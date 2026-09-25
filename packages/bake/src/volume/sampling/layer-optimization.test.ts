@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { test } from 'vitest';
 import { optimizeVolumeLayers, readLayerOptimizationReport, type LayerOptimizationOptions } from './layer-optimization.ts';
 import type { VolumeLayerPlan } from '../contracts/volume-slices.ts';
 

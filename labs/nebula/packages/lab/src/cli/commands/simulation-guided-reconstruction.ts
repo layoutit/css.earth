@@ -12,13 +12,11 @@ import {parseSimulationGuidedLevels} from './simulation-guided-levels.ts';
 import {fitSimulationGuidedEmission} from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
 import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from './simulation-prior.ts';
-import {compilerSlabMaterial,alphaLimitedSlabMaterial} from '@cssearth/volume-core/materials/slab-material';
+import { compilerSlabMaterial, alphaLimitedSlabMaterial, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/bake/volume';
 import {bakeMasterVolumeSlices} from '@cssearth/volume-bake/slices/emission';
 import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';
 import {sourceBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
-import type {Vector3} from '@cssearth/volume-core/contracts/volume-recipe';
-import type {SkyBounds,EmissionBounds} from '@cssearth/volume-core/contracts/emission';
 const json=async(path:string,value:unknown)=>{const b=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,b);return sha256(b);};
 async function main(settingsPath:string){
  const root=process.cwd(),settingsBytes=await readFile(settingsPath),s=parseLabModelJson(settingsBytes.toString());

@@ -10,7 +10,7 @@ import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { bakeMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
 import { compilerAlphaDigest, compilerFrame } from './bake.ts';
-import { readCompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
+import { readCompilerBakeResult } from '@cssearth/bake/volume';
 import { assertCompilerLensGeometry } from './bank-validation.ts';
 import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from './retained-material-bank.ts';
 

@@ -1,6 +1,6 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { compilerSlabMaterial, alphaLimitedSlabMaterial, channelGainSlabMaterial, lensChannelGainMaterial, splitChannelGain, validateChannelGain } from '@cssearth/volume-core/materials/slab-material';
+import { compilerSlabMaterial, alphaLimitedSlabMaterial, channelGainSlabMaterial, lensChannelGainMaterial, splitChannelGain, validateChannelGain } from './slab-material.ts';
 
 test('explicit slab offsets and quadrature spacing govern chroma and alpha-limited color', () => {
   const emission = (x: number, _y: number, _z: number, out: [number, number, number]) => out.fill(x < 0 ? .01 : .03);
@@ -122,7 +122,7 @@ test('a lens channel gain scales its own chromaticity and never tints the zone t
 });
 
 test('a lens tone curve moves the render onto its curve, stays neutral in the faint zone, and is absent-exact', async () => {
-  const { validateLensToneCurve, lensToneRender } = await import('@cssearth/volume-core/materials/slab-material');
+  const { validateLensToneCurve, lensToneRender } = await import('./slab-material.ts');
   const orange = (_x: number, _y: number, _z: number, out: [number, number, number]) => { out[0] = 255; out[1] = 128; out[2] = 0; return true; };
   const slab = { axis: 'z' as const, pitch: 1, samples: 4 }, out: [number, number, number] = [0, 0, 0];
   const dense = (_x: number, _y: number, _z: number, o: [number, number, number]) => { o[0] = o[1] = o[2] = 2; };

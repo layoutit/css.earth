@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createShapeCloudField, shapePixelToUnits } from '@cssearth/volume-core/fields/authored-shapes';
+import { createShapeCloudField, shapePixelToUnits } from '@cssearth/bake/volume';
 import { readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';
 import type { ShapeCloudComponent } from '../../../features/shape-cloud/types.ts';
 const ring: ShapeCloudComponent = { id: 'a', label: 'Arc', memberIds: ['ellipse-a'], groupId: 'one', shape: 'ring', operation: 'add',

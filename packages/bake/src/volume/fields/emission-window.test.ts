@@ -1,9 +1,9 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from '@cssearth/volume-core/fields/emission-window';
-import { createEmissionField, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from '@cssearth/volume-core/fields/emission';
-import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
-import type { EmissionFieldModel, EmissionVector3 } from '@cssearth/volume-core/contracts/emission';
+import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from './emission-window.ts';
+import { createEmissionField, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';
+import { readRetainedEmissionField } from './retained-emission.ts';
+import type { EmissionFieldModel, EmissionVector3 } from '../contracts/emission.ts';
 
 const window: EmissionWindow = { sourceId: 'optical', polygonArcsec: [[-5, -4], [-2, -1], [-5, 2], [-8, -1]],
   featherArcsec: .5, interpretation: 'Authored display footprint, not a physical edge.' };

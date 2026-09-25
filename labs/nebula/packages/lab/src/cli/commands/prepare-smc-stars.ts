@@ -1,8 +1,7 @@
 /** Offline preparation of the published Bonanos et al. (2010) massive SMC star sample inside the current finite SMC model. */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { STAR_PHOTOMETRY } from '@cssearth/volume-core/materials/star-photometry';
-import type { PreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
+import { STAR_PHOTOMETRY, type PreparedLmcStars } from '@cssearth/bake/volume';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { loadFiniteModelStarContext, type FiniteModelStarContext } from '../../server/workflows/stars/finite-model-star-context.ts';
 import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, readFiniteLensRecipe, finiteModelSubjectId,

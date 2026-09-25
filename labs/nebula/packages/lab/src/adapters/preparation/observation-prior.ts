@@ -1,8 +1,7 @@
-import type { ObservationMapping } from '@cssearth/volume-core/contracts/observation-mapping';
-export type { ObservationMapping } from '@cssearth/volume-core/contracts/observation-mapping';
+import { type ObservationMapping, overlayCorners, type ImageWcs, type OverlayFrame, reprojectObservationPrior as reproject } from '@cssearth/bake/volume';
+export type { ObservationMapping } from '@cssearth/bake/volume';
 /** Offline calibrated image/ray mapping and sampling of the unchanged neutral stellar prior. */
 import { prepareOverlayGeometry } from '../renderer/overlay-geometry.ts';
-import { overlayCorners, type ImageWcs, type OverlayFrame } from '@cssearth/volume-core/coordinates/overlay-wcs';
 import { sampleEncoded, type VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { channelDensity } from '@cssearth/volume-bake/slices/density';
 
@@ -59,8 +58,7 @@ export function createObservationMapping(wcs: ImageWcs, frame: OverlayFrame): Ob
     rayPathPerDepth: (x, y) => Math.hypot(1, x / distanceUnits, y / distanceUnits),
   };
 }
-export type {ObservationPrior} from '@cssearth/volume-core/fields/observation-prior';
-import {reprojectObservationPrior as reproject} from '@cssearth/volume-core/fields/observation-prior';
+export type {ObservationPrior} from '@cssearth/bake/volume';
 export function reprojectObservationPrior(source:VolumeSource,mapping:ObservationMapping,options:Parameters<typeof reproject>[2]) {
  const encoded:[number,number,number,number]=[0,0,0,0];
  return reproject({bounds:source.recipe.grid.bounds,densityAt(x,y,z){sampleEncoded(source,x,y,z,encoded);return channelDensity(encoded[3],source.recipe.grid.encoding);}},mapping,options);

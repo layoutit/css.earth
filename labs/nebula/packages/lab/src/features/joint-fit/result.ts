@@ -1,5 +1,5 @@
 import { jointPath, jointRecord, readJointControls, readJointParameters, type JointControls, type JointFit } from './model.ts';
-import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/volume-core/contracts/joint-volume';
+import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/bake/volume';
 
 export interface JointPin { path: string; sha256: string }
 export interface JointCandidate { fit: JointFit; volume: JointVolumeResult; outlinePath: string; pointings: { id: string; x: number; y: number; heldOut: boolean; residualKmS: number; color: string; measurements: string }[] }

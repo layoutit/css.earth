@@ -5,7 +5,7 @@ import type { VolumeCameraPublication } from '../../../../../../../src/renderers
 import { worldRotationCss } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
 import type { DensityOverlay } from '../../features/legacy-viewer/controller';
 import { parseOverlayCatalogue, sameOverlayFrame } from '../../features/legacy-viewer/overlay-catalogue';
-import { defaultOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement } from '@cssearth/bake/volume';
 
 import { mountImagePlane } from '@cssearth/volume-viewer/scene/image-plane';
 

@@ -3,7 +3,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import sharp from 'sharp';
-import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { prepareVolumeSlices, type VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { acquire, hash, json, pinned } from './io.ts';
 import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';

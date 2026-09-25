@@ -7,8 +7,7 @@ import { createHash } from 'node:crypto';
 import { bakeMasterVolumeSlices, type MasterVolumeOptions } from './emission.ts';
 import sharp from 'sharp';
 import { recolorCloudSlices } from './material.ts';
-import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
-import { readVolumeLayerPlan, validateVolumeLayerSlices, type VolumeLayerPlan } from '@cssearth/volume-core/contracts/volume-slices';
+import { compilerSlabMaterial, readVolumeLayerPlan, validateVolumeLayerSlices, type VolumeLayerPlan } from '@cssearth/bake/volume';
 
 function plan(): VolumeLayerPlan {
   return { schema: 'cssearth-volume-layer-plan@1', referenceSliceCounts: { x: 4, y: 4, z: 4 }, referenceSamplesPerSlab: 4,

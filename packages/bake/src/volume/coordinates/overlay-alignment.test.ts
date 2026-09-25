@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
-import { transferOverlayAlignment } from '@cssearth/volume-core/coordinates/overlay-alignment';
-import type { OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { test } from 'vitest';
+import { transferOverlayAlignment } from './overlay-alignment.ts';
+import type { OverlayPlacement } from './overlay-placement.ts';
 
 type Vec3 = [number, number, number];
 const close = (actual: readonly number[], expected: readonly number[]) => actual.forEach((value, axis) =>

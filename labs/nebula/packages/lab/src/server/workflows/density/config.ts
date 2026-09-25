@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import type { OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
-import { parseCloudAppearance, type CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
+import { type OverlayPlacement, parseCloudAppearance, type CloudAppearance } from '@cssearth/bake/volume';
 import { parseReconstructionRequest } from '../../services/density-reconstruction.ts';
 import { json, pinned, type Pin } from './io.ts';
 import type { BakeDelivery } from './delivery.ts';

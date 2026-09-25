@@ -27,7 +27,7 @@ async function put(root: string, path: string, bytes: Uint8Array | string) {
 }
 async function fixture(root: string) {
   // The delivery identity reads these source files from its checkout; keep the fixture isolated.
-  for (const directory of ['tools/nebula/application','labs/nebula/packages/volume-core/src','labs/nebula/packages/volume-bake/src','src/renderers/css/preparation','src/renderers/css/volume','src/preparation/volume']) {
+  for (const directory of ['tools/nebula/application','packages/bake/src/volume','labs/nebula/packages/volume-bake/src','src/renderers/css/preparation','src/renderers/css/volume','src/preparation/volume']) {
     for (const name of await readdir(directory,{recursive:true})) {
       if (!name.endsWith('.ts')) continue;
       const path = `${directory}/${name}`;

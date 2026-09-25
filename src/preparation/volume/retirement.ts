@@ -2,7 +2,7 @@
 import { readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import { text } from '@cssearth/volume-core/contracts/volume-recipe';
+import { text } from '@cssearth/bake/volume';
 import { requireRecord as record } from '@cssearth/core';
 
 function texturePath(outputDirectory: string, value: unknown): string {

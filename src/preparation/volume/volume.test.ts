@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
 import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.js';

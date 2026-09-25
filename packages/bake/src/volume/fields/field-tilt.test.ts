@@ -1,7 +1,7 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { createEmissionField, emissionComponentBounds, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from '@cssearth/volume-core/fields/emission';
-import type { EmissionComponent, EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
+import { createEmissionField, emissionComponentBounds, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';
+import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';
 
 function component(gradient?: [number, number]): EmissionComponent {
   return { id: 'patch', basisId: 'patch', center: [2, -3, 11], sigma: [4, 6, 2], angleRadians: .7,

@@ -12,7 +12,7 @@ import { convertParticlesToDensityVolume } from '../../server/workflows/stars/pa
 import type { ParticlePhotoEmissionOptions } from '../../server/workflows/stars/particles.ts';
 import { extractExtendedSource } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createParticleAlignmentDiagnostic } from '@cssearth/nebula-reconstruction/registration/particle-alignment';
-import type { VolumeRecipe, Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { VolumeRecipe, Vector3 } from '@cssearth/bake/volume';
 
 interface ParticleExperiment {
   schema: 'cssearth-magellanic-particle-experiment@1';

@@ -1,7 +1,5 @@
 /** Image-space candidates with bounded 3D support; line-of-sight modes come from the spatial prior. */
-import type { PreparedSampledField } from '@cssearth/volume-core/fields/sampled';
-import type { SampledEmissionFit } from '@cssearth/volume-core/contracts/sampled-emission-fit';
-import type { DiffuseAtom } from '@cssearth/volume-core/fields/diffuse-atoms';
+import type { PreparedSampledField, SampledEmissionFit, DiffuseAtom } from '@cssearth/bake/volume';
 
 export function finiteDetailAtoms(prepared: PreparedSampledField, recipe: SampledEmissionFit,
   target: Float32Array, chroma: Float32Array, covered: Uint8Array, xs: Float64Array, ys: Float64Array, signal?: AbortSignal): DiffuseAtom[] {

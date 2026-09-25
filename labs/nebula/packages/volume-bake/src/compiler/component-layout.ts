@@ -3,14 +3,12 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import type { CompilerBakeResult, CompilerLensVolume, CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
+import { type CompilerBakeResult, type CompilerLensVolume, type CompilerPin, COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices, readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlabInterval, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/bake/volume';
 import type { CompilerBakeBackend, CompiledVolumeArtifact } from './bake.ts';
-import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '@cssearth/volume-core/coordinates/compiler-frame';
 
 import { hash as geometrySha } from '../compact-inputs/io.ts';
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 
-import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlabInterval, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 
 export interface ComponentVolumeArtifact extends CompiledVolumeArtifact {
   stacks: readonly { leaves: readonly { id: string }[] }[];

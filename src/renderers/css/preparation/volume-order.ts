@@ -1,4 +1,4 @@
-import type { Axis, Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { Axis, Vector3 } from '@cssearth/bake/volume';
 
 /** Parallel slice planes need no source-depth DOM ordering: the browser still
  * resolves their physical depth. Offer median planes first so its first-pivot

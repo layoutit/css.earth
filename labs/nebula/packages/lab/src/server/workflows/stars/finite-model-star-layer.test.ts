@@ -8,9 +8,7 @@ import test from 'node:test';
 import { readFile, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
-import { rayToOverlayPlane, overlayCorners, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
-import { registeredOverlayCorners, type ImageRegistration } from '@cssearth/volume-core/coordinates/overlay-registration';
+import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane, overlayCorners, type ImageWcs, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
 import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
 import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, finiteModelStarsIndex, finiteModelSubjectId,
   MAGNITUDE_LIMIT } from './finite-model-star-layer.ts';

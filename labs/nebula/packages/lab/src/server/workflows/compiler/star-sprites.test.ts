@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import sharp from 'sharp';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
-import { validCompilerStarSprites, type CompilerStarSprites, type PreparedCompilerStar } from '@cssearth/volume-core/contracts/compiler-bake';
+import { validCompilerStarSprites, type CompilerStarSprites, type PreparedCompilerStar } from '@cssearth/bake/volume';
 
 const stars: PreparedCompilerStar[] = [
   { id: 'bright', positionUnits: [1, 2, 3], rgb: [255, 220, 180], diameterUnits: 3, alpha: .7,

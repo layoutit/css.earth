@@ -10,7 +10,7 @@
  * that rides the opacity shoulder. Exposure is solved jointly: the projection is re-exposed analytically from
  * the exposure-free integral, the curve re-fitted, and the whole range (p99, p99.9, core) scored.
  */
-import { lensToneRender, lensToneValue, type LensToneCurve } from '@cssearth/volume-core/materials/slab-material';
+import { lensToneRender, lensToneValue, type LensToneCurve } from '@cssearth/bake/volume';
 import { lensLevelPairs, lensLevelStatistics, untonedRender, type LensLevelGrid, type LensLevelMaterial } from '../../server/services/lens-levels.ts';
 
 /** Largest and smallest gain one knot may take against its input: past these a parameter is pinned. */

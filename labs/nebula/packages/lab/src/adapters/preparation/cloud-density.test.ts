@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { cloudDensityWeight, createIntegratedSignalSampler, filterCloudDensityRgba, partitionCloudAlpha } from '@cssearth/volume-core/fields/cloud-density';
+import { cloudDensityWeight, createIntegratedSignalSampler, filterCloudDensityRgba, partitionCloudAlpha } from '@cssearth/bake/volume';
 import { cloudTextureTexelPoint } from '../../server/services/density-material.ts';
 
 test('cutoff zero preserves every kept alpha and smooth cutoff distinguishes centre from edge', () => {

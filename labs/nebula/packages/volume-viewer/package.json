@@ -24,6 +24,6 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
-    "@cssearth/volume-core": "workspace:*"
+    "@cssearth/bake": "workspace:*"
   }
 }

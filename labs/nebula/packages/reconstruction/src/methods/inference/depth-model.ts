@@ -1,5 +1,5 @@
 import {jointPath,jointRecord} from '../joint/model.ts';
-import type {EmissionComponent} from '@cssearth/volume-core/contracts/emission';
+import type { EmissionComponent } from '@cssearth/bake/volume';
 type Pair = [number, number];
 type Triple = [number, number, number];
 export interface DepthSurface {

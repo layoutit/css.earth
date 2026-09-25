@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { Vector3 } from '@cssearth/bake/volume';
 export interface FiniteMaterialSettings {width:number;spacing:Vector3;origin:Vector3;maximumRegions:number;iterations:number;regularization:number}
 export function parseFiniteMaterialSettings(value:unknown):FiniteMaterialSettings {
   if(!value||typeof value!=='object')throw Error('Missing finite material settings');

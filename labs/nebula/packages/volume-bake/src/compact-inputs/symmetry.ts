@@ -1,14 +1,12 @@
 import type { CompiledVolumeArtifact } from '../compiler/bake.ts';
-import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
+import type { VolumeSlices, DensityVolumeFrame, CompilerPin } from '@cssearth/bake/volume';
 /** Losslessly retained RGB emission voxels; runtime slice images remain disposable. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
-import type { DensityVolumeFrame } from "@cssearth/volume-core/contracts/volume-frame";
 import { bakeMasterVolumeSlices } from "../slices/emission.ts";
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === "object" && !Array.isArray(v);
-import type { CompilerPin } from "@cssearth/volume-core/contracts/compiler-bake";
 const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 async function pinned(root: string, pin: CompilerPin) {
   if (pin.path.startsWith("/") || pin.path.split("/").includes(".."))

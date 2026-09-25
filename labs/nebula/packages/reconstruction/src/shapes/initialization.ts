@@ -1,7 +1,7 @@
 /** Source-pixel shape controls. Detection seeds the model; authored depth is never a measurement. */
 import type { GeometryCandidate, GeometryMap } from '../evidence/geometry/contracts.ts';
 import { ellipsePoint, radialError } from '@cssearth/nebula-reconstruction/evidence/geometry/ellipse';
-import type { ShapeCloudComponent, ShapeCloudSettings } from '@cssearth/volume-core/contracts/authored-shapes';
+import type { ShapeCloudComponent, ShapeCloudSettings } from '@cssearth/bake/volume';
 
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0 && value.length <= 120;

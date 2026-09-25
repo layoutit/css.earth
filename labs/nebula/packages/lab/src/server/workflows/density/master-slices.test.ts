@@ -7,7 +7,7 @@ import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOpti
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { VolumeRecipe } from '@cssearth/bake/volume';
 import type { VolumeSliceQuad } from '@cssearth/volume-bake/slices/density';
 
 async function temporary(t: { after(fn: () => Promise<void>): void }) {

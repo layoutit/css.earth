@@ -8,7 +8,7 @@ import { invertAffine, applyAffine } from '@cssearth/nebula-reconstruction/regis
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { tangentOffsetWestNorth } from '../joint-fit/input.ts';
 import { readGeometryPin } from '../geometry/registered-source.ts';
-import type { SkyBounds } from '@cssearth/volume-core/contracts/emission';
+import type { SkyBounds } from '@cssearth/bake/volume';
 import type { CompilerRequest } from '../../../features/compiler/model.ts';
 import type { CompilerRaster, CompilerImage } from '@cssearth/nebula-reconstruction/observations/compiler-image';
 export {compilerImagePanel} from '@cssearth/nebula-reconstruction/observations/image-sampling';

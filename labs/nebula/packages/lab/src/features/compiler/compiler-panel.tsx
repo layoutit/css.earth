@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import { adjustedMatrix, imageCorners, readObservations, savedObservationFit, unchanged, type Observations } from '../observations/models/model';
 import { readStructureCatalogue, type StructureCatalogue } from '../observations/models/structures-model';
 import { readFusionSettings } from '../evidence-fusion/jobs-model.ts';
-import { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/volume-core/contracts/compiler-controls';
+import { defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/bake/volume';
 import { compilerControlsForRecipe, readCompilerRecipe, type CompilerRequest } from './model.ts';
 import { localFile } from '../legacy-viewer/controller';
 import { earthCloudView, type CloudView } from '../shape-cloud/shape-cloud-stage';

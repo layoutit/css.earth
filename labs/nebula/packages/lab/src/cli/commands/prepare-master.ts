@@ -12,7 +12,7 @@ import { extractExtendedSource, type ExtractionOptions, type NativeExtractionRec
 import { createPhotoMasterEmissionSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/photo-master';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
-import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { VolumeRecipe } from '@cssearth/bake/volume';
 import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 
 type Vec3 = [number, number, number];

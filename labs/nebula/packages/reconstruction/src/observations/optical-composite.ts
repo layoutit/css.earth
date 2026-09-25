@@ -1,4 +1,4 @@
-import type { SkyBounds } from '@cssearth/volume-core/contracts/emission';
+import type { SkyBounds } from '@cssearth/bake/volume';
 
 type Rgb = [number, number, number];
 type Point = [number, number];

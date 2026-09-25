@@ -1,6 +1,6 @@
 /** Compatibility API with an explicit cssEarth camera binding. */
 import { shapeCloudCamera as createCamera, shapeCloudOrthographicCamera as createOrthographicCamera } from '@cssearth/volume-viewer/camera/shape-cloud';
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import type { DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { ViewFraming as ShapeCloudFraming } from '@cssearth/volume-viewer/camera/framing';
 import { shapeCloudCameraBackend } from './shape-cloud-renderer';
 export type { ViewFraming as ShapeCloudFraming } from '@cssearth/volume-viewer/camera/framing';

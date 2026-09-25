@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';

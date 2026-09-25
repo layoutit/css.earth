@@ -1,4 +1,4 @@
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { angularScale, physicalToField, fieldToPhysical, physicalBounds } from './observer-tangent.ts';
 function close(actual: number, expected: number) { assert.ok(Math.abs(actual - expected) < 1e-8 * Math.max(1, Math.abs(expected)), `${actual} differs from ${expected}`); }

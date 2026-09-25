@@ -34,7 +34,7 @@
   "dependencies": {
     "@cssearth/core": "workspace:*",
     "@cssearth/fits": "workspace:*",
-    "@cssearth/volume-core": "workspace:*",
+    "@cssearth/bake": "workspace:*",
     "@cssearth/volume-bake": "workspace:*",
     "@cssearth/nebula-reconstruction": "workspace:*",
     "@cssearth/volume-viewer": "workspace:*",

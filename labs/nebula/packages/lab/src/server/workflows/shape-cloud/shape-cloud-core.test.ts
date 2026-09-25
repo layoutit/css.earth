@@ -8,7 +8,7 @@ import type { StructureImage } from '../../../features/observations/models/struc
 import { sha256 } from '@cssearth/core/node';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { initializeShapeCloud, readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';
-import { createShapeCloudField, createShapeImageSampler, shapePixelToUnits, shapeUnitsToPixel } from '@cssearth/volume-core/fields/authored-shapes';
+import { createShapeCloudField, createShapeImageSampler, shapePixelToUnits, shapeUnitsToPixel } from '@cssearth/bake/volume';
 import { bakeShapeCloud } from './bake.ts';
 import type { ShapeCloudSettings } from '../../../features/shape-cloud/types.ts';
 import { shapeCloudSampling } from '../../../features/shape-cloud/quality.ts';

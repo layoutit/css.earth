@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { analyticChanceMatches, cataloguePixel, chanceExcess, CHANCE_RADIUS_PIXELS } from './fixed-catalogue.ts';
-import { wcsPixelRay, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { wcsPixelRay, type ImageWcs } from '@cssearth/bake/volume';
 for (const projection of ['TAN', 'SIN'] as const) test(`Fixed catalogue ${projection} inverts native publisher pixel rays`, () => {
   const wcs: ImageWcs = { projection, coordinateFrame: 'ICRS', referenceDimension: [4000, 4000], referencePixel: [2000, 2000], referenceValueDeg: [13.5, -73], scaleDeg: [-.0025, .0025], rotationDeg: -24.94 };
   for (const pixel of [[.5, .5], [1200.5, 1600.5], [3999.5, 3999.5]]) {

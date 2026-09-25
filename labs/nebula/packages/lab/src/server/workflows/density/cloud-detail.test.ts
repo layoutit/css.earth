@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { ObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
-import { parseCloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
-import { prepareCloudDetail } from '@cssearth/volume-core/materials/cloud-detail';
+import { parseCloudAppearance, prepareCloudDetail } from '@cssearth/bake/volume';
 import { registeredScalarSampler } from './registered-image.ts';
 
 function fixture(partial = false) {

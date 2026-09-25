@@ -1,4 +1,4 @@
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import type { DensityVolumeFrame } from '@cssearth/bake/volume';
 export type InspectionPose = 'front' | 'x-minus-60' | 'x-minus-30' | 'x-plus-30' | 'x-plus-60' |
   'y-minus-60' | 'y-minus-30' | 'y-plus-30' | 'y-plus-60' | 'edge-x' | 'edge-y' | 'manual';
 const POSE_OFFSETS: Record<Exclude<InspectionPose, 'manual'>, readonly [number, number]> = {

@@ -1,11 +1,9 @@
 import {realizeRegisteredStars} from '@cssearth/nebula-reconstruction/stars/registered-realization';
 /** Offline, image-independent catalogue realization in the accepted Alignment density cloud. */
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
+import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane, type ImageWcs, createAlignedObservationMapping, type ReconstructionAlignment } from '@cssearth/bake/volume';
 import { sampleJointDepth } from '../../../cli/commands/prepare-lmc-stars.ts';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
-import { rayToOverlayPlane, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
-import { createAlignedObservationMapping, type ReconstructionAlignment } from '@cssearth/volume-core/coordinates/observation-mapping';
 import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
 
 type Pin = { path: string };

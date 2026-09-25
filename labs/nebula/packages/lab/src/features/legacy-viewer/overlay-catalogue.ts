@@ -1,5 +1,4 @@
-import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
+import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement, type DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { OverlayVariant } from './overlay-variants';
 export interface DensityOverlay {
   id: string; label: string; sha256: string; texturePath: string; widthPx: number; heightPx: number;

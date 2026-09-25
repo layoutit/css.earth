@@ -12,7 +12,7 @@ import { createObservationMapping } from '../../../adapters/preparation/observat
 import { rectifyObservation } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { decomposeFilledComponents } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { createFilledVolumeSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-volume';
-import { createIntegratedSignalSampler } from '@cssearth/volume-core/fields/cloud-density';
+import { createIntegratedSignalSampler } from '@cssearth/bake/volume';
 
 const sha256 = (b: Buffer) => createHash('sha256').update(b).digest('hex');
 type Pin = { path: string; sha256: string; url?: string };

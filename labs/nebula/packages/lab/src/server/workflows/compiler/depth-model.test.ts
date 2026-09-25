@@ -5,9 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { conditionDepthComponents, depthSurfaceAt, readDepthRecipe, verifyDepthEvidence, loadDepthModel, type DepthRecipe, type DepthSurface } from './depth-model.ts';
-import { createEmissionField, projectEmissionComponent } from '@cssearth/volume-core/fields/emission';
+import { createEmissionField, projectEmissionComponent, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput } from '@cssearth/bake/volume';
 import { fitEmissionField } from './fit.ts';
-import type { EmissionComponent, EmissionFieldModel, EmissionFitInput } from '@cssearth/volume-core/contracts/emission';
 
 function recipe(features = false): DepthRecipe {
   const background: DepthSurface = { id: 'background', methodId: 'coherent-irregular-front', evidenceIds: ['assumption'], support: 'unconstrained',

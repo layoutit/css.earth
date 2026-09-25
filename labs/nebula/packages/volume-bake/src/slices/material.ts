@@ -5,10 +5,7 @@ import sharp from 'sharp';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath } from '../compact-inputs/density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeImageEncoding, Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
-import type { SlabMaterialSampling } from '@cssearth/volume-core/materials/slab-material';
-import { parseCloudAppearance, type CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
+import { type VolumeImageEncoding, type Vector3, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad, type SlabMaterialSampling, parseCloudAppearance, type CloudAppearance } from '@cssearth/bake/volume';
 
 export const CLOUD_MATERIAL_METHOD = 'density-opacity-image-material@2';
 export interface CloudMaterialCoverage {

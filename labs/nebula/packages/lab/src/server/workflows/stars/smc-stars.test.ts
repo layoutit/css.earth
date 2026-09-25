@@ -3,8 +3,7 @@ import test from 'node:test';
 import { readFile, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/volume-core/contracts/prepared-catalogue-stars';
-import { rayToOverlayPlane } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane } from '@cssearth/bake/volume';
 import { prepareSmcCatalogue, readBonanos2010Row, readSmcStarManifest, finiteModelStarsIndex, preparedStarsPath, MAGNITUDE_LIMIT } from '../../../cli/commands/prepare-smc-stars.ts';
 import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
 

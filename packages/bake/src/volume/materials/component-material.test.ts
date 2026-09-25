@@ -1,8 +1,8 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { createEmissionMaterial } from '@cssearth/volume-core/materials/component-material';
-import { createEmissionField, prepareEmissionComponent, samplePreparedEmissionComponent } from '@cssearth/volume-core/fields/emission';
-import type { EmissionComponent, EmissionFieldModel, EmissionVector3 } from '@cssearth/volume-core/contracts/emission';
+import { createEmissionMaterial } from './component-material.ts';
+import { createEmissionField, prepareEmissionComponent, samplePreparedEmissionComponent } from '../fields/emission.ts';
+import type { EmissionComponent, EmissionFieldModel, EmissionVector3 } from '../contracts/emission.ts';
 
 function model(): EmissionFieldModel {
   const component = (id: string, x: number, z: number): EmissionComponent => ({ id, basisId: id, center: [x, 0, z],

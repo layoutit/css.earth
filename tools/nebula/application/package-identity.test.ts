@@ -32,8 +32,9 @@ test('package identities survive relocation and invalidate changed implementatio
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 test('actual bake and core packages expose nonempty package-owned inventories', async () => {
-  const pins = await packageImplementationPins(process.cwd(), ['@cssearth/volume-core', '@cssearth/volume-bake']);
+  const pins = await packageImplementationPins(process.cwd(), ['@cssearth/bake', '@cssearth/volume-bake']);
   assert.ok(pins.length > 30);
+  assert.ok(pins.some(pin => pin.path === '@cssearth/bake/src/volume/contracts/volume-recipe.ts'));
   assert.ok(pins.some(pin => pin.path === '@cssearth/volume-bake/src/compact-inputs/compiler.ts'));
   assert.equal(pins.some(pin => pin.path.startsWith('labs/') || pin.path.endsWith('.test.ts')), false);
 });

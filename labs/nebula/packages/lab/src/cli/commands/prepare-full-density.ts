@@ -7,7 +7,7 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { Vector3, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { Vector3, VolumeRecipe } from '@cssearth/bake/volume';
 import { decodeDensityKtx2, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import { parseDensityPlacement, densityPlacementTransform } from '@cssearth/volume-core/coordinates/density-placement';
+import { parseDensityPlacement, densityPlacementTransform } from '@cssearth/bake/volume';
 import { prepareDensityProjection } from './density-projection.ts';
 
 test('placed density projection samples original voxels through the inverse model transform', () => {

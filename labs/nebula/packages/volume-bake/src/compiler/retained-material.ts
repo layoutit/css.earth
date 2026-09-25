@@ -1,15 +1,11 @@
 /** Offline RGB replacement using a pinned compiler bank's exact retained slabs. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative } from 'node:path';
-import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import { type Vector3, readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad, readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolume, type CompilerPin, compilerSlabMaterial, COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '@cssearth/bake/volume';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
-import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { verifyCompilerAlphaIdentity, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';
-import { readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolume, type CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
-import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
-import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '@cssearth/volume-core/coordinates/compiler-frame';
 
 export interface RetainedMaterialBankOptions {
   root: string; outputDirectory: string; scene: CompilerBakeResult; neutralSlicesPin: CompilerPin;

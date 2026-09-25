@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { test } from 'vitest';
 import { compilerPreparedSlices } from './compiler-frame.ts';
 import { validateVolumeLayerSlices, type VolumeLayerPlan, type VolumeSlices, type VolumeSliceQuad } from '../contracts/volume-slices.ts';
 import type { Vector3 } from '../contracts/volume-recipe.ts';

@@ -1,10 +1,7 @@
 import sharp from 'sharp';
 import { detectStars } from '@cssearth/nebula-reconstruction/registration/stellar';
 import type { CompilerImage } from '../observations/compiler-image.ts';
-import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
-import { createEmissionField } from '@cssearth/volume-core/fields/emission';
-import type { CompilerStarInput } from '@cssearth/volume-core/contracts/compiler-star-input';
-import type { CompilerStarMaterial } from '@cssearth/volume-core/contracts/compiler-bake';
+import { type EmissionFieldModel, createEmissionField, type CompilerStarInput, type CompilerStarMaterial } from '@cssearth/bake/volume';
 const fraction = (id: string) => { let hash = 2166136261; for (const c of id) hash = Math.imul(hash ^ c.charCodeAt(0), 16777619); return ((hash >>> 0) + .5) / 4294967296; };
 type Point = [number, number];
 type Rgb = [number, number, number];

@@ -1,5 +1,5 @@
 import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
-import {observationEnvelope} from '@cssearth/volume-core/coordinates/observation-envelope';
+import { observationEnvelope, type VolumeRecipe, type ImageWcs } from '@cssearth/bake/volume';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Lab experiment: registered native photograph + full stellar prior → filled, colored 3D components. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -8,11 +8,9 @@ import { gzipSync } from 'node:zlib';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { createObservationMapping, reprojectObservationPrior } from '../../adapters/preparation/observation-prior.ts';
-import type { ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
 import { decomposeFilledComponents, type FilledComponentOptions } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { createFilledVolumeSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-volume';
 import { rectifyObservation, writeObservationPanel, extendedMap, validateObservationProjection } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';

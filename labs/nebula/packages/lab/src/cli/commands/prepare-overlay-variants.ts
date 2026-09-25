@@ -4,8 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { overlayVariantsPath, parseOverlayVariants, type OverlayVariants } from '../../features/legacy-viewer/overlay-variants.ts';
-import { overlayCorners } from '@cssearth/volume-core/coordinates/overlay-wcs';
-import { registeredOverlayCorners } from '@cssearth/volume-core/coordinates/overlay-registration';
+import { overlayCorners, registeredOverlayCorners } from '@cssearth/bake/volume';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
 
 export async function prepareOverlayVariants(planPath: string, selected: string[] = []) {

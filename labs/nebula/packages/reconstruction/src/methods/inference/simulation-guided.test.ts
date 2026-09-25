@@ -1,8 +1,7 @@
 import { test } from 'node:test';import assert from 'node:assert/strict';
 import { conditionSimulationComponents, fitSimulationGuidedEmission, type SimulationDepthPrior, type SimulationDepthSettings } from './simulation-guided.ts';
 import { fitEmissionField } from './fit.ts';
-import { createEmissionField, projectEmissionComponent } from '@cssearth/volume-core/fields/emission';
-import type { EmissionComponent, EmissionFitInput } from '@cssearth/volume-core/contracts/emission';
+import { createEmissionField, projectEmissionComponent, type EmissionComponent, type EmissionFitInput } from '@cssearth/bake/volume';
 const prior:SimulationDepthPrior={identity:'a'.repeat(64),bounds:{min:[-5,-5,-12],max:[5,5,12]},sampleDensity:(x,_y,z)=>Math.abs(x)>3?0:Math.exp(-.5*((z+4)/.8)**2)+2*Math.exp(-.5*((z-3)/.6)**2)};
 const settings:SimulationDepthSettings={depthSamples:256,modeRelativeThreshold:.25,maximumModes:2,minimumSigmaZ:.15,maximumSigmaZ:1,featureThicknessRatio:.85,supportSigma:4};
 const component:EmissionComponent={id:'feature',basisId:'feature',center:[0,0,0],sigma:[.5,.4,4],angleRadians:0,projectedWeight:2,depthAssignment:'halo-diffuse',velocityCovered:false};

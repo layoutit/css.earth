@@ -1,4 +1,4 @@
-export { registeredImageSampler, registeredScalarSampler } from '@cssearth/volume-core/sampling/registered-raster';
+export { registeredImageSampler, registeredScalarSampler } from '@cssearth/bake/volume';
 /** Offline color sampling and original-image reference plane in the fixed cloud frame. */
 import sharp from 'sharp';
 import { writeFile } from 'node:fs/promises';

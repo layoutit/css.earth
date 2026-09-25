@@ -1,7 +1,7 @@
 import fs from 'node:fs';import sharp from 'sharp';import crypto from 'node:crypto';
 import {cataloguePixel} from '@cssearth/nebula-reconstruction/registration/fixed-catalogue';
 import {fitDensitySimilarity,projectSimilarity,fitScore,type DensityFitInput} from '@cssearth/nebula-reconstruction/registration/density-similarity';
-import {validateImageWcs} from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { validateImageWcs } from '@cssearth/bake/volume';
 import {parseDensityVolumeObjectDescriptor} from '@cssearth/objects';
 function record(value:unknown):Record<string,unknown>{if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Expected object');return value as Record<string,unknown>;}
 function text(value:unknown):string{if(typeof value!=='string'||!value)throw Error('Expected path/hash');return value;}

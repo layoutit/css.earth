@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { replayCompactCompiler, readCompactCompiler } from '@cssearth/volume-bake/compact-inputs/compiler';
 import { replayCompactSampled } from '@cssearth/volume-bake/compact-inputs/sampled';
-import { readCompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
+import { readCompilerBakeResult } from '@cssearth/bake/volume';
 import { assertReplayScene, replaySha, verifyReplayFiles } from './cold-replay-parity.ts';
 
 const ids = ['m42', 'helix', 'm45', 'm8', 'm1'];

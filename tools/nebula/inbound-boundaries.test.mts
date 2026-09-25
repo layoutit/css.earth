@@ -9,11 +9,13 @@ import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
 function fixture() {
   const root = mkdtempSync(resolve(tmpdir(), 'nebula-inbound-'));
   const write = (path: string, source: string) => { const file = resolve(root, path); mkdirSync(resolve(file, '..'), { recursive: true }); writeFileSync(file, source); };
-  const owners = { 'volume-core': '@cssearth/volume-core', 'volume-bake': '@cssearth/volume-bake', lab: '@cssearth/nebula-lab', reconstruction: '@cssearth/nebula-reconstruction', 'volume-viewer': '@cssearth/volume-viewer' };
+  const owners = { 'packages/bake': '@cssearth/bake', 'labs/nebula/packages/volume-bake': '@cssearth/volume-bake',
+    'labs/nebula/packages/lab': '@cssearth/nebula-lab', 'labs/nebula/packages/reconstruction': '@cssearth/nebula-reconstruction',
+    'labs/nebula/packages/volume-viewer': '@cssearth/volume-viewer' };
   write('package.json', JSON.stringify({ type: 'module', devDependencies: Object.fromEntries(Object.values(owners).map(name => [name, 'workspace:*'])) }));
-  for (const [owner, name] of Object.entries(owners)) {
-    write(`labs/nebula/packages/${owner}/package.json`, JSON.stringify({ name, exports: { './public': './src/public.ts' } }));
-    write(`labs/nebula/packages/${owner}/src/public.ts`, 'export const value = 1; export type Contract = number;');
+  for (const [directory, name] of Object.entries(owners)) {
+    write(`${directory}/package.json`, JSON.stringify({ name, exports: { './public': './src/public.ts' } }));
+    write(`${directory}/src/public.ts`, 'export const value = 1; export type Contract = number;');
   }
   return { root, write, check: () => checkNebulaInboundBoundaries(root), cleanup: () => rmSync(root, { recursive: true, force: true }) };
 }
@@ -40,20 +42,27 @@ test('normal runtime and preparation reject all public research imports, includi
   } finally { f.cleanup(); }
 });
 
-test('preparation accepts public core/bake while runtime accepts only explicitly erased core imports', () => {
+test('preparation accepts the public bake entries while the runtime accepts none of them, not even an erased type', () => {
   const f = fixture();
   try {
-    f.write('tools/prepare.mts', "import {value} from '@cssearth/volume-bake/public'; export {value as core} from '@cssearth/volume-core/public';");
-    for (const source of ["import type {Contract} from '@cssearth/volume-core/public';", "import {type Contract} from '@cssearth/volume-core/public';",
-      "export type {Contract} from '@cssearth/volume-core/public';", "export {type Contract} from '@cssearth/volume-core/public';",
-      "type T = import('@cssearth/volume-core/public').Contract;"]) {
-      f.write('site/runtime.mts', source); assert.deepEqual(f.check(), [], source);
+    f.write('tools/prepare.mts', "import {value} from '@cssearth/volume-bake/public'; export {value as core} from '@cssearth/bake/public';");
+    for (const path of ['src/preparation/volume.ts', 'src/renderers/css/preparation/volume.ts', 'packages/bake/src/volume/other.ts']) {
+      f.write(path, "import {value, type Contract} from '@cssearth/bake/public'; export {value};"); assert.deepEqual(f.check(), [], path);
+      f.write(path, 'export {};');
     }
-    for (const source of ["import '@cssearth/volume-core/public';", "import {value,type Contract} from '@cssearth/volume-core/public';",
-      "export * from '@cssearth/volume-core/public';", "import type {Contract} from '@cssearth/volume-bake/public';"]) {
-      f.write('site/runtime.mts', source); assert.ok(f.check().some(error => error.includes('runtime closure forbids')), source);
+    assert.deepEqual(f.check(), []);
+    // The runtime used to import volume-core for a type; that type belongs to the renderer now.
+    for (const source of ["import type {Contract} from '@cssearth/bake/public';", "import {type Contract} from '@cssearth/bake/public';",
+      "export type {Contract} from '@cssearth/bake/public';", "export {type Contract} from '@cssearth/bake/public';",
+      "type T = import('@cssearth/bake/public').Contract;", "import '@cssearth/bake/public';", "import {value,type Contract} from '@cssearth/bake/public';",
+      "export * from '@cssearth/bake/public';", "import type {Contract} from '@cssearth/volume-bake/public';"]) {
+      for (const path of ['site/runtime.mts', 'src/renderers/css/volume/types.ts']) {
+        f.write(path, source); assert.ok(f.check().some(error => error.includes('runtime closure forbids')), `${path}: ${source}`);
+        f.write(path, 'export {};');
+      }
     }
-    f.write('site/runtime.mts', 'export {};');
+    f.write('tools/prepare.mts', "import '@cssearth/bake/src/private';");
+    assert.ok(f.check().some(error => error.includes('non-public nebula import')));
     f.write('tools/prepare.mts', "import '@cssearth/volume-bake/src/private';");
     assert.ok(f.check().some(error => error.includes('non-public nebula import')));
   } finally { f.cleanup(); }
@@ -72,13 +81,30 @@ test('relative, absolute, URL, traversal and tsconfig aliases cannot enter the l
     ]) {
       f.write('tools/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), source);
     }
-    f.write('tsconfig.base.json', JSON.stringify({ compilerOptions: { baseUrl: '.', paths: { '@research/*': ['labs/nebula/packages/lab/src/*'], '@cssearth/volume-core/*': ['labs/nebula/packages/lab/src/*'] } } }));
+    f.write('tsconfig.base.json', JSON.stringify({ compilerOptions: { baseUrl: '.', paths: { '@research/*': ['labs/nebula/packages/lab/src/*'], '@cssearth/bake/*': ['labs/nebula/packages/lab/src/*'] } } }));
     f.write('tsconfig.json', JSON.stringify({ extends: './tsconfig.base.json' }));
     for (const path of ['public', 'not-yet-created']) {
       f.write('tools/prepare.mts', `import '@research/${path}';`); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')));
     }
-    f.write('tools/prepare.mts', "import '@cssearth/volume-core/public';");
+    f.write('tools/prepare.mts', "import '@cssearth/bake/public';");
     assert.ok(f.check().some(error => error.includes('package alias escapes')));
+  } finally { f.cleanup(); }
+});
+
+test('relative, absolute and URL paths cannot enter the bake sources past the public entries', () => {
+  const f = fixture();
+  try {
+    for (const source of [
+      "export * from '../packages/bake/src/public.ts';",
+      "import '../src/../packages/bake/src/volume/not-yet-created.ts';",
+      `import('${resolve(f.root, 'packages/bake/src/public.ts')}');`,
+      "import(new URL('../packages/bake/src/public.ts', import.meta.url).href);",
+    ]) {
+      f.write('tools/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into packages/bake')), source);
+    }
+    f.write('tools/prepare.mts', 'export {};');
+    f.write('packages/bake/src/volume/field.ts', "export * from '../public.ts';");
+    assert.deepEqual(f.check(), [], 'the package reaches its own sources');
   } finally { f.cleanup(); }
 });
 
@@ -90,7 +116,7 @@ test('test exceptions and preparation wrappers cannot be used as inbound runtime
     f.write('site/runtime.mts', "export * from '../src/check.test.ts';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via src/check.test.ts')));
     f.write('src/check.test.ts', 'export {};');
-    f.write('tools/prepare.mts', "export * from '@cssearth/volume-bake/public';");
+    f.write('tools/prepare.mts', "export * from '@cssearth/bake/public';");
     f.write('site/runtime.mts', "import '../tools/prepare.mts';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via tools/prepare.mts')));
     f.write('site/runtime.mts', 'export {};');
@@ -103,10 +129,10 @@ test('root research dependencies remain development-only and computed policy sta
   const f = fixture();
   try {
     for (const field of ['dependencies', 'optionalDependencies', 'peerDependencies']) {
-      f.write('package.json', JSON.stringify({ [field]: { '@cssearth/nebula-lab': 'workspace:*', '@cssearth/nebula-reconstruction': 'workspace:*', '@cssearth/volume-viewer': 'workspace:*' } }));
-      assert.equal(f.check().filter(error => error.includes('must remain a devDependency')).length, 3);
+      f.write('package.json', JSON.stringify({ [field]: { '@cssearth/bake': 'workspace:*', '@cssearth/nebula-lab': 'workspace:*', '@cssearth/nebula-reconstruction': 'workspace:*', '@cssearth/volume-viewer': 'workspace:*' } }));
+      assert.equal(f.check().filter(error => error.includes('must remain a devDependency')).length, 4);
     }
-    f.write('package.json', JSON.stringify({ dependencies: { '@cssearth/volume-core': 'workspace:*', '@cssearth/volume-bake': 'workspace:*' } }));
+    f.write('package.json', JSON.stringify({ dependencies: { '@cssearth/volume-bake': 'workspace:*' } }));
     f.write('site/plugin.mts', 'export const load = (plugin: string) => import(plugin);');
     assert.deepEqual(f.check(), []);
     f.write('tools/nebula/application/load.ts', 'export const load = (plugin: string) => import(plugin);');
@@ -114,13 +140,15 @@ test('root research dependencies remain development-only and computed policy sta
     f.write('tools/nebula/application/load.ts', 'export {};');
     f.write('site/plugin.mts', "const prefix = '@cssearth/nebula-lab/'; export const load = (name: string) => import(prefix + name);");
     assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
+    f.write('site/plugin.mts', "const prefix = '@cssearth/bake/'; export const load = (name: string) => import(prefix + name);");
+    assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
   } finally { f.cleanup(); }
 });
 
 test('Astro frontmatter and script imports obey the same inbound policy', () => {
   const f = fixture();
   try {
-    for (const source of ["---\nimport '@cssearth/nebula-lab/public';\n---\n<div/>", "<div/><script>import '@cssearth/volume-bake/public';</script>"]) {
+    for (const source of ["---\nimport '@cssearth/nebula-lab/public';\n---\n<div/>", "<div/><script>import '@cssearth/bake/public';</script>"]) {
       f.write('site/page.astro', source); assert.ok(f.check().some(error => error.includes('runtime closure forbids')));
     }
   } finally { f.cleanup(); }
@@ -169,8 +197,8 @@ test('package import aliases and redirected public exports cannot disguise a lab
     f.write('site/runtime.mts', "import '#research';");
     assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')));
     f.write('site/runtime.mts', 'export {};');
-    f.write('labs/nebula/packages/volume-core/package.json', JSON.stringify({ name: '@cssearth/volume-core', exports: { './public': '../lab/src/public.ts' } }));
-    f.write('tools/prepare.mts', "import '@cssearth/volume-core/public';");
+    f.write('packages/bake/package.json', JSON.stringify({ name: '@cssearth/bake', exports: { './public': '../../labs/nebula/packages/lab/src/public.ts' } }));
+    f.write('tools/prepare.mts', "import '@cssearth/bake/public';");
     assert.ok(f.check().some(error => error.includes('public export escapes')));
   } finally { f.cleanup(); }
 });

@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, realpath } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
-import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
+import type { VolumeSlices } from '@cssearth/bake/volume';
 import { sha256 } from '@cssearth/core/node';
 import { preparePlacedDensity } from './placed-assets.ts';
 

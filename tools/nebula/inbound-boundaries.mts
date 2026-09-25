@@ -8,9 +8,12 @@ import { dirname, relative, resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
+/** Package names and their owning directories. The volume contracts, fields and materials were the lab's volume-core
+ * package; they are `@cssearth/bake/volume` now, outside the lab, and keep its rules. */
 const packages = {
-  '@cssearth/volume-core': 'volume-core', '@cssearth/volume-bake': 'volume-bake',
-  '@cssearth/nebula-lab': 'lab', '@cssearth/nebula-reconstruction': 'reconstruction', '@cssearth/volume-viewer': 'volume-viewer',
+  '@cssearth/bake': 'packages/bake', '@cssearth/volume-bake': 'labs/nebula/packages/volume-bake',
+  '@cssearth/nebula-lab': 'labs/nebula/packages/lab', '@cssearth/nebula-reconstruction': 'labs/nebula/packages/reconstruction',
+  '@cssearth/volume-viewer': 'labs/nebula/packages/volume-viewer',
 } as const;
 type PackageName = keyof typeof packages;
 type Policy = 'runtime' | 'preparation' | 'test';
@@ -31,7 +34,7 @@ function files(directory: string): string[] {
 }
 function policy(path: string): Policy {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path)) return 'test';
-  if (path.startsWith('tools/') || path.startsWith('src/preparation/') || path.startsWith('src/renderers/css/preparation/') ||
+  if (path.startsWith('tools/') || path.startsWith('src/preparation/') || path.startsWith('src/renderers/css/preparation/') || path.startsWith('packages/bake/') ||
       path === 'src/platform/astronomy-package.mts' || /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }
@@ -114,16 +117,16 @@ function analyze(tree: ts.SourceFile, root: string): { imports: Import[]; access
 }
 
 export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
-  const root = canonical(inputRoot), errors: string[] = [], lab = resolve(root, 'labs/nebula');
+  const root = canonical(inputRoot), errors: string[] = [], lab = resolve(root, 'labs/nebula'), bake = resolve(root, 'packages/bake');
   const rootManifest = existsSync(resolve(root, 'package.json')) ? readJson(resolve(root, 'package.json')) : {};
   for (const field of ['dependencies', 'optionalDependencies', 'peerDependencies']) {
     const entries = rootManifest[field];
-    if (object(entries)) for (const name of ['@cssearth/nebula-lab', '@cssearth/nebula-reconstruction', '@cssearth/volume-viewer'])
+    if (object(entries)) for (const name of ['@cssearth/bake', '@cssearth/nebula-lab', '@cssearth/nebula-reconstruction', '@cssearth/volume-viewer'])
       if (name in entries) errors.push(`package.json: ${name} must remain a devDependency, not ${field}`);
   }
   const manifests = new Map<PackageName, Record<string, unknown>>();
   for (const [name, owner] of Object.entries(packages)) {
-    const file = resolve(lab, 'packages', owner, 'package.json');
+    const file = resolve(root, owner, 'package.json');
     if (existsSync(file)) manifests.set(name as PackageName, readJson(file));
   }
   const configCache = new Map<string, ts.CompilerOptions>();
@@ -152,7 +155,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
         const middle = pattern.includes('*') ? specifier.slice(prefix!.length, specifier.length - suffix.length) : '';
         for (const target of targets) {
           const mapped = resolve(opts.baseUrl ?? dirname(ts.findConfigFile(dirname(file), existsSync) ?? resolve(root, 'tsconfig.json')), target.replace('*', middle));
-          if (within(lab, mapped)) return canonical(mapped);
+          if (within(lab, mapped) || within(bake, mapped)) return canonical(mapped);
         }
       }
     }
@@ -169,7 +172,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
     for (const item of node.imports) {
       const specifier = item.specifier, location = `${label}:${item.line}`;
       if (!specifier) {
-        if (label.startsWith('tools/nebula/application/') || /(?:labs\/nebula|@cssearth\/(?:nebula-|volume-))/.test(readFileSync(file, 'utf8')))
+        if (label.startsWith('tools/nebula/application/') || /(?:labs\/nebula|packages\/bake|@cssearth\/(?:nebula-|volume-|bake\b))/.test(readFileSync(file, 'utf8')))
           node.unchecked = true;
         continue;
       }
@@ -177,7 +180,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
       if (name) {
         const exports = manifests.get(name)?.exports, key = specifier === name ? '.' : `.${specifier.slice(name.length)}`;
         if (!object(exports) || !(key in exports)) errors.push(`${location}: non-public nebula import ${specifier}`);
-        const resolved = destination(specifier, file), expected = resolve(lab, 'packages', packages[name]);
+        const resolved = destination(specifier, file), expected = resolve(root, packages[name]);
         if (resolved && !within(expected, resolved)) errors.push(`${location}: package alias escapes its declared owner (${specifier})`);
         const exportValue = object(exports) ? exports[key] : undefined;
         const targets = (value: unknown): string[] => typeof value === 'string' ? [value] : Array.isArray(value) ? value.flatMap(targets) : object(value) ? Object.values(value).flatMap(targets) : [];
@@ -186,6 +189,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
       } else {
         const target = destination(specifier, file);
         if (target && within(lab, target)) errors.push(`${location}: direct path into labs/nebula is forbidden; use an allowed public package export (${specifier})`);
+        else if (target && within(bake, target) && !within(bake, canonical(file))) errors.push(`${location}: direct path into packages/bake is forbidden; use its public entries (${specifier})`);
         else if (target && within(root, target)) {
           node.edges.push({ file: target, erased: item.erased });
           if (isFile(target) && sourcePattern.test(target) && !target.includes('/node_modules/') && !graph.has(target)) sourceFiles.push(target);
@@ -206,8 +210,8 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
       }
       for (const entry of node.packages) {
         const typeOnly = erased || entry.erased;
-        const allowed = mode === 'test' || entry.name === '@cssearth/volume-core' && (mode === 'preparation' || typeOnly) ||
-          entry.name === '@cssearth/volume-bake' && mode === 'preparation';
+        // Only preparation code imports the bake, not even for a type: a type the runtime needs belongs to the renderer.
+        const allowed = mode === 'test' || (entry.name === '@cssearth/bake' || entry.name === '@cssearth/volume-bake') && mode === 'preparation';
         if (!allowed) errors.push(`${origin.label}: ${mode} closure forbids ${entry.specifier}${file === current ? '' : ` via ${node.label}`}${typeOnly ? ' (type import)' : ''}`);
       }
       for (const edge of node.edges) visit(edge.file, erased || edge.erased);

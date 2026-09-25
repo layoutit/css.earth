@@ -4,7 +4,7 @@ import {bakeFiniteLens} from '../../server/workflows/density/finite-lens.ts';
 import {parseLabModelJson} from '../../resources/model-paths.ts';
 import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
-import {validateChannelGain,validateLensToneCurve} from '@cssearth/volume-core/materials/slab-material';
+import { validateChannelGain, validateLensToneCurve } from '@cssearth/bake/volume';
 const root=process.cwd(),path=process.argv[2],bytes=await readFile(path),recipe=parseLabModelJson(bytes.toString());
 if(recipe.schema!=='cssearth-finite-lens-recipe@1'||!Array.isArray(recipe.sources))throw Error('Invalid finite lens recipe');
 const alignment=parseLabModelJson((await sourceBytes(root,recipe.alignmentReport)).toString()),results=[];

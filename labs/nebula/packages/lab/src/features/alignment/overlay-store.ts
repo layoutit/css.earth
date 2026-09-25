@@ -1,5 +1,5 @@
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
-import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from '@cssearth/bake/volume';
 
 export interface SavedOverlay {
   id: string; enabled: boolean; opacity: number; placement: OverlayPlacement; basis: string;

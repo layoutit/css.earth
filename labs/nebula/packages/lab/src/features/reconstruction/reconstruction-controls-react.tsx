@@ -3,9 +3,8 @@ import { acceptsSavedResult, selectedPreviewAllowed, selectedProcessing } from '
 import { useEffect, useRef, useState } from 'react';
 import type { ControlPortals } from '../../ui/control-portals';
 import { readOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
-import { defaultOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { defaultOverlayPlacement, parseCloudAppearance, sameCloudAppearance, type CloudAppearance } from '@cssearth/bake/volume';
 import type { PreparedReconstruction, ReconstructionCandidate, ReconstructionCatalogue, ReconstructionRequest } from './reconstruction-types.ts';
-import { parseCloudAppearance, sameCloudAppearance, type CloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 import { readCloudAppearance, saveCloudAppearance } from './cloud-appearance-store.ts';
 import { CloudAppearanceControls } from './cloud-appearance-controls';
 import { LensLevelsPanel, LevelsIcon, LEVELS_TOOLTIP } from './lens-levels-panel';

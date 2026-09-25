@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
-import { registeredOverlayCorners, type ImageRegistration } from '@cssearth/volume-core/coordinates/overlay-registration';
-import { overlayCorners, rayToOverlayPlane, wcsPixelRay, type ImageWcs, type OverlayFrame } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { test } from 'vitest';
+import { registeredOverlayCorners, type ImageRegistration } from './overlay-registration.ts';
+import { overlayCorners, rayToOverlayPlane, wcsPixelRay, type ImageWcs, type OverlayFrame } from './overlay-wcs.ts';
 
 const wcs: ImageWcs = { projection: 'TAN', coordinateFrame: 'ICRS', referenceDimension: [80, 60],
   referencePixel: [40.5, 30.5], referenceValueDeg: [0, 0], scaleDeg: [-.02, .02], rotationDeg: 13 };

@@ -1,5 +1,5 @@
 import type {InferenceGrid} from './solver.ts';
-import type {Bounds3,Vector3} from '@cssearth/volume-core/contracts/volume-recipe';
+import type { Bounds3, Vector3 } from '@cssearth/bake/volume';
 export function applyRecordedPointMasks(diffuse:Buffer,original:Buffer,width:number,height:number,masks:readonly {x:number;y:number;radius:number}[]) {
 // Explicitly recorded point masks, bounded by nearby light. Not a detector or a
 // replacement for NOX: this baseline preserves bright extended nebular knots.

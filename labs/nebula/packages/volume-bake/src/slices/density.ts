@@ -2,12 +2,10 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { encodeVolumeRaster } from './raster.ts';
-import { gradePremultipliedDisplayRgb } from '@cssearth/volume-core/materials/display-color';
+import { gradePremultipliedDisplayRgb, type Axis, type Bounds3, type DisplayColorMatrix, type Vector3, type RadialEmission, type VolumeRecipe, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/bake/volume';
 import { loadVolumeSource, sampleEncoded, type VolumeSource } from '../compact-inputs/density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { Axis, Bounds3, DisplayColorMatrix, Vector3, RadialEmission, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
-export type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
+export type { VolumeSlices, VolumeSliceQuad } from '@cssearth/bake/volume';
 const clamp = (value: number): number => Math.max(0, Math.min(1, value));
 const smoothstep = (lo: number, hi: number, value: number): number => {
   const t = clamp((value - lo) / (hi - lo));

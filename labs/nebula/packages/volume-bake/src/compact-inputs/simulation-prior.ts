@@ -5,12 +5,10 @@
  * sampling arithmetic are unchanged; the host supplies any path-revival policy for historical recipes.
  */
 import { resolve, dirname } from 'node:path';
-import { fieldToPhysical, angularScale } from '@cssearth/volume-core/coordinates/observer-tangent';
+import { fieldToPhysical, angularScale, parseVolumeRecipe, type SimulationDepthPrior } from '@cssearth/bake/volume';
 import { loadVolumeSource, sampleEncoded, sourceBytes } from './density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
 import { channelDensity } from '../slices/density.ts';
-import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import type { SimulationDepthPrior } from '@cssearth/volume-core/contracts/simulation-prior';
 
 interface Pin { path: string }
 const isPin = (value: unknown): value is Pin => !!value && typeof value === 'object' &&

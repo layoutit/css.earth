@@ -2,7 +2,7 @@
 import {gunzipSync} from 'node:zlib';
 import {median} from '@cssearth/core';
 import {parseDensityVolumeObjectDescriptor} from '@cssearth/objects';
-import {cataloguePosition} from '@cssearth/volume-core/coordinates/catalogue-position';
+import { cataloguePosition } from '@cssearth/bake/volume';
 import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import {observableForwardPoint,type WeightedPoint,type ForwardConfig,type ForwardObservations,type HistogramAxis} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';
 export function record(value:unknown):Record<string,unknown>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected object');return value as Record<string,unknown>;}

@@ -1,4 +1,4 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { densityPlacementTransform, parseDensityPlacement, placeDensitySlices } from './density-placement.ts';
 import type { VolumeSlices } from '../contracts/volume-slices.ts';

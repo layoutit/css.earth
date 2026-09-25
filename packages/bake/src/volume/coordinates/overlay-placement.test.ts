@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
-import { defaultOverlayPlacement, overlayPlacementTransform, updateOverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
+import { test } from 'vitest';
+import { defaultOverlayPlacement, overlayPlacementTransform, updateOverlayPlacement } from './overlay-placement.ts';
 
 test('manual placement rejects invalid controls without changing accepted state', () => {
   const prior = defaultOverlayPlacement();

@@ -7,7 +7,7 @@ import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readDepthRecipe, verifyDepthEvidence } from './depth-model.ts';
 import { readPhotometricMgeRecipe, verifyPhotometricEvidence } from './photometric-prior.ts';
 import type { PreparedCssVolume } from '../../../adapters/renderer/volume-types.ts';
-import type { CompilerBakeResult, CompilerLensVolume, CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
+import type { CompilerBakeResult, CompilerLensVolume, CompilerPin } from '@cssearth/bake/volume';
 
 type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity' | 'alphaSha256'>;
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);

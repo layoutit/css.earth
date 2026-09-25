@@ -6,10 +6,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
 import { sha256 } from '@cssearth/core/node';
-import { overlayCorners, type ImageWcs, type OverlayFrame } from '@cssearth/volume-core/coordinates/overlay-wcs';
-import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
-import { transferOverlayAlignment } from '@cssearth/volume-core/coordinates/overlay-alignment';
-import { registeredOverlayCorners, type ImageRegistration } from '@cssearth/volume-core/coordinates/overlay-registration';
+import { overlayCorners, type ImageWcs, type OverlayFrame, defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement, transferOverlayAlignment, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
 import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 import { composeSkyBandSource, verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 

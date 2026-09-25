@@ -10,8 +10,7 @@ import { prepareCatalogueStars } from './catalogue-stars.ts';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
 import { validateCompilerResult } from './bank-validation.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
-import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
-import { COMPILER_PHYSICAL_REFERENCE } from '@cssearth/volume-core/coordinates/compiler-frame';
+import { readRetainedEmissionField, COMPILER_PHYSICAL_REFERENCE } from '@cssearth/bake/volume';
 
 export async function refreshCompilerStars(root: string, recipePath: string, previousResultPath: string) {
   const started = performance.now();

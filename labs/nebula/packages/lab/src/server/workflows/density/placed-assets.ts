@@ -2,8 +2,7 @@
 import { readFile, mkdir, symlink, rename, rm, realpath } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
-import { parseDensityPlacement, placeDensitySlices } from '@cssearth/volume-core/coordinates/density-placement';
-import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
+import { parseDensityPlacement, placeDensitySlices, type VolumeSlices } from '@cssearth/bake/volume';
 import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';

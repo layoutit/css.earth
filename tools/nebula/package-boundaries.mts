@@ -8,14 +8,19 @@ import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
 
 export const nebulaPackages = {
   lab: '@cssearth/nebula-lab',
-  'volume-core': '@cssearth/volume-core',
   'volume-bake': '@cssearth/volume-bake',
   reconstruction: '@cssearth/nebula-reconstruction',
   'volume-viewer': '@cssearth/volume-viewer',
 } as const;
 type Owner = keyof typeof nebulaPackages;
 const owners = Object.keys(nebulaPackages) as Owner[];
-const allowed = (from: Owner, to: Owner) => from === to || from === 'lab' || to === 'volume-core';
+const allowed = (from: Owner, to: Owner) => from === to || from === 'lab';
+/** The volume contracts, fields and materials were the lab's volume-core package, which every nebula package could import.
+ * They are `@cssearth/bake/volume` now; its Node-only bake entry, like volume-bake before it, is for the lab alone. */
+export const bakePackage = '@cssearth/bake';
+export const bakeVolumeEntries = { main: `${bakePackage}/volume`, node: `${bakePackage}/volume/node` } as const;
+const bakeEntryAllowed = (from: Owner, specifier: string) => specifier !== bakeVolumeEntries.node || from === 'lab' || from === 'volume-bake';
+const platformDependency = /^(react(?:-dom)?(?:\/|$)|sharp$|vite$|@layoutit\/polycss$)/;
 const inside = (parent: string, path: string) => {
   const offset = relative(parent, path);
   return offset === '' || !offset.startsWith('../') && offset !== '..' && !offset.startsWith('/');
@@ -97,6 +102,54 @@ function manifest(directory: string): { name?: unknown; private?: unknown; expor
 }
 const record = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
 
+/** No computed module loading, object/source paths or celestial-id branches: the host supplies those. */
+function hostNeutral(label: string, syntax: ts.SourceFile, computed: boolean, objectIds: Set<string>, errors: string[]) {
+  if (computed) errors.push(`${label}: computed module loading crosses an unchecked boundary`);
+  const visit = (node: ts.Node) => {
+    if (ts.isStringLiteralLike(node) && /(?:^|\/)(?:labs\/nebula\/(?:models|sources)|src\/(?:objects|planets))\//.test(node.text))
+      errors.push(`${label}: object/source path belongs to a host adapter`);
+    const objectId = celestialBranch(node, objectIds);
+    if (objectId) errors.push(`${label}: hardcoded celestial-id branch ${objectId} belongs to a host adapter`);
+    ts.forEachChild(node, visit);
+  };
+  visit(syntax);
+}
+/** The rules volume-core and volume-bake followed, kept on `@cssearth/bake/volume` and its node entry: the main entry
+ * imports no platform dependency and never the node entry, the topic reaches no nebula package and no other topic, and
+ * no volume source names an object, an object path or a computed module. */
+function checkBakeVolume(root: string, directory: string, value: ReturnType<typeof manifest>, objectIds: Set<string>, errors: string[]) {
+  if (value.name !== bakePackage || value.private !== true) errors.push('bake: expected named private workspace package');
+  if (!record(value.exports) || !(`.${bakeVolumeEntries.main.slice(bakePackage.length)}` in value.exports) ||
+      !(`.${bakeVolumeEntries.node.slice(bakePackage.length)}` in value.exports)) errors.push('bake: missing volume entries');
+  const deps = { ...(record(value.dependencies) ? value.dependencies : {}), ...(record(value.devDependencies) ? value.devDependencies : {}) };
+  const volume = resolve(directory, 'src/volume'), node = resolve(volume, 'node');
+  for (const file of sourceFiles(volume)) {
+    const source = readFileSync(file, 'utf8'), label = relative(root, file);
+    const lineCount = source.split('\n').length - Number(source.endsWith('\n'));
+    if (lineCount > 600) errors.push(`${label}: ${lineCount} lines exceeds 600`);
+    if (extname(file) === '.py') continue;
+    const test = /\.(test|spec)\.[cm]?tsx?$/.test(file), main = !inside(node, file);
+    const syntax = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true), loading = imports(syntax);
+    for (const specifier of loading.values) {
+      if (specifier === bakePackage || specifier.startsWith(`${bakePackage}/`)) errors.push(`${label}: bake topic imports a bake entry ${specifier}`);
+      const target = owners.find(key => specifier === nebulaPackages[key] || specifier.startsWith(`${nebulaPackages[key]}/`));
+      if (target) errors.push(`${label}: forbidden import ${target}`);
+      if (!specifier.startsWith('.') && !specifier.startsWith('/') && !isBuiltin(specifier)) {
+        const dependency = specifier.startsWith('@') ? specifier.split('/').slice(0, 2).join('/') : specifier.split('/')[0]!;
+        if (dependency !== bakePackage && !(dependency in deps)) errors.push(`${label}: undeclared external dependency ${dependency}`);
+      }
+      if ((specifier.startsWith('/') || specifier.startsWith('file:')) && !test) errors.push(`${label}: absolute module import leaves package: ${specifier}`);
+      if (specifier.startsWith('.')) {
+        const destination = resolve(dirname(file), specifier);
+        if (!inside(volume, destination) && !test) errors.push(`${label}: relative import leaves package: ${specifier}`);
+        if (main && inside(node, destination)) errors.push(`${label}: core imports the node entry ${specifier}`);
+      }
+      if (main && !test && (isBuiltin(specifier) || platformDependency.test(specifier))) errors.push(`${label}: core imports platform dependency ${specifier}`);
+    }
+    if (!test) hostNeutral(label, syntax, loading.computed, objectIds, errors);
+  }
+}
+
 export function checkNebulaBoundaries(root: string, requireAll = true): string[] {
   const base = resolve(root, 'labs/nebula/packages'), errors: string[] = [], objectIds = celestialIds(root);
   const manifests = new Map<Owner, ReturnType<typeof manifest>>();
@@ -113,7 +166,10 @@ export function checkNebulaBoundaries(root: string, requireAll = true): string[]
       if (!allowed(owner, target)) errors.push(`${owner}: forbidden dependency ${target}`);
       if (deps[nebulaPackages[target]] !== 'workspace:*') errors.push(`${owner}: ${target} must use workspace:*`);
     }
+    if (bakePackage in deps && deps[bakePackage] !== 'workspace:*') errors.push(`${owner}: bake must use workspace:*`);
   }
+  const bakeDirectory = resolve(root, 'packages/bake'), bake = existsSync(resolve(bakeDirectory, 'package.json')) ? manifest(bakeDirectory) : undefined;
+  if (!bake && requireAll) errors.push('Missing package: bake');
   for (const [owner, value] of manifests) {
     const directory = resolve(base, owner);
     const deps = { ...(record(value.dependencies) ? value.dependencies : {}), ...(record(value.devDependencies) ? value.devDependencies : {}) };
@@ -134,6 +190,12 @@ export function checkNebulaBoundaries(root: string, requireAll = true): string[]
           const key = specifier === nebulaPackages[target] ? '.' : `.${specifier.slice(nebulaPackages[target].length)}`;
           if (!targetManifest || !record(targetManifest.exports) || !(key in targetManifest.exports)) errors.push(`${label}: non-public import ${specifier}`);
         }
+        if (specifier === bakePackage || specifier.startsWith(`${bakePackage}/`)) {
+          if (!bakeEntryAllowed(owner, specifier)) errors.push(`${label}: forbidden import ${specifier}`);
+          if (deps[bakePackage] !== 'workspace:*') errors.push(`${label}: undeclared workspace import ${bakePackage}`);
+          const key = specifier === bakePackage ? '.' : `.${specifier.slice(bakePackage.length)}`;
+          if (!bake || !record(bake.exports) || !(key in bake.exports)) errors.push(`${label}: non-public import ${specifier}`);
+        }
         if (!specifier.startsWith('.') && !specifier.startsWith('/') && !isBuiltin(specifier)) {
           const dependency = specifier.startsWith('@') ? specifier.split('/').slice(0, 2).join('/') : specifier.split('/')[0]!;
           if (dependency !== value.name && !(dependency in deps)) errors.push(`${label}: undeclared external dependency ${dependency}`);
@@ -144,22 +206,11 @@ export function checkNebulaBoundaries(root: string, requireAll = true): string[]
           const destination = resolve(dirname(file), specifier);
           if (!inside(directory, destination) && !test && !hostAdapter) errors.push(`${label}: relative import leaves package: ${specifier}`);
         }
-        if (owner === 'volume-core' && !test && (isBuiltin(specifier) || /^(react(?:-dom)?(?:\/|$)|sharp$|vite$|@layoutit\/polycss$)/.test(specifier)))
-          errors.push(`${label}: core imports platform dependency ${specifier}`);
       }
-      if (owner !== 'lab' && !test) {
-        if (loading.computed) errors.push(`${label}: computed module loading crosses an unchecked boundary`);
-        const visit = (node: ts.Node) => {
-          if (ts.isStringLiteralLike(node) && /(?:^|\/)(?:labs\/nebula\/(?:models|sources)|src\/(?:objects|planets))\//.test(node.text))
-            errors.push(`${label}: object/source path belongs to a host adapter`);
-          const objectId = celestialBranch(node, objectIds);
-          if (objectId) errors.push(`${label}: hardcoded celestial-id branch ${objectId} belongs to a host adapter`);
-          ts.forEachChild(node, visit);
-        };
-        visit(syntax);
-      }
+      if (owner !== 'lab' && !test) hostNeutral(label, syntax, loading.computed, objectIds, errors);
     }
   }
+  if (bake) checkBakeVolume(root, bakeDirectory, bake, objectIds, errors);
   return [...errors, ...checkNebulaInboundBoundaries(root)];
 }
 
@@ -167,5 +218,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
   const errors = checkNebulaBoundaries(root);
   if (errors.length) { console.error(errors.join('\n')); process.exitCode = 1; }
-  else console.log('NEBULA_BOUNDARIES_OK: all five private packages follow their public dependency graph');
+  else console.log(`NEBULA_BOUNDARIES_OK: all ${owners.length} private packages and ${bakeVolumeEntries.main} follow their public dependency graph`);
 }

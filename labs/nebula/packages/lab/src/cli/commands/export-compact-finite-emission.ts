@@ -19,7 +19,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { readPreparedReconstruction } from '../../server/services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../server/services/finite-lens-bundles.ts';
 import { parseVolumeLensPromotion } from '../../server/workflows/density/volume-lens-promotion.ts';
-import { validateChannelGain, validateLensToneCurve } from '@cssearth/volume-core/materials/slab-material';
+import { validateChannelGain, validateLensToneCurve } from '@cssearth/bake/volume';
 
 const sha256 = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };

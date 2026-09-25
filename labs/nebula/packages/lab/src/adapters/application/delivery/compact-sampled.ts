@@ -12,18 +12,9 @@ import { jointRecord } from "../../../features/joint-fit/model.ts";
 import { readSampledRecipe } from "../../../features/sampled-prior/model.ts";
 import { readCompilerResult } from "../../../features/compiler/result.ts";
 import { readCompilerRequest } from "../../../features/compiler/model.ts";
-import {
-  readCompilerBakeResult,
-  type CompilerPin,
-} from "@cssearth/volume-core/contracts/compiler-bake";
+import { readCompilerBakeResult, type CompilerPin, sampledPointColors, prepareSampledMaterial, type SampledColor, prepareSampledField } from "@cssearth/bake/volume";
 import { loadCompilerImages } from "../../../server/workflows/compiler/images.ts";
 import { decodeFits } from "@cssearth/fits";
-import {
-  sampledPointColors,
-  prepareSampledMaterial,
-  type SampledColor,
-} from "@cssearth/volume-core/materials/sampled";
-import { prepareSampledField } from "@cssearth/volume-core/fields/sampled";
 import {
   gridDiffuse,
   type DiffuseAtom,

@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
-import { text } from '@cssearth/volume-core/contracts/volume-recipe';
+import { text } from '@cssearth/bake/volume';
 import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
 import { parseShellRecipe } from './config.js';

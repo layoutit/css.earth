@@ -5,7 +5,7 @@ import { preparePointAtlas } from '../../../src/renderers/css/preparation/stars/
 import { parseStarsRecipe } from '../../../src/preparation/stars/config.js';
 import { containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
-import type { CompilerStarSprites, PreparedCompilerStar } from '@cssearth/volume-core/contracts/compiler-bake';
+import type { CompilerStarSprites, PreparedCompilerStar } from '@cssearth/bake/volume';
 
 /** The real site's prepared compact core/halo profile; never rebuilt in the viewer. */
 export const COMPILER_STAR_PROFILE_PATH = 'src/objects/stellar-neighbourhood/source/stars.json';

@@ -6,8 +6,7 @@ import { join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, compilerSampling, type CompilerBakeResult } from './bake.ts';
 import { readCompactCompiler } from '../compact-inputs/compiler.ts';
-import { validateVolumeLayerSlices, type VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
-import { createRenderElementBudget, type RenderElementProfile } from '@cssearth/volume-core/contracts/render-element-budget';
+import { validateVolumeLayerSlices, type VolumeSlices, createRenderElementBudget, type RenderElementProfile } from '@cssearth/bake/volume';
 
 const boundsArcsec = { min: [-1, -1, -1] as [number, number, number], max: [1, 1, 1] as [number, number, number] };
 const renderProfile: RenderElementProfile = { schema: 'cssearth-render-element-profile@1', id: 'test-retained-renderer@1',

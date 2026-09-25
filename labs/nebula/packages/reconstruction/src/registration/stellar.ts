@@ -1,7 +1,7 @@
 import { applyAffine, type Affine, type Point } from './affine.ts';
 /** Offline point-source registration. All coordinates are raster pixel edges (centres at n + .5). */
 import sharp from 'sharp';
-import { wcsPixelRay, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
+import { wcsPixelRay, type ImageWcs } from '@cssearth/bake/volume';
 import { registrationOverlap, type ReferenceFootprint } from './overlap.ts';
 export interface Star { point: Point; peak: number }
 export interface Pair { source: Point; frame: Point; sourceIndex: number; referenceIndex: number }

@@ -1,4 +1,4 @@
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { cataloguePosition, METERS_PER_KPC } from './catalogue-position.ts';
 import type { DensityVolumeFrame } from '../contracts/volume-frame.ts';

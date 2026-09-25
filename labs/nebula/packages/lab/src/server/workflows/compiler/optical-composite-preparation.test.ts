@@ -15,8 +15,7 @@ import { compilerAlphaDigest, compilerFrame } from './bake.ts';
 import { assertCompilerLensGeometry } from './bank-validation.ts';
 import { readCompilerRecipe, defaultCompilerControls } from '../../../features/compiler/model.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
-import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
-import { createEmissionField } from '@cssearth/volume-core/fields/emission';
+import { readRetainedEmissionField, createEmissionField } from '@cssearth/bake/volume';
 import { opticalCompositeSourcePins, restoreOpticalCompositeSources } from './optical-composite-inputs.ts';
 import { prepareOpticalComposite, prepareOpticalCompositeForResult, readOpticalCompositeRecipe } from './optical-composite-preparation.ts';
 

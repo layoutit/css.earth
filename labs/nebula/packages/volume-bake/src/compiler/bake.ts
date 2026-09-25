@@ -3,29 +3,18 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
-import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
-import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
+import { type DensityVolumeFrame, type Vector3, type VolumeSlices, compilerSlabMaterial, optimizeVolumeLayers, readLayerOptimizationReport, readVolumeLayerPlan, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile, readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds, compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds, type CompilerStarInput } from '@cssearth/bake/volume';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';
-import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
-import { optimizeVolumeLayers, readLayerOptimizationReport } from '@cssearth/volume-core/sampling/layer-optimization';
-import { readVolumeLayerPlan } from '@cssearth/volume-core/contracts/volume-slices';
-import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount,
-  type RenderElementProfile } from '@cssearth/volume-core/contracts/render-element-budget';
-import { readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites } from '@cssearth/volume-core/contracts/compiler-bake';
-import type { EmissionBounds, EmissionVector3, SkyBounds } from '@cssearth/volume-core/contracts/emission';
 
-import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds } from '@cssearth/volume-core/coordinates/compiler-frame';
-export { compilerFrame, compilerSliceCounts } from '@cssearth/volume-core/coordinates/compiler-frame';
+export { compilerFrame, compilerSliceCounts } from '@cssearth/bake/volume';
 
-export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '@cssearth/volume-core/contracts/compiler-bake';
-export { readCompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
+export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '@cssearth/bake/volume';
+export { readCompilerBakeResult } from '@cssearth/bake/volume';
 export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
-import type {CompilerStarInput} from '@cssearth/volume-core/contracts/compiler-star-input';
-export type {CompilerStarInput} from '@cssearth/volume-core/contracts/compiler-star-input';
+export type {CompilerStarInput} from '@cssearth/bake/volume';
 export interface CompilerLensInput {
   id: string; label: string;
   /** Component-bound 3D chromaticity in 0..255; false means no observed material. No projected-image fallback. */

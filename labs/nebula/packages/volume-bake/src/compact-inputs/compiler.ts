@@ -4,9 +4,7 @@ import { createHash } from 'node:crypto';
 import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, type CompilerBakeProgress, type CompilerBakeBackend, type CompiledVolumeArtifact } from '../compiler/bake.ts';
-import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
-import { createPhotometricEmission, readEnvelopeColors, type EnvelopeColors } from '@cssearth/volume-core/fields/photometric-emission';
-import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
+import { readCompilerBakeResult, type CompilerBakeResult, createPhotometricEmission, readEnvelopeColors, type EnvelopeColors, readRetainedEmissionField } from '@cssearth/bake/volume';
 import { hash as geometrySha, pinned, type Pin } from './io.ts';
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);

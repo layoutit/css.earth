@@ -6,9 +6,8 @@ import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
 import type { VolumeSliceQuad } from '@cssearth/volume-bake/slices/density';
-import type { Axis as SliceAxis } from '@cssearth/volume-core/contracts/volume-recipe';
+import type { Axis as SliceAxis, Vector3 } from '@cssearth/bake/volume';
 import { test } from 'node:test';
-import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
 
 type Quad = Pick<VolumeSliceQuad, 'id' | 'axis' | 'texturePath' | 'widthPx' | 'heightPx' | 'vertices' | 'uvs'>;
 function record(value: unknown): Record<string, unknown> {
@@ -145,7 +144,7 @@ test('prepared volume descriptor and external PNG bank form a complete pinned cl
 test('volume compilation omits only lossless-alpha empty slabs, preserving every nonempty PolyCSS leaf', async () => {
   const { compileCssVolume } = await import('./volume.js');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { parseVolumeRecipe } = await import('@cssearth/volume-core/contracts/volume-recipe');
+  const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
   const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/volume-bake/slices/density').VolumeSlices;
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
   const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
@@ -174,7 +173,7 @@ test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the p
   const { compileCssVolume } = await import('./volume.js');
   const { TEXELS_PER_CSS_PIXEL } = await import('../../../platform/projective-surface-raster.mts');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { parseVolumeRecipe } = await import('@cssearth/volume-core/contracts/volume-recipe');
+  const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
   const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/volume-bake/slices/density').VolumeSlices;
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
   const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));

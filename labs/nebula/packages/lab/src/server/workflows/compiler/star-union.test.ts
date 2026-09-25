@@ -4,7 +4,7 @@ import { compilerUnionStars } from '@cssearth/nebula-reconstruction/stars/union'
 import { compilerStars } from '@cssearth/nebula-reconstruction/stars/compiler';
 import { readCompilerRecipe, readCompilerStarCatalogue } from '../../../features/compiler/model.ts';
 import type { CompilerImage } from './images.ts';
-import type { EmissionFieldModel } from '@cssearth/volume-core/contracts/emission';
+import type { EmissionFieldModel } from '@cssearth/bake/volume';
 
 function image(id: string, points: { x: number; y: number; peak: number }[], gain = 1, rotated = false): CompilerImage {
   const width = 64, data = new Uint8Array(width * width * 3);

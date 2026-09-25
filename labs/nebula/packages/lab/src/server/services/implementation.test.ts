@@ -30,7 +30,9 @@ test('relocated preparation entry points pin their live package owners', async (
   const pins = await implementationPins(process.cwd(), entries);
   for (const entry of entries) assert.ok(pins.some(pin => pin.path === entry));
   assert.ok(pins.some(pin => pin.path === 'labs/nebula/packages/reconstruction/src/methods/sampled/material-fit.ts'));
-  assert.ok(pins.some(pin => pin.path === 'labs/nebula/packages/volume-core/src/fields/authored-shapes.ts'));
+  assert.ok(pins.some(pin => pin.path === 'packages/bake/src/volume/fields/authored-shapes.ts'));
+  assert.ok(pins.some(pin => pin.path === 'packages/bake/package.json'));
+  assert.equal(pins.some(pin => pin.path.startsWith('packages/bake/dist/')), false);
   assert.ok(pins.some(pin => pin.path === 'labs/nebula/packages/volume-bake/src/slices/painted-field.ts'));
   assert.equal(pins.some(pin => pin.path.startsWith('labs/nebula/src/')), false);
   // The shared FITS reader the sampled compiler decodes with is pinned by its sources.

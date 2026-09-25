@@ -1,9 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import type { EmissionVector3 } from '@cssearth/volume-core/contracts/emission';
-import { prepareSampledField } from '@cssearth/volume-core/fields/sampled';
+import { type EmissionVector3, prepareSampledField, prepareSampledMaterial, sampledPointColors } from '@cssearth/bake/volume';
 import { gridDiffuse, type DiffuseAtom } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
-import { prepareSampledMaterial, sampledPointColors } from '@cssearth/volume-core/materials/sampled';
 import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
 
 const points = new Float32Array([-1.2, 0, -5, 1, 1.2, 0, 5, 1, -15, -15, -15, 1e-10, 15, 15, 15, 1e-10]);
