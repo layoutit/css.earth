@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { utcToEt, etToUtc, encodeClock, clockToEt, etToClock, apply, transpose, spiceCamera } from '@cssearth/spice';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
@@ -32,7 +32,7 @@ test('the fixture was generated from the pinned kernels by a named SPICE toolkit
   assert.match(requireString(fixture.tool.cspice), /^CSPICE_N\d{4}$/);
   await assertPinnedInputs(fixture.inputs);
   assert.equal(kernels.length, 15);
-  assert.deepEqual(set.kernels.map(kernel => kernel.path), kernels.map(entry => entry.path), 'the same kernels in the same order');
+  assert.deepEqual(set.kernels.map(kernel => relative(ORACLE_ROOT, kernel.path)), kernels.map(entry => entry.path), 'the same kernels in the same order');
   assert.equal(fixture.inputs.length, 17, 'fifteen kernels, the cube and its label');
 });
 
