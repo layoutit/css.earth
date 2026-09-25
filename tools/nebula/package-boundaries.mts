@@ -8,7 +8,6 @@ import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
 
 export const nebulaPackages = {
   lab: '@cssearth/nebula-lab',
-  'volume-bake': '@cssearth/volume-bake',
   reconstruction: '@cssearth/nebula-reconstruction',
   'volume-viewer': '@cssearth/volume-viewer',
 } as const;
@@ -19,7 +18,7 @@ const allowed = (from: Owner, to: Owner) => from === to || from === 'lab';
  * They are `@cssearth/bake/volume` now; its Node-only bake entry, like volume-bake before it, is for the lab alone. */
 export const bakePackage = '@cssearth/bake';
 export const bakeVolumeEntries = { main: `${bakePackage}/volume`, node: `${bakePackage}/volume/node` } as const;
-const bakeEntryAllowed = (from: Owner, specifier: string) => specifier !== bakeVolumeEntries.node || from === 'lab' || from === 'volume-bake';
+const bakeEntryAllowed = (from: Owner, specifier: string) => specifier !== bakeVolumeEntries.node || from === 'lab';
 const platformDependency = /^(react(?:-dom)?(?:\/|$)|sharp$|vite$|@layoutit\/polycss$)/;
 const inside = (parent: string, path: string) => {
   const offset = relative(parent, path);

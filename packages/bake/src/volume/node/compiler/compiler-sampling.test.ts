@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { onTestFinished, test, vi } from 'vitest';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, compilerSampling, type CompilerBakeResult } from './bake.ts';
 import { readCompactCompiler } from '../compact-inputs/compiler.ts';
-import { validateVolumeLayerSlices, type VolumeSlices, createRenderElementBudget, type RenderElementProfile } from '@cssearth/bake/volume';
+import { validateVolumeLayerSlices, type VolumeSlices } from '../../contracts/volume-slices.ts';
+import { createRenderElementBudget, type RenderElementProfile } from '../../contracts/render-element-budget.ts';
 
+// The real compiler probes millions of samples; the lab's Node runner gave these tests no timeout.
+vi.setConfig({ testTimeout: 120_000 });
 const boundsArcsec = { min: [-1, -1, -1] as [number, number, number], max: [1, 1, 1] as [number, number, number] };
 const renderProfile: RenderElementProfile = { schema: 'cssearth-render-element-profile@1', id: 'test-retained-renderer@1',
   maximumElements: 500, elementsPerSlab: 3, elementsPerStar: 1, reservedElements: 47 };
@@ -25,7 +29,7 @@ test('the actual compiler default creates a bounded plan without an opt-in sampl
 });
 
 test('actual accepted M42 sampling bypasses optimization with its historical omission unchanged', async () => {
-  const compact = readCompactCompiler(JSON.parse(gunzipSync(await readFile('src/objects/m42/source/bake-inputs.json.gz')).toString()));
+  const compact = readCompactCompiler(JSON.parse(gunzipSync(await readFile(fileURLToPath(new URL('../../../../../../src/objects/m42/source/bake-inputs.json.gz', import.meta.url)))).toString()));
   const saved = compact.scene.sampling, before = JSON.stringify(saved);
   assert.equal(saved.layerPlan, undefined);
   const forbidden = () => { throw new Error('Historical replay must not probe or replan the source field.'); };
@@ -72,9 +76,9 @@ test('the optimizer receives the remaining budget after retained stars, not a de
   assert.ok(sampling.renderBudget && sampling.renderBudget.totalElements <= 500);
 });
 
-test('a small historical compiler replay keeps unreflected source geometry, sampling and physical intervals absent', async t => {
+test('a small historical compiler replay keeps unreflected source geometry, sampling and physical intervals absent', async () => {
   const root = await mkdtemp(join(tmpdir(), 'legacy-compiler-sampling-'));
-  t.after(() => rm(root, { recursive: true, force: true }));
+  onTestFinished(() => rm(root, { recursive: true, force: true }));
   const compiled: VolumeSlices[] = [];
   const sampling = { sliceCounts: { x: 1, y: 1, z: 2 }, imageWidth: 512 as const, samplesPerSlab: 4 as const };
   const scene = await bakeCompiler({ root, outputDirectory: 'bake', id: 'historical', fieldIdentity: 'a'.repeat(64),

@@ -4,7 +4,7 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane, type ImageWcs, createAlignedObservationMapping, type ReconstructionAlignment } from '@cssearth/bake/volume';
 import { sampleJointDepth } from '../../../cli/commands/prepare-lmc-stars.ts';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
-import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import type { VolumeSource } from '@cssearth/bake/volume/node';
 
 type Pin = { path: string };
 export interface ReconstructionStarsInput {

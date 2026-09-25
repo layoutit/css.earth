@@ -10,7 +10,7 @@ const engine = createRequire(resolve(root, 'packages/engine/package.json'));
 const { build } = createRequire(engine.resolve('tsup'))('esbuild') as typeof import('esbuild');
 const output = resolve(root, 'output/nebula-application-isolation'); await mkdir(output, { recursive: true });
 const sandbox = await mkdtemp(join(output, 'run-'));
-const names = ['bake', 'volume-bake'];
+const names = ['bake'];
 await writeFile(join(sandbox, 'package.json'), '{"type":"module"}\n');
 await mkdir(join(sandbox, 'node_modules/@cssearth'), { recursive: true });
 for (const name of names) {

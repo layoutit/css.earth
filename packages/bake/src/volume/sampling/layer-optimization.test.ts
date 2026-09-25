@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test, vi } from 'vitest';
 import { optimizeVolumeLayers, readLayerOptimizationReport, type LayerOptimizationOptions } from './layer-optimization.ts';
 import type { VolumeLayerPlan } from '../contracts/volume-slices.ts';
 
+// The default planner probes a 512-cell reference grid; the lab's Node runner gave these tests no timeout.
+vi.setConfig({ testTimeout: 120_000 });
 const axes = ['x', 'y', 'z'] as const;
 const uniform = (): LayerOptimizationOptions => ({ bounds: { min: [-1, -1, -1], max: [1, 1, 1] },
   referenceSliceCounts: { x: 512, y: 512, z: 512 }, referenceSamplesPerSlab: 1, probeWidth: 8,

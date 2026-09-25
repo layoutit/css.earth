@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pinned, type Pin } from '@cssearth/volume-bake/compact-inputs/io';
+import { pinned, type Pin } from '@cssearth/bake/volume/node';
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 export async function verifyReplayReferences(root: string, directory: string, references: readonly Pin[]) {
   const needsCopies = references.some(pin => pin.path.startsWith('labs/'));

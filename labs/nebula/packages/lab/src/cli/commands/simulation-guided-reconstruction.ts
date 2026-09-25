@@ -13,9 +13,7 @@ import {fitSimulationGuidedEmission} from '@cssearth/nebula-reconstruction/metho
 import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from './simulation-prior.ts';
 import { compilerSlabMaterial, alphaLimitedSlabMaterial, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/bake/volume';
-import {bakeMasterVolumeSlices} from '@cssearth/volume-bake/slices/emission';
-import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';
-import {sourceBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { bakeMasterVolumeSlices, recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 const json=async(path:string,value:unknown)=>{const b=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,b);return sha256(b);};
 async function main(settingsPath:string){

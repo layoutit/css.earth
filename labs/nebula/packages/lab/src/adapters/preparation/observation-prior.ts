@@ -2,8 +2,7 @@ import { type ObservationMapping, overlayCorners, type ImageWcs, type OverlayFra
 export type { ObservationMapping } from '@cssearth/bake/volume';
 /** Offline calibrated image/ray mapping and sampling of the unchanged neutral stellar prior. */
 import { prepareOverlayGeometry } from '../renderer/overlay-geometry.ts';
-import { sampleEncoded, type VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import { channelDensity } from '@cssearth/volume-bake/slices/density';
+import { sampleEncoded, type VolumeSource, channelDensity } from '@cssearth/bake/volume/node';
 
 type Vec3 = [number, number, number];
 type Vec2 = [number, number];

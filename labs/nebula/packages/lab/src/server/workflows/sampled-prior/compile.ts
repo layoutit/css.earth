@@ -21,7 +21,7 @@ import { sampledBakeProgress } from './progress.ts';
 import { registerComponentBanks } from './layout.ts';
 import { fitSampledEmission, type EmissionFitResult } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
 import { fitSampledMaterialColors } from '@cssearth/nebula-reconstruction/methods/sampled/material-fit';
-import { maximumPlanningEmission } from '@cssearth/volume-bake/compact-inputs/sampled';
+import { maximumPlanningEmission } from '@cssearth/bake/volume/node';
 
 /** Spectral appearances belong to the final scene, so its atlas must include their complete palette. */
 export async function prepareSampledSceneStars(root: string, outputDirectory: string,

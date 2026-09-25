@@ -3,7 +3,9 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { type CompilerBakeResult, type CompilerLensVolume, type CompilerPin, COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices, readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlabInterval, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/bake/volume';
+import type { CompilerBakeResult, CompilerLensVolume, CompilerPin } from '../../contracts/compiler-bake.ts';
+import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
+import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlabInterval, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 import type { CompilerBakeBackend, CompiledVolumeArtifact } from './bake.ts';
 
 import { hash as geometrySha } from '../compact-inputs/io.ts';

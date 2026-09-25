@@ -2,7 +2,11 @@ import { readCompactPin as pinned } from './io.ts';
 /** Replay retained measured samples and emitter colors without fitting or native images. */
 import { gunzipSync } from 'node:zlib';
 import { hash as geometrySha } from './io.ts';
-import { readSampledRecipe, readCompilerBakeResult, type CompilerPin, prepareSampledMaterial, type SampledColor, prepareSampledField, gridDiffuse, type DiffuseAtom } from '@cssearth/bake/volume';
+import { readSampledRecipe } from '../../contracts/sampled-recipe.ts';
+import { readCompilerBakeResult, type CompilerPin } from '../../contracts/compiler-bake.ts';
+import { prepareSampledMaterial, type SampledColor } from '../../materials/sampled.ts';
+import { prepareSampledField } from '../../fields/sampled.ts';
+import { gridDiffuse, type DiffuseAtom } from '../../fields/diffuse-atoms.ts';
 import { bakeCompiler as bake, type BakeCompilerOptions, type CompilerBakeBackend } from '../compiler/bake.ts';
 import { registerComponentBanks as register, type ComponentBankBackend } from '../compiler/component-layout.ts';
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);

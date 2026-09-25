@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { relative } from 'node:path';
 import sharp from 'sharp';
-import { containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { compareShapeSignal, comparisonPixels, type NeutralProjection } from '@cssearth/nebula-reconstruction/evidence/shape-comparison';
 import { comparisonChannels, comparisonGains } from '../../../features/shape-cloud/comparison-result.ts';

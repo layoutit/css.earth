@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import type { VolumeSource } from '@cssearth/bake/volume/node';
 import { parseDensityPlacement, densityPlacementTransform } from '@cssearth/bake/volume';
 import { prepareDensityProjection } from './density-projection.ts';
 

@@ -1,7 +1,7 @@
 import { compileLeafBounds } from '../preparation/leaf-bounds.js';
 import { readFileSync } from 'node:fs';
 import { afterEach, expect, test, vi } from 'vitest';
-import { bakeSlab } from '@cssearth/volume-bake/slices/density';
+import { bakeSlab } from '@cssearth/bake/volume/node';
 import type { VolumeRecipe } from '@cssearth/bake/volume';
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';

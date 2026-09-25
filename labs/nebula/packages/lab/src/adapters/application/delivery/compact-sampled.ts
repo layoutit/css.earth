@@ -1,6 +1,5 @@
-import { readCompactPin as pinned } from '@cssearth/volume-bake/compact-inputs/io';
+import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '../../../../../../../../src/renderers/css/volume/compiler-render-budget.ts';
-import { replayCompactSampled as replay } from '@cssearth/volume-bake/compact-inputs/sampled';
 import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
 /** Retained measured particles and per-emitter materials; never stores rendered slices. */

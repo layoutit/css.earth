@@ -11,8 +11,7 @@ import {physicalToField,angularScale} from '../../../cli/commands/simulation-gui
 import { createEmissionField, createEmissionMaterial, compilerSlabMaterial, lensChannelGainMaterial, validateChannelGain, validateLensToneCurve, type ChannelGain, type LensToneCurve, parseCloudAppearance, type CloudAppearance, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/bake/volume';
 import {createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from '../../../cli/commands/simulation-prior.ts';
-import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';
-import {sourceBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import type {PreparedReconstruction} from '../../../features/reconstruction/reconstruction-types.ts';
 export interface FiniteLensInput {modelResultId:string;sourceResultId:string;appearance?:CloudAppearance;

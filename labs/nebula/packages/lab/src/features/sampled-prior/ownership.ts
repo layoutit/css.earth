@@ -11,6 +11,7 @@ const relocatedSampledOwners: Readonly<Record<string, string>> = {
   'packages/bake/src/volume/contracts/sampled-emission-fit.ts': 'labs/nebula/packages/volume-core/src/contracts/sampled-emission-fit.ts',
   'packages/bake/src/volume/fields/sampled.ts': 'labs/nebula/packages/volume-core/src/fields/sampled.ts',
   'packages/bake/src/volume/materials/sampled.ts': 'labs/nebula/packages/volume-core/src/materials/sampled.ts',
+  'packages/bake/src/volume/node/compact-inputs/sampled.ts': 'labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts',
 };
 export const sampledBakeOwners: ReadonlySet<string> = new Set(Object.keys(relocatedSampledOwners));
 const historicalSampledOwners: ReadonlySet<string> = new Set(Object.values(relocatedSampledOwners));
@@ -25,7 +26,6 @@ export const sampledImplementationOwners = new Set([
   'labs/nebula/packages/reconstruction/src/methods/sampled/emission-detail.ts',
   'labs/nebula/packages/reconstruction/src/methods/sampled/emission-fit.ts',
   'labs/nebula/packages/reconstruction/src/methods/sampled/material-solver.ts',
-  'labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts',
 ]);
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 function pin(v: unknown): SampledOwnerPin {

@@ -3,11 +3,10 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Bounds3, Vector3, JointVolumeResult } from '@cssearth/bake/volume';
-import { containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath, bakeMasterVolumeSlices, type MasterSliceProgress } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import { bakeMasterVolumeSlices, type MasterSliceProgress } from '@cssearth/volume-bake/slices/emission';
 
 export type { JointVolumePin, JointVolumeResult } from '@cssearth/bake/volume';
 export interface JointVolumeProgress {

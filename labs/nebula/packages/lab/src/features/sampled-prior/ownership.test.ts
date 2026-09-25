@@ -43,6 +43,7 @@ test('relocated sampled owners and historical receipts remain readable without a
     'labs/nebula/packages/volume-core/src/contracts/sampled-recipe.ts',
     'packages/bake/src/volume/contracts/sampled-recipe.ts',
     'packages/bake/src/volume/fields/sampled.ts',
+    'packages/bake/src/volume/node/compact-inputs/sampled.ts',
   ]) {
     const value = method(); value.extraImplementation = [pin(path)];
     assert.equal(sampledOwnerPins(value, recipe).length, 4);
@@ -53,6 +54,7 @@ test('relocated sampled owners and historical receipts remain readable without a
     'labs/nebula/packages/volume-bake/src/compact-inputs/../sampled.ts',
     'labs/nebula/packages/volume-core/src/fields/sampled.test.ts',
     'packages/bake/src/volume/fields/emission.ts',
+    'packages/bake/src/volume/node/compact-inputs/../sampled.ts',
     'packages/bake/src/volume/fields/sampled.test.ts',
   ]) {
     const value = method(); value.extraImplementation = [pin(path)];

@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSliceQuad, VolumeSlices } from '@cssearth/volume-bake/slices/density';
+import type { VolumeSliceQuad, VolumeSlices } from '@cssearth/bake/volume/node';
 import { bakeCompiler, compilerAlphaDigest, compilerFrame, compilerSliceCounts, verifyCompilerAlphaIdentity } from './bake.ts';
 import { compilerPreparedPoint, compilerPreparedSlices, COMPILER_PHYSICAL_REFERENCE } from '@cssearth/bake/volume';
 

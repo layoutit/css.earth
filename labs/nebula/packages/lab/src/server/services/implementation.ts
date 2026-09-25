@@ -35,7 +35,7 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/bake/src/volume/node/index.ts' : 'packages/bake/src/volume/index.ts') };
       });
-      builder.onResolve({ filter: /^@cssearth\/(?:volume-bake|nebula-reconstruction|nebula-lab)(?:\/|$)/ }, async args => {
+      builder.onResolve({ filter: /^@cssearth\/(?:nebula-reconstruction|nebula-lab)(?:\/|$)/ }, async args => {
         const [scope, name, ...tail] = args.path.split('/');
         const directory = name === 'nebula-reconstruction' ? 'reconstruction' : name === 'nebula-lab' ? 'lab' : name;
         const path = `labs/nebula/packages/${directory}/package.json`;

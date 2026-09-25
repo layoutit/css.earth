@@ -3,18 +3,27 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
-import { type DensityVolumeFrame, type Vector3, type VolumeSlices, compilerSlabMaterial, optimizeVolumeLayers, readLayerOptimizationReport, readVolumeLayerPlan, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile, readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds, compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds, type CompilerStarInput } from '@cssearth/bake/volume';
+import type { DensityVolumeFrame } from '../../contracts/volume-frame.ts';
+import type { Vector3 } from '../../contracts/volume-recipe.ts';
+import { type VolumeSlices, readVolumeLayerPlan } from '../../contracts/volume-slices.ts';
+import { compilerSlabMaterial } from '../../materials/slab-material.ts';
+import { optimizeVolumeLayers, readLayerOptimizationReport } from '../../sampling/layer-optimization.ts';
+import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile } from '../../contracts/render-element-budget.ts';
+import { readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites } from '../../contracts/compiler-bake.ts';
+import type { EmissionBounds, EmissionVector3, SkyBounds } from '../../contracts/emission.ts';
+import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds } from '../../coordinates/compiler-frame.ts';
+import type { CompilerStarInput } from '../../contracts/compiler-star-input.ts';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';
 
-export { compilerFrame, compilerSliceCounts } from '@cssearth/bake/volume';
+export { compilerFrame, compilerSliceCounts } from '../../coordinates/compiler-frame.ts';
 
-export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '@cssearth/bake/volume';
-export { readCompilerBakeResult } from '@cssearth/bake/volume';
+export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '../../contracts/compiler-bake.ts';
+export { readCompilerBakeResult } from '../../contracts/compiler-bake.ts';
 export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
-export type {CompilerStarInput} from '@cssearth/bake/volume';
+export type { CompilerStarInput } from '../../contracts/compiler-star-input.ts';
 export interface CompilerLensInput {
   id: string; label: string;
   /** Component-bound 3D chromaticity in 0..255; false means no observed material. No projected-image fallback. */

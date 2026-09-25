@@ -8,8 +8,7 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import { prepareStarPhotometry, STAR_PHOTOMETRY, rayToOverlayPlane, type ImageWcs } from '@cssearth/bake/volume';
 import { catalogueColor } from '../../adapters/sources/stellar-color.ts';
 import { createObservationMapping, type ObservationMapping } from '../../adapters/preparation/observation-prior.ts';
-import { sampleEncoded } from '@cssearth/volume-bake/compact-inputs/density-grid';
-import { channelDensity } from '@cssearth/volume-bake/slices/density';
+import { sampleEncoded, channelDensity } from '@cssearth/bake/volume/node';
 import { loadStarCloudModel, type StarCloudModel } from '../../server/workflows/stars/lmc-star-cloud-model.ts';
 import type { PreparedLmcStar, PreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 

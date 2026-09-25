@@ -1,7 +1,11 @@
 /** Offline RGB replacement using a pinned compiler bank's exact retained slabs. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative } from 'node:path';
-import { type Vector3, readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad, readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolume, type CompilerPin, compilerSlabMaterial, COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '@cssearth/bake/volume';
+import type { Vector3 } from '../../contracts/volume-recipe.ts';
+import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
+import { readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolume, type CompilerPin } from '../../contracts/compiler-bake.ts';
+import { compilerSlabMaterial } from '../../materials/slab-material.ts';
+import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { sha256 } from '@cssearth/core/node';
 import { recolorCloudSlices } from '../slices/material.ts';

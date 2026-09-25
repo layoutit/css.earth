@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { parseShellRecipe } from './config.js';
 import { parseGriddedShellMesh, parseIndexedShellMesh, loadShellMesh, type ShellMesh } from './mesh.js';
 import { prepareSurfaceShellObject } from './prepare.js';
-import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssSurfaceShell } from '../../renderers/css/shell/types.js';
 import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';

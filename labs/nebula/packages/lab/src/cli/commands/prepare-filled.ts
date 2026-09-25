@@ -6,15 +6,13 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { loadVolumeSource, type VolumeSlices, bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { createObservationMapping, reprojectObservationPrior } from '../../adapters/preparation/observation-prior.ts';
 import { decomposeFilledComponents, type FilledComponentOptions } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { createFilledVolumeSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-volume';
 import { rectifyObservation, writeObservationPanel, extendedMap, validateObservationProjection } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
 import { validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
 
 type Vec3 = [number, number, number];

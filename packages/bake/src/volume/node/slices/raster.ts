@@ -1,6 +1,6 @@
 /** Offline volume texture encoding; optical coverage always retains lossless alpha. */
 import sharp from 'sharp';
-import type { VolumeImageEncoding } from '@cssearth/bake/volume';
+import type { VolumeImageEncoding } from '../../contracts/volume-recipe.ts';
 
 export async function encodeVolumeRaster(options: {
   rgba: Buffer; width: number; height: number;

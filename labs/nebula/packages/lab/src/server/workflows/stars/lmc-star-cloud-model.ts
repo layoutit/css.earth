@@ -7,7 +7,7 @@ import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { loadVolumeSource } from '@cssearth/bake/volume/node';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import { rectifyObservation } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { decomposeFilledComponents } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';

@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Vector3 } from '@cssearth/bake/volume';
-import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import type { SkyRecipe } from './config.js';
 import { loadSkySource, HALF_LINEAR } from './source.js';

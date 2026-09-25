@@ -9,7 +9,7 @@ import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { readObservationRecipe } from '../../../features/observations/recipe.ts';
 import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
-import { bakeMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
+import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { compilerAlphaDigest, compilerFrame } from './bake.ts';
 import { assertCompilerLensGeometry } from './bank-validation.ts';

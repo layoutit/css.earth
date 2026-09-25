@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createObservationMapping, reprojectObservationPrior } from './observation-prior.ts';
-import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import type { VolumeSource } from '@cssearth/bake/volume/node';
 import type { ImageWcs, OverlayFrame } from '@cssearth/bake/volume';
 
 const close = (a: readonly number[], b: readonly number[], eps = 1e-10) => a.forEach((value, i) => assert.ok(Math.abs(value - b[i]) < eps, `${value} != ${b[i]}`));

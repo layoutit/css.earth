@@ -9,9 +9,8 @@ import { digest, readBenchmarkImage } from '@cssearth/nebula-reconstruction/meth
 import { decomposeStructures, type WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 import { createCoherentVolumeSampler, type CoarseStellarDensityPrior } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-volume';
 import { validateCoherentColumns, validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
+import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type VolumeSlices } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
-import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 
 type Vec3 = [number, number, number];
 interface Variant {

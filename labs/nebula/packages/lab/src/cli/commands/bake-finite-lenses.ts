@@ -2,7 +2,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {bakeFiniteLens} from '../../server/workflows/density/finite-lens.ts';
 import {parseLabModelJson} from '../../resources/model-paths.ts';
-import {sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { validateChannelGain, validateLensToneCurve } from '@cssearth/bake/volume';
 const root=process.cwd(),path=process.argv[2],bytes=await readFile(path),recipe=parseLabModelJson(bytes.toString());

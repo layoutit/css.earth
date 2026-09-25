@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { writeAtomic } from '@cssearth/volume-bake/compact-inputs/io';
+import { writeAtomic } from '@cssearth/bake/volume/node';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { isAbsolute, relative, resolve } from 'node:path';

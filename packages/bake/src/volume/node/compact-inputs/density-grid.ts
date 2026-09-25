@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { zstdDecompressSync } from 'node:zlib';
 import { resolve, relative, isAbsolute } from 'node:path';
-import type { VolumeRecipe } from '@cssearth/bake/volume';
+import type { VolumeRecipe } from '../../contracts/volume-recipe.ts';
 export interface DecodedGrid { width: number; height: number; depth: number; encodedRgba: Uint8Array; }
 export interface VolumeSource extends DecodedGrid {
   recipe: VolumeRecipe;

@@ -9,8 +9,7 @@ import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
 function fixture() {
   const root = mkdtempSync(resolve(tmpdir(), 'nebula-inbound-'));
   const write = (path: string, source: string) => { const file = resolve(root, path); mkdirSync(resolve(file, '..'), { recursive: true }); writeFileSync(file, source); };
-  const owners = { 'packages/bake': '@cssearth/bake', 'labs/nebula/packages/volume-bake': '@cssearth/volume-bake',
-    'labs/nebula/packages/lab': '@cssearth/nebula-lab', 'labs/nebula/packages/reconstruction': '@cssearth/nebula-reconstruction',
+  const owners = { 'packages/bake': '@cssearth/bake', 'labs/nebula/packages/lab': '@cssearth/nebula-lab', 'labs/nebula/packages/reconstruction': '@cssearth/nebula-reconstruction',
     'labs/nebula/packages/volume-viewer': '@cssearth/volume-viewer' };
   write('package.json', JSON.stringify({ type: 'module', devDependencies: Object.fromEntries(Object.values(owners).map(name => [name, 'workspace:*'])) }));
   for (const [directory, name] of Object.entries(owners)) {
@@ -45,7 +44,7 @@ test('normal runtime and preparation reject all public research imports, includi
 test('preparation accepts the public bake entries while the runtime accepts none of them, not even an erased type', () => {
   const f = fixture();
   try {
-    f.write('tools/prepare.mts', "import {value} from '@cssearth/volume-bake/public'; export {value as core} from '@cssearth/bake/public';");
+    f.write('tools/prepare.mts', "import {value} from '@cssearth/bake/public'; export {value as core} from '@cssearth/bake/public';");
     for (const path of ['src/preparation/volume.ts', 'src/renderers/css/preparation/volume.ts', 'packages/bake/src/volume/other.ts']) {
       f.write(path, "import {value, type Contract} from '@cssearth/bake/public'; export {value};"); assert.deepEqual(f.check(), [], path);
       f.write(path, 'export {};');
@@ -55,15 +54,13 @@ test('preparation accepts the public bake entries while the runtime accepts none
     for (const source of ["import type {Contract} from '@cssearth/bake/public';", "import {type Contract} from '@cssearth/bake/public';",
       "export type {Contract} from '@cssearth/bake/public';", "export {type Contract} from '@cssearth/bake/public';",
       "type T = import('@cssearth/bake/public').Contract;", "import '@cssearth/bake/public';", "import {value,type Contract} from '@cssearth/bake/public';",
-      "export * from '@cssearth/bake/public';", "import type {Contract} from '@cssearth/volume-bake/public';"]) {
+      "export * from '@cssearth/bake/public';"]) {
       for (const path of ['site/runtime.mts', 'src/renderers/css/volume/types.ts']) {
         f.write(path, source); assert.ok(f.check().some(error => error.includes('runtime closure forbids')), `${path}: ${source}`);
         f.write(path, 'export {};');
       }
     }
     f.write('tools/prepare.mts', "import '@cssearth/bake/src/private';");
-    assert.ok(f.check().some(error => error.includes('non-public nebula import')));
-    f.write('tools/prepare.mts', "import '@cssearth/volume-bake/src/private';");
     assert.ok(f.check().some(error => error.includes('non-public nebula import')));
   } finally { f.cleanup(); }
 });
@@ -132,7 +129,7 @@ test('root research dependencies remain development-only and computed policy sta
       f.write('package.json', JSON.stringify({ [field]: { '@cssearth/bake': 'workspace:*', '@cssearth/nebula-lab': 'workspace:*', '@cssearth/nebula-reconstruction': 'workspace:*', '@cssearth/volume-viewer': 'workspace:*' } }));
       assert.equal(f.check().filter(error => error.includes('must remain a devDependency')).length, 4);
     }
-    f.write('package.json', JSON.stringify({ dependencies: { '@cssearth/volume-bake': 'workspace:*' } }));
+    f.write('package.json', JSON.stringify({ devDependencies: { '@cssearth/bake': 'workspace:*' } }));
     f.write('site/plugin.mts', 'export const load = (plugin: string) => import(plugin);');
     assert.deepEqual(f.check(), []);
     f.write('tools/nebula/application/load.ts', 'export const load = (plugin: string) => import(plugin);');

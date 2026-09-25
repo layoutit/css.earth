@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { preparePointAtlas } from '../../../src/renderers/css/preparation/stars/material.js';
 import { parseStarsRecipe } from '../../../src/preparation/stars/config.js';
-import { containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { containedPath } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import type { CompilerStarSprites, PreparedCompilerStar } from '@cssearth/bake/volume';
 

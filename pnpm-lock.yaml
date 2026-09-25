@@ -54,9 +54,6 @@ importers:
       '@cssearth/telescope':
         specifier: workspace:*
         version: link:packages/telescope
-      '@cssearth/volume-bake':
-        specifier: workspace:*
-        version: link:labs/nebula/packages/volume-bake
       '@cssearth/volume-viewer':
         specifier: workspace:*
         version: link:labs/nebula/packages/volume-viewer
@@ -171,9 +168,6 @@ importers:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../../../../packages/objects
-      '@cssearth/volume-bake':
-        specifier: workspace:*
-        version: link:../volume-bake
       '@cssearth/volume-viewer':
         specifier: workspace:*
         version: link:../volume-viewer
@@ -211,21 +205,6 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../../../../packages/core
-      sharp:
-        specifier: 0.35.3
-        version: 0.35.3(@types/node@26.4.0)
-
-  labs/nebula/packages/volume-bake:
-    dependencies:
-      '@cssearth/bake':
-        specifier: workspace:*
-        version: link:../../../../packages/bake
-      '@cssearth/core':
-        specifier: workspace:*
-        version: link:../../../../packages/core
-      '@cssearth/objects':
-        specifier: workspace:*
-        version: link:../../../../packages/objects
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)

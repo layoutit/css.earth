@@ -1,5 +1,5 @@
-import {prepareRetainedMaterialBank as prepare,type RetainedMaterialBankOptions} from '@cssearth/volume-bake/compiler/retained-material';
-export type {RetainedMaterialBankOptions} from '@cssearth/volume-bake/compiler/retained-material';
+import { prepareRetainedMaterialBank as prepare, type RetainedMaterialBankOptions } from '@cssearth/bake/volume/node';
+export type {RetainedMaterialBankOptions} from '@cssearth/bake/volume/node';
 import {compileCssVolume} from '../../../adapters/preparation/css-volume.ts';
 import {validatePreparedCssVolume} from '../../../adapters/renderer/volume-validation.ts';
 import {assertCompilerBankIdentity,assertCompilerLensGeometry} from './bank-validation.ts';

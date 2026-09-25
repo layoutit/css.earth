@@ -4,7 +4,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 import { text } from '@cssearth/bake/volume';
-import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { parseShellRecipe } from './config.js';
 import { loadShellMesh } from './mesh.js';

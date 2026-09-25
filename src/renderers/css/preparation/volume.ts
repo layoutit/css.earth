@@ -4,7 +4,7 @@ import { compileLeafBounds } from './leaf-bounds.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Axis, Vector3, VolumeRecipe } from '@cssearth/bake/volume';
-import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
+import type { VolumeSlices } from '@cssearth/bake/volume/node';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';
 import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '../volume/types.js';

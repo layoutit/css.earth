@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import type { VolumeSliceQuad } from '@cssearth/volume-bake/slices/density';
+import type { VolumeSliceQuad } from '@cssearth/bake/volume/node';
 import type { Axis as SliceAxis, Vector3 } from '@cssearth/bake/volume';
 import { test } from 'node:test';
 
@@ -145,7 +145,7 @@ test('volume compilation omits only lossless-alpha empty slabs, preserving every
   const { compileCssVolume } = await import('./volume.js');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
   const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
-  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/volume-bake/slices/density').VolumeSlices;
+  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/bake/volume/node').VolumeSlices;
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
   const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
   const options = { id: descriptor.id, frame: descriptor.volume, recipe, slices };
@@ -174,7 +174,7 @@ test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the p
   const { TEXELS_PER_CSS_PIXEL } = await import('../../../platform/projective-surface-raster.mts');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
   const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
-  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/volume-bake/slices/density').VolumeSlices;
+  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/bake/volume/node').VolumeSlices;
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
   const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
   const volume = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, recipe, slices });

@@ -10,12 +10,10 @@ import type { ReconstructionWork } from '../../features/reconstruction/reconstru
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { registeredImageSampler, registeredScalarSampler, writeOriginalOverlay } from '../workflows/density/registered-image.ts';
-import { recolorCloudSlices } from '@cssearth/volume-bake/slices/material';
+import { recolorCloudSlices, containedPath, loadVolumeSource, type VolumeSlices } from '@cssearth/bake/volume/node';
 import { prepareDensityProjection } from '../workflows/density/density-projection.ts';
 import { prepareReconstructionStars } from '../workflows/density/reconstruction-stars.ts';
-import { containedPath, loadVolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { sha256 } from '@cssearth/core/node';
-import type { VolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 
 type Progress = { type:'progress'; stage:string; current:number; total:number; message:string };

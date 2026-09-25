@@ -8,10 +8,10 @@ import { dirname, relative, resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
-/** Package names and their owning directories. The volume contracts, fields and materials were the lab's volume-core
- * package; they are `@cssearth/bake/volume` now, outside the lab, and keep its rules. */
+/** Package names and their owning directories. The lab's volume-core and volume-bake packages are `@cssearth/bake/volume`
+ * and `@cssearth/bake/volume/node` now, outside the lab, and keep their rules. */
 const packages = {
-  '@cssearth/bake': 'packages/bake', '@cssearth/volume-bake': 'labs/nebula/packages/volume-bake',
+  '@cssearth/bake': 'packages/bake',
   '@cssearth/nebula-lab': 'labs/nebula/packages/lab', '@cssearth/nebula-reconstruction': 'labs/nebula/packages/reconstruction',
   '@cssearth/volume-viewer': 'labs/nebula/packages/volume-viewer',
 } as const;
@@ -211,7 +211,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
       for (const entry of node.packages) {
         const typeOnly = erased || entry.erased;
         // Only preparation code imports the bake, not even for a type: a type the runtime needs belongs to the renderer.
-        const allowed = mode === 'test' || (entry.name === '@cssearth/bake' || entry.name === '@cssearth/volume-bake') && mode === 'preparation';
+        const allowed = mode === 'test' || entry.name === '@cssearth/bake' && mode === 'preparation';
         if (!allowed) errors.push(`${origin.label}: ${mode} closure forbids ${entry.specifier}${file === current ? '' : ` via ${node.label}`}${typeOnly ? ' (type import)' : ''}`);
       }
       for (const edge of node.edges) visit(edge.file, erased || edge.erased);

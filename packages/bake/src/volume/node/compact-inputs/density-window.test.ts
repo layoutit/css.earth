@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { test } from 'vitest';
 import { copyDensityWindow } from './density-window.ts';
 test('density windows preserve little-endian cells and translate only their coordinate bounds', () => {
   const source=Buffer.alloc(4*3*2*4);for(let i=0;i<24;i++)source.writeFloatLE(i+.25,i*4);
