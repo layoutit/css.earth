@@ -10,9 +10,9 @@ import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, surfaceTransfe
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadKernelSet, type KernelSet } from '../../../spice/kernel-set.mts';
-import { kernelBankPaths } from '../../../spice/kernel-bank.mts';
-import { etToUtc } from '../../../spice/lsk.mts';
+import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
+import { kernelBankPaths } from '../../../kernel-banks/kernel-bank.mts';
+import { etToUtc } from '@cssearth/spice';
 import { ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
 import { project } from '../../terrestrial-layers/osiris-geo.mts';
 import { CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry } from '../../terrestrial-layers/junocam.mts';

@@ -4,8 +4,8 @@
  * rate is parallel-time seconds per count of the most significant field, as
  * the kernels document. Parallel time is TDT (TIME_SYSTEM 2) or TDB (1).
  */
-import { number, numbers, type KernelPool } from './text-kernel.mts';
-import { tdbMinusTdt, type LeapSeconds } from './lsk.mts';
+import { number, numbers, type KernelPool } from './text-kernel.js';
+import { tdbMinusTdt, type LeapSeconds } from './lsk.js';
 
 export interface SpacecraftClock {
   readonly id: number; readonly moduli: readonly number[]; readonly offsets: readonly number[];

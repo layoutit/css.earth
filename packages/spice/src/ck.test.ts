@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { readDaf } from './daf.mts';
-import { ckSegments, quaternionToMatrix, apply, multiply, transpose } from './ck.mts';
+import { test } from 'vitest';
+import { readDaf } from './daf.js';
+import { ckSegments, quaternionToMatrix, apply, multiply, transpose } from './ck.js';
 
 function ck(type: number, data: number[], { start = 0, stop = 100, instrument = -999000, reference = 1, rates = 1 } = {}) {
   const records = 3 + Math.ceil(data.length / 128), out = new Uint8Array(records * 1024), view = new DataView(out.buffer);

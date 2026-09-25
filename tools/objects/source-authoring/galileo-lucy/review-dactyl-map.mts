@@ -3,7 +3,7 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {controlledShapeCamera, decodeCalibratedCamera} from '../../terrestrial-layers/shape-camera-mosaic.mts';
-import {parseTextKernel, number as kernelNumber, numbers as kernelNumbers} from '../../../spice/text-kernel.mts';
+import { parseTextKernel, number as kernelNumber, numbers as kernelNumbers } from '@cssearth/spice';
 import {requireArray, requireFiniteNumber, requireRecord, requireString} from '@cssearth/core';
 
 type Pixel = [number, number];

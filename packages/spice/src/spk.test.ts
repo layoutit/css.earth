@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { readDaf } from './daf.mts';
-import { spkSegments } from './spk.mts';
+import { test } from 'vitest';
+import { readDaf } from './daf.js';
+import { spkSegments } from './spk.js';
 
 /** Build a one-segment SPK DAF of a given type from a data word list. */
 function spk(type: number, data: number[], { start = 0, stop = 100, target = -999, center = 0, frame = 1 } = {}) {

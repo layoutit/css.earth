@@ -5,7 +5,7 @@
  * is the C-matrix: it maps vectors from the segment's reference frame into
  * the instrument frame. Layouts follow the NAIF CK Required Reading.
  */
-import type { Daf, DafSummary } from './daf.mts';
+import type { Daf, DafSummary } from './daf.js';
 
 export type Matrix3 = readonly [readonly [number, number, number], readonly [number, number, number], readonly [number, number, number]];
 export interface Pointing { readonly cMatrix: Matrix3; readonly angularVelocity: readonly [number, number, number] | null }

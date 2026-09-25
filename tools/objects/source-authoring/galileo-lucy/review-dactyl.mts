@@ -3,9 +3,9 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
-import { readDaf } from '../../../spice/daf.mts';
+import { readDaf } from '@cssearth/spice';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readPinnedFile } from '../../../spice/kernel-bank.mts';
+import { readPinnedFile } from '@cssearth/spice/node';
 
 const input = resolve('src/objects/dactyl/evidence/galileo');
 const output = resolve(process.argv[2] ?? 'output/dactyl-galileo-review');

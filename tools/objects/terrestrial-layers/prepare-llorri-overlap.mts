@@ -6,7 +6,7 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseMeshProfile, parseGeoCameraClosure } from './source-records.mts';
 import { array, number, optional, shape, text } from '@cssearth/core';
-import { loadKernelSet } from '../../spice/kernel-set.mts';
+import { loadKernelSet } from '@cssearth/spice/node';
 import { llorriHeaderCamera } from './llorri-header-camera.mts';
 import { loadObjShape } from './obj-shape.mts';
 import { decodeLlorri, bindSipCamera } from './llorri-geo.mts';

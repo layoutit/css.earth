@@ -127,7 +127,7 @@ The [body registration record](source/cassini-ice/evidence/registration.md), [pr
 
 ## Cassini ISS photograph
 
-The lens projects one Cassini ISS narrow-angle frame onto the SPC shape model. The archive ships the calibrated image without geometry, so the camera comes from SPICE kernels. The spacecraft clock, frame, instrument, ephemeris and pointing kernels are pinned once in the [Cassini kernel bank](../../spice/cassini/manifest.json) for every Saturnian body; restore them with `node tools/spice/kernel-bank.mts acquire cassini`. The camera is evaluated at mid-exposure, halfway between the start and stop clock counts in the PDS3 label.
+The lens projects one Cassini ISS narrow-angle frame onto the SPC shape model. The archive ships the calibrated image without geometry, so the camera comes from SPICE kernels. The spacecraft clock, frame, instrument, ephemeris and pointing kernels are pinned once in the [Cassini kernel bank](../../spice/cassini/manifest.json) for every Saturnian body; restore them with `node tools/kernel-banks/kernel-bank.mts acquire cassini`. The camera is evaluated at mid-exposure, halfway between the start and stop clock counts in the PDS3 label.
 
 | Check | Result |
 | --- | --- |

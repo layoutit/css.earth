@@ -3,9 +3,9 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { loadKernelSet } from './kernel-set.mts';
-import { utcToEt } from './lsk.mts';
-import { kernelBankPaths } from './kernel-bank.mts';
+import { loadKernelSet } from '@cssearth/spice/node';
+import { utcToEt } from '@cssearth/spice';
+import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
 
 // SpiceyPy 8.2.0 / CSPICE_N0067, evaluated with only the two small NAIF kernels below, which the LICIACube bank
 // restores on demand. This checks a useful subset even when the larger DART oracle kernels are absent.

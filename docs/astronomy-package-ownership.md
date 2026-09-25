@@ -35,9 +35,9 @@ the lock. Observatory data keep their own attribution and reuse terms in each pr
 
 ## Decisions checked on 23 September 2026
 
-**SPICE.** Retain the preparation evaluator for now. [The tracked-kernel oracle](../tools/spice/small-kernel.oracle.test.mts)
+**SPICE.** Retain the preparation evaluator ([`@cssearth/spice`](../packages/spice/README.md)) for now. [The tracked-kernel oracle](../tools/oracles/spice/small-kernel.oracle.test.mts)
 checks UTC-to-ET and a body frame against [SpiceyPy](https://spiceypy.readthedocs.io/en/main/) 8.2.0 / CSPICE_N0067 with
-a checked-in LSK and PCK. [The full DART oracle](../tools/spice/oracle.test.mts) checks spacecraft states, light-time
+a checked-in LSK and PCK. [The full DART oracle](../tools/oracles/spice/dart-draco.oracle.test.mts) checks spacecraft states, light-time
 corrections, camera geometry and more frame classes when its pinned, ignored kernel bank is installed. The small test alone
 does not qualify spacecraft geometry. Telescope's PlanetMapper route already uses SpiceyPy without mixing evaluators in one
 result. Before deleting a custom path, migrate one complete preparation consumer with its pinned kernels and output receipt,

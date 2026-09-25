@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { parseTextKernel, parseDateToken, numbers, strings, number } from './text-kernel.mts';
-import { parseLeapSeconds, utcToEt } from './lsk.mts';
+import { test } from 'vitest';
+import { parseTextKernel, parseDateToken, numbers, strings, number } from './text-kernel.js';
+import { parseLeapSeconds, utcToEt } from './lsk.js';
 
 const lskText = `KPL/LSK
 Documentation with an = sign and a 'quote' that must be ignored.

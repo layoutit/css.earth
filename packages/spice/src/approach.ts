@@ -3,13 +3,13 @@
  * expressed in the body-fixed frame at closest approach. A fast flyby watches this hemisphere for days and images it best, so a
  * default camera can face it (`prepareDefaultCameraAngles`, observation). Closest approach is found in the recipe's search
  * window from the kernels themselves; the inbound leg is straight, so any sample hours before closest approach gives the same
- * direction (New Horizons at Pluto and Charon: within 1 degree from 6 to 48 hours out).
+ * direction (New Horizons at Pluto and Charon: within 1 degree from 6 to 48 hours out). The kernels come in loaded: the recipe's
+ * bank and kernels name them, and `@cssearth/spice/node` reads them (`loadKernelSet`).
  */
-import type { Vector3 } from '../../src/renderers/css/solar-system/types.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { kernelBankPaths } from './kernel-bank.mts';
-import { loadKernelSet } from './kernel-set.mts';
-import { utcToEt } from './lsk.mts';
+import type { Matrix3 } from './ck.js';
+import type { Ephemeris } from './geometry.js';
+import { utcToEt, type LeapSeconds } from './lsk.js';
 
 export interface ApproachRecipe {
   readonly kernelSet: string; readonly kernels: readonly string[];
@@ -35,9 +35,15 @@ export function parseApproachRecipe(value: unknown, label: string): ApproachReci
     searchWindowUtc: Object.freeze([window[0]!, window[1]!] as const), inboundHours });
 }
 
-/** The body-fixed unit direction toward the approaching spacecraft, and the closest-approach instant (TDB seconds past J2000). */
-export async function spacecraftApproach(recipe: ApproachRecipe): Promise<{ direction: Vector3; closestApproachEt: number; rangeKm: number }> {
-  const set = await loadKernelSet(await kernelBankPaths(recipe.kernelSet, recipe.kernels));
+/** What the search reads from a loaded kernel set: states, leap seconds and the J2000-to-frame rotation. */
+export interface ApproachKernels {
+  readonly ephemeris: Ephemeris; readonly leapSeconds: LeapSeconds;
+  readonly rotation: (frame: string | number, et: number) => Matrix3;
+}
+
+/** The body-fixed unit direction toward the approaching spacecraft, and the closest-approach instant (TDB seconds past J2000),
+ * from the recipe's kernels loaded in its order. */
+export function spacecraftApproach(set: ApproachKernels, recipe: ApproachRecipe): { direction: readonly number[]; closestApproachEt: number; rangeKm: number } {
   const range = (et: number) => Math.hypot(...set.ephemeris.state(recipe.spacecraft, recipe.body, et).position);
   let low = utcToEt(set.leapSeconds, recipe.searchWindowUtc[0]), high = utcToEt(set.leapSeconds, recipe.searchWindowUtc[1]);
   if (!(high > low)) throw new TypeError(`Approach search window ${recipe.searchWindowUtc.join(' to ')} is empty.`);
@@ -52,5 +58,5 @@ export async function spacecraftApproach(recipe: ApproachRecipe): Promise<{ dire
   const toward = [0, 1, 2].map(row => -(rotation[row]![0]! * inbound[0] + rotation[row]![1]! * inbound[1] + rotation[row]![2]! * inbound[2]));
   const length = Math.hypot(...toward);
   if (!(length > 0)) throw new Error(`Spacecraft ${recipe.spacecraft} has no inbound velocity relative to body ${recipe.body}.`);
-  return { direction: toward.map(value => value / length) as unknown as Vector3, closestApproachEt, rangeKm: range(closestApproachEt) };
+  return { direction: toward.map(value => value / length), closestApproachEt, rangeKm: range(closestApproachEt) };
 }

@@ -1,11 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { parseTextKernel } from './text-kernel.mts';
-import { Ephemeris } from './geometry.mts';
-import { rotation, pckRotation } from './frames.mts';
-import { spiceCamera, invert, aberrationRotation, pixelModel, type PixelModelKeys } from './camera.mts';
-import type { SpkSegment } from './spk.mts';
+import { test } from 'vitest';
+import { parseTextKernel } from './text-kernel.js';
+import { Ephemeris } from './geometry.js';
+import { rotation, pckRotation } from './frames.js';
+import { spiceCamera, invert, aberrationRotation, pixelModel, type PixelModelKeys } from './camera.js';
+import type { SpkSegment } from './spk.js';
 
 // A body whose fixed frame coincides with J2000 (pole at +Z, prime meridian along +X), a camera frame that is J2000
 // itself, looking along -Z, and a 100 x 100 detector of 10 µm pixels behind a 1 m focal length: 100,000 px per radian.

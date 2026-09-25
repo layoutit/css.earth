@@ -6,14 +6,14 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import { parseTextKernel, type KernelPool } from './text-kernel.mts';
-import { parseLeapSeconds, type LeapSeconds } from './lsk.mts';
-import { parseSpacecraftClock, etToClock, type SpacecraftClock } from './sclk.mts';
-import { readDaf } from './daf.mts';
-import { spkSegments } from './spk.mts';
-import { ckSegments, type CkSegment, type Matrix3 } from './ck.mts';
-import { Ephemeris } from './geometry.mts';
-import { frameDefinition, pckRotation, rotation, type FrameProviders } from './frames.mts';
+import { parseTextKernel, type KernelPool } from '../text-kernel.js';
+import { parseLeapSeconds, type LeapSeconds } from '../lsk.js';
+import { parseSpacecraftClock, etToClock, type SpacecraftClock } from '../sclk.js';
+import { readDaf } from '../daf.js';
+import { spkSegments } from '../spk.js';
+import { ckSegments, type CkSegment, type Matrix3 } from '../ck.js';
+import { Ephemeris } from '../geometry.js';
+import { frameDefinition, pckRotation, rotation, type FrameProviders } from '../frames.js';
 
 export interface LoadedKernel { readonly path: string; readonly bytes: number; readonly sha256: string; readonly kind: 'text' | 'spk' | 'ck' }
 export interface KernelSet {

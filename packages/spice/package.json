@@ -1,0 +1,39 @@
+{
+  "name": "@cssearth/spice",
+  "version": "0.0.0",
+  "private": true,
+  "description": "NAIF SPICE kernels for the preparation tools: DAF, SPK and CK evaluation, text kernels, leap seconds, spacecraft clocks, frames, light-time geometry, two-body propagation, kernel cameras and flyby approach sides, with kernel sets and pinned mission kernel banks behind a Node-only entry.",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@cssearth/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.1"
+  }
+}

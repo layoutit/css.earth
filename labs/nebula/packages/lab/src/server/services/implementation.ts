@@ -24,6 +24,11 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/telescope/package.json');
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/telescope/src/node/index.ts' : 'packages/telescope/src/index.ts') };
       });
+      // The SPICE kernel readers were relative modules under tools/ before they became @cssearth/spice; the same.
+      builder.onResolve({ filter: /^@cssearth\/spice(?:\/node)?$/ }, args => {
+        manifests.add('packages/spice/package.json');
+        return { path: resolve(root, args.path.endsWith('/node') ? 'packages/spice/src/node/index.ts' : 'packages/spice/src/index.ts') };
+      });
       builder.onResolve({ filter: /^@cssearth\/(?:volume-core|volume-bake|nebula-reconstruction|nebula-lab)(?:\/|$)/ }, async args => {
         const [scope, name, ...tail] = args.path.split('/');
         const directory = name === 'nebula-reconstruction' ? 'reconstruction' : name === 'nebula-lab' ? 'lab' : name;

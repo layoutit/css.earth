@@ -10,5 +10,5 @@ export default {
   splitting: false, sourcemap: false, dts: false,
   // tools/ci/check-stale-builds.mts reads the inputs to know when this bundle is stale.
   metafile: true,
-  external: ['@cssearth/astronomy', '@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@cssearth/telescope', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
+  external: ['@cssearth/astronomy', '@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@cssearth/spice', '@cssearth/telescope', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
 };

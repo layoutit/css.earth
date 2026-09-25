@@ -185,8 +185,8 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
 | New Horizons LORRI calibrated FITS, uncertainty and quality HDUs | `nh-lorri-camera` | Arrokoth `lorri` | Camera pins with a qualified attitude for the exact mesh; native TAN-SIP WCS | `new-horizons-geo.test.mts` (Astropy pixels and WCS) |
 | Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; its native PDS label confirms the bands and data-number quantity, and the recipe declares one `displayRange` | `new-horizons-geo.test.mts` (Astropy pixels) |
-| Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
-| A push-frame colour image from a spinning spacecraft, with SPICE kernels and no geometry | `junocam-camera` | The four JunoCam images of Europa (29 September 2022), measured in the [JunoCam guide](../../../../docs/junocam.md) | Frame and label pins; the `spice` block naming the kernel bank, kernels in load order, bodies, the label's target name and the body frame; `epochRefinement` budgets for the two epochs fitted to the lit limb; retained illumination or a disk function; a `displayRange` from 0 | `junocam.test.mts` (the instrument kernel's own field-of-view vectors), `strip-refinement.test.mts` (known epochs recovered from a synthetic spinning camera), `tools/spice/camera.test.mts` |
+| Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/oracles/spice/dart-draco.oracle.test.mts` |
+| A push-frame colour image from a spinning spacecraft, with SPICE kernels and no geometry | `junocam-camera` | The four JunoCam images of Europa (29 September 2022), measured in the [JunoCam guide](../../../../docs/junocam.md) | Frame and label pins; the `spice` block naming the kernel bank, kernels in load order, bodies, the label's target name and the body frame; `epochRefinement` budgets for the two epochs fitted to the lit limb; retained illumination or a disk function; a `displayRange` from 0 | `junocam.test.mts` (the instrument kernel's own field-of-view vectors), `strip-refinement.test.mts` (known epochs recovered from a synthetic spinning camera), `packages/spice/src/camera.test.ts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
 | Published camera controls for a shape model, or the Galileo SSI image catalog | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame pins with the control network's camera fields or a `cameraCatalog`, photometry, transfer limits, level matching | None yet; preparation refuses a frame whose camera puts more than a quarter of its lit shape on sky |
 | A camera lens whose named reference may turn or tilt it | `refinement` on the lens recipe, applied in `surface-observations/index.mts` through `cameras.mts` `turnedCamera` and `tiltedCamera`, kept only if re-measurement improves what it came from | Psyche `zimpol`: a 5° tilt kept | The stage measures, the named reference's decisive median turns every camera once when no other decisive reference disagrees, and the turned lens is measured again; every backplane camera now carries a Sun fitted from the archive's phase plane | `cameras.test.mts` (Sun fit to 0.01°, refused when no single Sun explains the plane, turned camera), `registration.test.mts` (agreement rule), `tests/objects/unit/itokawa/amica.test.mts` (fitted Sun against the SUM file's SZ) |
@@ -230,7 +230,7 @@ Routes with Sun geometry accept a published photometric model record (see
 `tools/photometry/README.md`), and [photometric models](photometric-models.md)
 lists which bodies have one. Kernels that serve several bodies of one mission
 live in a kernel bank under `src/spice/<mission>/`: add, restore and verify them
-with `node tools/spice/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
+with `node tools/kernel-banks/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
 
 A star other than the Sun is a placed body. `packages/astronomy` carries its
 catalogue astrometry (`star` record: ICRS position and epoch, distance, proper
@@ -301,10 +301,10 @@ and target SPK ids, the body-fixed frame, the instrument whose `INS<id>_*`
 variables define the pixel model, the header card that carries the exposure's
 spacecraft clock, the aberration correction (`LT+S`, `LT` or `NONE`), the
 instrument-frame axes that stored columns and rows follow, and how the image
-plane and its flag values are read. `tools/spice/` is the strict-TypeScript
+plane and its flag values are read. `@cssearth/spice` (`packages/spice`) is the strict-TypeScript
 kernel subset (DAF, SPK types 1, 2, 3, 5, 8, 9 and 13, CK types 1 to 3, text
 kernels, leap seconds, SCLK, PCK pole models, frame classes 2 to 6, light time
-and stellar aberration) and `tools/spice/camera.mts` assembles the camera;
+and stellar aberration) and its `spiceCamera` (`packages/spice/src/camera.ts`) assembles the camera;
 `tools/objects/terrestrial-layers/spice-camera.mts` turns it into the same
 `cssearth-archived-camera@1` closure the OSIRIS and L'LORRI formats use, and
 `castSourceRays` derives per-pixel geometry from the full source mesh. The
@@ -368,7 +368,7 @@ pipeline computed so a test can compare. `tools/oracles/` holds them with a
 pinned Python environment (`node tools/oracles/setup.mts`, `tools/oracles/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions, input
 paths and byte counts. Existing decoder references include
-SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
+SpiceyPy for `@cssearth/spice` (a microsecond in time, a millimetre in position, a
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
 the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS

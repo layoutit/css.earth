@@ -26,11 +26,9 @@ import { pathToFileURL } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { Worker } from 'node:worker_threads';
 import { cpus } from 'node:os';
-import { loadKernelSet, type KernelSet } from '../../spice/kernel-set.mts';
-import { kernelBankPaths } from '../../spice/kernel-bank.mts';
-import { numbers } from '../../spice/text-kernel.mts';
-import { encodeClock, clockToEt } from '../../spice/sclk.mts';
-import { spiceCamera, type PixelModelKeys } from '../../spice/camera.mts';
+import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
+import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
+import { numbers, encodeClock, clockToEt, spiceCamera, type PixelModelKeys } from '@cssearth/spice';
 import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
 

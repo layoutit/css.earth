@@ -60,11 +60,17 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');
   const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
   const terrestrial = sources.get('terrestrial');
-  // A flyby body without photograph frames faces the side its spacecraft approached (tools/spice/approach.mts).
+  // A flyby body without photograph frames faces the side its spacecraft approached (@cssearth/spice `spacecraftApproach`),
+  // found in the recipe's kernels from their shared bank (tools/kernel-banks/kernel-bank.mts).
   const approachSource = sources.get('approach');
-  const approachModule = approachSource ? await import(pathToFileURL(resolve(projectRoot, 'tools/spice/approach.mts')).href) as typeof import('../spice/approach.mts') : undefined;
+  const approachDirection = async () => {
+    const spice = await import('@cssearth/spice'), { loadKernelSet } = await import('@cssearth/spice/node');
+    const banks = await import(pathToFileURL(resolve(projectRoot, 'tools/kernel-banks/kernel-bank.mts')).href) as typeof import('../kernel-banks/kernel-bank.mts');
+    const recipe = spice.parseApproachRecipe(approachSource, `${descriptor.id} approach`);
+    return spice.spacecraftApproach(await loadKernelSet(await banks.kernelBankPaths(recipe.kernelSet, recipe.kernels)), recipe).direction;
+  };
   const observation = terrestrial ? cameraModule.photographDirections(descriptor.id, terrestrial, surfacesReport)
-    : approachModule ? [(await approachModule.spacecraftApproach(approachModule.parseApproachRecipe(approachSource, `${descriptor.id} approach`))).direction] : undefined;
+    : approachSource ? [await approachDirection()] : undefined;
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
   const coverageModule = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/default-view/lens-coverage.mts')).href) as typeof import('./default-view/lens-coverage.mts');

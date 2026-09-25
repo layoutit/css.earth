@@ -14,8 +14,7 @@
  * measurement serves a computed observer camera and a spacecraft kernel camera alike.
  */
 import { requireFiniteNumber } from '@cssearth/core';
-import { rotate } from '../../spice/frames.mts';
-import { multiply } from '../../spice/ck.mts';
+import { rotate, multiply } from '@cssearth/spice';
 import { createIndexedShape } from './obj-shape.mts';
 import type { SourceMesh } from './contracts.mts';
 import type { CameraImage } from './shape-camera-mosaic.mts';
