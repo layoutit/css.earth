@@ -1,6 +1,6 @@
 import { pds3Keyword } from '@cssearth/telescope';
 import { readFitsPlane } from '@cssearth/fits';
-import type { KernelSet } from '../../spice/kernel-set.mts';
+import type { KernelSet } from '@cssearth/spice/node';
 import { encodeClock, clockToEt, etToUtc, utcToEt, spiceCamera, type Aberration, type PixelModelKeys } from '@cssearth/spice';
 import type { SpiceCameraDeclaration } from './source-records.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';

@@ -20,8 +20,8 @@ import { validPublishedPhotometryShape } from '../../terrestrial-layers/publishe
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from '../../terrestrial-layers/pds4-geometry-cube.mts';
 import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT, ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
 import { refineCameraByLimb } from '../../terrestrial-layers/limb-refinement.mts';
-import { loadKernelSet } from '../../../spice/kernel-set.mts';
-import { kernelBankPaths } from '../../../spice/kernel-bank.mts';
+import { loadKernelSet } from '@cssearth/spice/node';
+import { kernelBankPaths } from '../../../kernel-banks/kernel-bank.mts';
 import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { fittedCamera, matrixCamera } from '../cameras.mts';
 import { archiveBackplanes, castSourceRays } from '../geometry.mts';

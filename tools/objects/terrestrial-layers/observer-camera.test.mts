@@ -7,7 +7,7 @@ import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCam
   spinOrientation, rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
 import { parseTextKernel, numbers, parseLeapSeconds, utcSecondsToEt } from '@cssearth/spice';
 import { dot3 as dot } from '@cssearth/core';
-import { kernelBankPaths } from '../../spice/kernel-bank.mts';
+import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
 const DEGREE = Math.PI / 180;
 const direction = (longitude: number, latitude: number): Vector =>
   [Math.cos(latitude * DEGREE) * Math.cos(longitude * DEGREE), Math.cos(latitude * DEGREE) * Math.sin(longitude * DEGREE), Math.sin(latitude * DEGREE)];

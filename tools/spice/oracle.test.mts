@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceLoad, sourceTest } from '../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadKernelSet } from './kernel-set.mts';
+import { loadKernelSet } from '@cssearth/spice/node';
 import { utcToEt, etToUtc, encodeClock, clockToEt, etToClock, apply, transpose, spiceCamera } from '@cssearth/spice';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../oracles/fixture.mts';

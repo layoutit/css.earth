@@ -7,7 +7,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/sclk/cas00172.tsc",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -29,7 +29,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_v43.tf",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -51,7 +51,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -73,7 +73,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
       "credit": "NASA/JPL NAIF",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -95,7 +95,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
       "credit": "NASA/JPL NAIF",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -117,7 +117,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/spk/150828R_SCPSE_15066_15116.bsp",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -139,7 +139,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/15098_15103ra.bc",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -161,7 +161,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/04161_04164ra.bc",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -183,7 +183,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/spk/041014R_SCPSE_01066_04199.bsp",
       "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"

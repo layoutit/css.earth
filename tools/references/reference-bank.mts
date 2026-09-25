@@ -1,7 +1,7 @@
 /**
  * Shared reference banks: one pinned copy of a standard table every body reads, under `src/references/<set>/`, instead of
  * a copy in each body that uses it. A bank's `manifest.json` has the shape of a body's source manifest and is verified the
- * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (tools/spice/kernel-bank.mts).
+ * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (tools/kernel-banks/kernel-bank.mts).
  */
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';

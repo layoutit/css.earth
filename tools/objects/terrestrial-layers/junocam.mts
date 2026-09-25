@@ -12,7 +12,7 @@
  * the exposure comes from the product's own PDS3 label: START_TIME, INTERFRAME_DELAY, the filter order and the size.
  */
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
-import type { KernelSet } from '../../spice/kernel-set.mts';
+import type { KernelSet } from '@cssearth/spice/node';
 import { number as kernelNumber, string as kernelString, utcToEt, spiceCamera, type Aberration, type PixelModel } from '@cssearth/spice';
 import { project } from './osiris-geo.mts';
 import type { LimbCamera, LimbPixelMapping } from './limb-refinement.mts';

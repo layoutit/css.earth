@@ -12,7 +12,7 @@ import { globals, writeArrayBuffer } from 'geotiff';
 import { decodeCalibratedCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { pds3Keyword } from '@cssearth/telescope';
 import { spiceCamera, utcToEt } from '@cssearth/spice';
-import type { KernelSet } from '../../spice/kernel-set.mts';
+import type { KernelSet } from '@cssearth/spice/node';
 import { fitLimb, limbAccepted, type LimbFit } from './limb.mts';
 
 // geotiff 3 reads GDAL_METADATA (tag 42112) but its writer has no type for it; GDAL defines it as ASCII.

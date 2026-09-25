@@ -7,7 +7,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/lsk/naif0011.tls",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -29,7 +29,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00010.tpc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -51,7 +51,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/pck/dawn_ceres_v05.tpc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -73,7 +73,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/sclk/DAWN_203_SCLKSCET.00060.tsc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -95,7 +95,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/fk/dawn_v13.tf",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -117,7 +117,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/fk/dawn_ceres_v00.tf",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -139,7 +139,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ik/dawn_vir_v05.ti",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -161,7 +161,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/de421.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -183,7 +183,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/sb_ceres_140724.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -205,7 +205,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_150630-151023_151210_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -227,7 +227,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150817_150823.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -249,7 +249,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_152300000_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -271,7 +271,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150601_150607.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -293,7 +293,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150608_150614.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -315,7 +315,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150615_150621.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -337,7 +337,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150622_150628.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -359,7 +359,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150824_150830.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -381,7 +381,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150831_150906.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -403,7 +403,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150907_150913.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -425,7 +425,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150914_150920.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -447,7 +447,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150921_150927.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -469,7 +469,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150928_151004.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -491,7 +491,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_151005_151011.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -513,7 +513,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_151012_151018.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -535,7 +535,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151561230_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -557,7 +557,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151591530_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -579,7 +579,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151621715_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -601,7 +601,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151652120_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -623,7 +623,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151682300_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -645,7 +645,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151720310_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -667,7 +667,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151750330_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -689,7 +689,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151800000_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -711,7 +711,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_152410600_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -733,7 +733,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_152520200_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -755,7 +755,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_152630300_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -777,7 +777,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_152740400_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -799,7 +799,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_152850530_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -821,7 +821,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_150509-150630_150730_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -843,7 +843,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_151214_151220.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -865,7 +865,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_151221_151227.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -887,7 +887,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_151228_160103.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -909,7 +909,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160104_160110.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -931,7 +931,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160111_160117.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -953,7 +953,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160118_160124.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -975,7 +975,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160125_160131.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -997,7 +997,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160201_160207.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1019,7 +1019,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160208_160214.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1041,7 +1041,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160215_160221.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1063,7 +1063,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160222_160228.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1085,7 +1085,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160229_160306.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1107,7 +1107,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160307_160313.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1129,7 +1129,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160314_160320.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1151,7 +1151,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160321_160327.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1173,7 +1173,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160328_160403.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1195,7 +1195,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160404_160410.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1217,7 +1217,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160411_160417.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1239,7 +1239,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160418_160424.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1261,7 +1261,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160425_160501.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1283,7 +1283,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160502_160508.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1305,7 +1305,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160509_160515.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1327,7 +1327,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160516_160522.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1349,7 +1349,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160523_160529.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1371,7 +1371,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160530_160605.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1393,7 +1393,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160606_160612.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1415,7 +1415,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160613_160619.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1437,7 +1437,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160620_160626.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1459,7 +1459,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160627_160703.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1481,7 +1481,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160704_160710.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1503,7 +1503,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160711_160717.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1525,7 +1525,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160718_160724.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1547,7 +1547,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160725_160731.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1569,7 +1569,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160801_160807.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1591,7 +1591,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_160808_160814.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1613,7 +1613,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_153500000_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1635,7 +1635,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_153521700_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1657,7 +1657,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_160101500_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1679,7 +1679,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_160331400_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1701,7 +1701,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_160561500_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1723,7 +1723,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_160791500_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1745,7 +1745,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_161021000_1.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1767,7 +1767,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_161251000_1.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1789,7 +1789,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_161481730_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1811,7 +1811,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_161711500_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1833,7 +1833,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_161951500_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1855,7 +1855,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_151023-160202_160412_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1877,7 +1877,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160202-160319_160531_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1899,7 +1899,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160319-160410_160809_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1921,7 +1921,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160410-160505_160809_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1943,7 +1943,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160505-160527_160809_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1965,7 +1965,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160505-160527_160810_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -1987,7 +1987,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160527-160617_160809_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2009,7 +2009,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_160617-160902_161109_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2031,7 +2031,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150112_150118.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2053,7 +2053,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150119_150125.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2075,7 +2075,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150202_150208.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2097,7 +2097,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150209_150215.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2119,7 +2119,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150216_150222.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2141,7 +2141,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150223_150301.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2163,7 +2163,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150302_150308.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2185,7 +2185,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150406_150412.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2207,7 +2207,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150413_150419.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2229,7 +2229,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150420_150426.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2251,7 +2251,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150427_150503.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2273,7 +2273,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_sc_150504_150510.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2295,7 +2295,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150131620_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2317,7 +2317,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150251830_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2339,7 +2339,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150350230_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2361,7 +2361,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150430830_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2383,7 +2383,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150501100_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2405,7 +2405,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150561510_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2427,7 +2427,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_150601930_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2449,7 +2449,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151000410_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2471,7 +2471,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151050300_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2493,7 +2493,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151150200_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2515,7 +2515,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151201600_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2537,7 +2537,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151232300_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2559,7 +2559,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151251600_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2581,7 +2581,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/ck/dawn_vir_151270800_0.bc",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -2603,7 +2603,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/spk/dawn_rec_141230-150509_150603_v1.bsp",
       "credit": "NASA/JPL NAIF; Dawn project SPICE kernels",
       "license": "Public NASA mission data; retain the NAIF and Dawn project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire dawn; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"

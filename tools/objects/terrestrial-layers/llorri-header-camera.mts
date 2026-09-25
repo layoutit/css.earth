@@ -2,7 +2,7 @@ import { cross3 as cross, requireFiniteNumber, dotN as dot } from '@cssearth/cor
 /** Native FITS TAN-SIP camera seed. Surface registration remains a separate requirement. */
 import { sha256 } from '@cssearth/core/node';
 import { scanFitsCards, fitsCardValue } from '@cssearth/fits';
-import type { KernelSet } from '../../spice/kernel-set.mts';
+import type { KernelSet } from '@cssearth/spice/node';
 import { pckRotation, utcToEt } from '@cssearth/spice';
 import { llorriFieldTargets, requireLlorriTarget } from './llorri-geo.mts';
 

@@ -6,7 +6,7 @@ import { readFitsPrimary } from '@cssearth/fits';
 import { controlledShapeCamera, decodeCalibratedCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
 import { readDaf, ckSegments, parseTextKernel, number as kernelNumber, numbers as kernelNumbers, parseSpacecraftClock, encodeClock, clockToEt, etToClock, parseLeapSeconds, utcToEt, etToUtc } from '@cssearth/spice';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readPinnedFile } from '../../../spice/kernel-bank.mts';
+import { readPinnedFile } from '@cssearth/spice/node';
 
 type Pixel = [number, number];
 type Vector = [number, number, number];

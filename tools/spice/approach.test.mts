@@ -4,7 +4,9 @@ import { resolve } from 'node:path';
 import { sourceLoad, sourceTest } from '../../tests/objects/source-test.mts';
 import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { parseApproachRecipe, spacecraftApproach } from './approach.mts';
+import { parseApproachRecipe, spacecraftApproach } from '@cssearth/spice';
+import { loadKernelSet } from '@cssearth/spice/node';
+import { kernelBankPaths } from '../kernel-banks/kernel-bank.mts';
 
 /**
  * tools/oracles/spice/new-horizons-approach.py runs SpiceyPy over the pinned new-horizons kernel bank with each body's
@@ -15,7 +17,7 @@ const loaded = await sourceLoad(async () => {
   await assertPinnedInputs(fixture.inputs);
   const results = await Promise.all(['pluto', 'charon'].map(async body => {
     const recipe = parseApproachRecipe(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', body, 'source/preparation/approach.json'), 'utf8')), body);
-    return [body, await spacecraftApproach(recipe)] as const;
+    return [body, spacecraftApproach(await loadKernelSet(await kernelBankPaths(recipe.kernelSet, recipe.kernels)), recipe)] as const;
   }));
   return { fixture, results };
 });

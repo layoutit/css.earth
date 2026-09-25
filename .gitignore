@@ -301,7 +301,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/m45/.prepared-*/
 /src/objects/m8/.prepared-*/
 /src/objects/omega-centauri/.prepared-*/
-# SPICE kernels are restored from their origins, never committed: bank kernels by tools/spice/kernel-bank.mts,
+# SPICE kernels are restored from their origins, never committed: bank kernels by tools/kernel-banks/kernel-bank.mts,
 # body kernels by their acquisition steps (tools/assets/restore-source-inputs.mts), evidence kernels by the script
 # that reads them.
 *.[tT][lL][sS]

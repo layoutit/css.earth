@@ -7,7 +7,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/lsk/naif0012.tls",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -29,7 +29,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/sclk/licia_sclk_0002.tsc",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -51,7 +51,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/pck00010.tpc",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -73,7 +73,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/didymos_system_15.tpc",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -95,7 +95,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/fk/licia_006.tf",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -117,7 +117,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/fk/didymos_system_007.tf",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -139,7 +139,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/ik/licia_pl_005.ti",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -161,7 +161,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/de430.bsp",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -183,7 +183,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/didymos_barycenter_s205_v01.bsp",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -205,7 +205,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/didymos_system_s542_v01.bsp",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -227,7 +227,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/dart_2022_231_2022_269_rec_v03.bsp",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -249,7 +249,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/licia_2022_254_2023_091_rec_v04.bsp",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"
@@ -271,7 +271,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/ck/licia_2022_254_2022_276_rec_v02.bc",
       "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
       "license": "Public NASA mission data; retain the NAIF and DART project credit.",
-      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "acquisition": "Restore the unmodified kernel with node tools/kernel-banks/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
       "redistribution": "Public NAIF SPICE kernel; retain the credit.",
       "consumers": [
         "spice"

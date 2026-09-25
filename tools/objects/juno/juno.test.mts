@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { kernelBankRoot } from '../../spice/kernel-bank.mts';
+import { kernelBankRoot } from '@cssearth/spice/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';

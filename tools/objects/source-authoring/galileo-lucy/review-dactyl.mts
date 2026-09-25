@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
 import { readDaf } from '@cssearth/spice';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readPinnedFile } from '../../../spice/kernel-bank.mts';
+import { readPinnedFile } from '@cssearth/spice/node';
 
 const input = resolve('src/objects/dactyl/evidence/galileo');
 const output = resolve(process.argv[2] ?? 'output/dactyl-galileo-review');
