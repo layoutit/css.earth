@@ -7,7 +7,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadRadialTerrain, rasterAtlasLayout } from './radial-terrain.mts';
+import { loadRadialTerrain, rasterAtlasLayout, rasterLeafStyle } from './radial-terrain.mts';
 import { radialTriangles, simplifyRadialShape, validateClosedMesh } from './radial-mesh.mts';
 import { removeOppositeFacePairs } from './mesh-face-pairs.mts';
 import { fillUndrawnTexels } from './radial-materials.mts';
@@ -138,13 +138,18 @@ test('raster atlas: each face gets its own rectangle at one texel density, and i
     assert.ok(rect.x + rect.width <= width && rect.y + rect.height <= height);
     for (const other of plans.slice(i + 1)) assert.ok(rect.x + rect.width <= other.rect.x || other.rect.x + other.rect.width <= rect.x ||
       rect.y + rect.height <= other.rect.y || other.rect.y + other.rect.height <= rect.y, 'rectangles never overlap');
-    assert.deepEqual([geometry.leafWidth, geometry.leafHeight], [rect.width, rect.height], 'one leaf pixel is one atlas texel');
+    assert.deepEqual([geometry.leafWidth, geometry.leafHeight], [rect.width, rect.height], 'the geometry counts atlas texels');
     assert.deepEqual(geometry.backgroundPosition, [-rect.x, -rect.y]);
     // The leaf's bottom corners and top centre land on the face, overlapped outward by the seam bleed: each lies near a vertex, in CSS units.
     const at = (x: number, y: number) => [0, 1, 2].map(k => m[k] * x + m[4 + k] * y + m[12 + k]);
     const css = faces[i].vertices.map(([x, y, z]) => [y * 50, x * 50, z * 50]);
     for (const corner of [at(0, rect.height), at(rect.width, rect.height), at(rect.width / 2, 0)])
       assert.ok(css.some(v => Math.hypot(...v.map((n, k) => n - corner[k])) < 200), 'the leaf triangle covers its face');
+    // The leaf box holds two texels per CSS pixel, and its matrix puts every texel back where the texel geometry puts it.
+    const style = rasterLeafStyle({ ...geometry, matrix: m }), leaf = required(/matrix3d\(([^)]+)\)/.exec(style))[1].split(',').map(Number);
+    assert.ok(style.includes(`background-position:${-rect.x / 2}px ${-rect.y / 2}px;background-size:${width / 2}px ${height / 2}px;--polycss-atlas-width:${rect.width / 2}px;--polycss-atlas-height:${rect.height / 2}px`));
+    for (const [x, y] of [[0, rect.height], [rect.width, rect.height], [rect.width / 2, 0]])
+      assert.deepEqual([0, 1, 2].map(k => leaf[k] * x / 2 + leaf[4 + k] * y / 2 + leaf[12 + k]), at(x, y));
   }
   // Density follows size: ten times the edges is many times the texels (the fixed seam overlap widens the small face), and a sliver stays thin.
   assert.ok(plans[0].rect.width * plans[0].rect.height > 20 * plans[1].rect.width * plans[1].rect.height);

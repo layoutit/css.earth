@@ -98,9 +98,9 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     completion = { ...completed.report, sourceFit, topology };
   }
   const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
-  const leaves = layout.plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
+  const leaves = layout.plans.map(({ geometry, matrix }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
+    style: `${rasterLeafStyle({ ...geometry, matrix })};--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
   return { grid, faces, ...layout, leaves, ...(completion ? { completion } : {}),
     ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
@@ -117,7 +117,7 @@ function textureQuantum(config: {raster?: unknown}) {
 }
 
 /** Raster sizing, as PolyCSS sizes a textured polygon: each face gets its own rectangle, sized by the face, so every face has the same
- * texel density and one leaf pixel is one atlas texel. The u leaf draws its triangle with the base along the bottom edge and the apex at
+ * texel density; its geometry counts atlas texels, which rasterLeafStyle draws at two to a CSS pixel. The u leaf draws its triangle with the base along the bottom edge and the apex at
  * the top centre. Sizing the height by the apex's distance from the base midpoint keeps each texel within the square root of two of the
  * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
  * holds at most the body's budget of texels per face. */
@@ -128,6 +128,18 @@ function textureQuantum(config: {raster?: unknown}) {
  * closes the cracks at every zoom, leaving at most 24 open crack pixels at maximum zoom against 16,708 without it, and costs no
  * surface detail (Itokawa's mean surface detail 1.572 without overlap, 1.669 with it). */
 export const RADIAL_SEAM_REPAIR = { sharedEdgeAmount: 12, fallbackAmount: SOLID_TRIANGLE_BLEED } as const;
+
+/** A raster leaf shows its surface@2x atlas at two texels per CSS pixel, its matrix scaled back so the leaf still covers its face.
+ * WebKit backs each composited leaf at its box size times the device pixel ratio, whatever the transform, so a box of one CSS pixel
+ * per texel held nine backing pixels per texel on a DPR 3 phone. Measured on Itokawa's 794 faces (iPhone 17 simulator, DPR 3):
+ * 486 MB of layers at one texel per CSS pixel, 173 MB at two, and 739 of 3.16 million screen pixels changed at rest. */
+export const RASTER_TEXELS_PER_CSS_PIXEL = 2;
+
+/** The leaf's CSS from its atlas geometry in texels. */
+export function rasterLeafStyle(g: { matrix: readonly number[]; leafWidth: number; leafHeight: number; backgroundPosition: readonly number[]; backgroundSize: readonly number[] }) {
+  const k = RASTER_TEXELS_PER_CSS_PIXEL, px = (values: readonly number[]) => values.map(value => `${value / k}px`).join(' ');
+  return `transform:matrix3d(${g.matrix.map((value, i) => i < 8 ? value * k : value).join(',')});background-position:${px(g.backgroundPosition)};background-size:${px(g.backgroundSize)};--polycss-atlas-width:${g.leafWidth / k}px;--polycss-atlas-height:${g.leafHeight / k}px`;
+}
 
 export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
   if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
