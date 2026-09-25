@@ -9,7 +9,7 @@ import { parseSkyRecipe } from './config.js';
 import { loadSkySource } from './source.js';
 import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces, compositeSkyStars } from './bake.js';
 import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssSky } from '../../renderers/css/sky/types.js';
 
 function exrFixture(compressed: boolean): { bytes: Buffer; expected: Buffer } {
@@ -184,7 +184,7 @@ test('baked stars land at the gnomonic centre of their face, cross onto the neig
     atlas: { path: 'atlas.png', columns: 1, tileSize: 4, colors: [[255, 0, 0]], haloRadii: 1 },
     photometry: { minimumMagnitude: 0, maximumMagnitude: 10, step: 10, floor: 0, limitingMagnitude: 10, hintsLimitMagnitude: 10, minimumRadiusPx: .6, samples: [{ radiusPx: 4, luminance: 1 }, { radiusPx: 4, luminance: 1 }] },
     policy: { activeSlots: 1, transitionSlots: 1, maxErrorPx: 1, transitionMs: 0 }, labels: { activeSlots: 0, transitionSlots: 0, capHeightPx: 1, gapPx: 1, maxAlpha: 1, fadeMs: 0 },
-    resources: [], provenance: {} };
+    resources: [] };
   const size = 64, atlas = { rgba: Buffer.alloc(4 * 4 * 4, 255), width: 4, height: 4 };
   // One face pixel per CSS pixel at the face centre: an 8 px sprite covers pixels 28..35.
   const sprites = { field, atlas, cssPixelsPerDegree: (size / 2) * Math.PI / 180 };

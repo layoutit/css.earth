@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "koronis-elevation-shadow-alpha@2x.webp",
+      "bytes": 548048,
+      "sha256": "32e1231efbd50c4ca6d9bd3325d88f38e8491e945efb39244bdd3b8e8591e6a1"
+    },
+    {
+      "location": "public",
       "filename": "koronis-elevation-shadow@2x.webp",
       "bytes": 144648,
       "sha256": "1e85ddf7c5310195f0f40d511cb089dceea3607206cdbb7920ee3db1a3bcc06e"
+    },
+    {
+      "location": "public",
+      "filename": "koronis-elevation-surface-alpha@2x.webp",
+      "bytes": 606386,
+      "sha256": "9824682dd0ed6c208f21ffe669c6ed87923c5ecf2b75f80e09c6f403e136954f"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "koronis-shape-shadow-alpha@2x.webp",
+      "bytes": 453262,
+      "sha256": "45b69ccdf563c942b1f9eea3168f144c6fd454c8384a2a4b21adaf30120f83c1"
+    },
+    {
+      "location": "public",
       "filename": "koronis-shape-shadow@2x.webp",
       "bytes": 62754,
       "sha256": "600f824229d1ad7c739804a5e764baaf163aa6bb89edb25d0137273b6112b9e5"
+    },
+    {
+      "location": "public",
+      "filename": "koronis-shape-surface-alpha@2x.webp",
+      "bytes": 445080,
+      "sha256": "df1c8f07385f554fa42859d5657753a5528d29fc0d516393194c62c8ca98248f"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751130,
-      "sha256": "ba4daeca64b41fcd880f57e49dcf644962dedb81ca3d9540eaf750888239ab29"
+      "bytes": 641722,
+      "sha256": "27221c84074e440522569b87bcd91ac93a26b3c8567e4d33e6f49364e2a233b3"
     },
     {
       "location": "prepared",

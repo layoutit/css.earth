@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "sapientia-elevation-shadow-alpha@2x.webp",
+      "bytes": 592042,
+      "sha256": "02bbc514476d0dbcb4d5cc9899c7bb6fc4da104aefec3e0fcb4b9bba8913399d"
+    },
+    {
+      "location": "public",
       "filename": "sapientia-elevation-shadow@2x.webp",
       "bytes": 156352,
       "sha256": "d5addf096454c841726d946964fb8c909052afefc1b9067b5a44acb7b2d547aa"
+    },
+    {
+      "location": "public",
+      "filename": "sapientia-elevation-surface-alpha@2x.webp",
+      "bytes": 647854,
+      "sha256": "22d1e3787a2c66d4669bae6ba6e9fbc646e885d4a1f401a5b53c2bfc7c3e1dd7"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "sapientia-shape-shadow-alpha@2x.webp",
+      "bytes": 487362,
+      "sha256": "b27a710679254cb7256cfd89f748eae5243ea07bdc3e4e423dfd9ea0eba39970"
+    },
+    {
+      "location": "public",
       "filename": "sapientia-shape-shadow@2x.webp",
       "bytes": 61376,
       "sha256": "e384bf38477ad845aa69c75ae1be94b816a75627948ed7b6cb5879d9354766d8"
+    },
+    {
+      "location": "public",
+      "filename": "sapientia-shape-surface-alpha@2x.webp",
+      "bytes": 481732,
+      "sha256": "f9c99842fef043db79bb9a5e1f61f6826434cf620a0f7c9a22d17277d54e874a"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 752438,
-      "sha256": "ae00668f4b605fb1130907b6d64c3d32cda843a6d4b2e40b9c927f615d2c31aa"
+      "bytes": 642524,
+      "sha256": "aca76ec1d476954470cd47b5dc0cdd2ac4bcef1a5b49acadfb98df54b81b6acb"
     },
     {
       "location": "prepared",

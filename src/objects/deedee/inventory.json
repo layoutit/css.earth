@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "deedee-model-shadow-alpha@2x.webp",
+      "bytes": 125030,
+      "sha256": "ce9054e2fd1f91a9e6f1b3e4c7814105688ec431ce0c52f40db1810423913011"
+    },
+    {
+      "location": "public",
       "filename": "deedee-model-shadow@2x.webp",
       "bytes": 21112,
       "sha256": "8fe2750b7481bb3a9d6d777a94a82cfd74713601d058ed89890600eaf5329127"
+    },
+    {
+      "location": "public",
+      "filename": "deedee-model-surface-alpha@2x.webp",
+      "bytes": 126806,
+      "sha256": "8d81da2044152ac9f08b3f5ee191919964622be30e426df16aa3ec5ae1a41877"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458051,
-      "sha256": "0db44438f2e7ec81b7bea8819680a672bf947792a9fae42655a14f1f20dfd4b4"
+      "bytes": 392129,
+      "sha256": "c54c85e5297101ef9d5b3a3d1d187e22b13ae0007db4db1744819d974cc11fe6"
     },
     {
       "location": "prepared",

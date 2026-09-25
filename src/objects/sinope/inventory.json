@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sinope-model-shadow-alpha@2x.webp",
+      "bytes": 127254,
+      "sha256": "1db76b99aae950420cde6881c76d4b4a7aa345a2dd8e6369dbf433360e2294f7"
+    },
+    {
+      "location": "public",
       "filename": "sinope-model-shadow@2x.webp",
       "bytes": 21518,
       "sha256": "27bd3d588fafdfac75709335e2e84149ef54467804298235615b4020199f6f67"
+    },
+    {
+      "location": "public",
+      "filename": "sinope-model-surface-alpha@2x.webp",
+      "bytes": 129620,
+      "sha256": "bf16f747c24900d8d9d5e5607c0fb056138d882abe996b13ca5cfa461416f427"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457379,
-      "sha256": "6a0a5d69ac567b1f91d0069f05006c68ff62308bd0663dde0277300d8a63eec2"
+      "bytes": 391494,
+      "sha256": "06cc4ba27267144ac50663bf4ddd008b9429b3fbb2c871aabd01d21b28b6a520"
     },
     {
       "location": "prepared",

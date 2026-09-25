@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "agenor-elevation-shadow-alpha@2x.webp",
+      "bytes": 491186,
+      "sha256": "f584c3d759b644ed19d799eb4971569da26eb915d51e2309257f416ce9cd1d8f"
+    },
+    {
+      "location": "public",
       "filename": "agenor-elevation-shadow@2x.webp",
       "bytes": 126478,
       "sha256": "3e9d598f548fb71c61b86f988fcf8bcd1c12f74a1cf58b5c1d6b7e6d630f30ce"
+    },
+    {
+      "location": "public",
+      "filename": "agenor-elevation-surface-alpha@2x.webp",
+      "bytes": 529896,
+      "sha256": "947c4fcc28f3ec851d3d421d92361cee0014bcda1fb02ba94ddcd98ee0849627"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "agenor-shape-shadow-alpha@2x.webp",
+      "bytes": 411662,
+      "sha256": "b447e1b488c3769eaa78dd228ca68d91d7da8590d2f6a1d3a8263cdbadb38ecc"
+    },
+    {
+      "location": "public",
       "filename": "agenor-shape-shadow@2x.webp",
       "bytes": 59150,
       "sha256": "2a51544162be0c1818827cb286b2e552dda92257bb648dda1e210ab1288281aa"
+    },
+    {
+      "location": "public",
+      "filename": "agenor-shape-surface-alpha@2x.webp",
+      "bytes": 403184,
+      "sha256": "9542788c781f8a0155d3739cade7c050cbb8849d1b5163086622b9624ae95ba8"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750117,
-      "sha256": "38c7aae6d29a52ce9323087a6217756bceeb5284661f1d0bce721bb3cd35c674"
+      "bytes": 640539,
+      "sha256": "3df986ae9011a2074ddd51bdfa6167bfa7ae2d7ceff98190256af247dc8d458a"
     },
     {
       "location": "prepared",

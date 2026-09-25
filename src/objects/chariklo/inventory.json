@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chariklo-model-shadow-alpha@2x.webp",
+      "bytes": 137748,
+      "sha256": "479580feb669bc13f8a2f4f3b6822d557c10f6e7e9cafe7edcaee188491006e2"
+    },
+    {
+      "location": "public",
       "filename": "chariklo-model-shadow@2x.webp",
       "bytes": 23404,
       "sha256": "a89772066e040a6909b625caa108ec654200023e3c7cf1dead3b6f403079dd62"
+    },
+    {
+      "location": "public",
+      "filename": "chariklo-model-surface-alpha@2x.webp",
+      "bytes": 137310,
+      "sha256": "0fcd9ba475dd9e2059c065c5dff7f7f80736514921f81851ef70e485f67185d7"
     },
     {
       "location": "public",
@@ -70,8 +82,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458070,
-      "sha256": "151b833f919157e1fd440f675f6cbf5105313a78b3cd9366179a8ce6ecc3d673"
+      "bytes": 392325,
+      "sha256": "9c581f45a065d0cfb8df532f72d389b62aaf22a26e12146d29408893181568cb"
     },
     {
       "location": "prepared",

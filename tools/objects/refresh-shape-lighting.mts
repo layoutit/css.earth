@@ -1,5 +1,5 @@
 /** Refresh only the default shape atlas; retain every other prepared asset. */
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, rename } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';

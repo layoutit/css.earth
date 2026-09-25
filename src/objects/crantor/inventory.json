@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "crantor-model-shadow-alpha@2x.webp",
+      "bytes": 128212,
+      "sha256": "a048776cce7f764af0326521fc5822e1b28f45bc64d9776666adfae57dabd2f4"
+    },
+    {
+      "location": "public",
       "filename": "crantor-model-shadow@2x.webp",
       "bytes": 21486,
       "sha256": "b27033db181b108ceeba37fcbae0dc0599eb0aedc224692654f28bc49e41dd17"
+    },
+    {
+      "location": "public",
+      "filename": "crantor-model-surface-alpha@2x.webp",
+      "bytes": 129522,
+      "sha256": "5472fe989696d53a291c0a510a5f84a5a7191bcec803e028414039d439ea5631"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458761,
-      "sha256": "f2a731370d1936aa4b62cf3aa43f0a7289c13dac2c3b93f305f1f357387941b0"
+      "bytes": 392846,
+      "sha256": "92274cbc9ecbe76eb6939207ccbc9a45dfad14e3405fdb888d35b4680ddaf189"
     },
     {
       "location": "prepared",

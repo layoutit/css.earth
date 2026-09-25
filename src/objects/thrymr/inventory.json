@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thrymr-model-shadow-alpha@2x.webp",
+      "bytes": 140318,
+      "sha256": "8c4a034e549204ca15b5f6c5a1119d57d23a6366f2fe44438a21be34c0821c52"
+    },
+    {
+      "location": "public",
       "filename": "thrymr-model-shadow@2x.webp",
       "bytes": 21622,
       "sha256": "5185d15fe271aa0063cc1fd0936ce143857080a7b7c2d9c3a4bbb8d49cc1e1df"
+    },
+    {
+      "location": "public",
+      "filename": "thrymr-model-surface-alpha@2x.webp",
+      "bytes": 142136,
+      "sha256": "651d4aaa1003ee58f08e396902b1dbf81efe3049d6af8c5fe1e0dfb41f585d28"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458837,
-      "sha256": "fb3fd4131058fe0def24cd65a13dadba1626697f25cc63b4f64978b06ed432bc"
+      "bytes": 392892,
+      "sha256": "9782adc7c35f98a46d594493d1ddaef2841b49bcd49f2b905140e50b61b7dffc"
     },
     {
       "location": "prepared",

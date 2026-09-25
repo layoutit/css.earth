@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "orus-model-shadow-alpha@2x.webp",
+      "bytes": 135802,
+      "sha256": "c4e9d8b409ac3dd1100012769f6726b286a78c175f1013110d1da80c2f14ee2a"
+    },
+    {
+      "location": "public",
       "filename": "orus-model-shadow@2x.webp",
       "bytes": 20806,
       "sha256": "c3afbac69cbf45f6b50a372d30074563108532dc15fd19ce78c99ad4f95cf79a"
+    },
+    {
+      "location": "public",
+      "filename": "orus-model-surface-alpha@2x.webp",
+      "bytes": 139078,
+      "sha256": "eb67524ab8ce7cf8af7e5bf83be1e503f2409e9df8cf326db60d86f65c4839e5"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457637,
-      "sha256": "41864bf50287c33fb1197642f0a3933776e3b445d6fbef2456459df53f17341b"
+      "bytes": 391793,
+      "sha256": "6a55e69d6f807fe662258f7ab64e751d26f19dd86442a54f59bc2f8b1ee789cc"
     },
     {
       "location": "prepared",

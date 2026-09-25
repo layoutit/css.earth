@@ -8,6 +8,7 @@ import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { encodeLossyWebp } from '../../src/preparation/raster/lossy-lane.ts';
 import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
@@ -81,9 +82,11 @@ export async function prepareLensBillboards(projectRoot = root) {
   }
   const drawn = banks.filter(bank => bank.image);
   const columns = Math.max(1, Math.ceil(Math.sqrt(drawn.length))), rows = Math.max(1, Math.ceil(drawn.length / columns));
-  const atlas = await sharp({ create: { width: columns * CELL_PX, height: rows * CELL_PX, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-    .composite(drawn.map((bank, index) => ({ input: bank.image!, left: (index % columns) * CELL_PX, top: Math.floor(index / columns) * CELL_PX })))
-    .webp({ lossless: true, effort: 6 }).toBuffer();
+  // Photographic billboards go through the lossy lane with exact alpha: lossless was 247 KB, lossy 98 KB, and pixelmatch
+  // (threshold 0.1) flags 4 of the atlas's 1,048,576 pixels (2026-09-25).
+  const atlas = await encodeLossyWebp(sharp({ create: { width: columns * CELL_PX, height: rows * CELL_PX, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite(drawn.map((bank, index) => ({ input: bank.image!, left: (index % columns) * CELL_PX, top: Math.floor(index / columns) * CELL_PX }))),
+    { alphaQuality: 100, effort: 6 });
   const metadata = { schema: 'cssearth-lens-billboards@1', atlas: { columns, rows, cellPx: CELL_PX, sha256: sha256(atlas) },
     banks: banks.map(bank => ({ id: bank.id, payloadSha256: bank.payloadSha256, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(bank.view ? { billboard: { cell: drawn.indexOf(bank), radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };

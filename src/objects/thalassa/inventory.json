@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thalassa-model-shadow-alpha@2x.webp",
+      "bytes": 86224,
+      "sha256": "054600207093b96991813708ea9467580f890807c470214013ccf8e8c4ae210f"
+    },
+    {
+      "location": "public",
       "filename": "thalassa-model-shadow@2x.webp",
       "bytes": 19892,
       "sha256": "b57e4cf1f120e6343c51d51814400c4439e2db250798c89b2677c0d635a2c595"
+    },
+    {
+      "location": "public",
+      "filename": "thalassa-model-surface-alpha@2x.webp",
+      "bytes": 89954,
+      "sha256": "68578cf828050703c3ed30fedde4982bbf4ba6f7a788e0df46903ed2f576b25a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457913,
-      "sha256": "798e9dfc967d10eb61b1082c6f3f2488d97a2190943995e6d547f4f588e3e69f"
+      "bytes": 392032,
+      "sha256": "825395a56a747f3a922f6dcc26f44f705c5e00c27cdec6a526da27694d1af6f7"
     },
     {
       "location": "prepared",

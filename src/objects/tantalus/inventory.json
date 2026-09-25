@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "tantalus-elevation-shadow-alpha@2x.webp",
+      "bytes": 639304,
+      "sha256": "bf0be48ebe18cd6663730048cafc5cddd32f239cc61faefef315472763cd36a4"
+    },
+    {
+      "location": "public",
       "filename": "tantalus-elevation-shadow@2x.webp",
       "bytes": 191974,
       "sha256": "6d29d1f2213bd8bb2d89d8f3cb468191f7d18f827a40ee65ecb60ae79950413e"
+    },
+    {
+      "location": "public",
+      "filename": "tantalus-elevation-surface-alpha@2x.webp",
+      "bytes": 699626,
+      "sha256": "c7b7a1d542fe3a31c89d4a864ecaf1fff1c0db6f46215e80f559245051b63a21"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "tantalus-shape-shadow-alpha@2x.webp",
+      "bytes": 503136,
+      "sha256": "105feb25817a78cbf63e44cb1c983ca5a726f98f569204aa7d21af159a5011e7"
+    },
+    {
+      "location": "public",
       "filename": "tantalus-shape-shadow@2x.webp",
       "bytes": 64096,
       "sha256": "e64b179a6d1039aa3060d4b53c066a453d19c17fdebe6a9d7d91d970169b9150"
+    },
+    {
+      "location": "public",
+      "filename": "tantalus-shape-surface-alpha@2x.webp",
+      "bytes": 497250,
+      "sha256": "e8f12c60688127c4103c1a42de916036ff1344d062966f1b7d965411bc4da88a"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 758297,
-      "sha256": "b8b868e4bc00326ec5a41dc295cf1f4059a59ac2cad4f4ace8a046bf708af144"
+      "bytes": 648259,
+      "sha256": "3fe2d2a4da3287516c4aa2f39d3023228a9b581f302fe349a5bf21e07b873dcf"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hydra-model-shadow-alpha@2x.webp",
+      "bytes": 239568,
+      "sha256": "58ca0e1747c258ee19889f5ee136ac0f37648ee02bb381922eb2e5ff6ee95783"
+    },
+    {
+      "location": "public",
       "filename": "hydra-model-shadow@2x.webp",
       "bytes": 33428,
       "sha256": "7a94bf4254da84f660ecf144fcaf190cc75fe058ede1fdabc997cb78de106212"
+    },
+    {
+      "location": "public",
+      "filename": "hydra-model-surface-alpha@2x.webp",
+      "bytes": 237124,
+      "sha256": "1f96d96cdc8951c5ea2c5ae58782dea8e051f1c55bc6f22582b83054b7d37206"
     },
     {
       "location": "public",
@@ -18,6 +30,12 @@
       "filename": "hydra-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "public",
+      "filename": "hydra-monochrome-surface-alpha@2x.webp",
+      "bytes": 262362,
+      "sha256": "fedc997ab17a5d5d10928e5984bc4a9a73c7cdd7705ea828951caf7ae5286a18"
     },
     {
       "location": "public",
@@ -82,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747114,
-      "sha256": "b2d6924c1be00aa8d8fe05d3550862fd71623e157e2c5dde04acca93eb7b3421"
+      "bytes": 637730,
+      "sha256": "108c5ac5ad9f6395cfde316f69034071b1a6f20d0c653bf250e98c35d397d69e"
     },
     {
       "location": "prepared",

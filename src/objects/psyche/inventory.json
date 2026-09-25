@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "psyche-dielectric-constant-shadow-alpha@2x.webp",
+      "bytes": 1074284,
+      "sha256": "7080491f5a094bfdc75a11ef2018ee261963d04fe18a5ed1d71007df03f3743c"
+    },
+    {
+      "location": "public",
       "filename": "psyche-dielectric-constant-shadow@2x.webp",
       "bytes": 440304,
       "sha256": "5e33c1adb8b55ed01937ab9838c8a7d0612a5083362280df6e69596daac2a95e"
+    },
+    {
+      "location": "public",
+      "filename": "psyche-dielectric-constant-surface-alpha@2x.webp",
+      "bytes": 783906,
+      "sha256": "9ffb56340728bc41b4c45eb0f92810e0057e33830f27b265a3fa1ee7488683a7"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "psyche-elevation-shadow-alpha@2x.webp",
+      "bytes": 619314,
+      "sha256": "e50808519847cce3b3f92bb5d5de56a7e28dcd686d3ec94495827d100453cb70"
+    },
+    {
+      "location": "public",
       "filename": "psyche-elevation-shadow@2x.webp",
       "bytes": 131356,
       "sha256": "138af0fbc7e7f83517d0ae34987579e8c5114dcf2c5d36d13e35f2d6996f9cab"
+    },
+    {
+      "location": "public",
+      "filename": "psyche-elevation-surface-alpha@2x.webp",
+      "bytes": 684768,
+      "sha256": "f5651365e48e9e8d078c17e0a1a04ef7c304819f68f259fa958eb947e8ab33c6"
     },
     {
       "location": "public",
@@ -51,9 +75,21 @@
     },
     {
       "location": "public",
+      "filename": "psyche-shape-shadow-alpha@2x.webp",
+      "bytes": 528862,
+      "sha256": "0fcf2008637f04860cd9e171cbcc0af5427abfa466065db4b48b1e96154e5016"
+    },
+    {
+      "location": "public",
       "filename": "psyche-shape-shadow@2x.webp",
       "bytes": 61910,
       "sha256": "7c2d87ecea95c894c6c0b6e8a4b3d9fb17ef55c41bee05e598167f53f5c40adc"
+    },
+    {
+      "location": "public",
+      "filename": "psyche-shape-surface-alpha@2x.webp",
+      "bytes": 522122,
+      "sha256": "d4879947b44a6ac10292ea21185e4938485f2d49e9ffe41bbd27b67b83662df3"
     },
     {
       "location": "public",
@@ -75,9 +111,21 @@
     },
     {
       "location": "public",
+      "filename": "psyche-thermal-inertia-shadow-alpha@2x.webp",
+      "bytes": 1178818,
+      "sha256": "a8d4d75124512af17fead6325591f79e1f22bc64f703738d35f69c6177bfa0af"
+    },
+    {
+      "location": "public",
       "filename": "psyche-thermal-inertia-shadow@2x.webp",
       "bytes": 548262,
       "sha256": "440cf9ea7eb372a6a998dfea7eda2c3e3ca48de8a27d72c317446b5d9ee6a416"
+    },
+    {
+      "location": "public",
+      "filename": "psyche-thermal-inertia-surface-alpha@2x.webp",
+      "bytes": 846698,
+      "sha256": "42cb0f159870ed99d11aa769d8d48e6c64a7fa74d82390862a5785b39139de79"
     },
     {
       "location": "public",
@@ -90,6 +138,12 @@
       "filename": "psyche-thermal-inertia-thumbnail.webp",
       "bytes": 1540,
       "sha256": "c8628aa9d24d7973d66606dc81c35ef307c10a299ea7b5dcfbc747b900833e67"
+    },
+    {
+      "location": "public",
+      "filename": "psyche-zimpol-surface-alpha@2x.webp",
+      "bytes": 581242,
+      "sha256": "8657afcf7aa8b21de2e8c8acb5fb86da3bfba424d6d6029f3624e86be6ea63d0"
     },
     {
       "location": "public",
@@ -172,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1382997,
-      "sha256": "7f313a13ee876d26848fbfd0481048955e61e86301b4231c9c6f7cb41a5238f6"
+      "bytes": 1385332,
+      "sha256": "f3ea0a270497cf352d9009de7471c19d5564d86f451fa1698e3fc49c6c9b81b4"
     },
     {
       "location": "prepared",

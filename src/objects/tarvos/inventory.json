@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tarvos-model-shadow-alpha@2x.webp",
+      "bytes": 136504,
+      "sha256": "c6eeb223eb019dc32bc3a3d7f69dbc019f0d8ba9a7d98e3b8ff712fb4264b725"
+    },
+    {
+      "location": "public",
       "filename": "tarvos-model-shadow@2x.webp",
       "bytes": 21174,
       "sha256": "021984a0b90617ee760aa7f4aa36aae76cf4c0847ca1a465091dd33210c7fd7f"
+    },
+    {
+      "location": "public",
+      "filename": "tarvos-model-surface-alpha@2x.webp",
+      "bytes": 138446,
+      "sha256": "d3146cb67072eca3a3e750fae189a13bbc39283d19b14638e31e8ed092262ae9"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458434,
-      "sha256": "cf6d940907fabefc1f8462a7b7edae0bd9113a0589a6456a20e07ee270e50d71"
+      "bytes": 392499,
+      "sha256": "bba01d872533477aa87f5ddbead189121cc6d5a8de0f7fb451b626c40cabf9a3"
     },
     {
       "location": "prepared",

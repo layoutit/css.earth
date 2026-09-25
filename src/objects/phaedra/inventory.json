@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "phaedra-elevation-shadow-alpha@2x.webp",
+      "bytes": 515666,
+      "sha256": "2706f82699bd473194d85b4ac5928259b222ae2b990feda42b70e914e87e81ac"
+    },
+    {
+      "location": "public",
       "filename": "phaedra-elevation-shadow@2x.webp",
       "bytes": 129530,
       "sha256": "c6a50652b567802a9a053e796520f489c4283a92a901cd15e99115c5d9cb5695"
+    },
+    {
+      "location": "public",
+      "filename": "phaedra-elevation-surface-alpha@2x.webp",
+      "bytes": 562788,
+      "sha256": "b23b2f6bc0e9ec88864bf33da06859fb390fbe70061454b33c3ea0b42adf9c4a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "phaedra-shape-shadow-alpha@2x.webp",
+      "bytes": 437378,
+      "sha256": "72e3016e0628d732e5d7fff6d75dd43a37969c1d177a0963abb70b7137a95281"
+    },
+    {
+      "location": "public",
       "filename": "phaedra-shape-shadow@2x.webp",
       "bytes": 59102,
       "sha256": "4f96b79e7c7872be020352f3cd2d33df77329691659287c4c8d7e29f6bd58ada"
+    },
+    {
+      "location": "public",
+      "filename": "phaedra-shape-surface-alpha@2x.webp",
+      "bytes": 430432,
+      "sha256": "32f4dfc095f5762cafd05dfc25c7978c32cb6a821344782170b7208002793d5c"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750192,
-      "sha256": "ece6adf91d51ee95ff8397fcab887704f09779e61d2d456110726212959548b1"
+      "bytes": 640747,
+      "sha256": "fb78b37a1264e8f658bd04aa24a7ace6d43cbdc50e8bf5e60afb2912e80c9c41"
     },
     {
       "location": "prepared",

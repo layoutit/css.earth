@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "asterope-elevation-shadow-alpha@2x.webp",
+      "bytes": 612376,
+      "sha256": "ca0833ac585f49dde7cc67034933b73ab09881a7ba369f5066f8202ccba5a71c"
+    },
+    {
+      "location": "public",
       "filename": "asterope-elevation-shadow@2x.webp",
       "bytes": 118832,
       "sha256": "0bd4a540ec500bf7d328352322da96ea939de73fd7cc433967e0f917eac407bd"
+    },
+    {
+      "location": "public",
+      "filename": "asterope-elevation-surface-alpha@2x.webp",
+      "bytes": 662128,
+      "sha256": "b3d95755609bba4d7438b7966fc01f388f37a2369dc5bb5cff92bd550fa33a7f"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "asterope-shape-shadow-alpha@2x.webp",
+      "bytes": 534748,
+      "sha256": "a6234095709cfb6ab7304ff0b3b9f4e257380cfc9abdd63828be72a6fd175825"
+    },
+    {
+      "location": "public",
       "filename": "asterope-shape-shadow@2x.webp",
       "bytes": 59108,
       "sha256": "29e24f848053d14e4c0149e9472d4e4965f1e8f2e36bec2aa792ba07d43b70c3"
+    },
+    {
+      "location": "public",
+      "filename": "asterope-shape-surface-alpha@2x.webp",
+      "bytes": 528962,
+      "sha256": "56031fa49feeb4f07edb06278c81905a9b7d7cee5ea8799c717fa90509888e9c"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 763966,
-      "sha256": "890403ddcc502f60db93ad0c341f9a94c9c5b85e1f8d0dd619fd01b957b6f9ac"
+      "bytes": 654084,
+      "sha256": "133f1c9176a818753129d5ab411971e31a32356370abdea2d747fefe7a787409"
     },
     {
       "location": "prepared",

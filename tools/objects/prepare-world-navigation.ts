@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
 import { preparedControlPitch } from '@cssearth/engine';

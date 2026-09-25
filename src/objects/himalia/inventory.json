@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "himalia-model-shadow-alpha@2x.webp",
+      "bytes": 142428,
+      "sha256": "eaccbaad5ca05e55534c087089800cbfa4f2d42f19cf496ee27de0602e430dd0"
+    },
+    {
+      "location": "public",
       "filename": "himalia-model-shadow@2x.webp",
       "bytes": 22384,
       "sha256": "e752fba6e5f6ca9649c66ce1d16b05e8d3bc61f5f65ea2ea87b9bd6af6ad9589"
+    },
+    {
+      "location": "public",
+      "filename": "himalia-model-surface-alpha@2x.webp",
+      "bytes": 142858,
+      "sha256": "fbf21bac06d46966eb97782d67c40164392d7e2919b97e0e385fb9ec49978a50"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459652,
-      "sha256": "59246d7ec11b10173a9c47ce5314a27cc1aa8d015dc977f4c0accf54aa27044d"
+      "bytes": 393804,
+      "sha256": "8416247e2d7ff6cc447897621d0b8f6118a5f727038969384d2d3c08f8cf10d3"
     },
     {
       "location": "prepared",

@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, array, boolean, number, optional, shape, text, dotN as dot } from '@cssearth/core';
 /**
  * Bounded New Horizons LORRI pointing registration for a fixed PCK body frame
  * and fixed released STL.  This is deliberately not a pose or shape solver.
@@ -14,13 +14,11 @@ import { newHorizonsCamera, decodeNewHorizonsLorri } from '../terrestrial-layers
 import { bindSipCamera } from '../terrestrial-layers/llorri-geo.mts';
 import { observedLimb, limbThreshold, type LimbEdgePoint } from '../terrestrial-layers/limb-refinement.mts';
 import { loadStlShape } from '../terrestrial-layers/obj-shape.mts';
-import { array, boolean, number, optional, shape, text } from '@cssearth/core';
 import { pckRotation } from '../../spice/frames.mts';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { transpose } from '../../spice/ck.mts';
 import { comparePhotographicInteriors } from './compare-photographic-interiors.mts';
 import { writeInteriorComparison } from './render-interior-comparison.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const SPEED_OF_LIGHT_KM_PER_SECOND = 299792.458;
 const MAXIMUM_OFFSET_PIXELS = 32;

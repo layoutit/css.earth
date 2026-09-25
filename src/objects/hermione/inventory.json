@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hermione-elevation-shadow-alpha@2x.webp",
+      "bytes": 639226,
+      "sha256": "b3593d3b5944f1c470bfca5ee923cf513476950eb6c04a53721a07f78a007171"
+    },
+    {
+      "location": "public",
       "filename": "hermione-elevation-shadow@2x.webp",
       "bytes": 127016,
       "sha256": "90409d8aad3d771b6a7accf43116dc624e9848d380fb7a7d69de70cf9955ad4c"
+    },
+    {
+      "location": "public",
+      "filename": "hermione-elevation-surface-alpha@2x.webp",
+      "bytes": 703374,
+      "sha256": "54fcefebf56ff3dcc3228328f1e0c63023be516e760ea40636de10910a9da9e3"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hermione-shape-shadow-alpha@2x.webp",
+      "bytes": 555122,
+      "sha256": "19ef5552554f9067ca9f87d104898b7e5c5bbea56c2b1b26c387205d833b0824"
+    },
+    {
+      "location": "public",
       "filename": "hermione-shape-shadow@2x.webp",
       "bytes": 60016,
       "sha256": "7ffaea974e7ab39eb1614b1453eab11cf93f00071eeb21e50ca8c7d59a1e6ff4"
+    },
+    {
+      "location": "public",
+      "filename": "hermione-shape-surface-alpha@2x.webp",
+      "bytes": 548914,
+      "sha256": "48668513d6b705aea092a4595a3f45eef5914b2b41ba4f6691803ac6b4f6bc6a"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 738432,
-      "sha256": "c327034e5d8101c43e573a1b7f1854af09c30de6401a787685b43c51a1ac81e9"
+      "bytes": 628824,
+      "sha256": "91a44a6e13c972e66885786afe97aef06aa16b136177cf2292f5624dc69babce"
     },
     {
       "location": "prepared",

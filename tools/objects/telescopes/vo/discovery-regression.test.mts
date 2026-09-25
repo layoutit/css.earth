@@ -7,7 +7,7 @@ import { loadVoInputs } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
 import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
 import { associateTarget, instrumentFacetQuery, mastConeSelection, normalizeSnapshot, SERVICES, targetQuery, verifySnapshot } from './discovery.mts';
-import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 
 const alma = SERVICES[1]!;
 const mast = SERVICES.find(profile => profile.label === 'MAST JWST')!;

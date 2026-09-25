@@ -8,7 +8,7 @@ import ts from 'typescript';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { applicationDeliveryKind, installedDeliveryMatchesRecipe } from './delivery-identity.ts';
 import { prepareNebulaObject, type NebulaResearchBackend } from './objects.ts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { createRenderElementBudget } from '@cssearth/volume-core/contracts/render-element-budget';
 import type { CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
 import type { PreparedCssVolume } from '../../../src/renderers/css/volume/types.js';

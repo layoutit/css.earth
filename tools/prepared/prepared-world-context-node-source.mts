@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { projectRoot } from '../cli/project-root.mts';
+import { projectRoot } from '@cssearth/core/node';
 
 /**
  * Node-only: the `file:` URL of a checked-in project file, resolved against the

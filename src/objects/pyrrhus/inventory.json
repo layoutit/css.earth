@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "pyrrhus-elevation-shadow-alpha@2x.webp",
+      "bytes": 471078,
+      "sha256": "1ec1f7e33719e6cf8c579d01025e74e8ba9579967c85ae23a9a308207f0da1a7"
+    },
+    {
+      "location": "public",
       "filename": "pyrrhus-elevation-shadow@2x.webp",
       "bytes": 134706,
       "sha256": "e52e83c07566272acf867d959fe4cb61b113ec73e63e4d8958c681794dbe79e4"
+    },
+    {
+      "location": "public",
+      "filename": "pyrrhus-elevation-surface-alpha@2x.webp",
+      "bytes": 516900,
+      "sha256": "4c4c6b8c432966a9d9a20b40e2b9a76aaee75e7cc3a940345faeddfb86ee61ec"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "pyrrhus-shape-shadow-alpha@2x.webp",
+      "bytes": 380850,
+      "sha256": "6b03b09c04483a2daaf552dbdb4a2b7e761534e4570795f9a72c5d6a25252678"
+    },
+    {
+      "location": "public",
       "filename": "pyrrhus-shape-shadow@2x.webp",
       "bytes": 57034,
       "sha256": "0954a7eff989ac409a429e9d439812b78805b49a972612fd5b2bb23317048b88"
+    },
+    {
+      "location": "public",
+      "filename": "pyrrhus-shape-surface-alpha@2x.webp",
+      "bytes": 374896,
+      "sha256": "3c726d8e662a86ce94bcda30d6e84a0deb85ee49d39da5cc1e4e260ab2ce78d9"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750984,
-      "sha256": "11ce925c0cf2354464d1d641bb9e1fad1e43ba771d0b7cbd40992986d8c6eb0f"
+      "bytes": 641499,
+      "sha256": "847633a240e02f06d0c361db5e98878ffd0c43a642f14e881b82ab1e444c3c8f"
     },
     {
       "location": "prepared",

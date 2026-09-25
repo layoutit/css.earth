@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kerberos-model-shadow-alpha@2x.webp",
+      "bytes": 130556,
+      "sha256": "6c5f7c079bf505554cb0d23142ce85bb6720aa09987be283e688e2b104e59014"
+    },
+    {
+      "location": "public",
       "filename": "kerberos-model-shadow@2x.webp",
       "bytes": 18552,
       "sha256": "7bfe24fbbe48d4fee802524c0c956e233ba8e685a3884f97ddb9ee214df8105e"
+    },
+    {
+      "location": "public",
+      "filename": "kerberos-model-surface-alpha@2x.webp",
+      "bytes": 135120,
+      "sha256": "f64751a761b370bea2e19170704e2a1fb0e126316f61ad0b9e353dbe62d8d67d"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458007,
-      "sha256": "72ec49f0312874500176bf91cc196d13324651ef617c3dedf70ba9c4881d7cae"
+      "bytes": 392236,
+      "sha256": "a205dc540ec80c9c2af59750a561f69027471ddf80b0d5731349f8e120ba99c7"
     },
     {
       "location": "prepared",

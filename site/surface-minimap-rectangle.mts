@@ -13,7 +13,7 @@ import { rotateWorldPosition } from '../src/renderers/css/dist/navigation.js';
 import { wrapMapU } from './surface-minimap-math.mts';
 import { viewScale } from './view-format.mts';
 import { computeViewRectangle } from './vendor/cesium-view-rectangle.mjs';
-import { dotN as dot } from '../src/platform/vector3.mts';
+import { dotN as dot } from '@cssearth/core';
 export interface MinimapCameraState { eye: PositionM; rotation: WorldRotation; view: MapViewport; axes: SurfaceAxes; }
 
 const referenceAxes: SurfaceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };

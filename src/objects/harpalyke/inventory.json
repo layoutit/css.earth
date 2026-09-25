@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "harpalyke-model-shadow-alpha@2x.webp",
+      "bytes": 128142,
+      "sha256": "91e09146fa2c1e96497a0bb7b07983f5391a678469ec3ab41c7019809ae5fde3"
+    },
+    {
+      "location": "public",
       "filename": "harpalyke-model-shadow@2x.webp",
       "bytes": 21688,
       "sha256": "cc15511974aee682a0049327086a0529ad1ae5b459de671da42e124a0978e6d0"
+    },
+    {
+      "location": "public",
+      "filename": "harpalyke-model-surface-alpha@2x.webp",
+      "bytes": 130526,
+      "sha256": "407a9751f8859190eb0a750aed0a10909dea6c98b518fb8bd01713c271b078f4"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458895,
-      "sha256": "39e85b37822133d3b73a50fc6b51bc06f4ffc80bef2695b4c8ea6ffffa939a16"
+      "bytes": 393064,
+      "sha256": "d5b3f03748300dc4a67837f5f11775219d95e514048afbc9767e39c905bccccf"
     },
     {
       "location": "prepared",

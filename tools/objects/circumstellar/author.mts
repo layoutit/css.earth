@@ -22,7 +22,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { encodeDensityKtx2 } from '../../../src/preparation/volume/acquisition.ts';
 import { gainForTopAlpha, spreadColumns } from '../../../src/preparation/volume/column-depth.ts';
 import { readFitsFileHdus } from '../../fits/fits.mts';

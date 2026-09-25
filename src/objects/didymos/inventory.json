@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "didymos-albedo-shadow-alpha@2x.webp",
+      "bytes": 562370,
+      "sha256": "04dbe22787ad750e54c09d6391f35be6fb252090a2d9a32075b50405e44432c0"
+    },
+    {
+      "location": "public",
       "filename": "didymos-albedo-shadow@2x.webp",
       "bytes": 101232,
       "sha256": "c565317724b769c7920ea15d2de4880a6c912c7012584b6771a13469675a97a8"
+    },
+    {
+      "location": "public",
+      "filename": "didymos-albedo-surface-alpha@2x.webp",
+      "bytes": 590894,
+      "sha256": "d3e7f1f4d31f93de825fa9c794fbd3885e01a08cbc52c4b642df04b022807e4a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "didymos-draco-shadow-alpha@2x.webp",
+      "bytes": 600636,
+      "sha256": "17a6ae5b403945ac60bfc2fa2e5f1b4eb82498820664fa4d1eec153c5a7c9bbd"
+    },
+    {
+      "location": "public",
       "filename": "didymos-draco-shadow@2x.webp",
       "bytes": 142688,
       "sha256": "846320e12ce18f6fa7f6875f04c3b9402bc6385ba2d3841b2646bc2c13a5195a"
+    },
+    {
+      "location": "public",
+      "filename": "didymos-draco-surface-alpha@2x.webp",
+      "bytes": 605976,
+      "sha256": "ad440879b5d3454db013703e2a25db83e40519fc97a52d53e81088ccb748422e"
     },
     {
       "location": "public",
@@ -51,9 +75,21 @@
     },
     {
       "location": "public",
+      "filename": "didymos-elevation-shadow-alpha@2x.webp",
+      "bytes": 621498,
+      "sha256": "6276b9b4ccbc4d3c105140027312a2debbb5408b7bdecfff384910f9915258c1"
+    },
+    {
+      "location": "public",
       "filename": "didymos-elevation-shadow@2x.webp",
       "bytes": 136264,
       "sha256": "f7aad5216e7ed2367096b93fc5fb08329f65e7146f83ab2e8510a1ee25605cd6"
+    },
+    {
+      "location": "public",
+      "filename": "didymos-elevation-surface-alpha@2x.webp",
+      "bytes": 680710,
+      "sha256": "c665ec2cae4bb80bb73aa9661e87e9955ed71b58c7056e921df9a84073060d29"
     },
     {
       "location": "public",
@@ -75,6 +111,12 @@
     },
     {
       "location": "public",
+      "filename": "didymos-luke-surface-alpha@2x.webp",
+      "bytes": 657000,
+      "sha256": "c45465781e318f363ae9ee5aa167211c6276c7f4bb1c2df4bb86e7774fa4a57f"
+    },
+    {
+      "location": "public",
       "filename": "didymos-luke-surface@2x.webp",
       "bytes": 212628,
       "sha256": "08e5bdb5b3810ba91272889f61ffeb6bac88077bef9c660305b1a3a1857d52a2"
@@ -87,9 +129,21 @@
     },
     {
       "location": "public",
+      "filename": "didymos-shape-shadow-alpha@2x.webp",
+      "bytes": 532618,
+      "sha256": "83ab5530ac1bd4724f216160b166bda1667a0e3a05272cfcb0b85aa5525ffc93"
+    },
+    {
+      "location": "public",
       "filename": "didymos-shape-shadow@2x.webp",
       "bytes": 63042,
       "sha256": "7418fff8c943b37670b7d55ac538dfbe1b6022b27f3cb8e0ba8e0c59a36880b7"
+    },
+    {
+      "location": "public",
+      "filename": "didymos-shape-surface-alpha@2x.webp",
+      "bytes": 528350,
+      "sha256": "72274ab76b4dfef4f1c87cf7b18b350e5cba998cec9ebbddaf581c1d9c887a13"
     },
     {
       "location": "public",
@@ -178,8 +232,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 755640,
-      "sha256": "04499e9fa02772d4075ff39f12848421145f98603f2909d9ebbee7ef7d11d90e"
+      "bytes": 646939,
+      "sha256": "0069eeb6cb8aab161c8d4182820d8e76c07d8bb52e37b23807dd03df010133f5"
     },
     {
       "location": "prepared",

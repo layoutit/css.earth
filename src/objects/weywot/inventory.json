@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "weywot-model-shadow-alpha@2x.webp",
+      "bytes": 125862,
+      "sha256": "47b01c167f12015ca4c7d56d0c3b775c0d61e343623f3981a53f414712aba53f"
+    },
+    {
+      "location": "public",
       "filename": "weywot-model-shadow@2x.webp",
       "bytes": 21528,
       "sha256": "9655ee02b975e0fd6afeec85e7f8f60e64d9d6e7c590d1908ebc42dd9a3b9592"
+    },
+    {
+      "location": "public",
+      "filename": "weywot-model-surface-alpha@2x.webp",
+      "bytes": 127352,
+      "sha256": "86cfac2093231dfc4ea79bd312bea938d4df32abafc1cafce17ff67a2dfdedb7"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458164,
-      "sha256": "1951be4f72fddf63ee519f3b6c14a7341e18bbbfdfe9318779ddf2a2418b9c09"
+      "bytes": 392249,
+      "sha256": "7a5379d600594ab5efb1db9e016aec24c1e062896cd7630eab7fa35d444cef21"
     },
     {
       "location": "prepared",

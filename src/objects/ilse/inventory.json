@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "ilse-elevation-shadow-alpha@2x.webp",
+      "bytes": 511940,
+      "sha256": "2ee14e7da8a3d663bfb4e0181c5d4a6fa26af7e6d5b5d7023607311d4d62980f"
+    },
+    {
+      "location": "public",
       "filename": "ilse-elevation-shadow@2x.webp",
       "bytes": 139894,
       "sha256": "2fb84e17f2bda597e83b5ee23ae2c0fd28adcb62cbbca5ea437f1149e13628cd"
+    },
+    {
+      "location": "public",
+      "filename": "ilse-elevation-surface-alpha@2x.webp",
+      "bytes": 558358,
+      "sha256": "2bd4eb8fb59721a6a3b468216084b6f662288a957a1c00a7e1072773d2e33884"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ilse-shape-shadow-alpha@2x.webp",
+      "bytes": 425324,
+      "sha256": "6f3559a441bc108a341e672a97eed9aa11d306ae2fdeb04787f985ab39931416"
+    },
+    {
+      "location": "public",
       "filename": "ilse-shape-shadow@2x.webp",
       "bytes": 60646,
       "sha256": "fad0907cbeeb73fdfff2bcc90fd9a2923570fae69ac5225832a8b8a958c925e8"
+    },
+    {
+      "location": "public",
+      "filename": "ilse-shape-surface-alpha@2x.webp",
+      "bytes": 418402,
+      "sha256": "3446940709a843d2a03cca9d25e1afc297de20734cd7a42dac5021fb5824e07e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748110,
-      "sha256": "39c16fdd3e40e1f0cf0f02d30cf98e0902a21e97445760599e6e3d97d1cab689"
+      "bytes": 638436,
+      "sha256": "78d0f081651a13a70fba69b14d31ec8185103d492ef00d1e84d33ea17d9fb143"
     },
     {
       "location": "prepared",

@@ -1,5 +1,16 @@
-import { sceneEye } from './prepared-facing.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
+
+/** Eye in raw prepared scene coordinates; no DOM/style or geometry derivation. */
+export function sceneEye(projection: PhysicalProjection): readonly [number, number, number] | null {
+  const m = projection.eyeFromScene;
+  const a = m[0], b = m[4], c = m[8], d = m[1], e = m[5], f = m[9], g = m[2], h = m[6], i = m[10];
+  const determinant = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
+  if (!Number.isFinite(determinant) || determinant === 0) return null;
+  const x = -m[12], y = -m[13], z = -m[14];
+  return [(x * (e * i - f * h) + y * (c * h - b * i) + z * (b * f - c * e)) / determinant,
+    (x * (f * g - d * i) + y * (a * i - c * g) + z * (c * d - a * f)) / determinant,
+    (x * (d * h - e * g) + y * (b * g - a * h) + z * (a * e - b * d)) / determinant];
+}
 
 export type PreparedDepthOrder = { readonly group: number } | { readonly sequence: readonly PreparedDepthOrder[] } | {
   readonly plane: readonly [number, number, number, number];

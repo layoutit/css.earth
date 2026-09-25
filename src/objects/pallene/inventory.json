@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pallene-normal-shadow-alpha@2x.webp",
+      "bytes": 153064,
+      "sha256": "f7a67c8ec45974e49ead09a2bffe845797b927aa56ca7affa60c0f26a6399c0c"
+    },
+    {
+      "location": "public",
       "filename": "pallene-normal-shadow@2x.webp",
       "bytes": 35828,
       "sha256": "90edbb4d3380ab917598d53806e4c5aaf668ed9be85f869eccd99c12ce6401c5"
+    },
+    {
+      "location": "public",
+      "filename": "pallene-normal-surface-alpha@2x.webp",
+      "bytes": 155012,
+      "sha256": "eb0a730e44ae3c975b976f83a0b16d660d6a5dca0bbaa6f330566eba04cfe4a4"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458373,
-      "sha256": "3fc2a6ed6d5345dba8ff8e5b29d23cd94b030f8daae754a86d3d6c49226c1d55"
+      "bytes": 392582,
+      "sha256": "8c35516f54d519d3f07e5e70534e1aa56feb691227f03ad9e4dc30af67407934"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "ganymed-elevation-shadow-alpha@2x.webp",
+      "bytes": 616342,
+      "sha256": "36f8c18066e0bb81a66ea8c062a6ff100f0efd0729bd6960da587b9a49f2e7c8"
+    },
+    {
+      "location": "public",
       "filename": "ganymed-elevation-shadow@2x.webp",
       "bytes": 124318,
       "sha256": "6051d9657d6845e6921931fac1d28366092a326fc344918ad3ee3cb53f519fe8"
+    },
+    {
+      "location": "public",
+      "filename": "ganymed-elevation-surface-alpha@2x.webp",
+      "bytes": 661528,
+      "sha256": "0b9fe24c2c6221a53f14d42cfc519c64953d5a36cd54589166676b6860e4e944"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ganymed-shape-shadow-alpha@2x.webp",
+      "bytes": 535412,
+      "sha256": "c27959f88258fc2b857f1b14ed391f93a491327f55207df52c292d5269524bdc"
+    },
+    {
+      "location": "public",
       "filename": "ganymed-shape-shadow@2x.webp",
       "bytes": 59804,
       "sha256": "c6f0d355861c797e3707c40be8f03d58e2aecb99a820e2e6581adaf95ab8b0b9"
+    },
+    {
+      "location": "public",
+      "filename": "ganymed-shape-surface-alpha@2x.webp",
+      "bytes": 531398,
+      "sha256": "fc6874e620953f631cc5d002ab48d449c1a9c331ff8e6940cd37246d253bd5f3"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 775111,
-      "sha256": "af8bf22262e7bf66adb6e5c32f9e3e6eb9557b6efeb335ec724ddb48b8f8b012"
+      "bytes": 665120,
+      "sha256": "97acdbf8e5594327c160e89cee677601e95d5629b318442d0d8d54218e908404"
     },
     {
       "location": "prepared",

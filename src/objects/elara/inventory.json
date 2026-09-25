@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "elara-model-shadow-alpha@2x.webp",
+      "bytes": 124236,
+      "sha256": "24ae0837a8ff960abfcc4860989d0a4778034bcc63c2a5c2e85ee6deb420ba13"
+    },
+    {
+      "location": "public",
       "filename": "elara-model-shadow@2x.webp",
       "bytes": 20962,
       "sha256": "bddb47c03c117584d2f42e6bf624063f77dd990ef916b6a58d3a9e6ef8f6bffe"
+    },
+    {
+      "location": "public",
+      "filename": "elara-model-surface-alpha@2x.webp",
+      "bytes": 126596,
+      "sha256": "3c84734530639278a72d162d7f436fa6d6fc953fc013f6d039a2fbbaf26edb84"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456250,
-      "sha256": "7014d0500740467f783398a24483530282ce4e65a297b5449bb314a941c99f81"
+      "bytes": 390328,
+      "sha256": "536d1b00ad284e8683ab55bc04826a39a1f840574d47f88a7ed66a713bc43d22"
     },
     {
       "location": "prepared",

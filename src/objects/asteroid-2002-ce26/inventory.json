@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "asteroid-2002-ce26-elevation-shadow-alpha@2x.webp",
+      "bytes": 633076,
+      "sha256": "2d20927661dd0fc6c43a66ae22a5f85cef5c00a1f3726dd8c6f2c8f7579d4312"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2002-ce26-elevation-shadow@2x.webp",
       "bytes": 168998,
       "sha256": "0b0742067c56f7d3be2174ca7fffd47166681a889bacbc3dfd578abf5981d0e9"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2002-ce26-elevation-surface-alpha@2x.webp",
+      "bytes": 699926,
+      "sha256": "c7148594c2dc574a7339b0f42cc679aaabcc71b3533c1fd5c4f93eb95683bbc1"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "asteroid-2002-ce26-shape-shadow-alpha@2x.webp",
+      "bytes": 515052,
+      "sha256": "e6fae90ce158553ddca9b10d605472455ade9a0a3d29e096bb72964cb1752a58"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2002-ce26-shape-shadow@2x.webp",
       "bytes": 61532,
       "sha256": "122dd269af3c25a24ca0c324774352a289d469e08a2661199e3b87cfbb394f67"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2002-ce26-shape-surface-alpha@2x.webp",
+      "bytes": 510140,
+      "sha256": "9c66db8b11bd4e266ebc0bb275fd51ff50ab9efa47d9406537117f0801f0bf9a"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 771596,
-      "sha256": "4be9345536c9972a90de43cdbded00d872f567790a9f284b62d45919c28f15be"
+      "bytes": 661693,
+      "sha256": "9af5f706d8f746e9a8d17a8278a76a373a7cd19e3f79891cc1d9ee035d7fa7fb"
     },
     {
       "location": "prepared",

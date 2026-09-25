@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sycorax-model-shadow-alpha@2x.webp",
+      "bytes": 141638,
+      "sha256": "1da308875726b3b54f97526a58604c3b8115002b557d14cded538e6e0b1f1f10"
+    },
+    {
+      "location": "public",
       "filename": "sycorax-model-shadow@2x.webp",
       "bytes": 21880,
       "sha256": "96adcf07a2bbed9ec8a750d1fcc2cd2ceaae673aa33219646c839cb753986e54"
+    },
+    {
+      "location": "public",
+      "filename": "sycorax-model-surface-alpha@2x.webp",
+      "bytes": 143568,
+      "sha256": "3f91a6c65e078e9dec36ad79ce8b85f7365a9ed15077cbdfcbe20c2c43e6003a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458709,
-      "sha256": "0767a44c4e5abc5b2d24fb1a75b580c905c9820897cdb9596ba30f2c5aeacca8"
+      "bytes": 392836,
+      "sha256": "5a1fe53bfafc85ed5b07c5929bc4ba616c97a1ae2092f97e9d1354afc21dfcb6"
     },
     {
       "location": "prepared",

@@ -37,7 +37,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
   const kernels=await loadKernelSet(recipe.kernels.map(path=>resolve(source,path))),mesh=await loadObjShape(resolve(source,geometry.path),geometry.grid),reports=[];
   for(const entry of recipe.frames) {
     const refBytes=await pinned(entry.referenceImage),refClosure=parseGeoCameraClosure(JSON.parse((await pinned(entry.referenceCamera)).toString('utf8')));
-    for(const pin of refClosure.provenance) await pinned(pin.path);
+    for(const pin of refClosure.provenance) if(pin.path!==undefined) await pinned(pin.path);
     const reference=decodeLlorri(refBytes,refClosure),refCamera=matrixCamera('archived-closure',refClosure,bindSipCamera(refClosure));
     const footprint={image:{width:1024,height:1024,values:reference.planes.IMAGE,startTime:reference.startTime,filter:reference.filter,reject:(i:number)=>reference.acceptPixel(i)?null:'quality',report:reference.qualityReport},
       camera:refCamera,geometry:castSourceRays(refCamera,mesh,1024,1024),photometry:{gain:()=>1,retainsIllumination:true}};
@@ -66,7 +66,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
       return [partition,{count:selected.length,rms:Math.sqrt(selected.reduce((s,c)=>s+c.residualPixels**2,0)/selected.length),maximum:Math.max(...selected.map(c=>c.residualPixels))}];
     }));
     assert.ok(stats.holdout.rms<=recipe.maximumRmsPixels&&stats.holdout.maximum<=recipe.maximumResidualPixels,`Registration failed: ${entry.image} ${JSON.stringify(stats)}`);
-    const paths=[...new Set([entry.image,entry.label,entry.referenceImage,entry.referenceCamera,geometry.path,...recipe.kernels,recipePath,...refClosure.provenance.map(p=>p.path)])];
+    const paths=[...new Set([entry.image,entry.label,entry.referenceImage,entry.referenceCamera,geometry.path,...recipe.kernels,recipePath,...refClosure.provenance.flatMap(p=>p.path===undefined?[]:[p.path])])];
     const provenance=paths.map(path=>({path}));
     const result={...seed,provenance,checks:{status:'registered-image-overlap',
       pointing:'Original FITS WCS plus detector translation from registered-image overlap; disjoint fit and holdout grids.',

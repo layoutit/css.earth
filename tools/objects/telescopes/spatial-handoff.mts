@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { writeProductRecord,type ProductInput } from '../product-record.mts';
 
 export type SpatialKind='points'|'volume'|'volume-lens-bank';
@@ -54,16 +54,18 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     const manifestPath=requireString(prepared.url);
     const resources=value.kind==='volume-lens-bank'?value.payload.lenses.flatMap(lens=>lens.volume.resources):value.payload.resources;
     for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes||sha256(content)!==resource.sha256)throw new Error(`Spatial resource pin mismatch: ${resource.path}`);}
-    return {source,root,bytes,descriptor,checked,compiled,...value};
+    // A point field publishes its baked provenance beside its manifest (prepared/stars-provenance.json); the others carry it.
+    const provenance:unknown=value.kind==='points'?requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),'stars-provenance.json')))).toString())).provenance:value.payload.provenance;
+    return {source,root,bytes,descriptor,checked,compiled,provenance,...value};
   }finally{await rm(scratch,{recursive:true,force:true});}
 }
 
 export async function inspectSpatialObject(objectPath:string){
   const value=await validateSpatialObject(objectPath,undefined);
   if(value.kind==='volume-lens-bank')return {kind:value.kind,target:value.descriptor.id,
-    frame:requireRecord(requireRecord(value.descriptor.properties).frame,'physical frame'),provenance:value.payload.provenance,inputs:value.checked.size+1,
+    frame:requireRecord(requireRecord(value.descriptor.properties).frame,'physical frame'),provenance:value.provenance,inputs:value.checked.size+1,
     attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)};
-  return {kind:value.kind,target:value.descriptor.id,frame:value.payload.frame,provenance:value.payload.provenance,inputs:value.checked.size+1};
+  return {kind:value.kind,target:value.descriptor.id,frame:value.payload.frame,provenance:value.provenance,inputs:value.checked.size+1};
 }
 
 export async function exportSpatialObject(objectPath:string,kind:SpatialKind,outputDirectory:string){
@@ -71,14 +73,14 @@ export async function exportSpatialObject(objectPath:string,kind:SpatialKind,out
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
     const value=await validateSpatialObject(objectPath,kind);
-    const {source,bytes,descriptor,checked,payload,compiled}=value;
+    const {source,bytes,descriptor,checked,compiled,provenance}=value;
     const outputs=[{path:'object.json',file:resolve(staging,'object.json')}];await writeFile(outputs[0].file,bytes);
     for(const [path,item] of checked){const file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await writeFile(file,item.bytes);outputs.push({path,file});}
     for(const item of checked.values())if((await readFile(item.pin.identity)).length!==item.pin.bytes)throw new Error('Spatial source changed during export');
     if(sha256(await readFile(source))!==sha256(bytes))throw new Error('Spatial descriptor changed during export');
     const implementation=sha256(Buffer.concat([await readFile(new URL('spatial-handoff.mts',import.meta.url)),...await Promise.all(Object.keys(compiled.metafile.inputs).sort().map(file=>readFile(file)))]));
     const frame=value.kind==='volume-lens-bank'?requireRecord(requireRecord(descriptor.properties).frame,'physical frame'):value.payload.frame;
-    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance:payload.provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:implementation}]},outputs);
+    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:implementation}]},outputs);
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,object:resolve(destination,'object.json'),receipt:resolve(destination,'output.product.json'),kind};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}

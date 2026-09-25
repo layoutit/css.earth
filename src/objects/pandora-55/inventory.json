@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "pandora-55-elevation-shadow-alpha@2x.webp",
+      "bytes": 562850,
+      "sha256": "e96cd938a6c4c532481bbc058748858088ee353a1c70cc94bc31b6c259428269"
+    },
+    {
+      "location": "public",
       "filename": "pandora-55-elevation-shadow@2x.webp",
       "bytes": 145222,
       "sha256": "4941e8f5dd8d6c7bbf2f7adb108ffad48da33170ba9849269929e484a2893d5a"
+    },
+    {
+      "location": "public",
+      "filename": "pandora-55-elevation-surface-alpha@2x.webp",
+      "bytes": 626316,
+      "sha256": "4861183b82cd12f51d174d7effad5dfe07d4c80e62d8cbbd3db0dfca08f2a615"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "pandora-55-shape-shadow-alpha@2x.webp",
+      "bytes": 470632,
+      "sha256": "ae0b505ec731d729ab30c8620a36a0bac7da3b24281602383c108f82a0c96c0e"
+    },
+    {
+      "location": "public",
       "filename": "pandora-55-shape-shadow@2x.webp",
       "bytes": 57930,
       "sha256": "275854717fca6bbd877e423e5ee2dbb10976d2ff8f066aeda8911e78edd8dbca"
+    },
+    {
+      "location": "public",
+      "filename": "pandora-55-shape-surface-alpha@2x.webp",
+      "bytes": 462156,
+      "sha256": "97e7357d5ef0cae0085eeedacced9a1077525b044c7481162ca89a1a1c24f7ef"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 753532,
-      "sha256": "89411ca91bc50c90d5dd5043e9cdd2af815749665f2f8971fc423239ecaecf44"
+      "bytes": 643725,
+      "sha256": "b7c4baf15fa78a2d00ead25a9a193cc3aee3b8a375bc05f88d9fa7b7aa8fef78"
     },
     {
       "location": "prepared",

@@ -39,6 +39,7 @@ import {
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { optimizePreparedQ75Webp } from "../prepared/prepared-webp.mts";
+import { encodeLossyWebp } from '../../src/preparation/raster/lossy-lane.ts';
 import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
 import { authoredObject } from '../sources/authored-object.mts';
 
@@ -108,7 +109,11 @@ export async function prepareNavigation({
       source: resolve(stagedOutput, filename), target: resolve(outputRoot, filename),
     }));
     const generatedTargets = new Set(changes.map(({ target }) => target));
+    // 1x marker tiles and pages are no longer made: the app reads only 2x.
+    const pageCount = Math.ceil(descriptors.length / BODY_MARKER_ATLAS_PAGE_SIZE);
     const obsolete = catalogOnly ? [] : [...selected.flatMap(({ objectId }) => [`${objectId}.webp`, `${objectId}-context.webp`]),
+      ...descriptors.map(({ objectId }) => `body-${objectId}.webp`),
+      ...Array.from({ length: pageCount + 1 }, (_, page) => `body-markers-${String(page).padStart(2, '0')}.webp`),
       "planet-markers.webp", "planet-markers@2x.webp", "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp", "sun-indicator-hexagon.png"];
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
@@ -145,20 +150,20 @@ async function markerPresentations(descriptors: readonly ObjectMarkerDescriptor[
     const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE;
     const count = Math.min(BODY_MARKER_ATLAS_PAGE_SIZE, descriptors.length - page * BODY_MARKER_ATLAS_PAGE_SIZE);
     const pageName = `body-markers-${String(page).padStart(2, '0')}`;
-    for (const density of [1, 2]) {
-      const image = await metadata(`${pageName}${density === 2 ? '@2x' : ''}.webp`);
-      if (image.width !== markerTileSize * density * count || image.height !== markerTileSize * density) throw new TypeError(`Invalid marker atlas dimensions: ${pageName}.`);
-    }
+    const image = await metadata(`${pageName}@2x.webp`);
+    if (image.width !== markerTileSize * 2 * count || image.height !== markerTileSize * 2) throw new TypeError(`Invalid marker atlas dimensions: ${pageName}.`);
     const context = parents.has(id) || descriptor.context ? await metadata(`${id}-context.webp`) : null;
-    entries.push([id, { url: `/navigation/${pageName}.webp`, url2x: `/navigation/${pageName}@2x.webp`, url2xPixels: markerTileSize * 2, index, count,
+    entries.push([id, { url2x: `/navigation/${pageName}@2x.webp`, url2xPixels: markerTileSize * 2, index, count,
       presentation: descriptor.presentation, ...(context ? { context: { url: `/navigation/${id}-context.webp`, pixels: context.width } } : {}) }]);
   }
   return Object.fromEntries(entries);
 }
 
-/** Pack the object-owned 16 px markers into bounded horizontal pages. The
+/** Pack the object-owned 16 px markers, at 2x density, into bounded horizontal pages. The
  * individual prepared images remain the ownership/oracle artifacts; runtime
- * presentation references only these pages, collapsing hundreds of requests. */
+ * presentation references only these pages, collapsing hundreds of requests.
+ * A page is photographic sprites, so it goes through the lossy lane with exact alpha: the three lossless pages were
+ * 482 KB, lossy 289 KB, and pixelmatch (threshold 0.1) flags at most 13 of a page's 262,144 pixels (2026-09-25). */
 export async function prepareBodyMarkerAtlases({ outputRoot, descriptors, directories }: {
   outputRoot: string; descriptors: readonly ObjectMarkerDescriptor[]; directories: readonly string[];
 }) {
@@ -174,20 +179,19 @@ export async function prepareBodyMarkerAtlases({ outputRoot, descriptors, direct
   for (let start = 0, page = 0; start < descriptors.length; start += BODY_MARKER_ATLAS_PAGE_SIZE, page++) {
     const members = descriptors.slice(start, start + BODY_MARKER_ATLAS_PAGE_SIZE);
     const pageName = `body-markers-${String(page).padStart(2, '0')}`;
-    for (const density of [1, 2]) {
-      const tile = markerTileSize * density;
+    {
+      const tile = markerTileSize * 2;
       // Copy decoded straight-alpha pixels, not a composite operation: blending
       // partially transparent edges changes their RGB by a rounding unit.
-      const tiles = await Promise.all(members.map(async ({ objectId }) => sharp(await locate(`body-${objectId}${density === 2 ? '@2x' : ''}.webp`))
+      const tiles = await Promise.all(members.map(async ({ objectId }) => sharp(await locate(`body-${objectId}@2x.webp`))
         .ensureAlpha().raw().toBuffer({ resolveWithObject: true })));
       if (tiles.some(({ info }) => info.width !== tile || info.height !== tile || info.channels !== 4)) throw new TypeError(`Invalid marker tile dimensions in ${pageName}.`);
       const width = tile * members.length, pixels = Buffer.alloc(width * tile * 4);
       for (let row = 0; row < tile; row++) for (const [index, image] of tiles.entries()) {
         image.data.copy(pixels, (row * width + index * tile) * 4, row * tile * 4, (row + 1) * tile * 4);
       }
-      await sharp(pixels, { raw: { width, height: tile, channels: 4 } })
-        .webp({ lossless: true, effort: 6 })
-        .toFile(resolve(outputRoot, `${pageName}${density === 2 ? '@2x' : ''}.webp`));
+      await writeFile(resolve(outputRoot, `${pageName}@2x.webp`),
+        await encodeLossyWebp(sharp(pixels, { raw: { width, height: tile, channels: 4 } }), { alphaQuality: 100, effort: 6 }));
     }
   }
 }
@@ -281,14 +285,15 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
 export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
   if (!descriptors.length) throw new TypeError('Markers require at least one descriptor.');
   await mkdir(outputRoot, { recursive: true });
-  for (const density of [1, 2]) {
-    const tileSize = markerTileSize * density;
+  // 2x only: the app reads the 2x pages, and every screen gets them (no 1x rasters).
+  {
+    const tileSize = markerTileSize * 2;
     for (const descriptor of descriptors) {
       const sourcePath = descriptor.owner === 'object'
         ? resolve(projectRoot, 'src/objects', descriptor.objectId, 'source', descriptor.source.path)
         : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
       const tile = await renderMarker(descriptor, { sourcePath, tileSize });
-      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.objectId}${density === 2 ? '@2x' : ''}.webp`));
+      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.objectId}@2x.webp`));
     }
   }
 }

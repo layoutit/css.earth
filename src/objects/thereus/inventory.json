@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thereus-model-shadow-alpha@2x.webp",
+      "bytes": 127418,
+      "sha256": "74f4ed20eaaa7fe2fd21a95ffb59b810b361b7936aafa2dba04f29572eefef2a"
+    },
+    {
+      "location": "public",
       "filename": "thereus-model-shadow@2x.webp",
       "bytes": 20738,
       "sha256": "7aefb797c49084880fcbcd02b6f9be049ec49b9b55e9dfb1f0bfbdfaf202e0bb"
+    },
+    {
+      "location": "public",
+      "filename": "thereus-model-surface-alpha@2x.webp",
+      "bytes": 129706,
+      "sha256": "db0f72efe4a1e843bebb191f7af7be6a11777014b7110ff0bf6db83c96adaa02"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458961,
-      "sha256": "ab2d20442de9b5d9c7e7c84bcae3c524a401bef05b25d867266411a2b18d1b7a"
+      "bytes": 393068,
+      "sha256": "55a66f6a6f9b74a1b2d446ad77b16c4360a6222752ae9d70effbe9cbe52c83e6"
     },
     {
       "location": "prepared",

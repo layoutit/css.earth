@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "desdemona-model-shadow-alpha@2x.webp",
+      "bytes": 142178,
+      "sha256": "4e6ae04397699849feda1993c841da8048a76e7ffb57a3d3e65e1e19c505ae09"
+    },
+    {
+      "location": "public",
       "filename": "desdemona-model-shadow@2x.webp",
       "bytes": 24962,
       "sha256": "585ade0fe6af07ef560dc01fe57cd14922ba822b031359c1b5098cd3b84a4f07"
+    },
+    {
+      "location": "public",
+      "filename": "desdemona-model-surface-alpha@2x.webp",
+      "bytes": 140974,
+      "sha256": "cb2968d45aed2a3b1b722250a4b981386f04e01eb85c0d2573c9630ef7d0bbd6"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459257,
-      "sha256": "b05a550e5ed4a4c4c57aa6fedce99ba72e7756617f07ed1916fbb5a4aafd720d"
+      "bytes": 393496,
+      "sha256": "7fd14da253c7afb031b966c13f6b6312bf3686c2905d322d411d7daed92bf220"
     },
     {
       "location": "prepared",

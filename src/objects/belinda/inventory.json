@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "belinda-model-shadow-alpha@2x.webp",
+      "bytes": 137904,
+      "sha256": "81849efabf3525f7cb517c8e3504b7791b11eb5065896225fe54cfb0429b49d2"
+    },
+    {
+      "location": "public",
       "filename": "belinda-model-shadow@2x.webp",
       "bytes": 23872,
       "sha256": "f1196246a0ee8fc445a79cf91178774799ac97a9afa9f15b5490e3be3f544a8d"
+    },
+    {
+      "location": "public",
+      "filename": "belinda-model-surface-alpha@2x.webp",
+      "bytes": 137042,
+      "sha256": "0c6e9fd5b4c3054f1b39da9c5cf140556916e586de0d1c67a1f7e8e5a0f39010"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457109,
-      "sha256": "35b5494568c95fc08b3ce64c0d328af80f3730173959c3c4c8bb90b811316839"
+      "bytes": 391324,
+      "sha256": "3874ed0c6419473cf6ad7f2b02a12ac93f0397d860431122de1d1bfea0b7109b"
     },
     {
       "location": "prepared",

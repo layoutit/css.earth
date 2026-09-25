@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "pomona-elevation-shadow-alpha@2x.webp",
+      "bytes": 560600,
+      "sha256": "4e7a5d4f8e35a49e097444f23d9d18556abfa96d5b713368f7a93acc09eb4796"
+    },
+    {
+      "location": "public",
       "filename": "pomona-elevation-shadow@2x.webp",
       "bytes": 134312,
       "sha256": "8ea633101a62aeb28e8a5d44e88de7933417ed56df8aed5f788056e051efbceb"
+    },
+    {
+      "location": "public",
+      "filename": "pomona-elevation-surface-alpha@2x.webp",
+      "bytes": 607888,
+      "sha256": "4d0642e38c66a0bb6307a24a2f319da13059374a3c17bb2d94a9da2cc1f50039"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "pomona-shape-shadow-alpha@2x.webp",
+      "bytes": 472066,
+      "sha256": "95af12bf831bf8e66fa08f8ebd04334473763c23b1daca2ada66babdce69383e"
+    },
+    {
+      "location": "public",
       "filename": "pomona-shape-shadow@2x.webp",
       "bytes": 60032,
       "sha256": "858a4bfb44f6d89e25effbfffc1e3fc9d3ce8f6f3907e9eaf01adc37411d331d"
+    },
+    {
+      "location": "public",
+      "filename": "pomona-shape-surface-alpha@2x.webp",
+      "bytes": 466570,
+      "sha256": "310ade47f9fa0284f1c7c58ed1e3f1b7b0991ca5fd73ba80982c7c223cf25f10"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749590,
-      "sha256": "e5e7efc64f03547e15fe04268c4a0c05583a23b251b6210e6cd3b05b283e8621"
+      "bytes": 639662,
+      "sha256": "c6b89b3b80f17a0bd4ac02e92921a78a962b1564f1d860f7920ac0ceb54e189b"
     },
     {
       "location": "prepared",

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "meliboea-elevation-shadow-alpha@2x.webp",
+      "bytes": 561086,
+      "sha256": "ea9e5c69cfaa84097c2492ee6c7399dd59f232bcab371d91b66dbb14a7d1dc3f"
+    },
+    {
+      "location": "public",
       "filename": "meliboea-elevation-shadow@2x.webp",
       "bytes": 137194,
       "sha256": "b5dc6a88526f2292b10fb8faad3d1251dc1c23c90f760e77df9d23ff85bfe607"
+    },
+    {
+      "location": "public",
+      "filename": "meliboea-elevation-surface-alpha@2x.webp",
+      "bytes": 597386,
+      "sha256": "5aefe4870b1f11bdcfc1dfd299b916635db199ce21dcb0051da992686bb64d3a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "meliboea-shape-shadow-alpha@2x.webp",
+      "bytes": 471788,
+      "sha256": "81c132bc77259cb555f880d5dd237bc5e3417d4eaa58f5e06699332f74503af9"
+    },
+    {
+      "location": "public",
       "filename": "meliboea-shape-shadow@2x.webp",
       "bytes": 61358,
       "sha256": "3bbee86f955534d77ae21aae03b26ee8a5d5321f5766d3224b40ddb99edd4a8f"
+    },
+    {
+      "location": "public",
+      "filename": "meliboea-shape-surface-alpha@2x.webp",
+      "bytes": 465742,
+      "sha256": "65777fb2d567654ed095927bf5ebcced8efd217898dbe00d36a1b05a4d9bd232"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751052,
-      "sha256": "0afd7f0c61692f9aa260371686ffd5976561519da06d7558414b790190baffea"
+      "bytes": 641066,
+      "sha256": "ad75d941dd6b6cab26eb43da7d337fab2d9dfc8662a46e6381264a8c4f095b75"
     },
     {
       "location": "prepared",

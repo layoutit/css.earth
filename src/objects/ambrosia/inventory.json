@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "ambrosia-elevation-shadow-alpha@2x.webp",
+      "bytes": 494816,
+      "sha256": "56982630aefbdcee113e931736c1cc51d58a27be7212884754b82353327f0301"
+    },
+    {
+      "location": "public",
       "filename": "ambrosia-elevation-shadow@2x.webp",
       "bytes": 119476,
       "sha256": "50cb612e7ad8d710642903b06b3d48111032792718f32654d3e1f8754217a664"
+    },
+    {
+      "location": "public",
+      "filename": "ambrosia-elevation-surface-alpha@2x.webp",
+      "bytes": 537088,
+      "sha256": "c7f3a71318cf685f1aaacc8bf561765aeaeb2861145b09c666974fe7239a7a3d"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ambrosia-shape-shadow-alpha@2x.webp",
+      "bytes": 420752,
+      "sha256": "5ab70fe49b1ec0d188031bc3f949eab42e2872662ac371aac44698d0f1ed7ffd"
+    },
+    {
+      "location": "public",
       "filename": "ambrosia-shape-shadow@2x.webp",
       "bytes": 57828,
       "sha256": "d65dd19712d596c80611b5c5511b23c307ff7b7e7d03a26533254b1c611e8013"
+    },
+    {
+      "location": "public",
+      "filename": "ambrosia-shape-surface-alpha@2x.webp",
+      "bytes": 412964,
+      "sha256": "6210e152476a73dc701057508c39cdf2ab1d59edc54eae26d3863fe6d0f60902"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751866,
-      "sha256": "dd63eeceb8fa1016f8c97d6bef620edea3e578d50d09befe24197ae77368033e"
+      "bytes": 642355,
+      "sha256": "0e1c23175fecb1a6da594d985fc5de780556ef3d46c60db77080649212c05b30"
     },
     {
       "location": "prepared",

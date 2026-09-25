@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "eros-elevation-shadow-alpha@2x.webp",
+      "bytes": 832172,
+      "sha256": "61a88d7eb2c37eff585f9a3c4f696991ed54881221ad3e30db6fc8c8544bce99"
+    },
+    {
+      "location": "public",
       "filename": "eros-elevation-shadow@2x.webp",
       "bytes": 477366,
       "sha256": "28ebe983a926992d445ec8a6bd6c5f630ff75c831ffc08dc852150744cb3db7f"
+    },
+    {
+      "location": "public",
+      "filename": "eros-elevation-surface-alpha@2x.webp",
+      "bytes": 814584,
+      "sha256": "feebef485abd45065d6d6cc1114729ba6c56c3b1664253c05df43b4962266305"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "eros-infrared-shadow-alpha@2x.webp",
+      "bytes": 882814,
+      "sha256": "34f3714129606e0ac791a9d1cefe7760a34c8773c125a7ba831dc8b3ca72961b"
+    },
+    {
+      "location": "public",
       "filename": "eros-infrared-shadow@2x.webp",
       "bytes": 892246,
       "sha256": "e38349f39c29610c13140063ce9916cdb578e11949fa01bb618849f871885f1f"
+    },
+    {
+      "location": "public",
+      "filename": "eros-infrared-surface-alpha@2x.webp",
+      "bytes": 1863274,
+      "sha256": "2c9ec77260fbe880e6f1a4af6d416d25c0aa9641526e2ee491d86b0c17ca50e5"
     },
     {
       "location": "public",
@@ -51,9 +75,21 @@
     },
     {
       "location": "public",
+      "filename": "eros-normal-shadow-alpha@2x.webp",
+      "bytes": 717422,
+      "sha256": "8a845c94db8b541ec10dc741545d928f4d5a23dd6c5c5fb584439c990a31b2af"
+    },
+    {
+      "location": "public",
       "filename": "eros-normal-shadow@2x.webp",
       "bytes": 526132,
       "sha256": "0e6f3f4f516565668e3a17fdef725d459a17a1bde82b3bede7be2c3eb1ff0f4c"
+    },
+    {
+      "location": "public",
+      "filename": "eros-normal-surface-alpha@2x.webp",
+      "bytes": 1236088,
+      "sha256": "426e69dad079bac394f5ed1eb748d5609df6359f70824e164ea264391a5cf912"
     },
     {
       "location": "public",
@@ -130,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 745992,
-      "sha256": "122ec48fa9d807f53a7424cc3c509a0565704c2310dc6e1c1d1ba6c020d5ebed"
+      "bytes": 637869,
+      "sha256": "0d5cecf4cbc7bb2fa52cb391ea60ca47fca595ba069aae4ced386b5fcf56f53a"
     },
     {
       "location": "prepared",

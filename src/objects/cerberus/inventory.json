@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "cerberus-elevation-shadow-alpha@2x.webp",
+      "bytes": 466942,
+      "sha256": "b4cf864910ed1ff6766e965e1a164529c59de4887daba55f7294142422d580ae"
+    },
+    {
+      "location": "public",
       "filename": "cerberus-elevation-shadow@2x.webp",
       "bytes": 114992,
       "sha256": "0cacee0a2f60428c0ca99685684426747febd2d0ff235445ffd365683bd2019c"
+    },
+    {
+      "location": "public",
+      "filename": "cerberus-elevation-surface-alpha@2x.webp",
+      "bytes": 530468,
+      "sha256": "04fdcafadd7f9a8e82c5d8e26390b0ccaa8ff991467563f1eb0e1fb4d8fdde14"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "cerberus-shape-shadow-alpha@2x.webp",
+      "bytes": 397058,
+      "sha256": "44d87a41f24f6ec06e4d68ddaede8baaba87600e924cf4a855a0c57b3af6c2be"
+    },
+    {
+      "location": "public",
       "filename": "cerberus-shape-shadow@2x.webp",
       "bytes": 54030,
       "sha256": "f5be58d8780fe12b5c9473ffc75b40e4151817bf0f50f07a9ca61398a4871525"
+    },
+    {
+      "location": "public",
+      "filename": "cerberus-shape-surface-alpha@2x.webp",
+      "bytes": 389938,
+      "sha256": "f79bbc80498aaa0940b058e45111d78e250146ceeb19989bf037deaeb9a23a04"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 751327,
-      "sha256": "2c0d06c8ffefc617a98cd03a23854ec66d6ca3124e080a8fc81e61203ef2ee97"
+      "bytes": 642101,
+      "sha256": "cf25768c58f8594f5c71296498dbfc101c2fb37efa07cf6a8dc7662596489949"
     },
     {
       "location": "prepared",

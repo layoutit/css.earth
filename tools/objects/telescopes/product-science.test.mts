@@ -10,7 +10,7 @@ import { readProductScience } from './product-science.mts';
 import { calibrationDependencies, verifyCalibrationDependencies, calibrationOrigin } from './calibration-dependencies.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { fileSize, writeProductRecord, productRecordPath } from '../product-record.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { recordQualification, QUALIFICATION_SCHEMA, type QualificationResult } from './qualify.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import type { SourceProduct } from './source-product-contract.mts';

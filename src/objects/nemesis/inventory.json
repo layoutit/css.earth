@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "nemesis-elevation-shadow-alpha@2x.webp",
+      "bytes": 626386,
+      "sha256": "21cc21ff28e2730779ef6a1866f756b3a75d7b349ab132e6290ebcc836ae2617"
+    },
+    {
+      "location": "public",
       "filename": "nemesis-elevation-shadow@2x.webp",
       "bytes": 142214,
       "sha256": "2076d4825fb9f923816b82d6a37fc017ec92af9e2cba1021a8ad75ce93b0fb90"
+    },
+    {
+      "location": "public",
+      "filename": "nemesis-elevation-surface-alpha@2x.webp",
+      "bytes": 685506,
+      "sha256": "2a45cc44e2869437d1487d7d9ccd2de5b4f4827c0fb7df6c92b9265186d9e242"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "nemesis-shape-shadow-alpha@2x.webp",
+      "bytes": 533012,
+      "sha256": "27bd68f3161b11b65cb94efde093cccfffdf05c198a3c409bc05c411caab1ad0"
+    },
+    {
+      "location": "public",
       "filename": "nemesis-shape-shadow@2x.webp",
       "bytes": 63258,
       "sha256": "c7c316d41b46cee12350333775a34b395534342d5e21755228f2cdf28810d930"
+    },
+    {
+      "location": "public",
+      "filename": "nemesis-shape-surface-alpha@2x.webp",
+      "bytes": 526130,
+      "sha256": "2b752b8cf111a6ec641664d83f934577877caf558a29f3d85b32da1150fa8c94"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750481,
-      "sha256": "0eebcbbda40a1570a0abca7e04b21b85b15cce3501b7392b0b81e15570b5f6a7"
+      "bytes": 640456,
+      "sha256": "449657eec248aed8ee420f8fc38cf1cf6098ae7fd857f420868b3b02e9847485"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "oumuamua-model-shadow-alpha@2x.webp",
+      "bytes": 105420,
+      "sha256": "66bada13af6815a28613ef5e41302374480769e11debb4362d14c9509870a7fa"
+    },
+    {
+      "location": "public",
       "filename": "oumuamua-model-shadow@2x.webp",
       "bytes": 18284,
       "sha256": "c82067493f0a17f97363fc2732b16785f512369d4f0fc071e2632749bae37b3f"
+    },
+    {
+      "location": "public",
+      "filename": "oumuamua-model-surface-alpha@2x.webp",
+      "bytes": 103148,
+      "sha256": "05ad1ac5217eef055b5d2c112992449af00ed9efa570cbf22f179cae38543aa2"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456265,
-      "sha256": "5596f1f4f9785df52308b7a620976e3c7c59a14360c45929490c6efdd32a1030"
+      "bytes": 390181,
+      "sha256": "9460545b7866d1fea4e9627e3d26a056769c6804d33002b9c5cb2b083afe5320"
     },
     {
       "location": "prepared",

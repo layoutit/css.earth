@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "sibylla-elevation-shadow-alpha@2x.webp",
+      "bytes": 593916,
+      "sha256": "eced95f02c66d0dc9e65c12700332a1f96dcd240488aca0d859fb56d0014df47"
+    },
+    {
+      "location": "public",
       "filename": "sibylla-elevation-shadow@2x.webp",
       "bytes": 135676,
       "sha256": "c1aa833ee7546a54a9ca23b276dda184d730fd2b9d1ddc348a1dee0d99ea3e49"
+    },
+    {
+      "location": "public",
+      "filename": "sibylla-elevation-surface-alpha@2x.webp",
+      "bytes": 628080,
+      "sha256": "2f19c2d7152c93ee6cbc3c8ac6d1f402e3c73b9e2a9b62a554870b83ccc14921"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "sibylla-shape-shadow-alpha@2x.webp",
+      "bytes": 507302,
+      "sha256": "ec53ec6bf7aecb04c36282f83ad5e8f93b56871ccd30b3ea2bd4ac7911674e2b"
+    },
+    {
+      "location": "public",
       "filename": "sibylla-shape-shadow@2x.webp",
       "bytes": 62556,
       "sha256": "ec81d2999e309266e85823033dba9c0fb71b3bb801dc98941fd0b1700e8abca1"
+    },
+    {
+      "location": "public",
+      "filename": "sibylla-shape-surface-alpha@2x.webp",
+      "bytes": 500790,
+      "sha256": "df32a4a7877e0614ebf06578440c30b04d65bf24172575a16f0f10b0eb615ae7"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750898,
-      "sha256": "afb5b673df108f8b259e658e6b27d626733f79cb86dc416587a00079beaeb811"
+      "bytes": 640860,
+      "sha256": "eb32a092ac976221a5bea7faf6931ffdd4a6266533ce2cce48cb159f170640c9"
     },
     {
       "location": "prepared",

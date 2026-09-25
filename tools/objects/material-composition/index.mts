@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from '@cssearth/core/schema';
 import {PREPARED_CSS_OBJECT_FORMAT} from '../../../src/renderers/css/dist/index.js';

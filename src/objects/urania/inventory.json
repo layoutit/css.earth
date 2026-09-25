@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "urania-elevation-shadow-alpha@2x.webp",
+      "bytes": 631322,
+      "sha256": "c1c93c108dfe2715b75c7adaa9d821883ba2823272b069672331fda5dd517172"
+    },
+    {
+      "location": "public",
       "filename": "urania-elevation-shadow@2x.webp",
       "bytes": 139450,
       "sha256": "ff7172d8f380ade9dc2951bc31592c121e0a67cced9fc9589894309837d7e093"
+    },
+    {
+      "location": "public",
+      "filename": "urania-elevation-surface-alpha@2x.webp",
+      "bytes": 697078,
+      "sha256": "d76a2747e1f3d2a03c3db99132548e503553930f1374a4d9a737268505c8d65e"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "urania-shape-shadow-alpha@2x.webp",
+      "bytes": 539096,
+      "sha256": "4fdd89e4c099adc90b1ea797dbec1419fcc3c8ae4c346e1571d53ca497ce084c"
+    },
+    {
+      "location": "public",
       "filename": "urania-shape-shadow@2x.webp",
       "bytes": 61782,
       "sha256": "5ccf9c920e419aaa3e80a285a926f84f6d7a12d5a24523d5de9c84e2d9d0f114"
+    },
+    {
+      "location": "public",
+      "filename": "urania-shape-surface-alpha@2x.webp",
+      "bytes": 535764,
+      "sha256": "31ba7f0c56d5731a340b12aa5ee7e27e63495afb137aa3d7acd6c537036bf504"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "urania-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "urania-zimpol-surface-alpha@2x.webp",
+      "bytes": 612186,
+      "sha256": "efa745152a39925214016bbb2755fbfb9e8e3d323881ddda809cffe5437b5f6f"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1374119,
-      "sha256": "fe1a14fea1e027508ee7b8c1e6e8dfcd981ff07479c2401c655c4067ecc7cf8e"
+      "bytes": 1375334,
+      "sha256": "4dc292d8e00d9c8fca438531e02435d1e390c901c899f88a167441298bcf7a41"
     },
     {
       "location": "prepared",

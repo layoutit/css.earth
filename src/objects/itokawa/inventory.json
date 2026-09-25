@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "itokawa-amica-shadow-alpha@2x.webp",
+      "bytes": 957018,
+      "sha256": "9978f068abd2a532e48110f94d660e3e4c6165c47bc4a42617d13452c8cb9c44"
+    },
+    {
+      "location": "public",
       "filename": "itokawa-amica-shadow@2x.webp",
       "bytes": 595830,
       "sha256": "0068c9ed85ca472722a902ea96339486505b0551289d1d8b205e3e78c54e5730"
+    },
+    {
+      "location": "public",
+      "filename": "itokawa-amica-surface-alpha@2x.webp",
+      "bytes": 1196070,
+      "sha256": "3514e47528e4628a2e960da3dc8326e283081df24c653abb267b5056cfcb9be7"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "itokawa-elevation-shadow-alpha@2x.webp",
+      "bytes": 773494,
+      "sha256": "9dec6ac4269ce82bca3fcbca49e3e3ca1c8139202a4e9df79b8766f536b09a75"
+    },
+    {
+      "location": "public",
       "filename": "itokawa-elevation-shadow@2x.webp",
       "bytes": 397856,
       "sha256": "fe302df331581967e7201eccd7425d8677ecc66388eaf974aa2dc9c03d2cb62d"
+    },
+    {
+      "location": "public",
+      "filename": "itokawa-elevation-surface-alpha@2x.webp",
+      "bytes": 825130,
+      "sha256": "31b442905800dc0d761ce1a552c950e880ad1100d6eaa8fcfeb7182f0958caf6"
     },
     {
       "location": "public",
@@ -106,8 +130,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 743800,
-      "sha256": "8954d25f1575112206ceabae56ba13bb8172b61ed8c127c72be8d1a5e0595b7f"
+      "bytes": 634968,
+      "sha256": "0a7a7647b37a64193c8995033d42f25794ef3841f3926a2cce9bb9f04661a533"
     },
     {
       "location": "prepared",

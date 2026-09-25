@@ -1,16 +1,17 @@
 import { parseObjectDiscovery, type ObjectDiscovery } from './object-discovery.mts';
-import { isArray } from '../src/platform/is-array.mts';
+import { isArray, isRecord } from '@cssearth/core';
 import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { SceneFactory } from './browser-types.mts';
-import { isRecord } from '@cssearth/core';
 import { parseNavigationDistance } from './navigation/navigation-distance.mts';
 import type { NavigationDistance } from './navigation/navigation-distance.mts';
 
 export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole';
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
+  /** What lists and cards call the body where its classification alone would mislead (a brown dwarf is placed as a star). */
+  classificationLabel?: string;
   color: string; distance: NavigationDistance; route: string; description: string;
   loadScene(signal?: AbortSignal): Promise<SceneFactory>; worldFrame: unknown; discovery?: ObjectDiscovery;
 }
@@ -21,6 +22,7 @@ const OBJECT_INPUT_KEYS = new Set([
   "name",
   "systemName",
   "classification",
+  "classificationLabel",
   "color",
   "distance",
   "route",
@@ -46,7 +48,8 @@ export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
     throw new TypeError(`Unsupported object field: ${unsupported.join(", ")}.`);
   }
 
-  const { id, name, systemName, classification, color, distance, route, loadScene, description, worldFrame } = input;
+  const { id, name, systemName, classification, classificationLabel, color, distance, route, loadScene, description, worldFrame } = input;
+  if (classificationLabel !== undefined && !/^[A-Z][a-z]*(?: [a-z]+)*$/u.test(classificationLabel)) throw new TypeError(`Invalid classification label for ${id}: ${JSON.stringify(classificationLabel)}.`);
   if (!safeId(id) || !nonEmpty(name) || !nonEmpty(systemName) || !OBJECT_CLASSIFICATIONS.includes(classification) ||
       !/^#[0-9a-f]{6}$/u.test(color ?? "") ||
       route !== `/${id}/` || typeof loadScene !== "function" ||
@@ -60,6 +63,7 @@ export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
     name,
     systemName,
     classification,
+    ...(classificationLabel === undefined ? {} : { classificationLabel }),
     color,
     distance: parseNavigationDistance(distance),
     route,

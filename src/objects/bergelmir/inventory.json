@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bergelmir-model-shadow-alpha@2x.webp",
+      "bytes": 139660,
+      "sha256": "cded637ba569aa253195a75841baac287d521ca8c3991455f076dc000c2e0efb"
+    },
+    {
+      "location": "public",
       "filename": "bergelmir-model-shadow@2x.webp",
       "bytes": 21740,
       "sha256": "509bdbe242d4aeb23a442dbbf0676426eb88d1c676f12d7e28b9462267e286ef"
+    },
+    {
+      "location": "public",
+      "filename": "bergelmir-model-surface-alpha@2x.webp",
+      "bytes": 142176,
+      "sha256": "0a6ae274f3dcc53a5bd44e44c27cdf472d11058163c8fd5a9f95e8da8b0ae9ad"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460399,
-      "sha256": "b0e8cf4b253982d14c0fef57c8e094c443b43dc75eeaa1b2f9eeb173e56c9cf5"
+      "bytes": 394507,
+      "sha256": "138ac4099fb594a8a4c5bdcef6193a9f2cc53efc7a39a690e07c5268ed97b4fa"
     },
     {
       "location": "prepared",

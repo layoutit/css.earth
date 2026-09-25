@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "brucia-elevation-shadow-alpha@2x.webp",
+      "bytes": 542020,
+      "sha256": "a21088a4c127d42735728efcae9091efec8074d94c10b0fd76cea298fc362fb6"
+    },
+    {
+      "location": "public",
       "filename": "brucia-elevation-shadow@2x.webp",
       "bytes": 142044,
       "sha256": "dce2e8c5cde8b0f75574e5ffcaf011fc1000d267151993b22713ed7d800e1644"
+    },
+    {
+      "location": "public",
+      "filename": "brucia-elevation-surface-alpha@2x.webp",
+      "bytes": 592334,
+      "sha256": "865522bc4958d6806da9f14674a82bc06f288ff18ae15e589a06db6e8946a2c9"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "brucia-shape-shadow-alpha@2x.webp",
+      "bytes": 447848,
+      "sha256": "23fbc1675b3685822a072d465fb99a533fa31246ee58937376b79da6a591c69f"
+    },
+    {
+      "location": "public",
       "filename": "brucia-shape-shadow@2x.webp",
       "bytes": 59954,
       "sha256": "d9ba72f5552b9c63d9fc41e6931bca7e3afda782af59562cc3f0f5c3fe4c8c88"
+    },
+    {
+      "location": "public",
+      "filename": "brucia-shape-surface-alpha@2x.webp",
+      "bytes": 438960,
+      "sha256": "195e4ab781ffddbc58a35375cedf3f846aa6f929d9c1900dd3c5a4fdb23f476e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750234,
-      "sha256": "7d68f9e57e4e6117d99fcafc9d5283ce869b64f8b26a30ece818a07ddaec29c7"
+      "bytes": 640615,
+      "sha256": "b938223d319d77df24f6e7d1ac8ba2c7c7494a9e8a500dcee9d8d77b5996267d"
     },
     {
       "location": "prepared",

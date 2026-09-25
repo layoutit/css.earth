@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-8p-arecibo-shadow-alpha@2x.webp",
+      "bytes": 242798,
+      "sha256": "7a0cec39eb2afcf4be747c739af93ed393886fa71e295c8bc74d66e231bb637c"
+    },
+    {
+      "location": "public",
       "filename": "comet-8p-arecibo-shadow@2x.webp",
       "bytes": 46770,
       "sha256": "20867da0d53239eed5b97e9c04a43590dbd1dc7ee744d4e633df61bfe7284c8f"
+    },
+    {
+      "location": "public",
+      "filename": "comet-8p-arecibo-surface-alpha@2x.webp",
+      "bytes": 236672,
+      "sha256": "174dd6109d496a6b6776599383ba6243510c01cc65ff83fbdeec00b2faea7199"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-8p-model-shadow-alpha@2x.webp",
+      "bytes": 176392,
+      "sha256": "e810870f569b47097ee3250a2a23913b1dc85bc6f0a84622ae0fac73ab7a1e55"
+    },
+    {
+      "location": "public",
       "filename": "comet-8p-model-shadow@2x.webp",
       "bytes": 42440,
       "sha256": "4b42b0f9acac1fafc4529434efcf8f15f4d09749e514b1352f3612958141579e"
+    },
+    {
+      "location": "public",
+      "filename": "comet-8p-model-surface-alpha@2x.webp",
+      "bytes": 170484,
+      "sha256": "5ee5b7e4a1b18ad35bdfc3a580a663bdd8f67320847cf858c5efcd383aaea0da"
     },
     {
       "location": "public",
@@ -88,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1720810,
-      "sha256": "e79461dd40728aa3a1e9ca68e51bd70c61bf411025184933966d2d8a1fec6f2d"
+      "bytes": 1721739,
+      "sha256": "96f62f29c28180a1ad9e00dbb90fba3a9e76ff08d656addc4497b1ec71716322"
     },
     {
       "location": "prepared",

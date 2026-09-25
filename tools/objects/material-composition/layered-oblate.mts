@@ -1,6 +1,6 @@
 import { applyLinearTint } from '../color-transfer.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
-import { isArray } from '../../../src/platform/is-array.mts';
+import { sha256 } from '@cssearth/core/node';
+import { isArray, requireString, requireRecord } from '@cssearth/core';
 import type {RingMotionPoint} from './radial-motion.mts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
 interface RetainedLeaf {style:string;tag?:string;className?:string;projectiveTextureLayer?:ReturnType<typeof prepareProjectiveTextureLayer>;}
@@ -27,7 +27,6 @@ import type {prepareRadialMotionAndShadow} from './radial-motion.mts';
 import type {prepareSpectralMaterialVariants} from './spectral-variants.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import type {ReadonlyVector3} from './ellipsoid.mts';
-import {requireString,requireRecord} from '@cssearth/core';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   ringGroups:PointGroup[];

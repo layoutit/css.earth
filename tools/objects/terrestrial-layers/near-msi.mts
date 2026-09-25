@@ -1,6 +1,5 @@
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
-import { array, number, shape, text } from '@cssearth/core';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
+import { array, number, shape, text, dotN as dot } from '@cssearth/core';
 
 
 const radians = (degrees: number) => degrees * Math.PI / 180;

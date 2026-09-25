@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
 // VO acquisition keeps the digests it computes for its own untracked responses (PR #531), so its pins are checked by hash.
-import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
 import { jsonValue, type DiscoverySnapshot } from './contracts.mts';

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "vesta-elevation-shadow-alpha@2x.webp",
+      "bytes": 725822,
+      "sha256": "f63816d726bc1f08c7f6d0f55e3f2c22ad437390ca2a117e1b8147776ac918f0"
+    },
+    {
+      "location": "public",
       "filename": "vesta-elevation-shadow@2x.webp",
       "bytes": 296816,
       "sha256": "eaca432d78014b075b7afe791b54720f5249db29df737d331d9cd4104c46aa55"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-elevation-surface-alpha@2x.webp",
+      "bytes": 1061170,
+      "sha256": "bf1fabf1199c87c1f47fa10e6485444f7a7d49e4f07026c1df3f8737f07b9e5e"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "vesta-hamo-shadow-alpha@2x.webp",
+      "bytes": 643192,
+      "sha256": "9674353b44e8b75ed564879a25913383670a7af52c2b1bb2697f15cffe9a880c"
+    },
+    {
+      "location": "public",
       "filename": "vesta-hamo-shadow@2x.webp",
       "bytes": 241824,
       "sha256": "689cb94ba364ca18be0c580db5d0c841fe1e327bb2e9592f26630effbf0edc68"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hamo-surface-alpha@2x.webp",
+      "bytes": 1010496,
+      "sha256": "21687895f4defb10d0e4a61218425db6ad4e29e255b0252b81f15f2380984abf"
     },
     {
       "location": "public",
@@ -51,9 +75,21 @@
     },
     {
       "location": "public",
+      "filename": "vesta-normal-shadow-alpha@2x.webp",
+      "bytes": 672448,
+      "sha256": "6dab2e2374bacedc4708b08a9529a19d5c52dd63fa3c6f8d97c5af7c97fcc601"
+    },
+    {
+      "location": "public",
       "filename": "vesta-normal-shadow@2x.webp",
       "bytes": 336622,
       "sha256": "79e8228712b11537630b149836e781605a25ac34aa13c0f63e0e9149154a4973"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-normal-surface-alpha@2x.webp",
+      "bytes": 1131958,
+      "sha256": "26732de0c269fda8a8cfcacaa99e6923e5e6430fb0759b8a514db6daaf263a98"
     },
     {
       "location": "public",
@@ -69,9 +105,21 @@
     },
     {
       "location": "public",
+      "filename": "vesta-ratios-shadow-alpha@2x.webp",
+      "bytes": 796262,
+      "sha256": "ef471e8aef3a8404e61cf86600b130f091cf6f9ec060ec8622d5ec73437926b1"
+    },
+    {
+      "location": "public",
       "filename": "vesta-ratios-shadow@2x.webp",
       "bytes": 440176,
       "sha256": "9d54b65017c0788c9208c131e9d6ab090dd409e28d0ae715f58db0ca4726434c"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-ratios-surface-alpha@2x.webp",
+      "bytes": 1525392,
+      "sha256": "4b6cf70f87fe59112d4f3d139b68bea51d670f6c22409b79b40d411bd5b5e950"
     },
     {
       "location": "public",
@@ -87,9 +135,21 @@
     },
     {
       "location": "public",
+      "filename": "vesta-surface-shadow-alpha@2x.webp",
+      "bytes": 756180,
+      "sha256": "5970a1391e0c6a162d6001c335374860f2289ae2f231ec98acf2d8c9b4457384"
+    },
+    {
+      "location": "public",
       "filename": "vesta-surface-shadow@2x.webp",
       "bytes": 406032,
       "sha256": "b76a358da032a19a350916b906c6f83e7a9ffd21b5da2828fe06a72f6ffbf263"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-surface-surface-alpha@2x.webp",
+      "bytes": 1453568,
+      "sha256": "b330768e8c0f08bffb997017b7ce85acf5c2f22ed867a6e8e151ed5873e8adda"
     },
     {
       "location": "public",
@@ -178,8 +238,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 766172,
-      "sha256": "f667a073e944675485dd1235c6b83eeb2c1e1c458de64a5428d645cd1258dfe1"
+      "bytes": 657471,
+      "sha256": "76b991d0ca10c9b3513905f2be571f6bb66edc3c1268aa3217db0b2c0a8fc166"
     },
     {
       "location": "prepared",

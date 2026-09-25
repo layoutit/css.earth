@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "amycus-model-shadow-alpha@2x.webp",
+      "bytes": 128406,
+      "sha256": "ce723af7f69c39a8a5abd89b12ef4b373bf96e2e925cfa634989d35e578e6e04"
+    },
+    {
+      "location": "public",
       "filename": "amycus-model-shadow@2x.webp",
       "bytes": 21382,
       "sha256": "36da46f7133ecebec47c2f64fd54248d719bbb96fb41282b667ace107f260d84"
+    },
+    {
+      "location": "public",
+      "filename": "amycus-model-surface-alpha@2x.webp",
+      "bytes": 131024,
+      "sha256": "03efd5629fab40d1bfbda0dfacf4dab731872658ba6f34c224412bc8875e09d5"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457530,
-      "sha256": "18165ad6188ab5bfd12ced7cb94cbc2d9afd30881f2ce8ff71386bf60a780296"
+      "bytes": 391640,
+      "sha256": "7c1293817ee9d3d98fade7364acd5550fdde805a44e218147369ee724cf59eaa"
     },
     {
       "location": "prepared",

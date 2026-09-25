@@ -80,6 +80,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       SCENE_OBJECTS: readonly { id: string; color: string; classification: string; systemName: string }[] }).SCENE_OBJECTS;
     const { contextColour } = await import(pathToFileURL(resolve(process.cwd(), 'site/context-colour.mts')).href) as typeof import('../../site/context-colour.mts');
     const { contextAnnotationOpacity } = await import(pathToFileURL(resolve(process.cwd(), 'src/navigation/marker-presentation.mts')).href) as typeof import('../../src/navigation/marker-presentation.mts');
+    const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/jpl-mission-targets.mts')).href) as typeof import('../prepare/jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records (site/prepared-object-discovery.json): what the world's visibility reads per body.
@@ -95,6 +96,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       // The page needs these for every body without loading the registry: which bodies host systems, and what each is called.
       body.classification = object.classification; body.systemName = object.systemName;
       if (Object.hasOwn(discoveries, object.id)) body.discovery = discoveries[object.id];
+      // Only notable asteroids are map targets: JPL mission targets and those with real imagery. The rest are plain dots.
+      const imagery = (discoveries[object.id] as { imagery?: unknown } | undefined)?.imagery === true;
+      if (object.classification === 'asteroid' && !isJplMissionTarget(object) && !imagery) body.plainDot = true;
     };
     await present(input.focus);
     for (const body of input.bodies as Record<string, unknown>[]) await present(body);

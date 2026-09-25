@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dysnomia-model-shadow-alpha@2x.webp",
+      "bytes": 128064,
+      "sha256": "0c1245c73f39eacf07d97444dc61e0fd1738b93a04a96eb62dbcaefe1a4f547e"
+    },
+    {
+      "location": "public",
       "filename": "dysnomia-model-shadow@2x.webp",
       "bytes": 21136,
       "sha256": "05cf7f1fc22d6a4b5726d5f644d6cdea539eb457ddc562262ae9a2478ab1cc1b"
+    },
+    {
+      "location": "public",
+      "filename": "dysnomia-model-surface-alpha@2x.webp",
+      "bytes": 130732,
+      "sha256": "ab82b63b0d72d0ba73f3e006af2c72980a44943805540dd210502293220988c2"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458273,
-      "sha256": "72d8ab181ad9202583ff0a6a3907961f3d9424183619af4267e6f64d86b6c454"
+      "bytes": 392370,
+      "sha256": "57f37329cf1e8465d7c244a3bcec087940e997db2ec0f566c6eb02d3fa4103e0"
     },
     {
       "location": "prepared",

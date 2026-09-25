@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cressida-model-shadow-alpha@2x.webp",
+      "bytes": 145192,
+      "sha256": "5ff80880508e5689de247caf434790c27a4d2a6bcb88edf320755f178c220025"
+    },
+    {
+      "location": "public",
       "filename": "cressida-model-shadow@2x.webp",
       "bytes": 24152,
       "sha256": "638810d110c3a3d4be0c0629a67d69dcab6490eccbb7ce98d4103e996e8810d6"
+    },
+    {
+      "location": "public",
+      "filename": "cressida-model-surface-alpha@2x.webp",
+      "bytes": 145156,
+      "sha256": "0501076c32482a2a8ed1e82419515b2e7a574576b502f4bc58cd40c3fe421c54"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459673,
-      "sha256": "cf015889573bd8feb312ae834694ab5f940cedc34cbce807557a840adec20a79"
+      "bytes": 393780,
+      "sha256": "51fedd0628be5d405b7b881ae23be6a7d08d55e6718a02b40dc2312d466eae03"
     },
     {
       "location": "prepared",

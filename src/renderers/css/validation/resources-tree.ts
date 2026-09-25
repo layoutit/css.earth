@@ -27,6 +27,13 @@ export function requireAssets(value: unknown): asserts value is PreparedAssets {
   }
   unique(resourceIds, 'resource identities');
   resourceList(assets.startup, new Set(resourceIds), 'startup resources');
+  if (assets.fallbacks !== undefined) for (const input of array(assets.fallbacks, 'resource fallbacks')) {
+    const fallback = record(input, 'resource fallback', ['unsupported', 'resources']);
+    choice(fallback.unsupported, ['corner-shape'], 'fallback capability');
+    const pairs = Object.entries(record(fallback.resources, 'fallback resources'));
+    if (!pairs.length) fail('a resource fallback replaces nothing');
+    for (const [key, replacement] of pairs) { resource(key, new Set(resourceIds)); resource(replacement, new Set(resourceIds)); }
+  }
 }
 export function resource(value: unknown, resources: ReadonlySet<string>, nullable = false): void {
   if (nullable && value === null) return;

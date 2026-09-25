@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "cybele-elevation-shadow-alpha@2x.webp",
+      "bytes": 605926,
+      "sha256": "255f0c4526b9813a1b6a310b8fe9dbdaf66810b8594b0697380e3a9f3aa229ea"
+    },
+    {
+      "location": "public",
       "filename": "cybele-elevation-shadow@2x.webp",
       "bytes": 132514,
       "sha256": "26ac3b7ccf80b0696b824d82b4bc62b7ff9d8b75b96f3c7becd52b4ee38d4599"
+    },
+    {
+      "location": "public",
+      "filename": "cybele-elevation-surface-alpha@2x.webp",
+      "bytes": 659528,
+      "sha256": "e2b9ddbce3c29798ebd0b3cfe225d4e06712ef19901b01dd7e6cc7e8c4003fae"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "cybele-shape-shadow-alpha@2x.webp",
+      "bytes": 520016,
+      "sha256": "1c52dc55ed5bfeefb9fc2d4e70728ddae13be742c17acc69387f7b35a406838f"
+    },
+    {
+      "location": "public",
       "filename": "cybele-shape-shadow@2x.webp",
       "bytes": 60406,
       "sha256": "7969733b43e0c7bee361a911874d6a98fb12a0d8b0d7916c2af331c5b3bf5abe"
+    },
+    {
+      "location": "public",
+      "filename": "cybele-shape-surface-alpha@2x.webp",
+      "bytes": 513732,
+      "sha256": "5c7c55e3bc788d40651b52665d3108e602860eea35230094b78ff63bd1efbf63"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 771197,
-      "sha256": "9a169ee44ee00fb1899a2bb99bad98d203ceb23ca08477dff039011b15416e6a"
+      "bytes": 661136,
+      "sha256": "b411db156cbd20f8ef98c8953d656ba7713132c89d2912fbe7a2ca0fe8373476"
     },
     {
       "location": "prepared",

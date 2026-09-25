@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { cross3 as cross } from '../../src/platform/vector3.mts';
+import { cross3 as cross, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 // Computes, for each body, the direction to the Sun, the J2000 ecliptic
 // north pole, the body's orbit normal and its orbital velocity direction, all
@@ -26,7 +26,6 @@ import { cross3 as cross } from '../../src/platform/vector3.mts';
 
 import type { BodyId, SceneSatelliteRecord, RotationElements } from "@cssearth/astronomy";
 import { readJsonSource } from "../sources/source-values.mts";
-import { requireArray, requireRecord, requireString } from "@cssearth/core";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { SCENE_OBJECTS } from "../../site/objects.mts";

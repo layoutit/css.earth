@@ -2,7 +2,7 @@
  * diffraction limit or a deconvolved PSF. Astropy owns the model and fitting. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { sha256, sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from '../toolchain.mts';
 import { toolchainPython } from '../mast.mts';

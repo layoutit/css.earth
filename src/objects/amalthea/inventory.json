@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "amalthea-elevation-shadow-alpha@2x.webp",
+      "bytes": 276948,
+      "sha256": "c3c03b9ab72f37563c07d96e730b34ba88a0dfa9dd7667c12d01a6999f0d40ff"
+    },
+    {
+      "location": "public",
       "filename": "amalthea-elevation-shadow@2x.webp",
       "bytes": 66310,
       "sha256": "0ba81b8c63a78161c734fe94e821d52af4fa8e3a714a7e837416f2c9b382e375"
+    },
+    {
+      "location": "public",
+      "filename": "amalthea-elevation-surface-alpha@2x.webp",
+      "bytes": 330770,
+      "sha256": "146c82b6ff5cba950c99269559b2b6184ebe305a61b8d0014e3c34ea4375d824"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "amalthea-normal-shadow-alpha@2x.webp",
+      "bytes": 267570,
+      "sha256": "38535be4f0b7fa12956338212fad26a262051d911f59e1d28480b89eba2acf94"
+    },
+    {
+      "location": "public",
       "filename": "amalthea-normal-shadow@2x.webp",
       "bytes": 63824,
       "sha256": "0c40771da0fc2bc3c16444f95b238b035d0c37558cfa363f040f4a1595001c92"
+    },
+    {
+      "location": "public",
+      "filename": "amalthea-normal-surface-alpha@2x.webp",
+      "bytes": 284550,
+      "sha256": "06ed45a8c5f32a6e028eb87ba43addf5c0b2b501143ba7e2b8b299dd52459cef"
     },
     {
       "location": "public",
@@ -106,8 +130,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 746791,
-      "sha256": "149cb548bd8be06dbfedf9b19739838ebfa38737c50da3c9db1d633f2e8e7950"
+      "bytes": 637951,
+      "sha256": "d732c63b07e4316e433092a7109675007c2fe8d3bdad4157ad65ee394062bf1a"
     },
     {
       "location": "prepared",

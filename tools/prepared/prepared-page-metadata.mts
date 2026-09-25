@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { requireRecord } from '@cssearth/core';
 
 /** The page's share of the runtime: assets and controls beside the scene. It is a build output that

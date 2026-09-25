@@ -188,7 +188,12 @@ export const parseSpiceCamera = shape({kernels:array(text),kernelSet:optional(te
 export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
 /** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
 export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
-export const parseGeoCameraClosure = shape({...archivedCameraFields,provenance:array(shape({path:text}))});
+/** A camera names the files it was solved against by path; a paper it relied on is cited by URL, not pinned. */
+export const parseGeoCameraClosure = shape({...archivedCameraFields,provenance:array(value => {
+  const entry = shape({path:optional(text),url:optional(text)})(value);
+  if ((entry.path === undefined) === (entry.url === undefined)) throw new TypeError('Camera provenance names one path or one URL.');
+  return entry;
+})});
 
 /** Only fields used to interpret science values; source-specific readers own their grids. */
 export function parseSciencePalette(value: unknown) {

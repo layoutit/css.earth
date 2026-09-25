@@ -1,7 +1,5 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, array, number, requireRecord, dotN as dot } from '@cssearth/core';
 import {parseEncounterControl} from './source-records.mts';
-import {array,number,requireRecord} from '@cssearth/core';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 // Calibrated detector projection. J2000/body binding and measured pointing
 // corrections are authored preparation inputs; no cameras run in the browser.
 

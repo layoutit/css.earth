@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "byblis-elevation-shadow-alpha@2x.webp",
+      "bytes": 592814,
+      "sha256": "b6a701b6a89932436c3a14a3c5f8540ca5e7f13da488268fad7d0e6592ccfa38"
+    },
+    {
+      "location": "public",
       "filename": "byblis-elevation-shadow@2x.webp",
       "bytes": 152860,
       "sha256": "6d52565e0c76d1bf53523c292b23381e33f6010ec60a4ddf30f8f00fd22d7714"
+    },
+    {
+      "location": "public",
+      "filename": "byblis-elevation-surface-alpha@2x.webp",
+      "bytes": 639108,
+      "sha256": "d547cc0f2d9b70947fd1867b2e31bda383fc29f3f15be13781d7849c658a3bf0"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "byblis-shape-shadow-alpha@2x.webp",
+      "bytes": 488452,
+      "sha256": "eda0e0c14f248b918510b01d7de6a119fd126461f82fe4373731773c37a46952"
+    },
+    {
+      "location": "public",
       "filename": "byblis-shape-shadow@2x.webp",
       "bytes": 61182,
       "sha256": "c0024c67492d383d085830c9e8cd96ff828b6d2f04f86a19199781e8227bd520"
+    },
+    {
+      "location": "public",
+      "filename": "byblis-shape-surface-alpha@2x.webp",
+      "bytes": 482512,
+      "sha256": "6ce3dc9dea0240586b9efff3d1999d7f686368bb163256e921f3628abddf5056"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750068,
-      "sha256": "2090e25f86685ba4861e343b6b65748411bc59f6d6d91fc8c7f02aac4fa58b30"
+      "bytes": 640103,
+      "sha256": "979de550d6dd12572c83ecb2d6a99c9c97c6adcf4ef0d6d75fd2174dec6d040e"
     },
     {
       "location": "prepared",

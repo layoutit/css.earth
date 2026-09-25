@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "ilioneus-elevation-shadow-alpha@2x.webp",
+      "bytes": 527974,
+      "sha256": "0dc26f636f64de2b3c06b29531ce034022bfc338f04814880dad858ccce209c9"
+    },
+    {
+      "location": "public",
       "filename": "ilioneus-elevation-shadow@2x.webp",
       "bytes": 141826,
       "sha256": "c74689d4fad2d684e9e84062e6c95c557afb6bcb87ddc0aab1575b8ab48b9e63"
+    },
+    {
+      "location": "public",
+      "filename": "ilioneus-elevation-surface-alpha@2x.webp",
+      "bytes": 587878,
+      "sha256": "89de48b8c6c9bb2cb5ad46c083238b3af7ab61a558a7430d17545bc61ffde9b9"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ilioneus-shape-shadow-alpha@2x.webp",
+      "bytes": 437874,
+      "sha256": "d80795880ec0d7880f839baa7f032058822a399d72461ed6967ec28d4aa52659"
+    },
+    {
+      "location": "public",
       "filename": "ilioneus-shape-shadow@2x.webp",
       "bytes": 59778,
       "sha256": "135bf9613cd96d761ccc7a702407f98cbd42bd846745d62c3b3fe1681cb8188f"
+    },
+    {
+      "location": "public",
+      "filename": "ilioneus-shape-surface-alpha@2x.webp",
+      "bytes": 431472,
+      "sha256": "09b73db680baa776bef7ef7f2bf5176ab7f7e69c5de8d36dab1a4bf18672f8b8"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750773,
-      "sha256": "878347edd04bee24964dacff52ee2696bd33f8f520c0747bddab6e5661818c41"
+      "bytes": 641180,
+      "sha256": "3cc784d004d01af98418b6e6df66ddf72e31bcb3aad087a7828d08a44c98f91d"
     },
     {
       "location": "prepared",

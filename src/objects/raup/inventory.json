@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "raup-elevation-shadow-alpha@2x.webp",
+      "bytes": 406364,
+      "sha256": "1f37f6cc01077f5b855609f873efbae0a893f7e2ac8cc757e07f7bc9d3a3d1ee"
+    },
+    {
+      "location": "public",
       "filename": "raup-elevation-shadow@2x.webp",
       "bytes": 129688,
       "sha256": "5918921c8ebc45073817ec0c3b0a59527394b332a8b8b4c080668cd03c7ef8c7"
+    },
+    {
+      "location": "public",
+      "filename": "raup-elevation-surface-alpha@2x.webp",
+      "bytes": 462912,
+      "sha256": "7913e1194eea9e10965cd34c76bf4e1a4469ab22ee7832739062bc771162a582"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "raup-shape-shadow-alpha@2x.webp",
+      "bytes": 324446,
+      "sha256": "61e9195822b439a46a1bbb9b751955698148c1093936ea6583d7423108a51766"
+    },
+    {
+      "location": "public",
       "filename": "raup-shape-shadow@2x.webp",
       "bytes": 56148,
       "sha256": "368f23272fbafcf6e3661d6f1a7d06d06b0e9a40c641a9fbe83da63e6aa257d5"
+    },
+    {
+      "location": "public",
+      "filename": "raup-shape-surface-alpha@2x.webp",
+      "bytes": 316926,
+      "sha256": "093898fd706fc4f7289dbd144de1e65260ccb4779052e74a96d5a426ee69829e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748170,
-      "sha256": "21844f34f73c2dec3107b256b8e5ffc2722b982e53c715dea3f52791bd5413db"
+      "bytes": 638729,
+      "sha256": "2087efa0bcb87594fe911941d378344f4a585b5d8889255d8d4c7a2be9f6dd82"
     },
     {
       "location": "prepared",

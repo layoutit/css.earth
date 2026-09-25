@@ -4,7 +4,7 @@ import { copyFile, lstat, mkdir, mkdtemp, open, readdir, readFile, rename, rm, r
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { fileSize, writeProductRecord, type ProductInput } from '../product-record.mts';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { proposedFamilyProfiles } from './family-handlers.mts';
 import { FAMILY_IDS, type CalibrationState, type DescriptorMember, type FamilyId, type MemberRole } from './product-descriptor.mts';
 import { describeMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';

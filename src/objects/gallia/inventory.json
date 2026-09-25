@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "gallia-elevation-shadow-alpha@2x.webp",
+      "bytes": 496518,
+      "sha256": "e18b822193b7b69c61305f37a54f4b5b1fada1eebe32b4e0bdc55a5e3930d230"
+    },
+    {
+      "location": "public",
       "filename": "gallia-elevation-shadow@2x.webp",
       "bytes": 129286,
       "sha256": "1a2802ab503333cf5029bfe02011a30b66ea01e6684b896f3745db971412a6e0"
+    },
+    {
+      "location": "public",
+      "filename": "gallia-elevation-surface-alpha@2x.webp",
+      "bytes": 537976,
+      "sha256": "91e6158dc8f54f78804b06e6eafb05105b35a6e48441bfbd9da93dfdc02644f5"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "gallia-shape-shadow-alpha@2x.webp",
+      "bytes": 412972,
+      "sha256": "dc6ee8917f73353b8cc41217d0d08dda0931503e7ab25192492efc7b9ba9ef9a"
+    },
+    {
+      "location": "public",
       "filename": "gallia-shape-shadow@2x.webp",
       "bytes": 55956,
       "sha256": "c2f8f9f32d13a058fcdb307225c2782aa41e69164d529dcfb040ccbdd7936347"
+    },
+    {
+      "location": "public",
+      "filename": "gallia-shape-surface-alpha@2x.webp",
+      "bytes": 408462,
+      "sha256": "dcc5b72bc2d645abf9819e7d4646d091e92ecaeeb54361a559d4f1d6a643265d"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749192,
-      "sha256": "1e9163b288bcce10e04340a0fd2ded214f848fe07f981f8871c368afc8a06e1b"
+      "bytes": 639619,
+      "sha256": "59d454075a357ed3bf532ce02128835fc3699c5c25bc0d522c1e05cac4a920d5"
     },
     {
       "location": "prepared",

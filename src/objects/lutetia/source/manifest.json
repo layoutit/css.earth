@@ -392,22 +392,28 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
-      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
-      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry; ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public mission scientific data; retain the dataset citation and source notices; Public scientific archive; retain original notices and full source attribution.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "lutetia-shape"
+          "lutetia-shape",
+          "lutetia-observations-n20100710t154047674id4df22-img",
+          "lutetia-observations-osiris-camera-json",
+          "lutetia-n20100710t154135529id4df22-camera",
+          "lutetia-n20100710t154135529id4df22-img",
+          "lutetia-n20100710t154241240id4df22-img",
+          "lutetia-n20100710t154241240id4df22-camera"
         ],
         "size": 512,
-        "longitudeDegrees": 0,
-        "latitudeDegrees": 35,
+        "longitudeDegrees": -47.2,
+        "latitudeDegrees": 86.5,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "shape"
+        "lensId": "osiris"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "leda-38-elevation-shadow-alpha@2x.webp",
+      "bytes": 596396,
+      "sha256": "7f81fae12a5a705a3578008e8edc425cbc737e66929cff7a92d51c1d1605232b"
+    },
+    {
+      "location": "public",
       "filename": "leda-38-elevation-shadow@2x.webp",
       "bytes": 144352,
       "sha256": "453b18849cb5b262091367f5862c452e425f95ce41fd31fa559169d223cd1a00"
+    },
+    {
+      "location": "public",
+      "filename": "leda-38-elevation-surface-alpha@2x.webp",
+      "bytes": 634174,
+      "sha256": "1ad06eda1ad2eb1448ced30a0d0274b13614423468bbee13488aba5aa402a371"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "leda-38-shape-shadow-alpha@2x.webp",
+      "bytes": 504576,
+      "sha256": "57cd85ce0f45aeedc1d405c7feb5912a9a0859797075d70ae342782bd8502833"
+    },
+    {
+      "location": "public",
       "filename": "leda-38-shape-shadow@2x.webp",
       "bytes": 60050,
       "sha256": "17b966d6a54316e9fa850f31521f9a82d4de9484b72ca907d00987cc8378fcde"
+    },
+    {
+      "location": "public",
+      "filename": "leda-38-shape-surface-alpha@2x.webp",
+      "bytes": 496944,
+      "sha256": "9b11e9539447ab4f790909b76a0d4cfaded689fc2137b80480a5fb0469532feb"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750536,
-      "sha256": "fd321a6eb164e093ad08db2ea7fc8fbb8c5a9dc26c1e284ba5cad5a716da876e"
+      "bytes": 640580,
+      "sha256": "2091b94c52dfa4e8baefff3fb265b400207313ea65ce43d007ad175ed3c7b9b2"
     },
     {
       "location": "prepared",

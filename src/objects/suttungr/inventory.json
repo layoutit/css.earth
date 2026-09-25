@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "suttungr-model-shadow-alpha@2x.webp",
+      "bytes": 143160,
+      "sha256": "76b2c58e98a96758f51f6cfbe0eb0fb489f97bb78f078ef770f373a251ff92bb"
+    },
+    {
+      "location": "public",
       "filename": "suttungr-model-shadow@2x.webp",
       "bytes": 21734,
       "sha256": "921623bdce2712bcafbff83bb254ee37b9720a2e68c65c62563bd3f7a54ce92e"
+    },
+    {
+      "location": "public",
+      "filename": "suttungr-model-surface-alpha@2x.webp",
+      "bytes": 145538,
+      "sha256": "5b77b3b2e29c72f88ecb5c29542ff476dcc8a9d6ace8f02f99bdfe9cb2781c8a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459357,
-      "sha256": "e589cc684debc4440738f24e465aca3130208d32cd0b8fe05dfb9d5f8066f5aa"
+      "bytes": 393478,
+      "sha256": "5d4f7adfeed70d00834f62acb4b822fd23b98fdc4fff3831f9eb81d70f4a1451"
     },
     {
       "location": "prepared",

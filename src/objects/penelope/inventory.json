@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "penelope-elevation-shadow-alpha@2x.webp",
+      "bytes": 569146,
+      "sha256": "811761672a09fb5d42af769488fc11e09f56a745d9b7457abe4cd113ee9791ba"
+    },
+    {
+      "location": "public",
       "filename": "penelope-elevation-shadow@2x.webp",
       "bytes": 132726,
       "sha256": "bcd9dc7d646b560702074ae4c22149380549953103a1f84b31a2740c133f45b6"
+    },
+    {
+      "location": "public",
+      "filename": "penelope-elevation-surface-alpha@2x.webp",
+      "bytes": 637260,
+      "sha256": "ebcc55c684378bdb98af5bdfb8f8daef5276eadc3b1c73632f295ce011c816e1"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "penelope-shape-shadow-alpha@2x.webp",
+      "bytes": 483396,
+      "sha256": "fee4df87fbccdda304e44f3390f369bfa8350e6342ce387237c6c51610b93cdb"
+    },
+    {
+      "location": "public",
       "filename": "penelope-shape-shadow@2x.webp",
       "bytes": 60610,
       "sha256": "9aab055fb99ff6c7fe65894b596cc2e408bfbe7addb303289e4aa3569cb94511"
+    },
+    {
+      "location": "public",
+      "filename": "penelope-shape-surface-alpha@2x.webp",
+      "bytes": 475990,
+      "sha256": "7849e1e84bd4a43798ae1c833b40182d8d0aded0e4a1baeaa62ec0d844bfb77b"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749764,
-      "sha256": "0a54d5e2620062be643d23b876c90d6a2fc8dd9dcb1bda521aaafdc49498ddff"
+      "bytes": 639809,
+      "sha256": "2e793bd4cda94763e33ef5bf8fecfe774f750acc7c0b0e33d6e93e4ca599284c"
     },
     {
       "location": "prepared",

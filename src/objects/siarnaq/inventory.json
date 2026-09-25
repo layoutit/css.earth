@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "siarnaq-model-shadow-alpha@2x.webp",
+      "bytes": 141940,
+      "sha256": "469e27c73933dee3c904b8249bf9381a2dbb01fc081734b32a3f298ccd17bd38"
+    },
+    {
+      "location": "public",
       "filename": "siarnaq-model-shadow@2x.webp",
       "bytes": 18882,
       "sha256": "3ff83b190600497edcecbffca9f0c806b7d6307773056f0107f588e26ff51063"
+    },
+    {
+      "location": "public",
+      "filename": "siarnaq-model-surface-alpha@2x.webp",
+      "bytes": 145416,
+      "sha256": "c23304c9811d640ed205c591ac61869b644071b99f0cd021335fb356936077ae"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459357,
-      "sha256": "106c2797dd8f63477f5cf7fd7273e68b5944d76ec582981797497888dbfc017f"
+      "bytes": 393481,
+      "sha256": "380445fcab7e1129f432c267a51c37db70b1242cfeec3115c452bd468a99ed7f"
     },
     {
       "location": "prepared",

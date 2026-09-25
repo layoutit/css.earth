@@ -254,27 +254,6 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
-      "path": "presentation/context.png",
-      "origin": "https://doi.org/10.3847/PSJ/abd022",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-object.mts",
-      "license": "Project-authored display derivative.",
-      "consumers": [
-        "navigation"
-      ],
-      "recipe": {
-        "generator": "tools/objects/new-object.mts",
-        "inputs": [
-          "trappist-1-observational-measurements"
-        ]
-      },
-      "generator": "tools/objects/new-object.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
-      }
-    },
-    {
       "id": "trappist-1-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
       "origin": "https://doi.org/10.5281/zenodo.6674521",
@@ -294,6 +273,31 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "The archived continuous spectrum on the archive's own 336-1020 nm sampling, in the DataLink sampled layout, because Gaia publishes no sampled spectrum for a source this faint. Kept in git (15 KB) so the star prepares on a fresh checkout without GaiaXPy; regenerate it with the generator when its input changes."
+      }
+    },
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1051/0004-6361/202243880",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "inputs": [
+          "trappist-1-stellar-color",
+          "trappist-1-gaia-dr3-source",
+          "trappist-1-gaia-dr3-xp-continuous",
+          "trappist-1-gillon-2016-limb-darkening",
+          "trappist-1-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

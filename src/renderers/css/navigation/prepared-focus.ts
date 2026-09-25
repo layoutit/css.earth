@@ -1,4 +1,4 @@
-import { cross3 as cross } from '../../../platform/vector3.mts';
+import { cross3 as cross } from '@cssearth/core';
 import { createSelectionFlight, createSelectionFlightSample, sampleSelectionFlightInto } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 import type { PreparedCamera } from './prepared-camera.js';

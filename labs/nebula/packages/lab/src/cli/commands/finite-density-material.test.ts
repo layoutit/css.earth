@@ -1,6 +1,6 @@
 import {parseFiniteMaterialSettings,verifyFiniteMaterialArtifacts} from './finite-density-material-artifacts.ts';
 import {test} from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,readFile,writeFile,mkdir,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';import sharp from 'sharp';
-import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';import {sha256} from '@cssearth/volume-bake/compact-inputs/density-grid';import type {VolumeSlices} from '@cssearth/volume-core/contracts/volume-slices';
+import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';import { sha256 } from '@cssearth/core/node';import type {VolumeSlices} from '@cssearth/volume-core/contracts/volume-slices';
 test('finite XYZ material repaint preserves geometry and every decoded alpha byte across all banks',async()=>{
  const directory=await mkdtemp(join(tmpdir(),'finite-material-'));
  try{const rgba=Buffer.from([255,255,255,0,255,255,255,64,255,255,255,128,255,255,255,255]);const bytes=await sharp(rgba,{raw:{width:2,height:2,channels:4}}).png().toBuffer();

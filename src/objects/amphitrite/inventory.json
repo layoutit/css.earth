@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "amphitrite-elevation-shadow-alpha@2x.webp",
+      "bytes": 621288,
+      "sha256": "33446f8c2a91935b4e281349d4ac2dee79d73e45f652f8a7c3079280f3df4682"
+    },
+    {
+      "location": "public",
       "filename": "amphitrite-elevation-shadow@2x.webp",
       "bytes": 145748,
       "sha256": "9b59244766e94addfef5b132d695eec83e7bd97bc20d3461682c8de8f533c2a8"
+    },
+    {
+      "location": "public",
+      "filename": "amphitrite-elevation-surface-alpha@2x.webp",
+      "bytes": 676838,
+      "sha256": "1c5977e14d4548f389b593c835858cd127b5dd68afb8f5f39990c10da389e516"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "amphitrite-shape-shadow-alpha@2x.webp",
+      "bytes": 523650,
+      "sha256": "aefdf4145284b601af1dd1e51f6c6e5d4f7a3dd26a76c440c8ca968ff1db728e"
+    },
+    {
+      "location": "public",
       "filename": "amphitrite-shape-shadow@2x.webp",
       "bytes": 63064,
       "sha256": "7d3ba00358c263ff90a39badf454de399fdfd5d881c9929edd0371e878df7a6b"
+    },
+    {
+      "location": "public",
+      "filename": "amphitrite-shape-surface-alpha@2x.webp",
+      "bytes": 517362,
+      "sha256": "342d580c966c5723e3df780956cba9ab3c4dcd63b6079e9281d9aef3985a42b5"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "amphitrite-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "amphitrite-zimpol-surface-alpha@2x.webp",
+      "bytes": 571138,
+      "sha256": "d2c34618fb82626ee026698998632a5f6ea7d90d2bbffafaa84d382630032224"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1388064,
-      "sha256": "a97fe833dcecd48f2541de453e003af7baaef180cac4fbc2a8931a2470924fb3"
+      "bytes": 1389343,
+      "sha256": "c318317fa7590646872849858eef6ca018c5ed376332e06117f7e9a39916d8e1"
     },
     {
       "location": "prepared",

@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import { SOURCE_CATALOGUE } from './sources-catalog.mts';
-import { projectRoot } from '../tools/cli/project-root.mts';
+import { projectRoot } from '@cssearth/core/node';
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.

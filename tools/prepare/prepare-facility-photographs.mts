@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';

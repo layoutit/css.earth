@@ -1,5 +1,5 @@
-import { sha256 } from '../../src/platform/sha256.mts';
-import { isArray } from '../../src/platform/is-array.mts';
+import { sha256 } from '@cssearth/core/node';
+import { isArray, hasErrorCode, requireString } from '@cssearth/core';
 import assert from "node:assert/strict";
 import { randomUUID } from 'node:crypto';
 import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -7,7 +7,6 @@ import { createRequire } from "node:module";
 import { basename, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import sharp from "sharp";
-import { hasErrorCode, requireString } from '@cssearth/core';
 import type { PreparationOptions, PreparationEvent } from '../cli/run-implemented-objects.mts';
 type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
   | {phase: 'receipt-refused'; id: string; reason: string};

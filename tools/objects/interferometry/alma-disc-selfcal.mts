@@ -27,7 +27,7 @@ import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { fileSize, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);

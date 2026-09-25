@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ferdinand-model-shadow-alpha@2x.webp",
+      "bytes": 124480,
+      "sha256": "6449bfdf8c30b9368222315b8dfcae419e506bf7ae974765117abddaabb0989a"
+    },
+    {
+      "location": "public",
       "filename": "ferdinand-model-shadow@2x.webp",
       "bytes": 21110,
       "sha256": "b3507ad9d75de89da2339898e4f634b3d285ebdc0a0433164681aa24b9a83914"
+    },
+    {
+      "location": "public",
+      "filename": "ferdinand-model-surface-alpha@2x.webp",
+      "bytes": 126596,
+      "sha256": "3c84734530639278a72d162d7f436fa6d6fc953fc013f6d039a2fbbaf26edb84"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458554,
-      "sha256": "4a45ab85e20ca835cbd5b5fa1bedd818d5fbbcedb5c13fb7ff63e1be25a1d823"
+      "bytes": 392643,
+      "sha256": "c5050ec4a01da42bf5c14f82bf66e679508141946d7f9fe8eaffae39b312a786"
     },
     {
       "location": "prepared",

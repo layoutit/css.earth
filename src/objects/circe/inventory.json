@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "circe-elevation-shadow-alpha@2x.webp",
+      "bytes": 516920,
+      "sha256": "3c5f4d378059e023c84e5197c4142368f8a195a2c27ce8471a5fc6ae8b6de473"
+    },
+    {
+      "location": "public",
       "filename": "circe-elevation-shadow@2x.webp",
       "bytes": 140986,
       "sha256": "10abf662a59b026340f43fc94a2f8ac9e5feffecc35fe763b60452c2753fb68f"
+    },
+    {
+      "location": "public",
+      "filename": "circe-elevation-surface-alpha@2x.webp",
+      "bytes": 553820,
+      "sha256": "95201008d17a105b71cf9841012cc874b40a9f07d4a702ca927a89a376fa4ccd"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "circe-shape-shadow-alpha@2x.webp",
+      "bytes": 427008,
+      "sha256": "21e219bec13568801104ad707253a709526262dbd0a7623383e5f6ca7695b020"
+    },
+    {
+      "location": "public",
       "filename": "circe-shape-shadow@2x.webp",
       "bytes": 60066,
       "sha256": "6e24c56d4181b017323145b3ef4e66f2891a8241b71b537e072585681ca323d9"
+    },
+    {
+      "location": "public",
+      "filename": "circe-shape-surface-alpha@2x.webp",
+      "bytes": 420652,
+      "sha256": "701ac20008b0d9f280dcab5aa88f0bd1282002b6264dbcfb286104a75706e3fa"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748359,
-      "sha256": "bb505fb8c00b843f1e772ff07a3a15d861a35ff973c34c502818f6c3b98be009"
+      "bytes": 638705,
+      "sha256": "44aca75299f55976e9f40d51eae1b7b85f6255fbd5169707d6820a5f53e3f032"
     },
     {
       "location": "prepared",

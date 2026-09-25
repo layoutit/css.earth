@@ -4,13 +4,12 @@
  * A JWST band names its level-3 product in the draft ({ band, product }); the product is downloaded by streaming and pinned.
  * WISE tiles come from the IRSA IBE atlas search around the grid; a tile is kept when any sample of its
  * published footprint edges or its centre projects inside the grid. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256, sha256File } from '@cssearth/core/node';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { acquireMastProduct, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';

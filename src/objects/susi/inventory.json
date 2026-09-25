@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "susi-elevation-shadow-alpha@2x.webp",
+      "bytes": 444100,
+      "sha256": "d06fd8b9b44374ab2c67d9c37b7e6cec47a5082576434b0a63adf746ff79d252"
+    },
+    {
+      "location": "public",
       "filename": "susi-elevation-shadow@2x.webp",
       "bytes": 128046,
       "sha256": "4347737d60fc9f96e35aedc58ccaf14c5e2939fa182bf861544d477ae4e4596c"
+    },
+    {
+      "location": "public",
+      "filename": "susi-elevation-surface-alpha@2x.webp",
+      "bytes": 498700,
+      "sha256": "883aff89c1a2e1be051e779ffe0019566a0b40c412361f37524aa5028a9acceb"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "susi-shape-shadow-alpha@2x.webp",
+      "bytes": 362982,
+      "sha256": "8803733d6ee4dbaa77a8630471f2ed9f0f6731bd10c941622bf3089c7804d639"
+    },
+    {
+      "location": "public",
       "filename": "susi-shape-shadow@2x.webp",
       "bytes": 55988,
       "sha256": "a16f5799aa7dab1090d80c8f4f6674ec109af43f334bad21b912ebd892b009ec"
+    },
+    {
+      "location": "public",
+      "filename": "susi-shape-surface-alpha@2x.webp",
+      "bytes": 357430,
+      "sha256": "4be9de71bd98ae3efe375feb6a949419eb7167ecf114876a4cd53b081737fcc6"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748081,
-      "sha256": "670d94f9bb03b8196f39541d49507ff828e895a94a7ddfd541e5cac25e08dfb8"
+      "bytes": 638500,
+      "sha256": "cde4c143849c2d0a4add47f404140b81b941e007381f0f083fc30f02a32408e2"
     },
     {
       "location": "prepared",

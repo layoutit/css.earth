@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "golevka-elevation-shadow-alpha@2x.webp",
+      "bytes": 682542,
+      "sha256": "4d9134251b6200d0469371a71a891291e6369a851afa7617af26464d7771ac86"
+    },
+    {
+      "location": "public",
       "filename": "golevka-elevation-shadow@2x.webp",
       "bytes": 213668,
       "sha256": "56a0b5a38a06ad51cff97f3ce3927108a10b432e606d263b3bfadff0b5002211"
+    },
+    {
+      "location": "public",
+      "filename": "golevka-elevation-surface-alpha@2x.webp",
+      "bytes": 740608,
+      "sha256": "c9d4e6b13147255fbbf9da524e5a372de5907458092076cebb43cf3e5e8eb63c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "golevka-shape-shadow-alpha@2x.webp",
+      "bytes": 540738,
+      "sha256": "9383f8a73a538014b2904d12f3f947ce8e4b1db671a9a1cdc1d17d92efdce555"
+    },
+    {
+      "location": "public",
       "filename": "golevka-shape-shadow@2x.webp",
       "bytes": 69986,
       "sha256": "fddd53e863087ed7935b505e5af157504b41a4f05b539509c72ae66fbd3656ec"
+    },
+    {
+      "location": "public",
+      "filename": "golevka-shape-surface-alpha@2x.webp",
+      "bytes": 530008,
+      "sha256": "2ab8ac77b91c40d14b617f730470ffdbbfc43641d86b25192bfd8fea9acca607"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 745572,
-      "sha256": "c176e5b79ef0cbb54776d624ee2f0df6029ceca02ca4639942a066770d25ee02"
+      "bytes": 636222,
+      "sha256": "06c69776e3308aad22042e17522a715aed2fea671d4ac085e9e8fbdfab1174cb"
     },
     {
       "location": "prepared",

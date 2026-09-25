@@ -8,8 +8,8 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { readFitsImage } from '../../fits/fits.mts';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { median, offsetComponents, solveConstantOffsets } from './background-offsets.mts';
+import { hasErrorCode, median, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { offsetComponents, solveConstantOffsets } from './background-offsets.mts';
 
 export const WISE_ATLAS_BANDS = { W1: { band: 1, magzp: 20.5 }, W2: { band: 2, magzp: 19.5 }, W3: { band: 3, magzp: 18 }, W4: { band: 4, magzp: 13 } } as const;
 export type WiseBand = keyof typeof WISE_ATLAS_BANDS;

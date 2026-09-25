@@ -41,24 +41,20 @@ async function fixture(run: (fixture: Fixture) => Promise<void>) {
   finally { await rm(root, { recursive: true, force: true }); }
 }
 
-test('source CSS compiles selection timing and only immutable single-sided leaf planes', async () => fixture(async ({ root, definition }) => {
+test('source CSS compiles selection timing', async () => fixture(async ({ root, definition }) => {
   const prepared = await preparePresentationBindings(definition, root);
   assert.ok(prepared.motion);
   assert.equal(prepared.motion.length, 1);
   assert.equal(prepared.motion[0].target, 2);
   assert.equal(prepared.motion[0].duration, 12000);
   assert.deepEqual(prepared.motion[0].timings, [{ when: { lensId: 'slow' }, duration: 36000 }]);
-  assert.deepEqual(prepared.facing, [{ target: 5, plane: [0, 0, 1, -4], tolerance: 2 ** -23 }]);
-  // Selection visibility has another owner, even if its plane is unchanged.
-  const writes: PreparedWrite[] = [...definition.variants[1].writes, { kind: 'style', target: 5, name: 'visibility', value: 'hidden' }];
-  const changed: PresentationSource = { ...definition, variants: definition.variants.map((variant, index) => index === 1 ? { ...variant, writes } : variant) };
-  assert.deepEqual((await preparePresentationBindings(changed, root)).facing, []);
+  // Back faces are the browser's: preparation publishes no facing planes.
+  assert.equal('facing' in prepared, false);
 }));
 
-test('explicit two-sided source leaves retain browser coverage without a hidden-facing publisher', async () => fixture(async ({ root, definition }) => {
+test('explicit two-sided source leaves keep their own style', async () => fixture(async ({ root, definition }) => {
   const tree = { ...definition.tree, nodes: definition.tree.nodes.map((node, index) => index === 5 ? { ...node, style: 'backface-visibility:visible' } : node) };
   const prepared = await preparePresentationBindings({ ...definition, tree }, root);
-  assert.deepEqual(prepared.facing, []);
   assert.equal(prepared.tree.nodes[5].style, 'backface-visibility:visible');
   assert.equal(prepared.tree.nodes.length, definition.tree.nodes.length);
 }));
@@ -74,10 +70,9 @@ test('repreparation starts from canonical topology and reproduces the final dept
   const root = fileURLToPath(new URL('../../', import.meta.url));
   const source = await mimasRuntime(root);
   const first = await preparePresentationBindings(source, root);
-  assert.ok(first.facing && first.surfaceHit && first.depthPartitions && first.tree.activationGroups);
+  assert.ok(first.surfaceHit && first.depthPartitions && first.tree.activationGroups);
   const second = await preparePresentationBindings(first, root);
   assert.deepEqual(second, first);
-  assert.equal(first.facing.length, first.surfaceHit.triangles.length);
   assert.ok(first.depthPartitions.groups.length > 1);
   assert.ok(first.tree.activationGroups.length < 40);
   // A new local frame owner invalidates the old partition instead of retaining

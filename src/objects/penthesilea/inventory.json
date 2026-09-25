@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "penthesilea-elevation-shadow-alpha@2x.webp",
+      "bytes": 508470,
+      "sha256": "a6fc5d869743a1c8018854d26c38e7d7c4408d61fefcc607387cbf9ae72a7615"
+    },
+    {
+      "location": "public",
       "filename": "penthesilea-elevation-shadow@2x.webp",
       "bytes": 128908,
       "sha256": "3ca64d34504d95a5c62918b4934d892bfc6dd77f005f5d871fa5907c7d450bad"
+    },
+    {
+      "location": "public",
+      "filename": "penthesilea-elevation-surface-alpha@2x.webp",
+      "bytes": 541076,
+      "sha256": "9aa03904f42d5129f1aa97f183d74f06f0e305ce539e0dcfa85ae6e488073ac5"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "penthesilea-shape-shadow-alpha@2x.webp",
+      "bytes": 428816,
+      "sha256": "a05860316dffa62e882f775ece0d00b3a9aa420f12a77bba7cd0e741a16678ce"
+    },
+    {
+      "location": "public",
       "filename": "penthesilea-shape-shadow@2x.webp",
       "bytes": 59924,
       "sha256": "637b87456e3054314e387b1069dcf4e6d8a4a3a3b960cc746f872d6852ae5716"
+    },
+    {
+      "location": "public",
+      "filename": "penthesilea-shape-surface-alpha@2x.webp",
+      "bytes": 419376,
+      "sha256": "fc1eb8426570325825876eba22f40190d9ad8d5e817ce7df6f6fae2ee0a5e9a4"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 753498,
-      "sha256": "4cb4d30fa6271c2f288706d6224b9eb1de4555b3022f7d21d6a50a484527cdbd"
+      "bytes": 644061,
+      "sha256": "4f8ce29e5fb5610a4dc4494b45e219c4eb2790e5b073a2b078545308160aee7e"
     },
     {
       "location": "prepared",

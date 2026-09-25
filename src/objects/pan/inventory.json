@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "pan-elevation-shadow-alpha@2x.webp",
+      "bytes": 605916,
+      "sha256": "23f57fc544ef5d0c75c8f23de34926b0386308f50a66187c214c50c6bcfcaa70"
+    },
+    {
+      "location": "public",
       "filename": "pan-elevation-shadow@2x.webp",
       "bytes": 137416,
       "sha256": "2bbb1a01c8d74441590a0779e97c0a7160689df5a22c43221ba399b1f2199794"
+    },
+    {
+      "location": "public",
+      "filename": "pan-elevation-surface-alpha@2x.webp",
+      "bytes": 666594,
+      "sha256": "e3d208985f5f30bba9fc2f08302f50208e95118df9199a366c0db5a89de6a69a"
     },
     {
       "location": "public",
@@ -27,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "pan-filter-color-surface-alpha@2x.webp",
+      "bytes": 604938,
+      "sha256": "4d93324c100df77a67de65cc873916d064c9443399c3bea985fed7b31baa59c7"
+    },
+    {
+      "location": "public",
       "filename": "pan-filter-color-surface@2x.webp",
       "bytes": 163404,
       "sha256": "b644164062b8e8384e1c9bfb9d3b9d573eae61828629c5e8a63fefff529b54b7"
@@ -39,9 +57,21 @@
     },
     {
       "location": "public",
+      "filename": "pan-normal-shadow-alpha@2x.webp",
+      "bytes": 582170,
+      "sha256": "4293c1b846bb0825518f15f9b319be2d8f30477c321bb2a90672b6159e82d298"
+    },
+    {
+      "location": "public",
       "filename": "pan-normal-shadow@2x.webp",
       "bytes": 137158,
       "sha256": "e1e12ba7a36f8a071ee8950baebbe0eada7ec7e7f12813d637fe427353ddb2a3"
+    },
+    {
+      "location": "public",
+      "filename": "pan-normal-surface-alpha@2x.webp",
+      "bytes": 607548,
+      "sha256": "e640efb3d355547f628a8e2ba052e9bfda31c3c7b3879b76d7b45ca07109a0ab"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 742550,
-      "sha256": "ba9a1f32b316aff41157ba6df0b11e07f94fd85eaa20b4356b1e9a9766bb1909"
+      "bytes": 633078,
+      "sha256": "54b0cff68f3a48a5dd01df689e96c0d6282a86a14fefdf5964487ee680d8111f"
     },
     {
       "location": "prepared",

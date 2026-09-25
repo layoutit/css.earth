@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "schorria-elevation-shadow-alpha@2x.webp",
+      "bytes": 483000,
+      "sha256": "b3f55e9e8678a1933d575b922e77261ed88c8f326da117900cca94d09eb0cd85"
+    },
+    {
+      "location": "public",
       "filename": "schorria-elevation-shadow@2x.webp",
       "bytes": 120920,
       "sha256": "18447e444ffea8df7493406ecf4b5216b629f63beaa80045e0e2d75a698f4f6f"
+    },
+    {
+      "location": "public",
+      "filename": "schorria-elevation-surface-alpha@2x.webp",
+      "bytes": 552682,
+      "sha256": "155628dc4bddbdd661f8b59ddecb765d9091e6842c1e0e179f464983bd631858"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "schorria-shape-shadow-alpha@2x.webp",
+      "bytes": 407156,
+      "sha256": "6f06bffd25daa0666ac1b6158e84b869b8d240fe3d313bcfe0718d0b54a4e832"
+    },
+    {
+      "location": "public",
       "filename": "schorria-shape-shadow@2x.webp",
       "bytes": 53274,
       "sha256": "26f783250616369c707c17e3d2a4485a0c5ee9466a8a94c1f3ad47d161c7f30a"
+    },
+    {
+      "location": "public",
+      "filename": "schorria-shape-surface-alpha@2x.webp",
+      "bytes": 400112,
+      "sha256": "931d502221c2020e639054fdf89b9f65d3746004ac2097f2c0534dddcb3b41c0"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 752142,
-      "sha256": "f4adb96edfb6edab9c6f5169e6e0c73695abc9effc2c2eccd03fcdace0249394"
+      "bytes": 642773,
+      "sha256": "4d8d6abca8b0a16ed6487cc658fcf6405433bc90e6f4eef0806f7ca488ccddf2"
     },
     {
       "location": "prepared",

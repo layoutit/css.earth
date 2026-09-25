@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "goibniu-model-shadow-alpha@2x.webp",
+      "bytes": 126648,
+      "sha256": "c075d524f7c9943cbc7982fd3c3f8584f6bf86c315c95627223612ff7eca0f0b"
+    },
+    {
+      "location": "public",
       "filename": "goibniu-model-shadow@2x.webp",
       "bytes": 21934,
       "sha256": "e31428090fbe3c36078f7b886f0dbd3fa80f68669759f4ec61487d2eb4529d19"
+    },
+    {
+      "location": "public",
+      "filename": "goibniu-model-surface-alpha@2x.webp",
+      "bytes": 127352,
+      "sha256": "86cfac2093231dfc4ea79bd312bea938d4df32abafc1cafce17ff67a2dfdedb7"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458790,
-      "sha256": "a587ce13ac0c5a6d30296767a03845a6973cb8734ea4b8c5643a1539d360bbc3"
+      "bytes": 392849,
+      "sha256": "25019aadade58fdfba44d112070e293ee9731e46ad238cfe79e894a8997a04b2"
     },
     {
       "location": "prepared",

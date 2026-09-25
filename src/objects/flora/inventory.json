@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "flora-elevation-shadow-alpha@2x.webp",
+      "bytes": 625860,
+      "sha256": "5db31b7a800e6ec6cc854d0cd69f35cef12086800cd2cb06a37f03940c6ec2f1"
+    },
+    {
+      "location": "public",
       "filename": "flora-elevation-shadow@2x.webp",
       "bytes": 148184,
       "sha256": "94aae91f59ace60147cf37cb50e3599b3388e3dd82a26845654a8706bd3f952e"
+    },
+    {
+      "location": "public",
+      "filename": "flora-elevation-surface-alpha@2x.webp",
+      "bytes": 684112,
+      "sha256": "cc0af36893938c8608961f9a49f19ee4f87331491e896222b3feab79494d337a"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "flora-shape-shadow-alpha@2x.webp",
+      "bytes": 531398,
+      "sha256": "249defcc26a4bd437bb27f4c2c1f49296051753519e60d08317f0bd0f8b7f545"
+    },
+    {
+      "location": "public",
       "filename": "flora-shape-shadow@2x.webp",
       "bytes": 64288,
       "sha256": "4cfe9ad459e39cd8a3e7436805922b44b745a0f77d08ff65544470b0293f841b"
+    },
+    {
+      "location": "public",
+      "filename": "flora-shape-surface-alpha@2x.webp",
+      "bytes": 523484,
+      "sha256": "5c01dbf33cd762da4d5cd21c4b9b16479cf0a1b0a0169cebd576030571c405aa"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "flora-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "flora-zimpol-surface-alpha@2x.webp",
+      "bytes": 597564,
+      "sha256": "0b58817f36c16f1b48e02e29cda46e98fd3e22bbba69ca0b81786a13ac225dba"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1382279,
-      "sha256": "b80cecca5631f39fdefe5da0cd27bb2128fa4fff8f8102ee71379091c6a5b011"
+      "bytes": 1383478,
+      "sha256": "a332262dcaf835c2b4fd6cd4d2e3da0262875703f5f39d580c8a2b50f825242f"
     },
     {
       "location": "prepared",

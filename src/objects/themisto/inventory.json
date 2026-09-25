@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "themisto-model-shadow-alpha@2x.webp",
+      "bytes": 128394,
+      "sha256": "317e871af3df7feb8d70b999cd520bb7fc97ea044fb6fa2ef1b12eabffb53261"
+    },
+    {
+      "location": "public",
       "filename": "themisto-model-shadow@2x.webp",
       "bytes": 21190,
       "sha256": "6a9d4ccf2c1f5e3e635efa3d88d08a11122b8ed72089dbf3887af4e17a0079a2"
+    },
+    {
+      "location": "public",
+      "filename": "themisto-model-surface-alpha@2x.webp",
+      "bytes": 132040,
+      "sha256": "b8df40be6de71bd6150942f779522f867a5c5400e4f81cbb519c9bde09d312a0"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458621,
-      "sha256": "1d34dc5f7085282795effd81a36cc47be37c2bb2bd8cb61cb06800acc10a2850"
+      "bytes": 392724,
+      "sha256": "fa53410c20a2d327ddd2e2c5f4650ea8399eb203b0114d5f705c2fc0c8d6439b"
     },
     {
       "location": "prepared",

@@ -1,4 +1,4 @@
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 /**
  * Georeferenced photographs: archive backplanes (OSIRIS GEO, AMICA Gaskell, PDS4 geometry cubes), archived camera closures
  * (OSIRIS reflectance, L'LORRI, New Horizons LORRI and MVIC) and cameras derived from SPICE kernels. GEO_SCHEMAS states what
@@ -181,6 +181,7 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     // The camera names the source files it was solved against; the manifest owns their identity.
     if (!Array.isArray(closure.provenance) || closure.provenance.length < 3 || !closure.provenance.some(entry => entry.path === config.geometry.radialTerrain.path)) throw new Error('Camera lacks its source-mesh closure.');
     for (const entry of closure.provenance) {
+      if (entry.path === undefined) continue;
       if (!safePath(entry.path)) throw new Error('Camera source provenance path is unsafe.');
       await source.validatePath(entry.path);
     }

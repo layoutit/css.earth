@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "albion-model-shadow-alpha@2x.webp",
+      "bytes": 127692,
+      "sha256": "2b1e7e3991228b6684d86500a52f6259f73f08c2a635a58ff566237bbd907d9c"
+    },
+    {
+      "location": "public",
       "filename": "albion-model-shadow@2x.webp",
       "bytes": 21570,
       "sha256": "5d9d557ceed56512af9428fa8e3a339a69d6f0555d324c65a79ccce1a72a16e6"
+    },
+    {
+      "location": "public",
+      "filename": "albion-model-surface-alpha@2x.webp",
+      "bytes": 128734,
+      "sha256": "65bac24a6f27a5bb1229a8911a1f2c0f8b2df1ac540428b3a683319f40644a1e"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457473,
-      "sha256": "f5ce580b27a0c248285a9bb7d641475979063e44b58016d128f46ade6fdd3d12"
+      "bytes": 391547,
+      "sha256": "3bd0213d446bc22d8070ab3a2a5f550729e424d15529d1d763f05f08f51d6a01"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2003-vs2-model-shadow-alpha@2x.webp",
+      "bytes": 141820,
+      "sha256": "7a1e8557a6d43a3682396b82462d80ce1344e27871752fd4f22cf8bab6385cd5"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2003-vs2-model-shadow@2x.webp",
       "bytes": 22376,
       "sha256": "11087d8c0fb70a5285a008a0606fcb81263ddbf131d3bfbd93f6198c30d517dc"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2003-vs2-model-surface-alpha@2x.webp",
+      "bytes": 142514,
+      "sha256": "eb023a05761816fe97ca848191fe5cb2fa1621dfc233396ff79653d05ebaa765"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 464772,
-      "sha256": "7dd9d5f2e5ab06a215dd0c4e6a56ea075374adf50efe8368939aea3b806ef0b5"
+      "bytes": 399062,
+      "sha256": "9f91bf20a8557e3165b15ad2b85d41994659533d2d72a12a0cbcdcd3a6e7d4cb"
     },
     {
       "location": "prepared",

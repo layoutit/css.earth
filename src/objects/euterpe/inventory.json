@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "euterpe-elevation-shadow-alpha@2x.webp",
+      "bytes": 567056,
+      "sha256": "a01e9f223288e5a17cb9bfb51e1d8163d170acd12f05dcdb40c3b3abedfe84fa"
+    },
+    {
+      "location": "public",
       "filename": "euterpe-elevation-shadow@2x.webp",
       "bytes": 145468,
       "sha256": "8da35261843446c04ca972378cdf9b5797a77fc9933aedba761d3e846fcca692"
+    },
+    {
+      "location": "public",
+      "filename": "euterpe-elevation-surface-alpha@2x.webp",
+      "bytes": 606252,
+      "sha256": "8ec9c9ac3fb234aaf28904f2236b7ec7590ed2dbf588bd328bd972fae51eae7e"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "euterpe-shape-shadow-alpha@2x.webp",
+      "bytes": 467672,
+      "sha256": "6faef002b0e17e30abfe8ad2e727a1f2eb79dc120b8aefb77e084e4401875845"
+    },
+    {
+      "location": "public",
       "filename": "euterpe-shape-shadow@2x.webp",
       "bytes": 59762,
       "sha256": "c64bd602eabccba342a9aebf6d433f6bd522f9a283bdc69b511344eb4f739d56"
+    },
+    {
+      "location": "public",
+      "filename": "euterpe-shape-surface-alpha@2x.webp",
+      "bytes": 463176,
+      "sha256": "74867eb781e307cee3c857ab7a20ef63de838b63cbe636fb3d43d102dd728080"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750238,
-      "sha256": "43d855e58a1c980e9fecdd16dd1e55658b7da5de7092f680e9f8cabbba2580e1"
+      "bytes": 640864,
+      "sha256": "c88a697b296ef0d86454421ae043e1687b6522c26759383aa86257a00487798e"
     },
     {
       "location": "prepared",

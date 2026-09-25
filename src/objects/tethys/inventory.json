@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-elevation-shadow-alpha@2x.webp",
+      "bytes": 1297148,
+      "sha256": "5a3327b3055c612038f94f09f6d942c4a0129d7a9c7580800a6c94f97d5a6669"
+    },
+    {
+      "location": "public",
       "filename": "tethys-elevation-shadow@2x.webp",
       "bytes": 560218,
       "sha256": "ae493f2d58af4e0c999bb6dad86dc413a996e5e095e730d640b6765d8e7c54e3"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-elevation-surface-alpha@2x.webp",
+      "bytes": 1878350,
+      "sha256": "96b1c72aade333652d5f74615777d51b2a31868dfe43c6bd27f27bef70ecfe31"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-enhanced-shadow-alpha@2x.webp",
+      "bytes": 1805930,
+      "sha256": "736857b29e4ecbf29954c416bfa226648370623345cd746269ca065103126ff7"
+    },
+    {
+      "location": "public",
       "filename": "tethys-enhanced-shadow@2x.webp",
       "bytes": 1864754,
       "sha256": "0e81c87c31120ee3ded11c921136fae6320108c708361d74459c1cd0df20c01a"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-enhanced-surface-alpha@2x.webp",
+      "bytes": 3959338,
+      "sha256": "ab67e45cb012353f2d3e1f921a88560de175ab347fba85b58e118fb6ad1adfd3"
     },
     {
       "location": "public",
@@ -57,9 +81,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-ice-absorption-shadow-alpha@2x.webp",
+      "bytes": 273382,
+      "sha256": "130609030d2d9ad64f04aec0f97297b6953823b374e5de3741ee0cbc7f2a9d40"
+    },
+    {
+      "location": "public",
       "filename": "tethys-ice-absorption-shadow@2x.webp",
       "bytes": 148208,
       "sha256": "a268bdef939abf5369ebf43037af6a864d7025ea02121fe276f5cbf55a5364ac"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-ice-absorption-surface-alpha@2x.webp",
+      "bytes": 179534,
+      "sha256": "0249da811d9f459830764ddc616523bd68dad186b6d54276f362178c98ef42f4"
     },
     {
       "location": "public",
@@ -75,9 +111,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-infrared-shadow-alpha@2x.webp",
+      "bytes": 108560,
+      "sha256": "a28bfbbb4b2e1abed7513fe38e804f83eae75a2cf29d788fac25ac5affc0cada"
+    },
+    {
+      "location": "public",
       "filename": "tethys-infrared-shadow@2x.webp",
       "bytes": 27906,
       "sha256": "d83f68d67e9001423396c1e736c697786bd47ce6738e85692c831bb2d590789b"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-infrared-surface-alpha@2x.webp",
+      "bytes": 113746,
+      "sha256": "85eb189b01098de5a01b8e58cc50de9a99ab6fe0d520d03cd215923d26ea92c7"
     },
     {
       "location": "public",
@@ -93,9 +141,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-iss-shadow-alpha@2x.webp",
+      "bytes": 1152504,
+      "sha256": "9c1c23e5dd494c31f0cb959718c3362f98dfe77da8525d248bb6d625ecf9752a"
+    },
+    {
+      "location": "public",
       "filename": "tethys-iss-shadow@2x.webp",
       "bytes": 400658,
       "sha256": "2bab990ae6355878ae3c4d6b0cdcfad5af0deeb356dd12796f1b677c9a0058ab"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-iss-surface-alpha@2x.webp",
+      "bytes": 1281212,
+      "sha256": "4626364f1abe02b6cb4e2db8d82f502ff61b8894e80714961a71eb38d89f23a0"
     },
     {
       "location": "public",
@@ -111,9 +171,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-normal-shadow-alpha@2x.webp",
+      "bytes": 1822112,
+      "sha256": "2e5d14ad2a90924ab1eb840f2b9707182b63d7789689ccd09db292d98eaf9420"
+    },
+    {
+      "location": "public",
       "filename": "tethys-normal-shadow@2x.webp",
       "bytes": 1889438,
       "sha256": "240a2285e8aae152d7f5bd83da0f75f4998dd74421eaf36644f21b30a39fe573"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-normal-surface-alpha@2x.webp",
+      "bytes": 3315936,
+      "sha256": "4403a4bde12107331b164a368505088a8a5ade33165e55578e36d1848b44b6b4"
     },
     {
       "location": "public",
@@ -135,9 +207,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-relative-albedo-shadow-alpha@2x.webp",
+      "bytes": 7834552,
+      "sha256": "76a4d21ab2ffb2ac733b27d6596ea8fb34383b99c70b0adc6430c81ce435238b"
+    },
+    {
+      "location": "public",
       "filename": "tethys-relative-albedo-shadow@2x.webp",
       "bytes": 6591546,
       "sha256": "f85f4779c8ab4a3bc5b4d0a9d15d271537db3a027626e006766ea2e0a5c85579"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-relative-albedo-surface-alpha@2x.webp",
+      "bytes": 10297760,
+      "sha256": "c4dd9a9b15ff61d37fe8616d6df2aa6ad9c15d83a7fa5f4f869ae96dcadc0081"
     },
     {
       "location": "public",
@@ -153,9 +237,21 @@
     },
     {
       "location": "public",
+      "filename": "tethys-shape-shadow-alpha@2x.webp",
+      "bytes": 903014,
+      "sha256": "bef188e7f6b66aea9309004fdf7d29cf5d0047a622af36bc389f9f9f537aa807"
+    },
+    {
+      "location": "public",
       "filename": "tethys-shape-shadow@2x.webp",
       "bytes": 110028,
       "sha256": "7707bfd4d4d99513c4da8cf92b1f17baf2f0fd0a498d7399e4742cc5d50eca74"
+    },
+    {
+      "location": "public",
+      "filename": "tethys-shape-surface-alpha@2x.webp",
+      "bytes": 874820,
+      "sha256": "c99b77d1afffae13ac6c3420321b2839e68e9bfa91e5a555f116c8cae8cc5535"
     },
     {
       "location": "public",
@@ -262,8 +358,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1589707,
-      "sha256": "61989e1c5fdd318f9bac06961e26a46124f9a58497e34fe39334a29b2bb78833"
+      "bytes": 1593420,
+      "sha256": "e7713c6010b2bf2bf87f311524cd240a479ab2c3831a258312d2fbcfd4b3e000"
     },
     {
       "location": "prepared",

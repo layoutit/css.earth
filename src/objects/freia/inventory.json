@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "freia-elevation-shadow-alpha@2x.webp",
+      "bytes": 584834,
+      "sha256": "c0a57c7562ee7e0854e3754e8008b5c4e71327088b0127bee1201da1315ae1e7"
+    },
+    {
+      "location": "public",
       "filename": "freia-elevation-shadow@2x.webp",
       "bytes": 138216,
       "sha256": "2858e860f8c5965ad29283619726076ff548b69c0a6a034b9391f22576627044"
+    },
+    {
+      "location": "public",
+      "filename": "freia-elevation-surface-alpha@2x.webp",
+      "bytes": 632606,
+      "sha256": "3f966563c08e65c1fa086caee1e348e62211839f41e51be078aaf5e657ca033c"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "freia-shape-shadow-alpha@2x.webp",
+      "bytes": 495788,
+      "sha256": "81c8e33e97678f421d4c256ef41a849be530fe428f659562d5abf35c933baf46"
+    },
+    {
+      "location": "public",
       "filename": "freia-shape-shadow@2x.webp",
       "bytes": 62216,
       "sha256": "3aa6d8258cbdf62b1a9838622ea464ad33dfa4def4a1de28b1f7db9fa1de1ee0"
+    },
+    {
+      "location": "public",
+      "filename": "freia-shape-surface-alpha@2x.webp",
+      "bytes": 486966,
+      "sha256": "d131284abb45fc1905fbdb9353a9b47b52ad24676d2c7360c89c2115462a514a"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750061,
-      "sha256": "66fe3343eb99fb53f740c1b8ef26281f0eea8d172b5bf4d6d82d8a2aca35cf4e"
+      "bytes": 640186,
+      "sha256": "e9a0e2c3b8c99adb88c1b13ac2c4cbf60e28c990f22dc1a2c3453c390db2adb4"
     },
     {
       "location": "prepared",

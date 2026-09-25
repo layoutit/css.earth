@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "isonoe-model-shadow-alpha@2x.webp",
+      "bytes": 129614,
+      "sha256": "68fe5e2f9f296412aade7f3b13757153bb198098a2fc6589ddf21cc491276217"
+    },
+    {
+      "location": "public",
       "filename": "isonoe-model-shadow@2x.webp",
       "bytes": 21106,
       "sha256": "947767f2d8e751f79c05d95d948a361ce86d540d1da643cbc4811258a9566262"
+    },
+    {
+      "location": "public",
+      "filename": "isonoe-model-surface-alpha@2x.webp",
+      "bytes": 131836,
+      "sha256": "e777d0f07d9c4f508549bbc00f01ce9c1b23bdf0aa899b9a580128c9208aa21f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457382,
-      "sha256": "bed6958a7a96c56d7c5bccb2ca572419a4a68bd8f94fbd370f1349ce4c6109d4"
+      "bytes": 391486,
+      "sha256": "34c917b4d549583dc01080dbfc5dc2be24c386d997ec73e1f79cb6f34fa68ddd"
     },
     {
       "location": "prepared",

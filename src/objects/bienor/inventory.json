@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bienor-model-shadow-alpha@2x.webp",
+      "bytes": 129302,
+      "sha256": "0da6bf7dfa48adc3385aac20ff167342145e7218dd90f8128ae346205a079131"
+    },
+    {
+      "location": "public",
       "filename": "bienor-model-shadow@2x.webp",
       "bytes": 19798,
       "sha256": "dce15c6b5398416ef7b16cb1083988717b36c9f6622e117ec9dc89695214fe62"
+    },
+    {
+      "location": "public",
+      "filename": "bienor-model-surface-alpha@2x.webp",
+      "bytes": 131814,
+      "sha256": "e3d38a422293116f17a257320356d6a51b1da9e7ab3add37fb5fbf7757e8324c"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 446979,
-      "sha256": "96958c2a65b30bf9c57c6bbe163d56faad3cbec4f71aae23cfb1651b8021c735"
+      "bytes": 381209,
+      "sha256": "21c5f0ada267d8b95f4d707ddbce496c2380ede4701b794b5257d6f724b190ba"
     },
     {
       "location": "prepared",

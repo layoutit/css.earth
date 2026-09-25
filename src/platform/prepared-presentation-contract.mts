@@ -1,5 +1,5 @@
 import { requireTextureLevels } from './prepared-texture-levels.mts';
-import { isArray } from './is-array.mts';
+import { isArray } from '@cssearth/core';
 import type { ObjectControls } from "../renderers/css/runtime/object-contract.ts";
 import type { ObjectRuntimeDefinition } from "../renderers/css/runtime/object-runtime-types.ts";
 import type { PreparedWrite } from "../renderers/css/rendering/prepared-presentation.ts";
@@ -78,7 +78,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "surfaceHit", "textureLevels", "features"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "surfaceHit", "textureLevels", "features"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -500,18 +500,6 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if (frame.offset < 0 || frame.offset > 1) fail("motion offset must be within animation");
     }
   }
-  if (plan.facing !== undefined) {
-    const targets = new Set();
-    for (const face of array(plan.facing, 'facing planes')) {
-      record(face, 'facing plane', ['target', 'plane', 'tolerance']); node(face.target);
-      if (!(Number.isFinite(face.tolerance) && face.tolerance > 0)) fail('native backface tolerance must be positive');
-      if ([tree.camera, tree.scene].includes(face.target) || targets.has(face.target) || tree.nodes.some(node => node.parent === face.target)) fail('facing target must be a unique prepared leaf');
-      if (!ancestor(face.target, tree.scene) && ![...partitionScenes].some(scene => ancestor(face.target, scene))) fail('facing target must belong to scene');
-      targets.add(face.target);
-      if (array(face.plane, 'facing plane coordinates').length !== 4) fail('facing plane needs four coordinates');
-      face.plane.forEach(value => finite(value, 'facing plane coordinate'));
-      if (Math.abs(Math.hypot(...face.plane.slice(0, 3)) - 1) > 1e-6) fail('facing plane must have a unit normal');
-    }
-  }
+
   return plan;
 }

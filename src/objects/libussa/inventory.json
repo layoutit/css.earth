@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "libussa-elevation-shadow-alpha@2x.webp",
+      "bytes": 519822,
+      "sha256": "91a0c0e8180333074d91f3e2bcfcaf3f7de4aa4658d0a87d4a9a4275cba06207"
+    },
+    {
+      "location": "public",
       "filename": "libussa-elevation-shadow@2x.webp",
       "bytes": 138756,
       "sha256": "a681666d9a8f99d2a5353f898e0b48adb247a47cda9078ccc66ed1c523faebf9"
+    },
+    {
+      "location": "public",
+      "filename": "libussa-elevation-surface-alpha@2x.webp",
+      "bytes": 548576,
+      "sha256": "bac01feb35c7c4a57111c1edfdc0eb64f8f3a37b6238131c5a0a3064e2dd1e74"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "libussa-shape-shadow-alpha@2x.webp",
+      "bytes": 434360,
+      "sha256": "4bc2633bf7572b3323362db316b19f37f55af06dc8060804448d9b4448f90c34"
+    },
+    {
+      "location": "public",
       "filename": "libussa-shape-shadow@2x.webp",
       "bytes": 59418,
       "sha256": "af44b983f6fffa86ff6717370947a12e1ea0da26c299dfc37a77d1ceb287cae7"
+    },
+    {
+      "location": "public",
+      "filename": "libussa-shape-surface-alpha@2x.webp",
+      "bytes": 426246,
+      "sha256": "96aec6a44ab6a6660d26149ded04232dd52b5bb1157ab700d9743de470f1ceaa"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750954,
-      "sha256": "0b0925b47163a11c857edbe23687f83ee158d3bbc3e4775542e17cf537e589aa"
+      "bytes": 641474,
+      "sha256": "db5fdffbcaeeaa6286da82f9622276e9463ca7da91d73f1b23b8b8ea8731524f"
     },
     {
       "location": "prepared",

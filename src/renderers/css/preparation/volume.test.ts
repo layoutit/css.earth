@@ -123,7 +123,7 @@ console.log('PASS actual PolyCSS PNG-to-world mapping; old vertex-order mutation
 
 test('prepared volume descriptor and external PNG bank form a complete pinned closure', async () => {
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { sha256 } = await import('@cssearth/volume-bake/compact-inputs/density-grid');
+  const { sha256 } = await import('@cssearth/core/node');
   const root = resolve('src/objects/milky-way');
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8')) as unknown);
   assert(descriptor.prepared);

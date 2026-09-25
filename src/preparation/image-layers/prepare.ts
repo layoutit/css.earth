@@ -1,14 +1,12 @@
-import { cross3 as cross } from '../../platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
+import { sha256 } from '@cssearth/core/node';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
-import { dot3 as dot } from '../../platform/vector3.mts';
 
-export const sha256 = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
   verticesUnits: [Vec3, Vec3, Vec3, Vec3]; uvs: [[number, number], [number, number], [number, number], [number, number]];
   style: { width: string; height: string; transform: string; backgroundSize: string; backgroundPosition: string };

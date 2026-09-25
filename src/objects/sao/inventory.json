@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sao-model-shadow-alpha@2x.webp",
+      "bytes": 131908,
+      "sha256": "e520b8860ed7bd524598c49000395d354aae1da647889d5542e99561a3305462"
+    },
+    {
+      "location": "public",
       "filename": "sao-model-shadow@2x.webp",
       "bytes": 20780,
       "sha256": "6d64dcdbae1ba8b9b7222ceb67745de34d5379e38f507afc37d1ae5f5bd00f66"
+    },
+    {
+      "location": "public",
+      "filename": "sao-model-surface-alpha@2x.webp",
+      "bytes": 134806,
+      "sha256": "732911003deae48126d8c564f761a67af31ee6143d3c588b36f8ab8c4755939c"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 455835,
-      "sha256": "94ea27bc4eb5b403b14ec60b5c9ac9ab44f92f6a1a9fe6abac8e934b33094559"
+      "bytes": 389940,
+      "sha256": "f36aad44f0506bcba7b860594059c4fc86b9413afd7e0f0710bd9651af3246e9"
     },
     {
       "location": "prepared",

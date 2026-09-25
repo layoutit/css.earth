@@ -8,8 +8,10 @@ import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images
 import "../../src/platform/cubic-sky.css";
 import "../../src/renderers/css/styles/volume.css";
 import "../../src/renderers/css/styles/world-context.css";
+import "../../src/renderers/css/styles/triangle-faces.css";
 import "../site.css";
 import "../maps-shell.css";
+import "../settings-panel.css";
 import "../shell-layout.css";
 import type { PreparedSceneMarkup } from '../../tools/prepared/serialize-prepared-scene.mts';
 import type { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
@@ -98,6 +100,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     {descriptor && <script is:inline type="application/json" data-prepared-descriptor set:html={JSON.stringify(descriptor).replace(/</g, '\\u003c')}></script>}
     <!--prepared-descriptor:end-->
     <div class="object-viewport">
+      <div class="object-viewport-search-band" aria-hidden="true"></div>
       <div class="object-world-stage">
         <!--prepared-scene:start-->
         <main

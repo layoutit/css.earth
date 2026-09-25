@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "damocles-model-shadow-alpha@2x.webp",
+      "bytes": 127482,
+      "sha256": "161ce1585ca46e9f891a0e4de8a58f5756e07777c45bfcb0b98b74beb5cbed02"
+    },
+    {
+      "location": "public",
       "filename": "damocles-model-shadow@2x.webp",
       "bytes": 21810,
       "sha256": "a96e26ba903a4f34b09778be62f9523e19165e9d40a995781ad26de14e35aa79"
+    },
+    {
+      "location": "public",
+      "filename": "damocles-model-surface-alpha@2x.webp",
+      "bytes": 129714,
+      "sha256": "4bb0c4bb6923b41ecbb7c9f7e51466fe1c8062a94852a7c0001d0843dcad1ff9"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459000,
-      "sha256": "561cdad4eb7e0aa1ba509693f77ee7ec8e5ceaea25eaec39abd48f188b4409bf"
+      "bytes": 393118,
+      "sha256": "5ec3e8a3f60f14152278af96d75add681a114e311bd370024ab272a6257723ea"
     },
     {
       "location": "prepared",

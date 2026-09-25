@@ -5,7 +5,8 @@ import sharp from 'sharp';
 import type { Axis, Bounds3, Vector3, VolumeImageEncoding } from '@cssearth/volume-core/contracts/volume-recipe';
 import { readVolumeLayerPlan, type VolumeLayerPlan, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 import { encodeVolumeRaster } from './raster.ts';
-import { containedPath, sha256 } from '../compact-inputs/density-grid.ts';
+import { containedPath } from '../compact-inputs/density-grid.ts';
+import { sha256 } from '@cssearth/core/node';
 
 export interface MasterDeliveryBank {
   width: number;

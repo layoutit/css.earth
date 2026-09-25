@@ -326,6 +326,20 @@ The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
 
+The `u` leaf cuts its triangle with `corner-shape: bevel` on its two top corners.
+Safari 26 and Firefox have no `corner-shape`, so they round those corners into an
+ellipse and each face shows an oval of its slice. For every atlas a `u` face reads,
+[triangle-alpha-atlas.mts](../tools/objects/terrestrial-layers/triangle-alpha-atlas.mts)
+therefore writes a second copy, `<name>-alpha@2x.webp`, whose slices are transparent
+outside their triangle. The mask is the union of the faces that read that atlas in
+some variant, antialiased over one texel and never grown: at the raster sizing's
+roughly 30× leaf scale, even a one-texel margin showed as spikes past narrow apexes.
+The runtime declares the copies as `corner-shape` resource fallbacks and swaps them in
+once per page when `CSS.supports` reports the capability missing
+([prepared-resource-fallbacks.ts](../src/renderers/css/rendering/prepared-resource-fallbacks.ts)),
+and `triangle-faces.css` then drops the leaf's rounded corners. A browser with
+`corner-shape` never requests the copies.
+
 ![Main's fixed squares, the raster atlas and their pixelmatch difference for Enceladus, Hyperion and Alphonsina](images/raster-atlas-pixelmatch.webp)
 
 Same pose before and after the change (main, raster atlas, pixelmatch at threshold 0.1). Every face gets
@@ -393,6 +407,17 @@ replaces using pixelmatch at threshold 0.1. The count is pixels flagged.
 Deimos was already lossy WebP. Its few hundred flagged pixels (0.002 %) are
 one lossy encoding against another and do not shrink with quality.
 
+Navigation images go through the lane too, with exact alpha (`alphaQuality: 100`),
+measured the same way on 2026-09-25 against the lossless files they replaced:
+
+| Image | Pixels | Lossless | q80 | Flagged |
+|---|---|---|---|---|
+| Body-marker pages (three) | 8192×32, 8192×32, 6080×32 | 482 KB | 284 KB | 13, 6, 6 |
+| Lens-billboard atlas | 1024×1024 | 247 KB | 98.5 KB | 4 |
+| Star point atlas | 1024×32 | 14.0 KB | 0.7 KB | 0 |
+
+The per-body marker tiles the pages are packed from stay lossless.
+
 These still set their own encoding:
 
 - Earth's full pages keep the qualities its recipe declares; its smaller
@@ -405,6 +430,8 @@ These still set their own encoding:
   Way sky keep their recipe qualities.
 - Volume atlases (density in alpha, seen as stacked slices) and the
   staging-only sphere-photograph refresh tool keep their encodings.
+- Navigation context images (`<id>-context.webp`, a body's large marker) keep
+  quality 85.
 
 To repeat the measurement, run
 [`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)

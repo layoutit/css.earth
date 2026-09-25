@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "setebos-model-shadow-alpha@2x.webp",
+      "bytes": 140714,
+      "sha256": "71c16493c310ef3e5fbdc52c2649b937283db8751ae1e5ec9202bd01d5a4b412"
+    },
+    {
+      "location": "public",
       "filename": "setebos-model-shadow@2x.webp",
       "bytes": 21428,
       "sha256": "484dc2c76881506a287876c0b21cb75e5d4bc5352e3c07d007c220f664c4b3a9"
+    },
+    {
+      "location": "public",
+      "filename": "setebos-model-surface-alpha@2x.webp",
+      "bytes": 143124,
+      "sha256": "fb502ffb9486c89e9c3bdb95b12f5384437df3518e1f903001bb52973689f283"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459109,
-      "sha256": "a5b98c900d14a072ed28eaa27f1e363abf16a240a2af7635d0b0e62a03eaf6b1"
+      "bytes": 393221,
+      "sha256": "96dd1bbbe75e59b18dd8920a29cb1705824bd6b948b4d241dba5b4c0077b6bfa"
     },
     {
       "location": "prepared",

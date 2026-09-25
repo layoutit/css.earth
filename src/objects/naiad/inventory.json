@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "naiad-model-shadow-alpha@2x.webp",
+      "bytes": 102040,
+      "sha256": "60e579ad7393e849289b59a8362d2853f81845907d49125e2772dc87d9b31608"
+    },
+    {
+      "location": "public",
       "filename": "naiad-model-shadow@2x.webp",
       "bytes": 20042,
       "sha256": "6ebfc6eb05c94372502e106d523543b6e06e268aeef7ccbe23c4cd3cd8c1c263"
+    },
+    {
+      "location": "public",
+      "filename": "naiad-model-surface-alpha@2x.webp",
+      "bytes": 108308,
+      "sha256": "6f264f62f1892624c64c796ea8d5eaf350b95ed7a1e5552465ef105adc114e0a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458925,
-      "sha256": "f696cd12eaa49e43b304a5c518fb0f3cde8d89f09661550707bad177bb967da7"
+      "bytes": 392871,
+      "sha256": "0cd11dfa0635d88b0ec0d9f85db17a06cacd791ed7863527b7811b20dd8f2ccd"
     },
     {
       "location": "prepared",

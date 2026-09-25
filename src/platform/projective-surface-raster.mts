@@ -1,4 +1,4 @@
-import { isArray } from './is-array.mts';
+import { isArray } from '@cssearth/core';
 export interface ProjectiveGeometry { projection: string; matrix: string; leafWidth: number; leafHeight: number; backgroundPosition: readonly number[]; backgroundSize: readonly number[]; }
 export interface RasterBand { y: number; height: number; }
 export interface RasterLayoutOptions { width: number; height: number; bandCount?: number; bands?: readonly RasterBand[]; gutter: number; }

@@ -9,10 +9,9 @@
 // brightest channel is 1. The hot poles are brighter and bluer, the cool equator dimmer and redder; the disc-integrated colour stays
 // the measured one. Limb darkening stays on the limb plate, which darkens every latitude alike.
 import { directionFromRaDec, skyBasis } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireFiniteNumber, requireRecord, requireString, dot3 as dot } from '@cssearth/core';
 import { linearToSrgb } from '../color-transfer.mts';
 import { planckLinearSrgb, type StellarColor } from './stellar/stellar-photometric-color.mts';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
 
 export interface GravityDarkeningRecord {
   readonly omega: number; readonly beta: number; readonly poleTemperatureK: number;

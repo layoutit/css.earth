@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "taygete-model-shadow-alpha@2x.webp",
+      "bytes": 128936,
+      "sha256": "d6b9f515d04becfbad4dce1d959e6cfdf64026688843439e6b77af68438adb34"
+    },
+    {
+      "location": "public",
       "filename": "taygete-model-shadow@2x.webp",
       "bytes": 21194,
       "sha256": "082c4680df384285d845422a146c0b70f07cb5040641d8fb7b1833c77d913441"
+    },
+    {
+      "location": "public",
+      "filename": "taygete-model-surface-alpha@2x.webp",
+      "bytes": 132040,
+      "sha256": "b8df40be6de71bd6150942f779522f867a5c5400e4f81cbb519c9bde09d312a0"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458043,
-      "sha256": "6c1c6b4312ef24b806a0e094d80563eca865ed21f87d41936e8695ad1ac73ace"
+      "bytes": 392116,
+      "sha256": "6af8122047dc5a36e3b8e5befd9e13dd2f8a227ec1fd140c7448ea6f66fa9b4c"
     },
     {
       "location": "prepared",

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
 import { parseObjShape } from './obj-shape.mts';
 import { refineStripEpochs, type EpochOffsets, type RefinableStrip, type StripRefinementPolicy } from './strip-refinement.mts';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 // An ellipsoid with 300, 240 and 180 m semi-axes seen from about 60 km by a spinning strip camera: 40,000 px/rad, strips 640 x 64 pixels
 // taken every 0.4 s while the spin carries the scene 56 rows per strip, and a spacecraft that drifts across the line of sight.

@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { parseDocument } from 'yaml';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { stagePublishedAssets } from './stage-published-assets.mts';
 
 const objectId = 'fixture';

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tarqeq-model-shadow-alpha@2x.webp",
+      "bytes": 141114,
+      "sha256": "bf612a8dc3c18f7651c15c8eadecdd7dc88d688a5fecc7532e3619c3acc3f6a8"
+    },
+    {
+      "location": "public",
       "filename": "tarqeq-model-shadow@2x.webp",
       "bytes": 22040,
       "sha256": "0e523a21df45803ba867cabd25de4828ba74196648a7b2b878f828d004328042"
+    },
+    {
+      "location": "public",
+      "filename": "tarqeq-model-surface-alpha@2x.webp",
+      "bytes": 143398,
+      "sha256": "996fcbf9e32e6dd8ebc9e6b8ab8ab9af2c9dfaf54c9a1e6349bbe77b51b2de68"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459776,
-      "sha256": "3a4b7308a12bc3d38c20772d2c803f3c7c52c3904e01db3d2190e5d4dc39db1f"
+      "bytes": 393842,
+      "sha256": "7c571e3b3d54df7672f43c2c09a508bef004f7c45195b2f925a97a9788d37b41"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "annefrank-model-shadow-alpha@2x.webp",
+      "bytes": 136616,
+      "sha256": "514a0118f33f8a3aa77842737921cb03ee5aa6a8b6eab30adab0777414ecaed8"
+    },
+    {
+      "location": "public",
       "filename": "annefrank-model-shadow@2x.webp",
       "bytes": 19652,
       "sha256": "0e14b2293751420db8c7caefaa7298a57e23943011bdd5b8e2c68354c3386ae5"
+    },
+    {
+      "location": "public",
+      "filename": "annefrank-model-surface-alpha@2x.webp",
+      "bytes": 139172,
+      "sha256": "e28490f0777edcb5b5b7bc14cd5ab9520cd9c3b6e78d90f2c6791d6c5b4709b4"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459289,
-      "sha256": "be7ddf260685ed7949385fdeef0810f041fcd4f64c0fe72d63031fd7e11b5872"
+      "bytes": 393523,
+      "sha256": "ba73841635b955c6bb12a6f64c0d8090a7125a3dcb122e098646977cf392d645"
     },
     {
       "location": "prepared",

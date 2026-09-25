@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "castalia-elevation-shadow-alpha@2x.webp",
+      "bytes": 633034,
+      "sha256": "e36fc5c60922fe18583af5db0a0bd5c16adf2e5cb216b76e9ea8d170894cc69e"
+    },
+    {
+      "location": "public",
       "filename": "castalia-elevation-shadow@2x.webp",
       "bytes": 145444,
       "sha256": "b79ccd4c7a0c65a2988a450c373c083bdd7a13515343b02ddce1dabae744c2bb"
+    },
+    {
+      "location": "public",
+      "filename": "castalia-elevation-surface-alpha@2x.webp",
+      "bytes": 701430,
+      "sha256": "cdb89c5712938c5d447fa73c358b03bbb3dcb2753c07ab1f2fc0ccfdbab776fb"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "castalia-shape-shadow-alpha@2x.webp",
+      "bytes": 536294,
+      "sha256": "35ff969f3c9bab7345a24741bff97b0ff310269daffb1aece4c5fe8f77ab3bf1"
+    },
+    {
+      "location": "public",
       "filename": "castalia-shape-shadow@2x.webp",
       "bytes": 63612,
       "sha256": "005a05e30f328d9ba1bcef1b62e792699dd77604436e925c24f02284845e70d6"
+    },
+    {
+      "location": "public",
+      "filename": "castalia-shape-surface-alpha@2x.webp",
+      "bytes": 531426,
+      "sha256": "27f3020c754b026689fc4f6120efe14e49a06e1702635e4da5c7369f43910336"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 759236,
-      "sha256": "97a2a71cc457dfd2907d5326b105db521d942c702b88098e154bc11b1af031c3"
+      "bytes": 649549,
+      "sha256": "4d4cf726d5473a800c728cb64bd0fc97984369c161c24d75d1a937b270c5d34f"
     },
     {
       "location": "prepared",

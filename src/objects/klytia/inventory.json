@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "klytia-elevation-shadow-alpha@2x.webp",
+      "bytes": 495448,
+      "sha256": "e22548079ea3a379495806210cfe7f120652ae8d48145fd391d7dc4249ba77ab"
+    },
+    {
+      "location": "public",
       "filename": "klytia-elevation-shadow@2x.webp",
       "bytes": 122540,
       "sha256": "2105d21a3cf7eafaabe70a621745ee8f166f5731c5a60e0efcd2e1e07ab76d16"
+    },
+    {
+      "location": "public",
+      "filename": "klytia-elevation-surface-alpha@2x.webp",
+      "bytes": 533886,
+      "sha256": "90749438e58b50383f85598265f8e82dfc951cb9ae8ea25e2c721bd1f0e71d01"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "klytia-shape-shadow-alpha@2x.webp",
+      "bytes": 418952,
+      "sha256": "bf4b11f9170c8571dea1e1a3612aa57d7abbed8447164565aa9266fa6c5111bc"
+    },
+    {
+      "location": "public",
       "filename": "klytia-shape-shadow@2x.webp",
       "bytes": 59740,
       "sha256": "7a0d03895a5d613d1c488bf89a5d727b687f60709c7f87dcc74471b8999271d6"
+    },
+    {
+      "location": "public",
+      "filename": "klytia-shape-surface-alpha@2x.webp",
+      "bytes": 413270,
+      "sha256": "84dba7144119089596919393c26bd9913f1e27804abe3888fb6f94859629a12e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749671,
-      "sha256": "eb4d470bc05c855da39f3fdc20f25f8203b619c0c2d37fa751ae845f19de5950"
+      "bytes": 640339,
+      "sha256": "eed97941eed3fe6a384264cde559a5fd30304d3ad84e1c000828038073fb8af1"
     },
     {
       "location": "prepared",

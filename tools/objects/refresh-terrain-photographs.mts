@@ -1,5 +1,5 @@
 import { retainedPhotographicAtlas } from './terrestrial-layers/retained-atlas.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

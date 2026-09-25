@@ -1,7 +1,7 @@
 /** Stage one selected raster lane without rebuilding the object's bands, lighting, geometry, or scene.
  * `node tools/objects/dist/refresh-sphere-photographs.js <body-id> <lens-id>` writes only that lens below
  * output/sphere-photographs/<body-id>/<lens-id>. The caller decides whether and how to apply the receipt. */
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';

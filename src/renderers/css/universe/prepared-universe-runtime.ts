@@ -50,7 +50,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   const pool = `volume:${payload.id}`, pointPool = `focus-point:${pointAppearance.id}`;
   // The baked-star cube is the sole sky background until the volume takes over.
   const skyPaths = new Set([...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []].map(face => face.texturePath));
-  const startupSkyPaths = new Set((payload.sky?.nearFaces ?? payload.sky?.faces)?.map(face => face.texturePath) ?? []);
   const entries = payload.resources.map(resource => ({ key: `${pool}:${resource.path}`, url: resolveResource(resource.path), pool }));
   const pointEntries = pointAppearance.resources.filter(resource => resource.path === pointAppearance.atlas.path).map(resource => ({
     key: `${pointPool}:${resource.path}`, url: resolvePointResource(resource.path), pool: pointPool }));
@@ -86,11 +85,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         capacity: payload.resources.length, concurrency: 2, reuse: false, decoding: 'async' as const })),
       ...imageLayers.map(({ payload }) => ({ id: `image-layers:${payload.id}`, retention: 'mount' as const,
         capacity: payload.resources.length, concurrency: 4, reuse: false, decoding: 'async' as const }))],
-    // Only the baked backdrop decodes at startup; the Sun atlas loads through its one marker.
-    // Galaxy slices, image layers, lens banks and shells appear far away; the
-    // browser decodes them again for raster when first drawn, so decoding them
-    // here spent seconds and hundreds of megabytes that were never reused.
-    startup: entries.filter(entry => startupSkyPaths.has(entry.key.slice(pool.length + 1))).map(entry => entry.key),
+    // Nothing decodes at startup. A sky face loads when it first enters the view (prepared-sky-runtime.ts): the camera
+    // sees two or three of the six, and decoding all six fetched every face (about 450 KB) on every page. Galaxy slices,
+    // image layers, lens banks and shells appear far away; the browser decodes them for raster when first drawn.
+    startup: [],
   };
   // Warm the galaxy backdrop before its handoff. Nebula lenses own their image
   // demand: crossing this distance must not fetch every distant/inactive lens.
@@ -205,7 +203,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             background.publishStellarPoints();
           },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
-            return spatial.captureFrame(world, viewport);
+            // The context's labels keep clear of the selected body's caption, placed for the same camera.
+            const caption = selectedLabel.rect(world, viewport, selected, { overview, focused: detailedFocus !== null, preview: selectionPreview });
+            return spatial.captureFrame(world, viewport, caption ? [caption] : []);
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial.previewSelection(id); },
           setOverview(enabled: boolean, scope?: string) {

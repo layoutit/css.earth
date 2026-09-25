@@ -8,9 +8,9 @@ import type { GoogleAction } from "./profile.mts";
 import type { ReferenceManifest } from "./manifest-types.mts";
 import sharp from "sharp";
 
+import { sha256 } from '@cssearth/core/node';
 import {
   comparePngBuffers,
-  sha256,
 } from "./image-analysis.mts";
 import {
   GOOGLE_MAPS_VENUS_URL,

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "veritas-elevation-shadow-alpha@2x.webp",
+      "bytes": 557918,
+      "sha256": "16fbc5772ff9bc871ecafa9d63a619b89782c7d6f4f701aa582ab47ffe4fff4d"
+    },
+    {
+      "location": "public",
       "filename": "veritas-elevation-shadow@2x.webp",
       "bytes": 146628,
       "sha256": "bfc45592405d0cb36df058e88b407bdfc2efbb717fe73d9be179042b76b58983"
+    },
+    {
+      "location": "public",
+      "filename": "veritas-elevation-surface-alpha@2x.webp",
+      "bytes": 617404,
+      "sha256": "ce67828119cda2460ad0e000f6bae6c65e7b8a4b419a5963fccdc7f77d165321"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "veritas-shape-shadow-alpha@2x.webp",
+      "bytes": 462112,
+      "sha256": "693e85b0488053e45005fc60d93bac28208136354704924119f0b58c79aff0d1"
+    },
+    {
+      "location": "public",
       "filename": "veritas-shape-shadow@2x.webp",
       "bytes": 59502,
       "sha256": "bb96adc416149fae7cecded9b922b52387a3d8b962da6ba1a1e7faf603c88e5b"
+    },
+    {
+      "location": "public",
+      "filename": "veritas-shape-surface-alpha@2x.webp",
+      "bytes": 454636,
+      "sha256": "1a5f6f8a5c654e5d9f96f563c1035e18a4d731bc2e3d9a563b48c90a85810f55"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750915,
-      "sha256": "c765f89628b4fb80c60b9c2c644a5da168e0d241cbe6fb64c946b91b28c86fbb"
+      "bytes": 641158,
+      "sha256": "2b07dd5b27ea78433505afea5bdbebb409ecf23e51d701836d506d3d59208912"
     },
     {
       "location": "prepared",

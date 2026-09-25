@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "comet-81p-model-shadow-alpha@2x.webp",
+      "bytes": 306990,
+      "sha256": "dd024298bfb57aa1ece5f70def0616ae968956adb19fa4d0032b8b451c8991fc"
+    },
+    {
+      "location": "public",
       "filename": "comet-81p-model-shadow@2x.webp",
       "bytes": 72526,
       "sha256": "f971a27c4e2c70682a79b082f6d178b318dbcc3ab144abc9f46be969b9da76fa"
+    },
+    {
+      "location": "public",
+      "filename": "comet-81p-model-surface-alpha@2x.webp",
+      "bytes": 311560,
+      "sha256": "f203ce7bece7defe09fde66ce47357a55e46596c58969cf1c30f65b938a5753c"
     },
     {
       "location": "public",
@@ -24,6 +36,12 @@
       "filename": "comet-81p-model-thumbnail.webp",
       "bytes": 1788,
       "sha256": "f5ac73cc2f83aaafa758cf0203e256866e8c568ebf1de74d153e364e7298c95e"
+    },
+    {
+      "location": "public",
+      "filename": "comet-81p-navcam-surface-alpha@2x.webp",
+      "bytes": 356238,
+      "sha256": "e43acae1dd129815735fd7aace8725e1aa67d18e82a4ec8c34fbd92468ff6fa1"
     },
     {
       "location": "public",
@@ -88,8 +106,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 929463,
-      "sha256": "6203386172a2d610cf5357c9e88690c8f5cd6a0544faaa68f956dce6c089c566"
+      "bytes": 793843,
+      "sha256": "f61ee9c17e495b604695b4516121c1d509a1c0f5c0043c524cad77d5b10ffe9f"
     },
     {
       "location": "prepared",

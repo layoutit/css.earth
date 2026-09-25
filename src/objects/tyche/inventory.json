@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "tyche-elevation-shadow-alpha@2x.webp",
+      "bytes": 528650,
+      "sha256": "5cd47860998c9e5c1c8ab836354a4dab189901847fb8d638861e0a94069f52a6"
+    },
+    {
+      "location": "public",
       "filename": "tyche-elevation-shadow@2x.webp",
       "bytes": 142124,
       "sha256": "6eb6cf2c1664986f13f2e5035ecd068b7ba743531e0350c4d9b3c5d38853053e"
+    },
+    {
+      "location": "public",
+      "filename": "tyche-elevation-surface-alpha@2x.webp",
+      "bytes": 584626,
+      "sha256": "e719eab54465d9af936f5c5e2bce903c5c53d8c0746333d0c515a4ee94819857"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "tyche-shape-shadow-alpha@2x.webp",
+      "bytes": 439004,
+      "sha256": "dc04cca16914be74af3ed94e771443c54cb8f92c50b66f1fdd30cd46dbc43a3e"
+    },
+    {
+      "location": "public",
       "filename": "tyche-shape-shadow@2x.webp",
       "bytes": 58594,
       "sha256": "7eeb5b5e3ed5606820886c11f90b0514d1a44bc0bb5a391489d4f8120994ef59"
+    },
+    {
+      "location": "public",
+      "filename": "tyche-shape-surface-alpha@2x.webp",
+      "bytes": 430872,
+      "sha256": "224170c98c5f115f3e67d778c3f470662a2f301418aee408abc1c6a274cdb2ee"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748601,
-      "sha256": "823d92955738b557cf50bce7f18657ab8bb556cf40f887f32646eddd0a6f53c6"
+      "bytes": 638856,
+      "sha256": "9dc4605ab58450fed15aa91ba40b26a8838345977dc7ba49dfdbc29a4a5ff816"
     },
     {
       "location": "prepared",

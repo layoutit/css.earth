@@ -1,7 +1,7 @@
 /** Bounded live archive leads. These are observations to investigate, never acquisition or science qualifications. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from '../astronomy-packages/toolchain.mts';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../keck/koa.mts';

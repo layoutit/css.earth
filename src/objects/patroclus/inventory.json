@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "patroclus-model-shadow-alpha@2x.webp",
+      "bytes": 139072,
+      "sha256": "72b5bdd50c7c707542c09ec685b891f3fbd8c09914bccee1c19f56dcbc4d03bc"
+    },
+    {
+      "location": "public",
       "filename": "patroclus-model-shadow@2x.webp",
       "bytes": 21626,
       "sha256": "9b77854e1cb321f5ddde5fe8d12b7cd1e90f219e20102c5fd46bbe19ade68f37"
+    },
+    {
+      "location": "public",
+      "filename": "patroclus-model-surface-alpha@2x.webp",
+      "bytes": 139044,
+      "sha256": "e045f63c47d800234d3f13625b2efecd010f842a5971a92ef2e51b2f38e7a9b6"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460537,
-      "sha256": "2e21dae95bb20f8fa88e4922aa551db95be419553363bb95946916602e66a2a4"
+      "bytes": 394673,
+      "sha256": "706f59b569086957587b6baacac7680233ad89ab84d03d3780dd457ea5b5a2cc"
     },
     {
       "location": "prepared",

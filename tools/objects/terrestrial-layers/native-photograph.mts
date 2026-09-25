@@ -1,4 +1,4 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';

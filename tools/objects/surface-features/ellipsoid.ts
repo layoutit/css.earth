@@ -1,6 +1,6 @@
 import { surfaceDirection } from './geometry.js';
 import type { SurfaceFeatureAxes } from './catalog.js';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 /** Ellipsoid anchoring for the shared feature preparation. Catalogue positions are geodetic (positive-east
  * longitude, geodetic latitude on the reference ellipsoid); the prepared anchor is the point where the

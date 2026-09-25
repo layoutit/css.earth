@@ -6,7 +6,8 @@
  */
 import { resolve, dirname } from 'node:path';
 import { fieldToPhysical, angularScale } from '@cssearth/volume-core/coordinates/observer-tangent';
-import { loadVolumeSource, sampleEncoded, sourceBytes, sha256 } from './density-grid.ts';
+import { loadVolumeSource, sampleEncoded, sourceBytes } from './density-grid.ts';
+import { sha256 } from '@cssearth/core/node';
 import { channelDensity } from '../slices/density.ts';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import type { SimulationDepthPrior } from '@cssearth/volume-core/contracts/simulation-prior';

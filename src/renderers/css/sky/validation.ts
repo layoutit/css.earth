@@ -2,7 +2,7 @@ import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '../validation/css-mat
 import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
-import { dot3 as dot } from '../../../platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
 

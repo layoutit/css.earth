@@ -1,6 +1,5 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import sharp from 'sharp';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const SAMPLE_OFFSETS = [[.25, .25], [.75, .25], [.25, .75], [.75, .75]];
 // Four premultiplied RGBA float samples per pixel: bound preparation memory.

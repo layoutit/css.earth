@@ -1,6 +1,6 @@
 /** Explicit historical-byte audit. Requires the recorded Git revisions; routine CI does not fetch history. */
 import assert from 'node:assert/strict';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';

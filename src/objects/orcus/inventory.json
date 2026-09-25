@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "orcus-model-shadow-alpha@2x.webp",
+      "bytes": 130490,
+      "sha256": "429f891fb641f7661121b1d1c94186000433c20a39fbbaab3fd49e07ccc76b14"
+    },
+    {
+      "location": "public",
       "filename": "orcus-model-shadow@2x.webp",
       "bytes": 21300,
       "sha256": "a82261a08f2046969e8c6c29e741d956c653dba22de13527066857ebf877b573"
+    },
+    {
+      "location": "public",
+      "filename": "orcus-model-surface-alpha@2x.webp",
+      "bytes": 132820,
+      "sha256": "4b02e591874b85be57f6dedfbfa6c18c102c8b50115a2f6a0997fcaa3e053f70"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456674,
-      "sha256": "27b61992419aebee159c43d42fa8aca2bb3bd177018199dba3be4274a36d363d"
+      "bytes": 390749,
+      "sha256": "67373ceaae76807e93f421eb7151307ddc27cae84003b3aca16e5fb5bd5ba436"
     },
     {
       "location": "prepared",

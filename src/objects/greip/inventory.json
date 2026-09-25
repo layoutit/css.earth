@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "greip-model-shadow-alpha@2x.webp",
+      "bytes": 141740,
+      "sha256": "f98b6adc777a8b902cc829cd6a51a0cf4e8d4e08eac6fd37f372deab21423757"
+    },
+    {
+      "location": "public",
       "filename": "greip-model-shadow@2x.webp",
       "bytes": 21202,
       "sha256": "5110e3b9ac52ee0fab47609917104253ac803b15bc3a77924ba75256dc1896d2"
+    },
+    {
+      "location": "public",
+      "filename": "greip-model-surface-alpha@2x.webp",
+      "bytes": 143038,
+      "sha256": "643bae0e997cd6d5ca889f4f5d3a1faa92c28b88d5e4f5578fa277c9b8f838b6"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457859,
-      "sha256": "04ab33735990f5e75e9144ca1bed3fbf60f882f3b26b72245f0d868f3b29e8c2"
+      "bytes": 391932,
+      "sha256": "b5ec775aabdd79dfec8928e01b06108657ce6b333baa2bc2c24d49a60476a1c2"
     },
     {
       "location": "prepared",

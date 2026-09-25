@@ -1,4 +1,4 @@
-import { requirePreparedMatrix4, readPreparedMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, invertPreparedAffineMatrix4, transformPreparedPoint, serializePreparedMatrix4 } from '../../../platform/math/matrix.mts';
+import { requirePreparedMatrix4, readPreparedMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, invertPreparedAffineMatrix4, transformPreparedPoint, serializePreparedMatrix4 } from '@cssearth/core';
 import type { Matrix4 } from '../solar-system/types.js';
 import { projectEyeEllipsoid, requirePhysicalProjection } from './physical-projection.js';
 import type { PhysicalProjection } from './physical-projection.js';

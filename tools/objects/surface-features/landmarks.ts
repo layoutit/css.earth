@@ -6,7 +6,7 @@ import { normalizeSearchText } from './catalog.js';
 import { projectRadial, surfaceDirection } from './geometry.js';
 import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.js';
 import type { SurfaceFeaturePreparationContext } from './index.js';
-import { dot3 as dot } from '../../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 type Vec = readonly [number, number, number];
 const record = (v: unknown, at: string): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError(`${at} must be an object.`); return v as Record<string, unknown>; };

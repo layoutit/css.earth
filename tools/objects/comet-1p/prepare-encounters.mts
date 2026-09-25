@@ -1,17 +1,15 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, array, number, shape, text, dotN as dot } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFitsHeader } from '../../fits/fits.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { array, number, shape, text } from '@cssearth/core';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import { createGiottoSampler, interpolatedNormals, polygonInteriorDistance } from './prepare-giotto.mts';
 import { deriveVegaCamera } from './encounter-camera.mts';
 import { validateVegaOutline } from './encounter-outline.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 const vector = array(number);
 const parseRegistration = shape({

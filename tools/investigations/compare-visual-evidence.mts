@@ -1,7 +1,7 @@
 /** Compare retained, equally framed captures without resizing, alignment or masks.
  * node tools/investigations/compare-visual-evidence.mts reference.png result.png diff.png report.json
  * The report measures visible change, not image quality or scientific accuracy. */
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { createRequire } from 'node:module';

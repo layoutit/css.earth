@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "galatea-model-shadow-alpha@2x.webp",
+      "bytes": 141044,
+      "sha256": "2ee6a20aa21a431454bd1e3ae379a875235495000c37c2e970705c64b8666dc2"
+    },
+    {
+      "location": "public",
       "filename": "galatea-model-shadow@2x.webp",
       "bytes": 20932,
       "sha256": "1c2018e64309d2905866ec53989934c20bac0e3e84534814b10983c270e672d7"
+    },
+    {
+      "location": "public",
+      "filename": "galatea-model-surface-alpha@2x.webp",
+      "bytes": 142268,
+      "sha256": "a839c9c2b71a03bee6e4a71726939e03a19584a59b5cc37be13eee7577d1a236"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459808,
-      "sha256": "342281340df854da9ff91d8039b7c47b2bef69e255e7aa38fa626c09b9c41f02"
+      "bytes": 393972,
+      "sha256": "755102148fee8651ad660aa1ea451123a6edfc4af67f35c9778d009877efc7ea"
     },
     {
       "location": "prepared",

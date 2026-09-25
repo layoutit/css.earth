@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "silesia-elevation-shadow-alpha@2x.webp",
+      "bytes": 522448,
+      "sha256": "6247a9368079729b085b2d1c038639086657c6e4f19a83c2b3a0e7c6c55ddb88"
+    },
+    {
+      "location": "public",
       "filename": "silesia-elevation-shadow@2x.webp",
       "bytes": 135064,
       "sha256": "a743ff1591751508ee5badf80e071a584ceed1930b4e1b6539c901dc93fde6ff"
+    },
+    {
+      "location": "public",
+      "filename": "silesia-elevation-surface-alpha@2x.webp",
+      "bytes": 573060,
+      "sha256": "340c5d3d47ceff95ad7179dde1fdae635a19b67cabadfad4556e619b09c93193"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "silesia-shape-shadow-alpha@2x.webp",
+      "bytes": 438076,
+      "sha256": "f82d3bcbd60dfa6fc4948e0233e0e64eefd4814b94678682c26a5b12725d2850"
+    },
+    {
+      "location": "public",
       "filename": "silesia-shape-shadow@2x.webp",
       "bytes": 59710,
       "sha256": "7bbdc10e4b85cbf8ce7d9ec37838a850f137f711a3c859b0e526f429274279b5"
+    },
+    {
+      "location": "public",
+      "filename": "silesia-shape-surface-alpha@2x.webp",
+      "bytes": 430212,
+      "sha256": "5a4f114a6317d44a7ff3f5e1c27e0d8fec39e4302bf15faed36c6c46f014738e"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750254,
-      "sha256": "0225a925fa7d2980f9bc1a6a49a3a8dbe1709416b4defb3d66490c1e224d3762"
+      "bytes": 640644,
+      "sha256": "0d8060ecd2ca08ba55af91bdc220d5e1832b9642259e06b1005a68b0ea46361a"
     },
     {
       "location": "prepared",

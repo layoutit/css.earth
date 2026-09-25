@@ -20,7 +20,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage } from '../../../fits/fits.mts';
 import { skyImageAxes } from '../../../fits/fits-sky.mts';
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { encodeDensityKtx2 } from '../../../../src/preparation/volume/acquisition.ts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse-shell/source');

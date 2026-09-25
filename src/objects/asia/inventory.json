@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "asia-elevation-shadow-alpha@2x.webp",
+      "bytes": 483096,
+      "sha256": "12604d7cf1a1585a054382a45f7180ea3baff73e376080efe71781d6b34e0455"
+    },
+    {
+      "location": "public",
       "filename": "asia-elevation-shadow@2x.webp",
       "bytes": 122094,
       "sha256": "f26c7e0f98b0d68b47303f27a8bf9b1d650d10056bb145a534d7a0008e9a0aca"
+    },
+    {
+      "location": "public",
+      "filename": "asia-elevation-surface-alpha@2x.webp",
+      "bytes": 534708,
+      "sha256": "c78f81bc56968164bb55a6248e642711d87863724765b167cbbd651dc87b74a4"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "asia-shape-shadow-alpha@2x.webp",
+      "bytes": 409030,
+      "sha256": "609aa86784537811c589cd58c12dc6670b52f56b145222ebf345dccf1a4782ed"
+    },
+    {
+      "location": "public",
       "filename": "asia-shape-shadow@2x.webp",
       "bytes": 56956,
       "sha256": "afe26c1ff1996add5a5107038a258d22bc1af6dd155bce355d57f7724bd98841"
+    },
+    {
+      "location": "public",
+      "filename": "asia-shape-surface-alpha@2x.webp",
+      "bytes": 403342,
+      "sha256": "d87d0b72f8a255b28213e443c2e794c0fccc3dbe5ff5bf061e4302dec30a0ba8"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748355,
-      "sha256": "df1c0a91b9a482ac468c85999752f5c202375797e8810e449cff3b5064673774"
+      "bytes": 638859,
+      "sha256": "4bb2506397b4692d1db34262198e154f97c2e5c3a4aadda16f5be83508a7603b"
     },
     {
       "location": "prepared",

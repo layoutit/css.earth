@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "asteroid-2001-qw16-elevation-shadow-alpha@2x.webp",
+      "bytes": 445248,
+      "sha256": "fe3e2bfb9ba05d1183aea0b94dbe3c2b6b913546cc3d194f3c672837e30ccd18"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2001-qw16-elevation-shadow@2x.webp",
       "bytes": 121548,
       "sha256": "a8c35f49d816906a432a110879f926a950fd512fad178e09b5d3813f0862c21b"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2001-qw16-elevation-surface-alpha@2x.webp",
+      "bytes": 510116,
+      "sha256": "9cb035532b5f19388a109819319337cc413735b2caab8cd2c51af36da82fc2cb"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "asteroid-2001-qw16-shape-shadow-alpha@2x.webp",
+      "bytes": 368280,
+      "sha256": "d0b4e6eb8c19fa7f1bf50904af8dc8079dc13c50a7fb1294b59db87db15c01da"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2001-qw16-shape-shadow@2x.webp",
       "bytes": 53456,
       "sha256": "f4817b7a923c3acf1f225e288b6ab9895ebebca126e2ae55e759b57a9e71a680"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2001-qw16-shape-surface-alpha@2x.webp",
+      "bytes": 364058,
+      "sha256": "ad0d962cabcc9558ee25101d05599d164292e62ac15f54cdf6f3f38960ed6cfc"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 760087,
-      "sha256": "a7ab3f5d80958ada75201675b8db4099cbbca611526c2ebd532520f8fcc56e04"
+      "bytes": 650708,
+      "sha256": "89e6fbbf23b5787d13ee1d5b07c382a45d2db1ea03d926192a334dfa5a02dab6"
     },
     {
       "location": "prepared",

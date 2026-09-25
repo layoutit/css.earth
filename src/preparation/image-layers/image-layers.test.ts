@@ -5,7 +5,8 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.js';
-import { prepareImageLayers, sha256 } from './prepare.js';
+import { prepareImageLayers } from './prepare.js';
+import { sha256 } from '@cssearth/core/node';
 import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment-images.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
 

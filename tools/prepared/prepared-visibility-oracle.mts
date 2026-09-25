@@ -1,8 +1,7 @@
-import { cross3 as cross } from '../../src/platform/vector3.mts';
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import type { SurfacePoint, SurfaceTriangle } from '../../src/renderers/css/navigation/prepared-surface-hit.ts';
 import type { PreparedDepthOrder } from '../../src/renderers/css/rendering/prepared-depth-partitions.ts';
 import assert from 'node:assert/strict';
-import { dotN as dot } from '../../src/platform/vector3.mts';
 
 const sub = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[0]-b[0],a[1]-b[1],a[2]-b[2]];
 

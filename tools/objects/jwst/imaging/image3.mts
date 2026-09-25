@@ -21,7 +21,7 @@ import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus } from '../../../fits/fits.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 import { addProductEvidence, productRecordPath, readProductRecord, sameRun, writeProductRecord,

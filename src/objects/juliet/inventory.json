@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "juliet-model-shadow-alpha@2x.webp",
+      "bytes": 110668,
+      "sha256": "a17201511cd6f67f48184af6ca78b7be4d984c4b6ef62f81095044e4a7cd3323"
+    },
+    {
+      "location": "public",
       "filename": "juliet-model-shadow@2x.webp",
       "bytes": 25316,
       "sha256": "39c17894283ae1e2b9042a6b2269ce08aa65eef8448aafd2b08d6f50d556aacc"
+    },
+    {
+      "location": "public",
+      "filename": "juliet-model-surface-alpha@2x.webp",
+      "bytes": 109556,
+      "sha256": "4938bc2f68a12b7368081dfa5b415f8110d0785ac3171ba70261827701b7523a"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 460206,
-      "sha256": "a0cf89037294219e6e5d6ba0c9a885ad6849d952ba2cdce735e9255a44d9eff5"
+      "bytes": 394522,
+      "sha256": "3039317a27dd59ef25adcc06d79a2e0f21560951fae21686d2b0722e46c1a53a"
     },
     {
       "location": "prepared",

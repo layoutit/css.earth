@@ -1,0 +1,147 @@
+/* The settings panel and the lens-bank switches. These rules lived in explorer-rail.css, which was deleted with the
+   unreachable rail (fd4a5fba7e) although the settings panel still carries .explorer-settings-panel. */
+
+.explorer-settings-panel h2 {
+  display: flex;
+  align-items: center;
+  min-height: 30.13px;
+  margin: 0;
+  padding: 0 var(--explorer-card-padding-inline-end) 11px
+    var(--explorer-card-padding-inline-start);
+  border-bottom: 1px solid var(--explorer-divider);
+  color: var(--shell-text);
+  font: 500 22px/30.13px var(--shell-ui-font);
+}
+
+.explorer-settings-panel > .object-settings {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.explorer-settings-panel::before {
+  content: none;
+}
+
+.explorer-settings-panel > .object-settings {
+  gap: 0;
+  font: 400 14px/1.3 var(--shell-ui-font);
+}
+
+.explorer-settings-panel .object-setting-control {
+  align-items: center;
+  min-height: 45px;
+  padding: 0 var(--explorer-card-padding-inline-end) 0
+    var(--explorer-card-padding-inline-start);
+  border-bottom: 1px solid var(--explorer-divider);
+}
+
+.explorer-settings-panel .object-setting-control:last-child {
+  border-bottom: 0;
+}
+
+.explorer-settings-panel .object-setting-text {
+  color: var(--shell-text);
+  font: var(--shell-font-small);
+  letter-spacing: 0;
+  opacity: 1;
+}
+
+.explorer-settings-panel .object-setting-control::before {
+  content: none;
+}
+
+.explorer-settings-panel .object-setting-control[data-state]::after {
+  font: 400 14px/1.3 var(--shell-ui-font);
+}
+
+:is(.explorer-settings-panel, [data-focus-lens-bank]) .object-setting-switch {
+  display: block;
+  position: relative;
+  grid-column: 3;
+  grid-row: 1;
+  width: 36px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 10px;
+  background: var(--explorer-header-control-selected);
+}
+
+:is(.explorer-settings-panel, [data-focus-lens-bank]) .object-setting-switch::before {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--shell-text-muted);
+  content: "";
+}
+
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:checked ~ .object-setting-switch {
+  background: var(--shell-text);
+}
+
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:checked ~ .object-setting-switch::before {
+  background: var(--explorer-panel-background);
+  transform: translateX(16px);
+}
+
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:indeterminate ~ .object-setting-switch::before {
+  transform: translateX(8px);
+}
+
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:focus-visible ~ .object-setting-switch {
+  outline: 2px solid var(--shell-focus);
+  outline-offset: 2px;
+}
+
+.explorer-settings-panel .object-speed-setting-control {
+  grid-template-columns: max-content minmax(8px, 1fr) 80px;
+}
+
+.explorer-settings-panel .object-speed-setting {
+  grid-column: 3;
+  grid-row: 1;
+  width: 80px;
+  height: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  appearance: none;
+  background: var(--explorer-header-control-selected);
+  cursor: pointer;
+}
+
+.explorer-settings-panel .object-speed-setting::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--shell-text);
+}
+
+.explorer-settings-panel .object-speed-setting::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--shell-text);
+}
+
+.explorer-settings-panel .object-speed-setting:focus-visible {
+  outline: 2px solid var(--shell-focus);
+  outline-offset: 2px;
+}
+
+.explorer-settings-panel .object-speed-setting-control:has(.object-speed-setting:disabled) {
+  cursor: default;
+}
+
+.explorer-settings-panel .object-speed-setting-control:has(.object-speed-setting:disabled) {
+  opacity: var(--shell-disabled-opacity);
+  cursor: default;
+}

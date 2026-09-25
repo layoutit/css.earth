@@ -5,12 +5,12 @@ import type { SurfaceTriangle } from '../../src/renderers/css/navigation/prepare
 export interface DepthSurface { target: number; leaves: number[]; frontSigns?: number[]; bodyFromScene: number[]; }
 export type PresentationSource = PreparedPresentationDefinition & { id: string };
 type TreeNode = PreparedTree['nodes'][number];
-type RecompiledFields='tree'|'variants'|'materials'|'animations'|'viewBindings'|'facing'|'motion'|'surfaceHit'|'depthPartitions';
+type RecompiledFields='tree'|'variants'|'materials'|'animations'|'viewBindings'|'motion'|'surfaceHit'|'depthPartitions';
 export type RecompiledPresentation<T extends PreparedPresentationDefinition> = Omit<T, RecompiledFields> & Pick<PreparedPresentationDefinition,RecompiledFields>;
 
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { visibilityComponents } from './prepared-visibility-order.mts';
-import { dot3 as dot } from '../../src/platform/vector3.mts';
+import { dot3 as dot } from '@cssearth/core';
 
 const MAXIMUM_DEPTH_LEAVES = 64;
 
@@ -58,7 +58,6 @@ export function restoreDepthSource<T extends PreparedPresentationDefinition>(def
     variants: source.variants.map(variant => ({ ...variant, writes: variant.writes.filter(binding => !removed.has(binding.target)).map(target) })),
     materials: source.materials.map(target), viewBindings: source.viewBindings.map(target), animations: source.animations.map(target),
     ...(source.motion ? { motion: source.motion.map(target) } : {}),
-    ...(source.facing ? { facing: source.facing.map(target) } : {}),
     surfaceHit: { ...surfaceHit, target: remap(surfaceHit.target) },
   };
   restored.tree.activationGroups = prepareActivationGroups(restored);
@@ -159,7 +158,7 @@ export function prepareDepthPartitions<T extends PreparedPresentationDefinition>
   const properties = [...definition.tree.properties, { name: 'transformStyle', value: 'flat', custom: false }];
   nodes[remap(camera)].properties = [...nodes[remap(camera)].properties, properties.length - 1];
   // The separating planes are transported in the same raw scene coordinates
-  // as the shared camera and facing publisher. No runtime matrix discovery.
+  // as the shared camera. No runtime matrix discovery.
   const inverse = surface.bodyFromScene;
   function transformOrder(node: PreparedDepthOrder): PreparedDepthOrder {
     if ('group' in node) return node;
@@ -176,7 +175,6 @@ export function prepareDepthPartitions<T extends PreparedPresentationDefinition>
       ...(clones.get(binding.target) ?? []).map(id => ({ ...binding, target: id }))]) })),
     materials: definition.materials.map(target), viewBindings: definition.viewBindings.map(target), animations: definition.animations.map(target),
     ...(definition.motion ? { motion: definition.motion.map(target) } : {}),
-    ...(definition.facing ? { facing: definition.facing.map(target) } : {}),
     surfaceHit: { ...definition.surfaceHit, target: remap(definition.surfaceHit.target) },
   };
 }

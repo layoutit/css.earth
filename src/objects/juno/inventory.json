@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "juno-elevation-shadow-alpha@2x.webp",
+      "bytes": 625202,
+      "sha256": "60bf769b150b283698015cddc71908d3e484712a7af7a8cb7b2e3d13c72bf52c"
+    },
+    {
+      "location": "public",
       "filename": "juno-elevation-shadow@2x.webp",
       "bytes": 143282,
       "sha256": "1f525114c5b04c04671002d66edb711573772aa275fc119c006392e0f787ce5f"
+    },
+    {
+      "location": "public",
+      "filename": "juno-elevation-surface-alpha@2x.webp",
+      "bytes": 691908,
+      "sha256": "2ed8e8227931172c5934679c2edfaf59342531405e398db5bea1f4b6bd2e2dbd"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "juno-shape-shadow-alpha@2x.webp",
+      "bytes": 530658,
+      "sha256": "b227439a47845ca481caff701c409db94a3724a5cdbd4ce7b8bf629b81f242fc"
+    },
+    {
+      "location": "public",
       "filename": "juno-shape-shadow@2x.webp",
       "bytes": 63518,
       "sha256": "80e7becf9581badab4e477632f104257cc4642cf5348b47e72c3282df285927c"
+    },
+    {
+      "location": "public",
+      "filename": "juno-shape-surface-alpha@2x.webp",
+      "bytes": 526838,
+      "sha256": "f35669755450124396cf9dfbe06d67dd191c3ed9f5b66e669fd2b5668f72e679"
     },
     {
       "location": "public",
@@ -42,6 +66,12 @@
       "filename": "juno-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "public",
+      "filename": "juno-zimpol-surface-alpha@2x.webp",
+      "bytes": 603268,
+      "sha256": "0028d15a2cd3ae8474824b85bb24a6c9050bee7b78610ac9d4b0650053892958"
     },
     {
       "location": "public",
@@ -112,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1371091,
-      "sha256": "9cdf8b5a65411d45a15b9325e2f2621a2a69a6554a4e3faac4df3044cf6b3073"
+      "bytes": 1372274,
+      "sha256": "3ca9fbaab5a2cbd4936d6af129fa44201c76318734d251e6a22d8bdd53f64c96"
     },
     {
       "location": "prepared",

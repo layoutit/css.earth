@@ -2,7 +2,7 @@
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection, type CapabilityAnswer, type QueryInputs } from './query.mts';

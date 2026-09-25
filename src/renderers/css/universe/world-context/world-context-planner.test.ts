@@ -642,8 +642,33 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
   expect(planner.takeWantedOrbits()).toEqual([]);
   planner.attachOrbits(decodeWorldOrbitBank(summary, 'sun', bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)));
   const after = planner(current), full = createWorldContextPlanner(plan)(view());
-  // With the bank attached, the Sun's orbits draw exactly as the planner given every path from the start draws them.
+  // With the bank attached, the Sun's orbits draw as the planner given every full-precision path draws them: the Int32
+  // vertices move no projected point by a thousandth of a pixel.
   const earth = (frame: typeof after) => frame.projectedBodies.find(body => [plan.focus, ...plan.bodies][body.index]!.id === 'earth')!.segments;
   expect(earth(after).length).toBeGreaterThan(0);
-  expect(earth(after)).toEqual(earth(full));
+  expect(earth(after).length).toBe(earth(full).length);
+  const numbers = (value: unknown): number[] => typeof value === 'number' ? [value] : Array.isArray(value) ? value.flatMap(numbers)
+    : value && typeof value === 'object' ? Object.values(value).flatMap(numbers) : [];
+  const drawn = numbers(earth(after)), exact = numbers(earth(full));
+  expect(drawn.length).toBe(exact.length);
+  drawn.forEach((value, index) => expect(Math.abs(value - exact[index]!)).toBeLessThan(1e-3));
+});
+
+test('a minor path that cannot show is never requested; highlighting it requests its bank', async () => {
+  const prepared = new URL('../../../../objects/sun/prepared/', import.meta.url);
+  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  const points = [summary.focus, ...summary.bodies], dots = new Set(summary.bodies.filter(body => body.plainDot).map(body => body.id));
+  expect(dots.size).toBeGreaterThan(0);
+  // Asteroids have no caption tier of their own (tier 0); the app hides a plain dot's caption.
+  const priorities = Object.fromEntries([...dots].map(id => [id, 0]));
+  const planner = createWorldContextPlanner(summary, priorities), current = view();
+  current.bodies.forEach((body, index) => { body.labelHidden = dots.has(points[index]!.id); });
+  planner(current);
+  const wanted = planner.takeWantedOrbits();
+  expect(wanted).toContain('earth');
+  expect(wanted.filter(id => dots.has(id))).toEqual([]);
+  // Highlighting the asteroids names them, so their paths can show and their banks are read.
+  current.bodies.forEach((body, index) => { body.highlighted = dots.has(points[index]!.id); });
+  planner(current);
+  expect(planner.takeWantedOrbits().some(id => dots.has(id))).toBe(true);
 });

@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "ariadne-elevation-shadow-alpha@2x.webp",
+      "bytes": 640840,
+      "sha256": "067bdf2af5455d775376c32cd3efb502f0bce639a7def6f6187a061237709cdf"
+    },
+    {
+      "location": "public",
       "filename": "ariadne-elevation-shadow@2x.webp",
       "bytes": 143024,
       "sha256": "c9b9797c8aca75649427ed338a60043811ea8ac23a0e7cf8e6107ccc5e507895"
+    },
+    {
+      "location": "public",
+      "filename": "ariadne-elevation-surface-alpha@2x.webp",
+      "bytes": 685816,
+      "sha256": "db6e24446498489b8568f7c7cd40c11a2569e6a1f48583441557cc49e6f47293"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ariadne-shape-shadow-alpha@2x.webp",
+      "bytes": 545414,
+      "sha256": "11e820e0e18183df8aec31c4e99083b8bea6e53ab079de31e46636d06a2934e7"
+    },
+    {
+      "location": "public",
       "filename": "ariadne-shape-shadow@2x.webp",
       "bytes": 61350,
       "sha256": "2451765db77f6dff3d12a7a813addc6e79da742683d57dde225207de412de624"
+    },
+    {
+      "location": "public",
+      "filename": "ariadne-shape-surface-alpha@2x.webp",
+      "bytes": 540374,
+      "sha256": "b479aa05e69d9f85ca6e3429f8af2e26f89f6f377f96aed47be00b9f539d55b6"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 762936,
-      "sha256": "25ab87e905269f461f71de6b291e5b720f2f29d3c279a39705d8d7b34ebd6031"
+      "bytes": 653306,
+      "sha256": "db54ddb6d37b2e283207ddebb8cad72f33c6925b362b3719b142ff68e9b3f3ab"
     },
     {
       "location": "prepared",

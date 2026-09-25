@@ -4,7 +4,8 @@ import { dirname, resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import { parseDensityPlacement, placeDensitySlices } from '@cssearth/volume-core/coordinates/density-placement';
 import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
-import { sha256, sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 export interface PlacedDensityOptions { sourceDirectory: string; outputDirectory: string; placement: { path: string; sha256: string }; }

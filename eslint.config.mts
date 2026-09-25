@@ -41,6 +41,27 @@ export default [
     },
   },
   {
+    // `@cssearth/core/node` is the one Node-only entry: it may use Node built-ins, and nothing else in core may import it.
+    files: ['packages/core/src/node/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**'],
+          message: 'Runtime packages must not depend on the application or legacy sources.' }],
+      }],
+    },
+  },
+  {
+    files: ['packages/core/src/**/*.ts'],
+    ignores: ['**/*.test.ts', 'packages/core/src/node/**'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', './node', './node/*', '../node', '../node/*'],
+          message: 'The main and schema entries of @cssearth/core stay browser-safe: no Node built-ins and no import of the node entry.' }],
+      }],
+    },
+  },
+  {
     files: ['packages/engine/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

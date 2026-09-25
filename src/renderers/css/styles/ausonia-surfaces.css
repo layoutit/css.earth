@@ -7,7 +7,7 @@
 :where(.object-stage[data-object-id="ausonia"]) .ausonia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
 :where(.object-stage[data-object-id="ausonia"]) .ausonia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
-  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--ausonia-surface-image); background-repeat: no-repeat;

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "megaclite-model-shadow-alpha@2x.webp",
+      "bytes": 129830,
+      "sha256": "e90d5b03ae4d4c1a0aadb32c6fd7ef854756356024cad84b15dd89a637cc36b4"
+    },
+    {
+      "location": "public",
       "filename": "megaclite-model-shadow@2x.webp",
       "bytes": 21320,
       "sha256": "ee3aeece75c93405a363bb0d9bfdfb320a84b6b2485c910f30217b6161d68e77"
+    },
+    {
+      "location": "public",
+      "filename": "megaclite-model-surface-alpha@2x.webp",
+      "bytes": 132760,
+      "sha256": "2b25e943e2188f71aae1ea82e2d6b9e3404f7fc04959764d3ee7901260b2e7a3"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458510,
-      "sha256": "bb37d53caf503788e0732e51db4bc2b13d09935f03c785ef460b95be1f85eac1"
+      "bytes": 392613,
+      "sha256": "bbe2eb2e34b6bb47ac205ba226d2968f0ece22345bbfe493ecdc72ea9c869bc6"
     },
     {
       "location": "prepared",

@@ -1,11 +1,10 @@
-import { cross3 as cross } from '../../../src/platform/vector3.mts';
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import type { SimplifierFlags } from 'meshoptimizer/simplifier';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import type { PreparedTriangle, SourceMesh, SourceScalar } from './contracts.mts';
 import { removeOppositeFacePairs } from './mesh-face-pairs.mts';
 import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mts';
 import { validateObservedReduction } from './open-surface.mts';
-import { dotN as dot } from '../../../src/platform/vector3.mts';
 
 export interface RadialSimplification {method?: string; targetFaces: number; maximumErrorMeters: number; regularize?: boolean; prune?: boolean;}
 export interface TerrainMesh extends SourceMesh {

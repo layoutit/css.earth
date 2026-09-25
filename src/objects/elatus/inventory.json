@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "elatus-model-shadow-alpha@2x.webp",
+      "bytes": 129158,
+      "sha256": "c49a0eee3c7d7001464de62cbc0c2b6def1a1a93995c6b93f89fef88f4cc66d9"
+    },
+    {
+      "location": "public",
       "filename": "elatus-model-shadow@2x.webp",
       "bytes": 20914,
       "sha256": "6209720bab3de824f032b4d3b34df078bd242b414b4125495c497f688252d951"
+    },
+    {
+      "location": "public",
+      "filename": "elatus-model-surface-alpha@2x.webp",
+      "bytes": 132022,
+      "sha256": "f693df177ef9f50372816e430b7f5dee0acab7ffbb2dfd2e7e0141bd61d2f34c"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 457672,
-      "sha256": "bdd6ab66b7808cdd6fa5cfa8ba70ee30644862ad31e485e02cae2cea983ab2f5"
+      "bytes": 391787,
+      "sha256": "c36fc693f0b388bed69a084468582f0a5653b8d03fbeb76995ecc26d5ad6b50f"
     },
     {
       "location": "prepared",

@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pelion-model-shadow-alpha@2x.webp",
+      "bytes": 127046,
+      "sha256": "a67a25d2b4a3197134671e7d493739d5ee47440f1ecc10ed8ecb5c88fcb9c6c5"
+    },
+    {
+      "location": "public",
       "filename": "pelion-model-shadow@2x.webp",
       "bytes": 21306,
       "sha256": "e1ac36a5adbf83a9285dac3d58890d5d6a980bcc55f552b2f900f974b275e995"
+    },
+    {
+      "location": "public",
+      "filename": "pelion-model-surface-alpha@2x.webp",
+      "bytes": 129558,
+      "sha256": "b58cf483e3b332bf288b0bdb20bfee40bddcb430cc33afe8cde0b8bdb87ef58f"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458273,
-      "sha256": "64efa35465ac92ece6e6fdd1912aee4533b8da53bbe588270d69958efea02229"
+      "bytes": 392323,
+      "sha256": "c859262e19cfe2b8332f199b3fdc048f878df79dabac8dd0f2f19bd7c4a60a77"
     },
     {
       "location": "prepared",

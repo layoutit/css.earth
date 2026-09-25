@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { recolorCloudSlices } from '@cssearth/volume-bake/slices/material';
-import { sha256 } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256 } from '@cssearth/core/node';
 import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-bake/slices/density';
 
 async function temporary(t: { after(fn: () => Promise<void>): void }) {

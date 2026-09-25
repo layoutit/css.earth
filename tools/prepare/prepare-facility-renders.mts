@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { execFileSync } from 'node:child_process';

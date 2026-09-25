@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bestla-model-shadow-alpha@2x.webp",
+      "bytes": 138758,
+      "sha256": "f8c95e826eb9668a8ac75e5ea6a4e1c1394d6bdc07887ad3783a7b0e214c3255"
+    },
+    {
+      "location": "public",
       "filename": "bestla-model-shadow@2x.webp",
       "bytes": 18726,
       "sha256": "e1ce6cc37717b8d4fe005d886f689459e7ba0f42c9ebe4f0d50e2519945ac65a"
+    },
+    {
+      "location": "public",
+      "filename": "bestla-model-surface-alpha@2x.webp",
+      "bytes": 144612,
+      "sha256": "862b315ce29d7ef46793ed91d9403a1fc943e57fc74e6b58f805d26c49235893"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458073,
-      "sha256": "861594f2cbb6e02124280afb853219e2b507fdc8bb873435ea5a1abafb7888ac"
+      "bytes": 392192,
+      "sha256": "95d0b875208e1ad8b99927cd4276cbec68dbe00e8438240f0b5288d1b04a69d8"
     },
     {
       "location": "prepared",

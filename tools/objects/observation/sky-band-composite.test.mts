@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
-import { sha256 as sha } from '../../../src/platform/sha256.mts';
+import { sha256 as sha } from '@cssearth/core/node';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '../color-transfer.mts';
 import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';

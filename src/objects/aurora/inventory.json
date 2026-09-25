@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "aurora-elevation-shadow-alpha@2x.webp",
+      "bytes": 630288,
+      "sha256": "4bc822f84abfc1fa7fa8871da5bfdcc0c70a5ca20906901fb1817a19f2e7f178"
+    },
+    {
+      "location": "public",
       "filename": "aurora-elevation-shadow@2x.webp",
       "bytes": 132110,
       "sha256": "cc54d7c330dd7891ac4e40886269801b35e2cef778b171963ed293cb597a0626"
+    },
+    {
+      "location": "public",
+      "filename": "aurora-elevation-surface-alpha@2x.webp",
+      "bytes": 692276,
+      "sha256": "e107dcffc9386779e487621f0994cc159d0b61372d2b3cd7d2f92497cff1aaea"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "aurora-shape-shadow-alpha@2x.webp",
+      "bytes": 543686,
+      "sha256": "a9551b221376f5e2ce5844a2a74d85574a7a4bdc2f78d2a273207db83efd8542"
+    },
+    {
+      "location": "public",
       "filename": "aurora-shape-shadow@2x.webp",
       "bytes": 62932,
       "sha256": "2d7649f1051778334aebab0ad06e6ed7482f7afd377de0826c1da40b4f2cb699"
+    },
+    {
+      "location": "public",
+      "filename": "aurora-shape-surface-alpha@2x.webp",
+      "bytes": 535796,
+      "sha256": "ceb6d8901d302f945e7da46df2807000147f2072d29e94c0b59feebe4be3e254"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 764185,
-      "sha256": "7cea0144f884ad68f5f52afafca7620a5d458376d9a1b8e250414f5b01d0e15e"
+      "bytes": 654218,
+      "sha256": "fdccee399694522848f4b88fba20ab33d477456cbc1803c2b19d68a34ca4e402"
     },
     {
       "location": "prepared",

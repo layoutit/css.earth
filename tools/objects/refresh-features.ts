@@ -3,7 +3,7 @@
 // catalogue, the runtime plan, the content document, the runtime asset manifest, the prepared provenance and the
 // object descriptor. Usage: node tools/objects/dist/refresh-features.js <objectId> [...]
 import { updateInventory } from '../../src/platform/runtime-asset-closure.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

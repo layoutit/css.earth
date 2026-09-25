@@ -1,6 +1,6 @@
 /** Preparation-only inspection of published planetocentric controls in native
  * image pixels. This measures discrepancies; it never fits or qualifies a camera. */
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';

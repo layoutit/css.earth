@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "stephano-model-shadow-alpha@2x.webp",
+      "bytes": 125134,
+      "sha256": "a9ebf9fc7cc3d555926bd5e9f4e358e2a1c19851856d1b216160b7d95a9dc0fc"
+    },
+    {
+      "location": "public",
       "filename": "stephano-model-shadow@2x.webp",
       "bytes": 21514,
       "sha256": "830352fa2e80433add5e7f744fd859f455183e6b34bc8f9250991fb8a333d62f"
+    },
+    {
+      "location": "public",
+      "filename": "stephano-model-surface-alpha@2x.webp",
+      "bytes": 127210,
+      "sha256": "9841aa0fff6b3ccc707df59ce356a1d79ac5b745f3f52114119b2f3de0771b96"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459328,
-      "sha256": "abd5452a6c3212c7c56f40894aa6a79beaffb54aab1c7f123dad9f621cd709f7"
+      "bytes": 393462,
+      "sha256": "6470a1ba417d8261a11e65d92547fe6857763fc2f12868e0059f9409e3331232"
     },
     {
       "location": "prepared",

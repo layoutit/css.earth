@@ -1,4 +1,4 @@
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import { recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
 import {hasErrorCode} from '@cssearth/core';

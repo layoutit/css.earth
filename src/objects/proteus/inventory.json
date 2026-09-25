@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "proteus-elevation-shadow-alpha@2x.webp",
+      "bytes": 370662,
+      "sha256": "f9144064fc536a050533ada8e52e6c02b42cbb706f3af2f35f048aab2d95c6e0"
+    },
+    {
+      "location": "public",
       "filename": "proteus-elevation-shadow@2x.webp",
       "bytes": 94872,
       "sha256": "6b0c9a9a6abe441fdcae3554f73087165cfd46c251be37cc31d56f3ed2e329e8"
+    },
+    {
+      "location": "public",
+      "filename": "proteus-elevation-surface-alpha@2x.webp",
+      "bytes": 441946,
+      "sha256": "4fcba3c4707d96c65b3bd102773be7be8c81529bb9926f2440e9f3e6d15ee61b"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "proteus-filter-color-shadow-alpha@2x.webp",
+      "bytes": 342146,
+      "sha256": "d825f53e3a7c9543c040759d96e82033e8a2874279fcca2c9f03f9ed55fda87d"
+    },
+    {
+      "location": "public",
       "filename": "proteus-filter-color-shadow@2x.webp",
       "bytes": 76468,
       "sha256": "080b3da9a18a50c19f7979e2049549498057fc1fd1bef74ed0bd789c2bda00a2"
+    },
+    {
+      "location": "public",
+      "filename": "proteus-filter-color-surface-alpha@2x.webp",
+      "bytes": 353102,
+      "sha256": "4fd705db2202c871fc6ff7f633ceb86639ca910668a04c991f676164db9c84b4"
     },
     {
       "location": "public",
@@ -45,9 +69,21 @@
     },
     {
       "location": "public",
+      "filename": "proteus-normal-shadow-alpha@2x.webp",
+      "bytes": 381830,
+      "sha256": "17ae976f287169ae0a0c8c6311c4128ae047642e73bf3a55f4652f5e35e0f071"
+    },
+    {
+      "location": "public",
       "filename": "proteus-normal-shadow@2x.webp",
       "bytes": 126040,
       "sha256": "96dd9ce156faa8a66c1b6d07961aa79734d2f6bac3a60702b04f77671abffc61"
+    },
+    {
+      "location": "public",
+      "filename": "proteus-normal-surface-alpha@2x.webp",
+      "bytes": 427246,
+      "sha256": "050fe3bd785e52207bcfdd152c51fe2be9e6ffa54b215bd2111a95b3f47914cb"
     },
     {
       "location": "public",
@@ -118,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1025774,
-      "sha256": "237d01cdb6076ce4a93d6479bb39ab943fa84ac7fe03ecf1e56eb5bf3fd14e83"
+      "bytes": 874831,
+      "sha256": "25318b519d567241f4b774a6af75dba10b70a9c6995d8477787dd45f35c61a49"
     },
     {
       "location": "prepared",

@@ -1,10 +1,8 @@
-import { cross3 as cross } from '../src/platform/vector3.mts';
+import { cross3 as cross, dotN as dot, clamp } from '@cssearth/core';
 import { composeDragRotation } from '@cssearth/engine';
 import type { PositionM, OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
-import { dotN as dot } from '../src/platform/vector3.mts';
-import { clamp } from '../src/platform/math/scalar.mts';
 
 export interface SurfaceAxes { prime: PositionM; east: PositionM; north: PositionM; }
 export const wrapMapU = (u: number) => ((u % 1) + 1) % 1;

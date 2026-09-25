@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "erigone-elevation-shadow-alpha@2x.webp",
+      "bytes": 474464,
+      "sha256": "ac00e5fd1066cc91a64d38c31ba3c19e0b5a90a3c9b5c9be16ab6247aa63339e"
+    },
+    {
+      "location": "public",
       "filename": "erigone-elevation-shadow@2x.webp",
       "bytes": 125514,
       "sha256": "4ae408dbdc1354e8c5ba9769d09b36541cf8923e9281030b9e824c56062d5c1f"
+    },
+    {
+      "location": "public",
+      "filename": "erigone-elevation-surface-alpha@2x.webp",
+      "bytes": 516216,
+      "sha256": "e8e20a500425cdaddf7e142b2282678c3514592cfa94fb358f90d7c077fc1b82"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "erigone-shape-shadow-alpha@2x.webp",
+      "bytes": 396824,
+      "sha256": "8233391c4e407edebc06011b99da7f0a5d2ea090dd46384a785c9679f713cb6b"
+    },
+    {
+      "location": "public",
       "filename": "erigone-shape-shadow@2x.webp",
       "bytes": 57368,
       "sha256": "c119e11fddfdb91c0757bd4029abcaed9a02c8ab6a60223782db50cf793e3500"
+    },
+    {
+      "location": "public",
+      "filename": "erigone-shape-surface-alpha@2x.webp",
+      "bytes": 389044,
+      "sha256": "b7ab377268c707be02242ed9930237309acf74d15e6e86727999659792807b3c"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 750945,
-      "sha256": "256307f3b9b06e44af672fc479ac1a0db9031dc6b1a946c145591143bb5d84a4"
+      "bytes": 641579,
+      "sha256": "10377b1ecba6499712f82533cb4bffee29f4fdb0b7cf2f313d49ffa346135b47"
     },
     {
       "location": "prepared",

@@ -1,7 +1,7 @@
 /** Curated target associations for WWT-hosted numeric FITS collections. They are leads, not field or detection checks. */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { sha256 } from '../../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { TargetCatalogueEntry } from '../targets.mts';
 

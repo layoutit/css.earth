@@ -1,11 +1,9 @@
 import { PNG } from "pngjs";
 import { ORACLE_SCENE_CENTER } from "./profile.mts";
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { clampUnit, maximumChannelDelta, relativeLuminance, hasNeighbor, insideSunNeighborhood } from "./image-pixels.mts";
 import { detectPlanet, detectSilhouette, detectSun, analyzeBackground } from "./scene-detection.mts";
 import { analyzeIlluminationProfile, analyzeDiscPhase, shadowShapeMask, shadowShapeSummary, analyzeTerminatorShape, symmetricShapeDistance, circularAngleDifference } from "./scene-illumination.mts";
 import type { Analysis, Silhouette, Sun, Illumination, Terminator } from "./analysis-types.mts";
-export { sha256 };
 export { comparePngBuffers, writeAbsoluteDiff, writeTriptych } from "./image-pixels.mts";
 export { classifySceneLod } from "./scene-detection.mts";
 export { writeIndependentCaptures } from "./isolated-captures.mts";

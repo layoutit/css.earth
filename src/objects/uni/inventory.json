@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "uni-model-shadow-alpha@2x.webp",
+      "bytes": 126698,
+      "sha256": "301c5cfb4dc5476c1a0f154aa2669633a424319d1bb7258d70c814bbd26c9a16"
+    },
+    {
+      "location": "public",
       "filename": "uni-model-shadow@2x.webp",
       "bytes": 20224,
       "sha256": "56a0d2f5260d63a453c68cfbf16e62175128118817d996e1cf6a19ea19ba4268"
+    },
+    {
+      "location": "public",
+      "filename": "uni-model-surface-alpha@2x.webp",
+      "bytes": 129706,
+      "sha256": "db0f72efe4a1e843bebb191f7af7be6a11777014b7110ff0bf6db83c96adaa02"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 456696,
-      "sha256": "d262b8d6fdfdbb94682e222137c6e736c93ded500c6eba81612a065ae2b95856"
+      "bytes": 390799,
+      "sha256": "5042d9a23b76f08a73ba4dc6ef76d1e66aec3c5f926f297b998b6a1b6c854fbf"
     },
     {
       "location": "prepared",

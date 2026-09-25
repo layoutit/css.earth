@@ -1,5 +1,5 @@
 import { readFitsImage, fitsHeaderLiterals } from '../../fits/fits.mts';
-import { clamp } from '../../../src/platform/math/scalar.mts';
+import { clamp } from '@cssearth/core';
 export { scanFitsCards, fitsCardValue, readFitsHeader } from '../../fits/fits.mts';
 /** FITS observation decoding and data-defined latitude/longitude/color mapping (moved from the retired static lane). */
 export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}

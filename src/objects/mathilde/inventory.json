@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "mathilde-elevation-shadow-alpha@2x.webp",
+      "bytes": 607704,
+      "sha256": "b362388a89878ebe863034068fce4a7646c3d418b1cd4b3ac9c300faaa53ff9f"
+    },
+    {
+      "location": "public",
       "filename": "mathilde-elevation-shadow@2x.webp",
       "bytes": 147362,
       "sha256": "9602d6fec89c0b139354ee901bd4062dfe64211fb8cdea17c39717afeaf25d25"
+    },
+    {
+      "location": "public",
+      "filename": "mathilde-elevation-surface-alpha@2x.webp",
+      "bytes": 724276,
+      "sha256": "71ed17f03f78718318217c193a983d51a95663d61c53524fac3f1ce84885e6c0"
     },
     {
       "location": "public",
@@ -33,6 +45,12 @@
     },
     {
       "location": "public",
+      "filename": "mathilde-near-msi-surface-alpha@2x.webp",
+      "bytes": 630846,
+      "sha256": "8fbdb09276488383d85c51b0a173197eb66f83ef6b4b0ebebf5e9a4bfb469a21"
+    },
+    {
+      "location": "public",
       "filename": "mathilde-near-msi-surface@2x.webp",
       "bytes": 183684,
       "sha256": "3cc99e7987330ab21a788701706e8c57fe662a8a60f8525c3c530b2799a7b36a"
@@ -45,9 +63,21 @@
     },
     {
       "location": "public",
+      "filename": "mathilde-normal-shadow-alpha@2x.webp",
+      "bytes": 573228,
+      "sha256": "06313749bc7fce701f18939b1977b5c73ce18174967e1298d34282702a2a22a3"
+    },
+    {
+      "location": "public",
       "filename": "mathilde-normal-shadow@2x.webp",
       "bytes": 138634,
       "sha256": "41f0aa7af52b75c19d2937cc1dfd3d02514ef08ca5ab17dcc2c56119d1bb60a5"
+    },
+    {
+      "location": "public",
+      "filename": "mathilde-normal-surface-alpha@2x.webp",
+      "bytes": 673130,
+      "sha256": "68229ad546e432ee0dc94cf2341092b9e79b655dccb6603a258ba0747b483636"
     },
     {
       "location": "public",
@@ -124,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1393293,
-      "sha256": "d0ef84b71f9b9c5ad32098536ed2573d00d20b66ba3b4479a863261fd524d562"
+      "bytes": 1394568,
+      "sha256": "28655ba52590a381c242fe51cb4df232cef80f99a85a6456cbcc92cb8c8944ac"
     },
     {
       "location": "prepared",

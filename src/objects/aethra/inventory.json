@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "aethra-elevation-shadow-alpha@2x.webp",
+      "bytes": 501064,
+      "sha256": "1000cffecc0ea1fade4ee03e071463b9b0bc9c7140274cd1fc951f629117d817"
+    },
+    {
+      "location": "public",
       "filename": "aethra-elevation-shadow@2x.webp",
       "bytes": 125692,
       "sha256": "b80586e9c5f6dfc6d33a494e2e5b9a0e2169ee3c8675a9219aa8cd473b70a4b7"
+    },
+    {
+      "location": "public",
+      "filename": "aethra-elevation-surface-alpha@2x.webp",
+      "bytes": 545242,
+      "sha256": "fd4f10ccbe5cd5ccd69bb78e26bccd77ca7d7510ccb7c81e84f24a8b351666c3"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "aethra-shape-shadow-alpha@2x.webp",
+      "bytes": 425588,
+      "sha256": "9f40de707c48ee43aea380ffcf414b80eea15657bb14bbeece081a5ccc2a9140"
+    },
+    {
+      "location": "public",
       "filename": "aethra-shape-shadow@2x.webp",
       "bytes": 58204,
       "sha256": "a08e5da982395bc3b124d95fd31883429c6097f03745e61c500f9cb94ce0d81a"
+    },
+    {
+      "location": "public",
+      "filename": "aethra-shape-surface-alpha@2x.webp",
+      "bytes": 421778,
+      "sha256": "2c9c52041ae6f1813c898e2492b75a21d9a356a7df01d951d2900104191c0768"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 749570,
-      "sha256": "2e726d115d549f10ecb0b30f2bf6359f5ced68b6da13648c179f6de0e73604cc"
+      "bytes": 640165,
+      "sha256": "0855cd6f39d980821fa24eefb3e43acc352d601dff18e49077af61b4140133a6"
     },
     {
       "location": "prepared",

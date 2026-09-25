@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cordelia-model-shadow-alpha@2x.webp",
+      "bytes": 146584,
+      "sha256": "5b079a6658d4862736148bb33cf9d3fd577be0fe3329b3ede1a60181220eacd3"
+    },
+    {
+      "location": "public",
       "filename": "cordelia-model-shadow@2x.webp",
       "bytes": 23786,
       "sha256": "64685677740fe0f941cd68a1e178fa16013462a577bfb409291644a46de83f96"
+    },
+    {
+      "location": "public",
+      "filename": "cordelia-model-surface-alpha@2x.webp",
+      "bytes": 145460,
+      "sha256": "37c009a10b1144b79fd3c8f111344bd73f03ff70a71f8d04c58b6c133a5c508b"
     },
     {
       "location": "public",
@@ -64,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 459628,
-      "sha256": "5a4d5c9b460a9e7a9a6c20dade4035c85b8770a89b266cd60f24baf0ec49ac49"
+      "bytes": 393768,
+      "sha256": "072a565f17f3b2a809935a85e5b2e6c5967ac6dde480ad330b062613fa66ea43"
     },
     {
       "location": "prepared",

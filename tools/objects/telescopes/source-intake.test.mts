@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 const label=(pointer:string)=>`PDS_VERSION_ID = PDS3\nPRODUCT_ID = "TEST"\nDATA_SET_ID = "DATA"\nTARGET_NAME = "TEST"\nINSTRUMENT_HOST_NAME = "TEST OBSERVATORY"\nINSTRUMENT_ID = "CAM"\n${pointer}\nEND\n`;
 test('source discovery reports missing headers without fetching every manifest URL', async () => {

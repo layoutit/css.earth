@@ -1,6 +1,5 @@
 /** Verified offline RGBA8/Zstd density-grid loading; no object names or sibling checkout paths. */
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { zstdDecompressSync } from 'node:zlib';
 import { resolve, relative, isAbsolute } from 'node:path';
 import type { VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
@@ -9,7 +8,6 @@ export interface VolumeSource extends DecodedGrid {
   recipe: VolumeRecipe;
   provenance: unknown;
 }
-export const sha256 = (value: Uint8Array): string => createHash('sha256').update(value).digest('hex');
 export function containedPath(root: string, path: string): string {
   const resolved = resolve(root, path), offset = relative(root, resolved);
   if (isAbsolute(offset) || offset === '..' || offset.startsWith('../') || offset.startsWith('..\\')) throw new TypeError('Source escapes its object directory.');

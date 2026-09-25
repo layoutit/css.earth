@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ryugu-close-up-shadow-alpha@2x.webp",
+      "bytes": 590616,
+      "sha256": "8b62bd972c70cceaed7d25f84ddd2a7b6f4cb7c641717c24d064b2faa3749ae2"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-close-up-shadow@2x.webp",
       "bytes": 229198,
       "sha256": "6366bf056cb734a771844e883be241729f9ca0010caebc5c27f2994ca1ed1b56"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-close-up-surface-alpha@2x.webp",
+      "bytes": 798236,
+      "sha256": "b25cd14e5f35a69a9102e6c3fa00de8d2e2f30f51e8038d71bd5b847ce0d7339"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "ryugu-elevation-shadow-alpha@2x.webp",
+      "bytes": 879514,
+      "sha256": "3c838d9eba5c849ef95cf2a3fe9b63468d6ff3302a58938811d1ffa53e244300"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-elevation-shadow@2x.webp",
       "bytes": 548562,
       "sha256": "8910b6c6da0a0f596be032461ae5bf2dee7ecec938c931dab187b7e190dea368"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-elevation-surface-alpha@2x.webp",
+      "bytes": 936488,
+      "sha256": "31297b772d6eaf2bfb8183dd811d0674825e89e671443eeb40bb077b0a212a32"
     },
     {
       "location": "public",
@@ -45,9 +69,21 @@
     },
     {
       "location": "public",
+      "filename": "ryugu-enhanced-shadow-alpha@2x.webp",
+      "bytes": 734874,
+      "sha256": "1fd54047cb0be7da8d95f9e2ec096dd275c6546fcd77574db8e91f89b4bf2891"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-enhanced-shadow@2x.webp",
       "bytes": 508324,
       "sha256": "c83b1457a1391e3588e68c2e5466e63d8bf8c4fdf48dc0ad95fdfd197fa097e7"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-enhanced-surface-alpha@2x.webp",
+      "bytes": 1315632,
+      "sha256": "2934b59d534211ecbf712bfdb77887e152104f16235055707e6aa3960562b2e3"
     },
     {
       "location": "public",
@@ -69,9 +105,21 @@
     },
     {
       "location": "public",
+      "filename": "ryugu-normal-shadow-alpha@2x.webp",
+      "bytes": 567494,
+      "sha256": "071a65c1936fc26f1068055e1064baf8574210de4c6351f158a65919012c61f4"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-normal-shadow@2x.webp",
       "bytes": 167170,
       "sha256": "5ae2041b6be2902fbcdaae6fd395c420d999b53e069f5d21e277788a7e9c1d44"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-normal-surface-alpha@2x.webp",
+      "bytes": 688382,
+      "sha256": "129e49ccc99e71318aebbf740de49da0a027d124ca73837290c7d7a84ab2b33b"
     },
     {
       "location": "public",
@@ -93,9 +141,21 @@
     },
     {
       "location": "public",
+      "filename": "ryugu-spectral-slope-shadow-alpha@2x.webp",
+      "bytes": 908486,
+      "sha256": "40b0cb44ac93c6296c5c33b3aa021852983fda6bced51caefc9e0ee44bcd89a3"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-spectral-slope-shadow@2x.webp",
       "bytes": 606390,
       "sha256": "7e67dd01a026ba95ac7b7f2f4170644cf042bb1f99e3aca7af93e20540bb4fc4"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-spectral-slope-surface-alpha@2x.webp",
+      "bytes": 1821964,
+      "sha256": "9aaa5cb4a0e35cfcc92709163f7a6e618049f5121917c18d546e825e3fcc6c28"
     },
     {
       "location": "public",
@@ -117,9 +177,21 @@
     },
     {
       "location": "public",
+      "filename": "ryugu-thermal-inertia-shadow-alpha@2x.webp",
+      "bytes": 1030628,
+      "sha256": "1aacf34a0ddee5360b764e1926c55bb8af16bebc238e73c70b4924f22def3cdc"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-thermal-inertia-shadow@2x.webp",
       "bytes": 715296,
       "sha256": "ba08b9d75421e306c0acccf7afb47179463f24a40f9bc29ebe67db8119830325"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-thermal-inertia-surface-alpha@2x.webp",
+      "bytes": 1883936,
+      "sha256": "d5da354a077e4840e78b5b89a9d7cd5b75002fcf9793ceb9c5484221c559e40e"
     },
     {
       "location": "public",
@@ -214,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 756321,
-      "sha256": "54f291572a4eeab48adb5c1162ef67061bd4f41b6d6938da662cdc388610f044"
+      "bytes": 649835,
+      "sha256": "0baac33c3c76870b672022cbb5cefc2a76c293f7396d4a44a827deec573b2af2"
     },
     {
       "location": "prepared",

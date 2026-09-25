@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "phobos-albedo-shadow-alpha@2x.webp",
+      "bytes": 3409464,
+      "sha256": "39bd8aaac4acb2a20344a3df320d3f7e484a33486d103f377f74e4db2bc3fc0b"
+    },
+    {
+      "location": "public",
       "filename": "phobos-albedo-shadow@2x.webp",
       "bytes": 2094744,
       "sha256": "feb14a3a02c81f6eeaf7e9ab585120436e27fd848acf5641927eaecc3c44b5fd"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-albedo-surface-alpha@2x.webp",
+      "bytes": 3700300,
+      "sha256": "7ff738a7974fb841134686da72b454a1b4f9ad2d107a9f3350ad32b825131928"
     },
     {
       "location": "public",
@@ -33,9 +45,21 @@
     },
     {
       "location": "public",
+      "filename": "phobos-elevation-shadow-alpha@2x.webp",
+      "bytes": 1243766,
+      "sha256": "43479475f33d2ca5eb0ab67a6672dd6d3c8bb3efbcdd52ce66ee99e4b01426e2"
+    },
+    {
+      "location": "public",
       "filename": "phobos-elevation-shadow@2x.webp",
       "bytes": 283342,
       "sha256": "6629f73e5a3bc315847a7bd8135e9c263dac7518804a0af9167de8ecd0b7b951"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-elevation-surface-alpha@2x.webp",
+      "bytes": 1409592,
+      "sha256": "f55095a90520948aff27ae0364d6cba26c119adecd0a857d4c937519d3dfe28f"
     },
     {
       "location": "public",
@@ -57,9 +81,21 @@
     },
     {
       "location": "public",
+      "filename": "phobos-normal-shadow-alpha@2x.webp",
+      "bytes": 1476912,
+      "sha256": "e62155e67adc0f07ecd8aaf42f119de95aa29792bb7d87174304dd45a2e5f1c9"
+    },
+    {
+      "location": "public",
       "filename": "phobos-normal-shadow@2x.webp",
       "bytes": 1050960,
       "sha256": "3c0563835def550f6d18d9e2b9cded37f814e8a07981878750fed246daff78a1"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-normal-surface-alpha@2x.webp",
+      "bytes": 2500426,
+      "sha256": "f2b2f633a98f5ee38d70ab8acc867814ecaab4e1bc1b283028b256f03ae2855c"
     },
     {
       "location": "public",
@@ -81,9 +117,21 @@
     },
     {
       "location": "public",
+      "filename": "phobos-slope-shadow-alpha@2x.webp",
+      "bytes": 4244214,
+      "sha256": "ea4a3f80a8137f9aac25b072994b3a8819660e661f8792486c803769fdfa3b63"
+    },
+    {
+      "location": "public",
       "filename": "phobos-slope-shadow@2x.webp",
       "bytes": 2848704,
       "sha256": "30c69f7ea713ff0aa9ce246343b5d4215fa2b6840d7485dad305bb4700049cd2"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-slope-surface-alpha@2x.webp",
+      "bytes": 4727332,
+      "sha256": "e30679858fdc0461e2c85f444557b66013f3d0bfc0ba94254d5ab8bb5cf5977d"
     },
     {
       "location": "public",
@@ -166,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1272113,
-      "sha256": "684973670f965ece3a8207cd7b58d41e4911bb19d78c0b45350eba6be721a284"
+      "bytes": 1273898,
+      "sha256": "02d7491e07f9d0a2da7f01f471a8e6ff895b574b1fb381bfbe6d3f94c3915c3a"
     },
     {
       "location": "prepared",

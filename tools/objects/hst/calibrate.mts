@@ -33,7 +33,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
+import { sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile, type MastFile } from '../astronomy-packages/mast.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';

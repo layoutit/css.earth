@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { ciPreparationInputs, ciUniverseInputs, requireCiInputMode, restoreCiPreparationInputs, restoreCiUniverseInputs } from './prepare-ci-inputs.mts';
 
 async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) {
@@ -55,7 +55,7 @@ async function universeFixture(t: { after: (cleanup: () => Promise<unknown>) => 
   await result.inventory('mimas', 'runtime', ['surface.webp', 'features.json']);
   await result.inventory('new-body', 'runtime', ['unrelated.webp', 'new-body-photometric-phase-curve.svg', 'unrelated.svg']);
   await result.inventory('heliosphere', 'prepared', ['shell.json', 'atlas.webp']);
-  await result.inventory('stellar-neighbourhood', 'prepared', ['stars.json', 'stars.bin', 'point-atlas.png']);
+  await result.inventory('stellar-neighbourhood', 'prepared', ['stars.json', 'stars.bin', 'point-atlas.webp']);
   await result.inventory('milky-way', 'runtime', ['unused-preview.webp']);
   await result.inventory('m31', 'runtime', ['layers.json', 'image.webp'], 'prepared');
   // Two manifest kinds may name the same prepared JSON; one validated installation suffices.

@@ -11,7 +11,7 @@
 //
 // Same verify-after-publish contract as publish-runtime-assets.mts: HEAD every key, retry a miss with a per-key
 // `wrangler r2 object put`, byte-verify, exit non-zero on any remaining failure.
-import { sha256 } from '../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

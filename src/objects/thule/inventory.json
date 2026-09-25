@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "thule-elevation-shadow-alpha@2x.webp",
+      "bytes": 569076,
+      "sha256": "74aff8ef290218c97ba2eb8674c424e82c868d7f0ce1377a5d36485b33802ab8"
+    },
+    {
+      "location": "public",
       "filename": "thule-elevation-shadow@2x.webp",
       "bytes": 142604,
       "sha256": "b6ef882a4f8ad538fb6c2d8dc8d362fb9e1f8b0c97d6015a679ae818fdf2d198"
+    },
+    {
+      "location": "public",
+      "filename": "thule-elevation-surface-alpha@2x.webp",
+      "bytes": 615482,
+      "sha256": "d7dc7bfa8a5ae0428c03cbc52f95b850d4ed7943ea8260c56f95fee63f6f91df"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "thule-shape-shadow-alpha@2x.webp",
+      "bytes": 478224,
+      "sha256": "bb81e06630754560616dfbecfd424e439a5df22a076e0437cb287f70f3641211"
+    },
+    {
+      "location": "public",
       "filename": "thule-shape-shadow@2x.webp",
       "bytes": 59434,
       "sha256": "703327114670556de3d3e11e06462107d23265713686319c250dab7acbd05032"
+    },
+    {
+      "location": "public",
+      "filename": "thule-shape-surface-alpha@2x.webp",
+      "bytes": 470588,
+      "sha256": "8f5f471e8ecdcbf30be1503ad1fb062704d5ddb12cb154115d49a2414cfc1526"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 747748,
-      "sha256": "6f4eafc82af605f7fc8f9ca128f63248d3a393ac13da6b00d59231e2854eb4ba"
+      "bytes": 637770,
+      "sha256": "3524d9825fa73c982d7224fd18f6ea35f6a5b893919c79d69e6817b7055cc985"
     },
     {
       "location": "prepared",

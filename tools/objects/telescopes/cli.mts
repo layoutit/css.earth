@@ -4,7 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
 import { readFile } from 'node:fs/promises';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { sha256 } from '@cssearth/core/node';
 import { formatAnswer } from './query.mts';
 import { assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';

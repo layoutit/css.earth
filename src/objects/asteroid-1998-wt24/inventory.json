@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "asteroid-1998-wt24-elevation-shadow-alpha@2x.webp",
+      "bytes": 637612,
+      "sha256": "fe181eeeeede81190f630fbff34252e97172e7dc5773cfa02ae30bc03b3b7479"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-1998-wt24-elevation-shadow@2x.webp",
       "bytes": 152206,
       "sha256": "304738cb4be78533e70031a6cd8dd483b8893ac36e64942e591be0e7761d29fa"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-1998-wt24-elevation-surface-alpha@2x.webp",
+      "bytes": 693984,
+      "sha256": "27eaa873f5505f8e6fb2f04678a61ab0cac15208de016aba66f8f62da32d7dc9"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "asteroid-1998-wt24-shape-shadow-alpha@2x.webp",
+      "bytes": 537618,
+      "sha256": "d3c7435f9ed57561e741eef74c72c3bbc3c7b573c9f3bc16f50d4db8efe367fa"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-1998-wt24-shape-shadow@2x.webp",
       "bytes": 63636,
       "sha256": "7518d4a19704995a3f591ed9327ef60bcb47ea00e4b0c281937d0f7b4deb30f9"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-1998-wt24-shape-surface-alpha@2x.webp",
+      "bytes": 527664,
+      "sha256": "86924e7050efd375be86527eb7baf4e02a64321c0032c0df0a27f05335809196"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 756925,
-      "sha256": "b422b87d3427aefc45ee93e09c5ce8517377fb2e0b1af57ca57c62bae1399002"
+      "bytes": 647227,
+      "sha256": "cb056a7e11467f945394548635a9f8120fabdaceb6ad029b9f70163b2020cec0"
     },
     {
       "location": "prepared",

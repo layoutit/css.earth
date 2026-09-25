@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "hekate-elevation-shadow-alpha@2x.webp",
+      "bytes": 547888,
+      "sha256": "66d76b381a982dda0be55025f7b0e9a4ce4ab4a6f8b146c95844e215c55e827f"
+    },
+    {
+      "location": "public",
       "filename": "hekate-elevation-shadow@2x.webp",
       "bytes": 142286,
       "sha256": "5b7ecdc997645b8960169cf6ef697a50ec6acf338e298476e328aa102810b97e"
+    },
+    {
+      "location": "public",
+      "filename": "hekate-elevation-surface-alpha@2x.webp",
+      "bytes": 608558,
+      "sha256": "40fcd2b730416dab707da5f0f0e34d349276735b1b07d2d8dfc89e216eca8f5e"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "hekate-shape-shadow-alpha@2x.webp",
+      "bytes": 457306,
+      "sha256": "21781ad9bc8bb002dd2d5ecd37a023ddc7ad106dea39ad72469d18d230d86150"
+    },
+    {
+      "location": "public",
       "filename": "hekate-shape-shadow@2x.webp",
       "bytes": 59458,
       "sha256": "e9e9021eb23c84245bc8f94a32b02233f90826ed4f180daec11a40d06257c694"
+    },
+    {
+      "location": "public",
+      "filename": "hekate-shape-surface-alpha@2x.webp",
+      "bytes": 446204,
+      "sha256": "00d6f3d546c2364ab6016652930f24a3a4cff6c0275774b34e42301f84ecd0f7"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 748932,
-      "sha256": "ba4f0849a803f29305986dff233491f2468c61be0316b351d28e87e176ced6ac"
+      "bytes": 639330,
+      "sha256": "08b140b0bd9f7e731dee2716b922dbca13cf3791061cc65f68bd86ef5eee429a"
     },
     {
       "location": "prepared",

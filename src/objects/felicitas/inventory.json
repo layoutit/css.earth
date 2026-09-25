@@ -9,9 +9,21 @@
     },
     {
       "location": "public",
+      "filename": "felicitas-elevation-shadow-alpha@2x.webp",
+      "bytes": 576516,
+      "sha256": "0b9259ee75114fe1b77262f8ae3df31262c5a66821e10629d1034faad0fea61e"
+    },
+    {
+      "location": "public",
       "filename": "felicitas-elevation-shadow@2x.webp",
       "bytes": 153920,
       "sha256": "8eb8609e22565cd18febe1f3341420ee83642e343cd137d8df451b7a8aa661e9"
+    },
+    {
+      "location": "public",
+      "filename": "felicitas-elevation-surface-alpha@2x.webp",
+      "bytes": 629974,
+      "sha256": "c178a07454d1de564219ddbc85cd2525d189169b3179e2b1ae05877dc2b56347"
     },
     {
       "location": "public",
@@ -27,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "felicitas-shape-shadow-alpha@2x.webp",
+      "bytes": 474406,
+      "sha256": "7871100f66aaf7bc4c092bd009d6145733cdef8c0ac0162929dc577e7eacaae3"
+    },
+    {
+      "location": "public",
       "filename": "felicitas-shape-shadow@2x.webp",
       "bytes": 59738,
       "sha256": "d18a8fbe515e237632f8b07f260acab3726e4511d4f784f6eae87e6b44a2afdd"
+    },
+    {
+      "location": "public",
+      "filename": "felicitas-shape-surface-alpha@2x.webp",
+      "bytes": 469040,
+      "sha256": "e1e0e19d14d2b593838263005fc9e6825b32a57b1350269a7c2d46404585cdad"
     },
     {
       "location": "public",
@@ -94,8 +118,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 752879,
-      "sha256": "1ded124bbe5e5de18cd8b7abf22b39387d1f8f62e7119ddd15987810787d6761"
+      "bytes": 642841,
+      "sha256": "7f3c1be85eb3bc568de6dd5e5798e0462bacedc9e2bf485db288ab377d516862"
     },
     {
       "location": "prepared",

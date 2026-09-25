@@ -1,4 +1,4 @@
-import { isArray } from '../../../src/platform/is-array.mts';
+import { isArray } from '@cssearth/core';
 import type {SurfaceBankPlan, SurfaceBankLenses} from './contracts.mts';
 export function requireSurfacePages(urls: unknown, label: string, assetPath: string) {
   if (typeof assetPath !== "string" || !assetPath.startsWith("/scenes/")) throw new TypeError("Surface banks require an explicit object asset path.");

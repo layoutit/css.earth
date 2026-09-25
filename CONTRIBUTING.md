@@ -30,7 +30,8 @@ Maintainer flow after baking a body or a context object: bake locally, `node
 tools/assets/publish-runtime-assets.mts --object=<id>` to publish every file its
 `inventory.json` lists (public textures and baked `prepared/*` files alike;
 see [Publishing prepared assets](#publishing-prepared-assets-maintainers)),
-then commit the refreshed inventory — never the baked files themselves.
+then commit the refreshed inventory — never the baked files themselves. A change across many bodies adds
+`--since=origin/main`: it checks and uploads only the inventory entries that main does not already list.
 
 Development startup checks installed volume packages without preparing every
 nebula. A missing or invalid package leaves its catalogue facts accessible and

@@ -676,7 +676,10 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* An on-screen keyboard covers the bottom of the layout viewport without
        shrinking it, so the sheet gives up that much room. */
     --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-lift) - var(--sheet-keyboard, 0px));
-    --sheet-peek: calc(152px + var(--explorer-safe-bottom));
+    /* The peek shows the selected card's heading and whole introduction (shell-sheet.mts measures it), never less
+       than 152 px and never more than the half-open sheet. */
+    --sheet-peek: max(calc(152px + var(--explorer-safe-bottom)),
+      min(var(--sheet-half), calc(var(--sheet-intro-height, 0px) + var(--explorer-safe-bottom))));
     --sheet-half: 50dvh;
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
@@ -785,6 +788,12 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
   /* The scene fills the room above the peeking sheet and runs behind the search, which shows only its field. */
   body[data-object-shell] .object-viewport { bottom: var(--sheet-peek); }
+  /* Where the search rests over the scene while the sheet peeks: the camera centres the body above it
+     (world-viewport.mts). It does not move with the sheet, so opening the sheet never re-centres the scene. */
+  body[data-object-shell] .object-viewport-search-band {
+    display: block;
+    height: calc(var(--sheet-lift) - 8px);
+  }
 
   /* The result list scrolls itself (the catalogue window reads its scroll), so it takes the open sheet's height
      instead of the side panel's 420 px. */
@@ -822,20 +831,29 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 }
 
 /* Portrait tablets keep the phone's bottom sheet, search and header, and have the width for the
-   filters, which join the header row between the wordmark and the actions and scroll sideways.
+   filters, which sit to the right of search on the sheet's top edge, move with it and scroll sideways.
    The sheet lays its card out in two columns. Landscape tablets already get the desktop side panel. */
 @media (orientation: portrait) and (min-width: 700px) {
+  body[data-object-shell] { --tablet-search-width: min(360px, 40vw); }
   .explorer-shell-header { column-gap: 20px; }
 
+  .object-search-toolbar { right: auto; width: var(--tablet-search-width); }
   .object-search-categories {
+    position: fixed;
+    z-index: 210;
+    top: calc(100dvh - var(--sheet-keyboard, 0px) - var(--sheet-height) - var(--sheet-lift) + 8px);
+    right: var(--explorer-panel-left);
+    left: calc(var(--explorer-panel-left) + var(--tablet-search-width) + 12px);
     display: flex;
-    grid-row: 1;
-    grid-column: 2;
-    align-self: center;
+    align-items: center;
+    height: var(--explorer-search-height);
     flex-wrap: nowrap;
     min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
+    transform: translate3d(0, var(--sheet-offset), 0);
+    transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
   }
+  body:has(.object-sidebar.is-dragging) .object-search-categories { transition: none; }
   :is(.object-search-category, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
 }

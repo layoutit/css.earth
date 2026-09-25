@@ -1,7 +1,6 @@
-import { cross3 as cross } from '../../../platform/vector3.mts';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { projectVolumeSphere } from './projected-volume-visibility.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
-import { dot3 as dot } from '../../../platform/vector3.mts';
 
 type View = PreparedVolumeImpostors['views'][number];
 export interface VolumeImpostorProjection {
