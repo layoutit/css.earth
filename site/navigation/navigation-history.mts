@@ -23,7 +23,8 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
   const snapshots = new Map<string, string>();
   // The entry each pushed entry was pushed from, so Back during a flight can be recognised.
   const previous = new Map<string, string>();
-  const prefix = crypto.randomUUID();
+  // Not randomUUID: it exists only in secure contexts, and a device on the network loads the dev server over plain http.
+  const prefix = Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
   let serial = 0, entry = `${prefix}-${++serial}`, disposed = false;
   const state = () => ({ ...(windowTarget.history.state ?? {}), cssEarthEntry: entry });
   function remember() {
