@@ -21,8 +21,8 @@ import {
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 // Sidebar thumbnails share the directory but belong to prepare-sidebar-thumbnails, whose manifest lists them.
-const sidebarThumbnails = JSON.parse(await readFile(resolve(projectRoot, "public/navigation/sidebar-thumbnails.json"), "utf8")) as { images: Record<string, { url: string; url2x: string }> };
-const sidebarFiles = new Set(["sidebar-thumbnails.json", ...Object.values(sidebarThumbnails.images).flatMap(({ url, url2x }) => [url, url2x].map((path) => path.replace("/navigation/", "")))]);
+const sidebarThumbnails = JSON.parse(await readFile(resolve(projectRoot, "public/navigation/sidebar-thumbnails.json"), "utf8")) as { images: Record<string, { url2x: string }> };
+const sidebarFiles = new Set(["sidebar-thumbnails.json", ...Object.values(sidebarThumbnails.images).map(({ url2x }) => url2x.replace("/navigation/", ""))]);
 const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"))).filter((file) => !sidebarFiles.has(file)).sort();
 
 const transparentMarkerFiles = Object.freeze([

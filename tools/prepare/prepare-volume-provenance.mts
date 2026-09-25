@@ -19,9 +19,10 @@ import { readInventory, mergeInventory, inventoryText } from '../../src/platform
 import { manifestSources } from '../sources/context-source-records.mts';
 import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
+import { DECORATIVE_WEBP } from '../../src/preparation/raster/lossy-lane.ts';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/sources/context-source-records.mts',
-  'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts'] as const;
+  'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'src/preparation/raster/lossy-lane.ts'] as const;
 
 const integer = (value: unknown): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
@@ -221,7 +222,8 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
   if (bytes === null) throw new Error(`Preview is missing: ${pin.path}`);
   let pipeline = sharp(bytes, { limitInputPixels: 50000000 });
   if (pin.crop) pipeline = pipeline.extract(pin.crop);
-  const result = await pipeline.resize({ width: 768, height: 768, fit: 'inside', withoutEnlargement: true }).webp({ quality: 82 }).toBuffer({ resolveWithObject: true });
+  // The sidebar shows the preview 300 CSS px wide: keep 2x of that, in the decorative encoding.
+  const result = await pipeline.resize({ width: 600, height: 600, fit: 'inside', withoutEnlargement: true }).webp(DECORATIVE_WEBP).toBuffer({ resolveWithObject: true });
   const { width, height } = result.info;
   return { bytes: result.data, width, height };
 }
