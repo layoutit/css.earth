@@ -14,15 +14,14 @@ import { sampleAgreement } from './sample-agreement.mts';
  * data/jwst/ledger.json and docs/jwst-ledger.md; --local rewrites only the repository-derived part of both, from the ledger
  * already on disk, because pinning a program or writing a receipt changes nothing the archive said; --targets writes every
  * target of every mode, which is too long to keep. */
-import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { firstSkyPosition } from '../archive-sky-position.mts';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from './mast.mts';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
+import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
 
 /** MAST's observing modes, what each one records, and the tool that reduces it here (none: nothing reads it yet). */
 export const JWST_MODES: readonly { readonly mode: string; readonly records: string; readonly draws: string; readonly tool: string | null; readonly note?: string }[] = [
@@ -92,7 +91,7 @@ const readJson = async (path: string): Promise<unknown> => JSON.parse(await read
 /** Every object package, with the names a JWST proposer might have used and, for what does not move, where it is on the sky:
  * a star within half an arcminute, a nebula within a sixth of a degree of the centre its recipe records. */
 export async function shippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
-  const ids = (await readdir(resolve(repository, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
+  const ids = await shippedObjectIds(repository);
   return Promise.all(ids.map(async id => {
     const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)).catch(() => undefined);
     const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
@@ -146,9 +145,6 @@ export async function timeSeriesVisits(nowMjd: number): Promise<TimeSeriesVisit[
   }
   return [...visits.values()];
 }
-
-/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
-const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 /** The schemas the three imaging stages write their reproduction receipts under. Nothing else is a receipt. */
 export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-image3-reproduction@2', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-coron3-reproduction@2', 'cssearth-jwst-spec3-reproduction@1', 'cssearth-jwst-spec3-reproduction@2', 'cssearth-jwst-spec3-reproduction@3'] as const;
@@ -269,9 +265,7 @@ export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSe
 export function parseLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'JWST ledger');
   if (row.schema !== 'cssearth-jwst-ledger@1' && row.schema !== 'cssearth-jwst-ledger@2') throw new TypeError('Unsupported JWST ledger.');
-  const names = (list: unknown, label: string) => requireArray(list, label).map(name => requireString(name, label));
-  const counts = (value: unknown, label: string) => Object.fromEntries(Object.entries(requireRecord(value, label)).map(([key, count]) => [key, requireFiniteNumber(count, label)]));
-  const orNull = (value: unknown, label: string) => value === null ? null : requireFiniteNumber(value, label);
+  const names = nameList, counts = countRecord, orNull = numberOrNull;
   return { schema: row.schema, archiveDate: requireString(row.archiveDate, 'Archive date'),
     modes: requireArray(row.modes, 'Modes').map(raw => { const entry = requireRecord(raw, 'Mode');
       return { mode: requireString(entry.mode, 'Mode name'), observations: requireFiniteNumber(entry.observations, 'Observations'), targets: orNull(entry.targets, 'Targets'),
@@ -346,7 +340,7 @@ ${ledger.objects.map(object => `| ${object.id} | ${Object.entries(object.observa
 
 A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
 
-${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}` : 'None: every receipt beside a pinned program was accepted.'}
+${receiptProblemsParagraph(ledger.receiptProblems)}
 
 ## Limits
 
@@ -357,43 +351,34 @@ ${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${led
 `;
 }
 
-const LEDGER = resolve(REPOSITORY, 'data/jwst/ledger.json'), GUIDE = resolve(REPOSITORY, 'docs/jwst-ledger.md');
-/** Refresh only repository-owned program and receipt state after a qualification run. */
-export async function refreshLocalLedger(): Promise<Ledger> {
-  const ledger = withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryState());
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 1)}\n`);
-  await writeFile(GUIDE, ledgerGuide(ledger));
-  return ledger;
-}
-/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
-const reportProblems = (problems: readonly string[]) => {
-  for (const problem of problems) console.error(`RECEIPT ${problem}`);
-  if (problems.length) process.exitCode = 1;
-};
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), listed = JWST_MODES.map(entry => entry.mode).filter(mode => mode !== 'NIRSPEC/MSA');
+/** The survey of MAST: every public level-3 observation of the listed modes, the time-series visits and the one counted
+ * mode. With `--targets <path>` it also writes every target of every mode, which is too long to keep. */
+async function surveyMast(args: readonly string[]): Promise<Ledger> {
+  const listed = JWST_MODES.map(entry => entry.mode).filter(mode => mode !== 'NIRSPEC/MSA');
   const now = new Date(), nowMjd = now.getTime() / 86_400_000 + 40_587;
-  if (args.includes('--local')) {
-    const ledger = await refreshLocalLedger();
-    console.log(`JWST_LEDGER ${LEDGER} ${GUIDE} (repository state only)`);
-    reportProblems(ledger.receiptProblems);
-    process.exit(process.exitCode ?? 0);
-  }
   const [rows, visits, objects, state, msa] = await Promise.all([archiveRows(listed), timeSeriesVisits(nowMjd), shippedObjects(), repositoryState(), archiveCount('NIRSPEC/MSA')]);
   const ledger = buildLedger(rows, visits, new Map([['NIRSPEC/MSA', msa]]), objects, state, now.toISOString().slice(0, 10));
-  for (const mode of ledger.modes) console.log(`${mode.mode.padEnd(14)} ${String(mode.observations).padStart(7)} obs ${String(mode.targets ?? '').padStart(5)} targets ${String(mode.shippedObjects).padStart(3)} shipped  bands ${String(mode.bands).padStart(2)}  programs ${mode.programs.length} checked ${mode.checked.length}`);
-  for (const series of ledger.timeSeries) console.log(`${series.exposure.padEnd(17)} ${String(series.visits).padStart(4)} visits ${String(series.targets).padStart(4)} targets  shipped ${series.shippedObjects.length}  programs ${series.programs.length} checked ${series.checked.length}`);
-  console.log(`JWST_LEDGER ${JSON.stringify({ observations: ledger.modes.reduce((total, mode) => total + mode.observations, 0), shippedObjects: ledger.objects.length })}`);
-  if (args.includes('--write')) {
-    await mkdir(dirname(LEDGER), { recursive: true });
-    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 1)}\n`); await writeFile(GUIDE, ledgerGuide(ledger));
-  }
-  reportProblems(ledger.receiptProblems);
   const targets = args.indexOf('--targets');
   if (targets >= 0) {
     const byTarget = new Map<string, { target: string; mode: string; observations: number; programmes: Set<string>; objects: string[] }>();
     for (const row of rows) { const key = `${row.mode}|${row.target}`, entry = byTarget.get(key) ?? { target: row.target, mode: row.mode, observations: 0, programmes: new Set<string>(), objects: matchTarget(row, objects) }; entry.observations++; entry.programmes.add(row.programme); byTarget.set(key, entry); }
     await writeFile(resolve(args[targets + 1]!), `${JSON.stringify([...byTarget.values()].map(entry => ({ ...entry, programmes: [...entry.programmes] })), null, 1)}\n`);
   }
+  return ledger;
 }
+
+/** The JWST ledger, written at indent 1: the full pass prints every mode and writes only with `--write`; `--local` retakes
+ * what is pinned, checked and drawn, and ends the process when it has reported. Its parse rebuilds each object's keys in
+ * their parse order, so a local pass puts `timeSeriesVisits` before `records` where a full pass wrote them after. */
+export const JWST_LEDGER: ArchiveLedger<Ledger> = {
+  files: ledgerFiles('data/jwst/ledger.json', 'docs/jwst-ledger.md'), indent: 1, guide: ledgerGuide,
+  survey: surveyMast, writes: 'with --write',
+  local: { parse: parseLedger, writes: 'always', exit: true, refresh: async previous => withRepositoryState(previous, await repositoryState()) },
+  receiptProblems: ledger => ledger.receiptProblems,
+  summary: (ledger, { local }) => local ? [`JWST_LEDGER ${JWST_LEDGER.files.ledger} ${JWST_LEDGER.files.guide} (repository state only)`] : [
+    ...ledger.modes.map(mode => `${mode.mode.padEnd(14)} ${String(mode.observations).padStart(7)} obs ${String(mode.targets ?? '').padStart(5)} targets ${String(mode.shippedObjects).padStart(3)} shipped  bands ${String(mode.bands).padStart(2)}  programs ${mode.programs.length} checked ${mode.checked.length}`),
+    ...ledger.timeSeries.map(series => `${series.exposure.padEnd(17)} ${String(series.visits).padStart(4)} visits ${String(series.targets).padStart(4)} targets  shipped ${series.shippedObjects.length}  programs ${series.programs.length} checked ${series.checked.length}`),
+    `JWST_LEDGER ${JSON.stringify({ observations: ledger.modes.reduce((total, mode) => total + mode.observations, 0), shippedObjects: ledger.objects.length })}`],
+};
+
+if (isCommand(import.meta.url)) await runArchiveLedger(JWST_LEDGER);

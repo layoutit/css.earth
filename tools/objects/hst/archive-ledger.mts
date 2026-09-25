@@ -25,9 +25,8 @@
  * altogether partway through a pass. A count or a listing that will not answer stops the pass, because the ledger would be
  * wrong without it; a cone search that will not answer is recorded as unanswered and the pass goes on, because which objects
  * were asked and which were not is itself the honest result. */
-import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { firstSkyPosition } from '../archive-sky-position.mts';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from '@cssearth/telescope/node';
@@ -36,10 +35,8 @@ import { runDigest } from '@cssearth/telescope/node';
 import { parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
+import { isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
-export const LEDGER = resolve(REPOSITORY, 'data/hst/ledger.json');
-export const GUIDE = resolve(REPOSITORY, 'docs/hubble-ledger.md');
 
 /** The two capabilities a configuration has, which are never one capability.
  *
@@ -143,7 +140,7 @@ const readJson = async (path: string): Promise<unknown> =>
 /** Every object package, with the names a proposer might have used and, for what does not move, where it is on the sky: a star
  * within half an arcminute, a nebula within a sixth of a degree of the centre its own recipe records. */
 export async function shippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
-  const ids = (await readdir(resolve(repository, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
+  const ids = await shippedObjectIds(repository);
   return Promise.all(ids.map(async id => {
     const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`));
     const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
@@ -213,9 +210,6 @@ export async function fixedRows(object: ShippedObject): Promise<ArchiveRow[] | n
   if (data.length === PAGE) throw new RangeError(`${object.id}: the position listing is cut at its page size.`);
   return data.map(row => ({ observation: requireString(row.obs_id), target: String(row.target_name ?? ''), programme: String(row.proposal_id), configuration: String(row.instrument_name ?? '') }));
 }
-
-/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
-const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 export const HST_REPRODUCTION_SCHEMA = 'cssearth-hst-reproduction@1';
 /** What a receipt has to say for the observation it names to count as re-calibrated: which program, observation and product it
@@ -401,7 +395,7 @@ export function parseLedger(value: unknown): Ledger {
   const counts = requireRecord(row.observations, 'Observation counts');
   const observations = Object.fromEntries((['collection', 'counted', 'other', 'moving'] as const)
     .map(key => [key, requireFiniteNumber(counts[key], key)])) as Ledger['observations'];
-  const names = (list: unknown, label: string) => requireArray(list, label).map(name => requireString(name, label));
+  const names = nameList;
   const configurations = requireArray(row.configurations, 'Configurations').map(raw => {
     const entry = requireRecord(raw, 'Configuration');
     return { ...entry, configuration: requireString(entry.configuration, 'Configuration name'), records: requireString(entry.records, 'Records'),
@@ -480,9 +474,7 @@ export function ledgerGuide(ledger: Ledger): string {
     '',
     `An archive-final program counts as qualified only when the \`<id>.archive-final.product.json\` beside it parses as a \`${ARCHIVE_FINAL_STAGE}\` product record, matches the current program selection (including component HDUs, units and observation identity), states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one \`archive-origin\` entry for the science product and no \`archive-agreement\` at all. A record that cannot be read proves less than no record, so it is reported here too.`,
     '',
-    ledger.receiptProblems.length
-      ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}`
-      : 'None: every receipt beside a pinned program was accepted.',
+    receiptProblemsParagraph(ledger.receiptProblems),
     '',
     '## Limits',
     '',
@@ -509,22 +501,8 @@ export function withRepositoryState(ledger: Ledger, receipts: Awaited<ReturnType
   }), receiptProblems: receipts.problems };
 }
 
-/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
-const reportProblems = (problems: readonly string[]) => {
-  for (const problem of problems) console.error(`RECEIPT ${problem}`);
-  if (problems.length) process.exitCode = 1;
-};
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const write = process.argv.includes('--write');
-  if (process.argv.includes('--local')) {
-    const ledger = withRepositoryState(parseLedger(await readJson(LEDGER)), await repositoryReceipts());
-    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-    await writeFile(GUIDE, ledgerGuide(ledger));
-    console.log(`HST_LEDGER ${LEDGER} ${GUIDE} (repository state only)`);
-    reportProblems(ledger.receiptProblems);
-    process.exit(process.exitCode ?? 0);
-  }
+/** The survey of MAST: every configuration counted, every moving target listed, one cone search per positioned object. */
+async function surveyMast(): Promise<Ledger> {
   const objects = await shippedObjects();
   const collection = await archiveCount();
   const counts = new Map<string, number>();
@@ -540,13 +518,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     fixed.set(object.id, rows);
     console.log(`${object.id}: ${rows === null ? 'unanswered' : `${rows.length} within ${(object.position!.radiusDeg * 60).toFixed(1)} arcmin`}`);
   }
-  const ledger = buildLedger(counts, collection, moving, fixed, objects, await repositoryReceipts(), new Date().toISOString().slice(0, 10));
-  if (!write) console.log(JSON.stringify(ledger.observations));
-  else {
-    await mkdir(resolve(LEDGER, '..'), { recursive: true });
-    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-    await writeFile(GUIDE, ledgerGuide(ledger));
-    console.log(`HST_LEDGER ${LEDGER} ${GUIDE}`);
-  }
-  reportProblems(ledger.receiptProblems);
+  return buildLedger(counts, collection, moving, fixed, objects, await repositoryReceipts(), new Date().toISOString().slice(0, 10));
 }
+
+/** The Hubble ledger: the full pass writes only with `--write`, and prints its totals otherwise; `--local` retakes both
+ * capabilities of every configuration from the repository, reads the ledger on disk as absent rather than failing when
+ * it is missing, and ends the process when it has reported. */
+export const HST_LEDGER: ArchiveLedger<Ledger> = {
+  files: ledgerFiles('data/hst/ledger.json', 'docs/hubble-ledger.md'), indent: 2, guide: ledgerGuide,
+  survey: surveyMast, writes: 'with --write',
+  local: { parse: parseLedger, read: readJson, writes: 'always', exit: true, refresh: async previous => withRepositoryState(previous, await repositoryReceipts()) },
+  receiptProblems: ledger => ledger.receiptProblems,
+  summary: (ledger, { local, write }) => [local ? `HST_LEDGER ${HST_LEDGER.files.ledger} ${HST_LEDGER.files.guide} (repository state only)`
+    : write ? `HST_LEDGER ${HST_LEDGER.files.ledger} ${HST_LEDGER.files.guide}` : JSON.stringify(ledger.observations)],
+};
+
+if (isCommand(import.meta.url)) await runArchiveLedger(HST_LEDGER);

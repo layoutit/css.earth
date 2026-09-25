@@ -18,17 +18,14 @@
  *
  * A pointing whose target name marks it as background, blank sky, an offset or a calibration field is never counted as an
  * observation of an object, however close to one it lands. */
-import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { countRecord, isCommand, ledgerFiles, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 import { cxcQuery, observationMode, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
 
-const repository = resolve(import.meta.dirname, '../../..');
-export const LEDGER = resolve(repository, 'data/chandra/ledger.json');
-export const GUIDE = resolve(repository, 'docs/chandra-ledger.md');
-const OBJECTS = resolve(repository, 'src/objects');
-const BODIES = resolve(repository, 'packages/astronomy/data/bodies');
+const OBJECTS = resolve(REPOSITORY, 'src/objects');
+const BODIES = resolve(REPOSITORY, 'packages/astronomy/data/bodies');
 
 /** A pointing named like this is a background, blank-sky, offset or dark field: never an observation of the object nearest it. */
 export const NOT_AN_OBJECT = /BLANKSKY|BLANK_SKY|BACKGROUND|BKG|OFFSET|DARK|STOWED|FIELD\b|CALIBRATION/u;
@@ -53,7 +50,7 @@ export const MOVING_TARGETS: Readonly<Record<string, readonly string[]>> = {
  * prepared Local Group catalogue, or the body record's own star position. Nothing is listed here that the repository does not
  * state. */
 export async function shippedSkyObjects(): Promise<ShippedObject[]> {
-  const ids = new Set((await readdir(OBJECTS, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name));
+  const ids = new Set(await shippedObjectIds());
   const found = new Map<string, ShippedObject>();
   const add = (id: string, raDeg: unknown, decDeg: unknown, source: string) => {
     if (!ids.has(id) || found.has(id)) return;
@@ -97,7 +94,7 @@ export function objectBox(object: ShippedObject, radiusDegrees = OBJECT_RADIUS_D
 
 /** Every shipped object the ledger searches for: the moving targets this module names, then everything with a stated position. */
 export async function shippedObjects(): Promise<ShippedObject[]> {
-  const ids = new Set((await readdir(OBJECTS, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name));
+  const ids = new Set(await shippedObjectIds());
   const moving = Object.keys(MOVING_TARGETS).filter(id => ids.has(id))
     .map(id => ({ id, source: 'tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)' }));
   const fixed = (await shippedSkyObjects()).filter(object => !MOVING_TARGETS[object.id]);
@@ -135,9 +132,6 @@ export async function observationsOf(object: ShippedObject, query: typeof cxcQue
     ` AND dec BETWEEN ${box.decLow.toFixed(6)} AND ${box.decHigh.toFixed(6)} AND status='archived'${instrument}${time}${limit === undefined ? '' : ' ORDER BY exposure_time DESC, obsid'}`);
   return rows.map(row).filter(entry => isObjectPointing(entry.targetName)).sort((a, b) => b.exposureKs - a.exposureKs);
 }
-
-/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
-const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 export const CHANDRA_REPRODUCTION_SCHEMA = 'cssearth-chandra-reproduction@1';
 /** What a receipt has to say for the observation it names to count as reproduced: which program, obsid and level-2 product it
@@ -261,7 +255,7 @@ export function parseLedger(value: unknown): Awaited<ReturnType<typeof buildLedg
   const row = requireRecord(value, 'Chandra ledger');
   if (row.schema !== 'cssearth-chandra-ledger@1') throw new TypeError('Unsupported Chandra ledger.');
   const archive = requireRecord(row.archive, 'Archive counts');
-  const counts = (value: unknown, label: string) => Object.fromEntries(Object.entries(requireRecord(value, label)).map(([key, n]) => [key, requireFiniteNumber(n, label)]));
+  const counts = countRecord;
   return { schema: 'cssearth-chandra-ledger@1', measured: requireString(row.measured, 'Measured date'),
     archive: { archivedObservations: requireFiniteNumber(archive.archivedObservations, 'Archived observations'), byInstrument: counts(archive.byInstrument, 'Observations by instrument'),
       byGrating: counts(archive.byGrating, 'Observations by grating'), byExposureMode: counts(archive.byExposureMode, 'Observations by exposure mode') },
@@ -310,24 +304,20 @@ ${modes.map(([key, entry]) => `| ${key} | ${entry.state} | ${entry.state === 're
 
 An observation counts as reproduced only when a receipt beside its program parses, states the \`${CHANDRA_REPRODUCTION_SCHEMA}\` schema, and names that program, that obsid, that detector and mode, and the level-2 product the program pins, with the size and digest of the archive file it compared. A receipt that says anything else is reported here and proves nothing.
 
-${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}` : 'None: every receipt beside a pinned program was accepted.'}
+${receiptProblemsParagraph(ledger.receiptProblems)}
 `;
 }
 
-/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
-const reportProblems = (problems: readonly string[]) => {
-  for (const problem of problems) console.error(`RECEIPT ${problem}`);
-  if (problems.length) process.exitCode = 1;
+/** The Chandra ledger: a full pass writes both files; `--local` retakes the modes and receipt problems from the pinned
+ * programs and leaves the dated archive snapshot alone. */
+export const CHANDRA_LEDGER: ArchiveLedger<Awaited<ReturnType<typeof buildLedger>>> = {
+  files: ledgerFiles('data/chandra/ledger.json', 'docs/chandra-ledger.md'), indent: 2, guide,
+  survey: () => buildLedger(), writes: 'always',
+  local: { parse: parseLedger, writes: 'always', refresh: async previous => { const pinned = await pinnedState(); return { ...previous, modes: modeStates(pinned), receiptProblems: pinned.problems }; } },
+  receiptProblems: ledger => ledger.receiptProblems,
+  summary: (ledger, { local }) => [`LEDGER ${CHANDRA_LEDGER.files.ledger} ${Object.keys(ledger.shippedObjects).length} objects, ${Object.keys(ledger.modes).length} modes${local ? ' (pinned state only)' : ''}`],
 };
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const pinned = process.argv.includes('--local') ? await pinnedState() : null;
-  const ledger = pinned ? { ...parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown), modes: modeStates(pinned), receiptProblems: pinned.problems } : await buildLedger();
-  await mkdir(resolve(LEDGER, '..'), { recursive: true });
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, guide(ledger));
-  console.log(`LEDGER ${LEDGER} ${Object.keys(ledger.shippedObjects).length} objects, ${Object.keys(ledger.modes).length} modes${pinned ? ' (pinned state only)' : ''}`);
-  reportProblems(ledger.receiptProblems);
-}
+if (isCommand(import.meta.url)) await runArchiveLedger(CHANDRA_LEDGER);
 
 export { guide as ledgerGuide };

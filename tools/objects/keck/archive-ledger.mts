@@ -17,19 +17,15 @@
  * `52 Europa`. It is reduced to letters and digits, and a name carrying a minor-planet number matches only an id that carries
  * the same number, so 52 Europa is never Jupiter's moon. Only `koaimtyp='object'` rows count: a pointing, bias or flat frame
  * is not an observation of the object. */
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { isRecord, requireRecord } from '@cssearth/core';
 import { readProductRecord } from '@cssearth/telescope/node';
 import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';
+import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
-export const OBJECTS = resolve(REPOSITORY, 'src/objects');
-export const LEDGER = resolve(REPOSITORY, 'data/keck/ledger.json');
-export const GUIDE = resolve(REPOSITORY, 'docs/keck-ledger.md');
 export const SCHEMA = 'cssearth-keck-ledger@1';
 
 /** Why an instrument's frames can or cannot be re-reduced here, and where that was checked. An entry is a statement about
@@ -228,7 +224,7 @@ export async function targetCounts(table: InstrumentTable) {
 }
 
 export async function buildLedger(measured: string): Promise<Ledger> {
-  const shipped = new Set((await readdir(OBJECTS, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name));
+  const shipped = new Set(await shippedObjectIds());
   const { programs, receipts, receiptProblems } = await pinnedEvidence();
   const found = new Map<string, { frames: number; targets: Set<string>; instruments: Record<string, number> }>();
   const modes: ModeState[] = [];
@@ -291,11 +287,12 @@ export function ledgerGuide(ledger: Ledger) {
   return `${lines.join('\n')}\n`;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const measured = new Date().toISOString().slice(0, 10);
-  const ledger = await buildLedger(measured);
-  await mkdir(resolve(REPOSITORY, 'data/keck'), { recursive: true });
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, ledgerGuide(ledger));
-  console.log(`KECK_LEDGER ${LEDGER} (${ledger.objects.length} objects, ${ledger.modes.filter(mode => mode.state === 'reduced').length} of ${ledger.modes.length} instruments reduced)`);
-}
+/** The Keck ledger: always a full pass against KOA, written every time. It has no local pass, and receipt problems are
+ * recorded in the ledger rather than reported. */
+export const KECK_LEDGER: ArchiveLedger<Ledger> = {
+  files: ledgerFiles('data/keck/ledger.json', 'docs/keck-ledger.md'), indent: 2, guide: ledgerGuide,
+  survey: () => buildLedger(new Date().toISOString().slice(0, 10)), writes: 'always',
+  summary: ledger => [`KECK_LEDGER ${KECK_LEDGER.files.ledger} (${ledger.objects.length} objects, ${ledger.modes.filter(mode => mode.state === 'reduced').length} of ${ledger.modes.length} instruments reduced)`],
+};
+
+if (isCommand(import.meta.url)) await runArchiveLedger(KECK_LEDGER);

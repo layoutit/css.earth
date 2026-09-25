@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '../interferometry/fits-table.mts';
 import { parseHstProgram, PROGRAMS, suffixOf } from './archive.mts';
-import { GUIDE, HST_CONFIGURATIONS, isNotAnObject, LEDGER, ledgerGuide, matchTarget, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
+import { HST_CONFIGURATIONS, isNotAnObject, ledgerGuide, matchTarget, parseLedger, repositoryState, type ShippedObject, HST_LEDGER } from './archive-ledger.mts';
 import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
 import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
 import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from './compare.mts';
@@ -312,7 +312,7 @@ test('a moving target names an object by its whole name, its first word or its n
 });
 
 test('the checked-in ledger counts what the pinned programs hold, and the guide says what the ledger says', async () => {
-  const ledger = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')));
+  const ledger = parseLedger(JSON.parse(await readFile(HST_LEDGER.files.ledger, 'utf8')));
   assert.deepEqual(ledger.configurations.map(entry => entry.configuration), HST_CONFIGURATIONS.map(entry => entry.configuration));
   // Nothing is declared: each configuration's programs come from the files beside them.
   const held = await repositoryState(REPOSITORY);
@@ -327,7 +327,7 @@ test('the checked-in ledger counts what the pinned programs hold, and the guide 
   assert.ok(ledger.movingTargets.some(entry => entry.object === 'europa'));
   // A cone search MAST would not answer is recorded, not dropped: no object is in both lists.
   for (const object of ledger.unansweredTargets) assert.ok(!ledger.fixedTargets.some(entry => entry.object === object), object);
-  assert.equal(await readFile(GUIDE, 'utf8'), ledgerGuide(ledger), 'docs/hubble-ledger.md is the ledger’s own guide');
+  assert.equal(await readFile(HST_LEDGER.files.guide, 'utf8'), ledgerGuide(ledger), 'docs/hubble-ledger.md is the ledger’s own guide');
 });
 
 const DRIZZLED = { NDRIZIM: 1, D001GEOM: 'wcs', D001KERN: 'square  ', D001PIXF: 1, D001SCAL: 0.03962000086903572, D001FVAL: 'INDEF   ', D001OUUN: 'cps     ' };

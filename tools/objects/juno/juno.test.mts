@@ -8,7 +8,7 @@ import { kernelBankRoot } from '../../spice/kernel-bank.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
-import { GUIDE, LEDGER, SCHEMA, castingObjects, holdings, ledgerGuide, matchShippedObject, measuredPrograms, objectStates, shippedObjects, type Ledger } from './archive-ledger.mts';
+import { SCHEMA, castingObjects, holdings, ledgerGuide, matchShippedObject, measuredPrograms, objectStates, shippedObjects, type Ledger, JUNO_LEDGER } from './archive-ledger.mts';
 import { POLICY, RECEIPT_SCHEMA, addRegistrationEvidence, ellipsoidMesh, registrationRun, registrationSoftware } from './measure.mts';
 
 // Two lines of JNOJNC_0024/INDEX/INDEX.TAB as the PDS serves them, and a methane image made from the second.
@@ -130,9 +130,9 @@ test('every pinned program has a receipt for exactly its images, from its kernel
 });
 
 test('the ledger page is the ledger, and its states are what the programs, receipts and packages give', async () => {
-  const ledger = JSON.parse(await readFile(LEDGER, 'utf8')) as Ledger;
+  const ledger = JSON.parse(await readFile(JUNO_LEDGER.files.ledger, 'utf8')) as Ledger;
   assert.equal(ledger.schema, SCHEMA);
-  assert.equal(await readFile(GUIDE, 'utf8'), ledgerGuide(ledger), 'docs/junocam-ledger.md is generated; run node tools/objects/juno/archive-ledger.mts');
+  assert.equal(await readFile(JUNO_LEDGER.files.guide, 'utf8'), ledgerGuide(ledger), 'docs/junocam-ledger.md is generated; run node tools/objects/juno/archive-ledger.mts');
   assert.deepEqual(ledger.objects, objectStates(ledger.targets, await measuredPrograms(), await castingObjects(await shippedObjects())));
   assert.equal(ledger.calibratedImages, Object.values(ledger.byFilterCombination).reduce((sum, n) => sum + n, 0));
   assert.equal(ledger.targets.reduce((sum, entry) => sum + entry.images, 0), ledger.calibratedImages);

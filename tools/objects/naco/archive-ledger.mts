@@ -15,15 +15,12 @@
  * `EUROPA` is Jupiter's moon, `52_EUROPA` is the asteroid this project ships as `europa-52`, and `195EURYKLEIA-26T0400` is a
  * third body with an ephemeris stamp glued to its name. Acquisition, sky and offset frames are never counted as an
  * observation of the object, because they are pointing and background exposures. */
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { INSTRUMENT, MODES, PROGRAMS, rawQuery, REFUSED_TECHNIQUES, type NacoMode } from './archive.mts';
+import { countRecord, isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 
-const repository = resolve(import.meta.dirname, '../../..');
-export const LEDGER = resolve(repository, 'data/naco/ledger.json');
-export const GUIDE = resolve(repository, 'docs/naco-ledger.md');
 export const SCHEMA = 'cssearth-naco-ledger@2';
 
 /** Frame categories that are never an observation of the object: pointing exposures, background exposures and tests. */
@@ -152,8 +149,7 @@ export async function scienceObservationRows(today: string, targets: readonly st
 
 /** The shipped object ids: the directories of src/objects. */
 export async function shippedObjects() {
-  const entries = await readdir(resolve(repository, 'src/objects'), { withFileTypes: true });
-  return new Set(entries.filter(entry => entry.isDirectory()).map(entry => entry.name));
+  return new Set(await shippedObjectIds());
 }
 
 /** Group the archive's science rows by the shipped object they name. */
@@ -188,9 +184,6 @@ export function observationsOf(rows: readonly Record<string, string>[], shipped:
     })).sort((a, b) => a.startIso.localeCompare(b.startIso) || a.id.localeCompare(b.id)),
   })).sort((a, b) => b.frames - a.frames || a.id.localeCompare(b.id));
 }
-
-/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
-const receiptProblem = (file: string, error: unknown) => { const said = error instanceof Error ? error.message : String(error); return said.startsWith(`${file}:`) ? said : `${file}: ${said}`; };
 
 /** The schemas this route's checks write. `reproduction` compares two object templates or two nod halves of one night;
  * `spectrum` is the extracted spectrum's own check of the same night's two halves. */
@@ -273,8 +266,7 @@ export function parseLedger(value: unknown): Ledger {
   if (row.schema !== SCHEMA) throw new TypeError('Unsupported NACO ledger.');
   if (row.instrument !== INSTRUMENT) throw new TypeError(`The ledger counts ${String(row.instrument)}, not ${INSTRUMENT}.`);
   const frames = requireRecord(row.frames, 'Frame counts');
-  const counts = (value: unknown, label: string) => Object.fromEntries(Object.entries(requireRecord(value, label)).map(([key, n]) => [key, requireFiniteNumber(n, label)]));
-  const names = (list: unknown, label: string) => requireArray(list, label).map(name => requireString(name, label));
+  const counts = countRecord, names = nameList;
   return { schema: SCHEMA, instrument: INSTRUMENT, measured: requireString(row.measured, 'Measured date'),
     frames: { total: requireFiniteNumber(frames.total, 'Total frames'), byCategory: counts(frames.byCategory, 'Frames by category'), byMode: counts(frames.byMode, 'Frames by mode') },
     objects: requireArray(row.objects, 'Objects').map(raw => { const entry = requireRecord(raw, 'Object');
@@ -334,38 +326,21 @@ ${objects.join('\n')}
 
 A receipt counts only when it parses, states one of the schemas this route writes (${NACO_RECEIPT_SCHEMAS.map(schema => `\`${schema}\``).join(', ')}), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path, size and digest. A receipt that says anything else is reported here and proves nothing.
 
-${ledger.receiptProblems.length ? `${ledger.receiptProblems.length} receipt${ledger.receiptProblems.length === 1 ? '' : 's'} could not be accepted:\n\n${ledger.receiptProblems.map(problem => `- ${problem}`).join('\n')}` : 'None: every receipt beside a pinned program was accepted.'}
+${receiptProblemsParagraph(ledger.receiptProblems)}
 `;
 }
 
-/** Every receipt problem, said once and counted against the run: a ledger that reports one has not proved what it lists. */
-const reportProblems = (problems: readonly string[]) => {
-  for (const problem of problems) console.error(`RECEIPT ${problem}`);
-  if (problems.length) process.exitCode = 1;
+/** The NACO ledger: a full pass writes both files every time; `--local` retakes the modes and receipt problems from the
+ * pinned programs and leaves the dated archive counts alone. */
+export const NACO_LEDGER: ArchiveLedger<Ledger> = {
+  files: ledgerFiles('data/naco/ledger.json', 'docs/naco-ledger.md'), indent: 2, guide: ledgerGuide,
+  survey: () => buildLedger(), writes: 'always',
+  local: { parse: parseLedger, writes: 'always', refresh: async held => { const { modes, problems } = await modeStates(held.frames.byMode); return { ...held, modes, receiptProblems: problems }; } },
+  receiptProblems: ledger => ledger.receiptProblems,
+  summary: (ledger, { local }) => [`${NACO_LEDGER.files.ledger}: ${thousands(ledger.frames.total)} frames, ${ledger.objects.length} shipped objects, ${ledger.modes.length} modes${local ? ' (pinned state only)' : ''}.`],
 };
 
-/** Refresh only receipt-derived state after a qualification run; archive holdings remain the measured snapshot on disk. */
-export async function refreshLocalLedger() {
-  const held = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown), { modes, problems } = await modeStates(held.frames.byMode);
-  const ledger = { ...held, modes, receiptProblems: problems };
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, ledgerGuide(ledger));
-  return ledger;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const local = process.argv.includes('--local');
-  let ledger: Ledger;
-  if (local) ledger = await refreshLocalLedger();
-  else ledger = await buildLedger();
-  await mkdir(resolve(repository, 'data/naco'), { recursive: true });
-  if (!local) {
-    await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-    await writeFile(GUIDE, ledgerGuide(ledger));
-  }
-  console.log(`${LEDGER}: ${thousands(ledger.frames.total)} frames, ${ledger.objects.length} shipped objects, ${ledger.modes.length} modes${local ? ' (pinned state only)' : ''}.`);
-  reportProblems(ledger.receiptProblems);
-}
+if (isCommand(import.meta.url)) await runArchiveLedger(NACO_LEDGER);
 
 export type { NacoMode };
 export { MODES };
