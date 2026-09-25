@@ -551,7 +551,55 @@ would give. `prepare-lighting-bank.js --check`, run by
 [its test](../tools/objects/prepare-lighting-bank.test.ts), bakes each bank afresh
 and compares it with the tracked files byte for byte, so the copy is never stale.
 A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
-inline block and its own encode.
+inline block and its own encode. The `sphere` bank's law is authored: a 0.35
+limb floor with shadows off, a 0.05 ambient term and a terminator ramp. A body
+with a published law leaves the bank, as the planets below do.
+
+### Planet limbs from published laws
+
+A planet map is flattened: its makers divided out how bright each point looked
+at its viewing angle. The planets' lighting overlays put that back with the
+same published law, so the limb in the app is the limb the instrument saw.
+
+- **The law.** Each planet keeps its model in `source/photometry/`, one
+  [model record](../tools/photometry/README.md#model-records) per colour channel.
+  [limb.mts](../tools/photometry/limb.mts) evaluates it relative to the flood-lit
+  disc centre, where incidence, emission and phase are all zero. The centre of
+  the default view shows the map as published; every other pixel follows the
+  paper, including its phase term where it has one. Toward the limb the law is
+  held at the largest emission angle its data reached: the paper's fitted range,
+  or for an OPAL map the outermost pixel of the Hubble disc at its epoch. A
+  Minnaert law extrapolated past that edge runs to white or black in a thin rim.
+  Nothing is added: no floor, ambient term or terminator ramp.
+- **Sources.**
+
+  | Planet | Law | Source |
+  | --- | --- | --- |
+  | Mercury | Kaasalainen–Shkuratov KS3 at 748.7 nm | [Domingue et al. 2016](https://doi.org/10.1016/j.icarus.2015.11.040), the correction of the MDIS maps |
+  | Venus | Minnaert, k 1.32 to 1.36 | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), MESSENGER MASCS |
+  | Mars | Hapke, surface only | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), OMEGA and CRISM |
+  | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
+  | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
+
+  Earth's lanes belong to another branch and keep their own lighting.
+- **One overlay per pixel.** A CSS overlay has one colour and one alpha, and
+  blend modes are not used. The overlay is exact for the map's mean colour,
+  measured at bake, and for every pixel in the channel that sets its alpha. A
+  pixel far from the mean colour is off by (mean − pixel) × (spread of the
+  channel factors), which is largest near the limb.
+- **Halo.** Venus and Mars draw a halo outside the disc from one NASA
+  [PSG](https://psg.gsfc.nasa.gov/) limb profile at full phase, with the Sun behind
+  the viewer. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
+  computes it once, against PSG's own disc centre, and
+  [halo.mts](../tools/photometry/halo.mts) reads it. Every frame draws it where the
+  tangent point faces the Sun. PSG computes limb paths with single scattering,
+  and the brighter halo of a backlit planet is not in the profile.
+- **Why not one model for every disc.** PSG's default atmospheres were checked
+  against Hubble's measured coefficients and missed them. In red, PSG gives
+  Uranus k 1.16 where OPAL measured 0.57. In blue, it gives Saturn 0.73 where
+  OPAL measured 0.40. For Venus it gives about 1.05 where MASCS measured 1.35.
+  Each disc therefore uses its measured law. PSG supplies only what nothing
+  measured: the halo.
 
 ## Run and check a change
 

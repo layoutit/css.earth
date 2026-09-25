@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "opal-2025-minnaert-f657n",
+  "instrument": "Hubble WFC3/UVIS (OPAL)",
+  "filter": "F657N, 657 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 0.57,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      1.4,
+      1.5
+    ],
+    "emissionDegrees": [
+      0,
+      81.7
+    ]
+  }
+}

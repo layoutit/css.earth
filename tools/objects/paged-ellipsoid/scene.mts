@@ -827,7 +827,7 @@ function prepareMaterialBank({
   return Object.freeze({
     id,
     model: source
-      ? "prepared-model-atmosphere-with-google-directional-response-bank"
+      ? "prepared-psg-limb-profile-halo-bank"
       : "prepared-fixed-world-view-bank-bounded-square-shards",
     source,
     ...(illumination && source ? { illumination, atmosphereProfile: atmosphereProfile(source) } : {}),

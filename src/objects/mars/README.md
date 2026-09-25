@@ -13,7 +13,8 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Visible surface | [Viking MDIM 2.1](https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg), colorized by NASA Ames |
 | Elevation display | MOLA color shaded relief from [NASA Trek WMTS tiles](source/manifest.json) |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
-| Atmosphere material | [Authored atmosphere record](source/atmosphere/model.json) |
+| Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
+| Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) limb profile of its Mars template |
 | Dimensions, placement and charts | USGS, JPL and NASA PSG records below |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -39,7 +40,7 @@ Feature notes: 644 of the labelled names carry a caption note, the lead summary 
 
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic (sha256 `1e9123a6…`) has fully black rows 0–28 (north of about 87.5° N) and rows 2034–2047 (south of about 88.8° S), and 2.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
 - The MOLA lens mosaic is stitched from NASA Trek zoom-3 WMTS tiles and the THEMIS lens is a USGS Astrogeology WMS GetMap of the global day-IR mosaic (2026-09-16); the source manifest pins those bytesed mosaics.
-- The atmosphere is a display approximation from the authored scattering parameters in `source/atmosphere/model.json`, adapted from the OpenSpace RenderableAtmosphere tuning; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
+- The disc law is Vincendon's mean surface law with the atmosphere removed, like the Viking map; dust haze over the disc is not drawn, only the halo beyond the limb. The halo is PSG's single-scattering limb profile at full phase for its Mars Climate Database template, not an epoch-specific observation, and a backlit Mars shows a brighter ring than is drawn. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
 - The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
 - Phobos and Deimos are standalone bodies with their own packages.
@@ -118,16 +119,30 @@ There is no Mars cross-section, methane lens, or fabricated interior view.
 
 The atmosphere material is the shared composite material used by Venus: a
 32-frame phase bank (31 directional frames from light-view Z -0.98 through
-0.98 plus one flood frame) derived from the authored atmosphere record
-`source/atmosphere/model.json` (atmosphere height 76.98 km over a 3,386.19 km
-source radius, Rayleigh and Mie coefficients and scale heights, average ground
-reflectance 0.1). The material uses the accepted 1.002 coverage margin and
-0.992 content scale and a 0-to-0.1 terminator smoothstep. Visible lenses use
-the atmosphere material; the MOLA and THEMIS lenses use the observation
-material, which carries surface lighting and the exterior limb only. The
-material is a separate retained plane fitted to the projected silhouette, not
-a plane inside the 3D scene, so close zoom shows no depth-sorted wedge
-drop-outs. Runtime only selects a prepared phase frame and writes its roll.
+0.98 plus one flood frame) with the accepted 1.002 coverage margin and 0.992
+content scale. Visible lenses use the atmosphere material; the MOLA and THEMIS
+lenses use a copy, the observation material. The material is a separate
+retained plane fitted to the projected silhouette, not a plane inside the 3D
+scene, so close zoom shows no depth-sorted wedge drop-outs. Runtime only selects
+a prepared phase frame and writes its roll.
+
+The disc is lit by the mean Mars surface law of
+[Vincendon (2013)](https://doi.org/10.1016/j.pss.2012.12.005), fitted to Mars Express
+OMEGA and MRO CRISM data with the atmosphere removed: Hapke (1993) with w 0.85,
+17° roughness, a two-term Henyey-Greenstein function (b 0.12, backward fraction
+0.6) and an opposition surge (B0 1, h 0.05), in
+`source/photometry/vincendon-2013-hapke.json`. The Viking MDIM 2.1 map is high-pass
+filtered and normalized, with no law of its own to invert, and is surface only,
+like the law. The paper finds the same shape at every solar wavelength, so one
+law lights all three channels. Relative to the flood-lit disc centre the limb
+keeps three quarters of the centre's brightness ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The authored OpenSpace
+Rayleigh and Mie tuning, its ambient term and the terminator ramp are removed.
+
+The halo comes from one NASA PSG limb profile of PSG's Mars template (Mars Climate
+Database profiles with dust and water ice), in `source/atmosphere/psg-limb.json`
+with the configurations beside it: radiance by tangent altitude with the Sun
+behind the viewer, divided by PSG's own disc-centre radiance. Frames draw it where
+the tangent point faces the Sun. PSG computes limb paths with single scattering.
 
 The reflectance spectrum and temperature-pressure profile are prepared from a
 pinned NASA GSFC Planetary Spectrum Generator configuration and raw I/F

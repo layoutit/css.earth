@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
-import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
+import { parseRasterRecipe, prepareLimb, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { prepareLighting } from '../../src/renderers/css/preparation/materials/lighting.js';
 import { outputName } from '../../src/preparation/raster/io.js';
 import { RASTER_DENSITY } from '../../src/preparation/raster/config.js';
@@ -287,11 +287,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const reused = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>> : null;
   // Lighting frames come from the recipe alone, never from raw downloads, so a reuse run recomputes them (a shared bank's are
   // copied): the published metadata may predate a lighting output, such as the shadowless frame.
+  const surfaceShape = parseGeometryProfile(required(sources, 'geometry').value).surface;
+  const shape = { polarToEquatorial: surfaceShape.polarRadius / surfaceShape.radius };
   if (reused && rasterConfig.lighting) {
-    Object.assign(reused, { lighting: await prepareLighting(rasterConfig, rasterConfig.lighting, publicDirectory) });
+    const limb = rasterConfig.lighting.limb ? await prepareLimb(rasterConfig.lighting.limb, sourceDirectory, publicDirectory, rasterConfig, 'lighting.limb', shape.polarToEquatorial) : undefined;
+    Object.assign(reused, { lighting: await prepareLighting(rasterConfig, rasterConfig.lighting, publicDirectory, limb) });
     await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(reused)}\n`);
   }
-  const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig,
+  const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig, shape,
       interpret: await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts'))
         .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig }) });
   // A body may take its surfaces from an observed-surfaces recipe rather than this lane, which then prepares only its

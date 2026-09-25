@@ -26,7 +26,7 @@ export async function readPagedEllipsoid(objectDirectory: string) {
   if (JSON.stringify(declared) !== JSON.stringify(bindingSource.controls.map(lens => lens.id))) throw new TypeError('Authored lenses differ from presentation bindings.');
   const sourceDirectory = resolve(objectDirectory, 'source'), sourceManifest = validateSourceManifest(config.namespace, await json(resolve(sourceDirectory, 'manifest.json')));
   const sun = prepareDirectionalSun();
-  const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
+  const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun, polarToEquatorial: config.polarRadiusKm / config.equatorialRadiusKm }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
   // The scene needs the declared retained pool capacity, not a previously prepared overlay.
   const interiorSource = parseInteriorSource(await json(resolve(sourceDirectory, config.interiorPath)));
   requireFiniteNumber(interiorSource[config.interiorRadiusKey], config.interiorRadiusKey);

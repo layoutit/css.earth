@@ -301,22 +301,6 @@
       }
     },
     {
-      "id": "venus-atmosphere-model",
-      "path": "atmosphere/model.json",
-      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
-      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
-      "license": "Repository-authored record; adapted values credited inside the file",
-      "acquisition": "authored in the repository",
-      "redistribution": "permitted with the credit stated in the record",
-      "consumers": [
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
-      }
-    },
-    {
       "id": "nasa-psg-venus-expanded-configuration",
       "path": "atmosphere/psg-venus-20260830.cfg",
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/30 12:00, OBJECT-NAME=Venus",
@@ -636,6 +620,60 @@
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /venus/ in headless Chrome, left to right the default Clouds lens, the Ultraviolet lens facing the observed hemisphere, and the Ultraviolet lens turned to show the coverage edge; taken 2026-09-19 after preparation at commit 694a126585."
       }
+    },
+    {
+      "path": "photometry/perez-hoyos-2018-minnaert-657nm.json",
+      "purpose": "Minnaert limb-darkening coefficient of Venus's cloud tops at 657 nm from MESSENGER MASCS, red channel.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1002-2017je005406",
+            "role": "method",
+            "evidence": "Perez-Hoyos et al. (2018) fit a Minnaert law to MASCS VIRS spectra of the second Venus flyby (phase 90 +/- 0.5 degrees, zenith angles up to 75 degrees) and plot k against wavelength in Fig. 2. The authors' data file for Fig. 2 (www.ajax.ehu.eus/sph/papers/2017JE005406/fig2_limb_darkening.dat) no longer resolves and the Wayback Machine holds only its listing, so k = 1.346 is read from the published vector figure: the centres of its plotted markers, interpolated linearly to 657 nm.",
+            "locator": "Fig. 2; section 3.1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1002/2017JE005406",
+      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/perez-hoyos-2018-minnaert-547nm.json",
+      "purpose": "Minnaert limb-darkening coefficient of Venus's cloud tops at 547 nm from MESSENGER MASCS, green channel.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1002-2017je005406",
+            "role": "method",
+            "evidence": "Perez-Hoyos et al. (2018) fit a Minnaert law to MASCS VIRS spectra of the second Venus flyby (phase 90 +/- 0.5 degrees, zenith angles up to 75 degrees) and plot k against wavelength in Fig. 2. The authors' data file for Fig. 2 (www.ajax.ehu.eus/sph/papers/2017JE005406/fig2_limb_darkening.dat) no longer resolves and the Wayback Machine holds only its listing, so k = 1.356 is read from the published vector figure: the centres of its plotted markers, interpolated linearly to 547 nm.",
+            "locator": "Fig. 2; section 3.1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1002/2017JE005406",
+      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/perez-hoyos-2018-minnaert-467nm.json",
+      "purpose": "Minnaert limb-darkening coefficient of Venus's cloud tops at 467 nm from MESSENGER MASCS, blue channel.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1002-2017je005406",
+            "role": "method",
+            "evidence": "Perez-Hoyos et al. (2018) fit a Minnaert law to MASCS VIRS spectra of the second Venus flyby (phase 90 +/- 0.5 degrees, zenith angles up to 75 degrees) and plot k against wavelength in Fig. 2. The authors' data file for Fig. 2 (www.ajax.ehu.eus/sph/papers/2017JE005406/fig2_limb_darkening.dat) no longer resolves and the Wayback Machine holds only its listing, so k = 1.323 is read from the published vector figure: the centres of its plotted markers, interpolated linearly to 467 nm.",
+            "locator": "Fig. 2; section 3.1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1002/2017JE005406",
+      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     }
   ]
 }

@@ -73,6 +73,8 @@ outside the observed OPAL coverage.
 <a id="body-orientation-and-charts"></a>
 <a id="reproduction"></a>
 
+The lighting overlay has one colour and alpha per pixel, so its per-channel limb law is exact for the colour map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The FQ727N and F845M lenses share the colour map's bank; OPAL applied no Minnaert correction to those two maps, so their limb is not their own law.
+
 <details>
 <summary>Methods and source notes</summary>
 
@@ -108,8 +110,11 @@ source-color equirectangular and polar atlases prepared at DPR 1 and DPR 2.
 Its orientation is solved from its pole and rotation at the scene epoch, so the
 face toward the camera is the one Uranus turns to it then; the hand-typed
 rotations it replaced were about 160° off. Lighting is one 256-frame bank
-indexed by the Sun's direction in view and shared by every lens. It keeps the
-earlier material's ambient level and softer terminator but carries no
-atmospheric-limb correction. The browser only selects and transports these products.
+indexed by the Sun's direction in view and shared by every lens. Each frame puts
+back the limb darkening OPAL removed from the colour map, with the README's own
+Minnaert coefficients: k 0.57 in F657N, 0.80 in F547M and 0.85 in F467M
+([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). Red barely darkens toward the limb while green and blue do, so the
+limb turns grey-red as Hubble saw it. No floor, ambient term or terminator ramp
+remains. The browser only selects and transports these products.
 
 </details>

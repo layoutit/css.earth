@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "epic-minnaert-680nm",
+  "instrument": "DSCOVR EPIC",
+  "filter": "680 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 0.394,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      6.3,
+      11.2
+    ],
+    "incidenceDegrees": [
+      0,
+      84.3
+    ],
+    "emissionDegrees": [
+      0,
+      84.3
+    ]
+  }
+}

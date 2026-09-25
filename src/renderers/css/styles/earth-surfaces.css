@@ -93,6 +93,13 @@
   visibility: hidden;
 }
 
+/* One image shows the planet: with the atmosphere on, its image carries the lit disc and the halo, so the disc-only
+   lighting image stays hidden. City lights are emitted, not reflected sunlight, so their lens takes neither. */
+.object-stage:where([data-object-id="earth"]):not(.earth-hide-atmosphere) .earth-lighting-material,
+.object-stage:where([data-object-id="earth"])[data-lens="night-lights"] .earth-atmosphere-material {
+  visibility: hidden;
+}
+
 @keyframes earth-sphere-spin {
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }

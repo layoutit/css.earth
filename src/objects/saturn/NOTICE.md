@@ -6,9 +6,9 @@ The ring opacity profile is the Cassini UVIS alpha Virginis stellar
 occultation of 2006 day 285 (Colwell, Jerousek, Becker and Esposito, PDS
 CO-SR-UVIS-HSP-2/4-OCC-V3.0), from the PDS Ring-Moon Systems Node.
 
-The globe lighting parameters (ambient intensity, roughness and terminator
-smoothstep) are values adapted from the OpenSpace Team's globe shader
-defaults (MIT); they are stated in the geometry recipe and credited there.
+The globe's limb law is the Minnaert table of the Hubble OPAL Saturn 2025
+README (NASA, ESA and the OPAL team), transcribed as facts in
+`source/photometry/`.
 
 The ultraviolet and methane observation inputs are Hubble OPAL products from
 NASA, ESA, and the OPAL team. The thermal interpretation and atmospheric

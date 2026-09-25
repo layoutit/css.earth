@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "epic-minnaert-443nm",
+  "instrument": "DSCOVR EPIC",
+  "filter": "443 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 0.41,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      6.3,
+      11.2
+    ],
+    "incidenceDegrees": [
+      0,
+      84.3
+    ],
+    "emissionDegrees": [
+      0,
+      84.3
+    ]
+  }
+}

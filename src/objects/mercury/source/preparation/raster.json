@@ -76,7 +76,16 @@
     }
   ],
   "lighting": {
-    "bank": "sphere",
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 256,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "radiusScale": 0.505,
     "presentationSize": 460,
     "defaultFrame": 230,
     "bankSchema": "cssmercury-prepared-lighting-bank@1",
@@ -84,7 +93,7 @@
     "metadata": {
       "schema": "cssmercury-prepared-lighting@3",
       "storageModel": "prepared-full-resolution-density-row-shards",
-      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "model": "published-photometric-models",
       "worldLightDirection": [
         -0.6119166247245715,
         0.41228475010189525,
@@ -95,20 +104,20 @@
         -0.385595,
         0.264864
       ],
-      "ambientIntensity": 0.05,
-      "shadowlessFloodLimbFloor": 0.35,
-      "orenNayarRoughness": 0,
-      "terminatorSmoothstep": [
-        0,
-        0.1
-      ],
       "minimumLightViewZ": -1,
       "maximumLightViewZ": 1,
       "baseLightAzimuthDegrees": 0,
       "defaultLightViewZ": 0.8030144929060974,
       "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
       "runtimeRasterization": false,
-      "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; formulation adapted from the OpenSpace globe shader (MIT) and documented in the body README"
+      "lightingModel": "Domingue et al. (2016) KS3 at 748.7 nm: the body's published photometric models relative to the flood-lit disc centre (tools/photometry/limb.mts); no floor, ambient term or terminator ramp"
+    },
+    "limb": {
+      "models": [
+        "photometry/domingue-2016-ks3-749nm.json",
+        "photometry/domingue-2016-ks3-749nm.json",
+        "photometry/domingue-2016-ks3-749nm.json"
+      ]
     }
   },
   "interior": {

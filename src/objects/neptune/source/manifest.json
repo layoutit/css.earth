@@ -441,6 +441,60 @@
     {
       "path": "presentation/overview.json",
       "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
+    },
+    {
+      "path": "photometry/opal-2025b-minnaert-f657n.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b colour map (F467M, F547M, F657N), red channel (F657N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-neptune-2025b-readme",
+            "role": "method",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.5 for F657N, the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 0.93-0.99 degrees on 24-25 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 79.5 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Minnaert table, F657N row"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/opal-2025b-minnaert-f547m.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b colour map (F467M, F547M, F657N), green channel (F547M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-neptune-2025b-readme",
+            "role": "method",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.8 for F547M, the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 0.93-0.99 degrees on 24-25 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 79.5 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Minnaert table, F547M row"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/opal-2025b-minnaert-f467m.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b colour map (F467M, F547M, F657N), blue channel (F467M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-neptune-2025b-readme",
+            "role": "method",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.88 for F467M, the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 0.93-0.99 degrees on 24-25 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 79.5 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Minnaert table, F467M row"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     }
   ]
 }

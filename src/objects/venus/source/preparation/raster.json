@@ -77,7 +77,15 @@
     }
   ],
   "atmosphere": {
-    "source": "atmosphere/model.json",
+    "limb": {
+      "models": [
+        "photometry/perez-hoyos-2018-minnaert-657nm.json",
+        "photometry/perez-hoyos-2018-minnaert-547nm.json",
+        "photometry/perez-hoyos-2018-minnaert-467nm.json"
+      ]
+    },
+    "halo": "atmosphere/psg-limb.json",
+    "haloEdgeAltitudeKm": 75,
     "tileSize": 256,
     "logicalSize": 512,
     "frameCount": 32,
@@ -90,16 +98,6 @@
     "supersampling": 2,
     "contentScale": 0.992,
     "coverageScale": 1.002,
-    "directionalShadowRelease": 0,
-    "floodShadowRelease": 0.3,
-    "sunwardShadowRelease": [
-      0.45,
-      0.92
-    ],
-    "terminator": [
-      -0.18,
-      0.08
-    ],
     "materialOutput": "venus-material{suffix}.webp",
     "observationOutput": "venus-observation-material{suffix}.webp",
     "lightingOutput": "venus-lighting{suffix}.webp"

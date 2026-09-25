@@ -1,0 +1,27 @@
+{
+  "id": "doi-10-1016-j-icarus-2015-11-040",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Application of multiple photometric models to disk-resolved measurements of Mercury's surface: Insights into Mercury's regolith characteristics",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2015.11.040"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2015.11.040",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/documents/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

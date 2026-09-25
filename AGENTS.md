@@ -12,6 +12,7 @@ directory-specific `AGENTS.md` files add guidance for their owners.
 - Runtime may decode and transport prepared state. It must not derive source data, geometry, charts, atlases, or scene assets.
 - Select the canonical prepared dataset once for each mount, independent of device DPR. A body may declare prepared surface texture levels that the shared selection swaps by projected silhouette size. Neither may generate geometry or imagery at runtime. Other object asset banks remain fixed after mount.
 - With shadows off (flood lighting), every lighting and material lane shows one prepared frame, published as its own file. Lighting rows load only when shadows are on.
+- A body whose map has a published photometric law is lit with that law through `tools/photometry/limb.mts`, relative to the flood-lit disc centre. Authored floors, ambient terms, terminator ramps and limb colours are only for bodies without one.
 - Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, or WebGL.
 - SVG is allowed sparingly where it makes sense. Keep detailed body rendering in PolyCSS. Different SVG edge antialiasing is acceptable; preserve geometry, colors, line thickness, content, and interactions when optimizing.
 - Bytes are the mobile reader's cost. Lossy images from the raster, terrestrial and cutaway lanes and Earth's texture

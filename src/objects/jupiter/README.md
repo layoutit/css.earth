@@ -25,6 +25,8 @@ The record describes image-background and source-value checks, but cites no date
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
+- The photometric overlay has one colour and alpha per pixel, so the per-channel limb law is exact for the 2019 map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The coefficients are for near-zero phase; directional frames use them at every phase.
+
 <details>
 <summary>Input pins and preparation</summary>
 
@@ -207,12 +209,12 @@ artistically colored.
 The checked OPAL paper by Simon, Wong, and Orton publishes the visible-map
 channel construction and the empirical Minnaert coefficients used to remove
 limb darkening before cylindrical projection: F631N red `k=0.999`, F502N green
-`k=0.950`, and F395N blue `k=0.850`. Those facts are transcribed into the
-checked `source/atmosphere/hubble-opal-minnaert.json`; the copyrighted paper is
-linked, not redistributed. Preparation reapplies the channel-specific Minnaert
-law to the limb-corrected Hubble map for the current observer and pinned PSG
-light directions. This preserves Jupiter's measured wavelength-dependent
-center-to-limb behavior instead of borrowing Saturn's pale atmosphere color.
+`k=0.950`, and F395N blue `k=0.850`; the Cycle 32 2025 README repeats them. They
+are transcribed into three model records, `source/photometry/simon-2015-minnaert-*.json`;
+the paper is linked, not redistributed. Preparation puts the channel-specific
+Minnaert law back on the limb-corrected Hubble map, relative to the flood-lit disc
+centre, for every prepared light direction ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
+This keeps Jupiter's measured wavelength-dependent centre-to-limb behavior.
 
 The pinned PSG configuration retains its exact `4.360399` degree observation
 phase and observation light direction as source metadata. That near-opposition
@@ -223,10 +225,12 @@ into Jupiter's object-owned preparation. The direction is an authored
 presentation choice, originally OpenSpace's default scene-graph light, and is
 not derived from a screenshot.
 
-The prepared photometric overlay retains the neutral-light `0.05`
-ambient floor and `smoothstep(0, 0.1, N dot L)` terminator. Every channel is
-computed in linear light, re-encoded through sRGB, and represented as a single
-source-over color plus alpha. The accepted material bank contains 181 half-degree frames at 512 pixels,
+The prepared photometric overlay adds nothing to the law: the `0.05` ambient
+floor, the `smoothstep(0, 0.1, N dot L)` terminator and the cap at the centre's
+brightness are gone. Every channel is computed in linear light, re-encoded
+through sRGB, and represented as a single source-over color plus alpha, exact for
+the map's mean colour (measured from the 2019 map at bake) rather than the grey
+160 used before. The accepted material bank contains 181 half-degree frames at 512 pixels,
 packed four frames per row with an eight-pixel gutter. Its 46 lossless row
 assets and one shadowless asset retain the accepted encoded bytes and immutable
 URLs. The shared bounded residency owner selects prepared rows and addresses;

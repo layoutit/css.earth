@@ -1,0 +1,36 @@
+{
+  "id": "source-dscovr-epic-l1b-v03",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "DSCOVR EPIC Level 1B calibrated images, version 03",
+  "version": "03",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/",
+      "label": "Source"
+    },
+    {
+      "role": "documentation",
+      "url": "https://epic.gsfc.nasa.gov/about",
+      "label": "EPIC"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/earth/source/manifest.json",
+      "locator": "/documents/17"
+    },
+    {
+      "path": "src/objects/earth/source/manifest.json",
+      "locator": "/documents/18"
+    },
+    {
+      "path": "src/objects/earth/source/manifest.json",
+      "locator": "/documents/19"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "reference-opal-neptune-2025b-readme",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Hubble OPAL Neptune Cycle 32 2025b high-level science product README",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/neptune/source/manifest.json",
+      "locator": "/documents/2"
+    },
+    {
+      "path": "src/objects/neptune/source/manifest.json",
+      "locator": "/documents/3"
+    },
+    {
+      "path": "src/objects/neptune/source/manifest.json",
+      "locator": "/documents/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

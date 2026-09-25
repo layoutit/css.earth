@@ -463,6 +463,67 @@
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the globe's lighting",
+      "status": "included",
+      "finding": "No publication gives Earth's whole-disc limb law, so it is measured: Minnaert coefficients fitted to six 2023 DSCOVR EPIC Level 1B frames (k 0.394 at 680 nm, 0.428 at 551 nm, 0.410 at 443 nm; spreads 0.07, 0.04, 0.03), relative to the flood-lit disc centre and held at 84.3 degrees emission.",
+      "evidence": [
+        "https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/",
+        "https://epic.gsfc.nasa.gov/about"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "psg-default-limb",
+      "survey": "psg-default-limbs",
+      "status": "excluded",
+      "evidence": [
+        "https://psg.gsfc.nasa.gov/helpatm.php"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "limb-halo",
+      "subject": "Limb halo outside the globe",
+      "status": "included",
+      "finding": "One NASA PSG limb profile of the Earth template at full phase, single scattering, scaled by PSG's own disc centre and drawn in the same image as the lit disc, where the tangent point faces the Sun.",
+      "evidence": [
+        "https://psg.gsfc.nasa.gov/helpapi.php"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Authored lighting: a white flood overlay at a quarter alpha, a 0.05 ambient term, a terminator ramp, the OpenSpace RenderableAtmosphere record and the Google Earth Pro presentation response",
+      "status": "excluded",
+      "finding": "Replaced by the EPIC-measured law and the PSG halo; the atmosphere record, the Google response and their evidence are removed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/objects/earth/source/preparation/paged-ellipsoid.json"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a measured law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
     }
   ]
 }

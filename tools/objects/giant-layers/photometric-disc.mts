@@ -1,12 +1,12 @@
 import { sha256 } from '@cssearth/core/node';
-import {parse, object, string, dictionary, number, union} from '@cssearth/core/schema';
+import {parse} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.mts';
 import type {MaterialAsset} from './material-contract.mts';
 import type {OverlayOptions} from 'sharp';
-export type ResolvedPhotometricRecipe = PhotometricRecipe & {minnaertChannels: number[]};
-// The observed composite also names its source product, so an entry is a channel coefficient or that label.
-const minnaertSource = object({photometricLaw:object({name:string}),mapComposite:dictionary(union(object({minnaertK:number}),string))});
-import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {loadLimbLaw,limbFactors,limbOverlay,meanObservedColour,outsideSilhouette,parseLimbBlock,scatteringAngles,type Channels,type LimbLaw} from '../../photometry/limb.mts';
+/** A recipe with its published models loaded and the overlay's reference colour measured from the colour map. */
+export type ResolvedPhotometricRecipe = PhotometricRecipe & {law: LimbLaw; reference: Channels<number>};
+import {mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
@@ -16,12 +16,6 @@ const round=(value: number,digits=6)=>Number(value.toFixed(digits));
 const dot=(a: readonly number[],b: readonly number[])=>a.reduce((sum,value,index)=>sum+value*b[index],0);
 const normalize=(vector: readonly number[])=>{const length=Math.hypot(...vector)||1;return vector.map(value=>value/length);};
 const ellipseBoundary=(rx: number,ry: number,dx: number,dy: number)=>1/Math.hypot(dx/rx,dy/ry);
-
-/** Linear-light transfer for a retained source-over photometric overlay. */
-export function encodeAttenuatedSrgb(channel: number,factor: number){
-  const srgb=channel/255,linear=srgb<=0.04045?srgb/12.92:Math.pow((srgb+0.055)/1.055,2.4),lit=clamp(linear*factor);
-  return Math.max(0,Math.min(255,Math.round((lit<=0.0031308?lit*12.92:1.055*Math.pow(lit,1/2.4)-0.055)*255)));
-}
 
 export function prepareNormalizedDiscProjection(config: PhotometricRecipe,pitchDegrees=config.scenePitchDegrees){
   const angle=pitchDegrees+config.systemRotationXDegrees,radians=angle*Math.PI/180,cosine=Math.cos(radians),sine=Math.sin(radians);
@@ -46,21 +40,23 @@ function projectedNormal(localX: number,localY: number,projection: ReturnType<ty
 
 export function phaseLightDirection(z: number,reference: readonly number[]):[number,number,number]{const[x,y]=reference,scale=Math.sqrt(Math.max(0,1-z*z))/Math.hypot(x,y);return[x*scale,y*scale,z];}
 
+/**
+ * One view-aligned overlay of the oblate disc for a light phase: the body's published photometric models relative to
+ * the flood-lit disc centre (tools/photometry/limb.mts), as one source-over colour and alpha per pixel.
+ */
 export function rasterPhotometricDisc(config: ResolvedPhotometricRecipe,lightViewZ: number,{shadowless=false}: {shadowless?: boolean}={}){
-  if(!Number.isFinite(lightViewZ)||lightViewZ<-1||lightViewZ>1)throw new TypeError('Light phase must be within [-1, 1].');
-  const size=config.frameSize,center=size/2,data=Buffer.alloc(size*size*4),light=shadowless?[0,0,1]:phaseLightDirection(lightViewZ,config.referenceLightDirection),projection=prepareNormalizedDiscProjection(config);
-  const[min,max]=config.terminatorSmoothstep;
+  if(!Number.isFinite(lightViewZ)||lightViewZ<-1||lightViewZ>1)throw new TypeError(`Light phase must be within [-1, 1], got ${lightViewZ}.`);
+  const size=config.frameSize,center=size/2,data=Buffer.alloc(size*size*4),light=shadowless?[0,0,1]:phaseLightDirection(lightViewZ,config.referenceLightDirection),projection=prepareNormalizedDiscProjection(config),view=[0,0,1],floor=0.5/config.rasterSurfaceRadius;
   for(let y=0;y<size;y++)for(let x=0;x<size;x++){
     const localX=x+0.5-center,localY=y+0.5-center,radius=Math.hypot(localX,localY),boundary=projection.rasterCoverageRadiusX;
     if(radius>boundary+0.5)continue;
-    const normal=projectedNormal(localX,localY*projection.rasterRadiusY/projection.rasterRadiusX,projection,config);
-    const incidence=Math.max(0,normal[0]*light[0]+normal[1]*light[1]+normal[2]*light[2]),emission=Math.max(Math.max(0,normal[2]),0.5/config.rasterSurfaceRadius),coverage=clamp(boundary-radius+0.5),amount=clamp((incidence-min)/(max-min)),terminator=amount*amount*(3-2*amount);
-    const desired=config.minnaertChannels.map(k=>{const direct=Math.min(1,Math.pow(incidence,k)*Math.pow(emission,k-1)*terminator);return encodeAttenuatedSrgb(config.referenceChannel,clamp((config.ambientIntensity+direct)/(1+config.ambientIntensity)));});
-    const alpha=clamp(1-Math.min(...desired)/config.referenceChannel);
+    const normal=projectedNormal(localX,localY*projection.rasterRadiusY/projection.rasterRadiusX,projection,config),coverage=clamp(boundary-radius+0.5);
+    // Past the textured ellipse the overlay only darkens: its colour would outline the planet on black space.
+    const inside=Math.hypot(localX/projection.rasterRadiusX,localY/projection.rasterRadiusY)<=1;
+    const{incidence,emission,phase}=scatteringAngles(normal,light,view,floor),overlay=limbOverlay(limbFactors(config.law,incidence,emission,phase),config.reference),[r,g,b,alpha]=inside?overlay:outsideSilhouette(overlay);
     if(alpha===0||coverage===0)continue;
-    const retainedBase=config.referenceChannel*(1-alpha),offset=(y*size+x)*4;
-    for(let channel=0;channel<3;channel++)data[offset+channel]=Math.max(0,Math.min(255,Math.round((desired[channel]-retainedBase)/alpha)));
-    data[offset+3]=Math.round(alpha*coverage*255);
+    const offset=(y*size+x)*4;
+    data[offset]=Math.round(r);data[offset+1]=Math.round(g);data[offset+2]=Math.round(b);data[offset+3]=Math.round(alpha*coverage*255);
   }
   return{data,width:size,height:size,lightViewZ,cameraLightDirection:light.map(value=>round(value)),projection};
 }
@@ -68,23 +64,19 @@ export function rasterPhotometricDisc(config: ResolvedPhotometricRecipe,lightVie
 export function parsePhotometricDiscRecipe(input: unknown){
   const config = parse(input, photometricRecipe, 'photometric disc recipe');
   const positive=(value: number)=>Number.isFinite(value)&&value>0;
-  if(config?.schema!=='cssearth-photometric-disc@1'||!positive(config.frameSize)||!Number.isInteger(config.frameSize)||config.frameSize>4096||!positive(config.rasterSurfaceRadius)||!positive(config.shape?.equatorialRadius)||!positive(config.shape?.polarRadius)||!positive(config.presentationScale)||!positive(config.contentScale)||!positive(config.referenceChannel)||config.referenceChannel>255||!Number.isFinite(config.ambientIntensity)||config.ambientIntensity<0)throw new TypeError('Invalid photometric disc geometry.');
+  if(config?.schema!=='cssearth-photometric-disc@1'||!positive(config.frameSize)||!Number.isInteger(config.frameSize)||config.frameSize>4096||!positive(config.rasterSurfaceRadius)||!positive(config.shape?.equatorialRadius)||!positive(config.shape?.polarRadius)||!positive(config.presentationScale)||!positive(config.contentScale))throw new TypeError('Invalid photometric disc geometry.');
+  parseLimbBlock(config.limb,'photometric disc limb');
   if(![config.scenePitchDegrees,config.systemRotationXDegrees].every(Number.isFinite)||!Array.isArray(config.referenceLightDirection)||config.referenceLightDirection.length!==3||!config.referenceLightDirection.every(Number.isFinite)||Math.hypot(...config.referenceLightDirection.slice(0,2))===0)throw new TypeError('Invalid photometric disc reference frame.');
   if(!Number.isInteger(config.shapePrecisionDigits)||config.shapePrecisionDigits<0||config.shapePrecisionDigits>12)throw new TypeError('Invalid photometric shape precision.');
-  if(!Array.isArray(config.terminatorSmoothstep)||config.terminatorSmoothstep.length!==2||!config.terminatorSmoothstep.every(Number.isFinite)||config.terminatorSmoothstep[1]<=config.terminatorSmoothstep[0]||!Array.isArray(config.minnaertSourceChannels)||config.minnaertSourceChannels.length!==3||typeof config.minnaertSource!=='string')throw new TypeError('Invalid photometry source recipe.');
   const bank=config.bank;if(!bank||![bank.frames,bank.framesPerRow,bank.columns,bank.maximumRetainedRows].every(value=>Number.isInteger(value)&&value>0)||bank.frames<2||!Number.isInteger(bank.gutter)||bank.gutter<0||!positive(config.pixelDensity)||!positive(config.presentationSize)||!config.rowOutput?.includes('{row}')||!config.shadowlessOutput||!Array.isArray(config.sources))throw new TypeError('Invalid photometric row recipe.');
   for(const filename of[config.rowOutput.replace('{row}','00'),config.shadowlessOutput])if(!/^[a-zA-Z0-9@_.-]+\.webp$/u.test(filename))throw new TypeError('Unsafe photometric output.');
   return config;
 }
 
-export async function resolvePhotometricDiscRecipe({sourceDirectory,config: input}: {sourceDirectory: string; config: unknown}){
+export async function resolvePhotometricDiscRecipe({sourceDirectory,config: input}: {sourceDirectory: string; config: unknown}): Promise<ResolvedPhotometricRecipe>{
   const config = parsePhotometricDiscRecipe(input);await verifyObservationSources(sourceDirectory,config.sources);
-  if(!config.sources.some(source=>source.path===config.minnaertSource))throw new TypeError('Minnaert source is not pinned.');
-  const source=parse(JSON.parse(await readFile(resolve(sourceDirectory,config.minnaertSource),'utf8')), minnaertSource, 'Minnaert source');
-  if(source.photometricLaw?.name!=='Minnaert')throw new TypeError('Unsupported photometric law.');
-  const minnaertChannels=config.minnaertSourceChannels.map(channel=>{const entry=source.mapComposite[channel];return typeof entry==='object'?entry.minnaertK:undefined;});
-  if(!minnaertChannels.every((value): value is number=>typeof value==='number'&&Number.isFinite(value)&&value>0&&value<=2))throw new TypeError('Invalid observed Minnaert coefficients.');
-  return{...config,minnaertChannels};
+  const law=await loadLimbLaw(sourceDirectory,config.limb.models),reference=await meanObservedColour(resolve(sourceDirectory,config.limb.reference));
+  return{...config,law,reference};
 }
 
 /** Generates transparent normalized-disc overlays, not replacement globe maps. */

@@ -41,7 +41,15 @@
     }
   ],
   "atmosphere": {
-    "source": "atmosphere/model.json",
+    "limb": {
+      "models": [
+        "photometry/vincendon-2013-hapke.json",
+        "photometry/vincendon-2013-hapke.json",
+        "photometry/vincendon-2013-hapke.json"
+      ]
+    },
+    "halo": "atmosphere/psg-limb.json",
+    "haloEdgeAltitudeKm": 0,
     "tileSize": 256,
     "logicalSize": 512,
     "frameCount": 32,
@@ -54,16 +62,6 @@
     "supersampling": 2,
     "contentScale": 0.992,
     "coverageScale": 1.002,
-    "directionalShadowRelease": 0,
-    "floodShadowRelease": 0.3,
-    "sunwardShadowRelease": [
-      0.45,
-      0.92
-    ],
-    "terminator": [
-      0,
-      0.1
-    ],
     "materialOutput": "mars-material{suffix}.webp",
     "observationOutput": "mars-observation-material{suffix}.webp",
     "lightingOutput": "mars-lighting{suffix}.webp"

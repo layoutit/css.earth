@@ -639,6 +639,24 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "photometry/domingue-2016-ks3-749nm.json",
+      "purpose": "Kaasalainen-Shkuratov KS3 model of Mercury at 748.7 nm, the photometric correction of the MESSENGER MDIS map products, used to light the 750 nm map.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-040",
+            "role": "method",
+            "evidence": "Domingue et al. (2016) eq. 43 defines KS3 (A_N e^(-alpha l) with the Lommel-Seeliger/Lambert disk function weighted by c_l); Table 9 gives A_N 0.1111, l 0.5628 and c_l 0.6424 at 748.7 nm. Their mosaic test (section 4.3.3) uses KS3, and the MDIS CDR/RDR SIS names this paper for the final products. The fitted ranges recorded are the ones the paper prints for its mosaic test (incidence 5.83-87.82, emission 0.85-66.41, phase 23.42-86.66 degrees); the fit data's coverage is plotted, not printed.",
+            "locator": "Eq. 43; Table 9, KS3 columns, 748.7 nm row; section 4.3.3"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1016/j.icarus.2015.11.040",
+      "credit": "Deborah L. Domingue, Brett W. Denevi, Scott L. Murchie and Christopher D. Hash (CC BY-NC-ND 4.0); transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     }
   ]
 }

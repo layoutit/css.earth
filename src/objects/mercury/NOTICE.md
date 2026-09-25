@@ -4,7 +4,7 @@ NASA, NASA Solar System Treks, NASA/JHU APL/Carnegie, NASA/PDS, USGS Astrogeolog
 
 The global MESSENGER MASCS spectrum is derived from M. D'Amore's DLR dataset, DOI 10.5281/zenodo.7433033, under CC-BY-4.0. See `source/spectrum/LICENSE.md`.
 
-The lighting model's formulation is adapted from the OpenSpace globe shader (MIT, OpenSpace Team); it is implemented and documented in this repository and no OpenSpace file is read.
+The globe's lighting is the published KS3 law of Domingue et al. (2016), doi:10.1016/j.icarus.2015.11.040 (CC BY-NC-ND 4.0), whose parameter values are transcribed as facts. The cutaway's section lighting keeps a formulation adapted from the OpenSpace globe shader (MIT, OpenSpace Team); it is implemented and documented in this repository and no OpenSpace file is read.
 
 Feature traces for rupes, dorsa and fossae are from Christian Klimczak, Paul Byrne and Kelsey Crane, “A Global Tectonic Map of Mercury”, version 2, Mendeley Data, DOI 10.17632/p43b9wttpj.2, licensed CC BY 4.0; preparation selected and decimated traces inside each feature’s published extent. See `source/features/tectonic/manifest.json`.
 

@@ -18,13 +18,21 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/jupiter/source/atmosphere/hubble-opal-minnaert.json",
-      "locator": "/source"
-    },
-    {
       "url": "https://esahubble.org/static/archives/releases/science_papers/heic1522a.pdf",
       "checkedOn": "2026-09-10",
       "locator": "Page 1: title, authors, DOI and publication date"
+    },
+    {
+      "path": "src/objects/jupiter/source/manifest.json",
+      "locator": "/documents/3"
+    },
+    {
+      "path": "src/objects/jupiter/source/manifest.json",
+      "locator": "/documents/4"
+    },
+    {
+      "path": "src/objects/jupiter/source/manifest.json",
+      "locator": "/documents/5"
     }
   ],
   "relations": [],

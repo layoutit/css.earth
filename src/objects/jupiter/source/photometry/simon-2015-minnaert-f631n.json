@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "simon-2015-minnaert-f631n",
+  "instrument": "Hubble WFC3/UVIS (OPAL)",
+  "filter": "F631N, 631 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 0.999,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      3.3,
+      3.5
+    ],
+    "emissionDegrees": [
+      0,
+      87.6
+    ]
+  }
+}

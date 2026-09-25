@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readAtmosphereModel, deriveAtmosphereMaterial } from '@cssearth/objects';
+import { loadLimbProfile } from '../../../../../tools/photometry/halo.mts';
 import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widestLeafImages } from './index.js';
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './index.js';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.js';
@@ -46,7 +46,8 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
   const url=(template:string)=>raster.publicBase+outputName(template,RASTER_DENSITY);
   assets.interior={cutaway:source.presentation.cutaway,metallicCoreRadiusFraction:source.metallicCoreRadiusFraction,coreUrl:url(raster.interior.coreOutput),corePolesUrl:url(raster.interior.corePolesOutput),sectionUrl:url(raster.interior.sectionOutput),outerPolesUrl:url(raster.interior.outerPolesOutput)};
  }
- if(raster.atmosphere){const source=readAtmosphereModel(JSON.parse(await readFile(join(fixtureRoot,root,raster.atmosphere.source),'utf8')));assets.atmosphere={source,model:deriveAtmosphereMaterial(source)};}
+ // The scene record carries the atmosphere bake's metadata; a fixed reference colour and outer radius stand in for the bake.
+ if(raster.atmosphere){const halo=await loadLimbProfile(join(fixtureRoot,root),raster.atmosphere.halo);assets.atmosphere={limb:{model:'published-photometric-models-relative-to-the-flood-lit-disc-centre',models:raster.atmosphere.limb.models,referenceColor:[128,128,128],referenceSource:'fixture'},halo:{model:'nasa-psg-full-phase-limb-profile-single-scattering-day-side',table:raster.atmosphere.halo,radiusKm:halo.radiusKm,edgeAltitudeKm:raster.atmosphere.haloEdgeAltitudeKm,topAltitudeKm:halo.altitudesKm[halo.altitudesKm.length-1],outerRadiusScale:1}};}
  const outputDirectory=await mkdtemp(join(tmpdir(),'geometry-parity-'));
  try{
   const result=await prepareGeometryScene({profile,raster,assets,solarSource:await readJson(`${root}/presentation/solar-system.json`) as SolarSceneSource,starfield:{faces:[]},sun:{},outputDirectory,imagePixels:widths(raster,profile),

@@ -277,6 +277,69 @@
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17°, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
+      "evidence": [
+        "https://doi.org/10.1016/j.pss.2012.12.005",
+        "https://arxiv.org/abs/1208.4518"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "soderblom-2006-lunar-lambert",
+      "subject": "HST WFPC2 whole-disc lunar-Lambert parameters (Soderblom et al. 2006)",
+      "status": "excluded",
+      "finding": "Parameters are in paywalled tables; Vincendon (2013) is open and surface-only like the Viking map.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2006Icar..184..401S/abstract"
+      ],
+      "revisitWhen": "An open copy of the tables, or a need for a whole-disc law that includes the atmosphere over the disc.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "limb-halo",
+      "subject": "Limb halo outside the disc",
+      "status": "included",
+      "finding": "One NASA PSG limb profile of the Mars template (Mars Climate Database, dust and water ice) at full phase, single scattering, scaled by PSG's own disc centre and drawn where the tangent point faces the Sun.",
+      "evidence": [
+        "https://psg.gsfc.nasa.gov/helpapi.php"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "OpenSpace RenderableAtmosphere tuning (Rayleigh and Mie coefficients, ambient term, terminator ramp)",
+      "status": "excluded",
+      "finding": "Removed with atmosphere/model.json; the disc takes Vincendon's law and the halo the PSG profile.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
     }
   ]
 }

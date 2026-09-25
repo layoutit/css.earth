@@ -23,6 +23,7 @@ import sharp from "sharp";
 import type { EllipsoidAttitude } from './attitude.mts';
 import { LIT_DEFAULT_VIEW } from '../../../src/platform/default-camera.mts';
 import { readCoraltempAnomaly } from "./sst-anomaly.mts";
+import { limbFactors, limbOverlay, scatteringAngles } from '../../photometry/limb.mts';
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mts";
 import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mts";
@@ -423,7 +424,6 @@ function renderMaterialFrame({
   const radius = size * config.material.discRadius;
   const center = (size - 1) / 2;
   const rgba = Buffer.alloc(size * size * 4);
-  const overlay = shadowless ? config.material.shadowlessOverlay : undefined;
   const {attitude: bodyAttitude}=requireMaterialPreparation();
   // Every lighting frame is drawn on the default pose's plane; the runtime turns it by the Sun's screen angle. Frame i puts the
   // Sun at view z = -1 + 2i/(count - 1) on the default Sun's screen azimuth, so the frame the runtime selects is the real Sun.
@@ -438,18 +438,7 @@ function renderMaterialFrame({
   const objectLight = shadowless
     ? view
     : normalizeVector(bodyAttitude.viewToObject([sunView[0] / azimuth * across, sunView[1] / azimuth * across, frameZ], planePitch));
-  const solarTint = config.material.solarTint;
-  const maximumTint = textureTintFactors(
-    Math.PI,
-    solarTint,
-    solarTint,
-    0.05 * Math.PI,
-  );
-  const maximumLightingFactor = Math.max(
-    maximumTint.r,
-    maximumTint.g,
-    maximumTint.b,
-  );
+  const {atmosphereModel: limbModel} = requireMaterialPreparation(), emissionFloor = 0.5 / radius;
   for (let y = 0; y < size; y += 1) {
     for (let x = 0; x < size; x += 1) {
       const offset = (y * size + x) * 4;
@@ -459,29 +448,14 @@ function renderMaterialFrame({
         right[axis] * screenX + down[axis] * screenY);
       const hit = intersectEllipsoid(origin, view);
       if (!hit) continue;
-      const lightAlignment = dotVector(hit.normal, objectLight);
-      const lambert = Math.max(0, lightAlignment);
       if (role === "lighting") {
-        const diffuse = lambert * smoothstep(0, 0.1, lambert);
-        const tint = textureTintFactors(
-          Math.PI * diffuse,
-          solarTint,
-          solarTint,
-          0.05 * Math.PI,
-        );
-        const lightingFactor = Math.max(tint.r, tint.g, tint.b) /
-          maximumLightingFactor;
-        const desiredChannel = applyLinearTint(160, lightingFactor);
-        const shadowAlpha = Math.round(Math.max(
-          0,
-          Math.min(0.93, 1 - desiredChannel / 160),
-        ) * 255);
-        if (overlay) {
-          rgba[offset] = overlay.color[0];
-          rgba[offset + 1] = overlay.color[1];
-          rgba[offset + 2] = overlay.color[2];
-        }
-        rgba[offset + 3] = overlay ? Math.round(shadowAlpha * overlay.opacity) : shadowAlpha;
+        // The published limb law relative to the flood-lit disc centre (tools/photometry/limb.mts); nothing authored.
+        const { incidence, emission, phase } = scatteringAngles(hit.normal, objectLight, view, emissionFloor);
+        const [red, green, blue, alpha] = limbOverlay(limbFactors(limbModel.law, incidence, emission, phase), limbModel.reference);
+        rgba[offset] = Math.round(red);
+        rgba[offset + 1] = Math.round(green);
+        rgba[offset + 2] = Math.round(blue);
+        rgba[offset + 3] = Math.round(alpha * 255);
         continue;
       }
 

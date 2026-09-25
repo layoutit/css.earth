@@ -79,22 +79,19 @@
       "minimumLightViewZ": -1,
       "maximumLightViewZ": 1,
       "baseLightAzimuthDegrees": 0
-    },
-    "solarTint": "#fff1ea",
-    "shadowlessOverlay": {
-      "color": [
-        255,
-        255,
-        255
-      ],
-      "opacity": 0.25
     }
   },
   "atmosphere": {
-    "sourcePath": "atmosphere/model.json",
-    "sourceId": "earth-atmosphere-model",
-    "responsePath": "atmosphere/google-earth-pro-presentation-response.json",
-    "maximumOpacityKey": "earthMaximumOpacity"
+    "halo": "atmosphere/psg-limb.json"
+  },
+  "limb": {
+    "models": [
+      "photometry/epic-minnaert-680nm.json",
+      "photometry/epic-minnaert-551nm.json",
+      "photometry/epic-minnaert-443nm.json"
+    ],
+    "reference": "blue-marble-july.jpg",
+    "referenceDisplayGamma": 1.25
   },
   "interiorPath": "interior/earth-interior.json",
   "surface": {

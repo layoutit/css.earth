@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "domingue-2016-ks3-749nm",
+  "instrument": "MESSENGER MDIS WAC",
+  "filter": "G filter, 748.7 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "lunar-lambert",
+      "weight": 0.6424
+    },
+    "phase": {
+      "family": "exponential",
+      "slopePerRadian": 0.5628
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      23.42,
+      86.66
+    ],
+    "incidenceDegrees": [
+      5.83,
+      87.82
+    ],
+    "emissionDegrees": [
+      0.85,
+      66.41
+    ]
+  }
+}

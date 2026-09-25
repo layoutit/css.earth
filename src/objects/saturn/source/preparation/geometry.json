@@ -7,6 +7,13 @@
     "approvedMaterial": "approved/saturn-fixed-material.webp",
     "interior": "interior/manifest.json"
   },
+  "limb": {
+    "models": [
+      "photometry/opal-2025-minnaert-f631n.json",
+      "photometry/opal-2025-minnaert-f502n.json",
+      "photometry/opal-2025-minnaert-f395n.json"
+    ]
+  },
   "files": {
     "surface": "saturn-surface.jpg",
     "bodySurface": "saturn-surface-body.jpg",
@@ -80,7 +87,6 @@
     "surfaceOverlap": 0.008,
     "planetLightingFrameGutter": 1,
     "planetLightingFrameColumns": 48,
-    "planetLightingReferenceChannel": 160,
     "planetFixedMaterialSize": 1024,
     "planetOrbitMaterialSize": 256,
     "planetOrbitMaterialGutter": 2,
@@ -96,14 +102,6 @@
     "planetFixedMaterialCoverageScale": 1.002,
     "planetFixedMaterialDepthBias": 0.5,
     "planetOrbitMaterialSilhouetteSupersampling": 4,
-    "atmosphereColor": [
-      238,
-      244,
-      251
-    ],
-    "atmosphereMaximumAlpha": 0.72,
-    "atmosphereLimbExponent": 1.75,
-    "atmosphereNightFloor": 0.22,
     "objectReferenceRotationSeconds": 38018,
     "objectEquatorCloudRotationSeconds": 36900,
     "objectHighLatitudeCloudRotationSeconds": 38280,
@@ -132,13 +130,7 @@
     "seamBleed": 0.15,
     "planetSeamBleed": 0,
     "solarEffectiveTemperatureKelvin": 5772,
-    "objectSolarAlbedoMultiplier": "#fff1ea",
-    "globeAmbientIntensity": 0.05,
-    "globeOrenNayarRoughness": 0,
-    "globeTerminatorSmoothstep": [
-      0,
-      0.1
-    ]
+    "objectSolarAlbedoMultiplier": "#fff1ea"
   },
   "labels": {
     "label002": "saturn-interior-section-face",

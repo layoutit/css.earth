@@ -18,7 +18,6 @@ const relief = object({referenceRadiusMeters: number, heightToMeters: optional(n
 const advisory = object({status: string, date: string});
 const enso = {date: string, baseline: string, checked: string, advisory};
 const colorByte: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 255;
-const opacity: Guard<number> = (value): value is number => number(value) && value >= 0 && value <= 1;
 const blendPixels: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 512;
 const fillTolerance: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 32;
 // A second edition of the same source month supplies the pixels the plain
@@ -36,10 +35,10 @@ const scientific = union(
 const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfiguration, 'camera'> & {camera: Infer<typeof recipeCamera>}> = object({namespace: string, publicBase: string, sceneBodyKey: string,
   interiorRadiusKey: string, interiorSchema: string, interiorPath: string, equatorialRadiusKm: number, polarRadiusKm: number, geometry, camera: recipeCamera,
   atlas: object({pageSize: number, pageCells: number, density: number, gutter: number, sourceWidth: number}),
-  material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number, solarTint: string,
-    shadowlessOverlay: optional(object({color: tuple(colorByte, colorByte, colorByte), opacity})),
+  material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number,
     illumination: object({frameCount: number, minimumLightViewZ: number, maximumLightViewZ: number, baseLightAzimuthDegrees: number})}),
-  atmosphere: object({sourcePath: string, responsePath: string, sourceId: string, maximumOpacityKey: string}),
+  atmosphere: object({halo: string}),
+  limb: object({models: tuple(string, string, string), reference: string, referenceDisplayGamma: number}),
   surface: object({width: number, height: number, quality: number, clouds: object({path: string, maximumAlpha: number, threshold: number, scale: number, color: tuple(number, number, number)}),
     maps: array(object({path: string, name: string, thumbnail: string, scientific: optional(scientific), compositeClouds: optional(boolean), displayGamma: optional(number), nativePhotographicSampling: optional(boolean), maximumTextureWidth: optional(number),
       deepOceanFill: optional(deepOceanFill),

@@ -48,6 +48,7 @@ import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
+import { loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../photometry/limb.mts';
 
 /** The pixel width of the widest of these published images, read from each file's header. */
 export async function widestPublishedImage(paths:readonly string[], owner:string) {
@@ -71,6 +72,10 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   const PREPARED_RING_SOURCE = preparedInputs.ringSource;
   const PREPARED_RING_GROUPS = preparedInputs.ringGroups;
   const PREPARED_MAIN_RING_PLATES = preparedInputs.ringPlates;
+  // The globe's limb: the published photometric models of its map (tools/photometry/limb.mts). The overlay's reference
+  // colour is measured from the prepared surface once it is written.
+  const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
+  let limbReference: Channels<number> | undefined;
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(stagingDirectory,{recursive:true})]);
 
 const DEFAULT_LENS_ID = config.parameters.defaultLensId;
@@ -201,7 +206,6 @@ const PLANET_LIGHTING_PRESENTATION_WIDTH =
   PLANET_LIGHTING_TEXTURE_WIDTH * PLANET_LIGHTING_PRESENTATION_SCALE_X;
 const PLANET_LIGHTING_PRESENTATION_HEIGHT =
   PLANET_LIGHTING_TEXTURE_HEIGHT * PLANET_LIGHTING_PRESENTATION_SCALE_Y;
-const PLANET_LIGHTING_REFERENCE_CHANNEL = config.parameters.planetLightingReferenceChannel;
 const PLANET_FIXED_MATERIAL_SIZE = config.parameters.planetFixedMaterialSize;
 const PLANET_ORBIT_MATERIAL_SIZE = config.parameters.planetOrbitMaterialSize;
 const PLANET_ORBIT_MATERIAL_GUTTER = config.parameters.planetOrbitMaterialGutter;
@@ -248,10 +252,6 @@ const PLANET_FIXED_MATERIAL_CONTENT_SCALE = config.parameters.planetFixedMateria
 const PLANET_FIXED_MATERIAL_COVERAGE_SCALE = config.parameters.planetFixedMaterialCoverageScale;
 const PLANET_FIXED_MATERIAL_DEPTH_BIAS = config.parameters.planetFixedMaterialDepthBias;
 const PLANET_ORBIT_MATERIAL_SILHOUETTE_SUPERSAMPLING = config.parameters.planetOrbitMaterialSilhouetteSupersampling;
-const ATMOSPHERE_COLOR = config.parameters.atmosphereColor;
-const ATMOSPHERE_MAXIMUM_ALPHA = config.parameters.atmosphereMaximumAlpha;
-const ATMOSPHERE_LIMB_EXPONENT = config.parameters.atmosphereLimbExponent;
-const ATMOSPHERE_NIGHT_FLOOR = config.parameters.atmosphereNightFloor;
 const OBJECT_REFERENCE_ROTATION_SECONDS = config.parameters.objectReferenceRotationSeconds;
 const OBJECT_EQUATOR_CLOUD_ROTATION_SECONDS = config.parameters.objectEquatorCloudRotationSeconds;
 const OBJECT_HIGH_LATITUDE_CLOUD_ROTATION_SECONDS = config.parameters.objectHighLatitudeCloudRotationSeconds;
@@ -279,18 +279,11 @@ const SEAM_BLEED = config.parameters.seamBleed;
 const PLANET_SEAM_BLEED = config.parameters.planetSeamBleed;
 const SOLAR_EFFECTIVE_TEMPERATURE_KELVIN = config.parameters.solarEffectiveTemperatureKelvin;
 const OBJECT_SOLAR_ALBEDO_MULTIPLIER = config.parameters.objectSolarAlbedoMultiplier;
-const GLOBE_AMBIENT_INTENSITY = config.parameters.globeAmbientIntensity;
-const GLOBE_OREN_NAYAR_ROUGHNESS = config.parameters.globeOrenNayarRoughness;
-const GLOBE_TERMINATOR_SMOOTHSTEP = config.parameters.globeTerminatorSmoothstep;
 const LIGHTING = Object.freeze({
   directionalLight: Object.freeze({
     direction: PREPARED_RING_SOURCE.shadowModel.worldLightDirection,
     color: OBJECT_SOLAR_ALBEDO_MULTIPLIER,
     intensity: Math.PI,
-  }),
-  ambientLight: Object.freeze({
-    color: OBJECT_SOLAR_ALBEDO_MULTIPLIER,
-    intensity: GLOBE_AMBIENT_INTENSITY * Math.PI,
   }),
 });
 const PLAN_OPTIONS = Object.freeze({
@@ -1084,6 +1077,8 @@ function prepareFixedMaterialPlane({
         right[axis] * sampledScreenX * materialSampleScale +
           down[axis] * sampledScreenY * materialSampleScale);
       let hit = intersectViewRayWithEllipsoidSurface(materialOrigin, view);
+      // A sample that misses the ellipsoid at content scale lies past the silhouette, where the overlay may only darken.
+      const outsideGlobe = !hit;
       if (!hit) {
         let lowerScale = 1;
         let upperScale = materialSampleScale;
@@ -1142,19 +1137,7 @@ function prepareFixedMaterialPlane({
           row,
         );
       }
-      const tint = textureTintFactors(
-        LIGHTING.directionalLight.intensity *
-          prepareGlobeDiffusePower(lambert) * directTransmission,
-        LIGHTING.directionalLight.color,
-        LIGHTING.ambientLight.color,
-        LIGHTING.ambientLight.intensity,
-      );
       const outputOffset = (row * outputSize + column) * 4;
-      const atmosphereAlpha = preparedAtmosphereOpacity(
-        hit.normal,
-        objectLight,
-        view,
-      );
       let cutawayMaterialRemoved = false;
       if (materialMode === "cutaway-full") {
         const longitudeDegrees = Math.atan2(
@@ -1164,13 +1147,8 @@ function prepareFixedMaterialPlane({
         cutawayMaterialRemoved = interiorLongitudeRemoved(longitudeDegrees);
       }
       if (!cutawayMaterialRemoved) {
-        writePreparedMaterialOverlay(
-          output,
-          outputOffset,
-          tint,
-          maximumLightingFactor,
-          atmosphereAlpha,
-        );
+        const overlay = globeLimbOverlay(hit.normal, objectLight, view, 1 / outputSize, directTransmission);
+        writeLimbOverlay(output, outputOffset, outsideGlobe ? outsideSilhouette(overlay) : overlay);
       }
       const surfaceDistance = dotVector(
         subtractVector(coverageHit.position, coverageOrigin),
@@ -1815,11 +1793,12 @@ async function prepareNormalMaterialMasters() {
       approvedReferenceFixedMaterialInfo.height !== PLANET_FIXED_MATERIAL_SIZE) {
     throw new Error("Ellipsoid approved reference material source changed.");
   }
+  // The Sun's colour on the map: the directional light's tint normalized by its brightest channel.
   const maximumTint = textureTintFactors(
     LIGHTING.directionalLight.intensity,
     LIGHTING.directionalLight.color,
-    LIGHTING.ambientLight.color,
-    LIGHTING.ambientLight.intensity,
+    LIGHTING.directionalLight.color,
+    0,
   );
   const maximumLightingFactor = Math.max(
     maximumTint.r,
@@ -1831,6 +1810,7 @@ async function prepareNormalMaterialMasters() {
     maximumLightingFactor,
   );
   await prepareSolarTintedSurface(surfaceChannelFactors);
+  limbReference = await meanObservedColour(PLANET_SURFACE_TEXTURE_PATH);
   const [metadata, preparedSurface] = await Promise.all([
     sharp(PLANET_SOURCE_TEXTURE_PATH).metadata(),
     sharp(PLANET_SURFACE_TEXTURE_PATH)
@@ -2464,20 +2444,16 @@ async function composePlanetTextures({
       runtimeMatrixFormatting: false,
       extraDomLeaves: 1,
       materialModel:
-        "globe-solar-rgb-lambert-terminator-attenuation-oblate-texels",
+        "globe-published-photometric-models-oblate-texels",
       atmosphere: Object.freeze({
-        model: "prepared-view-light-limb-scattering-oblate-texels",
+        model: "published-photometric-models-composited-into-the-material-oblate-texels",
         compositedIntoMaterialAsset: true,
         assetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
         assetBytes: orbitMaterialAsset.byteLength,
         assetSha256: createHash("sha256")
           .update(orbitMaterialAsset)
           .digest("hex"),
-        color: `#${ATMOSPHERE_COLOR.map((channel) =>
-          channel.toString(16).padStart(2, "0")).join("")}`,
-        maximumAlpha: ATMOSPHERE_MAXIMUM_ALPHA,
-        limbExponent: ATMOSPHERE_LIMB_EXPONENT,
-        nightFloor: ATMOSPHERE_NIGHT_FLOOR,
+        limb: Object.freeze({ models: LIMB_LAW.paths, referenceColor: limbReference }),
         initialObjectViewDirection: initialObjectView.map((component) =>
           Number(component.toFixed(6))),
         retainedOverlayBinding:
@@ -2667,17 +2643,14 @@ async function composePlanetTextures({
           "single-background-position-on-published-input-frame",
       }),
       lightingModel:
-        "lambert-with-ambient-and-smoothstep-terminator; parameter values adapted from the OpenSpace globe shader defaults (MIT), documented in the body README",
+        "published photometric models of the map relative to the flood-lit disc centre (tools/photometry/limb.mts), documented in the body README",
       illuminationDirectionAuthority: "declared scene Sun direction",
       solarEffectiveTemperatureKelvin: SOLAR_EFFECTIVE_TEMPERATURE_KELVIN,
       rendererAlbedoMultiplier: OBJECT_SOLAR_ALBEDO_MULTIPLIER,
       rendererAlbedoMultiplierModel:
         "Planck-5772K-CIE1931-linear-sRGB-D65-max-normalized",
-      ambientIntensity: GLOBE_AMBIENT_INTENSITY,
-      orenNayarRoughness: GLOBE_OREN_NAYAR_ROUGHNESS,
-      terminatorSmoothstep: GLOBE_TERMINATOR_SMOOTHSTEP,
+      limb: Object.freeze({ models: LIMB_LAW.paths, referenceColor: limbReference }),
       directionalLight: LIGHTING.directionalLight,
-      ambientLight: LIGHTING.ambientLight,
       mutualShadows: Object.freeze({
         model: PREPARED_RING_SOURCE.shadowModel.model,
         runtime: false,
@@ -2952,10 +2925,7 @@ function preparePolarMaterialSample({
   objectView,
   ringData,
   ringTextureWidth,
-  maximumLightingFactor,
 }:Omit<RingRaster,'foregroundRingData'|'ringData'> & {ringData:Uint8Array;normal:ReadonlyVector3;position:ReadonlyVector3;objectLight:ReadonlyVector3;objectView:ReadonlyVector3}) {
-  const lambert = Math.max(0, dotVector(normal, objectLight));
-  const diffusePower = prepareGlobeDiffusePower(lambert);
   const ringOpacity = sampleRingShadowOpacity(
     position,
     objectLight,
@@ -2967,69 +2937,25 @@ function preparePolarMaterialSample({
     RING_SHADOW_DIRECT_TRANSMISSION,
     ringOpacity,
   );
-  const tint = textureTintFactors(
-    LIGHTING.directionalLight.intensity * diffusePower * directTransmission,
-    LIGHTING.directionalLight.color,
-    LIGHTING.ambientLight.color,
-    LIGHTING.ambientLight.intensity,
-  );
-  const lightingAlpha = preparedLightingAlpha(tint, maximumLightingFactor);
-  const atmosphereAlpha = preparedAtmosphereOpacity(normal, objectLight, objectView);
-  const alpha = 1 - (1 - lightingAlpha) * (1 - atmosphereAlpha);
-  return {
-    alpha,
-    color: alpha > 0
-      ? ATMOSPHERE_COLOR.map((channel) => channel * atmosphereAlpha / alpha)
-      : [0, 0, 0],
-  };
+  const [r, g, b, alpha] = globeLimbOverlay(normal, objectLight, objectView, 1 / PLANET_POLAR_TEXTURE_SIZE, directTransmission);
+  return { alpha, color: [r, g, b] };
 }
 
-function writePreparedMaterialOverlay(
-  output:Uint8Array,
-  offset:number,
-  tint:ReturnType<typeof textureTintFactors>,
-  maximumLightingFactor:number,
-  atmosphereAlpha:number,
-) {
-  const lightingAlpha = preparedLightingAlpha(tint, maximumLightingFactor);
-  const alpha = 1 - (1 - atmosphereAlpha) * (1 - lightingAlpha);
-  for (let channel = 0; channel < 3; channel += 1) {
-    output[offset + channel] = alpha > 0
-      ? Math.round(ATMOSPHERE_COLOR[channel] * atmosphereAlpha / alpha)
-      : 0;
-  }
+/**
+ * The globe's overlay at a surface point: the published models' factor for its incidence, emission and phase, times
+ * the ring shadow's direct transmission, as one source-over colour and alpha against the surface's mean colour.
+ */
+function globeLimbOverlay(normal:ReadonlyVector3, objectLight:ReadonlyVector3, objectView:ReadonlyVector3, emissionFloor:number, directTransmission:number) {
+  if (!limbReference) throw new Error("Saturn's limb overlay needs the prepared surface's reference colour first.");
+  const { incidence, emission, phase } = scatteringAngles(normal, objectLight, objectView, emissionFloor);
+  return limbOverlay(limbFactors(LIMB_LAW, incidence, emission, phase).map((factor) => factor * directTransmission), limbReference);
+}
+
+function writeLimbOverlay(output:Uint8Array, offset:number, [r, g, b, alpha]:readonly number[]) {
+  output[offset] = Math.round(r);
+  output[offset + 1] = Math.round(g);
+  output[offset + 2] = Math.round(b);
   output[offset + 3] = Math.round(alpha * 255);
-}
-
-function preparedLightingAlpha(tint:ReturnType<typeof textureTintFactors>, maximumLightingFactor:number) {
-  const lightingFactor = Math.max(tint.r, tint.g, tint.b) / maximumLightingFactor;
-  const desiredChannel = applyLinearTint(
-    PLANET_LIGHTING_REFERENCE_CHANNEL,
-    lightingFactor,
-  );
-  return Math.max(0, Math.min(
-    1,
-    1 - desiredChannel / PLANET_LIGHTING_REFERENCE_CHANNEL,
-  ));
-}
-
-function prepareGlobeDiffusePower(lambert:number) {
-  const [edge0, edge1] = GLOBE_TERMINATOR_SMOOTHSTEP;
-  const amount = Math.max(0, Math.min(1, (lambert - edge0) / (edge1 - edge0)));
-  const terminator = amount * amount * (3 - 2 * amount);
-  return lambert * terminator;
-}
-
-function preparedAtmosphereOpacity(normal:ReadonlyVector3, objectLight:ReadonlyVector3, objectView:ReadonlyVector3) {
-  const viewAlignment = Math.max(0, dotVector(normal, objectView));
-  const limb = Math.pow(1 - viewAlignment, ATMOSPHERE_LIMB_EXPONENT);
-  const lightAlignment = Math.max(0, dotVector(normal, objectLight));
-  const sunwardAmount = ATMOSPHERE_NIGHT_FLOOR +
-    (1 - ATMOSPHERE_NIGHT_FLOOR) * Math.sqrt(lightAlignment);
-  return Math.max(0, Math.min(
-    ATMOSPHERE_MAXIMUM_ALPHA,
-    limb * ATMOSPHERE_MAXIMUM_ALPHA * sunwardAmount,
-  ));
 }
 
 function intersectViewRayWithEllipsoidSurface(origin:ReadonlyVector3, direction:ReadonlyVector3) { return intersectViewRayWithEllipsoid(origin, direction, { equatorialRadius: EQUATORIAL_RADIUS, polarRadius: POLAR_RADIUS }); }
