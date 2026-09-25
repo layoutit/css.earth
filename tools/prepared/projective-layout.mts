@@ -8,7 +8,9 @@ export interface PreparedProjectiveTextureLeaf {
   tag?: string; className?: string; style: string;
   projectiveTextureLayer?: { schema: string; rasterScale?: number; textureMatrix: string | readonly number[]; frameMatrix: string | readonly number[];
     /** Preparation composes this stepped outset into the leaf transform; runtime transports the result. */
-    seamOutset?: { property: string; scale: readonly number[] } };
+    seamOutset?: { property: string; scale: readonly number[] };
+    /** False keeps the leaf's full box; otherwise it follows its body's size on screen (leaf-box.mts). */
+    leafBox?: false };
 }
 
 export function scalePreparedPixelLengths(value: string | number, scale: number) {
@@ -22,7 +24,9 @@ export function scalePreparedPixelLengths(value: string | number, scale: number)
   );
 }
 
-export function scalePreparedBackgroundAddresses(style: Pick<PreparedProjectiveStyle, "backgroundPosition" | "backgroundSize" | "getPropertyValue" | "setProperty">, scale: number) {
+/** `finish` rewrites each scaled address once more before it is written: the leaf box's factor (leaf-box.mts). */
+export function scalePreparedBackgroundAddresses(style: Pick<PreparedProjectiveStyle, "backgroundPosition" | "backgroundSize" | "getPropertyValue" | "setProperty">, scale: number,
+  finish: (value: string) => string = value => value) {
   const references = new Set<string>();
   for (const value of [style.backgroundPosition, style.backgroundSize]) {
     for (const match of String(value).matchAll(/var\(\s*(--[\w-]+)/g)) {
@@ -32,14 +36,14 @@ export function scalePreparedBackgroundAddresses(style: Pick<PreparedProjectiveS
   for (const property of references) {
     const value = style.getPropertyValue(property);
     if (value) {
-      style.setProperty(property, scalePreparedPixelLengths(value, scale));
+      style.setProperty(property, finish(scalePreparedPixelLengths(value, scale)));
     }
   }
-  style.backgroundPosition = scalePreparedPixelLengths(
+  style.backgroundPosition = finish(scalePreparedPixelLengths(
     style.backgroundPosition,
     scale,
-  );
-  style.backgroundSize = scalePreparedPixelLengths(style.backgroundSize, scale);
+  ));
+  style.backgroundSize = finish(scalePreparedPixelLengths(style.backgroundSize, scale));
 }
 
 export function applyPreparedProjectiveLayout(style: Pick<PreparedProjectiveStyle, "width" | "height" | "backgroundSize"> & Partial<Pick<PreparedProjectiveStyle, "getPropertyValue">>, layout: PreparedProjectiveLayout | null, rasterScale: number) {

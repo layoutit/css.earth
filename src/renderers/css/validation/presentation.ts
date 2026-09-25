@@ -7,6 +7,7 @@ import type { ObjectControls } from '../runtime/object-contract.js';
 import type { CameraPlan } from '../navigation/types.js';
 
 export { requireTextureLevels } from '../../../platform/prepared-texture-levels.mts';
+import { requireTexturePlacements } from '../../../platform/prepared-texture-levels.mts';
 
 export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan): asserts value is readonly PreparedVariant[] {
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
@@ -83,7 +84,7 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {
-    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'sceneFromBody', 'radii', 'inset']);
+    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'placements', 'groups', 'groupSizes', 'sceneFromBody', 'radii', 'inset']);
     const kind = choice(binding.kind, ['counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc'], 'view binding');
     const target = nodeReference(binding.target, tree, kind === 'view-attribute' || kind === 'view-property');
     if ([tree.camera, tree.scene].includes(target) && kind !== 'view-attribute') fail('view binding cannot duplicate camera publisher');
@@ -96,7 +97,29 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
     } else if (kind === 'silhouette-fit') {
       if (finite(binding.minimumRadius, 'silhouette floor') < 0 || !(positive(binding.unitScale, 'silhouette scale') > 0) || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('silhouette fit requires perspective camera and scale');
     } else if (kind === 'silhouette-step-property') {
-      if (!text(binding.property, 'silhouette step property').startsWith('--')) fail('silhouette step property must be custom');
+      const property = text(binding.property, 'silhouette step property');
+      if (!property.startsWith('--')) fail('silhouette step property must be custom');
+      // Blocks of leaves the camera cannot see keep the first step; each block publishes <property>-<block>.
+      if (binding.placements !== undefined) requireTexturePlacements(binding.placements, name => name.startsWith(`${property}-`));
+      // Leaf box groups: each names the property or one of its blocks, and its leaves; no leaf is in two groups.
+      if (binding.groups !== undefined) {
+        const groups = record(binding.groups, 'leaf box groups'), seen = new Set<number>();
+        for (const [name, leaves] of Object.entries(groups)) {
+          if (name !== property && !name.startsWith(`${property}-`)) fail(`leaf box group ${name} is not a step of ${property}`);
+          for (const leaf of array(leaves, `leaf box group ${name}`)) {
+            const index = nodeReference(leaf, tree);
+            if (seen.has(index)) fail(`leaf box node ${index} is in two groups`);
+            seen.add(index);
+          }
+        }
+        const placed = binding.placements === undefined ? [] : Object.keys(record(record(binding.placements, 'placements').writes, 'placements'));
+        for (const name of placed) if (!(name in groups)) fail(`placed block ${name} has no leaf box group`);
+        // Each group's full box area and density, for the runtime's memory estimate.
+        if (binding.groupSizes !== undefined) for (const [name, size] of Object.entries(record(binding.groupSizes, 'leaf box group sizes'))) {
+          const [area, density] = array(size, `leaf box group size ${name}`);
+          if (!(name in groups) || !(positive(area, `leaf box group area ${name}`) > 0) || !(positive(density, `leaf box group density ${name}`) > 0)) fail(`leaf box group size ${name} is invalid`);
+        }
+      }
       const hysteresis = finite(binding.hysteresis, 'silhouette step hysteresis');
       if (hysteresis < 0 || hysteresis >= 1) fail('silhouette step hysteresis must be in [0, 1)');
       const levels = array(binding.levels, 'silhouette steps');

@@ -6,6 +6,7 @@ export type PreparedDeclarations = ReturnType<typeof preparedDeclarations>;
 export interface PreparedNode { tag: string; className: string | null; style: PreparedDeclarations; attributes: Record<string, string>; children: PreparedNode[]; parent: PreparedNode | null; }
 
 import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "./projective-layout.mts";
+import { leafBoxLengths, LEAF_BOX_UNSCALE } from "./leaf-box.mts";
 
 const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 // Preparation only: these inputs are the checked-in CSS declaration records,
@@ -52,21 +53,25 @@ export function createPreparedNodeTree({ cssomReads = new Map() }: { cssomReads?
     if (!layer) return node;
     if (layer.schema !== "polycss-prepared-projective-texture-layer@1") throw new TypeError("Prepared projective layer is incompatible.");
     const scale = layer.rasterScale ?? 1;
+    // Every projective leaf's box follows its body's size on screen (leaf-box.mts), unless its generator opts out: its
+    // lengths read the leaf's factor and its matrix is followed by the factor's inverse.
+    const leafBox = layer.leafBox !== false, boxed = leafBox ? leafBoxLengths : (value: string) => value;
     applyPreparedProjectiveLayout(node.style, layout, scale);
     // One raster plane owns the complete homography. Splitting the frame and
     // texture into nested composited planes lets Chrome paint outside the leaf
     // under a close perspective camera, even when both DOM rectangles are small.
     // Compose once during preparation; runtime only transports this matrix.
-    scalePreparedBackgroundAddresses(node.style, scale);
+    scalePreparedBackgroundAddresses(node.style, scale, boxed);
     node.attributes['data-prepared-projection'] = 'single-leaf';
-    const matrix = `matrix3d(${composePreparedTextureMatrices(layer.frameMatrix, layer.textureMatrix)})`;
-    node.style.transform = layer.seamOutset ? `${matrix} ${seamOutsetTransform(layer.seamOutset)}` : matrix;
+    const composed = composePreparedTextureMatrices(layer.frameMatrix, layer.textureMatrix);
+    const matrix = [`matrix3d(${composed})`, ...leafBox ? [LEAF_BOX_UNSCALE] : [], ...layer.seamOutset ? [seamOutsetTransform(layer.seamOutset)] : []];
+    node.style.transform = matrix.join(" ");
     node.style.transformStyle = "preserve-3d";
     for (const property of ["--polycss-atlas-width", "--polycss-atlas-height"]) {
-      const value = node.style.getPropertyValue(property); if (value) node.style.setProperty(property, scalePreparedPixelLengths(value, scale));
+      const value = node.style.getPropertyValue(property); if (value) node.style.setProperty(property, boxed(scalePreparedPixelLengths(value, scale)));
     }
-    if (node.style.width) node.style.width = scalePreparedPixelLengths(node.style.width, scale);
-    if (node.style.height) node.style.height = scalePreparedPixelLengths(node.style.height, scale);
+    if (node.style.width) node.style.width = boxed(scalePreparedPixelLengths(node.style.width, scale));
+    if (node.style.height) node.style.height = boxed(scalePreparedPixelLengths(node.style.height, scale));
     Object.assign(node.style, { backgroundRepeat: "no-repeat", backgroundOrigin: "border-box", backgroundClip: "border-box", pointerEvents: "none" });
     return node;
   }

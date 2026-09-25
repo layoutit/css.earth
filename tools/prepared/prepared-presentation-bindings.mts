@@ -16,6 +16,7 @@ import { chromium, type Browser } from 'playwright';
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
 import { verifyDepthStyles } from './prepared-depth-styles.mts';
+import { LEAF_BOX_FACTOR, withLeafBoxes } from './leaf-box.mts';
 
 /** Resolve authored motion offline. Runtime receives explicit animation
  * handles, never a live style discovery pass; the browser culls back faces. */
@@ -51,7 +52,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     await page.setContent('<main class="object-stage"></main>');
     await page.addStyleTag({ content: styles.join('\n') });
     const browserDefinition: PresentationSource = { ...definition, id: input.id };
-    const prepared = await page.evaluate(({ definition, closed, ratios, inset, interiorOnly }) => {
+    const prepared = await page.evaluate(({ definition, closed, ratios, inset, interiorOnly, leafBoxFactor }) => {
       const stage = document.querySelector('main');
       if (!stage) throw new TypeError('Preparation stage is missing.');
       stage.dataset.objectId = definition.id;
@@ -281,11 +282,31 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         }
         return { body: { center: centre.map(fixed), radius: Math.floor(radius * 100) / 100 }, writes };
       }
+      /** Every leaf whose box follows the body on screen (tools/prepared/leaf-box.mts), measured at its full box (no factor
+       * is written yet), and the body's centre, in scene coordinates. A leaf under the exterior body mesh is surface. */
+      function leafBoxMeasurements() {
+        const bodies = new Set(definition.tree.nodes.flatMap((node, id) =>
+          node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway') ? [id] : []));
+        const sceneFromBody = bodies.size ? frame([...bodies][0]!) : null;
+        if (!sceneFromBody) return null;
+        const exterior = (target: number) => { for (let cursor = definition.tree.nodes[target].parent; cursor >= 0; cursor = definition.tree.nodes[cursor].parent) if (bodies.has(cursor)) return true; return false; };
+        const origin = sceneFromBody.transformPoint(new DOMPoint(0, 0, 0));
+        const leaves = [];
+        for (const target of definition.tree.nodes.keys()) {
+          if (!nodes[target]?.style.transform.includes(`var(${leafBoxFactor}`)) continue;
+          const sceneFromLeaf = frame(target), style = getComputedStyle(nodes[target]);
+          const width = parseFloat(style.width), height = parseFloat(style.height);
+          if (!sceneFromLeaf || !(width > 0) || !(height > 0)) return null;
+          leaves.push({ node: target, frame: Array.from(sceneFromLeaf.toFloat64Array()), width, height, surface: exterior(target) });
+        }
+        return leaves.length ? { leaves, bodyCentre: [origin.x, origin.y, origin.z] } : null;
+      }
       for (const animation of stage.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 0; }
       const placements = texturePlacements();
+      const leafBoxes = interiorOnly ? null : leafBoxMeasurements();
       const interior = interiorGeometry();
       const bodyNode = definition.tree.nodes.findIndex(node => node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway'));
-      if (interiorOnly) return { interior, placements, surface: null, depthReason: null, motion: [] };
+      if (interiorOnly) return { interior, placements, leafBoxes, surface: null, depthReason: null, motion: [] };
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
@@ -338,13 +359,20 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       }
       // Recheck after every variant has declared its motion targets.
       const finalSurface = variableSurface ? null : depthSurface();
-      return { interior, placements, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()] };
-    }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
-    const { interior, placements, surface, depthReason, ...bindings } = prepared;
+      return { interior, placements, leafBoxes, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()] };
+    }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly, leafBoxFactor: LEAF_BOX_FACTOR });
+    const { interior, placements, leafBoxes, surface, depthReason, ...bindings } = prepared;
     const placed = <D extends { textureLevels?: unknown }>(value: D): D => placements && isRecord(value.textureLevels)
       ? { ...value, textureLevels: { ...value.textureLevels, placements } } : value;
     if (interiorOnly) return withPreparedInteriorFill(placed(withoutPreparedInteriorFill(input)), interior, assetRoot, gapExclusion);
-    const source = placed({ ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
+    const bound = placed({ ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
+    // Leaf boxes: each leaf's factor, the body's steps and their binding (leaf-box.mts).
+    // The steps start at the body's logical diameter, which only an object runtime's camera carries.
+    const logicalBodyDiameter: unknown = isRecord(definition.camera) ? definition.camera.logicalBodyDiameter : undefined;
+    if (leafBoxes && !(typeof logicalBodyDiameter === 'number' && logicalBodyDiameter > 0)) {
+      throw new TypeError(`${definition.id}: leaf boxes need the camera's logical body diameter, not ${String(logicalBodyDiameter)}.`);
+    }
+    const source = leafBoxes ? withLeafBoxes(bound, leafBoxes, { closed, initialDiameter: Number(logicalBodyDiameter) }) : bound;
     let compiled = prepareDepthPartitions(source, surface);
     let reason = depthReason;
     if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }
