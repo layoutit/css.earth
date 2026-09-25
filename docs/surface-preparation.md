@@ -449,6 +449,15 @@ measured the same way on 2026-09-25 against the lossless files they replaced:
 
 The per-body marker tiles the pages are packed from stay lossless.
 
+Facility thumbnails (spacecraft artwork and telescope photographs, 592×296) go
+through the lane too; the artwork keeps alpha quality 40. Measured on 2026-09-25
+against lossless encodes, artwork shown on the card colour:
+
+| Images | Quality 90 before | Lane | Flagged before → lane |
+|---|---|---|---|
+| NASA spacecraft artwork (21 files) | 427 KB | 263 KB | 346 → 245 |
+| Telescope photographs (11 files) | 485 KB | 315 KB | 679 → 197 |
+
 These still set their own encoding:
 
 - Earth's full pages keep the qualities its recipe declares; its smaller

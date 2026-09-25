@@ -1,0 +1,29 @@
+{
+  "id": "artwork-photo-voyager-1",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Voyager 1 spacecraft artwork",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/Voyager.png",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+      "checkedOn": "2026-09-25",
+      "locator": "NASA spacecraft icon artwork and original file"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA"
+}

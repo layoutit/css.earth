@@ -53,16 +53,18 @@ use the source's distinction. Coverage is limited to the records in the catalogu
 Artwork references use `imageId` and `emblemId`. The approved
 [render library](../../site/source/facilities/render-library.json) and
 [emblem library](../../site/source/facilities/emblem-library.json) own the asset
-bytes and credits. A facility with no 3D model carries a published photograph
-instead, pinned in
+bytes and credits. A spacecraft shows NASA's official artwork and a telescope or
+ground station a published photograph, both recorded in
 [`photograph-records.json`](../../site/source/facilities/photograph-records.json)
 and prepared by
 [`prepare-facility-photographs.mts`](../../tools/prepare/prepare-facility-photographs.mts)
-into the same library, where `source.kind` tells a photograph from a render.
+into the same library, where `source.kind` tells artwork, a photograph and a
+model render apart. Only spacecraft NASA publishes no artwork for are rendered
+from a 3D model; [facility thumbnails](../facility-thumbnails.md) explains both routes.
 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
-committed files. `node tools/prepare/prepare-facility-photographs.mts` re-acquires each pinned
-photograph and prepares it to the library's frame.
+committed files. `node tools/prepare/prepare-facility-photographs.mts` re-acquires each recorded
+file and prepares it to the library's frame.
 `node tools/prepare/prepare-facility-renders.mts` clears the flat sidebar background out of the
 approved renders to alpha, flood-filling only from the frame edges and refusing
 any change to artwork RGB, then records where each facility sits so a card can
