@@ -11,7 +11,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
 import { supportsMeasuredResolution } from './resolution-evidence.mts';
-import { readFitsHdus, fitsImageAccessor } from '../fits/fits.mts';
+import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from './body-map-product.mts';
 import { parseProductRecord, productRecordPath, runDigest, sameRun, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from './product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ConstraintVerdict, type ObservationSelection } from './telescopes/query.mts';

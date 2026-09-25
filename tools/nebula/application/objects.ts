@@ -35,7 +35,7 @@ const implementationFiles = [
   'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
   'tools/nebula/application/element-budget.ts', 'src/renderers/css/volume/compiler-render-budget.ts',
   'src/renderers/css/volume/prepared-volume-lod.ts',
-  'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
+  'tools/nebula/application/star-sprites.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
   'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/volume-impostors.ts',
   'src/renderers/css/volume/types.ts', 'src/renderers/css/volume/validation.ts',

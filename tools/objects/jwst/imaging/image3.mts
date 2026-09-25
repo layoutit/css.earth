@@ -22,7 +22,7 @@ import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
-import { readFitsFileHdus } from '../../../fits/fits.mts';
+import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord, requireString } from '@cssearth/core';
 import { addProductEvidence, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '../../product-record.mts';

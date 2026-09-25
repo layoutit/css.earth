@@ -27,7 +27,7 @@ export default [
     },
   },
   {
-    files: ['packages/{core,engine,objects}/src/**/*.ts'],
+    files: ['packages/{core,engine,fits,objects}/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-globals': ['error', 'window', 'document', 'HTMLElement', 'DOMMatrix', 'DOMMatrixReadOnly', 'Image', 'CSSStyleDeclaration', 'requestAnimationFrame'],
@@ -41,8 +41,9 @@ export default [
     },
   },
   {
-    // `@cssearth/core/node` is the one Node-only entry: it may use Node built-ins, and nothing else in core may import it.
-    files: ['packages/core/src/node/**/*.ts'],
+    // `@cssearth/core/node` and `@cssearth/fits/node` are the Node-only entries: they may use Node built-ins, and nothing
+    // else in their package may import them.
+    files: ['packages/{core,fits}/src/node/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
@@ -52,12 +53,12 @@ export default [
     },
   },
   {
-    files: ['packages/core/src/**/*.ts'],
-    ignores: ['**/*.test.ts', 'packages/core/src/node/**'],
+    files: ['packages/{core,fits}/src/**/*.ts'],
+    ignores: ['**/*.test.ts', 'packages/{core,fits}/src/node/**'],
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', './node', './node/*', '../node', '../node/*'],
-          message: 'The main and schema entries of @cssearth/core stay browser-safe: no Node built-ins and no import of the node entry.' }],
+          message: 'The main entries of @cssearth/core and @cssearth/fits stay browser-safe: no Node built-ins and no import of the node entry.' }],
       }],
     },
   },

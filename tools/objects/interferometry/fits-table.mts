@@ -1,9 +1,9 @@
 /** Binary tables (OIFITS) read with the standard's own byte layout: 2880-byte blocks, 80-character cards,
  * big-endian columns whose TFORM states a repeat count and a type. No heap (variable-length) columns are read. Complex columns
  * (C single, M double precision; OIFITS 2 VISDATA and VISERR) read as real and imaginary pairs, so a table that carries them,
- * as AMBER and GRAVITY files do, can be read and rewritten. Headers and HDU bounds come from tools/fits.mts. */
-import { readFitsHdus as readSharedHdus, type FitsHeader } from '../../fits/fits.mts';
-/** One HDU as tools/fits/fits.mts reads it: its header (ESO HIERARCH keywords as "ESO DET NAME" style keys), where its header and data start,
+ * as AMBER and GRAVITY files do, can be read and rewritten. Headers and HDU bounds come from @cssearth/fits. */
+import { readFitsHdus as readSharedHdus, type FitsHeader } from '@cssearth/fits';
+/** One HDU as @cssearth/fits reads it: its header (ESO HIERARCH keywords as "ESO DET NAME" style keys), where its header and data start,
  * and how many data bytes it holds before padding. */
 export interface FitsHdu { readonly header: FitsHeader; readonly headerOffset: number; readonly dataOffset: number; readonly dataBytes: number; readonly extname: string }
 /** `nullValue` is the column's TNULL, read back as NaN. A column whose TSCAL or TZERO changes its values is refused when read or written. */

@@ -12,6 +12,12 @@ export async function implementationPins(root: string, entries: readonly string[
     bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
     packages: 'external', logLevel: 'silent',
     plugins: [{ name: 'nebula-internal-owner-identity', setup(builder) {
+      // The FITS reader was a relative module under tools/ before it became @cssearth/fits; its sources stay owners of
+      // every identity that reads FITS. The package publishes built files, so its entries map to their sources here.
+      builder.onResolve({ filter: /^@cssearth\/fits(?:\/node)?$/ }, args => {
+        manifests.add('packages/fits/package.json');
+        return { path: resolve(root, args.path.endsWith('/node') ? 'packages/fits/src/node/index.ts' : 'packages/fits/src/index.ts') };
+      });
       builder.onResolve({ filter: /^@cssearth\/(?:volume-core|volume-bake|nebula-reconstruction|nebula-lab)(?:\/|$)/ }, async args => {
         const [scope, name, ...tail] = args.path.split('/');
         const directory = name === 'nebula-reconstruction' ? 'reconstruction' : name === 'nebula-lab' ? 'lab' : name;

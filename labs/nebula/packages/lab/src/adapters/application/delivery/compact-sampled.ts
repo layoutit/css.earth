@@ -17,7 +17,7 @@ import {
   type CompilerPin,
 } from "@cssearth/volume-core/contracts/compiler-bake";
 import { loadCompilerImages } from "../../../server/workflows/compiler/images.ts";
-import { decodeFits } from "../fits.ts";
+import { decodeFits } from "@cssearth/fits";
 import {
   sampledPointColors,
   prepareSampledMaterial,

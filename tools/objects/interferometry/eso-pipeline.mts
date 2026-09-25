@@ -10,7 +10,7 @@ import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { tapRows } from '../astronomy-packages/client.mts';
 
 export type RawRow = Readonly<Record<string, string>>;
@@ -109,7 +109,7 @@ export async function runRecipe(pipelineSetup: EsoPipeline, work: string, step: 
 
 export type EsoHeader = Readonly<Record<string, string | number | boolean>>;
 
-/** Header card lines as keywords, with HIERARCH ones as "ESO DET2 SEQ1 DIT" style keys, each value read by tools/fits.mts. The archive's
+/** Header card lines as keywords, with HIERARCH ones as "ESO DET2 SEQ1 DIT" style keys, each value read by @cssearth/fits. The archive's
  * header service prints cards without their trailing blanks and widens long HIERARCH cards past 80 columns, so each line is read on
  * its own rather than as an 80-column record. */
 export function parseHeaderCards(cards: Iterable<string>): EsoHeader {

@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
+import { readFitsHdu, fitsImageAccessor } from '@cssearth/fits';
 import { parseTransform } from './source-records.mts';
 import { shape, text, number, array, optional, dictionary } from '@cssearth/core';
 

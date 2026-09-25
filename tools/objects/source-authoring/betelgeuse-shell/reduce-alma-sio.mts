@@ -20,7 +20,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { fitsImageAccessor, readFitsHdu } from '../../../fits/fits.mts';
+import { fitsImageAccessor, readFitsHdu } from '@cssearth/fits';
 import { sha256 } from '@cssearth/core/node';
 import { ALMA_SIO, DOWNLOADS_BASE } from './author.mts';
 

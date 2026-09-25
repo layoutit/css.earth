@@ -19,7 +19,7 @@ import { loadSurfaceObservation, type SurfaceObservation } from '../surface-obse
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-mesh.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
-import { skyDisplayRaster } from '../../fits/fits-sky.mts';
+import { skyDisplayRaster } from '@cssearth/fits';
 import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation } from '../terrestrial-layers/observation-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';

@@ -16,8 +16,8 @@
  * (labs/nebula reconstruct-circumstellar), and the author reads that reconstruction.
  *
  * Which side of the midplane tilts toward the observer is a stated convention (`nearSidePositionAngleDeg`), as for the ring. */
-import { readFitsFileHdus, readFitsFileRegion } from '../../fits/fits.mts';
-import { skyProjection } from '../../fits/fits-sky.mts';
+import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
+import { skyProjection } from '@cssearth/fits';
 import type { SkyPlane } from './disc-envelope.mts';
 
 const DEG = Math.PI / 180;

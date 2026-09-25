@@ -6,7 +6,7 @@ import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
 import{ plotNumericPreview ,type FigureOptions}from'../../astronomy-packages/plots.mts';
 import { resolve } from 'node:path';
 import { fileSize } from '../../product-record.mts';
-import { readFitsImage } from '../../../fits/fits.mts';
+import { readFitsImage } from '@cssearth/fits';
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
 import { descriptor, stable } from './common.mts';

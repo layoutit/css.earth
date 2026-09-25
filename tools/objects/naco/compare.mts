@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { sampleStatistics as statistics, type Statistics } from '../../fits/sample-statistics.mts';
+import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
 /** Compare two independently commanded NACO jitter sequences of one night, sample by sample: the only oracle this route has.
  *
  *   node tools/objects/naco/compare.mts <program id> <work directory> <tpl_start> <tpl_start>
@@ -34,7 +34,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits/fits.mts';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { addProductEvidence, productRecordPath } from '../product-record.mts';
 import { PROGRAMS, readProgram } from './archive.mts';
 

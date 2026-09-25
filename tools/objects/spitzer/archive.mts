@@ -33,7 +33,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { readFitsFileHdus, type FitsHeader } from '../../fits/fits.mts';
+import type { FitsHeader } from '@cssearth/fits';
+import { readFitsFileHdus } from '@cssearth/fits/node';
 import { sha256File } from '@cssearth/core/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 

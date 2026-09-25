@@ -52,7 +52,7 @@ Preparation reads these products from their public archives, such as NASA's PDS,
 
 Preparation reads archive formats directly with in-house TypeScript readers. The FITS, PDS, SPICE and photometry readers are checked against independent reference implementations in [`tools/oracles/`](tools/oracles/README.md).
 
-- **FITS and PDS:** FITS images and tables, including Rice-compressed ones, with their sky orientation, and PDS3 and PDS4 labels ([`tools/fits/fits.mts`](tools/fits/fits.mts), [PDS labels](docs/pds-labels.md)).
+- **FITS and PDS:** FITS images and tables, including Rice-compressed ones, with their sky orientation, and PDS3 and PDS4 labels ([`@cssearth/fits`](packages/fits/README.md), [PDS labels](docs/pds-labels.md)).
 - **SPICE:** kernels, clocks, frames and pointing, used to place a spacecraft's camera for each photograph ([`tools/spice/`](tools/spice)).
 - **Surface imagery:** image decoding, shape-model reduction, UV mapping and texture atlases ([surface preparation](docs/surface-preparation.md), [colour preparation](docs/color-preparation.md)).
 - **Photometry:** Hapke and disc models that separate a surface's brightness from its lighting and viewing angles ([`tools/photometry/`](tools/photometry/README.md)).

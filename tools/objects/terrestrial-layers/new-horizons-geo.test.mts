@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {decodeNewHorizonsLorri,decodeArrokothMvic,newHorizonsCamera} from './new-horizons-geo.mts';
 import {bindSipCamera} from './llorri-geo.mts';
-import {readFitsPrimary} from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import {array,number,nullable,optional,shape,text} from '@cssearth/core';
 import {validateSurfaceObservation} from '../surface-observations/index.mts';
 import {pinnedOracleVersions} from '../../oracles/fixture.mts';

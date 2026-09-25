@@ -1,6 +1,6 @@
 import { cross3 as cross, array, number, shape, text, dotN as dot } from '@cssearth/core';
 import assert from 'node:assert/strict';
-import { readFitsHeader } from '../../fits/fits.mts';
+import { readFitsHeader } from '@cssearth/fits';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

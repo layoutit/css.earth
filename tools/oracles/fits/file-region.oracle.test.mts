@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { resolve } from 'node:path';
-import { readFitsFileHdus, readFitsFileRegion } from './fits.mts';
+import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 
 // Astropy 8.0.1, fits.open(path, memmap=True)[1].section[40:160, 250:762],
 // converted to big-endian float64 before hashing. The archived STIS FITS file is tracked.

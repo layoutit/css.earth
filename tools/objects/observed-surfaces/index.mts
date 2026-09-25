@@ -6,7 +6,7 @@ import type {SourcePin} from '../giant-layers/radial-contract.mts';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
-import { readFitsPrimary } from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import { planetographicRowsToMeshLatitude } from '../material-composition/ellipsoid.mts';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
 

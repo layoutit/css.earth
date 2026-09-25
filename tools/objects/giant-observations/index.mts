@@ -7,7 +7,7 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '../../../src/platform/projective-surface-raster.mts';
-import {readFitsPrimary} from '../observation/fits.mts';
+import { readFitsPrimary } from '@cssearth/fits';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {latitudeRasterBands} from '../giant-layers/geometry.mts';
 import {validateRelativePath} from '../material-composition/recipe.mts';

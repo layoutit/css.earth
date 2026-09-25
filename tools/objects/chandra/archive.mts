@@ -25,7 +25,7 @@ import { spawn } from 'node:child_process';
 import { mkdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { tapRows } from '../astronomy-packages/client.mts';
 

@@ -38,9 +38,10 @@ export async function buildLabModule(options: BuildOptions) {
     name: 'nebula-workspace-source-owners',
     setup(builder) {
       builder.onResolve({ filter: /^@cssearth\// }, args => {
-        // `@cssearth/core` ships built JavaScript, not TypeScript owners. Node loads its ESM build at run time: inlining
-        // the CommonJS build `require.resolve` finds would leave `require('node:crypto')` in an ESM bundle, which fails.
-        if (/^@cssearth\/core(?:\/|$)/.test(args.path)) return { path: args.path, external: true };
+        // `@cssearth/core` and `@cssearth/fits` ship built JavaScript, not TypeScript owners. Node loads their ESM builds at
+        // run time: inlining the CommonJS build `require.resolve` finds would leave `require('node:crypto')` in an ESM
+        // bundle, which fails.
+        if (/^@cssearth\/(?:core|fits)(?:\/|$)/.test(args.path)) return { path: args.path, external: true };
         const directory = args.resolveDir || options.absWorkingDir || process.cwd();
         const require = createRequire(resolve(directory, '__nebula_bundle__.cjs'));
         return { path: require.resolve(args.path) };

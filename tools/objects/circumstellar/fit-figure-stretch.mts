@@ -18,7 +18,7 @@ import sharp from 'sharp';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { mastFile } from '../astronomy-packages/mast.mts';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';
-import { readFitsFileHdus } from '../../fits/fits.mts';
+import { readFitsFileHdus } from '@cssearth/fits/node';
 import { readSkyPlane } from './disc-envelope.mts';
 
 export const CHANNELS = ['red', 'green', 'blue'] as const;

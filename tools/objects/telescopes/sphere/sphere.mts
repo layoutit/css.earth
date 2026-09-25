@@ -12,12 +12,14 @@ import { writeProductRecord } from '../../product-record.mts';
 import { sha256 } from '@cssearth/core/node';
 import { verifiedProduct, localOutput } from '../verified-product.mts';
 import { contextTarget, sourceContext } from '../delivery-context.mts';
+import { followedWorkspaceSources } from '../implementation-dependencies.mts';
 
 const root=resolve(import.meta.dirname,'../../../..');
 type SphereOwner=typeof import('./sphere-lane.mts');
 async function loadSphereOwner(){
   await mkdir(resolve(root,'work'),{recursive:true});const directory=await mkdtemp(resolve(root,'work/telescope-sphere-owner-'));
-  const compiled=await build({entryPoints:[resolve(root,'tools/objects/telescopes/sphere/sphere-lane.mts')],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true});
+  // The FITS reader is bundled from its sources, so the implementation digest below covers it as it did when it was local.
+  const compiled=await build({entryPoints:[resolve(root,'tools/objects/telescopes/sphere/sphere-lane.mts')],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[followedWorkspaceSources(root)]});
   const moduleFile=resolve(directory,'lane.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   const owner:SphereOwner=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);return {compiled,owner,cleanup:()=>rm(directory,{recursive:true,force:true})};
 }

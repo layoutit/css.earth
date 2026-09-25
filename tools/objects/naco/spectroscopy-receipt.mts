@@ -26,7 +26,7 @@ import { sha256File } from '@cssearth/core/node';
 import { archiveHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';
-import { sampleStatistics as statistics, type Statistics } from '../../fits/sample-statistics.mts';
+import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
 import { detectSlitAxis, extractSpectrum, measureTrace, readFrame, type TraceMeasurement } from './spectrum.mts';
 
 /** Dispersion samples summed on each side of the trace when a one-dimensional spectrum is extracted. */

@@ -10,8 +10,7 @@ import { mkdir, readFile, writeFile, rename, rm, open, realpath } from 'node:fs/
 import { dirname, resolve, basename, relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { withIdleTimeout, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
-import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor } from '../../fits/fits.mts';
-import { readRiceCompressedImage } from '../../fits/fits-rice.mts';
+import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor, readRiceCompressedImage } from '@cssearth/fits';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements } from '../pds-labels.mts';
 import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';

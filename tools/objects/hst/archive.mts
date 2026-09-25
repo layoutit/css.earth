@@ -24,7 +24,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { binaryTable, numbers, tableColumn, text as cell } from '../interferometry/fits-table.mts';
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

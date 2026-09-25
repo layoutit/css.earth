@@ -1,7 +1,8 @@
-import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeFits, encodeFits } from '../../../adapters/application/fits.ts';
-import { imageFixture, card } from '../../../../../../../../tests/fixtures/fits/helpers.mts';
+import { test } from 'vitest';
+import { decodeFits } from '../index.js';
+import { imageFixture, card } from '../test-support/fixtures.js';
+import { encodeFits } from './index.js';
 
 test('FITS transport reverses DOM rows exactly once and preserves signed samples', () => {
   const samples = new Float32Array([1, 2, 3, -4, .125, 0]);

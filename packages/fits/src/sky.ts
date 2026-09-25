@@ -6,7 +6,7 @@
  * swapped axes, a projection whose default LONPOLE is not 180 or a reference point on a celestial pole is refused, because
  * a display raster cannot hold it without resampling. tools/oracles/fits/sky-orientation.py checks this reading against
  * Astropy's world coordinates. */
-import type { FitsHeader } from './fits.mts';
+import type { FitsHeader } from './fits.js';
 import { dot3 as dot } from '@cssearth/core';
 
 export interface SkyImageAxes {

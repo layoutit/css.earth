@@ -11,12 +11,13 @@
  *
  * None of it is read here: the comparison needs an extension's name, version, shape, type and scaling, and nothing that repeats
  * carries those. So the first card of a repeated keyword is kept, the keywords that repeated are reported, and a receipt says
- * so. Cards themselves are parsed by the repository's one FITS reader (tools/fits/fits.mts); only where each unit begins and ends is
+ * so. Cards themselves are parsed by the repository's one FITS reader (@cssearth/fits); only where each unit begins and ends is
  * worked out here, from the structural keywords the standard fixes.
  *
  * A file whose headers repeat nothing reads exactly as `readFitsFileHdus` reads it. */
 import { open } from 'node:fs/promises';
-import { fitsCardValue, scanFitsCards, type FitsFileHdu, type FitsHeader, type FitsValue } from '../../fits/fits.mts';
+import { fitsCardValue, scanFitsCards, type FitsHeader, type FitsValue } from '@cssearth/fits';
+import type { FitsFileHdu } from '@cssearth/fits/node';
 
 const RECORD = 2880;
 const MAX_HEADER_RECORDS = 256;

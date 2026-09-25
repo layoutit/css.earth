@@ -12,7 +12,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import type { FitsHeader } from '../../fits/fits.mts';
+import type { FitsHeader } from '@cssearth/fits';
 
 export interface PipelineImaging {
   readonly field: string;

@@ -35,7 +35,7 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits/fits.mts';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { addProductEvidence, assertInputPins, productRecordPath, readProductRecord, sameRun,
   type EvidenceKind, type ProductInput, type ProductRecord } from '../product-record.mts';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';

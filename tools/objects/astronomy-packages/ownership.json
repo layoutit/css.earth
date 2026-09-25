@@ -206,7 +206,7 @@
     },
     {
       "mechanic": "streaming FITS and in-process WCS reads",
-      "implementation": "tools/fits/fits.mts and tools/objects/interferometry/fits-table.mts",
+      "implementation": "packages/fits (@cssearth/fits and its node entry) and tools/objects/interferometry/fits-table.mts",
       "reason": "Existing in-process consumers retain subregion streaming, including repeated reads through an already open file handle. A tracked STIS image region agrees byte for byte with Astropy 8.0.1's memmap section; that one small fixture does not establish large-file memory or throughput superiority. Astropy owns scientific metadata qualification through science.mts; these consumers do not implement that qualification contract."
     },
     {

@@ -65,7 +65,7 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   to 1.08 → (255, 178, 37), with a tight 10–90% spread (≤ 16 levels). Below
   0.56 sunspots are only a few JPEG pixels wide and the table is not
   measurable; the palette ramps linearly to black there.
-- The JSOC segments are Rice tile-compressed FITS. `tools/fits/fits-rice.mts`
+- The JSOC segments are Rice tile-compressed FITS. `@cssearth/fits` (`packages/fits/src/rice.ts`)
   decodes them; on the full 13 May frame every one of the 16.8 million samples
   equals astropy's raw integer through BSCALE/BZERO, with BLANK samples in the
   same places. The [oracle table](../../../tools/oracles/README.md) lists the

@@ -1,5 +1,5 @@
 import { pds3Keyword } from '../pds-labels.mts';
-import { readFitsPlane } from '../observation/fits.mts';
+import { readFitsPlane } from '@cssearth/fits';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { encodeClock, clockToEt } from '../../spice/sclk.mts';
 import { etToUtc, utcToEt } from '../../spice/lsk.mts';

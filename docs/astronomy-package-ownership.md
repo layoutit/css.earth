@@ -43,7 +43,7 @@ does not qualify spacecraft geometry. Telescope's PlanetMapper route already use
 result. Before deleting a custom path, migrate one complete preparation consumer with its pinned kernels and output receipt,
 then compare positions, frames, light time and final pixels.
 
-**FITS.** Retain the on-disk subregion reader used by repeated preparation reads. [The tracked STIS region oracle](../tools/fits/fits-file-region.oracle.test.mts)
+**FITS.** Retain the on-disk subregion reader used by repeated preparation reads. [The tracked STIS region oracle](../tools/oracles/fits/file-region.oracle.test.mts)
 hashes a 512 × 120 SCI rectangle after conversion to float64 and matches [Astropy](https://docs.astropy.org/en/stable/io/fits/)
 8.0.1 `fits.open(..., memmap=True).section[...]` byte for byte. The reader can reuse an open file handle; Astropy already owns
 Telescope's scientific FITS metadata checks. This one 3.1 MB file proves value parity, not large-file memory or speed. Before

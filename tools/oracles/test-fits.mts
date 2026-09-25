@@ -10,18 +10,21 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 const args = process.argv.slice(2);
 if (args.some(arg => !['--unit', '--restore'].includes(arg)) || args.includes('--unit') && args.includes('--restore'))
   throw new Error('Usage: pnpm test:fits [--unit | --restore]');
-const run = (args: string[]) => {
-  const result = spawnSync(process.execPath, args, { cwd: ORACLE_ROOT, stdio: 'inherit' });
+const run = (args: string[], command = process.execPath) => {
+  const result = spawnSync(command, args, { cwd: ORACLE_ROOT, stdio: 'inherit' });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
-const unit = ['tools/fits/fits.test.mts', 'tools/fits/fits.oracle.test.mts', 'tools/fits/fits-sky.test.mts', 'tools/fits/fits-sky.oracle.test.mts', 'tools/fits/fits-sky-projection.oracle.test.mts', 'tools/fits/fits-rice.oracle.test.mts',
+// The reader's own behaviour tests, including the float32 transport image, are the package's.
+run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
+const unit = ['tools/oracles/fits/core.oracle.test.mts', 'tools/oracles/fits/sky-orientation.oracle.test.mts', 'tools/oracles/fits/sky-projection.oracle.test.mts',
+  'tools/oracles/fits/file-region.oracle.test.mts', 'tools/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
   'tools/objects/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tools/objects/observation/wise-atlas-mosaic.oracle.test.mts',
   'tools/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'tools/objects/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tools/objects/terrestrial-layers/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);
-run(['labs/nebula/run.mts', 'test', 'getsf-fits', 'getsf', 'sampled-prior', 'ownership']);
+run(['labs/nebula/run.mts', 'test', 'getsf', 'sampled-prior', 'ownership', 'source-pin']);
 if (args.includes('--unit')) process.exit(0);
 
 const inputs = new Map<string, { path: string; bytes?: number }>();
@@ -92,8 +95,8 @@ if (missing.length) {
   }
 }
 run(['--test', '--test-concurrency=1',
-  'tools/fits/fits-products.test.mts',
-  'tools/fits/fits-pallas.test.mts',
+  'tools/oracles/fits/synoptic.test.mts',
+  'tools/oracles/fits/pallas.test.mts',
   'tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts',
   'tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts',
   'tools/objects/terrestrial-layers/pds4-geometry-cube.oracle.test.mts',

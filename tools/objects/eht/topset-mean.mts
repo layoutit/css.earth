@@ -15,7 +15,7 @@ import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsImage } from '../../fits/fits.mts';
+import { readFitsImage } from '@cssearth/fits';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 

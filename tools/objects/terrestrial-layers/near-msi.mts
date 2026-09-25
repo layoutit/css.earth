@@ -1,4 +1,4 @@
-import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
+import { readFitsHeader, readFitsPrimary } from '@cssearth/fits';
 import { array, number, shape, text, dotN as dot } from '@cssearth/core';
 
 

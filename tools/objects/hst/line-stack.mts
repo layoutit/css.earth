@@ -32,7 +32,8 @@
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
+import type { FitsHeader } from '@cssearth/fits';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
 import { sha256 } from '@cssearth/core/node';
 import { addProductEvidence, fileSize, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readFitsHdus } from '../../fits/fits.mts';
+import { readFitsHdus } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { atlasToGridPixel, gridWcs } from './wise-atlas-mosaic.mts';

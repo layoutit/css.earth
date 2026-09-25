@@ -23,11 +23,15 @@ test('a sampled publication cannot silently drop or relabel its qualified source
   assert.throws(() => sampledOwnerPins(outside, recipe), /owner/);
 });
 
-test('the shared FITS decoder is a pinned preparation owner, not an arbitrary tools path', () => {
-  const shared = method(); shared.extraImplementation.push(pin('tools/fits/fits.mts'));
-  assert.equal(sampledOwnerPins(shared, recipe).length, 5);
-  shared.extraImplementation[1]!.path = 'tools/other.mts';
-  assert.throws(() => sampledOwnerPins(shared, recipe), /owner|path/);
+test('the shared FITS decoder is a pinned preparation owner, not an arbitrary tools or package path', () => {
+  for (const path of ['packages/fits/src/fits.ts', 'tools/fits/fits.mts']) {
+    const shared = method(); shared.extraImplementation.push(pin(path));
+    assert.equal(sampledOwnerPins(shared, recipe).length, 5, path);
+  }
+  for (const path of ['tools/other.mts', 'packages/fits/src/other.ts', 'packages/core/src/validate.ts']) {
+    const shared = method(); shared.extraImplementation.push(pin(path));
+    assert.throws(() => sampledOwnerPins(shared, recipe), /owner|path/, path);
+  }
 });
 
 

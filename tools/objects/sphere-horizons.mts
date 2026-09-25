@@ -16,7 +16,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
-import { readFitsHdu } from '../fits/fits.mts';
+import { readFitsHdu } from '@cssearth/fits';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { horizonsRows, loadObserverCameraInputs, observerRowValues, rowJd, zimpolExposure } from './terrestrial-layers/observer-cameras.mts';
 

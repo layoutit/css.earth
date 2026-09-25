@@ -20,8 +20,8 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { fitsImageAccessor, imageExtent, readFitsFileHdus, readFitsFileRegion, readFitsHdus, type FitsHeader } from '../../fits/fits.mts';
-import { skyDisplayRaster, skyImageAxes, skyProjection } from '../../fits/fits-sky.mts';
+import { fitsImageAccessor, imageExtent, readFitsHdus, type FitsHeader, skyDisplayRaster, skyImageAxes, skyProjection } from '@cssearth/fits';
+import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { column, eventTable } from '../chandra/events.mts';
 import { decodeJunocam } from '../terrestrial-layers/junocam.mts';
 

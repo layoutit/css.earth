@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { skyDisplayRaster, skyImageAxes } from './fits-sky.mts';
+import { test } from 'vitest';
+import { skyDisplayRaster, skyImageAxes } from './index.js';
 
 const tan = { CTYPE1: 'RA---TAN', CTYPE2: 'DEC--TAN', CRVAL1: 83.8, CRVAL2: 22, CDELT1: -1e-4, CDELT2: 1e-4, CUNIT1: 'deg', CUNIT2: 'deg' };
 

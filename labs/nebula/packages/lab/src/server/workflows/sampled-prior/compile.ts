@@ -11,12 +11,13 @@ import { bakeCompiler, type CompilerStarInput } from '../compiler/bake.ts';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
 import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 import type { SkyBounds } from '@cssearth/volume-core/contracts/emission';
-import { decodeFits, float32LittleEndian } from '../../../adapters/application/fits.ts';
+import { decodeFits } from '@cssearth/fits';
+import { float32LittleEndian } from '../float32-little-endian.ts';
 import { readSampledRecipe, verifySampledEvidence } from '../../../features/sampled-prior/model.ts';
 import { prepareSampledField } from '@cssearth/volume-core/fields/sampled';
 import { sampledStars } from './stars.ts';
 import { sampledPanels } from './panels.ts';
-import { sampledOwnerPins, sampledImplementationOwners } from '../../../features/sampled-prior/ownership.ts';
+import { isSampledFitsOwner, sampledOwnerPins, sampledImplementationOwners } from '../../../features/sampled-prior/ownership.ts';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { sampledBakeProgress } from './progress.ts';
 import { registerComponentBanks } from './layout.ts';
@@ -43,7 +44,7 @@ export async function prepareSampledSceneStars(root: string, outputDirectory: st
 }
 
 export async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
-  if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || pin.path === 'tools/fits/fits.mts') || /[\\?#\s]/.test(pin.path) ||
+  if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || isSampledFitsOwner(pin.path)) || /[\\?#\s]/.test(pin.path) ||
       pin.path.split('/').some(p => !p || p === '..')) throw new TypeError('Invalid sampled source path.');
   const path = await realpath(resolve(root, pin.path)), offset = relative(await realpath(root), path);
   if (offset === '..' || offset.startsWith('../') || isAbsolute(offset)) throw new TypeError('Sampled source leaves the repository.');
