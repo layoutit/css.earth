@@ -78,6 +78,8 @@ publisher then took `hidden` as their restored state, so they never returned, an
 changed pixels (pixelmatch threshold 0.1) at rest and after a drag, and drag frame times on Haumea and 55 Cancri e
 are unchanged.
 
+![TRAPPIST-1e opened from a shared camera link and dragged: 295 surface leaves hidden with the cull, none without it](images/facing-cull-removed.webp)
+
 ## Open trajectories
 
 For negative semimajor axis and eccentricity above one, the astronomy package
