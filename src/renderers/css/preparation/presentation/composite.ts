@@ -22,7 +22,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const layers=atmospheric?(["surface","poles","material"] as const):(["surface","poles"] as const);
   const warm=[
     ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
-      :[{key:"shadowless",url:bank!.presentations[bank!.presentations.length-1]!.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
+      :[{key:"shadowless",url:bank!.shadowless.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
   // A surface too large to decode as one image comes as pages, each at every level (preparation/raster/pages.ts).
   const paged=pagedSurface(plan.body.surfacePages,lenses);
@@ -68,7 +68,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       zeroAtPole:false,property:`--${ns}-light-roll`},frameAttribute:null,modeAttribute:null,quoted:true}
   :{id:"lighting",target:index(plane),frame:{source:"sun-z",minimum:assets.lighting.minimumLightViewZ,maximum:assets.lighting.maximumLightViewZ,
       count:assets.lighting.frameCount,baseFrame:0,remap:null},
-    banks:[{id:"rows",frames:bank!.presentations.map(p=>address(p)),default:null,fixed:address(bank!.presentations[bank!.presentations.length-1]!,"shadowless"),
+    banks:[{id:"rows",frames:bank!.presentations.map(p=>address(p)),default:null,fixed:{resource:"shadowless",frame:bank!.shadowless.frameIndex,row:null,backgroundPosition:bank!.shadowless.backgroundPosition,backgroundSize:bank!.shadowless.backgroundSize},
       rows:bank!.rows.map((_,row)=>({row,resource:`lighting:${row}`,firstFrame:row*bank!.transport.framesPerRow,
         lastFrame:Math.min(bank!.presentations.length-1,(row+1)*bank!.transport.framesPerRow-1)}))},
      {id:"billboard",frames:bank!.billboard.presentations.map(billboardAddress),default:null,fixed:billboardAddress(bank!.billboard.presentations[bank!.billboard.presentations.length-1]!),
@@ -106,9 +106,9 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
         eviction:"capacity",maximumDecodedBytes:paged.maximumDecodedBytes})]:[]),
       ...(atmospheric?[]:[preparedResourcePool("lighting",entries,{retention:"selection",decoding:"sync",capacity:bank!.transport.maximumRetainedRowCount,
         concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true})])],
-      // A paged surface starts at its first level, the one the first selection chooses.
-      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key),
-        ...(atmospheric?[]:bank!.transport.initialWarmRows.map(row=>`lighting:${row}`))])]},
+      // A paged surface starts at its first level, the one the first selection chooses. Lighting rows are not startup
+      // assets: shadows start off, which shows the one shadowless frame, and the rows load when shadows are turned on.
+      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key)])]},
     tree,variants,...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
     viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,
       unitScale:2/plan.camera.logicalBodyDiameter},

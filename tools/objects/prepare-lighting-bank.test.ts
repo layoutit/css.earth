@@ -10,6 +10,7 @@ const root = resolve(import.meta.dirname, '../..');
 test('every tracked lighting bank is the bytes its recipe encodes today', async () => {
   for (const id of Object.keys(LIGHTING_BANKS)) {
     const result = await checkLightingBank(id, root);
-    assert.deepEqual(result, { files: 33, differing: [] }, id);
+    // 32 rows, the billboard and the shadowless frame.
+    assert.deepEqual(result, { files: 34, differing: [] }, id);
   }
 });

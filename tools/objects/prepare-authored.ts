@@ -5,6 +5,9 @@ import { pathToFileURL } from 'node:url';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
+import { prepareLighting } from '../../src/renderers/css/preparation/materials/lighting.js';
+import { outputName } from '../../src/preparation/raster/io.js';
+import { RASTER_DENSITY } from '../../src/preparation/raster/config.js';
 import { parseGeometryProfile, prepareGeometryScene, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '../../src/renderers/css/preparation/presentation/index.js';
 import { prepareCelestialAssets } from './celestial/index.js';
@@ -177,7 +180,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           const changed = [...new Set([...existing.keys(), ...staged.keys()])].filter(filename => JSON.stringify(existing.get(filename)) !== JSON.stringify(staged.get(filename)));
           const chartSource = result.sources.get('charts')?.value as { charts?: { output?: unknown }[] } | undefined;
           const chartOutputs = new Set(chartSource?.charts?.map(chart => chart.output).filter((output): output is string => typeof output === 'string' && output.endsWith('.svg')) ?? []);
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename));
+          // The lighting stage is recomputed from its recipe, and may add the shadowless frame the published set predates.
+          const lightingRecipe = (result.sources.get('raster')?.value as { lighting?: { billboardOutput?: unknown } } | undefined)?.lighting;
+          const shadowless = typeof lightingRecipe?.billboardOutput === 'string'
+            ? outputName(lightingRecipe.billboardOutput, RASTER_DENSITY).replace('billboard', 'shadowless') : null;
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(filename === shadowless && !existing.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }
@@ -276,8 +283,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const publishedJson = async (name: string) => JSON.parse(await readFile(resolve(outputDirectory, `${name}.json`), 'utf8')) as unknown;
   const publishedFeatures = reuseImages ? { runtime: record(await publishedJson('runtime'), 'published runtime'),
     content: record(await publishedJson('content'), 'published content') } : null;
-  const raster = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>>
-    : await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig,
+  const reused = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>> : null;
+  // Lighting frames come from the recipe alone, never from raw downloads, so a reuse run recomputes them (a shared bank's are
+  // copied): the published metadata may predate a lighting output, such as the shadowless frame.
+  if (reused && rasterConfig.lighting) {
+    Object.assign(reused, { lighting: await prepareLighting(rasterConfig, rasterConfig.lighting, publicDirectory) });
+    await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(reused)}\n`);
+  }
+  const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig,
       interpret: await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts'))
         .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig }) });
   // A body may take its surfaces from an observed-surfaces recipe rather than this lane, which then prepares only its

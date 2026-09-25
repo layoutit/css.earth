@@ -39,7 +39,7 @@ export interface WorldContextPointSource {
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
  * (site/context-colour.mts). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
 /** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
- * dot, and its orbit path is its own bank, read only when that path can show. */
+ * dot, and the planner reads its path only when it is named. */
 type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
@@ -288,7 +288,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
 
 /** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as binary
  * orbit banks (`worldOrbitBanks`), which this summary pins by byte length; each orbit here keeps its parent, bounds and
- * size, and names its bank when that is not its centre's. Classification views are build-time only. */
+ * size; each path's bank is named by its body. Classification views are build-time only. */
 export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
   const { classificationViews: _views, ...rest } = prepared;
   // System views keep their members; their camera candidates are `worldSystemViews`, loaded after the first body mounts.
@@ -300,8 +300,7 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
-    const bank = orbitBankId(body);
-    return freeze({ ...body, orbit: freeze({ centerBodyId, ...(bank === centerBodyId ? {} : { bank }), centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
+    return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
       bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
   })) });
 }
@@ -349,10 +348,6 @@ export function orbitVertexError(verticesM: readonly Vector3[], pinnedIndex = 0)
   const { originM, stepM } = orbitVertexQuantum(verticesM, pinnedIndex);
   return Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => originM[axis]! + Math.round((value - originM[axis]!) / stepM) * stepM - value))));
 }
-/** The bank that carries a body's orbit path: its own for a plain dot, whose path shows only when it is named, else its centre's. */
-export function orbitBankId(body: { readonly id: string; readonly plainDot?: true; readonly orbit?: { readonly centerBodyId: string } | null }): string {
-  return body.plainDot ? body.id : body.orbit!.centerBodyId;
-}
 export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
   const sections: (Float64Array | Uint32Array | Int32Array)[] = [];
   let offset = 0;
@@ -387,13 +382,12 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
   }
   return bytes;
 }
-/** One orbit bank per orbit centre (the Sun, each planet with moons, each other star, Sgr A*), and one per plain dot: the
- * planner worker reads a bank when one of its orbits would be drawn, so a page never downloads the paths of systems it does
- * not show (the single bank was 1.6 MB brotli on every page, 2026-09-24), nor the paths of the plain dots, which show only
- * when named (68% of the Sun's bank). */
+/** One orbit bank per path, named by its body: the planner worker reads a path when a frame would draw it, so a page
+ * downloads only the paths its views draw. A bank per orbit centre carried every path around that centre: the Sun view
+ * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path). */
 export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
-  const banks = [...new Set(prepared.bodies.flatMap(body => body.orbit ? [orbitBankId(body)] : []))].sort();
-  return banks.map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.orbit !== null && body.orbit !== undefined && orbitBankId(body) === id) }));
+  return prepared.bodies.filter(body => body.orbit).map(body => body.id).sort()
+    .map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.id === id) }));
 }
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];

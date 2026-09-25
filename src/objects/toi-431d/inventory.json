@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "toi-431d-lens-shape.webp",
       "bytes": 44,
       "sha256": "8f7da55eda9a0d2d4829e2899982cedd61dbcf6ba93afa341ce3f1f34d7c5d30"
@@ -220,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 89062,
-      "sha256": "8cd58db55bfee080164c0a6e717f827cfbf36b5027bad0089e50a0da450e8173"
+      "bytes": 89353,
+      "sha256": "15de014c0bedfc67a92f7ead38363d98e51f48e4fc8ad8dfd5435566af47ddcc"
     },
     {
       "location": "prepared",
@@ -262,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 527129,
-      "sha256": "6572baad0674ed3d59b2124b7d0a497e8154f8ba09524d008645b7b0b1bbba87"
+      "bytes": 527088,
+      "sha256": "90afaaf81a0f6f25c69350e800a1d1de5509b66d6e3a6d7aaacd3fb7163d7d16"
     },
     {
       "location": "prepared",

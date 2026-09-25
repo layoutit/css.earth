@@ -2562,12 +2562,14 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
     }
     expect(lod?.levels, body.id).toEqual(trueLod?.levels);
   }
-  // A bank of another size, one missing an orbit's path, or one for a centre the summary does not pin never decodes.
-  const sun = banks.get('sun')!;
-  expect(() => decodeWorldOrbitBank(summary, 'sun', sun.slice(0, sun.byteLength - 8))).toThrow(/its summary says/);
-  const orbiting = summary.bodies.find(body => body.orbit?.centerBodyId === 'sun')!;
-  expect(() => decodeWorldOrbitBank({ ...summary, bodies: summary.bodies.map(body => body === orbiting ? { ...body, id: 'unknown-body' } : body) }, 'sun', sun)).toThrow(/lacks its path/);
-  expect(() => decodeWorldOrbitBank(summary, 'nowhere', sun)).toThrow(/summary says undefined/);
+  // Each path is its own bank, named by its body. A bank of another size, one for a body the summary does not pin, or one
+  // whose body carries another's path never decodes.
+  expect(banks.size).toBe(summary.bodies.filter(body => body.orbit).length);
+  const earth = banks.get('earth')!;
+  expect([...decodeWorldOrbitBank(summary, 'earth', earth).keys()]).toEqual(['earth']);
+  expect(() => decodeWorldOrbitBank(summary, 'earth', earth.slice(0, earth.byteLength - 8))).toThrow(/its summary says/);
+  expect(() => decodeWorldOrbitBank(summary, 'nowhere', earth)).toThrow(/summary says undefined/);
+  expect(() => decodeWorldOrbitBank({ ...summary, orbitBanks: { ...summary.orbitBanks, mars: earth.byteLength } }, 'mars', earth)).toThrow(/lacks its path/);
 });
 
 test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {

@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "pluto-features.json",
       "bytes": 453080,
       "sha256": "d9badd8fdb2e01b3847a0ef6190e2bb40376dcab842a5327b2088dbad971b088"
@@ -316,8 +322,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 89779,
-      "sha256": "ce10395f8d13e4e1507b53856b060895383fde674c416871e981f1ce26c47ac4"
+      "bytes": 90067,
+      "sha256": "d48f0870aed1fe7dccb0599ed340d8b4374f5e5ea5383c51ccc713ae1c4e2162"
     },
     {
       "location": "prepared",
@@ -394,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 531619,
-      "sha256": "31890e05286114bdade6480aa554f6e96b39d64b44ec41ad0995d29949ed9d5e"
+      "bytes": 531578,
+      "sha256": "4655627e72364689c0252208954448abd41ff9a37585b894aa2c856a6b01df8a"
     },
     {
       "location": "prepared",
