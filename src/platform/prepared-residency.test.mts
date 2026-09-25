@@ -237,7 +237,8 @@ test("frame-used fallback stays protected until a later publication reads its re
 
 test('Saturn actual interior atmosphere banks keep the published variant through rejection and retry',async()=>{
   const definition=definitions.saturn,track=definition.materials.find(track=>track.id==='interior'); assert.ok(track);
-  const urls=track.banks.map(bank=>assetUrl(definition,bank.frames[0].resource));
+  // A shadowless bank ships one fixed frame and no rows; its resource is that frame's.
+  const urls=track.banks.map(bank=>assetUrl(definition,(bank.frames[0]??bank.fixed).resource));
   assert.ok(urls.length>=3,'Use the actual retained cutaway material variants');
   const {manager,commit,jobs,complete}=harness(catalog(urls,{capacity:2,reuse:false}));
   await commit(['0']);
