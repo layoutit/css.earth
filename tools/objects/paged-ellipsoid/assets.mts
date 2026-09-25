@@ -123,7 +123,8 @@ async function prepareMap(input: string | Buffer, name: string, {
     width,
     height,
     channels: info.channels,
-    density: 4,
+    // The canonical atlas: baked at the recipe's atlas density (twice this), one texel per atlas texel.
+    density: config.atlas.density / 2,
     canonical: true,
     outputRoot: surfaceOutputRoot,
     name,

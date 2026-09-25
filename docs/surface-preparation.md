@@ -40,7 +40,10 @@ according to projected CSS size, independently of DPR; dataset selection remains
 manual. Each surface page takes that level only while its faces may be seen: a
 page off screen or behind the globe keeps the first level, because a browser
 decodes a whole image to draw any of it. Preparation measures where each page's
-faces sit at rest; while the globe spins, every page takes the selected level. These texture levels are separate from its retired geographic paging.
+faces sit at rest; while the globe spins, every page takes the selected level. A map whose source
+holds less detail than the finest level stops earlier (`maximumTextureWidth` in the paged recipe): its
+finer levels read that level's files, and its lens keeps the matching camera limit. The camera's
+closest approach follows the atlas density, so a denser atlas also lets the camera come closer. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
 current datasets and retained source history. The shared raster lane prepares

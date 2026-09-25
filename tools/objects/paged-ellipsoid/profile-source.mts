@@ -41,7 +41,7 @@ const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfig
     illumination: object({frameCount: number, minimumLightViewZ: number, maximumLightViewZ: number, baseLightAzimuthDegrees: number})}),
   atmosphere: object({sourcePath: string, responsePath: string, sourceId: string, maximumOpacityKey: string}),
   surface: object({width: number, height: number, quality: number, clouds: object({path: string, maximumAlpha: number, threshold: number, scale: number, color: tuple(number, number, number)}),
-    maps: array(object({path: string, name: string, thumbnail: string, scientific: optional(scientific), compositeClouds: optional(boolean), displayGamma: optional(number), nativePhotographicSampling: optional(boolean),
+    maps: array(object({path: string, name: string, thumbnail: string, scientific: optional(scientific), compositeClouds: optional(boolean), displayGamma: optional(number), nativePhotographicSampling: optional(boolean), maximumTextureWidth: optional(number),
       deepOceanFill: optional(deepOceanFill),
       thumbnailRegion: optional(object({longitude: optional(number), latitude: optional(number), spanDegrees: optional(number)})),
       webp: optional(object({quality: optional(number), effort: optional(number)}))}))})});

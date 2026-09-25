@@ -125,12 +125,14 @@ test('URL restoration admits no default-camera detail before the router releases
   h.coordinator.setView(h.currentView()); // saved distant view
   h.coordinator.refineTextures(); await h.resolveJobs();
   // Released, the body takes the level its projected size needs: a distant globe keeps the 512 bank, a near one climbs
-  // to Earth's full 4096 pages.
+  // to Earth's 4096 level.
   const restoredPlan = h.coordinator.state().plan; assert.ok(restoredPlan); assert.equal(restoredPlan.textureLevel, 0);
   h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
   await h.resolveJobs();
   const nearPlan = h.coordinator.state().plan; assert.ok(nearPlan); assert.equal(nearPlan.textureLevel, 3);
-  assert(h.jobs.some(job => /-page-\d\.webp$/.test(job.url)), 'a near globe loads the canonical 4096 pages');
+  const levelFiles = new Set(Object.values(earthDefinition.textureLevels!.levels[3]!.resources)
+    .map(key => earthDefinition.assets.entries.find(entry => entry.key === key)?.url.split('/').pop()));
+  assert(h.jobs.some(job => levelFiles.has(job.url.split('/').pop())), 'a near globe loads the 4096 level');
 });
 
 test("camera movement during startup keeps the pinned atmosphere rows and still settles", async t => {

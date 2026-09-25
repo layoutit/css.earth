@@ -12,11 +12,13 @@ export type ScientificSurfaceRecipe = (CoraltempRecipe & {kind: 'coraltemp-anoma
 // fixed; the inverse bake samples this source grid directly.
 export interface SurfaceMapInput {path: string | Buffer; scientific?: ScientificSurfaceRecipe; compositeClouds?: boolean; displayGamma?: number; nativePhotographicSampling?: boolean;
   deepOceanFill?: DeepOceanFillRecipe;}
-export interface SurfaceMapRecipe extends SurfaceMapInput {path: string; name: string; thumbnail: string; webp?: WebpOptions; thumbnailRegion?: {longitude?: number; latitude?: number; spanDegrees?: number};}
+export interface SurfaceMapRecipe extends SurfaceMapInput {path: string; name: string; thumbnail: string; webp?: WebpOptions; maximumTextureWidth?: number; thumbnailRegion?: {longitude?: number; latitude?: number; spanDegrees?: number};}
 export interface SurfaceAssetsConfiguration {surface: {width: number; height: number; quality: number; maps: readonly SurfaceMapRecipe[];
   clouds: {path: string; maximumAlpha: number; threshold: number; scale: number; color: readonly number[]}};}
 export interface PagedAssetConfiguration extends PagedSceneProfile, SurfaceAssetsConfiguration, AtmosphereConfiguration {
   material: AtmosphereConfiguration['material'] & {frameCount: number; solarTint: string;
     shadowlessOverlay?: {color: readonly [number, number, number]; opacity: number}};
   interiorPath: string; interiorSchema: string;
+  /** The canonical atlas bakes at this density; surface cells take half of it per source-grid unit. */
+  atlas: {density: number};
 }

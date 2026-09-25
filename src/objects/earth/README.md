@@ -129,7 +129,7 @@ water colour. It is not a measurement of sea surface reflectance and it is not a
 depth scale; for depth numbers use the elevation view.
 
 Each view's surface is 56 pages. A page holds eight neighbouring cells of one latitude row, a
-90° block, at 1,024, 2,048 or 4,096 pixels wide, whichever gives it the smallest area. A browser
+90° block, at 2,048, 4,096 or 8,192 pixels wide, whichever gives it the smallest area. A browser
 decodes a whole image to draw any part of it and never draws a face turned away, so a view decodes
 only the blocks it shows. The seven latitude-band pages used before each ran round the globe, so
 every view decoded all of them: 109 megapixels at the closest level, which zooming decoded again
@@ -144,10 +144,28 @@ Measured on 2026-09-25 in headless Chrome at 1,280 × 800 CSS px and DPR 2, a zo
 24 of 56 pages at the sharpest level and decoded 40.8 megapixels of surface, against 94.7 for
 the seven band pages; the default view decoded 17.3 against 23.7. The zoomed-in frame differed
 from the band pages in 29 of 4.1 million pixels (pixelmatch, threshold 0.1). Each page keeps its texture levels,
-halved exactly, and each view keeps one 2,048 × 512 pole atlas. The pole atlas has
-the same levels, reduced by the same ratio (256, 512 and 1,024 pixels wide), so the first view
-loads its poles at the pages' level: 2.7 KB instead of 85 KB for Visible color. The density-8 atlas,
-four-pixel gutter and 450 retained surface leaves are unchanged.
+halved exactly, and each view keeps one 4,096 × 1,024 pole atlas. The pole atlas has
+the same levels, reduced by the same ratio (256 to 2,048 pixels wide), so the first view
+loads its poles at the pages' level. The four-pixel gutter and 450 retained surface leaves are unchanged.
+
+The atlas has density 16: a surface cell takes 8 texels per unit of the 2,048-wide source grid along
+its finest edge, twice the density-8 atlas it replaced. That atlas stored the equator at about 4.3 km
+per texel while the Blue Marble we sample holds 1.86 km per pixel (21,600 across), so more than half of
+the source's detail never reached the globe, and the zoom stopped early: the camera's closest approach
+is where one CSS pixel shows the smallest surface arc the imagery supports
+(`surfaceArcPerCssPixelRadians`, derived from the atlas density). The finest level is now 8,192 pixels
+per page, about 2.2 km per texel at the equator, and the arc halves from 7.67 × 10⁻⁴ to 3.83 × 10⁻⁴
+radians. Measured on 2026-09-25 in headless Chrome at 1,280 × 800 CSS px, the camera now reaches
+2,719 km above the surface over Buenos Aires, against 5,444 km before, and at that view the new level
+resolves field patterns and the Paraná delta's channels that the previous finest level blurred. The
+smaller levels keep their pixel sizes: the first view's startup set is 331 KB against 335 KB, and the
+default view differs from the previous bake in 2,976 of 4.1 million pixels (pixelmatch, threshold 0.1),
+all on high-contrast edges. Each lens's own camera limit follows its data: Visible color, Cloud
+coverage, Night lights (VIIRS, 86,400 samples across) and ENSO (MUR imagery, 16,384 across) take the
+new level and zoom limit 8. Elevation is sampled from GEBCO at a stride of 10 (8,640 across), coarser
+than the new level, so its map stops at the 4,096 level (`maximumTextureWidth`) and its lens keeps zoom
+limit 4; no view downloads an Elevation page that is only its source upsampled. The interior views keep
+their resolution and limit.
 No source projection, Earth geometry, lighting, atmosphere, scientific palette or runtime
 selection rule changed. The same adjusted base still feeds the clear surface, cloud composite,
 cutaway exterior, thumbnails, minimaps, the pole atlas and every texture level; the original

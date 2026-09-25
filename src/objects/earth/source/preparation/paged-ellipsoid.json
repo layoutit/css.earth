@@ -54,15 +54,16 @@
       512,
       1024,
       2048,
-      4096
+      4096,
+      8192
     ],
     "hysteresis": 0.2,
     "texelsPerCssPixel": 2
   },
   "atlas": {
-    "pageSize": 4096,
+    "pageSize": 8192,
     "pageCells": 8,
-    "density": 8,
+    "density": 16,
     "gutter": 4,
     "sourceWidth": 2048,
     "sourceHeight": 1024
@@ -157,6 +158,7 @@
       {
         "path": "science/gebco-2026/latitude-00.dods.gz",
         "name": "earth-topography",
+        "maximumTextureWidth": 4096,
         "thumbnail": "earth-lens-topography.webp",
         "scientific": {
           "kind": "gebco-elevation",
@@ -440,7 +442,7 @@
     "maximumControlPitchDegrees": 89,
     "maximumScenePitchDegrees": 65,
     "minimumZoom": 0.42,
-    "maximumZoom": 4,
+    "maximumZoom": 8,
     "defaultZoom": 1.1,
     "sceneScale": 0.02,
     "logicalBodyDiameter": 460,
