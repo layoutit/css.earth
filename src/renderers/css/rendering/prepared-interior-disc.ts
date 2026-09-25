@@ -2,7 +2,9 @@ import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, serializePrepared
 import type { Matrix4 } from '../solar-system/types.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
-export const PREPARED_INTERIOR_DISC_SIZE = 512;
+/** The disc's CSS box. It is one flat colour whose edge stays inside the globe, so its box only sets the backing store a
+ * browser allocates for its 3D layer: 512 px was 9.4 MB at 3x on every body page, 128 px is 0.6 MB. */
+export const PREPARED_INTERIOR_DISC_SIZE = 128;
 
 export interface PreparedInteriorDisc {
   readonly sceneFromBody: Matrix4;

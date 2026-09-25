@@ -12,7 +12,7 @@ export function surfaceFeatureCaption(root: HTMLElement) {
     tooltip.dataset.featureTooltip = '';
     tooltip.setAttribute('role', 'tooltip');
     tooltip.hidden = true;
-    tooltip.style.cssText = 'position:absolute;left:50%;top:50%;pointer-events:none';
+    tooltip.style.cssText = 'position:absolute;left:0;top:0;pointer-events:none';
     for (const [tag, name] of [['b', 'name'], ['span', 'detail'], ['p', 'origin'], ['p', 'note'], ['small', 'credit']]) {
       const field = document.createElement(tag);
       field.setAttribute(`data-feature-tooltip-${name}`, '');

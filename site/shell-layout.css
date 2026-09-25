@@ -765,10 +765,14 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
     background: var(--explorer-panel-background);
     box-shadow: var(--sheet-shadow);
-    transform: translate3d(0, var(--sheet-offset), 0);
+    /* A 2D offset at rest: a 3D transform or will-change kept the whole sheet a composited layer (13 MB at 3x). It becomes
+       one only while a drag moves it. */
+    transform: translate(0, var(--sheet-offset));
     transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
     /* Vertical drags move the sheet; sideways swipes stay with carousels. */
     touch-action: pan-x;
+  }
+  .object-sidebar.is-dragging {
     will-change: transform;
   }
   .object-sidebar:has(:where(.object-sheet-handle:checked)),

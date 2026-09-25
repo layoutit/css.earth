@@ -237,6 +237,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless-billboard.webp",
+      "bytes": 968,
+      "sha256": "8cfe3d4e10e2b2c5b68dfb19e9e561a28d2b61e59f402756f9d0b5d536a6d2f1"
+    },
+    {
+      "location": "public",
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
@@ -244,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 90487,
-      "sha256": "417a4cf6b31c1d63cfb53ef8b75b78e8bddd3a9c4e8f3361497dcb9f2eaf6e27"
+      "bytes": 90783,
+      "sha256": "45f14960d89433458212f442da5c4379efcf2080877a3cf57f81abda4a0b1387"
     },
     {
       "location": "prepared",
@@ -292,8 +298,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 468366,
-      "sha256": "5e4c2bf9104e1b4e2a6b81016524b9f777c9cb38000e59a0df788c765eca4623"
+      "bytes": 468579,
+      "sha256": "378ec11fdbac825be57bda45711b0efbee7571903792ab1b8bc0aadc13aff7a0"
     },
     {
       "location": "prepared",

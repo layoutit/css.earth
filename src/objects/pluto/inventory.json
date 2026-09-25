@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless-billboard.webp",
+      "bytes": 968,
+      "sha256": "8cfe3d4e10e2b2c5b68dfb19e9e561a28d2b61e59f402756f9d0b5d536a6d2f1"
+    },
+    {
+      "location": "public",
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
@@ -322,8 +328,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 90067,
-      "sha256": "d48f0870aed1fe7dccb0599ed340d8b4374f5e5ea5383c51ccc713ae1c4e2162"
+      "bytes": 90359,
+      "sha256": "ae61e85a6502a7c87fd3232ad97b2652168542676da7af16d115d421d5fd7c64"
     },
     {
       "location": "prepared",
@@ -399,9 +405,15 @@
     },
     {
       "location": "prepared",
+      "filename": "panel.json",
+      "bytes": 2686,
+      "sha256": "9acb9de5a27da957751c3bcc07b522903b3958466858cf0a5dd4c38855995c81"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 531566,
-      "sha256": "b662123611ef45f3893c8ec91ce39e68c268e420e98b2dd06d54c2ebd0e57025"
+      "bytes": 531791,
+      "sha256": "f462af4580231ab691e88181268a9b9c81a87bc494cdd27c48f1091a2b579094"
     },
     {
       "location": "prepared",
@@ -423,9 +435,21 @@
     },
     {
       "location": "prepared",
+      "filename": "surface-raster-plan.json",
+      "bytes": 293640,
+      "sha256": "38363c64ed19762127822b1f46bda0373079a66dcfc912f5464c04c064084bb4"
+    },
+    {
+      "location": "prepared",
       "filename": "text.json",
       "bytes": 1717,
       "sha256": "5b3db49a55ccf7c5ea9b13ceee1fafd06a0360914e3c3d48f47561532015569e"
+    },
+    {
+      "location": "prepared",
+      "filename": "title.json",
+      "bytes": 2337,
+      "sha256": "e62356b2368a633b214455fa16026bb15d8e86af35ef41c849bd5eabd6e39aaa"
     },
     {
       "location": "prepared",

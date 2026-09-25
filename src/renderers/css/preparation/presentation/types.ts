@@ -23,7 +23,7 @@ export interface Lens {
 }
 export interface Lenses { defaultLens: string; controls: Lens[]; }
 export interface AtlasAddress { frameIndex: number; rowIndex: number; url: string; backgroundPosition: string; backgroundSize: string; }
-export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; }
+export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; shadowless: ShadowlessFrame; }
 /** The last lighting frame alone: what a body shows with shadows off. */
 export interface ShadowlessFrame { url: string; frameIndex: number; backgroundPosition: string; backgroundSize: string; }
 export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; rows: {url: string}[]; shadowless: ShadowlessFrame;

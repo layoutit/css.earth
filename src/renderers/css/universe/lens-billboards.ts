@@ -68,14 +68,15 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: 
   const document = host.ownerDocument;
   const layer = document.createElement('div');
   layer.className = 'prepared-lens-billboards';
-  layer.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+  // Zero-size root at the stage centre, children placed from it: a full-screen box above the globe became a full-screen layer.
+  layer.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
   host.insertBefore(layer, before);
   const leaves = entries.map(entry => {
     const node = document.createElement('s');
     node.dataset.lensBillboard = entry.id;
     const column = entry.billboard.cell % atlas.columns, row = Math.floor(entry.billboard.cell / atlas.columns);
     const percent = (index: number, cells: number) => cells > 1 ? `${index / (cells - 1) * 100}%` : '0%';
-    node.style.cssText = `position:absolute;left:50%;top:50%;display:none;pointer-events:none;transform-origin:50% 50%;background-repeat:no-repeat;` +
+    node.style.cssText = `position:absolute;left:0;top:0;display:none;pointer-events:none;transform-origin:50% 50%;background-repeat:no-repeat;` +
       `background-size:${atlas.columns * 100}% ${atlas.rows * 100}%;background-position:${percent(column, atlas.columns)} ${percent(row, atlas.rows)}`;
     layer.append(node);
     const bank = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: entry.billboard.radiusUnits,

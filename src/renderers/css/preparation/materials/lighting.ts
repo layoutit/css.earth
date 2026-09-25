@@ -81,10 +81,17 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     else await raster(lightingFrame(frameSize, lastFrame, recipe), frameSize, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(sfPath);
     const shadowless = { url: sfUrl, encoding: 'lossless-webp', ...await hashFile(sfPath), width: frameSize, height: frameSize, frameIndex: lastFrame,
         backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
+    // The far view's shadowless frame alone, the same tile the billboard atlas carries among its 256 (the Moon's atlas is
+    // 116 KB): with shadows off a distant body shows only this tile.
+    const sbFile = outputName(recipe.billboardOutput, density).replace('billboard', 'shadowless-billboard'), sbPath = resolve(publicDirectory, sbFile);
+    if (bankDirectory) await fromBank(sbFile);
+    else await raster(lightingFrame(frameSize, lastFrame, recipe), frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).webp({ lossless: true, alphaQuality: 100 }).toFile(sbPath);
+    const billboardShadowless = { url: config.publicBase + sbFile, encoding: 'lossless-webp', ...await hashFile(sbPath), width: bbSize, height: bbSize, frameIndex: lastFrame,
+        backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
     const defaultRow = Math.floor(recipe.defaultFrame / recipe.columns), initialWarmRows = [Math.max(0, defaultRow - 1), defaultRow, Math.min(rowCount - 1, defaultRow + 1)];
     const initialDecodedWorkingSetBytes = initialWarmRows.reduce((sum, row) => sum + rows[row].decodedRgbaBytes, 0);
     banks[density] = { schema: recipe.bankSchema, preparedPixelDensity: density, frameSize, presentationFrameSize: recipe.presentationSize,
-        billboard: { schema: recipe.billboardSchema, url: bbUrl, encoding: 'lossless-webp', ...await hashFile(bbPath), width: bbWidth, height: bbHeight, frameSize: bbSize, columns: recipe.billboardColumns, rowCount: bbRows, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, decodedRgbaBytes: bbWidth * bbHeight * 4, presentations: bbPresentations },
+        billboard: { schema: recipe.billboardSchema, url: bbUrl, shadowless: billboardShadowless, encoding: 'lossless-webp', ...await hashFile(bbPath), width: bbWidth, height: bbHeight, frameSize: bbSize, columns: recipe.billboardColumns, rowCount: bbRows, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, decodedRgbaBytes: bbWidth * bbHeight * 4, presentations: bbPresentations },
         transport: { model: 'row-shard-cache', encoding: 'lossless-webp', preloadBeforeMount: true, retainedLeafCount: 1, interpolation: 'nearest-prepared-camera-frame', framesPerRow: recipe.columns, rowCount, defaultFrame: recipe.defaultFrame, defaultRow, initialWarmRows, maximumRetainedRowCount: 3, addressWritesOnlyOnInput: true, retainLastReadyPresentation: true, idleCallbacks: 0, initialDecodedWorkingSetBytes, maximumDecodedWorkingSetBytes: initialDecodedWorkingSetBytes },
         rows, presentations, shadowless, totalBytes: rows.reduce((sum, row) => sum + row.bytes, 0), fullBankDecodedRgbaBytes: rows.reduce((sum, row) => sum + row.decodedRgbaBytes, 0) };
     return { ...recipe.metadata, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, defaultFrame: recipe.defaultFrame, preparedPixelDensities: [RASTER_DENSITY], banks };
