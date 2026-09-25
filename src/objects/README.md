@@ -83,8 +83,14 @@ shared code or related-body changes; explain that dependency in the PR.
 Builds assemble `OBJECTS`, astronomy exports, solar geometry, Sun context,
 navigation metadata and the minimap. These combined outputs are ignored. Do not
 edit or force-add them, or append entries to shared TypeScript tables or the
-Sun's source list. Marker images use body URLs with one tile, so adding a marker
-cannot shift another body's sprite coordinates.
+Sun's source list. The runtime reads markers from packed pages
+(`public/navigation/body-markers-NN@2x.webp`, in catalogue order); each body's
+`body-<id>@2x.webp` stays their source. Adding a body redraws its page and moves
+the tiles after it, so commit the redrawn pages. `node tools/prepare/prepare-navigation.mts <id>...`
+redraws them (the `markers` step of `prepare-object.mts`). After merging main into a
+branch that adds bodies, run it, and `prepare-object.mts <id>... --from world` for
+the Sun's world files, before `pnpm install` or `build:tools`, which refuse a page
+whose width does not match its members.
 
 ## Sources and delivery
 
