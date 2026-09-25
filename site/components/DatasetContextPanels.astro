@@ -43,11 +43,10 @@ const contributors = (context: (typeof contexts)[number]) => [
     emblem: undefined, attribute: { 'data-facility': facility.id }, band: facility.band?.value,
   })),
 ];
-// Tabs name the part of the spectrum rather than repeating the heading below
-// them, so they only earn their place when every label is different. Two
-// facilities can share a band — Arecibo and Goldstone are both radar — and a
-// strip of identical tabs tells the reader nothing, so those stay separate
-// cards as they were.
+// A dataset shows one card: several contributors become its tabs. A tab names
+// the part of the spectrum when every contributor has its own band; otherwise
+// (Arecibo and Goldstone are both radar, a mission may have no band) it names
+// the contributor, so the strip never repeats a label.
 const distinctBands = (credited: readonly { band?: string }[]) => {
   const bands = credited.map(entry => entry.band);
   return bands.every(Boolean) && new Set(bands).size === bands.length;
@@ -56,15 +55,14 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
 <aside class="object-dataset-context-rail" data-dataset-context-owner={objectId} aria-label="Selected dataset context">
   {contexts.map(context => {
     const credited = contributors(context);
-    const tabbed = credited.length > 1 && distinctBands(credited);
-    // Without tabs each contributor keeps its own card, so one card per group.
-    const groups = tabbed ? [credited] : credited.map(entry => [entry]);
+    const tabbed = credited.length > 1, byBand = distinctBands(credited);
+    const groups = credited.length ? [credited] : [];
     return <div data-dataset-context={context.lens.id} hidden={context.lens.id !== lenses?.defaultLens}>
       {groups.map(group => <ObjectCard class="object-dataset-context-card" role="region"
         aria-label={tabbed ? 'Credited machines' : group[0].title}>
         {tabbed && <InformationTabs idPrefix={`${objectId}-${context.lens.id}`}
           group={`context-${objectId}-${context.lens.id}`} label="Credited machines" panelSuffix="panel"
-          tabs={group.map(entry => ({ id: entry.id, label: entry.band ?? entry.title }))} />}
+          tabs={group.map(entry => ({ id: entry.id, label: byBand ? entry.band! : entry.title }))} />}
         {group.map(entry => {
           const publishedBackdrop = entry.image?.kind.startsWith('published-') ?? false;
           return <div class="object-card-tabpanel"
@@ -72,7 +70,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           data-information-group={tabbed ? `context-${objectId}-${context.lens.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
           role={tabbed ? 'region' : undefined}
-          aria-label={tabbed ? entry.band : undefined}
+          aria-label={tabbed ? (byBand ? entry.band : entry.title) : undefined}
           tabindex={tabbed ? 0 : undefined}>
           <article class="object-facility" {...entry.attribute}>
             <SelectedContent title={entry.title} lead={entry.lead} description={entry.description}>
