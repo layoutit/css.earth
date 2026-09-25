@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "moon-crust@2x.webp",
       "bytes": 1040742,
       "sha256": "64da1ef022f053e1280743e1ca359a95e5f2e6df74fd8252b4eac4b04d027386"
@@ -352,8 +358,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 90436,
-      "sha256": "0cb88ca4dc12adaa00c8a00d7b5d999c12a025f3c032c8e1460b5fa44c931392"
+      "bytes": 90723,
+      "sha256": "edff6cff70585a8e328ab691d9afd6f918f2f38b27e247a0dfec25201ddda778"
     },
     {
       "location": "prepared",
@@ -442,8 +448,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 490667,
-      "sha256": "dd85f796d895c4c27a34a49ca3336574e3537b27ff9311411bdb58cb45cfef5f"
+      "bytes": 490626,
+      "sha256": "9b5b274f1ab20aee2848f6b3dfc2740880284c335a57f083584de001a9784238"
     },
     {
       "location": "prepared",

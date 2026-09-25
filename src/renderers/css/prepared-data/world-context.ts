@@ -62,8 +62,6 @@ export interface PreparedContextBody extends PreparedContextPoint {
  * planner worker alone reads the path itself (`PreparedContextOrbitGeometry`). */
 export interface PreparedContextOrbit {
   readonly centerBodyId: string; readonly centerPositionM: PositionM;
-  /** The orbit bank that carries this path when it is not the centre's: a plain dot's own. */
-  readonly bank?: string;
   /** Path vertex count; the retained stroke pool holds two segments per vertex. */
   readonly vertexCount: number;
   /** Every trail weight is 1: the whole path draws at full strength. */
@@ -406,11 +404,9 @@ export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'vertice
     [orbit.verticesM[index * 3]!, orbit.verticesM[index * 3 + 1]!, orbit.verticesM[index * 3 + 2]!] as PositionM);
 }
 const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 2;
-/** The bank that carries a body's orbit path: the one it names, else its centre's. */
-export const orbitBankOf = (orbit: Pick<PreparedContextOrbit, 'centerBodyId' | 'bank'>): string => orbit.bank ?? orbit.centerBodyId;
 /** One bank's paths from its pinned binary file: index and weight sections become typed-array views over the transferred
  * bytes, Int32 vertex steps are decoded to metres, and each orbit passes the same checks as the JSON file. The bank must
- * hold exactly the orbits the summary assigns to `centreId`. */
+ * hold exactly the path of the body it is named for. */
 export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: string, bytes: ArrayBuffer): ReadonlyMap<string, PreparedContextOrbitGeometry> {
   const expected = plan.orbitBanks?.[centreId];
   if (expected === undefined || bytes.byteLength !== expected) throw new TypeError(`Orbit bank ${centreId} is ${bytes.byteLength} bytes; its summary says ${expected}.`);
@@ -431,7 +427,7 @@ export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: strin
   }));
   const renderedIds = new Set(plan.bodies.map(body => body.id)), orbits = new Map<string, PreparedContextOrbitGeometry>();
   for (const body of plan.bodies) {
-    if (!body.orbit || orbitBankOf(body.orbit) !== centreId) continue;
+    if (!body.orbit || body.id !== centreId) continue;
     const path = paths.get(body.id);
     if (!path) throw new TypeError(`${body.id}: orbit bank ${centreId} lacks its path.`);
     paths.delete(body.id);
@@ -468,15 +464,14 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap
   return Object.freeze({ ...rest, schema: 'cssearth-world-context@1', bodies: Object.freeze(bodies) });
 }
 function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
-  const orbit = record(value, 'body orbit', ['centerBodyId', 'bank', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
+  const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
   const vertexCount = finite(orbit.vertexCount, 'orbit vertex count');
   if (!Number.isSafeInteger(vertexCount) || vertexCount < 8) throw new TypeError('Context orbit must carry at least eight prepared vertices.');
   if (typeof orbit.fullTrail !== 'boolean') throw new TypeError('Context orbit must state whether its trail is full.');
   if (orbit.closed === undefined ? orbit.displayExtentAu !== undefined : orbit.closed !== false) {
     throw new TypeError('Open trajectory metadata requires closed: false.');
   }
-  return Object.freeze({ centerBodyId: text(orbit.centerBodyId, 'orbit parent identity'), ...(orbit.bank === undefined ? {} : { bank: text(orbit.bank, 'orbit bank') }),
-    centerPositionM: vector(orbit.centerPositionM, 'orbit centre position'),
+  return Object.freeze({ centerBodyId: text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM: vector(orbit.centerPositionM, 'orbit centre position'),
     vertexCount, fullTrail: orbit.fullTrail,
     ...(orbit.bounds === undefined ? {} : { bounds: sphere(orbit.bounds, 'orbit bounds') }),
     ...(orbit.lod === undefined ? {} : { lod: Object.freeze({ bounds: sphere(record(orbit.lod, 'orbit detail levels', ['bounds']).bounds, 'orbit detail bounds') }) }),
@@ -561,7 +556,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   // Every orbit's bank is pinned, and every pin holds an orbit.
   if (orbitBanks) {
-    const banks = new Set(bodies.flatMap(body => body.orbit ? [orbitBankOf(body.orbit)] : []));
+    const banks = new Set(bodies.flatMap(body => body.orbit ? [body.id] : []));
     for (const bank of banks) if (orbitBanks[bank] === undefined) throw new TypeError(`The world context summary pins no orbit bank ${bank}.`);
     for (const id of Object.keys(orbitBanks)) if (!banks.has(id)) throw new TypeError(`Orbit bank ${id} holds no orbit.`);
   }

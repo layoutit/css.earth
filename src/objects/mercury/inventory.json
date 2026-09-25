@@ -201,6 +201,12 @@
     },
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "mercury-features.json",
       "bytes": 954620,
       "sha256": "036ac4e31bf6c1045dfd8662ab5008c408f224c398fcb44eba02d562a45f3e28"
@@ -316,8 +322,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 93602,
-      "sha256": "288d903f5f52c0396af18b55d3d1f7eea415ebb6e7b4a1f92badb1de90b88708"
+      "bytes": 93892,
+      "sha256": "d2a291d6b37d18ef65010db9d7d6788e90a9857912a2b8955e913a948f45fdf5"
     },
     {
       "location": "prepared",
@@ -376,8 +382,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 795234,
-      "sha256": "cb47ee789cc2abc8f8d9ca51f1fdf1b050a1899faf7dd3eecd843cf25c36bf57"
+      "bytes": 795193,
+      "sha256": "8046c3e4cbd73c87e60d588e26a3bd95d129bf2700f07631edea871cb623d496"
     },
     {
       "location": "prepared",

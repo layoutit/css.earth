@@ -27,7 +27,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const interiorKeys = ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"];
   const entries = [
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
-    { key: "shadowless", url: bank.presentations[bank.presentations.length - 1].url, pool: "warm" },
+    { key: "shadowless", url: bank.shadowless.url, pool: "warm" },
     { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "warm" },
     ...lenses.controls.filter(lens => lens.view === "exterior").flatMap(lens => {
       const pool = lens.id === lenses.defaultLens ? "warm" : "lenses";
@@ -80,7 +80,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const billboardAddress = (p: AtlasAddress) => address(p, BILLBOARD_LIGHTING_KEY, 0);
   const track: SourceMaterialTrack = { id: "lighting", target: index(materialLeaf), frame: { source: "sun-z", minimum: assets.lighting.minimumLightViewZ,
       maximum: assets.lighting.maximumLightViewZ, count: assets.lighting.frameCount, baseFrame: 0, remap: null },
-    banks: [{ id: "rows", frames: bank.presentations.map(p => address(p)), default: null, fixed: address(bank.presentations[bank.presentations.length - 1], "shadowless"),
+    banks: [{ id: "rows", frames: bank.presentations.map(p => address(p)), default: null, fixed: { resource: "shadowless", frame: bank.shadowless.frameIndex, row: null, backgroundPosition: bank.shadowless.backgroundPosition, backgroundSize: bank.shadowless.backgroundSize },
       rows: bank.rows.map((_, row) => ({ row, resource: `lighting:${row}`, firstFrame: row * bank.transport.framesPerRow,
         lastFrame: Math.min(bank.presentations.length - 1, (row + 1) * bank.transport.framesPerRow - 1) })) },
     { id: "billboard", frames: billboard.presentations.map(billboardAddress), default: null, fixed: billboardAddress(billboard.presentations[billboard.presentations.length - 1]),
@@ -117,7 +117,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true })],
-      startup: [...startup, ...bank.transport.initialWarmRows.map(row => `lighting:${row}`)] },
+      // Lighting rows load when shadows are turned on; shadows start off and show the one shadowless frame.
+      startup },
     tree, variants, resourceOrder: "materials-first", materials: [track],
     viewBindings: [
       // The terminator overlay fitted to the projected silhouette; it never

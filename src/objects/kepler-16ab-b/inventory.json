@@ -207,6 +207,12 @@
     },
     {
       "location": "public",
+      "filename": "kepler-16ab-b-lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
       "filename": "kepler-16ab-b-poles-shape@2x.webp",
       "bytes": 1340,
       "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
@@ -220,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 99920,
-      "sha256": "1b62440c8e29ef449e45c739dbf2af4ae35e542704c9c98ea70082897b25ecdf"
+      "bytes": 100230,
+      "sha256": "2b05622b7ffdc0a3688de064476a1051767a38172bd258db99b1f506e1de6daa"
     },
     {
       "location": "prepared",
@@ -262,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 470618,
-      "sha256": "cb184cca8deae4d058a21363ebb449a3ae0a0f8ed623aef0b92dec8277c89f5a"
+      "bytes": 470577,
+      "sha256": "b311e120111b4a44a27e452127132329f8d0a38cd6b083f41717ffd2e371446f"
     },
     {
       "location": "prepared",

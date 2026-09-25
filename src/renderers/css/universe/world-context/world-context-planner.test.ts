@@ -633,14 +633,15 @@ test('inside its authored range a system draws every member orbit, named or not,
 test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
   const prepared = new URL('../../../../objects/sun/prepared/', import.meta.url);
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  const bytes = await readFile(new URL('world-orbits/sun.bin', prepared));
+  const bank = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
   const planner = createWorldContextPlanner(summary), current = view();
   const before = planner(current), wanted = planner.takeWantedOrbits();
-  // From 20 au over the Sun the planets' orbits would be drawn; without their bank none is, and each is named once.
+  // From 20 au over the Sun the planets' orbits would be drawn; without their banks none is, and each is named once.
   expect(wanted).toContain('earth');
   expect(before.projectedBodies.every(body => body.segments.length === 0)).toBe(true);
   expect(planner.takeWantedOrbits()).toEqual([]);
-  planner.attachOrbits(decodeWorldOrbitBank(summary, 'sun', bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)));
+  // Each wanted path is its own bank; the frame requested exactly the paths it would draw.
+  for (const id of wanted) planner.attachOrbits(decodeWorldOrbitBank(summary, id, await bank(id)));
   const after = planner(current), full = createWorldContextPlanner(plan)(view());
   // With the bank attached, the Sun's orbits draw as the planner given every full-precision path draws them: the Int32
   // vertices move no projected point by a thousandth of a pixel.
