@@ -180,11 +180,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           const changed = [...new Set([...existing.keys(), ...staged.keys()])].filter(filename => JSON.stringify(existing.get(filename)) !== JSON.stringify(staged.get(filename)));
           const chartSource = result.sources.get('charts')?.value as { charts?: { output?: unknown }[] } | undefined;
           const chartOutputs = new Set(chartSource?.charts?.map(chart => chart.output).filter((output): output is string => typeof output === 'string' && output.endsWith('.svg')) ?? []);
-          // The lighting stage is recomputed from its recipe, and may add the shadowless frame the published set predates.
+          // The lighting stage is recomputed from its recipe, and may add the shadowless frames the published set predates.
           const lightingRecipe = (result.sources.get('raster')?.value as { lighting?: { billboardOutput?: unknown } } | undefined)?.lighting;
-          const shadowless = typeof lightingRecipe?.billboardOutput === 'string'
-            ? outputName(lightingRecipe.billboardOutput, RASTER_DENSITY).replace('billboard', 'shadowless') : null;
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(filename === shadowless && !existing.has(filename)));
+          const billboardName = typeof lightingRecipe?.billboardOutput === 'string' ? outputName(lightingRecipe.billboardOutput, RASTER_DENSITY) : null;
+          const shadowless = new Set(billboardName ? ['shadowless', 'shadowless-billboard'].map(name => billboardName.replace('billboard', name)) : []);
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(shadowless.has(filename) && !existing.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }

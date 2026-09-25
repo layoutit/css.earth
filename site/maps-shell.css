@@ -568,15 +568,20 @@
   border-radius: 50%;
 }
 
+/* A zero-size root at the stage centre, labels placed from it: the root composites above the globe, and a full-screen box
+   made that layer the whole stage (9 MB at 3x) for a few names. */
 .catalogue-moon-labels {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
   pointer-events: none;
 }
 .catalogue-moon-label {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 0;
+  top: 0;
   pointer-events: none;
 }
 .object-sidebar .object-link .object-lens-icon { opacity: 1; }

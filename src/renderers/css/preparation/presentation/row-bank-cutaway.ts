@@ -5,7 +5,7 @@ import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMateria
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
-const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
+const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareRowBankCutaway(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, lenses, sun } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
@@ -28,7 +28,9 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const entries = [
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
     { key: "shadowless", url: bank.shadowless.url, pool: "warm" },
-    { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "warm" },
+    { key: SHADOWLESS_BILLBOARD_KEY, url: billboard.shadowless.url, pool: "warm" },
+    // The billboard atlas serves the far view with shadows on; it loads when that view needs a frame.
+    { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "billboard" },
     ...lenses.controls.filter(lens => lens.view === "exterior").flatMap(lens => {
       const pool = lens.id === lenses.defaultLens ? "warm" : "lenses";
       return [{ key: `surface:${lens.id}`, url: canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), pool }];
@@ -83,7 +85,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     banks: [{ id: "rows", frames: bank.presentations.map(p => address(p)), default: null, fixed: { resource: "shadowless", frame: bank.shadowless.frameIndex, row: null, backgroundPosition: bank.shadowless.backgroundPosition, backgroundSize: bank.shadowless.backgroundSize },
       rows: bank.rows.map((_, row) => ({ row, resource: `lighting:${row}`, firstFrame: row * bank.transport.framesPerRow,
         lastFrame: Math.min(bank.presentations.length - 1, (row + 1) * bank.transport.framesPerRow - 1) })) },
-    { id: "billboard", frames: billboard.presentations.map(billboardAddress), default: null, fixed: billboardAddress(billboard.presentations[billboard.presentations.length - 1]),
+    { id: "billboard", frames: billboard.presentations.map(billboardAddress), default: null, fixed: { resource: SHADOWLESS_BILLBOARD_KEY, frame: billboard.shadowless.frameIndex, row: null, backgroundPosition: billboard.shadowless.backgroundPosition, backgroundSize: billboard.shadowless.backgroundSize },
       rows: [{ row: 0, resource: BILLBOARD_LIGHTING_KEY, firstFrame: 0, lastFrame: billboard.presentations.length - 1 }] }],
     farBank: "billboard",
     demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: bank.transport.defaultFrame },
@@ -116,7 +118,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
-        concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true })],
+        concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true }),
+      preparedResourcePool("billboard", entries, { retention: "selection", decoding: "sync" })],
       // Lighting rows load when shadows are turned on; shadows start off and show the one shadowless frame.
       startup },
     tree, variants, resourceOrder: "materials-first", materials: [track],

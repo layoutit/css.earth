@@ -7,7 +7,7 @@ import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.
 import { RASTER_LEVEL_FACTORS, RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../../../../preparation/raster/pages.js';
 import type { PreparedResourceEntry } from '../../rendering/prepared-residency.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
-const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
+const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, lenses, sun, solarSource: solarSystemSource } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
@@ -22,15 +22,17 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const layers=atmospheric?(["surface","poles","material"] as const):(["surface","poles"] as const);
   const warm=[
     ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
-      :[{key:"shadowless",url:bank!.shadowless.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
+      :[{key:"shadowless",url:bank!.shadowless.url,pool:"warm"},{key:SHADOWLESS_BILLBOARD_KEY,url:bank!.billboard.shadowless.url,pool:"warm"}])];
+  // The billboard atlas serves the far view with shadows on; it loads when that view needs a frame.
+  const billboardAtlas=atmospheric?[]:[{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"billboard"}];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
   // A surface too large to decode as one image comes as pages, each at every level (preparation/raster/pages.ts).
   const paged=pagedSurface(plan.body.surfacePages,lenses);
   const entries=[...warm,...lenses.controls.flatMap(lens=>layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>({key:`${layer}:${lens.id}`,
-    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingRows,
+    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingRows,...billboardAtlas,
     ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
   const required=(id: string)=>[...(paged?.keys(id)??[]),...layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>`${layer}:${id}`),
-    ...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
+    ...(atmospheric?[]:["shadowless",SHADOWLESS_BILLBOARD_KEY])];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.flatMap(entry=>entry.leaves)].map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera object-render-root");
   const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});
@@ -71,7 +73,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     banks:[{id:"rows",frames:bank!.presentations.map(p=>address(p)),default:null,fixed:{resource:"shadowless",frame:bank!.shadowless.frameIndex,row:null,backgroundPosition:bank!.shadowless.backgroundPosition,backgroundSize:bank!.shadowless.backgroundSize},
       rows:bank!.rows.map((_,row)=>({row,resource:`lighting:${row}`,firstFrame:row*bank!.transport.framesPerRow,
         lastFrame:Math.min(bank!.presentations.length-1,(row+1)*bank!.transport.framesPerRow-1)}))},
-     {id:"billboard",frames:bank!.billboard.presentations.map(billboardAddress),default:null,fixed:billboardAddress(bank!.billboard.presentations[bank!.billboard.presentations.length-1]!),
+     {id:"billboard",frames:bank!.billboard.presentations.map(billboardAddress),default:null,fixed:{resource:SHADOWLESS_BILLBOARD_KEY,frame:bank!.billboard.shadowless.frameIndex,row:null,
+       backgroundPosition:bank!.billboard.shadowless.backgroundPosition,backgroundSize:bank!.billboard.shadowless.backgroundSize},
       rows:[{row:0,resource:BILLBOARD_LIGHTING_KEY,firstFrame:0,lastFrame:bank!.billboard.presentations.length-1}]}],
     farBank:"billboard",
     demand:{capacity:bank!.transport.maximumRetainedRowCount,defaultFrame:bank!.transport.defaultFrame},
@@ -105,7 +108,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       ...(paged?[preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:paged.pageCount*2*paged.textureLevels.levels.length,
         eviction:"capacity",maximumDecodedBytes:paged.maximumDecodedBytes})]:[]),
       ...(atmospheric?[]:[preparedResourcePool("lighting",entries,{retention:"selection",decoding:"sync",capacity:bank!.transport.maximumRetainedRowCount,
-        concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true})])],
+        concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true}),
+        preparedResourcePool("billboard",entries,{retention:"selection",decoding:"sync"})])],
       // A paged surface starts at its first level, the one the first selection chooses. Lighting rows are not startup
       // assets: shadows start off, which shows the one shadowless frame, and the rows load when shadows are turned on.
       startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key)])]},

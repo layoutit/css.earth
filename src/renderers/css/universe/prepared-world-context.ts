@@ -137,7 +137,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
   const locator = createContextLocator(host.ownerDocument);
   root.className = 'prepared-world-context';
-  root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+  // A zero-size root: children translate from the stage's top-left, and a full-screen box above the globe became a
+  // full-screen layer.
+  root.style.cssText = 'position:absolute;left:0;top:0;width:0;height:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
   presentationHost.insertBefore(root, before);
   const picking = screenPicking(host);
