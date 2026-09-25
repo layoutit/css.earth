@@ -111,14 +111,14 @@
       ],
       "policy": "Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude."
     },
-    "browser": "153.0.8010.54",
+    "browser": "153.0.8010.53",
     "sharp": "0.35.3",
     "implementation": {
-      "tools/prepare/prepare-facility-renders.mts": "97247f584f53c2420f69ab09e46d2972b89c2b2ab652e8cb157ae429fedeab0e",
+      "tools/prepare/prepare-facility-renders.mts": "1152430566b21a085f31af299a1bda62b795283102c1639dcaeb21f485424351",
       "tools/facility-renders/render.mts": "79551ff7cf763cd67b9ebfac1c28a36e2eee56764220ed85ecaf3d3e29112119",
-      "tools/facility-renders/poses.mts": "f0817777b3fff02980c4474d3e07717aa057d0d0a9cc52756e90152243e75afe",
+      "tools/facility-renders/poses.mts": "922b7dcc705e68993abeb67df977c630263b806755468d3d339a64455064b424",
       "tools/facility-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
-      "tools/facility-renders/refresh.mts": "2ca1377f3aba4e8e6bbdeb7a4c6098fc59c99ec59de4569f885f2e20ba26c684"
+      "tools/facility-renders/refresh.mts": "430973626c1fb6d83db32e4f00eb2072f5a56ff2874a360b0de016de37f79790"
     }
   },
   "entries": [
@@ -202,97 +202,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 19604,
-      "source": {
-        "kind": "model-render",
-        "id": "cassini",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Cassini-Huygens%20(A)/Cassini-Huygens%20(A).glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Cassini-Huygens%20(A)/Cassini-Huygens%20(A).glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Cassini-Huygens%20(A)/Cassini-Huygens%20(A).glb",
-          "path": "models/cassini/model.glb",
-          "bytes": 1660492
-        },
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 13570,
+      "subject": {
+        "left": 158,
+        "top": 15,
+        "width": 277,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-cassini",
+            "catalogueId": "artwork-photo-cassini",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
+            "evidence": "site/source/facilities/photograph-records.json#/11"
           }
         ]
       },
-      "subject": {
-        "left": 175,
-        "top": 12,
-        "width": 242,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 25686,
-        "omissions": [
-          {
-            "mesh": "aluminum",
-            "components": [
-              235,
-              288,
-              265
-            ],
-            "triangles": 50
-          }
-        ],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "Radar / high-gain dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            0.848399234791,
-            -0.466483160423,
-            -0.017914603695,
-            0.249582183702
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/radio-detection-and-ranging/radar-technical-write-up/",
-            "identification": "Use the visible opening of the large dish as the illustration front."
-          },
-          "renderedDirection": [
-            -0.782585580871723,
-            -0.4402043892395184,
-            0.4402043892397375
-          ]
-        }
+      "source": {
+        "id": "cassini",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/cassini.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 4243095,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -307,87 +242,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 11468,
-      "source": {
-        "kind": "model-render",
-        "id": "dawn",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Dawn/Dawn.glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Dawn/Dawn.glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Dawn/Dawn.glb",
-          "path": "models/dawn/model.glb",
-          "bytes": 927020
-        },
-        "camera": {
-          "direction": [
-            1,
-            0.55,
-            1.4
-          ],
-          "rollDegrees": 0,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 28882,
+      "subject": {
+        "left": 30,
+        "top": 32,
+        "width": 533,
+        "height": 233
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-dawn",
+            "catalogueId": "artwork-photo-dawn",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
+            "evidence": "site/source/facilities/photograph-records.json#/12"
           }
         ]
       },
-      "subject": {
-        "left": 84,
-        "top": 12,
-        "width": 424,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 32096,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            0,
-            1
-          ],
-          "modelQuaternion": [
-            0.273127361384,
-            -0.453099602563,
-            -0.025525568038,
-            0.848204362166
-          ],
-          "evidence": {
-            "url": "https://www.jpl.nasa.gov/images/pia12026-illustration-of-dawn-spacecraft-inside-view/",
-            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
-          },
-          "renderedDirection": [
-            -0.7825855808711409,
-            -0.4402043892390659,
-            0.4402043892412251
-          ]
-        }
+      "source": {
+        "id": "dawn",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/dawn.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 3162323,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -436,134 +316,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 15034,
-      "source": {
-        "kind": "model-render",
-        "id": "galileo-v2",
-        "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo.gltf",
-        "format": "gltf",
-        "sourcePage": "https://eyes.nasa.gov/apps/solar-system/",
-        "credit": "NASA/JPL-Caltech, Eyes on the Solar System",
-        "model": {
-          "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo.gltf",
-          "path": "models/galileo-v2/model.gltf",
-          "bytes": 26732
-        },
-        "dependencies": [
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/foil_normal.png",
-            "path": "models/galileo-v2/foil_normal.png",
-            "bytes": 309641
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_02_normal.png",
-            "path": "models/galileo-v2/galileo_02_normal.png",
-            "bytes": 98243
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_02_albedo.png",
-            "path": "models/galileo-v2/galileo_02_albedo.png",
-            "bytes": 990891
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_02_pbr.jpg",
-            "path": "models/galileo-v2/galileo_02_pbr.jpg",
-            "bytes": 52403
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_01_normal.png",
-            "path": "models/galileo-v2/galileo_01_normal.png",
-            "bytes": 970855
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_01_albedo.png",
-            "path": "models/galileo-v2/galileo_01_albedo.png",
-            "bytes": 1288517
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_01_pbr.jpg",
-            "path": "models/galileo-v2/galileo_01_pbr.jpg",
-            "bytes": 144102
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_tex_02.png",
-            "path": "models/galileo-v2/galileo_tex_02.png",
-            "bytes": 990891
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo.bin",
-            "path": "models/galileo-v2/galileo.bin",
-            "bytes": 731820
-          }
-        ],
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 17850,
+      "subject": {
+        "left": 180,
+        "top": 15,
+        "width": 232,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-galileo",
+            "catalogueId": "artwork-photo-galileo",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
+            "evidence": "site/source/facilities/photograph-records.json#/13"
           }
         ]
       },
-      "subject": {
-        "left": 160,
-        "top": 12,
-        "width": 272,
-        "height": 271
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 16721,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            0.840690524284,
-            -0.492123574677,
-            -0.11550600417,
-            0.194196273463
-          ],
-          "evidence": {
-            "url": "https://www.jpl.nasa.gov/news/press_kits/galileo-end.pdf#page=17",
-            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
-          },
-          "renderedDirection": [
-            -0.7825855808706017,
-            -0.4402043892404462,
-            0.4402043892408032
-          ]
-        }
+      "source": {
+        "id": "galileo",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/galileo.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 7780852,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -612,129 +390,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 17484,
-      "source": {
-        "kind": "model-render",
-        "id": "grail",
-        "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grail_b.gltf",
-        "sourcePage": "https://eyes.nasa.gov/apps/solar-system/",
-        "credit": "NASA/JPL-Caltech, Eyes on the Solar System",
-        "format": "gltf",
-        "model": {
-          "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grail_b.gltf",
-          "path": "models/grail/model.gltf",
-          "bytes": 27166
-        },
-        "dependencies": [
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grail_b.bin",
-            "path": "models/grail/grail_b.bin",
-            "bytes": 453372
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_ao.jpg",
-            "path": "models/grail/grailb_ao.jpg",
-            "bytes": 131539
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_2_ao.jpg",
-            "path": "models/grail/grailb_2_ao.jpg",
-            "bytes": 110110
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_hinges_ao.jpg",
-            "path": "models/grail/grailb_hinges_ao.jpg",
-            "bytes": 119098
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/foil_normal.png",
-            "path": "models/grail/foil_normal.png",
-            "bytes": 309641
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_tex_normal.png",
-            "path": "models/grail/grailb_tex_normal.png",
-            "bytes": 771837
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_tex_albedo.jpg",
-            "path": "models/grail/grailb_tex_albedo.jpg",
-            "bytes": 245910
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_tex_pbr.jpg",
-            "path": "models/grail/grailb_tex_pbr.jpg",
-            "bytes": 280168
-          }
-        ],
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 16052,
+      "subject": {
+        "left": 144,
+        "top": 15,
+        "width": 305,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-grail",
+            "catalogueId": "artwork-photo-grail",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
+            "evidence": "site/source/facilities/photograph-records.json#/14"
           }
         ]
       },
-      "subject": {
-        "left": 105,
-        "top": 12,
-        "width": 382,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 6952,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "MoonKAM nadir deck",
-          "sourceAxis": [
-            0,
-            0,
-            1
-          ],
-          "modelQuaternion": [
-            0.296476939609,
-            -0.438177166977,
-            -0.069902416308,
-            0.84570434953
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/grail/",
-            "identification": "Moon-facing camera deck; the gravity-ranging link points to the other spacecraft."
-          },
-          "renderedDirection": [
-            -0.7825855808710944,
-            -0.44020438924008337,
-            0.44020438924029026
-          ]
-        }
+      "source": {
+        "id": "grail",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/grail.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 136706,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -747,34 +428,34 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 14674,
-      "source": {
-        "id": "hayabusa",
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
-        "path": "artwork/hayabusa.png",
-        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA spacecraft artwork collection",
-        "bytes": 393166,
-        "kind": "official-prerendered-artwork",
-        "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
+      "bytes": 30866,
+      "subject": {
+        "left": 78,
+        "top": 15,
+        "width": 437,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-hayabusa",
+            "catalogueId": "artwork-photo-hayabusa",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
+            "evidence": "site/source/facilities/photograph-records.json#/31"
           }
         ]
       },
-      "subject": {
-        "left": 185,
-        "top": 40,
-        "width": 350,
-        "height": 216
+      "source": {
+        "id": "hayabusa",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 393166,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -787,34 +468,34 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 32
+        "offsetXCssPixels": 0
       },
-      "bytes": 11906,
-      "source": {
-        "id": "hayabusa2",
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
-        "path": "artwork/hayabusa2.png",
-        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA spacecraft artwork collection",
-        "bytes": 1195703,
-        "kind": "official-prerendered-artwork",
-        "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
+      "bytes": 19686,
+      "subject": {
+        "left": 175,
+        "top": 15,
+        "width": 243,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-hayabusa2",
+            "catalogueId": "artwork-photo-hayabusa2",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
+            "evidence": "site/source/facilities/photograph-records.json#/32"
           }
         ]
       },
-      "subject": {
-        "left": 241,
-        "top": 16,
-        "width": 239,
-        "height": 263
+      "source": {
+        "id": "hayabusa2",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 1195703,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -863,88 +544,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 19090,
-      "source": {
-        "kind": "model-render",
-        "id": "hubble-v2",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Hubble%20Space%20Telescope%20(A)/Hubble%20Space%20Telescope%20(A).glb",
-        "format": "glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources",
-        "credit": "NASA 3D Resources",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Hubble%20Space%20Telescope%20(A)/Hubble%20Space%20Telescope%20(A).glb",
-          "path": "models/hubble-v2/model.glb",
-          "bytes": 1694988
-        },
-        "dependencies": [],
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 17424,
+      "subject": {
+        "left": 139,
+        "top": 15,
+        "width": 314,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-hubble",
+            "catalogueId": "artwork-photo-hubble",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
+            "evidence": "site/source/facilities/photograph-records.json#/15"
           }
         ]
       },
-      "subject": {
-        "left": 163,
-        "top": 12,
-        "width": 266,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 7672,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "Telescope aperture",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            0.789657241177,
-            -0.524059195449,
-            -0.310714718152,
-            0.072524237637
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/hubble/observatory/design/optics/",
-            "identification": "Open end of the main optical tube."
-          },
-          "renderedDirection": [
-            -0.7825855808713478,
-            -0.4402043892397108,
-            0.4402043892402128
-          ]
-        }
+      "source": {
+        "id": "hubble",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hubble.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 5912305,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -993,87 +618,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 10408,
-      "source": {
-        "kind": "model-render",
-        "id": "juno",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Juno%20(A)/Juno%20(A).glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Juno%20(A)/Juno%20(A).glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Juno%20(A)/Juno%20(A).glb",
-          "path": "models/juno/model.glb",
-          "bytes": 8999028
-        },
-        "camera": {
-          "direction": [
-            1,
-            0.55,
-            1.4
-          ],
-          "rollDegrees": 25,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 20526,
+      "subject": {
+        "left": 72,
+        "top": 15,
+        "width": 448,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-juno",
+            "catalogueId": "artwork-photo-juno",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
+            "evidence": "site/source/facilities/photograph-records.json#/16"
           }
         ]
       },
-      "subject": {
-        "left": 197,
-        "top": 12,
-        "width": 198,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 17124,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            -0.169117737989,
-            0.346067505501,
-            0.831565622977,
-            0.400168823144
-          ],
-          "evidence": {
-            "url": "https://descanso.jpl.nasa.gov/DPSummary/Descanso16_Juno_RevA.pdf",
-            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
-          },
-          "renderedDirection": [
-            -0.7825855808713236,
-            -0.4402043892394234,
-            0.44020438924054295
-          ]
-        }
+      "source": {
+        "id": "juno",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/juno.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 820317,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1088,87 +658,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 21272,
-      "source": {
-        "kind": "model-render",
-        "id": "lro",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Lunar%20Reconnaissance%20Orbiter%20(B)/Lunar%20Reconnaissance%20Orbiter%20(B).glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Lunar%20Reconnaissance%20Orbiter%20(B)/Lunar%20Reconnaissance%20Orbiter%20(B).glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Lunar%20Reconnaissance%20Orbiter%20(B)/Lunar%20Reconnaissance%20Orbiter%20(B).glb",
-          "path": "models/lro/model.glb",
-          "bytes": 2902744
-        },
-        "camera": {
-          "direction": [
-            1.2,
-            1,
-            -1.2
-          ],
-          "rollDegrees": 70,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 22682,
+      "subject": {
+        "left": 147,
+        "top": 15,
+        "width": 299,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-lro",
+            "catalogueId": "artwork-photo-lro",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
+            "evidence": "site/source/facilities/photograph-records.json#/17"
           }
         ]
       },
-      "subject": {
-        "left": 123,
-        "top": 12,
-        "width": 346,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 8142,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "Lunar observing instruments",
-          "sourceAxis": [
-            0,
-            0,
-            1
-          ],
-          "modelQuaternion": [
-            -0.422661200534,
-            -0.318206403052,
-            0.841100586337,
-            0.112481101893
-          ],
-          "evidence": {
-            "url": "https://svs.gsfc.nasa.gov/10408/",
-            "identification": "Optical openings on the instrument cluster beside the bus."
-          },
-          "renderedDirection": [
-            -0.7825855808716463,
-            -0.4402043892395729,
-            0.44020438923981997
-          ]
-        }
+      "source": {
+        "id": "lro",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/lro.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 5622356,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1373,87 +888,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 14172,
-      "source": {
-        "kind": "model-render",
-        "id": "messenger",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER)/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER).glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER)/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER).glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER)/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER).glb",
-          "path": "models/messenger/model.glb",
-          "bytes": 2673396
-        },
-        "camera": {
-          "direction": [
-            1.2,
-            1,
-            -1.2
-          ],
-          "rollDegrees": 90,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 11076,
+      "subject": {
+        "left": 198,
+        "top": 15,
+        "width": 196,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-messenger",
+            "catalogueId": "artwork-photo-messenger",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
+            "evidence": "site/source/facilities/photograph-records.json#/18"
           }
         ]
       },
-      "subject": {
-        "left": 193,
-        "top": 12,
-        "width": 206,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 11572,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "MDIS/MLA instrument deck",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            -0.5280947528,
-            0.489987266672,
-            0.664242520985,
-            0.199525145982
-          ],
-          "evidence": {
-            "url": "https://www.nasa.gov/wp-content/uploads/2015/04/525164main_mercurymoi_pk.pdf",
-            "identification": "Apertures opposite the large engine nozzle, distinct from the heat shield."
-          },
-          "renderedDirection": [
-            -0.7825855808714223,
-            -0.4402043892392861,
-            0.4402043892405047
-          ]
-        }
+      "source": {
+        "id": "messenger",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/messenger.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 240933,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1468,87 +928,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18322,
-      "source": {
-        "kind": "model-render",
-        "id": "mro",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A)/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A).glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A)/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A).glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A)/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A).glb",
-          "path": "models/mro/model.glb",
-          "bytes": 2652460
-        },
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 22396,
+      "subject": {
+        "left": 92,
+        "top": 15,
+        "width": 408,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-mro",
+            "catalogueId": "artwork-photo-mro",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
+            "evidence": "site/source/facilities/photograph-records.json#/19"
           }
         ]
       },
-      "subject": {
-        "left": 159,
-        "top": 12,
-        "width": 274,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 124062,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "HiRISE science deck",
-          "sourceAxis": [
-            0,
-            -1,
-            0
-          ],
-          "modelQuaternion": [
-            0.097148676431,
-            0.544768125266,
-            -0.520057631468,
-            0.650638059381
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/science-instruments/",
-            "identification": "Main telescope lens plane faces negative Y in the source model."
-          },
-          "renderedDirection": [
-            -0.7825855808714431,
-            -0.4402043892388755,
-            0.44020438924087824
-          ]
-        }
+      "source": {
+        "id": "mro",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/mro.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 4912081,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1563,87 +968,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13278,
-      "source": {
-        "kind": "model-render",
-        "id": "near-shoemaker",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/NEAR%20Shoemaker/NEAR%20Shoemaker.glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/NEAR%20Shoemaker/NEAR%20Shoemaker.glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/NEAR%20Shoemaker/NEAR%20Shoemaker.glb",
-          "path": "models/near-shoemaker/model.glb",
-          "bytes": 701808
-        },
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 22264,
+      "subject": {
+        "left": 96,
+        "top": 25,
+        "width": 401,
+        "height": 246
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-near-shoemaker",
+            "catalogueId": "artwork-photo-near-shoemaker",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
+            "evidence": "site/source/facilities/photograph-records.json#/20"
           }
         ]
       },
-      "subject": {
-        "left": 189,
-        "top": 12,
-        "width": 214,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 9312,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            -0.297339126118,
-            -0.081361278746,
-            -0.794790311151,
-            -0.522760124436
-          ],
-          "evidence": {
-            "url": "https://pds.nasa.gov/data/near-a-mag-3-rdr-earth-v1.0/nmerth_2001/document/mission.pdf",
-            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
-          },
-          "renderedDirection": [
-            -0.7825855808716898,
-            -0.4402043892404631,
-            0.4402043892388522
-          ]
-        }
+      "source": {
+        "id": "near-shoemaker",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/near.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 156205,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1658,87 +1008,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 19346,
-      "source": {
-        "kind": "model-render",
-        "id": "new-horizons",
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/n/New_Horizons.glb",
-        "sourcePage": "https://science.nasa.gov/resource/new-horizons-3d-model/",
-        "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-        "format": "glb",
-        "model": {
-          "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/n/New_Horizons.glb",
-          "path": "models/new-horizons/model.glb",
-          "bytes": 3293532
-        },
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 25,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 30886,
+      "subject": {
+        "left": 96,
+        "top": 15,
+        "width": 401,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-new-horizons",
+            "catalogueId": "artwork-photo-new-horizons",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
+            "evidence": "site/source/facilities/photograph-records.json#/21"
           }
         ]
       },
-      "subject": {
-        "left": 165,
-        "top": 12,
-        "width": 261,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 8280,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            0.520353161895,
-            -0.07786474314,
-            0.670324385298,
-            0.523292353428
-          ],
-          "evidence": {
-            "url": "https://pluto.jhuapl.edu/Mission/Spacecraft.php",
-            "identification": "The large communication dish supplies the visual facing direction."
-          },
-          "renderedDirection": [
-            -0.7825855808719122,
-            -0.44020438923869704,
-            0.4402043892402227
-          ]
-        }
+      "source": {
+        "id": "new-horizons",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/new_horizons.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 413890,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1753,87 +1048,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 15878,
-      "source": {
-        "kind": "model-render",
-        "id": "odyssey",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Odyssey/Mars%20Odyssey.glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Odyssey/Mars%20Odyssey.glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Odyssey/Mars%20Odyssey.glb",
-          "path": "models/odyssey/model.glb",
-          "bytes": 5801372
-        },
-        "camera": {
-          "direction": [
-            1.2,
-            1,
-            -1.2
-          ],
-          "rollDegrees": 75,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 28570,
+      "subject": {
+        "left": 93,
+        "top": 15,
+        "width": 407,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-odyssey",
+            "catalogueId": "artwork-photo-odyssey",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
+            "evidence": "site/source/facilities/photograph-records.json#/22"
           }
         ]
       },
-      "subject": {
-        "left": 173,
-        "top": 12,
-        "width": 246,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 8642,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            -1,
-            0,
-            0
-          ],
-          "modelQuaternion": [
-            -0.408857549103,
-            0.109175259119,
-            0.311107653974,
-            0.850957281523
-          ],
-          "evidence": {
-            "url": "https://www.jpl.nasa.gov/news/press_kits/odysseylaunch.pdf",
-            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
-          },
-          "renderedDirection": [
-            -0.7825855808701124,
-            -0.44020438924122623,
-            0.4402043892408929
-          ]
-        }
+      "source": {
+        "id": "odyssey",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Mars_Odyssey-2.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 2722477,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1848,87 +1088,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 20616,
-      "source": {
-        "kind": "model-render",
-        "id": "osiris-rex",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Origins%2C%20Spectral%20Interpretation%2C%20Resource%20Identification%2C%20and%20Security%20-%20Regolith%20Explorer%20(OSIRIS-REx)/OSIRIS-REx.glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Origins%2C%20Spectral%20Interpretation%2C%20Resource%20Identification%2C%20and%20Security%20-%20Regolith%20Explorer%20(OSIRIS-REx)/OSIRIS-REx.glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Origins%2C%20Spectral%20Interpretation%2C%20Resource%20Identification%2C%20and%20Security%20-%20Regolith%20Explorer%20(OSIRIS-REx)/OSIRIS-REx.glb",
-          "path": "models/osiris-rex/model.glb",
-          "bytes": 1281308
-        },
-        "camera": {
-          "direction": [
-            -1.2,
-            -0.65,
-            -1.2
-          ],
-          "rollDegrees": 65,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 12166,
+      "subject": {
+        "left": 172,
+        "top": 15,
+        "width": 249,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-osiris-rex",
+            "catalogueId": "artwork-photo-osiris-rex",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
+            "evidence": "site/source/facilities/photograph-records.json#/23"
           }
         ]
       },
-      "subject": {
-        "left": 93,
-        "top": 12,
-        "width": 406,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 184407,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            1,
-            0,
-            0
-          ],
-          "modelQuaternion": [
-            0.29013329881,
-            -0.270327351726,
-            0.904552880347,
-            -0.156620172665
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/osiris-rex/science-instruments/",
-            "identification": "Use the prominent communication dish as the visual front; retain the source articulation."
-          },
-          "renderedDirection": [
-            -0.7825855808715622,
-            -0.4402043892394128,
-            0.4402043892401294
-          ]
-        }
+      "source": {
+        "id": "osiris-rex",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/OREx_SC_Low_Res_Compiled2.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 2176558,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -1943,134 +1128,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 20014,
-      "source": {
-        "kind": "model-render",
-        "id": "rosetta-v2",
-        "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosettaPhilae.gltf",
-        "format": "gltf",
-        "sourcePage": "https://eyes.nasa.gov/apps/solar-system/",
-        "credit": "NASA/JPL-Caltech, Eyes on the Solar System",
-        "model": {
-          "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosettaPhilae.gltf",
-          "path": "models/rosetta-v2/model.gltf",
-          "bytes": 58896
-        },
-        "dependencies": [
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_tex_01_normal.png",
-            "path": "models/rosetta-v2/rosetta_tex_01_normal.png",
-            "bytes": 389294
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_tex_01_albedo.jpg",
-            "path": "models/rosetta-v2/rosetta_tex_01_albedo.jpg",
-            "bytes": 97243
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_tex_01_pbr.jpg",
-            "path": "models/rosetta-v2/rosetta_tex_01_pbr.jpg",
-            "bytes": 168655
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_parts_ao.jpg",
-            "path": "models/rosetta-v2/rosetta_parts_ao.jpg",
-            "bytes": 192151
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_parts2_ao.jpg",
-            "path": "models/rosetta-v2/rosetta_parts2_ao.jpg",
-            "bytes": 201717
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_parts3_ao.jpg",
-            "path": "models/rosetta-v2/rosetta_parts3_ao.jpg",
-            "bytes": 328751
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_dish_ao.jpg",
-            "path": "models/rosetta-v2/rosetta_dish_ao.jpg",
-            "bytes": 127593
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/foil_normal.png",
-            "path": "models/rosetta-v2/foil_normal.png",
-            "bytes": 257893
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta-philae.bin",
-            "path": "models/rosetta-v2/rosetta-philae.bin",
-            "bytes": 1350420
-          }
-        ],
-        "camera": {
-          "direction": [
-            1,
-            0.55,
-            1.4
-          ],
-          "rollDegrees": 0,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 22526,
+      "subject": {
+        "left": 44,
+        "top": 15,
+        "width": 504,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-rosetta",
+            "catalogueId": "artwork-photo-rosetta",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
+            "evidence": "site/source/facilities/photograph-records.json#/24"
           }
         ]
       },
-      "subject": {
-        "left": 27,
-        "top": 41,
-        "width": 538,
-        "height": 214
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 17665,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "OSIRIS science face",
-          "sourceAxis": [
-            0,
-            0,
-            -1
-          ],
-          "modelQuaternion": [
-            0.837465012355,
-            0.136947244227,
-            0.496924482735,
-            -0.181559532491
-          ],
-          "evidence": {
-            "url": "https://www.esa.int/ESA_Multimedia/Images/2013/12/Rosetta_s_instruments_black_background",
-            "identification": "Optical openings on the face opposite the launch adapter."
-          },
-          "renderedDirection": [
-            -0.7825855808708492,
-            -0.4402043892405039,
-            0.4402043892403058
-          ]
-        }
+      "source": {
+        "id": "rosetta",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/rosetta.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 3567990,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -2085,87 +1168,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 14164,
-      "source": {
-        "kind": "model-render",
-        "id": "sdo",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Solar%20Dynamics%20Observatory/Solar%20Dynamics%20Observatory.glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Solar%20Dynamics%20Observatory/Solar%20Dynamics%20Observatory.glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Solar%20Dynamics%20Observatory/Solar%20Dynamics%20Observatory.glb",
-          "path": "models/sdo/model.glb",
-          "bytes": 497844
-        },
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "rollDegrees": 70,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 15498,
+      "subject": {
+        "left": 168,
+        "top": 15,
+        "width": 257,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-sdo",
+            "catalogueId": "artwork-photo-sdo",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
+            "evidence": "site/source/facilities/photograph-records.json#/25"
           }
         ]
       },
-      "subject": {
-        "left": 170,
-        "top": 12,
-        "width": 252,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 272770,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "AIA telescope apertures",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            0.799110407901,
-            -0.521496684794,
-            -0.285525393976,
-            0.089101139884
-          ],
-          "evidence": {
-            "url": "https://sdo.gsfc.nasa.gov/mission/spacecraft.php",
-            "identification": "Four telescope apertures at the end of the long spacecraft body."
-          },
-          "renderedDirection": [
-            -0.7825855808706342,
-            -0.4402043892413164,
-            0.4402043892398752
-          ]
-        }
+      "source": {
+        "id": "sdo",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/sdo.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 4044526,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -2214,87 +1242,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 11876,
-      "source": {
-        "kind": "model-render",
-        "id": "suomi-npp",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP)/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP).glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP)/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP).glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
-        "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP)/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP).glb",
-          "path": "models/suomi-npp/model.glb",
-          "bytes": 2283576
-        },
-        "camera": {
-          "direction": [
-            1.2,
-            1,
-            -1.2
-          ],
-          "rollDegrees": 70,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 20324,
+      "subject": {
+        "left": 122,
+        "top": 15,
+        "width": 348,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-suomi-npp",
+            "catalogueId": "artwork-photo-suomi-npp",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
+            "evidence": "site/source/facilities/photograph-records.json#/26"
           }
         ]
       },
-      "subject": {
-        "left": 190,
-        "top": 12,
-        "width": 212,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 4024,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "Earth-facing instrument deck",
-          "sourceAxis": [
-            -1,
-            0,
-            0
-          ],
-          "modelQuaternion": [
-            -0.481990138908,
-            -0.319491531217,
-            -0.081439370362,
-            -0.81177478184
-          ],
-          "evidence": {
-            "url": "https://svs.gsfc.nasa.gov/vis/a010000/a010700/a010742/NPPInstruments.html",
-            "identification": "Sensor openings on the instrument deck, distinct from the opposite electronics face."
-          },
-          "renderedDirection": [
-            -0.7825855808712686,
-            -0.4402043892399956,
-            0.44020438924006833
-          ]
-        }
+      "source": {
+        "id": "suomi-npp",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Suomi_NPP-2.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 4114140,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -2309,124 +1282,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 22436,
-      "source": {
-        "kind": "model-render",
-        "id": "terra-v2",
-        "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/Terra.gltf",
-        "format": "gltf",
-        "sourcePage": "https://eyes.nasa.gov/apps/earth/",
-        "credit": "NASA/JPL-Caltech, Eyes on the Earth",
-        "model": {
-          "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/Terra.gltf",
-          "path": "models/terra-v2/model.gltf",
-          "bytes": 32834
-        },
-        "dependencies": [
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra.bin",
-            "path": "models/terra-v2/terra.bin",
-            "bytes": 585464
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_dishes_ao.jpg",
-            "path": "models/terra-v2/terra_dishes_ao.jpg",
-            "bytes": 83463
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/foil_normal.png",
-            "path": "models/terra-v2/foil_normal.png",
-            "bytes": 257893
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_atlas_normal.png",
-            "path": "models/terra-v2/terra_atlas_normal.png",
-            "bytes": 111258
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_atlas_albedo.jpg",
-            "path": "models/terra-v2/terra_atlas_albedo.jpg",
-            "bytes": 91210
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_atlas_pbr.jpg",
-            "path": "models/terra-v2/terra_atlas_pbr.jpg",
-            "bytes": 80657
-          },
-          {
-            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_doodads_ao.jpg",
-            "path": "models/terra-v2/terra_doodads_ao.jpg",
-            "bytes": 159202
-          }
-        ],
-        "camera": {
-          "direction": [
-            1.2,
-            1,
-            -1.2
-          ],
-          "rollDegrees": 70,
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 18616,
+      "subject": {
+        "left": 186,
+        "top": 15,
+        "width": 220,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-terra",
+            "catalogueId": "artwork-photo-terra",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
+            "evidence": "site/source/facilities/photograph-records.json#/27"
           }
         ]
       },
-      "subject": {
-        "left": 141,
-        "top": 12,
-        "width": 310,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 10484,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "Earth-facing instrument deck",
-          "sourceAxis": [
-            0,
-            -1,
-            0
-          ],
-          "modelQuaternion": [
-            -0.518319837353,
-            -0.807981474587,
-            0.106029956078,
-            0.25936100583
-          ],
-          "evidence": {
-            "url": "https://eyes.nasa.gov/apps/earth/",
-            "identification": "NASA Eyes on the Earth points this model's -Y axis at Earth."
-          },
-          "renderedDirection": [
-            -0.7825855808711322,
-            -0.4402043892407969,
-            0.4402043892395097
-          ]
-        }
+      "source": {
+        "id": "terra",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/Terra.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 6797831,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -2439,34 +1320,34 @@
       "displayHeight": 148,
       "composition": {
         "scale": 1,
-        "offsetXCssPixels": 19
+        "offsetXCssPixels": 0
       },
-      "bytes": 14206,
-      "source": {
-        "id": "viking",
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Viking_Orbiter-2.png",
-        "path": "artwork/viking.png",
-        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA spacecraft artwork collection",
-        "bytes": 342620,
-        "kind": "official-prerendered-artwork",
-        "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
+      "bytes": 27320,
+      "subject": {
+        "left": 47,
+        "top": 15,
+        "width": 498,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-viking",
+            "catalogueId": "artwork-photo-viking",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
+            "evidence": "site/source/facilities/photograph-records.json#/30"
           }
         ]
       },
-      "subject": {
-        "left": 89,
-        "top": 16,
-        "width": 491,
-        "height": 264
+      "source": {
+        "id": "viking",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Viking_Orbiter-2.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 342620,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -2583,96 +1464,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13322,
-      "source": {
-        "kind": "model-render",
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
-        "sourcePage": "https://science.nasa.gov/resource/voyager-3d-model/",
-        "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-        "model": {
-          "path": "models/voyager-approved/model.usdz",
-          "bytes": 1229256
-        },
-        "sharedGeometry": "voyager",
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "setupSequence": [
-            [
-              1,
-              0.55,
-              1.4
-            ],
-            [
-              -1,
-              0.5,
-              1.3
-            ]
-          ],
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 17068,
+      "subject": {
+        "left": 114,
+        "top": 15,
+        "width": 364,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-voyager-1",
+            "catalogueId": "artwork-photo-voyager-1",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
+            "evidence": "site/source/facilities/photograph-records.json#/28"
           }
         ]
       },
-      "subject": {
-        "left": 167,
-        "top": 12,
-        "width": 258,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 20378,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            -0.169253524047,
-            -0.162193165141,
-            -0.831537996256,
-            -0.503578377774
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/voyager/spacecraft/",
-            "identification": "The large communication dish supplies the visual facing direction."
-          },
-          "renderedDirection": [
-            -0.7825855808714898,
-            -0.44020438923972055,
-            0.44020438923995003
-          ]
-        }
+      "source": {
+        "id": "voyager-1",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/Voyager.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 453869,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {
@@ -2687,96 +1504,32 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13322,
-      "source": {
-        "kind": "model-render",
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
-        "sourcePage": "https://science.nasa.gov/resource/voyager-3d-model/",
-        "credit": "NASA Visualization Technology Applications and Development (VTAD)",
-        "model": {
-          "path": "models/voyager-approved/model.usdz",
-          "bytes": 1229256
-        },
-        "sharedGeometry": "voyager",
-        "camera": {
-          "direction": [
-            -1,
-            0.5,
-            1.3
-          ],
-          "setupSequence": [
-            [
-              1,
-              0.55,
-              1.4
-            ],
-            [
-              -1,
-              0.5,
-              1.3
-            ]
-          ],
-          "projection": "orthographic",
-          "frameFill": 0.85
-        }
+      "bytes": 17068,
+      "subject": {
+        "left": 114,
+        "top": 15,
+        "width": 364,
+        "height": 267
       },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "artwork-render-voyager-2",
+            "catalogueId": "artwork-photo-voyager-2",
             "role": "artwork",
-            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
+            "evidence": "site/source/facilities/photograph-records.json#/29"
           }
         ]
       },
-      "subject": {
-        "left": 167,
-        "top": 12,
-        "width": 258,
-        "height": 272
-      },
-      "processing": {
-        "recipe": "tools/facility-renders/render.mts#recipe",
-        "sourceMaterials": "unchanged",
-        "triangles": 20378,
-        "omissions": [],
-        "camera": {
-          "direction": [
-            0,
-            0,
-            10
-          ],
-          "up": [
-            0,
-            1,
-            0
-          ],
-          "rollDegrees": 0
-        },
-        "pose": {
-          "facingFeature": "High-gain antenna dish",
-          "sourceAxis": [
-            0,
-            1,
-            0
-          ],
-          "modelQuaternion": [
-            -0.169253524047,
-            -0.162193165141,
-            -0.831537996256,
-            -0.503578377774
-          ],
-          "evidence": {
-            "url": "https://science.nasa.gov/mission/voyager/spacecraft/",
-            "identification": "Same source model and dish-facing pose as Voyager 1."
-          },
-          "renderedDirection": [
-            -0.7825855808714898,
-            -0.44020438923972055,
-            0.44020438923995003
-          ]
-        }
+      "source": {
+        "id": "voyager-2",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/Voyager.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 453869,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
       }
     },
     {

@@ -1,7 +1,6 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { execFileSync } from 'node:child_process';
 import { dirname, resolve, relative, extname, sep } from 'node:path';
 import { createRequire } from 'node:module';
 import { build } from 'esbuild';
@@ -55,19 +54,10 @@ for (const file of files.values()) {
   }
   if (bytes.length !== file.bytes) throw new Error(`Source byte count mismatch: ${file.path} has ${bytes.length}, library declares ${file.bytes}`);
 }
-for (const file of files.values()) if (file.path.endsWith('.usdz')) {
-  const source = local(cache, file.path), destination = local(cache, file.path.replace(/\.usdz$/, '.usda'));
-  execFileSync('usdcat', [source, '--flatten', '--skipSourceFileComment', '-o', destination]);
-  for (const image of ['0/image0.jpg', '0/image1.jpg', '0/image2.jpg']) {
-    const destination = resolve(dirname(source), image); await mkdir(dirname(destination), { recursive: true });
-    await writeFile(destination, execFileSync('unzip', ['-p', source, image]));
-  }
-}
 const bundle = await build({ entryPoints: [resolve(root, 'tools/facility-renders/render.mts')], bundle: true, format: 'iife', globalName: 'FacilityRender', write: false, platform: 'browser' });
 const script = bundle.outputFiles[0].contents;
 const require = createRequire(import.meta.url), dracoRoot = resolve(dirname(require.resolve('three')), '../examples/jsm/libs/draco/gltf');
 const allowedModels = new Set([...files.keys()]);
-for (const file of files.values()) if (file.path.endsWith('.usdz')) { allowedModels.add(file.path.replace(/\.usdz$/, '.usda')); for (let i = 0; i < 3; i++) allowedModels.add(relative(cache, resolve(dirname(local(cache, file.path)), `0/image${i}.jpg`))); }
 const server = createServer(async (req, res) => {
   try {
     const path = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
@@ -91,13 +81,12 @@ try {
     const id = requireString(entry.id), source = requireRecord(entry.source), model = requireRecord(source.model), camera = requireRecord(source.camera);
     const direction = requireArray(camera.direction).map(value => requireFiniteNumber(value));
     if (direction.length !== 3) throw new Error('Invalid camera direction');
-    const usda = requireString(model.path).endsWith('.usdz');
-    const request: RenderRequest = { id, url: origin + '/' + requireString(model.path).replace(/\.usdz$/, '.usda'), direction: [direction[0], direction[1], direction[2]], rollDegrees: 0, usda,
+    const request: RenderRequest = { id, url: origin + '/' + requireString(model.path), direction: [direction[0], direction[1], direction[2]], rollDegrees: 0,
       ...(!inspectAxes ? { pose: getFacilityPose(id) } : {}) };
     if (inspectAxes) {
       for (const [axis, vector] of Object.entries({ xp: [1, 0, 0], xn: [-1, 0, 0], yp: [0, 1, 0], yn: [0, -1, 0], zp: [0, 0, 1], zn: [0, 0, -1] })) {
         const [x, y, z] = vector;
-        const direction: [number, number, number] = usda ? [x, y, z] : [x, -z, y];
+        const direction: [number, number, number] = [x, -z, y];
         await page.goto(origin);
         const result = await page.evaluate(request => window.FacilityRender.renderFacility(request), { ...request, direction, rollDegrees: 0 });
         await writeFile(resolve(output, `rendered/${id}-${axis}.png`), Buffer.from(result.png.replace(/^data:image\/png;base64,/, ''), 'base64'));
@@ -136,13 +125,13 @@ try {
     await writeFile(resolve(output, `rendered/${id}.webp`), webp);
     entry.bytes = webp.length; entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
     entry.composition = { scale: 1, offsetXCssPixels: 0 };
-    entry.processing = { recipe: 'tools/facility-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, omissions: result.report.omissions, camera: result.report.camera, pose: result.report.pose };
+    entry.processing = { recipe: 'tools/facility-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, camera: result.report.camera, pose: result.report.pose };
     reports.push({ ...result.report, bytes: webp.length, sha256: sha256(webp), subject: entry.subject });
-    console.log(`${id}: ${result.report.triangles} triangles; ${webp.length} bytes; ${result.report.omissions.reduce((n, v) => n + v.triangles, 0)} omitted`);
+    console.log(`${id}: ${result.report.triangles} triangles; ${webp.length} bytes`);
   }
   if (!inspectAxes && !inspectRolls) {
     library.renderer = { ...await page.evaluate(() => { if (!('FacilityRender' in window)) throw new Error('Renderer not loaded'); return window.FacilityRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
-      implementation: Object.fromEntries(await Promise.all(['tools/prepare/prepare-facility-renders.mts', 'tools/facility-renders/render.mts', 'tools/facility-renders/poses.mts', 'tools/facility-renders/voyager.mts', 'tools/facility-renders/refresh.mts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
+      implementation: Object.fromEntries(await Promise.all(['tools/prepare/prepare-facility-renders.mts', 'tools/facility-renders/render.mts', 'tools/facility-renders/poses.mts', 'tools/facility-renders/refresh.mts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
     library.composition = { background: 'transparent for model renders', displaySize: [296, 148], preserveAspectRatio: true, fitPolicy: 'Center retained source geometry; alpha bounds with 6px padding supply sidebar crop.' };
     await writeFile(resolve(output, 'render-report.json'), JSON.stringify(reports, null, 2) + '\n');
     await writeFile(resolve(output, 'render-library.candidate.json'), JSON.stringify(library, null, 2) + '\n');

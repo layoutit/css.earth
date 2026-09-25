@@ -53,7 +53,7 @@ For a body's sources, processing, evidence and known problems, read its
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
 | What the open archives hold for our catalogued bodies | [Archive screen](archive-screen.md) |
-| Facility model thumbnails: sources and appearance | [Facility thumbnails](facility-thumbnails.md) |
+| Facility thumbnails: NASA artwork, photographs and model renders | [Facility thumbnails](facility-thumbnails.md) |
 | Moon sidebar listing, labels and orbit registration | [Moon catalogues](moon-catalogues.md) |
 | Scroll-driven camera distance experiment | [Native scroll zoom experiment](native-scroll-zoom.md) |
 | Choosing which destinations get featured or captioned | [Choosing destinations to explore](object-discovery.md) |
