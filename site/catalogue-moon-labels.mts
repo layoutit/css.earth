@@ -78,13 +78,13 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
     label.dataset.catalogueMoon = moon.id; label.dataset.moonParent = moon.parentId;
     label.textContent = moon.name; label.setAttribute('aria-disabled', 'true');
     label.setAttribute('aria-label', `${moon.name}, not available`);
-    label.ariaHidden = 'true'; label.style.opacity = '0'; root.append(label); return label;
+    label.ariaHidden = 'true'; label.style.opacity = '0'; label.style.visibility = 'hidden'; root.append(label); return label;
   });
   host.append(root);
   let widths: number[] = [], measured = false;
   const invalidate = () => { measured = false; };
   host.ownerDocument.fonts?.addEventListener('loadingdone', invalidate);
-  const fader = createOpacityFader(host.ownerDocument.defaultView!, clock);
+  const fader = createOpacityFader(host.ownerDocument.defaultView!, clock, { hideAtZero: true });
   const last = labels.map(() => ({ shown: false, transform: '' }));
   let selected = focus, previous: ReadonlySet<number> = new Set();
   return {

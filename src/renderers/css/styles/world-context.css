@@ -90,7 +90,7 @@
   white-space: nowrap;
   font: 400 14px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   pointer-events: none;
-  z-index: 4;
+  z-index: calc(var(--world-depth-base, 0) + 4);
 }
 .prepared-world-context .context-flight-circle {
   position: absolute;
@@ -100,7 +100,7 @@
   border-radius: 50%;
   box-shadow: inset 0 0 0 1.5px currentColor;
   pointer-events: none;
-  z-index: 4;
+  z-index: calc(var(--world-depth-base, 0) + 4);
 }
 .prepared-world-context [data-context-annotations-animate="true"]::after {
   transition: opacity 200ms linear;

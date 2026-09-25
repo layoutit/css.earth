@@ -118,8 +118,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const root = document.createElement('div');
         lifetime.onDispose(() => root.remove());
         root.className = 'prepared-universe';
-        // Keep the background below every depth-sorted body in the isolated stage.
-        root.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${-plan.bodies.length - 2}`;
+        // The stage's depth band starts above zero: the background at 1, every depth-sorted body, the selected detail
+        // (--world-depth-base) and the annotations above it. A composited child with a negative z-index made WebKit split
+        // the stage into a background and a foreground layer, each backed at the whole stage (15.8 MB at 3x together).
+        const depthBase = plan.bodies.length + 3;
+        presentationHost.style.setProperty('--world-depth-base', String(depthBase));
+        lifetime.onDispose(() => presentationHost.style.removeProperty('--world-depth-base'));
+        root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
         presentationHost.insertBefore(root, presentationHost.firstChild);
         // A bank whose every voxel lies between the observer and the body it surrounds composites over the
         // detail scene instead of behind it. Two flattened roots cannot interleave, so the payload declares
@@ -127,7 +132,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const frontRoot = document.createElement('div');
         lifetime.onDispose(() => frontRoot.remove());
         frontRoot.className = 'prepared-universe-front';
-        frontRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
+        frontRoot.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${depthBase + 1}`;
         presentationHost.appendChild(frontRoot);
         const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
         const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock));
@@ -157,7 +162,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes' }));
+        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
         // The selected body's own label is the close-up's; overviews label every body.
         const publishSuppressedLabels = () => spatial.setBodyVisibility({ labelSuppressed: overview ? [] : [selected.id] });
         publishSuppressedLabels();

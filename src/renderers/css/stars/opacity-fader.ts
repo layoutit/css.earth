@@ -27,7 +27,11 @@ const running = (track: Track, time: number) => track.from !== track.target && t
 
 /** One numeric opacity writer. Independent authored factors are evaluated on
  * one clock, then multiplied once; CSS/WAAPI never re-animate its output. */
-export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityClock) {
+export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityClock,
+  /** Hide an element whose opacity reaches 0. WebKit counts a transparent element as painted content and backs a composited
+   * ancestor over it: the galaxy catalogue's zero-size root held up to 5 MB at 3x for labels nobody could see. Only for owners
+   * that never write visibility themselves. */
+  { hideAtZero = false }: { readonly hideAtZero?: boolean } = {}) {
   const clock = sharedClock ?? opacityClockFor(window);
   const entries = new Map<FadeTarget, Entry>(), pending = new Set<Entry>(), dirty = new Set<Entry>();
   let destroyed = false, animationEnabled = true;
@@ -45,7 +49,10 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
     dirty.clear();
     for (const entry of publishing) {
       const alpha = entry.visible ? valueAt(entry.alpha, time) * valueAt(entry.multiplier, time) * valueAt(entry.suppression, time) : 0;
-      if (entry.written !== alpha) { entry.element.style.opacity = String(alpha); entry.written = alpha; }
+      if (entry.written !== alpha) {
+        entry.element.style.opacity = String(alpha); entry.written = alpha;
+        if (hideAtZero) entry.element.style.visibility = alpha > 0 ? '' : 'hidden';
+      }
       if (!entry.visible || (entry.suppression.target === 0 && !running(entry.suppression, time)) ||
           !(running(entry.alpha, time) || running(entry.multiplier, time) || running(entry.suppression, time))) pending.delete(entry);
       else pending.add(entry);
