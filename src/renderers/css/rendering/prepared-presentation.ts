@@ -1,7 +1,6 @@
 import { createPreparedInteriorDisc, type PreparedInteriorDisc } from './prepared-interior-disc.js';
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
 import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
-import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
 import { createPreparedDepthPartitions, type PreparedDepthPartitions } from './prepared-depth-partitions.js';
 import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
@@ -57,7 +56,6 @@ export interface PreparedPresentationDefinition {
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
   /** Authored infinite motion, resolved from source CSS during preparation. */
   motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
-  facing?: readonly PreparedFacingPlane[];
   features?: PreparedSurfaceFeaturePlan;
   depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
@@ -252,9 +250,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
 export function createPreparedFramePublisher(definition: PreparedPresentationDefinition, stage: HTMLElement,
   nodes: readonly HTMLElement[], sceneElement: HTMLElement, seekPose: (controlPitch: number) => void = () => {},
   initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection) {
-  const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
   const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
-  if (initialProjection) { publishFacing(initialProjection); publishDepth(initialProjection); }
+  if (initialProjection) publishDepth(initialProjection);
   const materials = new Map(definition.materials.map(track => [track.id,
     createPreparedMaterialPublisher(track, nodes[track.target])]));
   let framePublications = 0, styleWrites = 0, transformWrites = 0;
@@ -268,7 +265,6 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   return {
     publish({ selection, view, resources }: PreparedFramePublication) {
       publishDepth(view.projection);
-      publishFacing(view.projection);
       const levelOfDetail = view.levelOfDetail;
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);

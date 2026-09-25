@@ -1,0 +1,31 @@
+{
+ "id": "hat-p-11b",
+ "classification": "exoplanet",
+ "order": 1838,
+ "physical": {
+  "name": "HAT-P-11 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 31928.3,
+  "gravitationalParameterKm3PerS2": 9970230.06,
+  "parent": "hat-p-11"
+ },
+ "physicalNotes": "Radius 0.4466 Jupiter radii from Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract): 31,928.3 km at 71,492 km per Jupiter radius. GM from the mass 0.0787 Jupiter masses (Basilicata et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.127B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.888,
+  "semiMajorAxisStellarRadii": 15.05,
+  "inclinationDegrees": 89.027,
+  "eccentricity": 0.251,
+  "argumentOfPeriapsisDegrees": 28,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 54957.313207,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "An et al. 2025 (2025AJ....169...22A), via the NASA Exoplanet Archive ps table (pl_refname AN_ET_AL__2025): P 4.888 d",
+   "shape": "Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive ps table (pl_refname BASILICATA_ET_AL__2024): a/R* 15.05; Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive ps table (pl_refname BASILICATA_ET_AL__2024): inclination 89.027 degrees",
+   "eccentricity": "An et al. 2025 (2025AJ....169...22A), via the NASA Exoplanet Archive ps table (pl_refname AN_ET_AL__2025): e 0.251",
+   "argumentOfPeriapsis": "An et al. 2025 (2025AJ....169...22A), via the NASA Exoplanet Archive ps table (pl_refname AN_ET_AL__2025): omega 28 degrees",
+   "phase": "Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive ps table (pl_refname BASILICATA_ET_AL__2024): transit mid-time 2454957.8132067 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

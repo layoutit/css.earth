@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-7",
+  "displayName": "Kepler-7",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. (2015), The Astrophysical Journal 804 150",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "969 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-kepler-7",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "kepler-7-lens-color.webp",
+        "surface": "kepler-7-surface-color@2x.webp",
+        "poles": "kepler-7-poles-color@2x.webp",
+        "source": {
+          "id": "kepler-7-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,933 K and log g 3.98 (u1 0.423, u2 0.281): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Esteves et al. 2015",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+      "credit": "Esteves et al. 2015"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-7.json",
+      "credit": "Esteves et al. 2015, the stellar radius of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

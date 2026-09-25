@@ -1,0 +1,31 @@
+{
+  "host": "hat-p-11",
+  "planets": [
+    {
+      "id": "hat-p-11b",
+      "name": "HAT-P-11 b",
+      "description": "Transiting planet of HAT-P-11 with a 4.89-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+        "credit": "An et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "AN_ET_AL__2025"
+      },
+      "text": {
+        "card": "HAT-P-11 b crosses its star every 4.89 days and is 0.45 Jupiter radii across, found in 2010.",
+        "introduction": "HAT-P-11 b transits HAT-P-11 every 4.89 days and is 0.45 Jupiter radii across. Orbit and size follow An et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AN_ET_AL__2025): pl_orbper 4.888, pl_radj 0.4466, pl_bmassj 0.0787",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-11b",
+          "title": "HAT-P-11b",
+          "revision": "1374246338",
+          "card": "HAT-P-11b is an extrasolar planet orbiting the star HAT-P-11.",
+          "introduction": "It was discovered by the HATNet Project team in 2009 using the transit method, and submitted for publication on 2 January 2009."
+        }
+      },
+      "order": 1838
+    }
+  ]
+}

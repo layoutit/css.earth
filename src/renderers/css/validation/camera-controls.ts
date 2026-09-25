@@ -43,6 +43,7 @@ export function requireCamera(value: unknown): asserts value is CameraPlan {
   if (maximum < minimum || positive(camera.defaultZoom, 'default zoom') < minimum || positive(camera.defaultZoom, 'default zoom') > maximum ||
       finite(camera.maximumControlPitchDegrees, 'maximum pitch') <= finite(camera.minimumControlPitchDegrees, 'minimum pitch')) fail('camera bounds are invalid');
   for (const name of ['materialReferenceControlPitchDegrees', 'materialReferenceControlYawDegrees']) if (camera[name] !== undefined) finite(camera[name], name);
+  if (camera.framingScale !== undefined && positive(camera.framingScale, 'camera framing scale') > 1) fail('camera framing scale must be at most one');
   const fit = record(camera.responsiveFit, 'responsive fit');
   choice(fit.model, ['continuous-aspect-smoothstep'], 'responsive fit model');
   for (const name of ['portraitBaseWidthShare', 'narrowPortraitWidthShareGain', 'landscapeWidthShareGain',

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-22b",
+  "card": {
+    "text": "Kepler-22 b crosses its star every 290 days and is 2.1 Earth radii across, found in 2011.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-22b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-22b",
+        "label": "Wikipedia, \"Kepler-22b\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374868815",
+        "quote": "Kepler-22b is an exoplanet orbiting the Sun-like star Kepler-22 within its habitable zone."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-22 b transits Kepler-22 every 290 days and is 2.1 Earth radii across. Orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. 2023",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-22b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-22b",
+        "label": "Wikipedia, \"Kepler-22b\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374868815",
+        "quote": "It is located about 640 light-years from Earth in the constellation Cygnus."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "illustration": {
+      "title": "NASA artist's concept",
+      "detail": "Illustration, not observed",
+      "summary": "The map NASA's Eyes on Exoplanets wraps around this planet. None of it was observed, and its longitudes are arbitrary."
+    }
+  }
+}

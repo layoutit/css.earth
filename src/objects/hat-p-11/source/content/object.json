@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hat-p-11",
+  "displayName": "HAT-P-11",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.76 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202347659",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B",
+          "label": "Basilicata et al. (2024), Astronomy & Astrophysics 686 A127",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "37.8 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hat-p-11",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hat-p-11-lens-color.webp",
+        "surface": "hat-p-11-surface-color@2x.webp",
+        "poles": "hat-p-11-poles-color@2x.webp",
+        "source": {
+          "id": "hat-p-11-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,780 K and log g 4.59 (u1 0.718, u2 0.069): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "An et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+      "credit": "An et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-11.json",
+      "credit": "Basilicata et al. 2024, the stellar radius of HAT-P-11 b's parameter set radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

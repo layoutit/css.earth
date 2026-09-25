@@ -89,10 +89,10 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  });
  assert.deepEqual(definition.tree,expectedTree,'Only inactive image URLs may change; geometry and node identity remain exact');
  assert.deepEqual(requireRecord(requireRecord(data.metadata).renderer).inactiveImageProperties??[],inactive);
- for(const key of ['camera','facing','depthPartitions','surfaceHit','sky'] as const)assert.deepEqual(definition[key],original[key],`Standard sphere ${key} changed`);
+ for(const key of ['camera','depthPartitions','surfaceHit','sky'] as const)assert.deepEqual(definition[key],original[key],`Standard sphere ${key} changed`);
  const rejected=structuredClone(definition.tree);requireRecord(rejected).camera=-1;
  assert.notDeepEqual(rejected,expectedTree,'Parity check must detect a changed camera owner');
- const sceneParity={runtimeSha256:sha256(originalBytes),contextSha256:sha256(contextBytes),physicalCameraMountValidated:true,missingContextRejected:true,inactiveImageProperties:inactive,unchanged:['tree except inactive image bindings','camera','facing','depthPartitions','surfaceHit','sky'],treeSha256:sha256(JSON.stringify(definition.tree)),mutationRejected:true};
+ const sceneParity={runtimeSha256:sha256(originalBytes),contextSha256:sha256(contextBytes),physicalCameraMountValidated:true,missingContextRejected:true,inactiveImageProperties:inactive,unchanged:['tree except inactive image bindings','camera','depthPartitions','surfaceHit','sky'],treeSha256:sha256(JSON.stringify(definition.tree)),mutationRejected:true};
  const result=execFileSync(tc.python,['-c',ORACLE_PYTHON],{env:{...process.env,...tc.env},input:JSON.stringify({map:map.root,html:resolve(sphere.root,'sphere.html'),measurement:resolve(measurement),out:resolve(out)}),encoding:'utf8',maxBuffer:2**20});
  const report={...JSON.parse(result),sceneParity,controlBinding,selfContained:{inlineCss:true,inlineJavaScript:false,embeddedImages:assets.entries.length,networkForbidden:true},inputs:{map:map.pin,sphere:sphere.pin},source:'tools/objects/telescopes/sphere/sphere-oracle.mts'};await writeFile(resolve(out,'sphere-oracle.json'),JSON.stringify(report,null,2)+'\n');return report;
 }

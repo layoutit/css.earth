@@ -1,0 +1,323 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "kepler-22b-lens-illustration.webp",
+      "bytes": 934,
+      "sha256": "5b5b429371bd312d55d4ff8b65798903b1554b8f67c4c5a47e7b5060760f29b7"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-22b-lens-shape.webp",
+      "bytes": 44,
+      "sha256": "993ec26bde216fc1a286a14b5d636c78f507ce7e142e58f3bb5a321acf0847f4"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-22b-poles-illustration@2x.webp",
+      "bytes": 136352,
+      "sha256": "8c73eddf31146a14449cb08c891506a1ef9d66ac42ff5b8fd68bda8bfa990611"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-22b-poles-shape@2x.webp",
+      "bytes": 1340,
+      "sha256": "605108f9729e453e7b745d6558e0fe75268dfb714ca872b80affc3d938c04026"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-22b-surface-illustration@2x.webp",
+      "bytes": 223300,
+      "sha256": "dcb45682810bd0988a80d98e2a8f25bd5bb1f71612eeb76350d0de741e97d7a5"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-22b-surface-shape@2x.webp",
+      "bytes": 178,
+      "sha256": "0d996211a7e850fed0932398572cab892a0bd6d2dc062e35a3e7bd198e632ef0"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-billboard.webp",
+      "bytes": 115740,
+      "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-00.webp",
+      "bytes": 37672,
+      "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-01.webp",
+      "bytes": 70898,
+      "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-02.webp",
+      "bytes": 92030,
+      "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-03.webp",
+      "bytes": 106840,
+      "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-04.webp",
+      "bytes": 120584,
+      "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-05.webp",
+      "bytes": 132094,
+      "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-06.webp",
+      "bytes": 143228,
+      "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-07.webp",
+      "bytes": 153142,
+      "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-08.webp",
+      "bytes": 163984,
+      "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-09.webp",
+      "bytes": 172632,
+      "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-10.webp",
+      "bytes": 177128,
+      "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-11.webp",
+      "bytes": 179144,
+      "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-12.webp",
+      "bytes": 173518,
+      "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-13.webp",
+      "bytes": 161150,
+      "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-14.webp",
+      "bytes": 132038,
+      "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-15.webp",
+      "bytes": 69930,
+      "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-16.webp",
+      "bytes": 74522,
+      "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-17.webp",
+      "bytes": 143520,
+      "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-18.webp",
+      "bytes": 185628,
+      "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-19.webp",
+      "bytes": 218252,
+      "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-20.webp",
+      "bytes": 245184,
+      "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-21.webp",
+      "bytes": 269836,
+      "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-22.webp",
+      "bytes": 291326,
+      "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-23.webp",
+      "bytes": 312110,
+      "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-24.webp",
+      "bytes": 333302,
+      "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-25.webp",
+      "bytes": 355976,
+      "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-26.webp",
+      "bytes": 377782,
+      "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-27.webp",
+      "bytes": 403282,
+      "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-28.webp",
+      "bytes": 429004,
+      "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-29.webp",
+      "bytes": 456570,
+      "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-30.webp",
+      "bytes": 481914,
+      "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-row-31.webp",
+      "bytes": 526556,
+      "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 90760,
+      "sha256": "269515cbdab603d7b2a103625977fbee0561ab6095a71b17749132765191aada"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1409,
+      "sha256": "bf9c5db601fa0efdc10c63bee2879378eb69fcad4fe2c56ecef3d5aa7176fdbd"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1690,
+      "sha256": "f1360d77d1d3d93d2e7d53de4736ca6701afb53320c77226152137d46bdb7f7a"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 539,
+      "sha256": "5825a1cf9bb2ae8a46b554795a6147f31959448e80c1cbc3da5c354d133fd167"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 1563,
+      "sha256": "6008c583b72418165ac5a672837ec84f56d52186db2ff51aecba2a94660851f8"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 165,
+      "sha256": "e50951d46a42e15b5df28729b4b69422b605c5f7766c7f8fa0753f8c9b705250"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/illustration.webp",
+      "bytes": 48936,
+      "sha256": "9550d7db2334109437ab61687550535f7f8f54267f305cb5d57ed24f99ecec55"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 430,
+      "sha256": "32f355ff2fcf368f74e5e5a73ff35bd91e9c57a0b07734212935523abdfc75f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 469366,
+      "sha256": "66dcc5dcba46b4759463710cf0dd12331c677ed5e0ad00928eb9f3f6bde428d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 366391,
+      "sha256": "244795576deed10ad5e74f2743485ff2d15ae21b97061e3ff40dd3d5c7ad959a"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1204,
+      "sha256": "f6c55f353aad56f8d1559c89ecc6bfdbaf2011accfc1b2849f853deeb0852375"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 644,
+      "sha256": "a350c9daa11d9ebbf4c8296121a295e4cb0d9adbaf36365a5387424b27c91ba5"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1977,
+      "sha256": "62beb668a981e4fd1fa3e15f8448551ca886bdc74d480e1eb8ff49e35999c779"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1156,
+      "sha256": "34ea706dbcd859f9f496d26f18d8029bfb309b88c48dd20b21695476699d890b"
+    }
+  ]
+}

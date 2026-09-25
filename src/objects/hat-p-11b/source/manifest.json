@@ -1,0 +1,179 @@
+{
+  "schema": "cssearth-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "hat-p-11b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+      "credit": "An et al. 2025",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "hat-p-11b-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "hat-p-11b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "hat-p-11b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield",
+        "sky-sun"
+      ]
+    },
+    {
+      "id": "hat-p-11b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "hat-p-11b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "hat-p-11b-nasa-eyes-illustration",
+      "path": "illustration/HAT-P-11_b.jpg",
+      "origin": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HAT-P-11_b.jpg",
+      "productId": "HAT-P-11_b.jpg",
+      "title": "Eyes on Exoplanets artist's concept map of HAT-P-11 b",
+      "sourceUrl": "https://eyes.nasa.gov/apps/exo/",
+      "credit": "NASA/JPL-Caltech (Eyes on Exoplanets)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original JPEG from the Eyes on Exoplanets app, unchanged; the app's texture table names it as HAT-P-11 b's map.",
+      "redistribution": "NASA media; an artist's concept, not an observation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-eyes-on-exoplanets",
+            "role": "material",
+            "evidence": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HAT-P-11_b.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "lens-colour-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "inputs": [
+          "hat-p-11b-observational-measurements",
+          "hat-p-11b-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    }
+  ]
+}

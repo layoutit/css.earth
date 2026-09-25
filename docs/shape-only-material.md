@@ -22,6 +22,12 @@ through the `equirectangular-illustration` kind.
 
 ![The Illustration lens of the ten exoplanets, in the app](images/eyes-on-exoplanets-illustrations.webp)
 
+Kepler-22 b, HAT-P-11 b and Kepler-7 b carry their Eyes maps the same way, and 55 Cancri e carries the texture of NASA's
+55 Cancri e 3D model through `glb-base-color`. NASA's WASP-12b model is egg-shaped, so its texture cannot be placed on
+the published sphere and is not used ([ledger](../src/objects/wasp-12b/investigations.json)).
+
+![The Illustration lens of 55 Cancri e, Kepler-22 b, HAT-P-11 b and Kepler-7 b, in the app](images/illustrated-exoplanets-new-systems.webp)
+
 An unresolved body measured only in the infrared has no visible colour to reconstruct. When a paper
 publishes its flux densities in three bands, the raster `disc-integrated-band-color` science kind
 ([disc-band-color.mts](../tools/objects/observation/disc-band-color.mts)) paints it one false colour:

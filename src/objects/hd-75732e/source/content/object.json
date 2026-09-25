@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-75732e",
+  "displayName": "55 Cnc e",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.9 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B",
+          "label": "Bourrier et al. 2018",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "18 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B",
+          "label": "Bourrier et al. 2018",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.025 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B",
+          "label": "Bourrier et al. 2018",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body colour at its measured dayside temperature, 2,360 K. The disc itself is unresolved.",
+        "thumbnail": "hd-75732e-lens-thermal.webp",
+        "surface": "hd-75732e-surface-thermal@2x.webp",
+        "poles": "hd-75732e-poles-thermal@2x.webp",
+        "source": {
+          "id": "hd-75732e-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...751L..28D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of 55 Cnc e's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "An artist's surface from NASA's 55 Cnc e 3D model; not an observation.",
+        "thumbnail": "hd-75732e-lens-illustration.webp",
+        "surface": "hd-75732e-surface-illustration@2x.webp",
+        "poles": "hd-75732e-poles-illustration@2x.webp",
+        "source": {
+          "id": "hd-75732e-nasa-vtad-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/55-cancri-e-3d-model/"
+        },
+        "falseColor": false,
+        "notes": "NASA's illustration of 55 Cnc e, from its 3D model. Nobody has resolved this planet's disc, so none of the colour or features in it was observed. Its longitudes are arbitrary."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bourrier et al. 2018",
+      "href": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+      "credit": "Bourrier et al. 2018"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-75732e.json",
+      "credit": "Radius from Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive; mass from Bourrier et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018A&A...619A...1B), via the NASA Exoplanet Archive; orbit from Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive"
+    }
+  }
+}

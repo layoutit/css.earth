@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-11",
+  "card": {
+    "text": "HAT-P-11 is a 4,780 K star 37.8 parsecs away with 1 known transiting planet.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad90b4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+        "label": "An et al. (2025), The Astronomical Journal 169 22",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BASILICATA_ET_AL__2024, AN_ET_AL__2025): st_teff 4780, st_rad 0.76, st_mass 0.811"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-11",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-11",
+        "label": "Wikipedia, \"HAT-P-11\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374438410",
+        "quote": "HAT-P-11, also designated GSC 03561-02092 and Kepler-3, is a metal-rich orange dwarf star with a planetary system, 123 light-years away in the constellation Cygnus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HAT-P-11 is a star of 4,780 K 37.8 parsecs away. Its planet HAT-P-11 b crosses it, which is how it was found and sized.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad90b4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+        "label": "An et al. (2025), The Astronomical Journal 169 22",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BASILICATA_ET_AL__2024, AN_ET_AL__2025): st_teff 4780, st_rad 0.76, st_mass 0.811"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-11",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-11",
+        "label": "Wikipedia, \"HAT-P-11\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374438410",
+        "quote": "This star is notable for its relatively large rate of proper motion."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

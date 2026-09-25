@@ -144,22 +144,6 @@ export function requireAnimations(value: unknown, tree: PreparedTree, motion = f
     }
   }
 }
-export function requireFacing(value: unknown, tree: PreparedTree, partitionScenes: readonly number[] = []): void {
-  const targets = new Set<number>();
-  for (const item of array(value, 'facing planes')) {
-    const face = record(item, 'facing plane', ['target', 'plane', 'tolerance']);
-    positive(face.tolerance, 'native backface tolerance');
-    const target = nodeReference(face.target, tree);
-    if ([tree.camera, tree.scene].includes(target) || targets.has(target)) fail('facing target must be a unique prepared leaf');
-    if (![tree.scene, ...partitionScenes].some(scene => ancestor(target, scene, tree))) fail('facing target must belong to scene');
-    if (tree.nodes.some(node => node.parent === target)) fail('facing target must be a leaf');
-    targets.add(target);
-    const plane = array(face.plane, 'facing plane coordinates');
-    if (plane.length !== 4) fail('facing plane needs four coordinates');
-    plane.forEach(value => finite(value, 'facing plane coordinate'));
-    if (Math.abs(Math.hypot(...plane.slice(0, 3) as number[]) - 1) > 1e-6) fail('facing plane must have a unit normal');
-  }
-}
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
   if (plan.surfaceHit !== undefined) {

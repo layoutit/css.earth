@@ -27,19 +27,25 @@ const responsiveFit = Object.freeze({
   maximumZoom: 2,
 });
 
-export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchDegrees = 40, defaultControlYawDegrees = 0, framingScale = 1 }: { sky: { projection: { horizontalFovDegrees: number; focalLengthOverViewportWidth: number; cssPerspective: string } }; radius?: number; initialScenePitchDegrees?: number; defaultControlYawDegrees?: number; framingScale?: number }) {
+/** The shared responsive fit scaled for a body whose silhouette reaches past its volume-equivalent radius: `framingScale`
+ * is that radius over the body's largest radius (1 for a sphere). */
+export function scaledResponsiveFit(framingScale: number) {
   if (!Number.isFinite(framingScale) || framingScale <= 0 || framingScale > 1) {
-    throw new TypeError("Camera framing scale must be greater than zero and at most one.");
+    throw new TypeError(`Camera framing scale must be greater than zero and at most one, not ${framingScale}.`);
   }
-  // Elongated bodies need room beyond their volume-equivalent radius. Tune
-  // the existing viewport fit at preparation time; keep physical scale intact.
-  const fit = framingScale === 1 ? responsiveFit : Object.freeze({
+  return framingScale === 1 ? responsiveFit : Object.freeze({
     ...responsiveFit,
     ...Object.fromEntries(([
       "portraitBaseWidthShare", "narrowPortraitWidthShareGain", "landscapeWidthShareGain",
       "maximumHeightShare", "maximumMobilePreviewShare", "minimumZoom",
     ] as const).map(key => [key, responsiveFit[key] * framingScale])),
   });
+}
+
+export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchDegrees = 40, defaultControlYawDegrees = 0, framingScale = 1 }: { sky: { projection: { horizontalFovDegrees: number; focalLengthOverViewportWidth: number; cssPerspective: string } }; radius?: number; initialScenePitchDegrees?: number; defaultControlYawDegrees?: number; framingScale?: number }) {
+  // Elongated bodies need room beyond their volume-equivalent radius. Tune
+  // the existing viewport fit at preparation time; keep physical scale intact.
+  const fit = scaledResponsiveFit(framingScale);
   const defaultPitch = 89 * (1 - initialScenePitchDegrees / 65);
   return Object.freeze({
     state: Object.freeze({
@@ -60,6 +66,8 @@ export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchD
     defaultZoom: 1.1,
     logicalBodyDiameter: radius * 2,
     responsiveFit: fit,
+    // The phone framing, which sizes the body to its open area rather than by the fit's shares, scales by it too.
+    ...(framingScale === 1 ? {} : { framingScale }),
     // PolyCSS leaves use 50 CSS units per world unit. Framing is already
     // owned by the dolly distance; scaling the mesh by defaultZoom here makes
     // its perspective silhouette disagree with lighting and occlusion.

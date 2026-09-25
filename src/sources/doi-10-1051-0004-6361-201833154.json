@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201833154",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bourrier et al. (2018): The 55 Cancri system reassessed",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1807.04301"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201833154"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018A&A...619A...1B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201833154",
+      "label": "Astronomy & Astrophysics 619 A1"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bourrier et al. (2018), Astronomy & Astrophysics 619 A1",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 619 A1",
+  "creators": [
+    "V. Bourrier",
+    "X. Dumusque",
+    "C. Dorn",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

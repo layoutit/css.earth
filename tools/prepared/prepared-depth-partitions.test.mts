@@ -59,15 +59,15 @@ test('compilation retains every original leaf and remaps selection, facing and a
       ...triangles.map((_, i) => node(2, null, `transform:translateZ(${i}px)`)), node(-1, 'overlay')] },
     surfaceHit: { target: 2, triangles },
     variants: [{ when: { lensId: null }, required: [], writes: [{ target: 2, kind: 'texture', name: '--texture', resource: 'map', quoted: true }], materials: [] }],
-    materials: [], viewBindings: [{ target: 131, kind: 'silhouette-fit', minimumRadius: 0, unitScale: 1 }], animations: [],
-    facing: triangles.map((_, i) => ({ target: i + 3, plane: [0, 0, 1, 0], tolerance: 1 })) } satisfies PreparedPresentationDefinition;
+    materials: [], viewBindings: [{ target: 131, kind: 'silhouette-fit', minimumRadius: 0, unitScale: 1 }], animations: [] } satisfies PreparedPresentationDefinition;
   const original = JSON.stringify(source);
   const result = prepareDepthPartitions(source, { target: 2, leaves: triangles.map((_, i) => i + 3),
     bodyFromScene: identityMatrix() });
-  assert.ok(result.depthPartitions && result.facing);
+  assert.ok(result.depthPartitions);
   assert.equal(JSON.stringify(source), original);
   assert.equal(result.depthPartitions.groups.length, 2);
-  for (const [i, face] of result.facing.entries()) assert.equal(result.tree.nodes[face.target].style, source.tree.nodes[i + 3].style);
+  // Every leaf keeps its own style: exactly one moved node carries each source triangle's transform.
+  for (const [i] of triangles.entries()) assert.equal(result.tree.nodes.filter(n => n.style === source.tree.nodes[i + 3].style).length, 1);
   assert.equal(result.tree.nodes[result.viewBindings[0].target].className, 'overlay');
   assert.equal(result.variants[0].writes.length, 3);
   assert.equal(result.tree.nodes.filter(n => n.className?.split(' ').includes('polycss-scene')).length, 1);

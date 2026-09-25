@@ -201,12 +201,6 @@
     },
     {
       "location": "public",
-      "filename": "lighting-2x-shadowless.webp",
-      "bytes": 56158,
-      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
-    },
-    {
-      "location": "public",
       "filename": "oberon-features.json",
       "bytes": 15954,
       "sha256": "4e1bd55a75963f24e8d6bbd39b6ac90a5b5ac2fad4b30f95b1f83bf14c3896de"
@@ -250,8 +244,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 90213,
-      "sha256": "d3ee224a986d86bd588379dd0c4bfdf1fd32259b232c3809aa106fcec90cf4f7"
+      "bytes": 89924,
+      "sha256": "56e4d9cdcb4b887c19c376ced66fa5469662b4583c5b3d5b055380171c736964"
     },
     {
       "location": "prepared",
@@ -304,8 +298,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 518495,
-      "sha256": "358bf8d257df46a9641de6db27014252b3e3430273cbca06013c451ac50df982"
+      "bytes": 518524,
+      "sha256": "b09d210a315341c1da4a03b284e3a2a9cf79e11434fa9593a505cd85079e2026"
     },
     {
       "location": "prepared",

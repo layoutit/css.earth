@@ -1,0 +1,46 @@
+{
+  "id": "kepler-22",
+  "name": "Kepler-22",
+  "system": "Kepler-22 system",
+  "description": "Star of 5,596 K 195 parsecs away with 1 transiting planet.",
+  "target": "Kepler-22",
+  "gaia": "2127941757262806656",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "credit": "Bonomo et al. 2023"
+  },
+  "radius": {
+    "value": 0.869,
+    "source": "Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.857,
+    "source": "Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 0.051
+  },
+  "temperature": {
+    "value": 5596,
+    "source": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 61
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-22 is a 5,596 K star 195 parsecs away with 1 known transiting planet.",
+    "introduction": "Kepler-22 is a star of 5,596 K 195 parsecs away. Its planet Kepler-22 b crosses it, which is how it was found and sized.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5596, st_rad 0.869, st_mass 0.857",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-22",
+      "title": "Kepler-22",
+      "revision": "1374405601",
+      "card": "Kepler-22 is a Sun-like star in the northern constellation of Cygnus, the swan, that is orbited by a planet found to be unequivocally within the star's habitable zone.",
+      "introduction": "It is located at the celestial coordinates: Right Ascension 19h 16m 52.2s, Declination +47° 53′ 3.9″."
+    }
+  },
+  "notes": [],
+  "order": 1835
+}

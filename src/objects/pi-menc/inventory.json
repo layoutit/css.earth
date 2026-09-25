@@ -201,12 +201,6 @@
     },
     {
       "location": "public",
-      "filename": "lighting-2x-shadowless.webp",
-      "bytes": 56158,
-      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
-    },
-    {
-      "location": "public",
       "filename": "pi-menc-lens-shape.webp",
       "bytes": 44,
       "sha256": "00d4a70547c36ef009088162a84f24bd944aab51aee77a82041c9486f93a2285"
@@ -226,8 +220,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 88796,
-      "sha256": "a8e50eb4e140a8e087e80661d2828b7d3aaacb9824e52961e4c8fda63788f4a5"
+      "bytes": 88506,
+      "sha256": "c29d044e6f0ec4d110773c062f45bee2ea6c7980c53069f092680e1fb9d0a1e4"
     },
     {
       "location": "prepared",
@@ -268,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 526161,
-      "sha256": "db27c8c6cba7d28b02becac1a81bc09d1f63e5c0044edec26160119aa5a859c4"
+      "bytes": 464405,
+      "sha256": "c51957bf19a3214a7a5ded9715a49aadb7da8b7f4d6882b31e627fb8f3c6cdc0"
     },
     {
       "location": "prepared",

@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-22b",
+  "displayName": "Kepler-22 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.1 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+          "label": "Bonomo et al. 2023",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "290 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+          "label": "Bonomo et al. 2023",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 0.029 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+          "label": "Bonomo et al. 2023",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-22; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-22b-lens-shape.webp",
+        "surface": "kepler-22b-surface-shape@2x.webp",
+        "poles": "kepler-22b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-22b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-22 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-22's light, as its colour lens measures it."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of Kepler-22 b, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "kepler-22b-lens-illustration.webp",
+        "surface": "kepler-22b-surface-illustration@2x.webp",
+        "poles": "kepler-22b-poles-illustration@2x.webp",
+        "source": {
+          "id": "kepler-22b-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of Kepler-22 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bonomo et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+      "credit": "Bonomo et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-22b.json",
+      "credit": "Radius from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive; mass from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive; orbit from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive"
+    }
+  }
+}

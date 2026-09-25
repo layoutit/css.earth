@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-11",
+  "angularDiameterMas": 0.19,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 528,732 km at 37.84 pc = 0.19 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 37.83952440098642,
+  "distanceSource": "Gaia DR3 parallax 26.4274 +/- 0.0108 mas (same row, RUWE 0.95): 37.84 pc, no zero-point correction",
+  "radiusKm": 528732,
+  "radiusSource": "Radius 0.76 +/- 0.01 solar radii from Basilicata et al. 2024, the stellar radius of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract): 528,732 km at 695,700 km per solar radius. Mass 0.811 +/- 0.03 solar masses from An et al. 2025, the stellar mass of the default parameter set of HAT-P-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract); GM is that mass times the JPL solar GM. Temperature 4780 +/- 50 K from Basilicata et al. 2024, the stellar temperature of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4780,
+  "effectiveTemperatureSource": "Basilicata et al. 2024, the stellar temperature of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract)",
+  "surfaceGravityLogg": 4.59,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-11.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.585, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/hd-75732e/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "hd-75732e-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csshd-75732e-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "thermal",
+      "output": "hd-75732e-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-75732e-lens-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Colour of a black body at the dayside brightness temperature 2,360 K measured in secondary eclipse at 4.5 µm (Demory et al. 2012, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+      }
+    },
+    {
+      "id": "illustration",
+      "output": "hd-75732e-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-75732e-lens-{id}.webp",
+      "source": "illustration/55_Cancri_e_1_24364.glb",
+      "falseColor": false,
+      "science": {
+        "kind": "glb-base-color",
+        "model": "illustration/55_Cancri_e_1_24364.glb"
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "bankSchema": "csshd-75732e-prepared-lighting-bank@1",
+    "billboardSchema": "csshd-75732e-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csshd-75732e-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

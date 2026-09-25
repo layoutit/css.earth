@@ -10,7 +10,7 @@ const test = sourceTest();
 const planets = SCENE_OBJECTS.filter(object => object.classification === 'exoplanet');
 
 test('every registered exoplanet bakes the source-radius silhouette through a lit or emissive path', async () => {
-  assert.equal(planets.length, 82);
+  assert.equal(planets.length, 87);
   for (const { id } of planets) {
     const directory = resolve(projectRoot, 'src/objects', id);
     const measurements = requireRecord(await readJsonSource(resolve(directory, 'source/measurements.json')), `${id} measurements`);
@@ -50,7 +50,7 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     const astronomy = requireRecord(await readJsonSource(resolve(projectRoot, 'packages/astronomy/data/bodies', `${id}.json`)), `${id} astronomy`);
     hosts.add(requireString(requireRecord(astronomy.physical, `${id} physical`).parent, `${id} host`));
   }
-  assert.equal(hosts.size, 51);
+  assert.equal(hosts.size, 56);
   const shapeOnly: string[] = [], uniform: string[] = [];
   for (const id of hosts) {
     const directory = resolve(projectRoot, 'src/objects', id);

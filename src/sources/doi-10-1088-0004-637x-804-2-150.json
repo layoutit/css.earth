@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1088-0004-637x-804-2-150",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Esteves et al. (2015): CHANGING PHASES OF ALIEN WORLDS: PROBING ATMOSPHERES OF<i>KEPLER</i>PLANETS WITH HIGH-PRECISION PHOTOMETRY",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1407.2245"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/804/2/150"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...804..150E"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/804/2/150",
+      "label": "The Astrophysical Journal 804 150"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+      "checkedOn": "2026-09-24",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Esteves et al. (2015), The Astrophysical Journal 804 150",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 804 150",
+  "creators": [
+    "Lisa J. Esteves",
+    "Ernst J. W. De Mooij",
+    "Ray Jayawardhana"
+  ],
+  "publicationDate": "2015"
+}

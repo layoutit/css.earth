@@ -45,7 +45,18 @@ export function solidCameraAngles(config: Pick<SolidSceneConfig, 'namespace' | '
   return prepareDefaultCameraAngles(config.namespace, { observation: photographDirections(config.namespace, config, surfacesReport) });
 }
 
-async function prepareSolidEpochFrame({ config, celestial, surfacesReport }:{config:SolidSceneConfig;celestial:SolidCelestial;surfacesReport:unknown}) {
+/** Volume-equivalent radius over the largest radius of the body's mesh (vertices in radius units), at most 1: how much
+ * smaller than a sphere of its radius the camera frames it, so an elongated body fits the view. An authored value, measured
+ * on the source mesh, wins. */
+export function meshFramingScale(radius: number, vertices: Iterable<readonly number[]>, authored?: number) {
+  if (authored !== undefined) return authored;
+  let largest = 0;
+  for (const vertex of vertices) largest = Math.max(largest, Math.hypot(...vertex));
+  if (!(largest > 0)) return 1;
+  return Math.min(1, radius / largest);
+}
+
+async function prepareSolidEpochFrame({ config, celestial, surfacesReport, framingScale }:{config:SolidSceneConfig;celestial:SolidCelestial;surfacesReport:unknown;framingScale:number}) {
   const { namespace: id, geometry } = config;
   const { BODIES } = await loadAstronomyPackage();
   const bodyId=(Object.keys(BODIES) as Array<keyof typeof BODIES>).find(key=>key===id);
@@ -62,13 +73,14 @@ async function prepareSolidEpochFrame({ config, celestial, surfacesReport }:{con
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: id, ...solidCameraAngles(config, surfacesReport), sceneDirection: frame.sunDirection }),
     provenance: { source: source.model, sourcePath: source.sourcePath,
       qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from its retained source state and canonical heliocentric parent coordinates. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
-  return { camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera, ...solidCameraAngles(config, surfacesReport) }), sky, sun,
+  return { camera: preparePerspectiveCamera({ sky, radius, framingScale, ...solidCameraAngles(config, surfacesReport) }), sky, sun,
     systemTransform: frame.cssTransform };
 }
 
 export async function prepareSolidScene({ config, celestial, outputDirectory, publicDirectory, radial = null }:{config:SolidSceneConfig;celestial:SolidCelestial;outputDirectory:string;publicDirectory:string;radial?:ReturnType<typeof combineRadialModels>}) {
   const { namespace: id, geometry } = config;
-  const epoch = await prepareSolidEpochFrame({ config, celestial, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')) });
+  const framingScale = meshFramingScale(geometry.radius, (radial?.faces ?? []).flatMap(face => face.vertices), geometry.camera?.framingScale);
+  const epoch = await prepareSolidEpochFrame({ config, celestial, framingScale, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')) });
   const bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[]=radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
       latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
@@ -99,7 +111,10 @@ export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan
   if (config.kind !== 'solid-observation-body' || definition.id !== id || !Array.isArray(scene.bodyLeaves)) {
     throw new TypeError('Epoch refresh requires its prepared solid-observation scene.');
   }
-  const epoch = await prepareSolidEpochFrame({ config, celestial: { sky: scene.sky, sun: scene.sun }, surfacesReport });
+  // The retained scene keeps the mesh in world units (radius units times BASE_TILE).
+  const triangles = (scene as { surfaceTriangles?: readonly (readonly (readonly number[])[])[] }).surfaceTriangles ?? [];
+  const framingScale = meshFramingScale(config.geometry.radius, triangles.flatMap(triangle => triangle.map(vertex => vertex.map(value => value / BASE_TILE))), config.geometry.camera?.framingScale);
+  const epoch = await prepareSolidEpochFrame({ config, celestial: { sky: scene.sky, sun: scene.sun }, surfacesReport, framingScale });
   const nodes = definition.tree.nodes;
   const carriers = nodes.map((node, index) => node.className?.split(' ').includes(`${id}-system`) ? index : -1).filter(index => index >= 0);
   if (carriers.length !== 1) throw new TypeError('Epoch refresh needs one retained physical surface carrier.');

@@ -1,0 +1,28 @@
+{
+ "id": "kepler-22b",
+ "classification": "exoplanet",
+ "order": 1836,
+ "physical": {
+  "name": "Kepler-22 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13394,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "kepler-22"
+ },
+ "physicalNotes": "Radius 0.18734977 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 13,394 km at 71,492 km per Jupiter radius. No mass is measured: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) gives only an upper limit of 0.0286318 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 289.863876,
+  "semiMajorAxisStellarRadii": 200.9276,
+  "inclinationDegrees": 89.764,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54966.2001,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): P 289.863876 d",
+   "shape": "Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): a/R* derived from its semi-major axis 0.812 au and stellar radius 0.869 solar radii; Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): inclination 89.764 degrees",
+   "eccentricity": "Borucki et al. 2012 (2012ApJ...745..120B), via the NASA Exoplanet Archive ps table (pl_refname BORUCKI_ET_AL__2012): e 0",
+   "phase": "Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): transit mid-time 2454966.7001 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

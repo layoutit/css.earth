@@ -1,0 +1,35 @@
+{
+  "id": "source-hd-75732-gaia-xp",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "55 Cnc · hd 75732 gaia xp",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gaia.ari.uni-heidelberg.de/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-75732/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "scope": "The hd 75732 gaia xp input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

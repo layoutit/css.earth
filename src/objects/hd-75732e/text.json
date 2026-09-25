@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-75732e",
+  "card": {
+    "text": "55 Cnc e crosses its star every 0.737 days and is 1.9 Earth radii across, found in 2004.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201833154",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+        "label": "Bourrier et al. 2018",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ae",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ae",
+        "label": "Wikipedia, \"55 Cancri Ae\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374105089",
+        "quote": "55 Cancri Ae, officially named Janssen, is an exoplanet orbiting a Sun-like host star, 55 Cancri A. The mass of the exoplanet is about eight Earth masses and its diameter is about twice that of the Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "55 Cnc e transits 55 Cnc every 0.737 days and is 1.9 Earth radii across. Orbit and size follow Bourrier et al. 2018's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201833154",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
+        "label": "Bourrier et al. 2018",
+        "checked": "2026-09-24",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ae",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ae",
+        "label": "Wikipedia, \"55 Cancri Ae\"",
+        "checked": "2026-09-24",
+        "locator": "Lead section, revision 1374105089",
+        "quote": "55 Cancri Ae was discovered in data taken during 2003–2004 and announced in 2004, thus making it the first super-Earth discovered around a main sequence star, predating Gliese 876 d by a year."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The colour of a black body at the 2,360 K day side measured in eclipse."
+    },
+    "illustration": {
+      "title": "NASA artist's texture",
+      "detail": "Illustration, not observed",
+      "summary": "NASA's illustrated surface from its 3D model. None of it was observed, and its longitudes are arbitrary."
+    }
+  }
+}
