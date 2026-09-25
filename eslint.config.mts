@@ -63,6 +63,33 @@ export default [
     },
   },
   {
+    // `@cssearth/bake` is build-time code: no application imports, and no `any`.
+    files: ['packages/bake/src/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-restricted-syntax': ['error', {
+        selector: 'TSAnyKeyword', message: 'Use an owned type or validate unknown input at the boundary.',
+      }],
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**', '@cssearth/bake', '@cssearth/bake/*'],
+          message: 'Bake topics import packages and their own topic only, never the application or another topic.' }],
+      }],
+    },
+  },
+  {
+    // `@cssearth/bake/volume` stays host-neutral (the nebula lab's browser viewer imports it); only `volume/node` may use
+    // Node built-ins and sharp, and nothing else imports it.
+    files: ['packages/bake/src/volume/**/*.ts'],
+    ignores: ['**/*.test.ts', 'packages/bake/src/volume/node/**'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', 'sharp', 'react', 'react/*', 'react-dom', 'react-dom/*', 'vite',
+          '@layoutit/polycss', '**/renderers/**', '@cssearth/bake', '@cssearth/bake/*', './node', './node/*', '../node', '../node/*', '../../node/*', '../../node'],
+          message: 'The main entry of @cssearth/bake/volume stays host-neutral: no Node built-ins, native codecs or UI libraries, and no import of the node entry.' }],
+      }],
+    },
+  },
+  {
     files: ['packages/engine/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-bake-node.tsbuildinfo"
+  },
+  "include": [
+    "src/volume/node"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}
