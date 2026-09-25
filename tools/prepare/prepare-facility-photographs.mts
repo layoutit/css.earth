@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
+import { encodeLossyWebp, LOSSY_WEBP } from '../../src/preparation/raster/lossy-lane.ts';
 
 /**
  * Prepares the published imagery that stands in for a facility: photographs,
@@ -18,6 +19,12 @@ const WIDTH = 592, HEIGHT = 296, BACKGROUND = '#0d0d0d';
 /** Artwork fits the same box as the retired model renders: 88% of the width, 86% of the height. */
 const ARTWORK_BOX = [Math.round(WIDTH * .88), Math.round(HEIGHT * .86)] as const, SUBJECT_PADDING = 6;
 const ARTWORK = 'official-prerendered-artwork', MATTE_ALPHA = 32, MATTE_RGB = 8;
+/** Both routes encode in the lossy lane. Measured 2026-09-25 with pixelmatch (threshold 0.1) against lossless
+ * encodes, artwork composited on the card's rgb(20, 20, 20): the 21 distinct artwork files take 263 KB at alpha
+ * quality 40 and flag 176 edge and 69 smooth-area pixels, fewer than the previous quality 90 with exact alpha
+ * (427 KB; 259 and 87). Alpha quality 20 adds edge hits (188). The 11 photographs take 315 KB and flag 197 pixels,
+ * against 485 KB and 679 at quality 90. */
+const ARTWORK_ALPHA_QUALITY = 40;
 
 interface Pinned {
   readonly id: string; readonly url: string; readonly sourcePage: string;
@@ -62,8 +69,8 @@ async function photograph(entry: Pinned, source: Buffer) {
   const probe = await sharp(source).metadata();
   if (!probe.width || !probe.height || probe.width < WIDTH || probe.height < HEIGHT) throw new Error(`Photograph is smaller than the frame: ${entry.id} is ${probe.width}x${probe.height}, frame ${WIDTH}x${HEIGHT}`);
   const resized = sharp(source).resize(WIDTH, HEIGHT, { fit: 'cover', position: 'centre' });
-  return { webp: await (entry.flipX ? resized.flop() : resized).flatten({ background: BACKGROUND }).webp({ quality: 90 }).toBuffer(),
-    preparation: `Centre-cover to ${WIDTH}x${HEIGHT} without upscaling${entry.flipX ? ', mirror horizontally' : ''}, flatten onto sidebar ${BACKGROUND}, encode WebP quality 90.` };
+  return { webp: await encodeLossyWebp((entry.flipX ? resized.flop() : resized).flatten({ background: BACKGROUND })),
+    preparation: `Centre-cover to ${WIDTH}x${HEIGHT} without upscaling${entry.flipX ? ', mirror horizontally' : ''}, flatten onto sidebar ${BACKGROUND}, encode WebP quality ${LOSSY_WEBP.quality} (lossy lane).` };
 }
 
 /** Keep the published angle, colours and transparency: clear the dark matte,
@@ -83,11 +90,11 @@ async function artwork(entry: Pinned, source: Buffer) {
   const size = await sharp(fitted).metadata();
   if (!size.width || !size.height || Math.max(size.width / ARTWORK_BOX[0], size.height / ARTWORK_BOX[1]) < .75) throw new Error(`Artwork is too small for the frame: ${entry.id} trims to ${size.width}x${size.height}, box ${ARTWORK_BOX.join('x')}`);
   const left = Math.round((WIDTH - size.width) / 2), top = Math.round((HEIGHT - size.height) / 2);
-  const webp = await sharp({ create: { width: WIDTH, height: HEIGHT, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-    .composite([{ input: fitted, left, top }]).webp({ quality: 90, alphaQuality: 100 }).toBuffer();
+  const webp = await encodeLossyWebp(sharp({ create: { width: WIDTH, height: HEIGHT, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite([{ input: fitted, left, top }]), { alphaQuality: ARTWORK_ALPHA_QUALITY });
   const x = Math.max(0, left - SUBJECT_PADDING), y = Math.max(0, top - SUBJECT_PADDING);
   return { webp, subject: { left: x, top: y, width: Math.min(WIDTH, left + size.width + SUBJECT_PADDING) - x, height: Math.min(HEIGHT, top + size.height + SUBJECT_PADDING) - y },
-    preparation: `Clear the near-black matte (alpha below ${MATTE_ALPHA}, RGB at most ${MATTE_RGB}), trim the transparent margin, fit inside ${ARTWORK_BOX.join('x')} without upscaling, centre on a transparent ${WIDTH}x${HEIGHT} frame, encode WebP quality 90 with lossless alpha.` };
+    preparation: `Clear the near-black matte (alpha below ${MATTE_ALPHA}, RGB at most ${MATTE_RGB}), trim the transparent margin, fit inside ${ARTWORK_BOX.join('x')} without upscaling, centre on a transparent ${WIDTH}x${HEIGHT} frame, encode WebP quality ${LOSSY_WEBP.quality} (lossy lane) with alpha quality ${ARTWORK_ALPHA_QUALITY}.` };
 }
 
 await fs.mkdir(output, { recursive: true });

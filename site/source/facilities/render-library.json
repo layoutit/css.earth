@@ -134,7 +134,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 37070,
+      "bytes": 20768,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -153,7 +153,7 @@
         "license": "CC BY 4.0",
         "bytes": 4881446,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -168,7 +168,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 83284,
+      "bytes": 59734,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -187,7 +187,7 @@
         "license": "CC BY 4.0",
         "bytes": 157987,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -202,7 +202,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 13570,
+      "bytes": 8644,
       "subject": {
         "left": 158,
         "top": 15,
@@ -227,7 +227,7 @@
         "license": "Public domain",
         "bytes": 4243095,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -242,7 +242,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 28882,
+      "bytes": 15198,
       "subject": {
         "left": 30,
         "top": 32,
@@ -267,7 +267,7 @@
         "license": "Public domain",
         "bytes": 3162323,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -282,7 +282,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 57642,
+      "bytes": 35230,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -301,7 +301,7 @@
         "license": "CC BY 4.0",
         "bytes": 2007483,
         "kind": "published-artwork",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -316,7 +316,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 17850,
+      "bytes": 11200,
       "subject": {
         "left": 180,
         "top": 15,
@@ -341,7 +341,7 @@
         "license": "Public domain",
         "bytes": 7780852,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -356,7 +356,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 30506,
+      "bytes": 18644,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -375,7 +375,7 @@
         "license": "Public domain",
         "bytes": 219929,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -390,7 +390,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 16052,
+      "bytes": 8660,
       "subject": {
         "left": 144,
         "top": 15,
@@ -415,7 +415,7 @@
         "license": "Public domain",
         "bytes": 136706,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -430,7 +430,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 30866,
+      "bytes": 20320,
       "subject": {
         "left": 78,
         "top": 15,
@@ -455,7 +455,7 @@
         "license": "Public domain",
         "bytes": 393166,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -470,7 +470,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 19686,
+      "bytes": 12700,
       "subject": {
         "left": 175,
         "top": 15,
@@ -495,7 +495,7 @@
         "license": "Public domain",
         "bytes": 1195703,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -510,7 +510,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 36466,
+      "bytes": 24904,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -529,7 +529,7 @@
         "license": "CC BY-SA 3.0",
         "bytes": 2350978,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -544,7 +544,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 17424,
+      "bytes": 10862,
       "subject": {
         "left": 139,
         "top": 15,
@@ -569,7 +569,7 @@
         "license": "Public domain",
         "bytes": 5912305,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -584,7 +584,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 31714,
+      "bytes": 19310,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -603,7 +603,7 @@
         "license": "CC BY 4.0",
         "bytes": 5308013,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -618,7 +618,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 20526,
+      "bytes": 12448,
       "subject": {
         "left": 72,
         "top": 15,
@@ -643,7 +643,7 @@
         "license": "Public domain",
         "bytes": 820317,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -658,7 +658,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 22682,
+      "bytes": 13990,
       "subject": {
         "left": 147,
         "top": 15,
@@ -683,7 +683,7 @@
         "license": "Public domain",
         "bytes": 5622356,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -888,7 +888,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 11076,
+      "bytes": 6972,
       "subject": {
         "left": 198,
         "top": 15,
@@ -913,7 +913,7 @@
         "license": "Public domain",
         "bytes": 240933,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -928,7 +928,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 22396,
+      "bytes": 13656,
       "subject": {
         "left": 92,
         "top": 15,
@@ -953,7 +953,7 @@
         "license": "Public domain",
         "bytes": 4912081,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -968,7 +968,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 22264,
+      "bytes": 15336,
       "subject": {
         "left": 96,
         "top": 25,
@@ -993,7 +993,7 @@
         "license": "Public domain",
         "bytes": 156205,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1008,7 +1008,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 30886,
+      "bytes": 20638,
       "subject": {
         "left": 96,
         "top": 15,
@@ -1033,7 +1033,7 @@
         "license": "Public domain",
         "bytes": 413890,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1048,7 +1048,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 28570,
+      "bytes": 17986,
       "subject": {
         "left": 93,
         "top": 15,
@@ -1073,7 +1073,7 @@
         "license": "Public domain",
         "bytes": 2722477,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1088,7 +1088,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 12166,
+      "bytes": 7226,
       "subject": {
         "left": 172,
         "top": 15,
@@ -1113,7 +1113,7 @@
         "license": "Public domain",
         "bytes": 2176558,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1128,7 +1128,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 22526,
+      "bytes": 13660,
       "subject": {
         "left": 44,
         "top": 15,
@@ -1153,7 +1153,7 @@
         "license": "Public domain",
         "bytes": 3567990,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1168,7 +1168,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 15498,
+      "bytes": 9558,
       "subject": {
         "left": 168,
         "top": 15,
@@ -1193,7 +1193,7 @@
         "license": "Public domain",
         "bytes": 4044526,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1208,7 +1208,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 32972,
+      "bytes": 21246,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1227,7 +1227,7 @@
         "license": "Public domain",
         "bytes": 1638522,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -1242,7 +1242,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 20324,
+      "bytes": 13548,
       "subject": {
         "left": 122,
         "top": 15,
@@ -1267,7 +1267,7 @@
         "license": "Public domain",
         "bytes": 4114140,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1282,7 +1282,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18616,
+      "bytes": 11732,
       "subject": {
         "left": 186,
         "top": 15,
@@ -1307,7 +1307,7 @@
         "license": "Public domain",
         "bytes": 6797831,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1322,7 +1322,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 27320,
+      "bytes": 16044,
       "subject": {
         "left": 47,
         "top": 15,
@@ -1347,7 +1347,7 @@
         "license": "Public domain",
         "bytes": 342620,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1362,7 +1362,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 63960,
+      "bytes": 44938,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1381,7 +1381,7 @@
         "license": "CC BY 4.0",
         "bytes": 3793201,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, mirror horizontally, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, mirror horizontally, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -1396,7 +1396,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 25324,
+      "bytes": 17498,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1415,7 +1415,7 @@
         "license": "CC BY 4.0",
         "bytes": 4932391,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -1430,7 +1430,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 31458,
+      "bytes": 15272,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1449,7 +1449,7 @@
         "license": "CC BY 4.0",
         "bytes": 2381531,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -1464,7 +1464,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 17068,
+      "bytes": 10634,
       "subject": {
         "left": 114,
         "top": 15,
@@ -1489,7 +1489,7 @@
         "license": "Public domain",
         "bytes": 453869,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1504,7 +1504,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 17068,
+      "bytes": 10634,
       "subject": {
         "left": 114,
         "top": 15,
@@ -1529,7 +1529,7 @@
         "license": "Public domain",
         "bytes": 453869,
         "kind": "official-prerendered-artwork",
-        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 90 with lossless alpha."
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {
@@ -1544,7 +1544,7 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 54404,
+      "bytes": 37832,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1563,7 +1563,7 @@
         "license": "CC BY 4.0",
         "bytes": 6700160,
         "kind": "published-photograph",
-        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     }
   ]

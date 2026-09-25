@@ -10,7 +10,8 @@ records each original file, its credit and its byte count, and
 [`prepare-facility-photographs.mts`](../tools/prepare/prepare-facility-photographs.mts)
 clears the near-black matte below 12% opacity that six of the files carry (it
 shows as a box on the card), trims the transparent margin, fits the result inside
-521 × 255 without upscaling and centres it on a transparent 592 × 296 frame. Each image keeps NASA's angle,
+521 × 255 without upscaling and centres it on a transparent 592 × 296 frame,
+encoded in the [lossy lane](surface-preparation.md#the-lossy-lane). Each image keeps NASA's angle,
 colours and any lens flare the artist painted in.
 
 ![Our earlier model renders beside NASA's artwork for the same spacecraft](images/facility-thumbnails-nasa-artwork.webp)
