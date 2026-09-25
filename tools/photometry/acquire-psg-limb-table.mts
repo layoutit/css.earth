@@ -58,18 +58,32 @@ const cached = async <T,>(key: string, compute: () => Promise<T>): Promise<T> =>
 };
 
 const template = await cached('template', () => call('cfg', `<OBJECT>Planet\n<OBJECT-NAME>${psgName}\n<OBJECT-DATE>2025/01/01 00:00\n<GEOMETRY>Observatory\n<GENERATOR-RANGE1>0.38\n<GENERATOR-RANGE2>0.70\n<GENERATOR-RANGEUNIT>um\n`, { wephm: 'y', watm: 'y' }));
-const longitude = Number(tag(template, 'OBJECT-OBS-LONGITUDE'));
-// The table's tangent points sit on the equator of the sub-observer meridian, so the requested Sun offset is the zenith.
+const longitude = Number(tag(template, 'OBJECT-OBS-LONGITUDE')), latitude = tag(template, 'OBJECT-OBS-LATITUDE');
+// A PSG without its atmosphere package answers with no template; its halo would be empty, not absent.
+if (!tag(template, 'ATMOSPHERE-DESCRIPTION') || !Number(tag(template, 'ATMOSPHERE-NGAS')))
+  throw new Error(`${body}: PSG returned no atmosphere template for ${psgName}; a local PSG needs its atmospheres package.`);
+// The Sun shares the sub-observer latitude; its longitude is searched below.
 let base = template;
-for (const [key, value] of Object.entries({ 'OBJECT-OBS-LATITUDE': 0, 'OBJECT-SOLAR-LATITUDE': 0, 'ATMOSPHERE-NMAX': 8, 'ATMOSPHERE-LMAX': 57, 'GENERATOR-BEAM': 1, 'GENERATOR-BEAM-UNIT': 'km',
+for (const [key, value] of Object.entries({ 'OBJECT-SOLAR-LATITUDE': latitude ?? 0, 'ATMOSPHERE-NMAX': 8, 'ATMOSPHERE-LMAX': 57, 'GENERATOR-BEAM': 1, 'GENERATOR-BEAM-UNIT': 'km',
   'GENERATOR-RESOLUTION': 100, 'GENERATOR-RESOLUTIONUNIT': 'RP', 'GENERATOR-RADUNITS': 'Wsrm2um', 'GENERATOR-TRANS-APPLY': 'N', 'GEOMETRY-OBS-ALTITUDE': 1000, 'GEOMETRY-ALTITUDE-UNIT': 'km' })) base = set(base, key, value);
 const nadirConfig = set(set(set(base, 'GEOMETRY', 'Nadir'), 'GEOMETRY-USER-PARAM', 0), 'OBJECT-SOLAR-LONGITUDE', longitude);
 const limbConfig = set(base, 'GEOMETRY', 'Limb');
 const nadir = await cached('nadir', async () => bands(await call('rad', nadirConfig), 'nadir'));
-// Full phase: the sub-solar point 90 degrees from the tangent point toward the observer, azimuth 0.
-const flood = set(set(limbConfig, 'OBJECT-SOLAR-LONGITUDE', longitude + 90), 'GEOMETRY-AZIMUTH', 0);
-const solarZenith = Number(await cached('zenith', async () => tag(await call('cfg', set(flood, 'GEOMETRY-USER-PARAM', altitudes[0])), 'GEOMETRY-SOLAR-ANGLE') ?? 'NaN'));
-if (!(Math.abs(solarZenith - 90) < 1)) throw new Error(`${body}: PSG placed the Sun ${solarZenith} degrees from the tangent point's zenith, not at its horizon.`);
+// Full phase: the Sun on the tangent point's horizon behind the observer (azimuth 0). The sub-solar longitude that puts
+// it there is searched with PSG's own geometry module, since its tangent point need not sit at the sub-observer point.
+// PSG's geometry module holds the solar angle fixed for a tangent path below an opaque layer (Venus at 60 km reports 81.2
+// degrees for every Sun longitude), so the Sun is placed at the profile's middle altitude.
+const geometryAltitude = altitudes[Math.floor(altitudes.length / 2)];
+const zenithAt = async (offset: number) => Number(await cached(`zenith:${offset.toFixed(4)}`, async () =>
+  tag(await call('cfg', set(set(set(limbConfig, 'GEOMETRY-USER-PARAM', geometryAltitude), 'OBJECT-SOLAR-LONGITUDE', longitude + offset), 'GEOMETRY-AZIMUTH', 0)), 'GEOMETRY-SOLAR-ANGLE') ?? 'NaN'));
+let low = 60, high = 120, offset = 90, solarZenith = await zenithAt(offset);
+for (let step = 0; step < 16 && !(Math.abs(solarZenith - 90) < 0.1); step++) {
+  if (!Number.isFinite(solarZenith)) throw new Error(`${body}: PSG computed no solar angle for a Sun ${offset} degrees east of the tangent point.`);
+  if (solarZenith < 90) low = offset; else high = offset;
+  offset = (low + high) / 2; solarZenith = await zenithAt(offset);
+}
+if (!(Math.abs(solarZenith - 90) < 0.1)) throw new Error(`${body}: no Sun longitude between 60 and 120 degrees puts the Sun on the tangent point's horizon (last ${solarZenith} at ${offset}).`);
+const flood = set(set(limbConfig, 'OBJECT-SOLAR-LONGITUDE', longitude + offset), 'GEOMETRY-AZIMUTH', 0);
 const radiance: Record<Band, number[]> = { red: [], green: [], blue: [] };
 const warnings = new Set<string>();
 for (const altitude of altitudes) {
@@ -89,7 +103,7 @@ await writeFile(resolve(outputDirectory, 'psg-limb.json'), JSON.stringify({
   schema: PSG_LIMB_TABLE_SCHEMA, body, psgObject: psgName, radiusKm: Number(tag(template, 'OBJECT-DIAMETER')) / 2,
   atmosphere: tag(template, 'ATMOSPHERE-DESCRIPTION'), units: 'W sr-1 m-2 um-1', bandsMicrometres: BANDS,
   configurations: { limb: 'atmosphere/psg-limb.cfg', nadir: 'atmosphere/psg-nadir.cfg' },
-  geometry: { solarZenithDegrees: solarZenith, azimuthDegrees: 0, meaning: 'full phase: the Sun behind the observer' },
+  geometry: { solarZenithDegrees: solarZenith, solarLongitudeOffsetDegrees: offset, atAltitudeKm: geometryAltitude, azimuthDegrees: 0, meaning: 'full phase: the Sun on the tangent point horizon behind the observer' },
   nadirOverheadSun: nadir, altitudesKm: altitudes, radiance, warnings: [...warnings].sort(),
 }, null, 1) + '\n');
 console.log(`${body}: wrote ${resolve(outputDirectory, 'psg-limb.json')}`);
