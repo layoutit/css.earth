@@ -1,14 +1,14 @@
 {
   "schema": "cssearth-photometric-model@1",
-  "id": "opal-2025-minnaert-f395n",
+  "id": "opal-2025-minnaert-f467m",
   "instrument": "Hubble WFC3/UVIS (OPAL)",
-  "filter": "F395N, 395 nm",
+  "filter": "F467M, 467 nm",
   "quantity": "radiance-factor",
   "model": {
     "family": "separable",
     "disk": {
       "family": "minnaert",
-      "coefficient": 0.4,
+      "coefficient": 0.86,
       "coefficientPerDegree": 0
     }
   },

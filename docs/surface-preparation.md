@@ -609,6 +609,14 @@ same published law, so the limb in the app is the limb the instrument saw.
   measured at bake, and for every pixel in the channel that sets its alpha. A
   pixel far from the mean colour is off by (mean − pixel) × (spread of the
   channel factors), which is largest near the limb.
+- **Colour tie.** A colour map whose archive scaling is arbitrary (Saturn's
+  OPAL TIF) names a whole-disc colour computed once from a published spectrum
+  ([whole-disc-colour.mts](../tools/photometry/whole-disc-colour.mts)). The map's
+  green and blue are scaled by one gain each so that, once the limb law is put
+  back, the flood-lit disc integrates to that colour: the target ratios are the
+  colour's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
+  The tie is the Uranian moons' band-ratio tie; the
+  [Saturn README](../src/objects/saturn/README.md) reports its gains.
 - **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
   limb profile with the Sun behind the viewer, lit where the tangent point faces
   the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
@@ -636,7 +644,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   ![](images/planet-limbs/venus-halo-before-after.webp)
 - **Why not one model for every disc.** PSG's default atmospheres were checked
   against Hubble's measured coefficients and missed them. In red, PSG gives
-  Uranus k 1.16 where OPAL measured 0.57. In blue, it gives Saturn 0.73 where
+  Uranus k 1.16 where OPAL measured 0.57. In F395N, it gives Saturn 0.73 where
   OPAL measured 0.40. For Venus it gives about 1.05 where MASCS measured 1.35.
   Each disc therefore uses its measured law. PSG is kept for what nothing
   measured: the halo.

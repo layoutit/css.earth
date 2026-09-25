@@ -1,4 +1,4 @@
-import { applyLinearTint } from '../color-transfer.mts';
+import { linearToSrgb, srgbToLinear } from '../color-transfer.mts';
 import { sha256 } from '@cssearth/core/node';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
 import type {RingMotionPoint} from './radial-motion.mts';
@@ -48,7 +48,10 @@ import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
-import { loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../photometry/limb.mts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../photometry/limb.mts';
+import { displayBandRatios, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
+import { tieBandRatios } from '../terrestrial-layers/photometric-observations.mts';
+import type { BandRatioPolicy } from '../terrestrial-layers/contracts.mts';
 
 /** The pixel width of the widest of these published images, read from each file's header. */
 export async function widestPublishedImage(paths:readonly string[], owner:string) {
@@ -60,6 +63,57 @@ export async function widestPublishedImage(paths:readonly string[], owner:string
     if (!width) throw new Error(`${owner}: ${path} has no pixel width.`);
     return width;
   })));
+}
+
+/**
+ * Rows the source map never observed, filled by linear interpolation in latitude between the nearest observed rows.
+ * A range touching the top or bottom edge repeats its one observed neighbour. The recipe states the rows; nothing is
+ * detected from pixel values, so a genuinely dark observed row is never treated as a gap.
+ */
+function fillUnobservedRows(data: Buffer, info: { width: number; height: number; channels: number }, ranges: readonly (readonly [number, number])[]) {
+  const row = info.width * info.channels;
+  for (const [first, last] of ranges) {
+    if (!(Number.isInteger(first) && Number.isInteger(last) && first >= 0 && last >= first && last < info.height))
+      throw new Error(`Unobserved surface rows ${first}-${last} lie outside the ${info.height}-row source.`);
+    const above = first - 1, below = last + 1;
+    if (above < 0 && below >= info.height) throw new Error("Unobserved surface rows leave no observed row to fill from.");
+    for (let y = first; y <= last; y += 1) {
+      const t = above < 0 ? 1 : below >= info.height ? 0 : (y - above) / (below - above);
+      for (let i = 0; i < row; i += 1) {
+        const a = above < 0 ? data[below * row + i] : data[above * row + i];
+        const b = below >= info.height ? data[above * row + i] : data[below * row + i];
+        data[y * row + i] = Math.round(a + (b - a) * t);
+      }
+    }
+  }
+}
+
+/**
+ * The prepared surface map before it is encoded: unobserved rows filled, resampled once to the prepared grid, rows moved
+ * from planetographic latitude (the OPAL readme) to the mesh's own latitude, and the Sun's colour multiplied in linear light.
+ * When the recipe names a whole-disc colour, the band-ratio tie then scales green and blue over every texel, cosine-weighted
+ * by latitude, and its report is returned. One sRGB encoding at the end.
+ */
+export async function prepareSurfaceColour({ sourcePath, unobservedRows, width, height, equatorialToPolar, channelFactors, tie }: {sourcePath:string;
+  unobservedRows:readonly (readonly [number, number])[];width:number;height:number;equatorialToPolar:number;channelFactors:readonly number[];tie?:BandRatioPolicy}) {
+  const source = await sharp(sourcePath)
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  fillUnobservedRows(source.data, source.info, unobservedRows);
+  // A source map smaller than the prepared grid is resampled once here, after its unobserved rows are filled.
+  const resized = source.info.width === width && source.info.height === height
+    ? source
+    : await sharp(source.data, { raw: source.info }).resize(width, height, { kernel: sharp.kernel.lanczos3, fit: "fill" })
+      .raw().toBuffer({ resolveWithObject: true });
+  const { info } = resized, data = planetographicRowsToMeshLatitude(resized.data, info.width, info.height, info.channels, equatorialToPolar);
+  const pixels = info.width * info.height, linear = new Float32Array(pixels * 3);
+  for (let pixel = 0; pixel < pixels; pixel += 1) for (let channel = 0; channel < 3; channel += 1)
+    linear[pixel * 3 + channel] = Math.min(1, srgbToLinear(data[pixel * info.channels + channel] / 255) * channelFactors[channel]);
+  const report = tie ? tieBandRatios(linear, new Uint8Array(pixels).fill(1), info.width, info.height, CHANNEL_NAMES, tie) : undefined;
+  for (let pixel = 0; pixel < pixels; pixel += 1) for (let channel = 0; channel < 3; channel += 1)
+    data[pixel * info.channels + channel] = Math.round(255 * linearToSrgb(linear[pixel * 3 + channel]));
+  return { data, info, tie: report };
 }
 
 /** Source-configured oblate surface, projected material banks and retained cutaway. */
@@ -76,6 +130,9 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   // colour is measured from the prepared surface once it is written.
   const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
   let limbReference: Channels<number> | undefined;
+  // A map with arbitrary archive scaling names the planet's published whole-disc colour (tools/photometry/whole-disc-colour.mts).
+  // The tinted map's band ratios are tied to it through the limb law's disc means, so the flood-lit disc integrates to it.
+  const COLOUR_TIE = config.colourTie === undefined ? undefined : displayBandRatios(await loadWholeDiscColour(sourceDirectory, config.colourTie), floodDiscMean(LIMB_LAW));
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(stagingDirectory,{recursive:true})]);
 
 const DEFAULT_LENS_ID = config.parameters.defaultLensId;
@@ -2677,50 +2734,9 @@ function prepareSurfaceChannelFactors(maximumTint:ReturnType<typeof textureTintF
     .map((factor) => factor / maximumLightingFactor);
 }
 
-/**
- * Rows the source map never observed, filled by linear interpolation in latitude between the nearest observed rows.
- * A range touching the top or bottom edge repeats its one observed neighbour. The recipe states the rows; nothing is
- * detected from pixel values, so a genuinely dark observed row is never treated as a gap.
- */
-function fillUnobservedRows(data: Buffer, info: { width: number; height: number; channels: number }, ranges: readonly (readonly [number, number])[]) {
-  const row = info.width * info.channels;
-  for (const [first, last] of ranges) {
-    if (!(Number.isInteger(first) && Number.isInteger(last) && first >= 0 && last >= first && last < info.height))
-      throw new Error(`Unobserved surface rows ${first}-${last} lie outside the ${info.height}-row source.`);
-    const above = first - 1, below = last + 1;
-    if (above < 0 && below >= info.height) throw new Error("Unobserved surface rows leave no observed row to fill from.");
-    for (let y = first; y <= last; y += 1) {
-      const t = above < 0 ? 1 : below >= info.height ? 0 : (y - above) / (below - above);
-      for (let i = 0; i < row; i += 1) {
-        const a = above < 0 ? data[below * row + i] : data[above * row + i];
-        const b = below >= info.height ? data[above * row + i] : data[below * row + i];
-        data[y * row + i] = Math.round(a + (b - a) * t);
-      }
-    }
-  }
-}
-
 async function prepareSolarTintedSurface(channelFactors:readonly number[]) {
-  const source = await sharp(PLANET_SOURCE_TEXTURE_PATH)
-    .removeAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-  fillUnobservedRows(source.data, source.info, config.surfaceUnobservedRows ?? []);
-  // A source map smaller than the prepared grid is resampled once here, after its unobserved rows are filled.
-  const resized = source.info.width === PLANET_SOURCE_TEXTURE_WIDTH && source.info.height === PLANET_SOURCE_TEXTURE_HEIGHT
-    ? source
-    : await sharp(source.data, { raw: source.info }).resize(PLANET_SOURCE_TEXTURE_WIDTH, PLANET_SOURCE_TEXTURE_HEIGHT, { kernel: sharp.kernel.lanczos3, fit: "fill" })
-      .raw().toBuffer({ resolveWithObject: true });
-  // The OPAL map's rows are planetographic latitude (its readme); the mesh's rows are the ellipsoid's own latitude.
-  const { info } = resized, data = planetographicRowsToMeshLatitude(resized.data, info.width, info.height, info.channels, EQUATORIAL_RADIUS / POLAR_RADIUS);
-  for (let offset = 0; offset < data.length; offset += info.channels) {
-    for (let channel = 0; channel < 3; channel += 1) {
-      data[offset + channel] = applyLinearTint(
-        data[offset + channel],
-        channelFactors[channel],
-      );
-    }
-  }
+  const { data, info } = await prepareSurfaceColour({ sourcePath: PLANET_SOURCE_TEXTURE_PATH, unobservedRows: config.surfaceUnobservedRows ?? [],
+    width: PLANET_SOURCE_TEXTURE_WIDTH, height: PLANET_SOURCE_TEXTURE_HEIGHT, equatorialToPolar: EQUATORIAL_RADIUS / POLAR_RADIUS, channelFactors, tie: COLOUR_TIE });
   await sharp(data, {
     raw: {
       width: info.width,
