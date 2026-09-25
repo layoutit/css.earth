@@ -108,7 +108,7 @@ export const facilityPoses: Record<string, FacilityPose> = {
   'terra': {
     facingFeature: "Earth-facing instrument deck", sourceAxis: [0, -1, 0],
     modelQuaternion: [-0.518319837353, -0.807981474587, 0.106029956078, 0.259361005830],
-    evidence: { url: 'https://terra.nasa.gov/about/terra-instruments', identification: "Instrument apertures on the nadir side, opposite the flat zenith panels." },
+    evidence: { url: 'https://eyes.nasa.gov/apps/earth/', identification: "NASA Eyes on the Earth points this model's -Y axis at Earth." },
   },
   'voyager-1': {
     facingFeature: "High-gain antenna dish", sourceAxis: [0, 1, 0],

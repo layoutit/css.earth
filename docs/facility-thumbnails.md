@@ -80,6 +80,13 @@ the bounded reader retains all four meshes, original JPEG textures, UVs,
 transforms and material values. Both Voyagers use the same reviewed 3D pose,
 with the dish aimed inward and every boom retained.
 
+Terra comes from NASA Eyes on the Earth, not NASA 3D Resources. The NASA 3D
+Resources GLB names its two textures by a Windows path outside the file, and
+the repository does not contain them; NASA's own preview render shows the same
+untextured flat blue. The Eyes model carries its colour, normal and
+metal/roughness maps. Eyes points this model's −Y axis at Earth, and the pose
+uses that axis.
+
 The fixed lighting recipe is in
 [`tools/facility-renders/render.mts`](../tools/facility-renders/render.mts).
 The library records preparation code hashes and browser/package versions.

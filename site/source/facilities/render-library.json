@@ -111,14 +111,14 @@
       ],
       "policy": "Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude."
     },
-    "browser": "153.0.8010.53",
+    "browser": "153.0.8010.54",
     "sharp": "0.35.3",
     "implementation": {
-      "tools/prepare/prepare-facility-renders.mts": "1152430566b21a085f31af299a1bda62b795283102c1639dcaeb21f485424351",
+      "tools/prepare/prepare-facility-renders.mts": "97247f584f53c2420f69ab09e46d2972b89c2b2ab652e8cb157ae429fedeab0e",
       "tools/facility-renders/render.mts": "79551ff7cf763cd67b9ebfac1c28a36e2eee56764220ed85ecaf3d3e29112119",
-      "tools/facility-renders/poses.mts": "922b7dcc705e68993abeb67df977c630263b806755468d3d339a64455064b424",
+      "tools/facility-renders/poses.mts": "f0817777b3fff02980c4474d3e07717aa057d0d0a9cc52756e90152243e75afe",
       "tools/facility-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
-      "tools/facility-renders/refresh.mts": "430973626c1fb6d83db32e4f00eb2072f5a56ff2874a360b0de016de37f79790"
+      "tools/facility-renders/refresh.mts": "2ca1377f3aba4e8e6bbdeb7a4c6098fc59c99ec59de4569f885f2e20ba26c684"
     }
   },
   "entries": [
@@ -2309,19 +2309,56 @@
         "scale": 1,
         "offsetXCssPixels": 0
       },
-      "bytes": 18842,
+      "bytes": 22436,
       "source": {
         "kind": "model-render",
-        "id": "terra",
-        "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Terra/Terra.glb",
-        "sourcePage": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Terra/Terra.glb",
-        "credit": "NASA 3D Resources",
-        "format": "glb",
+        "id": "terra-v2",
+        "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/Terra.gltf",
+        "format": "gltf",
+        "sourcePage": "https://eyes.nasa.gov/apps/earth/",
+        "credit": "NASA/JPL-Caltech, Eyes on the Earth",
         "model": {
-          "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Terra/Terra.glb",
-          "path": "models/terra/model.glb",
-          "bytes": 2150600
+          "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/Terra.gltf",
+          "path": "models/terra-v2/model.gltf",
+          "bytes": 32834
         },
+        "dependencies": [
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra.bin",
+            "path": "models/terra-v2/terra.bin",
+            "bytes": 585464
+          },
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_dishes_ao.jpg",
+            "path": "models/terra-v2/terra_dishes_ao.jpg",
+            "bytes": 83463
+          },
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/foil_normal.png",
+            "path": "models/terra-v2/foil_normal.png",
+            "bytes": 257893
+          },
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_atlas_normal.png",
+            "path": "models/terra-v2/terra_atlas_normal.png",
+            "bytes": 111258
+          },
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_atlas_albedo.jpg",
+            "path": "models/terra-v2/terra_atlas_albedo.jpg",
+            "bytes": 91210
+          },
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_atlas_pbr.jpg",
+            "path": "models/terra-v2/terra_atlas_pbr.jpg",
+            "bytes": 80657
+          },
+          {
+            "url": "https://eyes.nasa.gov/assets/static/models/sc_terra/terra_doodads_ao.jpg",
+            "path": "models/terra-v2/terra_doodads_ao.jpg",
+            "bytes": 159202
+          }
+        ],
         "camera": {
           "direction": [
             1.2,
@@ -2352,7 +2389,7 @@
       "processing": {
         "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
-        "triangles": 117120,
+        "triangles": 10484,
         "omissions": [],
         "camera": {
           "direction": [
@@ -2381,8 +2418,8 @@
             0.25936100583
           ],
           "evidence": {
-            "url": "https://terra.nasa.gov/about/terra-instruments",
-            "identification": "Instrument apertures on the nadir side, opposite the flat zenith panels."
+            "url": "https://eyes.nasa.gov/apps/earth/",
+            "identification": "NASA Eyes on the Earth points this model's -Y axis at Earth."
           },
           "renderedDirection": [
             -0.7825855808711322,
