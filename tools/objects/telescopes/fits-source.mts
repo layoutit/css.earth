@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
+import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
 import { localOutput, verifiedProduct } from './verified-product.mts';
 
 export const FITS_SOURCE_SCHEMA = 'cssearth-telescope-fits-source@1';

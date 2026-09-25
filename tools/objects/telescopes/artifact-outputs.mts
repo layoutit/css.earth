@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { sha256File } from '@cssearth/core/node';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
+import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
 import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
 import { validateProjectionSource } from './projection.mts';
 import { verifiedProduct } from './verified-product.mts';
@@ -16,7 +16,7 @@ import { openPdsSource } from './pds-source.mts';
 import { parseProductDescriptor } from './product-descriptor.mts';
 import { assessSourceRelevance, readSourceQuestion, type SourceRelevance } from './source-relevance.mts';
 import { recordedSourceProcessing, type SourceProcessingSoftware } from './source-product-contract.mts';
-import type { ProductSoftware } from '../product-record.mts';
+import type { ProductSoftware } from '@cssearth/telescope';
 
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});

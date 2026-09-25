@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord } from '../product-record.mts';
+import { parseProductRecord } from '@cssearth/telescope';
 
 export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';
 export const IHW_DATASET = 'IHW-C-NNSN-3-EDR-HALLEY-V2.0';

@@ -24,7 +24,7 @@
  * Memory: the pipeline is a separate executable, so the ceiling is applied to the whole process group, not to Python alone.
  * The group is sampled every second and the pipeline is stopped if it passes the ceiling (2 GiB by default).
  *
- * Beside every product it writes, the run writes its own record (`<product>.product.json`, tools/objects/product-record.mts):
+ * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope/src/product-record.ts):
  * the observation's pinned inputs at their sizes and digests, the CRDS context and the reference files that chose the
  * calibration, the pipeline and CRDS versions the run reported and the digest of the toolchain pins they were installed from.
  * Its evidence list is empty. What a product was checked against is added by the stage that checked it: compare.mts adds the
@@ -37,7 +37,8 @@ import { sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile, type MastFile } from '../astronomy-packages/mast.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
-import { productRecordPath, writeProductRecord, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { productRecordPath, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
+import { writeProductRecord } from '@cssearth/telescope/node';
 import { parseHstProgram, PROGRAMS, suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { readHstFileHdus } from './product-file.mts';
 import { HST_ROOT, hstToolchain } from './toolchain.mts';

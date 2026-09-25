@@ -25,7 +25,7 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord, type EvidenceKind } from '../product-record.mts';
+import { parseProductRecord, type EvidenceKind } from '@cssearth/telescope';
 import { PROGRAMS, parseGeminiProgram, type GeminiProgram } from './archive.mts';
 import { query } from './cadc.mts';
 

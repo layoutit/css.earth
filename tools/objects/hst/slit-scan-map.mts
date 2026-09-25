@@ -34,7 +34,7 @@ import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '../j
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 as digestOf } from '@cssearth/core/node';
 import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
-import type { ProductInput, ProductSoftware } from '../product-record.mts';
+import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 import {
   ACROSS_SLIT_DIRECTIONS, acrossSlitCentre, addFeatureless, bandFromReflectance, discChord, featurelessMean, newFeatureless,
   parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage,

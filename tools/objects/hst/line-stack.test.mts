@@ -4,7 +4,8 @@ const test = sourceTest();
 import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { PROGRAMS } from './archive.mts';
 import {
   accumulatedImage, addSample, discMetrics, gridPoint, limbFallOff, newAccumulator, parseLineStack, quadraticFit, radialProfile, rayleighPerSample,

@@ -5,7 +5,7 @@ import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '@cssearth/core';
-import { readProductRecord, sameRun } from '../product-record.mts';
+import { readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
 import { parseResolutionEvidence } from '../resolution-evidence.mts';

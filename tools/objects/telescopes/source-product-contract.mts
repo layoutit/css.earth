@@ -1,7 +1,7 @@
 /** Validated source declarations and receipt metadata; no intake, downloads or qualification. */
 import { resolve, relative, isAbsolute } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import type { ProductRecord } from '../product-record.mts';
+import type { ProductRecord } from '@cssearth/telescope';
 import type { ProductKind } from './recipe-request.mts';
 import { archiveProfileFamilyEvidence, productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';

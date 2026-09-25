@@ -6,7 +6,8 @@ import { tmpdir } from 'node:os';
 import { basename, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { manualDeliveryPins, manualImaging, manualRestoreRun, manualRestoreScript, manualTcleanArguments, recordArchiveComparison } from './alma-restore-manual.mts';
-import { evidenceFor, productRecordPath, readProductRecord, runDigest, writeProductRecord } from '../product-record.mts';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
 import { loggedSpectralWindowMap, parseManualCalibration, resolveNamedMaps } from './alma-manual-calibration.mts';
 
 const here = fileURLToPath(new URL('.', import.meta.url));

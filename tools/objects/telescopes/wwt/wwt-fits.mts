@@ -5,7 +5,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { sciencePackage } from '../../astronomy-packages/science.mts';
 import { plotProduct } from '../../astronomy-packages/plots.mts';
-import { writeProductRecord } from '../../product-record.mts';
+import { writeProductRecord } from '@cssearth/telescope/node';
 import { FITS_SOURCE_SCHEMA } from '../fits-source.mts';
 
 const MAX_TILE_BYTES = 8 * 1024 * 1024;

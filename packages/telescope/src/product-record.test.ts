@@ -3,9 +3,9 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sha256File } from '@cssearth/core/node';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { addProductEvidence, assertInputPins, evidenceFor, parseProductRecord, fileSize, productRecordPath, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductRun } from './product-record.mts';
+import { it as test } from 'vitest';
+import { addProductEvidence, assertInputPins, fileSize, readProductRecord, runDigest, sameRun, writeProductRecord } from './node/product-record.js';
+import { evidenceFor, parseProductRecord, productRecordPath, type ProductRun } from './product-record.js';
 
 const scratch = () => mkdtemp(join(tmpdir(), 'product-record-'));
 const run = (overrides: Partial<ProductRun> = {}): ProductRun => ({ telescope: 'ALMA', stage: 'disc-selfcal/final', inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3 }],

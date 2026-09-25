@@ -26,7 +26,7 @@
  * reproduction receipt beside the definition.
  *
  * Beside every stacked product it also writes that product's own record (`<product>.product.json`,
- * tools/objects/product-record.mts): the frames that went into that set at their pinned digests, the definition and Horizons
+ * packages/telescope/src/product-record.ts): the frames that went into that set at their pinned digests, the definition and Horizons
  * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
  * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
@@ -36,7 +36,8 @@ import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
 import { sha256 } from '@cssearth/core/node';
-import { addProductEvidence, fileSize, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { addProductEvidence, fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';
 import {
   accumulatedImage, addSample, clippedMean, discMetrics, gridPoint, inSubset, limbFallOff, median, newAccumulator, parseLineStack,

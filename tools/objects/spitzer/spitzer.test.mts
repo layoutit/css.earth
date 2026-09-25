@@ -7,7 +7,8 @@ const test = sourceTest();
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
 import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, observationRecords, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
 import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
-import { addProductEvidence, evidenceFor, fileSize, readProductRecord, writeProductRecord } from '../product-record.mts';
+import { addProductEvidence, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { evidenceFor } from '@cssearth/telescope';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
 const sha = (seed: string) => seed.repeat(64).slice(0, 64);

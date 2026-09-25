@@ -34,8 +34,8 @@ import { mkdir, readdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
-import { productRecordPath, readProductRecord, sameRun, writeProductRecord, assertInputPins,
-  type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
+import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
+import { readProductRecord, sameRun, writeProductRecord, assertInputPins } from '@cssearth/telescope/node';
 import { digestProgram, readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';

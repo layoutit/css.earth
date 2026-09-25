@@ -1,6 +1,6 @@
 /** Restore and prove the two bounded public family examples; archive bytes are deliberately not committed. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'; import { resolve } from 'node:path'; import { fileURLToPath } from 'node:url';
-import { fileSize } from '../../product-record.mts'; import { BETELGEUSE_ZIMPOL_V, exportIntensityDolp } from './f13-polarimetry.mts'; import { MATHILDE_NEAR_MSI_42826360, exportCalibrationBundle, inspectNearMsiBundle } from './f17-calibration.mts';
+import { fileSize } from '@cssearth/telescope/node'; import { BETELGEUSE_ZIMPOL_V, exportIntensityDolp } from './f13-polarimetry.mts'; import { MATHILDE_NEAR_MSI_42826360, exportCalibrationBundle, inspectNearMsiBundle } from './f17-calibration.mts';
 type Source={readonly id:string;readonly url:string;readonly path:string;readonly file:string;readonly role:'science'|'label'};
 const sources:readonly Source[]=[
   {...BETELGEUSE_ZIMPOL_V.intensity,file:'zimpol-intensity.fits',role:'science'},{...BETELGEUSE_ZIMPOL_V.dolp,file:'zimpol-dolp.fits',role:'science'},

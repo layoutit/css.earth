@@ -64,3 +64,18 @@ test('the FITS reader package is followed into its sources, as when it was a loc
     assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('the telescope library is followed into its sources, as when its modules sat under tools/objects', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-'));
+  try {
+    await writeFile(resolve(root, 'entry.mts'), "import { parseProductRecord } from '@cssearth/telescope'; import { runDigest } from '@cssearth/telescope/node';\nexport const used=[parseProductRecord,runDigest];\n");
+    await mkdir(resolve(root, 'packages/telescope/src/node'), { recursive: true });
+    await writeFile(resolve(root, 'packages/telescope/src/product-record.ts'), 'export const parseProductRecord=()=>1;\n');
+    await writeFile(resolve(root, 'packages/telescope/src/index.ts'), "export { parseProductRecord } from './product-record.js';\n");
+    await writeFile(resolve(root, 'packages/telescope/src/node/index.ts'), 'export const runDigest=()=>2;\n');
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/telescope/src/index.ts', 'packages/telescope/src/node/index.ts', 'packages/telescope/src/product-record.ts']);
+    await writeFile(resolve(root, 'packages/telescope/src/product-record.ts'), 'export const parseProductRecord=()=>3;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

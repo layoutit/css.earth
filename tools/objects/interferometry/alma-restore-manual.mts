@@ -41,8 +41,8 @@ import {
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { requireArray, requireString } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
-import { addProductEvidence, fileSize, productRecordPath, readProductRecord, sameRun, writeProductRecord,
-  type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 
 /** The imaging a manual delivery performed, read from the two scripts it ships instead of a command log. Both set their
  * parameters as plain variables and hand the names to the task, so the assignments are read alongside the calls. */

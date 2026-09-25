@@ -5,7 +5,7 @@ import { sciencePackage } from '../astronomy-packages/science.mts';
 import { isisMetadata, pdsMetadata, parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
 import { calibrationDependencies, verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import { parseProductFacts } from './qualified-observations.mts';
-import { fileSize } from '../product-record.mts';
+import { fileSize } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import type { ProductFacts } from './request-satisfaction.mts';

@@ -9,7 +9,7 @@ import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { writeProductRecord } from '../product-record.mts';
+import { writeProductRecord } from '@cssearth/telescope/node';
 import { sha256File } from '@cssearth/core/node';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli.mts';

@@ -28,7 +28,8 @@ import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { sha256 } from '@cssearth/core/node';
-import { fileSize, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { fileSize, readProductRecord, runDigest, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductInput, ProductRun } from '@cssearth/telescope';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);
 const ASTRONOMICAL_UNIT_KM = 149_597_870.7;

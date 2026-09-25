@@ -35,7 +35,8 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, productRecordPath } from '../product-record.mts';
+import { addProductEvidence } from '@cssearth/telescope/node';
+import { productRecordPath } from '@cssearth/telescope';
 import { PROGRAMS, readProgram } from './archive.mts';
 
 /** The two halves a nodded-spectroscopy set is split into: one template per night, so halves are what there is. */

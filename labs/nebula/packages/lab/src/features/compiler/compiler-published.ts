@@ -10,9 +10,9 @@ function producerPath(path: string): boolean {
   return /^labs\/nebula\/(?:src\/.+\.[cm]?tsx?|packages\/(?:lab|volume-core|volume-bake|reconstruction)\/(?:src\/.+\.[cm]?tsx?|package\.json))$/.test(path) ||
     /^src\/(?:preparation|renderers|platform)\/.+\.[cm]?ts$/.test(path) ||
     // The flat names and `tools/fits/` are pre-reorganization pins, kept because a recorded producer identity is history,
-    // not a path that still has to resolve; `packages/fits/` and `tools/sources/` are where those owners live now.
+    // not a path that still has to resolve; `packages/fits/`, `packages/telescope/` and `tools/sources/` are where those owners live now.
     /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:fits|sources)\/.+\.[cm]?ts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path) ||
-    /^packages\/fits\/(?:src\/.+\.ts|package\.json)$/.test(path);
+    /^packages\/(?:fits|telescope)\/(?:src\/.+\.ts|package\.json)$/.test(path);
 }
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {

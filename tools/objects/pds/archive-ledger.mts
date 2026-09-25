@@ -4,7 +4,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord } from '../product-record.mts';
+import { parseProductRecord } from '@cssearth/telescope';
 import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS } from './archive-final.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');

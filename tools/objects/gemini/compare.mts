@@ -36,8 +36,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, assertInputPins, productRecordPath, readProductRecord, sameRun,
-  type EvidenceKind, type ProductInput, type ProductRecord } from '../product-record.mts';
+import { addProductEvidence, assertInputPins, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRecord } from '@cssearth/telescope';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { currentProduct, rawDirectory, repositoryPath, stageDirectory, stageRun, STAGES,

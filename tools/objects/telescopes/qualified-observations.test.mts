@@ -5,7 +5,8 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { rememberQualification, loadQualifiedObservations } from './qualified-observations.mts';
-import { writeProductRecord, productRecordPath } from '../product-record.mts';
+import { writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath } from '@cssearth/telescope';
 import { PROFILE_ASSUMPTIONS } from '../resolution-evidence.mts';
 import { assessRequest } from './request-satisfaction.mts';
 test('qualification readback binds facts to the exact output, receipt and producing record', async () => {

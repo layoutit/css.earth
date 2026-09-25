@@ -10,7 +10,8 @@ import { GUIDE, HST_CONFIGURATIONS, isNotAnObject, LEDGER, ledgerGuide, matchTar
 import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
 import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
 import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from './compare.mts';
-import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { readHstFileHdus } from './product-file.mts';
 
 const REPOSITORY = join(import.meta.dirname, '../../..');

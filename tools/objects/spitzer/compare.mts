@@ -30,7 +30,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, assertInputPins, fileSize, readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { addProductEvidence, assertInputPins, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductInput, ProductRun } from '@cssearth/telescope';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
 

@@ -477,7 +477,7 @@ citation and the separate status of archive-data rights are recorded in
 ## The product record
 
 Every producing stage writes one `cssearth-telescope-product@1` record beside its output, named `<product>.product.json`
-([`tools/objects/product-record.mts`](../tools/objects/product-record.mts)). It holds:
+([`packages/telescope/src/product-record.ts`](../packages/telescope/src/product-record.ts)). It holds:
 
 | Field | What it states |
 | --- | --- |

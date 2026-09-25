@@ -3,7 +3,7 @@ import{sourceTest}from'../../../tests/objects/source-test.mts';const test=source
 import{copyFile,mkdtemp,readFile,rm,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
 import{resolve}from'node:path';
-import{readProductRecord}from'../product-record.mts';
+import { readProductRecord } from '@cssearth/telescope/node';
 import{member}from'./families/common.mts';
 import{describeFitsTable}from'./families/f08-table.mts';
 import{describeStandaloneSpectrum}from'./families/f03-spectrum.mts';

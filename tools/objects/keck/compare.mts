@@ -21,7 +21,8 @@ import { pathToFileURL } from 'node:url';
 import { positionalArguments, requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { assertInputPins, addProductEvidence, fileSize, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
+import { assertInputPins, addProductEvidence, fileSize, readProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductEvidence, type ProductInput } from '@cssearth/telescope';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
