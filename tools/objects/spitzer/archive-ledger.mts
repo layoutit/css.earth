@@ -24,16 +24,14 @@
  * checked only then. --write replaces data/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
  * repository's own state from the ledger already on disk, for when a program is pinned or a receipt written and nothing the
  * archive said has changed. */
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { firstSkyPosition } from '../archive-sky-position.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
+import { isCommand, ledgerFiles, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 
-export const LEDGER = resolve(REPOSITORY, 'data/spitzer/ledger.json');
-export const GUIDE = resolve(REPOSITORY, 'docs/spitzer-ledger.md');
 const SCHEMA = 'cssearth-spitzer-ledger@4';
 /** How many objects are asked at once. The archive's backend builds a temporary table for every question, so this stays small. */
 const CONCURRENCY = 4;
@@ -83,8 +81,8 @@ export function naifIdFromHorizonsCode(code: unknown): { naifId: number } | { re
 }
 
 /** Every object package, with the one question the archive can be asked about it. */
-export async function shippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
-  const ids = (await readdir(resolve(repository, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
+export async function spitzerShippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  const ids = (await shippedObjectIds(repository)).sort();
   const bodies = new Map<string, Record<string, unknown>>();
   for (const id of ids) { const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)); if (isRecord(body)) bodies.set(id, body); }
   const starPosition = (id: string): { raDeg: number; decDeg: number } | undefined => {
@@ -230,7 +228,7 @@ export async function surveyArchive(objects: readonly ShippedObject[]): Promise<
 
 export interface ArchiveSurvey { readonly holdings: readonly ObjectHoldings[]; readonly unanswered: readonly string[]; readonly searched: readonly string[] }
 
-export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSurvey, state: RepositoryState, archiveDate: string): Ledger {
+export function assembleSpitzerLedger(objects: readonly ShippedObject[], survey: ArchiveSurvey, state: RepositoryState, archiveDate: string): Ledger {
   const seen = new Map<string, number>();
   for (const entry of survey.holdings) for (const [mode, count] of Object.entries(entry.modes)) seen.set(mode, (seen.get(mode) ?? 0) + count);
   const known = new Set(SPITZER_MODES.map(entry => entry.mode));
@@ -243,7 +241,7 @@ export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSu
       pinnedPrograms: state.pinned.get(mode) ?? 0, checkedProducts: state.checked.get(mode) ?? 0,
       programs: [...(state.programs?.get(mode) ?? [])], checked: [...(state.checkedPrograms?.get(mode) ?? [])], receipts: [...(state.receipts?.get(mode) ?? [])] })),
   ].sort((a, b) => b.observationsForOurObjects - a.observationsForOurObjects || (a.mode < b.mode ? -1 : 1));
-  return parseLedger({
+  return parseSpitzerLedger({
     schema: SCHEMA, archiveDate, search: 'Spitzer Heritage Archive at IRSA', shippedObjects: objects.length,
     asked: objects.filter(object => object.query.kind !== 'none').length,
     notAsked: objects.filter(object => object.query.kind === 'none').map(object => ({ object: object.id, reason: (object.query as { reason: string }).reason })),
@@ -251,7 +249,7 @@ export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSu
   });
 }
 
-export function parseLedger(value: unknown): Ledger {
+export function parseSpitzerLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'Spitzer ledger');
   if (row.schema !== SCHEMA) throw new TypeError(`Unsupported Spitzer ledger schema ${String(row.schema)}.`);
   const counts = (raw: unknown): Record<string, number> => Object.fromEntries(Object.entries(requireRecord(raw, 'modes')).map(([mode, count]) => [mode, requireFiniteNumber(count, mode)]));
@@ -287,7 +285,7 @@ export function parseLedger(value: unknown): Ledger {
 const table = (header: readonly string[], rows: readonly (readonly string[])[]) =>
   [`| ${header.join(' | ')} |`, `| ${header.map(() => '---').join(' | ')} |`, ...rows.map(row => `| ${row.join(' | ')} |`)].join('\n');
 
-export function ledgerGuide(ledger: Ledger): string {
+export function spitzerLedgerGuide(ledger: Ledger): string {
   const galileans = ['io', 'europa', 'ganymede', 'callisto'];
   const observed = new Set(ledger.holdings.map(entry => entry.object));
   const missingGalileans = galileans.filter(id => !observed.has(id));
@@ -334,35 +332,20 @@ export function ledgerGuide(ledger: Ledger): string {
   ].join('\n');
 }
 
-/** Refresh repository-owned toolkit state without querying the archive again. Archive holdings and their measurement date
- * stay fixed; only pinned programs, checked products and their identities are recomputed from bytes and receipts here. */
-export async function refreshLocalLedger(): Promise<Ledger> {
-  const objects = await shippedObjects(), state = await repositoryState();
-  const previous = parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown);
-  const ledger = buildLedger(objects, { holdings: previous.holdings, unanswered: previous.unanswered, searched: previous.searched }, state, previous.archiveDate);
-  await mkdir(resolve(LEDGER, '..'), { recursive: true });
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, ledgerGuide(ledger));
-  return ledger;
-}
+/** The Spitzer ledger: the full pass and `--local` both write only with `--write`, and print otherwise. `--local` keeps the
+ * archive's holdings and their measurement date and retakes the object list, pinned programs and checked products.
+ * Receipt problems are not reported: a receipt that does not stand up counts for nothing in `repositoryState`. */
+export const SPITZER_LEDGER: ArchiveLedger<Ledger> = {
+  schema: SCHEMA,   files: ledgerFiles('data/spitzer/ledger.json', 'docs/spitzer-ledger.md'), indent: 2, guide: spitzerLedgerGuide,
+  survey: async () => { const objects = await spitzerShippedObjects(), state = await repositoryState();
+    return assembleSpitzerLedger(objects, await surveyArchive(objects), state, new Date().toISOString().slice(0, 10)); },
+  writes: 'with --write',
+  local: { parse: parseSpitzerLedger, writes: 'with --write', refresh: async previous => { const objects = await spitzerShippedObjects(), state = await repositoryState();
+    return assembleSpitzerLedger(objects, { holdings: previous.holdings, unanswered: previous.unanswered, searched: previous.searched }, state, previous.archiveDate); } },
+  summary: (ledger, { write }) => [...write ? [`Wrote ${SPITZER_LEDGER.files.ledger} and ${SPITZER_LEDGER.files.guide}.`] : [],
+    `${ledger.shippedObjects} objects shipped, ${ledger.asked} asked, ${ledger.holdings.length} with Spitzer observations, ${ledger.notAsked.length} not asked, ${ledger.unanswered.length} unanswered.`,
+    ...ledger.modes.filter(mode => mode.observationsForOurObjects).map(entry =>
+      `  ${entry.mode.padEnd(20)} ${String(entry.observationsForOurObjects).padStart(5)} observations, ${entry.pinnedPrograms} channels pinned, ${entry.checkedProducts} checked`)],
+};
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), write = args.includes('--write'), local = args.includes('--local');
-  const objects = await shippedObjects(), state = await repositoryState();
-  const ledger = local && write ? await refreshLocalLedger() : local
-    ? buildLedger(objects, { holdings: parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).holdings,
-      unanswered: parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).unanswered,
-      searched: parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).searched }, state, parseLedger(JSON.parse(await readFile(LEDGER, 'utf8')) as unknown).archiveDate)
-    : buildLedger(objects, await surveyArchive(objects), state, new Date().toISOString().slice(0, 10));
-  if (write) {
-    if (!local) {
-      await mkdir(resolve(LEDGER, '..'), { recursive: true });
-      await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-      await writeFile(GUIDE, ledgerGuide(ledger));
-    }
-    console.log(`Wrote ${LEDGER} and ${GUIDE}.`);
-  }
-  console.log(`${ledger.shippedObjects} objects shipped, ${ledger.asked} asked, ${ledger.holdings.length} with Spitzer observations, ${ledger.notAsked.length} not asked, ${ledger.unanswered.length} unanswered.`);
-  for (const entry of ledger.modes.filter(mode => mode.observationsForOurObjects))
-    console.log(`  ${entry.mode.padEnd(20)} ${String(entry.observationsForOurObjects).padStart(5)} observations, ${entry.pinnedPrograms} channels pinned, ${entry.checkedProducts} checked`);
-}
+if (isCommand(import.meta.url)) await runArchiveLedger(SPITZER_LEDGER);

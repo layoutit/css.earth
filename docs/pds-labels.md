@@ -1,6 +1,6 @@
 # PDS labels in preparation
 
-The shared [label helpers](../tools/objects/pds-labels.mts) read metadata used by
+The shared [label helpers](../packages/telescope/src/pds-labels.ts) in `@cssearth/telescope` read metadata used by
 image decoders and camera preparation. They do not decode image bytes or replace
 the product's identity, projection, calibration and source-hash checks.
 
@@ -57,7 +57,7 @@ helpers are not a general XML parser or namespace resolver and do not expand ent
 
 ## Checks
 
-[Label tests](../tools/objects/pds-labels.test.mts) exercise ambiguous scopes,
+[Label tests](../packages/telescope/src/pds-labels.test.ts) exercise ambiguous scopes,
 duplicates, quoted commas, multiline values, comments, malformed inputs and limits.
 They read the original tracked Tethys and Proteus labels for source-backed cases.
 [Calibration tests](../tools/objects/surface-observations/pds3-reflectance.test.mts)
@@ -67,8 +67,8 @@ pass corrupted offsets and projection fields through the actual decoder while
 retaining its existing exact RGB and missing-pixel expectations.
 
 ```bash
-node --test tools/objects/pds-labels.test.mts \
-  tools/objects/surface-observations/pds3-reflectance.test.mts \
+pnpm --filter @cssearth/telescope test
+node --test tools/objects/surface-observations/pds3-reflectance.test.mts \
   tools/objects/terrestrial-layers/observed-pds4.test.mts
 ```
 

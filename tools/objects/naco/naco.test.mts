@@ -8,12 +8,14 @@ import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAssociationTree } from '../interferometry/eso-associations.mts';
 import { parseRawTable } from '../interferometry/eso-pipeline.mts';
-import { evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { readProductRecord } from '@cssearth/telescope/node';
 import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles, type NacoFrame, type NacoProgram } from './archive.mts';
 import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRunner } from './reduce.mts';
 import { addComparisonEvidence, overlapOf, repositoryPath } from './compare.mts';
 import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
-import { bucketOf, ledgerGuide, matchShippedObject, observationsOf, parseTargetName, SCHEMA as LEDGER_SCHEMA } from './archive-ledger.mts';
+import { bucketOf, nacoLedgerGuide, observationsOf, NACO_LEDGER, NACO_TARGET_NAMES } from './archive-ledger.mts';
+import { matchNumberedTarget, parseNumberedTarget } from '../archives/targets.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
 import { median, supportOf, traceDirection, widthOf } from './spectrum.mts';
 
@@ -323,27 +325,27 @@ test('a comparison adds internal-consistency evidence to those records, and refu
 const SHIPPED = new Set(['europa', 'europa-52', 'eurykleia', 'ceres', 'io', 'io-85', 'titan', 'metis', 'metis-9']);
 
 test('a NACO target name is split into its minor-planet number, its name and its ephemeris stamp', () => {
-  assert.deepEqual(parseTargetName('EUROPA'), { number: null, name: 'EUROPA' });
-  assert.deepEqual(parseTargetName('52_EUROPA'), { number: 52, name: 'EUROPA' });
-  assert.deepEqual(parseTargetName('52EUROPA-26T0340'), { number: 52, name: 'EUROPA' });
-  assert.deepEqual(parseTargetName('195EURYKLEIA-26T0400'), { number: 195, name: 'EURYKLEIA' });
-  assert.deepEqual(parseTargetName('JUPITER-3H40'), { number: null, name: 'JUPITER' });
+  assert.deepEqual(parseNumberedTarget('EUROPA', NACO_TARGET_NAMES), { number: null, name: 'EUROPA' });
+  assert.deepEqual(parseNumberedTarget('52_EUROPA', NACO_TARGET_NAMES), { number: 52, name: 'EUROPA' });
+  assert.deepEqual(parseNumberedTarget('52EUROPA-26T0340', NACO_TARGET_NAMES), { number: 52, name: 'EUROPA' });
+  assert.deepEqual(parseNumberedTarget('195EURYKLEIA-26T0400', NACO_TARGET_NAMES), { number: 195, name: 'EURYKLEIA' });
+  assert.deepEqual(parseNumberedTarget('JUPITER-3H40', NACO_TARGET_NAMES), { number: null, name: 'JUPITER' });
 });
 
 test('a numbered target never matches the body that shares its name', () => {
   // The clash that matters: Jupiter's moon and the main-belt asteroid are two bodies with one name.
-  assert.equal(matchShippedObject('EUROPA', SHIPPED), 'europa');
-  assert.equal(matchShippedObject('52_EUROPA', SHIPPED), 'europa-52');
-  assert.equal(matchShippedObject('52EUROPA-26T0340', SHIPPED), 'europa-52');
-  assert.equal(matchShippedObject('IO', SHIPPED), 'io');
-  assert.equal(matchShippedObject('85_IO', SHIPPED), 'io-85');
-  assert.equal(matchShippedObject('9_METIS', SHIPPED), 'metis-9');
-  assert.equal(matchShippedObject('METIS', SHIPPED), 'metis');
+  assert.equal(matchNumberedTarget('EUROPA', SHIPPED, NACO_TARGET_NAMES), 'europa');
+  assert.equal(matchNumberedTarget('52_EUROPA', SHIPPED, NACO_TARGET_NAMES), 'europa-52');
+  assert.equal(matchNumberedTarget('52EUROPA-26T0340', SHIPPED, NACO_TARGET_NAMES), 'europa-52');
+  assert.equal(matchNumberedTarget('IO', SHIPPED, NACO_TARGET_NAMES), 'io');
+  assert.equal(matchNumberedTarget('85_IO', SHIPPED, NACO_TARGET_NAMES), 'io-85');
+  assert.equal(matchNumberedTarget('9_METIS', SHIPPED, NACO_TARGET_NAMES), 'metis-9');
+  assert.equal(matchNumberedTarget('METIS', SHIPPED, NACO_TARGET_NAMES), 'metis');
   // A numbered target with no numbered id is not the bare body, and is not matched at all.
-  assert.equal(matchShippedObject('195EURYKLEIA-26T0400', SHIPPED), null);
-  assert.equal(matchShippedObject('5012EURYMEDO-25', SHIPPED), null);
-  assert.equal(matchShippedObject('OBJECT NAME NOT SET', SHIPPED), null);
-  assert.equal(matchShippedObject('', SHIPPED), null);
+  assert.equal(matchNumberedTarget('195EURYKLEIA-26T0400', SHIPPED, NACO_TARGET_NAMES), null);
+  assert.equal(matchNumberedTarget('5012EURYMEDO-25', SHIPPED, NACO_TARGET_NAMES), null);
+  assert.equal(matchNumberedTarget('OBJECT NAME NOT SET', SHIPPED, NACO_TARGET_NAMES), null);
+  assert.equal(matchNumberedTarget('', SHIPPED, NACO_TARGET_NAMES), null);
 });
 
 test('a technique falls in exactly one ledger bucket, and the refused ones keep their own', () => {
@@ -382,7 +384,7 @@ test('observations group by shipped object and keep both spellings of a name', (
 
 test('the ledger on disk is the one the guide states, and its states come from the programs beside it', async () => {
   const ledger = requireRecord(JSON.parse(await readFile(resolve(import.meta.dirname, '../../../data/naco/ledger.json'), 'utf8')) as unknown, 'ledger.json');
-  assert.equal(ledger.schema, LEDGER_SCHEMA);
+  assert.equal(ledger.schema, NACO_LEDGER.schema);
   assert.equal(ledger.instrument, 'NAOS+CONICA');
   const modes = requireArray(ledger.modes, 'modes').map(item => requireRecord(item, 'mode'));
   const programs = await readdir(resolve(import.meta.dirname, 'programs'));
@@ -397,7 +399,7 @@ test('the ledger on disk is the one the guide states, and its states come from t
   }
   // The guide is generated from the ledger, so regenerating it from the same ledger must reproduce the file on disk.
   const guide = await readFile(resolve(import.meta.dirname, '../../../docs/naco-ledger.md'), 'utf8');
-  assert.equal(ledgerGuide(ledger as never), guide);
+  assert.equal(nacoLedgerGuide(ledger as never), guide);
 });
 
 // --- the spectroscopy receipt ------------------------------------------------------------------------------------------

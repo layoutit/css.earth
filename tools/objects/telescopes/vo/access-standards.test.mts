@@ -3,10 +3,10 @@ import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { astroquery } from '@cssearth/telescope/node';
 import { planAccess, sodaParameters, type MetadataLoader } from './access.mts';
 import type { CapabilityRequest } from '../recipe-request.mts';
-import { jsonValue, parseLimits, type DiscoverySnapshot, type Json, type MetadataResponse, type Resource } from './contracts.mts';
+import { jsonValue, parseLimits, type DiscoverySnapshot, type Json, type MetadataResponse, type Resource } from '@cssearth/telescope/node';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
 const test = sourceTest();
 

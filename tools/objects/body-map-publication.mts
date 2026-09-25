@@ -13,7 +13,8 @@ import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/
 import { supportsMeasuredResolution } from './resolution-evidence.mts';
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from './body-map-product.mts';
-import { parseProductRecord, productRecordPath, runDigest, sameRun, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from './product-record.mts';
+import { parseProductRecord, productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
+import { runDigest, sameRun } from '@cssearth/telescope/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ConstraintVerdict, type ObservationSelection } from './telescopes/query.mts';
 
 export const BODY_MAP_PUBLICATION_STAGE = 'body-map';

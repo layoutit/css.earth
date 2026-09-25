@@ -9,7 +9,7 @@
  * start, which checks the trajectory reader against a source that shares none of its code. Nothing external runs here:
  * the reader, the cameras and the fit are this repository's TypeScript.
  *
- * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, tools/objects/product-record.mts):
+ * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope/src/product-record.ts):
  * the images and kernels it read at their pinned sizes and digests, the policy the fit was held to, and the digest of the
  * modules that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
@@ -17,7 +17,8 @@ import { sha256 } from '@cssearth/core/node';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { addProductEvidence, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { loadKernelSet, type KernelSet } from '../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 import { numbers } from '../../spice/text-kernel.mts';
@@ -26,7 +27,7 @@ import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
 import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
-import { astroqueryRows } from '../astronomy-packages/client.mts';
+import { astroqueryRows } from '@cssearth/telescope/node';
 import { flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';

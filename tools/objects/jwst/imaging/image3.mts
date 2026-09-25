@@ -24,8 +24,8 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, productRecordPath, readProductRecord, sameRun, writeProductRecord,
-  type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '../../product-record.mts';
+import { addProductEvidence, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
 import { freeMemoryPercent, mastFile, toolchainPython, type MastFile } from '../mast.mts';
 import { parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';

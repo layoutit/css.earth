@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
 import type { EurekaToolchain } from './toolchain.mts';
 
-export { MAST_CACHE, exists, mastDownloadUrl, mastFile, mastRequest, mastService, type MastFile } from '../astronomy-packages/mast.mts';
+export { MAST_CACHE, exists, mastDownloadUrl, mastFile, mastRequest, mastService, type MastFile } from '@cssearth/telescope/node';
 
 /** The free-memory percentage macOS reports; a heavy stage does not start below half. */
 export function freeMemoryPercent() {

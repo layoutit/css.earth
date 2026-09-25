@@ -32,8 +32,8 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { positionalArguments } from '@cssearth/core';
-import { assertInputPins, productRecordPath, readProductRecord, sameRun, writeProductRecord,
-  type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { assertInputPins, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';
 import { keckToolchain, keckToolchainDigest, type KeckToolchain } from './toolchain.mts';
 

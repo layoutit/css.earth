@@ -3,12 +3,13 @@ import { dirname, resolve } from 'node:path';
 import { mkdir, readFile, writeFile, copyFile, rename, rm } from 'node:fs/promises';
 import { sha256File } from '@cssearth/core/node';
 import { randomUUID } from 'node:crypto';
-import { fileSize, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../../product-record.mts';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductRun } from '@cssearth/telescope';
+import { astroquery } from '@cssearth/telescope/node';
 import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
-import { acquisitionKey, canonical, digest, jsonValue, parseLimits, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from './contracts.mts';
+import { acquisitionKey, canonical, digest, jsonValue, parseLimits, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from '@cssearth/telescope/node';
 import type { DiscoveredObservation, DiscoveryRequest } from './discovery.mts';
 import { voUrl, type VoNetworkPolicy } from './network-policy.mts';
 
@@ -35,7 +36,7 @@ export function nativeQualificationRoute(spec: AcquisitionSpec): 'raster' | 'f08
 const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
 function supportedKind(value: string | null): value is AcquisitionSpec['kind'] { return value !== null && (PRODUCT_KINDS as readonly string[]).includes(value); }
 async function implementation(): Promise<string> {
-  return digest(await Promise.all(['./access.mts', './content.mts', './package.mts', './contracts.mts', './discovery.mts', './network-policy.mts', '../../astronomy-packages/client.mts', '../../astronomy-packages/requirements.lock']
+  return digest(await Promise.all(['./access.mts', './content.mts', './package.mts', '../../../../packages/telescope/src/node/vo-contracts.ts', './discovery.mts', './network-policy.mts', '../../../../packages/telescope/src/node/astroquery.ts', '../../../../packages/telescope/toolchains/requirements.lock']
     .map(path => readFile(new URL(path, import.meta.url), 'utf8'))));
 }
 export function mediaType(value: string | null): { type: string; parameters: Readonly<Record<string, string>> } | null {

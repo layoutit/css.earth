@@ -1,8 +1,8 @@
 /** Exact sparse planetary support. This owns no gridding, interpolation, inversion, or volume construction. */
 import type { CalibrationDescriptor, DescriptorMember, FrameDescriptor, ObservabilityDescriptor, ProductDescriptor, QuantityDescriptor, SupportDescriptor } from '../../product-descriptor.mts';
 import type { FamilyHandler, FamilyOperation } from '../../family-handlers.mts';
-import { pds3Values } from '../../../pds3-labels.mts';
-import { pds4Elements, pds4Field, pds4Number } from '../../../pds-labels.mts';
+import { pds3Values } from '@cssearth/telescope';
+import { pds4Elements, pds4Field, pds4Number } from '@cssearth/telescope';
 import { csv, descriptor, stable } from '../common.mts';
 import { requireFiniteNumber as finite } from '@cssearth/core';
 

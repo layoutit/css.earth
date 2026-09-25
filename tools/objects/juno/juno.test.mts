@@ -5,9 +5,11 @@ import { join, resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { kernelBankRoot } from '../../spice/kernel-bank.mts';
-import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
-import { GUIDE, LEDGER, SCHEMA, castingObjects, holdings, ledgerGuide, matchShippedObject, measuredPrograms, objectStates, shippedObjects, type Ledger } from './archive-ledger.mts';
+import { castingObjects, holdings, junoCamLedgerGuide, junoTargetObject, measuredPrograms, objectStates, type Ledger, JUNO_LEDGER } from './archive-ledger.mts';
+import { shippedObjectIds } from '../archives/ledger.mts';
 import { POLICY, RECEIPT_SCHEMA, addRegistrationEvidence, ellipsoidMesh, registrationRun, registrationSoftware } from './measure.mts';
 
 // Two lines of JNOJNC_0024/INDEX/INDEX.TAB as the PDS serves them, and a methane image made from the second.
@@ -50,7 +52,7 @@ test('holdings count calibrated images by target, and an object\'s state follows
   const held = holdings(rows, new Set(['europa', 'io']), 675.4);
   assert.deepEqual(held.byFilterCombination, { C: 1, M: 1 }); assert.equal(held.calibratedImages, 2);
   assert.deepEqual(held.targets, [{ target: 'EUROPA', images: 2, colourImages: 1, orbits: [45], lowestAltitudeKm: 1515.1, finestNadirPixelKm: 1.023299, objectId: 'europa' }]);
-  assert.equal(matchShippedObject('J RINGS', new Set(['jupiter'])), null); assert.equal(matchShippedObject('Io ', new Set(['io'])), 'io');
+  assert.equal(junoTargetObject('J RINGS', new Set(['jupiter'])), null); assert.equal(junoTargetObject('Io ', new Set(['io'])), 'io');
   const measured = [{ program: 'europa-pj45', target: 'EUROPA', images: 4 }];
   assert.equal(objectStates(held.targets, measured, ['europa'])[0]!.state, 'cast');
   assert.deepEqual(objectStates(held.targets, measured, []).map(o => [o.state, o.measuredImages, o.programs]), [['measured', 4, ['europa-pj45']]]);
@@ -129,10 +131,10 @@ test('every pinned program has a receipt for exactly its images, from its kernel
 });
 
 test('the ledger page is the ledger, and its states are what the programs, receipts and packages give', async () => {
-  const ledger = JSON.parse(await readFile(LEDGER, 'utf8')) as Ledger;
-  assert.equal(ledger.schema, SCHEMA);
-  assert.equal(await readFile(GUIDE, 'utf8'), ledgerGuide(ledger), 'docs/junocam-ledger.md is generated; run node tools/objects/juno/archive-ledger.mts');
-  assert.deepEqual(ledger.objects, objectStates(ledger.targets, await measuredPrograms(), await castingObjects(await shippedObjects())));
+  const ledger = JSON.parse(await readFile(JUNO_LEDGER.files.ledger, 'utf8')) as Ledger;
+  assert.equal(ledger.schema, JUNO_LEDGER.schema);
+  assert.equal(await readFile(JUNO_LEDGER.files.guide, 'utf8'), junoCamLedgerGuide(ledger), 'docs/junocam-ledger.md is generated; run node tools/objects/juno/archive-ledger.mts');
+  assert.deepEqual(ledger.objects, objectStates(ledger.targets, await measuredPrograms(), await castingObjects(new Set(await shippedObjectIds()))));
   assert.equal(ledger.calibratedImages, Object.values(ledger.byFilterCombination).reduce((sum, n) => sum + n, 0));
   assert.equal(ledger.targets.reduce((sum, entry) => sum + entry.images, 0), ledger.calibratedImages);
 });

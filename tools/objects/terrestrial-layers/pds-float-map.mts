@@ -2,7 +2,7 @@ import {parseFloatMapGrid,parseFloatMapLens} from './source-records.mts';
 import {readFile} from 'node:fs/promises';
 import {basename,resolve} from 'node:path';
 import {gunzipSync} from 'node:zlib';
-import {pds3Keyword} from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 
 /** Formal PDS3 scalar maps: 32-bit floats in a spherical, unrotated equirectangular projection, with an attached
  * label or a detached one beside the image. Byte order, west/east convention, latitude extent and missing value all

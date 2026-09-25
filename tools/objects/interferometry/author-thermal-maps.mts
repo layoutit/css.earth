@@ -34,7 +34,7 @@ import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyM
 import { sha256 } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from '../jwst/cubes/body-map.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
-import type { ProductInput, ProductSoftware } from '../product-record.mts';
+import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;

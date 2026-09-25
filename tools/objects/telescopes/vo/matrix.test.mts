@@ -4,10 +4,10 @@ const test = sourceTest();
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { astroquery } from '@cssearth/telescope/node';
 import { choiceKey } from '../session.mts';
 import { planAccess } from './access.mts';
-import { recordKey, type DiscoverySnapshot, type MetadataResponse } from './contracts.mts';
+import { recordKey, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
 
 const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');

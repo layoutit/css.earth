@@ -255,7 +255,7 @@
         "test": "tools/objects/telescopes/family-operation.test.mts",
         "assertion": "The public dispatcher reopens the UVFITS result and package-owned transparent PNG/SVG preview."
       },
-      "owner": "tools/objects/astronomy-packages/client.mts#pyuvdataUvfits",
+      "owner": "packages/telescope/src/node/pyuvdata.ts#pyuvdataUvfits",
       "independentCheck": "tools/objects/telescopes/families/f11-measurement-set.test.mts",
       "limit": "Pinned VLA UVFITS profile through pyuvdata 3.2.4; this is uncalibrated visibility data and does not claim a CASA Measurement Set or synthesized image."
     },

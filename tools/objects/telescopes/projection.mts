@@ -3,13 +3,14 @@ import { readFile, writeFile, mkdir, rm, rmdir, rename } from 'node:fs/promises'
 import { resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { fileSize, type ProductInput } from '../product-record.mts';
+import { fileSize } from '@cssearth/telescope/node';
+import type { ProductInput } from '@cssearth/telescope';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import { sha256, sha256File } from '@cssearth/core/node';
-import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
-import { projectWithPlanetMapper } from '../astronomy-packages/projection.mts';
-import { canonical } from './vo/contracts.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
+import { projectWithPlanetMapper } from '@cssearth/telescope/node';
+import { canonical } from '@cssearth/telescope/node';
 import { sourceContext } from './delivery-context.mts';
 import { delivery } from './outputs.mts';
 import { localOutput, verifiedProduct } from './verified-product.mts';
@@ -79,7 +80,7 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
     assertBodyMapPlanes(plane,product);const bytes=Buffer.from(JSON.stringify(product,null,2)+'\n');await writeFile(resolve(staging,'map.fits.body-map.json'),bytes);
     await writeFile(resolve(staging,'navigation.json'),JSON.stringify({...nav,sourceContext:context,sourceResolution:{angularResolutionArcsec:facts.angularResolutionArcsec??null,evidence:facts.resolutionEvidence??[]},publication:'not-evaluated'},null,2)+'\n');
     const names=['navigation.json','texture.png','poles.png','figure.png'],extras=await Promise.all(names.map(async path=>({path,bytes:await readFile(resolve(staging,path))})));
-    const implementation=sha256(Buffer.concat(await Promise.all(['projection.mts','../astronomy-packages/projection.mts','../body-map-product.mts','../body-map-publication.mts'].map(path=>readFile(new URL(path,import.meta.url))))));
+    const implementation=sha256(Buffer.concat(await Promise.all(['projection.mts','../../../packages/telescope/src/node/projection.ts','../body-map-product.mts','../body-map-publication.mts'].map(path=>readFile(new URL(path,import.meta.url))))));
     const software=[{name:'cssEarth projection',version:implementation},...Object.entries(requireRecord(nav.software)).map(([name,v])=>({name,version:requireString(v)}))];
     const record=bodyMapProductRecord(product,plane,bytes,inputs,software,(await astroqueryToolchain()).digest,extras);
     await checkPins(inputs);await writeFile(resolve(staging,'map.fits.product.json'),formatProductRecord(record));

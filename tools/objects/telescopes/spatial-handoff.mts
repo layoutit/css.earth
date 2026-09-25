@@ -6,7 +6,8 @@ import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
-import { writeProductRecord,type ProductInput } from '../product-record.mts';
+import { writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductInput } from '@cssearth/telescope';
 
 export type SpatialKind='points'|'volume'|'volume-lens-bank';
 type SpatialPayload =

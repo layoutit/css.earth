@@ -45,6 +45,9 @@ importers:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:packages/objects
+      '@cssearth/telescope':
+        specifier: workspace:*
+        version: link:packages/telescope
       '@cssearth/volume-bake':
         specifier: workspace:*
         version: link:labs/nebula/packages/volume-bake
@@ -337,7 +340,24 @@ importers:
         specifier: ^3.1.1
         version: 3.2.7(@types/debug@4.1.13)(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
 
-  packages/telescope: {}
+  packages/telescope:
+    dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@types/node':
+        specifier: ^26.4.0
+        version: 26.4.0
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.2.7(@types/debug@4.1.13)(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
 
 packages:
 

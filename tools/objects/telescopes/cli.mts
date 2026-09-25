@@ -14,7 +14,7 @@ import { exportSpatialObject } from './spatial-handoff.mts';
 import { exportOutput, validateOutputRequest, type OutputChoice, type OutputRequest } from './outputs.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import type { SourceRelevance } from './source-relevance.mts';
-import type { ProductSoftware } from '../product-record.mts';
+import type { ProductSoftware } from '@cssearth/telescope';
 import type { SourceProcessingSoftware } from './source-product-contract.mts';
 import { projectOutput } from './projection.mts';
 import { exportSphere } from './sphere/sphere.mts';

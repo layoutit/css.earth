@@ -1,5 +1,5 @@
 import type { ResolutionAssumption } from '../resolution-evidence.mts';
-import { parseLimits, parseRegion } from './vo/contracts.mts';
+import { parseLimits, parseRegion } from '@cssearth/telescope/node';
 /** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import { requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 export function inputWavelengths(request: CapabilityRequest): readonly [number,number] {
@@ -23,9 +23,9 @@ export type RequestedResult = typeof REQUESTED_RESULTS[number];
 
 
 export interface CapabilityRequest {
-  readonly region?: import('./vo/contracts.mts').IcrsCircle;
+  readonly region?: import('@cssearth/telescope/node').IcrsCircle;
   readonly spectralFrame?: 'barycentric';
-  readonly transferLimits?: import('./vo/contracts.mts').TransferLimits;
+  readonly transferLimits?: import('@cssearth/telescope/node').TransferLimits;
   readonly continuumMicrometres?: readonly [readonly [number,number],readonly [number,number]];
   readonly acceptedAssumptions?: readonly ResolutionAssumption[];
   readonly target: string;

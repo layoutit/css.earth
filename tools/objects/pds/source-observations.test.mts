@@ -15,7 +15,7 @@ test('source-pinned Wild 2 PDS3 images enter the PDS adapter without inventing a
 });
 
 test('ordinal UTC is validated without requiring a product processing-level field',async()=>{
- const {pds3TimeIso}=await import('../pds-labels.mts');
+ const {pds3TimeIso}=await import('@cssearth/telescope');
  assert.equal(pds3TimeIso('2004-163T16:09:09.703'),'2004-06-11T16:09:09.703Z');
  assert.throws(()=>pds3TimeIso('2003-366T00:00:00'),/day of year/);
  for(const target of ['phoebe','tethys']){

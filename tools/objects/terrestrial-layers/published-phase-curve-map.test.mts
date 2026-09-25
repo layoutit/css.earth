@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
 import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { starryMapGrid, starrySystemFlux } from '../astronomy-packages/starry.mts';
+import { starryMapGrid, starrySystemFlux } from '@cssearth/telescope/node';
 import { mapPhaseCurve, mirrorGrid, type EmissionGrid } from '../eclipse-map/phase-curve.mts';
 import { brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve,
   sinusoidMap } from './published-phase-curve-map.mts';

@@ -1,7 +1,7 @@
 import {requireRecord} from '@cssearth/core';
 import { gunzipSync } from 'node:zlib';
 import { readFitsPrimary } from '@cssearth/fits';
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 
 const field = (label: string, key: string) => {
   const value = pds3Keyword(label, key);

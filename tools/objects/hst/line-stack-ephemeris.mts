@@ -14,7 +14,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { requireRecord, requireString } from '@cssearth/core';
 import type { StackHorizons } from './line-stack-reduction.mts';
-import { astroqueryText } from '../astronomy-packages/client.mts';
+import { astroqueryText } from '@cssearth/telescope/node';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const DEGREE = Math.PI / 180;

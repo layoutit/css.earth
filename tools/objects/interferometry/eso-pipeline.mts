@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '@cssearth/fits';
-import { tapRows } from '../astronomy-packages/client.mts';
+import { tapRows } from '@cssearth/telescope/node';
 
 export type RawRow = Readonly<Record<string, string>>;
 

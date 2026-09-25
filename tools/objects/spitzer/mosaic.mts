@@ -20,7 +20,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
+import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductInput, ProductRecord, ProductRun } from '@cssearth/telescope';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';
 

@@ -2,7 +2,7 @@ import {parseGeoImageEntry,parsePdsRgbPolicy} from './source-records.mts';
 import {text} from '@cssearth/core';
 import { spawn } from 'node:child_process';
 import { prepareProjectedByteObservation } from './observed-image.mts';
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 
 /** Decode an attached PDS3 RGB image without treating its three BSQ planes as gray.
  * ZIP extraction streams into one RGB buffer; projection and masking remain shared.

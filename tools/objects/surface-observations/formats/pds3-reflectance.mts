@@ -1,4 +1,4 @@
-import { pds3Keyword, pds3Values } from '../../pds-labels.mts';
+import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 
 /** Archive-specific evidence for the calibrated VICAR band-colour lane. */
 export function pds3LabelHasReflectance(label: string): boolean {

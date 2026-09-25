@@ -27,7 +27,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { tapRows } from '../astronomy-packages/client.mts';
+import { tapRows } from '@cssearth/telescope/node';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 export const TAP = 'https://cda.cfa.harvard.edu/cxctap';

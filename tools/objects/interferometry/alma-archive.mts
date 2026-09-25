@@ -10,7 +10,7 @@
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryRows } from '../astronomy-packages/client.mts';
+import { astroqueryRows } from '@cssearth/telescope/node';
 
 export interface DatalinkRow { readonly id: string; readonly url: string; readonly semantics: string; readonly description: string; readonly contentType: string; readonly bytes: number | null; readonly serviceDef: string }
 export interface MemberProducts {

@@ -1,15 +1,15 @@
 /** One readback owner for native source files and reducer products. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sciencePackage } from '../astronomy-packages/science.mts';
+import { sciencePackage } from '@cssearth/telescope/node';
 import { isisMetadata, pdsMetadata, parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
 import { calibrationDependencies, verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import { parseProductFacts } from './qualified-observations.mts';
-import { fileSize } from '../product-record.mts';
+import { fileSize } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
-export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown; readonly region?: import('./vo/contracts.mts').IcrsCircle }
+export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown; readonly region?: import('@cssearth/telescope/node').IcrsCircle }
 function intersection(left:readonly (readonly [number,number])[],right:readonly (readonly [number,number])[]): [number,number][] {
   return left.flatMap(([a,b])=>right.flatMap(([c,d])=>Math.max(a,c)<=Math.min(b,d)?[[Math.max(a,c),Math.min(b,d)] as [number,number]]:[]));
 }

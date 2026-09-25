@@ -17,7 +17,7 @@
  * estimate the sky for itself measures something else and shifts every pixel by it. Only a product whose exposure records no
  * subtracted sky is attempted, and it is drizzled with the sky step off.
  *
- * Beside every product it writes, the run writes its own record (`<product>.product.json`, tools/objects/product-record.mts):
+ * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope/src/product-record.ts):
  * what went in (this run's calibrated exposure, and the archive files whose headers stated the settings and the sky), the
  * settings themselves, the drizzlepac and CRDS versions the run reported, and the digest of the toolchain pins they were
  * installed from. Its evidence list is empty; compare.mts adds the agreement with the archive's own drizzled product. */
@@ -26,9 +26,10 @@ import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastFile } from '../astronomy-packages/mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
-import { fileSize, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { hstSoftware, hstToolchainDigest, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
 import { hstToolchain } from './toolchain.mts';

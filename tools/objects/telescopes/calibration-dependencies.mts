@@ -2,7 +2,7 @@
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { dirname, resolve, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
-import { fileSize } from '../product-record.mts';
+import { fileSize } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 export interface CalibrationDependency {

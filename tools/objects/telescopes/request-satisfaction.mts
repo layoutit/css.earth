@@ -6,7 +6,7 @@ import type { CapabilityRequest, ProductKind, RequestedResult } from './recipe-r
 import type { ConstraintVerdict } from './query.mts';
 import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '../resolution-evidence.mts';
 export interface ProductFacts {
-  readonly regionCoverage?: { readonly region: import('./vo/contracts.mts').IcrsCircle; readonly answer: 'partial' | 'unknown'; readonly reason: string; readonly usablePixelCenters: number; readonly invalidPixelCenters: number };
+  readonly regionCoverage?: { readonly region: import('@cssearth/telescope/node').IcrsCircle; readonly answer: 'partial' | 'unknown'; readonly reason: string; readonly usablePixelCenters: number; readonly invalidPixelCenters: number };
   readonly nativeMetadata?: NativeMetadata;
   readonly calibrationDependencies?: readonly CalibrationDependency[];
   readonly verified: boolean;

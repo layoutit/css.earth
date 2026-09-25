@@ -1,11 +1,11 @@
 /** Live, bounded source identities from existing Chandra and Spitzer archive owners. */
-import { observationsOf, shippedObjects as chandraObjects } from '../chandra/archive-ledger.mts';
+import { observationsOf, chandraShippedObjects as chandraObjects } from '../chandra/archive-ledger.mts';
 import { cxcQuery, TAP as CHANDRA_TAP } from '../chandra/archive.mts';
-import { observationRecords, shippedObjects as spitzerObjects } from '../spitzer/archive-ledger.mts';
+import { observationRecords, spitzerShippedObjects as spitzerObjects } from '../spitzer/archive-ledger.mts';
 import { SEARCH as SPITZER_SEARCH, shaSearch } from '../spitzer/archive.mts';
 import { leadTime, saveArchiveLeadEvidence, type ArchiveLeadFilter, type ArchiveLeadService, type ChandraSourceLead, type SpitzerSourceLead } from './archive-leads.mts';
 import type { TargetCatalogueEntry } from './targets.mts';
-import type { IcrsCircle } from './vo/contracts.mts';
+import type { IcrsCircle } from '@cssearth/telescope/node';
 
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
 const LIMIT = 100;

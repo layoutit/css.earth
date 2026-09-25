@@ -33,7 +33,7 @@ import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyM
 import { sha256, sha256File } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from './body-map.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
-import type { ProductInput, ProductSoftware } from '../../product-record.mts';
+import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';

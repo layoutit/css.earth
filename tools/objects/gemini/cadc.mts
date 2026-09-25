@@ -18,7 +18,7 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { sha256File } from '@cssearth/core/node';
 import { requireString } from '@cssearth/core';
-import { tapRows } from '../astronomy-packages/client.mts';
+import { tapRows } from '@cssearth/telescope/node';
 
 export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus';
 export const CADC_FILES = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/raven/files';

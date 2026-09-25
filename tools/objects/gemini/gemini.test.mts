@@ -13,9 +13,9 @@ import { ditherHalf, ourCalibrations, stagePlan, stageRequires, stageRun, PRODUC
 import { archiveMasterPin, binning, checkAgainstArchive, compareOnDetector, overlapAt, parseSection, scienceExtensions,
   skyToPixel, statistics, storedOrigin,
   wcsShift, type Wcs } from './compare.mts';
-import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, matchShippedObject, observationsOf, parseTargetName,
-  RECEIPT_SCHEMA, type Ledger, type MoonRow } from './archive-ledger.mts';
-import { PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
+import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, observationsOf, RECEIPT_SCHEMA, type Ledger, type MoonRow, GEMINI_TARGET_NAMES } from './archive-ledger.mts';
+import { matchNumberedTarget, parseNumberedTarget } from '../archives/targets.mts';
+import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { sha256File } from '@cssearth/core/node';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -252,13 +252,13 @@ test('two products that share no finite sample are refused, not reported as agre
 
 test('a target name is matched to a shipped body only when its number agrees', () => {
   const shipped = new Set(['europa', 'europa-52', 'comet-3i']);
-  assert.equal(matchShippedObject('Europa', shipped), 'europa');
-  assert.equal(matchShippedObject('Europa.eph', shipped), 'europa');
-  assert.equal(matchShippedObject('52 Europa', shipped), 'europa-52');
+  assert.equal(matchNumberedTarget('Europa', shipped, GEMINI_TARGET_NAMES), 'europa');
+  assert.equal(matchNumberedTarget('Europa.eph', shipped, GEMINI_TARGET_NAMES), 'europa');
+  assert.equal(matchNumberedTarget('52 Europa', shipped, GEMINI_TARGET_NAMES), 'europa-52');
   // A numbered target is never the bare body, even when the bare id exists.
-  assert.equal(matchShippedObject('195 Eurykleia', shipped), null);
-  assert.deepEqual(parseTargetName('52_EUROPA'), { number: 52, name: 'EUROPA' });
-  assert.deepEqual(parseTargetName('Europa.eph'), { number: null, name: 'EUROPA' });
+  assert.equal(matchNumberedTarget('195 Eurykleia', shipped, GEMINI_TARGET_NAMES), null);
+  assert.deepEqual(parseNumberedTarget('52_EUROPA', GEMINI_TARGET_NAMES), { number: 52, name: 'EUROPA' });
+  assert.deepEqual(parseNumberedTarget('Europa.eph', GEMINI_TARGET_NAMES), { number: null, name: 'EUROPA' });
 });
 
 test('an acquisition frame is counted apart from an observation', () => {

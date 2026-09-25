@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import type { CapabilityRequest } from './recipe-request.mts';
 import { assessFamilyRequest, normalizeFamilyRequest } from './family-request.mts';
 import { describeDegreeLinearPolarization, describeStokesFits } from './families/f13-polarimetry.mts';

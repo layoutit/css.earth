@@ -28,8 +28,9 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, productRecordPath, readProductRecord, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
-import { astroqueryRows } from '../astronomy-packages/client.mts';
+import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/telescope';
+import { astroqueryRows } from '@cssearth/telescope/node';
 import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainPython } from '../jwst/mast.mts';

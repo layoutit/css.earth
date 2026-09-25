@@ -12,7 +12,7 @@
  * the lock, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
  * `micromamba`). */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from '../toolchain-process.mts';
+import { runToolchainProcess } from '@cssearth/telescope/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

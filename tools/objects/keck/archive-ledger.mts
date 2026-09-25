@@ -17,20 +17,17 @@
  * `52 Europa`. It is reduced to letters and digits, and a name carrying a minor-planet number matches only an id that carries
  * the same number, so 52 Europa is never Jupiter's moon. Only `koaimtyp='object'` rows count: a pointing, bias or flat frame
  * is not an observation of the object. */
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { isRecord, requireRecord } from '@cssearth/core';
-import { readProductRecord } from '../product-record.mts';
+import { readProductRecord } from '@cssearth/telescope/node';
 import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';
+import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
+import { normaliseTargetName } from '../archives/targets.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
-export const OBJECTS = resolve(REPOSITORY, 'src/objects');
-export const LEDGER = resolve(REPOSITORY, 'data/keck/ledger.json');
-export const GUIDE = resolve(REPOSITORY, 'docs/keck-ledger.md');
-export const SCHEMA = 'cssearth-keck-ledger@1';
+const SCHEMA = 'cssearth-keck-ledger@1';
 
 /** Why an instrument's frames can or cannot be re-reduced here, and where that was checked. An entry is a statement about
  * software, not about this toolkit's progress: whether a pipeline exists, is open, and runs without commercial software. The
@@ -55,9 +52,6 @@ export const REDUCTION_STATE: Readonly<Record<InstrumentTable, { readonly pipeli
 /** The one table KOA cannot count for an anonymous caller; its rows are reported as uncounted rather than as zero. */
 export const UNCOUNTABLE: readonly InstrumentTable[] = ['koa_guider'];
 
-/** A target name reduced to letters and digits, so `Europa___ 05-47` and `EUROPA` are one name. */
-export const normalise = (name: string) => name.toUpperCase().replace(/[^A-Z0-9]/gu, '');
-
 /** What a KOA observer's target name may be, longest first.
  *
  * Observers glue the time of the exposure onto the name they type, and they do it in as many ways as there are observers.
@@ -73,7 +67,7 @@ export function nameCandidates(target: string): string[] {
   const candidates: string[] = [];
   let text = target.trim();
   for (;;) {
-    const compact = normalise(text);
+    const compact = normaliseTargetName(text);
     if (compact && !candidates.includes(compact)) candidates.push(compact);
     const shorter = text.replace(STAMP, '').replace(TRAILING_UT, '');
     if (shorter === text || !/[A-Za-z]/u.test(shorter)) return candidates;
@@ -87,12 +81,12 @@ export function nameCandidates(target: string): string[] {
  * `europa-52` or no object at all, never Jupiter's moon. Any other name takes the first of its candidates that is a shipped
  * id: the whole name where the whole name is one, and otherwise the name with the observer's time stamp dropped. Nothing is
  * matched by prefix, and nothing is matched by a name that is only digits. */
-export function matchShippedObject(target: string, shipped: ReadonlySet<string>) {
+export function keckTargetObject(target: string, shipped: ReadonlySet<string>) {
   const candidates = nameCandidates(target);
   const numbered = /^(\d{1,6})([A-Z].*)$/u.exec(candidates[0] ?? '');
-  if (numbered) return [...shipped].find(id => normalise(id) === `${numbered[2]!}${numbered[1]!}`) ?? null;
+  if (numbered) return [...shipped].find(id => normaliseTargetName(id) === `${numbered[2]!}${numbered[1]!}`) ?? null;
   for (const candidate of candidates) {
-    const id = [...shipped].find(entry => normalise(entry) === candidate);
+    const id = [...shipped].find(entry => normaliseTargetName(entry) === candidate);
     if (id) return id;
   }
   return null;
@@ -227,8 +221,8 @@ export async function targetCounts(table: InstrumentTable) {
   return { rows: readable, unreadableRows: rows.length - readable.length };
 }
 
-export async function buildLedger(measured: string): Promise<Ledger> {
-  const shipped = new Set((await readdir(OBJECTS, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name));
+export async function surveyKeck(measured: string): Promise<Ledger> {
+  const shipped = new Set(await shippedObjectIds());
   const { programs, receipts, receiptProblems } = await pinnedEvidence();
   const found = new Map<string, { frames: number; targets: Set<string>; instruments: Record<string, number> }>();
   const modes: ModeState[] = [];
@@ -240,7 +234,7 @@ export async function buildLedger(measured: string): Promise<Ledger> {
     for (const row of counted?.rows ?? []) {
       const count = Number(row.frames ?? 0);
       frames = (frames ?? 0) + count;
-      const id = matchShippedObject(row.targname ?? '', shipped);
+      const id = keckTargetObject(row.targname ?? '', shipped);
       if (!id) continue;
       objects.add(id);
       objectFrames += count;
@@ -264,7 +258,7 @@ export async function buildLedger(measured: string): Promise<Ledger> {
 
 const number = (value: number | null) => value === null ? 'not counted' : value.toLocaleString('en-US');
 
-export function ledgerGuide(ledger: Ledger) {
+export function keckLedgerGuide(ledger: Ledger) {
   const lines = ['# What Keck holds', '',
     `Written by \`tools/objects/keck/archive-ledger.mts\` from the [Keck Observatory Archive](${ledger.archive}) on ${ledger.measured}.`,
     'Every count is the archive\'s own, taken with one grouped query per instrument. Every state is worked out from the pinned',
@@ -291,11 +285,12 @@ export function ledgerGuide(ledger: Ledger) {
   return `${lines.join('\n')}\n`;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const measured = new Date().toISOString().slice(0, 10);
-  const ledger = await buildLedger(measured);
-  await mkdir(resolve(REPOSITORY, 'data/keck'), { recursive: true });
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, ledgerGuide(ledger));
-  console.log(`KECK_LEDGER ${LEDGER} (${ledger.objects.length} objects, ${ledger.modes.filter(mode => mode.state === 'reduced').length} of ${ledger.modes.length} instruments reduced)`);
-}
+/** The Keck ledger: always a full pass against KOA, written every time. It has no local pass, and receipt problems are
+ * recorded in the ledger rather than reported. */
+export const KECK_LEDGER: ArchiveLedger<Ledger> = {
+  schema: SCHEMA,   files: ledgerFiles('data/keck/ledger.json', 'docs/keck-ledger.md'), indent: 2, guide: keckLedgerGuide,
+  survey: () => surveyKeck(new Date().toISOString().slice(0, 10)), writes: 'always',
+  summary: ledger => [`KECK_LEDGER ${KECK_LEDGER.files.ledger} (${ledger.objects.length} objects, ${ledger.modes.filter(mode => mode.state === 'reduced').length} of ${ledger.modes.length} instruments reduced)`],
+};
+
+if (isCommand(import.meta.url)) await runArchiveLedger(KECK_LEDGER);

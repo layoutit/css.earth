@@ -15,7 +15,8 @@ import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/cor
 import { bodyMapFits, topRowFirst } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '../body-map-product.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
-import { fileSize, productRecordPath, readProductRecord, sameRun, type ProductInput, type ProductSoftware } from '../product-record.mts';
+import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';

@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { parseBodyMapProduct } from '../../body-map-product.mts';
 import { assertBodyMapPlanes } from '../../body-map-publication.mts';
-import { writeProductRecord } from '../../product-record.mts';
+import { writeProductRecord } from '@cssearth/telescope/node';
 import { sha256 } from '@cssearth/core/node';
 import { verifiedProduct, localOutput } from '../verified-product.mts';
 import { contextTarget, sourceContext } from '../delivery-context.mts';

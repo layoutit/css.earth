@@ -13,7 +13,7 @@ import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
  * Only the KCWI pipeline is installed. The OSIRIS DRP is IDL and does not run here; toolchain.json says so, and archive.mts
  * pins KOA's own OSIRIS products instead of re-running them. */
 import { spawnSync } from 'node:child_process';
-import { runToolchainProcess } from '../toolchain-process.mts';
+import { runToolchainProcess } from '@cssearth/telescope/node';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

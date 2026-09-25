@@ -3,7 +3,7 @@ import{test}from'node:test';
 import{copyFile,mkdtemp,readFile,rm,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
 import{resolve}from'node:path';
-import{readProductRecord}from'../../product-record.mts';
+import { readProductRecord } from '@cssearth/telescope/node';
 import{executeFamilyOperation}from'../family-operation.mts';
 import{member}from'./common.mts';
 import{describeChandraEvents,energyHistogram,exportSelectedEventsCsv,F10_CHANDRA_EXAMPLE,gtiLightCurve,inspectChandraEvents,nativeCountImage}from'./f10-events.mts';

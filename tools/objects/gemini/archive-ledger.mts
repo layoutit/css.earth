@@ -21,18 +21,16 @@
  * The Galilean moons get a census of their own, because Europa is this project's showcase body and the answer for it is a
  * negative one that a summary line would hide. Its three neighbours are asked for beside it so that "is there anything here
  * for the Galilean moons" is answered from the archive rather than from one moon and a guess. */
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord, type EvidenceKind } from '../product-record.mts';
+import { parseProductRecord, type EvidenceKind } from '@cssearth/telescope';
 import { PROGRAMS, parseGeminiProgram, type GeminiProgram } from './archive.mts';
 import { query } from './cadc.mts';
+import { isCommand, ledgerFiles, receiptProblem, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
+import { matchNumberedTarget, type NumberedTargetNames } from '../archives/targets.mts';
 
-const repository = resolve(import.meta.dirname, '../../..');
-export const LEDGER = resolve(repository, 'data/gemini/ledger.json');
-export const GUIDE = resolve(repository, 'docs/gemini-ledger.md');
-export const SCHEMA = 'cssearth-gemini-ledger@1';
+const SCHEMA = 'cssearth-gemini-ledger@1';
 export const COLLECTION = 'GEMINI';
 
 /** Frame types that are never an observation of the object: a pointing exposure and the calibration frames. */
@@ -68,34 +66,9 @@ export const SUPPORT: Readonly<Record<string, { support: 'supported' | 'unsuppor
   Alopeke: { support: 'unsupported', note: 'speckle imager; its products come from its own speckle pipeline, not DRAGONS' },
 };
 
-/** A target name reduced to letters and digits, so `52_EUROPA` and `52 Europa` are one name. */
-export const normalise = (name: string) => name.toUpperCase().replace(/[^A-Z0-9]/gu, '');
-
-/** An observer's target name split into the parts that identify a body: a minor-planet number in front, and an ephemeris
- * suffix behind (`Europa.eph`, `-26T0400`), both of which observers add and neither of which is part of the name. */
-export function parseTargetName(name: string) {
-  const trimmed = name.trim().replace(/\.eph$/iu, '').replace(/[-_](?:\d{1,2}[TH]\d{2,4}|\d{1,3})$/u, '');
-  const compact = normalise(trimmed);
-  const numbered = /^(\d{1,6})([A-Z].*)$/u.exec(compact);
-  return numbered ? { number: Number(numbered[1]), name: numbered[2]! } : { number: null, name: compact };
-}
-
-/** The shipped object id a Gemini target name refers to, or null.
- *
- * A numbered target takes the id that carries the same number and nothing else: `52 Europa` is `europa-52`, never `europa`.
- * An unnumbered target takes the bare id. Nothing is matched by prefix. */
-export function matchShippedObject(target: string, shipped: ReadonlySet<string>) {
-  const { number, name } = parseTargetName(target);
-  if (!name) return null;
-  if (number === null) return [...shipped].find(id => normalise(id) === name) ?? null;
-  return [...shipped].find(id => normalise(id) === `${name}${number}`) ?? null;
-}
-
-/** The shipped object ids: the directories of src/objects. */
-export async function shippedObjects() {
-  const entries = await readdir(resolve(repository, 'src/objects'), { withFileTypes: true });
-  return new Set(entries.filter(entry => entry.isDirectory()).map(entry => entry.name));
-}
+/** Gemini observers write a numbered target as `52 Europa` and a non-sidereal one as `Europa.eph`: both the number and the
+ * suffix are read off the name, and a numbered target only matches a shipped id that carries the same number. */
+export const GEMINI_TARGET_NAMES: NumberedTargetNames = { ephemerisSuffix: true };
 
 export interface InstrumentCount { readonly instrument: string; readonly frames: number; readonly science: number }
 export interface ObjectObservation {
@@ -173,7 +146,7 @@ export async function targetCounts(today: string, shipped: ReadonlySet<string>) 
   // public frames simply counts zero.
   const names = await query(`SELECT DISTINCT o.target_name FROM caom2.Observation o WHERE o.collection=${quote(COLLECTION)} ` +
     `AND o.target_name IS NOT NULL AND o.target_name <> ''`);
-  const matched = names.map(row => row.target_name ?? '').filter(name => name && matchShippedObject(name, shipped));
+  const matched = names.map(row => row.target_name ?? '').filter(name => name && matchNumberedTarget(name, shipped, GEMINI_TARGET_NAMES));
   if (!matched.length) return [];
   const rows: Record<string, string>[] = [];
   // In batches, because a name list of thousands is longer than a query may be.
@@ -190,7 +163,7 @@ export async function targetCounts(today: string, shipped: ReadonlySet<string>) 
 export function observationsOf(rows: readonly Record<string, string>[], shipped: ReadonlySet<string>): ObjectObservation[] {
   const byId = new Map<string, { targets: Set<string>; science: number; acquisition: number; instruments: Set<string>; programmes: Set<string> }>();
   for (const row of rows) {
-    const id = matchShippedObject(row.target_name ?? '', shipped);
+    const id = matchNumberedTarget(row.target_name ?? '', shipped, GEMINI_TARGET_NAMES);
     if (!id) continue;
     const entry = byId.get(id) ?? { targets: new Set(), science: 0, acquisition: 0, instruments: new Set(), programmes: new Set() };
     const count = Number(row.n);
@@ -238,12 +211,6 @@ export async function galileanRows(today: string): Promise<MoonRow[]> {
  * it is asked of the rows rather than written down. */
 export const hasScience = (rows: readonly MoonRow[], moon: string) =>
   rows.some(row => row.moon === moon && row.intent === 'science' && !(NON_OBSERVING_TYPES as readonly string[]).includes(row.type));
-
-/** What went wrong with one receipt, always said of the file it was in: a JSON parser names a position, not a file. */
-const receiptProblem = (file: string, error: unknown) => {
-  const said = error instanceof Error ? error.message : String(error);
-  return said.startsWith(`${file}:`) ? said : `${file}: ${said}`;
-};
 
 export const RECEIPT_SCHEMA = 'cssearth-gemini-reproduction@1';
 export const EVIDENCE_OF_RECEIPT = ['archive-agreement', 'internal-consistency'] as const;
@@ -331,9 +298,9 @@ export async function capabilityStates(instruments: readonly InstrumentCount[], 
   return { capabilities, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
-export async function buildLedger(work: string | null, today = new Date().toISOString().slice(0, 10)): Promise<Ledger> {
+export async function surveyGemini(work: string | null, today = new Date().toISOString().slice(0, 10)): Promise<Ledger> {
   const instruments = await instrumentCounts(today);
-  const shipped = await shippedObjects();
+  const shipped = new Set(await shippedObjectIds());
   const objects = observationsOf(await targetCounts(today, shipped), shipped);
   const galilean = await galileanRows(today);
   const { capabilities, problems } = await capabilityStates(instruments, work);
@@ -457,13 +424,15 @@ export function ledgerMarkdown(ledger: Ledger): string {
   ].filter(line => line !== '').join('\n');
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const work = process.argv[2] ? resolve(process.argv[2]) : null;
-  const ledger = await buildLedger(work);
-  await mkdir(resolve(LEDGER, '..'), { recursive: true });
-  await writeFile(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`);
-  await writeFile(GUIDE, `${ledgerMarkdown(ledger)}\n`);
-  console.log(`${ledger.instruments.length} instruments, ${ledger.objects.length} shipped objects, ` +
+/** The Gemini ledger: always a full pass, written every time, with an optional work directory whose product records
+ * back the receipts (`archive-ledger.mts [work]`). It has no local pass, and receipt problems are recorded, not reported. */
+export const GEMINI_LEDGER: ArchiveLedger<Ledger> = {
+  schema: SCHEMA,   files: ledgerFiles('data/gemini/ledger.json', 'docs/gemini-ledger.md'), indent: 2,
+  guide: ledger => `${ledgerMarkdown(ledger)}\n`,
+  survey: args => surveyGemini(args[0] ? resolve(args[0]) : null), writes: 'always',
+  summary: ledger => [`${ledger.instruments.length} instruments, ${ledger.objects.length} shipped objects, ` +
     `${ledger.galileanMoons.rows.length} Galilean rows, ${ledger.capabilities.filter(entry => entry.state === 'reduced').length} reduced. ` +
-    `${ledger.receiptProblems.length} receipt problem(s).`);
-}
+    `${ledger.receiptProblems.length} receipt problem(s).`],
+};
+
+if (isCommand(import.meta.url)) await runArchiveLedger(GEMINI_LEDGER);

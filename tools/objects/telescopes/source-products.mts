@@ -6,14 +6,15 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { sha256File } from '@cssearth/core/node';
 import { hasErrorCode, requireRecord } from '@cssearth/core';
-import { fileSize, readProductRecord, sameRun, type ProductRun } from '../product-record.mts';
+import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import type { ProductRun } from '@cssearth/telescope';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
 import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 export interface LoadedSourceProduct extends SourceProduct { readonly qualified: boolean; readonly receipt: string; readonly receiptProblem?: string; readonly facts?: ProductFacts }
 /** Authored implementation inputs hashed into every source-qualification receipt. */
-export const SOURCE_RUN_FILES = ['source-intake.mts', 'source-product-contract.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../source-files.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../../packages/fits/src/fits.ts', '../../../packages/fits/src/node/file.ts', '../../../packages/fits/src/rice.ts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'] as const;
+export const SOURCE_RUN_FILES = ['source-intake.mts', 'source-product-contract.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../source-files.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../../../packages/telescope/src/node/science.ts', '../../../packages/telescope/toolchains/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../../packages/fits/src/fits.ts', '../../../packages/fits/src/node/file.ts', '../../../packages/fits/src/rice.ts', '../../../packages/telescope/src/pds3-labels.ts', '../pds/source-observations.mts', '../../../packages/telescope/src/pds-labels.ts', '../../../packages/telescope/src/product-record.ts', '../../../packages/telescope/src/node/product-record.ts', '../../../packages/telescope/src/node/pds-client.ts', '../../../packages/telescope/toolchains/pds-toolchain.json'] as const;
 export async function sourceRun(root: string, product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
   const digest = createHash('sha256');

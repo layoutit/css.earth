@@ -27,7 +27,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
-import { productRecordPath, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../product-record.mts';
+import { productRecordPath, type ProductRun } from '@cssearth/telescope';
+import { readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { chandraFile, parseChandraProgram, PROGRAMS, type ChandraFile, type ChandraObservation, type ChandraProgram } from './archive.mts';
 import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts';
 

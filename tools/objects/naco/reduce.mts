@@ -32,8 +32,8 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '../interferometry/eso-pipeline.mts';
-import { assertInputPins, fileSize, productRecordPath, readProductRecord, writeProductRecord,
-  type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { assertInputPins, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { readProgram, writeProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
 import { nacoToolchainDescriptor, nacoToolchainPath } from './toolchain.mts';
 

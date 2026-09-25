@@ -29,7 +29,8 @@ import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
 import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { assertInputPins, fileSize, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
+import { assertInputPins, fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import {

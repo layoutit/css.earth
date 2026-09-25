@@ -1,4 +1,4 @@
-import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
+import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope';
 import { readFitsHdu, type FitsHeader } from '@cssearth/fits';
 import type { GeometryCubeDeclaration } from './source-records.mts';
 

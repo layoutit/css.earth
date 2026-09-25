@@ -1,4 +1,4 @@
-import { pds3Keyword } from '../pds-labels.mts';
+import { pds3Keyword } from '@cssearth/telescope';
 import { readFitsPlane } from '@cssearth/fits';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { encodeClock, clockToEt } from '../../spice/sclk.mts';

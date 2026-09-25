@@ -457,7 +457,7 @@ Native source selection does not establish that a scientifically registered body
 ## Archive acquisition
 
 The virtual-telescope routes use one pinned archive client where Astroquery has the required public operation. Install it with
-`node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
+`node tools/objects/astronomy-toolchains.mts astroquery install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
 
 Astroquery is the archive client for MAST catalogue queries and complete-file downloads, ALMA TAP and DataLink, and the VizieR
 JMDC cone query. cssEarth does not implement those protocols beside it. cssEarth still checks catalogue fields, observation
@@ -472,12 +472,12 @@ non-overlapping exceptions rather than fallbacks for the same operation.
 
 Astroquery stays an external dependency: no upstream source is copied into cssEarth. Its BSD 3-Clause license, attribution,
 citation and the separate status of archive-data rights are recorded in
-[`tools/objects/astronomy-packages/NOTICE.md`](../tools/objects/astronomy-packages/NOTICE.md). Acquisition alone supplies no scientific evidence.
+[`packages/telescope/toolchains/NOTICE.md`](../packages/telescope/toolchains/NOTICE.md). Acquisition alone supplies no scientific evidence.
 
 ## The product record
 
 Every producing stage writes one `cssearth-telescope-product@1` record beside its output, named `<product>.product.json`
-([`tools/objects/product-record.mts`](../tools/objects/product-record.mts)). It holds:
+([`packages/telescope/src/product-record.ts`](../packages/telescope/src/product-record.ts)). It holds:
 
 | Field | What it states |
 | --- | --- |
@@ -640,6 +640,11 @@ problem, never counted as a check.
 The ledgers say how much of each archive these routes have been proved on:
 [JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
 [JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md), [Keck](keck-ledger.md) and [IHW Halley](ihw-halley.md).
+The eight archive ledgers (all but IHW Halley's) are written the same way by
+[`tools/objects/archives/ledger.mts`](../tools/objects/archives/ledger.mts): each archive's `archive-ledger.mts` states how
+to survey its archive, read its ledger back and render its page, and the few ways its command differs (which passes write,
+whether it has a `--local` pass, whether receipt problems fail the run, the JSON indent). Its
+[test](../tools/objects/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
 
 ## Asking which observations might measure something
 

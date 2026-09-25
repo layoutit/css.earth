@@ -3,9 +3,10 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pdsPackages } from '../astronomy-packages/pds-client.mts';
-import { pdsToolchain } from '../astronomy-packages/pds-toolchain.mts';
-import { writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { pdsPackages } from '@cssearth/telescope/node';
+import { pdsToolchain } from '@cssearth/telescope/node';
+import { writeProductRecord } from '@cssearth/telescope/node';
+import type { ProductInput, ProductRun } from '@cssearth/telescope';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const PDS_ARCHIVE_FINAL_SCHEMA = 'cssearth-pds-archive-final@1';

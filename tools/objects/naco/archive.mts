@@ -26,7 +26,7 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { archiveHeader, column, type RawRow } from '../interferometry/eso-pipeline.mts';
 import { associationTree, type Association } from '../interferometry/eso-associations.mts';
-import { tapRows } from '../astronomy-packages/client.mts';
+import { tapRows } from '@cssearth/telescope/node';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 export const SCHEMA = 'cssearth-naco-program@1';

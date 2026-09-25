@@ -48,8 +48,9 @@ import { sha256File } from '@cssearth/core/node';
 import { positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { mastFile, mastRequest, type MastFile } from '../astronomy-packages/mast.mts';
-import { assertInputPins, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
+import { mastFile, mastRequest, type MastFile } from '@cssearth/telescope/node';
+import { assertInputPins, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 

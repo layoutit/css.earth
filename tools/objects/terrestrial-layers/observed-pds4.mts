@@ -2,7 +2,7 @@ import {parsePds4Policy,parseImageEntry} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { bandColorDisplay, bandColorByte, bandColorEvidence } from '../color-transfer.mts';
-import { pds4Block, pds4Blocks, pds4Number } from '../pds-labels.mts';
+import { pds4Block, pds4Blocks, pds4Number } from '@cssearth/telescope';
 import { checkKeys } from '../surface-observations/recipe.mts';
 
 export function validatePds4ObservationPolicy(value: unknown) {

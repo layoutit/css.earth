@@ -4,7 +4,8 @@ import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { sha256File } from '@cssearth/core/node';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readProductRecord, type ProductRecord } from '../product-record.mts';
+import { readProductRecord } from '@cssearth/telescope/node';
+import type { ProductRecord } from '@cssearth/telescope';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection, type CapabilityAnswer, type QueryInputs } from './query.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
 import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
@@ -16,7 +17,7 @@ import type { QualificationConfiguration } from './qualification-routes.mts';
 import { EXPLORATION_SCHEMA, exploreTarget, parseExplorationArguments, type ExplorationAnswer, type ExplorationChoice, type ExplorationRequest } from './exploration.mts';
 import { SERVICES } from './vo/discovery.mts';
 import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery-context.mts';
-import { canonical } from './vo/contracts.mts';
+import { canonical } from '@cssearth/telescope/node';
 import { sourceQuestionFromRequest } from './source-relevance.mts';
 
 export const SESSION_SCHEMA = 'cssearth-telescope-session@1';
@@ -216,7 +217,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
     const saved = readSavedChoice(JSON.parse(await readFile(resolve(directory, 'query.json'), 'utf8')), pick), request = sessionRequest(saved.args);
     if (options.offline) {
       const resultPath = resolve(directory, `pick-${pick}`, 'result.json'), { delivery } = await import('./outputs.mts');
-      const local = await delivery(resultPath), { canonical } = await import('./vo/contracts.mts');
+      const local = await delivery(resultPath), { canonical } = await import('@cssearth/telescope/node');
       if (local.context.kind !== 'scientific-request' || local.record.choice !== saved.key || canonical(local.context.request) !== canonical({ ...request, target: saved.target })) throw new Error('Offline delivery differs from its saved scientific request or choice.');
       progress('Replaying the pinned local delivery; no remote archive was refreshed.');
       return { resultPath, product: local.file, satisfaction: local.context.assessment, context: local.context, reused: true, replay: 'pinned-local-artifact' as const };

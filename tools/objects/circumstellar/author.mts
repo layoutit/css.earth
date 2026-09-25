@@ -28,7 +28,7 @@ import { gainForTopAlpha, spreadColumns } from '../../../src/preparation/volume/
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
-import { mastDownloadUrl, mastFile } from '../astronomy-packages/mast.mts';
+import { mastDownloadUrl, mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '../jwst/imaging/image3.mts';
 import { JWST_BANDS } from '../jwst/imaging/bands.mts';
 import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, readArrayPlane, scoreEnvelope, readSkyPlane, ringGeometry, type SkyPlane } from './disc-envelope.mts';
@@ -325,7 +325,7 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
     for (const { band, entry, mosaic, primary } of channels.entries) bands.push({ band, mosaic, primary, sky: channels.planes.get(band)!, mosaicSha256: (await sha256File(mosaic)).sha256,
       origin: { file: entry.level3.name, url: mastDownloadUrl(entry.level3.uri), bytes: entry.level3.bytes, title: `MAST JWST programme ${program.programme} · ${entry.observation} level-3 coronagraph mosaic`,
         credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST', license: recipe.license.note,
-        acquisition: `Downloaded unchanged from MAST by its URI ${entry.level3.uri} (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json.`,
+        acquisition: `Downloaded unchanged from MAST by its URI ${entry.level3.uri} (@cssearth/telescope/node mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json.`,
         role: `MAST level-3 coronagraph mosaic ${entry.level3.name} (calwebb_coron3), the ${filterOf(band)} band of the ${lens.id} leaves`, landing: recipe.sourceUrl,
         observed: String(primary['DATE-OBS']), instrument: `JWST/NIRCam behind the ${JWST_BANDS[band]!.coronagraph} coronagraph` } });
   }

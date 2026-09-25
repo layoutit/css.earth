@@ -3,6 +3,21 @@
   "version": "0.1.0",
   "description": "Query and retrieve pinned telescope products with their scientific evidence.",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node/index.d.ts",
+      "import": "./dist/node/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "license": "MIT",
   "bin": {
     "telescope": "dist/telescope.mjs"
@@ -23,8 +38,18 @@
     "directory": "packages/telescope"
   },
   "scripts": {
-    "build": "node build.mts",
+    "build": "node build.mts && tsup",
     "prepack": "npm run build",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json && tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@cssearth/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.1"
   }
 }

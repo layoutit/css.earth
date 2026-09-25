@@ -35,8 +35,8 @@ information and remain NaN in both MEAN and STD.; they are not replaced by zero.
 Run from the repository root after the pinned toolchain is installed:
 
 ```sh
-node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install
-node tools/objects/astronomy-packages/toolchain.mts verify
+node tools/objects/astronomy-toolchains.mts astroquery install
+node tools/objects/astronomy-toolchains.mts astroquery verify
 output/toolchains/astroquery/env/bin/python tools/objects/telescopes/examples/edenhofer-xyz/restore.py \
   --out work/mean_and_std_xyz.crop-400-496-450-546-500-596.fits
 ```

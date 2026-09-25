@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, rm, appendFile, readdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { astroquery } from '@cssearth/telescope/node';
 import { saveSession, getSession, type SessionServices } from '../session.mts';
 import { saveExploration } from '../session.mts';
 import { loadQualifiedObservations } from '../qualified-observations.mts';
@@ -18,7 +18,7 @@ import { binaryTableHdu, primaryHdu } from '../../interferometry/fits-table.mts'
 import { sessionRequest } from '../session.mts';
 import { parseSnapshot, normalizeSnapshot, SERVICES } from './discovery.mts';
 import { planAccess } from './access.mts';
-import { jsonValue } from './contracts.mts';
+import { jsonValue } from '@cssearth/telescope/node';
 import { qualifyVoProduct } from './qualify.mts';
 import type { QueryInputs } from '../query.mts';
 

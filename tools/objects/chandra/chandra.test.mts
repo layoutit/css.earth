@@ -4,9 +4,10 @@ const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { addProductEvidence, evidenceFor, productRecordPath, readProductRecord, runDigest, writeProductRecord } from '../product-record.mts';
+import { addProductEvidence, readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
-import { isObjectPointing, LEDGER, ledgerGuide, GUIDE, modeKey, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS, pinnedState } from './archive-ledger.mts';
+import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
 import { reprocessParameters, reprocessRun, writeReprocessRecord } from './reprocess.mts';
@@ -251,8 +252,8 @@ test('a search box is that many degrees on the sky, not that many degrees of rig
 });
 
 test('the checked-in guide is the one the ledger generates', async () => {
-  const ledger = JSON.parse(await readFile(LEDGER, 'utf8')) as Parameters<typeof ledgerGuide>[0];
-  assert.equal(await readFile(GUIDE, 'utf8'), ledgerGuide(ledger), 'run node tools/objects/chandra/archive-ledger.mts');
+  const ledger = JSON.parse(await readFile(CHANDRA_LEDGER.files.ledger, 'utf8')) as Parameters<typeof chandraLedgerGuide>[0];
+  assert.equal(await readFile(CHANDRA_LEDGER.files.guide, 'utf8'), chandraLedgerGuide(ledger), 'run node tools/objects/chandra/archive-ledger.mts');
 });
 
 test('Jupiter reproduces event for event on HRC-I, and its disc lands in the object-centred frame', async () => {

@@ -5,12 +5,12 @@ import { createServer } from 'node:http';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '../../astronomy-packages/client.mts';
+import { astroquery } from '@cssearth/telescope/node';
 // VO acquisition keeps the digests it computes for its own untracked responses (PR #531), so its pins are checked by hash.
 import { sha256File } from '@cssearth/core/node';
 import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
-import { jsonValue, type DiscoverySnapshot } from './contracts.mts';
+import { jsonValue, type DiscoverySnapshot } from '@cssearth/telescope/node';
 
 test('PyVO sends descriptor-bound DataLink parameters and retains the exact response', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'vo-links-boundary-'));

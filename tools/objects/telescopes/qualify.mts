@@ -6,7 +6,7 @@ import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
-import { pdsPackages } from '../astronomy-packages/pds-client.mts';
+import { pdsPackages } from '@cssearth/telescope/node';
 import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
@@ -16,17 +16,19 @@ import { flagValue } from '@cssearth/core';
 import { compareCubeWithMast, runSpec3 } from '../jwst/cubes/spec3.mts';
 import { DEFAULT_CRDS_CONTEXT, pinImagingProgram } from '../jwst/imaging/archive.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { refreshLocalLedger as refreshJwstLedger } from '../jwst/archive-ledger.mts';
+import { JWST_LEDGER } from '../jwst/archive-ledger.mts';
 import { PROGRAMS as NACO_PROGRAMS, pinProgram as pinNacoProgram, writeProgram as writeNacoProgram } from '../naco/archive.mts';
-import { refreshLocalLedger as refreshNacoLedger } from '../naco/archive-ledger.mts';
+import { NACO_LEDGER } from '../naco/archive-ledger.mts';
 import { compareTemplates } from '../naco/compare.mts';
 import { reduceProgram as reduceNacoProgram } from '../naco/reduce.mts';
 import { qualifyPdsArchiveProduct } from '../pds/archive-final.mts';
 import { buildPdsLedger } from '../pds/archive-ledger.mts';
-import { productRecordPath, readProductRecord, sameRun } from '../product-record.mts';
+import { productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { compareChannel, receiptPath } from '../spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../spitzer/archive.mts';
-import { refreshLocalLedger as refreshSpitzerLedger } from '../spitzer/archive-ledger.mts';
+import { SPITZER_LEDGER } from '../spitzer/archive-ledger.mts';
+import { refreshLocalLedger } from '../archives/ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../spitzer/mosaic.mts';
 import { loadQueryInputs, queryCapabilities } from './query.mts';
 import { qualificationConfigurationFromArguments, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
@@ -65,7 +67,7 @@ async function qualifySpitzerIrac(root: string, request: QualificationRequest): 
   if (!channel) throw new Error(`AOR ${request.observation} returned no channel ${channelNumber}.`);
   const { record } = await remosaicChannel(program, channel, defaultDataRoot, defaultWorkRoot);
   await compareChannel(program, channel, defaultDataRoot, defaultWorkRoot);
-  await refreshSpitzerLedger();
+  await refreshLocalLedger(SPITZER_LEDGER);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration: request.configuration, product: resolve(defaultWorkRoot, programId, record.outputs[0]!.path), receipt: receiptPath(programId, channelNumber),
     ...(observation.programme ? { archiveProgramme: observation.programme } : {}) };
@@ -84,7 +86,7 @@ async function qualifyJwstNirspec(root: string, request: QualificationRequest): 
   if (observation.programme && program.programme !== observation.programme) throw new Error(`${request.observation} is programme ${program.programme}, not indexed programme ${observation.programme}.`);
   const work = resolve(root, 'output/jwst', programId), run = await runSpec3(programId, request.configuration.band, work, { wavelengthMicrometres: wavelength });
   const compared = await compareCubeWithMast(programId, request.configuration.band, run.cube, work, [], wavelength);
-  await refreshJwstLedger();
+  await refreshLocalLedger(JWST_LEDGER);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration: request.configuration, product: run.cube, receipt: compared.path,
     ...(observation.programme ? { archiveProgramme: observation.programme } : {}) };
@@ -112,7 +114,7 @@ async function qualifyNacoImaging(root: string, request: QualificationRequest): 
       return record;
     }));
   await compareTemplates(programId, work, templates);
-  await refreshNacoLedger();
+  await refreshLocalLedger(NACO_LEDGER);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration, product: reductions[0]!.combined,
     receipt: resolve(NACO_PROGRAMS, `${programId}.COADDED_IMG.reproduction.json`), archiveProgramme: configuration.programme };

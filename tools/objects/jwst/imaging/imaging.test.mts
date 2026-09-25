@@ -8,7 +8,8 @@ import { bandOfFilters, parseImagingProgram, PROGRAMS, type ImagingBand, type Im
 import { bandMode, bandOfHeader, isCubeBand, JWST_BANDS } from './bands.mts';
 import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
-import { evidenceFor, productRecordPath, readProductRecord, runDigest, writeProductRecord } from '../../product-record.mts';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
 import { toolchainPython } from '../mast.mts';
 import { findPointSources } from '../../observation/point-sources.mts';
 

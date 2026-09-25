@@ -2,8 +2,8 @@
 import { mkdir,readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { pdsPackages } from '../astronomy-packages/pds-client.mts';
-import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+import { pdsPackages } from '@cssearth/telescope/node';
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import { isisMetadata,pdsMetadata } from './native-metadata.mts';
 import { requireRecord,requireArray,requireString } from '@cssearth/core';

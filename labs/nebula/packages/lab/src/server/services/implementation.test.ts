@@ -38,6 +38,13 @@ test('relocated preparation entry points pin their live package owners', async (
     assert.ok(pins.some(pin => pin.path === path), path);
 });
 
+test('the telescope library a preparation owner reaches is pinned by its sources, not its build', async () => {
+  const pins = await implementationPins(process.cwd(), ['tools/objects/circumstellar/author.mts']);
+  for (const path of ['packages/telescope/package.json', 'packages/telescope/src/product-record.ts', 'packages/telescope/src/node/product-record.ts'])
+    assert.ok(pins.some(pin => pin.path === path), path);
+  assert.equal(pins.some(pin => pin.path.startsWith('packages/telescope/dist/')), false);
+});
+
 test('sampled supplementary owner allowlist points at existing implementation files', async () => {
   const { sampledImplementationOwners } = await import('../../features/sampled-prior/ownership.ts');
   const { stat } = await import('node:fs/promises');

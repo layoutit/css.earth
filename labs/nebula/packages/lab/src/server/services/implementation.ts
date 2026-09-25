@@ -18,6 +18,12 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/fits/package.json');
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/fits/src/node/index.ts' : 'packages/fits/src/index.ts') };
       });
+      // The telescope library (product records, label readers, astronomy-package clients) was relative modules under
+      // tools/objects/ before it became @cssearth/telescope; its sources stay owners the same way.
+      builder.onResolve({ filter: /^@cssearth\/telescope(?:\/node)?$/ }, args => {
+        manifests.add('packages/telescope/package.json');
+        return { path: resolve(root, args.path.endsWith('/node') ? 'packages/telescope/src/node/index.ts' : 'packages/telescope/src/index.ts') };
+      });
       builder.onResolve({ filter: /^@cssearth\/(?:volume-core|volume-bake|nebula-reconstruction|nebula-lab)(?:\/|$)/ }, async args => {
         const [scope, name, ...tail] = args.path.split('/');
         const directory = name === 'nebula-reconstruction' ? 'reconstruction' : name === 'nebula-lab' ? 'lab' : name;
