@@ -1322,6 +1322,9 @@ function prepareOrbitMaterialAtlas({
   for (let frameIndex = 0;
     frameIndex < PLANET_ORBIT_MATERIAL_FRAME_COUNT;
     frameIndex += 1) {
+    // Flood lit (shadows off), a bank ships one frame alone: the last, full phase (presentation.mts). The others are
+    // never drawn, so they are not computed.
+    if (shadowless && frameIndex !== PLANET_ORBIT_MATERIAL_FRAME_COUNT - 1) continue;
     const amount = frameIndex / (PLANET_ORBIT_MATERIAL_FRAME_COUNT - 1);
     const scenePitchDegrees = maximumScenePitch * (1 - amount);
     const systemObliquityDegrees = OBJECT_OBLIQUITY_DEGREES *
@@ -1720,6 +1723,8 @@ function prepareInteriorMaterialAtlas({
   for (let frameIndex = 0;
     frameIndex < INTERIOR_ATMOSPHERE_FRAME_COUNT;
     frameIndex += 1) {
+    // Flood lit, only the last (full phase) frame ships; see prepareOrbitMaterialAtlas.
+    if (shadowless && frameIndex !== INTERIOR_ATMOSPHERE_FRAME_COUNT - 1) continue;
     const amount = frameIndex / (INTERIOR_ATMOSPHERE_FRAME_COUNT - 1);
     const scenePitchDegrees = maximumScenePitchDegrees * (1 - amount);
     const systemObliquityDegrees = OBJECT_OBLIQUITY_DEGREES *
