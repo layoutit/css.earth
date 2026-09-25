@@ -27,7 +27,7 @@ export interface TextureLevelBank {id: string; urls: readonly string[]}
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
-export async function prepareTextureLevels({ config, plan, lenses, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string};plan?:SurfaceBankPlan;lenses?:SurfaceBankLenses;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
+export async function prepareTextureLevels({ config, plan, lenses, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;lenses?:SurfaceBankLenses;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
   const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
   const canonicalWidth = config.atlas.pageSize;
@@ -90,6 +90,20 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
   // Smaller completed levels share this same byte budget rather than multiply it.
   const maximumDecodedBytes = 2 * Math.max(...banks.map(bank => entries.filter(entry =>
     entry.key.startsWith(`page:${bank.id}:`) && !entry.key.includes(':level:')).reduce((sum, entry) => sum + entry.decodedBytes, 0)));
+  // A map whose source holds less detail than the finest level stops at `maximumTextureWidth`: its finer levels read that
+  // level's files, so no view loads a page that is only its source upsampled.
+  for (const map of config.surface?.maps ?? []) {
+    const cap = map.maximumTextureWidth;
+    if (cap === undefined) continue;
+    const capIndex = widths.indexOf(cap);
+    if (capIndex < 0) throw new TypeError(`${map.name}: maximumTextureWidth ${cap} is not one of the texture level widths ${widths.join(', ')}.`);
+    const lensIds = new Set(banks.filter(bank => basename(bank.urls[0]!, '.webp').replace(/@2x$/u, '') === map.name).map(bank => bank.id));
+    if (!lensIds.size) throw new TypeError(`${map.name}: maximumTextureWidth names a map no surface bank reads.`);
+    for (const level of levels.slice(capIndex + 1)) for (const key of Object.keys(level.resources)) {
+      const lens = /^(?:page|poles):([^:]+)/u.exec(key)?.[1];
+      if (lens && lensIds.has(lens)) level.resources[key] = levels[capIndex]!.resources[key]!;
+    }
+  }
   const offered = maximumWidth === undefined ? levels : levels.slice(0, widths.indexOf(maximumWidth) + 1);
   return { textureLevels: { hysteresis, levels: offered }, entries, maximumDecodedBytes,
     provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel, receipts } };

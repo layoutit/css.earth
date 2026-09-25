@@ -144,7 +144,8 @@ function createSurfaceRasterPlan(sizes?: readonly number[]) {
       // shear and overscan. Its maximum occurs at the unexpanded far corner.
       // These per-latitude densities are baked together in ONE atlas; runtime
       // never chooses a density or changes banks in response to device DPR.
-      const a = source.width * 4 / 32, d = source.height * 4 / 32;
+      // Cells take half the atlas density in texels per source-grid unit along their finest edge (4 at density 8).
+      const a = source.width * (SURFACE_ATLAS.density / 2) / 32, d = source.height * (SURFACE_ATLAS.density / 2) / 32;
       const b = a * -p * 32;
       const trace = a * a + b * b + d * d;
       const sourceStep = Math.sqrt((trace + Math.sqrt(Math.max(0,
@@ -184,7 +185,7 @@ function createSurfaceRasterPlan(sizes?: readonly number[]) {
 function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, plan: Pick<PagedSurfaceRasterPlan, 'cells' | 'pages'>, density = 8, page = 0,
   nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1, nativeOcean?: NativeDeepOceanFill) {
   if (channels !== 3 || !(height > 0) || data.length !== width * height * channels ||
-      ![2, 4, 8].includes(density) || width !== height * 2 ||
+      ![2, 4, 8, 16].includes(density) || width !== height * 2 ||
       (nativeClouds && (nativeClouds.channels !== 3 || nativeClouds.width !== nativeClouds.height * 2 ||
         nativeClouds.data.length !== nativeClouds.width * nativeClouds.height * nativeClouds.channels))) {
     throw new Error("Paged ellipsoid surface source dimensions do not match the prepared density.");
@@ -217,8 +218,9 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
   }
   const atlasScale = density / SURFACE_ATLAS.density;
   const outputWidth = pageWidth * atlasScale;
+  // Rounded after scaling: at an eighth of the atlas density a height rounded before scaling can land on half a pixel.
   const outputHeight = Math.ceil(Math.max(...pageCells.map(cell =>
-    cell.y + cell.size + SURFACE_ATLAS.gutter)) / 4) * 4 * atlasScale;
+    cell.y + cell.size + SURFACE_ATLAS.gutter)) * atlasScale / 4) * 4;
   const output = Buffer.alloc(outputWidth * outputHeight * 4);
   const scale = width / SURFACE_ATLAS.sourceWidth;
   const sourceSample = (raster: Uint8Array, rasterWidth: number, rasterHeight: number, rasterChannels: number,
