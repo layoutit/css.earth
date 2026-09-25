@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { utcToEt, etToUtc, encodeClock, clockToEt, etToClock, apply, transpose, spiceCamera } from '@cssearth/spice';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../fixture.mts';
 
 /**
  * The SPICE toolkit as the oracle. tools/oracles/spice/dart-draco.py runs
  * SpiceyPy over the same pinned DART kernels and writes what CSPICE computes;
- * this test loads the same kernels through tools/spice/ and compares. The
+ * this test loads the same kernels through @cssearth/spice and compares. The
  * fixture names the toolkit version and the sha256 of every kernel, so the
  * comparison is bound to exact inputs.
  */

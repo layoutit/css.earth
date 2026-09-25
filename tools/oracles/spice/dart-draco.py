@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """SpiceyPy oracle for the DART DRACO geometry: the reference SPICE toolkit computes
 times, states, frames and the apparent directions of archived surface intercepts
-from the same pinned kernels that tools/spice/ reads, and writes a fixture that
-tools/spice/oracle.test.mts compares against. The intercepts are read from the
+from the same pinned kernels that @cssearth/spice reads, and writes a fixture that
+dart-draco.oracle.test.mts beside this script compares against. The intercepts are read from the
 cube with NASA's pds4_tools, not with the pipeline's own decoder, so no pipeline
 code stands between the archive and the oracle.
 Usage: node tools/assets/restore-source-inputs.mts --object=dimorphos
