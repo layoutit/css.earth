@@ -3,6 +3,8 @@ import type { BrowserWindow } from './browser-types.mts';
 import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from './runtime-policy.mts';
 
 type SheetState = typeof MOBILE_SHEET_POLICY.states[number];
+/** Room left under the introduction in the peek, the card's own padding. */
+const INTRODUCTION_MARGIN_PIXELS = 16;
 type SheetStops = Readonly<Record<SheetState, number>>;
 interface SheetGesture {
   pointerId: number; x: number; y: number; start: number; offset: number; stops: SheetStops;
@@ -219,6 +221,24 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   visual?.addEventListener("resize", followKeyboard, { signal });
   visual?.addEventListener("scroll", followKeyboard, { signal });
   lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
+
+  // The peek reaches the bottom of the selected card's introduction, measured from the sheet's top with the card's
+  // own breathing room below it; shell-layout.css bounds it between its floor and the half-open sheet.
+  const fitIntroduction = () => {
+    const introduction = [...sheet.querySelectorAll<HTMLElement>(".object-introduction")].find(node => node.getClientRects().length > 0);
+    if (!mobile.matches || !introduction) { body.style.removeProperty("--sheet-intro-height"); return; }
+    const reach = introduction.getBoundingClientRect().bottom - sheet.getBoundingClientRect().top + sheet.scrollTop + INTRODUCTION_MARGIN_PIXELS;
+    body.style.setProperty("--sheet-intro-height", `${Math.ceil(reach)}px`);
+  };
+  // Introductions and the panels that hold them (breadcrumb, name) are retained; the selected one changes size as it
+  // is shown, filled or wrapped.
+  if (typeof windowTarget.ResizeObserver === "function") {
+    const observer = new windowTarget.ResizeObserver(fitIntroduction);
+    for (const node of sheet.querySelectorAll(".object-introduction, .object-selected-panel")) observer.observe(node);
+    lifetime.onDispose(() => observer.disconnect());
+  }
+  mobile.addEventListener("change", fitIntroduction, { signal });
+  fitIntroduction();
 
   body.dataset.sheet = state;
   return Object.freeze({

@@ -49,6 +49,15 @@ body {
   background: var(--shell-background);
 }
 
+/* Mobile layouts size it (shell-layout.css); elsewhere it covers nothing. */
+.object-viewport-search-band {
+  position: absolute;
+  inset: auto 0 0;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .object-viewport {
   position: fixed;
   z-index: 0;
