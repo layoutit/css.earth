@@ -283,7 +283,9 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         return { body: { center: centre.map(fixed), radius: Math.floor(radius * 100) / 100 }, writes };
       }
       /** Every leaf whose box follows the body on screen (tools/prepared/leaf-box.mts), measured at its full box (no factor
-       * is written yet), and the body's centre, in scene coordinates. A leaf under the exterior body mesh is surface. */
+       * is written yet), and the body's centre, in scene coordinates. A leaf under the exterior body mesh is surface. A leaf
+       * the default presentation does not render (Sgr A*'s sphere under display: none) backs no layer and has no measurable
+       * frame: it is left out, and keeps its full box through the factor's fallback. */
       function leafBoxMeasurements() {
         const bodies = new Set(definition.tree.nodes.flatMap((node, id) =>
           node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway') ? [id] : []));
@@ -294,6 +296,10 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         const leaves = [];
         for (const target of definition.tree.nodes.keys()) {
           if (!nodes[target]?.style.transform.includes(`var(${leafBoxFactor}`)) continue;
+          if (!nodes[target].checkVisibility()) continue;
+          // A runtime bound by an earlier bake carries each leaf's factor; measure the full box it scales, as the first bake
+          // did, so every bake measures the same leaf.
+          nodes[target].style.setProperty(leafBoxFactor, '1');
           const sceneFromLeaf = frame(target), style = getComputedStyle(nodes[target]);
           const width = parseFloat(style.width), height = parseFloat(style.height);
           if (!sceneFromLeaf || !(width > 0) || !(height > 0)) return null;
@@ -372,7 +378,8 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (leafBoxes && !(typeof logicalBodyDiameter === 'number' && logicalBodyDiameter > 0)) {
       throw new TypeError(`${definition.id}: leaf boxes need the camera's logical body diameter, not ${String(logicalBodyDiameter)}.`);
     }
-    const source = leafBoxes ? withLeafBoxes(bound, leafBoxes, { closed, initialDiameter: Number(logicalBodyDiameter) }) : bound;
+    // Always rewritten: a body with no rendered leaf (Sgr A*) still drops what an earlier bake wrote.
+    const source = withLeafBoxes(bound, leafBoxes, { closed, initialDiameter: Number(logicalBodyDiameter) });
     let compiled = prepareDepthPartitions(source, surface);
     let reason = depthReason;
     if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }

@@ -91,13 +91,17 @@ export function leafBoxBlocks(centres: readonly (readonly number[])[], bodyCentr
     const y = 1 - 2 * (index + 0.5) / count, ring = Math.sqrt(1 - y * y), angle = golden * index;
     return [Math.cos(angle) * ring, y, Math.sin(angle) * ring];
   });
+  // A leaf on the line between two lattice directions (a polar cap on the axis) would take whichever float noise in its
+  // browser-measured frame favours: its direction is rounded, and a tie goes to the lower block, so every bake agrees.
+  const TIE = 1e-7, round = (value: number) => Math.round(value * 1e6) / 1e6;
   const nearest = centres.map(centre => {
     const out = centre.map((value, axis) => value - bodyCentre[axis]!), length = Math.hypot(...out);
     if (!(length > 0)) throw new TypeError('A leaf centre sits at the body centre.');
+    const unit = out.map(value => round(value / length));
     let best = 0, score = -Infinity;
     for (const [index, direction] of lattice.entries()) {
-      const dot = direction.reduce((sum, value, axis) => sum + value * out[axis]! / length, 0);
-      if (dot > score) { score = dot; best = index; }
+      const dot = direction.reduce((sum, value, axis) => sum + value * unit[axis]!, 0);
+      if (dot > score + TIE) { score = dot; best = index; }
     }
     return best;
   });
@@ -197,8 +201,29 @@ interface LeafBoxTree {
  * common ancestor below the scene (the system node, which carries the body and its rings), and the binding that publishes
  * them. Earlier factors, steps and binding are replaced,
  * so the bindings can be measured again over their own output. */
-export function withLeafBoxes<D extends LeafBoxTree>(definition: D, measured: { leaves: readonly MeasuredLeafBox[]; bodyCentre: readonly number[] },
+/** The tree's property table interned again in node order, as the node builder's finish() writes it: an earlier bake's
+ * factors leave no entries behind, and the same leaves give the same bytes whatever the tree's history. */
+function internedTree<T extends LeafBoxTree['tree']>(tree: T, nodes: readonly (T['nodes'][number])[], table: T['properties']): T {
+  const properties: { name: string; value: string; custom: boolean }[] = [], ids = new Map<string, number>();
+  const intern = (property: { name: string; value: string; custom: boolean }) => {
+    const key = JSON.stringify(property);
+    if (!ids.has(key)) { ids.set(key, properties.length); properties.push(property); }
+    return ids.get(key)!;
+  };
+  return { ...tree, nodes: nodes.map(node => ({ ...node, properties: node.properties.map(id => intern(table[id]!)) })), properties };
+}
+
+export function withLeafBoxes<D extends LeafBoxTree>(definition: D, measured: { leaves: readonly MeasuredLeafBox[]; bodyCentre: readonly number[] } | null,
   { closed, initialDiameter }: { closed: boolean; initialDiameter: number }): D {
+  const stepName = (name: string) => name === LEAF_BOX_PROPERTY || name.startsWith(`${LEAF_BOX_PROPERTY}-`);
+  const leafBoxBinding = (entry: unknown) => typeof entry === 'object' && entry !== null &&
+    Reflect.get(entry, 'kind') === 'silhouette-step-property' && Reflect.get(entry, 'property') === LEAF_BOX_PROPERTY;
+  // No rendered leaf: every leaf keeps its full box (the factor's fallback), and an earlier bake's factors, steps and
+  // binding go.
+  if (!measured?.leaves.length) return { ...definition, viewBindings: definition.viewBindings.filter(entry => !leafBoxBinding(entry)),
+    tree: internedTree(definition.tree, definition.tree.nodes.map(node => ({ ...node, properties: node.properties
+      .filter(id => definition.tree.properties[id]!.name !== LEAF_BOX_FACTOR && !stepName(definition.tree.properties[id]!.name)) })),
+      definition.tree.properties) };
   const { tree } = definition, parents = (node: number) => {
     const chain: number[] = [];
     for (let cursor = tree.nodes[node]!.parent; cursor >= 0 && cursor !== tree.scene; cursor = tree.nodes[cursor]!.parent) chain.push(cursor);
@@ -227,7 +252,6 @@ export function withLeafBoxes<D extends LeafBoxTree>(definition: D, measured: { 
     return ids.get(key)!;
   };
   const factorOf = new Map(factors.map(factor => [factor.node, factor.value]));
-  const stepName = (name: string) => name === LEAF_BOX_PROPERTY || name.startsWith(`${LEAF_BOX_PROPERTY}-`);
   const nodes = tree.nodes.map((node, index) => {
     // prepare:object-json writes the bound runtime back, so an earlier measurement's factors and steps are dropped wherever
     // they are.
@@ -236,7 +260,6 @@ export function withLeafBoxes<D extends LeafBoxTree>(definition: D, measured: { 
     return { ...node, properties: [...kept, ...factor === undefined ? [] : [intern({ name: LEAF_BOX_FACTOR, value: factor, custom: true })],
       ...index === target ? initial.map(step => intern({ ...step, custom: true })) : []] };
   });
-  const bindings = definition.viewBindings.filter(entry => !(typeof entry === 'object' && entry !== null &&
-    Reflect.get(entry, 'kind') === 'silhouette-step-property' && Reflect.get(entry, 'property') === LEAF_BOX_PROPERTY));
-  return { ...definition, tree: { ...tree, nodes, properties }, viewBindings: [...bindings, binding] };
+  const bindings = definition.viewBindings.filter(entry => !leafBoxBinding(entry));
+  return { ...definition, tree: internedTree(tree, nodes, properties), viewBindings: [...bindings, binding] };
 }

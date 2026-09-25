@@ -143,4 +143,21 @@ test('measured leaf boxes are written into the tree, and measuring again replace
   assert.deepEqual(named(3), ['transform', LEAF_BOX_FACTOR]);
   // The leaves' outermost common ancestor below the scene holds the initial step they inherit.
   assert.deepEqual(named(2), [LEAF_BOX_PROPERTY]);
+  // With no rendered leaf (a body whose sphere is display: none), an earlier bake's factors, steps and binding go.
+  const cleared = withLeafBoxes(once, null, { closed: true, initialDiameter: 460 });
+  assert.deepEqual(cleared.tree.nodes.map(node => node.properties.map(id => cleared.tree.properties[id]!.name)), [[], [], [], ['transform'], ['transform']]);
+  assert.deepEqual(cleared.viewBindings, [{ kind: 'silhouette-fit' }]);
 });
+
+test('a leaf between two blocks joins the same one whatever float noise its measured frame carries', () => {
+  // The midpoint of two lattice directions of a 12-block body, and that point nudged by measurement-sized noise.
+  const golden = Math.PI * (3 - Math.sqrt(5)), direction = (index: number) => {
+    const y = 1 - 2 * (index + 0.5) / 12, ring = Math.sqrt(1 - y * y), angle = golden * index;
+    return [Math.cos(angle) * ring, y, Math.sin(angle) * ring];
+  };
+  const [a, b] = [direction(3), direction(4)], middle = a.map((value, axis) => value + b[axis]!);
+  const nudged = [1e-12, -1e-12, 3e-13].map(noise => middle.map(value => value + noise));
+  const blocks = leafBoxBlocks([middle, ...nudged, a, b], [0, 0, 0], 12);
+  assert.deepEqual(new Set(blocks.slice(0, 4)).size, 1);
+});
+
