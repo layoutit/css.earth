@@ -1,7 +1,7 @@
-import type { RuntimePolicy, WheelInputKind, WheelZoomInertia } from './runtime-policy.js';
+import type { RuntimePolicy, WheelInputKind, WheelZoomInertia, WheelZoomPinch } from './runtime-policy.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { NavigationCamera, CameraDelta, ControlsUpdate } from './types.js';
-export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; rotate(delta: CameraDelta): void; speedMultiplier?: number; dolly: { stepPerDelta: number }; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
+export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; rotate(delta: CameraDelta): void; speedMultiplier?: number; dolly: { stepPerDelta: number; minimumDistance?: () => number }; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
 // Each wheel event adds its magnitude and device gain to the target
 // log-distance. The eye moves along its axis; wheel input never turns the scene.
@@ -14,6 +14,34 @@ export const PREPARED_WHEEL_ZOOM = Object.freeze({
     cameraStep: "0x005d1152",
   }),
 });
+
+/**
+ * The distance a pinch moves the camera to. `fingerLogStep` is the natural log of the
+ * finger-distance ratio; positive spreads the fingers and approaches. The pinch moves u,
+ * the log distance left to the closest view plus one wheel notch (`notchLog`), so an
+ * approach still arrives there at a finite pace and the closest view has room to pinch
+ * out from. Near a body a full pinch keeps a fixed share of u; far out, where that share
+ * would outgrow it, a fixed zoom.
+ */
+export function pinchTargetDistance(origin: number, closest: number, fingerLogStep: number,
+  pinch: WheelZoomPinch, notchLog: number): number {
+  // A restored observer inside the closest view pinches from where it stands.
+  const floor = Math.min(closest, origin);
+  const fullPinch = Math.log(pinch.fullPinchFingerRatio);
+  const near = -Math.log(pinch.nearRemainingPerFullPinch) / fullPinch;
+  const far = Math.log(pinch.farZoomPerFullPinch) / fullPinch;
+  // Where the two rates meet: below it u decays, above it u falls at a fixed rate.
+  const bend = far / near;
+  let u = Math.log(origin / floor) + notchLog, left = Math.abs(fingerLogStep);
+  if (fingerLogStep > 0) {
+    if (u > bend) { const run = Math.min(left, (u - bend) / far); u -= run * far; left -= run; }
+    u *= Math.exp(-near * left);
+  } else {
+    if (u < bend) { const run = Math.min(left, Math.log(bend / u) / near); u *= Math.exp(near * run); left -= run; }
+    u += left * far;
+  }
+  return Math.max(floor, floor * Math.exp(u - notchLog));
+}
 
 export function createPreparedWheelZoomControls({
   inputSurface,
@@ -33,6 +61,12 @@ export function createPreparedWheelZoomControls({
       typeof rotate !== "function" ||
       !Number.isFinite(speedMultiplier) || speedMultiplier <= 0 ||
       !(dolly?.stepPerDelta > 0) ||
+      (dolly.minimumDistance !== undefined && typeof dolly.minimumDistance !== "function") ||
+      !(runtimePolicy.WHEEL_ZOOM_PINCH.wheelDeltaPerFingerLogStep > 0 &&
+        runtimePolicy.WHEEL_ZOOM_PINCH.fullPinchFingerRatio > 1 &&
+        runtimePolicy.WHEEL_ZOOM_PINCH.nearRemainingPerFullPinch > 0 &&
+        runtimePolicy.WHEEL_ZOOM_PINCH.nearRemainingPerFullPinch < 1 &&
+        runtimePolicy.WHEEL_ZOOM_PINCH.farZoomPerFullPinch > 1) ||
       (glidePolicy !== null && !(glidePolicy.dampingSeconds > 0 && glidePolicy.gain > 0 &&
         glidePolicy.stopLogRatePerSecond > 0 &&
         glidePolicy.stopRateRatio > 0 && glidePolicy.stopRateRatio < 1)) ||
@@ -188,9 +222,14 @@ export function createPreparedWheelZoomControls({
     inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
     previousInputTimestamp = event.timeStamp;
     const origin = motion.kind === 'dolly' && direction === nextDirection ? motion.targetDistance : camera.state.distance;
-    const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER
-      : event.ctrlKey ? runtimePolicy.WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER : speedMultiplier;
-    const targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
+    // A pinch is a ctrlKey wheel. It moves by its own rule once the camera names its closest view.
+    const closest = event.ctrlKey ? dolly.minimumDistance?.() : undefined;
+    const pinch = runtimePolicy.WHEEL_ZOOM_PINCH;
+    const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
+    const targetDistance = closest !== undefined && Number.isFinite(closest) && closest > 0
+      ? pinchTargetDistance(origin, closest, -event.deltaY * unit / pinch.wheelDeltaPerFingerLogStep, pinch,
+        dolly.stepPerDelta * 100)
+      : origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
     direction = nextDirection;
     const expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
     events += 1;

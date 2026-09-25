@@ -309,7 +309,7 @@ export function createUnboundedMatrixDragControls({
     return true;
   };
   // Two fingers pinch: the second touch ends the one-finger orbit, and the pair zooms through the shared wheel zoom as a
-  // pinch wheel at the fingers' midpoint (runtimePolicy.TOUCH_PINCH_WHEEL_DELTA), the way the surface minimap does.
+  // pinch wheel at the fingers' midpoint (runtimePolicy.WHEEL_ZOOM_PINCH), the way the surface minimap does.
   const touches = new Map<number, { x: number; y: number }>();
   let pinchDistance: number | null = null;
   const touchSpread = () => {
@@ -436,7 +436,7 @@ export function createUnboundedMatrixDragControls({
       event.preventDefault();
       const spread = touchSpread();
       if (spread.distance > 0 && pinchDistance > 0 && spread.distance !== pinchDistance) {
-        const deltaY = -Math.log(spread.distance / pinchDistance) * runtimePolicy.TOUCH_PINCH_WHEEL_DELTA;
+        const deltaY = -Math.log(spread.distance / pinchDistance) * runtimePolicy.WHEEL_ZOOM_PINCH.wheelDeltaPerFingerLogStep;
         pinchDistance = spread.distance;
         inputSurface.dispatchEvent(new windowTarget.WheelEvent("wheel", {
           bubbles: true, cancelable: true, ctrlKey: true, deltaY, deltaMode: 0, clientX: spread.x, clientY: spread.y }));

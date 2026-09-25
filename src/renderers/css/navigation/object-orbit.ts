@@ -212,7 +212,8 @@ export function createRetainedCubicSkyOrbit({
     surfaceFlyToHitTest: (clientX, clientY) => !camera.focus() && surfaceHitTest(clientX, clientY),
     // The prepared wheel dolly: the eye moves along its axis, with no
     // surface anchor to hold.
-    dolly: Object.freeze({ stepPerDelta: cameraPlan.dolly.wheelStepPerDelta }),
+    dolly: Object.freeze({ stepPerDelta: cameraPlan.dolly.wheelStepPerDelta,
+      minimumDistance: () => camera.inputMinimumDistance() }),
     onStart() {
       interactionStarts += 1;
       onInteractionStart();

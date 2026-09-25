@@ -11,6 +11,18 @@ export interface WheelZoomInertia {
   readonly stopLogRatePerSecond: number;
   readonly gain: number;
 }
+/** A pinch moves the log distance left to the closest view: near a body a full pinch
+ * leaves a fixed share of it, and far out it zooms by a fixed factor. */
+export interface WheelZoomPinch {
+  /** Pinch wheel delta units per natural-log step of finger distance; a touch pinch is sent in the same units. */
+  readonly wheelDeltaPerFingerLogStep: number;
+  /** The finger-distance ratio of one full pinch. */
+  readonly fullPinchFingerRatio: number;
+  /** The share of the log distance to the closest view left after a full pinch near a body. */
+  readonly nearRemainingPerFullPinch: number;
+  /** The zoom factor of a full pinch far from any closest view. */
+  readonly farZoomPerFullPinch: number;
+}
 export interface ResponsiveOrbitPolicyOptions {
   controls: { update(options: ControlsUpdate): void };
   inputSurface: HTMLElement;
@@ -25,9 +37,7 @@ export interface RuntimePolicy {
   readonly FLIGHT_WHEEL_SPEEDUP: number;
   readonly WHEEL_ZOOM_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: number;
-  readonly WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER: number;
-  /** A two-finger touch pinch zooms as a pinch wheel of this many delta units per natural-log step of finger distance. */
-  readonly TOUCH_PINCH_WHEEL_DELTA: number;
+  readonly WHEEL_ZOOM_PINCH: WheelZoomPinch;
   readonly WHEEL_ZOOM_INERTIA: WheelZoomInertia | null;
   /** The input kinds whose released gesture is glided. A precision pointer
    * carries the platform's own momentum, so gliding it again compounds two

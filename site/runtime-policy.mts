@@ -38,16 +38,24 @@ export const FLIGHT_VISIBLE_APPROACH = Object.freeze({
 // no correction: a 100-unit swipe and one notch should travel the same way.
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
-// A trackpad pinch arrives as ctrlKey wheel events of a few delta units each.
-// Traced on a MacBook trackpad (2026-09-24), a full-pad pinch summed to 150-170
-// units, under two notches, so zooming took many pinches. This gain makes one
-// full pinch about five notches. Scroll swipes keep the multiplier above.
-export const WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER = 3;
-// Two fingers pinch (MOBILE_TOUCH_ACTION): the globe's input sends the pinch as ctrlKey wheel deltas of this many
-// units per natural-log step of finger distance. A pinch wheel moves the camera by exp(delta x 0.006 x
-// WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER), so 1 / (0.006 x 3) makes the distance follow the fingers: spreading them
-// twice as far brings the camera twice as close (measured on Earth, headless touch, 2026-09-24).
-export const TOUCH_PINCH_WHEEL_DELTA = 56;
+// A pinch reports the change in finger distance, not a scroll distance. Chrome sends a trackpad pinch as ctrlKey wheel
+// events of 100 x ln(scale) delta units (components/input/touchpad_pinch_event_queue.cc), and a two-finger touch
+// pinch (MOBILE_TOUCH_ACTION) is sent the same way, so both devices share one finger scale.
+// A pinch crosses the whole camera range, from a body's closest view out to 6.2e21 km, where the Sun's view ends
+// 36 natural-log units from its closest view. One rate cannot suit both ends. At 18x per full pinch, crossing
+// open space took 11 pinches, and one pinch took Earth from its default view to its closest view (headless
+// trackpad pinches, 1,400 x 900, 2026-09-25). So a pinch moves the log distance left to the closest view: near
+// a body a full pinch leaves a fixed share of it, so the camera slows into the surface, and farther out, where
+// that share would outgrow it, it zooms by a fixed factor.
+// A full trackpad pinch was traced at 150-170 delta units (MacBook, 2026-09-24), a finger ratio of about 5.
+export const WHEEL_ZOOM_PINCH = Object.freeze({
+  wheelDeltaPerFingerLogStep: 100,
+  fullPinchFingerRatio: 5,
+  // Earth's default view is 0.93 log units from its closest view: two full pinches, as it is two wheel notches.
+  nearRemainingPerFullPinch: 0.6,
+  // Open space now takes 8 full pinches down to planetary distances.
+  farZoomPerFullPinch: 50,
+});
 // A released wheel gesture keeps the rate it commanded and decays it, as a
 // thrown drag does. Damping is shorter than the trackball's: the wheel drives
 // distance directly, so a glide outliving its gesture reads as drift.

@@ -225,6 +225,8 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     bodyCenter: () => bodyCenter,
     setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
     minimumZoom, maximumZoom, minimumDistance, maximumDistance,
+    /** The closest view input may dolly to, in the units of `state.distance`: a focus's own limit, else the body's. */
+    inputMinimumDistance: () => active ? active.focus.limits.minimumDistanceM / active.frame.metersPerUnit : minimumDistance(),
     /** Only the original centred framing follows a resize; a restored observer stays put. */
     reframe(zoom: number) { if (bodyCenter === null) updateDetail({ zoom }); },
     detailState() {

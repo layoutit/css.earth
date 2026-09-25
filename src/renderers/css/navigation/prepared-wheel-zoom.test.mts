@@ -1,7 +1,7 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import * as runtimePolicy from '../../../../site/runtime-policy.mts';
 import { Surface } from '../../../platform/test/orbit-fixture.mts';
-import { createPreparedWheelZoomControls } from './prepared-wheel-zoom.js';
+import { createPreparedWheelZoomControls, pinchTargetDistance } from './prepared-wheel-zoom.js';
 import type { NavigationCamera, CameraDelta } from './types.ts';
 import type { WheelZoomInertia } from './runtime-policy.ts';
 
@@ -11,20 +11,20 @@ interface WheelEventInput { deltaY: number; timeStamp: number; ctrlKey?: boolean
 
 // The commanded response is measured without inertia; the glide it releases
 // into has its own tests below.
-function fixture(inertia: WheelZoomInertia | null = null) {
+function fixture(inertia: WheelZoomInertia | null = null, minimumDistance?: () => number) {
   vi.stubGlobal('HTMLElement', Surface);
   const surface = new Surface();
   const cameraState = { rotX: 0, rotY: 0, zoom: 1, distance: 1000 };
   const camera: NavigationCamera = { state: cameraState };
   const controls = createPreparedWheelZoomControls({ inputSurface: surface.asElement(), camera, runtimePolicy,
-    dolly: { stepPerDelta: .006 }, inertia,
+    dolly: { stepPerDelta: .006, ...(minimumDistance ? { minimumDistance } : {}) }, inertia,
     rotate(value: CameraDelta) { if (value.distance !== undefined) cameraState.distance = value.distance; },
   });
   return { surface, camera, controls };
 }
 
-function replay(events: readonly WheelEventInput[]): number {
-  const f = fixture();
+function replay(events: readonly WheelEventInput[], minimumDistance?: () => number): number {
+  const f = fixture(null, minimumDistance);
   try {
     for (const event of events) {
       f.surface.tick(event.timeStamp);
@@ -44,13 +44,45 @@ test('physical trackpad zoom uses shared sensitivity consistently across packet 
   expect(replay(sweep(8))).toBeCloseTo(expected, 10);
   expect(replay(sweep(240))).toBeCloseTo(expected, 10);
   expect(replay([{deltaY: 2, timeStamp: 0}, {deltaY: 98, timeStamp: 8}])).toBeCloseTo(expected, 10);
-  // A pinch carries its own gain: its packets are far smaller than a swipe's.
-  const pinch = Math.exp(.006 * 100 * runtimePolicy.WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER);
-  expect(replay([{deltaY: 100, ctrlKey: true, timeStamp: 0}])).toBeCloseTo(pinch, 10);
+  // A camera that names no closest view pinches like a swipe.
+  expect(replay([{deltaY: 100, ctrlKey: true, timeStamp: 0}])).toBeCloseTo(expected, 10);
   expect(replay([{deltaY: 1, timeStamp: 0}])).toBeLessThan(1.025);
   const wheel = Math.exp(.006 * 100 * runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER);
   expect(replay([{deltaY: 100, timeStamp: 0}])).toBeCloseTo(wheel, 10);
   expect(replay([{deltaY: 6.25, deltaMode: 1, timeStamp: 0}])).toBeCloseTo(wheel, 10);
+});
+
+const pinch = runtimePolicy.WHEEL_ZOOM_PINCH;
+const fullPinch = Math.log(pinch.fullPinchFingerRatio);
+
+test('a pinch keeps a share of the way left near a body and zooms a fixed factor far out', () => {
+  // u, the log distance left plus one notch, starts at 2 here: inside the bend.
+  const near = pinchTargetDistance(Math.exp(2 - .6), 1, fullPinch, pinch, .6);
+  expect((Math.log(near) + .6) / 2).toBeCloseTo(pinch.nearRemainingPerFullPinch, 10);
+  const far = pinchTargetDistance(Math.exp(30), 1, fullPinch, pinch, .6);
+  expect(Math.exp(30) / far).toBeCloseTo(pinch.farZoomPerFullPinch, 6);
+});
+
+test('a pinch in and back out returns across the bend, and never passes the closest view', () => {
+  for (const origin of [1, 1.3, 20, 1e6, 1e17]) {
+    for (const step of [.1, fullPinch, 5 * fullPinch]) {
+      const inward = pinchTargetDistance(origin, 1, step, pinch, .6);
+      expect(inward).toBeGreaterThanOrEqual(1);
+      expect(inward).toBeLessThanOrEqual(origin);
+      if (inward > 1) expect(pinchTargetDistance(inward, 1, -step, pinch, .6) / origin).toBeCloseTo(1, 9);
+    }
+  }
+  // An observer restored inside the closest view pinches from where it stands.
+  expect(pinchTargetDistance(.5, 1, -fullPinch, pinch, .6)).toBeGreaterThan(.5);
+});
+
+test('a pinch wheel moves by the pinch rule once the camera names its closest view', () => {
+  const step = -100;
+  const expected = pinchTargetDistance(1000, 400, -step / pinch.wheelDeltaPerFingerLogStep, pinch, .6) / 1000;
+  expect(replay([{deltaY: step / 2, ctrlKey: true, timeStamp: 0}, {deltaY: step / 2, ctrlKey: true, timeStamp: 8}], () => 400))
+    .toBeCloseTo(expected, 10);
+  // The wheel itself keeps its notch.
+  expect(replay([{deltaY: 100, timeStamp: 0}], () => 400)).toBeCloseTo(Math.exp(.6), 10);
 });
 
 // Notches, not a precision sweep: only a discrete wheel is released into the
