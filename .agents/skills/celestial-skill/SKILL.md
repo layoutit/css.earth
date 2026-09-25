@@ -284,10 +284,11 @@ close-ups and image delivery size before accepting the larger texture.
 
 For authored objects, `node tools/prepare/prepare-object.mts <id>...` runs the whole preparation chain in order for those objects only and
 names the step that failed; resume with `--from <step>`, stop early with `--to <step>`. With several ids each tool runs once (the authored
-preparation three objects at a time), which is minutes for a batch where one call per object and tool was an hour. When a change touches only how a body is
-drawn from its images (its scene, presentation or content), add `--reuse-images`: it keeps the published images and rebuilds
-the rest from the tracked recipes in seconds, with no raw downloads. It works for the paged-ellipsoid lane (Earth) and the
-raster lane (the Moon, Mercury, stars…), and refuses when the published image set would change. A placed star, with its planets and
+preparation three objects at a time), which is minutes for a batch where one call per object and tool was an hour. On the paged-ellipsoid lane (Earth) and the raster
+lane (the Moon, Mercury, stars…) a write redraws only the lighting and atmosphere banks by default and keeps every other
+published image, when no recipe changed since the published preparation except in those banks' keys; it prints which mode
+it chose and why. `--full` bakes everything, and is needed when a source image was replaced under the same name.
+`--reuse-images` forces the redraw-only run. A placed star, with its planets and
 companion stars, starts with `node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and then `pnpm telescope new-object
 <spec.json>` (the spec format is in `tools/objects/new-object/spec.mts`): it writes the whole system from the archives and leaves
 only the prose marked `TODO(new-object)`; `--check` runs the chain through the page data on what it wrote, `--bake` the whole chain,

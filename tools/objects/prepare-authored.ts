@@ -1,5 +1,7 @@
 import './thread-pool.js';
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
@@ -140,6 +142,10 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
     const projectRoot = process.cwd(), stageRoot = resolve(projectRoot, '.local/object-preparation');
     await mkdir(stageRoot, { recursive: true });
+    // Publication refuses files the inventory does not list; say so before the run, not after it.
+    const { unownedPublicFiles } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
+    const strays = await unownedPublicFiles(id, objectDirectory, publicDirectory);
+    if (strays.length) throw new Error(`${id}: ${relative(projectRoot, publicDirectory)} holds ${strays.length} file(s) inventory.json does not list (${strays.slice(0, 5).join(', ')}${strays.length > 5 ? ', ...' : ''}); publication would refuse them. Move them out of that directory and run again.`);
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
     try {
       const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
@@ -379,16 +385,59 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   return result;
 }
 
+/** The recipe keys a redraw run recomputes: the lighting and atmosphere banks, per lane recipe. */
+const REDRAWN_KEYS: Readonly<Record<string, readonly string[]>> = { raster: ['lighting', 'atmosphere'], 'paged-ellipsoid': ['material', 'limb', 'atmosphere'] };
+
+/**
+ * Whether a --write run can redraw only the lighting and atmosphere banks and carry every other published image: the lane
+ * has that path, the object is published, and since its published preparation no recipe changed except in the keys those
+ * banks read. The published record keeps each recipe's SHA-256; the recipe it names is looked up in git history.
+ */
+export async function redrawOnlyDecision(objectDirectory: string): Promise<{ redraw: true; acceptChanged: string[]; reason: string } | { redraw: false; reason: string }> {
+  const { entries, sources } = await readAuthoredSources(objectDirectory);
+  const geometrySchema = String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema);
+  const rasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-raster-recipe@1' &&
+    !['terrestrial', 'shape-model', 'observations', 'rings'].some(sourceId => source(sources, sourceId)) &&
+    !['cssearth-layered-oblate-preparation@1', 'cssearth-banded-ellipsoid@1'].includes(geometrySchema);
+  if (!source(sources, 'paged-ellipsoid') && !rasterLane) return { redraw: false, reason: 'its lane has no redraw-only path' };
+  const published = await readFile(resolve(objectDirectory, 'prepared/authored-preparation.json'), 'utf8').then(text => JSON.parse(text) as { sources?: { id: string; path: string; sha256: string }[] }, () => null);
+  if (!published?.sources || !await access(resolve(objectDirectory, 'inventory.json')).then(() => true, () => false)) return { redraw: false, reason: 'nothing is published to carry' };
+  const before = new Map(published.sources.map(entry => [entry.id, entry])), acceptChanged: string[] = [];
+  const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+  const without = (value: unknown, keys: readonly string[]) => JSON.stringify(Object.fromEntries(Object.entries(record(value, 'recipe')).filter(([key]) => !keys.includes(key))));
+  for (const id of new Set([...before.keys(), ...entries.map(entry => entry.reference.id)])) {
+    const was = before.get(id), now = entries.find(entry => entry.reference.id === id);
+    if (was && now && was.path === now.reference.path && was.sha256 === now.reference.sha256) continue;
+    const keys = REDRAWN_KEYS[id];
+    if (!was || !now || !keys || was.path !== now.reference.path) return { redraw: false, reason: `recipe source ${id} changed` };
+    // The published bytes are the version of this file whose SHA-256 the record kept.
+    const path = relative(process.cwd(), now.path), git = (...args: string[]) => execFileSync('git', args, { encoding: 'buffer', maxBuffer: 64 * 1024 * 1024 });
+    const commits = git('log', '--format=%H', '-n', '200', '--', path).toString().split('\n').filter(Boolean);
+    const bytes = commits.map(commit => { try { return git('show', `${commit}:${path}`); } catch { return null; } }).find(candidate => candidate !== null && hash(candidate) === was.sha256);
+    if (!bytes) return { redraw: false, reason: `the published version of ${path} is not in the last 200 commits` };
+    if (without(JSON.parse(bytes.toString('utf8')), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
+    acceptChanged.push(id);
+  }
+  return { redraw: true, acceptChanged, reason: acceptChanged.length ? `only ${acceptChanged.map(id => `${id} ${REDRAWN_KEYS[id]!.join('/')}`).join(', ')} changed` : 'no recipe changed' };
+}
+
 const [id, ...flags] = process.argv.slice(2);
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
   const accepting = flags.find(flag => flag.startsWith('--accept-changed='));
-  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || flags.some(flag => flag !== '--write' && flag !== '--reuse-images' && flag !== accepting) || new Set(flags).size !== flags.length ||
-      (flags.includes('--reuse-images') && !flags.includes('--write')) || (accepting && !flags.includes('--reuse-images')))
-    throw new TypeError('Usage: prepare-authored <object-id> [--write [--reuse-images [--accept-changed=<source-id,...>]]].');
-  const acceptChanged = accepting ? accepting.slice('--accept-changed='.length).split(',').filter(Boolean) : [];
+  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || flags.some(flag => flag !== '--write' && flag !== '--reuse-images' && flag !== '--full' && flag !== accepting) || new Set(flags).size !== flags.length ||
+      ((flags.includes('--reuse-images') || flags.includes('--full')) && !flags.includes('--write')) || (flags.includes('--reuse-images') && flags.includes('--full')) || (accepting && !flags.includes('--reuse-images')))
+    throw new TypeError('Usage: prepare-authored <object-id> [--write [--full | --reuse-images [--accept-changed=<source-id,...>]]].');
+  let acceptChanged = accepting ? accepting.slice('--accept-changed='.length).split(',').filter(Boolean) : [];
   if (acceptChanged.some(source => !/^[a-z][a-z0-9-]*$/u.test(source))) throw new TypeError('--accept-changed takes recipe source ids.');
-  const root = process.cwd(), write = flags.includes('--write'), reuseImages = flags.includes('--reuse-images');
+  const root = process.cwd(), write = flags.includes('--write');
+  let reuseImages = flags.includes('--reuse-images');
+  // A write redraws only the lighting and atmosphere banks when nothing else changed; --full bakes everything.
+  if (write && !reuseImages && !flags.includes('--full')) {
+    const decision = await redrawOnlyDecision(resolve(root, 'src/objects', id));
+    if (decision.redraw) { reuseImages = true; acceptChanged = decision.acceptChanged; }
+    console.log(decision.redraw ? `${id}: redrawing only the lighting and atmosphere banks (${decision.reason}); --full bakes everything.` : `${id}: full preparation (${decision.reason}).`);
+  }
   const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, reuseImages, acceptChanged });
   if (!write) {
     // A check run refuses labels its own report contradicts; write mode rewrites them.
