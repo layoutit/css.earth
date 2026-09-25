@@ -6,13 +6,9 @@ import {mkdtemp, mkdir, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import sharp, { type OutputInfo } from 'sharp';
-import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
+import {MINIMAP_WEBP,prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
 
-const legacyEncoding={quality:90,alphaQuality:100,effort:4,smartSubsample:true};
 const colors=[[231,21,41],[13,211,31],[82,84,82]];
-const pixelSet=(data: Uint8Array)=>{
-  const set=new Set<string>();for(let i=0;i<data.length;i+=3)set.add(data.subarray(i,i+3).join(','));return set;
-};
 async function directories(t: TestContext) {
   const root=await mkdtemp(resolve(tmpdir(),'scientific-minimap-'));
   t.after(()=>rm(root,{recursive:true,force:true}));
@@ -35,7 +31,7 @@ function shiftHalf(data: Buffer<ArrayBuffer>,info: OutputInfo) {
   return out;
 }
 
-test('solid nearest, categorical and facet minimaps preserve framing and attribution without changing images',async t=>{
+test('nearest, categorical and facet minimaps keep the smaller of lossless and lossy, with framing and attribution',async t=>{
   const f=await directories(t),path=resolve(f.publicDirectory,'map.png');await stripedImage(path);
   const original=await readFile(path),attribution={label:'Pinned mission product',url:'https://example.test/source'};
   const surfaces=[
@@ -54,13 +50,9 @@ test('solid nearest, categorical and facet minimaps preserve framing and attribu
     const nearest=entry.id!=='image';
     const resized=await sharp(original).resize({width:640,withoutEnlargement:true,...(nearest?{kernel:'nearest'}:{})}).raw().toBuffer({resolveWithObject:true});
     const shifted=shiftHalf(resized.data,resized.info);
-    if(nearest){
-      const decoded=await sharp(actual).raw().toBuffer();assert.deepEqual(decoded,shifted,entry.id);
-      const allowed=new Set(colors.map(color=>color.join(',')));
-      for(const color of pixelSet(decoded))assert.ok(allowed.has(color),`${entry.id}: ${color}`);
-    }else{
-      const expected=await sharp(shifted,{raw:resized.info}).webp(legacyEncoding).toBuffer();assert.deepEqual(actual,expected);
-    }
+    const lossy=await sharp(shifted,{raw:resized.info}).webp(MINIMAP_WEBP).toBuffer();
+    const lossless=await sharp(shifted,{raw:resized.info}).webp({lossless:true,effort:4}).toBuffer();
+    assert.deepEqual(actual,nearest&&lossless.length<lossy.length?lossless:lossy,entry.id);
   }
   assert.deepEqual(await readFile(path),original);
   assert.deepEqual(await readFile(resolve(f.outputDirectory,'surfaces.json')),sourceBytes);
