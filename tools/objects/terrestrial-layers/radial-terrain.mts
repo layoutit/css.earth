@@ -101,7 +101,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
   const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
   const leaves = layout.plans.map(({ geometry, matrix }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
-    style: `${rasterLeafStyle({ ...geometry, matrix })};--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
+    style: `${rasterLeafStyle({ ...geometry, matrix })}${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
   return { grid, faces, ...layout, leaves, ...(completion ? { completion } : {}),
     ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };

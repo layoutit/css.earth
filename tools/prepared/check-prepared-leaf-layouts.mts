@@ -84,9 +84,9 @@ function requireLeaf(carrier:StyleRecord, nativeRaster = false) {
     if ([3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1) {
       throw new TypeError("Prepared native raster triangle requires an affine transform.");
     }
-    if (carrier.getPropertyValue("--polycss-atlas-leaf-sizing") !== "raster" ||
-        !/^-?\d+(?:\.\d+)?px\s+-?\d+(?:\.\d+)?px$/.test(leafBoxLength(carrier.backgroundPosition))) {
-      throw new TypeError("Prepared native raster triangle requires its raster sizing and texture address.");
+    // Its raster sizing is the data-polycss-texture-leaf-sizing attribute that made it a raster triangle (rasterTriangle).
+    if (!/^-?\d+(?:\.\d+)?px\s+-?\d+(?:\.\d+)?px$/.test(leafBoxLength(carrier.backgroundPosition))) {
+      throw new TypeError("Prepared native raster triangle requires its texture address.");
     }
   }
 }

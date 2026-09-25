@@ -27,17 +27,9 @@ export function scalePreparedPixelLengths(value: string | number, scale: number)
 /** `finish` rewrites each scaled address once more before it is written: the leaf box's factor (leaf-box.mts). */
 export function scalePreparedBackgroundAddresses(style: Pick<PreparedProjectiveStyle, "backgroundPosition" | "backgroundSize" | "getPropertyValue" | "setProperty">, scale: number,
   finish: (value: string) => string = value => value) {
-  const references = new Set<string>();
-  for (const value of [style.backgroundPosition, style.backgroundSize]) {
-    for (const match of String(value).matchAll(/var\(\s*(--[\w-]+)/g)) {
-      references.add(match[1]);
-    }
-  }
-  for (const property of references) {
-    const value = style.getPropertyValue(property);
-    if (value) {
-      style.setProperty(property, finish(scalePreparedPixelLengths(value, scale)));
-    }
+  // Every generator writes its texture address inline: a variable here would be left at its unscaled size.
+  for (const [name, value] of [["background-position", style.backgroundPosition], ["background-size", style.backgroundSize]] as const) {
+    if (/var\(/u.test(String(value))) throw new TypeError(`Prepared ${name} must be inline lengths, not ${value}.`);
   }
   style.backgroundPosition = finish(scalePreparedPixelLengths(
     style.backgroundPosition,

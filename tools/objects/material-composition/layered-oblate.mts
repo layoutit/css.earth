@@ -584,9 +584,6 @@ function textureStyle(polygon:LayeredPolygon, index:number, imagePixels:number, 
       fittedGeometry.leafWidth,
       fittedGeometry.leafHeight,
     ) +
-    (preparedLighting
-      ? `;--${config.namespace}-surface-position:${backgroundPosition}`
-      : "") +
     `;background-image:${preparedBackgroundImages}` +
     `;background-position:${backgroundPosition}` +
     `;background-size:${surfaceBackgroundSize}`;

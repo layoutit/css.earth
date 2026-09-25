@@ -253,16 +253,13 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
       .join(" ");
     const backgroundSize = rasterPresentation.backgroundSize
       .map((value) => formatCssLength(value)).join(" ");
-    const variable = polygon.polar
-      ? `--${id}-pole-position:${backgroundPosition};`
-      : `--${id}-surface-position:${backgroundPosition};`;
     return Object.freeze({
       tag: "s",
       className: polygon.className ?? (polygon.polar
         ? `${id}-polar ${id}-polar-${polygon.polar}${polygon.inner ? ` ${id}-polar-inner` : ""}`
         : ""),
-      style: `transform:matrix3d(${fitted.matrix});${variable}` +
-        `background-position:var(${polygon.polar ? `--${id}-pole-position` : `--${id}-surface-position`});` +
+      style: `transform:matrix3d(${fitted.matrix});` +
+        `background-position:${backgroundPosition};` +
         `background-size:${backgroundSize};` +
         `--polycss-atlas-width:${fitted.leafWidth}px;` +
         `--polycss-atlas-height:${fitted.leafHeight}px`,

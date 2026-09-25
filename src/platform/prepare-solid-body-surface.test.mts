@@ -69,7 +69,7 @@ test("CSS UVs sample the actual atlas when HD padding is not a quarter-band", as
   for (const band of [1, 7, 14]) for (const longitude of [1, 8, 23, 30]) {
     const leaf = geometry[1 + (14 - band) * 32 + longitude];
     const cssSize = ['width', 'height'].map(key => Number(matched(leaf.style, new RegExp(`atlas-${key}:([\\d.]+)`))[1]));
-    const position = matched(leaf.style, /--fixture-surface-position:([^;]+)/)[1].split(' ').map(parseFloat);
+    const position = matched(leaf.style, /background-position:([^;]+)/)[1].split(' ').map(parseFloat);
     const size = matched(leaf.style, /background-size:([^;]+)/)[1].split(' ').map(parseFloat);
     for (const u of [.08, .5, .92]) for (const v of [.08, .5, .92]) {
       const x = Math.floor((u * cssSize[0] - position[0]) * packed.packedWidth / size[0]);
