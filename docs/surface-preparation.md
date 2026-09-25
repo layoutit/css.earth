@@ -581,6 +581,8 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
   | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
   | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../tools/photometry/fit-epic-limb.mts)) |
+
+  ![Each planet's default view in the app, before (authored lighting) and after (published laws), 25 September 2026](images/planet-limbs/before-after.png)
 - **One overlay per pixel.** A CSS overlay has one colour and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean colour,
   measured at bake, and for every pixel in the channel that sets its alpha. A
