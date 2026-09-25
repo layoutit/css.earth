@@ -65,26 +65,18 @@ creates retained native handles directly. Playback owns their time, speed, pause
 resume and disposal. Mount does not call `getAnimations` or read computed styles.
 Pose-addressed animation and motion playback retain separate roles.
 
-## Conservative leaf visibility
+## Leaf visibility
 
-Only immutable, single-sided leaves receive a prepared plane. Leaves under native
-motion, pose, material or transform publishers are excluded. Selection visibility
-has its own owner and is also excluded. Double-sided rings remain native.
+Back faces belong to the browser: single-sided leaves carry `backface-visibility: hidden` and Chromium hides them
+natively. Preparation publishes no facing planes and neither the server nor the browser writes `visibility` on
+surface leaves. Selection visibility keeps its own owner.
 
-The physical camera supplies the eye transform through one shared projection
-function. The presentation tests prepared planes against that eye and writes
-`visibility` only on transitions. It never changes topology, transforms or display.
-The compiler also preserves the transform determinant when normalizing each
-plane. Chromium's native `IsBackFaceVisible` compares the cofactor times the
-determinant against float epsilon, so direction alone is insufficient for tiny
-transforms. The prepared tolerance is `2^-23 / (normalLength * determinant^2)`;
-runtime scales it using the camera determinant and focal length. A narrow angular
-margin additionally leaves grazing raster edges under the browser's ownership.
-See the [Chrome 152 implementation](https://chromium.googlesource.com/chromium/src/+/refs/tags/152.0.7977.76/ui/gfx/geometry/transform.cc).
-
-The visual comparison restores native backface handling on the exact same nodes,
-textures, camera and clocks. It requires zero changed pixels after pixelmatch's
-antialias handling (threshold 0.1); it does not accept a percentage difference.
+An earlier prepared culling pass copied Chromium's back-face test into JavaScript from planes frozen at bake time.
+The server applied it for the camera in a shared link and wrote those leaves into the HTML as hidden; the browser
+publisher then took `hidden` as their restored state, so they never returned, and each drag hid more. It also cost
+17.5 MB gzipped across 514 bodies. With it removed, the depth-partitioned bodies Selam and Haumea render with zero
+changed pixels (pixelmatch threshold 0.1) at rest and after a drag, and drag frame times on Haumea and 55 Cancri e
+are unchanged.
 
 ## Open trajectories
 

@@ -8,10 +8,12 @@ type MinimalPresentation = {id: string; tree: PreparedTree; variants: {writes: r
  * Namespace or ancestor-sensitive styles that cannot survive keep native depth. */
 export async function verifyDepthStyles(page: Page, source: PresentationSource, compiled: PresentationSource, surface: DepthSurface | null) {
   if (!compiled.depthPartitions) return true;
-  if (!surface || !compiled.facing) throw new TypeError('Compiled depth requires surface and facing.');
-  const pairs = surface.leaves.map((id, i) => [id, compiled.facing![i].target]);
+  if (!surface) throw new TypeError('Compiled depth requires its surface.');
   const chain = [];
   for (let id = surface.target; id !== source.tree.camera; id = source.tree.nodes[id].parent) chain.unshift(id);
+  // prepareDepthPartitions inserts every group's carrier chain before the first surface leaf and moves each later node by that count.
+  const insertion = Math.min(...surface.leaves), extra = compiled.depthPartitions.groups.length * (chain.length + 1);
+  const pairs = surface.leaves.map(id => [id, id < insertion ? id : id + extra]);
   for (const group of compiled.depthPartitions.groups) {
     let parent = group.root;
     for (const id of chain) {

@@ -30,7 +30,7 @@ export function addNativeCamera(document: Document, definition: ObjectRuntimeDef
   selection: ObjectSelection, frame: PreparedWorldCameraFrame, publication: Publication,
   options: { surfaceOnly?: boolean } = {}): NativeCameraRotation {
   if (!publication.view.projection) throw new TypeError('Native drag requires a physical camera.');
-  if (definition.depthPartitions || definition.facing?.length || definition.features || definition.animations.length) {
+  if (definition.depthPartitions || definition.features || definition.animations.length) {
     throw new TypeError('This camera experiment has not yet compiled this object’s extra view bindings.');
   }
   const values=new CssValues();

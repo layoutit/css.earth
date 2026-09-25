@@ -9,12 +9,10 @@ const source: ReturnType<typeof JSON.parse> = JSON.parse(await readFile(new URL(
 // partition transport against explicit carriers, independent of that bake choice.
 const prepared = structuredClone(source), groups: { root: number; scene: number }[] = [];
 const node = (parent: number) => ({ parent, tag: 'div', className: null, style: '', properties: [], attributes: {} });
-prepared.facing = [];
 for (let index = 0; index < 2; index++) {
-  const root = prepared.tree.nodes.length, scene = root + 1, leaf = root + 2;
+  const root = prepared.tree.nodes.length, scene = root + 1;
   prepared.tree.nodes.push(node(prepared.tree.camera), node(root), node(scene));
   groups.push({ root, scene });
-  prepared.facing.push({ target: leaf, plane: [0, 0, 1, 0], tolerance: 1 });
 }
 prepared.depthPartitions = { groups, order: { plane: [1, 0, 0, 0], back: { group: 0 }, front: { group: 1 } } };
 prepared.tree.activationGroups = prepareActivationGroups(prepared);
@@ -24,7 +22,6 @@ test('the published package and explicit grouped carriers validate before DOM co
   const plan = parsePreparedObjectRuntime(prepared);
   expect(plan.depthPartitions?.groups.length).toBeGreaterThan(1);
   expect(plan.tree.camera).toBe(source.tree.camera);
-  expect(plan.facing?.length).toBe(2);
 });
 
 test.each([
@@ -35,10 +32,9 @@ test.each([
   { name: 'duplicated group in depth sequence', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { sequence: [{ group: 0 }, { group: 0 }] }; } },
   { name: 'same group on both sides of separating plane', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { plane: [0,0,1,0], back: { group: 0 }, front: { group: 0 } }; } },
   { name: 'non-unit separating plane', mutate: (plan: typeof prepared) => { plan.depthPartitions.order.plane = [0,0,2,0]; } },
-  { name: 'missing depth partitions', mutate: (plan: typeof prepared) => { delete plan.depthPartitions; } },
 ])('transport rejects $name', ({ mutate }) => {
   const plan = structuredClone(prepared); mutate(plan);
-  expect(() => parsePreparedObjectRuntime(plan)).toThrow(/depth|facing/);
+  expect(() => parsePreparedObjectRuntime(plan)).toThrow(/depth/);
 });
 
 test('fixed visibility sequences cover every retained carrier', () => {

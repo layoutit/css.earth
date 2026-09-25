@@ -1,6 +1,11 @@
 import { expect, test } from 'vitest';
-import { createPreparedDepthPartitions } from './prepared-depth-partitions.js';
+import { createPreparedDepthPartitions, sceneEye } from './prepared-depth-partitions.js';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
+
+test('recovers the observer under rotation, translation and scene scale', () => {
+  const p = physicalProjectionFromCamera([0, 0, 1, 0, 1, 0, -1, 0, 0], [-12, -8, 4], 2, { focalPixels: 600, principalOffsetPixels: [21, -7] });
+  expect(sceneEye(p)).toEqual([2, 4, 6]);
+});
 
 test('camera publication preserves carriers and changes prepared ordering only across a separating plane', () => {
   const writes: string[] = [];

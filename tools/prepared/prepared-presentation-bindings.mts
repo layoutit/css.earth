@@ -3,9 +3,9 @@ import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../../src/platf
 import { isRecord } from '@cssearth/core';
 import type { PreparedInteriorDisc } from '../../src/renderers/css/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '../../src/renderers/css/rendering/prepared-presentation.ts';
-import type { PreparedFacingPlane } from '../../src/renderers/css/rendering/prepared-facing.ts';
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.mts';
-type FacingBinding = Omit<PreparedFacingPlane, 'target'>;
+/** A leaf's fixed plane in scene space, which the depth preparation needs to prove a surface static. */
+type FacingBinding = { plane: [number, number, number, number]; tolerance: number };
 type MotionTrack = Omit<NonNullable<PreparedPresentationDefinition['motion']>[number], 'timings'> & {timings: {when: PreparedVariant['when']; duration: number}[]};
 interface DepthResult {id: string; source: PresentationSource; compiled: PresentationSource; surface: DepthSurface | null; reason: string | null | undefined;}
 
@@ -17,8 +17,8 @@ import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
 import { verifyDepthStyles } from './prepared-depth-styles.mts';
 
-/** Resolve authored motion and immutable leaf facing offline. Runtime receives
- * explicit animation handles and planes, never a live style discovery pass. */
+/** Resolve authored motion offline. Runtime receives explicit animation
+ * handles, never a live style discovery pass; the browser culls back faces. */
 export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult, interiorOnly = false, browser: suppliedBrowser, publicDirectory }: {onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser; publicDirectory?: string} = {}) {
   // A staged scene directory holds this object's assets flat; published assets live under public/scenes/<id>/.
   const assetRoot = publicDirectory ? (url: string) => {
@@ -70,13 +70,12 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       nodes.forEach((node, i) => (definition.tree.nodes[i].parent < 0 ? stage : nodes[definition.tree.nodes[i].parent]).append(node));
       const index = new Map<Element, number>(nodes.map((node, i) => [node, i]));
       const tracks = new Map<string, MotionTrack>();
-      const planes = new Map<number, FacingBinding | null>(), variablePlanes = new Set<number>();
       const dynamic = new Set([
         ...definition.animations.map(plan => plan.target),
         ...definition.viewBindings.filter(binding => !['view-attribute', 'view-property', 'silhouette-step-property'].includes(binding.kind)).map(binding => binding.target),
         ...definition.materials.map(track => track.target),
-        // These properties have another publisher. A facing binding must not
-        // override selection visibility or an authored changing transform.
+        // These properties have another publisher: a leaf under selection visibility or an
+        // authored changing transform has no fixed plane for the depth preparation.
         ...definition.variants.flatMap(variant => variant.writes.filter(write => write.kind === 'style' &&
           ['visibility', 'display', 'transform', 'transformOrigin', 'transform-origin'].includes(write.name)).map(write => write.target)),
       ]);
@@ -236,7 +235,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       for (const animation of stage.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 0; }
       const interior = interiorGeometry();
       const bodyNode = definition.tree.nodes.findIndex(node => node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway'));
-      if (interiorOnly) return { interior, surface: null, depthReason: null, motion: [], facing: [] };
+      if (interiorOnly) return { interior, surface: null, depthReason: null, motion: [] };
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
@@ -283,20 +282,13 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         if (JSON.stringify(motionIdentities) !== JSON.stringify([...identities].sort())) {
           throw new TypeError('Selection-dependent motion membership requires explicit preparation.');
         }
-        for (let target = 0; target < nodes.length; target++) {
-          if (variablePlanes.has(target)) continue;
-          const plane = facingPlane(target);
-          if (planes.has(target) && JSON.stringify(planes.get(target)) !== JSON.stringify(plane)) {
-            planes.delete(target); variablePlanes.add(target);
-          } else planes.set(target, plane);
-        }
         const nextSurface = depthSurface();
         if (surface !== undefined && JSON.stringify(surface) !== JSON.stringify(nextSurface)) variableSurface = true;
         surface = nextSurface;
       }
       // Recheck after every variant has declared its motion targets.
       const finalSurface = variableSurface ? null : depthSurface();
-      return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
+      return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()] };
     }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
     const { interior, surface, depthReason, ...bindings } = prepared;
     if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, assetRoot, gapExclusion);
