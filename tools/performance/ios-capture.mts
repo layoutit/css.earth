@@ -120,12 +120,21 @@ async function bootedUdid() {
   return requireString(booted[0]!.udid, 'udid');
 }
 
-/** The simulator's Web Inspector socket moves between boots; the live one is held open by launchd_sim. */
-async function inspectorSocket() {
-  const { stdout } = await run('lsof', ['-c', 'launchd_sim', '-a', '-U']).catch(() => ({ stdout: '' }));
-  const socket = stdout.split('\n').map(line => line.trim().split(/\s+/u).at(-1) ?? '').find(path => path.endsWith('com.apple.webinspectord_sim.socket'));
-  if (!socket) throw new Error('No live simulator Web Inspector socket; boot a simulator and open Safari.');
-  return socket;
+/** The simulator's Web Inspector socket moves between boots; the live one is held open by that simulator's launchd_sim,
+ * whose command line names its device, so with several simulators booted the capture attaches to `udid`'s own Safari. */
+async function inspectorSocket(udid: string) {
+  const { stdout } = await run('lsof', ['-c', 'launchd_sim', '-a', '-U', '-F', 'pn']).catch(() => ({ stdout: '' }));
+  let pid = '';
+  const sockets: { pid: string; path: string }[] = [];
+  for (const line of stdout.split('\n')) {
+    if (line.startsWith('p')) pid = line.slice(1);
+    else if (line.startsWith('n') && line.endsWith('com.apple.webinspectord_sim.socket')) sockets.push({ pid, path: line.slice(1) });
+  }
+  for (const socket of sockets) {
+    const { stdout: command } = await run('ps', ['-o', 'command=', '-p', socket.pid]).catch(() => ({ stdout: '' }));
+    if (command.includes(`/Devices/${udid}/`)) return socket.path;
+  }
+  throw new Error(`No live Web Inspector socket for simulator ${udid} among ${sockets.length}; boot it and open Safari.`);
 }
 
 async function inspectorPages(port: number): Promise<{ url: string; webSocketDebuggerUrl: string }[]> {
@@ -151,10 +160,10 @@ async function visiblePage(pages: readonly { url: string; webSocketDebuggerUrl: 
 }
 
 /** Reuse a running proxy that lists pages; otherwise start one on the live socket. Attaches to the visible tab. */
-async function connectProxy(port: number): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
+async function connectProxy(port: number, udid: string): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
   const listed = await inspectorPages(port).catch(() => []);
   if (listed.length) return { page: await visiblePage(listed), proxy: null };
-  const proxy = spawn('ios_webkit_debug_proxy', ['-s', `unix:${await inspectorSocket()}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
+  const proxy = spawn('ios_webkit_debug_proxy', ['-s', `unix:${await inspectorSocket(udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
   for (let attempt = 0; attempt < 20; attempt++) {
     await wait(500);
     const pages = await inspectorPages(port).catch(() => []);
@@ -605,7 +614,7 @@ export async function captureIosMoment(args: readonly string[]) {
   const udid = option.udid ?? await bootedUdid();
   const out = resolve(root, 'output/performance/ios-captures', `${option.name}-${new Date().toISOString().replace(/[:.]/gu, '-')}`);
   await mkdir(out, { recursive: true });
-  const { page, proxy } = await connectProxy(option.port);
+  const { page, proxy } = await connectProxy(option.port, udid);
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
   // A fixed status-bar clock keeps screenshots of the same view identical across captures.

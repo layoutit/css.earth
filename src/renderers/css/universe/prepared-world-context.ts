@@ -558,7 +558,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         fader.visible(entry.mover, billboardShown);
         // The mover is hidden with its marker: a visible, transformed mover with nothing to draw still becomes a layer.
-        if (entry.billboardShown !== billboardShown) marker.style.visibility = entry.mover.style.visibility = billboardShown ? '' : 'hidden';
+        if (entry.billboardShown !== billboardShown) {
+          marker.style.visibility = entry.mover.style.visibility = billboardShown ? '' : 'hidden';
+          // A shown mover is its own small compositor layer, so camera motion slides it instead of repainting the
+          // screen-sized layer it would otherwise paint into (WebKit repainted the whole viewport on every drag frame).
+          // A hidden mover gets none, so hundreds of hidden markers cost no layers.
+          entry.mover.style.willChange = billboardShown ? 'transform' : '';
+        }
         entry.billboardShown = billboardShown;
         if (entry.markerShown !== markerShown) marker.dataset.contextBodyVisible = String(markerShown);
         entry.markerShown = markerShown; entry.markerDiameter = markerDiameter;
