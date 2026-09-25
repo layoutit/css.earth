@@ -2,8 +2,8 @@
 
 This package combines prepared material derived from the following sources:
 
-- Atmosphere parameter values in `source/atmosphere/model.json`, adapted from
-  the OpenSpace Team's RenderableAtmosphere tuning (MIT) and cited there.
+- The surface limb law transcribed from Vincendon (2013),
+  doi:10.1016/j.pss.2012.12.005, cited in `source/manifest.json`.
 - USGS Astrogeology and NASA/PDS Mars surface, MOLA, and THEMIS products.
   These United States government data products are credited in `README.md`
   and `source/manifest.json`.

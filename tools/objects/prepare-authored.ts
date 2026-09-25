@@ -5,8 +5,9 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
-import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
+import { parseRasterRecipe, prepareLimb, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { prepareLighting } from '../../src/renderers/css/preparation/materials/lighting.js';
+import { prepareAtmosphere } from '../../src/preparation/raster/materials.js';
 import { outputName } from '../../src/preparation/raster/io.js';
 import { RASTER_DENSITY } from '../../src/preparation/raster/config.js';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
@@ -25,7 +26,9 @@ export interface AuthoredPreparationContext { readonly objectDirectory: string; 
   readonly reuseImages?: boolean;
   /** Recipe sources the author states changed without feeding the reused outputs (reuse-images runs). */
   readonly acceptChanged?: readonly string[]; }
-export interface AuthoredPreparationResult { readonly descriptor: AuthoredObjectDescriptor; readonly sources: ReadonlyMap<string, VerifiedSource>; readonly raster?: unknown; readonly celestial?: unknown; readonly scene?: unknown; readonly definition?: unknown; }
+export interface AuthoredPreparationResult { readonly descriptor: AuthoredObjectDescriptor; readonly sources: ReadonlyMap<string, VerifiedSource>; readonly raster?: unknown; readonly celestial?: unknown; readonly scene?: unknown; readonly definition?: unknown;
+  /** Public images a reuse-images run redrew from the recipe (the paged-ellipsoid material banks); they may change. */
+  readonly recomputedImages?: readonly string[]; }
 type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
@@ -181,11 +184,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           const changed = [...new Set([...existing.keys(), ...staged.keys()])].filter(filename => JSON.stringify(existing.get(filename)) !== JSON.stringify(staged.get(filename)));
           const chartSource = result.sources.get('charts')?.value as { charts?: { output?: unknown }[] } | undefined;
           const chartOutputs = new Set(chartSource?.charts?.map(chart => chart.output).filter((output): output is string => typeof output === 'string' && output.endsWith('.svg')) ?? []);
-          // The lighting stage is recomputed from its recipe, and may add the shadowless frames the published set predates.
-          const lightingRecipe = (result.sources.get('raster')?.value as { lighting?: { billboardOutput?: unknown } } | undefined)?.lighting;
-          const billboardName = typeof lightingRecipe?.billboardOutput === 'string' ? outputName(lightingRecipe.billboardOutput, RASTER_DENSITY) : null;
+          // The lighting and atmosphere stages are recomputed from their recipes: their images may change, and the lighting
+          // stage may add the shadowless frames the published set predates.
+          const rasterRecipe = result.sources.get('raster')?.value as { lighting?: Record<string, unknown>; atmosphere?: Record<string, unknown> } | undefined;
+          const recomputed = new Set([...(result.recomputedImages ?? []), ...[rasterRecipe?.lighting, rasterRecipe?.atmosphere].flatMap(block => Object.entries(block ?? {}))
+            .filter(([key, value]) => key.endsWith('Output') && typeof value === 'string').map(([, value]) => outputName(value as string, RASTER_DENSITY))]);
+          const billboardName = typeof rasterRecipe?.lighting?.billboardOutput === 'string' ? outputName(rasterRecipe.lighting.billboardOutput, RASTER_DENSITY) : null;
           const shadowless = new Set(billboardName ? ['shadowless', 'shadowless-billboard'].map(name => billboardName.replace('billboard', name)) : []);
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(shadowless.has(filename) && !existing.has(filename)));
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !(recomputed.has(filename) && existing.has(filename) && staged.has(filename)) && !(shadowless.has(filename) && !existing.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }
@@ -285,13 +291,22 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const publishedFeatures = reuseImages ? { runtime: record(await publishedJson('runtime'), 'published runtime'),
     content: record(await publishedJson('content'), 'published content') } : null;
   const reused = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>> : null;
-  // Lighting frames come from the recipe alone, never from raw downloads, so a reuse run recomputes them (a shared bank's are
-  // copied): the published metadata may predate a lighting output, such as the shadowless frame.
-  if (reused && rasterConfig.lighting) {
-    Object.assign(reused, { lighting: await prepareLighting(rasterConfig, rasterConfig.lighting, publicDirectory) });
+  // Lighting and atmosphere frames come from the recipe and the body's photometry, never from raw downloads, so a reuse run
+  // recomputes them (a shared bank's are copied): the published metadata may predate a lighting output or a limb law.
+  const surfaceShape = parseGeometryProfile(required(sources, 'geometry').value).surface;
+  const shape = { polarToEquatorial: surfaceShape.polarRadius / surfaceShape.radius };
+  if (reused && (rasterConfig.lighting || rasterConfig.atmosphere)) {
+    if (rasterConfig.lighting) {
+      const limb = rasterConfig.lighting.limb ? await prepareLimb(rasterConfig.lighting.limb, sourceDirectory, publicDirectory, rasterConfig, 'lighting.limb', shape.polarToEquatorial) : undefined;
+      Object.assign(reused, { lighting: await prepareLighting(rasterConfig, rasterConfig.lighting, publicDirectory, limb) });
+    }
+    if (rasterConfig.atmosphere) {
+      const limb = await prepareLimb(rasterConfig.atmosphere.limb, sourceDirectory, publicDirectory, rasterConfig, 'atmosphere.limb', shape.polarToEquatorial);
+      Object.assign(reused, { atmosphere: await prepareAtmosphere(rasterConfig.atmosphere, sourceDirectory, publicDirectory, limb) });
+    }
     await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(reused)}\n`);
   }
-  const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig,
+  const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig, shape,
       interpret: await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts'))
         .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig }) });
   // A body may take its surfaces from an observed-surfaces recipe rather than this lane, which then prepares only its

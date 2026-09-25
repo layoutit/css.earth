@@ -158,7 +158,8 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         {kind:"attribute",target:-1,name:"data-lens",value:lens.id},
         {kind:"class",target:-1,name:`${config.namespace}-hide-atmosphere`,value:!atmosphere}],
       materials:tracks.map(track=>({track:track.id,bank:track.id,mode:track.id==="lighting"&&!shadows?"fixed":plan.material[track.id].illumination?"frames":"default-pose",
-        enabled:!isInterior&&(track.id==="lighting"?shadows&&lens.id!=="night-lights":atmosphere),rotationEnabled:track.id!=="lighting"||shadows,
+        // With the atmosphere on, its image holds the lit disc too, so the lighting bank loads only with the atmosphere off.
+        enabled:!isInterior&&(track.id==="lighting"?shadows&&!atmosphere&&lens.id!=="night-lights":atmosphere),rotationEnabled:track.id!=="lighting"||shadows,
         frameOverride:track.id!=="lighting"&&!shadows&&plan.material[track.id].illumination?plan.material[track.id].frameCount-1:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));

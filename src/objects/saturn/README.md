@@ -44,6 +44,8 @@ The recipe binds Saturn's settings to the shared
 [material-composition preparer](../../../tools/objects/material-composition/index.mts),
 which uses the shared radial, cutaway, sky and content preparation modules.
 
+- The material overlay has one colour and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.
+
 <details>
 <summary>Dimensions, motion and navigation portrait</summary>
 
@@ -327,23 +329,27 @@ the visible and inset caps.
 <details>
 <summary>Prepared lighting and mutual shadows</summary>
 
-The separate material overlays use a Lambert illumination model with a
-`0.05` ambient intensity, Oren-Nayar roughness `0` and a smoothstep terminator;
-the formulation and these parameter values are adapted from the OpenSpace
-globe shader (MIT, OpenSpace Team) and are stated in the geometry recipe. This
-adapter replaces the neutral albedo multiplier with a prepared warm solar
-presentation. NASA's
+The separate material overlays put back the limb darkening OPAL removed from
+the colour map, with the Cycle 32 README's own Minnaert coefficients: k 0.80 in
+F631N, 0.65 in F502N and 0.40 in F395N
+([README](https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt);
+[planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
+They are recorded in `source/photometry/opal-2025-minnaert-*.json` and
+evaluated relative to the flood-lit disc centre on continuous per-texel oblate
+normals, times the rings' direct transmission where their shadow falls. Blue has
+k below 0.5, so under full light the blue limb brightens: Hubble measured it, and
+it replaces the authored pearl-blue limb colour, the 0.05 ambient intensity, the
+Oren-Nayar term and the smoothstep terminator, all adapted from OpenSpace and all
+removed. This adapter keeps the warm solar presentation. NASA's
 [Sun fact sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html)
 gives the solar photosphere an effective temperature of 5,772 K. The prepared
 `#fff1ea` multiplier is derived from a 5,772 K Planck distribution through the
 CIE 1931 observer and linear sRGB/D65, normalized by its maximum channel. This
 is a declared colorimetric display approximation, not flat white light or a
 full spectral renderer. The constant solar spectrum is multiplied into the
-surface texels once during preparation. The Lambert term is multiplied by
-`smoothstep(0, 0.1, N dot L)` to soften the terminator, applied to continuous
-per-texel oblate normals. The prepared material solves black-alpha intensity attenuation against
-the declared sRGB reference channel `160`, then source-over composites the
-prepared pearl-blue atmospheric response into that same texel. The 5,188 x 4,160 `saturn-orbit-material.webp` RGBA preparation master packs
+surface texels once during preparation. Each material texel is one source-over
+colour and alpha, exact for the prepared surface's mean colour (measured at
+bake). The 5,188 x 4,160 `saturn-orbit-material.webp` RGBA preparation master packs
 256 prepared camera-elevation material fields in a 16 x 16 grid. Each field has
 a 256-pixel tile and a two-pixel gutter. Runtime export retains one active
 variant atlas and one generated high-resolution default frame. The four lenses
@@ -351,9 +357,8 @@ each have full, no-shadow, and ringless exterior and cutaway masters, so the
 controls remove only the requested phenomena without removing Saturn's
 lighting. The browser selects one prepared address only when camera input
 changes. It performs no lighting playback while the scene is idle. The material
-stores the pearl-blue, view- and
-light-dependent limb response from prepared oblate normal samples over the solar
-attenuation. CSS therefore paints one material background over the surface
+stores the view- and light-dependent limb from prepared oblate normal samples
+over the solar attenuation. CSS therefore paints one material background over the surface
 instead of separate atmosphere and shadow layers. The earlier project-authored
 three-storm texture and the cross-mission Cassini polar cap are no longer
 rendered: the visible body now contains only the declared Hubble map and its

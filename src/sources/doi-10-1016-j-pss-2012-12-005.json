@@ -1,0 +1,27 @@
+{
+  "id": "doi-10-1016-j-pss-2012-12-005",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mars surface phase function constrained by orbital observations",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.pss.2012.12.005"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.pss.2012.12.005",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/documents/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -80,6 +80,8 @@ registration or recover unobserved polar features.
 <a id="shape-satellites-and-rings"></a>
 <a id="atmosphere-facts-and-sky"></a>
 
+The lighting overlay has one colour and alpha per pixel, so its per-channel limb law is exact for the colour map's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The FQ619N and F845M lenses share the colour map's bank; OPAL applied no Minnaert correction to those two maps, so their limb is not their own law.
+
 <details>
 <summary>Methods and source notes</summary>
 
@@ -89,8 +91,11 @@ Each lens is mapped across 722 surface leaves on the shared sphere lane: 720
 longitude-latitude cells and two polar caps. The orientation is solved from
 Neptune's pole and rotation at the scene epoch; the hand-typed rotations it
 replaced were about 65° off. Lighting is one 256-frame bank indexed by the
-Sun's direction in view and shared by every lens; it carries no atmospheric-limb
-overlay. The rings are 16 wedges drawn from the ring recipe, the Adams arcs
+Sun's direction in view and shared by every lens. Each frame puts back the limb
+darkening OPAL removed from the colour map, with the 2025b README's Minnaert
+coefficients: k 0.50 in F657N, 0.80 in F547M and 0.88 in F467M ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). At
+k 0.50 red does not darken at all under full light, so the limb loses its cyan
+toward grey. No floor, ambient term or terminator ramp remains. The rings are 16 wedges drawn from the ring recipe, the Adams arcs
 included, and each starts outside the planet so the planet hides their far side.
 No ordinary image element or planet-sized background `<div>` is generated or
 mounted. Runtime only selects and decodes prepared assets; it performs no

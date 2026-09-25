@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "vincendon-2013-hapke",
+  "instrument": "Mars Express OMEGA and MRO CRISM",
+  "filter": "solar wavelengths, surface only",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.85,
+    "hFunction": "hapke-1981",
+    "phaseFunction": {
+      "form": "isis-henyey-greenstein",
+      "b": 0.12,
+      "c": 0.6
+    },
+    "shadowHiding": {
+      "amplitude": 1,
+      "width": 0.05
+    },
+    "roughnessDegrees": 17
+  },
+  "fit": {
+    "phaseDegrees": [
+      0,
+      70
+    ],
+    "emissionDegrees": [
+      0,
+      70
+    ]
+  }
+}

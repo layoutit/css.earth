@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "opal-2025b-minnaert-f467m",
+  "instrument": "Hubble WFC3/UVIS (OPAL)",
+  "filter": "F467M, 467 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 0.88,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      0.93,
+      0.99
+    ],
+    "emissionDegrees": [
+      0,
+      79.5
+    ]
+  }
+}

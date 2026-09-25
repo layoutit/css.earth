@@ -77,6 +77,8 @@ export function parsePhotometricModel(value: unknown): PhotometricModel {
       : diskFamily === 'lambert' || diskFamily === 'lommel-seeliger' ? (strict(r.disk, ['family'], 'disk function'), { family: diskFamily })
       : (() => { throw new TypeError(`Unknown disk function: ${diskFamily}.`); })();
     const phase: PhaseModel | undefined = optional(r.phase, value => {
+      if (requireRecord(value, 'phase function').family === 'exponential')
+        return assertPhaseModel({ family: 'exponential', slopePerRadian: requireFiniteNumber(strict(value, ['family', 'slopePerRadian'], 'phase function').slopePerRadian, 'phase slope per radian') });
       const p = strict(value, ['family', 'asymmetry', 'amplitude', 'width'], 'phase function');
       return assertPhaseModel({ family: oneOf(p.family, ['hg-shadow-hiding'] as const, 'phase family'), asymmetry: requireFiniteNumber(p.asymmetry, 'asymmetry'), amplitude: requireFiniteNumber(p.amplitude, 'amplitude'), width: requireFiniteNumber(p.width, 'width') });
     });

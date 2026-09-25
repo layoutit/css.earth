@@ -2,13 +2,24 @@ import { existsSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
-import { lightingFrame } from '@cssearth/objects';
+import { lightingFrame, type LambertRasterConfig } from '@cssearth/objects';
+import { limbSphereFrame, type Channels, type LimbLaw } from '../../../../../tools/photometry/limb.mts';
 import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from '../../../../preparation/raster/config.js';
 import { raster, hashFile, outputName } from '../../../../preparation/raster/io.js';
 import { LIGHTING_BANK_ROOT } from '../../../../preparation/raster/lighting-banks.js';
 /** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (tools/objects/thread-pool.ts). */
 export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
-export async function prepareLighting(config: RasterRecipe, recipe: LightingRecipe, publicDirectory: string) {
+/** A body's published limb: its models and the overlay's reference colour (tools/photometry/limb.mts). */
+export interface PreparedLimb { readonly law: LimbLaw; readonly reference: Channels<number>; readonly referenceSource: string; readonly polarToEquatorial: number }
+
+/** One frame of the bank: the published limb law when the body has one, otherwise the shared bank's authored sphere law. */
+function frameFor(frameSize: number, frameIndex: number, recipe: LightingRecipe, limb: PreparedLimb | undefined) {
+    if (!limb) return lightingFrame(frameSize, frameIndex, recipe as LambertRasterConfig);
+    const z = recipe.minimumLightViewZ + (recipe.maximumLightViewZ - recipe.minimumLightViewZ) * frameIndex / (recipe.frameCount - 1);
+    return limbSphereFrame(frameSize, recipe.radiusScale, [Math.sqrt(Math.max(0, 1 - z * z)), 0, z], limb.law, limb.reference, limb.polarToEquatorial);
+}
+export async function prepareLighting(config: RasterRecipe, recipe: LightingRecipe, publicDirectory: string, limb?: PreparedLimb) {
+    if (Boolean(recipe.limb) !== Boolean(limb)) throw new TypeError(`Lighting ${recipe.bankSchema}: lighting.limb ${recipe.limb ? 'names models that were not loaded' : 'is absent but a limb law was supplied'}.`);
     // A recipe naming a shared bank takes the bank's rows and billboard as baked under public/lighting/<bank>/ (lighting-banks.ts):
     // the same bytes an encode here would write, checked by prepare-lighting-bank --check, without the encode. The bake stages
     // into a scratch directory, so the bank is found from the repository root every preparation tool runs from.
@@ -50,7 +61,7 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
             const frameIndex = firstFrame + column;
             presentations.push({ frameIndex, rowIndex, url, backgroundPosition: `${-column * recipe.presentationSize}px 0px`, backgroundSize: `${frameCount * recipe.presentationSize}px ${recipe.presentationSize}px` });
             if (bankDirectory) continue;
-            const frame = lightingFrame(frameSize, frameIndex, recipe);
+            const frame = frameFor(frameSize, frameIndex, recipe, limb);
             for (let y = 0; y < frameSize; y++)
                 pixels!.set(frame.subarray(y * frameSize * 4, (y + 1) * frameSize * 4), (y * width + column * frameSize) * 4);
             thumbnails.push(raster(frame, frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).raw().toBuffer().then(thumbnail => {
@@ -78,14 +89,14 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     if (!sfFile.includes('shadowless')) throw new TypeError(`Lighting output ${recipe.billboardOutput} does not name its billboard; the shadowless frame has no name.`);
     const sfPath = resolve(publicDirectory, sfFile), sfUrl = config.publicBase + sfFile;
     if (bankDirectory) await fromBank(sfFile);
-    else await raster(lightingFrame(frameSize, lastFrame, recipe), frameSize, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(sfPath);
+    else await raster(frameFor(frameSize, lastFrame, recipe, limb), frameSize, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(sfPath);
     const shadowless = { url: sfUrl, encoding: 'lossless-webp', ...await hashFile(sfPath), width: frameSize, height: frameSize, frameIndex: lastFrame,
         backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
     // The far view's shadowless frame alone, the same tile the billboard atlas carries among its 256 (the Moon's atlas is
     // 116 KB): with shadows off a distant body shows only this tile.
     const sbFile = outputName(recipe.billboardOutput, density).replace('billboard', 'shadowless-billboard'), sbPath = resolve(publicDirectory, sbFile);
     if (bankDirectory) await fromBank(sbFile);
-    else await raster(lightingFrame(frameSize, lastFrame, recipe), frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).webp({ lossless: true, alphaQuality: 100 }).toFile(sbPath);
+    else await raster(frameFor(frameSize, lastFrame, recipe, limb), frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).webp({ lossless: true, alphaQuality: 100 }).toFile(sbPath);
     const billboardShadowless = { url: config.publicBase + sbFile, encoding: 'lossless-webp', ...await hashFile(sbPath), width: bbSize, height: bbSize, frameIndex: lastFrame,
         backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
     const defaultRow = Math.floor(recipe.defaultFrame / recipe.columns), initialWarmRows = [Math.max(0, defaultRow - 1), defaultRow, Math.min(rowCount - 1, defaultRow + 1)];
@@ -94,5 +105,6 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
         billboard: { schema: recipe.billboardSchema, url: bbUrl, shadowless: billboardShadowless, encoding: 'lossless-webp', ...await hashFile(bbPath), width: bbWidth, height: bbHeight, frameSize: bbSize, columns: recipe.billboardColumns, rowCount: bbRows, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, decodedRgbaBytes: bbWidth * bbHeight * 4, presentations: bbPresentations },
         transport: { model: 'row-shard-cache', encoding: 'lossless-webp', preloadBeforeMount: true, retainedLeafCount: 1, interpolation: 'nearest-prepared-camera-frame', framesPerRow: recipe.columns, rowCount, defaultFrame: recipe.defaultFrame, defaultRow, initialWarmRows, maximumRetainedRowCount: 3, addressWritesOnlyOnInput: true, retainLastReadyPresentation: true, idleCallbacks: 0, initialDecodedWorkingSetBytes, maximumDecodedWorkingSetBytes: initialDecodedWorkingSetBytes },
         rows, presentations, shadowless, totalBytes: rows.reduce((sum, row) => sum + row.bytes, 0), fullBankDecodedRgbaBytes: rows.reduce((sum, row) => sum + row.decodedRgbaBytes, 0) };
-    return { ...recipe.metadata, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, defaultFrame: recipe.defaultFrame, preparedPixelDensities: [RASTER_DENSITY], banks };
+    const limbMetadata = limb ? { limb: { model: 'published-photometric-models-relative-to-the-flood-lit-disc-centre', models: limb.law.paths, referenceColor: limb.reference, referenceSource: limb.referenceSource } } : {};
+    return { ...recipe.metadata, ...limbMetadata, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, defaultFrame: recipe.defaultFrame, preparedPixelDensities: [RASTER_DENSITY], banks };
 }

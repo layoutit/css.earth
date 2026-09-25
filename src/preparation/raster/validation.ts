@@ -1,5 +1,6 @@
 import type { LightingRecipe, RasterRecipe } from './config.js';
 import { resolveLightingRecipe } from './lighting-banks.js';
+import { parseLimbBlock } from '../../../tools/photometry/limb.mts';
 type RecordValue = Record<string, unknown>;
 function record(value: unknown, path: string): RecordValue { if (typeof value !== 'object' || value === null || Array.isArray(value))
     throw new TypeError(`${path} must be an object.`); return value as RecordValue; }
@@ -139,9 +140,18 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         // A recipe naming a shared bank states only its own fields; the bank's are filled in here (lighting-banks.ts).
         if (authored.bank !== undefined) text(authored.bank, 'lighting.bank');
         const lighting = authored.bank === undefined ? authored : resolveLightingRecipe(authored as unknown as LightingRecipe) as unknown as RecordValue;
-        fields(lighting, ['frameSize', 'columns', 'presentationSize', 'billboardFrameSize', 'billboardColumns', 'frameCount', 'radiusScale', 'maximumAlpha'], 'lighting', true);
-        fields(lighting, ['defaultFrame', 'minimumLightViewZ', 'maximumLightViewZ', 'shadowlessFloodLimbFloor', 'ambientIntensity'], 'lighting');
-        numbers(lighting.terminator, 'lighting.terminator', 2);
+        fields(lighting, ['frameSize', 'columns', 'presentationSize', 'billboardFrameSize', 'billboardColumns', 'frameCount', 'radiusScale'], 'lighting', true);
+        fields(lighting, ['defaultFrame', 'minimumLightViewZ', 'maximumLightViewZ'], 'lighting');
+        const authoredLaw = ['shadowlessFloodLimbFloor', 'ambientIntensity', 'terminator', 'maximumAlpha'].filter(key => lighting[key] !== undefined);
+        if (lighting.limb !== undefined) {
+            if (authoredLaw.length) throw new TypeError(`lighting names published models in lighting.limb, so it states no authored law; remove lighting.${authoredLaw.join(', lighting.')}.`);
+            parseLimbBlock(lighting.limb, 'lighting.limb');
+        }
+        else {
+            fields(lighting, ['maximumAlpha'], 'lighting', true);
+            fields(lighting, ['shadowlessFloodLimbFloor', 'ambientIntensity'], 'lighting');
+            numbers(lighting.terminator, 'lighting.terminator', 2);
+        }
         for (const key of ['rowOutput', 'billboardOutput'])
             path(lighting[key], `lighting.${key}`);
         for (const key of ['bankSchema', 'billboardSchema'])
@@ -158,12 +168,16 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
     }
     if (recipe.atmosphere !== undefined) {
         const atmosphere = record(recipe.atmosphere, 'atmosphere');
-        for (const key of ['source', 'materialOutput', 'observationOutput', 'lightingOutput'])
+        for (const key of ['materialOutput', 'observationOutput', 'lightingOutput'])
             path(atmosphere[key], `atmosphere.${key}`);
         fields(atmosphere, ['tileSize', 'logicalSize', 'bodyRadius', 'supersampling', 'coverageScale', 'contentScale', 'frameCount', 'directionalFrameCount', 'columns', 'rows'], 'atmosphere', true);
-        fields(atmosphere, ['minimumLightViewZ', 'maximumLightViewZ', 'directionalShadowRelease', 'floodShadowRelease'], 'atmosphere');
-        numbers(atmosphere.sunwardShadowRelease, 'atmosphere.sunwardShadowRelease', 2);
-        numbers(atmosphere.terminator, 'atmosphere.terminator', 2);
+        fields(atmosphere, ['minimumLightViewZ', 'maximumLightViewZ'], 'atmosphere');
+        if ((atmosphere.halo === undefined) !== (atmosphere.haloEdgeAltitudeKm === undefined))
+            throw new TypeError(`atmosphere.halo and atmosphere.haloEdgeAltitudeKm come together; got halo ${JSON.stringify(atmosphere.halo)}, haloEdgeAltitudeKm ${JSON.stringify(atmosphere.haloEdgeAltitudeKm)}.`);
+        if (atmosphere.halo !== undefined) { path(atmosphere.halo, 'atmosphere.halo'); fields(atmosphere, ['haloEdgeAltitudeKm'], 'atmosphere'); }
+        parseLimbBlock(atmosphere.limb, 'atmosphere.limb');
+        const retired = ['source', 'directionalShadowRelease', 'floodShadowRelease', 'sunwardShadowRelease', 'terminator'].filter(key => atmosphere[key] !== undefined);
+        if (retired.length) throw new TypeError(`atmosphere takes its disc from atmosphere.limb and its halo from atmosphere.halo; remove the authored atmosphere.${retired.join(', atmosphere.')}.`);
     }
     if (recipe.interior !== undefined) {
         const interior = record(recipe.interior, 'interior');

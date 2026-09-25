@@ -16,8 +16,7 @@ export interface SurfaceMapRecipe extends SurfaceMapInput {path: string; name: s
 export interface SurfaceAssetsConfiguration {surface: {width: number; height: number; quality: number; maps: readonly SurfaceMapRecipe[];
   clouds: {path: string; maximumAlpha: number; threshold: number; scale: number; color: readonly number[]}};}
 export interface PagedAssetConfiguration extends PagedSceneProfile, SurfaceAssetsConfiguration, AtmosphereConfiguration {
-  material: AtmosphereConfiguration['material'] & {frameCount: number; solarTint: string;
-    shadowlessOverlay?: {color: readonly [number, number, number]; opacity: number}};
+  material: AtmosphereConfiguration['material'] & {frameCount: number};
   interiorPath: string; interiorSchema: string;
   /** The canonical atlas bakes at this density; surface cells take half of it per source-grid unit. */
   atlas: {density: number};

@@ -1,0 +1,35 @@
+{
+  "id": "doi-10-1002-2017je005406",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Venus Upper Clouds and the UV Absorber From MESSENGER/MASCS Observations",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1002/2017JE005406"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/2017JE005406",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/documents/5"
+    },
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/documents/6"
+    },
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/documents/7"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

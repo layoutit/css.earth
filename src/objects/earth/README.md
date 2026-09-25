@@ -14,6 +14,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Surface and clouds | NASA Blue Marble, July 2004 surface plus archival cloud TIFF | Brightness is adjusted for display. Surface and clouds are separate observations. Deep ocean is shaded from depth, not observed water colour. |
 | Elevation | [GEBCO_2026](https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa) | Sampled modeled height relative to sea level. Relief shading is exaggerated; globe geometry is unchanged. |
 | Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
+| Limb | [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames, Minnaert law fitted here | Measured: Earth's brightness toward the edge in 680, 551 and 443 nm |
 | Atmosphere and charts | Authored atmosphere parameter record; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
 | ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04), 7 September 2026, via GIBS | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
@@ -27,13 +28,11 @@ source records are in the repository history before that change.
 
 The linked reports identify their tested sources, prepared files and limitations.
 
-- **Softer lighting, 10 September 2026:** the applied Shadows-off view matches
-  the selected 25% white-overlay preview exactly. Checked in Chrome at DPR 1/2,
-  with directional lighting and the surface, clouds, elevation, night-light and
-  ENSO views. TypeScript, preparation build and 35 focused checks passed.
-  [Verification and limits](evidence/soft-light-overlay.json) ·
-  [Before](evidence/soft-light-before.png) · [After](evidence/soft-light-after.png) ·
-  [Absolute difference](evidence/soft-light-diff.png).
+- **Measured limb, 25 September 2026:** Earth's limb law is fitted to six DSCOVR EPIC
+  frames from 2023 (one every two months, at staggered hours) by `tools/photometry/fit-epic-limb.mts`: Minnaert
+  k 0.394 at 680 nm, 0.428 at 551 nm and 0.410 at 443 nm, with frame-to-frame spreads of 0.07, 0.04 and 0.03. Below
+  0.5 the edge is brighter than the centre under full light, from the atmosphere and clouds seen at a slant.
+  [Per-frame fits](evidence/epic-limb-fit.json).
 
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
@@ -83,6 +82,8 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
+- The limb law is a Minnaert fit to whole-disc EPIC frames, clouds included; bins scatter 18–50% about it because clouds move, and a flattened average stands in for every scene. It applies to every lens, including the cloud-free map. The overlay has one colour and alpha per pixel, exact for the map's displayed mean colour. The night-lights lens takes no lighting or halo, since city light is emitted.
+
 ## Methods and source notes
 
 <details>
@@ -93,8 +94,9 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
 - Clouds: NASA Visible Earth, Blue Marble Clouds. The checked 8,192 × 4,096 TIFF is `source/blue-marble-clouds.tif`.
 - Navigation marker: NASA image-library Earth globe `GSFC_20171208_Archive_e001016`, checked as `source/earth-navigation.jpg`.
 
-The atmosphere parameters used in preparation are stated in `source/atmosphere/model.json`,
-with the sources each value is adapted from.
+The globe is lit with Earth's own measured limb law ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)): Minnaert coefficients fitted to DSCOVR EPIC,
+the one camera that sees the whole sunlit Earth at nearly full phase, as the default view does. The atmosphere over and around the
+globe is unchanged from before the limb law: the model record and Google Earth Pro response described below.
 
 The July mosaic uses a display-only midtone lift: each sampled RGB code value becomes
 `round(255 * (value / 255) ** (1 / 1.25))`. Black and white endpoints are unchanged.
@@ -184,11 +186,11 @@ observations or live weather.
 
 One retained surface displays the selected image bank.
 
-With Shadows off, Earth uses a white limb overlay at one quarter of the original
-shading alpha. This display adjustment brightens the edge without modifying the
-source imagery. The directional Shadows bank is unchanged. The atmosphere shows its
-full-phase frame, the evenly lit limb, instead of following the Sun, so turning the globe
-keeps one prepared atmosphere image loaded instead of decoding a new one for each phase.
+With the atmosphere on, one image shows the planet: the atmosphere bank's frame holds the disc lit by the EPIC law
+with the model atmosphere composited over and around it, and the disc-only lighting bank stays hidden (it shows only with the atmosphere turned
+off). The white limb overlay at a quarter of the shading alpha, the 0.05 ambient term and the terminator ramp are
+gone. With Shadows off the atmosphere shows its full-phase frame, so turning the globe
+keeps one prepared image loaded instead of decoding a new one for each phase.
 That frame is its own image (`earth-atmosphere-flood@2x.webp`, 1,016 pixels with its gutter)
 instead of a quarter of the last four-frame row, so the first view downloads 37 KB of
 atmosphere instead of 158 KB, and does not fetch the two neighbouring rows. It goes through the
@@ -332,10 +334,9 @@ density remain body-specific and are derived from the atmosphere record. The che
 `source/atmosphere/google-earth-pro-presentation-response.json` records the shader hashes and
 results from tests that render the atmosphere separately.
 
-It does not redistribute Google pixels or shader bytes. Google Earth Pro's blue Mars result is
-deliberately not treated as a body-colour authority. The browser uses the same prepared
-high-resolution images on every device; it performs no scattering, geometry, or raster work at
-runtime.
+The EPIC limb law already includes the atmosphere EPIC saw over the disc, so the model atmosphere drawn over the
+disc counts that haze twice near the limb. It stays until a NASA PSG limb profile replaces it (the `limb-halo`
+ledger entry).
 
 #### Chart inputs
 

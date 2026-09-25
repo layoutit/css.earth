@@ -349,33 +349,6 @@
       }
     },
     {
-      "id": "hubble-opal-jupiter-minnaert",
-      "path": "atmosphere/hubble-opal-minnaert.json",
-      "origin": "normalized Table 1 and Figure 1 facts from https://doi.org/10.1088/0004-637X/812/1/55",
-      "credit": "Amy A. Simon, Michael H. Wong, and Glenn S. Orton",
-      "license": "factual values transcribed from the cited paper",
-      "licenseEvidence": [
-        "https://esahubble.org/static/archives/releases/science_papers/heic1522a.pdf"
-      ],
-      "acquisition": "checked project-authored transcription validated by Jupiter preparation; the paper itself is not redistributed",
-      "redistribution": "normalized factual data only",
-      "consumers": [
-        "atmosphere",
-        "lighting"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "doi-10-1088-0004-637x-812-1-55",
-            "role": "method",
-            "evidence": "Table 1 and Figure 1 supply the filter choices and Minnaert coefficients in this numerical extract.",
-            "locator": "Table 1; Figure 1"
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-psg-jupiter-configuration",
       "path": "atmosphere/psg-jupiter-20260830.cfg",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
@@ -764,6 +737,60 @@
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
       }
+    },
+    {
+      "path": "photometry/simon-2015-minnaert-f631n.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of Jupiter's visible map, red channel (F631N): the correction the map's producers divided out, which the lighting overlay puts back.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1088-0004-637x-812-1-55",
+            "role": "method",
+            "evidence": "Simon, Wong and Orton (2015), Table 1, give k = 0.999 for F631N, the Minnaert correction removed before cylindrical projection; the Cycle 32 2025 README repeats it. The fitted phase range is Jupiter's phase on 27 June 2019, the colour map's epoch (3.3-3.5 degrees, JPL Horizons). The fitted emission range ends at 87.6 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Table 1, F631N row"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1088/0004-637X/812/1/55",
+      "credit": "Amy A. Simon, Michael H. Wong and Glenn S. Orton; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/simon-2015-minnaert-f502n.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of Jupiter's visible map, green channel (F502N): the correction the map's producers divided out, which the lighting overlay puts back.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1088-0004-637x-812-1-55",
+            "role": "method",
+            "evidence": "Simon, Wong and Orton (2015), Table 1, give k = 0.95 for F502N, the Minnaert correction removed before cylindrical projection; the Cycle 32 2025 README repeats it. The fitted phase range is Jupiter's phase on 27 June 2019, the colour map's epoch (3.3-3.5 degrees, JPL Horizons). The fitted emission range ends at 87.6 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Table 1, F502N row"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1088/0004-637X/812/1/55",
+      "credit": "Amy A. Simon, Michael H. Wong and Glenn S. Orton; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/simon-2015-minnaert-f395n.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of Jupiter's visible map, blue channel (F395N): the correction the map's producers divided out, which the lighting overlay puts back.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1088-0004-637x-812-1-55",
+            "role": "method",
+            "evidence": "Simon, Wong and Orton (2015), Table 1, give k = 0.85 for F395N, the Minnaert correction removed before cylindrical projection; the Cycle 32 2025 README repeats it. The fitted phase range is Jupiter's phase on 27 June 2019, the colour map's epoch (3.3-3.5 degrees, JPL Horizons). The fitted emission range ends at 87.6 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Table 1, F395N row"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1088/0004-637X/812/1/55",
+      "credit": "Amy A. Simon, Michael H. Wong and Glenn S. Orton; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     }
   ]
 }

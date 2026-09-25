@@ -49,22 +49,6 @@
       }
     },
     {
-      "id": "mars-atmosphere-model",
-      "path": "atmosphere/model.json",
-      "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
-      "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
-      "license": "Repository-authored record; adapted values credited inside the file",
-      "acquisition": "authored in the repository",
-      "redistribution": "permitted with the credit stated in the record",
-      "consumers": [
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Repository-authored atmosphere parameter record; its values and their citations are stated inside the file."
-      }
-    },
-    {
       "id": "usgs-viking-mdim21-color",
       "path": "surface/mars-viking-mdim21-color-1km.jpg",
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
@@ -717,6 +701,24 @@
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
       }
+    },
+    {
+      "path": "photometry/vincendon-2013-hapke.json",
+      "purpose": "Mean Mars surface phase function from Mars Express OMEGA and MRO CRISM with the atmosphere removed, used to light the Viking MDIM 2.1 map, which is itself surface only.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-pss-2012-12-005",
+            "role": "method",
+            "evidence": "Vincendon (2013) parameterizes the mean surface phase function with Hapke (1993): w 0.85, theta 17 degrees, c 0.6, b 0.12, B0 1, h 0.05, with c = (1 + c_Hapke)/2 as Johnson et al. (2006a), the ISIS two-term Henyey-Greenstein weighting. The paper states that phase angles below 70 degrees and emergence 0-70 degrees constrain the surface, and that the shape holds across solar wavelengths.",
+            "locator": "Abstract; section 2.1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1016/j.pss.2012.12.005",
+      "credit": "Mathieu Vincendon; preprint arXiv:1208.4518; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     }
   ]
 }

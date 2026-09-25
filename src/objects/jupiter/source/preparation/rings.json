@@ -19,14 +19,6 @@
       "license": "NASA media usage guidelines"
     },
     {
-      "id": "hubble-opal-jupiter-minnaert",
-      "path": "atmosphere/hubble-opal-minnaert.json",
-      "expectedBytes": 1228,
-      "origin": "normalized Table 1 and Figure 1 facts from https://doi.org/10.1088/0004-637X/812/1/55",
-      "credit": "Amy A. Simon, Michael H. Wong, and Glenn S. Orton",
-      "license": "factual values transcribed from the cited paper"
-    },
-    {
       "id": "nasa-psg-jupiter-configuration",
       "path": "atmosphere/psg-jupiter-20260830.cfg",
       "expectedBytes": 8813,

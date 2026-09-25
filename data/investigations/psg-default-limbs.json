@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "psg-default-limbs",
+  "subject": "NASA PSG default atmosphere templates as the source of planet limb laws",
+  "finding": "Excluded 2026-09-25. PSG disc scans at zero phase, fitted with a Minnaert law at the OPAL filter wavelengths, miss the coefficients Hubble measured for the same maps: Uranus F657N 1.16 against OPAL 0.57, Saturn F395N 0.73 against 0.40, Jupiter F467M 0.79 against 0.95, Neptune F467M 0.73 against 0.88; Venus near 1.05 against MASCS 1.35. The templates are models with generic aerosols, not fits to these observations. Each disc uses the law its map's producer or a disc-resolved study published; PSG supplies only the limb halo, which nothing measured.",
+  "evidence": [
+    "https://psg.gsfc.nasa.gov/helpatm.php",
+    "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+    "https://doi.org/10.1002/2017JE005406"
+  ],
+  "revisitWhen": "A PSG atmosphere fitted to a planet's observed centre-to-limb profile (for example a retrieval published with its PSG configuration) would be a model tied to data and could replace a measured coefficient that is missing."
+}

@@ -8,12 +8,13 @@ export interface PagedAssetJob { mode: 'maps' | 'extras' | 'materials'; surfaceM
 const MAXIMUM_WORKERS = 6;
 
 /** Prepare a paged ellipsoid's assets in worker threads: each surface map, the extras and slices of the material frames
- * run at once. Every job writes a disjoint set of files with the same code as a single run, so the outputs are the same. */
-export async function preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames }: { objectDirectory: string; publicDirectory: string; mapNames: readonly string[] }) {
+ * run at once. Every job writes a disjoint set of files with the same code as a single run, so the outputs are the same.
+ * `materialsOnly` runs the material slices alone: the lighting and atmosphere banks, which read no surface imagery. */
+export async function preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames, materialsOnly = false }: { objectDirectory: string; publicDirectory: string; mapNames: readonly string[]; materialsOnly?: boolean }) {
   const workers = Math.max(1, Math.min(MAXIMUM_WORKERS, availableParallelism() - 2));
   const slices = workers;
   // Longest first (Earth, 2026-09-24): the extras take about 115 s, a surface map 80 s, a sixth of the materials 55 s.
-  const jobs: PagedAssetJob[] = [{ mode: 'extras' }, ...mapNames.map(name => ({ mode: 'maps' as const, surfaceMapNames: [name] })),
+  const jobs: PagedAssetJob[] = [...(materialsOnly ? [] : [{ mode: 'extras' as const }, ...mapNames.map(name => ({ mode: 'maps' as const, surfaceMapNames: [name] }))]),
     ...Array.from({ length: slices }, (_, index) => ({ mode: 'materials' as const, materialSlice: { index, count: slices } }))];
   const assets = new Set<string>();
   let next = 0;

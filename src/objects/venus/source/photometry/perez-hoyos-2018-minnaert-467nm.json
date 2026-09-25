@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "perez-hoyos-2018-minnaert-467nm",
+  "instrument": "MESSENGER MASCS VIRS",
+  "filter": "467 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 1.323,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      89.5,
+      90.5
+    ],
+    "incidenceDegrees": [
+      0,
+      75
+    ],
+    "emissionDegrees": [
+      0,
+      75
+    ]
+  }
+}

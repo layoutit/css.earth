@@ -43,6 +43,68 @@
           "commit": "694a1265852870fed108c79258b324f5e1072ef9"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Minnaert coefficients of the cloud tops from MESSENGER MASCS (Pérez-Hoyos et al. 2018, Fig. 2: 1.35 at 657 nm, 1.36 at 547 nm, 1.32 at 467 nm), read from the vector figure because the authors' data file is offline.",
+      "evidence": [
+        "https://doi.org/10.1002/2017JE005406",
+        "https://arxiv.org/abs/1801.03820"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "psg-default-limb",
+      "survey": "psg-default-limbs",
+      "status": "excluded",
+      "evidence": [
+        "https://psg.gsfc.nasa.gov/helpatm.php"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "limb-halo",
+      "subject": "Limb halo outside the cloud deck",
+      "status": "unresolved",
+      "finding": "No halo is drawn. The lane draws one from a NASA PSG limb profile at full phase when the recipe names it. On 2026-09-25 the local nasapsg/psg container's limb geometry returned the same radiance at every tangent altitude, and the public API refused further calls for a day, so no valid profile exists.",
+      "evidence": [
+        "https://psg.gsfc.nasa.gov/helpapi.php"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ],
+      "revisitWhen": "The public PSG API accepts calls again, or the local container returns a limb radiance that changes with altitude."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "OpenSpace RenderableAtmosphere tuning (Rayleigh and Mie coefficients, flood and sunward shadow releases, terminator ramp)",
+      "status": "excluded",
+      "finding": "Removed with atmosphere/model.json; the disc takes the MASCS law.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
     }
   ]
 }

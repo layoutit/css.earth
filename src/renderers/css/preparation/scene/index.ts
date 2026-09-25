@@ -2,7 +2,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { buildPolyMeshTransform, buildSeamBleedPolygonEdges } from '@layoutit/polycss';
 import { createSurfacePatches, createPolarPatch } from '@cssearth/objects';
-import type { AtmosphereSource, AtmosphereMaterial, Pole } from '@cssearth/objects';
+import type { Pole } from '@cssearth/objects';
+import type { prepareAtmosphere } from '../../../../preparation/raster/materials.js';
 import type { RasterRecipe } from '../../../../preparation/raster/config.js';
 import { RASTER_DENSITY } from '../../../../preparation/raster/config.js';
 import { rasterPagePlan } from '../../../../preparation/raster/pages.js';
@@ -29,7 +30,7 @@ export interface ScenePreparationAdapters {
 export interface GeometrySceneAssets {
  lighting?:{frameCount:number;defaultFrame:number};
  interior?:InteriorAssets;
- atmosphere?:{source:AtmosphereSource;model:AtmosphereMaterial};
+ atmosphere?:Awaited<ReturnType<typeof prepareAtmosphere>>;
  /** An unlit body: source-lit leaves, no lighting bank, stationary off-limb context and limb plate. */
  emission?:Record<string,unknown>&{offLimbContext:{logicalSize:number};limbMaterial:{logicalSize:number}};
  /** Rings the radial lane drew as wedges, by atlas file name: how many, and where the field first draws. */
@@ -86,7 +87,7 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  const outset=profile.projection.seamOutset?prepareSeamOutsetSteps(profile.projection.seamOutset):undefined;
  const seamRepair=outset?{model:profile.projection.rasterOverscan>0?'prepared-matched-raster-overscan-with-silhouette-stepped-outset':'prepared-exact-tiling-with-silhouette-stepped-outset',seamBleed:0,presentationOverlap:profile.projection.overlap,rasterGutter:profile.projection.rasterGutter,rasterOverscan:profile.projection.rasterOverscan,runtimeEdgeDiscovery:false,outset}
   :{model:'prepared-zero-seam-bleed-with-compositor-overlap',seamBleed:profile.projection.seamBleed,presentationOverlap:profile.projection.overlap,rasterGutter:profile.projection.rasterGutter,rasterOverscan:profile.projection.rasterOverscan,runtimeEdgeDiscovery:false};
- const material=assets.atmosphere?prepareAtmosphericMaterial(profile,raster,assets.atmosphere.source,assets.atmosphere.model,adapters.sunReferenceViewDirection(solarSource)):
+ const material=assets.atmosphere?prepareAtmosphericMaterial(profile,raster,assets.atmosphere,adapters.sunReferenceViewDirection(solarSource)):
   assets.lighting?{schema:profile.output.materialSchema,frameCount:assets.lighting.frameCount,logicalDiameter:profile.surface.radius*2,defaultFrame:assets.lighting.defaultFrame,runtimeLighting:false}:
   assets.emission?{...assets.emission,schema:profile.output.materialSchema,model:'emissive',lighting:false,shadows:false,runtimeLighting:false}:undefined;
  if(!material)throw new TypeError('The prepared scene needs a declared material capability.');

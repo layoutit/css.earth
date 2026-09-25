@@ -1,4 +1,5 @@
-import type { AtmosphericRasterConfig, LambertRasterConfig, CutawayAngles, InteriorPalette } from '@cssearth/objects';
+import type { LambertRasterConfig, CutawayAngles, InteriorPalette } from '@cssearth/objects';
+import type { LimbBlock } from '../../../tools/photometry/limb.mts';
 /** Delivered surface map encoding. Absent means the lossy WebP default. */
 export interface SurfaceEncoding {
     format: 'jpeg';
@@ -39,9 +40,13 @@ export interface SurfaceRasterRecipe {
 }
 /** An unlit body: per-lens off-limb context and limb plates written by the interpretation instead of a lighting bank. */
 export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
-export interface LightingRecipe extends LambertRasterConfig {
+/** The authored sphere law of the shared bank: a floor, an ambient term and a terminator ramp, with no published source. */
+type AuthoredSphereLaw = 'shadowlessFloodLimbFloor' | 'ambientIntensity' | 'terminator' | 'maximumAlpha';
+export interface LightingRecipe extends Omit<LambertRasterConfig, AuthoredSphereLaw>, Partial<Pick<LambertRasterConfig, AuthoredSphereLaw>> {
     /** A shared bank (lighting-banks.ts) whose fields this recipe takes; the parser fills them in. */
     bank?: string;
+    /** The body's published photometric models (tools/photometry/limb.mts); a recipe with one states no authored sphere law. */
+    limb?: LimbBlock;
     frameSize: number;
     columns: number;
     presentationSize: number;
@@ -54,8 +59,21 @@ export interface LightingRecipe extends LambertRasterConfig {
     bankSchema: string;
     billboardSchema: string;
 }
-export interface AtmosphereRecipe extends AtmosphericRasterConfig {
-    source: string;
+/**
+ * A body with an atmosphere: its disc lit by its published photometric models and, when the body has one, a halo read
+ * from one NASA PSG limb profile (tools/photometry/halo.mts). Frames only evaluate both.
+ */
+export interface AtmosphereRecipe {
+    limb: LimbBlock;
+    /** Source-relative PSG limb profile: radiance by tangent altitude at full phase (tools/photometry/halo.mts). Absent: the disc alone. */
+    halo?: string;
+    /** Altitude of the disc's visible edge above the table's reference radius, in km (0 for a surface); given with `halo`. */
+    haloEdgeAltitudeKm?: number;
+    logicalSize: number;
+    bodyRadius: number;
+    supersampling: number;
+    coverageScale: number;
+    contentScale: number;
     tileSize: number;
     frameCount: number;
     directionalFrameCount: number;
@@ -63,8 +81,6 @@ export interface AtmosphereRecipe extends AtmosphericRasterConfig {
     rows: number;
     minimumLightViewZ: number;
     maximumLightViewZ: number;
-    directionalShadowRelease: number;
-    floodShadowRelease: number;
     materialOutput: string;
     observationOutput: string;
     lightingOutput: string;

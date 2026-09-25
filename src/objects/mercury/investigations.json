@@ -236,6 +236,38 @@
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Kaasalainen-Shkuratov KS3 at 748.7 nm (Domingue et al. 2016, eq. 43, Table 9), the correction of MESSENGER's final map products, relative to the flood-lit disc centre.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2015.11.040",
+        "https://planetarydata.jpl.nasa.gov/img/data/messenger/msgrmds_7001/DOCUMENT/MDIS_CDR_RDRSIS.HTM"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the published KS3 law; Mercury now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
     }
   ]
 }
