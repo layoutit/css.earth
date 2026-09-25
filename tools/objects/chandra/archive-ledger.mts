@@ -93,7 +93,7 @@ export function objectBox(object: ShippedObject, radiusDegrees = OBJECT_RADIUS_D
 }
 
 /** Every shipped object the ledger searches for: the moving targets this module names, then everything with a stated position. */
-export async function shippedObjects(): Promise<ShippedObject[]> {
+export async function chandraShippedObjects(): Promise<ShippedObject[]> {
   const ids = new Set(await shippedObjectIds());
   const moving = Object.keys(MOVING_TARGETS).filter(id => ids.has(id))
     .map(id => ({ id, source: 'tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)' }));
@@ -224,7 +224,7 @@ export function modeStates(state: Awaited<ReturnType<typeof pinnedState>>): Reco
   return modes;
 }
 
-export async function buildLedger() {
+export async function surveyChandra() {
   const counts = async (column: string) => {
     const rows = await cxcQuery(`SELECT ${column}, COUNT(*) AS n FROM cxc.observation WHERE status='archived' GROUP BY ${column}`);
     return Object.fromEntries(rows.map(entry => [requireString(entry[column] ?? '', column) || '(none)', Number(requireString(entry.n, 'count'))])
@@ -235,7 +235,7 @@ export async function buildLedger() {
     archivedObservations: Number(requireString(total?.n ?? '', 'count')),
     byInstrument: await counts('instrument'), byGrating: await counts('grating'), byExposureMode: await counts('exposure_mode'),
   };
-  const objects = await shippedObjects();
+  const objects = await chandraShippedObjects();
   const observed: Record<string, unknown> = {};
   for (const object of objects) {
     const rows = await observationsOf(object);
@@ -251,7 +251,7 @@ export async function buildLedger() {
 }
 
 /** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
-export function parseLedger(value: unknown): Awaited<ReturnType<typeof buildLedger>> {
+export function parseChandraLedger(value: unknown): Awaited<ReturnType<typeof surveyChandra>> {
   const row = requireRecord(value, 'Chandra ledger');
   if (row.schema !== 'cssearth-chandra-ledger@1') throw new TypeError('Unsupported Chandra ledger.');
   const archive = requireRecord(row.archive, 'Archive counts');
@@ -264,7 +264,7 @@ export function parseLedger(value: unknown): Awaited<ReturnType<typeof buildLedg
     receiptProblems: requireArray(row.receiptProblems ?? [], 'Receipt problems').map(problem => requireString(problem, 'Receipt problem')) };
 }
 
-function guide(ledger: Awaited<ReturnType<typeof buildLedger>>) {
+export function chandraLedgerGuide(ledger: Awaited<ReturnType<typeof surveyChandra>>) {
   const objects = Object.entries(ledger.shippedObjects) as [string, { observations: number; totalExposureKs: number; matchedBy: string; longest: { obsid: number; instrument: string; grating: string; exposureKs: number; startDate: string }[] }][];
   objects.sort((a, b) => b[1].observations - a[1].observations);
   const modes = Object.entries(ledger.modes) as [string, { state: string; program?: string; obsid?: number; target?: string; why?: string }][];
@@ -310,14 +310,12 @@ ${receiptProblemsParagraph(ledger.receiptProblems)}
 
 /** The Chandra ledger: a full pass writes both files; `--local` retakes the modes and receipt problems from the pinned
  * programs and leaves the dated archive snapshot alone. */
-export const CHANDRA_LEDGER: ArchiveLedger<Awaited<ReturnType<typeof buildLedger>>> = {
-  files: ledgerFiles('data/chandra/ledger.json', 'docs/chandra-ledger.md'), indent: 2, guide,
-  survey: () => buildLedger(), writes: 'always',
-  local: { parse: parseLedger, writes: 'always', refresh: async previous => { const pinned = await pinnedState(); return { ...previous, modes: modeStates(pinned), receiptProblems: pinned.problems }; } },
+export const CHANDRA_LEDGER: ArchiveLedger<Awaited<ReturnType<typeof surveyChandra>>> = {
+  schema: 'cssearth-chandra-ledger@1',   files: ledgerFiles('data/chandra/ledger.json', 'docs/chandra-ledger.md'), indent: 2, guide: chandraLedgerGuide,
+  survey: () => surveyChandra(), writes: 'always',
+  local: { parse: parseChandraLedger, writes: 'always', refresh: async previous => { const pinned = await pinnedState(); return { ...previous, modes: modeStates(pinned), receiptProblems: pinned.problems }; } },
   receiptProblems: ledger => ledger.receiptProblems,
   summary: (ledger, { local }) => [`LEDGER ${CHANDRA_LEDGER.files.ledger} ${Object.keys(ledger.shippedObjects).length} objects, ${Object.keys(ledger.modes).length} modes${local ? ' (pinned state only)' : ''}`],
 };
 
 if (isCommand(import.meta.url)) await runArchiveLedger(CHANDRA_LEDGER);
-
-export { guide as ledgerGuide };

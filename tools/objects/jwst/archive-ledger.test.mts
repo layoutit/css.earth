@@ -4,7 +4,8 @@ const test = sourceTest();
 import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { buildLedger, JWST_MODES, JWST_TIME_SERIES, ledgerGuide, matchTarget, parseLedger, repositoryState, shippedObjects, withRepositoryState, type Ledger, type ShippedObject } from './archive-ledger.mts';
+import { assembleJwstLedger, JWST_MODES, JWST_TIME_SERIES, jwstLedgerGuide, matchTarget, parseJwstLedger, repositoryState, jwstShippedObjects, withRepositoryState, type Ledger } from './archive-ledger.mts';
+import type { NamedShippedObject as ShippedObject } from '../archives/targets.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const objects: ShippedObject[] = [{ id: 'titan', names: ['titan', 'Titan'] }, { id: 'pluto', names: ['pluto', 'Pluto'] }, { id: 'charon', names: ['charon', 'Charon'] },
@@ -50,7 +51,7 @@ test('each mode\'s state comes from the pinned programs, and every named tool ex
 
 test('a ledger counts observations by object and mode', () => {
   const held = { modes: new Map(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [] as string[], checked: [] as string[] }])), timeSeries: new Map<string, { programs: string[]; checked: string[] }>(), receiptProblems: [] as string[] };
-  const ledger = buildLedger([{ observation: 'a', target: 'TITAN-LEADING', programme: '1251', mode: 'NIRSPEC/IFU', moving: true,
+  const ledger = assembleJwstLedger([{ observation: 'a', target: 'TITAN-LEADING', programme: '1251', mode: 'NIRSPEC/IFU', moving: true,
     startIso: '2022-01-01T00:00:00.000Z', endIso: '2022-01-01T01:00:00.000Z', filter: 'F100LP;G140H', raDeg: null, decDeg: null },
     { observation: 'b', target: 'TITAN-BACKGROUND', programme: '1251', mode: 'NIRSPEC/IFU', moving: true,
       startIso: '2022-01-02T00:00:00.000Z', endIso: '2022-01-02T01:00:00.000Z', filter: 'F100LP;G140H', raDeg: null, decDeg: null }],

@@ -21,6 +21,8 @@ export const ledgerFiles = (ledger: string, guide: string): LedgerFiles => ({ le
 export type WritePolicy = 'always' | 'with --write';
 
 export interface ArchiveLedger<L> {
+  /** The schema the ledger's JSON states. */
+  readonly schema: string;
   readonly files: LedgerFiles;
   /** JSON indentation of the tracked ledger. */
   readonly indent: 1 | 2;

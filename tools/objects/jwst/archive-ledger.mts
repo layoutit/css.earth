@@ -16,11 +16,11 @@ import { sampleAgreement } from './sample-agreement.mts';
  * target of every mode, which is too long to keep. */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { firstSkyPosition } from '../archive-sky-position.mts';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from './mast.mts';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
-import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
+import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../archives/ledger.mts';
+import { namedShippedObjects, normaliseTargetName, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '../archives/targets.mts';
 
 
 /** MAST's observing modes, what each one records, and the tool that reduces it here (none: nothing reads it yet). */
@@ -46,41 +46,18 @@ export interface ArchiveRow { readonly observation: string; readonly target: str
   readonly startIso: string; readonly endIso: string; readonly filter: string; readonly raDeg: number | null; readonly decDeg: number | null }
 export interface JwstObservationRecord { readonly id: string; readonly programme: string; readonly mode: string; readonly startIso: string; readonly endIso: string; readonly filter: string }
 const RETAINED_OBSERVATION_MODES = new Set(['NIRSPEC/IFU']);
-export interface ShippedObject { readonly id: string; readonly names: readonly string[]; readonly position?: { readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number } }
 
-const normalise = (name: string) => name.toUpperCase().replace(/[^A-Z0-9]/gu, '');
-/** 2060 CHIRON and (2060) Chiron name Chiron. */
-const withoutNumber = (name: string) => name.replace(/^\(?\d+\)?[\s_-]+(?=[A-Za-z])/u, '');
 /** A pointing beside the target, taken to subtract the sky. */
 const isBackground = (name: string) => /(^|[^A-Z])(BG|BKG|BKGD|BACKGROUND|OFFSET|SKY)([^A-Z]|$)/iu.test(name);
-
-const indexes = new WeakMap<readonly ShippedObject[], Map<string, string>>();
-const nameIndex = (objects: readonly ShippedObject[]) => {
-  let index = indexes.get(objects);
-  if (!index) {
-    index = new Map();
-    // Dione is Saturn's moon and asteroid 106: the plain name goes to the object whose id is the plain name, and a numbered
-    // body is also found with its number (106 DIONE, DIONE-106).
-    const numbered = (id: string) => /-\d+$/u.test(id);
-    // An id outranks a display name: HD-189733B is the planet hd-189733b, not the companion star named HD 189733 B.
-    const ordered = [...objects].sort((a, b) => Number(numbered(a.id)) - Number(numbered(b.id)));
-    for (const [rank, object] of [...ordered.map(object => [0, object] as const), ...ordered.map(object => [1, object] as const)]) for (const name of rank === 0 ? [object.id] : object.names) {
-      const key = normalise(name); if (!index.has(key)) index.set(key, object.id);
-      const number = /-(\d+)$/u.exec(object.id)?.[1]; if (number) index.set(`${number}${key}`, object.id);
-    }
-    indexes.set(objects, index);
-  }
-  return index;
-};
 
 /** The shipped objects a target names or points at. PLUTO+CHARON is both; a background pointing is none. */
 export function matchTarget(row: Pick<ArchiveRow, 'target' | 'moving' | 'raDeg' | 'decDeg'>, objects: readonly ShippedObject[]): string[] {
   if (isBackground(row.target)) return [];
-  const byName = nameIndex(objects);
-  const whole = byName.get(normalise(row.target)) ?? byName.get(normalise(withoutNumber(row.target)));
+  const byName = targetNameIndex(objects, false);
+  const whole = byName.get(normaliseTargetName(row.target)) ?? byName.get(normaliseTargetName(withoutMinorPlanetNumber(row.target)));
   if (whole) return [whole];
   if (row.moving) {
-    const parts = row.target.split('+').map(part => byName.get(normalise(withoutNumber(part).split(/[-_\s]/u)[0]!))).filter((id): id is string => id !== undefined);
+    const parts = row.target.split('+').map(part => byName.get(normaliseTargetName(withoutMinorPlanetNumber(part).split(/[-_\s]/u)[0]!))).filter((id): id is string => id !== undefined);
     return [...new Set(parts)];
   }
   if (row.raDeg === null || row.decDeg === null) return [];
@@ -88,19 +65,9 @@ export function matchTarget(row: Pick<ArchiveRow, 'target' | 'moving' | 'raDeg' 
 }
 
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
-/** Every object package, with the names a JWST proposer might have used and, for what does not move, where it is on the sky:
- * a star within half an arcminute, a nebula within a sixth of a degree of the centre its recipe records. */
-export async function shippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
-  const ids = await shippedObjectIds(repository);
-  return Promise.all(ids.map(async id => {
-    const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)).catch(() => undefined);
-    const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
-    if (physical && typeof physical.name === 'string') names.push(physical.name);
-    if (isRecord(body) && isRecord(body.star)) return { id, names, position: { raDeg: requireFiniteNumber(body.star.rightAscensionDegrees), decDeg: requireFiniteNumber(body.star.declinationDegrees), radiusDeg: 0.5 / 60 } };
-    const nebula = firstSkyPosition(await readJson(resolve(repository, 'src/objects', id, 'source/nebula.json')).catch(() => undefined));
-    return nebula ? { id, names, position: { ...nebula, radiusDeg: 1 / 6 } } : { id, names };
-  }));
-}
+/** Every object package, with the names a JWST proposer might have used and, for what does not move, where it is on the sky.
+ * A body record or nebula recipe that cannot be read, for whatever reason, is treated as absent. */
+export const jwstShippedObjects = (repository = REPOSITORY) => namedShippedObjects(path => readJson(path).catch(() => undefined), repository);
 
 /** Every public level-3 observation of the given modes. */
 export async function archiveRows(modes: readonly string[]): Promise<ArchiveRow[]> {
@@ -234,7 +201,7 @@ export interface Ledger {
   readonly receiptProblems: readonly string[];
 }
 
-export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSeriesVisit[], counts: ReadonlyMap<string, number>, objects: readonly ShippedObject[], held: Awaited<ReturnType<typeof repositoryState>>, archiveDate: string): Ledger {
+export function assembleJwstLedger(rows: readonly ArchiveRow[], visits: readonly TimeSeriesVisit[], counts: ReadonlyMap<string, number>, objects: readonly ShippedObject[], held: Awaited<ReturnType<typeof repositoryState>>, archiveDate: string): Ledger {
   const state = held.modes, seen = new Map<string, { observations: Record<string, number>; records: JwstObservationRecord[]; visits: Record<string, number>; programmes: Set<string> }>();
   const entryOf = (id: string) => { const entry = seen.get(id) ?? { observations: {}, records: [], visits: {}, programmes: new Set<string>() }; seen.set(id, entry); return entry; };
   const watched = new Map<string, Set<string>>();
@@ -262,7 +229,7 @@ export function buildLedger(rows: readonly ArchiveRow[], visits: readonly TimeSe
 }
 
 /** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
-export function parseLedger(value: unknown): Ledger {
+export function parseJwstLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'JWST ledger');
   if (row.schema !== 'cssearth-jwst-ledger@1' && row.schema !== 'cssearth-jwst-ledger@2') throw new TypeError('Unsupported JWST ledger.');
   const names = nameList, counts = countRecord, orNull = numberOrNull;
@@ -300,7 +267,7 @@ export function withRepositoryState(ledger: Ledger, held: Awaited<ReturnType<typ
     receiptProblems: [...held.receiptProblems].sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
-export function ledgerGuide(ledger: Ledger): string {
+export function jwstLedgerGuide(ledger: Ledger): string {
   const number = (value: number | null) => value === null ? 'none' : value.toLocaleString('en-US');
   const readable = ledger.modes.filter(mode => mode.checked.length), unread = ledger.objects.filter(object => !Object.keys(object.observations).some(mode => ledger.modes.find(entry => entry.mode === mode)!.checked.length) &&
     !Object.keys(object.timeSeriesVisits).some(exposure => ledger.timeSeries.find(entry => entry.exposure === exposure)!.checked.length));
@@ -356,8 +323,8 @@ ${receiptProblemsParagraph(ledger.receiptProblems)}
 async function surveyMast(args: readonly string[]): Promise<Ledger> {
   const listed = JWST_MODES.map(entry => entry.mode).filter(mode => mode !== 'NIRSPEC/MSA');
   const now = new Date(), nowMjd = now.getTime() / 86_400_000 + 40_587;
-  const [rows, visits, objects, state, msa] = await Promise.all([archiveRows(listed), timeSeriesVisits(nowMjd), shippedObjects(), repositoryState(), archiveCount('NIRSPEC/MSA')]);
-  const ledger = buildLedger(rows, visits, new Map([['NIRSPEC/MSA', msa]]), objects, state, now.toISOString().slice(0, 10));
+  const [rows, visits, objects, state, msa] = await Promise.all([archiveRows(listed), timeSeriesVisits(nowMjd), jwstShippedObjects(), repositoryState(), archiveCount('NIRSPEC/MSA')]);
+  const ledger = assembleJwstLedger(rows, visits, new Map([['NIRSPEC/MSA', msa]]), objects, state, now.toISOString().slice(0, 10));
   const targets = args.indexOf('--targets');
   if (targets >= 0) {
     const byTarget = new Map<string, { target: string; mode: string; observations: number; programmes: Set<string>; objects: string[] }>();
@@ -371,9 +338,9 @@ async function surveyMast(args: readonly string[]): Promise<Ledger> {
  * what is pinned, checked and drawn, and ends the process when it has reported. Its parse rebuilds each object's keys in
  * their parse order, so a local pass puts `timeSeriesVisits` before `records` where a full pass wrote them after. */
 export const JWST_LEDGER: ArchiveLedger<Ledger> = {
-  files: ledgerFiles('data/jwst/ledger.json', 'docs/jwst-ledger.md'), indent: 1, guide: ledgerGuide,
+  schema: 'cssearth-jwst-ledger@2',   files: ledgerFiles('data/jwst/ledger.json', 'docs/jwst-ledger.md'), indent: 1, guide: jwstLedgerGuide,
   survey: surveyMast, writes: 'with --write',
-  local: { parse: parseLedger, writes: 'always', exit: true, refresh: async previous => withRepositoryState(previous, await repositoryState()) },
+  local: { parse: parseJwstLedger, writes: 'always', exit: true, refresh: async previous => withRepositoryState(previous, await repositoryState()) },
   receiptProblems: ledger => ledger.receiptProblems,
   summary: (ledger, { local }) => local ? [`JWST_LEDGER ${JWST_LEDGER.files.ledger} ${JWST_LEDGER.files.guide} (repository state only)`] : [
     ...ledger.modes.map(mode => `${mode.mode.padEnd(14)} ${String(mode.observations).padStart(7)} obs ${String(mode.targets ?? '').padStart(5)} targets ${String(mode.shippedObjects).padStart(3)} shipped  bands ${String(mode.bands).padStart(2)}  programs ${mode.programs.length} checked ${mode.checked.length}`),

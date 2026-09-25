@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
-import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, observationRecords, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
+import { assembleSpitzerLedger, spitzerLedgerGuide, naifIdFromHorizonsCode, observationRecords, parseSpitzerLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
 import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
 import { addProductEvidence, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor } from '@cssearth/telescope';
@@ -244,7 +244,7 @@ test('archive rows retain the AOR identity, programme, mode and complete time ra
 });
 
 test('a ledger counts a mode as checked only from a receipt, and says plainly that Spitzer has no Galilean data', () => {
-  const unproved = buildLedger(objects, survey, { pinned: new Map([['IRAC Map', 4]]), checked: new Map() }, '2026-09-19');
+  const unproved = assembleSpitzerLedger(objects, survey, { pinned: new Map([['IRAC Map', 4]]), checked: new Map() }, '2026-09-19');
   const iracMap = unproved.modes.find(entry => entry.mode === 'IRAC Map')!;
   assert.equal(iracMap.pinnedPrograms, 4);
   assert.equal(iracMap.checkedProducts, 0);
@@ -253,18 +253,18 @@ test('a ledger counts a mode as checked only from a receipt, and says plainly th
   assert.equal(unproved.holdings.length, 1, 'only objects with observations are listed');
   // A mode the archive returned that this toolkit does not describe is still counted, so it cannot go unnoticed.
   const surprisingRecords = records.map((record, index) => ({ ...record, id: String(200 + index), mode: 'IRAC Something New' }));
-  const surprising = buildLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 2 }, records: surprisingRecords }], unanswered: [], searched: ['ceres'] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
+  const surprising = assembleSpitzerLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 2 }, records: surprisingRecords }], unanswered: [], searched: ['ceres'] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
   const unknown = surprising.modes.find(entry => entry.mode === 'IRAC Something New')!;
   assert.equal(unknown.observationsForOurObjects, 2);
   assert.equal(unknown.records, null);
 
-  const guide = ledgerGuide(unproved);
+  const guide = spitzerLedgerGuide(unproved);
   assert.match(guide, /no observation of Io, Europa, Ganymede or Callisto/u);
   assert.match(guide, /the same search, in the same pass, returned 2 for Ceres/u);
   assert.match(guide, /not asked for at all/u);
-  assert.deepEqual(parseLedger(JSON.parse(JSON.stringify(unproved)) as unknown), unproved);
-  assert.throws(() => parseLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@1' }), /Unsupported/u);
-  assert.throws(() => parseLedger({ ...unproved, holdings: [{ ...unproved.holdings[0], records: [] }] }), /do not reproduce/u);
+  assert.deepEqual(parseSpitzerLedger(JSON.parse(JSON.stringify(unproved)) as unknown), unproved);
+  assert.throws(() => parseSpitzerLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@1' }), /Unsupported/u);
+  assert.throws(() => parseSpitzerLedger({ ...unproved, holdings: [{ ...unproved.holdings[0], records: [] }] }), /do not reproduce/u);
 });
 
 test('a checked mosaic carries its evidence on its own record, and evidence never drifts onto other bytes', async () => {

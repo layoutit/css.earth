@@ -9,7 +9,8 @@ import { runDigest } from '@cssearth/telescope/node';
 import { instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts';
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
 import { assertInputPins } from '@cssearth/telescope/node';
-import { checkReceipt, matchShippedObject, nameCandidates, normalise, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
+import { checkReceipt, keckTargetObject, nameCandidates, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
+import { normaliseTargetName } from '../archives/targets.mts';
 import { assertNoPlotServer, configureWithoutPlots, pinnedInput, PLOT_SERVER_LINES, PLOTS_OFF, REDUCIBLE, reductionRun, stagedName } from './reduce.mts';
 import { archiveAgreement, assertRunIsFor, comparisonPins, pairExtensions, productStems, runProduct, selectRunProduct, stageOf } from './compare.mts';
 
@@ -170,21 +171,21 @@ test('a run that started a plot server is a failed run, and the log is what says
 
 test('a target name is matched to a shipped object by its number, never by its bare name', () => {
   const shipped = new Set(['europa', 'europa-52', 'titan', 'psyche', 'm42']);
-  assert.equal(matchShippedObject('Europa', shipped), 'europa');
-  assert.equal(matchShippedObject('Europa___ 05-47', shipped), 'europa', 'a time stamp the observer glued on is dropped');
-  assert.equal(matchShippedObject('Europa 21 13', shipped), 'europa', 'and so is a second one');
-  assert.equal(matchShippedObject('titan_3H40', shipped), 'titan');
-  assert.equal(matchShippedObject('M 42', shipped), 'm42', 'a name that is its own number is matched before anything is dropped');
+  assert.equal(keckTargetObject('Europa', shipped), 'europa');
+  assert.equal(keckTargetObject('Europa___ 05-47', shipped), 'europa', 'a time stamp the observer glued on is dropped');
+  assert.equal(keckTargetObject('Europa 21 13', shipped), 'europa', 'and so is a second one');
+  assert.equal(keckTargetObject('titan_3H40', shipped), 'titan');
+  assert.equal(keckTargetObject('M 42', shipped), 'm42', 'a name that is its own number is matched before anything is dropped');
   for (const typed of ['Europa 06:30UT', 'Europa UT 11-05', 'europa 04 15:00', 'Europa 270900', 'Europa UT'])
-    assert.equal(matchShippedObject(typed, shipped), 'europa', typed);
+    assert.equal(keckTargetObject(typed, shipped), 'europa', typed);
   assert.deepEqual(nameCandidates('Europa 21 13'), ['EUROPA2113', 'EUROPA21', 'EUROPA'], 'longest first');
   assert.deepEqual(nameCandidates('2024'), ['2024'], 'nothing is dropped when only digits would be left');
   // An id that ends in a digit is matched whole before a digit is ever taken off it.
-  assert.equal(matchShippedObject('WASP-43', new Set(['wasp-43', 'wasp'])), 'wasp-43');
-  assert.equal(matchShippedObject('52 Europa', shipped), 'europa-52', '52 Europa is the asteroid, not the moon');
-  assert.equal(matchShippedObject('195 Eurykleia', shipped), null, 'a numbered name matches no bare id');
-  assert.equal(matchShippedObject('', shipped), null);
-  assert.equal(normalise('M 42'), 'M42');
+  assert.equal(keckTargetObject('WASP-43', new Set(['wasp-43', 'wasp'])), 'wasp-43');
+  assert.equal(keckTargetObject('52 Europa', shipped), 'europa-52', '52 Europa is the asteroid, not the moon');
+  assert.equal(keckTargetObject('195 Eurykleia', shipped), null, 'a numbered name matches no bare id');
+  assert.equal(keckTargetObject('', shipped), null);
+  assert.equal(normaliseTargetName('M 42'), 'M42');
 });
 
 test('a mode counts as reduced only where a receipt names an observation a program pins', async () => {

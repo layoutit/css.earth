@@ -81,7 +81,7 @@ export function naifIdFromHorizonsCode(code: unknown): { naifId: number } | { re
 }
 
 /** Every object package, with the one question the archive can be asked about it. */
-export async function shippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+export async function spitzerShippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
   const ids = (await shippedObjectIds(repository)).sort();
   const bodies = new Map<string, Record<string, unknown>>();
   for (const id of ids) { const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)); if (isRecord(body)) bodies.set(id, body); }
@@ -228,7 +228,7 @@ export async function surveyArchive(objects: readonly ShippedObject[]): Promise<
 
 export interface ArchiveSurvey { readonly holdings: readonly ObjectHoldings[]; readonly unanswered: readonly string[]; readonly searched: readonly string[] }
 
-export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSurvey, state: RepositoryState, archiveDate: string): Ledger {
+export function assembleSpitzerLedger(objects: readonly ShippedObject[], survey: ArchiveSurvey, state: RepositoryState, archiveDate: string): Ledger {
   const seen = new Map<string, number>();
   for (const entry of survey.holdings) for (const [mode, count] of Object.entries(entry.modes)) seen.set(mode, (seen.get(mode) ?? 0) + count);
   const known = new Set(SPITZER_MODES.map(entry => entry.mode));
@@ -241,7 +241,7 @@ export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSu
       pinnedPrograms: state.pinned.get(mode) ?? 0, checkedProducts: state.checked.get(mode) ?? 0,
       programs: [...(state.programs?.get(mode) ?? [])], checked: [...(state.checkedPrograms?.get(mode) ?? [])], receipts: [...(state.receipts?.get(mode) ?? [])] })),
   ].sort((a, b) => b.observationsForOurObjects - a.observationsForOurObjects || (a.mode < b.mode ? -1 : 1));
-  return parseLedger({
+  return parseSpitzerLedger({
     schema: SCHEMA, archiveDate, search: 'Spitzer Heritage Archive at IRSA', shippedObjects: objects.length,
     asked: objects.filter(object => object.query.kind !== 'none').length,
     notAsked: objects.filter(object => object.query.kind === 'none').map(object => ({ object: object.id, reason: (object.query as { reason: string }).reason })),
@@ -249,7 +249,7 @@ export function buildLedger(objects: readonly ShippedObject[], survey: ArchiveSu
   });
 }
 
-export function parseLedger(value: unknown): Ledger {
+export function parseSpitzerLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'Spitzer ledger');
   if (row.schema !== SCHEMA) throw new TypeError(`Unsupported Spitzer ledger schema ${String(row.schema)}.`);
   const counts = (raw: unknown): Record<string, number> => Object.fromEntries(Object.entries(requireRecord(raw, 'modes')).map(([mode, count]) => [mode, requireFiniteNumber(count, mode)]));
@@ -285,7 +285,7 @@ export function parseLedger(value: unknown): Ledger {
 const table = (header: readonly string[], rows: readonly (readonly string[])[]) =>
   [`| ${header.join(' | ')} |`, `| ${header.map(() => '---').join(' | ')} |`, ...rows.map(row => `| ${row.join(' | ')} |`)].join('\n');
 
-export function ledgerGuide(ledger: Ledger): string {
+export function spitzerLedgerGuide(ledger: Ledger): string {
   const galileans = ['io', 'europa', 'ganymede', 'callisto'];
   const observed = new Set(ledger.holdings.map(entry => entry.object));
   const missingGalileans = galileans.filter(id => !observed.has(id));
@@ -336,12 +336,12 @@ export function ledgerGuide(ledger: Ledger): string {
  * archive's holdings and their measurement date and retakes the object list, pinned programs and checked products.
  * Receipt problems are not reported: a receipt that does not stand up counts for nothing in `repositoryState`. */
 export const SPITZER_LEDGER: ArchiveLedger<Ledger> = {
-  files: ledgerFiles('data/spitzer/ledger.json', 'docs/spitzer-ledger.md'), indent: 2, guide: ledgerGuide,
-  survey: async () => { const objects = await shippedObjects(), state = await repositoryState();
-    return buildLedger(objects, await surveyArchive(objects), state, new Date().toISOString().slice(0, 10)); },
+  schema: SCHEMA,   files: ledgerFiles('data/spitzer/ledger.json', 'docs/spitzer-ledger.md'), indent: 2, guide: spitzerLedgerGuide,
+  survey: async () => { const objects = await spitzerShippedObjects(), state = await repositoryState();
+    return assembleSpitzerLedger(objects, await surveyArchive(objects), state, new Date().toISOString().slice(0, 10)); },
   writes: 'with --write',
-  local: { parse: parseLedger, writes: 'with --write', refresh: async previous => { const objects = await shippedObjects(), state = await repositoryState();
-    return buildLedger(objects, { holdings: previous.holdings, unanswered: previous.unanswered, searched: previous.searched }, state, previous.archiveDate); } },
+  local: { parse: parseSpitzerLedger, writes: 'with --write', refresh: async previous => { const objects = await spitzerShippedObjects(), state = await repositoryState();
+    return assembleSpitzerLedger(objects, { holdings: previous.holdings, unanswered: previous.unanswered, searched: previous.searched }, state, previous.archiveDate); } },
   summary: (ledger, { write }) => [...write ? [`Wrote ${SPITZER_LEDGER.files.ledger} and ${SPITZER_LEDGER.files.guide}.`] : [],
     `${ledger.shippedObjects} objects shipped, ${ledger.asked} asked, ${ledger.holdings.length} with Spitzer observations, ${ledger.notAsked.length} not asked, ${ledger.unanswered.length} unanswered.`,
     ...ledger.modes.filter(mode => mode.observationsForOurObjects).map(entry =>

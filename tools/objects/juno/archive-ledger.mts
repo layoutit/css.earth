@@ -20,7 +20,7 @@ import { FILTER_COMBINATIONS, KERNEL_SET, PROGRAMS, VOLUMES, fetchText, indexNum
 import { POLICY, RECEIPT_SCHEMA } from './measure.mts';
 import { isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
 
-export const SCHEMA = 'cssearth-junocam-ledger@1';
+const SCHEMA = 'cssearth-junocam-ledger@1';
 const COLOUR = ['RED', 'GREEN', 'BLUE'];
 
 export interface TargetHoldings { target: string; images: number; colourImages: number; orbits: number[]; lowestAltitudeKm: number | null; finestNadirPixelKm: number | null; objectId: string | null }
@@ -30,11 +30,8 @@ export interface Ledger { schema: typeof SCHEMA; measured: string; volumes: stri
   receiptProblems: string[] }
 
 /** The shipped object a JunoCam target name refers to: the same name as an object id, or nothing. */
-export const matchShippedObject = (target: string, shipped: ReadonlySet<string>) => { const id = target.trim().toLowerCase().replace(/[^a-z0-9]+/gu, '-'); return shipped.has(id) ? id : null; };
+export const junoTargetObject = (target: string, shipped: ReadonlySet<string>) => { const id = target.trim().toLowerCase().replace(/[^a-z0-9]+/gu, '-'); return shipped.has(id) ? id : null; };
 
-export async function shippedObjects() {
-  return new Set(await shippedObjectIds());
-}
 
 /** The camera's pixel angle from the instrument kernel in the bank: pixel pitch over focal length. */
 export async function pixelAngleMicroradians() {
@@ -52,7 +49,7 @@ export function holdings(rows: readonly IndexRow[], shipped: ReadonlySet<string>
     if (!strips) continue;
     calibratedImages++; byFilterCombination[product.filterCombination] = (byFilterCombination[product.filterCombination] ?? 0) + 1;
     const name = row.TARGET_NAME.toUpperCase(), altitude = indexNumber(row.SPACECRAFT_ALTITUDE);
-    const entry = targets.get(name) ?? { target: name, images: 0, colourImages: 0, orbits: [], lowestAltitudeKm: null, finestNadirPixelKm: null, objectId: matchShippedObject(name, shipped) };
+    const entry = targets.get(name) ?? { target: name, images: 0, colourImages: 0, orbits: [], lowestAltitudeKm: null, finestNadirPixelKm: null, objectId: junoTargetObject(name, shipped) };
     entry.images++; if (COLOUR.every(strip => strips.includes(strip))) entry.colourImages++;
     if (!entry.orbits.includes(product.orbit)) entry.orbits.push(product.orbit);
     if (altitude !== null && altitude > 0 && (entry.lowestAltitudeKm === null || altitude < entry.lowestAltitudeKm)) { entry.lowestAltitudeKm = altitude; entry.finestNadirPixelKm = Math.round(altitude * pixelAngle) / 1e6; }
@@ -139,21 +136,21 @@ export async function volumes(fetcher: typeof fetch = fetch) {
   return [...new Set([...(await fetchText(VOLUMES, fetcher)).matchAll(/JNOJNC_\d{4}(?=\/)/gu)].map(match => match[0]))].sort();
 }
 
-export async function buildLedger(today = new Date().toISOString().slice(0, 10), fetcher: typeof fetch = fetch): Promise<Ledger> {
+export async function surveyJunoCam(today = new Date().toISOString().slice(0, 10), fetcher: typeof fetch = fetch): Promise<Ledger> {
   const names = await volumes(fetcher), rows: IndexRow[] = [];
   for (const name of names) rows.push(...parseIndex(await fetchText(`${VOLUMES}${name}/INDEX/INDEX.TAB`, fetcher)));
-  const shipped = await shippedObjects(), pixelAngle = await pixelAngleMicroradians(), counted = holdings(rows, shipped, pixelAngle);
+  const shipped = new Set(await shippedObjectIds()), pixelAngle = await pixelAngleMicroradians(), counted = holdings(rows, shipped, pixelAngle);
   const receipts = await junoReceipts();
   return { schema: SCHEMA, measured: today, volumes: names, pixelAngleMicroradians: Math.round(pixelAngle * 10) / 10, ...counted,
     objects: objectStates(counted.targets, receipts.measured, await castingObjects(shipped)), receiptProblems: receipts.problems };
 }
 
 /** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
-export function parseLedger(value: unknown): Ledger {
+export function parseJunoCamLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'JunoCam ledger');
   if (row.schema !== SCHEMA) throw new TypeError('Unsupported JunoCam ledger.');
   const names = nameList, orNull = numberOrNull;
-  // The keys are rebuilt in the order buildLedger writes them, so a --local pass and a full pass give the same file.
+  // The keys are rebuilt in the order surveyJunoCam writes them, so a --local pass and a full pass give the same file.
   return { schema: SCHEMA, measured: requireString(row.measured, 'Measured date'), volumes: names(row.volumes, 'Volumes'),
     pixelAngleMicroradians: requireFiniteNumber(row.pixelAngleMicroradians, 'Pixel angle'),
     targets: requireArray(row.targets, 'Targets').map(raw => { const entry = requireRecord(raw, 'Target');
@@ -167,7 +164,7 @@ export function parseLedger(value: unknown): Ledger {
 }
 
 const count = (n: number) => n.toLocaleString('en-US');
-export function ledgerGuide(ledger: Ledger) {
+export function junoCamLedgerGuide(ledger: Ledger) {
   const combinations = Object.entries(ledger.byFilterCombination).sort((a, b) => b[1] - a[1]).map(([letter, n]) => `${letter} (${FILTER_COMBINATIONS[letter]!.join(', ').toLowerCase()}) ${count(n)}`).join('; ');
   const lines = ['# JunoCam archive ledger', '',
     'Generated by `node tools/objects/juno/archive-ledger.mts` from [data/juno/ledger.json](../data/juno/ledger.json). Do not edit it by hand: every count is read from the',
@@ -192,10 +189,10 @@ export function ledgerGuide(ledger: Ledger) {
 /** The JunoCam ledger: a full pass writes both files every time; `--local` retakes the objects' states and the receipt
  * problems from the programs, receipts and packages and leaves the dated index counts alone. */
 export const JUNO_LEDGER: ArchiveLedger<Ledger> = {
-  files: ledgerFiles('data/juno/ledger.json', 'docs/junocam-ledger.md'), indent: 2, guide: ledgerGuide,
-  survey: () => buildLedger(), writes: 'always',
-  local: { parse: parseLedger, writes: 'always', refresh: async held => { const receipts = await junoReceipts();
-    return { ...held, objects: objectStates(held.targets, receipts.measured, await castingObjects(await shippedObjects())), receiptProblems: receipts.problems }; } },
+  schema: SCHEMA,   files: ledgerFiles('data/juno/ledger.json', 'docs/junocam-ledger.md'), indent: 2, guide: junoCamLedgerGuide,
+  survey: () => surveyJunoCam(), writes: 'always',
+  local: { parse: parseJunoCamLedger, writes: 'always', refresh: async held => { const receipts = await junoReceipts();
+    return { ...held, objects: objectStates(held.targets, receipts.measured, await castingObjects(new Set(await shippedObjectIds()))), receiptProblems: receipts.problems }; } },
   receiptProblems: ledger => ledger.receiptProblems,
   summary: ledger => [JSON.stringify({ volumes: ledger.volumes.length, calibratedImages: ledger.calibratedImages, objects: ledger.objects.map(object => `${object.id}: ${object.state}`) })],
 };

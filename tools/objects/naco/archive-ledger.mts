@@ -20,43 +20,18 @@ import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { INSTRUMENT, MODES, PROGRAMS, rawQuery, REFUSED_TECHNIQUES, type NacoMode } from './archive.mts';
 import { countRecord, isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
+import { matchNumberedTarget, type NumberedTargetNames } from '../archives/targets.mts';
 
-export const SCHEMA = 'cssearth-naco-ledger@2';
+const SCHEMA = 'cssearth-naco-ledger@2';
 
 /** Frame categories that are never an observation of the object: pointing exposures, background exposures and tests. */
 export const NON_OBSERVING_CATEGORIES = ['ACQUISITION', 'TEST'] as const;
 export const NON_OBSERVING_TYPES = ['SKY', 'DARK', 'FLAT', 'STD', 'OBJECT,SKY'] as const;
 
-/** A target name reduced to letters and digits, so `52_EUROPA` and `52EUROPA` are one name. */
-export const normalise = (name: string) => name.toUpperCase().replace(/[^A-Z0-9]/gu, '');
-
-/** An observer's target name split into the parts that identify a body.
- *
- * NACO target names carry three things beyond the name: a minor-planet number in front (`52_EUROPA`), an ephemeris stamp
- * behind (`-26T0400`, `-3H40`, `-25`), and separators the observer chose. All three are stripped, and the number is kept
- * because it is what tells the asteroid from the moon. */
-export function parseTargetName(name: string) {
-  const stamp = /[-_](?:\d{1,2}[TH]\d{2,4}|\d{1,2}H\d{2}|\d{1,3})$/u;
-  const trimmed = name.trim().replace(stamp, '');
-  const compact = normalise(trimmed);
-  const numbered = /^(\d{1,6})([A-Z].*)$/u.exec(compact);
-  return numbered ? { number: Number(numbered[1]), name: numbered[2]! } : { number: null, name: compact };
-}
-
-/** The shipped object id a NACO target name refers to, or null.
- *
- * A numbered target prefers the id that carries the same number (`52_EUROPA` is `europa-52`, never `europa`), and is refused
- * outright when no such id exists, because the bare name belongs to a different body. An unnumbered target takes the bare
- * id. Nothing is matched by prefix: `195EURYKLEIA` is not `eurykleia` unless the numbers agree. */
-export function matchShippedObject(target: string, shipped: ReadonlySet<string>) {
-  const { number, name } = parseTargetName(target);
-  if (!name) return null;
-  const bare = [...shipped].find(id => normalise(id) === name) ?? null;
-  if (number === null) return bare;
-  const numbered = [...shipped].find(id => normalise(id) === `${name}${number}`) ?? null;
-  // A numbered target that matches no numbered id is not the bare body: 52 Europa is not Europa.
-  return numbered;
-}
+/** NACO observers glue a minor-planet number in front (`52_EUROPA`) and an ephemeris stamp behind (`-26T0400`, `-3H40`);
+ * the number is kept, because it is what tells the asteroid from the moon, and a numbered target that matches no numbered
+ * id is not the bare body. */
+export const NACO_TARGET_NAMES: NumberedTargetNames = { ephemerisSuffix: false };
 
 export interface ObjectObservation {
   readonly id: string;
@@ -147,17 +122,12 @@ export async function scienceObservationRows(today: string, targets: readonly st
   return rawQuery(query);
 }
 
-/** The shipped object ids: the directories of src/objects. */
-export async function shippedObjects() {
-  return new Set(await shippedObjectIds());
-}
-
 /** Group the archive's science rows by the shipped object they name. */
 export function observationsOf(rows: readonly Record<string, string>[], shipped: ReadonlySet<string>,
   observationRows: readonly Record<string, string>[] = []): ObjectObservation[] {
   const byId = new Map<string, { targets: Set<string>; frames: number; programmes: Set<string>; modes: Set<string> }>();
   for (const row of rows) {
-    const id = matchShippedObject(row.object ?? '', shipped);
+    const id = matchNumberedTarget(row.object ?? '', shipped, NACO_TARGET_NAMES);
     if (!id) continue;
     const entry = byId.get(id) ?? { targets: new Set(), frames: 0, programmes: new Set(), modes: new Set() };
     entry.targets.add(row.object!); entry.frames += Number(row.n); entry.programmes.add(row.prog_id!);
@@ -166,7 +136,7 @@ export function observationsOf(rows: readonly Record<string, string>[], shipped:
   }
   const records = new Map<string, Map<string, { programme: string; archiveTarget: string; mode: string; night: string; starts: string[] }>>();
   for (const row of observationRows) {
-    const id = matchShippedObject(row.object ?? '', shipped), start = row.exp_start ?? '';
+    const id = matchNumberedTarget(row.object ?? '', shipped, NACO_TARGET_NAMES), start = row.exp_start ?? '';
     if (!id || !/^\d{4}-\d{2}-\d{2}T/u.test(start)) continue;
     const programme = row.prog_id ?? '', archiveTarget = row.object ?? '', mode = bucketOf(row.dp_tech ?? ''), night = start.slice(0, 10);
     const key = `${programme}\u0000${archiveTarget}\u0000${mode}\u0000${night}`, objectRecords = records.get(id) ?? new Map();
@@ -251,17 +221,17 @@ export async function modeStates(byMode: Readonly<Record<string, number>>, direc
   return { modes, problems: problems.sort((a, b) => a.localeCompare(b, 'en')) };
 }
 
-export async function buildLedger(today = new Date().toISOString().slice(0, 10)): Promise<Ledger> {
+export async function surveyNaco(today = new Date().toISOString().slice(0, 10)): Promise<Ledger> {
   const frames = await frameCounts(today);
-  const rows = await scienceTargets(today), shipped = await shippedObjects();
-  const targets = [...new Set(rows.filter(row => matchShippedObject(row.object ?? '', shipped)).map(row => row.object!))].sort();
+  const rows = await scienceTargets(today), shipped = new Set(await shippedObjectIds());
+  const targets = [...new Set(rows.filter(row => matchNumberedTarget(row.object ?? '', shipped, NACO_TARGET_NAMES)).map(row => row.object!))].sort();
   const objects = observationsOf(rows, shipped, await scienceObservationRows(today, targets));
   const { modes, problems } = await modeStates(frames.byMode);
   return { schema: SCHEMA, instrument: INSTRUMENT, measured: today, frames, objects, modes, receiptProblems: problems };
 }
 
 /** The ledger on disk, read back as the external value it is, so --local rewrites a file it has checked. */
-export function parseLedger(value: unknown): Ledger {
+export function parseNacoLedger(value: unknown): Ledger {
   const row = requireRecord(value, 'NACO ledger');
   if (row.schema !== SCHEMA) throw new TypeError('Unsupported NACO ledger.');
   if (row.instrument !== INSTRUMENT) throw new TypeError(`The ledger counts ${String(row.instrument)}, not ${INSTRUMENT}.`);
@@ -288,7 +258,7 @@ export function parseLedger(value: unknown): Ledger {
 const thousands = (value: number) => value.toLocaleString('en-GB');
 
 /** The guide, written from the ledger so the two cannot disagree. */
-export function ledgerGuide(ledger: Ledger) {
+export function nacoLedgerGuide(ledger: Ledger) {
   const modes = ledger.modes.map(mode => `| ${mode.mode} | ${thousands(mode.frames)} | ${mode.state} | ${mode.reason} |`);
   const objects = ledger.objects.map(object =>
     `| ${object.id} | ${thousands(object.frames)} | ${object.modes.join(', ')} | ${object.programmes.slice(0, 3).join(', ')}${object.programmes.length > 3 ? ` (+${object.programmes.length - 3})` : ''} | ${object.targets.join(', ')} |`);
@@ -333,9 +303,9 @@ ${receiptProblemsParagraph(ledger.receiptProblems)}
 /** The NACO ledger: a full pass writes both files every time; `--local` retakes the modes and receipt problems from the
  * pinned programs and leaves the dated archive counts alone. */
 export const NACO_LEDGER: ArchiveLedger<Ledger> = {
-  files: ledgerFiles('data/naco/ledger.json', 'docs/naco-ledger.md'), indent: 2, guide: ledgerGuide,
-  survey: () => buildLedger(), writes: 'always',
-  local: { parse: parseLedger, writes: 'always', refresh: async held => { const { modes, problems } = await modeStates(held.frames.byMode); return { ...held, modes, receiptProblems: problems }; } },
+  schema: SCHEMA,   files: ledgerFiles('data/naco/ledger.json', 'docs/naco-ledger.md'), indent: 2, guide: nacoLedgerGuide,
+  survey: () => surveyNaco(), writes: 'always',
+  local: { parse: parseNacoLedger, writes: 'always', refresh: async held => { const { modes, problems } = await modeStates(held.frames.byMode); return { ...held, modes, receiptProblems: problems }; } },
   receiptProblems: ledger => ledger.receiptProblems,
   summary: (ledger, { local }) => [`${NACO_LEDGER.files.ledger}: ${thousands(ledger.frames.total)} frames, ${ledger.objects.length} shipped objects, ${ledger.modes.length} modes${local ? ' (pinned state only)' : ''}.`],
 };
