@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "aldebaran-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "aldebaran-lens-color.webp",
       "bytes": 44,
       "sha256": "af7857fb41addcea3486bfa644765957aca33010249d314dc37126c646a704af"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2419,
-      "sha256": "a44981a79680488f1661ca17b8d8a4f015e97083ee88c42d5ec0998a75361753"
+      "bytes": 2165,
+      "sha256": "94ca586f757992be2652e6bb9f418c8aa724a0272cc5827ed00a9a3b870c54a2"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1162,
-      "sha256": "cad6d3777b857a766cff2014f430fb20a22804eb7217770102f62fa8326a670d"
+      "bytes": 1032,
+      "sha256": "0fbacf65734c57b0f422cde13c562c53f7458dddb022126427fb2c7910c60738"
     },
     {
       "location": "prepared",
@@ -76,14 +70,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 378648,
-      "sha256": "8e53b33bd2d15c979d5d9d9854128280963aa1326aa7f7a715f1eac8b1b7ec30"
+      "bytes": 382399,
+      "sha256": "acb96022fbeed7d093a1663c39d7d6a81893e0b11115d40d84b9ebe1499e27b7"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 366105,
-      "sha256": "7995aae0b5ee320000f91337fc3929127afe96fb936cca2433e91a3f6e78687e"
+      "bytes": 364737,
+      "sha256": "5d1b8e134b426a573ab23738c317fef34d02f75568a8d42daffb0073e9f9730d"
     },
     {
       "location": "prepared",

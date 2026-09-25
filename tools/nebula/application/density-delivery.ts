@@ -71,8 +71,9 @@ async function restoreAtlasDelivery(root: string, delivery: BakeDelivery, result
       stacks: accepted.volume.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => {
         const mapping = input.textures.find((value: {id: string}) => value.id === leaf.id);
         assert.ok(mapping && typeof mapping.path === 'string');
+        // Its own slice spans the leaf's box, at whatever texel density the box was compiled.
         return { ...leaf, texturePath: mapping.path, style: { ...leaf.style,
-          backgroundSize: `${leaf.widthPx}px ${leaf.heightPx}px`, backgroundPosition: '0px 0px' } };
+          backgroundSize: `${leaf.style.width} ${leaf.style.height}`, backgroundPosition: '0px 0px' } };
       }) })) });
     const baked = await prepareVolumeAtlases({ volume, prefix: `${result.imageId}/atlases`,
       readResource: async path => {

@@ -2,7 +2,7 @@
 import sharp from 'sharp';
 import { createHash } from 'node:crypto';
 import { validatePreparedCssVolume } from '../../renderers/css/volume/validation.js';
-import type { PreparedCssVolume } from '../../renderers/css/volume/types.js';
+import type { PreparedCssVolume, PreparedVolumeLeaf, PreparedVolumeLeafStyle } from '../../renderers/css/volume/types.js';
 
 const GUTTER = 2, MAX_SIZE = 8192;
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
@@ -28,6 +28,19 @@ function pack(rectangles: Rectangle[]) {
   return best;
 }
 
+/** A slice's background once its texture sits at `rectangle` in `atlas`. The leaf keeps its box, so it keeps its own texel
+ * density: a slice compiled at TEXELS_PER_CSS_PIXEL samples the atlas at that density too. */
+export function atlasLeafStyle(leaf: PreparedVolumeLeaf, atlas: { width: number; height: number }, rectangle: { x: number; y: number }): PreparedVolumeLeafStyle {
+  const box = (field: 'width' | 'height') => {
+    const value = leaf.style[field], pixels = /^\d+(?:\.\d+)?px$/u.test(value) ? Number(value.slice(0, -2)) : Number.NaN;
+    if (!(pixels > 0)) throw new TypeError(`Atlas slice ${leaf.id} needs a positive CSS pixel ${field}, not ${value}.`);
+    return pixels;
+  };
+  const scaleX = box('width') / leaf.widthPx, scaleY = box('height') / leaf.heightPx;
+  return {...leaf.style,backgroundSize:`${atlas.width*scaleX}px ${atlas.height*scaleY}px`,
+    backgroundPosition:`${-rectangle.x*scaleX}px ${-rectangle.y*scaleY}px`};
+}
+
 export async function prepareVolumeAtlases(options: {
   volume: PreparedCssVolume;
   prefix: string;
@@ -45,9 +58,10 @@ export async function prepareVolumeAtlases(options: {
     for (const leaf of stack.leaves) {
       const resource = metadata.get(leaf.texturePath)!;
       if (leaf.widthPx !== resource.width || leaf.heightPx !== resource.height ||
-          leaf.style.width !== `${resource.width}px` || leaf.style.height !== `${resource.height}px` ||
-          leaf.style.backgroundSize !== `${resource.width}px ${resource.height}px` || leaf.style.backgroundPosition !== '0px 0px') {
-        throw new TypeError('Atlas preparation requires original, unscaled slice textures.');
+          leaf.style.backgroundSize !== `${leaf.style.width} ${leaf.style.height}` || leaf.style.backgroundPosition !== '0px 0px') {
+        throw new TypeError(`Atlas preparation needs ${stack.axis} slice ${leaf.id} to draw its whole ${resource.width}×${resource.height} texture ` +
+          `${leaf.texturePath} across its box; it declares ${leaf.widthPx}×${leaf.heightPx} texels, box ${leaf.style.width} ${leaf.style.height}, ` +
+          `background-size ${leaf.style.backgroundSize}, background-position ${leaf.style.backgroundPosition}.`);
       }
       rectangles.set(resource.path,{path:resource.path,width:resource.width,height:resource.height,x:0,y:0});
     }
@@ -77,9 +91,7 @@ export async function prepareVolumeAtlases(options: {
     additions.push({path,sha256:hash(bytes),bytes:bytes.length,width:atlas.width,height:atlas.height});
     const placements = new Map(atlas.rectangles.map(rectangle => [rectangle.path,rectangle]));
     stacks.push({...stack,leaves:stack.leaves.map(leaf => {
-      const rectangle = placements.get(leaf.texturePath)!;
-      return {...leaf,texturePath:path,style:{...leaf.style,backgroundSize:`${atlas.width}px ${atlas.height}px`,
-        backgroundPosition:`${-rectangle.x}px ${-rectangle.y}px`}};
+      return {...leaf,texturePath:path,style:atlasLeafStyle(leaf,atlas,placements.get(leaf.texturePath)!)};
     })});
   }
   return validatePreparedCssVolume({...volume,stacks,resources:[...volume.resources.filter(resource => !removed.has(resource.path)),...additions]});

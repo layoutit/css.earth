@@ -129,10 +129,29 @@ test('rejects actual image dimensions that disagree with declared slice geometry
 test('rejects already-atlased geometry and unsafe output prefixes', async () => {
   const { volume, files } = await fixture(), options = io(files);
   const result = await prepareVolumeAtlases({ volume, ...options });
-  await assert.rejects(prepareVolumeAtlases({ volume: result, ...io(options.written) }), /original, unscaled/);
+  await assert.rejects(prepareVolumeAtlases({ volume: result, ...io(options.written) }), /x slice x-0 to draw its whole 14×6 texture/);
   await assert.rejects(prepareVolumeAtlases({ volume, ...io(files), prefix: '../outside' }), /Unsafe/);
   const stacks = volume.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => ({
     ...leaf, style: { ...leaf.style, width: '6px' },
   })) }));
-  await assert.rejects(prepareVolumeAtlases({ volume: { ...volume, stacks }, ...io(files) }), /original, unscaled/);
+  await assert.rejects(prepareVolumeAtlases({ volume: { ...volume, stacks }, ...io(files) }), /box 6px 2px, background-size 3px 2px/);
+});
+
+test('an atlas keeps each slice at the texel density its box was compiled at', async () => {
+  // A slice compiled at two texels per CSS pixel draws its 3x2 texture across a 1.5x1 px box; its atlas sampling
+  // must stay at that density, or the leaf would show a quarter of its tile.
+  const { volume, files } = await fixture(), options = io(files);
+  const dense = { ...volume, stacks: volume.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => ({
+    ...leaf, style: { ...leaf.style, width: '1.5px', height: '1px', backgroundSize: '1.5px 1px' },
+  })) })) };
+  const result = await prepareVolumeAtlases({ volume: dense, ...options });
+  for (const [axisIndex, stack] of result.stacks.entries()) for (const [index, leaf] of stack.leaves.entries()) {
+    const original = dense.stacks[axisIndex]!.leaves[index]!;
+    assert.deepEqual(leaf, { ...original, texturePath: `atlas/test/${stack.axis}.webp`,
+      style: { ...original.style, backgroundSize: '7px 3px', backgroundPosition: index === 0 ? '-4.5px -1px' : '-1px -1px' } });
+  }
+  // The same pixels are packed whatever the leaf's box.
+  const sparse = io(files);
+  await prepareVolumeAtlases({ volume, ...sparse });
+  assert.deepEqual(options.written, sparse.written);
 });

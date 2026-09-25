@@ -77,12 +77,10 @@ ${s} .polycss-scene s {
    hide their back faces. */
 ${s} .polycss-scene s:not(.${id}-polar) {
   backface-visibility: visible;
-  background-image: var(--${id}-surface-image) !important;
 }
 
 ${s} .polycss-scene s.${id}-polar {
   backface-visibility: hidden;
-  background-image: var(--${id}-poles-image) !important;
 }
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */

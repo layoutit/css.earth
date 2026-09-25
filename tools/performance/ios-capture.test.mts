@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { comparePixels, parseSteps, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, parseSteps, requireStepsFor, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
 test('steps are validated before anything records', () => {
   assert.deepEqual(parseSteps([{ tap: [194, 94] }, { type: 'saturn' }, { wait: 1.5 }, { screenshot: 'after' },
@@ -10,6 +10,54 @@ test('steps are validated before anything records', () => {
   assert.throws(() => parseSteps([{ tap: [1, 2], wait: 1 }]), /exactly one action/);
   assert.throws(() => parseSteps([{ pinch: 2 }]), /unknown action/);
   assert.throws(() => parseSteps([{ screenshot: '../escape' }]), /lowercase/);
+});
+
+test('a device capture finds its device on USB, records no native trace by default and refuses touch steps', () => {
+  const device = options(['--device', '--name', 'ipad', '--seconds', '15', '--open', '/jupiter/']);
+  assert.deepEqual([device.device, device.native, device.inspectorScreenshots, device.open], [{ udid: null }, 'off', true, '/jupiter/']);
+  assert.deepEqual(options(['--device', '00008120-000A', '--name', 'ipad', '--seconds', '5']).device, { udid: '00008120-000A' });
+  const simulator = options(['--name', 'sim', '--seconds', '5']);
+  assert.deepEqual([simulator.device, simulator.native, simulator.inspectorScreenshots], [null, 'page', false]);
+  const drag = parseSteps([{ drag: { from: [1, 2], to: [3, 4], seconds: 1 } }]);
+  assert.throws(() => requireStepsFor({ kind: 'device', udid: 'x' }, drag), /needs the simulator/);
+  assert.doesNotThrow(() => requireStepsFor({ kind: 'simulator', udid: 'x' }, drag));
+  assert.doesNotThrow(() => requireStepsFor({ kind: 'device', udid: 'x' }, parseSteps([{ script: 'void 0' }, { screenshot: 'end' }])));
+});
+
+test('a comparison averages the runs on each side and says which way each metric moved', () => {
+  const report = (frames: number, work: number, composite: number, layersMb: number, fps?: number) => ({
+    timeline: { renderingFrames: { count: frames, totalMs: work * frames, over16ms: 10, over50ms: 0, longestMs: 30 }, byType: [{ type: 'Composite', ms: composite * frames }] },
+    layers: { memoryMb: layersMb, count: 800 }, ...(fps === undefined ? {} : { deviceMetrics: { graphics: { CoreAnimationFramesPerSecond: { mean: fps } }, webContent: { footprintMb: { max: 900 } } } }),
+  });
+  const rows = compareCaptures([captureMetrics(report(190, 9, 5.4, 487)), captureMetrics(report(200, 9.2, 5.6, 487))], [captureMetrics(report(198, 8.2, 4.9, 173))]);
+  const row = (label: string) => rows.find(entry => entry.label === label);
+  assert.deepEqual([row('Work per frame (ms)')?.before, row('Work per frame (ms)')?.after, row('Work per frame (ms)')?.verdict], [9.1, 8.2, 'better']);
+  assert.equal(row('Layer memory (MB)')?.verdict, 'better');
+  assert.equal(row('Frames over 16.7 ms')?.verdict, 'same');
+  assert.equal(row('Device frames per second'), undefined, 'simulator runs have no device rows');
+  assert.equal(captureMetrics(report(60, 10, 5, 100, 58.5)).deviceFps, 58.5);
+  assert.match(formatComparison(rows, { before: 2, after: 1 }, [{ name: 'loaded', differing: 739, total: 3162132 }]), /\| Layer memory \(MB\) \| 487 \| 173 \| -64% better \|[\s\S]*loaded: 739 of 3162132/u);
+});
+
+test('three calibration taps give the page-to-display map, and a recording becomes one finger of timed contacts', () => {
+  // A page offset 60 points down on a 402-point-wide screen, displayed in 0..65535 units: display = page * 163.02 + offset.
+  const scale = 65535 / 402, toPage = ([x, y]: readonly [number, number]) => [x / scale, y / scale - 60] as const;
+  const affine = solveAffine(CALIBRATION_POINTS.map(display => ({ page: toPage(display), display })));
+  assert.ok(Math.abs(affine[0] - scale) < 1e-6 && Math.abs(affine[1]) < 1e-6 && Math.abs(affine[5] - 60 * scale) < 1e-3);
+  assert.throws(() => solveAffine([{ page: [0, 0], display: [0, 0] }, { page: [1, 1], display: [1, 1] }, { page: [2, 2], display: [2, 2] }]), /in a line/);
+  const plan = touchPlan({ pointers: [
+    [100, 'pointerdown', 1, 'touch', 10, 20], [116, 'pointermove', 1, 'touch', 20, 20],
+    [120, 'pointerdown', 2, 'touch', 200, 200], [125, 'pointermove', 2, 'touch', 210, 200],
+    [130, 'pointermove', 7, 'mouse', 5, 5], [140, 'pointerup', 1, 'touch', 20, 20], [150, 'pointerup', 2, 'touch', 210, 200],
+  ] }, affine);
+  assert.deepEqual(plan.events.map(([at, kind]) => [at, kind]), [[0, 'contact'], [16, 'contact'], [40, 'release']]);
+  assert.deepEqual(plan.events[0]!.slice(2), [Math.round(10 * scale), Math.round(80 * scale)]);
+  assert.equal(plan.skippedFingers, 1);
+});
+
+test('device samples summarise every numeric field the device reports', () => {
+  assert.deepEqual(summariseNumericSamples([{ fps: 60, name: 'x' }, { fps: 30, util: 12.34 }, 'noise']),
+    { fps: { mean: 45, min: 30, max: 60, count: 2 }, util: { mean: 12.3, min: 12.3, max: 12.3, count: 1 } });
 });
 
 test('JavaScript samples count each function once per stack, by top frame and anywhere on it', () => {

@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "hd-189733-companion-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "hd-189733-companion-lens-color.webp",
       "bytes": 44,
       "sha256": "95b09a6abad03c9782d68680d2a17871a6f7c94d665f3c0e0650296b230f26eb"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2555,
-      "sha256": "6a417be9ef1be1f93ab195b522010473f2ddbce1ffb1d9b8b33644c8307e6ce2"
+      "bytes": 2251,
+      "sha256": "8b509a95e2c0c468a639e41e74e643610bcf6b8f3964271680dc4a7d4991c019"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1279,
-      "sha256": "25073d7d0439f979aa46a1ff4c923d4d1ba0bb58a2b127d87fe221f28d7d879f"
+      "bytes": 1109,
+      "sha256": "61669908209ce50128e826605372102912add645d45ac2f4b96e707a43b04c54"
     },
     {
       "location": "prepared",
@@ -76,14 +70,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 387893,
-      "sha256": "fb8aa62dfa2e37b7488d956de765cabed51445ca64e494964382adb05e89ddde"
+      "bytes": 387124,
+      "sha256": "35dcffb0554e32939f7484cbda66c8ef60da13e8bb3622016cff73093422a616"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 375175,
-      "sha256": "e292b92e04a3fa3bfbc4649d7e7ac99778cd3aa99738228a2cc98f15135e51f4"
+      "bytes": 369307,
+      "sha256": "6b232ba0af2c3bac1d5b171794afdecd11bdfe189a4722dc6d8aff6966c79ae3"
     },
     {
       "location": "prepared",

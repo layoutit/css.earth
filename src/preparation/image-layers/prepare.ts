@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
+import { compileVolumeLeaf } from '../../renderers/css/preparation/volume.js';
 
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
   verticesUnits: [Vec3, Vec3, Vec3, Vec3]; uvs: [[number, number], [number, number], [number, number], [number, number]];
@@ -42,8 +43,9 @@ function compileStyle(vertices: Quad['verticesUnits'], texture: string, width: n
   const plan=computeTextureAtlasPlanPublic(polygon,index,{tileSize:50,layerElevation:50,seamBleed:0});
   const g=plan&&resolvePolyTextureLeafGeometry(plan,{backend:'image',lighting:'source',projection:'projective'});
   if(!g) throw new TypeError(`Could not compile ${texture}.`);
-  return { width:`${g.leafWidth}px`,height:`${g.leafHeight}px`,transform:`matrix3d(${g.matrix})`,
-    backgroundSize:g.backgroundSize.map(v=>`${v}px`).join(' '),backgroundPosition:g.backgroundPosition.map(v=>`${v}px`).join(' ') };
+  // The same projective leaf as a volume slice, drawn at TEXELS_PER_CSS_PIXEL: M31's 2735×2988 detail plane was backed at
+  // 8205×8964 device pixels on a DPR 3 phone.
+  return compileVolumeLeaf(g,width).style;
 }
 export async function prepareImageLayers(options: { sourceDirectory: string; outputDirectory: string; recipe: ImageLayerRecipe }): Promise<PreparedImageLayerBank> {
   const { recipe }=options, source=await readFile(resolve(options.sourceDirectory,recipe.source.path));

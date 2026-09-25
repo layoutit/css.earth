@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "arcturus-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "arcturus-lens-color.webp",
       "bytes": 44,
       "sha256": "c6416430ee4813245c354ce3a92bc9fc7171ce08a6ec05138c2221fef130981e"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2416,
-      "sha256": "5491e116083f05862531d8a7978eed9b40a10aba073e6fde63b6747bdc5f4ab4"
+      "bytes": 2167,
+      "sha256": "f607bfbddd1a97b440370518bcd194e8e9225fb99d6484a2fbc8b1485cc725da"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1124,
-      "sha256": "5d7b58e686360ab946ba7c3ea96849ad6ab4328c992f2f6726aa879dbb708f7e"
+      "bytes": 998,
+      "sha256": "01b6cb4c831305f63b4b60b805f71a2f77ef4176ffc85cc5976170cfd358a45c"
     },
     {
       "location": "prepared",
@@ -76,14 +70,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 377735,
-      "sha256": "e7b0b4628658734b2b50c394e332e90750c16d07b03156f12e2b32312816f4bf"
+      "bytes": 381938,
+      "sha256": "9c5e2858766c5e95b6982fb8f0238af8beb8c8033211778ba031ded95159a54c"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 365180,
-      "sha256": "d925c900013afc081cbf6a6d106c37959029f8cb840d4e29d16d0a8286c9771b"
+      "bytes": 364262,
+      "sha256": "50ba447df18e813f1f966b9b934f032c49972b8c01556b2f57156990c6719f33"
     },
     {
       "location": "prepared",

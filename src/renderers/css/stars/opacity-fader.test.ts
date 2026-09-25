@@ -233,3 +233,15 @@ test('a window has one frame clock, which requests a browser frame only while an
   expect(ran).toEqual(['second', 'later']);
   expect(second).toBeGreaterThan(first);
 });
+
+test('an owner that asks for it gets elements hidden while their opacity is 0, and shown as soon as it rises',()=>{
+  const clock=new Clock(),element=new Element(),plain=new Element(),fader=createOpacityFader(clock,undefined,{hideAtZero:true}),other=createOpacityFader(clock);
+  element.style.visibility='hidden';
+  fader.set(element as unknown as HTMLElement,1,100);clock.frame(50);
+  expect(Number(element.style.opacity)).toBeCloseTo(.5);expect(element.style.visibility).toBe('');
+  fader.set(element as unknown as HTMLElement,0,100);clock.frame(100);
+  expect(element.style.opacity).toBe('0');expect(element.style.visibility).toBe('hidden');
+  other.set(plain as unknown as HTMLElement,0);other.set(plain as unknown as HTMLElement,1);
+  expect(plain.style.visibility).toBeUndefined();
+  fader.destroy();other.destroy();
+});

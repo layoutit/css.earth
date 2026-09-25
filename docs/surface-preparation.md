@@ -328,9 +328,23 @@ triangle of a body has the same texel density. The leaf shows its rectangle like
 any `@2x` image, at two atlas texels per CSS pixel, and its matrix scales it back
 onto the face. WebKit backs each composited leaf at its box size times the device
 pixel ratio and ignores the transform: at one texel per CSS pixel, Itokawa's 794
-faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two
-([radial-terrain.mts](../tools/objects/terrestrial-layers/radial-terrain.mts)). At
-rest, 739 of 3.16 million screen pixels change; at maximum zoom each face is drawn
+faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two. Every
+textured leaf follows the same rule, `TEXELS_PER_CSS_PIXEL` and `leafRasterScale`
+in [projective-surface-raster.mts](../src/platform/projective-surface-raster.mts):
+faces, polar caps, band leaves, ring tiles, volume slices and image layers hold
+their widest image, over every lens, level and page, at two texels per CSS
+pixel, with the recipe's raster scale as a ceiling. On the iPhone 17 simulator
+Jupiter's page went from 2,823 to 133 MB of layers and Saturn's from 703 to 374 MB,
+with at most 4 of 3.16 million pixels changed at rest. A leaf names no image of its
+own: each lens's variant writes the surface and pole textures every leaf reads
+(`scene/projector.ts`, `presentation/composite.ts`), which is what made Uranus's
+and Neptune's lenses draw their own maps. On a body with a dense map the texture
+is drawn at half the resolution at maximum zoom and softens there (Ceres, Mars,
+Mercury).
+
+![Before and after the rule: Jupiter and Saturn at rest, Neptune's methane lens on main and after, Ceres at maximum zoom](images/leaf-texel-rule.webp)
+
+At rest on Itokawa, 739 of 3.16 million screen pixels change; at maximum zoom each face is drawn
 at half the resolution, so a seam can show as a faint light line ([seam repair](#seam-repair-and-the-globe-interior-disc)).
 
 ![Itokawa on the iPhone 17 simulator at rest and at maximum zoom: one texel per CSS pixel, two, and their Pixelmatch difference at threshold 0.1](images/raster-leaf-2x.webp)

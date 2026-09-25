@@ -3,21 +3,9 @@
   "assets": [
     {
       "location": "public",
-      "filename": "roxs-42b-b-context-infrared@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "roxs-42b-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "b0266b85edf491ac6bdd6c973b3c3862f483ea52326e789e262bf2db5b895cf6"
-    },
-    {
-      "location": "public",
-      "filename": "roxs-42b-b-limb-infrared@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -34,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 3227,
-      "sha256": "ef89922b89afb5cc5b93b94012fe257f4d0b4d5d3b8a3a73ca9b248d4ba5f2ee"
+      "bytes": 2705,
+      "sha256": "992b7b02aa4a41bc497c9868fbb711498152ef57b5bab0c6926dae54c659783b"
     },
     {
       "location": "prepared",
@@ -58,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1295,
-      "sha256": "243e7fe64c88e7500d6625f525af6c34047fd83452abcb9f1007b47ed6feda66"
+      "bytes": 1025,
+      "sha256": "b876f0c8465ff56b546e57156a9f83b25bae85bb453d1de457cf5770dbcc0dbd"
     },
     {
       "location": "prepared",
@@ -76,14 +64,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 380994,
-      "sha256": "f53969aa915d6044d7fb4552b279be293a02e7ee8bcf2886c12dcda7ba471dd7"
+      "bytes": 382783,
+      "sha256": "07408d9e39e379375f381c0d6646ca02e0e35aa5a64d133554bba1a2f52b3d52"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 368286,
-      "sha256": "c028184358e990649639b7c21986f4ef5aa45f3ee0972b7e702321b11956470a"
+      "bytes": 365118,
+      "sha256": "c2be7a4bf90b7cb2f8ad9e8d6d35e6a9a1457d1a1678937ca8993365212cd57d"
     },
     {
       "location": "prepared",

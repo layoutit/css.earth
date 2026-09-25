@@ -59,7 +59,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
   host.insertBefore(root, before);
   const picking = screenPicking(pickingHost);
-  const fader = createOpacityFader(document.defaultView!);
+  const fader = createOpacityFader(document.defaultView!, undefined, { hideAtZero: true });
   // The source bank also preserves Local Volume nonmembers for future scopes.
   // Membership is a prepared scientific fact, never a runtime distance cut.
   const createEntry = (object: PreparedCatalogObject): Entry => {
@@ -68,13 +68,13 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     const dot = !isPreparedCluster(object) && !isPreparedNebula(object) ? document.createElement('span') : null;
     if (dot) {
       dot.dataset.galaxyDot = object.id;
-      dot.style.cssText = 'position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:#c2ccd8;opacity:0;pointer-events:none';
+      dot.style.cssText = 'position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:#c2ccd8;opacity:0;visibility:hidden;pointer-events:none';
       root.append(dot);
     }
     const aperture = isPreparedCluster(object) ? document.createElement('span') : null;
     if (aperture) {
       aperture.dataset.clusterAperture = object.id;
-      aperture.style.cssText = 'position:absolute;left:0;top:0;box-sizing:border-box;border:1px solid #80a1cc;border-radius:50%;opacity:0;pointer-events:none';
+      aperture.style.cssText = 'position:absolute;left:0;top:0;box-sizing:border-box;border:1px solid #80a1cc;border-radius:50%;opacity:0;visibility:hidden;pointer-events:none';
       aperture.title = 'R500 overdensity aperture; not the cluster boundary';
       root.append(aperture);
     }
@@ -86,7 +86,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
-    label.style.cssText = 'position:absolute;left:0;top:0;opacity:0;pointer-events:none;cursor:pointer';
+    label.style.cssText = 'position:absolute;left:0;top:0;opacity:0;visibility:hidden;pointer-events:none;cursor:pointer';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
       event.preventDefault(); event.stopPropagation(); onSelect(entry.object);

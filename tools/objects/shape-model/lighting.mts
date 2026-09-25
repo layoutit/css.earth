@@ -1,8 +1,11 @@
 import type {createPreparedNodeTree,PreparedNode} from '../../prepared/prepared-node-tree.mts';
 import type {PreparedMaterialTrack,PreparedMaterialSelection} from '../../../src/renderers/css/rendering/prepared-material.ts';
 import type {PreparedViewBinding} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};}
+interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};
+  /** The published lighting image's pixel size, measured from its file. */
+  image:{width:number;height:number};objectId:string;}
 import { BASE_TILE } from '@layoutit/polycss';
+import { leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
 import { readPreparedMatrix4, preparedRotationMatrix4, multiplyPreparedMatrix4, invertPreparedAffineMatrix4 } from '@cssearth/core';
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
@@ -12,10 +15,12 @@ const translation = (x:number, y:number, z:number) => Object.assign(identity(), 
  * Its plane stays in the retained 3D scene so foreground rings can occlude it.
  * This is illustrative curvature shading, not a measured reflectance model.
  */
-export function prepareShapeLighting({ builder: b, root, axes, config, scene }:LightingContext) {
-  // Keep the CSS leaf at texture size; a world-sized leaf exceeds Chrome's
-  // raster extent even when the camera later scales it down.
-  const radius = config.displayRadius * BASE_TILE, width = 512, half = width / 2;
+export function prepareShapeLighting({ builder: b, root, axes, config, scene, image, objectId }:LightingContext) {
+  if (image.width !== image.height) throw new TypeError(`${objectId}: the shape lighting image must be square, not ${image.width}×${image.height} px.`);
+  // Keep the CSS leaf at texture size: a world-sized leaf exceeds Chrome's raster extent even when the camera later scales it
+  // down. The image fills the leaf at two texels per CSS pixel (leafRasterScale), since WebKit backs the leaf at its box size
+  // whatever its transform. Every value below follows `width`, so the plate still covers the same projected disc.
+  const radius = config.displayRadius * BASE_TILE, width = image.width * leafRasterScale(image.width, image.width, 1), half = width / 2;
   const counter = b.mesh('shape-model-lighting-counter');
   const leaf = b.element('s', 'shape-model-lighting', `width:${width}px;height:${width}px`);
   b.append(root, counter); b.append(counter, leaf);

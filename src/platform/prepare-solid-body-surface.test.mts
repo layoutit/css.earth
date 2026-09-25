@@ -10,7 +10,9 @@ const source = Buffer.alloc(width * height * 4);
 for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
   source.set([Math.round(x / (width - 1) * 255), Math.round(y / (height - 1) * 255), 0, 255], (y * width + x) * 4);
 }
-const leaves = prepareSolidBodySurface({ id: "fixture", mapUrl: "/scenes/fixture/map.webp", polesUrl: "/scenes/fixture/poles.webp" });
+// The widths of a 2048 × 1024 map packed with its gutters (2080 px) and its two 256-px pole tiles (512 px).
+const leaves = prepareSolidBodySurface({ id: "fixture", mapUrl: "/scenes/fixture/map.webp", polesUrl: "/scenes/fixture/poles.webp",
+  mapPixelWidth: 2080, polesPixelWidth: 512 });
 function matched(style: string, pattern: RegExp): RegExpMatchArray {
   const result = style.match(pattern);
   assert.ok(result, `Prepared style matches ${pattern}`);
@@ -63,7 +65,7 @@ test("CSS UVs sample the actual atlas when HD padding is not a quarter-band", as
   const packed = packProjectiveSurfaceRaster(reprojectSolidBodySurfaceRaster(source, { width, height }),
     { width, height, bandCount: 16, gutter });
   const geometry = prepareSolidBodySurface({ id: 'fixture', mapUrl: '/map.webp', polesUrl: '/poles.webp',
-    sourceWidth: width, sourceHeight: height, gutter });
+    sourceWidth: width, sourceHeight: height, gutter, mapPixelWidth: packed.packedWidth, polesPixelWidth: 512 });
   for (const band of [1, 7, 14]) for (const longitude of [1, 8, 23, 30]) {
     const leaf = geometry[1 + (14 - band) * 32 + longitude];
     const cssSize = ['width', 'height'].map(key => Number(matched(leaf.style, new RegExp(`atlas-${key}:([\\d.]+)`))[1]));
@@ -77,5 +79,30 @@ test("CSS UVs sample the actual atlas when HD padding is not a quarter-band", as
       assert.ok(Math.abs(actual[0] - longitudeByte(coordinate.longitude)) < 2, `longitude at band ${band}, face ${longitude}`);
       assert.ok(Math.abs(actual[1] - latitudeByte(coordinate.latitude)) < 2, `latitude at band ${band}, face ${longitude}`);
     }
+  }
+});
+
+test("band and cap leaves hold their widest image at two texels per CSS pixel, never above the former scale 4", () => {
+  const texelsPerCssPixel = (leaf: typeof leaves[number], imagePixels: number) =>
+    imagePixels / (Number.parseFloat(matched(leaf.style, /background-size:([^;]+)/)[1]) * leaf.projectiveTextureLayer.rasterScale);
+  for (const [mapPixelWidth, polesPixelWidth] of [[2080, 512], [4160, 1024], [1040, 256]]) {
+    const prepared = prepareSolidBodySurface({ id: "fixture", mapUrl: "/map.webp", polesUrl: "/poles.webp", mapPixelWidth, polesPixelWidth });
+    for (const leaf of prepared) {
+      const texels = texelsPerCssPixel(leaf, leaf.polar ? polesPixelWidth : mapPixelWidth);
+      assert.ok(Math.abs(texels - 2) < 1e-12, `${leaf.polar ?? "band"} leaf shows ${texels} texels per CSS pixel`);
+    }
+  }
+  // A map denser than two texels per CSS pixel at scale 4 keeps scale 4, as every leaf had before the rule.
+  const dense = prepareSolidBodySurface({ id: "fixture", mapUrl: "/map.webp", polesUrl: "/poles.webp", mapPixelWidth: 16640, polesPixelWidth: 8192 });
+  assert.deepEqual([...new Set(dense.map(leaf => leaf.projectiveTextureLayer.rasterScale))], [4]);
+  // The scale only sizes the box: geometry and texture addresses are the same leaves.
+  const fine = prepareSolidBodySurface({ id: "fixture", mapUrl: "/scenes/fixture/map.webp", polesUrl: "/scenes/fixture/poles.webp", mapPixelWidth: 4160, polesPixelWidth: 1024 });
+  assert.deepEqual(fine.map(leaf => leaf.style), leaves.map(leaf => leaf.style));
+});
+
+test("solid-body leaves refuse a missing image width and name the body", () => {
+  for (const widths of [{ mapPixelWidth: 0, polesPixelWidth: 512 }, { mapPixelWidth: 2080, polesPixelWidth: Number.NaN }]) {
+    assert.throws(() => prepareSolidBodySurface({ id: "fixture", mapUrl: "/map.webp", polesUrl: "/poles.webp", ...widths }),
+      /fixture: solid-body leaves need the measured pixel widths/);
   }
 });

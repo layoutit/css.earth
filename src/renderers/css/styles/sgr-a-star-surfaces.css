@@ -71,12 +71,10 @@
    hide their back faces. */
 .object-stage[data-object-id="sgr-a-star"] .polycss-scene s:not(.sgr-a-star-polar) {
   backface-visibility: visible;
-  background-image: var(--sgr-a-star-surface-image) !important;
 }
 
 .object-stage[data-object-id="sgr-a-star"] .polycss-scene s.sgr-a-star-polar {
   backface-visibility: hidden;
-  background-image: var(--sgr-a-star-poles-image) !important;
 }
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */

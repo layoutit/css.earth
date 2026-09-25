@@ -21,7 +21,7 @@ import { prepareGiantLayers, parseRadialLayerRecipe } from './index.mts';
 import { rasterAnnularField } from './rings.mts';
 import { prepareObservedSurfaces } from '../observed-surfaces/index.mts';
 import { prepareEllipsoidMaterials } from './materials.mts';
-import { prepareBandedEllipsoid } from './geometry.mts';
+import { prepareBandedEllipsoid, type BandedImagePixels } from './geometry.mts';
 import { prepareLayeredSurfacePresentation } from './presentation.mts';
 import { preparePhotometricDisc } from './photometric-disc.mts';
 import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.mts';
@@ -44,6 +44,20 @@ export function assertLayeredGiantFrameBank(descriptor:Pick<ReturnType<typeof pa
   if(declared?.length!==1||declared[0].source!=='materials'||declared[0].frames!==frames||declared[0].rows!==rows||declared[0].residentRows!==residentRows||
       !descriptor.recipe.materials?.some(material=>material.source===declared[0].source&&material.frameBank===declared[0].id))throw new TypeError('Authored frame bank differs from compiled material frames, rows or residency.');
   if(!normalizedDisc&&presentationConfig.resources?.pools.find(pool=>pool.id===presentationConfig.resources?.rowPool)?.options.capacity!==residentRows)throw new TypeError('Authored material residency differs from its row resource pool.');
+}
+
+/** The part of an observation recipe that names each lens's surface images. */
+type LensSurfaceFiles={schema:'cssearth-observed-polar-surfaces@1';lenses:readonly {files:{surface:string;surface2x:string}}[]}|{schema:'cssearth-observed-surfaces@1';lenses:readonly {products:readonly {kind:string;filename:string}[]}[]};
+
+/** The widths of the images the geometry's leaves show, read from what this run published: a surface face shows any lens's
+ * surface, a tiled plane its own image. */
+export function publishedLeafImages(id:string,observations:LensSurfaceFiles,assets:readonly {filename:string;width:number}[]):BandedImagePixels {
+  const widths=new Map(assets.map(asset=>[asset.filename,asset.width]));
+  const width=(filename:string)=>{const value=widths.get(filename);if(value===undefined)throw new TypeError(`Layered giant ${id}: leaf image ${filename} was not published by this preparation.`);return value;};
+  const surfaces=observations.schema==='cssearth-observed-polar-surfaces@1'?observations.lenses.flatMap(lens=>[lens.files.surface,lens.files.surface2x]):observations.lenses.flatMap(lens=>lens.products.flatMap(product=>product.kind==='surface'?[product.filename]:[]));
+  if(!surfaces.length)throw new TypeError(`Layered giant ${id}: no lens publishes a surface image.`);
+  const prefix=`/scenes/${id}/`;
+  return{surface:Math.max(...surfaces.map(width)),image:url=>{if(!url.startsWith(prefix))throw new TypeError(`Layered giant ${id}: leaf image ${url} is not under ${prefix}.`);return width(url.slice(prefix.length));}};
 }
 
 /** A giant's sky orientation and directional Sun; the shared universe draws the visible sky and Sun. */
@@ -75,9 +89,9 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   assertLayeredGiantFrameBank(descriptor,materialConfig,presentationConfig);
   const sourceManifest=await createSourceManifest({objectId:descriptor.id,objectName:contentConfig.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(outputDirectory,{recursive:true})]);
-  const geometry=prepareBandedEllipsoid(geometryConfig);
   const observed=await (observationConfig.schema==='cssearth-observed-polar-surfaces@1'?prepareObservedPolarSurfaces:prepareObservedSurfaces)({sourceDirectory,publicDirectory,config:observationConfig,write:true});
   const radial=await prepareGiantLayers({sourceDirectory,publicDirectory,config:radialConfig,write:true});
+  const geometry=prepareBandedEllipsoid(geometryConfig,publishedLeafImages(descriptor.id,observationConfig,[...observed.assets,...radial.assets]));
   let radialLayer;
   if ('radialLayer' in materialConfig && materialConfig.radialLayer) {const layer=radialConfig.layers[materialConfig.radialLayer.layerIndex];if(!layer||layer.kind!=='annular-field')throw new TypeError('Material radial layer must bind an annular field.');radialLayer={...materialConfig.radialLayer,data:rasterAnnularField(layer,materialConfig.radialLayer.size)};}
   const material=normalizedDisc?await preparePhotometricDisc({sourceDirectory,config:materialConfig,publicDirectory,write:true}):await prepareEllipsoidMaterials({config:materialConfig,maps:observed.maps,radialLayer,publicDirectory,write:true});

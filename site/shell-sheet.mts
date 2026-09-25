@@ -34,13 +34,14 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   let searchReturn: SheetState | null = null;
   let gesture: SheetGesture | null = null;
   let dragged = false;
-  let snapFrame = 0;
+  let snapFrame = 0, settleTimer = 0;
   let readingPosition: { key: string; top: number } | null = null;
   let handleReadingPosition: number | null = null;
   const readingKey = readSelectionKey;
   lifetime.onDispose(() => {
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
-    snapFrame = 0;
+    if (settleTimer) windowTarget.clearTimeout(settleTimer);
+    snapFrame = settleTimer = 0;
   });
 
   // Distances from the fully open sheet down to each snap state.
@@ -54,16 +55,23 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     const height = sheet.offsetHeight;
     return { peek: Math.max(0, height - peek), half: Math.max(0, height - half), full: 0 };
   };
-  const currentOffset = () => {
+  // Layout rests the sheet at its state's offset; a drag or a snap adds a transform to that. The rest comes from this
+  // controller's state, not from CSS: a tap on the handle checks it, and CSS moves the rest, before the change event.
+  const currentOffset = (points: SheetStops = stops()) => {
     const transform = windowTarget.getComputedStyle(sheet).transform;
-    return transform === "none" ? 0 : new windowTarget.DOMMatrixReadOnly(transform).m42;
+    return points[state] + (transform === "none" ? 0 : new windowTarget.DOMMatrixReadOnly(transform).m42);
+  };
+  const endSettle = () => {
+    if (settleTimer) windowTarget.clearTimeout(settleTimer);
+    settleTimer = 0;
+    sheet.classList.remove("is-settling");
   };
   const nearest = (offset: number, points: SheetStops, candidates: readonly SheetState[] = states) =>
     candidates.reduce((best, next) =>
       Math.abs(points[next] - offset) < Math.abs(points[best] - offset) ? next : best);
   const settle = (next: SheetState, speed = 0) => {
-    const points = stops();
-    const distance = Math.min(1, Math.abs(points[next] - currentOffset()) / Math.max(1, points.peek));
+    const points = stops(), from = currentOffset(points);
+    const distance = Math.min(1, Math.abs(points[next] - from) / Math.max(1, points.peek));
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
     const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
     body.style.setProperty("--sheet-snap-duration", `${duration}ms`);
@@ -71,17 +79,34 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     handleReadingPosition = null;
     const restoreScroll = next === 'full' && state !== 'full' && readingPosition?.key === readingKey() ? readingPosition.top : null;
     if (next !== "full") sheet.scrollTop = 0;
+    // The rest moves to the new state at once; the sheet is held where it is, untransitioned, then the transition carries
+    // it to that rest and the transform clears.
+    endSettle();
+    body.style.setProperty("--sheet-offset", `${from}px`);
+    sheet.classList.add("is-dragging");
     state = next;
     body.dataset.sheet = next;
     handle.checked = next !== "peek";
-    sheet.classList.remove("is-dragging");
+    void windowTarget.getComputedStyle(sheet).transform;
+    // Committed before the hold is released: WebKit starts no transition when the transition turns on in the same style
+    // update as the transform it would animate.
+    sheet.classList.replace("is-dragging", "is-settling");
+    void windowTarget.getComputedStyle(sheet).transitionProperty;
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
-      if (!lifetime.disposed) {
-        body.style.removeProperty("--sheet-offset");
-        if (restoreScroll !== null) sheet.scrollTop = restoreScroll;
-      }
+      if (lifetime.disposed) return;
+      body.style.removeProperty("--sheet-offset");
+      if (restoreScroll !== null) sheet.scrollTop = restoreScroll;
+      if (Math.abs(from - points[next]) < 0.5) { endSettle(); return; }
+      // Transitions inside the sheet bubble here too; only its own transform ends the settle.
+      const onEnd = (event: TransitionEvent) => {
+        if (event.target !== sheet || event.propertyName !== "transform") return;
+        sheet.removeEventListener("transitionend", onEnd);
+        endSettle();
+      };
+      sheet.addEventListener("transitionend", onEnd, { signal });
+      settleTimer = windowTarget.setTimeout(endSettle, duration + 100);
     });
   };
   // Scrolled content keeps its own drags until it returns to the top.
@@ -124,6 +149,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       }
       drag.active = true;
       sheet.setPointerCapture(event.pointerId);
+      endSettle();
       sheet.classList.add("is-dragging");
     }
     const raw = drag.start + dy;
@@ -203,6 +229,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   }, { signal });
   mobile.addEventListener("change", () => {
     gesture = null;
+    endSettle();
     sheet.classList.remove("is-dragging");
     documentTarget.body.style.removeProperty("--sheet-offset");
   }, { signal });
@@ -255,6 +282,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     destroy() {
       events.abort();
       gesture = null;
+      endSettle();
       sheet.classList.remove("is-dragging");
       body.style.removeProperty("--sheet-offset");
       body.style.removeProperty("--sheet-snap-duration");

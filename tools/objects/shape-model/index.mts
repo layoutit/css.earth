@@ -6,7 +6,7 @@ import { requireObjectRuntimeDefinition } from '../../contract/object-runtime-co
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { prepareRingLeaves } from './rings.mts';
+import { prepareRingLeaves, ringQuadStyle } from './rings.mts';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
 
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
@@ -19,9 +19,9 @@ import { requirePreparedPresentation } from '../../../src/platform/prepared-pres
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
 import { createPreparedNodeTree } from '../../prepared/prepared-node-tree.mts';
 import { prepareCssomDeclarationReads } from '../../prepared/prepared-cssom.mts';
-import { prepareModelRasters, prepareRingRaster, prepareSphereLighting } from './raster.mts';
+import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.mts';
 import { prepareShapeLighting } from './lighting.mts';
-import { prepareCoplanarColorRaster } from '../material-composition/coplanar-raster.mts';
+import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/coplanar-raster.mts';
 
 const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');
 
@@ -76,10 +76,15 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   if(!bodyId)throw new TypeError(`Shape model has no astronomical body ${id}`);
   const scene = await prepareSolarSystemScene({ ...cameraOptions, bodyId, bodyRadiusUnits: config.displayRadius,
     bodyRadiusKilometers: axes[0], defaultZoom: .75, geometryScale: 1, starfield: sky });
+  // Every lens binds its images to the same leaves, which hold the widest one at two texels per CSS pixel.
+  const published = { publicDirectory, publicBase };
+  const widest = async (kind: 'surface' | 'poles') => Math.max(...await Promise.all(modelLenses.map(async lens =>
+    (await publishedImageSize(published, lens.textures[kind], id)).width)));
   const bodyLeaves = prepareSolidBodySurface({ id, radius: config.displayRadius,
     secondaryRadius: config.displayRadius * axes[1] / axes[0], polarRadius: config.displayRadius * axes[2] / axes[0],
     mapUrl: initial.textures.surface, polesUrl: initial.textures.poles, latitudeSegments, longitudeSegments,
-    sourceWidth: width, sourceHeight: height, poleTileSize: poleSize, seamOverlap: config.mesh.seamOverlap });
+    sourceWidth: width, sourceHeight: height, poleTileSize: poleSize, seamOverlap: config.mesh.seamOverlap,
+    mapPixelWidth: await widest('surface'), polesPixelWidth: await widest('poles') });
   const ringFaces:Parameters<typeof prepareCoplanarColorRaster>[0]["faces"][number][] = [];
   const ringConfig=config.ring;
   const sourceRingLeaves = ringTexture && ringConfig ? prepareRingLeaves(config, ringTexture, axes[0], geometry => {
@@ -93,11 +98,10 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   }) : [];
   const ringRaster = ringTexture ? await prepareCoplanarColorRaster({ faces: ringFaces,
     pixelsPerUnit: ringTexture.width / (2 * Math.max(...ringFaces.flatMap(face => face.vertices.flatMap(v => [Math.abs(v[0]),Math.abs(v[1])])))) }) : null;
-  const ringLeaves = ringRaster ? ringRaster.tiles.map(tile => ({ tag: 's', className: 'shape-model-ring-quad',
-    style: `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width}px;` +
-      `--polycss-atlas-height:${tile.height}px;background-position:${-tile.x}px ${-tile.y}px;` +
-      `background-size:${ringRaster.width}px ${ringRaster.height}px;background-repeat:no-repeat` })) : [];
   if (ringRaster) await writeFile(resolve(publicDirectory, 'ring.webp'), ringRaster.bytes);
+  const ringPixels = ringRaster && ringTexture ? (await publishedImageSize(published, ringTexture.url, id)).width : null;
+  const ringLeaves = ringRaster && ringPixels ? ringRaster.tiles.map(tile => ({ tag: 's', className: 'shape-model-ring-quad',
+    style: ringQuadStyle(coplanarTileLayout(tile, ringRaster, ringPixels)) })) : [];
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   // The default lens mounts with the body; another lens decodes only when it is selected.
   const entries = [...modelLenses.flatMap(lens => (['surface', 'poles'] as const).map(kind =>
@@ -122,7 +126,8 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const material = sphereLighting ? b.element('s', 'shape-model-material',
     `width:${scene.camera.logicalBodyDiameter}px;height:${scene.camera.logicalBodyDiameter}px;margin:${-scene.camera.logicalBodyDiameter / 2}px 0 0 ${-scene.camera.logicalBodyDiameter / 2}px`) : null;
   if (material && materialRoot) { b.append(null, materialRoot); b.append(materialRoot, material); }
-  const shapeLighting = !sphereLighting ? prepareShapeLighting({ builder: b, root, axes, config, scene }) : null;
+  const shapeLighting = !sphereLighting ? prepareShapeLighting({ builder: b, root, axes, config, scene,
+    image: await publishedImageSize(published, lightingUrl, id), objectId: id }) : null;
   const materialReference = shapeLighting ? {
     materialReferenceControlPitchDegrees: scene.camera.defaultControlPitchDegrees,
     materialReferenceControlYawDegrees: scene.camera.defaultControlYawDegrees,

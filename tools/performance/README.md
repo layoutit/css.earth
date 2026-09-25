@@ -57,6 +57,55 @@ messages, network requests, and the Time Profiler summary for Safari's web conte
 
 The simulator runs on the Mac's CPU and GPU, so absolute times are not a phone's. Compare builds with the same steps.
 
+### Before and after in one command
+
+`--compare` also takes a capture name: every earlier capture called `<name>-<time>` is a baseline. The command then prints
+a before/after table of means and writes it to `comparison.md` in its last run. The table covers frames, work and
+compositing per frame, frames over 16.7 and 50 ms, style and paint time, layer memory and layer count, and on a device
+its frame rate and Safari's memory. `--runs <n>` repeats the capture; the numbers of one run vary, so compare three
+against three:
+
+```sh
+node tools/performance/ios-capture.mts --name drag-before --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json
+node tools/performance/ios-capture.mts --name drag-after --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json --compare drag-before
+```
+
+The dev server must be idle while it measures: a server busy with a bake or a file-watch storm times out and serves an
+error page, and every number from that run is wrong. Look at the screenshots.
+
+### Recording a hand and playing it back
+
+Every capture writes `input.json`: each pointer event the page received and the camera state on every frame. `--replay
+<capture dir>` plays that input back in place of steps, so two builds see the same hand. Compare a replay with another
+replay of the same input, not with the recording, whose steps and waits differ. On the simulator the replay dispatches
+the recorded pointer events in the page at their recorded times: AXe's batch touch steps take about 190 ms each, too
+slow for a path, and the app's own input handling runs as it does for a finger.
+
+### A real iPhone or iPad over USB
+
+`--device [udid]` records a device instead of the simulator. Turn on Settings > Apps > Safari > Advanced > Web Inspector,
+trust this Mac, keep the device unlocked (Auto-Lock off while plugged in) with the page open in Safari, and start the dev
+server on the network (`pnpm exec astro dev --host 0.0.0.0 --port 4210`). An `--open` path that starts with `/` loads from
+this Mac's address (`--origin` overrides it):
+
+```sh
+node tools/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
+node tools/performance/ios-capture.mts --device --name ipad-replay --open /jupiter/ --replay output/performance/ios-captures/ipad-drag-<time> --compare ipad-drag-before
+```
+
+A `--seconds` recording plays a sound on the Mac when it starts and when it stops: use the device between the two.
+Touch steps need the simulator; on a device, script steps move the camera and screenshots come from Web Inspector (the
+page alone; `--inspector-screenshots` does the same on the simulator). Capture one origin at a time: loading another
+origin moves Safari's page to a new process and drops the inspector session.
+
+[pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install
+pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device; it uses macOS's
+own device tunnel, no root). During a device recording it samples Core Animation's frames per second and the memory of
+Safari's web content processes into `device-graphics.jsonl` and `device-webcontent.jsonl`. A device `--replay` plays the
+recorded path as real touch through its CoreDevice HID service (`device-touch.py`, run with pymobiledevice3's own
+Python): first three calibration taps on a transparent shield map page coordinates to the display, then the path plays
+as one finger at its recorded times.
+
 ## Chrome traces
 
 For internal measurements, `navigation-capture.mts` records a Chrome trace and

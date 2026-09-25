@@ -12,8 +12,9 @@ export interface PreparedProjectiveTextureLeaf {
 }
 
 export function scalePreparedPixelLengths(value: string | number, scale: number) {
-  if (!Number.isFinite(scale) || scale < 1) {
-    throw new RangeError("Prepared pixel scale must be at least one.");
+  // Below one too: a leaf showing a 1x image shrinks its box to two texels per CSS pixel (leafRasterScale).
+  if (!Number.isFinite(scale) || scale <= 0) {
+    throw new RangeError(`Prepared pixel scale must be positive, not ${scale}.`);
   }
   return String(value).replace(
     /(-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?)px\b/gi,
@@ -42,14 +43,14 @@ export function scalePreparedBackgroundAddresses(style: Pick<PreparedProjectiveS
 }
 
 export function applyPreparedProjectiveLayout(style: Pick<PreparedProjectiveStyle, "width" | "height" | "backgroundSize"> & Partial<Pick<PreparedProjectiveStyle, "getPropertyValue">>, layout: PreparedProjectiveLayout | null, rasterScale: number) {
-  if (!Number.isFinite(rasterScale) || rasterScale < 1) {
-    throw new TypeError("Prepared projective texture raster scale is invalid.");
+  if (!Number.isFinite(rasterScale) || rasterScale <= 0) {
+    throw new TypeError(`Prepared projective texture raster scale must be positive, not ${rasterScale}.`);
   }
   for (const property of ["width", "height", "backgroundSize"] as const) {
     const variable = property === "backgroundSize" ? "" : style.getPropertyValue?.(`--polycss-atlas-${property}`);
     if (!style[property] && !variable && layout?.[property]) style[property] = layout[property];
     const preparedValue = style[property] || variable;
-    if (rasterScale > 1 && (!preparedValue || preparedValue === "auto")) {
+    if (rasterScale !== 1 && (!preparedValue || preparedValue === "auto")) {
       throw new TypeError(`Scaled projective leaf requires explicit prepared ${property}.`);
     }
   }

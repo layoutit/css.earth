@@ -16,10 +16,16 @@ import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } f
 import { shellRim } from './atlas.js';
 import { validatePreparedCssSurfaceShell } from '../../renderers/css/shell/validation.js';
 import { dotN as dot } from '@cssearth/core';
+import { TEXELS_PER_CSS_PIXEL } from '../../platform/projective-surface-raster.mts';
 
 const objectDirectory = resolve('src/objects/heliosphere');
 const recipe = async () => parseShellRecipe(JSON.parse(await readFile(join(objectDirectory, 'source/shell.json'), 'utf8')) as unknown);
 const prepared = async () => (JSON.parse(await readFile(join(objectDirectory, 'prepared/shell.json'), 'utf8')) as { data: PreparedCssSurfaceShell }).data;
+/** A triangle corner of the atlas tile, inside its transparent texel guard, in the face's CSS box. */
+function tileCorner(face: PreparedCssSurfaceShell['faces'][number], atlas: PreparedCssSurfaceShell['atlas'], u: number, v: number): [number, number] {
+  const inset = atlas.triangleInsetPixels ?? 0, texels = atlas.tileSize - 2 * inset;
+  return [(inset + u * texels) * parseFloat(face.style.width) / atlas.tileSize, (inset + v * texels) * parseFloat(face.style.height) / atlas.tileSize];
+}
 function close(actual: readonly number[], expected: readonly number[], tolerance = 1e-5): void {
   assert.equal(actual.length, expected.length);
   actual.forEach((value, index) => assert(Math.abs(value - expected[index]!) < tolerance, `${actual} differs from ${expected}`));
@@ -94,16 +100,18 @@ test('actual PolyCSS matrices map triangular PNG coverage onto each source trian
   let maximumError = 0, reflectionMutationError = 0, maximumNormalDifference = 0;
   for (let index = 0; index < data.faces.length; index++) {
     const face = data.faces[index]!, triangle = mesh.triangles[index]!;
-    assert.deepEqual(face.atlasStepPixels, [32, 32]); assert.deepEqual(face.atlasOriginPixels, [0, 0]);
-    assert.equal(face.style.backgroundSize, '1472px 1408px');
+    // A 32 px tile at the shared texel density: WebKit backs a face at its box, whatever its matrix.
+    const step = data.atlas.tileSize / TEXELS_PER_CSS_PIXEL;
+    assert.deepEqual(face.atlasStepPixels, [step, step]); assert.deepEqual(face.atlasOriginPixels, [0, 0]);
+    assert.equal(face.style.width, `${step}px`); assert.equal(face.style.height, `${step}px`);
+    assert.equal(face.style.backgroundSize, `${1472 / TEXELS_PER_CSS_PIXEL}px ${1408 / TEXELS_PER_CSS_PIXEL}px`);
     assert.equal(face.materialTransforms?.length, 6);
     assert.deepEqual(face.vertexIndices, triangle);
     for (let order = 0; order < 6; order++) {
     const matrix: number[] = face.materialTransforms![order]!.slice('matrix3d('.length, -1).split(',').map(Number);
     assert.equal(matrix.length, 16); assert(matrix.every(Number.isFinite));
     for (const [corner, u, v] of [[0, 0, 0], [1, 1, 0], [2, 0, 1]] as const) {
-      const inset = data.atlas.triangleInsetPixels ?? 0;
-      const x = inset + u * (parseFloat(face.style.width) - 2 * inset), y = inset + v * (parseFloat(face.style.height) - 2 * inset);
+      const [x, y] = tileCorner(face, data.atlas, u, v);
       const denominator = matrix[3]! * x + matrix[7]! * y + matrix[15]!;
       // Shared camera interprets PolyCSS pixel axes as Y, X, Z in physical space.
       const actual = [1, 0, 2].map(axis => (matrix[axis]! * x + matrix[axis + 4]! * y + matrix[axis + 12]!) / denominator / data.unitScale);
@@ -135,8 +143,7 @@ test('generic pinned indexed reader preserves an open non-axis-aligned triangle 
     assert.equal(data.faces.length, 1, 'An open source must not acquire fabricated closing triangles');
     const face = data.faces[0]!, matrix = face.style.transform.slice('matrix3d('.length, -1).split(',').map(Number);
     for (const [index, u, v] of [[0, 0, 0], [1, 1, 0], [2, 0, 1]] as const) {
-      const inset = data.atlas.triangleInsetPixels ?? 0;
-      const x = inset + u * (parseFloat(face.style.width) - 2 * inset), y = inset + v * (parseFloat(face.style.height) - 2 * inset);
+      const [x, y] = tileCorner(face, data.atlas, u, v);
       const denominator = matrix[3]! * x + matrix[7]! * y + matrix[15]!;
       const physical = [1, 0, 2].map(axis => (matrix[axis]! * x + matrix[axis + 4]! * y + matrix[axis + 12]!) / denominator / r.unitScale);
       close(physical, source.positionsUnits[index]!, 2e-6);

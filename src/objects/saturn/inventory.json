@@ -1965,6 +1965,12 @@
     },
     {
       "location": "prepared",
+      "filename": "image-quality.json",
+      "bytes": 4391,
+      "sha256": "d4f71b148f5345b912afbbc700062b4edbac6920dfe2dc069c82685d41bb2c3f"
+    },
+    {
+      "location": "prepared",
       "filename": "layouts.json",
       "bytes": 263,
       "sha256": "61232a9953bb32aa8175c764780dfe3136012c26e0a5292097d50f655724a459"
@@ -2014,14 +2020,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1726083,
-      "sha256": "17bf7d0084a7f312eb4aed6811227b5ee7e16f5c300108df126414b001c0a20a"
+      "bytes": 1725378,
+      "sha256": "3658f0163d3801491cd49e35811424173e8525beef2f3ddc00bf1b3d57b06d68"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1789517,
-      "sha256": "e727212063e2745e76958e1a9936a59b1248b2c0a08daaffcc0f482d3e4e0c18"
+      "bytes": 1789281,
+      "sha256": "6aeb659c5fa075134007191a1ffa72dbbeca4a402d3c0561660783ea7655870e"
     },
     {
       "location": "prepared",

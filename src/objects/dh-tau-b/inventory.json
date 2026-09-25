@@ -3,21 +3,9 @@
   "assets": [
     {
       "location": "public",
-      "filename": "dh-tau-b-context-infrared@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "dh-tau-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "6b5f90cabf54a316505905f7471c4500fecb12085273bf6bbcd1284e10ffb4b0"
-    },
-    {
-      "location": "public",
-      "filename": "dh-tau-b-limb-infrared@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -34,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 3183,
-      "sha256": "4ceaec31fc562999cfe61eab5a7cb4af120abed8b78531e6f016e04cc53cc4e3"
+      "bytes": 2681,
+      "sha256": "272550ed49d51af8325c5d085a11aff9eaa53554541c2410ad6072091794c2ea"
     },
     {
       "location": "prepared",
@@ -58,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1253,
-      "sha256": "4a243fa93b82de0520783ad0b92d02c2743c7b48a0f7c8d6899d26a240ccf272"
+      "bytes": 999,
+      "sha256": "a536bbdef74d7d38565c8bb5eae6660c74a4c0f3ff09f73435bf692ddfbd4629"
     },
     {
       "location": "prepared",
@@ -76,14 +64,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 379128,
-      "sha256": "8d167da34bcfce96ac700bcdd081f6d628f8618f3bd6d73d01edc1b1ea755050"
+      "bytes": 381825,
+      "sha256": "3c6bae47fdf6510984070c61b25be4535a0495e6081335cc287762770ef6abcd"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 366497,
-      "sha256": "0637d27b420f395ed8cfb167ee9f484456c0306aa8e77234881b32351479bdc2"
+      "bytes": 364229,
+      "sha256": "087a6668c750c9159bb1e3a9e284ebd9b13ce752222f1eee9fa76365e93f856a"
     },
     {
       "location": "prepared",

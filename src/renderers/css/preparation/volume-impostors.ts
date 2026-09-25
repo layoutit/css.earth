@@ -61,13 +61,18 @@ export async function prepareVolumeImpostors(options: {
   let decodedBytes = 0;
   // A leaf either owns its texture or takes a rectangle out of a shared atlas. Its CSS background is what maps one
   // onto the other, and the rasteriser samples through that mapping, so the decoded image must match the declared
-  // resource and the background must cover it exactly. Checking the leaf's own pixel size instead would refuse every
-  // delivered bank, which is why the Magellanic Clouds shipped without impostor views.
-  for (const { planes } of stacks) for (const { leaf, backgroundWidth, backgroundHeight } of planes) {
+  // resource and the background must cover it exactly, at the leaf's own texel density: its widthPx texels across its
+  // box. Checking the leaf's own pixel size instead would refuse every delivered bank, which is why the Magellanic
+  // Clouds shipped without impostor views; checking one texel per CSS pixel would refuse every slice drawn at
+  // TEXELS_PER_CSS_PIXEL.
+  const sameDensity = (texels: number, css: number, leafTexels: number, box: number) => Math.abs(texels * box - leafTexels * css) <= 1e-9 * texels * box;
+  for (const { planes } of stacks) for (const { leaf, width, height, backgroundWidth, backgroundHeight } of planes) {
     const resource = metadata.get(leaf.texturePath);
     if (!resource) throw new TypeError(`Impostor leaf ${leaf.id} has no declared texture resource.`);
-    if (backgroundWidth !== resource.width || backgroundHeight !== resource.height) {
-      throw new TypeError(`Impostor leaf ${leaf.id} background does not cover ${leaf.texturePath}.`);
+    if (!sameDensity(resource.width, backgroundWidth, leaf.widthPx, width) || !sameDensity(resource.height, backgroundHeight, leaf.heightPx, height)) {
+      throw new TypeError(`Impostor leaf ${leaf.id} background does not cover ${leaf.texturePath} at the leaf's texel density: ` +
+        `${resource.width}×${resource.height} texels across background-size ${leaf.style.backgroundSize}, ` +
+        `${leaf.widthPx}×${leaf.heightPx} texels across its ${leaf.style.width} ${leaf.style.height} box.`);
     }
     if (textures.has(leaf.texturePath)) continue;
     const count = resource.width * resource.height;

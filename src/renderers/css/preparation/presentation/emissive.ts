@@ -11,6 +11,16 @@ import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
+type EmissiveLens = PresentationInputs['lenses']['controls'][number];
+/** The texture resources an emissive body publishes: each lens's surface and poles, and a plate only when the raster lane
+ * published one. A plate with no visible pixel is not published (preparation/raster/index.ts): its lens draws no image
+ * there, loads nothing, and its layer paints nothing, so WebKit gives it no backing. */
+export function emissiveEntries(surfaces: readonly EmissiveLens[]) {
+  const published = (lens: EmissiveLens, layer: typeof LAYERS[number]) => layer === 'surface' || layer === 'poles' || lens[`${layer}Url`] !== undefined;
+  return surfaces.flatMap(lens => LAYERS.filter(layer => published(lens, layer)).map(layer => ({ key: `${layer}:${lens.id}`,
+    url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
+}
+
 export async function prepareEmissive(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, lenses } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
@@ -20,9 +30,8 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   // A dataset that names a companion cloud borrows another lens's prepared surface, so it owns no plates and needs
   // no variant of its own; the selection resolves it to the surface it borrows before this definition is read.
   const surfaces = lenses.controls.filter(lens => lens.volume === undefined || lens.volume.surface === lens.id);
-  const entries = surfaces.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
-    url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
-  const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);
+  const entries = emissiveEntries(surfaces), keys = new Set(entries.map(entry => entry.key));
+  const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`).filter(key => keys.has(key));
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   // Same camera/scene/system/body nodes as composite.ts: the shared orbit writes the perspective and dolly.
   const camera = b.element('div', 'polycss-camera object-render-root');
@@ -46,7 +55,8 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const variants: PreparedVariant[] = lenses.controls.map(lens => {
     const surfaceId = lens.volume?.surface ?? lens.id;
     return { when: { lensId: lens.id }, required: required(surfaceId), writes: [
-      ...LAYERS.map((layer, i) => ({ kind: 'texture' as const, target: index(targets[i]!), name: `--${ns}-${layer}-image`, resource: `${layer}:${surfaceId}`, quoted: true })),
+      ...LAYERS.map((layer, i) => ({ kind: 'texture' as const, target: index(targets[i]!), name: `--${ns}-${layer}-image`,
+        resource: keys.has(`${layer}:${surfaceId}`) ? `${layer}:${surfaceId}` : null, quoted: true })),
       { kind: 'attribute', target: -1, name: 'data-lens', value: lens.id }, { kind: 'attribute', target: -1, name: 'data-view', value: null },
     ], materials: [] };
   });

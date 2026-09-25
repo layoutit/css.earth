@@ -3,21 +3,9 @@
   "assets": [
     {
       "location": "public",
-      "filename": "proxima-centauri-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "proxima-centauri-lens-color.webp",
       "bytes": 44,
       "sha256": "2172156ae50ed344ff3dd542b15cd68b7900e03b84c23871ee1d3fe273b93e2b"
-    },
-    {
-      "location": "public",
-      "filename": "proxima-centauri-limb-color@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -34,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2344,
-      "sha256": "d5c060ca55883bb1b17230be8da20f4ef81093ce33798222b387556f514d4a69"
+      "bytes": 1780,
+      "sha256": "68d6189bfef855af1f81cbcbc10e39402cb1a0e24f4a42a83e915dd2de09d03c"
     },
     {
       "location": "prepared",
@@ -58,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1222,
-      "sha256": "49efef77b7214ff0fb8e2bc7eb6ed76ed1099aa3ac0b4b4c58276c8bb1392ba1"
+      "bytes": 916,
+      "sha256": "32e0a2790a2abd157512190bfe3c18ea83891c9bdc18e902e2fc49e72cd1c3c7"
     },
     {
       "location": "prepared",
@@ -76,14 +64,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 385137,
-      "sha256": "3325d4cc1f30fb64392d9313b873e8735921fbf37015cc90c3167613c05ee6b8"
+      "bytes": 385582,
+      "sha256": "539fc1f6c54769ee069981dfe6e9ded1218ba83bbaedcfdb4bfd949f486cd138"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 372429,
-      "sha256": "1df1a8f32ee8b00b0b16c9c66273edef1e8835400680d640120995a7d9a75c81"
+      "bytes": 367911,
+      "sha256": "c83c8baad01045bccadd4a9e2611fedfc32264799705441f38ffa7785d3ae367"
     },
     {
       "location": "prepared",

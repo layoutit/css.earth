@@ -3,21 +3,9 @@
   "assets": [
     {
       "location": "public",
-      "filename": "kepler-16-a-context-shape@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "kepler-16-a-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
-    },
-    {
-      "location": "public",
-      "filename": "kepler-16-a-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -34,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1857,
-      "sha256": "4d350204423d99a626a00f8bc34a0c7afd33347e09cbe8dbc19133bcd169382f"
+      "bytes": 1343,
+      "sha256": "8b3f49b7fdd1ec9dc4285f06af707f35665bf38dd6e1a9f10ff4855c11277e54"
     },
     {
       "location": "prepared",
@@ -58,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1132,
-      "sha256": "57f49a269a77c8db8aa2f1928d6615497be12aac89852ba66e1f1b37419a4273"
+      "bytes": 866,
+      "sha256": "0883697df071f10934a8ba31e3d41ad289b916fe38d86b6b080ff6ff88eb5766"
     },
     {
       "location": "prepared",
@@ -76,14 +64,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 380502,
-      "sha256": "00e581da28ab563157cfcc492bd0a65ada9943b6104720d4bd6e79566c42cc40"
+      "bytes": 383217,
+      "sha256": "5cfd797ebab9e5c098382a70f43b58c46506f5d42855371e0924bd1d6161709c"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 367908,
-      "sha256": "a966103227dc03aceda947d2e9bde710ecfd27c505b28b3059cb73a5dcccf3fd"
+      "bytes": 365640,
+      "sha256": "a0c807eed209aa94e87b53a82b669a4dd3eded6b4945aafd028e136f27748e63"
     },
     {
       "location": "prepared",

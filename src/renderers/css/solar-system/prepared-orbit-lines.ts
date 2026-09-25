@@ -77,7 +77,7 @@ function sharedSvg(host: HTMLElement): SVGSVGElement {
     svg = host.ownerDocument.createElementNS(SVG, 'svg');
     svg.setAttribute('class', 'context-orbit-strokes'); svg.setAttribute('width', '1'); svg.setAttribute('height', '1'); svg.setAttribute('aria-hidden', 'true');
     // Composited once: every orbit paints into this one layer instead of earning its own by overlap.
-    svg.style.cssText = 'position:absolute;left:50%;top:50%;overflow:visible;pointer-events:none;will-change:transform';
+    svg.style.cssText = 'position:absolute;left:50%;top:50%;overflow:visible;pointer-events:none;will-change:transform;z-index:var(--world-depth-base,0)';
     root.appendChild(svg); sharedSvgs.set(root, svg);
   }
   return svg;

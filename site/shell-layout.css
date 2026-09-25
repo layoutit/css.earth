@@ -661,6 +661,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
    the sheet controller read the resolved snap heights. */
 @property --sheet-peek { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --sheet-half { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --sheet-rest { syntax: "<length>"; inherits: true; initial-value: 0px; }
 
 @media (max-width: 820px), (orientation: portrait) {
   body[data-object-shell] {
@@ -686,10 +687,16 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* How far the sheet sits below its open position. The sheet and the search above it both move by it;
        a drag writes it inline on the body (shell-sheet.mts). */
     --sheet-offset: calc(var(--sheet-height) - var(--sheet-peek));
+    /* The state's own offset, where layout rests the sheet. A drag or a snap writes --sheet-offset inline; this never
+       follows the finger. */
+    --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
   }
   body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
-  body[data-object-shell][data-sheet="full"] { --sheet-offset: 0px; }
-  body[data-object-shell][data-sheet="half"] { --sheet-offset: calc(var(--sheet-height) - var(--sheet-half)); }
+  body[data-object-shell][data-sheet="full"] { --sheet-offset: 0px; --sheet-rest: 0px; }
+  body[data-object-shell][data-sheet="half"] {
+    --sheet-offset: calc(var(--sheet-height) - var(--sheet-half));
+    --sheet-rest: calc(var(--sheet-height) - var(--sheet-half));
+  }
 
   .explorer-shell-header {
     position: fixed;
@@ -753,7 +760,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   .object-sidebar {
     position: fixed;
     z-index: 200;
-    inset: auto 0 var(--sheet-keyboard, 0px);
+    /* At rest layout places the sheet, untransformed: WebKit clips an untransformed fixed layer to the viewport, so a
+       peeking sheet backs the part that shows instead of its whole box (10.6 MB at 3x on an iPhone). */
+    inset: auto 0 calc(var(--sheet-keyboard, 0px) - var(--sheet-rest));
     box-sizing: border-box;
     width: 100%;
     height: var(--sheet-height);
@@ -765,13 +774,14 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
     background: var(--explorer-panel-background);
     box-shadow: var(--sheet-shadow);
-    /* A 2D offset at rest: a 3D transform or will-change kept the whole sheet a composited layer (13 MB at 3x). It becomes
-       one only while a drag moves it. */
-    transform: translate(0, var(--sheet-offset));
+    /* Drags and snaps move it by a transform relative to that rest (shell-sheet.mts); a 3D transform or will-change at rest
+       kept the whole sheet a composited layer (13 MB at 3x). */
+    transform: none;
     transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
     /* Vertical drags move the sheet; sideways swipes stay with carousels. */
     touch-action: pan-x;
   }
+  .object-sidebar:is(.is-dragging, .is-settling) { transform: translate(0, calc(var(--sheet-offset) - var(--sheet-rest))); }
   .object-sidebar.is-dragging {
     will-change: transform;
   }

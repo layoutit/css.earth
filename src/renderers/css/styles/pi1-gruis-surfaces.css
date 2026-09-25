@@ -55,12 +55,10 @@
    hide their back faces. */
 .object-stage[data-object-id="pi1-gruis"] .polycss-scene s:not(.pi1-gruis-polar) {
   backface-visibility: visible;
-  background-image: var(--pi1-gruis-surface-image) !important;
 }
 
 .object-stage[data-object-id="pi1-gruis"] .polycss-scene s.pi1-gruis-polar {
   backface-visibility: hidden;
-  background-image: var(--pi1-gruis-poles-image) !important;
 }
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */

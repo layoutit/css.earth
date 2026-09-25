@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "ce-tauri-context-color@2x.webp",
-      "bytes": 142,
-      "sha256": "793d4eafe032e7678cfbc3dfbd7a35b07c0ba425f8df61374519f77406b5c623"
-    },
-    {
-      "location": "public",
       "filename": "ce-tauri-context-pionier-2016-11@2x.webp",
       "bytes": 47590,
       "sha256": "328272d6c0a0900a72d1d00a3abef66fc481496b36bd520493918993c77f3d1b"
@@ -36,24 +30,6 @@
       "filename": "ce-tauri-lens-pionier-2016-12.webp",
       "bytes": 340,
       "sha256": "1c6c1a31edb80f6be9cffe89160908a809f8691c135d3cdb5329c85873c9d434"
-    },
-    {
-      "location": "public",
-      "filename": "ce-tauri-limb-color@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "ce-tauri-limb-pionier-2016-11@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
-    },
-    {
-      "location": "public",
-      "filename": "ce-tauri-limb-pionier-2016-12@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
       "location": "public",
@@ -94,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 15223,
-      "sha256": "cb9edef97c7b45d478fbc653a8f60f5748513b283afe595b1fc731af584b1e21"
+      "bytes": 14209,
+      "sha256": "18daeae4fa06b7a183e0c76c55a0e1ed67546cb9f03d0d6fdce67259fba1ad36"
     },
     {
       "location": "prepared",
@@ -118,8 +94,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 5481,
-      "sha256": "4f66d1913faf30fe56f907b1716bcf61bec90f9c49ff83a65a2d2388cbfabc47"
+      "bytes": 4967,
+      "sha256": "01f7734278841e8cbf4b5eb15876aba7107ad7698da056c73e60328603835f66"
     },
     {
       "location": "prepared",
@@ -148,14 +124,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 388041,
-      "sha256": "36ddaed54a6f253e191fa6628380a7fb13133d54aeea091ad683b887bbd563e3"
+      "bytes": 387317,
+      "sha256": "7a8fa2f42ba9b27fa38a211668204919cd3ee7a754e5ffe4ff1c659cb2789659"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 370235,
-      "sha256": "870131257d72511be682e4dd2b7cfebb2ca36b79013d8558e01aa11865c6e974"
+      "bytes": 364817,
+      "sha256": "c65d2ad6a45cdcbf255a1d5bee8951c1c7d39a7667e5939fefeb33156fd7349b"
     },
     {
       "location": "prepared",

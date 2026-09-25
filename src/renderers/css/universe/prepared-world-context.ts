@@ -41,7 +41,7 @@ type ProjectedBody = PlannedWorldContext['projectedBodies'][number];
 /** Paint and pick order by camera depth. Camera translation shifts every body's depth equally, so only the
  * orientation, the ranked members and the selection move ranks. A rotation keeps the committed order and
  * re-sorts once on release: re-ranking every frame rewrote dozens of z-indices as one body changed place. */
-function createDepthOrder<Entry extends { readonly body: { readonly positionM: readonly number[] } }>(members: readonly Entry[]) {
+function createDepthOrder<Entry extends { readonly body: { readonly positionM: readonly number[] } }>(members: readonly Entry[], base: number) {
   let orientation: readonly number[] | null = null, selection: Entry | null = null, selectedRank = 0;
   let ranks = new Map<Entry, number>();
   return {
@@ -63,8 +63,8 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
     },
     /** Four pick slots per body: orbit and marker, label, indicator. */
     rank: (entry: Entry) => ranks.get(entry),
-    /** The selected body's retained detail layers take z-index 0..3; other bodies stack behind or in front. */
-    zIndex(rank: number) { const relative = (rank - selectedRank) / 4; return String(relative > 0 ? relative + 3 : relative); },
+    /** The selected body's retained detail layers take z-index base..base+3; other bodies stack behind or in front. */
+    zIndex(rank: number) { const relative = (rank - selectedRank) / 4; return String(base + (relative > 0 ? relative + 3 : relative)); },
   };
 }
 
@@ -93,7 +93,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
         if (circle.dataset.contextFlightCircle !== entry.body.id) circle.dataset.contextFlightCircle = entry.body.id;
         const opacity = String(entry.baseAlpha.line * Math.max(0, Math.min(1, (start - flightBody.diameter) / (start - full))));
         if (circle.style.opacity !== opacity) circle.style.opacity = opacity;
-        const transform = `translate(${Math.round((width / 2 + flightBody.x) * 1000) / 1000}px, ${Math.round((height / 2 + flightBody.y) * 1000) / 1000}px) translate(-50%, -50%)`;
+        const transform = `translate(${Math.round(flightBody.x * 1000) / 1000}px, ${Math.round(flightBody.y * 1000) / 1000}px) translate(-50%, -50%)`;
         if (circle.style.transform !== transform) circle.style.transform = transform;
       }
       const captionVisibility = captionBody ? '' : 'hidden';
@@ -105,7 +105,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
           caption.style.opacity = String(entry.baseAlpha.label);
         }
         const [x, y] = captionBody.labelPosition;
-        const transform = `translate(${Math.round((width / 2 + x) * 1000) / 1000}px, ${Math.round((height / 2 + y) * 1000) / 1000}px)`;
+        const transform = `translate(${Math.round(x * 1000) / 1000}px, ${Math.round(y * 1000) / 1000}px)`;
         if (caption.style.transform !== transform) caption.style.transform = transform;
       }
       return captionBody;
@@ -114,7 +114,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars' }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
@@ -127,6 +127,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   opacityClock?: OpacityClock;
   /** Which retained paint owner draws the prepared orbit lines. */
   orbitRenderer?: OrbitRenderer;
+  /** The stage's depth base: every z-index here is above it or at it, never negative (prepared-universe-runtime.ts). */
+  depthBase?: number;
 }) {
   if (distantNavigation && (!Number.isFinite(distantNavigation.afterDistanceM) || distantNavigation.afterDistanceM <= 0)) {
     throw new TypeError('Distant navigation requires a positive finite distance.');
@@ -137,7 +139,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
   const locator = createContextLocator(host.ownerDocument);
   root.className = 'prepared-world-context';
-  root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+  // A zero-size root at the stage centre, its children placed from it. WebKit stops inspecting a container after about twenty
+  // children and assumes it paints: the full-screen root held a 7.6 MB backing at 3x on every page and never drew a pixel.
+  root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
   presentationHost.insertBefore(root, before);
   const picking = screenPicking(host);
@@ -258,7 +262,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
   const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
   let systemRetired = false;
-  const depthOrder = createDepthOrder(bodies);
+  const depthOrder = createDepthOrder(bodies, depthBase);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
   let overview = false;
@@ -620,7 +624,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           // every restyle of it, so a per-frame opacity on the marker restyled its ring and caption every frame.
           if (policyChanged || !wasShown || hoverChanged) fader.multiply(entry.mover, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
           fader.set(entry.mover, markerOpacity);
-          const transform = `translate(${width / 2 + x}px,${height / 2 + y}px) translate(-50%,-50%)`;
+          const transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
           // CSSOM serializes commas/spacing differently from the published
           // string. Compare against our last write, not its browser readback.
           if (entry.markerTransform !== transform) {
@@ -662,7 +666,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
-          const orbitTransform = `translate(${width / 2}px,${height / 2}px)`;
+          const orbitTransform = 'none';
           if (orbitRenderer === 'bars' && entry.orbitTransform !== orbitTransform) {
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;
           }

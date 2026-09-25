@@ -1,5 +1,6 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import sharp from 'sharp';
+import { leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
 
 const SAMPLE_OFFSETS = [[.25, .25], [.75, .25], [.25, .75], [.75, .75]];
 // Four premultiplied RGBA float samples per pixel: bound preparation memory.
@@ -99,4 +100,16 @@ export async function prepareCoplanarColorRaster({ faces, pixelsPerUnit, tilePix
   }
   return { width, height, tiles, sourceFaceCount: faces.length,
     bytes: await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, effort: 4 }).toBuffer() };
+}
+
+/** A tile's box, texture address and matrix. A tile's matrix maps one raster texel to one CSS pixel of its box; the box
+ * shows `imagePixels`, the published image's width, at two texels per CSS pixel instead (leafRasterScale), and the matrix's
+ * first two columns grow by the same factor, so each tile still covers its plane rectangle (transform-origin 0 0). WebKit
+ * backs a leaf at its box size times the device pixel ratio whatever its transform: a full 512-texel tile is modelled at
+ * 9 MB at DPR 3 and 2.25 MB at 256 CSS px. */
+export function coplanarTileLayout(tile: {x: number; y: number; width: number; height: number; matrix: readonly number[]},
+  raster: {width: number; height: number}, imagePixels: number) {
+  const scale = leafRasterScale(imagePixels, raster.width, 1), px = (value: number) => `${value * scale}px`;
+  return { matrix: tile.matrix.map((value, index) => index < 8 ? value / scale : value), width: px(tile.width), height: px(tile.height),
+    backgroundPosition: `${px(-tile.x)} ${px(-tile.y)}`, backgroundSize: `${px(raster.width)} ${px(raster.height)}` };
 }

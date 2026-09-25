@@ -49,7 +49,11 @@ test('two annuli retain the source radii, central aperture, gap, and separate op
     assert.equal(alpha(26 / 30), 0, 'gap stays transparent');
     assert.ok(alpha(29 / 30) >= 60 && alpha(29 / 30) <= 65, 'outer ring retains independent opacity');
     assert.ok(required(result).leaves.length <= 4, 'one bounded coplanar raster supplies retained tiles');
-    assert.match(required(result).leaves[0].style, /position:absolute;display:block;width:\d+px;height:\d+px/);
+    assert.match(required(result).leaves[0].style, /position:absolute;display:block;width:[\d.]+px;height:[\d.]+px/);
+    // Each tile shows the published image at two texels per CSS pixel.
+    for (const leaf of required(result).leaves) {
+      assert.equal(info.width / Number.parseFloat(required(leaf.style.match(/background-size:([^;]+)/))[1]), 2);
+    }
     assert.match(required(result).leaves[0].style, /transform-origin:0 0/);
     assert.equal(required(result).resource.pool, 'mounted');
   } finally { await rm(publicDirectory, { recursive: true, force: true }); }

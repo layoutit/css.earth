@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "altair-context-color@2x.webp",
-      "bytes": 100,
-      "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
-    },
-    {
-      "location": "public",
       "filename": "altair-lens-color.webp",
       "bytes": 172,
       "sha256": "0eba2f5ed960706e0c83c4b6daa68dfc27916f7eee013008285c62c7f422b1e3"
@@ -34,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2544,
-      "sha256": "11269fc9b03e74e581f2b1d394b130fc88753cbe4e52a94ab0d1d461f06a1100"
+      "bytes": 2305,
+      "sha256": "0a867bf0dc029470f7864909381129271a01b8c8055957254baaf0dd2494031b"
     },
     {
       "location": "prepared",
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1188,
-      "sha256": "92b55dfae428821292d7fc7aece619a2831839dd7886cff31b3b1b5d4c9c0d87"
+      "bytes": 1070,
+      "sha256": "0a65e2904eb38d72d80d8e2b63db073460c4d975c89ffc2404ab4e48206e0d3a"
     },
     {
       "location": "prepared",
@@ -76,14 +70,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 376014,
-      "sha256": "49f95426d490ac5d10f00ff446b9daf34c1b036faa37a4445c28b4c5a3829220"
+      "bytes": 380285,
+      "sha256": "ef3acaeafd7b048114d92ccf70fc6a49d809c1b977d6a65f3ae1b08e42972842"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 363434,
-      "sha256": "a866c1ebcb93bbaca56d3755ddc9f081ecdd8086ee570cf880c0c7103b8ca088"
+      "bytes": 363128,
+      "sha256": "c6f01e0ee34b123b138dfcdd01cd0003f05bc218c72fc7ebbb5233b495fdba70"
     },
     {
       "location": "prepared",

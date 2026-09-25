@@ -293,26 +293,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="venus"] .polycss-scene s:not(.venus-polar) {
-  background-image: url("/scenes/venus/venus-clouds@2x.webp") !important;
-}
-
-.object-stage[data-object-id="venus"] .polycss-scene s.venus-polar {
-  background-image: url("/scenes/venus/venus-poles-clouds@2x.webp") !important;
-}
-
-.object-stage[data-object-id="venus"][data-lens="radar"] .polycss-scene s:not(.venus-polar) {
-  background-image: url("/scenes/venus/venus-radar@2x.webp") !important;
-}
-
-.object-stage[data-object-id="venus"][data-lens="radar"] .polycss-scene s.venus-polar {
-  background-image: url("/scenes/venus/venus-poles-radar@2x.webp") !important;
-}
-
-.object-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s:not(.venus-polar) {
-  background-image: url("/scenes/venus/venus-elevation@2x.webp") !important;
-}
-
 .object-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s.venus-polar {
   background-image:
     url("/scenes/venus/venus-poles-elevation@2x.webp") !important;
@@ -425,30 +405,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="mars"] .polycss-scene s:not(.mars-polar) {
-  background-image: url("/scenes/mars/mars-surface-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="mars"] .polycss-scene s.mars-polar {
-  background-image: url("/scenes/mars/mars-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="mars"][data-lens="elevation"] .polycss-scene s:not(.mars-polar) {
-  background-image: url("/scenes/mars/mars-surface-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="mars"][data-lens="elevation"] .polycss-scene s.mars-polar {
-  background-image: url("/scenes/mars/mars-poles-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="mars"][data-lens="thermal"] .polycss-scene s:not(.mars-polar) {
-  background-image: url("/scenes/mars/mars-surface-thermal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="mars"][data-lens="thermal"] .polycss-scene s.mars-polar {
-  background-image: url("/scenes/mars/mars-poles-thermal@2x.webp") !important;
-}
-
 .object-stage[data-object-id="mars"] .mars-fixed-material {
   z-index: 1;
   top: 50%;
@@ -538,70 +494,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="moon"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-surface@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-surface@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="midnight-temperature"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-midnight-temperature@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="midnight-temperature"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-midnight-temperature@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="heat-anomalies"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-heat-anomalies@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="heat-anomalies"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-heat-anomalies@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="rock-abundance"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-rock-abundance@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="rock-abundance"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-rock-abundance@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="topography"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-topography@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="topography"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-topography@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="crust"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-crust@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="crust"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-crust@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="silicate-signature"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-silicate-signature@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="silicate-signature"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-silicate-signature@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="geology"] .polycss-scene s:not(.moon-polar) {
-  background-image: url("/scenes/moon/moon-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="moon"][data-lens="geology"] .polycss-scene s.moon-polar {
-  background-image: url("/scenes/moon/moon-poles-geology@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="moon"] .moon-fixed-material {
@@ -684,54 +576,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="pluto"] .polycss-scene s:not(.pluto-polar) {
-  background-image: url("/scenes/pluto/pluto-surface@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"] .polycss-scene s.pluto-polar {
-  background-image: url("/scenes/pluto/pluto-poles-surface@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="topography"] .polycss-scene s:not(.pluto-polar) {
-  background-image: url("/scenes/pluto/pluto-topography@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="topography"] .polycss-scene s.pluto-polar {
-  background-image: url("/scenes/pluto/pluto-poles-topography@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="monochrome"] .polycss-scene s:not(.pluto-polar) {
-  background-image: url("/scenes/pluto/pluto-monochrome@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="monochrome"] .polycss-scene s.pluto-polar {
-  background-image: url("/scenes/pluto/pluto-poles-monochrome@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="methane-ice"] .polycss-scene s:not(.pluto-polar) {
-  background-image: url("/scenes/pluto/pluto-methane-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="methane-ice"] .polycss-scene s.pluto-polar {
-  background-image: url("/scenes/pluto/pluto-poles-methane-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="nitrogen-ice"] .polycss-scene s:not(.pluto-polar) {
-  background-image: url("/scenes/pluto/pluto-nitrogen-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="nitrogen-ice"] .polycss-scene s.pluto-polar {
-  background-image: url("/scenes/pluto/pluto-poles-nitrogen-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="water-ice"] .polycss-scene s:not(.pluto-polar) {
-  background-image: url("/scenes/pluto/pluto-water-ice@2x.webp") !important;
-}
-
-.object-stage[data-object-id="pluto"][data-lens="water-ice"] .polycss-scene s.pluto-polar {
-  background-image: url("/scenes/pluto/pluto-poles-water-ice@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -817,22 +661,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="ariel"] .polycss-scene s:not(.ariel-polar) {
-  background-image: url("/scenes/ariel/ariel-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ariel"] .polycss-scene s.ariel-polar {
-  background-image: url("/scenes/ariel/ariel-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ariel"][data-lens="elevation"] .polycss-scene s:not(.ariel-polar) {
-  background-image: url("/scenes/ariel/ariel-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ariel"][data-lens="elevation"] .polycss-scene s.ariel-polar {
-  background-image: url("/scenes/ariel/ariel-poles-elevation@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="ariel"] .ariel-fixed-material {
@@ -916,30 +744,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="callisto"] .polycss-scene s:not(.callisto-polar) {
-  background-image: url("/scenes/callisto/callisto-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="callisto"] .polycss-scene s.callisto-polar {
-  background-image: url("/scenes/callisto/callisto-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="callisto"][data-lens="enhanced"] .polycss-scene s:not(.callisto-polar) {
-  background-image: url("/scenes/callisto/callisto-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="callisto"][data-lens="enhanced"] .polycss-scene s.callisto-polar {
-  background-image: url("/scenes/callisto/callisto-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="callisto"][data-lens="infrared"] .polycss-scene s:not(.callisto-polar) {
-  background-image: url("/scenes/callisto/callisto-infrared@2x.webp") !important;
-}
-
-.object-stage[data-object-id="callisto"][data-lens="infrared"] .polycss-scene s.callisto-polar {
-  background-image: url("/scenes/callisto/callisto-poles-infrared@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="callisto"] .callisto-fixed-material {
@@ -1021,46 +825,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="ceres"] .polycss-scene s:not(.ceres-polar) {
-  background-image: url("/scenes/ceres/ceres-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"] .polycss-scene s.ceres-polar {
-  background-image: url("/scenes/ceres/ceres-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="enhanced"] .polycss-scene s:not(.ceres-polar) {
-  background-image: url("/scenes/ceres/ceres-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="enhanced"] .polycss-scene s.ceres-polar {
-  background-image: url("/scenes/ceres/ceres-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="elevation"] .polycss-scene s:not(.ceres-polar) {
-  background-image: url("/scenes/ceres/ceres-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="elevation"] .polycss-scene s.ceres-polar {
-  background-image: url("/scenes/ceres/ceres-poles-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s:not(.ceres-polar) {
-  background-image: url("/scenes/ceres/ceres-clay-band@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s.ceres-polar {
-  background-image: url("/scenes/ceres/ceres-poles-clay-band@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s:not(.ceres-polar) {
-  background-image: url("/scenes/ceres/ceres-ammonium-band@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s.ceres-polar {
-  background-image: url("/scenes/ceres/ceres-poles-ammonium-band@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -1229,22 +993,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="eris"] .polycss-scene s:not(.eris-polar) {
-  background-image: url("/scenes/eris/eris-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="eris"] .polycss-scene s.eris-polar {
-  background-image: url("/scenes/eris/eris-poles-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s:not(.eris-polar) {
-  background-image: url("/scenes/eris/eris-illustration@2x.webp") !important;
-}
-
-.object-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s.eris-polar {
-  background-image: url("/scenes/eris/eris-poles-illustration@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="eris"] .eris-fixed-material {
@@ -1326,46 +1074,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="europa"] .polycss-scene s:not(.europa-polar) {
-  background-image: url("/scenes/europa/europa-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="enhanced"] .polycss-scene s:not(.europa-polar) {
-  background-image: url("/scenes/europa/europa-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="enhanced"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="elevation"] .polycss-scene s:not(.europa-polar) {
-  background-image: url("/scenes/europa/europa-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="elevation"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="geology"] .polycss-scene s:not(.europa-polar) {
-  background-image: url("/scenes/europa/europa-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="geology"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="infrared"] .polycss-scene s:not(.europa-polar) {
-  background-image: url("/scenes/europa/europa-infrared@2x.webp") !important;
-}
-
-.object-stage[data-object-id="europa"][data-lens="infrared"] .polycss-scene s.europa-polar {
-  background-image: url("/scenes/europa/europa-poles-infrared@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -1451,38 +1159,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="ganymede"] .polycss-scene s:not(.ganymede-polar) {
-  background-image: url("/scenes/ganymede/ganymede-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"] .polycss-scene s.ganymede-polar {
-  background-image: url("/scenes/ganymede/ganymede-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="enhanced"] .polycss-scene s:not(.ganymede-polar) {
-  background-image: url("/scenes/ganymede/ganymede-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="enhanced"] .polycss-scene s.ganymede-polar {
-  background-image: url("/scenes/ganymede/ganymede-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="geology"] .polycss-scene s:not(.ganymede-polar) {
-  background-image: url("/scenes/ganymede/ganymede-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="geology"] .polycss-scene s.ganymede-polar {
-  background-image: url("/scenes/ganymede/ganymede-poles-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="oxygen-signature"] .polycss-scene s:not(.ganymede-polar) {
-  background-image: url("/scenes/ganymede/ganymede-oxygen-signature@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="oxygen-signature"] .polycss-scene s.ganymede-polar {
-  background-image: url("/scenes/ganymede/ganymede-poles-oxygen-signature@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="ganymede"] .ganymede-fixed-material {
@@ -1564,38 +1240,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="iapetus"] .polycss-scene s:not(.iapetus-polar) {
-  background-image: url("/scenes/iapetus/iapetus-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"] .polycss-scene s.iapetus-polar {
-  background-image: url("/scenes/iapetus/iapetus-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"][data-lens="enhanced"] .polycss-scene s:not(.iapetus-polar) {
-  background-image: url("/scenes/iapetus/iapetus-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"][data-lens="enhanced"] .polycss-scene s.iapetus-polar {
-  background-image: url("/scenes/iapetus/iapetus-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"][data-lens="infrared"] .polycss-scene s:not(.iapetus-polar) {
-  background-image: url("/scenes/iapetus/iapetus-infrared@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"][data-lens="infrared"] .polycss-scene s.iapetus-polar {
-  background-image: url("/scenes/iapetus/iapetus-poles-infrared@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"][data-lens="ice-absorption"] .polycss-scene s:not(.iapetus-polar) {
-  background-image: url("/scenes/iapetus/iapetus-ice-absorption@2x.webp") !important;
-}
-
-.object-stage[data-object-id="iapetus"][data-lens="ice-absorption"] .polycss-scene s.iapetus-polar {
-  background-image: url("/scenes/iapetus/iapetus-poles-ice-absorption@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -1681,54 +1325,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="io"] .polycss-scene s:not(.io-polar) {
-  background-image: url("/scenes/io/io-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"] .polycss-scene s.io-polar {
-  background-image: url("/scenes/io/io-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="enhanced"] .polycss-scene s:not(.io-polar) {
-  background-image: url("/scenes/io/io-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="enhanced"] .polycss-scene s.io-polar {
-  background-image: url("/scenes/io/io-poles-enhanced@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="geology"] .polycss-scene s:not(.io-polar) {
-  background-image: url("/scenes/io/io-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="geology"] .polycss-scene s.io-polar {
-  background-image: url("/scenes/io/io-poles-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="spectral-slope"] .polycss-scene s:not(.io-polar) {
-  background-image: url("/scenes/io/io-spectral-slope@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="spectral-slope"] .polycss-scene s.io-polar {
-  background-image: url("/scenes/io/io-poles-spectral-slope@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="visible-absorption"] .polycss-scene s:not(.io-polar) {
-  background-image: url("/scenes/io/io-visible-absorption@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="visible-absorption"] .polycss-scene s.io-polar {
-  background-image: url("/scenes/io/io-poles-visible-absorption@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s:not(.io-polar) {
-  background-image: url("/scenes/io/io-volcanic-heat@2x.webp") !important;
-}
-
-.object-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s.io-polar {
-  background-image: url("/scenes/io/io-poles-volcanic-heat@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="io"] .io-fixed-material {
@@ -1810,22 +1406,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="makemake"] .polycss-scene s:not(.makemake-polar) {
-  background-image: url("/scenes/makemake/makemake-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="makemake"] .polycss-scene s.makemake-polar {
-  background-image: url("/scenes/makemake/makemake-poles-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="makemake"][data-lens="illustration"] .polycss-scene s:not(.makemake-polar) {
-  background-image: url("/scenes/makemake/makemake-illustration@2x.webp") !important;
-}
-
-.object-stage[data-object-id="makemake"][data-lens="illustration"] .polycss-scene s.makemake-polar {
-  background-image: url("/scenes/makemake/makemake-poles-illustration@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -1911,30 +1491,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="miranda"] .polycss-scene s:not(.miranda-polar) {
-  background-image: url("/scenes/miranda/miranda-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="miranda"] .polycss-scene s.miranda-polar {
-  background-image: url("/scenes/miranda/miranda-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="miranda"][data-lens="elevation"] .polycss-scene s:not(.miranda-polar) {
-  background-image: url("/scenes/miranda/miranda-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="miranda"][data-lens="elevation"] .polycss-scene s.miranda-polar {
-  background-image: url("/scenes/miranda/miranda-poles-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="miranda"][data-lens="geology"] .polycss-scene s:not(.miranda-polar) {
-  background-image: url("/scenes/miranda/miranda-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="miranda"][data-lens="geology"] .polycss-scene s.miranda-polar {
-  background-image: url("/scenes/miranda/miranda-poles-geology@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="miranda"] .miranda-fixed-material {
@@ -2016,14 +1572,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="oberon"] .polycss-scene s:not(.oberon-polar) {
-  background-image: url("/scenes/oberon/oberon-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="oberon"] .polycss-scene s.oberon-polar {
-  background-image: url("/scenes/oberon/oberon-poles-normal@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -2109,54 +1657,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="titan"] .polycss-scene s:not(.titan-polar) {
-  background-image: url("/scenes/titan/titan-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"] .polycss-scene s.titan-polar {
-  background-image: url("/scenes/titan/titan-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="radar"] .polycss-scene s:not(.titan-polar) {
-  background-image: url("/scenes/titan/titan-radar@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="radar"] .polycss-scene s.titan-polar {
-  background-image: url("/scenes/titan/titan-poles-radar@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="topography"] .polycss-scene s:not(.titan-polar) {
-  background-image: url("/scenes/titan/titan-topography@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="topography"] .polycss-scene s.titan-polar {
-  background-image: url("/scenes/titan/titan-poles-topography@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="interpolated"] .polycss-scene s:not(.titan-polar) {
-  background-image: url("/scenes/titan/titan-interpolated@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="interpolated"] .polycss-scene s.titan-polar {
-  background-image: url("/scenes/titan/titan-poles-interpolated@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="coverage-distance"] .polycss-scene s:not(.titan-polar) {
-  background-image: url("/scenes/titan/titan-coverage-distance@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="coverage-distance"] .polycss-scene s.titan-polar {
-  background-image: url("/scenes/titan/titan-poles-coverage-distance@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="geology"] .polycss-scene s:not(.titan-polar) {
-  background-image: url("/scenes/titan/titan-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titan"][data-lens="geology"] .polycss-scene s.titan-polar {
-  background-image: url("/scenes/titan/titan-poles-geology@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="titan"] .titan-fixed-material {
@@ -2238,30 +1738,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="titania"] .polycss-scene s:not(.titania-polar) {
-  background-image: url("/scenes/titania/titania-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"] .polycss-scene s.titania-polar {
-  background-image: url("/scenes/titania/titania-poles-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"][data-lens="elevation"] .polycss-scene s:not(.titania-polar) {
-  background-image: url("/scenes/titania/titania-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"][data-lens="elevation"] .polycss-scene s.titania-polar {
-  background-image: url("/scenes/titania/titania-poles-elevation@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"][data-lens="geology"] .polycss-scene s:not(.titania-polar) {
-  background-image: url("/scenes/titania/titania-geology@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"][data-lens="geology"] .polycss-scene s.titania-polar {
-  background-image: url("/scenes/titania/titania-poles-geology@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -2347,46 +1823,6 @@
   pointer-events: none;
 }
 
-.object-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s:not(.miranda-polar) {
-  background-image: url("/scenes/miranda/miranda-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s.miranda-polar {
-  background-image: url("/scenes/miranda/miranda-poles-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ariel"][data-lens="voyager-color"] .polycss-scene s:not(.ariel-polar) {
-  background-image: url("/scenes/ariel/ariel-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ariel"][data-lens="voyager-color"] .polycss-scene s.ariel-polar {
-  background-image: url("/scenes/ariel/ariel-poles-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="umbriel"][data-lens="voyager-color"] .polycss-scene s:not(.umbriel-polar) {
-  background-image: url("/scenes/umbriel/umbriel-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="umbriel"][data-lens="voyager-color"] .polycss-scene s.umbriel-polar {
-  background-image: url("/scenes/umbriel/umbriel-poles-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"][data-lens="voyager-color"] .polycss-scene s:not(.titania-polar) {
-  background-image: url("/scenes/titania/titania-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="titania"][data-lens="voyager-color"] .polycss-scene s.titania-polar {
-  background-image: url("/scenes/titania/titania-poles-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="oberon"][data-lens="voyager-color"] .polycss-scene s:not(.oberon-polar) {
-  background-image: url("/scenes/oberon/oberon-voyager-color@2x.webp") !important;
-}
-
-.object-stage[data-object-id="oberon"][data-lens="voyager-color"] .polycss-scene s.oberon-polar {
-  background-image: url("/scenes/oberon/oberon-poles-voyager-color@2x.webp") !important;
-}
-
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .object-stage[data-object-id="triton"] .triton-fixed-material {
@@ -2468,14 +1904,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="umbriel"] .polycss-scene s:not(.umbriel-polar) {
-  background-image: url("/scenes/umbriel/umbriel-normal@2x.webp") !important;
-}
-
-.object-stage[data-object-id="umbriel"] .polycss-scene s.umbriel-polar {
-  background-image: url("/scenes/umbriel/umbriel-poles-normal@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.

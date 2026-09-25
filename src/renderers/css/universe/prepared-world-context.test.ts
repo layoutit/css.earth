@@ -208,9 +208,9 @@ function mover(element: HTMLElement | FakeElement): FakeElement {
 }
 function billboardCenter(element: HTMLElement | FakeElement): number[] {
   const moved = mover(element);
+  // The context root is a zero-size anchor at the stage centre, so a mover's translation is already centre-relative.
   const [x, y] = moved.style.transform.match(/-?[\d.]+/g)!.map(Number);
-  const host = moved.parentNode!.parentNode!;
-  return [x - host.clientWidth / 2, y - host.clientHeight / 2];
+  return [x, y];
 }
 function captionPosition(element: HTMLElement | FakeElement): number[] {
   const [x, y] = billboardCenter(element);
@@ -985,7 +985,7 @@ test('an orbit may centre on an orbitless prepared parent while remaining acycli
 test('projects retained markers, culls focus-occluded bodies, and keeps physical scale invariant', () => {
   const near = mount(1), far = mount(1e12);
   const nearSun = find(near, 'contextBody', 'sun'), nearMercury = find(near, 'contextBody', 'mercury'), nearVenus = find(near, 'contextBody', 'venus');
-  expect(mover(nearSun).style.transform).toContain('translate(430px,280px)');
+  expect(mover(nearSun).style.transform).toContain('translate(30px,-20px)');
   expect(nearMercury.style.visibility).toBe('');
   expect(nearVenus.style.visibility).toBe('hidden');
   const nearOrbit = mounted.get(near)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '');
@@ -1060,7 +1060,7 @@ test('orbit chords stop at the circular indicator on both sides of the centered 
   expect(mercury.mover.style.visibility).toBe('');
   expect(mercury.billboard.style.width).toBe('16px');
   expect(mercury.center).toEqual([70, -20]);
-  expect(mover(mercury.billboard).style.transform).toContain('translate(470px,280px)');
+  expect(mover(mercury.billboard).style.transform).toContain('translate(70px,-20px)');
   const edges: number[][] = [];
   for (const piece of mercury.orbit.filter(piece => piece.style.visibility === '')) {
     const [dx, dy, , , x, y] = piece.style.transform.slice(7, -1).split(',').map(Number);
@@ -2525,11 +2525,16 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
   for (let i = 0; i < 10; i++) layer.publish(world, viewport);
   expect(writes).toBe(0);
+  // Positions are relative to the stage centre, so a wider stage moves nothing; a longer focal length moves the marker. The
+  // orbit root stays anchored at the centre and is not rewritten.
   viewport.widthPixels = 900;
   layer.publish(world, viewport);
-  expect(writes).toBe(2);
+  expect(writes).toBe(0);
+  viewport.focalPixels = 500;
   layer.publish(world, viewport);
-  expect(writes).toBe(2);
+  expect(writes).toBe(1);
+  layer.publish(world, viewport);
+  expect(writes).toBe(1);
   layer.destroy();
 });
 

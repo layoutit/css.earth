@@ -576,6 +576,7 @@
   top: 50%;
   width: 0;
   height: 0;
+  z-index: var(--world-depth-base, 0);
   pointer-events: none;
 }
 .catalogue-moon-label {

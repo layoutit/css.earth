@@ -23,18 +23,6 @@
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;
 }
-.object-stage[data-object-id="hat-p-11b"] .polycss-scene s:not(.hat-p-11b-polar) {
-  background-image: url("/scenes/hat-p-11b/hat-p-11b-surface-shape@2x.webp") !important;
-}
-.object-stage[data-object-id="hat-p-11b"] .polycss-scene s.hat-p-11b-polar {
-  background-image: url("/scenes/hat-p-11b/hat-p-11b-poles-shape@2x.webp") !important;
-}
-.object-stage[data-object-id="hat-p-11b"][data-lens="illustration"] .polycss-scene s:not(.hat-p-11b-polar) {
-  background-image: url("/scenes/hat-p-11b/hat-p-11b-surface-illustration@2x.webp") !important;
-}
-.object-stage[data-object-id="hat-p-11b"][data-lens="illustration"] .polycss-scene s.hat-p-11b-polar {
-  background-image: url("/scenes/hat-p-11b/hat-p-11b-poles-illustration@2x.webp") !important;
-}
 /* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
 .object-stage[data-object-id="hat-p-11b"] .hat-p-11b-fixed-material {
   top: 50%;
