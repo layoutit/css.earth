@@ -5,7 +5,7 @@ import { interactionTrackball, directAngularDegreesPerTrackballRadius, directPit
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';
-export interface ObjectInteractionOptions { inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta, signal?: AbortSignal): void | Promise<boolean>; minimumZoom: number; maximumZoom: number; dolly: { stepPerDelta: number }; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
+export interface ObjectInteractionOptions { inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta, signal?: AbortSignal): void | Promise<boolean>; minimumZoom: number; maximumZoom: number; dolly: { stepPerDelta: number; minimumDistance?: () => number }; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
 export interface InteractionServices { createUnboundedMatrixDragControls?: typeof createMatrixDragControls; createPreparedWheelZoomControls?: typeof createWheelZoomControls; }
 export function createObjectInteractionControls({
   inputSurface,

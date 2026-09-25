@@ -10,14 +10,14 @@ import {
   MOBILE_VIEWPORT_QUERY,
   WHEEL_ZOOM_SPEED_MULTIPLIER,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
-  WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_PINCH,
   WHEEL_ZOOM_INERTIA,
   WHEEL_ZOOM_INERTIA_INPUT_KINDS,
   wheelZoomInputKind,
   mobileSheetKeyboardInset,
   MOBILE_SHEET_POLICY,
 } from "../runtime-policy.mts";
-import { PREPARED_WHEEL_ZOOM } from "../../src/renderers/css/navigation/prepared-wheel-zoom.ts";
+import { PREPARED_WHEEL_ZOOM, pinchTargetDistance } from "../../src/renderers/css/navigation/prepared-wheel-zoom.ts";
 
 test("only a keyboard-sized covering takes room from the sheet", () => {
   // A phone with nothing over the layout viewport.
@@ -71,11 +71,14 @@ test("every scroll device is calibrated to the traced reference response", () =>
   }
 });
 
-// A pinch reports its own, much smaller units: a full-pad pinch traced at
-// 150-170 of them. Its gain puts one full pinch at several wheel notches.
-test("a full trackpad pinch travels several wheel notches", () => {
-  const notches = 160 * WHEEL_ZOOM_PINCH_SPEED_MULTIPLIER / 100;
-  assert.ok(notches >= 4 && notches <= 6, `a full pinch is ${notches} notches`);
+// Measured with headless trackpad pinches on Earth at 1,400 x 900 (2026-09-25): the default view is 4.914 radii
+// out and the closest view 1.930. One pinch at the old 18x reached the closest view; two wheel notches do.
+test("a full pinch slows into a body and speeds across open space", () => {
+  const full = Math.log(WHEEL_ZOOM_PINCH.fullPinchFingerRatio), notch = .006 * 100, closest = 1.930;
+  const once = (distance: number) => pinchTargetDistance(distance, closest, full, WHEEL_ZOOM_PINCH, notch);
+  assert.ok(once(4.914) / closest > 1.3, "one full pinch stops well outside Earth's closest view");
+  assert.equal(once(once(4.914)), closest, "two full pinches reach it");
+  assert.ok(1e21 / once(1e21) > 18, "far out a full pinch zooms further than the old 18x");
 });
 
 // The glide decays per frame, so `dampingSeconds` is a time constant and the
