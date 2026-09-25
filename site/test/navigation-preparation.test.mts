@@ -23,7 +23,9 @@ const projectRoot = resolve(import.meta.dirname, "../..");
 // Sidebar thumbnails share the directory but belong to prepare-sidebar-thumbnails, whose manifest lists them.
 const sidebarThumbnails = JSON.parse(await readFile(resolve(projectRoot, "public/navigation/sidebar-thumbnails.json"), "utf8")) as { images: Record<string, { url2x: string }> };
 const sidebarFiles = new Set(["sidebar-thumbnails.json", ...Object.values(sidebarThumbnails.images).map(({ url2x }) => url2x.replace("/navigation/", ""))]);
-const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"))).filter((file) => !sidebarFiles.has(file)).sort();
+// Subfolders such as search/ belong to their own preparers; this one writes files at the top level only.
+const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"), { withFileTypes: true }))
+  .filter((entry) => entry.isFile() && !sidebarFiles.has(entry.name)).map((entry) => entry.name).sort();
 
 const transparentMarkerFiles = Object.freeze([
   "blackhole-marker.png",
