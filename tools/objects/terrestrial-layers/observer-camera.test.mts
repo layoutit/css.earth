@@ -5,8 +5,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCamera, parseSpinState, pckOrientation,
   spinOrientation, rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
-import { parseTextKernel, numbers } from '../../spice/text-kernel.mts';
-import { parseLeapSeconds, utcSecondsToEt } from '../../spice/lsk.mts';
+import { parseTextKernel, numbers, parseLeapSeconds, utcSecondsToEt } from '@cssearth/spice';
 import { dot3 as dot } from '@cssearth/core';
 import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 const DEGREE = Math.PI / 180;

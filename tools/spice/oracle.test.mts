@@ -3,10 +3,8 @@ import { sourceLoad, sourceTest } from '../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet } from './kernel-set.mts';
-import { utcToEt, etToUtc } from './lsk.mts';
-import { encodeClock, clockToEt, etToClock } from './sclk.mts';
+import { utcToEt, etToUtc, encodeClock, clockToEt, etToClock, apply, transpose } from '@cssearth/spice';
 import { spiceCamera } from './camera.mts';
-import { apply, transpose } from '@cssearth/spice';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../oracles/fixture.mts';
 

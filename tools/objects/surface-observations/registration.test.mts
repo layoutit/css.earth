@@ -1,8 +1,7 @@
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { rotate } from '../../spice/frames.mts';
-import { multiply } from '@cssearth/spice';
+import { rotate, multiply } from '@cssearth/spice';
 import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '../terrestrial-layers/observer-camera.mts';
 import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';

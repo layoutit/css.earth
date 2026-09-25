@@ -6,12 +6,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import { parseTextKernel, type KernelPool } from './text-kernel.mts';
-import { parseLeapSeconds, type LeapSeconds } from './lsk.mts';
-import { parseSpacecraftClock, etToClock, type SpacecraftClock } from './sclk.mts';
-import { readDaf, spkSegments, ckSegments, type CkSegment, type Matrix3 } from '@cssearth/spice';
-import { Ephemeris } from './geometry.mts';
-import { frameDefinition, pckRotation, rotation, type FrameProviders } from './frames.mts';
+import { parseTextKernel, type KernelPool, parseLeapSeconds, type LeapSeconds, parseSpacecraftClock, etToClock, type SpacecraftClock, readDaf, spkSegments, ckSegments, type CkSegment, type Matrix3, Ephemeris, frameDefinition, pckRotation, rotation, type FrameProviders } from '@cssearth/spice';
 
 export interface LoadedKernel { readonly path: string; readonly bytes: number; readonly sha256: string; readonly kind: 'text' | 'spk' | 'ck' }
 export interface KernelSet {

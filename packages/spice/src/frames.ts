@@ -7,9 +7,9 @@
  * that maps J2000 vectors into the frame, resolving the chain through
  * whichever providers the caller supplies.
  */
-import { has, number, numbers, string, strings, type KernelPool } from './text-kernel.mts';
-import { multiply, transpose, quaternionToMatrix, type Matrix3 } from '@cssearth/spice';
-import { ECLIPTIC_OBLIQUITY_RAD } from './geometry.mts';
+import { has, number, numbers, string, strings, type KernelPool } from './text-kernel.js';
+import { multiply, transpose, quaternionToMatrix, type Matrix3 } from './ck.js';
+import { ECLIPTIC_OBLIQUITY_RAD } from './geometry.js';
 
 const RAD = Math.PI / 180;
 /** SPICE `rotate`: the frame rotation by `angle` about axis 1, 2 or 3 (vectors expressed in the rotated frame). */

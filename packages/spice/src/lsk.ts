@@ -4,7 +4,7 @@
  * TDB = TDT + K sin(E) with E = M0 + M1 TDB + EB sin(M0 + M1 TDB), solved by
  * fixed-point iteration.
  */
-import { number, numbers, type KernelPool } from './text-kernel.mts';
+import { number, numbers, type KernelPool } from './text-kernel.js';
 
 export interface LeapSeconds { readonly deltaTA: number; readonly k: number; readonly eb: number; readonly m: readonly [number, number]; readonly table: readonly { readonly leapSeconds: number; readonly at: number }[] }
 

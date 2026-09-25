@@ -5,7 +5,8 @@
  * precedence, as in the SPICE kernel pool. All states are J2000 kilometres and
  * kilometres per second; ET is TDB seconds past J2000.
  */
-import type { SpkSegment, State, Matrix3 } from '@cssearth/spice';
+import type { SpkSegment, State } from './spk.js';
+import type { Matrix3 } from './ck.js';
 
 export const SPEED_OF_LIGHT_KM_S = 299792.458;
 const sub = (a: readonly number[], b: readonly number[]) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]] as [number, number, number];

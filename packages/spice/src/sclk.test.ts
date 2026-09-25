@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { parseTextKernel } from './text-kernel.mts';
-import { parseLeapSeconds } from './lsk.mts';
-import { parseSpacecraftClock, encodeClock, clockToEt, etToClock } from './sclk.mts';
+import { test } from 'vitest';
+import { parseTextKernel } from './text-kernel.js';
+import { parseLeapSeconds } from './lsk.js';
+import { parseSpacecraftClock, encodeClock, clockToEt, etToClock } from './sclk.js';
 
 const lsk = parseLeapSeconds(parseTextKernel(`\\begindata
 DELTET/DELTA_T_A = 32.184

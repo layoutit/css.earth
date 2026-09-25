@@ -12,7 +12,7 @@ import { globals, writeArrayBuffer } from 'geotiff';
 import { decodeCalibratedCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { pds3Keyword } from '@cssearth/telescope';
 import { spiceCamera } from '../../spice/camera.mts';
-import { utcToEt } from '../../spice/lsk.mts';
+import { utcToEt } from '@cssearth/spice';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { fitLimb, limbAccepted, type LimbFit } from './limb.mts';
 

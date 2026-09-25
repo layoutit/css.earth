@@ -21,8 +21,7 @@ import { addProductEvidence, writeProductRecord } from '@cssearth/telescope/node
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { loadKernelSet, type KernelSet } from '../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../spice/kernel-bank.mts';
-import { numbers } from '../../spice/text-kernel.mts';
-import { utcToEt } from '../../spice/lsk.mts';
+import { numbers, utcToEt } from '@cssearth/spice';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';

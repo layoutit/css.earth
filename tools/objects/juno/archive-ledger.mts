@@ -14,7 +14,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseTextKernel, number as kernelNumber } from '../../spice/text-kernel.mts';
+import { parseTextKernel, number as kernelNumber } from '@cssearth/spice';
 import { bankKernelPath } from '../../spice/kernel-bank.mts';
 import { FILTER_COMBINATIONS, KERNEL_SET, PROGRAMS, VOLUMES, fetchText, indexNumber, parseIndex, parseProductId, parseProgram, type IndexRow } from './archive.mts';
 import { POLICY, RECEIPT_SCHEMA } from './measure.mts';

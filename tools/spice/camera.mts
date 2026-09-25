@@ -8,10 +8,7 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
  * the recipe states which instrument-frame axes stored columns and rows follow,
  * because that is a property of the archived array, not of the kernels.
  */
-import { has, number, numbers, string, type KernelPool } from './text-kernel.mts';
-import { apply, multiply, transpose, type Matrix3 } from '@cssearth/spice';
-import { stelab, type Ephemeris } from './geometry.mts';
-import { frameDefinition } from './frames.mts';
+import { has, number, numbers, string, type KernelPool, apply, multiply, transpose, type Matrix3, stelab, type Ephemeris, frameDefinition } from '@cssearth/spice';
 
 /** SPICE aberration corrections: one light-time iteration (LT), converged (CN), each with or without stellar aberration (+S), or none. */
 export type Aberration = 'LT+S' | 'LT' | 'CN+S' | 'CN' | 'NONE';

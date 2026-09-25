@@ -9,7 +9,7 @@ import type { Vector3 } from '../../src/renderers/css/solar-system/types.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { kernelBankPaths } from './kernel-bank.mts';
 import { loadKernelSet } from './kernel-set.mts';
-import { utcToEt } from './lsk.mts';
+import { utcToEt } from '@cssearth/spice';
 
 export interface ApproachRecipe {
   readonly kernelSet: string; readonly kernels: readonly string[];

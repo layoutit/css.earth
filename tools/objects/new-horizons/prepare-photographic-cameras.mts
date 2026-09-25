@@ -14,9 +14,7 @@ import { newHorizonsCamera, decodeNewHorizonsLorri } from '../terrestrial-layers
 import { bindSipCamera } from '../terrestrial-layers/llorri-geo.mts';
 import { observedLimb, limbThreshold, type LimbEdgePoint } from '../terrestrial-layers/limb-refinement.mts';
 import { loadStlShape } from '../terrestrial-layers/obj-shape.mts';
-import { pckRotation } from '../../spice/frames.mts';
-import { parseTextKernel } from '../../spice/text-kernel.mts';
-import { transpose } from '@cssearth/spice';
+import { pckRotation, parseTextKernel, transpose } from '@cssearth/spice';
 import { comparePhotographicInteriors } from './compare-photographic-interiors.mts';
 import { writeInteriorComparison } from './render-interior-comparison.mts';
 
