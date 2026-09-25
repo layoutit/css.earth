@@ -34,6 +34,30 @@ test('source topology preserves translated inward-facing facets and welds duplic
   assert.throws(() => Reflect.apply(removeOppositeFacePairs, undefined, [[0,1,2,1,2,0]]), /ambiguous duplicate/);
 });
 
+test('a source within the face target is kept whole, and an unreachable target names the object, file and the error it needs', async () => {
+  const simplification = { method: 'source-meshoptimizer', targetFaces: 8, maximumErrorMeters: 0.001 };
+  // Nyx's 512-face DAMIT mesh under an 800-face target used to stop meshoptimizer with a bare "Assertion failed".
+  const vertices = [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]], tetrahedron = [[0,1,2],[0,3,1],[0,2,3],[1,3,2]];
+  const small = await simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
+    { faceBudget: 8, simplification, source: 'tetra: shape.txt' }, 1);
+  assert.equal(small.length, 4);
+  assert.deepEqual([fixtureRecord(small.simplification).outputFaces, fixtureRecord(small.simplification).estimatedErrorMeters], [4, 0]);
+  // A once-subdivided octahedron on the unit sphere: no collapse fits a millimetre, eight faces fit once the bound is lifted.
+  const corners = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]], positions = corners.map(v => [...v]), midpoints = new Map<string, number>();
+  const midpoint = (a: number, b: number) => {
+    const key = a < b ? `${a},${b}` : `${b},${a}`;
+    if (!midpoints.has(key)) { const m = corners[a].map((v, i) => v + corners[b][i]), length = Math.hypot(...m); midpoints.set(key, positions.push(m.map(v => v / length)) - 1); }
+    return midpoints.get(key)!;
+  };
+  const faces = [[0,2,4],[2,1,4],[1,3,4],[3,0,4],[2,0,5],[1,2,5],[3,1,5],[0,3,5]].flatMap(([a, b, c]) => {
+    const ab = midpoint(a, b), bc = midpoint(b, c), ca = midpoint(c, a);
+    return [[a, ab, ca], [ab, b, bc], [ca, bc, c], [ab, bc, ca]];
+  });
+  const sphere = createIndexedShape(positions, faces, { metersPerUnit: 1, expectedVertices: positions.length, expectedFaces: faces.length });
+  await assert.rejects(simplifyRadialShape(sphere, { faceBudget: 8, simplification, source: 'sphere: source/shape/sphere.txt' }, 1),
+    /^Error: sphere: source\/shape\/sphere\.txt: simplification stopped at 32 of 32 source faces at 0 m estimated error; the target is 8 faces within maximumErrorMeters 0\.001\. Reaching 8 faces needs 0\.\d+ m\.$/u);
+});
+
 test('radial geometry retains independently specified ellipsoid axes and rejects missing radii', () => {
   const profile = { latitudeSegments: 12, longitudeSegments: 24, faceBudget: 1000 };
   const sample = (longitude: number, latitude: number) => {

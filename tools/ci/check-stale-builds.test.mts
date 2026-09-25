@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { BUILD_RULES, rebuildStale, staleBuilds } from './check-stale-builds.mts';
+import { BUILD_RULES, rebuildStale, staleBuilds, staleInstall } from './check-stale-builds.mts';
 
 test('a build is stale when a compiled source is newer than its output or the output is missing', async () => {
   const root = await mkdtemp(join(tmpdir(), 'stale-builds-'));
@@ -85,5 +85,20 @@ test('a bundle is stale when any file its last build read changed, even outside 
 
     await rm(join(root, 'tools/bundle/dist/metafile-esm.json'));
     assert.match((await staleBuilds(root, rules))[0]!.reason, /metafile-esm\.json is missing/u, 'a build without its input record is stale');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('an install older than pnpm-lock.yaml is named with the command that fixes it, before a tool fails on a missing package', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'stale-install-'));
+  try {
+    assert.equal(await staleInstall(root), null, 'a directory without a lockfile is not a pnpm checkout');
+    await writeFile(join(root, 'pnpm-lock.yaml'), "lockfileVersion: '9.0'\n");
+    assert.equal(await staleInstall(root), 'node_modules holds no pnpm install; run pnpm install --frozen-lockfile');
+    await mkdir(join(root, 'node_modules/.pnpm'), { recursive: true });
+    await writeFile(join(root, 'node_modules/.pnpm/lock.yaml'), "lockfileVersion: '9.0'\n");
+    assert.equal(await staleInstall(root), null);
+    // main added a workspace package (@cssearth/telescope) that this install never linked.
+    await writeFile(join(root, 'pnpm-lock.yaml'), "lockfileVersion: '9.0'\nimporters:\n  .:\n    dependencies:\n      '@cssearth/telescope':\n        specifier: workspace:*\n");
+    assert.equal(await staleInstall(root), 'pnpm-lock.yaml changed after the last install; run pnpm install --frozen-lockfile');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
