@@ -9,7 +9,7 @@ import { prepareImageLayers } from './prepare.js';
 import { sha256 } from '@cssearth/core/node';
 import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment-images.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
-import { TEXELS_PER_CSS_PIXEL } from '../../platform/projective-surface-raster.mts';
+import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 
 test('environment restoration leaves dedicated preparation owners to restore their missing banks', async () => {
   const { writeFile } = await import('node:fs/promises');

@@ -3,8 +3,7 @@ import sharp from 'sharp';
 import { lambertAttenuationAtlas } from '../terrestrial-layers/lambert-atlas.mts';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
-import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
+import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 import { loadDiscIntegratedColor } from '../observation/disc-integrated-color.mts';
 import { prepareGlbSurface } from './glb-surface.mts';
 interface OutputDirectories {publicDirectory:string;publicBase:string;}

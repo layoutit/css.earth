@@ -13,10 +13,9 @@ import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { chromium, type Browser } from 'playwright';
-import { prepareActivationGroups } from './prepared-activation-groups.mts';
+import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes } from '@cssearth/bake/presentation';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
 import { verifyDepthStyles } from './prepared-depth-styles.mts';
-import { LEAF_BOX_FACTOR, withLeafBoxes } from './leaf-box.mts';
 
 /** Resolve authored motion offline. Runtime receives explicit animation
  * handles, never a live style discovery pass; the browser culls back faces. */
@@ -282,7 +281,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         }
         return { body: { center: centre.map(fixed), radius: Math.floor(radius * 100) / 100 }, writes };
       }
-      /** Every leaf whose box follows the body on screen (tools/prepared/leaf-box.mts), measured at its full box (no factor
+      /** Every leaf whose box follows the body on screen (packages/bake/src/presentation/leaf-box.ts), measured at its full box (no factor
        * is written yet), and the body's centre, in scene coordinates. A leaf under the exterior body mesh is surface. A leaf
        * the default presentation does not render (Sgr A*'s sphere under display: none) backs no layer and has no measurable
        * frame: it is left out, and keeps its full box through the factor's fallback. */
@@ -372,7 +371,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       ? { ...value, textureLevels: { ...value.textureLevels, placements } } : value;
     if (interiorOnly) return withPreparedInteriorFill(placed(withoutPreparedInteriorFill(input)), interior, assetRoot, gapExclusion);
     const bound = placed({ ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
-    // Leaf boxes: each leaf's factor, the body's steps and their binding (leaf-box.mts).
+    // Leaf boxes: each leaf's factor, the body's steps and their binding (bake/presentation/leaf-box.ts).
     // The steps start at the body's logical diameter, which only an object runtime's camera carries.
     const logicalBodyDiameter: unknown = isRecord(definition.camera) ? definition.camera.logicalBodyDiameter : undefined;
     if (leafBoxes && !(typeof logicalBodyDiameter === 'number' && logicalBodyDiameter > 0)) {

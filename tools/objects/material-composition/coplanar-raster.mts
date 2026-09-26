@@ -1,6 +1,6 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import sharp from 'sharp';
-import { leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
+import { leafRasterScale } from '@cssearth/bake/scene';
 
 const SAMPLE_OFFSETS = [[.25, .25], [.75, .25], [.25, .75], [.75, .75]];
 // Four premultiplied RGBA float samples per pixel: bound preparation memory.

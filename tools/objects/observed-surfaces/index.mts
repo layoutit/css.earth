@@ -8,7 +8,7 @@ import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
 import { planetographicRowsToMeshLatitude } from '../material-composition/ellipsoid.mts';
-import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
+import { packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 
 
 const clamp = (value: number, low=0, high=1) => Math.max(low, Math.min(high,value));

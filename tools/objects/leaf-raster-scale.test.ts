@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { leafRasterScale, TEXELS_PER_CSS_PIXEL } from '../../src/platform/projective-surface-raster.mts';
+import { leafRasterScale, TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 
 // A raster leaf holds its widest image at two texels per CSS pixel. WebKit backs each leaf at its box times the device pixel
 // ratio whatever its transform: Earth, Mercury, Haumea and Saturn each backed four caps with 36 MB layers on an iPhone at

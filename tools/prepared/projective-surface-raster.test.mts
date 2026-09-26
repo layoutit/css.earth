@@ -7,7 +7,7 @@ import {
   fitProjectiveTextureGeometryToStableLayout,
   packProjectiveSurfaceRaster,
   prepareProjectiveTextureLayer,
-} from "./projective-surface-raster.mts";
+} from "@cssearth/bake/scene";
 
 test("prepares an affine face and flattened homography that compose to the source projection", () => {
   const source = [

@@ -5,9 +5,9 @@
 import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PresentationInputs, PresentationDraft } from './types.js';
-import type { PresentationAdapters } from './adapters.js';
-import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
+import type { PresentationInputs, PresentationDraft } from './types.ts';
+import type { PresentationAdapters } from './adapters.ts';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 

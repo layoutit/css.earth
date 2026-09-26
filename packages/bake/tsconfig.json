@@ -21,6 +21,8 @@
     "src/**/*.test.ts",
     "src/volume/node",
     "src/photometry",
-    "src/raster"
+    "src/raster",
+    "src/scene",
+    "src/presentation"
   ]
 }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { lensTextureGrid } from './raster-grid.mts';
-import { createProjectiveSurfaceRasterLayout } from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterLayout } from '@cssearth/bake/scene';
 const test = sourceTest();
 
 test('reduced science textures preserve every normalized band and gutter address',()=>{

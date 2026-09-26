@@ -11,8 +11,7 @@ import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransfo
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
 import{preparedResourcePool}from'../../../src/platform/prepared-object-assets.mts';
 import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presentation-contract.mts';
-import{prepareCssomDeclarationReads}from'../../prepared/prepared-cssom.mts';
-import{createPreparedNodeTree}from'../../prepared/prepared-node-tree.mts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import{prepareMaterialTracks}from'../../prepare/prepare-materials.mts';
 import{rotateSequence}from'../material-composition/ellipsoid.mts';
 import{prepareNormalizedDiscProjection,phaseLightDirection}from'./photometric-disc.mts';

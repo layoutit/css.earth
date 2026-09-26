@@ -24,7 +24,7 @@ function pin(value: unknown): Pin {
 }
 export function readPublishedCompiler(value: unknown, recipePath: string): Published {
   if (!record(value) || value.schema !== 'cssearth-nebula-compiler-published@1' || value.recipePath !== recipePath ||
-      !Array.isArray(value.inputs) || value.inputs.length < 5 || value.inputs.length > 200) throw new TypeError('Invalid prepared compiler publication.');
+      !Array.isArray(value.inputs) || value.inputs.length < 5 || value.inputs.length > 500) throw new TypeError('Invalid prepared compiler publication.');
   const inputs = value.inputs.map(pin), result = pin(value.result);
   if (new Set(inputs.map(item => item.path)).size !== inputs.length || !inputs.some(item => item.path === recipePath) ||
       !/^\.local\/nebula-lab\/compiler\/[a-f0-9]{64}\/result\.json$/.test(result.path)) throw new TypeError('Prepared compiler publication has incomplete source ownership.');

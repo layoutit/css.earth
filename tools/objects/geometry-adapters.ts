@@ -2,7 +2,16 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, type BodyId } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import type { ScenePreparationAdapters } from '../../src/renderers/css/preparation/scene/index.js';
+import type { ScenePreparationAdapters } from '@cssearth/bake/scene';
+import type { PresentationHostAdapters } from '@cssearth/bake/presentation';
+import { prepareMaterialTracks } from '../prepare/prepare-materials.mts';
+import { requirePreparedPresentation } from '../../src/platform/prepared-presentation-contract.mts';
+import { prepareScientificNavigation } from './terrestrial-layers/scientific-focus.mts';
+
+/** The presentation compiler's host: material tracks, the prepared-presentation contract and lens navigation. */
+export const presentationHostAdapters: PresentationHostAdapters = {
+  prepareMaterialTracks, requirePreparedPresentation, prepareLensNavigation: prepareScientificNavigation,
+};
 
 /** Validate external scene records, then call the native TypeScript owners. */
 export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> {

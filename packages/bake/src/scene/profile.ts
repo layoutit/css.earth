@@ -1,5 +1,5 @@
 import type { SurfaceGeometryProfile } from '@cssearth/objects';
-import type { SeamOutsetProfile } from './seam-outset.js';
+import type { SeamOutsetProfile } from './seam-outset.ts';
 
 export interface GeometryProfile {
   schema: 'cssearth-css-geometry-profile@1'; namespace: string; surface: SurfaceGeometryProfile;

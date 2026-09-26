@@ -25,11 +25,10 @@ import {
   fitTextureGeometry,
   fitProjectiveTextureGeometryToStableLayout,
   prepareProjectiveTextureLayer,
-} from "../../../src/platform/projective-surface-raster.mts";
-import {prepareLeafSeamOutset, prepareSeamOutsetSteps} from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
-import {POLAR_CAP_STYLE, requireOutwardCap} from "../../../src/renderers/css/preparation/scene/polar-cap.ts";
+} from "@cssearth/bake/scene";
+import { prepareLeafSeamOutset, prepareSeamOutsetSteps, POLAR_CAP_STYLE, requireOutwardCap } from "@cssearth/bake/scene";
 // Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves
-// join the shared rule (tools/prepared/leaf-box.mts) with that work.
+// join the shared rule (packages/bake/src/presentation/leaf-box.ts) with that work.
 const FULL_BOXES = { leafBox: false as const };
 
 
@@ -44,7 +43,7 @@ const ATMOSPHERE_MODEL = atmosphereModel;
 const POLAR_RADIUS = EQUATORIAL_RADIUS * profile.polarRadiusKm / profile.equatorialRadiusKm;
 const SURFACE_RASTER_OVERSCAN = 64 * SURFACE_OVERLAP;
 // Surface leaves overlap by a fixed angle, too little at some zooms for WebKit's antialiased leaf edges; the stepped outset
-// holds the declared screen overlap at every silhouette size, as the geometry profile's does (preparation/scene/seam-outset.ts).
+// holds the declared screen overlap at every silhouette size, as the geometry profile's does (bake/scene/seam-outset.ts).
 const SEAM_OUTSET = profile.geometry.seamOutset ? prepareSeamOutsetSteps(profile.geometry.seamOutset) : null;
 const BODY_DIAMETER = 2 * EQUATORIAL_RADIUS * TILE_SIZE;
 const CAMERA_MAXIMUM_ZOOM = profile.camera.maximumZoom;
@@ -661,7 +660,7 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
     const size = cell.size / density, page = `--${profile.namespace}-surface-page-${cell.page}`;
     // At a small level the page is a tile of one sheet (texture-levels.mts); the body then publishes the tile's offset and
     // the sheet's scale beside the image, and the fallbacks are the page's own. They are unitless multipliers of inline
-    // lengths, so preparation's raster and leaf-box scaling (projective-layout.mts) scales them with the address.
+    // lengths, so preparation's raster and leaf-box scaling (bake/presentation/projective-layout.ts) scales them with the address.
     return {
       style: `transform:matrix3d(${cell.layer.frameMatrix})` +
         preparedAtlasDimensions(size, size) +

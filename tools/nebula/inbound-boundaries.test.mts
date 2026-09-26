@@ -149,6 +149,14 @@ test('root research dependencies remain development-only and computed policy sta
     f.write('tools/prepare/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import('@cssearth/nebula-lab/' + name);");
     f.write('site/plugin.mts', 'export {};');
     assert.ok(f.check().some(error => error.includes('tools/prepare/plugin.mts: unchecked computed nebula module loading')));
+    // A test helper under tests/ may import the bake; a runtime module that reaches it may not.
+    f.write('tools/prepare/plugin.mts', 'export {};');
+    f.write('tests/objects/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
+    f.write('tools/prepare/plugin.test.mts', "import { helper } from '../../tests/objects/helper.mts'; export { helper };");
+    assert.deepEqual(f.check(), []);
+    f.write('site/plugin.mts', "import { helper } from '../tests/objects/helper.mts'; export { helper };");
+    assert.ok(f.check().some(error => error.includes('site/plugin.mts: runtime closure forbids @cssearth/bake/public via tests/objects/helper.mts')));
+    f.write('site/plugin.mts', 'export {};');
   } finally { f.cleanup(); }
 });
 

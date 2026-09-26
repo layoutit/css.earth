@@ -33,7 +33,8 @@ function files(directory: string): string[] {
   });
 }
 function policy(path: string): Policy {
-  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path)) return 'test';
+  // `tests/` holds test fixtures and helpers only; a runtime module that imports one is still checked through its own closure.
+  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/')) return 'test';
   if (path.startsWith('tools/') || path.startsWith('src/preparation/') || path.startsWith('src/renderers/css/preparation/') || path.startsWith('packages/bake/') ||
       path === 'src/platform/astronomy-package.mts' || /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';

@@ -1,8 +1,8 @@
 import { buildPolyMeshTransform } from '@layoutit/polycss';
 import { createSurfacePatches, createPolarPatch, createSectionPatch, outsideCutaway } from '@cssearth/objects';
 import type { SurfaceGeometryProfile, SurfacePatch, Pole } from '@cssearth/objects';
-import type { GeometryProfile } from './profile.js';
-import type { createLeafProjector, PreparedLeaf } from './projector.js';
+import type { GeometryProfile } from './profile.ts';
+import type { createLeafProjector, PreparedLeaf } from './projector.ts';
 export interface InteriorAssets extends Record<string, unknown> {
  cutaway: {centerLongitudeDegrees:number;widthDegrees:number}; metallicCoreRadiusFraction:number;
  coreUrl:string;corePolesUrl:string;sectionUrl:string;outerPolesUrl:string;
