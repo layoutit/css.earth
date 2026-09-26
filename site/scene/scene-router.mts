@@ -359,6 +359,12 @@ export function createSceneRouter({
         : { kind: 'object', object, targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && request.scene === 'reuse') {
+        if (request.camera.kind === 'focus') {
+          // A cold detail is ready before its shared world; explicit focus waits for that owner.
+          const contextual = await request.lifetime.wait(world.ensure());
+          if (contextual.cancelled || !requests.owns(request) || !scenes.isCurrent(source)) return false;
+          world.connect(source);
+        }
         return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
           windowTarget, getReducedMotion: () => reducedMotionActive,
           commitSelection: (request, transition) => commitSelection(ready, request, transition),
