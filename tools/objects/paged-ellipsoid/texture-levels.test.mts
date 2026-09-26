@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { packTextureSheet, prepareTextureLevels } from './texture-levels.mts';
+import { requirePreparedData } from '../../../src/platform/prepared-presentation-contract.mts';
 
 test('a map capped below the finest level reads its capped files there; other maps keep every level', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'texture-levels-'));
@@ -15,6 +16,8 @@ test('a map capped below the finest level reads its capped files there; other ma
     config: { textureLevels: { widths: [16, 32], hysteresis: 0.2, texelsPerCssPixel: 2 }, atlas: { pageSize: 32, density: 16 },
       camera: { logicalBodyDiameter: 460 }, publicBase: '/scenes/test/', surface: { maps: [{ name: 'test-topography', maximumTextureWidth: 16 }] } },
     banks: [{ id: 'normal', urls: ['/scenes/test/test-surface.webp'] }, { id: 'topography', urls: ['/scenes/test/test-topography.webp'] }] });
+  // The levels travel in the prepared presentation, whose contract takes plain, unshared JSON only.
+  requirePreparedData(levels!.textureLevels);
   const [coarse, fine] = levels!.textureLevels.levels;
   assert.equal(fine!.resources['page:normal:0'], 'page:normal:0');
   assert.equal(fine!.resources['page:topography:0'], coarse!.resources['page:topography:0']);
@@ -44,6 +47,7 @@ test('a small level draws every page of a bank from one sheet; the finest level 
     config: { textureLevels: { widths: [16, 32], hysteresis: 0.2, texelsPerCssPixel: 2 }, atlas: { pageSize: 32, density: 16 },
       camera: { logicalBodyDiameter: 460 }, publicBase: '/scenes/test/' },
     banks: [{ id: 'normal', urls: ['/scenes/test/test-surface.webp', '/scenes/test/test-surface-page-1.webp'] }] });
+  requirePreparedData(levels!.textureLevels);
   const [coarse, fine] = levels!.textureLevels.levels;
   assert.equal(coarse!.resources['page:normal:0'], 'sheet:normal:level:16');
   assert.equal(coarse!.resources['page:normal:1'], 'sheet:normal:level:16');

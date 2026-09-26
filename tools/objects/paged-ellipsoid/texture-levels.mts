@@ -63,12 +63,12 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     ? selectedBanks.map(bank=>({id:bank.id,urls:requireSurfacePages(bank.urls,`Texture level ${bank.id}`,config.publicBase)}))
     : plan&&lenses ? surfaceBankInventory(plan,lenses,config.publicBase) : (()=>{throw new TypeError('Texture levels require prepared surface banks.');})();
   if(!banks.length||new Set(banks.map(bank=>bank.id)).size!==banks.length)throw new TypeError('Texture level banks must be distinct.');
-  const entries: (TextureLevelAsset & {key:string;pool:string})[] = [], receipts: TextureLevelReceipt[] = [], levels = widths.map((width, i) => ({
+  type Level = {minimumDiameter:number;resources:Record<string,string>;tiles?:Record<string,{x:number;y:number;scale:number}>};
+  const entries: (TextureLevelAsset & {key:string;pool:string})[] = [], receipts: TextureLevelReceipt[] = [], levels: Level[] = widths.map((width, i) => ({
     // The canonical atlas density is relative to the authored logical globe.
     minimumDiameter: i ? config.camera.logicalBodyDiameter * config.atlas.density *
       widths[i - 1] / canonicalWidth / texelsPerCssPixel : 0,
     resources: {} as Record<string,string>,
-    tiles: undefined as Record<string, {x:number;y:number;scale:number}> | undefined,
   }));
   const urls = new Map<string, TextureLevelAsset[]>();
   const pageDimensions = new Map<string, { width: number; height: number; lossless: boolean }>();
