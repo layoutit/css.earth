@@ -6,10 +6,10 @@
  * exploration, so a later `get` reuses the same identity. The pinned SIMBAD answers are evidence beside the request, not
  * part of it: SIMBAD names each result table after the request time, so its bytes differ on every call. */
 import { resolve } from 'node:path';
-import { astroquery } from '@cssearth/telescope/node';
+import { astroquery } from './astroquery.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import type { IcrsCircle, MetadataResponse, Pin } from '@cssearth/telescope/node';
-import type { TargetCatalogueEntry } from '../targets.mts';
+import type { IcrsCircle, MetadataResponse, Pin } from './vo-contracts.js';
+import type { TargetCatalogueEntry } from '../targets.js';
 
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap';
 const SIMBAD_BYTES = 1_048_576;

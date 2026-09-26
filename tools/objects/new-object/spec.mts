@@ -27,7 +27,7 @@
  * "source", "url" }. A planet's radius and mass are in Jupiter units and default to the archive row's; a planet with a cited
  * `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units, temperature required.
  *
- * `target` is a name SIMBAD resolves, through the telescope's resolver (tools/objects/telescopes/sky/target.mts); `gaia` is a Gaia
+ * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
  * `radius` and `mass` may be "gaia-flame": the Gaia DR3 FLAME value of the same source, an archive product. `gravity` defaults to
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a

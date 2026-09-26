@@ -27,7 +27,8 @@ import { requireRecord, requireString } from '@cssearth/core';
 import { addProductEvidence, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
-import { freeMemoryPercent, mastFile, toolchainPython, type MastFile } from '../mast.mts';
+import { mastFile, type MastFile } from '../mast.mts';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
 import { gridWcs, parseSkyGrid, type SkyGrid } from '@cssearth/bake/objects/raster';
 

@@ -33,7 +33,7 @@ import { productRecordPath, type ProductEvidence, type ProductInput, type Produc
 import { astroqueryRows } from '@cssearth/telescope/node';
 import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { toolchainPython } from '../jwst/mast.mts';
+import { toolchainPython } from '@cssearth/telescope/node';
 import { PROGRAMS, type ChandraFile, type ChandraObservation } from './archive.mts';
 import { reprocessedWith } from './compare.mts';
 import { column, eventTable, gunzipFile, type EventTable } from './events.mts';

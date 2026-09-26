@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from '../toolchain.mts';
-import { toolchainPython } from '../mast.mts';
+import { toolchainPython } from '@cssearth/telescope/node';
 import { openSpectralCube } from './spectral-cube.mts';
 import type { ProductFacts } from '../../telescopes/request-satisfaction.mts';
 

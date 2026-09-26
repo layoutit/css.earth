@@ -7,7 +7,7 @@ import { astroqueryToolchainSync } from '@cssearth/telescope/node';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from '../gemini/cadc.mts';
 import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from '../gemini/archive.mts';
-import type { TargetCatalogueEntry } from './targets.mts';
+import type { TargetCatalogueEntry } from '@cssearth/telescope';
 
 export interface ArchiveLeadService {
   readonly service: string; readonly state: 'sampled' | 'overflow' | 'empty-in-scope' | 'unavailable';

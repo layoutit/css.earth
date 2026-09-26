@@ -1,6 +1,6 @@
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest } from './recipe-request.mts';
 import { inputWavelengths } from './recipe-request.mts';
-import { skyCatalogueEntry } from './sky/target.mts';
+import { skyCatalogueEntry } from '@cssearth/telescope/node';
 import { parseLimits, parseRegion } from '@cssearth/telescope/node';
 import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } from './vo/bridge.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
@@ -38,8 +38,8 @@ import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
-import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
-import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from '@cssearth/telescope/node';
+import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry, type TargetResolution } from '@cssearth/telescope';
 import { productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;

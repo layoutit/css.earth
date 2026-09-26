@@ -1,13 +1,10 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp } from 'node:fs/promises';
+import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId, type SkyTarget } from './target.mts';
-import { skyTargetRequest } from '../exploration.mts';
-import { SERVICES, searchCircle, targetQuery } from '../vo/discovery.mts';
-import type { MetadataResponse } from '@cssearth/telescope/node';
+import { it as test } from 'vitest';
+import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId } from './sky-target.js';
+import type { MetadataResponse } from './vo-contracts.js';
 
 const field = (name: string, unit: string | null) => ({ name, id: null, datatype: 'char', arraysize: null, unit, ucd: null, utype: null, xtype: null, ref: null });
 const response = (rows: MetadataResponse['rows'], units: Readonly<Record<string, string | null>> = { ra: 'deg', dec: 'deg', coo_err_maj: 'mas' }): MetadataResponse => ({
@@ -45,31 +42,6 @@ test('a saved sky target is validated and reused; one that does not derive its i
   const target = readSkyTarget(response([sgrA]), identifiers, queries)!;
   assert.deepEqual(parseSkyTarget(JSON.parse(JSON.stringify(target))), target);
   assert.throws(() => parseSkyTarget({ ...target, id: 'simbad-other' }), /does not derive/u);
-});
-
-test('explore asks SIMBAD only for a name the catalogue does not know, and keeps a supplied circle', async () => {
-  const root = await mkdtemp(resolve(tmpdir(), 'sky-target-')); await mkdir(resolve(root, 'src/objects'), { recursive: true });
-  const target: SkyTarget = readSkyTarget(response([sgrA]), identifiers, queries)!;
-  // SIMBAD names each result table after the request time, so two calls pin different bytes for the same answer.
-  let call = 0;
-  const asked: string[] = [], resolveSky = async (_root: string, name: string) => { asked.push(name); call++;
-    return name === 'Sgr A*' ? { target, evidence: queries.map(query => ({ query, raw: { path: `simbad-${call}.xml`, bytes: 1118, sha256: String(call).repeat(64) } })) } : undefined; };
-  const found = await skyTargetRequest(root, { target: 'Sgr A*', kind: 'cube' }, resolveSky);
-  const again = await skyTargetRequest(root, { target: 'Sgr A*', kind: 'cube' }, resolveSky);
-  assert.deepEqual(again.request, found.request, 'the request, and so every snapshot and acquisition key, ignores which call SIMBAD answered');
-  assert.notDeepEqual(again.evidence, found.evidence); assert.equal(found.evidence?.length, 2);
-  assert.equal(found.request.target, 'simbad-name-sgr-a'); assert.equal(found.request.skyTarget, target); assert.deepEqual(found.request.footprint, skyRegion(target));
-  assert.equal(found.request.region, undefined, 'SIMBAD\'s circle selects records; it never becomes a cutout');
-  const circle = { frame: 'icrs' as const, shape: 'circle' as const, raDegrees: 266.4, decDegrees: -29, radiusDegrees: 0.001 };
-  const cut = (await skyTargetRequest(root, { target: 'Sgr A*', region: circle }, resolveSky)).request;
-  assert.deepEqual(cut.region, circle); assert.deepEqual(cut.footprint, skyRegion(target));
-  assert.equal(searchCircle(cut), circle, 'an explicit cutout is also the circle the search selects by');
-  assert.match(targetQuery(SERVICES[0]!, ['x'], 50, found.request), /INTERSECTS/u, 'the footprint alone reaches the query');
-  assert.deepEqual(await skyTargetRequest(root, { target: 'nothing' }, resolveSky), { request: { target: 'nothing' }, simbadMiss: true });
-  const saved = await skyTargetRequest(root, { target: 'simbad-name-sgr-a', skyTarget: target }, resolveSky);
-  assert.equal(saved.request.target, 'simbad-name-sgr-a');
-  assert.deepEqual(asked, ['Sgr A*', 'Sgr A*', 'Sgr A*', 'nothing'], 'a saved sky target is not resolved again');
-  await assert.rejects(skyTargetRequest(root, { target: 'other', skyTarget: target }, resolveSky), /does not match/u);
 });
 
 test('resolution asks SIMBAD for the object, then its identifiers, and pins both answers', async () => {

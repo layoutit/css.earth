@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { explorationAnswer, explorationOutcome, parseExplorationArguments } from './exploration.mts';
-import { canonicalTargetRequest, withRequestedTargetName } from './targets.mts';
+import { canonicalTargetRequest, withRequestedTargetName } from '@cssearth/telescope';
 import { associateTarget, SERVICES, targetQuery } from './vo/discovery.mts';
 
 test('a uniquely resolved entered name reaches archives without becoming a permanent alias', () => {

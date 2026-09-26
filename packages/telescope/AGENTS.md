@@ -5,8 +5,9 @@ Own two things: the `telescope` command's thin wrapper (`src/cli.mts`, `src/help
 finds a css.earth checkout and runs `tools/objects/telescopes/cli.mts` there; keep its arguments, help text, `--version`,
 `--workspace` / `CSSEARTH_WORKSPACE` lookup, TTY forwarding and exit codes unchanged unless that is the change.
 
-The library holds archive-neutral telescope plumbing: product records, PDS3 and PDS4 label reading, and the clients of
-the pinned Python astronomy packages with their toolchain pins. Mission or archive policy (which programs, which frames,
+The library holds archive-neutral telescope plumbing: product records, PDS3 and PDS4 label reading, target-name
+resolution, SIMBAD sky targets, cited target associations, the inline Python runner, and the clients of the pinned Python
+astronomy packages with their toolchain pins. Mission or archive policy (which programs, which frames,
 how an archive's ledger is written) stays in `tools/objects/<archive>/`, and object-specific use of products stays in
 the bake. Nothing here names a body.
 

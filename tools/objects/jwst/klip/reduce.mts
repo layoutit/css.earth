@@ -17,7 +17,7 @@ import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython } from '../mast.mts';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { jwstToolchain } from '../toolchain.mts';
 
 const PROGRAMS = resolve(import.meta.dirname, 'programs');
