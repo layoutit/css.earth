@@ -10,7 +10,7 @@ import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from '../search-results-presentation.mts';
-import { readCatalogueFragmentUrl } from '../catalogue-fragment-loader.mts';
+import { readCatalogueFragmentUrl } from '../catalogue/catalogue-fragment-loader.mts';
 import { objectIdAtPath } from '../root-object.mts';
 import { overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 

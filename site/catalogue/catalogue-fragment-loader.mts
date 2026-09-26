@@ -1,4 +1,4 @@
-import type { BrowserWindow } from './browser-types.mts';
+import type { BrowserWindow } from '../browser-types.mts';
 import { parseCatalogueIndex, type CatalogueIndex } from './catalogue-index.mts';
 
 /**

@@ -1,4 +1,4 @@
-import { createObjectCatalogue } from './object-catalogue.mts';
+import { createObjectCatalogue } from './catalogue/object-catalogue.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';

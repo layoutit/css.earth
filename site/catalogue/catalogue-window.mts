@@ -1,7 +1,7 @@
-import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
-import type { BrowserWindow } from './browser-types.mts';
+import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
+import type { BrowserWindow } from '../browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
-import { markerStyle } from '../src/navigation/marker-presentation.mts';
+import { markerStyle } from '../../src/navigation/marker-presentation.mts';
 
 /** A search result row is 48 px (a 40 px preview beside a name and a subtitle) with an 8 px gap. */
 const ROW_PITCH = 56;

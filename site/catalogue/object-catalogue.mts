@@ -1,10 +1,10 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from './browser-types.mts';
+import type { BrowserWindow } from '../browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
-import { requiredElement } from './browser-types.mts';
-import { createCatalogueRows } from './search-results-presentation.mts';
-import { sourceDocuments } from './source-link.mts';
-import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from './object-search.mts';
+import { requiredElement } from '../browser-types.mts';
+import { createCatalogueRows } from '../search-results-presentation.mts';
+import { sourceDocuments } from '../source-link.mts';
+import { objectSearchLabels, searchObjects, type ObjectSearchLabels } from '../object-search.mts';
 import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl } from './catalogue-fragment-loader.mts';
 import { createCatalogueWindow, type CatalogueSelection } from './catalogue-window.mts';
 
