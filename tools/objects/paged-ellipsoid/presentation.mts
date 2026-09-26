@@ -179,8 +179,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
       // What the default view shows (shadows off): its pages and poles at the first level, the shadowless lighting and
       // the atmosphere's flood frame. The default-pose materials are only base styles every variant overwrites.
-      startup:[...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),"shadowless:lighting",
-        ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))]},
+      // A sheet level maps every page to one resource, which the first view loads once.
+      startup:[...new Set([...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),"shadowless:lighting",
+        ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))])]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null},...(seamOutset?[seamOutsetBinding(seamOutset,index(system))]:[])],animations:[],
     motionFrame:[index(system),index(body.surface[0])]};
  return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,
