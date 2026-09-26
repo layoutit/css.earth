@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation';
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
+import { parseObjectDiscovery } from '@cssearth/objects';
 
 test('a shape-only body gets a prepared arrival without becoming photographic', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'arrival-discovery-'));
@@ -24,6 +25,12 @@ test('a shape-only body gets a prepared arrival without becoming photographic', 
     assert.equal(discovery.featured, false);
     assert.equal(discovery.arrival?.billboard?.distanceM, 8000);
     assert.deepEqual(discovery.arrival?.lensIds, ['shape']);
+    assert.equal(parseObjectDiscovery(discovery).imagery, false);
+    await writeFile(join(prepared, 'controls.json'), JSON.stringify({ lenses: { defaultLens: 'shape', controls: [{ id: 'shape' }, { id: 'photo' }] } }));
+    await writeFile(join(directory, 'raster.json'), JSON.stringify({ observations: [{ id: 'photo' }] }));
+    const photographed = await prepareObjectDiscovery({ properties: { catalog: {}, recipe: { sources: [{ id: 'raster', path: 'raster.json' }] } } }, directory);
+    assert.deepEqual(photographed.arrival?.lensIds, ['shape', 'photo'], 'a photographic alternative cannot exclude the default billboard');
+    assert.equal(parseObjectDiscovery(photographed).imagery, true);
     await writeFile(join(prepared, 'arrival-billboard.json'), JSON.stringify({ ...billboard, lens: 'stale' }));
     await assert.rejects(prepareObjectDiscovery(descriptor, directory), /Reprepare the arrival billboard/);
   } finally { await rm(directory, { recursive: true, force: true }); }

@@ -29,7 +29,7 @@ export function parseArrivalView(value: unknown): Readonly<PreparedArrivalView> 
   validateWorldRotation(value.rotation);
   const billboard = value.billboard === undefined ? undefined : parseArrivalBillboard(value.billboard);
   const rotation = value.rotation;
-  if (billboard && (billboard.lens !== value.defaultLens ||
+  if (billboard && (billboard.lens !== value.defaultLens || !value.lensIds.includes(value.defaultLens) ||
       billboard.rotation.some((component, index) => Math.abs(component - Number(rotation[index])) > 1e-8)))
     throw new TypeError('Reprepare the arrival billboard for the current lens and camera.');
   return Object.freeze({ defaultLens: value.defaultLens, lensIds: Object.freeze([...value.lensIds]),

@@ -684,7 +684,8 @@ Each body can publish one square, transparent image of its default dataset at
 the prepared arrival rotation. `pnpm prepare:arrival-billboards --all` prepares
 the registry; body ids select a smaller refresh. Run it against a current local
 performance build with `--origin http://127.0.0.1:4212`. The default image is
-1024 pixels square, with a camera distance of eight body radii. The tool renders
+1024 pixels square, starting at eight body radii and moving farther back when
+rings or emission extend beyond the capture. The tool renders
 the delivered CSS scene, including rings and atmosphere, waits for application
 readiness and image decoding, and checks the acknowledged camera distance,
 nonempty pixels and clipping. It uses the shared lossy WebP lane with alpha.
@@ -692,7 +693,7 @@ nonempty pixels and clipping. It uses the shared lossy WebP lane with alpha.
 The image and `prepared/arrival-billboard.json` are inventoried per body. Publish
 both through the ordinary R2 workflow before merging. Scratch receipts and the
 resumable batch report live under `output/billboards/arrival-batch/`; prepared
-images are not committed to Git. Reprepare after changing the default camera,
+images are not committed to Git. Use `--force` to refresh after changing the default camera,
 dataset, geometry, materials or renderer. A billboard does not change the
 body's imagery classification or extend the coverage of its source data.
 

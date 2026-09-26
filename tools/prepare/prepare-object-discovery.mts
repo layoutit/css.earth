@@ -97,7 +97,7 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     // measured colour or illustration into photographic evidence.
     discovery.arrival = parseArrivalView({
       defaultLens: controls.lenses.defaultLens,
-      lensIds: discovery.arrival?.lensIds ?? [controls.lenses.defaultLens],
+      lensIds: [...new Set([controls.lenses.defaultLens, ...(discovery.arrival?.lensIds ?? [])])],
       rotation: preparedDefaultViewRotation(runtime.camera),
       billboard: { ...asset, url: await resolveBuildSceneAddress(asset.url, resolve(objectDirectory, '../../..')) } });
   }

@@ -4,7 +4,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
-import { requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
+import { requireRecord, requireFiniteNumber, requireString, isRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
@@ -21,6 +21,7 @@ function option(flag: string, fallback: string) {
   args.splice(at, 2); return value;
 }
 const origin = option('--origin', 'http://127.0.0.1:4212'), size = Number(option('--size', '1024'));
+const output = resolve(root, option('--output', 'output/billboards/arrival-batch'));
 // A fixed physical handoff gives every viewport the same prepared perspective;
 // the activated detailed scene then continues to the responsive close-up.
 const distanceRadii = Number(option('--distance-radii', '8'));
@@ -30,7 +31,6 @@ if ((!all && !ids.length) || ids.some(id => id.startsWith('-')) || !Number.isInt
   throw new Error('Usage: pnpm prepare:arrival-billboards --all | <body>... [--origin URL] [--size 1024] [--force]');
 const objects = SCENE_OBJECTS.filter(object => all || ids.includes(object.id));
 for (const id of ids) if (!objects.some(object => object.id === id)) throw new Error(`Unknown scene: ${id}`);
-const output = resolve(root, 'output/billboards/arrival-batch');
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports: unknown[] = [], failures: string[] = [], captureSize = 4096;
@@ -41,13 +41,22 @@ try {
     const runtime = requireRecord(JSON.parse(runtimeBytes.toString('utf8')));
     const rotation = preparedDefaultViewRotation(runtime.camera);
     const controls = requireRecord(requireRecord(runtime.controls).lenses);
-    const lens = requireString(controls.defaultLens), distanceM = object.worldFrame.bodyRadiusM * distanceRadii;
+    const lens = requireString(controls.defaultLens);
+    let distanceM = object.worldFrame.bodyRadiusM * distanceRadii;
     const filename = `${object.id}-arrival.webp`, receiptPath = resolve(output, `${object.id}.json`);
     const identity = { runtime: sha256(runtimeBytes), size, distanceRadii, version: 3 };
     if (!force) {
-      const previous = await readFile(receiptPath, 'utf8').then(JSON.parse, () => null);
-      if (previous && JSON.stringify(previous.identity) === JSON.stringify(identity)) {
-        reports.push(previous); console.log(`[${index + 1}/${objects.length}] ${object.id}: already prepared`); continue;
+      const previous: unknown = await readFile(receiptPath, 'utf8').then(JSON.parse, () => null);
+      if (isRecord(previous) && JSON.stringify(previous.identity) === JSON.stringify(identity)) {
+        const inventory = await readInventory(object.id, objectDirectory);
+        const assets = inventory?.assets.filter(asset => asset.location === 'public' && asset.filename === filename ||
+          asset.location === 'prepared' && asset.filename === 'arrival-billboard.json') ?? [];
+        const intact = assets.length === 2 && (await Promise.all(assets.map(async asset => {
+          const path = resolve(asset.location === 'public' ? resolve(root, 'public/scenes', object.id) : prepared, asset.filename);
+          const bytes = await readFile(path).catch(() => null);
+          return bytes !== null && bytes.length === asset.bytes && sha256(bytes) === asset.sha256;
+        }))).every(Boolean);
+        if (intact) { reports.push(previous); console.log(`[${index + 1}/${objects.length}] ${object.id}: already prepared`); continue; }
       }
     }
     const context = await browser.newContext({ viewport: { width: captureSize, height: captureSize }, deviceScaleFactor: 1 });
@@ -71,6 +80,8 @@ try {
         .object-stage > .object-render-root { translate:none!important; transform-origin:50% 50%!important; }
       ` });
       await page.evaluate(() => new Promise<void>(done => requestAnimationFrame(() => requestAnimationFrame(() => done()))));
+      let image: Buffer | undefined;
+      for (let attempt = 0; attempt < 6; attempt++) {
       const world = worldCameraFromCenteredPresentation({ rotation, distanceUnits: distanceM / object.worldFrame.metersPerUnit },
         object.worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
       const state = await page.evaluate(async ({ id, world, frame }) => {
@@ -103,7 +114,6 @@ try {
         return pending.length === 0 && Array.isArray(entries) && entries.every((entry: unknown) =>
           entry && typeof entry === 'object' && Reflect.get(entry, 'ready') === true);
       }, object.id);
-      let image: Buffer | undefined;
       {
         await page.evaluate(() => new Promise<void>(done => requestAnimationFrame(() => requestAnimationFrame(() => done()))));
         const settled = requireRecord(await page.evaluate(id => {
@@ -123,7 +133,10 @@ try {
         if (!opaque) throw new Error('The prepared body is blank.');
         if (extent >= captureSize / 2 - 4) {
           await writeFile(resolve(output, `${object.id}-clipped.png`), shot);
-          throw new Error('The prepared body clips the square.');
+          // Some rings and emission plates extend beyond the reference body
+          // radius. Move the prepared handoff back until the entire scene fits.
+          distanceM *= 2;
+          continue;
         }
         // Keep the physical body centre fixed even for asymmetric silhouettes.
         const half = Math.min(captureSize / 2, Math.ceil(extent + 8)), side = half * 2, resize = size / side;
@@ -145,6 +158,8 @@ try {
         const report = { id: object.id, identity, billboard, bytes: bytes.length, renderer: browser.version(), errors };
         await writeFile(receiptPath, JSON.stringify(report, null, 2) + '\n');
         reports.push(report); console.log(`[${index + 1}/${objects.length}] ${object.id}: ${bytes.length} bytes`);
+        break;
+      }
       }
       if (!image) throw new Error('The body clips the square at every preparation scale.');
     } catch (error) { failures.push(object.id); console.error(`${object.id}: ${error instanceof Error ? error.message : error}`); }
