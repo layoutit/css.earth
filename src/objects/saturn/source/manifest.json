@@ -595,22 +595,40 @@
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
-      "path": "photometry/opal-2025-minnaert-f395n.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a colour map (F631N, F502N, F395N), blue channel (F395N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "path": "photometry/opal-2025-minnaert-f467m.json",
+      "purpose": "Hubble OPAL Minnaert coefficient for the blue channel of the 2025a colour map: the F467M coefficient, not the F395N filter the channel was imaged in, because the map's display colour is tied to Saturn's true colour, whose blue channel is carried by light near 467 nm. The lighting overlay puts it back relative to the flood-lit disc centre.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "reference-opal-saturn-2025-readme",
             "role": "method",
-            "evidence": "The OPAL README's Minnaert table gives k = 0.4 for F395N, the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
-            "locator": "Minnaert table, F395N row"
+            "evidence": "The OPAL README's Minnaert table gives k = 0.86 for F467M (\"F467M 0.86 .00507\"), the correction applied to remove limb darkening before projection; F467M is the README filter closest to the sRGB blue primary. The F395N coefficient, 0.40, belongs to violet light that the true-colour blue channel barely contains (13 % of it comes from 380-429 nm in Saturn's sunlit spectrum). The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Minnaert table, F467M row"
           }
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
       "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/karkoschka-1998-whole-disc-colour.json",
+      "purpose": "Saturn's whole-disc colour in sunlight, the target of the colour map's band-ratio tie: the OPAL colour map is arbitrarily scaled per channel, so preparation scales its green and blue channels until the map's cosine-weighted mean ratios to red match this colour.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "karkoschka-1998-jovian-spectrophotometry-1995-low",
+            "role": "reference",
+            "evidence": "Computed once with the repository's colour code from the SATURN ALBEDO column of 1995LOW.TAB (full disk albedo at phase 5.7 degrees and zero ring tilt, 300-1050 nm), times a 5,772 K Planck spectrum, through the CIE 1931 2 degree observer into linear sRGB: 0.6168, 0.4713, 0.2982 (#ceb794), green/red 0.7640 and blue/red 0.4834.",
+            "locator": "1995LOW.TAB, columns 2 (air wavelength) and 5 (Saturn albedo), 380-780 nm"
+          }
+        ]
+      },
+      "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.tab",
+      "credit": "E. Karkoschka (1998), Icarus 133, 134-146, archived by the NASA Planetary Data System Atmospheres Node; colour computation: cssEarth.",
+      "acquisition": "Colour computed once from the cited PDS table and recorded in a project document; the table itself is not stored with the body."
     }
   ]
 }

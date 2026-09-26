@@ -11,6 +11,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | View or quantity | Source |
 | --- | --- |
 | Visible body | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) rotation-A F395N/F502N/F631N global map, 2025-08-29; unobserved polar and ring-occluded rows are filled during preparation |
+| Visible body colour | [Karkoschka (1998)](https://doi.org/10.1006/icar.1998.5913) full-disc albedo spectrum, [PDS `1995LOW.TAB`](https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl) (ESO, July 1995, rings edge-on) |
 | Ring opacity profile | [Cassini UVIS HSP alpha Virginis occultation, 2006 day 285](https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL), 1 km bins, PDS CO-SR-UVIS-HSP-2/4-OCC-V3.0 |
 | Ultraviolet and methane bands | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32), 2025 |
 | Ring boundaries and motion | [PDS ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html) and JPL SAT441 |
@@ -37,6 +38,8 @@ weather path did not alter the Cassini UVIS ring recipe.
 - Thermal colors and interior layers are illustrations. No measured global thermal raster is qualified here.
 - Ring opacity and narrow features are enhanced for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
+- The visible map's colour balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colours are kept, but a seasonal change in Saturn's overall colour since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 4 % of texels are compressed by a soft shoulder.
+- The map's blue channel is F395N (violet) data, displayed as sRGB blue with the F467M limb law. The navigation portrait and context image still crop the untied TIF.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
@@ -118,6 +121,46 @@ the map to the 2,880 x 1,440 grid; nothing is detected from pixel values.
 The north cap is then replaced by the Cassini polar projection as described
 below. The rotation-B map of the same year has the same unobserved rows, so
 it cannot fill them.
+
+Colour. The OPAL README calls the colour TIF "arbitrarily scaled", with "slight
+contrast enhancement": its channel balance is not a measurement. Untied, the
+map rendered 1.4 times too blue (blue/red 0.65 in linear light, against 0.48
+for Saturn), and the blue limb turned grey-blue. Preparation now ties the
+map's channel balance to a measured whole-disc colour, the pattern the Uranian
+moons use for their Voyager colour. The colour comes from Karkoschka's
+full-disc albedo of Saturn at 5.7 degrees phase with the rings edge-on
+(ESO, July 1995; [Icarus 133, 134-146](https://doi.org/10.1006/icar.1998.5913);
+[PDS `1995LOW.TAB`](https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.tab)),
+times a 5,772 K Planck spectrum, through the CIE 1931 observer into linear
+sRGB with the repository's own colour code: 0.6168, 0.4713, 0.2982, `#ceb794`,
+green/red 0.7640 and blue/red 0.4834. It is recorded in
+[`source/photometry/karkoschka-1998-whole-disc-colour.json`](source/photometry/karkoschka-1998-whole-disc-colour.json);
+the table itself is cited, not stored. Karkoschka measured the whole disc,
+limb darkening included, while OPAL divided each filter's limb darkening out
+of the map and the lighting overlay puts it back per channel. So the map is
+tied to that colour divided by each channel's disc mean of the limb law
+(0.7694, 0.8698 and 0.7354, the Minnaert 2/(2k+1)): green/red 0.6759 and
+blue/red 0.5057. The solar-tinted map measured 0.9272 and 0.6953
+(cosine-weighted means in linear light), so green is scaled by 0.729 and blue
+by 0.7273, and red is kept. The flood-lit disc then integrates to
+Karkoschka's colour; tying the map's own mean instead left the rendered disc
+greener (green/red 0.856) with an olive limb. Keeping red and lowering green
+and blue also made the map a fifth darker (cosine-weighted luminance 0.426 to
+0.337), and in the app Saturn looked brown. So the tied map then gets back its
+untied luminance: one factor on all three channels, 1.264, which keeps the
+tied ratios. With that factor alone red would clip on 0.5 % of texels, so a
+texel whose brightest channel passes 0.8 of full scale is compressed by a soft
+shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), all three channels by the
+same amount: 4.35 % of texels, none clipped, each keeping its own ratios. The
+largest factor that clips nothing, 1.085, left the disc dark. `node --test
+tools/photometry/whole-disc-colour.test.mts
+tools/objects/material-composition/layered-oblate.test.mts` checks the record,
+the disc means, these gains, the luminance factor and the shouldered share on
+the restored map. Spatial colour
+differences stay the map's own. An independent spectrum agrees: Saturn's
+swatch, from the Payne et al. (2026) composite reference spectrum with the Sun
+adapted to the D65 white, has green/red 0.863 and blue/red 0.589, where
+Karkoschka's spectrum lit by D65 gives 0.863 and 0.593.
 
 The ring opacity is the Cassini UVIS high-speed photometer stellar
 occultation of alpha Virginis on 2006 day 285 at 1 km radial bins (PDS
@@ -331,14 +374,20 @@ the visible and inset caps.
 
 The separate material overlays put back the limb darkening OPAL removed from
 the colour map, with the Cycle 32 README's own Minnaert coefficients: k 0.80 in
-F631N, 0.65 in F502N and 0.40 in F395N
+F631N (red) and 0.65 in F502N (green). The blue channel takes F467M's k 0.86
+(the README's table row reads "F467M 0.86 .00507"), not F395N's 0.40: once the
+map's colour is tied to Saturn's true colour, its blue channel stands for light
+near the sRGB blue primary, and only 13 % of that channel's signal in Saturn's
+sunlit spectrum comes from 380-429 nm, where F395N sits. F467M is the README
+filter closest to the primary. With F395N's k below 0.5 the blue limb
+brightened under full light, and Saturn's limb turned grey-blue (b* -16 at the
+rim)
 ([README](https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt);
 [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 They are recorded in `source/photometry/opal-2025-minnaert-*.json` and
 evaluated relative to the flood-lit disc centre on continuous per-texel oblate
-normals, times the rings' direct transmission where their shadow falls. Blue has
-k below 0.5, so under full light the blue limb brightens: Hubble measured it, and
-it replaces the authored pearl-blue limb colour, the 0.05 ambient intensity, the
+normals, times the rings' direct transmission where their shadow falls. They
+replace the authored pearl-blue limb colour, the 0.05 ambient intensity, the
 Oren-Nayar term and the smoothstep terminator, all adapted from OpenSpace and all
 removed. This adapter keeps the warm solar presentation. NASA's
 [Sun fact sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html)

@@ -79,6 +79,19 @@ export function limbFactors(law: LimbLaw, incidence: number, emission: number, p
   }) as [number, number, number];
 }
 
+/**
+ * Each channel's mean factor over the flood-lit disc, weighted by projected area: what the law does to a uniform map's
+ * disc-integrated colour. A measured whole-disc colour includes it; a map with the law divided out does not.
+ */
+export function floodDiscMean(law: LimbLaw, steps = 4096): [number, number, number] {
+  const sum = [0, 0, 0];
+  for (let step = 0; step < steps; step++) {
+    const radius = (step + 0.5) / steps, emission = Math.asin(radius), factors = limbFactors(law, emission, emission, 0);
+    for (let channel = 0; channel < 3; channel++) sum[channel] += factors[channel] * 2 * radius / steps;
+  }
+  return [sum[0], sum[1], sum[2]];
+}
+
 /** Angles at a point of a sphere or ellipsoid, from its unit normal, the unit light direction and the unit view direction. */
 export function scatteringAngles(normal: readonly number[], light: readonly number[], view: readonly number[], minimumEmissionCosine: number) {
   const mu0 = normal[0] * light[0] + normal[1] * light[1] + normal[2] * light[2];

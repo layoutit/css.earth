@@ -406,7 +406,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Hubble OPAL Minnaert coefficients of the colour map per channel (F631N 0.80, F502N 0.65, F395N 0.40), the correction OPAL removed before projection, put back relative to the flood-lit disc centre.",
+      "finding": "Hubble OPAL Minnaert coefficients of the colour map per channel (red F631N 0.80, green F502N 0.65, blue F467M 0.86), the correction OPAL removed before projection, put back relative to the flood-lit disc centre. Blue took F395N's 0.40 until 2026-09-25; see opal-f467m-blue-limb.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
       ],
@@ -414,6 +414,10 @@
         {
           "date": "2026-09-25",
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        },
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
       ]
     },
@@ -435,7 +439,7 @@
       "id": "authored-limb-lighting",
       "subject": "Authored limb lighting: pearl-blue limb colour, Oren-Nayar term, 0.05 ambient and smoothstep terminator adapted from OpenSpace",
       "status": "excluded",
-      "finding": "Replaced by the OPAL Minnaert law of the map; F395N k 0.40 makes the blue limb brighten, as Hubble measured.",
+      "finding": "Replaced by the OPAL Minnaert laws of the map.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
       ],
@@ -444,6 +448,75 @@
         {
           "date": "2026-09-25",
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        },
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "karkoschka-whole-disc-colour",
+      "subject": "Colour tie of the OPAL visible map to Karkoschka's 1995 whole-disc spectrum",
+      "status": "included",
+      "finding": "The OPAL colour TIF is arbitrarily scaled per channel and rendered 1.4 times too blue (map mean blue/red 0.65 in linear light). Karkoschka's full-disc albedo of Saturn (phase 5.7 degrees, rings edge-on, PDS 1995LOW.TAB) times a 5,772 K Planck spectrum through the CIE 1931 observer gives linear sRGB 0.6168, 0.4713, 0.2982 (#ceb794), green/red 0.7640 and blue/red 0.4834. Divided by the limb law's disc means (0.7694, 0.8698, 0.7354) the map targets are green/red 0.6759 and blue/red 0.5057; the solar-tinted map measured 0.9272 and 0.6953 (cosine-weighted, linear), so the gains are red 1, green 0.729, blue 0.7273. The swatch's independent Payne et al. (2026) spectrum agrees under a D65 white: green/red 0.863 and blue/red 0.589 against Karkoschka's 0.863 and 0.593.",
+      "evidence": [
+        "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
+        "https://doi.org/10.1006/icar.1998.5913",
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+        "https://doi.org/10.3847/PSJ/ae2feb"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "map-mean-colour-tie",
+      "subject": "Tying the map's own mean colour, rather than the lit disc, to Karkoschka's whole-disc colour",
+      "status": "excluded",
+      "finding": "Karkoschka measured the disc with its limb darkening; OPAL divided each filter's darkening out and the overlay puts it back per channel, so a map mean tied straight to the whole-disc ratios (gains green 0.824, blue 0.6952) renders a disc of green/red 0.856 instead of 0.764 and an olive limb (a* -5 at 0.85-0.95 of the radius) in a preview built with the lane's own surface and limb code.",
+      "evidence": [
+        "https://doi.org/10.1006/icar.1998.5913",
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
+      ],
+      "revisitWhen": "Nothing while the lighting overlay puts back a per-channel limb law.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "opal-f467m-blue-limb",
+      "subject": "Minnaert coefficient for the visible map's blue channel",
+      "status": "included",
+      "finding": "The blue channel uses F467M's k 0.86 from the OPAL Cycle 32 README table (\"F467M 0.86 .00507\"), the README filter closest to the sRGB blue primary. F395N's 0.40 is violet light that carries 13 % of the true-colour blue channel in Saturn's sunlit spectrum; with it the limb brightened in blue and turned grey-blue (b* -16 at the rim, 0.95-0.99 of the radius) in the app. The map's blue data are still F395N.",
+      "evidence": [
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "tied-map-luminance",
+      "subject": "Brightness of the colour-tied visible map",
+      "status": "included",
+      "finding": "The tie keeps red and lowers green and blue, so the map lost a fifth of its cosine-weighted luminance (0.426 to 0.337) and Saturn looked brown in the app (whole-disc Y 0.315 against 0.409 on main). The tied map now gets back its untied mean luminance with one factor on all three channels, 1.264, then a soft shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), on each texel's brightest channel, all channels by the same amount: 4.35 % of texels, none clipped, ratios kept. The factor alone clips red on 0.5 % of texels; the largest factor that clips nothing, 1.085, leaves the whole disc at Y 0.326. Chosen by the user on a preview built with the lane's own code, 2026-09-25.",
+      "evidence": [
+        "https://doi.org/10.1006/icar.1998.5913"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
       ]
     }

@@ -11,9 +11,10 @@
     "models": [
       "photometry/opal-2025-minnaert-f631n.json",
       "photometry/opal-2025-minnaert-f502n.json",
-      "photometry/opal-2025-minnaert-f395n.json"
+      "photometry/opal-2025-minnaert-f467m.json"
     ]
   },
+  "colourTie": "photometry/karkoschka-1998-whole-disc-colour.json",
   "files": {
     "surface": "saturn-surface.jpg",
     "bodySurface": "saturn-surface-body.jpg",

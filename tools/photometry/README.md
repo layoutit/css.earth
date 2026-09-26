@@ -16,6 +16,7 @@ runtime never evaluates a model.
 | `roughness.mts` | Hapke (1984) macroscopic roughness, step for step as ISIS computes it. |
 | `normalization.mts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |
 | `model-record.mts` | Reading and validating model records and the recipe block that names them. |
+| `whole-disc-colour.mts` | A planet's whole-disc colour record, computed once from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.mts`); `keepLuminance` then restores the map's untied mean luminance with a soft shoulder. |
 
 Angles are radians in code and degrees in records and recipes.
 
@@ -108,5 +109,7 @@ Check each point against the source before merging a record:
   Lunar-Lambert, Minnaert and Lommel-Seeliger.
   [`photometric-truth.py`](../oracles/isis/photometric-truth.py) reads the truth
   files at the pinned commit, and the fixture records each file's URL and sha256.
+- `whole-disc-colour.test.mts` checks the record parser, the Minnaert disc
+  means 2/(2k+1), the tie and the luminance factor and shoulder on synthetic maps.
 - ISIS's truth files do not exercise the 2002 H function, coherent backscatter
   or porosity. Those terms are checked only against their defining limits.

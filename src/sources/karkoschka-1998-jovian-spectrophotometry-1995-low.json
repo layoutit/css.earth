@@ -1,0 +1,42 @@
+{
+  "id": "karkoschka-1998-jovian-spectrophotometry-1995-low",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Methane spectrophotometry of the Jovian planets at 300 to 1050 nm, low resolution, 1995 (Karkoschka 1998), PDS 1995LOW.TAB",
+  "identifiers": [
+    {
+      "type": "pds3-data-set-product",
+      "value": "ESO-J/S/N/U-SPECTROPHOTOMETER-4-V2.0:1995LOW.TAB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
+      "label": "PDS3 label"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.tab",
+      "label": "Spectra table"
+    }
+  ],
+  "creators": [
+    "Erich Karkoschka"
+  ],
+  "publisher": "NASA Planetary Data System, Atmospheres Node",
+  "publicationDate": "1998-12-17",
+  "evidence": [
+    {
+      "url": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
+      "checkedOn": "2026-09-25",
+      "locator": "DATA_SET_ID, PRODUCT_ID, PRODUCT_CREATION_TIME, the NOTE naming Karkoschka (Icarus 1998) and the SATURN ALBEDO column"
+    },
+    {
+      "path": "src/objects/saturn/source/manifest.json",
+      "locator": "/documents/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
