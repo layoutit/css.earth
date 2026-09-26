@@ -1,10 +1,10 @@
 /**
  * A planet's limb halo from one NASA Planetary Spectrum Generator profile: the radiance of a tangent line of sight at
- * each altitude at full phase (Sun behind the observer), divided by the radiance of the disc centre under an overhead
- * Sun from the same model. The profile is computed once (tools/photometry/acquire-psg-limb-table.mts) and serves every
- * lighting frame: a frame draws it where the tangent point faces the Sun and leaves the night side dark. PSG computes
- * limb paths with single scattering only, and the brighter forward scattering of a backlit limb is not in the profile;
- * the body README says both.
+ * each altitude with the Sun behind the observer, divided by the radiance of the disc centre under an overhead Sun from
+ * the same model. The profile is computed once (tools/photometry/acquire-psg-limb-table.mts) and serves every lighting
+ * frame: a frame draws it where the tangent point faces the Sun and leaves the night side dark. PSG computes limb paths
+ * with single scattering only and needs the Sun one degree above the tangent point's horizon, so multiply scattered
+ * light and the brighter forward scattering of a backlit limb are not in the profile; the body README says so.
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -41,6 +41,16 @@ export function parseLimbProfile(value: unknown, where: string): LimbProfile {
 
 export async function loadLimbProfile(sourceDirectory: string, path: string) {
   return parseLimbProfile(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')), path);
+}
+
+/**
+ * The tangent altitude, in km above the profile's reference radius, of a display radius measured in the raster frame's
+ * fitted silhouette. The visible disc ends at the lane's content scale (the lit map fills that fraction of the frame), so
+ * that radius is the edge altitude (Venus's cloud top, Mars's surface) and the halo's altitudes grow outward from it.
+ */
+export function haloAltitudeKm(profile: LimbProfile, displayRadius: number, contentScale: number, edgeAltitudeKm: number) {
+  if (!(contentScale > 0)) throw new RangeError(`The halo needs a positive content scale, got ${contentScale}.`);
+  return edgeAltitudeKm + (displayRadius / contentScale - 1) * (profile.radiusKm + edgeAltitudeKm);
 }
 
 /**

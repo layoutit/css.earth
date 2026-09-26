@@ -609,16 +609,31 @@ same published law, so the limb in the app is the limb the instrument saw.
   measured at bake, and for every pixel in the channel that sets its alpha. A
   pixel far from the mean colour is off by (mean − pixel) × (spread of the
   channel factors), which is largest near the limb.
-- **Halo.** Venus and Mars draw no halo yet and end at their lit disc. Earth
-  keeps the model atmosphere it had before, drawn over its lit disc in the same
-  image (the [Earth README](../src/objects/earth/README.md) lists its sources).
-  The lanes draw a PSG halo when the recipe names a NASA
-  [PSG](https://psg.gsfc.nasa.gov/) limb profile at full phase, with the Sun behind
-  the viewer. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
+- **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
+  limb profile with the Sun behind the viewer, lit where the tangent point faces
+  the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
   computes it once, against PSG's own disc centre, and
-  [halo.mts](../tools/photometry/halo.mts) reads it. The local PSG container's
-  limb mode returned the same radiance at every altitude, and the public service
-  refused further calls for a day, so no valid profile exists yet.
+  [halo.mts](../tools/photometry/halo.mts) reads it. PSG computes limb lines of
+  sight with single scattering only
+  ([handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96), and
+  its single-scattering limb receives no sunlight with the Sun exactly on the
+  tangent point's horizon, so the tool puts the Sun one degree above it. The
+  real halo, most of all Venus's low haze, may therefore be brighter. The halo's
+  lowest altitude sits at the visible disc edge, the lane's content scale (0.992
+  of the frame's silhouette), and there it replaces the dark ring the disc
+  overlay draws to hide the mesh edge. The first
+  local runs returned the same radiance at every altitude because PUMAS had
+  quietly switched to a plane-parallel two-stream solver to save memory. The tool
+  now splits each band into narrow windows (10 nm for Mars, 5 nm for Venus, whose
+  aerosols need a longer phase function) and refuses any answer that did not run
+  the requested single scattering. Earth keeps the model atmosphere it had
+  before, drawn over its lit disc in the same image (the
+  [Earth README](../src/objects/earth/README.md) lists its sources). PSG's
+  Earth template has no aerosols, and then its single-scattering limb scatters
+  Rayleigh light the same in every direction, so the tool refuses it.
+
+  ![Mars and Venus limbs at 4x: css.earth before the limb laws, main without a halo, and the PSG halo](images/planet-limbs/mars-halo-before-after.webp)
+  ![](images/planet-limbs/venus-halo-before-after.webp)
 - **Why not one model for every disc.** PSG's default atmospheres were checked
   against Hubble's measured coefficients and missed them. In red, PSG gives
   Uranus k 1.16 where OPAL measured 0.57. In blue, it gives Saturn 0.73 where

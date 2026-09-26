@@ -48,6 +48,8 @@
         "photometry/vincendon-2013-hapke.json"
       ]
     },
+    "halo": "atmosphere/psg-limb.json",
+    "haloEdgeAltitudeKm": 0,
     "tileSize": 256,
     "logicalSize": 512,
     "frameCount": 32,

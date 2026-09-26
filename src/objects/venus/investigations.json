@@ -77,18 +77,35 @@
     {
       "id": "limb-halo",
       "subject": "Limb halo outside the cloud deck",
-      "status": "unresolved",
-      "finding": "No halo is drawn. The lane draws one from a NASA PSG limb profile at full phase when the recipe names it. On 2026-09-25 the local nasapsg/psg container's limb geometry returned the same radiance at every tangent altitude, and the public API refused further calls for a day, so no valid profile exists.",
+      "status": "included",
+      "finding": "The halo is a NASA PSG limb profile of PSG's Venus template (VIRA-45 with its sulfuric acid haze), computed on 2026-09-25 with a local nasapsg/psg container: single scattering (NMAX 0, LMAX 41) on 1 km beams at 8 tangent altitudes from the 75 km cloud top to 120 km, the Sun one degree above the tangent point horizon behind the observer, divided by PSG's multiple-scattering disc centre (NMAX 6, LMAX 41, what PSG asks for these aerosols) under an overhead Sun, each band the mean of 5 nm windows. Relative to the disc centre it is 0.039, 0.068 and 0.110 (red, green, blue) at 75 km, 0.016, 0.030 and 0.051 at 80 km and 0.0017, 0.0032 and 0.0057 at 90 km. The first local runs were flat because PUMAS fell back to a two-stream solver for memory and the Sun sat on the horizon; both are now refused by the tool.",
       "evidence": [
-        "https://psg.gsfc.nasa.gov/helpapi.php"
+        "https://psg.gsfc.nasa.gov/images/help/handbook.pdf",
+        "https://hub.docker.com/r/nasapsg/psg"
       ],
       "checked": [
         {
           "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
+      ]
+    },
+    {
+      "id": "measured-limb-halo",
+      "subject": "A measured limb halo to replace the PSG model",
+      "status": "unresolved",
+      "finding": "No calibrated limb radiance profile of Venus near full phase in visible bands was found. Pioneer Venus OCPP limb scans at 365 and 690 nm (Lane and Opstbaum 1983) and Venus Express VMC limb images at 513 nm were taken at other phase angles and wavelengths, so they can check the haze height but cannot replace the model.",
+      "revisitWhen": "A calibrated Venus limb radiance profile in visible bands near full phase is published or archived.",
+      "evidence": [
+        "https://doi.org/10.1016/0019-1035(83)90071-4",
+        "https://archives.esac.esa.int/psa/"
       ],
-      "revisitWhen": "The public PSG API accepts calls again, or the local container returns a limb radiance that changes with altitude."
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     },
     {
       "id": "authored-limb-lighting",
