@@ -6,7 +6,7 @@ import type { NativeMetadata } from './native-metadata.mts';
 import type { OutputChoice } from './outputs.mts';
 import type { ProductDescriptor } from './product-descriptor.mts';
 import { PRODUCT_KINDS } from './recipe-request.mts';
-import { parseSkyTarget } from './sky/target.mts';
+import { parseSkyTarget } from '@cssearth/telescope/node';
 import { parseRegion } from '@cssearth/telescope/node';
 
 type Verdict = { readonly status:'supported'|'unsupported'|'unknown'|'not-requested';readonly reason:string };

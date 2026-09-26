@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode } from '@cssearth/core';
-import type { TargetCatalogueEntry } from '../targets.mts';
+import type { TargetCatalogueEntry } from '@cssearth/telescope';
 
 export const WWT_CATALOG_SCHEMA = 'cssearth-wwt-core-imagesets@1';
 const CORE_REPOSITORY = 'WorldWideTelescope/wwt-core-catalogs';

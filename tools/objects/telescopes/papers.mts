@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { loadTargetCatalogue } from './query.mts';
-import { resolveTarget } from './targets.mts';
+import { resolveTarget } from '@cssearth/telescope';
 
 export const PAPERS_SCHEMA = 'cssearth-telescope-papers@1';
 export const OPENALEX_WORKS = 'https://api.openalex.org/works';

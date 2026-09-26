@@ -4,6 +4,7 @@ export * from './product-record.js';
 export * from './paths.js';
 export * from './toolchain-process.js';
 export * from './vo-contracts.js';
+export * from './sky-target.js';
 export * from './toolchain.js';
 export * from './astroquery.js';
 export * from './pyuvdata.js';

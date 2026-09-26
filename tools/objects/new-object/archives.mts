@@ -117,10 +117,10 @@ export function readIdentifiers(main: string, identifiers: readonly string[]): I
   }
   return out;
 }
-/** How a star is named and identified: the telescope's SIMBAD resolver, whose answers are pinned as evidence (sky/target.mts). */
+/** How a star is named and identified: the telescope's SIMBAD resolver, whose answers are pinned as evidence (`@cssearth/telescope/node`, `sky-target.ts`). */
 export type Resolver = (name: string) => Promise<{ readonly mainId: string; readonly identifiers: readonly string[] } | undefined>;
 export const telescopeResolver = (root: string): Resolver => async name => {
-  const { resolveSkyTarget } = await import('../telescopes/sky/target.mts');
+  const { resolveSkyTarget } = await import('@cssearth/telescope/node');
   return (await resolveSkyTarget(root, name))?.target;
 };
 /** SIMBAD's identifiers for a spec's target or Gaia source; a target and a Gaia id that name different stars are refused. */
