@@ -89,6 +89,15 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
   if (!stagedPrepared) throw new Error(`Prepared publication inventory is missing: ${id}.`);
   const previous = current === null ? null : parseRuntimeManifest(current, id);
   const writes = await preparedAssetWrites({ id, stage: resolve(stage, 'public'), destination: publicDirectory, previous, manifest });
+  // Other steps write files under prepared/ that no bake stage produces (text.json, material.json, surfaces.json): a
+  // rebake replaced the prepared entries with its own and dropped theirs, and #763's deploy failed on the missing text.json.
+  // An entry the stage does not produce stays while the file on disk still has the bytes it records.
+  const staged = stagedPrepared.assets.filter(asset => asset.location === 'prepared'), stagedNames = new Set(staged.map(asset => asset.filename));
+  const unowned = [];
+  for (const asset of current?.assets ?? []) if (asset.location === 'prepared' && !stagedNames.has(asset.filename)) {
+    const bytes = await readFile(resolve(outputDirectory, asset.filename)).catch(() => null);
+    if (bytes && sha256(bytes) === asset.sha256) unowned.push(asset);
+  }
   const minimaps = minimapPaths(await optionalJson(resolve(data, 'minimaps.json')));
   const oldMinimaps = minimapPaths(await optionalJson(resolve(outputDirectory, 'minimaps.json')));
   writes.push(...minimaps.map(path => ({ path: resolve(outputDirectory, path), source: resolve(data, path) })),
@@ -96,7 +105,7 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
     // The staged inventory is published once, at the body root; prepared/ never carries a copy.
     ...outputs.filter(entry => entry.filename !== 'inventory.json').map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
     { path: resolve(objectDirectory, 'inventory.json'), text: inventoryText(mergeInventory(
-      mergeInventory(current, 'prepared', stagedPrepared.assets.filter(asset => asset.location === 'prepared')),
+      mergeInventory(current, 'prepared', [...staged, ...unowned]),
       'public', manifest.assets)) },
     { path: resolve(objectDirectory, 'object.json'), source: resolve(stage, 'object.json') });
   JSON.parse(await readFile(resolve(stage, 'object.json'), 'utf8'));
