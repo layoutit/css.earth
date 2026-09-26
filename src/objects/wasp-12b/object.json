@@ -32,6 +32,16 @@
               "id": "thermal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "temperature-2010",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature-2013",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

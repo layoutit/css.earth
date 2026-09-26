@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Bell et al. (2019), MNRAS 489, 1995, 'Mass loss from the exoplanet WASP-12b inferred from Spitzer phase curves' (doi:10.1093/mnras/stz2018; arXiv:1906.04742). Spitzer IRAC 3.6 um phase curve of 2013 (program 90186), the paper's fiducial analysis (M. Zhang's PLD pipeline, first-order sinusoid). Values read from the authors' LaTeX source: the phase-variation equations of section 3.1 and Table A2, 3.6 um rows.",
+  "wavelengthMicrons": 3.6,
+  "radiusRatio": {
+    "value": 0.11327,
+    "cell": "0.11327 +/- 0.00068, corrected for dilution from WASP-12BC",
+    "where": "Table A2, 2013, A2 PLD 1st Order, R_p/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.00384,
+    "cell": "3840 +/- 120 ppm, corrected for dilution from WASP-12BC",
+    "where": "Table A2, 2013, A2 PLD 1st Order, F_day/F_*"
+  },
+  "model": {
+    "kind": "eclipse-normalized-fourier",
+    "equation": "F_p(t) = F_day Phi(psi), Phi = 1 + C1 (cos psi - 1) + D1 sin psi, psi = 2 pi (t - t_e)/P counted from mid-eclipse (section 3.1). The fiducial 3.6 um model is first order: C2 and D2 are not fitted.",
+    "c1": {
+      "value": 0.32,
+      "cell": "0.320 +/- 0.024",
+      "where": "Table A2, 2013, A2 PLD 1st Order, C_1"
+    },
+    "d1": {
+      "value": 0.079,
+      "cell": "0.079 +/- 0.025",
+      "where": "Table A2, 2013, A2 PLD 1st Order, D_1"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 2813,
+      "cell": "2813 +/- 48 K",
+      "where": "Table A2, 2013, A2 PLD 1st Order, T_b,day"
+    },
+    "nightsideK": {
+      "value": 1760,
+      "cell": "1760 +/- 97 K",
+      "where": "Table A2, 2013, A2 PLD 1st Order, T_b,night (appendix B: from F_day (1 - 2 C_1))"
+    },
+    "offsetDegrees": {
+      "value": -13.6,
+      "cell": "13.6 +/- 3.8 degrees after eclipse: the peak comes 13.6 degrees after eclipse, a hot spot west of noon",
+      "where": "Table A2, 2013, A2 PLD 1st Order, 1st Order Phase Offset (degrees after eclipse)"
+    }
+  },
+  "notStated": [
+    "The 3.6 um stellar brightness temperature behind Table A2. Appendix B gives 5,800 K at 3.6 um and 6,000 K at 4.5 um, but the 3.6 um rows follow about 6,030 K and the 4.5 um rows follow 5,800 K: the two appear swapped in the text. Through 5,800 K this row's day side would be 2,734 K, not the table's 2,813 K. The lens uses the value the table's own day side implies."
+  ]
+}

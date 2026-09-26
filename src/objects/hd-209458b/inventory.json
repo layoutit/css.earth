@@ -3,15 +3,33 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-209458b-lens-temperature.webp",
+      "bytes": 162,
+      "sha256": "c3523facfd415b00e3934c00221ffeff270c8ffad4c8fab76cee5b1d92af32a0"
+    },
+    {
+      "location": "public",
       "filename": "hd-209458b-lens-thermal.webp",
       "bytes": 42,
       "sha256": "b029b2a0f1120bdd4cdcd6897d0f2e321c1e98143d818b627ead75792ab890d6"
     },
     {
       "location": "public",
+      "filename": "hd-209458b-poles-temperature@2x.webp",
+      "bytes": 42862,
+      "sha256": "b4a44eecabf96709c312e05fb456679bdd8fa07a38d78c51cde920bf106f38d3"
+    },
+    {
+      "location": "public",
       "filename": "hd-209458b-poles-thermal@2x.webp",
       "bytes": 1340,
       "sha256": "319345e3916edc4623f296419843e348db9db0b0e6caf04717d7d4666bf43364"
+    },
+    {
+      "location": "public",
+      "filename": "hd-209458b-surface-temperature@2x.webp",
+      "bytes": 14358,
+      "sha256": "0ee874a54fe3a07d6ded1d3f715e36aefaed108479f7e19c57b99c3b73d25eab"
     },
     {
       "location": "public",
@@ -232,14 +250,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91326,
-      "sha256": "bb04ddc39d985243cc616c2d0b357693a6d89d3a7b8d709a2b4d0852dc54cfa9"
+      "bytes": 91902,
+      "sha256": "d135d0621607931c9629d8bcc3c444edcbdc36e117a88b5c1169f180a1f716a5"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1409,
-      "sha256": "193ca1c9ef37ba46a840e90fefd5c0fd34ad58a69951f21a9bb818faeff8f6e2"
+      "sha256": "26f143ff165480de7581094a7233f243649691f32f208210c83b9a0032803ffc"
     },
     {
       "location": "prepared",
@@ -250,26 +268,32 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 437,
-      "sha256": "237b856498492646686c949cb1fc483e869e55909917421a9f9c5a3ea7f43db4"
+      "bytes": 1824,
+      "sha256": "e3296b64ff71ccb6da8a8b1acb617a25ee3197d50d2ea473ac58016be4221496"
     },
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 875,
-      "sha256": "ac358e7cd53355b18d89e707d020e630dd1f3ad227b65901ac15151d41b322d2"
+      "bytes": 2811,
+      "sha256": "b7971861a67d2651c53a35d39683ef139b07216eb231966ea79628b7c6d5b5f2"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 86,
-      "sha256": "1b5d91f11827ec520031a98cd925903e0616ffddcda41339ea7871f8637226ec"
+      "bytes": 167,
+      "sha256": "bdcc68557817c527ff5e160bec65b48c2e7b4bd33420af4e1c58d926c3aeefd6"
     },
     {
       "location": "prepared",
       "filename": "minimaps/shape.webp",
       "bytes": 422,
       "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature.webp",
+      "bytes": 1360,
+      "sha256": "39df5a6dcb59b49d4aedcfd2f6b4defe72768656ae46d575102b5bd9d02d0a89"
     },
     {
       "location": "prepared",
@@ -280,8 +304,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 527044,
-      "sha256": "551831fa5c41bdb4e91b5d9119321a31a2f9381718a3b44fc94245523b22157b"
+      "bytes": 530868,
+      "sha256": "de59821df0b614a5ed84012b39f8ec5c13e28c5e27c4efb21174b0da7b9fe530"
     },
     {
       "location": "prepared",
@@ -304,8 +328,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1379,
-      "sha256": "e400aa8d4a93918039ff11dacece8672675dc5480c16a99dc5c67fb8c7c2f5f1"
+      "bytes": 1583,
+      "sha256": "1b202c1255dd930853b4d05064967ef5eba12631fb4f9aeb1e97788e4ba4ba79"
     },
     {
       "location": "prepared",

@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Zellem et al. (2014), ApJ 790, 53, 'The 4.5 um full-orbit phase curve of the hot Jupiter HD 209458b' (doi:10.1088/0004-637X/790/1/53; arXiv:1405.5923). Spitzer IRAC 4.5 um, program 60021, 2010 January 17 to 21. Values read from the authors' LaTeX source: the phase-curve equation in section 2.3, Table 2 (Global Fit Parameters) and Table 3 (Brightness Temperatures).",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.1213,
+    "cell": "0.12130 -0.00031/+0.00028",
+    "where": "Table 2, R_p/R_s"
+  },
+  "eclipseDepth": {
+    "value": 0.001391,
+    "cell": "0.1391% -0.0069%/+0.0072%",
+    "where": "Table 2, Second Secondary Eclipse Depth. Section 2.3: 'we use the deeper measured secondary eclipse depth to establish this baseline'."
+  },
+  "model": {
+    "kind": "fourier-from-transit",
+    "equation": "F = 1 + c0 + c1 cos(2 pi t/P) + c2 sin(2 pi t/P) + c3 cos(4 pi t/P) + c4 sin(4 pi t/P) (section 2.3), with c3 and c4 dropped because the BIC showed they do not improve the fit. The planet's flux is F - 1. The paper does not print c0; the planet's flux at mid-eclipse is taken to be the deeper eclipse depth, which the paper names as the baseline.",
+    "cos1": {
+      "value": -0.00041,
+      "cell": "-0.0410% -0.0046%/+0.0051%",
+      "where": "Table 2, c1"
+    },
+    "sin1": {
+      "value": 0.000354,
+      "cell": "0.0354% -0.0063%/+0.0062%",
+      "where": "Table 2, c2"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1443,
+      "cell": "1443 +/- 30 K",
+      "where": "Table 3, Second Secondary Eclipse (the depth this record uses)"
+    },
+    "hottestHemisphereK": {
+      "value": 1499,
+      "cell": "1499 +/- 15 K",
+      "where": "Table 3, Maximum Flux"
+    },
+    "coldestHemisphereK": {
+      "value": 972,
+      "cell": "972 +/- 44 K",
+      "where": "Table 3, Minimum Flux"
+    },
+    "offsetDegrees": {
+      "value": 40.9,
+      "cell": "-40.9 +/- 6.0 degrees; 9.6 +/- 1.4 hours before secondary eclipse, a hot spot 40.9 +/- 6.0 degrees east",
+      "where": "Table 2, Maximum Flux Offset; section 4.2"
+    },
+    "maximumFlux": {
+      "value": 1.001527,
+      "cell": "1.001527 +/- 0.000036",
+      "where": "Table 2, Maximum Flux (star = 1)"
+    },
+    "minimumFlux": {
+      "value": 1.000443,
+      "cell": "1.000443 -0.000067/+0.000068",
+      "where": "Table 2, Minimum Flux (star = 1)"
+    },
+    "troughOffsetDegrees": {
+      "value": -40.9,
+      "cell": "-40.9 +/- 6.0 degrees",
+      "where": "Table 2, Minimum Flux Offset (from mid-transit)"
+    }
+  },
+  "notStated": [
+    "Where t = 0 falls. Only t counted from mid-transit puts the curve's peak 40.9 degrees before eclipse and its trough 40.9 degrees before transit, as Table 2 gives them; the test checks both.",
+    "The stellar brightness temperature behind Table 3. The one the second eclipse's depth and 1443 K imply, 5588 K at 4.5 um, turns the curve's maximum and minimum into 1497 K and 972 K."
+  ]
+}

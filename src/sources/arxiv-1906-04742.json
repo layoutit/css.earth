@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1906-04742",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bell et al. (2019): Mass loss from the exoplanet WASP-12b inferred from Spitzer phase curves",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1906.04742"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stz2018"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1906.04742",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stz2018",
+      "label": "Monthly Notices of the Royal Astronomical Society 489, 1995"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1906.04742",
+      "checkedOn": "2026-09-25",
+      "locator": "Section 3.1 phase-variation equations and Table A2: 3.6 um fiducial (PLD, first order) C1, D1, F_day, R_p/R_*, day and night brightness temperatures and offsets for 2010 and 2013"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 489, 1995",
+  "creators": [
+    "T. J. Bell",
+    "M. Zhang",
+    "P. E. Cubillos",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

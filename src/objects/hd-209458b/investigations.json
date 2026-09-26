@@ -34,6 +34,38 @@
         }
       ],
       "revisitWhen": "When a transmission or emission spectrum is reduced here and a lens that draws it is designed."
+    },
+    {
+      "id": "spitzer-phase-curve-map",
+      "subject": "Zellem et al. (2014) Spitzer 4.5 um one-sinusoid phase-curve fit, as a map of longitude",
+      "status": "included",
+      "finding": "Shown as the temperature lens through the Cowan & Agol (2008) inversion. The paper does not say where t = 0 falls in its c1 cos(2 pi t/P) + c2 sin(2 pi t/P); counted from mid-transit, c1 = -0.0410% and c2 = 0.0354% put the peak 40.81 degrees before eclipse and the trough 40.81 degrees before transit, as Table 2 gives both (40.9 +/- 6.0). With the star at the 5,588 K its deeper eclipse (0.1391%) and 1,443 K imply, the curve maximum and minimum give 1,497 and 972 K against Table 3's 1,499 +/- 15 and 972 +/- 44 K. The map runs from 867 K at 139.2 degrees west to 1,557 K at 40.8 degrees east.",
+      "evidence": [
+        "https://arxiv.org/abs/1405.5923",
+        "https://arxiv.org/abs/0803.3622"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "0c36d4524e657d274ffde8cbcb68a449a6df6a68"
+        }
+      ]
+    },
+    {
+      "id": "dang-2025-reanalysis",
+      "subject": "Dang et al. (2025) SPCA reanalysis of the same Spitzer 4.5 um phase curve",
+      "status": "excluded",
+      "finding": "Offset 43 +5/-6 degrees east, day side 1,420 +/- 20 K, night side 1,010 +70/-80 K (Tables 2 and 3 of arXiv v1): it agrees with the Zellem et al. map, whose transit-time night side is 1,052 K. The paper prints its fluxes, offset and temperatures but not its Fourier coefficients, so its curve cannot be drawn without refitting.",
+      "revisitWhen": "Its fit coefficients or model curve are published.",
+      "evidence": [
+        "https://arxiv.org/abs/2408.13308"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "0c36d4524e657d274ffde8cbcb68a449a6df6a68"
+        }
+      ]
     }
   ]
 }

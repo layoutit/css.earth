@@ -32,6 +32,11 @@
               "id": "thermal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
