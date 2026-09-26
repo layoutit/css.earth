@@ -16,7 +16,7 @@ import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './lens.mts';
 import { decodeEntities, NASA_TAP } from './orbit.mts';
 import type { Cited, PhotometrySpec, ThermalSpec } from './spec.mts';
-import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '../observation/disc-band-color.mts';
+import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
 import { loadStellarPhotometricColor } from '../observation/stellar/stellar-photometric-color.mts';
 import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';

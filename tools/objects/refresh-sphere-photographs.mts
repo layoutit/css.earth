@@ -10,7 +10,7 @@ import sharp from 'sharp';
 import type { Sharp } from 'sharp';
 import { completeEnhancedCoverage, createNativePhotographPolarSprite, packLatitudeRaster } from '@cssearth/objects';
 import { missingCoverageColor, applyNativeSurfaceExposure, loadNativeSourcePoleSampler } from '@cssearth/bake/raster';
-import { loadNativeObservationPoleSampler, parseObservationLens } from './observation/raster.mts';
+import { loadNativeObservationPoleSampler, parseObservationLens } from '@cssearth/bake/objects/layers/observation';
 import { loadNativePhotograph, parseSolidObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 

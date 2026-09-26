@@ -7,13 +7,13 @@
 //     each pole with one flat cap.
 // The photosphere is the JSOC HMI continuum mosaic (hmi-continuum.mts). The Fourier polar boundary continuation,
 // off-limb registration and rim plate are the retired lane's.
-import type { RasterInfo } from "./raster.mts";
-import type { FitsMapRecipe } from "./fits-map.mts";
+import type { RasterInfo } from "./raster.ts";
+import type { FitsMapRecipe } from "./fits-map.ts";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
-import { prepareFitsMap } from "./fits-map.mts";
-import { createHmiContinuum, type HmiContinuumSource } from "./hmi-continuum.mts";
+import { prepareFitsMap } from "./fits-map.ts";
+import { createHmiContinuum, type HmiContinuumSource } from "./hmi-continuum.ts";
 
 type PolarBoundaryModel = readonly {mean: number; modes: readonly {cosine: number; sine: number}[]}[];
 export interface FitsSource { kind: "fits-map"; fits: FitsMapRecipe; }

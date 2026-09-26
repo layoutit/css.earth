@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
 import { executeAcquisition, parseAcquisitionPlan } from './operations-acquisition.js';
-import { acquirePinnedDownloads, verifySources, type SourceManifest } from './source-files.js';
+import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
 import { convertMappedComposition, parseMappedCompositionRecipe } from './acquisition/mapped-composition.mts';
 const test = sourceTest();

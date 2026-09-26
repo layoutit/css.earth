@@ -14,8 +14,7 @@ import { readFitsImage, skyDisplayRaster, skyImageAxes, skyProjection } from '@c
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '@cssearth/bake/objects/color';
-import { maskSaturatedStars } from './plate-saturation.mts';
-import { findPointSources } from './point-sources.mts';
+import { maskSaturatedStars, findPointSources } from '@cssearth/bake/objects/layers/observation';
 import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../jwst/imaging/bands.mts';
 import { runImage3 } from '../jwst/imaging/image3.mts';
 import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,

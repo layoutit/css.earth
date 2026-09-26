@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readRiceCompressedImage } from '@cssearth/fits';
-import { hmiPixel, hmiRecordGeometry } from '../../objects/observation/hmi-continuum.mts';
+import { hmiPixel, hmiRecordGeometry } from '@cssearth/bake/objects/layers/observation';
 import { ORACLE_ROOT, readOracleFixture, readOracleInput } from '../fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 

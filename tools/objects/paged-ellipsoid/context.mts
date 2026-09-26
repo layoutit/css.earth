@@ -1,13 +1,12 @@
 import { resolve } from 'node:path';
-import { readAuthoredSources } from '../authored-sources.ts';
+import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { readJsonSource } from '../../sources/source-values.mts';
 import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.mts';
-import { parseInteriorSource } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createAtmospherePreparation } from './atmosphere.mts';
-import { createPagedSurfaceRaster } from './surface-raster.mts';
 import { preparePagedEllipsoidScene } from './scene.mts';
 import { prepareEllipsoidAttitude } from './attitude.mts';
 

@@ -39,7 +39,7 @@
  * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" lens) or
  * `photometry` (three-band flux densities for the band-colour lens); planet-lenses.mts. */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '../observation/disc-band-color.mts';
+import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
 
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }
 export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kharitonov' | 'burnashev';

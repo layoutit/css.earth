@@ -1,7 +1,7 @@
 import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
 import { sha256 } from '@cssearth/core/node';
-import { readAuthoredSources } from './authored-sources.ts';
+import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';

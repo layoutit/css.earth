@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { validateSourceManifest } from '@cssearth/objects/node';
-import { parseSourceManifest } from '#preparation/source-files';
+import { parseSourceManifest } from '@cssearth/bake/objects/sources';
 
-// The preparation tools read source manifests with their own parser (tools/objects/source-files.ts); it must agree with the
+// The preparation tools read source manifests with their own parser (`@cssearth/bake/objects/sources`, source-files.ts); it must agree with the
 // package's validator on what a document and a generated intermediate need.
 test('document descriptions are optional without weakening generator identity, in both manifest parsers', () => {
   const base = {

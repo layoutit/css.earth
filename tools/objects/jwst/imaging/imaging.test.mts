@@ -11,7 +11,7 @@ import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidenc
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
 import { toolchainPython } from '@cssearth/telescope/node';
-import { findPointSources } from '../../observation/point-sources.mts';
+import { findPointSources } from '@cssearth/bake/objects/layers/observation';
 
 const member = (name: string, bytes = 1000) => ({ name, uri: `mast:JWST/product/${name}`, bytes });
 const program = (overrides: Record<string, unknown> = {}) => ({

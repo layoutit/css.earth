@@ -1,6 +1,6 @@
-import type { Relief } from '@cssearth/bake/objects/raster';
-import type { RasterImage } from './raster.mts';
-import { terrainBrightness } from '@cssearth/bake/objects/raster';
+import type { Relief } from '../../raster/index.ts';
+import type { RasterImage } from './raster.ts';
+import { terrainBrightness } from '../../raster/index.ts';
 export interface ElevationRecipe {noData: number; palette: readonly (readonly number[])[]; rangeMetres: number; relief?: Relief;}
 // USGS's pinned GeoTIFF is uncompressed, signed 16-bit, one strip per row.
 // Reading these samples directly avoids image-library conversion of negative

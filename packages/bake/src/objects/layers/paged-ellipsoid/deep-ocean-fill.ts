@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { RasterInfo } from '../observation/raster.mts';
+import type { RasterInfo } from '../observation/index.ts';
 
 // NASA replaced deep ocean in the plain Blue Marble Next Generation editions
 // with one arbitrary reflectance instead of an observation (Stoeckli et al.
