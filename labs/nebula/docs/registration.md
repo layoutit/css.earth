@@ -42,7 +42,7 @@ The LMC result is close to the rounded table; the roughly 0.2 kpc SMC residual s
 
 For a raw target particle `p`, the reconstructed MW-centric Galactic point is `p_gc = Rz × (p - MW_star_median)`. With the paper's Sun position, its heliocentric Galactic vector is `h_gal = p_gc - (-8,0,0) = p_gc + (8,0,0)` kpc.
 
-The repository already pins the Hipparcos J2000 ICRS→Galactic convention in `src/platform/galactic-frame.mjs`. Its transpose maps Galactic vectors to ICRS:
+The repository already pins the Hipparcos J2000 ICRS→Galactic convention in `packages/bake/src/objects/scene/galactic-frame.ts`. Its transpose maps Galactic vectors to ICRS:
 
 `G_to_ICRS = [-0.0548755604162, 0.494109427876, -0.867666149019; -0.873437090235, -0.444829629960, -0.198076373431; -0.483835015549, 0.746982244497, 0.455983776175]`.
 
