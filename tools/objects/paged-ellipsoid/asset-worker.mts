@@ -2,9 +2,10 @@ import { parentPort, workerData } from 'node:worker_threads';
 import { readPagedEllipsoid } from './context.mts';
 import { preparePagedEllipsoidAssets } from './assets.mts';
 import { requireRecord, requireString } from '@cssearth/core';
-import type { PagedAssetJob } from './parallel-assets.mts';
+import type { PagedAssetJob } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 
-// One share of a paged ellipsoid's asset preparation, run by parallel-assets.mts.
+// One share of a paged ellipsoid's asset preparation, run by preparePagedEllipsoidAssetsInParallel
+// (`@cssearth/bake/objects/layers/paged-ellipsoid`), which index.mts points here.
 const data = requireRecord(workerData, 'paged asset worker data'), input = requireRecord(data.job, 'paged asset job');
 const mode = requireString(input.mode, 'paged asset job mode');
 if (mode !== 'maps' && mode !== 'extras' && mode !== 'materials') throw new TypeError(`Unknown paged asset job mode: ${mode}.`);
