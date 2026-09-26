@@ -97,28 +97,36 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
   const navigation = bindObjectNavigationTarget(element, host);
   const picking = screenPicking(pickingHost);
   let navigationEnabled = true, target: ScreenPickTarget[] = [];
-  let destroyed = false;
+  let destroyed = false, coasting = false;
+  // Every write is on change; while the camera coasts the point only moves and fades, and its visibility and navigation
+  // wait for the coast to stop (docs/performance/motion-freezes-membership.md).
+  const setStyle = (property: 'visibility' | 'backgroundPosition' | 'transform' | 'opacity', value: string) => {
+    if (element.style[property] !== value) element.style[property] = value;
+  };
   return Object.freeze({ element,
     setNavigationEnabled(enabled: boolean) { navigationEnabled = enabled; picking.publish(element, enabled ? target : []); },
+    setCoasting(active: boolean) { coasting = active; },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, publication: PointSourcePublication = {}) {
       if (destroyed) return;
       const appearance = worldContextPointAppearance(plan, field, world, viewport, publication);
+      const hidden = element.style.visibility === 'hidden';
       if (!appearance || appearance.opacity <= 0 || appearance.luminance <= 0) {
         target = []; picking.publish(element, target);
-        element.style.visibility = 'hidden'; navigation.update(null); return;
+        if (coasting) { setStyle('opacity', '0'); return; }
+        setStyle('visibility', 'hidden'); navigation.update(null); return;
       }
+      // A coast does not reveal: a hidden point waits for it to stop.
+      if (coasting && hidden) { target = []; picking.publish(element, target); return; }
       const size = appearance.radiusPx * 2 * field.atlas.haloRadii;
-      element.style.visibility = '';
-      element.style.backgroundPosition = `${-(appearance.colorIndex % field.atlas.columns) * field.atlas.tileSize}px ${-Math.floor(appearance.colorIndex / field.atlas.columns) * field.atlas.tileSize}px`;
-      element.style.transform = `translate(${appearance.x - size / 2}px,${appearance.y - size / 2}px) scale(${size / field.atlas.tileSize})`;
+      setStyle('visibility', '');
+      setStyle('backgroundPosition', `${-(appearance.colorIndex % field.atlas.columns) * field.atlas.tileSize}px ${-Math.floor(appearance.colorIndex / field.atlas.columns) * field.atlas.tileSize}px`);
+      setStyle('transform', `translate(${appearance.x - size / 2}px,${appearance.y - size / 2}px) scale(${size / field.atlas.tileSize})`);
       const alpha = appearance.opacity * appearance.luminance;
-      element.style.opacity = String(alpha);
-      navigation.update(alpha > .1 ? plan.focus.id : null, plan.focus.name);
+      setStyle('opacity', String(alpha));
+      if (!coasting) navigation.update(alpha > .1 ? plan.focus.id : null, plan.focus.name);
       target = alpha > .1 ? [{ element, rank: -1, shape: { kind: 'rect', left: appearance.x - size / 2,
         top: appearance.y - size / 2, right: appearance.x + size / 2, bottom: appearance.y + size / 2 } }] : [];
       picking.publish(element, navigationEnabled ? target : []);
-      const diameterHook = String(Math.round(appearance.diameterPx * 10) / 10);
-      if (element.dataset.pointSourceDiameter !== diameterHook) element.dataset.pointSourceDiameter = diameterHook;
     },
     destroy() { if (!destroyed) { destroyed = true; picking.remove(element); navigation.destroy(); element.remove(); } },
   });

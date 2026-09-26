@@ -14,5 +14,7 @@ export { bindObjectNavigationTarget, supportsObjectNavigation } from '../solar-s
 export { createCameraViewport } from './camera-viewport.js';
 export type { CameraViewport, CameraViewportSnapshot } from './camera-viewport.js';
 export { createCameraMotion } from './camera-motion.js';
+export { cameraMotionSignalFor } from './camera-motion-signal.js';
+export type { CameraMotionSignal, CameraMotionSource, CameraMotionState } from './camera-motion-signal.js';
 export type { CameraMotion } from './camera-motion.js';
 export { createCameraFlight } from './camera-flight.js';

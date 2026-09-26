@@ -23,9 +23,12 @@ export function mountPreparedVolumePlanes(options: PreparedVolumeMountOptions) {
     const transform = preparedVolumeCameraTransform(publication, options.payload.frame, options.unitScale);
     const translation = transform.translationCssPixels.map((value, axis) => options.nativeFocalCss && axis === 2
       ? `calc(${options.nativeFocalCss} + ${format(value - transform.focalPixels)}px)` : `${format(value)}px`);
-    camera.style.perspective = options.nativeFocalCss ?? `${format(transform.focalPixels)}px`;
+    // Written on change: this publishes every camera frame (motion-freezes-membership.md).
+    const perspective = options.nativeFocalCss ?? `${format(transform.focalPixels)}px`;
+    if (camera.style.perspective !== perspective) camera.style.perspective = perspective;
     const [x, y] = publication.viewport.principalOffsetPixels;
-    camera.style.perspectiveOrigin = `calc(50% + ${x}px) calc(50% + ${y}px)`;
+    const origin = `calc(50% + ${x}px) calc(50% + ${y}px)`;
+    if (camera.style.perspectiveOrigin !== origin) camera.style.perspectiveOrigin = origin;
     scene.style.transform = `translate3d(${translation.join(',')}) ${worldRotationCss(transform.rotation)}`;
   }, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
     payload.detailPlanes!.forEach((leaf, index) => {

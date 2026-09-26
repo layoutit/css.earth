@@ -24,7 +24,9 @@ export function mountStellarPoints({host,before,field}:{host:HTMLElement;before:
   runtime.root.style.display='none';
   return Object.freeze({root:runtime.root,publish(publication:VolumeCameraPublication,opacity:number){
     const alpha=Math.max(0,Math.min(1,opacity));
-    runtime.root.style.opacity=String(alpha);runtime.root.style.display=alpha>0?'block':'none';
+    const display=alpha>0?'block':'none';
+    if(runtime.root.style.opacity!==String(alpha))runtime.root.style.opacity=String(alpha);
+    if(runtime.root.style.display!==display)runtime.root.style.display=display;
     if(alpha>0)runtime.publish(publication);
   },destroy:runtime.destroy});
 }

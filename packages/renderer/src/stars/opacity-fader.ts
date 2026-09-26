@@ -34,7 +34,7 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
   { hideAtZero = false }: { readonly hideAtZero?: boolean } = {}) {
   const clock = sharedClock ?? opacityClockFor(window);
   const entries = new Map<FadeTarget, Entry>(), pending = new Set<Entry>(), dirty = new Set<Entry>();
-  let destroyed = false, animationEnabled = true;
+  let destroyed = false, animationEnabled = true, hidingHeld = false;
   const entryFor = (element: FadeTarget) => {
     let entry = entries.get(element);
     if (!entry) {
@@ -51,7 +51,8 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
       const alpha = entry.visible ? valueAt(entry.alpha, time) * valueAt(entry.multiplier, time) * valueAt(entry.suppression, time) : 0;
       if (entry.written !== alpha) {
         entry.element.style.opacity = String(alpha); entry.written = alpha;
-        if (hideAtZero) entry.element.style.visibility = alpha > 0 ? '' : 'hidden';
+        // A fade that reaches 0 while hiding is held (a coast) keeps its box until the hold ends.
+        if (hideAtZero && !(hidingHeld && alpha === 0)) entry.element.style.visibility = alpha > 0 ? '' : 'hidden';
       }
       if (!entry.visible || (entry.suppression.target === 0 && !running(entry.suppression, time)) ||
           !(running(entry.alpha, time) || running(entry.multiplier, time) || running(entry.suppression, time))) pending.delete(entry);
@@ -74,6 +75,13 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
     changed(entry);
   };
   return Object.freeze({
+    /** While held, an element fading to 0 is not hidden: the camera coasts (motion-freezes-membership.md). Releasing
+     * hides every element the hold kept at 0. */
+    holdHiding(held: boolean) {
+      if (destroyed || held === hidingHeld) return;
+      hidingHeld = held;
+      if (!held && hideAtZero) for (const entry of entries.values()) if (entry.written === 0 && entry.element.style.visibility !== 'hidden') entry.element.style.visibility = 'hidden';
+    },
     setAnimationEnabled(enabled: boolean) {
       if (destroyed || enabled === animationEnabled) return;
       animationEnabled = enabled;

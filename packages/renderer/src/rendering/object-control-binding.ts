@@ -8,10 +8,14 @@ export interface ObjectControlBindingOptions {
 type SettingInput = HTMLInputElement | HTMLButtonElement;
 const isInput = (element: SettingInput): element is HTMLInputElement => element.tagName === "INPUT";
 
+// Every publication writes only what changed: a view-driven texture re-plan republishes this state, and an unchanged
+// attribute write still reaches the DOM (docs/performance/motion-freezes-membership.md).
+const setAttribute = (element: Element, name: string, value: string) => { if (element.getAttribute(name) !== value) element.setAttribute(name, value); };
+
 /** Native responses and retained controls publish the same committed dataset presentation. */
 export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], details: readonly { id: string; panel: HTMLElement }[],
   contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>) {
-  for (const button of buttons) button.setAttribute('aria-pressed', String(pressed.has(button.getAttribute('value') ?? '')));
+  for (const button of buttons) setAttribute(button, 'aria-pressed', String(pressed.has(button.getAttribute('value') ?? '')));
   const active = buttons.find(button => pressed.has(button.getAttribute('value') ?? ''))?.getAttribute('value');
   // A dataset shown as a sequence lists only its first step; that entry stays pressed while any of its steps is shown.
   const groups = new Map<string, boolean>();
@@ -21,7 +25,7 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
   }
   for (const button of buttons) {
     const option = button.closest<HTMLElement>('[data-step-group]');
-    if (option?.dataset.stepListed === 'true') button.setAttribute('aria-pressed', String(groups.get(option.dataset.stepGroup!) === true));
+    if (option?.dataset.stepListed === 'true') setAttribute(button, 'aria-pressed', String(groups.get(option.dataset.stepGroup!) === true));
   }
   for (const { id, panel } of details) if (panel.hidden !== (id !== active)) panel.hidden = id !== active;
   for (const context of contexts) {
@@ -107,30 +111,32 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       if (root) busyRoots.add(root);
     }
     for (const root of busyRoots) {
-      root.classList.toggle("is-loading", !ready || next.pending === true);
-      root.setAttribute("aria-busy", String(!ready || next.pending === true));
+      const busy = !ready || next.pending === true;
+      if (root.classList.contains("is-loading") !== busy) root.classList.toggle("is-loading", busy);
+      setAttribute(root, "aria-busy", String(busy));
     }
     for (const input of lensInputs) {
-      input.disabled = input.type === 'submit' ? false : !ready;
+      const disabled = input.type === 'submit' ? false : !ready;
+      if (input.disabled !== disabled) input.disabled = disabled;
     }
     publishDatasetSelection(lensInputs, details, contexts, pressed);
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       if (nativeChanges.has(control.name)) continue;
-      if (control.kind === "toggle" && isInput(input)) input.checked = shown[control.name] === true;
+      if (control.kind === "toggle" && isInput(input)) { const checked = shown[control.name] === true; if (input.checked !== checked) input.checked = checked; }
       else {
         const selected = objectCycleStates(control.kind === "cycle" ? control : invalidCycle()).find(state => state.value === shown[control.name]);
         if (!selected) throw new Error(`Selected ${control.name} is not declared by its content.`);
-        if (isInput(input) && input.type === "range") input.value = String(selected.value);
-        input.dataset.state = selected.label;
-        input.setAttribute("aria-label", `${control.label}: ${selected.label}`);
+        if (isInput(input) && input.type === "range" && input.value !== String(selected.value)) input.value = String(selected.value);
+        if (input.dataset.state !== selected.label) input.dataset.state = selected.label;
+        setAttribute(input, "aria-label", `${control.label}: ${selected.label}`);
       }
       if (control.name === "speed") {
         // The shell alone enables Speed when Motion is requested. Runtime
         // readiness can block it, and router readiness republishes shell state.
-        input.dataset.runtimeReady = String(ready);
-        if (!ready) input.disabled = true;
-      } else input.disabled = input.hasAttribute('form') ? false : !ready;
+        if (input.dataset.runtimeReady !== String(ready)) input.dataset.runtimeReady = String(ready);
+        if (!ready && !input.disabled) input.disabled = true;
+      } else { const disabled = input.hasAttribute('form') ? false : !ready; if (input.disabled !== disabled) input.disabled = disabled; }
     }
   }
   function act(action: ObjectAction) {

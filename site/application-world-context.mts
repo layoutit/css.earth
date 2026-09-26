@@ -67,6 +67,11 @@ export function createApplicationWorldContext() {
           event instanceof CustomEvent && (event.detail as { active?: unknown } | null)?.active === true);
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
         lifetime.onDispose(() => inputSurface?.removeEventListener('objectrotationchange', rotationChanged));
+        // The inertia gate: while the camera coasts, the world holds its membership (motion-freezes-membership.md).
+        const motionChanged = (event: Event) => frames.setCoasting(
+          event instanceof CustomEvent && (event.detail as { coasting?: unknown } | null)?.coasting === true);
+        inputSurface?.addEventListener('objectmotionchange', motionChanged);
+        lifetime.onDispose(() => inputSurface?.removeEventListener('objectmotionchange', motionChanged));
         const visibility = createApplicationWorldVisibility(layer, lifetime);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frames, presentationHost !== stage) : null;
         if (diagnostics) {

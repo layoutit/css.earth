@@ -52,7 +52,8 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
       if (world.referenceFrame !== payload.referenceFrame || world.epochJdTt !== payload.epochJdTt) throw new TypeError('Prepared sky and observer reference frames differ.');
       const pose = preparedSkyCameraPose(world, viewport, payload.parallax);
       const transform = skyTransformCss(pose);
-      root.style.visibility = visible ? 'visible' : 'hidden';
+      const visibility = visible ? 'visible' : 'hidden';
+      if (root.style.visibility !== visibility) root.style.visibility = visibility;
       if (!visible) return;
       if (cubes.length === 2) {
         const nearOpacity = Math.max(0, Math.min(1, near)), far = cubes[0]!, close = cubes[1]!;
@@ -68,6 +69,8 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
       const clipView = `${transform}|${perspective}|${origin}|${viewport.widthPixels}|${viewport.heightPixels}`;
       if (clipView !== previousClipView) {
         previousClipView = clipView;
+        // Faces follow the view edge exactly, even while the camera coasts: a face's layer is about 85 MB at 3x, so
+        // staging one ahead or keeping one through a spin would multiply memory (motion-freezes-membership.md).
         const planes = createPreparedLeafFrustum(pose.rotation, pose.translation, viewport);
         for (const cube of cubes) for (const face of cube.boundedFaces) {
           const shown = preparedLeafMayContribute(face.bounds, planes);

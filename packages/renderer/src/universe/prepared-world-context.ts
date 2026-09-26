@@ -271,6 +271,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let navigationInFlight = false;
   // A released rotation keeps the committed system landmarks until the next published frame.
   let rotationPhase: 'idle' | 'dragging' | 'released' = 'idle';
+  // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, shown bodies only move and
+  // fade; nothing is revealed, retired, restyled, restacked or re-announced until the coast stops.
+  let coasting = false;
   let labelBlockers: readonly LabelScreenRect[] = [];
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
@@ -419,6 +422,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (depthChanged) refreshDepthBodies();
       if (changed) { invalidatePolicy(); refresh(); }
     },
+    /** The camera coasts on inertia (camera-motion-signal.ts). Held membership lands on the first frame after. */
+    setCoasting(active: boolean) {
+      if (destroyed || active === coasting) return;
+      coasting = active;
+      if (active) { hoverIntent = false; settleHover(); return; }
+      invalidatePolicy();
+      refresh();
+    },
     setRotationActive(active: boolean) {
       if (destroyed || (rotationPhase === 'dragging') === active) return;
       rotationPhase = active ? 'dragging' : 'released';
@@ -464,8 +475,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       ) >= distantNavigation.afterDistanceM;
       const distantNavigationChanged = nextDistantNavigationActive !== distantNavigationActive;
       distantNavigationActive = nextDistantNavigationActive;
-      const rotating = rotationPhase === 'dragging';
-      const interactiveHover = hoverIntent && !cameraChanged && !rotating && !navigationInFlight;
+      const rotating = rotationPhase === 'dragging', coast = coasting;
+      const interactiveHover = hoverIntent && !cameraChanged && !rotating && !navigationInFlight && !coast;
       if (cameraChanged || rotating || navigationInFlight) settleHover();
       hoverIntent = false;
       const delta = contextFrames.accept(preparedFrame);
@@ -533,18 +544,21 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
-        const billboardShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
+        const plannedShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
+        // Coasting holds membership: a shown body stays shown and fades out if the plan drops it; a hidden one waits.
+        const billboardShown = coast ? entry.billboardShown === true : plannedShown;
         if (!billboardShown && entry.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
         // A plain dot is always its colour; the flat-dot swap is for bodies with a sprite.
-        const flatDot = !entry.plainDot && entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
+        const flatDot = coast ? entry.flatDot : !entry.plainDot && entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
         // A body without its own circle inside its parent's dot is part of that dot, not a second dot within it.
         const parentDot = entry.orbit ? entriesById.get(entry.orbit.centerBodyId) : undefined;
         const insideParentDot = !entry.indicatorShown && parentDot?.flatDot === true &&
           Math.hypot(x - parentDot.center[0], y - parentDot.center[1]) < parentDot.markerDiameter / 2;
-        const markerShown = (visible || (pointSource && flatDot)) && markerOpacity > 0 && (!pointSource || flatDot) && !insideParentDot;
+        const markerShown = coast && entry.markerShown !== undefined ? entry.markerShown
+          : (visible || (pointSource && flatDot)) && markerOpacity > 0 && (!pointSource || flatDot) && !insideParentDot;
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
@@ -584,7 +598,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           // prepared image; only then is that image loaded and decoded.
           const detail = entry.sprite?.detail;
           if (!entry.spriteApplied && entry.sprite && !flatDot) { applySpriteImage(entry.spriteLeaf, entry.sprite); entry.spriteApplied = true; }
-          if (detail && !flatDot) {
+          if (detail && !flatDot && !coast) {
             const spriteDetail = markerDiameter >= detail.fromDiameterPixels ||
               (entry.spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
             if (spriteDetail !== entry.spriteDetail) {
@@ -601,7 +615,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
               entry.spriteApplied = true;
             }
           }
-          if (entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
+          if (!coast && entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
           if (marker.dataset.contextSelected !== selection) {
             // A body with a prepared colour marks its emphasis with the one corner locator, moved in under its sprite; it
             // inherits the marker's colour. The marker it leaves returns to its ring.
@@ -616,14 +630,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             }
             marker.dataset.contextSelected = selection;
           }
-          if (entry.indicatorHovered !== entry.hovered) {
+          if (!coast && entry.indicatorHovered !== entry.hovered) {
             entry.indicatorHovered = entry.hovered;
             marker.dataset.contextIndicatorHovered = String(entry.hovered);
           }
           // Opacity lives on the mover, which has no pseudos: WebKit re-resolves an element's ::before and ::after with
           // every restyle of it, so a per-frame opacity on the marker restyled its ring and caption every frame.
           if (policyChanged || !wasShown || hoverChanged) fader.multiply(entry.mover, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
-          fader.set(entry.mover, markerOpacity);
+          fader.set(entry.mover, billboardShown && !plannedShown ? 0 : markerOpacity);
           const transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
           // CSSOM serializes commas/spacing differently from the published
           // string. Compare against our last write, not its browser readback.
@@ -646,13 +660,15 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
         const indicatorVisible = entry.indicatorShown;
         const indicatorState = String(indicatorVisible && !(navigationInFlight && body.id === emphasizedId));
-        if (marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
+        if (!coast && marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
         if (!navigationSuppressed && indicatorVisible && markerOpacity > .1) {
           const target = entry.indicatorPickTarget ??= { element: marker, rank: rank + 2, shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } };
           target.rank = rank + 2; target.shape.x = x; target.shape.y = y; target.shape.radius = entry.indicatorRadius + 5;
           entry.indicatorPick = target;
         } else entry.indicatorPick = null;
-        const orbitShown = orbitVisibility > 0 && segments.length > 0;
+        const plannedOrbit = orbitVisibility > 0 && segments.length > 0;
+        // Coasting: a drawn orbit stays drawn (fading if the plan drops it), an undrawn one waits for the coast to stop.
+        const orbitShown = coast ? entry.previousCount > 0 : plannedOrbit;
         const contributesPaint = billboardShown || orbitShown;
         if (paintedBodies.has(entry) !== contributesPaint) {
           if (contributesPaint) paintedBodies.add(entry); else paintedBodies.delete(entry);
@@ -671,7 +687,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;
           }
           const navigable = !navigationSuppressed && orbitVisibility > 0.1 && !entry.orbitHidden;
-          if (!navigationInFlight && !rotating && entry.orbitNavigable !== navigable) {
+          if (!navigationInFlight && !rotating && !coast && entry.orbitNavigable !== navigable) {
             entry.orbitNavigable = navigable;
             entry.orbitNavigation!.update(navigable ? body.id : null, body.name);
             // The stage picker owns the clipped corridor; paint nodes are inert.
@@ -679,9 +695,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             if (entry.orbitRoot.tabIndex !== -1) entry.orbitRoot.tabIndex = -1;
           }
           fader.visible(orbitPaint, orbitShown);
-          fader.set(orbitPaint, orbitVisibility);
+          fader.set(orbitPaint, orbitShown && !plannedOrbit ? 0 : orbitVisibility);
           const patch = delta.orbits.get(index);
-          if (patch) {
+          if (patch && (!coast || (orbitShown && plannedOrbit))) {
             entry.piecePool.publish(segments);
             entry.previousCount = segments.length;
           }
@@ -692,7 +708,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           } else entry.orbitPick = null;
 
         }
-        if (mask & (ContextChange.label | ContextChange.marker)) {
+        if (!coast && (mask & (ContextChange.label | ContextChange.marker))) {
           const labelVisible = entry.labelShown;
           const labelState = String(labelVisible && !(navigationInFlight && body.id === emphasizedId));
           if (marker.dataset.contextLabelVisible !== labelState) marker.dataset.contextLabelVisible = labelState;
@@ -715,7 +731,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           }
         }
         // Flights and rotations keep keyboard/accessibility targets; they catch up after.
-        if (!navigationInFlight && !rotating) entry.navigation.update(entry.markerPick || entry.indicatorPick || entry.labelPick ? body.id : null, body.name);
+        if (!navigationInFlight && !rotating && !coast) entry.navigation.update(entry.markerPick || entry.indicatorPick || entry.labelPick ? body.id : null, body.name);
         // Pseudos and the sprite share the stage's precise retained hit shapes.
         if (marker.style.pointerEvents !== 'none') marker.style.pointerEvents = 'none';
 

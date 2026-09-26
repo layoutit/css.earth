@@ -63,7 +63,19 @@ export function mountObjectShell({
   lifetime.onDispose(() => unsubscribeCamera?.());
   // The card panel is retained; a camera frame re-queries it only after a card swap.
   let information: HTMLElement | null = null;
+  // The card switches between detail and overview layouts: a layout change, so it waits while the camera coasts and
+  // follows once the coast stops (docs/performance/motion-freezes-membership.md).
+  let coasting = false;
+  const motionChanged = (event: Event) => {
+    const next = event instanceof CustomEvent && (event.detail as { coasting?: unknown } | null)?.coasting === true;
+    if (next === coasting) return;
+    coasting = next;
+    if (!coasting) updateBodyCard();
+  };
+  drawer.ownerDocument.addEventListener('objectmotionchange', motionChanged, { capture: true });
+  lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
   function updateBodyCard(world = camera?.navigation?.capture()) {
+    if (coasting) return;
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
     const previous = information?.dataset.cardView;
     const view = navigationTransition?.cardView ?? bodyCardViewAtCamera(world, camera?.navigation?.frame,

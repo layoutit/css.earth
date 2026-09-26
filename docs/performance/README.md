@@ -12,4 +12,5 @@ name the recorder and trace identifiers instead.
 | [Point-frame publication](point-frame-publication.md) | Point-field frames during flights and galaxy round trips |
 | [Prepared orbit strokes](prepared-orbit-strokes.md) | Orbit stroke batches and their level-of-detail chords |
 | [Retained layout boundaries](retained-layout-boundaries.md) | Style containment that keeps invalidation local |
+| [Coasting freezes membership](motion-freezes-membership.md) | The inertia gate: what may change while the camera coasts |
 | [World-context delta publication](world-context-delta-publication.md) | Publishing only changed world-context bodies |

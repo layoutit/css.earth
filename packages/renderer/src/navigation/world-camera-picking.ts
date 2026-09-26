@@ -1,3 +1,4 @@
+import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import { screenPicking } from './screen-picking.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { setHoverCursor } from './cursor-state.js';
@@ -55,9 +56,12 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   const frameClock = opacityClockFor(windowTarget);
   let hoverPoint: PointerEvent | null = null, hoverFrame: number | null = null;
   let hoverInteractive = false;
+  // The inertia gate (motion-freezes-membership.md): while the camera coasts under a still pointer, the hovered body
+  // holds; no pick (and no surface hit test) runs until the coast stops, then one does.
+  const motion = cameraMotionSignalFor(inputSurface);
   const scheduleHover = (interactive = false) => {
     hoverInteractive ||= interactive;
-    if (!hoverPoint || hoverFrame !== null) return;
+    if (!hoverPoint || hoverFrame !== null || motion.coasting) return;
     hoverFrame = frameClock.request(() => {
       hoverFrame = null;
       const interactive = hoverInteractive; hoverInteractive = false;
@@ -65,6 +69,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     });
   };
   const unsubscribe = registry.subscribe(scheduleHover);
+  const unsubscribeMotion = motion.subscribe(state => { if (!state.coasting) scheduleHover(); });
   const clearHover = (event?: Event) => {
     hoverPoint = null;
     if (hoverFrame !== null) frameClock.cancel(hoverFrame);
@@ -163,7 +168,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   inputSurface.addEventListener('pointerleave', clearHover);
   return () => {
     clearHover();
-    unsubscribe();
+    unsubscribe(); unsubscribeMotion();
     windowTarget.removeEventListener('pointerdown', down, { capture: true });
     windowTarget.removeEventListener('pointermove', move, { capture: true });
     windowTarget.removeEventListener('pointerup', up, { capture: true });

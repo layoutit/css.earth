@@ -43,9 +43,13 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       const weights = imageLayerAxisWeights(local.orientationXyzw, payload.bankViews);
       const [ox, oy] = publication.viewport.principalOffsetPixels;
       for (const bank of banks) {
-        bank.camera.style.perspective = `${transform.focalPixels}px`;
-        bank.camera.style.perspectiveOrigin = `calc(50% + ${ox}px) calc(50% + ${oy}px)`;
-        bank.scene.style.transform = cssTransform;
+        // Every write is on change: this publishes every camera frame (motion-freezes-membership.md).
+        const set = (element: HTMLElement, property: 'perspective' | 'perspectiveOrigin' | 'transform' | 'opacity' | 'visibility' | 'display', value: string) => {
+          if (element.style[property] !== value) element.style[property] = value;
+        };
+        set(bank.camera, 'perspective', `${transform.focalPixels}px`);
+        set(bank.camera, 'perspectiveOrigin', `calc(50% + ${ox}px) calc(50% + ${oy}px)`);
+        set(bank.scene, 'transform', cssTransform);
         const weight = weights[bank.axis];
         if (weight > 0 && !bank.loaded) {
           for (const { element, path } of bank.textures) {
@@ -54,10 +58,10 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           }
           bank.loaded = true;
         }
-        bank.projection.style.opacity = String(weight);
-        bank.projection.style.visibility = weight > 0 ? 'visible' : 'hidden';
+        set(bank.projection, 'opacity', String(weight));
+        set(bank.projection, 'visibility', weight > 0 ? 'visible' : 'hidden');
         // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
-        bank.projection.style.display = weight > 0 ? '' : 'none';
+        set(bank.projection, 'display', weight > 0 ? '' : 'none');
       }
     },
     destroy() { if (destroyed) return; destroyed = true; root.remove(); },

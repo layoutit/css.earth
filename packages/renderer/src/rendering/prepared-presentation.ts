@@ -9,6 +9,7 @@ import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
+import { createSettlePacer } from './settle-pacer.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
@@ -284,6 +285,24 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
     ? [[binding as PreparedViewBinding, createLeafBoxBlocks({ ...binding, groups: binding.groups },
       name => styleValue(nodes[binding.groups![name]![0]!]!, binding.property) || styleValue(target(binding.target), binding.property),
       (name, value) => { for (const leaf of binding.groups![name]!) { writeStyle(nodes[leaf]!, binding.property, value); styleWrites++; } })] as const] : []));
+  // A body-wide step property (the surface seam outset) sits on an ancestor of every leaf, so a change restyles the whole
+  // mesh: like the leaf-box steps it switches only once the camera has stopped (motion-freezes-membership.md). The first
+  // value is written at once.
+  const bodySteps = new Map(definition.viewBindings.flatMap(binding => binding.kind === "silhouette-step-property" && !binding.groups
+    ? [[binding as PreparedViewBinding, (() => {
+      let wanted: string | null = null;
+      const pacer = createSettlePacer((_budget, moving) => {
+        const element = target(binding.target);
+        if (moving || wanted === null || styleValue(element, binding.property) === wanted) return 0;
+        writeStyle(element, binding.property, wanted); styleWrites++; return 1;
+      }, { frame: globalThis.requestAnimationFrame?.bind(globalThis) ?? null });
+      return (value: string) => {
+        pacer.published();
+        const first = wanted === null && !styleValue(target(binding.target), binding.property);
+        wanted = value;
+        pacer.request(first);
+      };
+    })()] as const] : []));
   const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
     ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
   return {
@@ -293,11 +312,12 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);
         if (binding.kind === "view-attribute") {
-          let value = binding.source === "scene-pitch" ? preparedScenePitch(view.controlPitch, definition.camera)
-            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom
-              : binding.source === "level-of-detail-stage" ? levelOfDetail.stage : view.sceneMatrix;
-          if (binding.precision !== null) { const scale = 10 ** binding.precision; value = Math.round(Number(value) * scale) / scale; }
-          if (readAttribute(element, binding.property) !== String(value)) writeAttribute(element, binding.property, String(value));
+          // Only the level of detail is read (by stylesheets). The camera-pose attributes older packages still carry
+          // (scene pitch, yaw, zoom, matrix) have no reader and would change every frame: they are not published
+          // (docs/performance/motion-freezes-membership.md). The generator no longer emits them.
+          if (binding.source !== "level-of-detail-stage") continue;
+          const value = levelOfDetail.stage;
+          if (readAttribute(element, binding.property) !== value) writeAttribute(element, binding.property, value);
         } else if (binding.kind === "view-property") {
           const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
           if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
@@ -312,12 +332,14 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           // mathematical silhouette the prepared frames are registered to,
           // never smaller than the prepared floor (the marker it lights).
           const silhouette = view.body.silhouette;
-          element.style.visibility = view.body.visible === false ? "hidden" : "";
+          // Written only on change: this binding publishes every frame (motion-freezes-membership.md).
+          const visibility = view.body.visible === false ? "hidden" : "";
+          if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
           if (silhouette) {
             // This transform already owns physical framing. The legacy shell's
             // individual scale would otherwise apply the same fit a second time.
-            element.style.scale = "1";
-            element.style.transformOrigin = "50% 50%";
+            if (element.style.scale !== "1") element.style.scale = "1";
+            if (element.style.transformOrigin !== "50% 50%") element.style.transformOrigin = "50% 50%";
             const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
             const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
             const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
@@ -340,8 +362,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           const level = selectPreparedSilhouetteStep(binding, levelOfDetail.silhouetteDiameter, silhouetteSteps.get(binding));
           if (level !== undefined) {
             silhouetteSteps.set(binding, level);
-            const value = binding.levels[level].value;
-            if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+            bodySteps.get(binding)!(binding.levels[level].value);
           }
         } else {
           const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);

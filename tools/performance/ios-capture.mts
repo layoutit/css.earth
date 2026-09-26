@@ -36,7 +36,7 @@
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
 import { execFile, spawn, type ChildProcess } from 'node:child_process';
-import { mkdir, readFile, writeFile, readdir, realpath } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, readdir, realpath, rm } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
@@ -672,12 +672,12 @@ async function pageProcess(): Promise<number> {
   return candidates[0].pid;
 }
 
-/** Stops a recording; xctrace has hung finalising, so after 30 s it is killed and the capture reports no native trace. */
+/** Stops a recording; xctrace has hung finalising, so after 120 s it is killed and the capture reports no native trace. */
 async function stopRecording(xctrace: ChildProcess): Promise<boolean> {
   if (xctrace.exitCode !== null) return true;
   const exited = new Promise<boolean>(done => xctrace.once('exit', () => done(true)));
   xctrace.kill('SIGINT');
-  const stopped = await Promise.race([exited, wait(30_000).then(() => false)]);
+  const stopped = await Promise.race([exited, wait(120_000).then(() => false)]);
   if (!stopped) { xctrace.kill('SIGKILL'); await exited; }
   return stopped;
 }
@@ -771,11 +771,12 @@ const RECORDING_BADGE = (seconds: number) => `(() => {
  * (drag and coast announce objectrotationchange, the motion signal objectmotionchange; production builds before that
  * signal get a wheel counted as moving for 700 ms). The invariant is judged on the moving writes. Aggregated in the page
  * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
-const STYLE_WRITES_LOGGER = `(() => {
+export const STYLE_WRITES_LOGGER = `(() => {
   const t0 = performance.now(), entries = new Map(), perFrame = [];
-  let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, wheelUntil = 0;
+  let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, coasting = false, wheelUntil = 0;
   const moving = () => announced || performance.now() < wheelUntil;
-  const onMotion = event => { announced = Boolean(event.detail && event.detail.active); };
+  // objectmotionchange also says whether the camera coasts on inertia, the only motion the contract gates.
+  const onMotion = event => { announced = Boolean(event.detail && event.detail.active); if (event.type === 'objectmotionchange') coasting = Boolean(event.detail && event.detail.coasting); };
   const onWheel = () => { wheelUntil = performance.now() + 700; };
   for (const type of ['objectrotationchange', 'objectmotionchange']) document.addEventListener(type, onMotion, true);
   addEventListener('wheel', onWheel, { capture: true, passive: true });
@@ -788,8 +789,8 @@ const STYLE_WRITES_LOGGER = `(() => {
   };
   const parse = text => { const map = new Map(); for (const part of (text || '').split(';')) { const i = part.indexOf(':'); if (i > 0) map.set(part.slice(0, i).trim(), part.slice(i + 1).trim()); } return map; };
   const bump = (key, value, at, inMotion) => {
-    const entry = entries.get(key) || { key, count: 0, moving: 0, first: at, last: at, value: '' };
-    entry.count++; if (inMotion) entry.moving++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry);
+    const entry = entries.get(key) || { key, count: 0, moving: 0, coasting: 0, first: at, last: at, value: '' };
+    entry.count++; if (inMotion) entry.moving++; if (coasting) entry.coasting++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry);
     frameWrites++; if (inMotion) frameMoving++;
   };
   const ours = node => node.nodeType === 1 ? Boolean(node.closest('[data-capture-overlay]')) : Boolean(node.parentElement && node.parentElement.closest('[data-capture-overlay]'));
@@ -1014,7 +1015,7 @@ export function options(args: readonly string[]) {
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
   return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), screens: args.includes('--screens'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
@@ -1147,7 +1148,7 @@ export function traceEvents(records: readonly unknown[], stopwatchEpochMs: numbe
       if (typeof sample.cpuUsage === 'number') events.push({ ph: 'C', name: 'Page process', pid: 2, tid: 1, ts, args: { 'CPU %': Math.round(sample.cpuUsage * 10) / 10 } });
     }
   }
-  return { traceEvents: events, displayTimeUnit: 'ms', metadata: { source: 'cssearth-ios-capture', ...metadata } };
+  return { traceEvents: events, displayTimeUnit: 'ms', metadata: { source: 'cssearth-ios-capture', stopwatchEpochMs, ...metadata } };
 }
 
 /** Mean, lowest and highest of every numeric field across samples: the graphics sampler's fields are the device's own. */
@@ -1168,6 +1169,52 @@ async function deviceWebContentPid(binary: string, udid: string) {
   const snapshot = await run(binary, ['developer', 'dvt', 'sysmon', 'process', 'single', '-f', 'name=com.apple.WebKit.WebContent', '-k', 'pid', '-k', 'physFootprint', '-k', 'cpuUsage'],
     { env: deviceEnv(udid) }).then(result => jsonValues(result.stdout).flatMap(value => Array.isArray(value) ? value : [value]), () => []);
   return devicePageProcess(snapshot);
+}
+
+// The grabber runs pymobiledevice3's own Python API in its own interpreter: the command line has no streaming screenshot
+// and reopens the developer tunnel for each grab (about 1 s a grab), where one open channel answers about 4.6 a second.
+const SCREEN_GRABBER = `
+import asyncio, os, sys, time
+from pymobiledevice3.remote.native_tunnel import NativeRemotedTunnel
+from pymobiledevice3.services.dvt.instruments.dvt_provider import DvtProvider
+from pymobiledevice3.services.dvt.instruments.screenshot import Screenshot
+async def main(out, udid):
+    async with NativeRemotedTunnel(serial=udid) as rsd, DvtProvider(rsd) as dvt, Screenshot(dvt) as shot:
+        print('grabbing', flush=True)
+        while True:
+            start = time.time(); data = await shot.get_screenshot(); at = round((start + time.time()) * 500)
+            open(f'{out}/{at}.tmp', 'wb').write(data); os.replace(f'{out}/{at}.tmp', f'{out}/{at}.png')
+try: asyncio.run(main(sys.argv[1], sys.argv[2]))
+except KeyboardInterrupt: pass
+`;
+
+/** --screens: the iPad's own screen during the recording, as screens/<epoch ms>.jpg (the middle of each grab's request),
+ * for the DevTools filmstrip. Grabbing costs the page frames (Core Animation 58 → 44 fps on the replayed Earth flick,
+ * 2026-09-26), so timing takes leave it off. */
+async function deviceScreens(binary: string, udid: string, out: string) {
+  const dir = resolve(out, 'screens');
+  await mkdir(dir, { recursive: true });
+  const executable = binary.includes('/') ? binary : (await run('which', [binary])).stdout.trim();
+  const python = (await readFile(await realpath(executable), 'utf8')).split('\n', 1)[0]!.replace(/^#!\s*/u, '').trim();
+  const errors: string[] = [];
+  const child = spawn(python, ['-c', SCREEN_GRABBER, dir, udid], { env: deviceEnv(udid), stdio: ['ignore', 'pipe', 'pipe'] });
+  child.stderr?.on('data', chunk => errors.push(String(chunk)));
+  const ready = new Promise<boolean>(done => { child.stdout?.on('data', () => done(true)); child.once('exit', () => done(false)); });
+  if (!await Promise.race([ready, wait(15_000).then(() => false)])) console.error(`No screen grabs (${errors.join('').trim().split('\n').at(-1) ?? 'no answer in 15 s'}).`);
+  return {
+    async stop() {
+      const exited = new Promise<void>(done => child.exitCode !== null ? done() : child.once('exit', () => done()));
+      child.kill('SIGINT');
+      await Promise.race([exited, wait(5000).then(() => { child.kill('SIGKILL'); })]);
+      const shots = (await readdir(dir)).filter(file => file.endsWith('.png'));
+      // A full-resolution PNG is about 2 MB; the filmstrip needs a glance, so 1280 px JPEGs at quality 75.
+      for (const file of shots) {
+        await sharp(resolve(dir, file)).resize({ width: 1280, height: 1280, fit: 'inside' }).jpeg({ quality: 75 }).toFile(resolve(dir, file.replace(/\.png$/u, '.jpg')));
+        await rm(resolve(dir, file));
+      }
+      return shots.length;
+    },
+  };
 }
 
 async function deviceMonitors(binary: string, udid: string, out: string, pid: number | null) {
@@ -1299,6 +1346,7 @@ export async function captureIosMoment(args: readonly string[]) {
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
   const monitors = target.kind === 'device' ? await deviceMonitors(option.pymobiledevice3, udid, out, devicePid) : null;
+  const screens = target.kind === 'device' && option.screens ? await deviceScreens(option.pymobiledevice3, udid, out) : null;
   // --no-js-samples leaves JavaScriptCore's sampling profiler off: it costs the page frames, so timing questions run without it.
   if (option.jsSamples) {
     await session.send('ScriptProfiler.startTracking', { includeSamples: true });
@@ -1309,6 +1357,8 @@ export async function captureIosMoment(args: readonly string[]) {
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
   const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
   // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
+  // --eval runs one expression in the page before recording: an experiment's switch (hide a layer, set a flag).
+  if (option.eval) await evaluate(option.eval);
   await evaluate(INPUT_LOGGER);
   const styleWritesStarted = Date.now();
   if (option.styleWrites) await evaluate(STYLE_WRITES_LOGGER);
@@ -1334,6 +1384,7 @@ export async function captureIosMoment(args: readonly string[]) {
   }
   const durationMs = Date.now() - started;
   const { samples: deviceSamples = null, ...deviceSummary } = (monitors ? await monitors.stop() : null) ?? {};
+  if (screens) console.error(`${await screens.stop()} screen grabs.`);
   // The capture goes on without a sampler, but says so here rather than only in the report.
   for (const [sampler, result] of Object.entries(deviceSummary)) if (isRecord(result) && typeof result.error === 'string')
     console.error(`No device ${sampler} samples (${result.error.trim().split('\n').at(-1)}). ${DEVELOPER_SERVICES}`);
@@ -1349,7 +1400,7 @@ export async function captureIosMoment(args: readonly string[]) {
   const recorded = xctrace ? await stopRecording(xctrace) : false;
   // The export runs while the page side is read.
   const nativeExport: Promise<Awaited<ReturnType<typeof exportTimeProfile>> | { error: string }> = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
-    : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 30 s.' });
+    : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 120 s.' });
   await wait(1500);
   const moment = events.slice(recordingStart);
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));

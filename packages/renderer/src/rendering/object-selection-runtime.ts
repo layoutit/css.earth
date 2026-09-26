@@ -1,3 +1,4 @@
+import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
 import type { PreparedPresentationDefinition, PreparedPresentationPlan, PreparedView, mountPreparedPresentation } from "./prepared-presentation.js";
@@ -19,6 +20,8 @@ export interface ObjectSelectionRuntimeOptions {
   onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan, intent: SelectionIntent) => void;
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
   deferTextureRefinement?: boolean;
+  /** The input surface's camera-motion signal: view-driven levels commit only while it is still. */
+  motion?: CameraMotionSignal | null;
   initialLens?: string;
   initialSettings?: unknown;
 }
@@ -34,7 +37,17 @@ const sameDemand = (a: PreparedPresentationPlan, b: PreparedPresentationPlan) =>
 export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime, initialLens, initialSettings,
   onChange = () => {}, prepareSelection, onCommit = () => {}, onFatalError, onMaterialError = () => {}, deferTextureRefinement = false,
+  motion = null,
 }: ObjectSelectionRuntimeOptions) {
+  // Blur while moving (motion-freezes-membership.md): a texture level the view asks for may decode during camera motion,
+  // but it commits only once the camera is still, re-resolved for the view it stopped on, so a zoom skips the levels it
+  // passed. Lighting rows are not levels: a view that only changes them commits live.
+  const texturesChange = (plan: PreparedPresentationPlan) => plan.textureLevel !== committedPlan?.textureLevel ||
+    JSON.stringify(plan.textureResources ?? null) !== JSON.stringify(committedPlan?.textureResources ?? null);
+  const untilStill = () => new Promise<void>(done => {
+    if (!motion?.active) { done(); return; }
+    const unsubscribe = motion.subscribe(state => { if (!state.active) { unsubscribe(); done(); } });
+  });
   const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
   let desired = initialSelection, committed: ObjectSelection | null = null, committedPlan: PreparedPresentationPlan | null = null, view: PreparedView | null = null;
   let committedBy: SelectionIntent | null = null;
@@ -141,6 +154,11 @@ export function createObjectSelectionRuntime({
           error = failure instanceof Error ? failure.message : String(failure);
           try { notify(); } catch (publicationFailure) { onFatalError(publicationFailure); throw publicationFailure; }
           throw failure;
+        }
+        if (kind === 'frame' && motion?.active && texturesChange(resolve(selection))) {
+          const still = await Promise.race([lifetime.wait(untilStill()), cancelled]);
+          if (!current() || ('cancelled' in still && still.cancelled)) { discard(request); return false; }
+          continue;
         }
         try {
           // Re-resolve after decode. No asynchronous gap separates this lookup

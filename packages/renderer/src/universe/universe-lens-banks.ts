@@ -42,7 +42,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
 }) {
-  let billboardCount = 0, useClock = 0;
+  let billboardCount = 0, useClock = 0, coasting = false;
   const banks: LensBank[] = declarations.map((declared, index) => ({
     id: declared.id, facts: facts[index]!, billboardIndex: facts[index]!.billboard ? billboardCount++ : -1,
     mounted: null, loading: null, generation: 0, explicitEnabled: undefined,
@@ -212,6 +212,9 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
         bank.mounted?.setStarsVisible(visible);
       }
     },
+    /** While the camera coasts no bank mounts, shows or hides: a shown bank fades, the rest wait for the coast to stop
+     * (motion-freezes-membership.md). */
+    setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string) {
       if (lifetime.disposed) return;
       let residencyChanged = false;
@@ -229,7 +232,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
         if (!bank.mounted) {
           const visible = opacity > 0 && projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
           if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
-          if (visible) void ensureLoaded(bank).catch(() => {});
+          if (visible && !coasting) void ensureLoaded(bank).catch(() => {});
           continue;
         }
         const visible = opacity > 0;
@@ -238,10 +241,14 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
           // Both retained roots carry the bank's visibility, including foreground clouds.
           for (const target of [bank.mounted.root, bank.mounted.frontRoot]) {
             if (!target) continue;
-            target.style.opacity = String(opacity);
-            target.style.display = opacity > 0 ? 'block' : 'none';
+            // Coasting: a shown root only fades; a hidden one stays hidden until the coast stops.
+            if (coasting) { if (target.style.display !== 'none' && target.style.opacity !== String(opacity)) target.style.opacity = String(opacity); continue; }
+            if (target.style.opacity !== String(opacity)) target.style.opacity = String(opacity);
+            const display = opacity > 0 ? 'block' : 'none';
+            if (target.style.display !== display) target.style.display = display;
           }
-          bank.publishedOpacity = opacity;
+          // A coast leaves the published state stale on purpose: the first publication after it applies it.
+          if (!coasting) bank.publishedOpacity = opacity;
         }
         bank.mounted.publish({ world, viewport }, visible);
       }

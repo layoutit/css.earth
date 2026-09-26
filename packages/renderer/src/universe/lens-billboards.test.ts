@@ -40,7 +40,11 @@ test('a billboard samples its atlas cell only once shown, and hides behind the c
   const world = (orientationXyzw: readonly [number, number, number, number]) =>
     ({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10] as const, orientationXyzw } });
   layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
-  expect(leaf.style).toMatchObject({ display: 'block', opacity: '0.5', width: '20px', backgroundImage: 'url("/atlas.webp")' });
+  // A fixed 128 px box (two texels per CSS pixel of a 256 px cell) scaled to the 20 px it projects to: the camera
+  // changes only its transform (motion-freezes-membership.md).
+  expect(leaf.style).toMatchObject({ display: 'block', opacity: '0.5', backgroundImage: 'url("/atlas.webp")' });
+  expect(leaf.style.cssText).toContain('width:128px;height:128px');
+  expect(leaf.style.transform).toContain(`scale(${20 / 128})`);
   // Seen off its prepared axis the one view still draws, turned toward the camera.
   layer.publish(0, 0.5, { ...world([0, 0, 0, 1]), pose: { positionM: [3, 0, 10] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport);
   expect(leaf.style.display).toBe('block');

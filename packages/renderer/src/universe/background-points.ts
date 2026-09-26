@@ -19,7 +19,9 @@ export function mountBackgroundPoints(host: HTMLElement, before: Element, manife
     if(!manifestUrl||disposed)return;
     latest=publication;
     const opacity = backgroundPointsOpacity(distanceM);
-    root.style.opacity=String(opacity);root.style.display=opacity > 0 ? 'block' : 'none';
+    const display = opacity > 0 ? 'block' : 'none';
+    if (root.style.opacity !== String(opacity)) root.style.opacity = String(opacity);
+    if (root.style.display !== display) root.style.display = display;
     if (opacity === 0) return;
     if(runtime){runtime.publish(publication);return;}
     if(pending)return;pending=true;

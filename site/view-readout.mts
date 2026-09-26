@@ -37,7 +37,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
   const configs = new Map(maps.map(map => [map, parseSurfaceMapConfig(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
-  let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, flying = false;
+  let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, flying = false, moving = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
   let overviewScope: OverviewScope = 'system';
   let preparedFocus: PreparedFocus | null = null;
@@ -95,7 +95,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   }
   function schedule(immediate = false) {
     // A fly-to holds the readout still; arrival refreshes it once.
-    if (events.signal.aborted || documentTarget.hidden || flying) return;
+    if (events.signal.aborted || documentTarget.hidden || flying || moving) return;
     if (immediate && timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
     if (frame !== null || timer !== null) return;
     const wait = immediate ? 0 : 100 - (windowTarget.performance.now() - lastRender);
@@ -105,6 +105,14 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     else frame = windowTarget.requestAnimationFrame(render);
   }
   const refresh = () => schedule(true);
+  // The footer holds still while the camera moves (drag, zoom, coast) and reads once it stops: its text and ruler would
+  // otherwise restyle and lay out every frame (docs/performance/motion-freezes-membership.md). It keeps the last reading.
+  documentTarget.addEventListener('objectmotionchange', event => {
+    const active = event instanceof CustomEvent && (event.detail as { active?: unknown } | null)?.active === true;
+    if (active === moving) return;
+    moving = active;
+    if (moving) cancelPending(); else refresh();
+  }, { capture: true, signal: events.signal });
   windowTarget.addEventListener('resize', refresh, { signal: events.signal });
   documentTarget.addEventListener('visibilitychange', () => {
     if (documentTarget.hidden) cancelPending();

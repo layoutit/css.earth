@@ -86,14 +86,27 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
   host.ownerDocument.fonts?.addEventListener('loadingdone', invalidate);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, clock, { hideAtZero: true });
   const last = labels.map(() => ({ shown: false, transform: '' }));
-  let selected = focus, previous: ReadonlySet<number> = new Set();
+  let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false;
   return {
     selectObject(id: string) { selected = bodies.find(body => body.id === id) ?? focus; },
+    /** While the camera coasts the shown captions only move: none is admitted, retired or measured until it stops
+     * (docs/performance/motion-freezes-membership.md). */
+    setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, budget: LabelBudget) {
+      if (coasting && !measured) return;
       if (!measured) { widths = labels.map(label => label.getBoundingClientRect().width); measured = true; }
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       const points = new Map<number, { x: number; y: number }>();
       const placements = compatible ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points) : [];
+      if (coasting) {
+        for (const [index, label] of labels.entries()) {
+          const point = last[index].shown ? points.get(index) : undefined;
+          if (!point) continue;
+          const transform = `translate(${point.x}px,${point.y}px)`;
+          if (last[index].transform !== transform) { label.style.transform = transform; last[index].transform = transform; }
+        }
+        return;
+      }
       const admitted = new Map(placements.map(point => [point.index, point]));
       previous = new Set(admitted.keys());
       for (const [index, label] of labels.entries()) {
