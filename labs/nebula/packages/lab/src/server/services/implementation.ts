@@ -2,14 +2,36 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, isAbsolute } from 'node:path';
-import { build } from 'esbuild';
+import { build, type Metafile } from 'esbuild';
+import ts from 'typescript';
 
 export async function implementationPins(root: string, entries: readonly string[]) {
+  const { manifests, metafile } = await identityBuild(root, entries);
+  const paths = [...new Set([...entries, ...manifests, ...(metafile ? await reachedOwners(root, metafile) : [])])].sort();
+  return Promise.all(paths.map(async path => ({ path: repositoryPath(root, path), sha256: createHash('sha256').update(await readFile(resolve(root, path))).digest('hex') })));
+}
+
+/** Every file the identity build reads: the owners and the modules resolved on the way to them (a barrel's other modules).
+ * A copy of these files computes the same identity. */
+export async function implementationClosure(root: string, entries: readonly string[]) {
+  const { manifests, metafile } = await identityBuild(root, entries);
+  return [...new Set([...entries, ...manifests, ...Object.keys(metafile?.inputs ?? {})].map(path => repositoryPath(root, path)))].sort();
+}
+
+function repositoryPath(root: string, path: string) {
+  const name = relative(root, resolve(root, path)).replaceAll('\\', '/');
+  if (isAbsolute(name) || name === '..' || name.startsWith('../')) throw new Error('Implementation owner leaves repository.');
+  return name;
+}
+
+async function identityBuild(root: string, entries: readonly string[]) {
   const manifests = new Set<string>();
   const sourceEntries = entries.filter(path => /\.[cm]?tsx?$/.test(path));
   const result = sourceEntries.length ? await build({
     absWorkingDir: root, entryPoints: sourceEntries, outdir: '.local/nebula-lab/fingerprint-only',
-    bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
+    // Tree shaking (with the packages' `sideEffects` declarations) keeps the owners to the modules the entries reach,
+    // not every module behind a topic barrel. No minification: esbuild then inlines only TypeScript enums across modules.
+    bundle: true, write: false, metafile: true, platform: 'node', format: 'esm', treeShaking: true, minify: false,
     packages: 'external', logLevel: 'silent',
     plugins: [{ name: 'nebula-internal-owner-identity', setup(builder) {
       // The FITS reader was a relative module under tools/ before it became @cssearth/fits; its sources stay owners of
@@ -78,10 +100,44 @@ export async function implementationPins(root: string, entries: readonly string[
       });
     } }],
   }) : undefined;
-  const paths = [...new Set([...entries, ...manifests, ...Object.keys(result?.metafile?.inputs ?? {})])].sort();
-  return Promise.all(paths.map(async path => {
-    const full = resolve(root, path), name = relative(root, full).replaceAll('\\', '/');
-    if (isAbsolute(name) || name === '..' || name.startsWith('../')) throw new Error('Implementation owner leaves repository.');
-    return { path: name, sha256: createHash('sha256').update(await readFile(full)).digest('hex') };
-  }));
+  return { manifests, metafile: result?.metafile };
+}
+
+/** A loaded module is an owner when it puts code in the bundle, or when it can change the bundle without putting code in it:
+ * it forwards a binding (a barrel on the path from an import to its definition) or declares an enum esbuild inlines where it
+ * is read. The modules left are declarations the bundle never reads. esbuild drops a module only when it has no side effects,
+ * or when its package declares `sideEffects: false`; the identity trusts that declaration as every bundler does. Editing a
+ * module left out so that the bundle reads it makes it contribute code, and so an owner. */
+async function reachedOwners(root: string, metafile: Metafile) {
+  const contributing = new Set(Object.values(metafile.outputs).flatMap(output =>
+    Object.entries(output.inputs).filter(([, input]) => input.bytesInOutput > 0).map(([path]) => path)));
+  const owners: string[] = [];
+  for (const path of Object.keys(metafile.inputs))
+    if (contributing.has(path) || !/\.[cm]?[jt]sx?$/.test(path) || shapesBundleWithoutCode(path, await readFile(resolve(root, path), 'utf8')))
+      owners.push(path);
+  return owners;
+}
+
+function shapesBundleWithoutCode(path: string, text: string) {
+  const source = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, false, /x$/.test(path) ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
+  const imported = new Set<string>();
+  for (const statement of source.statements) {
+    if (!ts.isImportDeclaration(statement) || !statement.importClause || statement.importClause.isTypeOnly) continue;
+    const { name, namedBindings } = statement.importClause;
+    if (name) imported.add(name.text);
+    if (namedBindings && ts.isNamespaceImport(namedBindings)) imported.add(namedBindings.name.text);
+    else if (namedBindings) for (const element of namedBindings.elements) if (!element.isTypeOnly) imported.add(element.name.text);
+  }
+  let shapes = false;
+  const visit = (node: ts.Node): void => {
+    if (shapes) return;
+    if (ts.isEnumDeclaration(node) && !node.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.DeclareKeyword)) shapes = true;
+    else if (ts.isExportDeclaration(node) && !node.isTypeOnly) shapes = node.moduleSpecifier !== undefined || (node.exportClause !== undefined &&
+      ts.isNamedExports(node.exportClause) && node.exportClause.elements.some(element => !element.isTypeOnly && imported.has((element.propertyName ?? element.name).text)));
+    else if (ts.isExportAssignment(node)) shapes = ts.isIdentifier(node.expression) && imported.has(node.expression.text);
+    else if (ts.isImportEqualsDeclaration(node)) shapes = !node.isTypeOnly;
+    else ts.forEachChild(node, visit);
+  };
+  visit(source);
+  return shapes;
 }

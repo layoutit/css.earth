@@ -1,4 +1,4 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
+import { implementationClosure } from '@cssearth/nebula-lab/server/implementation';
 import assert from 'node:assert/strict';
 import test, { type TestContext } from 'node:test';
 import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
@@ -35,12 +35,12 @@ async function fixture(t: TestContext) {
     await save(path, {});
   for (const path of [compiler.depthRecipe!, 'labs/nebula/models/m45/physical-evidence.json']) await put(path, await readFile(path));
   // Copy the actual code closure, including package manifests, into the isolated fixture.
-  const owners = await implementationPins(process.cwd(), [
+  const closure = await implementationClosure(process.cwd(), [
     'labs/nebula/packages/lab/src/server/workflows/compiler/optical-composite-preparation.ts',
     'labs/nebula/packages/lab/src/cli/commands/prepare-observations.ts',
     'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py',
   ]);
-  for (const owner of owners) await put(owner.path, await readFile(owner.path));
+  for (const path of closure) await put(path, await readFile(path));
   const native = Buffer.alloc(32 * 32 * 3);
   for (let y = 0; y < 32; y++) for (let x = 0; x < 32; x++) {
     const at = (y * 32 + x) * 3; native[at] = 50 + x * 3; native[at + 1] = 60 + y * 3; native[at + 2] = 70 + x + y;

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { implementationPins } from './implementation.ts';
@@ -18,6 +18,44 @@ test('cache identity includes transitive numerical owners and leaves no build ou
     assert.notEqual(before[1]!.sha256, after[1]!.sha256);
     const { readdir } = await import('node:fs/promises');
     assert.deepEqual((await readdir(root)).sort(), ['entry.ts', 'numeric.ts']);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('cache identity pins the modules an entry reaches through a barrel, not the barrel\'s other modules', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'nebula-implementation-'));
+  const files = {
+    'entry.ts': "import { used, Kind } from './topic/index.ts';\nexport const value = used() + Kind.Leaf;\n",
+    'topic/index.ts': "export * from './used.ts';\nexport * from './unused.ts';\nexport * from './kind.ts';\nexport type { Shape } from './shape.ts';\n",
+    'topic/used.ts': 'export function used() { return 1; }\n',
+    'topic/unused.ts': 'export function unused() { return 2; }\n',
+    'topic/kind.ts': 'export enum Kind { Leaf = 1 }\n',
+    'topic/shape.ts': 'export interface Shape { size: number }\n',
+  };
+  try {
+    await mkdir(join(root, 'topic'));
+    for (const [path, text] of Object.entries(files)) await writeFile(join(root, path), text);
+    const before = await implementationPins(root, ['entry.ts']);
+    // The barrel forwards the imported names and the enum is inlined where it is read; neither puts code in the bundle.
+    assert.deepEqual(before.map(pin => pin.path), ['entry.ts', 'topic/index.ts', 'topic/kind.ts', 'topic/used.ts']);
+    await writeFile(join(root, 'topic/unused.ts'), 'export function unused() { return 3; }\n');
+    await writeFile(join(root, 'topic/shape.ts'), 'export interface Shape { size: string }\n');
+    assert.deepEqual(await implementationPins(root, ['entry.ts']), before);
+    await writeFile(join(root, 'topic/kind.ts'), 'export enum Kind { Leaf = 2 }\n');
+    assert.notDeepEqual(await implementationPins(root, ['entry.ts']), before);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('cache identity pins a barrel that renames what an import resolves to, and a module kept for its side effects', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'nebula-implementation-'));
+  try {
+    await writeFile(join(root, 'entry.ts'), "import { first } from './names.ts';\nimport './effect.ts';\nexport const value = first;\n");
+    await writeFile(join(root, 'names.ts'), "export { a as first, b as second } from './pair.ts';\n");
+    await writeFile(join(root, 'pair.ts'), "export const a = 'a'; export const b = 'b';\n");
+    await writeFile(join(root, 'effect.ts'), "Reflect.set(globalThis, 'nebulaProbe', 1);\nexport const unusedExport = 1;\n");
+    const before = await implementationPins(root, ['entry.ts']);
+    assert.deepEqual(before.map(pin => pin.path), ['effect.ts', 'entry.ts', 'names.ts', 'pair.ts']);
+    await writeFile(join(root, 'names.ts'), "export { b as first, a as second } from './pair.ts';\n");
+    assert.notDeepEqual(await implementationPins(root, ['entry.ts']), before);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -69,8 +107,9 @@ test('the object colour transfer and atlas mosaic a sky-band owner reaches are p
 });
 
 /** A compiler publication pins at most 500 inputs (readPublishedCompiler); the compiler entry's owners are most of them. 340 at
- * J slice 2 (it was 263 before the object raster entry). Fail here, well before a publish is refused, and split the entry the
- * compiler reaches or raise the publication limit on purpose. */
+ * J slice 2 (it was 263 before the object raster entry), 436 at J slice 5 while whole topic barrels were owners, 183 once owners
+ * followed tree shaking. Fail here, well before a publish is refused, and split the entry the compiler reaches or raise the
+ * publication limit on purpose. */
 const COMPILER_OWNER_BUDGET = 450;
 test('the compiler cache identity stays under its owner budget, well inside the publication limit', async () => {
   const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
