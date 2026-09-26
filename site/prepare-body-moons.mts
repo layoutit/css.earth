@@ -1,8 +1,8 @@
 import { SEARCH_OBJECTS } from './search-objects.mts';
-import { isSceneObject } from './prepared-focus-object.mts';
+import { isSceneObject } from '@cssearth/objects';
+import type { ObjectEntry } from './objects.mts';
 import preparedWorld from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import moonCatalogues from './source/moon-catalogues.json' with { type: 'json' };
-import type { ObjectEntry } from './object-schema.mts';
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@cssearth/objects/sources';
 import { labelEligible } from '@cssearth/renderer/labels/universe-label-policy.ts';
 

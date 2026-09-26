@@ -1,7 +1,7 @@
 import { parseHTML } from 'linkedom';
 import { requiredElement } from './browser-types.mts';
 import { isRecord } from '@cssearth/core';
-import { matchesObjectCategory } from './object-categories.mts';
+import { matchesObjectCategory } from '@cssearth/objects';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeaturePin } from './feature-search.mts';
 import { findResults } from './find.mts';

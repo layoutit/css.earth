@@ -37,7 +37,7 @@ export interface WorldContextPointSource {
   };
 }
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
- * (site/context-colour.mts). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
+ * (`contextColour` in @cssearth/objects). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
 /** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
  * dot, and the planner reads its path only when it is named. */
 type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true };

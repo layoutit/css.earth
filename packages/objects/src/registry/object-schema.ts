@@ -1,21 +1,33 @@
-import { parseObjectDiscovery, type ObjectDiscovery } from './object-discovery.mts';
+import { parseObjectDiscovery, type ObjectDiscovery } from './object-discovery.js';
 import { isArray, isRecord } from '@cssearth/core';
-import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { PositionM } from '@cssearth/engine';
-import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
-import type { SceneFactory } from './browser-types.mts';
-import { parseNavigationDistance } from './navigation/navigation-distance.mts';
-import type { NavigationDistance } from './navigation/navigation-distance.mts';
+import { parseNavigationDistance } from './navigation-distance.js';
+import type { NavigationDistance } from './navigation-distance.js';
+
+/** Metres in the reference frame. */
+export type ObjectPositionM = readonly [number, number, number];
+/** A prepared world frame: the numeric data a renderer's world camera places the body with. */
+export interface ObjectWorldFrame {
+  readonly referenceFrame: string;
+  readonly epochJdTt: number;
+  readonly originM: ObjectPositionM;
+  /** Row-major map from CSS presentation directions to reference directions: a reflection. */
+  readonly presentationToReference: readonly number[];
+  readonly metersPerUnit: number;
+  readonly bodyRadiusM: number;
+  readonly orbitUpReference?: ObjectPositionM;
+}
 
 export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole';
-export interface ObjectDefinitionInput {
+/** `Scene` is what the host's loader resolves to and `Signal` how the host cancels it (an `AbortSignal`); the registry only
+ * checks that a loader is bound. */
+export interface ObjectDefinitionInput<Scene = unknown, Signal = unknown> {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   /** What lists and cards call the body where its classification alone would mislead (a brown dwarf is placed as a star). */
   classificationLabel?: string;
   color: string; distance: NavigationDistance; route: string; description: string;
-  loadScene(signal?: AbortSignal): Promise<SceneFactory>; worldFrame: unknown; discovery?: ObjectDiscovery;
+  loadScene(signal?: Signal): Promise<Scene>; worldFrame: unknown; discovery?: ObjectDiscovery;
 }
-export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: PreparedWorldCameraFrame }>;
+export type ObjectEntry<Scene = unknown, Signal = unknown> = Readonly<Omit<ObjectDefinitionInput<Scene, Signal>, 'worldFrame' | 'discovery'> & { discovery: Readonly<ObjectDiscovery>; kind: 'scene'; worldFrame: ObjectWorldFrame }>;
 
 const OBJECT_INPUT_KEYS = new Set([
   "id",
@@ -38,7 +50,7 @@ export const OBJECT_CLASSIFICATIONS = Object.freeze([
   "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet", "black-hole",
 ]);
 
-export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
+export function defineObject<Scene, Signal>(input: ObjectDefinitionInput<Scene, Signal>): ObjectEntry<Scene, Signal> {
   if (!input || typeof input !== "object" || isArray(input)) {
     throw new TypeError("Object definition must be an object.");
   }
@@ -100,7 +112,7 @@ function nonEmpty(value: unknown): value is string {
 }
 // Registry capability data is numeric; importing a renderer entry here would
 // pull its native camera factory into every otherwise unrelated object route.
-function parseWorldFrame(value: unknown): PreparedWorldCameraFrame {
+function parseWorldFrame(value: unknown): ObjectWorldFrame {
   const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM', 'orbitUpReference'];
   const vector = (input: unknown, length: number): input is number[] => isArray(input) && input.length === length && Array.from(input).every(Number.isFinite);
   if (!isRecord(value) || Object.getPrototypeOf(value) !== Object.prototype || Object.keys(value).some(key => !fields.includes(key)) ||
@@ -124,7 +136,7 @@ function parseWorldFrame(value: unknown): PreparedWorldCameraFrame {
     throw new TypeError('Orbit up must be a unit vector.');
   }
   return Object.freeze({ referenceFrame: value.referenceFrame, epochJdTt: value.epochJdTt,
-    originM: Object.freeze([...value.originM]) as PositionM, presentationToReference: Object.freeze([...rotation]) as WorldRotation,
+    originM: Object.freeze([...value.originM]) as ObjectPositionM, presentationToReference: Object.freeze([...rotation]) as readonly number[],
     metersPerUnit: value.metersPerUnit, bodyRadiusM: value.bodyRadiusM,
-    ...(value.orbitUpReference === undefined ? {} : { orbitUpReference: Object.freeze([...(value.orbitUpReference as number[])]) as PositionM }) });
+    ...(value.orbitUpReference === undefined ? {} : { orbitUpReference: Object.freeze([...(value.orbitUpReference as number[])]) as ObjectPositionM }) });
 }

@@ -1,5 +1,4 @@
-import { normalizeDestinationQuery } from './destination-search.mts';
-import { matchesObjectClassification } from './object-categories.mts';
+import { matchesObjectClassification, normalizeDestinationQuery } from '@cssearth/objects';
 
 export const SEARCH_QUERY_LIMIT = 200;
 export interface ObjectSearchLabels {

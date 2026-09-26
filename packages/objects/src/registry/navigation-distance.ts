@@ -1,5 +1,5 @@
-import { parseDistanceSubject } from '../../packages/catalog/src/spatial-relations.ts';
-import type { DistanceSubject } from '../../packages/catalog/src/spatial-relations.ts';
+import { parseDistanceSubject } from '@cssearth/catalog';
+import type { DistanceSubject } from '@cssearth/catalog';
 import { isRecord } from '@cssearth/core';
 
 /** Display and sort values are prepared together; catalogue epochs are not measurement epochs. */

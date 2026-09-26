@@ -1,8 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import type { ObjectDiscovery } from '../../site/object-discovery.mts';
-import { parseArrivalView } from '../../site/arrival-view.mts';
+import { parseArrivalView, type ObjectDiscovery } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */

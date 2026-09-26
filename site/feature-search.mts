@@ -1,5 +1,5 @@
 import { isRecord } from '@cssearth/core';
-import { searchDestinations } from './destination-search.mts';
+import { searchDestinations } from '@cssearth/objects';
 
 /** A row of the prepared cross-body feature index: enough to list, navigate and select. */
 export interface IndexedFeature { readonly objectId: string; readonly id: string; readonly name: string; readonly type: string; readonly diameterKm: number; readonly searchNames: readonly string[]; readonly searchContext: string;

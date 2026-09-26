@@ -1,7 +1,7 @@
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ShellCamera } from '../browser-types.mts';
-import type { ObjectEntry } from '../object-schema.mts';
+import type { ObjectEntry } from '../objects.mts';
 import type { OverviewScope } from '../overview-context.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { isFocusDatasetUrl, withDataset } from '../dataset-url.mts';

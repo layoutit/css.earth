@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { orderFacts } from '../../site/fact-order.mts';
+import { orderFacts } from '@cssearth/objects';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
 import { refreshPreparedInventory } from './prepare-object-json.mts';

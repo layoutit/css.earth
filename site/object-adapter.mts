@@ -1,5 +1,5 @@
 import { parseObjectDescriptor, type ObjectDescriptor } from '@cssearth/objects';
-import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectEntry } from './objects.mts';
 
 export const objectAdapter = Object.freeze({
   /** A page's own prepared descriptor mounts without the registry, so the first body loads before it. */

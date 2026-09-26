@@ -2,7 +2,7 @@ export const SITE_ORIGIN = "https://css.earth";
 
 // Object routes remain canonical. The root Earth alias uses /earth/ too;
 // camera state, query parameters, and preview hosts never enter metadata.
-export function objectSeo(object: Pick<import("./object-schema.mts").ObjectEntry, "id" | "name" | "description" | "route">,
+export function objectSeo(object: Pick<import("./objects.mts").ObjectEntry, "id" | "name" | "description" | "route">,
   { socialImages, defaultSocialImageId = "earth" }: { socialImages?: ReadonlySet<string>; defaultSocialImageId?: string } = {}) {
   // Only some bodies have a scene capture. Advertising a missing file would
   // break every share preview, so the rest fall back to the default capture.
