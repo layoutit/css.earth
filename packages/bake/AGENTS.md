@@ -113,3 +113,6 @@ against the delivery's import closure); `src/nebula/objects.ts` names only owner
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+- `tsup` bundles the JavaScript; declarations come from one `tsc` pass (`tsconfig.build.json`, per file under
+  `dist/types/`), and each exported `dist/<entry>.d.ts` re-exports its topic's index. A new topic needs only its entry in
+  `tsup.config.ts` and `package.json`; don't raise Node's heap for the build.
