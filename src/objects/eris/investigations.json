@@ -230,6 +230,22 @@
           "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "No image resolves Eris's surface, so no disc-resolved photometric law exists. Eris keeps the shared sphere bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/objects/eris/README.md"
+      ],
+      "revisitWhen": "A resolved image of Eris with a fitted disk law.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

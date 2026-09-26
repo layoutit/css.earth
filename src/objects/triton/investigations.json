@@ -103,6 +103,24 @@
           "commit": "66948cc1fa9919990594906473bb671c5a4c5923"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Hillier et al. (1994) give disc-resolved Hapke fits per terrain unit (from the abstract: w 0.98 or higher, g -0.35 to -0.45 for most units, roughness near 14 degrees), and Hillier et al. (1991) fit the whole disc with a Hapke surface under a thin haze. Neither table could be opened, and neither is one global disk law. Triton keeps the shared sphere bank.",
+      "evidence": [
+        "https://doi.org/10.1006/icar.1994.1095",
+        "https://ntrs.nasa.gov/citations/19950043343",
+        "https://doi.org/10.1029/91JA01736"
+      ],
+      "revisitWhen": "A global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

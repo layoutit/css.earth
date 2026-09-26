@@ -167,6 +167,22 @@
           "commit": "36198077d3d3c9548154ca9ce2c85f044cc72cdf"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "No image resolves Makemake's surface, so no disc-resolved photometric law exists. Makemake keeps the shared sphere bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/objects/makemake/README.md"
+      ],
+      "revisitWhen": "A resolved image of Makemake with a fitted disk law.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }
