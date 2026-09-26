@@ -74,7 +74,11 @@ export function createWorldContextBodyInteraction(marker: HTMLElement, orbitRoot
       rect.right = left + labelSize.width; rect.bottom = top + labelSize.height;
       labelRect = rect;
       const target = labelTarget ??= { element: marker, rank: rank + 1, shape: { kind: 'rect', left: 0, top: 0, right: 0, bottom: 0 } };
-      target.rank = rank + 1; target.shape.left = rect.left; target.shape.top = rect.top; target.shape.right = rect.right; target.shape.bottom = rect.bottom;
+      const horizontalReach = Math.max(8, (44 - labelSize.width) / 2);
+      const verticalReach = Math.max(0, (44 - labelSize.height) / 2);
+      target.rank = rank + 1;
+      target.shape.left = rect.left - horizontalReach; target.shape.top = rect.top - verticalReach;
+      target.shape.right = rect.right + horizontalReach; target.shape.bottom = rect.bottom + verticalReach;
       labelPick = navigationSuppressed ? null : target;
     },
     updateNavigation() { navigation.update(markerPick || indicatorPick || labelPick ? body.id : null, body.name); },
