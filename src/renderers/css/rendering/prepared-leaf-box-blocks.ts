@@ -2,6 +2,7 @@ import { transformPreparedPoint } from '@cssearth/core';
 import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import { unseenTextureWrites, type PreparedTexturePlacements } from './prepared-texture-levels.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
+import { createSettlePacer, SETTLE_PACING } from './settle-pacer.js';
 
 // Leaf boxes by group (tools/prepared/leaf-box.mts). Every leaf reads the silhouette step `binding.property`; the prepared
 // groups say which leaves share one. A block of surface leaves (named in the placements) takes the step for the body's
@@ -12,19 +13,15 @@ import type { PhysicalProjection } from '../prepared-data/physical-projection.js
 // sharpness) after every sharpening has landed. A group's turn writes its latest need, so during a fast zoom a block skips
 // the steps it fell behind, and one that leaves the screen first is never sharpened.
 
-/** Leaves repainted per frame, to start with: a whole-body switch of the Moon's 448 leaves took 300 ms in the iOS
- * simulator, so 16 leaves are about 10 ms there. A leaf's repaint cost differs from body to body (Haumea's took four
- * times the Moon's), so the budget follows the frames it causes: after a frame longer than SLOW_FRAME_MS it halves and
- * the queue waits a frame; after a short one it grows back. A frame takes at least one group. */
-const START_LEAVES_PER_FRAME = 16, MAXIMUM_LEAVES_PER_FRAME = 64, SLOW_FRAME_MS = 25, QUICK_FRAME_MS = 20;
-/** A step change resizes its leaves, and a resized leaf is drawn again before the frame that shows it: WebKit repaints
- * it, and Chrome with a GPU rasters it again and decodes its image at the new size (on a Saturn wheel zoom, 131 ms of
- * decodes inside the gesture and a presented-frame p95 of 33 ms against 17 ms). A transform alone reuses what was drawn.
- * So nothing switches while the camera moves: SETTLE_MS after the last view change the queue applies the final steps,
- * and every step the gesture passed through is skipped. A stepped mouse wheel leaves gaps between notches (up to 666 ms
- * in a recorded Saturn zoom); at 150 ms groups switched between notches and Chrome presented 31 frames with missing
- * content while it rastered them mid-zoom. SETTLE_MS outlasts those gaps. */
-const SETTLE_MS = 750;
+/** Leaves repainted per frame: the settle pacer's units (settle-pacer.ts). A leaf's repaint cost differs from body to
+ * body (Haumea's took four times the Moon's), so the budget follows the frames it causes. A frame takes at least one
+ * group. A step change resizes its leaves, and a resized leaf is drawn again before the frame that shows it: WebKit
+ * repaints it, and Chrome with a GPU rasters it again and decodes its image at the new size (on a Saturn wheel zoom,
+ * 131 ms of decodes inside the gesture and a presented-frame p95 of 33 ms against 17 ms). A transform alone reuses what
+ * was drawn. So nothing switches while the camera moves: once it has stopped the pacer applies the final steps, and
+ * every step the gesture passed through is skipped. At 150 ms after the last view change groups switched between wheel
+ * notches and Chrome presented 31 frames with missing content while it rastered them mid-zoom. */
+const START_LEAVES_PER_FRAME = SETTLE_PACING.startUnits;
 /** Detail beyond what the view needs is kept, as a tile cache keeps tiles the view left (lru-cache's maxSize, MapLibre's
  * out-of-view cache, Cesium's cacheBytes), up to EXTRA_BYTES; past it the groups needed longest ago shrink back to their
  * need first. No browser reports its layer memory or budget to the page (navigator.deviceMemory and
@@ -79,7 +76,7 @@ export function leafBoxBlockNeeds(binding: LeafBoxBinding, view: LeafBoxBlocksVi
  * shrinks, the most over-stepped first, only once no sharpening waits; up to `budget` leaves. While the camera moves
  * nothing is written, except a group that shows no step yet. `shrinkable`, when given, limits the shrinks to those groups. */
 export function nextLeafBoxWrites(wanted: ReadonlyMap<string, Need>, written: ReadonlyMap<string, number>, leavesOf: (name: string) => number,
-  budget = START_LEAVES_PER_FRAME, moving = false, shrinkable: ReadonlySet<string> | null = null) {
+  budget: number = START_LEAVES_PER_FRAME, moving = false, shrinkable: ReadonlySet<string> | null = null) {
   const sharpen: [string, number, number][] = [], shrink: [string, number, number][] = [];
   for (const [name, { level, need }] of wanted) {
     const current = written.get(name);
@@ -126,14 +123,13 @@ export function leafBoxShrinkable(binding: LeafBoxBinding, wanted: ReadonlyMap<s
 
 /** Publishes one binding's group steps. `read(name)` is the step a group shows now; `write(name, value)` writes it on the
  * group's leaves. Without an animation frame (a native response, a test) every group is written at once; in a browser the
- * queue drains a few groups per frame, publications or not, and wakes SETTLE_MS after the camera stops. */
+ * queue drains a few groups per frame, publications or not, once the camera has stopped (settle-pacer.ts). */
 export function createLeafBoxBlocks(binding: LeafBoxBinding, read: (name: string) => string, write: (name: string, value: string) => void,
   frame: ((callback: (now?: number) => void) => unknown) | null = globalThis.requestAnimationFrame?.bind(globalThis) ?? null,
   { clock = () => globalThis.performance?.now() ?? Date.now(), later = (callback: () => void, ms: number) => { globalThis.setTimeout(callback, ms); },
     devicePixelRatio = globalThis.devicePixelRatio ?? 1 }:
     { clock?: () => number; later?: (callback: () => void, ms: number) => void; devicePixelRatio?: number } = {}) {
-  let needs = new Map<string, Need>(), scheduled = false, budget = START_LEAVES_PER_FRAME, wrote = false, last: number | null = null;
-  let published = -Infinity, waking = false;
+  let needs = new Map<string, Need>();
   // When each group last needed all of its current step.
   const lastNeeded = new Map<string, number>();
   const written = new Map<string, number>();
@@ -145,32 +141,20 @@ export function createLeafBoxBlocks(binding: LeafBoxBinding, read: (name: string
     for (const name of names) { const level = needs.get(name)!.level; write(name, binding.levels[level]!.value); written.set(name, level); }
     return names.length;
   };
-  const drain = (now?: number) => {
-    scheduled = false;
-    // The frame since the last write carried its repaint: pace the next writes by what it cost.
-    const spent = wrote && last !== null && now !== undefined ? now - last : null;
-    last = now ?? null;
-    if (spent !== null && spent > SLOW_FRAME_MS) { budget = Math.max(1, budget / 2); wrote = false; schedule(); return; }
-    if (spent !== null && spent < QUICK_FRAME_MS) budget = Math.min(MAXIMUM_LEAVES_PER_FRAME, budget * 1.5);
-    const time = clock(), still = time - published, moving = still < SETTLE_MS;
+  // While the camera moves only a group that shows no step yet is written; the rest wait for the pacer's settle.
+  const pacer = createSettlePacer((budget, moving) => {
     const shrinkable = moving ? null : leafBoxShrinkable(binding, needs, written, lastNeeded, devicePixelRatio);
-    const chosen = nextLeafBoxWrites(needs, written, name => binding.groups[name]?.length ?? 1, budget, moving, shrinkable);
-    wrote = apply(chosen) > 0;
-    if (wrote) schedule();
-    // The camera stopped less than SETTLE_MS ago: wake when it has been still long enough.
-    else if (moving && !waking) { waking = true; later(() => { waking = false; schedule(); }, SETTLE_MS - still); }
-  };
-  const schedule = () => { if (!scheduled && frame) { scheduled = true; frame(drain); } };
+    return apply(nextLeafBoxWrites(needs, written, name => binding.groups[name]?.length ?? 1, budget, moving, shrinkable));
+  }, { frame, clock, later });
   return {
     publish(view: LeafBoxBlocksView) {
       needs = leafBoxBlockNeeds(binding, view, needs);
-      published = clock();
+      pacer.published();
+      const published = clock();
       for (const [name, { level }] of needs) { const current = written.get(name); if (current === undefined || level >= current) lastNeeded.set(name, published); }
       if (!frame) { apply([...needs].filter(([name, need]) => written.get(name) !== need.level).map(([name]) => name)); return; }
-      // While the camera moves nothing switches: request no frame, only a wake for when it has stayed still. A group
-      // that shows no step yet is written on the next frame.
-      if ([...needs.keys()].some(name => !written.has(name))) schedule();
-      else if (!waking) { waking = true; later(() => { waking = false; schedule(); }, SETTLE_MS); }
+      // A group that shows no step yet is written on the next frame, moving or not.
+      pacer.request([...needs.keys()].some(name => !written.has(name)));
     },
     /** The published level of every group, for tests and probes. */
     written: () => new Map(written),

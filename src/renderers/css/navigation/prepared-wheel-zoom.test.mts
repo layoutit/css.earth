@@ -2,6 +2,7 @@ import { afterEach, expect, test, vi } from 'vitest';
 import * as runtimePolicy from '../../../../site/runtime-policy.mts';
 import { Surface } from '../../../platform/test/orbit-fixture.mts';
 import { createPreparedWheelZoomControls, pinchTargetDistance } from './prepared-wheel-zoom.js';
+import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { NavigationCamera, CameraDelta } from './types.ts';
 import type { WheelZoomInertia } from './runtime-policy.ts';
 
@@ -91,18 +92,24 @@ const notch = (index: number) => ({deltaY: 100, timeStamp: index * 60, deltaMode
 
 test('a released wheel gesture glides on in its own direction and settles', () => {
   const f = fixture(runtimePolicy.WHEEL_ZOOM_INERTIA);
+  const moving: { active: boolean; coasting: boolean }[] = [];
+  cameraMotionSignalFor(f.surface.asElement()).subscribe(state => moving.push(state));
   try {
     for (let i = 0; i < 4; i++) { f.surface.tick(i * 60); f.surface.dispatch('wheel', notch(i)); }
     expect(f.controls.stats().inputKind).toBe('wheel');
+    // The notches drive the camera; the released glide coasts on inertia (camera-motion-signal.ts).
+    expect(moving).toEqual([{ active: true, coasting: false }]);
     // The commanded interval is spent: the gesture releases into its glide.
     f.surface.tick(180 + 200);
     const released = f.camera.state.distance;
     expect(f.controls.stats().gliding).toBe(true);
+    expect(moving.at(-1)).toEqual({ active: true, coasting: true });
     f.surface.tick(180 + 216);
     expect(f.camera.state.distance).toBeGreaterThan(released);
     for (let elapsed = 232; elapsed < 2600; elapsed += 16) f.surface.tick(180 + elapsed);
     expect(f.controls.stats().gliding).toBe(false);
     expect(f.controls.stats().active).toBe(false);
+    expect(moving).toEqual([{ active: true, coasting: false }, { active: true, coasting: true }, { active: false, coasting: false }]);
     const settled = f.camera.state.distance;
     expect(settled).toBeGreaterThan(released);
     f.surface.tick(180 + 4000);

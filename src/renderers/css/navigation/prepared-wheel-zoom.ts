@@ -1,5 +1,6 @@
 import type { RuntimePolicy, WheelInputKind, WheelZoomInertia, WheelZoomPinch } from './runtime-policy.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
+import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { NavigationCamera, CameraDelta, ControlsUpdate } from './types.js';
 export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; rotate(delta: CameraDelta): void; speedMultiplier?: number; dolly: { stepPerDelta: number; minimumDistance?: () => number }; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
@@ -108,6 +109,17 @@ export function createPreparedWheelZoomControls({
     | { readonly kind: 'glide'; frame: number | null; rate: number; readonly releasedRate: number; previous: number };
   const IDLE: Motion = Object.freeze({ kind: 'idle' });
   let motion: Motion = IDLE;
+  // A dolly drives the camera, its glide coasts on inertia (camera-motion-signal.ts): every change of `motion` goes
+  // through here so the signal sees each start and end.
+  const motionSignal = cameraMotionSignalFor(inputSurface);
+  const sourceOf = (value: Motion) => value.kind === 'dolly' ? 'zoom' as const : value.kind === 'glide' ? 'glide' as const : null;
+  const setMotion = (next: Motion) => {
+    const from = sourceOf(motion), to = sourceOf(next);
+    motion = next;
+    if (from === to) return;
+    if (to) motionSignal.begin(to);
+    if (from) motionSignal.end(from);
+  };
   // The gesture behind the motion: its direction and the rate the camera actually travelled at. Seeding the glide
   // from the camera rather than from the commanded target keeps the release continuous: a short gesture commands
   // far more than it has run. Both outlive a dolly that ends without a glide (trackpad input does not glide), so a
@@ -117,7 +129,7 @@ export function createPreparedWheelZoomControls({
 
   const cancelMotion = () => {
     if (motion.kind !== 'idle' && motion.frame !== null) cancelFrame(motion.frame);
-    motion = IDLE;
+    setMotion(IDLE);
   };
   const stop = () => {
     cancelMotion();
@@ -136,7 +148,7 @@ export function createPreparedWheelZoomControls({
   const glide = (timestamp: number) => {
     const current = motion;
     if (current.kind !== 'glide') return;
-    if (glidePolicy === null) { motion = IDLE; return; }
+    if (glidePolicy === null) { setMotion(IDLE); return; }
     const step = Math.max(0, timestamp - current.previous);
     current.previous = timestamp;
     current.rate *= Math.max(0, 1 - step / (glidePolicy.dampingSeconds * 1000));
@@ -157,7 +169,7 @@ export function createPreparedWheelZoomControls({
     if (Math.abs(current.rate) > stopRate) {
       current.frame = requestFrame(glide);
     } else {
-      motion = IDLE;
+      setMotion(IDLE);
       direction = 0;
     }
   };
@@ -200,12 +212,12 @@ export function createPreparedWheelZoomControls({
       const releasedRate = travelRate * glidePolicy.gain;
       travelRate = 0;
       const gliding: Extract<Motion, { kind: 'glide' }> = { kind: 'glide', frame: null, rate: releasedRate, releasedRate, previous: timestamp - leftover };
-      motion = gliding;
+      setMotion(gliding);
       if (leftover > 0) { glide(timestamp); return; }
       gliding.frame = requestFrame(glide);
       return;
     }
-    motion = IDLE;
+    setMotion(IDLE);
   };
   const onWheel = (event: WheelEvent) => {
     if (!enabled || !Number.isFinite(event.deltaY) || event.deltaY === 0 || event.defaultPrevented) return;
@@ -236,7 +248,7 @@ export function createPreparedWheelZoomControls({
     events += 1;
     // A running dolly takes the new command; otherwise a dolly starts from this event.
     if (motion.kind === 'dolly') { motion.targetDistance = targetDistance; motion.expiresAt = expiresAt; }
-    else motion = { kind: 'dolly', frame: requestFrame(animate), previousTimestamp: event.timeStamp, targetDistance, expiresAt };
+    else setMotion({ kind: 'dolly', frame: requestFrame(animate), previousTimestamp: event.timeStamp, targetDistance, expiresAt });
   };
   const guardedWheel = guard(onWheel);
   inputSurface.addEventListener("wheel", guardedWheel, { passive:false });

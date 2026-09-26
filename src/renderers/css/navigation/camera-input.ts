@@ -16,6 +16,8 @@ import { advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_
 import { SURFACE_FLY_TO, planSurfaceFlyTo, sampleSurfaceFlyTo } from "./surface-fly-to.js";
 import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
 import { clearCursor, setBaseCursor } from './cursor-state.js';
+import { cameraMotionSignalFor } from './camera-motion-signal.js';
+import type { CameraMotionSource } from './camera-motion-signal.js';
 const POINTER_POSITION_EPSILON = 1e-6;
 export function createUnboundedMatrixDragControls({
   inputSurface, cameraMotion, runtimePolicy, trackballMetrics,
@@ -64,6 +66,15 @@ export function createUnboundedMatrixDragControls({
     | { readonly kind: 'inertia'; frame: number; readonly sky: boolean; readonly state: Throw };
   const IDLE: Motion = Object.freeze({ kind: 'idle' });
   let motion: Motion = IDLE;
+  // A drag drives the camera, its throw coasts on inertia, a surface fly-to drives it (camera-motion-signal.ts).
+  const motionSignal = cameraMotionSignalFor(inputSurface);
+  const sourceOf = (value: Motion): CameraMotionSource | null => value.kind === 'idle' ? null : value.kind;
+  const reportMotion = (before: Motion, after: Motion) => {
+    const from = sourceOf(before), to = sourceOf(after);
+    if (from === to) return;
+    if (to) motionSignal.begin(to);
+    if (from) motionSignal.end(from);
+  };
   const announceRotation = (active: boolean) =>
     inputSurface.dispatchEvent(new CustomEvent('objectrotationchange', { bubbles: true, detail: { active } }));
   const projectSkyRotation = (trackball: TrackballMetrics, pointer: SphereDragInput) => {
@@ -138,14 +149,16 @@ export function createUnboundedMatrixDragControls({
   };
   /** A drag or fly-to begins the interaction; a drag's inertia continues it. */
   const startMotion = (next: Motion) => {
-    const idle = motion.kind === 'idle';
+    const idle = motion.kind === 'idle', before = motion;
     motion = next;
+    reportMotion(before, next);
     if (idle) onStart();
   };
   const finishInteraction = () => {
     if (motion.kind === 'idle') return;
-    const rotated = motion.kind === 'drag' || motion.kind === 'inertia';
+    const rotated = motion.kind === 'drag' || motion.kind === 'inertia', before = motion;
     motion = IDLE;
+    reportMotion(before, IDLE);
     if (rotated) announceRotation(false);
     onEnd();
   };
@@ -305,7 +318,9 @@ export function createUnboundedMatrixDragControls({
       previousTimestamp: releaseFrameTimestamp ?? releaseTimestamp,
     };
     inertiaStarts += 1;
+    const beforeThrow = motion;
     motion = { kind: 'inertia', sky: released.sky, state, frame: requestFrame(animateInertia) };
+    reportMotion(beforeThrow, motion);
     return true;
   };
   // Two fingers pinch: the second touch ends the one-finger orbit, and the pair zooms through the shared wheel zoom as a
