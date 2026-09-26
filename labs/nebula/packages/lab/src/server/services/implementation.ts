@@ -37,6 +37,12 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') };
       });
+      // The star colour fit was a relative module (src/preparation/stars/color.ts) before it joined @cssearth/engine, whose
+      // sources stay owners the same way.
+      builder.onResolve({ filter: /^@cssearth\/engine$/ }, () => {
+        manifests.add('packages/engine/package.json');
+        return { path: resolve(root, 'packages/engine/src/index.ts') };
+      });
       // The CSS renderer runtime was relative modules under src/renderers/css/ before it became @cssearth/renderer; the lab
       // imports its TypeScript source subpaths (`@cssearth/renderer/volume/types.ts`), which stay owners the same way.
       builder.onResolve({ filter: /^@cssearth\/renderer\// }, async args => {

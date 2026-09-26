@@ -54,6 +54,13 @@ test('the telescope library a preparation owner reaches is pinned by its sources
   assert.equal(pins.some(pin => pin.path.startsWith('packages/telescope/dist/')), false);
 });
 
+test('the star colour fit a catalogue owner reaches is pinned by its engine sources, not its build', async () => {
+  const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-lmc-stars.ts']);
+  for (const path of ['packages/engine/package.json', 'packages/engine/src/solar-system/star-color.ts'])
+    assert.ok(pins.some(pin => pin.path === path), path);
+  assert.equal(pins.some(pin => pin.path.startsWith('packages/engine/dist/')), false);
+});
+
 test('sampled supplementary owner allowlist points at existing implementation files', async () => {
   const { sampledImplementationOwners } = await import('../../features/sampled-prior/ownership.ts');
   const { stat } = await import('node:fs/promises');
