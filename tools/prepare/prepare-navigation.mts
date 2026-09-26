@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { constants } from "node:fs";
 import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -609,20 +607,4 @@ async function loadObjectDescriptor(objectId: string, projectRoot: string): Prom
   const module: unknown = await import(pathToFileURL(modulePath).href);
   if (!module || typeof module !== 'object' || !('default' in module)) throw new TypeError('Navigation marker module requires a default export.');
   return module.default;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2);
-  const catalogOnly = args.includes('--catalog-only');
-  const objectIds = args.filter(arg => arg !== '--catalog-only');
-  const result = await prepareNavigation({ catalogOnly, objectIds: objectIds.length ? objectIds : undefined });
-  console.log(JSON.stringify({
-    ...result,
-    bodyMarkers:
-      `${result.planetCount} prepared 16px raster markers with 2x density`,
-    sunMarker: "NASA HMI raster marker with 2x density",
-    blackHoleMarker: "NASA/GSFC simulated accretion-disk marker with 2x density",
-    supernovaMarker: "NASA/ESA/CSA Webb MIRI Cassiopeia A marker with 2x density",
-    actionMarkers: "4 prepared monochrome shaded markers with 2x density",
-  }));
 }

@@ -28,9 +28,12 @@
     "site/object-schema.mts",
     "site/object-catalog.mts",
     "tools/prepare/prepare-catalog.mts",
+    "tools/prepare/cli/prepare-catalog.mts",
     "tools/prepare/prepare-objects.mts",
     "tools/prepare/prepare-object.mts",
+    "tools/prepare/cli/prepare-object.mts",
     "tools/prepare/prepare-navigation.mts",
+    "tools/prepare/cli/prepare-navigation.mts",
     "tools/prepare/prepare-solar-geometry.mts",
     "tools/objects/**"
   ],

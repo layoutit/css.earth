@@ -222,7 +222,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   if (missing.length) console.log(`Still missing, restore them before preparing (node tools/objects/dist/operations.js acquire ${objectId}): ${missing.join(', ')}.`);
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
   console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
-    `  node tools/prepare/prepare-object.mts ${objectId}`, `  node tools/objects/report-registration.mts ${objectId} --write`,
+    `  node tools/prepare/cli/prepare-object.mts ${objectId}`, `  node tools/objects/report-registration.mts ${objectId} --write`,
     `  commit, then pnpm publish:runtime-assets --object=${objectId}`].join('\n'));
 }
 

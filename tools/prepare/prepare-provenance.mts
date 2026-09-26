@@ -1,5 +1,4 @@
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
@@ -48,10 +47,4 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
     unresolved: document.coverage.unresolved,
     ...(compiled ? { citedFacts: compiled.preparedSources.usage.edges.filter(edge => edge.consumerKind === 'object-fact' && edge.objectId === document.objectId).length } : {}),
   }));
-}
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), ids = args.filter(arg => arg !== '--objects-only');
-  const results = await recoverObjectProvenance(ids.length ? ids : null, { catalogue: !args.includes('--objects-only') });
-  if (args.includes('--objects-only')) console.log(JSON.stringify({ objects: results.length }));
-  else for (const result of results) console.log(JSON.stringify(result));
 }

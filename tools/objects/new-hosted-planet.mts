@@ -13,7 +13,7 @@
  * --self-luminous with its cited temperature, and keeps its star class and a temperature catalogue colour. The package starts shape-only, in the
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
- * Then run: node tools/prepare/prepare-object.mts <id> */
+ * Then run: node tools/prepare/cli/prepare-object.mts <id> */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -268,5 +268,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const { neutralDiscMarker } = await import('./new-object/scaffold.mts');
   const presentation = resolve(root, 'src/objects', id, 'source/presentation');
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  console.log(`${files.size + 1} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
+  console.log(`${files.size + 1} files written. Replace every ${TODO}, then: node tools/prepare/cli/prepare-object.mts ${id}`);
 }

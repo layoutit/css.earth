@@ -116,7 +116,7 @@ export async function prepareObjects({ projectRoot = process.cwd(), force = fals
     }
     const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });
     const navigation = await runObjectCommand({ command: process.execPath,
-      argumentsList: [resolve(root, "tools/prepare/prepare-navigation.mts"), ...objectIds], cwd: root });
+      argumentsList: [resolve(root, "tools/prepare/cli/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
     // Inventory every prepared body's baked prepared/ files, even when `prepare:object-json` does not run afterward.
     for (const id of objectIds) {

@@ -1,7 +1,6 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
@@ -83,10 +82,4 @@ export async function prepareContextAvailability({ projectRoot = root, strict = 
   const failures = Object.entries(availability).flatMap(([id, state]) => state.available ? [] : [`${id}: ${state.reason}`]);
   if (strict && failures.length) throw new Error(`Prepared context packages unavailable:\n${failures.join('\n')}`);
   return { availability, failures };
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  if (process.argv.slice(2).some(arg => arg !== '--strict')) throw new TypeError('Usage: prepare-context-availability [--strict]');
-  const { failures } = await prepareContextAvailability({ strict: process.argv.includes('--strict') });
-  console.log(failures.length ? failures.join('\n') : 'All prepared context packages are available.');
 }

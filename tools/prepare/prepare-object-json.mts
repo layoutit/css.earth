@@ -163,9 +163,3 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   }
   return results;
 }
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  // --keep-bindings: a default camera or world frame change, which needs no browser or image work.
-  const args = process.argv.slice(2), ids = args.filter(arg => arg !== '--keep-bindings');
-  for (const result of await prepareObjectJson(ids.length ? ids : null, { keepBindings: args.includes('--keep-bindings') })) console.log(JSON.stringify(result));
-}
