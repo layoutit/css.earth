@@ -3,7 +3,7 @@
 // into sRGB (D65 white), scaled so the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness
 // is not modelled. Limb darkening is drawn where a measurement gives it, or from a named model grid (below).
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { linearToSrgb } from '../../color-transfer.mts';
+import { linearToSrgb } from '@cssearth/bake/objects/color';
 import { gunzipSync } from 'node:zlib';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';
 import { readCie1931ColorMatching } from '../../../references/reference-bank.mts';
@@ -184,7 +184,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
   const record = parseStellarColorRecord(raw), crossRecord = parseStellarColorCrossCheck(requireRecord(raw).crossCheck);
   const result = await loadStellarColorOnly(read, science, record);
   if (!crossRecord) return { ...result, crossCheck: null };
-  const { parseCieTable } = await import('../disc-integrated-color.mts');
+  const { parseCieTable } = await import('@cssearth/bake/objects/color');
   const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const color = measuredSpectrumColor(await loadMeasuredSpectrum(read, crossRecord.record), colorMatching, crossRecord.record.gaps);
   const difference = Math.max(...color.srgb.map((value, channel) => Math.abs(value - result.color.srgb[channel]!)));
@@ -192,7 +192,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
 }
 
 async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, record: StellarColorRecord) {
-  const { parseCieTable } = await import('../disc-integrated-color.mts');
+  const { parseCieTable } = await import('@cssearth/bake/objects/color');
   const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const limbDarkening = science.limbDarkening === undefined ? null : await (async () => {
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);

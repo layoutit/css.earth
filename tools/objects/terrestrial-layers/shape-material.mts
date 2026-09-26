@@ -21,7 +21,7 @@ export function shapeMaterialRaster(width: number, height: number): Buffer {
 }
 
 import { BASE_TILE } from '@layoutit/polycss';
-import type { PreparedTriangle } from './contracts.mts';
+import type { PreparedTriangle } from '@cssearth/bake/objects/geometry';
 import { dotN as dot } from '@cssearth/core';
 interface ShapeAtlas {
   width: number; height: number;

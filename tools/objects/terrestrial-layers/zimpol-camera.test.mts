@@ -1,7 +1,7 @@
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
+import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { card, imageFixture } from '../../../tests/fixtures/fits/helpers.mts';
 
 /** The survey's sky axes, copied from the first pinned Psyche frame: RA---TAN/DEC--TAN with east toward the first column and north toward the last row. */

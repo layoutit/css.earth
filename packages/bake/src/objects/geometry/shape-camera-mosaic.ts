@@ -1,17 +1,17 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
-import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './source-records.mts';
+import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './shape-records.ts';
 type Vector = readonly number[] | Float32Array | Float64Array;
 export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
  missing?:Uint8Array;allowFiniteSigned?:boolean;quality?:{records:number;badBlockPixels:number;saturatedPixels:number;specialPixels:number;withheldPixels:number}}
 type CameraFrame = ReturnType<typeof parseCameraFrame>;
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mts';
-import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
+import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.ts';
+import {loadPdsRadialTableMesh} from './pds-radial-table.ts';
 import { readFitsPrimary, readFitsImage, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
 import { pds3Keyword } from '@cssearth/telescope';
-import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.mts';
+import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.ts';
 
 const rad = Math.PI / 180;
 

@@ -20,7 +20,7 @@ import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starStylesheet } from './new-object/scaffold.mts';
-import { temperatureCatalogueColor } from './star-catalogue-color.mts';
+import { temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { sphereProjection } from './sphere-projection.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';

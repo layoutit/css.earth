@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { prepareGiottoProjection, createGiottoSampler, polygonInteriorDistance } from './prepare-giotto.mts';
-import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
+import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
 
 const source = resolve('src/objects/comet-1p/source');
 

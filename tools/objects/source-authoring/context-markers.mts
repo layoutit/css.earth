@@ -19,7 +19,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { hostLitGray, linearToSrgb } from '../color-transfer.mts';
+import { hostLitGray, linearToSrgb } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '../observation/disc-band-color.mts';
 import { loadStellarPhotometricColor, quadraticIntensity } from '../observation/stellar/stellar-photometric-color.mts';
 import { colorForValue, loadScienceSurface } from '../terrestrial-layers/scientific-raster.mts';

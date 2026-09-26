@@ -39,6 +39,16 @@ its validators accept); the renderer never imports the bake.
   resampler. It imports `volume-leaves`.
 - `src/environment/` is published as `@cssearth/bake/environment` (Node only): the environment-image replay. It
   imports `image-layers`, `shell`, `stars`, `density` and `volume`.
+- `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
+  its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only); none imports another topic:
+  - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
+    and the uniform colour of whole-disc photometry. The host passes the CIE 1931 colour-matching table in.
+  - `objects/geometry`: shape models (OBJ, STL, PDS plate, vertex-facet and radius tables, FITS facet fields) and the records
+    that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
+    Lambert attenuation atlas and the radial-layer contract.
+  - `objects/cameras`: observer-computed cameras from an ephemeris and a spin state or IAU pole model.
+  Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
+  oracle fixtures through the repository's test helpers; they import the entries.
 - The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
   inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none.
 

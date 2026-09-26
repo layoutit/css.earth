@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mts';
-import {linearToSrgb} from '../color-transfer.mts';
+import {linearToSrgb} from '@cssearth/bake/objects/color';
 
 // This test reads only the small pinned label, never an ignored image.
 const label = readFileSync(new URL('../../../src/objects/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { composeCorrectedColor, matchObservedColorLevels, solveBandLevels } from './photometric-observations.mts';
-import { linearToSrgb } from '../color-transfer.mts';
+import { linearToSrgb } from '@cssearth/bake/objects/color';
 import { sampleColorBand } from './scientific-raster.mts';
 import type { ColorBand, PhotometryProfile } from './contracts.mts';
 

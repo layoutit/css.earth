@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { readJsonSource } from '../../../tools/sources/source-values.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { validateClosedMesh } from '../../../tools/objects/terrestrial-layers/radial-mesh.mts';
+import { validateClosedMesh } from '@cssearth/bake/objects/geometry';
 
 const projectRoot = resolve(import.meta.dirname, '../../..');
 type Coordinates = readonly number[];

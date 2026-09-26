@@ -2,8 +2,7 @@ import { required } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import {decodeCalibratedCamera,controlledShapeCamera,insetCoverage} from './shape-camera-mosaic.mts';
-import {parsePdsPlateShape} from './obj-shape.mts';
+import { decodeCalibratedCamera, controlledShapeCamera, insetCoverage, parsePdsPlateShape } from '@cssearth/bake/objects/geometry';
 
 test('calibrated VICAR skips binary telemetry and honors source byte order',()=>{
   for(const endian of ['RIEEE','IEEE']){

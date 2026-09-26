@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { controlledShapeCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
+import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
 import { decodeFitsImageMap } from '../../terrestrial-layers/fits-image-map.mts';
 import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst } from './body-map.mts';
 

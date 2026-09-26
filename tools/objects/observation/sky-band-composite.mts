@@ -13,7 +13,7 @@ import sharp from 'sharp';
 import { readFitsImage, skyDisplayRaster, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
+import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '@cssearth/bake/objects/color';
 import { maskSaturatedStars } from './plate-saturation.mts';
 import { findPointSources } from './point-sources.mts';
 import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../jwst/imaging/bands.mts';

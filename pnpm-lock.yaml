@@ -250,15 +250,27 @@ importers:
       '@cssearth/engine':
         specifier: workspace:*
         version: link:../engine
+      '@cssearth/fits':
+        specifier: workspace:*
+        version: link:../fits
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../objects
       '@cssearth/renderer':
         specifier: workspace:*
         version: link:../renderer
+      '@cssearth/spice':
+        specifier: workspace:*
+        version: link:../spice
+      '@cssearth/telescope':
+        specifier: workspace:*
+        version: link:../telescope
       '@layoutit/polycss':
         specifier: 0.2.11
         version: 0.2.11
+      meshoptimizer:
+        specifier: 1.2.0
+        version: 1.2.0
       playwright:
         specifier: 1.60.0
         version: 1.60.0

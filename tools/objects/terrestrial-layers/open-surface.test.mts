@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { inspectOpenSurface, orientObservedSurface, validateObservedReduction } from './open-surface.mts';
+import { inspectOpenSurface, orientObservedSurface, validateObservedReduction } from '@cssearth/bake/objects/geometry';
 
 const positions = [[0,0,1],[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]];
 const sides = [[0,1,2],[0,2,3],[0,3,4],[0,4,1]];

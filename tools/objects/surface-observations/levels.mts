@@ -1,4 +1,5 @@
-import type { ObservationSample, ObservationLevelPolicy, PreparedTriangle } from '../terrestrial-layers/contracts.mts';
+import type { ObservationSample, ObservationLevelPolicy } from '../terrestrial-layers/contracts.mts';
+import type { PreparedTriangle } from '@cssearth/bake/objects/geometry';
 export interface OverlapPair {a:number;b:number;samples:number;medianLogRatio:number|null;logMad:number|null;levelError:number|null;accepted:boolean;residualLogRatio?:number}
 // Preparation-only overlap calibration and source selection. No samples or
 // camera solutions are constructed by the retained runtime.

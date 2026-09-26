@@ -1,6 +1,6 @@
 import {parse} from '@cssearth/core/schema';
 import {bandedGeometryRecipe, type BandedGeometryRecipe} from './geometry-contract.mts';
-import type {Vector3} from '../material-composition/ellipsoid.mts';
+import type {Vector3} from '@cssearth/bake/objects/geometry';
 type SourceRectangle = {x:number;y:number;width:number;height:number};
 interface GeometryPolygon extends Omit<Parameters<typeof computeTextureAtlasPlanPublic>[0], 'textureImageSource'> {
   latitudeIndex?: number; longitudeIndex?: number; polarCap?: 'north' | 'south'; polarRole?: string;
@@ -22,7 +22,7 @@ export interface BandedImagePixels {
 export interface PoleImageProjection { edgeLatitudeDegrees: number; scale: number }
 import {buildSeamBleedPolygonEdges,computeTextureAtlasPlanPublic,resolvePolyTextureLeafGeometry,formatCssLength} from '@layoutit/polycss';
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '@cssearth/bake/scene';
-import {ellipsoidPoint} from '../material-composition/ellipsoid.mts';
+import {ellipsoidPoint} from '@cssearth/bake/objects/geometry';
 
 const presentation={backend:'image',lighting:'source',projection:'projective'} as const;
 const replace=(template: string,values: Record<string,string>)=>template.replace(/\{([a-z]+)\}/gu,(_match: string,key: string)=>values[key]);

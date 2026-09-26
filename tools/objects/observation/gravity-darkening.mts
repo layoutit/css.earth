@@ -10,7 +10,7 @@
 // the measured one. Limb darkening stays on the limb plate, which darkens every latitude alike.
 import { directionFromRaDec, skyBasis } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString, dot3 as dot } from '@cssearth/core';
-import { linearToSrgb } from '../color-transfer.mts';
+import { linearToSrgb } from '@cssearth/bake/objects/color';
 import { planckLinearSrgb, type StellarColor } from './stellar/stellar-photometric-color.mts';
 
 export interface GravityDarkeningRecord {

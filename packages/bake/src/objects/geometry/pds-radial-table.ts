@@ -1,6 +1,6 @@
-import {parseRadialTableProfile} from './source-records.mts';
+import {parseRadialTableProfile} from './shape-records.ts';
 import { readFile } from 'node:fs/promises';
-import { parsePdsRadiusTable } from './obj-shape.mts';
+import { parsePdsRadiusTable } from './obj-shape.ts';
 
 export function validateRadialTableProfile(value: unknown) {
   const profile=parseRadialTableProfile(value);

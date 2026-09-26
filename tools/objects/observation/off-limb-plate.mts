@@ -5,7 +5,7 @@
  * palette on the lens's display stretch. Alpha follows the light: fully opaque at the stretch's low end, fading to transparent as
  * the light falls to the frame's background maximum, so the halo is as faint as the reconstruction says. The part of the plate
  * inside the disc is hidden behind the sphere at runtime. */
-import { interpolatePalette } from '../color-transfer.mts';
+import { interpolatePalette } from '@cssearth/bake/objects/color';
 
 export interface OffLimbSource {
   readonly width: number; readonly height: number;

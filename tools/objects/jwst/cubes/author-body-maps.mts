@@ -11,7 +11,7 @@
  * 2. measures the band's depth in every pixel (spectral-cube.mts);
  * 3. asks JPL Horizons where the body and the Sun were as seen from JWST (500@-170) at the cube's exposure start, and keeps the
  *    two responses beside the record as pinned inputs; a later run reads them instead of asking;
- * 4. computes the camera at the exposure midpoint (observer-camera.mts) with the disc centre fitted on the continuum image;
+ * 4. computes the camera at the exposure midpoint (`@cssearth/bake/objects/cameras`) with the disc centre fitted on the continuum image;
  * 5. projects each cube onto the body and combines them, each counting most where the body faced the telescope (body-map.mts),
  *    and writes the map as FITS where the record says, with the measurements that
  *    judge it in evidence/jwst-band-maps.json.

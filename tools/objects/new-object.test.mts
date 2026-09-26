@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { skyPlaneOrientation } from '@cssearth/astronomy';
 import { TODO, scaffoldStarFiles, solarRadii } from './new-object.mts';
-import { temperatureCatalogueColor } from './star-catalogue-color.mts';
+import { temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 
 const root = resolve(import.meta.dirname, '../..');
 const EPOCH = 2461286.5;

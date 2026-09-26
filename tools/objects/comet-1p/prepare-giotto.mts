@@ -4,9 +4,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
+import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
 
-import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 
 const pair = (value: unknown) => { const result = array(number)(value); assert.equal(result.length, 2); return result; };
 const parseRegistration = shape({

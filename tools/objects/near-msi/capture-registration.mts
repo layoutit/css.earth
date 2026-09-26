@@ -1,6 +1,6 @@
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import sharp from 'sharp';
-import {parsePdsRadiusTable} from '../terrestrial-layers/obj-shape.mts';
+import {parsePdsRadiusTable} from '@cssearth/bake/objects/geometry';
 import {matrixCamera} from '../surface-observations/cameras.mts';
 import {decodeNearMsi} from '../terrestrial-layers/near-msi.mts';
 import {requireRecord,requireArray,requireString,requireFiniteNumber} from '@cssearth/core';

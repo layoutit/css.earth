@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsPrimary } from '@cssearth/fits';
-import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
+import { loadObjShape } from '@cssearth/bake/objects/geometry';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 
 type Pixel = readonly [number, number];

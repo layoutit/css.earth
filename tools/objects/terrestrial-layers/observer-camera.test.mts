@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { eclipticToBody, eclipticToEquatorial, equatorialToEcliptic, observerCamera, parseSpinState, pckOrientation,
-  spinOrientation, rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from './observer-camera.mts';
+  spinOrientation, rotationPhaseDegrees, bodyEpochJd, type SpinState, type Vector } from '@cssearth/bake/objects/cameras';
 import { parseTextKernel, numbers, parseLeapSeconds, utcSecondsToEt } from '@cssearth/spice';
 import { dot3 as dot } from '@cssearth/core';
 import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';

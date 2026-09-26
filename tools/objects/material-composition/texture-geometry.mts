@@ -1,4 +1,4 @@
-import type {Vector3} from './ellipsoid.mts';
+import type {Vector3} from '@cssearth/bake/objects/geometry';
 /** Winding and atlas convention shared by the oblate polar-disc carriers. */
 export function polarQuad({ pole, radius, z }: {pole: 'north' | 'south'; radius: number; z: number}): {vertices: Vector3[]; uvs: [number, number][]} {
   if (!['north', 'south'].includes(pole) || !Number.isFinite(radius) || radius <= 0 || !Number.isFinite(z)) {

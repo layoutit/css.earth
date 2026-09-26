@@ -2,7 +2,7 @@
   "name": "@cssearth/bake",
   "version": "0.0.0",
   "private": true,
-  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, and the geometry scene and CSS presentation compilers.",
+  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, the geometry scene and CSS presentation compilers, and the shared object libraries (colour, shape geometry, cameras).",
   "type": "module",
   "files": [
     "dist"
@@ -74,6 +74,21 @@
       "import": "./dist/environment.js",
       "default": "./dist/environment.js"
     },
+    "./objects/color": {
+      "types": "./dist/objects/color.d.ts",
+      "import": "./dist/objects/color.js",
+      "default": "./dist/objects/color.js"
+    },
+    "./objects/cameras": {
+      "types": "./dist/objects/cameras.d.ts",
+      "import": "./dist/objects/cameras.js",
+      "default": "./dist/objects/cameras.js"
+    },
+    "./objects/geometry": {
+      "types": "./dist/objects/geometry.d.ts",
+      "import": "./dist/objects/geometry.js",
+      "default": "./dist/objects/geometry.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -86,9 +101,13 @@
     "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",
     "@cssearth/engine": "workspace:*",
+    "@cssearth/fits": "workspace:*",
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
+    "@cssearth/spice": "workspace:*",
+    "@cssearth/telescope": "workspace:*",
     "@layoutit/polycss": "0.2.11",
+    "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
     "sharp": "0.35.3"
   },

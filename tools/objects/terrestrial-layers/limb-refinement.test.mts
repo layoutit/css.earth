@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
-import { parseObjShape } from './obj-shape.mts';
+import { parseObjShape } from '@cssearth/bake/objects/geometry';
 import { refineCameraByLimb, rotateCamera, rotationOf, limbThreshold, observedLimb } from './limb-refinement.mts';
 import { dot3 as dot } from '@cssearth/core';
 
