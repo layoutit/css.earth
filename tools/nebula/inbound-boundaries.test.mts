@@ -139,6 +139,16 @@ test('root research dependencies remain development-only and computed policy sta
     assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
     f.write('site/plugin.mts', "const prefix = '@cssearth/bake/'; export const load = (name: string) => import(prefix + name);");
     assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
+    // Preparation code imports the bake by design: its computed loads are not suspect for naming it, but a runtime module
+    // that reaches such a file still is.
+    f.write('site/plugin.mts', 'export {};');
+    f.write('tools/prepare/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import(name);");
+    assert.deepEqual(f.check(), []);
+    f.write('site/plugin.mts', "import { load } from '../tools/prepare/plugin.mts'; export { load };");
+    assert.ok(f.check().some(error => error.includes('site/plugin.mts: unchecked computed nebula module loading via tools/prepare/plugin.mts')));
+    f.write('tools/prepare/plugin.mts', "import '@cssearth/bake/public'; export const load = (name: string) => import('@cssearth/nebula-lab/' + name);");
+    f.write('site/plugin.mts', 'export {};');
+    assert.ok(f.check().some(error => error.includes('tools/prepare/plugin.mts: unchecked computed nebula module loading')));
   } finally { f.cleanup(); }
 });
 

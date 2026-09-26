@@ -164,16 +164,19 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
   }
   const sourceFiles = [...['src', 'site', 'tools', 'packages'].flatMap(path => files(resolve(root, path))),
     ...readdirSync(root).filter(path => sourcePattern.test(path) && isFile(resolve(root, path))).map(path => resolve(root, path))];
-  type Node = { label: string; imports: Import[]; accesses: { path: string; line: number }[]; unchecked: boolean; edges: { file: string; erased: boolean }[]; packages: { name: PackageName; erased: boolean; specifier: string }[] };
+  type Node = { label: string; imports: Import[]; accesses: { path: string; line: number }[]; unchecked: boolean; uncheckedBake: boolean; edges: { file: string; erased: boolean }[]; packages: { name: PackageName; erased: boolean; specifier: string }[] };
   const graph = new Map<string, Node>();
   for (const file of sourceFiles) {
     if (graph.has(canonical(file))) continue;
-    const label = relative(root, file), analysis = analyze(syntax(file), root), node: Node = { label, ...analysis, unchecked: false, edges: [], packages: [] }; graph.set(canonical(file), node);
+    const label = relative(root, file), analysis = analyze(syntax(file), root), node: Node = { label, ...analysis, unchecked: false, uncheckedBake: false, edges: [], packages: [] }; graph.set(canonical(file), node);
     for (const item of node.imports) {
       const specifier = item.specifier, location = `${label}:${item.line}`;
       if (!specifier) {
-        if (label.startsWith('tools/nebula/application/') || /(?:labs\/nebula|packages\/bake|@cssearth\/(?:nebula-|volume-|bake\b))/.test(readFileSync(file, 'utf8')))
-          node.unchecked = true;
+        // A computed load that may name the lab is unchecked everywhere. One that may name the bake is unchecked only where the
+        // bake is forbidden: preparation code imports the bake by design, so its computed loads of other modules are not suspect.
+        const text = readFileSync(file, 'utf8');
+        if (label.startsWith('tools/nebula/application/') || /(?:labs\/nebula|@cssearth\/(?:nebula-|volume-))/.test(text)) node.unchecked = true;
+        else if (/(?:packages\/bake|@cssearth\/bake\b)/.test(text)) node.uncheckedBake = true;
         continue;
       }
       const name = Object.keys(packages).find(name => specifier === name || specifier.startsWith(`${name}/`)) as PackageName | undefined;
@@ -202,7 +205,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
     function visit(current: string, erased: boolean) {
       const key = `${current}:${erased}`; if (visited.has(key)) return; visited.add(key);
       const node = graph.get(current); if (!node) return;
-      if (mode !== 'test' && node.unchecked) errors.push(`${origin.label}: unchecked computed nebula module loading via ${node.label}`);
+      if (mode !== 'test' && node.unchecked || mode === 'runtime' && node.uncheckedBake) errors.push(`${origin.label}: unchecked computed nebula module loading via ${node.label}`);
       if (mode !== 'test') for (const access of node.accesses) {
         let target: string;
         try { target = access.path.startsWith('file:') ? fileURLToPath(access.path) : resolve(root, access.path); } catch { continue; }
