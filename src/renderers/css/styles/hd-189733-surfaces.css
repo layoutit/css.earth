@@ -51,16 +51,6 @@
   pointer-events: none;
 }
 
-/* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
-   hide their back faces. */
-.object-stage[data-object-id="hd-189733"] .polycss-scene s:not(.hd-189733-polar) {
-  backface-visibility: visible;
-}
-
-.object-stage[data-object-id="hd-189733"] .polycss-scene s.hd-189733-polar {
-  backface-visibility: hidden;
-}
-
 /* Off-limb context: 600 px = raster.json emission.offLimbSize. The silhouette-fit binding already follows the
    rendered sphere; multiplying background-size by geometryScale again would oversize this plate. */
 .object-stage[data-object-id="hd-189733"] .hd-189733-corona-layer {

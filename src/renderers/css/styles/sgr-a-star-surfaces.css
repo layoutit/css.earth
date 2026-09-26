@@ -67,16 +67,6 @@
   display: none;
 }
 
-/* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
-   hide their back faces. */
-.object-stage[data-object-id="sgr-a-star"] .polycss-scene s:not(.sgr-a-star-polar) {
-  backface-visibility: visible;
-}
-
-.object-stage[data-object-id="sgr-a-star"] .polycss-scene s.sgr-a-star-polar {
-  backface-visibility: hidden;
-}
-
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="sgr-a-star"] .sgr-a-star-corona-layer {
   background-image: var(--sgr-a-star-corona-image);
