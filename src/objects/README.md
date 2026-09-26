@@ -138,6 +138,8 @@ Read the current `package.json` and runner arguments before using commands:
 | Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |
 
 Build the shared preparation tools before invoking their `dist/` entry points.
+Run a `tools/prepare` script by its entry in `tools/prepare/cli/`. The file of the same name in `tools/prepare/` is its
+library: other code imports it, and running it directly exits with the entry's path.
 Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);
 this table lists available commands, not a checklist for every body addition.
 The retired per-body test folders and browser-profile registry are not required
