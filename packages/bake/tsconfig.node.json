@@ -21,7 +21,8 @@
     "src/stars",
     "src/shell",
     "src/sky",
-    "src/density"
+    "src/density",
+    "src/image-layers"
   ],
   "exclude": [
     "src/**/*.test.ts"

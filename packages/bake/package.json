@@ -64,6 +64,11 @@
       "import": "./dist/density.js",
       "default": "./dist/density.js"
     },
+    "./image-layers": {
+      "types": "./dist/image-layers.d.ts",
+      "import": "./dist/image-layers.js",
+      "default": "./dist/image-layers.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

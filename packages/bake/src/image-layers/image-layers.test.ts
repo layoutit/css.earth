@@ -4,12 +4,12 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.js';
-import { prepareImageLayers } from './prepare.js';
+import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
+import { prepareImageLayers } from './prepare.ts';
 import { sha256 } from '@cssearth/core/node';
-import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment-images.js';
-import { resizeRgbaLanczos3 } from './resize-rgba.js';
-import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
+import { assertImageLayerReplay, restoreEnvironmentObject } from '../../../../src/preparation/environment-images.ts';
+import { resizeRgbaLanczos3 } from './resize-rgba.ts';
+import { TEXELS_PER_CSS_PIXEL } from '../scene/index.ts';
 
 test('environment restoration leaves dedicated preparation owners to restore their missing banks', async () => {
   const { writeFile } = await import('node:fs/promises');

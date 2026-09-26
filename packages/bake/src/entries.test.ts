@@ -41,6 +41,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'shell': ['scene', 'volume'],
   'sky': ['volume-leaves', 'volume'],
   'density': ['sky', 'volume-leaves', 'volume'],
+  'image-layers': ['volume-leaves'],
 };
 
 it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {
