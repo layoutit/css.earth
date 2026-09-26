@@ -610,6 +610,9 @@ same published law, so the limb in the app is the limb the instrument saw.
   [Earth README](../src/objects/earth/README.md) lists its sources). PSG's
   Earth template has no aerosols, and then its single-scattering limb scatters
   Rayleigh light the same in every direction, so the tool refuses it.
+
+  ![Mars and Venus limbs at 4x: css.earth before the limb laws, main without a halo, and the PSG halo](images/planet-limbs/mars-halo-before-after.webp)
+  ![](images/planet-limbs/venus-halo-before-after.webp)
 - **Why not one model for every disc.** PSG's default atmospheres were checked
   against Hubble's measured coefficients and missed them. In red, PSG gives
   Uranus k 1.16 where OPAL measured 0.57. In blue, it gives Saturn 0.73 where
