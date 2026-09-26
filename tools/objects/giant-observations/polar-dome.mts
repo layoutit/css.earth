@@ -1,5 +1,5 @@
 import type {ObservedRgb} from './polar-continuation.mts';
-import type {domeRingWarp} from '../giant-layers/geometry.mts';
+import type {domeRingWarp} from '@cssearth/bake/objects/layers/giant';
 
 /** Two square pole tiles side by side, RGBA: the south tile first, then the north tile, as both atlas generators write them. */
 export interface PolarAtlas {data: Uint8Array; width: number; height: number}

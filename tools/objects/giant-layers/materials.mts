@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { isArray, shape, array, number, optional } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
-import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from './material-contract.mts';
+import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from '@cssearth/bake/objects/layers/giant';
 import type { Vector3, ReadonlyVector3 } from '@cssearth/bake/objects/geometry';
 import type { WebpOptions } from 'sharp';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
@@ -10,7 +10,7 @@ import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { worldPositionToCss } from '@layoutit/polycss';
 import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '@cssearth/bake/objects/geometry';
-import { writeMaterialAtlasTile, sampleRgbaBilinear } from '../material-composition/raster.mts';
+import { writeMaterialAtlasTile, sampleRgbaBilinear } from '@cssearth/bake/objects/layers/material-composition';
 
 import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 

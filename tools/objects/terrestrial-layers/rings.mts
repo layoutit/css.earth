@@ -4,7 +4,7 @@ export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareRingLeaves } from '../shape-model/rings.mts';
-import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/coplanar-raster.mts';
+import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
 import { publishedImageSize } from '../shape-model/raster.mts';
 
 /** Ring geometry and display assumptions are authored by the body. */

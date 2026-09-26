@@ -23,7 +23,7 @@ import sharp from 'sharp';
 import { fitsImageAccessor, imageExtent, readFitsHdus, type FitsHeader, skyDisplayRaster, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { column, eventTable } from '../chandra/events.mts';
-import { decodeJunocam } from '../terrestrial-layers/junocam.mts';
+import { decodeJunocam } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** An enlarged picture stays small enough to read in a document and to commit beside it. */
 const MAX_OUTPUT_EDGE = 1024;

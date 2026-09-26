@@ -2,7 +2,7 @@ import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contr
 import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
 import type { PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation';
 import type { prepareSolidMaterial } from './solid-raster.mts';
-import type { SolidRasterGrid } from './raster-grid.mts';
+import type { SolidRasterGrid } from '@cssearth/bake/objects/layers/terrestrial';
 import type { combineRadialModels } from './radial-models.mts';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';

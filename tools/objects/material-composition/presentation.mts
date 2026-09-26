@@ -1,16 +1,14 @@
 import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import {parse} from '@cssearth/core/schema';
-import {layeredPresentationRecipe} from './presentation-recipe.mts';
-import {parseLayeredLenses,parseLayeredAtlas} from './presentation-source.mts';
+import { layeredPresentationRecipe, parseLayeredLenses, parseLayeredAtlas, prepareAtlasRows, prepareAtlasStill } from '@cssearth/bake/objects/layers/material-composition';
 import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 import type {createLayeredOblatePreparation} from './layered-oblate.mts';
-import type {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
+import type {prepareLayeredLeafLayouts} from '@cssearth/bake/objects/layers/material-composition';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import type {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import type { PreparedNode } from '@cssearth/bake/presentation';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
-import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.mts';
 
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/platform/prepared-object-assets";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";

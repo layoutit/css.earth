@@ -5,7 +5,7 @@ import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.mts';
-import { parseInteriorSource } from './source-contract.mts';
+import { parseInteriorSource } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createAtmospherePreparation } from './atmosphere.mts';
 import { createPagedSurfaceRaster } from './surface-raster.mts';
 import { preparePagedEllipsoidScene } from './scene.mts';

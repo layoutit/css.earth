@@ -196,7 +196,7 @@
     },
     {
       "mechanic": "PDS layouts not supported by pdr",
-      "implementation": "existing format-specific readers, including tools/objects/terrestrial-layers/pds4-geometry-cube.mts",
+      "implementation": "existing format-specific readers, including packages/bake/src/objects/layers/terrestrial/missions/pds4-geometry-cube.ts",
       "reason": "The package boundary owns every product it successfully qualifies. Existing readers remain only for families such as the DART FITS-offset geometry cube that pdr 1.4.4 does not decode; no supported family has two production decoders."
     },
     {

@@ -1,8 +1,6 @@
 import {parse} from '@cssearth/core/schema';
-import {normalizedPresentationRecipe, type NormalizedPresentationRecipe} from './normalized-presentation-contract.mts';
-import {parsePhotometricDiscRecipe} from './photometric-disc.mts';
-import type {PhotometricRecipe} from './photometric-contract.mts';
-import type {prepareBandedEllipsoid} from './geometry.mts';
+import { normalizedPresentationRecipe, type NormalizedPresentationRecipe, parsePhotometricDiscRecipe, prepareNormalizedDiscProjection, phaseLightDirection } from '@cssearth/bake/objects/layers/giant';
+import type { PhotometricRecipe, prepareBandedEllipsoid } from '@cssearth/bake/objects/layers/giant';
 import type {Vector3, ReadonlyVector3} from '@cssearth/bake/objects/geometry';
 import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
@@ -14,7 +12,6 @@ import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presenta
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import{prepareMaterialTracks}from'../../prepare/prepare-materials.mts';
 import{rotateSequence}from'@cssearth/bake/objects/geometry';
-import{prepareNormalizedDiscProjection,phaseLightDirection}from'./photometric-disc.mts';
 
 const round=(value:number)=>Number(value.toFixed(12));
 const roundDirection=(v:ReadonlyVector3):Vector3=>[Number(v[0].toFixed(6)),Number(v[1].toFixed(6)),Number(v[2].toFixed(6))];

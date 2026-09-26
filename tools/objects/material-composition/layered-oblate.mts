@@ -1,7 +1,7 @@
 import { linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { sha256 } from '@cssearth/core/node';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
-import type {RingMotionPoint} from './radial-motion.mts';
+import type { RingMotionPoint, prepareRadialMotionAndShadow, prepareSpectralMaterialVariants } from '@cssearth/bake/objects/layers/material-composition';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
 interface RetainedLeaf {style:string;tag?:string;className?:string;projectiveTextureLayer?:ReturnType<typeof prepareProjectiveTextureLayer>;}
 interface PointGroup {population:string;durationSeconds:number;expansionGroupIndex?:number;points:RingMotionPoint[];}
@@ -23,10 +23,8 @@ interface FixedMaterialOptions extends RingRaster {objectLight:ReadonlyVector3;o
   textureUrl?:string;outputSize?:number;preparedMeshSilhouette?:boolean;materialMode?:string;}
 const mapVector3=(fn:(axis:number)=>number):Vector3=>[fn(0),fn(1),fn(2)];
 import {parse,object,number} from '@cssearth/core/schema';
-import {layeredRecipe} from './layered-recipe.mts';
-import {interiorSource} from '../cutaway/source-contract.mts';
-import type {prepareRadialMotionAndShadow} from './radial-motion.mts';
-import type {prepareSpectralMaterialVariants} from './spectral-variants.mts';
+import { layeredRecipe, polarQuad, extractRgbaBounds, visibleRgbaMatches, writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear, validateMaterialRecipe } from '@cssearth/bake/objects/layers/material-composition';
+import {interiorSource} from '@cssearth/bake/objects/layers/cutaway';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
@@ -41,12 +39,8 @@ import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '@cssearth/bake/scene';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
-import { polarQuad } from './texture-geometry.mts';
-import { verifyObservationSources } from '../observed-surfaces/index.mts';
-import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
+import { verifyObservationSources } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '@cssearth/bake/objects/geometry';
-import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
-import { validateMaterialRecipe } from './recipe.mts';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { tieBandRatios } from '@cssearth/bake/objects/raster';

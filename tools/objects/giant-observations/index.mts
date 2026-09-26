@@ -8,9 +8,9 @@ import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '@cssearth/bake/scene';
 import { readFitsPrimary } from '@cssearth/fits';
-import {verifyObservationSources} from '../observed-surfaces/index.mts';
-import {latitudeRasterBands} from '../giant-layers/geometry.mts';
-import {validateRelativePath} from '../material-composition/recipe.mts';
+import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
+import {latitudeRasterBands} from '@cssearth/bake/objects/layers/giant';
+import {validateRelativePath} from '@cssearth/bake/objects/layers/material-composition';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from './polar-continuation.mts';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from './scalar-coverage.mts';
 import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mts';
@@ -54,7 +54,7 @@ export function polarImageProjection(config: unknown): PoleProjection {
 
 /** Observed RGB/scalar maps, projective band packing, and source-structured poles.
  * The original observations are the only input; encoded surfaces are consumed
- * directly in memory for their matching thumbnail. With a dome (giant-layers/geometry.mts domeRingWarp), the pole imagery is
+ * directly in memory for their matching thumbnail. With a dome (`@cssearth/bake/objects/layers/giant`, geometry.ts domeRingWarp), the pole imagery is
  * composited into the map poleward of its edge, each dome ring's packed rows are written for its leaves, and the pole atlas
  * is laid out for the caps. */
 export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirectory,config,write=false,dome}: {sourceDirectory: string; publicDirectory: string; config: unknown; write?: boolean; dome?: DomeRingWarp}) {

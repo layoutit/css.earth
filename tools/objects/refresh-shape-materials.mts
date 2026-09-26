@@ -1,6 +1,5 @@
-import { retainedShapeAtlas } from './terrestrial-layers/retained-atlas.mts';
+import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
-import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
 import { sha256 } from '@cssearth/core/node';
 import { readAuthoredSources } from './authored-sources.ts';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
@@ -11,7 +10,6 @@ import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
-import { createRasterEmitter } from './terrestrial-layers/raster-output.mts';
 import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
 import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './terrestrial-layers/shape-material.mts';
@@ -20,7 +18,6 @@ import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts'
 import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.mts';
 import { renderRadialSnapshot } from './terrestrial-layers/radial-snapshot.mts';
-import { parseRadialSnapshot } from './terrestrial-layers/radial-source.mts';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
 import { validateMarkerDescriptor, renderMarker } from '../prepare/marker-recipe.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';

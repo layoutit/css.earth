@@ -1,7 +1,7 @@
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { llorriFieldTargets, requireLlorriTarget } from './llorri-geo.mts';
+import { llorriFieldTargets, requireLlorriTarget } from '@cssearth/bake/objects/layers/terrestrial';
 
 test('a L\'LORRI camera may name any body its frame lists in the field of view, and no other', () => {
   assert.deepEqual(llorriFieldTargets({ TRGFOVN: 1, TRGFOV1: "'DONALDJOHANSON'" }), ['DONALDJOHANSON']);

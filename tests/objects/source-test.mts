@@ -39,7 +39,10 @@ const tracked = (path: string): boolean => {
 export function missingSourceReason(error: unknown, objectId: string | null = null): string | null {
   if (!(error instanceof Error)) return null;
   const objects = resolve(root, 'src/objects') + sep, inside = root + sep;
-  const code = 'code' in error ? error.code : undefined, path = 'path' in error && typeof error.path === 'string' ? resolve(error.path) : null;
+  // sharp names an absent input in its message instead of an ENOENT code and path.
+  const sharpMissing = /^Input file is missing: (.+)$/u.exec(error.message)?.[1];
+  const code = sharpMissing ? 'ENOENT' : 'code' in error ? error.code : undefined;
+  const path = sharpMissing ? resolve(sharpMissing) : 'path' in error && typeof error.path === 'string' ? resolve(error.path) : null;
   if (code === 'ENOENT' && path && path.startsWith(inside) && !tracked(path.slice(inside.length))) {
     const relative = path.slice(inside.length);
     if (path.startsWith(objects)) {

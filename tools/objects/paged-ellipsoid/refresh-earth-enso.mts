@@ -1,13 +1,11 @@
 import { sha256 } from '@cssearth/core/node';
 import { readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest } from './refresh-source.mts';
-import { parseCoraltempRecipe } from './source-contract.mts';
+import { parseCoraltempRecipe, parseEnsoAdvisory, readCoraltempAnomaly, ensoContent, ensoText } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseEnsoAdvisory } from './enso-advisory.mts';
-import { readCoraltempAnomaly, ensoContent, ensoText } from './sst-anomaly.mts';
 
 const base = 'https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/';
 const advisoryUrl = 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml';

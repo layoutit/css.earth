@@ -8,12 +8,10 @@ import { parseGeoCameraClosure } from '@cssearth/bake/objects/raster';
 import { parseMeshProfile, loadObjShape } from '@cssearth/bake/objects/geometry';
 import { array, number, optional, shape, text } from '@cssearth/core';
 import { loadKernelSet } from '@cssearth/spice/node';
-import { llorriHeaderCamera } from './llorri-header-camera.mts';
-import { decodeLlorri, bindSipCamera } from './llorri-geo.mts';
+import { llorriHeaderCamera, decodeLlorri, bindSipCamera, matchImageFeatures } from '@cssearth/bake/objects/layers/terrestrial';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 import { castSourceRays } from '../surface-observations/geometry.mts';
 import { sampleFootprint } from '../surface-observations/footprint.mts';
-import { matchImageFeatures } from './image-feature-matching.mts';
 
 const matching = shape({patchRadius:number,searchRadius:number,gridStride:number,gridOrigin:number,targetSmoothingSigma:number,minimumCorrelation:number,minimumPeakMargin:number,minimumJointValidFraction:number});
 const transfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,visibilityToleranceMeters:number,maximumEmissionDegrees:number});

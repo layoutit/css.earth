@@ -1,8 +1,7 @@
 import {parse} from '@cssearth/core/schema';
-import {layeredPresentationRecipe, type LayeredPresentationRecipe} from './presentation-contract.mts';
-import {bandedGeometryRecipe} from './geometry-contract.mts';
-import type {prepareBandedEllipsoid} from './geometry.mts';
-import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.mts';
+import { layeredPresentationRecipe, type LayeredPresentationRecipe, bandedGeometryRecipe, prepareFixedSpanMaterialPlane } from '@cssearth/bake/objects/layers/giant';
+import type {prepareBandedEllipsoid} from '@cssearth/bake/objects/layers/giant';
+import {parseObservedSurfaceRecipe} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
 import type { PreparedNode, PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation';
 import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
@@ -12,7 +11,6 @@ import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} f
 import {preparedResourcePool} from '@cssearth/renderer/platform/prepared-object-assets';
 import {PREPARED_PRESENTATION_SCHEMA} from '../../../src/platform/prepared-presentation-contract.mts';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
-import {prepareFixedSpanMaterialPlane} from './geometry.mts';
 import {rasterEllipsoidMaterial} from './materials.mts';
 import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
 

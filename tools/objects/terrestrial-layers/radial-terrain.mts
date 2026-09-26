@@ -3,12 +3,9 @@ import type { createSourceManifest } from '../../../src/platform/source-manifest
 import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '@cssearth/bake/objects/geometry';
 import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
-import { parseRadialSource } from './radial-source.mts';
+import { parseRadialSource, loadEllipsoidParameters, loadContactEllipsoids, completeImageDem, reduceCompletedImageDem } from '@cssearth/bake/objects/layers/terrestrial';
 import { resolve } from 'node:path';
-import { loadEllipsoidParameters } from './ellipsoid-parameters.mts';
-import { loadContactEllipsoids } from './contact-ellipsoids.mts';
 import { loadImageDem, loadPdsScalarGrid } from '@cssearth/bake/objects/raster';
-import { completeImageDem, reduceCompletedImageDem } from './image-dem-completion.mts';
 import { buildSeamBleedPolygonEdges, computeSolidTrianglePlan, SOLID_TRIANGLE_BLEED, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';

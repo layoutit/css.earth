@@ -1,6 +1,6 @@
 import type { RadialState } from './solid-contract.mts';
 import { loadRadialTerrain } from './radial-terrain.mts';
-import { alternativeLensIds } from './alternative-lenses.mts';
+import { alternativeLensIds } from '@cssearth/bake/objects/layers/terrestrial';
 type TerrainContext = Parameters<typeof loadRadialTerrain>[0];
 const lensGroups = ['observations', 'scientific', 'observedColors', 'shapeViews', 'surfaceObservations'] as const;
 interface ModelConfig {

@@ -2,7 +2,7 @@ import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from './near-msi.mts';
+import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from '@cssearth/bake/objects/layers/terrestrial';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 
 const loaded = await sourceLoad(async () => {

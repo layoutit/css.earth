@@ -2,11 +2,11 @@ import { required } from './test-values.mts';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from '../objects/terrestrial-layers/osiris-geo.mts';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from '@cssearth/bake/objects/layers/terrestrial';
 import { sampleFootprint } from '../objects/surface-observations/footprint.mts';
 import { archiveBackplanes } from '../objects/surface-observations/geometry.mts';
 import { diskPhotometry } from '../objects/surface-observations/photometry.mts';
-import type { DiskPhotometry } from '../objects/terrestrial-layers/contracts.mts';
+import type { DiskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** A decoded GEO frame as the footprint stage sees it: optional quality flags and disk photometry. */
 const sampleGeo = (frame: ReturnType<typeof decodeOsirisGeo> & { quality?: { flags: ArrayLike<number>; allowLossy: boolean }; colorPlanes?: readonly ArrayLike<number>[]; acceptPixel?(index: number): boolean }, matrix: number[][], pointKm: number[],

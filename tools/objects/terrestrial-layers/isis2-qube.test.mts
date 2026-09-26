@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { decodeIsis2Qube } from './isis2-qube.mts';
+import { decodeIsis2Qube } from '@cssearth/bake/objects/layers/terrestrial';
 
 function fixture() {
   const header = `CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL

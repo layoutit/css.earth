@@ -7,7 +7,7 @@ import { encounterFormat } from './formats/encounter.mts';
 import { orthographicFormat } from './formats/orthographic.mts';
 import { controlledCameraFormat, controlledColorFormat } from './formats/controlled-camera.mts';
 import { junocamFormat } from './formats/junocam.mts';
-import { JUNOCAM_FORMAT } from '../terrestrial-layers/junocam.mts';
+import { JUNOCAM_FORMAT } from '@cssearth/bake/objects/layers/terrestrial';
 import { createSurfaceObservation, type SurfaceObservation } from './surface.mts';
 import { TILT, parseRefinement, refinementDecision, refinementKept, registrationStage, tiltDecision } from './registration.mts';
 import { tiltedCamera, turnedCamera } from './cameras.mts';

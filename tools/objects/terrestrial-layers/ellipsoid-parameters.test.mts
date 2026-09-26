@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { ellipsoidParameterMesh, subdividedOctahedron } from './ellipsoid-parameters.mts';
-import { contactEllipsoidMesh } from './contact-ellipsoids.mts';
+import { ellipsoidParameterMesh, subdividedOctahedron, contactEllipsoidMesh } from '@cssearth/bake/objects/layers/terrestrial';
 
 test('ellipsoid scaling preserves axis ratios and the explicit volume convention', () => {
   const model={schema:'cssearth-ellipsoid-parameters@1',scaleConvention:'thermal-radius-as-volume-equivalent',axisRatioAB:2,axisRatioBC:3,thermalRadiusKm:6,subdivisions:3};

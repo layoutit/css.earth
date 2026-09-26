@@ -119,6 +119,36 @@
       "import": "./dist/nebula.js",
       "default": "./dist/nebula.js"
     },
+    "./objects/layers/cutaway": {
+      "types": "./dist/objects/layers/cutaway.d.ts",
+      "import": "./dist/objects/layers/cutaway.js",
+      "default": "./dist/objects/layers/cutaway.js"
+    },
+    "./objects/layers/giant": {
+      "types": "./dist/objects/layers/giant.d.ts",
+      "import": "./dist/objects/layers/giant.js",
+      "default": "./dist/objects/layers/giant.js"
+    },
+    "./objects/layers/material-composition": {
+      "types": "./dist/objects/layers/material-composition.d.ts",
+      "import": "./dist/objects/layers/material-composition.js",
+      "default": "./dist/objects/layers/material-composition.js"
+    },
+    "./objects/layers/observed-surfaces": {
+      "types": "./dist/objects/layers/observed-surfaces.d.ts",
+      "import": "./dist/objects/layers/observed-surfaces.js",
+      "default": "./dist/objects/layers/observed-surfaces.js"
+    },
+    "./objects/layers/paged-ellipsoid": {
+      "types": "./dist/objects/layers/paged-ellipsoid.d.ts",
+      "import": "./dist/objects/layers/paged-ellipsoid.js",
+      "default": "./dist/objects/layers/paged-ellipsoid.js"
+    },
+    "./objects/layers/terrestrial": {
+      "types": "./dist/objects/layers/terrestrial.d.ts",
+      "import": "./dist/objects/layers/terrestrial.js",
+      "default": "./dist/objects/layers/terrestrial.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -138,6 +168,7 @@
     "@cssearth/telescope": "workspace:*",
     "@layoutit/polycss": "0.2.11",
     "geotiff": "3.0.5",
+    "h5wasm": "0.10.3",
     "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
     "sharp": "0.35.3",

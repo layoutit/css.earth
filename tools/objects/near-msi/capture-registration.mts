@@ -2,7 +2,7 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import sharp from 'sharp';
 import {parsePdsRadiusTable} from '@cssearth/bake/objects/geometry';
 import {matrixCamera} from '../surface-observations/cameras.mts';
-import {decodeNearMsi} from '../terrestrial-layers/near-msi.mts';
+import {decodeNearMsi} from '@cssearth/bake/objects/layers/terrestrial';
 import {requireRecord,requireArray,requireString,requireFiniteNumber} from '@cssearth/core';
 const root='src/objects/mathilde',source=`${root}/source`,out=`${root}/evidence/near-msi`;
 const body=requireRecord(JSON.parse(await readFile(`${root}/prepared/surfaces.json`,'utf8')));

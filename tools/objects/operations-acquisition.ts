@@ -78,7 +78,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());
  const publish=async(path:string,data:Uint8Array)=>{const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===path);if(!entry)throw new Error(`Undeclared acquisition target: ${path}.`);return publishPinnedSource({sourceRoot,entry,bytes:data});};
  // Attempt every step so one unreachable host does not hide the others; report all failures together.
- const hriiResults=new Map<string,Awaited<ReturnType<typeof import('./terrestrial-layers/hrii-facets.mts').prepareHriiFacets>>>();
+ const hriiResults=new Map<string,Awaited<ReturnType<typeof import('@cssearth/bake/objects/layers/terrestrial').prepareHriiFacets>>>();
  const spectralResults=new Map<string,Awaited<ReturnType<typeof import('./observation/spectral-band-maps.mts').prepareSpectralBandMaps>>>();
  const compositionResults=new Map<string,Awaited<ReturnType<typeof import('./acquisition/mapped-composition.mts').prepareMappedComposition>>>();
  const failures:{step:(typeof selected)[number];error:unknown}[]=[];
@@ -146,7 +146,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   }
   else if(step.kind==='hrii-facets'){
    let result=hriiResults.get(step.recipePath);
-   if(!result){const {prepareHriiFacets}=await import('./terrestrial-layers/hrii-facets.mts');result=await prepareHriiFacets(sourceRoot,step.recipePath);hriiResults.set(step.recipePath,result);}
+   if(!result){const {prepareHriiFacets}=await import('@cssearth/bake/objects/layers/terrestrial');result=await prepareHriiFacets(sourceRoot,step.recipePath);hriiResults.set(step.recipePath,result);}
    await publish(step.path,step.product==='fields'?result.bytes:new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'));
   }
   else if(step.kind==='spectral-band-maps'){

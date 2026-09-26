@@ -1,7 +1,7 @@
 import {array, boolean, dictionary, literal, number, object, optional, parse, record, string, tuple, union, type Guard, type Infer} from '@cssearth/core/schema';
 import type {PagedAssetConfiguration} from './asset-contract.mts';
 import type {PagedRasterConfiguration} from './surface-raster.mts';
-import type {PagedGeometryParameters} from './scene-contract.mts';
+import type {PagedGeometryParameters} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import {DERIVED_CAMERA_ANGLE_FIELDS, recipeCamera} from '../camera-source.mts';
 import {preparedControlPitch} from '@cssearth/engine';
 import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';

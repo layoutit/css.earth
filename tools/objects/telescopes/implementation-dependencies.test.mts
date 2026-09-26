@@ -82,16 +82,16 @@ test('the telescope library is followed into its sources, as when its modules sa
 
 test('the shared object libraries are followed into their bake sources, as when they sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-bake-objects-'));
-  const topics = ['cameras', 'color', 'geometry', 'raster', 'scene'];
+  const topics = ['cameras', 'color', 'geometry', 'raster', 'scene', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
   try {
-    await writeFile(resolve(root, 'entry.mts'), `${topics.map(topic => `import * as ${topic} from '@cssearth/bake/objects/${topic}';`).join(' ')}\nexport const used=[${topics.join(',')}];\n`);
+    await writeFile(resolve(root, 'entry.mts'), `${topics.map(topic => `import * as ${topic.replace(/\W/gu, '_')} from '@cssearth/bake/objects/${topic}';`).join(' ')}\nexport const used=[${topics.map(topic => topic.replace(/\W/gu, '_')).join(',')}];\n`);
     for (const topic of topics) {
       await mkdir(resolve(root, `packages/bake/src/objects/${topic}`), { recursive: true });
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/library.ts`), 'export const method=1;\n');
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/index.ts`), "export * from './library.ts';\n");
     }
     const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...topics.flatMap(topic => [`packages/bake/src/objects/${topic}/index.ts`, `packages/bake/src/objects/${topic}/library.ts`])]);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...topics.flatMap(topic => [`packages/bake/src/objects/${topic}/index.ts`, `packages/bake/src/objects/${topic}/library.ts`]).sort()]);
     for (const topic of topics) {
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/library.ts`), 'export const method=2;\n');
       const after = await implementationFingerprint(root, ['entry.mts']);

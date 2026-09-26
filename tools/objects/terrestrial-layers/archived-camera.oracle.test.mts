@@ -2,8 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeOsirisReflectance } from './archived-camera.mts';
-import { acceptOsirisQuality } from './osiris-geo.mts';
+import { decodeOsirisReflectance, acceptOsirisQuality } from '@cssearth/bake/objects/layers/terrestrial';
 import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 

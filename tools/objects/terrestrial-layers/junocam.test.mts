@@ -4,7 +4,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseTextKernel, numbers, parseLeapSeconds, utcToEt } from '@cssearth/spice';
 import { bankKernelPath } from '../../kernel-banks/kernel-bank.mts';
-import { FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FILTERS, decodeJunocam, frameEpoch, frameletIndex, junocamPixelMapping, junocamStrip, readJunocamLabel } from './junocam.mts';
+import { FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FILTERS, decodeJunocam, frameEpoch, frameletIndex, junocamPixelMapping, junocamStrip, readJunocamLabel } from '@cssearth/bake/objects/layers/terrestrial';
 
 const kernel = async (path: string) => readFile(await bankKernelPath('juno', path), 'latin1');
 const pool = parseTextKernel(await kernel('ik/juno_junocam_v03.ti'), 'juno_junocam_v03.ti');

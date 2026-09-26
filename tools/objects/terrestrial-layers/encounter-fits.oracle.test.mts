@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeEncounterFits } from './encounter-fits.mts';
+import { decodeEncounterFits } from '@cssearth/bake/objects/layers/terrestrial';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 

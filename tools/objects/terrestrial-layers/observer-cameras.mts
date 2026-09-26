@@ -14,8 +14,7 @@ import { parseTextKernel, parseLeapSeconds } from '@cssearth/spice';
 import { restoredBankFile } from '../../kernel-banks/kernel-bank.mts';
 import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from '@cssearth/bake/objects/cameras';
-import { limbCentre } from './registration-sweeps.mts';
-import { readingPole, spinRecordReading } from './spin-record-reading.mts';
+import { limbCentre, readingPole, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';
 
 const DEGREE = Math.PI / 180;
 export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@1';

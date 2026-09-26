@@ -2,8 +2,7 @@ import { required } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { readEncounterHdus, decodeEncounterFits } from './encounter-fits.mts';
-import { encounterCamera, validateBodyFrame } from './encounter-camera.mts';
+import { readEncounterHdus, decodeEncounterFits, encounterCamera, validateBodyFrame } from '@cssearth/bake/objects/layers/terrestrial';
 const card = (key: string, value: string | number | boolean) => `${key.padEnd(8)}= ${typeof value === 'string' ? `'${value.replaceAll("'", "''")}'` : typeof value === 'boolean' ? value ? 'T' : 'F' : value}`.padEnd(80);
 function hdu(name: string, bitpix: number, data: readonly number[], extra: Record<string, string | number | boolean> = {}, width = 2, height = 2) {
   const header = Buffer.from([name === 'PRIMARY' ? card('SIMPLE', true) : card('XTENSION', 'IMAGE'), card('BITPIX', bitpix),

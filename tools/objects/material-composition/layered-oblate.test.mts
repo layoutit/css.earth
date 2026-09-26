@@ -10,7 +10,7 @@ import { leafRasterScale, requireOutwardCap } from '@cssearth/bake/scene';
 import { floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { prepareSurfaceColour, widestPublishedImage } from './layered-oblate.mts';
-import { polarQuad } from './texture-geometry.mts';
+import { polarQuad } from '@cssearth/bake/objects/layers/material-composition';
 import { assertCapFacesOut } from '../../../tests/objects/polar-caps.mts';
 
 const image = (path: string, width: number, height: number) =>

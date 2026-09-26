@@ -1,6 +1,6 @@
 import { cross3 as cross } from '@cssearth/core';
 /** The shared surface transfer: from qualified frames to the atlas sampler, the flat preview and the report. */
-import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
+import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.mts';
 import { missingCoverageColor } from '@cssearth/bake/raster';

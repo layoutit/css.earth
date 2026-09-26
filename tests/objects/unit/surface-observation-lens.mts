@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { parseRadialLoaderConfig } from '../../../tools/objects/terrestrial-layers/radial-source.mts';
+import { parseRadialLoaderConfig } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { loadSurfaceObservation } from '../../../tools/objects/surface-observations/index.mts';

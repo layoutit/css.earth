@@ -6,12 +6,9 @@ import {pathToFileURL} from 'node:url';
 import { parseEncounterPolicy, parseEncounterSourceControl } from '@cssearth/bake/objects/raster';
 import { parseMeshProfile, loadPdsPlanetocentricShape } from '@cssearth/bake/objects/geometry';
 import {array,number,optional,shape,text} from '@cssearth/core';
-import {decodeEncounterFits} from '../terrestrial-layers/encounter-fits.mts';
-import {encounterCamera} from '../terrestrial-layers/encounter-camera.mts';
-import {validateEncounterControls} from '../terrestrial-layers/encounter-controls.mts';
+import { decodeEncounterFits, encounterCamera, validateEncounterControls, matchImageFeatures } from '@cssearth/bake/objects/layers/terrestrial';
 import {castSourceRays} from '../surface-observations/geometry.mts';
 import {sampleFootprint} from '../surface-observations/footprint.mts';
-import {matchImageFeatures} from '../terrestrial-layers/image-feature-matching.mts';
 
 const matching=shape({patchRadius:number,searchRadius:number,gridStride:number,gridOrigin:number,targetSmoothingSigma:number,minimumCorrelation:number,minimumPeakMargin:number,minimumJointValidFraction:number});
 const parseRecipe=shape({schema:text,margin:number,matching,maximumRmsPixels:number,maximumResidualPixels:number,frames:array(shape({id:text,referenceId:text,observation:parseEncounterPolicy}))});

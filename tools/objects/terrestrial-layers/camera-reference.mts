@@ -1,11 +1,10 @@
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { parseRadialLoaderConfig } from './radial-source.mts';
+import { parseRadialLoaderConfig, decodeOsirisReflectance } from '@cssearth/bake/objects/layers/terrestrial';
 // Preparation-only source-model image for archived-camera registration.
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadRadialTerrain } from './radial-terrain.mts';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { decodeOsirisReflectance } from './archived-camera.mts';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 import { castSourceRays } from '../surface-observations/geometry.mts';
 const [sourceDirectory,cameraPath,imagePath,output] = process.argv.slice(2);

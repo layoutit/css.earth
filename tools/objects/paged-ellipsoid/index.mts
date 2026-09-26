@@ -26,7 +26,7 @@ export interface PagedEllipsoidContext {
   acceptChanged?: readonly string[];
 }
 
-import { prepareTextureLevels } from './texture-levels.mts';
+import { prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 
 const json = readJsonSource;
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);

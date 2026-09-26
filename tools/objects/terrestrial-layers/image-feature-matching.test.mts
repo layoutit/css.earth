@@ -1,7 +1,7 @@
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import {matchImageFeatures,type MatchRaster} from './image-feature-matching.mts';
+import {matchImageFeatures,type MatchRaster} from '@cssearth/bake/objects/layers/terrestrial';
 
 const policy={patchRadius:4,searchRadius:9,gridStride:13,gridOrigin:14,targetSmoothingSigma:.35,minimumCorrelation:.86,minimumPeakMargin:.03,minimumJointValidFraction:.85};
 test('image matching recovers a translation despite exposure changes and flagged pixels',()=>{

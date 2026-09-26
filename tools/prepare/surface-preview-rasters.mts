@@ -7,7 +7,7 @@ import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createProjectiveSurfaceRasterLayout } from '@cssearth/bake/scene';
-import { latitudeRasterBands } from '../objects/giant-layers/geometry.mts';
+import { latitudeRasterBands } from '@cssearth/bake/objects/layers/giant';
 import { preparePagedSurfaceMap } from '../objects/paged-ellipsoid/assets.mts';
 
 // Reverse only the declared lossless packing, before downsizing. Unrepresented

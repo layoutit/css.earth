@@ -2,7 +2,7 @@ import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { array, number, shape, text } from '@cssearth/core';
-import { mathildeImageCamera, decodeNearMsi } from '../terrestrial-layers/near-msi.mts';
+import { mathildeImageCamera, decodeNearMsi } from '@cssearth/bake/objects/layers/terrestrial';
 import { pds4Field } from '@cssearth/telescope';
 
 const source = resolve(process.argv[2] ?? 'src/objects/mathilde/source');

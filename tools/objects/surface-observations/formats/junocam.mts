@@ -1,6 +1,6 @@
 /**
  * JunoCam colour photographs. One recipe frame is one calibrated image: a stack of strips through the detector's red,
- * green and blue filters, every strip with its own camera from the Juno kernels (../../terrestrial-layers/junocam.mts).
+ * green and blue filters, every strip with its own camera from the Juno kernels (`@cssearth/bake/objects/layers/terrestrial`, junocam.ts).
  * The image's two epochs are first fitted to the lit limb of the body's mesh (strip-refinement.mts). Each band then
  * becomes one frame made of its strips, and the three bands one colour photograph, so everything after the frame is the
  * shared route: footprints, photometry, selection between photographs, level matching, display and the report.
@@ -14,9 +14,7 @@ import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '../../../kernel-banks/kernel-bank.mts';
 import { etToUtc } from '@cssearth/spice';
 import { ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
-import { project } from '../../terrestrial-layers/osiris-geo.mts';
-import { CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry } from '../../terrestrial-layers/junocam.mts';
-import { refineStripEpochs, validateStripRefinement } from '../../terrestrial-layers/strip-refinement.mts';
+import { project, CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry, refineStripEpochs, validateStripRefinement } from '@cssearth/bake/objects/layers/terrestrial';
 import { bandColorDisplay } from '@cssearth/bake/objects/color';
 import { matrixCamera, type PixelDistortion } from '../cameras.mts';
 import { castSourceRays } from '../geometry.mts';

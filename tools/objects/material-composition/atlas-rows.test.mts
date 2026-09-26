@@ -5,7 +5,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.mts';
+import { prepareAtlasRows, prepareAtlasStill } from '@cssearth/bake/objects/layers/material-composition';
 
 test('streamed rows preserve every RGBA texel and the scaled frame addresses', async () => {
   const root = await mkdtemp(join(tmpdir(), 'material-rows-'));

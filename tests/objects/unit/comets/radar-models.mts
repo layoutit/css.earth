@@ -6,7 +6,7 @@ import { sourceTest } from '../../source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {ellipsoidParameterMesh} from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
+import {ellipsoidParameterMesh} from '@cssearth/bake/objects/layers/terrestrial';
 import {readAuthoredRotation} from '@cssearth/bake/objects/scene';
 const read=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 export function testRadarApproximation(id:string,semiaxesMeters:readonly number[]){

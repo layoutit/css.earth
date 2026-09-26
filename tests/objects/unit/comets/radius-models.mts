@@ -6,7 +6,7 @@ const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
-import {ellipsoidParameterMesh} from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
+import {ellipsoidParameterMesh} from '@cssearth/bake/objects/layers/terrestrial';
 import {readAuthoredRotation} from '@cssearth/bake/objects/scene';
 import {requireObjectRotationReference} from '../radial-fixture.mts';
 const json=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));

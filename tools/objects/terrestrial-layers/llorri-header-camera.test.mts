@@ -6,8 +6,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { loadKernelSet } from '@cssearth/spice/node';
-import { llorriHeaderCamera } from './llorri-header-camera.mts';
-import { bindSipCamera } from './llorri-geo.mts';
+import { llorriHeaderCamera, bindSipCamera } from '@cssearth/bake/objects/layers/terrestrial';
 
 test('FITS camera and shared SPICE reproduce the independent Astropy projection anchors', async () => {
   const root = resolve('src/objects/donaldjohanson/source');

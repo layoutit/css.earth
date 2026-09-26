@@ -14,9 +14,10 @@ import { pathToFileURL } from 'node:url';
 
 /** Tracked node-test files the selection may take, as `git ls-files` pathspecs. */
 export const BAKE_OBJECT_TEST_PATHS = ['tools/**/*.test.mts', 'tools/**/*.test.ts', 'tests/**/*.test.mts', 'tests/**/*.test.ts'] as const;
-const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/[a-z-]+['"]/u;
+const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
 
-/** The test files among `files` whose source (read by `read`) imports an `@cssearth/bake/objects/<topic>` entry, sorted. */
+/** The test files among `files` whose source (read by `read`) imports an `@cssearth/bake/objects/<topic>` or
+ * `@cssearth/bake/objects/layers/<kind>` entry, sorted. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {
   return files.filter(path => /\.test\.m?ts$/u.test(path) && OBJECT_ENTRY.test(read(path))).sort();
 }

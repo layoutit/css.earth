@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { alternativeForLens, alternativeLensIds } from './alternative-lenses.mts';
-import { radialTerrainForLens } from './alternative-lenses.mts';
+import { alternativeForLens, alternativeLensIds, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
 test('an alternative mesh serves its own lens and the lenses it names as sharing its frame', () => {

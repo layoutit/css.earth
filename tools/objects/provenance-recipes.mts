@@ -1,4 +1,4 @@
-import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
+import { alternativeForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import {record, records, maybeRecord, text, texts, optionalText, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
 import {CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY} from '@cssearth/renderer/platform/prepared-object-assets';
 import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.mts';

@@ -7,7 +7,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { writeArrayBuffer } from 'geotiff';
 import sharp from 'sharp';
-import { loadNativePhotograph } from './native-photograph-source.mts';
+import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
 const source = (path: string, bytes: Buffer, width: number, height: number, projection: Record<string, unknown> = {
   kind: 'simple-cylindrical', longitudeDirection: 'east', latitudeType: 'planetocentric'

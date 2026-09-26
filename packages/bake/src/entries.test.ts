@@ -46,12 +46,18 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'cluster-catalog': ['galaxy-catalog'],
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
+  'objects/layers/observed-surfaces': ['scene', 'objects/geometry'],
+  'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/observed-surfaces'],
+  'objects/layers/material-composition': ['raster', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
+  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'objects/raster'],
+  'objects/layers/terrestrial': ['photometry', 'raster', 'objects/cameras', 'objects/geometry', 'objects/raster'],
 };
 
 /** A topic is a top-level folder of `src/`, except `objects/`, whose every folder is a topic of its own (`objects/color`,
- * published as `@cssearth/bake/objects/color`). Returns the topic and the path inside it. */
+ * published as `@cssearth/bake/objects/color`), and `objects/layers/`, whose every folder is one too (`objects/layers/giant`).
+ * Returns the topic and the path inside it. */
 function topicOf(name: string): readonly [string, string] {
-  const parts = name.split('/'), depth = parts[0] === 'objects' ? 2 : 1;
+  const parts = name.split('/'), depth = parts[0] !== 'objects' ? 1 : parts[1] === 'layers' ? 3 : 2;
   return [parts.slice(0, depth).join('/'), parts.slice(depth).join('/')];
 }
 
@@ -77,14 +83,16 @@ it('topics import only the lower topics declared for them, through their index, 
   expect(topicOffenders(files)).toEqual([]);
 });
 
-it('each folder under objects/ is a topic of its own: one imports another only as a declared lower topic, through its index', () => {
+it('each folder under objects/ and objects/layers/ is a topic of its own: one imports another only as a declared lower topic, through its index', () => {
   expect(topicOffenders(new Map([
     ['objects/geometry/shape.ts', "import { a } from './mesh.ts';\nimport { b } from '../color/color-transfer.ts';\nimport { c } from '../color/index.ts';"],
     ['objects/color/color-transfer.ts', "import { d } from '../../raster/index.ts';"],
+    ['objects/layers/giant/rings.ts', "import { e } from './geometry.ts';\nimport { f } from '../cutaway/materials.ts';"],
   ]))).toEqual([
     "objects/geometry/shape.ts -> ../color/color-transfer.ts",
     "objects/geometry/shape.ts -> ../color/index.ts",
     "objects/color/color-transfer.ts -> ../../raster/index.ts",
+    "objects/layers/giant/rings.ts -> ../cutaway/materials.ts",
   ]);
 });
 

@@ -2,8 +2,7 @@ import { refuseAuthoredCameraAngles } from '../../../src/platform/default-camera
 import {requireRecord,shape,number,text,optional,nullable,array,boolean,dictionary,choice} from '@cssearth/core';
 import { parseSciencePalette } from '@cssearth/bake/objects/raster';
 import { parseTransform } from '@cssearth/bake/objects/geometry';
-import {parseSolidScience,parseSolidRasterConfig} from './solid-source.mts';
-import {parseRadialSource} from './radial-source.mts';
+import { parseSolidScience, parseSolidRasterConfig, parseRadialSource } from '@cssearth/bake/objects/layers/terrestrial';
 
 const grid = shape({width:optional(number),height:optional(number),noData:optional(nullable(number)),
   projection:optional(text),poleLatitude:optional(number),latitudeRange:optional(array(number)),

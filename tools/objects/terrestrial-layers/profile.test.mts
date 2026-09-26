@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { parseTerrestrialProfile } from './index.mts';
-import { radialModelForLens } from './alternative-lenses.mts';
+import { radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{

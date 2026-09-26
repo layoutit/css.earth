@@ -158,7 +158,7 @@ browser comparisons relevant to the actual feature.
 
 Start with the [photographic investigation route](photographic-investigation.md):
 an existing map need not pass through camera reconstruction. For supported
-cylindrical photographic maps, `tools/objects/terrestrial-layers/native-photograph-source.mts`
+cylindrical photographic maps, `packages/bake/src/objects/layers/terrestrial/native-photograph-source.ts`
 reads the pinned raster with its declared grid and validity policy;
 `native-photograph.mts` samples it onto existing triangle-atlas rectangles.
 `radial-terrain.mts` selects this path through an observation's
@@ -256,7 +256,7 @@ for availability; this reference does not establish merge or deployment status.
 | Capability | Owner relative to the repository |
 | --- | --- |
 | Observation pins, quality policy, photometry and transfer limits | `src/objects/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
-| OSIRIS decoding, companion identity and quality flags | `tools/objects/terrestrial-layers/osiris-geo.mts` |
+| OSIRIS decoding, companion identity and quality flags | `packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.ts` |
 | Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `tools/objects/surface-observations/`, described in its [README](../../../../tools/objects/surface-observations/README.md) |
 | Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/surface-observations/levels.mts` |
 | Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-materials.mts` |
@@ -272,7 +272,7 @@ Archives that ship an image with its geometric backplanes as one PDS4 cube use
 the same pipeline through `format: "pds4-geometry-cube"`: the recipe's `cube` block
 names the label planes that carry the image, the X/Y/Z intercepts and the
 angles, the collection, target, observing system and DSK to bind, and optional
-FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.mts`
+FITS header expectations. `packages/bake/src/objects/layers/terrestrial/missions/pds4-geometry-cube.ts`
 validates all of it against the label (offsets, units, special constants) and
 the header, converts units, and recovers nothing else; the camera comes from the
 shared fit above. Dimorphos's DART DRACO view
@@ -328,7 +328,7 @@ for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.
 A `spice-camera` or `osiris-camera` recipe may declare `limbRefinement: { method:
 "mesh-limb", maximumCorrectionDegrees, maximumResidualPixels, minimumControls,
 searchPixels?, maximumControls?, minimumSharpness?, threshold? }` and
-`tools/objects/terrestrial-layers/limb-refinement.mts` then fits one rotation of
+`packages/bake/src/objects/layers/terrestrial/registration/limb-refinement.ts` then fits one rotation of
 the camera to the lit limb of the retained mesh before geometry is derived:
 edges are the sub-pixel coverage crossings of the body against background
 connected to space, sharp enough not to be terminator; each edge is matched to

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeLlorri, sipPixel } from './llorri-geo.mts';
+import { decodeLlorri, sipPixel } from '@cssearth/bake/objects/layers/terrestrial';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 

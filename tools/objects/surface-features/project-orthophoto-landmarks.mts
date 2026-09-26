@@ -2,7 +2,7 @@ import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { decodeIsis2Qube } from '../terrestrial-layers/isis2-qube.mts';
+import { decodeIsis2Qube } from '@cssearth/bake/objects/layers/terrestrial';
 import { fitImageControls } from './image-controls.mts';
 
 type Pixel = readonly [number, number];

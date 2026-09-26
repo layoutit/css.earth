@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { alphaAtlasName, triangleSlices, webpIsLossless } from './triangle-alpha-atlas.mts';
+import { alphaAtlasName, triangleSlices, webpIsLossless } from '@cssearth/bake/objects/layers/terrestrial';
 
 const face = (parent: number, className: string, x: number, size: string, display?: string) => ({ parent, tag: 'u', className,
   style: `transform:none;background-position:-${x}px -4px;background-size:${size};--polycss-atlas-width:10px;--polycss-atlas-height:8px${display ? `;display:var(${display})` : ''}` });

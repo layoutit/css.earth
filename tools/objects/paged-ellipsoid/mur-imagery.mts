@@ -1,7 +1,7 @@
 import {readJsonSource} from '../../sources/source-values.mts';
 import {requireString} from '@cssearth/core';
-import {parseMurReceipt} from './source-contract.mts';
-import type {EnsoRecipe, MurInventory, MurMosaic, MurTile} from './contracts.mts';
+import {parseMurReceipt} from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import type {EnsoRecipe, MurInventory, MurMosaic, MurTile} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 interface AcquiredMurInventory extends MurInventory {
   schema: string; checked: string; product: string; baseline: string; layer: string;
   grid: {crs: string; level: number; columns: number; rows: number; tileSize: number; west: number; north: number; cellDegrees: number};

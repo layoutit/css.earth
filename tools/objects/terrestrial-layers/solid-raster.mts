@@ -1,13 +1,11 @@
 import { readObservation, type ObservationRaster, colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor, loadControlledObservationGeometry, matchObservedColorLevels, npyLonLatGridDependencies } from '@cssearth/bake/objects/raster';
-import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid } from './raster-grid.mts';
+import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid, createRasterEmitter, parseSolidRasterConfig, parseSurfaceSource, radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import type { WebpOptions } from 'sharp';
-import { createRasterEmitter } from './raster-output.mts';
 import { writeLossyWebp, paintMissingCoverage } from '@cssearth/bake/raster';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import type { RadialState } from './solid-contract.mts';
 import { encodeBandColor, interpolatePalette } from '@cssearth/bake/objects/color';
-import { parseSolidRasterConfig, parseSurfaceSource } from './solid-source.mts';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';
 import type { SolidSurface } from './solid-contract.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -16,7 +14,6 @@ import sharp from 'sharp';
 import { packProjectiveSurfaceRaster, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '@cssearth/bake/scene';
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
-import { radialModelForLens } from './alternative-lenses.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
 interface SolidMaterialConfig {
   namespace: string; publicBase: string; raster: SolidRasterGrid;
