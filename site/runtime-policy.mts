@@ -39,8 +39,8 @@ export const FLIGHT_VISIBLE_APPROACH = Object.freeze({
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 // A pinch reports the change in finger distance, not a scroll distance. Chrome sends a trackpad pinch as ctrlKey wheel
-// events of 100 x ln(scale) delta units (components/input/touchpad_pinch_event_queue.cc), and a two-finger touch
-// pinch (MOBILE_TOUCH_ACTION) is sent the same way, so both devices share one finger scale.
+// events of 100 x ln(scale) delta units (components/input/touchpad_pinch_event_queue.cc). A two-finger touch pinch
+// (MOBILE_TOUCH_ACTION) is sent as the same ctrlKey wheel, with its own units below.
 // A pinch crosses the whole camera range, from a body's closest view out to 6.2e21 km, where the Sun's view ends
 // 36 natural-log units from its closest view. One rate cannot suit both ends. At 18x per full pinch, crossing
 // open space took 11 pinches, and one pinch took Earth from its default view to its closest view (headless
@@ -50,6 +50,10 @@ export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 // A full trackpad pinch was traced at 150-170 delta units (MacBook, 2026-09-24), a finger ratio of about 5.
 export const WHEEL_ZOOM_PINCH = Object.freeze({
   wheelDeltaPerFingerLogStep: 100,
+  // Fingers on the glass hold the body, so it should grow as they spread. Sent in trackpad units, one spread to
+  // twice the finger distance grew Earth's on-screen radius only 1.35-1.40x, 0.46 of the fingers' log step
+  // (headless touch, 390 x 844 and 820 x 1,180, 2026-09-25). 100 / 0.46 makes the body follow the fingers.
+  touchWheelDeltaPerFingerLogStep: 217,
   fullPinchFingerRatio: 5,
   // Earth's default view is 0.93 log units from its closest view: two full pinches, as it is two wheel notches.
   nearRemainingPerFullPinch: 0.6,

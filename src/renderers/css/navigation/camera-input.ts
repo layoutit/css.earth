@@ -436,7 +436,7 @@ export function createUnboundedMatrixDragControls({
       event.preventDefault();
       const spread = touchSpread();
       if (spread.distance > 0 && pinchDistance > 0 && spread.distance !== pinchDistance) {
-        const deltaY = -Math.log(spread.distance / pinchDistance) * runtimePolicy.WHEEL_ZOOM_PINCH.wheelDeltaPerFingerLogStep;
+        const deltaY = -Math.log(spread.distance / pinchDistance) * runtimePolicy.WHEEL_ZOOM_PINCH.touchWheelDeltaPerFingerLogStep;
         pinchDistance = spread.distance;
         inputSurface.dispatchEvent(new windowTarget.WheelEvent("wheel", {
           bubbles: true, cancelable: true, ctrlKey: true, deltaY, deltaMode: 0, clientX: spread.x, clientY: spread.y }));

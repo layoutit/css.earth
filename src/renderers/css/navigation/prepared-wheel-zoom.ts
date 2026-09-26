@@ -63,6 +63,7 @@ export function createPreparedWheelZoomControls({
       !(dolly?.stepPerDelta > 0) ||
       (dolly.minimumDistance !== undefined && typeof dolly.minimumDistance !== "function") ||
       !(runtimePolicy.WHEEL_ZOOM_PINCH.wheelDeltaPerFingerLogStep > 0 &&
+        runtimePolicy.WHEEL_ZOOM_PINCH.touchWheelDeltaPerFingerLogStep > 0 &&
         runtimePolicy.WHEEL_ZOOM_PINCH.fullPinchFingerRatio > 1 &&
         runtimePolicy.WHEEL_ZOOM_PINCH.nearRemainingPerFullPinch > 0 &&
         runtimePolicy.WHEEL_ZOOM_PINCH.nearRemainingPerFullPinch < 1 &&
