@@ -24,20 +24,29 @@ const array = (value: unknown, label: string): readonly unknown[] => {
   if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
   return value;
 };
-/** Join authored dataset links while building the page; no source lookup runs in the browser. */
-export function datasetSourceUrls(input: unknown, objectId: string): ReadonlyMap<string, string> {
+/** Join authored dataset links and scope while building the page; no source lookup runs in the browser. */
+export function authoredDatasetMetadata(input: unknown, objectId: string): {
+  sourceUrls: ReadonlyMap<string, string>; systemDatasetIds: ReadonlySet<string>;
+} {
   const content = object(input, 'object content source');
-  if (content.schema !== 'cssearth-object-content@1' || content.id !== objectId) throw new TypeError(`${objectId}: dataset source owner differs.`);
+  if (content.schema !== 'cssearth-object-content@1' || content.id !== objectId) throw new TypeError(`${objectId}: dataset metadata owner differs.`);
   const lenses = object(content.lenses, 'object content lenses');
-  const urls = new Map<string, string>();
+  const sourceUrls = new Map<string, string>();
+  const systemDatasetIds = new Set<string>();
+  const ids = new Set<string>();
   for (const value of array(lenses.controls, 'object content lens controls')) {
     const control = object(value, 'object content lens');
     const id = text(control.id, 'object content lens id');
-    if (urls.has(id)) throw new TypeError(`${objectId}: duplicate dataset source for ${id}.`);
-    const source = object(control.source, 'object content lens source');
-    if (source.url !== undefined) urls.set(id, sourceUrl(source.url));
+    if (ids.has(id)) throw new TypeError(`${objectId}: duplicate dataset ${id}.`);
+    ids.add(id);
+    if (control.scope !== undefined && control.scope !== 'system') throw new TypeError(`${objectId}: invalid dataset scope for ${id}.`);
+    if (control.scope === 'system') systemDatasetIds.add(id);
+    if (control.source !== undefined) {
+      const source = object(control.source, 'object content lens source');
+      if (source.url !== undefined) sourceUrls.set(id, sourceUrl(source.url));
+    }
   }
-  return urls;
+  return { sourceUrls, systemDatasetIds };
 }
 function rasterTitle(value: unknown): PreparedTitle {
   const title = object(value, 'raster title');

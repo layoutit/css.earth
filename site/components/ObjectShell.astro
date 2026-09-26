@@ -335,7 +335,7 @@ const searchCategories = [
         {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
         <SystemHeaders only={[SOLAR_SYSTEM_ID, ...(ownSystem ? [ownSystem.id] : [])]} />
         <span data-system-headers-slot hidden></span>
-        {/* A dataset that draws something the whole system shares, like a debris disc, belongs to the system, not to its star:
+        {/* A dataset authored for the whole system, like a debris disc, belongs to the system, not to its star:
             the shell moves those options here while the system is the selection, and back to the body card when it is not. */}
         <div class="object-lenses object-system-datasets" data-system-datasets hidden>
           <nav class="object-observation-controls" aria-label="Datasets" data-system-dataset-options></nav>

@@ -62,7 +62,7 @@ const stepOf = (lens: Control) => {
       </div>
     <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens, index) => (
-        <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}
+        <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-system-dataset={lens.systemDataset ? lens.id : undefined}
           data-step-group={lens.step?.group} data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
           <button
             class="object-observation-control object-thumbnail-leading"
@@ -96,7 +96,7 @@ const stepOf = (lens: Control) => {
       <div
         id={`${objectId}-${lens.id}-details`}
         data-lens-details={focus ? undefined : lens.id}
-        data-lens-volume-details={!focus && lens.volume ? lens.id : undefined}
+        data-system-dataset-details={!focus && lens.systemDataset ? lens.id : undefined}
         data-focus-lens-details={focus ? lens.id : undefined}
         hidden={lens.id !== lenses.defaultLens}
       >

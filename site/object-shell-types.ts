@@ -60,6 +60,8 @@ export interface LensControl {
   label: string;
   thumbnailUrl: string;
   sourceUrl?: string;
+  /** This dataset describes the whole host system, so its reader row belongs on the system card. */
+  systemDataset?: boolean;
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
   /** The surface marks missing observations with the shared no-data grid. */
   noData?: boolean;
