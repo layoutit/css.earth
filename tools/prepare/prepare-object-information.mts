@@ -10,7 +10,7 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 
 import {
   OBJECT_INFORMATION_SOURCES,
@@ -87,10 +87,6 @@ export async function prepareObjectInformation(
     );
   }
   return Object.freeze(prepared);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await prepareObjectInformation();
 }
 
 async function prepareInformationSnapshot(config: ObjectInformationSource): Promise<ObjectInformationSnapshot> {

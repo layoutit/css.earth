@@ -5,7 +5,6 @@ import { randomUUID } from 'node:crypto';
 import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { basename, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
 import sharp from "sharp";
 import type { PreparationOptions, PreparationEvent } from '../cli/run-implemented-objects.mts';
 type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
@@ -24,7 +23,7 @@ import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt 
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 
-const sharedSteps = ["prepare-shell-titles.mts", "prepare-scientific-charts.mts"];
+const sharedSteps = ["prepare-shell-titles.mts", "cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 const traceModule = new URL("./preparation-trace.mts", import.meta.url).href;
 
@@ -128,16 +127,4 @@ export async function prepareObjects({ projectRoot = process.cwd(), force = fals
     console.log(`Prepared ${report.rebuilt.length} objects; verified ${report.cached.length} unchanged objects in ${(totalReport.totalElapsedMilliseconds / 1000).toFixed(1)}s.`);
     return totalReport;
   } finally { await rm(lock, { force: true }); }
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const options: { force?: boolean; concurrency?: number; objectIds?: string[] } = {};
-  for (const argument of process.argv.slice(2)) {
-    if (argument === "--") continue;
-    if (argument === "--force") options.force = true;
-    else if (argument.startsWith("--concurrency=")) options.concurrency = Number(argument.slice("--concurrency=".length));
-    else if (argument.startsWith("--object=")) (options.objectIds ??= []).push(argument.slice("--object=".length));
-    else throw new Error(`Unknown preparation argument: ${argument}`);
-  }
-  await prepareObjects(options);
 }

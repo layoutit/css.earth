@@ -33,9 +33,10 @@ export function parseMoonVector(input: unknown, code: string, center: string, ep
   return { positionKm: position, ephemeris };
 }
 
-if (import.meta.main) {
+/** Write site/moon-labels.prepared.json from the saved Horizons replies; `refresh` first re-requests them from JPL. */
+export async function prepareMoonLabels({ refresh = false }: { refresh?: boolean } = {}) {
   const path = 'site/source/moon-horizons.json.gz';
-  if (process.argv.includes('--refresh')) {
+  if (refresh) {
     await mkdir('output/moon-horizons', { recursive: true });
     const responses: { id: string; parentId: string; code: string; query: string; response: unknown }[] = [];
     for (const system of catalogue.systems) {

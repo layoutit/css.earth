@@ -1,5 +1,4 @@
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { inventoryAssets, inventoriedObjectIds, volumeMetadataAssets } from '../assets/runtime-assets.mts';
 import type { RuntimeAssetLocation } from '../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../assets/setup.mts';
@@ -10,7 +9,7 @@ export type CiInputMode = 'universe' | 'universe-preparation';
 
 export function requireCiInputMode(args: readonly string[]): CiInputMode {
   if (args.length !== 1 || (args[0] !== 'universe' && args[0] !== 'universe-preparation')) {
-    throw new TypeError('Usage: node tools/prepare/prepare-ci-inputs.mts <universe|universe-preparation> (run pnpm build:tools first).');
+    throw new TypeError('Usage: node tools/prepare/cli/prepare-ci-inputs.mts <universe|universe-preparation> (run pnpm build:tools first).');
   }
   return args[0];
 }
@@ -89,13 +88,4 @@ export async function restoreCiUniverseInputs({ root = projectRoot, ...options }
 /** The ordinary SHA/size verifier remains the only installer. CI never permits missing selected inputs. */
 export async function restoreCiPreparationInputs({ root = projectRoot, ...options }: CiRestoreOptions = {}) {
   return restoreSelectedCiInputs(await ciPreparationInputs(root), options);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const mode = requireCiInputMode(process.argv.slice(2));
-  const restore = mode === 'universe' ? restoreCiUniverseInputs : restoreCiPreparationInputs;
-  const result = await restore({ onProgress: ({ completed, total }) => {
-    if (completed % 100 === 0 || completed === total) console.log(`${mode} inputs: ${completed}/${total}`);
-  } });
-  console.log(`${mode} inputs ready: ${JSON.stringify(result)}`);
 }

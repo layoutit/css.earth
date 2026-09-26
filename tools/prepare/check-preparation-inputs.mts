@@ -1,7 +1,6 @@
-#!/usr/bin/env node
 /** Check what the preparation chain's later steps read, before its long bake, so a bad input fails in seconds.
  *
- *   node tools/prepare/check-preparation-inputs.mts <object-id>...
+ *   node tools/prepare/cli/check-preparation-inputs.mts <object-id>...
  *
  * - Reader text. The text step runs after the bake and refuses a block over its budget; Aspasia's 134-character summary
  *   (budget 125) failed there after the bake had finished. Each named object's `text.json` is checked against the same
@@ -13,14 +12,13 @@
  *   Sun skips this. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { hasErrorCode } from '@cssearth/core';
 import { parseObjectText, textBudgetErrors } from '../../site/object-text.mts';
 import type { TextFinding } from '../../site/object-text.mts';
 import { inventoryAssets } from '../assets/runtime-assets.mts';
 import type { InventoryAsset } from '../../src/platform/runtime-asset-closure.mts';
-import { deriveRestoredPreparedFiles, installRuntimeAssets } from '../assets/setup.mts';
+import { installRuntimeAssets } from '../assets/setup.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const readOptional = (path: string) => readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
@@ -53,23 +51,4 @@ export async function restoreDriftedFiles(id: string, { projectRoot = root, keep
   }
   if (drifted.length) await installRuntimeAssets(drifted, { fetcher });
   return drifted.map(asset => `${asset.location}/${asset.filename}`);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const ids = process.argv.slice(2);
-  if (!ids.length) throw new TypeError('Usage: check-preparation-inputs <object-id>...');
-  const findings = await textBudgetFindings(ids);
-  if (findings.length) {
-    console.error(`Reader text breaks its budgets; fix it before the bake, or the text step refuses it after:\n${findings
-      .map(({ objectId, slot, rule, detail }) => `  src/objects/${objectId}/text.json ${slot}: ${rule}, ${detail}`).join('\n')}`);
-    process.exitCode = 1;
-  } else {
-    console.log('Reader text is within its budgets.');
-    if (!ids.includes('sun')) {
-      const restored = await restoreDriftedFiles('sun', { keep: worldStepOutput });
-      if (restored.length) console.log(`Restored ${restored.length} Sun file(s) that differed from its inventory, before the world and pins steps build on them: ${restored.join(', ')}.`);
-      // A checkout that never restored the Sun also lacks the page data derived from it, which the provenance step reads.
-      await deriveRestoredPreparedFiles(['sun'], root);
-    }
-  }
 }

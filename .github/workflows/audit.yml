@@ -173,7 +173,7 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             pnpm setup:asset-data
           else
-            node tools/prepare/prepare-ci-inputs.mts universe
+            node tools/prepare/cli/prepare-ci-inputs.mts universe
           fi
           node tools/assets/restore-object-json.mts
           node tools/prepare/cli/prepare-provenance.mts --objects-only
@@ -201,7 +201,7 @@ jobs:
             echo "This change selects no preparation area; there is no bake to reproduce."
             exit 0
           fi
-          node tools/prepare/prepare-ci-inputs.mts universe-preparation
+          node tools/prepare/cli/prepare-ci-inputs.mts universe-preparation
           # The galaxy writer finishes before world/provenance readers in this workspace.
           node tools/assets/restore-source-inputs.mts --repository-volumes
           pnpm test:preparation --universe

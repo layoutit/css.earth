@@ -386,7 +386,7 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
             pnpm setup:asset-data
           else
-            node tools/prepare/prepare-ci-inputs.mts universe
+            node tools/prepare/cli/prepare-ci-inputs.mts universe
           fi
           node tools/assets/restore-object-json.mts
           node tools/prepare/cli/prepare-provenance.mts --objects-only
@@ -481,7 +481,7 @@ jobs:
           key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
       - name: Restore only the inputs consumed by preparation tests
-        run: node tools/prepare/prepare-ci-inputs.mts universe-preparation
+        run: node tools/prepare/cli/prepare-ci-inputs.mts universe-preparation
       - name: Test the selected preparation lane
         run: |
           case "$CI_PREPARATION_LANE" in

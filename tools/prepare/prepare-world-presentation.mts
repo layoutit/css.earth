@@ -1,4 +1,4 @@
-/** `node tools/prepare/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
+/** `node tools/prepare/cli/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
  * sources so the browser reads one small file instead of source tables and recipes: which moons are major, which orbits
  * the default view hides, which objects are default features, and the galaxy and cluster fade distances. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -58,7 +58,8 @@ export function prepareWorldPresentation() {
   };
 }
 
-if (import.meta.main) {
+/** Write site/prepared-world-presentation.json, leaving an unchanged file untouched. */
+export async function writeWorldPresentation() {
   const text = `${JSON.stringify(prepareWorldPresentation())}\n`;
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);

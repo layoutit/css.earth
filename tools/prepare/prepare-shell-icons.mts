@@ -1,9 +1,6 @@
-#!/usr/bin/env node
-
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
 
 import { SHELL_ICON_SOURCES } from "../../site/source/icons/manifest.mts";
 
@@ -88,8 +85,4 @@ function validateManifest() {
     sourceFiles.add(descriptor.file);
     outputFiles.add(descriptor.outputFile);
   }
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await prepareShellIcons();
 }
