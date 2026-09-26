@@ -6,8 +6,8 @@
 //   node tools/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
 //
 // --device [udid] records a real iPhone or iPad over USB instead of the simulator: turn on Settings > Apps > Safari >
-// Advanced > Web Inspector, trust this Mac and keep the device unlocked with cssEarth open in Safari. A sound marks the start
-// and the end of a --seconds recording, so whoever holds the device knows when to use it. An --open path starting with /
+// Advanced > Web Inspector, trust this Mac and keep the device unlocked with cssEarth open in Safari. The terminal says when a
+// --seconds recording starts and ends. An --open path starting with /
 // loads from this Mac's network address (--origin, default http://<en0 address>:4210, `pnpm dev`'s port); start the dev
 // server on the network for it: `pnpm exec astro dev --host 0.0.0.0 --port 4210`.
 // On a device, pymobiledevice3 (https://github.com/doronz88/pymobiledevice3; --pymobiledevice3 <path>, default from
@@ -40,6 +40,7 @@ import { mkdir, readFile, writeFile, readdir, realpath } from 'node:fs/promises'
 import { resolve, relative, isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
+import { gunzipSync, gzipSync } from 'node:zlib';
 import pixelmatch from 'pixelmatch';
 import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
@@ -252,7 +253,7 @@ type Message = Record<string, unknown>;
 /** One inspector connection: the page target, plus each worker reached through the page's Worker domain. */
 function inspector(socketUrl: string) {
   const socket = new WebSocket(socketUrl);
-  let sequence = 0, pageTarget: string | null = null;
+  let sequence = 0, pageTarget: string | null = null, swaps = 0;
   const pending = new Map<number, (message: Message) => void>(), listeners: ((source: string, message: Message) => void)[] = [];
   const ready = new Promise<void>((done, fail) => {
     socket.onerror = () => fail(new Error('Inspector socket failed.'));
@@ -262,6 +263,13 @@ function inspector(socketUrl: string) {
       const params = isRecord(outer.params) ? outer.params : {};
       if (outer.method === 'Target.targetCreated' && isRecord(params.targetInfo) && params.targetInfo.type === 'page' && !pageTarget) {
         pageTarget = requireString(params.targetInfo.targetId, 'target'); done(); return;
+      }
+      // A cross-site navigation (the Mac's dev server → https://css.earth) moves the page to a new web content process:
+      // WebKit announces a provisional target, paused while an inspector is attached, and commits it in place of the old.
+      if (outer.method === 'Target.targetCreated' && isRecord(params.targetInfo) && params.targetInfo.isPaused === true)
+        socket.send(JSON.stringify({ id: ++sequence, method: 'Target.resume', params: { targetId: params.targetInfo.targetId } }));
+      if (outer.method === 'Target.didCommitProvisionalTarget' && params.oldTargetId === pageTarget && typeof params.newTargetId === 'string') {
+        pageTarget = params.newTargetId; swaps++; return;
       }
       if (outer.method !== 'Target.dispatchMessageFromTarget') return;
       const inner: unknown = JSON.parse(requireString(params.message, 'target message'));
@@ -289,7 +297,9 @@ function inspector(socketUrl: string) {
     if (worker) post({ id: ++sequence, method: 'Worker.sendMessageToWorker', params: { workerId: worker, message: JSON.stringify(message) } });
     else post(message);
   });
-  return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => socket.close() };
+  return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => socket.close(),
+    /** How many times the page moved to a new process; its domains must then be enabled again. */
+    swaps: () => swaps };
 }
 
 /** Waits until the page has loaded and the app reports itself ready or failed. The shell marks its own body, which is
@@ -672,28 +682,147 @@ async function stopRecording(xctrace: ChildProcess): Promise<boolean> {
   return stopped;
 }
 
-async function exportTimeProfile(native: string): Promise<ReturnType<typeof summariseTimeProfile> | { error: string }> {
+async function exportTimeProfile(native: string, pid: number | null): Promise<{ summary: ReturnType<typeof summariseTimeProfile> | { error: string }; samples: NativeSample[]; startMs: number | null }> {
   try {
-    const { stdout } = await run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 });
-    return summariseTimeProfile(stdout);
-  } catch (error) { return { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
+    // Instruments may still be finishing the file when its recorder exits; the first export can then fail with no message.
+    const exportTable = async (attempt = 1): Promise<string> => run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 })
+      .then(result => result.stdout, async (error: unknown) => { if (attempt >= 5) throw error; await wait(2000); return exportTable(attempt + 1); });
+    const stdout = await exportTable();
+    const toc = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 }).then(result => result.stdout, () => '');
+    const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
+    return { summary: summariseTimeProfile(stdout), samples: timeProfileSamples(stdout, pid), startMs: start ? Date.parse(start) : null };
+  } catch (error) { return { summary: { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }, samples: [], startMs: null }; }
+}
+
+export type NativeSample = { ns: number; weightNs: number; pid: number; thread: string; frames: string[] };
+
+/** Every Time Profiler sample with its time from the recording start, its thread and its stack (leaf first), keeping one
+ * process when pid is given. xctrace writes each repeated value once with an id and refers to it after (ref="…"). */
+export function timeProfileSamples(xml: string, pid: number | null): NativeSample[] {
+  const text = new Map<string, string>(), numbers = new Map<string, number>(), stacks = new Map<string, string[]>(), threads = new Map<string, { name: string; pid: number }>();
+  const decode = (value: string) => value.replace(/&amp;/gu, '&').replace(/&lt;/gu, '<').replace(/&gt;/gu, '>').replace(/&quot;/gu, '"').replace(/&apos;/gu, "'");
+  const samples: NativeSample[] = [];
+  for (const row of xml.split('<row>').slice(1)) {
+    for (const m of row.matchAll(/<([\w-]+) id="(\d+)"(?: fmt="([^"]*)")?(?: name="([^"]*)")?[^>]*>(\d+)?/gu)) {
+      text.set(m[2]!, decode(m[4] ?? m[3] ?? m[1]!)); if (m[5] !== undefined) numbers.set(m[2]!, Number(m[5]));
+    }
+    const ref = (tag: string) => { const m = row.match(new RegExp(`<${tag} (?:id|ref)="(\\d+)"`, 'u')); return m?.[1] ?? null; };
+    const timeId = ref('sample-time'), weightId = ref('weight'), threadId = ref('thread'), backtraceId = ref('backtrace');
+    if (threadId && !threads.has(threadId)) {
+      const fmt = text.get(threadId) ?? '', owner = Number(fmt.match(/pid: (\d+)\)/u)?.[1] ?? NaN);
+      threads.set(threadId, { name: fmt.replace(/ \(.*$/u, ''), pid: owner });
+    }
+    const thread = threadId ? threads.get(threadId) : undefined;
+    if (!thread || (pid !== null && thread.pid !== pid)) continue;
+    if (backtraceId && !stacks.has(backtraceId)) {
+      const block = row.slice(row.indexOf('<backtrace'), row.indexOf('</backtrace>'));
+      stacks.set(backtraceId, [...block.matchAll(/<frame (?:id="\d+" name="([^"]*)"|ref="(\d+)")/gu)].map(m => decode(m[1] ?? text.get(m[2]!) ?? '?')));
+    }
+    samples.push({ ns: numbers.get(timeId ?? '') ?? 0, weightNs: numbers.get(weightId ?? '') ?? 1e6, pid: thread.pid, thread: thread.name, frames: stacks.get(backtraceId ?? '') ?? [] });
+  }
+  return samples;
 }
 
 // ---- Input recording and replay -------------------------------------------------------------------------------------
 
 /** Installed before a recording: every pointer event the page receives, and the camera each frame. */
+// The camera is sampled every frame only while it can move: from any input until it has held still for 30 frames (the
+// release inertia included). An endless requestAnimationFrame loop here made an idle page render 60 frames a second in
+// every capture (2026-09-25, iPad: 314 of 315 idle frames were this loop).
 const INPUT_LOGGER = `(() => {
   const t0 = performance.now(), pointers = [], camera = [];
-  const record = event => pointers.push([Math.round((performance.now() - t0) * 10) / 10, event.type, event.pointerId, event.pointerType, event.clientX, event.clientY]);
-  const types = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'];
-  for (const type of types) addEventListener(type, record, { capture: true, passive: true });
-  let frame = requestAnimationFrame(function tick(now) {
+  const record = event => { pointers.push([Math.round((performance.now() - t0) * 10) / 10, event.type, event.pointerId, event.pointerType, event.clientX, event.clientY]); wake(); };
+  const types = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'], wakers = ['wheel', 'keydown'];
+  let frame = 0, still = 0, last = '';
+  const tick = now => {
+    frame = 0;
     try { const id = window.__cssEarth && window.__cssEarth.activeObjectId, state = id && window['__' + id] && window['__' + id].camera.state();
-      if (state) camera.push([Math.round((now - t0) * 10) / 10, state.zoom, state.controlYaw, state.controlPitch]); } catch {}
-    frame = requestAnimationFrame(tick);
-  });
+      if (state) { const sample = [state.zoom, state.controlYaw, state.controlPitch], key = sample.join();
+        still = key === last ? still + 1 : 0; last = key; if (!still) camera.push([Math.round((now - t0) * 10) / 10, ...sample]); }
+      // A build without the camera hook (production) has nothing to follow: it counts as still, so the loop stops.
+      else still++; } catch { still++; }
+    if (still < 30) frame = requestAnimationFrame(tick);
+  };
+  function wake() { still = 0; if (!frame) frame = requestAnimationFrame(tick); }
+  for (const type of types) addEventListener(type, record, { capture: true, passive: true });
+  for (const type of wakers) addEventListener(type, wake, { capture: true, passive: true });
+  wake();
   window.__captureInput = { stop() { cancelAnimationFrame(frame); for (const type of types) removeEventListener(type, record, { capture: true });
+    for (const type of wakers) removeEventListener(type, wake, { capture: true });
     return { screen: [screen.width, screen.height], viewport: [innerWidth, innerHeight], dpr: devicePixelRatio, orientation: screen.orientation ? screen.orientation.type : null, pointers, camera }; } };
+  return true;
+})()`;
+
+/** "● REC n" at the top of the page, counting down the seconds of a hand recording; window.__captureBadge() removes it. */
+const RECORDING_BADGE = (seconds: number) => `(() => {
+  const badge = document.createElement('div'), end = performance.now() + ${seconds} * 1000;
+  badge.dataset.captureOverlay = '';
+  badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2147483647;pointer-events:none;' +
+    'font:600 15px/1 system-ui;color:#fff;background:#c62828;padding:6px 12px;border-radius:14px';
+  const show = () => { badge.textContent = '● REC ' + Math.max(0, Math.ceil((end - performance.now()) / 1000)); };
+  show(); document.body.append(badge);
+  const timer = setInterval(show, 1000);
+  window.__captureBadge = () => { clearInterval(timer); badge.remove(); delete window.__captureBadge; };
+  return true;
+})()`;
+
+/** Every attribute write and child insertion or removal the page makes while recording, from a MutationObserver: which
+ * element, which inline properties, attributes or children changed, and whether the camera was moving at that moment
+ * (drag and coast announce objectrotationchange, the motion signal objectmotionchange; production builds before that
+ * signal get a wheel counted as moving for 700 ms). The invariant is judged on the moving writes. Aggregated in the page
+ * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
+const STYLE_WRITES_LOGGER = `(() => {
+  const t0 = performance.now(), entries = new Map(), perFrame = [];
+  let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, wheelUntil = 0;
+  const moving = () => announced || performance.now() < wheelUntil;
+  const onMotion = event => { announced = Boolean(event.detail && event.detail.active); };
+  const onWheel = () => { wheelUntil = performance.now() + 700; };
+  for (const type of ['objectrotationchange', 'objectmotionchange']) document.addEventListener(type, onMotion, true);
+  addEventListener('wheel', onWheel, { capture: true, passive: true });
+  const describe = element => {
+    let text = element.localName;
+    if (element.id) text += '#' + element.id;
+    for (const name of [...element.classList].slice(0, 3)) text += '.' + name;
+    for (const attribute of element.attributes) if (attribute.name.startsWith('data-') && text.length < 120) text += '[' + attribute.name + ']';
+    return text;
+  };
+  const parse = text => { const map = new Map(); for (const part of (text || '').split(';')) { const i = part.indexOf(':'); if (i > 0) map.set(part.slice(0, i).trim(), part.slice(i + 1).trim()); } return map; };
+  const bump = (key, value, at, inMotion) => {
+    const entry = entries.get(key) || { key, count: 0, moving: 0, first: at, last: at, value: '' };
+    entry.count++; if (inMotion) entry.moving++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry);
+    frameWrites++; if (inMotion) frameMoving++;
+  };
+  const ours = node => node.nodeType === 1 ? Boolean(node.closest('[data-capture-overlay]')) : Boolean(node.parentElement && node.parentElement.closest('[data-capture-overlay]'));
+  const observer = new MutationObserver(records => {
+    const at = Math.round((performance.now() - t0) * 10) / 10, inMotion = moving();
+    for (const record of records) {
+      const element = record.target;
+      if (ours(element)) continue;
+      const who = describe(element.nodeType === 1 ? element : element.parentElement || document.documentElement);
+      if (record.type === 'childList') {
+        for (const node of record.addedNodes) if (!ours(node)) bump(who + ' <+' + (node.localName || '#text') + '>', '', at, inMotion);
+        for (const node of record.removedNodes) bump(who + ' <-' + (node.localName || '#text') + '>', '', at, inMotion);
+        continue;
+      }
+      const name = record.attributeName;
+      if (name === 'style') {
+        const before = parse(record.oldValue), after = parse(element.getAttribute('style'));
+        for (const [property, value] of after) if (before.get(property) !== value) bump(who + ' { ' + property + ' }', value, at, inMotion);
+        for (const property of before.keys()) if (!after.has(property)) bump(who + ' { ' + property + ' } removed', '', at, inMotion);
+      } else if (record.oldValue !== element.getAttribute(name)) bump(who + ' [' + name + ']', element.getAttribute(name), at, inMotion);
+    }
+  });
+  observer.observe(document.documentElement, { subtree: true, attributes: true, attributeOldValue: true, childList: true });
+  let frame = requestAnimationFrame(function tick(now) {
+    if (frameWrites) perFrame.push([Math.round((frameStart - t0) * 10) / 10, frameWrites, frameMoving]);
+    frameWrites = frameMoving = 0; frameStart = now; frame = requestAnimationFrame(tick);
+  });
+  window.__captureStyles = { stop() {
+    observer.disconnect(); cancelAnimationFrame(frame);
+    for (const type of ['objectrotationchange', 'objectmotionchange']) document.removeEventListener(type, onMotion, true);
+    removeEventListener('wheel', onWheel, { capture: true });
+    return { entries: [...entries.values()].sort((a, b) => b.moving - a.moving || b.count - a.count), perFrame };
+  } };
   return true;
 })()`;
 
@@ -885,30 +1014,140 @@ export function options(args: readonly string[]) {
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
   return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
 
-/** One pymobiledevice3 sampler writing JSON lines beside the capture. A sampler that cannot start reports its error;
- * the capture goes on without it. */
+/** Every top-level JSON object or array in pymobiledevice3's output, which prints them indented over many lines between
+ * plain log lines such as "Monitoring pid=459, ppid=1, name=com.apple.WebKit.WebContent". */
+export function jsonValues(text: string): unknown[] { return jsonSpans(text).map(span => span.value); }
+
+/** jsonValues with the offset just past each value, so a streamed sample can take the time its last byte arrived. */
+function jsonSpans(text: string): { value: unknown; end: number }[] {
+  const values: { value: unknown; end: number }[] = [];
+  let depth = 0, start = -1, inString = false, escaped = false;
+  for (let index = 0; index < text.length; index++) {
+    const char = text[index];
+    if (inString) { if (escaped) escaped = false; else if (char === '\\') escaped = true; else if (char === '"') inString = false; continue; }
+    if (char === '"' && depth > 0) inString = true;
+    else if (char === '{' || char === '[') { if (depth++ === 0) start = index; }
+    else if ((char === '}' || char === ']') && depth > 0 && --depth === 0) { try { values.push({ value: JSON.parse(text.slice(start, index + 1)), end: index + 1 }); } catch { /* a log line's brackets */ } }
+  }
+  return values;
+}
+
+/** One pymobiledevice3 sampler writing its samples as JSON lines beside the capture. A sampler that cannot start reports
+ * its error; the capture goes on without it. */
 function deviceSampler(binary: string, udid: string, args: readonly string[], file: string) {
-  const lines: string[] = [], errors: string[] = [];
-  const child = spawn(binary, args, { env: { ...process.env, PYMOBILEDEVICE3_UDID: udid, PYMOBILEDEVICE3_NATIVE: '1' }, stdio: ['ignore', 'pipe', 'pipe'] });
-  let partial = '';
-  child.stdout?.on('data', chunk => { const text = partial + String(chunk), parts = text.split('\n'); partial = parts.pop() ?? ''; lines.push(...parts.filter(line => line.trim())); });
+  let text = '';
+  const errors: string[] = [], arrivals: { end: number; at: number }[] = [];
+  const child = spawn(binary, args, { env: deviceEnv(udid), stdio: ['ignore', 'pipe', 'pipe'] });
+  child.stdout?.on('data', chunk => { text += String(chunk); arrivals.push({ end: text.length, at: Date.now() }); });
   child.stderr?.on('data', chunk => errors.push(String(chunk)));
   const failed = new Promise<string>(done => child.on('error', error => done(error.message)));
   return {
     async stop() {
-      const error = child.exitCode !== null && !lines.length ? errors.join('').slice(-500) || `exited with ${child.exitCode}` : null;
+      const exited = child.exitCode !== null;
       child.kill('SIGINT');
       const spawnError = await Promise.race([failed, wait(200).then(() => null)]);
-      await writeFile(file, lines.join('\n') + (lines.length ? '\n' : ''));
-      const samples = lines.flatMap(line => { try { const value: unknown = JSON.parse(line); return [value]; } catch { return []; } });
+      // receivedAt: when the Mac read the sample, for samplers (graphics) that carry no time of their own.
+      const receivedAt = (end: number) => arrivals.find(arrival => arrival.end >= end)?.at ?? Date.now();
+      const samples = jsonSpans(text).flatMap(({ value, end }) => (Array.isArray(value) ? value : [value]).map(sample => isRecord(sample) ? { ...sample, receivedAt: receivedAt(end) } : sample));
+      await writeFile(file, samples.map(sample => JSON.stringify(sample)).join('\n') + (samples.length ? '\n' : ''));
+      const error = exited && !samples.length ? errors.join('').slice(-500) || `exited with ${child.exitCode}` : null;
       return { samples, error: spawnError ?? error ?? (samples.length ? null : errors.join('').slice(-500) || 'no samples') };
     },
   };
+}
+
+// PYTHONUNBUFFERED: pymobiledevice3 is Python, which holds piped output in an 8 KB buffer; half-second samples then arrive
+// only in bursts or at exit, after the capture stopped listening (empty memory samples in some takes, 2026-09-26).
+const deviceEnv = (udid: string) => ({ ...process.env, PYMOBILEDEVICE3_UDID: udid, PYMOBILEDEVICE3_NATIVE: '1', PYTHONUNBUFFERED: '1' });
+
+/** On a device, the web content process holding the page: the one running, then the largest. Safari keeps a prewarmed
+ * spare of a few MB, and after a cross-site navigation the previous page waits suspended in the back-forward cache
+ * (2026-09-26 on the iPad: css.earth 250 MB at 1.1% CPU, the suspended dev page 447 MB at 0.2%, the spare 7 MB at 0%). */
+export function devicePageProcess(samples: readonly unknown[]): number | null {
+  let best: { pid: number; cpu: number; footprint: number } | null = null;
+  for (const sample of samples) {
+    if (!isRecord(sample) || typeof sample.pid !== 'number' || typeof sample.physFootprint !== 'number') continue;
+    const cpu = typeof sample.cpuUsage === 'number' ? sample.cpuUsage : 0, footprint = sample.physFootprint;
+    if (!best || cpu > best.cpu || (cpu === best.cpu && footprint > best.footprint)) best = { pid: sample.pid, cpu, footprint };
+  }
+  return best?.pid ?? null;
+}
+
+/** The capture as a Trace Event file (the JSON Perfetto and jankmonster load): WebKit's timeline records as slices on the
+ * page's main thread, under WebKit's own names, and the device's samples as counters. Timeline times count seconds from
+ * Page.enable (the inspector stopwatch), so device samples align through the Mac time Page.enable was sent. */
+export function traceEvents(records: readonly unknown[], stopwatchEpochMs: number,
+  device: { graphics: readonly unknown[]; webContent: readonly unknown[] } | null, metadata: Record<string, unknown>,
+  cpu: { updates: readonly unknown[]; workers: ReadonlyMap<string, string> } = { updates: [], workers: new Map() },
+  native: { samples: readonly NativeSample[]; offsetUs: number } | null = null) {
+  const events: Record<string, unknown>[] = [
+    { ph: 'M', name: 'process_name', pid: 1, tid: 1, args: { name: 'Safari web content (page)' } },
+    { ph: 'M', name: 'thread_name', pid: 1, tid: 1, args: { name: 'WebKit timeline' } },
+  ];
+  const micros = (seconds: number) => Math.round(seconds * 1e6);
+  const visit = (record: unknown) => {
+    if (!isRecord(record) || typeof record.type !== 'string' || typeof record.startTime !== 'number') return;
+    const ts = micros(record.startTime), data = isRecord(record.data) ? record.data : {};
+    if (typeof record.endTime === 'number') events.push({ ph: 'X', name: record.type, cat: 'webkit.timeline', pid: 1, tid: 1, ts, dur: Math.max(0, micros(record.endTime) - ts), args: { data } });
+    else events.push({ ph: 'i', s: 't', name: record.type, cat: 'webkit.timeline', pid: 1, tid: 1, ts, args: { data } });
+    if (Array.isArray(record.children)) record.children.forEach(visit);
+  };
+  records.forEach(visit);
+  // WebKit's CPU profiler, every 500 ms: one counter track per thread ("CPU % Main Thread", "CPU % worker …"), so a
+  // stretch where the timeline shows no work still shows which thread was busy.
+  for (const update of cpu.updates) {
+    if (!isRecord(update) || typeof update.timestamp !== 'number') continue;
+    const threads: Record<string, number> = { total: typeof update.usage === 'number' ? Math.round(update.usage * 10) / 10 : 0 };
+    for (const thread of Array.isArray(update.threads) ? update.threads : []) {
+      if (!isRecord(thread) || typeof thread.usage !== 'number') continue;
+      const target = typeof thread.targetId === 'string' ? cpu.workers.get(thread.targetId) ?? thread.targetId : null;
+      const label = target ? `worker ${target.split('?')[0]}` : typeof thread.name === 'string' && thread.name ? thread.name : 'unnamed thread';
+      threads[label] = Math.round(((threads[label] ?? 0) + thread.usage) * 10) / 10;
+    }
+    events.push({ ph: 'C', name: 'CPU %', pid: 1, tid: 1, ts: micros(update.timestamp), args: threads });
+  }
+  // Instruments' native samples of the page's process, one slice per sample on its own thread's track, named by the
+  // leaf frame with the stack in args: what WebKit did when its timeline records nothing.
+  if (native?.samples.length) {
+    events.push({ ph: 'M', name: 'process_name', pid: 3, tid: 0, args: { name: 'Page process native stacks (Instruments)' } });
+    const tids = new Map<string, number>(), next = new Map<NativeSample, number>(), last = new Map<string, NativeSample>();
+    // A sample is drawn until the next one on its thread at most: samples closer than their 1 ms weight would overlap,
+    // and Perfetto drops overlapping slices ("slice_drop_overlapping_complete_event", 17 in one take).
+    for (const sample of [...native.samples].sort((a, b) => a.ns - b.ns)) {
+      const previous = last.get(sample.thread);
+      if (previous) next.set(previous, sample.ns);
+      last.set(sample.thread, sample);
+    }
+    for (const sample of native.samples) {
+      if (!tids.has(sample.thread)) { tids.set(sample.thread, tids.size + 1); events.push({ ph: 'M', name: 'thread_name', pid: 3, tid: tids.get(sample.thread), args: { name: sample.thread } }); }
+      const ts = Math.round(native.offsetUs + sample.ns / 1e3), end = Math.round(native.offsetUs + Math.min(sample.ns + sample.weightNs, next.get(sample) ?? Infinity) / 1e3);
+      events.push({ ph: 'X', name: sample.frames[0] ?? '?', cat: 'native', pid: 3, tid: tids.get(sample.thread), ts, dur: Math.max(0, end - ts),
+        args: { stack: sample.frames.slice(0, 40).join(' < '), weightMs: sample.weightNs / 1e6 } });
+    }
+  }
+  if (device) {
+    events.push({ ph: 'M', name: 'process_name', pid: 2, tid: 1, args: { name: 'Device (USB)' } });
+    const at = (ms: number) => Math.round((ms - stopwatchEpochMs) * 1e3);
+    for (const sample of device.graphics) {
+      if (!isRecord(sample) || typeof sample.receivedAt !== 'number') continue;
+      const ts = at(sample.receivedAt), number = (key: string) => typeof sample[key] === 'number' ? sample[key] : 0;
+      events.push({ ph: 'C', name: 'Core Animation', pid: 2, tid: 1, ts, args: { fps: number('CoreAnimationFramesPerSecond') } });
+      events.push({ ph: 'C', name: 'GPU utilisation %', pid: 2, tid: 1, ts, args: { device: number('Device Utilization %'), renderer: number('Renderer Utilization %'), tiler: number('Tiler Utilization %') } });
+    }
+    for (const sample of device.webContent) {
+      if (!isRecord(sample) || typeof sample.timestamp !== 'string') continue;
+      const ts = at(Date.parse(sample.timestamp));
+      // Perfetto names each counter track "<name> <arg>": "Page process footprint MB", "Page process CPU %".
+      if (typeof sample.physFootprint === 'number') events.push({ ph: 'C', name: 'Page process', pid: 2, tid: 1, ts, args: { 'footprint MB': Math.round(sample.physFootprint / 104857.6) / 10 } });
+      if (typeof sample.cpuUsage === 'number') events.push({ ph: 'C', name: 'Page process', pid: 2, tid: 1, ts, args: { 'CPU %': Math.round(sample.cpuUsage * 10) / 10 } });
+    }
+  }
+  return { traceEvents: events, displayTimeUnit: 'ms', metadata: { source: 'cssearth-ios-capture', ...metadata } };
 }
 
 /** Mean, lowest and highest of every numeric field across samples: the graphics sampler's fields are the device's own. */
@@ -922,26 +1161,32 @@ export function summariseNumericSamples(samples: readonly unknown[]) {
   return Object.fromEntries([...fields].map(([key, values]) => [key, { mean: round(values.reduce((sum, value) => sum + value, 0) / values.length), min: round(Math.min(...values)), max: round(Math.max(...values)), count: values.length }]));
 }
 
-/** The device-side samplers of one recording: frames per second from the graphics instrument, and each Safari web content
- * process's memory footprint from sysmon, every half second. */
-function deviceMonitors(binary: string, udid: string, out: string) {
+/** The device-side samplers of one recording: frames per second from the graphics instrument, and the memory footprint of
+ * the Safari web content process holding the page from sysmon, every half second. */
+/** The device's web content process holding the page, from one sysmon snapshot; null when sysmon cannot answer. */
+async function deviceWebContentPid(binary: string, udid: string) {
+  const snapshot = await run(binary, ['developer', 'dvt', 'sysmon', 'process', 'single', '-f', 'name=com.apple.WebKit.WebContent', '-k', 'pid', '-k', 'physFootprint', '-k', 'cpuUsage'],
+    { env: deviceEnv(udid) }).then(result => jsonValues(result.stdout).flatMap(value => Array.isArray(value) ? value : [value]), () => []);
+  return devicePageProcess(snapshot);
+}
+
+async function deviceMonitors(binary: string, udid: string, out: string, pid: number | null) {
   const graphics = deviceSampler(binary, udid, ['developer', 'dvt', 'graphics'], resolve(out, 'device-graphics.jsonl'));
-  const memory = deviceSampler(binary, udid, ['developer', 'dvt', 'sysmon', 'process', 'monitor', 'process', '-f', 'name=com.apple.WebKit.WebContent',
+  const memory = deviceSampler(binary, udid, ['developer', 'dvt', 'sysmon', 'process', 'monitor', 'process', '-f', pid === null ? 'name=com.apple.WebKit.WebContent' : `pid=${pid}`,
     '--choose', 'last', '--keep-monitoring', '-k', 'pid', '-k', 'name', '-k', 'physFootprint', '-k', 'cpuUsage', '-i', '500'], resolve(out, 'device-webcontent.jsonl'));
   return {
     async stop() {
       const [frames, processes] = await Promise.all([graphics.stop(), memory.stop()]);
       const footprints = processes.samples.flatMap(sample => isRecord(sample) && typeof sample.physFootprint === 'number' ? [sample.physFootprint / 1048576] : []);
       return {
-        graphics: frames.error ? { error: frames.error } : summariseNumericSamples(frames.samples),
+        samples: { graphics: frames.samples, webContent: processes.samples },
+        graphics: frames.error ? { error: frames.error } : summariseNumericSamples(frames.samples.map(sample => isRecord(sample) ? { ...sample, receivedAt: undefined } : sample)),
         webContent: processes.error ? { error: processes.error } : { samples: footprints.length, footprintMb: summariseNumericSamples(footprints.map(value => ({ mb: value }))).mb ?? null },
       };
     },
   };
 }
 
-/** A sound on the Mac marks when a hand recording starts and ends. */
-const cue = (sound: 'Ping' | 'Glass') => { spawn('afplay', [`/System/Library/Sounds/${sound}.aiff`], { stdio: 'ignore' }).on('error', () => undefined); };
 
 export async function captureIosMoment(args: readonly string[]) {
   const option = options(args);
@@ -949,7 +1194,6 @@ export async function captureIosMoment(args: readonly string[]) {
   const target: Target = option.device ? { kind: 'device', udid: await connectedDevice(option.device.udid) } : { kind: 'simulator', udid: option.udid ?? await bootedUdid() };
   const udid = target.udid;
   requireStepsFor(target, steps);
-  if (target.kind === 'device' && option.native === 'page') throw new TypeError('--native page needs the simulator; on a device pass --native all or off.');
   const device = target.kind === 'device' ? await deviceInfo(udid) : null;
   const out = resolve(root, 'output/performance/ios-captures', `${option.name}-${new Date().toISOString().replace(/[:.]/gu, '-')}`);
   await mkdir(out, { recursive: true });
@@ -967,20 +1211,34 @@ export async function captureIosMoment(args: readonly string[]) {
       // With the Worker domain on, WebKit holds each new worker paused until Worker.initialized ("required to allow
       // execution in the worker", Worker.json). Profile it first when a recording is running, then let it run.
       void (async () => {
-        if (recording) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
+        if (recording && option.jsSamples) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
         await session.send('Worker.initialized', { workerId: worker });
       })();
     }
     events.push({ ...message, source });
   });
   // Page.enable starts the inspector stopwatch every timestamp reads (WebKit InspectorPageAgent::enable); without it all are 0.
-  for (const domain of ['Page', 'Console', 'Network', 'Timeline', 'Worker']) await session.send(`${domain}.enable`);
-  // Real visits keep Safari's cache; --no-cache measures a cold load (it also refetches repeated images).
-  if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
+  let stopwatchEpochMs = Date.now();
+  const enableDomains = async () => {
+    stopwatchEpochMs = Date.now();
+    for (const domain of ['Page', 'Console', 'Network', 'Timeline', 'Worker']) await session.send(`${domain}.enable`);
+    // Real visits keep Safari's cache; --no-cache measures a cold load (it also refetches repeated images).
+    if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
+  };
+  await enableDomains();
   // --open loads the page in this same tab, so each capture starts from a fresh load in the tab on screen.
   // --settle then counts from the moment the app reports its body loaded, not from the navigation.
   const open = option.open?.startsWith('/') ? `${option.origin ?? await networkOrigin()}${option.open}` : option.open;
-  if (open) { workers.clear(); await session.send('Page.navigate', { url: open }); await waitForApp(session); await wait(option.settle * 1000); }
+  // iPadOS 26's page target has no Page.navigate ("'Page.navigate' was not found"), so the page navigates itself.
+  if (open) {
+    workers.clear();
+    const swapsBefore = session.swaps();
+    await session.send('Runtime.evaluate', { expression: `location.assign(${JSON.stringify(open)})` });
+    await waitForApp(session);
+    // A new process starts with every domain off (and its own stopwatch): enable them again before recording.
+    if (session.swaps() !== swapsBefore) await enableDomains();
+    await wait(option.settle * 1000);
+  }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
   const url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
   await wait(500);
@@ -996,38 +1254,64 @@ export async function captureIosMoment(args: readonly string[]) {
   // A device replay first calibrates: three taps on a transparent shield give the map from page to display coordinates.
   let replay: { plan: ReturnType<typeof touchPlan>; affine: Affine; hits: unknown } | null = null;
   const replayInput: unknown = option.replay ? JSON.parse(await readFile(resolve(option.replay, 'input.json'), 'utf8')) : null;
-  if (option.replay && target.kind === 'device') {
-    const input = replayInput;
+  // Real touch needs CoreDevice remote control, which iOS 26 refuses ("Remote control requires iOS 27.0 or later",
+  // iPad 26.6, 2026-09-26): the replay then runs in the page, as on the simulator — the app's input code gets the same
+  // pointer events at the same times; only the system's touch pipeline is skipped.
+  let deviceTouch = option.replay !== null && target.kind === 'device';
+  if (deviceTouch) {
     await evaluate(CALIBRATION_SHIELD);
-    await playTouches(option.pymobiledevice3, udid, CALIBRATION_POINTS.flatMap(([x, y], index) => [[index * 500, 'contact', x, y], [index * 500 + 80, 'release', x, y]]), resolve(out, 'calibration-plan.json'));
+    await playTouches(option.pymobiledevice3, udid, CALIBRATION_POINTS.flatMap(([x, y], index) => [[index * 500, 'contact', x, y], [index * 500 + 80, 'release', x, y]]), resolve(out, 'calibration-plan.json'))
+      .catch(async (error: unknown) => {
+        if (!/requires iOS 2[7-9]|startmediastream/u.test(error instanceof Error ? error.message : String(error))) throw error;
+        await evaluate('window.__calibration && window.__calibration.remove()');
+        console.error('ios-capture: this iOS refuses remote touch; replaying the recorded pointer events in the page.');
+        deviceTouch = false;
+      });
+  }
+  if (deviceTouch) {
+    const input = replayInput;
     await wait(300);
     const hits = requireArray(await evaluate('window.__calibration.remove()'), 'calibration hits').map(hit => requireArray(hit, 'hit').map(value => requireFiniteNumber(value, 'hit')) as [number, number]);
     const affine = solveAffine(hits.map((page, index) => ({ page, display: CALIBRATION_POINTS[index]! })));
     replay = { plan: touchPlan(input, affine), affine, hits };
     if (!replay.plan.events.length) throw new Error(`${option.replay}/input.json has no touch to replay.`);
-    await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay)), ...replay }, null, 2) + '\n');
+    await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay!)), ...replay }, null, 2) + '\n');
   }
   const memoryBefore = await memorySample(session, events);
   const recordingStart = events.length;
 
   // Instruments first, so the native trace covers the whole moment.
   const native = resolve(out, 'native.trace');
-  const processes = option.native === 'all' ? ['--all-processes'] : option.native === 'page' ? ['--attach', String(await pageProcess())] : null;
+  // On a device, --native page attaches Instruments to the iPad's own web content process over USB: WebKit's native
+  // stacks for work its timeline does not record (an 848 ms Composite with 2.5 ms of timeline work, 2026-09-26).
+  // The developer disk image unmounts when the device restarts; the samplers and Instruments need it. 0.7 s when mounted.
+  if (target.kind === 'device') await run(option.pymobiledevice3, ['mounter', 'auto-mount'], { env: deviceEnv(udid) }).catch(() => undefined);
+  const devicePid = target.kind === 'device' ? await deviceWebContentPid(option.pymobiledevice3, udid) : null;
+  const pagePid = option.native === 'page' ? (target.kind === 'device' ? devicePid : await pageProcess()) : null;
+  // iOS refuses to attach Instruments to WebKit's system process ("Cannot find process for provided pid"), so on a device
+  // page mode samples every process and keeps the page's pid when the samples are exported.
+  const processes = option.native === 'all' || (target.kind === 'device' && option.native === 'page') ? ['--all-processes']
+    : pagePid !== null ? ['--attach', String(pagePid)] : null;
   const xctrace = processes ? spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, ...processes, '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] }) : null;
   const xctraceLog: string[] = [];
   xctrace?.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
   xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
-  const monitors = target.kind === 'device' ? deviceMonitors(option.pymobiledevice3, udid, out) : null;
-  await session.send('ScriptProfiler.startTracking', { includeSamples: true });
-  for (const worker of workers.keys()) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
+  const monitors = target.kind === 'device' ? await deviceMonitors(option.pymobiledevice3, udid, out, devicePid) : null;
+  // --no-js-samples leaves JavaScriptCore's sampling profiler off: it costs the page frames, so timing questions run without it.
+  if (option.jsSamples) {
+    await session.send('ScriptProfiler.startTracking', { includeSamples: true });
+    for (const worker of workers.keys()) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
+  }
   recording = true;
   await session.send('CPUProfiler.startTracking');
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
   const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
   // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
   await evaluate(INPUT_LOGGER);
+  const styleWritesStarted = Date.now();
+  if (option.styleWrites) await evaluate(STYLE_WRITES_LOGGER);
   // On a device the screenshot is the page's viewport, taken by Web Inspector.
   const screenshot = option.inspectorScreenshots ? (file: string) => snapshotViewport(session, file) : undefined;
   if (replay) {
@@ -1036,20 +1320,27 @@ export async function captureIosMoment(args: readonly string[]) {
   } else if (option.replay) {
     const sent = await evaluate(pageReplayExpression(replayInput));
     marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay)), in: 'page' }), at: 0, value: { sent } });
-    await wait(1000);
+    // The replay resolves at its last pointer event; a flick's inertia coasts on after it.
+    await wait(option.tail * 1000);
   } else if (steps.length) await perform(steps, target, out, marks, started, evaluate, selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }), screenshot);
   else {
     marks.push({ label: `manual ${option.seconds} s`, at: 0 });
-    cue('Ping'); console.error(`Recording ${option.seconds} s${device ? ` on ${device.name ?? udid}` : ''}: use it now.`);
+    console.error(`Recording ${option.seconds} s${device ? ` on ${device.name ?? udid}` : ''}: use it now.`);
+    // Whoever holds the device sees the countdown on it: one small fixed label, repainted once a second, gone at the end.
+    await evaluate(RECORDING_BADGE(option.seconds ?? 0)).catch(() => null);
     await wait((option.seconds ?? 0) * 1000);
-    cue('Glass'); console.error('Recording stopped.');
+    await evaluate('window.__captureBadge ? window.__captureBadge() : null').catch(() => null);
+    console.error('Recording stopped.');
   }
   const durationMs = Date.now() - started;
-  const deviceMetrics = monitors ? await monitors.stop() : null;
+  const { samples: deviceSamples = null, ...deviceSummary } = (monitors ? await monitors.stop() : null) ?? {};
   // The capture goes on without a sampler, but says so here rather than only in the report.
-  for (const [sampler, result] of Object.entries(deviceMetrics ?? {})) if (isRecord(result) && typeof result.error === 'string')
+  for (const [sampler, result] of Object.entries(deviceSummary)) if (isRecord(result) && typeof result.error === 'string')
     console.error(`No device ${sampler} samples (${result.error.trim().split('\n').at(-1)}). ${DEVELOPER_SERVICES}`);
+  const viewport = await evaluate('[innerWidth, innerHeight]').catch(() => null);
   const input = await evaluate('window.__captureInput ? window.__captureInput.stop() : null').catch(() => null);
+  const styleWrites = option.styleWrites ? await evaluate('window.__captureStyles ? window.__captureStyles.stop() : null').catch(() => null) : null;
+  if (styleWrites) await writeFile(resolve(out, 'style-writes.json'), JSON.stringify({ startedMs: styleWritesStarted, ...styleWrites }, null, 1) + '\n');
   if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   await session.send('Timeline.stop');
   await session.send('CPUProfiler.stopTracking');
@@ -1057,8 +1348,8 @@ export async function captureIosMoment(args: readonly string[]) {
   for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
   const recorded = xctrace ? await stopRecording(xctrace) : false;
   // The export runs while the page side is read.
-  const nativeExport = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
-    : recorded ? exportTimeProfile(native) : Promise.resolve({ error: 'xctrace did not finish its recording within 30 s.' });
+  const nativeExport: Promise<Awaited<ReturnType<typeof exportTimeProfile>> | { error: string }> = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
+    : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 30 s.' });
   await wait(1500);
   const moment = events.slice(recordingStart);
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
@@ -1082,7 +1373,15 @@ export async function captureIosMoment(args: readonly string[]) {
   const initiators = summariseInitiators(scheduling, frame => namer.name(frame));
   const javascript = Object.fromEntries([...stacks].map(([target, list]) => [target, summariseSamples(list, frame => namer.name(frame))]));
   const timeline = summariseTimeline(timelineRecords);
-  const cpu = summariseCpu(moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event), workers);
+  const cpuUpdates = moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event);
+  // What jankmonster's report reads beside a trace (its record.mjs writes the same file for Chrome).
+  const [width, height] = Array.isArray(viewport) ? viewport : [];
+  await writeFile(resolve(out, 'trace.recording.json'), JSON.stringify({
+    scenario: option.name, url: page.url, browser: device ? `Safari on ${device.name ?? 'a device'} (${device.model ?? '?'}, iOS ${device.system ?? '?'})` : 'Safari on the iOS Simulator',
+    window: typeof width === 'number' && typeof height === 'number' ? { start: { width, height } } : null, categories: ['webkit.timeline'],
+    stopReason: replay || option.replay ? 'replay' : steps.length ? 'steps' : `${option.seconds} s timer`,
+  }, null, 2) + '\n');
+  const cpu = summariseCpu(cpuUpdates, workers);
   const consoleMessages = moment.filter(event => event.method === 'Console.messageAdded' && isRecord(event.params)).map(event => requireRecord((event.params as Message).message, 'console'))
     .map(message => ({ level: String(message.level), text: String(message.text).slice(0, 500), url: typeof message.url === 'string' ? message.url : null, line: message.line ?? null }));
   const responses = new Map<string, { url: string; type: string; status: number; bytes: number; initiator?: string }>();
@@ -1104,11 +1403,17 @@ export async function captureIosMoment(args: readonly string[]) {
   const requests = [...responses.values()];
 
   // Native side.
-  const nativeSummary = await nativeExport;
+  const nativeResult = await nativeExport;
+  const nativeSummary = 'summary' in nativeResult ? nativeResult.summary : nativeResult;
+  const nativeSamples = 'samples' in nativeResult && nativeResult.startMs !== null ? { samples: nativeResult.samples, offsetUs: (nativeResult.startMs - stopwatchEpochMs) * 1000 } : null;
+  // Everything trace.json is made from, so --rebuild can remake it (a failed export, a new track) without a new take.
+  await writeFile(resolve(out, 'raw.json.gz'), gzipSync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1', moment, stopwatchEpochMs, deviceSamples,
+    workers: [...workers], pagePid, metadata: { url: page.url, target: target.kind, ...(device ? { device } : {}) } })));
+  await writeFile(resolve(out, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, { url: page.url, target: target.kind, ...(device ? { device } : {}) }, { updates: cpuUpdates, workers }, nativeSamples)) + '\n');
 
   const pixels = option.compare ? await compareScreenshots(out, (await baselineCaptures(option.compare))[0]!, steps) : null;
   const report = {
-    schema: 'cssearth-ios-capture@1', name: option.name, url, udid, target: target.kind, ...(device ? { device, deviceMetrics } : {}), durationMs, steps: marks, workers: Object.fromEntries(workers),
+    schema: 'cssearth-ios-capture@1', name: option.name, url, udid, target: target.kind, ...(device ? { device, deviceMetrics: deviceSummary } : {}), durationMs, steps: marks, workers: Object.fromEntries(workers),
     sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter },
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
@@ -1154,14 +1459,34 @@ function readme(r: ReadmeInput): string {
   return lines.join('\n');
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) await main().catch((error: unknown) => {
+// Exits when done: a device sampler or inspector socket still closing must not hold the command open for half a minute.
+if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) await main().then(() => process.exit(0), (error: unknown) => {
   // A refusal names what is missing; a stack trace would bury it.
   console.error(`ios-capture: ${error instanceof Error ? error.message : String(error)}`);
   process.exit(1);
 });
 
+/** --rebuild <capture dir>: remake trace.json from raw.json.gz and native.trace, the way the capture made it. */
+export async function rebuildTrace(dir: string) {
+  const raw = requireRecord(JSON.parse(gunzipSync(await readFile(resolve(dir, 'raw.json.gz'))).toString('utf8')), 'raw capture');
+  const moment = requireArray(raw.moment, 'raw moment').filter(isRecord);
+  const workers = new Map(requireArray(raw.workers, 'raw workers').map(entry => requireArray(entry, 'worker') as [string, string]));
+  const stopwatchEpochMs = requireFiniteNumber(raw.stopwatchEpochMs, 'raw stopwatch epoch');
+  const timelineRecords = moment.filter(event => event.method === 'Timeline.eventRecorded' && isRecord(event.params)).map(event => (event.params as Message).record);
+  const cpuUpdates = moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event);
+  const nativeFile = resolve(dir, 'native.trace'), hasNative = await readdir(nativeFile).then(() => true, () => false);
+  const exported = hasNative ? await exportTimeProfile(nativeFile, typeof raw.pagePid === 'number' ? raw.pagePid : null) : null;
+  const nativeSamples = exported && exported.startMs !== null ? { samples: exported.samples, offsetUs: (exported.startMs - stopwatchEpochMs) * 1000 } : null;
+  const deviceSamples = isRecord(raw.deviceSamples) ? raw.deviceSamples as { graphics: unknown[]; webContent: unknown[] } : null;
+  await writeFile(resolve(dir, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, isRecord(raw.metadata) ? raw.metadata : {},
+    { updates: cpuUpdates, workers }, nativeSamples)) + '\n');
+  console.log(`${dir}/trace.json rebuilt${nativeSamples ? `, ${nativeSamples.samples.length} native samples` : hasNative ? `, native export failed: ${exported && 'error' in exported.summary ? exported.summary.error.trim() : '?'}` : ''}`);
+}
+
 async function main() {
   const args = process.argv.slice(2), runsIndex = args.indexOf('--runs');
+  const rebuild = args.indexOf('--rebuild');
+  if (rebuild >= 0) { for (const dir of args.slice(rebuild + 1).filter(arg => !arg.startsWith('--'))) await rebuildTrace(dir); return; }
   const runs = runsIndex >= 0 ? requireFiniteNumber(Number(args[runsIndex + 1]), '--runs') : 1;
   if (!Number.isInteger(runs) || runs < 1) throw new TypeError('--runs is a whole number of captures.');
   const captures = [];

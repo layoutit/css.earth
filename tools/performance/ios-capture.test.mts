@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, parseSteps, requireStepsFor, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
 test('steps are validated before anything records', () => {
   assert.deepEqual(parseSteps([{ tap: [194, 94] }, { type: 'saturn' }, { wait: 1.5 }, { screenshot: 'after' },
@@ -58,6 +58,17 @@ test('three calibration taps give the page-to-display map, and a recording becom
 test('device samples summarise every numeric field the device reports', () => {
   assert.deepEqual(summariseNumericSamples([{ fps: 60, name: 'x' }, { fps: 30, util: 12.34 }, 'noise']),
     { fps: { mean: 45, min: 30, max: 60, count: 2 }, util: { mean: 12.3, min: 12.3, max: 12.3, count: 1 } });
+});
+
+test('pymobiledevice3 output reads as its indented JSON values between log lines', () => {
+  const text = 'Monitoring pid=459, ppid=1, name=com.apple.WebKit.WebContent\n{\n    "pid": 459,\n    "name": "a {b} \\"c\\""\n}\n{\n    "pid": 459\n}\n[\n    { "pid": 505 }\n]\n';
+  assert.deepEqual(jsonValues(text), [{ pid: 459, name: 'a {b} "c"' }, { pid: 459 }, [{ pid: 505 }]]);
+});
+
+test('the page is the running web content process, then the largest: not the spare, not a suspended page', () => {
+  assert.equal(devicePageProcess([{ pid: 459, physFootprint: 309544768 }, { pid: 505, physFootprint: 8143648 }]), 459);
+  assert.equal(devicePageProcess([{ pid: 459, physFootprint: 447565768, cpuUsage: 0.19 }, { pid: 930, physFootprint: 249988448, cpuUsage: 1.13 }, { pid: 948, physFootprint: 7373576, cpuUsage: 0 }]), 930);
+  assert.equal(devicePageProcess([{ pid: 'x' }]), null);
 });
 
 test('JavaScript samples count each function once per stack, by top frame and anywhere on it', () => {
@@ -131,4 +142,26 @@ test('a probe step records the page state under a name', () => {
 test('a script step carries the expression it runs', () => {
   assert.deepEqual(parseSteps([{ script: 'document.title' }]), [{ script: 'document.title' }]);
   assert.throws(() => parseSteps([{ script: 5 }]), /must be a string/);
+});
+
+test('the trace file keeps WebKit names on the page thread and the device samples as counters on its clock', () => {
+  const trace = traceEvents([{ type: 'RenderingFrame', startTime: 1, endTime: 1.02, children: [{ type: 'Layout', startTime: 1.001, endTime: 1.005, data: { root: 1 } }] }, { type: 'TimeStamp', startTime: 2 }],
+    10_000, { graphics: [{ CoreAnimationFramesPerSecond: 58, 'Device Utilization %': 40, receivedAt: 11_500 }], webContent: [{ physFootprint: 419430400, cpuUsage: 12.34, timestamp: new Date(12_000).toISOString() }] }, { url: 'x' });
+  const events = trace.traceEvents.filter(event => event.ph !== 'M');
+  assert.deepEqual(events.map(event => [event.ph, event.name, event.ts]), [
+    ['X', 'RenderingFrame', 1_000_000], ['X', 'Layout', 1_001_000], ['i', 'TimeStamp', 2_000_000],
+    ['C', 'Core Animation', 1_500_000], ['C', 'GPU utilisation %', 1_500_000], ['C', 'Page process', 2_000_000], ['C', 'Page process', 2_000_000]]);
+  assert.equal(events[0]!.dur, 20_000);
+  assert.deepEqual(events.slice(3).map(event => event.args), [{ fps: 58 }, { device: 40, renderer: 0, tiler: 0 }, { 'footprint MB': 400 }, { 'CPU %': 12.3 }]);
+});
+
+test('native samples keep their time, thread and stack, and one process when asked', () => {
+  const xml = '<row><sample-time id="1" fmt="00:00.001">1000000</sample-time><thread id="2" fmt="Main Thread 0x1 (com.apple.WebKit.WebContent, pid: 459)"><tid id="3">1</tid></thread>' +
+    '<weight id="4" fmt="1.00 ms">1000000</weight><backtrace id="5"><frame id="6" name="WebCore::GraphicsLayer::flush"/><frame id="7" name="WebKit::main"/></backtrace></row>' +
+    '<row><sample-time id="8" fmt="00:00.002">2000000</sample-time><thread ref="2"/><weight ref="4"/><backtrace ref="5"/></row>' +
+    '<row><sample-time id="9" fmt="00:00.002">2000000</sample-time><thread id="10" fmt="main 0x9 (SpringBoard, pid: 60)"/><weight ref="4"/><backtrace ref="5"/></row>';
+  assert.deepEqual(timeProfileSamples(xml, 459), [
+    { ns: 1000000, weightNs: 1000000, pid: 459, thread: 'Main Thread 0x1', frames: ['WebCore::GraphicsLayer::flush', 'WebKit::main'] },
+    { ns: 2000000, weightNs: 1000000, pid: 459, thread: 'Main Thread 0x1', frames: ['WebCore::GraphicsLayer::flush', 'WebKit::main'] }]);
+  assert.equal(timeProfileSamples(xml, null).length, 3);
 });
