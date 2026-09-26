@@ -133,6 +133,37 @@ mid-flight frame.
 for visual analysis and leave it off for performance comparisons. Capture one origin at a time: loading another
 origin moves Safari's page to a new process and drops the inspector session.
 
+### Repeatable journeys on the connected iPad
+
+`pnpm ipad:run` opens the start route in **visible Safari** through one retained pymobiledevice3 library session, uses
+that session for native screen frames, and closes it afterward. It attaches Web Inspector to the visible page; it never drives a hidden
+Automation page. It requires a built preview from this checkout listening on the Mac LAN. The command builds in
+performance mode when its build marker is absent or stale (`pnpm exec astro build --mode performance`), then actions
+run in order while WebKit tracing
+and native iPad screen grabs are active:
+
+```sh
+pnpm ipad:run --start mars --fly moon --name mars-to-moon
+pnpm ipad:run --start ceres --zoom -200 --drag '{"from":[400,500],"to":[600,530],"seconds":1}' --fly venus --name ceres-to-venus
+```
+
+Use `--origin http://<Mac-LAN-IP>:<port>` when the preview uses a different port. A JSON scenario can express a longer
+sequence: `pnpm ipad:run --scenario journey.json --name long-journey`. Its shape is
+`{"start":"ceres","actions":[{"zoom":-200},{"fly":"venus"},{"wait":2},{"screenshot":"after-venus"}]}`.
+`--tap '[x,y]'`, `--drag '{"from":[x,y],"to":[x,y],"seconds":1}'`, `--type text`, `--zoom <pixel-delta>`,
+`--fly <object>`, `--wait <seconds>`, and `--screenshot <name>` are ordered actions. Coordinates are Safari viewport CSS
+pixels. Negative zoom delta zooms in; positive zoom delta zooms out. An optional `--tail <seconds>` (default 2) lets the
+last handoff finish before capture stops.
+
+The command validates body names against the object registry, uses the performance router bridge for flights, verifies
+ready destination routes, and fails if an action cannot complete. Direct `tap`, `drag`, `type`, and `zoom` actions are
+`page-dispatched`: Web Inspector sends pointer and wheel events through the app's input handlers. This iPad's iOS 26.6 refuses CoreDevice HID remote touch
+(`Remote control requires iOS 27.0 or later`), and WebInspector Automation's `touch()` emits no events on it. The report
+never labels these actions as native touch. `screens/*.jpg` and `filmstrip.png` come from the actual iPad screen, and
+`trace.devtools.json` embeds those frames beside the WebKit trace. Native screen grabbing can affect timing, so use this
+mode for interaction and visual diagnosis. This journey command omits the separate device FPS and memory samplers to
+reduce startup time; the underlying `ios-capture.mts` command can still collect them for a dedicated performance run.
+
 [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install
 pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device; it uses macOS's
 own device tunnel, no root). During a device recording it samples Core Animation's frames per second and the memory of

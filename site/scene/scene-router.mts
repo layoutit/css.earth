@@ -32,6 +32,7 @@ import { createSceneSessions, type SceneSession as Session } from './scene-sessi
 import { readPreparedDescriptor } from '../prepared-descriptor.mts';
 import { watchSatelliteSelection } from '../satellite-selection.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
+import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
@@ -137,6 +138,17 @@ export function createSceneRouter({
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
   mountTask = mountApplication();
+  // The iPad trace harness drives this same navigation path as the shell. Keep
+  // the control out of ordinary builds; a performance build opts in explicitly.
+  const control = DIAGNOSTICS_ENABLED ? Object.freeze({
+    async fly(id: string) {
+      if (documentTarget.visibilityState !== 'visible') throw new Error('The app is not the visible Safari tab.');
+      if (typeof id !== 'string' || !/^[a-z0-9-]+$/u.test(id)) throw new TypeError('Invalid destination object id.');
+      if (await navigate(id) !== true) throw new Error(`Navigation to ${id} did not complete.`);
+      return { source: 'scene-router' as const, action: 'fly' as const, objectId: id, url: windowTarget.location.href };
+    },
+  }) : null;
+  if (control) windowTarget.__cssEarthControl = control;
 
   return Object.freeze({
     get settled() { return mountTask; },
@@ -149,6 +161,7 @@ export function createSceneRouter({
       destroyActiveScene();
       cameraMotion.cancel();
       world.destroy();
+      if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
       windowTarget.removeEventListener("pageshow", restoreCachedScene);
       historyOwner?.destroy(); unbindLinks?.();
