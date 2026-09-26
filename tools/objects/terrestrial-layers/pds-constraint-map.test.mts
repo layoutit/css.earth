@@ -95,5 +95,9 @@ test('terrain preparation verifies categorical output pins named by either histo
     assert.ok(pinned.manifest.inputs.find(input=>input.id==='constraint'));
     const source={...pinned,async validatePath(path:string){assert.equal(path,'source.tab');return pinned.validatePath(path);}};
     await loadRadialTerrain({sourceDirectory:directory,config,source});
+    // The recorded name must bind to the map preparation: an invalid recipe under it fails the terrain load.
+    const invalid=await fixtureSource(directory,[{id:'shape',path:'source.tab',consumers:['geometry']},
+      {id:'constraint',path:'constraint.png',consumers:['geometry'],generator:`tools/objects/terrestrial-layers/pds-constraint-map.${extension}`,recipe:{...recipe,gridFlags:[4]}}]);
+    await assert.rejects(loadRadialTerrain({sourceDirectory:directory,config,source:invalid}),/Invalid PDS constraint map/);
   }
 });
