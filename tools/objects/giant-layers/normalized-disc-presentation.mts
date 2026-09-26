@@ -9,7 +9,7 @@ import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contrac
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
-import{preparedResourcePool}from'../../../src/platform/prepared-object-assets.mts';
+import{preparedResourcePool}from'@cssearth/renderer/platform/prepared-object-assets';
 import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presentation-contract.mts';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import{prepareMaterialTracks}from'../../prepare/prepare-materials.mts';

@@ -11,7 +11,7 @@ import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts"
 // the one the runtime would compute in the browser. Preparation-time only.
 
 import { requireBodyFixedSunDirection } from "./solar-geometry.mts";
-import { cssDirectionToViewDirection } from "./solar-view-direction.mts";
+import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
 
 export function prepareSunReferenceViewDirection({
   bodyId,

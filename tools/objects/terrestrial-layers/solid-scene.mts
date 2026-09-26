@@ -21,7 +21,7 @@ import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-pr
 import { photographDirections, prepareDefaultCameraAngles } from '../../../src/platform/default-camera.mts';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
-import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
+import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import { prepareMaterialTracks } from '../../prepare/prepare-materials.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';

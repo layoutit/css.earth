@@ -3,7 +3,7 @@ import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {viewSunDirectionToPreparedLightDirection} from '../../../src/platform/directional-sun-coordinate.mts';
+import {viewSunDirectionToPreparedLightDirection} from '@cssearth/renderer/platform/directional-sun-coordinate';
 import {requireFiniteNumber, requireRecord} from '@cssearth/core';
 import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
 import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '@cssearth/bake/photometry';

@@ -16,7 +16,7 @@ import { prepareDirectionalSun } from '../../../src/platform/prepare-directional
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '../solar-system-scene.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
-import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
+import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { createPreparedNodeTree, prepareCssomDeclarationReads } from '@cssearth/bake/presentation';
 import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.mts';
 import { prepareShapeLighting } from './lighting.mts';
