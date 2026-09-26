@@ -40,14 +40,7 @@
       "centerLongitudeDegrees": -56.25,
       "widthDegrees": 112.5
     },
-    "rotationSeconds": 72,
-    "seamOutset": {
-      "targetPixels": 0.5,
-      "stepRatio": 1.4142135623730951,
-      "hysteresis": 0.1,
-      "firstDiameter": 16,
-      "lastDiameter": 32768
-    }
+    "rotationSeconds": 72
   },
   "textureLevels": {
     "widths": [
@@ -396,14 +389,14 @@
           },
           "legend": {
             "kind": "scale",
-            "title": "Annual radiance · nW/cm²/sr",
+            "title": "Annual radiance · nW/cm\u00b2/sr",
             "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
             "image": "earth-night-lights-legend.png",
             "width": 620,
             "height": 16,
             "labels": [
               "0",
-              "≥ 100 nW/cm²/sr"
+              "\u2265 100 nW/cm\u00b2/sr"
             ]
           },
           "provenancePath": "science/night-lights-2025/provenance.json"
@@ -421,11 +414,11 @@
         "scientific": {
           "kind": "gibs-mur-imagery",
           "date": "2026-09-07",
-          "baseline": "2003–2014",
+          "baseline": "2003\u20132014",
           "checked": "2026-09-09T03:53:28.313Z",
           "advisory": {
             "date": "13 August 2026",
-            "status": "El Niño Advisory",
+            "status": "El Ni\u00f1o Advisory",
             "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
           }
         },
