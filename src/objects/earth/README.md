@@ -130,8 +130,19 @@ Deep ocean colour in the clear and cloud views is therefore shaded from depth, n
 water colour. It is not a measurement of sea surface reflectance and it is not a calibrated
 depth scale; for depth numbers use the elevation view.
 
-Each view's surface is 56 pages. A page holds eight neighbouring cells of one latitude row, a
-90° block, at 2,048, 4,096 or 8,192 pixels wide, whichever gives it the smallest area. A browser
+Each view's surface is 112 square pages. A page holds four neighbouring cells of one latitude row, a
+45° block, two by two, on a square whose side is a multiple of 64 pixels (1,152 to 2,688). The 56 pages
+used before took a width of 2,048, 4,096 or 8,192 pixels, whichever gave the smallest area, and several
+came out as strips such as 8,192 × 688 whose last third held nothing: 17.9% of the atlas lay outside any
+cell and 31% of its pixels were fully transparent. The square pages leave 19% transparent, the wedges
+beside each slanted cell, and decode 1,225 MB when all are resident against 1,445. Modelled on the baked
+layouts (a page decodes whole when any of its cells faces the camera), a view showing a cap of 15°, 30°,
+60° or a hemisphere decodes 50, 123, 381 and 712 MB at the closest level, against 95, 197, 529 and 935.
+The two smallest levels draw every page of a view from one square sheet: each page is a tile, and the body
+publishes the tile's offset and the sheet's scale beside the image, so a level change is a few custom
+properties on the page carriers and no leaf changes. The first view loads one 1,176-pixel sheet of 162 KB
+instead of 56 files of 271 KB. Measured on 2026-09-26 from the rebake. The paragraph below describes the
+block pages as first introduced on 2026-09-25. A browser
 decodes a whole image to draw any part of it and never draws a face turned away, so a view decodes
 only the blocks it shows. The seven latitude-band pages used before each ran round the globe, so
 every view decoded all of them: 109 megapixels at the closest level, which zooming decoded again
