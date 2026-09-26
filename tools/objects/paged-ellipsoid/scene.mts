@@ -660,7 +660,7 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
     const size = cell.size / density, page = `--${profile.namespace}-surface-page-${cell.page}`;
     // At a small level the page is a tile of one sheet (texture-levels.mts); the body then publishes the tile's offset and
     // the sheet's scale beside the image, and the fallbacks are the page's own. They are unitless multipliers of inline
-    // lengths, so preparation's raster and leaf-box scaling (projective-layout.mts) scales them with the address.
+    // lengths, so preparation's raster and leaf-box scaling (bake/presentation/projective-layout.ts) scales them with the address.
     return {
       style: `transform:matrix3d(${cell.layer.frameMatrix})` +
         preparedAtlasDimensions(size, size) +

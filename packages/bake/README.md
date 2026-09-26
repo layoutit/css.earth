@@ -54,8 +54,8 @@ lane's surface test also reads the observation lens sampler from `tools/objects/
 in `tools/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
 The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
-from their published prepared data, so `vitest.config.ts` leaves them out of the package run and `pnpm test:preparation`
-runs them after restoring that data.
+from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
+restored, after its node:test stage passes.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 

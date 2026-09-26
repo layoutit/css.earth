@@ -26,7 +26,7 @@ test('one prepared raster plane preserves the full projective mapping and scaled
   const { tree, index } = builder.finish({ camera, scene }), node = tree.nodes[index(leaf)], style = preparedDeclarations(node.style);
   for (const propertyId of node.properties) { const property = tree.properties[propertyId]; if (property.custom) style.setProperty(property.name, property.value); else Reflect.set(style, property.name, property.value); }
   assert.equal(tree.nodes.length, 3); assert.equal(leaf.children.length, 0);
-  // Every length follows the leaf's box factor (leaf-box.mts); at its fallback of one the leaf keeps the full raster scale.
+  // Every length follows the leaf's box factor (bake/presentation/leaf-box.ts); at its fallback of one the leaf keeps the full raster scale.
   assert.equal(style.width, leafBoxLengths('128px')); assert.equal(style.height, leafBoxLengths('64px'));
   assert.equal(style.backgroundSize, leafBoxLengths('2048px 1024px'));
   assert.equal(style.backgroundPosition, leafBoxLengths('-32px -48px'));

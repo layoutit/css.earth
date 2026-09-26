@@ -371,7 +371,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       ? { ...value, textureLevels: { ...value.textureLevels, placements } } : value;
     if (interiorOnly) return withPreparedInteriorFill(placed(withoutPreparedInteriorFill(input)), interior, assetRoot, gapExclusion);
     const bound = placed({ ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
-    // Leaf boxes: each leaf's factor, the body's steps and their binding (leaf-box.mts).
+    // Leaf boxes: each leaf's factor, the body's steps and their binding (bake/presentation/leaf-box.ts).
     // The steps start at the body's logical diameter, which only an object runtime's camera carries.
     const logicalBodyDiameter: unknown = isRecord(definition.camera) ? definition.camera.logicalBodyDiameter : undefined;
     if (leafBoxes && !(typeof logicalBodyDiameter === 'number' && logicalBodyDiameter > 0)) {
