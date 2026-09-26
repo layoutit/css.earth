@@ -773,9 +773,10 @@ const RECORDING_BADGE = (seconds: number) => `(() => {
  * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
 const STYLE_WRITES_LOGGER = `(() => {
   const t0 = performance.now(), entries = new Map(), perFrame = [];
-  let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, wheelUntil = 0;
+  let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, coasting = false, wheelUntil = 0;
   const moving = () => announced || performance.now() < wheelUntil;
-  const onMotion = event => { announced = Boolean(event.detail && event.detail.active); };
+  // objectmotionchange also says whether the camera coasts on inertia, the only motion the contract gates.
+  const onMotion = event => { announced = Boolean(event.detail && event.detail.active); if (event.type === 'objectmotionchange') coasting = Boolean(event.detail && event.detail.coasting); };
   const onWheel = () => { wheelUntil = performance.now() + 700; };
   for (const type of ['objectrotationchange', 'objectmotionchange']) document.addEventListener(type, onMotion, true);
   addEventListener('wheel', onWheel, { capture: true, passive: true });
@@ -788,8 +789,8 @@ const STYLE_WRITES_LOGGER = `(() => {
   };
   const parse = text => { const map = new Map(); for (const part of (text || '').split(';')) { const i = part.indexOf(':'); if (i > 0) map.set(part.slice(0, i).trim(), part.slice(i + 1).trim()); } return map; };
   const bump = (key, value, at, inMotion) => {
-    const entry = entries.get(key) || { key, count: 0, moving: 0, first: at, last: at, value: '' };
-    entry.count++; if (inMotion) entry.moving++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry);
+    const entry = entries.get(key) || { key, count: 0, moving: 0, coasting: 0, first: at, last: at, value: '' };
+    entry.count++; if (inMotion) entry.moving++; if (coasting) entry.coasting++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry);
     frameWrites++; if (inMotion) frameMoving++;
   };
   const ours = node => node.nodeType === 1 ? Boolean(node.closest('[data-capture-overlay]')) : Boolean(node.parentElement && node.parentElement.closest('[data-capture-overlay]'));
