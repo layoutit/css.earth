@@ -1,8 +1,8 @@
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import { requiredElement, setPanelHidden, type BrowserWindow } from './browser-types.mts';
-import type { CatalogueSelection } from './catalogue-window.mts';
+import { requiredElement, setPanelHidden, type BrowserWindow } from './browser/browser-types.mts';
+import type { CatalogueSelection } from './catalogue/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';

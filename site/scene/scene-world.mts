@@ -1,5 +1,5 @@
 import type { createApplicationWorldContext } from '../application-world-context.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { FocusPublication } from '../prepared-context-navigation.mts';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';

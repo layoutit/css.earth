@@ -5,7 +5,7 @@ const test = sourceTest();
 import { createSceneView } from '../scene/scene-view.mts';
 import { createSceneSessions } from '../scene/scene-session.mts';
 import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { formatSharedView, parseSharedView } from "@cssearth/renderer/navigation";
 
 import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';

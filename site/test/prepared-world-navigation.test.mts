@@ -13,7 +13,7 @@ import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-nav
 import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
-import type { SceneFactory } from '../browser-types.mts';
+import type { SceneFactory } from '../browser/browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import type { PreparedArrivalView } from '@cssearth/objects';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';

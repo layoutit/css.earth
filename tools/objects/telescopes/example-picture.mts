@@ -13,7 +13,7 @@
  * Three product shapes are read, and no more: a FITS image (any extension, and a plane of a cube), a FITS event list
  * binned to counts per square bin, and a JunoCam PDS3 push-frame image as the instrument records it.
  *
- * Related: ../content/fits-gallery-image.mts, whose rules for sky images this follows (north up, east left, every source
+ * Related: ../charts/fits-gallery-image.mts, whose rules for sky images this follows (north up, east left, every source
  * pixel a square). */
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';

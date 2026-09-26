@@ -1,7 +1,7 @@
 import { parseArgs } from "node:util";
 import { pathToFileURL } from "node:url";
 import { preview } from "vite";
-import { searchServer } from './search-server.mts';
+import { searchServer } from '../../site/server/search-server.mts';
 
 // Astro static preview discards user Vite plugins. Use Vite's static preview
 // directly so the same prepared-pack middleware works in dev and preview.

@@ -3,7 +3,7 @@
 export { SCENE_OBJECTS, knownObject, loadObject } from '../object-directory.mts';
 export { WORLD_OBJECTS } from '../world-objects.mts';
 export { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-export { mountObjectShell } from '../object-shell-client.mts';
+export { mountObjectShell } from '../shell/object-shell-client.mts';
 export { createSceneActivation } from './scene-activation.mts';
 export { createSceneSelection, selectionTargetFromUrl } from './scene-selection.mts';
 export { resolveNavigation } from '../navigation/navigation-request.mts';

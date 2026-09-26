@@ -1,5 +1,5 @@
-import type { BrowserWindow } from '../browser-types.mts';
-import { errorMessage } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
+import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';

@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import type { BrowserWindow } from '../browser-types.mts';
-import type { CatalogueIndexEntry } from '../catalogue-index.mts';
-import { createCatalogueWindow } from '../catalogue-window.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
+import type { CatalogueIndexEntry } from '../catalogue/catalogue-index.mts';
+import { createCatalogueWindow } from '../catalogue/catalogue-window.mts';
 
 const entry = (index: number): CatalogueIndexEntry => ({
   kind: 'scene', id: `earth-${index}`, name: `Earth ${index}`, searchNames: [], classification: 'planet',

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { performance, PerformanceObserver } from 'node:perf_hooks';
 import { webcrypto } from 'node:crypto';
 import { createDiagnosticRecorder } from '../diagnostic-recorder.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { required } from './navigation-test-values.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';

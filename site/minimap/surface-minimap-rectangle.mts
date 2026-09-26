@@ -12,7 +12,7 @@ import Ray from '@cesium/engine/Source/Core/Ray.js';
 import { rotateWorldPosition } from '@cssearth/renderer/navigation';
 import { wrapMapU } from './surface-minimap-math.mts';
 import { viewScale } from './view-format.mts';
-import { computeViewRectangle } from './vendor/cesium-view-rectangle.mjs';
+import { computeViewRectangle } from '../vendor/cesium-view-rectangle.mjs';
 import { dotN as dot } from '@cssearth/core';
 export interface MinimapCameraState { eye: PositionM; rotation: WorldRotation; view: MapViewport; axes: SurfaceAxes; }
 

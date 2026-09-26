@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { loadNpyDictionaryMap, readNpyObject, npyArrayAt } from '@cssearth/bake/objects/raster';
 import { sourceTest } from './source-test.mts';
-import { readMeasuredSpectrum } from '../../tools/objects/content/measured-spectrum.mts';
+import { readMeasuredSpectrum } from '../../tools/objects/charts/measured-spectrum.mts';
 
 const test = sourceTest('hd-189733b');
 const root = resolve(import.meta.dirname, '../../src/objects/hd-189733b/source');

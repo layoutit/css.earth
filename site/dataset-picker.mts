@@ -1,5 +1,5 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from './browser-types.mts';
+import type { BrowserWindow } from './browser/browser-types.mts';
 
 /** The mobile native select forwards a choice to the same retained dataset button as desktop. */
 export function bindDatasetPicker(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {

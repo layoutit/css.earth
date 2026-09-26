@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
-import { SEARCH_OBJECTS } from '../search-objects.mts';
+import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare/prepare-navigation-destinations.mts';
 import { distanceDescription, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
@@ -122,7 +122,7 @@ test('an unconfirmed LVDB galaxy is searchable by name as a candidate galaxy, an
   // LVDB candidate-table rows: Camargo 1105 and Minni 01 are unconfirmed; Hydra I is confirmed real but not a galaxy.
   for (const name of ['Camargo 1105', 'Minni 01', 'Hydra I']) assert.equal(byName(name).candidate, true, name);
   for (const name of ['Draco II', 'Segue 1', 'Sagittarius']) assert.equal(byName(name).candidate, undefined, name);
-  const { searchObjects } = await import('../object-search.mts');
+  const { searchObjects } = await import('../search/object-search.mts');
   const labels = prepared.filter(object => object.classification === 'galaxy').map(object => ({ name: object.name.toLocaleLowerCase('en'), names: object.searchNames,
     classification: object.classification, classificationName: object.candidate ? 'candidate galaxy' : 'galaxy', systemName: object.systemName.toLocaleLowerCase('en'),
     candidate: object.candidate === true }));

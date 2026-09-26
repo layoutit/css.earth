@@ -124,7 +124,7 @@ export async function prepareObjectContentAssets({
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
   if (chartConfig !== undefined) {
-    const { prepareChartAssets } = await import("./charts");
+    const { prepareChartAssets } = await import("../charts/charts");
     chartAssets = await prepareChartAssets({ sourceDirectory, publicDirectory, config: chartConfig }) as {
       urls: string[];
       gallery?: { items: GalleryRecipe["items"]; qualification?: string };

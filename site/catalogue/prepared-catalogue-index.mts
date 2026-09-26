@@ -1,8 +1,8 @@
 import { distanceDescription, isSceneObject } from '@cssearth/objects';
-import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
-import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
-import { sidebarThumbnail } from './sidebar-thumbnails.mts';
-import { sourceDocumentation } from './source-documentation.mts';
+import { FOCUS_SOURCE_DOCUMENTS } from '../focus-catalog-data.mts';
+import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from '../search/search-objects.mts';
+import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
+import { sourceDocumentation } from '../source-documentation.mts';
 import type { CatalogueIndex } from './catalogue-index.mts';
 
 /** Prepared search transport. Runtime filters records and materializes only the visible rows. */

@@ -2,7 +2,7 @@
 import CatalogueRows from "./CatalogueRows.astro";
 import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
 import NavigationTree from './NavigationTree.astro';
-import { CATALOGUE_FRAGMENT_URL, CATALOGUE_INDEX_URL } from '../catalogue-fragment-loader.mts';
+import { CATALOGUE_FRAGMENT_URL, CATALOGUE_INDEX_URL } from '../catalogue/catalogue-fragment-loader.mts';
 
 interface Props { activeObjectId?: string; }
 const { activeObjectId } = Astro.props;
