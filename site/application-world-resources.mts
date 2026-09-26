@@ -93,8 +93,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       const set = resourceSet(id), payload = await loadPreparedVolumeLenses(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
     });
-    // The worker reads its own prepared context. The bounded spatial-star sample is
-    // already inside pointAppearance; the complete binary catalogue stays out of the app.
+    // The worker receives the validated summary and reads orbit paths on demand.
+    // The bounded spatial-star sample is already inside pointAppearance;
+    // the complete binary catalogue stays out of the app.
     const plannerSource = APPLICATION_WORLD_PLANNER_SOURCE;
     const fades = PREPARED_WORLD_PRESENTATION;
     const catalogBank = { fadeStartDistanceM: fades.galaxies.fadeStartDistanceM, fullDistanceM: fades.galaxies.fullDistanceM,
