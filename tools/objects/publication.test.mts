@@ -15,11 +15,15 @@ test('publication updates prepared inventory pins with the staged runtime', asyn
     const stagedData = resolve(stage, 'prepared'), stagedPublic = resolve(stage, 'public');
     await Promise.all([stagedData, stagedPublic, outputDirectory, publicDirectory].map(path => mkdir(path, { recursive: true })));
     const oldRuntime = Buffer.from('{"version":1}\n'), newRuntime = Buffer.from('{"version":2}\n');
-    const texture = Buffer.from('prepared texture');
+    const texture = Buffer.from('prepared texture'), text = Buffer.from('{"facts":[]}\n'), gone = Buffer.from('{"old":true}\n');
     const pin = (filename: string, bytes: Buffer) => ({ filename, bytes: bytes.length, sha256: sha256(bytes) });
     const oldInventory = { schema: 'cssearth-inventory@1' as const, assets: [
       { location: 'public' as const, ...pin('surface.webp', texture) },
       { location: 'prepared' as const, ...pin('runtime.json', oldRuntime) },
+      // Written by another step, not by the bake: kept while its bytes are on disk.
+      { location: 'prepared' as const, ...pin('text.json', text) },
+      // Recorded but no longer on disk: dropped.
+      { location: 'prepared' as const, ...pin('stale.json', gone) },
     ] };
     const publicManifest = { schema: 'cssearth-inventory@1' as const, assets: [
       { location: 'public' as const, ...pin('surface.webp', texture) },
@@ -27,6 +31,7 @@ test('publication updates prepared inventory pins with the staged runtime', asyn
     await Promise.all([
       writeFile(resolve(objectDirectory, 'inventory.json'), inventoryText(oldInventory)),
       writeFile(resolve(outputDirectory, 'runtime.json'), oldRuntime),
+      writeFile(resolve(outputDirectory, 'text.json'), text),
       writeFile(resolve(publicDirectory, 'surface.webp'), texture),
       writeFile(resolve(stage, 'object.json'), '{}\n'),
       writeFile(resolve(stagedData, 'inventory.json'), inventoryText(publicManifest)),
@@ -39,6 +44,7 @@ test('publication updates prepared inventory pins with the staged runtime', asyn
     const inventory = await readInventory(id, objectDirectory);
     assert.ok(inventory);
     assert.equal(inventory.assets.find(asset => asset.location === 'prepared' && asset.filename === 'runtime.json')?.sha256, sha256(newRuntime));
+    assert.deepEqual(inventory.assets.filter(asset => asset.location === 'prepared').map(asset => asset.filename), ['runtime.json', 'text.json']);
     assert.equal((await readFile(resolve(outputDirectory, 'runtime.json'))).toString(), newRuntime.toString());
     await verifyInventory({ objectId: id, inventory, preparedRoot: outputDirectory, publicRoot: publicDirectory });
   } finally {
