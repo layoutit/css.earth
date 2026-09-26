@@ -1,4 +1,4 @@
-import {decodeProfile} from './source-records.mts';
+import {decodeProfile} from '@cssearth/bake/objects/raster';
 import {shape,number,text,optional,array,dictionary} from '@cssearth/core';
 interface ConstraintMesh {
   coordinates?: readonly number[][]; constraintFlags?: ArrayLike<number>; faceProvenance?: ArrayLike<number>;

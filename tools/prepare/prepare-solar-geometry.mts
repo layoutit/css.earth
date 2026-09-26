@@ -122,7 +122,7 @@ const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promi
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
   const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
   if (!ref) return [id, null];
-  const { readAuthoredRotation } = await import('../objects/authored-rotation.mts');
+  const { readAuthoredRotation } = await import('@cssearth/bake/objects/scene');
   return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path) }, EPOCH_JD_TT)];
 })));
 const rotationAtEpoch = (id: BodyId): RotationElements => {

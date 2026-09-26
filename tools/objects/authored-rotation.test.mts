@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { obliquitySpinAxis, readAuthoredRotation } from './authored-rotation.mts';
+import { obliquitySpinAxis, readAuthoredRotation } from '@cssearth/bake/objects/scene';
 
 test('a measured meridian advances from its source epoch, including retrograde spin', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-rotation-'));
@@ -46,7 +46,7 @@ test('a PCK quadratic meridian advances phase and instantaneous spin consistentl
 
 test('a synchronous rotation faces +X at the centre it orbits, +Z along the orbit normal, and spins at the orbital rate', async () => {
   const { bodyFixedToIcrf } = await import('@cssearth/astronomy');
-  const { synchronousRotationElements } = await import('./authored-rotation.mts');
+  const { synchronousRotationElements } = await import('@cssearth/bake/objects/scene');
   const cases: [number[], number[]][] = [[[3.2e6, -1.1e6, 0.4e6], [-2.0e6, -4.5e6, 7.1e6]], [[-1, 0.2, -0.9], [0.3, 1, 0.1]], [[0, 0, 5], [1, 0, 0]]];
   for (const [position, velocity] of cases) {
     const elements = synchronousRotationElements(position, velocity, 0.8134741);
@@ -62,7 +62,7 @@ test('a synchronous rotation faces +X at the centre it orbits, +Z along the orbi
 });
 
 test('a uniform synchronous rotation refuses an eccentric orbit until an explicit rotation law is authored', async () => {
-  const { synchronousRotationElements } = await import('./authored-rotation.mts');
+  const { synchronousRotationElements } = await import('@cssearth/bake/objects/scene');
   assert.throws(() => synchronousRotationElements([1, 0, 0], [0, 1, 0], 2, .1), /explicit authored rotation law/);
 });
 

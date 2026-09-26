@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import {parsePdsImage} from './pds-image.mts';
+import {parsePdsImage} from '@cssearth/bake/objects/raster';
 
 function fixture({rock=false, values}: {rock?: boolean; values?: readonly number[]} = {}) {
   const width=rock?6:4, height=2, ppd=rock?1/60:1/90, latitude=rock?60:90;

@@ -22,7 +22,7 @@ import sharp from 'sharp';
 import { hostLitGray, linearToSrgb } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '../observation/disc-band-color.mts';
 import { loadStellarPhotometricColor, quadraticIntensity } from '../observation/stellar/stellar-photometric-color.mts';
-import { colorForValue, loadScienceSurface } from '../terrestrial-layers/scientific-raster.mts';
+import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const objects = resolve(import.meta.dirname, '../../../src/objects');

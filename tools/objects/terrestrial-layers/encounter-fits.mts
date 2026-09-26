@@ -1,4 +1,4 @@
-import {parseEncounterPolicy} from './source-records.mts';
+import {parseEncounterPolicy} from '@cssearth/bake/objects/raster';
 import { readFitsHdu, fitsImageAccessor, type FitsHeader } from '@cssearth/fits';
 // Preparation-only decoding of calibrated Stardust and Deep Impact/EPOXI
 // observations. Detector quality is independent of brightness and display tone.

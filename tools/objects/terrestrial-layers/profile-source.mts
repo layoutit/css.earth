@@ -1,6 +1,6 @@
 import { refuseAuthoredCameraAngles } from '../../../src/platform/default-camera.mts';
 import {requireRecord,shape,number,text,optional,nullable,array,boolean,dictionary,choice} from '@cssearth/core';
-import { parseSciencePalette } from './source-records.mts';
+import { parseSciencePalette } from '@cssearth/bake/objects/raster';
 import { parseTransform } from '@cssearth/bake/objects/geometry';
 import {parseSolidScience,parseSolidRasterConfig} from './solid-source.mts';
 import {parseRadialSource} from './radial-source.mts';

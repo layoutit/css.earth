@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { readObservation } from '../../../tools/objects/terrestrial-layers/observation-raster.mts';
+import { readObservation } from '@cssearth/bake/objects/raster';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 
 // Exercise the source conversion without requiring an intermediate image in

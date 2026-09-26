@@ -1,4 +1,4 @@
-import { parseEllipsoidParameters } from './source-records.mts';
+import { parseEllipsoidParameters } from '@cssearth/bake/objects/raster';
 import { parseMeshProfile, parseObjShape } from '@cssearth/bake/objects/geometry';
 import { readFile } from 'node:fs/promises';
 

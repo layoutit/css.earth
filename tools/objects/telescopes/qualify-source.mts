@@ -4,7 +4,7 @@ import { parseProductFacts } from './qualified-observations.mts';
 import { verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 import { sourceHeaders } from './source-transfer.mts';
-import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
+import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { mkdir, readFile, writeFile, rename, rm, open, realpath } from 'node:fs/promises';
 import { dirname, resolve, basename, relative } from 'node:path';

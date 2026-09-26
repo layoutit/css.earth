@@ -2,8 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { mapBasisCurves, mapPhaseCurve, mirrorGrid } from './phase-curve.mts';
-import { equalAngleGrid } from './eigenmap-fit.mts';
+import { mapBasisCurves, mapPhaseCurve, mirrorGrid, equalAngleGrid } from '@cssearth/bake/objects/raster';
 
 test('an eccentric map cannot silently use instantaneous star-facing rotation', () => {
   const orbit = { ...hostedOrbit('wasp-43b'), eccentricity: 0.1, argumentOfPeriapsisDegrees: 90, epochDefinition: 'inferior-conjunction' as const };

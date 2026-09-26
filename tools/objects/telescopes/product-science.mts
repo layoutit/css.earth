@@ -7,7 +7,7 @@ import { calibrationDependencies, verifyCalibrationDependencies } from './calibr
 import { parseProductFacts } from './qualified-observations.mts';
 import { fileSize } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
+import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import type { ProductFacts } from './request-satisfaction.mts';
 export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown; readonly region?: import('@cssearth/telescope/node').IcrsCircle }
 function intersection(left:readonly (readonly [number,number])[],right:readonly (readonly [number,number])[]): [number,number][] {

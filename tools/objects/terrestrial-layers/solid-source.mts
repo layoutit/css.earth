@@ -1,5 +1,5 @@
 import {requireRecord,shape,number,text,optional,boolean,array,dictionary,choice} from '@cssearth/core';
-import {parseSciencePalette} from './source-records.mts';
+import {parseSciencePalette} from '@cssearth/bake/objects/raster';
 import {parseNativePhotographicSampling} from './native-photograph.mts';
 
 const texture = {textureScale:optional(number),monochromeBase:optional(text),

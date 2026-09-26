@@ -32,7 +32,7 @@ settings, except the aperture, which counts edge pixels by their area inside the
 together by [`joint-emission.mts`](../../../tools/objects/jwst/joint-emission.mts) with Bell's model: transits and eclipses of b, c
 and g, c's phase curve, a baseline, pointing terms and a Gaussian process for the star's own variability. What is left is b's own
 emission, [`b-emission-15um.csv`](source/science/jwst-trappist-1/b-emission-15um.csv). The lens fits a bare rock to it with
-[`bare-rock.mts`](../../../tools/objects/eclipse-map/bare-rock.mts), converting temperature to 15 µm flux through the F1500W response
+[`bare-rock.ts`](../../../packages/bake/src/objects/raster/eclipse-map/bare-rock.ts), converting temperature to 15 µm flux through the F1500W response
 and a BT-Settl model of the star (2600 K, log g 5.0, the grid point nearest Agol's 2566 K).
 
 Checked against the published result: with Bell's own phase-curve shape the joint fit gives b a dayside of 859 ppm against his

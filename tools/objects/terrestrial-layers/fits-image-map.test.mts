@@ -4,8 +4,7 @@ const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { decodeFitsImageMap } from './fits-image-map.mts';
-import { loadScienceSurface } from './scientific-raster.mts';
+import { decodeFitsImageMap, loadScienceSurface } from '@cssearth/bake/objects/raster';
 
 function header(fields: Record<string, string | number | boolean>) {
   const cards = Object.entries(fields).map(([key, value]) => `${key.padEnd(8)}= ${typeof value === 'string' ? `'${value}'` : typeof value === 'boolean' ? value ? 'T' : 'F' : value}`.padEnd(80));

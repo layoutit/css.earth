@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import{test}from'node:test';
-import{observationPixelMissing,prepareFloatObservation,prepareRgbBandObservation}from'./observed-geotiff.mts';
+import{observationPixelMissing,prepareFloatObservation,prepareRgbBandObservation}from'@cssearth/bake/objects/raster';
 import { writeArrayBuffer, type GeotiffWriterMetadata } from 'geotiff';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';

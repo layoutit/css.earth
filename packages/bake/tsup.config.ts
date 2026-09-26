@@ -17,7 +17,9 @@ export default defineConfig({
     'objects/geometry': 'src/objects/geometry/index.ts',
     'galaxy-catalog': 'src/galaxy-catalog/index.ts',
     'cluster-catalog': 'src/cluster-catalog/index.ts',
-    'world-context': 'src/world-context/index.ts' },
+    'world-context': 'src/world-context/index.ts',
+    'objects/raster': 'src/objects/raster/index.ts',
+    'objects/scene': 'src/objects/scene/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the

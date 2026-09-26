@@ -49,8 +49,8 @@ import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from 
 import { validateMaterialRecipe } from './recipe.mts';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
-import { tieBandRatios } from '../terrestrial-layers/photometric-observations.mts';
-import type { BandRatioPolicy } from '../terrestrial-layers/contracts.mts';
+import { tieBandRatios } from '@cssearth/bake/objects/raster';
+import type { BandRatioPolicy } from '@cssearth/bake/objects/raster';
 
 /** The pixel width of the widest of these published images, read from each file's header. */
 export async function widestPublishedImage(paths:readonly string[], owner:string) {

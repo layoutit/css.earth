@@ -1,6 +1,6 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { SourceMesh } from '@cssearth/bake/objects/geometry';
-import { parseArchivedCamera, parseLimbRefinement } from './source-records.mts';
+import { parseArchivedCamera, parseLimbRefinement } from '@cssearth/bake/objects/raster';
 
 /**
  * Pointing refinement against the retained mesh. Archived and kernel cameras

@@ -15,7 +15,7 @@ const test = sourceTest();
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { HostedOrbit } from '@cssearth/astronomy';
-import { continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap } from './eigenmap-fit.mts';
+import { continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap } from '@cssearth/bake/objects/raster';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const run = (observation: string) => resolve(repository, `output/jwst/hd-189733b-miri-2021-${observation}/light-curves`);

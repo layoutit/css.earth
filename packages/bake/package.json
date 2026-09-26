@@ -2,7 +2,7 @@
   "name": "@cssearth/bake",
   "version": "0.0.0",
   "private": true,
-  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, the geometry scene and CSS presentation compilers, and the shared object libraries (colour, shape geometry, cameras).",
+  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, the geometry scene and CSS presentation compilers, and the shared object libraries (colour, shape geometry, cameras, world frame and rotation, science rasters).",
   "type": "module",
   "files": [
     "dist"
@@ -104,6 +104,16 @@
       "import": "./dist/world-context.js",
       "default": "./dist/world-context.js"
     },
+    "./objects/raster": {
+      "types": "./dist/objects/raster.d.ts",
+      "import": "./dist/objects/raster.js",
+      "default": "./dist/objects/raster.js"
+    },
+    "./objects/scene": {
+      "types": "./dist/objects/scene.d.ts",
+      "import": "./dist/objects/scene.js",
+      "default": "./dist/objects/scene.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -122,6 +132,7 @@
     "@cssearth/spice": "workspace:*",
     "@cssearth/telescope": "workspace:*",
     "@layoutit/polycss": "0.2.11",
+    "geotiff": "3.0.5",
     "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
     "sharp": "0.35.3",

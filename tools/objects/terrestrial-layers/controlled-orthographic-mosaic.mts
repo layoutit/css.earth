@@ -1,13 +1,11 @@
-import {parseControlledMosaic,parseControlledMetadata,numericRasterBands} from './source-records.mts';
+import { parseControlledMosaic, parseControlledMetadata, numericRasterBands, controlledBodyFrame, colorPhotometricGain, readObservationVectors, sampleColorBand } from '@cssearth/bake/objects/raster';
 import {execFile} from 'node:child_process';
 import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {promisify} from 'node:util';
 import {fromFile} from 'geotiff';
-import {controlledBodyFrame, colorPhotometricGain, readObservationVectors} from './photometric-observations.mts';
 import {orthographicPoint} from './orthographic-observation.mts';
-import {sampleColorBand} from './scientific-raster.mts';
 
 const run = promisify(execFile), radians = Math.PI / 180;
 /** Correct calibrated source frames before compositing, retaining the finest valid observation. */

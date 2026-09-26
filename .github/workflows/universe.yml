@@ -157,6 +157,13 @@ jobs:
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts lint
+      - name: Test the shared object libraries
+        # The node tests of @cssearth/bake/objects/<topic> stay beside the pipelines in tools/objects/, which no other PR step
+        # runs; tools/ci/test-bake-objects.mts selects every test that imports an object entry, and unrestored downloads skip.
+        # They read the generated solar geometry built above and five tracked geology shapefiles (5.4 MB) the sparse tree leaves out.
+        run: |
+          git sparse-checkout add '/src/objects/**/*.shp'
+          pnpm test:bake-objects
       - name: Check physical frame receipts
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
         run: node tools/ci/check-object-runtime-ownership.mts --receipts

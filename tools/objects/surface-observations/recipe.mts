@@ -5,8 +5,9 @@
  * adds its selection and level matching. A format adds only its own frame inputs and lens blocks. A key the format does not
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
-import { requireRecord, array, number, optional, shape, text } from '@cssearth/core';
+import { array, number, optional, shape, text } from '@cssearth/core';
 import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
+import { checkKeys } from '@cssearth/bake/objects/raster';
 
 /** Keys every lens has, and the two a mosaic adds. */
 export const LENS_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;
@@ -21,12 +22,6 @@ const identifier = /^[a-z][a-z0-9-]*$/;
 /** A frame keeps its archive product id, such as Cassini n1506184171_1 or a Galileo SSI image number. */
 const frameIdentifier = /^[a-z0-9][a-z0-9_-]*$/;
 
-/** Refuse keys a format does not declare, and require the ones it must have. */
-export function checkKeys(value: unknown, required: readonly string[], allowed: readonly string[], context: string) {
-  const record = requireRecord(value), keys = Object.keys(record);
-  const unknown = keys.filter(key => !required.includes(key) && !allowed.includes(key)), missing = required.filter(key => record[key] === undefined);
-  if (unknown.length || missing.length) throw new TypeError(`Invalid source-bound ${context}: ${[...unknown.map(key => `unknown ${key}`), ...missing.map(key => `missing ${key}`)].join(', ')}.`);
-}
 
 /** A display maps either a percentile range of the qualified values or one stated display range to display levels; a colour product's bands share that range.
  * A monochrome lens may present those levels through a palette of at least two hex colours instead of grey. `basis` says where the stretch comes from:

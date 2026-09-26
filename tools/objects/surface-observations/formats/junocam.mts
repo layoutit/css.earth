@@ -6,7 +6,7 @@
  * shared route: footprints, photometry, selection between photographs, level matching, display and the report.
  */
 import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -24,7 +24,7 @@ import { cameraFrame } from '../footprint.mts';
 import { bandSetFrame, stripFrame, type Strip } from '../composite.mts';
 import { diskPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 const CONTEXT = 'JunoCam observation recipe';
 /** The bands of the colour photograph, in display order. */

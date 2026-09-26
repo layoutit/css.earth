@@ -7,7 +7,7 @@ const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {ellipsoidParameterMesh} from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
-import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
+import {readAuthoredRotation} from '@cssearth/bake/objects/scene';
 const read=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 export function testRadarApproximation(id:string,semiaxesMeters:readonly number[]){
  test(`${id}: published absolute axes produce a closed 800-triangle approximation`,async()=>{

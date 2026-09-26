@@ -1,12 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
+import { planckRadiance, mapPhaseCurve, mirrorGrid, type EmissionGrid, phaseCurveBrightnessTemperature as brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve, sinusoidMap } from '@cssearth/bake/objects/raster';
 import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { starryMapGrid, starrySystemFlux } from '@cssearth/telescope/node';
-import { mapPhaseCurve, mirrorGrid, type EmissionGrid } from '../eclipse-map/phase-curve.mts';
-import { brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve,
-  sinusoidMap } from './published-phase-curve-map.mts';
 
 const test = sourceTest();
 const objects = new URL('../../../src/objects/', import.meta.url);

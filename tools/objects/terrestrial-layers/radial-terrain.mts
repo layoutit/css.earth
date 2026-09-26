@@ -7,10 +7,9 @@ import { parseRadialSource } from './radial-source.mts';
 import { resolve } from 'node:path';
 import { loadEllipsoidParameters } from './ellipsoid-parameters.mts';
 import { loadContactEllipsoids } from './contact-ellipsoids.mts';
-import { loadImageDem } from './image-dem.mts';
+import { loadImageDem, loadPdsScalarGrid } from '@cssearth/bake/objects/raster';
 import { completeImageDem, reduceCompletedImageDem } from './image-dem-completion.mts';
 import { buildSeamBleedPolygonEdges, computeSolidTrianglePlan, SOLID_TRIANGLE_BLEED, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
-import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 

@@ -1,6 +1,6 @@
 import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope';
 import { readFitsHdu, type FitsHeader } from '@cssearth/fits';
-import type { GeometryCubeDeclaration } from './source-records.mts';
+import type { GeometryCubeDeclaration } from '@cssearth/bake/objects/raster';
 
 /**
  * PDS4 observational products that store an image with its geometric

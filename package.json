@@ -71,6 +71,7 @@
     "test": "pnpm test:packages && pnpm test:renderer && pnpm test:node && pnpm test:preparation --universe && pnpm test:lab",
     "test:packages": "pnpm -r --filter \"./packages/**\" test",
     "test:preparation": "node tools/contract/test-preparation.mts",
+    "test:bake-objects": "node tools/ci/test-bake-objects.mts",
     "test:renderer": "pnpm --filter @cssearth/renderer exec vitest run",
     "typecheck": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula",
     "typecheck:astro": "astro check --tsconfig site/astro.tsconfig.json",

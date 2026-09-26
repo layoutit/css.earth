@@ -4,7 +4,7 @@
  * its rays are cast onto the source mesh the network was controlled to. Three filters can be shown together as colour.
  */
 import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
 import { parseCameraFrame, checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '@cssearth/bake/objects/geometry';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
@@ -20,7 +20,7 @@ import { bandSetFrame } from '../composite.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
 import { MAXIMUM_LEVEL_FRAMES } from '../levels.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.mts';
 
 const CONTEXT = 'controlled camera recipe';
 /** The camera a control network states for one photograph. A frame that names an image catalog takes these from the catalog instead. */

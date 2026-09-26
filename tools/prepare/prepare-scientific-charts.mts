@@ -1,7 +1,7 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
-import {decodeProfile} from "../objects/terrestrial-layers/source-records.mts";
+import {decodeProfile} from "@cssearth/bake/objects/raster";
 const phaseFields={maximumAngleDegrees:number,qualification:optional(text),segments:array(shape({maximumAngleDegrees:number,kind:text,coefficients:array(number),constant:optional(number)}))};
 const parsePhase=shape(phaseFields);
 const parseContext=shape({schema:text,sources:shape({photometricPhase:requireRecord}),planets:dictionary(shape({phase:parsePhase}))});

@@ -35,7 +35,7 @@ starlight it absorbs, T cos(z)^(1/4) at an angle z from the point under the star
 [Cowan & Agol 2011](https://doi.org/10.1088/0004-637X/726/2/82), eq. 3), the model TRAPPIST-1b's light curve supports. Its one
 number is set so the rock shows c's eclipse depth
 ([`c-dayside-15um.json`](source/science/jwst-trappist-1/c-dayside-15um.json)) through the F1500W response and a BT-Settl model of the
-star, with [`bare-rock.mts`](../../../tools/objects/eclipse-map/bare-rock.mts): 392 to 421 K under the star for 318 to 389 ppm, drawn
+star, with [`bare-rock.ts`](../../../packages/bake/src/objects/raster/eclipse-map/bare-rock.ts): 392 to 421 K under the star for 318 to 389 ppm, drawn
 at 407 K for the middle of the range. A perfectly black rock at c's distance would reach 480 K (Agol's 2566 K star at 28.549 stellar
 radii), so the measured day side is dimmer than a black rock's. The lens is labelled a model on the page.
 

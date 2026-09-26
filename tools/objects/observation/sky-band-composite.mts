@@ -19,7 +19,7 @@ import { findPointSources } from './point-sources.mts';
 import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../jwst/imaging/bands.mts';
 import { runImage3 } from '../jwst/imaging/image3.mts';
 import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,
-  WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';
+  WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
 
 export const HIPS2FITS = 'https://alasky.cds.unistra.fr/hips-image-services/hips2fits';
 const WISE_ATLAS_PIXEL_SR = (1.375 / 206264.80624709636) ** 2;

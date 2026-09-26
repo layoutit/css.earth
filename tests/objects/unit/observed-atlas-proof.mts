@@ -1,4 +1,4 @@
-import {numericRaster} from '../../../tools/objects/terrestrial-layers/source-records.mts';
+import {numericRaster} from '@cssearth/bake/objects/raster';
 import { array, dictionary, number, optional, shape, text, requireFiniteNumber, invertPreparedAffineMatrix4 } from '@cssearth/core';
 import {required} from '../../../tools/contract/test-values.mts';
 import type {GeoTIFFImage} from 'geotiff';

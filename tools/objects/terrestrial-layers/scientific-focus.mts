@@ -1,4 +1,4 @@
-import {parseScientificFocus,parseScientificCamera} from './source-records.mts';
+import {parseScientificFocus,parseScientificCamera} from '@cssearth/bake/objects/raster';
 import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
 import {preparedControlPitch} from '@cssearth/engine';
 

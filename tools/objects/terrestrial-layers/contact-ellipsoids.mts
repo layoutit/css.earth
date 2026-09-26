@@ -1,4 +1,4 @@
-import { parseContactModel } from './source-records.mts';
+import { parseContactModel } from '@cssearth/bake/objects/raster';
 import { parseMeshProfile, parseObjShape } from '@cssearth/bake/objects/geometry';
 import { readFile } from 'node:fs/promises';
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';

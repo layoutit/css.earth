@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Astropy WCS pixel mapping for tools/objects/observation/wise-atlas-mosaic.mts atlasToGridPixel.
+"""Astropy WCS pixel mapping for packages/bake/src/objects/raster/wise-atlas-mosaic.ts atlasToGridPixel.
 Run with the pinned oracle environment; never imports the TypeScript mosaic.
 The tiny FITS inputs carry AllWISE-atlas-like SIN tile headers and hips2fits-convention TAN grids.
 """

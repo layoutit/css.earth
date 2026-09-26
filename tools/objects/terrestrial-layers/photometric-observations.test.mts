@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { composeCorrectedColor, matchObservedColorLevels, solveBandLevels } from './photometric-observations.mts';
+import { composeCorrectedColor, matchObservedColorLevels, solveBandLevels, sampleColorBand } from '@cssearth/bake/objects/raster';
 import { linearToSrgb } from '@cssearth/bake/objects/color';
-import { sampleColorBand } from './scientific-raster.mts';
-import type { ColorBand, PhotometryProfile } from './contracts.mts';
+import type { ColorBand, PhotometryProfile } from '@cssearth/bake/objects/raster';
 
 const RADIUS_KM = 1000, RADIUS_M = RADIUS_KM * 1000, FILTERS = ['GREEN', 'VIOLET', 'UV'];
 const metresPerDegree = RADIUS_M * Math.PI / 180;

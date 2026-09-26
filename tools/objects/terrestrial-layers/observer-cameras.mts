@@ -8,7 +8,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString, array, number, optional, shape, text } from '@cssearth/core';
-import { decodeProfile } from './source-records.mts';
+import { decodeProfile } from '@cssearth/bake/objects/raster';
 import { readFitsHdu } from '@cssearth/fits';
 import { parseTextKernel, parseLeapSeconds } from '@cssearth/spice';
 import { restoredBankFile } from '../../kernel-banks/kernel-bank.mts';

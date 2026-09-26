@@ -5,7 +5,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { prepareByteObservation, resizeProjectedValidity } from './observed-image.mts';
+import { prepareByteObservation, resizeProjectedValidity } from '@cssearth/bake/objects/raster';
 
 test('disk-backed native validity preserves mixed edge footprints for gray and RGB maps', async () => {
   for (const channels of [1, 3] as const) {

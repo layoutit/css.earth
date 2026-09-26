@@ -6,9 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { deflateRawSync } from 'node:zlib';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { fitScaleAndOffset, mapPhaseCurve, mirrorGrid, type EmissionGrid } from '../eclipse-map/phase-curve.mts';
-import { loadEigenspectraGroups, loadEigenspectraTemperature } from './eigenspectra-map.mts';
-import { readNpz } from './npz.mts';
+import { fitScaleAndOffset, mapPhaseCurve, mirrorGrid, type EmissionGrid, loadEigenspectraGroups, loadEigenspectraTemperature, readNpz } from '@cssearth/bake/objects/raster';
 
 const test = sourceTest('wasp-18b');
 const root = new URL('../../../src/objects/wasp-18b/source/', import.meta.url).pathname;

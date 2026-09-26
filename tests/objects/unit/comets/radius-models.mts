@@ -7,7 +7,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {ellipsoidParameterMesh} from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
-import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
+import {readAuthoredRotation} from '@cssearth/bake/objects/scene';
 import {requireObjectRotationReference} from '../radial-fixture.mts';
 const json=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 const near=(a:number,b:number,t:number)=>assert.ok(Math.abs(a-b)<t,`${a} differs from ${b}`);

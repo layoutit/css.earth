@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { preparePhysicalWorldFrame, transform, multiply, transpose, type Matrix3 } from './world-navigation.js';
 import { chain, POLYCSS_SURFACE_PLACEMENT } from './world-navigation-sources.js';
+import { preparePhysicalWorldFrame, transform, multiply, transpose, type Matrix3 } from '@cssearth/bake/objects/scene';
 
 const identity: Matrix3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 /** PolyCSS's own surface placement: body +x along CSS +y, body +y along CSS +x. */

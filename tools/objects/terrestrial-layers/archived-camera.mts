@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import { parseReflectanceCamera, type NumericRaster } from './source-records.mts';
+import { parseReflectanceCamera, type NumericRaster } from '@cssearth/bake/objects/raster';
 import { field, acceptOsirisQuality } from './osiris-geo.mts';
 
 /** Level-4 resampled reflectance keeps its quality and sigma arrays in the

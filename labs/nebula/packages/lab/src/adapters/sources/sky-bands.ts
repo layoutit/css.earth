@@ -6,4 +6,4 @@ export function skyBandCompositeFile(sourceId: string) {
   if (!/^[a-z0-9-]+$/u.test(sourceId)) throw new TypeError('Invalid sky band composite identity.');
   return `${sourceId}.skybands.png`;
 }
-export { gridWcs as skyBandGridWcs } from '../../../../../../../tools/objects/observation/wise-atlas-mosaic.mts';
+export { gridWcs as skyBandGridWcs } from '@cssearth/bake/objects/raster';

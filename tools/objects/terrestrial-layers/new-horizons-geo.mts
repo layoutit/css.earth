@@ -1,7 +1,7 @@
 import { cross3 as cross, array, number, shape, text, dotN as dot } from '@cssearth/core';
 import { pds4Blocks, pds4Elements } from '@cssearth/telescope';
 import { readFitsHdu, fitsImageAccessor, readFitsHeader, readFitsPrimary } from '@cssearth/fits';
-import { archivedCameraFields, dimensions, sipCameraFields } from './source-records.mts';
+import { archivedCameraFields, dimensions, sipCameraFields } from '@cssearth/bake/objects/raster';
 import { bindSipCamera, sipPixel } from './llorri-geo.mts';
 
 const parseCamera = shape({ ...archivedCameraFields, ...sipCameraFields, ...dimensions,

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
-import { colorForValue, terrainBrightness } from '../terrestrial-layers/scientific-raster.mts';
+import { colorForValue, terrainBrightness } from '@cssearth/bake/objects/raster';
 
 function demand(ok: unknown, why: string): asserts ok { if (!ok) throw new Error(`Elevation: ${why}`); };
 

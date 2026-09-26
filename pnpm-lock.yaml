@@ -268,6 +268,9 @@ importers:
       '@layoutit/polycss':
         specifier: 0.2.11
         version: 0.2.11
+      geotiff:
+        specifier: 3.0.5
+        version: 3.0.5
       meshoptimizer:
         specifier: 1.2.0
         version: 1.2.0

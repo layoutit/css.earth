@@ -11,8 +11,9 @@ photometric models), never sideways. The first topic was the volume bake, which 
 renderer's scene and presentation compilers with `src/platform/projective-surface-raster.mts`,
 `src/platform/prepare-solid-body-surface.mts` and the `tools/prepared` node-tree libraries, and then the star, shell, sky,
 density-volume, image-layer and environment bakes of `src/preparation/` with the renderer's remaining compilers. The shared
-object libraries of `tools/objects/` (colour transfers, shape geometry and cameras) followed as `@cssearth/bake/objects/<topic>`,
-and then the galaxy and cluster catalogues and the world context, which emptied `src/preparation/`.
+object libraries of `tools/objects/` (colour transfers, shape geometry, cameras, the world frame and authored rotation, and the
+science and observation rasters) followed as `@cssearth/bake/objects/<topic>`, and then the galaxy and cluster catalogues and the
+world context, which emptied `src/preparation/`.
 
 | entry | what it holds | host |
 |---|---|---|
@@ -41,6 +42,8 @@ and then the galaxy and cluster catalogues and the world context, which emptied 
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
 | `@cssearth/bake/objects/geometry` | shape models and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
 | `@cssearth/bake/objects/cameras` | observer-computed cameras from an ephemeris and a spin state or IAU pole model | Node only |
+| `@cssearth/bake/objects/scene` | the physical world frame navigation is solved in, authored synchronous and hosted rotations | Node only |
+| `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology and symbols, eclipse and phase-curve maps, observed colour rasters and their photometric composition, their source records, the WISE atlas mosaic grid | Node only (`node:*`, `sharp`, `geotiff`) |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -57,7 +60,7 @@ packages/bake/
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
 │   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/
 │                  the volume compilers and the object and catalogue bakes: one entry each
-├── src/objects/   color/, geometry/, cameras/: the shared object libraries, one entry each (`objects/<topic>`)
+├── src/objects/   color/, geometry/, cameras/, scene/, raster/: the shared object libraries, one entry each (`objects/<topic>`)
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -78,7 +81,7 @@ from their published prepared data, so `vitest.config.ts` leaves them out of the
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,
 shell, sky, density-volume, image-layer, catalogue and world-context bakes, which read restored sources.
 The object libraries' tests stay beside the pipelines in `tools/objects/` (`node --test`), since they read body sources, kernel
-banks and oracle fixtures through the repository's test helpers; they import the entries.
+banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
-import { decodeNpyLonLatGrid, readNpy } from './npy-lonlat-grid.mts';
+import { decodeNpyLonLatGrid, readNpy } from '@cssearth/bake/objects/raster';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 

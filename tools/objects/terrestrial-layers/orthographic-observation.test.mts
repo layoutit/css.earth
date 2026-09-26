@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import {orthographicPoint} from './orthographic-observation.mts';
-import {sampleColorBand} from './scientific-raster.mts';
+import {sampleColorBand} from '@cssearth/bake/objects/raster';
 
 test('orthographic center and east/north orientation follow the source projection', () => {
   const p = {centerLongitude: 15, centerLatitude: 18, radius: 1352600};

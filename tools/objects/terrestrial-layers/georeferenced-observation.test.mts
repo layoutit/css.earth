@@ -4,8 +4,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeArrayBuffer, fromFile } from 'geotiff';
-import { resampleGeoreferencedObservation } from './observed-geotiff.mts';
-import { readObservation } from './observation-raster.mts';
+import { resampleGeoreferencedObservation, readObservation } from '@cssearth/bake/objects/raster';
 const test = sourceTest();
 
 const radius = 180 / Math.PI;

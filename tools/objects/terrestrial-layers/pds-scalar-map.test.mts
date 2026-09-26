@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseScalarMap, scalarMapIndex, createScalarMapSampler, validateScalarMapProfile } from './pds-scalar-map.mts';
+import { parseScalarMap, scalarMapIndex, createScalarMapSampler, validateScalarMapProfile } from '@cssearth/bake/objects/raster';
 import { parseObjShape } from '@cssearth/bake/objects/geometry';
 
 const grid = { width: 720, height: 360, stepDegrees: .5, latitudeFirst: 90, latitudeStep: -.5, noData: -1, frame: 'cheops-planetocentric-east-positive' };

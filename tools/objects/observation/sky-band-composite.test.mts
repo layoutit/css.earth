@@ -9,7 +9,7 @@ import { sha256 as sha } from '@cssearth/core/node';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '@cssearth/bake/objects/color';
 import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
-import { gridWcs } from './wise-atlas-mosaic.mts';
+import { gridWcs } from '@cssearth/bake/objects/raster';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };
 const wcs = gridWcs(grid);

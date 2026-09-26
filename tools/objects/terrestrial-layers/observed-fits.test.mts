@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFitsPrimary } from '@cssearth/fits';
-import { mapFitsObservation } from './observed-fits.mts';
+import { mapFitsObservation } from '@cssearth/bake/objects/raster';
 
 function fitsBytes(bitpix: number, values: readonly number[], extra: readonly string[] = []) {
   const bytes = Buffer.alloc(5760, 32), cards = ['SIMPLE  = T', `BITPIX  = ${bitpix}`, 'NAXIS   = 2',

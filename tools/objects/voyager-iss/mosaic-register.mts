@@ -5,9 +5,7 @@
  * done here, where a pointing error is a plain translation.
  */
 import { resolve } from 'node:path';
-import { loadIsis3Raster } from '../terrestrial-layers/isis3-raster.mts';
-import { sampleScienceGrid, scienceMapPoint } from '../terrestrial-layers/scientific-raster.mts';
-import { parseScienceGrid } from '../terrestrial-layers/source-records.mts';
+import { loadIsis3Raster, sampleScienceGrid, scienceMapPoint, parseScienceGrid } from '@cssearth/bake/objects/raster';
 import type { PlacedFrame } from './place.mts';
 
 export interface MosaicReference { reference: 'mosaic'; path: string; grid: unknown }

@@ -1,6 +1,6 @@
 import { isArray } from '@cssearth/core';
 import type {encounterCamera} from './encounter-camera.mts';
-import {parseEncounterRegistration} from './source-records.mts';
+import {parseEncounterRegistration} from '@cssearth/bake/objects/raster';
 const dot=(a: readonly number[],b: readonly number[])=>a.reduce((s,n,i)=>s+n*b[i],0);
 const vector=(v: unknown,n: number): v is number[] =>isArray(v)&&v.length===n&&v.every(Number.isFinite);
 /** Recompute the residuals from source coordinates. Reported RMS values alone

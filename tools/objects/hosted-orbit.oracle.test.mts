@@ -4,7 +4,7 @@ const test = sourceTest();
 import { bodyFixedToIcrf, hostSkyFrame, hostedOrbitPhase, hostedOrbitStateRelativeKm, type HostedOrbit } from '@cssearth/astronomy';
 import { readOracleFixture } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { synchronousRotationElements } from './authored-rotation.mts';
+import { synchronousRotationElements } from '@cssearth/bake/objects/scene';
 
 const fixture = await readOracleFixture('astronomy/hosted-orbit.json');
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));
