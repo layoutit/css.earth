@@ -63,7 +63,7 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 From the repository root, run:
 
 ```sh
-node tools/prepare/prepare-provenance.mts <object-id>
+node tools/prepare/cli/prepare-provenance.mts <object-id>
 ```
 
 Omit the ID to regenerate all registered scene-body records. By default the

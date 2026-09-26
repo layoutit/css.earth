@@ -51,7 +51,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const id of ids) if (await refreshContent(id)) changed.push(id);
   console.log(`content refreshed for ${changed.length} of ${ids.length} objects`);
   if (changed.length) {
-    const run = spawnSync('node', ['tools/prepare/prepare-provenance.mts', ...changed], { stdio: 'inherit' });
+    const run = spawnSync('node', ['tools/prepare/cli/prepare-provenance.mts', ...changed], { stdio: 'inherit' });
     if (run.status !== 0) process.exitCode = 1;
   }
 }

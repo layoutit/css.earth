@@ -22,9 +22,9 @@ import { parsePreparedWorldContextSummary } from '@cssearth/renderer';
 // reduced to its parent, bounds and size. Only the planner worker projects orbit
 // paths; it reads each orbit centre's binary bank when a frame first needs it. The full JSON is build-time only.
 const source = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
-/** What the world planner worker reads itself: this summary, and the banks it pins, served per centre by the build
- * (`pages/world/orbits/[id].bin.ts`). */
-export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ summaryUrl: source.href, orbitBanksUrl: '/world/orbits/' });
+/** Orbit banks the planner worker reads on demand, served per centre by the build
+ * (`pages/world/orbits/[id].bin.ts`). The main thread sends its validated summary to the worker. */
+export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ orbitBanksUrl: '/world/orbits/' });
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
   if (source.protocol === 'file:') {

@@ -1,9 +1,9 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { parseProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import type { Lens } from '../../site/object-shell-types.ts';
@@ -18,7 +18,7 @@ import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import { manifestSources } from '../sources/context-source-records.mts';
 import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
+import { fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/sources/context-source-records.mts',
@@ -354,12 +354,4 @@ export async function writeVolumeProvenance(options: Options = {}) {
   return results;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2);
-  if (args.length > 1 || args.some(arg => !/^--object=[a-z][a-z0-9-]*$/.test(arg)))
-    throw new TypeError('Usage: prepare-volume-provenance [--object=<id>].');
-  // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const results = await writeVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
-    ...(args[0] === undefined ? {} : { objectId: args[0].slice(9) }) });
-  console.log(`Prepared volume presentation and provenance: ${results.length} objects, ${results.reduce((sum, result) => sum + result.controls.length, 0)} lenses.`);
-}
+refuseDirectRun(import.meta);

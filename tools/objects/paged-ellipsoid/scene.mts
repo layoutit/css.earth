@@ -33,7 +33,7 @@ const FULL_BOXES = { leafBox: false as const };
 
 
 export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude, cellSizes }: {cellSizes?: readonly number[]; attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
-const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
+const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
 // The default pose is derived (src/platform/default-camera.mts): the Sun to the left of an ecliptic-up frame at the lit pitch.
 const CAMERA_SCENE_PITCH_DEGREES = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
 const CAMERA_DEFAULT_CONTROL_PITCH_DEGREES = preparedControlPitch(CAMERA_SCENE_PITCH_DEGREES, { maximumControlPitchDegrees: CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, maximumScenePitchDegrees: 65 });
@@ -62,7 +62,6 @@ const bodyConfig = Object.freeze({
   longitudeSegments: BODY_LONGITUDE_SEGMENTS,
   equatorialRadius: EQUATORIAL_RADIUS,
   polarRadius: POLAR_RADIUS,
-  includePolarInner: false,
   polarCapBandSpan: POLAR_CAP_BAND_SPAN,
   texture: Object.freeze({
     url: `${profile.publicBase}${profile.namespace}-surface.webp`,
@@ -79,12 +78,11 @@ const bodyConfig = Object.freeze({
   }),
   poles: Object.freeze({
     url: `${profile.publicBase}${profile.namespace}-surface-poles.webp`,
-    width: 1024,
+    width: 512,
     height: 256,
   }),
   surfaceClassName: `${profile.namespace}-surface-leaf`,
   polarClassName: `${profile.namespace}-polar-surface`,
-  polarInnerClassName: `${profile.namespace}-polar-inner`,
 });
 
 const camera = createPolyCamera({
@@ -206,12 +204,7 @@ const scene = Object.freeze({
 return { scene, surfaceRasterPlan: { atlas: SURFACE_ATLAS, cells: surfaceRasterPlan.cells, pages: surfaceRasterPlan.pages } };
 
 function prepareSphereBands(config: SphereConfiguration, visualRotationSeconds: number) {
-  const leaves = [
-    ...prepareSphereLeaves(config),
-    ...(config.includePolarInner === false
-      ? []
-      : preparePolarInnerLeaves(config)),
-  ];
+  const leaves = prepareSphereLeaves(config);
   return Object.freeze(Array.from(
     { length: config.latitudeSegments },
     (_, latitudeIndex) => Object.freeze({
@@ -253,22 +246,6 @@ function prepareSphereLeaves(config: SphereConfiguration) {
       ),
     }),
   })));
-}
-
-function preparePolarInnerLeaves(config: SphereConfiguration) {
-  return Object.freeze((["south", "north"] as const).map((pole, index) => {
-    const polygon = createPolarCapPolygon(config, pole, "inner");
-    return Object.freeze({
-      latitudeIndex: polygon.latitudeIndex,
-      polarCap: pole,
-      polarInner: true,
-      leaf: Object.freeze({
-        tag: "s",
-        className: `${config.polarInnerClassName} ${config.polarInnerClassName}-${pole}`,
-        ...textureStyle(polygon, index, null, 0),
-      }),
-    });
-  }));
 }
 
 function createSpherePolygons(config: SphereConfiguration, surfaceOverlap: number) {
@@ -355,20 +332,14 @@ function createSpherePolygons(config: SphereConfiguration, surfaceOverlap: numbe
   return polygons;
 }
 
-function createPolarCapPolygon(config: SphereConfiguration, pole: "north" | "south", role = "surface"): SpherePolygon {
+function createPolarCapPolygon(config: SphereConfiguration, pole: "north" | "south"): SpherePolygon {
   const north = pole === "north";
   const sign = north ? 1 : -1;
   const boundaryLatitude = Math.PI / 2 - Math.PI /
     config.latitudeSegments * (config.polarCapBandSpan ?? 1);
-  const inner = role === "inner";
   const radius = config.equatorialRadius * Math.cos(boundaryLatitude) *
-    (inner
-      ? POLAR_INNER_OVERLAP
-      : config.polarSurfaceOverlap ?? POLAR_SURFACE_OVERLAP);
-  const z = sign * (
-    config.polarRadius * Math.sin(boundaryLatitude) + 0.1 -
-      (inner ? POLAR_INNER_INSET : 0)
-  );
+    (config.polarSurfaceOverlap ?? POLAR_SURFACE_OVERLAP);
+  const z = sign * (config.polarRadius * Math.sin(boundaryLatitude) + 0.1);
   const tileSize = config.poles.height;
   return {
     latitudeIndex: north ? config.latitudeSegments - 1 : 0,
@@ -386,7 +357,7 @@ function createPolarCapPolygon(config: SphereConfiguration, pole: "north" | "sou
       width: config.poles.width,
       height: config.poles.height,
       sourceRect: {
-        x: (inner ? tileSize * 2 : 0) + (north ? 0 : tileSize),
+        x: north ? 0 : tileSize,
         y: 0,
         width: tileSize,
         height: tileSize,
@@ -427,7 +398,7 @@ function prepareInteriorPlan() {
     polarCapBandSpan: 1,
     poles: Object.freeze({
       ...bodyConfig.poles,
-      width: 512,
+      width: 256,
       height: 128,
     }),
   }).filter((entry) => {
@@ -475,13 +446,11 @@ function prepareInteriorPlan() {
       poles: Object.freeze({
         one: `${profile.publicBase}${profile.namespace}-interior-${id}-poles.webp`,
         two: `${profile.publicBase}${profile.namespace}-interior-${id}-poles@2x.webp`,
-        width: 512,
+        width: 256,
         height: 128,
       }),
       surfaceClassName: `${profile.namespace}-interior-${id}-leaf`,
       polarClassName: `${profile.namespace}-interior-${id}-polar`,
-      polarInnerClassName: `${profile.namespace}-interior-${id}-polar-inner`,
-      includePolarInner: false,
       surfaceOverlap: 0,
       textureSeamBleed: 0,
     });

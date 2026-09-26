@@ -38,6 +38,22 @@ test('actual bake and core packages expose nonempty package-owned inventories', 
   assert.ok(pins.some(pin => pin.path === '@cssearth/bake/src/volume/node/compact-inputs/compiler.ts'));
   assert.equal(pins.some(pin => pin.path.startsWith('labs/') || pin.path.endsWith('.test.ts')), false);
 });
+test('the bake inventory covers every bake topic a nebula delivery runs', async () => {
+  const { build } = await import('esbuild');
+  const { readFile } = await import('node:fs/promises');
+  const { resolve } = await import('node:path');
+  const root = process.cwd();
+  const result = await build({ entryPoints: [resolve(root, 'tools/nebula/application/prepare.ts')], bundle: true, write: false, metafile: true,
+    platform: 'node', format: 'esm', packages: 'external', logLevel: 'silent',
+    plugins: [{ name: 'bake-sources', setup(builder) { builder.onResolve({ filter: /^@cssearth\/bake\// }, args =>
+      ({ path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') })); } }] });
+  const reached = [...new Set(Object.keys(result.metafile.inputs).filter(path => path.startsWith('packages/bake/src/'))
+    .map(path => `src/${path.split('/')[3]}`))].sort();
+  const manifest = JSON.parse(await readFile(resolve(root, 'packages/bake/package.json'), 'utf8')) as { nebulaImplementation: { directories: string[] } };
+  assert.ok(reached.includes('src/volume-leaves') && reached.includes('src/density'), 'the closure reaches the bake through its entries');
+  assert.deepEqual(reached.filter(directory => !manifest.nebulaImplementation.directories.includes(directory)), [],
+    'every bake topic a delivery runs is in nebulaImplementation.directories');
+});
 test('missing package-owned inventory is an error, never an empty fingerprint', async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-missing-inventory-'));
   try {

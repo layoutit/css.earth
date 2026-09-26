@@ -66,7 +66,7 @@ if (recipe.densityPrior) {
   densityPrior = { density, dimensions: recipe.densityPrior.dimensions, boundsKpc: recipe.densityPrior.boundsKpc };
 }
 const codePins = Object.fromEntries((await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-coherent.ts'])).map(pin => [pin.path, pin.sha256]));
-codePins['css-volume-compiler'] = digest(await readFile('src/renderers/css/preparation/volume.ts'));
+codePins['css-volume-compiler'] = digest(await readFile('packages/bake/src/volume-leaves/volume.ts'));
 const frame: DensityVolumeFrame = {
   referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: span * 3.085677581491367e19,

@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
 import {decodeProfile} from "../objects/terrestrial-layers/source-records.mts";
@@ -8,7 +8,6 @@ const parseContext=shape({schema:text,sources:shape({photometricPhase:requireRec
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
 
 import { renderPhotometricPhaseChart } from "../objects/content/chart-svg.ts";
 
@@ -142,11 +141,4 @@ function titleCase(value:string) {
   return value[0].toUpperCase() + value.slice(1);
 }
 
-if (process.argv[1] &&
-    import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const planetArgument = process.argv.find((argument) =>
-    argument.startsWith("--planet="));
-  const planetIds = planetArgument ? [planetArgument.slice("--planet=".length)] : undefined;
-  const outputs = await prepareScientificCharts({ planetIds });
-  console.log(`Prepared ${outputs.length} source-backed scientific charts.`);
-}
+refuseDirectRun(import.meta);

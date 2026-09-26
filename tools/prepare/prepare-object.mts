@@ -1,7 +1,6 @@
-#!/usr/bin/env node
 /** Prepare authored objects end to end, in the only order that works, and name the step that failed.
  *
- *   node tools/prepare/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images]
+ *   node tools/prepare/cli/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images]
  *
  * The prepare step already redraws only the lighting and atmosphere banks when nothing else changed (prepare-authored.ts,
  * redrawOnlyDecision). --reuse-images forces that: it keeps the object's published images (and, for Earth, its pages, places
@@ -17,10 +16,10 @@
  * that takes the id list (page data, reader text, markers, provenance) once with every id, and the authored preparation, the
  * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
  * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { staleBuilds, staleInstall } from '../ci/check-stale-builds.mts';
 
 export interface PreparationOptions { readonly reuseImages?: boolean }
@@ -46,21 +45,21 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     return (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' '));
   } },
   { name: 'inputs', purpose: "check the reader text budgets and restore the Sun's stale files before the long bake", scope: 'ids', commands: async ids =>
-    [node('tools/prepare/check-preparation-inputs.mts', ...ids)] },
-  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
+    [node('tools/prepare/cli/check-preparation-inputs.mts', ...ids)] },
+  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
     (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('tools/prepare/prepare-solar-geometry.mts')] : [] },
   { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
     [node('tools/objects/dist/prepare-authored.js', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
-  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
+  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
   { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('tools/sources/author-source-records.mts', id!)] },
-  { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-object-json.mts', ...ids)] },
-  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-text.mts', ...ids)] },
-  { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-navigation.mts', ...ids)] },
+  { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-object-json.mts', ...ids)] },
+  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-text.mts', ...ids)] },
+  { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-navigation.mts', ...ids)] },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
-  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('tools/prepare/prepare-provenance.mts', ...ids)] },
+  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-provenance.mts', ...ids)] },
   // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
-  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('tools/prepare/prepare-object-json.mts', 'sun')] },
+  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-object-json.mts', 'sun')] },
 ]);
 
 export type Progress = (line: string) => void;
@@ -76,7 +75,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
   // its prepare step already pins the page data and publishes the set.
   const start = index(from, 0), end = reuseImages ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
   const steps = PREPARATION_STEPS.slice(start, end + 1), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
-  const resume = (step: PreparationStep) => `node tools/prepare/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
+  const resume = (step: PreparationStep) => `node tools/prepare/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
   for (const step of steps) {
     if (step.scope === 'each') {
       const queue = ids.map((id, at) => [id, at] as const), failures: string[] = [];
@@ -111,10 +110,4 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
 /** One object, as before. */
 export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean } = {}) => prepareObjects([id], options);
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), option = (name: string) => { const at = args.indexOf(name); return at >= 0 ? args[at + 1] : undefined; };
-  const from = option('--from'), to = option('--to'), reuseImages = args.includes('--reuse-images');
-  const ids = args.filter((argument, at) => !argument.startsWith('--') && args[at - 1] !== '--from' && args[at - 1] !== '--to');
-  if (!ids.length) throw new TypeError(`Usage: prepare-object <object-id>... [--from <step>] [--to <step>] [--reuse-images]; steps: ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
-  if (!await prepareObjects(ids, { ...(from === undefined ? {} : { from }), ...(to === undefined ? {} : { to }), reuseImages })) process.exitCode = 1;
-}
+refuseDirectRun(import.meta);

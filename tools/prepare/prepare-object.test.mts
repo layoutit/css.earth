@@ -28,7 +28,7 @@ test('several objects run each tool once: the id-list tools take every id, the a
     const commands = await PREPARATION_STEPS.find(step => step.name === name)!.commands(ids);
     assert.equal(commands.length, 1, name); assert.deepEqual(commands[0]!.slice(-2), ids, name);
   }
-  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'tools/prepare/prepare-object-json.mts', 'sun']]);
+  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'tools/prepare/cli/prepare-object-json.mts', 'sun']]);
 });
 
 test('the reader text budgets and the Sun the later steps build on are checked before the bake, not after it', () => {

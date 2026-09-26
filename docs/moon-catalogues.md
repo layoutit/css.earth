@@ -68,13 +68,13 @@ S/2009 S1 and S/2009 S2 have no full ephemerides in these inputs; Uranus's
 S/2025 U1 has the identity conflict above. All three remain in the sidebar.
 There are no invented phases, spheres or fallback locations.
 
-Run `node tools/prepare/prepare-moon-labels.mts` to reproduce the ignored
+Run `node tools/prepare/cli/prepare-moon-labels.mts` to reproduce the ignored
 `site/moon-labels.prepared.json` from the pinned source archive and current world
 context. `pnpm prepare:world-context` runs this step after preparing the world.
 The browser only projects these fixed positions; it performs no ephemeris work.
 
 To refresh the sources, run `node tools/sources/acquire-moon-catalogues.mts --refresh`
-then `node tools/prepare/prepare-moon-labels.mts --refresh`. Horizons requests are
+then `node tools/prepare/cli/prepare-moon-labels.mts --refresh`. Horizons requests are
 sequential and cached in `output/moon-horizons/`. Review changes in totals,
 identity and ephemeris coverage before accepting refreshed inputs. Do not reuse
 cached replies for a different epoch or reference frame.

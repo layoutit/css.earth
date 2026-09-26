@@ -91,14 +91,14 @@ for (const id of ids) {
         if (!hasErrorCode(error, 'ENOENT')) throw error;
         const cache = await mkdtemp(resolve(tmpdir(), `cssearth-${id}-volume-`));
         try {
-          const { acquireVolumeSource } = await import('../../src/preparation/volume/acquisition.ts');
+          const { acquireVolumeSource } = await import('@cssearth/bake/density');
           await acquireVolumeSource(volumeSource, recipe, cache);
         }
         finally { await rm(cache, { recursive:true, force:true }); }
       }
       if (recipe.sky) {
         const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
-          import('../../src/preparation/sky/config.ts'), import('./setup.mts'), import('./runtime-assets.mts'),
+          import('@cssearth/bake/sky'), import('./setup.mts'), import('./runtime-assets.mts'),
         ]);
         const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
         if (skyRecipe.stars) {

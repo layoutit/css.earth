@@ -32,7 +32,7 @@ test('site chains restore prepared assets before discovery reads them, and a dep
     const commands = expandScriptChain(scripts, name).map(step => step.command);
     // Discovery reads each body's prepared/controls.json, which only the R2 restore provides on a clean checkout.
     const restore = commands.indexOf('node tools/assets/setup.mts');
-    const catalogue = commands.indexOf('node tools/prepare/prepare-catalog.mts');
+    const catalogue = commands.indexOf('node tools/prepare/cli/prepare-catalog.mts');
     assert.ok(restore >= 0 && restore < catalogue, `${name}: first restore at step ${restore}, catalogue at step ${catalogue}`);
   }
   // The deploy bundles the published world context; a later restore replaces the copy build:tools regenerates.

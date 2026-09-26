@@ -156,10 +156,18 @@ level only while its faces may be seen; one off screen or behind the globe keeps
 Measured on 2026-09-25 in headless Chrome at 1,280 × 800 CSS px and DPR 2, a zoomed-in view drew
 24 of 56 pages at the sharpest level and decoded 40.8 megapixels of surface, against 94.7 for
 the seven band pages; the default view decoded 17.3 against 23.7. The zoomed-in frame differed
-from the band pages in 29 of 4.1 million pixels (pixelmatch, threshold 0.1). Each page keeps its texture levels,
-halved exactly, and each view keeps one 4,096 × 1,024 pole atlas. The pole atlas has
-the same levels, reduced by the same ratio (256 to 2,048 pixels wide), so the first view
-loads its poles at the pages' level. The four-pixel gutter and 450 retained surface leaves are unchanged.
+from the band pages in 29 of 4.1 million pixels (pixelmatch, threshold 0.1). In that 2026-09-25
+bake, each page kept its texture levels, halved exactly, and each view kept one 4,096 × 1,024
+pole atlas. Its levels ranged from 256 to 2,048 pixels wide. The four-pixel gutter and 450
+retained surface leaves were unchanged.
+
+The 2026-09-26 pole rebake removes two unused inner tiles. The globe and cutaway already retained
+only the outward north and south cap leaves. Their surface atlas is now 2,048 × 1,024 instead of
+4,096 × 1,024; it still follows the pages' texture levels. At startup its 128 × 64 file is 2,180
+bytes, down from 3,708 bytes for the former 256 × 64 file. At the 460-pixel silhouette threshold,
+its 512 × 256 file is 15,998 bytes, down from 27,622 bytes for the former 1,024 × 256 file.
+The source map and sampled pixels for both outward caps are unchanged. On the built iPad Safari
+reload, only the startup pole file loads until the first pointer input asks for more detail.
 
 The atlas has density 16: a surface cell takes 8 texels per unit of the 2,048-wide source grid along
 its finest edge, twice the density-8 atlas it replaced. That atlas stored the equator at about 4.3 km
@@ -179,8 +187,8 @@ new level and zoom limit 8. Elevation is sampled from GEBCO at a stride of 10 (8
 than the new level, so its map stops at the 4,096 level (`maximumTextureWidth`) and its lens keeps zoom
 limit 4; no view downloads an Elevation page that is only its source upsampled. The interior views keep
 their resolution and limit.
-No source projection, Earth geometry, lighting, atmosphere, scientific palette or runtime
-selection rule changed. The same adjusted base still feeds the clear surface, cloud composite,
+That 2026-09-25 rebake changed no source projection, Earth geometry, lighting, atmosphere,
+scientific palette or runtime selection rule. The same adjusted base still feeds the clear surface, cloud composite,
 cutaway exterior, thumbnails, minimaps, the pole atlas and every texture level; the original
 source JPEGs remain unchanged. Dataset selection is manual at every zoom level.
 

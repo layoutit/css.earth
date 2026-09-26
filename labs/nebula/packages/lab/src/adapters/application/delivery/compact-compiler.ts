@@ -1,7 +1,7 @@
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 /** cssEarth representation adapter; compact replay does not depend on research processing. */
 import { replayCompactCompiler as replay, type CompactCompilerBackend, type CompilerBakeProgress, type Pin } from '@cssearth/bake/volume/node';
-import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
+import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { prepareCompilerStarSprites } from '../star-sprites.ts';
 export { readCompactCompiler } from '@cssearth/bake/volume/node';

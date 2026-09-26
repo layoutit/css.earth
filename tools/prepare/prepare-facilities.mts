@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from '../sources/spatial-source-citations.mts';
@@ -13,7 +14,6 @@ import type { SourceInventoryEntry } from '../sources/source-catalogue-inputs.mt
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '../../src/platform/exploration-catalog.mts';
@@ -27,7 +27,6 @@ import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from '../assets/restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
-import { RUNTIME_ASSET_ORIGIN } from '../assets/source-mirror.mts';
 export const explorationCompilerClosure = [
   'tools/prepare/prepare-facilities.mts', 'tools/sources/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/prepare/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'site/object-schema.mts',
@@ -187,13 +186,5 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   return { prepared, preparedSources, output, outputs, catalogueOutputs, factsheets };
 
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2);
-  if (args.some(arg => arg !== '--catalog-only' && arg !== '--restored-only'))
-    throw new TypeError('Usage: node tools/prepare/prepare-facilities.mts [--catalog-only] [--restored-only]');
-  // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
-    publish: args.includes('--catalog-only') ? 'catalogues' : true, restoredOnly: args.includes('--restored-only') });
-  console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
-  console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
-}
+
+refuseDirectRun(import.meta);

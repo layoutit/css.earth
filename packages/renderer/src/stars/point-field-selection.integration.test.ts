@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { selectPreparedPointField, selectVisiblePreparedStars } from '@cssearth/engine';
-import { readCanonicalPointField } from '../../../../src/renderers/css/preparation/stars/canonical-point-field-fixture.js';
+import { readCanonicalPointField } from '../../../../tests/renderer/canonical-point-field-fixture.js';
 
 const field = readCanonicalPointField();
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;

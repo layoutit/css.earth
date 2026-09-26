@@ -11,18 +11,16 @@ export interface WorldPlannerWorker {
   terminate(): void;
 }
 
-/** Prepared files the planner worker loads and validates itself, off the main thread. */
+/** Prepared orbit banks the planner worker loads on demand. */
 export interface WorldPlannerSource {
-  /** The same summary the main thread holds. */
-  readonly summaryUrl: string;
   /** Where each orbit path lives, as `<orbitBanksUrl><body id>.bin`: the only copies of the orbit paths
    * in the browser, read by the worker when a frame first needs that path. */
   readonly orbitBanksUrl: string;
 }
 
 /** The publication queue owns admission; this transport owns one persistent prepared bank.
- * With a `source`, the worker reads the full file itself; the main thread may hold only
- * the summary. Without one, `plan` must be the full context and is cloned to the worker. */
+ * With a `source`, the worker receives the main thread's validated summary and
+ * reads orbit banks as needed. Without one, `plan` must be the full context. */
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   createWorker: () => WorldPlannerWorker = () => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
     { type: 'module', name: 'cssearth-world-planner' }),
@@ -51,7 +49,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
     const complete = pending; pending = null; complete.resolve(data.frame);
   };
   worker.onerror = event => destroy(new Error(event.message));
-  if (source) worker.postMessage({ source, annotationPriorities, annotationLandmarks });
+  if (source) worker.postMessage({ source, plan, annotationPriorities, annotationLandmarks });
   else worker.postMessage({ plan: worldContextGeometry(plan), annotationPriorities, annotationLandmarks });
   return { async plan(view: WorldContextView): Promise<WorldContextFrame> {
     await ready;

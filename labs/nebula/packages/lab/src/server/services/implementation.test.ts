@@ -42,7 +42,7 @@ test('relocated preparation entry points pin their live package owners', async (
 
 test('the compiler cache identity follows the bake topics its volume compiler reaches', async () => {
   const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
-  for (const path of ['src/renderers/css/preparation/volume.ts', 'packages/bake/src/scene/projective-surface-raster.ts'])
+  for (const path of ['packages/bake/src/volume-leaves/volume.ts', 'packages/bake/src/scene/projective-surface-raster.ts'])
     assert.ok(pins.some(pin => pin.path === path), path);
   assert.equal(pins.some(pin => pin.path.startsWith('packages/bake/dist/')), false);
 });
@@ -52,6 +52,13 @@ test('the telescope library a preparation owner reaches is pinned by its sources
   for (const path of ['packages/telescope/package.json', 'packages/telescope/src/product-record.ts', 'packages/telescope/src/node/product-record.ts'])
     assert.ok(pins.some(pin => pin.path === path), path);
   assert.equal(pins.some(pin => pin.path.startsWith('packages/telescope/dist/')), false);
+});
+
+test('the star colour fit a catalogue owner reaches is pinned by its engine sources, not its build', async () => {
+  const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-lmc-stars.ts']);
+  for (const path of ['packages/engine/package.json', 'packages/engine/src/solar-system/star-color.ts'])
+    assert.ok(pins.some(pin => pin.path === path), path);
+  assert.equal(pins.some(pin => pin.path.startsWith('packages/engine/dist/')), false);
 });
 
 test('sampled supplementary owner allowlist points at existing implementation files', async () => {

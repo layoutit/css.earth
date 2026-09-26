@@ -1,6 +1,6 @@
 /** Cut both outer polar tiles in their common prepared longitude frame. */
 export function cutInteriorPoles<T extends Uint8Array>(pixels: T, tileSize: number, cutaway: {centerLongitudeDegrees: number; widthDegrees: number}) {
-  const width = tileSize * 4;
+  const width = tileSize * 2;
   for (let tile = 0; tile < 2; tile += 1) {
     for (let y = 0; y < tileSize; y += 1) {
       for (let x = 0; x < tileSize; x += 1) {

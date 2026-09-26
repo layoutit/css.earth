@@ -14,7 +14,7 @@ import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
 import { logarithmicFade } from '../universe/world-context/context-scale.js';
 import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
-import { readCanonicalPointField } from '../../../../src/renderers/css/preparation/stars/canonical-point-field-fixture.js';
+import { readCanonicalPointField } from '../../../../tests/renderer/canonical-point-field-fixture.js';
 import { parseLensBillboards } from '../universe/lens-billboards.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 

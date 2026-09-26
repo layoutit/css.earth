@@ -1,6 +1,6 @@
 /** A circumstellar disc seen in a coronagraph image, given depth the way this repository gives every sky image depth: a
- * three-dimensional shape is fitted to what was measured and each sky column is spread along it (src/preparation/volume/
- * column-depth.ts). Nothing is extruded.
+ * three-dimensional shape is fitted to what was measured and each sky column is spread along it (packages/bake/src/
+ * density/column-depth.ts). Nothing is extruded.
  *
  * Three steps, each measured on the image itself:
  *

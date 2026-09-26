@@ -145,7 +145,7 @@ test('current depth pins cannot relabel a historical bake with missing or differ
 
 test('relocated producer closures restore without fetching current code or changing historical hashes', async () => {
   const owners = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
-  assert.ok(owners.some(owner => owner.path.startsWith('src/preparation/')));
+  assert.ok(owners.some(owner => owner.path.startsWith('packages/bake/src/volume-leaves/')));
   assert.ok(owners.some(owner => owner.path.endsWith('/package.json')));
   const fixture = completedFixture(), historicalOwners = owners.map(owner => ({ ...owner, sha256: digest(`historical ${owner.path}`) }));
   const method = JSON.parse(fixture.data.get(fixture.result.method.path)!);

@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
 import type {ResizeOptions,Sharp} from 'sharp';
 import { DECORATIVE_WEBP, composeLimbPreview } from '@cssearth/bake/raster';
@@ -6,7 +7,6 @@ import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSur
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/observation/interpret.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
@@ -22,9 +22,7 @@ function interpretFor(objectDirectory: string, objectId: string, recipe: Interpr
   return pending;
 }
 import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 
-const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 // Preserve categorical/numeric cells only where the source contract requests it.
 // Ordinary images retain the established resize and WebP presentation.
 const nearestDisplay = (...records:unknown[]) => records.some(record => isRecord(record) && (
@@ -143,13 +141,4 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   return images;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const requested = process.argv.slice(2);
-  for (const { id } of SCENE_OBJECTS) {
-    if (requested.length && !requested.includes(id)) continue;
-    const objectDirectory = resolve(projectRoot, 'src/objects', id);
-    const images = await prepareSurfaceMinimaps({ objectDirectory,
-      publicDirectory: resolve(projectRoot, 'public/scenes', id), outputDirectory: resolve(objectDirectory, 'prepared') });
-    console.log(`${id}: ${images.length} prepared minimaps`);
-  }
-}
+refuseDirectRun(import.meta);

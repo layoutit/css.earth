@@ -1,4 +1,4 @@
-import { compileLeafBounds } from '../../../../src/renderers/css/preparation/leaf-bounds.js';
+import { compileLeafBounds } from '@cssearth/bake/volume-leaves';
 import { readFileSync } from 'node:fs';
 import { afterEach, expect, test, vi } from 'vitest';
 import { bakeSlab } from '@cssearth/bake/volume/node';

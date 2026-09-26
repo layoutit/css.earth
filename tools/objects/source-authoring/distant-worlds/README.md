@@ -23,7 +23,7 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
    bindings and other package metadata. Run
    `node tools/objects/source-authoring/distant-worlds/finalize-sources.mts`,
    then prepare each changed body.
-4. Prepare changed marker sources with `node tools/prepare/prepare-navigation.mts <id>`.
+4. Prepare changed marker sources with `node tools/prepare/cli/prepare-navigation.mts <id>`.
    Prepare the selected body to bind its stable marker URL.
 5. Install published runtime assets with `pnpm setup:assets --object=<id>`.
 

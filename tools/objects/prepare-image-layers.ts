@@ -2,8 +2,7 @@
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseImageLayerRecipe } from '../../src/preparation/image-layers/config.js';
-import { prepareImageLayers } from '../../src/preparation/image-layers/prepare.js';
+import { parseImageLayerRecipe, prepareImageLayers } from '@cssearth/bake/image-layers';
 import { sha256 } from '@cssearth/core/node';
 
 export async function prepareImageLayerObject(objectDirectory: string) {

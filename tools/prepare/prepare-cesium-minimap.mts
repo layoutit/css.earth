@@ -1,6 +1,6 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { refuseDirectRun } from '../cli/library-entry.mts';
+import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
 import { parseAst } from 'vite';
 import type { ClassDeclaration, ImportDeclaration } from 'estree';
 import { requireRecord } from '@cssearth/core';
@@ -61,8 +61,4 @@ ${tail}`.trimEnd() + '\n');
   return output;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  for (const [name, source] of await cesiumMinimapExcerpts()) {
-    await writeFile(new URL(`../../site/vendor/${name}`, import.meta.url), source);
-  }
-}
+refuseDirectRun(import.meta);
