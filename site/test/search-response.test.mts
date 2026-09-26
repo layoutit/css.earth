@@ -4,7 +4,7 @@ const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../server/search-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
-import { objectSearchLabels, searchObjects } from '../object-search.mts';
+import { objectSearchLabels, searchObjects } from '../search/object-search.mts';
 import searchRoute from '../server/search-route.mts';
 import { createFeatureBrowser } from '../feature-browser.mts';
 import { handleFindRequest } from '../server/find.mts';

@@ -1,5 +1,5 @@
-import type { FindResult } from './search/find-protocol.mts';
-import { requiredElement, setPanelHidden } from './browser-types.mts';
+import type { FindResult } from './find-protocol.mts';
+import { requiredElement, setPanelHidden } from '../browser-types.mts';
 
 /** Keep existing overview destinations reachable as ordinary search rows. */
 export function presentOverviewResults(browser: HTMLElement, value: string) {

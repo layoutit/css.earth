@@ -7,7 +7,7 @@ import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement } from './browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
-import { presentOverviewResults, createSearchPresentation } from './search-results-presentation.mts';
+import { presentOverviewResults, createSearchPresentation } from './search/search-results-presentation.mts';
 import { createNavigationTreeController } from './navigation/navigation-tree-client.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
