@@ -141,9 +141,9 @@ instead of editing a shared list or atlas position.
 | Irregular-mesh capability | Owner relative to the repository |
 | --- | --- |
 | Source loading and native triangle planning | `tools/objects/terrestrial-layers/radial-terrain.mts` |
-| Source sampling, position welding, compaction, meshoptimizer simplification and topology checks | `tools/objects/terrestrial-layers/radial-mesh.mts` |
+| Source sampling, position welding, compaction, meshoptimizer simplification and topology checks | `packages/bake/src/objects/geometry/radial-mesh.ts` |
 | Per-texel lighting and material atlas baking | `tools/objects/terrestrial-layers/radial-materials.mts` |
-| PDS radius values / OBJ radial intersections | `tools/objects/terrestrial-layers/pds-scalar-grid.mts`, `tools/objects/terrestrial-layers/obj-shape.mts` |
+| PDS radius values / OBJ radial intersections | `tools/objects/terrestrial-layers/pds-scalar-grid.mts`, `packages/bake/src/objects/geometry/obj-shape.ts` |
 | Geometry regressions and independent body anchors | `tools/objects/terrestrial-layers/radial-meshoptimizer.test.mts`, `tools/objects/terrestrial-layers/radial-terrain.test.mts`, `tests/objects/unit/vesta/source.test.mts` |
 
 The OBJ sampler supplies radius by ray intersection; this route resamples the

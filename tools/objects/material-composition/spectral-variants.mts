@@ -12,7 +12,7 @@ import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '@cssearth/bake/scene';
 import { readFitsPrimary } from '@cssearth/fits';
-import {planetographicRowsToMeshLatitude} from './ellipsoid.mts';
+import {planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {validateMaterialRecipe,validateRelativePath} from './recipe.mts';
 /** Compose source-selected scalar/thermal surfaces and the corresponding material variants. */

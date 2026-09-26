@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { readOracleFixture, readOracleInput, ORACLE_ROOT, verifyOracleBytes } from '../fixture.mts';
-import { parsePdsVertexFacetShape } from '../../objects/terrestrial-layers/obj-shape.mts';
+import { parsePdsVertexFacetShape } from '@cssearth/bake/objects/geometry';
 import { readFitsImage } from '@cssearth/fits';
 import { readPointing, camera } from './candidate.mts';
 import { cases, parseCase, vector, assertQueryCoverage, orientations } from './cases.mts';

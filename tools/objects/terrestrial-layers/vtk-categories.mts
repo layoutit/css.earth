@@ -1,9 +1,9 @@
-import type {SourceMesh,ClosestSurfacePoint} from './contracts.mts';
+import type { SourceMesh, ClosestSurfacePoint } from '@cssearth/bake/objects/geometry';
 import {parseVtkLens,parseVtkGrid} from './source-records.mts';
 import {shape,text,number} from '@cssearth/core';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createIndexedShape} from './obj-shape.mts';
+import {createIndexedShape} from '@cssearth/bake/objects/geometry';
 import {loadSbmtSymbols} from './sbmt-symbols.mts';
 
 const local = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.split('/').includes('..');

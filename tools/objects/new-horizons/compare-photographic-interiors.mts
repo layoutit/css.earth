@@ -1,5 +1,5 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
-import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 
 export interface PhotographicCamera {
   positionKm: readonly number[];

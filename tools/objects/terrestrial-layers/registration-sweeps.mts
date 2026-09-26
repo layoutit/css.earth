@@ -15,10 +15,10 @@
  */
 import { requireFiniteNumber } from '@cssearth/core';
 import { rotate, multiply } from '@cssearth/spice';
-import { createIndexedShape } from './obj-shape.mts';
-import type { SourceMesh } from './contracts.mts';
-import type { CameraImage } from './shape-camera-mosaic.mts';
-import { controlledShapeCamera } from './shape-camera-mosaic.mts';
+import { createIndexedShape } from '@cssearth/bake/objects/geometry';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
+import type { CameraImage } from '@cssearth/bake/objects/geometry';
+import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
 
 const DEGREE = Math.PI / 180;

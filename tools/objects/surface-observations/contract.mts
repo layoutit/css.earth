@@ -8,7 +8,7 @@
  * shared: the bilinear footprint, the closest source point, visibility, selection, level matching,
  * the display range, area coverage, the preview and the report.
  */
-import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import type { RadialSurface, SourceAccess, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { BandColorDisplay } from '@cssearth/bake/objects/color';

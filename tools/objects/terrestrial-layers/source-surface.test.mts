@@ -1,5 +1,5 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
-import { parseShapeLens } from './source-records.mts';
+import { parseShapeLens } from '@cssearth/bake/objects/geometry';
 import { shape, array, text, number, optional, requireArray } from '@cssearth/core';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
@@ -10,7 +10,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { parseObjShape, createShapeSurfaceSampler } from './obj-shape.mts';
+import { parseObjShape, createShapeSurfaceSampler } from '@cssearth/bake/objects/geometry';
 import { prepareRadialMaterials } from './radial-materials.mts';
 const test = sourceTest();
 

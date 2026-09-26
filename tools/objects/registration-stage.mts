@@ -15,7 +15,7 @@ import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { loadRadialModels } from './terrestrial-layers/radial-models.mts';
 import { radialModelForLens } from './terrestrial-layers/alternative-lenses.mts';
-import { requireTerrainMesh } from './terrestrial-layers/radial-mesh.mts';
+import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { loadSurfaceObservation } from './surface-observations/index.mts';
 import { registrationBlockFor, withRegistrationBlock } from './report-registration.mts';
 

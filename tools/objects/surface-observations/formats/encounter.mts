@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 /** Encounter FITS photographs: calibrated flyby images whose cameras come from a registered control network. */
 import { sha256 } from '@cssearth/core/node';
 import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.mts';
-import type { SourceMesh } from '../../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import { decodeProfile, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
 import { array, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';

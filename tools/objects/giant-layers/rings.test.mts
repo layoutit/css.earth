@@ -1,5 +1,5 @@
 import { fixtureRecord } from '../../contract/test-values.mts';
-import type { SourcePin } from './radial-contract.mts';
+import type { SourcePin } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';

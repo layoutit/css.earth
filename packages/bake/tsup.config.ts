@@ -13,7 +13,8 @@ export default defineConfig({
     'image-layers': 'src/image-layers/index.ts',
     'environment': 'src/environment/index.ts',
     'objects/color': 'src/objects/color/index.ts',
-    'objects/cameras': 'src/objects/cameras/index.ts' },
+    'objects/cameras': 'src/objects/cameras/index.ts',
+    'objects/geometry': 'src/objects/geometry/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the

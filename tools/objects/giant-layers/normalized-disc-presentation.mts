@@ -3,7 +3,7 @@ import {normalizedPresentationRecipe, type NormalizedPresentationRecipe} from '.
 import {parsePhotometricDiscRecipe} from './photometric-disc.mts';
 import type {PhotometricRecipe} from './photometric-contract.mts';
 import type {prepareBandedEllipsoid} from './geometry.mts';
-import type {Vector3, ReadonlyVector3} from '../material-composition/ellipsoid.mts';
+import type {Vector3, ReadonlyVector3} from '@cssearth/bake/objects/geometry';
 import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
@@ -13,7 +13,7 @@ import{preparedResourcePool}from'../../../src/platform/prepared-object-assets.mt
 import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presentation-contract.mts';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import{prepareMaterialTracks}from'../../prepare/prepare-materials.mts';
-import{rotateSequence}from'../material-composition/ellipsoid.mts';
+import{rotateSequence}from'@cssearth/bake/objects/geometry';
 import{prepareNormalizedDiscProjection,phaseLightDirection}from'./photometric-disc.mts';
 
 const round=(value:number)=>Number(value.toFixed(12));

@@ -4,7 +4,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseScalarMap, scalarMapIndex, createScalarMapSampler, validateScalarMapProfile } from './pds-scalar-map.mts';
-import { parseObjShape } from './obj-shape.mts';
+import { parseObjShape } from '@cssearth/bake/objects/geometry';
 
 const grid = { width: 720, height: 360, stepDegrees: .5, latitudeFirst: 90, latitudeStep: -.5, noData: -1, frame: 'cheops-planetocentric-east-positive' };
 const iceGrid = { ...grid, latitudeFirst: -90, latitudeStep: .5 };

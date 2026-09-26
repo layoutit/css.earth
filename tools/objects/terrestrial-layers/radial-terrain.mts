@@ -1,7 +1,7 @@
-import type { PreparedTriangle } from './contracts.mts';
+import type { PreparedTriangle } from '@cssearth/bake/objects/geometry';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import type { RadialSamplingProfile, RadialFaces, TerrainGrid } from './radial-mesh.mts';
-import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh } from './radial-mesh.mts';
+import type { RadialSamplingProfile, RadialFaces, TerrainGrid } from '@cssearth/bake/objects/geometry';
+import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh } from '@cssearth/bake/objects/geometry';
 import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
 import { parseRadialSource } from './radial-source.mts';
@@ -10,13 +10,13 @@ import { loadEllipsoidParameters } from './ellipsoid-parameters.mts';
 import { loadContactEllipsoids } from './contact-ellipsoids.mts';
 import { loadImageDem } from './image-dem.mts';
 import { completeImageDem, reduceCompletedImageDem } from './image-dem-completion.mts';
-import { measureImageDemReduction } from './image-dem-reduction.mts';
+import { measureImageDemReduction } from '@cssearth/bake/objects/geometry';
 import { buildSeamBleedPolygonEdges, computeSolidTrianglePlan, SOLID_TRIANGLE_BLEED, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
-import { loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable } from './obj-shape.mts';
+import { loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
-import { loadPdsRadialTable, loadPdsRadialTableMesh } from './pds-radial-table.mts';
+import { loadPdsRadialTable, loadPdsRadialTableMesh } from '@cssearth/bake/objects/geometry';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
-import { orientObservedSurface } from './open-surface.mts';
+import { orientObservedSurface } from '@cssearth/bake/objects/geometry';
 import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);

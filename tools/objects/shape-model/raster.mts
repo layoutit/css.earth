@@ -1,6 +1,6 @@
 import type { ShapeModelConfig } from './source.mts';
 import sharp from 'sharp';
-import { lambertAttenuationAtlas } from '../terrestrial-layers/lambert-atlas.mts';
+import { lambertAttenuationAtlas } from '@cssearth/bake/objects/geometry';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';

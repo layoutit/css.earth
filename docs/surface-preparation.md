@@ -26,7 +26,7 @@ Original images, meshes and labels
 Terrain preparation separates source loading, mesh operations and material output.
 [The loader](../tools/objects/terrestrial-layers/radial-terrain.mts) assembles the
 source surface, atlas layout and retained leaves. It uses
-[mesh sampling and simplification](../tools/objects/terrestrial-layers/radial-mesh.mts),
+[mesh sampling and simplification](../packages/bake/src/objects/geometry/radial-mesh.ts),
 which can also run independently of source loading.
 [Material preparation](../tools/objects/terrestrial-layers/radial-materials.mts)
 consumes that prepared layout and writes textures through the shared
@@ -308,7 +308,7 @@ stretches differ. Both use related observations, so this is a registration check
 
 ## Reduce geometry and bake the atlas
 
-[radial-mesh.mts](../tools/objects/terrestrial-layers/radial-mesh.mts)
+[radial-mesh.ts](../packages/bake/src/objects/geometry/radial-mesh.ts)
 supports both a sampled radial surface and reduction of the original mesh.
 A radial surface supplies one radius per direction. `source-meshoptimizer`
 reduces source triangles instead; it can retain surfaces that a single radius

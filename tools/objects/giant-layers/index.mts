@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
-import { radialRecipe, type SourcePin, type ObservedRadialLayer } from './radial-contract.mts';
+import { radialRecipe, type SourcePin, type ObservedRadialLayer } from '@cssearth/bake/objects/geometry';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';

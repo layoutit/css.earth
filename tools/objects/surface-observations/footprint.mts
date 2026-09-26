@@ -1,6 +1,6 @@
 /** The footprint stage: sample a photograph at a surface point, and build a camera route's frame around it. */
 import { castSourceRays } from './geometry.mts';
-import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import type { FootprintSample, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, TransferLimits } from './contract.mts';
 import { pixelAngle } from './cameras.mts';
 import { contourDepth, contourDistances, type ContourDistances } from './contour.mts';

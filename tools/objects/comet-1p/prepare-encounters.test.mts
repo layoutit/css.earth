@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {createIndexedShape} from '../terrestrial-layers/obj-shape.mts';
+import {createIndexedShape} from '@cssearth/bake/objects/geometry';
 import {deriveVegaCamera} from './encounter-camera.mts';
 import {prepareEncounters,decodeVegaImage,createVegaSampler,fitDisplayGain,selectVegaCandidate} from './prepare-encounters.mts';
 

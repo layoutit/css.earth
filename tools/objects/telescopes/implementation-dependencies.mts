@@ -36,6 +36,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/volume-leaves': 'packages/bake/src/volume-leaves/index.ts',
   '@cssearth/bake/objects/color': 'packages/bake/src/objects/color/index.ts',
   '@cssearth/bake/objects/cameras': 'packages/bake/src/objects/cameras/index.ts',
+  '@cssearth/bake/objects/geometry': 'packages/bake/src/objects/geometry/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its

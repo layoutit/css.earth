@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 
 interface OutlineObservation {bodyRight:number[];bodyUp:number[];center:number[];kmPerPixel:number[];scaleMultiplier:number;footprintPolygon:number[][]}
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((sum,n,i)=>sum+n*b[i],0);

@@ -2,8 +2,8 @@ import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from './obj-shape.mts';
-import { parsePdsPlateShape } from './obj-shape.mts';
+import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from '@cssearth/bake/objects/geometry';
+import { parsePdsPlateShape } from '@cssearth/bake/objects/geometry';
 
 test('flagged PDS plates preserve observed, ellipsoid and joining provenance', () => {
   const table = '4 4\n1 0 0 0\n0 1 0 0\n0 0 1 0\n-1 -1 -1 1\n0 1 2 0\n0 3 1 2\n1 3 2 2\n2 3 0 2';
@@ -100,7 +100,7 @@ test('source layout mismatches fail instead of inventing a shape',()=>{
 });
 
 test('PDS vertex-facet rows reproduce analytic octahedron intersections', async () => {
-  const { parsePdsVertexFacetShape } = await import('./obj-shape.mts');
+  const { parsePdsVertexFacetShape } = await import('@cssearth/bake/objects/geometry');
   const vertices = ['2 0 0','-2 0 0','0 3 0','0 -3 0','0 0 4','0 0 -4'];
   const faces = ['1 3 5','3 2 5','2 4 5','4 1 5','3 1 6','2 3 6','4 2 6','1 4 6'];
   const text = ['6',...vertices.map((v,i)=>`${i+1} ${v}`),'8',...faces.map((f,i)=>`${i+1} ${f}`)].join('\r\n');
@@ -120,7 +120,7 @@ test('PDS vertex-facet rows reproduce analytic octahedron intersections', async 
 });
 
 test('radius tables retain west longitude, asymmetric radii and closed poles', async () => {
-  const {parsePdsRadiusTable}=await import('./obj-shape.mts');
+  const {parsePdsRadiusTable}=await import('@cssearth/bake/objects/geometry');
   const rows: string[]=[];
   for(let lon=0;lon<=360;lon+=90)for(const lat of [-90,0,90])rows.push([lon,lat,lat===0?({0:2,90:3,180:4,270:5,360:2}[lon]):6].join(' '));
   const p={metersPerUnit:1000,stepDegrees:90,longitudeDirection:'west-positive',expectedVertices:6,expectedFaces:8};
@@ -139,7 +139,7 @@ test('radius tables retain west longitude, asymmetric radii and closed poles', a
 });
 
 test('ASCII and binary STL preserve the same physical mesh and reject malformed facets', async () => {
-  const { parseStlShape } = await import('./obj-shape.mts');
+  const { parseStlShape } = await import('@cssearth/bake/objects/geometry');
   const vertices = [[2,0,0],[-2,0,0],[0,3,0],[0,-3,0],[0,0,4],[0,0,-4]];
   const triangles = [[0,2,4],[2,1,4],[1,3,4],[3,0,4],[2,0,5],[1,2,5],[3,1,5],[0,3,5]];
   const ascii = `solid octahedron\n${triangles.map(face =>

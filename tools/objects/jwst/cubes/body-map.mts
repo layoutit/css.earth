@@ -9,7 +9,7 @@
  *
  * The result is a full-world longitude-latitude grid, NaN where the body was not seen or was seen too obliquely, in the FITS
  * layout the scalar-map reader (terrestrial-layers/fits-image-map.mts) reads. */
-import { controlledShapeCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
+import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
 import type { ObserverCamera } from '@cssearth/bake/objects/cameras';
 import type { BandDepthMap } from './spectral-cube.mts';
 

@@ -84,6 +84,11 @@
       "import": "./dist/objects/cameras.js",
       "default": "./dist/objects/cameras.js"
     },
+    "./objects/geometry": {
+      "types": "./dist/objects/geometry.d.ts",
+      "import": "./dist/objects/geometry.js",
+      "default": "./dist/objects/geometry.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -96,10 +101,13 @@
     "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",
     "@cssearth/engine": "workspace:*",
+    "@cssearth/fits": "workspace:*",
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
+    "@cssearth/telescope": "workspace:*",
     "@layoutit/polycss": "0.2.11",
+    "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
     "sharp": "0.35.3"
   },

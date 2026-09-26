@@ -5,7 +5,7 @@ export interface ImageDemReductionRecipe {targetFaces: number; maximumErrorMeter
 // Preparation-only illustrative closure of an observed height field. The
 // observed plates are immutable. Added plates always carry missing-data grid.
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
-import { removeOppositeFacePairs } from './mesh-face-pairs.mts';
+import { removeOppositeFacePairs } from '@cssearth/bake/objects/geometry';
 const cross2 = (a: Point, b: Point, c: Point) => (b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
 const key = (a: number, b: number) => a < b ? `${a},${b}` : `${b},${a}`;
 

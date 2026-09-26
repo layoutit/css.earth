@@ -1,5 +1,6 @@
 import { isArray } from '@cssearth/core';
-import type {SourceMesh,SourceScalar,SciencePalette,Relief,ScalarGrid,LinearTransform,ScienceProjection,ColorBand,ObservationGeometry,PhotometryProfile,ObservedColorContext} from './contracts.mts';
+import type { SciencePalette, Relief, ScalarGrid, LinearTransform, ScienceProjection, ColorBand, ObservationGeometry, PhotometryProfile, ObservedColorContext } from './contracts.mts';
+import type { SourceMesh, SourceScalar } from '@cssearth/bake/objects/geometry';
 import {decodeProfile,parseScienceInput,parseScienceGrid,parseQualitySource,parseQualityMask,parseColorSourceProfile,parseColorEntry,numericRaster,numericRasterBands} from './source-records.mts';
 import {loadPdsFloatMap} from './pds-float-map.mts';
 import { loadImageDemScience } from './image-dem-science.mts';
@@ -16,8 +17,8 @@ import {composeCorrectedColor} from './photometric-observations.mts';
 import { bandColorDisplay, encodeBandColor, bandColorEvidence, interpolatePalette } from '@cssearth/bake/objects/color';
 import { checkKeys } from '../surface-observations/recipe.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
-import { loadPdsRadialTable } from './pds-radial-table.mts';
-import { loadShapeScalarGrid } from './obj-shape.mts';
+import { loadPdsRadialTable } from '@cssearth/bake/objects/geometry';
+import { loadShapeScalarGrid } from '@cssearth/bake/objects/geometry';
 import { loadObjUvFits } from './obj-uv-fits.mts';
 import { loadFitsImageMap } from './fits-image-map.mts';
 import { loadNpyDictionaryMap } from './npy-dictionary-map.mts';

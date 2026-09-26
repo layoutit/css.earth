@@ -1,6 +1,6 @@
 import { readObservation, type ObservationRaster } from './observation-raster.mts';
 import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid } from './raster-grid.mts';
-import { lambertAttenuationAtlas, type LambertAttenuationParameters } from './lambert-atlas.mts';
+import { lambertAttenuationAtlas, type LambertAttenuationParameters } from '@cssearth/bake/objects/geometry';
 import type { WebpOptions } from 'sharp';
 import { createRasterEmitter } from './raster-output.mts';
 import { writeLossyWebp, paintMissingCoverage } from '@cssearth/bake/raster';
@@ -8,7 +8,7 @@ import type { createSourceManifest } from '../../../src/platform/source-manifest
 import type { RadialState } from './solid-contract.mts';
 import { encodeBandColor, interpolatePalette } from '@cssearth/bake/objects/color';
 import { parseSolidRasterConfig, parseSurfaceSource } from './solid-source.mts';
-import { requireTerrainMesh } from './radial-mesh.mts';
+import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';
 import type { SolidSurface } from './solid-contract.mts';
 import { mkdir, writeFile } from 'node:fs/promises';

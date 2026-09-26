@@ -2,7 +2,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { rotate, multiply } from '@cssearth/spice';
-import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
+import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
 import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';
 import { DECISIVE, parseRefinement, refinementDecision, refinementKept, referenceRegistration, reliefRegistration, silhouetteRegistration, tiltDecision, type RegistrationStageReport } from './registration.mts';

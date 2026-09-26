@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mts';
-import { createIndexedShape } from './obj-shape.mts';
-import { validateObservedReduction } from './open-surface.mts';
+import { repairImageDemDiagonals, measureImageDemReduction } from '@cssearth/bake/objects/geometry';
+import { createIndexedShape } from '@cssearth/bake/objects/geometry';
+import { validateObservedReduction } from '@cssearth/bake/objects/geometry';
 
 test('a vertical boundary triangle is retriangulated without moving points or filling gaps', () => {
   const positions = [[0, 0, 0], [1, 0, 0.1], [2, 0, 0], [1, 1, 0]];

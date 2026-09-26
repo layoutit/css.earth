@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { simplifyRadialTerrain } from './radial-mesh.mts';
+import { simplifyRadialTerrain } from '@cssearth/bake/objects/geometry';
 const test = sourceTest();
 
 const sample = (longitude: number, latitude: number) => {

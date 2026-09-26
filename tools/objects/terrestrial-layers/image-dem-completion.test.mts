@@ -2,8 +2,8 @@ import { required } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import assert from 'node:assert/strict';
 import { completeImageDem } from './image-dem-completion.mts';
-import { validateClosedMesh } from './radial-mesh.mts';
-import { createIndexedShape } from './obj-shape.mts';
+import { validateClosedMesh } from '@cssearth/bake/objects/geometry';
+import { createIndexedShape } from '@cssearth/bake/objects/geometry';
 const test = sourceTest();
 
 const recipe = { method: 'outline-depth-envelope', depthMeters: 3, faceBudget: 100 };

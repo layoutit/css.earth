@@ -1,4 +1,4 @@
-import type {SourceMesh} from './contracts.mts';
+import type {SourceMesh} from './contracts.ts';
 // Preparation-only topology support for an observed surface with real gaps.
 // No vertices or boundary plates are fabricated to close the observations.
 export function inspectOpenSurface(indices: Uint32Array, positions: readonly number[][]) {

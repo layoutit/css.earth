@@ -1,6 +1,6 @@
 import { applyLinearTint } from '@cssearth/bake/objects/color';
 import sharp from 'sharp';
-import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from './radial-contract.mts';
+import type {RadiusMapping, RadialBand, RadialShadow, RadialVariant, RadialOverlay, AnnularLayer, ObservedRadialLayer, RadialProfile} from '@cssearth/bake/objects/geometry';
 import { type RingWedgeLayout, wedgePoint, wedgeShare } from '@cssearth/bake/scene';
 import { clamp } from '@cssearth/core';
 /** Preparation-only radial fields. Body identities and interpretation live in JSON. */

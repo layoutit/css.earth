@@ -3,7 +3,7 @@ import { readFitsPlane } from '@cssearth/fits';
 import type { KernelSet } from '@cssearth/spice/node';
 import { encodeClock, clockToEt, etToUtc, utcToEt, spiceCamera, type Aberration, type PixelModelKeys } from '@cssearth/spice';
 import type { SpiceCameraDeclaration } from './source-records.mts';
-import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
+import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { relative, resolve } from 'node:path';
 
 const projectRoot = resolve(import.meta.dirname, '../../..');

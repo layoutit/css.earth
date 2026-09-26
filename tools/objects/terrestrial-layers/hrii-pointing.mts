@@ -2,7 +2,7 @@ import {array,choice,number,shape,text} from '@cssearth/core';
 import {readEncounterHdus} from './encounter-fits.mts';
 import {encounterCamera} from './encounter-camera.mts';
 import {hriiCamera} from './hrii-camera.mts';
-import type {SourceMesh} from './contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import type {decodeHriiSpectra} from './hrii-spectra.mts';
 
 const point=array(number),pin=shape({path:text});

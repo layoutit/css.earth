@@ -9,7 +9,7 @@
  * limb probe on c1139257 confirmed (the predicted disc centre fell 53 px from the observed one only in that orientation).
  */
 import { globals, writeArrayBuffer } from 'geotiff';
-import { decodeCalibratedCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
+import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { pds3Keyword } from '@cssearth/telescope';
 import { spiceCamera, utcToEt } from '@cssearth/spice';
 import type { KernelSet } from '@cssearth/spice/node';

@@ -2,7 +2,7 @@ import { sha256 } from '@cssearth/core/node';
 import {parse} from '@cssearth/core/schema';
 import {cutawayRecipe} from './recipe-contract.mts';
 import {interiorSource, type InteriorSource} from './source-contract.mts';
-import type {ReadonlyVector3, Vector3} from '../material-composition/ellipsoid.mts';
+import type {ReadonlyVector3, Vector3} from '@cssearth/bake/objects/geometry';
 interface InteriorLensPlan {id:string;model:string;qualification:string;palette:InteriorSource['palette'];sectionResponse:{innerFloor:number;startRadius:number;exponent:number};shellGain:{metallic:number;core:number};filter?:string;wavelength?:string}
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -10,7 +10,7 @@ import sharp from 'sharp';
 import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared/prepared-webp.mts';
 import {writeLossyWebp} from '@cssearth/bake/raster';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
-import {dotVector as dot3} from '../material-composition/ellipsoid.mts';
+import {dotVector as dot3} from '@cssearth/bake/objects/geometry';
 
 /** Interior cutaways are smooth illustrations, written in the lossy lane (lossy-lane.ts). */
 const INTERIOR_WEBP = { alphaQuality: 100, effort: 6 } as const;

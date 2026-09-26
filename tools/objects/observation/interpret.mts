@@ -14,8 +14,8 @@ import { array, literal, number, object, optional, parse, string, tuple, union, 
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
-import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-mesh.mts';
-import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
+import { requireTerrainMesh, sampleRadialTriangles } from '@cssearth/bake/objects/geometry';
+import { loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { offLimbPlate } from './off-limb-plate.mts';

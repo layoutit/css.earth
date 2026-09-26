@@ -2,7 +2,7 @@
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {controlledShapeCamera, decodeCalibratedCamera} from '../../terrestrial-layers/shape-camera-mosaic.mts';
+import {controlledShapeCamera, decodeCalibratedCamera} from '@cssearth/bake/objects/geometry';
 import { parseTextKernel, number as kernelNumber, numbers as kernelNumbers } from '@cssearth/spice';
 import {requireArray, requireFiniteNumber, requireRecord, requireString} from '@cssearth/core';
 

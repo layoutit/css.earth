@@ -2,7 +2,7 @@ import { cross3 as cross, array, number, shape, text } from '@cssearth/core';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadObjShape} from '../terrestrial-layers/obj-shape.mts';
+import {loadObjShape} from '@cssearth/bake/objects/geometry';
 import {decodeNewHorizonsLorri,newHorizonsCamera,multiplyCameraMatrices} from '../terrestrial-layers/new-horizons-geo.mts';
 import { readFitsHeader } from '@cssearth/fits';
 import {observedLimb,limbThreshold,type LimbEdgePoint} from '../terrestrial-layers/limb-refinement.mts';

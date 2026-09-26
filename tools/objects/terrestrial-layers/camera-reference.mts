@@ -4,7 +4,7 @@ import { parseRadialLoaderConfig } from './radial-source.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadRadialTerrain } from './radial-terrain.mts';
-import { requireTerrainMesh } from './radial-mesh.mts';
+import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { decodeOsirisReflectance } from './archived-camera.mts';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 import { castSourceRays } from '../surface-observations/geometry.mts';

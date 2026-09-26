@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeVtkCategories } from '../terrestrial-layers/vtk-categories.mts';
-import { createIndexedShape } from '../terrestrial-layers/obj-shape.mts';
+import { createIndexedShape } from '@cssearth/bake/objects/geometry';
 import { normalizeSearchText } from './catalog.js';
 import { projectRadial, surfaceDirection } from './geometry.js';
 import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.js';

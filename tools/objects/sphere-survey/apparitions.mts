@@ -21,11 +21,11 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { horizonsCommand, horizonsTables } from '../sphere-horizons.mts';
 import { qualifiedFace, shadingNormal } from '../surface-observations/geometry.mts';
-import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { horizonsRows, loadOrientation, observerRowValues, parseObserverCameras } from '../terrestrial-layers/observer-cameras.mts';
 import { radialTerrainForLens } from '../terrestrial-layers/alternative-lenses.mts';
-import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
+import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 import { apparitions } from './frames.mts';
 import { lamText, parseFrameListing, type LamFrame } from './lam.mts';
 

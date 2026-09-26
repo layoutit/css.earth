@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { decodeCalibratedCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
+import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { pds3Keyword } from '@cssearth/telescope';
 
 // A source inspection only. It cannot fit a camera or publish a surface.
@@ -70,7 +70,7 @@ const png = await sharp({ create: { width: 960, height: 512, channels: 3, backgr
 await writeFile(resolve(outputDirectory, 'native-pair.png'), png);
 const report = { schema: 'cssearth-aegaeon-source-review@1', qualifiedSurface: false,
   inputManifestSha256: sha256(manifestBytes), generatorSha256: sha256(await readFile(new URL(import.meta.url))),
-  decoderSha256: sha256(await readFile(resolve('tools/objects/terrestrial-layers/shape-camera-mosaic.mts'))),
+  decoderSha256: sha256(await readFile(resolve('packages/bake/src/objects/geometry/shape-camera-mosaic.ts'))),
   outputSha256: sha256(png), display, frames: reports,
   result: 'A diffuse disc candidate is visible in both source crops. No image-to-surface registration, interior-control validation or photographic coverage is established.' };
 await writeFile(resolve(outputDirectory, 'review.json'), JSON.stringify(report, null, 2) + '\n');

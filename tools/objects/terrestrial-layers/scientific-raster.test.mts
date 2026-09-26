@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { LOSSLESS_PALETTE_STEPS, LOSSY_PALETTE_STEPS, paletteLookup, colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mts';
-import { lambertAttenuationAtlas } from './lambert-atlas.mts';
+import { lambertAttenuationAtlas } from '@cssearth/bake/objects/geometry';
 import { parseTerrestrialProfile } from './index.mts';
 const test = sourceTest();
 

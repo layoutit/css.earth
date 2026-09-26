@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA } from './observer-cameras.mts';
-import { loadCameraShape } from './shape-camera-mosaic.mts';
+import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 import { radialTerrainForLens } from './alternative-lenses.mts';
 const test = sourceTest();
 

@@ -2,7 +2,7 @@ import {required} from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import {parseObjShape} from './obj-shape.mts';
+import {parseObjShape} from '@cssearth/bake/objects/geometry';
 import {parseFacetCsv, parseFacetFits, createFacetScalarSampler, validateFacetScalarProfile} from './facet-scalars.mts';
 
 const mesh = parseObjShape(['v 1 0 0','v 1 3 0','v 1 0 3','v 5 0 0','v 5 3 0','v 5 0 3','f 1 2 3','f 4 5 6'].join('\n'),

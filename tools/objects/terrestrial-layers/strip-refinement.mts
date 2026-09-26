@@ -10,7 +10,7 @@ import { cross3 as cross } from '@cssearth/core';
  * keep their source values. Edge points are split into a fit and a holdout partition, and the holdout residual and both
  * offsets must stay within the recipe's budget. The limb measurement itself is limb-refinement.mts's.
  */
-import type { SourceMesh } from './contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import { limbResidual, limbThreshold, observedLimb, type LimbCamera, type LimbEdgePoint, type LimbImage, type LimbPixelMapping, type Residual } from './limb-refinement.mts';
 
 export interface EpochOffsets { pointingSeconds: number; ephemerisSeconds: number }

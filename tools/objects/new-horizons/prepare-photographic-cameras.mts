@@ -13,7 +13,7 @@ import { readFitsHeader } from '@cssearth/fits';
 import { newHorizonsCamera, decodeNewHorizonsLorri } from '../terrestrial-layers/new-horizons-geo.mts';
 import { bindSipCamera } from '../terrestrial-layers/llorri-geo.mts';
 import { observedLimb, limbThreshold, type LimbEdgePoint } from '../terrestrial-layers/limb-refinement.mts';
-import { loadStlShape } from '../terrestrial-layers/obj-shape.mts';
+import { loadStlShape } from '@cssearth/bake/objects/geometry';
 import { pckRotation, parseTextKernel, transpose } from '@cssearth/spice';
 import { comparePhotographicInteriors } from './compare-photographic-interiors.mts';
 import { writeInteriorComparison } from './render-interior-comparison.mts';
