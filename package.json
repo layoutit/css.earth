@@ -38,6 +38,8 @@
     "check:nebula-boundaries": "node tools/nebula/package-boundaries.mts",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
     "ipad": "node tools/cli/ipad.mts",
+    "ipad:screen": "node tools/performance/ios-capture.mts --screen",
+    "ipad:inspect": "node tools/performance/ios-capture.mts --inspect",
     "lab:nebula": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
     "lint": "eslint packages labs tools src site",
     "lint:packages": "eslint packages --max-warnings 0",
