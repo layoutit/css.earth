@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { loadPreparedCssObject } from '@cssearth/renderer';
-import { readPreparedObjectBytes } from '../../site/object-page-data.mts';
-import { serializePreparedScene } from './serialize-prepared-scene.mts';
+import { readPreparedObjectBytes } from '../object-page-data.mts';
+import { serializePreparedScene } from '../prepared/serialize-prepared-scene.mts';
 
 const { descriptor, bytes } = await readPreparedObjectBytes('saturn');
 const definition = await loadPreparedCssObject(descriptor, {

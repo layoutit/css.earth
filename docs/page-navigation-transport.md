@@ -158,7 +158,7 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/test/object-page-data.test.mts
-node --test tools/prepared/serialize-prepared-scene.test.mts
+node --test site/test/serialize-prepared-scene.test.mts
 node --test site/test/rendered-page.test.mts
 node --test site/test/search-response.test.mts
 node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
