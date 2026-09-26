@@ -1,7 +1,7 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow, PlaybackState } from './browser-types.mts';
-import type { WorldPreferences } from './world-preferences.mts';
-import { requiredElement } from './browser-types.mts';
+import type { BrowserWindow, PlaybackState } from '../browser-types.mts';
+import type { WorldPreferences } from '../world-preferences.mts';
+import { requiredElement } from '../browser-types.mts';
 
 export function createSettingsController(
   documentTarget: Document,

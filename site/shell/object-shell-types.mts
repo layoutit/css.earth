@@ -1,10 +1,10 @@
-import type { WorldPreferences } from './world-preferences.mts';
-import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
-import type { NavigationContent } from './navigation/navigation-content.mts';
-import type { ObjectEntry } from './objects.mts';
-import type { SceneOverview, SceneSubject, SelectionTarget } from './scene/scene-selection.mts';
+import type { WorldPreferences } from '../world-preferences.mts';
+import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser-types.mts';
+import type { NavigationContent } from '../navigation/navigation-content.mts';
+import type { ObjectEntry } from '../objects.mts';
+import type { SceneOverview, SceneSubject, SelectionTarget } from '../scene/scene-selection.mts';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { DestinationPresentation } from './destination-browser.mts';
+import type { DestinationPresentation } from '../destination-browser.mts';
 
 export interface ShellOptions {
   objectId: string;

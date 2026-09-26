@@ -1,8 +1,8 @@
 import type { SceneSubject, SelectionTarget } from './scene-selection.mts';
-import type { SceneState } from '../shell-contract-types.mts';
+import type { SceneState } from '../shell/shell-contract-types.mts';
 import type { SceneSessionState } from './scene-session.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
-import type { ObjectShell } from '../object-shell-types.mts';
+import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { automaticPlaybackPolicy } from '../runtime-policy.mts';

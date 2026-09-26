@@ -1,5 +1,5 @@
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
-import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./shell-contract-types.mts";
+import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./shell/shell-contract-types.mts";
 
 export const MOBILE_VIEWPORT_MAX = 820;
 export const DESKTOP_VIEWPORT_MIN = MOBILE_VIEWPORT_MAX + 1;

@@ -11,7 +11,7 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
-import type { ObjectShell, ShellNavigationTransition } from '../object-shell-types.mts';
+import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import { objectAdapter } from "../object-adapter.mts";
 import { createNavigationContent } from '../navigation/navigation-content.mts';

@@ -1,4 +1,4 @@
-import type { SceneLifecycle, ShellObjectControls } from "../shell-contract-types.mts";
+import type { SceneLifecycle, ShellObjectControls } from "../shell/shell-contract-types.mts";
 import { SHELL_SETTING_NAMES } from '@cssearth/renderer/runtime/shell-settings.ts';
 
 function objectLike(value: unknown): value is Record<string, unknown> {

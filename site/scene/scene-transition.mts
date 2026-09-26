@@ -3,7 +3,7 @@ import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
 import type { createNavigationContent } from '../navigation/navigation-content.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectEntry } from '../objects.mts';
-import type { ShellNavigationTransition } from '../object-shell-types.mts';
+import type { ShellNavigationTransition } from '../shell/object-shell-types.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
