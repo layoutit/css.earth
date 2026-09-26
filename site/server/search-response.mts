@@ -1,18 +1,18 @@
 import { parseHTML } from 'linkedom';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from '../browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { matchesObjectCategory } from '@cssearth/objects';
-import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
-import { parseFeaturePin } from './feature-search.mts';
+import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from '../object-search.mts';
+import { parseFeaturePin } from '../search/feature-search.mts';
 import { findResults } from './find.mts';
-import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
-import { createSelectionPresentation } from './selection-presentation.mts';
-import { selectionTargetFromUrl } from './scene/scene-selection.mts';
-import { WORLD_OBJECTS } from './world-objects.mts';
-import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from './search-results-presentation.mts';
-import { readCatalogueFragmentUrl } from './catalogue-fragment-loader.mts';
-import { objectIdAtPath } from './root-object.mts';
-import { overviewScopeFromUrl, withOverviewScope } from './navigation/navigation-scope.mts';
+import { renderDatasetResponse, UnreadableSavedView } from '../dataset-response.mts';
+import { createSelectionPresentation } from '../selection-presentation.mts';
+import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
+import { WORLD_OBJECTS } from '../world-objects.mts';
+import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from '../search-results-presentation.mts';
+import { readCatalogueFragmentUrl } from '../catalogue-fragment-loader.mts';
+import { objectIdAtPath } from '../root-object.mts';
+import { overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 
 export interface SearchPin { url: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {

@@ -2,10 +2,10 @@ import type { Connect, Plugin } from 'vite';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
-import { handleSearchRequest } from '../../site/search-response.mts';
-import { handleFindRequest } from '../../site/find.mts';
-import { FIND_PATH } from '../../site/find-protocol.mts';
-import { parseFeaturePin } from '../../site/feature-search.mts';
+import { handleSearchRequest } from '../../site/server/search-response.mts';
+import { handleFindRequest } from '../../site/server/find.mts';
+import { FIND_PATH } from '../../site/search/find-protocol.mts';
+import { parseFeaturePin } from '../../site/search/feature-search.mts';
 
 /** Exercise Netlify's exact routing and handler in Astro dev and static preview. */
 export function searchServer(): Plugin {
