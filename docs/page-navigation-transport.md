@@ -103,7 +103,7 @@ with a `feature` parameter (`city-<id>` for a city). The response selects
 a compatible dataset and publishes the same feature caption used by live labels;
 JavaScript adds the camera flight after that body is ready.
 
-`netlify/edge-functions/search-route.ts` routes requests containing `q`, `dataset`,
+`netlify/edge-functions/search-route.ts` (its routing is `site/server/search-route.mts`) routes requests containing `q`, `dataset`,
 `settings`, `feature`, `v`, `focus` or `focusLens` to the Node function in
 `netlify/functions/search.ts`. It keeps optional category
 and view parameters, and passes ordinary pages and assets straight through.
@@ -142,7 +142,7 @@ native submits; a small form binding refreshes that context after interactive
 camera movement. Feature flights and continuous camera input require JavaScript
 in the normal site.
 
-`tools/cli/search-server.mts` calls the same routing and request handlers in Astro
+`site/server/search-server.mts` calls the same routing and request handlers in Astro
 dev. `astro preview` does not run Vite's preview hooks, so neither search works
 there; use dev, or a Netlify deploy. `netlify.toml` declares the production build, Node function
 and edge route. Deployment is deferred: before launch, verify a real Netlify

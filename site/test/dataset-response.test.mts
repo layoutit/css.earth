@@ -7,7 +7,7 @@ import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { renderDatasetResponse } from '../dataset-response.mts';
 import { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
 import { handleSearchRequest } from '../server/search-response.mts';
-import searchRoute from '../../netlify/edge-functions/search-route.ts';
+import searchRoute from '../server/search-route.mts';
 
 const origin = 'https://example.test';
 const scene = await loadPreparedSceneMarkup('saturn');
