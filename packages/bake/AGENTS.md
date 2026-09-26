@@ -62,6 +62,10 @@ its validators accept); the renderer never imports the bake.
   Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
   oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
   (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
+- `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
+  identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
+  render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `tools/nebula/prepare.mts` is its
+  entry and records the prepared closure with the platform's inventory.
 - The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
   inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none.
 
@@ -82,7 +86,7 @@ the finite-emission compiler. Change an output only on purpose, together with ev
 
 The `nebulaImplementation` inventory in `package.json` lists the sources that nebula delivery identities hash. Keep it
 covering every topic directory whose code a delivery runs (`tools/nebula/application/package-identity.test.ts` checks it
-against the delivery's import closure); `tools/nebula/application/objects.ts` names only owners outside the package.
+against the delivery's import closure); `src/nebula/objects.ts` names only owners outside the package.
 
 ## Shared package contract
 

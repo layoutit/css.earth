@@ -1,6 +1,6 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
-import { balanceVolumeSlices } from '@cssearth/bake/volume-leaves';
+import { balanceVolumeSlices } from '../volume-leaves/index.ts';
 
 export const METERS_PER_PARSEC = 3.085677581491367e16;
 export const ARCSECOND_RADIANS = Math.PI / 648000;

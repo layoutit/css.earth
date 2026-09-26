@@ -2,14 +2,14 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawn } from 'node:child_process';
-import { prepareNebulaObject as prepare, type NebulaResearchBackend } from '../../../../../../../../tools/nebula/application/objects.ts';
+import { prepareNebulaObject as prepare, type NebulaResearchBackend } from '@cssearth/bake/nebula';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { readCompilerRequest } from '../../../features/compiler/model.ts';
 import { compileNebula } from '../../../server/workflows/compiler/compile.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { prepareOpticalCompositeForResult } from '../../../server/workflows/compiler/optical-composite-preparation.ts';
 import { pinned } from '../../../server/workflows/density/io.ts';
-export { readNebulaDelivery } from '../../../../../../../../tools/nebula/application/objects.ts';
+export { readNebulaDelivery } from '@cssearth/bake/nebula';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 async function symmetry(root: string, recipePath: string) {
   await new Promise<void>((accept,reject) => {

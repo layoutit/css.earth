@@ -2,10 +2,10 @@ import { packageImplementationPins } from './package-identity.ts';
 import { installedDeliveryMatchesRecipe } from './delivery-identity.ts';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
-import { type CompilerBakeResult, type DensityVolumeFrame, parseVolumeRecipe } from '@cssearth/bake/volume';
+import { type CompilerBakeResult, type DensityVolumeFrame, parseVolumeRecipe } from '../volume/index.ts';
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
-import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '@cssearth/bake/volume/node';
-import { compileCssVolume, prepareVolumeImpostors } from '@cssearth/bake/volume-leaves';
+import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
+import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
@@ -13,7 +13,7 @@ import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
-import { prepareVolumeAtlases } from '@cssearth/bake/density';
+import { prepareVolumeAtlases } from '../density/index.ts';
 import type { PreparedVolumeLens } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
@@ -24,12 +24,11 @@ const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeEr
 const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Expected finite nebula delivery value.'); return v; };
 // This identity records the implementation used by an explicit bake. Consumer builds reuse a complete installed
 // delivery by recipe identity and byte closure; they never turn a runtime change into an implicit scientific bake.
+// This package's own sources (this topic and the ones it imports) are hashed through its `nebulaImplementation` inventory;
+// the list names the owners outside it.
 const implementationFiles = [
-  'tools/nebula/application/package-identity.ts', 'tools/nebula/application/delivery-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
-  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
-  'tools/nebula/application/element-budget.ts', 'packages/renderer/src/volume/compiler-render-budget.ts',
-  'packages/renderer/src/volume/prepared-volume-lod.ts',
-  'tools/nebula/application/star-sprites.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts',
+  'packages/renderer/src/volume/compiler-render-budget.ts', 'packages/renderer/src/volume/prepared-volume-lod.ts',
+  'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts',
   'packages/renderer/src/volume/types.ts', 'packages/renderer/src/volume/validation.ts',
   'packages/renderer/src/volume/volume-impostor-validation.ts', 'packages/renderer/src/volume/prepared-volume-lenses.ts',
 ];
@@ -126,7 +125,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     await verifyReplayReferences(root, directory, [recipe.request,...recipe.inputPins,...(recipe.compositeRecipe ? [recipe.compositeRecipe] : [])]);
   }
   for (const input of [...(recipe.fieldStars ? [recipe.fieldStars] : []), ...(recipe.compactInputs ? [recipe.compactInputs] : [])]) await pinned(root,input);
-  const owners = [...implementationFiles, ...(recipe.fieldStars ? ['tools/nebula/application/catalogue-field.ts',
+  const owners = [...implementationFiles, ...(recipe.fieldStars ? [
     'packages/renderer/src/navigation/world-camera-math.ts', 'packages/renderer/src/stars/prepared-catalogue-points.ts'] : [])];
   // Package inventories define numerical owners without exposing their installation layout.
   const packagePins = await packageImplementationPins(root, ['@cssearth/bake']);

@@ -1,10 +1,8 @@
 /** Application preparation entrypoint. Scientific regeneration remains an explicit research command. */
 import { readdir, access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { prepareNebulaObject } from './objects.ts';
-import { prepareCompactDensityObject } from './density-object.ts';
+import { prepareNebulaObject, prepareCompactDensityObject, applicationDeliveryKind } from '@cssearth/bake/nebula';
 import { inventoryPreparedAssets } from '../../../src/platform/runtime-asset-closure.mts';
-import { applicationDeliveryKind } from './delivery-identity.ts';
 const args = process.argv.slice(2);
 if (args.some(arg=>arg !== '--if-missing' && arg !== '--allow-missing' && !/^--object=[a-z][a-z0-9-]*$/.test(arg)) || args.filter(arg=>arg.startsWith('--object=')).length > 1)
   throw new TypeError('Usage: tools/nebula/prepare.mts [--if-missing] [--allow-missing] [--object=<id>]. Research: node --experimental-strip-types labs/nebula/run.mts bake-nebula --research.');

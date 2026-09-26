@@ -27,6 +27,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
   '@cssearth/bake/scene': 'packages/bake/src/scene/index.ts',
   '@cssearth/bake/presentation': 'packages/bake/src/presentation/index.ts',
+  '@cssearth/bake/nebula': 'packages/bake/src/nebula/index.ts',
   '@cssearth/bake/world-context': 'packages/bake/src/world-context/index.ts',
   '@cssearth/bake/cluster-catalog': 'packages/bake/src/cluster-catalog/index.ts',
   '@cssearth/bake/galaxy-catalog': 'packages/bake/src/galaxy-catalog/index.ts',

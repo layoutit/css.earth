@@ -4,7 +4,7 @@ import { type CompilerBakeResult, createRenderElementBudget } from '@cssearth/ba
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
 import type { PreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
-import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
+import { assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
 
 const axes = ['x', 'y', 'z'] as const;
 const frame = { referenceFrame: 'lab-sky-west-north-toward', epochJdTt: 2451545, metersPerUnit: 1,

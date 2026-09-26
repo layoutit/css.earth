@@ -1,4 +1,4 @@
-import { nebulaBakeBackend } from '../../../../../../../../tools/nebula/application/backend.ts';
+import { nebulaBakeBackend } from '@cssearth/bake/nebula';
 /** Explicit expensive gate (not default unit-test discovery):
  * node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.mts --timeout-seconds 1800
  * Optional --objects m42,helix,m45,m8,m1 selects a bounded subset; every selected object's lenses run.

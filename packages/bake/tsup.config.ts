@@ -19,7 +19,8 @@ export default defineConfig({
     'cluster-catalog': 'src/cluster-catalog/index.ts',
     'world-context': 'src/world-context/index.ts',
     'objects/raster': 'src/objects/raster/index.ts',
-    'objects/scene': 'src/objects/scene/index.ts' },
+    'objects/scene': 'src/objects/scene/index.ts',
+    'nebula': 'src/nebula/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the
