@@ -1,8 +1,8 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import { prepareGroupView, prepareSystemView } from './system-view.js';
-import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
+import { prepareGroupView, prepareSystemView } from './system-view.ts';
+import type { PreparedSystemView, SystemViewPolicy } from './system-view.ts';
 import { M_PER_AU } from '@cssearth/astronomy';
-import { prepareHyperbolicPath } from '../platform/prepare-hyperbolic-path.mts';
+import { prepareHyperbolicPath } from './hyperbolic-path.ts';
 
 export type Vector3 = readonly [number, number, number];
 

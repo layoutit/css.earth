@@ -11,3 +11,4 @@ export * from './leaf-images.ts';
 export * from './cutaway.ts';
 export * from './atmosphere.ts';
 export * from './geometry-scene.ts';
+export * from './perspective-camera.ts';

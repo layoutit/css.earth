@@ -27,7 +27,6 @@
   "include": [
     "**/*.ts",
     "**/*.mts",
-    "../../src/preparation/**/*.ts",
     "../external-modules.d.mts",
     "../../site/env.d.ts"
   ],

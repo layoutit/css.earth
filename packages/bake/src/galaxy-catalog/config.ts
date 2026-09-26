@@ -1,5 +1,5 @@
 import { requireFiniteNumber as finite, requirePositive as positive, requireRecord as record } from '@cssearth/core';
-import type { GalaxyDistance, GalaxyRecipe, SourcePin } from './types.js';
+import type { GalaxyDistance, GalaxyRecipe, SourcePin } from './types.ts';
 
 export function keys(value: Record<string, unknown>, allowed: string[], label: string): void {
   for (const key of Object.keys(value)) if (!allowed.includes(key)) throw new TypeError(`Unknown ${label} field: ${key}`);

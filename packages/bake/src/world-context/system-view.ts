@@ -1,5 +1,5 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import type { OrbitalState, PreparedWorldContext, Vector3 } from './spatial-context.js';
+import type { OrbitalState, PreparedWorldContext, Vector3 } from './spatial-context.ts';
 
 export interface PreparedSystemView {
   readonly memberIds: readonly string[];

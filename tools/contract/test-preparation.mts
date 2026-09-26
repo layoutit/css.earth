@@ -12,9 +12,9 @@ const output = resolve(root, '.local/preparation-tests');
 const universeOnly = process.argv.length === 3 && process.argv[2] === '--universe';
 if (process.argv.length > 2 && !universeOnly) throw new TypeError('Usage: test-preparation.mts [--universe]');
 const universeEntries = [
-  'src/preparation/galaxy-catalog/galaxy-catalog.test.ts',
-  'src/preparation/galaxy-catalog/bibliography.test.ts',
-  'src/preparation/cluster-catalog/cluster-catalog.test.ts',
+  'packages/bake/src/galaxy-catalog/galaxy-catalog.test.ts',
+  'packages/bake/src/galaxy-catalog/bibliography.test.ts',
+  'packages/bake/src/cluster-catalog/cluster-catalog.test.ts',
   'packages/bake/src/image-layers/image-layers.test.ts',
   'packages/bake/src/density/volume.test.ts',
   // `@cssearth/bake` declares no side effects, so a bundled suite cannot pull another in by a bare import: list each one.
@@ -23,7 +23,7 @@ const universeEntries = [
   'packages/bake/src/sky/sky.test.ts',
   'packages/bake/src/volume-leaves/volume.test.ts',
   'packages/bake/src/volume-leaves/volume-impostors.test.ts',
-  'src/preparation/spatial-context.test.ts',
+  'packages/bake/src/world-context/spatial-context.test.ts',
   'tools/objects/prepare-spatial-context.test.ts',
   'tools/objects/world-navigation.test.ts',
   'packages/bake/src/stars/stars.test.ts',

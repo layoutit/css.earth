@@ -31,6 +31,9 @@
     "src/density",
     "src/image-layers",
     "src/environment",
-    "src/objects"
+    "src/objects",
+    "src/galaxy-catalog",
+    "src/cluster-catalog",
+    "src/world-context"
   ]
 }

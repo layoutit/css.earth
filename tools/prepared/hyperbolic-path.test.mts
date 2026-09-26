@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { prepareHyperbolicPath } from "./prepare-hyperbolic-path.mts";
+import { prepareHyperbolicPath } from "@cssearth/bake/world-context";
 
 // Independent polar conic: a=-10 au, e=2 has p=a(1-e²)=30 au.
 // At true anomaly pi/2 the body is at (0,30,0) relative to its focus.

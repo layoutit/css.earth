@@ -6,8 +6,8 @@ import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { parsePreparedClusterCatalog } from '@cssearth/catalog';
 import { M_PER_PC } from '@cssearth/astronomy';
-import { comovingDistanceMpc, parseMcxcRows, prepareClusterCatalog } from './prepare.js';
-import type { ClusterRecipe } from './prepare.js';
+import { comovingDistanceMpc, parseMcxcRows, prepareClusterCatalog } from './prepare.ts';
+import type { ClusterRecipe } from './prepare.ts';
 
 const directory = resolve('src/objects/galaxy-clusters');
 test('the checked seven clusters reproduce from the pinned independent MCXC-II release with exact columns and units', async () => {

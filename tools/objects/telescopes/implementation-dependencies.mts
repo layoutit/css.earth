@@ -14,7 +14,7 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
  * were local modules under `tools/objects/` before they became `@cssearth/telescope`, and the photometric models and raster lane
  * were local modules (`tools/photometry/`, `src/preparation/raster/`) before they became `@cssearth/bake/photometry` and
  * `@cssearth/bake/raster`, as were the renderer's preparation compilers (`src/renderers/css/preparation/`), `src/platform/`
- * and `tools/prepared/` libraries and `src/preparation/` topics before their `@cssearth/bake/<topic>` entries, and the shared object libraries under
+ * and `tools/prepared/` libraries and the `src/preparation/` topics before their `@cssearth/bake/<topic>` entries, and the shared object libraries under
  * `tools/objects/` before `@cssearth/bake/objects/<topic>`; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
@@ -27,6 +27,9 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
   '@cssearth/bake/scene': 'packages/bake/src/scene/index.ts',
   '@cssearth/bake/presentation': 'packages/bake/src/presentation/index.ts',
+  '@cssearth/bake/world-context': 'packages/bake/src/world-context/index.ts',
+  '@cssearth/bake/cluster-catalog': 'packages/bake/src/cluster-catalog/index.ts',
+  '@cssearth/bake/galaxy-catalog': 'packages/bake/src/galaxy-catalog/index.ts',
   '@cssearth/bake/environment': 'packages/bake/src/environment/index.ts',
   '@cssearth/bake/image-layers': 'packages/bake/src/image-layers/index.ts',
   '@cssearth/bake/density': 'packages/bake/src/density/index.ts',

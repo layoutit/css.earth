@@ -89,6 +89,21 @@
       "import": "./dist/objects/geometry.js",
       "default": "./dist/objects/geometry.js"
     },
+    "./galaxy-catalog": {
+      "types": "./dist/galaxy-catalog.d.ts",
+      "import": "./dist/galaxy-catalog.js",
+      "default": "./dist/galaxy-catalog.js"
+    },
+    "./cluster-catalog": {
+      "types": "./dist/cluster-catalog.d.ts",
+      "import": "./dist/cluster-catalog.js",
+      "default": "./dist/cluster-catalog.js"
+    },
+    "./world-context": {
+      "types": "./dist/world-context.d.ts",
+      "import": "./dist/world-context.js",
+      "default": "./dist/world-context.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -109,7 +124,8 @@
     "@layoutit/polycss": "0.2.11",
     "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
-    "sharp": "0.35.3"
+    "sharp": "0.35.3",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

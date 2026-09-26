@@ -6,12 +6,12 @@ import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { M_PER_PC } from '@cssearth/astronomy';
 import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
-import { parseGalaxyRecipe } from './config.js';
-import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.js';
-import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './prepare.js';
-import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from './source.js';
-import { prepareGalaxyCatalogObject } from '../../../tools/objects/prepare-galaxy-catalog.js';
-import type { AuthorMetadata, CsvRow } from './types.js';
+import { parseGalaxyRecipe } from './config.ts';
+import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.ts';
+import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './prepare.ts';
+import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from './source.ts';
+import { prepareGalaxyCatalogObject } from '../../../../tools/objects/prepare-galaxy-catalog.ts';
+import type { AuthorMetadata, CsvRow } from './types.ts';
 
 const directory = resolve('src/objects/local-group');
 const json = async (path: string) => JSON.parse(await readFile(resolve(directory, path), 'utf8')) as unknown;
