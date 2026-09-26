@@ -27,7 +27,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile } from '@cssearth/telescope/node';
-import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';

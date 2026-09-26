@@ -10,7 +10,7 @@ import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
-import { toolchainPython } from '../mast.mts';
+import { toolchainPython } from '@cssearth/telescope/node';
 import { findPointSources } from '../../observation/point-sources.mts';
 
 const member = (name: string, bytes = 1000) => ({ name, uri: `mast:JWST/product/${name}`, bytes });

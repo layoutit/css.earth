@@ -31,7 +31,7 @@ import { totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';

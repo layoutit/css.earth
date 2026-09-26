@@ -30,7 +30,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
-import { freeMemoryPercent, mastFile, toolchainPython } from './mast.mts';
+import { mastFile } from './mast.mts';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {
