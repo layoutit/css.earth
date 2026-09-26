@@ -23,10 +23,8 @@ export interface AtmosphereConfiguration {
 }
 
 /**
- * Earth's lighting and atmosphere inputs: the measured limb law with the overlay's reference colour, and the atmosphere
- * model with its display response. The atmosphere bank's image holds both, the lit disc with the atmosphere over and
- * around it, so one image shows the planet; the lighting bank (assets.mts) holds the disc alone and shows only with the
- * atmosphere turned off.
+ * Earth's measured limb law and atmosphere model. Each prepared image holds the lit disc with the atmosphere
+ * over and around it, so one material shows the planet.
  */
 export function createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun, polarToEquatorial }: {config: AtmosphereConfiguration; sourceDirectory: string; sourceManifest: SourceManifest; sun: Pick<PreparedDirectionalSunPlan, "referenceViewDirection">; polarToEquatorial: number}) {
 const MATERIAL_TILE_SIZE = config.material.tileSize;

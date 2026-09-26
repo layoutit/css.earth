@@ -21,7 +21,13 @@ import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coor
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
-// The actual Earth plan provides independent lighting and atmosphere row demand.
+test("Earth has one atmospheric material and no Atmosphere setting or disc-only asset demand", () => {
+  assert.deepEqual(earthDefinition.controls.settings?.controls.map(control => control.name), ["speed", "shadows"]);
+  assert.deepEqual(earthDefinition.materials.map(track => track.id), ["atmosphere"]);
+  assert.ok(earthDefinition.variants.every(variant => !Object.hasOwn(variant.when, "atmosphere")));
+  assert.ok(earthDefinition.assets.entries.every(entry => !entry.url.includes("earth-lighting-")));
+  assert.ok(!earthDefinition.assets.startup.includes("shadowless:lighting"));
+});
 // Only native image completion and DOM setters are controlled by these tests.
 interface ImageJob { url: string; image: ControlledImage; resolve(): void; reject(error: unknown): void; done: boolean; }
 class ControlledImage implements PreparedImage {
@@ -65,7 +71,7 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens, moti
   f.lifetime.onDispose(() => coordinator.destroy());
   let revision = 0, currentView: PreparedView | undefined;
   function view(row: number, withinRow = 0, silhouetteDiameter = 100): PreparedView {
-    const track = definition.materials[1], frame = 20 + row * 32 + withinRow;
+    const track = definition.materials[0], frame = 20 + row * 32 + withinRow;
     const z = frame / (track.frame.indices.length - 1) * 2 - 1;
     const direction: readonly [number, number, number] = [Math.sqrt(1 - z * z), 0, z];
     const next: PreparedView = { ...f.view, controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
@@ -90,7 +96,7 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens, moti
     view, currentView: (): PreparedView => { assert.ok(currentView); return currentView; }, initialReady, ready, resolveJobs,
     lens: (id: string) => coordinator.dispatch({ kind: "lens", id }),
     frameCount: () => presentation.observe().presentation.framePublications,
-    atmosphereTarget: () => created[definition.materials[1].target],
+    atmosphereTarget: () => created[definition.materials[0].target],
   };
 }
 

@@ -6207,216 +6207,6 @@
     },
     {
       "location": "public",
-      "filename": "earth-lighting-default.webp",
-      "bytes": 28840,
-      "sha256": "636e06ba4edeee83b7786820d5373b474a9c5d73dc65db31f1ed126f8d361410"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-default@2x.webp",
-      "bytes": 72900,
-      "sha256": "c49e250620cafee339304816d50b1721317858fee8d1f9c77cacb5f91b181689"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-00@2x.webp",
-      "bytes": 59174,
-      "sha256": "7ec78a9a8c290b8c5f63804b42fd68e37d68f235dd1fcb2f8d2657d6c2ae970e"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-01@2x.webp",
-      "bytes": 121652,
-      "sha256": "3e3388fbfdf25d221f7ced376fe104df4656123bdff8fc9d3d4b4b0408d99d29"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-02@2x.webp",
-      "bytes": 152020,
-      "sha256": "881d87d5522824f3c8bc46e4d1404c666f328d6c0cb026edb6de1005ad614296"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-03@2x.webp",
-      "bytes": 175868,
-      "sha256": "6ea64a4e1000e872ca9a46541fa6758b581515e8ed17c5a3c98980959bc8a425"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-04@2x.webp",
-      "bytes": 195616,
-      "sha256": "b618516df149ab2330117977fad7c5a3d36dd3e707ec74b314b35b1da8764a4e"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-05@2x.webp",
-      "bytes": 213564,
-      "sha256": "dd1d80f69d52c1b3f050462a55c765ce47d8d9c78f55458711ae5d94607781db"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-06@2x.webp",
-      "bytes": 227362,
-      "sha256": "5b842ce6aa64e02dcd8f40110f4578467935464efec38d992044b07f3fc3386f"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-07@2x.webp",
-      "bytes": 240626,
-      "sha256": "c1e0a5b7c829442a639874d68a796eb7af81670e43ede203d0545425defec6e6"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-08@2x.webp",
-      "bytes": 256618,
-      "sha256": "5f22fd938fe11ad1ed14b5de9b35224054a5d070c028fe13c7b9fc8537ed5ed6"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-09@2x.webp",
-      "bytes": 267496,
-      "sha256": "e4375d83b6543adf754a21e566069cb7586454b294a7734bbe7156e4fad137d9"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-10@2x.webp",
-      "bytes": 273946,
-      "sha256": "8169c6954a7461d34bbf9bd7a23ecc94c734c7573d537bf561f866040e7d6acb"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-11@2x.webp",
-      "bytes": 283450,
-      "sha256": "3ce2936d489f8a207bd2170915b0928d57a46bdac29ab264a6437f55ba328648"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-12@2x.webp",
-      "bytes": 286960,
-      "sha256": "1a893b7fbec54b9563fb8a215a54220cfda324c80c2b3798f0da8e33c5decdc7"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-13@2x.webp",
-      "bytes": 292730,
-      "sha256": "9ccaeaa9b4e44e58a86f20295fcacad5587aa6220ceed0b8b869597c9f2e8d0c"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-14@2x.webp",
-      "bytes": 295398,
-      "sha256": "974f05bc114400cd5db8c3c88b9e6f37df12ab12e05d8d7caf596fa0ea4bb07d"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-15@2x.webp",
-      "bytes": 292496,
-      "sha256": "09072f639532aac228e5f370b40d525060127e8e763531a9e907ab86fc4eab03"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-16@2x.webp",
-      "bytes": 288360,
-      "sha256": "6d9a6bfa6cb85f30169b21c2843b4dbbbe76f453e6aa035e3e937a71214cfb85"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-17@2x.webp",
-      "bytes": 296390,
-      "sha256": "ac4fc93f26fd323f38322d7c530aca4802d7da850d0175a809cdeaabbb4d86fd"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-18@2x.webp",
-      "bytes": 301858,
-      "sha256": "db2cd66aca796521a0cf194b14bfce18fa2ac686942d12ed733da8515f767551"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-19@2x.webp",
-      "bytes": 307480,
-      "sha256": "c892c618f95af8a79dc81cc18d9715616ea8a9bb58d06c636cafab8ed266c078"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-20@2x.webp",
-      "bytes": 312392,
-      "sha256": "91a0782113f312b89a18e25978b1b8023c89367ab3b6fa2c7970d7e6a432c09b"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-21@2x.webp",
-      "bytes": 317246,
-      "sha256": "bb41016e316829a963efe3790630a07437ee36fd57386b01d9c0f4e0b1c9248f"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-22@2x.webp",
-      "bytes": 321816,
-      "sha256": "24d56c24ffe6921cef662ff215062c8623864a82a273fcfbad6400db2da6978e"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-23@2x.webp",
-      "bytes": 326658,
-      "sha256": "1feec184352865e67801543c63d83f778df1c7ea6a2880e1bcbd736bfa71107f"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-24@2x.webp",
-      "bytes": 329078,
-      "sha256": "b3c339c20bc17df1f526312ba78127acdc380ba2b42c2615ba2f136a6abea8c8"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-25@2x.webp",
-      "bytes": 336306,
-      "sha256": "1a447b07b0f8c99d960d3208a581c156bbfcf0e634bbb2f7a0199b0a40087d7b"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-26@2x.webp",
-      "bytes": 344022,
-      "sha256": "dfe7e2c2f96bb12b9447e1ee47d6b528fbbae29d7303397eaaf0e77cfda933a2"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-27@2x.webp",
-      "bytes": 353010,
-      "sha256": "5213bb9cc8cf8417bccdfac92950fa78bbbccca283e69b8b7b9680437b40ec0e"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-28@2x.webp",
-      "bytes": 363570,
-      "sha256": "827fd6db8b07335ebf2828388df06f1bc8b4179e240cf182e8eb4f06adb3d2c8"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-29@2x.webp",
-      "bytes": 372656,
-      "sha256": "a13620b17c2ea388711b345c18ccb2b1cf5e66537d0cac2b848d5b286f5fb2e8"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-30@2x.webp",
-      "bytes": 388462,
-      "sha256": "835f975c4f81869f759a3bd685345dc04c5dbdfda29c5ddba4a69f7505be3959"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-row-31@2x.webp",
-      "bytes": 326192,
-      "sha256": "392ecc85aa4a8deb101b357ebd827319f0d4b823a4d78895b8ff94298f0ab142"
-    },
-    {
-      "location": "public",
-      "filename": "earth-lighting-shadowless@2x.webp",
-      "bytes": 13048,
-      "sha256": "1599a0496a4eeb6d0db74671d9835c997960c4be859d166b698010fa2e08b541"
-    },
-    {
-      "location": "public",
       "filename": "earth-night-lights-legend.png",
       "bytes": 1932,
       "sha256": "3a2e79ee42683af3e652b0ce460c3dc0bbf6b601e244ded4511bfff6aafb6bc4"
@@ -12683,7 +12473,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1394,
-      "sha256": "b21529a7d15851d843d52bdb0993a293cf6afdc4de5231907e61652f716fb40a"
+      "sha256": "8c91643de71ee020f8281d44e202da2997dc120d4d5a51099a4aaf6afeff6083"
     },
     {
       "location": "prepared",
@@ -12694,8 +12484,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3689,
-      "sha256": "57739aa9622869c60ffe4ee30b1250ab7608c689f8d85f15a3dda862e917110d"
+      "bytes": 3615,
+      "sha256": "693778757f52fcb47792a8baf50d717147d2aca8e144ad828e38cb403d833564"
     },
     {
       "location": "prepared",
@@ -12754,20 +12544,20 @@
     {
       "location": "prepared",
       "filename": "raster-assets.json",
-      "bytes": 56950,
-      "sha256": "5bd5d516eaeaf3cacac289fc219bdd8e58594a74b35da0602836b7f66b17f0ef"
+      "bytes": 53914,
+      "sha256": "72e012bcff4eeb02fda173d5ed220022ab79edaba47ea45ddd995a4428fcb20d"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 2678225,
-      "sha256": "0dea8ec2a857aed11f85602438b38e29bb529bb2da4076f4b60bc4699bbcf679"
+      "bytes": 2177041,
+      "sha256": "139f0c5ee731cb5769cfdd83ca5276d19ca03b8d7f10132aa26e16a55d048e7d"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1450437,
-      "sha256": "cb41861b60e2923d5872dd5a7ad8352fec1d3d110ebfc9470f8ad1cc67d3c376"
+      "bytes": 1330186,
+      "sha256": "398e5219c5e4633840d056a652fc5d194806ba0534eb875b0448074dcf2aebf3"
     },
     {
       "location": "prepared",
@@ -12789,6 +12579,12 @@
     },
     {
       "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2066,
+      "sha256": "cf86ea91d4643016145d0ffc0d3721d870c30b1424fa5c336384049dd8e040c7"
+    },
+    {
+      "location": "prepared",
       "filename": "texture-levels.json",
       "bytes": 1489520,
       "sha256": "6f2842ac37435e2087a7fb53c65816407316e51ad207edc4515b46eed9e39ab1"
@@ -12798,12 +12594,6 @@
       "filename": "world-navigation.json",
       "bytes": 1223,
       "sha256": "54b747e0d6e28f7d8036be91cb191947423958a016ee648669571840c1758406"
-    },
-    {
-      "location": "prepared",
-      "filename": "text.json",
-      "bytes": 2066,
-      "sha256": "cf86ea91d4643016145d0ffc0d3721d870c30b1424fa5c336384049dd8e040c7"
     }
   ]
 }
