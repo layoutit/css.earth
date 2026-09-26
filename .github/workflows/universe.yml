@@ -176,6 +176,7 @@ jobs:
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
           node --test "tools/ci/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+            tools/prepare/library-entries.test.mts \
             "src/platform/runtime-asset-*.test.mts"
 
   typecheck:
