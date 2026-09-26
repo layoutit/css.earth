@@ -13,7 +13,7 @@ export const cameraFields = {cameraModel: string, minimumControlPitchDegrees: nu
   orbitLineFade: optional(object({visibleBelowDiscHeightShare: number, hiddenAboveDiscHeightShare: number})),
   drag: optional(object({model: string}))};
 export const camera = object(cameraFields);
-/** A recipe's camera without the default angles, which preparation derives (src/platform/default-camera.mts). */
+/** A recipe's camera without the default angles, which preparation derives (`@cssearth/bake/objects/scene` default-camera). */
 export const DERIVED_CAMERA_ANGLE_FIELDS = ['defaultControlPitchDegrees', 'defaultControlYawDegrees', 'initialScenePitchDegrees',
   'materialReferenceControlPitchDegrees', 'materialReferenceControlYawDegrees'] as const;
 const {defaultControlPitchDegrees: _pitch, defaultControlYawDegrees: _yaw, initialScenePitchDegrees: _scenePitch,

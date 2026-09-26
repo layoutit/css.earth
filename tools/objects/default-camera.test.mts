@@ -2,15 +2,16 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
-import { LIT_DEFAULT_VIEW, LOPSIDED_COVERAGE, openingDirection, prepareDefaultCameraAngles, prepareFacingCameraAngles } from './default-camera.mts';
+import { LIT_DEFAULT_VIEW, LOPSIDED_COVERAGE, openingDirection, prepareDefaultCameraAngles, prepareFacingCameraAngles } from '@cssearth/bake/objects/scene';
 import { detectMissingCoverage, missingCoverageColor } from '@cssearth/bake/raster';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 const distance = (a: Vector3, b: Vector3) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 const point = (longitude: number, latitude: number) => { const l = longitude * Math.PI / 180, b = latitude * Math.PI / 180; return [Math.cos(b) * Math.cos(l), Math.cos(b) * Math.sin(l), Math.sin(b)] as unknown as Vector3; };
 
 test('the opening direction is the inverse of facing a direction', () => {
   for (const [id, target] of [['triton', point(-179, -16)], ['pluto', point(146.5, 43.2)], ['titania', point(10, 60)]] as const) {
-    assert.ok(distance(openingDirection(id, prepareFacingCameraAngles(id, target)), target) < 1e-12, id);
+    assert.ok(distance(openingDirection(solarGeometry, id, prepareFacingCameraAngles(solarGeometry, id, target)), target) < 1e-12, id);
   }
 });
 
@@ -19,17 +20,17 @@ test('a lopsided map turns the design tilt toward its data, on the south side wh
   // Triton's Voyager data centre lies south of the ecliptic; a map centre north of it keeps the northern tilt.
   for (const [id, centre, pitch] of [['triton', point(-179, -16), tilt], ['triton', point(-179, 60), -tilt]] as const) {
     const coverage = centre.map(value => value * 0.7) as unknown as Vector3;
-    const angles = prepareDefaultCameraAngles(id, { coverage });
+    const angles = prepareDefaultCameraAngles(solarGeometry, id, { coverage });
     assert.equal(angles.initialScenePitchDegrees, pitch, `${id} ${centre}`);
-    assert.equal(angles.defaultControlYawDegrees, prepareFacingCameraAngles(id, centre).defaultControlYawDegrees);
+    assert.equal(angles.defaultControlYawDegrees, prepareFacingCameraAngles(solarGeometry, id, centre).defaultControlYawDegrees);
   }
 });
 
 test('a map complete enough to have no data side keeps the design pose, and a photograph still outranks coverage', () => {
   const nearlyEven = point(131, -6).map(value => value * (LOPSIDED_COVERAGE - 0.01)) as unknown as Vector3;
-  assert.deepEqual(prepareDefaultCameraAngles('moon', { coverage: nearlyEven }), LIT_DEFAULT_VIEW);
+  assert.deepEqual(prepareDefaultCameraAngles(solarGeometry, 'moon', { coverage: nearlyEven }), LIT_DEFAULT_VIEW);
   const photograph = point(146.5, 43.2);
-  assert.deepEqual(prepareDefaultCameraAngles('pluto', { observation: [photograph], coverage: point(-30, -10) }), prepareFacingCameraAngles('pluto', photograph));
+  assert.deepEqual(prepareDefaultCameraAngles(solarGeometry, 'pluto', { observation: [photograph], coverage: point(-30, -10) }), prepareFacingCameraAngles(solarGeometry, 'pluto', photograph));
 });
 
 test('the painted gap is found in a noisy copy, and a gray surface of the same tone is not', () => {

@@ -1,6 +1,6 @@
 import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
-import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
-import { requireBodyFixedSunDirection, requireBodyFixedToIcrf } from "./solar-geometry.mts";
+import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.ts";
+import type { SolarGeometry } from "./solar-geometry.ts";
 
 // Where every prepared object's camera opens. Nothing here is authored per object: the ecliptic presentation frame puts
 // ecliptic north up and the Sun to the left at zero yaw, so a lit body opens on that frame's design pose, and a body with
@@ -15,18 +15,18 @@ export interface ObserverPoint { readonly observerWestLongitude: number; readonl
 
 /** The yaw and scene pitch that put `target`, a body-fixed direction, at the centre of the default view. The scene matrix is
  * CSS rotateX(pitch) · rotateY(yaw) applied to presentation directions, and the viewer lies along CSS +z. */
-export function prepareFacingCameraAngles(bodyId: string, target: Vector3): DefaultCameraAngles {
+export function prepareFacingCameraAngles(geometry: SolarGeometry, bodyId: string, target: Vector3): DefaultCameraAngles {
   const length = Math.hypot(...target);
   if (!(length > 0) || !target.every(Number.isFinite)) throw new TypeError(`${bodyId}: a default camera target needs a direction.`);
-  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(target.map(value => value / length));
+  const [x, y, z] = prepareEclipticPresentationFrame(geometry, bodyId).toPresentation(target.map(value => value / length));
   return Object.freeze({ defaultControlYawDegrees: Math.atan2(-x, z) * 180 / Math.PI, initialScenePitchDegrees: Math.atan2(y, Math.hypot(x, z)) * 180 / Math.PI });
 }
 
 /** The body-fixed direction at the centre of a default view: the inverse of `prepareFacingCameraAngles`. */
-export function openingDirection(bodyId: string, { initialScenePitchDegrees, defaultControlYawDegrees }: DefaultCameraAngles): Vector3 {
+export function openingDirection(geometry: SolarGeometry, bodyId: string, { initialScenePitchDegrees, defaultControlYawDegrees }: DefaultCameraAngles): Vector3 {
   const yaw = defaultControlYawDegrees * Math.PI / 180, pitch = initialScenePitchDegrees * Math.PI / 180;
   const presentation = [-Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch)];
-  const [xAxis, yAxis, zAxis] = prepareEclipticPresentationFrame(bodyId).basis;
+  const [xAxis, yAxis, zAxis] = prepareEclipticPresentationFrame(geometry, bodyId).basis;
   return [0, 1, 2].map(axis => presentation[0]! * xAxis![axis]! + presentation[1]! * yAxis![axis]! + presentation[2]! * zAxis![axis]!);
 }
 
@@ -92,13 +92,13 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
  *   LOPSIDED_COVERAGE long): the design pose's tilt, turned to face the centre of that data, and on the south side of the
  *   ecliptic when that centre is south of it;
  * - any other body: the lit design pose. */
-export function prepareDefaultCameraAngles(bodyId: string, { observation, light = 'sun', coverage }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host'; coverage?: Vector3 } = {}): DefaultCameraAngles {
-  if (observation?.length) return prepareFacingCameraAngles(bodyId, observationCentroid(bodyId, observation));
-  if (light === 'host') return prepareFacingCameraAngles(bodyId, [1, 0, 0]);
-  if (light === 'self') return prepareFacingCameraAngles(bodyId, requireBodyFixedSunDirection(bodyId));
+export function prepareDefaultCameraAngles(geometry: SolarGeometry, bodyId: string, { observation, light = 'sun', coverage }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host'; coverage?: Vector3 } = {}): DefaultCameraAngles {
+  if (observation?.length) return prepareFacingCameraAngles(geometry, bodyId, observationCentroid(bodyId, observation));
+  if (light === 'host') return prepareFacingCameraAngles(geometry, bodyId, [1, 0, 0]);
+  if (light === 'self') return prepareFacingCameraAngles(geometry, bodyId, geometry.requireBodyFixedSunDirection(bodyId));
   if (coverage && Math.hypot(...coverage) >= LOPSIDED_COVERAGE) {
     // The design tilt, taken on the south side of the ecliptic when the data centre lies south of it.
-    const facing = prepareFacingCameraAngles(bodyId, coverage), tilt = Math.abs(LIT_DEFAULT_VIEW.initialScenePitchDegrees);
+    const facing = prepareFacingCameraAngles(geometry, bodyId, coverage), tilt = Math.abs(LIT_DEFAULT_VIEW.initialScenePitchDegrees);
     return Object.freeze({ initialScenePitchDegrees: facing.initialScenePitchDegrees > 0 ? tilt : -tilt, defaultControlYawDegrees: facing.defaultControlYawDegrees });
   }
   return LIT_DEFAULT_VIEW;
@@ -107,21 +107,21 @@ export function prepareDefaultCameraAngles(bodyId: string, { observation, light 
 /** Default camera angles are derived here; a recipe that still states them is stale and would silently disagree. */
 export function refuseAuthoredCameraAngles(source: object) {
   for (const key of ["initialScenePitchDegrees", "defaultControlYawDegrees"]) {
-    if (Object.hasOwn(source, key)) throw new TypeError(`${key} is derived at preparation (src/platform/default-camera.mts), not authored.`);
+    if (Object.hasOwn(source, key)) throw new TypeError(`${key} is derived at preparation (@cssearth/bake/objects/scene default-camera), not authored.`);
   }
 }
 
 /** Counterclockwise screen angle (from screen-right, y up) at which celestial north on the sky, as Earth sees the body, lies in
  * the default view. Earth's line of sight is taken along the Sun direction, as the scene places Earth. A sky-plane image
  * turned by this angle minus 90 degrees keeps its north where the scene's sky has it. */
-export function prepareSkyNorthScreenAngleDegrees(bodyId: string, angles: DefaultCameraAngles): number {
-  const B = requireBodyFixedToIcrf(bodyId), sun = requireBodyFixedSunDirection(bodyId);
+export function prepareSkyNorthScreenAngleDegrees(geometry: SolarGeometry, bodyId: string, angles: DefaultCameraAngles): number {
+  const B = geometry.requireBodyFixedToIcrf(bodyId), sun = geometry.requireBodyFixedSunDirection(bodyId);
   const toIcrf = (v: readonly number[]) => [0, 1, 2].map(row => B[3 * row]! * v[0]! + B[3 * row + 1]! * v[1]! + B[3 * row + 2]! * v[2]!);
   const toBody = (v: readonly number[]) => [0, 1, 2].map(column => B[column]! * v[0]! + B[3 + column]! * v[1]! + B[6 + column]! * v[2]!);
   const sight = toIcrf(sun).map(value => -value), along = sight[2]!;
   const north = [0 - along * sight[0]!, 0 - along * sight[1]!, 1 - along * sight[2]!], length = Math.hypot(...north);
   if (!(length > 1e-9)) throw new TypeError(`${bodyId}: celestial north has no direction on a sky seen along the pole.`);
-  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(toBody(north.map(value => value / length)));
+  const [x, y, z] = prepareEclipticPresentationFrame(geometry, bodyId).toPresentation(toBody(north.map(value => value / length)));
   const yaw = angles.defaultControlYawDegrees * Math.PI / 180, pitch = angles.initialScenePitchDegrees * Math.PI / 180;
   // rotateY(yaw), then rotateX(pitch), as the scene matrix applies them.
   const yawedX = Math.cos(yaw) * x! + Math.sin(yaw) * z!, yawedZ = -Math.sin(yaw) * x! + Math.cos(yaw) * z!;

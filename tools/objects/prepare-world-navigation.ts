@@ -8,7 +8,8 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from './authored-sources.js';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
 import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement } from './world-navigation-sources.js';
-import { preparePhysicalWorldFrame, transform, transpose, type Matrix3, type Vector3 } from '@cssearth/bake/objects/scene';
+import { LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame,
+  prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3 } from '@cssearth/bake/objects/scene';
 import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
 
 type Input = Record<string, any>;
@@ -28,10 +29,10 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
       frame: context.frame, model: 'authored-context-focus' } };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
-  const presentation = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-presentation-frame.mts')).href) as Input;
-  const direction = await import(pathToFileURL(resolve(projectRoot, 'src/platform/prepare-sun-view-direction.mts')).href) as Input;
-  const ecliptic = presentation.prepareEclipticPresentationFrame(descriptor.id);
-  const intended = ecliptic.basis.flat() as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
+  // The generated module satisfies the frame preparers' contract as it is.
+  const geometry = solar as SolarGeometry;
+  const ecliptic = prepareEclipticPresentationFrame(geometry, descriptor.id);
+  const intended = ecliptic.basis.flat() as unknown as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
   assertAtlasOrigins(descriptor.id, sources.get('raster'), placement);
   // The body is drawn in its ecliptic presentation frame: the outermost mesh node is solved through whatever the lane placed below it.
   const solved = eclipticLane(sources) ? solveSystemTransform(definition, descriptor.id, placement, intended) : null;
@@ -57,7 +58,6 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, pagedSurfaceArcPerCssPixel(sources.get('paged-ellipsoid')));
   // The default camera has one owner: this stage derives it and rewrites every prepared value computed from it, so a rule change
   // re-runs this stage, not the lanes.
-  const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');
   const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
   const terrestrial = sources.get('terrestrial');
   // A flyby body without photograph frames faces the side its spacecraft approached (@cssearth/spice `spacecraftApproach`),
@@ -69,16 +69,16 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     const recipe = spice.parseApproachRecipe(approachSource, `${descriptor.id} approach`);
     return spice.spacecraftApproach(await loadKernelSet(await banks.kernelBankPaths(recipe.kernelSet, recipe.kernels)), recipe).direction;
   };
-  const observation = terrestrial ? cameraModule.photographDirections(descriptor.id, terrestrial, surfacesReport)
+  const observation = terrestrial ? photographDirections(descriptor.id, terrestrial, surfacesReport)
     : approachSource ? [await approachDirection()] : undefined;
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
   const coverageModule = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/default-view/lens-coverage.mts')).href) as typeof import('./default-view/lens-coverage.mts');
   const coverage = !observation?.length && light === 'sun' ? await coverageModule.readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
-  const angles = cameraModule.prepareDefaultCameraAngles(descriptor.id, { observation, light, coverage: coverage && coverageModule.coverageDirection(coverage) });
+  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light, coverage: coverage && coverageModule.coverageDirection(coverage) });
   if (coverage) {
-    const shown = coverageModule.visibleCoverageShare(coverage, cameraModule.openingDirection(descriptor.id, angles));
-    const design = coverageModule.visibleCoverageShare(coverage, cameraModule.openingDirection(descriptor.id, cameraModule.LIT_DEFAULT_VIEW));
+    const shown = coverageModule.visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, angles));
+    const design = coverageModule.visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, LIT_DEFAULT_VIEW));
     if (shown < design) throw new Error(`${descriptor.id}: the default camera (yaw ${angles.defaultControlYawDegrees.toFixed(1)}) shows ${(shown * 100).toFixed(1)}% of the ${coverage.lens} map's data, less than the design pose's ${(design * 100).toFixed(1)}%.`);
   }
   // Only a solved lane takes the derived pose; a typed lane keeps the camera its own bakes were made for.
@@ -93,7 +93,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   // stage records; the frame origin above still places the body from the Sun.
   const localDirection = transform(bodyToPresentation, (solar.bodyFixedStarDirection(descriptor.id) ?? bodySun) as Vector3);
   const sun = oriented.sun ? { ...oriented.sun, localDirection,
-    referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
+    referenceViewDirection: prepareSunReferenceViewDirection(geometry, { bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
   const prepared = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });

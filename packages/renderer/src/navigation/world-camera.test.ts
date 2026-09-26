@@ -6,11 +6,21 @@ import mercuryDefinition from "../../../../src/objects/mercury/prepared/runtime.
 import venusDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 import mercurySolar from "../../../../src/objects/mercury/source/presentation/solar-system.json" with {type: "json"};
 import venusSolar from "../../../../src/objects/venus/source/presentation/solar-system.json" with {type: "json"};
-import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar-presentation-frame.mts';
-import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
+import { cross3 } from '@cssearth/core';
+import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
   BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../../src/platform/solar-geometry.mts';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
+
+/** The ecliptic presentation basis preparation derives (`@cssearth/bake/objects/scene`, which the renderer never imports): screen
+ * left is the Sun projected onto the ecliptic plane, screen up is ecliptic north, and the third axis is their right-handed cross. */
+function eclipticPresentationBasis(id: 'mercury' | 'venus'): readonly (readonly number[])[] {
+  const sun = BODY_FIXED_SUN_DIRECTIONS[id], north = BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS[id];
+  const along = sun[0] * north[0] + sun[1] * north[1] + sun[2] * north[2];
+  const inPlane = [0, 1, 2].map(axis => sun[axis] - north[axis] * along), length = Math.hypot(...inPlane);
+  const xAxis = inPlane.map(value => value / length).map(value => value * -1);
+  return [xAxis, north.map(value => value * -1), cross3(xAxis, north)];
+}
 
 // Independent oracle: checked-in ephemerides, the real preparation basis and the authored body radii,
 // without importing the new shared frame preparer or transport's matrix helpers. The solved system node
@@ -18,7 +28,7 @@ import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-came
 // axis swap is applied here.
 function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: number): PreparedWorldCameraFrame {
   const bodyFixedToIcrf = BODY_FIXED_TO_ICRF_MATRICES[id];
-  const basis = prepareEclipticPresentationFrame(id).basis;
+  const basis = eclipticPresentationBasis(id);
   const directionToIcrf = (vector: readonly number[]) => [0, 1, 2].map(row =>
     [0, 1, 2].reduce((sum, column) => sum + bodyFixedToIcrf[row * 3 + column] * vector[column], 0));
   const origin = directionToIcrf(BODY_FIXED_SUN_DIRECTIONS[id]);

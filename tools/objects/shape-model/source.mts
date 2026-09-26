@@ -1,4 +1,4 @@
-import {refuseAuthoredCameraAngles} from '../../../src/platform/default-camera.mts';
+import {refuseAuthoredCameraAngles} from '@cssearth/bake/objects/scene';
 import {shape,text,number,optional,array,requireRecord} from '@cssearth/core';
 export const parseShapeModelConfig=shape({schema:text,displayName:text,displayRadius:number,quadBudget:number,
   mesh:shape({latitudeSegments:number,longitudeSegments:number,width:number,height:number,poleSize:number,seamOverlap:number}),

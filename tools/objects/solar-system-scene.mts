@@ -9,10 +9,7 @@ interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'ini
 // Shared preparation of the physical camera and its sky/body reference frame.
 // Geometry stays in the existing preparers; object facts enter through config.
 import { buildPolyCameraSceneTransform } from "@layoutit/polycss";
-import { prepareEclipticPresentationFrame } from "../../src/platform/solar-presentation-frame.mts";
-import { LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from "../../src/platform/default-camera.mts";
-import { prepareAstrometricSkySceneRegistration } from "../../src/platform/astrometric-sky-registration.mts";
-import { prepareSunReferenceViewDirection } from "../../src/platform/prepare-sun-view-direction.mts";
+import { prepareEclipticPresentationFrame, LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles, prepareAstrometricSkySceneRegistration, prepareSunReferenceViewDirection } from "@cssearth/bake/objects/scene";
 import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from "../../src/platform/directional-sun-contract.mts";
 import {
@@ -20,6 +17,7 @@ import {
   SOLAR_GEOMETRY_EPOCH_LABEL, bodyFixedStarDirection, requireBodyFixedSunDirection,
   requireBodyFixedToIcrf, requireBodyOrbit,
 } from "../../src/platform/solar-geometry.mts";
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 const RESPONSIVE_FIT = Object.freeze({
   model: "continuous-aspect-smoothstep", portraitBaseWidthShare: 0.34,
@@ -76,7 +74,7 @@ export function prepareSolarSystemSunPresentation(source:{bodyId:string;displayN
   refuseAuthoredCameraAngles(source);
   const { bodyId, displayName } = source;
   if (typeof displayName !== "string" || !displayName.trim()) throw new TypeError("Sun presentation needs the observer's display name.");
-  const frame = prepareEclipticPresentationFrame(bodyId);
+  const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
   // A planet of another star is lit by that star, whose direction its synchronous rotation holds at longitude 0. Every body
   // the Sun lights keeps the Sun's own direction; the presentation frame itself is unchanged either way.
   const star = bodyFixedStarDirection(bodyId);
@@ -97,8 +95,8 @@ export function prepareSolarSystemSunPresentation(source:{bodyId:string;displayN
         "zero yaw) and in view space at the default camera pose.",
     bodyFixedDirection,
     presentationFrame: frame.model, localDirection,
-    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId,
-      ...prepareDefaultCameraAngles(bodyId, { light: star ? 'host' : 'sun' }), sceneDirection: localDirection }),
+    referenceViewDirection: prepareSunReferenceViewDirection(solarGeometry, { bodyId,
+      ...prepareDefaultCameraAngles(solarGeometry, bodyId, { light: star ? 'host' : 'sun' }), sceneDirection: localDirection }),
   });
 }
 
@@ -111,9 +109,9 @@ function unitVector(direction: readonly number[]): Vector3 {
 export async function prepareSolarSystemScene(options:SolarSceneOptions) {
   refuseAuthoredCameraAngles(options);
   const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1, light = 'sun' } = options;
-  const frame = prepareEclipticPresentationFrame(bodyId);
-  const { initialScenePitchDegrees, defaultControlYawDegrees } = prepareDefaultCameraAngles(bodyId, { light });
-  const registration = prepareAstrometricSkySceneRegistration(bodyId);
+  const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
+  const { initialScenePitchDegrees, defaultControlYawDegrees } = prepareDefaultCameraAngles(solarGeometry, bodyId, { light });
+  const registration = prepareAstrometricSkySceneRegistration(solarGeometry, bodyId);
   if(!starfield.projection)throw new TypeError("Physical sky requires its prepared projection.");
   const camera = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale,
     initialScenePitchDegrees, defaultControlYawDegrees, skyProjection: {...starfield.projection,focalLengthOverViewportWidth:requireFiniteNumber(starfield.projection.focalLengthOverViewportWidth)} });

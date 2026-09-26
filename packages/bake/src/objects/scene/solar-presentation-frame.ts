@@ -1,5 +1,6 @@
 import { cross3 as cross } from '@cssearth/core';
 import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { SolarGeometry } from "./solar-geometry.ts";
 // Builds the ecliptic presentation frame of a body: where each body-fixed direction (+Z north pole, +X prime meridian)
 // lands in the CSS scene the retained camera orbits (+x right, +y down, +z toward the viewer). Prepared once per body
 // from the checked-in solar geometry; the runtime only transports the resulting matrices.
@@ -16,14 +17,9 @@ import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts"
 // Y/X, map left edge at longitude 0, no spin phase below it). The world-navigation stage solves the exact node
 // transform from the drawn chain of every body and refuses a drawn frame that differs from `basis`.
 
-import {
-  requireBodyFixedEclipticNorth,
-  requireBodyFixedSunDirection,
-} from "./solar-geometry.mts";
-
-export function prepareEclipticPresentationFrame(bodyId: string) {
-  const sun = requireBodyFixedSunDirection(bodyId);
-  const north = requireBodyFixedEclipticNorth(bodyId);
+export function prepareEclipticPresentationFrame(geometry: SolarGeometry, bodyId: string) {
+  const sun = geometry.requireBodyFixedSunDirection(bodyId);
+  const north = geometry.requireBodyFixedEclipticNorth(bodyId);
   const sunInPlane = normalize(subtract(sun, scale(north, dot(sun, north))));
   // Presentation axes expressed in the body-fixed frame.
   const xAxis = scale(sunInPlane, -1);

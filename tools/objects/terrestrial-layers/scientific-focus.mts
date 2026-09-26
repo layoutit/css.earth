@@ -1,6 +1,7 @@
 import {parseScientificFocus,parseScientificCamera} from '@cssearth/bake/objects/raster';
-import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
+import {prepareEclipticPresentationFrame} from '@cssearth/bake/objects/scene';
 import {preparedControlPitch} from '@cssearth/engine';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 /** A geographic target is a body-fixed direction; the ecliptic presentation frame is where the drawn body puts it (the
  * world-navigation stage solves the carrier so that holds). The runtime receives only the existing camera destination contract. */
@@ -14,7 +15,7 @@ export function prepareScientificFocus(bodyId: string, value: unknown, cameraVal
   }
   const lon=focus.longitudeDegrees*Math.PI/180, lat=focus.latitudeDegrees*Math.PI/180;
   const local=[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)];
-  const [x,y,z]=prepareEclipticPresentationFrame(bodyId).toPresentation(local);
+  const [x,y,z]=prepareEclipticPresentationFrame(solarGeometry, bodyId).toPresentation(local);
   const pitch=Math.atan2(y,Math.hypot(x,z))*180/Math.PI;
   return {controlPitch:preparedControlPitch(pitch,camera),
     controlYaw:Math.atan2(-x,z)*180/Math.PI,zoom:focus.zoom};

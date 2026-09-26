@@ -117,7 +117,7 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
 test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
   const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
   const { restoreDepthSource } = await import('../prepared/prepared-depth-partitions.mts');
-  const { prepareEclipticPresentationFrame } = await import('../../src/platform/solar-presentation-frame.mts');
+  const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json'));
   const scene = parseSolidReplayScene(await read('prepared/scene.json')),
@@ -129,7 +129,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   assert.equal(Reflect.set(requireSnapshot(definition.tree.nodes[index], 'Mimas system carrier'), 'style', `transform:${oldTransform}`), true);
   const surfacesReport = await read('prepared/surfaces.json');
   const result = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport });
-  assert.equal(result.scene.systemTransform, prepareEclipticPresentationFrame('mimas').cssTransform);
+  assert.equal(result.scene.systemTransform, prepareEclipticPresentationFrame(geometry, 'mimas').cssTransform);
   assert.notEqual(result.scene.systemTransform, oldTransform);
   assert.equal(requireSnapshot(result.definition.tree.nodes[index], 'refreshed Mimas system carrier').style, `transform:${result.scene.systemTransform}`);
   assert.equal(result.scene.bodyLeaves, scene.bodyLeaves);
