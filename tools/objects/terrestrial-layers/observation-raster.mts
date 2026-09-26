@@ -5,7 +5,7 @@ import { parseDimensions } from './source-records.mts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
-import { blackFillCoverage, sampleCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { blackFillCoverage, sampleCoverage } from '@cssearth/bake/raster';
 import { prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation } from './observed-geotiff.mts';
 import { preparePdsRgbObservation } from './observed-pds-rgb.mts';
 import { prepareByteObservation } from './observed-image.mts';

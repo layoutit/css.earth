@@ -1,4 +1,4 @@
-/** Bake the shared lighting banks (src/preparation/raster/lighting-banks.ts) into `public/lighting/<bank>/`, or check the
+/** Bake the shared lighting banks (packages/bake/src/raster/lighting-banks.ts) into `public/lighting/<bank>/`, or check the
  * tracked files against a fresh bake.
  *
  *   node tools/objects/dist/prepare-lighting-bank.js [--check] [<bank>...]
@@ -10,9 +10,8 @@ import { mkdir, mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import type { RasterRecipe } from '../../src/preparation/raster/config.js';
-import { LIGHTING_BANKS, LIGHTING_BANK_ROOT } from '../../src/preparation/raster/lighting-banks.js';
-import { prepareLighting } from '../../src/renderers/css/preparation/materials/lighting.js';
+import type { RasterRecipe } from '@cssearth/bake/raster';
+import { LIGHTING_BANKS, LIGHTING_BANK_ROOT, prepareLighting } from '@cssearth/bake/raster';
 
 /** Encode bank `id` into `directory`: its rows and billboard. The presentation fields only shape the returned JSON, which a
  * bank has no use for; the bytes come from the bank's own fields. */

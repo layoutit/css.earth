@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parsePhotometricModelRecord, parsePhotometryReference, PHOTOMETRIC_MODEL_SCHEMA } from './model-record.mts';
-import { createNormalization } from './normalization.mts';
+import { parsePhotometricModelRecord, parsePhotometryReference, PHOTOMETRIC_MODEL_SCHEMA, createNormalization } from '@cssearth/bake/photometry';
 
 const hapkeRecord = {
   schema: PHOTOMETRIC_MODEL_SCHEMA, id: 'example-hapke', instrument: 'Example camera', filter: 'clear', quantity: 'radiance-factor',

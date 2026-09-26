@@ -1,6 +1,6 @@
-import type { LightingRecipe, RasterRecipe } from './config.js';
-import { resolveLightingRecipe } from './lighting-banks.js';
-import { parseLimbBlock } from '../../../tools/photometry/limb.mts';
+import type { LightingRecipe, RasterRecipe } from './config.ts';
+import { resolveLightingRecipe } from './lighting-banks.ts';
+import { parseLimbBlock } from '../photometry/index.ts';
 type RecordValue = Record<string, unknown>;
 function record(value: unknown, path: string): RecordValue { if (typeof value !== 'object' || value === null || Array.isArray(value))
     throw new TypeError(`${path} must be an object.`); return value as RecordValue; }
@@ -51,7 +51,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         throw new TypeError('surfaceMetadata.sourcePositionVariable is gone: leaves write their texture address inline.');
     const thumbnail = record(recipe.thumbnail, 'thumbnail');
     fields(thumbnail, ['size'], 'thumbnail', true);
-    if ('quality' in thumbnail) throw new TypeError('thumbnail.quality is no longer read; thumbnails are encoded in the lossy lane (src/preparation/raster/lossy-lane.ts). Remove it from raster.json.');
+    if ('quality' in thumbnail) throw new TypeError('thumbnail.quality is no longer read; thumbnails are encoded in the lossy lane (packages/bake/src/raster/lossy-lane.ts). Remove it from raster.json.');
     if (thumbnail.centerLongitudeDegrees !== undefined && !(typeof thumbnail.centerLongitudeDegrees === 'number' && Number.isFinite(thumbnail.centerLongitudeDegrees))) throw new TypeError('thumbnail.centerLongitudeDegrees must be a finite number.');
     if (thumbnail.crop !== undefined) {
         const crop = record(thumbnail.crop, 'thumbnail.crop');

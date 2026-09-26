@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""USGS ISIS3 as the oracle for tools/photometry: the truth files of ISIS's photometric
+"""USGS ISIS3 as the oracle for @cssearth/bake/photometry: the truth files of ISIS's photometric
 model unit tests, fetched at a pinned commit, parsed into parameters, geometries and the
 values ISIS printed. The values come from ISIS's own implementation (Hapke.cpp and the
 disk functions); nothing here recomputes them.

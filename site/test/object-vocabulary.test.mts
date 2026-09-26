@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 // "planet" names a planet. The shell, the runtime and the tools that serve every object say object, as OBJECTS and
 // the object adapter do; the eight planet ids are only a reporting filter. Science code about planets lies outside.
 const root = resolve(import.meta.dirname, '../..');
-const SERVES_EVERY_OBJECT = ['site', 'src/platform', 'src/navigation', 'src/renderers', 'packages/renderer', 'src/preparation', 'src/styles',
+const SERVES_EVERY_OBJECT = ['site', 'src/platform', 'src/navigation', 'src/renderers', 'packages/renderer', 'src/preparation', 'packages/bake/src/raster', 'src/styles',
   'tools/cli', 'tools/prepare', 'tools/assets', 'tools/contract', 'tools/sources', 'tools/ci', 'atlas'];
 const SCIENCE_TERM = /exoplanet|planetar|dwarf.?planet|hosted.?planet|minor.?planet/iu;
 /** Names in those directories that do mean planets, and why. */

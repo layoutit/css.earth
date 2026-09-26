@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
+import { writeLossyWebp } from '@cssearth/bake/raster';
 import {parse} from '@cssearth/core/schema';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.mts';
 import type {Channels, OutputInfo} from 'sharp';

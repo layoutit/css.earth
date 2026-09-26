@@ -1,13 +1,13 @@
 import sharp, { type Sharp } from 'sharp';
 import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
-import { RASTER_DENSITY, type RasterRecipe } from './config.js';
-import { raster, readRgba, assetPath } from './io.js';
-import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.js';
-import { composeLimbPreview } from './emission-preview.js';
-import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.js';
-import { missingCoverageColor } from '../../platform/prepare-missing-coverage.mts';
-import { RASTER_LEVEL_FACTORS, rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.js';
+import { RASTER_DENSITY, type RasterRecipe } from './config.ts';
+import { raster, readRgba, assetPath } from './io.ts';
+import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.ts';
+import { composeLimbPreview } from './emission-preview.ts';
+import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.ts';
+import { missingCoverageColor } from './missing-coverage.ts';
+import { RASTER_LEVEL_FACTORS, rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.ts';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
 /** Sample the original image in the exact normalized 2:1 domain used by the established `fit: 'fill'` resize.

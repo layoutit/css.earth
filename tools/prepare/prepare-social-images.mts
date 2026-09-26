@@ -7,7 +7,7 @@ import sharp from "sharp";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { previewSite } from "../cli/preview.mts";
 import { inventoriedObjectIds } from "../assets/runtime-assets.mts";
-import { writeLossyWebp } from "../../src/preparation/raster/lossy-lane.ts";
+import { writeLossyWebp } from "@cssearth/bake/raster";
 
 // Plain captures of the built CSS scenes: no added artwork, text, or branding.
 // Card captures use the shared sidebar background and omit the surrounding sky.

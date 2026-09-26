@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import pixelmatch from 'pixelmatch';
 import { stat } from 'node:fs/promises';
 import { basename } from 'node:path';
-import { LOSSY_WEBP } from '../../src/preparation/raster/lossy-lane.ts';
+import { LOSSY_WEBP } from '@cssearth/bake/raster';
 
 const qualities = [LOSSY_WEBP.quality - 5, LOSSY_WEBP.quality, LOSSY_WEBP.quality + 5];
 const files = process.argv.slice(2);

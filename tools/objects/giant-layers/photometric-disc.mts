@@ -3,7 +3,7 @@ import {parse} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.mts';
 import type {MaterialAsset} from './material-contract.mts';
 import type {OverlayOptions} from 'sharp';
-import {loadLimbLaw,limbFactors,limbOverlay,meanObservedColour,outsideSilhouette,parseLimbBlock,scatteringAngles,type Channels,type LimbLaw} from '../../photometry/limb.mts';
+import {loadLimbLaw,limbFactors,limbOverlay,meanObservedColour,outsideSilhouette,parseLimbBlock,scatteringAngles,type Channels,type LimbLaw} from '@cssearth/bake/photometry';
 /** A recipe with its published models loaded and the overlay's reference colour measured from the colour map. */
 export type ResolvedPhotometricRecipe = PhotometricRecipe & {law: LimbLaw; reference: Channels<number>};
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -42,7 +42,7 @@ export function phaseLightDirection(z: number,reference: readonly number[]):[num
 
 /**
  * One view-aligned overlay of the oblate disc for a light phase: the body's published photometric models relative to
- * the flood-lit disc centre (tools/photometry/limb.mts), as one source-over colour and alpha per pixel.
+ * the flood-lit disc centre (packages/bake/src/photometry/limb.ts), as one source-over colour and alpha per pixel.
  */
 export function rasterPhotometricDisc(config: ResolvedPhotometricRecipe,lightViewZ: number,{shadowless=false}: {shadowless?: boolean}={}){
   if(!Number.isFinite(lightViewZ)||lightViewZ<-1||lightViewZ>1)throw new TypeError(`Light phase must be within [-1, 1], got ${lightViewZ}.`);

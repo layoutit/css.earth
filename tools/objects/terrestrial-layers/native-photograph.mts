@@ -1,9 +1,8 @@
 import { sha256 } from '@cssearth/core/node';
-import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
+import { writeLossyWebp, missingCoverageColor } from '@cssearth/bake/raster';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import type { PreparedTriangle } from './contracts.mts';
 import { BASE_TILE } from '@layoutit/polycss';
 import { loadNativePhotograph } from './native-photograph-source.mts';
@@ -15,7 +14,7 @@ export function parseNativePhotographicSampling(value: unknown): NativePhotograp
   const record = requireRecord(value);
   const samplesPerAxis = requireFiniteNumber(record.samplesPerAxis);
   if (![1, 2, 3, 4].includes(samplesPerAxis)) throw new TypeError(`Native photographic sampling requires 1–4 samples per axis; got ${samplesPerAxis}.`);
-  if ('quality' in record) throw new TypeError('nativePhotographicSampling.quality is no longer read; its files are encoded in the lossy lane (src/preparation/raster/lossy-lane.ts). Remove it from the recipe.');
+  if ('quality' in record) throw new TypeError('nativePhotographicSampling.quality is no longer read; its files are encoded in the lossy lane (packages/bake/src/raster/lossy-lane.ts). Remove it from the recipe.');
   return {samplesPerAxis};
 }
 

@@ -1,4 +1,4 @@
-import type { LightingRecipe } from './config.js';
+import type { LightingRecipe } from './config.ts';
 
 /**
  * Shared lighting banks: the pixel-determining fields of a lighting recipe that many bodies draw the same. A body's raster

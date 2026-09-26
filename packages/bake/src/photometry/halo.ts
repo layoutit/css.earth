@@ -8,7 +8,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { Channels } from './limb.mts';
+import type { Channels } from './limb.ts';
 
 export const PSG_LIMB_TABLE_SCHEMA = 'cssearth-psg-limb-table@1';
 

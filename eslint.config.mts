@@ -77,6 +77,18 @@ export default [
     },
   },
   {
+    // The raster lane reads prepared-asset constants the renderer owns (`@cssearth/renderer/rendering/*`); build-time code may
+    // import the runtime package, never the reverse. Other topics stay on the rule above.
+    files: ['packages/bake/src/raster/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**', '@cssearth/bake', '@cssearth/bake/*'],
+          message: 'Bake topics import packages and their own topic only, never the application or another topic.' }],
+      }],
+    },
+  },
+  {
     // `@cssearth/bake/volume` stays host-neutral (the nebula lab's browser viewer imports it); only `volume/node` may use
     // Node built-ins and sharp, and nothing else imports it.
     files: ['packages/bake/src/volume/**/*.ts'],

@@ -49,7 +49,7 @@ import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
-import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../photometry/limb.mts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { tieBandRatios } from '../terrestrial-layers/photometric-observations.mts';
 import type { BandRatioPolicy } from '../terrestrial-layers/contracts.mts';
@@ -131,7 +131,7 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   const PREPARED_RING_SOURCE = preparedInputs.ringSource;
   const PREPARED_RING_GROUPS = preparedInputs.ringGroups;
   const PREPARED_MAIN_RING_PLATES = preparedInputs.ringPlates;
-  // The globe's limb: the published photometric models of its map (tools/photometry/limb.mts). The overlay's reference
+  // The globe's limb: the published photometric models of its map (packages/bake/src/photometry/limb.ts). The overlay's reference
   // colour is measured from the prepared surface once it is written.
   const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
   let limbReference: Channels<number> | undefined;

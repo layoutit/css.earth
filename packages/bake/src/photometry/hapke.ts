@@ -1,4 +1,4 @@
-import { hapkeRoughness } from './roughness.mts';
+import { hapkeRoughness } from './roughness.ts';
 /**
  * The Hapke bidirectional reflectance model, configurable to the formulation a
  * published parameter set was fitted with. The isotropic multiple scattering

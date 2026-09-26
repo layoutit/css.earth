@@ -1,4 +1,4 @@
-import type { MissingCoverageStyle } from '../../../src/platform/prepare-missing-coverage.mts';
+import type { MissingCoverageStyle } from '@cssearth/bake/raster';
 import type { SourceInput, SourceEntry, SourceManifest } from '../../../src/platform/source-manifest.mts';
 /** Source-space geometry and numeric fields shared by preparation algorithms. */
 export interface MeshDimensions { metersPerUnit:number; expectedVertices:number; expectedFaces:number }

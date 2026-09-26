@@ -1,6 +1,5 @@
 import type {GeoFrame,DiskPhotometry,PhasePhotometry} from './contracts.mts';
-import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
-import { phaseGain as phaseFunctionGain } from '../../photometry/phase.mts';
+import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY, phaseGain as phaseFunctionGain } from '@cssearth/bake/photometry';
 import { pds3Keyword } from '@cssearth/telescope';
 import { dotN as dot } from '@cssearth/core';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO

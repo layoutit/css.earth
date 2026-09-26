@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { checkLightingBank } from './prepare-lighting-bank.js';
-import { LIGHTING_BANKS } from '../../src/preparation/raster/lighting-banks.js';
+import { LIGHTING_BANKS } from '@cssearth/bake/raster';
 
 const root = resolve(import.meta.dirname, '../..');
 

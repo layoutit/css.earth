@@ -6,17 +6,23 @@ reference geometry with a published photometric model, so photographs taken
 under different illumination can be joined and relit. Preparation runs it; the
 runtime never evaluates a model.
 
+The models and the limb laws are the `@cssearth/bake/photometry` entry
+([`packages/bake/src/photometry/`](../../packages/bake/src/photometry/)). This
+folder keeps the whole-disc colour policy, the commands that make records
+(`fit-epic-limb.mts`, `acquire-psg-limb-table.mts`) and the tests, which import
+the entry.
+
 ## Modules
 
 | Module | Owns |
 | --- | --- |
-| `disk.mts` | Lambert, Lommel-Seeliger, ISIS Lunar-Lambert and Minnaert disk functions. The arithmetic is the form each route used before this library, so migrated routes prepare byte-identical outputs. |
-| `phase.mts` | The Henyey-Greenstein phase term with shadow hiding that 67P used before its full model. |
-| `hapke.mts` | The Hapke model: the 1981 and 2002 H-function approximations, one- and two-term Henyey-Greenstein and Legendre particle phase functions, shadow hiding, coherent backscatter and porosity. |
-| `roughness.mts` | Hapke (1984) macroscopic roughness, step for step as ISIS computes it. |
-| `normalization.mts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |
-| `model-record.mts` | Reading and validating model records and the recipe block that names them. |
-| `whole-disc-colour.mts` | A planet's whole-disc colour record, computed once from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.mts`); `keepLuminance` then restores the map's untied mean luminance with a soft shoulder. |
+| `disk.ts` | Lambert, Lommel-Seeliger, ISIS Lunar-Lambert and Minnaert disk functions. The arithmetic is the form each route used before this library, so migrated routes prepare byte-identical outputs. |
+| `phase.ts` | The Henyey-Greenstein phase term with shadow hiding that 67P used before its full model. |
+| `hapke.ts` | The Hapke model: the 1981 and 2002 H-function approximations, one- and two-term Henyey-Greenstein and Legendre particle phase functions, shadow hiding, coherent backscatter and porosity. |
+| `roughness.ts` | Hapke (1984) macroscopic roughness, step for step as ISIS computes it. |
+| `normalization.ts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |
+| `model-record.ts` | Reading and validating model records and the recipe block that names them. |
+| `whole-disc-colour.mts` (this folder) | A planet's whole-disc colour record, computed once from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.ts`); `keepLuminance` then restores the map's untied mean luminance with a soft shoulder. |
 
 Angles are radians in code and degrees in records and recipes.
 

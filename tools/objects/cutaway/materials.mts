@@ -8,7 +8,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared/prepared-webp.mts';
-import {writeLossyWebp} from '../../../src/preparation/raster/lossy-lane.ts';
+import {writeLossyWebp} from '@cssearth/bake/raster';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {dotVector as dot3} from '../material-composition/ellipsoid.mts';
 

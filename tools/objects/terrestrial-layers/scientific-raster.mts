@@ -11,7 +11,7 @@ import { loadScalarMap } from './pds-scalar-map.mts';
 import { resolve } from 'node:path';
 import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mts';
-import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { paintMissingCoverage } from '@cssearth/bake/raster';
 import {composeCorrectedColor} from './photometric-observations.mts';
 import { bandColorDisplay, encodeBandColor, bandColorEvidence, interpolatePalette } from '../color-transfer.mts';
 import { checkKeys } from '../surface-observations/recipe.mts';

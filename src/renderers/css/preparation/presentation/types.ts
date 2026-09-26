@@ -9,7 +9,7 @@ import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '@cssear
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '@cssearth/renderer/rendering/prepared-material.ts';
 import type { PreparedTextureLevels } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 import type { PreparedSeamOutset } from '../scene/seam-outset.js';
-import type { RasterPagePlan } from '../../../../preparation/raster/pages.js';
+import type { RasterPagePlan } from '@cssearth/bake/raster';
 type SeamRepair = { outset?: PreparedSeamOutset };
 
 export interface Lens {

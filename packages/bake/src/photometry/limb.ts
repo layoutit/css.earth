@@ -7,8 +7,8 @@
  */
 import sharp from 'sharp';
 import { resolve } from 'node:path';
-import { radianceFactor } from './normalization.mts';
-import { loadPhotometricModelRecord, type PhotometricModelRecord } from './model-record.mts';
+import { radianceFactor } from './normalization.ts';
+import { loadPhotometricModelRecord, type PhotometricModelRecord } from './model-record.ts';
 
 export type Channels<T> = readonly [T, T, T];
 export const CHANNEL_NAMES = ['red', 'green', 'blue'] as const;

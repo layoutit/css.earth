@@ -3,8 +3,8 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readOracleFixture, assertPinnedReferences } from '../oracles/fixture.mts';
-import { radianceFactor, type ScatteringAngles } from './normalization.mts';
-import type { HapkeModel, ParticlePhaseFunction } from './hapke.mts';
+import { radianceFactor, type ScatteringAngles } from '@cssearth/bake/photometry';
+import type { HapkeModel, ParticlePhaseFunction } from '@cssearth/bake/photometry';
 
 /**
  * USGS ISIS3 as the oracle. tools/oracles/isis/photometric-truth.py reads the truth

@@ -1,5 +1,5 @@
 import type { LambertRasterConfig, CutawayAngles, InteriorPalette } from '@cssearth/objects';
-import type { LimbBlock } from '../../../tools/photometry/limb.mts';
+import type { LimbBlock } from '../photometry/index.ts';
 /** Delivered surface map encoding. Absent means the lossy WebP default. */
 export interface SurfaceEncoding {
     format: 'jpeg';
@@ -45,7 +45,7 @@ type AuthoredSphereLaw = 'shadowlessFloodLimbFloor' | 'ambientIntensity' | 'term
 export interface LightingRecipe extends Omit<LambertRasterConfig, AuthoredSphereLaw>, Partial<Pick<LambertRasterConfig, AuthoredSphereLaw>> {
     /** A shared bank (lighting-banks.ts) whose fields this recipe takes; the parser fills them in. */
     bank?: string;
-    /** The body's published photometric models (tools/photometry/limb.mts); a recipe with one states no authored sphere law. */
+    /** The body's published photometric models (packages/bake/src/photometry/limb.ts); a recipe with one states no authored sphere law. */
     limb?: LimbBlock;
     frameSize: number;
     columns: number;
@@ -61,11 +61,11 @@ export interface LightingRecipe extends Omit<LambertRasterConfig, AuthoredSphere
 }
 /**
  * A body with an atmosphere: its disc lit by its published photometric models and, when the body has one, a halo read
- * from one NASA PSG limb profile (tools/photometry/halo.mts). Frames only evaluate both.
+ * from one NASA PSG limb profile (packages/bake/src/photometry/halo.ts). Frames only evaluate both.
  */
 export interface AtmosphereRecipe {
     limb: LimbBlock;
-    /** Source-relative PSG limb profile: radiance by tangent altitude at full phase (tools/photometry/halo.mts). Absent: the disc alone. */
+    /** Source-relative PSG limb profile: radiance by tangent altitude at full phase (packages/bake/src/photometry/halo.ts). Absent: the disc alone. */
     halo?: string;
     /** Altitude of the disc's visible edge above the table's reference radius, in km (0 for a surface); given with `halo`. */
     haloEdgeAltitudeKm?: number;

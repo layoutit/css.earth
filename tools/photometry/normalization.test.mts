@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createNormalization, radianceFactor, possibleGeometry, type PhotometricNormalization } from './normalization.mts';
+import { createNormalization, radianceFactor, possibleGeometry, type PhotometricNormalization } from '@cssearth/bake/photometry';
 
 const rad = Math.PI / 180;
 const wide = { maximumIncidence: 89 * rad, maximumEmission: 89 * rad, minimumPhase: 0, maximumPhase: 179 * rad, minimumGain: 1e-9, maximumGain: Number.POSITIVE_INFINITY };

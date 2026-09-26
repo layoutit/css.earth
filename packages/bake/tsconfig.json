@@ -19,6 +19,8 @@
   ],
   "exclude": [
     "src/**/*.test.ts",
-    "src/volume/node"
+    "src/volume/node",
+    "src/photometry",
+    "src/raster"
   ]
 }

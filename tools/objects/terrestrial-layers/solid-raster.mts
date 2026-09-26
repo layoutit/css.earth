@@ -3,7 +3,7 @@ import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid } from './
 import { lambertAttenuationAtlas, type LambertAttenuationParameters } from './lambert-atlas.mts';
 import type { WebpOptions } from 'sharp';
 import { createRasterEmitter } from './raster-output.mts';
-import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
+import { writeLossyWebp, paintMissingCoverage } from '@cssearth/bake/raster';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import type { RadialState } from './solid-contract.mts';
 import { encodeBandColor, interpolatePalette } from '../color-transfer.mts';
@@ -15,7 +15,6 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
-import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mts';
 import { loadControlledObservationGeometry, matchObservedColorLevels } from './photometric-observations.mts';

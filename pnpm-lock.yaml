@@ -244,6 +244,9 @@ importers:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../objects
+      '@cssearth/renderer':
+        specifier: workspace:*
+        version: link:../renderer
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)

@@ -29,7 +29,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdir, readFile, writeFile, appendFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { PSG_LIMB_TABLE_SCHEMA } from './halo.mts';
+import { PSG_LIMB_TABLE_SCHEMA } from '@cssearth/bake/photometry';
 
 // The public service, or a local PSG container (https://hub.docker.com/r/nasapsg/psg) with --api=http://localhost:3000/api.php.
 const API = process.argv.find(value => value.startsWith('--api='))?.slice(6) ?? 'https://psg.gsfc.nasa.gov/api.php';

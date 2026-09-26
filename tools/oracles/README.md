@@ -34,7 +34,7 @@ are older standalone audits; the groups below are fixture oracles.
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `fits/charon-leisa.py` | `observation/spectral-band-maps.test.mts` |
 | pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `isis2/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
 | numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `npy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
-| USGS ISIS 10.0.0_LTS unit-test truth files | `tools/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tools/photometry/isis.oracle.test.mts` |
+| USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tools/photometry/isis.oracle.test.mts` |
 
 Scripts are under `tools/oracles/`, fixtures under `tests/oracles/` with the
 same group and name, and the comparing tests beside the code they check (under

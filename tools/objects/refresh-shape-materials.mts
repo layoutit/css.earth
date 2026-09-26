@@ -22,7 +22,7 @@ import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.
 import { renderRadialSnapshot } from './terrestrial-layers/radial-snapshot.mts';
 import { parseRadialSnapshot } from './terrestrial-layers/radial-source.mts';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
-import { validateMarkerDescriptor, renderMarker } from '../../src/navigation/marker-recipe.mts';
+import { validateMarkerDescriptor, renderMarker } from '../prepare/marker-recipe.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 
 

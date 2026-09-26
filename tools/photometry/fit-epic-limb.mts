@@ -17,7 +17,7 @@
 import * as h5 from 'h5wasm/node';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { PHOTOMETRIC_MODEL_SCHEMA } from './model-record.mts';
+import { PHOTOMETRIC_MODEL_SCHEMA } from '@cssearth/bake/photometry';
 
 const BANDS = [{ band: '680', channel: 'red' }, { band: '551', channel: 'green' }, { band: '443', channel: 'blue' }] as const;
 const STEP = 0.05, MINIMUM_COSINE = 0.1, MINIMUM_PIXELS = 200;

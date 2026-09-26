@@ -13,7 +13,7 @@ import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
 import { closestTrianglePoint } from './obj-shape.mts';
 import { createSourceSurfacePainter } from './scientific-raster.mts';
-import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
+import { missingCoverageColor } from '@cssearth/bake/raster';
 import { createRasterEmitter } from './raster-output.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';

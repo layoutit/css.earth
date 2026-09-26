@@ -7,9 +7,9 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
-import { contextMarkerSprite } from "./marker-presentation.mts";
+import { contextMarkerSprite } from "../../src/navigation/marker-presentation.mts";
 
-import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "../../tools/prepare/prepare-navigation.mts";
+import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "./prepare-navigation.mts";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,

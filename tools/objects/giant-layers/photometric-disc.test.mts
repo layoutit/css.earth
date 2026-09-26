@@ -6,8 +6,7 @@ import{readFile,mkdtemp,readdir,rm}from'node:fs/promises';
 import{join}from'node:path';
 import{tmpdir}from'node:os';
 import{phaseLightDirection,rasterPhotometricDisc,parsePhotometricDiscRecipe,preparePhotometricDisc}from'./photometric-disc.mts';
-import{limbLawFromRecords}from'../../photometry/limb.mts';
-import{parsePhotometricModelRecord}from'../../photometry/model-record.mts';
+import { limbLawFromRecords, parsePhotometricModelRecord } from '@cssearth/bake/photometry';
 
 const minnaert=(k: number)=>parsePhotometricModelRecord({schema:'cssearth-photometric-model@1',id:`fixture-k${String(k).replace('.','-')}`,instrument:'fixture',filter:'fixture',quantity:'radiance-factor',model:{family:'separable',disk:{family:'minnaert',coefficient:k,coefficientPerDegree:0}},fit:{phaseDegrees:[0,10],emissionDegrees:[0,80]}});
 

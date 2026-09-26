@@ -1,4 +1,4 @@
-import { safeRelativePath } from '../platform/source-path.mts';
+import { safeRelativePath } from '../../src/platform/source-path.mts';
 import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 /** A pin identifies bytes git does not hold; a marker image authored in this repository carries none. */
@@ -20,7 +20,7 @@ export interface MarkerDescriptor { presentation?: unknown; schema: string; obje
 import { readFile } from "node:fs/promises";
 
 import sharp, { type Sharp } from "sharp";
-import { blackFillCoverage, paintMissingCoverage } from "../platform/prepare-missing-coverage.mts";
+import { blackFillCoverage, paintMissingCoverage } from "@cssearth/bake/raster";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 const OBJECT_ID = /^[a-z][a-z0-9-]*$/u;
@@ -84,7 +84,7 @@ export async function readMarkerImage(source: MarkerSource, sourcePath: string) 
   const bytes = await validateMarkerSourceBytes(source, sourcePath);
   if (!source.raster) return sharp(bytes);
   if (typeof source.width !== "number" || typeof source.height !== "number" || !Number.isSafeInteger(source.width) || !Number.isSafeInteger(source.height) || source.width < 1 || source.height < 1) throw new TypeError("Marker source raster dimensions are invalid.");
-  const {readObservation} = await import('../../tools/objects/terrestrial-layers/observation-raster.mts');
+  const {readObservation} = await import('../objects/terrestrial-layers/observation-raster.mts');
   const {rgb, missing} = await readObservation('/', {...source, path: sourcePath}, source.raster, source.width, source.height);
   const info = {width: source.width, height: source.height, channels: 3 as const};
   return sharp(paintMissingCoverage(rgb, info, missing), {raw: info});

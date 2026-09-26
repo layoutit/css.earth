@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import {viewSunDirectionToPreparedLightDirection} from '../../../src/platform/directional-sun-coordinate.mts';
 import {requireFiniteNumber, requireRecord} from '@cssearth/core';
 import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
-import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '../../photometry/limb.mts';
+import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '@cssearth/bake/photometry';
 import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../prepared/prepared-atmosphere.mts';
 import {readJsonSource} from '../../sources/source-values.mts';
 import {applyDisplayGamma} from './display-tone.mts';

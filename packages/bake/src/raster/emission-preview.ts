@@ -1,4 +1,4 @@
-import type { InterpretedPlate } from './science.js';
+import type { InterpretedPlate } from './science.ts';
 
 /** Show the prepared limb layer over a uniform emissive photosphere in picker and card previews. */
 export function composeLimbPreview(plate: InterpretedPlate, base: Uint8Array): Uint8Array {

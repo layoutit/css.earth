@@ -1,9 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { limbFactors, limbLawFromRecords, limbOverlay, linearToSrgb, parseLimbBlock, scatteringAngles, srgbToLinear } from './limb.mts';
-import { haloAltitudeKm, haloRatio, parseLimbProfile, PSG_LIMB_TABLE_SCHEMA } from './halo.mts';
-import { parsePhotometricModelRecord } from './model-record.mts';
+import { limbFactors, limbLawFromRecords, limbOverlay, linearToSrgb, parseLimbBlock, scatteringAngles, srgbToLinear, haloAltitudeKm, haloRatio, parseLimbProfile, PSG_LIMB_TABLE_SCHEMA, parsePhotometricModelRecord } from '@cssearth/bake/photometry';
 
 const record = (id: string, model: unknown) => parsePhotometricModelRecord({ schema: 'cssearth-photometric-model@1', id, instrument: 'fixture', filter: 'fixture', quantity: 'radiance-factor', model, fit: { phaseDegrees: [0, 10], emissionDegrees: [0, 80] } });
 const minnaert = (k: number) => record(`k${String(k).replace('.', '-')}`, { family: 'separable', disk: { family: 'minnaert', coefficient: k, coefficientPerDegree: 0 } });

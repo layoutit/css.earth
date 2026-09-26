@@ -11,8 +11,9 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
 /** Workspace entries whose TypeScript sources an identity follows as local modules. The FITS reader was a local module
  * (`tools/fits/`) before it became `@cssearth/fits`, the SPICE kernel readers were local modules (`tools/spice/`) before
  * they became `@cssearth/spice`, and the telescope library's product records, label readers and astronomy-package clients
- * were local modules under `tools/objects/` before they became `@cssearth/telescope`; following them keeps every operation
- * identified by the code it ran. Other packages stay external, as they always were. */
+ * were local modules under `tools/objects/` before they became `@cssearth/telescope`, and the photometric models and raster lane
+ * were local modules (`tools/photometry/`, `src/preparation/raster/`) before they became `@cssearth/bake/photometry` and
+ * `@cssearth/bake/raster`; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
@@ -20,6 +21,8 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/spice/node': 'packages/spice/src/node/index.ts',
   '@cssearth/telescope': 'packages/telescope/src/index.ts',
   '@cssearth/telescope/node': 'packages/telescope/src/node/index.ts',
+  '@cssearth/bake/photometry': 'packages/bake/src/photometry/index.ts',
+  '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its

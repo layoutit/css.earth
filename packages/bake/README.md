@@ -4,8 +4,10 @@ The repository's build-time preparation code. The preparation tools (`src/prepar
 `preparation/` compilers, `tools/nebula`, `tools/objects`, `tools/assets`) and the nebula lab import it to turn source
 records into prepared delivery. The application never imports it: the runtime reads only what the bake wrote.
 
-Each topic is one subpath entry, and topics don't import each other. The first topic is the volume bake, which was the
-nebula lab's `volume-core` and `volume-bake` packages until 2026-09.
+Each topic is one subpath entry. A topic imports another only when it sits on a lower layer (the raster lane uses the
+photometric models), never sideways. The first topic was the volume bake, which was the nebula lab's `volume-core` and
+`volume-bake` packages until 2026-09. The photometric models (`tools/photometry/`) and the raster lane
+(`src/preparation/raster/`, the renderer's lighting bank and `src/platform/prepare-missing-coverage.mts`) followed.
 
 | entry | what it holds | host |
 |---|---|---|
@@ -17,6 +19,8 @@ nebula lab's `volume-core` and `volume-bake` packages until 2026-09.
 | `@cssearth/bake/volume/node` | compact inputs: replay of compact compiler, sampled, symmetry, finite-emission and simulation-prior inputs, density grids and windows, pinned file I/O | Node only (`node:*`, `sharp`) |
 | | slices: offline XYZ density, emission, material and painted-field slices and their raster encoding | |
 | | compiler: the target-neutral compiler bake, component layouts and retained materials | |
+| `@cssearth/bake/photometry` | disk and phase functions, the Hapke model and roughness, normalization to a reference geometry, model records, limb laws from published models, PSG limb profiles for halos | Node only (`node:fs`, `sharp`) |
+| `@cssearth/bake/raster` | raster recipes and their validation, surface maps, pages and poles, lighting banks and limb overlays, atmospheres and halos, interiors, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -26,6 +30,8 @@ for example `Compact sampled replay changed accepted <lens> volume`.
 packages/bake/
 ├── src/volume/    contracts/, coordinates/, fields/, materials/, sampling/ and their tests: `@cssearth/bake/volume`
 │   └── node/      compact-inputs/, compiler/, slices/ and their tests: `@cssearth/bake/volume/node`
+├── src/photometry/ published photometric models and limb laws: `@cssearth/bake/photometry`
+├── src/raster/    the raster lane and its tests: `@cssearth/bake/raster`
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -37,7 +43,11 @@ entry, the main volume entry imports no platform dependency, and no volume sourc
 another topic.
 
 `pnpm --filter @cssearth/bake build` writes `dist/`; `pnpm --filter @cssearth/bake test` runs the package's tests
-(Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`.
+(Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`. The raster
+lane's surface test also reads the observation lens sampler from `tools/objects/observation/`. The photometry tests stay
+in `tools/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
+The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
+`tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 
 ## Evidence
 

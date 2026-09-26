@@ -6,7 +6,7 @@ import { readFile, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/promises'
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
+import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { parseRuntimeManifest } from './runtime-assets.js';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';

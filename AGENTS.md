@@ -13,11 +13,11 @@ directory-specific `AGENTS.md` files add guidance for their owners.
 - Runtime may decode and transport prepared state. It must not derive source data, geometry, charts, atlases, or scene assets.
 - Select the canonical prepared dataset once for each mount, independent of device DPR. A body may declare prepared surface texture levels that the shared selection swaps by projected silhouette size. Neither may generate geometry or imagery at runtime. Other object asset banks remain fixed after mount.
 - With shadows off (flood lighting), every lighting and material lane shows one prepared frame, published as its own file. Lighting rows load only when shadows are on.
-- A body whose map has a published photometric law is lit with that law through `tools/photometry/limb.mts`, relative to the flood-lit disc centre. Authored floors, ambient terms, terminator ramps and limb colours are only for bodies without one.
+- A body whose map has a published photometric law is lit with that law through `packages/bake/src/photometry/limb.ts`, relative to the flood-lit disc centre. Authored floors, ambient terms, terminator ramps and limb colours are only for bodies without one.
 - Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, or WebGL.
 - SVG is allowed sparingly where it makes sense. Keep detailed body rendering in PolyCSS. Different SVG edge antialiasing is acceptable; preserve geometry, colors, line thickness, content, and interactions when optimizing.
 - Bytes are the mobile reader's cost. Lossy images from the raster, terrestrial and cutaway lanes and Earth's texture
-  levels go through the lossy lane (`src/preparation/raster/lossy-lane.ts`): WebP at one quality constant whose comment
+  levels go through the lossy lane (`packages/bake/src/raster/lossy-lane.ts`): WebP at one quality constant whose comment
   carries its measurement. Numeric and categorical images stay lossless. The lanes that still set their own quality are
   listed in [surface preparation](docs/surface-preparation.md#the-lossy-lane).
 - Use the affected shared package, runtime, router and rendered-page tests, plus inspected browser evidence for changed interactions or appearance. Do not duplicate body facts as declaration-only constants. The [body guide](src/objects/README.md#sources-and-delivery) lists current commands and test owners.

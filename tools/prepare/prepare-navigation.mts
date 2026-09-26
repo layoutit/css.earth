@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 import type { ObjectEntry } from '../../site/object-schema.mts';
-import type { MarkerDescriptor } from '../../src/navigation/marker-recipe.mts';
+import type { MarkerDescriptor } from './marker-recipe.mts';
 import type { MarkerPresentation } from '../../src/navigation/marker-presentation.mts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
@@ -35,11 +35,11 @@ import {
   readMarkerImage,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
-} from "../../src/navigation/marker-recipe.mts";
+} from "./marker-recipe.mts";
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { optimizePreparedQ75Webp } from "../prepared/prepared-webp.mts";
-import { encodeLossyWebp } from '../../src/preparation/raster/lossy-lane.ts';
+import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
 import { authoredObject } from '../sources/authored-object.mts';
 

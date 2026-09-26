@@ -11,7 +11,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { BandRatioPolicy } from '../objects/terrestrial-layers/contracts.mts';
-import { CHANNEL_NAMES } from './limb.mts';
+import { CHANNEL_NAMES } from '@cssearth/bake/photometry';
 
 export const WHOLE_DISC_COLOUR_SCHEMA = 'cssearth-whole-disc-colour@1';
 

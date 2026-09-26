@@ -15,7 +15,7 @@ import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse
 import { encodePointFieldBank } from '../../renderers/css/preparation/stars/point-field-bank.js';
 import { inventoryPreparedAssets } from '../../platform/runtime-asset-closure.mts';
 import sharp from 'sharp';
-import { encodeLossyWebp } from '../raster/lossy-lane.ts';
+import { encodeLossyWebp } from '@cssearth/bake/raster';
 
 export async function prepareStarsObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory,'prepared'));
