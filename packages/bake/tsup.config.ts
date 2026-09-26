@@ -1,5 +1,6 @@
 import { spawnSync } from 'node:child_process'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { watch } from 'node:fs'
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { createRequire } from 'node:module'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -41,6 +42,8 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
  * is declared with Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the renderer
  * types they name use it); `tsconfig.json` keeps both out of the browser-safe sources. */
 async function emitDeclarations(): Promise<void> {
+  // A failed pass leaves no stubs, so the exports stop resolving and tools/ci/check-stale-builds.mts reads the build stale.
+  for (const name of Object.keys(entry)) await rm(resolve(root, 'dist', `${name}.d.ts`), { force: true })
   const tsc = createRequire(import.meta.url).resolve('typescript/bin/tsc')
   const run = spawnSync(process.execPath, [tsc, '-p', resolve(root, 'tsconfig.build.json')], { cwd: root, stdio: 'inherit' })
   if (run.status !== 0) throw new Error(`@cssearth/bake declarations: tsc exited with ${run.status ?? run.signal}`)
@@ -53,11 +56,32 @@ async function emitDeclarations(): Promise<void> {
   }
 }
 
-export default defineConfig({
+/** `tsup --watch` rebuilds only when a file of the JavaScript bundle changes, so a type-only source (a module every
+ * importer reaches through `export type`) would leave its declarations stale. While watching, a change to any other source
+ * re-emits them; a bundle input is left to tsup, whose rebuild cleans `dist` and runs the hook again. The returned
+ * cleanup stops this watcher before that rebuild. */
+async function watchDeclarationSources(): Promise<() => void> {
+  const metafile: unknown = JSON.parse(await readFile(resolve(root, 'dist/metafile-esm.json'), 'utf8'))
+  const inputs = typeof metafile === 'object' && metafile !== null && 'inputs' in metafile && typeof metafile.inputs === 'object' && metafile.inputs !== null
+    ? new Set(Object.keys(metafile.inputs)) : new Set<string>()
+  let timer: NodeJS.Timeout | undefined
+  const watcher = watch(resolve(root, 'src'), { recursive: true }, (_event, file) => {
+    const path = file ? `src/${file.replaceAll('\\', '/')}` : ''
+    if (!/\.ts$/u.test(path) || /\.test\.ts$/u.test(path) || inputs.has(path)) return
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      console.log(`[bake declarations] ${path} changed; re-emitting declarations`)
+      emitDeclarations().then(() => console.log('[bake declarations] emitted'), (error: unknown) => console.error(`[bake declarations] ${String(error)}`))
+    }, 100)
+  })
+  return () => { clearTimeout(timer); watcher.close() }
+}
+
+export default defineConfig(options => ({
   entry,
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
-  onSuccess: emitDeclarations,
+  onSuccess: async () => { await emitDeclarations(); return options.watch ? await watchDeclarationSources() : undefined },
   clean: true,
   // Topics read renderer constants, types and validators from its source subpaths (`@cssearth/renderer/rendering/*.ts`).
   // Those subpaths are TypeScript whose sibling imports name `.js`, which Node cannot load, so they are bundled; the
@@ -68,4 +92,4 @@ export default defineConfig({
   target: 'es2022',
   // Keep `node:` specifiers so a browser bundler can never mistake the node entry's imports for polyfillable modules.
   removeNodeProtocol: false,
-})
+}))
