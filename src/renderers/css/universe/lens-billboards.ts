@@ -71,12 +71,17 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: 
   // Zero-size root at the stage centre, children placed from it: a full-screen box above the globe became a full-screen layer.
   layer.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
   host.insertBefore(layer, before);
+  // A fixed box, sized once, scaled by its transform: camera motion changes only transform and opacity
+  // (docs/performance/motion-freezes-membership.md). Two atlas texels per CSS pixel, the texture rule of
+  // src/platform/projective-surface-raster.mts: the cell holds no more detail than that, and the layer's backing stays
+  // this size however large the billboard shows.
+  const box = atlas.cellPx / 2;
   const leaves = entries.map(entry => {
     const node = document.createElement('s');
     node.dataset.lensBillboard = entry.id;
     const column = entry.billboard.cell % atlas.columns, row = Math.floor(entry.billboard.cell / atlas.columns);
     const percent = (index: number, cells: number) => cells > 1 ? `${index / (cells - 1) * 100}%` : '0%';
-    node.style.cssText = `position:absolute;left:0;top:0;display:none;pointer-events:none;transform-origin:50% 50%;background-repeat:no-repeat;` +
+    node.style.cssText = `position:absolute;left:0;top:0;width:${box}px;height:${box}px;display:none;pointer-events:none;transform-origin:0 0;background-repeat:no-repeat;` +
       `background-size:${atlas.columns * 100}% ${atlas.rows * 100}%;background-position:${percent(column, atlas.columns)} ${percent(row, atlas.rows)}`;
     layer.append(node);
     const bank = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: entry.billboard.radiusUnits,
@@ -102,8 +107,9 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: 
       const style = `${d}|${projection.x}|${projection.y}|${view.matrix.join(',')}|${opacity}`;
       if (style !== leaf.style) {
         leaf.style = style;
-        leaf.node.style.width = `${d}px`; leaf.node.style.height = `${d}px`;
-        leaf.node.style.transform = `translate(${projection.x - d / 2}px,${projection.y - d / 2}px) matrix(${view.matrix.join(',')},0,0)`;
+        // The view matrix orients the billboard about its centre: scale the box to `d` first, then move its centre there.
+        leaf.node.style.transform = `translate(${projection.x}px,${projection.y}px) matrix(${view.matrix.join(',')},0,0) ` +
+          `scale(${d / box}) translate(${-box / 2}px,${-box / 2}px)`;
         leaf.node.style.opacity = String(opacity);
       }
       if (!leaf.shown) { leaf.node.style.display = 'block'; leaf.shown = true; }

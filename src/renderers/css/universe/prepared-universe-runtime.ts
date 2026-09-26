@@ -226,7 +226,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           /** Label suppression follows the selection here; callers set the other flags. */
           setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },
-          setCoasting(active: boolean) { spatial.setCoasting(active); },
+          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); },
           setLabelBlockers(rects: readonly LabelScreenRect[]) { labelBlockers = rects; spatial.setLabelBlockers(rects); },
           labelBudget() { return labelBudget; },
           inspect() {
