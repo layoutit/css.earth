@@ -1,17 +1,13 @@
-import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from '../../src/preparation/galaxy-catalog/display-sample.js';
+import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample, parseGalaxyRecipe, text, prepareGalaxyCatalog, parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata, readBibliography } from '@cssearth/bake/galaxy-catalog';
 import { readInventory, updateInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/catalog';
-import { parseGalaxyRecipe, text } from '../../src/preparation/galaxy-catalog/config.js';
 import { requireRecord as record } from '@cssearth/core';
-import { prepareGalaxyCatalog } from '../../src/preparation/galaxy-catalog/prepare.js';
-import { parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata } from '../../src/preparation/galaxy-catalog/source.js';
 import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import type { GalaxySource } from '../../src/preparation/galaxy-catalog/types.js';
-import { readBibliography } from '../../src/preparation/galaxy-catalog/bibliography.js';
+import type { GalaxySource } from '@cssearth/bake/galaxy-catalog';
 
 export async function prepareGalaxyCatalogObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');

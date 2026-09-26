@@ -35,8 +35,8 @@ function files(directory: string): string[] {
 function policy(path: string): Policy {
   // `tests/` holds test fixtures and helpers only; a runtime module that imports one is still checked through its own closure.
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/')) return 'test';
-  if (path.startsWith('tools/') || path.startsWith('src/preparation/') || path.startsWith('packages/bake/') ||
-      path === 'src/platform/astronomy-package.mts' || /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
+  if (path.startsWith('tools/') || path.startsWith('packages/bake/') ||
+      /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }
 function syntax(file: string): ts.SourceFile {

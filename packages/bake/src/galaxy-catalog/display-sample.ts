@@ -1,6 +1,6 @@
 import type { PreparedGalaxyCatalog } from '@cssearth/catalog';
 import { M_PER_PC } from '@cssearth/astronomy';
-import { keys } from './config.js';
+import { keys } from './config.ts';
 import { requireRecord as record } from '@cssearth/core';
 
 export interface GalaxyDisplaySampling { budget: number; cellSizeMpc: number; }

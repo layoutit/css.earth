@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { sourceBytes } from '@cssearth/bake/volume/node';
-import { publishSourceBytes } from '../../src/platform/source-acquisition.mts';
+import { publishSourceBytes } from './source-acquisition.mts';
 import { sourceArray, sourceObject, sourcePath } from '../../src/platform/source-catalog.mts';
 import { fetchWithRetry, RUNTIME_ASSET_ORIGIN, sourceCacheUrl } from './source-mirror.mts';
 

@@ -10,7 +10,7 @@ import { prepareEclipticPresentationFrame } from
   "./solar-presentation-frame.mts";
 import { prepareSunReferenceViewDirection } from
   "./prepare-sun-view-direction.mts";
-import { cssDirectionToViewDirection } from "./solar-view-direction.mts";
+import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
 
 const BODIES = [
   "mercury",

@@ -1,7 +1,7 @@
 import { spatialPublicationId } from '@cssearth/catalog';
 import { M_PER_PC } from '@cssearth/astronomy';
 import type { PreparedClusterCatalog, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/catalog';
-import { galaxyPositionM } from '../galaxy-catalog/prepare.js';
+import { galaxyPositionM } from '../galaxy-catalog/index.ts';
 
 export interface ClusterSelection { readonly id: string; readonly name: string; readonly catalogueId: string; readonly aliases: readonly string[] }
 export interface ClusterRecipe {

@@ -7,7 +7,7 @@ import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabili
 import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation } from "@cssearth/renderer/testing";
 import type { ObjectRuntimeDefinition } from "@cssearth/renderer";
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
-import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mts";
+import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 import { createSceneLifetime } from "@cssearth/engine";
 import { requireObjectRuntimeDefinition } from "../../../tools/contract/object-runtime-contract.mts";
 import { initialObjectSelection } from "@cssearth/renderer/testing";

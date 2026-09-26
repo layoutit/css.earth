@@ -5,11 +5,11 @@ const test = sourceTest();
 import {
   viewSunDirectionToPhysicalLightDirection,
   viewSunDirectionToPreparedLightDirection,
-} from "./directional-sun-coordinate.mts";
+} from "@cssearth/renderer/platform/directional-sun-coordinate";
 import { requireBodyFixedSunDirection } from "./solar-geometry.mts";
 import { prepareSunReferenceViewDirection } from
   "./prepare-sun-view-direction.mts";
-import { cssDirectionToViewDirection } from "./solar-view-direction.mts";
+import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
 
 // A view direction lies in front of the camera when `forward = -z` is positive.
 function forward(viewDirection: readonly number[]) {

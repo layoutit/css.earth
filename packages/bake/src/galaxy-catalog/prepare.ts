@@ -1,5 +1,5 @@
 import { M_PER_PC } from '@cssearth/astronomy';
-import type { AuthorMetadata, CsvRow, GalaxyDistance, GalaxyMembership, GalaxyRecipe, GalaxySource, PreparedGalaxy, PreparedGalaxyCatalog, Vec3 } from './types.js';
+import type { AuthorMetadata, CsvRow, GalaxyDistance, GalaxyMembership, GalaxyRecipe, GalaxySource, PreparedGalaxy, PreparedGalaxyCatalog, Vec3 } from './types.ts';
 
 /** Derived display coordinates: 12 significant digits, far below distance errors. */
 function rounded(value: number): number { return Number(value.toPrecision(12)); }

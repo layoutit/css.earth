@@ -37,7 +37,7 @@ export async function checkEnvironment(root: string): Promise<string[]> {
     if (!await optionalStat(join(root, 'packages', name, 'dist'))) problems.push(`packages/${name}/dist is missing; run pnpm build:packages.`);
   }
   const bundle = await optionalStat(join(root, 'tools/objects/dist/prepare-authored.js'));
-  const sources = Math.max(await newestSource(join(root, 'tools/objects'), new Set(['dist'])), await newestSource(join(root, 'src/preparation'), new Set()));
+  const sources = await newestSource(join(root, 'tools/objects'), new Set(['dist']));
   if (!bundle) problems.push('tools/objects/dist is missing; run pnpm build:tools.');
   else if (bundle.mtimeMs < sources) problems.push('tools/objects/dist is older than its sources; run pnpm build:tools (tsup builds it, not tsc).');
   return problems;

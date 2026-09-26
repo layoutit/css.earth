@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { M_PER_AU } from '@cssearth/astronomy';
-import { parseWorldContextSource, prepareWorldContext } from './spatial-context.js';
-import type { OrbitalState } from './spatial-context.js';
+import { parseWorldContextSource, prepareWorldContext } from './spatial-context.ts';
+import type { OrbitalState } from './spatial-context.ts';
 
 const sourcePath = 'src/objects/sun/source/navigation/universe.json';
 // Unit cases supply their own body inventory; the application resolves catalogue membership.

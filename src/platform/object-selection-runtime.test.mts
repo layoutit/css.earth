@@ -17,7 +17,7 @@ import type { PreparedPresentationContext, PreparedPresentationPlan, PreparedVie
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 const saturnDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn'));
 import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
-import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";
+import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";

@@ -16,7 +16,8 @@ its validators accept); the renderer never imports the bake.
   pages and poles, the lighting, limb and atmosphere banks, interiors, missing-coverage painting and the lossy WebP lane.
   It imports `photometry`.
 - `src/scene/` is published as `@cssearth/bake/scene` (Node only): geometry profiles, projected surface leaves and their
-  raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials and solid-body surfaces.
+  raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials, solid-body surfaces and
+  the perspective camera of a solid scene.
   It imports `raster`. The host passes the physical scene and Sun directions in (`ScenePreparationAdapters`).
 - `src/presentation/` is published as `@cssearth/bake/presentation` (Node only): the retained node tree with its
   projective layouts and leaf boxes, offline CSSOM reads (Playwright's Chromium), activation groups, and the row-bank
@@ -39,6 +40,12 @@ its validators accept); the renderer never imports the bake.
   resampler. It imports `volume-leaves`.
 - `src/environment/` is published as `@cssearth/bake/environment` (Node only): the environment-image replay. It
   imports `image-layers`, `shell`, `stars`, `density` and `volume`.
+- `src/galaxy-catalog/` is published as `@cssearth/bake/galaxy-catalog` (Node only): the galaxy catalogue bake (recipes,
+  CSV and archive sources, bibliography, positions, memberships, the display sample). It imports no topic.
+- `src/cluster-catalog/` is published as `@cssearth/bake/cluster-catalog` (Node only): the galaxy-cluster catalogue,
+  placed with the galaxy positions. It imports `galaxy-catalog`.
+- `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
+  bodies, orbit banks, system and group views, hyperbolic paths). It imports no topic.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only); none imports another topic:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,

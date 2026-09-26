@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readBibliography } from './bibliography.js';
+import { readBibliography } from './bibliography.ts';
 
 test('bibliography keeps source keys and locators with nested or escaped title braces', () => {
   const entry = '@ARTICLE{Example2026,\n title = "{A {nested} title}",\n adsurl = {https://example.org/paper},\n}\n';

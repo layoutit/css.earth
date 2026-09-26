@@ -1,6 +1,6 @@
 import { gunzipSync } from 'node:zlib';
 import { isMap, parseDocument } from 'yaml';
-import type { AuthorMetadata, CsvRow } from './types.js';
+import type { AuthorMetadata, CsvRow } from './types.ts';
 
 /** RFC 4180 records, including quoted commas, quotes and line breaks. */
 export function parseGalaxyCsv(source: string): CsvRow[] {

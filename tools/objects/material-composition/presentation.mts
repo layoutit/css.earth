@@ -12,7 +12,7 @@ import type { PreparedNode } from '@cssearth/bake/presentation';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.mts';
 
-import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
+import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/platform/prepared-object-assets";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
 

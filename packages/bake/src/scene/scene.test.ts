@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadLimbProfile } from '@cssearth/bake/photometry';
+import { loadLimbProfile } from '../photometry/index.ts';
 import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widestLeafImages } from './geometry-scene.ts';
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './geometry-scene.ts';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';

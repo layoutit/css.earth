@@ -4,8 +4,8 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '../../src/preparation/spatial-context.js';
-import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
+import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '@cssearth/bake/world-context';
+import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '@cssearth/bake/world-context';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; readonly centerParentBodyId?: string; }
 interface SolarGeometry {

@@ -56,7 +56,7 @@ fallback requirements are not the current authored-package template.
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
 | Content, lens labels and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
 | Search and marker presentation | `site/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
-| Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
+| Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `packages/bake/src/world-context/hyperbolic-path.ts`, shared world-context preparation and orbit validation/projector |
 
 Minimap preparation accepts authored source paths and prepared source records.
 For a prepared surface, `map.url` identifies the preview image; its `source`
