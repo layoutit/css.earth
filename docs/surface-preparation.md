@@ -737,6 +737,17 @@ and missing pixels stay missing.
 
 ## Seam repair and the globe interior disc
 
+**Polar caps.** Every lane closes a band mesh at the poles the same way
+([polar-cap.ts](../src/renderers/css/preparation/scene/polar-cap.ts)): a flat plate rounded to a disc, facing out of
+the body and culled when it turns away. Generated spheres used to grow their bands by a 24-unit seam bleed and draw
+square lids from both sides; on iPad Safari that pushed past the outline at the poles:
+
+![Kepler-452 b on iPad Safari before the fix: two bulges at the poles](images/polar-caps/kepler-452b-ipad-lemon.webp)
+
+Generated spheres now take their seams from one shared setting
+([sphere-projection.mts](../tools/objects/sphere-projection.mts)): exact tiling, a half-texel overscan and the stepped
+silhouette outset, with the overlap derived from each map's texels per cell.
+
 Spherical and ellipsoidal objects share one retained interior disc behind their
 leaves. An irregular body cannot use it: the disc's inner ellipsoid is limited by
 the nearest leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks
