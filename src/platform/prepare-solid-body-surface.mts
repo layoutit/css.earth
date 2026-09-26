@@ -6,9 +6,10 @@ interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: numbe
   /** Pixel widths of the widest surface and pole images any lens binds to these leaves, measured from the published files:
    * each leaf holds its image at TEXELS_PER_CSS_PIXEL (leafRasterScale). */
   mapPixelWidth: number; polesPixelWidth: number; }
-type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: string; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };
+type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: "north" | "south"; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from "@layoutit/polycss";
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
+import { POLAR_CAP_STYLE, requireOutwardCap } from "../renderers/css/preparation/scene/polar-cap.ts";
 
 // A latitude trapezoid uses projective UVs: tan(latitude), rather than latitude,
 // varies linearly down its texture. Bake the inverse mapping into each band so
@@ -97,7 +98,7 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
   const cellWidth = sourceWidth / longitudeSegments, cellHeight = sourceHeight / latitudeSegments;
   const planOptions: ComputeTextureAtlasPlanOptions & { textureLighting: "baked" } = { tileSize: 50, layerElevation: 50, textureLighting: "baked", seamBleed: 0 };
   const polygons = createSpherePolygons(seamOverlap);
-  return [...polygons, ...["north", "south"].map(pole => createPolarCapPolygon(pole, true))]
+  return [...polygons, ...(["north", "south"] as const).map(pole => createPolarCapPolygon(pole, true))]
     .map((polygon, index) => prepareLeaf(polygon, index));
   function spherePoint(latitude: number, longitude: number): Vec3 {
     const latitudeRadius = Math.cos(latitude);
@@ -168,7 +169,7 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
     return output;
   }
 
-  function createPolarCapPolygon(pole: string, inner: boolean): SurfacePolygon {
+  function createPolarCapPolygon(pole: "north" | "south", inner: boolean): SurfacePolygon {
     const north = pole === "north";
     const sign = north ? 1 : -1;
     const boundaryLatitude = Math.PI / 2 - Math.PI / latitudeSegments;
@@ -253,6 +254,8 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
       .join(" ");
     const backgroundSize = rasterPresentation.backgroundSize
       .map((value) => formatCssLength(value)).join(" ");
+    // Every lane's caps follow one rule (polar-cap.ts): a disc, facing out, culled when it turns away.
+    if (polygon.polar) requireOutwardCap(`${id} ${polygon.texture}`, polygon.polar, fitted.matrix, polygon.inner);
     return Object.freeze({
       tag: "s",
       className: polygon.className ?? (polygon.polar
@@ -262,7 +265,8 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
         `background-position:${backgroundPosition};` +
         `background-size:${backgroundSize};` +
         `--polycss-atlas-width:${fitted.leafWidth}px;` +
-        `--polycss-atlas-height:${fitted.leafHeight}px`,
+        `--polycss-atlas-height:${fitted.leafHeight}px` +
+        (polygon.polar ? POLAR_CAP_STYLE : ""),
       // Each leaf holds its widest image at two texels per CSS pixel (leafRasterScale), capped at the lane's former fixed scale.
       // Haumea's 3096-px maps on a 1548-px band background keep the 32 × 24 layout box where scale 4 drew 128 × 96.
       projectiveTextureLayer: prepareProjectiveTextureLayer(

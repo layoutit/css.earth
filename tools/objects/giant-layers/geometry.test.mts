@@ -3,6 +3,8 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { TEXELS_PER_CSS_PIXEL, leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
 import { prepareBandedEllipsoid, type BandedImagePixels } from './geometry.mts';
 import { publishedLeafImages } from './object.mts';
+import { readFile } from 'node:fs/promises';
+import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
 const test = sourceTest();
 
 const ringUrl = '/scenes/hypothetical/rings@2x.webp';
@@ -84,4 +86,29 @@ test('a leaf image the preparation did not publish is refused by name', () => {
   assert.throws(() => published.image('/scenes/other/rings@2x.webp'), /is not under \/scenes\/hypothetical\//u);
   assert.throws(() => publishedLeafImages('hypothetical', observations, assets.slice(1)), /leaf image surface\.webp was not published/u);
   assert.throws(() => prepareBandedEllipsoid(recipe(), publishedLeafImages('hypothetical', observations, assets.slice(0, -1))), /hypothetical: leaf image rings@2x\.webp was not published/u);
+});
+
+type Leaf = { style: string; className?: string };
+const capsOf = (leaves: readonly Leaf[], owner: string) => {
+  const caps = leaves.filter(leaf => /\bpole-(inner|outer)\b/u.test(leaf.className ?? ''));
+  assert.equal(caps.length, 4, `${owner}: an inner and an outer cap at each pole`);
+  assert.ok(leaves.filter(leaf => !caps.includes(leaf)).every(leaf => !leaf.style.includes('border-radius')), `${owner}: bands keep their own shape`);
+  return caps.map(leaf => ({ pole: poleOfClass(leaf.className ?? ''), style: leaf.style, label: leaf.className }));
+};
+
+test('latitude-bound caps, Jupiter\'s own among them, follow the one cap rule', async () => {
+  assertPolarCaps('fixture', capsOf(latitudeBound(prepareBandedEllipsoid(recipe(), images(2048, 2048))).leaves, 'fixture'));
+  const jupiter: unknown = JSON.parse(await readFile(new URL('../../../src/objects/jupiter/source/preparation/geometry.json', import.meta.url), 'utf8'));
+  const leaves = latitudeBound(prepareBandedEllipsoid(jupiter, { surface: 4160, image: () => 2048 })).leaves;
+  assertPolarCaps('jupiter', capsOf(leaves, 'jupiter'));
+});
+
+test('caps of the stepped and fractional tessellations follow the one cap rule in every leaf record', () => {
+  for (const coordinateArithmetic of ['step', 'fraction'] as const) for (const leafRecord of ['compact', 'annotated'] as const) {
+    const { latitudeBoundsDegrees: _bounds, ...bounded } = recipe(), owner = `${coordinateArithmetic} ${leafRecord}`;
+    const geometry = prepareBandedEllipsoid({ ...bounded, coordinateArithmetic, leafRecord, latitudeSegments: 8, tiledPlanes: [],
+      polar: { ...bounded.polar, boundaryLatitudeDegrees: undefined, overlayLatitudeDegrees: undefined } }, images(2048, 2048));
+    if (!('bodyBands' in geometry)) throw new Error(`${owner}: expected banded geometry`);
+    assertPolarCaps(owner, capsOf(geometry.bodyBands.flatMap(band => band.leaves), owner));
+  }
 });

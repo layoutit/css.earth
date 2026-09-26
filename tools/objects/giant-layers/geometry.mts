@@ -3,7 +3,7 @@ import {bandedGeometryRecipe, type BandedGeometryRecipe} from './geometry-contra
 import type {Vector3} from '../material-composition/ellipsoid.mts';
 type SourceRectangle = {x:number;y:number;width:number;height:number};
 interface GeometryPolygon extends Omit<Parameters<typeof computeTextureAtlasPlanPublic>[0], 'textureImageSource'> {
-  latitudeIndex?: number; longitudeIndex?: number; polarCap?: string; polarRole?: string;
+  latitudeIndex?: number; longitudeIndex?: number; polarCap?: 'north' | 'south'; polarRole?: string;
   textureImageSource: {url:string;width:number;height:number;sourceRect:SourceRectangle};
 }
 type TextureLeafOptions = {seamEdges?: Set<number>; seamBleed?:number; fitSurface?:boolean; leafSize?:number; imagePixels?:number};
@@ -17,6 +17,7 @@ export interface BandedImagePixels {
 import {buildSeamBleedPolygonEdges,computeTextureAtlasPlanPublic,resolvePolyTextureLeafGeometry,formatCssLength} from '@layoutit/polycss';
 import {createProjectiveSurfaceRasterPresentation,fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout,leafRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
 import {ellipsoidPoint} from '../material-composition/ellipsoid.mts';
+import {POLAR_CAP_STYLE,requireOutwardCap} from '../../../src/renderers/css/preparation/scene/polar-cap.ts';
 
 const presentation={backend:'image',lighting:'source',projection:'projective'} as const;
 const replace=(template: string,values: Record<string,string>)=>template.replace(/\{([a-z]+)\}/gu,(_match: string,key: string)=>values[key]);
@@ -61,14 +62,17 @@ function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:n
     if(imagePixels===undefined)throw new TypeError(`Surface leaf ${index} (${polygon.texture}): the width of the widest image it shows is missing.`);
     return{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,leafRasterScale(imagePixels,address.backgroundSize[0],config.surface.rasterScale))};
   };
+  // Every lane's caps follow one rule (polar-cap.ts): a disc, facing out, culled when it turns away.
+  if(polygon.polarCap)requireOutwardCap(config.polar.url,polygon.polarCap,fitted.matrix,polygon.polarRole==='inner');
+  const cap=polygon.polarCap?POLAR_CAP_STYLE:'';
   if(config.leafRecord==='explicit'){
     const length=(value:number)=>value===0?'0px':formatCssLength(value);
-    return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}`,...(fitSurface?projectiveLayer():{})};
+    return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}${cap}`,...(fitSurface?projectiveLayer():{})};
   }
   const compact=config.leafRecord==='compact';
   const position=address.backgroundPosition.map(value=>!compact&&value===0?'0px':formatCssLength(value)).join(' '),size=address.backgroundSize.map(value=>formatCssLength(value)).join(' ');
   const dimensions=compact?(fitted.leafWidth===64?'':`;--polycss-atlas-width:${formatCssLength(fitted.leafWidth)}`)+(fitted.leafHeight===64?'':`;--polycss-atlas-height:${formatCssLength(fitted.leafHeight)}`):(fitted.leafWidth===64&&fitted.leafHeight===64?'':`;--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px`);
-  return{...(compact?{tag:'s'}:{}),style:`transform:matrix3d(${fitted.matrix})${dimensions}${compact&&polygon.polarCap?`;background-image:url(${fitted.url})`:''};background-position:${position};background-size:${size}`,
+  return{...(compact?{tag:'s'}:{}),style:`transform:matrix3d(${fitted.matrix})${dimensions}${compact&&polygon.polarCap?`;background-image:url(${fitted.url})`:''};background-position:${position};background-size:${size}${cap}`,
     ...(fitSurface?projectiveLayer():{}),...(!compact?{sourceRect:fitted.sourceRect,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,projection:fitted.projection,lighting:'source',lightingOverlay:false}:{})};
 }
 

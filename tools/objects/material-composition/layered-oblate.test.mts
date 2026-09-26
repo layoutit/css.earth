@@ -5,11 +5,14 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import sharp from 'sharp';
-import { textureTintFactors } from '@layoutit/polycss';
+import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, textureTintFactors } from '@layoutit/polycss';
 import { leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
 import { floodDiscMean, loadLimbLaw } from '../../photometry/limb.mts';
 import { displayBandRatios, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { prepareSurfaceColour, widestPublishedImage } from './layered-oblate.mts';
+import { polarQuad } from './texture-geometry.mts';
+import { requireOutwardCap } from '../../../src/renderers/css/preparation/scene/polar-cap.ts';
+import { assertCapFacesOut } from '../../../tests/objects/polar-caps.mts';
 
 const image = (path: string, width: number, height: number) =>
   sharp({ create: { width, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).webp({ lossless: true }).toFile(path);
@@ -50,4 +53,25 @@ test("Saturn's tinted OPAL map is tied to Karkoschka's whole-disc colour and kee
     channelFactors: [tint.r / peak, tint.g / peak, tint.b / peak], tie });
   assert.deepEqual(report, { reference: 'red', source: 'karkoschka-1998-whole-disc-colour', measured: { green: 0.9272, blue: 0.6953 }, published: { green: 0.6759, blue: 0.5057 }, gains: [1, 0.729, 0.7273],
     luminance: { factor: 1.264, knee: 0.8, shoulderedTexels: 180204, shoulderedShare: 0.0435 } });
+});
+
+test("Saturn's caps sit on the oblate polar carrier, which faces out of the body at the lane's own tile size", async () => {
+  // All four cap families of the lane (surface, inner, cutaway outer poles and interior shells) are polarQuad plates, and the
+  // lane refuses one that faces in (requireOutwardCap) while it bakes; the lane itself only runs inside that bake. Facing
+  // depends on the carrier's winding and on the side of the equator a plate stands on, not on its size. The samples are
+  // close to the published caps' half-widths and heights, as fractions of the equatorial radius: the surface and inner caps,
+  // then the metallic-hydrogen and core shells' caps.
+  const recipe = JSON.parse(await readFile(resolve(import.meta.dirname, '../../../src/objects/saturn/source/preparation/geometry.json'), 'utf8'));
+  const { tileSize, equatorialRadius } = recipe.parameters as { tileSize: number; equatorialRadius: number };
+  for (const pole of ['north', 'south'] as const) for (const [radius, height] of [[0.2, 0.885], [0.205, 0.875], [0.267, 0.567], [0.173, 0.367]]) {
+    const z = (pole === 'north' ? 1 : -1) * height! * equatorialRadius, plate = polarQuad({ pole, radius: radius! * equatorialRadius, z });
+    const plan = computeTextureAtlasPlanPublic({ ...plate, texture: '/poles.webp', color: '#ffffff',
+      textureImageSource: { url: '/poles.webp', width: 512, height: 256, sourceRect: { x: pole === 'north' ? 0 : 256, y: 0, width: 256, height: 256 } },
+      texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' } }, 0, { tileSize, layerElevation: tileSize, seamBleed: 0 });
+    const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
+    assert.ok(geometry, `${pole} plate at ${radius}, ${height} prepares`);
+    requireOutwardCap('saturn', pole, geometry.matrix);
+    assertCapFacesOut(`saturn ${pole} plate at ${radius}, ${height}`, pole,
+      `transform:matrix3d(${geometry.matrix});--polycss-atlas-width:${geometry.leafWidth}px;--polycss-atlas-height:${geometry.leafHeight}px`);
+  }
 });
