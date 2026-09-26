@@ -3,7 +3,7 @@ import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
 import type { VolumeSlices, VolumeSliceQuad, VolumeRecipe, Vector3 } from '@cssearth/bake/volume';
-import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
+import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 /** Display support only: preserve the original colors and split each slab's optical depth. */

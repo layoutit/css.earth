@@ -5,8 +5,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import type { VolumeSliceQuad } from '@cssearth/bake/volume/node';
-import type { Axis as SliceAxis, Vector3 } from '@cssearth/bake/volume';
+import type { VolumeSliceQuad } from '../volume/node/index.ts';
+import type { Axis as SliceAxis, Vector3 } from '../volume/index.ts';
 import { test } from 'node:test';
 
 type Quad = Pick<VolumeSliceQuad, 'id' | 'axis' | 'texturePath' | 'widthPx' | 'heightPx' | 'vertices' | 'uvs'>;
@@ -142,7 +142,7 @@ test('prepared volume descriptor and external PNG bank form a complete pinned cl
 
 
 test('volume compilation omits only lossless-alpha empty slabs, preserving every nonempty PolyCSS leaf', async () => {
-  const { compileCssVolume } = await import('./volume.js');
+  const { compileCssVolume } = await import('./volume.ts');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
   const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
   const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/bake/volume/node').VolumeSlices;
@@ -170,7 +170,7 @@ test('volume compilation omits only lossless-alpha empty slabs, preserving every
 });
 
 test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the plane PolyCSS gave them', async () => {
-  const { compileCssVolume } = await import('./volume.js');
+  const { compileCssVolume } = await import('./volume.ts');
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
   const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
@@ -202,7 +202,7 @@ test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the p
 });
 
 test('prepared volume plane order bounds first-pivot depth without changing coplanar order', async () => {
-  const { balanceVolumeSlices } = await import('./volume-order.js');
+  const { balanceVolumeSlices } = await import('./volume-order.ts');
   for (const axis of ['x', 'y', 'z'] as const) {
     const component = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
     const input = Array.from({ length: 214 }, (_,index) => {

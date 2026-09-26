@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { createPreparedLeafFrustum, preparedLeafMayContribute, validatePreparedLeafBounds } from './prepared-leaf-frustum.js';
-import { compileLeafBounds } from '../../../../src/renderers/css/preparation/leaf-bounds.js';
+import { compileLeafBounds } from '@cssearth/bake/volume-leaves';
 
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const viewport = { focalPixels: 600, widthPixels: 1000, heightPixels: 800, principalOffsetPixels: [0, 0] as const };

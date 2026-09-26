@@ -1,5 +1,5 @@
 /** Static PolyCSS cube geometry in physical ICRF axes; the renderer owns its one axis reflection. */
-import { compileVolumeLeaf } from './volume.js';
+import { compileVolumeLeaf } from '@cssearth/bake/volume-leaves';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { BakedSky } from '../../../preparation/sky/bake.js';

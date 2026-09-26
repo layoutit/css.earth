@@ -27,7 +27,7 @@ async function put(root: string, path: string, bytes: Uint8Array | string) {
 }
 async function fixture(root: string) {
   // The delivery identity reads these source files from its checkout; keep the fixture isolated.
-  for (const directory of ['tools/nebula/application','packages/bake/src/volume','src/renderers/css/preparation','packages/renderer/src/volume','src/preparation/volume']) {
+  for (const directory of ['tools/nebula/application','packages/bake/src/volume','packages/bake/src/volume-leaves','packages/renderer/src/volume','src/preparation/volume']) {
     for (const name of await readdir(directory,{recursive:true})) {
       if (!name.endsWith('.ts')) continue;
       const path = `${directory}/${name}`;
@@ -96,7 +96,7 @@ test('delivery restores missing impostors, rejects drift and rebuilds when their
     await writeFile(path,'corrupt');
     await assert.rejects(prepareNebulaObject(root,directory,true,true),/Nebula source hash mismatch/);
     await writeFile(path,original);
-    const generator = resolve(root,'src/renderers/css/preparation/volume-impostors.ts');
+    const generator = resolve(root,'packages/bake/src/volume-leaves/volume-impostors.ts');
     await writeFile(generator,`${await readFile(generator,'utf8')}\n// changed fixture generator\n`);
     assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'prepared');
     assert.equal(hash(await readFile(path)),proxy.sha256);

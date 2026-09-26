@@ -39,6 +39,11 @@
       "import": "./dist/presentation.js",
       "default": "./dist/presentation.js"
     },
+    "./volume-leaves": {
+      "types": "./dist/volume-leaves.d.ts",
+      "import": "./dist/volume-leaves.js",
+      "default": "./dist/volume-leaves.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

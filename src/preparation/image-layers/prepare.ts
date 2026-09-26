@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
-import { compileVolumeLeaf } from '../../renderers/css/preparation/volume.js';
+import { compileVolumeLeaf } from '@cssearth/bake/volume-leaves';
 
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
   verticesUnits: [Vec3, Vec3, Vec3, Vec3]; uvs: [[number, number], [number, number], [number, number], [number, number]];

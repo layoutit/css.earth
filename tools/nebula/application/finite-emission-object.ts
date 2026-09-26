@@ -5,9 +5,8 @@ import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { restoreCompactFiniteEmission, hash, localPath, pinned, type Pin, writeAtomic } from '@cssearth/bake/volume/node';
 import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, parsePreparedLmcStars } from '@cssearth/bake/volume';
-import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
+import { compileCssVolume, prepareVolumeImpostors } from '@cssearth/bake/volume-leaves';
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
-import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 
 const record = (value: unknown, at: string): Record<string, unknown> => {

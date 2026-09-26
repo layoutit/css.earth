@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { test } from 'node:test';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
-import { prepareVolumeImpostors } from './volume-impostors.js';
+import { prepareVolumeImpostors } from './volume-impostors.ts';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '@cssearth/renderer/volume/types.ts';
 import type { PreparedVolumeLensBrightness } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
@@ -234,7 +234,7 @@ test('leaves that share one delivered atlas render the same views as leaves that
 
 test('slices drawn at TEXELS_PER_CSS_PIXEL bake the same views as their one-texel-per-pixel boxes', async () => {
   // The views read each slice's plane and texture mapping, not its box: redrawing a delivered bank's boxes needs no re-bake.
-  const { compileVolumeLeaf } = await import('./volume.js');
+  const { compileVolumeLeaf } = await import('./volume.ts');
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');
   const quadrants = (a: Rgba, b: Rgba) => ({ width: 5, height: 3,
     data: Uint8Array.from(Array.from({ length: 15 }, (_, index) => (index % 5 < 2) !== (index < 5) ? a : b).flat()) });

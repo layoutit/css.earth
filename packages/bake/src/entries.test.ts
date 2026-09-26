@@ -30,12 +30,13 @@ it('the main volume entry stays host-neutral: only volume/node imports Node buil
   expect(offenders).toEqual([]);
 });
 
-/** The topics a topic may import, always through that topic's own `index.ts`: a lower layer, never a peer or a layer above.
- * A topic missing here imports no other topic. */
+/** The topics a topic may import, always through one of that topic's entries (`index.ts`, or `node/index.ts` for the volume
+ * bake): a lower layer, never a peer or a layer above. A topic missing here imports no other topic. */
 const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   raster: ['photometry'],
   scene: ['raster'],
   presentation: ['scene', 'raster'],
+  'volume-leaves': ['scene', 'volume'],
 };
 
 it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {
@@ -47,7 +48,7 @@ it('topics import only the lower topics declared for them, through their index, 
       if (!specifier.startsWith('.')) continue;
       const target = relative(source, join(path, '..', specifier)).replaceAll('\\', '/'), [targetTopic, ...rest] = target.split('/');
       if (target.startsWith('..')) offenders.push(`${name} -> ${specifier}`);
-      else if (targetTopic !== topic && !(LOWER_TOPICS[topic]?.includes(targetTopic!) && rest.join('/') === 'index.ts')) offenders.push(`${name} -> ${specifier}`);
+      else if (targetTopic !== topic && !(LOWER_TOPICS[topic]?.includes(targetTopic!) && ['index.ts', 'node/index.ts'].includes(rest.join('/')))) offenders.push(`${name} -> ${specifier}`);
     }
   }
   expect(offenders).toEqual([]);

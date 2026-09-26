@@ -4,7 +4,8 @@ export default defineConfig({
   // `volume` is browser-safe (the nebula lab's viewer imports it); `volume/node` and the other topics are Node-only.
   entry: { volume: 'src/volume/index.ts', 'volume/node': 'src/volume/node/index.ts', photometry: 'src/photometry/index.ts',
     raster: 'src/raster/index.ts', scene: 'src/scene/index.ts',
-    presentation: 'src/presentation/index.ts' },
+    presentation: 'src/presentation/index.ts',
+    'volume-leaves': 'src/volume-leaves/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the

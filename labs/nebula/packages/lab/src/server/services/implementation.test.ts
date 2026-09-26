@@ -42,7 +42,7 @@ test('relocated preparation entry points pin their live package owners', async (
 
 test('the compiler cache identity follows the bake topics its volume compiler reaches', async () => {
   const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
-  for (const path of ['src/renderers/css/preparation/volume.ts', 'packages/bake/src/scene/projective-surface-raster.ts'])
+  for (const path of ['packages/bake/src/volume-leaves/volume.ts', 'packages/bake/src/scene/projective-surface-raster.ts'])
     assert.ok(pins.some(pin => pin.path === path), path);
   assert.equal(pins.some(pin => pin.path.startsWith('packages/bake/dist/')), false);
 });
