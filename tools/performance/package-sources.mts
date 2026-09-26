@@ -31,19 +31,21 @@ function entryPairs(config: unknown, root: string): [string, string][] {
   throw new TypeError(`${root}tsup.config.ts must declare concrete entries.`);
 }
 
-export function packageSources(): Plugin {
+/** `names` limits the plugin to some of the packages (a worker build names only the objects package). */
+export function packageSources(names: readonly string[] = packages.map(({ name }) => name)): Plugin {
+  const owners = built.filter(({ name }) => names.includes(name));
   return {
     name: 'cssearth-package-sources',
     apply: 'build',
     enforce: 'pre',
     async resolveId(id, importer, options) {
-      const owner = built.find(({ name }) => id === name || id.startsWith(`${name}/`));
+      const owner = owners.find(({ name }) => id === name || id.startsWith(`${name}/`));
       if (options.ssr || !importer || !owner) return null;
       const resolved = await this.resolve(id, importer, { ...options, skipSelf: true });
       return resolved ? owner.entries.get(resolved.id) ?? null : null;
     },
     transform(_code, id, options) {
-      if (options?.ssr || !built.some(({ sources }) => id.startsWith(sources)) || /-worker\.ts$/u.test(id)) return null;
+      if (options?.ssr || !owners.some(({ sources }) => id.startsWith(sources)) || /-worker\.ts$/u.test(id)) return null;
       return { moduleSideEffects: false };
     },
   };
