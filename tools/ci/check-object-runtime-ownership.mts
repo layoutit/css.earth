@@ -130,7 +130,7 @@ function preparedLightingProjectionRecord(node: Node, file: string) {
 // JSON import names the same project file as `source`, and its attributes mean it
 // can only load data, never an executor, so it is the one computed import this
 // plan may contain.
-const worldContextNodeHelper = '../tools/prepared/prepared-world-context-node-source.mts';
+const worldContextNodeHelper = './prepared/prepared-world-context-node-source.mts';
 function worldContextPlanImport(ast: Program | null, file: string): {data: number; helper: number} | null {
   if (!ast || file !== 'site/world-context-plan.mts') return null;
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
