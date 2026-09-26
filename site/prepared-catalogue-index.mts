@@ -1,6 +1,5 @@
-import { distanceDescription } from './navigation/navigation-distance.mts';
+import { distanceDescription, isSceneObject } from '@cssearth/objects';
 import { FOCUS_SOURCE_DOCUMENTS } from './focus-catalog-data.mts';
-import { isSceneObject } from './prepared-focus-object.mts';
 import { objectClassificationLabel, objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from './sidebar-thumbnails.mts';
 import { sourceDocumentation } from './source-documentation.mts';

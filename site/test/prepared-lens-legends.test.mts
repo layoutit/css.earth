@@ -10,7 +10,7 @@ import { OBJECTS } from "../objects.mts";
 import {
   prepareLensCategoryLegend,
   prepareLensScaleLegend,
-} from "../prepared-lens-legends.mts";
+} from "../../tools/objects/content/prepared-lens-legends.mts";
 
 test("prepares a frozen, smoothly sampled scale legend", () => {
   const legend = prepareLensScaleLegend({

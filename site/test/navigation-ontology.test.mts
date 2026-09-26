@@ -7,9 +7,8 @@ import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../ob
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search-objects.mts';
 import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare/prepare-navigation-destinations.mts';
-import { normalizeDestinationQuery } from '../destination-search.mts';
+import { distanceDescription, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
-import { parseNavigationDistance, distanceDescription } from '../navigation/navigation-distance.mts';
 import { navigationTree, type TreeNode } from '../navigation/navigation-tree.mts';
 import { OVERVIEW_TITLES } from '../overview-titles.mts';
 import { resolve } from 'node:path';

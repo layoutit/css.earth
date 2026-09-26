@@ -1,5 +1,4 @@
-import type { ObjectClassification } from './object-schema.mts';
-import { parseObjectDiscovery } from './object-discovery.mts';
+import { parseObjectDiscovery, type ObjectClassification } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
 /** Every packaged body the world draws, in the shape the system helpers (site/object-systems.mts) and world visibility

@@ -8,13 +8,14 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString, array, number, optional, shape, text } from '@cssearth/core';
-import { decodeProfile } from '@cssearth/bake/objects/raster';
+import { decodeProfile } from '../../../raster/index.ts';
 import { readFitsHdu } from '@cssearth/fits';
 import { parseTextKernel, parseLeapSeconds } from '@cssearth/spice';
-import { restoredBankFile } from '../../kernel-banks/kernel-bank.mts';
-import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
-import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from '@cssearth/bake/objects/cameras';
-import { limbCentre, readingPole, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';
+import { restoredBankFile } from '../../../cameras/index.ts';
+import { decodeCalibratedCamera } from '../../../geometry/index.ts';
+import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from '../../../cameras/index.ts';
+import { limbCentre } from './registration-sweeps.ts';
+import { readingPole, spinRecordReading } from './spin-record-reading.ts';
 
 const DEGREE = Math.PI / 180;
 export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@1';

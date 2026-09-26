@@ -8,9 +8,7 @@ import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Ex
 import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
 import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
-import { parseNavigationDistance } from '../../site/navigation/navigation-distance.mts';
-import { definePreparedFocus } from '../../site/prepared-focus-object.mts';
-import { parseObjectDiscovery } from '../../site/object-discovery.mts';
+import { definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../src/platform/prepared-presentation-contract.mts";
 import { readPreparedJsonExports } from "../prepared/check-prepared-presentation.mts";
@@ -20,6 +18,8 @@ import { requireAuthoredWorldFrameReceipt } from '../sources/authored-world-fram
 import { readContextObjects } from '../prepare/prepare-catalog.mts';
 
 const registryPath = "site/objects.mts";
+// The registry assembles its entries with the shared registry contracts the objects package's main entry exports.
+const registryPackage = "@cssearth/objects";
 const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json", "src/objects/sun/prepared/world-context-summary.json"]);
 // Registered objects own packages; context folders beside them (galaxies, nebulae, the heliosphere) are application data.
 const objectPackageIds: ReadonlySet<string> = new Set(OBJECTS.map(object => object.id));
@@ -316,7 +316,7 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
   const ast = parseRuntimeSource(source, registryPath), imports = new Map<string, string>();
   function fail(message: string): never { throw new TypeError(`Actual OBJECTS registry: ${message}.`); }
   for (const node of ast.body) if (node.type === 'ImportDeclaration') for (const specifier of node.specifiers) {
-    if (specifier.type === 'ImportSpecifier' && node.source.value === './object-schema.mts') imports.set(specifier.local.name, nameOf(specifier.imported));
+    if (specifier.type === 'ImportSpecifier' && node.source.value === registryPackage) imports.set(specifier.local.name, nameOf(specifier.imported));
 
   }
   const definitions = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration' ? node.declaration.declarations : []).filter(node => nameOf(node.id) === 'OBJECTS');
@@ -327,7 +327,7 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
     if (scene?.type !== 'SpreadElement' || scene.argument.type !== 'CallExpression' || focus?.type !== 'SpreadElement' || focus.argument.type !== 'CallExpression') fail('requires scene and focus capability projections');
     const mapping = focus.argument;
     const focusImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === './prepared-focus-objects.json');
-    const validatorImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === './prepared-focus-object.mts');
+    const validatorImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === registryPackage);
     if (focusImport?.type !== 'ImportDeclaration' || focusImport.specifiers.length !== 1 || focusImport.specifiers[0].type !== 'ImportDefaultSpecifier' ||
         validatorImport?.type !== 'ImportDeclaration' || !validatorImport.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'definePreparedFocus' && nameOf(mapping.arguments[0]) === specifier.local.name) ||
         mapping.callee.type !== 'MemberExpression' || mapping.callee.computed || nameOf(mapping.callee.object) !== focusImport.specifiers[0].local.name || nameOf(mapping.callee.property) !== 'map' || mapping.arguments.length !== 1) fail('focus destinations must use the prepared inventory and validator');
@@ -352,7 +352,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
       specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === exported ? [specifier.local.name] : []) : []);
   const descriptorFile = 'site/prepared-object-catalog.mts';
   const inventoryNames = namedImport(ast, './prepared-object-catalog.mts', 'OBJECT_DESCRIPTORS');
-  const entryNames = namedImport(ast, './object-catalog.mts', 'catalogEntry');
+  const entryNames = namedImport(ast, registryPackage, 'catalogEntry');
   const map = kind(mapping.callee, 'MemberExpression');
   if (inventoryNames.length !== 1 || entryNames.length !== 1 || map.computed || map.optional || mapping.type !== 'CallExpression' || mapping.optional ||
       nameOf(map.object) !== inventoryNames[0] || nameOf(map.property) !== 'map' || mapping.arguments.length !== 1) fail('requires the prepared descriptor inventory');
@@ -383,9 +383,10 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   if (field.computed || field.kind !== 'init' || nameOf(field.key) !== 'loadPackagedObject' || returned.optional ||
       nameOf(returned.callee) !== kind(field.value, 'Identifier').name || returned.arguments.length !== 2 || nameOf(returned.arguments[0]) !== parameter || nameOf(returned.arguments[1]) !== nameOf(loader.params[0])) fail('catalogue loader must forward its bound descriptor and abort signal unchanged');
 
-  const entryAst = parseRuntimeSource(await readSource(resolve(root, 'site/object-catalog.mts')), 'site/object-catalog.mts');
+  const entryFile = await exportOwner(await resolveRuntimeSource(registryPackage, resolve(root, registryPath), { root, source: readSource }), 'catalogEntry', root, readSource);
+  const entryAst = parseRuntimeSource(await readSource(entryFile), relative(root, entryFile));
   const entry = entryAst.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'catalogEntry' ? [node.declaration] : []);
-  const definitions = namedImport(entryAst, './object-schema.mts', 'defineObject');
+  const definitions = namedImport(entryAst, './object-schema.js', 'defineObject');
   if (entry.length !== 1 || definitions.length !== 1 || ![2, 3, 4].includes(entry[0].params.length)) fail('catalogue helper must bind its own actual JSON descriptor');
   const input = kind(entry[0].params[0], 'Identifier').name, loadScene = kind(entry[0].params[1], 'Identifier').name;
   const distance = entry[0].params[2] === undefined ? undefined : kind(entry[0].params[2], 'Identifier').name;
@@ -443,6 +444,26 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     entries.set(value.id, {kind: 'descriptor', client: 'site/packaged-object-runtime.mts', descriptor, exported: 'loadPackagedObject'});
   }
   return {entries, importOffsets: new Set([sourceStart(imported)]), descriptorImports, descriptorFile};
+}
+/** The module that declares `name`, followed from `file` through its `export … from` re-exports. */
+async function exportOwner(file: string, name: string, root: string, readSource: (path: string) => Promise<string>, seen = new Set<string>()): Promise<string> {
+  if (seen.has(file)) throw new TypeError(`Actual OBJECTS registry: ${name} is re-exported in a cycle.`);
+  seen.add(file);
+  const ast = parseRuntimeSource(await readSource(file), relative(root, file));
+  const next = (specifier: unknown) => typeof specifier === 'string' && specifier.startsWith('./') ? resolve(dirname(file), specifier.replace(/\.js$/u, '.ts')) : null;
+  for (const node of ast.body) {
+    if (node.type === 'ExportNamedDeclaration' && node.declaration && (node.declaration.type === 'FunctionDeclaration' ? nameOf(node.declaration.id) === name
+      : node.declaration.type === 'VariableDeclaration' && node.declaration.declarations.some(declaration => nameOf(declaration.id) === name))) return file;
+    if (node.type === 'ExportNamedDeclaration' && node.source && node.specifiers.some(specifier => nameOf(specifier.exported) === name)) {
+      const target = next(node.source.value);
+      if (target) return exportOwner(target, name, root, readSource, seen);
+    }
+  }
+  for (const node of ast.body) if (node.type === 'ExportAllDeclaration' && !node.exported) {
+    const target = next(node.source.value);
+    if (target) try { return await exportOwner(target, name, root, readSource, seen); } catch { /* another re-export may declare it */ }
+  }
+  throw new TypeError(`Actual OBJECTS registry: ${relative(root, file)} does not export ${name}.`);
 }
 function memberPath(node: Node | null | undefined): string[] | null {
   if (node?.type !== 'MemberExpression' || node.computed) return null;

@@ -6,7 +6,7 @@ import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '../fixture.m
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { parseApproachRecipe, spacecraftApproach } from '@cssearth/spice';
 import { loadKernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 
 /**
  * tools/oracles/spice/new-horizons-approach.py runs SpiceyPy over the pinned new-horizons kernel bank with each body's

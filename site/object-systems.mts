@@ -1,7 +1,7 @@
 import { orbitRoot } from '../src/platform/orbit-root.mts';
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
-import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectEntry } from './objects.mts';
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, systemFramingRadii } from './system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';

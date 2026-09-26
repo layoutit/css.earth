@@ -74,11 +74,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule or a registry entry per body:
   // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
-  // site/context-colour.mts), capitals for a star, black hole or planet's caption, and its classification and system name.
+  // @cssearth/objects `contextColour`), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
     const registry = (await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
       SCENE_OBJECTS: readonly { id: string; color: string; classification: string; systemName: string }[] }).SCENE_OBJECTS;
-    const { contextColour } = await import(pathToFileURL(resolve(process.cwd(), 'site/context-colour.mts')).href) as typeof import('../../site/context-colour.mts');
+    const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import(pathToFileURL(resolve(process.cwd(), 'src/navigation/marker-presentation.mts')).href) as typeof import('../../src/navigation/marker-presentation.mts');
     const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/jpl-mission-targets.mts')).href) as typeof import('../prepare/jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));

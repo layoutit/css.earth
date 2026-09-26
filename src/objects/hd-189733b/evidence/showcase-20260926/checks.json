@@ -386,5 +386,21 @@
     "No new physical atmosphere retrieval or raw-observation reduction.",
     "Screenshots inspect the new surfaces and charts; no claim of matched frame pixel parity.",
     "Some first screenshots caught pending browser paint; retained images were inspected after the chart and surface appeared."
-  ]
+  ],
+  "integration": {
+    "mainCommit": "9830ac1173f25e00fb3111b6f1afe35a12865742",
+    "resolution": "Chart titles follow main into tools/objects/content/prepare.ts; the deleted site title module stays deleted.",
+    "inventoryByteIdenticalToImplementation": true,
+    "inventorySha256": "19650c1844daf991b996bc648e0e91247668bfc15cd4108e7a5ddf0f99ac7338",
+    "rerunResults": {
+      "focusedTests": 28,
+      "sharedPageAndDatasetTests": 19,
+      "preparationTypecheck": "pass",
+      "testsTypecheck": "pass",
+      "astroTypecheck": "pass",
+      "browserConfigurations": 4,
+      "browserErrors": 0
+    },
+    "evidenceReuse": "All inventory entries, including runtime, content and every image, are byte-identical after the rebuild. Prior delivery and screenshots remain applicable."
+  }
 }

@@ -1,6 +1,6 @@
 import { requireRecord, shape, text, number, array, optional, nullable, boolean } from '@cssearth/core';
 import { parseSourceManifest } from '#preparation/source-files';
-import { parseSolidPreparationSource } from '../objects/terrestrial-layers/profile-source.mts';
+import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** Refresh bytes without discarding reviewed identity, credits or capture evidence. */
 export function refreshSourceRecord<T extends {path: string}>(records: readonly unknown[], update: T) {

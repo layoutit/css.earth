@@ -1,4 +1,4 @@
-import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectEntry } from './objects.mts';
 import { isRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';

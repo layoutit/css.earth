@@ -2,7 +2,7 @@ import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { normalizeDestinationQuery } from "../../../../site/destination-search.mts";
+import { normalizeDestinationQuery } from '@cssearth/objects';
 import { prepareLocationPoint, prepareLocationCamera } from "./prepare-location.mts";
 
 import type { GeographicScene } from './contracts.mts';

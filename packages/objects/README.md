@@ -13,6 +13,13 @@ shape, surfaces and lenses, materials, frame banks, optional layers and motion,
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 
+The registry contracts (`src/registry/`) are what the application's one `OBJECTS` registry (`site/objects.mts`) and the
+preparation tools share: `defineObjects()` and `catalogEntry()` assemble and decode entries, `parseObjectDiscovery()`,
+`parseNavigationDistance()`, `parseArrivalView()` and `definePreparedFocus()` validate the prepared registry data,
+`orderFacts()` orders factsheets, `normalizeDestinationQuery()` is the name normalisation preparation writes and search
+reads, `contextColour()` picks a body's world-context colour, and `validateWorldRotation()` checks a rotation. The host
+binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
+
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
 physical frame, bounds, and pinned preparation source. Volume images, concrete
 sampling, and renderer-specific slice geometry remain outside this package.

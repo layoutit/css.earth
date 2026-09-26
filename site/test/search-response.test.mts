@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../search-response.mts';
+import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../server/search-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
 import { objectSearchLabels, searchObjects } from '../object-search.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
 import { createFeatureBrowser } from '../feature-browser.mts';
-import { handleFindRequest } from '../find.mts';
+import { handleFindRequest } from '../server/find.mts';
 
 const origin = 'https://preview.example.test';
 const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',

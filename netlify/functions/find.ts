@@ -1,5 +1,5 @@
-import { handleFindRequest } from '../../site/find.mts';
-import { parseFeaturePin } from '../../site/feature-search.mts';
+import { handleFindRequest } from '../../site/server/find.mts';
+import { parseFeaturePin } from '../../site/search/feature-search.mts';
 import pin from '../../site/prepared-feature-index.json' with { type: 'json' };
 
 const featurePin = parseFeaturePin(JSON.stringify(pin));

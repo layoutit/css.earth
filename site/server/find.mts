@@ -1,10 +1,10 @@
 import { isRecord } from '@cssearth/core';
-import { featureResult, matchFeatures, parseFeatureIndex, placeFeatures, PLACE_FEATURE_PREFIX } from './feature-search.mts';
-import type { FeatureIndex, FeatureIndexPin, IndexedFeature } from './feature-search.mts';
-import { FIND_QUERY_LIMIT } from './find-protocol.mts';
-import type { FindResult } from './find-protocol.mts';
+import { featureResult, matchFeatures, parseFeatureIndex, placeFeatures, PLACE_FEATURE_PREFIX } from '../search/feature-search.mts';
+import type { FeatureIndex, FeatureIndexPin, IndexedFeature } from '../search/feature-search.mts';
+import { FIND_QUERY_LIMIT } from '../search/find-protocol.mts';
+import type { FindResult } from '../search/find-protocol.mts';
 
-/** The search function's side of find-protocol.mts. */
+/** The search function's side of search/find-protocol.mts. */
 interface FindData { readonly index: FeatureIndex; readonly places: ReadonlyMap<string, ReadonlyMap<string, unknown>>; }
 
 async function readJson(url: URL, fetcher: typeof fetch): Promise<unknown> {

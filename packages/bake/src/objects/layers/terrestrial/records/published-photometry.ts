@@ -5,7 +5,7 @@
  * The model record is a pinned manifest document citing its publication with a
  * `method` binding; `source.verify()` has byte-verified it before any route runs.
  */
-import { loadPhotometricModelRecord, parsePhotometryReference, createNormalization, possibleGeometry } from '@cssearth/bake/photometry';
+import { loadPhotometricModelRecord, parsePhotometryReference, createNormalization, possibleGeometry } from '../../../../photometry/index.ts';
 import type { SourceManifest } from '@cssearth/objects/node';
 
 export interface PublishedPhotometryBlock {
