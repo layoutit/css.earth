@@ -8,3 +8,9 @@ test('only absent inputs skip: coverage that finds an undeclared file fails', ()
   assert.match(missingSourceReason(new Error('Fixture source manifest coverage failed. Undeclared: none. Missing: raw/a.fits.')) ?? '', /Missing: raw\/a\.fits/u);
   assert.equal(missingSourceReason(new Error('an ordinary assertion')), null);
 });
+
+test('an untracked source sharp reports missing skips; a tracked one still fails', () => {
+  const root = new URL('../../', import.meta.url).pathname;
+  assert.match(missingSourceReason(new Error(`Input file is missing: ${root}src/objects/saturn/source/observations/not-restored.tif`)) ?? '', /saturn: .*not-restored\.tif is not restored/u);
+  assert.equal(missingSourceReason(new Error(`Input file is missing: ${root}src/objects/saturn/source/manifest.json`)), null);
+});
