@@ -6,10 +6,10 @@ import { createSceneView } from '../scene/scene-view.mts';
 import { createSceneSessions } from '../scene/scene-session.mts';
 import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mts';
 import type { BrowserWindow } from '../browser-types.mts';
-import { formatSharedView, parseSharedView } from "../../src/renderers/css/dist/navigation.js";
+import { formatSharedView, parseSharedView } from "@cssearth/renderer/navigation";
 
-import type { ObjectSharedView } from '../../src/renderers/css/runtime/object-scene.ts';
-import type { SharedView } from '../../src/renderers/css/navigation/view-url.ts';
+import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
+import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 import { required } from './navigation-test-values.mts';
 interface FakeHistoryWindow extends EventTarget {
   location: URL;

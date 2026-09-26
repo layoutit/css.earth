@@ -24,8 +24,6 @@ const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  '${{ steps.ci-cache-key.outputs.build_digest }}':'',
  '${{ steps.package-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.package_digest }}':'',
- '${{ steps.renderer-cache.outputs.cache-hit }}':'false',
- '${{ steps.ci-cache-key.outputs.renderer_digest }}':'',
 };
 /** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
  * the rest of the run after a failure. */

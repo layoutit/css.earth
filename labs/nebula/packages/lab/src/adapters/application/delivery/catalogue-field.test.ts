@@ -6,10 +6,10 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedCataloguePoint } from '../../../../../../../../src/renderers/css/stars/prepared-catalogue-points.ts';
+import type { PreparedCataloguePoint } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { embedNebulaFrame, METERS_PER_PARSEC } from './nebula-frame.ts';
-import { samePreparedCatalogueGeometry } from '../../../../../../../../src/renderers/css/stars/prepared-catalogue-points.ts';
+import { samePreparedCatalogueGeometry } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
 
 const sha = (v: Uint8Array | string) => createHash('sha256').update(v).digest('hex');
 const frame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545 + 16 * 365.25,

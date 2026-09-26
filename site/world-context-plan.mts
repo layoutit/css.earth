@@ -1,4 +1,4 @@
-import { parsePreparedWorldContextSummary } from '../src/renderers/css/dist/index.js';
+import { parsePreparedWorldContextSummary } from '@cssearth/renderer';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared

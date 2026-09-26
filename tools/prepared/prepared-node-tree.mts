@@ -1,4 +1,4 @@
-import type { PreparedTree } from '../../src/renderers/css/rendering/prepared-presentation.ts';
+import type { PreparedTree } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedProjectiveLayout, PreparedProjectiveTextureLeaf } from './projective-layout.mts';
 type PreparedProperty = PreparedTree['properties'][number];
 type StyleValues = { [K in keyof CSSStyleDeclaration as CSSStyleDeclaration[K] extends string ? K : never]: string };

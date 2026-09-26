@@ -1,9 +1,9 @@
 /** cssEarth camera representation binding; generic view math lives in volume-viewer. */
 import type { ShapeCloudCameraBackend } from '@cssearth/volume-viewer/camera/shape-cloud';
-import { worldCameraFromCenteredPresentation } from '../../../../../../../src/renderers/css/navigation/world-camera';
-import { worldRotationCss, worldRotationFromQuaternion } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
-import { preparedVolumeCameraTransform } from '../../../../../../../src/renderers/css/volume/prepared-volume-runtime';
-import type { VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import { worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldRotationCss, worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 
 export const shapeCloudCameraBackend: ShapeCloudCameraBackend<VolumeCameraPublication> = {
   cssPixelsPerUnit: 50,

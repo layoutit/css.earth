@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { Vector3 } from '../renderers/css/solar-system/types.ts';
+import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
 import { LIT_DEFAULT_VIEW, LOPSIDED_COVERAGE, openingDirection, prepareDefaultCameraAngles, prepareFacingCameraAngles } from './default-camera.mts';
 import { detectMissingCoverage, missingCoverageColor } from './prepare-missing-coverage.mts';
 

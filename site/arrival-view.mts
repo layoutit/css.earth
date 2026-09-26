@@ -1,6 +1,6 @@
 import { isRecord } from '@cssearth/core';
-import { validateWorldRotation } from '../src/renderers/css/navigation/world-camera-math.ts';
-import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.ts';
+import { validateWorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 
 /** The package's prepared photographic viewing angle, in its presentation frame. */
 export interface PreparedArrivalView { defaultLens: string; lensIds: readonly string[]; rotation: WorldRotation; }

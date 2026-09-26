@@ -11,7 +11,7 @@ import type { ObjectEntry } from '../../site/object-schema.mts';
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../src/platform/prepared-presentation-contract.mts";
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
 import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
-import { PREPARED_CSS_OBJECT_FORMAT } from '../../src/renderers/css/dist/index.js';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { requireObjectControls } from '../../site/scene/scene-contract.mts';
 import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../ci/runtime-ast.mts';
 import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';

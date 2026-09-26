@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { readdir, readFile } from "node:fs/promises";
-import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "../../../src/renderers/css/dist/index.js";
+import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "@cssearth/renderer";
 
 const root = new URL("../../../", import.meta.url);
 const bodies = new URL("src/objects/", root);

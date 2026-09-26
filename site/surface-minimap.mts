@@ -4,7 +4,7 @@ import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { SurfaceMapConfig, SurfaceMapReader } from './surface-map-context.mts';
 interface MapElements { config: SurfaceMapConfig | null; rectangles: HTMLElement[]; size: { width: number; height: number } | null; }
 type WheelInput = Pick<WheelEvent, 'deltaY'> & Partial<Pick<WheelEvent, 'deltaX' | 'deltaMode' | 'ctrlKey' | 'preventDefault' | 'stopPropagation'>>;
-import { cssCameraAxesFromOrientation } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation } from '@cssearth/renderer/navigation';
 import { directionOnMap, mapDirection, orbitMapCamera } from './surface-minimap-math.mts';
 import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';

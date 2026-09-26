@@ -1,9 +1,9 @@
 import { cross3 as cross } from '@cssearth/core';
-import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
+import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
-import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
-import type { PreparedWorldContext } from '../src/renderers/css/prepared-data/world-context.js';
+import type { PreparedWorldCameraFrame, WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
+import type { PreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { MapViewport } from './surface-map-context.mts';
@@ -15,7 +15,7 @@ const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import lensVolumes from './prepared-lens-volumes.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
-import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';
 

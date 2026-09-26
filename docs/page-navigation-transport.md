@@ -166,7 +166,7 @@ node --test site/test/scene-session.test.mts
 ```
 
 Worker reuse, cancellation and disposal are covered by
-[prepared-object-worker-client.test.ts](../src/renderers/css/prepared-object-worker-client.test.ts)
+[prepared-object-worker-client.test.ts](../packages/renderer/src/prepared-object-worker-client.test.ts)
 in the renderer suite. Browser checks should hold a destination's actual scene
 request and verify an immediate complete card, one scene swap, retained camera
 and correct interruption behavior.

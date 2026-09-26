@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '../../stars/types.js';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../../stars/validation.js';
+import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '@cssearth/renderer/stars/types.ts';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
 
 const base = new URL('../../../../objects/stellar-neighbourhood/', import.meta.url);
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');

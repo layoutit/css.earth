@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '../renderers/css/dist/index.js';
-import type { PreparedResidencyOptions, PreparedResourcePool, PreparedResourceEntry, PreparedAssets } from '../renderers/css/dist/platform/prepared-residency.js';
-import type { PreparedImage } from '../renderers/css/dist/platform/prepared-image-store.js';
-import { createPreparedResidency } from '../renderers/css/dist/testing.js';
+import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/renderer';
+import type { PreparedResidencyOptions, PreparedResourcePool, PreparedResourceEntry, PreparedAssets } from '@cssearth/renderer/platform/prepared-residency';
+import type { PreparedImage } from '@cssearth/renderer/platform/prepared-image-store';
+import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { requireRecord, requireArray } from '@cssearth/core';
 import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
 const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','uranus','saturn'].map(async id=>[id,parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));

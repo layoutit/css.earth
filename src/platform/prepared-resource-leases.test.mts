@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createPreparedImageStore } from '../renderers/css/dist/testing.js';
-import type { PreparedImage } from '../renderers/css/rendering/prepared-image-store.ts';
+import { createPreparedImageStore } from '@cssearth/renderer/testing';
+import type { PreparedImage } from '@cssearth/renderer/rendering/prepared-image-store.ts';
 type ImageLease = ReturnType<ReturnType<typeof createPreparedImageStore>["createLease"]>;
 interface DecodeJob { image: PreparedImage; url: string; resolve(): void; reject(reason: unknown): void; }
 

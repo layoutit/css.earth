@@ -1,9 +1,9 @@
-import { createCameraMotion } from '../../src/renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import { mountSurfaceFeatureLabels } from '../../src/renderers/css/dist/index.js';
+import { mountSurfaceFeatureLabels } from '@cssearth/renderer';
 import { createSceneLifetime } from '@cssearth/engine';
 
 test('surface labels keep no frame loop while they are off, the default', () => {

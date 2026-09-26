@@ -1,16 +1,16 @@
 import { readFile } from 'node:fs/promises';
-import type { OrbitPublication } from "../../renderers/css/navigation/object-orbit.ts";
+import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
 import * as runtimePolicy from "../../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "../../renderers/css/dist/index.js";
-import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation } from "../../renderers/css/dist/testing.js";
-import type { ObjectRuntimeDefinition } from "../../renderers/css/dist/index.js";
-import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "../../renderers/css/dist/testing.js";
+import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "@cssearth/renderer";
+import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation } from "@cssearth/renderer/testing";
+import type { ObjectRuntimeDefinition } from "@cssearth/renderer";
+import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
 import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mts";
 import { createSceneLifetime } from "@cssearth/engine";
 import { requireObjectRuntimeDefinition } from "../../../tools/contract/object-runtime-contract.mts";
-import { initialObjectSelection } from "../../renderers/css/dist/testing.js";
+import { initialObjectSelection } from "@cssearth/renderer/testing";
 // Feature catalogues use the checked-in fixture bytes; these image-lifetime
 // tests have no network service. Camera behavior has its own platform fixtures.
 export const fixtureObjectCapabilities = { ...preparedObjectCapabilities,
@@ -177,7 +177,7 @@ export function objectView(definition: ObjectRuntimeDefinition, silhouetteDiamet
 export function objectRuntimePackageTests(value: unknown): void {
     const definition = runtimeDefinition(value);
     test(`${definition.id}: the actual definition satisfies the common contract`, () => { resolvePreparedPresentation(definition, { selection: initialObjectSelection(definition.controls), view: objectView(definition) }); });
-    // Startup decoding moved from the mount into the prepared resource lease (src/renderers/css/runtime/prepared-resource-lease.ts);
+    // Startup decoding moved from the mount into the prepared resource lease (packages/renderer/src/runtime/prepared-resource-lease.ts);
     // its cancellation, decode-failure and release-failure behaviour is covered by prepared-resource-lease.test.ts.
 }
 export function retainedPresentationFixture(value: unknown, { failAtElement = null }: {

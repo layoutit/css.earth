@@ -1,4 +1,4 @@
-import type { LensVolume } from '../../../src/renderers/css/runtime/object-contract.js';
+import type { LensVolume } from '@cssearth/renderer/runtime/object-contract.ts';
 
 export interface LensLegendRecipe {
   kind: "scale" | "categories" | "ranges";

@@ -1,8 +1,8 @@
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.mts';
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../../src/platform/prepare-missing-coverage.mts';
 import { isRecord } from '@cssearth/core';
-import type { PreparedInteriorDisc } from '../../src/renderers/css/rendering/prepared-interior-disc.ts';
-import type { PreparedPresentationDefinition, PreparedVariant } from '../../src/renderers/css/rendering/prepared-presentation.ts';
+import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
+import type { PreparedPresentationDefinition, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.mts';
 /** A leaf's fixed plane in scene space, which the depth preparation needs to prove a surface static. */
 type FacingBinding = { plane: [number, number, number, number]; tolerance: number };

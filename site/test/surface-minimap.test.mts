@@ -1,15 +1,15 @@
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { WorldRotation } from '../../src/renderers/css/navigation/world-camera-math.ts';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { SurfaceAxes } from '../surface-minimap-math.mts';
 import { required, position } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { cesiumMinimapExcerpts } from '../../tools/prepare/prepare-cesium-minimap.mts';
 import { directionOnMap, mapDirection, orbitMapCamera } from '../surface-minimap-math.mts';
-import { rotateWorldPosition, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
+import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import Camera from '@cesium/engine/Source/Scene/Camera.js';
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import Rectangle from '@cesium/engine/Source/Core/Rectangle.js';

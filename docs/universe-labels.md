@@ -1,7 +1,7 @@
 # Universe labels
 
 Scene captions use the shared policy in
-[`universe-label-policy.ts`](../src/renderers/css/labels/universe-label-policy.ts).
+[`universe-label-policy.ts`](../packages/renderer/src/labels/universe-label-policy.ts).
 The object registry and source catalogues remain complete; a catalogue entry
 does not automatically need a caption on screen.
 
@@ -51,7 +51,7 @@ Disabled moon captions have no circle or navigation target.
 
 ## Stable references
 
-[`stable-label-layout.ts`](../src/renderers/css/labels/stable-label-layout.ts)
+[`stable-label-layout.ts`](../packages/renderer/src/labels/stable-label-layout.ts)
 reserves clear existing placements within each static tier before relocating
 blocked labels or admitting peers. Explicit selection and hover can take priority. Camera drag, inertia
 and rest use this same rule; ending motion never triggers a separate layout.
@@ -65,7 +65,7 @@ moon and surface-feature labels; camera frames do not measure the panels.
 
 ## Orbit and selection emphasis
 
-[`context-presentation-policy.ts`](../src/renderers/css/universe/context-presentation-policy.ts)
+[`context-presentation-policy.ts`](../packages/renderer/src/universe/context-presentation-policy.ts)
 keeps zoom fading separate from selection emphasis. As the selected disc grows
 from 12% to 30% of viewport height, orbit lines soften to 30% of their normal
 strength and remain there at closer distances. Viewport clipping, body occlusion,

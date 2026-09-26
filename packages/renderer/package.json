@@ -1,0 +1,91 @@
+{
+  "name": "@cssearth/renderer",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The CSS renderer runtime: prepared-object loading and validation, the world camera and navigation, retained CSS rendering of bodies, skies, stars, volumes, labels and the universe context, plus the compiled entries the site and tools import.",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./universe": {
+      "types": "./dist/universe.d.ts",
+      "import": "./dist/universe.js",
+      "default": "./dist/universe.js"
+    },
+    "./navigation": {
+      "types": "./dist/navigation.d.ts",
+      "import": "./dist/navigation.js",
+      "default": "./dist/navigation.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js",
+      "default": "./dist/testing.js"
+    },
+    "./scene-native-waits": {
+      "types": "./dist/scene-native-waits.d.ts",
+      "import": "./dist/scene-native-waits.js",
+      "default": "./dist/scene-native-waits.js"
+    },
+    "./world-context-planner-worker": {
+      "types": "./dist/world-context-planner-worker.d.ts",
+      "import": "./dist/world-context-planner-worker.js",
+      "default": "./dist/world-context-planner-worker.js"
+    },
+    "./prepared-object-worker": {
+      "types": "./dist/prepared-object-worker.d.ts",
+      "import": "./dist/prepared-object-worker.js",
+      "default": "./dist/prepared-object-worker.js"
+    },
+    "./platform/*": {
+      "types": "./dist/platform/*.d.ts",
+      "import": "./dist/platform/*.js",
+      "default": "./dist/platform/*.js"
+    },
+    "./image-layers/*": "./src/image-layers/*",
+    "./labels/*": "./src/labels/*",
+    "./navigation/*": "./src/navigation/*",
+    "./prepared-data/*": "./src/prepared-data/*",
+    "./rendering/*": "./src/rendering/*",
+    "./runtime/*": "./src/runtime/*",
+    "./shell/*": "./src/shell/*",
+    "./sky/*": "./src/sky/*",
+    "./solar-system/*": "./src/solar-system/*",
+    "./stars/*": "./src/stars/*",
+    "./universe/*": "./src/universe/*",
+    "./validation/*": "./src/validation/*",
+    "./volume/*": "./src/volume/*",
+    "./styles/*": "./src/styles/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@cssearth/core": "workspace:*",
+    "@cssearth/engine": "workspace:*",
+    "@cssearth/objects": "workspace:*"
+  },
+  "devDependencies": {
+    "@cssearth/bake": "workspace:*",
+    "@cssearth/catalog": "workspace:*",
+    "@cssearth/volume-viewer": "workspace:*",
+    "@types/node": "^26.4.0",
+    "linkedom": "^0.18.13",
+    "sharp": "0.35.3",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.1"
+  }
+}

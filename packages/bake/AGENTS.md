@@ -1,7 +1,7 @@
 # Bake package instructions
 
 Own the build-time preparation code: what the preparation tools and the nebula lab run to turn source records into
-prepared delivery. Nothing here runs in the application. The runtime (`src/renderers/**` outside `preparation/`, and
+prepared delivery. Nothing here runs in the application. The runtime (`@cssearth/renderer` and
 `site/**`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
 
 Each topic is one subpath entry. Topics must not import each other sideways; share code through `@cssearth/core` or

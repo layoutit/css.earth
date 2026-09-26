@@ -1,4 +1,4 @@
-import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import type { PreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
 
 /** Prepare conservative bounds from the final PolyCSS image rectangle,
  * including its edge extension and serialized transform, not source vertices. */

@@ -1,14 +1,14 @@
 import {loadObjectTestDefinition} from '../../../tools/contract/object-test-data.mts';
-import { createObjectRuntime } from '../../renderers/css/dist/index.js';
+import { createObjectRuntime } from '@cssearth/renderer';
 import { createSceneLifetime } from '@cssearth/engine';
 import { createPreparedResidency } from '../prepared-residency.mts';
 import { createObjectSelectionRuntime } from '../object-selection-runtime.mts';
 import { retainedPresentationFixture } from './object-runtime-package.mts';
 import { Surface, orbitFixture, type OrbitCallbacks } from './orbit-fixture.mts';
 import { requireObjectRuntimeDefinition } from '../object-runtime-contract.mts';
-import { parsePreparedObjectRuntime } from '../../renderers/css/dist/index.js';
-import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '../../renderers/css/dist/index.js';
-import type { RetainedCubicSkyOrbit, OrbitServices } from '../../renderers/css/dist/platform/object-orbit.js';
+import { parsePreparedObjectRuntime } from '@cssearth/renderer';
+import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '@cssearth/renderer';
+import type { RetainedCubicSkyOrbit, OrbitServices } from '@cssearth/renderer/platform/object-orbit';
 import type { PreparedImage } from '../prepared-image-store.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 
@@ -42,7 +42,7 @@ export function materialOrbitFixture(id: string) {
       sunViewDirection: () => [0, 0, 1],
       captureCounterRotation: () => () => identity, setSceneRotation() {},
       reset() {}, rotate() {}, snapshot: () => ({}) }) };
-  const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('../../renderers/css/dist/platform/object-orbit.js').OrbitServices>);
+  const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('@cssearth/renderer/platform/object-orbit').OrbitServices>);
   const f = { ...shared, stage: nativeStage, errors: [], writes: 0, fail: false, create: async () => undefined, event: () => undefined, restore() {} } as unknown as MaterialFixture;
   const publish = () => { f.writes++; if (f.fail) throw new Error('material publication failed'); };
   const services = {
@@ -69,7 +69,7 @@ export function materialOrbitFixture(id: string) {
         decode: () => Promise.resolve(), removeAttribute() { this.src = ''; } }) });
       return f.resources;
     },
-    createOrbit(options: unknown) { f.orbit = shared.create(options as import('../../renderers/css/dist/platform/object-orbit.js').RetainedOrbitOptions); return f.orbit; },
+    createOrbit(options: unknown) { f.orbit = shared.create(options as import('@cssearth/renderer/platform/object-orbit').RetainedOrbitOptions); return f.orbit; },
   };
   const mount = createObjectRuntime(definition, services as unknown as Partial<ObjectRuntimeServices>);
   f.create = async () => { f.runtime = mount(nativeStage, { cameraMotion: shared.arguments.cameraMotion, worldContext: shared.arguments.worldContext, viewport: shared.arguments.viewport, framePresenter: shared.arguments.framePresenter, inputSurface: nativeStage, runtimePolicy: shared.arguments.runtimePolicy, onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };

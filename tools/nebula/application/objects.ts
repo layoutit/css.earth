@@ -11,11 +11,11 @@ import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promise
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
-import { validatePreparedCssVolume } from '../../../src/renderers/css/volume/validation.js';
-import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
-import type { PreparedVolumeLens } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import type { PreparedVolumeLens } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
@@ -28,13 +28,13 @@ const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v
 const implementationFiles = [
   'tools/nebula/application/package-identity.ts', 'tools/nebula/application/delivery-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
   'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
-  'tools/nebula/application/element-budget.ts', 'src/renderers/css/volume/compiler-render-budget.ts',
-  'src/renderers/css/volume/prepared-volume-lod.ts',
+  'tools/nebula/application/element-budget.ts', 'packages/renderer/src/volume/compiler-render-budget.ts',
+  'packages/renderer/src/volume/prepared-volume-lod.ts',
   'tools/nebula/application/star-sprites.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
   'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/volume-impostors.ts',
-  'src/renderers/css/volume/types.ts', 'src/renderers/css/volume/validation.ts',
-  'src/renderers/css/volume/volume-impostor-validation.ts', 'src/renderers/css/volume/prepared-volume-lenses.ts',
+  'packages/renderer/src/volume/types.ts', 'packages/renderer/src/volume/validation.ts',
+  'packages/renderer/src/volume/volume-impostor-validation.ts', 'packages/renderer/src/volume/prepared-volume-lenses.ts',
 ];
 export interface NebulaResearchBackend {
   compiler(root: string, recipe: ReturnType<typeof readNebulaDelivery>, progress: (message: string, fraction?: number) => void): Promise<{
@@ -130,7 +130,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   }
   for (const input of [...(recipe.fieldStars ? [recipe.fieldStars] : []), ...(recipe.compactInputs ? [recipe.compactInputs] : [])]) await pinned(root,input);
   const owners = [...implementationFiles, ...(recipe.fieldStars ? ['tools/nebula/application/catalogue-field.ts',
-    'src/renderers/css/navigation/world-camera-math.ts', 'src/renderers/css/stars/prepared-catalogue-points.ts'] : [])];
+    'packages/renderer/src/navigation/world-camera-math.ts', 'packages/renderer/src/stars/prepared-catalogue-points.ts'] : [])];
   // Package inventories define numerical owners without exposing their installation layout.
   const packagePins = await packageImplementationPins(root, ['@cssearth/bake']);
   const implementationSha256 = sha256(json([...await Promise.all(owners.map(async path => ({path,sha256:sha256(await readFile(local(root,path)))}))), ...packagePins]));

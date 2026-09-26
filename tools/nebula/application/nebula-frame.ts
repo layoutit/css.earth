@@ -1,5 +1,5 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedCssVolume, VolumeVector } from '../../../src/renderers/css/volume/types.js';
+import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
 import { balanceVolumeSlices } from '../../../src/renderers/css/preparation/volume-order.js';
 
 export const METERS_PER_PARSEC = 3.085677581491367e16;

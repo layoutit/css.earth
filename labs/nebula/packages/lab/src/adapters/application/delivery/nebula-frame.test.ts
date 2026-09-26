@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
-import { worldRotationFromQuaternion } from '../../../../../../../../src/renderers/css/navigation/world-camera-math.ts';
-import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
-import type { PreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/types.ts';
+import { worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
 import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, type VolumeSlices } from '@cssearth/bake/volume';
 const frame = { referenceFrame:'lab',epochJdTt:0,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,

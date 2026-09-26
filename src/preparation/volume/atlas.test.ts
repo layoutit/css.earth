@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { prepareVolumeAtlases } from './atlas.js';
-import type { PreparedCssVolume } from '../../renderers/css/volume/types.js';
+import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const AXES = ['x', 'y', 'z'] as const;

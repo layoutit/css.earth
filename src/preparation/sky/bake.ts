@@ -8,9 +8,9 @@ import { sha256 } from '@cssearth/core/node';
 import type { SkyRecipe } from './config.js';
 import { loadSkySource, HALF_LINEAR } from './source.js';
 import type { LinearHalfImage } from './exr.js';
-import { loadPreparedCssPointField } from '../../renderers/css/stars/loader.js';
-import { pointLuminanceVisible, pointPhotometry } from '../../renderers/css/stars/point-field-projection.js';
-import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
+import { loadPreparedCssPointField } from '@cssearth/renderer/stars/loader.ts';
+import { pointLuminanceVisible, pointPhotometry } from '@cssearth/renderer/stars/point-field-projection.ts';
+import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
 export interface SkyBasis { id: 'px' | 'nx' | 'py' | 'ny' | 'pz' | 'nz'; forwardIcrf: Vector3; rightIcrf: Vector3; upIcrf: Vector3; }
 export const SKY_BASES: readonly SkyBasis[] = [
   { id: 'px', forwardIcrf: [1, 0, 0], rightIcrf: [0, -1, 0], upIcrf: [0, 0, 1] },

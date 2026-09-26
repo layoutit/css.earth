@@ -4,6 +4,7 @@ import { mkdir, readdir } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { bundleRendererPackage } from '../cli/bundle-renderer.mts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const engineRequire = createRequire(resolve(root, 'packages/engine/package.json'));
@@ -48,7 +49,7 @@ for (const entry of entries) {
   await build({
     entryPoints: [resolve(root, entry)], outfile, bundle: true,
     platform: 'node', format: 'esm', target: 'node22', packages: 'external',
-    plugins: [{ name: 'retain-native-modules', setup(builder) {
+    plugins: [bundleRendererPackage, { name: 'retain-native-modules', setup(builder) {
       builder.onResolve({ filter: /\.m[jt]s$/ }, args => ({
         path: resolve(args.resolveDir, args.path), external: true,
       }));

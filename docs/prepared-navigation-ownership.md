@@ -107,7 +107,7 @@ comparisons and the interpretation used for its model.
 - `node --test site/test/rendered-page.test.mts` parses built Saturn, Earth and
   Mercury HTML for one scene, a camera and prepared texture references. It does
   not run Chrome or verify animation and flight behavior.
-- [prepared-object-worker-client.test.ts](../src/renderers/css/prepared-object-worker-client.test.ts)
+- [prepared-object-worker-client.test.ts](../packages/renderer/src/prepared-object-worker-client.test.ts)
   in the renderer suite — persistent worker reuse, cancellation and disposal.
 
 Performance evidence needs matched route, camera, viewport, DPR and browser runs.

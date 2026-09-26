@@ -1,5 +1,5 @@
 import { isArray } from '@cssearth/core';
-import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
+import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
 // Converts a scene-frame Sun direction into the view-space direction the
 // retained sky uses at the default camera pose.
 //

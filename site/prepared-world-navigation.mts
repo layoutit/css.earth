@@ -1,8 +1,8 @@
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser-types.mts';
-import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.ts';
-import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/object-scene.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
+import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 type WorldCamera = Parameters<typeof presentWorldCamera>[0];
 type WorldFrame = Parameters<typeof presentWorldCamera>[1];
 type Optics = ReturnType<ObjectWorldNavigation['optics']>;
@@ -28,7 +28,7 @@ import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARR
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
+import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;

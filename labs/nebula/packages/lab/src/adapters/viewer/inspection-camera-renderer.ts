@@ -1,12 +1,12 @@
 /** The app's input policy and canonical physical-camera representation. */
 import type { InspectionCameraBackend } from '@cssearth/volume-viewer/camera/inspection-camera';
-import type { VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import * as runtimePolicy from '../../../../../../../site/runtime-policy.mts';
-import { createObjectInteractionControls } from '../../../../../../../src/renderers/css/navigation/object-interaction-controls';
-import { createCameraMotion } from '../../../../../../../src/renderers/css/navigation/camera-motion';
-import { worldCameraFromCenteredPresentation } from '../../../../../../../src/renderers/css/navigation/world-camera';
-import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
-import { rotationFromMatrix3d } from '../../../../../../../src/renderers/css/solar-system/heliocentric-geometry';
+import { createObjectInteractionControls } from '@cssearth/renderer/navigation/object-interaction-controls.ts';
+import { createCameraMotion } from '@cssearth/renderer/navigation/camera-motion.ts';
+import { worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { rotationFromMatrix3d } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 export const inspectionCameraRenderer: InspectionCameraBackend<VolumeCameraPublication> = {
   rotationFromQuaternion: worldRotationFromQuaternion,
   connect(bindings) { return createObjectInteractionControls({ ...bindings, runtimePolicy, cameraMotion: createCameraMotion(),

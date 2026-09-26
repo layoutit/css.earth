@@ -1,11 +1,11 @@
-import { createCameraMotion } from '../renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { Surface, orbitFixture } from "./test/orbit-fixture.mts";
-import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";
-import { errorMessage, type TrackballMetrics } from "../renderers/css/navigation/types.ts";
+import { createUnboundedMatrixDragControls } from "@cssearth/renderer/platform/camera-input";
+import { errorMessage, type TrackballMetrics } from "@cssearth/renderer/navigation/types.ts";
 
 const trackball = (): TrackballMetrics => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius: 200, focalLength: 600, viewportWidth: 400 });
 // This test fixture only implements the native input surface methods consumed by the controls.

@@ -1,4 +1,4 @@
-import type { Vector3 } from "../renderers/css/solar-system/types.ts";
+import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
 import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
 import { requireBodyFixedSunDirection, requireBodyFixedToIcrf } from "./solar-geometry.mts";
 

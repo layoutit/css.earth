@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { sha256 } from '@cssearth/core/node';
-import { loadPreparedVolumeLenses } from '../../renderers/css/volume/prepared-volume-lenses.js';
+import { loadPreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { promoteDensityVolumeLensBank } from './promote-density-volume-lens-bank.ts';
 

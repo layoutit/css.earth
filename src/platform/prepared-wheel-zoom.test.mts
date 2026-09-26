@@ -5,7 +5,7 @@ const runtimePolicy = { ...applicationPolicy, WHEEL_ZOOM_INERTIA: null };
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { CameraDelta, CameraUpdate } from '../renderers/css/navigation/types.ts';
+import type { CameraDelta, CameraUpdate } from '@cssearth/renderer/navigation/types.ts';
 function cameraFixture(distance = 1) {
   const state = { zoom: 1, distance, rotX: 0, rotY: 0 };
   return { state, update(value: CameraUpdate) { Object.assign(state, value); } };
@@ -13,7 +13,7 @@ function cameraFixture(distance = 1) {
 
 import {
   createPreparedWheelZoomControls,
-} from "../renderers/css/dist/platform/prepared-wheel-zoom.js";
+} from "@cssearth/renderer/platform/prepared-wheel-zoom";
 
 test("a wheel publication failure removes its listener and pending camera frame", async t => {
   const {Surface}=await import('./test/orbit-fixture.mts');

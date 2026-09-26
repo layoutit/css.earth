@@ -4,7 +4,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { APPLICATION_WORLD_CONTEXT } from '../../../world-context-plan.mts';
 
 // One orbit centre's binary path bank, copied from the Sun's prepared world files at build: the planner worker reads a
-// centre's bank when a frame first draws its orbits (src/renderers/css/universe/world-context/world-context-planner-worker.ts).
+// centre's bank when a frame first draws its orbits (packages/renderer/src/universe/world-context/world-context-planner-worker.ts).
 const centres = Object.keys(APPLICATION_WORLD_CONTEXT.orbitBanks ?? {});
 export const getStaticPaths: GetStaticPaths = async () => centres.map(id => ({ params: { id } }));
 

@@ -1,4 +1,4 @@
-import { initialObjectSelection, loadPreparedCssObject } from '../src/renderers/css/dist/index.js';
+import { initialObjectSelection, loadPreparedCssObject } from '@cssearth/renderer';
 import { readPreparedObjectBytes } from './object-page-data.mts';
 import { isRecord } from '@cssearth/core';
 

@@ -1,5 +1,5 @@
-import type { LensControl, SettingControl } from "../src/renderers/css/runtime/object-contract.js";
-import type { ObjectSceneLifecycle } from "../src/renderers/css/runtime/object-scene.js";
+import type { LensControl, SettingControl } from "@cssearth/renderer/runtime/object-contract.ts";
+import type { ObjectSceneLifecycle } from "@cssearth/renderer/runtime/object-scene.ts";
 
 // The shell checks this lifecycle shape. The renderer supplies the complete
 // scene contract, including shared-view and navigation capabilities.

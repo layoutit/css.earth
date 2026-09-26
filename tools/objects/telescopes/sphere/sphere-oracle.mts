@@ -9,8 +9,8 @@ import { pathToFileURL } from 'node:url';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { verifiedProduct } from '../verified-product.mts';
 import { parseHTML } from 'linkedom';
-import { parsePreparedObjectRuntime, createWorldContextObjectRuntime, parsePreparedWorldContext, worldCameraOf } from '../../../../src/renderers/css/dist/index.js';
-import { parsePreparedWorldCameraFrame } from '../../../../src/renderers/css/dist/navigation.js';
+import { parsePreparedObjectRuntime, createWorldContextObjectRuntime, parsePreparedWorldContext, worldCameraOf } from '@cssearth/renderer';
+import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/navigation';
 export const ORACLE_PYTHON=String.raw`
 import json,sys,re,html as html_parser
 from pathlib import Path

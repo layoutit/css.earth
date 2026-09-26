@@ -1,4 +1,4 @@
-import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from "../renderers/css/dist/index.js";
+import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from "@cssearth/renderer";
 import { requireRecord, requireArray } from "@cssearth/core";
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";

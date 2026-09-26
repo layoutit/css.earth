@@ -1,8 +1,8 @@
-import { createCameraMotion } from '../../src/renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose, PreparedWorldCameraFrame } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
+import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from '../object-schema.mts';
 
 export function required<T>(value: T | null | undefined): T {
@@ -32,7 +32,7 @@ export function objectFixture(id: string, worldFrame: PreparedWorldCameraFrame, 
     async loadScene() { throw new Error('This fixture does not mount a scene.'); }, ...overrides };
 }
 
-export const unusedSharedView: import('../../src/renderers/css/runtime/object-scene.ts').ObjectSharedView = {
+export const unusedSharedView: import('@cssearth/renderer/runtime/object-scene.ts').ObjectSharedView = {
   capture: () => null,
   async restore() { throw new Error('This fixture does not restore shared URLs.'); },
   subscribe() { return () => {}; },

@@ -10,11 +10,11 @@ import { parseGriddedShellMesh, parseIndexedShellMesh, loadShellMesh, type Shell
 import { prepareSurfaceShellObject } from './prepare.js';
 import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import type { PreparedCssSurfaceShell } from '../../renderers/css/shell/types.js';
+import type { PreparedCssSurfaceShell } from '@cssearth/renderer/shell/types.ts';
 import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';
-import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '../../renderers/css/shell/material-address.js';
+import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '@cssearth/renderer/shell/material-address.ts';
 import { shellRim } from './atlas.js';
-import { validatePreparedCssSurfaceShell } from '../../renderers/css/shell/validation.js';
+import { validatePreparedCssSurfaceShell } from '@cssearth/renderer/shell/validation.ts';
 import { dotN as dot } from '@cssearth/core';
 import { TEXELS_PER_CSS_PIXEL } from '../../platform/projective-surface-raster.mts';
 

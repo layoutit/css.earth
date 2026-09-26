@@ -1,7 +1,7 @@
 import type {BodyId} from '@cssearth/astronomy';
 import type {PreparedCubicSkyPlan} from '../../src/platform/cubic-sky-contract.mts';
 import {requireFiniteNumber} from '@cssearth/core';
-import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
+import { parsePreparedWorldContext } from '@cssearth/renderer';
 interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;}
 interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'initialScenePitchDegrees'|'defaultControlYawDegrees'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;
   /** What lights the body's map: the Sun, the body itself (a placed star) or its host star (a planet of another star). */
@@ -13,7 +13,7 @@ import { prepareEclipticPresentationFrame } from "../../src/platform/solar-prese
 import { LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from "../../src/platform/default-camera.mts";
 import { prepareAstrometricSkySceneRegistration } from "../../src/platform/astrometric-sky-registration.mts";
 import { prepareSunReferenceViewDirection } from "../../src/platform/prepare-sun-view-direction.mts";
-import type { Vector3 } from "../../src/renderers/css/solar-system/types.ts";
+import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from "../../src/platform/directional-sun-contract.mts";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS, SOLAR_GEOMETRY_EPOCH_JD_TT,

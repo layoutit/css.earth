@@ -62,7 +62,7 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 
 ## Architecture
 
-- **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL.
+- **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL. The runtime is [`@cssearth/renderer`](packages/renderer/README.md).
 - **Preparation:** Node reads declared source products and writes the textures, geometry, orbits and page text, each recording its sources. Runtime inventories pin the published outputs; source manifests record paths, acquisition and attribution.
 - **Objects:** each one is a package under [`src/objects/<id>/`](src/objects/README.md). One registry, one shell and one camera serve them all.
 - **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site for Netlify.

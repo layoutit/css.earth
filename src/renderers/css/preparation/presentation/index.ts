@@ -1,4 +1,4 @@
-import { parsePreparedObjectRuntime } from '../../validation/index.js';
+import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { loadPresentationAdapters } from './adapters.js';
 import { prepareRowBankCutaway } from './row-bank-cutaway.js';
 import { prepareComposite } from './composite.js';

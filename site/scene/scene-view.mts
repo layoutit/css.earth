@@ -1,4 +1,4 @@
-import { formatSharedView, parseSharedView } from '../../src/renderers/css/dist/navigation.js';
+import { formatSharedView, parseSharedView } from '@cssearth/renderer/navigation';
 import type { BrowserWindow } from '../browser-types.mts';
 import { withDataset } from '../dataset-url.mts';
 import type { createNavigationHistory } from '../navigation/navigation-history.mts';

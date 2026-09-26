@@ -1,5 +1,5 @@
 import type { NativeCameraRotation } from './native-camera.mts';
-import { ORBIT_RENDERER_LOD_PIXELS } from '../../../src/renderers/css/solar-system/prepared-orbit-lines.js';
+import { ORBIT_RENDERER_LOD_PIXELS } from '@cssearth/renderer/solar-system/prepared-orbit-lines.ts';
 
 interface Level { readonly vertexIndices:readonly number[]; readonly deviationM:number }
 interface Bounds { readonly centerM:readonly number[]; readonly radiusM:number }
