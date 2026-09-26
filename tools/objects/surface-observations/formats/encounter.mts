@@ -7,9 +7,7 @@ import { decodeProfile, publishedOr, parseLevelMatching, parseSurfaceGeometry, p
 import { array, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeEncounterFits } from '../../terrestrial-layers/encounter-fits.mts';
-import { encounterCamera } from '../../terrestrial-layers/encounter-camera.mts';
-import { validateEncounterControls } from '../../terrestrial-layers/encounter-controls.mts';
+import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '@cssearth/bake/objects/layers/terrestrial';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';

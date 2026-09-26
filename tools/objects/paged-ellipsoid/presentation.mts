@@ -1,4 +1,4 @@
-import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.mts';
+import type { prepareTextureLevels, TextureLevelConfiguration, SurfaceBankLenses } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type { PreparedNode } from '@cssearth/bake/presentation';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
@@ -7,7 +7,6 @@ import type { ShellObjectControls } from '../../../site/shell-contract-types.mts
 import type { preparePagedEllipsoidScene } from './scene.mts';
 import type { preparePlaces } from './geographic/places.mts';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
-import type { SurfaceBankLenses } from './contracts.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 type PagedPlan = ReturnType<typeof preparePagedEllipsoidScene>['scene'];
 export type PagedLens = SurfaceBankLenses['controls'][number] & { maximumZoom: number; polesUrl?: string;
@@ -24,7 +23,7 @@ import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/
 import { seamOutsetBinding, seamOutsetInitialValue } from "@cssearth/bake/scene";
 import { textureTileStyles, tiledTextureKeys } from "@cssearth/renderer";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
-import { surfaceBankInventory } from "./surface-banks.mts";
+import { surfaceBankInventory } from "@cssearth/bake/objects/layers/paged-ellipsoid";
 
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {
   if (Boolean(config.textureLevels) !== Boolean(textureLevels)) throw new TypeError('Prepared texture levels must match the authored recipe.');

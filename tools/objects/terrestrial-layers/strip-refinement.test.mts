@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { subdividedOctahedron } from './ellipsoid-parameters.mts';
+import { subdividedOctahedron, refineStripEpochs, type EpochOffsets, type RefinableStrip, type StripRefinementPolicy } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseObjShape } from '@cssearth/bake/objects/geometry';
-import { refineStripEpochs, type EpochOffsets, type RefinableStrip, type StripRefinementPolicy } from './strip-refinement.mts';
 import { dot3 as dot } from '@cssearth/core';
 
 // An ellipsoid with 300, 240 and 180 m semi-axes seen from about 60 km by a spinning strip camera: 40,000 px/rad, strips 640 x 64 pixels

@@ -1,7 +1,7 @@
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { accumulateRadianceRow, finishRadianceGrid, nightLightColor, validateNightLightGrid } from './night-lights.mts';
+import { accumulateRadianceRow, finishRadianceGrid, nightLightColor, validateNightLightGrid } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 
 const missing = Math.fround(-999.9);
 function aggregate(rows: number[][], grid: Parameters<typeof accumulateRadianceRow>[2], target: Parameters<typeof accumulateRadianceRow>[3]) {

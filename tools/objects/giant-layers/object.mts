@@ -1,11 +1,8 @@
 import { readAuthoredSources } from '../authored-sources.ts';
 import { parse } from '@cssearth/core/schema';
-import { bandedGeometryRecipe } from './geometry-contract.mts';
-import { normalizedPresentationRecipe } from './normalized-presentation-contract.mts';
-import { layeredPresentationRecipe } from './presentation-contract.mts';
+import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc } from '@cssearth/bake/objects/layers/giant';
 import { parseEllipsoidMaterialRecipe } from './materials.mts';
-import { parsePhotometricDiscRecipe } from './photometric-disc.mts';
-import { parseObservedSurfaceRecipe } from '../observed-surfaces/index.mts';
+import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { parseObservedPolarRecipe } from '../giant-observations/index.mts';
 import { shape, text, number, optional, array, isRecord, requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
@@ -17,13 +14,8 @@ import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
-import { prepareGiantLayers, parseRadialLayerRecipe } from './index.mts';
-import { rasterAnnularField } from './rings.mts';
-import { prepareObservedSurfaces } from '../observed-surfaces/index.mts';
 import { prepareEllipsoidMaterials } from './materials.mts';
-import { prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels } from './geometry.mts';
 import { prepareLayeredSurfacePresentation } from './presentation.mts';
-import { preparePhotometricDisc } from './photometric-disc.mts';
 import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.mts';
 import { prepareObservedPolarSurfaces, polarImageProjection } from '../giant-observations/index.mts';
 import { withFocusedCamera } from '../focused-camera.mts';

@@ -1,4 +1,4 @@
-import type { createRasterEmitter } from './raster-output.mts';
+import type { createRasterEmitter } from '@cssearth/bake/objects/layers/terrestrial';
 import type { loadRadialTerrain } from './radial-terrain.mts';
 import type { loadScienceSurface, SciencePalette } from '@cssearth/bake/objects/raster';
 import type { SurfaceObservation } from '../surface-observations/index.mts';
@@ -23,5 +23,5 @@ export interface RadialMaterialConfig {
   namespace: string; publicBase: string;
   geometry: {radius: number; radiusKm: number; radialTerrain: {sourceLighting?: unknown; thumbnail?: unknown}};
   raster: {width: number; scientific?: ScientificLens[];
-    observations?: readonly {id:string;validity:unknown;nativePhotographicSampling?:import('./native-photograph.mts').NativePhotographicSampling}[]};
+    observations?: readonly {id:string;validity:unknown;nativePhotographicSampling?:import('@cssearth/bake/objects/layers/terrestrial').NativePhotographicSampling}[]};
 }

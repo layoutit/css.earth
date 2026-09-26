@@ -5,13 +5,12 @@ import { writeLossyWebp } from '@cssearth/bake/raster';
 import type {WebpOptions} from 'sharp';
 import type {RasterInfo} from '../observation/raster.mts';
 import type {PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInput, ResizeKernel} from './asset-contract.mts';
-import type {Cutaway} from './contracts.mts';
-import type {InteriorSource} from './scene-contract.mts';
+import type { Cutaway, InteriorSource } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type {createAtmospherePreparation} from './atmosphere.mts';
 import type {createPagedSurfaceRaster, NativeDeepOceanFill, NativePhotographicCloudComposite, PagedSurfaceRasterPlan} from './surface-raster.mts';
 import {applyDeepOceanFill, clearDeepOceanFillCache, readDeepOceanFill, resizeDeepOceanFill} from './deep-ocean-fill.mts';
 import {readJsonSource} from '../../sources/source-values.mts';
-import {parseInteriorSource, parseMapFocusBindings} from './source-contract.mts';
+import {parseInteriorSource, parseMapFocusBindings} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
@@ -20,14 +19,14 @@ import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import type { EllipsoidAttitude } from './attitude.mts';
-import { readCoraltempAnomaly } from "./sst-anomaly.mts";
+import { readCoraltempAnomaly } from "@cssearth/bake/objects/layers/paged-ellipsoid";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mts";
-import { prepareElevationMap, writeElevationLegend } from "./elevation.mts";
-import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mts";
+import { prepareElevationMap, writeElevationLegend } from "@cssearth/bake/objects/layers/paged-ellipsoid";
+import { prepareNightLightsMap, writeNightLightsLegend } from "@cssearth/bake/objects/layers/paged-ellipsoid";
 import { textureTintFactors } from "@layoutit/polycss";
-import { cutInteriorPoles } from "./interior-poles.mts";
+import { cutInteriorPoles } from "@cssearth/bake/objects/layers/paged-ellipsoid";
 import { readMantleTomography, tomographyLegend } from "./tomography.mts";
-import { applyDisplayGamma } from "./display-tone.mts";
+import { applyDisplayGamma } from "@cssearth/bake/objects/layers/paged-ellipsoid";
 
 
 /** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials. `materialSlice` runs

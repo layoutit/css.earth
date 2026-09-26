@@ -2,7 +2,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import {prepareCoplanarColorRaster, coplanarTileLayout} from './coplanar-raster.mts';
+import {prepareCoplanarColorRaster, coplanarTileLayout} from '@cssearth/bake/objects/layers/material-composition';
 type Point3 = [number, number, number];
 type Rgba = [number, number, number, number];
 

@@ -23,8 +23,7 @@ import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
 import { numbers, utcToEt } from '@cssearth/spice';
 import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
-import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
-import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
+import { decodeJunocam, refinableStrips, type JunocamGeometry, refineStripEpochs, type StripRefinementPolicy } from '@cssearth/bake/objects/layers/terrestrial';
 import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
 import { astroqueryRows } from '@cssearth/telescope/node';
 import { flagValue, positionalArguments } from '@cssearth/core';
@@ -71,7 +70,7 @@ export async function horizonsCheck(set: KernelSet, program: JunocamProgram) {
 /** The version of the software that measured a registration: the digest of the modules that decode an image, place it and fit
  * its limb. Nothing external runs, so there is no installed toolchain to pin. */
 export async function registrationSoftware(): Promise<ProductSoftware[]> {
-  const sources = await Promise.all(['measure.mts', '../terrestrial-layers/junocam.mts', '../terrestrial-layers/strip-refinement.mts']
+  const sources = await Promise.all(['measure.mts', '../../../packages/bake/src/objects/layers/terrestrial/missions/junocam.ts', '../../../packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts']
     .map(name => readFile(resolve(import.meta.dirname, name))));
   return [{ name: 'cssearth tools/objects/juno/measure.mts', version: sha256(Buffer.concat(sources)) }];
 }

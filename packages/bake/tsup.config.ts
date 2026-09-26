@@ -20,7 +20,13 @@ export default defineConfig({
     'world-context': 'src/world-context/index.ts',
     'objects/raster': 'src/objects/raster/index.ts',
     'objects/scene': 'src/objects/scene/index.ts',
-    'nebula': 'src/nebula/index.ts' },
+    'nebula': 'src/nebula/index.ts',
+    'objects/layers/cutaway': 'src/objects/layers/cutaway/index.ts',
+    'objects/layers/giant': 'src/objects/layers/giant/index.ts',
+    'objects/layers/material-composition': 'src/objects/layers/material-composition/index.ts',
+    'objects/layers/observed-surfaces': 'src/objects/layers/observed-surfaces/index.ts',
+    'objects/layers/paged-ellipsoid': 'src/objects/layers/paged-ellipsoid/index.ts',
+    'objects/layers/terrestrial': 'src/objects/layers/terrestrial/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the

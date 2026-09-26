@@ -9,8 +9,7 @@ import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objec
 import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '@cssearth/bake/photometry';
 import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../prepared/prepared-atmosphere.mts';
 import {readJsonSource} from '../../sources/source-values.mts';
-import {applyDisplayGamma} from './display-tone.mts';
-import {parseAtmosphereResponse} from './source-contract.mts';
+import { applyDisplayGamma, parseAtmosphereResponse } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 
 export interface AtmosphereConfiguration {
   material: {tileSize: number; presentationSize: number; framesPerShard: number; discRadius: number;

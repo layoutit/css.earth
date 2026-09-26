@@ -20,7 +20,7 @@ import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-objec
 import { createPreparedNodeTree, prepareCssomDeclarationReads } from '@cssearth/bake/presentation';
 import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.mts';
 import { prepareShapeLighting } from './lighting.mts';
-import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/coplanar-raster.mts';
+import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
 
 const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');
 

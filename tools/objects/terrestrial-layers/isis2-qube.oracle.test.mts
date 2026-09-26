@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeIsis2Qube } from './isis2-qube.mts';
+import { decodeIsis2Qube } from '@cssearth/bake/objects/layers/terrestrial';
 import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireFiniteNumber } from '@cssearth/core';
 

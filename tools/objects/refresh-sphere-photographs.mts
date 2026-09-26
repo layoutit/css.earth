@@ -11,8 +11,7 @@ import type { Sharp } from 'sharp';
 import { completeEnhancedCoverage, createNativePhotographPolarSprite, packLatitudeRaster } from '@cssearth/objects';
 import { missingCoverageColor, applyNativeSurfaceExposure, loadNativeSourcePoleSampler } from '@cssearth/bake/raster';
 import { loadNativeObservationPoleSampler, parseObservationLens } from './observation/raster.mts';
-import { loadNativePhotograph } from './terrestrial-layers/native-photograph-source.mts';
-import { parseSolidObservation } from './terrestrial-layers/solid-source.mts';
+import { loadNativePhotograph, parseSolidObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 type RecordValue = Record<string, unknown>;

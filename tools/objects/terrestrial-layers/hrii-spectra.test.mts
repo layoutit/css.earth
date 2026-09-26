@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
-import {decodeHriiSolarTable,fitHriiContinuum,fitHriiThermal,fitHriiSpectrum,planckRadiance,solarIrradiance} from './hrii-spectra.mts';
+import {decodeHriiSolarTable,fitHriiContinuum,fitHriiThermal,fitHriiSpectrum,planckRadiance,solarIrradiance} from '@cssearth/bake/objects/layers/terrestrial';
 import {array,number,shape,text} from '@cssearth/core';
 
 const parse=shape({reference:text,temperatureKelvin:number,amplitude:number,slopePercentPer100Nm:number,incidenceCosine:number,heliocentricDistanceAu:number,samples:array(array(number)),planckAnchors:array(array(number))});

@@ -3,8 +3,7 @@ import type { SourcePin } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
-import { mapRadius, ringRayOccluded, rasterAnnularField } from './rings.mts';
-import { parseRadialLayerRecipe } from './index.mts';
+import { mapRadius, ringRayOccluded, rasterAnnularField, parseRadialLayerRecipe } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 
 const recipe = () => ({schema:'cssearth-radial-layer-recipe@1',units:'kilometers',sources:[] as SourcePin[],layers:[{
@@ -87,7 +86,7 @@ test('ring wedges cover every point of their sectors from where the ring begins,
 });
 
 test('ring wedges draw exactly the square ring image inside each wedge, arcs included', async () => {
-  const { rasterAnnularField, rasterAnnularWedges, annularContentPixels } = await import('./rings.mts');
+  const { rasterAnnularField, rasterAnnularWedges, annularContentPixels } = await import('@cssearth/bake/objects/layers/giant');
   const { ringWedgeLayout, wedgePoint, wedgeShare } = await import('@cssearth/bake/scene');
   for (const body of ['uranus', 'neptune']) {
     const recipe = JSON.parse(await readFile(new URL(`../../../src/objects/${body}/source/preparation/rings.json`, import.meta.url), 'utf8'));

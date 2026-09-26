@@ -43,6 +43,12 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/geometry': 'packages/bake/src/objects/geometry/index.ts',
   '@cssearth/bake/objects/raster': 'packages/bake/src/objects/raster/index.ts',
   '@cssearth/bake/objects/scene': 'packages/bake/src/objects/scene/index.ts',
+  '@cssearth/bake/objects/layers/cutaway': 'packages/bake/src/objects/layers/cutaway/index.ts',
+  '@cssearth/bake/objects/layers/giant': 'packages/bake/src/objects/layers/giant/index.ts',
+  '@cssearth/bake/objects/layers/material-composition': 'packages/bake/src/objects/layers/material-composition/index.ts',
+  '@cssearth/bake/objects/layers/observed-surfaces': 'packages/bake/src/objects/layers/observed-surfaces/index.ts',
+  '@cssearth/bake/objects/layers/paged-ellipsoid': 'packages/bake/src/objects/layers/paged-ellipsoid/index.ts',
+  '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its

@@ -5,7 +5,7 @@ import { array, number, shape, text, requireArray, requireRecord } from '@cssear
 import { OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope } from '../recipe.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeIsis2Qube } from '../../terrestrial-layers/isis2-qube.mts';
+import { decodeIsis2Qube } from '@cssearth/bake/objects/layers/terrestrial';
 
 const CONTEXT = 'orthographic observation';
 const parseOrthographicLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),

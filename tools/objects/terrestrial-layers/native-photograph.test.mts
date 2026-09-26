@@ -5,8 +5,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeArrayBuffer } from 'geotiff';
 import sharp from 'sharp';
-import { loadNativePhotograph } from './native-photograph-source.mts';
-import { samplePhotographicTexel } from './native-photograph.mts';
+import { loadNativePhotograph, samplePhotographicTexel } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
 const radius = 180 / Math.PI;

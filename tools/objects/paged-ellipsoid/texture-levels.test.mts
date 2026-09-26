@@ -4,7 +4,7 @@ import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { packTextureSheet, prepareTextureLevels } from './texture-levels.mts';
+import { packTextureSheet, prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { requirePreparedData } from '../../../src/platform/prepared-presentation-contract.mts';
 
 test('a map capped below the finest level reads its capped files there; other maps keep every level', async () => {

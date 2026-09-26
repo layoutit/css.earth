@@ -1,5 +1,5 @@
 import type {Vec3} from '@layoutit/polycss';
-import type {PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon} from './scene-contract.mts';
+import type {PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type {createAtmospherePreparation, AtmosphereConfiguration} from './atmosphere.mts';
 import type {createPagedSurfaceRaster} from './surface-raster.mts';
 import {requireFiniteNumber} from '@cssearth/core';

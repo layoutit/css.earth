@@ -273,7 +273,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const terrestrialAttached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: terrestrialPrepared.definition as unknown as Record<string, unknown> });
     if (terrestrialAttached.features) await writeFeatureContent(outputDirectory, terrestrialAttached.features);
     // Triangle faces also publish atlases masked to their triangles, for browsers without corner-shape.
-    const { prepareTriangleAlphaAtlases } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/triangle-alpha-atlas.mts')).href) as typeof import('./terrestrial-layers/triangle-alpha-atlas.mts');
+    const { prepareTriangleAlphaAtlases } = await import('@cssearth/bake/objects/layers/terrestrial');
     const terrestrialDefinition = await prepareTriangleAlphaAtlases(terrestrialAttached.definition as never, { namespace: descriptor.id, publicDirectory, publicBase: `/scenes/${descriptor.id}/` });
     await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialDefinition)}\n`);
     const prepared = { ...terrestrialPrepared, definition: terrestrialDefinition as typeof terrestrialPrepared.definition };
@@ -318,14 +318,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // lighting bank. The observed products are published beside it and the lenses name them, as they name any other surface.
   const observationsSource = source(sources, 'observations');
   const observed = observationsSource
-    ? await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observed-surfaces/index.mts')).href) as typeof import('./observed-surfaces/index.mts'))
+    ? await (await import('@cssearth/bake/objects/layers/observed-surfaces'))
         .prepareObservedSurfaces({ sourceDirectory, publicDirectory, config: observationsSource.value, write: true })
     : null;
   // A body may also declare radial layers, such as a ring, whose image this lane publishes beside the surfaces; the
   // geometry profile places it as a plane.
   const ringsSource = source(sources, 'rings');
   const radial = ringsSource
-    ? await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/index.mts')).href) as typeof import('./giant-layers/index.mts'))
+    ? await (await import('@cssearth/bake/objects/layers/giant'))
         .prepareGiantLayers({ sourceDirectory, publicDirectory, config: ringsSource.value, write: true })
     : null;
   const celestial = reuseImages

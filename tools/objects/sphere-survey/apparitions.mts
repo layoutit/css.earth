@@ -24,7 +24,7 @@ import { qualifiedFace, shadingNormal } from '../surface-observations/geometry.m
 import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { horizonsRows, loadOrientation, observerRowValues, parseObserverCameras } from '../terrestrial-layers/observer-cameras.mts';
-import { radialTerrainForLens } from '../terrestrial-layers/alternative-lenses.mts';
+import { radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 import { apparitions } from './frames.mts';
 import { lamText, parseFrameListing, type LamFrame } from './lam.mts';

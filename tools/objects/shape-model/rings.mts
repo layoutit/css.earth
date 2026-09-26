@@ -1,7 +1,7 @@
 import type { Polygon, Vec3 } from '@layoutit/polycss';
 export interface RingGeometry {segments:number;innerRadiusKm:number;outerRadiusKm:number}
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry } from '@layoutit/polycss';
-import type { coplanarTileLayout } from '../material-composition/coplanar-raster.mts';
+import type { coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
 
 export function prepareRingLeaves(config: {ring?:RingGeometry;displayRadius:number}, texture: {url:string;width:number;height:number}, majorRadiusKm: number, onGeometry?: (geometry: NonNullable<ReturnType<typeof resolvePolyTextureLeafGeometry>>) => void) {
   if (!config.ring) throw new TypeError("Ring leaves require an authored ring.");

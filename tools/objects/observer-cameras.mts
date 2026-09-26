@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { deriveObserverCameras, loadObserverCameraInputs, recipeFields } from './terrestrial-layers/observer-cameras.mts';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
-import { radialTerrainForLens } from './terrestrial-layers/alternative-lenses.mts';
+import { radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const [objectId, flag] = process.argv.slice(2);

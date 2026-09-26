@@ -3,7 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {array,boolean,nullable,number,shape,text} from '@cssearth/core';
-import {decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spectra.mts';
+import {decodeHriiSolarTable,fitHriiSpectrum} from '@cssearth/bake/objects/layers/terrestrial';
 const parse=shape({method:text,cases:array(shape({body:text,path:text,detectorRow:number,incidenceCosine:number,heliocentricDistanceAu:number,
  reference:shape({temperatureKelvin:number,slopePercentPer100Nm:number}),samples:array(shape({wavelengthMicrons:number,radiance:nullable(number),valid:boolean}))}))});
 const fixture=parse(JSON.parse(readFileSync(new URL('../../../tests/objects/fixtures/comets/hrii-native-reference.json',import.meta.url),'utf8')));
@@ -16,7 +16,7 @@ for(const c of fixture.cases)test(`${c.body} native ${c.path.split('/').at(-1)} 
 });
 
 for(const c of fixture.cases)test(`${c.body} row ${c.detectorRow}: native FITS channels and masks match the Astropy extract`,async()=>{
- const {createHash}=await import('node:crypto'),{decodeHriiSpectra}=await import('./hrii-spectra.mts');
+ const {createHash}=await import('node:crypto'),{decodeHriiSpectra}=await import('@cssearth/bake/objects/layers/terrestrial');
  assert.ok(['comet-9p','comet-103p'].includes(c.body)&&/^science\/hrii\/hi[0-9_]+_r{1,2}\.fit$/.test(c.path));
  const bytes=readFileSync(new URL(`../../../src/objects/${c.body}/source/${c.path}`,import.meta.url));
  const spectrum=decodeHriiSpectra(bytes),actual=[];

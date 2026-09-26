@@ -401,7 +401,7 @@
         "test": "tools/objects/telescopes/family-operation.test.mts",
         "assertion": "The public dispatcher reopens the decoded NEAR MSI closure and exact bundle export."
       },
-      "owner": "tools/objects/terrestrial-layers/near-msi.mts#decodeNearMsi",
+      "owner": "packages/bake/src/objects/layers/terrestrial/missions/near-msi.ts#decodeNearMsi",
       "independentCheck": "tools/objects/telescopes/families/f17-calibration.test.mts",
       "limit": "One pinned NEAR MSI raw/calibrated/PDS4-label closure; the owner-specific decoder does not imply a universal raw-calibration pipeline."
     },

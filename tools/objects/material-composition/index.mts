@@ -2,12 +2,9 @@ import { sha256 } from '@cssearth/core/node';
 import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from '@cssearth/core/schema';
 import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer';
-import {layeredRecipe} from './layered-recipe.mts';
-import {spectralRecipe} from './spectral-recipe.mts';
-import {radialMotionRecipe} from './radial-motion-recipe.mts';
-import {layeredPresentationRecipe} from './presentation-recipe.mts';
-import {cutawayRecipe} from '../cutaway/recipe-contract.mts';
-import {parseRadialLayerRecipe} from '../giant-layers/index.mts';
+import { layeredRecipe, spectralRecipe, radialMotionRecipe, layeredPresentationRecipe, prepareRadialMotionAndShadow, prepareSpectralMaterialVariants, prepareLayeredLeafLayouts } from '@cssearth/bake/objects/layers/material-composition';
+import {cutawayRecipe} from '@cssearth/bake/objects/layers/cutaway';
+import { parseRadialLayerRecipe, prepareGiantLayers } from '@cssearth/bake/objects/layers/giant';
 import {shape,text,number,boolean,array,isRecord,requireRecord} from '@cssearth/core';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
@@ -22,12 +19,8 @@ import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubi
 import {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
-import {prepareGiantLayers} from '../giant-layers/index.mts';
 import {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import {createLayeredOblatePreparation} from './layered-oblate.mts';
-import {prepareRadialMotionAndShadow} from './radial-motion.mts';
-import {prepareSpectralMaterialVariants} from './spectral-variants.mts';
-import {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import {prepareLayeredOblatePresentation} from './presentation.mts';
 import {withFocusedCamera} from '../focused-camera.mts';
 

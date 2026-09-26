@@ -3,9 +3,8 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {loadObjShape} from '@cssearth/bake/objects/geometry';
-import {decodeNewHorizonsLorri,newHorizonsCamera,multiplyCameraMatrices} from '../terrestrial-layers/new-horizons-geo.mts';
+import { decodeNewHorizonsLorri, newHorizonsCamera, multiplyCameraMatrices, observedLimb, limbThreshold, type LimbEdgePoint } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFitsHeader } from '@cssearth/fits';
-import {observedLimb,limbThreshold,type LimbEdgePoint} from '../terrestrial-layers/limb-refinement.mts';
 
 const root=resolve('src/objects/arrokoth/source'),read=async(path:string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 const profile=shape({mesh:text,frames:array(shape({id:text,image:text,output:text,bodyToJ2000:array(array(number)),offsetPixels:array(number)}))})(await read('preparation/photography.json'));

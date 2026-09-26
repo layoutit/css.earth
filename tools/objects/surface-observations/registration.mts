@@ -13,8 +13,7 @@
  * for a bad number; it records the number. A frame it cannot judge is reported with the reason.
  */
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { loadNativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
-import { framesReference, observationCaster, outline, peakValue, prepareFrame, registrationSweep, reliefSweep, type PreparedFrame, type RegistrationImage, type RegistrationResult, type ReliefResult, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';
+import { loadNativePhotograph, framesReference, observationCaster, outline, peakValue, prepareFrame, registrationSweep, reliefSweep, type PreparedFrame, type RegistrationImage, type RegistrationResult, type ReliefResult, type SurfaceReference } from '@cssearth/bake/objects/layers/terrestrial';
 import type { FrameDetector, LoadContext, ObservationFrame } from './contract.mts';
 
 export const REGISTRATION_STAGE = 'cssearth-registration-stage@1';

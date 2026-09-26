@@ -1,13 +1,12 @@
 import { sha256 } from '@cssearth/core/node';
 import {readJsonSource} from '../../sources/source-values.mts';
 import {hasErrorCode, requireRecord, requireString} from '@cssearth/core';
-import {parseMurReceipt} from './source-contract.mts';
+import { parseMurReceipt, parseEnsoAdvisory } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes} from './refresh-source.mts';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { acquireMurImagery, murEnsoContent, murEnsoText, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer } from './mur-imagery.mts';
-import { parseEnsoAdvisory } from './enso-advisory.mts';
 
 const json = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
 // A completed anonymous acquisition is installed only after every source tile

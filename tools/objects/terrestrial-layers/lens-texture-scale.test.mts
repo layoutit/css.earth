@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { lensTextureGrid } from './raster-grid.mts';
+import { lensTextureGrid } from '@cssearth/bake/objects/layers/terrestrial';
 import { createProjectiveSurfaceRasterLayout } from '@cssearth/bake/scene';
 const test = sourceTest();
 

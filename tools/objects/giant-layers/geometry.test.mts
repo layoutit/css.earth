@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { TEXELS_PER_CSS_PIXEL, leafRasterScale, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
-import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from './geometry.mts';
+import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from '@cssearth/bake/objects/layers/giant';
 import { publishedLeafImages } from './object.mts';
 import { readFile } from 'node:fs/promises';
 import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';

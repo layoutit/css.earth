@@ -1,4 +1,4 @@
-import { retainedPhotographicAtlas } from './terrestrial-layers/retained-atlas.mts';
+import { retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNativePhotographicAtlas } from '@cssearth/bake/objects/layers/terrestrial';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -6,7 +6,6 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { parseNativePhotographicSampling, prepareNativePhotographicAtlas } from './terrestrial-layers/native-photograph.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));
 

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { decodePds4GeometryCube } from './pds4-geometry-cube.mts';
+import { decodePds4GeometryCube } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseGeometryCube } from '@cssearth/bake/objects/raster';
 
 const size = 8, fileName = 'dart_0401930040_12262_01_geo.fits', planeBytes = size * size * 4;

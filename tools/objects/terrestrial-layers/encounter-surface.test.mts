@@ -6,8 +6,7 @@ import {sampleFootprint} from '../surface-observations/footprint.mts';
 import {castSourceRays} from '../surface-observations/geometry.mts';
 import {validateEncounterImageReference} from '../surface-observations/formats/encounter.mts';
 import type {PixelGeometry} from '../surface-observations/contract.mts';
-import {validateEncounterControls} from './encounter-controls.mts';
-import {encounterCamera} from './encounter-camera.mts';
+import { validateEncounterControls, encounterCamera } from '@cssearth/bake/objects/layers/terrestrial';
 const sample=()=>{
  const accepted=new Uint8Array([1,1,1,1]),xyz=new Float64Array([0,0,0,1,0,0,0,1,0,1,1,0]),emissions=[0,10,20,30];
  const geometry: PixelGeometry={source:'source-mesh-rays',report:{},reject:i=>accepted[i]?null:'no-geometry',

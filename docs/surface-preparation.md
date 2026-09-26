@@ -30,8 +30,8 @@ source surface, atlas layout and retained leaves. It uses
 which can also run independently of source loading.
 [Material preparation](../tools/objects/terrestrial-layers/radial-materials.mts)
 consumes that prepared layout and writes textures through the shared
-[raster emitter](../tools/objects/terrestrial-layers/raster-output.mts).
-[Lens selection](../tools/objects/terrestrial-layers/alternative-lenses.mts)
+[raster emitter](../packages/bake/src/objects/layers/terrestrial/raster-output.ts).
+[Lens selection](../packages/bake/src/objects/layers/terrestrial/alternative-lenses.ts)
 only selects a model or terrain entry; it does not import their preparers.
 
 The [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
@@ -401,7 +401,7 @@ several times fewer texels per metre than small ones, at the same bytes.
 The `u` leaf cuts its triangle with `corner-shape: bevel` on its two top corners.
 Safari 26 and Firefox have no `corner-shape`, so they round those corners into an
 ellipse and each face shows an oval of its slice. For every atlas a `u` face reads,
-[triangle-alpha-atlas.mts](../tools/objects/terrestrial-layers/triangle-alpha-atlas.mts)
+[triangle-alpha-atlas.ts](../packages/bake/src/objects/layers/terrestrial/triangle-alpha-atlas.ts)
 therefore writes a second copy, `<name>-alpha@2x.webp`, whose slices are transparent
 outside their triangle. The mask is the union of the faces that read that atlas in
 some variant, antialiased over one texel and never grown: at the raster sizing's
@@ -526,7 +526,7 @@ To repeat the measurement, run
 [`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
 on the files a lane change replaces.
 
-[raster-output.mts](../tools/objects/terrestrial-layers/raster-output.mts) writes
+[raster-output.ts](../packages/bake/src/objects/layers/terrestrial/raster-output.ts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
 lossless; display output is written in the lossy lane unless the recipe selects a
 quality setting.

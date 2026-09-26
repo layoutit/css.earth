@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseObjShape } from '@cssearth/bake/objects/geometry';
-import { createSourceMeshLighting } from './source-mesh-lighting.mts';
+import { createSourceMeshLighting } from '@cssearth/bake/objects/layers/terrestrial';
 const recipe = { maximumDistanceMeters: 2, rayOffsetMeters: .001, ambient: .2, diffuse: .8,
   floodLights: [{ direction: [0,0,1], weight: .8 }] };
 const floor = 'v -10 -10 0\nv 10 -10 0\nv 0 10 0\nf 1 2 3\n';

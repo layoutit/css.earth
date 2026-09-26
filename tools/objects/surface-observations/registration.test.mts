@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { rotate, multiply } from '@cssearth/spice';
 import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
-import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '../terrestrial-layers/registration-sweeps.mts';
+import { radiusFieldMesh, turnedOrientation, type SurfaceReference } from '@cssearth/bake/objects/layers/terrestrial';
 import { DECISIVE, parseRefinement, refinementDecision, refinementKept, referenceRegistration, reliefRegistration, silhouetteRegistration, tiltDecision, type RegistrationStageReport } from './registration.mts';
 import { tiltedCamera } from './cameras.mts';
 import type { FrameDetector, LoadContext, ObservationCamera, ObservationFrame, ObservationImage } from './contract.mts';

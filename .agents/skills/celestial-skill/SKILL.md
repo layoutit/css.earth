@@ -326,7 +326,7 @@ from the observation times and slit pointing. Keep an independent numerical fit
 reference, validate the image-to-shape placement separately, and preserve missing
 spectra. A small reprojection residual is relative to the selected reference frame;
 it does not remove inherited absolute shape or pointing uncertainty. The
-[HRI-IR preparer](../../../tools/objects/terrestrial-layers/hrii-facets.mts) is one
+[HRI-IR preparer](../../../packages/bake/src/objects/layers/terrestrial/missions/hrii-facets.ts) is one
 example using native spectra and a dataset-owned source mesh.
 
 ## 4. Inspect the mounted body
