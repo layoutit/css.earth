@@ -159,7 +159,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
       surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
       poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
-    projection: sphereProjection(0.05),
+    projection: sphereProjection(0.05, 1024 / 32),
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-lighting@1`, layout: 'body-container',
       body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: rotation === 'unmeasured' ? 0 : periodDays,
         sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere',

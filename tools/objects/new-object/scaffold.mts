@@ -166,7 +166,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id, surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
     surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
     poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
-    projection: sphereProjection(1),
+    projection: sphereProjection(1, 1024 / 32),
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-emission@1`, layout: 'body-container', body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: 36525,
       sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere', polarPreparation: 'the same gray on the polar tiles',
       axialTiltNote: "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame" } } });
