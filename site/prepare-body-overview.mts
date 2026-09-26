@@ -5,8 +5,8 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireSceneObject } from './objects.mts';
 import { objectClassificationLabel } from './search/search-objects.mts';
-import { parseSpectrumRecipe, readSpectrumData } from '../tools/objects/content/spectrum-data.mts';
-import { renderCompactSpectrum } from '../tools/objects/content/compact-spectrum.mts';
+import { parseSpectrumRecipe, readSpectrumData } from '../tools/objects/charts/spectrum-data.mts';
+import { renderCompactSpectrum } from '../tools/objects/charts/compact-spectrum.mts';
 
 const root = resolve(import.meta.dirname, '..');
 const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
