@@ -51,7 +51,6 @@
   background: transparent;
   cursor: pointer;
 }
-.object-lens-picker-display:has(.object-lens-native-select:focus-visible) { box-shadow: inset 0 -1px var(--shell-focus); }
 .object-lens-native-select {
   position: absolute;
   inset: 0;
@@ -60,6 +59,7 @@
   margin: 0;
   opacity: 0;
   cursor: pointer;
+  outline: 0;
 }
 .object-lens-picker-current { flex: 1; min-width: 0; }
 .object-lens-picker-selection { display: flex; align-items: center; gap: 10px; min-width: 0; }
