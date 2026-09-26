@@ -14,9 +14,10 @@ function producerPath(path: string): boolean {
     // `packages/bake/` and `tools/sources/` are where those owners live now; `src/renderers/` above is the renderer runtime
     // before it became `packages/renderer/`, and `packages/engine/` holds the star colour fit that was `src/preparation/stars/`.
     // `packages/spice/` is an owner since the sky-band composite reads the WISE atlas grid through `@cssearth/bake/objects/raster`,
-    // whose entry (followed whole, like every topic entry) reaches the observer cameras.
+    // whose entry (followed whole, like every topic entry) reaches the observer cameras. `packages/objects/` is an owner since
+    // the renderer's world-rotation validation joined `@cssearth/objects`, whose main entry is followed whole.
     /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:fits|sources)\/.+\.[cm]?ts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path) ||
-    /^packages\/(?:bake|engine|fits|renderer|spice|telescope)\/(?:src\/.+\.ts|package\.json)$/.test(path);
+    /^packages\/(?:bake|engine|fits|objects|renderer|spice|telescope)\/(?:src\/.+\.ts|package\.json)$/.test(path);
 }
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {
