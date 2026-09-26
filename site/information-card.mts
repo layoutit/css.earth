@@ -6,6 +6,7 @@ import { objectTypeLabel } from './object-classification-label.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
+const TREE_PANEL_STATE = 'tree-sections@1';
 
 /** Bind only the controls replaced with an object's information card. */
 export function mountInformationCard(drawer: HTMLElement, objectId: string,
@@ -15,6 +16,9 @@ export function mountInformationCard(drawer: HTMLElement, objectId: string,
     return controller;
   };
   const tabs = retain(createInformationTabsController(drawer, lifetime));
+  const dataset = drawer.querySelector<HTMLDetailsElement>('.object-information-panel > .object-dataset-content');
+  // The dataset is a desktop tab and a stacked mobile section, always expanded.
+  if (dataset) dataset.open = true;
   retain(createChartSwitcherController(drawer, windowTarget, lifetime));
   retain(createChartPixelAlignmentController(drawer, windowTarget));
   return {
@@ -32,6 +36,7 @@ export function restoreInformationPanels(card: HTMLElement, objectId: string, wi
 function informationPanels(card: HTMLElement, windowTarget: BrowserWindow): Panel[] {
   return [...card.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')]
     .filter((panel) => panel instanceof windowTarget.HTMLDetailsElement)
+    .filter((panel) => !panel.classList.contains('object-dataset-content'))
     .map(panel => [panelKey(panel), panel] as const);
 }
 
@@ -44,13 +49,21 @@ export function createInformationTabsController(drawer: HTMLElement, lifetime: S
 export function createTabsController(card: HTMLElement | null, lifetime: SceneLifetime, requestedGroup?: string) {
   const tabs = [...(card?.querySelectorAll<HTMLInputElement>('[data-information-tab]:not([hidden])') ?? [])]
     .filter(tab => requestedGroup === undefined || (tab.dataset.informationGroup ?? 'detail') === requestedGroup);
+  const sections = requestedGroup === undefined
+    ? [...(card?.querySelectorAll<HTMLDetailsElement>(':scope > details[data-information-panel]') ?? [])]
+    : [];
   let disposed = false;
   const destroy = () => { disposed = true; };
   lifetime.onDispose(destroy);
   return { show(id: string) {
     if (disposed) return;
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
-    if (tab) { tab.checked = true; tab.dispatchEvent(new Event('change', { bubbles: true })); }
+    if (tab) {
+      tab.checked = true;
+      tab.dispatchEvent(new tab.ownerDocument.defaultView!.Event('change', { bubbles: true }));
+    }
+    const section = sections.find(panel => panel.dataset.informationPanel === id);
+    if (section) section.open = true;
   }, destroy };
 }
 
@@ -131,7 +144,7 @@ function createPanelController(drawer: HTMLElement, objectId: string, windowTarg
       windowTarget.localStorage.setItem(
         storageKey,
         JSON.stringify(
-          panels.filter(([, panel]) => panel.open).map(([name]) => name),
+          [TREE_PANEL_STATE, ...panels.filter(([, panel]) => panel.open).map(([name]) => name)],
         ),
       );
     } catch {}
@@ -166,7 +179,11 @@ function restorePanelState(panels: readonly Panel[], objectId: string, windowTar
     const saved: unknown = JSON.parse(windowTarget.localStorage.getItem(`css.earth:${objectId}:panels`) ?? "null");
     if (Array.isArray(saved) && saved.every(id => typeof id === 'string')) {
       const openPanels = new Set(saved);
-      for (const [name, panel] of panels) panel.open = openPanels.has(name);
+      for (const [name, panel] of panels) {
+        // Older saved lists predate the main tree disclosures; keep their authored default openness.
+        if (!openPanels.has(TREE_PANEL_STATE) && panel.classList.contains('atlas-tree-disclosure')) continue;
+        panel.open = openPanels.has(name);
+      }
     }
   } catch {}
 }

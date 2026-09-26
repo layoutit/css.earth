@@ -35,6 +35,82 @@
   display: block;
 }
 
+/* Desktop shows the rows; mobile keeps their selected image and text under a native select. */
+.object-lens-picker { min-width: 0; }
+.object-lens-picker-display {
+  position: relative;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 56px;
+  padding: 7px 0;
+  border: 0;
+  border-radius: 8px;
+  color: var(--shell-text);
+  background: transparent;
+  cursor: pointer;
+}
+.object-lens-picker-display:has(.object-lens-native-select:focus-visible) { box-shadow: inset 0 -1px var(--shell-focus); }
+.object-lens-native-select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.object-lens-picker-current { flex: 1; min-width: 0; }
+.object-lens-picker-selection { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.object-lens-picker-selection[hidden] { display: none; }
+.object-lens-picker-preview {
+  display: grid;
+  flex: 0 0 40px;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #080808;
+}
+.object-lens-picker-preview > img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.object-lens-picker-text { display: flex; flex-direction: column; min-width: 0; }
+.object-lens-picker-label, .object-lens-picker-detail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.object-lens-picker-label { font: var(--shell-font-content); }
+.object-lens-picker-detail { color: var(--shell-text-muted); font: var(--shell-font-value); }
+.object-lens-picker-chevron {
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  margin: 0;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+.object-lens-picker > .object-observation-controls {
+  box-sizing: border-box;
+  gap: 4px;
+  max-height: none;
+  margin-top: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+.object-lens-picker .object-observation-control { min-height: 26px; padding: 3px 0; opacity: 0.78; }
+.object-lens-picker .object-observation-control:is([aria-pressed="true"], :hover, :focus-visible) { opacity: 1; }
+.object-lens-picker .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
+  grid-template-columns: 14px minmax(0, 1fr) max-content;
+}
+.object-lens-picker .object-thumbnail-leading > .object-lens-detail { grid-column: 3; }
+.object-lens-picker .object-observation-control:has(.object-lens-detail)::after { content: none; }
+@media (max-width: 820px), (orientation: portrait) {
+  .object-lens-picker-display { display: flex; }
+  .object-lens-picker > .object-observation-controls { display: none; }
+}
+
 .object-sheet-handle {
   display: none;
 }
@@ -1889,8 +1965,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   object-fit: contain;
 }
 
-/* Portrait tablets: the sheet drops its tab strip and shows every section at once, named by
-   its panel's own label. The title, the dataset list and the factsheet float down the left; the
+/* Portrait tablets place the disclosed sections in two columns. The title and factsheet float down the left; the
    chosen dataset, its galleries and its spacecraft cards stack on the right. Floats rather than a
    grid, so the spacecraft cards follow the dataset map and not the factsheet's height. Long lists
    (moons) close the sheet at full width, in as many columns as fit. */
@@ -1903,14 +1978,9 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-native-tabs { display: none; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not([hidden]) { display: block; }
-  /* Every section is visible, so the spacecraft cards no longer wait for the Datasets tab. */
-  .object-ui-layer:not(:has(.object-facility-toggle:not(:checked), .object-settings-panel:popover-open))
-    .object-information-panel:not([aria-busy="true"], [data-card-view="overview"]) > .object-native-tabs
-    ~ .object-dataset-context-rail:has([data-dataset-context]:not([hidden]) > *) { display: block; }
-
   /* Section headings: the label each tab used to carry, in the sheet's panel-heading type. */
-  .object-information-panel > .object-dataset-content:has(> .object-lenses)::before,
-  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content)::before {
+  .object-information-panel > .object-dataset-content:not(.atlas-tree-disclosure):has(> .object-lenses)::before,
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .atlas-tree-disclosure)::before {
     content: attr(aria-label);
     display: flex;
     align-items: center;
@@ -1921,7 +1991,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     letter-spacing: 0;
     text-transform: uppercase;
   }
-  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content) { padding-top: 0; }
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content) { padding-top: 0; }
 
   /* Two columns: the title and its factsheet on the left; the dataset list, the chosen dataset and its
      spacecraft on the right. A grid whose second row is flexible, so the factsheet starts right under
@@ -1934,8 +2004,14 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   }
   .object-information-panel:not([data-card-view="overview"]) > * { grid-column: 1 / -1; }
   .object-information-panel:not([data-card-view="overview"]) > .object-selected-panel { grid-column: 1; grid-row: 1; }
-  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="factsheet"] { grid-column: 1; grid-row: 2 / span 2; margin-top: 12px; }
-  .object-information-panel:not([data-card-view="overview"]) > .object-dataset-content:not([hidden]) { display: block; grid-column: 2; grid-row: 1 / span 2; padding-top: 0; }
+  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="factsheet"] { grid-column: 1; grid-row: 2 / span 2; margin-top: 0; }
+  .object-information-panel:not([data-card-view="overview"]) > .object-dataset-content:not([hidden]) {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    padding-top: 0;
+    border-top: 0;
+  }
   .object-information-panel:not([data-card-view="overview"]) > .object-dataset-context-rail {
     grid-column: 2;
     grid-row: 3;
@@ -1943,7 +2019,6 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     width: auto;
     padding: 12px 0 20px;
   }
-  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="moons"] { grid-row: 4; }
   /* The chosen dataset follows its list, under the list's own rule. */
   .object-information-panel > .object-dataset-content > .object-lens-details { margin-top: 12px; }
 

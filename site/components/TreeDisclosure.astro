@@ -1,0 +1,10 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import '../navigation/navigation-tree.css';
+interface Props extends Omit<HTMLAttributes<'details'>, 'title'> { title: string; }
+const { title, open = false, class: className, ...attributes } = Astro.props;
+---
+<details class:list={['atlas-tree-disclosure', className]} open={open} {...attributes}>
+  <summary><span class="atlas-tree-root">{title}</span></summary>
+  <slot />
+</details>

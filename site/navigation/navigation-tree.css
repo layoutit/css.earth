@@ -1,6 +1,8 @@
 /* Application navigation accordion and prepared markers. */
-.atlas-tree-card {
+.atlas-tree-card, .atlas-tree-disclosure {
   --atlas-navigation-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23858585' stroke-width='1.4'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5'/%3E%3C/svg%3E");
+}
+.atlas-tree-card {
   box-sizing: border-box;
   width: 100%;
   min-height: 0;
@@ -12,7 +14,7 @@
 .atlas-tree, .atlas-tree ul { margin: 0; padding: 0; list-style: none; }
 .atlas-tree details > ul { padding-inline-start: 0.75rem; }
 .atlas-tree .top-level > li + li, .atlas-tree > li + li { margin-top: 0.5rem; }
-.atlas-tree summary {
+.atlas-tree summary, .atlas-tree-disclosure > summary {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -22,8 +24,9 @@
   cursor: pointer;
   user-select: none;
 }
-.atlas-tree summary::marker, .atlas-tree summary::-webkit-details-marker { content: ''; display: none; }
-.atlas-tree summary::before {
+.atlas-tree summary::marker, .atlas-tree summary::-webkit-details-marker,
+.atlas-tree-disclosure > summary::marker, .atlas-tree-disclosure > summary::-webkit-details-marker { content: ''; display: none; }
+.atlas-tree summary::before, .atlas-tree-disclosure > summary::before {
   content: '';
   flex: none;
   width: 0.75rem;
@@ -31,8 +34,10 @@
   background: var(--atlas-navigation-caret) center / contain no-repeat;
   transition: transform 0.15s ease-in-out;
 }
-.atlas-tree details[open] > summary::before { transform: rotate(90deg); }
-.atlas-tree summary:hover { background: transparent; }
+.atlas-tree details[open] > summary::before, .atlas-tree-disclosure[open] > summary::before { transform: rotate(90deg); }
+.atlas-tree summary:hover, .atlas-tree-disclosure > summary:hover { background: transparent; }
+.atlas-tree-disclosure > summary:focus-visible { outline: none; }
+.atlas-tree-disclosure > summary:focus-visible .atlas-tree-root { color: var(--shell-text); text-decoration: underline; text-underline-offset: 3px; }
 .atlas-tree-root { color: var(--shell-text-muted); font: 400 14px/18px var(--shell-ui-font); text-transform: uppercase; }
 .atlas-tree-group { color: var(--shell-text-secondary); font: var(--shell-font-content); }
 .atlas-tree-body { display: flex; align-items: center; gap: 0.375rem; color: var(--shell-text-secondary); font: var(--shell-font-content); }

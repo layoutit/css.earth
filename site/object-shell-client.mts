@@ -16,6 +16,7 @@ import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation/navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
+import { bindDatasetPicker } from './dataset-picker.mts';
 import { createSettingsController } from './shell-settings.mts';
 import { mountInformationCard, createInformationTabsController, createTabsController, restoreInformationPanels, objectCardPreview } from './information-card.mts';
 import type { ObjectShell, ShellOptions, ShellNavigationTarget, ShellNavigationTransition } from './object-shell-types.mts';
@@ -32,6 +33,7 @@ export function mountObjectShell({
     throw new Error("Object shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
+  bindDatasetPicker(documentTarget, windowTarget, lifetime);
   const fragments = navigationFragments(windowTarget);
   let informationCard: ReturnType<typeof mountInformationCard>;
   let sheet: ReturnType<typeof createSheetController>;

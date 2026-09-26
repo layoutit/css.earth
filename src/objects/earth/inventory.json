@@ -12789,6 +12789,12 @@
     },
     {
       "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2014,
+      "sha256": "6e3fa1711f04399785ffd0b4ff8038dee4604ed68bb9afd73ea604a8456a49c0"
+    },
+    {
+      "location": "prepared",
       "filename": "texture-levels.json",
       "bytes": 1489520,
       "sha256": "6f2842ac37435e2087a7fb53c65816407316e51ad207edc4515b46eed9e39ab1"
@@ -12798,12 +12804,6 @@
       "filename": "world-navigation.json",
       "bytes": 1223,
       "sha256": "54b747e0d6e28f7d8036be91cb191947423958a016ee648669571840c1758406"
-    },
-    {
-      "location": "prepared",
-      "filename": "text.json",
-      "bytes": 2066,
-      "sha256": "cf86ea91d4643016145d0ffc0d3721d870c30b1424fa5c336384049dd8e040c7"
     }
   ]
 }

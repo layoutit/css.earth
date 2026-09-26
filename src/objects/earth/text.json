@@ -28,27 +28,27 @@
   "datasets": {
     "normal": {
       "title": "Blue Marble Next Generation",
-      "detail": "NASA · July 2004",
+      "detail": "NASA",
       "summary": "NASA Blue Marble, July 2004, midtones brightened. Deep ocean is shaded from depth, not observed water colour."
     },
     "clouds": {
       "title": "Blue Marble cloud composite",
-      "detail": "NASA · archival",
+      "detail": "NASA",
       "summary": "Archival NASA clouds over the July 2004 mosaic; not live weather. Deep ocean is shaded from depth."
     },
     "topography": {
       "title": "GEBCO land and seafloor heights",
-      "detail": "GEBCO · 2026",
+      "detail": "GEBCO",
       "summary": "GEBCO 2026 terrain: height and depth relative to mean sea level, with estimated ocean depths."
     },
     "night-lights": {
       "title": "Black Marble annual night lights · 2025",
-      "detail": "NASA · 2025",
+      "detail": "NASA",
       "summary": "2025 night-time radiance in false color on a log scale. Aurora can remain near the poles."
     },
     "enso": {
       "title": "Sea-surface temperature anomaly",
-      "detail": "7 Sept 2026",
+      "detail": "NASA MUR",
       "summary": "Sea-surface temperature compared with the 2003–2014 average, on 7 September 2026. Gray covers land, ice and gaps."
     },
     "cross-section": {
@@ -58,7 +58,7 @@
     },
     "mantle-tomography": {
       "title": "GLAD-M35 mantle tomography",
-      "detail": "GLAD-M35 · 2024",
+      "detail": "GLAD-M35",
       "summary": "Slower and faster mantle waves at each depth, in red and blue. This is not temperature."
     }
   }

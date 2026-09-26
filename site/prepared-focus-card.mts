@@ -1,4 +1,5 @@
 import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
+import { publishDatasetPreview } from '@cssearth/renderer';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { preparedFocusObjectId } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
@@ -69,6 +70,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
         const pressed = String(lens === currentPresentation.selectedLens);
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
+      publishDatasetPreview(bank.root, bank.buttons);
       for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
       for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedLens;
     }

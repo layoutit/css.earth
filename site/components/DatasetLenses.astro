@@ -13,6 +13,8 @@ interface Props {
 }
 const { objectId, lenses, controlName = 'dataset', route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const focus = controlName === 'focusLens';
+const previewUrl = (lens: NonNullable<ShellProps['lenses']>['controls'][number]) =>
+  sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl;
 // A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
 // one's scale. Its legend is published beside the cloud's own, or the reader is left with a body nothing explains.
 const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][number]) => {
@@ -27,6 +29,8 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
 type Control = NonNullable<ShellProps['lenses']>['controls'][number];
 const stepMembers = (lens: Control) => lens.step ? lenses.controls.filter(candidate => candidate.step?.group === lens.step!.group) : [];
 const listed = (lens: Control) => !lens.step || stepMembers(lens)[0]?.id === lens.id;
+const defaultControl = lenses.controls.find(lens => lens.id === lenses.defaultLens);
+const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
 const stepOf = (lens: Control) => {
   const members = stepMembers(lens), index = members.findIndex(member => member.id === lens.id);
   return members.length ? { index, count: members.length, previous: members[index - 1], next: members[index + 1] } : undefined;
@@ -37,6 +41,23 @@ const stepOf = (lens: Control) => {
     {['v', 'overview', 'focus', focus ? 'dataset' : 'focusLens', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
+    <div class="object-lens-picker" data-lens-picker>
+      <div class="object-lens-picker-display">
+        <span class="object-lens-picker-current">
+          {lenses.controls.filter(listed).map(lens => <span class="object-lens-picker-selection"
+            data-lens-selected={lens.id} hidden={lens.id !== defaultListedId}>
+            <span class="object-lens-picker-preview"><img src={previewUrl(lens)} width="40" height="40" alt="" loading="lazy" decoding="async" /></span>
+            <span class="object-lens-picker-text"><span class="object-lens-picker-label">{lens.label}</span>
+              {lens.detail && <span class="object-lens-picker-detail">{lens.detail}</span>}</span>
+          </span>)}
+        </span>
+        <span class="object-lens-picker-chevron" aria-hidden="true"></span>
+        <select class="object-lens-native-select" data-lens-native-select aria-label={focus ? 'Focus dataset' : 'Dataset'}>
+          {lenses.controls.filter(listed).map(lens => <option value={lens.id} selected={lens.id === defaultListedId}>
+            {lens.label}{lens.detail ? ` — ${lens.detail}` : ''}
+          </option>)}
+        </select>
+      </div>
     <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens) => (
         <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}
@@ -59,6 +80,7 @@ const stepOf = (lens: Control) => {
         </div>
       ))}
     </nav>
+    </div>
   </div>
 </section>
 <section
@@ -74,8 +96,7 @@ const stepOf = (lens: Control) => {
         data-focus-lens-details={focus ? lens.id : undefined}
         hidden={lens.id !== lenses.defaultLens}
       >
-        <DatasetDescription {lens}>
-          {lens.texture && <div
+        {lens.texture && <div
             class="object-surface-minimap"
             data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}
             role={lens.texture.minimap ? "group" : undefined}
@@ -101,6 +122,7 @@ const stepOf = (lens: Control) => {
               ></span>)}
             </>}
           </div>}
+        <DatasetDescription {lens}>
           {stepOf(lens) && (() => {
             const step = stepOf(lens)!;
             const arrow = (target: Control | undefined, next: boolean) => <button

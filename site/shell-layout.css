@@ -527,8 +527,11 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-ui-layer:has(.object-facility-toggle:not(:checked)) .object-dataset-context-rail,
 .object-ui-layer:has(.object-settings-panel:popover-open) .object-dataset-context-rail,
 .object-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .object-dataset-context-rail,
-.object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail,
+.object-information-panel > .object-dataset-content:not([open]) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
+@media (min-width: 821px) and (orientation: landscape) {
+  .object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail { display: none; }
+}
 
 /* Dataset context uses the same cards as the left sidebar. */
 .object-dataset-context-dock { display: contents; }

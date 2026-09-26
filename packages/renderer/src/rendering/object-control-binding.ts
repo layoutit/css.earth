@@ -12,9 +12,38 @@ const isInput = (element: SettingInput): element is HTMLInputElement => element.
 // attribute write still reaches the DOM (docs/performance/motion-freezes-membership.md).
 const setAttribute = (element: Element, name: string, value: string) => { if (element.getAttribute(name) !== value) element.setAttribute(name, value); };
 
+/** Keep the collapsed dataset's image and text aligned with the committed option, including sequence steps. */
+export function publishDatasetPreview(root: ParentNode | null, buttons: readonly HTMLButtonElement[]) {
+  if (!root) return;
+  const previews = root.querySelectorAll<HTMLElement>('[data-lens-selected]');
+  const select = root.querySelector<HTMLSelectElement>('[data-lens-native-select]');
+  if (previews.length === 0 && !select) return;
+  const pressed = buttons.find(button => button.getAttribute('aria-pressed') === 'true');
+  const visible = buttons.find(button => button.getAttribute('aria-pressed') === 'true' &&
+    button.closest<HTMLElement>('[data-lens-option]')?.hidden !== true);
+  const group = pressed?.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup;
+  const listed = group ? buttons.find(button => {
+    const option = button.closest<HTMLElement>('[data-step-group]');
+    return option?.dataset.stepGroup === group && option.dataset.stepListed === 'true';
+  }) : undefined;
+  const selected = visible?.getAttribute('value') ?? listed?.getAttribute('value') ?? pressed?.getAttribute('value');
+  for (const preview of previews) {
+    const hidden = preview.dataset.lensSelected !== selected;
+    if (preview.hidden !== hidden) preview.hidden = hidden;
+  }
+  if (select && selected) {
+    for (const option of select.querySelectorAll('option')) {
+      option.toggleAttribute('selected', option.value === selected);
+      const button = buttons.find(button => button.value === option.value);
+      option.disabled = !button || button.disabled;
+    }
+    if (select.value !== selected) select.value = selected;
+  }
+}
+
 /** Native responses and retained controls publish the same committed dataset presentation. */
 export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], details: readonly { id: string; panel: HTMLElement }[],
-  contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>) {
+  contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>, previewRoot: ParentNode | null = null) {
   for (const button of buttons) setAttribute(button, 'aria-pressed', String(pressed.has(button.getAttribute('value') ?? '')));
   const active = buttons.find(button => pressed.has(button.getAttribute('value') ?? ''))?.getAttribute('value');
   // A dataset shown as a sequence lists only its first step; that entry stays pressed while any of its steps is shown.
@@ -32,6 +61,7 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
     const hidden = context.dataset.datasetContext !== active;
     if (context.hidden !== hidden) context.hidden = hidden;
   }
+  publishDatasetPreview(previewRoot, buttons);
 }
 
 import { requireObjectControls } from "../runtime/object-contract.js";
@@ -119,7 +149,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       const disabled = input.type === 'submit' ? false : !ready;
       if (input.disabled !== disabled) input.disabled = disabled;
     }
-    publishDatasetSelection(lensInputs, details, contexts, pressed);
+    publishDatasetSelection(lensInputs, details, contexts, pressed, lensRoot);
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       if (nativeChanges.has(control.name)) continue;
