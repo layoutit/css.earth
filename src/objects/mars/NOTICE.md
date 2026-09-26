@@ -10,7 +10,9 @@ This package combines prepared material derived from the following sources:
 - JPL Solar System Dynamics physical and orbital tables, cited per fact in
   `source/editorial/factsheet-review.json`.
 - NASA GSFC Planetary Spectrum Generator output and NASA Science editorial
-  information.
+  information. The limb halo profile (`source/atmosphere/psg-limb.json`) was
+  computed with a local copy of the Planetary Spectrum Generator (nasapsg/psg
+  container; Villanueva et al. 2018, 2022).
 - The shared clean-room directional-sun standard cites the earlier Google Earth
   Pro Mars behavioural measurements retained in
   `source/sky/google-earth-pro-contract.json`; no Google sky, shader, or Sun

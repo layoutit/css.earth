@@ -1,0 +1,193 @@
+{
+ "schema": "cssearth-psg-limb-table@1",
+ "body": "venus",
+ "psgObject": "Venus",
+ "radiusKm": 6051.8,
+ "atmosphere": "Venus - VIRA-45, Vandaele+2020, Bierson+2019, Ehrenreich+2012",
+ "units": "W sr-1 m-2 um-1",
+ "bandsMicrometres": {
+  "red": [
+   0.64,
+   0.67
+  ],
+  "green": [
+   0.53,
+   0.56
+  ],
+  "blue": [
+   0.44,
+   0.49
+  ]
+ },
+ "windowsMicrometres": {
+  "red": [
+   [
+    0.64,
+    0.645
+   ],
+   [
+    0.645,
+    0.65
+   ],
+   [
+    0.65,
+    0.655
+   ],
+   [
+    0.655,
+    0.66
+   ],
+   [
+    0.66,
+    0.665
+   ],
+   [
+    0.665,
+    0.67
+   ]
+  ],
+  "green": [
+   [
+    0.53,
+    0.535
+   ],
+   [
+    0.535,
+    0.54
+   ],
+   [
+    0.54,
+    0.545
+   ],
+   [
+    0.545,
+    0.55
+   ],
+   [
+    0.55,
+    0.555
+   ],
+   [
+    0.555,
+    0.56
+   ]
+  ],
+  "blue": [
+   [
+    0.44,
+    0.445
+   ],
+   [
+    0.445,
+    0.45
+   ],
+   [
+    0.45,
+    0.455
+   ],
+   [
+    0.455,
+    0.46
+   ],
+   [
+    0.46,
+    0.465
+   ],
+   [
+    0.465,
+    0.47
+   ],
+   [
+    0.47,
+    0.475
+   ],
+   [
+    0.475,
+    0.48
+   ],
+   [
+    0.48,
+    0.485
+   ],
+   [
+    0.485,
+    0.49
+   ]
+  ]
+ },
+ "meaning": "band radiance: the mean of every spectral point of the band's 5 nm windows, each window one PSG call",
+ "configurations": {
+  "limb": "atmosphere/psg-limb.cfg",
+  "nadir": "atmosphere/psg-nadir.cfg",
+  "note": "GENERATOR-RANGE1/2 are set per window and GEOMETRY-USER-PARAM per altitude"
+ },
+ "method": {
+  "limb": "single scattering, NMAX 0, LMAX 41: PSG computes limb paths with single scattering only (handbook p. 96)",
+  "nadir": "PSGDORT multiple scattering, NMAX 6, LMAX 41"
+ },
+ "geometry": {
+  "solarZenithDegrees": [
+   89.05,
+   89.05,
+   89.05,
+   89.05,
+   89.05,
+   89.05,
+   89.05,
+   89.05
+  ],
+  "solarLongitudeOffsetDegrees": 89.0625,
+  "searchedAtAltitudeKm": 95,
+  "azimuthDegrees": 0,
+  "meaning": "the Sun 1 degree above the tangent point horizon behind the observer: PSG's single-scattering limb path receives no sunlight with the Sun on the horizon",
+  "nadirSolarZenithDegrees": 1.158
+ },
+ "nadirOverheadSun": {
+  "red": 839.7199,
+  "green": 1078.694,
+  "blue": 1125.814
+ },
+ "altitudesKm": [
+  75,
+  80,
+  85,
+  90,
+  95,
+  100,
+  110,
+  120
+ ],
+ "radiance": {
+  "red": [
+   32.61465,
+   13.6585,
+   4.70335,
+   1.420492,
+   0.391556,
+   0.1060107,
+   0.008328578,
+   0.0006672698
+  ],
+  "green": [
+   73.06331,
+   31.92612,
+   11.19674,
+   3.40457,
+   0.9406023,
+   0.2548426,
+   0.02002711,
+   0.001604588
+  ],
+  "blue": [
+   123.748,
+   57.61587,
+   20.77151,
+   6.380687,
+   1.768195,
+   0.4794085,
+   0.03768624,
+   0.003019544
+  ]
+ },
+ "warnings": []
+}

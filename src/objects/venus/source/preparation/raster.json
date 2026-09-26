@@ -84,6 +84,8 @@
         "photometry/perez-hoyos-2018-minnaert-467nm.json"
       ]
     },
+    "halo": "atmosphere/psg-limb.json",
+    "haloEdgeAltitudeKm": 75,
     "tileSize": 256,
     "logicalSize": 512,
     "frameCount": 32,

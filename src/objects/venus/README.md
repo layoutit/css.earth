@@ -13,6 +13,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Radar and elevation | [USGS Magellan radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) and [colorized topography](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m) |
 | Surface photographs | [PDS Venera collection](https://pds-geosciences.wustl.edu/missions/venera/) |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
+| Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target) Venus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
@@ -36,7 +37,7 @@ Landing sites: 13 spacecraft landing, touchdown or impact sites are labelled bes
 Feature notes: 112 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - Magellan colors are synthetic; they are not natural-color views.
-- There is no halo yet: the cloud deck ends at its limb (see the `limb-halo` ledger entry). Rotation is accelerated.
+- The halo is a PSG model, not a measurement. PSG computes it with single scattering only and with the Sun one degree above the tangent point's horizon, so the real halo, especially the low haze just above the cloud top, may be brighter (see the `limb-halo` and `measured-limb-halo` ledger entries). Rotation is accelerated.
 - The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
 - The Magellan color source map has a darker one-pixel column at both its left and right edges (mean brightness 108 against about 124 beside them). A thin dark line can show along 180° E at close zoom.
@@ -210,10 +211,34 @@ at the centre and falls to a third of it where the clouds are seen at 60°
 ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The authored 0.30 flood shadow release, 0.78 sunward release and
 terminator ramp are gone.
 
-There is no halo yet: the lane draws one when the recipe names a NASA PSG limb
-profile of the Venus template, and no valid profile exists yet (see the
-`limb-halo` ledger entry). The OpenSpace RenderableAtmosphere tuning is removed
-with its record.
+Outside the disc, the halo comes from a NASA PSG limb profile of PSG's own Venus
+template (VIRA-45 with Vandaele et al. 2020, Bierson et al. 2019 and Ehrenreich et
+al. 2012, and its sulfuric acid haze), computed with a local nasapsg/psg container
+by
+[acquire-psg-limb-table.mts](../../../tools/photometry/acquire-psg-limb-table.mts)
+into `source/atmosphere/psg-limb.json`. It is the radiance of a 1 km beam along a
+line of sight grazing the planet at each tangent altitude, with the Sun behind the
+viewer, divided by PSG's own disc-centre radiance under an overhead Sun, in the
+red (640-670 nm), green (530-560 nm) and blue (440-490 nm) bands. The halo starts
+at the visible edge, the cloud top at 75 km (Pérez-Hoyos et al. 2018 find a mean
+cloud top of 75 ± 2 km), and each frame lights it where the tangent point faces
+the Sun. Relative to the disc centre (red, green, blue) it is 0.039, 0.068 and
+0.110 at the cloud top, 0.016, 0.030 and 0.051 at 80 km, 0.0017, 0.0032 and 0.0057
+at 90 km, and below one ten-thousandth above 100 km.
+
+Two PSG limits shape it. PSG computes limb lines of sight with single scattering
+only ([PSG handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96),
+so light scattered more than once is missing and the real halo, most of all the
+low haze just above the cloud top, may be brighter. And its single-scattering limb
+receives no sunlight with the Sun exactly on the tangent point's horizon (the
+answer is only thermal emission, near 1e-49), so the Sun sits one degree above it,
+at a solar zenith of 89 degrees; in a spot check at 90 km, moving it one more
+degree changed the radiance by 0.1%. Each band is the mean of 5 nm windows. The
+nadir uses PSG's multiple-scattering solver at NMAX 6 and LMAX 41, and the limb
+NMAX 0 and LMAX 41, what PSG asks for these aerosols. In wider windows PSG quietly
+switches to a two-stream solver that ignores the tangent altitude, and the tool
+refuses every answer that did not run the requested method. The OpenSpace
+RenderableAtmosphere tuning is removed with its record.
 
 </details>
 

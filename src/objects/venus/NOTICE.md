@@ -14,7 +14,9 @@ the official USGS planetary WMS. NASA and USGS do not endorse this presentation.
 
 The navigation image is credited to NASA/JPL-Caltech and retained under NASA's
 media usage guidelines. The atmosphere model outputs are credited to the NASA
-GSFC Planetary Spectrum Generator.
+GSFC Planetary Spectrum Generator. The limb halo profile
+(`source/atmosphere/psg-limb.json`) was computed with a local copy of it
+(nasapsg/psg container; Villanueva et al. 2018, 2022).
 
 The four Venera surface files are exact institutional archive downloads from
 the NASA PDS Geosciences Node. Image credit belongs to the Vernadsky Institute

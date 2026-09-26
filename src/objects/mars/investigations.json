@@ -313,18 +313,35 @@
     {
       "id": "limb-halo",
       "subject": "Limb halo outside the disc",
-      "status": "unresolved",
-      "finding": "No halo is drawn. The lane draws one from a NASA PSG limb profile at full phase when the recipe names it. On 2026-09-25 the local nasapsg/psg container's limb geometry returned the same radiance at every tangent altitude, and the public API refused further calls for a day, so no valid profile exists.",
+      "status": "included",
+      "finding": "The halo is a NASA PSG limb profile of PSG's Mars template (Mars Climate Database 5.3 dust and water ice), computed on 2026-09-25 with a local nasapsg/psg container: single scattering (NMAX 0, LMAX 43) on 1 km beams at 11 tangent altitudes from 0 to 100 km, the Sun one degree above the tangent point horizon behind the observer, divided by PSG's multiple-scattering disc centre (NMAX 8, LMAX 43) under an overhead Sun, each band the mean of 10 nm windows. Relative to the disc centre it is 0.031, 0.058 and 0.069 (red, green, blue) at the surface, 0.039, 0.075 and 0.089 at 10 km and 0.0019, 0.0052 and 0.0091 at 40 km. The first local runs were flat because PUMAS fell back to a two-stream solver for memory and the Sun sat on the horizon; both are now refused by the tool.",
       "evidence": [
-        "https://psg.gsfc.nasa.gov/helpapi.php"
+        "https://psg.gsfc.nasa.gov/images/help/handbook.pdf",
+        "https://hub.docker.com/r/nasapsg/psg"
       ],
       "checked": [
         {
           "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
+      ]
+    },
+    {
+      "id": "exi-measured-limb-halo",
+      "subject": "EMM EXI limb profile to replace the PSG halo",
+      "status": "unresolved",
+      "finding": "The Emirates Mars Mission camera EXI takes calibrated full-disc images at 437, 546 and 635 nm with 2 to 4 km pixels and better than 5 per cent absolute accuracy. Frames taken over local noon show the limb near full phase with the disc centre in the same frame, so they could give a measured halo in the three bands. Not reduced yet: the EMM Science Data Center file API refused an anonymous request on 2026-09-25, so access is unconfirmed.",
+      "revisitWhen": "EXI Level 2 radiance frames near zero phase are obtained and reduced to limb profiles in the three bands.",
+      "evidence": [
+        "https://sdc.emiratesmarsmission.ae/",
+        "https://www.hou.usra.edu/meetings/tenthmars2024/pdf/3197.pdf"
       ],
-      "revisitWhen": "The public PSG API accepts calls again, or the local container returns a limb radiance that changes with altitude."
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     },
     {
       "id": "authored-limb-lighting",

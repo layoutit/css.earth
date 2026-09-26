@@ -14,6 +14,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Elevation display | MOLA color shaded relief from [NASA Trek WMTS tiles](source/manifest.json) |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
+| Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Dimensions, placement and charts | USGS, JPL and NASA PSG records below |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -39,7 +40,7 @@ Feature notes: 644 of the labelled names carry a caption note, the lead summary 
 
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic (sha256 `1e9123a6…`) has fully black rows 0–28 (north of about 87.5° N) and rows 2034–2047 (south of about 88.8° S), and 2.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
 - The MOLA lens mosaic is stitched from NASA Trek zoom-3 WMTS tiles and the THEMIS lens is a USGS Astrogeology WMS GetMap of the global day-IR mosaic (2026-09-16); the source manifest pins those bytesed mosaics.
-- The disc law is Vincendon's mean surface law with the atmosphere removed, like the Viking map; dust haze is not drawn, over the disc or beyond the limb: there is no halo yet (see the `limb-halo` ledger entry). The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
+- The disc law is Vincendon's mean surface law with the atmosphere removed, like the Viking map; dust haze is not drawn over the disc. Beyond the limb, the halo is a PSG model, not a measurement: single scattering only, with the Sun one degree above the tangent point's horizon, and one Mars Climate Database dust and ice snapshot, so the real halo may be brighter and changes with the season and dust storms (see the `limb-halo` and `exi-measured-limb-halo` ledger entries). The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
 - The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
 - Phobos and Deimos are standalone bodies with their own packages.
@@ -137,9 +138,33 @@ law lights all three channels. Relative to the flood-lit disc centre the limb
 keeps three quarters of the centre's brightness ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The authored OpenSpace
 Rayleigh and Mie tuning, its ambient term and the terminator ramp are removed.
 
-There is no halo yet: the disc ends at its limb. The lane draws one when the
-recipe names a NASA PSG limb profile of the Mars template, and no valid profile
-exists yet (see the `limb-halo` ledger entry).
+Outside the disc, the halo comes from a NASA PSG limb profile of PSG's own Mars
+template (the Mars Climate Database 5.3 profile PSG attaches, Millour et al. 2015,
+with its dust and water ice), computed with a local nasapsg/psg container by
+[acquire-psg-limb-table.mts](../../../tools/photometry/acquire-psg-limb-table.mts)
+into `source/atmosphere/psg-limb.json`. It is the radiance of a 1 km beam along a
+line of sight grazing the planet at each tangent altitude, with the Sun behind the
+viewer, divided by PSG's own disc-centre radiance under an overhead Sun, in the
+red (640-670 nm), green (530-560 nm) and blue (440-490 nm) bands. The halo starts
+at the surface, and each frame lights it where the tangent point faces the Sun.
+Relative to the disc centre (red, green, blue) it is 0.031, 0.058 and 0.069 at the
+surface, brightest at 10 to 15 km (0.039, 0.075 and 0.089 at 10 km), 0.0019,
+0.0052 and 0.0091 at 40 km, and below one ten-thousandth above 60 km; the dust
+dims the lowest lines of sight.
+
+Two PSG limits shape it. PSG computes limb lines of sight with single scattering
+only ([PSG handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96),
+so light scattered more than once is missing and the real halo may be brighter.
+And its single-scattering limb receives no sunlight with the Sun exactly on the
+tangent point's horizon (the answer is only thermal emission, near 1e-41), so the
+Sun sits one degree above it, at a solar zenith of 89 degrees; in a spot check at
+the surface, moving it one more degree changed the radiance by 0.4%. Each band is
+the mean of 10 nm windows. The nadir uses PSG's multiple-scattering solver at NMAX
+8 and LMAX 43, and the limb NMAX 0 and LMAX 43, what PSG asks for the dust. A
+shorter phase function overstates the backscattered halo about ninefold (LMAX 10
+against 43 at 460-470 nm). In wider windows PSG quietly switches to a two-stream
+solver that ignores the tangent altitude, and the tool refuses every answer that
+did not run the requested method.
 
 The reflectance spectrum and temperature-pressure profile are prepared from a
 pinned NASA GSFC Planetary Spectrum Generator configuration and raw I/F
