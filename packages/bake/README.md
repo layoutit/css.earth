@@ -13,7 +13,7 @@ renderer's scene and presentation compilers with `src/platform/projective-surfac
 density-volume, image-layer and environment bakes of `src/preparation/` with the renderer's remaining compilers. The shared
 object libraries of `tools/objects/` (colour transfers, shape geometry, cameras, the world frame and authored rotation, and the
 science and observation rasters) followed as `@cssearth/bake/objects/<topic>`, and then the galaxy and cluster catalogues and the
-world context, which emptied `src/preparation/`.
+world context, which emptied `src/preparation/`, and the nebula delivery bake of `tools/nebula/application/`.
 
 | entry | what it holds | host |
 |---|---|---|
@@ -38,6 +38,7 @@ world context, which emptied `src/preparation/`.
 | `@cssearth/bake/galaxy-catalog` | galaxy catalogue recipes, CSV and archive sources, bibliography, galaxy positions and memberships, the display sample | Node only (`node:*`, `yaml`) |
 | `@cssearth/bake/cluster-catalog` | the galaxy-cluster catalogue, placed with the galaxy positions | Node only |
 | `@cssearth/bake/world-context` | the spatial world context: sources, bodies, orbit banks, system and group views, hyperbolic paths | Node only |
+| `@cssearth/bake/nebula` | nebula delivery recipes and identities, compact density, finite-emission and compiler deliveries, catalogue fields and star sprites, sky frames, render-element budgets, replay references | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/environment` | the replay of an environment object's missing runtime images through the bakes above | Node only (`node:*`) |
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
 | `@cssearth/bake/objects/geometry` | shape models and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
@@ -58,7 +59,7 @@ packages/bake/
 ├── src/scene/     the geometry scene compilers: `@cssearth/bake/scene`
 ├── src/presentation/ the CSS presentation compilers: `@cssearth/bake/presentation`
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
-│   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/
+│   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
 ├── src/objects/   color/, geometry/, cameras/, scene/, raster/: the shared object libraries, one entry each (`objects/<topic>`)
 ├── AGENTS.md      Package rules
