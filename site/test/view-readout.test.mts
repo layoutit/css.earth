@@ -5,7 +5,7 @@ import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-m
 import { required } from './navigation-test-values.mts';
 import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../view-format.mts';
 import { measurePreparedFocusView } from '../view-readout.mts';
-import { measureView } from '../surface-minimap-rectangle.mts';
+import { measureView } from '../minimap/surface-minimap-rectangle.mts';
 const test = sourceTest();
 
 const identity: WorldRotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];

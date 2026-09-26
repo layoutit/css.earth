@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "@cssearth/renderer";
 import { isRecord } from "@cssearth/core";
-import { mapDirection } from "../../../site/surface-minimap-math.mts";
+import { mapDirection } from "../../../site/minimap/surface-minimap-math.mts";
 
 // Every body that declares a prepared feature catalogue must ship it pinned, anchored on its
 // mesh through its own map axes and edge, and validated by the runtime parser. Bodies without

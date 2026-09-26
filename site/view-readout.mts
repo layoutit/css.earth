@@ -4,12 +4,12 @@ import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
-import type { SurfaceMapReader } from './surface-map-context.mts';
-import { parseSurfaceMapConfig } from './surface-map-context.mts';
+import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
+import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';
 import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
-import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
-import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
+import { loadSurfaceGeometry, loadedSurfaceGeometry } from './minimap/surface-geometry.mts';
+import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
 import { dotN as dot } from '@cssearth/core';
 type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;

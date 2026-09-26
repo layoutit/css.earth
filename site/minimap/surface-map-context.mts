@@ -1,7 +1,7 @@
 import type { PositionM } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { BrowserWindow } from './browser-types.mts';
-import { requiredElement } from './browser-types.mts';
+import type { BrowserWindow } from '../browser-types.mts';
+import { requiredElement } from '../browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import type { SurfaceAxes } from './surface-minimap-math.mts';
 /** Axes and the map's left edge longitude: latitude and longitude sit where the prepared feature labels place them. */

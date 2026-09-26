@@ -65,7 +65,7 @@ These change paint every frame on purpose, and each has a budget:
 | Batched star points (`universe/batched-spatial-points.ts`) | `box-shadow` point lists | 8 nodes | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
-| Surface minimap viewport boxes (`site/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
+| Surface minimap viewport boxes (`site/minimap/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
 
 The footer readout (distance, coordinates, the scale ruler) holds its last reading while the camera moves, and reads
 once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to
