@@ -4,7 +4,7 @@ import {test} from 'vitest';
 import {requireVariants} from './presentation.js';
 import type {PreparedTree} from '../rendering/prepared-presentation.js';
 import type {ObjectControls} from '../runtime/object-contract.js';
-import {prepareScientificNavigation} from '../../../bake/src/objects/layers/terrestrial/scientific-focus.ts';
+import {prepareScientificNavigation} from '@cssearth/bake/objects/layers/terrestrial';
 import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import {preparedScenePitch} from '@cssearth/engine';
 import {requireCamera} from './camera-controls.js';
