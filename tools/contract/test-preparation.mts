@@ -68,4 +68,4 @@ const native = universeOnly ? [] : [...await discover('tools/objects', '.test.mj
 run(['--test', '--test-concurrency=1', ...compiled, ...native]);
 if (!universeOnly) run([resolve(dirname(engineRequire.resolve('vitest/package.json')), 'vitest.mjs'),
   'run', '--root', resolve(root, 'packages/bake/src/presentation'),
-  '--exclude', '**/.local/**', 'presentation.test.ts']);
+  '--exclude', '**/.local/**', 'presentation.test.ts', 'composite-settings.test.ts']);
