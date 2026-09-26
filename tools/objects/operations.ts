@@ -3,7 +3,7 @@ import { containedPath, parseSourceManifest, verifySources } from './source-file
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
-import { publishSourceBytes } from '../../src/platform/source-acquisition.mts';
+import { publishSourceBytes } from '../assets/source-acquisition.mts';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 

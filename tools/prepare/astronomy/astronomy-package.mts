@@ -14,7 +14,7 @@ export const ASTRONOMY_PACKAGE = "@cssearth/astronomy";
 export const ASTRONOMY_BUILD_COMMAND = "pnpm build:astronomy";
 export const ASTRONOMY_BUILD_ENTRY = resolve(
   import.meta.dirname,
-  "../../packages/astronomy/dist/index.js",
+  "../../../packages/astronomy/dist/index.js",
 );
 
 export async function loadAstronomyPackage(

@@ -19,7 +19,7 @@ import { preparePerspectiveCamera } from '../../../src/platform/prepare-perspect
 import { prepareAstrometricSkySceneRegistration } from '../../../src/platform/astrometric-sky-registration.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 import { photographDirections, prepareDefaultCameraAngles } from '../../../src/platform/default-camera.mts';
-import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
+import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';

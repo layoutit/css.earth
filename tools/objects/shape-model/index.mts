@@ -3,7 +3,7 @@ import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { parseShapeModelConfig, parseShapeContent } from './source.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 import { requireObjectRuntimeDefinition } from '../../contract/object-runtime-contract.mts';
-import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
+import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareRingLeaves, ringQuadStyle } from './rings.mts';
