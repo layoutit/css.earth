@@ -176,7 +176,6 @@ jobs:
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
           node --test "tools/ci/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
-            tools/prepare/library-entries.test.mts \
             "src/platform/runtime-asset-*.test.mts"
 
   typecheck:
@@ -241,6 +240,9 @@ jobs:
         run: node tools/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
+      - name: Test that tools/prepare libraries load silently and refuse to run by their old path
+        # Needs the full build above: two libraries import the generated world context.
+        run: node --test tools/prepare/library-entries.test.mts
       - name: Typecheck shared code and enforce TypeScript ownership
         # Application types here; the parallel test-file and nebula jobs own their compiler programs.
         env:
