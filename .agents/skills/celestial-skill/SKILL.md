@@ -200,7 +200,7 @@ Preserve each fact's evidence when editing content. A general page credit does
 not supply a citation for every number on that page.
 Write the card line, introduction and dataset text in the body's `text.json`,
 cite the source records a reviewer checks them against, and run
-`node tools/prepare/prepare-text.mts`; see [reader text](../../../docs/reader-text.md).
+`node tools/prepare/cli/prepare-text.mts`; see [reader text](../../../docs/reader-text.md).
 
 Record the following for selected inputs in the existing source record and
 manifest:

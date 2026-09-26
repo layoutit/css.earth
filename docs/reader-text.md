@@ -34,13 +34,13 @@ lists those.
 
 ## Publish and check
 
-`node tools/prepare/prepare-text.mts` checks every body, then writes `prepared/text.json` and the
+`node tools/prepare/cli/prepare-text.mts` checks every body, then writes `prepared/text.json` and the
 card into `object.json`. If any body fails validation, it writes nothing. Supply
 object IDs to limit publication after the shared validation. A changed card
 changes catalogue text; regenerate catalogue/provenance with
 `node tools/prepare/cli/prepare-provenance.mts`. Changed prepared text refreshes the
 body inventory and must be published through the usual asset workflow.
-`node tools/prepare/prepare-text.mts --check` verifies without writing.
+`node tools/prepare/cli/prepare-text.mts --check` verifies without writing.
 
 These errors block publication:
 

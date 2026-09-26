@@ -71,7 +71,7 @@ The facts-only preparer preserves the other content and scene data, checks the
 content's manifest declaration and validates its citations. It refreshes the
 inventory for changed prepared text; it does not compare source digest pins.
 Card lines, introductions and dataset text are not content:
-they live in the body's `text.json` and publish with `node tools/prepare/prepare-text.mts`; see
+they live in the body's `text.json` and publish with `node tools/prepare/cli/prepare-text.mts`; see
 [reader text](reader-text.md). After a lens label change, run the body's content
 preparation, then `node tools/prepare/cli/prepare-object-json.mts <object-id>` with the
 preparation tools built, and refresh provenance with `node tools/prepare/cli/prepare-provenance.mts <object-id>`.
