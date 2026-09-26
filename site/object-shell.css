@@ -1992,7 +1992,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
    (moons) close the sheet at full width, in as many columns as fit. */
 @media (orientation: portrait) and (min-width: 700px) {
   :is(.object-information-panel, .object-prepared-information-panel):not([hidden]) {
-    --tablet-left-column: 42%;
+    --tablet-left-column: 50%;
     display: flow-root;
     box-sizing: border-box;
     width: 100%;
