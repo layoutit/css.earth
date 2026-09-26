@@ -4,7 +4,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { Vector3 } from '../../../src/renderers/css/solar-system/types.ts';
+import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
 import { detectMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { isRecord } from '@cssearth/core';
 

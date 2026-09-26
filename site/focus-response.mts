@@ -1,9 +1,9 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedVolumeLenses, createPreparedVolumeLenses, imageFocusDatasets } from '../src/renderers/css/dist/universe.js';
-import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '../src/renderers/css/dist/navigation.js';
-import type { PreparedWorldCameraFrame, SharedView } from '../src/renderers/css/dist/navigation.js';
-import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/object-runtime-types.js';
+import { loadPreparedVolumeLenses, createPreparedVolumeLenses, imageFocusDatasets } from '@cssearth/renderer/universe';
+import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '@cssearth/renderer/navigation';
+import type { PreparedWorldCameraFrame, SharedView } from '@cssearth/renderer/navigation';
+import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
 import { requiredElement } from './browser-types.mts';
 import { isRecord } from '@cssearth/core';

@@ -1,8 +1,8 @@
 /** Restore accepted app textures from regenerated cloud slices; keep reference metadata immutable. */
 import assert from 'node:assert/strict';
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
-import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
-import { validatePreparedCssVolume } from '../../../src/renderers/css/volume/validation.js';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { hash, localPath, pinned, type Pin, writeAtomic } from '@cssearth/bake/volume/node';
 
 export interface BakeDelivery { directory: string; manifest: Pin; atlasInputs?: Pin; compactInputs?: Pin }

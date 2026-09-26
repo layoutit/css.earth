@@ -1,4 +1,4 @@
-import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../renderers/css/labels/label-presentation.ts';
+import { DEFAULT_CONTEXT_LABEL_OPACITY } from '@cssearth/renderer/labels/label-presentation.ts';
 
 export interface MarkerPresentation {
   size: number; ringAngle?: number; ringExtra?: number; ringHeight?: number; ringOpacity?: number;

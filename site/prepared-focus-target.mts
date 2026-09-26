@@ -1,5 +1,5 @@
 import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
-import type { PreparedFocusBank } from '../src/renderers/css/universe/prepared-focus-bank.js';
+import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import { preparedFocusObjectId, resolvePreparedFocus, preparedFocusCitations, resolvePreparedFocusLens } from './prepared-focus.mts';
 import type { PreparedFocusPolicy } from './prepared-focus.mts';
 

@@ -6,7 +6,7 @@ import type { ObjectShell } from '../object-shell-types.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { automaticPlaybackPolicy } from '../runtime-policy.mts';
-import { readObjectDiagnostics } from '../../src/renderers/css/dist/index.js';
+import { readObjectDiagnostics } from '@cssearth/renderer';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 
 interface ScenePublicationInput {

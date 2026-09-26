@@ -63,10 +63,10 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Generate the object registry
         # `tools/prepare/prepare-catalog.mts` reaches `tools/prepare/prepare-object-discovery.mts`, which imports the built
-        # `src/renderers/css/dist/navigation.js`; `build:astronomy` alone never produces it, so the catalog step
-        # died with ERR_MODULE_NOT_FOUND. `build:packages` + `build:renderer` are the two steps of `build:tools`
-        # that produce it, without the preparation bundles this job never reads.
-        run: pnpm build:packages && pnpm build:renderer && pnpm prepare:catalog
+        # `@cssearth/renderer/navigation`; `build:astronomy` alone never produces it, so the catalog step died with
+        # ERR_MODULE_NOT_FOUND. `build:packages` is the step of `build:tools` that produces it (the renderer is one of the
+        # packages), without the preparation bundles this job never reads.
+        run: pnpm build:packages && pnpm prepare:catalog
       - name: Check every inventoried key is published
         # PRs and main pushes check only the keys they add. Only this full sweep notices R2 losing an object whose
         # inventory line did not change; concurrency 8 matches the shared agent's connection cap. A real 404 fails

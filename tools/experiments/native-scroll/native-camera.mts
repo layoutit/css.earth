@@ -1,11 +1,11 @@
-import type { ObjectRuntimeDefinition } from '../../../src/renderers/css/runtime/object-runtime-types.js';
-import type { ObjectSelection } from '../../../src/renderers/css/runtime/object-contract.js';
-import type { PreparedWorldCameraFrame } from '../../../src/renderers/css/navigation/world-camera.js';
-import type { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.js';
-import { selectedPreparedVariant } from '../../../src/renderers/css/rendering/prepared-presentation.js';
-import { readPreparedTransform } from '../../../src/renderers/css/navigation/prepared-camera-basis.js';
+import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
+import { selectedPreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import { readPreparedTransform } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { readPreparedMatrix4 } from '@cssearth/core';
-import type { PreparedMaterialRotation } from '../../../src/renderers/css/rendering/prepared-material.js';
+import type { PreparedMaterialRotation } from '@cssearth/renderer/rendering/prepared-material.ts';
 import { CssValues } from './css-values.mts';
 import type { Matrix, Value } from './css-values.mts';
 

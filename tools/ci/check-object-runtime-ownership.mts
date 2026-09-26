@@ -114,7 +114,7 @@ function staticShellNavigationContent(ast: Program | null, objectIds: readonly s
 function preparedLightingProjectionRecord(node: Node, file: string) {
   // The physical camera publishes this existing typed lighting field. It is
   // a forwarded projection value, not an object-id keyed execution table.
-  if (file !== 'src/renderers/css/navigation/perspective-dolly.ts' || node.type !== 'ObjectExpression' || node.properties.length !== 1) return false;
+  if (file !== 'packages/renderer/src/navigation/perspective-dolly.ts' || node.type !== 'ObjectExpression' || node.properties.length !== 1) return false;
   const field = node.properties[0];
   return field.type === 'Property' && !field.computed && !field.method && field.kind === 'init' &&
     propertyKey(field.key) === 'sun' && field.value?.type === 'MemberExpression' && !field.value.computed &&
@@ -137,7 +137,7 @@ function worldContextPlanImport(ast: Program | null, file: string): {data: numbe
   const source = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && nameOf(node.id) === 'source');
   const url = astKind(source?.init, 'NewExpression');
   const base = astKind(url?.arguments[1], 'MemberExpression');
-  const parser = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === '../src/renderers/css/dist/index.js');
+  const parser = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === '@cssearth/renderer');
   const imports = nodes.filter((node): node is Extract<Node, {type: 'ImportExpression'}> => node.type === 'ImportExpression');
   const helper = imports.find(node => node.source.type === 'Literal' && node.source.value === worldContextNodeHelper);
   const data = imports.find(node => node !== helper);
@@ -469,7 +469,7 @@ function requireApplicationWorldContextSource(mountSource: string, resourceSourc
   const { imports, nodes, calls, importsFactory } = runtimeFactorySource(resourceSource);
   function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
   const context = [...imports].find(([, binding]) => binding.name === 'APPLICATION_WORLD_CONTEXT' && binding.source === './world-context-plan.mts')?.[0];
-  const renderer = '../src/renderers/css/dist/universe.js';
+  const renderer = '@cssearth/renderer/universe';
   // The mount leases resources; its imported loader owns the pinned prepared inventory.
   if (!mount.importsFactory('loadApplicationUniverse', './application-world-resources.mts') ||
     !mount.importsFactory('prepareObjectResources', renderer) || mount.calls('loadApplicationUniverse').length !== 1 ||

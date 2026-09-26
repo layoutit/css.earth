@@ -6,7 +6,7 @@ import type { PreparedDirectionalSunPlan } from '../../../src/platform/direction
 import type { ShellObjectControls } from '../../../site/shell-contract-types.mts';
 import type { preparePagedEllipsoidScene } from './scene.mts';
 import type { preparePlaces } from './geographic/places.mts';
-import type { CameraPlan } from '../../../src/renderers/css/navigation/types.ts';
+import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 import type { SurfaceBankLenses } from './contracts.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 type PagedPlan = ReturnType<typeof preparePagedEllipsoidScene>['scene'];

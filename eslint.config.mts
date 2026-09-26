@@ -90,6 +90,26 @@ export default [
     },
   },
   {
+    // `@cssearth/renderer` is the browser runtime. It reads prepared data through its own validators and never imports the
+    // application, preparation code (`@cssearth/bake`, `src/renderers/css/preparation`) or Node built-ins; tests may.
+    files: ['packages/renderer/src/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/src/preparation/**', '**/site/**', '**/tools/**', '**/labs/**', '**/renderers/**',
+          'node:*', '@cssearth/bake', '@cssearth/bake/*', '@cssearth/renderer', '@cssearth/renderer/*'],
+          message: 'The renderer runtime imports packages and its own modules only, never the application, preparation code or Node built-ins.' }],
+      }],
+    },
+  },
+  {
+    // Moved unchanged from src/renderers/css, which had no line limit; splitting them is separate work. The site bundle's
+    // bytes were held identical across the move, so the runtime module is not split here.
+    files: ['packages/renderer/src/universe/prepared-world-context.ts', 'packages/renderer/src/universe/prepared-world-context.test.ts',
+      'packages/renderer/src/universe/world-context/world-context-planner.test.ts', 'packages/renderer/src/sky/prepared-sky-runtime.test.ts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
     files: ['packages/engine/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

@@ -1,7 +1,7 @@
 /// <reference path="./cesium-module-types.d.ts" />
 import 'vite/client';
 
-import type { publishObjectDiagnostics } from '../src/renderers/css/runtime/object-diagnostics.ts';
+import type { publishObjectDiagnostics } from '@cssearth/renderer/runtime/object-diagnostics.ts';
 export type ObjectRuntimeDiagnostics = ReturnType<typeof publishObjectDiagnostics>;
 import type { SceneDiagnostics } from './scene/scene-router.mts';
 import type { WorldContextDiagnostics } from './application-world-context.mts';

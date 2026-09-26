@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createPreparedImageStore, decodePreparedImage, releasePreparedImage } from '../renderers/css/dist/testing.js';
+import { createPreparedImageStore, decodePreparedImage, releasePreparedImage } from '@cssearth/renderer/testing';
 
 type PreparedImage = Parameters<typeof decodePreparedImage>[0];
 interface ControlledImage extends PreparedImage { calls: number; resolve(): void; reject(reason: unknown): void; }

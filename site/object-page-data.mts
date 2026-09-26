@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { requireAssets, requireControls } from '../src/renderers/css/dist/index.js';
+import { requireAssets, requireControls } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from './asset-origin.mts';
 

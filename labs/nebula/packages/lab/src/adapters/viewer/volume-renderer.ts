@@ -1,8 +1,8 @@
 /** Canonical cssEarth retained-volume binding shared by the lab's prepared viewers. */
 import type { VolumeViewerBackend } from '@cssearth/volume-viewer/scene/backend';
-import { mountPreparedCssVolume } from '../../../../../../../src/renderers/css/volume/prepared-volume-runtime';
-import { validatePreparedCssVolume } from '../../../../../../../src/renderers/css/volume/validation';
-import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import { shapeCloudOrthographicCamera } from './shape-cloud-camera';
 const legacyAngularFrame = (frame: PreparedCssVolume['frame']) => ['lab-sky-angular', 'lab-image-relative-unscaled'].includes(frame.referenceFrame);
 /** Rename the runtime-only transported frame; source receipts retain their original frame and pins. */

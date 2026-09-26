@@ -1,16 +1,16 @@
-import { requireTextureLevels, requireTexturePlacements } from './prepared-texture-levels.mts';
+import { requireTextureLevels, requireTexturePlacements } from '@cssearth/renderer/validation/prepared-texture-levels.ts';
 import { isArray } from '@cssearth/core';
-import type { ObjectControls } from "../renderers/css/runtime/object-contract.ts";
-import type { ObjectRuntimeDefinition } from "../renderers/css/runtime/object-runtime-types.ts";
-import type { PreparedWrite } from "../renderers/css/rendering/prepared-presentation.ts";
-import type { PreparedAssets } from "../renderers/css/rendering/prepared-residency.ts";
+import type { ObjectControls } from "@cssearth/renderer/runtime/object-contract.ts";
+import type { ObjectRuntimeDefinition } from "@cssearth/renderer/runtime/object-runtime-types.ts";
+import type { PreparedWrite } from "@cssearth/renderer/rendering/prepared-presentation.ts";
+import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.mts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.mts";
-import type { EllipsoidProjectionPlan } from '../renderers/css/prepared-data/prepared-ellipsoid-projection.js';
-import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "../renderers/css/dist/testing.js";
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "../renderers/css/dist/testing.js";
+import type { EllipsoidProjectionPlan } from '@cssearth/renderer/prepared-data/prepared-ellipsoid-projection.ts';
+import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "@cssearth/renderer/testing";
+import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "@cssearth/renderer/testing";
 import type { PreparedVariant, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";
-import type { PreparedDepthOrder } from "../renderers/css/rendering/prepared-depth-partitions.ts";
+import type { PreparedDepthOrder } from "@cssearth/renderer/rendering/prepared-depth-partitions.ts";
 type PreparedContractRotation = {
   reference: "prepared" | "initial"; baseDegrees: number; zeroAtPole: boolean;
   onlyWhenEnabled?: boolean; publishWithAddress?: boolean; systemTransform?: string; polePolicy?: "azimuth";

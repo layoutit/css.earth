@@ -26,7 +26,7 @@ import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { authoredObject } from '../sources/authored-object.mts';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
-import { PREPARED_CSS_OBJECT_FORMAT } from '../../src/renderers/css/dist/index.js';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { inventoryPreparedAssets, readInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));

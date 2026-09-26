@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import type { PreparedCssVolume, VolumeAxis } from '../../../../../../../../src/renderers/css/volume/types.ts';
-import { validatePreparedVolumeLenses } from '../../../../../../../../src/renderers/css/volume/prepared-volume-lenses.ts';
+import type { PreparedCssVolume, VolumeAxis } from '@cssearth/renderer/volume/types.ts';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
 
 const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
@@ -27,7 +27,7 @@ async function put(root: string, path: string, bytes: Uint8Array | string) {
 }
 async function fixture(root: string) {
   // The delivery identity reads these source files from its checkout; keep the fixture isolated.
-  for (const directory of ['tools/nebula/application','packages/bake/src/volume','src/renderers/css/preparation','src/renderers/css/volume','src/preparation/volume']) {
+  for (const directory of ['tools/nebula/application','packages/bake/src/volume','src/renderers/css/preparation','packages/renderer/src/volume','src/preparation/volume']) {
     for (const name of await readdir(directory,{recursive:true})) {
       if (!name.endsWith('.ts')) continue;
       const path = `${directory}/${name}`;
@@ -36,8 +36,8 @@ async function fixture(root: string) {
   }
   const request = '{}', directory = join(root,'object');
   const recipe = JSON.parse(await readFile('src/objects/m2-9/source/delivery.json','utf8'));
-  for (const path of [recipe.fieldStars.path, 'src/renderers/css/navigation/world-camera-math.ts',
-    'src/renderers/css/stars/prepared-catalogue-points.ts']) {
+  for (const path of [recipe.fieldStars.path, 'packages/renderer/src/navigation/world-camera-math.ts',
+    'packages/renderer/src/stars/prepared-catalogue-points.ts']) {
     await put(root,path,await readFile(path));
   }
   await put(root,'input/request.json',request);

@@ -1,7 +1,7 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection } from '../src/renderers/css/dist/index.js';
-import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '../src/renderers/css/dist/navigation.js';
+import { createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection } from '@cssearth/renderer';
+import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
 import { requiredElement } from './browser-types.mts';

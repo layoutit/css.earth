@@ -3,8 +3,8 @@ import { compileVolumeLeaf } from './volume.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { BakedSky } from '../../../preparation/sky/bake.js';
-import type { PreparedCssSky } from '../sky/types.js';
-import { validatePreparedCssSky } from '../sky/validation.js';
+import type { PreparedCssSky } from '@cssearth/renderer/sky/types.ts';
+import { validatePreparedCssSky } from '@cssearth/renderer/sky/validation.ts';
 const RADIUS_UNITS = 1, CSS_PIXELS_PER_UNIT = 50;
 function compileFaces(faces: BakedSky['faces']): PreparedCssSky['faces'] {
   return faces.map((face, index) => {

@@ -1,13 +1,13 @@
 import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './view-format.mts';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
-import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
 import type { SurfaceMapReader } from './surface-map-context.mts';
 import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';
-import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';

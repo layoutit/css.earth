@@ -2,9 +2,9 @@
 import { createJointFitViewer as createScene, type JointFitViewerOptions as SceneOptions,
   type JointFitViewer } from '@cssearth/volume-viewer/scene/joint-fit-viewer';
 import type { JointVolumeResult } from '@cssearth/bake/volume';
-import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import { volumeRenderer } from './volume-renderer';
-import '../../../../../../../src/renderers/css/styles/volume.css';
+import '@cssearth/renderer/styles/volume.css';
 export { readJointVolumeResult } from '@cssearth/bake/volume';
 export type { JointFitViewer } from '@cssearth/volume-viewer/scene/joint-fit-viewer';
 export interface JointFitViewerOptions extends Omit<SceneOptions<PreparedCssVolume, VolumeCameraPublication>, 'backend' | 'resolvePath'> { resolvePath?: (path: string) => string }

@@ -6,9 +6,9 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Axis, Vector3, VolumeRecipe } from '@cssearth/bake/volume';
 import type { VolumeSlices } from '@cssearth/bake/volume/node';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';
-import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
-import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '../volume/types.js';
-export type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
+import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
+export type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 /** A PolyCSS image leaf drawn at TEXELS_PER_CSS_PIXEL. PolyCSS gives the leaf one CSS pixel per texel of the image its
  * background spans, `imagePixels` wide, and WebKit backs every composited leaf at that box times the device pixel ratio,

@@ -41,6 +41,8 @@ export async function buildLabModule(options: BuildOptions) {
         // `@cssearth/bake`, `@cssearth/core`, `@cssearth/fits`, `@cssearth/spice` and `@cssearth/telescope` ship built JavaScript, not TypeScript owners. Node loads their ESM builds at
         // run time: inlining the CommonJS build `require.resolve` finds would leave `require('node:crypto')` in an ESM
         // bundle, which fails.
+        // `@cssearth/renderer` stays bundled, as it was when it was relative modules: its source subpaths are TypeScript whose
+        // sibling imports name `.js`, which Node cannot load unbundled.
         if (/^@cssearth\/(?:bake|core|fits|spice|telescope)(?:\/|$)/.test(args.path)) return { path: args.path, external: true };
         const directory = args.resolveDir || options.absWorkingDir || process.cwd();
         const require = createRequire(resolve(directory, '__nebula_bundle__.cjs'));

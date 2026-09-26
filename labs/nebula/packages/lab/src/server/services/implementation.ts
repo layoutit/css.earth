@@ -35,6 +35,18 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/bake/src/volume/node/index.ts' : 'packages/bake/src/volume/index.ts') };
       });
+      // The CSS renderer runtime was relative modules under src/renderers/css/ before it became @cssearth/renderer; the lab
+      // imports its TypeScript source subpaths (`@cssearth/renderer/volume/types.ts`), which stay owners the same way.
+      builder.onResolve({ filter: /^@cssearth\/renderer\// }, async args => {
+        const value: unknown = JSON.parse(await readFile(resolve(root, 'packages/renderer/package.json'), 'utf8'));
+        const subpath = args.path.slice('@cssearth/renderer/'.length), [directory = ''] = subpath.split('/');
+        const owner = value && typeof value === 'object' && 'exports' in value && value.exports && typeof value.exports === 'object'
+          ? Reflect.get(value.exports, `./${directory}/*`) : undefined;
+        if (typeof owner !== 'string' || owner !== `./src/${directory}/*` || subpath.split('/').includes('..') || !/\.ts$/.test(subpath))
+          throw new Error(`Missing public implementation owner: ${args.path}`);
+        manifests.add('packages/renderer/package.json');
+        return { path: resolve(root, 'packages/renderer/src', subpath) };
+      });
       builder.onResolve({ filter: /^@cssearth\/(?:nebula-reconstruction|nebula-lab)(?:\/|$)/ }, async args => {
         const [scope, name, ...tail] = args.path.split('/');
         const directory = name === 'nebula-reconstruction' ? 'reconstruction' : name === 'nebula-lab' ? 'lab' : name;

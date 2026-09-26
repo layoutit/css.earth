@@ -1,3 +1,3 @@
 /** cssEarth projection reference used to verify the lab photo/volume registration. */
-export { preparedVolumeCameraTransform } from '../../../../../../../src/renderers/css/volume/prepared-volume-runtime.js';
-export type { PreparedCssVolume } from '../../../../../../../src/renderers/css/volume/types.js';
+export { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
+export type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';

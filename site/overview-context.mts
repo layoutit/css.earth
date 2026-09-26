@@ -1,6 +1,6 @@
 import type { PreparedCatalogObject } from '@cssearth/catalog';
-import type { WorldCameraPose, PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
-import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
+import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 /** `system` is the planetary system of the mounted star; the larger scopes are measured from the Sun. */
 export type OverviewScope = 'system' | 'milky-way' | 'local-group' | 'nearby-universe';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';

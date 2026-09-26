@@ -6,9 +6,9 @@ import { requireSceneObject } from "../objects.mts";
 import { objectSeo } from "../seo.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "../../src/platform/cubic-sky.css";
-import "../../src/renderers/css/styles/volume.css";
-import "../../src/renderers/css/styles/world-context.css";
-import "../../src/renderers/css/styles/triangle-faces.css";
+import "@cssearth/renderer/styles/volume.css";
+import "@cssearth/renderer/styles/world-context.css";
+import "@cssearth/renderer/styles/triangle-faces.css";
 import "../site.css";
 import "../maps-shell.css";
 import "../settings-panel.css";
@@ -19,7 +19,7 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
-import { worldCameraOf } from '../../src/renderers/css/dist/index.js';
+import { worldCameraOf } from '@cssearth/renderer';
 const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {

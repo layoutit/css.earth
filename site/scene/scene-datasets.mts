@@ -1,6 +1,6 @@
-import type { LensVolume } from '../../src/renderers/css/runtime/object-contract.js';
-import type { ObjectMountOptions } from '../../src/renderers/css/runtime/object-runtime-types.js';
-import type { PreparedFocusBank } from '../../src/renderers/css/universe/prepared-focus-bank.js';
+import type { LensVolume } from '@cssearth/renderer/runtime/object-contract.ts';
+import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import type { SceneSession } from './scene-session.mts';
 import { errorMessage } from '../browser-types.mts';
 import { readDatasetUrl } from '../dataset-url.mts';

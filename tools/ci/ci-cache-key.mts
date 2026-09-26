@@ -225,7 +225,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
     }
     return digest.digest('hex');
   };
-  const packageOptions: string[] = [], rendererOptions: string[] = [];
+  const packageOptions: string[] = [];
   let packageDigest = full.buildDigest;
   try {
     for (const pkg of packages) {
@@ -236,18 +236,12 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
     }
     packageDigest = narrowHash(packageInputs, packageOptions);
   } catch (error) { fallbackReasons.push(`packages: ${error instanceof Error ? error.message : String(error)}`); }
-  const rendererInputs = new Set(shared);
-  let rendererDigest = full.buildDigest;
-  try {
-    await closure('src/renderers/css', resolve(root, 'src/renderers/css/tsup.config.ts'), rendererInputs, rendererOptions);
-    rendererDigest = narrowHash(rendererInputs, rendererOptions, packageDigest);
-  } catch (error) { fallbackReasons.push(`renderer: ${error instanceof Error ? error.message : String(error)}`); }
-  return { ...full, packageDigest, rendererDigest, packageInputFiles: packageInputs.size, rendererInputFiles: rendererInputs.size, fallbackReasons };
+  return { ...full, packageDigest, packageInputFiles: packageInputs.size, fallbackReasons };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   if (process.argv.length !== 2) throw new TypeError('Usage: node tools/ci/ci-cache-key.mts');
   const started = performance.now(), result = await compiledCiCacheKeys();
-  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `build_digest=${result.buildDigest}\ntsconfig_digest=${result.tsconfigDigest}\npackage_digest=${result.packageDigest}\nrenderer_digest=${result.rendererDigest}\n`);
+  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `build_digest=${result.buildDigest}\ntsconfig_digest=${result.tsconfigDigest}\npackage_digest=${result.packageDigest}\n`);
   console.log(JSON.stringify({ ...result, elapsedSeconds: Number(((performance.now() - started) / 1000).toFixed(3)) }));
 }

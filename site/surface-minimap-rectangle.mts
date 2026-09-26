@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
+import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { SurfaceAxes } from './surface-minimap-math.mts';
 import type { MapViewport } from './surface-map-context.mts';
 import type { Rectangle } from '@cesium/engine';
@@ -9,7 +9,7 @@ import CullingVolume from '@cesium/engine/Source/Core/CullingVolume.js';
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import IntersectionTests from '@cesium/engine/Source/Core/IntersectionTests.js';
 import Ray from '@cesium/engine/Source/Core/Ray.js';
-import { rotateWorldPosition } from '../src/renderers/css/dist/navigation.js';
+import { rotateWorldPosition } from '@cssearth/renderer/navigation';
 import { wrapMapU } from './surface-minimap-math.mts';
 import { viewScale } from './view-format.mts';
 import { computeViewRectangle } from './vendor/cesium-view-rectangle.mjs';

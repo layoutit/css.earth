@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { preparedObjectCapabilities } from '../renderers/css/dist/index.js';
+import { preparedObjectCapabilities } from '@cssearth/renderer';
 const createPreparedDestinations = preparedObjectCapabilities.createDestinations!;
 type PreparedDestinationOptions = Parameters<typeof createPreparedDestinations>[0];
 type DestinationCamera = Parameters<PreparedDestinationOptions['navigate']>[0];

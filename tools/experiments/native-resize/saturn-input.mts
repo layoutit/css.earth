@@ -1,4 +1,4 @@
-import type { bindCameraInputListeners } from '../../../src/renderers/css/navigation/camera-input-listeners.js';
+import type { bindCameraInputListeners } from '@cssearth/renderer/navigation/camera-input-listeners.ts';
 
 type Bindings = Parameters<typeof bindCameraInputListeners>[0];
 

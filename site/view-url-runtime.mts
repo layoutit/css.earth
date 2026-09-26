@@ -1,5 +1,5 @@
-import type { ObjectSharedView } from '../src/renderers/css/runtime/object-scene.js';
-import { formatSharedView } from "../src/renderers/css/dist/navigation.js";
+import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
+import { formatSharedView } from "@cssearth/renderer/navigation";
 
 // One URL owner in the shared shell. Camera publication only schedules a
 // bounded history write; native motion is sampled once per second while on.

@@ -1,18 +1,18 @@
 import { createServer } from 'node:http';
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedCssObject, initialObjectSelection } from '../../../src/renderers/css/dist/index.js';
-import { parsePreparedWorldCameraFrame, parseSharedView, formatSharedView } from '../../../src/renderers/css/dist/navigation.js';
-import { preparedSceneMatrix } from '../../../src/renderers/css/navigation/prepared-camera-basis.js';
+import { loadPreparedCssObject, initialObjectSelection } from '@cssearth/renderer';
+import { parsePreparedWorldCameraFrame, parseSharedView, formatSharedView } from '@cssearth/renderer/navigation';
+import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { serializePreparedMatrix4 } from '@cssearth/core';
-import { distanceForSilhouetteRadius } from '../../../src/renderers/css/solar-system/heliocentric-geometry.js';
+import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
 import { serializePreparedScene } from '../../prepared/serialize-prepared-scene.mts';
-import { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.js';
+import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { addNativeResizeInput } from './resize-input.mts';
 import { addNativeCamera } from './native-camera.mts';
 import { carryViewportValues } from './carry-values.mts';
-import type { SharedView } from '../../../src/renderers/css/navigation/view-url.js';
+import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4349';
 const port = Number(process.argv[3] ?? 4350);

@@ -5,7 +5,7 @@ const test = sourceTest();
 import { leafBoxBlocks, leafBoxDensity, leafBoxLengths, leafBoxPlacements, prepareLeafBoxBindings, prepareLeafBoxSteps, withLeafBoxes,
   LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, LEAF_BOX_SCREEN_PIXELS, LEAF_BOX_UNSCALE, type MeasuredLeafBox } from './leaf-box.mts';
 import { createPreparedNodeTree } from './prepared-node-tree.mts';
-import { unseenTextureWrites } from '../../src/renderers/css/rendering/prepared-texture-levels.ts';
+import { unseenTextureWrites } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 
 const identity = (scale: number, x = 0, y = 0, z = 0) => [scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, x, y, z, 1];
 const layer = (frame: number[], extra: Record<string, unknown> = {}) => ({ schema: 'polycss-prepared-projective-texture-layer@1', rasterScale: 1,

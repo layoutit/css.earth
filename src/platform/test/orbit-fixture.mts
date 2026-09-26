@@ -1,7 +1,7 @@
-import { createCameraMotion } from '../../renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 import * as runtimePolicy from "../../../site/runtime-policy.mts";
-import { createRetainedCubicSkyOrbit, type OrbitServices, type RetainedCubicSkyOrbit, type RetainedOrbitOptions } from "../../renderers/css/dist/platform/object-orbit.js";
-import type { CameraPlan } from '../../renderers/css/navigation/types.ts';
+import { createRetainedCubicSkyOrbit, type OrbitServices, type RetainedCubicSkyOrbit, type RetainedOrbitOptions } from "@cssearth/renderer/platform/object-orbit";
+import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 
 type Listener = (event: PointerEvent) => void;
 type DragOptions = Parameters<NonNullable<OrbitServices["createUnboundedMatrixDragControls"]>>[0];

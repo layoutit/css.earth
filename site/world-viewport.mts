@@ -1,4 +1,4 @@
-import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
+import { createCameraViewport } from '@cssearth/renderer/navigation';
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 
 /** The shell's camera viewport, shared by the body and the world. It is pure layout, so it exists before the

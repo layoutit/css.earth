@@ -9,7 +9,7 @@ import { requirePreparedControlSource, requirePreparedDefinitionSource, readPrep
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../../src/platform/prepared-schema.mts';
 import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
 import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
-import { PREPARED_CSS_OBJECT_FORMAT } from '../../src/renderers/css/dist/index.js';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 
 export function requireDescriptorAdapterSource(text: string, exported: string): string {
   const ast = parseRuntimeSource(text, 'site/packaged-object-runtime.mts');

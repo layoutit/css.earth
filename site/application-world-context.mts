@@ -1,8 +1,8 @@
 import { createSceneLifetime } from '@cssearth/engine';
-import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
-import { prepareObjectResources, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
-import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
-import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
+import { labelOcclusionFor } from '@cssearth/renderer';
+import { prepareObjectResources, createRetainedGeometrySnapshot } from '@cssearth/renderer/universe';
+import { createCameraViewport } from '@cssearth/renderer/navigation';
+import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';

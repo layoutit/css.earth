@@ -1,4 +1,4 @@
-import type { RuntimePolicy } from "../src/renderers/css/navigation/runtime-policy.js";
+import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./shell-contract-types.mts";
 
 export const MOBILE_VIEWPORT_MAX = 820;
@@ -7,7 +7,7 @@ export const MOBILE_VIEWPORT_QUERY =
   `(max-width: ${MOBILE_VIEWPORT_MAX}px), (orientation: portrait)`;
 // Phones show the scene full screen, so one finger orbits and two fingers pinch.
 export const MOBILE_TOUCH_ACTION = "none";
-export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/renderers/css/rendering/prepared-object-assets.ts";
+export { CANONICAL_PREPARED_IMAGE_DENSITY } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
 export const SKYBOX_DRAG_ENABLED = true;
 export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
 // A wheel during a fly-to, or a click, drag or key before the destination approach is drawn,

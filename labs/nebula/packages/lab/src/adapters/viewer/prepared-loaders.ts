@@ -1,5 +1,5 @@
 /** Canonical renderer loading and CSS enter the lab through this host boundary. */
-export { loadPreparedCssImageLayers, type PreparedCssImageLayers } from '../../../../../../../src/renderers/css/image-layers/loader';
-export { loadPreparedCssVolume } from '../../../../../../../src/renderers/css/volume/loader';
-export type { PreparedCssVolume, VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
-import '../../../../../../../src/renderers/css/styles/volume.css';
+export { loadPreparedCssImageLayers, type PreparedCssImageLayers } from '@cssearth/renderer/image-layers/loader.ts';
+export { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
+export type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import '@cssearth/renderer/styles/volume.css';

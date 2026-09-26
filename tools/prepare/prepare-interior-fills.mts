@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
+import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
 import { repinObjectJson } from './prepare-object-json.mts';
 
