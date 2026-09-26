@@ -30,8 +30,6 @@ export interface ObjectSceneLifecycle {
   readonly navigation?: ObjectWorldNavigation;
   readonly datasets?: ObjectDatasets;
   refineTextures?(): void;
-  /** A body with one fixed texture level refines to it once the application is ready, not on the first input. */
-  readonly refinesWithoutInput?: boolean;
   pause(): void;
   resume(): void;
   destroy(): void;
