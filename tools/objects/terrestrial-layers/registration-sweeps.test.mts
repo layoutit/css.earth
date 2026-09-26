@@ -3,7 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { rotate } from '@cssearth/spice';
 import { controlledShapeCamera, type CameraImage } from './shape-camera-mosaic.mts';
-import { observerCamera, type BodyOrientation, type ObserverSighting } from './observer-camera.mts';
+import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
 import { framesReference, limbCentre, observationCaster, observerCaster, prepareFrame, radiusFieldMesh, registrationSweep, turnedOrientation, type SurfaceReference } from './registration-sweeps.mts';
 
 const DEGREE = Math.PI / 180, J2000 = 2451545;

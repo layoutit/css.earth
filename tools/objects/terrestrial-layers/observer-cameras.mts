@@ -13,7 +13,7 @@ import { readFitsHdu } from '@cssearth/fits';
 import { parseTextKernel, parseLeapSeconds } from '@cssearth/spice';
 import { restoredBankFile } from '../../kernel-banks/kernel-bank.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
-import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from './observer-camera.mts';
+import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from '@cssearth/bake/objects/cameras';
 import { limbCentre } from './registration-sweeps.mts';
 import { readingPole, spinRecordReading } from './spin-record-reading.mts';
 

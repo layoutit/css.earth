@@ -28,7 +28,7 @@ import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@csseart
 import { requireFiniteNumber } from '@cssearth/core';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses, type HorizonsResponses } from './line-stack-ephemeris.mts';
-import { observerCamera, type BodyOrientation } from '../terrestrial-layers/observer-camera.mts';
+import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '../terrestrial-layers/observer-cameras.mts';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '../jwst/cubes/body-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';

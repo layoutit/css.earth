@@ -6,7 +6,7 @@
  * resolved limb, computing the body camera from the pinned geometry and rotation model, projecting onto the common body
  * grid, and writing the complete observation geometry used by the body-map contract.
  */
-import { observerCamera, type BodyOrientation, type ObserverSighting } from './terrestrial-layers/observer-camera.mts';
+import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
 import { fitDiscCentre, projectBandMap, topRowFirst, type BodyMap, type DiscCentre } from './jwst/cubes/body-map.mts';
 import type { AngularResolution, BodyMapObservation } from './body-map-product.mts';
 

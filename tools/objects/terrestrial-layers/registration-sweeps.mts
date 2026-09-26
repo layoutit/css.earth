@@ -19,7 +19,7 @@ import { createIndexedShape } from './obj-shape.mts';
 import type { SourceMesh } from './contracts.mts';
 import type { CameraImage } from './shape-camera-mosaic.mts';
 import { controlledShapeCamera } from './shape-camera-mosaic.mts';
-import { observerCamera, type BodyOrientation, type ObserverSighting } from './observer-camera.mts';
+import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
 
 const DEGREE = Math.PI / 180;
 

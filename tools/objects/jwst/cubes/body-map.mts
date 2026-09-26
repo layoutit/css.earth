@@ -2,7 +2,7 @@
  *
  * A cube of a resolved Solar System body is a small picture of its disc, north up, a few pixels across. Where each pixel lies
  * on the body follows from three things: when the cube was exposed (its own header), where JWST and the Sun were (JPL Horizons,
- * observer 500@-170), and how the body was turned (the IAU rotation model in a text PCK). observer-camera.mts turns those into
+ * observer 500@-170), and how the body was turned (the IAU rotation model in a text PCK). `@cssearth/bake/objects/cameras` turns those into
  * the controlled camera every photograph lens uses, and controlledShapeCamera projects the body's surface into it. The one thing
  * the header cannot give is the disc's centre to a fraction of a pixel (JWST points to about 0.1″, one pixel), so it is fitted:
  * a disc of the body's known angular radius, blurred by a Gaussian, against the continuum image.
@@ -10,7 +10,7 @@
  * The result is a full-world longitude-latitude grid, NaN where the body was not seen or was seen too obliquely, in the FITS
  * layout the scalar-map reader (terrestrial-layers/fits-image-map.mts) reads. */
 import { controlledShapeCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
-import type { ObserverCamera } from '../../terrestrial-layers/observer-camera.mts';
+import type { ObserverCamera } from '@cssearth/bake/objects/cameras';
 import type { BandDepthMap } from './spectral-cube.mts';
 
 const DEGREE = Math.PI / 180;

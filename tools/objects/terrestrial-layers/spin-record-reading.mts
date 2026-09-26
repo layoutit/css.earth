@@ -11,7 +11,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { parseSpinState, type SpinState } from './observer-camera.mts';
+import { parseSpinState, type SpinState } from '@cssearth/bake/objects/cameras';
 
 export const READING = {
   /** The largest separation from the published pole a reading may have: the survey's Table A.1 states whole degrees with uncertainties up to five. */

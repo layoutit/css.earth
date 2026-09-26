@@ -28,7 +28,7 @@ import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
 import type { RadialSimplification } from '../terrestrial-layers/radial-mesh.mts';
 import { requireTerrainMesh, simplifyRadialShape } from '../terrestrial-layers/radial-mesh.mts';
-import { parseSpinState, spinOrientation } from '../terrestrial-layers/observer-camera.mts';
+import { parseSpinState, spinOrientation } from '@cssearth/bake/objects/cameras';
 import { spinRecordReading } from '../terrestrial-layers/spin-record-reading.mts';
 import { glyphTemplates, readLabel } from './figure-labels.mts';
 import { apparitionLinks, listedViews, meshFaces, releasedFrames } from './apparitions.mts';

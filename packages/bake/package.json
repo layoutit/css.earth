@@ -79,6 +79,11 @@
       "import": "./dist/objects/color.js",
       "default": "./dist/objects/color.js"
     },
+    "./objects/cameras": {
+      "types": "./dist/objects/cameras.d.ts",
+      "import": "./dist/objects/cameras.js",
+      "default": "./dist/objects/cameras.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -93,6 +98,7 @@
     "@cssearth/engine": "workspace:*",
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
+    "@cssearth/spice": "workspace:*",
     "@layoutit/polycss": "0.2.11",
     "playwright": "1.60.0",
     "sharp": "0.35.3"

@@ -22,7 +22,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { horizonsCommand, horizonsTables } from '../sphere-horizons.mts';
 import { qualifiedFace, shadingNormal } from '../surface-observations/geometry.mts';
 import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
-import { observerCamera, type BodyOrientation } from '../terrestrial-layers/observer-camera.mts';
+import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { horizonsRows, loadOrientation, observerRowValues, parseObserverCameras } from '../terrestrial-layers/observer-cameras.mts';
 import { radialTerrainForLens } from '../terrestrial-layers/alternative-lenses.mts';
 import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
