@@ -63,14 +63,24 @@ export function prepareHyperbolicPath({
   // 600 au is a drawing choice. It does not bound the body's motion over time.
   const displayExtentAu = Math.max(600, 1.25 * heliocentricDistanceAu, 1.25 * -a * (e - 1) / unitsPerAu);
   const limit = Math.acosh((displayExtentAu * unitsPerAu / -a + 1) / e);
-  const anomalies = new Set([0, bodyHyperbolicAnomalyRad]);
+  // Keep the epoch, periapsis and both ends, then spend at most half the vertex budget on
+  // local refinement. Fill the remaining widest gaps so `segments` is the delivered count.
+  const anomalies = new Set([-limit, limit, 0, bodyHyperbolicAnomalyRad]);
   const step = 2 * limit / segments;
-  for (let i = 0; i <= segments; i++) anomalies.add(-limit + i * step);
-  for (let halving = 1; halving <= localRefinementHalvings; halving++) {
+  const refinements = Math.min(localRefinementHalvings, Math.floor((segments - anomalies.size) / 4));
+  for (let halving = 1; halving <= refinements; halving++) {
     for (const sign of [-1, 1]) {
       const h = bodyHyperbolicAnomalyRad + sign * step / 2 ** halving;
       if (h > -limit && h < limit) anomalies.add(h);
     }
+  }
+  while (anomalies.size < segments) {
+    const ordered = [...anomalies].sort((left, right) => left - right);
+    let widest = 0;
+    for (let index = 1; index < ordered.length; index++) {
+      if (ordered[index]! - ordered[index - 1]! > ordered[widest + 1]! - ordered[widest]!) widest = index - 1;
+    }
+    anomalies.add((ordered[widest]! + ordered[widest + 1]!) / 2);
   }
   const sorted = [...anomalies].sort((left, right) => left - right);
   const bodyVertexIndex = sorted.indexOf(bodyHyperbolicAnomalyRad);

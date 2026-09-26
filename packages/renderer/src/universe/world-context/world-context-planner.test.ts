@@ -658,6 +658,24 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
   drawn.forEach((value, index) => expect(Math.abs(value - exact[index]!)).toBeLessThan(1e-3));
 });
 
+test('host detail defers satellite paths until each planetary system is opened', async () => {
+  const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
+  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  for (const [hostId, satelliteId] of [['earth', 'moon'], ['jupiter', 'europa'], ['saturn', 'titan']]) {
+    const host = summary.bodies.find(body => body.id === hostId)!;
+    const planner = createWorldContextPlanner(summary), current = view();
+    current.selectedId = hostId; current.overview = false;
+    current.viewport = { focalPixels: 900, widthPixels: 820, heightPixels: 1094, principalOffsetPixels: [0, 0] };
+    current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + Math.max(host.radiusM * 6, 4e7)];
+    planner(current);
+    expect(planner.takeWantedOrbits(), `${hostId} detail`).not.toContain(satelliteId);
+    current.overview = true;
+    current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + 5e9];
+    planner(current);
+    expect(planner.takeWantedOrbits(), `${hostId} system`).toContain(satelliteId);
+  }
+});
+
 test('a minor path that cannot show is never requested; highlighting it requests its bank', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));

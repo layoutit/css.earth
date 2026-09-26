@@ -45,6 +45,16 @@ test("window expands to include distant source epochs without inventing an apoap
   assert.ok(distant.bodyVertexIndex < distant.vertices.length - 1);
 });
 
+test("open paths spend the requested vertex budget while retaining the epoch and endpoints", () => {
+  for (const segments of [8, 16, 60]) {
+    const sampled = prepareHyperbolicPath({ ...input, segments });
+    assert.equal(sampled.vertices.length, segments);
+    assert.deepEqual(sampled.vertices[sampled.bodyVertexIndex], [0, 0, 0]);
+    assert.equal(sampled.trail.length, segments - 1);
+    assert.ok(sampled.bodyVertexIndex > 0 && sampled.bodyVertexIndex < segments - 1);
+  }
+});
+
 test("the sampler rejects closed, inconsistent or misplaced conics", () => {
   for (const change of [{ eccentricity: 1 }, { semiMajorAxisUnits: 10 },
     { trueAnomalyRad: Math.PI }, { focus: [0, -31, 0] }]) {

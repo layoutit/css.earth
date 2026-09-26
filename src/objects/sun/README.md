@@ -30,6 +30,12 @@ positions and orbit paths use the displayed scene epoch; they are not live
 ephemerides. The footer's provider list combines the existing prepared source
 credits of the bodies in this overview.
 
+The [world navigation recipe](source/navigation/universe.json) samples every
+prepared orbit at 60 vertices, including open comet paths. This changes the
+display path, not the source positions or orbital model. A host detail view
+defers its satellites' paths until the satellite system is opened or a
+satellite is targeted.
+
 ## Evidence
 
 Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
