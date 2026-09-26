@@ -57,14 +57,26 @@ on 27 June 2019. The source product is 3,600 by 1,800 pixels and combines the
 beyond 80 degrees are excluded. Preparation fixes DPR 1 and DPR 2 surface banks,
 reorients each latitude band for the retained projective leaves, and produces
 the polar-cap atlas before runtime. Preparation verifies measured rows 101
-through 1,698 and carries the curved retained body to 80°S and 80°N. Four
-prepared high-latitude rings on each side replace the former single stretched
-band. Interior bands are limited to eight degrees, below Saturn's accepted
-11.25-degree band span, to reduce close-zoom faceting. The polar overlay is
-opaque only across the remaining 80° geometric
-opening and becomes fully transparent before its 64° source-matching edge.
-That retained alpha transition preserves the curved silhouette without a
-visible circular plate.
+through 1,698 and carries the curved retained body to 80°S and 80°N. Bands are
+limited to eight degrees, below Saturn's accepted 11.25-degree band span, to
+reduce close-zoom faceting.
+
+Poleward of 64° the body is a dome: two rings on each side (64° to 72° and 72° to
+80°, 64 quads each, so every band vertex at 64° is also a ring vertex) and a flat
+cap at 80°, rounded to a disc like every polar cap. Preparation lays the polar
+atlas over the Hubble map there through the atlas's own projection (latitude
+linear from the pole to 64°) and its alpha, the composite the former overlay
+plate showed over the bands, so one surface carries both. A ring leaf maps its
+rows onto its flat trapezoid projectively, so each ring row is written with the
+latitude its leaf shows it at: on the prepared leaves every texel lands within
+0.33 of a 2x polar-atlas texel of its latitude, where plain rows missed by up to
+12. The cap shows its atlas tile within 0.39 of a texel. The cap's rim stands
+0.15% of the radius outside the body and nothing else does; the overlay plate it
+replaces floated at the 80° height out to 64° and reached up to 5.7% of the
+radius past the limb when seen from 10° above the equator. The atlas tiles are
+now laid out the way the caps draw them: the plate showed the north tile a
+quarter turn and the south tile mirrored from the longitudes the atlas was made
+for, so the Juno structure turns accordingly.
 
 The north-pole cyclone structure comes from the checked NASA/JPL PIA23808
 JunoCam polar projection. That publication uses extreme false color, so its
