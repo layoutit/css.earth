@@ -59,6 +59,26 @@
       "title": "Galileo NIMS spectral color",
       "detail": "NIMS spectral bands",
       "summary": "False color from 1.50, 1.34 and 0.73 µm NIMS bands: spectral differences, not natural color or mineral amounts."
+    },
+    "carbon-dioxide": {
+      "title": "NIRSpec 4.26 µm band depth",
+      "detail": "JWST 4.25 µm CO₂ band depth",
+      "summary": "JWST CO₂ absorption across eight observations. About 300 km resolution."
+    },
+    "hydrogen-peroxide": {
+      "title": "NIRSpec 3.50 µm band depth",
+      "detail": "Disputed feature · 3.50 µm",
+      "summary": "The 3.50 µm feature has a disputed instrumental contribution. About 300 km resolution."
+    },
+    "sodium-chloride": {
+      "title": "STIS 450 nm absorption",
+      "detail": "STIS · 450 nm absorption",
+      "summary": "Hubble absorption band interpreted as irradiated salt. Compare spatial patterns."
+    },
+    "junocam": {
+      "title": "JunoCam 2022 flyby mosaic",
+      "detail": "JunoCam · 29 September 2022",
+      "summary": "Four calibrated photographs retain their observed coverage and illumination."
     }
   }
 }

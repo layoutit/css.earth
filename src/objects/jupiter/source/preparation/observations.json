@@ -276,6 +276,516 @@
         "boundaryLatitudeDegrees": 64
       },
       "planetographicAxisRatio": 1.0693750560923803
+    },
+    {
+      "id": "visible-2015a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2015a.webp",
+        "surface2x": "jupiter-visible-2015a@2x.webp",
+        "poles": "jupiter-visible-2015a-poles.webp",
+        "poles2x": "jupiter-visible-2015a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2015a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2015a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2015-01-19"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2015a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2015a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2015a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2015a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2015a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2015a, starting 2015-01-19. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2016a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2016a.webp",
+        "surface2x": "jupiter-visible-2016a@2x.webp",
+        "poles": "jupiter-visible-2016a-poles.webp",
+        "poles2x": "jupiter-visible-2016a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2016a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2016a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2016-02-09"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2016a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2016a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2016a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2016a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2016a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2016a, starting 2016-02-09. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2017a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2017a.webp",
+        "surface2x": "jupiter-visible-2017a@2x.webp",
+        "poles": "jupiter-visible-2017a-poles.webp",
+        "poles2x": "jupiter-visible-2017a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2017a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2017a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2017-04-03"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2017a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2017a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2017a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2017a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2017a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2017a, starting 2017-04-03. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2018a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2018a.webp",
+        "surface2x": "jupiter-visible-2018a@2x.webp",
+        "poles": "jupiter-visible-2018a-poles.webp",
+        "poles2x": "jupiter-visible-2018a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2018a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2018a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2018-04-17"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2018a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2018a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2018a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2018a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2018a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2018a, starting 2018-04-17. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2019a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2019a.webp",
+        "surface2x": "jupiter-visible-2019a@2x.webp",
+        "poles": "jupiter-visible-2019a-poles.webp",
+        "poles2x": "jupiter-visible-2019a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2019a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2019a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2019-06-26"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2019a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2019a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2019a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2019a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2019a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2019a, starting 2019-06-26. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2020a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2020a.webp",
+        "surface2x": "jupiter-visible-2020a@2x.webp",
+        "poles": "jupiter-visible-2020a-poles.webp",
+        "poles2x": "jupiter-visible-2020a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2020a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2020a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2020-08-24"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2020a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2020a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2020a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2020a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2020a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2020a, starting 2020-08-24. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2021a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2021a.webp",
+        "surface2x": "jupiter-visible-2021a@2x.webp",
+        "poles": "jupiter-visible-2021a-poles.webp",
+        "poles2x": "jupiter-visible-2021a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2021a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2021a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2021-09-04"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2021a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2021a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2021a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2021a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2021a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2021a, starting 2021-09-04. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2022a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2022a.webp",
+        "surface2x": "jupiter-visible-2022a@2x.webp",
+        "poles": "jupiter-visible-2022a-poles.webp",
+        "poles2x": "jupiter-visible-2022a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2022a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2022a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2022-11-12"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2022a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2022a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2022a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2022a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2022a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2022a, starting 2022-11-12. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2024a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2024a.webp",
+        "surface2x": "jupiter-visible-2024a@2x.webp",
+        "poles": "jupiter-visible-2024a-poles.webp",
+        "poles2x": "jupiter-visible-2024a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2024a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f658n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2024a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2024-01-05"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2024a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2024a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2024a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2024a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2024a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2024a, starting 2024-01-05. Publisher colour composite (F395N, F502N, F658N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing and its red filter differ between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2024c",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2024c.webp",
+        "surface2x": "jupiter-visible-2024c@2x.webp",
+        "poles": "jupiter-visible-2024c-poles.webp",
+        "poles2x": "jupiter-visible-2024c-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2024c.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2024c",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2024-11-19"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2024c.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2024c.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2024c@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2024c-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2024c-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2024c, starting 2024-11-19. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "visible-2025a",
+      "operation": "rgb-observed-gaps",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "files": {
+        "surface": "jupiter-visible-2025a.webp",
+        "surface2x": "jupiter-visible-2025a@2x.webp",
+        "poles": "jupiter-visible-2025a-poles.webp",
+        "poles2x": "jupiter-visible-2025a-poles@2x.webp",
+        "thumbnail": "jupiter-lens-visible-2025a.webp"
+      },
+      "coverageSources": [
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f502n_v1_globalmap.fits",
+        "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f631n_v1_globalmap.fits"
+      ],
+      "planetographicAxisRatio": 1.0693750560923805,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "visible-2025a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2025-12-11"
+        },
+        "measurement": "Published OPAL colour composite",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-visible-2025a.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-visible-2025a.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-visible-2025a@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-visible-2025a-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-visible-2025a-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Hubble OPAL release 2025a, starting 2025-12-11. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour."
+      }
+    },
+    {
+      "id": "magnetic",
+      "operation": "scalar-observed-gaps",
+      "source": "magnetic/radial-field.fits",
+      "files": {
+        "surface": "jupiter-magnetic.webp",
+        "surface2x": "jupiter-magnetic@2x.webp",
+        "poles": "jupiter-magnetic-poles.webp",
+        "poles2x": "jupiter-magnetic-poles@2x.webp",
+        "thumbnail": "jupiter-lens-magnetic.webp"
+      },
+      "label": "Magnetic field",
+      "shortLabel": "Br",
+      "filter": "JRM33",
+      "wavelength": "",
+      "measurement": "Modelled radial magnetic field (gauss)",
+      "qualification": "JRM33 radial magnetic field at the 1-bar ellipsoid (71,492 × 66,854 km), degree and order 13. Blue points inward; red points outward. Evaluated with the published PSH community code in System III east longitude; this is a model inferred from Juno measurements.",
+      "palette": [
+        [
+          33,
+          102,
+          172
+        ],
+        [
+          247,
+          247,
+          247
+        ],
+        [
+          178,
+          24,
+          43
+        ]
+      ],
+      "scalar": {
+        "bitpix": -32,
+        "width": 720,
+        "height": 360,
+        "percentiles": [
+          0,
+          1
+        ],
+        "minimumCoverageFraction": 1,
+        "noData": 0,
+        "coverage": "finite",
+        "range": [
+          -25,
+          25
+        ],
+        "gamma": 1,
+        "lossless": true
+      },
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      }
     }
   ]
 }

@@ -1,0 +1,120 @@
+PDS_VERSION_ID                 = PDS3
+
+/* File Characteristics */
+RECORD_TYPE                    = FIXED_LENGTH
+RECORD_BYTES                   = 57
+FILE_RECORDS                   = 2592
+
+/* Pointers To Data Objects */
+^TABLE                         = "CL_5X5.TAB"
+
+/* Identification Data Elements */
+DATA_SET_NAME                  = "ODY MARS GAMMA RAY SPECTROMETER
+                                  5 ELEMENT CONCENTRATION V1.0"
+DATA_SET_ID                    = "ODY-M-GRS-5-ELEMENTS-V1.0"
+PRODUCT_ID                     = "CL_5X5"
+PRODUCT_TYPE                   = "ELEMENT CONCENTRATIONS"
+PRODUCT_VERSION_ID             = "1.0"
+
+/* Descriptive Data Elements */
+INSTRUMENT_HOST_NAME           = "2001 MARS ODYSSEY"
+INSTRUMENT_NAME                = "GAMMA RAY SPECTROMETER"
+SPACECRAFT_ID                  = ODY
+TARGET_NAME                    = MARS
+MISSION_PHASE_NAME             = MAPPING
+START_TIME                     = 2002-06-04T00:00:00 
+STOP_TIME                      = 2005-04-03T00:00:00 
+SPACECRAFT_CLOCK_START_COUNT   = "N/A" 
+SPACECRAFT_CLOCK_STOP_COUNT    = "N/A" 
+PRODUCT_CREATION_TIME          = 2006-03-09T19:23:00.000
+
+/* Data Object Definition */
+OBJECT                         = TABLE
+
+  NAME                         = "CHLORINE CONCENTRATION DATA"
+  INTERCHANGE_FORMAT           = ASCII
+  ROWS                         = 2592
+  ROW_BYTES                    = 57
+  COLUMNS                      = 5
+
+  DESCRIPTION                  = "This table contains the raw data
+    used to generate the Chlorine (Cl) concentration data used to 
+    create the simple cylindrical projection maps in the BROWSE
+    folder of this data set. 
+    These data were collected between 06/04/02 and 04/03/05. Values
+    of 9999.999999 indicate invalid data points. Negative 
+    concentrations indicate that the background subtracted during 
+    peak fitting was larger than the signal. Negative values are 
+    included when data are smoothed."
+
+  OBJECT                       = COLUMN
+    COLUMN_NUMBER              = 1
+    NAME                       = "LATITUDE"
+    DATA_TYPE                  = ASCII_REAL
+    FORMAT                     = "F5.1"
+    UNIT                       = "DEGREE"
+    BYTES                      = 5
+    START_BYTE                 = 1
+    DESCRIPTION                = "Center latitude of 5-degree 
+     latitude 5-degree longitude bin from which data has been
+     accumulated."
+  END_OBJECT                   = COLUMN
+
+  OBJECT                       = COLUMN
+    COLUMN_NUMBER              = 2
+    NAME                       = "LONGITUDE"
+    DATA_TYPE                  = ASCII_REAL
+    FORMAT                     = "F5.1"
+    UNIT                       = "DEGREE"
+    BYTES                      = 5
+    START_BYTE                 = 9
+    DESCRIPTION                = "Center longitude of 5-degree 
+     latitude 5-degree longitude bin from which data has been
+     accumulated."
+  END_OBJECT                   = COLUMN
+
+  OBJECT                       = COLUMN
+    COLUMN_NUMBER              = 3
+    NAME                       = "CONCENTRATION"
+    DATA_TYPE                  = ASCII_REAL
+    FORMAT                     = "F8.3"
+    UNIT                       = "WEIGHT PERCENT"
+    BYTES                      = 8
+    START_BYTE                 = 17
+    NOT_APPLICABLE_CONSTANT    = 9999.999
+    DESCRIPTION                = "Concentration of Cl in weight
+    percent."
+  END_OBJECT                   = COLUMN
+
+  OBJECT                       = COLUMN
+    COLUMN_NUMBER              = 4
+    NAME                       = "SIGMA"
+    DATA_TYPE                  = ASCII_REAL
+    FORMAT                     = "F8.3"
+    UNIT                       = "WEIGHT PERCENT"
+    BYTES                      = 8
+    START_BYTE                 = 33
+    NOT_APPLICABLE_CONSTANT    = 9999.999
+    DESCRIPTION                = "The error associated with the
+    concentration measurement."
+  END_OBJECT                   = COLUMN
+
+  OBJECT                       = COLUMN
+    COLUMN_NUMBER              = 5
+    NAME                       = "SIGMA WITH CFS"
+    DATA_TYPE                  = ASCII_REAL
+    FORMAT                     = "F8.3"
+    UNIT                       = "WEIGHT PERCENT"
+    BYTES                      = 8
+    START_BYTE                 = 49
+    NOT_APPLICABLE_CONSTANT    = 9999.999
+    DESCRIPTION                = "The error associated with the 
+    concentration measurement. This error includes the errors 
+    associated with the correction factors applied to the 
+    concentration data if applicable."
+  END_OBJECT                   = COLUMN
+
+END_OBJECT                     = TABLE
+
+END
+

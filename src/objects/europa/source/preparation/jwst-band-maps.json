@@ -1,0 +1,201 @@
+{
+  "schema": "cssearth-jwst-band-maps@1",
+  "rotation": {
+    "path": "jwst/pck00011.tpc",
+    "body": 502
+  },
+  "maps": [
+    {
+      "id": "carbon-dioxide",
+      "target": "EUROPA",
+      "quantity": "CO2 BAND DEPTH",
+      "units": "band depth",
+      "measure": {
+        "band": [
+          4.24,
+          4.28
+        ],
+        "continuum": [
+          [
+            4.2,
+            4.225
+          ],
+          [
+            4.3,
+            4.33
+          ]
+        ],
+        "source": "The carbon dioxide ν3 band on Europa is a doublet with minima near 4.25 and 4.27 µm (Trumbo & Brown 2023, Science 381, 1308; Villanueva et al. 2023, Science 381, 1305). The band window spans both minima; the continuum windows are this repository's, on either side of the band and clear of it."
+      },
+      "cubes": [
+        {
+          "program": "europa-1250",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw01250-o002-observer.txt",
+            "heliocentric": "jwst/horizons-jw01250-o002-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-4023-o001",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw04023-o001-observer.txt",
+            "heliocentric": "jwst/horizons-jw04023-o001-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-4023-o002",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw04023-o002-observer.txt",
+            "heliocentric": "jwst/horizons-jw04023-o002-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-4023-o003",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw04023-o003-observer.txt",
+            "heliocentric": "jwst/horizons-jw04023-o003-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o001",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o001-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o001-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o002",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o002-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o002-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o003",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o003-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o003-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o004",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o004-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o004-heliocentric.txt"
+          }
+        }
+      ],
+      "grid": {
+        "width": 360,
+        "height": 180
+      },
+      "maximumEmissionDegrees": 65,
+      "minimumDiscPixels": 6,
+      "output": "jwst/carbon-dioxide.fits"
+    },
+    {
+      "id": "hydrogen-peroxide",
+      "target": "EUROPA",
+      "quantity": "H2O2 BAND DEPTH",
+      "units": "band depth",
+      "measure": {
+        "band": [
+          3.49,
+          3.52
+        ],
+        "continuum": [
+          [
+            3.455,
+            3.48
+          ],
+          [
+            3.555,
+            3.58
+          ]
+        ],
+        "source": "Hydrogen peroxide absorbs at 3.5 um on Europa (Trumbo, Brown & Hand 2019, AJ 158, 127, doi:10.3847/1538-3881/ab380c), and Wu, Trumbo, Brown & de Kleer (2024, PSJ, doi:10.3847/PSJ/ad7468) map it in these JWST cubes. Both remove a second-order polynomial fitted over 3.37-3.715 um with 3.4-3.65 um excluded, which this record's straight-line continuum cannot reproduce; the band and continuum windows here are this repository's, set narrowly either side of the 3.50 um core, so the depth is not comparable with the published band area."
+      },
+      "cubes": [
+        {
+          "program": "europa-1250",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw01250-o002-observer.txt",
+            "heliocentric": "jwst/horizons-jw01250-o002-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-4023-o001",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw04023-o001-observer.txt",
+            "heliocentric": "jwst/horizons-jw04023-o001-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-4023-o002",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw04023-o002-observer.txt",
+            "heliocentric": "jwst/horizons-jw04023-o002-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-4023-o003",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw04023-o003-observer.txt",
+            "heliocentric": "jwst/horizons-jw04023-o003-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o001",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o001-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o001-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o002",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o002-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o002-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o003",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o003-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o003-heliocentric.txt"
+          }
+        },
+        {
+          "program": "europa-9230-o004",
+          "band": "NIRSPEC-G395H-F290LP",
+          "ephemeris": {
+            "observer": "jwst/horizons-jw09230-o004-observer.txt",
+            "heliocentric": "jwst/horizons-jw09230-o004-heliocentric.txt"
+          }
+        }
+      ],
+      "grid": {
+        "width": 360,
+        "height": 180
+      },
+      "maximumEmissionDegrees": 65,
+      "minimumDiscPixels": 6,
+      "output": "jwst/hydrogen-peroxide.fits"
+    }
+  ]
+}

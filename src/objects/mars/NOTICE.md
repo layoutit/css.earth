@@ -32,3 +32,8 @@ Feature names, centres, diameters, extents and name origins are from the Gazette
 Feature caption notes: 644 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
 
 Landing, touchdown and impact sites (14, 2 traverses): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.
+
+- Mars geology: Kenneth L. Tanaka and colleagues, USGS Scientific Investigations Map 3292 (2014); unit colours from the published map sheet.
+- Odyssey GRS concentrations: William V. Boynton and colleagues (2007), NASA/PDS Geosciences Node, ODY-M-GRS-5-ELEMENTS-V1.0.
+- Crustal magnetic model: Benoît Langlais and colleagues (2019), Zenodo 3876714; evaluated with pyshtools 4.14.1.
+- Crust thickness: Mark A. Wieczorek and colleagues (2022), Zenodo 6477509; precomputed Figure 2 model, Khan2022-39-2900-2900.

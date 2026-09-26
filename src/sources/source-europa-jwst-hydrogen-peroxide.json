@@ -1,0 +1,22 @@
+{
+  "id": "source-europa-jwst-hydrogen-peroxide",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hydrogen peroxide",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/ad7468",
+      "label": "NASA/ESA/CSA JWST, NIRSpec programmes 1250 (PI G. Villanueva), 4023 and 9230; MAST (STScI)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/inputs/426"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

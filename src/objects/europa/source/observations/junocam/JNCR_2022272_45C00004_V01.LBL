@@ -1,0 +1,66 @@
+PDS_VERSION_ID                = PDS3
+
+/* FILE CHARACTERISTICS */
+
+RECORD_TYPE                   = FIXED_LENGTH
+RECORD_BYTES                  = 3296
+FILE_RECORDS                  = 10752
+
+/* POINTERS TO DATA OBJECTS */
+
+^IMAGE                        = "JNCR_2022272_45C00004_V01.IMG"
+
+/* IDENTIFICATION DATA ELEMENTS */
+
+FILE_NAME                     = "JNCR_2022272_45C00004_V01.IMG"
+SPACECRAFT_NAME               = JUNO
+MISSION_PHASE_NAME            = "SCIENCE ORBITS"
+TARGET_NAME                   = "EUROPA"
+INSTRUMENT_ID                 = "JNC"
+INSTRUMENT_HOST_NAME          = "JUNO"
+INSTRUMENT_NAME               = "JUNO EPO CAMERA"
+PRODUCER_ID                   = JUNO_JUNOCAM_TEAM
+DATA_SET_ID                   = "JUNO-J-JUNOCAM-3-RDR-L1A-V1.0"
+STANDARD_DATA_PRODUCT_ID      = "JUNOCAM-RDR"
+PRODUCT_CREATION_TIME         = 2023-02-02T20:23:41
+PRODUCT_VERSION_ID            = "01"
+PRODUCT_ID                    = "JNCR_2022272_45C00004_V01"
+SOURCE_PRODUCT_ID             = "3D-09002D0004-2022-272T14.31.58"
+START_TIME                    = 2022-09-29T09:41:09.159
+IMAGE_TIME                    = 2022-09-29T09:41:09.159
+STOP_TIME                     = 2022-09-29T09:41:19.547
+SPACECRAFT_CLOCK_START_COUNT  = "717716887:56"
+SPACECRAFT_CLOCK_STOP_COUNT   = "N/A"
+
+/* DESCRIPTIVE DATA ELEMENTS */
+
+ORBIT_NUMBER                  = 45
+SOFTWARE_NAME                 = "JUNOMAKEPDS.PY 0.12"
+PROCESSING_LEVEL_ID           = "3"
+FOCAL_PLANE_TEMPERATURE       = 253.3 <K>
+INTERFRAME_DELAY              = 0.371 <s>
+SUB_SPACECRAFT_LATITUDE       = 14.8794
+SUB_SPACECRAFT_LONGITUDE      = 337.4927
+SPACECRAFT_ALTITUDE           = 5443.4 <km>
+SOLAR_DISTANCE                = 7.4134e+08 <km>
+SAMPLE_BIT_MODE_ID            = "SQROOT"
+EXPOSURE_DURATION             = 3.200000 <ms>
+JNO:TDI_STAGES_COUNT          = 1
+SAMPLING_FACTOR               = 1
+FILTER_NAME                   = ('BLUE', 'GREEN', 'RED')
+COMPRESSION_TYPE              = "HUFFMAN"
+RATIONALE_DESC                = "Europa"
+
+/* DATA OBJECT DEFINITIONS */
+
+OBJECT                        = IMAGE
+  LINES                       = 10752
+  LINE_SAMPLES                = 1648
+  SAMPLE_TYPE                 = UNSIGNED_INTEGER
+  LINE_PREFIX_BYTES           = 0
+  LINE_SUFFIX_BYTES           = 0
+  SAMPLE_BITS                 = 16
+  SAMPLE_BIT_MASK             = 2#1111111111111111#
+  MD5_CHECKSUM                = "a2df2a013f12ce99cd7f9ab6e848b1f1"
+END_OBJECT                    = IMAGE
+END

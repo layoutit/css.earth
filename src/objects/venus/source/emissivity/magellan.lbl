@@ -1,0 +1,68 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 33624
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 8193
+      Lines   = 4097
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = SignedWord
+      ByteOrder  = Lsb
+      Base       = -0.000100000000000211004
+      Multiplier = 0.000100000000000000005
+    End_Group
+    ^Core     = Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif
+  End_Object
+
+  Group = Archive
+    DataSetId               = MGN-V-GXDR-5-DIM-V1.0
+    ProducerInstitutionName = "UNITED STATES GEOLOGICAL SURVEY"
+    ProductId               = EA00N000
+    InstrumentName          = "RADAR SYSTEM"
+    InstrumentId            = RAD
+    TargetName              = VENUS
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = SimpleCylindrical
+    CenterLongitude    = 0.0
+    TargetName         = Venus
+    EquatorialRadius   = 6051000.0 <meters>
+    PolarRadius        = 6051000.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 180
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -19014417.9035999998 <meters>
+    UpperLeftCornerY   = 9509529.48120000027 <meters>
+    PixelResolution    = 4641.05879999999979 <meters/pixel>
+    Scale              = 22.7555559999999986 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1879             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 1688
+  ^History  = Venus_Magellan_MicrowaveEmissivity_Global_4641m.History.IsisCube
+End_Object
+
+Object = OriginalLabel
+  Name           = IsisCube
+  StartByte      = 1
+  Bytes          = 2831
+  ^OriginalLabel = Venus_Magellan_MicrowaveEmissivity_Global_4641m.OriginalLab-
+                   el.IsisCube
+End_Object
+End

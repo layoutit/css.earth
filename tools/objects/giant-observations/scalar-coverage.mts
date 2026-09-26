@@ -3,9 +3,9 @@ import { polarZeroCoverage } from '../observed-coverage.mts';
 
 /** Preserve measured values and mark only non-finite or polar-connected zero fill. */
 export function measureScalarCoverage<T extends ScalarSource>(source: T, config: {noData: number; coverage: string}) {
-  if (!Number.isSafeInteger(source.width) || source.width < 1 || !Number.isSafeInteger(source.height) || source.height < 2 || source.values.length !== source.width * source.height || config.noData !== 0 || config.coverage !== 'polar-connected-zero') throw new TypeError('Invalid measured scalar coverage.');
+  if (!Number.isSafeInteger(source.width) || source.width < 1 || !Number.isSafeInteger(source.height) || source.height < 2 || source.values.length !== source.width * source.height || config.noData !== 0 || !['polar-connected-zero','finite'].includes(config.coverage)) throw new TypeError('Invalid measured scalar coverage.');
   const candidates = Uint8Array.from(source.values, value => value === 0 || !Number.isFinite(value) ? 0 : 255);
-  const missing = polarZeroCoverage(candidates, {width:source.width,height:source.height,channels:1});
+  const missing = config.coverage==='finite'?new Uint8Array(source.values.length):polarZeroCoverage(candidates, {width:source.width,height:source.height,channels:1});
   let first=source.height,last=-1,sourceMissingPixels=0;
   for(let i=0;i<source.values.length;i++) {
     if(!Number.isFinite(source.values[i]))missing[i]=1;
@@ -27,13 +27,14 @@ export function finitePercentiles(values: ScalarSource['values'], lower: number,
   ];
 }
 
-export function falseColorMap(source: ScalarSource, palette: readonly (readonly number[])[], minimum: number, maximum: number) {
+export function falseColorMap(source: ScalarSource, palette: readonly (readonly number[])[], minimum: number, maximum: number, gamma = .5) {
+  if (!(gamma > 0) || !Number.isFinite(gamma)) throw new TypeError('Invalid scalar display gamma.');
   const output = Buffer.alloc(source.width * source.height * 4);
   for (let index = 0; index < source.values.length; index += 1) {
     if(source.missing?.[index]) continue;
     const amount = Math.max(0, Math.min(1,
       (source.values[index] - minimum) / (maximum - minimum)));
-    const color = samplePalette(palette, Math.sqrt(amount));
+    const color = samplePalette(palette, amount ** gamma);
     const offset = index * 4;
     output[offset] = color[0];
     output[offset + 1] = color[1];

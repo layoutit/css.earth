@@ -1,0 +1,27 @@
+{
+  "id": "hubble-opal-jupiter-dated-maps",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hubble OPAL Jupiter global maps, cycles 22–32",
+  "identifiers": [
+    {
+      "value": "10.1088/0004-637X/812/1/55",
+      "type": "doi"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/hlsp/opal",
+      "label": "OPAL releases"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/jupiter/source/preparation/observations.json",
+      "locator": "/lenses"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

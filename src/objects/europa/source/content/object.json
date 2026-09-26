@@ -273,6 +273,206 @@
         "falseColor": true,
         "notes": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
         "noData": true
+      },
+      {
+        "id": "carbon-dioxide",
+        "label": "Carbon dioxide",
+        "thumbnail": "europa-lens-carbon-dioxide.webp",
+        "surface": "europa-carbon-dioxide@2x.webp",
+        "poles": "europa-poles-carbon-dioxide@2x.webp",
+        "source": {
+          "id": "jwst-carbon-dioxide",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/science.adg4155"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Carbon dioxide",
+          "labels": [
+            "0%",
+            "9%",
+            "18%"
+          ],
+          "meta": "band depth",
+          "sourceUrl": "https://doi.org/10.1126/science.adg4155",
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "0%",
+              "9%",
+              "18%"
+            ]
+          }
+        },
+        "notes": "Depth of the 4.25 µm CO₂ band in eight JWST NIRSpec cubes, November 2022–February 2025. Each view is placed on the surface it observed. About 300 km is the finest resolved detail; the 1° grid is resampling. Missing polar coverage remains empty.",
+        "noData": true,
+        "qualification": "JWST 4.25 µm CO₂ band depth"
+      },
+      {
+        "id": "hydrogen-peroxide",
+        "label": "Peroxide signature",
+        "thumbnail": "europa-lens-hydrogen-peroxide.webp",
+        "surface": "europa-hydrogen-peroxide@2x.webp",
+        "poles": "europa-poles-hydrogen-peroxide@2x.webp",
+        "source": {
+          "id": "jwst-hydrogen-peroxide",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/PSJ/ad7468"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Hydrogen peroxide",
+          "labels": [
+            "0%",
+            "3%",
+            "6%"
+          ],
+          "meta": "band depth",
+          "sourceUrl": "https://doi.org/10.3847/PSJ/ad7468",
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "−0.015",
+              "0.065"
+            ]
+          }
+        },
+        "notes": "Depth near 3.50 µm in eight JWST NIRSpec cubes, interpreted as H₂O₂ by Wu et al. (2024). Yoffe & Shahaf (2026) find a NIRSpec artefact in this band and exclude it from their analysis. This straight-line continuum proxy is not the published band area. Resolution is about 300 km.",
+        "noData": true,
+        "qualification": "Disputed 3.50 µm feature · JWST",
+        "shortLabel": "H₂O₂"
+      },
+      {
+        "id": "sodium-chloride",
+        "label": "Salt signature",
+        "thumbnail": "europa-lens-sodium-chloride.webp",
+        "surface": "europa-sodium-chloride@2x.webp",
+        "poles": "europa-poles-sodium-chloride@2x.webp",
+        "source": {
+          "id": "hst-sodium-chloride",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/sciadv.aaw7123"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "450 nm absorption",
+          "labels": [
+            "0 Å",
+            "100 Å",
+            "200 Å"
+          ],
+          "meta": "band strength",
+          "sourceUrl": "https://doi.org/10.1126/sciadv.aaw7123",
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "0 Å",
+              "100 Å",
+              "200 Å"
+            ]
+          }
+        },
+        "notes": "Strength of the 450 nm absorption band in Hubble STIS scans from four visits in 2017, interpreted as irradiated sodium chloride. The broad background cannot be fully separated, so compare places rather than absolute values. The slit resolves about 380 km; missing coverage remains empty.",
+        "noData": true,
+        "qualification": "STIS 450 nm absorption · 2017",
+        "shortLabel": "NaCl"
+      },
+      {
+        "id": "junocam",
+        "label": "JunoCam",
+        "thumbnail": "europa-lens-junocam.webp",
+        "surface": "europa-junocam@2x.webp",
+        "poles": "europa-poles-junocam@2x.webp",
+        "source": {
+          "id": "jncr-2022272-45c00001-v01",
+          "path": "../manifest.json",
+          "url": "https://pds-imaging.jpl.nasa.gov/volumes/juno.html"
+        },
+        "falseColor": true,
+        "notes": "Four calibrated JunoCam colour photographs from 29 September 2022, projected with their individual camera geometries. Original illumination and coverage are retained. Displayed colours preserve the instrument band ratios; they are not a natural-colour reconstruction.",
+        "noData": true,
+        "qualification": "JunoCam · 29 September 2022"
       }
     ]
   },
