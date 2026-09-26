@@ -1,9 +1,2 @@
 /* Body-owned dataset bindings for the existing retained spherical scene.
    Prepared science atlases share the photograph atlas layout at one eighth its dimensions. */
-.object-stage[data-object-id="ganymede"][data-lens="ice-fraction"] .polycss-scene s:not(.ganymede-polar) {
-  background-image: url("/scenes/ganymede/ganymede-ice-fraction@2x.webp") !important;
-}
-
-.object-stage[data-object-id="ganymede"][data-lens="dark-material"] .polycss-scene s:not(.ganymede-polar) {
-  background-image: url("/scenes/ganymede/ganymede-dark-material@2x.webp") !important;
-}
