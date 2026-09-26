@@ -45,6 +45,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/objects/cameras` | observer-computed cameras from an ephemeris and a spin state or IAU pole model | Node only |
 | `@cssearth/bake/objects/scene` | the physical world frame navigation is solved in, authored synchronous and hosted rotations | Node only |
 | `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology and symbols, eclipse and phase-curve maps, observed colour rasters and their photometric composition, their source records, the WISE atlas mosaic grid | Node only (`node:*`, `sharp`, `geotiff`) |
+| `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (mission decoders and cameras, registration, native photographs, solid and radial sources, atlases), giant (ring and disc geometry, photometric contracts), paged-ellipsoid (texture levels, surface banks, Earth rasters), material-composition (recipes, rasters, radial motion, spectral variants), cutaway and observed-surfaces contracts | Node only |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -61,7 +62,7 @@ packages/bake/
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
 │   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
-├── src/objects/   color/, geometry/, cameras/, scene/, raster/: the shared object libraries, one entry each (`objects/<topic>`)
+├── src/objects/   color/, geometry/, cameras/, scene/, raster/, layers/<kind>/: the shared object libraries, one entry each
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```

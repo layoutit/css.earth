@@ -59,6 +59,11 @@ its validators accept); the renderer never imports the bake.
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
     photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
+  - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`):
+    the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
+    as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). The pipelines' entry
+    scripts, the generators source manifests name by path (`radial-snapshot`, `pds-constraint-map`, `shape-material`) and
+    modules that still read platform files stay in `tools/objects/`.
   Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
   oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
   (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
