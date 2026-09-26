@@ -7,13 +7,11 @@
     "equatorialRadius": 230,
     "polarRadius": 215.0788899457282
   },
-  "latitudeSegments": 24,
+  "latitudeSegments": 20,
   "longitudeSegments": 32,
   "latitudeBoundsDegrees": [
     -80,
-    -76,
     -72,
-    -68,
     -64,
     -56,
     -48,
@@ -31,9 +29,7 @@
     48,
     56,
     64,
-    68,
     72,
-    76,
     80
   ],
   "surface": {
@@ -53,15 +49,15 @@
     "url": "/scenes/jupiter/jupiter-poles.webp",
     "tileSize": 256,
     "boundaryLatitudeDegrees": 80,
-    "overlayLatitudeDegrees": 64,
     "southFirst": true,
     "separateInnerTiles": false,
     "fitToTile": false,
     "surfaceOverlap": 1.035,
-    "innerOverlap": 1.05,
     "surfaceOffset": 0.1,
-    "innerInset": 2.4,
-    "innerOffsetBeforeSubtract": true
+    "dome": {
+      "edgeLatitudeDegrees": 64,
+      "longitudeSegments": 64
+    }
   },
   "classes": {
     "surface": "",

@@ -14,6 +14,7 @@ import {validateRelativePath} from '../material-composition/recipe.mts';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from './polar-continuation.mts';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from './scalar-coverage.mts';
 import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mts';
+import {compositePolarOverlay,layoutPolarAtlasForCaps,writeDomeRings,type DomeRingWarp,type PoleProjection} from './polar-dome.mts';
 
 export function parseObservedPolarRecipe(input: unknown) {
   const config=parseObservedPolarSource(input);
@@ -35,11 +36,30 @@ export function parseObservedPolarRecipe(input: unknown) {
   return {...config,sourcePins:[...sourcePaths].map(path=>({path}))};
 }
 
+/** The projection every lens's pole tiles share (see PoleProjection). A dome shows every lens through the same rings and cap,
+ * so the lenses must agree; each is latitude-linear from the pole to its edge. */
+export function polarImageProjection(config: unknown): PoleProjection {
+  const recipe=parseObservedPolarRecipe(config);
+  const projections=recipe.lenses.map(lens=>{
+    if(lens.operation==='rgb-polar-structure')return{id:lens.id,edgeLatitudeDegrees:lens.continuation.measuredProjectionEdgeLatitudeDegrees??lens.continuation.edgeLatitudeDegrees,scale:lens.continuation.overlap??1.035};
+    if((lens.projection.projection??'latitude-linear')!=='latitude-linear')throw new TypeError(`${recipe.namespace} lens ${lens.id}: pole tiles in the ${lens.projection.projection} projection cannot share a dome with latitude-linear ones.`);
+    return{id:lens.id,edgeLatitudeDegrees:lens.projection.boundaryLatitudeDegrees,scale:lens.projection.overlap??1.035};
+  });
+  const [first]=projections;
+  if(!first)throw new TypeError(`${recipe.namespace}: no lens declares pole tiles.`);
+  for(const projection of projections)if(projection.edgeLatitudeDegrees!==first.edgeLatitudeDegrees||projection.scale!==first.scale)
+    throw new TypeError(`${recipe.namespace} lens ${projection.id}: pole tiles at edge ${projection.edgeLatitudeDegrees}° and scale ${projection.scale} differ from lens ${first.id}'s (${first.edgeLatitudeDegrees}°, ${first.scale}).`);
+  return{edgeLatitudeDegrees:first.edgeLatitudeDegrees,scale:first.scale};
+}
+
 /** Observed RGB/scalar maps, projective band packing, and source-structured poles.
  * The original observations are the only input; encoded surfaces are consumed
- * directly in memory for their matching thumbnail. */
-export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirectory,config,write=false}: {sourceDirectory: string; publicDirectory: string; config: unknown; write?: boolean}) {
+ * directly in memory for their matching thumbnail. With a dome (giant-layers/geometry.mts domeRingWarp), the pole imagery is
+ * composited into the map poleward of its edge, each dome ring's packed rows are written for its leaves, and the pole atlas
+ * is laid out for the caps. */
+export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirectory,config,write=false,dome}: {sourceDirectory: string; publicDirectory: string; config: unknown; write?: boolean; dome?: DomeRingWarp}) {
   const recipe=parseObservedPolarRecipe(config);
+  const poleProjection=dome?.length?polarImageProjection(config):null;
   const sources=await verifyObservationSources(sourceDirectory,recipe.sourcePins);
   if(write)await mkdir(publicDirectory,{recursive:true});
   const assets: {filename: string; data: Buffer; bytes: number; sha256: string; width: number; height: number}[]=[],
@@ -58,10 +78,11 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     if(write)await writeFile(resolve(publicDirectory,filename),data);
     return asset;
   };
-  const pack=async (source: ObservedRgb)=>{
+  const pack=async (source: ObservedRgb,rings?: DomeRingWarp)=>{
     const {width,height}=source.info, channels=requireChannels(source.info.channels);
     if (!Buffer.isBuffer(source.data)) throw new TypeError('Projective raster packing requires a byte buffer.');
     const packed=packProjectiveSurfaceRaster(source.data,{width,height,channels,bands:latitudeRasterBands(recipe.packing.latitudeBoundsDegrees,height),gutter:recipe.packing.gutter*height/recipe.dimensions.height});
+    if(rings?.length)writeDomeRings(packed,source,rings,recipe.packing.latitudeBoundsDegrees);
     return sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels}}).webp(recipe.encoding.surface).toBuffer();
   };
   for(const lens of recipe.lenses) {
@@ -92,9 +113,13 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
       measured={firstMeasuredRow:measuredSource.firstMeasuredRow,lastMeasuredRow:measuredSource.lastMeasuredRow,sourceMissingPixels:measuredSource.sourceMissingPixels};
       polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...lens.projection});
     }
+    if(poleProjection){
+      source2x=compositePolarOverlay(source2x,polar,poleProjection);source1x=compositePolarOverlay(source1x,polar,poleProjection);
+      polar={...polar,data:layoutPolarAtlasForCaps(polar)};
+    }
     maps.set(lens.id,{data:source2x.data,...source2x.info});
     coverage[lens.id]={...measured,...Object.fromEntries(Object.entries(polar).filter(([key])=>key!=='data'))};
-    const surface=await add(lens.files.surface,await pack(source1x)),surface2x=await add(lens.files.surface2x,await pack(source2x));
+    const surface=await add(lens.files.surface,await pack(source1x,dome)),surface2x=await add(lens.files.surface2x,await pack(source2x,dome));
     const raw={width:polar.width,height:polar.height,channels:4 as const};
     const poles=await add(lens.files.poles,await sharp(polar.data,{raw}).resize(polarTileSize*2,polarTileSize).webp(recipe.encoding.polar).toBuffer());
     const poles2x=await add(lens.files.poles2x,await sharp(polar.data,{raw}).webp(recipe.encoding.polar).toBuffer());

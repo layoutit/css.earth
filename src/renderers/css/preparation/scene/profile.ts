@@ -60,7 +60,7 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
     const texture = object(surface.surface, 'surface texture');
     const matched = [Number(texture.width) / Number(surface.longitudeSegments), Number(surface.surfaceLatitudeHeight) / Number(surface.latitudeSegments)]
       .every(cellTexels => Math.abs(Number(projection.overlap) * cellTexels - Number(projection.rasterOverscan)) < 1e-9);
-    if (projection.seamBleed !== 0 || !matched) throw new TypeError('A stepped seam outset needs seamBleed 0 and an overlap matched to the raster overscan.');
+    if (projection.seamBleed !== 0 || !matched) throw new TypeError(`${String(profile.namespace)}: a stepped seam outset needs seamBleed 0 (got ${String(projection.seamBleed)}) and overlap x texels per cell = rasterOverscan (overlap ${String(projection.overlap)}, cells ${Number(texture.width) / Number(surface.longitudeSegments)} x ${Number(surface.surfaceLatitudeHeight) / Number(surface.latitudeSegments)} texels, overscan ${String(projection.rasterOverscan)}).`);
   }
   if (profile.planes !== undefined) {
     if (!Array.isArray(profile.planes) || !profile.planes.length) throw new TypeError('geometry.planes must be a non-empty array.');

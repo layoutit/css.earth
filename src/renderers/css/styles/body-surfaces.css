@@ -1959,10 +1959,7 @@
   pointer-events: none;
 }
 
-/* Emissive leaves keep the retired lane's visibility: full-band leaves stay visible from behind so the overlapped
-   seams never open; polar cap leaves hide their back faces. */
 .object-stage[data-object-id="sun"] .polycss-scene s:not(.sun-polar) {
-  backface-visibility: visible;
   background-image: var(--sun-surface-image) !important;
 }
 

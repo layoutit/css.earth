@@ -45,7 +45,7 @@
     "rasterScale": 4,
     "rasterGutter": 16.0,
     "rasterOverscan": 0.5,
-    "projectivePoles": true,
+    "projectivePoles": false,
     "lightColor": "#ffffff",
     "ambientIntensity": 0.05
   },

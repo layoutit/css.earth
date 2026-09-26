@@ -21,6 +21,7 @@ import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrome
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starStylesheet } from './new-object/scaffold.mts';
 import { temperatureCatalogueColor } from './star-catalogue-color.mts';
+import { sphereProjection } from './sphere-projection.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';
 const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
@@ -158,8 +159,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
       surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
       poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
-    projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0,
-      projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 0.05 },
+    projection: sphereProjection(0.05, 1024 / 32),
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-lighting@1`, layout: 'body-container',
       body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: rotation === 'unmeasured' ? 0 : periodDays,
         sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere',

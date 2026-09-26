@@ -21,11 +21,11 @@ import { prepareGiantLayers, parseRadialLayerRecipe } from './index.mts';
 import { rasterAnnularField } from './rings.mts';
 import { prepareObservedSurfaces } from '../observed-surfaces/index.mts';
 import { prepareEllipsoidMaterials } from './materials.mts';
-import { prepareBandedEllipsoid, type BandedImagePixels } from './geometry.mts';
+import { prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels } from './geometry.mts';
 import { prepareLayeredSurfacePresentation } from './presentation.mts';
 import { preparePhotometricDisc } from './photometric-disc.mts';
 import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.mts';
-import { prepareObservedPolarSurfaces } from '../giant-observations/index.mts';
+import { prepareObservedPolarSurfaces, polarImageProjection } from '../giant-observations/index.mts';
 import { withFocusedCamera } from '../focused-camera.mts';
 
 
@@ -89,9 +89,16 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   assertLayeredGiantFrameBank(descriptor,materialConfig,presentationConfig);
   const sourceManifest=await createSourceManifest({objectId:descriptor.id,objectName:contentConfig.displayName,sourceRoot:sourceDirectory});await sourceManifest.verify();
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(outputDirectory,{recursive:true})]);
-  const observed=await (observationConfig.schema==='cssearth-observed-polar-surfaces@1'?prepareObservedPolarSurfaces:prepareObservedSurfaces)({sourceDirectory,publicDirectory,config:observationConfig,write:true});
+  // A dome's rings show the pole imagery the observation lane composites into their map rows, written for the rings' own
+  // projective mapping; its caps show the pole tiles at their own projection.
+  const dome=geometryConfig.polar.dome?domeRingWarp(geometryConfig):undefined;
+  if(dome&&observationConfig.schema!=='cssearth-observed-polar-surfaces@1')throw new TypeError(`Layered giant ${descriptor.id}: a dome needs pole tiles from an observed polar recipe.`);
+  if(dome&&JSON.stringify(observationConfig.schema==='cssearth-observed-polar-surfaces@1'?observationConfig.packing.latitudeBoundsDegrees:null)!==JSON.stringify(geometryConfig.latitudeBoundsDegrees))
+    throw new TypeError(`Layered giant ${descriptor.id}: the dome's rings need the packed bands (observations packing.latitudeBoundsDegrees) to be the geometry's latitude bounds.`);
+  const observed=observationConfig.schema==='cssearth-observed-polar-surfaces@1'?await prepareObservedPolarSurfaces({sourceDirectory,publicDirectory,config:observationConfig,write:true,...(dome?{dome}:{})}):await prepareObservedSurfaces({sourceDirectory,publicDirectory,config:observationConfig,write:true});
   const radial=await prepareGiantLayers({sourceDirectory,publicDirectory,config:radialConfig,write:true});
-  const geometry=prepareBandedEllipsoid(geometryConfig,publishedLeafImages(descriptor.id,observationConfig,[...observed.assets,...radial.assets]));
+  const leafImages=publishedLeafImages(descriptor.id,observationConfig,[...observed.assets,...radial.assets]);
+  const geometry=prepareBandedEllipsoid(geometryConfig,dome?{...leafImages,poles:polarImageProjection(observationConfig)}:leafImages);
   let radialLayer;
   if ('radialLayer' in materialConfig && materialConfig.radialLayer) {const layer=radialConfig.layers[materialConfig.radialLayer.layerIndex];if(!layer||layer.kind!=='annular-field')throw new TypeError('Material radial layer must bind an annular field.');radialLayer={...materialConfig.radialLayer,data:rasterAnnularField(layer,materialConfig.radialLayer.size)};}
   const material=normalizedDisc?await preparePhotometricDisc({sourceDirectory,config:materialConfig,publicDirectory,write:true}):await prepareEllipsoidMaterials({config:materialConfig,maps:observed.maps,radialLayer,publicDirectory,write:true});

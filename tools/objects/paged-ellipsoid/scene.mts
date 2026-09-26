@@ -27,6 +27,7 @@ import {
   prepareProjectiveTextureLayer,
 } from "../../../src/platform/projective-surface-raster.mts";
 import {prepareLeafSeamOutset, prepareSeamOutsetSteps} from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
+import {POLAR_CAP_STYLE, requireOutwardCap} from "../../../src/renderers/css/preparation/scene/polar-cap.ts";
 // Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves
 // join the shared rule (tools/prepared/leaf-box.mts) with that work.
 const FULL_BOXES = { leafBox: false as const };
@@ -680,11 +681,15 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
     .map((value) => value === 0 ? "0px" : formatCssLength(value)).join(" ");
   const backgroundSize = fitted.backgroundSize
     .map((value) => formatCssLength(value)).join(" ");
+  // Every lane's caps follow one rule (polar-cap.ts): a disc, facing out, culled when it turns away. This covers the globe's
+  // caps, the cutaway's outer poles and every interior shell's caps.
+  if (polygon.polarCap) requireOutwardCap(`${profile.namespace} ${polygon.texture}`, polygon.polarCap, fitted.matrix);
   return {
     style: `transform:matrix3d(${fitted.matrix})` +
       preparedAtlasDimensions(fitted.leafWidth, fitted.leafHeight) +
       `;background-position:${backgroundPosition}` +
-      `;background-size:${backgroundSize}`,
+      `;background-size:${backgroundSize}` +
+      (polygon.polarCap ? POLAR_CAP_STYLE : ""),
     // A polar cap samples the 256-pixel poles image, so it is rastered at its own size. At the interior shells' scale
     // WebKit backed each cap with a 1024-pixel layer (36 MB on an iPhone) for no extra detail.
     projectiveTextureLayer: { ...prepareProjectiveTextureLayer(

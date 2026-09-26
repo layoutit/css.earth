@@ -10,7 +10,7 @@ interface AtlasVariant {runtimeAtlas:AtlasPresentation;defaultPresentation?:Atla
 interface AtlasPlanMetadata {model:string;defaultVariant?:string;defaultPreparedFrame:number;defaultPreparedRow:number;initialWarmRows:readonly number[];
   maximumRetainedAtlasCount:number;initialDecodedWorkingSetBytes:number;maximumDecodedWorkingSetBytes:number;fullAtlasDecodedRgbaBytes:number;}
 type AtlasPlan=AtlasPlanMetadata & (AtlasVariant & {variants?:undefined}|{variants:Record<string,AtlasVariant>});
-import type {Polygon,Vec3,Vec2,PolyTextureImageSource,ComputeTextureAtlasPlanOptions} from '@layoutit/polycss';
+import type {Polygon,Vec3,PolyTextureImageSource,ComputeTextureAtlasPlanOptions} from '@layoutit/polycss';
 import type {SilhouetteOptions,Vector3} from './ellipsoid.mts';
 type Pole='north'|'south';
 interface LayeredPolygon extends Polygon {textureImageSource:PolyTextureImageSource;latitudeIndex?:number;longitudeIndex?:number;lightingFaceIndex?:number;polarCap?:Pole;polarRole?:string;}
@@ -43,6 +43,7 @@ import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPo
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 import { polarQuad } from './texture-geometry.mts';
+import { POLAR_CAP_STYLE, requireOutwardCap } from '../../../src/renderers/css/preparation/scene/polar-cap.ts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
 import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
@@ -405,14 +406,7 @@ function createPolarCapPolygon(pole:"north"|"south", role = "surface"): LayeredP
   const planeOffset = (isInner ? -PLANET_POLAR_INNER_INSET : 0) +
     (isMaterial ? PLANET_POLAR_MATERIAL_OFFSET : 0);
   const z = sign * (PLANET_POLAR_PLANE_Z + planeOffset);
-  const vertices:Vec3[] = north
-    ? [[-radius, -radius, z], [radius, -radius, z],
-      [radius, radius, z], [-radius, radius, z]]
-    : [[-radius, radius, z], [radius, radius, z],
-      [radius, -radius, z], [-radius, -radius, z]];
-  const uvs:Vec2[] = north
-    ? [[0, 0], [1, 0], [1, 1], [0, 1]]
-    : [[0, 1], [1, 1], [1, 0], [0, 0]];
+  const { vertices, uvs } = polarQuad({ pole, radius, z });
   const tile = isInner
     ? isMaterial
       ? PLANET_POLAR_INNER_MATERIAL_TILE[pole]
@@ -625,6 +619,8 @@ function textureStyle(polygon:LayeredPolygon, index:number, imagePixels:number, 
   const preparedBackgroundImages = preparedLighting
     ? "var(--polycss-projective-texture-image)"
     : `url(${fittedGeometry.url})`;
+  // Every lane's caps follow one rule (polar-cap.ts): a disc, facing out, culled when it turns away.
+  if (polygon.polarCap) requireOutwardCap(`${config.namespace} ${polygon.texture}`, polygon.polarCap, fittedGeometry.matrix, polygon.polarRole?.startsWith("inner"));
   const style = `transform:matrix3d(${fittedGeometry.matrix})` +
     preparedAtlasDimensions(
       fittedGeometry.leafWidth,
@@ -632,7 +628,8 @@ function textureStyle(polygon:LayeredPolygon, index:number, imagePixels:number, 
     ) +
     `;background-image:${preparedBackgroundImages}` +
     `;background-position:${backgroundPosition}` +
-    `;background-size:${surfaceBackgroundSize}`;
+    `;background-size:${surfaceBackgroundSize}` +
+    (polygon.polarCap ? POLAR_CAP_STYLE : "");
   return {
     style,
     // Every leaf holds its widest image at TEXELS_PER_CSS_PIXEL, the recipe's scale as the ceiling. The ring plane, motion
@@ -788,6 +785,11 @@ function preparedCanonicalTextureStyle(
   const backgroundSize = fitted.backgroundSize
     .map((value) => formatCssLength(value))
     .join(" ");
+  // Interior shell caps and the cutaway's outer poles follow the one cap rule (polar-cap.ts), as the surface caps do.
+  if (polygon.polarCap) {
+    if (backfaceVisible) throw new TypeError(`${config.namespace} ${polygon.texture}: the ${polygon.polarCap} polar cap is never drawn from both sides.`);
+    requireOutwardCap(`${config.namespace} ${polygon.texture}`, polygon.polarCap, fitted.matrix, polygon.polarRole?.startsWith("inner"));
+  }
   return Object.freeze({
     style: `transform:matrix3d(${fitted.matrix})` +
       preparedAtlasDimensions(fitted.leafWidth, fitted.leafHeight) +
@@ -796,7 +798,8 @@ function preparedCanonicalTextureStyle(
         : `;background-image:url(\"${url2x}\")`) +
       `;background-position:${backgroundPosition}` +
       (sharedTexture ? "" : `;background-size:${backgroundSize}`) +
-      (backfaceVisible ? ";backface-visibility:visible" : ""),
+      (backfaceVisible ? ";backface-visibility:visible" : "") +
+      (polygon.polarCap ? POLAR_CAP_STYLE : ""),
     // The widest image at TEXELS_PER_CSS_PIXEL, the recipe's scale as the ceiling. A shared-texture shell face takes its
     // background from the stylesheet, which matches this fitted address (1024 × 512 px for Saturn's 64 px faces). At scale 2
     // the 162 shell faces held their @2x images at one texel per CSS pixel: an estimated 91 MB of layers in the interior view
@@ -843,14 +846,7 @@ function createInteriorPolarCapPolygon(pole:Pole, radiusScale:number, asset:Surf
     POLAR_RADIUS * radiusScale * Math.sin(boundaryLatitude) + 0.05
   );
   return {
-    vertices: north
-      ? [[-radius, -radius, z], [radius, -radius, z],
-        [radius, radius, z], [-radius, radius, z]]
-      : [[-radius, radius, z], [radius, radius, z],
-        [radius, -radius, z], [-radius, -radius, z]],
-    uvs: north
-      ? [[0, 0], [1, 0], [1, 1], [0, 1]]
-      : [[0, 1], [1, 1], [1, 0], [0, 0]],
+    ...polarQuad({ pole, radius, z }),
     texture: asset.url,
     textureImageSource: {
       url: asset.url,
