@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
 test('steps are validated before anything records', () => {
   assert.deepEqual(parseSteps([{ tap: [194, 94] }, { type: 'saturn' }, { wait: 1.5 }, { screenshot: 'after' },
@@ -10,18 +10,27 @@ test('steps are validated before anything records', () => {
   assert.throws(() => parseSteps([{ tap: [1, 2], wait: 1 }]), /exactly one action/);
   assert.throws(() => parseSteps([{ pinch: 2 }]), /unknown action/);
   assert.throws(() => parseSteps([{ screenshot: '../escape' }]), /lowercase/);
+  assert.throws(() => parseSteps([{ viewport: '../escape' }]), /lowercase/);
 });
 
 test('a device capture finds its device on USB, records no native trace by default and refuses touch steps', () => {
   const device = options(['--device', '--name', 'ipad', '--seconds', '15', '--open', '/jupiter/']);
-  assert.deepEqual([device.device, device.native, device.inspectorScreenshots, device.open], [{ udid: null }, 'off', true, '/jupiter/']);
+  assert.deepEqual([device.device, device.native, device.open], [{ udid: null }, 'off', '/jupiter/']);
   assert.deepEqual(options(['--device', '00008120-000A', '--name', 'ipad', '--seconds', '5']).device, { udid: '00008120-000A' });
   const simulator = options(['--name', 'sim', '--seconds', '5']);
-  assert.deepEqual([simulator.device, simulator.native, simulator.inspectorScreenshots], [null, 'page', false]);
+  assert.deepEqual([simulator.device, simulator.native], [null, 'page']);
   const drag = parseSteps([{ drag: { from: [1, 2], to: [3, 4], seconds: 1 } }]);
   assert.throws(() => requireStepsFor({ kind: 'device', udid: 'x' }, drag), /needs the simulator/);
   assert.doesNotThrow(() => requireStepsFor({ kind: 'simulator', udid: 'x' }, drag));
   assert.doesNotThrow(() => requireStepsFor({ kind: 'device', udid: 'x' }, parseSteps([{ script: 'void 0' }, { screenshot: 'end' }])));
+});
+
+test('screen evidence names its source and an expected page pins origin and route', () => {
+  assert.equal(screenshotArtifact({ screenshot: 'after-flight' }), 'after-flight.screen.png');
+  assert.equal(screenshotArtifact({ viewport: 'after-flight' }), 'after-flight.viewport.png');
+  assert.equal(sameCapturePage('http://192.168.0.8:4212/lutetia/', 'http://192.168.0.8:4212/lutetia/?v=pose'), true);
+  assert.equal(sameCapturePage('http://192.168.0.8:4212/lutetia/', 'http://192.168.0.8:4213/lutetia/'), false);
+  assert.equal(sameCapturePage('http://192.168.0.8:4212/earth/', 'http://192.168.0.8:4212/lutetia/'), false);
 });
 
 test('a comparison averages the runs on each side and says which way each metric moved', () => {

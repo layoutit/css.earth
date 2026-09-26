@@ -72,7 +72,12 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
     const files = await readdir(resolve(dir, 'screens')).then(names => names.filter(name => /^\d+\.jpg$/u.test(name)).sort(), () => []);
     const screens = await Promise.all(files.map(async name => ({ epochMs: Number(name.slice(0, -4)), jpeg: (await readFile(resolve(dir, 'screens', name))).toString('base64') })));
     const copy = devtoolsTrace(JSON.parse(await readFile(resolve(dir, 'trace.json'), 'utf8')), screens);
+    const receipt: unknown = await readFile(resolve(dir, 'report.json'), 'utf8').then(JSON.parse, () => null);
+    copy.metadata.capture = { directory: resolve(dir), screenSource: screens.length ? 'device-screen' : 'none', screenFrames: screens.length,
+      ...(isRecord(receipt) ? { checkout: receipt.checkout ?? null, checkoutRole: receipt.checkoutRole ?? null,
+        revision: receipt.revision ?? null, trackedChanges: receipt.trackedChanges ?? null } : {}) };
+    if (!screens.length) console.error(`${dir}: no native device-screen frames; DevTools will have no screenshot filmstrip. Inspect existing device PNGs or record a visual trace with --screens.`);
     await writeFile(resolve(dir, 'trace.devtools.json'), JSON.stringify(copy) + '\n');
-    console.log(`${dir}/trace.devtools.json: ${copy.traceEvents.length} events`);
+    console.log(`${dir}/trace.devtools.json: ${copy.traceEvents.length} events, ${screens.length} device-screen frames`);
   }
 }

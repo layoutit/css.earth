@@ -21,6 +21,7 @@ directory-specific `AGENTS.md` files add guidance for their owners.
   carries its measurement. Numeric and categorical images stay lossless. The lanes that still set their own quality are
   listed in [surface preparation](docs/surface-preparation.md#the-lossy-lane).
 - Use the affected shared package, runtime, router and rendered-page tests, plus inspected browser evidence for changed interactions or appearance. Do not duplicate body facts as declaration-only constants. The [body guide](src/objects/README.md#sources-and-delivery) lists current commands and test owners.
+- For an iPad visual report, inspect the existing named recording and its actual device screenshots with `pnpm ipad:inspect <capture directory>` before making a new capture or changing code. Web Inspector viewport snapshots are page images, not full device screens. Pin a new still to the visible Safari URL with `pnpm ipad:screen <name> --device --expect-url <url>`; use the native `--screens` filmstrip for moving frames.
 
 ## Sources and prepared delivery
 

@@ -31,11 +31,14 @@ node tools/performance/ios-capture.mts --name by-hand --seconds 15
 
 It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of
 `{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`,
-`{ "wait": seconds }`, `{ "screenshot": "name" }` and `{ "probe": "name" }` (records the scene router's state, the route
+`{ "wait": seconds }`, `{ "screenshot": "name" }`, `{ "viewport": "name" }` and `{ "probe": "name" }` (records the scene router's state, the route
 and the page's element count in the report), in simulator points, sent as real touch input. Safari keeps its cache
 as a visitor's would; `--no-cache` measures a cold load. `--open` loads the
 page in the visible tab first and waits until the app reports its body ready, then `--settle` seconds more, so each
-capture starts from a fresh, loaded page. Check the screenshots before reading any numbers: a tap that lands on the
+capture starts from a fresh, loaded page. A `screenshot` is the full device screen (or simulator screen); a `viewport`
+is only the Web Inspector page image. Their files end in `.screen.png` and `.viewport.png`, and each has a source, size
+and page URL in `report.json`. A device screenshot fails if the native screen service is unavailable; it never falls back
+to the page image. Check the screenshots before reading any numbers: a tap that lands on the
 wrong control records the wrong moment.
 
 `--compare <capture dir>` pixelmatches each screenshot against the one with the same name in an earlier capture and
@@ -101,8 +104,33 @@ node tools/performance/ios-capture.mts --device --name ipad-replay --open /jupit
 ```
 
 A `--seconds` recording plays a sound on the Mac when it starts and when it stops: use the device between the two.
-Touch steps need the simulator; on a device, script steps move the camera and screenshots come from Web Inspector (the
-page alone; `--inspector-screenshots` does the same on the simulator). Capture one origin at a time: loading another
+Touch steps need the simulator; on a device, script steps move the camera. For an iPad visual failure, first inspect the
+existing recording and its images without touching Safari:
+
+```sh
+pnpm ipad:inspect output/performance/ios-captures/<capture-directory>
+```
+
+This lists the trace URL, checkout and each image's source. Older captures without an image receipt say `source
+unrecorded`; inspect those images directly before drawing a conclusion. To make a new full-screen still during a trace,
+put `{ "screenshot": "after-flight" }` in its steps. Use `{ "viewport": "after-flight" }` only when the Safari toolbar
+is deliberately excluded. A device screenshot step needs `--open <url>` or `--expect-url <url>`; the capture checks the
+visible Safari page's origin and path before recording. The report records the capture tool's checkout path, Git revision
+and tracked-change state; the URL identifies the preview being captured.
+Trace receipts record the page URL when recording starts and ends, including flights that change routes.
+For a fast still without starting a trace or changing the page:
+
+```sh
+pnpm ipad:screen after-flight --device --expect-url http://192.168.0.8:4212/lutetia/
+```
+
+This writes a full device PNG and a source receipt under `output/performance/ios-stills/`. A different port or route
+fails before the grab. `--inspect` works on this still directory too. A single grab can take seconds; for a moving
+flight, use the native `--screens` filmstrip and inspect its frame times instead of treating a still as an exact
+mid-flight frame.
+
+`--screens` records a native device-screen filmstrip for DevTools, but continuous grabbing perturbs frame timing; use it
+for visual analysis and leave it off for performance comparisons. Capture one origin at a time: loading another
 origin moves Safari's page to a new process and drops the inspector session.
 
 [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install
