@@ -36,16 +36,18 @@ if (object && !scope && system) {
     if (parent) crumbs.push({ label: parent.name, href: parent.route });
   }
 }
-// Mission cards end their trail at the body they describe, which is the current page.
+// Keep the body in the three-crumb window; its heading replaces that final crumb.
 if (object && includeObject && !satelliteSystem) crumbs.push({ label: object.name, href: object.route });
-const visibleCrumbs = crumbs.slice(-3);
+// Body and satellite-system cards already name their subject in the heading.
+const trail = crumbs.slice(-3);
+const visibleCrumbs = currentPage && objectId ? trail.slice(0, -1) : trail;
 ---
 
 <nav {...attributes} class="object-breadcrumbs" aria-label="Breadcrumb">
   <ol>
     {visibleCrumbs.map((crumb, index) => <li>
       {index > 0 && <span class="object-breadcrumb-separator" aria-hidden="true">&raquo;</span>}
-      {currentPage && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
+      {currentPage && !objectId && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
         : crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span>{crumb.label}</span>}
     </li>)}
   </ol>

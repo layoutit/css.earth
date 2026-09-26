@@ -42,7 +42,20 @@ function sourceProviders(objectId: string) {
   providerNames.set(objectId, providers);
   return providers;
 }
-const creditLabel = (providers: readonly string[]) => providers.length ? `Sources: ${providers.join(', ')}` : 'Sources';
+const creditLabel = (providers: readonly string[]) => {
+  if (!providers.length) return 'Sources';
+  const shown: string[] = [];
+  for (const provider of providers) {
+    if (shown.length === 3 || provider.length > 20) continue;
+    const next = [...shown, provider];
+    const remaining = providers.length - next.length;
+    const label = `Sources: ${next.join(', ')}${remaining ? ` and ${remaining} more` : ''}`;
+    if (label.length <= 52) shown.push(provider);
+  }
+  if (!shown.length) return `Sources: ${providers.length} credited ${providers.length === 1 ? 'name' : 'names'}`;
+  const remaining = providers.length - shown.length;
+  return `Sources: ${shown.join(', ')}${remaining ? ` and ${remaining} more` : ''}`;
+};
 
 export function sourceDocumentation(objectId: string, name: string) {
   if (!/^[a-z0-9][a-z0-9-]*$/u.test(objectId)) throw new Error(`Invalid source document owner: ${objectId}`);
@@ -65,11 +78,7 @@ export function focusSourceDocumentation(object: PreparedCatalogObject, catalogI
 // credits. Prepare the overview's union from the system's prepared members.
 export function systemSourceDocumentation(system: { readonly id: string; readonly name: string; readonly memberIds: readonly string[] }) {
   const providers = [...new Set([system.id, ...system.memberIds].flatMap(sourceProviders))];
-  const summary = compactProviders.filter(provider => providers.includes(provider));
-  // A large system abbreviates its many providers; a small one without any abbreviated provider names them.
-  if (!summary.length) return { ...sourceDocumentation(system.id, system.name), label: creditLabel(providers) };
-  if (providers.some(provider => !compactProviders.includes(provider))) summary.push('others');
-  return { ...sourceDocumentation(system.id, system.name), label: creditLabel(summary) };
+  return { ...sourceDocumentation(system.id, system.name), label: creditLabel(providers) };
 }
 export function overviewSourceDocumentation(scope: string, name: string) {
   return sourceDocumentation(scope, name);

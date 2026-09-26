@@ -19,7 +19,6 @@ export function mountInformationCard(drawer: HTMLElement, objectId: string,
   const dataset = drawer.querySelector<HTMLDetailsElement>('.object-information-panel > .object-dataset-content');
   // The dataset is a desktop tab and a stacked mobile section, always expanded.
   if (dataset) dataset.open = true;
-  retain(createChartSwitcherController(drawer, windowTarget, lifetime));
   retain(createChartPixelAlignmentController(drawer, windowTarget));
   return {
     show: tabs.show,
@@ -65,66 +64,6 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
     const section = sections.find(panel => panel.dataset.informationPanel === id);
     if (section) section.open = true;
   }, destroy };
-}
-
-function createChartSwitcherController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const switcher = drawer.querySelector<HTMLElement>(".object-chart-switcher");
-  if (switcher === null) {
-    return Object.freeze({ destroy() {} });
-  }
-  if (!(switcher instanceof windowTarget.HTMLElement)) {
-    throw new Error("Object shell chart switcher is invalid.");
-  }
-  const previous = switcher.querySelector('.object-chart-step[data-chart-step="-1"]');
-  const next = switcher.querySelector('.object-chart-step[data-chart-step="1"]');
-  const slides = [...switcher.querySelectorAll(".object-chart-slide")]
-    .filter((slide) => slide instanceof windowTarget.HTMLElement);
-  const labels = [...switcher.querySelectorAll(".object-chart-label")]
-    .filter((label) => label instanceof windowTarget.HTMLElement);
-  if (!(previous instanceof windowTarget.HTMLButtonElement) ||
-      !(next instanceof windowTarget.HTMLButtonElement) ||
-      slides.length === 0 || labels.length !== slides.length) {
-    throw new Error("Object shell chart switcher is incomplete.");
-  }
-  const chartIds = slides.map((slide) => slide.dataset.chartId ?? "");
-  if (chartIds.some((id) => id.length === 0) ||
-      new Set(chartIds).size !== chartIds.length ||
-      labels.some((label) => !chartIds.includes(label.dataset.chartLabel ?? ""))) {
-    throw new Error("Object shell chart switcher identities are incomplete.");
-  }
-
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  let activeIndex = Math.max(0, chartIds.indexOf(switcher.dataset.activeChart ?? ""));
-  const render = (index: number, notify = true) => {
-    activeIndex = (index + slides.length) % slides.length;
-    const activeId = chartIds[activeIndex];
-    switcher.dataset.activeChart = activeId;
-    for (const slide of slides) slide.hidden = slide.dataset.chartId !== activeId;
-    for (const label of labels) label.hidden = label.dataset.chartLabel !== activeId;
-
-    const previousSlide = slides[(activeIndex - 1 + slides.length) % slides.length];
-    const nextSlide = slides[(activeIndex + 1) % slides.length];
-    previous.ariaLabel = `Previous chart: ${previousSlide.dataset.chartTitle}`;
-    next.ariaLabel = `Next chart: ${nextSlide.dataset.chartTitle}`;
-    previous.disabled = slides.length < 2;
-    next.disabled = slides.length < 2;
-    if (notify) switcher.dispatchEvent(new windowTarget.Event("chartchange"));
-  };
-  for (const button of [previous, next]) {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      render(activeIndex + Number(button.dataset.chartStep));
-    }, { signal: events.signal });
-  }
-  render(activeIndex, false);
-
-  return Object.freeze({
-    destroy() {
-      events.abort();
-    },
-  });
 }
 
 function createPanelController(drawer: HTMLElement, objectId: string, windowTarget: BrowserWindow, lifetime: SceneLifetime) {

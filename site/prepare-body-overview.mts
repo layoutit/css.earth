@@ -28,7 +28,9 @@ export async function prepareBodyOverview(objectId: string) {
   const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
   const presentationPath = resolve(sourceDirectory, 'presentation/overview.json');
   const presentation: unknown = existsSync(presentationPath) ? JSON.parse(await readFile(presentationPath, 'utf8')) : {};
-  if (!isRecord(presentation) || (presentation.classificationLabel !== undefined && typeof presentation.classificationLabel !== 'string')) throw new TypeError('Invalid object overview presentation.');
+  if (!isRecord(presentation) || (presentation.classificationLabel !== undefined && typeof presentation.classificationLabel !== 'string') ||
+      (presentation.articleUrl !== undefined && (typeof presentation.articleUrl !== 'string' ||
+        !/^https:\/\/en\.wikipedia\.org\/wiki\/[^\s?#]+$/u.test(presentation.articleUrl)))) throw new TypeError('Invalid object overview presentation.');
   const image = [`/overview/${objectId}.webp`, `/social/${objectId}.jpg`]
     .find(url => existsSync(resolve(root, 'public', url.slice(1))));
   let spectrum = null;
@@ -48,5 +50,5 @@ export async function prepareBodyOverview(objectId: string) {
       };
     }
   }
-  return { image, spectrum, classification: presentation.classificationLabel ?? objectClassificationLabel(object.classification), ...overviewMeasurements(object) };
+  return { image, spectrum, articleUrl: presentation.articleUrl, classification: presentation.classificationLabel ?? objectClassificationLabel(object.classification), ...overviewMeasurements(object) };
 }

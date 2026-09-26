@@ -68,7 +68,7 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
-const searchPlaceholder = 'Search celestial objects...';
+const searchPlaceholder = `Search ${new Intl.NumberFormat('en-US').format(SCENE_OBJECTS.length)} celestial objects...`;
 const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
 const searchCategories = [

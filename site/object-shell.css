@@ -89,23 +89,29 @@
   transform: rotate(45deg);
 }
 .object-lens-picker > .object-observation-controls {
+  --dataset-scroll-offset: calc(var(--explorer-card-padding-inline-end) / 2);
   box-sizing: border-box;
-  gap: 4px;
-  max-height: none;
+  gap: 0;
+  width: calc(100% + var(--dataset-scroll-offset));
+  max-height: 120px;
   margin-top: 0;
-  padding: 0;
-  overflow: visible;
+  margin-inline-end: calc(-1 * var(--dataset-scroll-offset));
+  padding: 0 var(--dataset-scroll-offset) 0 0;
+  overflow-x: hidden;
+  overflow-y: auto;
   border: 0;
   border-radius: 8px;
   background: transparent;
 }
-.object-lens-picker .object-observation-control { min-height: 26px; padding: 3px 0; opacity: 0.78; }
+.object-lens-picker .object-observation-control { min-height: 30px; padding: 3px 0; opacity: 0.78; }
 .object-lens-picker .object-observation-control:is([aria-pressed="true"], :hover, :focus-visible) { opacity: 1; }
 .object-lens-picker .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
-  grid-template-columns: 14px minmax(0, 1fr) max-content;
+  grid-template-columns: 14px minmax(0, max-content) minmax(16px, 1fr) max-content;
 }
-.object-lens-picker .object-thumbnail-leading > .object-lens-detail { grid-column: 3; }
-.object-lens-picker .object-observation-control:has(.object-lens-detail)::after { content: none; }
+.object-lens-picker .object-thumbnail-leading > .object-lens-detail { grid-column: 4; }
+.object-lens-picker .object-observation-control:has(.object-lens-detail)::after {
+  grid-column: 3;
+}
 @media (max-width: 820px), (orientation: portrait) {
   .object-lens-picker-display { display: flex; }
   .object-lens-picker > .object-observation-controls { display: none; }
@@ -669,6 +675,16 @@ details:not([open]) > .object-panel-summary .object-panel-icon {
   font: var(--shell-font-introduction);
   user-select: text;
 }
+.object-learn-more-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 6px;
+  color: var(--shell-text-secondary);
+  font: var(--shell-font-small);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.object-learn-more-link:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 2px; }
 
 .object-facts {
   display: grid;
@@ -1280,6 +1296,11 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   border-bottom: 1px dotted #222;
   content: "";
   transform: translateY(0.3em);
+}
+
+.object-lens-picker .object-observation-control:has(.object-lens-detail)::after,
+.object-factsheet-section .object-facts li::before {
+  border-bottom-color: rgb(255 255 255 / 28%);
 }
 
 .object-lens-detail {
@@ -1980,7 +2001,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not([hidden]) { display: block; }
   /* Section headings: the label each tab used to carry, in the sheet's panel-heading type. */
   .object-information-panel > .object-dataset-content:not(.atlas-tree-disclosure):has(> .object-lenses)::before,
-  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .atlas-tree-disclosure)::before {
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .object-charts-content, .atlas-tree-disclosure)::before {
     content: attr(aria-label);
     display: flex;
     align-items: center;
@@ -2004,7 +2025,8 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   }
   .object-information-panel:not([data-card-view="overview"]) > * { grid-column: 1 / -1; }
   .object-information-panel:not([data-card-view="overview"]) > .object-selected-panel { grid-column: 1; grid-row: 1; }
-  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="factsheet"] { grid-column: 1; grid-row: 2 / span 2; margin-top: 0; }
+  .object-information-panel:not([data-card-view="overview"]) > [data-information-panel="factsheet"] { grid-column: 1; grid-row: 2; margin-top: 0; }
+  .object-information-panel:not([data-card-view="overview"]) > .object-charts-content { grid-column: 1; grid-row: 3; }
   .object-information-panel:not([data-card-view="overview"]) > .object-dataset-content:not([hidden]) {
     display: block;
     grid-column: 2;
@@ -2047,19 +2069,19 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     width: auto;
   }
 
-  /* The distant (overview) view of a body: its portrait and spectrum on the left, its facts on the
+  /* The distant (overview) view of a body: its portrait and charts on the left, its facts on the
      right. A grid, because these panels come moons-first in the markup. */
   .object-sidebar .object-information-panel[data-card-view="overview"]:not([hidden]) {
     display: grid;
     max-height: none;
     grid-template-columns: var(--tablet-left-column) minmax(0, 1fr);
-    grid-template-areas: "head facts" "spectrum facts" "moons moons";
+    grid-template-areas: "head facts" "charts facts" "moons moons";
     align-items: start;
   }
   .object-information-panel[data-card-view="overview"] > * { width: auto; }
   .object-information-panel[data-card-view="overview"] > .object-selected-panel { grid-area: head; }
   .object-information-panel[data-card-view="overview"] > [data-information-panel="factsheet"] { grid-area: facts; margin-top: 0; }
-  .object-information-panel[data-card-view="overview"] > [data-information-panel="spectrum"] { grid-area: spectrum; }
+  .object-information-panel[data-card-view="overview"] > [data-information-panel="charts"] { grid-area: charts; }
   .object-information-panel[data-card-view="overview"] > [data-information-panel="moons"] { grid-area: moons; }
   .object-sidebar .object-information-panel[data-card-subject="satellite-system"]:not([hidden]) { display: block; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }
