@@ -1,7 +1,6 @@
 import { RASTER_DENSITY, type AtmosphereRecipe } from './config.js';
 import { raster, assetPath } from './io.js';
-import { limbFactors, limbOverlay, scatteringAngles, silhouetteColourWeight, srgbToLinear, linearToSrgb } from '../../../tools/photometry/limb.mts';
-import { loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '../../../tools/photometry/halo.mts';
+import { limbFactors, limbOverlay, scatteringAngles, silhouetteColourWeight, srgbToLinear, linearToSrgb, loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '@cssearth/bake/photometry';
 import type { PreparedLimb } from '../../renderers/css/preparation/materials/lighting.js';
 
 /**

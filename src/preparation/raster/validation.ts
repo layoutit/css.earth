@@ -1,6 +1,6 @@
 import type { LightingRecipe, RasterRecipe } from './config.js';
 import { resolveLightingRecipe } from './lighting-banks.js';
-import { parseLimbBlock } from '../../../tools/photometry/limb.mts';
+import { parseLimbBlock } from '@cssearth/bake/photometry';
 type RecordValue = Record<string, unknown>;
 function record(value: unknown, path: string): RecordValue { if (typeof value !== 'object' || value === null || Array.isArray(value))
     throw new TypeError(`${path} must be an object.`); return value as RecordValue; }

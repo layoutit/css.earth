@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { hFunction, particlePhase, shadowHidingFactor, coherentBackscatterFactor, hapkeRadianceFactor, assertHapkeModel, type HapkeModel, type ParticlePhaseFunction } from './hapke.mts';
-import { hapkeRoughness } from './roughness.mts';
+import { hFunction, particlePhase, shadowHidingFactor, coherentBackscatterFactor, hapkeRadianceFactor, assertHapkeModel, type HapkeModel, type ParticlePhaseFunction, hapkeRoughness } from '@cssearth/bake/photometry';
 
 const close = (a: number, b: number, tolerance: number, message?: string) => assert.ok(Math.abs(a - b) <= tolerance, `${message ?? ''} ${a} vs ${b}`);
 

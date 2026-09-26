@@ -1,5 +1,5 @@
 import type { LambertRasterConfig, CutawayAngles, InteriorPalette } from '@cssearth/objects';
-import type { LimbBlock } from '../../../tools/photometry/limb.mts';
+import type { LimbBlock } from '@cssearth/bake/photometry';
 /** Delivered surface map encoding. Absent means the lossy WebP default. */
 export interface SurfaceEncoding {
     format: 'jpeg';

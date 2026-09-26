@@ -8,10 +8,10 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireString, requireFiniteNumber, requireArray } from '@cssearth/core';
-import { assertDiskModel, type DiskModel } from './disk.mts';
-import { assertPhaseModel, type PhaseModel } from './phase.mts';
-import { assertHapkeModel, type HapkeModel, type ParticlePhaseFunction, type HFunctionApproximation } from './hapke.mts';
-import type { PhotometricModel, PhotometricNormalization } from './normalization.mts';
+import { assertDiskModel, type DiskModel } from './disk.ts';
+import { assertPhaseModel, type PhaseModel } from './phase.ts';
+import { assertHapkeModel, type HapkeModel, type ParticlePhaseFunction, type HFunctionApproximation } from './hapke.ts';
+import type { PhotometricModel, PhotometricNormalization } from './normalization.ts';
 
 export const PHOTOMETRIC_MODEL_SCHEMA = 'cssearth-photometric-model@1';
 const rad = Math.PI / 180;

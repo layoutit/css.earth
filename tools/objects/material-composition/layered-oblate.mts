@@ -49,7 +49,7 @@ import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
-import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../photometry/limb.mts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { tieBandRatios } from '../terrestrial-layers/photometric-observations.mts';
 import type { BandRatioPolicy } from '../terrestrial-layers/contracts.mts';

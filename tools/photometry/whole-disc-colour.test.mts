@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { tieBandRatios } from '../objects/terrestrial-layers/photometric-observations.mts';
-import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from './limb.mts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from './whole-disc-colour.mts';
 
 const record = { schema: WHOLE_DISC_COLOUR_SCHEMA, id: 'fixture', quantity: 'fixture', spectrum: {}, illuminant: {}, observer: 'fixture', linearSrgb: [0.5, 0.4, 0.25] };

@@ -7,7 +7,7 @@ import { prepareAtmosphere } from './materials.js';
 import { prepareLighting } from '../../renderers/css/preparation/materials/lighting.js';
 import { prepareInterior } from './interior.js';
 import { outputName, hashFile } from './io.js';
-import { loadLimbLaw, meanObservedColour, type LimbBlock } from '../../../tools/photometry/limb.mts';
+import { loadLimbLaw, meanObservedColour, type LimbBlock } from '@cssearth/bake/photometry';
 import type { PreparedLimb } from '../../renderers/css/preparation/materials/lighting.js';
 import type { ObservationInterpretation } from './science.js';
 export type { ObservationInterpretation, InterpretedSurface } from './science.js';

@@ -5,9 +5,9 @@
  * radianceFactor(reference) / radianceFactor(observed); multiplying an observed
  * I/F by it gives the I/F the same surface would show at the reference geometry.
  */
-import { diskGain, diskValue, type DiskModel } from './disk.mts';
-import { phaseGain, phaseValue, type PhaseModel } from './phase.mts';
-import { hapkeRadianceFactor, type HapkeModel } from './hapke.mts';
+import { diskGain, diskValue, type DiskModel } from './disk.ts';
+import { phaseGain, phaseValue, type PhaseModel } from './phase.ts';
+import { hapkeRadianceFactor, type HapkeModel } from './hapke.ts';
 
 export type PhotometricModel =
   /** A disk function times an optional phase function. */

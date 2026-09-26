@@ -23,7 +23,7 @@ import sharp from "sharp";
 import type { EllipsoidAttitude } from './attitude.mts';
 import { LIT_DEFAULT_VIEW } from '../../../src/platform/default-camera.mts';
 import { readCoraltempAnomaly } from "./sst-anomaly.mts";
-import { limbFactors, limbOverlay, scatteringAngles } from '../../photometry/limb.mts';
+import { limbFactors, limbOverlay, scatteringAngles } from '@cssearth/bake/photometry';
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mts";
 import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mts";

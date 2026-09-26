@@ -3,7 +3,7 @@ import { copyFile } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { lightingFrame, type LambertRasterConfig } from '@cssearth/objects';
-import { limbSphereFrame, type Channels, type LimbLaw } from '../../../../../tools/photometry/limb.mts';
+import { limbSphereFrame, type Channels, type LimbLaw } from '@cssearth/bake/photometry';
 import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from '../../../../preparation/raster/config.js';
 import { raster, hashFile, outputName } from '../../../../preparation/raster/io.js';
 import { LIGHTING_BANK_ROOT } from '../../../../preparation/raster/lighting-banks.js';

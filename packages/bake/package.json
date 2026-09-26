@@ -2,7 +2,7 @@
   "name": "@cssearth/bake",
   "version": "0.0.0",
   "private": true,
-  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, and the Node-only volume bake (compact inputs, slices and the compiler).",
+  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), and the photometric models that preparation draws limbs from.",
   "type": "module",
   "files": [
     "dist"
@@ -18,6 +18,11 @@
       "types": "./dist/volume/node.d.ts",
       "import": "./dist/volume/node.js",
       "default": "./dist/volume/node.js"
+    },
+    "./photometry": {
+      "types": "./dist/photometry.d.ts",
+      "import": "./dist/photometry.js",
+      "default": "./dist/photometry.js"
     },
     "./package.json": "./package.json"
   },

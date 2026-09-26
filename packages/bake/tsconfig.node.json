@@ -7,7 +7,8 @@
     "tsBuildInfoFile": "../../output/tsbuildinfo/packages-bake-node.tsbuildinfo"
   },
   "include": [
-    "src/volume/node"
+    "src/volume/node",
+    "src/photometry"
   ],
   "exclude": [
     "src/**/*.test.ts"

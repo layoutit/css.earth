@@ -7,7 +7,7 @@ import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, textureTintFactors } from '@layoutit/polycss';
 import { leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
-import { floodDiscMean, loadLimbLaw } from '../../photometry/limb.mts';
+import { floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { prepareSurfaceColour, widestPublishedImage } from './layered-oblate.mts';
 import { polarQuad } from './texture-geometry.mts';
