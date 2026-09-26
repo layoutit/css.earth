@@ -27,20 +27,13 @@
   "projection": {
     "tileSize": 50,
     "layerElevation": 50,
-    "seamBleed": 0,
+    "seamBleed": 0.15,
     "interiorSeamBleed": 8,
-    "overlap": 0.0078125,
-    "seamOutset": {
-      "targetPixels": 0.5,
-      "stepRatio": 1.4142135623730951,
-      "hysteresis": 0.1,
-      "firstDiameter": 16,
-      "lastDiameter": 32768
-    },
+    "overlap": 0.05,
     "fitToSource": false,
     "rasterScale": 2.5,
     "rasterGutter": 10,
-    "rasterOverscan": 0.5,
+    "rasterOverscan": 0,
     "projectivePoles": false,
     "lightColor": "#ffffff",
     "ambientIntensity": 0.7539822368615503
