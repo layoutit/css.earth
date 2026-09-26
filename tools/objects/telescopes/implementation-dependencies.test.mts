@@ -65,7 +65,7 @@ test('the FITS reader package is followed into its sources, as when it was a loc
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the source catalogue and manifest checks are followed into @cssearth/objects, as when they sat under src/platform', async () => {
+test('the source catalogue, manifest checks and main entry are followed into @cssearth/objects, as when they sat under src/platform and site', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-objects-'));
   try {
     await writeFile(resolve(root, 'entry.mts'), "import { parseSourceBinding } from '@cssearth/objects/sources'; import { validateSourceManifest } from '@cssearth/objects/node'; import { parseObjectDescriptor } from '@cssearth/objects';\nexport const used=[parseSourceBinding,validateSourceManifest,parseObjectDescriptor];\n");
@@ -74,10 +74,18 @@ test('the source catalogue and manifest checks are followed into @cssearth/objec
     await writeFile(resolve(root, 'packages/objects/src/sources/catalog.ts'), 'export const parseSourceBinding=()=>1;\n');
     await writeFile(resolve(root, 'packages/objects/src/sources/index.ts'), "export * from './catalog.js';\n");
     await writeFile(resolve(root, 'packages/objects/src/node/index.ts'), 'export const validateSourceManifest=()=>2;\n');
+    await mkdir(resolve(root, 'packages/objects/src/registry'), { recursive: true });
+    await writeFile(resolve(root, 'packages/objects/src/registry/world-rotation.ts'), 'export const parseObjectDescriptor=()=>4;\n');
+    await writeFile(resolve(root, 'packages/objects/src/index.ts'), "export { parseObjectDescriptor } from './registry/world-rotation.js';\n");
     const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/objects/src/node/index.ts', 'packages/objects/src/sources/catalog.ts', 'packages/objects/src/sources/index.ts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/objects/src/index.ts', 'packages/objects/src/node/index.ts',
+      'packages/objects/src/registry/world-rotation.ts', 'packages/objects/src/sources/catalog.ts', 'packages/objects/src/sources/index.ts']);
     await writeFile(resolve(root, 'packages/objects/src/sources/catalog.ts'), 'export const parseSourceBinding=()=>3;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const changedSources = await implementationFingerprint(root, ['entry.mts']);
+    assert.notEqual(changedSources.sha256, before.sha256);
+    // A dependency of the main entry is an owner too: the renderer's world-rotation validation lives there now.
+    await writeFile(resolve(root, 'packages/objects/src/registry/world-rotation.ts'), 'export const parseObjectDescriptor=()=>5;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, changedSources.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
