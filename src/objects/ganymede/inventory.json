@@ -57,12 +57,6 @@
     },
     {
       "location": "public",
-      "filename": "ganymede-poles-dark-material@2x.webp",
-      "bytes": 9526,
-      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
-    },
-    {
-      "location": "public",
       "filename": "ganymede-poles-enhanced@2x.webp",
       "bytes": 226008,
       "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929"
@@ -72,12 +66,6 @@
       "filename": "ganymede-poles-geology@2x.webp",
       "bytes": 11260,
       "sha256": "d0a72f2188303c037b1db6b635e8e33bfdfd3741d06fa612b3e8c550f2faedba"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-poles-ice-fraction@2x.webp",
-      "bytes": 9526,
-      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
     },
     {
       "location": "public",
@@ -311,7 +299,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1423,
-      "sha256": "8dfe9028db1c239d7084eda7c200ac3b48877bb5da77a385c03d295491af17a7"
+      "sha256": "353f30d775adb1efb2246aa3131b3531e4b52f64dbf2a52a9ecaf4803d6cea05"
     },
     {
       "location": "prepared",
@@ -339,12 +327,6 @@
     },
     {
       "location": "prepared",
-      "filename": "material.json",
-      "bytes": 24509,
-      "sha256": "eb863aae3a0faf1e84683b84f1df8125fa45df7f6cdcb19fa6b08ca1d2c3cee0"
-    },
-    {
-      "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 323,
       "sha256": "c816beff57ef26038cdcd2da510491e4e2111024430d5a550533eefcd9ffd5c8"
@@ -352,8 +334,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/enhanced.webp",
-      "bytes": 10606,
-      "sha256": "12f508f4cca2e9584b5a7ad7b160aff75b64074ffd034c53efb15b5a0be20082"
+      "bytes": 10770,
+      "sha256": "c4c13386ff9667da297347135ff5e4d80a70caf0fe661d26ba959ad265a7d8cf"
     },
     {
       "location": "prepared",
@@ -364,8 +346,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 8272,
-      "sha256": "faab37239a802fa2c51118413b568f12c232f3b8ea7b3c5f1b8b5e5b30fc383e"
+      "bytes": 8544,
+      "sha256": "fc876f9436ed04432ea8f34fdd275ae7add9bc8167dfa735386794d5f961fd24"
     },
     {
       "location": "prepared",
@@ -376,14 +358,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 580043,
-      "sha256": "b21d2cf4f03c769218460e2f90c0c7448f9f606fb8a2ad8fa53f5c449ba321ee"
+      "bytes": 580023,
+      "sha256": "961c71978a3070fa1fbd0e9b6c840d31f28f3d7ebf7f774ef4943784387055e3"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 373956,
-      "sha256": "820af3131cb071ff25d09ff875f3647641f97cbf8a68838ae263db3a73afdf69"
+      "bytes": 373936,
+      "sha256": "223518874003193e0c6ba5265082c72bc8ec08957aa8c83f288639b931e3d649"
     },
     {
       "location": "prepared",
@@ -399,9 +381,9 @@
     },
     {
       "location": "prepared",
-      "filename": "surfaces.json",
-      "bytes": 9461,
-      "sha256": "e241c5e347fb71b44e8158e5bb1727891995a50b31fa1640a719dba6c62ac5db"
+      "filename": "world-navigation.json",
+      "bytes": 1214,
+      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
     },
     {
       "location": "prepared",
@@ -411,9 +393,15 @@
     },
     {
       "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1214,
-      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
+      "filename": "material.json",
+      "bytes": 24509,
+      "sha256": "eb863aae3a0faf1e84683b84f1df8125fa45df7f6cdcb19fa6b08ca1d2c3cee0"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 9461,
+      "sha256": "e241c5e347fb71b44e8158e5bb1727891995a50b31fa1640a719dba6c62ac5db"
     }
   ]
 }
