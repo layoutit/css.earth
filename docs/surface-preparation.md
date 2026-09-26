@@ -710,6 +710,30 @@ handoff with the [iPad journey recorder](../tools/performance/README.md),
 inspecting native frames through the reveal and final zoom. The same trace
 records released scene resources, DOM counts and WebKit memory categories.
 
+### Arrival evidence
+
+The 2026-09-26 preparation at `95d442c8c0` covers all 722 body scenes:
+1,444 inventoried files and 28,064,758 image bytes. Each image is 1024 square;
+its receipt matched the runtime, default dataset, camera rotation and both
+inventory hashes. Quaoar's rings required a distance of 16 radii; the other
+721 captures used eight. The [representative sheet](performance/evidence/arrival-billboards/overview.webp)
+shows the existing datasets, including their unobserved regions and modeled colours.
+
+The [Earth-to-Lutetia sequence](performance/evidence/arrival-billboards/earth-to-lutetia.webp)
+contains eight of 50 native iPad frames from the performance build at that
+revision (iPad15,7, iOS 26.6, portrait). Times are relative to the first screen
+grab. The 4.902, 5.213 and 5.377 second frames bracket the billboard reveal;
+the silhouette stays aligned, then the mesh finishes the responsive zoom.
+The route reached ready with no console errors. The scene-release record
+reported Earth's resource owners and decoded image entries cleared.
+Only documentation evidence was untracked during this run.
+
+The full capture remains under ignored
+`output/performance/ios-captures/all-body-billboard-handoff-2026-09-26T23-56-31-481Z/`.
+This is device evidence for that journey, not an exhaustive device test of all
+722 arrivals. Shared projection tests cover other viewport focal lengths and
+camera-root offsets; browser GPU residency still requires visual inspection.
+
 ## Refresh photographs without rebuilding geometry
 
 Existing single-model spacecraft observation lenses can refresh through the same
