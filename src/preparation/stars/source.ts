@@ -3,7 +3,8 @@ import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
 import type { PreparedStar, Rgb, StarsRecipe } from './types.js';
 import { sourceBytes } from '@cssearth/bake/volume/node';
-import { catalogueColor, nearestColor } from './color.js';
+import { catalogueColor } from '@cssearth/engine';
+import { nearestColor } from './color.js';
 function column(catalogue: Catalog, name: string): Float32Array {
   const value = catalogue.numeric(name);
   if (!(value instanceof Float32Array)) throw new TypeError(`Star ${name} column must be float32.`);
