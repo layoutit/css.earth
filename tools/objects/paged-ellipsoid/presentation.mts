@@ -23,6 +23,7 @@ import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platf
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
+import { textureTileStyles, tiledTextureKeys } from "@cssearth/renderer";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";
@@ -82,7 +83,13 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   if(seamOutset)system.style.setProperty(seamOutset.property,seamOutsetInitialValue(seamOutset,cameraPlan.logicalBodyDiameter));
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);
   const pages=plan.body.assets.surface.urls.length;
-  const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++)node.style.setProperty(`--${config.namespace}-surface-page-${i}`,urls.length?`url("${urls[i]}")`:"none");};
+  // A page the first level draws from a sheet also carries its tile (prepared-texture-levels.ts), as a commit writes it.
+  const tiledKeys=tiledTextureKeys(textureLevels?.textureLevels),initialTiles=textureLevels?.textureLevels.levels[0]?.tiles??{};
+  const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++){
+    const name=`--${config.namespace}-surface-page-${i}`,key=pageKeys(defaultLens)[i]!;
+    node.style.setProperty(name,urls.length?`url("${urls[i]}")`:"none");
+    if(urls.length&&tiledKeys.has(key))for(const [property,value] of textureTileStyles(name,initialTiles[key]))node.style.setProperty(property,value);
+  }};
   function bands(parent: PreparedNode,records: PagedPlan['body']['bands'],className: string,polarClass: string,marker: string,urls: readonly string[],poles: string | null) {
     const grouped=new Map<string, PreparedNode>(),surface: PreparedNode[]=[],polar: PreparedNode[]=[];
     for(const band of records) {
@@ -172,8 +179,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
       // What the default view shows (shadows off): its pages and poles at the first level, the shadowless lighting and
       // the atmosphere's flood frame. The default-pose materials are only base styles every variant overwrites.
-      startup:[...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),"shadowless:lighting",
-        ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))]},
+      // A sheet level maps every page to one resource, which the first view loads once.
+      startup:[...new Set([...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),"shadowless:lighting",
+        ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))])]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null},...(seamOutset?[seamOutsetBinding(seamOutset,index(system))]:[])],animations:[],
     motionFrame:[index(system),index(body.surface[0])]};
  return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,

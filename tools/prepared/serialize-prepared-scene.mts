@@ -1,4 +1,4 @@
-import { initialObjectSelection, resolvePreparedAssetUrl, rewritePreparedStyleUrls } from '@cssearth/renderer';
+import { initialObjectSelection, resolvePreparedAssetUrl, rewritePreparedStyleUrls, textureTileStyles, tiledTextureKeys } from '@cssearth/renderer';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
@@ -68,15 +68,20 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
   }
   // The base view uses the same initial prepared texture level as an interactive mount.
-  const textureResources = definition.textureLevels?.levels[0]?.resources;
+  const textureResources = definition.textureLevels?.levels[0]?.resources, tiledKeys = tiledTextureKeys(definition.textureLevels);
   for (const binding of variant.writes) {
     const element = target(binding.target);
     if (binding.kind === 'attribute') {
       if (binding.value === null) delete element.attributes[binding.name]; else element.attributes[binding.name] = binding.value;
     } else if (binding.kind === 'class') {
       if (binding.value) element.classes.add(binding.name); else element.classes.delete(binding.name);
-    } else write(binding.target, binding.name, binding.kind === 'texture'
-      ? texture(binding.resource === null ? null : textureResources?.[binding.resource] ?? binding.resource) : binding.value);
+    } else {
+      write(binding.target, binding.name, binding.kind === 'texture'
+        ? texture(binding.resource === null ? null : textureResources?.[binding.resource] ?? binding.resource) : binding.value);
+      // A page the first level draws from a sheet reads its tile beside the image (prepared-presentation.ts commits the same).
+      if (binding.kind === 'texture' && binding.resource !== null && tiledKeys.has(binding.resource))
+        for (const [name, value] of textureTileStyles(binding.name, definition.textureLevels?.levels[0]?.tiles?.[binding.resource])) write(binding.target, name, value);
+    }
   }
   for (const selected of variant.materials) {
     const track = definition.materials.find(track => track.id === selected.track);

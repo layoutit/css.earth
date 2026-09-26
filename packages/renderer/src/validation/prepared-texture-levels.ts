@@ -19,7 +19,7 @@ export function requireTextureLevels(value: unknown, variants: readonly Pick<Pre
   }
   let previous = -1; let addresses: string[] | undefined;
   for (const [i, input] of plan.levels.entries()) {
-    const level = record(input, ['minimumDiameter', 'resources']);
+    const level = record(input, ['minimumDiameter', 'resources', 'tiles']);
     if (typeof level.minimumDiameter !== 'number' || !Number.isFinite(level.minimumDiameter) || level.minimumDiameter <= previous || i === 0 && level.minimumDiameter !== 0) throw new TypeError('Invalid prepared texture levels.');
     previous = level.minimumDiameter;
     const mapping = record(level.resources), keys = Object.keys(mapping).sort();
@@ -28,6 +28,12 @@ export function requireTextureLevels(value: unknown, variants: readonly Pick<Pre
     for (const [source, target] of Object.entries(mapping)) {
       if (!textures.has(source) || !resources.has(source) || typeof target !== 'string' || !resources.has(target)) throw new TypeError('Invalid prepared texture levels.');
       if (variants.some(variant => variant.writes.some(write => write.kind === 'texture' && write.resource === source) && !variant.required.includes(source))) throw new TypeError('Invalid prepared texture levels.');
+    }
+    // A sheet tile: the page's offset in the sheet and the sheet's width over the page's, for a page this level maps.
+    if (level.tiles !== undefined) for (const [source, input] of Object.entries(record(level.tiles))) {
+      const tile = record(input, ['x', 'y', 'scale']);
+      if (!(source in mapping) || ![tile.x, tile.y, tile.scale].every(value => typeof value === 'number' && Number.isFinite(value)) ||
+        (tile.x as number) < 0 || (tile.y as number) < 0 || !((tile.scale as number) >= 1)) throw new TypeError(`Invalid prepared texture tile ${source}: ${JSON.stringify(input)}.`);
     }
   }
 }

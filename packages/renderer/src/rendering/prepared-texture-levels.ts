@@ -16,10 +16,27 @@ export interface PreparedTexturePlacements {
 export interface PreparedTextureLevels {
   hysteresis: number;
   fixedLevel?: number;
-  levels: readonly { minimumDiameter: number; resources: Readonly<Record<string, string>> }[];
+  /** `tiles`: at a small level every page of a bank is one tile of a shared sheet (paged-ellipsoid texture-levels.mts). */
+  levels: readonly { minimumDiameter: number; resources: Readonly<Record<string, string>>; tiles?: Readonly<Record<string, PreparedTextureTile>> }[];
   /** A write whose faces are off screen or behind the body keeps the first level: sharper texels there are never seen,
    * and a browser decodes a whole image to draw any of it. */
   placements?: PreparedTexturePlacements;
+}
+
+/** Where a page sits in the sheet its level shares with the bank's other pages, in the page's own CSS atlas units: the
+ * tile's offset, and the sheet's width over the page's. */
+export interface PreparedTextureTile { x: number; y: number; scale: number }
+
+/** The page textures some level draws from a sheet. Their writes carry the tile beside the image, at every level. */
+export function tiledTextureKeys(levels: PreparedTextureLevels | undefined): Set<string> {
+  return new Set(levels?.levels.flatMap(level => Object.keys(level.tiles ?? {})) ?? []);
+}
+
+/** The custom properties a tiled page's leaves read beside its image (paged-ellipsoid scene.mts): the tile's offset and
+ * scale, or the page's own (no offset, scale 1) when the level draws the page itself. */
+export function textureTileStyles(name: string, tile: PreparedTextureTile | undefined): readonly (readonly [string, string])[] {
+  // Unitless: the leaves multiply them by inline lengths, which preparation scales with the leaf's raster.
+  return [[`${name}-x`, String(tile?.x ?? 0)], [`${name}-y`, String(tile?.y ?? 0)], [`${name}-scale`, String(tile?.scale ?? 1)]];
 }
 
 /** Faces within this share of the larger viewport side beyond its edge, or this far past the horizon, count as seen,

@@ -27,6 +27,12 @@ test("scales inline prepared background addresses and refuses variable-backed on
   assert.equal(style.backgroundSize, "4160px 3072px");
   assert.throws(() => scalePreparedBackgroundAddresses({ ...style, backgroundPosition: "var(--mercury-surface-position)" }, 4),
     /background-position must be inline lengths, not var\(--mercury-surface-position\)/u);
+  // A unitless variable multiplying an inline length scales with it: a sheet tile's offset (paged-ellipsoid scene.mts).
+  const tiled = { ...style, backgroundPosition: "calc(-1px * var(--p-x, 0) - 2px) 0px", backgroundSize: "calc(10px * var(--p-scale, 1)) auto" };
+  scalePreparedBackgroundAddresses(tiled, 4);
+  assert.equal(tiled.backgroundPosition, "calc(-4px * var(--p-x, 0) - 8px) 0px");
+  assert.equal(tiled.backgroundSize, "calc(40px * var(--p-scale, 1)) auto");
+  assert.throws(() => scalePreparedBackgroundAddresses({ ...style, backgroundPosition: "calc(var(--p-x) - 2px) 0px" }, 4), /must be inline lengths/u);
 });
 
 test("scaled projective leaves reject missing prepared dimensions and texture size", () => {

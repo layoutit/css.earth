@@ -167,7 +167,8 @@ test("Uranus retains only active plus latest pending prepared neighborhoods", as
 });
 
 test("Earth complete page groups retain the committed bank with only two pending decodes", async () => {
-  const pageEntries=definitions.earth.assets.entries.filter(entry=>entry.pool==='pages'),groups=new Map<string, string[]>();
+  // A complete bank is one dataset's full pages; its small levels are page levels or one shared sheet.
+  const pageEntries=definitions.earth.assets.entries.filter(entry=>entry.pool==='pages'&&entry.key.startsWith('page:')&&!entry.key.includes(':level:')),groups=new Map<string, string[]>();
   for(const entry of pageEntries){const id=entry.key.split(':')[1];if(!groups.has(id))groups.set(id,[]);groups.get(id)?.push(entry.url);}
   const banks=[...groups.values()].map(surfaceUrls=>({surfaceUrls}));
   const urls = banks.flatMap(lens => lens.surfaceUrls);

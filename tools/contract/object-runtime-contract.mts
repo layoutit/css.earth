@@ -48,9 +48,10 @@ export function requirePreparedResourceCatalog(input: unknown): PreparedAssets {
 }
 
 function requireResourceKeys(values: unknown, entries: ReadonlyMap<string, unknown>, label: string): void {
-  if (!Array.isArray(values) || new Set(values).size !== values.length ||
-      (values as unknown[]).some(key => typeof key !== 'string' || !entries.has(key))) {
-    throw new TypeError(`${label} contains duplicate or undeclared resource keys.`);
+  if (!Array.isArray(values)) throw new TypeError(`${label} is not a list of resource keys.`);
+  const duplicate = values.filter((key, index) => values.indexOf(key) !== index), undeclared = values.filter(key => typeof key !== 'string' || !entries.has(key));
+  if (duplicate.length || undeclared.length) {
+    throw new TypeError(`${label} contains duplicate (${duplicate.slice(0, 5).join(', ') || 'none'}) or undeclared (${undeclared.slice(0, 5).map(String).join(', ') || 'none'}) resource keys.`);
   }
 }
 

@@ -6,7 +6,7 @@ export interface TextureLevelConfiguration {widths:readonly number[];fixedWidth?
 interface TextureLevelAsset {url:string;decodedBytes:number}
 interface TextureLevelReceipt {source:string;sourceSha256:string;url:string;sha256:string;width:number;height:number;bottomPadding:number}
 import sharp from 'sharp';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, rm } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { requireSurfacePages, surfaceBankInventory } from './surface-banks.mts';
 import { encodeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
@@ -24,6 +24,29 @@ function losslessWebp(bytes: Buffer): boolean {
 
 export interface TextureLevelBank {id: string; urls: readonly string[]}
 
+/** A level whose sheet stays within this side draws every page of a bank from one square sheet: the first view then
+ * loads one image per bank instead of one per page (Earth: 112 square pages; about 70 requests at the full globe). */
+const SHEET_MAXIMUM_SIDE = 4096;
+/** Every level scales a page by a power of two down to 1/16, so sheet positions stay whole pixels at every level. */
+const SHEET_STEP = 16;
+
+/** Shelf-pack square pages, largest first, into the smallest square sheet (sides and positions in canonical pixels). */
+export function packTextureSheet(sides: readonly number[]): { side: number; positions: { x: number; y: number }[] } {
+  if (!sides.length || sides.some(side => !Number.isInteger(side) || side <= 0 || side % SHEET_STEP)) throw new TypeError(`Texture sheet pages must be positive multiples of ${SHEET_STEP}: ${sides.join(', ')}.`);
+  const order = sides.map((side, index) => ({ side, index })).sort((a, b) => b.side - a.side || a.index - b.index);
+  const place = (width: number) => {
+    const positions: { x: number; y: number }[] = [];
+    let x = 0, y = 0, shelf = 0;
+    for (const { side, index } of order) {
+      if (x + side > width) { x = 0; y += shelf; shelf = 0; }
+      positions[index] = { x, y }; x += side; shelf = Math.max(shelf, side);
+    }
+    return y + shelf <= width ? positions : null;
+  };
+  let side = Math.ceil(Math.sqrt(sides.reduce((sum, value) => sum + value * value, 0)) / SHEET_STEP) * SHEET_STEP;
+  for (;; side += SHEET_STEP) { const positions = place(side); if (positions) return { side, positions }; }
+}
+
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
@@ -40,20 +63,25 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     ? selectedBanks.map(bank=>({id:bank.id,urls:requireSurfacePages(bank.urls,`Texture level ${bank.id}`,config.publicBase)}))
     : plan&&lenses ? surfaceBankInventory(plan,lenses,config.publicBase) : (()=>{throw new TypeError('Texture levels require prepared surface banks.');})();
   if(!banks.length||new Set(banks.map(bank=>bank.id)).size!==banks.length)throw new TypeError('Texture level banks must be distinct.');
-  const entries: (TextureLevelAsset & {key:string;pool:string})[] = [], receipts: TextureLevelReceipt[] = [], levels = widths.map((width, i) => ({
+  type Level = {minimumDiameter:number;resources:Record<string,string>;tiles?:Record<string,{x:number;y:number;scale:number}>};
+  const entries: (TextureLevelAsset & {key:string;pool:string})[] = [], receipts: TextureLevelReceipt[] = [], levels: Level[] = widths.map((width, i) => ({
     // The canonical atlas density is relative to the authored logical globe.
     minimumDiameter: i ? config.camera.logicalBodyDiameter * config.atlas.density *
       widths[i - 1] / canonicalWidth / texelsPerCssPixel : 0,
     resources: {} as Record<string,string>,
   }));
   const urls = new Map<string, TextureLevelAsset[]>();
+  const pageDimensions = new Map<string, { width: number; height: number; lossless: boolean }>();
   await mkdir(publicDirectory, { recursive: true });
   const prepare = async (key: string, url: string, pool: string) => {
     let prepared = urls.get(url);
     if (!prepared) {
       const source = await readFile(resolve(publicDirectory, url.slice(config.publicBase.length)));
       const { width, height } = await sharp(source).metadata();
-      if (!width || canonicalWidth % width || !height) throw new TypeError(`Atlas dimensions differ: ${url}`);
+      if (width && height) pageDimensions.set(url, { width, height, lossless: losslessWebp(source) });
+      // Any page width works when every level scales it to whole pixels (checked per level below); square pages are not
+      // halvings of the canonical width.
+      if (!width || !height) throw new TypeError(`Atlas dimensions differ: ${url}`);
       prepared = [];
       for (const levelWidth of widths) {
         const targetWidth = width * levelWidth / canonicalWidth;
@@ -83,6 +111,47 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     }
   };
   for (const bank of banks) for (const [page, url] of bank.urls.entries()) await prepare(`page:${bank.id}:${page}`, url, 'pages');
+  // Small levels: each bank's pages become tiles of one square sheet, which every page's resource then names.
+  const sheets: { url: string; sha256: string; side: number; pages: { source: string; x: number; y: number }[] }[] = [];
+  const sheetUrls = new Map<string, { key: string; url: string; tiles: { x: number; y: number; scale: number }[] }>();
+  const replaced = new Set<string>();
+  for (const bank of banks) {
+    const dimensions = bank.urls.map(url => pageDimensions.get(url)!);
+    if (dimensions.some(page => page.width !== page.height)) continue;
+    const packed = packTextureSheet(dimensions.map(page => page.width));
+    for (const [i, levelWidth] of widths.entries()) {
+      const side = packed.side * levelWidth / canonicalWidth;
+      if (i === widths.length - 1 || side > SHEET_MAXIMUM_SIDE) continue;
+      const cacheKey = `${levelWidth}:${bank.urls.join(',')}`;
+      let sheet = sheetUrls.get(cacheKey);
+      if (!sheet) {
+        const url = `${config.publicBase}${basename(bank.urls[0]!, '.webp')}-sheet-${levelWidth}.webp`, scale = levelWidth / canonicalWidth;
+        const parts = await Promise.all(bank.urls.map(async (page, p) => {
+          replaced.add(urls.get(page)![i]!.url);
+          // From the full page, reduced once and kept lossless until the sheet is encoded: its own lossy level would be
+          // encoded twice.
+          const full = await readFile(resolve(publicDirectory, page.slice(config.publicBase.length)));
+          const input = await sharp(full).ensureAlpha().resize(dimensions[p]!.width * scale, dimensions[p]!.height * scale, { kernel: 'lanczos3' }).png().toBuffer();
+          return { input, left: packed.positions[p]!.x * scale, top: packed.positions[p]!.y * scale };
+        }));
+        const canvas = sharp({ create: { width: side, height: side, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(parts);
+        const output = dimensions[0]!.lossless ? await canvas.webp({ lossless: true, effort: 4 }).toBuffer() : await encodeLossyWebp(sharp(await canvas.png().toBuffer()), { alphaQuality: 100, effort: 4 });
+        await writeFile(resolve(publicDirectory, url.slice(config.publicBase.length)), output);
+        sheets.push({ url, sha256: sha256(output), side, pages: bank.urls.map((source, p) => ({ source, ...packed.positions[p]! })) });
+        const key = `sheet:${bank.id}:level:${levelWidth}`;
+        entries.push({ key, url, decodedBytes: side * side * 4, pool: 'pages' });
+        sheet = { key, url, tiles: dimensions.map((page, p) => ({ x: packed.positions[p]!.x / config.atlas.density, y: packed.positions[p]!.y / config.atlas.density, scale: packed.side / page.width })) };
+        sheetUrls.set(cacheKey, sheet);
+      }
+      const level = levels[i]!;
+      level.tiles ??= {};
+      for (const p of bank.urls.keys()) { level.resources[`page:${bank.id}:${p}`] = sheet.key; level.tiles[`page:${bank.id}:${p}`] = { ...sheet.tiles[p]! }; }
+    }
+  }
+  // The pages' own small levels only fed their sheets: they are neither offered nor published.
+  for (let i = entries.length - 1; i >= 0; i--) if (replaced.has(entries[i]!.url)) entries.splice(i, 1);
+  for (let i = receipts.length - 1; i >= 0; i--) if (replaced.has(receipts[i]!.url)) receipts.splice(i, 1);
+  for (const url of replaced) await rm(resolve(publicDirectory, url.slice(config.publicBase.length)), { force: true });
   // A surface lens's pole atlas has its pages' texel density, so each level scales it by the pages' ratio; the first
   // view then loads its poles at the same level as its pages instead of at full resolution.
   for (const lens of lenses?.controls ?? []) if (lens.view !== 'interior' && lens.polesUrl) await prepare(`poles:${lens.id}`, lens.polesUrl, 'mounted');
@@ -101,10 +170,14 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
     if (!lensIds.size) throw new TypeError(`${map.name}: maximumTextureWidth names a map no surface bank reads.`);
     for (const level of levels.slice(capIndex + 1)) for (const key of Object.keys(level.resources)) {
       const lens = /^(?:page|poles):([^:]+)/u.exec(key)?.[1];
-      if (lens && lensIds.has(lens)) level.resources[key] = levels[capIndex]!.resources[key]!;
+      if (!lens || !lensIds.has(lens)) continue;
+      level.resources[key] = levels[capIndex]!.resources[key]!;
+      const tile = levels[capIndex]!.tiles?.[key];
+      // A copy: the presentation contract refuses an object shared between two places as cyclic.
+      if (tile) (level.tiles ??= {})[key] = { ...tile }; else if (level.tiles) delete level.tiles[key];
     }
   }
   const offered = maximumWidth === undefined ? levels : levels.slice(0, widths.indexOf(maximumWidth) + 1);
   return { textureLevels: { hysteresis, levels: offered }, entries, maximumDecodedBytes,
-    provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel, receipts } };
+    provenance: { schema: 'cssearth-prepared-texture-levels@1', kernel: 'lanczos3', encoding: 'source-webp-encoding', texelsPerCssPixel, receipts, sheets } };
 }
