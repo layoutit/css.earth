@@ -82,6 +82,7 @@
       {
         "id": "debris-disc-visible",
         "label": "Debris disc · Hubble visible light",
+        "scope": "system",
         "thumbnail": "beta-pictoris-lens-color.webp",
         "volume": {
           "objectId": "beta-pictoris-disc",
@@ -110,6 +111,7 @@
       {
         "id": "debris-disc-colour",
         "label": "Debris disc · Hubble colour",
+        "scope": "system",
         "thumbnail": "beta-pictoris-lens-color.webp",
         "volume": {
           "objectId": "beta-pictoris-disc",
@@ -143,6 +145,7 @@
       {
         "id": "debris-disc",
         "label": "Debris disc · JWST 2.1 and 4.1 µm",
+        "scope": "system",
         "thumbnail": "beta-pictoris-lens-color.webp",
         "volume": {
           "objectId": "beta-pictoris-disc",

@@ -30,6 +30,8 @@ export interface LensSource {
 export interface LensRecipe {
   id: string;
   label: string;
+  /** The observation covers the host system rather than just its body. */
+  scope?: "system";
   shortLabel?: string;
   /** Maintainer notes about the dataset. They are never published; reader text lives in the package's text.json. */
   notes?: string;

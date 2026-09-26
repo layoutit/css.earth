@@ -1,8 +1,8 @@
 /** Keep one copy of body content while presenting it on the system card, including native responses. */
 export function createSystemCardContent(documentTarget: Document) {
   const groups = [
-    { source: '[data-lens-volume]', target: '[data-system-dataset-options]' },
-    { source: '[data-lens-volume-details]', target: '[data-system-dataset-details]' },
+    { source: '[data-system-dataset]', target: '[data-system-dataset-options]' },
+    { source: '[data-system-dataset-details]', target: '[data-system-dataset-details]' },
     { source: 'details.object-gallery-panel', target: '[data-system-galleries]' },
   ];
   const entries = groups.flatMap(({ source, target }) => {
