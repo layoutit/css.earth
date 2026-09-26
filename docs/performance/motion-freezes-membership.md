@@ -56,3 +56,11 @@ These change paint every frame on purpose, and each has a budget:
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
 | Batched star points (`universe/batched-spatial-points.ts`) | `box-shadow` point lists | 8 nodes | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
+| Surface minimap viewport boxes (`site/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
+
+The footer readout (distance, coordinates, the scale ruler) holds its last reading while the camera moves, and reads
+once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to
+be seen mid-motion.
+
+`node tools/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
+page makes while it coasts. It exits 1 on anything outside this table.

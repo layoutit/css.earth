@@ -771,7 +771,7 @@ const RECORDING_BADGE = (seconds: number) => `(() => {
  * (drag and coast announce objectrotationchange, the motion signal objectmotionchange; production builds before that
  * signal get a wheel counted as moving for 700 ms). The invariant is judged on the moving writes. Aggregated in the page
  * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
-const STYLE_WRITES_LOGGER = `(() => {
+export const STYLE_WRITES_LOGGER = `(() => {
   const t0 = performance.now(), entries = new Map(), perFrame = [];
   let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, coasting = false, wheelUntil = 0;
   const moving = () => announced || performance.now() < wheelUntil;

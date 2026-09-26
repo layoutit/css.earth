@@ -91,17 +91,23 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: 
         right: entry.billboard.right as unknown as VolumeVector, down: entry.billboard.down as unknown as VolumeVector }] };
     return { node, frame: entry.frame, bank, shown: false, style: '' };
   });
+  // While the camera coasts a billboard is neither revealed nor hidden: a shown one fades, the rest wait for the coast
+  // to stop (motion-freezes-membership.md).
+  let coasting = false;
   return {
     root: layer,
+    setCoasting(active: boolean) { coasting = active; },
     /** Show billboard `index` at `opacity` (0 hides it) for this camera. */
     publish(index: number, opacity: number, world: WorldCameraPose, viewport: WorldCameraViewport) {
       const leaf = leaves[index]!;
       const projection = opacity > 0 ? projectVolumeImpostors({ world, viewport }, leaf.frame, leaf.bank, true) : null;
       const view = projection?.visible ? projection.views[0] : undefined;
       if (!projection || !view) {
-        if (leaf.shown) { leaf.node.style.display = 'none'; leaf.shown = false; }
+        if (leaf.shown && coasting) { if (leaf.node.style.opacity !== '0') leaf.node.style.opacity = '0'; leaf.style = ''; }
+        else if (leaf.shown) { leaf.node.style.display = 'none'; leaf.shown = false; }
         return;
       }
+      if (!leaf.shown && coasting) return;
       if (!leaf.node.style.backgroundImage) leaf.node.style.backgroundImage = `url("${atlasUrl.replace(/["\\]/g, '\\$&')}")`;
       const d = projection.diameterPixels;
       const style = `${d}|${projection.x}|${projection.y}|${view.matrix.join(',')}|${opacity}`;
