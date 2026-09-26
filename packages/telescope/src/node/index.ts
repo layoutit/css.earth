@@ -9,6 +9,7 @@ export * from './toolchain.js';
 export * from './astroquery.js';
 export * from './pyuvdata.js';
 export * from './mast.js';
+export * from './target-associations.js';
 export * from './pds-toolchain.js';
 export * from './pds-client.js';
 export * from './cube-outputs.js';

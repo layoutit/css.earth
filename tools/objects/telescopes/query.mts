@@ -38,7 +38,7 @@ import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
-import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from '@cssearth/telescope/node';
 import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry, type TargetResolution } from '@cssearth/telescope';
 import { productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 

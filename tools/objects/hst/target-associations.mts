@@ -3,7 +3,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource } from '../telescopes/target-associations.mts';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource } from '@cssearth/telescope/node';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const TARGET_ASSOCIATIONS = resolve(ROOT, 'data/telescopes/target-associations.json');
