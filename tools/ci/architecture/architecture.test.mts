@@ -91,8 +91,8 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['packages/p/src/a.ts', 'src/platform/x.mts'], ['packages/p/src/a.test.ts', 'tools/helper.mts'],
     ['src/renderers/css/x.ts', 'tools/prepared/y.mts'], ['src/renderers/css/x.ts', 'tools/prepared/y.mts'],
     ['src/renderers/css/preparation/z.ts', 'tools/objects/w.mts'], ['site/a.mts', 'src/preparation/stars/s.ts'],
-    ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'],
-    ['src/platform/p.test.mts', 'tools/prepare/prepare-x.mts'], ['astro.config.mts', 'tools/performance/p.mts'],
+    ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
+    ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/performance/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
   ));
   const pairs = (rule: string) => (violations.get(rule) ?? []).map(item => `${item.from}>${item.to}`);
@@ -100,7 +100,8 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   assert.deepEqual(pairs('nothing-imports-applications'), ['src/renderers/css/preparation/z.ts>tools/objects/w.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts', 'tools/objects/o.mts>site/objects.mts']);
   assert.deepEqual(pairs('runtime-imports-no-preparation'), ['site/a.mts>src/preparation/stars/s.ts', 'src/renderers/css/x.ts>tools/prepared/y.mts'],
     'renderer preparation code is preparation, not runtime');
-  assert.deepEqual(pairs('nothing-imports-prepare-scripts'), ['tools/objects/o.mts>tools/prepare/prepare-x.mts']);
+  assert.deepEqual(pairs('nothing-imports-prepare-scripts'), ['tools/objects/o.mts>tools/prepare/cli/prepare-x.mts'],
+    'a prepare entry is never imported; its library beside it may be');
   assert.deepEqual([...violations.keys()], LAYER_RULES.map(rule => rule.id));
 });
 

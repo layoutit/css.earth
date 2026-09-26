@@ -47,8 +47,8 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'nothing-imports-prepare-scripts',
-    description: 'tools/prepare/ holds entry scripts only: nothing imports them, including other prepare scripts (type-only imports count)',
-    forbids: (_from, to) => to.startsWith('tools/prepare/'),
+    description: 'tools/prepare/cli/ holds the prepare entry scripts: nothing imports them, including other entries (type-only imports count); the libraries beside them in tools/prepare/ may be imported',
+    forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
   },
 ];
 
