@@ -103,7 +103,7 @@ instead of editing a shared list or atlas position.
   the shared `tools/objects/terrestrial-layers/` path for native image geometry,
   photometric correction, compositing and gaps. Reuse the capability with the
   target body's inputs and conventions.
-- **Photometric normalization:** `tools/photometry/` evaluates published
+- **Photometric normalization:** `@cssearth/bake/photometry` (`packages/bake/src/photometry/`) evaluates published
   photometric models, including Hapke with macroscopic roughness, for the
   surface-observation and shape-camera routes. Lutetia's
   `source/photometry/` record and its manifest binding are the worked example;

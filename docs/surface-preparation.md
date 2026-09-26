@@ -459,7 +459,7 @@ source maps.
 
 A prepared image's size is a cost the reader pays on a phone, and it must still
 look identical. Every lossy image a bake writes goes through the lossy lane
-([lossy-lane.ts](../src/preparation/raster/lossy-lane.ts)): WebP at quality 80
+([lossy-lane.ts](../packages/bake/src/raster/lossy-lane.ts)): WebP at quality 80
 with sharp YUV chroma (`smartSubsample`). Numeric and categorical images stay
 lossless and never enter it.
 
@@ -514,7 +514,7 @@ These still set their own encoding:
 - Navigation context images (`<id>-context.webp`, a body's large marker) keep
   quality 85.
 - Decorative images take quality 40
-  ([`DECORATIVE_WEBP`](../src/preparation/raster/lossy-lane.ts)): the sidebar
+  ([`DECORATIVE_WEBP`](../packages/bake/src/raster/lossy-lane.ts)): the sidebar
   dataset maps (`prepared/minimaps/`) and the volume dataset previews
   (`datasets/<sha>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
   against the quality 90 maps they replaced: 15.8 MB became 4.8 MB with 0.074 %
@@ -540,7 +540,7 @@ together when their layout changes.
 The phase-lighting rows and billboard of an opaque sphere lit by the Sun with no
 atmosphere do not depend on the body: 61 bodies carried the same lighting block
 and encoded the same 7 MB one by one. Such a block is now a bank named once in
-[lighting-banks.ts](../src/preparation/raster/lighting-banks.ts) and baked once
+[lighting-banks.ts](../packages/bake/src/raster/lighting-banks.ts) and baked once
 into `public/lighting/<bank>/` (tracked, like the navigation atlases) by
 `node tools/objects/dist/prepare-lighting-bank.js`. A body's raster recipe names
 it, `"lighting": { "bank": "sphere", ... }`, keeping only its presentation
@@ -563,7 +563,7 @@ same published law, so the limb in the app is the limb the instrument saw.
 
 - **The law.** Each planet keeps its model in `source/photometry/`, one
   [model record](../tools/photometry/README.md#model-records) per colour channel.
-  [limb.mts](../tools/photometry/limb.mts) evaluates it relative to the flood-lit
+  [limb.mts](../packages/bake/src/photometry/limb.ts) evaluates it relative to the flood-lit
   disc centre, where incidence, emission and phase are all zero. The centre of
   the default view shows the map as published; every other pixel follows the
   paper, including its phase term where it has one. Toward the limb the law is
@@ -626,7 +626,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   limb profile with the Sun behind the viewer, lit where the tangent point faces
   the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
   computes it once, against PSG's own disc centre, and
-  [halo.mts](../tools/photometry/halo.mts) reads it. PSG computes limb lines of
+  [halo.mts](../packages/bake/src/photometry/halo.ts) reads it. PSG computes limb lines of
   sight with single scattering only
   ([handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96), and
   its single-scattering limb receives no sunlight with the Sun exactly on the
