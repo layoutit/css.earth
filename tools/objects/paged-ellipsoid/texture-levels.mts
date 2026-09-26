@@ -145,7 +145,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
       }
       const level = levels[i]!;
       level.tiles ??= {};
-      for (const p of bank.urls.keys()) { level.resources[`page:${bank.id}:${p}`] = sheet.key; level.tiles[`page:${bank.id}:${p}`] = sheet.tiles[p]!; }
+      for (const p of bank.urls.keys()) { level.resources[`page:${bank.id}:${p}`] = sheet.key; level.tiles[`page:${bank.id}:${p}`] = { ...sheet.tiles[p]! }; }
     }
   }
   // The pages' own small levels only fed their sheets: they are neither offered nor published.
@@ -173,7 +173,8 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
       if (!lens || !lensIds.has(lens)) continue;
       level.resources[key] = levels[capIndex]!.resources[key]!;
       const tile = levels[capIndex]!.tiles?.[key];
-      if (tile) (level.tiles ??= {})[key] = tile; else if (level.tiles) delete level.tiles[key];
+      // A copy: the presentation contract refuses an object shared between two places as cyclic.
+      if (tile) (level.tiles ??= {})[key] = { ...tile }; else if (level.tiles) delete level.tiles[key];
     }
   }
   const offered = maximumWidth === undefined ? levels : levels.slice(0, widths.indexOf(maximumWidth) + 1);
