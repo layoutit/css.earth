@@ -44,7 +44,7 @@ export function messageProblem(raw: string): string | undefined {
   if (lines.some(line => ATTRIBUTION.test(line))) return 'Remove attribution (Co-Authored-By, "Generated with …").';
   if (lines.length > 1) return 'Use a single line: no body and no trailers.';
   if (!CONVENTIONAL.test(first)) {
-    return `Use Conventional Commits: <type>(<scope>)?!?: <summary>, with a lowercase type from ${TYPES.join(', ')}.`;
+    return `Use Conventional Commits: <type>(<scope>)?!?: <summary>, with a lowercase type from ${TYPES.join(', ')}, and a scope of a-z, 0-9, ".", "_", "/" or "-" (no commas or spaces). Got: ${first}`;
   }
   if (first.length > MAX_LENGTH) return `Keep the line to ${MAX_LENGTH} characters; it has ${first.length}.`;
   return undefined;
