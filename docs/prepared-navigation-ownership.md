@@ -85,7 +85,7 @@ are unchanged.
 For negative semimajor axis and eccentricity above one, the astronomy package
 uses the standard hyperbolic Kepler equation. Preparation samples a finite
 inbound-to-outbound path through
-[prepare-hyperbolic-path.mts](../src/platform/prepare-hyperbolic-path.mts),
+[hyperbolic-path.ts](../packages/bake/src/world-context/hyperbolic-path.ts),
 marks it `closed: false`, and records `bodyVertexIndex` for the epoch position.
 The parser and projector keep its N−1 edges open, including full-path highlighting.
 Runtime projects the prepared vertices; it does not derive orbital geometry.

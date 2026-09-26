@@ -23,7 +23,7 @@ export interface PreparedContextPoint {
   readonly systemName?: string;
   /** Its catalogue discovery record, which the application reads for world visibility; opaque to the renderer. */
   readonly discovery?: Readonly<Record<string, unknown>>;
-  /** Not a map target: drawn as a plain dot, its path in its own bank (src/preparation/spatial-context.ts). */
+  /** Not a map target: drawn as a plain dot, its path in its own bank (packages/bake/src/world-context/spatial-context.ts). */
   readonly plainDot?: true;
   readonly positionM: PositionM;
   readonly radiusM: number;
