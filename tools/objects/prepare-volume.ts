@@ -1,7 +1,7 @@
 /** Offline volume preparation CLI; implementation is shared with image restoration. */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { prepareDensityVolumeObject as prepareDensityVolume } from '../../src/preparation/volume/prepare.js';
+import { prepareDensityVolumeObject as prepareDensityVolume } from '@cssearth/bake/density';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 
 /** The density-volume preparation with this checkout's inventory of the published prepared closure. */

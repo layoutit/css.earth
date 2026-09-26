@@ -1,12 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseVolumeRecipe } from '@cssearth/bake/volume';
-import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, bakeSlab, channelDensity, slabStepSize, withinVolumeSupport, encodeVolumeRaster } from '@cssearth/bake/volume/node';
+import { parseVolumeRecipe } from '../volume/index.ts';
+import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, bakeSlab, channelDensity, slabStepSize, withinVolumeSupport, encodeVolumeRaster } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.js';
+import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.ts';
 import sharp from 'sharp';
-import './retirement.test.js';
 import { sunBarycentricAu, M_PER_AU } from '@cssearth/astronomy';
 const sourceDirectory = 'src/objects/milky-way/source';
 const readRecipe = async () => parseVolumeRecipe(JSON.parse(await readFile(`${sourceDirectory}/volume.json`, 'utf8')) as unknown);

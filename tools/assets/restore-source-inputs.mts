@@ -91,7 +91,7 @@ for (const id of ids) {
         if (!hasErrorCode(error, 'ENOENT')) throw error;
         const cache = await mkdtemp(resolve(tmpdir(), `cssearth-${id}-volume-`));
         try {
-          const { acquireVolumeSource } = await import('../../src/preparation/volume/acquisition.ts');
+          const { acquireVolumeSource } = await import('@cssearth/bake/density');
           await acquireVolumeSource(volumeSource, recipe, cache);
         }
         finally { await rm(cache, { recursive:true, force:true }); }

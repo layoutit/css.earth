@@ -13,7 +13,7 @@ import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
-import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
+import { prepareVolumeAtlases } from '@cssearth/bake/density';
 import type { PreparedVolumeLens } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
@@ -30,7 +30,7 @@ const implementationFiles = [
   'tools/nebula/application/element-budget.ts', 'packages/renderer/src/volume/compiler-render-budget.ts',
   'packages/renderer/src/volume/prepared-volume-lod.ts',
   'tools/nebula/application/star-sprites.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts',
-  'src/preparation/volume/atlas.ts', 'packages/bake/src/volume-leaves/volume.ts',
+  'packages/bake/src/density/atlas.ts', 'packages/bake/src/volume-leaves/volume.ts',
   'packages/bake/src/volume-leaves/volume-order.ts', 'packages/bake/src/volume-leaves/volume-impostors.ts',
   'packages/renderer/src/volume/types.ts', 'packages/renderer/src/volume/validation.ts',
   'packages/renderer/src/volume/volume-impostor-validation.ts', 'packages/renderer/src/volume/prepared-volume-lenses.ts',

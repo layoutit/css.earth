@@ -1,8 +1,8 @@
 /** Retire only obsolete textures owned by the previous successful volume manifest. */
 import { readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { containedPath } from '@cssearth/bake/volume/node';
-import { text } from '@cssearth/bake/volume';
+import { containedPath } from '../volume/node/index.ts';
+import { text } from '../volume/index.ts';
 import { requireRecord as record } from '@cssearth/core';
 
 function texturePath(outputDirectory: string, value: unknown): string {

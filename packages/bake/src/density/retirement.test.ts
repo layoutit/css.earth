@@ -5,12 +5,12 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
-import { bundleRendererPackage } from '../../../tools/cli/bundle-renderer.mts';
+import { bundleRendererPackage } from '../../../../tools/cli/bundle-renderer.mts';
 import { zstdCompressSync } from 'node:zlib';
 import sharp from 'sharp';
-import { encodeDensityKtx2 } from './acquisition.js';
+import { encodeDensityKtx2 } from './acquisition.ts';
 import { sha256 } from '@cssearth/core/node';
-import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
+import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.ts';
 
 test('successful format/count changes retire previous manifest-owned textures and preserve unrelated files', async () => {
   const root = await mkdtemp(join(tmpdir(), 'volume-retirement-'));

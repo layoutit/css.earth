@@ -16,8 +16,10 @@ const universeEntries = [
   'src/preparation/galaxy-catalog/bibliography.test.ts',
   'src/preparation/cluster-catalog/cluster-catalog.test.ts',
   'src/preparation/image-layers/image-layers.test.ts',
-  'src/preparation/volume/volume.test.ts',
-  'src/preparation/volume/column-depth.test.ts',
+  'packages/bake/src/density/volume.test.ts',
+  // `@cssearth/bake` declares no side effects, so a bundled suite cannot pull another in by a bare import: list each one.
+  'packages/bake/src/density/retirement.test.ts',
+  'packages/bake/src/density/column-depth.test.ts',
   'packages/bake/src/sky/sky.test.ts',
   'packages/bake/src/volume-leaves/volume.test.ts',
   'packages/bake/src/volume-leaves/volume-impostors.test.ts',

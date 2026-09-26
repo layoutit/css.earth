@@ -12,7 +12,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
-import { loadPreparedCssVolume, validatePreparedVolumeLenses } from '@cssearth/renderer/universe';
+import { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 export interface DensityVolumeLensBankLens {

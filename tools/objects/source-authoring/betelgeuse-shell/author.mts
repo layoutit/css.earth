@@ -20,7 +20,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage, skyImageAxes } from '@cssearth/fits';
 import { sha256 } from '@cssearth/core/node';
-import { encodeDensityKtx2 } from '../../../../src/preparation/volume/acquisition.ts';
+import { encodeDensityKtx2 } from '@cssearth/bake/density';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse-shell/source');
 const packageBase = 'src/objects/betelgeuse-shell/source';

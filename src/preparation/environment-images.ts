@@ -8,7 +8,7 @@ import { prepareImageLayers } from './image-layers/prepare.js';
 import { containedPath, sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { prepareSurfaceShellObject } from '@cssearth/bake/shell';
-import { prepareDensityVolumeObject } from './volume/prepare.js';
+import { prepareDensityVolumeObject } from '@cssearth/bake/density';
 import { prepareStarsObject } from '@cssearth/bake/stars';
 
 interface Resource { path: string; sha256: string; bytes: number }

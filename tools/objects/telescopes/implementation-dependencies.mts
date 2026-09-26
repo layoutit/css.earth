@@ -26,6 +26,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
   '@cssearth/bake/scene': 'packages/bake/src/scene/index.ts',
   '@cssearth/bake/presentation': 'packages/bake/src/presentation/index.ts',
+  '@cssearth/bake/density': 'packages/bake/src/density/index.ts',
   '@cssearth/bake/sky': 'packages/bake/src/sky/index.ts',
   '@cssearth/bake/shell': 'packages/bake/src/shell/index.ts',
   '@cssearth/bake/stars': 'packages/bake/src/stars/index.ts',

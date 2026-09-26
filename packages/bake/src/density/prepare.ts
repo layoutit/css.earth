@@ -2,13 +2,13 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { parseVolumeRecipe } from '@cssearth/bake/volume';
-import { sourceBytes, containedPath, prepareVolumeSlices } from '@cssearth/bake/volume/node';
-import { compileCssVolume, prepareVolumeImpostors } from '@cssearth/bake/volume-leaves';
-import { acquireVolumeSource } from './acquisition.js';
-import { prepareFixedDiscVolume } from './fixed-disc.js';
-import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
-import { parseSkyRecipe, acquireSkySource, loadSkyStarSprites, prepareSkyFaces, compileCssSky } from '@cssearth/bake/sky';
+import { parseVolumeRecipe } from '../volume/index.ts';
+import { sourceBytes, containedPath, prepareVolumeSlices } from '../volume/node/index.ts';
+import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
+import { acquireVolumeSource } from './acquisition.ts';
+import { prepareFixedDiscVolume } from './fixed-disc.ts';
+import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.ts';
+import { parseSkyRecipe, acquireSkySource, loadSkyStarSprites, prepareSkyFaces, compileCssSky } from '../sky/index.ts';
 
 export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string;
   inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {

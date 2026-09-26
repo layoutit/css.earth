@@ -59,6 +59,11 @@
       "import": "./dist/sky.js",
       "default": "./dist/sky.js"
     },
+    "./density": {
+      "types": "./dist/density.d.ts",
+      "import": "./dist/density.js",
+      "default": "./dist/density.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

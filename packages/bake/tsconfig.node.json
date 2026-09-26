@@ -20,7 +20,8 @@
     "src/volume-leaves",
     "src/stars",
     "src/shell",
-    "src/sky"
+    "src/sky",
+    "src/density"
   ],
   "exclude": [
     "src/**/*.test.ts"
