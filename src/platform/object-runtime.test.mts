@@ -161,6 +161,17 @@ test("production mount restores camera and native playback through its shared vi
   await assert.rejects(h.runtime.sharedView.restore({ ...saved, playback: { ...saved.playback, times: [] } }), /prepared scene/);
   assert.equal(h.native.currentTime, 2345);
 });
+test("a newer saved view cancels an older speed selection", async t => {
+  const h = harness(); t.after(h.restore); await h.complete();
+  const saved = h.runtime.sharedView.capture(false);
+  assert.ok(saved);
+  const older = h.runtime.sharedView.restore({ ...saved, playback: { ...saved.playback, speed: 2 } });
+  const newer = h.runtime.sharedView.restore(saved);
+  assert.equal(await newer, true);
+  assert.equal(await older, false);
+  assert.equal(h.playback().stats().speed, saved.playback.speed);
+  assert.equal(h.selection().state().committed?.speed, saved.playback.speed);
+});
 test("destroy settles never-ending real startup and native rejection stays retired", async t => {
   const h = harness(); t.after(h.restore); await flush(); assert.ok(h.jobs.length > 0);
   h.runtime.destroy(); await h.runtime.ready;
