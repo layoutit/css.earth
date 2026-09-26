@@ -10,10 +10,12 @@ import { parseShellRecipe } from './config.js';
 import { loadShellMesh } from './mesh.js';
 import { prepareShellAtlas } from './atlas.js';
 import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';
-import { inventoryPreparedAssets } from '../../platform/runtime-asset-closure.mts';
 
-export async function prepareSurfaceShellObject(options: { objectDirectory: string; outputDirectory?: string }) {
+export async function prepareSurfaceShellObject(options: { objectDirectory: string; outputDirectory?: string; inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
+  // A bake into the object's own prepared/ directory records its published closure through the host's inventory
+  // (`inventoryPreparedAssets` in src/platform/runtime-asset-closure.mts); a scratch bake records nothing.
+  if (outputDirectory === resolve(objectDirectory, 'prepared') && !options.inventory) throw new TypeError('A bake into the object\'s prepared directory needs the host inventory.');
   const descriptorPath = resolve(objectDirectory, 'object.json');
   const descriptor = parseObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);
   if (descriptor.type !== 'surface-shell') throw new TypeError('Object descriptor is not a surface-shell.');
@@ -47,7 +49,7 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await writeFile(descriptorPath, JSON.stringify({ ...descriptor, prepared: { format: envelope.format,
       url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
-    await inventoryPreparedAssets({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
+    await options.inventory!({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   console.log(`PREPARED ${descriptor.id}: ${data.faces.length} PolyCSS triangle leaves; ${atlas.width * atlas.height * 4} decoded RGBA bytes; ${outputPath}`);
   return envelope;

@@ -13,12 +13,14 @@ import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssPointFieldManifest } from './types.js';
 import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse-sky.js';
 import { encodePointFieldBank } from '../../renderers/css/preparation/stars/point-field-bank.js';
-import { inventoryPreparedAssets } from '../../platform/runtime-asset-closure.mts';
 import sharp from 'sharp';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 
-export async function prepareStarsObject(options: { objectDirectory: string; outputDirectory?: string }) {
+export async function prepareStarsObject(options: { objectDirectory: string; outputDirectory?: string; inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory,'prepared'));
+  // A bake into the object's own prepared/ directory records its published closure through the host's inventory
+  // (`inventoryPreparedAssets` in src/platform/runtime-asset-closure.mts); a scratch bake records nothing.
+  if (outputDirectory === resolve(objectDirectory, 'prepared') && !options.inventory) throw new TypeError('A bake into the object\'s prepared directory needs the host inventory.');
   const descriptorPath = resolve(objectDirectory,'object.json'), descriptor = record(JSON.parse(await readFile(descriptorPath,'utf8')) as unknown,'Point-field descriptor');
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.type !== 'point-field') throw new TypeError('Unsupported point-field descriptor.');
   const id = text(descriptor.id,'Point-field id'), properties = record(descriptor.properties,'Point-field properties'), preparation = record(properties.preparation,'Point-field preparation');
@@ -55,7 +57,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   await writeFile(resolve(outputDirectory,'stars-provenance.json'),JSON.stringify({schema:'cssearth-point-field-provenance@1',id,provenance})+'\n');
   if (outputDirectory===resolve(objectDirectory,'prepared')) {
     await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/')}},null,2)+'\n');
-    await inventoryPreparedAssets({ objectId: id, objectDirectory, preparedRoot: outputDirectory });
+    await options.inventory!({ objectId: id, objectDirectory, preparedRoot: outputDirectory });
   }
   const magnitude = encoded.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   console.log(`PREPARED ${id}: ${encoded.bank.starCount} catalogue rows; ${encoded.bank.nodeCount} hierarchy nodes; ${bytes.length} manifest bytes; ${encoded.bytes.length} bank bytes; ${atlas.length} atlas bytes; magnitude error ${magnitude.measured} <= ${magnitude.bound} mag (pixel alpha <= ${magnitude.displayAlphaChange})`);

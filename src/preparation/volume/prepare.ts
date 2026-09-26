@@ -13,10 +13,13 @@ import { parseSkyRecipe } from '../sky/config.js';
 import { acquireSkySource } from '../sky/source.js';
 import { loadSkyStarSprites, prepareSkyFaces } from '../sky/bake.js';
 import { compileCssSky } from '../../renderers/css/preparation/sky.js';
-import { inventoryPreparedAssets } from '../../platform/runtime-asset-closure.mts';
 
-export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string }) {
+export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string;
+  inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
+  // A bake into the object's own prepared/ directory records its published closure through the host's inventory
+  // (`inventoryPreparedAssets` in src/platform/runtime-asset-closure.mts); a scratch bake records nothing.
+  if (outputDirectory === resolve(objectDirectory, 'prepared') && !options.inventory) throw new TypeError('A bake into the object\'s prepared directory needs the host inventory.');
   const descriptorPath = resolve(objectDirectory, 'object.json');
   const authored: unknown = JSON.parse(await readFile(descriptorPath, 'utf8'));
   const descriptor = parseDensityVolumeObjectDescriptor(authored);
@@ -60,7 +63,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   await retireVolumeTextures(outputDirectory, [...previousTextures, ...slices.quads.map(quad => quad.texturePath)],
     [...data.stacks.flatMap(stack => stack.leaves), ...data.detailPlanes ?? []].map(leaf => leaf.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    await inventoryPreparedAssets({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
+    await options.inventory!({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   const decodedBytes = data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0);
   console.log(`PREPARED ${descriptor.id}: ${data.stacks.reduce((count, stack) => count + stack.leaves.length, 0)} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);
