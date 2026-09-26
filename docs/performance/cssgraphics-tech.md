@@ -313,12 +313,12 @@ This was the user's manual trace, not a new synchronized video/recorder capture.
 
 Source entry points in this working tree:
 
-- [Planner client](../../src/renderers/css/universe/world-context/world-context-planner-client.ts)
-  and [planner](../../src/renderers/css/universe/world-context/world-context-planner.ts).
-- [World frame queue](../../src/renderers/css/navigation/world-frame-queue.ts).
-- [Baked celestial sky](../../src/renderers/css/sky/prepared-sky-runtime.ts)
-  and [opacity fader](../../src/renderers/css/stars/opacity-fader.ts).
-- [Retained leaf pool](../../src/renderers/css/rendering/retained-leaf-pool.ts).
+- [Planner client](../../packages/renderer/src/universe/world-context/world-context-planner-client.ts)
+  and [planner](../../packages/renderer/src/universe/world-context/world-context-planner.ts).
+- [World frame queue](../../packages/renderer/src/navigation/world-frame-queue.ts).
+- [Baked celestial sky](../../packages/renderer/src/sky/prepared-sky-runtime.ts)
+  and [opacity fader](../../packages/renderer/src/stars/opacity-fader.ts).
+- [Retained leaf pool](../../packages/renderer/src/rendering/retained-leaf-pool.ts).
 - Existing overview image-bank results were recorded in local run output, not in a tracked guide.
 
 ## 5. Concrete implementation order and proof

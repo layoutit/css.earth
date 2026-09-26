@@ -16,9 +16,9 @@ measured before anyone builds it.
   `originM`, the physical position of local `[0, 0, 0]`; `localToReferenceXyzw`, a right-handed orientation into the
   shared frame; `metersPerUnit`; and `boundsUnits`. That is a box in physical space. A body with a known position and
   radius converts into volume units with numbers already in the contract.
-- **A volume is three stacks of leaves, all mounted at once.** `PreparedVolumeStack` (`src/renderers/css/volume/types.ts`)
+- **A volume is three stacks of leaves, all mounted at once.** `PreparedVolumeStack` (`packages/renderer/src/volume/types.ts`)
   names an `axis` and its `PreparedVolumeLeaf` list, each leaf with its `centerUnits` and texture. The runtime
-  (`src/renderers/css/volume/prepared-volume-runtime.ts`) mounts every axis and throws if one is missing. Each stack gets
+  (`packages/renderer/src/volume/prepared-volume-runtime.ts`) mounts every axis and throws if one is missing. Each stack gets
   its own projection root, flattened (`transform-style: flat` in `styles/volume.css`); inside it the camera, the scene
   and the mesh are `preserve-3d`, and every leaf is a static `matrix3d` plane. The browser depth-sorts those parallel
   planes itself; the runtime never reorders a leaf.
@@ -30,11 +30,11 @@ measured before anyone builds it.
 - **The isolation of the roots is load-bearing.** `site/test/rendered-page.test.mts` forces `preserve-3d` onto the
   projection roots and requires the rendered light to collapse, because a root that joins the page's 3D context loses
   the per-root opacity mix.
-- **A body is a flattened root too.** The shell runtime (`src/renderers/css/shell/prepared-shell-runtime.ts`) mounts a
+- **A body is a flattened root too.** The shell runtime (`packages/renderer/src/shell/prepared-shell-runtime.ts`) mounts a
   flat root with a `preserve-3d` camera and scene, and the PolyCSS leaves inside keep `preserve-3d`. Betelgeuse's
   prepared tree has 457 nodes.
 - **Nothing is drawn inside a volume today.** The Gaia stars around the six prepared nebulae
-  (`src/renderers/css/stars/prepared-catalogue-points.ts`) are a flat overlay at `z-index: 1`, shown when their depth is
+  (`packages/renderer/src/stars/prepared-catalogue-points.ts`) are a flat overlay at `z-index: 1`, shown when their depth is
   positive: in front of the volume, not among its leaves.
 
 Two flattened roots composite one over the other in DOM order. A body can therefore sit between a stack's leaves only
