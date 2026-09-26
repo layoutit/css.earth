@@ -620,6 +620,8 @@ same published law, so the limb in the app is the limb the instrument saw.
   0.8 are compressed by a soft shoulder instead of clipping, ratios kept.
   The tie is the Uranian moons' band-ratio tie; the
   [Saturn README](../src/objects/saturn/README.md) reports its gains and factor.
+
+  ![Saturn in the app: the live site, main with the F395N blue limb, and the colour tie; swatches compare centre, limb and whole disc with Karkoschka's colour](images/planet-limbs/saturn-true-colour.webp)
 - **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
   limb profile with the Sun behind the viewer, lit where the tangent point faces
   the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
