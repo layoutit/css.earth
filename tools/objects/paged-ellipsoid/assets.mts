@@ -181,7 +181,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
   }, nativePhotographicClouds, nativePhotographicDisplayGamma, nativeDeepOceanFill);
   if (cutaway) cutInteriorPoles(poles, polarTileSize, cutaway);
   await sharp(poles, { raw: {
-      width: polarTileSize * 4,
+      width: polarTileSize * 2,
       height: polarTileSize,
       channels: 4,
     } })
@@ -209,16 +209,14 @@ function orientLatitudeBands(data: Buffer, { width, height, channels }: RasterIn
 
 function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize, boundaryLatitudeRadians, longitudeOffsetRadians }: RasterInfo & {tileSize: number; boundaryLatitudeRadians: number; longitudeOffsetRadians: number},
   nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1, nativeOcean?: NativeDeepOceanFill) {
-  const output = Buffer.alloc(tileSize * 4 * tileSize * 4);
+  const output = Buffer.alloc(tileSize * 2 * tileSize * 4);
   const supersampling = 2;
   const sampleCount = supersampling ** 2;
   const tiles = [
-    { pole: "north", inner: false },
-    { pole: "south", inner: false },
-    { pole: "north", inner: true },
-    { pole: "south", inner: true },
+    "north",
+    "south",
   ];
-  for (const [tile, { pole, inner }] of tiles.entries()) {
+  for (const [tile, pole] of tiles.entries()) {
     for (let y = 0; y < tileSize; y += 1) {
       for (let x = 0; x < tileSize; x += 1) {
         const premultiplied = [0, 0, 0];
@@ -229,10 +227,8 @@ function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize
             const unitY = (y + (sampleY + 0.5) / supersampling) / tileSize * 2 - 1;
             const radius = Math.hypot(unitX, unitY);
             if (radius > 1) continue;
-            const sampleRadius = inner ? 1 : radius;
             const latitudeMagnitude = Math.acos(Math.min(
-              1,
-              sampleRadius * Math.cos(boundaryLatitudeRadians),
+              1, radius * Math.cos(boundaryLatitudeRadians),
             ));
             const latitude = pole === "north" ? latitudeMagnitude : -latitudeMagnitude;
             let longitude = Math.atan2(unitY, unitX) - longitudeOffsetRadians;
@@ -245,7 +241,7 @@ function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize
             alphaTotal += alpha;
           }
         }
-        const target = (y * tileSize * 4 + tile * tileSize + x) * 4;
+        const target = (y * tileSize * 2 + tile * tileSize + x) * 4;
         if (alphaTotal > 0) {
           for (let channel = 0; channel < 3; channel += 1) output[target + channel] = Math.round(premultiplied[channel] / alphaTotal);
           output[target + 3] = Math.round(alphaTotal / sampleCount * 255);

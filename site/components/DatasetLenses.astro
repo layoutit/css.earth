@@ -13,6 +13,8 @@ interface Props {
 }
 const { objectId, lenses, controlName = 'dataset', route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const focus = controlName === 'focusLens';
+const sprite = !focus && lenses.controls.length > 1;
+const spriteColumns = Math.ceil(Math.sqrt(lenses.controls.length));
 // A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
 // one's scale. Its legend is published beside the cloud's own, or the reader is left with a body nothing explains.
 const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][number]) => {
@@ -38,7 +40,7 @@ const stepOf = (lens: Control) => {
   </form>
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
     <nav class="object-observation-controls" aria-label="Datasets">
-      {lenses.controls.map((lens) => (
+      {lenses.controls.map((lens, index) => (
         <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}
           data-step-group={lens.step?.group} data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
           <button
@@ -52,7 +54,9 @@ const stepOf = (lens: Control) => {
             aria-controls={`${objectId}-${lens.id}-details`}
             title={lens.title}
           >
-            <img class="object-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" loading="lazy" decoding="async" />
+            {sprite
+              ? <span class="object-lens-icon" aria-hidden="true" style={`background-image:url(/navigation/dataset-sprites/${objectId}.webp);background-position:-${index % spriteColumns * 14}px -${Math.floor(index / spriteColumns) * 14}px;background-size:${spriteColumns * 14}px ${spriteColumns * 14}px`}></span>
+              : <img class="object-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" loading="lazy" decoding="async" />}
             <span class="object-lens-label">{lens.label}</span>
             {lens.detail && <span class="object-lens-detail">{lens.detail}</span>}
           </button>

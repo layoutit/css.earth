@@ -227,7 +227,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       get navigation() { return live() ? navigation : undefined; },
       get datasets() { return live() ? datasets : undefined; },
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
-      refinesWithoutInput: definition.textureLevels !== undefined,
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
       destroy() {
@@ -404,9 +403,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same
       // selection transaction after visibility, including direct URL loads.
-      // A body with texture levels refines without waiting for input: to its fixed level, or to the level its projected
-      // silhouette needs, which zoom then keeps choosing. With deferred refinement the application starts it
-      // (`refinesWithoutInput`), once what it loads after the body has arrived.
+      // Nondeferred hosts refine after first paint. The site defers this until actual input.
       if (definition.textureLevels && !deferTextureRefinement) selection.refineTextures();
     }
   };
