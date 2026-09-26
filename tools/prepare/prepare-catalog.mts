@@ -1,7 +1,7 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { defineObjects } from '../../site/object-schema.mts';
 import { catalogEntry } from '../../site/object-catalog.mts';
 import type { CatalogEntry } from '../../site/object-catalog.mts';
@@ -145,4 +145,4 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   return entries;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) await prepareCatalog();
+refuseDirectRun(import.meta);

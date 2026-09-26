@@ -22,7 +22,7 @@
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
  * (star-catalogue-color.mts). The package starts with the shape lens and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
- * tools/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/prepare-object.mts <id> */
+ * tools/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/cli/prepare-object.mts <id> */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { scaffoldStar, TODO } from './new-object/scaffold.mts';
@@ -56,12 +56,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./new-object/spec.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
     const lines = await relensExisting(process.cwd(), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
-    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/prepare-object.mts <id>...\n`);
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/cli/prepare-object.mts <id>...\n`);
   } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
     // Colour for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-lenses.mts).
     const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const lines = await relensExisting(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
-    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/prepare-object.mts <id>...\n`);
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--refresh') && !specPath) {
     // Regenerate bodies the tool made from their stored specs: `--refresh ID... [--check | --bake]` (new-object/refresh.mts).
     const { mkdir, writeFile } = await import('node:fs/promises'), { refreshSpec } = await import('./new-object/refresh.mts');
@@ -95,6 +95,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (!id || missing.length) throw new TypeError(`Usage: new-object --spec <stars.json>, or the shape-only scaffold: new-object <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
     const order = option('order');
     const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, ...blackHole ? { blackHole: { shadowSource: option('shadow-source')! } } : { temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')! }, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
-    console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
+    console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare/cli/prepare-object.mts ${id}`);
   }
 }

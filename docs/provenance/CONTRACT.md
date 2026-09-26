@@ -45,7 +45,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | [Source records](../../src/sources/) (`<id>.json`) | One shared published identity per file, with versions, citation links and evidence |
 | `source/manifest.json` | Local input paths, canonical bindings, acquisition and per-input credits; tracked source records do not carry file-stability hashes |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
-| Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `node tools/prepare/prepare-text.mts` publishes `prepared/text.json` |
+| Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `node tools/prepare/cli/prepare-text.mts` publishes `prepared/text.json` |
 | `prepared/object.json`, `prepared/page.json` | Transport and page metadata regenerated from the installed runtime; not inventoried or committed |
 | `prepared/provenance.json` | Generated lineage, never committed. Layered bodies regenerate it; volumes, image layers and catalogues inventory and publish it with their baked outputs |
 | Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed; audit-only terrain reports and source-index rasters are excluded |

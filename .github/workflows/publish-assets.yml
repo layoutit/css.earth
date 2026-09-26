@@ -140,7 +140,7 @@ jobs:
             pnpm build:astronomy
             node tools/prepare/prepare-solar-geometry.mts
             pnpm build:catalog
-            node tools/prepare/prepare-objects.mts "--object=$OBJECT"
+            node tools/prepare/cli/prepare-objects.mts "--object=$OBJECT"
           fi
       - name: Check the rebake reproduces the committed inventory
         # Early contributor feedback. The trusted publish job independently checks the frozen inventory;
