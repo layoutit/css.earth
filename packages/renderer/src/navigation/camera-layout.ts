@@ -2,8 +2,10 @@ import type { CameraPlan } from './types.js';
 export interface ResponsiveZoomOptions { plan: CameraPlan; mobile: boolean; framingReferenceZoom?: number; viewport: import('./camera-viewport.js').CameraViewport; }
 import { smoothstep } from "@cssearth/engine";
 
-/** Share of a phone's open scene area (width, and height between header and drawer) the focus body spans on arrival. */
+/** Share of a portrait tablet's open scene area (between header and drawer) the focus body spans on arrival. */
 export const MOBILE_OPEN_AREA_SHARE = .75;
+/** Phones frame a little closer while leaving the tablet fit unchanged. */
+export const PHONE_OPEN_AREA_SHARE = .82;
 
 export function selectPreparedResponsiveZoom({
   plan,
@@ -61,7 +63,7 @@ export function selectPreparedResponsiveZoom({
   // authored portrait share: the open area is what the viewer actually sees.
   // An elongated body reaches past its volume-equivalent diameter; its framing scale keeps the whole shape in the area.
   const openHeight = mobile && measured.openArea ? measured.openArea.bottom - measured.openArea.top : null;
-  const openShare = MOBILE_OPEN_AREA_SHARE * (plan.framingScale ?? 1);
+  const openShare = (stageBounds.width < 700 ? PHONE_OPEN_AREA_SHARE : MOBILE_OPEN_AREA_SHARE) * (plan.framingScale ?? 1);
   const targetDiameter = openHeight !== null
     ? Math.min(stageBounds.width * Math.max(widthShare, openShare), openHeight * openShare)
     : Math.min(

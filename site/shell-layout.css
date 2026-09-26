@@ -703,6 +703,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
        follows the finger. */
     --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
   }
+  @media (max-width: 699px) and (orientation: portrait) {
+    body[data-object-shell] { --sheet-peek: calc(304px + var(--explorer-safe-bottom)); }
+  }
   body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
   body[data-object-shell][data-sheet="full"] { --sheet-rest: 0px; }
   body[data-object-shell][data-sheet="half"] { --sheet-rest: calc(var(--sheet-height) - var(--sheet-half)); }

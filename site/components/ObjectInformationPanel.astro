@@ -34,10 +34,6 @@ const overview = await prepareBodyOverview(objectId);
         ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
       ]} />}
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
-      {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
-        <h2 class="object-mobile-information-heading">Factsheet</h2>
-        <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
-      </section>}
       <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasLenses && lenses && <DatasetLenses {objectId} {lenses} />}
@@ -69,6 +65,10 @@ const overview = await prepareBodyOverview(objectId);
       </details>
       ))}
       </TreeDisclosure>
+      {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
+        <h2 class="object-mobile-information-heading">Factsheet</h2>
+        <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
+      </section>}
       {orderedCharts.length > 0 && <section class="object-card-tabpanel object-charts-content" id={`${objectId}-charts-content`} data-information-panel="charts" aria-label="Charts">
         <h2 class="object-mobile-information-heading">Charts</h2>
         <div class="object-chart-list">
