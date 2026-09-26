@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sylvia-arrival.webp",
+      "bytes": 34458,
+      "sha256": "ba70cc86250d552bd23557e59a5e4b0e0fc96c3780201190c140976f8b13a4e0"
+    },
+    {
+      "location": "public",
       "filename": "sylvia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "sylvia-zimpol-thumbnail.webp",
       "bytes": 1222,
       "sha256": "77089c1fca22261d19cc9928af653a2a59d507bad729c9ece33cc82d96a7c661"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "3c4e7a795607525d71eb162a3da65e02708d40837d14cc5c96c9881cf54af403"
     },
     {
       "location": "prepared",

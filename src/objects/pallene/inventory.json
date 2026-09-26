@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pallene-arrival.webp",
+      "bytes": 38872,
+      "sha256": "ad2a8827a63c38783d5415586b80a4a09bb646afb3c16e4e4d522a0f6c22c43e"
+    },
+    {
+      "location": "public",
       "filename": "pallene-normal-shadow-alpha@2x.webp",
       "bytes": 153064,
       "sha256": "f7a67c8ec45974e49ead09a2bffe845797b927aa56ca7affa60c0f26a6399c0c"
@@ -30,6 +36,12 @@
       "filename": "pallene-normal-thumbnail.webp",
       "bytes": 1774,
       "sha256": "e18485a43f80bfe35d703240b6912a71b570be26933d7393fc2e80c2aaef943d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "fff2289a69c7ab11d92bd8fb8d6b2d06fbb8bf11c578449fd85c05a83c2c11b6"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "siwa-arrival.webp",
+      "bytes": 24018,
+      "sha256": "f405430d218ede7d6a1550541b637addd9a8fe8e42aaf57b0508988517651483"
+    },
+    {
+      "location": "public",
       "filename": "siwa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "siwa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "071104bc7f423606106d31aa4781f508dd3cb22bfd03cbedd976a0ae662ac6a5"
     },
     {
       "location": "prepared",

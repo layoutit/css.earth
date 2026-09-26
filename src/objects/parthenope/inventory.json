@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "parthenope-arrival.webp",
+      "bytes": 25074,
+      "sha256": "6834f687d38d9ccf2be81ede2e7ec5acf2b9e2d5b3ce481017c473146ce0a5da"
+    },
+    {
+      "location": "public",
       "filename": "parthenope-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "parthenope-zimpol-thumbnail.webp",
       "bytes": 1564,
       "sha256": "9f97fcca6fe9f2dfd4ba0cdca0736df2c0f158cdb2a07a70045a3b725925fd76"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "8f0125e732c20f28bd2f1a32b542f00335192f115a71d9b3f9cdd5e02873d79c"
     },
     {
       "location": "prepared",

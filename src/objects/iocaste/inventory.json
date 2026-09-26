@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iocaste-arrival.webp",
+      "bytes": 31742,
+      "sha256": "597340c5dda14d60cb4e2c21e711392d0288463f9a5c04ae25ef8bc407cd2aaa"
+    },
+    {
+      "location": "public",
       "filename": "iocaste-model-shadow-alpha@2x.webp",
       "bytes": 132082,
       "sha256": "fa7f33a3520b91814dc10ed3dc8960035d1fc531e794bc2cb1aec725b072ee12"
@@ -30,6 +36,12 @@
       "filename": "iocaste-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "71bc8dd4b0d858edff7e3b41a185005b5de4786fd9a5cf4109a1713347855c47"
     },
     {
       "location": "prepared",

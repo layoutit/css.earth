@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bamberga-arrival.webp",
+      "bytes": 23362,
+      "sha256": "fd36b4b943ee39a682dc96cd2ab300b3b0962f855029af2a7a220411efd0dab9"
+    },
+    {
+      "location": "public",
       "filename": "bamberga-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "bamberga-zimpol-thumbnail.webp",
       "bytes": 1732,
       "sha256": "2899573210abfd2a8878d1e641121a458f0e063bbbed2cda38957290b64811f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "9a7d5dc4de4ea21f05954e8478f7c9cf24fd091fa7fe4a9d9625434aebb9d1ca"
     },
     {
       "location": "prepared",

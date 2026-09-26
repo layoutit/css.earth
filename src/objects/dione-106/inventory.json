@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dione-106-arrival.webp",
+      "bytes": 34998,
+      "sha256": "e17ce1e62bd3816b1ee9b5950f1c1671a6adc89d624bee56d76ca2f7d431a3f5"
+    },
+    {
+      "location": "public",
       "filename": "dione-106-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "dione-106-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "ca26aba9d67eafa6ec6e6ca5d91fd8b9f9fdd79ca411b7f6944a98e0fab5aa13"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lycomedes-arrival.webp",
+      "bytes": 23444,
+      "sha256": "d94e46810903bdc34f95f7b3725a2e3fff358932f77fe02c1f1b7f20182d7313"
+    },
+    {
+      "location": "public",
       "filename": "lycomedes-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "lycomedes-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "4c768f40d06f85a715a8a87367c1f60c14c32b67730b5f05987b195687f4abcc"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iapetus-arrival.webp",
+      "bytes": 165862,
+      "sha256": "5ec81a4d77514c42f042196703aa52be145d34aedc3d66237669c70d1a00e58e"
+    },
+    {
+      "location": "public",
       "filename": "iapetus-enhanced@2x.webp",
       "bytes": 3059264,
       "sha256": "431a96291a8a5d2e563248327868e436d639e377e05e1111c3f2d63720f1289e"
@@ -288,6 +294,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "2ac42cd2265d6a7ad3b8b6d5ea02075e64ba00150a114947af6350437a8af228"
     },
     {
       "location": "prepared",

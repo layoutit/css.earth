@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tulipa-arrival.webp",
+      "bytes": 24172,
+      "sha256": "6ee6e0da750231b579a052277091e9d1cc6133f195e77aee129da87bd81d1ff4"
+    },
+    {
+      "location": "public",
       "filename": "tulipa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "tulipa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "af738fff646df459cff16876ce7a317ede0ee14071a22b95f8c6fc9f320ec985"
     },
     {
       "location": "prepared",

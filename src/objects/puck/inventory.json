@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "puck-arrival.webp",
+      "bytes": 33806,
+      "sha256": "13c66c4175b7151d05fb031aa35f2f85b4778c5ddeac1ce5889b33514754f2fe"
+    },
+    {
+      "location": "public",
       "filename": "puck-normal-shadow-alpha@2x.webp",
       "bytes": 142816,
       "sha256": "b829c72376de2236638ab15958fd6a279db8578393039a0e2c0f6e14e5e5e4a5"
@@ -30,6 +36,12 @@
       "filename": "puck-normal-thumbnail.webp",
       "bytes": 2390,
       "sha256": "0a31170bba1c3a348c225e5fc613078710668e1067f73f3b4c553403ca8ad0a4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "3a4aa01fe3151dbe05c245a82188f9c7103b93f9c8145bafdfc2b6abda74d5e8"
     },
     {
       "location": "prepared",

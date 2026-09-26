@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "miranda-arrival.webp",
+      "bytes": 109866,
+      "sha256": "5cd0ea0941d1dab9f70a03f474f6af6d889f2ada53af9f9db718a23148fe5439"
+    },
+    {
+      "location": "public",
       "filename": "miranda-elevation@2x.webp",
       "bytes": 1152836,
       "sha256": "d790d4f4429ba77feb4c18e5e55b197c852e37f2529499c8cb9cb8c0106841d1"
@@ -288,6 +294,12 @@
       "filename": "miranda-voyager-color@2x.webp",
       "bytes": 667404,
       "sha256": "e0511fd532e8d45cbb433ecc0b49760825b58c279fa47e983e72013f5603bdc5"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "71e2fa73ba7fee8c94af2d34c70c54677d77f6158f1e19f7e21cd7e4de831ab8"
     },
     {
       "location": "prepared",

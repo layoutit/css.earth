@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "trinculo-arrival.webp",
+      "bytes": 30842,
+      "sha256": "d990ed5d1b1be068b5e0069d100ffcbad3eec91e32da95eb64ee852c33c69a13"
+    },
+    {
+      "location": "public",
       "filename": "trinculo-model-shadow-alpha@2x.webp",
       "bytes": 128926,
       "sha256": "5cf5ba550cb4cc9bd05ebc079a55c6dae6194b76a684fd6b09d20249e9732bac"
@@ -30,6 +36,12 @@
       "filename": "trinculo-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "f6d905248b24f438a8d3a83497e4acd353f9ac0b5936edeb6fb2c6d21b856bd2"
     },
     {
       "location": "prepared",

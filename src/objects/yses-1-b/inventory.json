@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "yses-1-b-arrival.webp",
+      "bytes": 22396,
+      "sha256": "c52e1ec17eba7f2d337c7235e6fc9754a5936040b8caa9a501fea2f88bfd5521"
+    },
+    {
+      "location": "public",
       "filename": "yses-1-b-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
@@ -18,6 +24,12 @@
       "filename": "yses-1-b-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "7ea96c70df1a15ce929410334928576ff566a4ca010b23c6736f7b5291b7e437"
     },
     {
       "location": "prepared",

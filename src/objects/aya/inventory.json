@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aya-arrival.webp",
+      "bytes": 31524,
+      "sha256": "d61550d993d174978d7143f647084b3844f6ebebf758f615e32fe48e821f913d"
+    },
+    {
+      "location": "public",
       "filename": "aya-model-shadow-alpha@2x.webp",
       "bytes": 131978,
       "sha256": "66d0a9631e0f858c437548f4b2bdb11ce8ec3bed393842417b72522a2df54e9b"
@@ -30,6 +36,12 @@
       "filename": "aya-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "4a428d2467fd8d8d4913fc9c9516f744b82f54b3c8ef09be00d47b01d68ea0c9"
     },
     {
       "location": "prepared",

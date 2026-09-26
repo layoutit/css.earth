@@ -78,6 +78,8 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
   const originText = takeOption(args, '--origin') ?? `http://${localAddress()}:4212`;
   const name = takeOption(args, '--name') ?? 'ipad-journey';
   const udid = takeOption(args, '--device');
+  const heapSnapshot = args.includes('--heap-snapshot');
+  if (heapSnapshot) args.splice(args.indexOf('--heap-snapshot'), 1);
   const tail = requireFiniteNumber(Number(takeOption(args, '--tail') ?? '2'), '--tail');
   if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError('--name needs lowercase words and dashes.');
   if (tail < 0 || tail > 30) throw new RangeError('--tail must be 0–30 seconds.');
@@ -110,7 +112,8 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
     deviceSession = await startIpadDeviceSession(startUrl, udid);
     stage('visible Safari ready');
     const { out, report } = await captureIosMoment(['--device', ...(udid ? [udid] : []), '--name', name,
-      '--expect-url', startUrl, '--steps', stepsPath, '--strict-steps', '--stage-timing', '--no-device-monitors', '--screens', '--dist', 'dist', '--settle', '2'], deviceSession);
+      '--expect-url', startUrl, '--steps', stepsPath, '--strict-steps', '--stage-timing', '--no-device-monitors', '--screens', '--dist', 'dist', '--settle', '2',
+      ...(heapSnapshot ? ['--heap-snapshot'] : [])], deviceSession);
     stage('WebKit capture complete');
     if (!report.filmstrip || report.filmstrip.frames < 1) throw new Error(`Trace ${out} has no native iPad screen frames.`);
     await writeFile(resolve(out, 'journey.json'), JSON.stringify({ schema: 'cssearth-ipad-journey@1', inputSources,

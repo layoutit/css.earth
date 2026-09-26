@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-1998-ml14-arrival.webp",
+      "bytes": 24642,
+      "sha256": "7feaea436ca092b0c195fada30405580a34e3528a86e594254e14853c90a8f1a"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-1998-ml14-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "asteroid-1998-ml14-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 319,
+      "sha256": "251f78c361ce0b704e007896113a7cd6c3358582e01868397cdfbd81776fe37f"
     },
     {
       "location": "prepared",

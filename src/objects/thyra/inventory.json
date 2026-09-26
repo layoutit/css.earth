@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thyra-arrival.webp",
+      "bytes": 23186,
+      "sha256": "30e20a61d4ecb6d27f53d309c55afa80f568581cbfbc2e89f2254ded08b10533"
+    },
+    {
+      "location": "public",
       "filename": "thyra-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "thyra-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "0c6345ee81d9a1d578cf4b1618f901aa8e5616a3d9ae17f9da699abe01299f17"
     },
     {
       "location": "prepared",

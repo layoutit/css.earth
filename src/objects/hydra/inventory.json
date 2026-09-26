@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hydra-arrival.webp",
+      "bytes": 31804,
+      "sha256": "c1519d4a325e3e760bf82c61af3c53d95083e1d3fea23b2dd51969fe8e92bfbc"
+    },
+    {
+      "location": "public",
       "filename": "hydra-model-shadow-alpha@2x.webp",
       "bytes": 239568,
       "sha256": "58ca0e1747c258ee19889f5ee136ac0f37648ee02bb381922eb2e5ff6ee95783"
@@ -48,6 +54,12 @@
       "filename": "hydra-monochrome-thumbnail.webp",
       "bytes": 1786,
       "sha256": "a054a86592aff90fd3c50f068035e85221ccb4efed0ca29c13ca5a85a167a611"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 383,
+      "sha256": "ae31f2afd12d11007f6bbaa15bab4629748f8db4233609bbc2690d1c90e069f3"
     },
     {
       "location": "prepared",

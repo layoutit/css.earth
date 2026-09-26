@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "caliban-arrival.webp",
+      "bytes": 28700,
+      "sha256": "1f3b19b6e0103c66e7fb698d148ef0cd902083128e50e42fb564e4dc0d32ce30"
+    },
+    {
+      "location": "public",
       "filename": "caliban-model-shadow-alpha@2x.webp",
       "bytes": 141848,
       "sha256": "382b26aa4c14b39bbc22569cb8572e3180e108f58fd0da62d10a28bb9bd360d4"
@@ -30,6 +36,12 @@
       "filename": "caliban-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "ce4e54950b2b1086b188ad044d1f105e864a3e55c62285f53b037626261f83c0"
     },
     {
       "location": "prepared",

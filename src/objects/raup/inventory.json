@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "raup-arrival.webp",
+      "bytes": 28634,
+      "sha256": "40195db5b2f241312dcc0ec390aabe002fbc84ef766c20078a1813b077ede149"
+    },
+    {
+      "location": "public",
       "filename": "raup-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "raup-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "54e54aca5221e4de1adec70f2e928f33881c478d4ef45096c35800121f85ce76"
     },
     {
       "location": "prepared",

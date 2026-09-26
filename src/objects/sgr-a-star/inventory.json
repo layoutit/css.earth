@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sgr-a-star-arrival.webp",
+      "bytes": 99696,
+      "sha256": "8eb71dc13aacd41afc00de2ce0cfcc03e9ebdce36b1ee513b860b281eaa21313"
+    },
+    {
+      "location": "public",
       "filename": "sgr-a-star-context-shape@2x.webp",
       "bytes": 330158,
       "sha256": "9558528a0572a095949091133c31714e95f8221ec1cbf31a3599aedbfa302e1e"
@@ -30,6 +36,12 @@
       "filename": "sgr-a-star-surface-shape@2x.webp",
       "bytes": 176,
       "sha256": "e0dd357b2ccd79c2edb8b61d0e6e0c163c8414131412155b04bdb975995d26b7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "c8150b72da8b8915ee1a898b60f3860488e059082e0be239c2f7e4f903dce642"
     },
     {
       "location": "prepared",

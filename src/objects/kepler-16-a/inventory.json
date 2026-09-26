@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kepler-16-a-arrival.webp",
+      "bytes": 22388,
+      "sha256": "928e1670a2abc2d6ba59b7d68c7851e6d6ab6f84cc47e6ddeedad75868a0f4ba"
+    },
+    {
+      "location": "public",
       "filename": "kepler-16-a-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
@@ -18,6 +24,12 @@
       "filename": "kepler-16-a-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "14a56f0f3ca852f8a7f7609a3b81b050764e8f8a5c45c7b17cfe4d04b494fac4"
     },
     {
       "location": "prepared",

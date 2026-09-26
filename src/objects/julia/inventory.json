@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "julia-arrival.webp",
+      "bytes": 20380,
+      "sha256": "2f3748b4de98ebca771625895d0ca8a8dc4d39be7cf4c26e8896c1e899d68b07"
+    },
+    {
+      "location": "public",
       "filename": "julia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "julia-zimpol-thumbnail.webp",
       "bytes": 1774,
       "sha256": "0f98e99791d5789cc0dd890562ad3148fd7988fc28802d08d4f6809e78949a08"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "f76720eb361564a2dcf82029ff98a97ba535600374a8787aff1a97801946daa3"
     },
     {
       "location": "prepared",

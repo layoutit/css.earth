@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "antigone-arrival.webp",
+      "bytes": 22168,
+      "sha256": "cb56423db6ec567dc1fd52f5695ec8c8b6325ad3d954c43cc4a2c6f632498f6d"
+    },
+    {
+      "location": "public",
       "filename": "antigone-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "antigone-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "6a0cb51749ee683dfb11781dc7905581e90a061cef6df01462039e39c5db55e8"
     },
     {
       "location": "prepared",

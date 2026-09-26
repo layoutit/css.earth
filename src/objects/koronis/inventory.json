@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "koronis-arrival.webp",
+      "bytes": 23820,
+      "sha256": "5004ef363c8a17a8ad9b6f0389d903eae76fc5b9db069ebfbdd2de8e6517d2a5"
+    },
+    {
+      "location": "public",
       "filename": "koronis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "koronis-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "7fc8e754bd6adfd8f44e127efede61fe1c8feff03dcb558a0a52eb3900a2ace4"
     },
     {
       "location": "prepared",

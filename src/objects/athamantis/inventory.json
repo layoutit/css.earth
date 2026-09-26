@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "athamantis-arrival.webp",
+      "bytes": 27040,
+      "sha256": "74ed0a5c77facea19b9f6d9b3a348ff1b7e423ef29a109afad8c92162416549d"
+    },
+    {
+      "location": "public",
       "filename": "athamantis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "athamantis-zimpol-thumbnail.webp",
       "bytes": 1548,
       "sha256": "3ac69c7dca718a21c854aa09b98638b8d853acd02eb98ca2711c130d1a71fbdb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "acd029e36ac467e848ef1a5f492336cd504aec8788f7cfe9cb406c440462f1e8"
     },
     {
       "location": "prepared",

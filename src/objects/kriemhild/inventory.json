@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kriemhild-arrival.webp",
+      "bytes": 23636,
+      "sha256": "28bd334218d1285042246a059a4770d6ee402afbcd55c4935a2444db03982b21"
+    },
+    {
+      "location": "public",
       "filename": "kriemhild-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "kriemhild-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "019c20e9aa183ebf9e230cb203eea6b70ee27f5bdbebe0a6d6aebd3677aece3b"
     },
     {
       "location": "prepared",

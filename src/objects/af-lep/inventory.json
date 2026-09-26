@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "af-lep-arrival.webp",
+      "bytes": 32438,
+      "sha256": "129bdae20fe7bb73ea50c7dce2cbcf8fe501a903e944be92fe13c3dfb6ef9f74"
+    },
+    {
+      "location": "public",
       "filename": "af-lep-lens-color.webp",
       "bytes": 44,
       "sha256": "e6ec764b4b7577094c3c1778040c8084d47dc750453861bec7a5d203faf453c3"
@@ -24,6 +30,12 @@
       "filename": "af-lep-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "b241e2492c6e5a06bd88fa5b15cab224e45c38a9f8422fee511cc7bd4c75f665"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "f88657ca9ec1d69d1cda84248581028b9819073751bdd44ec64f06f88c1634cd"
     },
     {
       "location": "prepared",

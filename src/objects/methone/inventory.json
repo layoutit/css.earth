@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "methone-arrival.webp",
+      "bytes": 27600,
+      "sha256": "93a67fa44a5c7725a5028e4dcc1a521a0ae34214ed427a6705c54050bbb0bdbc"
+    },
+    {
+      "location": "public",
       "filename": "methone-normal-shadow-alpha@2x.webp",
       "bytes": 153588,
       "sha256": "9db542e2fe13f5fb9f9859999d6ec77351b930f431d378a3ff68fb81386130fe"
@@ -30,6 +36,12 @@
       "filename": "methone-normal-thumbnail.webp",
       "bytes": 1646,
       "sha256": "551c15348c724db23c2ed15ac5cc61e69056fa70701dbba2b6ed8efdfa018ac4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "28e60bf5b3cb365eed10b017bb236a05dd0adb3e89c7b505c5436eb521164611"
     },
     {
       "location": "prepared",

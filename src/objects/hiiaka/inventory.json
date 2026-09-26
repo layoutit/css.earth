@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hiiaka-arrival.webp",
+      "bytes": 27530,
+      "sha256": "13f892ba5ea57e86c33985f0f4d653a40b478f8331cadf1cf4edaa391af16779"
+    },
+    {
+      "location": "public",
       "filename": "hiiaka-model-shadow-alpha@2x.webp",
       "bytes": 139790,
       "sha256": "fbcda72d66ac6a53272724b224b6b82201cd2c0f76052103c114326da744d80c"
@@ -30,6 +36,12 @@
       "filename": "hiiaka-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "d1f18b85ec5170e6d3ed611f51ecb6aa9b6034aff2da945d71b3a15a8ae7704d"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asporina-arrival.webp",
+      "bytes": 22102,
+      "sha256": "171bebfb8e712d1ff9b1967066bb001290ff7972ff0c33e68ac23f78d1369ba0"
+    },
+    {
+      "location": "public",
       "filename": "asporina-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "asporina-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "c65e34ecab762dff06b6bc473c8dce29d82e3fb16f94bc604454077501006581"
     },
     {
       "location": "prepared",

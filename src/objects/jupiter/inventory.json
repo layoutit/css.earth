@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "jupiter-arrival.webp",
+      "bytes": 81378,
+      "sha256": "4ffd165c5b969e3acb2782dd35a3a1a2e77882b254326c7352b6be4a6c614df3"
+    },
+    {
+      "location": "public",
       "filename": "jupiter-lens-methane-poles.webp",
       "bytes": 21708,
       "sha256": "aa1604ef70e1ebed1e471ebd291389d85abd52d77bd51f9ed16d2625c057224d"
@@ -402,6 +408,12 @@
       "filename": "jupiter-temperature-pressure-profile.svg",
       "bytes": 2341,
       "sha256": "420f47ff7a09a1420fe2010dc39567720591a2e14ce6592cff0d89aa1b5b151b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "a15daf3313269cf5832504dd1a4277432f9007a0167cf947dce6338e7b79a7d4"
     },
     {
       "location": "prepared",

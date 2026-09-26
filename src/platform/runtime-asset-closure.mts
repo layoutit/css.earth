@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import { isArray } from '@cssearth/core';
+import { isArray, isRecord, hasErrorCode } from '@cssearth/core';
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs/promises";
@@ -166,7 +166,16 @@ export async function inventoryPublicAssets({ objectId, objectDirectory, urls, p
   objectId: string; objectDirectory: string; urls: readonly string[]; publicRoot: string; allowPreparationArtifacts?: boolean;
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
-  const filenames = normalizeRuntimeAssetUrls({ objectId, urls });
+  // The arrival image belongs to navigation, so it is absent from the detail
+  // runtime's texture entries. Keep its explicit prepared reference on rebakes.
+  const arrival: unknown = await readFile(resolve(objectDirectory, 'prepared/arrival-billboard.json'), 'utf8')
+    .then(JSON.parse, error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+  const references = [...urls];
+  if (arrival !== null) {
+    if (!isRecord(arrival) || typeof arrival.url !== 'string') throw new TypeError('Invalid prepared arrival asset.');
+    if (!references.includes(arrival.url)) references.push(arrival.url);
+  }
+  const filenames = normalizeRuntimeAssetUrls({ objectId, urls: references });
   // Offline baking may emit intermediate densities. They are not shipped; production assembly still enforces closure.
   if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, objectId);
   await rejectGitTrackedAssets(objectId, publicRoot, filenames, gitTrackedPaths);

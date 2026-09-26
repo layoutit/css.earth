@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "datura-arrival.webp",
+      "bytes": 23706,
+      "sha256": "8e82591903474dc1bbfe11cf7ea5a77c778763bbf9abfdbdbdd5f2ac20b8bc5a"
+    },
+    {
+      "location": "public",
       "filename": "datura-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "datura-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "b00dcc0890efc6116eedaf32837813912341595737a0129a1cd7e382b7a6aea3"
     },
     {
       "location": "prepared",

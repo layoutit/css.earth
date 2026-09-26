@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hati-arrival.webp",
+      "bytes": 28026,
+      "sha256": "0c0297b8093742026275f65ef366808984ccb76e9b21e3d39f5fc5c7bc38cfa0"
+    },
+    {
+      "location": "public",
       "filename": "hati-model-shadow-alpha@2x.webp",
       "bytes": 141642,
       "sha256": "94317cf645243b50605613a2682435a5fb57f9fd9911933ea7253a1f98966414"
@@ -30,6 +36,12 @@
       "filename": "hati-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 291,
+      "sha256": "21f22f1c6dc299b44a548819a5f922b5e7f92ac07aeb33fdc0fa4ebc1cbbb52d"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "silesia-arrival.webp",
+      "bytes": 23246,
+      "sha256": "50de9cca9147dc38e97a167278b4c3e9e49a8ac036ebe0ae81857b69fe914b96"
+    },
+    {
+      "location": "public",
       "filename": "silesia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "silesia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "550a91b934acdbce8af95d087a62ba4b7c4a5d5bd1317a96b6e60e4ec6787fce"
     },
     {
       "location": "prepared",

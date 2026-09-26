@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hyperion-arrival.webp",
+      "bytes": 94338,
+      "sha256": "130043045621d7536484176186b0cba06eb7d29005412792b6e24e309079e086"
+    },
+    {
+      "location": "public",
       "filename": "hyperion-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -90,6 +96,12 @@
       "filename": "hyperion-normal-thumbnail.webp",
       "bytes": 2086,
       "sha256": "0adaf41fb745b2f45bd69fa50a06e789416d156ea581cea0b2ddc55ebdcf4ae1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "db59ffd0c3913f1638ddf05d41cacd9cdffbfdac13f520b38b1f262a3d8a3641"
     },
     {
       "location": "prepared",

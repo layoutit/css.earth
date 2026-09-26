@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "klio-arrival.webp",
+      "bytes": 26288,
+      "sha256": "46b8bac42128918343249a6fdd89dde2f2c70374faa15780e999a8e0a9550669"
+    },
+    {
+      "location": "public",
       "filename": "klio-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "klio-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 291,
+      "sha256": "7357a431ba703b840cb9e2db85f01c1d3a07109d3a0975afc544526100280c9b"
     },
     {
       "location": "prepared",

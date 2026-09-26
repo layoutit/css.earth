@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polymele-arrival.webp",
+      "bytes": 26636,
+      "sha256": "2401771d13467e48a977737d8ce8340d0687f4f87d8ecd7a1873ab0e751f97a1"
+    },
+    {
+      "location": "public",
       "filename": "polymele-model-shadow-alpha@2x.webp",
       "bytes": 130670,
       "sha256": "81e89aa3ccb339aa998356b622129c55d794b81401fb0ee46ef3a61d3f997138"
@@ -30,6 +36,12 @@
       "filename": "polymele-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 312,
+      "sha256": "2dfa017a9e921735e8a8838aceaabccf58fb1cedb6ea2445ed452263f25b0d7e"
     },
     {
       "location": "prepared",

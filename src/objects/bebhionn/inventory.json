@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bebhionn-arrival.webp",
+      "bytes": 28564,
+      "sha256": "b5e6769c2d746ab2a1b31768a37999c25c1554b1cc786e5519beb88cfe3863aa"
+    },
+    {
+      "location": "public",
       "filename": "bebhionn-model-shadow-alpha@2x.webp",
       "bytes": 141952,
       "sha256": "88d1df4a78187cc9d481006cefa2e692ec4bb4f29f264b648f1784d2458f60c3"
@@ -30,6 +36,12 @@
       "filename": "bebhionn-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "db57ee99828a27f16301a1173e224a8faa0c96c9da0ba1c228a172dc8f86a46c"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mithra-arrival.webp",
+      "bytes": 34946,
+      "sha256": "cf060faa7e060b0c324a7b01ea078b7f297a8124b245028c8ca9ef8da575ec53"
+    },
+    {
+      "location": "public",
       "filename": "mithra-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "mithra-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 285,
+      "sha256": "4b187db772e67708c6536aed8e3aa111e3878888f6650df5e7457fd5e5d39040"
     },
     {
       "location": "prepared",

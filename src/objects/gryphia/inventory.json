@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gryphia-arrival.webp",
+      "bytes": 19166,
+      "sha256": "78ae5d5384f1bc2e3c2370ef4b4fdbe52302c3a53dbca47ec747c9d023d43b03"
+    },
+    {
+      "location": "public",
       "filename": "gryphia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "gryphia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "ba294b36d0ca9ce7e38c4d509f933ddd374099d5743aa3f6d574c9ab354d5154"
     },
     {
       "location": "prepared",

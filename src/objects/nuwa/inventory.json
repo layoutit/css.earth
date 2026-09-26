@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nuwa-arrival.webp",
+      "bytes": 25576,
+      "sha256": "ca5b731aab3dba256fdd096c09aae8eb057f3212ea2dd6995adddef8e1e74810"
+    },
+    {
+      "location": "public",
       "filename": "nuwa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "nuwa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "575515ec21ccd18db653ec67ad2c883cce49b9d7cc009bb7e8293f05537fd01a"
     },
     {
       "location": "prepared",

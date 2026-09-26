@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vera-arrival.webp",
+      "bytes": 27020,
+      "sha256": "d08d1a025e016e7a5ad4a3d03028e26f205677a1657421cb9ebd12f2ba14ff80"
+    },
+    {
+      "location": "public",
       "filename": "vera-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "vera-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "86ecca7a27acf114d8662a3d69a18acf53b359dbb9a233ea6a030b6d3caf7847"
     },
     {
       "location": "prepared",

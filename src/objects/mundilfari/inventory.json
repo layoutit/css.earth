@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mundilfari-arrival.webp",
+      "bytes": 28410,
+      "sha256": "089641245e6bce6c18b7c73e9918baf1560da24b0418527826e2d9c868228534"
+    },
+    {
+      "location": "public",
       "filename": "mundilfari-model-shadow-alpha@2x.webp",
       "bytes": 142768,
       "sha256": "1a780f7b8c8bb7279dc38fdfe3606e3c328c957ae917eb6847f1673947d1939a"
@@ -30,6 +36,12 @@
       "filename": "mundilfari-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "c7c745cc68abd44101fff76370686b12f2025e098915c84ed2a9b92831ef2277"
     },
     {
       "location": "prepared",

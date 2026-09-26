@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "prospero-arrival.webp",
+      "bytes": 35562,
+      "sha256": "7a1ac8d37574711482550bc7b241afa5f0ac79d55edd9a6e312f00376c1191df"
+    },
+    {
+      "location": "public",
       "filename": "prospero-model-shadow-alpha@2x.webp",
       "bytes": 140090,
       "sha256": "3aa6ccfe9ae8a2d00c6ffced51374af0507e4e7691b6b77890441d104fbb7867"
@@ -30,6 +36,12 @@
       "filename": "prospero-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "5cfc2ff92fff310c53eebbe4d23541545c40696b269f3a38e13aa4a835ecdc59"
     },
     {
       "location": "prepared",

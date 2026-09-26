@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-2i-arrival.webp",
+      "bytes": 32382,
+      "sha256": "82822350cd7506b65cf0b6a00af99950985eb2b39012c79439f47ce69e724baa"
+    },
+    {
+      "location": "public",
       "filename": "comet-2i-model-shadow-alpha@2x.webp",
       "bytes": 123584,
       "sha256": "5625dda6081f43ee0999c4cfd04687b82698c28308a19c5ba408c9309e614727"
@@ -30,6 +36,12 @@
       "filename": "comet-2i-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "7483896bc7dd3b29dc313e55d97ae519412b883657334d591487a8a272cd9969"
     },
     {
       "location": "prepared",

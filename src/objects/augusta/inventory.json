@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "augusta-arrival.webp",
+      "bytes": 22124,
+      "sha256": "db45f15fd121c3496a6a5d82d07904a07891eba3223df7d516420acc32e9887e"
+    },
+    {
+      "location": "public",
       "filename": "augusta-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "augusta-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "7499ff1c7d9cc29cda14892621a09d04a7b4dcd96ae47c0cbc3ad6748f8d9f4a"
     },
     {
       "location": "prepared",

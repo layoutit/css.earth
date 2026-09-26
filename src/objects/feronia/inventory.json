@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "feronia-arrival.webp",
+      "bytes": 23282,
+      "sha256": "19cd52b1dafa151bd620106f39f4e22b257540a43586a4bf89f60c6261ecadba"
+    },
+    {
+      "location": "public",
       "filename": "feronia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "feronia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "b9489ea2781eaaf55f5128541b01b7638e10f8dbb7841d7b77d8243ce06ab233"
     },
     {
       "location": "prepared",

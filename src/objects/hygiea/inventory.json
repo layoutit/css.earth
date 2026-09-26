@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hygiea-arrival.webp",
+      "bytes": 25550,
+      "sha256": "53f0c0fe731ade2579473c333f071eb6dfdcd171c01d73e8b6936aacc58f19c0"
+    },
+    {
+      "location": "public",
       "filename": "hygiea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "hygiea-zimpol-thumbnail.webp",
       "bytes": 1808,
       "sha256": "ad6a6e8d5fdd90cc21eff7579d0a216ede3a5817c1ee082b4c1e17fb47d188f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "ba58c28ead60ce036367a7aa5cfb790a418efa07a2de497d2627a4cea49de01f"
     },
     {
       "location": "prepared",

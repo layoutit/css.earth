@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polydeuces-arrival.webp",
+      "bytes": 31034,
+      "sha256": "6ba81284fe2e1355fd177658c6451d9425f2f31fb9b6c418bf7f35344542f7b4"
+    },
+    {
+      "location": "public",
       "filename": "polydeuces-normal-shadow-alpha@2x.webp",
       "bytes": 153688,
       "sha256": "145295c80fbb42c375d83a13bec4e516bb578799a4c418f373a5619df4eca076"
@@ -30,6 +36,12 @@
       "filename": "polydeuces-normal-thumbnail.webp",
       "bytes": 1932,
       "sha256": "f703c603e25aac9be5e25814f3ae88f6574b756615c0c445976899cae46fb8a4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 393,
+      "sha256": "52a97fb9fd270f8ecf3a092419c2e3bb885375588cfb2a413e9112f357229296"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "roxs-42b-b-arrival.webp",
+      "bytes": 25746,
+      "sha256": "391f82f76ef5d0b81b6942c5559607e89ce543d6a2c9fe73d9a6c69878303093"
+    },
+    {
+      "location": "public",
       "filename": "roxs-42b-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "b0266b85edf491ac6bdd6c973b3c3862f483ea52326e789e262bf2db5b895cf6"
@@ -18,6 +24,12 @@
       "filename": "roxs-42b-b-surface-infrared@2x.webp",
       "bytes": 178,
       "sha256": "dd6792b6e284de16a07fbe61a3f944bd8759662766917dbaab1cccfdbc2f8769"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 306,
+      "sha256": "9d317ad4e3950a57ecbea3432b59455c25ad37d29a93c515e676401fabf1cd2a"
     },
     {
       "location": "prepared",

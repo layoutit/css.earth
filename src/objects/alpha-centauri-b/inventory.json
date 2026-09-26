@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alpha-centauri-b-arrival.webp",
+      "bytes": 33516,
+      "sha256": "e371ca8902b26b8f9837a575dc97aea66c052d35d7e5725258a704710b6904dc"
+    },
+    {
+      "location": "public",
       "filename": "alpha-centauri-b-lens-color.webp",
       "bytes": 44,
       "sha256": "e706293f92a6f12c472873114782f5b9e6a1db7d2af965b25119a74e32d29418"
@@ -24,6 +30,12 @@
       "filename": "alpha-centauri-b-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "8391a7b09da41549fad35d8b92a69753fbaf177336f2cedaa4037daf11ec7452"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 388,
+      "sha256": "0681e9489833912766c9aa2e18951dc0b713a249334b428610bc8c1fe3a16ee4"
     },
     {
       "location": "prepared",

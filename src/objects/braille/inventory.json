@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "braille-arrival.webp",
+      "bytes": 20500,
+      "sha256": "11a2f948952f878fa210355b48939a7d68638e0bfd3bee5521c1d8bd9aca12fb"
+    },
+    {
+      "location": "public",
       "filename": "braille-model-shadow-alpha@2x.webp",
       "bytes": 128286,
       "sha256": "af3b6d1591e8657bea3dc685ee2a8ce09344c4cbc39575127d54c342e9fe957b"
@@ -30,6 +36,12 @@
       "filename": "braille-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 310,
+      "sha256": "a22b90f9cb6383dd9b963cab422e6719af7ed1c013100179105416d20b5ac366"
     },
     {
       "location": "prepared",

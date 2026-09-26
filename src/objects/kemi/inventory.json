@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kemi-arrival.webp",
+      "bytes": 25636,
+      "sha256": "d443e7638a936eb9a0f372b2d493b182e71525645bbf391420b1f3c89eb97d53"
+    },
+    {
+      "location": "public",
       "filename": "kemi-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "kemi-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "11e4db96193d1e816bf350c0e42f18163b9babf73ef6e282da428d3961850b6b"
     },
     {
       "location": "prepared",

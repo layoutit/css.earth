@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thalassa-arrival.webp",
+      "bytes": 28010,
+      "sha256": "0c473e05a40f390d4a31d23a59deb16b0c6cdc2a4253d2936e63ccf2b13d7d00"
+    },
+    {
+      "location": "public",
       "filename": "thalassa-model-shadow-alpha@2x.webp",
       "bytes": 86224,
       "sha256": "054600207093b96991813708ea9467580f890807c470214013ccf8e8c4ae210f"
@@ -30,6 +36,12 @@
       "filename": "thalassa-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "5040ad0a026332f5eb688e8a2912b0d795b164d06c3c6d207e75741f258d40c1"
     },
     {
       "location": "prepared",

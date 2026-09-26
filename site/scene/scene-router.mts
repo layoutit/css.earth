@@ -33,6 +33,7 @@ import { readPreparedDescriptor } from '../prepared-descriptor.mts';
 import { watchSatelliteSelection } from '../satellite-selection.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
+import { observeSceneRetirement } from './scene-memory.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
@@ -381,7 +382,7 @@ export function createSceneRouter({
       }
       syncPlayback();
       const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation, requests,
-        loadObject, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current });
+        loadObject, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current, stage });
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
       request.timing.mark('handoff');
@@ -469,8 +470,10 @@ export function createSceneRouter({
 
   function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true } = {}) {
     if (!scenes.isCurrent(session)) return;
+    const retired = DIAGNOSTICS_ENABLED ? observeSceneRetirement(windowTarget, session.objectId) : null;
     // Detach and invalidate before any user cleanup or native wait can finish.
     const cleanupErrors = session.dispose(error === null ? undefined : error, { flush });
+    retired?.();
     if (!preserveShell) {
       hasPresented = false;
       const owner = shellOwner; shellOwner = null;

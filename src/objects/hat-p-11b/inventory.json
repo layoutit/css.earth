@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hat-p-11b-arrival.webp",
+      "bytes": 31954,
+      "sha256": "7ed7334aa6f1147d94194a45e4bf5da51969b601e0f98d2367667e7fc409d894"
+    },
+    {
+      "location": "public",
       "filename": "hat-p-11b-lens-illustration.webp",
       "bytes": 1352,
       "sha256": "95bca2bb5456faddf6215b055bf321644af229ccc85c66e091073a4587657ef6"
@@ -246,6 +252,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "004c1dffefc2354b64a5783f7e39eb695746b10d3c4ceeaf088b08c7327694e4"
     },
     {
       "location": "prepared",

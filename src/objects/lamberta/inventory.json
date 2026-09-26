@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lamberta-arrival.webp",
+      "bytes": 23250,
+      "sha256": "a88bb02f4038f62a8f1f0dcdfa95502c879a6e507257e1aebabf43d754e0fd03"
+    },
+    {
+      "location": "public",
       "filename": "lamberta-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "lamberta-zimpol-thumbnail.webp",
       "bytes": 1548,
       "sha256": "b1c2cfe47873dd67bdb24d9e1185ebfd1c7611c87156f7c15f7f8f78f6d3fafc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "fba4d4cb167961c6b531e3ac28c4733138096dbc99ac74584f0f6ac606d7bdf4"
     },
     {
       "location": "prepared",

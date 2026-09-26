@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "felicitas-arrival.webp",
+      "bytes": 27074,
+      "sha256": "b721b9b3aca95c164bf635a50d7d743955fee38d5efb15f07c3700f590129188"
+    },
+    {
+      "location": "public",
       "filename": "felicitas-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "felicitas-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "ee2ff2312456cb0b1cf690c1ef586f8285d1b9eb6ab9b0b33b509829d2bc4580"
     },
     {
       "location": "prepared",

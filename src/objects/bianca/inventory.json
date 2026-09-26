@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bianca-arrival.webp",
+      "bytes": 25018,
+      "sha256": "681e79fdb4b3216b210b10e266915aafb3a46cb2c6743ecfc06a23c4e036133e"
+    },
+    {
+      "location": "public",
       "filename": "bianca-model-shadow-alpha@2x.webp",
       "bytes": 144726,
       "sha256": "67fde9fd5c98fc4ac66603a3d2169a88fce055dcd0ddaa2780dc5f7ebf82edf9"
@@ -30,6 +36,12 @@
       "filename": "bianca-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 309,
+      "sha256": "ba1e23c5a7f57931d3e25db84ef9dd4a355e76a9245d1ea04cae7ac0b87c3761"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "libussa-arrival.webp",
+      "bytes": 45872,
+      "sha256": "d8d1f189fa9f1416825e80c72d9484e7f845d9809a6f319774d56a68fb138622"
+    },
+    {
+      "location": "public",
       "filename": "libussa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "libussa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "8c00766f14560e91b7c9c12a67f6eafe50112f1313ee9643393f3d13e025e357"
     },
     {
       "location": "prepared",

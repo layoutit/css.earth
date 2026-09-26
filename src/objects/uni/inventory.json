@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "uni-arrival.webp",
+      "bytes": 36102,
+      "sha256": "b4c86a600a0167823d88c5c03159da072aa367336e1cba9a6a9c2326fa64c108"
+    },
+    {
+      "location": "public",
       "filename": "uni-model-shadow-alpha@2x.webp",
       "bytes": 126698,
       "sha256": "301c5cfb4dc5476c1a0f154aa2669633a424319d1bb7258d70c814bbd26c9a16"
@@ -30,6 +36,12 @@
       "filename": "uni-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "f8039faf8bf3d52faea359c6aa29988eb28b72f5a91968c26d3bb743d150dc3b"
     },
     {
       "location": "prepared",

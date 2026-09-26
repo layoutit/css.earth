@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "belinda-arrival.webp",
+      "bytes": 25668,
+      "sha256": "9b560ddf0086627314fd381e1f70f8c0fc103925ea4d177e4fef94386ad4d0b7"
+    },
+    {
+      "location": "public",
       "filename": "belinda-model-shadow-alpha@2x.webp",
       "bytes": 137904,
       "sha256": "81849efabf3525f7cb517c8e3504b7791b11eb5065896225fe54cfb0429b49d2"
@@ -30,6 +36,12 @@
       "filename": "belinda-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "1477e6cfee283f61e65e01f6b932b0dbb2fbea5f7afb1dcbea985eebc02d4d36"
     },
     {
       "location": "prepared",

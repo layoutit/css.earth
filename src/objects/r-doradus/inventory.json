@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "r-doradus-arrival.webp",
+      "bytes": 67642,
+      "sha256": "62583da31f79d9120cbab97599ffc0bedf9bdf13f3550c3801e7791de4c42cfe"
+    },
+    {
+      "location": "public",
       "filename": "r-doradus-context-alma@2x.webp",
       "bytes": 89818,
       "sha256": "8fcb5e46cc3f18c5fd524ac745b5ec580745a9e530c3c02c1d79d0c4ce30be96"
@@ -60,6 +66,12 @@
       "filename": "r-doradus-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "d5b45092d7fb3ae22eb7d22bb9e8f7118de5ccc2712921e6da390cb80205d1c6"
     },
     {
       "location": "prepared",

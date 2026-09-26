@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "isonoe-arrival.webp",
+      "bytes": 33154,
+      "sha256": "39cf6158bd11cdc5a81a9cdd403fbd295d23beb782e16ff730127235e3197f46"
+    },
+    {
+      "location": "public",
       "filename": "isonoe-model-shadow-alpha@2x.webp",
       "bytes": 129614,
       "sha256": "68fe5e2f9f296412aade7f3b13757153bb198098a2fc6589ddf21cc491276217"
@@ -30,6 +36,12 @@
       "filename": "isonoe-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "33668b0c455c5e98139ac205b9551d6710c81fe12443902893311181a98a8dbd"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bergelmir-arrival.webp",
+      "bytes": 29866,
+      "sha256": "7cd3677cc90db768d8eee57791920edceb9915692f41a4aebcd32fd973738225"
+    },
+    {
+      "location": "public",
       "filename": "bergelmir-model-shadow-alpha@2x.webp",
       "bytes": 139660,
       "sha256": "cded637ba569aa253195a75841baac287d521ca8c3991455f076dc000c2e0efb"
@@ -30,6 +36,12 @@
       "filename": "bergelmir-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "1dbb63e3149e875bbc41d107330d703bcde4f46422a00f2cb4f3ad87d7451d5a"
     },
     {
       "location": "prepared",

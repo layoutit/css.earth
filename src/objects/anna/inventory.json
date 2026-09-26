@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "anna-arrival.webp",
+      "bytes": 25984,
+      "sha256": "3a50fa0acda945ac3f5cfd0b5936c9595cc1f40f8df3c22332590b4c3ff31fc2"
+    },
+    {
+      "location": "public",
       "filename": "anna-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "anna-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "134f1135c866de1fa0d0f88e7ec85c1b2d78cc147b60f5811eeca3066d92bec2"
     },
     {
       "location": "prepared",

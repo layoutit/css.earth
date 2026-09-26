@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chaldene-arrival.webp",
+      "bytes": 32206,
+      "sha256": "9a55618faa48c5765fcf8ec40d4f2a956c4143906963a9d4f30d530015aa2236"
+    },
+    {
+      "location": "public",
       "filename": "chaldene-model-shadow-alpha@2x.webp",
       "bytes": 124246,
       "sha256": "46f043e9e193e02267dc39d6d47ce8e2610463be50b7d5e176a0d2457579c051"
@@ -30,6 +36,12 @@
       "filename": "chaldene-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "843cf3423976bc9050a388982c993b92d94bab00ce338e7f8a591cf5f9ee78ec"
     },
     {
       "location": "prepared",

@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "oberon-arrival.webp",
+      "bytes": 57468,
+      "sha256": "8989d5d2ce9d76cfcf26112a7b2c4c122dd254b07de289e2b3c27279d14f698d"
+    },
+    {
+      "location": "public",
       "filename": "oberon-features.json",
       "bytes": 15954,
       "sha256": "4e1bd55a75963f24e8d6bbd39b6ac90a5b5ac2fad4b30f95b1f83bf14c3896de"
@@ -252,6 +258,12 @@
       "filename": "oberon-voyager-color@2x.webp",
       "bytes": 129862,
       "sha256": "714b0f0674d6ed3ab02512c619338aed7a36d8a28f49ce09f5f2833c77cd13f1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "acba8c95bf6f10ababfe596651588c6812b08feadeabfe597d59ca5790db2346"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "harpalyke-arrival.webp",
+      "bytes": 31576,
+      "sha256": "fc7f33124499369d49fc08f86d8cc7a5e48b0c57dbec51d22e1783f8fa61ce4b"
+    },
+    {
+      "location": "public",
       "filename": "harpalyke-model-shadow-alpha@2x.webp",
       "bytes": 128142,
       "sha256": "91e09146fa2c1e96497a0bb7b07983f5391a678469ec3ab41c7019809ae5fde3"
@@ -30,6 +36,12 @@
       "filename": "harpalyke-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "9caf7c1c1398c71e43188a7d539121c4a34f1cb061de3fa466ea3796745dd376"
     },
     {
       "location": "prepared",

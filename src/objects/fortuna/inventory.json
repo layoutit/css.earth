@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "fortuna-arrival.webp",
+      "bytes": 21856,
+      "sha256": "db7bc5ef41923f79781e587aed8fe56b1c5ed23056d01a47076aa099d011c407"
+    },
+    {
+      "location": "public",
       "filename": "fortuna-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "fortuna-zimpol-thumbnail.webp",
       "bytes": 1622,
       "sha256": "62f55888cd4694d5103f7c88480c070602298a5843733b0eacf27ceca31b8f5e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "80ba7c167f6488e6f761e66f529705fef83b0f9fdd995ee0b0d9516d0a4fe54e"
     },
     {
       "location": "prepared",

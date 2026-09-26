@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hesperia-arrival.webp",
+      "bytes": 24644,
+      "sha256": "885751119f4dba98d5ed4bbb55a868acc2c7b7467170eb386124f7ccb31b6868"
+    },
+    {
+      "location": "public",
       "filename": "hesperia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "hesperia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "ef705cf4fe23635c01098e2ab75f22691ea80c8f3a95d7f060aaab76f33abd82"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "anthe-arrival.webp",
+      "bytes": 30200,
+      "sha256": "a87f99c83d1f4ca1e34139ff24ef2bf4d7b7b810dc43f63437658516cd6115ac"
+    },
+    {
+      "location": "public",
       "filename": "anthe-model-shadow-alpha@2x.webp",
       "bytes": 123662,
       "sha256": "37e485042a618fd9a3de0089eb9170a904e140f2b4ce172b522c27d601528566"
@@ -30,6 +36,12 @@
       "filename": "anthe-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "8e0049dcc245e0452292a9d688c6ecf8a307dcdb32d4911c4e318abf6a2ad150"
     },
     {
       "location": "prepared",

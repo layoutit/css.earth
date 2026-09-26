@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thereus-arrival.webp",
+      "bytes": 32222,
+      "sha256": "5c3f05deed20105726f931c28fb704817b1335f0520f49366b48d1dce8d4648a"
+    },
+    {
+      "location": "public",
       "filename": "thereus-model-shadow-alpha@2x.webp",
       "bytes": 127418,
       "sha256": "74f4ed20eaaa7fe2fd21a95ffb59b810b361b7936aafa2dba04f29572eefef2a"
@@ -30,6 +36,12 @@
       "filename": "thereus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "b237d6ce453896e9886bdf488d608599b95eeff4ec7dc9ea2d3ba84e3235dc35"
     },
     {
       "location": "prepared",

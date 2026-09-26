@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-189733-arrival.webp",
+      "bytes": 46720,
+      "sha256": "f0f3bdc853485cd02ac3047559e7af3778c097681f7bbffa7e02b2efd8574a40"
+    },
+    {
+      "location": "public",
       "filename": "hd-189733-lens-activity-model.webp",
       "bytes": 1810,
       "sha256": "d2fdde137123b72810257cc65d6b993e0f72fd4a05748a208bc8849e40c5ea02"
@@ -72,6 +78,12 @@
       "filename": "hd-189733-surface-spot-2021@2x.webp",
       "bytes": 178,
       "sha256": "3f2b0d6a1dab8a50d819f4a00182c825c74ba5ad4c4524cc5ffa7d1911071f00"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "42843a2ebe579ffb7e48f0bb16eb0b22e306a93ccec5003257c410bc44d3ec88"
     },
     {
       "location": "prepared",

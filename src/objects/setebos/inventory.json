@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "setebos-arrival.webp",
+      "bytes": 26572,
+      "sha256": "27b47a0661b94d0b6d4ae818fc8a0d99a196f1d831195d194f2b2c85c846385f"
+    },
+    {
+      "location": "public",
       "filename": "setebos-model-shadow-alpha@2x.webp",
       "bytes": 140714,
       "sha256": "71c16493c310ef3e5fbdc52c2649b937283db8751ae1e5ec9202bd01d5a4b412"
@@ -30,6 +36,12 @@
       "filename": "setebos-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "e79691d1594e5c4eeff5bd02298bc3441082cbb5c74c76cc17cb010f1179bb2c"
     },
     {
       "location": "prepared",

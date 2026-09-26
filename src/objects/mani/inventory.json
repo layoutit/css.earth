@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mani-arrival.webp",
+      "bytes": 31564,
+      "sha256": "2dfdf24bd1c60513d76943c1a0fb629e29883f7d826db5841f14c0e0a0224d00"
+    },
+    {
+      "location": "public",
       "filename": "mani-model-shadow-alpha@2x.webp",
       "bytes": 125606,
       "sha256": "87329ccdf4fecada0cfbc639c7aa2a028232d6f981ccdda569b50150f2d04453"
@@ -30,6 +36,12 @@
       "filename": "mani-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "5b4029399f08c4d33bbb292e2c3aea6df8d5405f890588545223772b6c3cf045"
     },
     {
       "location": "prepared",

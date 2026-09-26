@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "orus-arrival.webp",
+      "bytes": 29486,
+      "sha256": "f03a6dfb682d3d489cf010b550e99e7f561b1110b4c6e32c4457f3fc742178ac"
+    },
+    {
+      "location": "public",
       "filename": "orus-model-shadow-alpha@2x.webp",
       "bytes": 135802,
       "sha256": "c4e9d8b409ac3dd1100012769f6726b286a78c175f1013110d1da80c2f14ee2a"
@@ -30,6 +36,12 @@
       "filename": "orus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "32d5d7f3e3f9264074e6c476949537641587f36a315454afd5fa1bcf4d132bb4"
     },
     {
       "location": "prepared",

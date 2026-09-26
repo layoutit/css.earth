@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "meliboea-arrival.webp",
+      "bytes": 24954,
+      "sha256": "d0a426eb90f190c97f1a923a69cf507bf760af511aedcbbd9965b870340bf538"
+    },
+    {
+      "location": "public",
       "filename": "meliboea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "meliboea-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "9f6f3d6a015128390304db6704ff66f0f5b7bba53b36f2c8e28d9e5b2c93439b"
     },
     {
       "location": "prepared",

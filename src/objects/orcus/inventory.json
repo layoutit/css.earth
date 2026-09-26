@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "orcus-arrival.webp",
+      "bytes": 31984,
+      "sha256": "b3003fa5d094b138409d6efd530a6406913a36c4d2aaf532792b7a45aa3d3b80"
+    },
+    {
+      "location": "public",
       "filename": "orcus-model-shadow-alpha@2x.webp",
       "bytes": 130490,
       "sha256": "429f891fb641f7661121b1d1c94186000433c20a39fbbaab3fd49e07ccc76b14"
@@ -30,6 +36,12 @@
       "filename": "orcus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 307,
+      "sha256": "bbc5ccd5d034d207b48ace0082b9a3bb6302730d3509fe493e4c831e165764fc"
     },
     {
       "location": "prepared",

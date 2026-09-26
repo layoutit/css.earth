@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dinkinesh-arrival.webp",
+      "bytes": 60160,
+      "sha256": "214496158bc221df835569d20920f2d90b7e713653de309bb5af0c2c53618cba"
+    },
+    {
+      "location": "public",
       "filename": "dinkinesh-features.json",
       "bytes": 3841,
       "sha256": "5d760d17fb3cddb25203c267c8f3204cb0ae4afab999d2a618ccd08e84a3febe"
@@ -66,6 +72,12 @@
       "filename": "dinkinesh-tempest-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 309,
+      "sha256": "c89ea754279d462df17aa358cbc0920c8c16cd1e0f7f5e31bcff575fdb04ef35"
     },
     {
       "location": "prepared",

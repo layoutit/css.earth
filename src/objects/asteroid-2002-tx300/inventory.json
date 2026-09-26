@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2002-tx300-arrival.webp",
+      "bytes": 28084,
+      "sha256": "7eb636553773d123bd6c1d69090104a54af2af050816e4cd8dddddb07a810cc7"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2002-tx300-model-shadow-alpha@2x.webp",
       "bytes": 124000,
       "sha256": "ca58f983613d3236eb7889f0459e171d987768682aca21f0069e66a0850e4721"
@@ -30,6 +36,12 @@
       "filename": "asteroid-2002-tx300-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 335,
+      "sha256": "13e503a373fa2a7f5777acf39697067a3f7599579b9222fee2919d5b48a4b95c"
     },
     {
       "location": "prepared",

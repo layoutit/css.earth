@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "crimea-arrival.webp",
+      "bytes": 25318,
+      "sha256": "5b670adeee09c227cddad493fc415e2f0d4c5fece3c238ebaf034a2a06b0e926"
+    },
+    {
+      "location": "public",
       "filename": "crimea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "crimea-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "5570f6f34a91ee8c0dc91f10441a2bae0887d5001e756bf84a6b760d58759157"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "badenia-arrival.webp",
+      "bytes": 25500,
+      "sha256": "f972f807c571b7e051bcd9f8991ec325e1e9332f1de1dd46cfda6ee57de5c7b3"
+    },
+    {
+      "location": "public",
       "filename": "badenia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "badenia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "2124b1c8bd3c96681a71cc82c5df74e4013ce32a9c81274062861d2e2e9a417d"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "adrastea-arrival.webp",
+      "bytes": 29464,
+      "sha256": "5261282085cf8f5339feacb103109f77b38895dfbbeeca08620e3cdbcd14c3dc"
+    },
+    {
+      "location": "public",
       "filename": "adrastea-model-shadow-alpha@2x.webp",
       "bytes": 100860,
       "sha256": "4a2b4bed1dd8adcc1ef89fa170cbb767d4a894ee31a307b28a581eb22d1e7c2e"
@@ -30,6 +36,12 @@
       "filename": "adrastea-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "fd87074f342f263bb72251bac483026193234df200d4b787278f3ae66aed6845"
     },
     {
       "location": "prepared",

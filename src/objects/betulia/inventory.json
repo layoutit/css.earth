@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "betulia-arrival.webp",
+      "bytes": 20770,
+      "sha256": "301739af94c308c7a8d046ee2b097e1d317a7c5c1274bb3f2fde8c7204ca281d"
+    },
+    {
+      "location": "public",
       "filename": "betulia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "betulia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "550ba8d54b357304c73dfdae83c19892df4745dfd80a2dfa5025a1d43c6e8cb8"
     },
     {
       "location": "prepared",

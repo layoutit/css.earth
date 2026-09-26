@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-1p-arrival.webp",
+      "bytes": 52192,
+      "sha256": "c4032188ec0bfa51b2fac5f251cd4ead073dcfbbebbcdbbd13e110a90791940f"
+    },
+    {
+      "location": "public",
       "filename": "comet-1p-giotto-shadow-alpha@2x.webp",
       "bytes": 320330,
       "sha256": "352e58444f216bd7ca44695e1d95bfbcaf2417fd145de176052dcbe9c9f10e64"
@@ -60,6 +66,12 @@
       "filename": "comet-1p-model-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 312,
+      "sha256": "ac8b08be814d23a6f4826dc984736b0027dae0434310fb91a5a6298c8cad4f0f"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nereid-arrival.webp",
+      "bytes": 29620,
+      "sha256": "02d1020b6f2d3e530b72ea58b856ebf9e44cf125ca4e34cb61319f051453403b"
+    },
+    {
+      "location": "public",
       "filename": "nereid-model-shadow-alpha@2x.webp",
       "bytes": 141964,
       "sha256": "383d9ac3d82a706cee15c31bd95f571529977b3b0547cf06d6df91094edff5ee"
@@ -30,6 +36,12 @@
       "filename": "nereid-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "b8108fbcd4bb85217f6eb88b2d249179f8e2d81c8ec7cbfa017e1c571c453ab4"
     },
     {
       "location": "prepared",

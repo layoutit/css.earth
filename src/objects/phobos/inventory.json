@@ -39,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "phobos-arrival.webp",
+      "bytes": 104808,
+      "sha256": "83c36f0471a5fd574cc7f2556c059d0a81b3e80ec5138c26c1557de6e262a392"
+    },
+    {
+      "location": "public",
       "filename": "phobos-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -144,6 +150,12 @@
       "filename": "phobos-slope-thumbnail.webp",
       "bytes": 1218,
       "sha256": "142a9046bf6a10dd231520b713f9737c03e5144c22382140dd6018528ba7dfaf"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "db451c83991fee5221cc1fd253aa85c70ad38acfe2db11fcc8e5863f4f534dec"
     },
     {
       "location": "prepared",

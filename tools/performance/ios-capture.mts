@@ -46,6 +46,7 @@ import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readSourceMap } from './trace-brief.mts';
+import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';
 
 const run = promisify(execFile);
 const root = resolve(import.meta.dirname, '../..');
@@ -140,7 +141,8 @@ export function screenshotArtifact(step: Step): string | null {
 async function perform(steps: readonly Step[], target: Target, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
   evaluate: (expression: string) => Promise<unknown>, snapshotLayers: (selector?: string) => Promise<unknown>,
   captureScreen: (file: string) => Promise<void>, captureViewport: (file: string) => Promise<void>,
-  awaitRoute: (pathname: string) => Promise<unknown>, strictSteps = false) {
+  awaitRoute: (pathname: string) => Promise<unknown>, strictSteps = false,
+  afterStep?: (index: number) => Promise<void>) {
   const udid = target.udid;
   for (const [index, step] of steps.entries()) {
     const label = JSON.stringify(step);
@@ -180,6 +182,7 @@ async function perform(steps: readonly Step[], target: Target, out: string, mark
     }
     else await run('axe', ['drag', '--start-x', String(step.drag.from[0]), '--start-y', String(step.drag.from[1]),
       '--end-x', String(step.drag.to[0]), '--end-y', String(step.drag.to[1]), '--duration', String(step.drag.seconds), '--udid', udid]);
+    await afterStep?.(index);
     if (strictSteps) console.error(`iPad step ${index + 1}/${steps.length} complete${mark.value === undefined ? '' : `: ${JSON.stringify(mark.value).slice(0, 180)}`}`);
   }
 }
@@ -555,14 +558,16 @@ async function layerTree(session: ReturnType<typeof inspector>, options: { byMem
     const resolved = await session.send('DOM.resolveNode', { nodeId });
     const objectId = isRecord(resolved.result) && isRecord(resolved.result.object) ? resolved.result.object.objectId : null;
     if (typeof objectId !== 'string') return null;
-    const call = await session.send('Runtime.callFunctionOn', { objectId, returnByValue: true, functionDeclaration: `function () {
+    try {
+      const call = await session.send('Runtime.callFunctionOn', { objectId, returnByValue: true, functionDeclaration: `function () {
       const element = this.nodeType === 1 ? this : this.parentElement; if (!element) return null;
       const style = getComputedStyle(element);
       const data = [...element.attributes].filter(attribute => attribute.name.startsWith('data-') || attribute.name === 'id').map(attribute => attribute.name + '=' + attribute.value.slice(0, 40));
       const path = []; for (let node = element; node && path.length < 4; node = node.parentElement) path.push(node.tagName.toLowerCase() + (node.className && typeof node.className === 'string' ? '.' + node.className.trim().split(/\\s+/).slice(0, 2).join('.') : ''));
       return { path: path.join(' < '), data, image: style.backgroundImage.slice(0, 160), size: element.offsetWidth + 'x' + element.offsetHeight };
     }` });
-    return isRecord(call.result) && isRecord(call.result.result) ? call.result.result.value ?? null : null;
+      return isRecord(call.result) && isRecord(call.result.result) ? call.result.result.value ?? null : null;
+    } finally { await session.send('Runtime.releaseObject', { objectId }); }
   };
   const described = [];
   for (const layer of largest) described.push({ layer, element: await describe(layer.nodeId) });
@@ -1145,7 +1150,8 @@ export function devicePageProcess(samples: readonly unknown[]): number | null {
 export function traceEvents(records: readonly unknown[], stopwatchEpochMs: number,
   device: { graphics: readonly unknown[]; webContent: readonly unknown[] } | null, metadata: Record<string, unknown>,
   cpu: { updates: readonly unknown[]; workers: ReadonlyMap<string, string> } = { updates: [], workers: new Map() },
-  native: { samples: readonly NativeSample[]; offsetUs: number } | null = null) {
+  native: { samples: readonly NativeSample[]; offsetUs: number } | null = null,
+  evidence: { memory?: readonly unknown[]; snapshots?: readonly unknown[]; released?: readonly unknown[] } = {}) {
   const events: Record<string, unknown>[] = [
     { ph: 'M', name: 'process_name', pid: 1, tid: 1, args: { name: 'Safari web content (page)' } },
     { ph: 'M', name: 'thread_name', pid: 1, tid: 1, args: { name: 'WebKit timeline' } },
@@ -1159,6 +1165,20 @@ export function traceEvents(records: readonly unknown[], stopwatchEpochMs: numbe
     if (Array.isArray(record.children)) record.children.forEach(visit);
   };
   records.forEach(visit);
+  // WebKit category accounting is distinct from the device's physical footprint.
+  for (const update of evidence.memory ?? []) {
+    if (!isRecord(update) || typeof update.timestamp !== 'number' || !Array.isArray(update.categories)) continue;
+    events.push({ ph: 'C', name: 'WebKit memory MiB', pid: 1, tid: 1, ts: micros(update.timestamp),
+      args: Object.fromEntries(update.categories.filter(isRecord).filter(category => typeof category.type === 'string' && typeof category.size === 'number')
+        .map(category => [String(category.type), Math.round(Number(category.size) / 1048576 * 100) / 100])) });
+  }
+  for (const [name, records] of [['cssEarth residency', evidence.snapshots ?? []], ['cssEarth scene released', evidence.released ?? []]] as const) {
+    for (const data of records) {
+      if (!isRecord(data) || typeof data.atEpochMs !== 'number') continue;
+      events.push({ ph: 'i', s: 't', name, cat: 'cssearth.memory', pid: 1, tid: 1,
+        ts: Math.round((data.atEpochMs - stopwatchEpochMs) * 1000), args: { data } });
+    }
+  }
   // WebKit's CPU profiler, every 500 ms: one counter track per thread ("CPU % Main Thread", "CPU % worker …"), so a
   // stretch where the timeline shows no work still shows which thread was busy.
   for (const update of cpu.updates) {
@@ -1402,10 +1422,12 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
       throw new Error(`Web Inspector could not evaluate the step: ${JSON.stringify(reply).slice(0, 500)}`);
     const promise = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.objectId : null;
     if (typeof promise !== 'string') throw new Error(`Web Inspector returned no step result: ${JSON.stringify(reply).slice(0, 500)}`);
-    const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
-    if ('timeout' in settled || 'error' in settled || isRecord(settled.result) && settled.result.wasThrown === true)
-      throw new Error(`Web Inspector step failed: ${JSON.stringify(settled).slice(0, 500)}`);
-    return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
+    try {
+      const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
+      if ('timeout' in settled || 'error' in settled || isRecord(settled.result) && settled.result.wasThrown === true)
+        throw new Error(`Web Inspector step failed: ${JSON.stringify(settled).slice(0, 500)}`);
+      return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
+    } finally { await session.send('Runtime.releaseObject', { objectId: promise }); }
   };
   const awaitRoute = async (pathname: string): Promise<unknown> => {
     const deadline = Date.now() + 90_000;
@@ -1448,7 +1470,20 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay!)), ...replay }, null, 2) + '\n');
   }
   const memoryBefore = await memorySample(session, events);
+  const heapSnapshot = async (phase: 'before' | 'after') => {
+    if (!args.includes('--heap-snapshot')) return;
+    const heap = await session.send('Heap.snapshot');
+    if (!isRecord(heap.result) || typeof heap.result.snapshotData !== 'string') throw new Error('WebKit returned no heap snapshot.');
+    await writeFile(resolve(out, `heap.${phase}.json`), heap.result.snapshotData);
+  };
+  await heapSnapshot('before');
+  const residencySnapshots: unknown[] = [await evaluate(INSTALL_RESIDENCY_PROBE)];
+  const residencyCheckpoint = async (step: number) => {
+    const value = await evaluate(READ_RESIDENCY_PROBE);
+    residencySnapshots.push(isRecord(value) ? { ...value, step } : { step, error: 'Residency probe unavailable after navigation.' });
+  };
   const recordingStart = events.length;
+  await session.send('Memory.startTracking');
 
   // Instruments first, so the native trace covers the whole moment.
   const native = resolve(out, 'native.trace');
@@ -1511,7 +1546,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     try {
       await perform(steps, target, out, marks, started, evaluate,
         selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }),
-        captureScreen, file => snapshotViewport(session, file), awaitRoute, args.includes('--strict-steps'));
+        captureScreen, file => snapshotViewport(session, file), awaitRoute, args.includes('--strict-steps'), residencyCheckpoint);
     } catch (error) {
       xctrace?.kill('SIGINT');
       await Promise.allSettled([monitors?.stop(), screens?.stop(), session.send('Timeline.stop'), session.send('CPUProfiler.stopTracking')]);
@@ -1546,6 +1581,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   if (styleWrites) await writeFile(resolve(out, 'style-writes.json'), JSON.stringify({ startedMs: styleWritesStarted, ...styleWrites }, null, 1) + '\n');
   if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   await session.send('Timeline.stop');
+  await session.send('Memory.stopTracking');
   await session.send('CPUProfiler.stopTracking');
   await session.send('ScriptProfiler.stopTracking');
   for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
@@ -1557,6 +1593,12 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const moment = events.slice(recordingStart);
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
+  await residencyCheckpoint(steps.length);
+  const retired = await evaluate(STOP_RESIDENCY_PROBE);
+  const residency = { snapshots: residencySnapshots, released: isRecord(retired) && Array.isArray(retired.released) ? retired.released : [],
+    droppedReleases: isRecord(retired) ? retired.dropped : null };
+  await writeFile(resolve(out, 'residency.json'), JSON.stringify(residency, null, 2) + '\n');
+  await heapSnapshot('after');
   session.close(); proxy?.kill();
 
   // Page side.
@@ -1577,6 +1619,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const javascript = Object.fromEntries([...stacks].map(([target, list]) => [target, summariseSamples(list, frame => namer.name(frame))]));
   const timeline = summariseTimeline(timelineRecords);
   const cpuUpdates = moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event);
+  const memoryUpdates = moment.filter(event => event.method === 'Memory.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event);
+  const evidence = { memory: memoryUpdates, ...residency };
   // What jankmonster's report reads beside a trace (its record.mjs writes the same file for Chrome).
   const [width, height] = Array.isArray(viewport) ? viewport : [];
   await writeFile(resolve(out, 'trace.recording.json'), JSON.stringify({
@@ -1611,8 +1655,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const nativeSamples = 'samples' in nativeResult && nativeResult.startMs !== null ? { samples: nativeResult.samples, offsetUs: (nativeResult.startMs - stopwatchEpochMs) * 1000 } : null;
   // Everything trace.json is made from, so --rebuild can remake it (a failed export, a new track) without a new take.
   await writeFile(resolve(out, 'raw.json.gz'), gzipSync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1', moment, stopwatchEpochMs, deviceSamples,
-    workers: [...workers], pagePid, metadata: { url, endUrl, target: target.kind, ...(device ? { device } : {}) } })));
-  await writeFile(resolve(out, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, { url, endUrl, target: target.kind, ...(device ? { device } : {}) }, { updates: cpuUpdates, workers }, nativeSamples)) + '\n');
+    workers: [...workers], pagePid, evidence, metadata: { url, endUrl, target: target.kind, ...(device ? { device } : {}) } })));
+  await writeFile(resolve(out, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, { url, endUrl, target: target.kind, ...(device ? { device } : {}) }, { updates: cpuUpdates, workers }, nativeSamples, evidence)) + '\n');
 
   const pixels = option.compare ? await compareScreenshots(out, (await baselineCaptures(option.compare))[0]!, steps) : null;
   const revision = (await run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' }))).stdout.trim() || null;
@@ -1622,7 +1666,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     ...(device ? { device, deviceMetrics: deviceSummary } : {}), durationMs, steps: marks,
     screenshots: marks.flatMap(mark => isRecord(mark.value) && typeof mark.value.file === 'string' && typeof mark.value.source === 'string' ? [mark.value] : []),
     filmstrip: screens ? { source: 'device-screen', frames: filmstripCount } : null, workers: Object.fromEntries(workers),
-    sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter },
+    sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter,
+      source: 'WebKit category accounting; endpoints after GC, continuous samples without forced GC; not process physical footprint', samples: memoryUpdates }, residency,
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
     native: nativeSummary, pixels, files: (await readdir(out)).sort(),
@@ -1653,7 +1698,8 @@ function readme(r: ReadmeInput): string {
     ...(r.screenshots.length || r.filmstrip ? ['## Visual evidence', '',
       ...r.screenshots.map(shot => `- ${shot.file}: ${shot.source}, ${shot.width}×${shot.height}, Safari page ${shot.pageUrl}`),
       ...(r.filmstrip ? [`- screens/*.jpg: ${r.filmstrip.frames} ${r.filmstrip.source} frames; continuous grabbing can affect timing.`] : []), ''] : []),
-    `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
+    `Memory (WebKit categories in MiB, endpoints after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}. This is not process physical footprint.`, '',
+    'Residency and cleanup: [residency.json](residency.json). The trace includes memory counters and scene-release timestamps. Optional heaps: `heap.before.json` and `heap.after.json`.', '',
     ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
       .map(step => { const label: unknown = JSON.parse(step.label), name = isRecord(label)
         ? label.probe ?? label.screenshot ?? label.viewport ?? (label.replay ? 'replay' : 'script') : 'script';
@@ -1763,7 +1809,7 @@ export async function rebuildTrace(dir: string) {
   const nativeSamples = exported && exported.startMs !== null ? { samples: exported.samples, offsetUs: (exported.startMs - stopwatchEpochMs) * 1000 } : null;
   const deviceSamples = isRecord(raw.deviceSamples) ? raw.deviceSamples as { graphics: unknown[]; webContent: unknown[] } : null;
   await writeFile(resolve(dir, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, isRecord(raw.metadata) ? raw.metadata : {},
-    { updates: cpuUpdates, workers }, nativeSamples)) + '\n');
+    { updates: cpuUpdates, workers }, nativeSamples, isRecord(raw.evidence) ? raw.evidence : {})) + '\n');
   console.log(`${dir}/trace.json rebuilt${nativeSamples ? `, ${nativeSamples.samples.length} native samples` : hasNative ? `, native export failed: ${exported && 'error' in exported.summary ? exported.summary.error.trim() : '?'}` : ''}`);
 }
 

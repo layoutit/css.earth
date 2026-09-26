@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "enceladus-arrival.webp",
+      "bytes": 82956,
+      "sha256": "4953332b3cab4112592120cafc6f4a5f283f90e06cf01fd8d7c304cc35fec169"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-elevation-legend.webp",
       "bytes": 240,
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
@@ -174,6 +180,12 @@
       "filename": "enceladus-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "d933166c8a09d539ff718fedf0df748d5bb9841bb289f06d1189e7d82f810175"
     },
     {
       "location": "prepared",

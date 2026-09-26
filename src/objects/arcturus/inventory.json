@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "arcturus-arrival.webp",
+      "bytes": 34854,
+      "sha256": "9ddaae04cdba00b2f4688f4b825e1802f189ee94cfaed0b12acaa11001e3c458"
+    },
+    {
+      "location": "public",
       "filename": "arcturus-lens-color.webp",
       "bytes": 44,
       "sha256": "c6416430ee4813245c354ce3a92bc9fc7171ce08a6ec05138c2221fef130981e"
@@ -24,6 +30,12 @@
       "filename": "arcturus-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "0cacc0ca45a0203d3fcec0b847b93d14ca36e97fa4d42e63ce1ff88cc1d3ae6b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "b4157e41c0e540782cfdf245d86cbeaf8699b3c920a8cf865ddaecae814972a3"
     },
     {
       "location": "prepared",

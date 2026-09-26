@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kepler-444b-arrival.webp",
+      "bytes": 31236,
+      "sha256": "cc9016513981e94a0da4d076f72a8318a2986dc5c81b2c92958d00b419e78f32"
+    },
+    {
+      "location": "public",
       "filename": "kepler-444b-lens-shape.webp",
       "bytes": 44,
       "sha256": "ceb9e0ad20fcd066ce684359dc21d668bee37a233417ea6cd97b0bbb0ae618e6"
@@ -228,6 +234,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "46100f94866e8b95a99d1c106815b4e1e84bfd8911e635a760dd47fd3e029d44"
     },
     {
       "location": "prepared",

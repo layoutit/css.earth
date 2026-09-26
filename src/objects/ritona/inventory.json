@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ritona-arrival.webp",
+      "bytes": 30816,
+      "sha256": "80e38f0024ab83e43fd04371763e5370be7fff7d6e1245684aa86e223f4ec8ce"
+    },
+    {
+      "location": "public",
       "filename": "ritona-model-shadow-alpha@2x.webp",
       "bytes": 121064,
       "sha256": "994c1c49aeec1074e87d1ac85ddb765281ac2fd4f45cf47133dbb46c749c415f"
@@ -30,6 +36,12 @@
       "filename": "ritona-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "42ecc544e087dd36162d8dd54a859f98f0da9425bbeb5df9e7d7549dc5dbf686"
     },
     {
       "location": "prepared",

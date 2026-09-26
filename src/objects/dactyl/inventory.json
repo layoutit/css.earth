@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dactyl-arrival.webp",
+      "bytes": 22028,
+      "sha256": "29177ec1ff9f9c656f4a6113350350a530bfeb209b8b9a50bad2d0b1c85754d9"
+    },
+    {
+      "location": "public",
       "filename": "dactyl-features.json",
       "bytes": 2490,
       "sha256": "f4040a1cae780948bea4881c7a756018f7eb6ce5449c791f95aa305c8c3e6fa5"
@@ -36,6 +42,12 @@
       "filename": "dactyl-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "45b1d9000b2108813b332ee59a3005581c958aa6c9a629f0233859f6e832c88a"
     },
     {
       "location": "prepared",

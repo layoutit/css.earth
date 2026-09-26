@@ -33,6 +33,12 @@
     },
     {
       "location": "public",
+      "filename": "itokawa-arrival.webp",
+      "bytes": 68306,
+      "sha256": "71fac7533a837a8f07a818a7afeccff83e5cf3036911fbec06e887189f5e699d"
+    },
+    {
+      "location": "public",
       "filename": "itokawa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -72,6 +78,12 @@
       "filename": "itokawa-features.json",
       "bytes": 12072,
       "sha256": "7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "b479ab1cd805eae9d60690aa278fe69b733dd3cf4d3565327e4351b766cd5379"
     },
     {
       "location": "prepared",

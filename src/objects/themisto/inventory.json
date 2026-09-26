@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "themisto-arrival.webp",
+      "bytes": 31454,
+      "sha256": "b9380d75c76ebf535689137ba9fcd3dfca3afa194990ae4f1f046f2811a4c810"
+    },
+    {
+      "location": "public",
       "filename": "themisto-model-shadow-alpha@2x.webp",
       "bytes": 128394,
       "sha256": "317e871af3df7feb8d70b999cd520bb7fc97ea044fb6fa2ef1b12eabffb53261"
@@ -30,6 +36,12 @@
       "filename": "themisto-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "09ee1599745b955a4ffd80de18dac8c529ea1bc0312e745c2c7ab0eb396e13ec"
     },
     {
       "location": "prepared",

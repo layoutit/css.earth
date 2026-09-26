@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kerberos-arrival.webp",
+      "bytes": 25176,
+      "sha256": "e2fa7a28b9e1e5a9eb3259dd4db2e761215e71805f6c585605ba9314cc55e2fb"
+    },
+    {
+      "location": "public",
       "filename": "kerberos-model-shadow-alpha@2x.webp",
       "bytes": 130556,
       "sha256": "6c5f7c079bf505554cb0d23142ce85bb6720aa09987be283e688e2b104e59014"
@@ -30,6 +36,12 @@
       "filename": "kerberos-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "189d6530551810d11ad20c3a9dfba50d798425ac5c510d0a8815786b1bffe17e"
     },
     {
       "location": "prepared",

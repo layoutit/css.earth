@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "psyche-arrival.webp",
+      "bytes": 34680,
+      "sha256": "45e611e620d5e12c9f4b5c4a231fc9b4110dc18633886fdd66f5d386771742f2"
+    },
+    {
+      "location": "public",
       "filename": "psyche-dielectric-constant-legend.webp",
       "bytes": 224,
       "sha256": "2446b91632f2327cdd693c991b60c83b07fa4f088f8c33f1682f0bf09ef88fde"
@@ -156,6 +162,12 @@
       "filename": "psyche-zimpol-thumbnail.webp",
       "bytes": 1572,
       "sha256": "5962265f66b6972cc5ed5ff380a169675f719940088338aed9da66412897ac50"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "b94f4ef678490f80fba0c532b14eec1ab35b1b005f1f3274b0ba38e91acd1505"
     },
     {
       "location": "prepared",

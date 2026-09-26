@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "clementina-arrival.webp",
+      "bytes": 26438,
+      "sha256": "bed0f0ed4ea03ac380df290b5c78f9c75105cdb98113e57123c15bf38ca48040"
+    },
+    {
+      "location": "public",
       "filename": "clementina-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "clementina-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "d47f2a2e63d511cb5dc0c263b87856dede9e7138029461360d2dc61f48afa7cf"
     },
     {
       "location": "prepared",

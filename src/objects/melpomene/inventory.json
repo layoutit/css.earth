@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "melpomene-arrival.webp",
+      "bytes": 24976,
+      "sha256": "1f4afd39e26784c0ce1a8d81dd586c44b2f713551a1c08b1c5f1a066c0cea57c"
+    },
+    {
+      "location": "public",
       "filename": "melpomene-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "melpomene-zimpol-thumbnail.webp",
       "bytes": 1718,
       "sha256": "ebf245734fc5be6b0e8b04ed6a6534ba2cd4d22cacdd6b98c0b6b38df755a48a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "f6913438e54db21ed08c728c3a64653e5fd3dd28635651a250e6ccfc398ba742"
     },
     {
       "location": "prepared",

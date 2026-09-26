@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "taygete-arrival.webp",
+      "bytes": 37876,
+      "sha256": "d27a4a0799e70971482584b42910036778a8f0d96470342da731425f58236719"
+    },
+    {
+      "location": "public",
       "filename": "taygete-model-shadow-alpha@2x.webp",
       "bytes": 128936,
       "sha256": "d6b9f515d04becfbad4dce1d959e6cfdf64026688843439e6b77af68438adb34"
@@ -30,6 +36,12 @@
       "filename": "taygete-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "2d68aa6d6269a26ce5b7a1911413e638c947f414871bd75e4e7c8b3c1fca21fc"
     },
     {
       "location": "prepared",

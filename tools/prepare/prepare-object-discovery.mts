@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import type { ObjectDiscovery } from '../../site/object-discovery.mts';
-import { parseArrivalView } from '../../site/arrival-view.mts';
+import { parseArrivalView, parseArrivalBillboard } from '../../site/arrival-view.mts';
+import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
 import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
@@ -87,13 +88,19 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
   };
   const controls: unknown = await preparedJson('controls.json') ?? { lenses: { controls: [] } };
-  // Only photographic packages need their prepared camera. No geometry or image
-  // analysis runs in the browser or during a selection.
-  const photographic = inputs.some(input => {
-    if (!isRecord(input)) return false;
-    const raster = isRecord(input.raster) ? input.raster : input;
-    return ['observations', 'surfaceObservations'].some(key => Array.isArray(raster[key]) && raster[key].length > 0);
-  });
-  const runtime: unknown = photographic ? await preparedJson('runtime.json') : null;
-  return deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, isRecord(runtime) ? runtime.camera : undefined);
+  const runtime: unknown = await preparedJson('runtime.json');
+  const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, isRecord(runtime) ? runtime.camera : undefined);
+  const billboard = await preparedJson('arrival-billboard.json');
+  if (billboard !== null) {
+    const asset = parseArrivalBillboard(billboard);
+    if (!isRecord(runtime) || !isRecord(controls) || !isRecord(controls.lenses)) throw new TypeError('An arrival billboard requires its prepared runtime and lenses.');
+    // Every body can have an arrival image. This does not turn a shape model,
+    // measured colour or illustration into photographic evidence.
+    discovery.arrival = parseArrivalView({
+      defaultLens: controls.lenses.defaultLens,
+      lensIds: discovery.arrival?.lensIds ?? [controls.lenses.defaultLens],
+      rotation: preparedDefaultViewRotation(runtime.camera),
+      billboard: { ...asset, url: await resolveBuildSceneAddress(asset.url, resolve(objectDirectory, '../../..')) } });
+  }
+  return discovery;
 }

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cyrene-arrival.webp",
+      "bytes": 24868,
+      "sha256": "eaacf3b617fdf950b99f5354ea60a3f6df1d1ef8a9989c047c49e4dce214bd20"
+    },
+    {
+      "location": "public",
       "filename": "cyrene-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "cyrene-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "c5914f679853f201c0c949b406621b71a27f2dfe22821496cdb93689ee1d29e0"
     },
     {
       "location": "prepared",

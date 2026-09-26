@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "wd-1856-534b-arrival.webp",
+      "bytes": 31796,
+      "sha256": "017ba5f55ad30e3a906b20988820108f349576a3df8e3f3f50cf45b3fd98f567"
+    },
+    {
+      "location": "public",
       "filename": "wd-1856-534b-lens-shape.webp",
       "bytes": 44,
       "sha256": "841bb91cd25f3800093deaf72e1a1f1c281fd2c2dac0e6babe4601919b2e52ba"
@@ -228,6 +234,12 @@
       "filename": "wd-1856-534b-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "d62ea0d32c2ffc3be9a85a5440837a9ee29ce93b1e9dcc1e471085ce855220bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "8ef10b71ba5d05769ab69de33b1a1edc3e1ef491c356b8ba58feef78e72cc9d6"
     },
     {
       "location": "prepared",

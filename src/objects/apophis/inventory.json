@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "apophis-arrival.webp",
+      "bytes": 21754,
+      "sha256": "c2d6064520cf7c5b98000af6a00cd1f589e54b75601ba1965e78536db403f2be"
+    },
+    {
+      "location": "public",
       "filename": "apophis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "apophis-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "14a380fa1a46f2b5a1887cca5794e8e2768a674213d632d20b3b37fdc869ac72"
     },
     {
       "location": "prepared",

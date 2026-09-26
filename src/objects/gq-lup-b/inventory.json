@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gq-lup-b-arrival.webp",
+      "bytes": 22430,
+      "sha256": "4546abb39f1d70555bd37d1af24e07ac652bc1b76f1dd56c6316c388348d4bb6"
+    },
+    {
+      "location": "public",
       "filename": "gq-lup-b-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
@@ -18,6 +24,12 @@
       "filename": "gq-lup-b-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "5e9f70543ea984770301f439993ebae5eb4c8823261fe7d94ea4ca740ada9c50"
     },
     {
       "location": "prepared",

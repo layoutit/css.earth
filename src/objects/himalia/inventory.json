@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "himalia-arrival.webp",
+      "bytes": 33226,
+      "sha256": "be5fce3f0ed34382fb40f21a61de72c02d6dd0070c7d4f2cfa847bfc45311435"
+    },
+    {
+      "location": "public",
       "filename": "himalia-model-shadow-alpha@2x.webp",
       "bytes": 142428,
       "sha256": "eaccbaad5ca05e55534c087089800cbfa4f2d42f19cf496ee27de0602e430dd0"
@@ -30,6 +36,12 @@
       "filename": "himalia-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "ff46bba98c9146c7dd6e7bd2faacf777c33300392bbbe3894aa685b29ab93d80"
     },
     {
       "location": "prepared",

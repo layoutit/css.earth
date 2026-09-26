@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "galatea-74-arrival.webp",
+      "bytes": 24904,
+      "sha256": "f422f245a1cacfdea36217f6681d59196b2e8c04fe1b89463380a435511b42b6"
+    },
+    {
+      "location": "public",
       "filename": "galatea-74-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "galatea-74-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "2e271df5fe918df6885a6d183da9a7ca4dc97f768d9cf6f49a6d841b831a075f"
     },
     {
       "location": "prepared",

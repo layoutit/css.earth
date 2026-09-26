@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "albiorix-arrival.webp",
+      "bytes": 28958,
+      "sha256": "4cf3c356cc04b315c074c709b6344dd7f85eed4c46732ebd912e89ee438a157a"
+    },
+    {
+      "location": "public",
       "filename": "albiorix-model-shadow-alpha@2x.webp",
       "bytes": 139998,
       "sha256": "ee1063a54941c259331f46014fa959ae86fe1b8ae64e0cbc5406dbb7a49f6aac"
@@ -30,6 +36,12 @@
       "filename": "albiorix-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "6d41dba533c784bb45530475bf3012c4d36dc1d0e57a5a89a1fe3fddb43265ea"
     },
     {
       "location": "prepared",

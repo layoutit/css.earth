@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leukothea-arrival.webp",
+      "bytes": 22566,
+      "sha256": "903633240fe9f3b96d00c8473069937d28d566cfeefe9f62f1706eeefabf0d48"
+    },
+    {
+      "location": "public",
       "filename": "leukothea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "leukothea-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "b85bb2bff95c7b9584be7f69ab03dc01f3cd7f25ada6c73f7fce1343e195b516"
     },
     {
       "location": "prepared",

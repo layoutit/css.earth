@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rosalind-arrival.webp",
+      "bytes": 34888,
+      "sha256": "4069494a732198ac9eccda8277ed773eaf2a5a6f691b27cfc2a68f6ef7b2a0fa"
+    },
+    {
+      "location": "public",
       "filename": "rosalind-model-shadow-alpha@2x.webp",
       "bytes": 130726,
       "sha256": "69585887aa84fdfc1d4e0bf36e20479900a533b1d176c44d73eba9ecd0a8f999"
@@ -30,6 +36,12 @@
       "filename": "rosalind-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 311,
+      "sha256": "35bdc0bb89cbad1252925b6cbb0cc37a4e060a3702f4fc397f9d670bfd0f3b29"
     },
     {
       "location": "prepared",

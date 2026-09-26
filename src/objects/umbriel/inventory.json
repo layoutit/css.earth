@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "umbriel-arrival.webp",
+      "bytes": 43630,
+      "sha256": "644ab400e03bf63fac27e400411ea8c01d8c16237d9911699c2726f3ae3763a1"
+    },
+    {
+      "location": "public",
       "filename": "umbriel-features.json",
       "bytes": 10388,
       "sha256": "a06a2315e00d7edc663bc1af56e5e4e063a3f26e271879cdf84184018d8c800c"
@@ -252,6 +258,12 @@
       "filename": "umbriel-voyager-color@2x.webp",
       "bytes": 117742,
       "sha256": "adb167ddfe20a2485ca46c60b69e8b5363094701efee3ceba892453cd7d0aba9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "88f348338ba8da597be10036ce8661c049fe946438643eb8d7a8996f9bc24850"
     },
     {
       "location": "prepared",

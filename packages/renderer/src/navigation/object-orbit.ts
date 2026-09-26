@@ -22,7 +22,8 @@ export type OrbitState = { pitch: number; controlPitch: number; controlYaw: numb
 export interface OrbitPublication extends CameraAngles { worldCamera: WorldCameraPose; sceneMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection: PhysicalProjection; distance: number; focal: number; viewportWidth: number; viewportHeight: number; stageViewport: WorldCameraViewport; principalOffset: readonly number[]; body: PerspectivePublication['body']; levelOfDetail: ReturnType<PerspectiveDolly['levelOfDetail']>; }
 export interface RetainedOrbitOptions { framePresenter: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; directionalSunPlan?: DirectionalSunPlan | null; worldContext: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport: import('./camera-viewport.js').CameraViewport; objectId: string; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
-  canReveal?: () => boolean; }
+  canReveal?: () => boolean;
+  canStageReveal?: () => boolean; }
 export interface OrbitServices extends InteractionServices { createCameraOrientation?: typeof createCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; }
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 
@@ -47,6 +48,7 @@ export function createRetainedCubicSkyOrbit({
   sceneElement,
   revealGroups,
   canReveal,
+  canStageReveal,
   directionalSunPlan = null,
   // A physical world context gives the orbit its perspective camera, which
   // frames by dolly (cameraPlan.projection); the Sun's direction in
@@ -111,7 +113,7 @@ export function createRetainedCubicSkyOrbit({
   // One physical observer owns rotation, distance and projection.
   const perspective = createPerspectiveDolly({
     cameraPlan, worldContext, cameraElement, sceneElement, sunDirection: directionalSunPlan?.localDirection,
-    stage, viewport, ...(revealGroups ? { revealGroups } : {}), ...(canReveal ? { canReveal } : {}),
+    stage, viewport, ...(revealGroups ? { revealGroups } : {}), ...(canReveal ? { canReveal } : {}), canStageReveal,
   }, createCameraOrientation);
   const validateWorldFrame = (frame: PreparedWorldCameraFrame) => {
     if (Math.abs(frame.metersPerUnit / (worldContext.kilometersPerUnit * 1000) - 1) > 1e-9 ||

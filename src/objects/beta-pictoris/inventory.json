@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "beta-pictoris-arrival.webp",
+      "bytes": 145642,
+      "sha256": "3e2f1785cee992332d2c3de04075aac498e18d4d8ef8af02b9f5d619d382ed36"
+    },
+    {
+      "location": "public",
       "filename": "beta-pictoris-lens-color.webp",
       "bytes": 44,
       "sha256": "e5ed762d929ff45ae5b4854bff9b4d5fb13f54382b89a53c758cff412173c042"
@@ -24,6 +30,12 @@
       "filename": "beta-pictoris-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "0d90fd381c7fc1c72c9e094e65628bdf230aeec9e75a9d9ced0fcedb0f706497"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 390,
+      "sha256": "a45928f846ca725860a048be0cb74351b3cb278bf9527214ca9234a86a88d8b3"
     },
     {
       "location": "prepared",

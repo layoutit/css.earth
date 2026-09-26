@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "brunhild-arrival.webp",
+      "bytes": 27800,
+      "sha256": "73c7c3fe3a0a3770742613b15a0de8820f7def64e7832e636d33c58750ed7bbe"
+    },
+    {
+      "location": "public",
       "filename": "brunhild-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "brunhild-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "7fc69a1de39eb50a91dafc8097a6273c8e7b77ed8d8cfc5e74e93892fcdb1d23"
     },
     {
       "location": "prepared",

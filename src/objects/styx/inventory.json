@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "styx-arrival.webp",
+      "bytes": 22694,
+      "sha256": "ee360fef214ef189c9dfad405804a1f661d1bc834b354880d0a6d7a5a90f7f98"
+    },
+    {
+      "location": "public",
       "filename": "styx-model-shadow-alpha@2x.webp",
       "bytes": 99878,
       "sha256": "600ed0d0f5994c346abe21240afc68a992d3d76339a7a4b0f59f3ee64612410b"
@@ -30,6 +36,12 @@
       "filename": "styx-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "98cbca9c65a29925e12c41c6dbd47d2fd7eedfbc2cf7f0d5bfe0cd750f5cc16d"
     },
     {
       "location": "prepared",

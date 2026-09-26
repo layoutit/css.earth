@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "herculina-arrival.webp",
+      "bytes": 20986,
+      "sha256": "7eaa968fb04bd70f577a6966e76c9f1ecdab555e950f2f47f1ca309a82757ab1"
+    },
+    {
+      "location": "public",
       "filename": "herculina-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "herculina-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "be4fb5199bcdcc58d2752c8fba939d3dd48b38acd9c5b42d7d670f80ab7cc8b2"
     },
     {
       "location": "prepared",

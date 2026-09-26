@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "euterpe-arrival.webp",
+      "bytes": 25856,
+      "sha256": "a031b4b87a6222b566692bbbd415824b9249b8814b6062de9effea00070b0594"
+    },
+    {
+      "location": "public",
       "filename": "euterpe-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "euterpe-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "596cbb1ffd95e2479342cc202ec8bdc8e8c3fd581a81c1482a463a92a1933a8c"
     },
     {
       "location": "prepared",

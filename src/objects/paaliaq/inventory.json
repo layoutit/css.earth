@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "paaliaq-arrival.webp",
+      "bytes": 29180,
+      "sha256": "c324f97d3319e25646a28783de73961dd98f5228c4688912d3cb872ea66d5e17"
+    },
+    {
+      "location": "public",
       "filename": "paaliaq-model-shadow-alpha@2x.webp",
       "bytes": 138552,
       "sha256": "4e1c64bcd9419f6e0fe799d057bd60f8f038b842f0e6c9ac7747654544c6f883"
@@ -30,6 +36,12 @@
       "filename": "paaliaq-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "c9a03c29293828f5d56acc79141cda48a5eddd7aef5b8f6f4accf7d0cf81154a"
     },
     {
       "location": "prepared",

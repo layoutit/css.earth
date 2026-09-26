@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kalyke-arrival.webp",
+      "bytes": 31156,
+      "sha256": "2eb10d1dbc7d2677a0f4c2098682c1e5de1ed2a07a44a95371978ec2bc012387"
+    },
+    {
+      "location": "public",
       "filename": "kalyke-model-shadow-alpha@2x.webp",
       "bytes": 128978,
       "sha256": "4b031587408c12667c16faa46ba62fb2b8ec0bcfd24c87a4f11cedc85fd0e1fc"
@@ -30,6 +36,12 @@
       "filename": "kalyke-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "8091f6e5c5bb7527e45037c1661ce9f0ed5e6657d361214cc552d6d9b8c11ea3"
     },
     {
       "location": "prepared",

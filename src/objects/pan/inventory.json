@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pan-arrival.webp",
+      "bytes": 30230,
+      "sha256": "15c66a3e90f3209124596571acda7fed126fe3babf1e214f1b5fe0c2fd5311ed"
+    },
+    {
+      "location": "public",
       "filename": "pan-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "pan-normal-thumbnail.webp",
       "bytes": 1550,
       "sha256": "f0618c16afb8871cf2524eb320d7e8ac9a0c4287010ad5a1d3a7c9cc5cd9c0e7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 366,
+      "sha256": "5754a280cefa3357ae81f56380b09c351d0cbc42d16ae02df6b285642fac829f"
     },
     {
       "location": "prepared",

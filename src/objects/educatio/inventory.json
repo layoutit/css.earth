@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "educatio-arrival.webp",
+      "bytes": 20576,
+      "sha256": "4dd9bd5f3302487929ffd141f7c91e7916c055c8d9a65bf12fa93bf284b04abd"
+    },
+    {
+      "location": "public",
       "filename": "educatio-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "educatio-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 291,
+      "sha256": "b78e9f8b2c7c4e51fabbfef11a1200419f6a036c77385ac2e89b2607e8dabdf0"
     },
     {
       "location": "prepared",

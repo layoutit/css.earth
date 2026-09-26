@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "wasp-12b-arrival.webp",
+      "bytes": 36402,
+      "sha256": "dcc8eff06564543a423f6cc9cffe565b7db63eb6a6891017f0f284d76f084c4a"
+    },
+    {
+      "location": "public",
       "filename": "wasp-12b-lens-temperature-2010.webp",
       "bytes": 166,
       "sha256": "15756cad27151580129f05f35a79d91bc0ad977c1e91992e427f08800fd0ccfc"
@@ -264,6 +270,12 @@
       "filename": "wasp-12b-surface-thermal@2x.webp",
       "bytes": 178,
       "sha256": "5d1944b64a7b592e703b37384725784bdaf4154fe155f53284897e5eefbc636d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "d8a1333d6471ed4de82a4ce5bdb9773751e5fbc0e4c276b5e59fa0d3c00fe1f2"
     },
     {
       "location": "prepared",

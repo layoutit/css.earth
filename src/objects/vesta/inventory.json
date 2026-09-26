@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vesta-arrival.webp",
+      "bytes": 117326,
+      "sha256": "c331a44da054068d523a20be046ae71a58430da5e54b0776c0abae20eb1ceafd"
+    },
+    {
+      "location": "public",
       "filename": "vesta-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -162,6 +168,12 @@
       "filename": "vesta-surface-thumbnail.webp",
       "bytes": 3604,
       "sha256": "39e1d211d320a5180c05e2a978a40fc29643a09635a03748e9ea214cbb89230f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "334a34b974218bd589d639adc0d06769d5df9a8208eea0a3f4e806d6a369d6b0"
     },
     {
       "location": "prepared",

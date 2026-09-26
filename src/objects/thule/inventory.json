@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thule-arrival.webp",
+      "bytes": 25952,
+      "sha256": "907183c0fc51f522bd6b8cbd3d1ae880e3c1a938d0b3473ac5ab67827c29aa89"
+    },
+    {
+      "location": "public",
       "filename": "thule-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "thule-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "ef9168b36005895b8f3a024b9993e5488e4e9871d44953c6a1c0e18a8df28b59"
     },
     {
       "location": "prepared",

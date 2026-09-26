@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "be-ceti-arrival.webp",
+      "bytes": 31824,
+      "sha256": "2404bebaea0e62cd4d113ab816e9dfabe9f32bd3002f5ae7704349f071f69b28"
+    },
+    {
+      "location": "public",
       "filename": "be-ceti-lens-azimuthal-field.webp",
       "bytes": 250,
       "sha256": "b20a8e62c15d53458de3ab55789a41d4d9f099149c2507689df7b0f0bab8ce23"
@@ -78,6 +84,12 @@
       "filename": "be-ceti-surface-radial-field@2x.webp",
       "bytes": 34258,
       "sha256": "bc15b7bf9d322a386fdef7e4bd47f68c98a150875a81d4af23c304e1a5005f2a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 362,
+      "sha256": "7392f2e4021ed61bb187a7639384bd681cc93f93d5b83eecfd96325bbb627336"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rhea-arrival.webp",
+      "bytes": 119094,
+      "sha256": "f017a060eecfeb3e8051cd916c7dfecf4893a1cf0a9ff5bd9e546ca211ced6c7"
+    },
+    {
+      "location": "public",
       "filename": "rhea-elevation-legend.webp",
       "bytes": 240,
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
@@ -234,6 +240,12 @@
       "filename": "rhea-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "99a1d01ade25e67d5ef5456ae79ccb77ea7f5628fb2d30a6df6031459d8a1002"
     },
     {
       "location": "prepared",

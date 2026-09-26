@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "beta-pictoris-b-arrival.webp",
+      "bytes": 25422,
+      "sha256": "8e98dd0585d7277a05b6f55206eb819421d18d231ad0a1d0a76b7d9c90b9b6aa"
+    },
+    {
+      "location": "public",
       "filename": "beta-pictoris-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "8d99008aa97954776a520f6c5c5f4aef6eefe91cc6b92d89cac191b1de6c556a"
@@ -18,6 +24,12 @@
       "filename": "beta-pictoris-b-surface-infrared@2x.webp",
       "bytes": 178,
       "sha256": "44f7e31606e0f452e83bc85f97b08e1fd6e9caca41bd584e633188f5eb755074"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 313,
+      "sha256": "b92826809c666922b9cc0ede7275301ae0d766d615a80765e8797ffd4d660f44"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eurynome-arrival.webp",
+      "bytes": 23432,
+      "sha256": "3bd8b3bd09525fb811f34fb72824087074e80755e9233d3217c30199e7b64d85"
+    },
+    {
+      "location": "public",
       "filename": "eurynome-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "eurynome-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "ff30f3e313d18b429309b2058b0a3d30de570a003fdad8e1db1275c146bbebdd"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hera-arrival.webp",
+      "bytes": 24952,
+      "sha256": "d61f62d00d0d0198e378baa803bfb0cb80db1887c3ba9b40033ad6be85ecdb13"
+    },
+    {
+      "location": "public",
       "filename": "hera-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "hera-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "856ea308499c5698116cb367698ccc05b358cd47370816b9c3668000a868b4fa"
     },
     {
       "location": "prepared",

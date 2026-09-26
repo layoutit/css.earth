@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chi1-orionis-arrival.webp",
+      "bytes": 31778,
+      "sha256": "562b4a21a694450bcb7db50df4a85fe288e973b65a5871c4d73908b351c05740"
+    },
+    {
+      "location": "public",
       "filename": "chi1-orionis-lens-azimuthal-field.webp",
       "bytes": 348,
       "sha256": "47821f0ae967ba5ba1834fdd1101e1f105042d72a1277c740ee3ad1174151849"
@@ -78,6 +84,12 @@
       "filename": "chi1-orionis-surface-radial-field@2x.webp",
       "bytes": 32360,
       "sha256": "4013386e71f2ba444759ea59ae741d2fafd023901f8b1bc4cfa46765b04acecf"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "5921f990d94a0bacca190d4705232f1036238b1d18db36dea3e04506f063c965"
     },
     {
       "location": "prepared",

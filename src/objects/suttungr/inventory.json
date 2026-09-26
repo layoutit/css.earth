@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "suttungr-arrival.webp",
+      "bytes": 29392,
+      "sha256": "00b1242548a20de2b25492772f365076b32de0a9ce85bb4a797467ed66672d40"
+    },
+    {
+      "location": "public",
       "filename": "suttungr-model-shadow-alpha@2x.webp",
       "bytes": 143160,
       "sha256": "76b2c58e98a96758f51f6cfbe0eb0fb489f97bb78f078ef770f373a251ff92bb"
@@ -30,6 +36,12 @@
       "filename": "suttungr-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "6893a43c894771c5b8c5a92dbbb399afd7dae0d655824984a732217084a3557d"
     },
     {
       "location": "prepared",

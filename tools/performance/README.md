@@ -145,6 +145,7 @@ and native iPad screen grabs are active:
 ```sh
 pnpm ipad:run --start mars --fly moon --name mars-to-moon
 pnpm ipad:run --start ceres --zoom -200 --drag '{"from":[400,500],"to":[600,530],"seconds":1}' --fly venus --name ceres-to-venus
+pnpm ipad:run --start earth --fly lutetia --heap-snapshot --name earth-to-lutetia-memory
 ```
 
 Use `--origin http://<Mac-LAN-IP>:<port>` when the preview uses a different port. A JSON scenario can express a longer
@@ -154,6 +155,18 @@ sequence: `pnpm ipad:run --scenario journey.json --name long-journey`. Its shape
 `--fly <object>`, `--wait <seconds>`, and `--screenshot <name>` are ordered actions. Coordinates are Safari viewport CSS
 pixels. Negative zoom delta zooms in; positive zoom delta zooms out. An optional `--tail <seconds>` (default 2) lets the
 last handoff finish before capture stops.
+
+Each journey includes memory category samples over time, a residency snapshot before and after each ordered action,
+and before/after resource counters for scene teardown. `residency.json` records the active scene, decoded image owners,
+pending resources, navigation fragment counts, billboard state, and orbit SVG groups, HTML hosts and retained strokes
+as separate counts. Values are copied; the recorder does not retain scene objects. Release events are bounded to 256
+and report dropped entries. `trace.json` puts these events and `WebKit memory MiB` counters on the recording clock;
+`trace.devtools.json` preserves counters and exposes residency/release snapshots as timestamps beside native frames.
+Use Perfetto to plot all memory categories. These are WebKit's accounting categories, not total process physical memory.
+
+`--heap-snapshot` additionally writes `heap.before.json` and `heap.after.json` around the journey, after collection.
+The snapshots pause JavaScript outside the interaction recording. Read their retainers when counters disagree with
+cleanup; a zero resource-owner count alone does not prove that every JavaScript or browser allocation was freed.
 
 The command validates body names against the object registry, uses the performance router bridge for flights, verifies
 ready destination routes, and fails if an action cannot complete. Direct `tap`, `drag`, `type`, and `zoom` actions are

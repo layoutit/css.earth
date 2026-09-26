@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "annefrank-arrival.webp",
+      "bytes": 23530,
+      "sha256": "612ae9540ee7b350e816448f48d7343c344cff2bfa11d39aedfbb67df7cae4f4"
+    },
+    {
+      "location": "public",
       "filename": "annefrank-model-shadow-alpha@2x.webp",
       "bytes": 136616,
       "sha256": "514a0118f33f8a3aa77842737921cb03ee5aa6a8b6eab30adab0777414ecaed8"
@@ -30,6 +36,12 @@
       "filename": "annefrank-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 315,
+      "sha256": "8b43089f23fa9b419a4b3f04f78ec40ca2f0bcfc9878923a574260ce365ba26a"
     },
     {
       "location": "prepared",

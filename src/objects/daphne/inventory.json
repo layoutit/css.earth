@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "daphne-arrival.webp",
+      "bytes": 21216,
+      "sha256": "30c1d53cfb195fe5ea487dda288c9b90d9b066dddb15e818378ffadc9a570c6c"
+    },
+    {
+      "location": "public",
       "filename": "daphne-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "daphne-zimpol-thumbnail.webp",
       "bytes": 1632,
       "sha256": "9afb45fc19781d76f8b7538d23768842a90b61a86d52afb25af85e9cfd3b96df"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "92fc52ce8999dc5716a9047a79bb9a6c8867de147917a897bb3bda16dbf46e1c"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-21p-arrival.webp",
+      "bytes": 26424,
+      "sha256": "600066c7e51cdf80108cbe96faad3981a262df9d5967d7488fc21ab9fd3c790b"
+    },
+    {
+      "location": "public",
       "filename": "comet-21p-model-shadow-alpha@2x.webp",
       "bytes": 107094,
       "sha256": "85d6c753cdd9be3b08fdbcacf1a86b9047a93b402525246da41bbe600148e05a"
@@ -30,6 +36,12 @@
       "filename": "comet-21p-model-thumbnail.webp",
       "bytes": 954,
       "sha256": "8e4a13f99092e754932b833988ac5cbd6659a277829f773e97d187b6b98c8672"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "651adc23342d931b1aef7ac302720e34c274957d94ab4c2c15d10d74cd20b55b"
     },
     {
       "location": "prepared",

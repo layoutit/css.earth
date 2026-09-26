@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "trappist-1-arrival.webp",
+      "bytes": 36286,
+      "sha256": "a91b2f496fd376bfdda604e98ae71ab5b180b8353ddef8d8b94cc8f76ed818e7"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1-lens-color.webp",
       "bytes": 44,
       "sha256": "5611d83e227916722d56c30c948ea0445e6e987cbe3554450c22982aa04ba55b"
@@ -30,6 +36,12 @@
       "filename": "trappist-1-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "2775b4d676169cd0d194356c42afc4eeb3ba33d58cd9416f966ad8c0d2c26bf8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "76f58de719720d283f95556f316da300c5f23aa6cc99b9bb3cd21fb022715788"
     },
     {
       "location": "prepared",

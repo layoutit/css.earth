@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "laurentia-arrival.webp",
+      "bytes": 22926,
+      "sha256": "b23d9fcf310d2c82720ce3eeec5bb273bf101f6143a3ab403a3d02a8588f67f2"
+    },
+    {
+      "location": "public",
       "filename": "laurentia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "laurentia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "a6585725702cf18b061297a486905ff7098b6ec742158db2b4b218b18a98cf9b"
     },
     {
       "location": "prepared",

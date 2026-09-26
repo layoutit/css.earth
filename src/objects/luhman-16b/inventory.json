@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "luhman-16b-arrival.webp",
+      "bytes": 35182,
+      "sha256": "59b8ac31f5d4320f7480eb52bea8f50a985453fd62385cdda52931861773479d"
+    },
+    {
+      "location": "public",
       "filename": "luhman-16b-lens-brightness.webp",
       "bytes": 376,
       "sha256": "7ebb88aed3b44607548c860a01e7223e656accd7ae9e27aee000834dec3bf5f9"
@@ -60,6 +66,12 @@
       "filename": "luhman-16b-surface-uncertainty@2x.webp",
       "bytes": 27484,
       "sha256": "a128a33a721b1442efbbc64452d8ff46ef3095062498c20629b98ebbe059fede"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 314,
+      "sha256": "addc2c9a070f45cbaae55b55099c9b994723e4df2cb1a90aaa79cd2578220b6a"
     },
     {
       "location": "prepared",

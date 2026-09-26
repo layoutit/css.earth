@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sirius-arrival.webp",
+      "bytes": 33936,
+      "sha256": "80cad76e1ad43c0ef98015c8b9e00bafa05395589c231b059858503cad6e52b7"
+    },
+    {
+      "location": "public",
       "filename": "sirius-lens-color.webp",
       "bytes": 44,
       "sha256": "58ee77cfff2db716403679f5f60043ec0a40eb50e3a02c38e963b591879c67ed"
@@ -24,6 +30,12 @@
       "filename": "sirius-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "5f87784f54db9d5518f79a69e8ae4c1971ff1af1f40d8edce95f493ee5902705"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "57abae45753e20aa288596f58efc676e1570f5c530ec71ba115b6b9fa7500d47"
     },
     {
       "location": "prepared",

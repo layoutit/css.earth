@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mentor-arrival.webp",
+      "bytes": 25104,
+      "sha256": "a153fb67379769a03cf9842d826de968b18cb4aa512b4026d73c06ed116e9d5b"
+    },
+    {
+      "location": "public",
       "filename": "mentor-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "mentor-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "108677fa4fdb91d98f9b6eee62cf6b305cb5b0a27d9f7e6996b2508eb429782c"
     },
     {
       "location": "prepared",

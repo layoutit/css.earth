@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ida-arrival.webp",
+      "bytes": 28452,
+      "sha256": "2055d48bd091992517ff600c60892834558b4bf62e7e4636a621d1b6505c6575"
+    },
+    {
+      "location": "public",
       "filename": "ida-calibrated-shadow-alpha@2x.webp",
       "bytes": 604566,
       "sha256": "fb7a7cfc5021bb8b31b29758e8674fb4f17944e4de679c1df0bb14bd33b06476"
@@ -120,6 +126,12 @@
       "filename": "ida-normal-thumbnail.webp",
       "bytes": 3264,
       "sha256": "b895e1c40342f4cf5596adea903f2a73ac217a8c463707443d9e8ceabfaadfaf"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "7a458c9d50da5348a4bc1d3d8437fecae31f3373ab31d30602d1d14b7b3d6075"
     },
     {
       "location": "prepared",

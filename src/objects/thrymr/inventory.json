@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thrymr-arrival.webp",
+      "bytes": 30660,
+      "sha256": "159c5a919f027f8f1c0ced19adff3a1f3180c05a6126bb6795a852169cb7bec9"
+    },
+    {
+      "location": "public",
       "filename": "thrymr-model-shadow-alpha@2x.webp",
       "bytes": 140318,
       "sha256": "8c4a034e549204ca15b5f6c5a1119d57d23a6366f2fe44438a21be34c0821c52"
@@ -30,6 +36,12 @@
       "filename": "thrymr-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "eae0987ba9f1f5f3df9141e2ba8e79e80f516e8c6d8611559119f0e79d64483a"
     },
     {
       "location": "prepared",

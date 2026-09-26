@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "elara-arrival.webp",
+      "bytes": 30924,
+      "sha256": "ed4af64f5665319d8d01a7d3326c506abdcc4602024c1ba670f3f4d975228d72"
+    },
+    {
+      "location": "public",
       "filename": "elara-model-shadow-alpha@2x.webp",
       "bytes": 124236,
       "sha256": "24ae0837a8ff960abfcc4860989d0a4778034bcc63c2a5c2e85ee6deb420ba13"
@@ -30,6 +36,12 @@
       "filename": "elara-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "e3ca357aeb8def2e3dd472b3d02b4cb2b93719bd8eb2af6d5923f01bde67d6e1"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "urania-arrival.webp",
+      "bytes": 31910,
+      "sha256": "7a6057319f9a5dc44a0eae149d43a37b70448cabb79fee8f33308e469af35bf1"
+    },
+    {
+      "location": "public",
       "filename": "urania-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "urania-zimpol-thumbnail.webp",
       "bytes": 1326,
       "sha256": "96e0ffdfdcb53d03c1ff0be3db646ef9d2b03ac6ef9e5c6bf18f8944ade3fec6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "f338e5018524014fe01cde13b157194b4d710221689f00a730526d1ef0d14c5f"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "maja-arrival.webp",
+      "bytes": 25448,
+      "sha256": "1c1939a9cf4ba558cd6cc91f498c6715cb2f036313de767db16883195ceae6c8"
+    },
+    {
+      "location": "public",
       "filename": "maja-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "maja-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "202160c5911282417e1f63e867ee671be26ba97d2fc5cb18d10812bb0be56b07"
     },
     {
       "location": "prepared",

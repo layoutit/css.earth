@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "selam-arrival.webp",
+      "bytes": 19262,
+      "sha256": "d4df6153619705aebe9b64afe061e684913a9b7eb41522ccb8775ac8cc311e76"
+    },
+    {
+      "location": "public",
       "filename": "selam-shape-shadow-alpha@2x.webp",
       "bytes": 85048,
       "sha256": "0ed486ff93041e7c1faa075e007211bb30df3002ed56d501bc27265b5c700655"
@@ -30,6 +36,12 @@
       "filename": "selam-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 307,
+      "sha256": "f81d4dd94eb83037dd3abacb1c1912b4e2922ca94ea1c0e0937ae517d5d4d8c6"
     },
     {
       "location": "prepared",

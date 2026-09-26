@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ambrosia-arrival.webp",
+      "bytes": 23768,
+      "sha256": "a88eddabab1b1a7114823f02595930f21fbe35d868dd94e0730ddc9dc8a97d62"
+    },
+    {
+      "location": "public",
       "filename": "ambrosia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "ambrosia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "4b99b4e7ff51deb678eaa117a1ef073803657e00017d4930cf06e333ad3e7ad1"
     },
     {
       "location": "prepared",

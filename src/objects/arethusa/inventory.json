@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "arethusa-arrival.webp",
+      "bytes": 22944,
+      "sha256": "15d24d31f808d09c4580a2c9a3e5959f3dcb827841291c6b26508b612b9f5842"
+    },
+    {
+      "location": "public",
       "filename": "arethusa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "arethusa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "154cd20165434b8634cab8165f6d78de5fa6713c1494635c875ccb000aff5748"
     },
     {
       "location": "prepared",

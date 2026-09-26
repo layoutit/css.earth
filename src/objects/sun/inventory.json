@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sun-arrival.webp",
+      "bytes": 37236,
+      "sha256": "fea99f3b78ceead3a28a430e816fe101f076765cad007ecb820ed23efe5cc6c8"
+    },
+    {
+      "location": "public",
       "filename": "sun-corona-chromosphere@2x.webp",
       "bytes": 104208,
       "sha256": "896d153a5458c725dc77d1cf9bf9795e95e8150f1745fe07a96df3625bb01590"
@@ -108,6 +114,12 @@
       "filename": "sun-surface-photosphere@2x.webp",
       "bytes": 12996,
       "sha256": "bcf7cebd894552c68861fdd879f292ef17b023e2f84bcdd6f5996090e63a7773"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "b68629999e962c58ae1e5242ecf6db36df96a5f8662c3454b7f924e6c8c8600c"
     },
     {
       "location": "prepared",

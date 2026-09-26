@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eukrate-arrival.webp",
+      "bytes": 23404,
+      "sha256": "8a4b43a51279b925f47d7b0b32b697dc6ffaf96066c9001b27d05c937a6824c4"
+    },
+    {
+      "location": "public",
       "filename": "eukrate-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "eukrate-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "82503ca3e0844074f61c54241e0991e9c83763bacb3ba75e092e02d7f17a4087"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ananke-arrival.webp",
+      "bytes": 30732,
+      "sha256": "a40f1f3e0c00be0279b3e7b3596ef593821804956ca1a353ac65abc596b21291"
+    },
+    {
+      "location": "public",
       "filename": "ananke-model-shadow-alpha@2x.webp",
       "bytes": 124066,
       "sha256": "bbbda58627cb2956a2a96c638a1e04bbc94956fa452398cfbb5a39a62b48d1b6"
@@ -30,6 +36,12 @@
       "filename": "ananke-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "9781aba46f137829565d96355032627aca8a6514ef89d2b1929e9afe9b8da956"
     },
     {
       "location": "prepared",

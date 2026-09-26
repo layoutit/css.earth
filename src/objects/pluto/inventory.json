@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "pluto-arrival.webp",
+      "bytes": 89080,
+      "sha256": "696e3e14a4e661896a01f67366e7b0854aed2f7e325ea29e6b1cb2d8ba10ee20"
+    },
+    {
+      "location": "public",
       "filename": "pluto-features.json",
       "bytes": 453080,
       "sha256": "d9badd8fdb2e01b3847a0ef6190e2bb40376dcab842a5327b2088dbad971b088"
@@ -324,6 +330,12 @@
       "filename": "pluto-water-ice@2x.webp",
       "bytes": 567644,
       "sha256": "c61cfd11e0b0a450cc3f28a85239ef6b654204f9cfe6107501646e9cfaa0aea2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "92a9b41444e438049167a27142d53a6b471a6660a962d67bfdef56e0db420e25"
     },
     {
       "location": "prepared",

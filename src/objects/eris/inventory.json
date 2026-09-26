@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eris-arrival.webp",
+      "bytes": 32956,
+      "sha256": "3d03ab8cc50cb5211f631a9bfc848559c64a23ae6ad499f870efe4c5e6e5d27b"
+    },
+    {
+      "location": "public",
       "filename": "eris-color@2x.webp",
       "bytes": 558,
       "sha256": "5336afbbf0f4b49dc6bdde302deab9582e1b143869730f6387d4300fb8bb4aa0"
@@ -246,6 +252,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "5dcdfe2ab3ded438dc7cfd80e4c3b13fd60c710e7ffca8f37065ecb139f621a4"
     },
     {
       "location": "prepared",

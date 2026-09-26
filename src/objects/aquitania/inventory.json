@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aquitania-arrival.webp",
+      "bytes": 22500,
+      "sha256": "ebd453f2898fc7833e4fc93fe3539967e9f5d4faa23bbfdc91a31244e7948797"
+    },
+    {
+      "location": "public",
       "filename": "aquitania-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "aquitania-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "22be187e2ee7c002d3c1d3e2ce226b7b49af8ee8b1bf428733f3d749e0ae4960"
     },
     {
       "location": "prepared",

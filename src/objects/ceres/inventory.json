@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "ceres-arrival.webp",
+      "bytes": 234324,
+      "sha256": "b3732e755bd73b3de0bb61a6d9d227ff0a182cf7069587510538674542a32cbf"
+    },
+    {
+      "location": "public",
       "filename": "ceres-clay-band@2x.webp",
       "bytes": 3658868,
       "sha256": "909d3847f523e84a5c7b15f624e8adf65063dd92874c3b04d794f3749257e185"
@@ -306,6 +312,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 3790,
       "sha256": "ecd4465e6336b3419313b997a37ab883b7e3c8b235248cf5f27bdca9077cb6e6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "a963569263b900770f2861931af7e062d84dd34231730c40c6889f2c63d3a103"
     },
     {
       "location": "prepared",

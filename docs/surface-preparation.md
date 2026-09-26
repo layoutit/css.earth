@@ -678,6 +678,37 @@ in its README and recipe. Keep shared algorithm explanations here. Add a
 operation consumes inputs or emits products, and retain its original check results
 under the [evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result).
 
+## Arrival billboards
+
+Each body can publish one square, transparent image of its default dataset at
+the prepared arrival rotation. `pnpm prepare:arrival-billboards --all` prepares
+the registry; body ids select a smaller refresh. Run it against a current local
+performance build with `--origin http://127.0.0.1:4212`. The default image is
+1024 pixels square, with a camera distance of eight body radii. The tool renders
+the delivered CSS scene, including rings and atmosphere, waits for application
+readiness and image decoding, and checks the acknowledged camera distance,
+nonempty pixels and clipping. It uses the shared lossy WebP lane with alpha.
+
+The image and `prepared/arrival-billboard.json` are inventoried per body. Publish
+both through the ordinary R2 workflow before merging. Scratch receipts and the
+resumable batch report live under `output/billboards/arrival-batch/`; prepared
+images are not committed to Git. Reprepare after changing the default camera,
+dataset, geometry, materials or renderer. A billboard does not change the
+body's imagery classification or extend the coverage of its source data.
+
+The runtime decodes the destination billboard before flight. It holds that
+retained image while the full destination scene attaches and paints at the
+same prepared perspective, then fades the image and finishes the zoom with
+the mesh to preserve responsive framing. Camera-root offsets and focal length
+come from the shared viewport. Saved views, other datasets, reduced motion
+and overview targets outside the baked distance retain their own navigation.
+No browser-specific camera or runtime image generation is involved.
+
+Decoded images and connected DOM do not prove GPU residency. Qualify the
+handoff with the [iPad journey recorder](../tools/performance/README.md),
+inspecting native frames through the reveal and final zoom. The same trace
+records released scene resources, DOM counts and WebKit memory categories.
+
 ## Refresh photographs without rebuilding geometry
 
 Existing single-model spacecraft observation lenses can refresh through the same

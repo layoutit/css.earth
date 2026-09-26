@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "okyrhoe-arrival.webp",
+      "bytes": 33876,
+      "sha256": "5543c75b6c63128d7b146dc4142ef3f9a5b9b9c253d0d63de1e63ed095147948"
+    },
+    {
+      "location": "public",
       "filename": "okyrhoe-model-shadow-alpha@2x.webp",
       "bytes": 128202,
       "sha256": "61390dc11a5ad880568a4f4bade0404133083d7c86aa3f21f60dff8553025851"
@@ -30,6 +36,12 @@
       "filename": "okyrhoe-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "c0b1429943bad7cd11764d1704b01202eea3da79acb3ae26ab0a2fded8576303"
     },
     {
       "location": "prepared",

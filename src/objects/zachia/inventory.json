@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "zachia-arrival.webp",
+      "bytes": 29298,
+      "sha256": "7627683e213a906dd60984ef41965b01ee2a00527293198040e6296488b1b494"
+    },
+    {
+      "location": "public",
       "filename": "zachia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "zachia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "c34823db462e4c4ad174e07b94fce421d45bf0ba28763dde1a4e6bd6beae2e28"
     },
     {
       "location": "prepared",

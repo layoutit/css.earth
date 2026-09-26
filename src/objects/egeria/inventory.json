@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "egeria-arrival.webp",
+      "bytes": 24950,
+      "sha256": "aaae43eb10c2909ad7fb020d56c3f4ceab49ffbd2a7213d922a38cae1306d8aa"
+    },
+    {
+      "location": "public",
       "filename": "egeria-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "egeria-zimpol-thumbnail.webp",
       "bytes": 1634,
       "sha256": "e847950962e5dc817c0df581730f14092adbffe8a4c719d8079acf6f2b6a06ed"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "acbd6783ad0d5aaa75871e11c161eb6a2577ec79864c417dce332d578ed88249"
     },
     {
       "location": "prepared",

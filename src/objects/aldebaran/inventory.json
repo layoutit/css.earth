@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aldebaran-arrival.webp",
+      "bytes": 35294,
+      "sha256": "819c365cb996e160928ee7e2d4567d8f1b75dedab1d1430e1f02577572eed2b3"
+    },
+    {
+      "location": "public",
       "filename": "aldebaran-lens-color.webp",
       "bytes": 44,
       "sha256": "af7857fb41addcea3486bfa644765957aca33010249d314dc37126c646a704af"
@@ -24,6 +30,12 @@
       "filename": "aldebaran-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "517afb93f767e04290e12e69913dd766c29835d95f749ce168b738085b8465e4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "c384fa29acc61eb5fb2ae579255f42f752c751498e469de8ada6cd70ca1083b9"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "melete-arrival.webp",
+      "bytes": 22832,
+      "sha256": "c7f0bcc60e0f57f87a1a4faf891394da0732e1c9687031851a25f65cddf01f3a"
+    },
+    {
+      "location": "public",
       "filename": "melete-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "melete-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "9223dd38f6548f04c23cb5faab23ef2a419d21114d2265c90d3d22d71878b65c"
     },
     {
       "location": "prepared",

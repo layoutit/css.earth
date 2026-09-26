@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "desdemona-arrival.webp",
+      "bytes": 22922,
+      "sha256": "2222db048e7b0cd3cf16bbd4760fff8ec5bf198bbde2df0adc161fa55e5776be"
+    },
+    {
+      "location": "public",
       "filename": "desdemona-model-shadow-alpha@2x.webp",
       "bytes": 142178,
       "sha256": "4e6ae04397699849feda1993c841da8048a76e7ffb57a3d3e65e1e19c505ae09"
@@ -30,6 +36,12 @@
       "filename": "desdemona-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 315,
+      "sha256": "07391fd7722bfa3b07cb6b4324191e39b52fb79d73ea1295e9d8e8ba48539b42"
     },
     {
       "location": "prepared",

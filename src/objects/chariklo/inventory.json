@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chariklo-arrival.webp",
+      "bytes": 40486,
+      "sha256": "5f93a8b2a8c196e07c737c4597f7afc0f0f30dcf28517368acf6d9f6d9a35a09"
+    },
+    {
+      "location": "public",
       "filename": "chariklo-model-shadow-alpha@2x.webp",
       "bytes": 137748,
       "sha256": "479580feb669bc13f8a2f4f3b6822d557c10f6e7e9cafe7edcaee188491006e2"
@@ -36,6 +42,12 @@
       "filename": "chariklo-rings.webp",
       "bytes": 19322,
       "sha256": "62ab226715480f5c3f4951bf898e03abb034614632fc4700e82584d7bc4b90ab"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 311,
+      "sha256": "0eb3163ab1711383aec68349f4aa9f791efc031ccf0a92f2a2b003ea628c8cfe"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "skathi-arrival.webp",
+      "bytes": 28022,
+      "sha256": "620e12233b16ca4addc822ac6c43a07543892ab0cdbe021c4df6e73ee25015e5"
+    },
+    {
+      "location": "public",
       "filename": "skathi-model-shadow-alpha@2x.webp",
       "bytes": 144678,
       "sha256": "b9b066c49f2b73edd9dd6e0cdf9af83e6c73b628035152ffd314216503e473f6"
@@ -30,6 +36,12 @@
       "filename": "skathi-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "8834d261aa6a05db4d42a398c6e97ca409e19f0d8f7c89c0827aa940d0222d52"
     },
     {
       "location": "prepared",

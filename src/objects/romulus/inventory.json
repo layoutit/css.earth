@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "romulus-arrival.webp",
+      "bytes": 26320,
+      "sha256": "44188cc80e18c5b2dc0d3221d0d830ee50e8c85e0e2c419689a1a2b958cb9489"
+    },
+    {
+      "location": "public",
       "filename": "romulus-model-shadow-alpha@2x.webp",
       "bytes": 131138,
       "sha256": "2ea95a13e459c9d762b135c154b61c04851dfef0c6eef12b59e2c731113510d6"
@@ -30,6 +36,12 @@
       "filename": "romulus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "72ab5317c3e566adb45a6604d07e2d49a71e16274a6f0c47c53c61059821b86e"
     },
     {
       "location": "prepared",

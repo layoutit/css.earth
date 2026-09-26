@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pales-arrival.webp",
+      "bytes": 22244,
+      "sha256": "5807a27e5d18c09bc581d37d0464de6dba082cd344ab5392ca489ee9d2284b29"
+    },
+    {
+      "location": "public",
       "filename": "pales-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "pales-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "b11cbcc37421edae65049642dcade060f865872b25efe7de2b3b2fbee432b6bc"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "autonoe-arrival.webp",
+      "bytes": 31490,
+      "sha256": "73b5bd285678c63e8d1b2da541fd609d3580cc8920b25a516ee6a9e50fe6e5dd"
+    },
+    {
+      "location": "public",
       "filename": "autonoe-model-shadow-alpha@2x.webp",
       "bytes": 128356,
       "sha256": "05d162f21d551f6ea4a14c64dc9be7aabc7a469e3fe1e64381500a236c66e7df"
@@ -30,6 +36,12 @@
       "filename": "autonoe-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "7272e1c0ace39b06b09f6c6265d629c6556bfe4f77b653b83535691701ac2abf"
     },
     {
       "location": "prepared",

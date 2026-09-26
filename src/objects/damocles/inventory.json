@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "damocles-arrival.webp",
+      "bytes": 30810,
+      "sha256": "9a55e2a127e6498f152dea207cef5d512298a485175a1be2c9182f4baf3e2881"
+    },
+    {
+      "location": "public",
       "filename": "damocles-model-shadow-alpha@2x.webp",
       "bytes": 127482,
       "sha256": "161ce1585ca46e9f891a0e4de8a58f5756e07777c45bfcb0b98b74beb5cbed02"
@@ -30,6 +36,12 @@
       "filename": "damocles-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "ab1f3b20210c059bee3c042cd7dcb812a20b87aa8dc448d8ee1c9490ccd7589f"
     },
     {
       "location": "prepared",

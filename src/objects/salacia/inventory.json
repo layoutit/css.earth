@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "salacia-arrival.webp",
+      "bytes": 30074,
+      "sha256": "10fe1f6065d9f47a83bb0f4d07b9268ce4bc4a0252b296938316e54c1f5358c0"
+    },
+    {
+      "location": "public",
       "filename": "salacia-model-shadow-alpha@2x.webp",
       "bytes": 131372,
       "sha256": "fbc106523fd19d2b5bda3632785f84c50e2c8b758e65a50250c751858372658e"
@@ -30,6 +36,12 @@
       "filename": "salacia-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 310,
+      "sha256": "17eed1a5368efc4718bfb1433ad0c6d15b6f940bbeb51f860a0380daf4b45755"
     },
     {
       "location": "prepared",

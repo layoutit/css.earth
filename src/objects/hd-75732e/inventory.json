@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-75732e-arrival.webp",
+      "bytes": 36920,
+      "sha256": "cf2fde0087aeecf2bc833c9f89eec44332ec2578685f4122de23805cd4e08371"
+    },
+    {
+      "location": "public",
       "filename": "hd-75732e-lens-illustration.webp",
       "bytes": 1352,
       "sha256": "bb45bb96a72ba775437097812eccfd8dee8e9aa99e6afda76fd87b34404e5cb1"
@@ -246,6 +252,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "111823807e81128aef7181a38d46509f6f93d531c566bf79b9a8c53e90c40152"
     },
     {
       "location": "prepared",

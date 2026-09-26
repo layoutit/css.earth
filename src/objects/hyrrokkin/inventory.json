@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hyrrokkin-arrival.webp",
+      "bytes": 28042,
+      "sha256": "b388b62fc2bf18ac6da164bdc05c889592c4af3da452b92652cedb26859715b1"
+    },
+    {
+      "location": "public",
       "filename": "hyrrokkin-model-shadow-alpha@2x.webp",
       "bytes": 144626,
       "sha256": "444bb7836d3483187d087db4ef8749b5db4ca01b9831ec460e3ecf25406adb77"
@@ -30,6 +36,12 @@
       "filename": "hyrrokkin-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "b67d1db664a354bd51e16b3e85f89979f8d925c82033626a05aa72fc4cf3e9e8"
     },
     {
       "location": "prepared",

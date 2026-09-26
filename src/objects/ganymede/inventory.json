@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ganymede-arrival.webp",
+      "bytes": 98594,
+      "sha256": "ef9a37e6cc761632f9dac91a49ce005eed2cdc8607dd460c7c3c1231e95c6936"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-enhanced@2x.webp",
       "bytes": 4588056,
       "sha256": "ba0d7db23bf758b3b1b08b6611826368d7fc2c5e47287b3bc64850ddafcdc434"
@@ -291,6 +297,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "a2de7ecaad2eca66e0df7a3e9db1064922b3046afb292ba3345d22b798e90fed"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
       "bytes": 91058,
       "sha256": "3110b39d6b44c99a4ad5fc7bec83da42967bfec84e6aa5581e5fa057629a7fae"
@@ -324,6 +336,12 @@
       "filename": "lenses.json",
       "bytes": 5917,
       "sha256": "942f2e2c91210c9d83dccb070f942ed682271d35d98520d34b75992ee322a15c"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 24509,
+      "sha256": "eb863aae3a0faf1e84683b84f1df8125fa45df7f6cdcb19fa6b08ca1d2c3cee0"
     },
     {
       "location": "prepared",
@@ -381,9 +399,9 @@
     },
     {
       "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1214,
-      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
+      "filename": "surfaces.json",
+      "bytes": 9461,
+      "sha256": "e241c5e347fb71b44e8158e5bb1727891995a50b31fa1640a719dba6c62ac5db"
     },
     {
       "location": "prepared",
@@ -393,15 +411,9 @@
     },
     {
       "location": "prepared",
-      "filename": "material.json",
-      "bytes": 24509,
-      "sha256": "eb863aae3a0faf1e84683b84f1df8125fa45df7f6cdcb19fa6b08ca1d2c3cee0"
-    },
-    {
-      "location": "prepared",
-      "filename": "surfaces.json",
-      "bytes": 9461,
-      "sha256": "e241c5e347fb71b44e8158e5bb1727891995a50b31fa1640a719dba6c62ac5db"
+      "filename": "world-navigation.json",
+      "bytes": 1214,
+      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
     }
   ]
 }

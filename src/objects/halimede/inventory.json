@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "halimede-arrival.webp",
+      "bytes": 29678,
+      "sha256": "554f1ef4aea421f283ffad323613427608f0a8e1b1cbc3acf1dbb0df1f0e5d10"
+    },
+    {
+      "location": "public",
       "filename": "halimede-model-shadow-alpha@2x.webp",
       "bytes": 127296,
       "sha256": "0adba00ad1e155829961344fa56c3ee4711d1a260fe57df5b00b130eafc40444"
@@ -30,6 +36,12 @@
       "filename": "halimede-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "93e3ee9e0aebf3f379643dec8802acd2c41ca308649909b726410b60a4879dad"
     },
     {
       "location": "prepared",

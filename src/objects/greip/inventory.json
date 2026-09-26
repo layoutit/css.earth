@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "greip-arrival.webp",
+      "bytes": 29654,
+      "sha256": "efd34750882aa8f2a83e1d16164c2e7520e305a187c41e0bf7ecbe6fd1df035f"
+    },
+    {
+      "location": "public",
       "filename": "greip-model-shadow-alpha@2x.webp",
       "bytes": 141740,
       "sha256": "f98b6adc777a8b902cc829cd6a51a0cf4e8d4e08eac6fd37f372deab21423757"
@@ -30,6 +36,12 @@
       "filename": "greip-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "b2c9a84a4b04badef057da4397839f7aa83dcf5f6fe5c2848cdad24e1c32322a"
     },
     {
       "location": "prepared",

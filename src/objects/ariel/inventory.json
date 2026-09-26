@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ariel-arrival.webp",
+      "bytes": 125228,
+      "sha256": "a41a81ca4868dd4a64dc93611d2130a9dace92775476e5635e088567c45aa61b"
+    },
+    {
+      "location": "public",
       "filename": "ariel-elevation@2x.webp",
       "bytes": 367182,
       "sha256": "ef004c262c520433c4348a438a97d09306a69993798db6632f5cdd2eac387640"
@@ -270,6 +276,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "4e5bfa6203756d95b85fa728c13c789954985872cf966e6709255cc9d74fab2e"
     },
     {
       "location": "prepared",

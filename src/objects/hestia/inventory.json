@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hestia-arrival.webp",
+      "bytes": 24244,
+      "sha256": "cccc62ff74428476f0d134cee86ded4c93f08240e760b2a2d3e6b06ea8adb152"
+    },
+    {
+      "location": "public",
       "filename": "hestia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "hestia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "773e5aede7bbe873c8e4941d22747052c928f3fdaeea9cc3b14289611fd79c0f"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aegaeon-arrival.webp",
+      "bytes": 21204,
+      "sha256": "9e5be40c0621e87f7d25461914f98e28b0f164394157d772f9f702e062beb2f1"
+    },
+    {
+      "location": "public",
       "filename": "aegaeon-model-shadow-alpha@2x.webp",
       "bytes": 132202,
       "sha256": "2f60763b2bf0ff3485fe3452f9ce650622c734dbc432de7be3bb142c6518da4c"
@@ -30,6 +36,12 @@
       "filename": "aegaeon-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 310,
+      "sha256": "e82af6cef1b0f7b103f0f450d394e532c95b8e6aae709daa1de6552ce2b80d88"
     },
     {
       "location": "prepared",

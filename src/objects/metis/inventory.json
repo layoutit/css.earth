@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "metis-arrival.webp",
+      "bytes": 24706,
+      "sha256": "94a6c9bae2018f784302e2f802286fc3e979bc5a82717f06abf4b5be4ebb32bd"
+    },
+    {
+      "location": "public",
       "filename": "metis-normal-shadow-alpha@2x.webp",
       "bytes": 70100,
       "sha256": "d8d3a0cd5817999f28eba83d9051bbe0bfff5942fd15c979ca62102a16b830b6"
@@ -30,6 +36,12 @@
       "filename": "metis-normal-thumbnail.webp",
       "bytes": 1408,
       "sha256": "9d0fc00f2a23a17efa0e3533d11dea2cabf093754ff8b3aa59543d8afcec6b78"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 368,
+      "sha256": "6caff415955331a557789d84d4db6a23c15eaa57469732163e3bef6ec2378d7f"
     },
     {
       "location": "prepared",

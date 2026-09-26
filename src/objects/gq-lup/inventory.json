@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gq-lup-arrival.webp",
+      "bytes": 34424,
+      "sha256": "7c8d98777bd8644b38935bf6fde2a2fd5b405efb9d315808d734feae80dcb2a7"
+    },
+    {
+      "location": "public",
       "filename": "gq-lup-lens-color.webp",
       "bytes": 44,
       "sha256": "cd1cf35794fbf5bd9f9fb5895178e9c3e5a9fa509618422121ffbc38ee862912"
@@ -24,6 +30,12 @@
       "filename": "gq-lup-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "a80d728e6ec293145763ad143da8d171fc1498f72dd8729d72752bce8107621b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "7ab87771db2dd9827f599c26fcdaef089b237274fe8671de98391e0143e26be1"
     },
     {
       "location": "prepared",

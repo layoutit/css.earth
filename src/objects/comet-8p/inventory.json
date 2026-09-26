@@ -33,6 +33,12 @@
     },
     {
       "location": "public",
+      "filename": "comet-8p-arrival.webp",
+      "bytes": 31112,
+      "sha256": "84b59b88d87030bd3fe13889a86760cad144dedd0a0e6764c4de0348716a978e"
+    },
+    {
+      "location": "public",
       "filename": "comet-8p-features.json",
       "bytes": 3454,
       "sha256": "9facda5bfcfcbfe502828c83e72538e1e479b96e1dae80007b1c96d56a9d7df0"
@@ -66,6 +72,12 @@
       "filename": "comet-8p-model-thumbnail.webp",
       "bytes": 1458,
       "sha256": "01d5ce463e113416edbebb42a1cacc4bf75718c3debdd9297c6546de9d330dfd"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 313,
+      "sha256": "8eb1fbbc15a112a8dfde9db13030d54dc59d6dafbd720dc93a4b87e78a3c0ffc"
     },
     {
       "location": "prepared",

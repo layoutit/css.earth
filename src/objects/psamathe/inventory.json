@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "psamathe-arrival.webp",
+      "bytes": 30722,
+      "sha256": "c88ebdf6965697285d68fa4550c30150dd67c86837197c76954d18145b3882d1"
+    },
+    {
+      "location": "public",
       "filename": "psamathe-model-shadow-alpha@2x.webp",
       "bytes": 124410,
       "sha256": "060ca8e8160a0ea1ef0256b0865ae90e2d91e56276370fd4ff82fe85e078b338"
@@ -30,6 +36,12 @@
       "filename": "psamathe-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "9fc82ce13333fdea741ef1e7444a6aedeaa47a5f48722f718b9b970f52b01d95"
     },
     {
       "location": "prepared",

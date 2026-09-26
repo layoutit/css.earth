@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ymir-arrival.webp",
+      "bytes": 29940,
+      "sha256": "80f44e4bc74479d4316b0633eec7689fb2662869cca536c499e28eecf933497a"
+    },
+    {
+      "location": "public",
       "filename": "ymir-model-shadow-alpha@2x.webp",
       "bytes": 107992,
       "sha256": "ed68dabca54d2206d8c7332b850c5e29bc240fc5a6b04f180659b91f7606bfbd"
@@ -30,6 +36,12 @@
       "filename": "ymir-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "5a00f538453f0f52b2dcd0ca562d652eaa37f80ad6b4d71bf1cadaef689d1fb0"
     },
     {
       "location": "prepared",

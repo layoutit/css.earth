@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bavaria-arrival.webp",
+      "bytes": 21994,
+      "sha256": "16519e5978bb3f7d775fb49c100050b3852cb944f014961ed3039ff65d7f4748"
+    },
+    {
+      "location": "public",
       "filename": "bavaria-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "bavaria-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "c123addcc462a91bf42da9ba22777c7e46cadd34715e5e476e4dd8768274bafb"
     },
     {
       "location": "prepared",

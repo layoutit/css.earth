@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "trappist-1c-arrival.webp",
+      "bytes": 31046,
+      "sha256": "93bb145375f4ddcda4b2696f3f120cd7316e2437111758a7bca0501394683eef"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1c-lens-illustration.webp",
       "bytes": 398,
       "sha256": "c0f415a3bae7db7b498cd2bfdb857e5e01d2c179365e0ab876fdb8d282a2d37a"
@@ -36,6 +42,12 @@
       "filename": "trappist-1c-surface-temperature@2x.webp",
       "bytes": 18756,
       "sha256": "effe544edf5e784efbd3387c18ce185d8532ecf25f4dc99e22a8863a9ba21963"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 307,
+      "sha256": "856de61879a32888ce806cda28d5ea3be03a990a0ca6f8372f8ecf8a81c586a5"
     },
     {
       "location": "prepared",

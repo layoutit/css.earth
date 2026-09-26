@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "echeclus-arrival.webp",
+      "bytes": 32154,
+      "sha256": "32dd4c434d7456fcef940a55cd0ce1e1c4b3d2c87f63f26180e8a3cd85854900"
+    },
+    {
+      "location": "public",
       "filename": "echeclus-model-shadow-alpha@2x.webp",
       "bytes": 126996,
       "sha256": "562f38e4026552f03d4efe82e5dbe26828cf3b93c20b685a81eb9fe3f985ac82"
@@ -30,6 +36,12 @@
       "filename": "echeclus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "0ea0c3a952be679c3f82964b848f9df716fbd4d830f8fb872ef35da3b4cb8f82"
     },
     {
       "location": "prepared",

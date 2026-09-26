@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-1996-hw1-arrival.webp",
+      "bytes": 19752,
+      "sha256": "815a8fd614ff6c01174cbbf45c5c099eaa03f274510b6943e1b4d70cdfaf6273"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-1996-hw1-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "asteroid-1996-hw1-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 317,
+      "sha256": "23d841c0b097918738201233d3698315c12a13525eb5e5f37d16e412ee34862a"
     },
     {
       "location": "prepared",

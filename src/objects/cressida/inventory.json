@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cressida-arrival.webp",
+      "bytes": 28242,
+      "sha256": "ef449ef3d3e2ae093512550d0a1bf244548634562942791d41b45fde11afcab0"
+    },
+    {
+      "location": "public",
       "filename": "cressida-model-shadow-alpha@2x.webp",
       "bytes": 145192,
       "sha256": "5ff80880508e5689de247caf434790c27a4d2a6bcb88edf320755f178c220025"
@@ -30,6 +36,12 @@
       "filename": "cressida-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 313,
+      "sha256": "a4e8e2096a516e758da8c026b8e046a4206237df7dd5848f6caab2e06f52e17e"
     },
     {
       "location": "prepared",

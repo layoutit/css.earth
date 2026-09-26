@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iris-arrival.webp",
+      "bytes": 22952,
+      "sha256": "87ed6eb4fcb237bd4cabf5e2e8032d080a8552260f2880a51e0dd6d3ff0583ab"
+    },
+    {
+      "location": "public",
       "filename": "iris-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "iris-zimpol-thumbnail.webp",
       "bytes": 1836,
       "sha256": "5878cd9793b61dcbbd25eb7af2b022f42698d1785a8b79650fe035e816faac6b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "bec7446fe944614cd9d8bbc098a55a22c89907d9c176af7343075621d996dc60"
     },
     {
       "location": "prepared",

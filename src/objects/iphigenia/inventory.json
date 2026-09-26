@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iphigenia-arrival.webp",
+      "bytes": 30360,
+      "sha256": "ab4b4560e1296e7e6a068305bc298cce62bc31a72e56f61fb4543aef4cbc6243"
+    },
+    {
+      "location": "public",
       "filename": "iphigenia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "iphigenia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "57872a4f31b10330afd40f4b690325dbbcfe32c83effef1b7aed43aba9fd5c92"
     },
     {
       "location": "prepared",

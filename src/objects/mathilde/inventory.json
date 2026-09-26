@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mathilde-arrival.webp",
+      "bytes": 40724,
+      "sha256": "47df7b1ccf40d7361feb08f7ac4bbde2c77362fc2ef625fe0b736c2e6cd8187b"
+    },
+    {
+      "location": "public",
       "filename": "mathilde-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -90,6 +96,12 @@
       "filename": "mathilde-normal-thumbnail.webp",
       "bytes": 3222,
       "sha256": "70fdcc159376b4f0d82ffe49e0436ca7553c913d9aa285f32dc12df825cf7bf7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "d9ad84e84d43f2a5e2c27e7edc91658d9b3ab16a5fbd103b7ea6f022077480e8"
     },
     {
       "location": "prepared",
