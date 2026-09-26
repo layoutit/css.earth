@@ -83,6 +83,13 @@ slow for a path, and the app's own input handling runs as it does for a finger.
 
 ### A real iPhone or iPad over USB
 
+For a local iPad preview, open Safari on the unlocked device and enable Settings > Apps > Safari > Advanced > Web
+Inspector. From this checkout, run `pnpm ipad` (or `pnpm ipad --route /jupiter/`). It prepares and starts the dev server
+on the Mac's LAN, navigates the existing Safari tab, and confirms the tab's URL. It reuses a server on port 4210 only if
+that server belongs to this checkout. `--open-only` uses an already running server; `--port` and `--address` override the
+defaults. This path uses Web Inspector and does not require Safari's Remote Automation setting. Keep its terminal open
+when it starts a new server. This is a dev preview: first visits may spend time loading transformed modules.
+
 `--device [udid]` records a device instead of the simulator. Turn on Settings > Apps > Safari > Advanced > Web Inspector,
 trust this Mac, keep the device unlocked (Auto-Lock off while plugged in) with the page open in Safari, and start the dev
 server on the network (`pnpm exec astro dev --host 0.0.0.0 --port 4210`). An `--open` path that starts with `/` loads from
