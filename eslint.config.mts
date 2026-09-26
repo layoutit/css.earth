@@ -115,7 +115,7 @@ export default [
   },
   {
     // `@cssearth/renderer` is the browser runtime. It reads prepared data through its own validators and never imports the
-    // application, preparation code (`@cssearth/bake`, `src/renderers/css/preparation`) or Node built-ins; tests may.
+    // application, preparation code (`@cssearth/bake`) or Node built-ins; tests may.
     files: ['packages/renderer/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

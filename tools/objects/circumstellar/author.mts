@@ -12,7 +12,7 @@
  * (fit-figure-stretch.mts reflectanceChannels). The ring's geometry is measured on the mean of the channels, checked against
  * the published geometry the recipe cites, and the envelope that best projects to that image is fitted (disc-envelope.mts).
  * Each channel is shown through the stretch fitted to the publisher's own panel (fit-figure-stretch.mts), and the three are
- * spread along the ring with one depth profile (src/preparation/volume/column-depth.ts spreadColumns), so a line of sight keeps
+ * spread along the ring with one depth profile (packages/bake/src/density/column-depth.ts spreadColumns), so a line of sight keeps
  * its colour through its depth. One volume unit is one astronomical unit at the
  * star's distance; the frame is anchored on the star's prepared scene origin, so the star's sphere sits at the centre.
  *
@@ -387,7 +387,7 @@ function faceShareOf(sky: SkyPlane, innerMaskUnits: number, taperFromUnits: numb
 }
 
 /** The display and the volume, shared by both geometries: each channel through the lens's stretch, spread along the envelope's
- * depth profile (src/preparation/volume/column-depth.ts), encoded, and previewed north up, east left. */
+ * depth profile (packages/bake/src/density/column-depth.ts), encoded, and previewed north up, east left. */
 /** The displayed channels: each read channel through the lens's stretch, blank under the drawn inner edge, tapered beyond the
  * light's end and faded by the stated noise fade. What the volume must reproduce from Earth. */
 export function shownChannels(lens: CircumstellarLens, sky: SkyPlane, read: readonly Float32Array[], innerMaskUnits: number, taperFromUnits: number) {
