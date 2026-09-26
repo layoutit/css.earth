@@ -23,7 +23,7 @@ import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platf
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
-import { textureTileStyles, tiledTextureKeys } from "../../../src/renderers/css/rendering/prepared-texture-levels.ts";
+import { textureTileStyles, tiledTextureKeys } from "../../../src/renderers/css/dist/index.js";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";

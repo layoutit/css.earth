@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { selectPreparedTextureLevel } from './prepared-texture-levels.js';
+import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys } from './prepared-texture-levels.js';
 import { resolvePreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
 import { requireTextureLevels } from '../validation/presentation.js';
 
@@ -86,4 +86,27 @@ test('a texture whose faces are behind the body or off screen keeps the first le
   expect(plan(view(false))).toEqual(['front', 'back', 'aside']);
   expect(() => requireTextureLevels({ ...placed, placements: { ...placed.placements, writes: { '--unwritten': page([0, 0, 0], [0, 0, 1]) } } },
     placedDefinition.variants, new Set([...written, ...written.map(key => `${key}-small`)]))).toThrow('--unwritten');
+});
+
+test('a sheet level plans each page as a tile of one shared image; the page level plans the pages themselves', () => {
+  const sheet = { hysteresis: 0.2, levels: [
+    { minimumDiameter: 0, resources: { a: 'sheet', b: 'sheet' }, tiles: { a: { x: 0, y: 0, scale: 2 }, b: { x: 3, y: 0, scale: 2 } } },
+    { minimumDiameter: 230, resources: { a: 'a', b: 'b' } },
+  ] };
+  const both = [{ when: { lensId: 'a' }, required: ['a', 'b'], materials: [], writes: ['a', 'b'].map((resource, i) =>
+    ({ kind: 'texture' as const, resource, target: i, name: `--page-${i}`, quoted: true })) }];
+  const paged = { textureLevels: sheet, variants: both, materials: [] } as unknown as PreparedPresentationDefinition;
+  const view = { sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } };
+  const initial = resolvePreparedPresentation(paged, { selection: { lensId: 'a' }, view, initial: true });
+  // One decode for both pages.
+  expect(initial.required).toEqual(['sheet']);
+  expect(initial.textureTiles).toEqual(sheet.levels[0]!.tiles);
+  const refined = resolvePreparedPresentation(paged, { selection: { lensId: 'a' }, view, previousPlan: initial });
+  expect(refined.required).toEqual(['a', 'b']);
+  expect(refined.textureTiles).toBeUndefined();
+  expect([...tiledTextureKeys(sheet)]).toEqual(['a', 'b']);
+  expect(textureTileStyles('--page-1', sheet.levels[0]!.tiles!.b)).toEqual([['--page-1-x', '-3px'], ['--page-1-y', '0px'], ['--page-1-scale', '2']]);
+  expect(textureTileStyles('--page-1', undefined)).toEqual([['--page-1-x', '0px'], ['--page-1-y', '0px'], ['--page-1-scale', '1']]);
+  expect(() => requireTextureLevels(sheet, both, new Set(['a', 'b', 'sheet']))).not.toThrow();
+  expect(() => requireTextureLevels({ ...sheet, levels: [{ ...sheet.levels[0], tiles: { a: { x: 0, y: 0, scale: 0.5 } } }, sheet.levels[1]] }, both, new Set(['a', 'b', 'sheet']))).toThrow(/tile a/);
 });
