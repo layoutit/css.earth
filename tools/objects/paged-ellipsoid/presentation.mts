@@ -3,7 +3,7 @@ import type { PreparedNode } from '@cssearth/bake/presentation';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
 import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
-import type { ShellObjectControls } from '../../../site/browser/shell-contract-types.mts';
+import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { preparePagedEllipsoidScene } from './scene.mts';
 import type { preparePlaces } from './geographic/places.mts';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';

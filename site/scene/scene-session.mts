@@ -7,7 +7,7 @@ import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import type { bindViewUrl } from '../view-url-runtime.mts';
-import { requireSceneLifecycle } from './scene-contract.mts';
+import { requireSceneLifecycle } from '@cssearth/renderer/runtime/shell-contract.ts';
 
 export type SceneSessionState =
   | { readonly kind: 'loading'; readonly activation: 'idle' | 'mounting' | 'restoring'; readonly mount: ObjectSceneLifecycle | null }

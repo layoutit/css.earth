@@ -9,7 +9,7 @@ import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
+import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

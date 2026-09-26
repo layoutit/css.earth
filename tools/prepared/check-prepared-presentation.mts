@@ -12,7 +12,7 @@ import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
 import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
-import { requireObjectControls } from '../../site/scene/scene-contract.mts';
+import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../ci/runtime-ast.mts';
 import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
 
