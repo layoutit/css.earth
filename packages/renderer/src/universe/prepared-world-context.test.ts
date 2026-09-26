@@ -749,6 +749,7 @@ test('prepared planetary systems retain identified moon paths and retire offscre
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
+  layer.setOverview(true);
   for (const [planet, moon] of [['saturn', 'titan'], ['jupiter', 'europa'], ['uranus', 'titania']]) {
     const body = context.bodies.find(body => body.id === planet)!;
     layer.selectObject(planet);
@@ -842,7 +843,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
   const memberIds = new Set(required([context.focus, ...context.bodies].find(body => body.id === planet)!.systemView).memberIds);
   const moons = layer.inspect().filter(body => memberIds.has(body.id));
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  layer.selectObject(planet);
+  layer.selectObject(planet); layer.setOverview(true);
   layer.publish(target, viewport);
   for (const zoom of [.8, 1, 1.4]) {
     layer.publish({ ...target, pose: { ...target.pose,
@@ -882,7 +883,7 @@ test('initial Jupiter system framing makes the four large moons and their labels
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
     annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, labelImportance(object.classification)])),
   });
-  layer.selectObject('jupiter');
+  layer.selectObject('jupiter'); layer.setOverview(true);
   layer.publish(target, viewport); document.defaultView.advance(200);
   for (const id of ['io', 'europa', 'ganymede', 'callisto']) {
     const moon = layer.inspect().find(body => body.id === id)!;

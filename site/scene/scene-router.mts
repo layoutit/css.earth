@@ -488,7 +488,9 @@ export function createSceneRouter({
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(overview);
     shellOwner?.shell?.presentSelection();
     const subject = selection?.current;
-    world.current?.setOverview?.(overview, subject?.kind === 'overview' ? subject.overview.scope : undefined);
+    // The system has its own shell selection, but its world paths use the shared overview policy.
+    world.current?.setOverview?.(overview || selection?.context.kind === 'satellite-system',
+      subject?.kind === 'overview' ? subject.overview.scope : undefined);
     if (stage.dataset) {
       const current = subject ?? { kind: 'object' as const, objectId };
       stage.dataset.selection = current.kind === 'overview' ? current.overview.scope
