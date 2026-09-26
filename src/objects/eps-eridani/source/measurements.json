@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "eps-eridani",
+  "angularDiameterMas": 2.14,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 514,818 km at 3.22 pc = 2.14 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 3.219810408490127,
+  "distanceSource": "Gaia DR3 parallax 310.5773 +/- 0.1355 mas (same row, RUWE 2.72): 3.22 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 514818,
+  "radiusSource": "Radius 0.74 +/- 0.01 solar radii from Baines & Armstrong (2012), ApJ 744, 138, section 3: the Navy Optical Interferometer limb-darkened angular diameter 2.153 ± 0.028 mas at the parallax of Benedict et al. (2006) (https://arxiv.org/abs/1112.0447): 514,818 km at 695,700 km per solar radius. Mass 0.82 +/- 0.02 solar masses from Thompson et al. (2025), AJ 170, 301, the stellar mass their orbit fit of ε Eridani b adopts, via the NASA Exoplanet Archive default parameter set (https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract); GM is that mass times the JPL solar GM. Temperature 5039 +/- 126 K from Baines & Armstrong (2012), ApJ 744, 138, section 3: from the interferometric angular diameter and the bolometric flux (https://arxiv.org/abs/1112.0447). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5039,
+  "effectiveTemperatureSource": "Baines & Armstrong (2012), ApJ 744, 138, section 3: from the interferometric angular diameter and the bolometric flux (https://arxiv.org/abs/1112.0447)",
+  "surfaceGravityLogg": 4.61,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/eps-eridani.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.613, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 22049) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

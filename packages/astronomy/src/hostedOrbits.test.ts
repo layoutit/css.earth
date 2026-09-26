@@ -24,9 +24,9 @@ describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
     const hd110067 = ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']
-    expect(EXOPLANET_IDS).toEqual(['ab-pic-b', 'af-lep-b', 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'eps-indi-ab', 'gj-143b', 'gj-504-b', 'gq-lup-b', 'hat-p-11b', 'hd-101581b', 'hd-101581c', ...hd110067, 'hd-135344-ab', 'hd-136352b', 'hd-136352c', 'hd-136352d', 'hd-189733b', 'hd-206893-b', 'hd-206893-c', 'hd-207496b', 'hd-207897b', 'hd-209458b', 'hd-219134b', 'hd-219134c', 'hd-29391-b', 'hd-60779b', 'hd-63433c', 'hd-63433d', 'hd-73583b', 'hd-73583c', 'hd-75732e', 'hd-88986b', 'hd-95086-b', 'hd-97658b', 'hip-65426-b', 'hr-858b', 'hr-858d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-22b', 'kepler-444b', 'kepler-444c', 'kepler-444d', 'kepler-444e', 'kepler-444f', 'kepler-452b', 'kepler-7b', 'pds-70-b', 'pds-70-c', 'pi-menc', 'roxs-42b-b', 'toi-2134b', 'toi-2134c', 'toi-2194b', 'toi-431b', 'toi-431d', 'toi-5789c', 'toi-836b', 'trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h', 'vhs-1256-1257-b', 'wasp-121b', 'wasp-12b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b', 'yses-1-b'])
+    expect(EXOPLANET_IDS).toEqual(['ab-pic-b', 'af-lep-b', 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'dh-tau-b', 'eps-eridani-b', 'eps-indi-ab', 'gj-143b', 'gj-504-b', 'gq-lup-b', 'hat-p-11b', 'hd-101581b', 'hd-101581c', ...hd110067, 'hd-135344-ab', 'hd-136352b', 'hd-136352c', 'hd-136352d', 'hd-189733b', 'hd-206893-b', 'hd-206893-c', 'hd-207496b', 'hd-207897b', 'hd-209458b', 'hd-219134b', 'hd-219134c', 'hd-29391-b', 'hd-60779b', 'hd-63433c', 'hd-63433d', 'hd-73583b', 'hd-73583c', 'hd-75732e', 'hd-88986b', 'hd-95086-b', 'hd-97658b', 'hip-65426-b', 'hr-858b', 'hr-858d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kelt-9b', 'kepler-16ab-b', 'kepler-186f', 'kepler-22b', 'kepler-444b', 'kepler-444c', 'kepler-444d', 'kepler-444e', 'kepler-444f', 'kepler-452b', 'kepler-7b', 'pds-70-b', 'pds-70-c', 'pi-menc', 'roxs-42b-b', 'toi-2134b', 'toi-2134c', 'toi-2194b', 'toi-431b', 'toi-431d', 'toi-5789c', 'toi-836b', 'trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h', 'vhs-1256-1257-b', 'wasp-121b', 'wasp-12b', 'wasp-18b', 'wasp-39b', 'wasp-43b', 'wasp-76b', 'wd-1856-534b', 'yses-1-b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', 'hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g', 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c', 'wasp-121b', 'hip-65426-b', 'af-lep-b', 'ab-pic-b', 'yses-1-b', 'hd-206893-b', 'hd-206893-c', 'hd-95086-b', 'gj-504-b', 'hd-135344-ab', 'eps-indi-ab', 'hd-219134c', 'hd-219134b', 'hd-101581b', 'hd-101581c', 'hd-136352c', 'hd-136352d', 'hd-136352b', 'gj-143b', 'pi-menc', 'toi-2194b', 'toi-5789c', 'hd-97658b', 'hd-63433c', 'hd-63433d', 'toi-2134b', 'toi-2134c', 'hd-207496b', 'toi-836b', 'hd-207897b', 'hd-73583c', 'hd-73583b', 'hr-858d', 'hr-858b', 'toi-431d', 'toi-431b', 'hd-88986b', 'hd-60779b', 'kepler-444e', 'kepler-444b', 'kepler-444c', 'kepler-444d', 'kepler-444f', 'wasp-12b', 'hd-75732e', 'kepler-22b', 'hat-p-11b', 'kepler-7b'])
+    expect(HOSTED_PLANET_IDS.filter(id => (EXOPLANET_IDS as readonly string[]).includes(id))).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b', 'hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g', 'hd-29391-b', 'kepler-16ab-b', 'wd-1856-534b', 'kelt-9b', 'vhs-1256-1257-b', 'gq-lup-b', 'dh-tau-b', 'roxs-42b-b', 'wasp-76b', 'pds-70-b', 'wasp-18b', 'pds-70-c', 'wasp-121b', 'hip-65426-b', 'af-lep-b', 'ab-pic-b', 'yses-1-b', 'hd-206893-b', 'hd-206893-c', 'hd-95086-b', 'gj-504-b', 'hd-135344-ab', 'eps-indi-ab', 'hd-219134c', 'hd-219134b', 'hd-101581b', 'hd-101581c', 'hd-136352c', 'hd-136352d', 'hd-136352b', 'gj-143b', 'pi-menc', 'toi-2194b', 'toi-5789c', 'hd-97658b', 'hd-63433c', 'hd-63433d', 'toi-2134b', 'toi-2134c', 'hd-207496b', 'toi-836b', 'hd-207897b', 'hd-73583c', 'hd-73583b', 'hr-858d', 'hr-858b', 'toi-431d', 'toi-431b', 'hd-88986b', 'hd-60779b', 'kepler-444e', 'kepler-444b', 'kepler-444c', 'kepler-444d', 'kepler-444f', 'wasp-12b', 'hd-75732e', 'kepler-22b', 'hat-p-11b', 'kepler-7b', 'eps-eridani-b'])
     for (const id of hd110067) expect(BODIES[id as keyof typeof BODIES].parent).toBe('hd-110067')
     expect(BODIES['wd-1856-534b' as keyof typeof BODIES].parent).toBe('wd-1856-534')
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
@@ -200,6 +200,28 @@ describe('hosted orbits', () => {
     }
     // A circular display orbit at the published semi-major axis, node and inclination, phased to the six epochs: chi-squared 12.5 for 11 degrees of freedom.
     expect(chi2).toBeLessThan(14)
+  })
+  it('places ε Eridani b where Thompson et al. put it: at its greatest separation, south of the star, in December 2024', () => {
+    // Thompson et al. (2025, AJ 170, 301; arXiv:2502.20561), section 4: the radial velocities alone put the planet on a ring of
+    // 1071 +/- 58 mas at "opposition", 2024-12-07 + N x 3.66 yr; with the absolute astrometry it is south of the star in 2025
+    // and north in 2029, moving counterclockwise; Table 3 gives the node at position angle 186 +8/-9 degrees. The record draws
+    // their orbit circular (e 0.06 +0.06/-0.04, omega and periastron time unconstrained), phased to that date.
+    const star = starAstrometry('eps-eridani'), radiusKm = BODIES['eps-eridani'].meanRadiusKm
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+    const distanceKm = star.distanceParsecs * PARSEC_KM
+    const mjdOf = (iso: string) => Date.parse(`${iso}T00:00:00Z`) / 86400000 + 40587
+    const sky = (iso: string) => {
+      const p = hostedOrbitStateRelativeKm(hostedOrbit('eps-eridani-b'), star, radiusKm, mjdOf(iso) + 2400000.5).positionKm
+      const [x, y] = [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000)
+      return { separation: Math.hypot(x!, y!), positionAngle: ((Math.atan2(x!, y!) * 180 / Math.PI) + 360) % 360 }
+    }
+    const opposition = sky('2024-12-07')
+    expect(Math.abs(opposition.separation - 1071)).toBeLessThan(58)
+    expect(Math.abs(opposition.positionAngle - 186)).toBeLessThan(9)
+    // Counterclockwise: the position angle grows through 2025, and half a period later the planet is north of the star.
+    expect(sky('2025-07-01').positionAngle).toBeGreaterThan(sky('2025-01-01').positionAngle)
+    const later = sky('2028-08-01').positionAngle
+    expect(Math.min(later, 360 - later)).toBeLessThan(15)
   })
   it('places Luhman 16 B where Garcia et al. measured it from A, and moves it at their relative radial velocities', () => {
     // Garcia et al. (2017, ApJ 846, 97; arXiv:1708.02714), Table 3: GeMS orbital astrometry of B from A, (dRA, dDec) in mas at MJD, with
