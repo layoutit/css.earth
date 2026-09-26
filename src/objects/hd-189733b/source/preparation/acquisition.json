@@ -18,6 +18,26 @@
       ],
       "path": "illustration/HD_189733_b.jpg",
       "url": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/fu-2024/HD189733b_NIRCam_spectrum.txt",
+      "url": "https://zenodo.org/api/records/11459715/files/HD189733b_JWST_data_model.zip/content",
+      "member": "zenodo/Data/transit spectrum/HD189733b_NIRCam_spectrum.txt"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/fu-2024/FULL_TD_median_result.txt",
+      "url": "https://zenodo.org/api/records/11459715/files/HD189733b_JWST_data_model.zip/content",
+      "member": "zenodo/Model/Free/FULL_TD_median_result.txt"
     }
   ]
 }

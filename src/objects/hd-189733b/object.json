@@ -9,6 +9,7 @@
       "steps": [
         "verify-sources",
         "assets",
+        "charts",
         "panel-content",
         "lenses",
         "starfield",
@@ -28,6 +29,11 @@
           "lenses": [
             {
               "id": "temperature",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "uncertainty",
               "source": "content",
               "material": "emission"
             },
@@ -86,6 +92,10 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json"
         }
       ],
       "emission": {

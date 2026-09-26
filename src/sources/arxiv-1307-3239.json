@@ -1,0 +1,34 @@
+{
+  "id": "arxiv-1307-3239",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Evans et al. (2013): The Deep Blue Color of HD 189733b: Albedo Measurements with HST/STIS at Visible Wavelengths",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/772/2/L16"
+    },
+    {
+      "type": "arXiv",
+      "value": "1307.3239"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1307.3239",
+      "label": "The Astrophysical Journal Letters"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1307.3239",
+      "checkedOn": "2026-09-26",
+      "locator": "Table 1: six-channel geometric albedos, flux-weighted wavelengths, band edges and asymmetric uncertainties. The two broad channels rebin the same observation."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters",
+  "publicationDate": "2013"
+}

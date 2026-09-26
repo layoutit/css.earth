@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-import { mkdtemp, readFile, writeFile, rm, readdir } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile, rm, readdir, mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -224,11 +224,12 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
   let cache: string | undefined;
   try {
     const content = Buffer.from(`Pinned source fixture ${randomUUID()}\n`);
-    await writeFile(join(directory, 'source.bin'), content);
-    execFileSync('zip', ['-q', 'archive.zip', 'source.bin'], {cwd: directory});
+    await mkdir(join(directory, 'transit spectrum'));
+    await writeFile(join(directory, 'transit spectrum/source.bin'), content);
+    execFileSync('zip', ['-q', 'archive.zip', 'transit spectrum/source.bin'], {cwd: directory});
     const archive = await readFile(join(directory, 'archive.zip'));
     cache = resolve('.local/source-archives', `${digest(Buffer.from('https://example.test/archive.zip'))}.zip`);
-    const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip', member:'source.bin', groups:['restore']};
+    const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip', member:'transit spectrum/source.bin', groups:['restore']};
     const plan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1', operations:[step]});
     const manifest = {schema:'cssearth-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
     await executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
