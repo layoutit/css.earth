@@ -167,6 +167,7 @@
    The scale covers the circle, the name and its offset together; hit targets keep their full size. */
 @media (max-width: 820px), (orientation: portrait) {
   .prepared-world-context { --context-annotation-scale: .75; }
+  .prepared-selected-body-label { scale: .75; transform-origin: center top; }
 }
 /* The Galactic-centre landmark sits over the bright Milky Way bulge. */
 .prepared-world-context [data-context-body="sgr-a-star"]::before,

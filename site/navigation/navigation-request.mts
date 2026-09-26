@@ -75,7 +75,8 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     : intent.kind === 'object' && family && !opensFamilyFocus && object.id !== current.centeredObjectId && current.hasPresented
       ? navigation.systemTarget(targetRequest) : null;
   const center = overviewTarget?.world ?? familyTarget
-    ?? (intent.kind === 'object' && !opensOverviewFocus && object.id !== current.centeredObjectId && current.hasPresented
+    ?? (intent.kind === 'object' && (family !== null || systemById(objects, object.id) !== null)
+      && !opensOverviewFocus && object.id !== current.centeredObjectId && current.hasPresented
       ? navigation.centerTarget(targetRequest) : null);
   if (intent.kind === 'focus') {
     url.pathname = object.route;
