@@ -692,10 +692,10 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* An on-screen keyboard covers the bottom of the layout viewport without
        shrinking it, so the sheet gives up that much room. */
     --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-lift) - var(--sheet-keyboard, 0px));
-    /* The tucked stop leaves only the grabber; the first content stop stays fixed across objects. */
+    /* The tucked stop leaves only the grabber. The controller measures the first content stop from the visible card. */
     --sheet-tucked: calc(20px + var(--explorer-safe-bottom));
-    --sheet-peek: calc(180px + var(--explorer-safe-bottom));
-    --sheet-half: 50dvh;
+    --sheet-peek: var(--sheet-tucked);
+    --sheet-half: max(50dvh, var(--sheet-peek));
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
     /* How far the sheet sits below its open position in its state: layout rests the sheet there, and the search above
@@ -703,9 +703,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
        follows the finger. */
     --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
   }
-  @media (max-width: 699px) and (orientation: portrait) {
-    body[data-object-shell] { --sheet-peek: calc(304px + var(--explorer-safe-bottom)); }
-  }
+  /* Wait for the measured content stop before showing the sheet and its riders. */
+  body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: hidden; }
   body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
   body[data-object-shell][data-sheet="full"] { --sheet-rest: 0px; }
   body[data-object-shell][data-sheet="half"] { --sheet-rest: calc(var(--sheet-height) - var(--sheet-half)); }
@@ -826,13 +825,11 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
      instead of the side panel's 420 px. */
   .object-sidebar #object-category-results { max-height: calc(var(--sheet-height) - 40px); }
 
-  /* A phone on its side has little height: the filters join the search row and
-     the sheet peeks less, so the scene keeps a usable band. */
+  /* A phone on its side has little height: the filters join the search row. */
   @media (max-height: 480px) {
     body[data-object-shell] {
       --explorer-header-height: var(--explorer-search-height);
-      --sheet-peek: calc(104px + var(--explorer-safe-bottom));
-      --sheet-half: 62dvh;
+      --sheet-half: max(62dvh, var(--sheet-peek));
     }
 
     /* The one header row already fits a short viewport; only the sheet metrics change. */
