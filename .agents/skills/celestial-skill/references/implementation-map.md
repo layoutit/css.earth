@@ -305,7 +305,7 @@ plane and its flag values are read. `@cssearth/spice` (`packages/spice`) is the 
 kernel subset (DAF, SPK types 1, 2, 3, 5, 8, 9 and 13, CK types 1 to 3, text
 kernels, leap seconds, SCLK, PCK pole models, frame classes 2 to 6, light time
 and stellar aberration) and its `spiceCamera` (`packages/spice/src/camera.ts`) assembles the camera;
-`tools/objects/terrestrial-layers/spice-camera.mts` turns it into the same
+`packages/bake/src/objects/layers/terrestrial/missions/spice-camera.ts` turns it into the same
 `cssearth-archived-camera@1` closure the OSIRIS and L'LORRI formats use, and
 `castSourceRays` derives per-pixel geometry from the full source mesh. The
 route is validated end to end against Dimorphos's DRACO backplanes in

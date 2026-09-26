@@ -10,9 +10,8 @@ import { decodeProfile, parseGeoCameraClosure, parseGeometryCube, parseLevelMatc
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale, decodeAmicaGeo, decodeOsirisReflectance, decodeLlorri, decodeNearMsi, parseNearCameraClosure, decodeNewHorizonsLorri, decodeArrokothMvic, decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT, refineCameraByLimb } from '@cssearth/bake/objects/layers/terrestrial';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale, decodeAmicaGeo, decodeOsirisReflectance, decodeLlorri, decodeNearMsi, parseNearCameraClosure, decodeNewHorizonsLorri, decodeArrokothMvic, decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT, refineCameraByLimb, decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT, ABERRATIONS } from '@cssearth/bake/objects/layers/terrestrial';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
-import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT, ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '../../../kernel-banks/kernel-bank.mts';
 import { bandColorDisplay, type BandColorDisplay } from '@cssearth/bake/objects/color';

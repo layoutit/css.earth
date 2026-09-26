@@ -22,6 +22,7 @@ export * from './missions/near-msi.ts';
 export * from './missions/new-horizons-geo.ts';
 export * from './missions/osiris-geo.ts';
 export * from './missions/pds4-geometry-cube.ts';
+export * from './missions/spice-camera.ts';
 export * from './native-photograph-source.ts';
 export * from './native-photograph.ts';
 export * from './pds-constraint-map.ts';
