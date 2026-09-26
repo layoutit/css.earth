@@ -12,8 +12,8 @@ test('a spatial point field reprojects through a fixed eight-node CSS shadow ban
   const world={referenceFrame:'sun-icrf',epochJdTt:2451545,pose:{positionM:[0,0,0] as const,orientationXyzw:[0,0,0,1] as const}};
   field.publish({world,viewport});
   const first=field.nodes[0]!.style.boxShadow;
-  expect(field.nodes).toHaveLength(8);expect(field.root.dataset.visiblePoints).toBe('1');expect(first).toContain('#ffffffff');
+  expect(field.nodes).toHaveLength(8);expect(field.stats().visiblePoints).toBe(1);expect(first).toContain('#ffffffff');
   field.publish({world:{...world,pose:{...world.pose,positionM:[1,0,0]}},viewport});
-  expect(field.nodes[0]!.style.boxShadow).not.toBe(first);expect(field.root.dataset.visiblePoints).toBe('1');expect(host.children).toHaveLength(2);
+  expect(field.nodes[0]!.style.boxShadow).not.toBe(first);expect(field.stats().visiblePoints).toBe(1);expect(host.children).toHaveLength(2);
   field.destroy();expect(host.children).toHaveLength(1);
 });

@@ -114,7 +114,7 @@ export function mountPreparedCataloguePoints({ host, before, payload, createElem
       if (shown) {
         visible++;
         const length = (value: number) => nativeFocalCss === undefined ? `${value}px` : nativeProjectedLength(value, focal, nativeFocalCss);
-        if (material.diameterUnits !== undefined) node.style.width = node.style.height = length(size);
+        if (material.diameterUnits !== undefined) { const side = length(size); if (node.style.width !== side) node.style.width = node.style.height = side; }
         const halfSize = material.diameterUnits === undefined ? `${size / 2}px` : length(size / 2);
         const transform = nativeFocalCss === undefined ? `translate(${px - size / 2}px,${py - size / 2}px)`
           : `translate(calc(${ox}px + ${length(px - ox)} - ${halfSize}),calc(${oy}px + ${length(py - oy)} - ${halfSize}))`;

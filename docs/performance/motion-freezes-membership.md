@@ -11,6 +11,14 @@ While a hand or the app drives the camera (a drag, an active zoom or pinch, a fl
 can see where you are heading. Crossings between levels of detail are staged ahead: the next level is made resident at
 opacity 0, paced, so the crossing itself is a crossfade.
 
+Annotations (markers, names, orbits, the footer) and content (sky faces, a nebula's slice stack changing axis) are
+held differently while coasting:
+
+- **Annotations** wait for the coast to stop.
+- **Content** has to appear as it turns into view, or the scene would show holes. It is staged ahead instead: made
+  resident a margin before it enters the view (image loaded, `display` on, opacity 0), then faded in. During a coast
+  content is only added, never retired; retirement waits for the coast to stop.
+
 ## Why
 
 A USB iPad capture of production css.earth (v0.3455, 2026-09-26, `tools/performance/ios-capture.mts --style-writes`)
@@ -56,6 +64,7 @@ These change paint every frame on purpose, and each has a budget:
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
 | Batched star points (`universe/batched-spatial-points.ts`) | `box-shadow` point lists | 8 nodes | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
+| Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 | Surface minimap viewport boxes (`site/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
 
 The footer readout (distance, coordinates, the scale ruler) holds its last reading while the camera moves, and reads

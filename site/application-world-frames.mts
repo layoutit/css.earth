@@ -36,6 +36,7 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
     setCoasting(active: boolean) {
       if (lifetime.disposed) return;
       layer.setCoasting(active);
+      moonLabels.setCoasting(active);
     },
     setNavigationInFlight(active: boolean) {
       if (lifetime.disposed) return;

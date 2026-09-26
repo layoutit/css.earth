@@ -19,6 +19,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     root.append(node);return node;});
   if (before) host.insertBefore(root, before); else host.append(root);
   let previousCamera: number[] = [], destroyed = false;
+  let last={visiblePoints:0,residentElements:nodes.length+1,publishMs:0};
   const publish = ({world,viewport}: VolumeCameraPublication) => {
     if (destroyed) return;
     const started=performance.now();
@@ -43,9 +44,9 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       const spread=Math.max(0,style.radiusPx-.5);
       shadows[index%nodes.length]!.push(`${(sx-.5).toFixed(3)}px ${(sy-.5).toFixed(3)}px 0 ${spread.toFixed(3)}px ${style.colorCss}${opacity}`);visible++;
     });
-    nodes.forEach((node,index)=>{node.style.boxShadow=shadows[index]!.join(',')||'none';});
-    root.dataset.visiblePoints=String(visible);root.dataset.residentElements=String(nodes.length+1);
-    root.dataset.publishMs=(performance.now()-started).toFixed(2);
+    nodes.forEach((node,index)=>{const shadow=shadows[index]!.join(',')||'none';if(node.style.boxShadow!==shadow)node.style.boxShadow=shadow;});
+    // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
+    last={visiblePoints:visible,residentElements:nodes.length+1,publishMs:performance.now()-started};
   };
-  return Object.freeze({root,nodes:Object.freeze(nodes),publish,destroy(){if(destroyed)return;destroyed=true;root.remove();}});
+  return Object.freeze({root,nodes:Object.freeze(nodes),publish,stats:()=>Object.freeze({...last}),destroy(){if(destroyed)return;destroyed=true;root.remove();}});
 }
