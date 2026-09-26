@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '@cssearth/objects/sources';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { manifestSources } from '../sources/context-source-records.mts';
 import { requireInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';

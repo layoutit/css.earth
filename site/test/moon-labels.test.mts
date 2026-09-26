@@ -10,7 +10,7 @@ import catalogue from '../source/moon-catalogues.json' with { type: 'json' };
 import { parseMoonLabels, projectMoonLabels } from '../catalogue-moon-labels.mts';
 import { hasProperMoonName, prepareBodyMoons } from '../prepare-body-moons.mts';
 import { parseMoonVector } from '../../tools/prepare/prepare-moon-labels.mts';
-import { sourceArray, sourceObject, sourceText } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 import { minorMoonOrbitIds } from '../../tools/prepare/prepare-world-presentation.mts';
 
 test('prepared unavailable moon labels cover proper names and match pinned Horizons vectors', async () => {

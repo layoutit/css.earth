@@ -3,15 +3,16 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {prepareScientificFocus} from './scientific-focus.mts';
-import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
+import {prepareEclipticPresentationFrame} from '@cssearth/bake/objects/scene';
 import {preparedScenePitch} from '@cssearth/engine';
 import {parseScientificCamera} from '@cssearth/bake/objects/raster';
 import {requireRecord} from '@cssearth/core';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 test('Agenor focus puts its body-fixed direction at the camera centre',async()=>{
   const camera=parseScientificCamera(requireRecord(JSON.parse(await readFile(new URL('../../../src/objects/europa/prepared/scene.json',import.meta.url), 'utf8')), 'Europa scene').camera);
   const focus={longitudeDegrees:142,latitudeDegrees:-43.7,zoom:4};
   const result=prepareScientificFocus('europa',focus,camera),r=Math.PI/180;
-  const [x,y,z]=prepareEclipticPresentationFrame('europa').toPresentation([
+  const [x,y,z]=prepareEclipticPresentationFrame(solarGeometry, 'europa').toPresentation([
     Math.cos(focus.latitudeDegrees*r)*Math.cos(focus.longitudeDegrees*r),
     Math.cos(focus.latitudeDegrees*r)*Math.sin(focus.longitudeDegrees*r),Math.sin(focus.latitudeDegrees*r)]);
   const a=result.controlYaw*r,b=preparedScenePitch(result.controlPitch,camera)*r;

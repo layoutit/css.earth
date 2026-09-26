@@ -6,14 +6,13 @@ import type { parseSolidScience } from '@cssearth/bake/objects/layers/terrestria
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '../../../src/platform/directional-sun-contract.mts';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
-import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mts';
-import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
+import { prepareSunReferenceViewDirection, prepareEclipticPresentationFrame } from '@cssearth/bake/objects/scene';
 import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mts';
 import { scientificPreviewGrid, lensTextureGrid, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
@@ -21,6 +20,7 @@ import { prepareRadialMaterials } from './radial-materials.mts';
 import { loadRadialModels, combineRadialModels } from './radial-models.mts';
 import { validateRadialTableProfile, validateFacetFieldRecipe } from '@cssearth/bake/objects/geometry';
 import { validateSurfaceObservation } from '../surface-observations/index.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 type SolidConfig=ReturnType<typeof parseSolidPreparationSource>;
 type Directories={sourceDirectory:string;publicDirectory:string;outputDirectory:string};
 type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnType<typeof createSourceManifest>>};
@@ -250,7 +250,7 @@ export async function prepareTerrestrialCelestial({ outputDirectory, config }:Te
 
 /** Body-owned qualification distinguishes solved orientations from display axes. */
 export function prepareTerrestrialSun({ config, surfacesReport }:{config:SolidConfig;surfacesReport:unknown}) {
-  const frame = prepareEclipticPresentationFrame(config.namespace), sceneDirection = frame.sunDirection;
+  const frame = prepareEclipticPresentationFrame(solarGeometry, config.namespace), sceneDirection = frame.sunDirection;
   const presentation = { ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
     source: config.celestial.sunSource, sourcePath: 'src/platform/solar-geometry.mts',
     qualification: config.celestial.sunQualification ?? (`Computed ${config.displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
@@ -258,7 +258,7 @@ export function prepareTerrestrialSun({ config, surfacesReport }:{config:SolidCo
       (config.celestial.qualification ? ` ${config.celestial.qualification}` : '')),
     bodyFixedDirection: requireBodyFixedSunDirection(config.namespace), presentationFrame: frame.model,
     localDirection: sceneDirection,
-    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...solidCameraAngles(config, surfacesReport), sceneDirection }),
+    referenceViewDirection: prepareSunReferenceViewDirection(solarGeometry, { bodyId: config.namespace, ...solidCameraAngles(config, surfacesReport), sceneDirection }),
   };
   return prepareDirectionalSun({ presentation });
 }

@@ -54,7 +54,10 @@ its validators accept); the renderer never imports the bake.
     that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
     Lambert attenuation atlas and the radial-layer contract.
   - `objects/cameras`: observer-computed cameras from an ephemeris and a spin state or IAU pole model.
-  - `objects/scene`: the physical world frame navigation is solved in, and authored synchronous and hosted rotations.
+  - `objects/scene`: the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the frames
+    derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
+    direction and the astrometric sky registration. The solar geometry is generated into the checkout
+    (`src/platform/solar-geometry.mts`) after the packages build, so the host passes it in (`SolarGeometry`).
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
     photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,

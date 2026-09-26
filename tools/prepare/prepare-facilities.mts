@@ -2,14 +2,14 @@ import { refuseDirectRun } from '../cli/library-entry.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from '../sources/spatial-source-citations.mts';
-import { sourceResolver, parseSourceBinding } from '../../src/platform/source-catalog.mts';
+import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '../../src/platform/source-usage.mts';
 import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usage.mts';
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
 import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
-import { sourcePath, sourceDigest } from '../../src/platform/source-catalog.mts';
+import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
 import type { SourceInventoryEntry } from '../sources/source-catalogue-inputs.mts';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
@@ -35,7 +35,7 @@ export const explorationCompilerClosure = [
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'tools/sources/read-source-catalogue.mts',
-  'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
+  'packages/objects/src/sources/catalog.ts', 'src/platform/source-usage.mts', 'packages/objects/src/node/source-manifest.ts',
   'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
   'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
   'tools/sources/factsheet-sources.mts', 'site/fact-order.mts', 'tools/assets/restore-factsheet-evidence.mts',

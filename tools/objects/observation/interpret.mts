@@ -1,4 +1,4 @@
-import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '../../../src/platform/default-camera.mts';
+import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '@cssearth/bake/objects/scene';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
 // keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-colour
@@ -11,7 +11,7 @@ import { readRgba, paintMissingCoverage } from '@cssearth/bake/raster';
 import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '@cssearth/bake/raster';
 import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-synoptic.mts';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
 import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
@@ -32,6 +32,7 @@ import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stell
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }
@@ -378,7 +379,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (!Array.isArray(palette)) throw new TypeError(`${objectId}/${surface.id}: the off-limb plate needs the lens palette.`);
         const plateSize = recipe.emission.offLimbSize * density;
         // Image-up is celestial north; turn it to where the default view (a self-luminous body faces Earth) shows north.
-        const rotationDegrees = prepareSkyNorthScreenAngleDegrees(objectId, prepareDefaultCameraAngles(objectId, { light: 'self' })) - 90;
+        const rotationDegrees = prepareSkyNorthScreenAngleDegrees(solarGeometry, objectId, prepareDefaultCameraAngles(solarGeometry, objectId, { light: 'self' })) - 90;
         const offLimb = offLimbPlate({ width: image.width, height: image.height, values: topDown, center: [requireFiniteNumber(center[0]), requireFiniteNumber(center[1])], discRadiusPx,
           backgroundMaximum: requireFiniteNumber(frame.backgroundMaximum) },
           { low: requireFiniteNumber(displayRange.low), high: requireFiniteNumber(displayRange.high), palette: palette.map(value => requireString(value)), rotationDegrees },
@@ -448,7 +449,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (percentiles.length !== 2 || !(percentiles[0]! < percentiles[1]!)) throw new TypeError(`${objectId}/${surface.id}: offLimb percentiles are a rising pair, not ${percentiles.join(', ')}.`);
         const at = (percent: number) => lit[Math.min(lit.length - 1, Math.max(0, Math.round(percent / 100 * (lit.length - 1))))]!;
         const low = at(percentiles[0]!), high = at(percentiles[1]!);
-        const rotationDegrees = prepareSkyNorthScreenAngleDegrees(objectId, prepareDefaultCameraAngles(objectId, { light: 'self' })) - 90;
+        const rotationDegrees = prepareSkyNorthScreenAngleDegrees(solarGeometry, objectId, prepareDefaultCameraAngles(solarGeometry, objectId, { light: 'self' })) - 90;
         const plateSize = recipe.emission.offLimbSize * density;
         const offLimb = offLimbPlate({ width: image.width, height: image.height, values: topDown, center: [image.width / 2, image.height / 2], discRadiusPx, backgroundMaximum: 0 },
           // Opacity follows the light linearly to the stretch top, as a linear brightness image shows it: faint light fades to the black behind.

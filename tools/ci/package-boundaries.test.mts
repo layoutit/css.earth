@@ -37,7 +37,9 @@ function imports(node: unknown, result: string[] = []): string[] {
 
 function forbiddenImport(owner: string, file: string, specifier: string) {
   if (specifier === '@layoutit/polycss') return true;
-  if (specifier.startsWith('node:')) return !file.endsWith('.test.ts');
+  // `@cssearth/objects/node` (source manifests) is the objects package's Node-only entry, as `/node` is for core and fits.
+  const nodeEntry = owner === 'objects' && file.startsWith(path.join(root, 'packages/objects/src/node') + path.sep);
+  if (specifier.startsWith('node:')) return !file.endsWith('.test.ts') && !nodeEntry;
   if (owner === 'engine' && specifier.startsWith('@cssearth/objects')) return true;
   if (!specifier.startsWith('.')) return false;
   const packageRoot = path.join(root, 'packages', owner, 'src') + path.sep;
@@ -77,6 +79,9 @@ test('runtime packages cannot reach site, legacy sources, Node tooling, or rever
     const tree = parse(`import data from ${JSON.stringify(specifier)}`, { sourceType: 'module' });
     assert.ok(imports(tree).some(value => forbiddenImport('engine', fixture, value)), specifier);
   }
+  const nodeImport = parse('import { readFile } from "node:fs/promises"', { sourceType: 'module' });
+  assert.ok(imports(nodeImport).some(value => forbiddenImport('objects', path.join(root, 'packages/objects/src/sources/probe.ts'), value)));
+  assert.ok(!imports(nodeImport).some(value => forbiddenImport('objects', path.join(root, 'packages/objects/src/node/probe.ts'), value)));
 });
 
 

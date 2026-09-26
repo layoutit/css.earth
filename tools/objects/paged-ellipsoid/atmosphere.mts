@@ -1,4 +1,4 @@
-import type {SourceManifest} from '../../../src/platform/source-manifest.mts';
+import type {SourceManifest} from '@cssearth/objects/node';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';

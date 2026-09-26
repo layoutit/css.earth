@@ -2,7 +2,7 @@
   "name": "@cssearth/objects",
   "version": "0.0.0",
   "private": true,
-  "description": "Prepared celestial object definitions and content.",
+  "description": "Prepared celestial object definitions and content, the source catalogue every object cites, and a Node-only entry for source manifests.",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -15,12 +15,25 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./sources": {
+      "types": "./dist/sources.d.ts",
+      "import": "./dist/sources.js",
+      "require": "./dist/sources.cjs"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.js",
+      "require": "./dist/node.cjs"
     }
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "test": "vitest run"
+  },
+  "dependencies": {
+    "@cssearth/core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.0.1",

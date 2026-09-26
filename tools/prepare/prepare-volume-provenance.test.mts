@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
-import { parseSourceCatalog, sourceObject, sourceResolver } from '../../src/platform/source-catalog.mts';
+import { parseSourceCatalog, sourceObject, sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '../../src/platform/source-usage.mts';
 import { parseAgencies, parseExplorationCatalog } from '../../src/platform/exploration-catalog.mts';
 import { compileContributions } from '../../src/platform/exploration-contributions.mts';

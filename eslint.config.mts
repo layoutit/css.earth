@@ -41,9 +41,9 @@ export default [
     },
   },
   {
-    // `@cssearth/core/node`, `@cssearth/fits/node`, `@cssearth/spice/node` and `@cssearth/telescope/node` are the Node-only entries: they may use Node built-ins, and nothing
-    // else in their package may import them.
-    files: ['packages/{core,fits,spice,telescope}/src/node/**/*.ts'],
+    // `@cssearth/core/node`, `@cssearth/fits/node`, `@cssearth/objects/node`, `@cssearth/spice/node` and `@cssearth/telescope/node` are the Node-only entries: they may
+    // use Node built-ins, and nothing else in their package may import them.
+    files: ['packages/{core,fits,objects,spice,telescope}/src/node/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
@@ -53,12 +53,12 @@ export default [
     },
   },
   {
-    files: ['packages/{core,fits,spice,telescope}/src/**/*.ts'],
-    ignores: ['**/*.test.ts', 'packages/{core,fits,spice,telescope}/src/node/**'],
+    files: ['packages/{core,fits,objects,spice,telescope}/src/**/*.ts'],
+    ignores: ['**/*.test.ts', 'packages/{core,fits,objects,spice,telescope}/src/node/**'],
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*', './node', './node/*', '../node', '../node/*'],
-          message: 'The main entries of @cssearth/core, @cssearth/fits, @cssearth/spice and @cssearth/telescope stay browser-safe: no Node built-ins and no import of the node entry.' }],
+          message: 'The main entries of @cssearth/core, @cssearth/fits, @cssearth/objects, @cssearth/spice and @cssearth/telescope stay browser-safe: no Node built-ins and no import of the node entry.' }],
       }],
     },
   },
@@ -91,7 +91,9 @@ export default [
   {
     // The scene and presentation compilers read the renderer's prepared types, validators and silhouette steps, and the scene
     // projects leaves with PolyCSS, which the runtime uses to draw them.
-    files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts', 'packages/bake/src/nebula/**/*.ts', 'packages/bake/src/world-context/**/*.ts', 'packages/bake/src/cluster-catalog/**/*.ts', 'packages/bake/src/galaxy-catalog/**/*.ts', 'packages/bake/src/environment/**/*.ts', 'packages/bake/src/image-layers/**/*.ts', 'packages/bake/src/density/**/*.ts', 'packages/bake/src/sky/**/*.ts', 'packages/bake/src/shell/**/*.ts', 'packages/bake/src/stars/**/*.ts', 'packages/bake/src/volume-leaves/**/*.ts', 'packages/bake/src/objects/layers/**/*.ts'],
+    // The world frame's presentation and Sun directions name the renderer's vector types and its view-direction conversion.
+    files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts', 'packages/bake/src/nebula/**/*.ts', 'packages/bake/src/world-context/**/*.ts', 'packages/bake/src/cluster-catalog/**/*.ts', 'packages/bake/src/galaxy-catalog/**/*.ts', 'packages/bake/src/environment/**/*.ts', 'packages/bake/src/image-layers/**/*.ts', 'packages/bake/src/density/**/*.ts', 'packages/bake/src/sky/**/*.ts', 'packages/bake/src/shell/**/*.ts', 'packages/bake/src/stars/**/*.ts', 'packages/bake/src/volume-leaves/**/*.ts', 'packages/bake/src/objects/layers/**/*.ts',
+      'packages/bake/src/objects/scene/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {

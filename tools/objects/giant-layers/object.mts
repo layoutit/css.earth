@@ -5,7 +5,7 @@ import { parseEllipsoidMaterialRecipe } from './materials.mts';
 import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { parseObservedPolarRecipe } from '../giant-observations/index.mts';
 import { shape, text, number, optional, array, isRecord, requireRecord, requireFiniteNumber } from '@cssearth/core';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';

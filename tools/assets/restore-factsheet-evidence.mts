@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { lstat, readFile, realpath } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { sourcePath } from '../../src/platform/source-catalog.mts';
+import { sourcePath } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
 import { assertSourceFile, containedPath, parseSourceManifest } from '#preparation/source-files';
 import { parseAcquisitionPlan } from '#preparation/operations-acquisition';

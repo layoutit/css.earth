@@ -12,22 +12,19 @@ import type { Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
 // right-handed too. The runtime multiplies the registration into the scene
 // matrix, so the stars cross the screen exactly as the body's geometry does.
 
-import { multiplyMatrices, transposeMatrix } from "./galactic-frame.mts";
-import {
-  SOLAR_GEOMETRY_EPOCH_LABEL,
-  requireBodyFixedToIcrf,
-} from "./solar-geometry.mts";
+import { multiplyMatrices, transposeMatrix } from "./galactic-frame.ts";
+import type { SolarGeometry } from "./solar-geometry.ts";
 import { prepareEclipticPresentationFrame } from
-  "./solar-presentation-frame.mts";
+  "./solar-presentation-frame.ts";
 
 const ASTROMETRIC_CUBE_FRAME = "icrf-j2000-as-cube-local-axes";
 
 // Scene registration for a body: cube-local (ICRF) direction -> ecliptic
 // presentation frame direction, so the runtime's `scene * registration`
 // places the stars where the body's own geometry puts them.
-export function prepareAstrometricSkySceneRegistration(bodyId: string) {
-  const frame = prepareEclipticPresentationFrame(bodyId);
-  const bodyFixedToIcrf = requireBodyFixedToIcrf(bodyId);
+export function prepareAstrometricSkySceneRegistration(geometry: SolarGeometry, bodyId: string) {
+  const frame = prepareEclipticPresentationFrame(geometry, bodyId);
+  const bodyFixedToIcrf = geometry.requireBodyFixedToIcrf(bodyId);
   // Rows of the presentation basis are the presentation axes in body-fixed
   // coordinates, so the basis as a matrix takes body-fixed into presentation.
   const presentation = frame.basis.flat();
@@ -41,7 +38,7 @@ export function prepareAstrometricSkySceneRegistration(bodyId: string) {
       "galactic -> ICRF (J2000 constants) -> body-fixed (IAU pole and prime " +
       "meridian at the epoch) -> ecliptic presentation frame",
     bodyId,
-    epoch: SOLAR_GEOMETRY_EPOCH_LABEL,
+    epoch: geometry.SOLAR_GEOMETRY_EPOCH_LABEL,
     cubeFrame: ASTROMETRIC_CUBE_FRAME,
     matrix: Object.freeze(matrix),
     cssTransform: formatMatrix3d(matrix),

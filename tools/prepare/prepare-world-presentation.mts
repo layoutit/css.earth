@@ -10,7 +10,7 @@ import clusters from '../../src/objects/galaxy-clusters/source/presentation.json
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import type { ObjectDiscovery } from '../../site/object-discovery.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../site/world-context-plan.mts';
-import { sourceArray, sourceId, sourceObject, sourceUnique } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 
 const output = resolve(import.meta.dirname, '../../site/prepared-world-presentation.json');

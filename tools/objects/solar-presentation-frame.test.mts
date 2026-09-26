@@ -5,12 +5,13 @@ const test = sourceTest();
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
-} from "./solar-geometry.mts";
+} from "../../src/platform/solar-geometry.mts";
 import { prepareEclipticPresentationFrame } from
-  "./solar-presentation-frame.mts";
+  "@cssearth/bake/objects/scene";
 import { prepareSunReferenceViewDirection } from
-  "./prepare-sun-view-direction.mts";
+  "@cssearth/bake/objects/scene";
 import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 const BODIES = [
   "mercury",
@@ -25,7 +26,7 @@ const BODIES = [
 
 test("the presentation frame maps the body's right-handed axes into left-handed CSS space", () => {
   for (const bodyId of BODIES) {
-    const frame = prepareEclipticPresentationFrame(bodyId);
+    const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
     const [x, y, z] = frame.basis;
     for (const axis of frame.basis) {
       assert.ok(Math.abs(Math.hypot(...axis) - 1) < 1e-12, bodyId);
@@ -47,7 +48,7 @@ test("the presentation frame maps the body's right-handed axes into left-handed 
 
 test("ecliptic north is screen up and the Sun projects to screen left", () => {
   for (const bodyId of BODIES) {
-    const frame = prepareEclipticPresentationFrame(bodyId);
+    const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
     const north = frame.toPresentation(requireBodyFixedEclipticNorth(bodyId));
     assert.ok(Math.abs(north[0]) < 1e-12 && Math.abs(north[2]) < 1e-12, bodyId);
     assert.ok(Math.abs(north[1] + 1) < 1e-12, `${bodyId} north is CSS -y`);
@@ -63,10 +64,10 @@ test("ecliptic north is screen up and the Sun projects to screen left", () => {
 });
 
 test("pole tilts match the ecliptic, not the body's own orbit", () => {
-  const earth = prepareEclipticPresentationFrame("earth");
+  const earth = prepareEclipticPresentationFrame(solarGeometry, "earth");
   assert.ok(Math.abs(earth.poleTiltDegrees - 23.44) < 0.01);
   assert.ok(Math.abs(earth.sunEclipticLatitudeDegrees) < 0.01);
-  const mercury = prepareEclipticPresentationFrame("mercury");
+  const mercury = prepareEclipticPresentationFrame(solarGeometry, "mercury");
   // 7.0 degrees of orbital inclination plus 0.03 degrees of obliquity.
   assert.ok(Math.abs(mercury.poleTiltDegrees - 7.04) < 0.01);
   assert.ok(Math.abs(mercury.sunEclipticLatitudeDegrees + 5.11) < 0.01);
@@ -79,9 +80,9 @@ test("pole tilts match the ecliptic, not the body's own orbit", () => {
 });
 
 test("Mercury's Sun sits on screen left at zero yaw for any pitch", () => {
-  const frame = prepareEclipticPresentationFrame("mercury");
+  const frame = prepareEclipticPresentationFrame(solarGeometry, "mercury");
   for (const initialScenePitchDegrees of [0, 40, 65, -30]) {
-    const view = prepareSunReferenceViewDirection({
+    const view = prepareSunReferenceViewDirection(solarGeometry, {
       bodyId: "mercury",
       initialScenePitchDegrees,
       defaultControlYawDegrees: 0,
@@ -96,7 +97,7 @@ test("Mercury's Sun sits on screen left at zero yaw for any pitch", () => {
     assert.ok(Math.abs(view[2]) < Math.sin(6 * Math.PI / 180));
   }
   // Without the presentation frame the body-fixed direction still works.
-  const bodyFixed = prepareSunReferenceViewDirection({
+  const bodyFixed = prepareSunReferenceViewDirection(solarGeometry, {
     bodyId: "mercury",
     initialScenePitchDegrees: 40,
     defaultControlYawDegrees: -105,

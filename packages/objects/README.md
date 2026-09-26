@@ -22,9 +22,18 @@ spatial models reconstructed from observations. Its type distinguishes prepared
 image layers from measured density grids; concrete imagery, depth assumptions
 and compiled rendering leaves stay with the object and preparation adapter.
 
+`@cssearth/objects/sources` is the source catalogue: its records, citations and
+bindings and the validators every one passes. It stays browser-safe, because the
+application reads the catalogue with it. `@cssearth/objects/node` is the Node-only
+entry for source manifests: their validation, coverage and byte-range checks and the
+portable relative-path rule their entries follow. Nothing else in the package imports
+it. The manifests themselves stay beside each body.
+
 ```text
 packages/objects/
 ├── src/           Generic TypeScript implementation and tests
+│   ├── sources/   Source catalogue (`@cssearth/objects/sources`)
+│   └── node/      Source manifests (`@cssearth/objects/node`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```

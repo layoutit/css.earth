@@ -1,4 +1,4 @@
-import type { SourceResolver } from './source-catalog.mts';
+import type { SourceResolver } from '@cssearth/objects/sources';
 import { explorationArray, explorationId, explorationRecord, explorationText, explorationUrl, parseAgencies, parseExplorationCatalog } from './exploration-catalog.mts';
 import type { Agency } from './exploration-catalog.mts';
 import { parseContributionGraph } from './exploration-contributions.mts';

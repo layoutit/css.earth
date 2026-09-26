@@ -1,7 +1,7 @@
-import { safeRelativePath } from './source-path.mts';
+import { safeRelativePath } from './source-path.js';
 import { isArray } from '@cssearth/core';
-import { parseSourceBinding } from './source-catalog.mts';
-import type { SourceBinding } from './source-catalog.mts';
+import { parseSourceBinding } from '../sources/catalog.js';
+import type { SourceBinding } from '../sources/catalog.js';
 /** One byte range of a remote member, for archive files too large to keep whole. The pin covers exactly the kept bytes. */
 export interface SourceRange { offset: number; length: number; }
 /** A declared source file. Git holds authored files; a download is fetched by its origin. Nothing here carries a hash. */

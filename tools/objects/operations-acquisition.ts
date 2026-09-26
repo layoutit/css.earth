@@ -10,7 +10,7 @@ import { promisify } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from './source-files.js';
 import type { SourceManifest } from './source-files.js';
-import { assertRangeResponse, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
+import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
 import type { SourceEntry } from './source-files.js';
 import { sourceCacheUrl, withIdleTimeout } from '../assets/source-mirror.mts';
 import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './acquisition/satellite-catalog.mts';

@@ -1,5 +1,5 @@
 /** Reuse the registered-image overlap method for native Lucy TAN-SIP cameras. */
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';

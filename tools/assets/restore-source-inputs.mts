@@ -8,7 +8,7 @@ import { spawn } from "node:child_process";
 import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { sourceBytes } from '@cssearth/bake/volume/node';
 import { publishSourceBytes } from './source-acquisition.mts';
-import { sourceArray, sourceObject, sourcePath } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
 import { fetchWithRetry, RUNTIME_ASSET_ORIGIN, sourceCacheUrl } from './source-mirror.mts';
 
 const projectRoot = resolve(import.meta.dirname, "../..");

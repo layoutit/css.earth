@@ -1,4 +1,4 @@
-import { refuseAuthoredCameraAngles } from '../../../src/platform/default-camera.mts';
+import { refuseAuthoredCameraAngles } from '@cssearth/bake/objects/scene';
 import {requireRecord,shape,number,text,optional,nullable,array,boolean,dictionary,choice} from '@cssearth/core';
 import { parseSciencePalette } from '@cssearth/bake/objects/raster';
 import { parseTransform } from '@cssearth/bake/objects/geometry';

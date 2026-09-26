@@ -10,14 +10,14 @@ import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts"
 // reproduce DOMMatrix.rotateAxisAngle exactly, so the value prepared here is
 // the one the runtime would compute in the browser. Preparation-time only.
 
-import { requireBodyFixedSunDirection } from "./solar-geometry.mts";
-import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
+import type { SolarGeometry } from "./solar-geometry.ts";
+import { cssDirectionToViewDirection } from "@cssearth/renderer/solar-system/solar-view-direction.ts";
 
-export function prepareSunReferenceViewDirection({
+export function prepareSunReferenceViewDirection(geometry: SolarGeometry, {
   bodyId,
   initialScenePitchDegrees,
   defaultControlYawDegrees,
-  sceneDirection = requireBodyFixedSunDirection(bodyId),
+  sceneDirection = geometry.requireBodyFixedSunDirection(bodyId),
 }: { bodyId: string; initialScenePitchDegrees: number; defaultControlYawDegrees: number; sceneDirection?: Vector3 }) {
   if (!Number.isFinite(initialScenePitchDegrees) ||
       !Number.isFinite(defaultControlYawDegrees)) {

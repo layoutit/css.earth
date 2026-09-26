@@ -4,7 +4,7 @@ import type {PagedRasterConfiguration} from './surface-raster.mts';
 import type {PagedGeometryParameters} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import {DERIVED_CAMERA_ANGLE_FIELDS, recipeCamera} from '../camera-source.mts';
 import {preparedControlPitch} from '@cssearth/engine';
-import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';
+import {LIT_DEFAULT_VIEW} from '@cssearth/bake/objects/scene';
 
 const geometry: Guard<PagedGeometryParameters> = object({BODY_LATITUDE_SEGMENTS: number, BODY_LONGITUDE_SEGMENTS: number, EQUATORIAL_RADIUS: number,
   TILE_SIZE: number, SEAM_BLEED: number, PLANET_SEAM_BLEED: number, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE: number,

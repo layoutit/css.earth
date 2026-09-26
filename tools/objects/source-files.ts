@@ -1,5 +1,5 @@
-import { parseSourceBinding, type SourceBinding } from '../../src/platform/source-catalog.mts';
-import { assertRangeResponse, assertSourceRange, rangeRequestHeader, SOURCE_MANIFEST_SCHEMA, type SourceRange } from '../../src/platform/source-manifest.mts';
+import { parseSourceBinding, type SourceBinding } from '@cssearth/objects/sources';
+import { assertRangeResponse, assertSourceRange, rangeRequestHeader, SOURCE_MANIFEST_SCHEMA, type SourceRange } from '@cssearth/objects/node';
 import { randomUUID } from 'node:crypto';
 import { mkdir, readdir, rename, rm, writeFile, lstat } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';

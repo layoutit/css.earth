@@ -1,5 +1,5 @@
 import manifest from '../public/navigation/sidebar-thumbnails.json';
-import { sourceObject, sourceText } from '../src/platform/source-catalog.mts';
+import { sourceObject, sourceText } from '@cssearth/objects/sources';
 
 const data = sourceObject(manifest);
 if (data.schema !== 'cssearth-sidebar-thumbnails@1') throw new TypeError('Invalid sidebar thumbnail bank');

@@ -1,4 +1,4 @@
-import { sourceObject, sourceId, sourceText } from './source-catalog.mts';
+import { sourceObject, sourceId, sourceText } from '@cssearth/objects/sources';
 
 export type ContextAvailability = Readonly<Record<string,
   { available: true } | { available: false; reason: string }>>;

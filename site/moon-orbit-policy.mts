@@ -1,4 +1,4 @@
-import { sourceId } from '../src/platform/source-catalog.mts';
+import { sourceId } from '@cssearth/objects/sources';
 
 /** Hidden orbits normally return on hover. Minor moons have no visible orbit,
  * including hover, under both existing stroke and bar presentation owners. */

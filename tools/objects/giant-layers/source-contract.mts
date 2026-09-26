@@ -5,7 +5,7 @@ import{readFile,readdir}from'node:fs/promises';
 import{resolve}from'node:path';
 import{createHash}from'node:crypto';
 import{parseAuthoredObjectDescriptor}from'@cssearth/objects';
-import{verifySourceManifest,validateSourceManifest}from'../../../src/platform/source-manifest.mts';
+import{verifySourceManifest,validateSourceManifest}from'@cssearth/objects/node';
 
 export async function assertAuthoredGiantSourceContract(id: string){
  const directory=resolve('src/objects',id),sourceRoot=resolve(directory,'source'),manifest=validateSourceManifest(id,JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')));

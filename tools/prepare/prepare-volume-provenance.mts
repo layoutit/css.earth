@@ -12,7 +12,7 @@ import { parsePreparedVolumePresentation } from '../../site/volume-presentation.
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '../../src/platform/object-provenance.mts';
-import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '../../src/platform/source-catalog.mts';
+import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
 import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';

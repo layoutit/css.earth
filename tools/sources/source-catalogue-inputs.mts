@@ -1,5 +1,5 @@
-import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../../src/platform/source-catalog.mts';
-import type { SourceBinding, SourceResolver } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '@cssearth/objects/sources';
+import type { SourceBinding, SourceResolver } from '@cssearth/objects/sources';
 import type { SourceUse } from '../../src/platform/source-usage.mts';
 import type { Fact } from '../objects/content/types.js';
 

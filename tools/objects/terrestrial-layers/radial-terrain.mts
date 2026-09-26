@@ -1,5 +1,5 @@
 import type { PreparedTriangle, RadialSamplingProfile, RadialFaces, TerrainGrid } from '@cssearth/bake/objects/geometry';
-import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '@cssearth/bake/objects/geometry';
 import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';

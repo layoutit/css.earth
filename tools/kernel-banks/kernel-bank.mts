@@ -14,7 +14,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { kernelBanks } from '@cssearth/spice/node';
-import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 
 export const { openKernelBank, kernelBankPaths, restoredBankFile, bankKernelPath, acquireKernelBank, addKernels } =
   kernelBanks({ openManifest: createSourceManifest, acquireCommand: 'node tools/kernel-banks/kernel-bank.mts' });

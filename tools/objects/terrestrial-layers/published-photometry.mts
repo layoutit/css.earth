@@ -6,7 +6,7 @@
  * `method` binding; `source.verify()` has byte-verified it before any route runs.
  */
 import { loadPhotometricModelRecord, parsePhotometryReference, createNormalization, possibleGeometry } from '@cssearth/bake/photometry';
-import type { SourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { SourceManifest } from '@cssearth/objects/node';
 
 export interface PublishedPhotometryBlock {
   model: string;

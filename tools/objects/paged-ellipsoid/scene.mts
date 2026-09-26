@@ -5,7 +5,7 @@ import type {createPagedSurfaceRaster} from './surface-raster.mts';
 import {requireFiniteNumber} from '@cssearth/core';
 import type {EllipsoidAttitude} from './attitude.mts';
 import {preparedControlPitch} from '@cssearth/engine';
-import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';
+import {LIT_DEFAULT_VIEW} from '@cssearth/bake/objects/scene';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 interface MaterialBankOptions {id: 'atmosphere'; className: string; physicalRadius: number; depthBias: number; source: AtmosphereModel; illumination: AtmosphereConfiguration['material']['illumination'];}
@@ -34,7 +34,7 @@ const FULL_BOXES = { leafBox: false as const };
 
 export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude, cellSizes }: {cellSizes?: readonly number[]; attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
 const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
-// The default pose is derived (src/platform/default-camera.mts): the Sun to the left of an ecliptic-up frame at the lit pitch.
+// The default pose is derived (`@cssearth/bake/objects/scene` default-camera): the Sun to the left of an ecliptic-up frame at the lit pitch.
 const CAMERA_SCENE_PITCH_DEGREES = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
 const CAMERA_DEFAULT_CONTROL_PITCH_DEGREES = preparedControlPitch(CAMERA_SCENE_PITCH_DEGREES, { maximumControlPitchDegrees: CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, maximumScenePitchDegrees: 65 });
 const { MATERIAL_FRAMES_PER_SHARD, MATERIAL_PRESENTATION_SIZE, MATERIAL_TILE_SIZE, ATMOSPHERE_ILLUMINATION, ATMOSPHERE_DEFAULT_FRAME, atmosphereProfile } = atmosphere;

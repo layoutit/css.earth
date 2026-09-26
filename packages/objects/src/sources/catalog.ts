@@ -46,6 +46,8 @@ export function sourceEnum<T extends string>(input: unknown, values: readonly T[
   const value = sourceText(input), result = values.find(candidate => candidate === value);
   if (result === undefined) throw new TypeError(`Unsupported source value: ${value}.`); return result;
 }
+// The WHATWG URL parser both hosts provide; the package compiles against ES2022 alone, which does not declare it.
+declare const URL: new (input: string) => { readonly protocol: string; readonly username: string; readonly password: string };
 export function sourceUrl(input: unknown): string {
   const value = sourceText(input);
   if (/[\s{}]/u.test(value)) throw new TypeError('Invalid source URL.');

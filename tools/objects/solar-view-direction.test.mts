@@ -6,10 +6,11 @@ import {
   viewSunDirectionToPhysicalLightDirection,
   viewSunDirectionToPreparedLightDirection,
 } from "@cssearth/renderer/platform/directional-sun-coordinate";
-import { requireBodyFixedSunDirection } from "./solar-geometry.mts";
+import { requireBodyFixedSunDirection } from "../../src/platform/solar-geometry.mts";
 import { prepareSunReferenceViewDirection } from
-  "./prepare-sun-view-direction.mts";
+  "@cssearth/bake/objects/scene";
 import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 // A view direction lies in front of the camera when `forward = -z` is positive.
 function forward(viewDirection: readonly number[]) {
@@ -45,7 +46,7 @@ test("Mercury's reference view direction matches the scene matrix", () => {
     initialScenePitchDegrees: 40,
     defaultControlYawDegrees: -105,
   };
-  const reference = prepareSunReferenceViewDirection({
+  const reference = prepareSunReferenceViewDirection(solarGeometry, {
     bodyId: "mercury",
     ...pose,
   });

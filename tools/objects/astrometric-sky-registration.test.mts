@@ -2,20 +2,21 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
-import { prepareAstrometricSkySceneRegistration } from "./astrometric-sky-registration.mts";
+import { prepareAstrometricSkySceneRegistration } from "@cssearth/bake/objects/scene";
 import {
   ICRS_TO_GALACTIC,
   multiplyMatrices,
   transformDirection,
   transposeMatrix,
-} from "./galactic-frame.mts";
+} from "@cssearth/bake/objects/scene";
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
-} from "./solar-geometry.mts";
+} from "../../src/platform/solar-geometry.mts";
 import { prepareEclipticPresentationFrame } from
-  "./solar-presentation-frame.mts";
+  "@cssearth/bake/objects/scene";
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 // IAU 1976 obliquity at J2000 (84381.448 arcseconds): the J2000 ecliptic north
 // pole in ICRF is +z tilted about +x by it. Independent of the prepared
@@ -49,7 +50,7 @@ test("the checked-in body-fixed to ICRF rotations agree with the checked-in ecli
 
 test("the scene registration puts ecliptic north up and the Sun where the presentation frame puts it", () => {
   for (const bodyId of BODIES) {
-    const registration = prepareAstrometricSkySceneRegistration(bodyId);
+    const registration = prepareAstrometricSkySceneRegistration(solarGeometry, bodyId);
     assert.equal(registration.bodyId, bodyId);
     assert.match(registration.cssTransform, /^matrix3d\((?:[^,]+,){15}1\)$/u);
     // Ecliptic north in ICRF (a cube-local direction) must land on CSS -y.
@@ -63,7 +64,7 @@ test("the scene registration puts ecliptic north up and the Sun where the presen
       requireBodyFixedSunDirection(bodyId),
     );
     const sunScene = transformDirection(registration.matrix, sunIcrf);
-    const frame = prepareEclipticPresentationFrame(bodyId);
+    const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
     for (let axis = 0; axis < 3; axis += 1) {
       assert.ok(Math.abs(sunScene[axis] - frame.sunDirection[axis]) < 1e-9, bodyId);
     }
@@ -76,7 +77,7 @@ test("the scene registration puts ecliptic north up and the Sun where the presen
 });
 
 test("the galactic plane crosses Mercury's presentation frame at 60.2 degrees", () => {
-  const registration = prepareAstrometricSkySceneRegistration("mercury");
+  const registration = prepareAstrometricSkySceneRegistration(solarGeometry, "mercury");
   const galacticToIcrs = transposeMatrix(ICRS_TO_GALACTIC);
   const poleScene = transformDirection(
     registration.matrix,
@@ -98,7 +99,7 @@ test("the galactic plane crosses Mercury's presentation frame at 60.2 degrees", 
 test("a wrong rotation direction in the chain is caught", () => {
   // Mutation guard: with the body rotation applied un-transposed the Sun no
   // longer lands on the presentation Sun.
-  const frame = prepareEclipticPresentationFrame("mercury");
+  const frame = prepareEclipticPresentationFrame(solarGeometry, "mercury");
   const wrong = multiplyMatrices(
     frame.basis.flat(),
     requireBodyFixedToIcrf("mercury"),

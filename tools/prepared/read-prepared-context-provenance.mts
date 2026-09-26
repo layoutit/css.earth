@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceArray, sourceObject, sourceText } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
 

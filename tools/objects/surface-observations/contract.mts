@@ -11,7 +11,7 @@
 import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import type { SourceAccess } from '../terrestrial-layers/contracts.mts';
 import type { RadialSurface, SurfaceConfig } from '@cssearth/bake/objects/layers/terrestrial';
-import type { SourceInput } from '../../../src/platform/source-manifest.mts';
+import type { SourceInput } from '@cssearth/objects/node';
 import type { BandColorDisplay } from '@cssearth/bake/objects/color';
 
 /** A decoded photograph: calibrated values and the archive's own verdict on each pixel. */

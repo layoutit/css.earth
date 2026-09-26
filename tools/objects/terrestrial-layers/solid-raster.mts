@@ -3,7 +3,7 @@ import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid, createRas
 import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import type { WebpOptions } from 'sharp';
 import { writeLossyWebp, paintMissingCoverage } from '@cssearth/bake/raster';
-import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { createSourceManifest } from '@cssearth/objects/node';
 import type { RadialState } from './solid-contract.mts';
 import { encodeBandColor, interpolatePalette } from '@cssearth/bake/objects/color';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';

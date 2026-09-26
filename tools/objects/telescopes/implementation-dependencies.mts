@@ -15,10 +15,13 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
  * were local modules (`tools/photometry/`, `src/preparation/raster/`) before they became `@cssearth/bake/photometry` and
  * `@cssearth/bake/raster`, as were the renderer's preparation compilers (`src/renderers/css/preparation/`), `src/platform/`
  * and `tools/prepared/` libraries and the `src/preparation/` topics before their `@cssearth/bake/<topic>` entries, and the shared object libraries under
- * `tools/objects/` before `@cssearth/bake/objects/<topic>`; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
+ * `tools/objects/` before `@cssearth/bake/objects/<topic>`, and the source catalogue and manifest checks (`src/platform/source-*.mts`)
+ * before `@cssearth/objects/sources` and `@cssearth/objects/node`; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
+  '@cssearth/objects/sources': 'packages/objects/src/sources/index.ts',
+  '@cssearth/objects/node': 'packages/objects/src/node/index.ts',
   '@cssearth/spice': 'packages/spice/src/index.ts',
   '@cssearth/spice/node': 'packages/spice/src/node/index.ts',
   '@cssearth/telescope': 'packages/telescope/src/index.ts',

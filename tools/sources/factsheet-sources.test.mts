@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
 import { factsheetCitations } from './source-catalogue-inputs.mts';
-import { parseSourceCatalog, sourceResolver } from '../../src/platform/source-catalog.mts';
+import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '../../src/platform/source-usage.mts';
 
 const citation = { catalogueId: 'radius-table', url: 'https://example.invalid/radii', label: 'Radius table',

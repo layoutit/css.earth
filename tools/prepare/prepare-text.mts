@@ -11,7 +11,7 @@ import {
 import type { ObjectText, TextContext, TextFinding } from '../../site/object-text.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
-import { sourceResolver } from '../../src/platform/source-catalog.mts';
+import { sourceResolver } from '@cssearth/objects/sources';
 import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';

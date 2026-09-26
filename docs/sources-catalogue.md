@@ -38,7 +38,7 @@ evidence and plain language. Keep scientific tables in their existing records.
    within a collection. A publisher, shared download endpoint or matching hash
    alone does not establish equivalence.
 2. If it is absent, create `src/sources/<id>.json`, with `id` matching the filename.
-   Use the existing [source record fields](../src/platform/source-catalog.mts).
+   Use the existing [source record fields](../packages/objects/src/sources/catalog.ts).
    Add its published title, provider identifiers and citation link.
    Record authors, date and version when established by the source. Cite the
    provider page with a checked date and locator, or the repository file and

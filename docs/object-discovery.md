@@ -113,7 +113,7 @@ tests when introducing a new representation.
 
 Selecting a body with a prepared photograph uses the body's default camera
 angle, so visitors arrive facing the photographed side. Preparation derives
-that angle ([`src/platform/default-camera.mts`](../src/platform/default-camera.mts));
+that angle ([`packages/bake/src/objects/scene/default-camera.ts`](../packages/bake/src/objects/scene/default-camera.ts));
 no package states it. A body whose default lens has observation frames opens
 on the mean of their sub-observer points. A flyby body with an `approach`
 recipe, such as Pluto and Charon, opens facing the side its spacecraft
