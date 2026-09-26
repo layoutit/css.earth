@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawn } from 'node:child_process';
 import { prepareNebulaObject as prepare, type NebulaResearchBackend } from '../../../../../../../../tools/nebula/application/objects.ts';
-import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { readCompilerRequest } from '../../../features/compiler/model.ts';
 import { compileNebula } from '../../../server/workflows/compiler/compile.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';

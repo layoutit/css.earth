@@ -3,12 +3,12 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { SCENE_OBJECTS } from "../../site/objects.mts";
-import { createObjectControlBinding } from '../renderers/css/dist/testing.js';
-import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '../renderers/css/dist/testing.js';
-import { parsePreparedObjectRuntime } from '../renderers/css/dist/index.js';
-import type { ObjectAction, ObjectControls, ObjectSelection } from '../renderers/css/runtime/object-contract.ts';
-import type { ObjectSelectionState } from '../renderers/css/rendering/object-selection-runtime.ts';
-import type { ObjectControlBindingOptions } from '../renderers/css/rendering/object-control-binding.ts';
+import { createObjectControlBinding } from '@cssearth/renderer/testing';
+import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '@cssearth/renderer/testing';
+import { parsePreparedObjectRuntime } from '@cssearth/renderer';
+import type { ObjectAction, ObjectControls, ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
+import type { ObjectSelectionState } from '@cssearth/renderer/rendering/object-selection-runtime.ts';
+import type { ObjectControlBindingOptions } from '@cssearth/renderer/rendering/object-control-binding.ts';
 
 const moonControls = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon')).controls;
 const saturnControls = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn')).controls;

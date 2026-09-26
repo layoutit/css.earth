@@ -1,4 +1,4 @@
-import { loadPreparedCssObject } from '../../src/renderers/css/dist/index.js';
+import { loadPreparedCssObject } from '@cssearth/renderer';
 import { readPreparedObjectBytes } from '../../site/object-page-data.mts';
 import { serializePreparedScene } from './serialize-prepared-scene.mts';
 import { withPreparedAssetOrigin } from '../../site/asset-origin.mts';

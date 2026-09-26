@@ -5,14 +5,14 @@ import { createPreparedContextNavigation } from '../prepared-context-navigation.
 import { createSceneSelection } from '../scene/scene-selection.mts';
 import { createNavigationLifecycle } from '../navigation/navigation-lifecycle.mts';
 import { withPreparedFocus } from '../navigation/navigation-scope.mts';
-import { createImageFocusBank } from '../../src/renderers/css/universe/prepared-focus-bank.ts';
+import { createImageFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import { overviewScopeFromUrl, preparedFocusFromUrl } from '../navigation/navigation-scope.mts';
 import { isPreparedCluster } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
-import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
-import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation/prepared-focus.ts';
-import type { PreparedVolumeLensState } from '../../src/renderers/css/volume/prepared-volume-lenses.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
+import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
+import type { PreparedVolumeLensState } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 type ContextLayer = Parameters<typeof createPreparedContextNavigation>[0]['layer'];
 type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCitation[]; presentation: PreparedFocusPresentation | null };

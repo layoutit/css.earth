@@ -13,8 +13,8 @@
 // write they inherit the body's initial step from the system node. The node builder writes the lengths and transform;
 // the presentation bindings, measured in a browser, write each factor, the groups and the steps
 // (tools/prepared/prepared-presentation-bindings.mts), so every generator shares one rule.
-import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from '../../src/renderers/css/rendering/prepared-silhouette-steps.ts';
-import type { PreparedTexturePlacements } from '../../src/renderers/css/rendering/prepared-texture-levels.ts';
+import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from '@cssearth/renderer/rendering/prepared-silhouette-steps.ts';
+import type { PreparedTexturePlacements } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 
 /** The step every leaf reads; `<property>-<block>` names a block in the binding's placements and groups. */
 export const LEAF_BOX_PROPERTY = '--silhouette-step';

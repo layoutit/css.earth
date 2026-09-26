@@ -1,7 +1,7 @@
 import { sourceTest } from '../../tests/objects/source-test.mts';
 import assert from 'node:assert/strict';
-import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { WorldRotation } from '../../src/renderers/css/navigation/world-camera-math.ts';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import { required } from './navigation-test-values.mts';
 import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../view-format.mts';
 import { measurePreparedFocusView } from '../view-readout.mts';

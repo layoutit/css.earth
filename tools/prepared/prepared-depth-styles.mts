@@ -1,5 +1,5 @@
 import type { Page } from 'playwright';
-import type { PreparedTree, PreparedWrite } from '../../src/renderers/css/rendering/prepared-presentation.ts';
+import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.mts';
 type MinimalPresentation = {id: string; tree: PreparedTree; variants: {writes: readonly PreparedWrite[]}[]};
 

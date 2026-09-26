@@ -1,10 +1,10 @@
-import { createCameraMotion } from '../renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
-import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";
+import { createUnboundedMatrixDragControls } from "@cssearth/renderer/platform/camera-input";
 import {
   createDragHistory,
   recordDragSample,
@@ -14,7 +14,7 @@ import {
   interactionTrackball,
 } from "./trackball-drag-inertia.mts";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
-import type { TrackballMetrics, CameraDelta, Quaternion } from "../renderers/css/navigation/types.ts";
+import type { TrackballMetrics, CameraDelta, Quaternion } from "@cssearth/renderer/navigation/types.ts";
 
 type Rotate = Parameters<typeof createUnboundedMatrixDragControls>[0]["rotate"];
 type Publication = Parameters<Rotate>[0];

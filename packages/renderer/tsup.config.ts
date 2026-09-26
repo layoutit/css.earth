@@ -1,0 +1,37 @@
+import { fileURLToPath } from 'node:url';
+
+export default {
+  entry: {
+    'platform/object-orbit': fileURLToPath(new URL('./src/navigation/object-orbit.ts', import.meta.url)),
+    'platform/camera-input': fileURLToPath(new URL('./src/navigation/camera-input.ts', import.meta.url)),
+    'platform/camera-layout': fileURLToPath(new URL('./src/navigation/camera-layout.ts', import.meta.url)),
+    'platform/prepared-wheel-zoom': fileURLToPath(new URL('./src/navigation/prepared-wheel-zoom.ts', import.meta.url)),
+    "platform/prepared-residency": fileURLToPath(new URL("./src/rendering/prepared-residency.ts", import.meta.url)),
+    'platform/object-contract': fileURLToPath(new URL('./src/runtime/object-contract.ts', import.meta.url)),
+    'platform/prepared-image-store': fileURLToPath(new URL('./src/rendering/prepared-image-store.ts', import.meta.url)),
+    'platform/object-selection-runtime': fileURLToPath(new URL('./src/rendering/object-selection-runtime.ts', import.meta.url)),
+    'platform/prepared-presentation': fileURLToPath(new URL('./src/rendering/prepared-presentation.ts', import.meta.url)),
+    'platform/perspective-dolly': fileURLToPath(new URL('./src/navigation/perspective-dolly.ts', import.meta.url)),
+    'platform/solar-view-direction': fileURLToPath(new URL('./src/solar-system/solar-view-direction.ts', import.meta.url)),
+    'platform/prepared-object-assets': fileURLToPath(new URL('./src/rendering/prepared-object-assets.ts', import.meta.url)),
+    'platform/surface-fly-to': fileURLToPath(new URL('./src/navigation/surface-fly-to.ts', import.meta.url)),
+    'platform/directional-sun-coordinate': fileURLToPath(new URL('./src/solar-system/directional-sun-coordinate.ts', import.meta.url)),
+    index: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+    universe: fileURLToPath(new URL('./src/universe/index.ts', import.meta.url)),
+    navigation: fileURLToPath(new URL('./src/navigation/index.ts', import.meta.url)),
+    testing: fileURLToPath(new URL('./src/testing.ts', import.meta.url)),
+    'scene-native-waits': fileURLToPath(new URL('./src/runtime/scene-native-waits.ts', import.meta.url)),
+    'world-context-planner-worker': fileURLToPath(new URL('./src/universe/world-context/world-context-planner-worker.ts', import.meta.url)),
+    'prepared-object-worker': fileURLToPath(new URL('./src/prepared-object-worker.ts', import.meta.url)),
+  },
+  outDir: fileURLToPath(new URL('./dist', import.meta.url)),
+  tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
+  format: ['esm'],
+  external: ['@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@layoutit/polycss'],
+  dts: true,
+  sourcemap: process.env.CSSEARTH_PERFORMANCE_SOURCEMAPS === '1',
+  clean: true,
+  // tools/ci/check-stale-builds.mts reads the inputs to know when this bundle is stale.
+  metafile: true,
+  target: 'es2022',
+};

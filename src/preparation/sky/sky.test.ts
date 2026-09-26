@@ -8,9 +8,9 @@ import { decodeExrRgbHalf, halfToFloat } from './exr.js';
 import { parseSkyRecipe } from './config.js';
 import { loadSkySource } from './source.js';
 import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces, compositeSkyStars } from './bake.js';
-import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
+import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { PreparedCssSky } from '../../renderers/css/sky/types.js';
+import type { PreparedCssSky } from '@cssearth/renderer/sky/types.ts';
 
 function exrFixture(compressed: boolean): { bytes: Buffer; expected: Buffer } {
   const width = 32, height = 2, zero = Buffer.from([0]), int = (n: number) => { const b = Buffer.alloc(4); b.writeInt32LE(n); return b; };

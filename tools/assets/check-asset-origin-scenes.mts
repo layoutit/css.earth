@@ -20,7 +20,7 @@ const CONTEXT_CHARS = 70;
 
 /** Every literal `/scenes/` occurrence remaining in emitted HTML or CSS: with
  * `ASSET_ORIGIN` set, every consumption point should have resolved it away
- * before it reached the page (see `src/renderers/css/rendering/prepared-asset-origin.ts`,
+ * before it reached the page (see `packages/renderer/src/rendering/prepared-asset-origin.ts`,
  * `site/asset-origin.mts`). A non-empty result means one was missed.
  * `text` is a short window around the match, not the whole (often minified, multi-megabyte) line. */
 export async function findSceneReferences(distDir: string): Promise<SceneReference[]> {

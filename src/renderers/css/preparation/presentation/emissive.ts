@@ -2,9 +2,9 @@
 // (scene/index.ts body-container layout) with the composite node conventions (composite.ts).
 // An emissive body has no material track, no Shadows toggle and no directional Sun; its off-limb context and
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
-import { canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
-import type { PreparedVariant } from '../../rendering/prepared-presentation.js';
+import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PresentationInputs, PresentationDraft } from './types.js';
 import type { PresentationAdapters } from './adapters.js';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';

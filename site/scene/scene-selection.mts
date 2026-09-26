@@ -1,6 +1,6 @@
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-focus.mts';
-import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.mts';
 import { overviewScopeFromUrl, withOverviewScope, withPreparedFocus } from '../navigation/navigation-scope.mts';
 import { SOLAR_SYSTEM_ID, systemById, type SystemObjects } from '../object-systems.mts';

@@ -3,7 +3,7 @@ import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 import { WORLD_OBJECTS as SCENE_OBJECTS } from './world-objects.mts';
 import { contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { discoveryVisibility } from './object-discovery.mts';
-import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
+import { labelImportance } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { PREPARED_WORLD_PRESENTATION as prepared } from './prepared-world-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';

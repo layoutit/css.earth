@@ -145,11 +145,6 @@ jobs:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: renderer-cache
-        with:
-          path: src/renderers/css/dist
-          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: build-tools-cache
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
@@ -159,8 +154,6 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
-          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts lint
@@ -222,11 +215,6 @@ jobs:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: renderer-cache
-        with:
-          path: src/renderers/css/dist
-          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: build-tools-cache
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
@@ -247,8 +235,6 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
-          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts full
@@ -297,11 +283,6 @@ jobs:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: renderer-cache
-        with:
-          path: src/renderers/css/dist
-          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: build-tools-cache
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
@@ -320,8 +301,6 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
-          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts full
@@ -375,11 +354,6 @@ jobs:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: renderer-cache
-        with:
-          path: src/renderers/css/dist
-          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: build-tools-cache
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
@@ -389,8 +363,6 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
-          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: |
@@ -488,11 +460,6 @@ jobs:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: renderer-cache
-        with:
-          path: src/renderers/css/dist
-          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: build-tools-cache
         with:
           # Preparation still uses the conservative whole-tree key; generated data is never cached here.
@@ -502,8 +469,6 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
-          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts full

@@ -3,8 +3,8 @@ import { volumeRenderer } from './volume-renderer';
 import type { CompilerViewerBackend } from '@cssearth/volume-viewer/scene/compiler-viewer';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
-import { cssViewFromOrientation } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
-import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import { cssViewFromOrientation } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import { assertCompilerBankIdentity, assertCompilerLensGeometry } from '../../server/workflows/compiler/bank-validation.ts';
 
 export const compilerRenderer: CompilerViewerBackend<PreparedCssVolume, VolumeCameraPublication> = {

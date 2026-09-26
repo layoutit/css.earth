@@ -1,6 +1,6 @@
-import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/object-scene.js';
-import type { ObjectMountOptions } from '../src/renderers/css/runtime/object-runtime-types.js';
-import type { createPreparedObjectNavigation } from '../src/renderers/css/runtime/prepared-object-navigation.js';
+import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
+import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+import type { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 export type BrowserWindow = Window & typeof globalThis;
 export type MountOptions = Omit<ObjectMountOptions, 'runtimePolicy' | 'inputSurface' | 'worldContext'>;
 export type SceneFactory = ((stage: HTMLElement, options: MountOptions) => ObjectSceneLifecycle) & {

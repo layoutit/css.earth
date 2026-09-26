@@ -1,12 +1,12 @@
 /** Lab validation and URL binding for the generic retained shape scene. */
 import { createShapeCloudViewer as createScene, type ShapeCloudViewerOptions as SceneOptions,
   type ShapeCloudViewer } from '@cssearth/volume-viewer/scene/shape-cloud-viewer';
-import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import type { ShapeCloudResult } from '../../features/shape-cloud/types.ts';
 import { readShapeCloudResult } from '../../features/shape-cloud/result.ts';
 import { volumeRenderer } from './volume-renderer';
 import { assertSharedGeometry } from './shape-cloud-renderer-validation';
-import '../../../../../../../src/renderers/css/styles/volume.css';
+import '@cssearth/renderer/styles/volume.css';
 export type { ShapeCloudViewer } from '@cssearth/volume-viewer/scene/shape-cloud-viewer';
 export interface ShapeCloudViewerOptions extends Omit<SceneOptions<PreparedCssVolume, VolumeCameraPublication>, 'backend' | 'resolvePath' | 'result'> {
   result: ShapeCloudResult; resolvePath?: (path: string) => string;

@@ -1,17 +1,17 @@
 /** Serialize the standard prepared sphere and its CSS camera at export time. */
 import { parseHTML } from 'linkedom';
 import { serializePreparedScene } from '../../../prepared/serialize-prepared-scene.mts';
-import { initialObjectSelection } from '../../../../src/renderers/css/runtime/object-contract.ts';
-import { publishPreparedNativeView } from '../../../../src/renderers/css/rendering/prepared-native-view.ts';
-import { preparedSceneMatrix } from '../../../../src/renderers/css/navigation/prepared-camera-basis.ts';
+import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
+import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
+import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { serializePreparedMatrix4 } from '@cssearth/core';
-import { parsePreparedWorldCameraFrame } from '../../../../src/renderers/css/validation/world-frame.ts';
-import { distanceForSilhouetteRadius } from '../../../../src/renderers/css/solar-system/heliocentric-geometry.ts';
+import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/validation/world-frame.ts';
+import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 import { addNativeCamera } from '../../../experiments/native-scroll/native-camera.mts';
 import { addNativeResizeInput } from '../../../experiments/native-scroll/resize-input.mts';
 import { carryViewportValues } from '../../../experiments/native-scroll/carry-values.mts';
 import type { measurementSphere } from './sphere-lane.mts';
-import type { SharedView } from '../../../../src/renderers/css/navigation/view-url.ts';
+import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 
 const escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 type Prepared=Awaited<ReturnType<typeof measurementSphere>>;

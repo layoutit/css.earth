@@ -1,9 +1,9 @@
 /** cssEarth image-bank/volume binding for retained contribution inspection. */
 import type { InspectionMountBackend } from '@cssearth/volume-viewer/scene/inspection-banks';
-import { mountPreparedCssImageLayers } from '../../../../../../../src/renderers/css/image-layers/prepared-image-layer-runtime';
-import type { PreparedCssImageLayers } from '../../../../../../../src/renderers/css/image-layers/loader';
-import { mountPreparedCssVolume } from '../../../../../../../src/renderers/css/volume/prepared-volume-runtime';
-import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import { mountPreparedCssImageLayers } from '@cssearth/renderer/image-layers/prepared-image-layer-runtime.ts';
+import type { PreparedCssImageLayers } from '@cssearth/renderer/image-layers/loader.ts';
+import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
+import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 function imageBank(payload: PreparedCssVolume | PreparedCssImageLayers): PreparedCssImageLayers {
   if (!('bankViews' in payload) || !Array.isArray(payload.bankViews)) throw new TypeError('Missing prepared image-bank views.');
   return payload;

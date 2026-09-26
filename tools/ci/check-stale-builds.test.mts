@@ -74,7 +74,7 @@ test('a bundle is stale when any file its last build read changed, even outside 
     // tsup runs from the engine package, so the metafile's paths are relative to it; node_modules inputs are not ours.
     await writeFile(join(root, 'tools/bundle/dist/metafile-esm.json'), JSON.stringify({ inputs: {
       '../../tools/bundle/entry.ts': {}, '../../site/imported.mts': {}, '../../node_modules/x/index.js': {} } }));
-    const rules = [{ name: 'bundle', command: 'build bundle', sources: ['tools/bundle'], output: 'tools/bundle/dist/index.js', inputs: 'tools/bundle/dist/metafile-esm.json' }];
+    const rules = [{ name: 'bundle', command: 'build bundle', sources: ['tools/bundle'], output: 'tools/bundle/dist/index.js', inputs: 'tools/bundle/dist/metafile-esm.json', base: 'packages/engine' }];
     await utimes(join(root, 'tools/bundle/entry.ts'), 1000, 1000); await utimes(join(root, 'site/imported.mts'), 1000, 1000);
     await utimes(join(root, 'tools/bundle/dist/index.js'), 2000, 2000);
     assert.deepEqual(await staleBuilds(root, rules), [], 'every input is older than the output');

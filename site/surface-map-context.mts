@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { BrowserWindow } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -24,7 +24,7 @@ interface MapEntry {
   stage: Element | null; frame: ObjectWorldNavigation['frame']; axes: SurfaceAxes | null;
   animations: (Animation & { effect: KeyframeEffect })[] | null; times: (CSSNumberish | null | undefined)[];
 }
-import { rotateWorldPosition } from '../src/renderers/css/dist/navigation.js';
+import { rotateWorldPosition } from '@cssearth/renderer/navigation';
 
 // Read the package's prepared map axes in the current shared world frame.
 export function surfaceMapContext(config: SurfaceMapConfig | undefined, camera: SurfaceCamera | null, documentTarget: Document, windowTarget: BrowserWindow) {

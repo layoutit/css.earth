@@ -1,5 +1,5 @@
 import type { SceneLifecycle, ShellObjectControls } from "../shell-contract-types.mts";
-import { SHELL_SETTING_NAMES } from '../../src/platform/shell-settings.mts';
+import { SHELL_SETTING_NAMES } from '@cssearth/renderer/runtime/shell-settings.ts';
 
 function objectLike(value: unknown): value is Record<string, unknown> {
   return value !== null && (typeof value === "object" || typeof value === "function");

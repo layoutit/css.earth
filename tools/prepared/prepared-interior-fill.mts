@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { PREPARED_INTERIOR_DISC_SIZE } from '../../src/renderers/css/dist/index.js';
-import type { PreparedInteriorDisc } from '../../src/renderers/css/rendering/prepared-interior-disc.ts';
-import type { PreparedPresentationDefinition, PreparedWrite } from '../../src/renderers/css/rendering/prepared-presentation.ts';
-import type { PreparedAssets } from '../../src/renderers/css/rendering/prepared-residency.ts';
+import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/renderer';
+import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
+import type { PreparedPresentationDefinition, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import type { PreparedAssets } from '@cssearth/renderer/rendering/prepared-residency.ts';
 
 /** The complete disc, including two raster pixels of edge clearance, fits
  * inside the prepared inner ellipsoid at every camera orientation. */

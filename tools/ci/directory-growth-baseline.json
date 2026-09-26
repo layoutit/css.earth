@@ -18,6 +18,18 @@
       "implementations": 24,
       "tests": 19
     },
+    "packages/renderer/src/navigation": {
+      "implementations": 31,
+      "tests": 15
+    },
+    "packages/renderer/src/rendering": {
+      "implementations": 29,
+      "tests": 17
+    },
+    "packages/renderer/src/universe": {
+      "implementations": 24,
+      "tests": 15
+    },
     "site": {
       "implementations": 101,
       "tests": 2
@@ -33,18 +45,6 @@
     "src/platform": {
       "implementations": 55,
       "tests": 40
-    },
-    "src/renderers/css/navigation": {
-      "implementations": 31,
-      "tests": 15
-    },
-    "src/renderers/css/rendering": {
-      "implementations": 29,
-      "tests": 17
-    },
-    "src/renderers/css/universe": {
-      "implementations": 24,
-      "tests": 15
     },
     "tools/objects": {
       "implementations": 56,

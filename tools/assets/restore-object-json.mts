@@ -7,7 +7,7 @@ import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { serializeObjectJson } from '../prepare/prepare-object-json.mts';
 import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
-import { PREPARED_CSS_OBJECT_FORMAT } from '../../src/renderers/css/dist/index.js';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 
 const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 

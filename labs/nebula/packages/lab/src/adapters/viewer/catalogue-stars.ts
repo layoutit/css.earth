@@ -1,8 +1,8 @@
 /** Retained catalogue points: runtime projects prepared XYZ only, never source astrometry. */
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
-import { cssViewFromOrientation } from '../../../../../../../src/renderers/css/navigation/world-camera-math';
-import type { WorldCameraPose, WorldCameraViewport } from '../../../../../../../src/renderers/css/navigation/world-camera';
+import { cssViewFromOrientation } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import { mountCatalogueStars } from '@cssearth/volume-viewer/scene/catalogue-stars';
 
 import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/bake/volume';

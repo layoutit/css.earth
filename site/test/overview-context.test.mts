@@ -3,15 +3,15 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
-import { presentWorldCamera } from '../../src/renderers/css/dist/navigation.js';
-import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
+import { presentWorldCamera } from '@cssearth/renderer/navigation';
+import { parsePreparedWorldContext } from '@cssearth/renderer';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
 
 // The same validated plan the application mounts; the raw JSON import is untyped.
 const context = parsePreparedWorldContext(preparedContext);
 
-import type { WorldCameraPose, PreparedWorldCameraFrame } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
+import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 
 const camera = (distance: number, plan: Pick<typeof context, 'focus'> = context): WorldCameraPose => ({
   referenceFrame: 'world', epochJdTt: 1, pose: {

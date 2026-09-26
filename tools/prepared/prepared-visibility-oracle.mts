@@ -1,6 +1,6 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
-import type { SurfacePoint, SurfaceTriangle } from '../../src/renderers/css/navigation/prepared-surface-hit.ts';
-import type { PreparedDepthOrder } from '../../src/renderers/css/rendering/prepared-depth-partitions.ts';
+import type { SurfacePoint, SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';
+import type { PreparedDepthOrder } from '@cssearth/renderer/rendering/prepared-depth-partitions.ts';
 import assert from 'node:assert/strict';
 
 const sub = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[0]-b[0],a[1]-b[1],a[2]-b[2]];

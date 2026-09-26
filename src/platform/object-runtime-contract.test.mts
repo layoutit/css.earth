@@ -1,4 +1,4 @@
-import { parsePreparedObjectRuntime } from "../renderers/css/dist/index.js";
+import { parsePreparedObjectRuntime } from "@cssearth/renderer";
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -6,7 +6,7 @@ const test = sourceTest();
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon'));
 const objectControls = moonDefinition.controls;
-import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '../renderers/css/dist/testing.js';
+import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '@cssearth/renderer/testing';
 import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
 
 function definition(overrides: Record<string, unknown> = {}) {

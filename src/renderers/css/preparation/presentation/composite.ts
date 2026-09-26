@@ -1,11 +1,11 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
-import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
+import type { PreparedVariant, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
 import { RASTER_LEVEL_FACTORS, RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../../../../preparation/raster/pages.js';
-import type { PreparedResourceEntry } from '../../rendering/prepared-residency.js';
+import type { PreparedResourceEntry } from '@cssearth/renderer/rendering/prepared-residency.ts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {

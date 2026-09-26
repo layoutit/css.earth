@@ -1,6 +1,6 @@
 import { parseDatasetLens } from './prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '../src/platform/source-catalog.mts';
-import type { PreparedVolumeLensBank } from '../src/renderers/css/volume/prepared-volume-lenses';
+import type { PreparedVolumeLensBank } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 
 /** The shell consumes the same lens shape for surfaces and prepared volumes. */

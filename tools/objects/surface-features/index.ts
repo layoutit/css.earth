@@ -3,7 +3,7 @@ import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, Sur
 import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand } from './geometry.js';
 import { unzipMember } from './archive.js';
 import { sha256 } from '@cssearth/core/node';
-import { surfaceFeatureBankIndex } from '../../../src/platform/surface-feature-banks.mts';
+import { surfaceFeatureBankIndex } from '@cssearth/renderer/labels/surface-feature-banks.ts';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { extname, relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.js';

@@ -6,7 +6,7 @@
  * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the lens's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
 import { preparedScenePitch } from '@cssearth/engine';
-import { worldCameraFromPresentation } from '../../../src/renderers/css/dist/navigation.js';
+import { worldCameraFromPresentation } from '@cssearth/renderer/navigation';
 import { requireBodyFixedToIcrf } from '../../../src/platform/solar-geometry.mts';
 
 const DEGREE = Math.PI / 180;

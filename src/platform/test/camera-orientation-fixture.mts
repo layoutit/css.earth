@@ -1,4 +1,4 @@
-import type { CameraOrientation } from '../../renderers/css/navigation/camera-orientation.ts';
+import type { CameraOrientation } from '@cssearth/renderer/navigation/camera-orientation.ts';
 
 /** Fixed browser orientation for DOM-free dolly and viewport checks. */
 export function fixedCameraOrientation(rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1]): CameraOrientation {

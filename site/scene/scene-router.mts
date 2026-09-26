@@ -8,7 +8,7 @@ import { errorMessage } from '../browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../object-schema.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
-import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../object-shell-types.mts';
@@ -20,7 +20,7 @@ import type { createPreparedWorldNavigation } from '../prepared-world-navigation
 import { createWorldViewport } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
-import { createCameraMotion } from '../../src/renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 // The world summary the registry's modules read when they load (`world-context-plan.mts`).
 import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { readInitialFocus } from '../focus-catalog.mts';

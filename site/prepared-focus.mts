@@ -1,7 +1,7 @@
 import { isPreparedCluster, isPreparedNebula, resolveSpatialCitation } from '@cssearth/catalog';
 import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
-import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
-import type { PreparedFocusDatasets } from '../src/renderers/css/universe/prepared-focus-bank.js';
+import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
+import type { PreparedFocusDatasets } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 
 export interface PreparedFocusPolicy {
   metersPerParsec: number; defaultFocusRadiusM: number; minimumDistanceRadii: number; maximumDistanceM: number;

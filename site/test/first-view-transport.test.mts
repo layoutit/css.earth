@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { loadPreparedCssObject } from '../../src/renderers/css/dist/index.js';
+import { loadPreparedCssObject } from '@cssearth/renderer';
 import { firstViewTransport } from '../first-view-transport.mts';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';

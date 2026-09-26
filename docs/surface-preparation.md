@@ -367,7 +367,7 @@ its full box. [leaf-box.mts](../tools/prepared/leaf-box.mts) holds the rule:
   shares the rule. Surface leaves join blocks of about eight leaves by direction (`LEAF_BOX_GROUP_LEAVES`), each with a
   placement like a texture page's; other leaves (rings, shells, cutaways) form groups of eight. The bindings also record
   each group's full box area, for the memory estimate below.
-- **Runtime** ([prepared-leaf-box-blocks.ts](../src/renderers/css/rendering/prepared-leaf-box-blocks.ts)): a block's step
+- **Runtime** ([prepared-leaf-box-blocks.ts](../packages/renderer/src/rendering/prepared-leaf-box-blocks.ts)): a block's step
   is the body's diameter as it would look at the block's nearest depth, the first step when it is behind the body or off
   screen; the other groups follow the silhouette. A step is written on the group's own leaves, so only they restyle.
   - **Only at rest.** A step change redraws its leaves, so nothing switches while the camera moves, including inertia and
@@ -408,7 +408,7 @@ some variant, antialiased over one texel and never grown: at the raster sizing's
 roughly 60× leaf scale, even a one-texel margin showed as spikes past narrow apexes.
 The runtime declares the copies as `corner-shape` resource fallbacks and swaps them in
 once per page when `CSS.supports` reports the capability missing
-([prepared-resource-fallbacks.ts](../src/renderers/css/rendering/prepared-resource-fallbacks.ts)),
+([prepared-resource-fallbacks.ts](../packages/renderer/src/rendering/prepared-resource-fallbacks.ts)),
 and `triangle-faces.css` then drops the leaf's rounded corners. A browser with
 `corner-shape` never requests the copies.
 

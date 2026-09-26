@@ -16,8 +16,8 @@ import { interactionTrackball, projectTrackballDelta, rotationFromAngularVelocit
   directAngularDegreesPerTrackballRadius, directPitchResponseForZoom } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/bake/volume';
 import { inspectionCameraRenderer } from './inspection-camera-renderer';
-import { preparedVolumeCameraTransform } from '../../../../../../../src/renderers/css/volume/prepared-volume-runtime';
-import type { VolumeCameraPublication } from '../../../../../../../src/renderers/css/volume/types';
+import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 
 const WIDTH = 1300, HEIGHT = 950, DRAG_PX = 80;
 /** The prepared LMC frame's own shape: an Earth observer 49.59 units away, east-left like the lab's. */

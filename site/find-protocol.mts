@@ -1,4 +1,4 @@
-import type { PreparedDestination } from '../src/renderers/css/runtime/object-runtime-types.js';
+import type { PreparedDestination } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import { isRecord } from '@cssearth/core';
 
 /** Search named features, cities included, on the server. The browser sends its query and receives the rows to show:

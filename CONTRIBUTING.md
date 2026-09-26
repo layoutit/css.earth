@@ -165,7 +165,7 @@ audit. Native tests needing unavailable sources, prepared outputs or toolchains
 can skip through `tests/objects/source-test.mts`; a pass with skips does not prove
 those inputs or rendering paths. Run focused tests with the needed inputs installed.
 Compiled artifacts use exact-input caches; these never cache a test verdict.
-Package and renderer caches follow compiler inputs; preparation retains a
+Package caches, the renderer's included, follow compiler inputs; preparation retains a
 conservative whole-tree key. The preparation bundle ships JS only: type checks
 read its sources through the root `#preparation/*` imports. Cached
 baked JSON remains subject to the installer's byte and SHA-256 checks on every run.

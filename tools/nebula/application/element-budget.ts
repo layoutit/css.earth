@@ -1,7 +1,7 @@
 import { type CompilerBakeResult, readRenderElementBudget } from '@cssearth/bake/volume';
-import { CSS_COMPILER_RENDER_BUDGET } from '../../../src/renderers/css/volume/compiler-render-budget.js';
-import { samePreparedVolumeTopology } from '../../../src/renderers/css/volume/prepared-volume-lod.js';
-import { validatePreparedVolumeLenses, type PreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
+import { samePreparedVolumeTopology } from '@cssearth/renderer/volume/prepared-volume-lod.ts';
+import { validatePreparedVolumeLenses, type PreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 
 const AXES = ['x', 'y', 'z'] as const;
 // Renderer conformance counts these retained wrappers/markers, including the bank root and empty star wrapper.

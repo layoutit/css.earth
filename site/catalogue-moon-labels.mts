@@ -1,13 +1,13 @@
-import { createOpacityFader } from '../src/renderers/css/dist/index.js';
-import type { OpacityClock } from '../src/renderers/css/stars/opacity-clock.ts';
-import { admitStableLabels } from '../src/renderers/css/labels/stable-label-layout.ts';
+import { createOpacityFader } from '@cssearth/renderer';
+import type { OpacityClock } from '@cssearth/renderer/stars/opacity-clock.ts';
+import { admitStableLabels } from '@cssearth/renderer/labels/stable-label-layout.ts';
 import prepared from './moon-labels.prepared.json' with { type: 'json' };
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '../src/platform/source-catalog.mts';
-import { cssViewFromOrientation, rotateWorldPosition } from '../src/renderers/css/navigation/world-camera-math.ts';
-import { rayHitsSphereBefore } from '../src/renderers/css/solar-system/heliocentric-geometry.ts';
-import type { LabelScreenRect } from '../src/renderers/css/labels/screen-label-layout.ts';
-import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.ts';
-import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '../src/renderers/css/labels/universe-label-policy.ts';
+import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { rayHitsSphereBefore } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
+import type { LabelScreenRect } from '@cssearth/renderer/labels/screen-label-layout.ts';
+import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
 interface Point { id: string; positionM: readonly number[]; radiusM: number; orbit?: { centerBodyId: string }; }
 interface Moon { id: string; name: string; parentId: string; positionM: readonly number[]; parentDistanceM: number; }

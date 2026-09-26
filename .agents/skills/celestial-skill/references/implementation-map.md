@@ -48,11 +48,11 @@ fallback requirements are not the current authored-package template.
 | --- | --- |
 | Identity, route, lazy loading | Body `object.json` → `tools/prepare/prepare-catalog.mts` → `site/objects.mts`; `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
-| Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `src/renderers/css/validation/` |
+| Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `packages/renderer/src/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare/prepare-object-json.mts` |
 | Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `tools/objects/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
-| Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene/scene-contract.mts`, `site/scene/scene-router.mts` |
-| Shared input, world camera and physical registration | `site/runtime-policy.mts`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
+| Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `site/scene/scene-contract.mts`, `site/scene/scene-router.mts` |
+| Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
 | Content, lens labels and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
 | Search and marker presentation | `site/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
