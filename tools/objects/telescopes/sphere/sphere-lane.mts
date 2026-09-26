@@ -10,7 +10,8 @@ import { sha256 } from '@cssearth/core/node';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '@cssearth/bake/scene';
-import { prepareScientificNavigation } from '../../terrestrial-layers/scientific-focus.mts';
+import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
+import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 
@@ -101,7 +102,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   const excluded = original.assets.entries.filter(entry => !required.includes(entry.key));
   const { properties: portableProperties, inactiveImageProperties } = clearInactiveImageBindings(original.tree.properties, excluded);
   const tree = { ...original.tree, properties: portableProperties };
-  const navigation = prepareScientificNavigation(id, focus, original.camera);
+  const navigation = prepareScientificNavigation(solarGeometry, id, focus, original.camera);
   // Apply the measurement view immediately, keeping the viewport's fitted zoom.
   const { features: _features, ...portable } = original;
   const definition = parsePreparedObjectRuntime({ ...portable, tree,

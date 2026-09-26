@@ -11,7 +11,7 @@ import { array, boolean, number, optional, shape, text, requireArray, requireRec
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '../../../kernel-banks/kernel-bank.mts';
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { etToUtc } from '@cssearth/spice';
 import { ABERRATIONS, project, CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry, refineStripEpochs, validateStripRefinement } from '@cssearth/bake/objects/layers/terrestrial';
 import { bandColorDisplay } from '@cssearth/bake/objects/color';

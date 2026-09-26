@@ -1,8 +1,9 @@
-import { refuseAuthoredCameraAngles } from '@cssearth/bake/objects/scene';
+import { refuseAuthoredCameraAngles } from '../../../scene/index.ts';
 import {requireRecord,shape,number,text,optional,nullable,array,boolean,dictionary,choice} from '@cssearth/core';
-import { parseSciencePalette } from '@cssearth/bake/objects/raster';
-import { parseTransform } from '@cssearth/bake/objects/geometry';
-import { parseSolidScience, parseSolidRasterConfig, parseRadialSource } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSciencePalette } from '../../../raster/index.ts';
+import { parseTransform } from '../../../geometry/index.ts';
+import { parseSolidScience, parseSolidRasterConfig } from './solid-source.ts';
+import { parseRadialSource } from './radial-source.ts';
 
 const grid = shape({width:optional(number),height:optional(number),noData:optional(nullable(number)),
   projection:optional(text),poleLatitude:optional(number),latitudeRange:optional(array(number)),

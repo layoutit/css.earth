@@ -2,8 +2,7 @@
 import type { ObservationPhotometry } from './contract.mts';
 import type { DiskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SourceManifest } from '@cssearth/objects/node';
-import { observationGain } from '@cssearth/bake/objects/layers/terrestrial';
-import { resolvePublishedPhotometry, type PublishedPhotometryBlock } from '../terrestrial-layers/published-photometry.mts';
+import { observationGain, resolvePublishedPhotometry, type PublishedPhotometryBlock } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** A published model record carries every pixel to its reference geometry. */
 export async function publishedPhotometry(sourceDirectory: string, manifest: SourceManifest | undefined, block: PublishedPhotometryBlock): Promise<ObservationPhotometry> {

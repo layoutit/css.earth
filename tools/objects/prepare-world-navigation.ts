@@ -61,11 +61,11 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
   const terrestrial = sources.get('terrestrial');
   // A flyby body without photograph frames faces the side its spacecraft approached (@cssearth/spice `spacecraftApproach`),
-  // found in the recipe's kernels from their shared bank (tools/kernel-banks/kernel-bank.mts).
+  // found in the recipe's kernels from their shared bank (`@cssearth/bake/objects/cameras`).
   const approachSource = sources.get('approach');
   const approachDirection = async () => {
     const spice = await import('@cssearth/spice'), { loadKernelSet } = await import('@cssearth/spice/node');
-    const banks = await import(pathToFileURL(resolve(projectRoot, 'tools/kernel-banks/kernel-bank.mts')).href) as typeof import('../kernel-banks/kernel-bank.mts');
+    const banks = await import('@cssearth/bake/objects/cameras');
     const recipe = spice.parseApproachRecipe(approachSource, `${descriptor.id} approach`);
     return spice.spacecraftApproach(await loadKernelSet(await banks.kernelBankPaths(recipe.kernelSet, recipe.kernels)), recipe).direction;
   };

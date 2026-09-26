@@ -6,11 +6,12 @@ import type { ScenePreparationAdapters } from '@cssearth/bake/scene';
 import type { PresentationHostAdapters } from '@cssearth/bake/presentation';
 import { prepareMaterialTracks } from '../prepare/prepare-materials.mts';
 import { requirePreparedPresentation } from '../../src/platform/prepared-presentation-contract.mts';
-import { prepareScientificNavigation } from './terrestrial-layers/scientific-focus.mts';
+import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 /** The presentation compiler's host: material tracks, the prepared-presentation contract and lens navigation. */
 export const presentationHostAdapters: PresentationHostAdapters = {
-  prepareMaterialTracks, requirePreparedPresentation, prepareLensNavigation: prepareScientificNavigation,
+  prepareMaterialTracks, requirePreparedPresentation, prepareLensNavigation: (bodyId, focus, camera) => prepareScientificNavigation(solarGeometry, bodyId, focus, camera),
 };
 
 /** Validate external scene records, then call the native TypeScript owners. */

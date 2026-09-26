@@ -50,7 +50,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/observed-surfaces'],
   'objects/layers/material-composition': ['raster', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
   'objects/layers/paged-ellipsoid': ['raster', 'scene', 'objects/raster'],
-  'objects/layers/terrestrial': ['photometry', 'raster', 'objects/cameras', 'objects/geometry', 'objects/raster'],
+  'objects/layers/terrestrial': ['photometry', 'raster', 'objects/cameras', 'objects/geometry', 'objects/raster', 'objects/scene'],
 };
 
 /** A topic is a top-level folder of `src/`, except `objects/`, whose every folder is a topic of its own (`objects/color`,

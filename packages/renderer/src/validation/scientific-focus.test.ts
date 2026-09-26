@@ -4,7 +4,8 @@ import {test} from 'vitest';
 import {requireVariants} from './presentation.js';
 import type {PreparedTree} from '../rendering/prepared-presentation.js';
 import type {ObjectControls} from '../runtime/object-contract.js';
-import {prepareScientificNavigation} from '../../../../tools/objects/terrestrial-layers/scientific-focus.mts';
+import {prepareScientificNavigation} from '../../../bake/src/objects/layers/terrestrial/scientific-focus.ts';
+import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import {preparedScenePitch} from '@cssearth/engine';
 import {requireCamera} from './camera-controls.js';
 import {requireRecord,requireString} from '@cssearth/core';
@@ -24,7 +25,7 @@ const controls:ObjectControls = {lenses:{defaultLens:'elevation',controls:[{id:'
   {name:'orbit',kind:'toggle',label:'Orbit',checked:true},
 ]}};
 function variants() {
-  const navigation = prepareScientificNavigation('europa', focus, scene.camera);
+  const navigation = prepareScientificNavigation(solarGeometry, 'europa', focus, scene.camera);
   return [false,true].flatMap(shadows => [false,true].map(orbit => ({
     when:{lensId:'elevation',shadows,orbit}, required:[], writes:[
       {kind:'class',target:-1,name:'focus-shadows',value:shadows},
@@ -47,7 +48,7 @@ test('scientific focus emits the complete navigation contract for every lens tog
   const tooLow = structuredClone(value);
   tooLow[0].navigation.maximumZoom = 3;
   assert.throws(() => validate(tooLow), /navigation camera must be bounded/);
-  assert.throws(() => prepareScientificNavigation('europa', {...focus,zoom:5}, scene.camera), /supported camera zoom/);
+  assert.throws(() => prepareScientificNavigation(solarGeometry, 'europa', {...focus,zoom:5}, scene.camera), /supported camera zoom/);
 });
 
 test('a displayed toggle must select a distinct prepared effect', () => {
@@ -58,7 +59,7 @@ test('a displayed toggle must select a distinct prepared effect', () => {
 });
 
 test('Agenor navigation centres the actual emitted PolyCSS XY-swapped carrier at its established pose', () => {
-  const navigation = prepareScientificNavigation('europa', focus, scene.camera);
+  const navigation = prepareScientificNavigation(solarGeometry, 'europa', focus, scene.camera);
   const camera = navigation.camera, r = Math.PI/180;
   // Europa's systemTransform is solved into the corrected frame (#294); re-pinned to the new pose.
   assert.ok(Math.abs(camera.controlPitch - 26.308446037891912) < 1e-10);

@@ -1,4 +1,4 @@
-import type { RadialSimplification } from '../../geometry/index.ts';
+import type { RadialSimplification } from '../../../geometry/index.ts';
 import { type Decoder, requireRecord, shape, number, text, optional, boolean } from '@cssearth/core';
 
 export const parseRadialSimplification:Decoder<RadialSimplification> = shape({method:optional(text),targetFaces:number,maximumErrorMeters:number,regularize:optional(boolean),prune:optional(boolean)});
