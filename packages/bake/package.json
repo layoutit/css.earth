@@ -49,6 +49,11 @@
       "import": "./dist/stars.js",
       "default": "./dist/stars.js"
     },
+    "./shell": {
+      "types": "./dist/shell.d.ts",
+      "import": "./dist/shell.js",
+      "default": "./dist/shell.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

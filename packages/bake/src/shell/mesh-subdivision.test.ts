@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { parseShellRecipe } from './config.js';
-import { subdivideRadialMesh, type ShellMesh } from './mesh.js';
+import { parseShellRecipe } from './config.ts';
+import { subdivideRadialMesh, type ShellMesh } from './mesh.ts';
 
 const source: ShellMesh = { positionsUnits: [[2, 0, 0], [0, 3, 0], [0, 0, 4], [2, 0, 1e-13]],
   radialNormals: [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 0, 0]], triangles: [[0, 1, 2], [3, 2, 1]] };

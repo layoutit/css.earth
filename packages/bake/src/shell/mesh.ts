@@ -1,8 +1,8 @@
 /** Offline mesh construction; runtime receives only retained transforms and source-derived normals. */
-import type { ShellRecipe } from './config.js';
+import type { ShellRecipe } from './config.ts';
 import { requireRecord as record } from '@cssearth/core';
-import { triple, type Vector3 } from '@cssearth/bake/volume';
-import { sourceBytes } from '@cssearth/bake/volume/node';
+import { triple, type Vector3 } from '../volume/index.ts';
+import { sourceBytes } from '../volume/node/index.ts';
 
 export interface ShellMesh {
   positionsUnits: Vector3[];

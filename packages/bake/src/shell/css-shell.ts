@@ -1,11 +1,11 @@
 /** Actual PolyCSS preparation of static triangular image coverage and retained transforms. */
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, resolveProjectiveQuadGuards, type Polygon } from '@layoutit/polycss';
-import type { ShellRecipe } from '../../../preparation/shell/config.js';
-import { unitVector, type ShellMesh } from '../../../preparation/shell/mesh.js';
-import type { Vector3 } from '@cssearth/bake/volume';
+import type { ShellRecipe } from './config.ts';
+import { unitVector, type ShellMesh } from './mesh.ts';
+import type { Vector3 } from '../volume/index.ts';
 import type { PreparedCssSurfaceShell } from '@cssearth/renderer/shell/types.ts';
 import { SHELL_CORNER_PERMUTATIONS } from '@cssearth/renderer/shell/material-address.ts';
-import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '@cssearth/bake/scene';
+import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';
 
 /** A face drawn at TEXELS_PER_CSS_PIXEL. PolyCSS sizes the face's box at one CSS pixel per texel of its atlas tile, and
  * WebKit backs every composited face at that box times the device pixel ratio whatever its matrix: the heliosphere's 960

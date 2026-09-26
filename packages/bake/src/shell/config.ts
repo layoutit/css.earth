@@ -1,7 +1,7 @@
 /** Data-only deformation and material recipe for a prepared transparent surface. */
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
-import { text, triple, type Vector3 } from '@cssearth/bake/volume';
+import { text, triple, type Vector3 } from '../volume/index.ts';
 
 export interface ShellDisplaySubdivision { method: 'radial-linear'; segmentsPerEdge: number; }
 interface ShellShapeSource { path: string; displaySubdivision?: ShellDisplaySubdivision; }

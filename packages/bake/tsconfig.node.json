@@ -18,7 +18,8 @@
     "src/scene",
     "src/presentation",
     "src/volume-leaves",
-    "src/stars"
+    "src/stars",
+    "src/shell"
   ],
   "exclude": [
     "src/**/*.test.ts"

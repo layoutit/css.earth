@@ -3,13 +3,13 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
-import { text } from '@cssearth/bake/volume';
-import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';
+import { text } from '../volume/index.ts';
+import { sourceBytes, containedPath } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import { parseShellRecipe } from './config.js';
-import { loadShellMesh } from './mesh.js';
-import { prepareShellAtlas } from './atlas.js';
-import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';
+import { parseShellRecipe } from './config.ts';
+import { loadShellMesh } from './mesh.ts';
+import { prepareShellAtlas } from './atlas.ts';
+import { compileCssSurfaceShell } from './css-shell.ts';
 
 export async function prepareSurfaceShellObject(options: { objectDirectory: string; outputDirectory?: string; inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));

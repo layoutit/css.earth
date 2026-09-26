@@ -25,8 +25,8 @@ const universeEntries = [
   'tools/objects/prepare-spatial-context.test.ts',
   'tools/objects/world-navigation.test.ts',
   'packages/bake/src/stars/stars.test.ts',
-  'src/preparation/shell/shell.test.ts',
-  'src/preparation/shell/mesh-subdivision.test.ts',
+  'packages/bake/src/shell/shell.test.ts',
+  'packages/bake/src/shell/mesh-subdivision.test.ts',
 ];
 async function discover(directory: string, suffix: string): Promise<string[]> {
   const files: string[] = [];

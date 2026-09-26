@@ -1,6 +1,6 @@
 /** RGBA triangle coverage and source-lighting samples, baked without browser APIs. */
 import sharp from 'sharp';
-import type { ShellRecipe } from './config.js';
+import type { ShellRecipe } from './config.ts';
 
 export function shellRim(facing: number, fadeFacing: number): number {
   const t = Math.max(0, Math.min(1, facing / fadeFacing));
