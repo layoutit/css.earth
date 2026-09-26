@@ -29,8 +29,8 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
       frame: context.frame, model: 'authored-context-focus' } };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
-  // The generated module satisfies the frame preparers' contract as it is.
-  const geometry = solar as SolarGeometry;
+  // The generated module satisfies the frame preparers' contract as it is; typing it by the module keeps drift a type error.
+  const geometry: SolarGeometry = solar as typeof import('../../src/platform/solar-geometry.mts');
   const ecliptic = prepareEclipticPresentationFrame(geometry, descriptor.id);
   const intended = ecliptic.basis.flat() as unknown as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
   assertAtlasOrigins(descriptor.id, sources.get('raster'), placement);
