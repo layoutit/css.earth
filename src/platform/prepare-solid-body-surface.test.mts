@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "./prepare-solid-body-surface.mts";
+import { assertPolarCaps } from "../../tests/objects/polar-caps.mts";
 
 // An independently readable coordinate image: red encodes longitude and green
 // encodes latitude. Check its prepared texels against actual CSS vertex mapping.
@@ -104,5 +105,17 @@ test("solid-body leaves refuse a missing image width and name the body", () => {
   for (const widths of [{ mapPixelWidth: 0, polesPixelWidth: 512 }, { mapPixelWidth: 2080, polesPixelWidth: Number.NaN }]) {
     assert.throws(() => prepareSolidBodySurface({ id: "fixture", mapUrl: "/map.webp", polesUrl: "/poles.webp", ...widths }),
       /fixture: solid-body leaves need the measured pixel widths/);
+  }
+});
+
+test("every cap, outer and inner, follows the one cap rule on a sphere and on a triaxial body", () => {
+  // The shape-model lane draws triaxial bodies (Haumea) with three different display radii; these are fixture values.
+  const triaxial = prepareSolidBodySurface({ id: "fixture", radius: 230, secondaryRadius: 180, polarRadius: 120, latitudeSegments: 32,
+    longitudeSegments: 48, mapUrl: "/map.webp", polesUrl: "/poles.webp", mapPixelWidth: 3072, polesPixelWidth: 512 });
+  for (const [owner, prepared] of [["sphere", leaves], ["triaxial body", triaxial]] as const) {
+    const caps = prepared.flatMap(leaf => leaf.polar ? [{ pole: leaf.polar, style: leaf.style, label: leaf.className }] : []);
+    assert.equal(caps.length, 4, `${owner}: an outer and an inner cap at each pole`);
+    assertPolarCaps(owner, caps);
+    assert.ok(prepared.filter(leaf => !leaf.polar).every(leaf => !leaf.style.includes("border-radius")), `${owner}: bands keep their own shape`);
   }
 });

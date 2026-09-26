@@ -4,6 +4,7 @@ import type { SurfacePatch } from '@cssearth/objects';
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from '../../../../platform/projective-surface-raster.mts';
 import type { GeometryProfile } from './profile.js';
 import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
+import { POLAR_CAP_STYLE, requireOutwardCap } from './polar-cap.js';
 
 export interface PreparedLeaf {
   tag: 's'; className: string; style: string; polarCap?: string | null;
@@ -83,10 +84,9 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       // (composite.ts, emissive.ts): a band draws the lens's surface, or its page of a paged surface, and a cap its poles.
       // Leaves that inlined the profile's image drew it under every lens: Uranus's and Neptune's lenses never changed them.
       const image = `var(--${ns}-${patch.pole ? 'poles-image' : page === null ? 'surface-image' : `surface-page-${page}`})`;
-      // A polar cap closes the top of the band mesh. Its fitted plate can come out with the opposite winding to the
-      // bands around it, and a culled cap leaves a hole at the pole through which the body's interior fill shows as a
-      // flat disc. A cap is only ever seen from outside the body, so it is drawn from both sides.
-      const caps = patch.pole ? ';backface-visibility:visible' : '';
+      // Every lane's caps follow one rule (polar-cap.ts): a disc, facing out, culled when it turns away.
+      if (patch.pole) requireOutwardCap(ns, patch.pole, fitted.matrix, patch.inner);
+      const caps = patch.pole ? POLAR_CAP_STYLE : '';
       const style = `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:${image};background-position:${position};background-size:${size}${caps}`;
       return { tag: 's', className: className ?? (patch.pole ? `${ns}-polar ${ns}-polar-${patch.pole}${patch.inner ? ` ${ns}-polar-inner` : ''}` : ''), style,
         ...(projective ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix,
@@ -102,8 +102,10 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       const stable = patch.pole || dimensions ? initial : fitProjectiveTextureGeometryToStableLayout(initial);
       // A section is a plain leaf at its presentation size; core bands and caps are projective.
       const fitted = dimensions ? scalePlainLeafGeometry(stable, rasterScale(patch, stable.backgroundSize[0]!, 1)) : stable;
+      const cap = patch.pole && !dimensions;
+      if (cap) requireOutwardCap(ns, patch.pole!, fitted.matrix, true);
       return { tag: 's', className,
-        style: `transform:matrix3d(${fitted.matrix});background-image:var(--${ns}-${patch.pole ? 'poles' : 'surface'}-image);background-position:${fitted.backgroundPosition.map(value => formatCssLength(value)).join(' ')};background-size:${fitted.backgroundSize.map(value => formatCssLength(value)).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : ''}`,
+        style: `transform:matrix3d(${fitted.matrix});background-image:var(--${ns}-${patch.pole ? 'poles' : 'surface'}-image);background-position:${fitted.backgroundPosition.map(value => formatCssLength(value)).join(' ')};background-size:${fitted.backgroundSize.map(value => formatCssLength(value)).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : cap ? POLAR_CAP_STYLE : ''}`,
         ...(!dimensions ? { projectiveTextureLayer: prepareProjectiveTextureLayer(fitted.matrix,
           rasterScale(patch, fitted.backgroundSize[0]!, p.rasterScale)), polarCap: patch.pole ?? null } : {}) };
     },

@@ -127,11 +127,6 @@
     url("/scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp");
 }
 
-.jupiter-stage:where([data-object-id="jupiter"])[data-lens="ultraviolet"] .jupiter-body > .jupiter-pole-inner,
-.jupiter-stage:where([data-object-id="jupiter"])[data-lens="methane"] .jupiter-body > .jupiter-pole-inner {
-  visibility: hidden;
-}
-
 .jupiter-stage:where([data-object-id="jupiter"])[data-lens="methane"] .jupiter-body > s:not(.jupiter-pole) {
   background-image: url("/scenes/jupiter/jupiter-lens-methane@2x.webp");
 }

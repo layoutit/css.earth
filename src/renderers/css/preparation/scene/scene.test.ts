@@ -63,7 +63,7 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
  test(`authored ${id} geometry preserves independent pre-migration leaf oracle`,async()=>{
   // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
   // with must reproduce it exactly, so the outset changes nothing else about the leaves.
-  const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0}};});
+  const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0,projectivePoles:id==='mercury'}};});
   // Four changes since this oracle was taken touched these leaves, each by name: d10c041091 draws every polar cap from
   // both sides, 36198077d3 moved raster images to the canonical 2x density, leafRasterScale draws each leaf at two
   // texels per CSS pixel instead of the recipe's raster scale (its caps already were), and a leaf binds its lens's
@@ -74,7 +74,9 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
   // texture address and lens image inline like every other body (no position variables), and each lens has its own
   // two-tile pole sprite (512 px) where one atlas held all six tiles (1,536 px). Checked against the published leaves before
   // the rehash: every matrix, box, texture position and projective layer is unchanged; only the four caps' sprite size moved.
-  const both=';backface-visibility:visible',isCap=(leaf:object)=>Boolean((leaf as {polar?:unknown;polarCap?:unknown}).polar||(leaf as {polarCap?:unknown}).polarCap);
+  // A seventh is restored rather than undone: Mercury's caps were projective when the oracle was taken, and are plain leaves
+  // like every other body's now.
+  const both=';border-radius:50%',isCap=(leaf:object)=>Boolean((leaf as {polar?:unknown;polarCap?:unknown}).polar||(leaf as {polarCap?:unknown}).polarCap);
   const geometry=parseGeometryProfile(await readJson(`src/objects/${id}/source/preparation/geometry.json`)),ns=geometry.namespace;
   const recipeLayer=(leaf:{style:string;projectiveTextureLayer?:object})=>isCap(leaf)||!leaf.projectiveTextureLayer?leaf
    :{...leaf,projectiveTextureLayer:prepareProjectiveTextureLayer(matrixOf(leaf.style),geometry.projection.rasterScale)};
@@ -82,7 +84,7 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
    .replace(`background-image:var(--${ns}-poles-image)`,`background-image:url(${geometry.surface.poles.url})`)});
   const undo=(set:readonly {style:string;projectiveTextureLayer?:object}[])=>JSON.parse(JSON.stringify(set.map(recipeLayer).map(inlined).map(leaf=>isCap(leaf)?{...leaf,style:leaf.style.replace(both,'')}:leaf)).replaceAll('@2x.webp','.webp')) as unknown;
   const leaves='bodyLeaves' in result?result.bodyLeaves:result.body.leaves,caps=leaves.filter(isCap);
-  assert.ok(caps.length>=2&&caps.every(leaf=>leaf.style.endsWith(both)),'every polar cap is drawn from both sides');
+  assert.ok(caps.length>=2&&caps.every(leaf=>leaf.style.endsWith(both)&&!leaf.style.includes('backface-visibility')),'every polar cap is a disc, culled when it faces away');
   assert.equal(hash(undo(leaves)),bodyHash);
   if(interiorHash){assert.ok('interior' in result&&result.interior);const interior=result.interior;
    assert.equal(hash({outerBodyLeaves:undo(interior.outerBodyLeaves),coreLeaves:undo(interior.coreLeaves),sectionLeaves:undo(interior.sectionLeaves)}),interiorHash);}
@@ -285,7 +287,7 @@ test('a leaf seam outset moves each edge by the same share of the body diameter'
 test('a stepped seam outset requires an overlap matched to its raster overscan',async()=>{
  const profile=await readJson('src/objects/venus/source/preparation/geometry.json') as {projection:Record<string,unknown>};
  assert.doesNotThrow(()=>parseGeometryProfile(profile));
- assert.throws(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0.008}}),/matched to the raster overscan/);
+ assert.throws(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0.008}}),/overlap x texels per cell = rasterOverscan/);
  assert.doesNotThrow(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0,rasterOverscan:0}}));
 });
 
