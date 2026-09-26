@@ -20,7 +20,7 @@ export interface MarkerDescriptor { presentation?: unknown; schema: string; obje
 import { readFile } from "node:fs/promises";
 
 import sharp, { type Sharp } from "sharp";
-import { blackFillCoverage, paintMissingCoverage } from "../../src/platform/prepare-missing-coverage.mts";
+import { blackFillCoverage, paintMissingCoverage } from "@cssearth/bake/raster";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 const OBJECT_ID = /^[a-z][a-z0-9-]*$/u;

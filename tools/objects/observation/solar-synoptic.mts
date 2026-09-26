@@ -1,6 +1,6 @@
 // Derived from the retired static lane's synoptic-emission.mts by moving the per-variant closure into a factory that
 // returns finished RGBA maps and plates instead of writing files:
-//   - the retired module's file writes are gone: the generic raster lane (src/preparation/raster/surfaces.ts) packs,
+//   - the retired module's file writes are gone: the generic raster lane (packages/bake/src/raster/surfaces.ts) packs,
 //     encodes and names every output;
 //   - the retired polar sprite, 32-segment band atlas and proxy blend are not here: the generic lane samples its own
 //     polar sprite (packages/objects/src/baking/polar.ts) from the stabilized map (stabilizeMapPoles below) and closes

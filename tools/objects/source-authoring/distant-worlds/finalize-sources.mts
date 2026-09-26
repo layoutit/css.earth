@@ -10,7 +10,7 @@ import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';
-import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
+import { paintMissingCoverage } from '@cssearth/bake/raster';
 const root = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));

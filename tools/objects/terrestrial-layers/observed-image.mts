@@ -3,7 +3,7 @@ import sharp, { type SharpOptions } from 'sharp';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { blackFillCoverage } from '@cssearth/bake/raster';
 
 /** Keep thresholding at native resolution without holding a multi-gigapixel mask
  * in memory. A separate lossless image is necessary: Sharp otherwise resizes

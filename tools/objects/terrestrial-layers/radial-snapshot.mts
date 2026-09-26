@@ -1,6 +1,6 @@
 import type {PreparedTriangle} from './contracts.mts';
 import sharp from 'sharp';
-import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
+import { missingCoverageColor } from '@cssearth/bake/raster';
 import { dotN as dot } from '@cssearth/core';
 
 /** An orthographic, full-phase context image from the same prepared surface

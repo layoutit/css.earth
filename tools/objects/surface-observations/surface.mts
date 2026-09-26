@@ -3,7 +3,7 @@ import { cross3 as cross } from '@cssearth/core';
 import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.mts';
-import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
+import { missingCoverageColor } from '@cssearth/bake/raster';
 import { edgeWeights, finestOnSurface, fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
 import { qualifiedFace } from './geometry.mts';
 import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '../color-transfer.mts';

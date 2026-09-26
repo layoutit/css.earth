@@ -4,11 +4,17 @@
     "types": [
       "node"
     ],
-    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-bake-node.tsbuildinfo"
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-bake-node.tsbuildinfo",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ]
   },
   "include": [
     "src/volume/node",
-    "src/photometry"
+    "src/photometry",
+    "src/raster"
   ],
   "exclude": [
     "src/**/*.test.ts"

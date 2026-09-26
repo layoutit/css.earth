@@ -2,9 +2,9 @@ import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { interiorLayer, interiorCorePoleAtlas, interiorSection, shadeInteriorOuter, orientLatitudeBands, polarTile } from '@cssearth/objects';
-import { RASTER_DENSITY, type RasterRecipe, type InteriorRecipe, type StructureSource } from './config.js';
-import { raster, readRgba, assetPath, outputName } from './io.js';
-import { writeLossyWebp } from './lossy-lane.js';
+import { RASTER_DENSITY, type RasterRecipe, type InteriorRecipe, type StructureSource } from './config.ts';
+import { raster, readRgba, assetPath, outputName } from './io.ts';
+import { writeLossyWebp } from './lossy-lane.ts';
 function structureSource(value: unknown): StructureSource {
     if (typeof value !== 'object' || value === null)
         throw new TypeError('Interior source must be an object.');

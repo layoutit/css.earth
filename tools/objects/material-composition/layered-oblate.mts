@@ -131,7 +131,7 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   const PREPARED_RING_SOURCE = preparedInputs.ringSource;
   const PREPARED_RING_GROUPS = preparedInputs.ringGroups;
   const PREPARED_MAIN_RING_PLATES = preparedInputs.ringPlates;
-  // The globe's limb: the published photometric models of its map (tools/photometry/limb.mts). The overlay's reference
+  // The globe's limb: the published photometric models of its map (packages/bake/src/photometry/limb.ts). The overlay's reference
   // colour is measured from the prepared surface once it is written.
   const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
   let limbReference: Channels<number> | undefined;

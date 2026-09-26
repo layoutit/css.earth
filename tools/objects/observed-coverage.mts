@@ -1,7 +1,7 @@
 import type {ObservedRgb} from './giant-observations/polar-continuation.mts';
 export interface CoveredRgb extends ObservedRgb {missing: Uint8Array;}
 export interface MeasuredPolarOptions {projection: 'latitude-linear' | 'orthographic'; boundaryLatitudeDegrees: number; overlap?: number; alphaOpaqueRadius?: number; alphaTransparentRadius?: number;}
-import { blackFillCoverage, paintMissingCoverage } from '../../src/platform/prepare-missing-coverage.mts';
+import { blackFillCoverage, paintMissingCoverage } from '@cssearth/bake/raster';
 
 /** Conservative coverage for display maps with opaque, exact-zero polar fill.
  * Isolated black terrain and every nonzero sample remain observations. */

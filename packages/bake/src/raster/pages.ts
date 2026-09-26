@@ -1,4 +1,4 @@
-import { outputName } from './io.js';
+import { outputName } from './io.ts';
 
 /** Chromium refuses to decode one image of more than 64 MP (256 MB of RGBA). Measured in headless Chromium on
  * 2026-09-24: a 14336 × 4000 WebP decodes and a 14336 × 5000 one fails, as do Triton's 157 MP and Charon's 125 MP

@@ -1,7 +1,7 @@
 import { applyLinearTint } from '../color-transfer.mts';
 import { isArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import {basename} from 'node:path';
-import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
+import { writeLossyWebp } from '@cssearth/bake/raster';
 import type {WebpOptions} from 'sharp';
 import type {RasterInfo} from '../observation/raster.mts';
 import type {PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInput, ResizeKernel} from './asset-contract.mts';
@@ -449,7 +449,7 @@ function renderMaterialFrame({
       const hit = intersectEllipsoid(origin, view);
       if (!hit) continue;
       if (role === "lighting") {
-        // The published limb law relative to the flood-lit disc centre (tools/photometry/limb.mts); nothing authored.
+        // The published limb law relative to the flood-lit disc centre (packages/bake/src/photometry/limb.ts); nothing authored.
         const { incidence, emission, phase } = scatteringAngles(hit.normal, objectLight, view, emissionFloor);
         const [red, green, blue, alpha] = limbOverlay(limbFactors(limbModel.law, incidence, emission, phase), limbModel.reference);
         rgba[offset] = Math.round(red);

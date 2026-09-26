@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { encodeLossyWebp, LOSSY_WEBP } from '../../src/preparation/raster/lossy-lane.ts';
+import { encodeLossyWebp, LOSSY_WEBP } from '@cssearth/bake/raster';
 
 /**
  * Prepares the published imagery that stands in for a facility: photographs,

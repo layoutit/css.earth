@@ -1,15 +1,15 @@
-import { RASTER_DENSITY, type AtmosphereRecipe } from './config.js';
-import { raster, assetPath } from './io.js';
-import { limbFactors, limbOverlay, scatteringAngles, silhouetteColourWeight, srgbToLinear, linearToSrgb, loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '@cssearth/bake/photometry';
-import type { PreparedLimb } from '../../renderers/css/preparation/materials/lighting.js';
+import { RASTER_DENSITY, type AtmosphereRecipe } from './config.ts';
+import { raster, assetPath } from './io.ts';
+import { limbFactors, limbOverlay, scatteringAngles, silhouetteColourWeight, srgbToLinear, linearToSrgb, loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '../photometry/index.ts';
+import type { PreparedLimb } from './lighting.ts';
 
 /**
  * A body with an atmosphere, frame by frame: the disc lit by the body's published photometric models and, outside it,
  * the halo from its PSG limb profile when the recipe names one, from the visible edge outward, lit where the tangent point faces the Sun
- * (tools/photometry). Three atlases share the frames:
+ * (../photometry). Three atlases share the frames:
  * - material: disc law and halo, drawn over the visible map;
  * - observation: the same, drawn over the false-colour lenses. The disc law of Venus and Mars is grey or nearly so
- *   (tools/photometry/limb.mts), so it does not tint their false colours;
+ *   (packages/bake/src/photometry/limb.ts), so it does not tint their false colours;
  * - lighting: the disc law alone.
  * The last frame is the shadowless flood frame (light along the view).
  */

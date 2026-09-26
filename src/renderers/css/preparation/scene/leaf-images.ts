@@ -1,6 +1,5 @@
-import type { RasterRecipe } from '../../../../preparation/raster/config.js';
-import { RASTER_DENSITY } from '../../../../preparation/raster/config.js';
-import { RASTER_LEVEL_FACTORS, rasterPageName, rasterPagePlan } from '../../../../preparation/raster/pages.js';
+import type { RasterRecipe } from '@cssearth/bake/raster';
+import { RASTER_DENSITY, RASTER_LEVEL_FACTORS, rasterPageName, rasterPagePlan } from '@cssearth/bake/raster';
 import type { GeometryProfile } from './profile.js';
 import type { LeafImagePixels } from './projector.js';
 

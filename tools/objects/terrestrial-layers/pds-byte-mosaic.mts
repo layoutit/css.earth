@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import { pds3Keyword } from '@cssearth/telescope';
-import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { blackFillCoverage } from '@cssearth/bake/raster';
 
 // PDS3 byte images carry their projection and validity in the attached label.
 // This reader deliberately supports only unrotated, planetocentric cylindrical grids.

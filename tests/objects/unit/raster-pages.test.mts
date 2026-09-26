@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { RASTER_DECODE_LIMIT_PIXELS, RASTER_PAGE_PIXELS, packedRasterSize, rasterPageName, rasterPagePlan } from '../../../src/preparation/raster/pages.ts';
+import { RASTER_DECODE_LIMIT_PIXELS, RASTER_PAGE_PIXELS, packedRasterSize, rasterPageName, rasterPagePlan } from '@cssearth/bake/raster';
 
 const surfaces = (scales: readonly number[]) => scales.map((resolutionScale, index) => ({ id: `lens-${index}`, output: 'body-{id}{suffix}.webp', resolutionScale }));
 

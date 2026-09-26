@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
-import { detectMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { detectMissingCoverage } from '@cssearth/bake/raster';
 import { isRecord } from '@cssearth/core';
 
 const DEGREE = Math.PI / 180;

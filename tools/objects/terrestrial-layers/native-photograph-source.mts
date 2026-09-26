@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { blackFillCoverage } from '@cssearth/bake/raster';
 import { readFitsPrimary } from '@cssearth/fits';
 import { numericRaster, numericRasterBands, parseByteObservationPolicy, parseFitsPolicy, parseFloatObservationPolicy,
   parseGeoImageEntry, parseIsisObservationPolicy, parseMaskedObservationPolicy, requireWrappedLongitudeSpan } from './source-records.mts';

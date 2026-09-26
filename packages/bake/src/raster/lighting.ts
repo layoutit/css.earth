@@ -3,13 +3,13 @@ import { copyFile } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { lightingFrame, type LambertRasterConfig } from '@cssearth/objects';
-import { limbSphereFrame, type Channels, type LimbLaw } from '@cssearth/bake/photometry';
-import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from '../../../../preparation/raster/config.js';
-import { raster, hashFile, outputName } from '../../../../preparation/raster/io.js';
-import { LIGHTING_BANK_ROOT } from '../../../../preparation/raster/lighting-banks.js';
+import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/index.ts';
+import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from './config.ts';
+import { raster, hashFile, outputName } from './io.ts';
+import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 /** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (tools/objects/thread-pool.ts). */
 export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
-/** A body's published limb: its models and the overlay's reference colour (tools/photometry/limb.mts). */
+/** A body's published limb: its models and the overlay's reference colour (packages/bake/src/photometry/limb.ts). */
 export interface PreparedLimb { readonly law: LimbLaw; readonly reference: Channels<number>; readonly referenceSource: string; readonly polarToEquatorial: number }
 
 /** One frame of the bank: the published limb law when the body has one, otherwise the shared bank's authored sphere law. */

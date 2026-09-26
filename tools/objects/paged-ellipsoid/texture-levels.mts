@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import { readFile, mkdir, writeFile, rm } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { requireSurfacePages, surfaceBankInventory } from './surface-banks.mts';
-import { encodeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
+import { encodeLossyWebp } from '@cssearth/bake/raster';
 
 /** Whether a WebP file is lossless: its image data is a VP8L chunk. */
 function losslessWebp(bytes: Buffer): boolean {

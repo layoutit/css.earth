@@ -7,7 +7,7 @@ import { inventoryAssets } from '../../../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../../../assets/setup.mts';
 import { requireRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
-import { parseRasterRecipe, prepareRasterAssets } from '../../../../src/preparation/raster/index.ts';
+import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '../../../../src/renderers/css/preparation/scene/profile.ts';
 import { prepareScientificNavigation } from '../../terrestrial-layers/scientific-focus.mts';

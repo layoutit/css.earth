@@ -3,9 +3,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
-import { loadNativeSourcePoleSampler } from './surfaces.js';
-import { parseRasterRecipe, prepareRasterAssets } from './index.js';
-import { loadNativeObservationPoleSampler, parseObservationLens } from '../../../tools/objects/observation/raster.mts';
+import { loadNativeSourcePoleSampler } from './surfaces.ts';
+import { parseRasterRecipe, prepareRasterAssets } from './assets.ts';
+import { loadNativeObservationPoleSampler, parseObservationLens } from '../../../../tools/objects/observation/raster.mts';
 
 describe('native source pole sampling', () => {
     it('packs a lower-resolution surface without changing the shared layout or pole dimensions', async () => {

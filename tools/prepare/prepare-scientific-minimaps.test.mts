@@ -7,7 +7,7 @@ import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import sharp, { type OutputInfo } from 'sharp';
 import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
-import {DECORATIVE_WEBP} from '../../src/preparation/raster/lossy-lane.ts';
+import {DECORATIVE_WEBP} from '@cssearth/bake/raster';
 
 const colors=[[231,21,41],[13,211,31],[82,84,82]];
 async function directories(t: TestContext) {

@@ -8,7 +8,7 @@ import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { encodeLossyWebp } from '../../src/preparation/raster/lossy-lane.ts';
+import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory } from '../../src/platform/runtime-asset-closure.mts';

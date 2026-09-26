@@ -6,7 +6,7 @@ const test = sourceTest();
 import sharp from 'sharp';
 import { parsePdsPlanetocentricShape } from './obj-shape.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
-import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { paintMissingCoverage } from '@cssearth/bake/raster';
 
 const table = `6 8
 -90 0 1 3

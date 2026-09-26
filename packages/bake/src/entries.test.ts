@@ -30,16 +30,35 @@ it('the main volume entry stays host-neutral: only volume/node imports Node buil
   expect(offenders).toEqual([]);
 });
 
-it('topics do not import each other sideways, the application, or another package\'s sources', async () => {
+/** The topics a topic may import, always through that topic's own `index.ts`: a lower layer, never a peer or a layer above.
+ * A topic missing here imports no other topic. */
+const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
+  raster: ['photometry'],
+};
+
+it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {
   const offenders: string[] = [];
   for (const path of await sources(source)) {
     const name = relative(source, path).replaceAll('\\', '/'), topic = name.split('/')[0]!, text = await readFile(path, 'utf8');
     for (const specifier of specifiers(text)) {
       if (specifier.startsWith('@cssearth/bake')) offenders.push(`${name} -> ${specifier}`);
       if (!specifier.startsWith('.')) continue;
-      const target = relative(source, join(path, '..', specifier)).replaceAll('\\', '/');
-      if (target.startsWith('..') || target.split('/')[0] !== topic) offenders.push(`${name} -> ${specifier}`);
+      const target = relative(source, join(path, '..', specifier)).replaceAll('\\', '/'), [targetTopic, ...rest] = target.split('/');
+      if (target.startsWith('..')) offenders.push(`${name} -> ${specifier}`);
+      else if (targetTopic !== topic && !(LOWER_TOPICS[topic]?.includes(targetTopic!) && rest.join('/') === 'index.ts')) offenders.push(`${name} -> ${specifier}`);
     }
   }
   expect(offenders).toEqual([]);
+});
+
+it('the declared topic order has no cycle', () => {
+  const visiting = new Set<string>(), done = new Set<string>();
+  const visit = (topic: string, path: readonly string[]) => {
+    if (done.has(topic)) return;
+    if (visiting.has(topic)) throw new TypeError(`Topic cycle: ${[...path, topic].join(' -> ')}`);
+    visiting.add(topic);
+    for (const lower of LOWER_TOPICS[topic] ?? []) visit(lower, [...path, topic]);
+    visiting.delete(topic); done.add(topic);
+  };
+  for (const topic of Object.keys(LOWER_TOPICS)) visit(topic, []);
 });

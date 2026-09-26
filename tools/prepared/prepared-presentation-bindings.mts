@@ -1,5 +1,5 @@
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.mts';
-import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../../src/platform/prepare-missing-coverage.mts';
+import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '@cssearth/bake/raster';
 import { isRecord } from '@cssearth/core';
 import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';

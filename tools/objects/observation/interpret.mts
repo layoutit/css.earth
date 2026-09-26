@@ -7,13 +7,11 @@ import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '.
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { readRgba } from '../../../src/preparation/raster/io.ts';
-import type { ObservationInterpretation, InterpretedSurface } from '../../../src/preparation/raster/index.js';
-import type { RasterRecipe } from '../../../src/preparation/raster/index.js';
+import { readRgba, paintMissingCoverage } from '@cssearth/bake/raster';
+import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '@cssearth/bake/raster';
 import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-synoptic.mts';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-mesh.mts';

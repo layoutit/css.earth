@@ -11,7 +11,7 @@ function validFlags(flags: ArrayLike<number>, allowed: readonly number[]) {
   return true;
 }
 import sharp from 'sharp';
-import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+import { paintMissingCoverage } from '@cssearth/bake/raster';
 
 /** Map the archive's categorical vertex flags, with nearest-grid sampling.
  * Colours are an authored legend, never a surface photograph or albedo map. */

@@ -39,7 +39,7 @@ import {
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { optimizePreparedQ75Webp } from "../prepared/prepared-webp.mts";
-import { encodeLossyWebp } from '../../src/preparation/raster/lossy-lane.ts';
+import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
 import { authoredObject } from '../sources/authored-object.mts';
 
