@@ -1986,6 +1986,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   .object-information-panel[data-card-view="overview"] > [data-information-panel="factsheet"] { grid-area: facts; margin-top: 0; }
   .object-information-panel[data-card-view="overview"] > [data-information-panel="spectrum"] { grid-area: spectrum; }
   .object-information-panel[data-card-view="overview"] > [data-information-panel="moons"] { grid-area: moons; }
+  .object-sidebar .object-information-panel[data-card-subject="satellite-system"]:not([hidden]) { display: block; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }
 
   /* Moons close the sheet at full width, in columns. */

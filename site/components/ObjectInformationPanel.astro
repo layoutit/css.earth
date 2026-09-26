@@ -2,12 +2,14 @@
 import type { Props } from "../object-shell-types";
 import ObjectBreadcrumbs from "./ObjectBreadcrumbs.astro";
 import BodyOverview from "./BodyOverview.astro";
+import SatelliteSystemCard from './SatelliteSystemCard.astro';
 import { orderScientificCharts } from "../scientific-chart-order.mts";
 import ObjectCard from "./ObjectCard.astro";
 import ObjectCardHeader from "./ObjectCardHeader.astro";
 import ObjectFactsheet from "./ObjectFactsheet.astro";
 import SystemList from "./SystemList.astro";
 import { prepareBodyRelations } from "../prepare-body-moons.mts";
+import { satelliteSystemFromUrl } from '../navigation/navigation-scope.mts';
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetLenses from "./DatasetLenses.astro";
 import InformationTabs from './InformationTabs.astro';
@@ -20,7 +22,9 @@ const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
 
-<ObjectCard class="object-information-panel">
+<ObjectCard class="object-information-panel" data-card-subject={satelliteSystemFromUrl(Astro.url) ? 'satellite-system' : 'body'}
+  data-card-view={satelliteSystemFromUrl(Astro.url) ? 'overview' : undefined}>
+  <SatelliteSystemCard hostId={objectId} />
   <BodyOverview {objectId} {title} {introduction} {facts} {moreFacts} />
       {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
       <ObjectCardHeader {objectId} heading={false} {title} {introduction}>

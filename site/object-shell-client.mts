@@ -40,7 +40,8 @@ export function mountObjectShell({
   let contentLifetime: SceneLifetime | null = null;
   let minimapController: ReturnType<typeof createSurfaceMinimap>;
   let viewReadout: ReturnType<typeof createViewReadout>;
-  let navigationTransition: (ShellNavigationTransition & { cardView: 'detail' | 'overview' | null }) | null = null;
+  let navigationTransition: (ShellNavigationTransition & { cardView: 'detail' | 'overview' | null;
+    cardSubject: 'body' | 'satellite-system' | null }) | null = null;
   let camera: ShellCamera | null = null;
   let unsubscribeCamera: (() => void) | null = null;
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
@@ -77,11 +78,13 @@ export function mountObjectShell({
   function updateBodyCard(world = camera?.navigation?.capture()) {
     if (coasting) return;
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
+    const subject = navigationTransition?.cardSubject ?? (readSelection().kind === 'satellite-system' ? 'satellite-system' : 'body');
     const previous = information?.dataset.cardView;
-    const view = navigationTransition?.cardView ?? bodyCardViewAtCamera(world, camera?.navigation?.frame,
+    const view = subject === 'satellite-system' ? 'overview' : navigationTransition?.cardView ?? bodyCardViewAtCamera(world, camera?.navigation?.frame,
       camera?.navigation?.optics?.(), objectId,
       previous === 'detail' || previous === 'overview' ? previous : undefined);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
+    if (information && information.dataset.cardSubject !== subject) information.dataset.cardSubject = subject;
   }
   function presentSelection() {
     if (lifetime.disposed) return;
@@ -168,12 +171,13 @@ export function mountObjectShell({
     const transition: NonNullable<typeof navigationTransition> = {
       // Classify the endpoint once; intermediate flight poses must not toggle
       // the destination's retained overview/detail card.
-      cardView: target.kind === 'object' ? (target.targetWorldCamera
+      cardView: target.kind === 'satellite-system' ? 'overview' : target.kind === 'object' ? (target.targetWorldCamera
         ? bodyCardViewAtCamera(target.targetWorldCamera, target.object.worldFrame, camera?.navigation?.optics?.(), target.object.id)
         : 'detail') : null,
+      cardSubject: target.kind === 'overview' ? null : target.kind === 'satellite-system' ? 'satellite-system' : 'body',
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
-        const preserveSidebar = content !== undefined && target.kind === 'object' && target.object.id === content.id;
+        const preserveSidebar = content !== undefined && target.kind !== 'overview' && target.object.id === content.id;
         const keep = content ? preserveSidebar : (subject.kind === 'overview') === (target.kind === 'overview');
         // Invalidate pending fragment callbacks before committing or restoring DOM.
         arrived = true;
@@ -195,7 +199,8 @@ export function mountObjectShell({
       } else {
         const object = target.object;
         sheet.showSelection();
-        restoreBrowser = objectBrowser.previewSelection({ kind: 'object', objectId: object.id });
+        restoreBrowser = objectBrowser.previewSelection(target.kind === 'satellite-system'
+          ? { kind: 'satellite-system', hostId: object.id } : { kind: 'object', objectId: object.id });
         if (object.id !== objectId) {
           const panel = requiredElement(drawer, '.object-information-panel');
           const previous = [...panel.childNodes], previousBusy = panel.ariaBusy;
