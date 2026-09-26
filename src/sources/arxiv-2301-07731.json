@@ -1,0 +1,34 @@
+{
+  "id": "arxiv-2301-07731",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Krenn et al. (2023): The geometric albedo of the hot Jupiter HD 189733b measured with CHEOPS",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202245016"
+    },
+    {
+      "type": "arXiv",
+      "value": "2301.07731"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2301.07731",
+      "label": "Astronomy & Astrophysics"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2301.07731",
+      "checkedOn": "2026-09-26",
+      "locator": "Abstract and section 3: geometric albedo 0.076 +/- 0.016 in the CHEOPS 350-1100 nm passband, after subtracting the thermal contribution."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics",
+  "publicationDate": "2023"
+}

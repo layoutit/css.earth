@@ -65,6 +65,52 @@
       }
     },
     {
+      "id": "uncertainty",
+      "output": "hd-189733b-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-189733b-lens-{id}.webp",
+      "source": "science/lally-2025/output_E.npy",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "uncertainty",
+        "label": "Map uncertainty",
+        "format": "npy-dictionary-map",
+        "path": "science/lally-2025/output_E.npy",
+        "consumer": "lally-2025-map-uncertainty",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "values": [
+          "tmap_unc"
+        ],
+        "gridLayout": "pixel-centres",
+        "visibleLongitudes": {
+          "times": [
+            "time"
+          ],
+          "planet": "hd-189733b"
+        },
+        "minimum": 0,
+        "maximum": 10,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0",
+          "5",
+          "10"
+        ],
+        "description": "Standard deviation of sampled brightness-temperature maps, conditional on the authors’ chosen model. It excludes timing and model-choice uncertainty; neighbouring cells are correlated. The temperature map’s observed-longitude mask is retained.",
+        "title": "JWST MIRI · map uncertainty",
+        "sourceUrl": "https://zenodo.org/records/15103479"
+      }
+    },
+    {
       "id": "illustration",
       "output": "hd-189733b-surface-{id}{suffix}.webp",
       "thumbnail": "hd-189733b-lens-{id}.webp",

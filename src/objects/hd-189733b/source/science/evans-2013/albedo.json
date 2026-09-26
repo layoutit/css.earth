@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": {
+    "catalogueId": "arxiv-1307-3239",
+    "url": "https://arxiv.org/abs/1307.3239",
+    "locator": "Table 1, six-channel binning",
+    "checked": "2026-09-26"
+  },
+  "units": {
+    "x": "nm",
+    "y": "geometric albedo"
+  },
+  "uncertainty": "Published asymmetric 1-sigma uncertainties; albedo errors propagated in quadrature.",
+  "observation": "HST/STIS G430L, GO-13006, secondary eclipse on 2012-12-20.",
+  "processing": "Factual transcription. x is the flux-weighted central wavelength, not the bin midpoint. Signed estimates preserved. The alternative two-channel binning uses the same observation and is not plotted as independent data.",
+  "measurements": [
+    {
+      "xLow": 290,
+      "xHigh": 340,
+      "x": 325,
+      "y": 0.45,
+      "minus": 0.55,
+      "plus": 0.55
+    },
+    {
+      "xLow": 340,
+      "xHigh": 390,
+      "x": 368,
+      "y": 0.39,
+      "minus": 0.27,
+      "plus": 0.27
+    },
+    {
+      "xLow": 390,
+      "xHigh": 435,
+      "x": 416,
+      "y": 0.32,
+      "minus": 0.15,
+      "plus": 0.15
+    },
+    {
+      "xLow": 435,
+      "xHigh": 480,
+      "x": 459,
+      "y": 0.17,
+      "minus": 0.11,
+      "plus": 0.12
+    },
+    {
+      "xLow": 480,
+      "xHigh": 525,
+      "x": 502,
+      "y": -0.11,
+      "minus": 0.11,
+      "plus": 0.14
+    },
+    {
+      "xLow": 525,
+      "xHigh": 570,
+      "x": 547,
+      "y": 0.02,
+      "minus": 0.12,
+      "plus": 0.14
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": {
+    "catalogueId": "arxiv-2301-07731",
+    "url": "https://arxiv.org/abs/2301.07731",
+    "locator": "Abstract and section 3",
+    "checked": "2026-09-26"
+  },
+  "units": {
+    "x": "nm",
+    "y": "geometric albedo"
+  },
+  "uncertainty": "Published 1-sigma uncertainty.",
+  "observation": "Thirteen CHEOPS occultations in 2021; integrated 350-1100 nm passband.",
+  "processing": "Factual transcription of the thermally corrected broadband geometric albedo. No effective wavelength or wavelength-resolved spectrum is inferred.",
+  "measurements": [
+    {
+      "xLow": 350,
+      "xHigh": 1100,
+      "y": 0.076,
+      "minus": 0.016,
+      "plus": 0.016
+    }
+  ]
+}

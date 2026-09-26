@@ -32,6 +32,9 @@ const SCIENTIFIC_CHART_TITLES = Object.freeze({
   reflectance: PREPARED_SHELL_TITLES.reflectance,
   photometricPhase: Object.freeze({ label: "Photometric phase curve" }),
   temperaturePressure: PREPARED_SHELL_TITLES.temperaturePressure,
+  reflectedLight: Object.freeze({ label: "Reflected light" }),
+  broadbandAlbedo: Object.freeze({ label: "Broadband albedo" }),
+  transmissionSpectrum: Object.freeze({ label: "Transmission spectrum" }),
 });
 
 /** The display fields of a shell title. Its font pin and input hash are the generator's receipt and stay in its own module. */
@@ -42,9 +45,8 @@ function requiredShellTitle(key: string): { label: string; src: string; width: n
 }
 
 function requiredChartTitle(key: string) {
-  const title = key === "photometricPhase"
-    ? SCIENTIFIC_CHART_TITLES.photometricPhase
-    : titleMap[key];
+  const titles: Readonly<Record<string, { readonly label: string }>> = SCIENTIFIC_CHART_TITLES;
+  const title = titles[key] ?? titleMap[key];
   if (!title) throw new Error(`Unknown shared chart title key: ${key}`);
   return { label: title.label };
 }

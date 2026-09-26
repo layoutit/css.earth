@@ -202,6 +202,85 @@
           "commit": "5e05f0df6d52838e06568ddb969662f08fd2cedc"
         }
       ]
+    },
+    {
+      "id": "lally-2025-map-uncertainty",
+      "subject": "Uncertainty of the deposited MIRI brightness-temperature map",
+      "status": "included",
+      "finding": "tmap_unc is the standard deviation of sampled temperature maps in ThERESA at 74a8fec, not total systematic uncertainty. The 12 x 24 cells range from 3.2717 to 9.5537 K; 240 visible cells keep exactly the thermal map grid and coverage. Prepared on a 0-10 K viridis scale. Timing, model choice and the deposit/paper run ambiguity remain outside this conditional spread.",
+      "evidence": [
+        "https://zenodo.org/records/15103479",
+        "https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/theresa.py#L207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
+        }
+      ]
+    },
+    {
+      "id": "evans-2013-reflected-light",
+      "subject": "HST/STIS reflected-light geometric albedo",
+      "status": "included",
+      "finding": "Table 1 supplies six bins from 290 to 570 nm, their flux-weighted centres and asymmetric errors. All are plotted without interpolation, including the -0.11 fitted albedo. The two wider channels rebin the same eclipse, so they are not independent extra points. The uncovered 570-780 nm interval stays empty.",
+      "evidence": [
+        "https://arxiv.org/abs/1307.3239"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
+        }
+      ]
+    },
+    {
+      "id": "krenn-2023-cheops-band",
+      "subject": "CHEOPS integrated geometric albedo",
+      "status": "included",
+      "finding": "The thermally corrected geometric albedo is 0.076 +/- 0.016 in the 350-1100 nm CHEOPS band. It has a separate chart spanning the full passband, with no representative wavelength point or inferred spectral samples.",
+      "evidence": [
+        "https://arxiv.org/abs/2301.07731"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
+        }
+      ]
+    },
+    {
+      "id": "fu-2024-nircam-transmission",
+      "subject": "JWST NIRCam transmission spectrum and free-retrieval model",
+      "status": "included",
+      "finding": "Zenodo 11459715 version 1 is CC BY 4.0. The exact deposited spectrum has 139 bins with overlapping filter coverage; depth and errors are multiplied by 100 for percentage. The deposited free-retrieval median file has 863 rows and 224 finite samples in the plotted range. No fit, rebinning or inter-filter shift is added. The published retrieval identifies H2O, CO2, CO and H2S; these are atmospheric interpretations, not spatial gas maps.",
+      "evidence": [
+        "https://zenodo.org/records/11459715",
+        "https://www.nature.com/articles/s41586-024-07760-y"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
+        }
+      ]
+    },
+    {
+      "id": "visible-rgb-from-albedo",
+      "subject": "Observed visible-colour globe inferred from Hubble and CHEOPS albedos",
+      "status": "excluded",
+      "finding": "The six Hubble bins stop at 570 nm; CHEOPS adds one overlapping broadband integral. They do not determine a full visible spectrum or an RGB surface map. The measurements are shown as charts, while NASA Illustration retains its artist-concept qualification.",
+      "revisitWhen": "A sufficiently sampled, calibrated visible reflectance spectrum and a justified colour-conversion method are available.",
+      "evidence": [
+        "https://arxiv.org/abs/1307.3239",
+        "https://arxiv.org/abs/2301.07731"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
+        }
+      ]
     }
   ]
 }
