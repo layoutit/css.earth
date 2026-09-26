@@ -33,7 +33,8 @@ credits of the bodies in this overview.
 The [world navigation recipe](source/navigation/universe.json) samples every
 prepared orbit at 60 vertices, including open comet paths. This changes the
 display path, not the source positions or orbital model. A host detail view
-defers its moon path until the satellite system is opened or the moon is targeted.
+defers its satellites' paths until the satellite system is opened or a
+satellite is targeted.
 
 ## Evidence
 
