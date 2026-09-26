@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { parseImageLayerRecipe, prepareImageLayers } from '@cssearth/bake/image-layers';
-import { containedPath, sourceBytes } from '@cssearth/bake/volume/node';
+import { parseImageLayerRecipe, prepareImageLayers } from '../image-layers/index.ts';
+import { containedPath, sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import { prepareSurfaceShellObject } from '@cssearth/bake/shell';
-import { prepareDensityVolumeObject } from '@cssearth/bake/density';
-import { prepareStarsObject } from '@cssearth/bake/stars';
+import { prepareSurfaceShellObject } from '../shell/index.ts';
+import { prepareDensityVolumeObject } from '../density/index.ts';
+import { prepareStarsObject } from '../stars/index.ts';
 
 interface Resource { path: string; sha256: string; bytes: number }
 interface Descriptor {

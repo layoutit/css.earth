@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
 import { prepareImageLayers } from './prepare.ts';
 import { sha256 } from '@cssearth/core/node';
-import { assertImageLayerReplay, restoreEnvironmentObject } from '../../../../src/preparation/environment-images.ts';
+import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment/environment-images.ts';
 import { resizeRgbaLanczos3 } from './resize-rgba.ts';
 import { TEXELS_PER_CSS_PIXEL } from '../scene/index.ts';
 

@@ -69,6 +69,11 @@
       "import": "./dist/image-layers.js",
       "default": "./dist/image-layers.js"
     },
+    "./environment": {
+      "types": "./dist/environment.d.ts",
+      "import": "./dist/environment.js",
+      "default": "./dist/environment.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
