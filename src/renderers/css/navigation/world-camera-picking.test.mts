@@ -307,8 +307,14 @@ test('hover clears before a drag and on leaving the scene', () => {
   assert.equal(f.target.dataset.objectHovered, undefined);
   f.fire('pointerup', 30);
   f.fire('pointermove', 40, { buttons: 0 }); f.tick(41);
+  // The release coasts on inertia: the hovered body holds until the coast stops (motion-freezes-membership.md).
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  let time = 57;
+  for (; f.controls.stats().active && time < 60_000; time += 16) f.tick(time);
+  assert.equal(f.target.dataset.objectHovered, undefined, 'still coasting until the last frame');
+  f.tick(time);
   assert.equal(f.target.dataset.objectHovered, 'true');
-  f.fire('pointerleave', 50, { buttons: 0 });
+  f.fire('pointerleave', time + 10, { buttons: 0 });
   assert.equal(f.target.dataset.objectHovered, undefined);
   f.destroy();
 });

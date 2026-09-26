@@ -44,16 +44,22 @@ function mountTestContext({ annotationPriorities, annotationLandmarks, ...option
   return { ...layer, publish };
 }
 
+/** Every style, data-attribute and attribute write that changes a value, while a test records: the browser fast-path check. */
+let writeLog: string[] | null = null;
+const logWrite = (element: FakeElement, what: string, before: unknown, after: unknown) => {
+  if (writeLog && String(before ?? '') !== String(after ?? '')) writeLog.push(`${element.tagName} ${what}`);
+};
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
   styleWrites = 0;
   readonly style = new Proxy(Object.assign({ opacity: '' } as Record<string, string>, {
     getPropertyValue: (name: string) => this.style[name] ?? '',
     setProperty: (name: string, value: string) => { this.style[name] = value; },
-  }), { set: (target, key, value) => { this.styleWrites++; Reflect.set(target, key, value); return true; } });
+  }), { set: (target, key, value) => { this.styleWrites++; logWrite(this, `style.${String(key)}`, Reflect.get(target, key), value); Reflect.set(target, key, value); return true; } });
   attributeWrites = 0;
   readonly dataset: Record<string, string> = new Proxy({}, {
-    set: (target, key, value) => { this.attributeWrites++; Reflect.set(target, key, value); return true; },
+    set: (target, key, value) => { this.attributeWrites++; logWrite(this, `data-${String(key)}`, Reflect.get(target, key), value); Reflect.set(target, key, value); return true; },
+    deleteProperty: (target, key) => { logWrite(this, `data-${String(key)} removed`, Reflect.get(target, key), undefined); return Reflect.deleteProperty(target, key); },
   });
   parentNode: FakeElement | null = null;
   get parentElement(): FakeElement | null { return this.parentNode; }
@@ -69,7 +75,7 @@ class FakeElement extends EventTarget {
   measurements = 0;
   getBoundingClientRect() { this.measurements++; return { width: this.dataset.contextName.length * 6, height: 14 }; }
   readonly attributes = new Map<string, string>();
-  setAttribute(name: string, value: string): void { this.attributes.set(name, value); }
+  setAttribute(name: string, value: string): void { logWrite(this, `@${name}`, this.attributes.get(name), value); this.attributes.set(name, value); }
   getAttribute(name: string): string | null { return this.attributes.get(name) ?? null; }
   removeAttribute(name: string): void { this.attributes.delete(name); }
   append(...entries: FakeElement[]): void { for (const entry of entries) this.insertBefore(entry, null); }
@@ -2630,5 +2636,55 @@ test('inside the Solar System, moons without a circle stay inside their planet d
   expect(opacity('jupiter')).toBeGreaterThan(.9);
   expect(opacity('proxima-centauri')).toBeGreaterThan(0);
   expect(opacity('proxima-centauri')).toBeLessThanOrEqual(.3);
+  layer.destroy();
+});
+
+// The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, retained DOM changes only
+// transform and opacity, plus the orbit strokes' paint exception. Production shape: strokes, and a coast reports rotation.
+async function orbitEarth(options: { coast: boolean }) {
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 820; host.clientHeight = 1094; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, orbitRenderer: 'strokes',
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
+    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id,
+      labelImportance(object.classification, object.discovery.featured, object.discovery.orientationReference ?? 0)])) });
+  const earth = context.bodies.find(body => body.id === 'earth')!;
+  layer.selectObject('earth');
+  // Orbit at 40 Earth radii: identity orientation looks down -Z, so rotating offset and orientation together about Y
+  // keeps Earth centred while the Moon, Sun and planets sweep across the view.
+  const publish = (angle: number) => layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt, pose: {
+    positionM: [earth.positionM[0] + Math.sin(angle) * 40 * earth.radiusM, earth.positionM[1], earth.positionM[2] + Math.cos(angle) * 40 * earth.radiusM],
+    orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)] } },
+  { focalPixels: 900, principalOffsetPixels: [0, 0], widthPixels: 820, heightPixels: 1094 });
+  publish(0);
+  layer.setRotationActive(true);
+  if (options.coast) layer.setCoasting(true);
+  writeLog = [];
+  // A quarter turn: the view it ends on differs from the one it began with.
+  for (let frame = 1; frame <= 90; frame++) publish(frame * Math.PI / 2 / 90);
+  const writes = writeLog; writeLog = null;
+  return { layer, writes, publish, document };
+}
+const tally = (writes: readonly string[]) => Object.entries(writes.reduce<Record<string, number>>((all, write) => ({ ...all, [write]: (all[write] ?? 0) + 1 }), {}))
+  .sort((a, b) => b[1] - a[1]).map(([write, count]) => `${count}x ${write}`);
+
+test('a coast around Earth writes only transform and opacity, and the orbit strokes', async () => {
+  const { layer, writes, publish } = await orbitEarth({ coast: true });
+  const offPath = writes.filter(write => !/ style\.(transform|opacity|strokeOpacity)$| @points$/u.test(write));
+  expect(tally(offPath), `${writes.length} writes over a 90-frame coast; off the fast path`).toEqual([]);
+  // The coast stops: the membership it held lands.
+  writeLog = [];
+  layer.setCoasting(false);
+  layer.setRotationActive(false);
+  publish(Math.PI / 2);
+  const settled = writeLog; writeLog = null;
+  expect(settled.some(write => / style\.visibility$| data-contextLabelVisible$| data-contextIndicatorVisible$/u.test(write)), tally(settled).slice(0, 8).join(', ')).toBe(true);
+  layer.destroy();
+});
+
+test('a driven drag around Earth keeps revealing and retiring bodies', async () => {
+  const { layer, writes } = await orbitEarth({ coast: false });
+  expect(writes.filter(write => / style\.visibility$/u.test(write)).length).toBeGreaterThan(0);
   layer.destroy();
 });

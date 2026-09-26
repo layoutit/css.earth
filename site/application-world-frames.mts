@@ -33,6 +33,10 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
       if (lifetime.disposed) return;
       layer.setRotationActive(active);
     },
+    setCoasting(active: boolean) {
+      if (lifetime.disposed) return;
+      layer.setCoasting(active);
+    },
     setNavigationInFlight(active: boolean) {
       if (lifetime.disposed) return;
       layer.setNavigationInFlight(active);
