@@ -2,8 +2,9 @@
 // from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products, categorical geology and symbol overlays, published
 // exoplanet phase-curve and eclipse maps, observed colour rasters and their photometric composition, the records that describe
 // them, and the WISE atlas mosaic grid.
-// `npy-lonlat-grid` and `npy-pickle` each read a different NumPy array type, so the lonlat grid's stays internal; the published
-// phase-curve and eigenmap fits each define a brightness temperature, and the phase curve's is `phaseCurveBrightnessTemperature`.
+// `npy-lonlat-grid` and `npy-pickle` each define an `NpyArray` type; the pickle reader's is exported and the lonlat grid's
+// `NpyArray` stays internal. The published phase-curve and eigenmap fits each define a brightness temperature, and the phase
+// curve's is `phaseCurveBrightnessTemperature`.
 export * from './background-offsets.ts';
 export * from './categorical-geology.ts';
 export * from './contracts.ts';
