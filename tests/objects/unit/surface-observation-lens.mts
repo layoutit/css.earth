@@ -5,7 +5,7 @@ import { createSourceManifest } from '../../../src/platform/source-manifest.mts'
 import { requireArray, requireRecord } from '@cssearth/core';
 import { parseRadialLoaderConfig } from '../../../tools/objects/terrestrial-layers/radial-source.mts';
 import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-import { requireTerrainMesh } from '../../../tools/objects/terrestrial-layers/radial-mesh.mts';
+import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { loadSurfaceObservation } from '../../../tools/objects/surface-observations/index.mts';
 
 export async function loadLens(body: string, lensId: string, change: (recipe: Record<string, unknown>) => void = () => {}) {

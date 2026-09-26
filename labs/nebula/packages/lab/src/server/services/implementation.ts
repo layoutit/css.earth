@@ -31,9 +31,10 @@ export async function implementationPins(root: string, entries: readonly string[
       });
       // The volume contracts, fields and materials were the lab's volume-core package before they became
       // `@cssearth/bake/volume`, and the volume bake was volume-bake before `@cssearth/bake/volume/node`; the preparation
-      // topics (photometry, raster, scene, presentation) were relative modules under src/ and tools/. Each topic entry maps
-      // to its source index the same way.
-      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation|environment|image-layers|density|sky|shell|stars|volume-leaves)$/ }, args => {
+      // topics (photometry, raster, scene, presentation) were relative modules under src/ and tools/, and the object topics
+      // (`objects/color`, `objects/geometry`, `objects/cameras`) were relative modules under tools/objects/. Each topic entry
+      // maps to its source index the same way.
+      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation|environment|image-layers|density|sky|shell|stars|volume-leaves|objects\/(?:color|geometry|cameras))$/ }, args => {
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') };
       });

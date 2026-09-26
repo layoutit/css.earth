@@ -36,7 +36,8 @@
     "tools/prepare/prepare-navigation.mts",
     "tools/prepare/cli/prepare-navigation.mts",
     "tools/prepare/prepare-solar-geometry.mts",
-    "tools/objects/**"
+    "tools/objects/**",
+    "packages/bake/src/objects/**"
   ],
   "production": [
     ".github/workflows/nightly.yml", ".github/workflows/deploy.yml", ".github/ci-areas.json",

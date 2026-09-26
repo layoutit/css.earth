@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { sourceLoad, sourceTest } from '../../../../tests/objects/source-test.mts';
-import { srgbToLinear } from '../../color-transfer.mts';
+import { srgbToLinear } from '@cssearth/bake/objects/color';
 import { limbDarkeningPlate } from './stellar-photometric-color.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar-spot-figure.mts';
 

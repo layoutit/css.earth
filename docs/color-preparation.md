@@ -34,7 +34,7 @@ not a universal calibration for other bodies.
 
 ## Keep measured values until the display boundary
 
-The shared [color transfer](../tools/objects/color-transfer.mts) builds one
+The shared [color transfer](../packages/bake/src/objects/color/color-transfer.ts) builds one
 band-composite display per product. The route names the actual ordered bands and
 their quantity from what it reads, checked against native labels where the product
 has them, and the recipe declares only the common `displayRange`. Each route
@@ -199,7 +199,7 @@ smallest relative uncertainty and the longest wavelength on a tie, every row is 
 stated in the record. Below about 1,800 K a black body lies outside sRGB and is shown mixed with the least white that brings
 it inside, hue kept, which the lens says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
 colour instead of a white lamp: the gray's brightness with the host colour lens's chromaticity (`hostLitGray` in
-[color-transfer.mts](../tools/objects/color-transfer.mts)). `telescope new-object --from-archive` does both; `--thermal <id>...`
+[color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `--thermal <id>...`
 and `--host-light <id>...` give them to planets already in the tree.
 
 ![Lens thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
@@ -209,7 +209,7 @@ and `--host-light <id>...` give them to planets already in the tree.
 The star's catalogue swatch, minimap dot and navigation marker take the same colour
 ([stellar-spectra/author.mts](../tools/objects/source-authoring/stellar-spectra/author.mts)). A star with no usable
 spectrum keeps the star field's temperature fit at a cited effective temperature
-([star-catalogue-color.mts](../tools/objects/star-catalogue-color.mts)).
+([star-catalogue-color.ts](../packages/bake/src/objects/color/star-catalogue-color.ts)).
 
 **Cross-checks.** A colour record may name a second spectrum from a different instrument. Preparation records its colour
 beside the lens colour, and [object-package-consistency.test.mts](../tools/contract/object-package-consistency.test.mts) fails when

@@ -1,7 +1,7 @@
-import { applyLinearTint } from '../color-transfer.mts';
+import { applyLinearTint } from '@cssearth/bake/objects/color';
 import {parse, object, string, boolean} from '@cssearth/core/schema';
 import {radialMotionRecipe, type RadialMotionRecipe} from './radial-motion-recipe.mts';
-import type {ReadonlyVector3} from './ellipsoid.mts';
+import type {ReadonlyVector3} from '@cssearth/bake/objects/geometry';
 export const bodyRingShadow = object({model:string,edgeFeather:object({model:string,runtimeWork:boolean}),overlayTextureUrl:string,authority:string});
 export type RingMotionPoint = [number,number,number,string,number,boolean];
 import {readFile,mkdir} from 'node:fs/promises';
@@ -12,7 +12,7 @@ import {parseRadialLayerRecipe} from '../giant-layers/index.mts';
 import {sampleRadialProfile,rasterObservedRadialField, loadObservedProfile} from '../giant-layers/rings.mts';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {cropTransparentRgba,responsiveTransparentCrop} from './rgba.mts';
-import {normalizeVector,rotateX as rotateVectorX,rotateZ as rotateVectorZ} from './ellipsoid.mts';
+import {normalizeVector,rotateX as rotateVectorX,rotateZ as rotateVectorZ} from '@cssearth/bake/objects/geometry';
 /** Observed radial-profile sampling, seeded density tracers and ellipsoid penumbra. */
 export async function prepareRadialMotionAndShadow({sourceDirectory,publicDirectory,config: input,radialRecipe: radialInput}: {sourceDirectory: string; publicDirectory: string; config: unknown; radialRecipe: unknown}) {
  const config = parse(input, radialMotionRecipe, 'radial motion recipe');

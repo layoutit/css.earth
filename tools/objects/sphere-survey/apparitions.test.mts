@@ -3,7 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
+import { loadObjShape } from '@cssearth/bake/objects/geometry';
 import { apparitionLinks, bodyDirection, coveredShare, meshFaces, seenFaces, type FrameView } from './apparitions.mts';
 
 /** A 100 km sphere of 5,040 triangles, in kilometres like the survey releases. */

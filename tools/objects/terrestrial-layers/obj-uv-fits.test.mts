@@ -2,7 +2,7 @@ import { required } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { parseObjShape } from './obj-shape.mts';
+import { parseObjShape } from '@cssearth/bake/objects/geometry';
 import { parseObjTextureCoordinates, createObjUvFitsSampler, validateObjUvFits } from './obj-uv-fits.mts';
 
 // Independent two-layer geometry: a center ray can see multiple surfaces,

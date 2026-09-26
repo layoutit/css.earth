@@ -3,7 +3,7 @@ import { writeLossyWebp, missingCoverageColor } from '@cssearth/bake/raster';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
-import type { PreparedTriangle } from './contracts.mts';
+import type { PreparedTriangle } from '@cssearth/bake/objects/geometry';
 import { BASE_TILE } from '@layoutit/polycss';
 import { loadNativePhotograph } from './native-photograph-source.mts';
 

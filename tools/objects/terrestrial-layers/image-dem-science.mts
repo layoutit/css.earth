@@ -1,4 +1,4 @@
-import type {SourceMesh} from './contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import {parseDemScience} from './source-records.mts';
 import {shape,number} from '@cssearth/core';
 import { resolve } from 'node:path';

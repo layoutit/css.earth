@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parsePdsRadialTable } from './pds-radial-table.mts';
+import { parsePdsRadialTable } from '@cssearth/bake/objects/geometry';
 
 const profile = { latitudeStepDegrees: 90, longitudeStepDegrees: 90,
   metersPerUnit: 1000, longitudeDirection: 'east', expectedRecords: 15 };

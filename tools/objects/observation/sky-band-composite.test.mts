@@ -7,7 +7,7 @@ const test = sourceTest();
 import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '@cssearth/core/node';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
-import { encodeAsinhBands } from '../color-transfer.mts';
+import { encodeAsinhBands } from '@cssearth/bake/objects/color';
 import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
 import { gridWcs } from './wise-atlas-mosaic.mts';
 

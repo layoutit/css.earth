@@ -4,7 +4,7 @@
  * Correlation reads a 5-minus-31-pixel detail image only; original I/F is never changed. Disjoint checkerboard patches are
  * held out, and a camera is accepted when its held-out residuals stay within the criteria below.
  */
-import type {loadCameraShape} from './shape-camera-mosaic.mts';
+import type {loadCameraShape} from './shape-camera-mosaic.ts';
 
 export interface AlignmentImage {data:ArrayLike<number>;width:number;height:number}
 export interface AlignmentCamera {position:readonly number[];sun:readonly number[];ray(x:number,y:number):ArrayLike<number>;project(point:readonly number[]):readonly number[]|null}

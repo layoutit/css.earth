@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parseObjShape } from './obj-shape.mts';
+import { parseObjShape } from '@cssearth/bake/objects/geometry';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 const recipe = { maximumDistanceMeters: 2, rayOffsetMeters: .001, ambient: .2, diffuse: .8,
   floodLights: [{ direction: [0,0,1], weight: .8 }] };

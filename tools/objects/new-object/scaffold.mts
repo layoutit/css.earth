@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readStarTemperature, temperatureCatalogueColor } from '../star-catalogue-color.mts';
+import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { sphereProjection } from '../sphere-projection.mts';
 
 export const TODO = 'TODO(new-object)';

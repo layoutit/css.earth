@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseImageDem } from './image-dem.mts';
-import { inspectOpenSurface } from './open-surface.mts';
+import { inspectOpenSurface } from '@cssearth/bake/objects/geometry';
 
 const profile = { columns: 3, step: 1, xyTransform: [2, 0, 10, 0, -2, 20],
   zOffsetMeters: -5, expectedVertices: 8, expectedFaces: 4 };

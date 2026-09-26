@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { decodeEncounterFits } from '../terrestrial-layers/encounter-fits.mts';
 import { encounterCamera } from '../terrestrial-layers/encounter-camera.mts';
 import { validateEncounterControls } from '../terrestrial-layers/encounter-controls.mts';
-import { loadPdsPlateShape } from '../terrestrial-layers/obj-shape.mts';
+import { loadPdsPlateShape } from '@cssearth/bake/objects/geometry';
 import { fitImageControls } from './image-controls.mts';
 import type { ImageControlsFit } from './image-controls.mts';
 

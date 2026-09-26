@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from './source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
-import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetographicRowsToMeshLatitude} from '../../tools/objects/material-composition/ellipsoid.mts';
+import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
 import {polarQuad} from '../../tools/objects/material-composition/texture-geometry.mts';
 import {fitTextureGeometry} from '@cssearth/bake/scene';
 import {writeMaterialAtlasTile,sampleRgbaBilinear,sampleAlphaBilinear} from '../../tools/objects/material-composition/raster.mts';

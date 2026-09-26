@@ -1,4 +1,4 @@
-import { applyLinearTint } from '../color-transfer.mts';
+import { applyLinearTint } from '@cssearth/bake/objects/color';
 import { isArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import {basename} from 'node:path';
 import { writeLossyWebp } from '@cssearth/bake/raster';

@@ -10,7 +10,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseSpinState, spinOrientation, type SpinState } from './observer-camera.mts';
+import { parseSpinState, spinOrientation, type SpinState } from '@cssearth/bake/objects/cameras';
 import { readNpyHeader } from './npy-pickle.mts';
 
 type Matrix = readonly (readonly [number, number, number])[];

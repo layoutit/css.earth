@@ -1,4 +1,5 @@
-import type {SourceMesh,SymbolSegment,PreparedSymbolSegment} from './contracts.mts';
+import type { SymbolSegment, PreparedSymbolSegment } from './contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import {parseSymbols} from './source-records.mts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';

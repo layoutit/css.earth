@@ -1,5 +1,5 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
-import type {SourceMesh} from './contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import {parseMeshLighting} from './source-records.mts';
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 

@@ -20,7 +20,7 @@
  * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
  * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
- * (star-catalogue-color.mts). The package starts with the shape lens and stays off the map until a surface image is added.
+ * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape lens and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
  * tools/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/cli/prepare-object.mts <id> */
 import { resolve } from 'node:path';

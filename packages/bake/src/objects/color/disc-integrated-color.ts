@@ -2,8 +2,7 @@
 // each filter's effective wavelength, a piecewise-linear spectrum joins them, and the CIE 1931 observer under D65 turns
 // it into linear sRGB scaled so the V reflectance is the published geometric albedo. No map, terrain or variation is implied.
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { linearToSrgb } from '../color-transfer.mts';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
+import { linearToSrgb } from './color-transfer.ts';
 
 const BANDS = ['B', 'V', 'R', 'I'] as const;
 type Band = typeof BANDS[number];
@@ -98,9 +97,11 @@ export function discIntegratedColor(record: DiscColorRecord, colorMatching: Map<
   return { reflectance: points, linear, srgb: linear.map(value => Math.round(255 * linearToSrgb(value))) as [number, number, number] };
 }
 
-export async function loadDiscIntegratedColor(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, sourcePath: string) {
+/** `readColorMatching` returns the CIE 1931 2° colour-matching table; the host reads it from the shared reference bank. */
+export async function loadDiscIntegratedColor(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, sourcePath: string,
+  readColorMatching: () => Promise<Buffer>) {
   const record = parseDiscColorRecord(JSON.parse((await read(sourcePath)).toString('utf8')));
-  const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
+  const colorMatching = parseCieTable((await readColorMatching()).toString('utf8'), 3);
   const illuminant = parseCieTable((await read(requireString(science.illuminant, 'science.illuminant'))).toString('utf8'), 1);
   return discIntegratedColor(record, colorMatching, illuminant);
 }

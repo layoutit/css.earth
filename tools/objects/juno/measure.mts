@@ -22,7 +22,7 @@ import { productRecordPath, type ProductInput, type ProductRun, type ProductSoft
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
 import { numbers, utcToEt } from '@cssearth/spice';
-import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
+import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { decodeJunocam, refinableStrips, type JunocamGeometry } from '../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, type StripRefinementPolicy } from '../terrestrial-layers/strip-refinement.mts';
 import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';

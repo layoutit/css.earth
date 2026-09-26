@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
-import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
+import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
 import { decodeFitsImageMap } from '../terrestrial-layers/fits-image-map.mts';
 import { paintScienceSurface } from '../terrestrial-layers/scientific-raster.mts';
 import { readSurfaceGrid, surfaceLensMap, writeFitsImageMap } from './surface-lens.mts';

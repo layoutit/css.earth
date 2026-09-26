@@ -1,7 +1,7 @@
 import { array, boolean, choice, dictionary, nullable, number, optional, requireRecord, shape, text, type Decoder } from '@cssearth/core';
+import { meshDimensions, parseMeshProfile, parseSurfaceSampling, parseTransform } from '@cssearth/bake/objects/geometry';
 export const dimensions = {width:number,height:number};
 export const parseDimensions = shape(dimensions);
-export const parseTransform = shape({scale:number,offset:number});
 export const parseFloatMapGrid = shape({...dimensions,productId:text,dataSetId:text,targetName:text,pixelsPerDegree:number,
   referenceRadiusMeters:number,sampleProjectionOffset:number,lineProjectionOffset:number,projectionRotation:text,
   centerLongitudeWestDegrees:optional(number),longitudeRangeWest:optional(array(number)),
@@ -11,8 +11,6 @@ export const parseFloatMapGrid = shape({...dimensions,productId:text,dataSetId:t
 export const parseFloatMapLens = shape({path:text,labelPath:optional(text),grid:parseFloatMapGrid,sampling:optional(text),valueTransform:optional(parseTransform)});
 export const parseBytePolicy = shape({noData:optional(number),connectedEdge:optional(text)});
 export const parseImageEntry = shape({...dimensions,id:optional(text),path:text,projection:shape({referenceRadiusMeters:number})});
-export const parseRadialTableProfile = shape({latitudeStepDegrees:number,longitudeStepDegrees:number,metersPerUnit:number,
-  expectedRecords:number,columns:optional(array(text)),longitudeDirection:text,noDataRadius:optional(number)});
 export const parsePdsImagePolicy = shape({schema:text,format:text,sampling:text,datasetId:text,productId:text,productVersion:text,
   target:text,path:text,labelPath:text,sourceUnit:text,valueTransform:parseTransform,validRange:optional(array(number)),
   grid:shape({...dimensions,latitudeRange:array(number),longitudeRange:array(number),pixelsPerDegree:number,
@@ -23,17 +21,7 @@ export const parseScalarGridProfile = shape({...dimensions,member:text,pixelsPer
 export const parsePds4Policy = shape({kind:text,labelPath:text,lidvid:text,bands:array(number),wavelengthsNm:array(number),displayRange:array(number)});
 export const parseFitsPolicy = shape({bitpix:number,longitudeDirection:text,rowOrder:text,centerLongitude:number,noData:number,displayRange:array(number)});
 export const parseEncounterPolicy = shape({...dimensions,instrument:text,startTime:text,filter:text,target:text,residualPolicy:optional(text),detectorBorderPixels:optional(number)});
-export const meshDimensions = {metersPerUnit:number,expectedVertices:number,expectedFaces:number};
-export const meshProfileFields = {...meshDimensions,member:optional(text),compression:optional(text)};
-export const parseMeshProfile = shape(meshProfileFields);
-export const parsePlateProfile = shape({...meshProfileFields,indexBase:number,provenanceFlags:optional(text)});
-export const parseRadiusProfile = shape({...meshProfileFields,stepDegrees:number,longitudeDirection:text});
 export const parseImageDemProfile = shape({columns:number,step:number,xyTransform:array(number),zOffsetMeters:number,expectedVertices:number,expectedFaces:number});
-export const parseSurfaceSampling = shape({method:text,maximumDistanceMeters:number});
-export const parseSurfaceLens = shape({surfaceSampling:parseSurfaceSampling,valueTransform:optional(parseTransform)});
-export const parseShapeLens = shape({format:text,path:text,grid:parseMeshProfile,facetField:optional(requireRecord),
-  sampleGrid:optional(shape({width:optional(number),height:optional(number)})),coverage:optional(shape({path:text,member:text,field:text})),
-  surfaceSampling:optional(parseSurfaceSampling),valueTransform:optional(parseTransform)});
 export const parseMeshLighting = shape({maximumDistanceMeters:number,rayOffsetMeters:number,ambient:number,diffuse:number,
   uniformFlood:optional(boolean),floodLights:array(shape({direction:array(number),weight:number}))});
 
@@ -74,8 +62,6 @@ export const parseFacetProfile = shape(facetProfileFields);
 export const parseFacetLens = shape({path:text,minimum:number,maximum:number,...facetProfileFields});
 export const parseFacetSampler = shape({surfaceSampling:shape({maximumDistanceMeters:number}),valueTransform:optional(parseTransform)});
 export const parseTransferTerrain = shape({path:text,grid:shape({expectedFaces:number}),simplification:shape({method:text,maximumErrorMeters:number})});
-export const parseFacetField = shape({format:text,path:text,labelPath:text,field:text,target:text,sourceVersion:text,mapVersion:text,
-  facetOrder:optional(text),maximumCentroidResidualMeters:number,validity:text});
 export const parseScalarMapGrid = shape({...dimensions,stepDegrees:number,noData:number,latitudeFirst:number,latitudeStep:number,frame:text});
 export const parseAmbiguitySampling = shape({method:text,maximumDistanceMeters:number,ambiguityReference:shape({path:text,format:text,grid:parseMeshProfile})});
 export const parseScalarMapLens = shape({path:text,labelPath:text,datasetId:text,productId:text,grid:parseScalarMapGrid,sampling:text,
@@ -131,20 +117,6 @@ export const parseLlorriCamera = shape({...sipCameraFields,target:text,startTime
 export const archivedCameraFields = {schema:text,matrix:array(array(number)),rayMatrix:array(array(number)),positionKm:array(number),sunDirection:array(number)};
 export const parseArchivedCamera = shape(archivedCameraFields);
 export const parseReflectanceCamera = shape({...archivedCameraFields,...dimensions,target:text,startTime:text,filter:text,firstLine:number,firstSample:number});
-
-export const controlledCameraFields = {observerLatitude:number,observerWestLongitude:number,sunLatitude:number,sunWestLongitude:number,
-  rangeKm:number,northAzimuthDegrees:number,pixelAngleMicroradians:number,center:array(number)};
-export const parseControlledCamera = shape(controlledCameraFields);
-const partialControlledCameraFields = {observerLatitude:optional(number),observerWestLongitude:optional(number),sunLatitude:optional(number),sunWestLongitude:optional(number),
-  rangeKm:optional(number),northAzimuthDegrees:optional(number),pixelAngleMicroradians:optional(number),center:optional(array(number))};
-export const cameraFrameFields = {id:text,path:text,labelPath:optional(text),encoding:optional(text),allowFiniteSigned:optional(boolean),backgroundMaximum:optional(number),
-  coverageInsetPixels:optional(number),backgroundOffset:optional(number),...partialControlledCameraFields,
-  cameraCatalog:optional(shape({path:text,labelPath:text,instrumentPath:text,longitudeDirection:text,pixelOrigin:text,imageNumber:number})),
-  quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text})),
-  // An image reconstructed from interferometric visibilities: the epoch and band of those visibilities, and the merged file they were read from.
-  reconstruction:optional(shape({startTime:text,filter:text,visibilitiesPath:text}))};
-export const parseCameraFrame = shape(cameraFrameFields);
-export const parseCameraShape = shape({format:text,path:text,grid:requireRecord});
 
 export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumGain:number,samplesPerTriangle:optional(number)};
 export const parseLevelMatching = shape(levelMatchingFields);

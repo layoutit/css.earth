@@ -1,6 +1,6 @@
 import {parseImageDemProfile,decodeProfile} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
-import { createIndexedShape } from './obj-shape.mts';
+import { createIndexedShape } from '@cssearth/bake/objects/geometry';
 
 /** Released Cartesian elevation samples in an image plane. Missing rows remain
  * missing surface; connectivity never bridges a vacant grid cell. The explicit

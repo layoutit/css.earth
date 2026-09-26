@@ -12,7 +12,7 @@
  *    mid-time, beam and noise from the receipt;
  * 2. asks JPL Horizons where the body and the Sun were as seen from ALMA at that mid-time, and keeps the two responses
  *    beside the record as pinned inputs; a later run reads them instead of asking;
- * 3. computes the camera (observer-camera.mts) with the disc centre fitted on the image itself (body-map.mts fitDiscCentre);
+ * 3. computes the camera (`@cssearth/bake/objects/cameras`) with the disc centre fitted on the image itself (body-map.mts fitDiscCentre);
  * 4. projects each session onto the body and combines them, each counting most where the body faced the telescope, and
  *    writes the map as FITS where the record says, with the measurements that judge it in evidence/alma-thermal-maps.json.
  *

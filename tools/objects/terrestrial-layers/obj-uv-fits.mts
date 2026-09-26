@@ -1,6 +1,6 @@
-import { parseTransform } from './source-records.mts';
+import { parseTransform, closestTrianglePoint } from '@cssearth/bake/objects/geometry';
 import { shape, text, number, boolean, optional } from '@cssearth/core';
-import type { SourceMesh, SurfaceHit, ClosestSurfacePoint } from './contracts.mts';
+import type { SourceMesh, SurfaceHit, ClosestSurfacePoint } from '@cssearth/bake/objects/geometry';
 const parseUvSampler = shape({grid:shape({bitpix:number,width:number,height:number,flipV:boolean,noData:optional(number)}),sampling:text,surfaceSampling:shape({method:text,maximumDistanceMeters:number}),valueTransform:optional(parseTransform)});
 const parseUvRecipe = shape({meshPath:text,labelPath:text,...{grid:shape({bitpix:number,width:number,height:number,flipV:boolean,noData:optional(number)}),sampling:text,surfaceSampling:shape({method:text,maximumDistanceMeters:number})},additionalGrids:optional(value=>value),relief:optional(value=>value)});
 const parseUvTerrain = shape({path:text,format:text,simplification:shape({method:text,maximumErrorMeters:number})});
@@ -8,7 +8,6 @@ interface UvFits {bitpix:number;width:number;height:number;values:ArrayLike<numb
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsPrimary } from '@cssearth/fits';
-import { closestTrianglePoint } from './obj-shape.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');
 

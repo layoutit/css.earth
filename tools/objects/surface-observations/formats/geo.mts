@@ -22,7 +22,7 @@ import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT,
 import { refineCameraByLimb } from '../../terrestrial-layers/limb-refinement.mts';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '../../../kernel-banks/kernel-bank.mts';
-import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
+import { bandColorDisplay, type BandColorDisplay } from '@cssearth/bake/objects/color';
 import { fittedCamera, matrixCamera } from '../cameras.mts';
 import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';

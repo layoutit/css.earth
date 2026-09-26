@@ -10,7 +10,8 @@ photometric models), never sideways. The first topic was the volume bake, which 
 (`src/preparation/raster/`, the renderer's lighting bank and `src/platform/prepare-missing-coverage.mts`) followed, then the
 renderer's scene and presentation compilers with `src/platform/projective-surface-raster.mts`,
 `src/platform/prepare-solid-body-surface.mts` and the `tools/prepared` node-tree libraries, and then the star, shell, sky,
-density-volume, image-layer and environment bakes of `src/preparation/` with the renderer's remaining compilers.
+density-volume, image-layer and environment bakes of `src/preparation/` with the renderer's remaining compilers. The shared
+object libraries of `tools/objects/` (colour transfers, shape geometry and cameras) followed as `@cssearth/bake/objects/<topic>`.
 
 | entry | what it holds | host |
 |---|---|---|
@@ -33,6 +34,9 @@ density-volume, image-layer and environment bakes of `src/preparation/` with the
 | `@cssearth/bake/density` | density-volume acquisition and KTX2 encoding, column-depth spreading, fixed discs, slice atlases and their retirement, the density-volume preparation, lens-bank promotion | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/image-layers` | image-layer recipes, the diffuse Lanczos3 resampler, retained image layers as PolyCSS volume leaves | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/environment` | the replay of an environment object's missing runtime images through the bakes above | Node only (`node:*`) |
+| `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
+| `@cssearth/bake/objects/geometry` | shape models and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
+| `@cssearth/bake/objects/cameras` | observer-computed cameras from an ephemeris and a spin state or IAU pole model | Node only |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -48,6 +52,7 @@ packages/bake/
 ├── src/presentation/ the CSS presentation compilers: `@cssearth/bake/presentation`
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/
 │                  the volume compilers and the object bakes: one entry each
+├── src/objects/   color/, geometry/, cameras/: the shared object libraries, one entry each (`objects/<topic>`)
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -67,6 +72,8 @@ The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `to
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,
 shell, sky, density-volume and image-layer bakes, which read restored sources.
+The object libraries' tests stay beside the pipelines in `tools/objects/` (`node --test`), since they read body sources, kernel
+banks and oracle fixtures through the repository's test helpers; they import the entries.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 

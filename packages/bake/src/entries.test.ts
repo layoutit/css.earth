@@ -45,19 +45,44 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'environment': ['image-layers', 'shell', 'stars', 'density', 'volume'],
 };
 
-it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {
+/** A topic is a top-level folder of `src/`, except `objects/`, whose every folder is a topic of its own (`objects/color`,
+ * published as `@cssearth/bake/objects/color`). Returns the topic and the path inside it. */
+function topicOf(name: string): readonly [string, string] {
+  const parts = name.split('/'), depth = parts[0] === 'objects' ? 2 : 1;
+  return [parts.slice(0, depth).join('/'), parts.slice(depth).join('/')];
+}
+
+/** The imports of `files` (source paths under `src/` → text) that break the topic order. */
+function topicOffenders(files: ReadonlyMap<string, string>): string[] {
   const offenders: string[] = [];
-  for (const path of await sources(source)) {
-    const name = relative(source, path).replaceAll('\\', '/'), topic = name.split('/')[0]!, text = await readFile(path, 'utf8');
+  for (const [name, text] of files) {
+    const [topic] = topicOf(name);
     for (const specifier of specifiers(text)) {
       if (specifier.startsWith('@cssearth/bake')) offenders.push(`${name} -> ${specifier}`);
       if (!specifier.startsWith('.')) continue;
-      const target = relative(source, join(path, '..', specifier)).replaceAll('\\', '/'), [targetTopic, ...rest] = target.split('/');
+      const target = relative(source, join(source, name, '..', specifier)).replaceAll('\\', '/'), [targetTopic, rest] = topicOf(target);
       if (target.startsWith('..')) offenders.push(`${name} -> ${specifier}`);
-      else if (targetTopic !== topic && !(LOWER_TOPICS[topic]?.includes(targetTopic!) && ['index.ts', 'node/index.ts'].includes(rest.join('/')))) offenders.push(`${name} -> ${specifier}`);
+      else if (targetTopic !== topic && !(LOWER_TOPICS[topic]?.includes(targetTopic) && ['index.ts', 'node/index.ts'].includes(rest))) offenders.push(`${name} -> ${specifier}`);
     }
   }
-  expect(offenders).toEqual([]);
+  return offenders;
+}
+
+it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {
+  const files = new Map<string, string>();
+  for (const path of await sources(source)) files.set(relative(source, path).replaceAll('\\', '/'), await readFile(path, 'utf8'));
+  expect(topicOffenders(files)).toEqual([]);
+});
+
+it('each folder under objects/ is a topic of its own: one imports another only as a declared lower topic, through its index', () => {
+  expect(topicOffenders(new Map([
+    ['objects/geometry/shape.ts', "import { a } from './mesh.ts';\nimport { b } from '../color/color-transfer.ts';\nimport { c } from '../color/index.ts';"],
+    ['objects/color/color-transfer.ts', "import { d } from '../../raster/index.ts';"],
+  ]))).toEqual([
+    "objects/geometry/shape.ts -> ../color/color-transfer.ts",
+    "objects/geometry/shape.ts -> ../color/index.ts",
+    "objects/color/color-transfer.ts -> ../../raster/index.ts",
+  ]);
 });
 
 it('the declared topic order has no cycle', () => {

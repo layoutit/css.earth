@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
-import { parsePdsPlanetocentricShape } from './obj-shape.mts';
+import { parsePdsPlanetocentricShape } from '@cssearth/bake/objects/geometry';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 

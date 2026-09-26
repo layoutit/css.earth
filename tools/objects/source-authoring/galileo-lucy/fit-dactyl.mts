@@ -3,7 +3,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
-import { controlledShapeCamera, decodeCalibratedCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
+import { controlledShapeCamera, decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { readDaf, ckSegments, parseTextKernel, number as kernelNumber, numbers as kernelNumbers, parseSpacecraftClock, encodeClock, clockToEt, etToClock, parseLeapSeconds, utcToEt, etToUtc } from '@cssearth/spice';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readPinnedFile } from '@cssearth/spice/node';
@@ -231,7 +231,7 @@ await sharp({ create: { width: 800, height: 490, channels: 3, background: '#1519
   { input: await sharp(overlay(inspectedAlternative, 'Alternative after inspecting Celmis', 'Celmis is no longer an independent holdout')).png().toBuffer(), left: 400, top: 0 },
 ]).png().toFile(resolve(output, 'orientation-candidates.png'));
 
-const dependencies = ['tools/objects/terrestrial-layers/shape-camera-mosaic.mts', 'packages/fits/src/fits.ts', 'packages/spice/src/ck.ts', 'packages/spice/src/daf.ts', 'packages/spice/src/sclk.ts', 'packages/spice/src/lsk.ts', 'packages/spice/src/text-kernel.ts'];
+const dependencies = ['packages/bake/src/objects/geometry/shape-camera-mosaic.ts', 'packages/fits/src/fits.ts', 'packages/spice/src/ck.ts', 'packages/spice/src/daf.ts', 'packages/spice/src/sclk.ts', 'packages/spice/src/lsk.ts', 'packages/spice/src/text-kernel.ts'];
 const report = { schema: 'cssearth-dactyl-registration-result@1', qualifiedSurface: false,
   baseCommit: input.baseCommit, dependencies,
   runtime: { node: process.version, sharp: sharp.versions.sharp },

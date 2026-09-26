@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { bandColorDisplay, linearToSrgb, srgbToLinear, encodeBandColor } from './color-transfer.mts';
+import { bandColorDisplay, linearToSrgb, srgbToLinear, encodeBandColor } from '@cssearth/bake/objects/color';
 
 const display = () => bandColorDisplay(['IR3','IR1','UV3'], 'radiance-factor', [0, 1]);
 

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { discIntegratedColor, filterReflectance, parseCieTable, parseDiscColorRecord } from './disc-integrated-color.mts';
+import { discIntegratedColor, filterReflectance, parseCieTable, parseDiscColorRecord } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 
 const root = new URL('../../../src/objects/makemake/source/', import.meta.url);

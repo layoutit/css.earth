@@ -1,6 +1,6 @@
 import { cross3 as cross, dot3 as dot, isArray } from '@cssearth/core';
-import type {SourceMesh,SourceFace,FaceTree,ClosestSurfacePoint,MeshDimensions} from './contracts.mts';
-import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeLens,parseSurfaceLens} from './source-records.mts';
+import type {SourceMesh,SourceFace,FaceTree,ClosestSurfacePoint,MeshDimensions} from './contracts.ts';
+import {parseMeshProfile,parseRadiusProfile,parsePlateProfile,parseShapeLens,parseSurfaceLens} from './shape-records.ts';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve } from 'node:path';
@@ -235,7 +235,7 @@ export async function loadShapeScalarGrid(root: string, value: unknown, sourceMe
   const lens=parseShapeLens(value);
   const load = lens.format === 'stl' ? loadStlShape : lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = sourceMesh ?? await load(resolve(root, lens.path), lens.grid);
-  const field = lens.facetField ? await (await import('./fits-facet-field.mts')).loadFitsFacetField(root, mesh, lens) : null;
+  const field = lens.facetField ? await (await import('./fits-facet-field.ts')).loadFitsFacetField(root, mesh, lens) : null;
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
   let validity;

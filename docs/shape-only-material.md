@@ -8,7 +8,7 @@ adds no craters, mottling, grid lines, or other invented surface detail.
 When published whole-disc photometry gives a body's colour indices and V
 geometric albedo, its shape view may use that measured colour instead, through
 the raster `disc-integrated-color` science kind
-([disc-integrated-color.mts](../tools/objects/observation/disc-integrated-color.mts)).
+([disc-integrated-color.ts](../packages/bake/src/objects/color/disc-integrated-color.ts)).
 Colour indices relative to the Sun give reflectance at the B, V, R and I effective
 wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
 1931 observer under D65 and scaled so V reflectance equals the albedo. The colour

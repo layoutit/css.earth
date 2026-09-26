@@ -1,4 +1,4 @@
-import type {PreparedTriangle} from './contracts.mts';
+import type { PreparedTriangle } from '@cssearth/bake/objects/geometry';
 import sharp from 'sharp';
 import { missingCoverageColor } from '@cssearth/bake/raster';
 import { dotN as dot } from '@cssearth/core';

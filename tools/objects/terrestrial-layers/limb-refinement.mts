@@ -1,5 +1,5 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import type { SourceMesh } from './contracts.mts';
+import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import { parseArchivedCamera, parseLimbRefinement } from './source-records.mts';
 
 /**

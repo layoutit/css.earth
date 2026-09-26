@@ -1,7 +1,7 @@
 import { refreshSourceRecord } from '../../../sources/source-authoring-templates.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
-import { requireTerrainMesh } from '../../terrestrial-layers/radial-mesh.mts';
+import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
 await ensureReportDirectory('output/distant-worlds', {recursive:true});
 // Use the common source-mesh snapshot owner; no scene technique lives here.

@@ -1,5 +1,5 @@
-import type {SourceMesh} from './contracts.mts';
-import { createIndexedShape } from './obj-shape.mts';
+import type {SourceMesh} from './contracts.ts';
+import { createIndexedShape } from './obj-shape.ts';
 
 const edgeKey = (a: number, b: number) => a < b ? `${a},${b}` : `${b},${a}`;
 const projectedArea = (face: readonly number[], positions: readonly number[][]) => {

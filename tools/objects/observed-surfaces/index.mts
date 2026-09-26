@@ -2,12 +2,12 @@ import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 import {parse} from '@cssearth/core/schema';
 import {observedRecipe, type Region, type ObservationTransform, type BoundaryContinuation, type FalseColor, type PixelPresence, type UniformCoverage, type DiscBaseline, type Calibration, type BrightTail, type PolarProjection, type RasterMap, type Baseline} from './contract.mts';
-import type {SourcePin} from '../giant-layers/radial-contract.mts';
+import type {SourcePin} from '@cssearth/bake/objects/geometry';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
-import { planetographicRowsToMeshLatitude } from '../material-composition/ellipsoid.mts';
+import { planetographicRowsToMeshLatitude } from '@cssearth/bake/objects/geometry';
 import { packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 
 
