@@ -69,6 +69,23 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "USGS describes lunar-Lambert normalization of the mosaic without printing its values. Squyres and Veverka (1981) could not be opened, and the Callisto photometry of Belgacem and colleagues covers regions only. Callisto keeps the shared sphere bank.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/callisto_voyager_galileo_image_mosaic_map",
+        "https://doi.org/10.1016/0019-1035(81)90203-7"
+      ],
+      "revisitWhen": "A global disc-resolved Callisto law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

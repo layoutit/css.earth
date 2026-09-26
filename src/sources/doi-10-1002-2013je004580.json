@@ -1,0 +1,27 @@
+{
+  "id": "doi-10-1002-2013je004580",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Resolved Hapke parameter maps of the Moon",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1002/2013JE004580"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/2013JE004580",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/23"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

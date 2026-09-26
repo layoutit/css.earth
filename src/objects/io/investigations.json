@@ -173,6 +173,24 @@
         }
       ],
       "revisitWhen": "A lens shows catalogued hot-spot power as symbols again."
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "The USGS false-colour mosaic page says a lunar-Lambert coefficient of 0.7 was adequate for all three colours, but gives no angle range and no fit. The disc-resolved studies (Simonelli and Veverka 1986 from Voyager; Simonelli, Dodd and Veverka 2001, Hapke fits to Galileo SSI) could not be opened, and Io's photometry varies strongly between regions. Io keeps the shared sphere bank.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km",
+        "https://ntrs.nasa.gov/citations/19860063116",
+        "https://doi.org/10.1029/2000JE001350"
+      ],
+      "revisitWhen": "A disc-resolved Io law with its filter and fitted incidence, emission and phase ranges is read in the paper.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

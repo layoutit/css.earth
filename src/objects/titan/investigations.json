@@ -139,6 +139,23 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "No disc law exists for the 938 nm surface map. Titan's limb at that wavelength is set by haze scattering, and the published 938 nm photometry is a radiative-transfer model with 16 parameters, not a disk function the photometry library can hold. Titan keeps the shared sphere bank.",
+      "evidence": [
+        "https://doi.org/10.5066/P14FAEKS",
+        "https://ui.adsabs.harvard.edu/abs/2018DPS....5021602K/abstract"
+      ],
+      "revisitWhen": "A published centre-to-limb law for Titan's disc at 938 nm with its fitted emission range, or a radiative-transfer limb profile the preparation can read.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

@@ -104,6 +104,23 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Squyres et al. (1984) found a lunar-like law (Lommel-Seeliger, which has no parameter) adequate for Voyager images at 8 to 90 degrees phase, with a phase function that varies with albedo. Only the abstract could be read, so the emission range and the phase function are unknown. Iapetus keeps the shared sphere bank.",
+      "evidence": [
+        "https://doi.org/10.1016/0019-1035(84)90111-8",
+        "https://ntrs.nasa.gov/citations/19840066646"
+      ],
+      "revisitWhen": "The fitted emission range of Squyres et al. (1984), or a Cassini disc-resolved Iapetus law with its ranges, is read in the paper.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

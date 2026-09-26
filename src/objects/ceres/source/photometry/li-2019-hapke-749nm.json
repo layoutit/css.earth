@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "li-2019-hapke-749nm",
+  "instrument": "Dawn Framing Camera 2 (FC2)",
+  "filter": "F3, 749 nm effective wavelength",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.139,
+    "hFunction": "hapke-2002",
+    "phaseFunction": {
+      "form": "double-henyey-greenstein",
+      "b": 0.364,
+      "c": 0.048
+    },
+    "shadowHiding": {
+      "amplitude": 1.6,
+      "width": 0.06
+    },
+    "roughnessDegrees": 19.2
+  },
+  "fit": {
+    "phaseDegrees": [
+      7,
+      95
+    ],
+    "incidenceDegrees": [
+      0,
+      80
+    ],
+    "emissionDegrees": [
+      0,
+      80
+    ]
+  }
+}

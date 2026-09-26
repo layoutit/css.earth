@@ -1,0 +1,27 @@
+{
+  "id": "doi-10-1016-j-icarus-2018-12-038",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Spectrophotometric modeling and mapping of Ceres",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2018.12.038"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2018.12.038",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ceres/source/manifest.json",
+      "locator": "/documents/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

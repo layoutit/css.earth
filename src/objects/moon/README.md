@@ -15,6 +15,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 | Silicate signature | [Lucey et al. (2021)](https://zenodo.org/records/4558194), Christiansen-feature wavelength |
 | Crust thickness | [NASA GRAIL visualization](https://svs.gsfc.nasa.gov/4014/), based on gravity and topography models |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MOON/target) the Moon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
+| Lighting | The Hapke model of [Sato et al. (2014)](https://doi.org/10.1002/2013JE004580) at 643 nm, the model the monochrome mosaic was corrected with, recorded in [`source/photometry/sato-2014-hapke-643nm.json`](source/photometry/sato-2014-hapke-643nm.json). See [Lighting law](#lighting-law). |
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -61,7 +62,7 @@ Feature notes: 1749 of the labelled names carry a caption note, the lead summary
 - Christiansen-feature values are wavelengths, not mineral abundances. Coverage stops at ±70° and residual viewing effects remain.
 - Geology colors are interpretations; the GRAIL display depends on model assumptions.
 - The monochrome mosaic retains photographed crater shadows and differences between observation strips. The Shadows control adds spherical illumination; it cannot relight those shadows. Gray grid marks missing observations. The 947.6 m source grid is not an estimate of camera accuracy. Polar sprites retain their existing resolution.
-- The scene now uses the shared physical frame: pole, prime meridian and Sun direction at the shared epoch come from the IAU/WGCCRE rotation model in `src/platform/solar-geometry.mts`, and the Shadows toggle drives a Lambert terminator bank. The retired lane showed limb curvature only.
+- The scene now uses the shared physical frame: pole, prime meridian and Sun direction at the shared epoch come from the IAU/WGCCRE rotation model in `src/platform/solar-geometry.mts`, and the Shadows toggle drives the terminator frames of the Hapke lighting bank (see Lighting law). The retired lane showed limb curvature only.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
@@ -90,11 +91,29 @@ chosen, at both prepared densities. Unit checks live under
 - The checked `source/orbit/moon.json` records the extracted Moon values and
   exact authority-page hashes.
 
+## Lighting law
+
+The globe is lit with the Hapke model of [Sato et al. (2014)](https://doi.org/10.1002/2013JE004580) in the WAC 643 nm band. The monochrome mosaic was made from the same band, and its [README](https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT) says each image was corrected with this model. Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
+| Value | Where it comes from |
+| --- | --- |
+| Model form | Appendix A, eq. A1 to A9: Hapke (2002) H function, two-term Henyey-Greenstein phase function whose (1 + c)/2 lobe scatters backward |
+| B_C0 0, h_C 1, K 1 | Table 1 and section 2.3 |
+| Roughness 23.657° | The PDS parameter map's THETA band and README; the paper prints 23.4° (Table 1, Figure 8) |
+| w 0.3854, b 0.2375, h_S 0.0672 | Medians of the [PDS 643 nm parameter map](https://data.lroc.im-ldi.com/lroc/view_rdr/WAC_HAPKEPARAMMAP) over 30°S to 30°N, the region the paper uses for its all-area trends (Figure 17f). The paper prints no global w. It prints b 0.26 for the maria and 0.23 for the highlands, and h_S 0.050 and 0.074 (section 3.4). The medians fall between them. |
+| c 0.3253 | Eq. 2 from b |
+| B_S0 1.686 | Eq. 4 from w, b and c, with the 643 nm gradient 2.459 and intercept 0.078 of Table 2 |
+| Fitted angles | Incidence below 75°, emission below 30°, phase below 97° (sections 2.2 and 2.3) |
+
+- The WAC looks almost straight down, so the fit saw emission only up to 30°. Toward the limb the law is held at 30°. Beyond that the limb follows no measurement.
+- With the Sun behind the viewer the law hardly darkens the limb: 0.996 of the centre at 30° emission and beyond. The shared bank it replaces (Lambert with a 0.35 floor) darkened it much more.
+- One set of values lights the whole globe. The paper's maps vary by tile: w from 0.27 to 0.44 between the 16th and 84th percentiles over 30°S to 30°N.
+- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false` in d090ce637d. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
+
 ## Scene and sky
 
-- The lighting model is a full-phase Lambert model with a cubic sky term,
-  implemented in the repository; its formulation is adapted from the OpenSpace
-  globe shader (MIT).
+- The lighting follows the published Hapke law described under
+  [Lighting law](#lighting-law).
 - The directional Sun follows the repository's clean-room directional-sun
   preparation standard. Its direction,
   the pole and the prime meridian at the shared epoch come from the IAU/WGCCRE
@@ -104,8 +123,8 @@ chosen, at both prepared densities. Unit checks live under
   longitude segments, the 50-pixel tile, 0.005 seam overlap, spin origin 0°
   and an 84-second visual rotation (an accelerated presentation choice). The
   6.68° obliquity and the 27.322-day rotation are recorded with the body from
-  `source/orbit/moon.json`. Lighting is the Mercury-style Lambert bank (256
-  frames, ambient 0.05, terminator smoothstep 0–0.1) with no atmosphere.
+  `source/orbit/moon.json`. The Moon draws its own 256-frame lighting bank
+  from that law, with no atmosphere.
 
 </details>
 

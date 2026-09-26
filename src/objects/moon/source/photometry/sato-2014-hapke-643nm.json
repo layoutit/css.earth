@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "sato-2014-hapke-643nm",
+  "instrument": "LRO LROC Wide Angle Camera",
+  "filter": "643 nm band",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.3854,
+    "hFunction": "hapke-2002",
+    "phaseFunction": {
+      "form": "double-henyey-greenstein",
+      "b": 0.2375,
+      "c": 0.3253
+    },
+    "shadowHiding": {
+      "amplitude": 1.686,
+      "width": 0.0672
+    },
+    "roughnessDegrees": 23.657
+  },
+  "fit": {
+    "phaseDegrees": [
+      0,
+      97
+    ],
+    "incidenceDegrees": [
+      0,
+      75
+    ],
+    "emissionDegrees": [
+      0,
+      30
+    ]
+  }
+}

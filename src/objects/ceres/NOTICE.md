@@ -23,7 +23,7 @@ record preserves the reference sphere, units, and withheld polar coverage.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
 
-Lighting: the shared prepared Lambert row bank follows the OpenSpace globebrowsing shading model (MIT, snapshot 56e29b54) as recorded in `source/preparation/raster.json`; no OpenSpace pixels are shipped.
+Lighting: the globe's lighting is the published Hapke law of Li et al. (2019), doi:10.1016/j.icarus.2018.12.038, whose parameter values are transcribed as facts in `source/photometry/li-2019-hapke-749nm.json` and cited in `source/manifest.json`.
 
 Feature caption notes: 31 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
 

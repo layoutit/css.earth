@@ -156,6 +156,23 @@
           "commit": "fd2ff67616df50df39ad194fe3d22073fdf40617"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Titania keeps the shared sphere bank.",
+      "evidence": [
+        "https://doi.org/10.1016/0019-1035(88)90039-5",
+        "https://ntrs.nasa.gov/citations/19880051927"
+      ],
+      "revisitWhen": "A disc-resolved law for Titania with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

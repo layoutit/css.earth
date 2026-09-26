@@ -1011,6 +1011,36 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "photometry/sato-2014-hapke-643nm.json",
+      "purpose": "Hapke model of the Moon in the LROC WAC 643 nm band, the model family and band the WAC global morphologic mosaic was corrected with, used to light the globe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1002-2013je004580",
+            "role": "method",
+            "evidence": "Sato et al. (2014) Appendix A, eq. A1 to A9, defines the model: Hapke (2012) with the Hapke (2002) H function (A6) and a two-term Henyey-Greenstein phase function (A3) whose lobe weighted (1 + c)/2 scatters backward. Table 1 holds B_C0 at 0 and h_C at 1, and section 2.3 sets the porosity factor K to 1. Only w, b and h_S are fitted; c follows from b by eq. 2 and B_S0 from w, b and c by eq. 4 with the 643 nm gradient 2.459 and intercept 0.078 of Table 2. Section 2.2 and 2.3 limit the fitted data to incidence below 75, emission below 30 and phase below 97 degrees, in angle bins that start at 0. The paper prints no global w; b and h_S are printed only per region (maria and highlands, section 3.4).",
+            "locator": "Appendix A, eq. A1 to A9; Table 1; eq. 2 and 4; Table 2, 643 nm row; sections 2.2 to 2.4 and 3.4"
+          },
+          {
+            "catalogueId": "lroc-wac-hapkeparammap-643nm-v1-1",
+            "role": "reference",
+            "evidence": "w 0.3854, b 0.2375 and h_S 0.0672 are the medians of the product's W, B and HS bands over the 21,600 tiles from 30S to 30N, the region Sato et al. (2014) use for their all-area trends (section 3.4, Figure 17f). c 0.3253 and B_S0 1.686 follow from those medians by eq. 2 and 4. The product's C band equals eq. 2 of its B band to 1.5e-7. Roughness 23.657 degrees is the product's THETA band and README value; the paper prints 23.4 degrees (Table 1). The product's PHI band is 0, which gives K = 1.",
+            "locator": "Bands W, B, HS, THETA and PHI; medians over lines 41 to 100 (30S to 30N)"
+          },
+          {
+            "catalogueId": "lroc-wac-global-v1-3",
+            "role": "reference",
+            "evidence": "The WAC_GLOBAL README says every image of the 643 nm morphologic mosaic was corrected to a common photometric geometry with a Hapke model whose parameters vary across the Moon, citing Sato et al. (2014).",
+            "locator": "WAC_GLOBAL_README.TXT, reference [2]"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1002/2013JE004580",
+      "credit": "Hiroyuki Sato, Mark S. Robinson, Bruce Hapke, Brett W. Denevi and Aaron K. Boyd; LROC Team, NASA/GSFC/Arizona State University; transcription and medians: cssEarth.",
+      "acquisition": "Model form and fixed values transcribed from the paper; w, b and h_S are medians computed from the PDS parameter map, which is not kept in the repository."
     }
   ]
 }

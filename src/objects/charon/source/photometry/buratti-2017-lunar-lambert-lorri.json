@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "buratti-2017-lunar-lambert-lorri",
+  "instrument": "New Horizons LORRI",
+  "filter": "panchromatic, pivot wavelength 0.607 um",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "lunar-lambert",
+      "weight": 0.5385
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      15.08,
+      16.85
+    ],
+    "emissionDegrees": [
+      0,
+      86.5
+    ]
+  }
+}

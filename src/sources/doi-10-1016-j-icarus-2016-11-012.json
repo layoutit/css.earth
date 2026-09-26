@@ -1,0 +1,31 @@
+{
+  "id": "doi-10-1016-j-icarus-2016-11-012",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Global albedos of Pluto and Charon from LORRI New Horizons observations",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2016.11.012"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2016.11.012",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pluto/source/manifest.json",
+      "locator": "/documents/3"
+    },
+    {
+      "path": "src/objects/charon/source/manifest.json",
+      "locator": "/documents/10"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

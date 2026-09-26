@@ -191,6 +191,24 @@
           "pr": 205
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Belgacem et al. (2020) give Hapke fits for 20 regions only (incidence and emission below 70 degrees), not a global law. Buratti and Veverka (1983) fitted a lunar-Lambert law to 90 Voyager images at 3 to 143 degrees phase, but only the abstract could be read, without the values or angle limits. Europa keeps the shared sphere bank.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2019.113525",
+        "https://arxiv.org/abs/2007.11445",
+        "https://ntrs.nasa.gov/citations/19830059564"
+      ],
+      "revisitWhen": "The lunar-Lambert values and fitted angle ranges of Buratti and Veverka (1983), or another global disc-resolved Europa law, are read in the paper.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }
