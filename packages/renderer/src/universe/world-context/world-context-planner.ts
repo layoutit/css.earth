@@ -207,6 +207,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const focusShare = focusInView ? focusDiameter / height : 0;
       const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusShare);
       const ownOrbitOpacity = focusOwnOrbitOpacity(plan.camera.presentation.orbitLineFade, focusShare);
+      // Once detail fills the view, distant systems' coarse orbit bounds can surround the camera even though no
+      // stroke reaches the screen. Keep the selected host's direct orbiters, or a selected satellite's siblings;
+      // fetch other paths on a wider view or when the user targets them.
+      const closeDetail = !overview && focusShare >= plan.camera.presentation.orbitLineFade.hiddenAboveDiscHeightShare;
+      const closeFamilyCenter = selectedEntry.orbit && !systemFade.isSystemStar(selectedEntry.orbit.centerBodyId)
+        ? selectedEntry.orbit.centerBodyId : selectedId;
       const near = opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -251,7 +257,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       for (const entry of publishingBodies) {
         const { body } = entry;
         const isSelected = !overview && body.id === selectedId;
-        const bodyOrbitOpacity = isSelected ? ownOrbitOpacity : orbitOpacity;
+        const nearSelected = entry.orbit?.centerBodyId === closeFamilyCenter;
+        const bodyOrbitOpacity = isSelected ? ownOrbitOpacity : closeDetail && !nearSelected &&
+          !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? 0 : orbitOpacity;
         const systemOpacity = systemFade.of(entry.index);
         // Category visibility never removes the object the user is inspecting.
         if (entry.bodyHidden && !isSelected) {
