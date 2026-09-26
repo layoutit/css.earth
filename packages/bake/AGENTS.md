@@ -47,15 +47,21 @@ its validators accept); the renderer never imports the bake.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
   bodies, orbit banks, system and group views, hyperbolic paths). It imports no topic.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
-  its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only); none imports another topic:
+  its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
     and the uniform colour of whole-disc photometry. The host passes the CIE 1931 colour-matching table in.
   - `objects/geometry`: shape models (OBJ, STL, PDS plate, vertex-facet and radius tables, FITS facet fields) and the records
     that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
     Lambert attenuation atlas and the radial-layer contract.
   - `objects/cameras`: observer-computed cameras from an ephemeris and a spin state or IAU pole model.
+  - `objects/scene`: the physical world frame navigation is solved in, and authored synchronous and hosted rotations.
+  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
+    categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
+    photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,
+    `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
-  oracle fixtures through the repository's test helpers; they import the entries.
+  oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
+  (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
   inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none.
 
