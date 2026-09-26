@@ -1,9 +1,9 @@
-import {parseDimensions,parseByteObservationPolicy,parseProjectedBytePolicy} from './source-records.ts';
+import {parseDimensions,parseByteObservationPolicy,parseProjectedBytePolicy} from '../source-records.ts';
 import sharp, { type SharpOptions } from 'sharp';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { blackFillCoverage } from '../../raster/index.ts';
+import { blackFillCoverage } from '../../../raster/index.ts';
 
 /** Keep thresholding at native resolution without holding a multi-gigapixel mask
  * in memory. A separate lossless image is necessary: Sharp otherwise resizes

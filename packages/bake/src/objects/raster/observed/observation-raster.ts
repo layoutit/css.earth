@@ -1,11 +1,11 @@
 /** Decode an observation and its validity mask independently of material and scene preparation. */
-import type { RgbObservation } from './contracts.ts';
+import type { RgbObservation } from '../contracts.ts';
 import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { parseDimensions } from './source-records.ts';
+import { parseDimensions } from '../source-records.ts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
-import { blackFillCoverage, sampleCoverage } from '../../raster/index.ts';
+import { blackFillCoverage, sampleCoverage } from '../../../raster/index.ts';
 import { prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation } from './observed-geotiff.ts';
 import { preparePdsRgbObservation } from './observed-pds-rgb.ts';
 import { prepareByteObservation } from './observed-image.ts';

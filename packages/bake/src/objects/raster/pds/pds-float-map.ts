@@ -1,4 +1,4 @@
-import {parseFloatMapGrid,parseFloatMapLens} from './source-records.ts';
+import {parseFloatMapGrid,parseFloatMapLens} from '../source-records.ts';
 import {readFile} from 'node:fs/promises';
 import {basename,resolve} from 'node:path';
 import {gunzipSync} from 'node:zlib';

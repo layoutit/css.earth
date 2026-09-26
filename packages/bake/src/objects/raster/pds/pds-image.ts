@@ -1,4 +1,4 @@
-import {parsePdsImagePolicy} from './source-records.ts';
+import {parsePdsImagePolicy} from '../source-records.ts';
 import {readFile} from 'node:fs/promises';
 import {resolve, basename} from 'node:path';
 

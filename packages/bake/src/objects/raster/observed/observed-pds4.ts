@@ -1,9 +1,9 @@
-import {parsePds4Policy,parseImageEntry} from './source-records.ts';
+import {parsePds4Policy,parseImageEntry} from '../source-records.ts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { bandColorDisplay, bandColorByte, bandColorEvidence } from '../color/index.ts';
+import { bandColorDisplay, bandColorByte, bandColorEvidence } from '../../color/index.ts';
 import { pds4Block, pds4Blocks, pds4Number } from '@cssearth/telescope';
-import { checkKeys } from './record-keys.ts';
+import { checkKeys } from '../record-keys.ts';
 
 export function validatePds4ObservationPolicy(value: unknown) {
   // The wavelengths name the bands, so the policy declares one display range and nothing else about colour.

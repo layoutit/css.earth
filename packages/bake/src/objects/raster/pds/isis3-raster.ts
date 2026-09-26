@@ -1,4 +1,4 @@
-import {parseIsis3Grid} from './source-records.ts';
+import {parseIsis3Grid} from '../source-records.ts';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 

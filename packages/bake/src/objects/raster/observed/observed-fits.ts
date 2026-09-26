@@ -1,4 +1,4 @@
-import {parseFitsPolicy,parseDimensions} from './source-records.ts';
+import {parseFitsPolicy,parseDimensions} from '../source-records.ts';
 import { readFile } from 'node:fs/promises';
 import { readFitsPrimary } from '@cssearth/fits';
 

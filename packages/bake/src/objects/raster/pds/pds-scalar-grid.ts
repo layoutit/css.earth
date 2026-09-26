@@ -1,5 +1,5 @@
 import { isArray } from '@cssearth/core';
-import {parseScalarGridProfile} from './source-records.ts';
+import {parseScalarGridProfile} from '../source-records.ts';
 import { spawn } from 'node:child_process';
 import { pds3Keyword } from '@cssearth/telescope';
 

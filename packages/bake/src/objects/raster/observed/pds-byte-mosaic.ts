@@ -1,10 +1,10 @@
-import {parseBytePolicy,parseImageEntry} from './source-records.ts';
+import {parseBytePolicy,parseImageEntry} from '../source-records.ts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import { pds3Keyword } from '@cssearth/telescope';
-import { blackFillCoverage } from '../../raster/index.ts';
+import { blackFillCoverage } from '../../../raster/index.ts';
 
 // PDS3 byte images carry their projection and validity in the attached label.
 // This reader deliberately supports only unrotated, planetocentric cylindrical grids.

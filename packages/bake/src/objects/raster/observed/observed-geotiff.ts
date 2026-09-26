@@ -1,9 +1,9 @@
 import { isArray, number } from '@cssearth/core';
-import type {PixelValidityPolicy,RasterResult} from './contracts.ts';
-import {parseGeoImageEntry,parseDimensions,parseRgbBandPolicy,parseFloatObservationPolicy,parseMaskedObservationPolicy,parseIsisObservationPolicy,numericRasterBands,requireWrappedLongitudeSpan} from './source-records.ts';
+import type {PixelValidityPolicy,RasterResult} from '../contracts.ts';
+import {parseGeoImageEntry,parseDimensions,parseRgbBandPolicy,parseFloatObservationPolicy,parseMaskedObservationPolicy,parseIsisObservationPolicy,numericRasterBands,requireWrappedLongitudeSpan} from '../source-records.ts';
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
-import {sampleColorBand, loadScienceSurface} from './scientific-raster.ts';
+import {sampleColorBand, loadScienceSurface} from '../scientific-raster.ts';
 import { prepareProjectedByteObservation } from './observed-image.ts';
 
 /** Some published color products retain scientific band tags instead of RGB tags.

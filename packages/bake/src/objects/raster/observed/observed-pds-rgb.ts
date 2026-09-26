@@ -1,4 +1,4 @@
-import {parseGeoImageEntry,parsePdsRgbPolicy} from './source-records.ts';
+import {parseGeoImageEntry,parsePdsRgbPolicy} from '../source-records.ts';
 import {text} from '@cssearth/core';
 import { spawn } from 'node:child_process';
 import { prepareProjectedByteObservation } from './observed-image.ts';

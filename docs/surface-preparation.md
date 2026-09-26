@@ -144,7 +144,7 @@ document their recorded revision; they are not relabeled as a new full sweep.
 
 ### Image and numeric readers
 
-[readObservation](../packages/bake/src/objects/raster/observation-raster.ts) selects
+[readObservation](../packages/bake/src/objects/raster/observed/observation-raster.ts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
@@ -729,7 +729,7 @@ at a time and supplies the same interpretation to the globe and sidebar map.
 
 A scientific lens with format `pds3-float-map` (for example Titan's heights and
 Ceres's Dawn VIR band depths) reads 32-bit float maps through
-[pds-float-map.ts](../packages/bake/src/objects/raster/pds-float-map.ts). The
+[pds-float-map.ts](../packages/bake/src/objects/raster/pds/pds-float-map.ts). The
 label may be attached or detached (`labelPath`); byte order, west- or
 east-positive longitude, latitude extent and missing value come from the label
 and must equal the recipe's grid. Pixels outside the label's latitude limits

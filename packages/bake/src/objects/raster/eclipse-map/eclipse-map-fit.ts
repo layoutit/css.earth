@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { binAverage, bandTemperatureTable, fitLightCurveMap, lightCurveSamples, temperatureGrid, type LightCurve, type Systematic } from './eclipse-map/light-curve-map.ts';
-import { bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from './eclipse-map/bare-rock.ts';
-import { measureTransitShift } from './eclipse-map/transit-timing.ts';
-import { readTarMember } from './tar-member.ts';
+import { binAverage, bandTemperatureTable, fitLightCurveMap, lightCurveSamples, temperatureGrid, type LightCurve, type Systematic } from './light-curve-map.ts';
+import { bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from './bare-rock.ts';
+import { measureTransitShift } from './transit-timing.ts';
+import { readTarMember } from '../numpy/tar-member.ts';
 import { array, boolean, number, optional, shape, text } from '@cssearth/core';
 
 const inside = (path: string) => { if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError('An eclipse-map input must be inside the source directory.'); return path; };
@@ -139,7 +139,7 @@ const transitReport = (transitFit: ReturnType<typeof measureTransitShift> | null
   samples: transitFit.samples, model: transitFit.fit.model, software: transitFit.fit.software } } : {};
 
 /** A map of brightness temperature fitted from a light curve at preparation time: the eigencurve fit on the package's own orbit,
- * then the band conversion against a stellar model spectrum (see `eclipse-map/light-curve-map.ts`). */
+ * then the band conversion against a stellar model spectrum (see `light-curve-map.ts`). */
 export async function loadEclipseMapFit(root: string, value: unknown) {
   const recipe = profile(value), { curve, band, orbit, host, stellarRadiusKm, radiusRatio, transitShiftSeconds, transitFit } = await loadLightCurveInputs(root, recipe);
   const result = fitLightCurveMap(curve, recipe.fit, orbit, host, radiusRatio, { stellarRadiusKm });
@@ -166,7 +166,7 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
   };
 }
 
-/** A bare rock fitted to a light curve at preparation time (see `eclipse-map/bare-rock.ts`): one substellar
+/** A bare rock fitted to a light curve at preparation time (see `bare-rock.ts`): one substellar
  * temperature, drawn as the planet's temperature, with nothing on the night side. */
 export async function loadBareRockFit(root: string, value: unknown) {
   const recipe = bareRockProfile(value), { curve, band, orbit, host, stellarRadiusKm, radiusRatio, transitShiftSeconds, transitFit } = await loadLightCurveInputs(root, recipe);
@@ -189,7 +189,7 @@ const depthRecord = shape({ schema: text, planet: text, eclipseDepthPpm: shape({
 const bareRockEclipseProfile = shape({ path: text, sampling: text, units: text, planet: text, host: text, band: shape({ encoding: text, path: text }), star: shape({ encoding: text, path: text }) });
 
 /** A bare rock drawn from a measured eclipse depth, for a planet whose day-night pattern is not measured: the substellar temperature
- * whose rock shows the depth at secondary eclipse (see `eclipse-map/bare-rock.ts`). The record gives the depth as a
+ * whose rock shows the depth at secondary eclipse (see `bare-rock.ts`). The record gives the depth as a
  * range; the rock is drawn at its middle and the range is reported. */
 export async function loadBareRockEclipse(root: string, value: unknown) {
   const recipe = bareRockEclipseProfile(value);

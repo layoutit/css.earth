@@ -1,9 +1,9 @@
-import type { SourceMesh } from '../geometry/index.ts';
-import {parseScalarMapLens} from './source-records.ts';
+import type { SourceMesh } from '../../geometry/index.ts';
+import {parseScalarMapLens} from '../source-records.ts';
 import {shape,text,number} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
-import { loadVrmlShape } from '../geometry/index.ts';
+import { loadVrmlShape } from '../../geometry/index.ts';
 
 const safePath = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.includes('\\') && !p.split('/').includes('..');
 export function validateScalarMapProfile(value: unknown, terrainValue: unknown) {

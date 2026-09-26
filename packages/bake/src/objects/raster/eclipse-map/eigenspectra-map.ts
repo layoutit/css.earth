@@ -13,7 +13,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
-import { npzArray, readNpz } from './npz.ts';
+import { npzArray, readNpz } from '../numpy/npz.ts';
 
 const RADIAN = 180 / Math.PI;
 
