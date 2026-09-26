@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import {readAuthoredSources} from '../authored-sources.ts';
+import {readAuthoredSources} from '@cssearth/bake/objects/sources';
 import {parse} from '@cssearth/core/schema';
 import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer';
 import { layeredRecipe, spectralRecipe, radialMotionRecipe, layeredPresentationRecipe, prepareRadialMotionAndShadow, prepareSpectralMaterialVariants, prepareLayeredLeafLayouts } from '@cssearth/bake/objects/layers/material-composition';

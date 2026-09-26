@@ -1,4 +1,4 @@
-import type {RasterImage} from '../objects/observation/raster.mts';
+import type {RasterImage} from '@cssearth/bake/objects/layers/observation';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.mts';
 import {parsePagedProfile} from '../objects/paged-ellipsoid/profile-source.mts';

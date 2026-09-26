@@ -63,7 +63,10 @@ its validators accept); the renderer never imports the bake.
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
     photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
-  - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`):
+  - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
+    files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes.
+  - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
+    `observation`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
     as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry

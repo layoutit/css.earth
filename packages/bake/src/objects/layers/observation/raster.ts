@@ -5,13 +5,13 @@ import { readFile } from 'node:fs/promises';
 import { basename, dirname } from 'node:path';
 import sharp from 'sharp';
 import type { Sharp } from 'sharp';
-import type { SciencePalette } from '@cssearth/bake/objects/raster';
-import type { SourceScalar } from '@cssearth/bake/objects/geometry';
-import { loadScienceSurface, paintScienceSurface } from '@cssearth/bake/objects/raster';
-import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '@cssearth/bake/raster';
+import type { SciencePalette } from '../../raster/index.ts';
+import type { SourceScalar } from '../../geometry/index.ts';
+import { loadScienceSurface, paintScienceSurface } from '../../raster/index.ts';
+import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../raster/index.ts';
 import { object, string, number, boolean, optional, array, union, parse } from '@cssearth/core/schema';
-import { decodeElevationGrid, elevationRaster } from './elevation.mts';
-import type { ElevationRecipe } from './elevation.mts';
+import { decodeElevationGrid, elevationRaster } from './elevation.ts';
+import type { ElevationRecipe } from './elevation.ts';
 
 export interface RasterInfo {width: number; height: number; channels: 1 | 2 | 3 | 4;}
 export interface RasterImage {data: Buffer; info: RasterInfo;}

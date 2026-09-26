@@ -9,7 +9,7 @@ import { spawnSync } from 'node:child_process';
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readAuthoredSources } from './authored-sources.ts';
+import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { refreshPreparedInventory } from '../prepare/prepare-object-json.mts';
 
 /** Prepared files the content stage writes that depend on lens images in the public folder, which the scratch run omits. */

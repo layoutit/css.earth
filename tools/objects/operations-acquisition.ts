@@ -8,10 +8,9 @@ import { pipeline } from 'node:stream/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { gzipSync } from 'node:zlib';
-import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from './source-files.js';
-import type { SourceManifest } from './source-files.js';
+import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
+import type { SourceManifest, SourceEntry } from '@cssearth/bake/objects/sources';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
-import type { SourceEntry } from './source-files.js';
 import { sourceCacheUrl, withIdleTimeout } from '../assets/source-mirror.mts';
 import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './acquisition/satellite-catalog.mts';
 import { prepareDskMesh, validateDskMeshRecipe } from './acquisition/dsk-mesh.mts';
@@ -79,7 +78,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  const publish=async(path:string,data:Uint8Array)=>{const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===path);if(!entry)throw new Error(`Undeclared acquisition target: ${path}.`);return publishPinnedSource({sourceRoot,entry,bytes:data});};
  // Attempt every step so one unreachable host does not hide the others; report all failures together.
  const hriiResults=new Map<string,Awaited<ReturnType<typeof import('@cssearth/bake/objects/layers/terrestrial').prepareHriiFacets>>>();
- const spectralResults=new Map<string,Awaited<ReturnType<typeof import('./observation/spectral-band-maps.mts').prepareSpectralBandMaps>>>();
+ const spectralResults=new Map<string,Awaited<ReturnType<typeof import('@cssearth/bake/objects/layers/observation').prepareSpectralBandMaps>>>();
  const compositionResults=new Map<string,Awaited<ReturnType<typeof import('./acquisition/mapped-composition.mts').prepareMappedComposition>>>();
  const failures:{step:(typeof selected)[number];error:unknown}[]=[];
  for(const step of selected){
@@ -151,7 +150,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   }
   else if(step.kind==='spectral-band-maps'){
    let result=spectralResults.get(step.recipePath);
-   if(!result){const {prepareSpectralBandMaps}=await import('./observation/spectral-band-maps.mts');result=await prepareSpectralBandMaps(sourceRoot,step.recipePath);spectralResults.set(step.recipePath,result);}
+   if(!result){const {prepareSpectralBandMaps}=await import('@cssearth/bake/objects/layers/observation');result=await prepareSpectralBandMaps(sourceRoot,step.recipePath);spectralResults.set(step.recipePath,result);}
    const bytes=step.product==='report'?new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'):result.products[step.product];
    if(!bytes)throw new Error(`Unknown spectral band map ${step.product}.`);
    await publish(step.path,bytes);

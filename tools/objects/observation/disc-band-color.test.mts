@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { discBandColor, parseDiscBandColorRecord } from './disc-band-color.mts';
+import { discBandColor, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
 
 const record = async (letter: string) => JSON.parse(await readFile(new URL(`../../../src/objects/hr-8799-${letter}/source/photometry/jwst-nircam-band-color.json`, import.meta.url), 'utf8')) as Record<string, any>;
 

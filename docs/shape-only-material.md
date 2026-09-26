@@ -30,7 +30,7 @@ the published sphere and is not used ([ledger](../src/objects/wasp-12b/investiga
 
 An unresolved body measured only in the infrared has no visible colour to reconstruct. When a paper
 publishes its flux densities in three bands, the raster `disc-integrated-band-color` science kind
-([disc-band-color.mts](../tools/objects/observation/disc-band-color.mts)) paints it one false colour:
+([disc-band-color.ts](../packages/bake/src/objects/layers/observation/disc-band-color.ts)) paints it one false colour:
 the longest wavelength red and the shortest blue, each flux density over one range shared by the
 bodies the record names, encoded once through `encodeBandColor`, so band ratios and the bodies'
 brightness against each other survive. The surface must declare `falseColor`. The four planets of

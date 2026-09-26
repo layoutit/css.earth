@@ -50,7 +50,7 @@ fallback requirements are not the current authored-package template.
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `packages/renderer/src/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare/prepare-object-json.mts` |
-| Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `tools/objects/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
+| Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `packages/bake/src/objects/sources/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `site/scene/scene-contract.mts`, `site/scene/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
@@ -115,7 +115,7 @@ instead of editing a shared list or atlas position.
   rules belong to its dataset.
 - **Spectral absorption maps:** Charon's `source/science/leisa/bands.json`
   pairs LEISA spectra with wavelength and geometry cubes.
-  `tools/objects/observation/spectral-band-maps.mts` prepares footprint-limited
+  `packages/bake/src/objects/layers/observation/spectral-band-maps.ts` prepares footprint-limited
   numeric maps; `tools/oracles/fits/charon-leisa.py` independently checks the
   native samples and arithmetic. Follow the spectral guidance in
   [scientific faithfulness](scientific-faithfulness.md).

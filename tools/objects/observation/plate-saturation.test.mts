@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { maskSaturatedStars, PLATE_PREPARATION } from './plate-saturation.mts';
+import { maskSaturatedStars, PLATE_PREPARATION } from '@cssearth/bake/objects/layers/observation';
 
 const W = 200, H = 200;
 /** A plate with sky, one saturated star (flat core plus halo) and one unsaturated star of the same peak. */

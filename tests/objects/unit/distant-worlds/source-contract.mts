@@ -1,7 +1,7 @@
 import { sourceTest } from '../../source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { parseSourceManifest, verifySources } from '#preparation/source-files';
+import { parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
 const test = sourceTest();
 
 // Each destination remains independently discoverable by the generic object

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parsePdsFloatLabel, preparePdsFloatMap } from './pds-float-map.mts';
+import { parsePdsFloatLabel, preparePdsFloatMap } from '@cssearth/bake/objects/layers/observation';
 
 function label(band: number) {
   return `PDS_VERSION_ID = PDS3

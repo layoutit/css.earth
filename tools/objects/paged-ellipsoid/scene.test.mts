@@ -7,9 +7,8 @@ import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
 import { parsePagedProfile } from './profile-source.mts';
-import { parseInteriorSource } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createAtmospherePreparation } from './atmosphere.mts';
-import { createPagedSurfaceRaster } from './surface-raster.mts';
 import { prepareEllipsoidAttitude } from './attitude.mts';
 import { preparePagedEllipsoidScene } from './scene.mts';
 

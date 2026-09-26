@@ -1,7 +1,6 @@
 import type {KernelEnum, WebpOptions} from 'sharp';
 import type {AtmosphereConfiguration} from './atmosphere.mts';
-import type { PagedSceneProfile, CoraltempRecipe, EnsoRecipe, ElevationRecipe, NightLightRecipe } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import type {DeepOceanFillRecipe} from './deep-ocean-fill.mts';
+import type { PagedSceneProfile, CoraltempRecipe, EnsoRecipe, ElevationRecipe, NightLightRecipe, DeepOceanFillRecipe } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 export type ResizeKernel = keyof KernelEnum;
 export type ScientificSurfaceRecipe = (CoraltempRecipe & {kind: 'coraltemp-anomaly'}) | (EnsoRecipe & {kind: 'gibs-mur-imagery'}) |
   (ElevationRecipe & {kind: 'gebco-elevation'; legend: ElevationRecipe['legend'] & {image: string}}) |
