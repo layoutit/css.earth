@@ -264,7 +264,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 
 | Source representation | How sampling works |
 | --- | --- |
-| Geographic or projected map | [scienceMapPoint](../tools/objects/terrestrial-layers/scientific-raster.mts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../src/platform/prepare-solid-body-surface.mts) handles the display surface and poles. |
+| Geographic or projected map | [scienceMapPoint](../tools/objects/terrestrial-layers/scientific-raster.mts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../packages/bake/src/scene/solid-body-surface.ts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../tools/objects/terrestrial-layers/obj-uv-fits.mts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
 | Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../tools/objects/surface-observations/levels.mts) selects among qualified frames. |
 
@@ -333,7 +333,7 @@ onto the face. WebKit backs each composited leaf at its box size times the devic
 pixel ratio and ignores the transform: at one texel per CSS pixel, Itokawa's 794
 faces held 486 MB of layer memory on a DPR 3 iPhone, and 173 MB at two. Every
 textured leaf follows the same rule, `TEXELS_PER_CSS_PIXEL` and `leafRasterScale`
-in [projective-surface-raster.mts](../src/platform/projective-surface-raster.mts):
+in [projective-surface-raster.ts](../packages/bake/src/scene/projective-surface-raster.ts):
 faces, polar caps, band leaves, ring tiles, volume slices and image layers hold
 their widest image, over every lens, level and page, at two texels per CSS
 pixel, with the recipe's raster scale as a ceiling. On the iPhone 17 simulator
@@ -358,7 +358,7 @@ Two texels per CSS pixel is what a leaf needs at maximum zoom. At rest the same 
 leaf on screen, and WebKit still backs all of it. So every projective leaf reads a factor, `--leaf-box`: its box,
 background size and position are `calc(<length> * var(--leaf-box, 1))`, and its matrix is followed by
 `scale(calc(1 / var(--leaf-box, 1)))`, so each texel lands where it did at any factor. Without a factor the leaf keeps
-its full box. [leaf-box.mts](../tools/prepared/leaf-box.mts) holds the rule:
+its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds the rule:
 
 - **The factor** is `min(1, step × density)`. A leaf's density is what its box needs per pixel of the body's silhouette:
   two box pixels per screen pixel (`LEAF_BOX_SCREEN_PIXELS`) at its most magnified edge, from its measured scene frame.
@@ -418,7 +418,7 @@ Same pose before and after the change (main, raster atlas, pixelmatch at thresho
 texels at one density, but where the source map is smoother than the old texels the screen does not
 change: the largest difference across all lenses of these three bodies was 0.45%, along a coverage edge.
 Ordinary mapped imagery is sampled from the lossless surface map at this step.
-For banded surfaces, [projective-surface-raster.mjs](../src/platform/projective-surface-raster.mts)
+For banded surfaces, [projective-surface-raster.ts](../packages/bake/src/scene/projective-surface-raster.ts)
 packs latitude bands and gutters; poles have separate prepared tiles.
 Atlas dimensions, tile sizes and padding must agree with those addresses.
 Padding hides sampling seams; it does not add observed coverage.
@@ -431,7 +431,7 @@ overlap was 0.4 CSS pixels per edge at the default view, too little for every
 edge, and 1.9 pixels at feature zoom, where the stretched texture showed as a
 band along each seam.
 
-When a [CSS geometry profile](../src/renderers/css/preparation/scene/profile.ts)
+When a [CSS geometry profile](../packages/bake/src/scene/profile.ts)
 declares a seam outset, preparation writes two corrections instead:
 
 - **Matched raster overscan.** Each surface leaf's texture address and its
@@ -440,7 +440,7 @@ declares a seam outset, preparation writes two corrections instead:
   neighbouring texels.
 - **Stepped seam outset.** Each surface leaf gets a scale per axis, and the body
   a table of silhouette steps
-  ([seam-outset.ts](../src/renderers/css/preparation/scene/seam-outset.ts)). At
+  ([seam-outset.ts](../packages/bake/src/scene/seam-outset.ts)). At
   runtime the body publishes the value for its projected diameter as
   `--surface-seam-outset`, and each leaf scales about its centre by
   `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
@@ -738,7 +738,7 @@ and missing pixels stay missing.
 ## Seam repair and the globe interior disc
 
 **Polar caps.** Every lane closes a band mesh at the poles the same way
-([polar-cap.ts](../src/renderers/css/preparation/scene/polar-cap.ts)): a flat plate rounded to a disc, facing out of
+([polar-cap.ts](../packages/bake/src/scene/polar-cap.ts)): a flat plate rounded to a disc, facing out of
 the body and culled when it turns away. Generated spheres used to grow their bands by a 24-unit seam bleed and draw
 square lids from both sides; on iPad Safari that pushed past the outline at the poles:
 
