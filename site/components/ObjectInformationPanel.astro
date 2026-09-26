@@ -7,96 +7,35 @@ import { orderScientificCharts } from "../scientific-chart-order.mts";
 import ObjectCard from "./ObjectCard.astro";
 import ObjectCardHeader from "./ObjectCardHeader.astro";
 import ObjectFactsheet from "./ObjectFactsheet.astro";
-import SystemList from "./SystemList.astro";
-import { prepareBodyRelations } from "../prepare-body-moons.mts";
+import InformationTabs from './InformationTabs.astro';
 import { satelliteSystemFromUrl } from '../navigation/navigation-scope.mts';
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetLenses from "./DatasetLenses.astro";
-import InformationTabs from './InformationTabs.astro';
+import TreeDisclosure from './TreeDisclosure.astro';
+import { prepareBodyOverview } from '../prepare-body-overview.mts';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], lenses } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const relations = prepareBodyRelations(objectId);
-const tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' },
-  ...(relations ? [{ id: 'moons', label: relations.label }] : [])];
+const hasFacts = facts.length + moreFacts.length > 0;
 const orderedCharts = orderScientificCharts(charts);
-const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
+const overview = await prepareBodyOverview(objectId);
 ---
 
 <ObjectCard class="object-information-panel" data-card-subject={satelliteSystemFromUrl(Astro.url) ? 'satellite-system' : 'body'}
   data-card-view={satelliteSystemFromUrl(Astro.url) ? 'overview' : undefined}>
   <SatelliteSystemCard hostId={objectId} />
-  <BodyOverview {objectId} {title} {introduction} {facts} {moreFacts} />
-      {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
-      <ObjectCardHeader {objectId} heading={false} {title} {introduction}>
+  <BodyOverview {objectId} {title} {introduction} {facts} {moreFacts} {overview} />
+      {/* The overview card above carries the page heading; this card repeats the title. */}
+      <ObjectCardHeader {objectId} heading={false} {title} {introduction} articleUrl={overview.articleUrl}>
           <ObjectBreadcrumbs {objectId} />
       </ObjectCardHeader>
-      <InformationTabs idPrefix={objectId} {tabs} />
+      {hasFacts && <InformationTabs idPrefix={objectId} initialTab="dataset" tabs={[
+        { id: 'factsheet', label: 'Factsheet' },
+        { id: 'dataset', label: 'Datasets' },
+        ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
+      ]} />}
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
-      <div class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset"
-        role="region" aria-label="Datasets">
-      {defaultChart && <details
-        id={`${objectId}-charts`}
-        class="object-chart-switcher"
-        style="display: none;"
-        data-active-chart={defaultChart.id}
-        aria-labelledby={`${objectId}-charts-title`}
-      >
-        <summary class="object-panel-summary object-chart-switcher-header">
-          <h2
-            id={`${objectId}-charts-title`}
-            class="object-panel-heading object-chart-switcher-title"
-            aria-live="polite"
-          >
-            {orderedCharts.map((chart) => (
-              <span
-                class="object-chart-label"
-                data-chart-label={chart.id}
-                hidden={chart.id !== defaultChart.id}
-              >{chart.title.label}</span>
-            ))}
-          </h2>
-          <div class="object-chart-switcher-controls" aria-label="Choose chart">
-            <button
-              class="object-chart-step object-chart-previous"
-              type="button"
-              data-chart-step="-1"
-              aria-controls={`${objectId}-chart-slides`}
-              aria-label="Previous chart"
-              disabled={orderedCharts.length < 2}
-            ><span aria-hidden="true">‹</span></button>
-            <button
-              class="object-chart-step object-chart-next"
-              type="button"
-              data-chart-step="1"
-              aria-controls={`${objectId}-chart-slides`}
-              aria-label="Next chart"
-              disabled={orderedCharts.length < 2}
-            ><span aria-hidden="true">›</span></button>
-          </div>
-        </summary>
-        <div id={`${objectId}-chart-slides`} class="object-chart-slides">
-          {orderedCharts.map((chart) => (
-            <figure
-              id={`${objectId}-${chart.id}`}
-              class="object-chart-slide"
-              data-chart-id={chart.id}
-              data-chart-title={chart.title.label}
-              aria-label={chart.title.label}
-              hidden={chart.id !== defaultChart.id}
-            >
-              <img
-                class="object-chart"
-                src={chart.src}
-                width={chart.width}
-                height={chart.height}
-                alt={chart.alt}
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-          ))}
-        </div>
-      </details>}
+      <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" open>
+      <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasLenses && lenses && <DatasetLenses {objectId} {lenses} />}
       {galleries.map((gallery) => (
       <details id={`${objectId}-${gallery.id}`} class="object-gallery-panel" hidden={gallery.hidden}>
@@ -125,14 +64,21 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         </div>
       </details>
       ))}
-      </div>
-      <div class="object-card-tabpanel" id={`${objectId}-factsheet-content`} data-information-panel="factsheet"
-        role="region" aria-label="Factsheet">
+      </TreeDisclosure>
+      {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
+        <h2 class="object-mobile-information-heading">Factsheet</h2>
         <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
-      </div>
+      </section>}
+      {orderedCharts.length > 0 && <section class="object-card-tabpanel object-charts-content" id={`${objectId}-charts-content`} data-information-panel="charts" aria-label="Charts">
+        <h2 class="object-mobile-information-heading">Charts</h2>
+        <div class="object-chart-list">
+          {orderedCharts.map((chart) => <section class="object-chart-entry" aria-labelledby={`${objectId}-${chart.id}-title`}>
+            <h3 class="object-chart-row" id={`${objectId}-${chart.id}-title`}>{chart.title.label}</h3>
+            <figure class="object-chart-figure">
+              <img class="object-chart" src={chart.src} width={chart.width} height={chart.height} alt={chart.alt} loading="lazy" decoding="async" />
+            </figure>
+          </section>)}
+        </div>
+      </section>}
       <DatasetContextPanels {...Astro.props} />
-      {relations && <div class="object-card-tabpanel object-results-scroll" id={`${objectId}-moons-content`} data-information-panel="moons"
-        role="region" aria-label={relations.label}>
-        <SystemList {relations} />
-      </div>}
     </ObjectCard>

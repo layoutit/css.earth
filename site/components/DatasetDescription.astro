@@ -9,3 +9,4 @@ const { title } = validateDatasetText(lens);
 <SelectedContent {title} description={lens.summary}>
   <slot />
 </SelectedContent>
+{lens.sourceUrl && <a class="object-dataset-source-link" href={lens.sourceUrl} target="_blank" rel="noopener noreferrer">View source ↗</a>}

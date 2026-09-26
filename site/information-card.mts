@@ -6,6 +6,7 @@ import { objectTypeLabel } from './object-classification-label.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
+const TREE_PANEL_STATE = 'tree-sections@1';
 
 /** Bind only the controls replaced with an object's information card. */
 export function mountInformationCard(drawer: HTMLElement, objectId: string,
@@ -15,7 +16,9 @@ export function mountInformationCard(drawer: HTMLElement, objectId: string,
     return controller;
   };
   const tabs = retain(createInformationTabsController(drawer, lifetime));
-  retain(createChartSwitcherController(drawer, windowTarget, lifetime));
+  const dataset = drawer.querySelector<HTMLDetailsElement>('.object-information-panel > .object-dataset-content');
+  // The dataset is a desktop tab and a stacked mobile section, always expanded.
+  if (dataset) dataset.open = true;
   retain(createChartPixelAlignmentController(drawer, windowTarget));
   return {
     show: tabs.show,
@@ -32,6 +35,7 @@ export function restoreInformationPanels(card: HTMLElement, objectId: string, wi
 function informationPanels(card: HTMLElement, windowTarget: BrowserWindow): Panel[] {
   return [...card.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')]
     .filter((panel) => panel instanceof windowTarget.HTMLDetailsElement)
+    .filter((panel) => !panel.classList.contains('object-dataset-content'))
     .map(panel => [panelKey(panel), panel] as const);
 }
 
@@ -44,74 +48,22 @@ export function createInformationTabsController(drawer: HTMLElement, lifetime: S
 export function createTabsController(card: HTMLElement | null, lifetime: SceneLifetime, requestedGroup?: string) {
   const tabs = [...(card?.querySelectorAll<HTMLInputElement>('[data-information-tab]:not([hidden])') ?? [])]
     .filter(tab => requestedGroup === undefined || (tab.dataset.informationGroup ?? 'detail') === requestedGroup);
+  const sections = requestedGroup === undefined
+    ? [...(card?.querySelectorAll<HTMLDetailsElement>(':scope > details[data-information-panel]') ?? [])]
+    : [];
   let disposed = false;
   const destroy = () => { disposed = true; };
   lifetime.onDispose(destroy);
   return { show(id: string) {
     if (disposed) return;
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
-    if (tab) { tab.checked = true; tab.dispatchEvent(new Event('change', { bubbles: true })); }
+    if (tab) {
+      tab.checked = true;
+      tab.dispatchEvent(new tab.ownerDocument.defaultView!.Event('change', { bubbles: true }));
+    }
+    const section = sections.find(panel => panel.dataset.informationPanel === id);
+    if (section) section.open = true;
   }, destroy };
-}
-
-function createChartSwitcherController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const switcher = drawer.querySelector<HTMLElement>(".object-chart-switcher");
-  if (switcher === null) {
-    return Object.freeze({ destroy() {} });
-  }
-  if (!(switcher instanceof windowTarget.HTMLElement)) {
-    throw new Error("Object shell chart switcher is invalid.");
-  }
-  const previous = switcher.querySelector('.object-chart-step[data-chart-step="-1"]');
-  const next = switcher.querySelector('.object-chart-step[data-chart-step="1"]');
-  const slides = [...switcher.querySelectorAll(".object-chart-slide")]
-    .filter((slide) => slide instanceof windowTarget.HTMLElement);
-  const labels = [...switcher.querySelectorAll(".object-chart-label")]
-    .filter((label) => label instanceof windowTarget.HTMLElement);
-  if (!(previous instanceof windowTarget.HTMLButtonElement) ||
-      !(next instanceof windowTarget.HTMLButtonElement) ||
-      slides.length === 0 || labels.length !== slides.length) {
-    throw new Error("Object shell chart switcher is incomplete.");
-  }
-  const chartIds = slides.map((slide) => slide.dataset.chartId ?? "");
-  if (chartIds.some((id) => id.length === 0) ||
-      new Set(chartIds).size !== chartIds.length ||
-      labels.some((label) => !chartIds.includes(label.dataset.chartLabel ?? ""))) {
-    throw new Error("Object shell chart switcher identities are incomplete.");
-  }
-
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  let activeIndex = Math.max(0, chartIds.indexOf(switcher.dataset.activeChart ?? ""));
-  const render = (index: number, notify = true) => {
-    activeIndex = (index + slides.length) % slides.length;
-    const activeId = chartIds[activeIndex];
-    switcher.dataset.activeChart = activeId;
-    for (const slide of slides) slide.hidden = slide.dataset.chartId !== activeId;
-    for (const label of labels) label.hidden = label.dataset.chartLabel !== activeId;
-
-    const previousSlide = slides[(activeIndex - 1 + slides.length) % slides.length];
-    const nextSlide = slides[(activeIndex + 1) % slides.length];
-    previous.ariaLabel = `Previous chart: ${previousSlide.dataset.chartTitle}`;
-    next.ariaLabel = `Next chart: ${nextSlide.dataset.chartTitle}`;
-    previous.disabled = slides.length < 2;
-    next.disabled = slides.length < 2;
-    if (notify) switcher.dispatchEvent(new windowTarget.Event("chartchange"));
-  };
-  for (const button of [previous, next]) {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      render(activeIndex + Number(button.dataset.chartStep));
-    }, { signal: events.signal });
-  }
-  render(activeIndex, false);
-
-  return Object.freeze({
-    destroy() {
-      events.abort();
-    },
-  });
 }
 
 function createPanelController(drawer: HTMLElement, objectId: string, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
@@ -131,7 +83,7 @@ function createPanelController(drawer: HTMLElement, objectId: string, windowTarg
       windowTarget.localStorage.setItem(
         storageKey,
         JSON.stringify(
-          panels.filter(([, panel]) => panel.open).map(([name]) => name),
+          [TREE_PANEL_STATE, ...panels.filter(([, panel]) => panel.open).map(([name]) => name)],
         ),
       );
     } catch {}
@@ -166,7 +118,11 @@ function restorePanelState(panels: readonly Panel[], objectId: string, windowTar
     const saved: unknown = JSON.parse(windowTarget.localStorage.getItem(`css.earth:${objectId}:panels`) ?? "null");
     if (Array.isArray(saved) && saved.every(id => typeof id === 'string')) {
       const openPanels = new Set(saved);
-      for (const [name, panel] of panels) panel.open = openPanels.has(name);
+      for (const [name, panel] of panels) {
+        // Older saved lists predate the main tree disclosures; keep their authored default openness.
+        if (!openPanels.has(TREE_PANEL_STATE) && panel.classList.contains('atlas-tree-disclosure')) continue;
+        panel.open = openPanels.has(name);
+      }
     }
   } catch {}
 }

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import mercury from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
 import venus from '../../../../src/objects/venus/prepared/runtime.json' with { type: 'json' };
-import { selectPreparedResponsiveZoom } from './camera-layout.ts';
+import { MOBILE_OPEN_AREA_SHARE, PHONE_OPEN_AREA_SHARE, selectPreparedResponsiveZoom } from './camera-layout.ts';
 
 type ResponsiveFitOptions = Parameters<typeof selectPreparedResponsiveZoom>[0];
 function responsiveFit(plan: ResponsiveFitOptions["plan"], width: number, height: number, options: Partial<ResponsiveFitOptions> = {}) {
@@ -41,7 +41,7 @@ test('physical responsive framing uses the world context framing reference', () 
   assert.ok(Math.abs(worldReference.zoom / authored.zoom - 1 / plan.defaultZoom) < 1e-12);
 });
 
-test('an elongated body fills a phone\'s open area by its framing scale, so its longest reach fits', () => {
+test('an elongated body fills a portrait tablet\'s open area by its framing scale, so its longest reach fits', () => {
   const plan = mercury.camera;
   const open = (framingScale?: number) => selectPreparedResponsiveZoom({
     viewport: { read: () => ({ bounds: { width: 834, height: 904, x: 0, y: 0, top: 0, left: 0, right: 834, bottom: 904, toJSON() { return {}; } } as DOMRect,
@@ -50,6 +50,18 @@ test('an elongated body fills a phone\'s open area by its framing scale, so its 
   });
   const sphere = open(), elongated = open(0.6231);
   assert.ok(Math.abs(elongated.zoom / sphere.zoom - 0.6231) < 1e-12);
-  // The sphere spans 75% of the 792 px open height; the elongated body's volume-equivalent disc spans its share of it.
-  assert.ok(Math.abs(sphere.zoom / plan.defaultZoom * plan.logicalBodyDiameter - 792 * 0.75) < 1e-9);
+  // The sphere spans the shared mobile share of the 792 px open height; the elongated body's disc spans its share of it.
+  assert.ok(Math.abs(sphere.zoom / plan.defaultZoom * plan.logicalBodyDiameter - 792 * MOBILE_OPEN_AREA_SHARE) < 1e-9);
+});
+
+test('a portrait phone frames more closely without changing the tablet fit', () => {
+  const plan = mercury.camera;
+  const fit = (width: number) => selectPreparedResponsiveZoom({
+    viewport: { read: () => ({ bounds: { width, height: 540, x: 0, y: 0, top: 0, left: 0, right: width, bottom: 540, toJSON() { return {}; } } as DOMRect,
+      focalPixels: 1000, previewTop: null, openArea: { top: 56, bottom: 484 } }), subscribe: () => () => {}, destroy() {} },
+    plan, mobile: true,
+  });
+  const diameter = (width: number) => fit(width).zoom / plan.defaultZoom * plan.logicalBodyDiameter;
+  assert.ok(Math.abs(diameter(390) - 390 * PHONE_OPEN_AREA_SHARE) < 1e-9);
+  assert.ok(Math.abs(diameter(768) - 428 * MOBILE_OPEN_AREA_SHARE) < 1e-9);
 });

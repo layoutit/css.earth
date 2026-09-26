@@ -5,8 +5,8 @@ import type { HTMLAttributes } from 'astro/types';
 import type { ObjectTitle } from '../object-shell-types';
 /** `heading` is the page heading by default; overview cards pass false so a
  * document keeps exactly one h1, the object's own title. */
-interface Props extends Omit<HTMLAttributes<'section'>, 'title'> { title: ObjectTitle; introduction?: string; heading?: boolean; objectId?: string }
-const { title, introduction = '', heading = true, objectId, ...attributes } = Astro.props;
+interface Props extends Omit<HTMLAttributes<'section'>, 'title'> { title: ObjectTitle; introduction?: string; articleUrl?: string; heading?: boolean; objectId?: string }
+const { title, introduction = '', articleUrl, heading = true, objectId, ...attributes } = Astro.props;
 const object = SCENE_OBJECTS.find(candidate => candidate.id === objectId);
 const contentDescription = object && !isDiscoveryAnchor(object) ? discoveryDescription(object.discovery) : null;
 const TitleTag = heading ? 'h1' : 'p';
@@ -19,4 +19,5 @@ const TitleTag = heading ? 'h1' : 'p';
   </div>
   <slot name="image" />
   {introduction && <p class="object-introduction">{introduction}</p>}
+  {introduction && articleUrl && <a class="object-learn-more-link" href={articleUrl} target="_blank" rel="noopener noreferrer">Learn more ↗</a>}
 </section>

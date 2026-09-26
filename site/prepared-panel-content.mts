@@ -1,5 +1,6 @@
 import { requireControls } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
+import { sourceUrl } from '../src/platform/source-catalog.mts';
 import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './object-shell-types.js';
 
 const object = (value: unknown, label: string): Record<string, unknown> => {
@@ -23,6 +24,21 @@ const array = (value: unknown, label: string): readonly unknown[] => {
   if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
   return value;
 };
+/** Join authored dataset links while building the page; no source lookup runs in the browser. */
+export function datasetSourceUrls(input: unknown, objectId: string): ReadonlyMap<string, string> {
+  const content = object(input, 'object content source');
+  if (content.schema !== 'cssearth-object-content@1' || content.id !== objectId) throw new TypeError(`${objectId}: dataset source owner differs.`);
+  const lenses = object(content.lenses, 'object content lenses');
+  const urls = new Map<string, string>();
+  for (const value of array(lenses.controls, 'object content lens controls')) {
+    const control = object(value, 'object content lens');
+    const id = text(control.id, 'object content lens id');
+    if (urls.has(id)) throw new TypeError(`${objectId}: duplicate dataset source for ${id}.`);
+    const source = object(control.source, 'object content lens source');
+    if (source.url !== undefined) urls.set(id, sourceUrl(source.url));
+  }
+  return urls;
+}
 function rasterTitle(value: unknown): PreparedTitle {
   const title = object(value, 'raster title');
   return { label: text(title.label, 'title label'), src: text(title.src, 'title image'), width: number(title.width, 'title width'), height: number(title.height, 'title height') };

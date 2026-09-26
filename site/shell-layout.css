@@ -13,6 +13,7 @@ html[data-shell-context="pending"] .object-sidebar-frame::before {
   border-radius: 16px;
   background: #141414;
   color: #aaa;
+  font: var(--shell-font-content);
 }
 body[data-object-shell] {
   --explorer-header-left: 16px;
@@ -31,7 +32,7 @@ body[data-object-shell] {
   --explorer-header-bar-height: calc(var(--explorer-search-height) + 12px);
   --explorer-header-control-background: var(--explorer-surface-background);
   --explorer-header-control-hover: #242424;
-  --explorer-header-control-selected: #2e2e2e;
+  --explorer-header-control-selected: #262626;
   --explorer-category-height: var(--explorer-search-height);
   /* Fully rounded, like Google Maps' search box and chips. */
   --explorer-control-radius: calc(var(--explorer-search-height) / 2);
@@ -182,7 +183,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   padding-inline: 16px 10px;
   border: 0;
   border-radius: var(--explorer-control-radius);
-  background: var(--explorer-header-control-background);
+  background: var(--explorer-header-control-selected);
   font: var(--shell-font-content);
   letter-spacing: 0.1px;
 }
@@ -527,8 +528,11 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-ui-layer:has(.object-facility-toggle:not(:checked)) .object-dataset-context-rail,
 .object-ui-layer:has(.object-settings-panel:popover-open) .object-dataset-context-rail,
 .object-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .object-dataset-context-rail,
-.object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail,
+.object-information-panel > .object-dataset-content:not([open]) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
+@media (min-width: 821px) and (orientation: landscape) {
+  .object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail { display: none; }
+}
 
 /* Dataset context uses the same cards as the left sidebar. */
 .object-dataset-context-dock { display: contents; }
@@ -569,6 +573,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     --explorer-header-height: calc(var(--explorer-header-bar-height) + var(--explorer-header-row-gap) + var(--explorer-search-height));
   }
 
+  .object-card:has(> .object-selected-panel > .object-breadcrumbs) { padding-block-start: 14px; }
+
   .object-ui-layer {
     position: fixed;
     z-index: 160;
@@ -585,6 +591,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
 
   .object-sidebar-frame {
+    /* Anchor the pending card to the sidebar slot, not the viewport-wide header grid. */
+    position: relative;
     grid-row: 2;
     display: block;
     width: var(--explorer-panel-width);
@@ -670,6 +678,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 @property --sheet-snap-duration { syntax: "<time>"; inherits: false; initial-value: 280ms; }
 
 @media (max-width: 820px), (orientation: portrait) {
+  .object-facility-action { display: none; }
   body[data-object-shell] {
     --explorer-category-height: 36px;
     --explorer-safe-top: env(safe-area-inset-top, 0px);
@@ -693,6 +702,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
        it rests on it. A drag or a snap moves them by transforms written on each of them (shell-sheet.mts); this never
        follows the finger. */
     --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
+  }
+  @media (max-width: 699px) and (orientation: portrait) {
+    body[data-object-shell] { --sheet-peek: calc(304px + var(--explorer-safe-bottom)); }
   }
   body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
   body[data-object-shell][data-sheet="full"] { --sheet-rest: 0px; }

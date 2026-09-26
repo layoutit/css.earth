@@ -59,6 +59,7 @@ export interface LensControl {
   id: string;
   label: string;
   thumbnailUrl: string;
+  sourceUrl?: string;
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
   /** The surface marks missing observations with the shared no-data grid. */
   noData?: boolean;

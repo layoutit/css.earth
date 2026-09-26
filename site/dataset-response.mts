@@ -114,7 +114,8 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   }
   publishDatasetSelection(buttons,
     [...shell.document.querySelectorAll<HTMLElement>('[data-lens-details]')].map(panel => ({ id: panel.dataset.lensDetails!, panel })),
-    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')], new Set([activeLens ?? null]));
+    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')], new Set([activeLens ?? null]),
+    shell.document.querySelector('.object-information-panel .object-lenses'));
   if (dataset.requested || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {
     if (Object.hasOwn(settings, input.name)) {
@@ -122,9 +123,7 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
       else input.setAttribute('value', String(settings[input.name]));
     }
   }
-  for (const tab of dataset.requested ? shell.document.querySelectorAll<HTMLInputElement>('.object-information-panel > .object-native-tabs > [data-information-tab]') : []) {
-    tab.toggleAttribute('checked', tab.dataset.informationTab === 'dataset');
-  }
+  if (dataset.requested) shell.document.querySelector('.object-information-panel > details[data-information-panel="dataset"]')?.setAttribute('open', '');
   // Replace from the end so the original shell offsets remain valid.
   html = html.slice(0, scene.start) + scene.document.body.innerHTML + html.slice(scene.end);
   return html.slice(0, shell.start) + shell.document.body.innerHTML + html.slice(shell.end);

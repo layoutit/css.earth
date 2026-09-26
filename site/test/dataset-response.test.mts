@@ -14,8 +14,10 @@ const scene = await loadPreparedSceneMarkup('saturn');
 const prepared = await readPreparedObjectBytes('saturn');
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body><!--search-shell:start-->
 <input class="object-sheet-handle" type="checkbox"><section class="object-information-panel">
-<div class="object-native-tabs"><input type="radio" data-information-tab="dataset"><input type="radio" data-information-tab="factsheet" checked></div>
+<section data-information-panel="factsheet">Fact</section>
+<details data-information-panel="dataset"><summary>Datasets</summary>
 ${['normal', 'ultraviolet', 'cross-section'].map(id => `<button type="submit" name="dataset" value="${id}" aria-pressed="${id === 'normal'}">${id}</button><div data-lens-details="${id}" ${id === 'normal' ? '' : 'hidden'}>${id}</div>`).join('')}
+</details>
 </section><!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(scene.descriptor)}</script><!--prepared-descriptor:end-->
 <!--prepared-scene:start--><main class="object-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;
 const read: typeof fetch = async input => {
@@ -33,7 +35,7 @@ test('native selection replaces only the existing prepared presentation and sele
     assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-dataset'), id);
     assert.equal(document.querySelector('button[aria-pressed="true"]')?.getAttribute('value'), id);
     assert.equal(document.querySelector('[data-lens-details]:not([hidden])')?.getAttribute('data-lens-details'), id);
-    assert.equal(document.querySelector('[data-information-tab][checked]')?.getAttribute('data-information-tab'), 'dataset');
+    assert.equal(document.querySelector('details[data-information-panel="dataset"][open]')?.getAttribute('data-information-panel'), 'dataset');
     assert.equal(result.slice(0, result.indexOf('<!--search-shell:start-->')), html.slice(0, html.indexOf('<!--search-shell:start-->')));
     assert.equal(result.slice(result.indexOf('<!--prepared-scene:end-->')), html.slice(html.indexOf('<!--prepared-scene:end-->')));
     assert.equal(document.querySelector('.object-stage')?.getAttribute('data-view'), id === 'cross-section' ? 'interior' : null);
