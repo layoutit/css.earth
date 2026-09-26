@@ -5,7 +5,7 @@ import type { SciencePalette } from '@cssearth/bake/objects/raster';
 import type { PreparedTriangle, SourceSurfaceSample } from '@cssearth/bake/objects/geometry';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN as dot } from '@cssearth/core';
-import { parseRadialSnapshot, createRasterEmitter, createSourceMeshLighting, prepareNativePhotographicAtlas } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseRadialSnapshot, createRasterEmitter, createSourceMeshLighting, prepareNativePhotographicAtlas, renderRadialSnapshot, neutralShapeAtlas, shapeFillIllumination } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh, closestTrianglePoint } from '@cssearth/bake/objects/geometry';
 import { resolve, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -14,9 +14,7 @@ import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
 import { createSourceSurfacePainter } from '@cssearth/bake/objects/raster';
 import { missingCoverageColor } from '@cssearth/bake/raster';
-import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
-import { neutralShapeAtlas, shapeFillIllumination } from './shape-material.mts';
 
 interface ObservationTransfer {
   interiorTexels: number; counts: Record<string, number>; sources?: Record<string, number>;

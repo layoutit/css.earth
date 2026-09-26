@@ -7,7 +7,7 @@ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { prepareSolidRasters } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
-import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';
+import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 const parseNavigation = (v: unknown) => { const raw=requireRecord(v); return {...raw,source:shape({path:text})(raw.source)}; };
 const parseSnapshotRecipe=shape({size:number,longitudeDegrees:number,latitudeDegrees:number,ambient:number,diffuse:number,inputs:array(text)});

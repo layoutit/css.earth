@@ -5,7 +5,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
 import { parsePdsPlanetocentricShape } from '@cssearth/bake/objects/geometry';
-import { preparePdsConstraintMap } from './pds-constraint-map.mts';
+import { preparePdsConstraintMap } from '@cssearth/bake/objects/layers/terrestrial';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 
 const table = `6 8

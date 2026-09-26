@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
-import {renderRadialSnapshot} from './radial-snapshot.mts';
+import {renderRadialSnapshot} from '@cssearth/bake/objects/layers/terrestrial';
 
 const normal=[1,0,0];
 const faces=[

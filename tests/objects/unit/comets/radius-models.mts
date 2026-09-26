@@ -1,4 +1,4 @@
-import {SHAPE_MATERIAL} from '../../../../tools/objects/terrestrial-layers/shape-material.mts';
+import {SHAPE_MATERIAL, ellipsoidParameterMesh} from '@cssearth/bake/objects/layers/terrestrial';
 import {preparedModelTerrain, modelConfig, modelSurfaces, modelSettings} from './model-fixture.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../source-test.mts';
@@ -6,7 +6,6 @@ const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
-import {ellipsoidParameterMesh} from '@cssearth/bake/objects/layers/terrestrial';
 import {readAuthoredRotation} from '@cssearth/bake/objects/scene';
 import {requireObjectRotationReference} from '../radial-fixture.mts';
 const json=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));

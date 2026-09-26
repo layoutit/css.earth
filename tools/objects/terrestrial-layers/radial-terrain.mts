@@ -3,11 +3,10 @@ import type { createSourceManifest } from '../../../src/platform/source-manifest
 import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '@cssearth/bake/objects/geometry';
 import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
-import { parseRadialSource, loadEllipsoidParameters, loadContactEllipsoids, completeImageDem, reduceCompletedImageDem } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseRadialSource, loadEllipsoidParameters, loadContactEllipsoids, completeImageDem, reduceCompletedImageDem, preparePdsConstraintMap } from '@cssearth/bake/objects/layers/terrestrial';
 import { resolve } from 'node:path';
 import { loadImageDem, loadPdsScalarGrid } from '@cssearth/bake/objects/raster';
 import { buildSeamBleedPolygonEdges, computeSolidTrianglePlan, SOLID_TRIANGLE_BLEED, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
-import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);

@@ -8,8 +8,7 @@ import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
-import { SHAPE_MATERIAL, neutralShapeAtlas } from './terrestrial-layers/shape-material.mts';
-import { createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
+import { SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareObjectProvenance } from './provenance.mts';
 
 
@@ -19,7 +18,7 @@ const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(va
 const files = ['prepared/scene.json', 'prepared/surfaces.json', 'prepared/material.json',
   'inventory.json', 'object.json', 'source/manifest.json',
   'source/preparation/terrestrial.json'];
-const generators = ['tools/objects/terrestrial-layers/shape-material.mts', 'tools/objects/refresh-shape-lighting.mts'];
+const generators = ['packages/bake/src/objects/layers/terrestrial/shape-material.ts', 'tools/objects/refresh-shape-lighting.mts'];
 
 async function stageShapeLighting(id: string) {
   const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);

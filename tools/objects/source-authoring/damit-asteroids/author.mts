@@ -16,12 +16,11 @@ import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { ENTRY_EVIDENCE } from '../../../sources/author-source-records.mts';
-import { shapeMaterialRaster } from '../../terrestrial-layers/shape-material.mts';
+import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import { loadRadialTerrain } from '../../terrestrial-layers/radial-terrain.mts';
-import { renderRadialSnapshot } from '../../terrestrial-layers/radial-snapshot.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');

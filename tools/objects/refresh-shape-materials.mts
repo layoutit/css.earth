@@ -1,4 +1,4 @@
-import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
 import { sha256 } from '@cssearth/core/node';
 import { readAuthoredSources } from './authored-sources.ts';
@@ -12,12 +12,10 @@ import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
 import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
 import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
-import { SHAPE_MATERIAL, shapeMaterialRaster } from './terrestrial-layers/shape-material.mts';
 import { refreshObservationControls } from './refresh-surface-observations.mts';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.mts';
-import { renderRadialSnapshot } from './terrestrial-layers/radial-snapshot.mts';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
 import { validateMarkerDescriptor, renderMarker } from '../prepare/marker-recipe.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
