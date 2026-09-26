@@ -69,8 +69,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (canonical(publishedPlan['surface-raster-plan']) !== canonical(surfaceRasterPlan))
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
-  // The lighting and atmosphere banks read only the recipe and the body's photometry, so a reuse run redraws them; their file
-  // names are the published ones.
+  // The atmosphere bank reads only the recipe and the body's photometry, so a reuse run redraws it.
   const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
     .map(asset => { if (!asset.startsWith(config.publicBase)) throw new Error(`${descriptor.id}: material asset ${asset} is outside ${config.publicBase}.`); return asset.slice(config.publicBase.length); }) : [];
   const rasterAssets = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>

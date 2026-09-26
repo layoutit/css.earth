@@ -74,7 +74,6 @@
 
 .object-stage:where([data-object-id="earth"])[data-view="interior"] :is(
   .earth-body,
-  .earth-lighting-material,
   .earth-atmosphere-material
 ) {
   visibility: hidden;
@@ -85,17 +84,7 @@
   visibility: visible;
 }
 
-.object-stage:where([data-object-id="earth"])[data-lens="night-lights"] .earth-lighting-material {
-  visibility: hidden;
-}
-
-.object-stage:where([data-object-id="earth"]).earth-hide-atmosphere .earth-atmosphere-material {
-  visibility: hidden;
-}
-
-/* One image shows the planet: with the atmosphere on, its image carries the lit disc and the halo, so the disc-only
-   lighting image stays hidden. City lights are emitted, not reflected sunlight, so their lens takes neither. */
-.object-stage:where([data-object-id="earth"]):not(.earth-hide-atmosphere) .earth-lighting-material,
+/* City lights are emitted, not reflected sunlight, so their lens takes no atmospheric lighting. */
 .object-stage:where([data-object-id="earth"])[data-lens="night-lights"] .earth-atmosphere-material {
   visibility: hidden;
 }
