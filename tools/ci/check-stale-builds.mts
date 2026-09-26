@@ -17,18 +17,20 @@ import { pathToFileURL } from 'node:url';
  * which the metafile's input paths are relative to. */
 export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly inputs?: string; readonly base?: string }
 
-/** The builds preparation tools import. Sources are directories scanned for TypeScript, JSON body records or generator scripts. */
+/** The builds preparation tools import. Sources are directories scanned for TypeScript, JSON body records or generator scripts.
+ * A package's rule follows the rules of the workspace packages it depends on (its package.json `dependencies`), since --run
+ * rebuilds in this order: `@cssearth/bake` declares types from the engine, renderer, objects and catalogue builds. */
 export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/core', command: 'pnpm build:core', sources: ['packages/core/src'], output: 'packages/core/dist/index.js' },
   { name: '@cssearth/fits', command: 'pnpm build:fits', sources: ['packages/fits/src'], output: 'packages/fits/dist/index.js' },
   { name: '@cssearth/spice', command: 'pnpm build:spice', sources: ['packages/spice/src'], output: 'packages/spice/dist/index.js' },
-  { name: '@cssearth/bake', command: 'pnpm build:bake', sources: ['packages/bake/src'], output: 'packages/bake/dist/volume.js', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
   { name: '@cssearth/telescope', command: 'pnpm build:telescope', sources: ['packages/telescope/src'], output: 'packages/telescope/dist/node/index.js' },
   { name: '@cssearth/objects', command: 'pnpm build:objects', sources: ['packages/objects/src'], output: 'packages/objects/dist/index.js' },
   { name: '@cssearth/astronomy', command: 'pnpm build:astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/tools'], output: 'packages/astronomy/dist/index.js' },
   { name: '@cssearth/engine', command: 'pnpm --filter @cssearth/engine build', sources: ['packages/engine/src'], output: 'packages/engine/dist/index.js' },
   { name: '@cssearth/catalog', command: 'pnpm build:catalog', sources: ['packages/catalog/src'], output: 'packages/catalog/dist/index.js' },
   { name: '@cssearth/renderer', command: 'pnpm build:renderer', sources: ['packages/renderer/src'], output: 'packages/renderer/dist/index.js', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
+  { name: '@cssearth/bake', command: 'pnpm build:bake', sources: ['packages/bake/src'], output: 'packages/bake/dist/volume.js', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
   { name: 'preparation tools bundle', command: 'pnpm build:preparation:bundle', sources: ['tools/objects', 'src/preparation'], output: 'tools/objects/dist/prepare-authored.js', inputs: 'tools/objects/dist/metafile-esm.json', base: 'packages/engine' },
 ]);
 

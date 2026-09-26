@@ -56,6 +56,32 @@ test('--run rebuilds only the stale builds, in rule order, and nothing when they
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('a package rule follows the rules of the workspace packages it depends on, so --run never builds it first', async () => {
+  const order = new Map(BUILD_RULES.map((rule, index) => [rule.name, index]));
+  for (const rule of BUILD_RULES.filter(rule => rule.name.startsWith('@cssearth/'))) {
+    const manifest = JSON.parse(await readFile(new URL(`../../packages/${rule.name.slice('@cssearth/'.length)}/package.json`, import.meta.url), 'utf8')) as
+      { dependencies?: Record<string, string> };
+    for (const dependency of Object.keys(manifest.dependencies ?? {}).filter(name => order.has(name)))
+      assert.ok(order.get(dependency)! < order.get(rule.name)!, `${rule.name} is rebuilt before its dependency ${dependency}.`);
+  }
+});
+
+test('with the engine and the bake both stale, --run rebuilds the engine first', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'rebuild-stale-order-'));
+  try {
+    for (const rule of BUILD_RULES) {
+      for (const source of rule.sources) { await mkdir(join(root, source), { recursive: true }); await writeFile(join(root, source, 'index.ts'), 'export {}'); await utimes(join(root, source, 'index.ts'), 1000, 1000); }
+      await mkdir(join(root, rule.output, '..'), { recursive: true }); await writeFile(join(root, rule.output), '');
+      await utimes(join(root, rule.output), 2000, 2000);
+      if (rule.inputs) { await writeFile(join(root, rule.inputs), JSON.stringify({ inputs: {} })); await utimes(join(root, rule.inputs), 2000, 2000); }
+    }
+    for (const name of ['engine', 'bake']) await utimes(join(root, `packages/${name}/src/index.ts`), 3000, 3000);
+    const ran: string[] = [];
+    await rebuildStale(root, BUILD_RULES, async command => { ran.push(command); });
+    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm build:bake']);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('every root script a build rule runs exists in package.json', async () => {
   const { scripts } = JSON.parse(await readFile(new URL('../../package.json', import.meta.url), 'utf8')) as { scripts: Record<string, string> };
   for (const rule of BUILD_RULES) {
