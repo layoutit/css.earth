@@ -2,8 +2,7 @@ import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from '@cssearth/bake/objects/geometry';
-import { parsePdsPlateShape } from '@cssearth/bake/objects/geometry';
+import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler, parsePdsPlateShape } from '@cssearth/bake/objects/geometry';
 
 test('flagged PDS plates preserve observed, ellipsoid and joining provenance', () => {
   const table = '4 4\n1 0 0 0\n0 1 0 0\n0 0 1 0\n-1 -1 -1 1\n0 1 2 0\n0 3 1 2\n1 3 2 2\n2 3 0 2';

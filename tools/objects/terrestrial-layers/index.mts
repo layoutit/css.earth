@@ -27,10 +27,9 @@ import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from '
 import { prepareRadialMaterials } from './radial-materials.mts';
 import { loadRadialModels, combineRadialModels } from './radial-models.mts';
 import { radialTerrainForLens } from './alternative-lenses.mts';
-import { validateRadialTableProfile } from '@cssearth/bake/objects/geometry';
+import { validateRadialTableProfile, validateFacetFieldRecipe } from '@cssearth/bake/objects/geometry';
 import { validateFitsObservationPolicy } from './observed-fits.mts';
 import { validateSurfaceObservation } from '../surface-observations/index.mts';
-import { validateFacetFieldRecipe } from '@cssearth/bake/objects/geometry';
 type SolidConfig=ReturnType<typeof parseSolidPreparationSource>;
 type Directories={sourceDirectory:string;publicDirectory:string;outputDirectory:string};
 type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnType<typeof createSourceManifest>>};

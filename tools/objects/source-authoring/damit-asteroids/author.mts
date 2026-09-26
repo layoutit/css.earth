@@ -19,9 +19,8 @@ import { ENTRY_EVIDENCE } from '../../../sources/author-source-records.mts';
 import { shapeMaterialRaster } from '../../terrestrial-layers/shape-material.mts';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { loadPdsPlateShape } from '@cssearth/bake/objects/geometry';
+import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import { loadRadialTerrain } from '../../terrestrial-layers/radial-terrain.mts';
-import { requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import { renderRadialSnapshot } from '../../terrestrial-layers/radial-snapshot.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../../..');

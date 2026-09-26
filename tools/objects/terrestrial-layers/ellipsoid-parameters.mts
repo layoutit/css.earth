@@ -1,7 +1,6 @@
 import { parseEllipsoidParameters } from './source-records.mts';
-import { parseMeshProfile } from '@cssearth/bake/objects/geometry';
+import { parseMeshProfile, parseObjShape } from '@cssearth/bake/objects/geometry';
 import { readFile } from 'node:fs/promises';
-import { parseObjShape } from '@cssearth/bake/objects/geometry';
 
 /** Preparation-only tessellation. The authored parameters specify a smooth
  * approximation; they never stand in for a recovered convex mesh or terrain. */

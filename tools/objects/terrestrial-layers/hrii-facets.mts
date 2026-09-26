@@ -2,8 +2,7 @@ import { cross3 as cross, array, choice, number, shape, text } from '@cssearth/c
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {gzipSync} from 'node:zlib';
-import { parseMeshProfile } from '@cssearth/bake/objects/geometry';
-import {loadPdsPlanetocentricShape} from '@cssearth/bake/objects/geometry';
+import { parseMeshProfile, loadPdsPlanetocentricShape } from '@cssearth/bake/objects/geometry';
 import {decodeHriiSpectra,decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spectra.mts';
 import {hriiCamera,hriiControlResidual} from './hrii-camera.mts';
 import {parseHriiContext,parseHriiDenseFit,loadHriiContext,fitHriiPointing} from './hrii-pointing.mts';

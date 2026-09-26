@@ -5,11 +5,10 @@
  */
 import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
 import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { parseCameraFrame } from '@cssearth/bake/objects/geometry';
+import { parseCameraFrame, checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '@cssearth/bake/objects/geometry';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '@cssearth/bake/objects/geometry';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { bandColorDisplay, type BandColorDisplay } from '@cssearth/bake/objects/color';
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';

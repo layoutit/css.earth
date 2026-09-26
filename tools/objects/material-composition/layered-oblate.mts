@@ -11,7 +11,7 @@ interface AtlasPlanMetadata {model:string;defaultVariant?:string;defaultPrepared
   maximumRetainedAtlasCount:number;initialDecodedWorkingSetBytes:number;maximumDecodedWorkingSetBytes:number;fullAtlasDecodedRgbaBytes:number;}
 type AtlasPlan=AtlasPlanMetadata & (AtlasVariant & {variants?:undefined}|{variants:Record<string,AtlasVariant>});
 import type {Polygon,Vec3,PolyTextureImageSource,ComputeTextureAtlasPlanOptions} from '@layoutit/polycss';
-import type {SilhouetteOptions,Vector3} from '@cssearth/bake/objects/geometry';
+import type { SilhouetteOptions, Vector3, ReadonlyVector3 } from '@cssearth/bake/objects/geometry';
 type Pole='north'|'south';
 interface LayeredPolygon extends Polygon {textureImageSource:PolyTextureImageSource;latitudeIndex?:number;longitudeIndex?:number;lightingFaceIndex?:number;polarCap?:Pole;polarRole?:string;}
 interface SurfaceAsset {url:string;url2x:string;width:number;height:number;asset2x:{width:number};}
@@ -28,7 +28,6 @@ import {interiorSource} from '../cutaway/source-contract.mts';
 import type {prepareRadialMotionAndShadow} from './radial-motion.mts';
 import type {prepareSpectralMaterialVariants} from './spectral-variants.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
-import type {ReadonlyVector3} from '@cssearth/bake/objects/geometry';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   ringGroups:PointGroup[];

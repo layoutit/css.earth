@@ -6,13 +6,12 @@ import type { PreparedTriangle, SourceSurfaceSample } from '@cssearth/bake/objec
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN as dot } from '@cssearth/core';
 import { parseRadialSnapshot } from './radial-source.mts';
-import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
+import { requireTerrainMesh, closestTrianglePoint } from '@cssearth/bake/objects/geometry';
 import { resolve, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { closestTrianglePoint } from '@cssearth/bake/objects/geometry';
 import { createSourceSurfacePainter } from './scientific-raster.mts';
 import { missingCoverageColor } from '@cssearth/bake/raster';
 import { createRasterEmitter } from './raster-output.mts';

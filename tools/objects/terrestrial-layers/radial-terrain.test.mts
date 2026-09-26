@@ -1,6 +1,6 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
-import { createIndexedShape } from '@cssearth/bake/objects/geometry';
+import { createIndexedShape, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
@@ -8,8 +8,6 @@ import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { loadRadialTerrain, rasterAtlasLayout, rasterLeafStyle } from './radial-terrain.mts';
-import { radialTriangles, simplifyRadialShape, validateClosedMesh } from '@cssearth/bake/objects/geometry';
-import { removeOppositeFacePairs } from '@cssearth/bake/objects/geometry';
 import { fillUndrawnTexels } from './radial-materials.mts';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mts';
 const test = sourceTest();

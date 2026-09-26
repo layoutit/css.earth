@@ -14,8 +14,7 @@ import { array, literal, number, object, optional, parse, string, tuple, union, 
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
-import { requireTerrainMesh, sampleRadialTriangles } from '@cssearth/bake/objects/geometry';
-import { loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
+import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { offLimbPlate } from './off-limb-plate.mts';
@@ -32,14 +31,13 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
-import { loadDiscIntegratedColor } from '@cssearth/bake/objects/color';
+import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 import { loadDiscBandColor } from './disc-band-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
-import { encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */

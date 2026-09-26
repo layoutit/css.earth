@@ -1,8 +1,7 @@
 import { parseContactModel } from './source-records.mts';
-import { parseMeshProfile } from '@cssearth/bake/objects/geometry';
+import { parseMeshProfile, parseObjShape } from '@cssearth/bake/objects/geometry';
 import { readFile } from 'node:fs/promises';
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
-import { parseObjShape } from '@cssearth/bake/objects/geometry';
 
 /** Tessellate published contact-body parameters. This is an inferred model,
  * never recovered terrain. X joins the lobe centres; Z is the spin axis.

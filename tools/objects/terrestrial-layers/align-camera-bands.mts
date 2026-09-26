@@ -4,9 +4,7 @@ import { sha256 } from '@cssearth/core/node';
 import {readFile,writeFile} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {requireRecord,requireString,array,shape,text} from '@cssearth/core';
-import { parseCameraFrame } from '@cssearth/bake/objects/geometry';
-import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from '@cssearth/bake/objects/geometry';
-import {alignCameraBands,BAND_ALIGNMENT_CRITERIA,BAND_ALIGNMENT_METHOD,BAND_ALIGNMENT_SETTINGS} from '@cssearth/bake/objects/geometry';
+import { parseCameraFrame, loadCameraShape, controlledShapeCamera, decodeCalibratedCamera, alignCameraBands, BAND_ALIGNMENT_CRITERIA, BAND_ALIGNMENT_METHOD, BAND_ALIGNMENT_SETTINGS } from '@cssearth/bake/objects/geometry';
 
 const jobPath=process.argv[2],outputPath=process.argv[3];
 if(!jobPath||!outputPath)throw new Error('Usage: align-camera-bands.mts JOB.json REPORT.json [--check-only]');
