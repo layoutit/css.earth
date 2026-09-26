@@ -68,6 +68,15 @@ test('the object colour transfer and atlas mosaic a sky-band owner reaches are p
   assert.equal(pins.some(pin => pin.path.startsWith('packages/bake/dist/')), false);
 });
 
+/** A compiler publication pins at most 500 inputs (readPublishedCompiler); the compiler entry's owners are most of them. 340 at
+ * J slice 2 (it was 263 before the object raster entry). Fail here, well before a publish is refused, and split the entry the
+ * compiler reaches or raise the publication limit on purpose. */
+const COMPILER_OWNER_BUDGET = 450;
+test('the compiler cache identity stays under its owner budget, well inside the publication limit', async () => {
+  const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
+  assert.ok(pins.length <= COMPILER_OWNER_BUDGET, `${pins.length} compiler owners exceed the budget of ${COMPILER_OWNER_BUDGET}`);
+});
+
 test('sampled supplementary owner allowlist points at existing implementation files', async () => {
   const { sampledImplementationOwners } = await import('../../features/sampled-prior/ownership.ts');
   const { stat } = await import('node:fs/promises');
