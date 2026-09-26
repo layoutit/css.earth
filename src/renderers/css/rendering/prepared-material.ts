@@ -107,7 +107,9 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
         for(const binding of selected.addressAttributes??[]){
           const value=binding.source==="frame"?String(next.frame):binding.source==="mode"?next.mode:
             binding.source==="mode-or-frame"?next.mode==="directional"?String(next.frame):next.mode:binding.value;
-          if(value===null)element.removeAttribute(binding.name);else element.setAttribute(binding.name,value);
+          // Written only on change: a lit body publishes every frame (motion-freezes-membership.md).
+          if(value===null){if(element.hasAttribute(binding.name))element.removeAttribute(binding.name);}
+          else if(element.getAttribute(binding.name)!==value)element.setAttribute(binding.name,value);
         }
       }
       if(track.rotation&&(!track.rotation.onlyWhenEnabled||next.enabled)&&(!track.rotation.publishWithAddress||addressPublished)){
@@ -121,7 +123,7 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
           const transform = project({ degrees: angle, projection: view.projection,
             counterMatrix: view.counterRotationFor(projection.systemTransform) });
           if (rotation.physical) {
-            element.style.removeProperty('rotate');
+            if(element.style.getPropertyValue('rotate'))element.style.removeProperty('rotate');
             // These prepared textures carry their centre in the physical matrix.
             if (write('transformOrigin', '0 0')) state.transformWrites++;
           }
@@ -133,8 +135,8 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
         } else throw new TypeError("Unknown prepared material rotation.");
         state.lightRollDegrees=angle;
       }
-      if(track.frameAttribute)element.setAttribute(track.frameAttribute,String(state.frame));
-      if(track.modeAttribute)element.setAttribute(track.modeAttribute,String(state.mode));
+      if(track.frameAttribute&&element.getAttribute(track.frameAttribute)!==String(state.frame))element.setAttribute(track.frameAttribute,String(state.frame));
+      if(track.modeAttribute&&element.getAttribute(track.modeAttribute)!==String(state.mode))element.setAttribute(track.modeAttribute,String(state.mode));
     },
     observe:()=>Object.freeze({...state}),
   });

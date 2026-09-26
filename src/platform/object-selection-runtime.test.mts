@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
+import { cameraMotionSignalFor } from '../renderers/css/dist/navigation.js';
 import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture, preparedSelectionFixture } from "./test/object-runtime-package.mts";
 import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
@@ -39,8 +40,9 @@ interface HarnessOptions {
   onTicket?: (ticket: PreparedResidencyTicket) => void;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   deferTextureRefinement?: boolean;
+  motion?: ReturnType<typeof cameraMotionSignalFor>;
 }
-function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: HarnessOptions = {}) {
+function harness({ onTicket, onChange, deferTextureRefinement, initialLens, motion }: HarnessOptions = {}) {
   const definition = earthDefinition, f = retainedPresentationFixture(definition);
   const jobs: ImageJob[] = [], commits: { selection: ObjectSelection; plan: PreparedPresentationPlan }[] = [], changes: Readonly<ObjectSelectionState>[] = [], fatal: unknown[] = [], materialErrors: unknown[] = [], created: ReturnType<typeof f.document.createElement>[] = [];
   const createElement = f.document.createElement;
@@ -57,17 +59,17 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: Ha
   const presentationContext: PreparedPresentationContext & { resources: typeof resources.resources } = { ...f.context, resources: resources.resources };
   const presentation = mountPreparedPresentation(f.stage, presentationContext, definition);
   const coordinator = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime,
-    deferTextureRefinement, initialLens,
+    deferTextureRefinement, initialLens, motion,
     onChange: state => { changes.push(state); onChange?.(state); }, onCommit: (selection, plan) => commits.push({ selection, plan }),
     onFatalError(error) { fatal.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => coordinator.destroy());
   let revision = 0, currentView: PreparedView | undefined;
-  function view(row: number, withinRow = 0): PreparedView {
+  function view(row: number, withinRow = 0, silhouetteDiameter = 100): PreparedView {
     const track = definition.materials[1], frame = 20 + row * 32 + withinRow;
     const z = frame / (track.frame.indices.length - 1) * 2 - 1;
     const direction: readonly [number, number, number] = [Math.sqrt(1 - z * z), 0, z];
     const next: PreparedView = { ...f.view, controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
-      levelOfDetail: { stage: 'geometry', silhouetteDiameter: 100, billboardOpacity: 0, markerOpacity: 0 },
+      levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 },
       revision: ++revision, sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
       sunViewDirection: direction, reference: currentView?.reference, };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
@@ -275,4 +277,19 @@ test('an already aborted dataset signal cannot replace a newer selection', async
   assert.equal(await h.coordinator.dispatch({ kind: 'lens', id: 'normal' }, { signal: aborted.signal }), false);
   await h.resolveJobs(); assert.equal(await next, true);
   const topographyAfterAbort = h.coordinator.state().committed; assert.ok(topographyAfterAbort); assert.equal(topographyAfterAbort.lensId, 'topography');
+});
+
+test("blur while moving: a texture level waits for the camera to stop, then commits for where it stopped", async t => {
+  const motion = cameraMotionSignalFor(new EventTarget());
+  const h = harness({ motion }); t.after(h.restore); await h.ready();
+  const level = () => h.commits.at(-1)!.plan.textureLevel;
+  const before = h.commits.length, startLevel = level();
+  motion.begin("drag");
+  // Close in: the silhouette grows past the texture levels while the camera still moves.
+  h.view(0, 0, 900); await h.resolveJobs();
+  assert.equal(h.commits.length, before, "no texture level commits mid-motion");
+  motion.end("drag");
+  await h.resolveJobs();
+  assert.ok(h.commits.length > before, "the held level commits once the camera stops");
+  assert.notEqual(level(), startLevel);
 });
