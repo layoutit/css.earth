@@ -32,6 +32,8 @@ import { createWorldPreferences } from '../world-preferences.mts';
 import { createDatasetEffects } from './scene-datasets.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
 import { readPreparedDescriptor } from '../prepared-descriptor.mts';
+import { watchSatelliteSelection } from '../satellite-selection.mts';
+import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
@@ -356,7 +358,8 @@ export function createSceneRouter({
       const selectionTransition = request.subject.kind === 'focus' ? null : shellOwner?.shell?.beginNavigation?.(request.subject.kind === 'overview'
         ? { kind: 'overview', overview: request.subject.overview,
           preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
-        : { kind: 'object', object, targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
+        : { kind: request.subject.kind === 'satellite-system' ? 'satellite-system' : 'object', object,
+          targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && request.scene === 'reuse') {
         return await focusExistingScene({ session: source, request, selectionTransition, navigation, requests, view,
@@ -427,7 +430,10 @@ export function createSceneRouter({
       if (ready.selection.current.kind === 'overview') aimAtSystemCenter(ready);
     }
     syncPlayback();
-    if (mounted) connectOverviewSelection(ready, session);
+    if (mounted) {
+      connectOverviewSelection(ready, session);
+      connectSatelliteSelection(ready, session);
+    }
     if (request && (interrupted || (request.scene === 'replace'
       ? request.history.history !== 'pop' : request.camera.kind !== 'restore'))) session.viewUrl?.flush();
   }
@@ -466,7 +472,7 @@ export function createSceneRouter({
   /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
   function worldOwnsArrival() {
     const params = new URL(windowTarget.location.href).searchParams;
-    return ['focus', 'focusLens', 'overview'].some(name => params.has(name));
+    return ['focus', 'focusLens', 'overview', 'view'].some(name => params.has(name));
   }
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
@@ -488,7 +494,7 @@ export function createSceneRouter({
     if (stage.dataset) {
       const current = subject ?? { kind: 'object' as const, objectId };
       stage.dataset.selection = current.kind === 'overview' ? current.overview.scope
-        : current.kind === 'focus' ? current.id : current.objectId;
+        : current.kind === 'focus' ? current.id : current.kind === 'satellite-system' ? current.hostId : current.objectId;
     }
     publication.publish();
   }
@@ -536,6 +542,27 @@ export function createSceneRouter({
           return;
         }
         void navigate(next.objectId, { kind: 'overview', scope: 'system', camera: 'preserve' });
+      },
+    }));
+  }
+  function connectSatelliteSelection(ready: RouterContext, session: Session) {
+    if (!satelliteSystemByHost(objectId) && !satelliteSystemOfMember(objectId)) return;
+    const owner = session.mount?.navigation;
+    if (!owner) return;
+    const current = ready.selection;
+    session.own(watchSatelliteSelection({ navigation: owner, objects: ready.registry.SCENE_OBJECTS,
+      getSelection: () => current.context,
+      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
+        && current.current.kind !== 'focus',
+      documentTarget, windowTarget,
+      onChange(next) {
+        if (next.kind === 'satellite-system' && next.hostId !== objectId) {
+          void navigate(next.hostId, { kind: 'satellite-system', camera: 'preserve' }).catch(report);
+          return;
+        }
+        current.commit(next, objectId);
+        view.replace(session, current.url(windowTarget.location.href));
+        session.viewUrl?.flush();
       },
     }));
   }

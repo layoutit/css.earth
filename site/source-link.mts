@@ -4,7 +4,7 @@ export interface SourceDocumentReference {
 
 /** Reuse document links prepared on the retained navigation rows. */
 export function sourceDocuments(document: Document): Map<string, SourceDocumentReference> {
-  return new Map([...document.querySelectorAll<HTMLElement>(':is(.object-browser, .object-context) [data-source-subject]')]
+  return new Map([...document.querySelectorAll<HTMLElement>(':is(.object-browser, .object-context, .object-information-panel) [data-source-subject]')]
     .map(node => [node.dataset.sourceSubject!, node]));
 }
 

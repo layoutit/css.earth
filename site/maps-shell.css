@@ -556,6 +556,29 @@
 .object-information-panel [data-information-panel="moons"] .object-list {
   width: 100%;
 }
+.object-information-panel [data-satellite-system].object-results-scroll .object-list {
+  width: 100%;
+  gap: 4px;
+}
+.object-information-panel [data-satellite-system] .object-observation-control.object-thumbnail-leading {
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 10px;
+  min-height: 30px;
+}
+.object-information-panel [data-satellite-system] .object-lens-icon {
+  grid-column: 1;
+  width: 24px;
+  height: 24px;
+}
+.object-information-panel [data-satellite-system] .object-lens-icon > .object-search-preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.object-information-panel [data-satellite-system] .object-lens-label { grid-column: 2; }
+.object-information-panel [data-satellite-system] .object-lens-detail,
+.object-information-panel [data-satellite-system] .object-observation-control::after { display: none; }
 .object-results-scroll .object-link[aria-disabled="true"] {
   color: var(--shell-text-muted);
   cursor: default;
@@ -594,8 +617,10 @@
 
 /* Keep both body cards retained; zoom only changes which view is visible.
    A registry-only selection preview has one view until its fragment arrives. */
-.object-information-panel:not([data-card-view="overview"]) > [data-body-overview],
-.object-information-panel[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
+.object-information-panel:not([data-card-subject="satellite-system"]) > [data-satellite-system],
+.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system], [data-card-preview]),
+.object-information-panel:not([data-card-subject="satellite-system"]):not([data-card-view="overview"]) > [data-body-overview],
+.object-information-panel:not([data-card-subject="satellite-system"])[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
   display: none !important;
 }
 .object-body-overview-image {

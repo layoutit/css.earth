@@ -37,6 +37,12 @@ the prepared world context and the registry, so no list names them. Every
 member shares its star's `systemName`, and the derivation fails otherwise. A
 star without orbiting bodies, such as Betelgeuse, belongs to no system.
 
+Inside a stellar system, every nonstellar host with prepared satellite children
+has a [satellite-system selection](satellite-system-navigation.md). Its
+`?view=satellites` URL and `satellite-system:<host-id>` identity name the family;
+the plain host and satellite routes name individual bodies. The family uses the
+host's mounted scene and the same world camera.
+
 ![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
 
 Each system has the same overview, `?overview=system` on its star's route:

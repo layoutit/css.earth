@@ -41,7 +41,8 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
     }) });
     return { sceneState, playing, playback, scene: Object.freeze({
       activeObjectId: objectId,
-      selectedObjectId: selected.kind === 'object' ? selected.objectId : selected.kind === 'focus' ? selected.id : null,
+      selectedObjectId: selected.kind === 'object' ? selected.objectId
+        : selected.kind === 'satellite-system' ? selected.hostId : selected.kind === 'focus' ? selected.id : null,
       overview: selected.kind === 'overview',
       error: state.kind === 'failed' ? state.error.message : null,
       lifecycle: sceneState === 'ready' ? (playing ? 'mounted' : 'paused') : sceneState,
