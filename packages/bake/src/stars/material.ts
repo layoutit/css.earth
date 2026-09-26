@@ -1,6 +1,6 @@
 import sharp from 'sharp';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
-import type { PreparedCssPointFieldManifest as PreparedCssPointField, Rgb, StarsRecipe } from '../../../../preparation/stars/types.js';
+import type { PreparedCssPointFieldManifest as PreparedCssPointField, Rgb, StarsRecipe } from './types.ts';
 
 function smoothstep(min: number, max: number, value: number) { const t = Math.max(0,Math.min(1,(value-min)/(max-min))); return t*t*(3-2*t); }
 /** Offline integration of Galaxio's settled (zero-motion) compact core/halo PSF; ordinary PNG alpha. */

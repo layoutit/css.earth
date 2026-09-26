@@ -2,19 +2,19 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import { M_PER_PC } from '@cssearth/astronomy';
-import { parseStarsRecipe } from './config.js';
+import { parseStarsRecipe } from './config.ts';
 import { requireRecord as record, requireNonemptyText as text } from '@cssearth/core';
-import { palette } from './color.js';
-import { loadStarSource } from './source.js';
-import { prepareStarHierarchy } from './hierarchy.js';
-import { preparePointAtlas, preparePointPhotometry } from '../../renderers/css/preparation/stars/material.js';
-import { containedPath, sourceBytes } from '@cssearth/bake/volume/node';
+import { palette } from './color.ts';
+import { loadStarSource } from './source.ts';
+import { prepareStarHierarchy } from './hierarchy.ts';
+import { preparePointAtlas, preparePointPhotometry } from './material.ts';
+import { containedPath, sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { PreparedCssPointFieldManifest } from './types.js';
-import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse-sky.js';
-import { encodePointFieldBank } from '../../renderers/css/preparation/stars/point-field-bank.js';
+import type { PreparedCssPointFieldManifest } from './types.ts';
+import { prepareDiffuseSky } from './diffuse-sky.ts';
+import { encodePointFieldBank } from './point-field-bank.ts';
 import sharp from 'sharp';
-import { encodeLossyWebp } from '@cssearth/bake/raster';
+import { encodeLossyWebp } from '../raster/index.ts';
 
 export async function prepareStarsObject(options: { objectDirectory: string; outputDirectory?: string; inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory,'prepared'));
@@ -64,7 +64,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   return envelope;
 }
 
-function prepareDirectPoints(stars: readonly import('./types.js').PreparedStar[], limit: number, catalogueCount: number) {
+function prepareDirectPoints(stars: readonly import('./types.ts').PreparedStar[], limit: number, catalogueCount: number) {
   const sourceRow = (id: string) => {
     const value = Number(id.slice(id.lastIndexOf(':') + 1));
     if (!Number.isSafeInteger(value) || value < 0) throw new TypeError(`Star ${id} has no source row.`);

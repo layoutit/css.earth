@@ -1,5 +1,5 @@
 import { requireFiniteNumber as finite, requireNonemptyText as text, requirePositive as positive, requireRecord as record } from '@cssearth/core';
-import type { StarsRecipe } from './types.js';
+import type { StarsRecipe } from './types.ts';
 function integer(value: unknown, label: string): number { const v = positive(value, label); if (!Number.isSafeInteger(v)) throw new TypeError(`${label} must be an integer.`); return v; }
 function reference(value: unknown, label: string) {
   const r = record(value, label), path = text(r.path, `${label} path`);

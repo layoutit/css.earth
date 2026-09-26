@@ -1,4 +1,4 @@
-import type { Point3 } from './types.js';
+import type { Point3 } from './types.ts';
 
 /** Published hierarchy precision, in parsecs and magnitudes. Source rows stay exact.
  * Native pow/log/hypot can differ by an ulp across CPUs; their full binary64

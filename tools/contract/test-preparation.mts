@@ -24,7 +24,7 @@ const universeEntries = [
   'src/preparation/spatial-context.test.ts',
   'tools/objects/prepare-spatial-context.test.ts',
   'tools/objects/world-navigation.test.ts',
-  'src/preparation/stars/stars.test.ts',
+  'packages/bake/src/stars/stars.test.ts',
   'src/preparation/shell/shell.test.ts',
   'src/preparation/shell/mesh-subdivision.test.ts',
 ];

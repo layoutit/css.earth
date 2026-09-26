@@ -4,7 +4,7 @@ import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '@cssearth/renderer/stars/types.ts';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
 
-const base = new URL('../../../../objects/stellar-neighbourhood/', import.meta.url);
+const base = new URL('../../src/objects/stellar-neighbourhood/', import.meta.url);
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Node test fixture: the checked-in stellar neighbourhood manifest and bank. */

@@ -9,7 +9,7 @@ import { containedPath, sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
 import { prepareSurfaceShellObject } from './shell/prepare.js';
 import { prepareDensityVolumeObject } from './volume/prepare.js';
-import { prepareStarsObject } from './stars/prepare.js';
+import { prepareStarsObject } from '@cssearth/bake/stars';
 
 interface Resource { path: string; sha256: string; bytes: number }
 interface Descriptor {

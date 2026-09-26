@@ -8,14 +8,14 @@ import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astr
 import { readCatalog } from '@cssearth/catalog';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
 import sharp from 'sharp';
-import { parseStarsRecipe } from './config.js';
-import { sourceBytes } from '@cssearth/bake/volume/node';
+import { parseStarsRecipe } from './config.ts';
+import { sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
 import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/renderer/stars/point-field-bank.ts';
-import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.js';
-import { prepareStarHierarchy } from './hierarchy.js';
+import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.ts';
+import { prepareStarHierarchy } from './hierarchy.ts';
 
 const objectDirectory = 'src/objects/stellar-neighbourhood', sourceDirectory = `${objectDirectory}/source`, preparedDirectory = `${objectDirectory}/prepared`;
 function coverageCell(x:number,y:number,z:number,divisions:number):number { const ax=Math.abs(x),ay=Math.abs(y),az=Math.abs(z),d=Math.max(ax,ay,az); if (!(d>0)) return -1; let face:number,u:number,v:number; if(ax>=ay&&ax>=az){face=x>=0?0:1;u=(x>=0?-z:z)/d;v=y/d;}else if(ay>=az){face=y>=0?2:3;u=x/d;v=(y>=0?-z:z)/d;}else{face=z>=0?4:5;u=(z>=0?x:-x)/d;v=y/d;} const c=(n:number)=>Math.min(divisions-1,Math.max(0,Math.floor((n+1)*divisions/2))); return face*divisions**2+c(v)*divisions+c(u); }

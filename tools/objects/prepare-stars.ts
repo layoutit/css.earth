@@ -1,7 +1,7 @@
 /** Offline stars preparation CLI; implementation is shared with image restoration. */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { prepareStarsObject as prepareStars } from '../../src/preparation/stars/prepare.js';
+import { prepareStarsObject as prepareStars } from '@cssearth/bake/stars';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 
 /** The star preparation with this checkout's inventory of the published prepared closure. */

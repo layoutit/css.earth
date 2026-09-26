@@ -1,6 +1,6 @@
-import type { Point3, PreparedStar, PreparedStarNode, Rgb } from './types.js';
-import { nearestColor } from './color.js';
-import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.js';
+import type { Point3, PreparedStar, PreparedStarNode, Rgb } from './types.ts';
+import { nearestColor } from './color.ts';
+import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.ts';
 
 /** Every input row occurs exactly once in the reordered array. Internal bounds contain its actual members. */
 export function prepareStarHierarchy(input: readonly PreparedStar[], colors: readonly Rgb[], leafSize: number, maximumDepth: number) {

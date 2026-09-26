@@ -1,5 +1,5 @@
 import { temperatureColor } from '@cssearth/engine';
-import type { Rgb, StarsRecipe } from './types.js';
+import type { Rgb, StarsRecipe } from './types.ts';
 
 export function palette(config: StarsRecipe['colors']): readonly Rgb[] {
   return Array.from({ length: config.count }, (_, i) => temperatureColor(config.minimumTemperatureK * (config.maximumTemperatureK / config.minimumTemperatureK) ** (i / (config.count - 1))));

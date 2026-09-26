@@ -1,9 +1,9 @@
 import sharp from 'sharp';
 import { mkdir,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceBytes } from '@cssearth/bake/volume/node';
+import { sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { PreparedCssPointFieldManifest as PreparedCssPointField,StarsRecipe } from '../../../../preparation/stars/types.js';
+import type { PreparedCssPointFieldManifest as PreparedCssPointField,StarsRecipe } from './types.ts';
 /** A low-pass photographic residual; compact points are suppressed, not identified or subtracted. */
 export async function prepareDiffuseSky(sourceDirectory:string,outputDirectory:string,config:StarsRecipe['diffuseSky']) {
   const diffuseSky: {id:string;path:string}[]=[],resources:PreparedCssPointField['resources'][number][]=[];

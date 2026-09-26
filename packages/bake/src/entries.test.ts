@@ -37,6 +37,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   scene: ['raster'],
   presentation: ['scene', 'raster'],
   'volume-leaves': ['scene', 'volume'],
+  'stars': ['raster', 'volume'],
 };
 
 it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {

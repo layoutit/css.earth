@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedStar, PreparedStarNode, StarsRecipe } from '../../../../preparation/stars/types.js';
+import type { PreparedStar, PreparedStarNode, StarsRecipe } from './types.ts';
 import type { PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/renderer/stars/types.ts';
 import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_MAGNITUDE_DIVISOR,
   decodePointFieldBank, decodeStarMagnitude, pointFieldBankHeader, pointFieldBankLayout } from '@cssearth/renderer/stars/point-field-bank.ts';

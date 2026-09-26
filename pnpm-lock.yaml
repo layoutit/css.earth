@@ -238,6 +238,12 @@ importers:
 
   packages/bake:
     dependencies:
+      '@cssearth/astronomy':
+        specifier: workspace:*
+        version: link:../astronomy
+      '@cssearth/catalog':
+        specifier: workspace:*
+        version: link:../catalog
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
