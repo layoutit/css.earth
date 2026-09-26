@@ -7,7 +7,7 @@ import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterial
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
-import { selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements } from './prepared-texture-levels.js';
+import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
@@ -67,7 +67,7 @@ export interface PreparedPresentationDefinition {
   surfaceHit?: PreparedSurfaceHit;
   assetOrigin?: PreparedAssetOrigin;
 }
-export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>;
+export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>; textureTiles?: Readonly<Record<string, PreparedTextureTile>>;
   /** The mesh is not drawn at this level of detail: its textures only warm. */
   deferredTextures?: boolean; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
@@ -90,7 +90,8 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
   // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
   const fallback = activeResourceFallbacks(definition.assets?.fallbacks);
-  const levelResources = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);
+  const levelChoice = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);
+  const levelResources = levelChoice?.resources, textureTiles = levelChoice?.tiles;
   const textureResources = levelResources === undefined && !Object.keys(fallback).length ? undefined
     : { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([key, level]) => [key, fallback[level] ?? level])) };
   const content = variant.required.map(key => textureResources?.[key] ?? key);
@@ -114,20 +115,24 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
   return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedLenses: [selection.lensId],
     ...(deferredTextures ? { deferredTextures } : {}),
     ...(textureLevel === undefined ? {} : { textureLevel }), ...(textureResources === undefined ? {} : { textureResources }),
+    ...(textureTiles && Object.keys(textureTiles).length ? { textureTiles } : {}),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
-/** The selected level's resources, except that a texture whose faces the camera cannot see keeps the first level. */
+/** The selected level's resources and sheet tiles, except that a texture whose faces the camera cannot see keeps the first level. */
 function textureLevelFor(levels: PreparedTextureLevels, level: number, variant: PreparedVariant, view: import('./prepared-material.js').PreparedMaterialView | null) {
-  const resources = levels.levels[level]!.resources;
-  if (!levels.placements || level === 0 || !view?.projection || view.motionAtRest !== true || !(view.viewportWidth! > 0) || !(view.viewportHeight! > 0)) return resources;
+  const { resources, tiles = {} } = levels.levels[level]!;
+  if (!levels.placements || level === 0 || !view?.projection || view.motionAtRest !== true || !(view.viewportWidth! > 0) || !(view.viewportHeight! > 0)) return { resources, tiles };
   const unseen = unseenTextureWrites(levels.placements, view.projection, { width: view.viewportWidth!, height: view.viewportHeight! });
-  if (!unseen.size) return resources;
+  if (!unseen.size) return { resources, tiles };
   const seen = new Set<string>(), hidden = new Set<string>();
   for (const write of variant.writes) if (write.kind === 'texture' && write.resource !== null && write.resource in resources)
     (unseen.has(write.name) ? hidden : seen).add(write.resource);
-  const first = levels.levels[0]!.resources, chosen = { ...resources };
-  for (const key of hidden) if (!seen.has(key)) chosen[key] = first[key]!;
-  return chosen;
+  const first = levels.levels[0]!, chosen = { ...resources }, chosenTiles: Record<string, PreparedTextureTile> = { ...tiles };
+  for (const key of hidden) if (!seen.has(key)) {
+    chosen[key] = first.resources[key]!;
+    if (first.tiles?.[key]) chosenTiles[key] = first.tiles[key]; else delete chosenTiles[key];
+  }
+  return { resources: chosen, tiles: chosenTiles };
 }
 const datasetKey = (name: string) => name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 function readAttribute(element: HTMLElement, name: string) {
@@ -199,6 +204,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       Math.max(0, Math.min(plan.duration, (controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
   }, initialProjection);
   let selectionPublications = 0, styleWrites = 0;
+  const tiledKeys = tiledTextureKeys(definition.textureLevels);
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
@@ -209,13 +215,16 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
       const variant = selectedPreparedVariant(definition, selection);
       // Resolve the complete texture group before publishing any part of it.
-      const writes = variant.writes.map(binding => {
-        if (binding.kind !== "texture") return binding;
+      const writes = variant.writes.flatMap(binding => {
+        if (binding.kind !== "texture") return [binding];
         const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
         // A deferred (undrawn) mesh publishes no texture at all; the resolving
         // camera re-plans and commits the complete group before it is shown.
         if (binding.resource !== null && !url && !plan?.deferredTextures) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
-        return { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
+        const image = { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
+        // A page some level draws from a shared sheet carries its tile (or its own placement) with every image.
+        if (binding.resource === null || !tiledKeys.has(binding.resource)) return [image];
+        return [image, ...textureTileStyles(binding.name, plan?.textureTiles?.[binding.resource]).map(([name, value]) => ({ kind: "style" as const, target: binding.target, name, value }))];
       });
       // Texture references belong to the committed dataset. Retire references
       // absent from its successor in the same publication, without embedding

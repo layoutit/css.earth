@@ -43,6 +43,8 @@ import { prepareProjectiveTextureLayer } from "../../../src/platform/projective-
 // latitude. Four transparent pixels separate all covered polygons.
 export function createPagedSurfaceRaster(config: PagedRasterConfiguration) {
 const SURFACE_ATLAS = config.atlas;
+/** Earth's smallest texture level is 1/16 of the canonical width (512 of 8192). */
+const PAGE_SIDE_STEP = 16;
 const IDENTITY = "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1";
 
 function surfacePageUrls(name: string, pageCount: number, suffix = "") {
@@ -53,8 +55,10 @@ function surfacePageUrls(name: string, pageCount: number, suffix = "") {
 /** Neighbouring cells of one latitude row share a page, `pageCells` of them. Chrome decodes a whole image to draw any
  * part of it and never draws a face turned away, so a view decodes only the pages it shows. Latitude-band pages each
  * ran round the globe, so every view decoded all of them: 109 MP at Earth's closest level, decoded again after each
- * zoom because the set outgrew Chrome's decode cache. A page takes whichever halving of the canonical width gives it
- * the smallest area; texture levels halve every page exactly. */
+ * zoom because the set outgrew Chrome's decode cache. A page is square: its cells sit in a grid of ceil(√pageCells)
+ * columns, sized to the block's largest cell. Widths picked from halvings of 8192 left strips such as 8192 × 688 whose
+ * last third was empty (Earth: 17.9% of the atlas outside any cell, 2026-09-26). The side is a multiple of
+ * PAGE_SIDE_STEP so every texture level halves a page to whole pixels. */
 function layoutBlockPages(sizes: readonly number[]) {
   const { pageSize, gutter, pageCells } = SURFACE_ATLAS, row = config.geometry.BODY_LONGITUDE_SEGMENTS;
   if (!Number.isInteger(pageCells) || pageCells < 1 || row % pageCells)
@@ -64,27 +68,15 @@ function layoutBlockPages(sizes: readonly number[]) {
     const block = Math.floor(index / row) * (row / pageCells) + Math.floor(index % row / pageCells);
     blocks.set(block, [...blocks.get(block) ?? [], index]);
   });
+  const columns = Math.ceil(Math.sqrt(pageCells));
   const positions: {page: number; x: number; y: number}[] = [], pages: {width: number; height: number}[] = [];
   for (const [block, members] of [...blocks].sort((a, b) => a[0] - b[0])) {
-    let best: {width: number; height: number; placed: {index: number; x: number; y: number}[]} | null = null;
-    for (let width = pageSize; width >= pageSize / 4; width /= 2) {
-      let x = 0, y = 0, shelf = 0;
-      const placed: {index: number; x: number; y: number}[] = [];
-      if (members.some(index => sizes[index] + 2 * gutter > width)) continue;
-      for (const index of members) {
-        const stride = sizes[index] + 2 * gutter;
-        if (x + stride > width) { x = 0; y += shelf; shelf = 0; }
-        placed.push({ index, x: x + gutter, y: y + gutter });
-        x += stride;
-        shelf = Math.max(shelf, stride);
-      }
-      const height = Math.ceil((y + shelf) / 4) * 4;
-      if (height <= pageSize && (!best || width * height < best.width * best.height)) best = { width, height, placed };
-    }
-    if (!best) throw new Error(`${config.publicBase}: raster page block ${block} (cells ${members.join(',')}) does not fit a ${pageSize} px page.`);
+    const stride = Math.max(...members.map(index => sizes[index]! + 2 * gutter));
+    const side = Math.ceil(columns * stride / PAGE_SIDE_STEP) * PAGE_SIDE_STEP;
+    if (side > pageSize) throw new Error(`${config.publicBase}: raster page block ${block} (cells ${members.join(',')}) needs a ${side} px page, over ${pageSize} px.`);
     const page = pages.length;
-    pages.push({ width: best.width, height: best.height });
-    for (const { index, x, y } of best.placed) positions[index] = { page, x, y };
+    pages.push({ width: side, height: side });
+    members.forEach((index, slot) => { positions[index] = { page, x: slot % columns * stride + gutter, y: Math.floor(slot / columns) * stride + gutter }; });
   }
   return { positions, pages };
 }
@@ -218,9 +210,8 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
   }
   const atlasScale = density / SURFACE_ATLAS.density;
   const outputWidth = pageWidth * atlasScale;
-  // Rounded after scaling: at an eighth of the atlas density a height rounded before scaling can land on half a pixel.
-  const outputHeight = Math.ceil(Math.max(...pageCells.map(cell =>
-    cell.y + cell.size + SURFACE_ATLAS.gutter)) * atlasScale / 4) * 4;
+  // A page is square (layoutBlockPages); its side is a multiple of PAGE_SIDE_STEP, so every level scales it to whole pixels.
+  const outputHeight = plan.pages[page]!.height * atlasScale;
   const output = Buffer.alloc(outputWidth * outputHeight * 4);
   const scale = width / SURFACE_ATLAS.sourceWidth;
   const sourceSample = (raster: Uint8Array, rasterWidth: number, rasterHeight: number, rasterChannels: number,

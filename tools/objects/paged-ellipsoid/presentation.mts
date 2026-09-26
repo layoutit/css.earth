@@ -23,6 +23,7 @@ import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platf
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
+import { textureTileStyles, tiledTextureKeys } from "../../../src/renderers/css/rendering/prepared-texture-levels.ts";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";
@@ -82,7 +83,13 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   if(seamOutset)system.style.setProperty(seamOutset.property,seamOutsetInitialValue(seamOutset,cameraPlan.logicalBodyDiameter));
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);
   const pages=plan.body.assets.surface.urls.length;
-  const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++)node.style.setProperty(`--${config.namespace}-surface-page-${i}`,urls.length?`url("${urls[i]}")`:"none");};
+  // A page the first level draws from a sheet also carries its tile (prepared-texture-levels.ts), as a commit writes it.
+  const tiledKeys=tiledTextureKeys(textureLevels?.textureLevels),initialTiles=textureLevels?.textureLevels.levels[0]?.tiles??{};
+  const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++){
+    const name=`--${config.namespace}-surface-page-${i}`,key=pageKeys(defaultLens)[i]!;
+    node.style.setProperty(name,urls.length?`url("${urls[i]}")`:"none");
+    if(urls.length&&tiledKeys.has(key))for(const [property,value] of textureTileStyles(name,initialTiles[key]))node.style.setProperty(property,value);
+  }};
   function bands(parent: PreparedNode,records: PagedPlan['body']['bands'],className: string,polarClass: string,marker: string,urls: readonly string[],poles: string | null) {
     const grouped=new Map<string, PreparedNode>(),surface: PreparedNode[]=[],polar: PreparedNode[]=[];
     for(const band of records) {
