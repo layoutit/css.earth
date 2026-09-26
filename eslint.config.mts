@@ -35,7 +35,7 @@ export default [
         selector: 'TSAnyKeyword', message: 'Use an owned type or validate unknown input at the boundary.',
       }],
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*'],
           message: 'Runtime packages must not depend on the application, legacy sources, or Node tooling.' }],
       }],
     },
@@ -47,7 +47,7 @@ export default [
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*'],
           message: 'Runtime packages must not depend on the application or legacy sources.' }],
       }],
     },
@@ -57,7 +57,7 @@ export default [
     ignores: ['**/*.test.ts', 'packages/{core,fits,spice,telescope}/src/node/**'],
     rules: {
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', './node', './node/*', '../node', '../node/*'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*', './node', './node/*', '../node', '../node/*'],
           message: 'The main entries of @cssearth/core, @cssearth/fits, @cssearth/spice and @cssearth/telescope stay browser-safe: no Node built-ins and no import of the node entry.' }],
       }],
     },
@@ -71,7 +71,7 @@ export default [
         selector: 'TSAnyKeyword', message: 'Use an owned type or validate unknown input at the boundary.',
       }],
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**', '@cssearth/bake', '@cssearth/bake/*'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*', '@cssearth/bake', '@cssearth/bake/*'],
           message: 'Bake topics import packages and their own topic only, never the application or another topic.' }],
       }],
     },
@@ -84,7 +84,7 @@ export default [
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', 'sharp', 'react', 'react/*', 'react-dom', 'react-dom/*', 'vite',
-          '@layoutit/polycss', '**/renderers/**', '@cssearth/bake', '@cssearth/bake/*', './node', './node/*', '../node', '../node/*', '../../node/*', '../../node'],
+          '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*', '@cssearth/bake', '@cssearth/bake/*', './node', './node/*', '../node', '../node/*', '../../node/*', '../../node'],
           message: 'The main entry of @cssearth/bake/volume stays host-neutral: no Node built-ins, native codecs or UI libraries, and no import of the node entry.' }],
       }],
     },
@@ -114,7 +114,7 @@ export default [
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/objects', '@cssearth/objects/*'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/renderer', '@cssearth/renderer/*', '@cssearth/objects', '@cssearth/objects/*'],
           message: 'The engine accepts object data and application policy through its public interfaces.' }],
       }],
     },
