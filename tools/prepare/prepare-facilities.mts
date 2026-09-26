@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from '../sources/spatial-source-citations.mts';
@@ -185,3 +186,5 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   return { prepared, preparedSources, output, outputs, catalogueOutputs, factsheets };
 
 }
+
+refuseDirectRun(import.meta);

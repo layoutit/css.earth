@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
@@ -48,3 +49,5 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
     ...(compiled ? { citedFacts: compiled.preparedSources.usage.edges.filter(edge => edge.consumerKind === 'object-fact' && edge.objectId === document.objectId).length } : {}),
   }));
 }
+
+refuseDirectRun(import.meta);

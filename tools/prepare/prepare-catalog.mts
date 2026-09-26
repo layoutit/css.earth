@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
@@ -143,3 +144,5 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));
   return entries;
 }
+
+refuseDirectRun(import.meta);

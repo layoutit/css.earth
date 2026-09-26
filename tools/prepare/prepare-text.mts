@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -106,3 +107,5 @@ export function reviewWarnings(warnings: readonly TextFinding[], ids: readonly s
   const own = ids.length ? warnings.filter(warning => ids.includes(warning.objectId)) : warnings;
   return [...new Map(own.map(warning => [JSON.stringify(warning), warning])).values()];
 }
+
+refuseDirectRun(import.meta);

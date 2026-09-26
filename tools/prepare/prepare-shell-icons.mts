@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -86,3 +87,5 @@ function validateManifest() {
     outputFiles.add(descriptor.outputFile);
   }
 }
+
+refuseDirectRun(import.meta);

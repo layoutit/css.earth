@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { isArray, hasErrorCode, requireString } from '@cssearth/core';
 import assert from "node:assert/strict";
@@ -128,3 +129,5 @@ export async function prepareObjects({ projectRoot = process.cwd(), force = fals
     return totalReport;
   } finally { await rm(lock, { force: true }); }
 }
+
+refuseDirectRun(import.meta);

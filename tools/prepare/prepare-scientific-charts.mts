@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
 import {decodeProfile} from "../objects/terrestrial-layers/source-records.mts";
@@ -139,3 +140,5 @@ function polynomial(coefficients:readonly number[], value:number) {
 function titleCase(value:string) {
   return value[0].toUpperCase() + value.slice(1);
 }
+
+refuseDirectRun(import.meta);

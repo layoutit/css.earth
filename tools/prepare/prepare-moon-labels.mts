@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { gzipSync, gunzipSync } from 'node:zlib';
@@ -92,3 +93,5 @@ export async function prepareMoonLabels({ refresh = false }: { refresh?: boolean
     qualification: 'Properly named catalogue moons only; provisional designations stay in the full sidebar catalogue. Horizons geometric ICRF vectors at the prepared world epoch, relative to each planet. No fabricated positions: moons without Horizons states remain in the sidebar only.', moons }, null, 2)}\n`);
   console.log(`${moons.filter(moon => moon.positionM).length} positioned labels; ${moons.filter(moon => !moon.positionM).length} without positions.`);
 }
+
+refuseDirectRun(import.meta);

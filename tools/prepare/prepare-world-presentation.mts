@@ -1,6 +1,7 @@
 /** `node tools/prepare/cli/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
  * sources so the browser reads one small file instead of source tables and recipes: which moons are major, which orbits
  * the default view hides, which objects are default features, and the galaxy and cluster fade distances. */
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import majorMoons from '../../site/source/major-moons.json' with { type: 'json' };
@@ -64,3 +65,5 @@ export async function writeWorldPresentation() {
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }
+
+refuseDirectRun(import.meta);

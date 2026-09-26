@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { parseProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
@@ -352,3 +353,5 @@ export async function writeVolumeProvenance(options: Options = {}) {
   await writePreparedSet(outputs);
   return results;
 }
+
+refuseDirectRun(import.meta);

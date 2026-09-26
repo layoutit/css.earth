@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
@@ -83,3 +84,5 @@ export async function prepareContextAvailability({ projectRoot = root, strict = 
   if (strict && failures.length) throw new Error(`Prepared context packages unavailable:\n${failures.join('\n')}`);
   return { availability, failures };
 }
+
+refuseDirectRun(import.meta);

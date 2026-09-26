@@ -10,6 +10,7 @@
  *   run). Each file that differs from the Sun's inventory is restored from R2 by hash, as `pnpm setup:assets` does,
  *   except the files the world step writes itself, and its page data is derived when missing. A run that prepares the
  *   Sun skips this. */
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
@@ -52,3 +53,5 @@ export async function restoreDriftedFiles(id: string, { projectRoot = root, keep
   if (drifted.length) await installRuntimeAssets(drifted, { fetcher });
   return drifted.map(asset => `${asset.location}/${asset.filename}`);
 }
+
+refuseDirectRun(import.meta);

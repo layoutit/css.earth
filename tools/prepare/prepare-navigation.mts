@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { constants } from "node:fs";
 import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -608,3 +609,5 @@ async function loadObjectDescriptor(objectId: string, projectRoot: string): Prom
   if (!module || typeof module !== 'object' || !('default' in module)) throw new TypeError('Navigation marker module requires a default export.');
   return module.default;
 }
+
+refuseDirectRun(import.meta);

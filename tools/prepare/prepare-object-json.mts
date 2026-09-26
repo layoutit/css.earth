@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
@@ -163,3 +164,5 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   }
   return results;
 }
+
+refuseDirectRun(import.meta);

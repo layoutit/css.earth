@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { randomUUID } from "node:crypto";
 import {
@@ -361,3 +362,5 @@ function parseCommandArguments(args: readonly string[]) {
 function defaultFileOperations() {
   return Object.freeze({ mkdir, mkdtemp, rename, rm, writeFile });
 }
+
+refuseDirectRun(import.meta);
