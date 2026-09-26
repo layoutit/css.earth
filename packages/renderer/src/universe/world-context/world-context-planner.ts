@@ -250,8 +250,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         if (center) activeSystems.add(center);
       }
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
-      // Declutter annotations without changing physical bodies. Orbit geometry is
-      // projected first, then retired when an on-screen body loses annotation admission.
+      // Declutter annotations without changing physical paths. A label can lose
+      // its slot during a drag without making its projected orbit blink.
       type Entry = (typeof bodies)[number];
       const projectedBodies: ProjectedBody<Entry>[] = [];
       for (const entry of publishingBodies) {
@@ -495,8 +495,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         top: selectedLocator.y - locatorRadius, bottom: selectedLocator.y + locatorRadius }] : [];
       const worldLabelBudget = () => createLabelBudget(Infinity, Infinity, [], [...locatorRects, ...coveredTopRects(viewport)], labelLimit(width));
       const labelBudget = worldLabelBudget();
-      // Circle and caption reserve space together. A rejected candidate owns no
-      // annotation or context orbit; physical sprites remain independent.
+      // Circle and caption reserve space together. A rejected candidate loses
+      // its annotation while its projected orbit remains independent.
       // Preserve the existing system landmark policy. It does not govern the
       // admission of unrelated stars in the surrounding field.
       const landmarks = candidates.filter(candidate => candidate.projected.entry.body.id === plan.focus.id ||
@@ -527,13 +527,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the useful orbit field, and hover/highlight/selection reveal a minor path.
         const anonymousMinor = (annotationPriorities[entry.body.id] ?? 2) < 2 && !entry.labelShown &&
           !projected.hovered && entry.highlighted !== true && entry.body.id !== emphasizedId;
-        // An on-screen context path belongs to the annotation that identifies its body
-        // when that annotation lost ordinary decluttering. The selected object's own
-        // path remains available, and so does every planet's path in a selected placed
-        // star's system: a planet passing behind its star loses its caption, not its orbit.
+        // Explicitly hidden or unnameable bodies also hide their on-screen paths.
+        // Ordinary collision decluttering must not blink an orbit during camera motion.
+        // The selected object's path and planets in a selected placed star's
+        // system remain available when their captions are intentionally absent.
         const selectedSystemPlanet = entry.orbit.centerBodyId === selectedId && entry.orbit.centerBodyId !== plan.focus.id &&
           systemFade.isSystemStar(entry.orbit.centerBodyId);
-        if (anonymousMinor || projected.inFrame && !entry.labelShown && !systemFade.hasAuthoredRange(entry.index) &&
+        if (anonymousMinor || projected.inFrame && !entry.labelShown && (entry.labelHidden || !projected.nameable) &&
+            !systemFade.hasAuthoredRange(entry.index) &&
             !selectedSystemPlanet && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
