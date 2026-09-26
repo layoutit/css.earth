@@ -1,6 +1,6 @@
 import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
 import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
-import type { PreparedProjectiveTextureLeaf } from '../../prepared/projective-layout.mts';
+import type { PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation';
 import type { prepareSolidMaterial } from './solid-raster.mts';
 import type { SolidRasterGrid } from './raster-grid.mts';
 import type { combineRadialModels } from './radial-models.mts';
@@ -22,8 +22,7 @@ import { photographDirections, prepareDefaultCameraAngles } from '../../../src/p
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
-import { prepareCssomDeclarationReads } from '../../prepared/prepared-cssom.mts';
-import { createPreparedNodeTree } from '../../prepared/prepared-node-tree.mts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import { prepareMaterialTracks } from '../../prepare/prepare-materials.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
 import { requirePreparedResourceCatalog } from '../../contract/object-runtime-contract.mts';

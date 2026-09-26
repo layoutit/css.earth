@@ -241,6 +241,9 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
+      '@cssearth/engine':
+        specifier: workspace:*
+        version: link:../engine
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../objects
@@ -250,6 +253,9 @@ importers:
       '@layoutit/polycss':
         specifier: 0.2.11
         version: 0.2.11
+      playwright:
+        specifier: 1.60.0
+        version: 1.60.0
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)

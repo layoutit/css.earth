@@ -67,5 +67,5 @@ const native = universeOnly ? [] : [...await discover('tools/objects', '.test.mj
 // bounded as the registry grows; this does not omit any preparation cases.
 run(['--test', '--test-concurrency=1', ...compiled, ...native]);
 if (!universeOnly) run([resolve(dirname(engineRequire.resolve('vitest/package.json')), 'vitest.mjs'),
-  'run', '--root', resolve(root, 'src/renderers/css/preparation/presentation'),
+  'run', '--root', resolve(root, 'packages/bake/src/presentation'),
   '--exclude', '**/.local/**', 'presentation.test.ts']);

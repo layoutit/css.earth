@@ -1,10 +1,10 @@
 import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
-import type { PreparedNode, PresentationAdapters } from './adapters.js';
-import { seamOutsetBinding, seamOutsetInitialValue } from '@cssearth/bake/scene';
-import { RASTER_LEVEL_FACTORS, RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '@cssearth/bake/raster';
+import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
+import type { PreparedNode, PresentationAdapters } from './adapters.ts';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
+import { RASTER_LEVEL_FACTORS, RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
 import type { PreparedResourceEntry } from '@cssearth/renderer/rendering/prepared-residency.ts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';

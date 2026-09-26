@@ -17,8 +17,7 @@ import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cu
 import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '../solar-system-scene.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
-import { createPreparedNodeTree } from '../../prepared/prepared-node-tree.mts';
-import { prepareCssomDeclarationReads } from '../../prepared/prepared-cssom.mts';
+import { createPreparedNodeTree, prepareCssomDeclarationReads } from '@cssearth/bake/presentation';
 import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.mts';
 import { prepareShapeLighting } from './lighting.mts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/coplanar-raster.mts';

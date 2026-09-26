@@ -1,5 +1,5 @@
 import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.mts';
-import type { PreparedNode } from '../../prepared/prepared-node-tree.mts';
+import type { PreparedNode } from '@cssearth/bake/presentation';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
 import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
@@ -21,10 +21,9 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
 const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
-import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
+import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
 import { seamOutsetBinding, seamOutsetInitialValue } from "@cssearth/bake/scene";
 import { textureTileStyles, tiledTextureKeys } from "@cssearth/renderer";
-import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";
 

@@ -6,7 +6,7 @@ import {
   applyPreparedProjectiveLayout,
   scalePreparedBackgroundAddresses,
   scalePreparedPixelLengths,
-} from "./projective-layout.mts";
+} from "@cssearth/bake/presentation";
 
 test("scales every prepared pixel address in multi-layer backgrounds", () => {
   assert.equal(

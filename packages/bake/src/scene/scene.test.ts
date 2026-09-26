@@ -11,9 +11,10 @@ import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts'
 import { parseRasterRecipe, outputName, RASTER_DENSITY, packedRasterSize, rasterPageName } from '../raster/index.ts';
 import type { RasterRecipe } from '../raster/index.ts';
 import { prepareProjectiveTextureLayer, TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
-import { prepareComposite } from '../../../../src/renderers/css/preparation/presentation/composite.ts';
-import { loadPresentationAdapters } from '../../../../src/renderers/css/preparation/presentation/adapters.ts';
-import type { PresentationInputs } from '../../../../src/renderers/css/preparation/presentation/types.ts';
+import { prepareComposite } from '../presentation/composite.ts';
+import { presentationAdapters } from '../presentation/adapters.ts';
+import { presentationHostAdapters } from '../../../../tools/objects/geometry-adapters.ts';
+import type { PresentationInputs } from '../presentation/types.ts';
 const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -223,7 +224,7 @@ test('every lens reaches the leaves: a leaf binds its lens texture and each comp
   ...['scene','assets','lenses','sun','controls'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/uranus/source/presentation/solar-system.json')]);
  const scene={...published as {body:object},body:{...(published as {body:object}).body,leaves:result.body.leaves}};
  // No browser here: the CSSOM reads only rescale leaf addresses, which this test does not read.
- const adapters={...await loadPresentationAdapters(),prepareCssomDeclarationReads:async()=>new Map()};
+ const adapters={...presentationAdapters(presentationHostAdapters),prepareCssomDeclarationReads:async()=>new Map()};
  const draft=await prepareComposite({namespace:'uranus',mode:'composite',scene,assets,lenses,sun,controls,solarSource} as unknown as PresentationInputs,adapters);
  const body=draft.tree.nodes.findIndex(node=>node.className==='polycss-mesh uranus-body'),defaultLens=(lenses as {defaultLens:string}).defaultLens;
  const lensIds=[...new Set(draft.variants.map(variant=>variant.when.lensId))];

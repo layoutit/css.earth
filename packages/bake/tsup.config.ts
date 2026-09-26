@@ -3,11 +3,13 @@ import { defineConfig } from 'tsup'
 export default defineConfig({
   // `volume` is browser-safe (the nebula lab's viewer imports it); `volume/node` and the other topics are Node-only.
   entry: { volume: 'src/volume/index.ts', 'volume/node': 'src/volume/node/index.ts', photometry: 'src/photometry/index.ts',
-    raster: 'src/raster/index.ts', scene: 'src/scene/index.ts' },
+    raster: 'src/raster/index.ts', scene: 'src/scene/index.ts',
+    presentation: 'src/presentation/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
-  // Only the Node entries need Node's types; `tsconfig.json` keeps them out of the browser-safe sources.
-  dts: { compilerOptions: { types: ['node'] } },
+  // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the
+  // renderer types they name use it); `tsconfig.json` keeps both out of the browser-safe sources.
+  dts: { compilerOptions: { types: ['node'], lib: ['ES2023', 'DOM', 'DOM.Iterable'] } },
   clean: true,
   // Topics read renderer constants, types and validators from its source subpaths (`@cssearth/renderer/rendering/*.ts`).
   // Those subpaths are TypeScript whose sibling imports name `.js`, which Node cannot load, so they are bundled; the

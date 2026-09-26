@@ -2,10 +2,11 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { prepareCssPresentation, parsePresentationProfile } from './index.js';
-import type { PresentationInputs } from './types.js';
+import { prepareCssPresentation, parsePresentationProfile } from './css-presentation.ts';
+import { presentationHostAdapters } from '../../../../tools/objects/geometry-adapters.ts';
+import type { PresentationInputs } from './types.ts';
 
-const root = resolve(import.meta.dirname, '../../../../..');
+const root = resolve(import.meta.dirname, '../../../..');
 const read = async (file: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, file), 'utf8'));
 function canonical(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonical);
@@ -21,7 +22,7 @@ describe('retained presentation compiler compatibility', () => {
       read(`src/objects/${id}/source/presentation/solar-system.json`),
     ]);
     const input = { ...profile, scene, assets, lenses, sun, markers, controls, solarSource } as PresentationInputs;
-    const prepared = await prepareCssPresentation(input);
+    const prepared = await prepareCssPresentation(input, presentationHostAdapters);
     // Runtime finalization adds motion/facing and can update marker/warm-bank
     // metadata. Compare compiler-owned structure, then every raw output byte
     // against the independently executed pre-migration JavaScript helpers.

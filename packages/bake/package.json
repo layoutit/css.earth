@@ -2,7 +2,7 @@
   "name": "@cssearth/bake",
   "version": "0.0.0",
   "private": true,
-  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, and the geometry scene compilers.",
+  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, and the geometry scene and CSS presentation compilers.",
   "type": "module",
   "files": [
     "dist"
@@ -34,6 +34,11 @@
       "import": "./dist/scene.js",
       "default": "./dist/scene.js"
     },
+    "./presentation": {
+      "types": "./dist/presentation.d.ts",
+      "import": "./dist/presentation.js",
+      "default": "./dist/presentation.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -43,9 +48,11 @@
   },
   "dependencies": {
     "@cssearth/core": "workspace:*",
+    "@cssearth/engine": "workspace:*",
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@layoutit/polycss": "0.2.11",
+    "playwright": "1.60.0",
     "sharp": "0.35.3"
   },
   "devDependencies": {

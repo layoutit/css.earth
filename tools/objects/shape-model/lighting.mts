@@ -1,4 +1,4 @@
-import type {createPreparedNodeTree,PreparedNode} from '../../prepared/prepared-node-tree.mts';
+import type {createPreparedNodeTree,PreparedNode} from '@cssearth/bake/presentation';
 import type {PreparedMaterialTrack,PreparedMaterialSelection} from '@cssearth/renderer/rendering/prepared-material.ts';
 import type {PreparedViewBinding} from '@cssearth/renderer/rendering/prepared-presentation.ts';
 interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};

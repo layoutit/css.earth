@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { prepareActivationGroups, type ActivationDefinition } from './prepared-activation-groups.mts';
+import { prepareActivationGroups, type ActivationDefinition } from '@cssearth/bake/presentation';
 
 test('preparation bounds sibling batches without changing retained geometry or selection ownership', () => {
   const definition: ActivationDefinition = { tree: { camera: 0, scene: 1,

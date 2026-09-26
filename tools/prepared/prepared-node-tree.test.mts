@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createPreparedNodeTree, preparedDeclarations } from "./prepared-node-tree.mts";
-import { LEAF_BOX_UNSCALE, leafBoxLengths } from "./leaf-box.mts";
+import { createPreparedNodeTree, preparedDeclarations, LEAF_BOX_UNSCALE, leafBoxLengths } from "@cssearth/bake/presentation";
 import PREPARED_MOON_SCENE from "../../src/objects/moon/prepared/scene.json" with { type: "json" };
 test("preparation expands every actual Moon leaf into a stable ordered tree", () => {
   const tree = createPreparedNodeTree(), camera = tree.element("div", "polycss-camera"), scene = tree.element("div", "polycss-scene");

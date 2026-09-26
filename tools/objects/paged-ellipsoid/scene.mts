@@ -28,7 +28,7 @@ import {
 } from "@cssearth/bake/scene";
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps, POLAR_CAP_STYLE, requireOutwardCap } from "@cssearth/bake/scene";
 // Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves
-// join the shared rule (tools/prepared/leaf-box.mts) with that work.
+// join the shared rule (packages/bake/src/presentation/leaf-box.ts) with that work.
 const FULL_BOXES = { leafBox: false as const };
 
 
