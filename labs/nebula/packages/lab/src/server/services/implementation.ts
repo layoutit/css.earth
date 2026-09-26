@@ -33,9 +33,15 @@ export async function implementationPins(root: string, entries: readonly string[
       // `@cssearth/bake/volume`, and the volume bake was volume-bake before `@cssearth/bake/volume/node`; the preparation
       // topics (photometry, raster, scene, presentation) were relative modules under src/ and tools/. Each topic entry maps
       // to its source index the same way.
-      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation)$/ }, args => {
+      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation|environment|image-layers|density|sky|shell|stars|volume-leaves)$/ }, args => {
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') };
+      });
+      // The star colour fit was a relative module (src/preparation/stars/color.ts) before it joined @cssearth/engine, whose
+      // sources stay owners the same way.
+      builder.onResolve({ filter: /^@cssearth\/engine$/ }, () => {
+        manifests.add('packages/engine/package.json');
+        return { path: resolve(root, 'packages/engine/src/index.ts') };
       });
       // The CSS renderer runtime was relative modules under src/renderers/css/ before it became @cssearth/renderer; the lab
       // imports its TypeScript source subpaths (`@cssearth/renderer/volume/types.ts`), which stay owners the same way.

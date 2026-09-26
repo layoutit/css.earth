@@ -13,8 +13,8 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
  * they became `@cssearth/spice`, and the telescope library's product records, label readers and astronomy-package clients
  * were local modules under `tools/objects/` before they became `@cssearth/telescope`, and the photometric models and raster lane
  * were local modules (`tools/photometry/`, `src/preparation/raster/`) before they became `@cssearth/bake/photometry` and
- * `@cssearth/bake/raster`, as were the scene and presentation compilers (`src/renderers/css/preparation/`, `src/platform/`,
- * `tools/prepared/`) before `@cssearth/bake/scene` and `@cssearth/bake/presentation`; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
+ * `@cssearth/bake/raster`, as were the renderer's preparation compilers (`src/renderers/css/preparation/`), `src/platform/`
+ * and `tools/prepared/` libraries and `src/preparation/` topics before their `@cssearth/bake/<topic>` entries; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
@@ -26,6 +26,13 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
   '@cssearth/bake/scene': 'packages/bake/src/scene/index.ts',
   '@cssearth/bake/presentation': 'packages/bake/src/presentation/index.ts',
+  '@cssearth/bake/environment': 'packages/bake/src/environment/index.ts',
+  '@cssearth/bake/image-layers': 'packages/bake/src/image-layers/index.ts',
+  '@cssearth/bake/density': 'packages/bake/src/density/index.ts',
+  '@cssearth/bake/sky': 'packages/bake/src/sky/index.ts',
+  '@cssearth/bake/shell': 'packages/bake/src/shell/index.ts',
+  '@cssearth/bake/stars': 'packages/bake/src/stars/index.ts',
+  '@cssearth/bake/volume-leaves': 'packages/bake/src/volume-leaves/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its

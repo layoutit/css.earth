@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { replayCompactSymmetry as replay } from '@cssearth/bake/volume/node';
-import { compileCssVolume } from "../../../../../../../../src/renderers/css/preparation/volume.ts";
+import { compileCssVolume } from "@cssearth/bake/volume-leaves";
 import { validatePreparedCssVolume } from "@cssearth/renderer/volume/validation.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
 import type { CompilerPin } from "@cssearth/bake/volume";

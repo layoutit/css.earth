@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { encodePointFieldBank, magnitudeDisplayAlphaChange } from '../../../../src/renderers/css/preparation/stars/point-field-bank.js';
+import { encodePointFieldBank, magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank } from './point-field-bank.js';
 import { IMPERCEPTIBLE_LUMINANCE } from './point-field-projection.js';
 import type { PreparedPointFieldBank } from './types.js';

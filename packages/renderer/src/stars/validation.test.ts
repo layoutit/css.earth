@@ -2,10 +2,10 @@ import { readFileSync } from 'node:fs';
 import { expect, test, vi } from 'vitest';
 import { loadPreparedCssPointField, loadPreparedPointAppearance } from './loader.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
-import { readCanonicalPointFieldFiles } from '../../../../src/renderers/css/preparation/stars/canonical-point-field-fixture.js';
+import { readCanonicalPointFieldFiles } from '../../../../tests/renderer/canonical-point-field-fixture.js';
 import { POINT_FIELD_MAGNITUDE_BOUND } from './point-field-bank.js';
 import { IMPERCEPTIBLE_LUMINANCE } from './point-field-projection.js';
-import { magnitudeDisplayAlphaChange } from '../../../../src/renderers/css/preparation/stars/point-field-bank.js';
+import { magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 
 const copy = (bytes: Uint8Array) => new Uint8Array(bytes).buffer;
 function fixture() {

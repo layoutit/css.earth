@@ -4,7 +4,7 @@ import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, ARCSECOND_RADI
 import { worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
-import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
+import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, type VolumeSlices } from '@cssearth/bake/volume';
 const frame = { referenceFrame:'lab',epochJdTt:0,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,
   metersPerUnit:1,boundsUnits:{min:[-3,-2,-1] as const,max:[4,2,1] as const} };

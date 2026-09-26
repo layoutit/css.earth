@@ -91,7 +91,7 @@ export default [
   {
     // The scene and presentation compilers read the renderer's prepared types, validators and silhouette steps, and the scene
     // projects leaves with PolyCSS, which the runtime uses to draw them.
-    files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts'],
+    files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts', 'packages/bake/src/environment/**/*.ts', 'packages/bake/src/image-layers/**/*.ts', 'packages/bake/src/density/**/*.ts', 'packages/bake/src/sky/**/*.ts', 'packages/bake/src/shell/**/*.ts', 'packages/bake/src/stars/**/*.ts', 'packages/bake/src/volume-leaves/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
@@ -115,7 +115,7 @@ export default [
   },
   {
     // `@cssearth/renderer` is the browser runtime. It reads prepared data through its own validators and never imports the
-    // application, preparation code (`@cssearth/bake`, `src/renderers/css/preparation`) or Node built-ins; tests may.
+    // application, preparation code (`@cssearth/bake`) or Node built-ins; tests may.
     files: ['packages/renderer/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

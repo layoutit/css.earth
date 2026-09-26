@@ -28,7 +28,6 @@
     "**/*.ts",
     "**/*.mts",
     "../../src/preparation/**/*.ts",
-    "../../src/renderers/css/preparation/**/*.ts",
     "../external-modules.d.mts",
     "../../site/env.d.ts"
   ],
