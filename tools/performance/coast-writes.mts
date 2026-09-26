@@ -26,6 +26,8 @@ export function offPath(entries: readonly Entry[]) {
 }
 
 const { values } = parseArgs({ options: { url: { type: 'string', multiple: true }, json: { type: 'string' },
+  /** `drag` flings sideways (a throw coasts), `wheel` spins the wheel out (a glide coasts). */
+  motion: { type: 'string', default: 'drag' },
   width: { type: 'string', default: '820' }, height: { type: 'string', default: '1094' } } });
 const urls = values.url ?? ['http://127.0.0.1:4211/'];
 const browser = await chromium.launch({ headless: true });
@@ -52,13 +54,19 @@ try {
       }, { capture: true });
       setTimeout(() => done(coasted), 20_000);
     }));
-    // A sideways flick: accelerating steps released while moving (constant steps do not throw, by design).
     const x = surface.x + surface.width / 2, y = surface.y + surface.height / 2;
-    let at = x - 120;
-    await page.mouse.move(at, y);
-    await page.mouse.down();
-    for (const step of [4, 8, 14, 22, 32, 44, 58]) { at += step; await page.mouse.move(at, y); await page.waitForTimeout(16); }
-    await page.mouse.up();
+    if (values.motion === 'wheel') {
+      // Discrete wheel notches outward: the released gesture glides on.
+      await page.mouse.move(x, y);
+      for (let notch = 0; notch < 6; notch++) { await page.mouse.wheel(0, 100); await page.waitForTimeout(40); }
+    } else {
+      // A sideways flick: accelerating steps released while moving (constant steps do not throw, by design).
+      let at = x - 120;
+      await page.mouse.move(at, y);
+      await page.mouse.down();
+      for (const step of [4, 8, 14, 22, 32, 44, 58]) { at += step; await page.mouse.move(at, y); await page.waitForTimeout(16); }
+      await page.mouse.up();
+    }
     const coasted = await coastEnded;
     const writes = await page.evaluate(() => (window as unknown as { __captureStyles: { stop(): { entries: Entry[] } } }).__captureStyles.stop());
     const off = offPath(writes.entries);

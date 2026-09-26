@@ -312,11 +312,12 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);
         if (binding.kind === "view-attribute") {
-          let value = binding.source === "scene-pitch" ? preparedScenePitch(view.controlPitch, definition.camera)
-            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom
-              : binding.source === "level-of-detail-stage" ? levelOfDetail.stage : view.sceneMatrix;
-          if (binding.precision !== null) { const scale = 10 ** binding.precision; value = Math.round(Number(value) * scale) / scale; }
-          if (readAttribute(element, binding.property) !== String(value)) writeAttribute(element, binding.property, String(value));
+          // Only the level of detail is read (by stylesheets). The camera-pose attributes older packages still carry
+          // (scene pitch, yaw, zoom, matrix) have no reader and would change every frame: they are not published
+          // (docs/performance/motion-freezes-membership.md). The generator no longer emits them.
+          if (binding.source !== "level-of-detail-stage") continue;
+          const value = levelOfDetail.stage;
+          if (readAttribute(element, binding.property) !== value) writeAttribute(element, binding.property, value);
         } else if (binding.kind === "view-property") {
           const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
           if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
