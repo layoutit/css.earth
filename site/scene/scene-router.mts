@@ -21,8 +21,6 @@ import { createWorldViewport } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-// The world summary the registry's modules read when they load (`world-context-plan.mts`).
-import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { readInitialFocus } from '../focus-catalog.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
@@ -265,12 +263,6 @@ export function createSceneRouter({
 
   /** Load the router's modules and this page's object entry once, and build what the router reads from them. */
   function ensureContext(): Promise<RouterContext> {
-    if (!contextTask && documentTarget.head) {
-      // Its modules fetch the summary only once they have downloaded; start it alongside them.
-      const hint = documentTarget.createElement('link');
-      hint.rel = 'preload'; hint.as = 'fetch'; hint.crossOrigin = 'anonymous'; hint.href = worldSummaryUrl;
-      documentTarget.head.append(hint);
-    }
     if (contextTask) return contextTask;
     const task = import('./scene-registry.mts').then(async registry => {
       // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.

@@ -7,7 +7,7 @@ import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-c
 import { unpackWorldBodies } from './world-context-view-transport.js';
 
 type Initialise = { annotationPriorities?: Readonly<Record<string, number>>; annotationLandmarks?: readonly string[] } &
-  ({ plan: PreparedWorldContextGeometry } | { source: WorldPlannerSource });
+  ({ plan: PreparedWorldContextGeometry } | { plan: PreparedWorldContext; source: WorldPlannerSource });
 const scope = globalThis as unknown as {
   onmessage: (event: MessageEvent<Initialise | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
   postMessage(value: unknown, transfer?: Transferable[]): void;
@@ -50,12 +50,10 @@ scope.onmessage = ({ data }) => {
   try {
     if ('source' in data) {
       const source = data.source;
-      void read(source.summaryUrl).then(bytes => {
-        const plan = parsePreparedWorldContextSummary(JSON.parse(new TextDecoder().decode(bytes)));
-        banks = { plan, source, requested: new Set(),
-          bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) };
-        initialise(plan, data.annotationPriorities, data.annotationLandmarks);
-      }).catch(report);
+      const plan = parsePreparedWorldContextSummary(data.plan);
+      banks = { plan, source, requested: new Set(),
+        bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) };
+      initialise(plan, data.annotationPriorities, data.annotationLandmarks);
     } else if ('plan' in data) {
       banks = null;
       initialise(data.plan, data.annotationPriorities, data.annotationLandmarks);
