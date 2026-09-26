@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { limbFactors, limbLawFromRecords, limbOverlay, linearToSrgb, parseLimbBlock, scatteringAngles, srgbToLinear } from './limb.mts';
-import { haloRatio, parseLimbProfile, PSG_LIMB_TABLE_SCHEMA } from './halo.mts';
+import { haloAltitudeKm, haloRatio, parseLimbProfile, PSG_LIMB_TABLE_SCHEMA } from './halo.mts';
 import { parsePhotometricModelRecord } from './model-record.mts';
 
 const record = (id: string, model: unknown) => parsePhotometricModelRecord({ schema: 'cssearth-photometric-model@1', id, instrument: 'fixture', filter: 'fixture', quantity: 'radiance-factor', model, fit: { phaseDegrees: [0, 10], emissionDegrees: [0, 80] } });
@@ -59,4 +59,18 @@ test('the PSG halo profile interpolates log radiance with altitude and ends at i
   assert.ok(Math.abs(middle[0] - 0.2) < 1e-12 && Math.abs(middle[1] - Math.SQRT2 / 10) < 1e-12 && Math.abs(middle[2] - 0.1) < 1e-12);
   assert.deepEqual(haloRatio(profile, 25), [0, 0, 0]);
   assert.throws(() => parseLimbProfile({ schema: PSG_LIMB_TABLE_SCHEMA, radiusKm: 1000, altitudesKm: [0, 10], nadirOverheadSun: { red: 1, green: 1, blue: 1 }, radiance: { red: [1], green: [1, 1], blue: [1, 1] } }, 'fixture'), /one positive value per altitude/);
+});
+
+test('the halo starts at the visible disc edge: the content scale is the edge altitude, and altitude grows with the edge radius', () => {
+  const profile = parseLimbProfile({ schema: PSG_LIMB_TABLE_SCHEMA, body: 'fixture', radiusKm: 6051.8, altitudesKm: [75, 80],
+    nadirOverheadSun: { red: 1, green: 1, blue: 1 }, radiance: { red: [0.04, 0.02], green: [0.07, 0.03], blue: [0.11, 0.05] } }, 'fixture');
+  // Venus: the lit map ends at the lane's 0.992 content scale, and the cloud top at 75 km is that edge.
+  assert.equal(haloAltitudeKm(profile, 0.992, 0.992, 75), 75);
+  assert.ok(Math.abs(haloAltitudeKm(profile, 0.992 * 1.001, 0.992, 75) - (75 + 0.001 * 6126.8)) < 1e-9);
+  // The frame's fitted silhouette (radius 1) is already 49 km above the cloud top, not the cloud top itself.
+  assert.ok(Math.abs(haloAltitudeKm(profile, 1, 0.992, 75) - (75 + (1 / 0.992 - 1) * 6126.8)) < 1e-9);
+  // Mars: a surface edge, altitude 0 at the content scale.
+  assert.equal(haloAltitudeKm(parseLimbProfile({ schema: PSG_LIMB_TABLE_SCHEMA, body: 'mars', radiusKm: 3389.9, altitudesKm: [0, 10],
+    nadirOverheadSun: { red: 1, green: 1, blue: 1 }, radiance: { red: [1, 1], green: [1, 1], blue: [1, 1] } }, 'fixture'), 0.992, 0.992, 0), 0);
+  assert.throws(() => haloAltitudeKm(profile, 1, 0, 75), /positive content scale/);
 });

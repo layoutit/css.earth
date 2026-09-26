@@ -1,12 +1,12 @@
 import { RASTER_DENSITY, type AtmosphereRecipe } from './config.js';
 import { raster, assetPath } from './io.js';
 import { limbFactors, limbOverlay, scatteringAngles, silhouetteColourWeight, srgbToLinear, linearToSrgb } from '../../../tools/photometry/limb.mts';
-import { loadLimbProfile, haloRatio, type LimbProfile } from '../../../tools/photometry/halo.mts';
+import { loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '../../../tools/photometry/halo.mts';
 import type { PreparedLimb } from '../../renderers/css/preparation/materials/lighting.js';
 
 /**
  * A body with an atmosphere, frame by frame: the disc lit by the body's published photometric models and, outside it,
- * the halo from its PSG limb profile when the recipe names one, lit where the tangent point faces the Sun
+ * the halo from its PSG limb profile when the recipe names one, from the visible edge outward, lit where the tangent point faces the Sun
  * (tools/photometry). Three atlases share the frames:
  * - material: disc law and halo, drawn over the visible map;
  * - observation: the same, drawn over the false-colour lenses. The disc law of Venus and Mars is grey or nearly so
@@ -18,14 +18,13 @@ export async function prepareAtmosphere(recipe: AtmosphereRecipe, sourceDirector
     const table = recipe.halo === undefined ? null : await loadLimbProfile(sourceDirectory, recipe.halo);
     const density = RASTER_DENSITY, tileSize = recipe.tileSize * density, width = tileSize * recipe.columns, height = tileSize * recipe.rows;
     const material = new Uint8Array(width * height * 4), observation = new Uint8Array(width * height * 4), lighting = new Uint8Array(width * height * 4);
-    const edgeRadiusKm = table ? table.radiusKm + recipe.haloEdgeAltitudeKm! : 0;
     let outermost = 1;
     for (let frame = 0; frame < recipe.frameCount; frame++) {
         const flood = frame === recipe.frameCount - 1;
         const z = flood ? 1 : recipe.minimumLightViewZ + (recipe.maximumLightViewZ - recipe.minimumLightViewZ) * frame / (recipe.directionalFrameCount - 1);
         const light = flood ? [0, 0, 1] : [-Math.sqrt(Math.max(0, 1 - z * z)), 0, z];
         const frameX = frame % recipe.columns * tileSize, frameY = Math.floor(frame / recipe.columns) * tileSize;
-        outermost = Math.max(outermost, writeFrame({ material, observation, lighting, width, tileSize, frameX, frameY, light, recipe, limb, table, edgeRadiusKm }));
+        outermost = Math.max(outermost, writeFrame({ material, observation, lighting, width, tileSize, frameX, frameY, light, recipe, limb, table }));
     }
     await raster(material, width, height).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, recipe.materialOutput, density));
     await raster(observation, width, height).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, recipe.observationOutput, density));
@@ -38,11 +37,19 @@ export async function prepareAtmosphere(recipe: AtmosphereRecipe, sourceDirector
 
 interface FrameOptions {
     material: Uint8Array; observation: Uint8Array; lighting: Uint8Array; width: number; tileSize: number; frameX: number; frameY: number;
-    light: readonly number[]; recipe: AtmosphereRecipe; limb: PreparedLimb; table: LimbProfile | null; edgeRadiusKm: number;
+    light: readonly number[]; recipe: AtmosphereRecipe; limb: PreparedLimb; table: LimbProfile | null;
+}
+
+/** A colour with straight alpha composited over another. */
+function over([tr, tg, tb, ta]: readonly number[], [br, bg, bb, ba]: readonly number[]) {
+    const alpha = ta + ba * (1 - ta);
+    if (alpha <= 0) return [0, 0, 0, 0];
+    const weight = ba * (1 - ta);
+    return [(tr * ta + br * weight) / alpha, (tg * ta + bg * weight) / alpha, (tb * ta + bb * weight) / alpha, alpha];
 }
 
 /** Writes one frame of the three atlases; returns the largest display radius, in body radii, that received halo light. */
-function writeFrame({ material, observation, lighting, width, tileSize, frameX, frameY, light, recipe, limb, table, edgeRadiusKm }: FrameOptions) {
+function writeFrame({ material, observation, lighting, width, tileSize, frameX, frameY, light, recipe, limb, table }: FrameOptions) {
     const bodyRadius = recipe.bodyRadius * tileSize / recipe.logicalSize, samples = recipe.supersampling, count = samples * samples;
     const emissionFloor = 0.5 / bodyRadius, view = [0, 0, 1], referenceLinear = limb.reference.map(srgbToLinear);
     let outermost = 1;
@@ -52,6 +59,18 @@ function writeFrame({ material, observation, lighting, width, tileSize, frameX, 
         for (let sy = 0; sy < samples; sy++) for (let sx = 0; sx < samples; sx++) {
             const screenX = (x + (sx + 0.5) / samples - tileSize / 2) / bodyRadius, screenY = (y + (sy + 0.5) / samples - tileSize / 2) / bodyRadius;
             const radius = Math.hypot(screenX, screenY);
+            // The halo starts at the visible edge, the content scale, and is lit where the tangent point's outward
+            // direction, which lies in the image plane, faces the light.
+            let halo: number[] | null = null;
+            if (table && radius > recipe.contentScale && (screenX * light[0] + screenY * light[1]) / radius >= 0) {
+                const ratio = haloRatio(table, haloAltitudeKm(table, radius, recipe.contentScale, recipe.haloEdgeAltitudeKm!));
+                const desired = ratio.map((value, channel) => Math.max(0, Math.min(255, linearToSrgb(Math.min(1, referenceLinear[channel] * value)))));
+                const alpha = Math.max(...desired) / 255;
+                if (alpha > 0) {
+                    if (alpha * 255 >= 0.5) outermost = Math.max(outermost, radius);
+                    halo = [desired[0] / alpha, desired[1] / alpha, desired[2] / alpha, alpha];
+                }
+            }
             if (radius <= recipe.coverageScale) {
                 let materialX = screenX / recipe.contentScale, materialY = screenY / recipe.contentScale;
                 const materialRadius = Math.hypot(materialX, materialY);
@@ -59,19 +78,14 @@ function writeFrame({ material, observation, lighting, width, tileSize, frameX, 
                 const normal = [materialX, materialY, Math.sqrt(Math.max(0, 1 - Math.min(1, materialRadius) ** 2))];
                 const { incidence, emission, phase } = scatteringAngles(normal, light, view, emissionFloor);
                 const [r, g, b, a] = limbOverlay(limbFactors(limb.law, incidence, emission, phase), limb.reference);
-                // Where the mesh may not reach, the overlay only darkens, so no colour outlines the planet.
+                // Where the mesh may not reach, the overlay only darkens, so no colour outlines the planet. Past the
+                // visible edge a lit halo is drawn over that darkening, so the halo, not a dark ring, meets the disc.
                 const keep = silhouetteColourWeight(radius, limb.polarToEquatorial), disc = [r * keep, g * keep, b * keep, a];
-                add(sums[0], disc); add(sums[1], disc); add(sums[2], disc);
+                const drawn = halo ? over(halo, disc) : disc;
+                add(sums[0], drawn); add(sums[1], drawn); add(sums[2], disc);
                 continue;
             }
-            // The tangent point's outward direction lies in the image plane; it is sunlit when that direction faces the light.
-            if (!table || (screenX * light[0] + screenY * light[1]) / radius < 0) continue;
-            const ratio = haloRatio(table, recipe.haloEdgeAltitudeKm! + (radius - 1) * edgeRadiusKm);
-            const desired = ratio.map((value, channel) => Math.max(0, Math.min(255, linearToSrgb(Math.min(1, referenceLinear[channel] * value)))));
-            const alpha = Math.max(...desired) / 255;
-            if (alpha <= 0) continue;
-            if (alpha * 255 >= 0.5) outermost = Math.max(outermost, radius);
-            const halo = [desired[0] / alpha, desired[1] / alpha, desired[2] / alpha, alpha];
+            if (!halo) continue;
             add(sums[0], halo); add(sums[1], halo);
         }
         const offset = ((frameY + y) * width + frameX + x) * 4;
