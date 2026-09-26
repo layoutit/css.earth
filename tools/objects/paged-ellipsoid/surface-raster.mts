@@ -43,8 +43,9 @@ import { prepareProjectiveTextureLayer } from "../../../src/platform/projective-
 // latitude. Four transparent pixels separate all covered polygons.
 export function createPagedSurfaceRaster(config: PagedRasterConfiguration) {
 const SURFACE_ATLAS = config.atlas;
-/** Earth's smallest texture level is 1/16 of the canonical width (512 of 8192). */
-const PAGE_SIDE_STEP = 16;
+/** Earth's smallest texture level is 1/16 of the canonical width (512 of 8192), and the cutaway rasters its pages at a
+ * quarter of the surface's size: a side divisible by 64 keeps every level of both whole pixels. */
+const PAGE_SIDE_STEP = 64;
 const IDENTITY = "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1";
 
 function surfacePageUrls(name: string, pageCount: number, suffix = "") {
