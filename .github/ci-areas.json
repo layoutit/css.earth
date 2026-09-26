@@ -42,7 +42,8 @@
   "areas": [
     { "id": "docs", "patterns": ["**/*.md", "docs/**", "LICENSE*"], "jobs": [] },
     { "id": "object", "patterns": ["src/objects/*/**"], "jobs": ["universe"] },
-    { "id": "preparation", "patterns": ["src/preparation/**", "src/renderers/css/preparation/**", "packages/bake/src/photometry/**", "packages/bake/src/raster/**", "tools/galaxy-field/**", "tools/contract/test-preparation.mts"], "jobs": ["typecheck", "universePreparation"] },
+    { "id": "bake", "patterns": ["packages/bake/src/photometry/**", "packages/bake/src/raster/**"], "jobs": ["typecheck", "universePreparation", "nebula"] },
+    { "id": "preparation", "patterns": ["src/preparation/**", "src/renderers/css/preparation/**", "tools/galaxy-field/**", "tools/contract/test-preparation.mts"], "jobs": ["typecheck", "universePreparation"] },
     { "id": "renderer", "patterns": ["packages/renderer/**", "src/renderers/**"], "jobs": ["typecheck", "universe", "universePreparation"] },
     { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
     { "id": "oracles", "patterns": ["tests/fits/**", "tools/oracles/**"], "jobs": ["typecheck", "universe"] },
