@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { emissiveEntries } from '../../src/renderers/css/preparation/presentation/emissive.ts';
+import { emissiveEntries } from '@cssearth/bake/presentation';
 
 // 364 of 454 published star plates held no visible pixel, and a layer painting a transparent image still gets a backing:
 // AB Pic's empty off-limb plate kept its whole stage a 7.4 MB layer on a DPR 3 iPhone. The raster lane no longer publishes

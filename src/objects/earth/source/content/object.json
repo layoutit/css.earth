@@ -311,12 +311,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "atmosphere",
-        "label": "Atmosphere",
-        "checked": true
       }
     ]
   },

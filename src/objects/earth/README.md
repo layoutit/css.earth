@@ -197,9 +197,9 @@ observations or live weather.
 
 One retained surface displays the selected image bank.
 
-With the atmosphere on, one image shows the planet: the atmosphere bank's frame holds the disc lit by the EPIC law
-with the model atmosphere composited over and around it, and the disc-only lighting bank stays hidden (it shows only with the atmosphere turned
-off). The white limb overlay at a quarter of the shading alpha, the 0.05 ambient term and the terminator ramp are
+One image shows the planet: the atmosphere bank's frame holds the disc lit by the EPIC law
+with the model atmosphere composited over and around it. Earth has no Atmosphere setting or separate disc-only lighting bank.
+The white limb overlay at a quarter of the shading alpha, the 0.05 ambient term and the terminator ramp are
 gone. With Shadows off the atmosphere shows its full-phase frame, so turning the globe
 keeps one prepared image loaded instead of decoding a new one for each phase.
 That frame is its own image (`earth-atmosphere-flood@2x.webp`, 1,016 pixels with its gutter)

@@ -73,7 +73,7 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: 
   host.insertBefore(layer, before);
   // A fixed box, sized once, scaled by its transform: camera motion changes only transform and opacity
   // (docs/performance/motion-freezes-membership.md). Two atlas texels per CSS pixel, the texture rule of
-  // src/platform/projective-surface-raster.mts: the cell holds no more detail than that, and the layer's backing stays
+  // packages/bake/src/scene/projective-surface-raster.ts: the cell holds no more detail than that, and the layer's backing stays
   // this size however large the billboard shows.
   const box = atlas.cellPx / 2;
   const leaves = entries.map(entry => {

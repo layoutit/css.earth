@@ -33,11 +33,26 @@ export function overviewScopeFromUrl(url: string | URL) {
   return scope === 'system' || scope === 'milky-way' || scope === 'local-group' || scope === 'nearby-universe' ? scope : null;
 }
 
+/** Satellite systems are selections on a body's route, below the stellar overview. */
+export function satelliteSystemFromUrl(url: string | URL) {
+  const query = new URL(url).searchParams;
+  return !query.has('focus') && !query.has('overview') && query.get('view') === 'satellites';
+}
+
+export function withSatelliteSystemView(url: URL, selected: boolean): URL {
+  if (selected) {
+    url.searchParams.set('view', 'satellites');
+    url.searchParams.delete('overview');
+    for (const key of PREPARED_FOCUS_KEYS) url.searchParams.delete(key);
+  } else url.searchParams.delete('view');
+  return url;
+}
+
 /** Selects the named catalogue focus, replacing any overview it supersedes. */
 export function withPreparedFocus(url: URL, id: string | null, lens: string | null): URL {
   if (id) url.searchParams.set('focus', id); else url.searchParams.delete('focus');
   if (lens) url.searchParams.set('focusLens', lens); else url.searchParams.delete('focusLens');
-  if (id) url.searchParams.delete('overview');
+  if (id) { url.searchParams.delete('overview'); url.searchParams.delete('view'); }
   return url;
 }
 
@@ -48,6 +63,7 @@ export function withOverviewScope(url: URL, scope: string | null): URL {
     return url;
   }
   url.searchParams.set('overview', scope);
+  url.searchParams.delete('view');
   for (const key of PREPARED_FOCUS_KEYS) url.searchParams.delete(key);
   return url;
 }

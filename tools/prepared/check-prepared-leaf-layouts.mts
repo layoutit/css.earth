@@ -1,4 +1,4 @@
-import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE } from "./leaf-box.mts";
+import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE, applyPreparedProjectiveLayout } from "@cssearth/bake/presentation";
 import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireString,shape,array,text,number,boolean,dictionary,optional} from '@cssearth/core';
 const parseProperty=shape({name:text,value:text,custom:boolean});
@@ -14,7 +14,6 @@ import { pathToFileURL } from "node:url";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../ci/check-object-runtime-ownership.mts";
 import { readPreparedPresentationModule } from "./check-prepared-presentation.mts";
-import { applyPreparedProjectiveLayout } from "./projective-layout.mts";
 
 const cssName = (name:string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 const projectiveLeaf = (node:TreeNode) => node?.attributes?.["data-prepared-projection"] === "single-leaf";
@@ -50,7 +49,7 @@ const LEAF_BOX_READ = String.raw`var\(${LEAF_BOX_FACTOR}, 1\)`;
 const LEAF_BOX_UNSCALE_SUFFIX = ` ${LEAF_BOX_UNSCALE}`;
 const SEAM_OUTSET = new RegExp(String.raw`^ translate\(50%, 50%\) scale\(calc\(1 \+ var\((--[a-z][a-z0-9-]*), 0\) \* ${SCALE}\), calc\(1 \+ var\(\1, 0\) \* ${SCALE}\)\) translate\(-50%, -50%\)$`);
 // A leaf whose box follows its body on screen reads its factor in its lengths, and scales back by its inverse right after
-// its matrix (tools/prepared/leaf-box.mts). The checks read the full box: the factor's fallback is one.
+// its matrix (packages/bake/src/presentation/leaf-box.ts). The checks read the full box: the factor's fallback is one.
 const leafBoxLength = (value:string) => value.replace(new RegExp(String.raw`calc\((-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?px) \* ${LEAF_BOX_READ}\)`, "g"), "$1");
 function requireMatrix(value:string, label:string, seamOutset = false) {
   const matrix = /^matrix3d\(([^)]+)\)(.*)$/.exec(value);

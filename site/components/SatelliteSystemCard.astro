@@ -1,0 +1,30 @@
+---
+import ObjectCardHeader from './ObjectCardHeader.astro';
+import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
+import ObjectResult from './ObjectResult.astro';
+import MoonList from './MoonList.astro';
+import { SCENE_OBJECTS } from '../objects.mts';
+import { prepareBodyMoons } from '../prepare-body-moons.mts';
+import { satelliteSystemByHost } from '../satellite-systems.mts';
+import { systemSourceDocumentation } from '../source-documentation.mts';
+
+interface Props { hostId: string; }
+const { hostId } = Astro.props;
+const system = satelliteSystemByHost(hostId);
+const host = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
+if (system && !host) throw new TypeError(`Satellite-system host ${hostId} has no scene object.`);
+const source = system ? systemSourceDocumentation({ id: hostId, name: system.name, memberIds: system.memberIds }) : null;
+const moons = system ? prepareBodyMoons(hostId) : [];
+---
+
+{system && host && source && <>
+  <ObjectCardHeader title={{ label: system.name }} heading={false} data-satellite-system
+    data-source-subject={`satellite-system:${hostId}`} data-source-document={source.href} data-source-label={source.label}>
+    <ObjectBreadcrumbs objectId={hostId} satelliteSystem />
+  </ObjectCardHeader>
+  <div class="object-results-scroll object-card-tabpanel" data-satellite-system
+    role="region" aria-label={`Bodies in the ${system.name}`}>
+    <ul class="object-list"><ObjectResult object={host} /></ul>
+    <MoonList {moons} />
+  </div>
+</>}

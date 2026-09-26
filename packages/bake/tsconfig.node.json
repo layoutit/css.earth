@@ -14,7 +14,9 @@
   "include": [
     "src/volume/node",
     "src/photometry",
-    "src/raster"
+    "src/raster",
+    "src/scene",
+    "src/presentation"
   ],
   "exclude": [
     "src/**/*.test.ts"

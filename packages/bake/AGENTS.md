@@ -7,13 +7,22 @@ prepared delivery. Nothing here runs in the application. The runtime (`@cssearth
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no
 cycle. Share anything else through `@cssearth/core` or another package. Build-time code may import `@cssearth/renderer`
-(the raster lane reads the prepared-asset constants the renderer owns); the renderer never imports the bake.
+(the raster lane reads the prepared-asset constants the renderer owns, and the scene and presentation compilers write what
+its validators accept); the renderer never imports the bake.
 
 - `src/photometry/` is published as `@cssearth/bake/photometry` (Node only): published photometric models, their
   records and normalization, and the limb laws and PSG limb profiles preparation draws from them. It imports no topic.
 - `src/raster/` is published as `@cssearth/bake/raster` (Node only): raster recipes and their validation, surface maps,
   pages and poles, the lighting, limb and atmosphere banks, interiors, missing-coverage painting and the lossy WebP lane.
   It imports `photometry`.
+- `src/scene/` is published as `@cssearth/bake/scene` (Node only): geometry profiles, projected surface leaves and their
+  raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials and solid-body surfaces.
+  It imports `raster`. The host passes the physical scene and Sun directions in (`ScenePreparationAdapters`).
+- `src/presentation/` is published as `@cssearth/bake/presentation` (Node only): the retained node tree with its
+  projective layouts and leaf boxes, offline CSSOM reads (Playwright's Chromium), activation groups, and the row-bank
+  cutaway, composite and emissive presentations. It imports `scene` and `raster`. The host passes material tracks, the
+  prepared-presentation contract and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or
+  platform modules itself.
 
 - `src/volume/` is published as `@cssearth/bake/volume`: the volume contracts, coordinates, fields, materials and
   sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,

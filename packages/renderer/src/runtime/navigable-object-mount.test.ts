@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test, vi } from 'vitest';
 import { loadNavigableObject } from './navigable-object-mount.js';
-import { prepareActivationGroups } from '../../../../tools/prepared/prepared-activation-groups.mts';
+import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '../../../../tools/contract/object-runtime-contract.mts';
 import { requirePreparedCssDescriptor } from '../prepared-object-decoder.js';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';

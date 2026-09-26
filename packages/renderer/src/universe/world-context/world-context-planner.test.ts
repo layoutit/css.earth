@@ -531,9 +531,9 @@ test.each(['ryugu', 'saturn'])('%s selection dimming relaxes at system scale, in
   }
 });
 
-test.each(['saturn', 'jupiter', 'uranus'])('%s: its own orbit fades out close up while the other orbits keep their floor', id => {
+test.each(['saturn', 'jupiter', 'uranus'])('%s: close detail retires its own and unrelated solar orbits', id => {
   const calculate = createWorldContextPlanner(plan), input = view();
-  const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === id);
+  const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === id);
   const selected = plan.bodies[index - 1]!;
   input.selectedId = id; input.overview = false;
   for (const discHeightShare of [.1, .2, .3, .6]) {
@@ -548,9 +548,12 @@ test.each(['saturn', 'jupiter', 'uranus'])('%s: its own orbit fades out close up
       expect(own.orbitVisibility).toBeGreaterThan(0);
       expect(own.segments.every(segment => segment.every(Number.isFinite))).toBe(true);
     } else expect(own.orbitVisibility, `${discHeightShare} viewport height`).toBe(0);
-    // Every other orbit keeps the close-up floor.
-    const others = frame.projectedBodies.filter(body => body.index !== index && body.orbitVisibility > 0);
-    if (discHeightShare >= .3) expect(others.every(body => body.orbitVisibility <= .3 + 1e-9)).toBe(true);
+    // Other planets' paths are irrelevant at close detail. The selected planet's nearby moons retain their own policy.
+    const otherSolarOrbits = frame.projectedBodies.filter(body => {
+      const point = points[body.index]!;
+      return body.index !== index && 'orbit' in point && point.orbit?.centerBodyId === plan.focus.id;
+    });
+    if (discHeightShare >= .3) expect(otherSolarOrbits.every(body => body.orbitVisibility === 0)).toBe(true);
   }
   input.bodies[index]!.orbitHidden = true;
   expect(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility).toBe(0);

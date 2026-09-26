@@ -8,7 +8,7 @@ type TreeNode = PreparedTree['nodes'][number];
 type RecompiledFields='tree'|'variants'|'materials'|'animations'|'viewBindings'|'motion'|'surfaceHit'|'depthPartitions';
 export type RecompiledPresentation<T extends PreparedPresentationDefinition> = Omit<T, RecompiledFields> & Pick<PreparedPresentationDefinition,RecompiledFields>;
 
-import { prepareActivationGroups } from './prepared-activation-groups.mts';
+import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { visibilityComponents } from './prepared-visibility-order.mts';
 import { dot3 as dot } from '@cssearth/core';
 

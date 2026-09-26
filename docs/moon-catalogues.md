@@ -10,6 +10,10 @@ Captions use the shared camera, ordinary caption typography and the
 family, using space left after clickable scene labels. They are retained text,
 not additional body scenes.
 
+Selecting a host from a wider view first opens its [satellite-system card](satellite-system-navigation.md).
+The card links to each available moon and marks catalogue-only moons as
+unavailable. A direct body link and a close zoom open the body's card.
+
 A selected moon with no moons of its own shows its parent system instead of an
 empty **Moons (0)** tab. For example, Titan's **Saturn system** tab links to Saturn
 and its other available, non-illustration moons. The same list remains available

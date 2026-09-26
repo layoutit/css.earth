@@ -1,6 +1,7 @@
 ---
 import { treeCount, type TreeNode } from '../navigation/navigation-tree.mts';
 import { treeMarker } from '../navigation/tree-marker.mts';
+import { satelliteSystemByHost } from '../satellite-systems.mts';
 
 interface Props { node: TreeNode; current: string; depth: number; eager?: boolean }
 
@@ -14,7 +15,8 @@ const marker = node.object ? treeMarker(node.object.id) : null;
 const open = holds(node);
 const deferred = !eager && node.children.length > 0 && !open;
 // Packages without an application destination retain their marker and label.
-const href = node.object ? node.href : null;
+const href = node.object && node.href && satelliteSystemByHost(node.object.id) && !node.focusId
+  ? `${node.href}?view=satellites` : node.object ? node.href : null;
 ---
 {node.children.length
   ? <details open={open} data-atlas-depth={depth} data-atlas-key={node.key} data-atlas-lazy={deferred ? '' : undefined}>

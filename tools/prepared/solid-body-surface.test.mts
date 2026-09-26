@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "./prepare-solid-body-surface.mts";
+import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "@cssearth/bake/scene";
 import { assertPolarCaps } from "../../tests/objects/polar-caps.mts";
 
 // An independently readable coordinate image: red encodes longitude and green
@@ -60,7 +60,7 @@ test("polar textures use the same projection as their flat caps", () => {
 });
 
 test("CSS UVs sample the actual atlas when HD padding is not a quarter-band", async () => {
-  const { packProjectiveSurfaceRaster } = await import('./projective-surface-raster.mts');
+  const { packProjectiveSurfaceRaster } = await import('@cssearth/bake/scene');
   // Like Charon and Triton, the packed gutter is independent of image density.
   const gutter = 6;
   const packed = packProjectiveSurfaceRaster(reprojectSolidBodySurfaceRaster(source, { width, height }),

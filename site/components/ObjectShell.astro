@@ -93,7 +93,7 @@ const searchCategories = [
     <div class="object-search-browser-shell">
       <form id={searchFormId} class="object-sidebar-search-card" role="search" aria-label="Object search"
         action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
-        {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
+        {['v', 'view', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
         <span class="object-sidebar-search-icon" aria-hidden="true">
           <MaterialSymbol name="search" />
         </span>
@@ -150,7 +150,7 @@ const searchCategories = [
 <div class="object-dataset-context-dock">
 <form id={`${objectId}-settings-form`} action={`/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
-  {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+  {['v', 'view', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
 </form>
 <section
   id={`${objectId}-settings`}

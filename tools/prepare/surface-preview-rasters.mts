@@ -6,7 +6,7 @@ import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createProjectiveSurfaceRasterLayout } from '../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterLayout } from '@cssearth/bake/scene';
 import { latitudeRasterBands } from '../objects/giant-layers/geometry.mts';
 import { preparePagedSurfaceMap } from '../objects/paged-ellipsoid/assets.mts';
 

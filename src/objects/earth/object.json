@@ -74,47 +74,39 @@
             {
               "id": "normal",
               "source": "content",
-              "material": "lighting"
+              "material": "atmosphere"
             },
             {
               "id": "clouds",
               "source": "content",
-              "material": "lighting"
+              "material": "atmosphere"
             },
             {
               "id": "topography",
               "source": "content",
-              "material": "lighting"
+              "material": "atmosphere"
             },
             {
               "id": "night-lights",
-              "source": "content",
-              "material": "lighting"
+              "source": "content"
             },
             {
               "id": "enso",
               "source": "content",
-              "material": "lighting"
+              "material": "atmosphere"
             },
             {
               "id": "cross-section",
-              "source": "content",
-              "material": "lighting"
+              "source": "content"
             },
             {
               "id": "mantle-tomography",
-              "source": "content",
-              "material": "lighting"
+              "source": "content"
             }
           ]
         }
       ],
       "materials": [
-        {
-          "id": "lighting",
-          "source": "paged-ellipsoid",
-          "model": "lit"
-        },
         {
           "id": "atmosphere",
           "source": "paged-ellipsoid",

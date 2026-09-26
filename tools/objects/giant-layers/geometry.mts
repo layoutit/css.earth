@@ -21,9 +21,8 @@ export interface BandedImagePixels {
  * The published atlas lays its tiles out for the caps that show them (layoutPolarAtlasForCaps), the south tile first. */
 export interface PoleImageProjection { edgeLatitudeDegrees: number; scale: number }
 import {buildSeamBleedPolygonEdges,computeTextureAtlasPlanPublic,resolvePolyTextureLeafGeometry,formatCssLength} from '@layoutit/polycss';
-import {createProjectiveSurfaceRasterPresentation,fitTextureGeometry,fitProjectiveTextureGeometryToStableLayout,leafRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '@cssearth/bake/scene';
 import {ellipsoidPoint} from '../material-composition/ellipsoid.mts';
-import {POLAR_CAP_STYLE,requireOutwardCap} from '../../../src/renderers/css/preparation/scene/polar-cap.ts';
 
 const presentation={backend:'image',lighting:'source',projection:'projective'} as const;
 const replace=(template: string,values: Record<string,string>)=>template.replace(/\{([a-z]+)\}/gu,(_match: string,key: string)=>values[key]);

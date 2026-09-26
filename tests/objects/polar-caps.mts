@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { POLAR_CAP_STYLE } from '../../src/renderers/css/preparation/scene/polar-cap.ts';
+import { POLAR_CAP_STYLE } from '@cssearth/bake/scene';
 
 export type Pole = 'north' | 'south';
 export interface PreparedCap { readonly pole: Pole; readonly style: string; readonly label?: string }
@@ -29,7 +29,7 @@ export function assertCapFacesOut(where: string, pole: Pole, style: string): voi
   assert.ok(dot(front, centre) > 0, `${where}: the plate faces out of the body (front ${front.join(',')}, centre ${centre.join(',')})`);
 }
 
-/** The one cap rule (src/renderers/css/preparation/scene/polar-cap.ts) on a lane's prepared caps: both poles closed, each cap
+/** The one cap rule (packages/bake/src/scene/polar-cap.ts) on a lane's prepared caps: both poles closed, each cap
  * the disc its round image fills, never drawn from both sides, and facing out of the body. */
 export function assertPolarCaps(owner: string, caps: readonly PreparedCap[]): void {
   assert.deepEqual(new Set(caps.map(cap => cap.pole)), new Set(['north', 'south']), `${owner}: caps close both poles`);

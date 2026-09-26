@@ -55,6 +55,7 @@ For a body's sources, processing, evidence and known problems, read its
 | What the open archives hold for our catalogued bodies | [Archive screen](archive-screen.md) |
 | Facility thumbnails: NASA artwork, photographs and model renders | [Facility thumbnails](facility-thumbnails.md) |
 | Moon sidebar listing, labels and orbit registration | [Moon catalogues](moon-catalogues.md) |
+| Explicit system cards for bodies with prepared moons | [Satellite-system navigation](satellite-system-navigation.md) |
 | Scroll-driven camera distance experiment | [Native scroll zoom experiment](native-scroll-zoom.md) |
 | Choosing which destinations get featured or captioned | [Choosing destinations to explore](object-discovery.md) |
 | The shared neutral shape-only display material | [Shape-only material](shape-only-material.md) |

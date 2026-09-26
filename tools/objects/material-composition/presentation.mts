@@ -8,14 +8,13 @@ import type {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import type {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
-import type {PreparedNode} from '../../prepared/prepared-node-tree.mts';
+import type { PreparedNode } from '@cssearth/bake/presentation';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.mts';
 
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
-import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
-import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
+import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 function prepareTransform(value:string|null|undefined) {

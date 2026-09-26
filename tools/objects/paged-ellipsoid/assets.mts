@@ -16,14 +16,11 @@ type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
 interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number; nativeDeepOceanFill?: NativeDeepOceanFill;}
-interface MaterialFrameInput {size: number; scenePitchDegrees: number; role: string; atmosphereModel: AtmosphereModel; shadowless?: boolean; phaseFrame?: number;}
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import type { EllipsoidAttitude } from './attitude.mts';
-import { LIT_DEFAULT_VIEW } from '../../../src/platform/default-camera.mts';
 import { readCoraltempAnomaly } from "./sst-anomaly.mts";
-import { limbFactors, limbOverlay, scatteringAngles } from '@cssearth/bake/photometry';
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mts";
 import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mts";
@@ -56,11 +53,6 @@ const output = (path: string) => { produced.add(`${config.publicBase}${path}`); 
 await mkdir(publicDirectory,{recursive:true});
 if (mode === 'interior') {
   await prepareInteriorAssets({ exterior: false });
-  return { assets: [...produced].sort() };
-}
-if (mode === 'shadowless') {
-  const {atmosphere}=requireMaterialPreparation();
-  for (const density of [1, 2]) await prepareShadowlessMaterial(atmosphere.MATERIAL_TILE_SIZE * density, density === 2 ? '@2x' : '');
   return { assets: [...produced].sort() };
 }
 if (mode !== 'materials') {
@@ -321,147 +313,59 @@ async function prepareMaterialBanks() {
   if (!Number.isInteger(columns) || !Number.isInteger(shardCount)) {
     throw new Error("Paged ellipsoid material shards require a square frame layout.");
   }
-  const {attitude: bodyAttitude}=requireMaterialPreparation();
-  const defaultFrame = Math.round((bodyAttitude.sunView(LIT_DEFAULT_VIEW.initialScenePitchDegrees)[2] + 1) / 2 * (frameCount - 1));
   let task = -1;
   const mine = () => ++task % materialSlice.count === materialSlice.index;
-  for (const role of ["lighting", "atmosphere"]) {
-    for (const density of [1, 2]) {
-      const suffix = density === 2 ? "@2x" : "";
-      const size = MATERIAL_TILE_SIZE * density;
-      const gutter = 2 * density;
-      const stride = size + gutter * 2;
-      if (mine()) {
-        const defaultRgba = renderMaterialFrame({
-          size,
-          scenePitchDegrees: LIT_DEFAULT_VIEW.initialScenePitchDegrees,
-          role,
-          atmosphereModel,
-          ...(role === "lighting" ? { phaseFrame: defaultFrame } : {}),
+  const role = "atmosphere";
+  for (const density of [1, 2]) {
+    const suffix = density === 2 ? "@2x" : "";
+    const size = MATERIAL_TILE_SIZE * density;
+    const gutter = 2 * density;
+    const stride = size + gutter * 2;
+    if (mine()) {
+      const defaultRgba = atmosphere.prepareAtmosphereMaterialFrame({ size, model: atmosphereModel }).data;
+      await sharp(defaultRgba, {
+        raw: { width: size, height: size, channels: 4 },
+      }).webp({ lossless: true }).toFile(output(
+        `${config.namespace}-${role}-default${suffix}.webp`,
+      ));
+    }
+    for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
+      if (!mine()) continue;
+      const shardWidth = stride * columns;
+      const shardHeight = stride * rows;
+      const shard = Buffer.alloc(shardWidth * shardHeight * 4);
+      for (let frameOffset = 0;
+        frameOffset < MATERIAL_FRAMES_PER_SHARD;
+        frameOffset += 1) {
+        const frameIndex = shardIndex * MATERIAL_FRAMES_PER_SHARD +
+          frameOffset;
+        const columnIndex = frameOffset % columns;
+        const tileRowIndex = Math.floor(frameOffset / columns);
+        const frame = atmosphere.prepareAtmosphereMaterialFrame({ size, frame: frameIndex, model: atmosphereModel }).data;
+        blitRgba(frame, size, size, shard, shardWidth, shardHeight, {
+          left: columnIndex * stride + gutter,
+          top: tileRowIndex * stride + gutter,
         });
-        await sharp(defaultRgba, {
-          raw: { width: size, height: size, channels: 4 },
-        }).webp({ lossless: true }).toFile(output(
-          `${config.namespace}-${role}-default${suffix}.webp`,
-        ));
       }
-      if (role === "lighting" && mine()) {
-        await prepareShadowlessMaterial(size, suffix);
-      }
-      for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
-        if (!mine()) continue;
-        const shardWidth = stride * columns;
-        const shardHeight = stride * rows;
-        const shard = Buffer.alloc(shardWidth * shardHeight * 4);
-        for (let frameOffset = 0;
-          frameOffset < MATERIAL_FRAMES_PER_SHARD;
-          frameOffset += 1) {
-          const frameIndex = shardIndex * MATERIAL_FRAMES_PER_SHARD +
-            frameOffset;
-          const columnIndex = frameOffset % columns;
-          const tileRowIndex = Math.floor(frameOffset / columns);
-          const scenePitchDegrees = 65 - frameIndex /
-            (frameCount - 1) * 65;
-          const frame = renderMaterialFrame({
-            size,
-            scenePitchDegrees,
-            phaseFrame: frameIndex,
-            role,
-            atmosphereModel,
-          });
-          blitRgba(frame, size, size, shard, shardWidth, shardHeight, {
-            left: columnIndex * stride + gutter,
-            top: tileRowIndex * stride + gutter,
-          });
-        }
-        const rowImage = sharp(shard, {
-          raw: { width: shardWidth, height: shardHeight, channels: 4 },
-        });
-        const rowPath = output(
-          `${config.namespace}-${role}-row-${String(shardIndex).padStart(2, "0")}` +
-          `${suffix}.webp`,
-        );
-        // Atmosphere rows carry colour in RGB: it goes through the lossy lane with its alpha exact (quality 80 flags no
-        // pixel on rows 29 to 31 and keeps all 113 alpha levels; 1.46 -> 0.46 MB). Lighting rows carry their shading in
-        // alpha and stay lossless.
-        if (role === "atmosphere") await writeLossyWebp(rowImage, rowPath, { alphaQuality: 100, effort: 6 });
-        else await rowImage.webp({ lossless: true }).toFile(rowPath);
-      }
-      if (role === "atmosphere" && mine()) {
-        // The flood frame on its own, with its gutter, for the shadows-off view (scene.mts): same lane as its row.
-        const tile = Buffer.alloc(stride * stride * 4);
-        blitRgba(renderMaterialFrame({ size, scenePitchDegrees: 0, phaseFrame: frameCount - 1, role, atmosphereModel }),
-          size, size, tile, stride, stride, { left: gutter, top: gutter });
-        await writeLossyWebp(sharp(tile, { raw: { width: stride, height: stride, channels: 4 } }),
-          output(`${config.namespace}-${role}-flood${suffix}.webp`), { alphaQuality: 100, effort: 6 });
-      }
+      const rowImage = sharp(shard, {
+        raw: { width: shardWidth, height: shardHeight, channels: 4 },
+      });
+      const rowPath = output(
+        `${config.namespace}-${role}-row-${String(shardIndex).padStart(2, "0")}` +
+        `${suffix}.webp`,
+      );
+      // The atmosphere carries colour in RGB, so use the lossy lane with exact alpha.
+      await writeLossyWebp(rowImage, rowPath, { alphaQuality: 100, effort: 6 });
+    }
+    if (mine()) {
+      // The flood frame on its own, with its gutter, for the shadows-off view (scene.mts): same lane as its row.
+      const tile = Buffer.alloc(stride * stride * 4);
+      blitRgba(atmosphere.prepareAtmosphereMaterialFrame({ size, frame: frameCount - 1, model: atmosphereModel }).data,
+        size, size, tile, stride, stride, { left: gutter, top: gutter });
+      await writeLossyWebp(sharp(tile, { raw: { width: stride, height: stride, channels: 4 } }),
+        output(`${config.namespace}-${role}-flood${suffix}.webp`), { alphaQuality: 100, effort: 6 });
     }
   }
-  if (defaultFrame < 0 || defaultFrame >= frameCount) {
-    throw new Error("Paged ellipsoid default material frame is invalid.");
-  }
-}
-
-async function prepareShadowlessMaterial(size: number, suffix: string) {
-  const {atmosphereModel}=requireMaterialPreparation();
-  const pixels = renderMaterialFrame({size, scenePitchDegrees: LIT_DEFAULT_VIEW.initialScenePitchDegrees, role: 'lighting',
-    atmosphereModel, shadowless: true});
-  await sharp(pixels, {raw: {width: size, height: size, channels: 4}})
-    .webp({lossless: true}).toFile(output(`${config.namespace}-lighting-shadowless${suffix}.webp`));
-}
-
-function renderMaterialFrame({
-  size,
-  scenePitchDegrees,
-  role,
-  atmosphereModel,
-  shadowless = false,
-  phaseFrame,
-}: MaterialFrameInput) {
-  if (role === "atmosphere") {
-    return requireMaterialPreparation().atmosphere.prepareAtmosphereMaterialFrame({ size, frame: phaseFrame, model: atmosphereModel }).data;
-  }
-  const radius = size * config.material.discRadius;
-  const center = (size - 1) / 2;
-  const rgba = Buffer.alloc(size * size * 4);
-  const {attitude: bodyAttitude}=requireMaterialPreparation();
-  // Every lighting frame is drawn on the default pose's plane; the runtime turns it by the Sun's screen angle. Frame i puts the
-  // Sun at view z = -1 + 2i/(count - 1) on the default Sun's screen azimuth, so the frame the runtime selects is the real Sun.
-  const planePitch = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
-  const screenToObject = (vector: readonly number[]) => bodyAttitude.screenToObject(vector, planePitch);
-  const right = normalizeVector(screenToObject([0, 1, 0]));
-  const down = normalizeVector(screenToObject([1, 0, 0]));
-  const view = normalizeVector(screenToObject([0, 0, 1]));
-  const sunView = bodyAttitude.sunView(planePitch), azimuth = Math.hypot(sunView[0], sunView[1]);
-  const frameZ = phaseFrame === undefined ? sunView[2] : -1 + 2 * phaseFrame / (config.material.frameCount - 1);
-  const across = Math.sqrt(Math.max(0, 1 - frameZ ** 2));
-  const objectLight = shadowless
-    ? view
-    : normalizeVector(bodyAttitude.viewToObject([sunView[0] / azimuth * across, sunView[1] / azimuth * across, frameZ], planePitch));
-  const {atmosphereModel: limbModel} = requireMaterialPreparation(), emissionFloor = 0.5 / radius;
-  for (let y = 0; y < size; y += 1) {
-    for (let x = 0; x < size; x += 1) {
-      const offset = (y * size + x) * 4;
-      const screenX = (x - center) / radius * config.geometry.EQUATORIAL_RADIUS;
-      const screenY = (y - center) / radius * config.geometry.EQUATORIAL_RADIUS;
-      const origin = [0, 1, 2].map((axis) =>
-        right[axis] * screenX + down[axis] * screenY);
-      const hit = intersectEllipsoid(origin, view);
-      if (!hit) continue;
-      if (role === "lighting") {
-        // The published limb law relative to the flood-lit disc centre (packages/bake/src/photometry/limb.ts); nothing authored.
-        const { incidence, emission, phase } = scatteringAngles(hit.normal, objectLight, view, emissionFloor);
-        const [red, green, blue, alpha] = limbOverlay(limbFactors(limbModel.law, incidence, emission, phase), limbModel.reference);
-        rgba[offset] = Math.round(red);
-        rgba[offset + 1] = Math.round(green);
-        rgba[offset + 2] = Math.round(blue);
-        rgba[offset + 3] = Math.round(alpha * 255);
-        continue;
-      }
-
-    }
-  }
-  return rgba;
 }
 
 function blitRgba(sourceRgba: Buffer, sourceWidth: number, sourceHeight: number, targetRgba: Buffer,
@@ -481,40 +385,6 @@ function blitRgba(sourceRgba: Buffer, sourceWidth: number, sourceHeight: number,
   }
 }
 
-function intersectEllipsoid(origin: readonly number[], direction: readonly number[]) {
-  const equatorialSquared = config.geometry.EQUATORIAL_RADIUS ** 2;
-  const polarSquared = (config.geometry.EQUATORIAL_RADIUS * config.polarRadiusKm / config.equatorialRadiusKm) ** 2;
-  const coefficientA =
-    (direction[0] ** 2 + direction[1] ** 2) / equatorialSquared +
-    direction[2] ** 2 / polarSquared;
-  const coefficientB = 2 * (
-    (origin[0] * direction[0] + origin[1] * direction[1]) /
-      equatorialSquared +
-    origin[2] * direction[2] / polarSquared
-  );
-  const coefficientC =
-    (origin[0] ** 2 + origin[1] ** 2) / equatorialSquared +
-    origin[2] ** 2 / polarSquared - 1;
-  const discriminant = coefficientB ** 2 - 4 * coefficientA * coefficientC;
-  if (!Number.isFinite(discriminant) || discriminant < 0) return null;
-  const root = Math.sqrt(discriminant);
-  const candidates = [
-    (-coefficientB - root) / (2 * coefficientA),
-    (-coefficientB + root) / (2 * coefficientA),
-  ].map((distance) => {
-    const position = [0, 1, 2].map((axis) =>
-      origin[axis] + direction[axis] * distance);
-    const normal = normalizeVector([
-      position[0] / equatorialSquared,
-      position[1] / equatorialSquared,
-      position[2] / polarSquared,
-    ]);
-    return { position, normal, visibility: dotVector(normal, direction) };
-  });
-  return candidates[0].visibility >= candidates[1].visibility
-    ? candidates[0]
-    : candidates[1];
-}
 
 function dotVector(left: readonly number[], right: readonly number[]) {
   return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];

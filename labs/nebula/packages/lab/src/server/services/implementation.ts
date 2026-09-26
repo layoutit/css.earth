@@ -30,10 +30,12 @@ export async function implementationPins(root: string, entries: readonly string[
         return { path: resolve(root, args.path.endsWith('/node') ? 'packages/spice/src/node/index.ts' : 'packages/spice/src/index.ts') };
       });
       // The volume contracts, fields and materials were the lab's volume-core package before they became
-      // `@cssearth/bake/volume`, and the volume bake was volume-bake before `@cssearth/bake/volume/node`; the same.
-      builder.onResolve({ filter: /^@cssearth\/bake\/volume(?:\/node)?$/ }, args => {
+      // `@cssearth/bake/volume`, and the volume bake was volume-bake before `@cssearth/bake/volume/node`; the preparation
+      // topics (photometry, raster, scene, presentation) were relative modules under src/ and tools/. Each topic entry maps
+      // to its source index the same way.
+      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation)$/ }, args => {
         manifests.add('packages/bake/package.json');
-        return { path: resolve(root, args.path.endsWith('/node') ? 'packages/bake/src/volume/node/index.ts' : 'packages/bake/src/volume/index.ts') };
+        return { path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') };
       });
       // The CSS renderer runtime was relative modules under src/renderers/css/ before it became @cssearth/renderer; the lab
       // imports its TypeScript source subpaths (`@cssearth/renderer/volume/types.ts`), which stay owners the same way.

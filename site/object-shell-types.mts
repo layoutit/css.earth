@@ -21,6 +21,7 @@ export interface ShellOptions {
 
 export type ShellNavigationTarget =
   | { kind: 'object'; object: ObjectEntry; targetWorldCamera?: WorldCameraPose }
+  | { kind: 'satellite-system'; object: ObjectEntry; targetWorldCamera?: WorldCameraPose }
   | { kind: 'overview'; overview: SceneOverview; preview: boolean };
 
 export interface ShellNavigationTransition {

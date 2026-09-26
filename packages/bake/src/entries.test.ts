@@ -34,6 +34,8 @@ it('the main volume entry stays host-neutral: only volume/node imports Node buil
  * A topic missing here imports no other topic. */
 const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   raster: ['photometry'],
+  scene: ['raster'],
+  presentation: ['scene', 'raster'],
 };
 
 it('topics import only the lower topics declared for them, through their index, never the application or another package\'s sources', async () => {

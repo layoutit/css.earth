@@ -1,5 +1,5 @@
 import type { Polygon, Vec3, Vec2, ComputeTextureAtlasPlanOptions } from "@layoutit/polycss";
-import type { RasterRect } from "./projective-surface-raster.mts";
+import type { RasterRect } from "./projective-surface-raster.ts";
 interface SurfaceRasterOptions { width: number; height: number; latitudeSegments?: number; longitudeSegments?: number; seamOverlap?: number; sampling?: "bilinear" | "nearest"; }
 interface PoleRasterOptions extends SurfaceRasterOptions { tileSize?: number; radius?: number; polarRadius?: number; }
 interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: number; secondaryRadius?: number; mapUrl: string; polesUrl: string; latitudeSegments?: number; longitudeSegments?: number; sourceWidth?: number; sourceHeight?: number; poleTileSize?: number; seamOverlap?: number; gutter?: number;
@@ -8,8 +8,8 @@ interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: numbe
   mapPixelWidth: number; polesPixelWidth: number; }
 type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: "north" | "south"; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from "@layoutit/polycss";
-import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
-import { POLAR_CAP_STYLE, requireOutwardCap } from "../renderers/css/preparation/scene/polar-cap.ts";
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.ts";
+import { POLAR_CAP_STYLE, requireOutwardCap } from "./polar-cap.ts";
 
 // A latitude trapezoid uses projective UVs: tan(latitude), rather than latitude,
 // varies linearly down its texture. Bake the inverse mapping into each band so

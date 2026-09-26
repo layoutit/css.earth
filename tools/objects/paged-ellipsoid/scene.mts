@@ -8,7 +8,7 @@ import {preparedControlPitch} from '@cssearth/engine';
 import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
-interface MaterialBankOptions {id: 'lighting' | 'atmosphere'; className: string; physicalRadius: number; depthBias: number; source?: AtmosphereModel | null; supportsShadowless?: boolean; illumination?: AtmosphereConfiguration['material']['illumination'] | null;}
+interface MaterialBankOptions {id: 'atmosphere'; className: string; physicalRadius: number; depthBias: number; source: AtmosphereModel; illumination: AtmosphereConfiguration['material']['illumination'];}
 interface MaterialPlaneOptions {scenePitchDegrees: number; outputSize: number; contentRadius: number; physicalRadius: number; depthBias: number; className: string;}
 import {
   buildPolyCameraSceneTransform,
@@ -25,11 +25,10 @@ import {
   fitTextureGeometry,
   fitProjectiveTextureGeometryToStableLayout,
   prepareProjectiveTextureLayer,
-} from "../../../src/platform/projective-surface-raster.mts";
-import {prepareLeafSeamOutset, prepareSeamOutsetSteps} from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
-import {POLAR_CAP_STYLE, requireOutwardCap} from "../../../src/renderers/css/preparation/scene/polar-cap.ts";
+} from "@cssearth/bake/scene";
+import { prepareLeafSeamOutset, prepareSeamOutsetSteps, POLAR_CAP_STYLE, requireOutwardCap } from "@cssearth/bake/scene";
 // Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves
-// join the shared rule (tools/prepared/leaf-box.mts) with that work.
+// join the shared rule (packages/bake/src/presentation/leaf-box.ts) with that work.
 const FULL_BOXES = { leafBox: false as const };
 
 
@@ -44,7 +43,7 @@ const ATMOSPHERE_MODEL = atmosphereModel;
 const POLAR_RADIUS = EQUATORIAL_RADIUS * profile.polarRadiusKm / profile.equatorialRadiusKm;
 const SURFACE_RASTER_OVERSCAN = 64 * SURFACE_OVERLAP;
 // Surface leaves overlap by a fixed angle, too little at some zooms for WebKit's antialiased leaf edges; the stepped outset
-// holds the declared screen overlap at every silhouette size, as the geometry profile's does (preparation/scene/seam-outset.ts).
+// holds the declared screen overlap at every silhouette size, as the geometry profile's does (bake/scene/seam-outset.ts).
 const SEAM_OUTSET = profile.geometry.seamOutset ? prepareSeamOutsetSteps(profile.geometry.seamOutset) : null;
 const BODY_DIAMETER = 2 * EQUATORIAL_RADIUS * TILE_SIZE;
 const CAMERA_MAXIMUM_ZOOM = profile.camera.maximumZoom;
@@ -101,13 +100,6 @@ const meshTransform = `transform:${buildPolyMeshTransform({
 const systemTransform = `transform:${attitude.systemTransform}`;
 const surfaceRasterPlan = createSurfaceRasterPlan(cellSizes);
 const bodyBands = prepareSphereBands(bodyConfig, profile.geometry.rotationSeconds);
-const lightingMaterial = prepareMaterialBank({
-  id: "lighting",
-  className: `${profile.namespace}-lighting-material`,
-  physicalRadius: EQUATORIAL_RADIUS * 1.035,
-  depthBias: 1.3,
-  supportsShadowless: true,
-});
 const atmosphereMaterial = prepareMaterialBank({
   id: "atmosphere",
   className: `${profile.namespace}-atmosphere-material`,
@@ -196,18 +188,16 @@ const scene = Object.freeze({
   }),
   material: Object.freeze({
     transform: meshTransform,
-    lighting: lightingMaterial,
     atmosphere: atmosphereMaterial,
   }),
   interior,
   counts: Object.freeze({
     surfaceLeafCount,
     cloudLeafCount: 0,
-    lightingLeafCount: 1,
     atmosphereLeafCount: 1,
     interiorLeafCount: interior.leafCount,
-    retainedLeafCount: surfaceLeafCount + 2,
-    maximumRetainedLeafCount: surfaceLeafCount + 2 + interior.leafCount,
+    retainedLeafCount: surfaceLeafCount + 1,
+    maximumRetainedLeafCount: surfaceLeafCount + 1 + interior.leafCount,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),
@@ -661,7 +651,7 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
     const size = cell.size / density, page = `--${profile.namespace}-surface-page-${cell.page}`;
     // At a small level the page is a tile of one sheet (texture-levels.mts); the body then publishes the tile's offset and
     // the sheet's scale beside the image, and the fallbacks are the page's own. They are unitless multipliers of inline
-    // lengths, so preparation's raster and leaf-box scaling (projective-layout.mts) scales them with the address.
+    // lengths, so preparation's raster and leaf-box scaling (bake/presentation/projective-layout.ts) scales them with the address.
     return {
       style: `transform:matrix3d(${cell.layer.frameMatrix})` +
         preparedAtlasDimensions(size, size) +
@@ -720,11 +710,9 @@ function prepareMaterialBank({
   className,
   physicalRadius,
   depthBias,
-  source = null,
-  supportsShadowless = false,
-  illumination = null,
+  source,
+  illumination,
 }: MaterialBankOptions) {
-  if (illumination && !source) throw new Error('Atmosphere material requires its source profile.');
   const frameCount = 128;
   const columns = Math.sqrt(MATERIAL_FRAMES_PER_SHARD);
   const rows = columns;
@@ -739,8 +727,7 @@ function prepareMaterialBank({
   const shardWidth = stride * columns;
   const shardHeight = stride * rows;
   const presentationScale = presentationTileSize / sourceTileSize;
-  // Lighting frames step the Sun's view z across [-1, 1] (the runtime selects by it); the default is the Sun at the default pose.
-  const defaultFrame = illumination ? ATMOSPHERE_DEFAULT_FRAME : Math.round((attitude.sunView(CAMERA_SCENE_PITCH_DEGREES)[2] + 1) / 2 * (frameCount - 1));
+  const defaultFrame = ATMOSPHERE_DEFAULT_FRAME;
   const frames = Object.freeze(Array.from({ length: frameCount },
     (_, frameIndex) => {
       const rowIndex = Math.floor(
@@ -753,7 +740,7 @@ function prepareMaterialBank({
         (frameCount - 1) * 65;
       // With shadows off an illuminated material shows only its last (flood) frame, so that frame is its own image:
       // the first view loads one frame, not the four-frame row around it.
-      const flood = Boolean(illumination) && frameIndex === frameCount - 1;
+      const flood = frameIndex === frameCount - 1;
       return Object.freeze({
         frameIndex,
         rowIndex,
@@ -834,11 +821,9 @@ function prepareMaterialBank({
   });
   return Object.freeze({
     id,
-    model: source
-      ? "published-disc-law-under-model-atmosphere-with-google-directional-response-bank"
-      : "prepared-fixed-world-view-bank-bounded-square-shards",
+    model: "published-disc-law-under-model-atmosphere-with-google-directional-response-bank",
     source,
-    ...(illumination && source ? { illumination, atmosphereProfile: atmosphereProfile(source) } : {}),
+    illumination, atmosphereProfile: atmosphereProfile(source),
     frameCount,
     columns,
     rows,
@@ -856,10 +841,7 @@ function prepareMaterialBank({
     defaultFrame,
     defaultRow,
     defaultAssets: materialAssetPair(id, "default"),
-    ...(illumination ? { floodAssets: materialAssetPair(id, "flood") } : {}),
-    ...(supportsShadowless ? {
-      shadowlessAssets: materialAssetPair(id, "shadowless"),
-    } : {}),
+    floodAssets: materialAssetPair(id, "flood"),
     defaultScenePitchDegrees: CAMERA_SCENE_PITCH_DEGREES,
     defaultPresentation: Object.freeze({
       transform: defaultPlane.transform,
@@ -868,14 +850,6 @@ function prepareMaterialBank({
       backgroundSize:
         `${presentationTileSize}px ${presentationTileSize}px`,
     }),
-    ...(supportsShadowless ? {
-      shadowlessPresentation: Object.freeze({
-        assets: materialAssetPair(id, "shadowless"),
-        backgroundPosition: "0px 0px",
-        backgroundSize:
-          `${presentationTileSize}px ${presentationTileSize}px`,
-      }),
-    } : {}),
     frames,
     transformPlayback: Object.freeze({
       schema: `cssearth-prepared-material-transform@1`,

@@ -39,7 +39,7 @@ async function discover(directory: string, suffix: string): Promise<string[]> {
   return files.sort();
 }
 const entries = universeOnly ? universeEntries : [...new Set([
-  'src/renderers/css/preparation/scene/scene.test.ts', ...universeEntries,
+  'packages/bake/src/scene/scene.test.ts', ...universeEntries,
   ...await discover('tools/objects', '.test.ts'), ...await discover('tests/objects', '.test.ts'),
 ])];
 await mkdir(output, { recursive: true });
@@ -67,5 +67,5 @@ const native = universeOnly ? [] : [...await discover('tools/objects', '.test.mj
 // bounded as the registry grows; this does not omit any preparation cases.
 run(['--test', '--test-concurrency=1', ...compiled, ...native]);
 if (!universeOnly) run([resolve(dirname(engineRequire.resolve('vitest/package.json')), 'vitest.mjs'),
-  'run', '--root', resolve(root, 'src/renderers/css/preparation/presentation'),
-  '--exclude', '**/.local/**', 'presentation.test.ts']);
+  'run', '--root', resolve(root, 'packages/bake/src/presentation'),
+  '--exclude', '**/.local/**', 'presentation.test.ts', 'composite-settings.test.ts']);

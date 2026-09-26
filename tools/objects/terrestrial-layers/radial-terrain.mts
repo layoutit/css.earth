@@ -17,7 +17,7 @@ import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable, loadPdsRadialTableMesh } from './pds-radial-table.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { orientObservedSurface } from './open-surface.mts';
-import { TEXELS_PER_CSS_PIXEL } from '../../../src/platform/projective-surface-raster.mts';
+import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 

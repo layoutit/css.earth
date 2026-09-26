@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { prepareCssomDeclarationReads } from "./prepared-cssom.mts";
-import { preparedDeclarations, createPreparedNodeTree } from "./prepared-node-tree.mts";
+import { prepareCssomDeclarationReads, preparedDeclarations, createPreparedNodeTree } from "@cssearth/bake/presentation";
 
 test("offline CSS reads retain native decimal serialization before scaling", async () => {
   const text = "width:512px;height:512px;background-position:-4px -312.06625px;background-size:1024px 1024px";

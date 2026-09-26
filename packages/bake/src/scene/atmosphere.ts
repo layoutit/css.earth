@@ -1,6 +1,6 @@
-import { RASTER_DENSITY, type RasterRecipe, outputName } from '@cssearth/bake/raster';
-import type { prepareAtmosphere } from '@cssearth/bake/raster';
-import type { GeometryProfile } from './profile.js';
+import { RASTER_DENSITY, type RasterRecipe, outputName } from '../raster/index.ts';
+import type { prepareAtmosphere } from '../raster/index.ts';
+import type { GeometryProfile } from './profile.ts';
 /** The scene record of a body with an atmosphere: its prepared frame atlases, the published disc law and the PSG halo when it has one. */
 export function prepareAtmosphericMaterial(profile:GeometryProfile,raster:RasterRecipe,prepared:Awaited<ReturnType<typeof prepareAtmosphere>>,sunDirection:readonly number[]) {
  const material=raster.atmosphere;

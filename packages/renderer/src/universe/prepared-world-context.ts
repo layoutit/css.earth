@@ -2,20 +2,18 @@ import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
+import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
+import { createWorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context/world-context-planner.js';
 import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
-import { screenPicking } from '../navigation/screen-picking.js';
-import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
-import { applySpriteImage, MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
+import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
-import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import type { OrbitSegment } from '../solar-system/types.js';
 
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
@@ -28,9 +26,6 @@ import type { OpacityClock } from '../stars/opacity-clock.js';
 const BILLBOARD_SIZE = BODY_INDICATOR_DIAMETER;
 /** Bodies of other systems, seen from inside the focus star's system; hover restores them. */
 const OTHER_SYSTEM_OPACITY = .3;
-// A marker keeps its large image until it shrinks below this share of the
-// switch diameter, so a body at the boundary never alternates images.
-const SPRITE_DETAIL_RETURN = .75;
 // Per-body presentation flags set by id from outside: which parts hide, and which bodies stand out.
 const VISIBILITY_FLAGS = ['bodyHidden', 'orbitHidden', 'labelHidden', 'labelSuppressed', 'indicatorHidden', 'highlighted'] as const;
 /** Each list names the bodies that carry its flag; an omitted flag keeps its current bodies. */
@@ -144,13 +139,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
   presentationHost.insertBefore(root, before);
-  const picking = screenPicking(host);
+  const interactions = createWorldContextInteractions(host, root);
   // Captured frames go stale on every presentation change; the planner's policy only on semantic ones.
   let presentationRevision = 0, policyDirty = true;
   let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
   let previousHeader: { emphasizedId: string | null; selectionStrength: number; focusSystemShown: boolean; width: number; height: number } | null = null;
-  let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const selectionPolicy = createContextSelectionPolicy(plan);
   let publishCount = 0;
@@ -222,27 +216,17 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
-    const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
-    const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
-    return { index, body, sprite, unpackaged, plainDot, marker, spriteLeaf, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
+    const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null);
+    const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, body, sprite, locator);
+    return { index, body, sprite, unpackaged, plainDot, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, interaction,
+      paint,
+      get markerShown() { return paint.markerShown; }, get markerDiameter() { return paint.markerDiameter; },
+      get billboardShown() { return paint.billboardShown; }, get center() { return paint.center; },
       closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
-      indicatorHovered: false,
-      orbitPick: null as ScreenPickTarget | null,
-      markerPick: null as ScreenPickTarget | null, labelPick: null as ScreenPickTarget | null,
-      // Retained hit targets, updated in place: none are allocated per frame.
-      markerPickTarget: null as (ScreenPickTarget & { shape: { kind: 'circle'; x: number; y: number; radius: number } }) | null,
-      indicatorPickTarget: null as (ScreenPickTarget & { shape: { kind: 'circle'; x: number; y: number; radius: number } }) | null,
-      orbitPickTarget: null as (ScreenPickTarget & { shape: { kind: 'segments'; segments: readonly OrbitSegment[]; bounds: LabelScreenRect | null; halfWidth: number } }) | null,
-      labelPickTarget: null as (ScreenPickTarget & { shape: { kind: 'rect'; left: number; top: number; right: number; bottom: number } }) | null,
-      labelRectTarget: null as { left: number; top: number; right: number; bottom: number } | null,
-      markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false, spriteApplied: false,
-      dotDiameter: sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null, flatDot: false,
-      center: [0, 0] as [number, number], markerTransform: '', spriteTransform: '', orbitTransform: '', labelOffset: '',
-      labelRect: null as LabelScreenRect | null,
-      indicatorPick: null as ScreenPickTarget | null,
+      dotDiameter: sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null,
+      orbitTransform: '',
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
-      orbitNavigable: false,
       bodyHidden: false, orbitHidden: false, labelHidden: false, labelSuppressed: false, indicatorHidden: false,
       highlighted: false,
       baseAlpha,
@@ -255,8 +239,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const windowTarget = host.ownerDocument.defaultView!;
   const clock = opacityClock ?? opacityClockFor(windowTarget);
   const fader = createOpacityFader(windowTarget, clock);
-  let labelExclusions: readonly LabelScreenRect[] = [];
-  let backgroundExclusions: readonly LabelScreenRect[] = [];
   let destroyed = false;
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
@@ -371,8 +353,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     setLabelBlockers(rects: readonly LabelScreenRect[]) {
       labelBlockers = rects; invalidatePolicy(); refresh();
     },
-    labelExclusionRects: () => labelExclusions,
-    backgroundExclusionRects: () => backgroundExclusions,
+    labelExclusionRects: interactions.labelExclusionRects,
+    backgroundExclusionRects: interactions.backgroundExclusionRects,
     setNavigationInFlight(active: boolean) {
       if (destroyed || active === navigationInFlight) return;
       invalidatePolicy();
@@ -382,7 +364,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // A flight clears the stage picker, which owns every pointer hit. Keyboard
       // and accessibility state stays as it was and catches up once the flight
       // ends: disabling and restoring every body restyled each marker twice.
-      if (active) picking.publish(root, []);
+      if (active) interactions.clearPicking();
       refresh();
     },
     previewSelection(id?: string | null) {
@@ -445,11 +427,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     inspect() {
       return Object.freeze(bodies.map(entry => Object.freeze({
         id: entry.body.id, billboard: entry.marker, mover: entry.mover,
-        get markerShown() { return entry.markerShown; },
+        get markerShown() { return entry.paint.markerShown; },
         get indicatorShown() { return entry.indicatorShown; },
         get labelShown() { return entry.labelShown; },
-        get center() { return entry.center; },
-        get labelRect() { return entry.labelRect; },
+        get center() { return entry.paint.center; },
+        get labelRect() { return entry.interaction.labelRect; },
         // Orbit leaves are built on first use; report the retained leaves now.
         get orbit() { return Object.freeze(entry.pieces.filter((piece): piece is HTMLElement | SVGElement => piece !== undefined)); },
       })));
@@ -517,10 +499,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const mask = policyChanged ? ContextChange.all : changed;
         return { projected, entry, mask };
       });
-      const acceptedRects: LabelScreenRect[] = [];
-      pickTargets = [];
       const pickingChanged = policyChanged || ranksChanged || delta.changes.size > 0;
-      const indicatorRects: LabelScreenRect[] = [];
       // Only the resolved presentation owns DOM visibility and hit targets.
       // A new depth order changes only z-order. It must not re-run the full
       // material/geometry publisher for every hidden or otherwise unchanged body.
@@ -529,12 +508,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (rank === undefined) continue;
         depthPublications++;
         const zIndex = depthOrder.zIndex(rank);
-        if (entry.billboardShown && entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
+        if (entry.paint.billboardShown && entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
         if (orbitRenderer === 'bars' && entry.previousCount > 0 && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
       }
       for (const { projected, entry, mask } of projectedBodies) {
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
-          lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
+          orbitVisibility, segments, index } = projected;
         const { body, marker } = entry;
         const navigationSuppressed = entry.unpackaged || entry.plainDot || (distantNavigationActive && distantNonNavigableIds.has(body.id));
         if (mask === 0) continue;
@@ -546,126 +525,43 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // movement transform. The pseudos only own annotation visibility.
         const plannedShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
         // Coasting holds membership: a shown body stays shown and fades out if the plan drops it; a hidden one waits.
-        const billboardShown = coast ? entry.billboardShown === true : plannedShown;
-        if (!billboardShown && entry.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
+        const billboardShown = coast ? entry.paint.billboardShown === true : plannedShown;
+        if (!billboardShown && entry.paint.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
         // A plain dot is always its colour; the flat-dot swap is for bodies with a sprite.
-        const flatDot = coast ? entry.flatDot : !entry.plainDot && entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
+        const flatDot = coast ? entry.paint.flatDot : !entry.plainDot && entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
         // A body without its own circle inside its parent's dot is part of that dot, not a second dot within it.
         const parentDot = entry.orbit ? entriesById.get(entry.orbit.centerBodyId) : undefined;
-        const insideParentDot = !entry.indicatorShown && parentDot?.flatDot === true &&
-          Math.hypot(x - parentDot.center[0], y - parentDot.center[1]) < parentDot.markerDiameter / 2;
-        const markerShown = coast && entry.markerShown !== undefined ? entry.markerShown
+        const insideParentDot = !entry.indicatorShown && parentDot?.paint.flatDot === true &&
+          Math.hypot(x - parentDot.paint.center[0], y - parentDot.paint.center[1]) < parentDot.paint.markerDiameter / 2;
+        const markerShown = coast && entry.paint.markerShown !== undefined ? entry.paint.markerShown
           : (visible || (pointSource && flatDot)) && markerOpacity > 0 && (!pointSource || flatDot) && !insideParentDot;
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
         const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.dotDiameter! :
           Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
-        const wasShown = entry.billboardShown === true;
-        const hoverChanged = entry.indicatorHovered !== entry.hovered;
+        const wasShown = entry.paint.billboardShown === true;
+        const hoverChanged = entry.paint.indicatorHovered !== entry.hovered;
         const animateHover = interactiveHover && hoverChanged && wasShown && billboardShown;
         // Visibility has its own immediate CSS property. Only deliberate
         // stationary hover arms opacity/transform transitions on this leaf.
         if (animateHover) { animatedAnnotations.add(entry); fader.setAnimationEnabled(true); }
         if (!billboardShown || (hoverChanged && !animateHover)) animatedAnnotations.delete(entry);
-        const animateAnnotations = String(animatedAnnotations.has(entry));
-        if (marker.dataset.contextAnnotationsAnimate !== animateAnnotations) marker.dataset.contextAnnotationsAnimate = animateAnnotations;
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
-        fader.visible(entry.mover, billboardShown);
-        // The mover is hidden with its marker: a visible, transformed mover with nothing to draw still becomes a layer.
-        if (entry.billboardShown !== billboardShown) {
-          marker.style.visibility = entry.mover.style.visibility = billboardShown ? '' : 'hidden';
-          // A shown mover is its own small compositor layer, so camera motion slides it instead of repainting the
-          // screen-sized layer it would otherwise paint into (WebKit repainted the whole viewport on every drag frame).
-          // A hidden mover gets none, so hundreds of hidden markers cost no layers.
-          entry.mover.style.willChange = billboardShown ? 'transform' : '';
-        }
-        entry.billboardShown = billboardShown;
-        if (entry.markerShown !== markerShown) marker.dataset.contextBodyVisible = String(markerShown);
-        entry.markerShown = markerShown; entry.markerDiameter = markerDiameter;
         const rank = depthOrder.rank(entry)!;
         const zIndex = depthOrder.zIndex(rank);
         // Styles distinguish only the emphasized body. Overview shares the unselected
         // value, so a new selection restyles its two owners, not every marker and chord.
         const selection = String(emphasizedId !== null && body.id === emphasizedId);
-        if (billboardShown) {
-          // Depth and selection are retained per paint owner. Off-screen
-          // owners catch up here before reveal, without global restyling.
-          // A marker wider than its small prepared tile resolves shows the large
-          // prepared image; only then is that image loaded and decoded.
-          const detail = entry.sprite?.detail;
-          if (!entry.spriteApplied && entry.sprite && !flatDot) { applySpriteImage(entry.spriteLeaf, entry.sprite); entry.spriteApplied = true; }
-          if (detail && !flatDot && !coast) {
-            const spriteDetail = markerDiameter >= detail.fromDiameterPixels ||
-              (entry.spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
-            if (spriteDetail !== entry.spriteDetail) {
-              entry.spriteDetail = spriteDetail;
-              if (!entry.flatDot) applySpriteImage(entry.spriteLeaf, spriteDetail ? detail : entry.sprite!);
-            }
-          }
-          if (entry.flatDot !== flatDot) {
-            entry.flatDot = flatDot;
-            const leaf = entry.spriteLeaf.style;
-            if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = entry.body.color; leaf.borderRadius = '50%'; } else {
-              leaf.backgroundColor = leaf.borderRadius = '';
-              applySpriteImage(entry.spriteLeaf, entry.spriteDetail && detail ? detail : entry.sprite!);
-              entry.spriteApplied = true;
-            }
-          }
-          if (!coast && entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
-          if (marker.dataset.contextSelected !== selection) {
-            // A body with a prepared colour marks its emphasis with the one corner locator, moved in under its sprite; it
-            // inherits the marker's colour. The marker it leaves returns to its ring.
-            if (selection === 'true' && entry.body.contextColor) {
-              const holder = locator.parentElement as HTMLElement | null;
-              if (holder && holder !== marker) delete holder.dataset.contextLocator;
-              marker.insertBefore(locator, entry.spriteLeaf);
-              marker.dataset.contextLocator = '';
-            } else if (selection !== 'true' && locator.parentElement === marker) {
-              locator.remove();
-              delete marker.dataset.contextLocator;
-            }
-            marker.dataset.contextSelected = selection;
-          }
-          if (!coast && entry.indicatorHovered !== entry.hovered) {
-            entry.indicatorHovered = entry.hovered;
-            marker.dataset.contextIndicatorHovered = String(entry.hovered);
-          }
-          // Opacity lives on the mover, which has no pseudos: WebKit re-resolves an element's ::before and ::after with
-          // every restyle of it, so a per-frame opacity on the marker restyled its ring and caption every frame.
-          if (policyChanged || !wasShown || hoverChanged) fader.multiply(entry.mover, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
-          fader.set(entry.mover, billboardShown && !plannedShown ? 0 : markerOpacity);
-          const transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
-          // CSSOM serializes commas/spacing differently from the published
-          // string. Compare against our last write, not its browser readback.
-          if (entry.markerTransform !== transform) {
-            entry.mover.style.transform = transform; entry.markerTransform = transform;
-          }
-          const spriteTransform = `scale(${markerDiameter / BILLBOARD_SIZE})`;
-          if (entry.spriteTransform !== spriteTransform) {
-            entry.spriteLeaf.style.transform = spriteTransform; entry.spriteTransform = spriteTransform;
-          }
-          entry.center = [x, y];
-        }
-        entry.markerPick = null;
-        if (!navigationSuppressed && markerShown && markerOpacity > .1) {
-          const radius = entry.indicatorHidden
-            ? Math.max(markerDiameter / 2, entry.indicatorRadius + 5) : markerDiameter / 2;
-          const target = entry.markerPickTarget ??= { element: marker, rank, shape: { kind: 'circle', x, y, radius } };
-          target.rank = rank; target.shape.x = x; target.shape.y = y; target.shape.radius = radius;
-          entry.markerPick = target;
-        }
+        entry.paint.publish({ projected, billboardShown, plannedShown, markerShown, markerDiameter, flatDot, zIndex,
+          selected: selection === 'true', hovered: entry.hovered, animated: animatedAnnotations.has(entry), coast,
+          policyChanged, emphasis }, fader);
+        entry.interaction.updateMarker(projected, rank, entry, navigationSuppressed);
         const indicatorVisible = entry.indicatorShown;
-        const indicatorState = String(indicatorVisible && !(navigationInFlight && body.id === emphasizedId));
-        if (!coast && marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
-        if (!navigationSuppressed && indicatorVisible && markerOpacity > .1) {
-          const target = entry.indicatorPickTarget ??= { element: marker, rank: rank + 2, shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } };
-          target.rank = rank + 2; target.shape.x = x; target.shape.y = y; target.shape.radius = entry.indicatorRadius + 5;
-          entry.indicatorPick = target;
-        } else entry.indicatorPick = null;
+        entry.paint.publishIndicator(indicatorVisible, navigationInFlight && body.id === emphasizedId, coast);
         const plannedOrbit = orbitVisibility > 0 && segments.length > 0;
         // Coasting: a drawn orbit stays drawn (fading if the plan drops it), an undrawn one waits for the coast to stop.
         const orbitShown = coast ? entry.previousCount > 0 : plannedOrbit;
@@ -686,14 +582,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           if (orbitRenderer === 'bars' && entry.orbitTransform !== orbitTransform) {
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;
           }
-          const navigable = !navigationSuppressed && orbitVisibility > 0.1 && !entry.orbitHidden;
-          if (!navigationInFlight && !rotating && !coast && entry.orbitNavigable !== navigable) {
-            entry.orbitNavigable = navigable;
-            entry.orbitNavigation!.update(navigable ? body.id : null, body.name);
-            // The stage picker owns the clipped corridor; paint nodes are inert.
-            if (entry.orbitRoot.style.pointerEvents !== 'none') entry.orbitRoot.style.pointerEvents = 'none';
-            if (entry.orbitRoot.tabIndex !== -1) entry.orbitRoot.tabIndex = -1;
-          }
+          entry.interaction.updateOrbit(projected, rank, navigationSuppressed, entry.orbitHidden, navigationInFlight, rotating, coast);
           fader.visible(orbitPaint, orbitShown);
           fader.set(orbitPaint, orbitShown && !plannedOrbit ? 0 : orbitVisibility);
           const patch = delta.orbits.get(index);
@@ -701,37 +590,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.piecePool.publish(segments);
             entry.previousCount = segments.length;
           }
-          if (!navigationSuppressed && orbitVisibility > .1 && !entry.orbitHidden) {
-            const target = entry.orbitPickTarget ??= { element: entry.orbitRoot, rank, shape: { kind: 'segments', segments, bounds: projected.orbitBounds, halfWidth: lineWidth / 2 + 7 } };
-            target.rank = rank; target.shape.segments = segments; target.shape.bounds = projected.orbitBounds; target.shape.halfWidth = lineWidth / 2 + 7;
-            entry.orbitPick = target;
-          } else entry.orbitPick = null;
-
         }
         if (!coast && (mask & (ContextChange.label | ContextChange.marker))) {
           const labelVisible = entry.labelShown;
-          const labelState = String(labelVisible && !(navigationInFlight && body.id === emphasizedId));
-          if (marker.dataset.contextLabelVisible !== labelState) marker.dataset.contextLabelVisible = labelState;
-          entry.labelRect = null; entry.labelPick = null;
-          if (labelVisible && labelPosition) {
-            const offset = `translate(${Math.round((labelPosition[0] - x) * 1e6) / 1e6}px,${Math.round((labelPosition[1] - y) * 1e6) / 1e6}px)`;
-            if (entry.labelOffset !== offset) {
-              const [labelX, labelY] = offset.match(/-?[\d.]+/g)!.map(Number);
-              marker.style.setProperty('--context-label-x', `${labelX}px`);
-              marker.style.setProperty('--context-label-y', `${labelY}px`);
-              entry.labelOffset = offset;
-            }
-            const rect = entry.labelRectTarget ??= { left: 0, top: 0, right: 0, bottom: 0 };
-            rect.left = labelPosition[0]; rect.top = labelPosition[1];
-            rect.right = labelPosition[0] + entry.labelSize.width; rect.bottom = labelPosition[1] + entry.labelSize.height;
-            entry.labelRect = rect;
-            const target = entry.labelPickTarget ??= { element: marker, rank: rank + 1, shape: { kind: 'rect', left: 0, top: 0, right: 0, bottom: 0 } };
-            target.rank = rank + 1; target.shape.left = rect.left; target.shape.top = rect.top; target.shape.right = rect.right; target.shape.bottom = rect.bottom;
-            entry.labelPick = navigationSuppressed ? null : target;
-          }
+          entry.paint.publishLabel(projected, labelVisible, navigationInFlight && body.id === emphasizedId);
+          entry.interaction.updateLabel(projected, rank, labelVisible, entry.labelSize, navigationSuppressed);
         }
         // Flights and rotations keep keyboard/accessibility targets; they catch up after.
-        if (!navigationInFlight && !rotating && !coast) entry.navigation.update(entry.markerPick || entry.indicatorPick || entry.labelPick ? body.id : null, body.name);
+        if (!navigationInFlight && !rotating && !coast) entry.interaction.updateNavigation();
         // Pseudos and the sprite share the stage's precise retained hit shapes.
         if (marker.style.pointerEvents !== 'none') marker.style.pointerEvents = 'none';
 
@@ -742,42 +608,23 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         paintedOrder = [...paintedBodies].sort((a, b) => a.index - b.index);
         paintMembershipChanged = false;
       }
-      for (const entry of paintedOrder) {
-        const rank = depthOrder.rank(entry)!;
-        if (entry.markerPick) { entry.markerPick.rank = rank; pickTargets.push(entry.markerPick); }
-        if (entry.indicatorPick) { entry.indicatorPick.rank = rank + 2; pickTargets.push(entry.indicatorPick); }
-        if (entry.orbitPick) { entry.orbitPick.rank = rank; pickTargets.push(entry.orbitPick); }
-        if (entry.labelPick) { entry.labelPick.rank = rank + 1; pickTargets.push(entry.labelPick); }
-        if (entry.labelRect) acceptedRects.push(entry.labelRect);
-        if (entry.indicatorShown && entry.billboardShown) {
-          const [x, y] = entry.center, radius = entry.indicatorRadius;
-          indicatorRects.push({ left: x - radius, right: x + radius, top: y - radius, bottom: y + radius });
-        }
-      }
-      if (captionBody?.labelPosition) {
-        const [left, top] = captionBody.labelPosition, size = bodies[captionBody.index].labelSize;
-        acceptedRects.push({ left, top, right: left + size.width, bottom: top + size.height });
-      }
-      labelExclusions = acceptedRects;
-      // Only drawn annotation footprints reserve background label space. An
-      // orbit is a line through empty space, never an opaque screen rectangle.
-      backgroundExclusions = [...acceptedRects, ...indicatorRects];
-      if (pickingChanged) picking.publish(root, navigationInFlight ? [] : pickTargets);
+      interactions.commit(paintedOrder, depthOrder.rank, captionBody,
+        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight);
       });
     },
-    destroy() { if (!destroyed) { destroyed = true; picking.remove(root);
+    destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);
       host.removeEventListener('objecthoverchange', refreshAnnotations);
       windowTarget.removeEventListener('pointerdown', beginCameraInput, { capture: true });
       windowTarget.removeEventListener('wheel', beginCameraInput, { capture: true });
       for (const event of ['focusin', 'focusout']) presentationHost.removeEventListener(event, refreshAnnotations);
-      root.removeEventListener('transitionend', finishIndicatorShrink); fader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); labelExclusions = []; backgroundExclusions = []; for (const entry of bodies) { entry.navigation.destroy(); entry.orbitNavigation?.destroy(); } root.remove(); } },
+      root.removeEventListener('transitionend', finishIndicatorShrink); fader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); for (const entry of bodies) entry.interaction.destroy(); root.remove(); } },
   });
   const indicatorTransitions = new Map<Element, (typeof bodies)[number]>(bodies.map(entry => [entry.marker, entry]));
   const finishIndicatorShrink = (event: Event) => {
     if ((event as TransitionEvent).propertyName !== 'transform') return;
     const entry = indicatorTransitions.get(event.target as Element);
-    if (!entry || entry.indicatorHovered || entry.indicatorRadius === BODY_INDICATOR_DIAMETER / 2) return;
+    if (!entry || entry.paint.indicatorHovered || entry.indicatorRadius === BODY_INDICATOR_DIAMETER / 2) return;
     entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
     refreshAnnotations();
   };

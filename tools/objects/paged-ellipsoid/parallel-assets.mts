@@ -9,7 +9,7 @@ const MAXIMUM_WORKERS = 6;
 
 /** Prepare a paged ellipsoid's assets in worker threads: each surface map, the extras and slices of the material frames
  * run at once. Every job writes a disjoint set of files with the same code as a single run, so the outputs are the same.
- * `materialsOnly` runs the material slices alone: the lighting and atmosphere banks, which read no surface imagery. */
+ * `materialsOnly` runs the atmosphere material slices alone; they read no surface imagery. */
 export async function preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames, materialsOnly = false }: { objectDirectory: string; publicDirectory: string; mapNames: readonly string[]; materialsOnly?: boolean }) {
   const workers = Math.max(1, Math.min(MAXIMUM_WORKERS, availableParallelism() - 2));
   const slices = workers;

@@ -2,12 +2,14 @@ import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-focus.mts';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.mts';
-import { overviewScopeFromUrl, withOverviewScope, withPreparedFocus } from '../navigation/navigation-scope.mts';
+import { overviewScopeFromUrl, satelliteSystemFromUrl, withOverviewScope, withPreparedFocus, withSatelliteSystemView } from '../navigation/navigation-scope.mts';
 import { SOLAR_SYSTEM_ID, systemById, type SystemObjects } from '../object-systems.mts';
+import { satelliteSystemByHost } from '../satellite-systems.mts';
 
 export interface SceneOverview { readonly scope: OverviewScope; readonly systemId: string; }
 export type SceneContext =
   | { readonly kind: 'object'; readonly objectId: string }
+  | { readonly kind: 'satellite-system'; readonly hostId: string }
   | { readonly kind: 'overview'; readonly overview: SceneOverview };
 export type SelectionTarget = SceneContext | { readonly kind: 'focus'; readonly id: string };
 export type SceneSubject = SceneContext | {
@@ -25,6 +27,7 @@ export function selectionContext(subject: SceneSubject): SceneContext {
 
 export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
   if (url.searchParams.has('focus')) return { kind: 'focus', id: url.searchParams.get('focus')! };
+  if (satelliteSystemFromUrl(url) && satelliteSystemByHost(objectId)) return { kind: 'satellite-system', hostId: objectId };
   const scope = overviewScopeFromUrl(url);
   return scope ? { kind: 'overview', overview: { scope, systemId: systemById(objects, objectId)?.id ?? SOLAR_SYSTEM_ID } }
     : { kind: 'object', objectId };
@@ -35,6 +38,7 @@ export function selectionKey(subject: SelectionTarget): string {
   switch (subject.kind) {
     case 'focus': return `focus:${subject.id}`;
     case 'object': return `object:${subject.objectId}`;
+    case 'satellite-system': return `satellite-system:${subject.hostId}`;
     case 'overview': return `overview:${subject.overview.scope === 'system' ? `system:${subject.overview.systemId}` : subject.overview.scope}`;
   }
 }
@@ -59,7 +63,8 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
         return selectionKey(target) === selectionKey(subject) ? false : publish(target);
       }
       const context = selectionContext(subject);
-      const host = context.kind === 'object' ? context.objectId : context.overview.systemId;
+      const host = context.kind === 'object' ? context.objectId
+        : context.kind === 'satellite-system' ? context.hostId : context.overview.systemId;
       const retained = subject.kind === 'focus' && subject.id === target.id ? subject : null;
       if (retained && host === mountedObjectId) return false;
       return publish({ ...target, record: retained?.record ?? null, sources: retained?.sources ?? [], presentation: retained?.presentation ?? null,
@@ -84,7 +89,8 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
         const lens = subject.presentation?.selectedLens ?? (url.searchParams.get('focus') === subject.id ? url.searchParams.get('focusLens') : null);
         return withPreparedFocus(url, subject.id, lens).href;
       }
-      return withOverviewScope(withPreparedFocus(url, null, null), subject.kind === 'overview' ? subject.overview.scope : null).href;
+      return withSatelliteSystemView(withOverviewScope(withPreparedFocus(url, null, null),
+        subject.kind === 'overview' ? subject.overview.scope : null), subject.kind === 'satellite-system').href;
     },
   };
 }

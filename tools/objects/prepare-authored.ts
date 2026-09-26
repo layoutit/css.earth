@@ -8,11 +8,11 @@ import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
 import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
-import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
-import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '../../src/renderers/css/preparation/presentation/index.js';
+import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
+import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
-import { loadGeometryAdapters } from './geometry-adapters.js';
+import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from './runtime-assets.js';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
@@ -358,7 +358,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory, imagePixels });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
-  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] });
+  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters);
   const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, definition as unknown as Record<string, unknown>, publishedFeatures)
     : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
   const runtime = attached.definition, features = attached.features !== null;

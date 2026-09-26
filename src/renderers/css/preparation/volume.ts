@@ -5,7 +5,7 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Pol
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Axis, Vector3, VolumeRecipe } from '@cssearth/bake/volume';
 import type { VolumeSlices } from '@cssearth/bake/volume/node';
-import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';
+import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '@cssearth/bake/scene';
 import type { PreparedLeafBounds } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
 import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
 export type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';

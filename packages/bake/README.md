@@ -7,7 +7,9 @@ records into prepared delivery. The application never imports it: the runtime re
 Each topic is one subpath entry. A topic imports another only when it sits on a lower layer (the raster lane uses the
 photometric models), never sideways. The first topic was the volume bake, which was the nebula lab's `volume-core` and
 `volume-bake` packages until 2026-09. The photometric models (`tools/photometry/`) and the raster lane
-(`src/preparation/raster/`, the renderer's lighting bank and `src/platform/prepare-missing-coverage.mts`) followed.
+(`src/preparation/raster/`, the renderer's lighting bank and `src/platform/prepare-missing-coverage.mts`) followed, then the
+renderer's scene and presentation compilers with `src/platform/projective-surface-raster.mts`,
+`src/platform/prepare-solid-body-surface.mts` and the `tools/prepared` node-tree libraries.
 
 | entry | what it holds | host |
 |---|---|---|
@@ -21,6 +23,8 @@ photometric models), never sideways. The first topic was the volume bake, which 
 | | compiler: the target-neutral compiler bake, component layouts and retained materials | |
 | `@cssearth/bake/photometry` | disk and phase functions, the Hapke model and roughness, normalization to a reference geometry, model records, limb laws from published models, PSG limb profiles for halos | Node only (`node:fs`, `sharp`) |
 | `@cssearth/bake/raster` | raster recipes and their validation, surface maps, pages and poles, lighting banks and limb overlays, atmospheres and halos, interiors, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
+| `@cssearth/bake/scene` | geometry profiles, projected surface leaves and their raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials, solid-body surfaces | Node only (`node:*`, PolyCSS) |
+| `@cssearth/bake/presentation` | the retained node tree, projective layouts and leaf boxes, offline CSSOM reads, activation groups, the row-bank cutaway, composite and emissive presentations | Node only (`node:*`, Playwright) |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -32,6 +36,8 @@ packages/bake/
 │   └── node/      compact-inputs/, compiler/, slices/ and their tests: `@cssearth/bake/volume/node`
 ├── src/photometry/ published photometric models and limb laws: `@cssearth/bake/photometry`
 ├── src/raster/    the raster lane and its tests: `@cssearth/bake/raster`
+├── src/scene/     the geometry scene compilers: `@cssearth/bake/scene`
+├── src/presentation/ the CSS presentation compilers: `@cssearth/bake/presentation`
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -46,6 +52,10 @@ another topic.
 (Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`. The raster
 lane's surface test also reads the observation lens sampler from `tools/objects/observation/`. The photometry tests stay
 in `tools/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
+The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The scene suite
+(`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
+from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
+restored, after its node:test stage passes.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 

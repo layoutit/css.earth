@@ -108,7 +108,7 @@ test('decoded byte budget evicts completed pages before admitting an atomic repl
 });
 // Mars's lighting track is the atmospheric single-sheet bank (authored atmosphere, predating the
 // #294/#297 frame refactors): it carries no rows, so it gets its own residency case below instead.
-const rowPlans={mercury:rowPlan(definitions.mercury),jupiter:rowPlan(definitions.jupiter),earthLighting:rowPlan(definitions.earth),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
+const rowPlans={mercury:rowPlan(definitions.mercury),jupiter:rowPlan(definitions.jupiter),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
 for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row policy preserves its bound and protected published row`, async () => {
   const { maximumRetainedRowCount: capacity, initialWarmRows } = plan.transport;
   const rowUrls = plan.rows.map(row => row.url);

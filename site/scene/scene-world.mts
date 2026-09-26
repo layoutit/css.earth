@@ -31,6 +31,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
   type WorldState = { kind: 'idle' } | { kind: 'loading'; controller: AbortController; task: Promise<WorldContextMount> }
     | { kind: 'ready'; world: WorldContextMount };
   let state: WorldState = { kind: 'idle' };
+  let connectedSession: SceneSession | null = null;
   const mounted = () => state.kind === 'ready' ? state.world : null;
   // One viewport for the detail and the world, so a detail mounted first frames exactly as the world will.
   let viewport: ReturnType<WorldContextOwner['createViewport']> | null = null;
@@ -100,7 +101,9 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
 
   function connect(session: SceneSession) {
     const world = mounted(), navigation = session.mount?.navigation;
-    if (!world || !navigation || typeof navigation.subscribe !== 'function') return;
+    if (!world || !navigation || typeof navigation.subscribe !== 'function' || connectedSession === session) return;
+    connectedSession = session;
+    session.own(() => { if (connectedSession === session) connectedSession = null; });
     session.framePresenter?.attach?.(world);
     world.selectObject?.(session.objectId, navigation.frame, navigation.framingScale);
     const disconnectFocus = world.connectNavigation?.(navigation, {

@@ -1,6 +1,6 @@
 /** Keep native submits usable after camera movement or an enhancement failure. */
 export function bindNativeViewForms(documentTarget: Document, windowTarget: Pick<Window, 'location'>) {
-  const context = ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'];
+  const context = ['v', 'view', 'overview', 'focus', 'focusLens', 'dataset', 'feature'];
   const submit = (event: Event) => {
     const form = event.target;
     if (!(form instanceof HTMLFormElement) || !form.matches('[data-settings-form], [data-dataset-form], .object-sidebar-search-card')) return;

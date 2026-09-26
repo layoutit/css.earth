@@ -50,3 +50,22 @@ for (const id of BODIES) {
     assert.deepEqual(ids.filter((value, index) => ids.indexOf(value) !== index), [], 'ids stay unique');
   });
 }
+
+test('planet and asteroid pages retain their satellite-system card beside one scene', async () => {
+  for (const [id, title, member] of [
+    ['earth', 'Earth–Moon system', 'moon'],
+    ['jupiter', 'Jupiter system', 'io'],
+    ['didymos', 'Didymos–Dimorphos system', 'dimorphos'],
+  ]) {
+    const document = await page(id);
+    assert.ok(document, `${id} has no dist build`);
+    assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
+    assert.equal(document.querySelector('[data-satellite-system] .object-title')?.textContent, title);
+    assert.ok(document.querySelector(`[data-satellite-system] a[href="/${id}/"]`), `${id} host link`);
+    assert.ok(document.querySelector(`[data-satellite-system] a[href="/${member}/"]`), `${member} member link`);
+    assert.ok(document.querySelector(`a[href="/${id}/?view=satellites"]`), `${id} system navigation`);
+  }
+  const mercury = await page('mercury');
+  assert.ok(mercury);
+  assert.equal(mercury.querySelector('[data-satellite-system]'), null);
+});

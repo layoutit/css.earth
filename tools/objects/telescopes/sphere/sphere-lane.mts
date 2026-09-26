@@ -9,7 +9,7 @@ import { requireRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
-import { parseGeometryProfile } from '../../../../src/renderers/css/preparation/scene/profile.ts';
+import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '../../terrestrial-layers/scientific-focus.mts';
 import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 

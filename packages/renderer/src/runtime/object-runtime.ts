@@ -122,6 +122,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }) : null;
     const preparedEpochJdTt = worldFrame.epochJdTt;
     let restoreVersion = 0;
+    let restoreSelection: AbortController | null = null;
     const sharedView = Object.freeze({
       capture(motionRequested = false): SharedView | null {
         if (phase !== 'ready') return null;
@@ -134,6 +135,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         const view = parseSharedView(formatSharedView(saved));
         if (!view) throw new TypeError("A saved object view is required.");
         const version = ++restoreVersion;
+        restoreSelection?.abort();
         if (!live()) return false;
         if (view.preparedEpochJdTt !== preparedEpochJdTt) {
           throw new TypeError("This view uses a different prepared astronomical date.");
@@ -141,7 +143,17 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         playback.validateMotion(view.playback.times);
         const speed = definition.controls.settings?.controls.find(control => control.name === "speed");
         if (view.playback.speed !== playback.stats().speed) {
-          if (!speed || !(await getSelection().dispatch({ kind: "cycle", name: "speed", value: view.playback.speed }))) {
+          if (!speed) throw new TypeError("This view uses an unsupported playback speed.");
+          const controller = new AbortController();
+          restoreSelection = controller;
+          let applied: boolean;
+          try {
+            applied = await getSelection().dispatch({ kind: "cycle", name: "speed", value: view.playback.speed }, { signal: controller.signal });
+          } finally {
+            if (restoreSelection === controller) restoreSelection = null;
+          }
+          if (lifetime.disposed || version !== restoreVersion) return false;
+          if (!applied) {
             throw new TypeError("This view uses an unsupported playback speed.");
           }
         }

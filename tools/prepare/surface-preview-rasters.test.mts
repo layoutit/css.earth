@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mts';
 import { preparePagedSurfaceMap } from '../objects/paged-ellipsoid/assets.mts';
 import { createPagedSurfaceRaster } from '../objects/paged-ellipsoid/surface-raster.mts';
-import { prepareProjectiveTextureLayer } from '../../src/platform/projective-surface-raster.mts';
+import { prepareProjectiveTextureLayer } from '@cssearth/bake/scene';
 
 // Two reversed bands with conspicuous padding: the preview must recover
 // north-to-south rows and must never show a gutter or fill an absent polar row.

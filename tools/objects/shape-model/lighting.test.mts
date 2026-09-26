@@ -2,7 +2,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, transformPreparedPoint } from '@cssearth/core';
-import { createPreparedNodeTree } from '../../prepared/prepared-node-tree.mts';
+import { createPreparedNodeTree } from '@cssearth/bake/presentation';
 import { prepareShapeLighting } from './lighting.mts';
 
 // Haumea's axes and display radius; any camera reference works, the plate follows it.

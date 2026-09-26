@@ -58,7 +58,7 @@ test('invalid recipes fail before raster output', () => {
 
 
 test('ring wedges cover every point of their sectors from where the ring begins, and share their boundaries exactly', async () => {
-  const { ringWedgeLayout, wedgePoint, wedgeShare, wedgeMatrix } = await import('../../../src/renderers/css/preparation/scene/ring-wedges.ts');
+  const { ringWedgeLayout, wedgePoint, wedgeShare, wedgeMatrix } = await import('@cssearth/bake/scene');
   const layout = ringWedgeLayout({ size: 1200, count: 16, contentPixels: 213.4 });
   let seed = 3;
   const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
@@ -88,7 +88,7 @@ test('ring wedges cover every point of their sectors from where the ring begins,
 
 test('ring wedges draw exactly the square ring image inside each wedge, arcs included', async () => {
   const { rasterAnnularField, rasterAnnularWedges, annularContentPixels } = await import('./rings.mts');
-  const { ringWedgeLayout, wedgePoint, wedgeShare } = await import('../../../src/renderers/css/preparation/scene/ring-wedges.ts');
+  const { ringWedgeLayout, wedgePoint, wedgeShare } = await import('@cssearth/bake/scene');
   for (const body of ['uranus', 'neptune']) {
     const recipe = JSON.parse(await readFile(new URL(`../../../src/objects/${body}/source/preparation/rings.json`, import.meta.url), 'utf8'));
     const layer = { ...recipe.layers[0], overlays: undefined, size: 600 }, density = 2, size = layer.size * density;

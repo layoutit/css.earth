@@ -1,11 +1,11 @@
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
-import { loadPresentationAdapters } from './adapters.js';
-import { prepareRowBankCutaway } from './row-bank-cutaway.js';
-import { prepareComposite } from './composite.js';
-import { prepareEmissive } from './emissive.js';
-import type { PresentationInputs } from './types.js';
-import { prepareActivationGroups } from '../../../../../tools/prepared/prepared-activation-groups.mts';
-export type { PresentationInputs } from './types.js';
+import { presentationAdapters, type PresentationHostAdapters } from './adapters.ts';
+import { prepareRowBankCutaway } from './row-bank-cutaway.ts';
+import { prepareComposite } from './composite.ts';
+import { prepareEmissive } from './emissive.ts';
+import type { PresentationInputs } from './types.ts';
+import { prepareActivationGroups } from './prepared-activation-groups.ts';
+export type { PresentationInputs } from './types.ts';
 
 export interface PresentationProfile {
   schema: 'cssearth-css-presentation-profile@1'; namespace: string;
@@ -30,9 +30,9 @@ export function parsePresentationProfile(value: unknown): PresentationProfile {
   return input as unknown as PresentationProfile;
 }
 /** Compile capabilities into a retained CSS tree; the runtime accepts only validated data. */
-export async function prepareCssPresentation(input: PresentationInputs) {
+export async function prepareCssPresentation(input: PresentationInputs, host: PresentationHostAdapters) {
   if (input.namespace !== input.solarSource.bodyId) throw new TypeError('Presentation and physical source identities disagree.');
-  const adapters = await loadPresentationAdapters();
+  const adapters = presentationAdapters(host);
   const compile = input.mode === 'row-bank-cutaway' ? prepareRowBankCutaway : input.mode === 'composite' ? prepareComposite : input.mode === 'emissive' ? prepareEmissive : null;
   if (!compile) throw new TypeError('Unsupported material composition.');
   const draft = await compile(input, adapters);

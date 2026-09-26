@@ -1,4 +1,4 @@
-import { prepareProjectiveTextureLayer } from "../../../../src/platform/projective-surface-raster.mts";
+import { prepareProjectiveTextureLayer } from "@cssearth/bake/scene";
 import { prepareCityPageGeometry, CITY_PAGE_RASTER_SCALE, cityPageRasterDensity } from "./page-geometry.mts";
 
 import type { GeographicScene, PageAddress, PageGeometry, GeographicBounds } from './contracts.mts';

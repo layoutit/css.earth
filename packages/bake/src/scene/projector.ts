@@ -1,10 +1,10 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from '@layoutit/polycss';
 import type { ComputeTextureAtlasPlanOptions, Polygon } from '@layoutit/polycss';
 import type { SurfacePatch } from '@cssearth/objects';
-import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from '../../../../platform/projective-surface-raster.mts';
-import type { GeometryProfile } from './profile.js';
-import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
-import { POLAR_CAP_STYLE, requireOutwardCap } from './polar-cap.js';
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from './projective-surface-raster.ts';
+import type { GeometryProfile } from './profile.ts';
+import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.ts';
+import { POLAR_CAP_STYLE, requireOutwardCap } from './polar-cap.ts';
 
 export interface PreparedLeaf {
   tag: 's'; className: string; style: string; polarCap?: string | null;

@@ -61,7 +61,7 @@ export function createSelectionPresentation(documentTarget: Document, {
     const systemSelected = overview?.scope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
     systemContent.show(systemSelected);
-    const showContext = subject.kind !== 'object';
+    const showContext = subject.kind === 'overview' || subject.kind === 'focus';
     setPanelHidden(information, showContext);
     setPanelHidden(context, !showContext);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
@@ -69,16 +69,19 @@ export function createSelectionPresentation(documentTarget: Document, {
     if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
     const navigationSelection = subject.kind === 'focus' ? subject.id
       : subject.kind === 'overview' ? subject.overview.scope === 'system' ? subject.overview.systemId : subject.overview.scope
+      : subject.kind === 'satellite-system' ? subject.hostId
       : subject.objectId;
     selectNavigation(navigationSelection);
     context.setAttribute('aria-label', subject.kind === 'focus'
       ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
       : subject.kind === 'overview' ? largeScale?.dataset.largeScaleName ?? overviewName(subject.overview)
+      : subject.kind === 'satellite-system' ? objectName(subject.hostId) || 'Selected system'
       : objectName(subject.objectId) || 'Selected object');
     documentTarget.documentElement.dataset.selection = subject.kind === 'focus' ? 'prepared-focus'
-      : subject.kind === 'overview' ? subject.overview.scope : 'object';
+      : subject.kind === 'overview' ? subject.overview.scope : subject.kind === 'satellite-system' ? 'satellite-system' : 'object';
     const selection = subject.kind === 'focus' ? { kind: 'prepared-focus', id: subject.id } as const
-      : subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const : null;
+      : subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const
+      : subject.kind === 'satellite-system' ? { kind: 'scene', id: subject.hostId } as const : null;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
       const selected = selection?.kind === 'prepared-focus' ? anchor.dataset.preparedFocusId === selection.id
         : selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;

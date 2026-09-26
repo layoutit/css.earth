@@ -8,6 +8,7 @@ import type { createPreparedWorldNavigation, WorldHandoff } from '../prepared-wo
 import { selectSceneDataset } from './scene-datasets.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
+import { loadSystemView } from '../system-framing.mts';
 
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */
 export function createSceneActivation({ windowTarget, navigation, view, isCurrent, getReducedMotion }: {
@@ -29,6 +30,14 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
           targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
         if (framed.cancelled || !isCurrent(session)) return;
       }
+    }
+    if (initialSelection?.subject.kind === 'satellite-system' && !initialSelection.savedView) {
+      await loadSystemView(objectId);
+      const target = navigation.systemTarget({ objectId, fromId: objectId, mount, force: true });
+      if (!target) throw new Error(`No prepared satellite-system target for ${objectId}.`);
+      const framed = await session.wait(navigation.focus({ objectId, mount, signal: session.signal,
+        reducedMotion: true, targetWorldCamera: target }));
+      if (framed.cancelled || !isCurrent(session)) return;
     }
     let interrupted = false;
     if (handoff?.afterMount) {
