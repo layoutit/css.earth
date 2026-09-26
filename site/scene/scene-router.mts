@@ -27,6 +27,7 @@ import { readInitialFocus } from '../focus-catalog.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from '../navigation/navigation-lifecycle.mts';
+import { createNavigationReadiness } from '../navigation/navigation-readiness.mts';
 import { createWorldPreferences } from '../world-preferences.mts';
 import { createDatasetEffects } from './scene-datasets.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
@@ -93,6 +94,13 @@ export function createSceneRouter({
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
     if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
+  const readiness = createNavigationReadiness<RouterContext>({
+    context: ensureContext,
+    knownObject: (ready, id) => ready.registry.knownObject(id) !== undefined,
+    loadObject: async (ready, id) => (await ready.registry.loadObject(id)) !== null,
+    systemViewLoaded: (ready, id) => ready.registry.systemViewLoaded(id),
+    loadSystemView: (ready, id) => ready.registry.loadSystemView(id),
+  });
 
   const world = createSceneWorld({ owner: persistentWorldContext, stage, windowTarget, isCurrent: scenes.isCurrent,
     onMount(value) {
@@ -261,7 +269,8 @@ export function createSceneRouter({
       hint.rel = 'preload'; hint.as = 'fetch'; hint.crossOrigin = 'anonymous'; hint.href = worldSummaryUrl;
       documentTarget.head.append(hint);
     }
-    return contextTask ??= import('./scene-registry.mts').then(async registry => {
+    if (contextTask) return contextTask;
+    const task = import('./scene-registry.mts').then(async registry => {
       // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
@@ -280,6 +289,9 @@ export function createSceneRouter({
       navigable = id => worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       return context = { registry, objects, navigation, selection, activation };
     });
+    contextTask = task;
+    void task.catch(() => { if (contextTask === task) contextTask = null; });
+    return task;
   }
   function attachShell(session: Session, { registry, selection: current }: RouterContext, replacement?: SceneReplacement) {
     if (!shellOwner) {
@@ -303,17 +315,16 @@ export function createSceneRouter({
     }
   }
 
-  function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
-    if (destroyed) return Promise.resolve(false);
-    if (!context) return ensureContext().then(() => navigate(id, intent));
-    const { registry: { loadSystemView, systemViewLoaded, resolveNavigation, knownObject, loadObject: loadEntry }, navigation: routes, selection: current, objects } = context;
+  async function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
+    if (destroyed) return false;
     if (intent.kind === 'focus' && scenes.current) id = objectId;
-    // The target's entry and, for system framing, its prepared candidates load when a navigation first names them.
-    if (!knownObject(id)) return loadEntry(id).then(loaded => loaded ? navigate(id, intent) : false);
-    if (intent.kind !== 'feature' && !systemViewLoaded(id)) return loadSystemView(id).then(() => navigate(id, intent));
-    if (!routes.supports(objectId, id)) return Promise.resolve(false);
-    const object = context.registry.SCENE_OBJECTS.find(object => object.id === id);
-    if (!object) return Promise.resolve(false);
+    // Entry and system-view reads may finish in any order. Only the latest selection can start a flight.
+    const ready = await readiness.prepare(id, intent.kind !== 'feature');
+    if (!ready || destroyed) return false;
+    const { registry: { resolveNavigation }, navigation: routes, selection: current, objects } = ready;
+    if (!routes.supports(objectId, id)) return false;
+    const object = ready.registry.SCENE_OBJECTS.find(object => object.id === id);
+    if (!object) return false;
     const source = scenes.current;
     const resolved = resolveNavigation(intent, { object, objects, navigation: routes, current: {
       objectId, href: intent.kind === 'focus' ? source?.url ?? windowTarget.location.href : windowTarget.location.href, subject: current.current,
@@ -328,7 +339,7 @@ export function createSceneRouter({
     scenes.current?.setViewUrl(null);
     const request = requests.begin({ ...resolved.destination, timing: createNavigationTiming(windowTarget, objectId, id) });
     if (request.camera.kind === 'focus' || request.camera.kind === 'surface' || request.feature) preferences.set('motionEnabled', false);
-    mountTask = transition(context, request, object);
+    mountTask = transition(ready, request, object);
     return mountTask;
   }
 
@@ -542,6 +553,7 @@ export function createSceneRouter({
   }
   function destroyActiveScene() {
     centeredObjectId = null;
+    readiness.invalidate();
     world.destroy();
     hasPresented = false;
     requests.cancel();
