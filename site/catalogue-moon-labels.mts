@@ -91,7 +91,7 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
     selectObject(id: string) { selected = bodies.find(body => body.id === id) ?? focus; },
     /** While the camera coasts the shown captions only move: none is admitted, retired or measured until it stops
      * (docs/performance/motion-freezes-membership.md). */
-    setCoasting(active: boolean) { coasting = active; },
+    setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, budget: LabelBudget) {
       if (coasting && !measured) return;
       if (!measured) { widths = labels.map(label => label.getBoundingClientRect().width); measured = true; }
