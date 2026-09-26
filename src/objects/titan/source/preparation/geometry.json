@@ -29,11 +29,18 @@
     "layerElevation": 50,
     "seamBleed": 0,
     "interiorSeamBleed": 8,
-    "overlap": 0.005,
+    "overlap": 0.0078125,
+    "seamOutset": {
+      "targetPixels": 0.5,
+      "stepRatio": 1.4142135623730951,
+      "hysteresis": 0.1,
+      "firstDiameter": 16,
+      "lastDiameter": 32768
+    },
     "fitToSource": false,
     "rasterScale": 4,
     "rasterGutter": 32,
-    "rasterOverscan": 0,
+    "rasterOverscan": 0.5,
     "projectivePoles": false,
     "lightColor": "#ffffff",
     "ambientIntensity": 0.05
