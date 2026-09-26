@@ -659,8 +659,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 /* Phones and portrait tablets use the map-app pattern: the scene fills the
    screen, search and filters float at the top, and information rises from a
-   bottom sheet that snaps between peek, half and full. Registered lengths let
+   bottom sheet that snaps between tucked, peek, half and full. Registered lengths let
    the sheet controller read the resolved snap heights. */
+@property --sheet-tucked { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --sheet-peek { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --sheet-half { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --sheet-rest { syntax: "<length>"; inherits: true; initial-value: 0px; }
@@ -682,10 +683,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* An on-screen keyboard covers the bottom of the layout viewport without
        shrinking it, so the sheet gives up that much room. */
     --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-lift) - var(--sheet-keyboard, 0px));
-    /* The peek shows the selected card's heading and whole introduction (shell-sheet.mts measures it), never less
-       than 152 px and never more than the half-open sheet. */
-    --sheet-peek: max(calc(152px + var(--explorer-safe-bottom)),
-      min(var(--sheet-half), calc(var(--sheet-intro-height, 0px) + var(--explorer-safe-bottom))));
+    /* The tucked stop leaves only the grabber; the first content stop stays fixed across objects. */
+    --sheet-tucked: calc(20px + var(--explorer-safe-bottom));
+    --sheet-peek: calc(180px + var(--explorer-safe-bottom));
     --sheet-half: 50dvh;
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
@@ -697,6 +697,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
   body[data-object-shell][data-sheet="full"] { --sheet-rest: 0px; }
   body[data-object-shell][data-sheet="half"] { --sheet-rest: calc(var(--sheet-height) - var(--sheet-half)); }
+  body[data-object-shell][data-sheet="tucked"] { --sheet-rest: calc(var(--sheet-height) - var(--sheet-tucked)); }
 
   .explorer-shell-header {
     position: fixed;
@@ -724,6 +725,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     transform: translate3d(0, var(--sheet-rest), 0);
     transition: transform var(--sheet-snap-duration) cubic-bezier(.2, .9, .3, 1);
   }
+  .object-search-toolbar,
+  .object-search-categories { touch-action: pan-x; }
   body:has(.object-sidebar.is-dragging) .object-search-toolbar { transition: none; }
   .explorer-shell-header .object-sidebar-search-card {
     /* Settings has its own slot in the brand bar; only Clear sits inside the field. */
@@ -754,8 +757,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
   .explorer-shell-header .object-wordmark-one-line { display: inline; }
   .explorer-shell-header .object-wordmark-two-line { display: none; }
-  /* Phones show no version: not in the header, not in the readout at the foot of the view. */
-  .explorer-brand-row .explorer-brand-version { display: none; }
+  /* Keep the version beside the wordmark in the compact header. */
 
   .object-sidebar {
     position: fixed;
@@ -799,10 +801,10 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   /* No readout bar: the sheet carries the sources link (.object-sheet-sources). */
   body[data-object-shell] .object-footer { display: none; }
 
-  /* The scene fills the room above the peeking sheet and runs behind the search, which shows only its field. */
+  /* The scene uses the space returned by the tucked sheet. Other stops leave the camera framed for the peek. */
   body[data-object-shell] .object-viewport { bottom: var(--sheet-peek); }
-  /* Where the search rests over the scene while the sheet peeks: the camera centres the body above it
-     (world-viewport.mts). It does not move with the sheet, so opening the sheet never re-centres the scene. */
+  body[data-object-shell][data-sheet="tucked"] .object-viewport { bottom: var(--sheet-tucked); }
+  /* The camera centres the body above the search. Opening the sheet from the content stops does not re-centre it. */
   body[data-object-shell] .object-viewport-search-band {
     display: block;
     height: calc(var(--sheet-lift) - 8px);

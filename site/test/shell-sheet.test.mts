@@ -5,14 +5,14 @@ import { createSceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from '../browser-types.mts';
 import { createSheetController } from '../shell-sheet.mts';
 
-// The phone shell's pieces that the sheet controller reads, with the snap heights shell-layout.css would resolve on a
-// 690 px sheet: the peek rests 538 px below the open sheet, the half 253 px.
+// Synthetic snap heights for a 690 px sheet: the peek rests 538 px below the open sheet,
+// and the half stop rests 253 px below it. The gesture behavior does not depend on the CSS peek size.
 const SHELL = `<html><body data-object-shell>
   <header class="explorer-shell-header"><div class="object-search-toolbar"><input class="object-sidebar-search" type="search"></div>
   <div class="object-search-categories"></div></header>
   <aside class="object-sidebar"><div class="object-drawer-content"><input class="object-sheet-handle" type="checkbox"></div></aside>
 </body></html>`;
-const REST: Readonly<Record<string, number>> = { peek: 538, half: 253, full: 0 };
+const REST: Readonly<Record<string, number>> = { tucked: 670, peek: 538, half: 253, full: 0 };
 const SHEET_TRANSFORM = /^translate\(0, calc\((-?[\d.]+)px - var\(--sheet-rest\)\)\)$/u;
 
 function mountSheet() {
@@ -22,7 +22,7 @@ function mountSheet() {
   const categories = document.querySelector<HTMLElement>('.object-search-categories')!;
   const search = document.querySelector<HTMLInputElement>('.object-sidebar-search')!;
   Object.defineProperty(sheet, 'offsetHeight', { value: 690 });
-  Object.assign(sheet, { setPointerCapture() {} });
+  for (const surface of [sheet, toolbar, categories]) Object.assign(surface, { setPointerCapture() {} });
   const frames: FrameRequestCallback[] = [];
   const mobile = { matches: true, listeners: [] as (() => void)[],
     addEventListener(_type: string, listener: () => void) { this.listeners.push(listener); } };
@@ -45,7 +45,7 @@ function mountSheet() {
       return {
         transform: offset ? `matrix(1, 0, 0, 1, 0, ${Number(offset[1]) - rest})` : 'none',
         transitionProperty: 'transform',
-        getPropertyValue: (name: string) => ({ '--sheet-peek': '152px', '--sheet-half': '437px' })[name] ?? '',
+        getPropertyValue: (name: string) => ({ '--sheet-tucked': '20px', '--sheet-peek': '152px', '--sheet-half': '437px' })[name] ?? '',
       };
     },
     DOMMatrixReadOnly: class { readonly m42: number; constructor(matrix: string) { this.m42 = Number(/(-?[\d.]+)\)$/u.exec(matrix)?.[1]); } },
@@ -53,11 +53,11 @@ function mountSheet() {
   const lifetime = createSceneLifetime();
   const controller = createSheetController(document, window as unknown as BrowserWindow, lifetime, () => 'europa:');
   let time = 0;
-  const pointer = (type: string, target: EventTarget, clientY: number, elapsed = 16) => {
+  const pointer = (type: string, target: EventTarget, clientY: number, elapsed = 16, clientX = 200) => {
     time += elapsed;
     const event = new window.Event(type, { bubbles: true });
     Object.defineProperties(event, { pointerId: { value: 1 }, isPrimary: { value: true }, button: { value: 0 },
-      clientX: { value: 200 }, clientY: { value: clientY }, timeStamp: { value: time } });
+      clientX: { value: clientX }, clientY: { value: clientY }, timeStamp: { value: time } });
     target.dispatchEvent(event);
   };
   const runFrames = () => { for (const frame of frames.splice(0)) frame(time); };
@@ -81,6 +81,49 @@ test('a drag writes its offset on the sheet and the search riding on it, never o
   assert.equal(sheet.style.transform, 'translate(0, calc(388px - var(--sheet-rest)))');
   assert.equal(document.body.getAttribute('style'), body, 'a move writes nothing on the body');
   assert.equal(document.body.style.getPropertyValue('--sheet-offset'), '');
+});
+
+test('filter and search swipes tuck and reveal the sheet without stealing horizontal pill swipes', () => {
+  const { document, sheet, toolbar, categories, pointer, runFrames } = mountSheet();
+  pointer('pointerdown', categories, 400);
+  pointer('pointermove', document, 510);
+  pointer('pointerup', document, 510, 200);
+  assert.equal(document.body.dataset.sheet, 'tucked');
+  assert.equal(sheet.querySelector('.object-sheet-handle')?.getAttribute('aria-label'), 'Show information sheet');
+  runFrames();
+
+  pointer('pointerdown', categories, 400);
+  pointer('pointermove', document, 410, 16, 300);
+  pointer('pointerup', document, 410, 200, 300);
+  assert.equal(document.body.dataset.sheet, 'tucked', 'horizontal pill swipes do not move the sheet');
+
+  pointer('pointerdown', toolbar, 500);
+  pointer('pointermove', document, 390);
+  pointer('pointerup', document, 390, 200);
+  assert.equal(document.body.dataset.sheet, 'peek');
+  runFrames();
+});
+
+test('a swipe on the search field reveals the sheet while a tap still opens search', () => {
+  const { document, window, categories, search, pointer, runFrames } = mountSheet();
+  pointer('pointerdown', categories, 400);
+  pointer('pointermove', document, 510);
+  pointer('pointerup', document, 510, 200);
+  runFrames();
+  assert.equal(document.body.dataset.sheet, 'tucked');
+
+  pointer('pointerdown', search, 500);
+  search.dispatchEvent(new window.Event('focus'));
+  assert.equal(document.body.dataset.sheet, 'tucked', 'focus waits for a possible swipe');
+  pointer('pointermove', document, 380);
+  pointer('pointerup', document, 380, 200);
+  assert.equal(document.body.dataset.sheet, 'peek');
+  runFrames();
+
+  pointer('pointerdown', search, 500);
+  search.dispatchEvent(new window.Event('focus'));
+  pointer('pointerup', document, 500);
+  assert.equal(document.body.dataset.sheet, 'full', 'a tap still opens the search sheet');
 });
 
 test('a release holds the sheet where the finger left it, then clears the hold on the next frame', () => {

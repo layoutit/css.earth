@@ -89,7 +89,7 @@ export const WHEEL_ZOOM_INERTIA_INPUT_KINDS = Object.freeze(["wheel"] as const);
 // Phones present information in a bottom sheet over the scene. Snap heights
 // live in shell-layout.css; these values shape the drag between them.
 export const MOBILE_SHEET_POLICY = Object.freeze({
-  states: Object.freeze(["peek", "half", "full"] as const),
+  states: Object.freeze(["tucked", "peek", "half", "full"] as const),
   dragSlopPixels: 6,
   flingPixelsPerMillisecond: 0.35,
   flingFreshnessMilliseconds: 80,
