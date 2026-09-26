@@ -1,4 +1,4 @@
-import type { Vector3 } from "../renderers/css/solar-system/types.ts";
+import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
 /** Where an object's Sun lies: its direction in the scene frame and in view space at the default camera pose. */
 export interface DirectionalSunPresentation {
   schema: string; source: string; sourcePath: string; localDirection: readonly number[]; referenceViewDirection: readonly number[]; qualification: string;

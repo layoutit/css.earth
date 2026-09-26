@@ -111,12 +111,6 @@ jobs:
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         if: ${{ !cancelled() }}
-        id: renderer-cache
-        with:
-          path: src/renderers/css/dist
-          key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        if: ${{ !cancelled() }}
         id: build-tools-cache
         with:
           path: tools/objects/dist
@@ -142,8 +136,6 @@ jobs:
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_RENDERER_CACHE_HIT: ${{ steps.renderer-cache.outputs.cache-hit }}
-          CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
           CI_AUDIT_UNIVERSE: ${{ needs.changes.outputs.run_universe }}

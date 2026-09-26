@@ -11,12 +11,13 @@ function fixture(t: TestContext) {
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const write = (path: string, text: string) => { mkdirSync(dirname(resolve(root, path)), { recursive: true }); writeFileSync(resolve(root, path), text); };
   write('packages/astronomy/package.json', JSON.stringify({ scripts: { build: 'tsup' }, main: 'dist/index.cjs', module: 'dist/index.js', types: 'dist/index.d.ts' }));
+  write('packages/renderer/package.json', JSON.stringify({ scripts: { build: 'tsup' }, main: 'dist/index.js', module: 'dist/index.js', types: 'dist/index.d.ts' }));
   const executed: string[] = [];
   const run = async (task: CiBuildTask) => {
     executed.push(task.id);
-    if (task.id === 'renderer') await new Promise<void>(accept => setImmediate(accept));
-    if (task.id === 'catalog') assert.ok(readFileSync(resolve(root, 'src/renderers/css/dist/navigation.js')).length,
-      'catalog discovery imports the compiled renderer; a warm checkout cannot satisfy this fixture');
+    if (task.id === 'packages') await new Promise<void>(accept => setImmediate(accept));
+    if (task.id === 'catalog') assert.ok(readFileSync(resolve(root, 'packages/renderer/dist/index.js')).length,
+      'catalog discovery imports the compiled renderer package; a warm checkout cannot satisfy this fixture');
     for (const output of task.outputs ?? []) for (const file of [...output.required, 'nested/chunk.js']) write(`${output.path}/${file}`, `compiled ${file}`);
   };
   return { root, executed, run, write };
@@ -24,12 +25,12 @@ function fixture(t: TestContext) {
 
 test('cold lint builds every compiled owner and regenerates the complete minimal source prerequisites', async t => {
   const f = fixture(t), results = await buildCi({ ...f, mode: 'lint', digest });
-  assert.deepEqual([...f.executed].sort(), ['catalog', 'packages', 'preparation', 'renderer', 'solar', 'titles']);
+  assert.deepEqual([...f.executed].sort(), ['catalog', 'packages', 'preparation', 'solar', 'titles']);
   assert.ok(results.every(result => !result.cached));
-  assert.ok(f.executed.indexOf('packages') < f.executed.indexOf('renderer'));
+  assert.ok(f.executed.indexOf('packages') < f.executed.indexOf('catalog'));
   assert.ok(f.executed.indexOf('catalog') < f.executed.indexOf('solar'));
   assert.ok(f.executed.indexOf('solar') < f.executed.indexOf('preparation'));
-  assert.ok(f.executed.indexOf('renderer') < f.executed.indexOf('preparation'));
+  assert.ok(f.executed.indexOf('packages') < f.executed.indexOf('preparation'));
 });
 
 test('an exact full hit reuses only compiled output while all generated source and shell preparation still runs', async t => {
@@ -37,7 +38,7 @@ test('an exact full hit reuses only compiled output while all generated source a
   await buildCi({ ...f, mode: 'lint', digest });
   f.executed.length = 0;
   const results = await buildCi({ ...f, mode: 'full', digest, cacheHit: true });
-  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation', 'renderer']);
+  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation']);
   assert.deepEqual([...f.executed].sort(), ['astronomy-data', 'catalog', 'icons', 'moon-labels', 'navigation', 'solar', 'titles', 'world', 'world-presentation']);
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('moon-labels'));
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('world-presentation'));
@@ -47,11 +48,11 @@ test('cache hits with missing JS, declarations, nested chunks or receipt rebuild
   const f = fixture(t);
   await buildCi({ ...f, mode: 'lint', digest });
   for (const file of ['index.js', 'index.d.ts', 'nested/chunk.js', '.ci-build-files.json']) {
-    unlinkSync(resolve(f.root, 'src/renderers/css/dist', file));
+    unlinkSync(resolve(f.root, 'packages/renderer/dist', file));
     f.executed.length = 0;
     const results = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
-    assert.equal(results.find(result => result.id === 'renderer')?.cached, false, file);
-    assert.ok(f.executed.includes('renderer'), file);
+    assert.equal(results.find(result => result.id === 'packages')?.cached, false, file);
+    assert.ok(f.executed.includes('packages'), file);
   }
 });
 
@@ -72,27 +73,28 @@ test('exit zero without real compiled artifacts is failure and never produces a 
   await assert.rejects(buildCi({ ...f, mode: 'lint', digest: '' }), /exact SHA-256/);
 });
 
-test('native package graph and the real renderer → catalogue dependency are preserved', t => {
+test('native package graph and the real renderer package → catalogue dependency are preserved', t => {
   const f = fixture(t), plan = ciBuildPlan(f.root, 'full');
   assert.deepEqual(plan.find(task => task.id === 'packages')?.args, ['-r', '--filter', './packages/**', 'build']);
-  assert.deepEqual(plan.find(task => task.id === 'renderer')?.after, ['packages']);
-  assert.deepEqual(plan.find(task => task.id === 'catalog')?.after, ['renderer']);
-  assert.deepEqual(plan.find(task => task.id === 'preparation')?.after, ['renderer', 'solar', 'titles']);
+  assert.equal(plan.find(task => task.id === 'renderer'), undefined, 'the renderer builds with the other packages');
+  assert.deepEqual(plan.find(task => task.id === 'packages')?.outputs?.find(output => output.path === 'packages/renderer/dist')?.required, ['index.js', 'index.d.ts']);
+  assert.deepEqual(plan.find(task => task.id === 'catalog')?.after, ['packages']);
+  assert.deepEqual(plan.find(task => task.id === 'preparation')?.after, ['packages', 'solar', 'titles']);
   assert.deepEqual(plan.find(task => task.id === 'world')?.after, ['preparation', 'navigation']);
   assert.deepEqual(plan.find(task => task.id === 'icons')?.after, ['packages']);
 });
 
-test('CI-only changes can reuse package and renderer outputs while preparation keeps its full input identity', async t => {
-  const f = fixture(t), packageDigest = 'b'.repeat(64), rendererDigest = 'c'.repeat(64);
-  await buildCi({ ...f, mode: 'lint', digest, packageDigest, rendererDigest });
+test('CI-only changes can reuse package outputs, the renderer included, while preparation keeps its full input identity', async t => {
+  const f = fixture(t), packageDigest = 'b'.repeat(64);
+  await buildCi({ ...f, mode: 'lint', digest, packageDigest });
   f.executed.length = 0;
-  const results = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest, rendererDigest,
-    cacheHit: false, packageCacheHit: true, rendererCacheHit: true });
-  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'renderer']);
+  const results = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest,
+    cacheHit: false, packageCacheHit: true });
+  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages']);
   assert.ok(f.executed.includes('preparation'));
   unlinkSync(resolve(f.root, 'packages/astronomy/dist/index.d.ts'));
-  const missing = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest, rendererDigest,
-    cacheHit: true, packageCacheHit: true, rendererCacheHit: true });
+  const missing = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest,
+    cacheHit: true, packageCacheHit: true });
   assert.equal(missing.find(result => result.id === 'packages')?.cached, false);
 });
 
@@ -100,7 +102,7 @@ test('a preparation hit still proves its JS entrypoints and nested files', async
   const f = fixture(t), options = { ...f, mode: 'full' as const, digest };
   await buildCi(options);
   const warm = await buildCi({ ...options, cacheHit: true });
-  assert.deepEqual(warm.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation', 'renderer']);
+  assert.deepEqual(warm.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation']);
   for (const file of ['operations.js', 'prepare-spatial-context.js', 'nested/chunk.js']) {
     unlinkSync(resolve(f.root, 'tools/objects/dist', file));
     const missing = await buildCi({ ...options, cacheHit: true });

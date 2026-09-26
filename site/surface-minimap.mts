@@ -4,7 +4,7 @@ import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { SurfaceMapConfig, SurfaceMapReader } from './surface-map-context.mts';
 interface MapElements { config: SurfaceMapConfig | null; rectangles: HTMLElement[]; size: { width: number; height: number } | null; }
 type WheelInput = Pick<WheelEvent, 'deltaY'> & Partial<Pick<WheelEvent, 'deltaX' | 'deltaMode' | 'ctrlKey' | 'preventDefault' | 'stopPropagation'>>;
-import { cssCameraAxesFromOrientation } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation } from '@cssearth/renderer/navigation';
 import { directionOnMap, mapDirection, orbitMapCamera } from './surface-minimap-math.mts';
 import { loadSurfaceGeometry, loadedSurfaceGeometry } from './surface-geometry.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
@@ -14,7 +14,9 @@ export function loadSurfacePreview(map: HTMLElement) {
   if (!image) return;
   if (!image.dataset.surfacePreviewSrc) return;
   if (!image.hasAttribute('src')) image.src = image.dataset.surfacePreviewSrc;
-  map.style.setProperty('--surface-preview-image', `url(${JSON.stringify(image.dataset.surfacePreviewSrc)})`);
+  // Set once: the map renders every camera frame (docs/performance/motion-freezes-membership.md).
+  const preview = `url(${JSON.stringify(image.dataset.surfacePreviewSrc)})`;
+  if (map.style.getPropertyValue('--surface-preview-image') !== preview) map.style.setProperty('--surface-preview-image', preview);
 }
 
 export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onInteraction, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; onInteraction(): void; surfaceReader?: SurfaceMapReader }) {
@@ -56,7 +58,8 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       const bounds = item.size ??= map.getBoundingClientRect();
       if (!bounds.width || !bounds.height) continue;
       const state = context(map);
-      map.dataset.ready = String(Boolean(state));
+      // Flags only on change; nothing reads the map's centre, so it is not written.
+      if (map.dataset.ready !== String(Boolean(state))) map.dataset.ready = String(Boolean(state));
       if (!state || !camera?.navigation) continue;
       visible = true;
       const geometry = loadedSurfaceGeometry();
@@ -65,21 +68,24 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       const view = surfaceMapViewport(state.scene, optics);
       const extent = geometry.surfaceViewRectangle({ eye: state.relative.map(x => x / camera!.navigation!.frame.bodyRadiusM) as [number, number, number],
         rotation: cssCameraAxesFromOrientation(state.world.pose.orientationXyzw), view, axes: state.axes });
-      const center = extent.center ?? directionOnMap(state.relative, state.axes);
-      map.dataset.centerU = center.u.toFixed(6);
-      map.dataset.centerV = center.v.toFixed(6);
-      map.dataset.visible = String(Boolean(extent.bounds));
-      map.dataset.fullView = String(extent.bounds && extent.bounds.width >= 1 && extent.bounds.height >= 1);
+      const visibleView = String(Boolean(extent.bounds)), fullView = String(extent.bounds && extent.bounds.width >= 1 && extent.bounds.height >= 1);
+      if (map.dataset.visible !== visibleView) map.dataset.visible = visibleView;
+      if (map.dataset.fullView !== fullView) map.dataset.fullView = fullView;
+      // The viewport boxes follow the camera live: a documented shell exception (up to three small absolutely placed
+      // boxes). A transform would scale their border and the map image drawn inside them.
       const { rectangles } = elements.get(map)!;
+      const set = (rect: HTMLElement, property: 'left' | 'top' | 'width' | 'height' | 'backgroundSize' | 'backgroundPosition', value: string) => {
+        if (rect.style[property] !== value) rect.style[property] = value;
+      };
       rectangles.forEach((rect, i) => {
-        rect.hidden = !extent.bounds;
+        if (rect.hidden !== !extent.bounds) rect.hidden = !extent.bounds;
         if (!extent.bounds) return;
-        rect.style.left = `${(extent.bounds.left + i - 1) * 100}%`;
-        rect.style.top = `${extent.bounds.top * 100}%`;
-        rect.style.width = `${extent.bounds.width * 100}%`;
-        rect.style.height = `${extent.bounds.height * 100}%`;
-        rect.style.backgroundSize = `${bounds.width}px ${bounds.height}px`;
-        rect.style.backgroundPosition = `${-(extent.bounds.left + i - 1) * bounds.width}px ${-extent.bounds.top * bounds.height}px`;
+        set(rect, 'left', `${(extent.bounds.left + i - 1) * 100}%`);
+        set(rect, 'top', `${extent.bounds.top * 100}%`);
+        set(rect, 'width', `${extent.bounds.width * 100}%`);
+        set(rect, 'height', `${extent.bounds.height * 100}%`);
+        set(rect, 'backgroundSize', `${bounds.width}px ${bounds.height}px`);
+        set(rect, 'backgroundPosition', `${-(extent.bounds.left + i - 1) * bounds.width}px ${-extent.bounds.top * bounds.height}px`);
       });
     }
     if (playing && visible) schedule();

@@ -8,7 +8,7 @@ import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter
 import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
 import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
-import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 
 const record = (value: unknown, at: string): Record<string, unknown> => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);

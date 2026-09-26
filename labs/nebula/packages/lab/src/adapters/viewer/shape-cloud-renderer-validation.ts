@@ -1,5 +1,5 @@
 import type { PreparedShapeScene } from '@cssearth/bake/volume';
-import type { PreparedCssVolume } from '../../../../../../../src/renderers/css/volume/types';
+import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 export function assertSharedGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: PreparedShapeScene): void {
   if (neutral.id !== `shape-cloud-${result.id}` || textured.id !== neutral.id) throw new Error('Cloud materials belong to a different preview.');
   if (JSON.stringify(neutral.frame) !== JSON.stringify(textured.frame)) throw new Error('Cloud materials have different physical frames.');

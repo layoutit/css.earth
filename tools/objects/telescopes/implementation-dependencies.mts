@@ -4,6 +4,7 @@ import { existsSync, realpathSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { build, type Plugin } from 'esbuild';
+import rendererBuild from '../../../packages/renderer/tsup.config.ts';
 
 export interface ImplementationFingerprint { readonly sha256: string; readonly files: readonly { readonly path: string; readonly sha256: string }[] }
 
@@ -20,11 +21,23 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/telescope': 'packages/telescope/src/index.ts',
   '@cssearth/telescope/node': 'packages/telescope/src/node/index.ts',
 };
+/** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
+ * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its
+ * tsup configuration names (`@cssearth/renderer/navigation` → `src/navigation/index.ts`); its source subpaths name the file. */
+const RENDERER_ENTRIES: Readonly<Record<string, string>> = Object.fromEntries(Object.entries(rendererBuild.entry)
+  .map(([name, source]) => [name, `src/${source.slice(source.lastIndexOf('/src/') + '/src/'.length)}`]));
+function rendererSource(specifier: string): string | undefined {
+  if (specifier !== '@cssearth/renderer' && !specifier.startsWith('@cssearth/renderer/')) return undefined;
+  const subpath = specifier.slice('@cssearth/renderer/'.length);
+  const built = RENDERER_ENTRIES[subpath || 'index'];
+  if (built) return `packages/renderer/${built}`;
+  return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
+}
 /** An esbuild plugin that bundles the followed workspace entries from their sources under `root`. */
 export function followedWorkspaceSources(root: string): Plugin {
   return { name: 'followed-workspace-sources', setup(builder) {
     builder.onResolve({ filter: /^@cssearth\// }, args => {
-      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path];
+      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? rendererSource(args.path);
       return source ? { path: resolve(root, source) } : undefined;
     });
   } };

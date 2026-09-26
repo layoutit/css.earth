@@ -3,7 +3,7 @@ import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
-import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "../../../src/renderers/css/dist/index.js";
+import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "@cssearth/renderer";
 import { isRecord } from "@cssearth/core";
 import { mapDirection } from "../../../site/surface-minimap-math.mts";
 

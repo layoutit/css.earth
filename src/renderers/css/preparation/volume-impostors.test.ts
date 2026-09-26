@@ -4,9 +4,9 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import { prepareVolumeImpostors } from './volume-impostors.js';
-import { validatePreparedCssVolume } from '../volume/validation.js';
-import type { PreparedCssVolume, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '../volume/types.js';
-import type { PreparedVolumeLensBrightness } from '../volume/prepared-volume-lenses.js';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import type { PreparedCssVolume, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '@cssearth/renderer/volume/types.ts';
+import type { PreparedVolumeLensBrightness } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { dot3 as dot } from '@cssearth/core';
 
 const AXES = ['x', 'y', 'z'] as const;

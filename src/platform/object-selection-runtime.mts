@@ -1,3 +1,3 @@
 // The checked TypeScript owner is shared with the renderer.
-export { createObjectSelectionRuntime } from "../renderers/css/dist/platform/object-selection-runtime.js";
-export type { ObjectSelectionState, ObjectSelectionRuntimeOptions } from "../renderers/css/dist/platform/object-selection-runtime.js";
+export { createObjectSelectionRuntime } from "@cssearth/renderer/platform/object-selection-runtime";
+export type { ObjectSelectionState, ObjectSelectionRuntimeOptions } from "@cssearth/renderer/platform/object-selection-runtime";

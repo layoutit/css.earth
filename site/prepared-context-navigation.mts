@@ -1,8 +1,8 @@
 import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
-import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
-import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
-import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
-import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
+import type { createPreparedUniverse } from '@cssearth/renderer/universe/prepared-universe-runtime.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
+import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { readPreparedFocusSelection } from './navigation/navigation-scope.mts';
 import { acquirePreparedFocusTarget } from './prepared-focus-target.mts';
 import type { PreparedFocusTarget } from './prepared-focus-target.mts';

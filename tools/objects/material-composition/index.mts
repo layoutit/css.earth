@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import {readAuthoredSources} from '../authored-sources.ts';
 import {parse} from '@cssearth/core/schema';
-import {PREPARED_CSS_OBJECT_FORMAT} from '../../../src/renderers/css/dist/index.js';
+import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer';
 import {layeredRecipe} from './layered-recipe.mts';
 import {spectralRecipe} from './spectral-recipe.mts';
 import {radialMotionRecipe} from './radial-motion-recipe.mts';

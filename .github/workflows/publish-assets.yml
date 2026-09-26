@@ -208,7 +208,7 @@ jobs:
         # Do not restore a cache writable by the untrusted bake runner.
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Prepare the trusted publisher's catalogue imports
-        run: pnpm build:packages && pnpm build:renderer && pnpm prepare:catalog
+        run: pnpm build:packages && pnpm prepare:catalog
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: ${{ needs.resolve.outputs.repository }}

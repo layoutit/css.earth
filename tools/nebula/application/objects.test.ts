@@ -10,9 +10,9 @@ import { applicationDeliveryKind, installedDeliveryMatchesRecipe } from './deliv
 import { prepareNebulaObject, type NebulaResearchBackend } from './objects.ts';
 import { sha256 } from '@cssearth/core/node';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
-import type { PreparedCssVolume } from '../../../src/renderers/css/volume/types.js';
-import { CSS_COMPILER_RENDER_BUDGET } from '../../../src/renderers/css/volume/compiler-render-budget.js';
-import { validatePreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
+import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
 
 // Run from the repository root with Node's test runner and the tsx loader.

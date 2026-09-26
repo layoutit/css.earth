@@ -1,5 +1,5 @@
 import { isArray } from '@cssearth/core';
-import type { CubicSkyPlan } from "../renderers/css/solar-system/cubic-sky-plan.ts";
+import type { CubicSkyPlan } from "@cssearth/renderer/solar-system/cubic-sky-plan.ts";
 export interface PreparedCubicSkyPlan extends CubicSkyPlan {
   schema: string; standard: string; model: string; runtimeRasterization: boolean; orientation: string; qualification: string;
   projection?: NonNullable<CubicSkyPlan["projection"]> & { axis: string; runtimeProjection: boolean };

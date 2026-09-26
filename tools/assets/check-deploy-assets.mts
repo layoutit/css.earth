@@ -4,7 +4,7 @@ import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
-import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '../../src/renderers/css/dist/index.js';
+import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '@cssearth/renderer';
 
 const execFileAsync = promisify(execFile);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);

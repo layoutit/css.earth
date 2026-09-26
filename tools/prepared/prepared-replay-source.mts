@@ -1,4 +1,4 @@
-import type {CameraPlan} from '../../src/renderers/css/navigation/types.ts';
+import type {CameraPlan} from '@cssearth/renderer/navigation/types.ts';
 import type {PreparedProjectiveTextureLeaf} from './projective-layout.mts';
 import {type Decoder,requireRecord,shape,text,number,array,optional,dictionary,boolean} from '@cssearth/core';
 export interface ReplayRings {

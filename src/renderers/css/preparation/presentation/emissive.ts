@@ -2,9 +2,9 @@
 // (scene/index.ts body-container layout) with the composite node conventions (composite.ts).
 // An emissive body has no material track, no Shadows toggle and no directional Sun; its off-limb context and
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
-import { canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
-import type { PreparedVariant } from '../../rendering/prepared-presentation.js';
+import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PresentationInputs, PresentationDraft } from './types.js';
 import type { PresentationAdapters } from './adapters.js';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
@@ -68,10 +68,9 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
     tree, variants, materials: [],
     viewBindings: [
       ...[corona, limb].map(node => ({ kind: 'silhouette-fit' as const, target: index(node), minimumRadius: POINT_MIN_RADIUS_PX, unitScale: 2 / plan.camera.logicalBodyDiameter })),
+      // No camera-pose attributes: nothing reads them, and a camera move would rewrite them every frame
+      // (docs/performance/motion-freezes-membership.md).
       { kind: 'view-attribute', target: -1, property: 'data-lod', source: 'level-of-detail-stage', precision: null },
-      ...([['data-polycss-camera-rot-x', 'scene-pitch', 2], ['data-polycss-camera-rot-y', 'control-yaw', null],
-        ['data-polycss-camera-zoom', 'zoom', null], [`data-${ns}-camera-matrix`, 'scene-matrix', null]] as const)
-        .map(([property, source, precision]) => ({ kind: 'view-attribute' as const, target: index(camera), property, source, precision })),
       ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
     animations: [],

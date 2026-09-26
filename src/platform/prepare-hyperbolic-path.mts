@@ -1,4 +1,4 @@
-import type { Vector3 } from "../renderers/css/solar-system/types.ts";
+import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
 export interface HyperbolicPathInput {
   semiMajorAxisUnits: number;
   eccentricity: number;

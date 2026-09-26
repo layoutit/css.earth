@@ -36,8 +36,9 @@ function packageOutputs(root: string): CompiledDirectory[] {
   });
 }
 
-/** Keep pnpm's native workspace dependency ordering (astronomy before engine). Catalogue discovery imports
- * compiled renderer navigation, so it must wait for renderer completion even when warm files exist.
+/** Keep pnpm's native workspace dependency ordering (astronomy before engine, engine before renderer). Catalogue
+ * discovery imports compiled renderer navigation (@cssearth/renderer/navigation), so it waits for the packages build
+ * even when warm files exist.
  * The preparation bundle ships JS only: type checks read its sources through the root `#preparation/*` imports.
  * The lint closure intentionally omits navigation/world/font assets, matching the contract checks' imports. */
 export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTask[] {
@@ -46,11 +47,9 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
   const tasks: CiBuildTask[] = [
     { id: 'packages', after: [], command: 'pnpm', args: ['-r', '--filter', './packages/**', 'build'], outputs: packageOutputs(root) },
     node('titles', 'tools/prepare/prepare-shell-titles.mts'),
-    { id: 'renderer', after: ['packages'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../src/renderers/css/tsup.config.ts'],
-      outputs: [{ path: 'src/renderers/css/dist', required: ['index.js', 'index.d.ts', 'navigation.js', 'navigation.d.ts'] }] },
-    node('catalog', 'tools/prepare/prepare-catalog.mts', ['renderer']),
+    node('catalog', 'tools/prepare/prepare-catalog.mts', ['packages']),
     node('solar', 'tools/prepare/prepare-solar-geometry.mts', ['catalog']),
-    { id: 'preparation', after: ['renderer', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],
+    { id: 'preparation', after: ['packages', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],
       outputs: [{ path: 'tools/objects/dist', required: ['operations.js', 'prepare-spatial-context.js'] }] },
   ];
   if (mode === 'full') tasks.push(
@@ -111,10 +110,10 @@ async function execute(task: CiBuildTask, root: string): Promise<void> {
 }
 
 export async function buildCi({ root = resolve(import.meta.dirname, '../..'), mode, cacheHit = false, digest,
-  packageCacheHit = cacheHit, rendererCacheHit = cacheHit, packageDigest = digest, rendererDigest = digest, run = execute,
-}: { root?: string; mode: CiBuildMode; cacheHit?: boolean; digest: string; packageCacheHit?: boolean; rendererCacheHit?: boolean;
-  packageDigest?: string; rendererDigest?: string; run?: (task: CiBuildTask, root: string) => Promise<void> }) {
-  for (const identity of [digest, packageDigest, rendererDigest]) if (!/^[a-f0-9]{64}$/u.test(identity)) throw new TypeError('CI build digests must be an exact SHA-256 cache identity.');
+  packageCacheHit = cacheHit, packageDigest = digest, run = execute,
+}: { root?: string; mode: CiBuildMode; cacheHit?: boolean; digest: string; packageCacheHit?: boolean;
+  packageDigest?: string; run?: (task: CiBuildTask, root: string) => Promise<void> }) {
+  for (const identity of [digest, packageDigest]) if (!/^[a-f0-9]{64}$/u.test(identity)) throw new TypeError('CI build digests must be an exact SHA-256 cache identity.');
   const plan = ciBuildPlan(root, mode), pending = new Map<string, Promise<void>>(), results: { id: string; cached: boolean; seconds: number }[] = [];
   for (const task of plan) {
     const parents = task.after.map(id => {
@@ -124,8 +123,8 @@ export async function buildCi({ root = resolve(import.meta.dirname, '../..'), mo
     });
     pending.set(task.id, Promise.all(parents).then(async () => {
       const started = performance.now();
-      const identity = task.id === 'packages' ? packageDigest : task.id === 'renderer' ? rendererDigest : digest;
-      const hit = task.id === 'packages' ? packageCacheHit : task.id === 'renderer' ? rendererCacheHit : cacheHit;
+      const identity = task.id === 'packages' ? packageDigest : digest;
+      const hit = task.id === 'packages' ? packageCacheHit : cacheHit;
       const cached = Boolean(hit && task.outputs?.length && task.outputs.every(output => compiledOutputsValid(root, output, identity)));
       if (cached && task.id === 'packages') {
         // The package dist cache intentionally excludes generated TS sources needed by typecheck/tests.
@@ -157,7 +156,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const hit = flag('CI_BUILD_CACHE_HIT');
   const digest = process.env.CI_BUILD_DIGEST || ciCacheKeys().buildDigest;
   const started = performance.now(), results = await buildCi({ mode, digest, cacheHit: hit,
-    packageCacheHit: flag('CI_PACKAGE_CACHE_HIT', hit), rendererCacheHit: flag('CI_RENDERER_CACHE_HIT', hit),
-    packageDigest: process.env.CI_PACKAGE_DIGEST || digest, rendererDigest: process.env.CI_RENDERER_DIGEST || digest });
+    packageCacheHit: flag('CI_PACKAGE_CACHE_HIT', hit), packageDigest: process.env.CI_PACKAGE_DIGEST || digest });
   console.log(JSON.stringify({ mode, seconds: Number(((performance.now() - started) / 1000).toFixed(3)), compiledCacheHits: results.filter(result => result.cached).length }));
 }

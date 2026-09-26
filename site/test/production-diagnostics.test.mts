@@ -10,7 +10,7 @@ test('production runtime removes development observations from the executable cl
   async function bundle(mode: 'development' | 'production' | 'performance') {
     const result = await build({ configFile: false, logLevel: 'silent',
       define: { 'import.meta.env.PROD': JSON.stringify(mode !== 'development'), 'import.meta.env.MODE': JSON.stringify(mode) },
-      build: { write: false, minify: 'esbuild', lib: { entry: resolve('src/renderers/css/runtime/object-runtime.ts'), formats: ['es'] },
+      build: { write: false, minify: 'esbuild', lib: { entry: resolve('packages/renderer/src/runtime/object-runtime.ts'), formats: ['es'] },
         rollupOptions: { external: ['@layoutit/polycss'] } } });
     return (Array.isArray(result) ? result : [result]).flatMap(bundle => {
       assert.ok("output" in bundle, "A one-shot build returns generated chunks");

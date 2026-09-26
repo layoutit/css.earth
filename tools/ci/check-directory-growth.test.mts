@@ -28,7 +28,7 @@ test('generated output and the required open-ended registries are exempt', () =>
   }
   // The object contract requires src/objects to be an open-ended registry of 586 bodies, so
   // counting it would forbid adding one. Authored trees are never exempt.
-  for (const directory of ['src/platform', 'site', 'tools', 'packages/astronomy/src', 'src/renderers/css']) {
+  for (const directory of ['src/platform', 'site', 'tools', 'packages/astronomy/src', 'packages/renderer/src']) {
     assert.equal(isExempt(directory), false, directory);
   }
 });

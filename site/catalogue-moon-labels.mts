@@ -1,13 +1,13 @@
-import { createOpacityFader } from '../src/renderers/css/dist/index.js';
-import type { OpacityClock } from '../src/renderers/css/stars/opacity-clock.ts';
-import { admitStableLabels } from '../src/renderers/css/labels/stable-label-layout.ts';
+import { createOpacityFader } from '@cssearth/renderer';
+import type { OpacityClock } from '@cssearth/renderer/stars/opacity-clock.ts';
+import { admitStableLabels } from '@cssearth/renderer/labels/stable-label-layout.ts';
 import prepared from './moon-labels.prepared.json' with { type: 'json' };
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '../src/platform/source-catalog.mts';
-import { cssViewFromOrientation, rotateWorldPosition } from '../src/renderers/css/navigation/world-camera-math.ts';
-import { rayHitsSphereBefore } from '../src/renderers/css/solar-system/heliocentric-geometry.ts';
-import type { LabelScreenRect } from '../src/renderers/css/labels/screen-label-layout.ts';
-import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.ts';
-import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '../src/renderers/css/labels/universe-label-policy.ts';
+import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { rayHitsSphereBefore } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
+import type { LabelScreenRect } from '@cssearth/renderer/labels/screen-label-layout.ts';
+import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
 interface Point { id: string; positionM: readonly number[]; radiusM: number; orbit?: { centerBodyId: string }; }
 interface Moon { id: string; name: string; parentId: string; positionM: readonly number[]; parentDistanceM: number; }
@@ -86,14 +86,27 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
   host.ownerDocument.fonts?.addEventListener('loadingdone', invalidate);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, clock, { hideAtZero: true });
   const last = labels.map(() => ({ shown: false, transform: '' }));
-  let selected = focus, previous: ReadonlySet<number> = new Set();
+  let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false;
   return {
     selectObject(id: string) { selected = bodies.find(body => body.id === id) ?? focus; },
+    /** While the camera coasts the shown captions only move: none is admitted, retired or measured until it stops
+     * (docs/performance/motion-freezes-membership.md). */
+    setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, budget: LabelBudget) {
+      if (coasting && !measured) return;
       if (!measured) { widths = labels.map(label => label.getBoundingClientRect().width); measured = true; }
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       const points = new Map<number, { x: number; y: number }>();
       const placements = compatible ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points) : [];
+      if (coasting) {
+        for (const [index, label] of labels.entries()) {
+          const point = last[index].shown ? points.get(index) : undefined;
+          if (!point) continue;
+          const transform = `translate(${point.x}px,${point.y}px)`;
+          if (last[index].transform !== transform) { label.style.transform = transform; last[index].transform = transform; }
+        }
+        return;
+      }
       const admitted = new Map(placements.map(point => [point.index, point]));
       previous = new Set(admitted.keys());
       for (const [index, label] of labels.entries()) {

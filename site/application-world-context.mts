@@ -1,8 +1,8 @@
 import { createSceneLifetime } from '@cssearth/engine';
-import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
-import { prepareObjectResources, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
-import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
-import type { PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
+import { labelOcclusionFor } from '@cssearth/renderer';
+import { prepareObjectResources, createRetainedGeometrySnapshot } from '@cssearth/renderer/universe';
+import { createCameraViewport } from '@cssearth/renderer/navigation';
+import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -67,6 +67,11 @@ export function createApplicationWorldContext() {
           event instanceof CustomEvent && (event.detail as { active?: unknown } | null)?.active === true);
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
         lifetime.onDispose(() => inputSurface?.removeEventListener('objectrotationchange', rotationChanged));
+        // The inertia gate: while the camera coasts, the world holds its membership (motion-freezes-membership.md).
+        const motionChanged = (event: Event) => frames.setCoasting(
+          event instanceof CustomEvent && (event.detail as { coasting?: unknown } | null)?.coasting === true);
+        inputSurface?.addEventListener('objectmotionchange', motionChanged);
+        lifetime.onDispose(() => inputSurface?.removeEventListener('objectmotionchange', motionChanged));
         const visibility = createApplicationWorldVisibility(layer, lifetime);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frames, presentationHost !== stage) : null;
         if (diagnostics) {

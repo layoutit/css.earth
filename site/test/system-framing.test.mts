@@ -7,15 +7,15 @@ import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS,
 import { bodyCardViewAtCamera } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
+import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
-import { orbitVertices } from '../../src/renderers/css/dist/index.js';
+import { orbitVertices } from '@cssearth/renderer';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
-import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
-import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
+import { parsePreparedWorldContext } from '@cssearth/renderer';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 const context = parsePreparedWorldContext(contextInput);
@@ -192,7 +192,7 @@ test('selecting the Milky Way from Local Group zooms in to the galaxy while keep
 
 test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
   const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mts');
-  const { rotateWorldPosition, worldRotationFromQuaternion } = await import('../../src/renderers/css/dist/navigation.js');
+  const { rotateWorldPosition, worldRotationFromQuaternion } = await import('@cssearth/renderer/navigation');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5]] as const) {
     const from: WorldCameraPose = { ...world, pose: { positionM: [2e12, -3e12, 1e13], orientationXyzw } };
     const viewport = { ...optics, principalOffsetPixels: [40, -20] as const };

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { publishObjectDiagnostics, readObjectDiagnostics } from '../../src/renderers/css/dist/testing.js';
-import type { ObjectDiagnosticsOptions } from '../../src/renderers/css/runtime/object-diagnostics.ts';
+import { publishObjectDiagnostics, readObjectDiagnostics } from '@cssearth/renderer/testing';
+import type { ObjectDiagnosticsOptions } from '@cssearth/renderer/runtime/object-diagnostics.ts';
 
 // This seam tests publication ownership only. Missing native methods fail if the
 // publisher starts consuming them, rather than silently growing a permissive mock.

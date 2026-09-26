@@ -133,7 +133,7 @@ export async function deriveRestoredPreparedFiles(ids: readonly string[], root: 
     if (missing(id, "provenance.json") && await provenanceIsRegenerated(resolve(root, "src/objects", id))) provenance.push(id);
   }
   if (!pages.length && !provenance.length) return { pages: 0, provenance: 0 };
-  if (!existsSync(new URL("../../src/renderers/css/dist/index.js", import.meta.url))) {
+  if (!existsSync(new URL("../../packages/renderer/dist/index.js", import.meta.url))) {
     console.log(`Derived page data not written for ${pages.length + provenance.length} restored object(s): the renderer is not built. Run pnpm prepare:shell && pnpm prepare:object-json.`);
     return { pages: 0, provenance: 0 };
   }

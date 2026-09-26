@@ -11,9 +11,9 @@ import type { ProductInput } from '@cssearth/telescope';
 
 export type SpatialKind='points'|'volume'|'volume-lens-bank';
 type SpatialPayload =
-  | {kind:'points';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/stars/loader.ts').loadPreparedCssPointField>>}
-  | {kind:'volume';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/volume/loader.ts').loadPreparedCssVolume>>}
-  | {kind:'volume-lens-bank';payload:Awaited<ReturnType<typeof import('../../../src/renderers/css/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses>>};
+  | {kind:'points';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/stars/loader.ts').loadPreparedCssPointField>>}
+  | {kind:'volume';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/volume/loader.ts').loadPreparedCssVolume>>}
+  | {kind:'volume-lens-bank';payload:Awaited<ReturnType<typeof import('@cssearth/renderer/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses>>};
 const workspaceRoot=resolve(import.meta.dirname,'../../..');
 
 async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
@@ -41,13 +41,13 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   if(kind==='volume-lens-bank')for(const path of ['README.md','prepared/provenance.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
-  const entry=new URL(kind==='points'?'../../../src/renderers/css/stars/loader.ts':kind==='volume'?'../../../src/renderers/css/volume/loader.ts':'../../../src/renderers/css/volume/prepared-volume-lenses.ts',import.meta.url);
+  const entry=new URL(kind==='points'?'../../../packages/renderer/src/stars/loader.ts':kind==='volume'?'../../../packages/renderer/src/volume/loader.ts':'../../../packages/renderer/src/volume/prepared-volume-lenses.ts',import.meta.url);
   // Use the application's exact loader, including physical-frame and binary-bank validation.
   const compiled=await build({entryPoints:[entry.pathname],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true});
   await mkdir(resolve(workspaceRoot,'work'),{recursive:true});const scratch=await mkdtemp(resolve(workspaceRoot,'work/telescope-spatial-loader-'));
   const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   try{
-    const loader: {loadPreparedCssPointField?:typeof import('../../../src/renderers/css/stars/loader.ts').loadPreparedCssPointField;loadPreparedCssVolume?:typeof import('../../../src/renderers/css/volume/loader.ts').loadPreparedCssVolume;loadPreparedVolumeLenses?:typeof import('../../../src/renderers/css/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
+    const loader: {loadPreparedCssPointField?:typeof import('@cssearth/renderer/stars/loader.ts').loadPreparedCssPointField;loadPreparedCssVolume?:typeof import('@cssearth/renderer/volume/loader.ts').loadPreparedCssVolume;loadPreparedVolumeLenses?:typeof import('@cssearth/renderer/volume/prepared-volume-lenses.ts').loadPreparedVolumeLenses}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
     const value:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}
       :kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}

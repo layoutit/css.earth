@@ -5,7 +5,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
+import { validatePreparedVolumeLenses } from '@cssearth/renderer/universe';
 import { parse, object, array, dictionary, number, string, tuple, json as jsonValue } from '@cssearth/core/schema';
 const pin = object({ bytes: number });
 const path = object({ path: string });

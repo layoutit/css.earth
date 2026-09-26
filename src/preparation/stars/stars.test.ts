@@ -11,9 +11,9 @@ import sharp from 'sharp';
 import { parseStarsRecipe } from './config.js';
 import { sourceBytes } from '@cssearth/bake/volume/node';
 import { sha256 } from '@cssearth/core/node';
-import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../../renderers/css/stars/validation.js';
-import { POINT_FIELD_MAGNITUDE_BOUND } from '../../renderers/css/stars/point-field-bank.js';
+import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
+import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/renderer/stars/point-field-bank.ts';
 import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.js';
 import { prepareStarHierarchy } from './hierarchy.js';
 

@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { SCENE_OBJECTS } from '../../../../objects.mts';
 import { assetHashSplit, assetOrigin } from '../../../../asset-origin.mts';
-import { preparedAssetGroupFile } from '../../../../../src/renderers/css/dist/index.js';
+import { preparedAssetGroupFile } from '@cssearth/renderer';
 
 // The hashes a page does not embed, one file per resource group (`assetHashSplit`). Only a build that publishes to an
 // asset origin writes them; without one every address stays same-origin and needs no hash.

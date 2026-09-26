@@ -1,5 +1,5 @@
 import type {Polygon} from '@layoutit/polycss';
-import type {CameraPlan} from '../../../src/renderers/css/navigation/types.ts';
+import type {CameraPlan} from '@cssearth/renderer/navigation/types.ts';
 import type {RasterRect} from '../../../src/platform/projective-surface-raster.mts';
 import type {Cutaway} from './contracts.mts';
 import type {SeamOutsetProfile} from '../../../src/renderers/css/preparation/scene/seam-outset.ts';

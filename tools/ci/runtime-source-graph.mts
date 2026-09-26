@@ -54,14 +54,22 @@ export async function resolveRuntimeSource(imported: string, importer: string, {
   let target: string;
   if (imported.startsWith('.')) target = resolve(dirname(importer), imported);
   else if (imported.startsWith('@cssearth/')) {
-    // `@cssearth/<package>` or one declared subpath entry, `@cssearth/<package>/<entry>`.
-    const [name = '', subpath, ...rest] = imported.slice('@cssearth/'.length).split('/');
-    if (!/^[a-z][a-z0-9-]*$/.test(name) || rest.length || (subpath !== undefined && !/^[a-z][a-z0-9-]*$/.test(subpath))) throw new Error(`Unclosed workspace import ${imported}`);
+    // `@cssearth/<package>` or a declared subpath, `@cssearth/<package>/<subpath>`: an exact entry, or one `*` pattern
+    // (`@cssearth/renderer/platform/*` for built entries, `@cssearth/renderer/navigation/*` for TypeScript sources).
+    const [name = '', ...segments] = imported.slice('@cssearth/'.length).split('/');
+    if (!/^[a-z][a-z0-9-]*$/.test(name) || !segments.every(segment => /^[a-z0-9][a-z0-9.-]*$/.test(segment) && !segment.includes('..'))) throw new Error(`Unclosed workspace import ${imported}`);
     const directory = resolve(root, 'packages', name);
     const manifest = requireRecord(JSON.parse(await source(resolve(directory, 'package.json'))));
-    const exports = isRecord(manifest.exports) ? manifest.exports[subpath === undefined ? '.' : `./${subpath}`] : null;
-    if (manifest.name !== `@cssearth/${name}` || !isRecord(exports) || typeof exports.import !== 'string') throw new Error(`Workspace export is not concrete: ${imported}`);
-    target = resolve(directory, exports.import);
+    const key = segments.length ? `./${segments.join('/')}` : '.';
+    const declared = isRecord(manifest.exports) ? manifest.exports : {};
+    const pattern = Object.keys(declared).filter(candidate => candidate.endsWith('/*') && key.startsWith(candidate.slice(0, -1)) && key.length > candidate.length - 1)
+      .sort((left, right) => right.length - left.length)[0];
+    if (segments.length > 1 && !Object.hasOwn(declared, key) && pattern === undefined) throw new Error(`Unclosed workspace import ${imported}`);
+    const value = Object.hasOwn(declared, key) ? declared[key] : pattern === undefined ? undefined : declared[pattern];
+    const concrete = typeof value === 'string' ? value : isRecord(value) && typeof value.import === 'string' ? value.import : undefined;
+    if (manifest.name !== `@cssearth/${name}` || concrete === undefined || (pattern !== undefined && !Object.hasOwn(declared, key) && concrete.split('*').length !== 2))
+      throw new Error(`Workspace export is not concrete: ${imported}`);
+    target = resolve(directory, Object.hasOwn(declared, key) || pattern === undefined ? concrete : concrete.replace('*', key.slice(pattern.length - 1)));
   } else target = createRequire(importer).resolve(imported);
   if (relative(root, target).startsWith('../')) throw new Error(`Runtime import escapes the source root: ${imported}`);
   if (target.includes('/dist/') && !target.includes('/node_modules/')) {

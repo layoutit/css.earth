@@ -8,10 +8,10 @@ import { installRuntimeAssets } from '../../../assets/setup.mts';
 import { requireRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { parseRasterRecipe, prepareRasterAssets } from '../../../../src/preparation/raster/index.ts';
-import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/validation/index.ts';
+import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '../../../../src/renderers/css/preparation/scene/profile.ts';
 import { prepareScientificNavigation } from '../../terrestrial-layers/scientific-focus.mts';
-import { parsePreparedWorldContext } from '../../../../src/renderers/css/prepared-data/world-context.js';
+import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 
 export async function inspectMeasurementSphere(root:string,target:string){

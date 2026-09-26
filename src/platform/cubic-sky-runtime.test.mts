@@ -1,10 +1,10 @@
-import { createCameraMotion } from '../renderers/css/dist/navigation.js';
+import { createCameraMotion } from '@cssearth/renderer/navigation';
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
-import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";
+import { createUnboundedMatrixDragControls } from "@cssearth/renderer/platform/camera-input";
 import {
   createDragHistory,
   recordDragSample,
@@ -14,7 +14,7 @@ import {
   interactionTrackball,
 } from "./trackball-drag-inertia.mts";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
-import type { TrackballMetrics, CameraDelta, Quaternion } from "../renderers/css/navigation/types.ts";
+import type { TrackballMetrics, CameraDelta, Quaternion } from "@cssearth/renderer/navigation/types.ts";
 
 type Rotate = Parameters<typeof createUnboundedMatrixDragControls>[0]["rotate"];
 type Publication = Parameters<Rotate>[0];
@@ -47,8 +47,13 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   });
   const pending = new Map<number, AnimationCallback>();
   let next = 0;
+  // The camera-motion signal's announcements: the drag drives, its throw coasts (camera-motion-signal.ts).
+  const moving: { active: boolean; coasting: boolean }[] = [];
   class Surface {
-    dispatchEvent(_event: Event): boolean { return true; }
+    dispatchEvent(event: Event): boolean {
+      if (event.type === "objectmotionchange") moving.push((event as CustomEvent<{ active: boolean; coasting: boolean }>).detail);
+      return true;
+    }
     listeners = new Map<string, (event: { type: string; clientX: number; clientY: number; pointerId: number; isPrimary: boolean; button: number; timeStamp: number; preventDefault(): void }) => void>();
     style = { removeProperty() {} };
     ownerDocument = { defaultView: {
@@ -96,8 +101,10 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
     releaseTimestamp:140.1,frameMilliseconds:35 }));
   const first = advanceDragThrow({ ...launch,elapsedMilliseconds:35 });
   const before = publications.length;
+  assert.deepEqual(moving, [{ active: true, coasting: false }], "the drag drives the camera");
   surface.emit("pointerup",394,140.1);
   assert.equal(publications.length,before+1);
+  assert.deepEqual(moving.at(-1), { active: true, coasting: true }, "the release coasts on inertia");
   const expected = composeDragRotation(rotationFromAngularVelocity(launch.angularVelocity,
     35*Math.hypot(first.pitchDegreesPerMillisecond,first.yawDegreesPerMillisecond)/launch.initialSpeedDegreesPerMillisecond),launch.launchRotation);
   lastPublication(publications).rotation?.forEach((value,index)=>assert.ok(Math.abs(value-expected[index])<1e-12));
@@ -108,6 +115,7 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   assert.ok(Math.abs(lastPublication(publications).controlYawDelta-second.yawDeltaDegrees)<1e-12);
   surface.emit("pointerdown",394,180);
   assert.equal(controls.stats().active,false,"press stops the existing coast");
+  assert.deepEqual(moving.at(-1), { active: false, coasting: false }, "the stopped coast ends the motion");
   const beforeHold = publications.length;
   tick(210);tick(245);
   assert.equal(publications.length,beforeHold,"a held press cannot publish another coast step");

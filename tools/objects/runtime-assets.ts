@@ -38,7 +38,7 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
  for(const asset of manifest.assets){const path=containedPath(root,asset.filename);if(!(await lstat(path)).isFile())throw new Error(`Runtime asset is not a regular file: ${asset.filename}.`);const bytes=await readFile(path);if(bytes.length!==asset.bytes||sha256(bytes)!==asset.sha256)throw new Error(`Runtime asset drifted: ${asset.filename}.`);}
 }
 
-/** The renderer's stylesheets, whose `url(/scenes/<id>/…)` values the deploy resolves to published hashes like the
+/** The object page stylesheets (the renderer package's own stylesheets name no scene image), whose `url(/scenes/<id>/…)` values the deploy resolves to published hashes like the
  * prepared data's (site/asset-origin.mts). A body's stylesheet lenses are part of what it ships. */
 export async function stylesheetTexts():Promise<string[]> {
  const directory=resolve(process.cwd(),'src/renderers/css/styles');

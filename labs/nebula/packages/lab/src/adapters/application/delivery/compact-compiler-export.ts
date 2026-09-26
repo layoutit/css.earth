@@ -1,7 +1,7 @@
 /** Explicitly promote an already inspected compiler result to small, source-backed bake inputs. */
 import { readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
-import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { hash, localPath, pinned } from '../../../server/workflows/density/io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';

@@ -1,11 +1,11 @@
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
-import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
+import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { SystemObjects } from './object-systems.mts';
 interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraViewport; }
 export interface OverviewSelection { overview: boolean; objectId: string; }
-import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
+import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
 import { systemOverviewDistance } from './system-framing.mts';

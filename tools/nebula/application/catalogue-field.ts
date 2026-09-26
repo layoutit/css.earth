@@ -3,8 +3,8 @@ import { sha256 } from '@cssearth/core/node';
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';
-import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../../../src/renderers/css/navigation/world-camera-math.js';
-import { validatePreparedCataloguePoints, type PreparedCataloguePoint } from '../../../src/renderers/css/stars/prepared-catalogue-points.js';
+import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { validatePreparedCataloguePoints, type PreparedCataloguePoint } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
 import { ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
 import { isRecord } from '@cssearth/core';
 

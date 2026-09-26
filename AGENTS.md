@@ -9,6 +9,7 @@ directory-specific `AGENTS.md` files add guidance for their owners.
 - Use one shared world camera and navigation contract for every prepared object. Menu membership never limits rendering; new object types extend prepared capabilities rather than introduce separate page-based scene owners.
 - Keep one shared application shell. Object packages supply content and supported capabilities, not shell markup, typography, navigation, or responsive behavior.
 - Keep runtime DOM retained and stable. Prepare textures, atlases, scene state, lighting, weather, and other static work ahead of runtime.
+- While the camera coasts on inertia, retained DOM changes only `transform` and `opacity` on resident elements; membership waits for the coast to stop, and driven motion stages level crossings ahead. See [coasting freezes membership](docs/performance/motion-freezes-membership.md) for the signal, the pacer and the paint exceptions.
 - Runtime may decode and transport prepared state. It must not derive source data, geometry, charts, atlases, or scene assets.
 - Select the canonical prepared dataset once for each mount, independent of device DPR. A body may declare prepared surface texture levels that the shared selection swaps by projected silhouette size. Neither may generate geometry or imagery at runtime. Other object asset banks remain fixed after mount.
 - With shadows off (flood lighting), every lighting and material lane shows one prepared frame, published as its own file. Lighting rows load only when shadows are on.

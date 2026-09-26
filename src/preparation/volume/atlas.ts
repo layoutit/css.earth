@@ -1,8 +1,8 @@
 /** Offline lens/axis WebP delivery. Geometry and non-slice resources remain unchanged. */
 import sharp from 'sharp';
 import { createHash } from 'node:crypto';
-import { validatePreparedCssVolume } from '../../renderers/css/volume/validation.js';
-import type { PreparedCssVolume, PreparedVolumeLeaf, PreparedVolumeLeafStyle } from '../../renderers/css/volume/types.js';
+import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import type { PreparedCssVolume, PreparedVolumeLeaf, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
 
 const GUTTER = 2, MAX_SIZE = 8192;
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');

@@ -6,7 +6,7 @@ import { writeLossyWebp } from '../../../src/preparation/raster/lossy-lane.ts';
 /** A `<u>` face is the triangle its two bevelled top corners cut from its atlas slice with `corner-shape`: apex at the
  * top centre, base along the bottom. Safari 26 has no `corner-shape` and rounds those corners into an ellipse, so every
  * atlas a face reads also gets a copy whose slices are transparent outside the triangle, and the runtime reads the copy
- * where the capability is missing (src/renderers/css/rendering/prepared-resource-fallbacks.ts). */
+ * where the capability is missing (packages/renderer/src/rendering/prepared-resource-fallbacks.ts). */
 interface Slice { x: number; y: number; width: number; height: number; atlasWidth: number; atlasHeight: number }
 interface Entry { key: string; url: string; pool: string; decodedBytes?: number }
 interface Write { kind: string; target?: number; name?: string; resource?: string | null; value?: string }

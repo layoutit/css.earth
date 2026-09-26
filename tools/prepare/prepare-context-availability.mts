@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
+import { loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { ContextAvailability } from '../../src/platform/context-availability.mts';
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';

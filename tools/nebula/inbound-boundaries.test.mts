@@ -55,7 +55,7 @@ test('preparation accepts the public bake entries while the runtime accepts none
       "export type {Contract} from '@cssearth/bake/public';", "export {type Contract} from '@cssearth/bake/public';",
       "type T = import('@cssearth/bake/public').Contract;", "import '@cssearth/bake/public';", "import {value,type Contract} from '@cssearth/bake/public';",
       "export * from '@cssearth/bake/public';"]) {
-      for (const path of ['site/runtime.mts', 'src/renderers/css/volume/types.ts']) {
+      for (const path of ['site/runtime.mts', 'packages/renderer/src/volume/types.ts']) {
         f.write(path, source); assert.ok(f.check().some(error => error.includes('runtime closure forbids')), `${path}: ${source}`);
         f.write(path, 'export {};');
       }

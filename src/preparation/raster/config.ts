@@ -125,7 +125,7 @@ export interface StructureSource {
     };
 }
 /** Every raster-lane image is prepared once, at the canonical density; there is no 1x output. */
-export { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '../../renderers/css/rendering/prepared-object-assets.js';
+export { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 export interface RasterRecipe {
     schema: 'cssearth-raster-recipe@1';
     publicBase: string;

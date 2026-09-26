@@ -7,9 +7,9 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
-import type { PreparedPresentationDefinition, PreparedTree } from '../../src/renderers/css/rendering/prepared-presentation.ts';
-import type { PreparedDepthOrder } from '../../src/renderers/css/rendering/prepared-depth-partitions.ts';
-import type { SurfacePoint, SurfaceTriangle } from '../../src/renderers/css/navigation/prepared-surface-hit.ts';
+import type { PreparedPresentationDefinition, PreparedTree } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import type { PreparedDepthOrder } from '@cssearth/renderer/rendering/prepared-depth-partitions.ts';
+import type { SurfacePoint, SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';
 
 const runtimeRoot = fileURLToPath(new URL('../../', import.meta.url));
 const mimasInput: unknown = JSON.parse(await readFile(join(runtimeRoot, 'src/objects/mimas/prepared/runtime.json'), 'utf8'));

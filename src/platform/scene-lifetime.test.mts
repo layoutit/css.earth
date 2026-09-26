@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createSceneLifetime } from "@cssearth/engine";
-import { waitForScenePaint, waitForSceneDocument } from "../renderers/css/dist/scene-native-waits.js";
+import { waitForScenePaint, waitForSceneDocument } from "@cssearth/renderer/scene-native-waits";
 
 function frameQueue() {
   let nextId = 0;

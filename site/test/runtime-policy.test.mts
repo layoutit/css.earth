@@ -17,7 +17,7 @@ import {
   mobileSheetKeyboardInset,
   MOBILE_SHEET_POLICY,
 } from "../runtime-policy.mts";
-import { PREPARED_WHEEL_ZOOM, pinchTargetDistance } from "../../src/renderers/css/navigation/prepared-wheel-zoom.ts";
+import { PREPARED_WHEEL_ZOOM, pinchTargetDistance } from "@cssearth/renderer/navigation/prepared-wheel-zoom.ts";
 
 test("only a keyboard-sized covering takes room from the sheet", () => {
   // A phone with nothing over the layout viewport.

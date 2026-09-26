@@ -3,8 +3,7 @@
   "include": [
     "./**/*.mts",
     "../navigation/**/*.mts",
-    "../renderers/css/**/*.test.mts",
-    "../renderers/css/**/*-browser.mts",
+    "../../packages/renderer/src/**/*.test.mts",
     "../../site/env.d.ts",
     "../../tools/external-modules.d.mts"
   ],

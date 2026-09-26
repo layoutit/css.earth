@@ -4,7 +4,7 @@ import preparedWorld from '../src/objects/sun/prepared/world-context.json' with 
 import moonCatalogues from './source/moon-catalogues.json' with { type: 'json' };
 import type { ObjectEntry } from './object-schema.mts';
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '../src/platform/source-catalog.mts';
-import { labelEligible } from '../src/renderers/css/labels/universe-label-policy.ts';
+import { labelEligible } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
 export interface MoonListEntry { id: string; name: string; object?: ObjectEntry; }
 

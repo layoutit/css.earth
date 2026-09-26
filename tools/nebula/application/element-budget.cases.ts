@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { type CompilerBakeResult, createRenderElementBudget } from '@cssearth/bake/volume';
-import { CSS_COMPILER_RENDER_BUDGET } from '../../../src/renderers/css/volume/compiler-render-budget.js';
-import type { PreparedCssVolume, VolumeVector } from '../../../src/renderers/css/volume/types.js';
-import type { PreparedVolumeLenses } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
+import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
+import type { PreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
 
 const axes = ['x', 'y', 'z'] as const;

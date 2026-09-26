@@ -1,7 +1,7 @@
 import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../../src/platform/prepared-schema.mts";
 import { requirePreparedPresentation } from "../../src/platform/prepared-presentation-contract.mts";
 import type { PreparedPresentationContract } from "../../src/platform/prepared-presentation-contract.mts";
-import type { PreparedAssets } from "../../src/renderers/css/rendering/prepared-residency.ts";
+import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
 import { requireObjectControls } from '../../site/scene/scene-contract.mts';
 import { isRecord, requireRecord } from '@cssearth/core';
 

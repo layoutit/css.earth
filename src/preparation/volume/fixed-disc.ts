@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
 import type { VolumeSlices, VolumeSliceQuad, VolumeRecipe, Vector3 } from '@cssearth/bake/volume';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
-import type { PreparedCssVolume } from '../../renderers/css/volume/types.js';
+import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 /** Display support only: preserve the original colors and split each slab's optical depth. */
 export function coreSupport(position: readonly number[], fadeStart: number, radius: number): number {

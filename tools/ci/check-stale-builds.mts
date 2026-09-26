@@ -13,8 +13,9 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 /** `inputs` names the bundler's metafile: every file the last build read counts as a source, so an import from outside the
- * declared directories (src/platform, src/renderers, a site module) still marks the bundle stale. */
-export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly inputs?: string }
+ * declared directories (src/platform, a site module) still marks the bundle stale. `base` is the directory tsup ran from,
+ * which the metafile's input paths are relative to. */
+export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly inputs?: string; readonly base?: string }
 
 /** The builds preparation tools import. Sources are directories scanned for TypeScript, JSON body records or generator scripts. */
 export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
@@ -27,8 +28,8 @@ export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/astronomy', command: 'pnpm build:astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/tools'], output: 'packages/astronomy/dist/index.js' },
   { name: '@cssearth/engine', command: 'pnpm --filter @cssearth/engine build', sources: ['packages/engine/src'], output: 'packages/engine/dist/index.js' },
   { name: '@cssearth/catalog', command: 'pnpm build:catalog', sources: ['packages/catalog/src'], output: 'packages/catalog/dist/index.js' },
-  { name: 'CSS renderer bundle', command: 'pnpm build:renderer', sources: ['src/renderers/css'], output: 'src/renderers/css/dist/index.js', inputs: 'src/renderers/css/dist/metafile-esm.json' },
-  { name: 'preparation tools bundle', command: 'pnpm build:preparation:bundle', sources: ['tools/objects', 'src/preparation'], output: 'tools/objects/dist/prepare-authored.js', inputs: 'tools/objects/dist/metafile-esm.json' },
+  { name: '@cssearth/renderer', command: 'pnpm build:renderer', sources: ['packages/renderer/src'], output: 'packages/renderer/dist/index.js', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
+  { name: 'preparation tools bundle', command: 'pnpm build:preparation:bundle', sources: ['tools/objects', 'src/preparation'], output: 'tools/objects/dist/prepare-authored.js', inputs: 'tools/objects/dist/metafile-esm.json', base: 'packages/engine' },
 ]);
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);
@@ -54,8 +55,8 @@ async function metafileInputs(root: string, rule: BuildRule): Promise<string[] |
   const parsed: unknown = JSON.parse(text);
   const inputs = typeof parsed === 'object' && parsed !== null && 'inputs' in parsed ? parsed.inputs : null;
   if (typeof inputs !== 'object' || inputs === null) throw new TypeError(`${rule.inputs}: esbuild metafile has no inputs.`);
-  // tsup runs esbuild from the engine package, so its input paths are relative to that directory.
-  const base = resolve(root, 'packages/engine');
+  // tsup runs esbuild from the rule's package directory, so its input paths are relative to that directory.
+  const base = resolve(root, rule.base ?? '.');
   return Object.keys(inputs).map(path => relative(root, resolve(base, path))).filter(path => !path.startsWith('..') && !path.includes('node_modules'));
 }
 

@@ -1,4 +1,4 @@
-import { parsePreparedSystemView } from '../src/renderers/css/dist/index.js';
+import { parsePreparedSystemView } from '@cssearth/renderer';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
 
 // One system's camera candidates, fetched when navigation frames that system (`site/system-framing.mts`), from the

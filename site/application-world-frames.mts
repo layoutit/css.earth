@@ -1,6 +1,6 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import { createWorldFrameQueue } from '../src/renderers/css/dist/universe.js';
-import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
+import { createWorldFrameQueue } from '@cssearth/renderer/universe';
+import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ApplicationWorldLayer, ApplicationWorldPlanner, ApplicationWorldMoonLabels } from './application-world-types.mts';
 
 interface WorldFramesOptions {
@@ -32,6 +32,11 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
     setRotationActive(active: boolean) {
       if (lifetime.disposed) return;
       layer.setRotationActive(active);
+    },
+    setCoasting(active: boolean) {
+      if (lifetime.disposed) return;
+      layer.setCoasting(active);
+      moonLabels.setCoasting(active);
     },
     setNavigationInFlight(active: boolean) {
       if (lifetime.disposed) return;

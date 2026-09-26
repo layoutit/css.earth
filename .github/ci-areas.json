@@ -37,13 +37,13 @@
   "production": [
     ".github/workflows/nightly.yml", ".github/workflows/deploy.yml", ".github/ci-areas.json",
     "tools/ci/ci-affected.mts", "package.json", "pnpm-lock.yaml", "site/**", "astro.config.mts",
-    "src/renderers/css/rendering/**", "tools/prepare-*.mts", "tools/setup*.mts"
+    "packages/renderer/src/rendering/**", "tools/prepare-*.mts", "tools/setup*.mts"
   ],
   "areas": [
     { "id": "docs", "patterns": ["**/*.md", "docs/**", "LICENSE*"], "jobs": [] },
     { "id": "object", "patterns": ["src/objects/*/**"], "jobs": ["universe"] },
     { "id": "preparation", "patterns": ["src/preparation/**", "src/renderers/css/preparation/**", "tools/galaxy-field/**", "tools/contract/test-preparation.mts"], "jobs": ["typecheck", "universePreparation"] },
-    { "id": "renderer", "patterns": ["src/renderers/**"], "jobs": ["typecheck", "universe", "universePreparation"] },
+    { "id": "renderer", "patterns": ["packages/renderer/**", "src/renderers/**"], "jobs": ["typecheck", "universe", "universePreparation"] },
     { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
     { "id": "oracles", "patterns": ["tests/fits/**", "tools/oracles/**"], "jobs": ["typecheck", "universe"] },
     { "id": "nebula", "patterns": ["tools/nebula/**", "labs/nebula/**"], "jobs": ["typecheck", "nebula"] }
