@@ -45,6 +45,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'environment': ['image-layers', 'shell', 'stars', 'density', 'volume'],
   'cluster-catalog': ['galaxy-catalog'],
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
+  'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
 };
 
 /** A topic is a top-level folder of `src/`, except `objects/`, whose every folder is a topic of its own (`objects/color`,

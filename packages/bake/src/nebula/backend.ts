@@ -1,9 +1,9 @@
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 /** Concrete cssEarth representation and point-profile backend; numerical replay stays package-owned. */
-import { compileCssVolume } from '@cssearth/bake/volume-leaves';
+import { compileCssVolume } from '../volume-leaves/index.ts';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
-import type { CompilerBakeBackend } from '@cssearth/bake/volume/node';
-import type { RenderElementProfile as BakeProfile } from '@cssearth/bake/volume';
+import type { CompilerBakeBackend } from '../volume/node/index.ts';
+import type { RenderElementProfile as BakeProfile } from '../volume/index.ts';
 import type { RenderElementProfile as RuntimeProfile } from '@cssearth/renderer/volume/types.ts';
 import { prepareCompilerStarSprites } from './star-sprites.ts';
 import { decodeFits } from '@cssearth/fits';

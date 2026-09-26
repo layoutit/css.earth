@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, symlink, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { packageImplementationPins } from './package-identity.ts';
+import { packageImplementationPins } from '@cssearth/bake/nebula';
 const name = '@fixture/volume';
 async function fixture(root: string, location: string) {
   const owner = join(root, location);

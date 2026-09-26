@@ -5,15 +5,12 @@ import sharp from 'sharp';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import ts from 'typescript';
-import { sanitizeVolumeProvenance } from './volume-provenance.ts';
-import { applicationDeliveryKind, installedDeliveryMatchesRecipe } from './delivery-identity.ts';
-import { prepareNebulaObject, type NebulaResearchBackend } from './objects.ts';
+import { sanitizeVolumeProvenance, applicationDeliveryKind, installedDeliveryMatchesRecipe, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
 import { sha256 } from '@cssearth/core/node';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
-import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
 
 // Run from the repository root with Node's test runner and the tsx loader.
 const root = process.cwd();
@@ -49,7 +46,7 @@ test('consumer preparation reuses a byte-verified delivery across implementation
 });
 
 test('every volume the nebula delivery validates is sanitized, and an explicit bake records the sanitizer', async () => {
-  const path = 'tools/nebula/application/objects.ts', source = await readFile(resolve(root, path), 'utf8');
+  const path = 'packages/bake/src/nebula/objects.ts', source = await readFile(resolve(root, path), 'utf8');
   const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true);
   let validated = 0, sanitized = 0;
   const visit = (node: ts.Node): void => {
@@ -64,9 +61,11 @@ test('every volume the nebula delivery validates is sanitized, and an explicit b
   visit(file);
   assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
   assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
-  // An explicit bake records these owners. `--if-missing` is a consumer path: it verifies the installed byte
-  // closure and recipe without silently rebaking because unrelated runtime code changed.
-  assert.match(source, /'tools\/nebula\/application\/volume-provenance\.ts'/);
+  // An explicit bake records these owners: the sanitizer is in this topic, which the package's implementation inventory hashes.
+  // `--if-missing` is a consumer path: it verifies the installed byte closure and recipe without silently rebaking because
+  // unrelated runtime code changed.
+  const bake = JSON.parse(await readFile(resolve(root, 'packages/bake/package.json'), 'utf8')) as { nebulaImplementation: { directories: string[] } };
+  assert.ok(bake.nebulaImplementation.directories.includes('src/nebula'));
   assert.match(source, /installed\(directory,sha256\(recipeBytes\)\)/);
   assert.doesNotMatch(source, /installed\(directory,sha256\(recipeBytes\),implementationSha256\)/);
 });

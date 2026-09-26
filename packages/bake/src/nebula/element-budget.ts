@@ -1,4 +1,4 @@
-import { type CompilerBakeResult, readRenderElementBudget } from '@cssearth/bake/volume';
+import { type CompilerBakeResult, readRenderElementBudget } from '../volume/index.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { samePreparedVolumeTopology } from '@cssearth/renderer/volume/prepared-volume-lod.ts';
 import { validatePreparedVolumeLenses, type PreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';

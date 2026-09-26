@@ -7,7 +7,7 @@ const test = sourceTest();
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import { evidenceLink, parseInvestigationLedger } from '../investigations/investigation-ledger.mts';
 import { readInvestigationSurveys } from '../investigations/investigation-survey.mts';
-import { applicationDeliveryKind } from '../nebula/application/delivery-identity.ts';
+import { applicationDeliveryKind } from '@cssearth/bake/nebula';
 
 const root = resolve(import.meta.dirname, '../..');
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
