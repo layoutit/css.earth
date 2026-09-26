@@ -14,8 +14,10 @@ export interface WheelZoomInertia {
 /** A pinch moves the log distance left to the closest view: near a body a full pinch
  * leaves a fixed share of it, and far out it zooms by a fixed factor. */
 export interface WheelZoomPinch {
-  /** Pinch wheel delta units per natural-log step of finger distance; a touch pinch is sent in the same units. */
+  /** Trackpad pinch wheel delta units per natural-log step of finger distance. */
   readonly wheelDeltaPerFingerLogStep: number;
+  /** The delta units a two-finger touch pinch is sent with per natural-log step of finger distance. */
+  readonly touchWheelDeltaPerFingerLogStep: number;
   /** The finger-distance ratio of one full pinch. */
   readonly fullPinchFingerRatio: number;
   /** The share of the log distance to the closest view left after a full pinch near a body. */
