@@ -35,7 +35,8 @@ export function tiledTextureKeys(levels: PreparedTextureLevels | undefined): Set
 /** The custom properties a tiled page's leaves read beside its image (paged-ellipsoid scene.mts): the tile's offset and
  * scale, or the page's own (no offset, scale 1) when the level draws the page itself. */
 export function textureTileStyles(name: string, tile: PreparedTextureTile | undefined): readonly (readonly [string, string])[] {
-  return [[`${name}-x`, `${-(tile?.x ?? 0)}px`], [`${name}-y`, `${-(tile?.y ?? 0)}px`], [`${name}-scale`, String(tile?.scale ?? 1)]];
+  // Unitless: the leaves multiply them by inline lengths, which preparation scales with the leaf's raster.
+  return [[`${name}-x`, String(tile?.x ?? 0)], [`${name}-y`, String(tile?.y ?? 0)], [`${name}-scale`, String(tile?.scale ?? 1)]];
 }
 
 /** Faces within this share of the larger viewport side beyond its edge, or this far past the horizon, count as seen,

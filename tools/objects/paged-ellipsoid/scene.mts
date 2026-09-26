@@ -660,11 +660,12 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
     const density = SURFACE_ATLAS.density;
     const size = cell.size / density, page = `--${profile.namespace}-surface-page-${cell.page}`;
     // At a small level the page is a tile of one sheet (texture-levels.mts); the body then publishes the tile's offset and
-    // the sheet's scale beside the image, and the fallbacks are the page's own.
+    // the sheet's scale beside the image, and the fallbacks are the page's own. They are unitless multipliers of inline
+    // lengths, so preparation's raster and leaf-box scaling (projective-layout.mts) scales them with the address.
     return {
       style: `transform:matrix3d(${cell.layer.frameMatrix})` +
         preparedAtlasDimensions(size, size) +
-        `;background-position:calc(var(${page}-x, 0px) - ${cell.x / density}px) calc(var(${page}-y, 0px) - ${cell.y / density}px)` +
+        `;background-position:calc(-1px * var(${page}-x, 0) - ${cell.x / density}px) calc(-1px * var(${page}-y, 0) - ${cell.y / density}px)` +
         `;background-size:calc(${surfaceRasterPlan.pages[cell.page].width / density}px * var(${page}-scale, 1)) auto` +
         `;background-image:var(${page})`,
       projectiveTextureLayer: SEAM_OUTSET

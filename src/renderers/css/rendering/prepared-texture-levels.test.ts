@@ -105,8 +105,8 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
   expect(refined.required).toEqual(['a', 'b']);
   expect(refined.textureTiles).toBeUndefined();
   expect([...tiledTextureKeys(sheet)]).toEqual(['a', 'b']);
-  expect(textureTileStyles('--page-1', sheet.levels[0]!.tiles!.b)).toEqual([['--page-1-x', '-3px'], ['--page-1-y', '0px'], ['--page-1-scale', '2']]);
-  expect(textureTileStyles('--page-1', undefined)).toEqual([['--page-1-x', '0px'], ['--page-1-y', '0px'], ['--page-1-scale', '1']]);
+  expect(textureTileStyles('--page-1', sheet.levels[0]!.tiles!.b)).toEqual([['--page-1-x', '3'], ['--page-1-y', '0'], ['--page-1-scale', '2']]);
+  expect(textureTileStyles('--page-1', undefined)).toEqual([['--page-1-x', '0'], ['--page-1-y', '0'], ['--page-1-scale', '1']]);
   expect(() => requireTextureLevels(sheet, both, new Set(['a', 'b', 'sheet']))).not.toThrow();
   expect(() => requireTextureLevels({ ...sheet, levels: [{ ...sheet.levels[0], tiles: { a: { x: 0, y: 0, scale: 0.5 } } }, sheet.levels[1]] }, both, new Set(['a', 'b', 'sheet']))).toThrow(/tile a/);
 });
