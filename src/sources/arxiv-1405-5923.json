@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-1405-5923",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zellem et al. (2014): The 4.5 µm Full-orbit Phase Curve of the Hot Jupiter HD 209458b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1405.5923"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/790/1/53"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1405.5923",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/790/1/53",
+      "label": "The Astrophysical Journal 790, 53"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1405.5923",
+      "checkedOn": "2026-09-25",
+      "locator": "Section 2.3 phase-curve equation, Table 2 (c1, c2, eclipse depths, radius ratio, maximum and minimum flux and their offsets) and Table 3 (brightness temperatures)"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 790, 53",
+  "creators": [
+    "R. T. Zellem",
+    "N. K. Lewis",
+    "H. A. Knutson",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

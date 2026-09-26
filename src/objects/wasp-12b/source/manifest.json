@@ -20,7 +20,7 @@
     {
       "id": "wasp-12b-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "origin": "Repository-authored raster recipe: the dayside thermal colour and the Bell et al. (2019) 3.6 um phase-curve maps of 2010 and 2013 on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -104,7 +104,7 @@
       "id": "wasp-12b-thermal-color",
       "path": "photometry/thermal-color.json",
       "origin": "https://ui.adsabs.harvard.edu/abs/2010ApJ...716L..36L/abstract",
-      "credit": "L\u00f3pez-Morales et al. 2010, dayside brightness temperature at 0.9 \u00b5m (NASA Exoplanet Archive emission table); CIE 1931 2\u00b0 observer",
+      "credit": "López-Morales et al. 2010, dayside brightness temperature at 0.9 µm (NASA Exoplanet Archive emission table); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Authored method record: names the archive row chosen and the colour computation applied",
       "redistribution": "Method record only",
@@ -135,6 +135,62 @@
             "catalogueId": "source-wasp-12b-emission-spectroscopy",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-12b-bell-2019-phase-curve-2010",
+      "path": "science/bell-2019/phase-curve-2010.json",
+      "origin": "https://arxiv.org/abs/1906.04742",
+      "credit": "Bell et al. (2019), MNRAS 489, 1995; Spitzer program 70060",
+      "displayCredit": "Bell et al. · Spitzer 3.6 µm, 2010",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' LaTeX source, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "bell-2019-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1906-04742",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1906.04742"
+          },
+          {
+            "catalogueId": "arxiv-0803-3622",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/0803.3622"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-12b-bell-2019-phase-curve-2013",
+      "path": "science/bell-2019/phase-curve-2013.json",
+      "origin": "https://arxiv.org/abs/1906.04742",
+      "credit": "Bell et al. (2019), MNRAS 489, 1995; Spitzer program 90186",
+      "displayCredit": "Bell et al. · Spitzer 3.6 µm, 2013",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' LaTeX source, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "bell-2019-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1906-04742",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1906.04742"
+          },
+          {
+            "catalogueId": "arxiv-0803-3622",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/0803.3622"
           }
         ]
       }

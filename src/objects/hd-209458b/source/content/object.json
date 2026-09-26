@@ -52,6 +52,66 @@
         },
         "falseColor": false,
         "notes": "The colour of HD 209458 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Zellem et al. 2014 · Spitzer 4.5 µm, 2010 · longitude only",
+        "thumbnail": "hd-209458b-lens-temperature.webp",
+        "surface": "hd-209458b-surface-temperature@2x.webp",
+        "poles": "hd-209458b-poles-temperature@2x.webp",
+        "source": {
+          "id": "hd-209458b-zellem-2014-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1405.5923"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "850",
+            "1225",
+            "1600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "850",
+              "1225",
+              "1600"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1405.5923"
+        },
+        "notes": "Brightness temperature at 4.5 µm from Zellem et al. (2014)'s published fit to a Spitzer phase curve of January 2010. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 41° east of noon. The false colour runs from 850 to 1,600 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

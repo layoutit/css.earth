@@ -48,6 +48,11 @@
       "title": "Dayside heat",
       "detail": "From its dayside temperature",
       "summary": "The colour of a black body at the 1,499 K day side measured in eclipse."
+    },
+    "temperature": {
+      "title": "Spitzer heat map",
+      "detail": "Published fit, 2010",
+      "summary": "Heat at 4.5 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
     }
   }
 }

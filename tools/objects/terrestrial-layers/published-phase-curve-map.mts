@@ -1,10 +1,15 @@
 /** A planet's brightness-temperature map drawn from a published phase-curve fit: the paper's own model and table values, no refit.
  *
- * Three published model forms are read:
+ * These published model forms are read:
  * - `two-term-sinusoid`: F_p(t) = A1 cos[2 pi (t - t1)/p] + A2 cos[4 pi (t - t2)/p] + c, with c set so that F_p at mid-eclipse is the
  *   eclipse depth (the planet's whole day side). Cowan & Agol (2008, ApJ 678, L129, eq. 5) give the unique longitudinal map of such a
  *   curve for an edge-on orbit: each map sinusoid of order j makes a light-curve sinusoid of the same order and phase, scaled by
  *   2 (j = 0), pi/2 (j = 1) and 2/3 (j = 2). The map carries no latitude information and is drawn the same at every latitude.
+ * - `fourier-from-transit`: F_p = c0 + c1 cos(2 pi t/P) + c2 sin(2 pi t/P) with t counted from mid-transit (Zellem et al. 2014, their
+ *   phase-curve equation). The paper does not print c0; as for the two-term sinusoid, F_p at mid-eclipse is the eclipse depth.
+ * - `eclipse-normalized-fourier`: F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi + C2 (cos 2psi - 1) + D2 sin 2psi] with psi counted
+ *   from mid-eclipse (Bell et al. 2019, section 3.1; the SPCA form of Bell et al. 2021, section 4.1). F_day is the eclipse depth.
+ *   The last two are the same Fourier series as the first, written from another phase origin, and take the same Cowan & Agol map.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
  *   (`@cssearth/telescope/node`, spiderman.ts).
  * - `starry`: the fit's starry map (amplitude, spherical-harmonic coefficients and phase offset), evaluated by starry itself
@@ -33,12 +38,18 @@ import { starryMapGrid, type StarryMap, type StarrySystem } from '@cssearth/tele
 const cell = (value: unknown, label: string) => requireFiniteNumber(requireRecord(value, label).value, `${label}.value`);
 
 export interface TwoTermSinusoid { readonly kind: 'two-term-sinusoid'; readonly periodDays: number; readonly a1: number; readonly t1: number; readonly a2: number; readonly t2: number; readonly eclipseTime: number }
+/** Zellem et al. (2014)'s form: cosine and sine of the orbital angle from mid-transit, as fractions of the star's flux. */
+export interface FourierFromTransit { readonly kind: 'fourier-from-transit'; readonly cos1: number; readonly sin1: number }
+/** Bell et al. (2019)'s form: the first- and second-order terms as fractions of the eclipse depth, angle from mid-eclipse. */
+export interface EclipseNormalizedFourier { readonly kind: 'eclipse-normalized-fourier'; readonly c1: number; readonly d1: number; readonly c2: number; readonly d2: number }
+export type FourierPhaseCurve = TwoTermSinusoid | FourierFromTransit | EclipseNormalizedFourier;
 export interface SpidermanModel { readonly kind: 'spiderman-spherical'; readonly map: SpidermanSphericalMap; readonly dilution: number;
   readonly orbit: { readonly periodDays: number; readonly semiMajorAxisAu: number; readonly semiMajorAxisStellarRadii: number; readonly inclinationDegrees: number } }
 export interface PublishedPhaseCurve {
   readonly source: string; readonly wavelengthMicrons: number; readonly eclipseDepth: number; readonly radiusRatio: number;
-  readonly model: TwoTermSinusoid | SpidermanModel;
-  readonly reported: { readonly daysideK: number; readonly nightsideK: number; readonly offsetDegrees: number; readonly amplitude?: number; readonly semiAmplitude?: number };
+  readonly model: FourierPhaseCurve | SpidermanModel;
+  readonly reported: { readonly daysideK: number; readonly nightsideK?: number; readonly hottestHemisphereK?: number; readonly coldestHemisphereK?: number;
+    readonly offsetDegrees: number; readonly amplitude?: number; readonly semiAmplitude?: number };
 }
 /** The authors' deposited spectra that convert a white-light starry map to brightness temperature (see the header). */
 export interface DepositedChannels {
@@ -86,10 +97,16 @@ export function parsePublishedPhaseCurve(value: unknown): PublishedPhaseCurve {
   if (input.schema !== 'cssearth-published-phase-curve@1') throw new TypeError('A published phase curve uses cssearth-published-phase-curve@1.');
   const model = requireRecord(input.model, 'model'), reported = requireRecord(input.reported, 'reported');
   const optional = (key: string) => reported[key] === undefined ? undefined : cell(reported[key], `reported.${key}`);
-  let parsed: TwoTermSinusoid | SpidermanModel;
+  let parsed: FourierPhaseCurve | SpidermanModel;
   if (model.kind === 'two-term-sinusoid') {
     parsed = { kind: 'two-term-sinusoid', periodDays: cell(model.periodDays, 'model.periodDays'), a1: cell(model.a1, 'model.a1'), t1: cell(model.t1, 'model.t1'),
       a2: cell(model.a2, 'model.a2'), t2: cell(model.t2, 'model.t2'), eclipseTime: cell(model.eclipseTime, 'model.eclipseTime') };
+  } else if (model.kind === 'fourier-from-transit') {
+    parsed = { kind: 'fourier-from-transit', cos1: cell(model.cos1, 'model.cos1'), sin1: cell(model.sin1, 'model.sin1') };
+  } else if (model.kind === 'eclipse-normalized-fourier') {
+    // A first-order fit prints no second-order terms; they are zero, not unknown.
+    const second = (key: string) => model[key] === undefined ? 0 : cell(model[key], `model.${key}`);
+    parsed = { kind: 'eclipse-normalized-fourier', c1: cell(model.c1, 'model.c1'), d1: cell(model.d1, 'model.d1'), c2: second('c2'), d2: second('d2') };
   } else if (model.kind === 'spiderman-spherical') {
     const map = requireRecord(model.spiderman, 'model.spiderman'), orbit = requireRecord(model.orbit, 'model.orbit');
     parsed = { kind: 'spiderman-spherical', dilution: cell(model.dilution, 'model.dilution'),
@@ -100,8 +117,9 @@ export function parsePublishedPhaseCurve(value: unknown): PublishedPhaseCurve {
   } else throw new TypeError(`Unknown published phase-curve model ${String(model.kind)}.`);
   return { source: requireString(input.source, 'source'), wavelengthMicrons: requireFiniteNumber(input.wavelengthMicrons, 'wavelengthMicrons'),
     eclipseDepth: cell(input.eclipseDepth, 'eclipseDepth'), radiusRatio: cell(input.radiusRatio, 'radiusRatio'), model: parsed,
-    reported: { daysideK: cell(reported.daysideK, 'reported.daysideK'), nightsideK: cell(reported.nightsideK, 'reported.nightsideK'),
-      offsetDegrees: cell(reported.offsetDegrees, 'reported.offsetDegrees'), amplitude: optional('amplitude'), semiAmplitude: optional('semiAmplitude') } };
+    reported: { daysideK: cell(reported.daysideK, 'reported.daysideK'), nightsideK: optional('nightsideK'), hottestHemisphereK: optional('hottestHemisphereK'),
+      coldestHemisphereK: optional('coldestHemisphereK'), offsetDegrees: cell(reported.offsetDegrees, 'reported.offsetDegrees'), amplitude: optional('amplitude'),
+      semiAmplitude: optional('semiAmplitude') } };
 }
 
 /** Temperature whose Planck radiance at `wavelengthMicrons` is `ratio` times that of `referenceK`; null when the ratio is not positive. */
@@ -119,11 +137,21 @@ export function impliedStellarTemperature(eclipseDepth: number, radiusRatio: num
   return (low + high) / 2;
 }
 
+/** The model's cosine and sine terms in the angle xi = 2 pi (t - t_eclipse) / p, as fractions of the star's flux. */
+function eclipseFourierTerms(model: FourierPhaseCurve, eclipseDepth: number) {
+  if (model.kind === 'two-term-sinusoid') {
+    const xi1 = 2 * Math.PI * (model.t1 - model.eclipseTime) / model.periodDays, xi2 = 4 * Math.PI * (model.t2 - model.eclipseTime) / model.periodDays;
+    return { c1: model.a1 * Math.cos(xi1), d1: model.a1 * Math.sin(xi1), c2: model.a2 * Math.cos(xi2), d2: model.a2 * Math.sin(xi2) };
+  }
+  // The angle from mid-transit is xi + pi, so its first-order cosine and sine change sign.
+  if (model.kind === 'fourier-from-transit') return { c1: -model.cos1, d1: -model.sin1, c2: 0, d2: 0 };
+  return { c1: eclipseDepth * model.c1, d1: eclipseDepth * model.d1, c2: eclipseDepth * model.c2, d2: eclipseDepth * model.d2 };
+}
+
 /** Fourier terms of the sinusoid in the angle xi = 2 pi (t - t_eclipse) / p, and the Cowan & Agol (2008, eq. 5) map terms. At xi the
  * observer faces longitude -xi, with longitude 0 at the substellar point and increasing eastward (the direction of rotation). */
-export function sinusoidMap(model: TwoTermSinusoid, eclipseDepth: number) {
-  const xi1 = 2 * Math.PI * (model.t1 - model.eclipseTime) / model.periodDays, xi2 = 4 * Math.PI * (model.t2 - model.eclipseTime) / model.periodDays;
-  const c1 = model.a1 * Math.cos(xi1), d1 = model.a1 * Math.sin(xi1), c2 = model.a2 * Math.cos(xi2), d2 = model.a2 * Math.sin(xi2);
+export function sinusoidMap(model: FourierPhaseCurve, eclipseDepth: number) {
+  const { c1, d1, c2, d2 } = eclipseFourierTerms(model, eclipseDepth);
   const f0 = eclipseDepth - c1 - c2;
   const map = { a0: f0 / 2, a1: c1 / (Math.PI / 2), b1: -d1 / (Math.PI / 2), a2: c2 / (2 / 3), b2: -d2 / (2 / 3) };
   const flux = (xi: number) => f0 + c1 * Math.cos(xi) + d1 * Math.sin(xi) + c2 * Math.cos(2 * xi) + d2 * Math.sin(2 * xi);
@@ -134,9 +162,9 @@ export function sinusoidMap(model: TwoTermSinusoid, eclipseDepth: number) {
 
 /** Samples of a periodic function of xi: its maximum, minimum and the xi of the maximum. */
 function extremes(flux: (xi: number) => number, steps = 72000) {
-  let max = -Infinity, min = Infinity, at = 0;
-  for (let i = 0; i < steps; i++) { const xi = -Math.PI + 2 * Math.PI * i / steps, f = flux(xi); if (f > max) { max = f; at = xi; } if (f < min) min = f; }
-  return { max, min, peakXi: at };
+  let max = -Infinity, min = Infinity, at = 0, troughAt = 0;
+  for (let i = 0; i < steps; i++) { const xi = -Math.PI + 2 * Math.PI * i / steps, f = flux(xi); if (f > max) { max = f; at = xi; } if (f < min) { min = f; troughAt = xi; } }
+  return { max, min, peakXi: at, troughXi: troughAt };
 }
 
 export async function loadPublishedPhaseCurveMap(root: string, value: unknown) {
@@ -150,16 +178,18 @@ export async function loadPublishedPhaseCurveMap(root: string, value: unknown) {
   const toK = (ratio: number) => brightnessTemperature(ratio, starK, wavelength);
   const common = { format: 'published-phase-curve-map', units: 'K', source: record.source, wavelengthMicrons: wavelength, stellarBandTemperatureK: starK };
 
-  if (record.model.kind === 'two-term-sinusoid') {
-    const { map, flux, slice } = sinusoidMap(record.model, eclipseDepth), { max, min, peakXi } = extremes(flux);
+  if (record.model.kind !== 'spiderman-spherical') {
+    const { map, flux, slice } = sinusoidMap(record.model, eclipseDepth), { max, min, peakXi, troughXi } = extremes(flux);
     const nightFlux = flux(Math.PI);
+    // Only the Fourier forms added after KELT-9b report the coldest hemisphere and the trough, so its report keeps its shape.
+    const trough = record.model.kind === 'two-term-sinusoid' ? {} : { coldestHemisphereK: toK(min / k ** 2), troughDegreesBeforeTransit: -troughXi * 180 / Math.PI + (troughXi < 0 ? -180 : 180) };
     return {
       sample(longitude: number, latitude: number) {
         if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
         return toK(2 * slice(longitude) / k ** 2);
       },
-      report: { ...common, model: 'two-term-sinusoid, Cowan & Agol (2008) longitudinal map, uniform in latitude', mapTerms: map,
-        derived: { daysideK: toK(eclipseDepth / k ** 2), nightsideK: toK(nightFlux / k ** 2), hottestHemisphereK: toK(max / k ** 2),
+      report: { ...common, model: `${record.model.kind}, Cowan & Agol (2008) longitudinal map, uniform in latitude`, mapTerms: map,
+        derived: { daysideK: toK(eclipseDepth / k ** 2), nightsideK: toK(nightFlux / k ** 2), hottestHemisphereK: toK(max / k ** 2), ...trough,
           amplitude: (max - min) / max, peakDegreesBeforeEclipse: -peakXi * 180 / Math.PI },
         reported: record.reported },
     };

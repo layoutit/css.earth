@@ -64,7 +64,127 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...716L..36L/abstract"
         },
         "falseColor": false,
-        "notes": "The colour of WASP-12 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 0.9 \u00b5m (Astrophysical Research Consortium (ARC) 3.5m Telescope At Apache Point Observatory (APO) Seaver Prototype Imaging camera (SPICam)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+        "notes": "The colour of WASP-12 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 0.9 µm (Astrophysical Research Consortium (ARC) 3.5m Telescope At Apache Point Observatory (APO) Seaver Prototype Imaging camera (SPICam)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature-2010",
+        "label": "Spitzer 2010",
+        "qualification": "Published fit · Bell et al. 2019 · Spitzer 3.6 µm, 2010 · longitude only · the 2013 visit disagrees",
+        "thumbnail": "wasp-12b-lens-temperature-2010.webp",
+        "surface": "wasp-12b-surface-temperature-2010@2x.webp",
+        "poles": "wasp-12b-poles-temperature-2010@2x.webp",
+        "source": {
+          "id": "wasp-12b-bell-2019-phase-curve-2010",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1906.04742"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1000",
+            "2050",
+            "3100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1000",
+              "2050",
+              "3100"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1906.04742"
+        },
+        "notes": "Brightness temperature at 3.6 µm from Bell et al. (2019)'s fit to a Spitzer phase curve of 2010. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail. Here the hottest longitude is 33° east of noon. Three years later the same camera saw it 14° west (the 2013 lens): the two visits disagree, and the paper counts it as 6.4σ evidence that the offset changes. The false colour runs from 1,000 to 3,100 K. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "temperature-2013",
+        "label": "Spitzer 2013",
+        "qualification": "Published fit · Bell et al. 2019 · Spitzer 3.6 µm, 2013 · longitude only · the 2010 visit disagrees",
+        "thumbnail": "wasp-12b-lens-temperature-2013.webp",
+        "surface": "wasp-12b-surface-temperature-2013@2x.webp",
+        "poles": "wasp-12b-poles-temperature-2013@2x.webp",
+        "source": {
+          "id": "wasp-12b-bell-2019-phase-curve-2013",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1906.04742"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1000",
+            "2050",
+            "3100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1000",
+              "2050",
+              "3100"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1906.04742"
+        },
+        "notes": "Brightness temperature at 3.6 µm from Bell et al. (2019)'s fit to a Spitzer phase curve of 2013. Their one sinusoid becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail. Here the hottest longitude is 14° west of noon. Three years earlier the same camera saw it 33° east (the 2010 lens): the two visits disagree, and the paper counts it as 6.4σ evidence that the offset changes. The false colour runs from 1,000 to 3,100 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

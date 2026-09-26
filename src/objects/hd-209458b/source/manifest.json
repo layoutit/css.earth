@@ -20,7 +20,7 @@
     {
       "id": "hd-209458b-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "origin": "Repository-authored raster recipe: the dayside thermal colour and the Zellem et al. (2014) phase-curve map on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -135,6 +135,34 @@
             "catalogueId": "source-hd-209458b-emission-spectroscopy",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-209458b-zellem-2014-phase-curve",
+      "path": "science/zellem-2014/phase-curve.json",
+      "origin": "https://arxiv.org/abs/1405.5923",
+      "credit": "Zellem et al. (2014), ApJ 790, 53; Spitzer program 60021",
+      "displayCredit": "Zellem et al. · Spitzer 4.5 µm",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' LaTeX source, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "zellem-2014-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1405-5923",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1405.5923"
+          },
+          {
+            "catalogueId": "arxiv-0803-3622",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/0803.3622"
           }
         ]
       }

@@ -28,6 +28,42 @@
         "kind": "dayside-thermal-color",
         "qualification": "Colour of a black body at the dayside brightness temperature 1,499 K measured in secondary eclipse at 4.5 µm (Zellem et al. 2014, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body colour lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
+    },
+    {
+      "id": "temperature",
+      "output": "hd-209458b-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-209458b-lens-{id}.webp",
+      "source": "science/zellem-2014/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Spitzer",
+        "format": "published-phase-curve-map",
+        "path": "science/zellem-2014/phase-curve.json",
+        "consumer": "zellem-2014-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 850,
+        "maximum": 1600,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "850",
+          "1225",
+          "1600"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's one-sinusoid phase-curve fit, turned into a map of longitude (Cowan & Agol 2008). It has no north-south information.",
+        "title": "Spitzer 4.5 µm · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/1405.5923"
+      }
     }
   ],
   "lighting": {

@@ -60,6 +60,60 @@ test('KELT-9b: Mansfield et al. (2020)\'s sinusoids reproduce their amplitude, n
   assert.ok(hottest > 10 && hottest < 30, `hottest longitude ${hottest}`);
 });
 
+test('HD 209458b: Zellem et al. (2014)\'s c1 and c2, counted from transit, give back their Table 2 curve and Table 3 temperatures', async () => {
+  const path = 'science/zellem-2014/phase-curve.json', source = new URL('hd-209458b/source/', objects);
+  const raw = JSON.parse(await readFile(new URL(path, source), 'utf8')) as { reported: Record<string, { value: number }> };
+  const zellem = parsePublishedPhaseCurve(raw);
+  if (zellem.model.kind !== 'fourier-from-transit') throw new TypeError('HD 209458b is a Fourier series counted from transit.');
+  const { flux, slice } = sinusoidMap(zellem.model, zellem.eclipseDepth);
+  // The Cowan & Agol map, integrated over the visible hemisphere, gives the curve back (their equation 4, midpoint rule).
+  for (const degrees of [-150, -40.8, 0, 90, 139.2]) {
+    const xi = degrees * Math.PI / 180, steps = 20000, from = -xi - Math.PI / 2, step = Math.PI / steps;
+    let sum = 0; for (let i = 0; i < steps; i++) { const phi = from + (i + 0.5) * step; sum += slice(phi * 180 / Math.PI) * Math.cos(phi + xi) * step; }
+    assert.ok(Math.abs(sum - flux(xi)) < 1e-9, `${degrees} degrees: ${sum} vs ${flux(xi)}`);
+  }
+  // Table 2: the planet's flux peaks at 1.001527 - 1 and bottoms at 1.000443 - 1 (star = 1), 40.9 +/- 6.0 degrees before eclipse and transit.
+  const map = await loadPublishedPhaseCurveMap(source.pathname, { path });
+  const { derived, stellarBandTemperatureK } = map.report as unknown as { derived: Record<string, number>; stellarBandTemperatureK: number };
+  let max = -Infinity, min = Infinity;
+  for (let i = 0; i < 36000; i++) { const f = flux(-Math.PI + 2 * Math.PI * i / 36000); max = Math.max(max, f); min = Math.min(min, f); }
+  assert.ok(Math.abs(max - (raw.reported.maximumFlux!.value - 1)) <= 0.000036, `maximum ${max}`);
+  assert.ok(Math.abs(min - (raw.reported.minimumFlux!.value - 1)) <= 0.000067, `minimum ${min}`);
+  assert.ok(Math.abs(derived.peakDegreesBeforeEclipse! - 40.9) <= 6.0 && Math.abs(derived.peakDegreesBeforeEclipse! - 40.81) < 0.01, `peak ${derived.peakDegreesBeforeEclipse}`);
+  assert.ok(Math.abs(derived.troughDegreesBeforeTransit! - 40.81) < 0.01, `trough ${derived.troughDegreesBeforeTransit}`);
+  // Table 3: the second eclipse (1443 K) sets the star; the curve's maximum and minimum then give 1499 +/- 15 K and 972 +/- 44 K.
+  assert.ok(Math.abs(derived.daysideK! - 1443) < 1e-6);
+  assert.ok(Math.abs(derived.hottestHemisphereK! - 1499) <= 15, `hottest hemisphere ${derived.hottestHemisphereK}`);
+  assert.ok(Math.abs(derived.coldestHemisphereK! - 972) <= 44, `coldest hemisphere ${derived.coldestHemisphereK}`);
+  assert.ok(Math.abs(stellarBandTemperatureK - 5587.6) < 0.1, `star ${stellarBandTemperatureK}`);
+  // A first-order map: its hottest longitude is the curve's offset, east of noon, and every latitude is drawn alike.
+  let hottest = -180, peak = -Infinity;
+  for (let lon = -180; lon < 180; lon += 0.1) { const t = map.sample(lon, 0)!; if (t > peak) { peak = t; hottest = lon; } }
+  assert.ok(Math.abs(hottest - 40.8) < 0.11, `hottest longitude ${hottest}`);
+  assert.equal(map.sample(-120, 45), map.sample(-120, -45));
+});
+
+test('WASP-12b: Bell et al. (2019)\'s two 3.6 µm visits give their table\'s day and night sides and peaks on opposite sides of noon', async () => {
+  const source = new URL('wasp-12b/source/', objects);
+  // Table A2, fiducial PLD first-order fits: night side 1510 +/- 210 K (2010) and 1760 +/- 97 K (2013); offsets 32.6 +/- 6.2 degrees
+  // before eclipse (2010) and 13.6 +/- 3.8 after (2013).
+  for (const [year, nightK, nightError, offset, offsetError] of [[2010, 1510, 210, 32.6, 6.2], [2013, 1760, 97, -13.6, 3.8]] as const) {
+    const map = await loadPublishedPhaseCurveMap(source.pathname, { path: `science/bell-2019/phase-curve-${year}.json` });
+    const { derived, stellarBandTemperatureK } = map.report as unknown as { derived: Record<string, number>; stellarBandTemperatureK: number };
+    assert.ok(Math.abs(derived.nightsideK! - nightK) <= nightError, `${year} night side ${derived.nightsideK}`);
+    assert.ok(Math.abs(derived.daysideK! - (year === 2010 ? 2744 : 2813)) < 1e-6, `${year} day side`);
+    assert.ok(Math.abs(derived.peakDegreesBeforeEclipse! - offset) <= offsetError, `${year} peak ${derived.peakDegreesBeforeEclipse}`);
+    // SPCA's first-order offset is -atan2(D1, C1) (Bell et al. 2021, section 4.1); the curve's peak is that same angle.
+    const record = parsePublishedPhaseCurve(JSON.parse(await readFile(new URL(`science/bell-2019/phase-curve-${year}.json`, source), 'utf8')));
+    if (record.model.kind !== 'eclipse-normalized-fourier') throw new TypeError('WASP-12b is an eclipse-normalized Fourier fit.');
+    assert.ok(Math.abs(derived.peakDegreesBeforeEclipse! + Math.atan2(record.model.d1, record.model.c1) * 180 / Math.PI) < 0.01);
+    // The table's 3.6 µm day and night sides follow a star near 6,030 K, not the 5,800 K appendix B prints for 3.6 µm (README).
+    assert.ok(Math.abs(stellarBandTemperatureK - 6032) < 1.5, `${year} star ${stellarBandTemperatureK}`);
+    const east = map.sample(30, 0)!, west = map.sample(-30, 0)!;
+    assert.ok(year === 2010 ? east > west : west > east, `${year}: 30 degrees east ${east} K, west ${west} K`);
+  }
+});
+
 test('WASP-76b: SPIDERMAN evaluates May et al. (2021)\'s dipole to their day side and near their night side', async () => {
   const map = await loadPublishedPhaseCurveMap(new URL('wasp-76b/source', objects).pathname, { path: 'science/may-2021/phase-curve.json' });
   const report = map.report as unknown as { spiderman: string; derived: Record<string, number> };

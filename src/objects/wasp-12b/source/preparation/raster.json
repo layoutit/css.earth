@@ -26,7 +26,79 @@
       "falseColor": false,
       "science": {
         "kind": "dayside-thermal-color",
-        "qualification": "Colour of a black body at the dayside brightness temperature 3,028 K measured in secondary eclipse at 0.9 \u00b5m (L\u00f3pez-Morales et al. 2010, dayside brightness temperature at 0.9 \u00b5m (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+        "qualification": "Colour of a black body at the dayside brightness temperature 3,028 K measured in secondary eclipse at 0.9 µm (López-Morales et al. 2010, dayside brightness temperature at 0.9 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+      }
+    },
+    {
+      "id": "temperature-2010",
+      "output": "wasp-12b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-12b-lens-{id}.webp",
+      "source": "science/bell-2019/phase-curve-2010.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2010",
+        "label": "Spitzer 2010",
+        "format": "published-phase-curve-map",
+        "path": "science/bell-2019/phase-curve-2010.json",
+        "consumer": "bell-2019-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1000,
+        "maximum": 3100,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "1000",
+          "2050",
+          "3100"
+        ],
+        "description": "Brightness temperature at 3.6 µm from the paper's one-sinusoid fit to the 2010 phase curve, turned into a map of longitude (Cowan & Agol 2008). It has no north-south information. The 2013 visit peaks on the other side of noon.",
+        "title": "Spitzer 3.6 µm, 2010 · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/1906.04742"
+      }
+    },
+    {
+      "id": "temperature-2013",
+      "output": "wasp-12b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-12b-lens-{id}.webp",
+      "source": "science/bell-2019/phase-curve-2013.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-2013",
+        "label": "Spitzer 2013",
+        "format": "published-phase-curve-map",
+        "path": "science/bell-2019/phase-curve-2013.json",
+        "consumer": "bell-2019-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1000,
+        "maximum": 3100,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "1000",
+          "2050",
+          "3100"
+        ],
+        "description": "Brightness temperature at 3.6 µm from the paper's one-sinusoid fit to the 2013 phase curve, turned into a map of longitude (Cowan & Agol 2008). It has no north-south information. The 2010 visit peaks on the other side of noon.",
+        "title": "Spitzer 3.6 µm, 2013 · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/1906.04742"
       }
     }
   ],
