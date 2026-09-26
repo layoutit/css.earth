@@ -22,17 +22,24 @@ function earthDetail(): WorldContextView {
   };
 }
 
-test('close Earth detail requests its moon family, not unrelated solar or comet paths', () => {
+test('close Earth detail defers orbit banks until a system or targeted path needs them', () => {
   const planner = createWorldContextPlanner(summary), view = earthDetail();
   planner(view);
   const wanted = planner.takeWantedOrbits();
-  expect(wanted).toContain('moon');
-  expect(wanted.every(id => summary.bodies.find(body => body.id === id)?.orbit?.centerBodyId === 'earth')).toBe(true);
+  expect(wanted).toEqual([]);
 
   // An explicit hover makes that path relevant even while the Earth fills the view.
   view.bodies[points.findIndex(body => body.id === 'comet-67p')]!.hovered = true;
   planner(view);
   expect(planner.takeWantedOrbits()).toContain('comet-67p');
+
+  // Opening the host's system makes its satellite orbit readable and requests its bank.
+  view.bodies[points.findIndex(body => body.id === 'comet-67p')]!.hovered = false;
+  view.overview = true;
+  view.world = { ...view.world, pose: { ...view.world.pose,
+    positionM: [earth.positionM[0], earth.positionM[1], earth.positionM[2] + 5e9] } };
+  planner(view);
+  expect(planner.takeWantedOrbits()).toContain('moon');
 
   // The wider world resumes its normal orbit demand instead of dropping those paths permanently.
   view.selectedId = 'sun'; view.overview = true;
