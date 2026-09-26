@@ -9,7 +9,7 @@ import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';
+import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 const root = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');

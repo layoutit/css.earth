@@ -89,7 +89,7 @@ images and occultations; 1999 JV6 adds radar images, which show its two lobes; N
 
 ## Preparation
 
-[shape-material.mts](../tools/objects/terrestrial-layers/shape-material.mts) owns
+[shape-material.ts](../packages/bake/src/objects/layers/terrestrial/shape-material.ts) owns
 the color. The full terrestrial preparer uses it for every shape view. A constant
 material avoids cylindrical image sampling when baking the ordinary mesh atlas;
 its encoded default and Shadows-on lighting are checked against the general texture path.

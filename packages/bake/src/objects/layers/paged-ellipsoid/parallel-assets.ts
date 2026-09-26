@@ -9,8 +9,10 @@ const MAXIMUM_WORKERS = 6;
 
 /** Prepare a paged ellipsoid's assets in worker threads: each surface map, the extras and slices of the material frames
  * run at once. Every job writes a disjoint set of files with the same code as a single run, so the outputs are the same.
+ * `worker` is the host's module that runs one job with `workerData` `{ objectDirectory, publicDirectory, job }` and posts
+ * back the files it wrote; it reads the body's files, so it stays with the host.
  * `materialsOnly` runs the atmosphere material slices alone; they read no surface imagery. */
-export async function preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames, materialsOnly = false }: { objectDirectory: string; publicDirectory: string; mapNames: readonly string[]; materialsOnly?: boolean }) {
+export async function preparePagedEllipsoidAssetsInParallel({ worker: workerModule, objectDirectory, publicDirectory, mapNames, materialsOnly = false }: { worker: URL; objectDirectory: string; publicDirectory: string; mapNames: readonly string[]; materialsOnly?: boolean }) {
   const workers = Math.max(1, Math.min(MAXIMUM_WORKERS, availableParallelism() - 2));
   const slices = workers;
   // Longest first (Earth, 2026-09-24): the extras take about 115 s, a surface map 80 s, a sixth of the materials 55 s.
@@ -19,7 +21,7 @@ export async function preparePagedEllipsoidAssetsInParallel({ objectDirectory, p
   const assets = new Set<string>();
   let next = 0;
   const run = (job: PagedAssetJob) => new Promise<void>((done, fail) => {
-    const worker = new Worker(new URL('./asset-worker.mts', import.meta.url), { workerData: { objectDirectory, publicDirectory, job } });
+    const worker = new Worker(workerModule, { workerData: { objectDirectory, publicDirectory, job } });
     let received = false;
     worker.once('message', (produced: unknown) => {
       if (!Array.isArray(produced) || produced.some(item => typeof item !== 'string')) { fail(new TypeError(`${objectDirectory}: asset job ${JSON.stringify(job)} returned an invalid file list.`)); return; }

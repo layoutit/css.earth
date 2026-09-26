@@ -14,7 +14,7 @@ import { prepareEllipsoidAttitude } from './attitude.mts';
 const json = readJsonSource;
 
 /** Read and check a paged ellipsoid's recipe and sources, and plan its scene. The preparation and each of its parallel
- * asset workers (parallel-assets.mts) build their context here, so every stage reads the same inputs. */
+ * asset workers (asset-worker.mts) build their context here, so every stage reads the same inputs. */
 export async function readPagedEllipsoid(objectDirectory: string) {
   const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };

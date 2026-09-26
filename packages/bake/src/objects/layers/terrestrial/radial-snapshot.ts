@@ -1,6 +1,6 @@
-import type { PreparedTriangle } from '@cssearth/bake/objects/geometry';
+import type { PreparedTriangle } from '../../geometry/index.ts';
 import sharp from 'sharp';
-import { missingCoverageColor } from '@cssearth/bake/raster';
+import { missingCoverageColor } from '../../../raster/index.ts';
 import { dotN as dot } from '@cssearth/core';
 
 /** An orthographic, full-phase context image from the same prepared surface

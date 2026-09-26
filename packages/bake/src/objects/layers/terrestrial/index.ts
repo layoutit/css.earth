@@ -1,5 +1,5 @@
-// `@cssearth/bake/objects/layers/terrestrial` (Node only): the shared libraries of the terrestrial layer pipeline; its entry scripts,
-// manifest-named generators and host-bound modules stay in tools/objects.
+// `@cssearth/bake/objects/layers/terrestrial` (Node only): the shared libraries of the terrestrial layer pipeline; its entry scripts
+// and host-bound modules stay in tools/objects.
 export * from './alternative-lenses.ts';
 export * from './contact-ellipsoids.ts';
 export * from './contracts.ts';
@@ -22,8 +22,11 @@ export * from './missions/near-msi.ts';
 export * from './missions/new-horizons-geo.ts';
 export * from './missions/osiris-geo.ts';
 export * from './missions/pds4-geometry-cube.ts';
+export * from './missions/spice-camera.ts';
 export * from './native-photograph-source.ts';
 export * from './native-photograph.ts';
+export * from './pds-constraint-map.ts';
+export * from './radial-snapshot.ts';
 export * from './radial-source.ts';
 export * from './raster-grid.ts';
 export * from './raster-output.ts';
@@ -35,6 +38,7 @@ export * from './registration/registration-sweeps.ts';
 export * from './registration/spin-record-reading.ts';
 export * from './registration/strip-refinement.ts';
 export * from './retained-atlas.ts';
+export * from './shape-material.ts';
 export * from './solid-source.ts';
 export * from './source-mesh-lighting.ts';
 export * from './triangle-alpha-atlas.ts';

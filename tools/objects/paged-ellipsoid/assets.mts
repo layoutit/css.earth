@@ -30,7 +30,7 @@ import { applyDisplayGamma } from "@cssearth/bake/objects/layers/paged-ellipsoid
 
 
 /** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials. `materialSlice` runs
- * every `count`th material image from `index`, so parallel workers each write a disjoint share (parallel-assets.mts). */
+ * every `count`th material image from `index`, so parallel workers each write a disjoint share (preparePagedEllipsoidAssetsInParallel). */
 export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude, materialSlice = { index: 0, count: 1 } }: {attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]; materialSlice?: {index: number; count: number}}) {
 const { bakeSurfaceRaster, surfacePageUrls } = raster;
 const requireMaterialPreparation=()=>{

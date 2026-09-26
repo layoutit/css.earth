@@ -6,6 +6,7 @@ export * from './elevation.ts';
 export * from './enso-advisory.ts';
 export * from './interior-poles.ts';
 export * from './night-lights.ts';
+export * from './parallel-assets.ts';
 export * from './scene-contract.ts';
 export * from './source-contract.ts';
 export * from './sst-anomaly.ts';

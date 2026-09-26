@@ -1,4 +1,4 @@
-import {decodeProfile} from '@cssearth/bake/objects/raster';
+import {decodeProfile} from '../../raster/index.ts';
 import {shape,number,text,optional,array,dictionary} from '@cssearth/core';
 interface ConstraintMesh {
   coordinates?: readonly number[][]; constraintFlags?: ArrayLike<number>; faceProvenance?: ArrayLike<number>;
@@ -11,7 +11,7 @@ function validFlags(flags: ArrayLike<number>, allowed: readonly number[]) {
   return true;
 }
 import sharp from 'sharp';
-import { paintMissingCoverage } from '@cssearth/bake/raster';
+import { paintMissingCoverage } from '../../../raster/index.ts';
 
 /** Map the archive's categorical vertex flags, with nearest-grid sampling.
  * Colours are an authored legend, never a surface photograph or albedo map. */

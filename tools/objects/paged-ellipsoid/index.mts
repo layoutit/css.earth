@@ -9,7 +9,6 @@ import { verifySourceManifest } from '../../../src/platform/source-manifest.mts'
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import type { preparePagedEllipsoidAssets } from './assets.mts';
-import { preparePagedEllipsoidAssetsInParallel } from './parallel-assets.mts';
 import { readPagedEllipsoid } from './context.mts';
 import { preparePagedEllipsoidPresentation } from './presentation.mts';
 import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.mts';
@@ -26,7 +25,10 @@ export interface PagedEllipsoidContext {
   acceptChanged?: readonly string[];
 }
 
-import { prepareTextureLevels } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { prepareTextureLevels, preparePagedEllipsoidAssetsInParallel } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+
+/** The module that runs one asset job in a worker thread: it reads the body's files, so it stays beside this pipeline. */
+const ASSET_WORKER = new URL('./asset-worker.mts', import.meta.url);
 
 const json = readJsonSource;
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);
@@ -70,10 +72,10 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
   // The atmosphere bank reads only the recipe and the body's photometry, so a reuse run redraws it.
-  const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
+  const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ worker: ASSET_WORKER, objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
     .map(asset => { if (!asset.startsWith(config.publicBase)) throw new Error(`${descriptor.id}: material asset ${asset} is outside ${config.publicBase}.`); return asset.slice(config.publicBase.length); }) : [];
   const rasterAssets = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
-    : await preparePagedEllipsoidAssetsInParallel({ objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
+    : await preparePagedEllipsoidAssetsInParallel({ worker: ASSET_WORKER, objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
   const context = { sourceDirectory, publicDirectory, config, scene };
   // The city catalogue is an authored capability (a search over GeoNames places on the globe), not a requirement of a globe.
   // It reads only the scene geometry, so a reuse-images run rebuilds it as well.
