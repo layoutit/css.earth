@@ -6,6 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readStarTemperature, temperatureCatalogueColor } from '../star-catalogue-color.mts';
+import { sphereProjection } from '../sphere-projection.mts';
 
 export const TODO = 'TODO(new-object)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
@@ -175,7 +176,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id, surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
     surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
     poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
-    projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 1 },
+    projection: sphereProjection(1),
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-emission@1`, layout: 'body-container', body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: 36525,
       sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere', polarPreparation: 'the same gray on the polar tiles',
       axialTiltNote: "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame" } } });
