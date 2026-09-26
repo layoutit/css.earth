@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "eps-eridani",
+  "displayName": "ε Eridani",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.74 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1112-0447",
+          "url": "https://arxiv.org/abs/1112.0447",
+          "label": "Baines & Armstrong (2011)",
+          "checked": "2026-09-26",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3.2 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-eps-eridani",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-26",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "eps-eridani-lens-color.webp",
+        "surface": "eps-eridani-surface-color@2x.webp",
+        "poles": "eps-eridani-poles-color@2x.webp",
+        "source": {
+          "id": "eps-eridani-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd022049/h_stis_ngsl_hd022049_v2.fits"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 22049). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,039 K and log g 4.61 (u1 0.646, u2 0.128): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baines & Armstrong (2012), ApJ 744, 138",
+      "href": "https://arxiv.org/abs/1112.0447"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1112.0447",
+      "credit": "Baines & Armstrong (2012), ApJ 744, 138"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/eps-eridani.json",
+      "credit": "Baines & Armstrong radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

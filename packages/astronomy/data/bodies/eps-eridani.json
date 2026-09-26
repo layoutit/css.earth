@@ -1,0 +1,30 @@
+{
+ "id": "eps-eridani",
+ "classification": "star",
+ "order": 1841,
+ "physical": {
+  "name": "ε Eridani",
+  "horizonsCode": null,
+  "meanRadiusKm": 514818,
+  "gravitationalParameterKm3PerS2": 108824200834.39029,
+  "parent": null,
+  "effectiveTemperatureK": 5039
+ },
+ "physicalNotes": "Radius 0.74 +/- 0.01 solar radii from Baines & Armstrong (2012), ApJ 744, 138, section 3: the Navy Optical Interferometer limb-darkened angular diameter 2.153 ± 0.028 mas at the parallax of Benedict et al. (2006) (https://arxiv.org/abs/1112.0447): 514,818 km at 695,700 km per solar radius. Mass 0.82 +/- 0.02 solar masses from Thompson et al. (2025), AJ 170, 301, the stellar mass their orbit fit of ε Eridani b adopts, via the NASA Exoplanet Archive default parameter set (https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract); GM is that mass times the JPL solar GM. Temperature 5039 +/- 126 K from Baines & Armstrong (2012), ApJ 744, 138, section 3: from the interferometric angular diameter and the bolometric flux (https://arxiv.org/abs/1112.0447). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 53.22829341517546,
+  "declinationDegrees": -9.458168216292322,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 3.219810408490127,
+  "properMotionRaMasPerYear": -974.758145249517,
+  "properMotionDecMasPerYear": 20.875840089774208,
+  "radialVelocityKmPerS": 16.376,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5164707970261890560 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/eps-eridani/source/photometry/gaia-dr3-source.csv; cross-identification HD 22049, HR 1084, HIP 16537: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5164707970261890560",
+   "distance": "Gaia DR3 parallax 310.5773 +/- 0.1355 mas (same row, RUWE 2.72): 3.22 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): -974.758, 20.876 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 5164707970261890560 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract)"
+  }
+ }
+}

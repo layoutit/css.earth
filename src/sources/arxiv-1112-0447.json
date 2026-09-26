@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-1112-0447",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baines & Armstrong (2011): Confirming Fundamental Parameters of the Exoplanet Host Star epsilon Eridani Using the Navy Optical Interferometer",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1112.0447"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/748/1/72"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1112.0447",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/748/1/72",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1112.0447",
+      "checkedOn": "2026-09-26",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Baines & Armstrong (2011)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1112.0447"
+    }
+  ],
+  "creators": [
+    "Ellyn K. Baines",
+    "J. Thomas Armstrong"
+  ],
+  "publicationDate": "2011"
+}
