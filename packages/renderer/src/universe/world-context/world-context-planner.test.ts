@@ -258,17 +258,17 @@ test('highlighted moons remain identifiable when their orbits are too small to d
     .projectedBodies.filter(body => moons.has(bodies[body.index].id) && body.labelShown)).toHaveLength(0);
 });
 
-test('system zoom and rotation never publish a context circle without its caption', () => {
+test('system zoom and rotation keep orbit paths when captions lose their slots', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
-  let paths = 0, crowded = 0;
+  let paths = 0, crowded = 0, uncaptionedPaths = 0;
   for (const distance of [20, 75, 205, 75, 20]) for (const angle of [0, .3, .7, .3, 0]) {
     input.world.pose.positionM = [0, 0, distance * 149597870700];
     Object.assign(input.world.pose, { orientationXyzw: [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)] });
     const frame = calculate(input);
     for (const body of frame.projectedBodies) {
       if (body.indicatorShown) expect(body.labelShown).toBe(true);
-      if (body.segments.length && body.visible) expect(body.labelShown).toBe(true);
       if (body.segments.length && body.visible && body.labelShown) paths++;
+      if (body.segments.length && body.visible && !body.labelShown) uncaptionedPaths++;
       if (!body.labelShown && body.visible) crowded++;
       Object.assign(input.bodies[body.index], { labelShown: body.labelShown, labelPlacement: body.labelPlacement,
         indicatorShown: body.indicatorShown });
@@ -276,6 +276,7 @@ test('system zoom and rotation never publish a context circle without its captio
   }
   expect(paths).toBeGreaterThan(0);
   expect(crowded).toBeGreaterThan(0);
+  expect(uncaptionedPaths).toBeGreaterThan(0);
 });
 
 test('a body too faint for this camera to name draws no ring beside the named ones', () => {
@@ -293,13 +294,14 @@ test('a body too faint for this camera to name draws no ring beside the named on
   expect(near.segments.length).toBeGreaterThan(0);
 });
 
-test('turning the view identifies on-screen orbits and preserves paths crossing from off screen', () => {
+test('turning the view preserves projected paths through caption admission changes', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
+  input.rotationActive = true;
   const points = [plan.focus, ...plan.bodies];
   const captions = new Map<string, boolean>();
-  let captionFlips = 0, paths = 0, offScreenPaths = 0;
+  let captionFlips = 0, paths = 0, offScreenPaths = 0, uncaptionedPaths = 0;
   // A drag tumbles the camera around the focus. Bodies cross the viewport edge and lose
-  // their annotations; paths may remain only after the body itself leaves the frame.
+  // their annotations; paths can remain whether their bodies are in or out of frame.
   for (let step = 0; step < 90; step++) {
     const angle = step * .5 * Math.PI / 180, distance = 8 * 149597870700;
     Object.assign(input.world.pose, { orientationXyzw: [Math.sin(angle / 2), 0, 0, Math.cos(angle / 2)] });
@@ -309,7 +311,7 @@ test('turning the view identifies on-screen orbits and preserves paths crossing 
       if (captions.get(id) !== undefined && captions.get(id) !== body.labelShown) captionFlips++;
       if (body.segments.length) {
         paths++;
-        if (body.visible) expect(body.labelShown, `${id}'s on-screen path must retain its annotation`).toBe(true);
+        if (body.visible && !body.labelShown) uncaptionedPaths++;
         else if (!body.labelShown) offScreenPaths++;
       }
       captions.set(id, body.labelShown);
@@ -319,6 +321,7 @@ test('turning the view identifies on-screen orbits and preserves paths crossing 
   }
   expect(captionFlips, 'captions come and go as their bodies cross the edge').toBeGreaterThan(0);
   expect(paths, 'admitted bodies still draw their paths').toBeGreaterThan(0);
+  expect(uncaptionedPaths, 'caption collisions do not retire on-screen paths').toBeGreaterThan(0);
   expect(offScreenPaths, 'paths keep crossing after their bodies leave the frame').toBeGreaterThan(0);
 });
 
