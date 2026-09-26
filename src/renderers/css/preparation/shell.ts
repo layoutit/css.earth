@@ -5,7 +5,7 @@ import { unitVector, type ShellMesh } from '../../../preparation/shell/mesh.js';
 import type { Vector3 } from '@cssearth/bake/volume';
 import type { PreparedCssSurfaceShell } from '@cssearth/renderer/shell/types.ts';
 import { SHELL_CORNER_PERMUTATIONS } from '@cssearth/renderer/shell/material-address.ts';
-import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../../../platform/projective-surface-raster.mts';
+import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '@cssearth/bake/scene';
 
 /** A face drawn at TEXELS_PER_CSS_PIXEL. PolyCSS sizes the face's box at one CSS pixel per texel of its atlas tile, and
  * WebKit backs every composited face at that box times the device pixel ratio whatever its matrix: the heliosphere's 960

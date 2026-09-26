@@ -22,7 +22,7 @@ const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
-import { seamOutsetBinding, seamOutsetInitialValue } from "../../../src/renderers/css/preparation/scene/seam-outset.ts";
+import { seamOutsetBinding, seamOutsetInitialValue } from "@cssearth/bake/scene";
 import { textureTileStyles, tiledTextureKeys } from "@cssearth/renderer";
 import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";

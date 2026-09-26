@@ -5,7 +5,7 @@ interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;roo
   /** The published lighting image's pixel size, measured from its file. */
   image:{width:number;height:number};objectId:string;}
 import { BASE_TILE } from '@layoutit/polycss';
-import { leafRasterScale } from '../../../src/platform/projective-surface-raster.mts';
+import { leafRasterScale } from '@cssearth/bake/scene';
 import { readPreparedMatrix4, preparedRotationMatrix4, multiplyPreparedMatrix4, invertPreparedAffineMatrix4 } from '@cssearth/core';
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];

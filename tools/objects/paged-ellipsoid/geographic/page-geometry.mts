@@ -1,5 +1,5 @@
 import { cross3 as cross } from '@cssearth/core';
-import { prepareProjectiveTextureLayer } from "../../../../src/platform/projective-surface-raster.mts";
+import { prepareProjectiveTextureLayer } from "@cssearth/bake/scene";
 
 import type { PageAddress, GeographicScene, GeographicLeaf, GeographicBounds, PolarBounds, PageGeometry, PolarProjection, PolarPlane } from './contracts.mts';
 export const CITY_PAGE_PIXELS = 1024;

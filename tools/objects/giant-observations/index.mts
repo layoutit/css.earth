@@ -6,7 +6,7 @@ import {parseObservedPolarSource} from './source-contract.mts';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {packProjectiveSurfaceRaster} from '../../../src/platform/projective-surface-raster.mts';
+import {packProjectiveSurfaceRaster} from '@cssearth/bake/scene';
 import { readFitsPrimary } from '@cssearth/fits';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {latitudeRasterBands} from '../giant-layers/geometry.mts';

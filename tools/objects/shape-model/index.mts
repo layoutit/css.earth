@@ -10,7 +10,7 @@ import { prepareRingLeaves, ringQuadStyle } from './rings.mts';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
 
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-body-surface.mts';
+import { prepareSolidBodySurface } from '@cssearth/bake/scene';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';

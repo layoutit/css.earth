@@ -1,7 +1,7 @@
-import type { RasterRecipe } from '@cssearth/bake/raster';
-import { RASTER_DENSITY, RASTER_LEVEL_FACTORS, rasterPageName, rasterPagePlan } from '@cssearth/bake/raster';
-import type { GeometryProfile } from './profile.js';
-import type { LeafImagePixels } from './projector.js';
+import type { RasterRecipe } from '../raster/index.ts';
+import { RASTER_DENSITY, RASTER_LEVEL_FACTORS, rasterPageName, rasterPagePlan } from '../raster/index.ts';
+import type { GeometryProfile } from './profile.ts';
+import type { LeafImagePixels } from './projector.ts';
 
 export interface LeafImageSources {
   objectId: string; profile: GeometryProfile; raster: RasterRecipe;

@@ -89,6 +89,18 @@ export default [
     },
   },
   {
+    // The scene compilers read the renderer's prepared types and silhouette steps, and project leaves with PolyCSS, which
+    // the runtime uses to draw them.
+    files: ['packages/bake/src/scene/**/*.ts'],
+    ignores: ['**/*.test.ts'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '**/renderers/**', '@cssearth/bake', '@cssearth/bake/*'],
+          message: 'Bake topics import packages and their own topic only, never the application or another topic.' }],
+      }],
+    },
+  },
+  {
     // `@cssearth/bake/volume` stays host-neutral (the nebula lab's browser viewer imports it); only `volume/node` may use
     // Node built-ins and sharp, and nothing else imports it.
     files: ['packages/bake/src/volume/**/*.ts'],

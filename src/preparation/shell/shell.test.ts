@@ -16,7 +16,7 @@ import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } f
 import { shellRim } from './atlas.js';
 import { validatePreparedCssSurfaceShell } from '@cssearth/renderer/shell/validation.ts';
 import { dotN as dot } from '@cssearth/core';
-import { TEXELS_PER_CSS_PIXEL } from '../../platform/projective-surface-raster.mts';
+import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
 
 const objectDirectory = resolve('src/objects/heliosphere');
 const recipe = async () => parseShellRecipe(JSON.parse(await readFile(join(objectDirectory, 'source/shell.json'), 'utf8')) as unknown);

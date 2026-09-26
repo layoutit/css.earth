@@ -39,7 +39,7 @@ async function discover(directory: string, suffix: string): Promise<string[]> {
   return files.sort();
 }
 const entries = universeOnly ? universeEntries : [...new Set([
-  'src/renderers/css/preparation/scene/scene.test.ts', ...universeEntries,
+  'packages/bake/src/scene/scene.test.ts', ...universeEntries,
   ...await discover('tools/objects', '.test.ts'), ...await discover('tests/objects', '.test.ts'),
 ])];
 await mkdir(output, { recursive: true });

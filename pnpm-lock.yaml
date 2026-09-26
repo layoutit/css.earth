@@ -247,6 +247,9 @@ importers:
       '@cssearth/renderer':
         specifier: workspace:*
         version: link:../renderer
+      '@layoutit/polycss':
+        specifier: 0.2.11
+        version: 0.2.11
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)

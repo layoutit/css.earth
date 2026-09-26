@@ -1,5 +1,5 @@
 import { isArray, isRecord } from '@cssearth/core';
-import type {ProjectiveGeometry} from '../../../src/platform/projective-surface-raster.mts';
+import type {ProjectiveGeometry} from '@cssearth/bake/scene';
 import type {RasterInfo} from '../observation/raster.mts';
 export interface PagedRasterConfiguration {publicBase: string; geometry: {BODY_LONGITUDE_SEGMENTS: number};
   atlas: {density: number; gutter: number; pageSize: number; pageCells: number; sourceWidth: number};}
@@ -36,7 +36,7 @@ export interface NativePhotographicCloudComposite {
   scale: number;
   color: readonly number[];
 }
-import { prepareProjectiveTextureLayer } from "../../../src/platform/projective-surface-raster.mts";
+import { prepareProjectiveTextureLayer } from "@cssearth/bake/scene";
 
 // One canonical 8K-source atlas. These are prepared pixels, not display-DPR
 // choices. The shelf layout avoids allocating a largest-size tile for every

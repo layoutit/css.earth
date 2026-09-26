@@ -1,4 +1,4 @@
-import type { PreparedLeaf } from '../scene/projector.js';
+import type { PreparedLeaf, PreparedSeamOutset } from '@cssearth/bake/scene';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 import type { CubicSkyPlan } from '@cssearth/renderer/solar-system/cubic-sky-plan.ts';
 import type { DirectionalSunPlan } from '@cssearth/renderer/solar-system/directional-sun-coordinate.ts';
@@ -8,7 +8,6 @@ import type { PreparedAssets } from '@cssearth/renderer/rendering/prepared-resid
 import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '@cssearth/renderer/rendering/prepared-material.ts';
 import type { PreparedTextureLevels } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
-import type { PreparedSeamOutset } from '../scene/seam-outset.js';
 import type { RasterPagePlan } from '@cssearth/bake/raster';
 type SeamRepair = { outset?: PreparedSeamOutset };
 

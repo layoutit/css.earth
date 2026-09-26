@@ -171,7 +171,7 @@ test('volume compilation omits only lossless-alpha empty slabs, preserving every
 
 test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the plane PolyCSS gave them', async () => {
   const { compileCssVolume } = await import('./volume.js');
-  const { TEXELS_PER_CSS_PIXEL } = await import('../../../platform/projective-surface-raster.mts');
+  const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
   const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
   const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/bake/volume/node').VolumeSlices;
