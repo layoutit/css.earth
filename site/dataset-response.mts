@@ -4,7 +4,7 @@ import { createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurface
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readDatasetUrl } from './dataset-url.mts';
 

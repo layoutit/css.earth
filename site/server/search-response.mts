@@ -1,5 +1,5 @@
 import { parseHTML } from 'linkedom';
-import { requiredElement } from '../browser-types.mts';
+import { requiredElement } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { matchesObjectCategory } from '@cssearth/objects';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from '../search/object-search.mts';

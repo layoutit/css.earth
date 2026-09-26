@@ -2,7 +2,7 @@ import type { LensVolume } from '@cssearth/renderer/runtime/object-contract.ts';
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import type { SceneSession } from './scene-session.mts';
-import { errorMessage } from '../browser-types.mts';
+import { errorMessage } from '../browser/browser-types.mts';
 import { readDatasetUrl } from '../dataset-url.mts';
 
 interface CompanionClouds {

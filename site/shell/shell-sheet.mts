@@ -1,5 +1,5 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from '../runtime-policy.mts';
 
 type SheetState = typeof MOBILE_SHEET_POLICY.states[number];

@@ -1,5 +1,5 @@
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
 import { markerStyle } from '../../src/navigation/marker-presentation.mts';
 

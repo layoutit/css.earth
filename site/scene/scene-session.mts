@@ -1,8 +1,8 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { SceneFramePresenter } from './scene-world.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
-import type { MountOptions, SceneFactory } from '../browser-types.mts';
-import { errorMessage } from '../browser-types.mts';
+import type { MountOptions, SceneFactory } from '../browser/browser-types.mts';
+import { errorMessage } from '../browser/browser-types.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';

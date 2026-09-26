@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { createSheetController } from '../shell/shell-sheet.mts';
 
 // Synthetic snap heights for a 690 px sheet: the peek rests 538 px below the open sheet,

@@ -1,4 +1,4 @@
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';

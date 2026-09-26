@@ -4,7 +4,7 @@ import type { SceneSessionState } from './scene-session.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldContextMount } from './scene-world.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { automaticPlaybackPolicy } from '../runtime-policy.mts';
 import { readObjectDiagnostics } from '@cssearth/renderer';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';

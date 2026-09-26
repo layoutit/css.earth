@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { bindNavigationIntent, createNavigationFragments, navigationFragments, type NavigationFragments } from '../navigation/navigation-fragments.mts';
 
 // A fragment body is "<body data-object-shell>|<stage data-object-id>" for this parser fixture.

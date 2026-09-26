@@ -1,9 +1,9 @@
-import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './view-format.mts';
+import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './minimap/view-format.mts';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PositionM } from '@cssearth/engine';
-import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
-import { requiredElement } from './browser-types.mts';
+import type { BrowserWindow, ShellCamera, PlaybackState } from './browser/browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
 import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';

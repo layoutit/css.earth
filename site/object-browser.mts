@@ -1,10 +1,10 @@
 import { createObjectCatalogue } from './catalogue/object-catalogue.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from './browser-types.mts';
+import type { BrowserWindow } from './browser/browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, createSearchPresentation } from './search/search-results-presentation.mts';

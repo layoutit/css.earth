@@ -1,5 +1,5 @@
-import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser-types.mts';
-import { requiredElement } from '../browser-types.mts';
+import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser/browser-types.mts';
+import { requiredElement } from '../browser/browser-types.mts';
 import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { SurfaceMapConfig, SurfaceMapReader } from './surface-map-context.mts';
 interface MapElements { config: SurfaceMapConfig | null; rectangles: HTMLElement[]; size: { width: number; height: number } | null; }

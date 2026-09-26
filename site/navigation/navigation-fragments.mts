@@ -1,5 +1,5 @@
 import { objectIdAtPath } from '../root-object.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 
 /**
  * Destination cards and content come from the static `/navigation/<id>/`

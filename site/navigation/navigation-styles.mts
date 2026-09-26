@@ -1,4 +1,4 @@
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 
 type StyleNode = HTMLStyleElement | HTMLLinkElement;
 interface IncomingStyle { element: StyleNode; media?: string | null; }

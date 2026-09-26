@@ -1,5 +1,5 @@
 import type { ObjectDescriptor } from '@cssearth/objects';
-import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
+import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import type { createNavigationContent } from '../navigation/navigation-content.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectEntry } from '../objects.mts';
