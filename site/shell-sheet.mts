@@ -3,12 +3,10 @@ import type { BrowserWindow } from './browser-types.mts';
 import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from './runtime-policy.mts';
 
 type SheetState = typeof MOBILE_SHEET_POLICY.states[number];
-/** Room left under the introduction in the peek, the card's own padding. */
-const INTRODUCTION_MARGIN_PIXELS = 16;
 type SheetStops = Readonly<Record<SheetState, number>>;
 interface SheetGesture {
   pointerId: number; x: number; y: number; start: number; offset: number; stops: SheetStops;
-  fromHandle: boolean; active: boolean; lastY: number; lastTime: number; velocity: number;
+  fromHandle: boolean; capture: HTMLElement; active: boolean; lastY: number; lastTime: number; velocity: number;
 }
 
 // Phones show information in a bottom sheet that snaps between the heights
@@ -36,6 +34,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   let state: SheetState = handle.checked ? "full" : "peek";
   // Search opens the whole sheet; leaving search returns to the earlier height.
   let searchReturn: SheetState | null = null;
+  let deferredSearchFocus = false;
   let gesture: SheetGesture | null = null;
   let dragged = false;
   let snapFrame = 0, settleTimer = 0;
@@ -51,13 +50,15 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   // Distances from the fully open sheet down to each snap state.
   const stops = (): SheetStops => {
     const style = windowTarget.getComputedStyle(sheet);
+    const tucked = Number.parseFloat(style.getPropertyValue("--sheet-tucked"));
     const peek = Number.parseFloat(style.getPropertyValue("--sheet-peek"));
     const half = Number.parseFloat(style.getPropertyValue("--sheet-half"));
-    if (!Number.isFinite(peek) || !Number.isFinite(half)) {
+    if (![tucked, peek, half].every(Number.isFinite)) {
       throw new Error("Object shell sheet heights are missing.");
     }
     const height = sheet.offsetHeight;
-    return { peek: Math.max(0, height - peek), half: Math.max(0, height - half), full: 0 };
+    return { tucked: Math.max(0, height - tucked), peek: Math.max(0, height - peek),
+      half: Math.max(0, height - half), full: 0 };
   };
   // Layout rests the sheet at its state's offset; a drag or a snap adds a transform to that. The rest comes from this
   // controller's state, not from CSS: a tap on the handle checks it, and CSS moves the rest, before the change event.
@@ -105,7 +106,9 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     sheet.classList.add("is-dragging");
     state = next;
     body.dataset.sheet = next;
-    handle.checked = next !== "peek";
+    handle.checked = next === "half" || next === "full";
+    handle.setAttribute("aria-label", next === "tucked" ? "Show information sheet"
+      : next === "peek" ? "Expand information sheet" : "Collapse information sheet");
     void windowTarget.getComputedStyle(sheet).transform;
     // Committed before the hold is released: WebKit starts no transition when the transition turns on in the same style
     // update as the transform it would animate.
@@ -139,17 +142,21 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   const ownsGesture = (target: EventTarget | null) => target !== handle && target instanceof windowTarget.Element &&
     target.closest("input, select, textarea, [data-surface-minimap]") !== null;
 
-  sheet.addEventListener("pointerdown", (event) => {
+  // The search and filters ride with the sheet, so a vertical swipe can begin on any of the three.
+  // Inputs inside the sheet keep their own gestures; the search field and filter buttons still accept taps.
+  for (const surface of [sheet, toolbar, categories]) surface.addEventListener("pointerdown", (event) => {
     dragged = false;
-    if (!mobile.matches || !event.isPrimary || event.button > 0 || ownsGesture(event.target)) return;
-    const fromHandle = event.target instanceof windowTarget.Node && handle.contains(event.target);
+    if (!mobile.matches || !event.isPrimary || event.button > 0 ||
+        (surface === sheet && ownsGesture(event.target))) return;
+    const fromHandle = surface === sheet && event.target instanceof windowTarget.Node && handle.contains(event.target);
     // Native focus can scroll the checkbox into view before its change event.
     // Save the reading position before that default action, including a drag.
     if (fromHandle && state === 'full') handleReadingPosition = sheet.scrollTop;
     if (state === "full" && !fromHandle && scrolled(event.target)) return;
     const start = currentOffset();
     gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, start, offset: start,
-      stops: stops(), fromHandle, active: false, lastY: event.clientY, lastTime: event.timeStamp, velocity: 0 };
+      stops: stops(), fromHandle, capture: surface, active: false,
+      lastY: event.clientY, lastTime: event.timeStamp, velocity: 0 };
   }, { signal });
 
   // A quick pointer can leave the sheet before the drag captures it, so the
@@ -167,14 +174,18 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
         return;
       }
       drag.active = true;
-      sheet.setPointerCapture(event.pointerId);
+      if (deferredSearchFocus) {
+        deferredSearchFocus = false;
+        if (documentTarget.activeElement === search) search.blur();
+      }
+      drag.capture.setPointerCapture(event.pointerId);
       endSettle();
       sheet.classList.add("is-dragging");
     }
     const raw = drag.start + dy;
     const overdrag = (distance: number) => Math.min(overdragPixels, distance * overdragResistance);
     drag.offset = raw < 0 ? -overdrag(-raw)
-      : raw > drag.stops.peek ? drag.stops.peek + overdrag(raw - drag.stops.peek) : raw;
+      : raw > drag.stops.tucked ? drag.stops.tucked + overdrag(raw - drag.stops.tucked) : raw;
     const elapsed = event.timeStamp - drag.lastTime;
     if (elapsed > 0) drag.velocity = 0.8 * (event.clientY - drag.lastY) / elapsed + 0.2 * drag.velocity;
     drag.lastY = event.clientY;
@@ -186,7 +197,11 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     const drag = gesture;
     if (drag === null || event.pointerId !== drag.pointerId) return;
     gesture = null;
-    if (!drag.active) return;
+    if (!drag.active) {
+      if (deferredSearchFocus) { deferredSearchFocus = false; openSearch(); }
+      return;
+    }
+    deferredSearchFocus = false;
     dragged = true;
     searchReturn = null;
     if (event.type === "pointercancel") {
@@ -204,21 +219,23 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   };
   documentTarget.addEventListener("pointerup", release, { signal });
   documentTarget.addEventListener("pointercancel", release, { signal });
-  // Once the sheet follows a finger, native scrolling must not claim the touch.
-  sheet.addEventListener("touchmove", (event) => {
-    if (gesture?.active) event.preventDefault();
-  }, { passive: false, signal });
-  sheet.addEventListener("click", (event) => {
-    if (!dragged) return;
-    dragged = false;
-    event.preventDefault();
-    event.stopPropagation();
-  }, { capture: true, signal });
+  // Once a rider or the sheet follows a finger, native scrolling must not claim the touch.
+  for (const surface of [sheet, toolbar, categories]) {
+    surface.addEventListener("touchmove", (event) => {
+      if (gesture?.active) event.preventDefault();
+    }, { passive: false, signal });
+    surface.addEventListener("click", (event) => {
+      if (!dragged) return;
+      dragged = false;
+      event.preventDefault();
+      event.stopPropagation();
+    }, { capture: true, signal });
+  }
 
   handle.addEventListener("change", () => {
     if (!mobile.matches) return;
     searchReturn = null;
-    settle(handle.checked ? "full" : "peek");
+    settle(handle.checked ? (state === "tucked" ? "peek" : "full") : "peek");
   }, { signal });
   handle.addEventListener("keydown", (event) => {
     const step = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
@@ -229,6 +246,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
 
   const openSearch = () => {
     if (!mobile.matches || state === "full") return;
+    // Pointer focus happens before a drag can clear its click. Wait until release to distinguish a tap from a swipe.
+    if (gesture?.capture === toolbar && !gesture.active) { deferredSearchFocus = true; return; }
     searchReturn = state;
     settle("full");
   };
@@ -243,10 +262,11 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   // The facility card sits inside the sheet, so opening it has to show it.
   const facilityToggle = documentTarget.querySelector(".object-facility-toggle");
   facilityToggle?.addEventListener("click", () => {
-    if (mobile.matches && state === "peek" && facilityToggle.getAttribute("aria-pressed") === "true") settle("half");
+    if (mobile.matches && (state === "tucked" || state === "peek") && facilityToggle.getAttribute("aria-pressed") === "true") settle("half");
   }, { signal });
   mobile.addEventListener("change", () => {
     gesture = null;
+    deferredSearchFocus = false;
     endSettle();
     sheet.classList.remove("is-dragging");
     clearOffset();
@@ -267,24 +287,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   visual?.addEventListener("scroll", followKeyboard, { signal });
   lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
-  // The peek reaches the bottom of the selected card's introduction, measured from the sheet's top with the card's
-  // own breathing room below it; shell-layout.css bounds it between its floor and the half-open sheet.
-  const fitIntroduction = () => {
-    const introduction = [...sheet.querySelectorAll<HTMLElement>(".object-introduction")].find(node => node.getClientRects().length > 0);
-    if (!mobile.matches || !introduction) { body.style.removeProperty("--sheet-intro-height"); return; }
-    const reach = introduction.getBoundingClientRect().bottom - sheet.getBoundingClientRect().top + sheet.scrollTop + INTRODUCTION_MARGIN_PIXELS;
-    body.style.setProperty("--sheet-intro-height", `${Math.ceil(reach)}px`);
-  };
-  // Introductions and the panels that hold them (breadcrumb, name) are retained; the selected one changes size as it
-  // is shown, filled or wrapped.
-  if (typeof windowTarget.ResizeObserver === "function") {
-    const observer = new windowTarget.ResizeObserver(fitIntroduction);
-    for (const node of sheet.querySelectorAll(".object-introduction, .object-selected-panel")) observer.observe(node);
-    lifetime.onDispose(() => observer.disconnect());
-  }
-  mobile.addEventListener("change", fitIntroduction, { signal });
-  fitIntroduction();
-
   body.dataset.sheet = state;
   return Object.freeze({
     // A choice from search reveals its card over the scene.
@@ -300,6 +302,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     destroy() {
       events.abort();
       gesture = null;
+      deferredSearchFocus = false;
       endSettle();
       sheet.classList.remove("is-dragging");
       clearOffset();
