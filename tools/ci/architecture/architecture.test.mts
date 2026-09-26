@@ -1,12 +1,9 @@
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { astroScriptBlocks, astroSpecifiers, resolveSpecifier, type ResolveContext } from './astro-imports.mts';
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
-import { distSource, loadRendererBuildConfig, rendererDistEntries } from './renderer-entries.mts';
 import { formatDelta } from './report.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { isTestPath, zoneOf } from './zones.mts';
@@ -68,7 +65,6 @@ test('Astro specifiers resolve like the cruise: extensions, .js to .ts, workspac
       { name: '@x/lab', directory: 'labs/p', exports: { './api': './src/api.ts' } },
     ],
     imports: { '#preparation/*': { types: './tools/objects/*.ts', default: './tools/objects/dist/*.js' } },
-    distEntries: new Map([['src/renderers/css/dist/universe', 'src/renderers/css/universe/index.ts']]),
   };
   const from = 'site/components/X.astro';
   assert.equal(resolveSpecifier(from, '../shape', context), 'site/shape.ts');
@@ -77,7 +73,6 @@ test('Astro specifiers resolve like the cruise: extensions, .js to .ts, workspac
   assert.equal(resolveSpecifier(from, '@x/core', context), 'packages/core/src/index.ts', 'an unbuilt dist entry counts as the source entry');
   assert.equal(resolveSpecifier(from, '@x/lab/api', context), 'labs/p/src/api.ts');
   assert.equal(resolveSpecifier(from, '#preparation/lens', context), 'tools/objects/lens.ts');
-  assert.equal(resolveSpecifier(from, '../../src/renderers/css/dist/universe.js', context), 'src/renderers/css/universe/index.ts');
   assert.equal(resolveSpecifier(from, 'astro/types', context), undefined, 'npm packages are external');
   assert.equal(resolveSpecifier(from, '../prepared-generated.json', context), undefined, 'untracked output is not an edge');
 });
@@ -157,18 +152,6 @@ test('external JSON is validated before use', () => {
     [{ source: 'a.ts', coreModule: false, couldNotResolve: false, dependencies: [{ module: './b', resolved: 'b.ts', coreModule: false, couldNotResolve: false }] }]);
 });
 
-test('compiled renderer imports count as the entry sources its tsup config names', async () => {
-  const root = resolve(import.meta.dirname, '../../..'), entries = rendererDistEntries(root, await loadRendererBuildConfig(root));
-  assert.equal(entries.get('src/renderers/css/dist/navigation'), 'src/renderers/css/navigation/index.ts');
-  assert.equal(entries.get('src/renderers/css/dist/platform/object-orbit'), 'src/renderers/css/navigation/object-orbit.ts');
-  for (const source of entries.values()) assert.equal(existsSync(resolve(root, source)), true, source);
-  assert.equal(distSource('src/renderers/css/dist/index.js', entries), 'src/renderers/css/index.ts');
-  assert.equal(distSource('src/renderers/css/dist/universe.d.ts', entries), 'src/renderers/css/universe/index.ts');
-  assert.equal(distSource('src/renderers/css/dist/chunk-abc.js', entries), undefined);
-  assert.equal(distSource('src/renderers/css/index.ts', entries), undefined);
-  assert.deepEqual(rendererDistEntries('/repo', { entry: { a: '/repo/src/renderers/css/a.ts' } }), new Map([['src/renderers/css/dist/a', 'src/renderers/css/a.ts']]));
-  assert.throws(() => rendererDistEntries('/repo', { entry: { a: 1 } }), /must be a string/u);
-});
 
 test('a source file missing from disk or from the cruise makes the graph incomplete', () => {
   const expected = ['src/a.mts', 'src/b.ts', 'src/c.json', 'src/objects/x/prepared/p.mts', 'site/X.astro', 'src/gone.mts'];

@@ -2,13 +2,12 @@
  * (tracked, or new and not ignored), plus the `.astro` imports it cannot read. */
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
-import { posix, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { cruise } from 'dependency-cruiser';
 import extractTSConfig from 'dependency-cruiser/config-utl/extract-ts-config';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { astroSpecifiers, moduleSpecifiers, packageEntry, resolveSpecifier, trackedStandIn, workspacePackages, type ResolveContext } from './astro-imports.mts';
 import { CRUISE_OPTIONS, CRUISE_ROOTS, EXCLUDE_PATHS, ROOT_CONFIG_FILE } from './cruiser-config.mts';
-import { distSource, loadRendererBuildConfig, rendererDistEntries } from './renderer-entries.mts';
 import { isTestPath } from './zones.mts';
 
 export interface FileFacts {
@@ -55,10 +54,9 @@ export function decodeCruiseResult(value: unknown): CruisedModule[] {
   });
 }
 
-/** Compiled output counts as its source: a shared package's `dist/` becomes its `src/index.ts`, and a
- * renderer `dist/` entry becomes the source its tsup config names. */
-function normalise(path: string, distEntries: ReadonlyMap<string, string>): string {
-  return distSource(path, distEntries) ?? path.replace(/^packages\/([^/]+)\/dist\/.*$/u, 'packages/$1/src/index.ts');
+/** Compiled output counts as its source: a shared package's `dist/` becomes its `src/index.ts`. */
+function normalise(path: string): string {
+  return path.replace(/^packages\/([^/]+)\/dist\/.*$/u, 'packages/$1/src/index.ts');
 }
 
 const git = (root: string, ...args: string[]) =>
@@ -83,11 +81,11 @@ export function missingSources(expected: readonly string[], cruised: ReadonlySet
 
 function readJson(root: string, path: string): unknown { return JSON.parse(readFileSync(resolve(root, path), 'utf8')); }
 
-export function resolveContext(root: string, tracked: ReadonlySet<string>, rendererBuild: unknown): ResolveContext {
+export function resolveContext(root: string, tracked: ReadonlySet<string>): ResolveContext {
   const manifests = new Map<string, unknown>();
   for (const path of tracked) if (/^(packages|labs\/nebula\/packages)\/[^/]+\/package\.json$/u.test(path)) manifests.set(path, readJson(root, path));
   const rootManifest = requireRecord(readJson(root, 'package.json'), 'package.json');
-  return { tracked, workspaces: workspacePackages(manifests), imports: isRecord(rootManifest.imports) ? rootManifest.imports : {}, distEntries: rendererDistEntries(root, rendererBuild) };
+  return { tracked, workspaces: workspacePackages(manifests), imports: isRecord(rootManifest.imports) ? rootManifest.imports : {} };
 }
 
 export interface BuildOptions {
@@ -97,7 +95,7 @@ export interface BuildOptions {
 
 export async function buildImportGraph(root: string, options: BuildOptions): Promise<ImportGraph> {
   const trackedList = repositoryFiles(root), tracked = new Set(trackedList);
-  const context = resolveContext(root, tracked, await loadRendererBuildConfig(root));
+  const context = resolveContext(root, tracked);
   const roots = [...CRUISE_ROOTS.filter(path => trackedList.some(file => file.startsWith(`${path}/`))),
     ...trackedList.filter(path => ROOT_CONFIG_FILE.test(path))];
   const result = await cruise(roots, { ...CRUISE_OPTIONS, baseDir: root }, {}, { tsConfig: extractTSConfig(resolve(root, 'tsconfig.json')) });
@@ -136,14 +134,11 @@ export async function buildImportGraph(root: string, options: BuildOptions): Pro
       if (dependency.coreModule) continue;
       let to: string | undefined;
       if (!dependency.couldNotResolve && !dependency.resolved.includes('node_modules')) {
-        const resolved = normalise(dependency.resolved, context.distEntries);
+        const resolved = normalise(dependency.resolved);
         to = trackedStandIn(resolved, tracked) ?? resolved;
       }
       // An unbuilt shared package cannot resolve its `dist/` types; count it as its source entry, as a built one is.
-      else if (dependency.couldNotResolve && dependency.module.startsWith('.')) {
-        // An unbuilt renderer: `../src/renderers/css/dist/index.js` still names its entry source.
-        to = distSource(posix.join(posix.dirname(module.source), dependency.module), context.distEntries);
-      } else if (dependency.couldNotResolve && dependency.module.startsWith('@')) {
+      else if (dependency.couldNotResolve && dependency.module.startsWith('@')) {
         const workspace = context.workspaces.find(item => dependency.module === item.name || dependency.module.startsWith(`${item.name}/`));
         if (workspace?.directory.startsWith('packages/')) to = packageEntry(workspace.directory);
       }
