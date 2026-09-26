@@ -100,7 +100,14 @@
   },
   "nebulaImplementation": {
     "directories": [
-      "src/volume"
+      "src/density",
+      "src/photometry",
+      "src/raster",
+      "src/scene",
+      "src/sky",
+      "src/stars",
+      "src/volume",
+      "src/volume-leaves"
     ],
     "extensions": [
       ".ts"

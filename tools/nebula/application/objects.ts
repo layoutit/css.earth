@@ -30,8 +30,6 @@ const implementationFiles = [
   'tools/nebula/application/element-budget.ts', 'packages/renderer/src/volume/compiler-render-budget.ts',
   'packages/renderer/src/volume/prepared-volume-lod.ts',
   'tools/nebula/application/star-sprites.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/transport.ts',
-  'packages/bake/src/density/atlas.ts', 'packages/bake/src/volume-leaves/volume.ts',
-  'packages/bake/src/volume-leaves/volume-order.ts', 'packages/bake/src/volume-leaves/volume-impostors.ts',
   'packages/renderer/src/volume/types.ts', 'packages/renderer/src/volume/validation.ts',
   'packages/renderer/src/volume/volume-impostor-validation.ts', 'packages/renderer/src/volume/prepared-volume-lenses.ts',
 ];
