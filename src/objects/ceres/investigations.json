@@ -256,6 +256,55 @@
           "commit": "48d4206bee09d28b04f28dc517c9a2296dcb9389"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Hapke model of Li et al. (2019), Table 1, F3 at 749 nm (w 0.139, b 0.364, c 0.048, roughness 19.2 degrees; B0 1.6 and h 0.06 held fixed), fitted to incidence and emission up to 80 degrees and phase from about 7 to about 95 degrees, relative to the flood-lit disc centre. F3 is the colour filter nearest the clear-filter mosaic. Its radiance factor at the flood-lit centre, 0.089, matches the paper's geometric albedo.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2018.12.038",
+        "https://arxiv.org/abs/1812.08361"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "schroeder-2017-clear-hapke",
+      "subject": "Clear-filter Hapke model of Schroeder et al. (2017) as the limb law",
+      "status": "excluded",
+      "finding": "Fitted to the same filter as the Monochrome mosaic (w 0.113, B_S0 4.0, h_S 0.02, roughness 22 degrees; incidence and emission below 80 degrees, phase 7.5 to 121 degrees), but its opposition amplitude, which the authors call not physical, gives 0.161 at the flood-lit centre, about twice Ceres's geometric albedo, so every directional frame would be about half as bright relative to the default view.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2017.01.026",
+        "https://arxiv.org/abs/1701.08550"
+      ],
+      "revisitWhen": "A clear-filter fit whose opposition surge is constrained by low-phase data, or a statement that the FC mosaic was corrected with this model.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the published Hapke law of Li et al. (2019); Ceres now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

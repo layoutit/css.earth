@@ -5,8 +5,11 @@
 - Physical and orbital facts: NASA JPL Solar System Dynamics.
 - Elevation lens: LRO LOLA LDEM16 numeric grid, David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node.
 - Crustal thickness lens: NASA GSFC Scientific Visualization Studio; GRAIL. NASA media usage guidelines.
-- Lighting model formulation adapted from the OpenSpace globe shader (MIT,
-  OpenSpace Team); implemented and documented in this repository.
+- Lighting: the published Hapke law of Sato et al. (2014),
+  doi:10.1002/2013JE004580, whose parameter values are transcribed as facts in
+  `source/photometry/sato-2014-hapke-643nm.json`, with w, b and h_S taken as
+  medians of the LROC WAC Hapke parameter map (NASA/GSFC/Arizona State
+  University, PDS). Both are cited in `source/manifest.json`.
 
 ## B6 sources
 

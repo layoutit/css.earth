@@ -531,6 +531,24 @@
           }
         ]
       }
+    },
+    {
+      "path": "photometry/buratti-2017-lunar-lambert-lorri.json",
+      "purpose": "Lunar-Lambert law of Pluto fitted to New Horizons LORRI approach images, used to light the globe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2016-11-012",
+            "role": "method",
+            "evidence": "Buratti et al. (2017) eq. 1 writes I/F = f(alpha) [A mu0/(mu0 + mu) + (1 - A) mu0]; the Pluto section gives the best global fit A = 0.70, found by minimizing offsets between the overlapping LORRI images of Table 1. The record's lunar-Lambert weight, which multiplies 2 mu0/(mu0 + mu), is A/(2 - A) = 0.5385; the two forms differ only by a constant factor. The paper computes f(alpha) from the disc-integrated phase curve without printing it, so the record has no phase term. The fitted phase range 15.08 to 16.85 degrees is the phase column of Table 1. The paper states no emission range. The fitted emission limit, 86.8 degrees, is derived here, not printed: it is the emission angle at the outermost pixel centre of the finest Pluto image in Table 1, LOR_0299124574 at 3.81 km per pixel, on a 1188.3 km sphere, arcsin((R - 0.5 pixel)/R). The same resolution follows from Table 1's range and LORRI's 4.96 microradian pixel.",
+            "locator": "Eq. 1; Pluto section; Table 1"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1016/j.icarus.2016.11.012",
+      "credit": "Bonnie J. Buratti and co-authors, New Horizons team; transcription and emission limit: cssEarth.",
+      "acquisition": "Parameter value transcribed from the cited source into a project document; the emission limit is computed from the paper's Table 1; no data file was downloaded."
     }
   ]
 }

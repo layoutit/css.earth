@@ -12,6 +12,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Methane, nitrogen and water ice | [Drozdov & Emelyanov (2026), Zenodo 18825240](https://zenodo.org/records/18825240), CC BY 4.0. Modeled surface fractions from five New Horizons LEISA scans on 14 July 2015. All three use the same 0–100% scale; they are infrared spectral fits, not photographs. |
 | Opening view | The side New Horizons approached: its reverse inbound velocity in the IAU body frame at closest approach, 146.5°E, 43.2°N, computed from the [NAIF New Horizons SPICE archive](https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/) (`nh_recon_pluto_od122_v01`, `nh_plu047_od122`, `pck00011`) by [the approach recipe](source/preparation/approach.json) and checked against SpiceyPy ([`tools/oracles/spice/new-horizons-approach.oracle.test.mts`](../../../tools/oracles/spice/new-horizons-approach.oracle.test.mts)). |
 | Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records. |
+| Lighting | The lunar-Lambert law of [Buratti et al. (2017)](https://doi.org/10.1016/j.icarus.2016.11.012), A = 0.70 for LORRI; its limb limit is derived here. See [Lighting law](#lighting-law). |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PLUTO/target) Pluto centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels depend on their size on screen, and a selected feature stays labelled. Available in all six views. |
 
 ## Evidence
@@ -52,6 +53,16 @@ The retained notes point to [unit checks](https://github.com/layoutit/css.earth/
 
 Declared inputs are checked by the shared source manifest coverage check.
 
+## Lighting law
+
+The globe is lit with the lunar-Lambert law of [Buratti et al. (2017)](https://doi.org/10.1016/j.icarus.2016.11.012), fitted to New Horizons LORRI approach images: I/F = f(α) [A μ0/(μ0 + μ) + (1 − A) μ0] with A = 0.70, found by minimizing offsets between the overlapping images of their Table 1 at 15.08° to 16.85° phase. The record [`source/photometry/buratti-2017-lunar-lambert-lorri.json`](source/photometry/buratti-2017-lunar-lambert-lorri.json) writes it as a weight of A/(2 − A) = 0.5385 on 2 μ0/(μ0 + μ); the two forms differ only by a constant. Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
+- The paper states no emission range. The limit the law is held at toward the limb, 86.8°, is derived here and is second class: the emission angle at the outermost pixel centre of the finest Pluto image in Table 1, LOR_0299124574 at 3.81 km per pixel, on a 1,188.3 km sphere. Beyond it the law is held.
+- With the Sun behind the viewer the law darkens the limb to 0.56 of the centre at 86.8° emission.
+- The paper computes the surface phase function f(α) from the disc-integrated phase curve and prints no values, so the frames with Shadows on carry no phase term: only the disk function changes with the Sun.
+- One law lights the whole body. The authors say it under-corrects the brightest regions and over-corrects the darkest. It was fitted at low phase with the haze included; it does not describe the haze-lit limb at high phase, which the paper left out because of atmospheric contamination.
+- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js pluto --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false` in d090ce637d. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.031 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.188 at 0.98. The redraw also rebuilt `scene.json` and `runtime.json` with Pluto's system transform turned 180 degrees, which would show the far side at opening; those two files were restored to the published bytes, so only the lighting changed.
+
 ## Known problems
 
 LEISA fractions depend on the assumed ice optical properties and the fitting
@@ -77,9 +88,9 @@ presentation choices. The pole, prime meridian and Sun direction at the shared
 epoch now come from the IAU/WGCCRE rotation model in
 `src/platform/solar-geometry.mts`; the body record carries the NSSDC obliquity
 of 119.51° (`source/editorial/factsheet-review.json`) rather than the retired
-lane's rounded 57° display tilt. Lighting is the Mercury-style Lambert bank
-(Shadows toggle) with no atmosphere material; Pluto's real haze layers are not
-modelled. Sky orientation is contextual, not a New Horizons camera solution.
+lane's rounded 57° display tilt. Lighting is Pluto's own bank drawn from the
+published law under Lighting law (Shadows toggle), with no atmosphere material;
+Pluto's real haze layers are not modelled. Sky orientation is contextual, not a New Horizons camera solution.
 All these choices are prepared; the browser only transports state.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -1,0 +1,35 @@
+{
+  "id": "lroc-wac-hapkeparammap-643nm-v1-1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "LROC WAC Hapke Photometric Parameter Map, 643 nm",
+  "version": "v1.1",
+  "publisher": "NASA/GSFC/Arizona State University",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.lroc.im-ldi.com/lroc/view_rdr/WAC_HAPKEPARAMMAP",
+      "label": "LROC Hapke parameter maps"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_HAPKEPARAMMAP/WAC_HAPKEPARAMMAP_643NM.IMG",
+      "label": "643 nm PDS product"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_HAPKEPARAMMAP/WAC_HAPKEPARAMMAP_643NM.IMG",
+      "checkedOn": "2026-09-25",
+      "locator": "Attached label: WAC_HAPKEPARAMMAP_643NM, v1.1, 360 x 140 samples at 1 pixel/degree from 70S to 70N, nine PC_REAL bands W, B, C, BCO, HC, BSO, HS, THETA, PHI."
+    },
+    {
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_HAPKEPARAMMAP/WAC_HAPKEPARAMMAP_README.TXT",
+      "checkedOn": "2026-09-25",
+      "locator": "Free parameters w, b, c, Bs0 and hs per tile; Bc0 0.0, hc 1.0, theta 23.657 and phi held fixed; cites Sato et al. (2014)."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

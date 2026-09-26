@@ -291,6 +291,38 @@
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Lunar-Lambert law of Buratti et al. (2017), A = 0.70 for LORRI (weight 0.5385 in the library's form), fitted at 15.08 to 16.85 degrees phase, relative to the flood-lit disc centre. The paper states no emission range; the limit 86.8 degrees is derived here from the outermost pixel of the finest Pluto image in its Table 1 (LOR_0299124574) and is second class.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2016.11.012",
+        "https://arxiv.org/abs/1604.06129"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "3588c20637fda8e4bdca8dee31a88a732a231f10"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the published lunar-Lambert law of Buratti et al. (2017); Pluto now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/3588c20637fda8e4bdca8dee31a88a732a231f10/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "3588c20637fda8e4bdca8dee31a88a732a231f10"
+        }
+      ]
     }
   ]
 }

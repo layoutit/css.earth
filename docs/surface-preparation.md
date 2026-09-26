@@ -581,8 +581,29 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
   | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
   | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../tools/photometry/fit-epic-limb.mts)) |
+  | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
+  | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
+  | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
+
+  The Galilean moons, Titan, Iapetus, the five large Uranian moons, Triton,
+  Eris and Makemake keep the shared `sphere` bank. Each
+  has a `limb-law` entry in its `investigations.json` that says what was found
+  and what is missing: no law exists, the published one could not be read, it
+  states no emission range, or it covers regions rather than the whole body.
 
   ![Each planet's default view in the app, before (authored lighting) and after (published laws), 25 September 2026](images/planet-limbs/before-after.png)
+
+  Ceres, the Moon, Pluto and Charon, each on css.earth with the shared bank
+  (left) and with its published law (right), 25 September 2026. The shared
+  bank darkened the flood-lit limb to an overlay alpha of 0.49 at 0.98 of the
+  radius; the laws give 0.004 for Ceres and the Moon and about 0.19 for Pluto
+  and Charon. The globes turned between the two captures, and css.earth still
+  showed Charon's coarse texture level.
+
+  ![Ceres before and after](images/planet-limbs/ceres-before-after.webp)
+  ![The Moon before and after](images/planet-limbs/moon-before-after.webp)
+  ![Pluto before and after](images/planet-limbs/pluto-before-after.webp)
+  ![Charon before and after](images/planet-limbs/charon-before-after.webp)
 - **One overlay per pixel.** A CSS overlay has one colour and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean colour,
   measured at bake, and for every pixel in the channel that sets its alpha. A

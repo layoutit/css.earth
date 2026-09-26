@@ -11,7 +11,7 @@ and attribution conditions. No agency or mission endorsement is implied.
 - JPL physical facts: NASA Jet Propulsion Laboratory / Solar System Dynamics.
 - NASA editorial facts: NASA Science. The short introduction is authored here.
 
-No OpenSpace code, Google imagery, or live external assets are loaded by Pluto. The Lambert lighting bank follows the shared OpenSpace-derived shading model recorded in `source/preparation/raster.json` (MIT-licensed shader reference, no OpenSpace data).
+No OpenSpace code, Google imagery, or live external assets are loaded by Pluto. The globe's lighting is the published lunar-Lambert law of Buratti et al. (2017), doi:10.1016/j.icarus.2016.11.012, whose value is transcribed as a fact in `source/photometry/buratti-2017-lunar-lambert-lorri.json` and cited in `source/manifest.json`.
 
 LEISA ice maps: A. E. Drozdov and N. V. Emelyanov (2026), *New surface
 composition and temperature maps of Pluto from New Horizons LEISA data*,

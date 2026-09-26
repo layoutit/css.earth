@@ -12,7 +12,12 @@
         "https://doi.org/10.1038/s41467-024-51826-4",
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC11448499/"
       ],
-      "checked": [{ "date": "2026-09-13", "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393" }]
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        }
+      ]
     },
     {
       "id": "lorri-mvic-mosaic",
@@ -182,6 +187,54 @@
         {
           "date": "2026-09-13",
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Lunar-Lambert law of Buratti et al. (2017), A = 0.70 for LORRI (weight 0.5385 in the library's form), fitted at 15.08 to 16.85 degrees phase, relative to the flood-lit disc centre. The paper states no emission range; the limit 86.5 degrees is derived here from the outermost pixel of the finest Charon image in its Table 1 (LOR_0299147641) and is second class.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2016.11.012",
+        "https://arxiv.org/abs/1604.06129"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "3588c20637fda8e4bdca8dee31a88a732a231f10"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the published lunar-Lambert law of Buratti et al. (2017); Charon now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/3588c20637fda8e4bdca8dee31a88a732a231f10/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "3588c20637fda8e4bdca8dee31a88a732a231f10"
+        }
+      ]
+    },
+    {
+      "id": "buratti-2019-hapke",
+      "subject": "Hapke model of Buratti et al. (2019) as the limb law",
+      "status": "excluded",
+      "finding": "w 0.72, g -0.09, roughness 23 degrees, fitted to disc-integrated phase curves from 15 to 169.5 degrees (ApJL 874, L3, Table 3). A disc-integrated fit states no emission range and was not tested on disc-resolved brightness; the disc-resolved lunar-Lambert fit of Buratti et al. (2017) is used instead.",
+      "evidence": [
+        "https://doi.org/10.3847/2041-8213/ab0bff"
+      ],
+      "revisitWhen": "A disc-resolved test of this Hapke model against LORRI images, with its emission range.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "3588c20637fda8e4bdca8dee31a88a732a231f10"
         }
       ]
     }

@@ -104,6 +104,39 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Hapke model of Sato et al. (2014) at 643 nm, the model the WAC global morphologic mosaic was corrected with: form, fixed values and fitted limits (incidence below 75, emission below 30, phase below 97 degrees) from the paper; w 0.3854, b 0.2375 and h_S 0.0672 are medians of the PDS 643 nm parameter map from 30S to 30N, because the paper prints no global w; c and B_S0 follow from the paper's eq. 2 and 4. Relative to the flood-lit disc centre and held at 30 degrees emission toward the limb.",
+      "evidence": [
+        "https://doi.org/10.1002/2013JE004580",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_HAPKEPARAMMAP/WAC_HAPKEPARAMMAP_README.TXT",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the published Hapke law of Sato et al. (2014); the Moon now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/preparation/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }
