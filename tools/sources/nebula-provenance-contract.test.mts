@@ -4,7 +4,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '@cssearth/objects/sources';
 import { evidenceLink, parseInvestigationLedger } from '../investigations/investigation-ledger.mts';
 import { readInvestigationSurveys } from '../investigations/investigation-survey.mts';
 import { applicationDeliveryKind } from '@cssearth/bake/nebula';

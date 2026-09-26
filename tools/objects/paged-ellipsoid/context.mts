@@ -2,7 +2,7 @@ import { resolve } from 'node:path';
 import { readAuthoredSources } from '../authored-sources.ts';
 import { readJsonSource } from '../../sources/source-values.mts';
 import { requireFiniteNumber } from '@cssearth/core';
-import { validateSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.mts';
 import { parseInteriorSource } from '@cssearth/bake/objects/layers/paged-ellipsoid';

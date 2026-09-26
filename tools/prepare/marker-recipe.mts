@@ -1,4 +1,4 @@
-import { safeRelativePath } from '../../src/platform/source-path.mts';
+import { safeRelativePath } from '@cssearth/objects/node';
 import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 /** A pin identifies bytes git does not hold; a marker image authored in this repository carries none. */

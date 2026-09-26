@@ -4,7 +4,7 @@ import type { PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation'
 import type { prepareSolidMaterial } from './solid-raster.mts';
 import type { SolidRasterGrid } from '@cssearth/bake/objects/layers/terrestrial';
 import type { combineRadialModels } from './radial-models.mts';
-import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { createSourceManifest } from '@cssearth/objects/node';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';

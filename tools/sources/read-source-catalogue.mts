@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseSourceCatalog } from '../../src/platform/source-catalog.mts';
+import { parseSourceCatalog } from '@cssearth/objects/sources';
 
 async function sourceRecordPaths(root: string): Promise<string[]> {
   const entries = await readdir(resolve(root, 'src/sources'), { withFileTypes: true });

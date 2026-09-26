@@ -8,7 +8,7 @@ import { validateInventory, requireInventory, verifyInventory } from "../../src/
 import {
   validateSourceManifest,
   verifySourceManifest,
-} from "../../src/platform/source-manifest.mts";
+} from "@cssearth/objects/node";
 
 export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name">, projectRoot = process.cwd(), authored = false) {
   const root = resolve(projectRoot, "src", "objects", objectRecord.id);

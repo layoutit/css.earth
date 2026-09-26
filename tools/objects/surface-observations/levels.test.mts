@@ -7,7 +7,7 @@ import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, sel
 import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
 import { namedLevelRefusal } from './surface.mts';
 import { observingSeasons } from './formats/controlled-camera.mts';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 const policy = { minimumPairs: 64, maximumGain: 1.35 };

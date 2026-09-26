@@ -1,7 +1,7 @@
 /** Load one body's surface-observation lens through the shared pipeline, for tests that check what its preview covers. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { parseRadialLoaderConfig } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';

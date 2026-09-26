@@ -1,6 +1,6 @@
 import { requireControls } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
-import { sourceUrl } from '../src/platform/source-catalog.mts';
+import { sourceUrl } from '@cssearth/objects/sources';
 import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './object-shell-types.js';
 
 const object = (value: unknown, label: string): Record<string, unknown> => {

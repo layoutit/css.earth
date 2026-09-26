@@ -1,7 +1,7 @@
 import { productSourceIds, validateObjectProvenance } from './object-provenance.mts';
 import type { ProvenanceDocument } from './object-provenance.mts';
-import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from './source-catalog.mts';
-import type { SourceResolver, SourceReference } from './source-catalog.mts';
+import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '@cssearth/objects/sources';
+import type { SourceResolver, SourceReference } from '@cssearth/objects/sources';
 import { objectDataset, parseDatasetDestination, type DatasetHost } from './dataset-destination.mts';
 
 export type SourceUseKind = 'product-input' | 'method' | 'citation' | 'shared-context' | 'artwork';

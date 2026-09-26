@@ -11,7 +11,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { loadRadialModels } from './terrestrial-layers/radial-models.mts';
 import { radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';

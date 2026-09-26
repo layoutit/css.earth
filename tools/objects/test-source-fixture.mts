@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 
 /** Bind synthetic files already written in a temporary test directory to the real source validator. */
 export async function fixtureSource(sourceRoot: string, entries: readonly {

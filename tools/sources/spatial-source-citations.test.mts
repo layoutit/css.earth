@@ -4,7 +4,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
 import { readSourceCatalog } from './read-source-catalogue.mts';
-import { sourceResolver } from '../../src/platform/source-catalog.mts';
+import { sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '../../src/platform/source-usage.mts';
 import { spatialSourceCitations } from './spatial-source-citations.mts';
 

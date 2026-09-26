@@ -6,7 +6,7 @@
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 
 /** The banks' directory, found upward from this module: it runs from tools/references and bundled into tools/objects/dist. */
 function findReferenceBankRoot(from: string): string {

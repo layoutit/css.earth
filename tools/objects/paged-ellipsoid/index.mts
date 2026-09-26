@@ -5,7 +5,7 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseBodyAttitude } from './geographic/source-records.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { verifySourceManifest } from '../../../src/platform/source-manifest.mts';
+import { verifySourceManifest } from '@cssearth/objects/node';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import type { preparePagedEllipsoidAssets } from './assets.mts';

@@ -2,31 +2,28 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
-import { parseSourceManifest } from '#preparation/source-files';
-const test = sourceTest();
+import { onTestFinished, test } from 'vitest';
 
 import {
 assertRangeResponse,
 rangeRequestHeader,
 validateSourceManifest,
 verifySourceManifest,
-} from "./source-manifest.mts";
+} from "./source-manifest.js";
 
 test('document descriptions are optional without weakening generator identity', () => {
   const base = sourceManifest({ 'input/source.txt': Buffer.from('input') });
   const { purpose, ...document } = base.documents[0];
   const manifest = { ...base, documents: [document] };
-  for (const parse of [(value: unknown) => validateSourceManifest('fixture', value), (value: unknown) => parseSourceManifest(value, 'fixture')]) {
-    assert.deepEqual(parse(manifest).documents[0], document);
-    assert.throws(() => parse({ ...manifest, documents: [{ ...document, purpose: '' }] }), /empty purpose/);
-    assert.throws(() => parse({ ...manifest, generatedIntermediates: [{ ...base.generatedIntermediates[0], generator: '' }] }), /generator/);
-  }
+  const parse = (value: unknown) => validateSourceManifest('fixture', value);
+  assert.deepEqual(parse(manifest).documents[0], document);
+  assert.throws(() => parse({ ...manifest, documents: [{ ...document, purpose: '' }] }), /empty purpose/);
+  assert.throws(() => parse({ ...manifest, generatedIntermediates: [{ ...base.generatedIntermediates[0], generator: '' }] }), /generator/);
 });
 
-test("validates and verifies every authoritative source entry class", async (t) => {
+test("validates and verifies every authoritative source entry class", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-manifest-"));
-  t.after(() => rm(root, { force: true, recursive: true }));
+  onTestFinished(() => rm(root, { force: true, recursive: true }));
   await mkdir(join(root, "input"));
   await mkdir(join(root, "generated"));
   await mkdir(join(root, "docs"));
@@ -87,9 +84,9 @@ test("validates and verifies every authoritative source entry class", async (t) 
   );
 });
 
-test("rejects a declared file missing from the source tree", async (t) => {
+test("rejects a declared file missing from the source tree", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-missing-"));
-  t.after(() => rm(root, { force: true, recursive: true }));
+  onTestFinished(() => rm(root, { force: true, recursive: true }));
   const bytes = Buffer.from("input");
   const files = { "input/source.txt": bytes };
   const manifest = validateSourceManifest("fixture", {

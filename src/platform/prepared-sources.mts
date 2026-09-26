@@ -1,4 +1,4 @@
-import { parseSourceCatalog, parseSourceBinding, sourceResolver, sourceArray, sourceObject, sourceText, sourcePath, sourceUnique } from './source-catalog.mts';
+import { parseSourceCatalog, parseSourceBinding, sourceResolver, sourceArray, sourceObject, sourceText, sourcePath, sourceUnique } from '@cssearth/objects/sources';
 import { parseSourceUsage } from './source-usage.mts';
 export function parsePreparedSources(raw: unknown) {
   const value = sourceObject(raw,['schema','catalog','usage','inventory','closure']);

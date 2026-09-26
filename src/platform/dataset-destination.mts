@@ -1,4 +1,4 @@
-import { sourceId, sourceText } from './source-catalog.mts';
+import { sourceId, sourceText } from '@cssearth/objects/sources';
 
 /** Only these two application routes may select a prepared object's dataset. */
 export function datasetDestination(objectId: string, route: string, lensId: string): string {

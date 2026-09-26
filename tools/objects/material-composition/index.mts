@@ -6,7 +6,7 @@ import { layeredRecipe, spectralRecipe, radialMotionRecipe, layeredPresentationR
 import {cutawayRecipe} from '@cssearth/bake/objects/layers/cutaway';
 import { parseRadialLayerRecipe, prepareGiantLayers } from '@cssearth/bake/objects/layers/giant';
 import {shape,text,number,boolean,array,isRecord,requireRecord} from '@cssearth/core';
-import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
+import {createSourceManifest} from '@cssearth/objects/node';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {mkdir,readFile,realpath,writeFile,rm} from 'node:fs/promises';
 import {relative,resolve,sep} from 'node:path';

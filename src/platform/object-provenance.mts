@@ -5,8 +5,8 @@ import type { ProductInputEvidence } from './product-input-evidence.mts';
 import { isArray } from '@cssearth/core';
 import { parseCapture } from './exploration-catalog.mts';
 import type { Capture } from './exploration-catalog.mts';
-import { parseSourceBinding } from './source-catalog.mts';
-import type { SourceBinding } from './source-catalog.mts';
+import { parseSourceBinding } from '@cssearth/objects/sources';
+import type { SourceBinding } from '@cssearth/objects/sources';
 export type ProvenanceJson = null | boolean | number | string | readonly ProvenanceJson[] | { readonly [key: string]: ProvenanceJson };
 export interface ProvenanceOperation { readonly url?: string; readonly [key: string]: ProvenanceJson | undefined; }
 export interface ProvenanceSource {

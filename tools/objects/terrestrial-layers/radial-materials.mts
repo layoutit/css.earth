@@ -3,7 +3,7 @@ import { matchesPreparationGenerator } from '../../prepare/preparation-generator
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
 import type { SciencePalette } from '@cssearth/bake/objects/raster';
 import type { PreparedTriangle, SourceSurfaceSample } from '@cssearth/bake/objects/geometry';
-import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN as dot } from '@cssearth/core';
 import { parseRadialSnapshot, createRasterEmitter, createSourceMeshLighting, prepareNativePhotographicAtlas, renderRadialSnapshot, neutralShapeAtlas, shapeFillIllumination } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh, closestTrianglePoint } from '@cssearth/bake/objects/geometry';

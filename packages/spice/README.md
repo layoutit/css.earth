@@ -25,10 +25,10 @@ live behind the separate `@cssearth/spice/node` entry.
 
 A kernel bank is one pinned set of a mission's kernels under the checkout's `src/spice/<set>/`. Only its manifest is
 committed. The package finds `src/spice` from its own package name, so the path is the same from `src/`, from `dist/`
-and from any caller. A bank's `manifest.json` has the shape of a body's source manifest, and that format belongs to the
-application, so `kernelBanks` takes the manifest reader as an argument.
+and from any caller. A bank's `manifest.json` has the shape of a body's source manifest, and that format belongs to
+`@cssearth/objects/node`, so `kernelBanks` takes the manifest reader as an argument.
 [`tools/kernel-banks/kernel-bank.mts`](../../tools/kernel-banks/kernel-bank.mts) binds the banks to
-`src/platform/source-manifest.mts` for the preparation tools, and it is also the command line:
+`@cssearth/objects/node` (`createSourceManifest`) for the preparation tools, and it is also the command line:
 
 ```sh
 node tools/kernel-banks/kernel-bank.mts acquire <set>        # restore missing kernels, then verify every pin

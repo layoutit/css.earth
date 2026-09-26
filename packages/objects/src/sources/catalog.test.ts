@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
-import { parseSourceCatalog, sourceResolver, parseSourceBinding, parseSourceCitation } from './source-catalog.mts';
+import { test } from 'vitest';
+import { parseSourceCatalog, sourceResolver, parseSourceBinding, parseSourceCitation } from './catalog.js';
 const record = (id = 'work') => ({id,title:'Published work',kind:'data-product',identityLevel:'work',identifiers:[],links:[{role:'landing',url:'https://example.org/product',label:'Provider'}],
   evidence:[{path:'source/record.json',locator:'/product'}],relations:[],statements:[]});
 const catalog = () => ({schema:'cssearth-source-catalog@1',records:[record()]});

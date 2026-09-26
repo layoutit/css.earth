@@ -65,6 +65,22 @@ test('the FITS reader package is followed into its sources, as when it was a loc
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the source catalogue and manifest checks are followed into @cssearth/objects, as when they sat under src/platform', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-objects-'));
+  try {
+    await writeFile(resolve(root, 'entry.mts'), "import { parseSourceBinding } from '@cssearth/objects/sources'; import { validateSourceManifest } from '@cssearth/objects/node'; import { parseObjectDescriptor } from '@cssearth/objects';\nexport const used=[parseSourceBinding,validateSourceManifest,parseObjectDescriptor];\n");
+    await mkdir(resolve(root, 'packages/objects/src/sources'), { recursive: true });
+    await mkdir(resolve(root, 'packages/objects/src/node'), { recursive: true });
+    await writeFile(resolve(root, 'packages/objects/src/sources/catalog.ts'), 'export const parseSourceBinding=()=>1;\n');
+    await writeFile(resolve(root, 'packages/objects/src/sources/index.ts'), "export * from './catalog.js';\n");
+    await writeFile(resolve(root, 'packages/objects/src/node/index.ts'), 'export const validateSourceManifest=()=>2;\n');
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/objects/src/node/index.ts', 'packages/objects/src/sources/catalog.ts', 'packages/objects/src/sources/index.ts']);
+    await writeFile(resolve(root, 'packages/objects/src/sources/catalog.ts'), 'export const parseSourceBinding=()=>3;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the telescope library is followed into its sources, as when its modules sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-'));
   try {

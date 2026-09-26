@@ -1,6 +1,6 @@
 import { INPUT_ROLES, productInputRoles } from './product-input-evidence.mts';
 import type { InputRole } from './product-input-evidence.mts';
-import { sourceEnum } from './source-catalog.mts';
+import { sourceEnum } from '@cssearth/objects/sources';
 import { validateObjectProvenance } from './object-provenance.mts';
 import type { ProvenanceDocument } from './object-provenance.mts';
 import { explorationArray, explorationId, explorationRecord, explorationText, parseCapture, parseCaptureObservation, validateCapture } from './exploration-catalog.mts';

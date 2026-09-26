@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sourceArray, sourceObject, sourceText, sourcePath } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourceText, sourcePath } from '@cssearth/objects/sources';
 import { fetchWithRetry, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../assets/source-mirror.mts';
 
 const root = resolve(import.meta.dirname, '../..');

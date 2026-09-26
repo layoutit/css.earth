@@ -1,4 +1,4 @@
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { parseRadialLoaderConfig, decodeOsirisReflectance } from '@cssearth/bake/objects/layers/terrestrial';
 // Preparation-only source-model image for archived-camera registration.
 import { readFile, writeFile } from 'node:fs/promises';

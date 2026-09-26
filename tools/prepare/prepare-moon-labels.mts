@@ -5,7 +5,7 @@ import { gzipSync, gunzipSync } from 'node:zlib';
 import catalogue from '../../site/source/moon-catalogues.json' with { type: 'json' };
 import world from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { hasProperMoonName, prepareBodyMoons } from '../../site/prepare-body-moons.mts';
-import { sourceArray, sourceObject, sourceText } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 
 
 const centerCodes: Readonly<Record<string, string>> = { jupiter: '599', saturn: '699', uranus: '799', neptune: '899' };

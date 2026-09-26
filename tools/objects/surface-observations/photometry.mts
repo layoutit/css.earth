@@ -1,7 +1,7 @@
 /** The photometry stage: every route's brightness treatment as one gain function with its report. */
 import type { ObservationPhotometry } from './contract.mts';
 import type { DiskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
-import type { SourceManifest } from '../../../src/platform/source-manifest.mts';
+import type { SourceManifest } from '@cssearth/objects/node';
 import { observationGain } from '@cssearth/bake/objects/layers/terrestrial';
 import { resolvePublishedPhotometry, type PublishedPhotometryBlock } from '../terrestrial-layers/published-photometry.mts';
 

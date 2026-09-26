@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { prepareRingLeaves, ringQuadStyle } from './rings.mts';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
 
-import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 import { prepareSolidBodySurface } from '@cssearth/bake/scene';
 import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';

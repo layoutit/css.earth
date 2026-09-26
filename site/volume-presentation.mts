@@ -1,5 +1,5 @@
 import { parseDatasetLens } from './prepared-panel-content.mts';
-import { sourceArray, sourceId, sourceObject, sourceUnique } from '../src/platform/source-catalog.mts';
+import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import type { PreparedVolumeLensBank } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 

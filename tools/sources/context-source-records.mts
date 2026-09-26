@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseSourceBinding, sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '../../src/platform/source-catalog.mts';
+import { parseSourceBinding, sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '@cssearth/objects/sources';
 import type { ProvenanceSource } from '../../src/platform/object-provenance.mts';
 
 export async function manifestSources(manifest: Record<string, unknown>, root: string, input: (path: string) => Promise<Buffer>): Promise<ProvenanceSource[]> {

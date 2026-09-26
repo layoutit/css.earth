@@ -4,7 +4,7 @@ const test = sourceTest();
 import { datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
 import { compileContributions, parseContributionGraph } from './exploration-contributions.mts';
 import { compileSourceUsage, parseSourceUsage } from './source-usage.mts';
-import { parseSourceCatalog, sourceResolver } from './source-catalog.mts';
+import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
 import { parseAgencies, parseExplorationCatalog } from './exploration-catalog.mts';
 import type { ProvenanceDocument } from './object-provenance.mts';
 

@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { prepareSolidRasters } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
-import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
+import { createSourceManifest } from '@cssearth/objects/node';
 const parseNavigation = (v: unknown) => { const raw=requireRecord(v); return {...raw,source:shape({path:text})(raw.source)}; };
 const parseSnapshotRecipe=shape({size:number,longitudeDegrees:number,latitudeDegrees:number,ambient:number,diffuse:number,inputs:array(text)});
 const read=async (p: string): Promise<unknown>=>JSON.parse(await readFile(p,'utf8')),write=async(p: string,o: unknown)=>writeFile(p,JSON.stringify(o,null,2)+'\n');

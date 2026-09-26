@@ -1,8 +1,8 @@
-import { SOURCE_MANIFEST_SCHEMA } from '../../src/platform/source-manifest.mts';
+import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
 import type { InputRole } from '../../src/platform/product-input-evidence.mts';
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '@cssearth/core';
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';
-import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
+import { parseSourceBinding } from '@cssearth/objects/sources';
 
 export {requireRecord as record, requireString as text};
 export const records = (value: unknown) => requireArray(value).map(item => requireRecord(item));

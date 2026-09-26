@@ -1,5 +1,5 @@
-import { parseSourceCitation } from './source-catalog.mts';
-import type { SourceCitation, SourceResolver } from './source-catalog.mts';
+import { parseSourceCitation } from '@cssearth/objects/sources';
+import type { SourceCitation, SourceResolver } from '@cssearth/objects/sources';
 /** Shared runtime validation for the authored and prepared exploration catalogues. */
 export interface Cited<T> { readonly value: T; readonly citations: readonly SourceCitation[]; }
 export type FacilityKind = 'orbiter' | 'lander' | 'rover' | 'probe' | 'observatory' | 'flyby' | 'sample-return'

@@ -4,7 +4,7 @@ import { sha256 } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceObject, sourceArray, sourceText } from '../../src/platform/source-catalog.mts';
+import { sourceObject, sourceArray, sourceText } from '@cssearth/objects/sources';
 
 const root = resolve(import.meta.dirname, '../..');
 const json = async (path: string) => sourceObject(JSON.parse(await readFile(resolve(root, path), 'utf8')));
