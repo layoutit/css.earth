@@ -5,7 +5,7 @@ import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from
 import { renderNativeFocus } from './focus-response.mts';
 import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
 import { requiredElement } from './browser-types.mts';
-import { PLACE_FEATURE_PREFIX } from './feature-search.mts';
+import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readDatasetUrl } from './dataset-url.mts';
 
 function region(html: string, name: string) {

@@ -1,8 +1,5 @@
-import { catalogEntry } from './object-catalog.mts';
-import { parseObjectDiscovery } from './object-discovery.mts';
-import { parseNavigationDistance } from './navigation/navigation-distance.mts';
-import { definePreparedFocus, isSceneObject, type NavigableObject } from './prepared-focus-object.mts';
-import type { ObjectEntry } from './object-schema.mts';
+import { catalogEntry, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import type { NavigableObject, ObjectEntry } from './objects.mts';
 import { isRecord } from '@cssearth/core';
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first
@@ -30,7 +27,7 @@ export function objectFromEntry(value: unknown): NavigableObject {
   if (value.kind === 'prepared-focus') return definePreparedFocus(value.focus);
   if (value.kind !== 'scene' || !isRecord(value.descriptor)) throw new TypeError('Invalid object entry.');
   const descriptor = value.descriptor;
-  const { order: _order, context: _context, ...object } = catalogEntry(descriptor, async signal => {
+  const { order: _order, context: _context, ...object } = catalogEntry(descriptor, async (signal?: AbortSignal) => {
     const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
     return loadPackagedObject(descriptor, signal);
   }, parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));

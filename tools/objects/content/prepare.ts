@@ -3,8 +3,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
-import { prepareLensLabels } from "../../../site/prepare-lens-labels.mts";
-import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mts";
+import { prepareLensLabels } from "./prepare-lens-labels.mts";
 import { prepareLenses } from "./lenses";
 import { lensBillboardColors } from "./billboard-colors.mts";
 import { parseFactsheet, verifyFactsheetSources } from '../../sources/factsheet-sources.mts';
@@ -28,6 +27,12 @@ const titleMap: Record<string, { label: string; src: string; width: number; heig
   lenses: PREPARED_SHELL_TITLES.lenses,
   settings: PREPARED_SHELL_TITLES.settings,
 };
+
+const SCIENTIFIC_CHART_TITLES = Object.freeze({
+  reflectance: PREPARED_SHELL_TITLES.reflectance,
+  photometricPhase: Object.freeze({ label: "Photometric phase curve" }),
+  temperaturePressure: PREPARED_SHELL_TITLES.temperaturePressure,
+});
 
 /** The display fields of a shell title. Its font pin and input hash are the generator's receipt and stay in its own module. */
 function requiredShellTitle(key: string): { label: string; src: string; width: number; height: number } {

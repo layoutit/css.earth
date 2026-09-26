@@ -4,11 +4,8 @@ import { parsePreparedGalaxyCatalog } from '../../packages/catalog/src/spatial.t
 import { parsePreparedClusterCatalog, isPreparedCluster } from '../../packages/catalog/src/clusters.ts';
 import { parsePreparedNebulaCatalog, isPreparedNebula } from '../../packages/catalog/src/nebulae.ts';
 import type { PreparedCatalogObject } from '../../packages/catalog/src/clusters.ts';
-import { normalizeDestinationQuery } from '../../site/destination-search.mts';
-import { definePreparedFocus } from '../../site/prepared-focus-object.mts';
-import { parseNavigationDistance } from '../../site/navigation/navigation-distance.mts';
+import { defineObjects, definePreparedFocus, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord, hasErrorCode } from '@cssearth/core';
-import { defineObjects } from '../../site/object-schema.mts';
 
 const AU_M = 149597870700, PC_M = 3.085677581491367e16;
 /** One tenth of a parsec, about 20,000 AU: the far edge of the Oort cloud. */

@@ -33,6 +33,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*"
   },
   "devDependencies": {

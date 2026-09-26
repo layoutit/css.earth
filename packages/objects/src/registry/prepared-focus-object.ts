@@ -1,7 +1,7 @@
 import { isRecord } from '@cssearth/core';
-import { parseNavigationDistance } from './navigation/navigation-distance.mts';
-import type { NavigationDistance } from './navigation/navigation-distance.mts';
-import type { ObjectEntry } from './object-schema.mts';
+import { parseNavigationDistance } from './navigation-distance.js';
+import type { NavigationDistance } from './navigation-distance.js';
+import type { ObjectEntry } from './object-schema.js';
 
 export interface PreparedFocusObject {
   readonly kind: 'prepared-focus';
@@ -17,8 +17,8 @@ export interface PreparedFocusObject {
   /** A galaxy its catalogue has not confirmed (LVDB `confirmed_galaxy` and `confirmed_real`): searchable by name, not listed as a galaxy. */
   readonly candidate?: true;
 }
-export type NavigableObject = ObjectEntry | PreparedFocusObject;
-export const isSceneObject = (object: NavigableObject): object is ObjectEntry => object.kind === 'scene';
+export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> | PreparedFocusObject;
+export const isSceneObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is ObjectEntry<Scene, Signal> => object.kind === 'scene';
 
 /** A focus reuses its host scene and camera; it has no scene loader. */
 export function definePreparedFocus(input: unknown): PreparedFocusObject {

@@ -8,7 +8,7 @@ import majorMoons from '../../site/source/major-moons.json' with { type: 'json' 
 import galaxies from '../../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusters from '../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import type { ObjectDiscovery } from '../../site/object-discovery.mts';
+import type { ObjectDiscovery } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT } from '../../site/world-context-plan.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';

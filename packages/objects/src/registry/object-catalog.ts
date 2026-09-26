@@ -1,14 +1,14 @@
-import type { ObjectDiscovery } from './object-discovery.mts';
+import type { ObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
-import { defineObject } from './object-schema.mts';
-import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.mts';
-import type { NavigationDistance } from './navigation/navigation-distance.mts';
+import { defineObject } from './object-schema.js';
+import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
+import type { NavigationDistance } from './navigation-distance.js';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
 /** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */
 export interface CatalogContext { name?: string; color?: string; order?: number; orbitsWithinAu?: number; labelPlacement?: 'centre' }
 /** Alternate scientific names owned by the object's package. They are not navigation labels or system membership. */
-export type CatalogEntry = ObjectEntry & { readonly aliases: readonly string[]; order?: number; context?: CatalogContext };
+export type CatalogEntry<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> & { readonly aliases: readonly string[]; order?: number; context?: CatalogContext };
 
 function classification(value: unknown): ObjectClassification {
   switch (value) {
@@ -33,7 +33,7 @@ function aliases(value: unknown, id: string): readonly string[] {
 }
 
 /** Decode package metadata at both the build and application boundaries. */
-export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['loadScene'], distance: NavigationDistance, discovery?: ObjectDiscovery): CatalogEntry {
+export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDefinitionInput<Scene, Signal>['loadScene'], distance: NavigationDistance, discovery?: ObjectDiscovery): CatalogEntry<Scene, Signal> {
   if (!isRecord(input) || input.schema !== 'cssearth-object@1' || typeof input.id !== 'string' || !isRecord(input.properties)) {
     throw new TypeError('Invalid catalogue descriptor.');
   }

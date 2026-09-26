@@ -2,10 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { OBJECTS } from '../objects.mts';
-import { defineObjects } from '../object-schema.mts';
-import { definePreparedFocus } from '../prepared-focus-object.mts';
-import type { PreparedFocusObject } from '../prepared-focus-object.mts';
-import { normalizeDestinationQuery } from '../destination-search.mts';
+import { defineObjects, definePreparedFocus, normalizeDestinationQuery, type PreparedFocusObject } from '@cssearth/objects';
 
 test('rendered nebulae contribute common names and catalogue aliases to search', async () => {
   const rows = OBJECTS.filter((object): object is PreparedFocusObject => object.kind === 'prepared-focus' && object.classification === 'nebula');

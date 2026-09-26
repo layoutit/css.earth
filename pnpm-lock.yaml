@@ -370,6 +370,9 @@ importers:
 
   packages/objects:
     dependencies:
+      '@cssearth/catalog':
+        specifier: workspace:*
+        version: link:../catalog
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core

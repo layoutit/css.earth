@@ -1,5 +1,5 @@
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
-import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectEntry } from './objects.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser-types.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';

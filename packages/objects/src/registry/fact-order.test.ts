@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
-const test = sourceTest();
+import { test } from 'vitest';
 
-import { orderFacts } from "../fact-order.mts";
+import { orderFacts } from "./fact-order.js";
 
 test("orders comparable facts before stable planet-specific facts", () => {
   const facts = [

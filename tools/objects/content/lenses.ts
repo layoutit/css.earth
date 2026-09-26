@@ -1,4 +1,4 @@
-import { prepareLensCategoryLegend, prepareLensScaleLegend } from "../../../site/prepared-lens-legends.mts";
+import { prepareLensCategoryLegend, prepareLensScaleLegend } from "./prepared-lens-legends.mts";
 import type { LensRecipe, PreparedRasterAssets } from "./types";
 
 const assetUrl = (objectId: string, asset: string | undefined): string | undefined => {

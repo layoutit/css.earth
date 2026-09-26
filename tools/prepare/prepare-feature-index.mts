@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { isRecord } from '@cssearth/core';
-import { normalizeDestinationQuery } from '../../site/destination-search.mts';
+import { normalizeDestinationQuery } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
 
 /** One search index over every body's prepared named features, so a feature can be found

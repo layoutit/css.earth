@@ -1,6 +1,6 @@
 import { isRecord } from '@cssearth/core';
-import { matchesObjectClassification } from './object-categories.mts';
-import { parseArrivalView, type PreparedArrivalView } from './arrival-view.mts';
+import { matchesObjectClassification } from './object-categories.js';
+import { parseArrivalView, type PreparedArrivalView } from './arrival-view.js';
 
 export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; orientationReference?: number;
   /** A star without imagery of its own that a body with imagery orbits: its planetary system is on the map. */

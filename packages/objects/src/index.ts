@@ -10,3 +10,4 @@ export * from './baking/index.js';
 export * from './geometry/index.js';
 export { prepareObject, readPreparedObject } from './preparation.js';
 export type { ObjectPreparation } from './preparation.js';
+export * from './registry/index.js';
