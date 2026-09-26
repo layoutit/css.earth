@@ -6,7 +6,6 @@ export * from './disc-band-color.ts';
 export * from './elevation.ts';
 export * from './fits-map.ts';
 export * from './hmi-continuum.ts';
-export * from './index.ts';
 export * from './off-limb-plate.ts';
 export * from './pds-float-map.ts';
 export * from './plate-saturation.ts';
