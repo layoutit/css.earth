@@ -10,7 +10,7 @@ import { loadAstronomyPackage } from './astronomy/astronomy-package.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import * as geometry from '../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseSolidPreparationSource } from '../objects/terrestrial-layers/profile-source.mts';
+import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseSolidReplayScene } from '../prepared/prepared-replay-source.mts';
 import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
 

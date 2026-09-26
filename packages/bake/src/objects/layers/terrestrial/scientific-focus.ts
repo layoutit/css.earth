@@ -1,11 +1,11 @@
-import {parseScientificFocus,parseScientificCamera} from '@cssearth/bake/objects/raster';
-import {prepareEclipticPresentationFrame} from '@cssearth/bake/objects/scene';
+import {parseScientificFocus,parseScientificCamera} from '../../raster/index.ts';
+import {prepareEclipticPresentationFrame} from '../../scene/index.ts';
 import {preparedControlPitch} from '@cssearth/engine';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import type { SolarGeometry } from '../../scene/index.ts';
 
 /** A geographic target is a body-fixed direction; the ecliptic presentation frame is where the drawn body puts it (the
  * world-navigation stage solves the carrier so that holds). The runtime receives only the existing camera destination contract. */
-export function prepareScientificFocus(bodyId: string, value: unknown, cameraValue: unknown) {
+export function prepareScientificFocus(solarGeometry: SolarGeometry, bodyId: string, value: unknown, cameraValue: unknown) {
   const focus=parseScientificFocus(value),camera=parseScientificCamera(cameraValue);
   if (!focus || ![focus.longitudeDegrees,focus.latitudeDegrees,focus.zoom].every(Number.isFinite) ||
       focus.longitudeDegrees < 0 || focus.longitudeDegrees >= 360 || Math.abs(focus.latitudeDegrees)>90 ||
@@ -22,8 +22,8 @@ export function prepareScientificFocus(bodyId: string, value: unknown, cameraVal
 }
 
 /** Keep the camera destination and its allowed zoom in the existing renderer
- * navigation contract. Surface preparation emits this record unchanged. */
-export function prepareScientificNavigation(bodyId: string, focus: unknown, cameraValue: unknown) {
+ * navigation contract. Surface preparation emits this record unchanged. The caller passes the generated solar geometry. */
+export function prepareScientificNavigation(solarGeometry: SolarGeometry, bodyId: string, focus: unknown, cameraValue: unknown) {
   const camera=parseScientificCamera(cameraValue);
-  return {maximumZoom: camera.maximumZoom, camera: prepareScientificFocus(bodyId, focus, camera)};
+  return {maximumZoom: camera.maximumZoom, camera: prepareScientificFocus(solarGeometry, bodyId, focus, camera)};
 }

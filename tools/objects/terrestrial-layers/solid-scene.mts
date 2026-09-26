@@ -10,7 +10,7 @@ import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-pres
 import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
-import { prepareScientificNavigation } from './scientific-focus.mts';
+import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BASE_TILE } from '@layoutit/polycss';
@@ -136,7 +136,7 @@ export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan
     (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
   const variants = focus.size === 0 ? definition.variants : definition.variants.map(variant => {
     const lensId = (variant.when as {lensId?:string}|undefined)?.lensId;
-    return lensId !== undefined && focus.has(lensId) ? { ...variant, navigation: prepareScientificNavigation(id, focus.get(lensId), epoch.camera) } : variant;
+    return lensId !== undefined && focus.has(lensId) ? { ...variant, navigation: prepareScientificNavigation(solarGeometry, id, focus.get(lensId), epoch.camera) } : variant;
   });
   const nextDefinition = { ...definition, variants, camera: { ...definition.camera, ...epoch.camera }, sky: epoch.sky, sun: epoch.sun,
     tree: { ...definition.tree, nodes: nodes.map((node, index) => index === carriers[0] ? { ...node, style: `transform:${epoch.systemTransform}` } : node) } };
@@ -187,7 +187,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const focus = new Map((['observations','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
     (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
   const variants = surfaces.flatMap(s => [false, true].map((shadows):PreparedVariant => ({
-    ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(id, focus.get(s.id), plan.camera)} : {}),
+    ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(solarGeometry, id, focus.get(s.id), plan.camera)} : {}),
     when: { lensId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, ...(lighting ? ['lighting'] : []), ...(rings ? ['rings'] : [])],
     writes: [
       ...(rings ? [{ kind: 'texture' as const, target: index(rings), name: `--${id}-ring-image`, resource: 'rings', quoted: true }] : []),

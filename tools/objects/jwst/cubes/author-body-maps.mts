@@ -24,7 +24,7 @@ import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { horizonsTables } from '../../sphere-horizons.mts';
-import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../../terrestrial-layers/observer-cameras.mts';
+import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc } from '../../resolved-disc-map.mts';
 import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';

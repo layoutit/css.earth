@@ -1,5 +1,5 @@
 /** The surface-observation route: one validator and one loader for every photograph format. See README.md. */
-import type { SurfaceOptions } from '../terrestrial-layers/contracts.mts';
+import type { SurfaceOptions } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SurfaceObservationFormat } from './contract.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 import { GEO_FORMATS, geoFormat } from './formats/geo.mts';

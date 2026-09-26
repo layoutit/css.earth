@@ -13,11 +13,7 @@
  */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { kernelBanks } from '@cssearth/spice/node';
-import { createSourceManifest } from '@cssearth/objects/node';
-
-export const { openKernelBank, kernelBankPaths, restoredBankFile, bankKernelPath, acquireKernelBank, addKernels } =
-  kernelBanks({ openManifest: createSourceManifest, acquireCommand: 'node tools/kernel-banks/kernel-bank.mts' });
+import { acquireKernelBank, addKernels, openKernelBank } from '@cssearth/bake/objects/cameras';
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [command, set, ...rest] = process.argv.slice(2);

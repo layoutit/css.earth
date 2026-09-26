@@ -1,6 +1,6 @@
 import {requireRecord,shape,number,text,optional,boolean,array,dictionary,choice} from '@cssearth/core';
-import {parseSciencePalette} from '../../raster/index.ts';
-import {parseNativePhotographicSampling} from './native-photograph.ts';
+import {parseSciencePalette} from '../../../raster/index.ts';
+import {parseNativePhotographicSampling} from '../native-photograph.ts';
 
 const texture = {textureScale:optional(number),monochromeBase:optional(text),
   previewGrid:optional(shape({width:number,height:number})),displaySampling:optional(text)};

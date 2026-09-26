@@ -20,7 +20,7 @@ import { pathToFileURL } from 'node:url';
 import { addProductEvidence, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { numbers, utcToEt } from '@cssearth/spice';
 import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { decodeJunocam, refinableStrips, type JunocamGeometry, refineStripEpochs, type StripRefinementPolicy } from '@cssearth/bake/objects/layers/terrestrial';

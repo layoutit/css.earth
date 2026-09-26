@@ -19,10 +19,10 @@ import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { horizonsTables } from '../sphere-horizons.mts';
-import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
+import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { esoHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
 import { readProgram } from './archive.mts';
-import { bankKernelPath } from '../../kernel-banks/kernel-bank.mts';
+import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
 const PCK = 'src/spice/cassini/pck/pck00011.tpc';
