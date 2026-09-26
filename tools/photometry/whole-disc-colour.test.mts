@@ -4,7 +4,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { tieBandRatios } from '../objects/terrestrial-layers/photometric-observations.mts';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from './limb.mts';
-import { displayBandRatios, loadWholeDiscColour, parseWholeDiscColour, WHOLE_DISC_COLOUR_SCHEMA } from './whole-disc-colour.mts';
+import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from './whole-disc-colour.mts';
 
 const record = { schema: WHOLE_DISC_COLOUR_SCHEMA, id: 'fixture', quantity: 'fixture', spectrum: {}, illuminant: {}, observer: 'fixture', linearSrgb: [0.5, 0.4, 0.25] };
 
@@ -36,4 +36,19 @@ test('a map with its limb law divided out is tied through the law\'s disc means,
 test("Saturn's record is Karkoschka's sunlit disc, #ceb794", async () => {
   const colour = await loadWholeDiscColour(resolve(import.meta.dirname, '../../src/objects/saturn/source'), 'photometry/karkoschka-1998-whole-disc-colour.json');
   assert.deepEqual(displayBandRatios(colour).ratios, { green: 0.764, blue: 0.4834 });
+});
+
+test('after a tie the map gets back its luminance with one factor, and texels past the knee are shouldered, never clipped, ratios kept', () => {
+  // Two rows of two texels at +-45 degrees (equal weights): a dim grey pair and a bright warm pair.
+  const rgb = new Float32Array([0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.6, 0.45, 0.3, 0.6, 0.45, 0.3]);
+  const before = latitudeWeightedLuminance(rgb, 2, 2);
+  const report = keepLuminance(rgb, 2, 2, before * 1.5);
+  assert.equal(report.factor, 1.5); assert.equal(report.knee, 0.8); assert.equal(report.shoulderedTexels, 2);
+  // Below the knee: exactly the factor. Above it: the brightest channel follows the shoulder and the texel keeps its ratios.
+  assert.ok(Math.abs(rgb[0]! - 0.3) < 1e-6);
+  assert.ok(Math.abs(rgb[6]! - softShoulder(0.9)) < 1e-6 && rgb[6]! < 1);
+  assert.ok(Math.abs(rgb[7]! / rgb[6]! - 0.75) < 1e-6 && Math.abs(rgb[8]! / rgb[6]! - 0.5) < 1e-6);
+  // The shoulder is continuous in value and slope at the knee and never reaches 1.
+  assert.equal(softShoulder(0.8), 0.8); assert.ok(Math.abs((softShoulder(0.8 + 1e-6) - 0.8) / 1e-6 - 1) < 1e-4); assert.ok(softShoulder(2) < 1);
+  assert.throws(() => keepLuminance(rgb, 2, 2, 0), /must be positive/u);
 });

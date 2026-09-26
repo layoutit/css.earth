@@ -38,7 +38,7 @@ weather path did not alter the Cassini UVIS ring recipe.
 - Thermal colors and interior layers are illustrations. No measured global thermal raster is qualified here.
 - Ring opacity and narrow features are enhanced for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
-- The visible map's colour balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colours are kept, but a seasonal change in Saturn's overall colour since 1995 would not show. The tie sets channel ratios only; the map's brightness is still the archive TIF's arbitrary scale, and lowering green and blue made the disc about a fifth darker than before.
+- The visible map's colour balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colours are kept, but a seasonal change in Saturn's overall colour since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 4 % of texels are compressed by a soft shoulder.
 - The map's blue channel is F395N (violet) data, displayed as sRGB blue with the F467M limb law. The navigation portrait and context image still crop the untied TIF.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -144,10 +144,19 @@ blue/red 0.5057. The solar-tinted map measured 0.9272 and 0.6953
 (cosine-weighted means in linear light), so green is scaled by 0.729 and blue
 by 0.7273, and red is kept. The flood-lit disc then integrates to
 Karkoschka's colour; tying the map's own mean instead left the rendered disc
-greener (green/red 0.856) with an olive limb. `node --test
+greener (green/red 0.856) with an olive limb. Keeping red and lowering green
+and blue also made the map a fifth darker (cosine-weighted luminance 0.426 to
+0.337), and in the app Saturn looked brown. So the tied map then gets back its
+untied luminance: one factor on all three channels, 1.264, which keeps the
+tied ratios. With that factor alone red would clip on 0.5 % of texels, so a
+texel whose brightest channel passes 0.8 of full scale is compressed by a soft
+shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), all three channels by the
+same amount: 4.35 % of texels, none clipped, each keeping its own ratios. The
+largest factor that clips nothing, 1.085, left the disc dark. `node --test
 tools/photometry/whole-disc-colour.test.mts
 tools/objects/material-composition/layered-oblate.test.mts` checks the record,
-the disc means and these gains on the restored map. Spatial colour
+the disc means, these gains, the luminance factor and the shouldered share on
+the restored map. Spatial colour
 differences stay the map's own. An independent spectrum agrees: Saturn's
 swatch, from the Payne et al. (2026) composite reference spectrum with the Sun
 adapted to the D65 white, has green/red 0.863 and blue/red 0.589, where

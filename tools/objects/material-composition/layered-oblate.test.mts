@@ -40,7 +40,7 @@ test('an image that cannot be measured is refused with its owner and path', asyn
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
-test("Saturn's tinted OPAL map is tied to Karkoschka's whole-disc colour with the gains its README reports", async () => {
+test("Saturn's tinted OPAL map is tied to Karkoschka's whole-disc colour and keeps its luminance, with the numbers its README reports", async () => {
   const source = resolve(import.meta.dirname, '../../../src/objects/saturn/source');
   const recipe = JSON.parse(await readFile(join(source, 'preparation/geometry.json'), 'utf8')), parameters = recipe.parameters;
   const tint = textureTintFactors(Math.PI, parameters.objectSolarAlbedoMultiplier, parameters.objectSolarAlbedoMultiplier, 0), peak = Math.max(tint.r, tint.g, tint.b);
@@ -48,5 +48,6 @@ test("Saturn's tinted OPAL map is tied to Karkoschka's whole-disc colour with th
   const { tie: report } = await prepareSurfaceColour({ sourcePath: join(source, recipe.sources.surface), unobservedRows: recipe.surfaceUnobservedRows,
     width: parameters.planetSourceTextureWidth, height: parameters.planetSourceTextureHeight, equatorialToPolar: parameters.objectEquatorialRadiusKm / parameters.objectPolarRadiusKm,
     channelFactors: [tint.r / peak, tint.g / peak, tint.b / peak], tie });
-  assert.deepEqual(report, { reference: 'red', source: 'karkoschka-1998-whole-disc-colour', measured: { green: 0.9272, blue: 0.6953 }, published: { green: 0.6759, blue: 0.5057 }, gains: [1, 0.729, 0.7273] });
+  assert.deepEqual(report, { reference: 'red', source: 'karkoschka-1998-whole-disc-colour', measured: { green: 0.9272, blue: 0.6953 }, published: { green: 0.6759, blue: 0.5057 }, gains: [1, 0.729, 0.7273],
+    luminance: { factor: 1.264, knee: 0.8, shoulderedTexels: 180204, shoulderedShare: 0.0435 } });
 });

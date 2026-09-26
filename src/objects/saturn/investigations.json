@@ -504,6 +504,21 @@
           "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
       ]
+    },
+    {
+      "id": "tied-map-luminance",
+      "subject": "Brightness of the colour-tied visible map",
+      "status": "included",
+      "finding": "The tie keeps red and lowers green and blue, so the map lost a fifth of its cosine-weighted luminance (0.426 to 0.337) and Saturn looked brown in the app (whole-disc Y 0.315 against 0.409 on main). The tied map now gets back its untied mean luminance with one factor on all three channels, 1.264, then a soft shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), on each texel's brightest channel, all channels by the same amount: 4.35 % of texels, none clipped, ratios kept. The factor alone clips red on 0.5 % of texels; the largest factor that clips nothing, 1.085, leaves the whole disc at Y 0.326. Chosen by the user on a preview built with the lane's own code, 2026-09-25.",
+      "evidence": [
+        "https://doi.org/10.1006/icar.1998.5913"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-25",
+          "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
     }
   ]
 }

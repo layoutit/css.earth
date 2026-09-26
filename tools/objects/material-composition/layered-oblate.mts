@@ -49,7 +49,7 @@ import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithE
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../photometry/limb.mts';
-import { displayBandRatios, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
+import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
 import { tieBandRatios } from '../terrestrial-layers/photometric-observations.mts';
 import type { BandRatioPolicy } from '../terrestrial-layers/contracts.mts';
 
@@ -92,7 +92,8 @@ function fillUnobservedRows(data: Buffer, info: { width: number; height: number;
  * The prepared surface map before it is encoded: unobserved rows filled, resampled once to the prepared grid, rows moved
  * from planetographic latitude (the OPAL readme) to the mesh's own latitude, and the Sun's colour multiplied in linear light.
  * When the recipe names a whole-disc colour, the band-ratio tie then scales green and blue over every texel, cosine-weighted
- * by latitude, and its report is returned. One sRGB encoding at the end.
+ * by latitude, the map gets back its untied mean luminance with a soft shoulder, and both reports are returned. One sRGB
+ * encoding at the end.
  */
 export async function prepareSurfaceColour({ sourcePath, unobservedRows, width, height, equatorialToPolar, channelFactors, tie }: {sourcePath:string;
   unobservedRows:readonly (readonly [number, number])[];width:number;height:number;equatorialToPolar:number;channelFactors:readonly number[];tie?:BandRatioPolicy}) {
@@ -110,7 +111,10 @@ export async function prepareSurfaceColour({ sourcePath, unobservedRows, width, 
   const pixels = info.width * info.height, linear = new Float32Array(pixels * 3);
   for (let pixel = 0; pixel < pixels; pixel += 1) for (let channel = 0; channel < 3; channel += 1)
     linear[pixel * 3 + channel] = Math.min(1, srgbToLinear(data[pixel * info.channels + channel] / 255) * channelFactors[channel]);
-  const report = tie ? tieBandRatios(linear, new Uint8Array(pixels).fill(1), info.width, info.height, CHANNEL_NAMES, tie) : undefined;
+  // The tie keeps red and lowers green and blue; the map then gets back its own mean luminance (keepLuminance), shouldered, not clipped.
+  const luminance = tie && latitudeWeightedLuminance(linear, info.width, info.height);
+  const report = tie && luminance ? { ...tieBandRatios(linear, new Uint8Array(pixels).fill(1), info.width, info.height, CHANNEL_NAMES, tie),
+    luminance: keepLuminance(linear, info.width, info.height, luminance) } : undefined;
   for (let pixel = 0; pixel < pixels; pixel += 1) for (let channel = 0; channel < 3; channel += 1)
     data[pixel * info.channels + channel] = Math.round(255 * linearToSrgb(linear[pixel * 3 + channel]));
   return { data, info, tie: report };

@@ -615,8 +615,11 @@ same published law, so the limb in the app is the limb the instrument saw.
   green and blue are scaled by one gain each so that, once the limb law is put
   back, the flood-lit disc integrates to that colour: the target ratios are the
   colour's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
+  The tie keeps red, so the map then gets back its untied mean luminance with
+  one factor on all three channels, and texels whose brightest channel passes
+  0.8 are compressed by a soft shoulder instead of clipping, ratios kept.
   The tie is the Uranian moons' band-ratio tie; the
-  [Saturn README](../src/objects/saturn/README.md) reports its gains.
+  [Saturn README](../src/objects/saturn/README.md) reports its gains and factor.
 - **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
   limb profile with the Sun behind the viewer, lit where the tangent point faces
   the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
