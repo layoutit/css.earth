@@ -9,7 +9,6 @@ import ts from 'typescript';
 import { posix } from 'node:path';
 import { isRecord, requireRecord, requireString } from '@cssearth/core';
 import { RESOLVE_EXTENSIONS } from './cruiser-config.mts';
-import { distSource } from './renderer-entries.mts';
 
 export interface AstroSpecifier { readonly specifier: string; readonly typeOnly: boolean; readonly symbols: readonly string[] }
 
@@ -67,8 +66,6 @@ export interface ResolveContext {
   readonly workspaces: readonly WorkspacePackage[];
   /** The root `package.json#imports` map. */
   readonly imports: Readonly<Record<string, unknown>>;
-  /** Compiled renderer entries to their sources (`renderer-entries.mts`). */
-  readonly distEntries: ReadonlyMap<string, string>;
 }
 
 /** The `types` target of an export or import condition, as the cruise's condition order picks it. */
@@ -107,7 +104,7 @@ export function packageEntry(directory: string): string { return `${directory}/s
 
 export function resolveSpecifier(from: string, raw: string, context: ResolveContext): string | undefined {
   const specifier = raw.replace(/[?#].*$/u, '');
-  const pick = (base: string) => distSource(base, context.distEntries) ?? candidates(posix.normalize(base)).find(path => context.tracked.has(path));
+  const pick = (base: string) => candidates(posix.normalize(base)).find(path => context.tracked.has(path));
   if (specifier.startsWith('.')) return pick(posix.join(posix.dirname(from), specifier));
   if (specifier.startsWith('/')) return pick(specifier.slice(1));
   if (raw.startsWith('#')) {
