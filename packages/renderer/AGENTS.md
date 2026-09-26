@@ -3,13 +3,13 @@
 Own the CSS renderer runtime: loading, decoding and validating prepared objects, the shared world camera and its
 navigation, retained CSS rendering of bodies, skies, stars, volumes, image layers and labels, and the universe context
 around the focused object. The site and the preparation tools reach it through `@cssearth/renderer` and its subpaths.
-The compilers that write the renderer's prepared formats are preparation code; they stay in `src/renderers/css/preparation`
-and import this package.
+The compilers that write the renderer's prepared formats are preparation code; they live in `@cssearth/bake` and import
+this package.
 
 ## The runtime contract
 
 - This is browser code. Import packages and the renderer's own modules only: never the application (`site/`,
-  `src/platform/`, `src/objects/`), tools, labs, preparation code (`@cssearth/bake`, `src/renderers/css/preparation`) or
+  `src/platform/`, `src/objects/`), tools, labs, preparation code (`@cssearth/bake`) or
   Node built-ins. `eslint.config.mts` enforces it for everything but tests.
 - Keep runtime DOM retained and stable. Decode and transport prepared state; never derive source data, geometry,
   charts, atlases or scene assets at runtime.

@@ -23,12 +23,31 @@ its validators accept); the renderer never imports the bake.
   cutaway, composite and emissive presentations. It imports `scene` and `raster`. The host passes material tracks, the
   prepared-presentation contract and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or
   platform modules itself.
+- `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
+  slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
+  It imports `scene` and `volume`.
+- `src/stars/` is published as `@cssearth/bake/stars` (Node only): the point-field star bake (recipes, catalogue
+  sources, palette, hierarchy, point atlas and photometry, diffuse sky, encoded bank). It imports `raster` and `volume`.
+- `src/shell/` is published as `@cssearth/bake/shell` (Node only): the surface-shell bake and its CSS compiler. It
+  imports `scene` and `volume`.
+- `src/sky/` is published as `@cssearth/bake/sky` (Node only): the cubic sky bake (recipes, EXR source, baked faces,
+  near-star sprites) and its CSS compiler. It imports `volume-leaves` and `volume`.
+- `src/density/` is published as `@cssearth/bake/density` (Node only): the density-volume object bake (acquisition,
+  column depth, fixed discs, slice atlases and retirement, lens-bank promotion). It imports `sky`, `volume-leaves` and
+  `volume`.
+- `src/image-layers/` is published as `@cssearth/bake/image-layers` (Node only): the extruded image-layer bake and its
+  resampler. It imports `volume-leaves`.
+- `src/environment/` is published as `@cssearth/bake/environment` (Node only): the environment-image replay. It
+  imports `image-layers`, `shell`, `stars`, `density` and `volume`.
+- The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
+  inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none.
 
 - `src/volume/` is published as `@cssearth/bake/volume`: the volume contracts, coordinates, fields, materials and
   sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices and the
-  compiler bake. It may import `node:*`, `sharp` and the main volume entry; nothing outside `src/volume/node/` imports it.
+  compiler bake. It may import `node:*`, `sharp` and the main volume entry. The main entry never imports it; the Node-only
+  topics above may, as a lower layer.
 
 ## Behaviour is part of the contract
 

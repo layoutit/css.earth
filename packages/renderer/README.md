@@ -6,8 +6,8 @@ the universe context around the focused object. The site mounts objects through 
 formats and validators so that what they write is what the browser reads.
 
 It was `src/renderers/css` until 2026-09-26. The compilers that write its prepared formats stayed there
-(`src/renderers/css/preparation`), as did the object page stylesheets (`src/renderers/css/styles/*-surfaces.css`), which
-belong to the objects.
+(`src/renderers/css/preparation`) until they moved into `@cssearth/bake`; the object page stylesheets
+(`src/renderers/css/styles/*-surfaces.css`), which belong to the objects, stay there.
 
 ## Entries
 
