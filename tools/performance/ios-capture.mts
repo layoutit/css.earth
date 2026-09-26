@@ -756,6 +756,7 @@ const INPUT_LOGGER = `(() => {
 /** "● REC n" at the top of the page, counting down the seconds of a hand recording; window.__captureBadge() removes it. */
 const RECORDING_BADGE = (seconds: number) => `(() => {
   const badge = document.createElement('div'), end = performance.now() + ${seconds} * 1000;
+  badge.dataset.captureOverlay = '';
   badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2147483647;pointer-events:none;' +
     'font:600 15px/1 system-ui;color:#fff;background:#c62828;padding:6px 12px;border-radius:14px';
   const show = () => { badge.textContent = '● REC ' + Math.max(0, Math.ceil((end - performance.now()) / 1000)); };
@@ -765,12 +766,19 @@ const RECORDING_BADGE = (seconds: number) => `(() => {
   return true;
 })()`;
 
-/** Every style and class write the page makes while recording, from a MutationObserver: which element, which inline
- * properties or classes changed, and when. RecalculateStyles says how long WebKit spent; this says what it recomputed
- * for. Aggregated in the page (one entry per element and property) so a coasting globe does not ship megabytes. */
+/** Every attribute write and child insertion or removal the page makes while recording, from a MutationObserver: which
+ * element, which inline properties, attributes or children changed, and whether the camera was moving at that moment
+ * (drag and coast announce objectrotationchange, the motion signal objectmotionchange; production builds before that
+ * signal get a wheel counted as moving for 700 ms). The invariant is judged on the moving writes. Aggregated in the page
+ * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
 const STYLE_WRITES_LOGGER = `(() => {
   const t0 = performance.now(), entries = new Map(), perFrame = [];
-  let frameWrites = 0, frameStart = t0;
+  let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, wheelUntil = 0;
+  const moving = () => announced || performance.now() < wheelUntil;
+  const onMotion = event => { announced = Boolean(event.detail && event.detail.active); };
+  const onWheel = () => { wheelUntil = performance.now() + 700; };
+  for (const type of ['objectrotationchange', 'objectmotionchange']) document.addEventListener(type, onMotion, true);
+  addEventListener('wheel', onWheel, { capture: true, passive: true });
   const describe = element => {
     let text = element.localName;
     if (element.id) text += '#' + element.id;
@@ -779,26 +787,41 @@ const STYLE_WRITES_LOGGER = `(() => {
     return text;
   };
   const parse = text => { const map = new Map(); for (const part of (text || '').split(';')) { const i = part.indexOf(':'); if (i > 0) map.set(part.slice(0, i).trim(), part.slice(i + 1).trim()); } return map; };
-  const bump = (key, value, at) => { const entry = entries.get(key) || { key, count: 0, first: at, last: at, value: '' }; entry.count++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry); frameWrites++; };
+  const bump = (key, value, at, inMotion) => {
+    const entry = entries.get(key) || { key, count: 0, moving: 0, first: at, last: at, value: '' };
+    entry.count++; if (inMotion) entry.moving++; entry.last = at; entry.value = String(value).slice(0, 160); entries.set(key, entry);
+    frameWrites++; if (inMotion) frameMoving++;
+  };
+  const ours = node => node.nodeType === 1 ? Boolean(node.closest('[data-capture-overlay]')) : Boolean(node.parentElement && node.parentElement.closest('[data-capture-overlay]'));
   const observer = new MutationObserver(records => {
-    const at = Math.round((performance.now() - t0) * 10) / 10;
+    const at = Math.round((performance.now() - t0) * 10) / 10, inMotion = moving();
     for (const record of records) {
-      const element = record.target, name = record.attributeName, who = describe(element);
+      const element = record.target;
+      if (ours(element)) continue;
+      const who = describe(element.nodeType === 1 ? element : element.parentElement || document.documentElement);
+      if (record.type === 'childList') {
+        for (const node of record.addedNodes) if (!ours(node)) bump(who + ' <+' + (node.localName || '#text') + '>', '', at, inMotion);
+        for (const node of record.removedNodes) bump(who + ' <-' + (node.localName || '#text') + '>', '', at, inMotion);
+        continue;
+      }
+      const name = record.attributeName;
       if (name === 'style') {
         const before = parse(record.oldValue), after = parse(element.getAttribute('style'));
-        for (const [property, value] of after) if (before.get(property) !== value) bump(who + ' { ' + property + ' }', value, at);
-        for (const property of before.keys()) if (!after.has(property)) bump(who + ' { ' + property + ' } removed', '', at);
-      } else bump(who + ' [' + name + ']', element.getAttribute(name), at);
+        for (const [property, value] of after) if (before.get(property) !== value) bump(who + ' { ' + property + ' }', value, at, inMotion);
+        for (const property of before.keys()) if (!after.has(property)) bump(who + ' { ' + property + ' } removed', '', at, inMotion);
+      } else if (record.oldValue !== element.getAttribute(name)) bump(who + ' [' + name + ']', element.getAttribute(name), at, inMotion);
     }
   });
-  observer.observe(document.documentElement, { subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ['style', 'class'] });
+  observer.observe(document.documentElement, { subtree: true, attributes: true, attributeOldValue: true, childList: true });
   let frame = requestAnimationFrame(function tick(now) {
-    if (frameWrites) perFrame.push([Math.round((frameStart - t0) * 10) / 10, frameWrites]);
-    frameWrites = 0; frameStart = now; frame = requestAnimationFrame(tick);
+    if (frameWrites) perFrame.push([Math.round((frameStart - t0) * 10) / 10, frameWrites, frameMoving]);
+    frameWrites = frameMoving = 0; frameStart = now; frame = requestAnimationFrame(tick);
   });
   window.__captureStyles = { stop() {
     observer.disconnect(); cancelAnimationFrame(frame);
-    return { entries: [...entries.values()].sort((a, b) => b.count - a.count), perFrame };
+    for (const type of ['objectrotationchange', 'objectmotionchange']) document.removeEventListener(type, onMotion, true);
+    removeEventListener('wheel', onWheel, { capture: true });
+    return { entries: [...entries.values()].sort((a, b) => b.moving - a.moving || b.count - a.count), perFrame };
   } };
   return true;
 })()`;
@@ -991,7 +1014,7 @@ export function options(args: readonly string[]) {
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
   return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), inspectorScreenshots: Boolean(device) || args.includes('--inspector-screenshots'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
@@ -1231,16 +1254,28 @@ export async function captureIosMoment(args: readonly string[]) {
   // A device replay first calibrates: three taps on a transparent shield give the map from page to display coordinates.
   let replay: { plan: ReturnType<typeof touchPlan>; affine: Affine; hits: unknown } | null = null;
   const replayInput: unknown = option.replay ? JSON.parse(await readFile(resolve(option.replay, 'input.json'), 'utf8')) : null;
-  if (option.replay && target.kind === 'device') {
-    const input = replayInput;
+  // Real touch needs CoreDevice remote control, which iOS 26 refuses ("Remote control requires iOS 27.0 or later",
+  // iPad 26.6, 2026-09-26): the replay then runs in the page, as on the simulator — the app's input code gets the same
+  // pointer events at the same times; only the system's touch pipeline is skipped.
+  let deviceTouch = option.replay !== null && target.kind === 'device';
+  if (deviceTouch) {
     await evaluate(CALIBRATION_SHIELD);
-    await playTouches(option.pymobiledevice3, udid, CALIBRATION_POINTS.flatMap(([x, y], index) => [[index * 500, 'contact', x, y], [index * 500 + 80, 'release', x, y]]), resolve(out, 'calibration-plan.json'));
+    await playTouches(option.pymobiledevice3, udid, CALIBRATION_POINTS.flatMap(([x, y], index) => [[index * 500, 'contact', x, y], [index * 500 + 80, 'release', x, y]]), resolve(out, 'calibration-plan.json'))
+      .catch(async (error: unknown) => {
+        if (!/requires iOS 2[7-9]|startmediastream/u.test(error instanceof Error ? error.message : String(error))) throw error;
+        await evaluate('window.__calibration && window.__calibration.remove()');
+        console.error('ios-capture: this iOS refuses remote touch; replaying the recorded pointer events in the page.');
+        deviceTouch = false;
+      });
+  }
+  if (deviceTouch) {
+    const input = replayInput;
     await wait(300);
     const hits = requireArray(await evaluate('window.__calibration.remove()'), 'calibration hits').map(hit => requireArray(hit, 'hit').map(value => requireFiniteNumber(value, 'hit')) as [number, number]);
     const affine = solveAffine(hits.map((page, index) => ({ page, display: CALIBRATION_POINTS[index]! })));
     replay = { plan: touchPlan(input, affine), affine, hits };
     if (!replay.plan.events.length) throw new Error(`${option.replay}/input.json has no touch to replay.`);
-    await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay)), ...replay }, null, 2) + '\n');
+    await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay!)), ...replay }, null, 2) + '\n');
   }
   const memoryBefore = await memorySample(session, events);
   const recordingStart = events.length;
@@ -1285,7 +1320,8 @@ export async function captureIosMoment(args: readonly string[]) {
   } else if (option.replay) {
     const sent = await evaluate(pageReplayExpression(replayInput));
     marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay)), in: 'page' }), at: 0, value: { sent } });
-    await wait(1000);
+    // The replay resolves at its last pointer event; a flick's inertia coasts on after it.
+    await wait(option.tail * 1000);
   } else if (steps.length) await perform(steps, target, out, marks, started, evaluate, selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }), screenshot);
   else {
     marks.push({ label: `manual ${option.seconds} s`, at: 0 });
