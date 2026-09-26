@@ -4,7 +4,8 @@ import { lambertAttenuationAtlas } from '../terrestrial-layers/lambert-atlas.mts
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
-import { loadDiscIntegratedColor } from '../observation/disc-integrated-color.mts';
+import { loadDiscIntegratedColor } from '@cssearth/bake/objects/color';
+import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 import { prepareGlbSurface } from './glb-surface.mts';
 interface OutputDirectories {publicDirectory:string;publicBase:string;}
 
@@ -35,7 +36,7 @@ export async function prepareModelRasters({ config, axes, publicDirectory, publi
       pixels = uniformSurface(width, height, [128, 128, 128]); source = { neutral: true as const };
     } else if (surface.science.kind === 'disc-integrated-color') {
       // The published whole-disc colour and V geometric albedo, uniform over the body: one mean, no map.
-      const color = await loadDiscIntegratedColor(readSource, surface.science, surface.source);
+      const color = await loadDiscIntegratedColor(readSource, surface.science, surface.source, readCie1931ColorMatching);
       pixels = uniformSurface(width, height, color.srgb);
       source = { discIntegratedColor: { source: surface.source, srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance } };
     } else if (surface.science.kind === 'glb-base-color') {

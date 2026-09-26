@@ -1,4 +1,4 @@
-import { applyLinearTint } from '../color-transfer.mts';
+import { applyLinearTint } from '@cssearth/bake/objects/color';
 import {parse, object, string, boolean} from '@cssearth/core/schema';
 import {radialMotionRecipe, type RadialMotionRecipe} from './radial-motion-recipe.mts';
 import type {ReadonlyVector3} from './ellipsoid.mts';

@@ -1,7 +1,7 @@
 import type { BandRatioPolicy, ObservationGeometry,PhotometryProfile,BandLevelPolicy,ObservedColorContext,ColorBand,RgbObservation} from './contracts.mts';
 import {shape,text,array as sourceArray,number,requireRecord} from '@cssearth/core';
 import { diskGain as diskFunctionGain } from '@cssearth/bake/photometry';
-import { bandColorDisplay, bandColorEvidence, srgbToLinear } from '../color-transfer.mts';
+import { bandColorDisplay, bandColorEvidence, srgbToLinear } from '@cssearth/bake/objects/color';
 const numberArray=sourceArray(number);
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';

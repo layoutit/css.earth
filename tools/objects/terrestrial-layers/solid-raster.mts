@@ -6,7 +6,7 @@ import { createRasterEmitter } from './raster-output.mts';
 import { writeLossyWebp, paintMissingCoverage } from '@cssearth/bake/raster';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import type { RadialState } from './solid-contract.mts';
-import { encodeBandColor, interpolatePalette } from '../color-transfer.mts';
+import { encodeBandColor, interpolatePalette } from '@cssearth/bake/objects/color';
 import { parseSolidRasterConfig, parseSurfaceSource } from './solid-source.mts';
 import { requireTerrainMesh } from './radial-mesh.mts';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';

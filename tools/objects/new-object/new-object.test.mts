@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { parseCieTable } from '../observation/disc-integrated-color.mts';
+import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 import { readIdentifiers, type Archive, type GaiaRow } from './archives.mts';
 import { chooseColor, coverageGaps } from './color.mts';
@@ -169,7 +169,7 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
 
 test('a planet takes its colour from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
   const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planet-lenses.mts');
-  const { hostLitGray } = await import('../color-transfer.mts');
+  const { hostLitGray } = await import('@cssearth/bake/objects/color');
   const csv = [EMISSION_COLUMNS,
     'WASP-39 b,0.8,0.4,,,,,,,,,TESS,,"<a refstr=X href=https://ui.adsabs.harvard.edu/abs/2021AJ....162..127W/abstract target=ref>Wong et al. 2021</a>"',
     'WASP-39 b,3.6,0.75,220,40,-40,0,1050,50,-50,0,Spitzer,IRAC,"<a refstr=Y href=https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract target=ref>Kammer et al. 2018</a>"',

@@ -14,7 +14,7 @@ import { convolveGaussian, readReconstruction, writeReconstruction } from '../..
 import { skyDisplayRaster } from '@cssearth/fits';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import sharp from 'sharp';
-import { interpolatePalette } from '../../color-transfer.mts';
+import { interpolatePalette } from '@cssearth/bake/objects/color';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
 

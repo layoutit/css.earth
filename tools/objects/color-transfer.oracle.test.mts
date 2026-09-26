@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFitsImage } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { asinhBandDisplay, encodeAsinhBands } from './color-transfer.mts';
+import { asinhBandDisplay, encodeAsinhBands } from '@cssearth/bake/objects/color';
 
 const fixture = await readOracleFixture('fits/lupton-asinh.json');
 const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/lupton-bands.fits');

@@ -13,7 +13,7 @@ import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mts';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 import {composeCorrectedColor} from './photometric-observations.mts';
-import { bandColorDisplay, encodeBandColor, bandColorEvidence, interpolatePalette } from '../color-transfer.mts';
+import { bandColorDisplay, encodeBandColor, bandColorEvidence, interpolatePalette } from '@cssearth/bake/objects/color';
 import { checkKeys } from '../surface-observations/recipe.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable } from './pds-radial-table.mts';

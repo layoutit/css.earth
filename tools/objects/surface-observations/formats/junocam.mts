@@ -17,7 +17,7 @@ import { ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
 import { project } from '../../terrestrial-layers/osiris-geo.mts';
 import { CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry } from '../../terrestrial-layers/junocam.mts';
 import { refineStripEpochs, validateStripRefinement } from '../../terrestrial-layers/strip-refinement.mts';
-import { bandColorDisplay } from '../../color-transfer.mts';
+import { bandColorDisplay } from '@cssearth/bake/objects/color';
 import { matrixCamera, type PixelDistortion } from '../cameras.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';

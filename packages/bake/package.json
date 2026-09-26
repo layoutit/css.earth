@@ -74,6 +74,11 @@
       "import": "./dist/environment.js",
       "default": "./dist/environment.js"
     },
+    "./objects/color": {
+      "types": "./dist/objects/color.d.ts",
+      "import": "./dist/objects/color.js",
+      "default": "./dist/objects/color.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

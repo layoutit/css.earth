@@ -17,7 +17,7 @@ import { missingCoverageColor } from '@cssearth/bake/raster';
 import { createRasterEmitter } from './raster-output.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';
-import { linearToSrgb, srgbToLinear } from '../color-transfer.mts';
+import { linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { prepareNativePhotographicAtlas } from './native-photograph.mts';
 import { neutralShapeAtlas, shapeFillIllumination } from './shape-material.mts';
 

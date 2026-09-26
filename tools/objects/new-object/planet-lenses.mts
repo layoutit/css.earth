@@ -18,9 +18,9 @@ import { decodeEntities, NASA_TAP } from './orbit.mts';
 import type { Cited, PhotometrySpec, ThermalSpec } from './spec.mts';
 import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '../observation/disc-band-color.mts';
 import { loadStellarPhotometricColor } from '../observation/stellar/stellar-photometric-color.mts';
-import { parseCieTable } from '../observation/disc-integrated-color.mts';
+import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
-import { hostLitGray } from '../color-transfer.mts';
+import { hostLitGray } from '@cssearth/bake/objects/color';
 import { hostedPlanetStylesheet } from '../new-hosted-planet.mts';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';

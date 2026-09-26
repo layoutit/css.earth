@@ -11,7 +11,8 @@ export default defineConfig({
     'sky': 'src/sky/index.ts',
     'density': 'src/density/index.ts',
     'image-layers': 'src/image-layers/index.ts',
-    'environment': 'src/environment/index.ts' },
+    'environment': 'src/environment/index.ts',
+    'objects/color': 'src/objects/color/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the

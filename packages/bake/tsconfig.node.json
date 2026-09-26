@@ -23,7 +23,8 @@
     "src/sky",
     "src/density",
     "src/image-layers",
-    "src/environment"
+    "src/environment",
+    "src/objects"
   ],
   "exclude": [
     "src/**/*.test.ts"

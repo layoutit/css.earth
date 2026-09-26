@@ -32,13 +32,14 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
-import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
+import { loadDiscIntegratedColor } from '@cssearth/bake/objects/color';
+import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
 import { loadDiscBandColor } from './disc-band-color.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
-import { encodeBandColor, hostLitGray } from '../color-transfer.mts';
+import { encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
@@ -471,7 +472,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // An unresolved surface painted with its published whole-disc colour and geometric albedo: one measured mean, no map.
         const source = await manifest;
         const color = await loadDiscIntegratedColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
-          surface.science, surface.source);
+          surface.science, surface.source, readCie1931ColorMatching);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         return { data, channels: 4, nearest: true, report: { discIntegratedColor: { srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance,
@@ -513,7 +514,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
           await source.validatePath(path);
           const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('./gravity-darkening.mts');
-          const { parseCieTable } = await import('./disc-integrated-color.mts');
+          const { parseCieTable } = await import('@cssearth/bake/objects/color');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
           const { readCie1931ColorMatching } = await import('../../references/reference-bank.mts');
           const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);

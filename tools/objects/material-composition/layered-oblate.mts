@@ -1,4 +1,4 @@
-import { linearToSrgb, srgbToLinear } from '../color-transfer.mts';
+import { linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { sha256 } from '@cssearth/core/node';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
 import type {RingMotionPoint} from './radial-motion.mts';

@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parseCieTable } from '../disc-integrated-color.mts';
+import { parseCieTable } from '@cssearth/bake/objects/color';
 import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from './stellar-photometric-color.mts';
-import { linearToSrgb } from '../../color-transfer.mts';
+import { linearToSrgb } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../../references/reference-bank.mts';
 
 const root = new URL('../../../../src/objects/wasp-43/source/', import.meta.url);

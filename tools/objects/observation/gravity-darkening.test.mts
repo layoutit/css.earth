@@ -4,7 +4,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
-import { parseCieTable } from './disc-integrated-color.mts';
+import { parseCieTable } from '@cssearth/bake/objects/color';
 import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from './gravity-darkening.mts';
 import { planckRadiance } from '../eclipse-map/eigenmap-fit.mts';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';

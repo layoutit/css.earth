@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Astropy make_lupton_rgb bytes for tools/objects/color-transfer.mts encodeAsinhBands.
+"""Astropy make_lupton_rgb bytes for packages/bake/src/objects/color/color-transfer.ts encodeAsinhBands.
 Run with the pinned oracle environment; never imports the TypeScript encoder.
 The float64 band cube is tiny, checked-in test data, not a pipeline asset.
 """

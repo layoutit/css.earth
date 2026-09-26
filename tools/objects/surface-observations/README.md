@@ -142,7 +142,7 @@ report records them.
   authored `displayRange`: the MVIC cube's format names the bands and their data-number
   quantity, which the decoder checks against the native label, and a controlled
   colour lens checks each filter and its I/F units in the native labels. Floating
-  samples receive the [shared IEC sRGB transfer](../color-transfer.mts) once,
+  samples receive the [shared IEC sRGB transfer](../../../packages/bake/src/objects/color/color-transfer.ts) once,
   after surface transfer, and the report records the band policy. Encoding does
   not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe

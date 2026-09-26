@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { scaffoldHostedPlanetFiles, TODO as HOSTED_TODO } from '../new-hosted-planet.mts';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
-import { parseCieTable } from '../observation/disc-integrated-color.mts';
+import { parseCieTable } from '@cssearth/bake/objects/color';
 import { type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
