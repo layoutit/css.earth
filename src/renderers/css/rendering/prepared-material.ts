@@ -123,7 +123,7 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
           const transform = project({ degrees: angle, projection: view.projection,
             counterMatrix: view.counterRotationFor(projection.systemTransform) });
           if (rotation.physical) {
-            if(element.style.getPropertyValue('rotate'))element.style.removeProperty('rotate');
+            if(element.style.rotate)element.style.removeProperty('rotate');
             // These prepared textures carry their centre in the physical matrix.
             if (write('transformOrigin', '0 0')) state.transformWrites++;
           }
