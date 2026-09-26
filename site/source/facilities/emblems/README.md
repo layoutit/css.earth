@@ -5,7 +5,7 @@ The 24 mission entries use permanent transparent PNGs from pinned emblem sources
 Normal app builds only verify and reuse the PNGs. To reproduce them explicitly, run:
 
     node tools/prepare/prepare-facility-emblems.mts
-    node tools/prepare/prepare-facilities.mts
+    node tools/prepare/cli/prepare-facilities.mts
 
 An optional absolute PNG path supplied to the first command writes a contact sheet. The preparation removes only edge-connected exterior white background on opaque inputs. Interior artwork RGB is kept intact before resizing. Existing alpha remains intact. Juno's source vector is placed over its original white circular badge interior, preserving transparency outside the circle. Output frames are 128 by 128 with two pixels of transparent padding, published as a palette PNG (at most 129 colours, exact transparency): they show at 64 CSS px beside a facility render.
 

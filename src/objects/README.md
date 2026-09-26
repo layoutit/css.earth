@@ -74,7 +74,7 @@ Acquisition tools accept `--object=<id>` for asteroid, comet and moon updates.
 They update that body's records; building the library needs no downloads.
 
 After authoring the sources and records, run `pnpm prepare:catalog` and
-`pnpm build:astronomy`, then `node tools/prepare/prepare-navigation.mts <id>` and the selected-body
+`pnpm build:astronomy`, then `node tools/prepare/cli/prepare-navigation.mts <id>` and the selected-body
 preparation command below. If this is a parent's first moon, also prepare the
 parent's navigation image. Commit the new body's files and navigation images.
 Adding a capability or changing a parent's physical data can still require
@@ -86,7 +86,7 @@ edit or force-add them, or append entries to shared TypeScript tables or the
 Sun's source list. The runtime reads markers from packed pages
 (`public/navigation/body-markers-NN@2x.webp`, in catalogue order); each body's
 `body-<id>@2x.webp` stays their source. Adding a body redraws its page and moves
-the tiles after it, so commit the redrawn pages. `node tools/prepare/prepare-navigation.mts <id>...`
+the tiles after it, so commit the redrawn pages. `node tools/prepare/cli/prepare-navigation.mts <id>...`
 redraws them (the `markers` step of `prepare-object.mts`). After merging main into a
 branch that adds bodies, run it, and `prepare-object.mts <id>... --from world` for
 the Sun's world files, before `pnpm install` or `build:tools`, which refuse a page
@@ -127,7 +127,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Start the shared development site | `pnpm dev` |
 | Restore missing source inputs | `node tools/assets/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
-| Update scene-body provenance and source/mission catalogues | `node tools/prepare/prepare-provenance.mts [<id>]` |
+| Update scene-body provenance and source/mission catalogues | `node tools/prepare/cli/prepare-provenance.mts [<id>]` |
 | Bind new inputs to catalogue records | `node tools/sources/author-source-records.mts <id>` |
 | Check shared body runtime behavior | `node --test tests/objects/unit/runtime-package.test.mts`; run affected scientific tests in `tests/objects/unit/` too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
