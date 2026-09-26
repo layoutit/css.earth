@@ -5,11 +5,11 @@ import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { resolve } from 'node:path';
 import { zstdCompressSync, zstdDecompressSync, constants } from 'node:zlib';
-import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';
+import { sourceBytes, containedPath } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import { requireRecord as record } from '@cssearth/core';
-import { decodeExrRgbHalf, halfToFloat, type LinearHalfImage } from './exr.js';
-import type { SkyRecipe } from './config.js';
+import { decodeExrRgbHalf, halfToFloat, type LinearHalfImage } from './exr.ts';
+import type { SkyRecipe } from './config.ts';
 export async function loadSkySource(directory: string, recipe: SkyRecipe): Promise<LinearHalfImage> {
   const { width, height } = recipe.source, rgb16f = Buffer.alloc(width * height * 6);
   for (const chunk of recipe.source.chunks) {

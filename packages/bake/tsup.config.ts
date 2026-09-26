@@ -7,7 +7,8 @@ export default defineConfig({
     presentation: 'src/presentation/index.ts',
     'volume-leaves': 'src/volume-leaves/index.ts',
     'stars': 'src/stars/index.ts',
-    'shell': 'src/shell/index.ts' },
+    'shell': 'src/shell/index.ts',
+    'sky': 'src/sky/index.ts' },
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
   // Only the Node entries need Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the

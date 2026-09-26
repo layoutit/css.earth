@@ -54,6 +54,11 @@
       "import": "./dist/shell.js",
       "default": "./dist/shell.js"
     },
+    "./sky": {
+      "types": "./dist/sky.d.ts",
+      "import": "./dist/sky.js",
+      "default": "./dist/sky.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

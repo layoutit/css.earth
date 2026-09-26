@@ -8,10 +8,7 @@ import { compileCssVolume, prepareVolumeImpostors } from '@cssearth/bake/volume-
 import { acquireVolumeSource } from './acquisition.js';
 import { prepareFixedDiscVolume } from './fixed-disc.js';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
-import { parseSkyRecipe } from '../sky/config.js';
-import { acquireSkySource } from '../sky/source.js';
-import { loadSkyStarSprites, prepareSkyFaces } from '../sky/bake.js';
-import { compileCssSky } from '../../renderers/css/preparation/sky.js';
+import { parseSkyRecipe, acquireSkySource, loadSkyStarSprites, prepareSkyFaces, compileCssSky } from '@cssearth/bake/sky';
 
 export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string;
   inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {

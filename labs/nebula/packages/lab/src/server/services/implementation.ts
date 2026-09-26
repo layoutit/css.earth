@@ -33,7 +33,7 @@ export async function implementationPins(root: string, entries: readonly string[
       // `@cssearth/bake/volume`, and the volume bake was volume-bake before `@cssearth/bake/volume/node`; the preparation
       // topics (photometry, raster, scene, presentation) were relative modules under src/ and tools/. Each topic entry maps
       // to its source index the same way.
-      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation|shell|stars|volume-leaves)$/ }, args => {
+      builder.onResolve({ filter: /^@cssearth\/bake\/(?:volume(?:\/node)?|photometry|raster|scene|presentation|sky|shell|stars|volume-leaves)$/ }, args => {
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') };
       });

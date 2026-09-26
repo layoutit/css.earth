@@ -98,7 +98,7 @@ for (const id of ids) {
       }
       if (recipe.sky) {
         const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
-          import('../../src/preparation/sky/config.ts'), import('./setup.mts'), import('./runtime-assets.mts'),
+          import('@cssearth/bake/sky'), import('./setup.mts'), import('./runtime-assets.mts'),
         ]);
         const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
         if (skyRecipe.stars) {

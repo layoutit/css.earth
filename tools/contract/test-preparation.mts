@@ -18,7 +18,7 @@ const universeEntries = [
   'src/preparation/image-layers/image-layers.test.ts',
   'src/preparation/volume/volume.test.ts',
   'src/preparation/volume/column-depth.test.ts',
-  'src/preparation/sky/sky.test.ts',
+  'packages/bake/src/sky/sky.test.ts',
   'packages/bake/src/volume-leaves/volume.test.ts',
   'packages/bake/src/volume-leaves/volume-impostors.test.ts',
   'src/preparation/spatial-context.test.ts',

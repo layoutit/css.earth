@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
-import { compileCssSky } from '../../../../src/renderers/css/preparation/sky.js';
+import { compileCssSky } from '@cssearth/bake/sky';
 import { preparedSkyCameraTransform } from './prepared-sky-runtime.js';
 import { validatePreparedCssSky } from './validation.js';
-import type { BakedSky } from '../../../../src/preparation/sky/bake.js';
+import type { BakedSky } from '@cssearth/bake/sky';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 
