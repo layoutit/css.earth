@@ -1,10 +1,10 @@
 import { nextFrame } from "./next-frame.mts";
 import { presentFeatureResults } from './search-results-presentation.mts';
 
-import { parseFeaturePin } from './feature-search.mts';
-import { FIND_PATH, parseFindResults } from './find-protocol.mts';
-import type { FindResult } from './find-protocol.mts';
-export type { FindResult } from './find-protocol.mts';
+import { parseFeaturePin } from './search/feature-search.mts';
+import { FIND_PATH, parseFindResults } from './search/find-protocol.mts';
+import type { FindResult } from './search/find-protocol.mts';
+export type { FindResult } from './search/find-protocol.mts';
 
 /** Retained search rows over every body's named features, cities included. The search function ranks them, so the page
  * never downloads the index or a places catalogue. Every row is an ordinary feature URL; the application owns dataset selection and flight. */

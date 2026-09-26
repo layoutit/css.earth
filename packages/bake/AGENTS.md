@@ -53,7 +53,8 @@ its validators accept); the renderer never imports the bake.
   - `objects/geometry`: shape models (OBJ, STL, PDS plate, vertex-facet and radius tables, FITS facet fields) and the records
     that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
     Lambert attenuation atlas and the radial-layer contract.
-  - `objects/cameras`: observer-computed cameras from an ephemeris and a spin state or IAU pole model.
+  - `objects/cameras`: observer-computed cameras from an ephemeris and a spin state or IAU pole model, and the shared SPICE
+    kernel banks bound to the source-manifest reader (`tools/kernel-banks/kernel-bank.mts` is their command line).
   - `objects/scene`: the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the frames
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
     direction and the astrometric sky registration. The solar geometry is generated into the checkout
@@ -64,7 +65,8 @@ its validators accept); the renderer never imports the bake.
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
-    as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). The pipelines' entry
+    as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). Code that reads
+    the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
     scripts and modules that still read platform files stay in `tools/objects/`. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
     old `tools/objects/terrestrial-layers/` paths; `tools/prepare/preparation-generator.mts` binds those names to this code.
@@ -111,3 +113,6 @@ against the delivery's import closure); `src/nebula/objects.ts` names only owner
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+- `tsup` bundles the JavaScript; declarations come from one `tsc` pass (`tsconfig.build.json`, per file under
+  `dist/types/`), and each exported `dist/<entry>.d.ts` re-exports its topic's index. A new topic needs only its entry in
+  `tsup.config.ts` and `package.json`; don't raise Node's heap for the build.

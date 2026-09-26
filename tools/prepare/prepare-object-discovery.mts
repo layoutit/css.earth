@@ -1,8 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import type { ObjectDiscovery } from '../../site/object-discovery.mts';
-import { parseArrivalView, parseArrivalBillboard } from '../../site/arrival-view.mts';
+import { parseArrivalView, parseArrivalBillboard, type ObjectDiscovery } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
 import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation';
 

@@ -1,7 +1,7 @@
 import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '@cssearth/bake/objects/raster';
 import { validateTerrestrialRings } from './rings.mts';
 import { isArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
-import { parseSolidPreparationSource } from './profile-source.mts';
+import { parseSolidPreparationSource, scientificPreviewGrid, lensTextureGrid, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import type { parseSolidScience } from '@cssearth/bake/objects/layers/terrestrial';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -14,7 +14,6 @@ import { prepareDirectionalSun } from '../../../src/platform/prepare-directional
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
 import { prepareSunReferenceViewDirection, prepareEclipticPresentationFrame } from '@cssearth/bake/objects/scene';
 import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mts';
-import { scientificPreviewGrid, lensTextureGrid, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
 import { prepareRadialMaterials } from './radial-materials.mts';
 import { loadRadialModels, combineRadialModels } from './radial-models.mts';

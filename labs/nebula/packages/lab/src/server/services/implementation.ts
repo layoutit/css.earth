@@ -38,6 +38,12 @@ export async function implementationPins(root: string, entries: readonly string[
         manifests.add('packages/bake/package.json');
         return { path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') };
       });
+      // World-rotation validation was a renderer module before it joined @cssearth/objects, beside the registry contracts
+      // that were relative modules under site/; the package's sources stay owners the same way.
+      builder.onResolve({ filter: /^@cssearth\/objects$/ }, () => {
+        manifests.add('packages/objects/package.json');
+        return { path: resolve(root, 'packages/objects/src/index.ts') };
+      });
       // The star colour fit was a relative module (src/preparation/stars/color.ts) before it joined @cssearth/engine, whose
       // sources stay owners the same way.
       builder.onResolve({ filter: /^@cssearth\/engine$/ }, () => {

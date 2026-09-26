@@ -16,10 +16,11 @@
         "https://zenodo.org/records/15103479",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Original Zenodo file, unchanged, MD5 dfb3f096bef955f228ed7e4d4bda12f0 as Zenodo lists it; read in place (tmap for the lens, time for the visible longitudes).",
+      "acquisition": "Original Zenodo file, unchanged; tmap and tmap_unc supply the temperature and uncertainty views, time supplies their common observed-longitude mask.",
       "redistribution": "CC BY 4.0 with attribution.",
       "consumers": [
-        "lally-2025-eclipse-map"
+        "lally-2025-eclipse-map",
+        "lally-2025-map-uncertainty"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -160,6 +161,122 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-189733b-evans-2013-albedo",
+      "path": "science/evans-2013/albedo.json",
+      "origin": "https://arxiv.org/abs/1307.3239",
+      "productId": "Table 1, six-channel binning",
+      "version": "2013",
+      "credit": "Evans et al. (2013): The Deep Blue Color of HD 189733b: Albedo Measurements with HST/STIS at Visible Wavelengths",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Published numerical result transcribed in the checked repository source.",
+      "redistribution": "Factual values only; no paper text or figures.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1307-3239",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1307.3239"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733b-krenn-2023-albedo",
+      "path": "science/krenn-2023/albedo.json",
+      "origin": "https://arxiv.org/abs/2301.07731",
+      "productId": "Broadband geometric albedo, section 3",
+      "version": "2023",
+      "credit": "Krenn et al. (2023): The geometric albedo of the hot Jupiter HD 189733b measured with CHEOPS",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Published numerical result transcribed in the checked repository source.",
+      "redistribution": "Factual values only; no paper text or figures.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2301-07731",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2301.07731"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733b-fu-2024-spectrum",
+      "path": "science/fu-2024/HD189733b_NIRCam_spectrum.txt",
+      "origin": "https://zenodo.org/api/records/11459715/files/HD189733b_JWST_data_model.zip/content",
+      "productId": "zenodo/Data/transit spectrum/HD189733b_NIRCam_spectrum.txt",
+      "version": "10.5281/zenodo.11459715 (v1)",
+      "sourceUrl": "https://zenodo.org/records/11459715",
+      "credit": "Guangwei Fu et al. (2024); JWST NIRCam",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/api/records/11459715",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Extract the exact member zenodo/Data/transit spectrum/HD189733b_NIRCam_spectrum.txt from HD189733b_JWST_data_model.zip; preserve its bytes. Chart preparation scales fractional depth and its error to percent.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-11459715",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/11459715"
+          },
+          {
+            "catalogueId": "doi-10-1038-s41586-024-07760-y",
+            "role": "method",
+            "evidence": "https://www.nature.com/articles/s41586-024-07760-y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733b-fu-2024-model",
+      "path": "science/fu-2024/FULL_TD_median_result.txt",
+      "origin": "https://zenodo.org/api/records/11459715/files/HD189733b_JWST_data_model.zip/content",
+      "productId": "zenodo/Model/Free/FULL_TD_median_result.txt",
+      "version": "10.5281/zenodo.11459715 (v1)",
+      "sourceUrl": "https://zenodo.org/records/11459715",
+      "credit": "Guangwei Fu et al. (2024); JWST NIRCam",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/api/records/11459715",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Extract the exact member zenodo/Model/Free/FULL_TD_median_result.txt from HD189733b_JWST_data_model.zip; preserve its bytes. Chart preparation scales fractional depth and its error to percent.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-11459715",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/11459715"
+          },
+          {
+            "catalogueId": "doi-10-1038-s41586-024-07760-y",
+            "role": "method",
+            "evidence": "https://www.nature.com/articles/s41586-024-07760-y"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -208,6 +325,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733b/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes; plotted quantities, units, uncertainty conventions and source paths."
       }
     }
   ]

@@ -1,0 +1,163 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-189733b/",
+  "charts": [
+    {
+      "kind": "measured-spectrum",
+      "id": "hd-189733b-hst",
+      "title": "HD 189733b: Hubble reflected light",
+      "description": "Six HST/STIS geometric albedo estimates from Evans et al. (2013), Table 1. Horizontal bars are wavelength coverage; vertical bars are the published asymmetric 1-sigma errors. The negative estimate is retained. No values beyond 570 nm are inferred.",
+      "output": "hd-189733b-hst-albedo.svg",
+      "metadata": {
+        "publication": "https://arxiv.org/abs/1307.3239",
+        "locator": "Table 1, six-channel binning",
+        "observation": "2012-12-20",
+        "quantity": "geometric albedo"
+      },
+      "source": {
+        "path": "science/evans-2013/albedo.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 6
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (nm)",
+        "minimum": 290,
+        "maximum": 780,
+        "ticks": [
+          300,
+          450,
+          570,
+          780
+        ]
+      },
+      "y": {
+        "label": "Geometric albedo",
+        "minimum": -0.25,
+        "maximum": 1.05,
+        "ticks": [
+          -0.2,
+          0,
+          0.5,
+          1
+        ]
+      },
+      "notes": [
+        "Hubble · Evans et al. 2013",
+        "Bars: wavelength bins and 1σ errors.",
+        "Negative estimate retained; noise can cross zero.",
+        "No measurements beyond 570 nm in this source."
+      ]
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hd-189733b-cheops",
+      "title": "HD 189733b: CHEOPS broadband albedo",
+      "description": "Krenn et al. (2023) geometric albedo 0.076 plus or minus 0.016, integrated over the CHEOPS 350-1100 nm passband after thermal correction. The horizontal bar spans the whole passband. The central error bar is a layout position, not a representative wavelength.",
+      "output": "hd-189733b-cheops-albedo.svg",
+      "metadata": {
+        "publication": "https://arxiv.org/abs/2301.07731",
+        "quantity": "broadband geometric albedo",
+        "thermalContribution": "subtracted by the authors"
+      },
+      "source": {
+        "path": "science/krenn-2023/albedo.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 1
+      },
+      "mode": "band",
+      "x": {
+        "label": "Passband (nm)",
+        "minimum": 350,
+        "maximum": 1100,
+        "ticks": [
+          350,
+          550,
+          750,
+          950,
+          1100
+        ]
+      },
+      "y": {
+        "label": "Geometric albedo",
+        "minimum": 0,
+        "maximum": 0.12,
+        "ticks": [
+          0,
+          0.04,
+          0.08,
+          0.12
+        ]
+      },
+      "notes": [
+        "CHEOPS · Krenn et al. 2023",
+        "0.076 ± 0.016 (1σ), across the whole band.",
+        "Thermal emission removed by the authors.",
+        "One integrated measurement, not a spectrum."
+      ]
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hd-189733b-jwst",
+      "title": "HD 189733b: Webb transmission spectrum",
+      "description": "Fu et al. (2024) JWST NIRCam transmission spectrum: all 139 measured bins, including overlapping wavelength coverage, with their errors. Gold line: deposited free-retrieval median model. Transit depth is the fraction of starlight blocked during transit. No fitting or offsets are added here.",
+      "output": "hd-189733b-jwst-transmission.svg",
+      "metadata": {
+        "publication": "https://www.nature.com/articles/s41586-024-07760-y",
+        "deposit": "https://zenodo.org/records/11459715",
+        "quantity": "transit depth (Rp/Rs)^2",
+        "unitConversion": "fraction multiplied by 100 to percent",
+        "processing": "No refit, rebinning, normalization or added filter offsets."
+      },
+      "source": {
+        "path": "science/fu-2024/HD189733b_NIRCam_spectrum.txt",
+        "format": "columns",
+        "columns": {
+          "x": 0,
+          "xError": 1,
+          "y": 2,
+          "error": 3
+        },
+        "yScale": 100,
+        "expectedRows": 139
+      },
+      "mode": "points",
+      "model": {
+        "path": "science/fu-2024/FULL_TD_median_result.txt",
+        "label": "Free-retrieval median model",
+        "yScale": 100,
+        "expectedRows": 863
+      },
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 2.38,
+        "maximum": 5.02,
+        "ticks": [
+          2.4,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Starlight blocked (%)",
+        "minimum": 2.38,
+        "maximum": 2.45,
+        "ticks": [
+          2.38,
+          2.4,
+          2.42,
+          2.44
+        ]
+      },
+      "notes": [
+        "Webb NIRCam · Fu et al. 2024",
+        "139 bins with wavelength widths and 1σ errors.",
+        "Gold: deposited model, with no new fit.",
+        "The fit identifies H₂O, CO₂, CO and H₂S."
+      ]
+    }
+  ]
+}

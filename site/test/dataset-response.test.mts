@@ -6,7 +6,7 @@ import { parseHTML } from 'linkedom';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { renderDatasetResponse } from '../dataset-response.mts';
 import { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
-import { handleSearchRequest } from '../search-response.mts';
+import { handleSearchRequest } from '../server/search-response.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
 
 const origin = 'https://example.test';

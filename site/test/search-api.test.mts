@@ -6,7 +6,7 @@ import { createFeatureBrowser } from '../feature-browser.mts';
 import { selectSceneFeature } from '../scene/scene-feature.mts';
 import type { SceneSession } from '../scene/scene-session.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
-import { handleFindRequest } from '../find.mts';
+import { handleFindRequest } from '../server/find.mts';
 
 // Named features and cities are searched by the find function; the page sends its query and gets rows back, and never
 // downloads the cross-body index (3.3 MB) or Earth's places catalogue (14.8 MB).

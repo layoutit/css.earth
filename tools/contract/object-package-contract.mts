@@ -1,7 +1,7 @@
 import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { ObjectEntry } from "../../site/object-schema.mts";
+import type { ObjectEntry } from '@cssearth/objects';
 import { authoredObject } from '../sources/authored-object.mts';
 
 import { validateInventory, requireInventory, verifyInventory } from "../../src/platform/runtime-asset-closure.mts";

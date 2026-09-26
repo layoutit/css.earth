@@ -9,8 +9,7 @@
  * the display range, area coverage, the preview and the report.
  */
 import type { SourceMesh } from '@cssearth/bake/objects/geometry';
-import type { SourceAccess } from '../terrestrial-layers/contracts.mts';
-import type { RadialSurface, SurfaceConfig } from '@cssearth/bake/objects/layers/terrestrial';
+import type { SourceAccess, RadialSurface, SurfaceConfig } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SourceInput } from '@cssearth/objects/node';
 import type { BandColorDisplay } from '@cssearth/bake/objects/color';
 

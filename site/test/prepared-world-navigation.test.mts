@@ -16,7 +16,7 @@ import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-sce
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import type { SceneFactory } from '../browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
-import type { PreparedArrivalView } from '../arrival-view.mts';
+import type { PreparedArrivalView } from '@cssearth/objects';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));

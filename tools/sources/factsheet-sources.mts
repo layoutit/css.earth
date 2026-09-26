@@ -5,7 +5,7 @@ import { relative, resolve } from 'node:path';
 import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUrl } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
 import type { Fact } from '../objects/content/types.js';
-import { orderFacts } from '../../site/fact-order.mts';
+import { orderFacts } from '@cssearth/objects';
 import { hasErrorCode } from '@cssearth/core';
 
 /** The same citation checks apply to full preparation, facts-only edits and Sources: every fact names its source. */

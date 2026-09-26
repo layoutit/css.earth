@@ -114,6 +114,24 @@ test('a bundle is stale when any file its last build read changed, even outside 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('a bake build whose tsc pass failed reads stale: tsup wrote the JavaScript, but the declaration stub is missing', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'stale-bake-types-'));
+  try {
+    const rule = BUILD_RULES.find(candidate => candidate.name === '@cssearth/bake');
+    assert.ok(rule);
+    await mkdir(join(root, 'packages/bake/src'), { recursive: true }); await mkdir(join(root, 'packages/bake/dist'), { recursive: true });
+    await writeFile(join(root, 'packages/bake/src/index.ts'), 'export {}');
+    // tsup cleaned dist and wrote the bundle and its metafile; `tsc` then failed, so no declarations or stubs were written.
+    await writeFile(join(root, 'packages/bake/dist/volume.js'), ''); await writeFile(join(root, 'packages/bake/dist/metafile-esm.json'), '{"inputs":{}}');
+    await utimes(join(root, 'packages/bake/src/index.ts'), 1000, 1000);
+    for (const file of ['volume.js', 'metafile-esm.json']) await utimes(join(root, 'packages/bake/dist', file), 2000, 2000);
+    assert.deepEqual((await staleBuilds(root, [rule])).map(build => build.reason), ['packages/bake/dist/volume.d.ts is missing']);
+    await writeFile(join(root, 'packages/bake/dist/volume.d.ts'), '');
+    await utimes(join(root, 'packages/bake/dist/volume.d.ts'), 2000, 2000);
+    assert.deepEqual(await staleBuilds(root, [rule]), [], 'with the stub written last, the build is current');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('an install older than pnpm-lock.yaml is named with the command that fixes it, before a tool fails on a missing package', async () => {
   const root = await mkdtemp(join(tmpdir(), 'stale-install-'));
   try {

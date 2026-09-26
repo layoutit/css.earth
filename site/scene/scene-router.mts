@@ -6,7 +6,7 @@ import { focusExistingScene, prepareSceneReplacement } from './scene-transition.
 import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
 import { errorMessage } from '../browser-types.mts';
 import { isRecord } from '@cssearth/core';
-import type { ObjectEntry } from '../object-schema.mts';
+import type { ObjectEntry } from '../objects.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';

@@ -3,7 +3,7 @@ import { parseCatalogueIndex, type CatalogueIndex } from './catalogue-index.mts'
 
 /**
  * Object pages ship the full catalogue rows empty. The browser loads the compact
- * JSON index; the server/no-JS search (`search-response.mts`) loads the rendered
+ * JSON index; the server/no-JS search (`server/search-response.mts`) loads the rendered
  * rows. Both are shared files named by path on `#object-category-results`.
  */
 export const CATALOGUE_FRAGMENT_URL = '/catalogue-fragment/';

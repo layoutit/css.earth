@@ -47,7 +47,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='horizons-time-list'){const parameters=record(step.parameters);if(Object.values(parameters).some(value=>typeof value!=='string')||'TLIST' in parameters||!Array.isArray(step.epochs)||!step.epochs.length||step.epochs.some(epoch=>typeof epoch!=='number'||!Number.isFinite(epoch)))throw new TypeError('Invalid Horizons time list.');}
   if(step.kind==='tar-gz-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')||step.member.split('/').includes('..')))throw new TypeError('Invalid tar.gz member.');
-  if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
+  if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
   if(step.kind==='request-download'&&(step.trimEnd!==undefined&&typeof step.trimEnd!=='boolean'||step.appendText!==undefined&&typeof step.appendText!=='string'))throw new TypeError('Invalid response text transformation.');
@@ -179,7 +179,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    await publish(step.path,new TextEncoder().encode(text));
   }
   else if(step.kind==='horizons-time-list'){
-   const [{timeListRows},{horizonsRows}]=await Promise.all([import('./sphere-horizons.mts'),import('./terrestrial-layers/observer-cameras.mts')]);
+   const [{timeListRows},{horizonsRows}]=await Promise.all([import('./sphere-horizons.mts'),import('@cssearth/bake/objects/layers/terrestrial')]);
    const asked=await timeListRows(step.url,step.parameters,step.epochs,async url=>(await request(url)).text());
    const pinned=horizonsRows(await readFile(containedPath(sourceRoot,step.path),'utf8'));
    if(asked.length!==pinned.length||asked.some((row,index)=>row!==pinned[index]))throw new Error(`Horizons rows drifted from ${step.path}.`);

@@ -1,7 +1,7 @@
 import { presentWorldCamera, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import { opacityClockFor } from '@cssearth/renderer/stars/opacity-clock.ts';
-import type { PreparedArrivalView } from './arrival-view.mts';
+import type { PreparedArrivalView } from '@cssearth/objects';
 import type { VisibleRect } from '@cssearth/renderer/solar-system/types.ts';
 
 type BillboardViewport = WorldCameraViewport & { readonly visibleRect: VisibleRect | null };

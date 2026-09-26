@@ -3,8 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { readingPole, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';
-import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './observer-cameras.mts';
+import { readingPole, spinRecordReading, OBSERVER_CAMERAS_FILE, parseObserverCameras } from '@cssearth/bake/objects/layers/terrestrial';
 
 const OBJECTS = resolve(import.meta.dirname, '../../../src/objects');
 

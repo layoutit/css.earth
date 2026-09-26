@@ -27,7 +27,7 @@ import { gzipSync } from 'node:zlib';
 import { Worker } from 'node:worker_threads';
 import { cpus } from 'node:os';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { numbers, encodeClock, clockToEt, spiceCamera, type PixelModelKeys } from '@cssearth/spice';
 import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';

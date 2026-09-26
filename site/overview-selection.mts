@@ -1,7 +1,7 @@
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectEntry } from './objects.mts';
 import type { SystemObjects } from './object-systems.mts';
 interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraViewport; }
 export interface OverviewSelection { overview: boolean; objectId: string; }

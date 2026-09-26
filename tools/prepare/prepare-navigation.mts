@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
-import type { ObjectEntry } from '../../site/object-schema.mts';
+import type { ObjectEntry } from '@cssearth/objects';
 import type { MarkerDescriptor } from './marker-recipe.mts';
 import type { MarkerPresentation } from '../../src/navigation/marker-presentation.mts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';

@@ -23,7 +23,7 @@ this package.
 - `tsup.config.ts` names the built entries; `package.json#exports` publishes each of them and the TypeScript source
   subpaths (`@cssearth/renderer/<folder>/<file>.ts`). Change them together.
 - The site's client build compiles the built entries from their sources and marks every non-worker module free of side
-  effects ([renderer-sources.mts](../../tools/performance/renderer-sources.mts)), so modules declare and export only.
+  effects ([package-sources.mts](../../tools/performance/package-sources.mts)), so modules declare and export only.
   Worker entries keep their load-time effects.
 - Node code built by esbuild with `packages: 'external'` must bundle this package
   ([bundle-renderer.mts](../../tools/cli/bundle-renderer.mts)): the sources name their siblings `.js`, which Node cannot

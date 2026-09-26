@@ -1,6 +1,6 @@
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { ObjectEntry } from './object-schema.mts';
+import type { ObjectEntry } from './objects.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { OVERVIEW_SELECTION_POLICY } from './runtime-policy.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';

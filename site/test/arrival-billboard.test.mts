@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { worldCameraFromCenteredPresentation, presentWorldCamera } from '@cssearth/renderer/navigation';
 import { prepareArrivalBillboard, arrivalBillboardHandoff } from '../arrival-billboard.mts';
-import type { PreparedArrivalView } from '../arrival-view.mts';
+import type { PreparedArrivalView } from '@cssearth/objects';
 
 test('all responsive close-ups hand off at the baked physical perspective', () => {
   const frame = { referenceFrame: 'world', epochJdTt: 1, originM: [0, 0, 0] as const,

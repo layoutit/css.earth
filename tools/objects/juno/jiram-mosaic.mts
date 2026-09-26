@@ -31,7 +31,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { numbers, utcToEt, spiceCamera, type PixelModelKeys, type SpiceCamera } from '@cssearth/spice';
 import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot, flagValue, positionalArguments } from '@cssearth/core';

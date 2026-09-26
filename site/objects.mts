@@ -1,18 +1,20 @@
-import { defineObjects } from './object-schema.mts';
-import { catalogEntry } from './object-catalog.mts';
+import { catalogEntry, defineObjects, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
 import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';
 import discoveries from './prepared-object-discovery.json' with { type: 'json' };
-import { parseObjectDiscovery } from './object-discovery.mts';
 import distances from './prepared-object-distances.json' with { type: 'json' };
 import focuses from './prepared-focus-objects.json' with { type: 'json' };
-import { parseNavigationDistance } from './navigation/navigation-distance.mts';
-import { definePreparedFocus, isSceneObject } from './prepared-focus-object.mts';
-import type { NavigableObject } from './prepared-focus-object.mts';
 import { isRecord } from '@cssearth/core';
+import type { SceneFactory } from './browser-types.mts';
+
+/** The shared registry types, bound to the shell's scene loader and its abort signal. */
+export type ObjectEntry = RegistryObjectEntry<SceneFactory, AbortSignal>;
+export type CatalogEntry = RegistryCatalogEntry<SceneFactory, AbortSignal>;
+export type NavigableObject = RegistryNavigableObject<SceneFactory, AbortSignal>;
 
 /** The single application registry, assembled from explicitly registered packages. */
 export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map(descriptor => {
-  const { order, context, ...object } = catalogEntry(descriptor, async signal => {
+  const { order, context, ...object } = catalogEntry(descriptor, async (signal?: AbortSignal) => {
     const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
     return loadPackagedObject(descriptor, signal);
   }, preparedDistance(descriptor), preparedDiscovery(descriptor));

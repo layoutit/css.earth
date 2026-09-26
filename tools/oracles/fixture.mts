@@ -52,7 +52,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
     const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);
     if (kernel) {
       // A shared kernel bank verifies its own pins (tools/kernel-banks/kernel-bank.mts).
-      const { kernelBankPaths } = await import('../kernel-banks/kernel-bank.mts');
+      const { kernelBankPaths } = await import('@cssearth/bake/objects/cameras');
       await kernelBankPaths(kernel[1]!, [kernel[2]!]);
       verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
       continue;

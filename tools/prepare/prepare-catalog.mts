@@ -2,9 +2,7 @@ import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
-import { defineObjects } from '../../site/object-schema.mts';
-import { catalogEntry } from '../../site/object-catalog.mts';
-import type { CatalogEntry } from '../../site/object-catalog.mts';
+import { catalogEntry, defineObjects, type CatalogEntry } from '@cssearth/objects';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance, readPreparedFocusObjects } from './prepare-navigation-destinations.mts';
 
