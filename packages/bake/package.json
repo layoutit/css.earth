@@ -2,7 +2,7 @@
   "name": "@cssearth/bake",
   "version": "0.0.0",
   "private": true,
-  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, and the geometry scene and CSS presentation compilers.",
+  "description": "Build-time preparation code, never imported by the runtime: the volume contracts, coordinates, fields, materials and sampling, the Node-only volume bake (compact inputs, slices and the compiler), the photometric models that preparation draws limbs from, the raster lane, the geometry scene and CSS presentation compilers, and the shared object libraries (colour, shape geometry, cameras).",
   "type": "module",
   "files": [
     "dist"
