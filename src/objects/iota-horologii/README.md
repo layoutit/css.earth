@@ -9,7 +9,7 @@
 - **Radial field**, 18 steps, October 2015 to September 2018: red where the field points out of the star, blue where it points in.
 - **Azimuthal field**, 18 steps: the field running one way or the other around the spin axis.
 
-Both use the paper's colour bar: linear from −12 G (blue) through white at 0 to +12 G (red). Stronger fields saturate, as in the paper (the strongest, 16.4 G, is azimuthal). A thin black line marks 60° S: at the adopted tilt the star never shows us what lies further south, and the paper marks the same limit with a dashed line. [tecplot-lonlat-map.mts](../../../tools/objects/terrestrial-layers/tecplot-lonlat-map.mts) reads the tables and interpolates bilinearly between grid nodes, so every node keeps its deposited value.
+Both use the paper's colour bar: linear from −12 G (blue) through white at 0 to +12 G (red). Stronger fields saturate, as in the paper (the strongest, 16.4 G, is azimuthal). A thin black line marks 60° S: at the adopted tilt the star never shows us what lies further south, and the paper marks the same limit with a dashed line. [tecplot-lonlat-map.ts](../../../packages/bake/src/objects/raster/tecplot-lonlat-map.ts) reads the tables and interpolates bilinearly between grid nodes, so every node keeps its deposited value.
 
 **Directions.** The paper marks each observed rotational phase φ on its map's longitude axis. For epoch 1 the ticks sit at 360° × (1 − φ) for the eleven phases of its Stokes V fits. So the central-meridian longitude falls as the star turns, and the maps' longitude is east longitude. All 18 maps share one rotational ephemeris (day 0 = BJD 2457300.78580, P = 7.73 d), so their longitudes line up from epoch to epoch.
 

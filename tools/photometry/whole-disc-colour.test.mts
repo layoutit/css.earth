@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { tieBandRatios } from '../objects/terrestrial-layers/photometric-observations.mts';
+import { tieBandRatios } from '@cssearth/bake/objects/raster';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from './whole-disc-colour.mts';
 

@@ -155,7 +155,7 @@ Pixels brighter than the display are scaled down as a whole, which keeps their h
 The WISE HiPS maps carry a separate level for each atlas tile, which shows as
 rectangles once faint emission is stretched. WISE bands are therefore built from
 the AllWISE atlas tiles, with one level fitted for each tile from its overlaps
-([wise-atlas-mosaic.mts](../tools/objects/observation/wise-atlas-mosaic.mts)).
+([wise-atlas-mosaic.ts](../packages/bake/src/objects/raster/wise-atlas-mosaic.ts)).
 
 The compositor also selects WISE atlas tiles by their projected footprint polygon, not its bounding box, and leaves out a grid-edge tile whose overlaps are too small to fix its level only when the joined tiles already cover every pixel it observed; such a tile is recorded in the evidence.
 

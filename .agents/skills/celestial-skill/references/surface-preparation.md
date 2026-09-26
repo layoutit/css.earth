@@ -98,7 +98,7 @@ the caveats a viewer needs also belong in the dataset summary in `text.json`.
 
 For multi-extension FITS scalar maps, select and check the named quantity,
 units and fit version explicitly; image dimensions alone cannot distinguish
-fractions, errors and temperature. The shared `fits-image-map.mts` reader
+fractions, errors and temperature. The shared `fits-image-map.ts` reader (`@cssearth/bake/objects/raster`)
 accepts an explicit full-world map domain. Missing WCS requires a cited map
 reference and orientation check. Inspect finite initialization values as well
 as NaN: Pluto LEISA's uncomputed cells retain a complete parameter tuple.

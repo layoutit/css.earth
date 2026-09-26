@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mts';
+import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from '@cssearth/bake/objects/raster';
 import {linearToSrgb} from '@cssearth/bake/objects/color';
 
 // This test reads only the small pinned label, never an ignored image.

@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { loadRadialTerrain, rasterAtlasLayout, rasterLeafStyle } from './radial-terrain.mts';
 import { fillUndrawnTexels } from './radial-materials.mts';
-import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mts';
+import { loadPdsScalarGrid, parsePdsScalarLabel } from '@cssearth/bake/objects/raster';
 const test = sourceTest();
 
 test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {

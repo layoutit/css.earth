@@ -18,8 +18,7 @@ import { fromFile } from 'geotiff';
 import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { orthographicPoint } from '../terrestrial-layers/orthographic-observation.mts';
-import { sampleColorBand } from '../terrestrial-layers/scientific-raster.mts';
-import { numericRasterBands } from '../terrestrial-layers/source-records.mts';
+import { sampleColorBand, numericRasterBands } from '@cssearth/bake/objects/raster';
 import { decodeGeomed, equirectangularGeoTiff, equirectangularTiles, frameSampler, placeFrame, projectFrame, type EquirectangularTile, type PlacedFrame, type VoyagerRoute } from './place.mts';
 import { MOSAIC_REGISTER_POLICY, mosaicSampler, registerToMosaic, renderMosaicThroughCamera, renderStep, type MosaicReference } from './mosaic-register.mts';
 

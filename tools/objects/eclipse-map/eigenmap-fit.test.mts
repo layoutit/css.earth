@@ -2,9 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { mapBasisCurves } from './phase-curve.mts';
-import { realSphericalHarmonics } from './spherical-harmonics.mts';
-import { bandBrightnessTemperature, brightnessTemperature, planckRadiance, continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from './eigenmap-fit.mts';
+import { mapBasisCurves, realSphericalHarmonics, bandBrightnessTemperature, brightnessTemperature, planckRadiance, continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from '@cssearth/bake/objects/raster';
 
 test('Jacobi eigenvectors diagonalize a symmetric matrix and come strongest first', () => {
   const random = seededRandom(7), n = 6, m = new Float64Array(n * n);

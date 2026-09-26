@@ -5,7 +5,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { decodePdsByteImage, preparePdsByteMosaic } from './pds-byte-mosaic.mts';
+import { decodePdsByteImage, preparePdsByteMosaic } from '@cssearth/bake/objects/raster';
 
 function tile(offset: number, value: number) {
   const label = `PDS_VERSION_ID = PDS3

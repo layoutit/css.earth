@@ -1,4 +1,4 @@
-import {parseDimensions} from './source-records.mts';
+import {parseDimensions} from '@cssearth/bake/objects/raster';
 import { pds3Keyword } from '@cssearth/telescope';
 /** Decode the explicitly selected legacy ISIS2 PC_REAL raster layout. These
  * rescued mission products are not relabelled as reviewed PDS image products.

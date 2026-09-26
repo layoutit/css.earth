@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { pdsPackages } from '@cssearth/telescope/node';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
-import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
+import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import { isisMetadata,pdsMetadata } from './native-metadata.mts';
 import { requireRecord,requireArray,requireString } from '@cssearth/core';
 interface NativeFigureInput {

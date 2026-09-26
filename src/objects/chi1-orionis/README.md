@@ -10,7 +10,7 @@
 - **Meridional field**: the field running north or south along the surface.
 - **Azimuthal field**: the field running one way or the other around the spin axis.
 
-Each map uses its paper figure's colour bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colours. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.mts](../../../tools/objects/terrestrial-layers/latitude-belt-map.mts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value. The star turns too slowly for a brightness map: the deposited brightness is 1.0 everywhere, so none is shown.
+Each map uses its paper figure's colour bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colours. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value. The star turns too slowly for a brightness map: the deposited brightness is 1.0 everywhere, so none is shown.
 
 **Directions.** The paper's Fig. 1 caption says the phases are inverted so that the map longitudes turn like the Earth's; its dashed lines sit at 360° × (1 − φ) for the observed phases φ of Table 1. So the maps' longitude is east longitude.
 

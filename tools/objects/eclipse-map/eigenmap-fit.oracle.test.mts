@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { eigencurveBasis } from './eigenmap-fit.mts';
+import { eigencurveBasis } from '@cssearth/bake/objects/raster';
 
 const fixture = await readOracleFixture('eclipse-map/theresa-eigenbasis.json');
 const harmonicCurves = {

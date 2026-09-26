@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import { parseEncounterPolicy, parseEncounterSourceControl } from '../terrestrial-layers/source-records.mts';
+import { parseEncounterPolicy, parseEncounterSourceControl } from '@cssearth/bake/objects/raster';
 import { parseMeshProfile, loadPdsPlanetocentricShape } from '@cssearth/bake/objects/geometry';
 import {array,number,optional,shape,text} from '@cssearth/core';
 import {decodeEncounterFits} from '../terrestrial-layers/encounter-fits.mts';

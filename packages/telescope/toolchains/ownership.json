@@ -211,7 +211,7 @@
     },
     {
       "mechanic": "eclipse-map eigensolver and small positive-definite linear systems",
-      "implementation": "tools/objects/eclipse-map/eigenmap-fit.mts",
+      "implementation": "packages/bake/src/objects/raster/eclipse-map/eigenmap-fit.ts",
       "reason": "The synchronous TypeScript fit and posterior sampler keep their small linear-algebra routines. The posterior now samples directly from the existing normal-matrix Cholesky factor instead of constructing and refactoring a full inverse. NumPy oracle fixtures check eigencurves, fitted coefficients and posterior covariance. A SciPy bridge would require a measured end-to-end gain and reproduction of the same deterministic and positivity behavior before replacing this route."
     },
     {

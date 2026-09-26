@@ -5,9 +5,7 @@ import { fromFile } from 'geotiff';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { blackFillCoverage } from '@cssearth/bake/raster';
 import { readFitsPrimary } from '@cssearth/fits';
-import { numericRaster, numericRasterBands, parseByteObservationPolicy, parseFitsPolicy, parseFloatObservationPolicy,
-  parseGeoImageEntry, parseIsisObservationPolicy, parseMaskedObservationPolicy, requireWrappedLongitudeSpan } from './source-records.mts';
-import { loadScienceSurface } from './scientific-raster.mts';
+import { numericRaster, numericRasterBands, parseByteObservationPolicy, parseFitsPolicy, parseFloatObservationPolicy, parseGeoImageEntry, parseIsisObservationPolicy, parseMaskedObservationPolicy, requireWrappedLongitudeSpan, loadScienceSurface } from '@cssearth/bake/objects/raster';
 
 export interface NativePhotograph {
   width: number;

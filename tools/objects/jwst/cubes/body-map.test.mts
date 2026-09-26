@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
-import { decodeFitsImageMap } from '../../terrestrial-layers/fits-image-map.mts';
+import { decodeFitsImageMap } from '@cssearth/bake/objects/raster';
 import { bodyMapFits, fitDiscCentre, projectBandMap, topRowFirst } from './body-map.mts';
 
 const camera = { observerLatitude: 0, observerWestLongitude: 90, sunLatitude: 0, sunWestLongitude: 90, rangeKm: 6e8, northAzimuthDegrees: 0, pixelAngleMicroradians: 0.4848, center: [20, 20] as [number, number], phaseDegrees: 0, bodyEpochJd: 0 };

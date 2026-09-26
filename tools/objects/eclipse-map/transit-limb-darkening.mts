@@ -6,7 +6,7 @@
  * result moves between seasons rather than a formal error. */
 import type { HostedOrbit } from '@cssearth/astronomy';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../interferometry/fits-table.mts';
-import { measureTransitShift } from './transit-timing.mts';
+import { measureTransitShift } from '@cssearth/bake/objects/raster';
 
 /** TESS times are BJD_TDB - 2457000; the hosted orbit's transit time is BJD_TDB - 2400000.5. */
 const BTJD_TO_BMJD = 2457000 - 2400000.5;

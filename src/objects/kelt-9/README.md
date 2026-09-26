@@ -18,7 +18,7 @@ Catalogue colour: #b5c9ff, this lens's prepared colour.
 Run of 2026-09-23 (this version):
 
 - [`gravity-darkening.test.mts`](../../../tools/objects/observation/gravity-darkening.test.mts) checks that the Roche surface built from the record has the paper's 1.089 ratio and 2.39 solar-radius equator. It fixes the model's equator at 9,672 K, 10.4 % dimmer at 800 nm and 18 % bolometrically, and keeps the paper's own contrast statements beside it.
-- [`authored-rotation.mts`](../../../tools/objects/authored-rotation.mts) refuses the rotation record unless λ, i* and the orbit's inclination give the published true obliquity within its uncertainty.
+- [`authored-rotation.ts`](../../../packages/bake/src/objects/scene/authored-rotation.ts) refuses the rotation record unless λ, i* and the orbit's inclination give the published true obliquity within its uncertainty.
 - [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour is the colour lens's prepared colour.
 
 ## Known problems

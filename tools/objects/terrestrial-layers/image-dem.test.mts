@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { parseImageDem } from './image-dem.mts';
+import { parseImageDem } from '@cssearth/bake/objects/raster';
 import { inspectOpenSurface } from '@cssearth/bake/objects/geometry';
 
 const profile = { columns: 3, step: 1, xyTransform: [2, 0, 10, 0, -2, 20],

@@ -7,7 +7,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { ellipsoidParameterMesh } from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
-import { readAuthoredRotation } from '../../../../tools/objects/authored-rotation.mts';
+import { readAuthoredRotation } from '@cssearth/bake/objects/scene';
 const json=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 const near=(a:number,b:number,t:number)=>assert.ok(Math.abs(a-b)<t,`${a} differs from ${b}`);
 export function testLightcurveModel(id:string,ab:number,bc:number,radius:number,longitude:number,latitude:number) {

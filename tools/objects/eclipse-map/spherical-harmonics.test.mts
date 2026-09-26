@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { harmonicOrder, realSphericalHarmonics } from './spherical-harmonics.mts';
-import { equalAngleGrid } from './eigenmap-fit.mts';
+import { harmonicOrder, realSphericalHarmonics, equalAngleGrid } from '@cssearth/bake/objects/raster';
 
 test('real harmonics are orthonormal with mean square 1 over the sphere (the starry normalization)', () => {
   const lmax = 4, grid = equalAngleGrid(180, 360), rows = realSphericalHarmonics(lmax, grid.latitudes, grid.longitudes);

@@ -5,7 +5,7 @@ import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {writeArrayBuffer} from 'geotiff';
-import {loadScienceSurface} from './scientific-raster.mts';
+import {loadScienceSurface} from '@cssearth/bake/objects/raster';
 
 test('geographic science preserves native degree cells, signed values and missing coverage', async () => {
   const root = await mkdtemp(join(tmpdir(), 'geographic-science-'));

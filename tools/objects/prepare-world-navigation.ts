@@ -8,8 +8,8 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from './authored-sources.js';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
 import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement } from './world-navigation-sources.js';
+import { preparePhysicalWorldFrame, transform, transpose, type Matrix3, type Vector3 } from '@cssearth/bake/objects/scene';
 import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
-import { preparePhysicalWorldFrame, transform, transpose, type Matrix3, type Vector3 } from './world-navigation.js';
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }

@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
-import type { SciencePalette } from './contracts.mts';
+import type { SciencePalette } from '@cssearth/bake/objects/raster';
 import type { PreparedTriangle, SourceSurfaceSample } from '@cssearth/bake/objects/geometry';
 import type { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN as dot } from '@cssearth/core';
@@ -12,7 +12,7 @@ import { gzipSync } from 'node:zlib';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { createSourceSurfacePainter } from './scientific-raster.mts';
+import { createSourceSurfacePainter } from '@cssearth/bake/objects/raster';
 import { missingCoverageColor } from '@cssearth/bake/raster';
 import { createRasterEmitter } from './raster-output.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';

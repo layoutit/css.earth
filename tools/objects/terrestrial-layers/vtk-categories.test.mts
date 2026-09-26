@@ -4,9 +4,8 @@ import assert from 'node:assert/strict';
 import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {decodeVtkCategories, loadVtkCategories, validateVtkCategories} from './vtk-categories.mts';
+import { decodeVtkCategories, loadVtkCategories, validateVtkCategories, decodeSbmtLocations, decodeSbmtPaths } from '@cssearth/bake/objects/raster';
 import {createIndexedShape} from '@cssearth/bake/objects/geometry';
-import {decodeSbmtLocations, decodeSbmtPaths} from './sbmt-symbols.mts';
 
 const vtk = '# vtk DataFile Version 2.0\nfixture\nASCII\nDATASET POLYDATA\nPOINTS 6 float\n-1 -1 1\n1 -1 1\n0 1 1\n-1 -1 2\n1 -1 2\n0 1 2\nPOLYGONS 2 8\n3 0 1 2\n3 3 4 5\nCELL_DATA 2\nSCALARS Region integer 1\nLOOKUP_TABLE default\n0\n1\n';
 const grid = {expectedVertices: 6, expectedFaces: 2, metersPerUnit: 1, field: 'Region'};

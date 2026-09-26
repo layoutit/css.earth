@@ -5,8 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
 import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
-import { decodeFitsImageMap } from '../terrestrial-layers/fits-image-map.mts';
-import { paintScienceSurface } from '../terrestrial-layers/scientific-raster.mts';
+import { decodeFitsImageMap, paintScienceSurface } from '@cssearth/bake/objects/raster';
 import { readSurfaceGrid, surfaceLensMap, writeFitsImageMap } from './surface-lens.mts';
 
 // ROTIR on the Polaris April 2021 file (3.16 mas sphere, linear limb darkening 0.12, pole North in the sky plane), written by

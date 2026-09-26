@@ -1,6 +1,6 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import type { SourceMesh } from '@cssearth/bake/objects/geometry';
-import {parseMeshLighting} from './source-records.mts';
+import {parseMeshLighting} from '@cssearth/bake/objects/raster';
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 
 const unit = (v: readonly number[]) => { const length = Math.hypot(...v); return v.map(x => x / length); };

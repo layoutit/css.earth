@@ -1,7 +1,7 @@
 import { isisGeometryBands } from './native-metadata.mts';
 /** Inventory native products already pinned by a body package. Header reads are discovery only; qualification verifies whole-file pins. */
 import { sourceHeaders } from './source-transfer.mts';
-import { isis3CoreHeader } from '../terrestrial-layers/isis3-raster.mts';
+import { isis3CoreHeader } from '@cssearth/bake/objects/raster';
 import { open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
 import { resolve, dirname, basename } from 'node:path';

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { decodeNpyLonLatGrid, readNpy, spinFrameTransfer } from './npy-lonlat-grid.mts';
+import { decodeNpyLonLatGrid, readNpy, spinFrameTransfer } from '@cssearth/bake/objects/raster';
 
 /** A version 1.0 .npy file as NumPy writes it: magic, header padded with spaces to a 64-byte boundary, then the data. */
 function npy(descr: '<f8' | '<i8', shape: readonly number[], values: readonly number[], fortran = false) {

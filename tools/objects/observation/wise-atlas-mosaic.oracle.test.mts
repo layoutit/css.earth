@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFitsHdus } from '@cssearth/fits';
 import { readOracleFixture, readOracleInput } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { atlasToGridPixel, gridWcs } from './wise-atlas-mosaic.mts';
+import { atlasToGridPixel, gridWcs } from '@cssearth/bake/objects/raster';
 
 const fixture = await readOracleFixture('fits/wise-atlas-projection.json');
 for (const [name, raw] of Object.entries(fixture.cases)) test(`Astropy SIN tile -> TAN grid pixels: ${name}`, async () => {

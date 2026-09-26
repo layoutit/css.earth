@@ -10,7 +10,7 @@ import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { acquireMastProduct, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
-import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';
+import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';
 const stable = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;

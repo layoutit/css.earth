@@ -1,7 +1,7 @@
 import {resolve,relative,isAbsolute} from 'node:path';
 import {fromFile} from 'geotiff';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '@cssearth/core';
-import {numericRasterBands} from '../terrestrial-layers/source-records.mts';
+import {numericRasterBands} from '@cssearth/bake/objects/raster';
 import {linearToSrgb,srgbToLinear} from '@cssearth/bake/objects/color';
 
 /** Area integrals of native pixel squares. The validity integral is independent

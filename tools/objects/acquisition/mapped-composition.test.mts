@@ -7,7 +7,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {gzipSync} from 'node:zlib';
 import {convertMappedComposition,parseMappedCompositionRecipe} from './mapped-composition.mts';
-import {loadScienceSurface} from '../terrestrial-layers/scientific-raster.mts';
+import {loadScienceSurface} from '@cssearth/bake/objects/raster';
 
 const grid = (f:(longitude:number,latitude:number)=>number) => Array.from({length:180},(_,y)=>Array.from({length:360},(_,x)=>f(x,y-90)));
 const metadata = {target:'Reference',observation_name:'original',nan_value:-99,

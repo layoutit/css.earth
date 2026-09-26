@@ -1,14 +1,12 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { requireArray, shape, array, number, text } from '@cssearth/core';
-import { parseGeologyLens } from './source-records.mts';
+import { parseGeologyLens, loadScienceSurface, loadGeologySurface } from '@cssearth/bake/objects/raster';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import {readFile, type FileHandle} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {loadScienceSurface} from './scientific-raster.mts';
-import {loadGeologySurface} from './categorical-geology.mts';
 import type { PathLike } from 'node:fs';
 
 const planets = fileURLToPath(new URL('../../../src/objects/', import.meta.url));

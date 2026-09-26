@@ -1,14 +1,12 @@
 import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { requireArray, requireString } from '@cssearth/core';
-import { parseGeologyLens } from './source-records.mts';
+import { parseGeologyLens, loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile, decodeGeologyAttributes, decodeGeologyPolygons } from '@cssearth/bake/objects/raster';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile,
-  decodeGeologyAttributes, decodeGeologyPolygons} from './categorical-geology.mts';
 
 const root = fileURLToPath(new URL('../../../src/objects/', import.meta.url));
 const rectangle = (west: number, south: number, east: number, north: number) => [[west, south], [east, south], [east, north], [west, north], [west, south]];

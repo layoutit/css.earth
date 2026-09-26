@@ -1,4 +1,4 @@
-import {numericRaster} from '../terrestrial-layers/source-records.mts';
+import {numericRaster} from '@cssearth/bake/objects/raster';
 import type {CoraltempRecipe, AnomalyPalette} from './contracts.mts';
 import * as h5 from 'h5wasm/node';
 

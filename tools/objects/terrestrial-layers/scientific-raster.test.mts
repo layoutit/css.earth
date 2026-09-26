@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
-import { LOSSLESS_PALETTE_STEPS, LOSSY_PALETTE_STEPS, paletteLookup, colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mts';
+import { LOSSLESS_PALETTE_STEPS, LOSSY_PALETTE_STEPS, paletteLookup, colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from '@cssearth/bake/objects/raster';
 import { lambertAttenuationAtlas } from '@cssearth/bake/objects/geometry';
 import { parseTerrestrialProfile } from './index.mts';
 const test = sourceTest();
@@ -156,7 +156,7 @@ test('a measured elevation lens can be the only surface capability', async () =>
 });
 
 test('a declared output meridian shifts presentation without changing source coordinates', async () => {
-  const {paintScienceSurface} = await import('./scientific-raster.mts');
+  const {paintScienceSurface} = await import('@cssearth/bake/objects/raster');
   const seen: [number, number][] = [], source = {sample(lon: number, lat: number) {seen.push([lon,lat]);return lon;}};
   const lens = {minimum:-180,maximum:360,colors:['#000000','#ffffff']};
   paintScienceSurface(source,lens,4,2);

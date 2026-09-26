@@ -29,7 +29,7 @@ import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRu
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
 import { freeMemoryPercent, mastFile, toolchainPython, type MastFile } from '../mast.mts';
 import { parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
-import { gridWcs, parseSkyGrid, type SkyGrid } from '../../observation/wise-atlas-mosaic.mts';
+import { gridWcs, parseSkyGrid, type SkyGrid } from '@cssearth/bake/objects/raster';
 
 const IMAGE3 = `
 import json, sys, time

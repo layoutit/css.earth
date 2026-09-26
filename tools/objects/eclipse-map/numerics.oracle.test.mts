@@ -3,8 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { bandBrightnessTemperature, brightnessTemperature, fitEigenmap, planckRadiance, sampleEigenmap } from './eigenmap-fit.mts';
-import { harmonicOrder, realSphericalHarmonics } from './spherical-harmonics.mts';
+import { bandBrightnessTemperature, brightnessTemperature, fitEigenmap, planckRadiance, sampleEigenmap, harmonicOrder, realSphericalHarmonics } from '@cssearth/bake/objects/raster';
 
 const fixture = await readOracleFixture('eclipse-map/numerics.json');
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));

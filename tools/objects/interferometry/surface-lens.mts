@@ -56,7 +56,7 @@ export function surfaceLensMap(grid: SurfaceGrid, { width, height, maximumEmissi
   return map;
 }
 
-/** A float32 image map in the layout fits-image-map.mts reads: an empty primary with identity keywords and one IMAGE extension. */
+/** A float32 image map in the layout fits-image-map.ts (`@cssearth/bake/objects/raster`) reads: an empty primary with identity keywords and one IMAGE extension. */
 export function writeFitsImageMap(map: Float32Array, width: number, height: number, { name, units, identity }: { name: string; units: string; identity: Readonly<Record<string, string>> }) {
   if (map.length !== width * height) throw new RangeError('The map does not match its size.');
   const data = Buffer.alloc(map.length * 4);

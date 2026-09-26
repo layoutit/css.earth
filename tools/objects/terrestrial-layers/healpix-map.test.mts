@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
-import { loadHealpixNpyMap } from './healpix-map.mts';
+import { loadHealpixNpyMap } from '@cssearth/bake/objects/raster';
 
 const test = sourceTest();
 test.before(async () => { await astroqueryToolchain(); });

@@ -24,10 +24,7 @@ import { fromFile } from 'geotiff';
 import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { orthographicPoint } from '../terrestrial-layers/orthographic-observation.mts';
-import { sampleColorBand, sampleScienceGrid, scienceMapPoint } from '../terrestrial-layers/scientific-raster.mts';
-import { loadIsis3Raster } from '../terrestrial-layers/isis3-raster.mts';
-import { parseScienceGrid } from '../terrestrial-layers/source-records.mts';
-import { numericRasterBands } from '../terrestrial-layers/source-records.mts';
+import { sampleColorBand, sampleScienceGrid, scienceMapPoint, loadIsis3Raster, parseScienceGrid, numericRasterBands } from '@cssearth/bake/objects/raster';
 import { decodeGeomed, placeFrame, type PlacedFrame, type VoyagerRoute } from './place.mts';
 import { MOSAIC_REGISTER_POLICY, mosaicSampler, registerToMosaic, renderMosaicThroughCamera, renderStep, type MosaicReference } from './mosaic-register.mts';
 

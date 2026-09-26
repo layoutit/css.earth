@@ -1,4 +1,4 @@
-import type {Relief} from '../terrestrial-layers/contracts.mts';
+import type { Relief } from '@cssearth/bake/objects/raster';
 export interface Dimensions {width: number; height: number;}
 export interface Cutaway {centerLongitudeDegrees: number; widthDegrees: number;}
 export interface ElevationGrid extends Dimensions {firstIndex: number; stride: number; nativeCellDegrees: number;}

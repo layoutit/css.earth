@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
-import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, parseTilePins, wiseAtlasUrl } from './wise-atlas-mosaic.mts';
+import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, parseTilePins, wiseAtlasUrl } from '@cssearth/bake/objects/raster';
 
 const size = 64, scale = 0.01;
 function atlasTile(coaddId: string, ra: number, dec: number, sky: (ra: number, dec: number) => number, offset: number, extra: readonly string[] = []) {

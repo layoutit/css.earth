@@ -61,9 +61,9 @@ test('the star colour fit a catalogue owner reaches is pinned by its engine sour
   assert.equal(pins.some(pin => pin.path.startsWith('packages/engine/dist/')), false);
 });
 
-test('the object colour transfer a sky-band owner reaches is pinned by its bake sources, not its build', async () => {
+test('the object colour transfer and atlas mosaic a sky-band owner reaches are pinned by their bake sources, not their build', async () => {
   const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/adapters/sources/sky-bands.ts']);
-  for (const path of ['packages/bake/package.json', 'packages/bake/src/objects/color/color-transfer.ts'])
+  for (const path of ['packages/bake/package.json', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts'])
     assert.ok(pins.some(pin => pin.path === path), path);
   assert.equal(pins.some(pin => pin.path.startsWith('packages/bake/dist/')), false);
 });

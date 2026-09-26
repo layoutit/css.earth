@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseGeoCameraClosure } from './source-records.mts';
+import { parseGeoCameraClosure } from '@cssearth/bake/objects/raster';
 import { parseMeshProfile, loadObjShape } from '@cssearth/bake/objects/geometry';
 import { array, number, optional, shape, text } from '@cssearth/core';
 import { loadKernelSet } from '@cssearth/spice/node';

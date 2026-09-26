@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { loadLatitudeBeltMap, parseLatitudeBelts } from './latitude-belt-map.mts';
+import { loadLatitudeBeltMap, parseLatitudeBelts } from '@cssearth/bake/objects/raster';
 
 const test = sourceTest();
 

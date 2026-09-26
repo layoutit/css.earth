@@ -5,8 +5,8 @@ import { sha256 } from '@cssearth/core/node';
  * each format adds to the lens shape every format shares (recipe.mts).
  */
 import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import type { NumericRaster, SpiceCameraDeclaration } from '../../terrestrial-layers/source-records.mts';
-import { decodeProfile, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement, parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import type { NumericRaster, SpiceCameraDeclaration } from '@cssearth/bake/objects/raster';
+import { decodeProfile, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement, parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
@@ -28,7 +28,7 @@ import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 /** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
 interface GeoSchema {

@@ -1,7 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import {requireRecord} from '@cssearth/core';
 import type {SipCamera} from './contracts.mts';
-import {parseSipCamera,parseLlorriCamera} from './source-records.mts';
+import {parseSipCamera,parseLlorriCamera} from '@cssearth/bake/objects/raster';
 import { readFitsPrimary } from '@cssearth/fits';
 import { project } from './osiris-geo.mts';
 

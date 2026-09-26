@@ -1,9 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readNpyHeader, readNpyObject, type NpyArray, type NpyValue } from './npy-pickle.mts';
-import { decodeNpyDictionaryMap, theresaVisibleLongitudes } from './npy-dictionary-map.mts';
-import { readTarMember } from './tar-member.mts';
+import { readNpyHeader, readNpyObject, type NpyArray, type NpyValue, decodeNpyDictionaryMap, theresaVisibleLongitudes, readTarMember } from '@cssearth/bake/objects/raster';
 
 /** The byte program numpy.save writes for a dictionary of float64 arrays, protocol 3, so the reader is tested on what it claims
  * to read without a Python dependency. */

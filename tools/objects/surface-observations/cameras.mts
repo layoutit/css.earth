@@ -1,7 +1,7 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
 /** Camera providers. Each turns what an archive or a kernel set gives into the one ObservationCamera contract. */
 import type { ObservationCamera } from './contract.mts';
-import { parseArchivedCamera } from '../terrestrial-layers/source-records.mts';
+import { parseArchivedCamera } from '@cssearth/bake/objects/raster';
 import { fitCamera, project } from '../terrestrial-layers/osiris-geo.mts';
 
 const unit = (a: readonly number[]) => { const n = Math.hypot(...a); return a.map(v => v / n); };

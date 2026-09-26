@@ -1,5 +1,5 @@
 import { cross3 as cross, array, number, requireRecord, dotN as dot } from '@cssearth/core';
-import {parseEncounterControl} from './source-records.mts';
+import {parseEncounterControl} from '@cssearth/bake/objects/raster';
 // Calibrated detector projection. J2000/body binding and measured pointing
 // corrections are authored preparation inputs; no cameras run in the browser.
 

@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { parseObjShape } from '@cssearth/bake/objects/geometry';
-import { parseObjTextureCoordinates, createObjUvFitsSampler, validateObjUvFits } from './obj-uv-fits.mts';
+import { parseObjTextureCoordinates, createObjUvFitsSampler, validateObjUvFits } from '@cssearth/bake/objects/raster';
 
 // Independent two-layer geometry: a center ray can see multiple surfaces,
 // whereas a local surface point still identifies its own released UV island.

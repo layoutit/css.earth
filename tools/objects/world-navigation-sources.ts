@@ -1,5 +1,5 @@
 import { buildPolyMeshTransform } from '@layoutit/polycss';
-import { multiply, reflection, rotation, type Matrix3 } from './world-navigation.ts';
+import { multiply, reflection, rotation, type Matrix3 } from '@cssearth/bake/objects/scene';
 
 type Input = Record<string, any>;
 const IDENTITY: Matrix3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];

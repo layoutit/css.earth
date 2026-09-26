@@ -2,10 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { mapBasisCurves } from './phase-curve.mts';
-import { realSphericalHarmonics } from './spherical-harmonics.mts';
-import { brightnessTemperature, eigenBasis, equalAngleGrid, planckRadiance, seededRandom } from './eigenmap-fit.mts';
-import { bandTemperatureTable, binAverage, fitLightCurveMap, hemisphereTemperature, meridionalOffset, temperatureGrid } from './light-curve-map.mts';
+import { mapBasisCurves, realSphericalHarmonics, brightnessTemperature, eigenBasis, equalAngleGrid, planckRadiance, seededRandom, bandTemperatureTable, binAverage, fitLightCurveMap, hemisphereTemperature, meridionalOffset, temperatureGrid } from '@cssearth/bake/objects/raster';
 
 test('a one-sample band with a blackbody star is the single-wavelength brightness temperature', () => {
   const band = { wavelengthMicrons: Float64Array.of(4.5), counts: Float64Array.of(1), stellarIntensity: Float64Array.of(planckRadiance(4.5, 4520)) };

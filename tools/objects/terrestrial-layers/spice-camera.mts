@@ -2,7 +2,7 @@ import { pds3Keyword } from '@cssearth/telescope';
 import { readFitsPlane } from '@cssearth/fits';
 import type { KernelSet } from '@cssearth/spice/node';
 import { encodeClock, clockToEt, etToUtc, utcToEt, spiceCamera, type Aberration, type PixelModelKeys } from '@cssearth/spice';
-import type { SpiceCameraDeclaration } from './source-records.mts';
+import type { SpiceCameraDeclaration } from '@cssearth/bake/objects/raster';
 import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { relative, resolve } from 'node:path';
 

@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import {parseObjShape} from '@cssearth/bake/objects/geometry';
-import {parseFacetCsv, parseFacetFits, createFacetScalarSampler, validateFacetScalarProfile} from './facet-scalars.mts';
+import {parseFacetCsv, parseFacetFits, createFacetScalarSampler, validateFacetScalarProfile} from '@cssearth/bake/objects/raster';
 
 const mesh = parseObjShape(['v 1 0 0','v 1 3 0','v 1 0 3','v 5 0 0','v 5 3 0','v 5 0 3','f 1 2 3','f 4 5 6'].join('\n'),
   {metersPerUnit:1, expectedVertices:6, expectedFaces:2});
@@ -90,7 +90,7 @@ test('explicit centroid bijection reconciles exporter order and retains the orig
 
 test('derived gzip facet tables retain their NaN gaps and exact mesh binding', async () => {
   const {mkdtemp,writeFile,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),{gzipSync}=await import('node:zlib');
-  const {loadFacetScalarSurface}=await import('./facet-scalars.mts');
+  const {loadFacetScalarSurface}=await import('@cssearth/bake/objects/raster');
   const root=await mkdtemp(join(tmpdir(),'hrii-facets-'));
   try{
     await writeFile(join(root,'fields.csv.gz'),gzipSync(csv));
