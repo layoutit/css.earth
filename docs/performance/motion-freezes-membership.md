@@ -10,7 +10,8 @@ changes land once the coast stops, a paced slice per frame.
 Navigation targets expose a named button role only while available. Repeated publication of the same target writes
 no accessibility attributes; a focus point outside the measured viewport leaves the tab order after the coast.
 Minimap arrow keys read the current camera on keydown, without publishing camera coordinates as DOM attributes.
-Keyboard focus outlines belong to the individual control or its small shell wrapper, outside the moving world.
+Keyboard focus uses label underlines and local view/map hints on the control or its small shell wrapper, outside the
+moving world. These styles change with focus, not with camera frames.
 
 While a hand or the app drives the camera (a drag, an active zoom or pinch, a flight), the view keeps updating, so you
 can see where you are heading. Crossings between levels of detail are staged ahead: the next level is made resident at

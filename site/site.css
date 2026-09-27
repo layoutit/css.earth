@@ -141,7 +141,20 @@ html:not([data-scene-presented="true"]) .object-world-stage { opacity: 0.001; }
 html[data-scene-presented="true"] .object-input-surface { pointer-events: auto; }
 /* Embedded scenes keep the shell in the DOM (the runtime binds to it) but out of layout, so camera framing ignores it. */
 html[data-embed] .object-ui-layer { display: none !important; }
-.object-input-surface:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: -4px; }
+.object-input-surface:focus { outline: none; }
+.object-input-surface:focus-visible::after {
+  content: attr(aria-label);
+  position: absolute;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: var(--shell-text);
+  background: var(--shell-surface);
+  font: var(--shell-font-value);
+  pointer-events: none;
+}
 
 .object-scene-overlays {
   position: absolute;

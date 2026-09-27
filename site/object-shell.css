@@ -61,8 +61,12 @@
   cursor: pointer;
   outline: 0;
 }
-/* Only this small, static wrapper changes on focus; camera updates do not affect the selector. */
-.object-lens-picker-display:focus-within { outline: 2px solid var(--shell-focus); outline-offset: -2px; }
+/* Focus stays on the label inside this static shell control, outside camera updates. */
+.object-lens-picker-display:focus-within .object-lens-picker-label {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
 .object-lens-picker-current { flex: 1; min-width: 0; }
 .object-lens-picker-selection { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .object-lens-picker-selection[hidden] { display: none; }
@@ -106,7 +110,11 @@
   background: transparent;
 }
 .object-lens-picker .object-observation-control { min-height: 30px; padding: 3px 0; }
-.object-lens-picker .object-observation-control:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: -2px; }
+.object-lens-picker .object-observation-control:focus-visible .object-lens-label {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
 .object-lens-picker .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
   grid-template-columns: 14px minmax(0, max-content) minmax(16px, 1fr) max-content;
 }
@@ -192,7 +200,19 @@
 }
 
 .object-surface-minimap[data-dragging="true"] { cursor: grabbing; }
-.object-surface-minimap:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: -2px; }
+.object-surface-minimap:focus { outline: none; }
+.object-surface-minimap:focus-visible::after {
+  content: "↑ ↓ ← →   + −";
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--shell-text);
+  background: var(--shell-surface);
+  font: var(--shell-font-value);
+  pointer-events: none;
+}
 
 .object-surface-minimap[data-ready="true"] > .object-lens-texture { opacity: .35; }
 
