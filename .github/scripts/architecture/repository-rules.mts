@@ -63,7 +63,7 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   },
   {
     id: 'declared-dependencies',
-    description: 'a packages/* file imports another workspace package only when its package.json declares it (declared-dependencies.mts)',
+    description: 'a packages/* file imports another workspace package only when its package.json declares it, and outside tests of a tsup-built package only when it ships it in dependencies (declared-dependencies.mts)',
     check: checkDeclaredDependencies,
   },
 ];
