@@ -241,6 +241,24 @@ function cameraView(camera: VolumeLocalCamera): readonly number[] {
   return cssViewFromOrientation(camera.orientationXyzw);
 }
 
+/** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
+export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
+  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks);
+  const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
+  const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
+  const paths = new Set<string>();
+  for (const [index, axis] of AXES.entries()) {
+    if (strengths[index]!.weight <= 0) continue;
+    for (const leaf of payload.stacks.find(stack => stack.axis === axis)!.leaves) {
+      if (preparedLeafMayContribute(leaf.boundsCssPixels, planes)) paths.add(leaf.texturePath);
+    }
+  }
+  for (const leaf of payload.detailPlanes ?? []) {
+    if (preparedLeafMayContribute(leaf.boundsCssPixels, planes)) paths.add(leaf.texturePath);
+  }
+  return [...paths];
+}
+
 function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks']): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];

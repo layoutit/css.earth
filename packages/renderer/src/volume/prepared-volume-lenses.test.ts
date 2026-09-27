@@ -512,3 +512,13 @@ test('fixed detail planes retain physical geometry through camera motion, materi
   expect(descendants(f.host).find(node => node.dataset.volumePlane)).toBe(plane);
   lod.destroy(); expect(f.host.children).toEqual([f.before]);
 });
+
+
+test('incoming lens demands only the camera-facing axis and no hidden dataset', () => {
+  const { options } = dom();
+  const mounted = createPreparedVolumeLenses({ payload: payload(), resolveResource: path => `/prepared/${path}` }).mount(options);
+  expect(mounted.textureUrls(publication(), true)).toEqual(['/prepared/first/z.webp']);
+  mounted.selectLens('second');
+  expect(mounted.textureUrls(publication(), true)).toEqual(['/prepared/second/z.webp']);
+  mounted.destroy();
+});

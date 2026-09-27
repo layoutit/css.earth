@@ -1,3 +1,5 @@
+import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
+import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
 import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
@@ -290,6 +292,19 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         // The bank's visibility is written on its roots from outside. A lens that composites in front of the body
         // lives in the second root, so both must be gated or a disabled cloud keeps drawing over the star.
         return Object.freeze({ root, frontRoot, publish, state, destroy,
+          /** Incoming focus warms only its selected lens and contributing axis, while its billboard still covers it. */
+          textureUrls(publication: VolumeCameraPublication, approaching = false): readonly string[] {
+            const volume = lensById.get(selected)!.volume;
+            const projection = volume.impostors ? projectVolumeImpostors(publication, volume.frame, volume.impostors) : null;
+            const paths = new Set<string>();
+            if (!projection || (projection.visible && (approaching || projection.volumeMix > 0))) {
+              for (const path of preparedVolumeTexturePaths(volume, publication)) paths.add(path);
+            }
+            if (projection?.visible && projection.volumeMix < 1) {
+              for (const view of projection.views) paths.add(volume.impostors!.views.find(candidate => candidate.id === view.id)!.texturePath);
+            }
+            return [...paths].map(resolvePrepared);
+          },
           subscribe(listener: (state: PreparedVolumeLensState) => void) {
             if (!destroyed) listeners.add(listener);
             return () => { listeners.delete(listener); };
