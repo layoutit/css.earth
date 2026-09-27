@@ -30,6 +30,12 @@ test('repreparing detail textures preserves the navigation arrival image', async
   await writeFile(resolve(objectDirectory, 'prepared/arrival-billboard.json'), JSON.stringify({ url: '/scenes/fixture/arrival.webp' }));
   const inventory = await inventoryPublicAssets({ objectId: 'fixture', objectDirectory, publicRoot, urls: ['/scenes/fixture/surface.webp'] });
   assert.deepEqual(inventory?.assets.map(asset => asset.filename), ['arrival.webp', 'surface.webp']);
+  // Authored preparation writes its temporary inventory beside the staged records,
+  // rather than in a package with a nested prepared/ directory.
+  const preparedDirectory = resolve(objectDirectory, 'prepared');
+  const staged = await inventoryPublicAssets({ objectId: 'fixture', objectDirectory: preparedDirectory,
+    preparedDirectory, publicRoot, urls: ['/scenes/fixture/surface.webp'] });
+  assert.deepEqual(staged?.assets.map(asset => asset.filename), ['arrival.webp', 'surface.webp']);
 });
 
 test("one inventory per object: each location is written by its own stage and keeps the other's entries", async (context) => {

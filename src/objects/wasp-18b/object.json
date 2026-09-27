@@ -9,6 +9,7 @@
       "steps": [
         "verify-sources",
         "assets",
+        "charts",
         "panel-content",
         "lenses",
         "starfield",
@@ -202,6 +203,10 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json"
         }
       ],
       "emission": {
