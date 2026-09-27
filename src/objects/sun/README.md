@@ -79,7 +79,7 @@ Photosphere and longitude review (measured on `main` at 11ac994699; unchanged co
   `CRLN-CEA`, CDELT1 −0.5, pixel 1 at Carrington longitude 0.3°) and the AIA
   synoptic maps run Carrington longitude up to the right. Carrington longitude
   grows in the direction of rotation, which is the renderer's east-positive
-  sense (`tools/objects/interferometry/surface-lens.mts`: east longitude grows
+  sense (`packages/telescope-cli/src/archives/interferometry/surface-lens.mts`: east longitude grows
   from 0 at the left edge), so the maps are used as stored. The earlier review
   reversed all of them and the HMI photosphere projection laid its columns out
   from 360° down to 0°. Both are fixed; the runtime-contract test checks that
