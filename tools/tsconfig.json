@@ -30,12 +30,14 @@
     "**/*.mts",
     "../.github/scripts/**/*.mts",
     "../labs/experiments/**/*.mts",
+    "../labs/performance/**/*.mts",
     "../site/env.d.ts",
     "nebula/application/**/*.ts"
   ],
   "exclude": [
     "**/*.test.mts",
     "../.github/scripts/**/*.test.mts",
+    "../labs/performance/**/*.test.mts",
     "**/dist/**",
     "**/node_modules/**",
     "**/oracles/**"

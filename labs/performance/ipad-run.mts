@@ -119,7 +119,7 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
     await writeFile(resolve(out, 'journey.json'), JSON.stringify({ schema: 'cssearth-ipad-journey@1', inputSources,
       initialUrl: startUrl, journey, steps, recordedAt: new Date().toISOString() }, null, 2) + '\n');
     const strip = await makeIpadStrip(out);
-    await exec(process.execPath, [resolve(root, 'tools/performance/webkit-devtools-trace.mts'), out], { cwd: root });
+    await exec(process.execPath, [resolve(root, 'labs/performance/webkit-devtools-trace.mts'), out], { cwd: root });
     stage('trace and filmstrip exported');
     console.log(`Trace: ${resolve(out, 'trace.devtools.json')}`);
     console.log(`Native iPad filmstrip: ${strip}`);

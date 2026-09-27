@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// `node tools/performance/ios-capture.mts`: record one moment of cssEarth in Safari on the booted iOS Simulator, with everything both sides expose.
+// `node labs/performance/ios-capture.mts`: record one moment of cssEarth in Safari on the booted iOS Simulator, with everything both sides expose.
 //
-//   node tools/performance/ios-capture.mts --name saturn-flight --steps steps.json [--open <url>] [--dist dist] [--udid <udid>]
-//   node tools/performance/ios-capture.mts --name hand-drag --seconds 15        (record while someone uses the app)
-//   node tools/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
+//   node labs/performance/ios-capture.mts --name saturn-flight --steps steps.json [--open <url>] [--dist dist] [--udid <udid>]
+//   node labs/performance/ios-capture.mts --name hand-drag --seconds 15        (record while someone uses the app)
+//   node labs/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
 //
 // --device [udid] records a real iPhone or iPad over USB instead of the simulator: turn on Settings > Apps > Safari >
 // Advanced > Web Inspector, trust this Mac and keep the device unlocked with cssEarth open in Safari. The terminal says when a
