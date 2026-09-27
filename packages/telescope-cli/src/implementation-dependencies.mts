@@ -22,7 +22,9 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
  * `@cssearth/bake/{prepared-presentation,delivery,sources,contract}` and `@cssearth/objects/node/contract`, and the provenance,
  * exploration and source-usage records and the runtime asset closure (`src/platform/`) before `@cssearth/objects/provenance` and
  * `@cssearth/objects/node`, and the galaxy, cluster and nebula catalogue readers (`packages/catalog/src/`), which the navigation
- * destinations and the spatial source citations imported by path before they joined the bake; following them keeps
+ * destinations and the spatial source citations imported by path before they joined the bake, and the galaxy-field
+ * libraries (`tools/galaxy-field/`) and layered provenance records and bindings (`tools/objects/`) before
+ * `@cssearth/bake/{galaxy-field,objects/provenance}`; following them keeps
  * every operation identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
