@@ -23,7 +23,7 @@ It was `src/renderers/css` until 2026-09-26. The compilers that write its prepar
 | `@cssearth/renderer/styles/*.css` | the runtime stylesheets: `volume.css`, `world-context.css`, `triangle-faces.css` |
 
 The built entries are ESM with declarations in `dist/`. The site's client build compiles them from their sources
-instead ([package-sources.mts](../../tools/performance/package-sources.mts)); server rendering and Node tools use `dist/`.
+instead ([package-sources.mts](../../site/build/package-sources.mts)); server rendering and Node tools use `dist/`.
 Node bundles that keep packages external still bundle this one ([bundle-renderer.mts](../../tools/cli/bundle-renderer.mts)),
 because its sources name their siblings `.js`. `src/runtime/shell-contract.ts` and `src/labels/universe-label-policy.ts` name
 theirs `.ts` instead, so plain-Node tools can load them without a bundler.

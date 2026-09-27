@@ -280,7 +280,7 @@ export async function main(argv: readonly string[]): Promise<{ output: string; b
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]; if (arg === '--') continue;
     if (arg === '--help' || arg === '-h') {
-      console.log('node tools/performance/trace-brief.mts <trace.json[.gz]> [--out directory] [--label name] [--compare prior/agent-brief.json] [--capture directory] [--url page-substring] [--build built-site] [--framesleuth module]\nRepeat --compare to overlay saved traces. The chart always uses a 500 ms mean. Sidecar metadata is discovered beside the trace.\nFrameSleuth defaults to the sibling cssGraphics checkout, or CSSEARTH_FRAMESLEUTH.'); return;
+      console.log('node labs/performance/trace-brief.mts <trace.json[.gz]> [--out directory] [--label name] [--compare prior/agent-brief.json] [--capture directory] [--url page-substring] [--build built-site] [--framesleuth module]\nRepeat --compare to overlay saved traces. The chart always uses a 500 ms mean. Sidecar metadata is discovered beside the trace.\nFrameSleuth defaults to the sibling cssGraphics checkout, or CSSEARTH_FRAMESLEUTH.'); return;
     }
     if (VALUE_OPTIONS.includes(arg)) {
       const value = argv[i + 1];

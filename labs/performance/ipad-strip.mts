@@ -36,6 +36,6 @@ export async function makeIpadStrip(directory: string, maximum = 12): Promise<st
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const directory = process.argv[2];
-  if (!directory) throw new TypeError('Usage: node tools/performance/ipad-strip.mts <capture-directory>');
+  if (!directory) throw new TypeError('Usage: node labs/performance/ipad-strip.mts <capture-directory>');
   console.log(await makeIpadStrip(directory));
 }

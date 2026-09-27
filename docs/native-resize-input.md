@@ -6,17 +6,19 @@ the `perf:trace` package command, last existed before
 [revision `6e32bc459b`](https://github.com/layoutit/css.earth/tree/6e32bc459b%5E).
 Commands below that name those helpers or `perf:trace` describe the original
 runs; they cannot be run from this checkout. The previews and their launchers
-under `labs/experiments/` still exist, as do the trace analyses under
-`tools/experiments/`.
+under `labs/experiments/` still exist, with the trace analyses beside them.
 
 Blocks that list a retired helper keep the paths of their original run. The
-current experiment sources are checked and started with:
+current experiment sources are checked, started and their traces analysed with:
 
 ```sh
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
 node labs/experiments/native-scroll/run.mts http://127.0.0.1:4349 4352
 node labs/experiments/native-resize/run.mts
+node labs/performance/trace-brief.mts <trace.json[.gz]> --url 4349
+node labs/experiments/native-scroll/perf-analysis.mts
+node labs/experiments/native-resize/saturn-analysis.mts
 ```
 
 The experiment used a native resize surface for rotation, inside a
@@ -280,8 +282,8 @@ occluded captures are marked invalid in ignored output.
 
 The test stores its substituted module, adapter and source hashes with raw traces
 under `output/playwright/native-resize/saturn-transparent/`. Process each trace
-with `node tools/performance/trace-brief.mts`, selecting port 4349, and then run
-`node tools/experiments/native-resize/saturn-analysis.mts`. The comparison uses
+with `node labs/performance/trace-brief.mts`, selecting port 4349, and then run
+`node labs/experiments/native-resize/saturn-analysis.mts`. The comparison uses
 explicit drag markers and unions main-thread task intervals to avoid counting
 nested work twice. CPU sampling is disabled consistently across the comparison.
 

@@ -1,4 +1,4 @@
-// `node tools/performance/webkit-devtools-trace.mts <capture dir>…`: write trace.devtools.json beside an ios-capture
+// `node labs/performance/webkit-devtools-trace.mts <capture dir>…`: write trace.devtools.json beside an ios-capture
 // trace.json, so Chrome DevTools' Performance panel can open a Safari (WebKit) recording.
 //
 // DevTools draws a trace only when it looks like Chrome's: a TracingStartedInBrowser record naming the page's frame, a

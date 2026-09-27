@@ -1,4 +1,4 @@
-// `node tools/performance/coast-writes.mts [--url <page>]… [--json <file>]`: fling the camera in headless Chrome and list
+// `node labs/performance/coast-writes.mts [--url <page>]… [--json <file>]`: fling the camera in headless Chrome and list
 // every DOM write the whole page makes while it coasts on inertia, the motion the runtime contract gates
 // (docs/performance/motion-freezes-membership.md). Only `transform` and `opacity` may change then, plus the documented
 // paint exceptions; anything else is printed and the command exits 1.
