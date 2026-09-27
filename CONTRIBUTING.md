@@ -112,7 +112,7 @@ Omit `--object` to publish everything under `src/objects/`. The publisher is inc
 
 A second cache, `source-cache/<object id>/<manifest path>`, mirrors downloaded
 inputs by the same path their source manifest names. Restorers try it before the
-origin URL when a file is missing. `node tools/assets/publish-source-cache.mts
+origin URL when a file is missing. `node packages/bake/cli/publish-source-cache.mts
 --object=<id>` publishes that object's available downloads; restore them first
 with `node tools/assets/restore-source-inputs.mts --object=<id>`. To publish one
 file, use `--file=<path> --key=<object id>/<manifest path>`. The publisher verifies

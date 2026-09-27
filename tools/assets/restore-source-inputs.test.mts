@@ -24,7 +24,6 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   await copyFile(resolve(project, 'tools/assets/runtime-assets.mts'), resolve(root, 'tools/assets/runtime-assets.mts'));
   // `runtime-assets.mts` imports `RUNTIME_ASSET_ORIGIN` from here; without it the fixture root cannot resolve.
   await copyFile(resolve(project, 'tools/assets/asset-origin.mts'), resolve(root, 'tools/assets/asset-origin.mts'));
-  await copyFile(resolve(project, 'tools/assets/source-acquisition.mts'), resolve(root, 'tools/assets/source-acquisition.mts'));
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));

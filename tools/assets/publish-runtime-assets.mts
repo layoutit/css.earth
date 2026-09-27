@@ -6,7 +6,7 @@ import { promisify } from "node:util";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from "./runtime-assets.mts";
-import { verifyPublished, reportVerification, type PublishAsset } from "./publish-verification.mts";
+import { verifyPublished, reportVerification, type PublishAsset } from "@cssearth/bake/delivery";
 
 const BUCKET = "cssearth-assets";
 const CACHE_CONTROL = "public,max-age=31536000,immutable";
@@ -79,7 +79,7 @@ async function isPublished(key: string, expectedBytes: number, fetcher: typeof f
   const response = await fetcher(`${RUNTIME_ASSET_ORIGIN}/${key}`, { method: "HEAD" }).catch(() => null);
   if (!response || !response.ok) return false;
   if (response.headers.get("content-type")?.split(";", 1)[0]?.trim().toLowerCase() !== contentType(key)) return false;
-  // See publish-verification.mts's headOk: a compressed (e.g. brotli) response can omit content-length entirely.
+  // See headOk in packages/bake/src/delivery/publish-verification.ts: a compressed (e.g. brotli) response can omit content-length entirely.
   const contentLength = response.headers.get("content-length");
   return contentLength === null || Number(contentLength) === expectedBytes;
 }
@@ -102,7 +102,7 @@ async function findMisses<T extends PublishAsset>(assets: readonly T[], fetcher:
 // every key first (concurrently) and bulk-upload only the misses (`wrangler r2 bulk put`, batched by content
 // type since one invocation takes one content type), then run the existing HEAD + byte verification pass, whose
 // own retry path uses a per-key `wrangler r2 object put` for whatever it still finds missing — see
-// tools/publish-verification.mts. `wrangler r2 bulk put` has silently dropped a subset of a batch before, which
+// packages/bake/src/delivery/publish-verification.ts. `wrangler r2 bulk put` has silently dropped a subset of a batch before, which
 // is exactly what that verification pass catches.
 export async function publishRuntimeAssets(objectIds: readonly string[], { since }: { since?: string } = {}): Promise<void> {
   const root = resolve(import.meta.dirname, "../..");

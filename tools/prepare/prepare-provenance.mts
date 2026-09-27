@@ -5,8 +5,8 @@ import { validateObjectProvenance } from '../../src/platform/object-provenance.m
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
 import { prepareFacilities } from './prepare-facilities.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
-import type { PreparedOutput } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
+import type { PreparedOutput } from '@cssearth/bake/delivery';
 import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 
 /**

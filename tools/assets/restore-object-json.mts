@@ -5,8 +5,8 @@ import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { serializeObjectJson } from '../prepare/prepare-object-json.mts';
-import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { preparePageMetadata } from '@cssearth/bake/delivery';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 
 const projectRoot = fileURLToPath(new URL('../../', import.meta.url));

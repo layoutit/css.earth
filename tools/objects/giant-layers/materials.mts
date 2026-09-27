@@ -12,7 +12,7 @@ import { worldPositionToCss } from '@layoutit/polycss';
 import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '@cssearth/bake/objects/geometry';
 import { writeMaterialAtlasTile, sampleRgbaBilinear } from '@cssearth/bake/objects/layers/material-composition';
 
-import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
+import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '@cssearth/bake/delivery';
 
 const clamp=(value: number,low=0,high=1)=>Math.max(low,Math.min(high,value));
 const scale=(vector: ReadonlyVector3,value: number): Vector3=>[vector[0]*value,vector[1]*value,vector[2]*value];

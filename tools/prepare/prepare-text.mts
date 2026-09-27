@@ -14,7 +14,7 @@ import { parsePreparedExploration } from '../../src/platform/prepared-exploratio
 import { sourceResolver } from '@cssearth/objects/sources';
 import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
 
 const root = resolve(import.meta.dirname, '../..');

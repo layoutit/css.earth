@@ -41,24 +41,3 @@ export async function findSceneReferences(distDir: string): Promise<SceneReferen
   }
   return found;
 }
-
-function usage(): never {
-  process.stderr.write("Usage: node tools/assets/check-asset-origin-scenes.mts <distDir>\n");
-  process.exit(2);
-}
-
-async function main(argv: readonly string[]) {
-  const [distDir] = argv;
-  if (!distDir) usage();
-  const found = await findSceneReferences(distDir);
-  if (found.length) {
-    process.stderr.write(`${found.length} literal /scenes/ reference(s) remain under ${distDir} with ASSET_ORIGIN set:\n`);
-    for (const entry of found.slice(0, 50)) process.stderr.write(`  ${entry.path}:${entry.line}: ${entry.text}\n`);
-    process.exitCode = 1;
-    return;
-  }
-  process.stdout.write(`No /scenes/ references found under ${distDir}.\n`);
-}
-
-const isMain = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
-if (isMain) await main(process.argv.slice(2));

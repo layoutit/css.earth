@@ -283,6 +283,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.69.0
         version: 8.69.0(eslint@10.10.0(jiti@2.6.1))(typescript@5.9.3)
+      cwebp-bin:
+        specifier: 8.0.0
+        version: 8.0.0
       geotiff:
         specifier: 3.0.5
         version: 3.0.5

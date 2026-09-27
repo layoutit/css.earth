@@ -1,5 +1,5 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
-import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
+import { preparePageMetadata } from '@cssearth/bake/delivery';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
@@ -26,7 +26,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { authoredObject } from '../sources/authored-object.mts';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { inventoryPreparedAssets, readInventory } from '../../src/platform/runtime-asset-closure.mts';
 

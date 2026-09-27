@@ -23,7 +23,7 @@ import type { ExplorationImage } from '../../src/platform/prepared-exploration.m
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from '../assets/restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';

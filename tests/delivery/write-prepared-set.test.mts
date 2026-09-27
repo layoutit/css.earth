@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import fs, { mkdtemp, readFile, writeFile, readdir, rm, stat, symlink } from 'node:fs/promises';
 import { syncBuiltinESMExports } from 'node:module';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { writePreparedSet } from './write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 
 test('a staging failure leaves every previous prepared file intact and removes temporary files', async t => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-prepared-set-')); t.after(() => rm(directory, { recursive: true, force: true }));
