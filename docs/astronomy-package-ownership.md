@@ -52,8 +52,8 @@ consumer if Astropy meets the budget and preserves the receipt. WCS and data dec
 
 **Eclipse numerics.** Keep the small synchronous TypeScript eigensolver and fit for this release. Posterior sampling now draws
 through the normal matrix's Cholesky factor instead of constructing its inverse and factoring it again. That draw has the same
-covariance. [The independent NumPy oracle](../tools/objects/eclipse-map/numerics.oracle.test.mts) checks eigencurves, fit and
-posterior covariance; the [ThERESA comparison](../tools/objects/eclipse-map/eigenmap-fit.oracle.test.mts) checks the method's
+covariance. [The independent NumPy oracle](../tests/objects/eclipse-map/numerics.oracle.test.mts) checks eigencurves, fit and
+posterior covariance; the [ThERESA comparison](../tests/objects/eclipse-map/eigenmap-fit.oracle.test.mts) checks the method's
 scientific behavior. A [SciPy](https://docs.scipy.org/doc/scipy/reference/linalg.html) replacement needs a complete real-fit
 comparison, including process startup and the constrained posterior, before it can take ownership of this route.
 

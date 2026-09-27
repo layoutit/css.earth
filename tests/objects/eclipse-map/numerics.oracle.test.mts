@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { readOracleFixture } from '../../oracles/fixture.mts';
+import { readOracleFixture } from '../../../tools/oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { bandBrightnessTemperature, brightnessTemperature, fitEigenmap, planckRadiance, sampleEigenmap, harmonicOrder, realSphericalHarmonics } from '@cssearth/bake/objects/raster';
 
