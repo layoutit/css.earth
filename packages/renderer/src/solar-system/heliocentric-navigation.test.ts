@@ -7,9 +7,29 @@ class Target extends EventTarget {
   dataset: Record<string, string | undefined> = {};
   tabIndex = -1;
   attributes = new Map<string, string>();
-  setAttribute(name: string, value: string) { this.attributes.set(name, value); }
-  removeAttribute(name: string) { this.attributes.delete(name); }
+  readonly attributeWrites: string[] = [];
+  setAttribute(name: string, value: string) { this.attributeWrites.push(name); this.attributes.set(name, value); }
+  removeAttribute(name: string) { this.attributeWrites.push(name); this.attributes.delete(name); }
 }
+
+test('retained visuals expose named button semantics only while available, with no repeated attribute writes', () => {
+  const element = new Target(), target = bindObjectNavigationTarget(element, new EventTarget());
+  assert.equal(element.attributes.has('role'), false);
+  target.update('venus', 'Venus');
+  assert.equal(element.attributes.get('role'), 'button');
+  assert.equal(element.attributes.get('aria-label'), 'Go to Venus');
+  let writes = element.attributeWrites.length;
+  for (let i = 0; i < 120; i++) target.update('venus', 'Venus');
+  assert.equal(element.attributeWrites.length, writes);
+  target.update(null);
+  assert.equal(element.attributes.has('role'), false);
+  assert.equal(element.attributes.has('aria-label'), false);
+  assert.equal(element.attributes.has('aria-disabled'), false);
+  writes = element.attributeWrites.length;
+  for (let i = 0; i < 120; i++) target.update(null);
+  assert.equal(element.attributeWrites.length, writes);
+  target.destroy();
+});
 
 test('a catalogue label needs explicit application navigation support', () => {
   const host = new EventTarget();

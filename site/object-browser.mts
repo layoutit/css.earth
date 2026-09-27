@@ -132,7 +132,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const presentBrowser = () => {
     searchPresentation.present(open, showingSearchResults);
     browser.toggleAttribute('data-navigation-filtered', open && showingSearchResults);
-    trigger.ariaExpanded = search.ariaExpanded = String(open);
+    trigger.ariaExpanded = String(open);
     trigger.title = trigger.ariaLabel = open ? 'Collapse celestial objects' : 'Browse celestial objects';
   };
   const filter = (resetScroll = true) => {

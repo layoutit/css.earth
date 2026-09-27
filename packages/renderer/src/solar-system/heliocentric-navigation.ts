@@ -62,7 +62,6 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
     if (!('key' in event) || (event.key !== 'Enter' && event.key !== ' ') || ('repeat' in event && event.repeat)) return;
     activate(event);
   };
-  element.setAttribute('role', 'button');
   element.dataset.objectNavigateActivation = activation;
   // A real document delegates presses; a target without one (a test double) listens itself.
   const pressOwner = delegatedPresses(element);
@@ -83,12 +82,15 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
       element.style.cursor = next === null ? '' : 'pointer';
     }
     element.tabIndex = next === null ? -1 : 0;
-    element.setAttribute('aria-disabled', String(next === null));
+    // Dormant paint nodes are not disabled controls. Swap semantics only when
+    // availability changes; callers hold these transitions while coasting.
     if (next === null) {
       delete element.dataset.objectNavigate;
+      element.removeAttribute('role');
       element.removeAttribute('aria-label');
     } else {
       element.dataset.objectNavigate = next;
+      element.setAttribute('role', 'button');
       element.setAttribute('aria-label', label!);
     }
   };
