@@ -1,7 +1,7 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { anchorApparition, apparitions, selectFrames, series } from './frames.mts';
+import { anchorApparition, apparitions, selectFrames, series } from '@cssearth/bake/objects/sphere-survey';
 
 /** Five exposures a minute apart at each listed epoch, as the survey took them. */
 const epochs = (...starts: string[]) => starts.flatMap(start => [0, 1, 2, 3, 4].map(minute => ({ start: new Date(Date.parse(`${start}Z`) + minute * 60_000).toISOString().slice(0, 23) })));

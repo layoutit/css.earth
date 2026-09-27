@@ -1,11 +1,11 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { readPdfImage } from '@cssearth/bake/sources';
 import { figureBands, figureCells, parseComparisonSpec, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
-import { glyphTemplates, readLabel } from './figure-labels.mts';
+import { glyphTemplates, readLabel } from '@cssearth/bake/objects/sphere-survey';
 
 // The survey paper is cited, not kept; a maintainer points CSSEARTH_SURVEY_PAPER at a downloaded copy to run the figure checks.
 const ROOT = resolve(import.meta.dirname, '../../..'), PAPER = process.env.CSSEARTH_SURVEY_PAPER ?? '';

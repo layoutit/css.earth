@@ -206,6 +206,11 @@
       "import": "./dist/objects/acquisition.js",
       "default": "./dist/objects/acquisition.js"
     },
+    "./objects/sphere-survey": {
+      "types": "./dist/objects/sphere-survey.d.ts",
+      "import": "./dist/objects/sphere-survey.js",
+      "default": "./dist/objects/sphere-survey.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",

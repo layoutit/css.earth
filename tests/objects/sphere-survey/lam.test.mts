@@ -1,7 +1,7 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { framesUrl, parseFrameListing, shapeUrl, spinRecordName, surveyDirectory } from './lam.mts';
+import { framesUrl, parseFrameListing, shapeUrl, spinRecordName, surveyDirectory } from '@cssearth/bake/objects/sphere-survey';
 
 test('a listing yields every frame with its camera and start, whatever surrounds the time in its name', () => {
   const url = framesUrl(48, 'Doris'), html = [

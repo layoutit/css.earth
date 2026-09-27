@@ -28,7 +28,7 @@ out. Pallas and Iris are seen pole-on from opposite sides in their two
 apparitions, so their second apparitions stay out.
 
 ```bash
-node tools/objects/sphere-survey/apparitions.mts [<id> …]
+node packages/bake/cli/sphere-survey-apparitions.mts [<id> …]
 ```
 
 This prints, for every shipped survey lens or the ones named, each apparition's

@@ -9,7 +9,7 @@
  * rotational phase the survey caught stays. The frames the figure shows are always kept, and within a series the frames
  * nearest them come first.
  */
-import { CONTROLLED_CAMERA_MAXIMUM_FRAMES, DECONVOLVED_SEASON_GAP_DAYS } from '@cssearth/bake/objects/layers/terrestrial';
+import { CONTROLLED_CAMERA_MAXIMUM_FRAMES, DECONVOLVED_SEASON_GAP_DAYS } from '../layers/terrestrial/index.ts';
 
 /** Frames further apart than this belong to different apparitions: an apparition is one observing season of the level fit. */
 export const APPARITION_GAP_DAYS = DECONVOLVED_SEASON_GAP_DAYS;

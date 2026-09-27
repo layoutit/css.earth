@@ -27,10 +27,10 @@ import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, 
 import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import type { RadialSimplification } from '@cssearth/bake/objects/geometry';
 import { parseSpinState, spinOrientation } from '@cssearth/bake/objects/cameras';
-import { glyphTemplates, readLabel } from './figure-labels.mts';
-import { apparitionLinks, listedViews, meshFaces, releasedFrames } from './apparitions.mts';
-import { anchorApparition, apparitions, selectFrames } from './frames.mts';
-import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from './lam.mts';
+import { glyphTemplates, readLabel } from '@cssearth/bake/objects/sphere-survey';
+import { apparitionLinks, listedViews, meshFaces, releasedFrames } from '@cssearth/bake/objects/sphere-survey';
+import { anchorApparition, apparitions, selectFrames } from '@cssearth/bake/objects/sphere-survey';
+import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from '@cssearth/bake/objects/sphere-survey';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const LENS_ID = 'zimpol';

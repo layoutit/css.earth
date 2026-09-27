@@ -7,7 +7,7 @@
  * A reading is only trusted once it names a real frame: the setup tool refuses a label that is not the exposure start
  * of one of the body's own frames to the second.
  */
-import type { Box, Raster } from '@cssearth/bake/objects/layers/terrestrial';
+import type { Box, Raster } from '../layers/terrestrial/index.ts';
 
 export const LABEL_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/u;
 /** A pixel is ink when its brightest channel exceeds this, on the figure's black panels. */

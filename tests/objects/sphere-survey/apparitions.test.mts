@@ -1,10 +1,10 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { loadObjShape } from '@cssearth/bake/objects/geometry';
-import { apparitionLinks, bodyDirection, coveredShare, meshFaces, seenFaces, type FrameView } from './apparitions.mts';
+import { apparitionLinks, bodyDirection, coveredShare, meshFaces, seenFaces, type FrameView } from '@cssearth/bake/objects/sphere-survey';
 
 /** A 100 km sphere of 5,040 triangles, in kilometres like the survey releases. */
 async function sphere() {
