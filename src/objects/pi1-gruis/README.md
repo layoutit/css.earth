@@ -32,7 +32,7 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 
 **The axis is a convention.** Where the pole really points is unknown. Celestial north up puts the image on the sphere as it appears on the sky, with the sub-Earth point on the equator; any other axis would place the same hemisphere differently. Longitudes on this sphere mean nothing beyond the image.
 
-**The default camera shows the sky as seen.** It faces Earth with celestial north up and east on the left; the sphere, the display axis and the halo plate agree with the sky view. Measured with `tools/objects/default-view.mts` and pinned by the default-view test.
+**The default camera shows the sky as seen.** It faces Earth with celestial north up and east on the left; the sphere, the display axis and the halo plate agree with the sky view. Measured with `packages/bake/src/objects/default-view/default-view.ts` and pinned by the default-view test.
 
 **One hemisphere, one band, one week.** The far hemisphere and the poles were not observed and carry the no-data grid. The colours are a legend for relative intensity at 1.65 µm on the heat scale, not colour, temperature or albedo. The granulation pattern changes on a timescale of months.
 
