@@ -9,8 +9,9 @@ import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 
 /** Ledger field names that are ordinary words and also a shipped id, by the module and exact spelling that uses them: a Gemini
- * Galilean row's `moon` is the member of the focus group it describes, and the field name is part of the published ledger. */
-const FIELD_NAMES = new Set(['gemini/archive-ledger.mts:moon']);
+ * Galilean row's `moon` is the member of the focus group it describes, and the field name is part of the published ledger. An
+ * HST slit-scan program's Horizons `sun` is the illumination source it queries, and the field name is part of its program files. */
+const FIELD_NAMES = new Set(['gemini/archive-ledger.mts:moon', 'hst/slit-scan-reduction.mts:sun']);
 
 const compact = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/gu, '');
 const PROPERTY_NAMES = [ts.isPropertyAssignment, ts.isShorthandPropertyAssignment, ts.isPropertySignature, ts.isPropertyDeclaration,
@@ -25,7 +26,9 @@ function bodyMentions(file: string, text: string, bodies: ReadonlySet<string>): 
   const visit = (node: ts.Node): void => {
     if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node) || ts.isTemplateHead(node) || ts.isTemplateMiddle(node) || ts.isTemplateTail(node)) {
       const lower = node.text.trim().toLowerCase();
-      const parts = /\s/u.test(lower) ? [lower] : [lower, ...lower.split(/[^a-z0-9_-]+/u).map(part => part.replace(/^[_-]+|[_-]+$/gu, ''))];
+      // A URL's host names a site (`readthedocs.io`), not a body; its path is read like any other string.
+      const unhosted = lower.replace(/^[a-z][a-z0-9+.-]*:\/\/[^/?#\s]*/u, '');
+      const parts = /\s/u.test(lower) ? [lower] : [lower, ...unhosted.split(/[^a-z0-9_-]+/u).map(part => part.replace(/^[_-]+|[_-]+$/gu, ''))];
       for (const part of new Set(parts)) if (bodies.has(part)) found.push(`${file}: ${JSON.stringify(node.text)} names ${part}`);
     } else if (ts.isIdentifier(node) && PROPERTY_NAMES.some(is => is(node.parent)) && (node.parent as ts.NamedDeclaration).name === node) {
       const id = byCompact.get(compact(node.text));
@@ -57,6 +60,8 @@ test('the scope scan catches a body in every place code can name it, and nothing
   assert.equal(scan('interface Row { readonly AlphaCentauriA: number }').length, 1, 'a key that spells a hyphenated id');
   assert.equal(scan('const name = `${prefix}Europa`; const other = `${a} GANYMEDE ${b}`;').length, 2, 'template-literal segments');
   assert.equal(scan("const path = 'src/objects/europa/prepared'; const flag = `--callisto=${x}`;").length, 2, 'a part of a string with no spaces');
+  assert.equal(scan("const cite = 'https://jwst-pipeline.readthedocs.io/en/latest'; const map = 'https://example.org/europa/map.fits';").length, 1,
+    'a URL host is not a name, and a body in its path is');
   assert.deepEqual(scan("// 'callisto'\n/* { europa: 1 } */ const note = 'Europa is an example here'; const row = { moon: 'x' };").length, 1,
     'comments and prose are not names; an ordinary field is one unless listed');
   assert.deepEqual(bodyMentions('gemini/archive-ledger.mts', "const row = { moon: 'x' }; const table = { MOON: '301' };", bodies),

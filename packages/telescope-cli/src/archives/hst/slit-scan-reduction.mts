@@ -121,7 +121,7 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
   const epochsPerRequest = requireFiniteNumber(horizonsRow.epochsPerRequest, 'epochsPerRequest');
   if (!Number.isSafeInteger(epochsPerRequest) || epochsPerRequest < 1) throw new TypeError('epochsPerRequest is a positive whole number.');
   const horizons: ScanHorizons = { observer: requireString(horizonsRow.observer, 'observer'), target: requireString(horizonsRow.target, 'target'),
-    sunObserver: requireString(horizonsRow.sunObserver, 'sunObserver'), sun: requireString(horizonsRow.sun, 'sun'),
+    sunObserver: requireString(horizonsRow.sunObserver, 'sunObserver'), sun: requireString(horizonsRow.sun, 'Horizons sun'),
     targetQuantities: requireString(horizonsRow.targetQuantities, 'targetQuantities'), sunQuantities: requireString(horizonsRow.sunQuantities, 'sunQuantities'),
     epochsPerRequest, responses: requireString(horizonsRow.responses, 'responses') };
 
