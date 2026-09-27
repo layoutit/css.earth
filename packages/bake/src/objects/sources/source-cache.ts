@@ -3,9 +3,11 @@
 // publisher URL always stays the recorded provenance; the mirror only saves a slow or unreliable third party from
 // blocking a build.
 import { Readable } from 'node:stream';
-import { withIdleTimeout } from '@cssearth/bake/objects/sources';
-import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
-export { RUNTIME_ASSET_ORIGIN };
+import { withIdleTimeout } from './idle-timeout.ts';
+
+/** The project's asset host: runtime assets under `runtime-assets/`, and the source mirror under `source-cache/`.
+ * `tools/assets/asset-origin.mts` re-exports it for the asset tools, whose tests redirect it there. */
+export const RUNTIME_ASSET_ORIGIN = "https://earth-assets.lowpoly.cc";
 
 /** `source-cache/<object id>/<manifest path>`: the mirror of one object's downloaded source input, addressed the way
  * its manifest names it. Each path segment is percent-encoded (a name can carry spaces or other reserved characters). */

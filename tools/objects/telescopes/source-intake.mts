@@ -3,7 +3,7 @@ import { isisGeometryBands } from './native-metadata.mts';
 import { sourceHeaders } from './source-transfer.mts';
 import { isis3CoreHeader } from '@cssearth/bake/objects/raster';
 import { open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
-import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
+import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString, hasErrorCode } from '@cssearth/core';

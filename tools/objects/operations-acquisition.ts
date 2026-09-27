@@ -11,7 +11,7 @@ import { gzipSync } from 'node:zlib';
 import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
 import type { SourceManifest, SourceEntry } from '@cssearth/bake/objects/sources';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
-import { sourceCacheUrl } from '../assets/source-mirror.mts';
+import { sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { withIdleTimeout } from '@cssearth/bake/objects/sources';
 import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './acquisition/satellite-catalog.mts';
 import { prepareDskMesh, validateDskMeshRecipe } from './acquisition/dsk-mesh.mts';

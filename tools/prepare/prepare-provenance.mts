@@ -7,7 +7,7 @@ import { prepareObjectProvenance } from '../objects/provenance.mts';
 import { prepareFacilities } from './prepare-facilities.mts';
 import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import type { PreparedOutput } from '../prepared/write-prepared-set.mts';
-import { RUNTIME_ASSET_ORIGIN } from '../assets/source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 
 /**
  * Each body's `prepared/provenance.json` is a build output: the source chain of its manifest, recipes and prepared

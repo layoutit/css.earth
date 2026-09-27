@@ -18,7 +18,7 @@ import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import { manifestSources } from '../sources/context-source-records.mts';
 import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
-import { fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
+import { fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/sources/context-source-records.mts',

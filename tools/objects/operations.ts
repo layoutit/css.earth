@@ -2,7 +2,7 @@ import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } f
 import { containedPath, parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { publishSourceBytes } from '../assets/source-acquisition.mts';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
