@@ -88,6 +88,47 @@
           ],
           "ambient": 0.25
         }
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative brightness",
+        "format": "geotiff",
+        "path": "science/b2-intake/mimas_albedo_g.tif",
+        "description": "Cassini SPC relative-albedo model · dimensionless",
+        "title": "Relative brightness solved together with the Cassini SPC shape model. A value of 1 is the map average; 0.9 is 10% darker and 1.1 is 10% brighter. This is a model result, not visible color or calibrated reflectance. Values outside the color range saturate; gray grid preserves the narrow areas outside the supplied raster.",
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
+        "minimum": 0.9,
+        "maximum": 1.1,
+        "colors": [
+          "#403362",
+          "#aba0be",
+          "#f4f1e8",
+          "#c0a257",
+          "#755013"
+        ],
+        "labels": [
+          "0.9",
+          "1.0",
+          "1.1"
+        ],
+        "units": "1 = map average",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 2222,
+          "height": 1111,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 198200,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -622663.6639415,
+            311331.83197075
+          ],
+          "resolutionMeters": 559.13276289079
+        },
+        "displaySampling": "nearest",
+        "textureScale": 0.25
       }
     ],
     "observedColors": []

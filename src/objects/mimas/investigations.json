@@ -86,6 +86,23 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "spc-relative-albedo",
+      "subject": "Mimas 2025 SPC relative-albedo GeoTIFF",
+      "status": "included",
+      "finding": "Selected the 2,222 by 1,111 dimensionless grid as Relative brightness. All source cells are valid; values span 0.582471 to 1.407658 around a map average of about 1. The actual geotransform shares the elevation raster’s narrow eastern and southern edge gaps. The product is a shape-linked brightness model, not visible color or calibrated reflectance.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.xml",
+        "https://doi.org/10.26033/y8wv-r303",
+        "source/validation/relative-albedo-anchors.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "115e4abf6a46f82edcca1ddea4748ebb65954a1c"
+        }
+      ]
     }
   ]
 }

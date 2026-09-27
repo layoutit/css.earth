@@ -80,7 +80,8 @@
     "labels": {
       "normal": "Monochrome",
       "enhanced": "Enhanced color",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "relative-albedo": "Relative brightness"
     },
     "controls": [
       {
@@ -133,6 +134,34 @@
         },
         "notes": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
         "noData": true
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative brightness",
+        "shortLabel": "Cassini / PDS",
+        "thumbnail": "/scenes/mimas/mimas-relative-albedo-thumbnail.webp",
+        "surface": "mimas-relative-albedo-surface@2x.webp",
+        "poles": "mimas-relative-albedo-poles@2x.webp",
+        "source": {
+          "id": "cassini-spc-2025-relative-albedo",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Relative brightness",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.9",
+            "1.0",
+            "1.1"
+          ],
+          "meta": "1 = map average",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
+          "image": "/scenes/mimas/mimas-relative-albedo-legend.webp"
+        },
+        "notes": "Brightness solved with the Cassini SPC shape model. A value of 1 is the map average; 0.9 is 10% darker and 1.1 is 10% brighter. This is a model result, not visible color or calibrated reflectance. Values outside the color range saturate; gray grid marks the narrow areas outside the supplied raster.",
+        "noData": true
       }
     ]
   },
@@ -169,8 +198,8 @@
     },
     {
       "label": "PDS",
-      "role": "elevation",
-      "description": "Weirich, Gaskell, Palmer and Domingue (2025), Mimas SPC terrain",
+      "role": "surface",
+      "description": "Weirich et al. (2025) Mimas SPC terrain and relative-brightness maps",
       "href": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html"
     }
   ],

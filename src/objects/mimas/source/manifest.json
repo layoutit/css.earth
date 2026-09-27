@@ -282,6 +282,65 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "cassini-spc-2025-relative-albedo",
+      "path": "science/b2-intake/mimas_albedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.tif",
+      "productId": "urn:nasa:pds:satellite-mimas.cassini.shape-models-maps:data:mimas_albedo_g::1.0",
+      "version": "1.0",
+      "title": "Albedo for global DTM Mimas: mimas_albedo_g",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "displayCredit": "Cassini / PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichmimasshape.html"
+      ],
+      "acquisition": "Download the native public PDS GeoTIFF through preparation/acquisition.json.",
+      "redistribution": "Prepared derivatives retain source authors, Cassini mission credit and DOI 10.26033/y8wv-r303.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative brightness",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 198200,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "pixelResolutionMeters": 559.13276289079,
+        "upperLeftMeters": [
+          -622663.6639415,
+          311331.83197075
+        ]
+      },
+      "coverage": "All 2,468,642 raster cells are finite and valid. The geotransform ends short of the nominal global bounds at the eastern and southern edges; those narrow gaps remain missing.",
+      "units": "Dimensionless SPC relative albedo normalized around 1; not geometric albedo, visible color or calibrated reflectance.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mimas-cassini-spc-2025-relative-albedo",
+            "role": "material",
+            "evidence": "PDS4 label and product identifier retained beside the source record."
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -339,6 +398,15 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "science/b2-intake/mimas_albedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.xml",
+      "purpose": "PDS4 source label: product identity, units, dimensions, geotransform and missing constant."
+    },
+    {
+      "path": "validation/relative-albedo-anchors.json",
+      "purpose": "Independent raw GeoTIFF values, range, byte count and coordinate anchors used to verify preparation."
     }
   ],
   "generatedIntermediates": [

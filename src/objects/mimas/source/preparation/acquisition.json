@@ -46,6 +46,28 @@
       ],
       "path": "features/MIMAS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIMAS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/mimas_albedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/mimas_albedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
     }
   ]
 }
