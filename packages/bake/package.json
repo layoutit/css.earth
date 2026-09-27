@@ -256,6 +256,11 @@
       "import": "./dist/asset-publication.js",
       "default": "./dist/asset-publication.js"
     },
+    "./facility-renders": {
+      "types": "./dist/facility-renders.d.ts",
+      "import": "./dist/facility-renders.js",
+      "default": "./dist/facility-renders.js"
+    },
     "./site-assets": {
       "types": "./dist/site-assets.d.ts",
       "import": "./dist/site-assets.js",
@@ -302,6 +307,7 @@
     "@layoutit/polycss": "0.2.11",
     "@typescript-eslint/parser": "^8.69.0",
     "cwebp-bin": "8.0.0",
+    "esbuild": "0.27.7",
     "geotiff": "3.0.5",
     "h5wasm": "0.10.3",
     "linkedom": "^0.18.13",
@@ -309,6 +315,7 @@
     "playwright": "1.60.0",
     "robust-predicates": "3.0.3",
     "sharp": "0.35.3",
+    "three": "0.180.0",
     "undici": "7.29.1",
     "vite": "7.3.1",
     "yaml": "^2.9.0"
@@ -316,6 +323,7 @@
   "devDependencies": {
     "@types/estree": "^1.0.9",
     "@types/node": "^26.4.0",
+    "@types/three": "0.180.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^3.1.1"

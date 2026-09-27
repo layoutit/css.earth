@@ -3,20 +3,22 @@ import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { dirname, resolve, relative, extname, sep } from 'node:path';
 import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
 import { Quaternion, Vector3, MathUtils } from 'three';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import type { RenderRequest, renderFacility, recipe } from '../facility-renders/render.mts';
+import type { RenderRequest, renderFacility, recipe } from '@cssearth/bake/facility-renders';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { prepareArtworkRefresh } from '@cssearth/bake/sources';
-import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
-import { getFacilityPose, inwardDirection } from '../facility-renders/poses.mts';
+import { getFacilityPose, inwardDirection } from '@cssearth/bake/facility-renders';
 
 declare global { interface Window { FacilityRender: { renderFacility: typeof renderFacility; recipe: typeof recipe }; } }
 
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../..');
+/** The application's dataset routes, loaded from the checkout and passed to the artwork refresh: they are application policy. */
+const { DATASET_ROUTES } = await import(pathToFileURL(resolve(root, 'src/platform/dataset-destination.mts')).href) as { DATASET_ROUTES: Parameters<typeof prepareArtworkRefresh>[4] };
 const args = process.argv.slice(2), write = args.includes('--write');
 const inspectAxes = args.includes('--inspect-axes');
 const inspectRolls = args.includes('--inspect-rolls');
@@ -55,7 +57,7 @@ for (const file of files.values()) {
   }
   if (bytes.length !== file.bytes) throw new Error(`Source byte count mismatch: ${file.path} has ${bytes.length}, library declares ${file.bytes}`);
 }
-const bundle = await build({ entryPoints: [resolve(root, 'tools/facility-renders/render.mts')], bundle: true, format: 'iife', globalName: 'FacilityRender', write: false, platform: 'browser' });
+const bundle = await build({ entryPoints: [resolve(root, 'packages/bake/src/facility-renders/render.ts')], bundle: true, format: 'iife', globalName: 'FacilityRender', write: false, platform: 'browser' });
 const script = bundle.outputFiles[0].contents;
 const require = createRequire(import.meta.url), dracoRoot = resolve(dirname(require.resolve('three')), '../examples/jsm/libs/draco/gltf');
 const allowedModels = new Set([...files.keys()]);
@@ -126,13 +128,13 @@ try {
     await writeFile(resolve(output, `rendered/${id}.webp`), webp);
     entry.bytes = webp.length; entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
     entry.composition = { scale: 1, offsetXCssPixels: 0 };
-    entry.processing = { recipe: 'tools/facility-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, camera: result.report.camera, pose: result.report.pose };
+    entry.processing = { recipe: 'packages/bake/src/facility-renders/render.ts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, camera: result.report.camera, pose: result.report.pose };
     reports.push({ ...result.report, bytes: webp.length, sha256: sha256(webp), subject: entry.subject });
     console.log(`${id}: ${result.report.triangles} triangles; ${webp.length} bytes`);
   }
   if (!inspectAxes && !inspectRolls) {
     library.renderer = { ...await page.evaluate(() => { if (!('FacilityRender' in window)) throw new Error('Renderer not loaded'); return window.FacilityRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
-      implementation: Object.fromEntries(await Promise.all(['tools/prepare/prepare-facility-renders.mts', 'tools/facility-renders/render.mts', 'tools/facility-renders/poses.mts', 'packages/bake/src/sources/facility-artwork-refresh.ts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
+      implementation: Object.fromEntries(await Promise.all(['packages/bake/cli/prepare-facility-renders.mts', 'packages/bake/src/facility-renders/render.ts', 'packages/bake/src/facility-renders/poses.ts', 'packages/bake/src/sources/facility-artwork-refresh.ts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
     library.composition = { background: 'transparent for model renders', displaySize: [296, 148], preserveAspectRatio: true, fitPolicy: 'Center retained source geometry; alpha bounds with 6px padding supply sidebar crop.' };
     await writeFile(resolve(output, 'render-report.json'), JSON.stringify(reports, null, 2) + '\n');
     await writeFile(resolve(output, 'render-library.candidate.json'), JSON.stringify(library, null, 2) + '\n');

@@ -5,8 +5,11 @@ import { availableParallelism, freemem, totalmem } from "node:os";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { SCENE_OBJECTS } from "../../site/objects.mts";
+import { readPreparedObjects } from "@cssearth/objects/node";
 import { authoredObject } from '@cssearth/bake/sources';
+
+/** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
 export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>; onSpawn?: (pid: number) => void;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}

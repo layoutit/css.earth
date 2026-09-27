@@ -80,7 +80,7 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
   }
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
   const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
-  const { repinObjectJson } = await import(pathToFileURL(resolve('tools/prepare/prepare-object-json.mts')).href) as typeof import('../prepare/prepare-object-json.mts');
+  const { repinObjectJson } = await import('@cssearth/bake/contract');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
   const labels = new Map(requireArray(requireRecord(updatedControls.lenses).controls).map(value => { const lens = requireRecord(value); return [requireString(lens.id), lens] as const; }));
   const controls = requireRecord(runtime.controls), lenses = requireRecord(controls.lenses);

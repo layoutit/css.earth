@@ -1,7 +1,7 @@
 import * as T from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { inwardDirection, type FacilityPose } from './poses.mts';
+import { inwardDirection, type FacilityPose } from './poses.ts';
 
 export interface RenderRequest {
   id: string;
@@ -31,7 +31,7 @@ export const recipe = {
   shadowMapSize: 2048,
   framing: 'Centered orthographic; fit retained geometry within 88% width / 86% height.',
   camera: { position: [0, 0, 10], up: [0, 1, 0], rollDegrees: 0 },
-  orientation: { poses: 'tools/facility-renders/poses.mts', inwardDirection, policy: 'Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude.' },
+  orientation: { poses: 'packages/bake/src/facility-renders/poses.ts', inwardDirection, policy: 'Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude.' },
 };
 
 /** Emissive spheres on black: reflections see the sun and a faint planet, not a lit room. */
