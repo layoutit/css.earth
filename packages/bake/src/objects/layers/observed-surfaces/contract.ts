@@ -16,7 +16,7 @@ const provenance = obj({authority: str, model: str, sourcePath: opt(str)});
 export type BaselineProvenance = s.Infer<typeof provenance>;
 const pixelPresence = {alphaValidity: opt(s.boolean), minimumBrightness: n};
 export interface PixelPresence {alphaValidity?: boolean; minimumBrightness: number}
-const coverage = s.union(obj({kind: s.literal('boundary-mean'), boundaryFraction: n, exponent: n, minimumBoundarySum: opt(n)}), obj({kind: s.literal('uniform-baseline'), ...pixelPresence, minimumCoverage: n, minimumRowCoverage: n, equatorialInsetRows: n, allowedBoundaryRange: vector2, transitionRows: n, baseline: opt(str), baselineProvenance: opt(provenance)}));
+const coverage = s.union(obj({kind: s.literal('component-fits'), sources: s.tuple(str,str,str), unobservedRows: arr(vector2), reverseLongitude: s.boolean, longitudeOffsetDegrees: n, longitudePeriod: n}), obj({kind: s.literal('boundary-mean'), boundaryFraction: n, exponent: n, minimumBoundarySum: opt(n)}), obj({kind: s.literal('uniform-baseline'), ...pixelPresence, minimumCoverage: n, minimumRowCoverage: n, equatorialInsetRows: n, allowedBoundaryRange: vector2, transitionRows: n, baseline: opt(str), baselineProvenance: opt(provenance)}));
 export type UniformCoverage = Extract<s.Infer<typeof coverage>, {kind: 'uniform-baseline'}>;
 const baseline = obj({id: str, source: str, minimumBrightness: n, minimumCoverage: n, radiusFraction: n, minimumSampleShare: n, provenance});
 export type DiscBaseline = s.Infer<typeof baseline>;
@@ -24,12 +24,12 @@ const calibration = obj({source: str, sourceSample: region, targetSample: region
 export type Calibration = s.Infer<typeof calibration>;
 const brightTail = obj({share: n, maximum: n, luminance: vector3});
 export type BrightTail = s.Infer<typeof brightTail>;
-const polarProjection = obj({tileSize: n, poles: arr(s.literal('north', 'south')), latitudeSegments: n, sampling: s.literal('nearest-closed', 'bilinear-wrapped'), angularMode: s.literal('direct-segment', 'boundary-difference')});
+const polarProjection = obj({tileSize: n, poles: arr(s.literal('north', 'south')), latitudeSegments: n, sampling: s.literal('nearest-closed', 'bilinear-wrapped'), angularMode: s.literal('direct-segment', 'boundary-difference', 'orthographic')});
 export type PolarProjection = s.Infer<typeof polarProjection>;
 const productCommon = {filename: str, encoding: webpEncoding, transforms: opt(arr(transform)), removeAlpha: opt(s.boolean)};
 const product = s.union(obj({...productCommon, kind: s.literal('surface'), packing: obj({bandCount: n, gutter: n, overscan: opt(n)})}), obj({...productCommon, kind: s.literal('poles'), projection: polarProjection}), obj({...productCommon, kind: s.literal('thumbnail')}));
 const lens = obj({id: str, source: str, decode, products: arr(product), transforms: opt(arr(transform)), coverage: opt(coverage), calibration: opt(calibration), atmosphereColor: opt(brightTail), planetographicAxisRatio: opt(n)});
 export const observedRecipe = obj({schema: s.literal('cssearth-observed-surfaces@1'), sources: arr(sourcePin), lenses: arr(lens), baselines: opt(arr(baseline))});
 export type ObservedSurfaceRecipe = s.Infer<typeof observedRecipe>;
-export interface RasterMap {data: Buffer; width: number; height: number; channels: 1 | 2 | 3 | 4; atmosphereColor?: number[]; calibration?: unknown; coverage?: {baselineColor: readonly number[]}; stretch?: number[]}
+export interface RasterMap {data: Buffer; width: number; height: number; channels: 1 | 2 | 3 | 4; missing?: Uint8Array; atmosphereColor?: number[]; calibration?: unknown; coverage?: {baselineColor: readonly number[]}; stretch?: number[]}
 export interface Baseline {color: readonly number[]; provenance: BaselineProvenance}

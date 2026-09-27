@@ -519,6 +519,29 @@
           "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
       ]
+    },
+    {
+      "id": "opal-dated-visible-maps",
+      "subject": "Dated Hubble OPAL visible-colour sequence (8 rotations)",
+      "status": "included",
+      "finding": "One publisher RGB composite per included cycle, component FITS coverage, source-backed map frame and observation dates. Gray grid preserves missing coverage. Current scene lighting and rings remain a presentation, not the historical observing geometry. See the Hubble dates section of the README.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-25",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-26",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-27",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-28",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-29",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-30",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-31",
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
+        "https://github.com/layoutit/css.earth/blob/323a8c2f52803627462db448e52ccfa3c073363d/src/objects/saturn/README.md#hubble-dates"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "323a8c2f52803627462db448e52ccfa3c073363d"
+        }
+      ]
     }
   ]
 }

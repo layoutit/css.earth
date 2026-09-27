@@ -10,6 +10,32 @@ import {join} from 'node:path';
 import sharp from 'sharp';
 import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
 import type {PolarProjection} from '@cssearth/bake/objects/layers/observed-surfaces';
+import {card} from '../../../tests/fixtures/fits/helpers.mts';
+
+test('dated component coverage normalizes longitude and preserves isolated dark observations',async()=>{
+  const directory=await mkdtemp(join(tmpdir(),'opal-components-'));
+  try{
+    const width=5,height=8,rgb=Buffer.from(Array.from({length:width*height},(_,i)=>[10+(i%4)*30,60,90]).flat());
+    await sharp(rgb,{raw:{width,height,channels:3}}).png().toFile(join(directory,'map.png'));
+    for(let channel=0;channel<3;channel++){
+      const values=new Float32Array(width*height).fill(1);
+      values[2*width+2]=0; // an isolated measured zero
+      values.fill(0,4*width,5*width);values[3*width+3]=0; // ring occlusion extends beyond the full row
+      if(channel===1)values[width+1]=NaN;
+      const header=Buffer.from([card('SIMPLE','T'),card('BITPIX','-32'),card('NAXIS','2'),card('NAXIS1',String(width)),card('NAXIS2',String(height)),'END'.padEnd(80)].join('').padEnd(2880));
+      const data=Buffer.alloc(2880);values.forEach((value,i)=>data.writeFloatBE(value,i*4));
+      await writeFile(join(directory,`${channel}.fits`),Buffer.concat([header,data]));
+    }
+    const result=await prepareObservedSurfaces({sourceDirectory:directory,config:{schema:'cssearth-observed-surfaces@1',sources:['map.png','0.fits','1.fits','2.fits'].map(path=>({path})),lenses:[{id:'dated',source:'map.png',decode:{kind:'raster',channels:3},coverage:{kind:'component-fits',sources:['0.fits','1.fits','2.fits'],unobservedRows:[[4,4]],reverseLongitude:true,longitudeOffsetDegrees:0,longitudePeriod:4},products:[{kind:'thumbnail',filename:'dated.webp',transforms:[{kind:'resize',width:10,height:16}],encoding:{lossless:true}}]}]}});
+    const map=result.maps.get('dated');assert.ok(map);
+    assert.deepEqual([0,1,2,3].map(x=>map.data[x*4]),[10,100,70,40]);
+    assert.equal(map.missing?.[width+3],1); // missing green component survives reversal
+    assert.equal(map.missing?.[2*width+2],0); // isolated dark sample stays measured
+    assert.equal(map.missing?.[3*width+1],1); // connected ring gap survives reversal
+    assert.ok(map.missing?.slice(4*width,5*width).every(value=>value===1));
+    assert.equal(result.assets.length,1);
+  }finally{await rm(directory,{recursive:true,force:true});}
+});
 
 test('boundary continuation retains observed rows and varies only source-derived longitude',()=>{
   const input=new Float32Array([0,0,0,0,2,6,10,12,14,16,18,20]);

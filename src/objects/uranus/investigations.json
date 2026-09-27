@@ -246,6 +246,33 @@
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
       ]
+    },
+    {
+      "id": "opal-dated-visible-maps",
+      "subject": "Dated Hubble OPAL visible-colour sequence (12 rotations)",
+      "status": "included",
+      "finding": "One publisher RGB composite per included cycle, component FITS coverage, source-backed map frame and observation dates. Gray grid preserves missing coverage. Current scene lighting and rings remain a presentation, not the historical observing geometry. See the Hubble dates section of the README.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32",
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33",
+        "https://github.com/layoutit/css.earth/blob/323a8c2f52803627462db448e52ccfa3c073363d/src/objects/uranus/README.md#hubble-dates"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "323a8c2f52803627462db448e52ccfa3c073363d"
+        }
+      ]
     }
   ]
 }

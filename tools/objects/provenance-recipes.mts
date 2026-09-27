@@ -53,7 +53,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     products.push(value);
   };
   const raster = recipe('raster'), terrestrial = recipe('terrestrial');
-  const addObservationLenses = () => namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`, paths(plan),
+  const addObservationLenses = () => namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`,
+    [...paths(plan), ...paths(maybeRecord(plan.coverage)?.sources)],
     'Apply the declared observation, polar coverage and spectral display operation.', {
       interpretation: { operation: plan.operation, qualification: plan.qualification ?? maybeRecord(plan.control)?.qualification },
     }));
@@ -172,9 +173,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         'Fill the authored shape with the shared neutral gray display convention; no surface texture.', {
           observationAttribution: 'none', interpretation: { kind: 'neutral-shape', resolvedSurfaceObservation: false } });
     }
-  } else if (recipe('observations')?.lenses) {
-    addObservationLenses();
   } else if (recipe('surface')?.lenses) {
+    if (recipe('observations')?.lenses) addObservationLenses();
     const plan = record(recipe('surface'));
     const materialControls = namedRecords(record(plan.descriptor).controls);
     // In this family geometry.sources is an executable input map, not an
@@ -197,6 +197,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
           ...(lens.view === 'interior' ? { observationAttribution: 'none' as const, interpretation: { kind: 'schematic-interior' } } : {}),
         });
     }
+  } else if (recipe('observations')?.lenses) {
+    addObservationLenses();
   } else if (recipe('paged-ellipsoid')) {
     const plan = record(recipe('paged-ellipsoid')), planSurface = record(plan.surface), maps = records(planSurface.maps);
     maps.forEach((map, index) => {

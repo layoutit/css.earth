@@ -40,6 +40,174 @@
       "title": "OPAL F845M map",
       "detail": "845 nm",
       "summary": "845 nm false-color reflectance for the north; the unseen south carries no measured detail."
+    },
+    "visible-2014a": {
+      "title": "Hubble 2014-11-08",
+      "detail": "F467M / F547M / F658N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22",
+          "label": "MAST · OPAL Cycle 22",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2014a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2015a": {
+      "title": "Hubble 2015-09-12",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23",
+          "label": "MAST · OPAL Cycle 23",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2015a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2016a": {
+      "title": "Hubble 2016-09-29",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24",
+          "label": "MAST · OPAL Cycle 24",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2016a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2017a": {
+      "title": "Hubble 2017-10-25",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25",
+          "label": "MAST · OPAL Cycle 25",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2017a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2018a": {
+      "title": "Hubble 2018-11-16",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26",
+          "label": "MAST · OPAL Cycle 26",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2018a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2019a": {
+      "title": "Hubble 2019-11-18",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27",
+          "label": "MAST · OPAL Cycle 27",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2019a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2020a": {
+      "title": "Hubble 2020-10-08",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28",
+          "label": "MAST · OPAL Cycle 28",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2020a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2021a": {
+      "title": "Hubble 2021-12-08",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29",
+          "label": "MAST · OPAL Cycle 29",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2021a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2022a": {
+      "title": "Hubble 2022-11-09",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30",
+          "label": "MAST · OPAL Cycle 30",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2022a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2023a": {
+      "title": "Hubble 2023-09-17",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31",
+          "label": "MAST · OPAL Cycle 31",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2023a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2024a": {
+      "title": "Hubble 2024-11-09",
+      "detail": "F657N / F547M / F467M",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32",
+          "label": "MAST · OPAL Cycle 32",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2024a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2025a": {
+      "title": "Hubble 2025-10-23",
+      "detail": "F657N / F547M / F467M",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33",
+          "label": "MAST · OPAL Cycle 33",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2025a; FITS DATE-OBS"
+        }
+      ]
     }
   }
 }
