@@ -8,7 +8,7 @@ import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usa
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
-import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
+import { verifyFactsheetSources } from '@cssearth/bake/sources';
 import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
 import type { SourceInventoryEntry } from '../sources/source-catalogue-inputs.mts';
 import { existsSync } from 'node:fs';
@@ -34,14 +34,14 @@ export const explorationCompilerClosure = [
   'tools/prepare/prepare-facilities.mts', 'tools/sources/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/prepare/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
   'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'tools/prepare/prepare-catalog.mts',
-  'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'tools/prepare/prepare-navigation-destinations.mts',
+  'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'src/platform/source-usage.mts', 'packages/objects/src/node/source-manifest.ts',
   'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
   'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
-  'tools/sources/factsheet-sources.mts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
+  'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
   'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',

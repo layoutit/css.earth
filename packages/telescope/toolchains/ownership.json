@@ -191,7 +191,7 @@
   "retained": [
     {
       "mechanic": "SPHERE pinned Horizons text tables",
-      "implementation": "tools/objects/sphere-horizons.mts",
+      "implementation": "packages/bake/cli/sphere-horizons.mts with packages/bake/src/objects/layers/terrestrial/registration/sphere-horizons.ts",
       "reason": "The checked products consume Horizons VEC_TABLE=1 text as a pinned input. Astroquery 0.4.11 exposes parsed vectors or VEC_TABLE=3 text; changing this route requires migrating the pinned artifact and every receipt together. The complete existing route remains in one implementation."
     },
     {

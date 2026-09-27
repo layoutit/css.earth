@@ -7,7 +7,7 @@ NASA publishes it. The [spacecraft icons collection](https://science.nasa.gov/mu
 covers 22 of our spacecraft, from Cassini to Voyager; both Voyagers share one
 image. [`photograph-records.json`](../site/source/facilities/photograph-records.json)
 records each original file, its credit and its byte count, and
-[`prepare-facility-photographs.mts`](../tools/prepare/prepare-facility-photographs.mts)
+[`prepare-facility-photographs.mts`](../packages/bake/cli/prepare-facility-photographs.mts)
 clears the near-black matte below 12% opacity that six of the files carry (it
 shows as a box on the card), trims the transparent margin, fits the result inside
 521 × 255 without upscaling and centres it on a transparent 592 × 296 frame,
@@ -52,7 +52,7 @@ source models require another pose review.
 
 ## Regeneration
 
-`node tools/prepare/prepare-facility-photographs.mts` acquires each recorded
+`node packages/bake/cli/prepare-facility-photographs.mts` acquires each recorded
 photograph or artwork file, checks its byte count and writes the thumbnails and
 their library entries. `--only=terra,cassini` limits the run.
 

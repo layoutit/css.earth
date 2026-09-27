@@ -10,7 +10,7 @@ import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { objectInformationSource, validateObjectEditorial } from "../../tools/sources/object-information-sources.mts";
+import { objectInformationSource, validateObjectEditorial } from "@cssearth/bake/sources";
 import {
   objectPackagePaths,
   validateObjectPackageFiles,

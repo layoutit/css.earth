@@ -16,7 +16,7 @@ import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts'
 import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
-import { validateMarkerDescriptor, renderMarker } from '../prepare/marker-recipe.mts';
+import { validateMarkerDescriptor, renderMarker } from '@cssearth/bake/navigation';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;

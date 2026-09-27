@@ -57,13 +57,13 @@ bytes and credits. A spacecraft shows NASA's official artwork and a telescope or
 ground station a published photograph, both recorded in
 [`photograph-records.json`](../../site/source/facilities/photograph-records.json)
 and prepared by
-[`prepare-facility-photographs.mts`](../../tools/prepare/prepare-facility-photographs.mts)
+[`prepare-facility-photographs.mts`](../../packages/bake/cli/prepare-facility-photographs.mts)
 into the same library, where `source.kind` tells artwork, a photograph and a
 model render apart. Only spacecraft NASA publishes no artwork for are rendered
 from a 3D model; [facility thumbnails](../facility-thumbnails.md) explains both routes.
 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
-committed files. `node tools/prepare/prepare-facility-photographs.mts` re-acquires each recorded
+committed files. `node packages/bake/cli/prepare-facility-photographs.mts` re-acquires each recorded
 file and prepares it to the library's frame.
 `node tools/prepare/prepare-facility-renders.mts` clears the flat sidebar background out of the
 approved renders to alpha, flood-filling only from the frame edges and refusing

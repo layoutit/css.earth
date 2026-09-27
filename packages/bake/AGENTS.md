@@ -63,12 +63,28 @@ its validators accept); the renderer never imports the bake.
   topic. Its tests are `node --test` suites in `tests/delivery/`.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
-  physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure.
-  It imports `runtime-source`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned JPL moon catalogue
-  (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
+  physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure;
+  the checks of a factsheet's cited source evidence, the object-information source records, and the citations of
+  factsheet values from the records a body pins (`packages/bake/cli/cite-pinned-facts.mts` is their command). It imports
+  `runtime-source` and `objects/content`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
+  JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls. It imports `presentation`.
+- `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the prepared focus objects and scene distances
+  the catalogue and search destinations are built from, and the marker recipes whose source bytes are checked and drawn
+  into navigation marker sprites. It imports `raster`, and `objects/raster` (loaded only when a marker is drawn from a
+  science raster). Its tests are `node --test` suites in `tests/navigation/`.
+- `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
+  minimap or preview raster is drawn from, read and checked. It imports no topic.
+- `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
+  of the preparation trace. `packages/bake/cli/preparation-trace.mts` is the trace itself, which
+  `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
+  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. Its tests
+  are `node --test` suites in `tests/preparation/`.
+- `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
+  libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
+  entry `package.json` lists under `sideEffects`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
@@ -82,7 +98,8 @@ its validators accept); the renderer never imports the bake.
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
     camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
-    projection it adds to rotating material tracks, and a recipe's camera source. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    projection it adds to rotating material tracks, a recipe's camera source, and the seams and projection block every generated
+    sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
@@ -100,7 +117,8 @@ its validators accept); the renderer never imports the bake.
     no topic. The recipe dispatcher, spectrum reader and compact spectrum stay in
     `tools/objects/charts/`: `site/prepare-body-overview.mts` uses them, and the runtime may not import the bake.
   - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
-    payload), the shared lens vocabulary, lens steps and prepared legends, and each lens control's billboard colour. It
+    payload), the shared lens vocabulary, lens steps and prepared legends, each lens control's billboard colour, and the legend
+    labels a palette lens derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload stays in `tools/objects/content/`.
   - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
     vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
@@ -111,12 +129,17 @@ its validators accept); the renderer never imports the bake.
     from a published figure or occultation, and Roche-von Zeipel gravity darkening. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
     compiler identity reaches, so that identity does not pin the source-manifest readers.
+  - `objects/candidates`: what public archives hold for a body or a star before it is reworked: read-only searches of
+    ALMA, the ESO archive, MAST, DataCite and the JMMC diameters (a query and a pure summary of its rows each), the imagery
+    candidates (OPUS frames finer than a body ships, archive leads for a named body) and the resolved-star candidates. It
+    imports no topic. `packages/bake/cli/imagery-candidates.mts` and `star-candidates.mts` print them.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
     as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
-    scripts and modules that still read platform files stay in `tools/objects/`. A source manifest's `generator` records
+    scripts and modules that still read platform files stay in `tools/objects/`; the terrestrial commands that derive
+    observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the

@@ -537,7 +537,7 @@ These still set their own encoding:
   maps.
 
 To repeat the measurement, run
-[`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
+[`packages/bake/cli/lossy-lane-sweep.mts`](../packages/bake/cli/lossy-lane-sweep.mts)
 on the files a lane change replaces.
 
 [raster-output.ts](../packages/bake/src/objects/layers/terrestrial/raster-output.ts) writes
@@ -556,13 +556,13 @@ atmosphere do not depend on the body: 61 bodies carried the same lighting block
 and encoded the same 7 MB one by one. Such a block is now a bank named once in
 [lighting-banks.ts](../packages/bake/src/raster/lighting-banks.ts) and baked once
 into `public/lighting/<bank>/` (tracked, like the navigation atlases) by
-`node tools/objects/dist/prepare-lighting-bank.js`. A body's raster recipe names
+`node packages/bake/cli/prepare-lighting-bank.mts`. A body's raster recipe names
 it, `"lighting": { "bank": "sphere", ... }`, keeping only its presentation
 fields and metadata; the parser fills the bank's fields in, and the bake copies
 the bank's files into the body's scene directory instead of encoding them, so
 the body's prepared output, inventory and published files are what encoding
-would give. `prepare-lighting-bank.js --check`, run by
-[its test](../tools/objects/prepare-lighting-bank.test.ts), bakes each bank afresh
+would give. `prepare-lighting-bank.mts --check`, run by
+[its test](../tests/raster/lighting-bank-bake.test.ts), bakes each bank afresh
 and compares it with the tracked files byte for byte, so the copy is never stale.
 A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
 inline block and its own encode. The `sphere` bank's law is authored: a 0.35
@@ -824,7 +824,7 @@ square lids from both sides; on iPad Safari that pushed past the outline at the 
 ![Kepler-452 b on iPad Safari before the fix: two bulges at the poles](images/polar-caps/kepler-452b-ipad-lemon.webp)
 
 Generated spheres now take their seams from one shared setting
-([sphere-projection.mts](../tools/objects/sphere-projection.mts)): exact tiling, a half-texel overscan and the stepped
+([sphere-projection.ts](../packages/bake/src/objects/scene/sphere-projection.ts)): exact tiling, a half-texel overscan and the stepped
 silhouette outset, with the overlap derived from each map's texels per cell.
 
 Spherical and ellipsoidal objects share one retained interior disc behind their

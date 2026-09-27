@@ -64,11 +64,16 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/layers/paged-ellipsoid': 'packages/bake/src/objects/layers/paged-ellipsoid/index.ts',
   '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
   '@cssearth/bake/objects/stellar': 'packages/bake/src/objects/stellar/index.ts',
+  '@cssearth/bake/objects/candidates': 'packages/bake/src/objects/candidates/index.ts',
   '@cssearth/bake/runtime-source': 'packages/bake/src/runtime-source/index.ts',
   '@cssearth/bake/prepared-presentation': 'packages/bake/src/prepared-presentation/index.ts',
   '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',
   '@cssearth/bake/sources': 'packages/bake/src/sources/index.ts',
   '@cssearth/bake/contract': 'packages/bake/src/contract/index.ts',
+  '@cssearth/bake/navigation': 'packages/bake/src/navigation/index.ts',
+  '@cssearth/bake/surface-previews': 'packages/bake/src/surface-previews/index.ts',
+  '@cssearth/bake/preparation': 'packages/bake/src/preparation/index.ts',
+  '@cssearth/bake/thread-pool': 'packages/bake/src/thread-pool/index.ts',
   '@cssearth/objects/node/contract': 'packages/objects/src/node/contract/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an

@@ -4,7 +4,7 @@ import type { LightingRecipe } from './config.ts';
  * Shared lighting banks: the pixel-determining fields of a lighting recipe that many bodies draw the same. A body's raster
  * recipe names a bank (`"lighting": { "bank": "sphere", ... }`) and keeps only its own presentation fields and metadata; its
  * bake copies the bank's rows and billboard from `public/lighting/<bank>/` instead of encoding them, and its prepared output
- * is what encoding them would give. `tools/objects/prepare-lighting-bank.mts` bakes the banks and checks the tracked files
+ * is what encoding them would give. `packages/bake/cli/prepare-lighting-bank.mts` bakes the banks and checks the tracked files
  * against a fresh bake, so the copy is never a stale cache.
  *
  * `sphere` is the opaque sphere lit by the Sun with no atmosphere: 61 bodies (the shape-only planets, the moons drawn from

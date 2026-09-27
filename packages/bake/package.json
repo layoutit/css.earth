@@ -7,7 +7,9 @@
   "files": [
     "dist"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/thread-pool.js"
+  ],
   "exports": {
     "./volume": {
       "types": "./dist/volume.d.ts",
@@ -184,6 +186,11 @@
       "import": "./dist/objects/stellar.js",
       "default": "./dist/objects/stellar.js"
     },
+    "./objects/candidates": {
+      "types": "./dist/objects/candidates.d.ts",
+      "import": "./dist/objects/candidates.js",
+      "default": "./dist/objects/candidates.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",
@@ -208,6 +215,26 @@
       "types": "./dist/contract.d.ts",
       "import": "./dist/contract.js",
       "default": "./dist/contract.js"
+    },
+    "./navigation": {
+      "types": "./dist/navigation.d.ts",
+      "import": "./dist/navigation.js",
+      "default": "./dist/navigation.js"
+    },
+    "./surface-previews": {
+      "types": "./dist/surface-previews.d.ts",
+      "import": "./dist/surface-previews.js",
+      "default": "./dist/surface-previews.js"
+    },
+    "./preparation": {
+      "types": "./dist/preparation.d.ts",
+      "import": "./dist/preparation.js",
+      "default": "./dist/preparation.js"
+    },
+    "./thread-pool": {
+      "types": "./dist/thread-pool.d.ts",
+      "import": "./dist/thread-pool.js",
+      "default": "./dist/thread-pool.js"
     },
     "./package.json": "./package.json"
   },

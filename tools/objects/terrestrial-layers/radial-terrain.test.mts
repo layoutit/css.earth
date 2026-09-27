@@ -1,5 +1,5 @@
 import { required, fixtureRecord } from '@cssearth/objects/node/contract';
-import { fixtureSource } from '../test-source-fixture.mts';
+import { fixtureSource } from '../../../tests/objects/test-source-fixture.mts';
 import { createIndexedShape, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';

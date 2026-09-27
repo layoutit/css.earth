@@ -1,4 +1,4 @@
-import './thread-pool.js';
+import '@cssearth/bake/thread-pool';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -84,9 +84,9 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   return Object.freeze({ ...result, definition: prepared.definition, scene });
 }
 
-/** Legend labels of the object's content record against the stretch a staged or checked run reported (legend-labels.mts). */
+/** Legend labels of the object's content record against the stretch a staged or checked run reported (`@cssearth/bake/objects/content`). */
 export async function stagedLegendLabelChanges(objectDirectory: string, preparedDirectory: string) {
-  const { legendLabelChanges, withDerivedLegendLabels } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/legend-labels.mts')).href) as typeof import('./legend-labels.mts');
+  const { legendLabelChanges, withDerivedLegendLabels } = await import('@cssearth/bake/objects/content');
   const { descriptor } = await readAuthoredSources(objectDirectory);
   const contentReference = descriptor.recipe.sources.find(entry => entry.id === 'content');
   const assets = await readFile(resolve(preparedDirectory, 'assets.json'), 'utf8').catch(() => null);
