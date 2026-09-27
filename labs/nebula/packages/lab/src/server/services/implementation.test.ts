@@ -1,10 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import ts from 'typescript';
-import { annotationOnlyModules, implementationPins } from './implementation.ts';
+import { implementationPins } from './implementation.ts';
 
 test('cache identity includes transitive numerical owners and leaves no build output', async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-implementation-'));
@@ -132,82 +131,30 @@ test('the object colour transfer and atlas mosaic a sky-band owner reaches are p
 });
 
 /** A compiler publication pins at most 500 inputs (readPublishedCompiler); the compiler entry's owners are most of them. 340 at
- * J slice 2 (it was 263 before the object raster entry), 436 at J slice 5 while whole topic barrels were owners, 294 once owners
- * followed tree shaking (the modules that put code in the bundle and every module importing them). Fail here, well before a publish is refused, and split the entry the compiler reaches or raise the
- * publication limit on purpose. */
+ * J slice 2 (it was 263 before the object raster entry), 436 at J slice 5 while whole topic barrels were owners, 353 once owners
+ * followed tree shaking (modules that put code in the bundle or act when evaluated, and every module importing them). Fail here,
+ * well before a publish is refused, and split the entry the compiler reaches or raise the publication limit on purpose. */
 const COMPILER_OWNER_BUDGET = 450;
 test('the compiler cache identity stays under its owner budget, well inside the publication limit', async () => {
   const pins = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts']);
   assert.ok(pins.length <= COMPILER_OWNER_BUDGET, `${pins.length} compiler owners exceed the budget of ${COMPILER_OWNER_BUDGET}`);
 });
 
-/** Every lab identity's entry sets: the repository paths named in each non-test module that computes an identity. */
-async function labIdentityEntries() {
-  const { readdir, readFile, stat } = await import('node:fs/promises');
-  const sources: string[] = [];
-  const walk = async (directory: string): Promise<void> => { for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const path = join(directory, entry.name);
-    if (entry.isDirectory()) await walk(path); else if (/\.tsx?$/.test(entry.name) && !/\.test\.tsx?$/.test(entry.name)) sources.push(path);
-  } };
-  await walk(join(process.cwd(), 'labs/nebula/packages/lab/src'));
-  const sets: string[][] = [];
-  for (const source of sources) {
-    const text = await readFile(source, 'utf8');
-    if (!/\b(?:implementationPins|finiteModelStarProvenance)\(/.test(text) || relative(process.cwd(), source).endsWith('services/implementation.ts')) continue;
-    const entries = [...new Set([...text.matchAll(/'((?:labs|packages|tools)\/[\w./-]+\.m?tsx?)'/g)].map(match => match[1]!))];
-    const existing = [];
-    for (const entry of entries) if (await stat(join(process.cwd(), entry)).then(file => file.isFile(), () => false)) existing.push(entry);
-    if (existing.length) sets.push(existing.sort());
-  }
-  return sets;
-}
-
-/** Why a module's top-level code could act when it is evaluated, or undefined when it only declares. */
-function topLevelEffect(text: string, path: string) {
-  const source = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true, /x$/.test(path) ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
-  const ambient = (node: ts.Node) => ts.canHaveModifiers(node) && (ts.getModifiers(node) ?? []).some(modifier => modifier.kind === ts.SyntaxKind.DeclareKeyword);
-  for (const statement of source.statements) {
-    if (ambient(statement) || ts.isInterfaceDeclaration(statement) || ts.isTypeAliasDeclaration(statement) || ts.isFunctionDeclaration(statement) ||
-        ts.isEnumDeclaration(statement) || ts.isExportDeclaration(statement)) continue;
-    if (ts.isImportDeclaration(statement)) { if (statement.importClause) continue; return `bare import: ${statement.getText(source)}`; }
-    if (ts.isVariableStatement(statement) && (statement.declarationList.flags & ts.NodeFlags.BlockScoped) === ts.NodeFlags.Const) continue;
-    if (ts.isExportAssignment(statement) && ts.isIdentifier(statement.expression)) continue;
-    // `void binding;` marks a compile-time assertion as used; reading a module's own binding does nothing.
-    if (ts.isExpressionStatement(statement) && ts.isVoidExpression(statement.expression) && ts.isIdentifier(statement.expression.expression)) continue;
-    if (ts.isClassDeclaration(statement) && !ts.getDecorators(statement)?.length &&
-        (statement.heritageClauses ?? []).every(clause => clause.types.every(type => ts.isIdentifier(type.expression) || ts.isPropertyAccessExpression(type.expression))) &&
-        statement.members.every(member => !ts.isClassStaticBlockDeclaration(member) && !(ts.isPropertyDeclaration(member) && member.initializer &&
-          (ts.getModifiers(member) ?? []).some(modifier => modifier.kind === ts.SyntaxKind.StaticKeyword)) && !(ts.canHaveDecorators(member) && ts.getDecorators(member)?.length))) continue;
-    return `top-level ${ts.SyntaxKind[statement.kind]}: ${statement.getText(source).split('\n')[0]!.slice(0, 120)}`;
-  }
-  return undefined;
-}
-
-/** Identities leave out modules esbuild drops on the strength of a package's `sideEffects: false` declaration (bake, fits,
- * spice, telescope). Both runtimes evaluate those modules anyway (run.mts unbundled; the CLI bundle keeps the packages
- * external), so a top-level statement that acts would change what a job does without changing its identity. */
-test('modules an identity trusts to have no side effects only declare at their top level', async () => {
-  const sets = await labIdentityEntries(), failures: string[] = [];
-  assert.ok(sets.length >= 20, `${sets.length} lab identity entry sets`);
-  assert.ok(sets.some(set => set.includes('labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts')));
-  const { readFile } = await import('node:fs/promises');
-  let checked = 0;
-  for (const entries of sets) for (const path of await annotationOnlyModules(process.cwd(), entries)) {
-    checked++;
-    const effect = /\.[cm]?tsx?$/.test(path) ? topLevelEffect(await readFile(path, 'utf8'), path) : 'not a TypeScript module';
-    if (effect) failures.push(`${path} (${entries[0]}): ${effect}`);
-  }
-  assert.ok(checked > 0, 'no module is kept only when sideEffects declarations are ignored');
-  assert.deepEqual([...new Set(failures)], []);
-});
-
-test('the side-effect guard names top-level code that acts and accepts declarations', () => {
-  assert.equal(topLevelEffect("import { a } from './a.ts';\nimport type { B } from './b.ts';\nexport * from './c.ts';\n" +
-    "export const schema = shape({ a });\nexport function f() { return 1; }\nexport class C extends Base { static readonly kind: string; value = 1; }\n" +
-    'export interface I { a: number }\nexport type T = I;\ndeclare const g: number;\nconst agree: true = true;\nvoid agree;\n', 'a.ts'), undefined);
-  for (const text of ['globalThis.x = 1;\n', "import './effect.ts';\n", 'export let counter = 0;\n', 'class C { static x = register(); }\n',
-    'class C { static { register(); } }\n', 'if (flag) run();\n', 'export default register();\n', 'class C extends mixin(Base) {}\n', 'void register();\n'])
-    assert.ok(topLevelEffect(text, 'a.ts'), text);
+/** Both runtimes evaluate every module a package exports, whatever its `sideEffects` declaration says, so a bake module that
+ * acts when evaluated is an owner even though the declaration would let a bundler drop it. */
+test('a module in a sideEffects: false package that acts when evaluated is an owner', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'nebula-implementation-'));
+  try {
+    await mkdir(join(root, 'library'));
+    await writeFile(join(root, 'library/package.json'), '{ "name": "library", "sideEffects": false }\n');
+    await writeFile(join(root, 'entry.ts'), "import { used } from './library/index.ts';\nexport const value = used();\n");
+    await writeFile(join(root, 'library/index.ts'), "export * from './used.ts';\nexport * from './quiet.ts';\n");
+    await writeFile(join(root, 'library/used.ts'), 'export function used() { return 1; }\n');
+    await writeFile(join(root, 'library/quiet.ts'), 'export function quiet() { return 2; }\n');
+    assert.deepEqual((await implementationPins(root, ['entry.ts'])).map(pin => pin.path), ['entry.ts', 'library/index.ts', 'library/used.ts']);
+    await writeFile(join(root, 'library/quiet.ts'), "export function quiet() { return 2; }\nexport const probe = Reflect.set(globalThis, '__probe', 1);\n");
+    assert.ok((await implementationPins(root, ['entry.ts'])).some(pin => pin.path === 'library/quiet.ts'));
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test('sampled supplementary owner allowlist points at existing implementation files', async () => {

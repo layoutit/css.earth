@@ -18,31 +18,23 @@ export async function implementationClosure(root: string, entries: readonly stri
   return [...new Set([...entries, ...manifests, ...Object.keys(metafile?.inputs ?? {})].map(path => repositoryPath(root, path)))].sort();
 }
 
-/** Modules only kept when the packages' `sideEffects: false` declarations are ignored: the identity leaves them out because it
- * trusts those declarations. Tests hold these modules to top-level code that cannot act when the module is evaluated. */
-export async function annotationOnlyModules(root: string, entries: readonly string[]) {
-  const [trusted, ignored] = await Promise.all([identityBuild(root, entries), identityBuild(root, entries, false)]);
-  const owners = new Set(trusted.metafile ? await reachedOwners(root, trusted.metafile) : []);
-  const kept = Object.values(ignored.metafile?.outputs ?? {}).flatMap(output =>
-    Object.entries(output.inputs).filter(([, input]) => input.bytesInOutput > 0).map(([path]) => path));
-  return [...new Set(kept.filter(path => !owners.has(path)).map(path => repositoryPath(root, path)))].sort();
-}
-
 function repositoryPath(root: string, path: string) {
   const name = relative(root, resolve(root, path)).replaceAll('\\', '/');
   if (isAbsolute(name) || name === '..' || name.startsWith('../')) throw new Error('Implementation owner leaves repository.');
   return name;
 }
 
-async function identityBuild(root: string, entries: readonly string[], trustSideEffectDeclarations = true) {
+async function identityBuild(root: string, entries: readonly string[]) {
   const manifests = new Set<string>();
   const sourceEntries = entries.filter(path => /\.[cm]?tsx?$/.test(path));
   const result = sourceEntries.length ? await build({
     absWorkingDir: root, entryPoints: sourceEntries, outdir: '.local/nebula-lab/fingerprint-only',
-    // Tree shaking (with the packages' `sideEffects` declarations) keeps the owners to the modules the entries reach,
-    // not every module behind a topic barrel. No minification: esbuild then inlines only TypeScript enums across modules.
-    bundle: true, write: false, metafile: true, platform: 'node', format: 'esm', treeShaking: true, minify: false,
-    packages: 'external', logLevel: 'silent', ignoreAnnotations: !trustSideEffectDeclarations,
+    // Tree shaking keeps the owners to the modules the entries reach, not every module behind a topic barrel. It ignores the
+    // packages' `sideEffects: false` declarations (and pure annotations): both runtimes evaluate every imported module, so a
+    // module is left out only when esbuild itself finds it free of side effects. No minification: esbuild then inlines only
+    // TypeScript enums across modules.
+    bundle: true, write: false, metafile: true, platform: 'node', format: 'esm', treeShaking: true, minify: false, ignoreAnnotations: true,
+    packages: 'external', logLevel: 'silent',
     plugins: [{ name: 'nebula-internal-owner-identity', setup(builder) {
       // The FITS reader was a relative module under tools/ before it became @cssearth/fits; its sources stay owners of
       // every identity that reads FITS. The package publishes built files, so its entries map to their sources here.
@@ -116,9 +108,8 @@ async function identityBuild(root: string, entries: readonly string[], trustSide
 /** A loaded module is an owner when it puts code in the bundle, when it imports such a module (directly or through other
  * modules, so it orders its evaluation), or when it can change the bundle without putting code in it: it forwards a binding
  * (a barrel on the path from an import to its definition) or declares an enum esbuild inlines where it is read. The modules
- * left are declarations the bundle never reads. esbuild drops a module only when it has no side effects, or when its package
- * declares `sideEffects: false`; the identity trusts that declaration, and a test holds those modules to declarations only.
- * Editing a module left out so that the bundle reads it makes it contribute code, and so an owner. */
+ * left are ones esbuild proves free of side effects and the bundle never reads; editing one so that the bundle reads it, or so
+ * that it acts when evaluated, makes it contribute code, and so an owner. */
 async function reachedOwners(root: string, metafile: Metafile) {
   const contributing = new Set(Object.values(metafile.outputs).flatMap(output =>
     Object.entries(output.inputs).filter(([, input]) => input.bytesInOutput > 0).map(([path]) => path)));
