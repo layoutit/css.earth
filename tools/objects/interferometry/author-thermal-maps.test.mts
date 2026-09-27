@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { cutDisc } from './author-thermal-maps.mts';
+import { CUTOUT_ORIGIN, cutDisc } from './author-thermal-maps.mts';
+import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
+import { readFitsHeader, readFitsImage } from '@cssearth/fits';
 import { ALMA, observerQuery } from '@cssearth/bake/objects/layers/terrestrial';
 
 test('the disc cutout follows the uv-plane offset: east is toward the first column, north toward later rows', () => {
@@ -22,4 +24,14 @@ test('ALMA is asked of Horizons as geodetic coordinates, other centres by their 
   const alma = observerQuery('502', [2457352.85], ALMA), paranal = observerQuery('502', [2457352.85]);
   assert.equal(alma.get('CENTER'), "'coord@399'"); assert.equal(alma.get('COORD_TYPE'), "'GEODETIC'"); assert.equal(alma.get('SITE_COORD'), "'-67.7549,-23.0229,5.06'");
   assert.equal(paranal.get('CENTER'), "'309'"); assert.equal(paranal.has('SITE_COORD'), false);
+});
+
+test('a cutout written with its provenance label reads back: the ORIGIN card fits the FITS 68-character string limit', () => {
+  assert.ok(CUTOUT_ORIGIN.length <= 68, `${CUTOUT_ORIGIN.length} characters`);
+  const bytes = bodyMapFits({ width: 2, height: 2 } as BodyMap, { TELESCOP: 'ALMA', ORIGIN: CUTOUT_ORIGIN, PIXSCALE: '0.005' },
+    [{ name: 'BRIGHTNESS TEMPERATURE', units: 'K', values: Float32Array.of(1, 2, 3, 4) }]);
+  const header = readFitsHeader(bytes).header as Record<string, unknown>;
+  assert.equal(header.ORIGIN, CUTOUT_ORIGIN);
+  assert.equal(header.PIXSCALE, '0.005');
+  assert.deepEqual([...readFitsImage(bytes, { start: 2880 }).values], [1, 2, 3, 4]);
 });
