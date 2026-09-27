@@ -199,6 +199,15 @@ test('the ratchet passes the baseline tree and fails only when something gets wo
   assert.deepEqual(fixed.rules.find(rule => rule.rule === 'nothing-imports-applications')?.removed, [{ from: 'tools/objects/o.mts', to: 'site/objects.mts' }]);
 });
 
+test('cycle growth printed after new forbidden imports is marked as their consequence', () => {
+  const base = measure(graph(...TANGLED));
+  const baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(base))));
+  const both = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts'], ['src/a/one.mts', 'tools/x.mts']))));
+  assert.match(both, /tools\/x\.mts\n {2}The cycle growth below is a consequence of the imports above[^\n]*\n {2}cycle-closing folder edge src\/b -> src\/a/u);
+  const cycleOnly = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts']))));
+  assert.doesNotMatch(cycleOnly, /consequence/u, 'nothing above to be a consequence of');
+});
+
 test('external JSON is validated before use', () => {
   assert.throws(() => decodeBaseline({ schema: 'other' }), /schema/u);
   assert.throws(() => decodeBaseline({ schema: 'cssearth-architecture-baseline@1', cycles: { largestCycle: 1.5, layerOrder: [], cycleClosingEdges: [] }, rules: {} }), /whole number/u);

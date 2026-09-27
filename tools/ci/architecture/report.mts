@@ -28,6 +28,9 @@ export function formatDelta(delta: Delta): string {
       lines.push(`  ${rule.rule}: ${description}`);
       for (const item of rule.added) lines.push(`    ${item.from} -> ${item.to}`);
     }
+    const cycleGrew = delta.largestCycle.now > delta.largestCycle.baseline || cycle.joined.length > 0 || cycle.added.length > 0;
+    if (cycleGrew && delta.rules.some(rule => rule.added.length > 0))
+      lines.push('  The cycle growth below is a consequence of the imports above: fix those first, then run the check again.');
     if (delta.largestCycle.now > delta.largestCycle.baseline) lines.push(`  the largest folder cycle grew from ${delta.largestCycle.baseline} to ${delta.largestCycle.now} folders`);
     if (cycle.joined.length) lines.push(`  folders that joined a cycle, with no recorded layer yet: ${cycle.joined.join(', ')}`);
     // Fewest imports first: a newly added import is usually a single one, while an old dependency that a
