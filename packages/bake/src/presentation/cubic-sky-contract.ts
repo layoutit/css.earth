@@ -8,7 +8,7 @@ export const PREPARED_CUBIC_SKY_SCHEMA = "cssearth-prepared-cubic-sky@3";
 
 export const CUBIC_SKY_CAMERA_PRESENTATION_STANDARD = Object.freeze({
   source: "cssEarth Mars-calibrated cubic-sky camera presentation",
-  sourcePath: "src/platform/cubic-sky-contract.mts",
+  sourcePath: "packages/bake/src/presentation/cubic-sky-contract.ts",
   rotationResponse: -1,
   zoomResponse: 0,
   horizontalFovDegrees: 60,
