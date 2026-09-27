@@ -19,7 +19,7 @@ import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '@cssearth/bake/objects/raster';
 import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
-import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
+import { validateCategoricalGrid } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';

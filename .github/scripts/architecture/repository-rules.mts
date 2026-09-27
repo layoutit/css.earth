@@ -45,10 +45,12 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/objects/spitzer',
   'tools/objects/static-surface',
   'tools/objects/telescopes',
-  'tools/objects/terrestrial-layers/fixtures',
+  'tools/objects/shape-model',
+  'tools/objects/terrestrial-layers',
   'tools/oracles',
   'tools/performance',
   'tools/photometry',
+  'tools/prepare/astronomy',
   'tools/references',
   'tools/spice',
 ];

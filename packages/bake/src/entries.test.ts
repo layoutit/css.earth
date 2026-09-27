@@ -52,7 +52,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/layers/observed-surfaces': ['raster', 'scene', 'objects/geometry'],
   'objects/layers/giant': ['photometry', 'presentation', 'scene', 'objects/color', 'objects/geometry', 'objects/sources', 'objects/layers/observed-surfaces'],
   'objects/layers/material-composition': ['delivery', 'photometry', 'presentation', 'raster', 'scene', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/layers/cutaway', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
-  'objects/layers/shape-model': ['presentation', 'scene', 'objects/color', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/material-composition'],
+  'objects/layers/shape-model': ['astronomy', 'contract', 'presentation', 'scene', 'objects/color', 'objects/content', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/material-composition'],
   'objects/layers/observation': ['raster', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster'],
   'objects/stellar': ['objects/color', 'objects/raster', 'objects/sources'],
   'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
@@ -63,7 +63,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'navigation': ['raster', 'objects/raster'],
   'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/layers/terrestrial'],
   'objects/provenance': ['objects/layers/terrestrial'],
-  'objects/layers/terrestrial': ['photometry', 'raster', 'scene', 'presentation', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/material-composition', 'objects/layers/shape-model'],
+  'objects/layers/terrestrial': ['astronomy', 'contract', 'prepared-presentation', 'photometry', 'raster', 'scene', 'presentation', 'objects/cameras', 'objects/content', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/material-composition', 'objects/layers/shape-model'],
 };
 
 /** A topic is a top-level folder of `src/`, except `objects/`, whose every folder is a topic of its own (`objects/color`,

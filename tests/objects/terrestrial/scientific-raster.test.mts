@@ -3,7 +3,7 @@ import { sourceTest } from '../source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { LOSSLESS_PALETTE_STEPS, LOSSY_PALETTE_STEPS, paletteLookup, colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from '@cssearth/bake/objects/raster';
 import { lambertAttenuationAtlas } from '@cssearth/bake/objects/geometry';
-import { parseTerrestrialProfile } from '../../../tools/objects/terrestrial-layers/index.mts';
+import { parseTerrestrialProfile } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
 const relief = { referenceRadiusMeters: 470000, lightDirection: [-0.5, 0.5, Math.SQRT1_2], ambient: 0.25 };

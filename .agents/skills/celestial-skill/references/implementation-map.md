@@ -120,7 +120,7 @@ instead of editing a shared list or atlas position.
   native samples and arithmetic. Follow the spectral guidance in
   [scientific faithfulness](scientific-faithfulness.md).
 - **A sourced shape model:** Haumea's `source/preparation/shape-model.json` uses
-  `tools/objects/shape-model/`, with one entry per lens in its `surfaces` list. Inspect both the authored schema and that
+  `packages/bake/src/objects/layers/shape-model/shape-model.ts`, with one entry per lens in its `surfaces` list. Inspect both the authored schema and that
   preparer's actual shape support before choosing it for another body; verify
   camera picking in the shared renderer if the new geometry requires it.
 - **Published ellipsoids and unresolved outlines:**

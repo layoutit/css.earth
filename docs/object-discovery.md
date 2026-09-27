@@ -135,7 +135,7 @@ not analyze coverage in the browser or create missing imagery.
 
 The opening sizes a body by its volume-equivalent diameter. An elongated shape model reaches past it, so
 preparation records its framing scale, that radius over the mesh's largest vertex radius
-([`meshFramingScale`](../tools/objects/terrestrial-layers/solid-scene.mts)), and the fit shrinks by it: 67P
+([`meshFramingScale`](../packages/bake/src/objects/layers/terrestrial/solid-scene.ts)), and the fit shrinks by it: 67P
 opens at 0.62 and Itokawa at 0.53. An authored `framingScale` in a terrestrial recipe (measured on the source
 mesh, or chosen to fit a ring) wins. Phones and portrait tablets, which fill 75% of the scene area their header
 and search leave open, scale that share by it too.

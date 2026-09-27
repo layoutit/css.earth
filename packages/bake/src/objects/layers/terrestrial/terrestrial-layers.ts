@@ -1,23 +1,24 @@
-import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '@cssearth/bake/objects/raster';
-import { validateTerrestrialRings, parseSolidPreparationSource, scientificPreviewGrid, lensTextureGrid, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '../../raster/index.ts';
+import { validateTerrestrialRings } from './rings.ts';
+import { parseSolidPreparationSource } from './records/profile-source.ts';
+import { scientificPreviewGrid, lensTextureGrid } from './raster-grid.ts';
+import { radialTerrainForLens } from './alternative-lenses.ts';
 import { isArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
-import type { parseSolidScience } from '@cssearth/bake/objects/layers/terrestrial';
-import type { prepareObjectContentAssets } from '../content/prepare.ts';
+import type { parseSolidScience } from './records/solid-source.ts';
+import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
-import { prepareSunReferenceViewDirection, prepareEclipticPresentationFrame } from '@cssearth/bake/objects/scene';
-import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
-import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
-import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
-import { prepareSolidRasters, prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
-import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadRadialModels, combineRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
-import { validateRadialTableProfile, validateFacetFieldRecipe } from '@cssearth/bake/objects/geometry';
-import { validateSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
+import { prepareSunReferenceViewDirection, prepareEclipticPresentationFrame } from '../../scene/index.ts';
+import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
+import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
+import { prepareSolidRasters, prepareSolidMaterial } from './solid/solid-raster.ts';
+import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles, type SolidSceneSolarGeometry } from './solid-scene.ts';
+import { prepareRadialMaterials } from './radial/radial-materials.ts';
+import { loadRadialModels, combineRadialModels } from './radial/radial-models.ts';
+import { validateRadialTableProfile, validateFacetFieldRecipe } from '../../geometry/index.ts';
+import { validateSurfaceObservation } from './surface-observations/observations.ts';
 type SolidConfig=ReturnType<typeof parseSolidPreparationSource>;
 type Directories={sourceDirectory:string;publicDirectory:string;outputDirectory:string};
 type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnType<typeof createSourceManifest>>};
@@ -237,31 +238,31 @@ export function parseTerrestrialProfile(input:unknown) {
   return input as typeof value;
 }
 
-export async function prepareTerrestrialCelestial({ outputDirectory, config }:TerrestrialContext) {
+export async function prepareTerrestrialCelestial({ outputDirectory, config, solarGeometry }:TerrestrialContext & {solarGeometry:SolidSceneSolarGeometry}) {
   const sky = prepareCubicSky({ objectId: config.namespace, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
-  const sun = prepareTerrestrialSun({ config, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')) });
+  const sun = prepareTerrestrialSun({ config, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')), solarGeometry });
   await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`),
     writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`)]);
   return { sky, sun };
 }
 
 /** Body-owned qualification distinguishes solved orientations from display axes. */
-export function prepareTerrestrialSun({ config, surfacesReport }:{config:SolidConfig;surfacesReport:unknown}) {
+export function prepareTerrestrialSun({ config, surfacesReport, solarGeometry }:{config:SolidConfig;surfacesReport:unknown;solarGeometry:SolidSceneSolarGeometry}) {
   const frame = prepareEclipticPresentationFrame(solarGeometry, config.namespace), sceneDirection = frame.sunDirection;
   const presentation = { ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
     source: config.celestial.sunSource, sourcePath: 'src/platform/solar-geometry.mts',
-    qualification: config.celestial.sunQualification ?? (`Computed ${config.displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
+    qualification: config.celestial.sunQualification ?? (`Computed ${config.displayName} Sun direction at ${solarGeometry.SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
       'expressed in the ecliptic presentation frame (north up, Sun left at zero yaw) and in view space at the default camera pose.' +
       (config.celestial.qualification ? ` ${config.celestial.qualification}` : '')),
-    bodyFixedDirection: requireBodyFixedSunDirection(config.namespace), presentationFrame: frame.model,
+    bodyFixedDirection: solarGeometry.requireBodyFixedSunDirection(config.namespace), presentationFrame: frame.model,
     localDirection: sceneDirection,
-    referenceViewDirection: prepareSunReferenceViewDirection(solarGeometry, { bodyId: config.namespace, ...solidCameraAngles(config, surfacesReport), sceneDirection }),
+    referenceViewDirection: prepareSunReferenceViewDirection(solarGeometry, { bodyId: config.namespace, ...solidCameraAngles(solarGeometry, config, surfacesReport), sceneDirection }),
   };
   return prepareDirectionalSun({ presentation });
 }
 
 /** Source inputs feed reusable raster, geometry, celestial and presentation operations. */
-export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent, replaceReviewedImages = false }:Directories & {config:unknown;prepareContent:typeof prepareObjectContentAssets;replaceReviewedImages?:boolean}) {
+export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent, replaceReviewedImages = false, solarGeometry }:Directories & {config:unknown;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>;replaceReviewedImages?:boolean;solarGeometry:SolidSceneSolarGeometry}) {
   const config = parseTerrestrialProfile(input);
   if (typeof prepareContent !== 'function') throw new TypeError('Terrestrial preparation requires the shared content preparer.');
   const source = await createSourceManifest({ objectId: config.namespace, objectName: config.displayName, sourceRoot: sourceDirectory });
@@ -280,7 +281,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
       artifactId: model === models[0] ? null : model.id,
       snapshotEntries: models.length === 1 ? source.manifest.generatedIntermediates
         : source.manifest.generatedIntermediates.filter(entry => model.lensIds.includes(requireString(requireRecord(requireRecord(entry).recipe).lensId))),
-      sunDirection: requireBodyFixedSunDirection(config.namespace), replaceReviewedImages });
+      sunDirection: solarGeometry.requireBodyFixedSunDirection(config.namespace), replaceReviewedImages });
     }
     const unpainted = surfaces.filter(surface => requireRecord(surface.layout).kind !== 'triangle-atlas').map(surface => surface.id);
     if (unpainted.length) throw new Error(`Radial surfaces without a triangle atlas: ${unpainted.join(', ')}.`);
@@ -293,9 +294,9 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   }])) };
   await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(assets)}\n`);
   const content = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
-  const celestial = await prepareTerrestrialCelestial(context);
-  const scene = await prepareSolidScene({ ...context, celestial, radial: combineRadialModels(models, config.namespace) });
-  const definition = await prepareSolidPresentation({ ...context, scene, material: raster, controls: content.controls });
+  const celestial = await prepareTerrestrialCelestial({ ...context, solarGeometry });
+  const scene = await prepareSolidScene({ ...context, celestial, radial: combineRadialModels(models, config.namespace), solarGeometry });
+  const definition = await prepareSolidPresentation({ ...context, scene, material: raster, controls: content.controls, solarGeometry });
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(definition)}\n`);
   return { raster, celestial, scene, definition, content };
 }
