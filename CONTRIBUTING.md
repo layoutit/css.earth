@@ -216,9 +216,13 @@ import of a shared package names no entry it can trace to a source file.
 
 The same check applies repository rules that have no baseline, so any finding
 fails it: no file under a retired `tools/` folder (`RETIRED_FOLDERS` in
-`repository-rules.mts`; a move that empties a folder adds it), and the nebula
+`repository-rules.mts`; a move that empties a folder adds it), the nebula
 boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
-`pnpm check:nebula-boundaries` is an alias of the check). Not yet enforced:
+`pnpm check:nebula-boundaries` is an alias of the check), and declared
+dependencies: a `packages/*` file imports another workspace package only when
+its own `package.json` declares it, and outside tests of a package tsup builds
+only when `dependencies` ships it, since tsup inlines a `devDependencies` package
+(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. Not yet enforced:
 unused files in library folders (untangle item K).
 
 Reference implementations live under `tools/oracles/` with their own pinned

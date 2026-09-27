@@ -116,6 +116,7 @@
     "@cssearth/fits": "workspace:*",
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
+    "@cssearth/spice": "workspace:*",
     "@cssearth/telescope": "workspace:*",
     "@types/node": "^26.4.0",
     "@types/pngjs": "6.0.5",

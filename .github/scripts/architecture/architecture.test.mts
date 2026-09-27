@@ -7,6 +7,7 @@ import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConne
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
 import { readCiSteps } from '../ci/check-ci.mts';
 import { formatDelta, formatFindings } from './report.mts';
+import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
 import { isBroken, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
@@ -291,7 +292,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'nebula-boundaries'], 'the nebula boundary checks are an architecture rule');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'nebula-boundaries', 'declared-dependencies'], 'retired folders, the nebula boundaries and declared workspace dependencies are the repository rules');
 });
 
 test('a file under a retired tools/ folder is a finding; a sibling folder with a longer name is not', () => {
@@ -299,4 +300,50 @@ test('a file under a retired tools/ folder is a finding; a sibling folder with a
     ['tools/objects/pds/programs/x.json: tools/objects/pds/ is retired; put the file in the folder its code moved to']);
   assert.ok(RETIRED_FOLDERS.every(folder => folder.startsWith('tools/') && !folder.endsWith('/')), 'retired folders are tools/ folders, named without a trailing slash');
   assert.deepEqual([...RETIRED_FOLDERS].sort(), RETIRED_FOLDERS, 'kept sorted');
+});
+
+test('a packages/* file may import another workspace package only when its package.json declares it', () => {
+  const packages = [
+    declaredPackage('packages/cli/package.json', { name: '@x/cli', dependencies: { '@x/lib': 'workspace:*' }, devDependencies: { '@x/fixtures': 'workspace:*' } }),
+    declaredPackage('packages/lib/package.json', { name: '@x/lib' }),
+    declaredPackage('packages/fixtures/package.json', { name: '@x/fixtures' }),
+    declaredPackage('labs/nebula/packages/lab/package.json', { name: '@x/lab' }),
+  ];
+  const sources = new Map([
+    ['packages/cli/src/run.mts', "import { a } from '@x/lib/sub';\nimport '@x/cli/self';\nimport fixture from '@x/fixtures';\nimport sharp from 'sharp';"],
+    ['packages/cli/src/run.test.mts', "import('@x/lab');\ntype T = import('@x/lab').T;"],
+    ['packages/lib/src/index.ts', "export * from '@x/fixtures';"],
+    ['labs/nebula/packages/lab/src/x.mts', "import '@x/lib';"],
+    ['site/x.mts', "import '@x/lib';"],
+  ]);
+  assert.deepEqual(undeclaredImports(packages, sources), [
+    'packages/cli/src/run.test.mts: imports @x/lab, which packages/cli/package.json does not declare',
+    'packages/lib/src/index.ts: imports @x/fixtures, which packages/lib/package.json does not declare',
+  ], 'any dependency field declares; self, npm and non-packages/* importers are out of scope; a file reports each package once');
+  assert.throws(() => declaredPackage('packages/bad/package.json', { name: '@x/bad', dependencies: [] }), /dependencies is not an object/u);
+});
+
+test('a CommonJS require and a TypeScript import-equals of an undeclared workspace package are findings too', () => {
+  const packages = [declaredPackage('packages/cli/package.json', { name: '@x/cli' }), declaredPackage('packages/lib/package.json', { name: '@x/lib' }),
+    declaredPackage('packages/core/package.json', { name: '@x/core' })];
+  assert.deepEqual(undeclaredImports(packages, new Map([
+    ['packages/cli/src/a.cts', "const lib = require('@x/lib/sub');"],
+    ['packages/cli/src/b.ts', "import core = require('@x/core');\nconst n = require(name);"],
+  ])), [
+    'packages/cli/src/a.cts: imports @x/lib, which packages/cli/package.json does not declare',
+    'packages/cli/src/b.ts: imports @x/core, which packages/cli/package.json does not declare',
+  ], 'a computed require names no package');
+});
+
+test('outside tests, a tsup-built package must ship a workspace package it imports; one run from source may list it in devDependencies', () => {
+  const manifest = (name: string) => ({ name, dependencies: { '@x/core': 'workspace:*' }, devDependencies: { '@x/catalog': 'workspace:*' } });
+  const packages = [declaredPackage('packages/renderer/package.json', manifest('@x/renderer'), true),
+    declaredPackage('packages/telescope-cli/package.json', manifest('@x/telescope-cli'), false),
+    declaredPackage('packages/core/package.json', { name: '@x/core' }, true), declaredPackage('packages/catalog/package.json', { name: '@x/catalog' }, true)];
+  const text = "import { a } from '@x/core';\nimport type { B } from '@x/catalog';";
+  assert.deepEqual(undeclaredImports(packages, new Map([
+    ['packages/renderer/src/universe/a.ts', text], ['packages/renderer/src/universe/a.test.ts', text], ['packages/renderer/tests/support.ts', text],
+    ['packages/telescope-cli/src/run.mts', text],
+  ])), ['packages/renderer/src/universe/a.ts: imports @x/catalog, which packages/renderer/package.json lists only in devDependencies although tsup builds this package'],
+  'type-only imports count, since dist/*.d.ts keeps them; tests and the source-run package are exempt');
 });
