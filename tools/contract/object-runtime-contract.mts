@@ -2,7 +2,7 @@ import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "..
 import { requirePreparedPresentation } from "../../src/platform/prepared-presentation-contract.mts";
 import type { PreparedPresentationContract } from "../../src/platform/prepared-presentation-contract.mts";
 import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
-import { requireObjectControls } from '../../site/scene/scene-contract.mts';
+import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { isRecord, requireRecord } from '@cssearth/core';
 
 export type CheckedObjectRuntimeDefinition = Omit<PreparedPresentationContract, 'schema'> & {

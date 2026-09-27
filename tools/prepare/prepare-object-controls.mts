@@ -6,7 +6,7 @@ import { readFile, rename, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
-import { requireObjectControls } from "../../site/scene/scene-contract.mts";
+import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 
