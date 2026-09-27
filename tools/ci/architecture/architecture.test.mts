@@ -271,7 +271,7 @@ test('an added and a removed entry that share a target or a source folder look l
 
 test('Contract lint, and so pnpm check:ci, runs the check after the packages are built', () => {
   const steps = readCiSteps(readFileSync(new URL('../../../.github/workflows/universe.yml', import.meta.url), 'utf8'), 'lint').map(step => step.run.trim());
-  const build = steps.indexOf('node tools/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
+  const build = steps.indexOf('node .github/scripts/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
   assert.ok(build >= 0, 'the lint job builds the shared packages');
   assert.ok(check > build, 'the lint job runs pnpm check:architecture after that build');
 });

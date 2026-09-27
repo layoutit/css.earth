@@ -102,7 +102,7 @@ jobs:
       - name: Hash tracked build and compiler inputs
         if: ${{ !cancelled() }}
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         if: ${{ !cancelled() }}
         id: package-cache
@@ -144,9 +144,9 @@ jobs:
         # read navigation, world context and title assets, so they need the same `full` build they had on the gate.
         run: |
           if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_UNIVERSE" != true ] && [ "$CI_AUDIT_PREPARATION" != true ]; then
-            node tools/ci/build-ci.mts lint
+            node .github/scripts/ci/build-ci.mts lint
           else
-            node tools/ci/build-ci.mts full
+            node .github/scripts/ci/build-ci.mts full
           fi
       - name: Check every object's package files and source restoration plan
         if: ${{ !cancelled() }}

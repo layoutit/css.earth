@@ -137,14 +137,14 @@ export function sharedCodeChanged(paths:readonly string[]):boolean {return paths
 // Keep these prerequisites with their consumer so command deduplication cannot discard them.
 export const SHARED_TYPECHECK_STEP:CiStep={
  name:'Typecheck (shared code changed)',
- run:'node tools/ci/build-ci.mts full\npnpm prepare:typecheck\npnpm typecheck',
+ run:'node .github/scripts/ci/build-ci.mts full\npnpm prepare:typecheck\npnpm typecheck',
  env:{NODE_OPTIONS:'--max-old-space-size=4096'},
 };
 
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
  * never tests, audits, or a production build with a different environment. */
 export function reuseLocalPreparation(steps:readonly CiStep[]):CiStep[] {
- const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','node tools/ci/build-ci.mts full','node tools/ci/ci-cache-key.mts','pnpm prepare:typecheck']);
+ const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','node .github/scripts/ci/build-ci.mts full','node .github/scripts/ci/ci-cache-key.mts','pnpm prepare:typecheck']);
  const seen=new Set<string>();
  return steps.filter(step=>{
   if(!reusable.has(step.run.trim()))return true;

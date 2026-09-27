@@ -64,7 +64,7 @@ function relativeInside(root: string, file: string): string {
  * over-invalidates on documentation/data changes instead of guessing a transitive build-input allowlist. The
  * lockfile and source recipes pin ignored downloads; ignored node_modules/dist/prepared outputs never enter
  * the digest. Cache consumers must use an exact key and install the frozen lockfile before using its outputs. */
-export function ciCacheKeys({ root = resolve(import.meta.dirname, '../..'), runtime = {
+export function ciCacheKeys({ root = resolve(import.meta.dirname, '../../..'), runtime = {
   node: process.versions.node, platform: process.platform, arch: process.arch, environment: process.env,
 } }: { root?: string; runtime?: CacheRuntime } = {}) {
   root = realpathSync(root);
@@ -116,14 +116,14 @@ const BUILD_CONFIG_FIELDS = new Set(['entry', 'outDir', 'tsconfig', 'format', 'e
 
 /** Requires the frozen install, but never scans installed directories. Compiler APIs resolve actual imports;
  * package dist imports stand for the package source digest, so cold and restored checkouts use the same key. */
-export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, '../..'), runtime = {
+export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, '../../..'), runtime = {
   node: process.versions.node, platform: process.platform, arch: process.arch, environment: process.env,
 } }: { root?: string; runtime?: CacheRuntime } = {}) {
   root = realpathSync(root);
   const full = ciCacheKeys({ root, runtime }), tracked = new Set(trackedCacheEntries(root).map(entry => entry.path));
   const compiler = (await import('typescript')).default, { build } = await import('esbuild');
   const identity = JSON.stringify(['compiled-inputs@1', toolchain(root, runtime)]);
-  const shared = [...tracked].filter(path => isTypecheckCacheInput(path) || ['tools/ci/build-ci.mts', 'tools/ci/ci-cache-key.mts'].includes(path));
+  const shared = [...tracked].filter(path => isTypecheckCacheInput(path) || ['.github/scripts/ci/build-ci.mts', '.github/scripts/ci/ci-cache-key.mts'].includes(path));
   const packageInputs = new Set([...shared, ...[...tracked].filter(path => path.startsWith('packages/'))]);
   const packageManifests = [...tracked].filter(path => /^packages\/[^/]+\/package\.json$/u.test(path));
   if (!packageManifests.length) throw new TypeError('No tracked package manifests for the compiled cache.');
@@ -240,7 +240,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  if (process.argv.length !== 2) throw new TypeError('Usage: node tools/ci/ci-cache-key.mts');
+  if (process.argv.length !== 2) throw new TypeError('Usage: node .github/scripts/ci/ci-cache-key.mts');
   const started = performance.now(), result = await compiledCiCacheKeys();
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `build_digest=${result.buildDigest}\ntsconfig_digest=${result.tsconfigDigest}\npackage_digest=${result.packageDigest}\n`);
   console.log(JSON.stringify({ ...result, elapsedSeconds: Number(((performance.now() - started) / 1000).toFixed(3)) }));
