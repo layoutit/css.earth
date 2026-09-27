@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 /** Mid-transit time of a planet from a JWST Level 3 white-light curve (MAST *_whtlt.ecsv; columns MJD_UTC, BJD_TDB, whitelight_flux).
  *
- *   node tools/objects/jwst/fit-transit-time.mts <whtlt.ecsv> [--depth <fraction>] [--duration <days>] [--clip <fraction>]
+ *   node packages/telescope-cli/src/archives/jwst/fit-transit-time.mts <whtlt.ecsv> [--depth <fraction>] [--duration <days>] [--clip <fraction>]
  *
  * A trapezoid with a linear baseline, least squares by Nelder-Mead; the error is the spread of 200 block bootstraps of the residuals.
  * --depth and --duration are the starting guesses for the transit depth and total duration, and --clip the largest departure from a

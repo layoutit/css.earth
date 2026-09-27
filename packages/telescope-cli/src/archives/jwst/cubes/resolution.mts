@@ -5,9 +5,9 @@ import { dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from '../toolchain.mts';
-import { toolchainPython } from '@cssearth/telescope/node';
+import { toolchainPython, WORKSPACE } from '@cssearth/telescope/node';
 import { openSpectralCube } from '@cssearth/bake/objects/layers/observation';
-import type { ProductFacts } from '@cssearth/telescope-cli/request-satisfaction';
+import type { ProductFacts } from '../../../request-satisfaction.mts';
 
 export const RESOLUTION_METHOD = 'jwst-point-source-profile@1';
 export const RESOLUTION_PYTHON = String.raw`
@@ -123,7 +123,7 @@ export async function measureCubeResolution(file: string): Promise<{ receipt: st
   if (arcsec !== undefined && !(arcsec > 0)) throw new Error('Invalid resolution bound.');
   const text = `${JSON.stringify({ schema: 'cssearth-cube-resolution@1', product: before,
     implementation: sha256(await readFile(new URL('./resolution.mts', import.meta.url))),
-    softwarePins: await sha256File(resolve(import.meta.dirname, '../requirements.lock')),
+    softwarePins: await sha256File(resolve(WORKSPACE, 'tools/objects/jwst/requirements.lock')),
     arcsecPerPixel: cube.arcsecPerPixel, upperBoundArcsec: arcsec, ...measured }, null, 2)}\n`;
   const receipt = `${file}.${sha256(text)}.resolution.json`;
   await writeFile(receipt, text);

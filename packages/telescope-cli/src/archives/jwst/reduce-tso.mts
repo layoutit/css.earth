@@ -2,7 +2,7 @@
 import { findOne } from './find-product.mts';
 /** Reduce a JWST time-series observation from raw exposures with Eureka!, for eclipse mapping from raw data.
  *
- *   node tools/objects/jwst/reduce-tso.mts <program directory> <work directory> [--raw <directory>]
+ *   node packages/telescope-cli/src/archives/jwst/reduce-tso.mts <program directory> <work directory> [--raw <directory>]
  *
  * A program directory (tools/objects/jwst/programs/<id>) pins the raw segments by name and size, the CRDS context, the
  * Eureka! control files, and an author's deposited light curve to compare with. The run:

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Subtract a star's light from pinned JWST NIRCam coronagraph exposures with spaceKLIP, the way a paper's authors did.
  *
- *   node tools/objects/jwst/klip/reduce.mts <program id> <band> <work directory> --raw <dir> [--max-rss-gib <n>]
+ *   node packages/telescope-cli/src/archives/jwst/klip/reduce.mts <program id> <band> <work directory> --raw <dir> [--max-rss-gib <n>]
  *
  * The program (klip/programs/<id>.json) pins the raw _uncal exposures by MAST URI and byte count, which observations are the
  * target and which the PSF reference star, and every setting of the published reduction with the page it is read from. The chain
@@ -17,10 +17,11 @@ import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
+import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telescope/node';
 import { jwstToolchain } from '../toolchain.mts';
 
-const PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs stay in the checkout beside the bodies' records, not in this package. */
+const PROGRAMS = resolve(WORKSPACE, 'tools/objects/jwst/klip/programs');
 
 export interface KlipBand { readonly band: string; readonly science: readonly string[]; readonly references: readonly string[] }
 export interface KlipProgram { readonly id: string; readonly crdsContext: string; readonly settings: Record<string, unknown>; readonly bands: readonly KlipBand[]; readonly files: ReadonlyMap<string, { readonly uri: string; readonly bytes: number }> }

@@ -27,7 +27,7 @@
       "landing": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
       "sha256": "e2390f5a10e6ce5a658e2abb3b0d2d1cb34e89904b93023693be93dea78df2d1",
       "bytes": 42382080,
-      "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F410M band of the contrast leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F410M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F410M band of the contrast leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F410M-MASK335R.reproduction.json"
     },
     {
       "id": "contrast-f210m",
@@ -35,7 +35,7 @@
       "landing": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
       "sha256": "da30c8d65230ba0bbca70213d464aa60732546b690f2f3a0619745b64db68381",
       "bytes": 42382080,
-      "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the contrast leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F210M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the contrast leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F210M-MASK335R.reproduction.json"
     },
     {
       "id": "colour-f435w-roll1",

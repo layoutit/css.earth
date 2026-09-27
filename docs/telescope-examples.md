@@ -54,7 +54,7 @@ is the brightest thing in this cube. Brightness is surface brightness in MJy/sr,
 100. North is up and east left. The knots on the ring are where the shock from the 1987 explosion is running into gas
 the star shed long before it died. Grey is outside the cube's footprint.
 
-`node tools/objects/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05`
+`node packages/telescope-cli/src/archives/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05`
 
 ## JWST, MIRI: the Ring Nebula at 7.7 microns
 
@@ -68,7 +68,7 @@ central white dwarf and a few stars run past the top of the range and clip to wh
 had no MIRI product of an extended target, so the programme was pinned and the stage re-run, and the toolkit's own
 comparison against the archive's mosaic agrees to about 2 parts in 10 million of the RMS brightness.
 
-`node tools/objects/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720`
+`node packages/telescope-cli/src/archives/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720`
 
 ## Hubble, STIS: the 450 nm sodium chloride band on Europa
 

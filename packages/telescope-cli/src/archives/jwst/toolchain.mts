@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /** Install and locate the pinned Python environments the JWST tools run on, under output/toolchains/<id> (ignored by git).
  *
- *   node tools/objects/jwst/toolchain.mts install [eureka|klip]
- *   node tools/objects/jwst/toolchain.mts verify [eureka|klip]
+ *   node packages/telescope-cli/src/archives/jwst/toolchain.mts install [eureka|klip]
+ *   node packages/telescope-cli/src/archives/jwst/toolchain.mts verify [eureka|klip]
  *
  * eureka (toolchain.json) is the STScI jwst pipeline with Eureka! for time series, level-3 imaging and cubes. klip
  * (klip/toolchain.json) is spaceKLIP on the pipeline version a coronagraphy paper ran, for starlight subtraction by KLIP.
@@ -12,15 +12,16 @@
  * the lock, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
  * `micromamba`). */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from '@cssearth/telescope/node';
+import { runToolchainProcess, WORKSPACE } from '@cssearth/telescope/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-const repository = resolve(import.meta.dirname, '../../..');
+const repository = WORKSPACE;
 export type ToolchainId = 'eureka' | 'klip';
-const DESCRIPTORS: Record<ToolchainId, string> = { eureka: resolve(import.meta.dirname, 'toolchain.json'), klip: resolve(import.meta.dirname, 'klip/toolchain.json') };
+/** The toolchains' pins (descriptors and locks) stay in the checkout beside the programs they reduce. */
+const DESCRIPTORS: Record<ToolchainId, string> = { eureka: resolve(WORKSPACE, 'tools/objects/jwst/toolchain.json'), klip: resolve(WORKSPACE, 'tools/objects/jwst/klip/toolchain.json') };
 const NAMES: Record<ToolchainId, string> = { eureka: 'Eureka!', klip: 'spaceKLIP' };
 export const toolchainRoot = (id: ToolchainId) => resolve(repository, 'output/toolchains', id);
 export const EUREKA_ROOT = toolchainRoot('eureka');
@@ -86,7 +87,7 @@ export type EurekaToolchain = JwstToolchain;
 export async function jwstToolchain(id: ToolchainId, crdsContext: string): Promise<JwstToolchain> {
   const { entry, digest } = await descriptor(id), root = toolchainRoot(id);
   const marker = await readFile(resolve(root, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error(`${NAMES[id]} is not installed: node tools/objects/jwst/toolchain.mts install ${id}`);
+  if (!marker) throw new Error(`${NAMES[id]} is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install ${id}`);
   if (marker.pinsSha256 !== digest) throw new Error(`${NAMES[id]} was installed from other pins; reinstall it.`);
   const dataEnv = Object.fromEntries([
     ...requireArray(entry.data ?? []).map(record => {

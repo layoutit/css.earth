@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Find a JWST imaging observation's products on MAST and pin them as an imaging program.
  *
- *   node tools/objects/jwst/imaging/archive.mts <program id> <crds context> <level-3 obs_id> [<level-3 obs_id> ...]
+ *   node packages/telescope-cli/src/archives/jwst/imaging/archive.mts <program id> <crds context> <level-3 obs_id> [<level-3 obs_id> ...]
  *
  * For each level-3 observation (e.g. jw02733-o001_t001_nircam_clear-f187n) the program records the pipeline's own level-3
  * mosaic, its image3 association and the level-2 calibrated exposures the association names, each by MAST URI and byte count.
@@ -19,10 +19,11 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope/node';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/jwst/imaging/programs');
 export const DEFAULT_CRDS_CONTEXT = 'jwst_1535.pmap';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 

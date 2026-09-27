@@ -21,6 +21,14 @@
       "types": "./src/archives/hst/slit-scan-reduction.mts",
       "default": "./src/archives/hst/slit-scan-reduction.mts"
     },
+    "./archives/jwst/imaging/bands": {
+      "types": "./src/archives/jwst/imaging/bands.mts",
+      "default": "./src/archives/jwst/imaging/bands.mts"
+    },
+    "./archives/jwst/imaging/image3": {
+      "types": "./src/archives/jwst/imaging/image3.mts",
+      "default": "./src/archives/jwst/imaging/image3.mts"
+    },
     "./archives/ledger": {
       "types": "./src/archives/ledger.mts",
       "default": "./src/archives/ledger.mts"

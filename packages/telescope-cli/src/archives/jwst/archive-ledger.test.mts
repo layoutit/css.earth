@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { assembleJwstLedger, JWST_MODES, JWST_TIME_SERIES, jwstLedgerGuide, matchTarget, parseJwstLedger, repositoryState, jwstShippedObjects, withRepositoryState, type Ledger } from './archive-ledger.mts';
-import type { NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
+import type { NamedShippedObject as ShippedObject } from '../targets.mts';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const repository = resolve(import.meta.dirname, '../../..');
+const repository = WORKSPACE;
 const objects: ShippedObject[] = [{ id: 'titan', names: ['titan', 'Titan'] }, { id: 'pluto', names: ['pluto', 'Pluto'] }, { id: 'charon', names: ['charon', 'Charon'] },
   { id: 'dione', names: ['dione', 'Dione'] }, { id: 'dione-106', names: ['dione-106', 'Dione'] }, { id: 'chiron', names: ['chiron', 'Chiron'] },
   { id: 'hd-189733b', names: ['hd-189733b', 'HD 189733 b'] }, { id: 'hd-189733-companion', names: ['hd-189733-companion', 'HD 189733 B'] },

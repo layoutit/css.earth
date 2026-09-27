@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run the JWST pipeline's level-3 coronagraphy stage (calwebb_coron3) for one coronagraph band of a pinned imaging program.
  *
- *   node tools/objects/jwst/imaging/coron3.mts <program id> <band> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
+ *   node packages/telescope-cli/src/archives/jwst/imaging/coron3.mts <program id> <band> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
  *
  * The members are the target's per-integration _calints exposures at each telescope roll and the PSF reference star's, as MAST's
  * own coron3 association names them (archive.mts); target acquisition exposures are left out, as the stage does not read them.

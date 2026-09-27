@@ -106,7 +106,7 @@
       "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?target_name=WASP-39",
       "credit": "JWST programmes 1366, 2783 and 8017; MAST Level 3 white-light curves; transit times measured in this project",
       "license": "JWST data are public; the transit times are this project's measurement",
-      "acquisition": "Each MAST product named in the table was fitted with node tools/objects/jwst/fit-transit-time.mts <product> --depth 0.0205 --duration 0.117 --clip 0.004 (a trapezoid with a linear baseline; uncertainty from 200 block bootstraps). The 1366 NIRSpec G395H curve (jw01366-o003) did not converge on the transit (fitted depth near zero) and is left out.",
+      "acquisition": "Each MAST product named in the table was fitted with node packages/telescope-cli/src/archives/jwst/fit-transit-time.mts <product> --depth 0.0205 --duration 0.117 --clip 0.004 (a trapezoid with a linear baseline; uncertainty from 200 block bootstraps). The 1366 NIRSpec G395H curve (jw01366-o003) did not converge on the transit (fitted depth near zero) and is left out.",
       "redistribution": "A table of measured times authored in this repository",
       "consumers": [
         "hosted-orbits"

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run the JWST pipeline's level-3 imaging stage (calwebb_image3) for one band of a pinned imaging program.
  *
- *   node tools/objects/jwst/imaging/image3.mts <program id> <band> <work directory> [--grid <sky band recipe.json>] [--raw <dir>]...
+ *   node packages/telescope-cli/src/archives/jwst/imaging/image3.mts <program id> <band> <work directory> [--grid <sky band recipe.json>] [--raw <dir>]...
  *     [--max-rss-gib <n>]
  *
  * The members are the level-2 calibrated exposures the program pins from MAST's own image3 association, taken from a --raw
@@ -24,7 +24,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
 import { mastFile, type MastFile } from '@cssearth/telescope/node';
@@ -97,9 +97,9 @@ export function pipelineSoftware(lock: string): readonly ProductSoftware[] {
  * has already refused an environment built from others by the time a stage gets here. */
 export async function eurekaPins(): Promise<{ toolchainDigest: string; software: readonly ProductSoftware[] }> {
   const installed = await readFile(resolve(EUREKA_ROOT, 'installed.json'), 'utf8')
-    .catch(() => { throw new Error('Eureka! is not installed: node tools/objects/jwst/toolchain.mts install'); });
+    .catch(() => { throw new Error('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
   const marker = requireRecord(JSON.parse(installed) as unknown, 'installed.json');
-  return { toolchainDigest: requireString(marker.pinsSha256, 'installed pins sha256'), software: pipelineSoftware(await readFile(resolve(import.meta.dirname, '../requirements.lock'), 'utf8')) };
+  return { toolchainDigest: requireString(marker.pinsSha256, 'installed pins sha256'), software: pipelineSoftware(await readFile(resolve(WORKSPACE, 'tools/objects/jwst/requirements.lock'), 'utf8')) };
 }
 
 /** What identifies one level-3 run of a pinned program band: the exposures it was given at their pinned digests, the settings

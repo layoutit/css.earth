@@ -3,7 +3,7 @@ import { sampleAgreement } from './sample-agreement.mts';
 /** The JWST ledger: what the public archive holds in each observing mode, which of it this repository can already turn into
  * something drawn, and which of the objects it ships JWST has observed.
  *
- *   node tools/objects/jwst/archive-ledger.mts [--write] [--local] [--targets <path>]
+ *   node packages/telescope-cli/src/archives/jwst/archive-ledger.mts [--write] [--local] [--targets <path>]
  *
  * Read only against MAST. Every public level-3 observation is listed by mode (MAST's instrument_name); NIRSpec's multi-object
  * mode is only counted, since each of its 145,000 rows is one galaxy in a survey field. Each mode's state is read from this
@@ -19,21 +19,21 @@ import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from '@cssearth/telescope/node';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
-import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
-import { namedShippedObjects, normaliseTargetName, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
+import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
+import { namedShippedObjects, normaliseTargetName, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '../targets.mts';
 
 
 /** MAST's observing modes, what each one records, and the tool that reduces it here (none: nothing reads it yet). */
 export const JWST_MODES: readonly { readonly mode: string; readonly records: string; readonly draws: string; readonly tool: string | null; readonly note?: string }[] = [
-  { mode: 'NIRCAM/IMAGE', records: 'pictures, 0.6–5 µm', draws: 'nebulae and shells as volumes; pictures of Solar System bodies', tool: 'tools/objects/jwst/imaging/image3.mts' },
-  { mode: 'NIRCAM/CORON', records: 'pictures with the star blocked out', draws: 'discs and rings attached to their star', tool: 'tools/objects/jwst/imaging/coron3.mts', note: 'Full-frame observations do not name their occulter.' },
+  { mode: 'NIRCAM/IMAGE', records: 'pictures, 0.6–5 µm', draws: 'nebulae and shells as volumes; pictures of Solar System bodies', tool: 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts' },
+  { mode: 'NIRCAM/CORON', records: 'pictures with the star blocked out', draws: 'discs and rings attached to their star', tool: 'packages/telescope-cli/src/archives/jwst/imaging/coron3.mts', note: 'Full-frame observations do not name their occulter.' },
   { mode: 'NIRCAM/GRISM', records: 'slitless spectra: time series of one star, or every source in a field', draws: 'exoplanet maps from eclipses and phase curves', tool: null, note: 'Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
-  { mode: 'MIRI/IMAGE', records: 'pictures, 5–26 µm, and time series of one star through a filter', draws: 'nebulae as volumes; exoplanet maps from eclipse photometry', tool: 'tools/objects/jwst/imaging/image3.mts', note: 'Time series are reduced from raw by reduce-tso.mts; pictures go through image3.' },
+  { mode: 'MIRI/IMAGE', records: 'pictures, 5–26 µm, and time series of one star through a filter', draws: 'nebulae as volumes; exoplanet maps from eclipse photometry', tool: 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts', note: 'Time series are reduced from raw by reduce-tso.mts; pictures go through image3.' },
   { mode: 'MIRI/CORON', records: 'pictures with the star nulled by a phase mask', draws: 'discs and rings attached to their star', tool: null, note: 'Refused: the pipeline\'s alignment does not converge (docs/jwst-imaging.md).' },
-  { mode: 'MIRI/IFU', records: 'cubes: a 5–28 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: 'tools/objects/jwst/cubes/spec3.mts', note: 'One observation is twelve cubes: four channels in three sub-bands, each pinned and rebuilt on its own.' },
+  { mode: 'MIRI/IFU', records: 'cubes: a 5–28 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: 'packages/telescope-cli/src/archives/jwst/cubes/spec3.mts', note: 'One observation is twelve cubes: four channels in three sub-bands, each pinned and rebuilt on its own.' },
   { mode: 'MIRI/SLIT', records: 'one 5–14 µm spectrum through a slit', draws: 'whole-disc composition; nothing resolved', tool: null, note: 'Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
-  { mode: 'MIRI/SLITLESS', records: 'time series of one star\'s 5–12 µm spectrum', draws: 'exoplanet maps from eclipses and phase curves', tool: 'tools/objects/jwst/reduce-tso.mts' },
-  { mode: 'NIRSPEC/IFU', records: 'cubes: a 0.6–5.3 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: 'tools/objects/jwst/cubes/spec3.mts', note: 'Only a body several pixels across gets a map: NIRSpec\'s pixels are 0.1″, and most moons and small bodies fit inside one.' },
+  { mode: 'MIRI/SLITLESS', records: 'time series of one star\'s 5–12 µm spectrum', draws: 'exoplanet maps from eclipses and phase curves', tool: 'packages/telescope-cli/src/archives/jwst/reduce-tso.mts' },
+  { mode: 'NIRSPEC/IFU', records: 'cubes: a 0.6–5.3 µm spectrum in every pixel', draws: 'maps of what a surface or a gas is made of; gas velocity as depth', tool: 'packages/telescope-cli/src/archives/jwst/cubes/spec3.mts', note: 'Only a body several pixels across gets a map: NIRSpec\'s pixels are 0.1″, and most moons and small bodies fit inside one.' },
   { mode: 'NIRSPEC/SLIT', records: 'one spectrum through a slit, and time series of one star', draws: 'exoplanet maps from eclipses and phase curves', tool: null, note: 'WASP-43b\'s NIRSpec map is fitted from the authors\' deposited light curve, not reduced here. Held, not reducible here: its level-3 product is an extracted spectrum, not a picture or a cube, and no stage reads one.' },
   { mode: 'NIRSPEC/MSA', records: 'spectra of many faint sources at once', draws: 'nothing: survey spectra of distant galaxies', tool: null },
   { mode: 'NIRISS/AMI', records: 'interferograms through a seven-hole mask', draws: 'structure closer to a star than a coronagraph reaches', tool: null, note: 'Held, not reducible here: no stage reads its level-3 interferometric products.' },
@@ -273,7 +273,7 @@ export function jwstLedgerGuide(ledger: Ledger): string {
     !Object.keys(object.timeSeriesVisits).some(exposure => ledger.timeSeries.find(entry => entry.exposure === exposure)!.checked.length));
   return `# JWST ledger
 
-This page is written by [\`archive-ledger.mts\`](../tools/objects/jwst/archive-ledger.mts) from MAST's public archive as it stood on ${ledger.archiveDate}, and from the programs pinned in this repository. It answers two questions: what kinds of JWST observation can this project already turn into something drawn, and which of the objects it ships has JWST observed. The numbers are in [\`data/jwst/ledger.json\`](../data/jwst/ledger.json). How each route works is in [JWST imaging](jwst-imaging.md) and [eclipse mapping](eclipse-mapping.md).
+This page is written by [\`archive-ledger.mts\`](../packages/telescope-cli/src/archives/jwst/archive-ledger.mts) from MAST's public archive as it stood on ${ledger.archiveDate}, and from the programs pinned in this repository. It answers two questions: what kinds of JWST observation can this project already turn into something drawn, and which of the objects it ships has JWST observed. The numbers are in [\`data/jwst/ledger.json\`](../data/jwst/ledger.json). How each route works is in [JWST imaging](jwst-imaging.md) and [eclipse mapping](eclipse-mapping.md).
 
 ## Observing modes
 

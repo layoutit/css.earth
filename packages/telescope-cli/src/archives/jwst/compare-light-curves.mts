@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Compare two exported light curves of the same exposures (reduce-tso.mts CSV: time, flux, err, mask, centroid_y, psf_width_y).
  *
- *   node tools/objects/jwst/compare-light-curves.mts <ours.csv> <author.csv>
+ *   node packages/telescope-cli/src/archives/jwst/compare-light-curves.mts <ours.csv> <author.csv>
  *
  * Integrations pair when their times agree within one second, and a pair counts when neither is masked and both are finite.
  * Both curves are divided by their median over the pairs. Reported: the correlation, the spread of the difference, the spread

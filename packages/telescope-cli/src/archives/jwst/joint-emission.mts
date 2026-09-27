@@ -3,7 +3,7 @@ import { findOne } from './find-product.mts';
 /**
  * One planet's emission light curve from a joint Eureka! Stage 5 fit of several reduced visits.
  *
- *   node tools/objects/jwst/joint-emission.mts <joint directory> <output root> <csv> [--export-only] [--planet <n>]
+ *   node packages/telescope-cli/src/archives/jwst/joint-emission.mts <joint directory> <output root> <csv> [--export-only] [--planet <n>]
  *
  * A joint directory (tools/objects/jwst/programs/<id>) names the visits in the order the parameter file numbers them, each by
  * its reduce-tso work directory under the output root, and pins the Stage 5 control and parameter files. The run:

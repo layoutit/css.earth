@@ -2,7 +2,7 @@
 /** Re-run the JWST pipeline's level-3 spectroscopy stage (calwebb_spec3) for one cube band of a pinned imaging program, and
  * check the cube against MAST's.
  *
- *   node tools/objects/jwst/cubes/spec3.mts <program id> <band> <work directory> [--raw <dir>]... [--max-rss-gib <n>] [--arcsec-per-pixel <n>]
+ *   node packages/telescope-cli/src/archives/jwst/cubes/spec3.mts <program id> <band> <work directory> [--raw <dir>]... [--max-rss-gib <n>] [--arcsec-per-pixel <n>]
  *
  * The members are every level-2 _cal exposure MAST's own spec3 association names (imaging/archive.mts): both detectors at each
  * dither, and for MIRI's medium-resolution spectrometer each of the three grating settings as well. The stage flags outliers

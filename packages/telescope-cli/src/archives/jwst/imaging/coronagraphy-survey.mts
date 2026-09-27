@@ -2,7 +2,7 @@
 /** What JWST coronagraphy the public archive holds: every public level-3 NIRCam coronagraph observation in MAST, by target,
  * with the band this toolkit would pin it as.
  *
- *   node tools/objects/jwst/imaging/coronagraphy-survey.mts [--associations] [--json <path>]
+ *   node packages/telescope-cli/src/archives/jwst/imaging/coronagraphy-survey.mts [--associations] [--json <path>]
  *
  * Read only. Each observation's band is resolved the way archive.mts resolves it, from the filter list and the occulter in
  * the observation's name; an observation whose name carries no occulter (full-frame coronagraphy) is listed as unpinnable by

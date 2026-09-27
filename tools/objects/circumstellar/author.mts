@@ -28,8 +28,8 @@ import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
 import { mastDownloadUrl, mastFile } from '@cssearth/telescope/node';
-import { readImagingProgram } from '../jwst/imaging/image3.mts';
-import { JWST_BANDS } from '../jwst/imaging/bands.mts';
+import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
+import { JWST_BANDS } from '@cssearth/telescope-cli/archives/jwst/imaging/bands';
 import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, readArrayPlane, scoreEnvelope, readSkyPlane, ringGeometry, type SkyPlane } from './disc-envelope.mts';
 import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type PlanetRegistration } from './edge-on-disc.mts';
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';
@@ -635,7 +635,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     authors: [], organizations: [...new Set(built.map(b => b.lens.deposit ? b.lens.deposit.displayCredit : b.lens.archive ? b.lens.archive.displayCredit : 'NASA/ESA/CSA JWST; MAST (STScI)'))],
     license: { spdx: recipe.license.spdx, dataLicenseDeclaration: recipe.license.url, note: recipe.license.note },
     sources: built.flatMap(b => b.bands.map(band => ({ id: inputOf(b.lens, band), url: band.origin.url, landing: band.origin.landing, bytes: band.origin.bytes,
-      role: b.lens.deposit || b.lens.hst || b.lens.archive ? band.origin.role : `${band.origin.role}; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/${b.lens.program}.${band.band}.reproduction.json` }))),
+      role: b.lens.deposit || b.lens.hst || b.lens.archive ? band.origin.role : `${band.origin.role}; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/${b.lens.program}.${band.band}.reproduction.json` }))),
     paper: built.map(b => ({ lens: b.lens.id, citation: b.lens.published.citation, url: b.lens.published.url })),
     measured: { sceneOriginRaDecDeg: [raDeg, decDeg], distancePc, arcsecPerUnit: 1 / distancePc, grid: recipe.grid, lenses: measured },
     models: Object.fromEntries(built.map(b => [b.lens.id, b.kind === 'edge-on' ? `Fitted edge-on disc. ${b.lens.deposit

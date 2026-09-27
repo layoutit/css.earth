@@ -17,42 +17,42 @@
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F335M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F335M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F335M band of the reflectance leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F335M-MASK335R.reproduction.json"
     },
     {
       "id": "reflectance-f444w",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F444W band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F444W-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F444W band of the reflectance leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F444W-MASK335R.reproduction.json"
     },
     {
       "id": "reflectance-f250m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F250M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F250M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F250M band of the reflectance leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F250M-MASK335R.reproduction.json"
     },
     {
       "id": "reflectance-f300m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F300M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F300M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F300M band of the reflectance leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F300M-MASK335R.reproduction.json"
     },
     {
       "id": "reflectance-f182m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "bytes": 3101760,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the reflectance leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
     },
     {
       "id": "reflectance-f210m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "bytes": 3101760,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F210M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the reflectance leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F210M-MASK335R.reproduction.json"
     }
   ],
   "paper": [

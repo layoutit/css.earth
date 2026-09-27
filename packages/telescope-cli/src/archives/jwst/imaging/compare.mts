@@ -1,7 +1,7 @@
 import { sampleAgreement } from '../sample-agreement.mts';
 /** Compare a local image3 mosaic with MAST's level-3 product of the same observation: the oracle for image3.mts.
  *
- *   node tools/objects/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
+ *   node packages/telescope-cli/src/archives/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
  *
  * Both are read with this repository's FITS reader. The two grids' WCS cards are recorded; brightness is compared at the same
  * sky positions: every MAST pixel centre is projected into the local mosaic through both WCSs (@cssearth/fits skyProjection) and

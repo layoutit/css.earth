@@ -7,7 +7,7 @@
    "observations": 19434,
    "targets": 2058,
    "movingObservations": 480,
-   "tool": "tools/objects/jwst/imaging/image3.mts",
+   "tool": "packages/telescope-cli/src/archives/jwst/imaging/image3.mts",
    "bands": 7,
    "programs": [
     "ngc-3132-2733"
@@ -20,7 +20,7 @@
    "observations": 285,
    "targets": 79,
    "movingObservations": 0,
-   "tool": "tools/objects/jwst/imaging/coron3.mts",
+   "tool": "packages/telescope-cli/src/archives/jwst/imaging/coron3.mts",
    "bands": 75,
    "programs": [
     "beta-pictoris-4758",
@@ -46,7 +46,7 @@
    "observations": 6879,
    "targets": 2132,
    "movingObservations": 173,
-   "tool": "tools/objects/jwst/imaging/image3.mts",
+   "tool": "packages/telescope-cli/src/archives/jwst/imaging/image3.mts",
    "bands": 4,
    "programs": [
     "europa-1250",
@@ -83,7 +83,7 @@
    "observations": 25668,
    "targets": 1432,
    "movingObservations": 1932,
-   "tool": "tools/objects/jwst/cubes/spec3.mts",
+   "tool": "packages/telescope-cli/src/archives/jwst/cubes/spec3.mts",
    "bands": 12,
    "programs": [
     "europa-1250"
@@ -107,7 +107,7 @@
    "observations": 111,
    "targets": 74,
    "movingObservations": 0,
-   "tool": "tools/objects/jwst/reduce-tso.mts",
+   "tool": "packages/telescope-cli/src/archives/jwst/reduce-tso.mts",
    "bands": 0,
    "programs": [
     "hd-189733b-miri-2021-002",
@@ -126,7 +126,7 @@
    "observations": 2233,
    "targets": 1257,
    "movingObservations": 637,
-   "tool": "tools/objects/jwst/cubes/spec3.mts",
+   "tool": "packages/telescope-cli/src/archives/jwst/cubes/spec3.mts",
    "bands": 9,
    "programs": [
     "europa-1250",
