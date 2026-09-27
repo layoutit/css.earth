@@ -390,7 +390,7 @@ export function hubbleLedgerGuide(ledger: Ledger): string {
   const lines = [
     '# Hubble ledger',
     '',
-    `What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [\`archive-ledger.mts\`](archive-ledger.mts) from MAST on ${ledger.archiveDate}; the routes it checks are in [Hubble](hubble.md).`,
+    `What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [\`archive-ledger.mts\`](../packages/telescope-cli/src/archives/hst/archive-ledger.mts) from MAST on ${ledger.archiveDate}; the routes it checks are in [Hubble](hubble.md).`,
     '',
     `The collection holds ${thousands(ledger.observations.collection)} public observations. The configurations below account for ${thousands(ledger.observations.counted)}; ${thousands(ledger.observations.other)} are in configurations this file does not name. ${thousands(ledger.observations.moving)} observations are of moving targets, which is the Solar System.`,
     '',
