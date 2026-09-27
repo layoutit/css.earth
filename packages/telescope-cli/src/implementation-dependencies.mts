@@ -81,6 +81,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/contract': 'packages/bake/src/contract/index.ts',
   '@cssearth/bake/astronomy': 'packages/bake/src/astronomy/index.ts',
   '@cssearth/bake/navigation': 'packages/bake/src/navigation/index.ts',
+  '@cssearth/bake/site-assets': 'packages/bake/src/site-assets/index.ts',
   '@cssearth/bake/surface-previews': 'packages/bake/src/surface-previews/index.ts',
   '@cssearth/bake/preparation': 'packages/bake/src/preparation/index.ts',
   '@cssearth/bake/thread-pool': 'packages/bake/src/thread-pool/index.ts',

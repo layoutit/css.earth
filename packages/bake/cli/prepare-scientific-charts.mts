@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Entry script: node tools/prepare/cli/prepare-scientific-charts.mts [--planet=<id>]. The work is in ../prepare-scientific-charts.mts.
-import { prepareScientificCharts } from '../prepare-scientific-charts.mts';
+// Entry script: node packages/bake/cli/prepare-scientific-charts.mts [--planet=<id>]. The work is in @cssearth/bake/site-assets.
+import { prepareScientificCharts } from '@cssearth/bake/site-assets';
 
 const planetArgument = process.argv.find((argument) =>
   argument.startsWith("--planet="));

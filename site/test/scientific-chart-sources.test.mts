@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { parseHTML } from "linkedom";
 import { requireRecord } from "@cssearth/core";
-import { validateScientificChartsContext } from "../../tools/prepare/prepare-scientific-charts.mts";
+import { validateScientificChartsContext } from "@cssearth/bake/site-assets";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 

@@ -25,7 +25,7 @@ import { readPreparedObjects } from "@cssearth/objects/node";
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
-const sharedSteps = ["cli/prepare-shell-titles.mts", "cli/prepare-scientific-charts.mts"];
+const sharedSteps = ["tools/prepare/cli/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 const traceModule = new URL("../../packages/bake/cli/preparation-trace.mts", import.meta.url).href;
 
@@ -112,7 +112,7 @@ export async function prepareObjects({ projectRoot = process.cwd(), force = fals
   const start = performance.now();
   try {
     for (const script of sharedSteps) {
-      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, "tools/prepare", script)], cwd: root });
+      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, script)], cwd: root });
       assert.equal(result.exitCode, 0, `${script} failed`); assert.equal(result.signal, null);
     }
     const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });

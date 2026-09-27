@@ -102,6 +102,14 @@ its validators accept); the renderer never imports the bake.
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
   suites in `tests/navigation/`, with the navigation preparation's in `site/test/`.
+- `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
+  not an object's own: dataset sprites and search thumbnails cut from prepared page and navigation images, the planets'
+  photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`
+  for them and checks the pinned version when the excerpts are made). It imports `raster`, `runtime-source`,
+  `objects/raster` and `objects/charts`. Its commands are `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,
+  scientific-charts,cesium-minimap}.mts`; its tests are in `tests/site-assets/` and `site/test/`. The vendored files keep
+  the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`), which the ownership inventory
+  anchors on.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
   minimap or preview raster is drawn from, read and checked. It imports no topic.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format

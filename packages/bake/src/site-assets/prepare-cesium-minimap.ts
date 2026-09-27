@@ -1,14 +1,17 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { parseAst } from 'vite';
 import type { ClassDeclaration, ImportDeclaration } from 'estree';
 import { requireRecord } from '@cssearth/core';
-import { sourceStart, sourceEnd, nodeName } from '@cssearth/bake/runtime-source';
+import { sourceStart, sourceEnd, nodeName } from '../runtime-source/index.ts';
 
 const require = createRequire(import.meta.url);
-const version = requireRecord(JSON.parse(await readFile(require.resolve('@cesium/engine/package.json'), 'utf8'))).version;
-if (version !== '26.3.0') throw new Error('Review the minimap excerpts before updating Cesium.');
+/** The pinned engine version, read and checked when the excerpts are made rather than when the entry is imported. */
+async function cesiumVersion() {
+  const version = requireRecord(JSON.parse(await readFile(require.resolve('@cesium/engine/package.json'), 'utf8'))).version;
+  if (version !== '26.3.0') throw new Error('Review the minimap excerpts before updating Cesium.');
+  return version;
+}
 
 // Copy only the upstream methods computeViewRectangle uses. The complete
 // classes also import image loading and renderer feature detection.
@@ -21,6 +24,7 @@ const excerpts = [
 ];
 
 export async function cesiumMinimapExcerpts() {
+  const version = await cesiumVersion();
   const output = new Map<string, string>();
   for (const { name, imports, methods, constant } of excerpts) {
     const source = await readFile(require.resolve(`@cesium/engine/Source/Core/${name}.js`), 'utf8');
@@ -61,4 +65,3 @@ ${tail}`.trimEnd() + '\n');
   return output;
 }
 
-refuseDirectRun(import.meta);

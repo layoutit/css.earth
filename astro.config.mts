@@ -7,7 +7,7 @@ import { performanceSourceMaps } from "./site/build/source-maps.mts";
 import { packageSources } from "./site/build/package-sources.mts";
 import { searchServer } from './site/server/search-server.mts';
 import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
-import { preparedMotionCss } from "./tools/prepare/prepared-motion-css.mts";
+import { preparedMotionCss } from "./site/build/prepared-motion-css.mts";
 import { assetOrigin } from "./site/asset-origin.mts";
 
 function cssEarthVersion() {

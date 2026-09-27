@@ -231,6 +231,11 @@
       "import": "./dist/astronomy.js",
       "default": "./dist/astronomy.js"
     },
+    "./site-assets": {
+      "types": "./dist/site-assets.d.ts",
+      "import": "./dist/site-assets.js",
+      "default": "./dist/site-assets.js"
+    },
     "./navigation": {
       "types": "./dist/navigation.d.ts",
       "import": "./dist/navigation.js",
@@ -259,6 +264,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@cesium/engine": "26.3.0",
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",

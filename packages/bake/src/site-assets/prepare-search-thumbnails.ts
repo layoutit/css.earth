@@ -3,14 +3,16 @@
 // marker has a context sprite (`public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite; a
 // sprite photographed on black sky is cut out along the body's outline. A search list decodes dozens of these; the full
 // images would cost megabytes each.
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { createRequire } from 'node:module';
+import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { isRecord } from '@cssearth/core';
 
-const root = resolve(import.meta.dirname, '../..');
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+const root = ROOT;
 /** Preview edge in device pixels: 40 CSS px at 2x. */
 export const SEARCH_THUMBNAIL_PIXELS = 80;
 /** The body's larger side, inside an even transparent margin. */
@@ -99,4 +101,3 @@ export async function prepareSearchThumbnails(projectRoot = root) {
   return { written, unchanged, current };
 }
 
-refuseDirectRun(import.meta);

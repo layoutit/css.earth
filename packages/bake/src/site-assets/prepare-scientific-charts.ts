@@ -1,17 +1,18 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
-import {decodeProfile} from "@cssearth/bake/objects/raster";
+import {decodeProfile} from "../objects/raster/index.ts";
 const phaseFields={maximumAngleDegrees:number,qualification:optional(text),segments:array(shape({maximumAngleDegrees:number,kind:text,coefficients:array(number),constant:optional(number)}))};
 const parsePhase=shape(phaseFields);
 const parseContext=shape({schema:text,sources:shape({photometricPhase:requireRecord}),planets:dictionary(shape({phase:parsePhase}))});
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
 
-import { renderPhotometricPhaseChart } from '@cssearth/bake/objects/charts';
+import { renderPhotometricPhaseChart } from '../objects/charts/index.ts';
 
-const projectRoot = resolve(import.meta.dirname, "../..");
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const projectRoot = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
 const contextPath = resolve(
   projectRoot,
   "site/source/scientific-charts/planetary-context.json",
@@ -141,4 +142,3 @@ function titleCase(value:string) {
   return value[0].toUpperCase() + value.slice(1);
 }
 
-refuseDirectRun(import.meta);

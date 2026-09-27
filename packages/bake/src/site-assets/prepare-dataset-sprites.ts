@@ -1,8 +1,7 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
+import { DECORATIVE_WEBP } from '../raster/index.ts';
 import { sourceArray, sourceId, sourceObject, sourceText } from '@cssearth/objects/sources';
 
 // Dataset icons occupy 14 CSS pixels. A 42-pixel tile stays sharp through 3x DPR.
@@ -50,4 +49,3 @@ export async function prepareDatasetSprites(root = process.cwd()) {
   return count;
 }
 
-refuseDirectRun(import.meta);
