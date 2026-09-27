@@ -57,7 +57,7 @@
     "prepare:environment-images": "node packages/bake/cli/restore-environment-images.mts",
     "prepare:galaxy-field": "pnpm prepare:galaxy-field:data && node tools/prepare/cli/prepare-provenance.mts",
     "prepare:galaxy-field:data": "node tools/galaxy-field/acquire.mts && node tools/galaxy-field/prepare-points.mts",
-    "prepare:arrival-billboards": "node tools/prepare/prepare-arrival-billboard.mts",
+    "prepare:arrival-billboards": "node packages/bake/cli/prepare-arrival-billboard.mts",
     "prepare:lens-billboards": "node tools/prepare/cli/prepare-lens-billboards.mts",
     "prepare:search-thumbnails": "node tools/prepare/cli/prepare-search-thumbnails.mts",
     "prepare:nebulae": "node tools/nebula/prepare.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts",

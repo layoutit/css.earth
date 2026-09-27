@@ -8,11 +8,11 @@ import { requireRecord, requireFiniteNumber, requireString, isRecord } from '@cs
 import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parseArrivalBillboard } from '@cssearth/objects';
-import { readInventory, updateInventory } from '@cssearth/objects/node';
+import { readInventory, readPreparedObjects, updateInventory } from '@cssearth/objects/node';
 
-const root = resolve(import.meta.dirname, '../..'), args = process.argv.slice(2);
+const root = resolve(import.meta.dirname, '../../..'), args = process.argv.slice(2);
+const SCENE_OBJECTS = readPreparedObjects(root).sceneObjects;
 function option(flag: string, fallback: string) {
   const at = args.indexOf(flag);
   if (at < 0) return fallback;
