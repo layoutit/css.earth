@@ -13,6 +13,7 @@
     "../src/**/test/**/*.mts",
     "../src/**/*-test-fixture.mts",
     "../src/**/*-browser.mts",
+    "../.github/scripts/**/*.test.mts",
     "../tools/**/*.test.ts",
     "../tools/**/*.test.mts",
     "../tools/**/*.spec.ts",

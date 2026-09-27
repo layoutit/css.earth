@@ -28,11 +28,13 @@
   },
   "include": [
     "**/*.mts",
+    "../.github/scripts/**/*.mts",
     "../site/env.d.ts",
     "nebula/application/**/*.ts"
   ],
   "exclude": [
     "**/*.test.mts",
+    "../.github/scripts/**/*.test.mts",
     "**/dist/**",
     "**/node_modules/**",
     "**/oracles/**"
