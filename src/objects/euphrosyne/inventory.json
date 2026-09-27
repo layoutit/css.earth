@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "euphrosyne-arrival.webp",
+      "bytes": 34490,
+      "sha256": "46e23da6760f0b97c63ba819833319d452eb508701074823e4bf001464441d3a"
+    },
+    {
+      "location": "public",
       "filename": "euphrosyne-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "euphrosyne-zimpol-thumbnail.webp",
       "bytes": 1630,
       "sha256": "0f5082159dffd1b60496763876020b9676783c2ea25b4e175c9d786cd9ab859c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "f0a4026565b67b845b9c82e655de01ffc6dc95174f2b5578916b32bfcf5a3f65"
     },
     {
       "location": "prepared",

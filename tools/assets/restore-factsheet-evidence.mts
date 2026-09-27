@@ -3,7 +3,7 @@ import { lstat, readFile, realpath } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { sourcePath } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
-import { assertSourceFile, containedPath, parseSourceManifest } from '#preparation/source-files';
+import { assertSourceFile, containedPath, parseSourceManifest } from '@cssearth/bake/objects/sources';
 import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
 import { restoreMissingSources } from '#preparation/operations-acquisition';
 export type FactsheetSourceTransport = NonNullable<Parameters<typeof restoreMissingSources>[0]['transport']>;

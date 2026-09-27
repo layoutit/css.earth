@@ -9,7 +9,7 @@ const parseContext=shape({schema:text,sources:shape({photometricPhase:requireRec
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import { renderPhotometricPhaseChart } from "../objects/content/chart-svg.ts";
+import { renderPhotometricPhaseChart } from "../objects/charts/chart-svg.ts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 const contextPath = resolve(

@@ -3,18 +3,18 @@ const test = sourceTest();
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
-import type { SurfaceAxes } from '../surface-minimap-math.mts';
+import type { SurfaceAxes } from '../minimap/surface-minimap-math.mts';
 import { required, position } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { cesiumMinimapExcerpts } from '../../tools/prepare/prepare-cesium-minimap.mts';
-import { directionOnMap, mapDirection, orbitMapCamera } from '../surface-minimap-math.mts';
+import { directionOnMap, mapDirection, orbitMapCamera } from '../minimap/surface-minimap-math.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import Camera from '@cesium/engine/Source/Scene/Camera.js';
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import Rectangle from '@cesium/engine/Source/Core/Rectangle.js';
-import { minimapCamera, rectangleOnMap, surfaceViewRectangle } from '../surface-minimap-rectangle.mts';
-import { surfaceMapViewport } from '../surface-map-context.mts';
+import { minimapCamera, rectangleOnMap, surfaceViewRectangle } from '../minimap/surface-minimap-rectangle.mts';
+import { surfaceMapViewport } from '../minimap/surface-map-context.mts';
 
 test('surface consumers use the published clipped viewport without measuring the scene', () => {
   const scene = { closest() { throw new Error('Unexpected layout read'); } };

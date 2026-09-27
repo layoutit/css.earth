@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "callisto-arrival.webp",
+      "bytes": 110450,
+      "sha256": "1924611b59c5df6c5c0c04be8a4c160c802989613682aa41b30ea9736b3eeedc"
+    },
+    {
+      "location": "public",
       "filename": "callisto-enhanced@2x.webp",
       "bytes": 568884,
       "sha256": "4010d2334042d485a9d2f723f6727ca9e72de10432b3a62ee376985e8aac5a21"
@@ -270,6 +276,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "4f363379df34e58c1d59973c7ceb1ca873e2d1167b4e0f6ee1ece4a0b0c7dec6"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tarqeq-arrival.webp",
+      "bytes": 34620,
+      "sha256": "be86024f0b1fe8e86d775812440a7f7a08a161925367ffa4ee450ea70fb40dd5"
+    },
+    {
+      "location": "public",
       "filename": "tarqeq-model-shadow-alpha@2x.webp",
       "bytes": 141114,
       "sha256": "bf612a8dc3c18f7651c15c8eadecdd7dc88d688a5fecc7532e3619c3acc3f6a8"
@@ -30,6 +36,12 @@
       "filename": "tarqeq-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "e00f29d0f3d765f51ac85d753714af28db863cb9541a21e128aa64c6a960bb2e"
     },
     {
       "location": "prepared",

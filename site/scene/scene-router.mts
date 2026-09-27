@@ -3,15 +3,15 @@ import { createSceneView } from './scene-view.mts';
 import { selectSceneFeature } from './scene-feature.mts';
 import { createScenePublication } from './scene-publication.mts';
 import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
-import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
-import { errorMessage } from '../browser-types.mts';
+import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
+import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../objects.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
-import type { ObjectShell, ShellNavigationTransition } from '../object-shell-types.mts';
+import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import { objectAdapter } from "../object-adapter.mts";
 import { createNavigationContent } from '../navigation/navigation-content.mts';
@@ -32,6 +32,8 @@ import { createSceneSessions, type SceneSession as Session } from './scene-sessi
 import { readPreparedDescriptor } from '../prepared-descriptor.mts';
 import { watchSatelliteSelection } from '../satellite-selection.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
+import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
+import { observeSceneRetirement } from './scene-memory.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
@@ -137,6 +139,17 @@ export function createSceneRouter({
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
   mountTask = mountApplication();
+  // The iPad trace harness drives this same navigation path as the shell. Keep
+  // the control out of ordinary builds; a performance build opts in explicitly.
+  const control = DIAGNOSTICS_ENABLED ? Object.freeze({
+    async fly(id: string) {
+      if (documentTarget.visibilityState !== 'visible') throw new Error('The app is not the visible Safari tab.');
+      if (typeof id !== 'string' || !/^[a-z0-9-]+$/u.test(id)) throw new TypeError('Invalid destination object id.');
+      if (await navigate(id) !== true) throw new Error(`Navigation to ${id} did not complete.`);
+      return { source: 'scene-router' as const, action: 'fly' as const, objectId: id, url: windowTarget.location.href };
+    },
+  }) : null;
+  if (control) windowTarget.__cssEarthControl = control;
 
   return Object.freeze({
     get settled() { return mountTask; },
@@ -149,6 +162,7 @@ export function createSceneRouter({
       destroyActiveScene();
       cameraMotion.cancel();
       world.destroy();
+      if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
       windowTarget.removeEventListener("pageshow", restoreCachedScene);
       historyOwner?.destroy(); unbindLinks?.();
@@ -368,7 +382,7 @@ export function createSceneRouter({
       }
       syncPlayback();
       const loaded = await prepareSceneReplacement({ fromId: objectId, source, object, request, navigation, requests,
-        loadObject, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current });
+        loadObject, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current, stage });
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
       request.timing.mark('handoff');
@@ -456,8 +470,10 @@ export function createSceneRouter({
 
   function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true } = {}) {
     if (!scenes.isCurrent(session)) return;
+    const retired = DIAGNOSTICS_ENABLED ? observeSceneRetirement(windowTarget, session.objectId) : null;
     // Detach and invalidate before any user cleanup or native wait can finish.
     const cleanupErrors = session.dispose(error === null ? undefined : error, { flush });
+    retired?.();
     if (!preserveShell) {
       hasPresented = false;
       const owner = shellOwner; shellOwner = null;

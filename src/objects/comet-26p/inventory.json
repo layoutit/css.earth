@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-26p-arrival.webp",
+      "bytes": 36164,
+      "sha256": "4deb9bfe5e1c8774f6ed0e1cbba222cb4ba8ed76f94990640a03bee1d3ac3c11"
+    },
+    {
+      "location": "public",
       "filename": "comet-26p-model-shadow-alpha@2x.webp",
       "bytes": 148464,
       "sha256": "d76e100c296f981ee6f31804ec3e978cc67e319da9f6193c6b3f01898914df74"
@@ -30,6 +36,12 @@
       "filename": "comet-26p-model-thumbnail.webp",
       "bytes": 898,
       "sha256": "d92d39b006279016a185ab4e656eb55711edadf6f2ab5e6da17705889d2f5651"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "94c4c3292daaffb4c4284569d8963b30497d4b73d47fdb5095175cca3106502d"
     },
     {
       "location": "prepared",

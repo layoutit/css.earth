@@ -47,10 +47,11 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
   'objects/layers/observed-surfaces': ['scene', 'objects/geometry'],
-  'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/observed-surfaces'],
+  'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/sources', 'objects/layers/observed-surfaces'],
   'objects/layers/material-composition': ['raster', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
-  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'objects/raster'],
-  'objects/layers/terrestrial': ['photometry', 'raster', 'objects/cameras', 'objects/geometry', 'objects/raster'],
+  'objects/layers/observation': ['raster', 'objects/color', 'objects/geometry', 'objects/raster'],
+  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'objects/raster', 'objects/layers/observation'],
+  'objects/layers/terrestrial': ['photometry', 'raster', 'objects/cameras', 'objects/geometry', 'objects/raster', 'objects/scene'],
 };
 
 /** A topic is a top-level folder of `src/`, except `objects/`, whose every folder is a topic of its own (`objects/color`,

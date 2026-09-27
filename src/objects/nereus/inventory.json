@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nereus-arrival.webp",
+      "bytes": 34886,
+      "sha256": "d784a32075e51359719783d6bf5ab9cb7d2bcbc5afb07f3917ccef8faa903280"
+    },
+    {
+      "location": "public",
       "filename": "nereus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "nereus-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "f4019dfcada7a7999b067cca6b96990b0558c1b091e3b0f38009445c7d0dbff8"
     },
     {
       "location": "prepared",

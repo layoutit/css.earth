@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "titania-arrival.webp",
+      "bytes": 86010,
+      "sha256": "d84b6e11d0eacbd9ba32b0489968eb0019353d968c2ba725ac45faed355f8d16"
+    },
+    {
+      "location": "public",
       "filename": "titania-elevation@2x.webp",
       "bytes": 230470,
       "sha256": "2ddc9c70e5343f5c36e61b89c3ab3d09d616b46dfe490ac9c390cb69c0946c2e"
@@ -288,6 +294,12 @@
       "filename": "titania-voyager-color@2x.webp",
       "bytes": 178812,
       "sha256": "426f1b810a99b1903d8eefb85f593909b002fa58672c81f254f3d3c757de85db"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "8b843d36084b4ff5a49a62f07ee3e0fbc5ef3aba8a99962df973ba67447f8edf"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2001-sn263-arrival.webp",
+      "bytes": 32678,
+      "sha256": "7c2ac901f7f7be1053064425cde97b425816918bf4780a5c9f4964a3cdb80507"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2001-sn263-shape-shadow-alpha@2x.webp",
       "bytes": 228158,
       "sha256": "429b688da6e4a330e566d2fa54eabb80b1a006e1e60e453618916d1a585735a2"
@@ -30,6 +36,12 @@
       "filename": "asteroid-2001-sn263-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 334,
+      "sha256": "443b2cd596a8b7537952ae3ee11a2236157797a66da9ee31525b273cf0b110c1"
     },
     {
       "location": "prepared",

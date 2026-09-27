@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "juliet-arrival.webp",
+      "bytes": 34498,
+      "sha256": "057634e30a3bccf1df5c3f4551f4692f3d5bb572fcc75f9abb4afdba123e7e6f"
+    },
+    {
+      "location": "public",
       "filename": "juliet-model-shadow-alpha@2x.webp",
       "bytes": 110668,
       "sha256": "a17201511cd6f67f48184af6ca78b7be4d984c4b6ef62f81095044e4a7cd3323"
@@ -30,6 +36,12 @@
       "filename": "juliet-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "7f580c00f4d9d38074b81c37244c1ca25b5bcdd49dbc22f5c956e23fa3ac5195"
     },
     {
       "location": "prepared",

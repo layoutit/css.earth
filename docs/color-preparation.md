@@ -161,7 +161,7 @@ The compositor also selects WISE atlas tiles by their projected footprint polygo
 
 Scanned photographic plates saturate, so the sky band route measures that from the plate itself: a flat-topped
 core a point spread function cannot produce, grown to where the ring median reaches the plate's own background
-([plate-saturation.mts](../tools/objects/observation/plate-saturation.mts)). Those pixels are neither light nor
+([plate-saturation.ts](../packages/bake/src/objects/layers/observation/plate-saturation.ts)). Those pixels are neither light nor
 zero. A recipe that declares `coverage: "alpha"` composes an RGBA raster whose alpha is 0 wherever no band
 observed a pixel, and the nebula lab carries that channel through rectification into the coverage its material
 and fits read. Plate-to-plate background steps are a separate defect and are not corrected: the plate footprints
@@ -173,7 +173,7 @@ Two routes extend this. Two bands display as red and blue, with their mean as gr
 JWST bands come either from MAST's level-3 mosaics or from the pipeline's level-3 stage re-run onto the recipe grid; both are
 already MJy/sr, so the route applies no factor. [JWST imaging](jwst-imaging.md) describes both routes, the reproduction check
 against MAST and what they cost. A recipe may set `pointSources: "mask"` to report stars found on each band as no coverage
-([point-sources.mts](../tools/objects/observation/point-sources.mts)), which a lens that places the image in depth needs.
+([point-sources.ts](../packages/bake/src/objects/layers/observation/point-sources.ts)), which a lens that places the image in depth needs.
 
 ## Star photospheres
 

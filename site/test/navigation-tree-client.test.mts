@@ -4,7 +4,7 @@ const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { createNavigationTreeController } from '../navigation/navigation-tree-client.mts';
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload } from '../../src/navigation/navigation-tree-schema.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 
 test('deferred navigation materializes only the selected path from its verified payload', async () => {
   const payload: NavigationTreePayload = {

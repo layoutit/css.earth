@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bennu-arrival.webp",
+      "bytes": 166960,
+      "sha256": "147f411df9a3ab96d4c12381b6553d57845ed3f17206862df5f1cc3d4a90af9d"
+    },
+    {
+      "location": "public",
       "filename": "bennu-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -132,6 +138,12 @@
       "filename": "bennu-surface-thumbnail.webp",
       "bytes": 3486,
       "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "5a14eae2e2b7cfe4ceaa22bb30704de3af4b505e54193dacbc81d9a5e1e9dd42"
     },
     {
       "location": "prepared",

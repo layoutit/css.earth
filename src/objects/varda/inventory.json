@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "varda-arrival.webp",
+      "bytes": 36650,
+      "sha256": "312ccb50dd82db0323530fce7029083967ddfe9d4518fb52126556fbb4228cdf"
+    },
+    {
+      "location": "public",
       "filename": "varda-model-shadow-alpha@2x.webp",
       "bytes": 144634,
       "sha256": "19754cb6f800cb425673e2662a2be95053c40bf2aed569eec00fa24099502276"
@@ -30,6 +36,12 @@
       "filename": "varda-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "474530a5b6dab5bf08fa8f3f6a0f0f3f306ee22adbf6000ed319d2e954dd4920"
     },
     {
       "location": "prepared",

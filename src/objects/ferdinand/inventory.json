@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ferdinand-arrival.webp",
+      "bytes": 35906,
+      "sha256": "c78d5ce4dbe212369e4ec161939a2336b88d942b6b9a0a0dd2c65cb9cedf8fa7"
+    },
+    {
+      "location": "public",
       "filename": "ferdinand-model-shadow-alpha@2x.webp",
       "bytes": 124480,
       "sha256": "6449bfdf8c30b9368222315b8dfcae419e506bf7ae974765117abddaabb0989a"
@@ -30,6 +36,12 @@
       "filename": "ferdinand-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "13e2d998472a106a9b22b714ada8a6b9fa8459f96b8495f1582e72779fd02a36"
     },
     {
       "location": "prepared",

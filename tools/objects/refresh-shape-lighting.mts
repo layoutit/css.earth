@@ -7,8 +7,7 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
-import { SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareObjectProvenance } from './provenance.mts';
 
 

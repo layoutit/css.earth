@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "titan-arrival.webp",
+      "bytes": 54278,
+      "sha256": "0b9be3844f517813c88d185f185b935ddc37d042b5fbf39693c23619276e99d1"
+    },
+    {
+      "location": "public",
       "filename": "titan-coverage-distance@2x.webp",
       "bytes": 2539954,
       "sha256": "d9e495cbeb2daab159675e1d7da0e9e11068bd05e6b5cbd1ccf61f0e0dff5232"
@@ -324,6 +330,12 @@
       "filename": "titan-topography@2x.webp",
       "bytes": 603448,
       "sha256": "c2e3ce90ccd3a761e64845d175436c6d712705b760511c1045e0781c065b46c8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "f6b9eafffb9721fa7423ee19e1fb5b986180f526e639a1a4563c5da78cc96cf9"
     },
     {
       "location": "prepared",

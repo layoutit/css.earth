@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ophelia-arrival.webp",
+      "bytes": 39442,
+      "sha256": "01f317a3ca5e2b50bdf30c842d8c6024f4eb76f51b8ac7b58702e97a3d92c373"
+    },
+    {
+      "location": "public",
       "filename": "ophelia-model-shadow-alpha@2x.webp",
       "bytes": 109220,
       "sha256": "874ff1ce3d8cc675370a33dc7fc1d20b4af677431fb4f06e558f6945eb2d446e"
@@ -30,6 +36,12 @@
       "filename": "ophelia-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 310,
+      "sha256": "d45424d048400a645cb7fbb7d8bad7e3fbed855a68c389738906e675dd82430c"
     },
     {
       "location": "prepared",

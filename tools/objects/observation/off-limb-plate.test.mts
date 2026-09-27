@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { offLimbPlate } from './off-limb-plate.mts';
+import { offLimbPlate } from '@cssearth/bake/objects/layers/observation';
 
 // A 64 px frame: a disc of radius 10 px at (32, 32) with value 1, a halo ring out to 20 px at value 0.2, a marker blob of value 0.5
 // straight above the disc (north), and background 0 elsewhere.

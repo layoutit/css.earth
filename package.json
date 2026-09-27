@@ -40,6 +40,7 @@
     "ipad": "node tools/cli/ipad.mts",
     "ipad:screen": "node tools/performance/ios-capture.mts --screen",
     "ipad:inspect": "node tools/performance/ios-capture.mts --inspect",
+    "ipad:run": "node tools/performance/ipad-run.mts",
     "lab:nebula": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
     "lint": "eslint packages labs tools src site",
     "lint:packages": "eslint packages --max-warnings 0",
@@ -53,6 +54,7 @@
     "prepare:environment-images": "node tools/objects/dist/restore-environment-images.js",
     "prepare:galaxy-field": "pnpm prepare:galaxy-field:data && node tools/prepare/cli/prepare-provenance.mts",
     "prepare:galaxy-field:data": "node tools/galaxy-field/acquire.mts && node tools/galaxy-field/prepare-points.mts",
+    "prepare:arrival-billboards": "node tools/prepare/prepare-arrival-billboard.mts",
     "prepare:lens-billboards": "node tools/prepare/prepare-lens-billboards.mts",
     "prepare:search-thumbnails": "node tools/prepare/prepare-search-thumbnails.mts",
     "prepare:nebulae": "node tools/nebula/prepare.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts",
@@ -101,7 +103,7 @@
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "test:universe:renderer": "pnpm test:renderer",
     "test:universe:runtime": "node --test --test-concurrency=2 \"tools/prepared/prepared-activation-*.test.mts\" tools/prepare/prepare-context-availability.test.mts tools/assets/restore-object-json.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node tools/ci/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
-    "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts tools/prepared/serialize-prepared-scene.test.mts && pnpm typecheck:oracles"
+    "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts site/test/serialize-prepared-scene.test.mts && pnpm typecheck:oracles"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

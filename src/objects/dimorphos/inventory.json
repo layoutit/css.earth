@@ -39,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "dimorphos-arrival.webp",
+      "bytes": 20686,
+      "sha256": "bd044bd0352b04a3cb473ca8758018247e0f9819da50ed084e7b4ec3134f2ec1"
+    },
+    {
+      "location": "public",
       "filename": "dimorphos-draco-shadow-alpha@2x.webp",
       "bytes": 703790,
       "sha256": "9fe6be45f35b0a9a6fee059732a3e6c646a008b1ae66b7c601cdc56273179c51"
@@ -174,6 +180,12 @@
       "filename": "dimorphos-slope-thumbnail.webp",
       "bytes": 912,
       "sha256": "f2d87a24b2122ff80db9d618356880d4723311280c50ff9cdcb4f26278672304"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "2c811108bb1132e840770cda97a9fa3eb720211e3d51a4c6ee94d7f69425bec7"
     },
     {
       "location": "prepared",

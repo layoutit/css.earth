@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "camilla-arrival.webp",
+      "bytes": 37582,
+      "sha256": "2befe66abb785dbf2f59e0ab420b78e339851453cbedfdc39439c5e1c8f87cb3"
+    },
+    {
+      "location": "public",
       "filename": "camilla-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "camilla-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "122a48b99aa0fb63156a1b744e83ffba97385939d81ed50c57991bb3aed26576"
     },
     {
       "location": "prepared",

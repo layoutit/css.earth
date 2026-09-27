@@ -1,5 +1,5 @@
 import { nextFrame } from "./next-frame.mts";
-import { presentFeatureResults } from './search-results-presentation.mts';
+import { presentFeatureResults } from './search/search-results-presentation.mts';
 
 import { parseFeaturePin } from './search/feature-search.mts';
 import { FIND_PATH, parseFindResults } from './search/find-protocol.mts';

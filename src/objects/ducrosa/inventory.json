@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ducrosa-arrival.webp",
+      "bytes": 30220,
+      "sha256": "8ff5e0cf2e9e15b199533b92b5e5596adf9727473f5d7cd008ccb03c4688ca39"
+    },
+    {
+      "location": "public",
       "filename": "ducrosa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "ducrosa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "e3296185371dc1aec484c4f483ccbd323cc81d2c31b03f0632e658bc3e9fe7be"
     },
     {
       "location": "prepared",

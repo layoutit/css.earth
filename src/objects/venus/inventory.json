@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "venus-arrival.webp",
+      "bytes": 27502,
+      "sha256": "c4e2101691a80a00993e5a7fd14cd28089f7337ce4761e9947fce308d5f1c8d4"
+    },
+    {
+      "location": "public",
       "filename": "venus-atmosphere-spectrum.svg",
       "bytes": 5691,
       "sha256": "e3ebcf21f9ca7b8cec7c39209f92a63e7d70a850ff823fde795cccba70e1367e"
@@ -156,6 +162,12 @@
       "filename": "venus-venera-9.gif",
       "bytes": 162270,
       "sha256": "7e7f45f24fd4ad2a7e51a4452973100d57751baf73815bfd852180a1bfa04bbd"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "91a5b42f9816cf546dbbe8b953661fd327fe17d905a55c375a9e586eb637fd9a"
     },
     {
       "location": "prepared",

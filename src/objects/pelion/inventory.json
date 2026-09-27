@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pelion-arrival.webp",
+      "bytes": 35724,
+      "sha256": "87e08c8d2f080bfa227d5729e02213682dcc80c4581ea36ec4b57e839bfbc471"
+    },
+    {
+      "location": "public",
       "filename": "pelion-model-shadow-alpha@2x.webp",
       "bytes": 127046,
       "sha256": "a67a25d2b4a3197134671e7d493739d5ee47440f1ecc10ed8ecb5c88fcb9c6c5"
@@ -30,6 +36,12 @@
       "filename": "pelion-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "8c33ea0b5145ebd5582b55700f9e219767059b0bf8761ba2cbdc8d042f7a0a33"
     },
     {
       "location": "prepared",

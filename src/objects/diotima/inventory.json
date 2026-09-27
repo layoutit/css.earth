@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "diotima-arrival.webp",
+      "bytes": 35406,
+      "sha256": "573cd7042998e522b820297a9a9e88536aaff9da2abab35ec648105c1f8714f2"
+    },
+    {
+      "location": "public",
       "filename": "diotima-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "diotima-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "f8b2becbd9cfd55856621f7ae4ff379ca50d23b0fa2e28b4e6729ff244f1437f"
     },
     {
       "location": "prepared",

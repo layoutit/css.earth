@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polyhymnia-arrival.webp",
+      "bytes": 43608,
+      "sha256": "a668259c75db0408ca4d0ed85e0dcd3c0aaac8acdbd7d1800d63525df5e620c8"
+    },
+    {
+      "location": "public",
       "filename": "polyhymnia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "polyhymnia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "64a3de6333c059892baa5e9a4d28d22a81b72f9ea886ec59d454457b39b269dc"
     },
     {
       "location": "prepared",

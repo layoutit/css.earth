@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2001-qw16-arrival.webp",
+      "bytes": 30268,
+      "sha256": "814984a350f1b5e04b2149d359eca73b9611de39379f502c01b8b5f49306294f"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2001-qw16-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "asteroid-2001-qw16-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 319,
+      "sha256": "8fd632588d94e4a01e4b8d132287ac3b34421d3502ec98b8a7cfa18641d34d74"
     },
     {
       "location": "prepared",

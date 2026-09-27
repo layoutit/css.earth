@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "caph-arrival.webp",
+      "bytes": 32602,
+      "sha256": "28163e590d8295bd2afb2ba4d89e21ca95c0dce31ad3ac569c32e656190703c0"
+    },
+    {
+      "location": "public",
       "filename": "caph-lens-color.webp",
       "bytes": 164,
       "sha256": "7ca44186ad69a5d0a466848ad247e60523edf48abedc3a430cd3bb0b9f48eb84"
@@ -24,6 +30,12 @@
       "filename": "caph-surface-color@2x.webp",
       "bytes": 2198,
       "sha256": "5d841d819fc9aee1c1eac36f6c450e5d6d3fc9bc47d112a6db635baee858a0cc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 363,
+      "sha256": "6ae45834bb24ed0593cec832c892ce08eefe1da45463d2c124f47fb51d7b5226"
     },
     {
       "location": "prepared",

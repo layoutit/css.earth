@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-29615-arrival.webp",
+      "bytes": 28528,
+      "sha256": "464c159f75657bddfd04a8b699bd028435d5f7c1ec1609084cefb7aab1dc35a7"
+    },
+    {
+      "location": "public",
       "filename": "hd-29615-lens-azimuthal-field.webp",
       "bytes": 288,
       "sha256": "075223d12b64b0fc7ad3afaa243099e747a5b4dba7dd1ab061badbe7a62c3695"
@@ -96,6 +102,12 @@
       "filename": "hd-29615-surface-radial-field@2x.webp",
       "bytes": 29598,
       "sha256": "a5fce96de39a36c88dbc30f81b72a55210c7ce3cb268ec394714f2d5687b5a07"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "77d454554d7876e22e296cf6629b890e73502f7488c0e770a48db52c42847aeb"
     },
     {
       "location": "prepared",

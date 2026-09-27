@@ -1,0 +1,30 @@
+{
+  "id": "doi-10-1038-s41586-024-07760-y",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fu et al. (2024): Hydrogen sulfide and metal-enriched atmosphere for a Jupiter-mass exoplanet",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-024-07760-y"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.nature.com/articles/s41586-024-07760-y",
+      "label": "Nature"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.nature.com/articles/s41586-024-07760-y",
+      "checkedOn": "2026-09-26",
+      "locator": "Abstract, Figure 2 and data availability: NIRCam transmission spectrum and retrievals; water, carbon dioxide, carbon monoxide and hydrogen sulfide detected. Data deposited in Zenodo 11459715."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Nature",
+  "publicationDate": "2024"
+}

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-19p-arrival.webp",
+      "bytes": 30388,
+      "sha256": "4e63e07ff3eff4d0cbee8fbc2f0e5bffc83477de5f37ad5dfd67e280cffcd59f"
+    },
+    {
+      "location": "public",
       "filename": "comet-19p-difference-legend.webp",
       "bytes": 272,
       "sha256": "84e84bed22545a2801117c6ca377766cc4462285a03ddbf33e0af9088e26d450"
@@ -156,6 +162,12 @@
       "filename": "comet-19p-usgs-thumbnail.webp",
       "bytes": 1112,
       "sha256": "8d369fa65143b27eec4ae73c2229caef847361cb74b38adad954e5039d1c639c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "15f15329a074191140c6860c0362e98bd3ee75eccd58ee8b1c5a10300eb3d6d5"
     },
     {
       "location": "prepared",

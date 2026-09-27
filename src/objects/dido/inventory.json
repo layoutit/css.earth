@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dido-arrival.webp",
+      "bytes": 43482,
+      "sha256": "74c049eb74b5e02859a37e5dfe36705ca7f5d46cbeb6a187910e5be93c6c1d46"
+    },
+    {
+      "location": "public",
       "filename": "dido-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "dido-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "d43e3ed5acbc35279b3e6a144d76e843a44d0c5d94d63978ebee14e543dec878"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "themis-arrival.webp",
+      "bytes": 34872,
+      "sha256": "85976f336c15059b20ed3ebd5d4b97991523c24f9f12d74b2f1a69cfaf24075d"
+    },
+    {
+      "location": "public",
       "filename": "themis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "themis-zimpol-thumbnail.webp",
       "bytes": 1652,
       "sha256": "924a90ac510fad044302bb629a0f40eedc665d2b84e0ef215fc92510e8397e81"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "c8861dc83a93f90223f5e8c7e6e095d29d425feeccf5be3c9080ce9780726b30"
     },
     {
       "location": "prepared",

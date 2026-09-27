@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "europa-52-arrival.webp",
+      "bytes": 38178,
+      "sha256": "468db2c1d19db2e2425658e63ca62fabf69d73190e548344fc6b2d31161de79f"
+    },
+    {
+      "location": "public",
       "filename": "europa-52-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "europa-52-zimpol-thumbnail.webp",
       "bytes": 1444,
       "sha256": "8bcd280cb760866d625aa9e6580eaabaef3a6467af88d44a8d49fc6b1422d473"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "44067a6f00f5a31ddad38e4b9665897328bc68ceb51f034924c3bf2c01e0a5c1"
     },
     {
       "location": "prepared",

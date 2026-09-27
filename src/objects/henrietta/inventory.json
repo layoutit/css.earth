@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "henrietta-arrival.webp",
+      "bytes": 40322,
+      "sha256": "421abfbb54b1d7c109761a1a2b75b131235e685302bc51ac44a4bb56e67661ee"
+    },
+    {
+      "location": "public",
       "filename": "henrietta-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "henrietta-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "960a4c96b595296f0c5ed1c03bdf7a33d4ba43bffe4e8f2df636b9365bd964d1"
     },
     {
       "location": "prepared",

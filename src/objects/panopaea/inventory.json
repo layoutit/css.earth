@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "panopaea-arrival.webp",
+      "bytes": 36064,
+      "sha256": "eab6584f91dfb08c4fba163a88c4010cb57d3f2225a7d15a867e4f8b6f739b69"
+    },
+    {
+      "location": "public",
       "filename": "panopaea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "panopaea-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "f02e4d08069dea1fa7e4cb03133f586bf721700e5e1c87c71ba09efc12b85a0a"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "siarnaq-arrival.webp",
+      "bytes": 38932,
+      "sha256": "d705cfee0486158cb5197d8bfa98fde3ec0d03a702a48c5e0d28a16a6fb38fc6"
+    },
+    {
+      "location": "public",
       "filename": "siarnaq-model-shadow-alpha@2x.webp",
       "bytes": 141940,
       "sha256": "469e27c73933dee3c904b8249bf9381a2dbb01fc081734b32a3f298ccd17bd38"
@@ -30,6 +36,12 @@
       "filename": "siarnaq-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "b346ff63be19fd34390667e7623659a650c596a9644e8e5504ede9c095474c99"
     },
     {
       "location": "prepared",

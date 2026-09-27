@@ -1,7 +1,7 @@
-import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
 import { sha256 } from '@cssearth/core/node';
-import { readAuthoredSources } from './authored-sources.ts';
+import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -9,7 +9,6 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
 import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
 import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
 import { refreshObservationControls } from './refresh-surface-observations.mts';

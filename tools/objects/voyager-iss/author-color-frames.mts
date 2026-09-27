@@ -15,7 +15,7 @@ import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fromFile } from 'geotiff';
-import { kernelBankPaths } from '../../kernel-banks/kernel-bank.mts';
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { orthographicPoint } from '@cssearth/bake/objects/layers/terrestrial';
 import { sampleColorBand, numericRasterBands } from '@cssearth/bake/objects/raster';

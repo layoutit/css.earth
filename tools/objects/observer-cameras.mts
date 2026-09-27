@@ -9,9 +9,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { deriveObserverCameras, loadObserverCameraInputs, recipeFields } from './terrestrial-layers/observer-cameras.mts';
+import { deriveObserverCameras, loadObserverCameraInputs, recipeFields, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
-import { radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const [objectId, flag] = process.argv.slice(2);

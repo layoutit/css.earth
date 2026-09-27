@@ -1,0 +1,50 @@
+{
+  "host": "eps-eridani",
+  "planets": [
+    {
+      "id": "eps-eridani-b",
+      "name": "ε Eridani b",
+      "description": "Planet of ε Eridani found by radial velocity, with a 2680-day year, found in 2000.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract",
+        "credit": "Thompson et al. (2025), AJ 170, 301"
+      },
+      "radius": {
+        "value": 1.23,
+        "source": "NASA Exoplanet Archive calculated radius from the mass, the Chen & Kipping (2017) relation: a model, not a measurement, since ε Eridani b does not transit",
+        "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      },
+      "mass": {
+        "value": 1,
+        "source": "Thompson et al. (2025), AJ 170, 301, Table 3, the model with every data set: 1.00 +/- 0.10 Jupiter masses",
+        "url": "https://arxiv.org/abs/2502.20561",
+        "uncertainty": 0.1
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 2677.28,
+          "semiMajorAxisStellarRadii": 1025.76,
+          "inclinationDegrees": 40,
+          "eccentricity": 0,
+          "transitTimeBmjdTdb": 59981.7,
+          "ascendingNodePositionAngleDegrees": 186
+        },
+        "source": "Thompson et al. (2025), AJ 170, 301, Table 3, the model with every data set (RV, Hipparcos, FGS, Gaia DR2 and DR3): P 7.33 +0.08/-0.07 yr, a 3.53 +/- 0.04 au (over the host's recorded 0.74 solar radii), i 40 +6/-5 degrees, position angle of the ascending node 186 +8/-9 degrees. Drawn circular: e 0.06 +0.06/-0.04 is small and its omega and periastron time are each unconstrained (268 +62/-105 degrees; MJD 58017 +1740/-447), so their medians do not phase the orbit. The phase is the paper's section 4 statement that the planet is at its greatest separation ('opposition'), south of the star, on 2024-12-07 + N x 3.66 yr, moving counterclockwise: inferior conjunction MJD 59981.7 puts it at 1,096 mas and position angle 186 degrees on that date (their radial velocities alone give 1,071 +/- 58 mas).",
+        "url": "https://arxiv.org/abs/2502.20561"
+      },
+      "text": {
+        "card": "ε Eridani b, found by radial velocity in 2000, orbits its star every 7.33 years.",
+        "introduction": "ε Eridani b was found by radial velocity. Thompson et al. (2025) measured the size, tilt and orientation of its orbit from its star's motion.",
+        "locator": "Thompson et al. (2025), AJ 170, 301, Table 3 (RV, HIP, FGS, DR2, DR3): P 7.33 yr, a 3.53 au, i 40 degrees, node 186 degrees, mass 1.00 Jupiter masses; NASA Exoplanet Archive pscomppars calculated pl_radj 1.23",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Epsilon_Eridani_b",
+          "title": "Epsilon Eridani b",
+          "revision": "1375454261",
+          "card": "Epsilon Eridani b, formally named AEgir [sic], is an exoplanet approximately 10.5 light-years away orbiting the star Epsilon Eridani, in the constellation of Eridanus.",
+          "introduction": "The planet was discovered in 2000, and as of 2025 remains the only confirmed planet in its planetary system."
+        }
+      },
+      "order": 1842
+    }
+  ]
+}

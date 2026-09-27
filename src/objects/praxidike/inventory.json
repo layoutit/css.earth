@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "praxidike-arrival.webp",
+      "bytes": 37034,
+      "sha256": "69746de9c9bc257f71d78f25b55fd1eb92b7d043489e4d68da696becfc8b851c"
+    },
+    {
+      "location": "public",
       "filename": "praxidike-model-shadow-alpha@2x.webp",
       "bytes": 129054,
       "sha256": "176f29513dbcb27b9b6edff876d8440209c0d84b27cc54fef978cbd00ea2ec94"
@@ -30,6 +36,12 @@
       "filename": "praxidike-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "baa41d62c00f7b2b8c5e6a4c2eec95a4fac0d477223d3b3f8c0b4a319f94676f"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "phoebe-arrival.webp",
+      "bytes": 83252,
+      "sha256": "145fad5fc5ea06e12b7ace49733c81756c55c79a067a663d3a1768509f9ead08"
+    },
+    {
+      "location": "public",
       "filename": "phoebe-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -246,6 +252,12 @@
       "filename": "phoebe-normal-thumbnail.webp",
       "bytes": 2646,
       "sha256": "9959a0f7e3da03587181e1d2f34654c229e8b04f13507533a3cc24e110beebb3"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "245f6e4f7ea6fe292ef761f90776badc1aefe3efe690cb2271524a90a133197d"
     },
     {
       "location": "prepared",

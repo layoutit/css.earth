@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "neso-arrival.webp",
+      "bytes": 35084,
+      "sha256": "5d48acb2380d8ae9e85d14f065adcb651a40fa7b9f2c99f6e48412bf1187e27b"
+    },
+    {
+      "location": "public",
       "filename": "neso-model-shadow-alpha@2x.webp",
       "bytes": 126314,
       "sha256": "2a362c3badb1f995fc78a8236bd316827a666fd0947c91ebe56bf4cb8022487d"
@@ -30,6 +36,12 @@
       "filename": "neso-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "ef4ed484606477d2608810bb229cf3bbb0a908473144adfc56a321ba0406ef13"
     },
     {
       "location": "prepared",

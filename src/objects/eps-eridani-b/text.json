@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eps-eridani-b",
+  "card": {
+    "text": "ε Eridani b, found by radial velocity in 2000, orbits its star every 7.33 years.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae0cbd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract",
+        "label": "Thompson et al. 2025",
+        "checked": "2026-09-26",
+        "locator": "Thompson et al. (2025), AJ 170, 301, Table 3 (RV, HIP, FGS, DR2, DR3): P 7.33 yr, a 3.53 au, i 40 degrees, node 186 degrees, mass 1.00 Jupiter masses; NASA Exoplanet Archive pscomppars calculated pl_radj 1.23"
+      },
+      {
+        "catalogueId": "wikipedia-epsilon-eridani-b",
+        "url": "https://en.wikipedia.org/wiki/Epsilon_Eridani_b",
+        "label": "Wikipedia, \"Epsilon Eridani b\"",
+        "checked": "2026-09-26",
+        "locator": "Lead section, revision 1375454261",
+        "quote": "Epsilon Eridani b, formally named AEgir [sic], is an exoplanet approximately 10.5 light-years away orbiting the star Epsilon Eridani, in the constellation of Eridanus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ε Eridani b was found by radial velocity. Thompson et al. (2025) measured the size, tilt and orientation of its orbit from its star's motion.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae0cbd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract",
+        "label": "Thompson et al. 2025",
+        "checked": "2026-09-26",
+        "locator": "Thompson et al. (2025), AJ 170, 301, Table 3 (RV, HIP, FGS, DR2, DR3): P 7.33 yr, a 3.53 au, i 40 degrees, node 186 degrees, mass 1.00 Jupiter masses; NASA Exoplanet Archive pscomppars calculated pl_radj 1.23"
+      },
+      {
+        "catalogueId": "wikipedia-epsilon-eridani-b",
+        "url": "https://en.wikipedia.org/wiki/Epsilon_Eridani_b",
+        "label": "Wikipedia, \"Epsilon Eridani b\"",
+        "checked": "2026-09-26",
+        "locator": "Lead section, revision 1375454261",
+        "quote": "The planet was discovered in 2000, and as of 2025 remains the only confirmed planet in its planetary system."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

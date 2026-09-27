@@ -37,6 +37,11 @@
       "title": "NASA artist's concept",
       "detail": "Illustration, not observed",
       "summary": "The map NASA's Eyes on Exoplanets wraps around this planet. None of it was observed, and its longitudes are arbitrary."
+    },
+    "uncertainty": {
+      "title": "JWST MIRI uncertainty",
+      "detail": "Map uncertainty (K)",
+      "summary": "Standard deviation within this fit (K). Timing and model choices add uncertainty; neighbouring cells are correlated."
     }
   }
 }

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "francisco-arrival.webp",
+      "bytes": 37070,
+      "sha256": "c6358498a1cdddab84f4480d8259f62a7a53a29309dea538a91dd691f957f620"
+    },
+    {
+      "location": "public",
       "filename": "francisco-model-shadow-alpha@2x.webp",
       "bytes": 132896,
       "sha256": "6f1e62d223149b53a2dc446fd4e897e702ca644626cca383a1a92c6bcd90ccfd"
@@ -30,6 +36,12 @@
       "filename": "francisco-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "fc31fd487ba4a4712722bc9e82962800b5b413f0e3b2dc4fb5a71ad6ea49fd06"
     },
     {
       "location": "prepared",

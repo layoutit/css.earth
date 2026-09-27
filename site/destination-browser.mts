@@ -1,4 +1,4 @@
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 
 export interface DestinationPresentation {
   readonly name: string; readonly context: string; readonly coverage: string;

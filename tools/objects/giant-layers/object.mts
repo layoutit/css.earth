@@ -1,4 +1,4 @@
-import { readAuthoredSources } from '../authored-sources.ts';
+import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { parse } from '@cssearth/core/schema';
 import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc } from '@cssearth/bake/objects/layers/giant';
 import { parseEllipsoidMaterialRecipe } from './materials.mts';

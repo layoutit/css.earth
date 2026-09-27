@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-arrival.webp",
+      "bytes": 129878,
+      "sha256": "1d5469b45053060b55f57fe66870c9e207676fd826edbdc405d67f5e46133b2a"
+    },
+    {
+      "location": "public",
       "filename": "moon-crust@2x.webp",
       "bytes": 1040742,
       "sha256": "64da1ef022f053e1280743e1ca359a95e5f2e6df74fd8252b4eac4b04d027386"
@@ -360,6 +366,12 @@
       "filename": "moon-topography@2x.webp",
       "bytes": 5001160,
       "sha256": "421722f523990e3bc04737f9abfe50bd77df97b65368017e571fa52acad40788"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "309b18c22d237a23549cc256a19bea88aee0e11705009ff093aaab2f66e57356"
     },
     {
       "location": "prepared",

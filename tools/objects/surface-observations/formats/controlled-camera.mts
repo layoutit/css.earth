@@ -9,7 +9,7 @@ import { parseCameraFrame, checkBandAlignment, controlledShapeCamera, framePaths
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
+import { validPublishedPhotometryShape } from '@cssearth/bake/objects/layers/terrestrial';
 import { bandColorDisplay, type BandColorDisplay } from '@cssearth/bake/objects/color';
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 import { readFitsPrimary } from '@cssearth/fits';

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hylonome-arrival.webp",
+      "bytes": 36842,
+      "sha256": "55e8fc988f0841c1ec107f36291b21206d7d00af85b87fb36b15e07c7a6d079a"
+    },
+    {
+      "location": "public",
       "filename": "hylonome-model-shadow-alpha@2x.webp",
       "bytes": 130790,
       "sha256": "435a2439aff21d65cbc5b6d594f5d9c4163050672016db0c1ebf70b01fe4dbf8"
@@ -30,6 +36,12 @@
       "filename": "hylonome-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "0de3da2f03de73ca6a98bf849d774a8c94f80ede1977373f64da0eb59971198d"
     },
     {
       "location": "prepared",

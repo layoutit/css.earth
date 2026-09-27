@@ -1,0 +1,36 @@
+{
+  "id": "zenodo-11459715",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Fu et al. (2024) HD 189733b JWST data and model, version 1",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.11459715"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/11459715",
+      "label": "Zenodo"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/11459715",
+      "checkedOn": "2026-09-26",
+      "locator": "Version 1, published 2024-06-03; HD189733b_JWST_data_model.zip; license cc-by-4.0. Data/transit spectrum/HD189733b_NIRCam_spectrum.txt and Model/Free/FULL_TD_median_result.txt under zenodo/."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Guangwei Fu et al. (2024); JWST NIRCam observations of HD 189733b.",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/11459715"
+    }
+  ],
+  "publisher": "Zenodo"
+}

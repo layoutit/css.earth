@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pi1-gruis-arrival.webp",
+      "bytes": 43288,
+      "sha256": "12612ccdea0985879d7573076468554eb1ae93245419d1a980e6169ff7903515"
+    },
+    {
+      "location": "public",
       "filename": "pi1-gruis-context-pionier@2x.webp",
       "bytes": 98684,
       "sha256": "4eaa2158f82166c805861659569e58c97f6b06d93acd060a919aca88ed7b2243"
@@ -42,6 +48,12 @@
       "filename": "pi1-gruis-surface-pionier@2x.webp",
       "bytes": 56508,
       "sha256": "459882ee2c6e286ca1f7bd3f44d93d3ef409e7bdb13ebeb1658501ff1899cc9c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "8c74a881d454866a56bbf0bc5e9d32348bf81345a65908a7530e4fb2e949f83a"
     },
     {
       "location": "prepared",

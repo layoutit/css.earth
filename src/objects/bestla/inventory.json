@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bestla-arrival.webp",
+      "bytes": 36366,
+      "sha256": "eb0603b801d24ca509a6b1ea1465f92410903af0e88ed1f5505dc47cb958fdec"
+    },
+    {
+      "location": "public",
       "filename": "bestla-model-shadow-alpha@2x.webp",
       "bytes": 138758,
       "sha256": "f8c95e826eb9668a8ac75e5ea6a4e1c1394d6bdc07887ad3783a7b0e214c3255"
@@ -30,6 +36,12 @@
       "filename": "bestla-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "616ff251c9941ece9871aba01c615ba8ec0a6cef52e9993608e6ee1dea0b27ba"
     },
     {
       "location": "prepared",

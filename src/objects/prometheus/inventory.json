@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "prometheus-arrival.webp",
+      "bytes": 60528,
+      "sha256": "096b52094b3ee210e02757810b7a7b3b2a24f5a5b34b3562457795f0b8a3607b"
+    },
+    {
+      "location": "public",
       "filename": "prometheus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "prometheus-normal-thumbnail.webp",
       "bytes": 1346,
       "sha256": "59a22b0d1e061ae10f95775c4f5c5c08ec24d835981495a45e28e5cb2ecce37d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "64d2b6e128fc60e02069a2c8c9468f3437db1e95f2e681c2e6bad2038d6eadb3"
     },
     {
       "location": "prepared",

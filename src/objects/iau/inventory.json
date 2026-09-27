@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iau-arrival.webp",
+      "bytes": 32340,
+      "sha256": "913c70c741272e546fbabd7067b32a4549b704cab84fbf48f30f88b31bfee25a"
+    },
+    {
+      "location": "public",
       "filename": "iau-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "iau-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 290,
+      "sha256": "ad7cf2024ca2085dd210909b1f1767f1c8e437f96a59e5632aa5768148e8eb0b"
     },
     {
       "location": "prepared",

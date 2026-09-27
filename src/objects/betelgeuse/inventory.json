@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "betelgeuse-arrival.webp",
+      "bytes": 33108,
+      "sha256": "36295bb4562264f3f278fe3a5690dea879874e7b7128061752a8f5d2a31fb7d9"
+    },
+    {
+      "location": "public",
       "filename": "betelgeuse-lens-color.webp",
       "bytes": 44,
       "sha256": "17430313f949072e8dfbdf575297839d80b4eeed87054219e2901cbc2b14aece"
@@ -72,6 +78,12 @@
       "filename": "betelgeuse-surface-matisse@2x.webp",
       "bytes": 59738,
       "sha256": "85515b0eba9857e62193b5bef2c5e95cf537452d0d659c5e283bdfb582555b44"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 385,
+      "sha256": "859dc1cd331c8138f74bc89709683eeb18273b73459c4900c8ff6d3d74a13ff0"
     },
     {
       "location": "prepared",

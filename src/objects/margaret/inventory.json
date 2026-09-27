@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "margaret-arrival.webp",
+      "bytes": 36296,
+      "sha256": "ff6870ce0c50f8833d218316bc18bbf4eef8b4b84e97d266fd49fb90a01c875d"
+    },
+    {
+      "location": "public",
       "filename": "margaret-model-shadow-alpha@2x.webp",
       "bytes": 124120,
       "sha256": "20086c408b3166ec0acbc39a0c7d667af55a6a403bee979e499c96b1dce9c8be"
@@ -30,6 +36,12 @@
       "filename": "margaret-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "3a3c49cb3d47bca6a92c2a163a3edcfdba580ab30b30dd8d2e7cf8d683113acb"
     },
     {
       "location": "prepared",

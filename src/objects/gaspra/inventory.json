@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gaspra-arrival.webp",
+      "bytes": 67938,
+      "sha256": "aa6b26755bb384bc15fa1b90fb5fa4236cc66f9c6175f77d356724d38ea124a2"
+    },
+    {
+      "location": "public",
       "filename": "gaspra-calibrated-shadow-alpha@2x.webp",
       "bytes": 597370,
       "sha256": "7e578f9b72eb071bea9c134ec6ac0f2c953704db5f0897395db78fa15fab34f9"
@@ -102,6 +108,12 @@
       "filename": "gaspra-normal-thumbnail.webp",
       "bytes": 2838,
       "sha256": "9d16c2204a5422ea2e49e280d8cce1a30fe927497a2ecda5636d8fc32f47fe21"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "f954e3886d6e83da4d8178f6ffade4267122656fec0329170eb68f93e613bc80"
     },
     {
       "location": "prepared",

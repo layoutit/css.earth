@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lysithea-arrival.webp",
+      "bytes": 37320,
+      "sha256": "fb240f1a35d75863172dc8dea22bf9b34bd1ccf53d852030c3858e4f405ad81d"
+    },
+    {
+      "location": "public",
       "filename": "lysithea-model-shadow-alpha@2x.webp",
       "bytes": 133074,
       "sha256": "e1e37ac41570091a5a18bf66683aef4b137f020561635d8c450b10f454be4b80"
@@ -30,6 +36,12 @@
       "filename": "lysithea-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "057d1779f0fcd35ae52b375d94e55220ef056ef97a2cd55b519842356ce4787f"
     },
     {
       "location": "prepared",

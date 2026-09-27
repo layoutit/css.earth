@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from './spectral-band-maps.mts';
+import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from '@cssearth/bake/objects/layers/observation';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 

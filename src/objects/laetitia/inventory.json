@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "laetitia-arrival.webp",
+      "bytes": 43340,
+      "sha256": "d7ad02cf7c8857055ab748455b395c6e729d070b6cb5abb8aaf4222bfdfcc377"
+    },
+    {
+      "location": "public",
       "filename": "laetitia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "laetitia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "60d2f3aed733c3bc4bdb9c19dc4783b7026edb6c411b488b2f64785b36f15299"
     },
     {
       "location": "prepared",

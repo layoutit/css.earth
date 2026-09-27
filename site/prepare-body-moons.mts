@@ -1,4 +1,4 @@
-import { SEARCH_OBJECTS } from './search-objects.mts';
+import { SEARCH_OBJECTS } from './search/search-objects.mts';
 import { isSceneObject } from '@cssearth/objects';
 import type { ObjectEntry } from './objects.mts';
 import preparedWorld from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };

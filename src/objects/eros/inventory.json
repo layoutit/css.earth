@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eros-arrival.webp",
+      "bytes": 78312,
+      "sha256": "85468338d9fce816fbeb9b73b6324797efb48fe1b9483876ccf2312e9a4bb78f"
+    },
+    {
+      "location": "public",
       "filename": "eros-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -102,6 +108,12 @@
       "filename": "eros-normal-thumbnail.webp",
       "bytes": 3270,
       "sha256": "77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "60005fec5fdae72f83b9182272515713ca7a4075101db80cfaaa3ee490a2ecff"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "thisbe-arrival.webp",
+      "bytes": 32762,
+      "sha256": "cca3c468e8248932e443f05f23e470fc4358f718285a2e6f7170cb19d9b53f13"
+    },
+    {
+      "location": "public",
       "filename": "thisbe-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "thisbe-zimpol-thumbnail.webp",
       "bytes": 1638,
       "sha256": "bfabc66dbab5ad7a992f0f38a513b402d5663683facec9cc9f16e72712323033"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "15a4f69386305e6d38b61d038277029b3cab3a87abf442b585a8da40e62035da"
     },
     {
       "location": "prepared",

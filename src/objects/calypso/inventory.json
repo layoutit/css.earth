@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "calypso-arrival.webp",
+      "bytes": 36378,
+      "sha256": "0aed513a1fc7d2e4887fce7943c254300802ec10479a263e72edb7c0ac0eb6d8"
+    },
+    {
+      "location": "public",
       "filename": "calypso-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -96,6 +102,12 @@
       "filename": "calypso-normal-thumbnail.webp",
       "bytes": 1470,
       "sha256": "b603c2f963ee6164182829c0cfa1a6fcdcf88a01a102481a59473506c25184ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "a379cf4e9ae895fa76487a44cc9837265bb8f6a1511942c248ea3983babf426f"
     },
     {
       "location": "prepared",

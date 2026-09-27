@@ -6,7 +6,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { objectNavigation, SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../search-objects.mts";
+import { objectNavigation, SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../search/search-objects.mts";
 import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "../../tools/prepare/prepare-navigation.mts";
 import { markerStyle, resolveMarkerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";

@@ -5,7 +5,7 @@ import discoveries from './prepared-object-discovery.json' with { type: 'json' }
 import distances from './prepared-object-distances.json' with { type: 'json' };
 import focuses from './prepared-focus-objects.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';
-import type { SceneFactory } from './browser-types.mts';
+import type { SceneFactory } from './browser/browser-types.mts';
 
 /** The shared registry types, bound to the shell's scene loader and its abort signal. */
 export type ObjectEntry = RegistryObjectEntry<SceneFactory, AbortSignal>;

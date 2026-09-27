@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pds-70-c-arrival.webp",
+      "bytes": 14154,
+      "sha256": "a00eb12b1322a4b06020c229847e9ab5e578ea27ea275c6a4b5fee94b54370ae"
+    },
+    {
+      "location": "public",
       "filename": "pds-70-c-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
@@ -18,6 +24,12 @@
       "filename": "pds-70-c-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "ab165d13da03d77afb5441cc191c4cfc8397f9a24dc45e7c7d67badaac7b5b82"
     },
     {
       "location": "prepared",

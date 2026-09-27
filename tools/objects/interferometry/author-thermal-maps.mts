@@ -28,7 +28,7 @@ import { pathToFileURL } from 'node:url';
 import { readFitsHeader, readFitsImage } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { ALMA, horizonsTables } from '../sphere-horizons.mts';
-import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
+import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
 import { sha256 } from '@cssearth/core/node';

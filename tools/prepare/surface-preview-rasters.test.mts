@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mts';
 import { preparePagedSurfaceMap } from '../objects/paged-ellipsoid/assets.mts';
-import { createPagedSurfaceRaster } from '../objects/paged-ellipsoid/surface-raster.mts';
+import { createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { prepareProjectiveTextureLayer } from '@cssearth/bake/scene';
 
 // Two reversed bands with conspicuous padding: the preview must recover
@@ -103,8 +103,9 @@ test('surface pages hold neighbouring cells of one row, each at the smallest-are
   // Two rows of four cells: the first row's cells are larger, as near a pole.
   const {positions,pages} = raster.layoutBlockPages([24,24,24,24, 10,10,10,10]);
   assert.deepEqual(positions.map(cell => cell.page), [0,0,1,1, 2,2,3,3]);
-  // A tie in area keeps the wider page; the small cells stack two high in a quarter-width page.
-  assert.deepEqual(pages, [{width:64,height:28},{width:64,height:28},{width:16,height:28},{width:16,height:28}]);
+  // Each page is square, its side the block's columns times its largest cell stride rounded up to 64 px, so every texture
+  // level halves it to whole pixels: 2 × 28 px and 2 × 14 px both round up to one 64 px side.
+  assert.deepEqual(pages, [{width:64,height:64},{width:64,height:64},{width:64,height:64},{width:64,height:64}]);
   for (const [index,cell] of positions.entries()) {
     const size = index < 4 ? 24 : 10;
     assert.ok(cell.x >= 2 && cell.x + size + 2 <= pages[cell.page].width && cell.y + size + 2 <= pages[cell.page].height);

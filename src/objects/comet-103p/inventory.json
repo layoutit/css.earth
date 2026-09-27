@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-103p-arrival.webp",
+      "bytes": 35986,
+      "sha256": "da7cedd57b901a1b168ef3d197fc42dc798683db24c39226e33058b9f9a3440b"
+    },
+    {
+      "location": "public",
       "filename": "comet-103p-constraints-shadow-alpha@2x.webp",
       "bytes": 338446,
       "sha256": "2d318f6271ab3b1b72fdc3b082b11ee70427a809ad5ab1cfc677ca4ec268b690"
@@ -156,6 +162,12 @@
       "filename": "comet-103p-temperature-thumbnail.webp",
       "bytes": 340,
       "sha256": "653c061553cde6087354a7c29e81d0a0e146a50168c3832cf802559812bc7b70"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 309,
+      "sha256": "ea2a47bb5d92f305a3adce5503738cbbe6a6697f04d7f09999ac0acd63fc8872"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "naiad-arrival.webp",
+      "bytes": 36922,
+      "sha256": "16b6516a7823a40a4ca956e9cdcdf4533b1621a5a9996a73c2d694ba7455a8f5"
+    },
+    {
+      "location": "public",
       "filename": "naiad-model-shadow-alpha@2x.webp",
       "bytes": 102040,
       "sha256": "60e579ad7393e849289b59a8362d2853f81845907d49125e2772dc87d9b31608"
@@ -30,6 +36,12 @@
       "filename": "naiad-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "3348596e30afceb090dfe265597ca59c80e30b5b33333739d92671aaa463786a"
     },
     {
       "location": "prepared",

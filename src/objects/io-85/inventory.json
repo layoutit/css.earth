@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "io-85-arrival.webp",
+      "bytes": 34148,
+      "sha256": "f1d222fa7e884fc52d6796c2449c51f8337fcef933f64273a5f2fca5411bae1c"
+    },
+    {
+      "location": "public",
       "filename": "io-85-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "io-85-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "209727a5c33e33800886a3b60f0ada09c7977641c34c8d72306a18162469460c"
     },
     {
       "location": "prepared",

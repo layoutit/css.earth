@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2002-tc302-arrival.webp",
+      "bytes": 34524,
+      "sha256": "731267f385fab3bc8915059d33c813b7c38f5026dc336b8f382ab2189137b52b"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2002-tc302-model-shadow-alpha@2x.webp",
       "bytes": 119530,
       "sha256": "6252e98def1450a9af0da34f63170917e8548d3a732b83531d2fd6be0edd64ca"
@@ -30,6 +36,12 @@
       "filename": "asteroid-2002-tc302-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 334,
+      "sha256": "186afbc3d95b9d020e03be7af1966d012d99864ac5be6cda3d74a1a9fb77bed6"
     },
     {
       "location": "prepared",

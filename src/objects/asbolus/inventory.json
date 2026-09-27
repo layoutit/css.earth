@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asbolus-arrival.webp",
+      "bytes": 36754,
+      "sha256": "43ee9b6ae957c25c5434a0b02a04f429b956c8b9be1a5e681bc192d5e451a1cd"
+    },
+    {
+      "location": "public",
       "filename": "asbolus-model-shadow-alpha@2x.webp",
       "bytes": 129708,
       "sha256": "3e3fab15882b9fc61a58e3bad3af4e7a4785c161f6addb720eb5747d6863f371"
@@ -30,6 +36,12 @@
       "filename": "asbolus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "fe76b46e0c6945c00fe6d4baf2765bd52271540203a771afb48abae8f0b8d884"
     },
     {
       "location": "prepared",

@@ -1,5 +1,5 @@
 /** Public asset closure and assembly, independent of source acquisition or CLI dispatch. */
-import { containedPath } from './source-files.ts';
+import { containedPath } from '@cssearth/bake/objects/sources';
 import { sha256 } from '@cssearth/core/node';
 import { inventoryPublicAssets, requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { requireRecord as object } from '@cssearth/core';

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nessus-arrival.webp",
+      "bytes": 35802,
+      "sha256": "c8c1e4fdf0ac7008b7ea065bbba9ab28a8fc797b780eaf0306d47b4a8cc20d02"
+    },
+    {
+      "location": "public",
       "filename": "nessus-model-shadow-alpha@2x.webp",
       "bytes": 124690,
       "sha256": "b480af36d500d9f07fdac88e4250f409a04831b9ea23ddaeb8b4ced3624c8c9d"
@@ -30,6 +36,12 @@
       "filename": "nessus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "f152d3c06906153dbb056eb528cda98fe03895891755f1eecac768e240dd3fad"
     },
     {
       "location": "prepared",

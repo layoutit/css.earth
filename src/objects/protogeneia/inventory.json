@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "protogeneia-arrival.webp",
+      "bytes": 40586,
+      "sha256": "e7993c1eb016284d64907e65e49606a78c5a7b271e413940b547f4179dd71ea3"
+    },
+    {
+      "location": "public",
       "filename": "protogeneia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "protogeneia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 306,
+      "sha256": "f01135d3e3744da09715e5dc0e9c3e49ce8663987baed8b5f96725f09e31129f"
     },
     {
       "location": "prepared",

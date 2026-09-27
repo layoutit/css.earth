@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eurybates-arrival.webp",
+      "bytes": 33804,
+      "sha256": "0d0583db72ae8b2ec293899676244ad6ca62154548b5352f63fabbb7034cb7fc"
+    },
+    {
+      "location": "public",
       "filename": "eurybates-model-shadow-alpha@2x.webp",
       "bytes": 138840,
       "sha256": "6ec385e90e04e3b4df3361212228ea9dae5b0b7bd3b9feebf97bda0297763eb0"
@@ -30,6 +36,12 @@
       "filename": "eurybates-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 313,
+      "sha256": "f8a858cefe3f03d0e09a030768ec4a6a1f03678bbd6802953743693f90363f5d"
     },
     {
       "location": "prepared",

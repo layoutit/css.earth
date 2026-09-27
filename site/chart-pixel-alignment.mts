@@ -1,4 +1,4 @@
-import type { BrowserWindow } from './browser-types.mts';
+import type { BrowserWindow } from './browser/browser-types.mts';
 /** Align only visible charts. Hidden content owns no measurement frame, and
  * reading all positions before publishing avoids per-chart layout flushes. */
 export function createChartPixelAlignmentController(drawer: HTMLElement, windowTarget: BrowserWindow) {

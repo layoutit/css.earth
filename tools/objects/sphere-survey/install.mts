@@ -18,7 +18,7 @@ import { authorSourceRecords } from '../../sources/author-source-records.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../report-registration.mts';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '../surface-observations/published-comparison.mts';
-import { OBSERVER_CAMERAS_FILE } from '../terrestrial-layers/observer-cameras.mts';
+import { OBSERVER_CAMERAS_FILE } from '@cssearth/bake/objects/layers/terrestrial';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
 import { INVESTIGATION_SURVEY_DIRECTORY } from '../../investigations/investigation-survey.mts';
 import { writeHorizonsOperations } from '../sphere-horizons.mts';

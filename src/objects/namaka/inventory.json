@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "namaka-arrival.webp",
+      "bytes": 37194,
+      "sha256": "8ef2b9ebee8ddbb20d4a9220e7cef032d19490dd311d993d5dc5f193fb03b6ff"
+    },
+    {
+      "location": "public",
       "filename": "namaka-model-shadow-alpha@2x.webp",
       "bytes": 126224,
       "sha256": "bd264509b2581788522d39f27b20c62dc6add59a833bfae8848d644a1f1ca82e"
@@ -30,6 +36,12 @@
       "filename": "namaka-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "316b31c6b743b60f6aec962598effcd8bc5a6d9e5ae69a9ce3baa674d7ddba31"
     },
     {
       "location": "prepared",

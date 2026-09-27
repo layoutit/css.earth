@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201832795",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Soubiran et al. (2018): <i>Gaia</i> Data Release 2",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1804.09370"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201832795"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018A&A...616A...7S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201832795",
+      "label": "Astronomy & Astrophysics 616 A7"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S",
+      "checkedOn": "2026-09-26",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Soubiran et al. (2018), Astronomy & Astrophysics 616 A7",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 616 A7",
+  "creators": [
+    "C. Soubiran",
+    "G. Jasniewicz",
+    "L. Chemin",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

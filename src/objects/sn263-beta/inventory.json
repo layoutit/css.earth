@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sn263-beta-arrival.webp",
+      "bytes": 37762,
+      "sha256": "d14b88e4805cbc6d91215e3acdeca29958affb89d67f06c33ddbc4a1e834476e"
+    },
+    {
+      "location": "public",
       "filename": "sn263-beta-shape-shadow-alpha@2x.webp",
       "bytes": 226048,
       "sha256": "0722b1caa66c1569dfdf45107ae8844c76186db3a1566472352c3e5286e3cec0"
@@ -30,6 +36,12 @@
       "filename": "sn263-beta-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 315,
+      "sha256": "44da91d672e0a37226f2a105d12d56d2e198c3d1893b607eaee99a662330aac4"
     },
     {
       "location": "prepared",

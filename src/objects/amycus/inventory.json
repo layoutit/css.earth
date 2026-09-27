@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "amycus-arrival.webp",
+      "bytes": 36278,
+      "sha256": "9d1a4cb9f56ed0cbb9867416accd9252f33fe6abf6a590d047fd83e14d67ae3b"
+    },
+    {
+      "location": "public",
       "filename": "amycus-model-shadow-alpha@2x.webp",
       "bytes": 128406,
       "sha256": "ce723af7f69c39a8a5abd89b12ef4b373bf96e2e925cfa634989d35e578e6e04"
@@ -30,6 +36,12 @@
       "filename": "amycus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "8e68f8680d7c33a683a56fe0a5e0cfe51136e8380203fa645a6379815e60489c"
     },
     {
       "location": "prepared",

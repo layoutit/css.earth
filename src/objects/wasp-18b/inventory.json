@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "wasp-18b-arrival.webp",
+      "bytes": 31104,
+      "sha256": "c7c95dd3d4c5d53b131e7e6b12694f6ba51f270f335306559ef7fef3f7d77a11"
+    },
+    {
+      "location": "public",
       "filename": "wasp-18b-lens-temperature-0-89um.webp",
       "bytes": 232,
       "sha256": "e81d2f0796cdafa179599db6b3acf97859ae465527a4b250504d169d62535e54"
@@ -450,6 +456,12 @@
       "filename": "wasp-18b-surface-temperature-2-79um@2x.webp",
       "bytes": 39302,
       "sha256": "7d515cb17b2be2e66ffa4ca23a5cf6718ced8389c1d3b2786cede47d5c44c2d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 319,
+      "sha256": "4ed0a960be10584922639d46edbf0ef32ee541b2cc60ac797787056607f02fd0"
     },
     {
       "location": "prepared",

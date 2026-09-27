@@ -11,7 +11,7 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 
 export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
 /** The compiled acquisition operations. Loaded here because `sbmt/` is its own package scope, which cannot see the root `#preparation` imports. */
-export const acquisitionOperations = async () => ({...await import('#preparation/source-files'), ...await import('#preparation/operations-acquisition')});
+export const acquisitionOperations = async () => ({...await import('@cssearth/bake/objects/sources'), ...await import('#preparation/operations-acquisition')});
 export interface OracleSample { index: number; value: number }
 
 export async function readOracleFixture(name: string) {
@@ -52,7 +52,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
     const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);
     if (kernel) {
       // A shared kernel bank verifies its own pins (tools/kernel-banks/kernel-bank.mts).
-      const { kernelBankPaths } = await import('../kernel-banks/kernel-bank.mts');
+      const { kernelBankPaths } = await import('@cssearth/bake/objects/cameras');
       await kernelBankPaths(kernel[1]!, [kernel[2]!]);
       verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
       continue;

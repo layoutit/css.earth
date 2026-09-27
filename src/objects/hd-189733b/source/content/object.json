@@ -58,7 +58,21 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "atmosphere",
+        "label": "Gases detected by Webb",
+        "value": "Water, carbon dioxide, carbon monoxide and hydrogen sulfide",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-024-07760-y",
+          "url": "https://www.nature.com/articles/s41586-024-07760-y",
+          "label": "Fu et al. (2024), transmission-spectrum retrieval",
+          "checked": "2026-09-26",
+          "path": "source/science/fu-2024/HD189733b_NIRCam_spectrum.txt",
+          "locator": "Abstract and Figure 2; H₂O, CO₂, CO and H₂S"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -125,6 +139,66 @@
         "notes": "Brightness temperature fitted to eclipses; large patterns only, and blank where the data never looked. The hot spot sits 33° east of noon, 22° to 36° across the models the paper compares. Eclipse maps depend on timing: a few seconds' error moves it by degrees."
       },
       {
+        "id": "uncertainty",
+        "label": "Uncertainty",
+        "qualification": "Published map uncertainty · Lally et al. 2025 · standard deviation within the chosen fit",
+        "thumbnail": "hd-189733b-lens-uncertainty.webp",
+        "surface": "hd-189733b-surface-uncertainty@2x.webp",
+        "poles": "hd-189733b-poles-uncertainty@2x.webp",
+        "source": {
+          "id": "hd-189733b-lally-2025-map",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/15103479"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature uncertainty",
+          "labels": [
+            "0",
+            "5",
+            "10"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "5",
+              "10"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/15103479"
+        },
+        "notes": "Standard deviation of sampled brightness-temperature maps, conditional on the authors’ chosen model. It excludes timing and model-choice uncertainty; neighbouring cells are correlated. The temperature map’s observed-longitude mask is retained."
+      },
+      {
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of HD 189733b, from Eyes on Exoplanets; not an observation.",
@@ -145,7 +219,47 @@
     "titleKey": "settings",
     "controls": []
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-189733b-hst",
+      "titleKey": "reflectedLight",
+      "src": "/scenes/hd-189733b/hd-189733b-hst-albedo.svg",
+      "width": 306,
+      "height": 280,
+      "alt": "Six HST/STIS geometric albedo estimates from Evans et al. (2013), Table 1. Horizontal bars are wavelength coverage; vertical bars are the published asymmetric 1-sigma errors. The negative estimate is retained. No values beyond 570 nm are inferred.",
+      "source": {
+        "id": "hd-189733b-evans-2013-albedo",
+        "path": "../manifest.json",
+        "url": "https://arxiv.org/abs/1307.3239"
+      }
+    },
+    {
+      "id": "hd-189733b-cheops",
+      "titleKey": "broadbandAlbedo",
+      "src": "/scenes/hd-189733b/hd-189733b-cheops-albedo.svg",
+      "width": 306,
+      "height": 280,
+      "alt": "Krenn et al. (2023) geometric albedo 0.076 plus or minus 0.016, integrated over the CHEOPS 350-1100 nm passband after thermal correction. The horizontal bar spans the whole passband. The central error bar is a layout position, not a representative wavelength.",
+      "source": {
+        "id": "hd-189733b-krenn-2023-albedo",
+        "path": "../manifest.json",
+        "url": "https://arxiv.org/abs/2301.07731"
+      }
+    },
+    {
+      "id": "hd-189733b-jwst",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/hd-189733b/hd-189733b-jwst-transmission.svg",
+      "width": 306,
+      "height": 280,
+      "alt": "Fu et al. (2024) JWST NIRCam transmission spectrum: all 139 measured bins, including overlapping wavelength coverage, with their errors. Gold line: deposited free-retrieval median model. Transit depth is the fraction of starlight blocked during transit. No fitting or offsets are added here.",
+      "source": {
+        "id": "hd-189733b-fu-2024-spectrum",
+        "path": "../manifest.json",
+        "url": "https://www.nature.com/articles/s41586-024-07760-y"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",
@@ -158,6 +272,12 @@
       "role": "dataset",
       "description": "Map and ThERESA configuration, Zenodo",
       "href": "https://zenodo.org/records/15103479"
+    },
+    {
+      "label": "Atmosphere",
+      "role": "facts",
+      "description": "Fu et al. (2024), Webb transmission spectrum",
+      "href": "https://www.nature.com/articles/s41586-024-07760-y"
     }
   ],
   "provenance": {

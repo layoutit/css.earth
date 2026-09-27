@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { bindNavigationIntent, createNavigationFragments, navigationFragments, type NavigationFragments } from '../navigation/navigation-fragments.mts';
 
 // A fragment body is "<body data-object-shell>|<stage data-object-id>" for this parser fixture.
@@ -72,6 +72,23 @@ test('every module copy in a window reaches the same fragment cache', async () =
   assert.equal(navigationFragments(windowTarget), fragments);
   assert.equal(Reflect.apply(shared, undefined, [windowTarget]), fragments);
   assert.notEqual(navigationFragments(other), fragments, 'Each window owns its own cache');
+});
+
+test('a released lease drops document access without retiring another consumer or its encoded cache', async () => {
+  const fragments = createNavigationFragments({ windowTarget: fixtureWindow().windowTarget,
+    fetchPage: async () => new Response('lutetia') });
+  const [content, preview] = await Promise.all([fragments.get('lutetia'), fragments.get('lutetia')]);
+  content.release();
+  assert.throws(() => content.document, /has been released/u);
+  content.release();
+  assert.equal(fragments.inspect().activeDocuments, 1);
+  assert.equal(preview.document.body.dataset.objectShell, 'lutetia');
+  preview.release();
+  assert.equal(fragments.inspect().activeDocuments, 0);
+  const next = fragments.peek('lutetia');
+  assert.ok(next, 'Encoded HTML remains available without retaining parsed documents');
+  assert.equal(next.document.body.dataset.objectShell, 'lutetia');
+  next.release();
 });
 
 test('failed, mismatched and cancelled requests never poison the shared fragment', async () => {

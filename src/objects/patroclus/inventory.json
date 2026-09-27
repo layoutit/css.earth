@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "patroclus-arrival.webp",
+      "bytes": 32490,
+      "sha256": "9f9471430082f5fbdebf4dec579ad5f8513c52d6841cf0269f1c7932508278e2"
+    },
+    {
+      "location": "public",
       "filename": "patroclus-model-shadow-alpha@2x.webp",
       "bytes": 139072,
       "sha256": "72b5bdd50c7c707542c09ec685b891f3fbd8c09914bccee1c19f56dcbc4d03bc"
@@ -30,6 +36,12 @@
       "filename": "patroclus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 315,
+      "sha256": "dbe4485c2f1d2ecd2661cdc652f85600371b103c079c2b670cbe899e58df296a"
     },
     {
       "location": "prepared",

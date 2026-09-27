@@ -6,7 +6,7 @@ import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-nav
 import type { PreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { MapViewport } from './surface-map-context.mts';
+import type { MapViewport } from './minimap/surface-map-context.mts';
 type Optics = ReturnType<ObjectWorldNavigation['optics']>;
 type FramingFrame = Pick<PreparedWorldCameraFrame, 'referenceFrame' | 'epochJdTt' | 'originM' | 'bodyRadiusM'>;
 interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM: PositionM; cameraToReference: readonly number[]; }

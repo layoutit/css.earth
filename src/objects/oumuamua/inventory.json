@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "oumuamua-arrival.webp",
+      "bytes": 27924,
+      "sha256": "acb6b457596cf585475e576de229555b0451df7374df7f15b138341b6b235d7c"
+    },
+    {
+      "location": "public",
       "filename": "oumuamua-model-shadow-alpha@2x.webp",
       "bytes": 105420,
       "sha256": "66bada13af6815a28613ef5e41302374480769e11debb4362d14c9509870a7fa"
@@ -30,6 +36,12 @@
       "filename": "oumuamua-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 312,
+      "sha256": "c10d7e920f1fe6189bf1f010682f4f03f73fb47925d34d1789527b9f2f4f33d6"
     },
     {
       "location": "prepared",

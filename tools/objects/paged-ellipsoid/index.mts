@@ -1,4 +1,4 @@
-import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
+import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { readJsonSource } from '../../sources/source-values.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

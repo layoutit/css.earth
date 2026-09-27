@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leda-38-arrival.webp",
+      "bytes": 40458,
+      "sha256": "a2aa8cab36549bb352c1969dcd6fb7690c0328e34e8a48fc9a9a8f2ebf50ae72"
+    },
+    {
+      "location": "public",
       "filename": "leda-38-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "leda-38-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "b4046436ed1923e76e9df7b373211d7d335444c7bbb817976e085af10d3dfc92"
     },
     {
       "location": "prepared",

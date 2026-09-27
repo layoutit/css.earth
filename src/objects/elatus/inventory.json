@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "elatus-arrival.webp",
+      "bytes": 37696,
+      "sha256": "b1577e8e6dd2c152645949a021f9bfbb90c44231f12f666cb723e68135d4d36a"
+    },
+    {
+      "location": "public",
       "filename": "elatus-model-shadow-alpha@2x.webp",
       "bytes": 129158,
       "sha256": "c49a0eee3c7d7001464de62cbc0c2b6def1a1a93995c6b93f89fef88f4cc66d9"
@@ -30,6 +36,12 @@
       "filename": "elatus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "8337d7aabb81d0de3129ad00486c26e0db3ffcc349b08690744e27c8d71a93c8"
     },
     {
       "location": "prepared",

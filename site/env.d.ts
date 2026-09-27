@@ -13,6 +13,10 @@ declare global {
     __cssEarth?: SceneDiagnostics;
     __cssEarthUniverse?: WorldContextDiagnostics;
     __cssEarthRecorder?: ReturnType<typeof createDiagnosticRecorder>;
+    /** Explicit semantic navigation for local performance recordings only. */
+    __cssEarthControl?: {
+      fly(id: string): Promise<{ source: 'scene-router'; action: 'fly'; objectId: string; url: string }>;
+    };
     __sun?: ObjectRuntimeDiagnostics;
     __mercury?: ObjectRuntimeDiagnostics;
     __venus?: ObjectRuntimeDiagnostics;

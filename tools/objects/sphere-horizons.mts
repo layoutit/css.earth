@@ -18,7 +18,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { horizonsRows, loadObserverCameraInputs, observerRowValues, rowJd, zimpolExposure } from './terrestrial-layers/observer-cameras.mts';
+import { horizonsRows, loadObserverCameraInputs, observerRowValues, rowJd, zimpolExposure } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 export const HORIZONS_API = 'https://ssd.jpl.nasa.gov/api/horizons.api';

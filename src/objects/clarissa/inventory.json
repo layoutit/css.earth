@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "clarissa-arrival.webp",
+      "bytes": 39912,
+      "sha256": "a494d37f909a9c760cd4f48899cc447376664f9a5878c8229eda01856a5a3206"
+    },
+    {
+      "location": "public",
       "filename": "clarissa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "clarissa-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "f2c30822f0dcf3b230ecb3e7e1f0e2a1cda27fa6e023afdaa7c775d7bf79cc98"
     },
     {
       "location": "prepared",

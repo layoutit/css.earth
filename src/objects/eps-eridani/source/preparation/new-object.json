@@ -1,0 +1,56 @@
+{
+  "id": "eps-eridani",
+  "name": "ε Eridani",
+  "system": "ε Eridani system",
+  "description": "K dwarf 3.2 parsecs away, 5,039 K, with a Jupiter-mass planet.",
+  "target": "eps Eri",
+  "gaia": "5164707970261890560",
+  "paper": {
+    "url": "https://arxiv.org/abs/1112.0447",
+    "credit": "Baines & Armstrong (2012), ApJ 744, 138"
+  },
+  "radius": {
+    "value": 0.74,
+    "source": "Baines & Armstrong (2012), ApJ 744, 138, section 3: the Navy Optical Interferometer limb-darkened angular diameter 2.153 ± 0.028 mas at the parallax of Benedict et al. (2006)",
+    "url": "https://arxiv.org/abs/1112.0447",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.82,
+    "source": "Thompson et al. (2025), AJ 170, 301, the stellar mass their orbit fit of ε Eridani b adopts, via the NASA Exoplanet Archive default parameter set",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5039,
+    "source": "Baines & Armstrong (2012), ApJ 744, 138, section 3: from the interferometric angular diameter and the bolometric flux",
+    "url": "https://arxiv.org/abs/1112.0447",
+    "uncertainty": 126
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "ε Eridani is a 5,039 K star 3.2 parsecs away with 1 known planet.",
+    "introduction": "ε Eridani is a star of 5,039 K 3.2 parsecs away. Its planet is b, placed on the orbit its paper measured.",
+    "locator": "Baines & Armstrong (2012), ApJ 744, 138, section 3: θLD 2.153 ± 0.028 mas, R 0.74 ± 0.01 solar radii, Teff 5039 ± 126 K; NASA Exoplanet Archive ps default row (THOMPSON_ET_AL_2025): st_mass 0.82",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Epsilon_Eridani",
+      "title": "Epsilon Eridani",
+      "revision": "1376485045",
+      "card": "Epsilon Eridani, proper name Ran, is a star in the southern constellation of Eridanus.",
+      "introduction": "At a declination of −9.46°, it is visible from most of Earth's surface."
+    }
+  },
+  "notes": [
+    "The star's magnetic maps (Jeffers et al. 2014, 2017, 2022) are published only as figures, so none is drawn",
+    "The planet has not been imaged: JWST/NIRCam coronagraphy found no point source (Llop-Sayson et al. 2025, arXiv:2508.08463). Earlier orbit fits put its tilt between 30 and 89 degrees; Thompson et al. (2025) measure 40 +6/-5 degrees",
+    "The spin axis is a display convention: no source used here measures its orientation"
+  ],
+  "radialVelocity": {
+    "value": 16.376,
+    "uncertainty": 0.0001,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5164707970261890560 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+  },
+  "order": 1841
+}

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lydia-arrival.webp",
+      "bytes": 40584,
+      "sha256": "775b34422a372b5e170600c4519261acc9abba0256bffb8dc9dd2d5fc6c75b0e"
+    },
+    {
+      "location": "public",
       "filename": "lydia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "lydia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "56a6a0e15047984b002b223d4a572406046023fcba33cdb9e8a37cdca29b7a00"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "adeona-arrival.webp",
+      "bytes": 32292,
+      "sha256": "df966deaeaf4156b385fda93df25aef800132d835b6ab10e44b84f82a1e67143"
+    },
+    {
+      "location": "public",
       "filename": "adeona-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "adeona-zimpol-thumbnail.webp",
       "bytes": 1676,
       "sha256": "0e089a7378345fe00697b08820be10c4af3b0ad1794846142dcc770189f9bb39"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "e6db54ed4620796e45512676fae619017d060533d316c3cea90e09feb6049c57"
     },
     {
       "location": "prepared",

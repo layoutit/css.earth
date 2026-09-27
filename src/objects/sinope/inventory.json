@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sinope-arrival.webp",
+      "bytes": 38852,
+      "sha256": "7714fcfe02852b11c9fc3190c8db5648b9f1a3e312aa4512af7f9c37c2a944a6"
+    },
+    {
+      "location": "public",
       "filename": "sinope-model-shadow-alpha@2x.webp",
       "bytes": 127254,
       "sha256": "1db76b99aae950420cde6881c76d4b4a7aa345a2dd8e6369dbf433360e2294f7"
@@ -30,6 +36,12 @@
       "filename": "sinope-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "63bc3a1e6f7fdce2ff9ae18ba707300637746b63f8b2ab81898ce694f9b1c307"
     },
     {
       "location": "prepared",

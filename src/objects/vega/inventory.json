@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vega-arrival.webp",
+      "bytes": 31504,
+      "sha256": "8223d027627a1431cffa26395c701d2c3426a2f7f24f256bf4754627a5968700"
+    },
+    {
+      "location": "public",
       "filename": "vega-lens-color.webp",
       "bytes": 162,
       "sha256": "1965309f57089dfcb20d526b3888e949d1c901108e0046a26088279679392317"
@@ -24,6 +30,12 @@
       "filename": "vega-surface-color@2x.webp",
       "bytes": 1830,
       "sha256": "65018073fe6546dd617d0544eeb5951b3c285910d7319d3ceb24e4e5f8a27242"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 362,
+      "sha256": "d50eb7304ced28ce5c0d34ae9c20576aefdfbadd1d4e614e41de469a2cd7d2d7"
     },
     {
       "location": "prepared",
