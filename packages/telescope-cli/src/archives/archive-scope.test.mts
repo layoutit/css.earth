@@ -1,5 +1,5 @@
 /** The archive clients, reducers and ledger builders are generic: which shipped bodies a ledger names or searches by name is data
- * beside that archive's programs (`src/archives/<archive>/`, or `tools/objects/<archive>/` until it moves), never a string or key
+ * beside that archive's programs or code (`src/archives/<archive>/`, or `tools/objects/<archive>/` until it moves), never a string or key
  * in this package's code.
  *
  * This is a heuristic scan, not a proof. It catches a shipped id written as a whole string or template segment, as any word of
@@ -81,6 +81,10 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
   },
   'naco/archive-ledger.mts': {
     'd3a9ab20cd633d0085b52f932da8f065fec7ea5c4120dad44d39510bca202998': ['europa'], // NACO guide intro
+  },
+  // The Julia language's release folder, not the asteroid 89 Julia.
+  'interferometry/toolchain.mts': {
+    '7acbee0363ed16c1c8c7e89de22fc4395b1bf500ebced48c6dc4db65123b4666': ['julia'], // the unpacked Julia 1.12.7 release
   },
   'naco/reduce.mts': {
     '87a51fb9103ac436a51201277d7a04ee0d06bd87717a7adbe09edc55b39fbd27': ['echo'], // shell echo

@@ -279,7 +279,7 @@
         "assertion": "The owner writes output.product.json and the focused public-path test reopens and verifies every recorded output pin."
       },
       "owner": "packages/bake/src/objects/layers/observation/interferometry/oifits-rows.ts#readChannelRows",
-      "independentCheck": "tools/objects/interferometry/fits-table.oracle.test.mts",
+      "independentCheck": "packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts",
       "limit": "OIFITS squared-visibility diagnostics only; inspection does not assert a reconstructed image."
     },
     {

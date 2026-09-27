@@ -555,7 +555,7 @@
       "rice": "refused: No tile-compressed FITS image.",
       "fileHdus": "15380e76f33a583d2308ea19bf44b8637a8b42df42feb3eb35c9589f770d7f06"
     },
-    "tools/objects/interferometry/fixtures/polaris-rotir-grid.fits": {
+    "packages/telescope-cli/src/archives/interferometry/fixtures/polaris-rotir-grid.fits": {
       "bytes": "31680",
       "hdus": "7eaa8b80ff30e4f501f0228d2f1d84ef2d141d695e2d0813523d07e7e06234f2",
       "image@0": "55014b9c84349099f3117a31aff84b899098f301d6309ca2002653ae5f41191d",
@@ -565,7 +565,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "e2be68549c39f2547274b6c2b9a6fd51962dbbf73b7de8f2cae384931665ae9a"
     },
-    "tools/objects/interferometry/fixtures/polaris-rotir-sky.fits": {
+    "packages/telescope-cli/src/archives/interferometry/fixtures/polaris-rotir-sky.fits": {
       "bytes": "77760",
       "hdus": "0976ed3ec36d8a87b13f6c8f197626f353d8f12c4a53001f1642d436f504e0bc",
       "image@0": "9a316f1c268029e83537a4db5079b664daceee718fb5b3d96f2d4dd2dbae50cf",

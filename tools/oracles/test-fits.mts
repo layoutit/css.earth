@@ -19,7 +19,7 @@ const run = (args: string[], command = process.execPath) => {
 run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tools/oracles/fits/core.oracle.test.mts', 'tools/oracles/fits/sky-orientation.oracle.test.mts', 'tools/oracles/fits/sky-projection.oracle.test.mts',
   'tools/oracles/fits/file-region.oracle.test.mts', 'tools/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
-  'tools/objects/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
+  'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
   'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tools/objects/terrestrial-layers/${name}.test.mts`)];

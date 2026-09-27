@@ -7,7 +7,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readReconstruction } from '../../interferometry/beam-convolve.mts';
+import { readReconstruction } from '@cssearth/telescope-cli/archives/interferometry/beam-convolve';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 

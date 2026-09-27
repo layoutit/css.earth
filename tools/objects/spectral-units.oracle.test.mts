@@ -3,7 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { brightnessTemperatureKelvin, planckIntensity } from './interferometry/alma-disc-selfcal.mts';
+import { brightnessTemperatureKelvin, planckIntensity } from '@cssearth/telescope-cli/archives/interferometry/alma-disc-selfcal';
 import { rayleighPerSample } from '@cssearth/telescope-cli/archives/hst/line-stack-reduction';
 
 const fixture = await readOracleFixture('physical-units/spectral.json');
