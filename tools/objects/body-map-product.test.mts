@@ -74,11 +74,13 @@ test('a resolution limit looks at both axes of the beam', () => {
 
 test('no production code averages placed maps except through the policy', async () => {
   const { readFile, readdir } = await import('node:fs/promises');
-  const root = new URL('./', import.meta.url), offenders: string[] = [];
-  for (const entry of await readdir(root, { recursive: true })) {
-    if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
-    if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(entry);
-  }
+  const offenders: string[] = [];
+  // The telescope command's modules left tools/objects for packages/telescope-cli; they are production code here too.
+  for (const [root, prefix] of [[new URL('./', import.meta.url), ''], [new URL('../../packages/telescope-cli/src/', import.meta.url), 'telescope-cli/']] as const)
+    for (const entry of await readdir(root, { recursive: true })) {
+      if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
+      if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(`${prefix}${entry}`);
+    }
   // The slit-scan stage compares trial placements with the averaging primitive as a diagnostic; its shipped map goes through the policy.
   assert.deepEqual(offenders.filter(entry => entry !== 'hst/slit-scan-map.mts'), []);
 });
