@@ -1,7 +1,7 @@
 // Pin source-backed notes for named surface features: each IAU Gazetteer feature id is joined to its Wikidata item
 // (property P2824) and, when an English Wikipedia article exists, to that article's lead summary. The result is a
 // repository-pinned document beside the Gazetteer archive; preparation merges it into the feature catalogue and the
-// tooltip shows the note with its licence. Run through tools/prepare-feature-notes.mts.
+// tooltip shows the note with its licence. Run through packages/bake/cli/prepare-feature-notes.mts.
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseDbf } from './dbf.ts';

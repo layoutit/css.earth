@@ -1,5 +1,5 @@
 // Pin source-backed feature notes for one or more objects. Usage:
-//   node tools/prepare/prepare-feature-notes.mts <objectId> [...] [--wikidata <saved SPARQL result>]
+//   node packages/bake/cli/prepare-feature-notes.mts <objectId> [...] [--wikidata <saved SPARQL result>]
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadArticleMap, prepareFeatureNotes } from '@cssearth/bake/objects/surface-features';

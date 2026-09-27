@@ -10,7 +10,7 @@ import { encodeLossyWebp, LOSSY_WEBP } from '@cssearth/bake/raster';
  * and preparation are explicit maintenance operations; normal builds reuse the
  * committed WebP files. `--only=a,b` limits the run to those records.
  */
-const root = path.resolve(import.meta.dirname, '../..');
+const root = path.resolve(import.meta.dirname, '../../..');
 const records = path.join(root, 'site/source/facilities/photograph-records.json');
 const output = path.join(root, 'public/shell/facility-renders');
 const cache = process.env.CSSEARTH_PHOTO_CACHE ?? path.join(root, 'output/facility-photos');

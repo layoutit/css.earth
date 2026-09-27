@@ -537,7 +537,7 @@ These still set their own encoding:
   maps.
 
 To repeat the measurement, run
-[`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
+[`packages/bake/cli/lossy-lane-sweep.mts`](../packages/bake/cli/lossy-lane-sweep.mts)
 on the files a lane change replaces.
 
 [raster-output.ts](../packages/bake/src/objects/layers/terrestrial/raster-output.ts) writes

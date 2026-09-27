@@ -1,6 +1,6 @@
 // Measure the lossy lane against the files it replaces: for each image, its size today and, at qualities around the lane's,
 // the encoded size and the pixels pixelmatch flags at threshold 0.1. The table in docs/surface-preparation.md is its output.
-// node tools/prepare/lossy-lane-sweep.mts <image>...
+// node packages/bake/cli/lossy-lane-sweep.mts <image>...
 import sharp from 'sharp';
 import pixelmatch from 'pixelmatch';
 import { stat } from 'node:fs/promises';
@@ -9,7 +9,7 @@ import { LOSSY_WEBP } from '@cssearth/bake/raster';
 
 const qualities = [LOSSY_WEBP.quality - 5, LOSSY_WEBP.quality, LOSSY_WEBP.quality + 5];
 const files = process.argv.slice(2);
-if (!files.length) throw new Error('Usage: node tools/prepare/lossy-lane-sweep.mts <image>...');
+if (!files.length) throw new Error('Usage: node packages/bake/cli/lossy-lane-sweep.mts <image>...');
 const megabytes = (bytes: number) => `${(bytes / 1e6).toFixed(2)} MB`;
 for (const file of files) {
   const { data, info } = await sharp(file, { limitInputPixels: false }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
