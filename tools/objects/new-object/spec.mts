@@ -34,6 +34,9 @@
  *
  * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
+ * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
+ * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
+ * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
  * `radius` and `mass` may be "gaia-flame": the Gaia DR3 FLAME value of the same source, an archive product. `gravity` defaults to
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a
  * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records; ADS links are cited by
@@ -56,6 +59,8 @@ export interface StarSpec {
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius: Cited | 'gaia-flame'; readonly mass: Cited | 'gaia-flame'; readonly temperature: Cited;
   readonly gravity?: Cited; readonly radialVelocity?: Cited;
+  /** Parsecs, cited: replaces Gaia DR3's parallax distance (spec header). */
+  readonly distance?: Cited;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
@@ -94,10 +99,12 @@ function draftQuotes(value: unknown, label: string): DraftQuotes {
   const quote = (key: 'card' | 'introduction') => { if (input[key] === undefined) return {}; const text = requireString(input[key], `${label}.${key}`); if (text.length > 300) throw new RangeError(`${label}.${key} is ${text.length} characters; a quote is 300 at most.`); return { [key]: text }; };
   return { url, title: requireString(input.title, `${label}.title`), revision: requireString(input.revision, `${label}.revision`), ...quote('card'), ...quote('introduction') };
 }
+export const HOSTED_EPOCHS = ['periastron', 'inferior-conjunction', 'superior-conjunction'] as const;
+export type HostedEpoch = typeof HOSTED_EPOCHS[number];
 export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
   | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string; readonly measured?: true }
-  | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: 'periastron' | 'inferior-conjunction'; readonly source: string; readonly url: string }
+  | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: HostedEpoch; readonly source: string; readonly url: string }
   | { readonly record: true; readonly source: string; readonly url: string };
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
@@ -137,11 +144,12 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
     const elements = requireRecord(o.elements, `${label}.elements`), unknown = Object.keys(elements).filter(key => !ELEMENT_KEYS.includes(key));
     if (unknown.length) throw new TypeError(`${label}.elements: unknown ${unknown.join(', ')} (${ELEMENT_KEYS.join(', ')}).`);
     for (const key of ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'transitTimeBmjdTdb']) requireFiniteNumber(elements[key], `${label}.elements.${key}`);
-    // An eccentric orbit says what its reference epoch is: a periastron passage or a transit (inferior conjunction).
+    // An eccentric orbit says what its reference epoch is: a periastron passage, the body in front of its host (a transit or primary
+    // eclipse, inferior conjunction), or behind it (an occultation or secondary eclipse, superior conjunction), as the paper times it.
     const epoch = o.epoch === undefined ? undefined : requireString(o.epoch, `${label}.epoch`);
-    if (epoch !== undefined && epoch !== 'periastron' && epoch !== 'inferior-conjunction') throw new TypeError(`${label}.epoch is periastron or inferior-conjunction, not ${epoch}.`);
-    if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (periastron or inferior-conjunction).`);
-    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as 'periastron' | 'inferior-conjunction' } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
+    if (epoch !== undefined && !(HOSTED_EPOCHS as readonly string[]).includes(epoch)) throw new TypeError(`${label}.epoch is ${HOSTED_EPOCHS.join(', ')}, not ${epoch}.`);
+    if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (${HOSTED_EPOCHS.join(', ')}).`);
+    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as HostedEpoch } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
   }
   throw new TypeError(`${label} needs whereistheplanet, archive, elements or record.`);
 }
@@ -189,7 +197,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -218,6 +226,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     temperature: cited(input.temperature, at('temperature'), [1000, 60000]),
     ...(input.gravity === undefined ? {} : { gravity: cited(input.gravity, at('gravity'), [-1, 9]) }),
     ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), [-1000, 1000]) }),
+    ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e7]) }),
     ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),
