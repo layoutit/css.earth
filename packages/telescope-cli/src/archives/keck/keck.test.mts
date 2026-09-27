@@ -226,7 +226,7 @@ test('the reduction record names the frames it read, the channel, and the two se
 });
 
 test('what the comparison establishes is tied to the exact product it checked', () => {
-  const evidence = archiveAgreement('kb231209_00085_icubed.fits', 'tools/objects/keck/programs/m42.lev1-icubed.reproduction.json', '/KCWI/2023/20231209/lev1/redux/x_icubed.fits',
+  const evidence = archiveAgreement('kb231209_00085_icubed.fits', 'packages/telescope-cli/src/archives/keck/programs/m42.lev1-icubed.reproduction.json', '/KCWI/2023/20231209/lev1/redux/x_icubed.fits',
     { extensions: [{ extname: 'PRIMARY', identicalShare: 0.04095, correlation: 0.9597 }, { extname: 'MASK', identicalShare: 1, correlation: Number.NaN }],
       samePipelineVersion: false, versions: "ours 1.3.1, the archive's 1.0.2" });
   assert.equal(evidence.kind, 'archive-agreement');
