@@ -27,6 +27,8 @@ implementations; there is no separate platform mount or codec.
 
 Saved views use one binary format (version 5), with a physical rotation, either
 a distance or translated body centre, an explicit epoch and playback state.
+An optional optical framing scale uses flag `0x100`; older version-5 links omit
+it and retain scale 1. It preserves the arrival perspective when a view reloads.
 Capture has no angular-camera fallback, and restoration requires the same epoch.
 Versions 1–4, the former JSON format and the unused Galaxio codec are unsupported. Dataset links
 use `?dataset=<id>`; `#dataset=...` is an ordinary fragment and does not select a

@@ -26,10 +26,14 @@ export interface WorldCameraPose {
   /** Camera-to-reference orientation of right-handed camera axes (+x right, +y up, +z toward the eye): the CSS camera axes with y
    * reversed, since CSS 3D space is left-handed and a quaternion carries only proper rotations. */
   readonly pose: PhysicalCameraPose;
+  /** Optical framing relative to the prepared viewport lens; 1 keeps its original field of view. */
+  readonly projectionScale?: number;
 }
 
 export interface WorldCameraViewport {
   readonly focalPixels: number;
+  /** Scale already included in focalPixels. */
+  readonly projectionScale?: number;
   /** Measured layout dimensions, transported with the camera rather than read after frame writes. */
   readonly widthPixels?: number;
   readonly heightPixels?: number;
@@ -37,6 +41,18 @@ export interface WorldCameraViewport {
   readonly principalOffsetPixels: readonly [number, number];
   /** The top band of the stage the shell header covers, in CSS pixels: scene labels stay below it. */
   readonly coveredTopPixels?: number;
+}
+
+export function cameraProjectionScale(value = 1): number {
+  if (!Number.isFinite(value) || value <= 0) throw new TypeError('Camera projection scale must be positive and finite.');
+  return value;
+}
+
+/** Resolve the camera lens once, including when a different scene supplied the viewport. */
+export function worldCameraViewport<T extends WorldCameraViewport>(world: Pick<WorldCameraPose, 'projectionScale'>, viewport: T): T {
+  const scale = cameraProjectionScale(world.projectionScale);
+  const previous = cameraProjectionScale(viewport.projectionScale);
+  return scale === previous ? viewport : { ...viewport, focalPixels: viewport.focalPixels * scale / previous, projectionScale: scale };
 }
 
 export interface LocalWorldCameraPresentation {
@@ -74,11 +90,11 @@ export function worldCameraFromCenteredPresentation(
     local.distanceUnits * axis.sinTheta * axis.radial[0],
     local.distanceUnits * axis.sinTheta * axis.radial[1],
     -local.distanceUnits * axis.cosTheta,
-  ] }, frame);
+  ] }, frame, viewport.projectionScale);
 }
 
 /** Reverse the full translated presentation; unlike the centred dolly this does not re-aim the observer. */
-export function worldCameraFromPresentation(local: LocalWorldCameraPresentation, frame: PreparedWorldCameraFrame): WorldCameraPose {
+export function worldCameraFromPresentation(local: LocalWorldCameraPresentation, frame: PreparedWorldCameraFrame, projectionScale = 1): WorldCameraPose {
   const focus = focusFrame(frame);
   validateWorldRotation(local.rotation);
   validateWorldPosition(local.bodyCenterUnits);
@@ -89,11 +105,14 @@ export function worldCameraFromPresentation(local: LocalWorldCameraPresentation,
     positionM: [x, -y, z],
     orientationXyzw: worldQuaternionFromRotation(flipWorldRotationY(cameraToPresentation)),
   }, focus);
-  return Object.freeze({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, pose });
+  cameraProjectionScale(projectionScale);
+  return Object.freeze({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, pose,
+    ...(projectionScale === 1 ? {} : { projectionScale }) });
 }
 
 /** Resolve one observer into any selected object's prepared presentation. No camera or DOM is allocated. */
 export function presentWorldCamera(world: WorldCameraPose, frame: PreparedWorldCameraFrame, viewport: WorldCameraViewport): WorldCameraPresentation {
+  viewport = worldCameraViewport(world, viewport);
   validateViewport(viewport);
   const focus = focusFrame(frame);
   if (world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) {

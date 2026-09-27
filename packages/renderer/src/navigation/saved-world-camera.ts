@@ -1,7 +1,7 @@
 import type { SharedView } from './view-url.js';
 import { parseSharedView, formatSharedView } from './view-url.js';
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
-import { worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
+import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraViewport } from './world-camera.js';
 
 /** Resolve a validated saved camera before flight so Back lands at its exact view. */
 export function savedWorldCamera(saved: SharedView, frame: PreparedWorldCameraFrame, viewport: WorldCameraViewport) {
@@ -13,8 +13,8 @@ export function savedWorldCamera(saved: SharedView, frame: PreparedWorldCameraFr
     components[9], components[2], components[6], components[10]];
   if (camera.bodyCenterKilometers) {
     const units = camera.bodyCenterKilometers.map(value => value * 1000 / frame.metersPerUnit);
-    return worldCameraFromPresentation({ rotation, bodyCenterUnits: [units[0], units[1], units[2]] }, frame);
+    return worldCameraFromPresentation({ rotation, bodyCenterUnits: [units[0], units[1], units[2]] }, frame, camera.projectionScale);
   }
   return worldCameraFromCenteredPresentation({ rotation,
-    distanceUnits: camera.distanceKilometers * 1000 / frame.metersPerUnit }, frame, viewport);
+    distanceUnits: camera.distanceKilometers * 1000 / frame.metersPerUnit }, frame, worldCameraViewport(camera, viewport));
 }

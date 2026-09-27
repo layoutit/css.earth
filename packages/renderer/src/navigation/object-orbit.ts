@@ -17,7 +17,7 @@ import { prepareSurfaceTargetRotation } from './surface-target.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 import { prepareFocusFlight } from './prepared-focus.js';
 import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
-export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
+export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; projectionScale?: number; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & ReturnType<PerspectiveDolly['state']>;
 export interface OrbitPublication extends CameraAngles { worldCamera: WorldCameraPose; sceneMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection: PhysicalProjection; distance: number; focal: number; viewportWidth: number; viewportHeight: number; stageViewport: WorldCameraViewport; principalOffset: readonly number[]; body: PerspectivePublication['body']; levelOfDetail: ReturnType<PerspectiveDolly['levelOfDetail']>; }
 export interface RetainedOrbitOptions { framePresenter: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; directionalSunPlan?: DirectionalSunPlan | null; worldContext: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport: import('./camera-viewport.js').CameraViewport; objectId: string; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; revealGroups?: readonly (readonly HTMLElement[])[];
@@ -355,11 +355,12 @@ export function createRetainedCubicSkyOrbit({
         throw error;
       }
     },
-    setState({ pitch, controlPitch = pitch, controlYaw, zoom, distance, distanceKilometers, bodyCenterKilometers, pose }: OrbitStateUpdate = {}): OrbitState {
+    setState({ pitch, controlPitch = pitch, controlYaw, zoom, distance, distanceKilometers, bodyCenterKilometers, pose, projectionScale }: OrbitStateUpdate = {}): OrbitState {
       if (lifetime.disposed) return this.state();
       try {
       cameraMotion.cancel();
       controls.stop();
+      if (projectionScale !== undefined || pose !== undefined) camera.setProjectionScale(projectionScale ?? 1);
       camera.restore({
         ...(controlPitch === undefined ? {} : { rotX: controlPitch }),
         ...(controlYaw === undefined ? {} : { rotY: controlYaw }),
@@ -386,6 +387,7 @@ export function createRetainedCubicSkyOrbit({
       const state = this.state();
       const bodyCenterKilometers = state.bodyCenterKilometers;
       return { distanceKilometers: state.distanceKilometers, pose: state.pose,
+        ...(state.projectionScale === 1 ? {} : { projectionScale: state.projectionScale }),
         ...(bodyCenterKilometers === undefined ? {} : { bodyCenterKilometers }) };
     },
     skyState() {

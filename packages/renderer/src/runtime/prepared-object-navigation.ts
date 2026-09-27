@@ -1,7 +1,7 @@
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { presentWorldCamera, worldCameraSilhouetteDiameter } from '../navigation/world-camera.js';
+import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { viewSunDirectionToPhysicalLightDirection } from '../solar-system/directional-sun-coordinate.js';
@@ -10,6 +10,7 @@ import { resolvePreparedPresentation, selectedPreparedVariant } from '../renderi
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
 import type { CameraViewport } from '../navigation/camera-viewport.js';
+import { selectPreparedResponsiveZoom } from '../navigation/camera-layout.js';
 
 export interface ObjectPreparationView { world: WorldCameraPose; viewport: WorldCameraViewport; }
 
@@ -45,6 +46,11 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
 /** One readiness contract for both already-decoded and deferred object packages. */
 export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => Promise<ObjectRuntimeDefinition>, frame: PreparedWorldCameraFrame) {
   return Object.freeze({ frame,
+    async framingRadius(viewport: CameraViewport, mobile: boolean, signal: AbortSignal) {
+      const { camera } = await abortable(load(signal), signal);
+      const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
+      return fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
+    },
     async prepare({ signal, getView, cameraViewport, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
       signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; ownerDocument?: Document;
     }) {
@@ -67,7 +73,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
         return Object.freeze({ frame, definition, resources, tree, prepareView, destroy,
           projection(view: ObjectPreparationView) {
             const { rotation, bodyCenterUnits } = presentWorldCamera(view.world, frame, view.viewport);
-            return physicalProjectionFromCamera(rotation, bodyCenterUnits, definition.camera.sceneScale, view.viewport);
+            return physicalProjectionFromCamera(rotation, bodyCenterUnits, definition.camera.sceneScale, worldCameraViewport(view.world, view.viewport));
           },
         });
       } catch (error) {

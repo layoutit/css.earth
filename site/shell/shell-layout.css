@@ -131,6 +131,35 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   pointer-events: none;
 }
 
+.explorer-navigation-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.explorer-navigation-progress > span {
+  display: block;
+  width: 25%;
+  height: 100%;
+  background: #bdbdbd;
+  animation: destination-loading 1.4s ease-in-out infinite paused;
+}
+
+.explorer-navigation-progress[aria-hidden="false"] { opacity: 0.55; }
+.explorer-navigation-progress[aria-hidden="false"] > span { animation-play-state: running; }
+
+@keyframes destination-loading {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explorer-navigation-progress > span { animation: none; width: 100%; }
+}
+
 .explorer-brand-row {
   /* Center the wordmark's lowercase band, 10.055/22 em below its prepared ink top, on the
      row, level with the search text. */

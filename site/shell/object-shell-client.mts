@@ -33,6 +33,8 @@ export function mountObjectShell({
     throw new Error("Object shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
+  const navigationProgress = documentTarget.querySelector<HTMLElement>('.explorer-navigation-progress');
+  lifetime.onDispose(() => { if (navigationProgress) navigationProgress.ariaHidden = 'true'; });
   bindDatasetPicker(documentTarget, windowTarget, lifetime);
   const fragments = navigationFragments(windowTarget);
   let informationCard: ReturnType<typeof mountInformationCard>;
@@ -151,7 +153,12 @@ export function mountObjectShell({
         viewReadout.setPlaybackState(state);
       }
     },
-    setNavigationInFlight(active: boolean) { if (!lifetime.disposed) viewReadout.setNavigationInFlight(active); },
+    setNavigationInFlight(active: boolean) {
+      if (lifetime.disposed) return;
+      const hidden = String(!active);
+      if (navigationProgress && navigationProgress.ariaHidden !== hidden) navigationProgress.ariaHidden = hidden;
+      viewReadout.setNavigationInFlight(active);
+    },
     destroy() {
       const errors = lifetime.destroy();
       if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");

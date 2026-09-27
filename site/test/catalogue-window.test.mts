@@ -103,3 +103,57 @@ test('a filter change reads the layout before writing rows, and rows keep their 
   assert.equal(subtitle()?.textContent, 'Moon · ');
   assert.equal(list.querySelector('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 7');
 });
+
+test('clearing, empty results and subsequent scroll events never measure layout', () => {
+  const { document, window } = parseHTML('<div id="scroll"><ul id="list"></ul></div>');
+  const scroll = document.querySelector<HTMLElement>('#scroll')!;
+  const list = document.querySelector<HTMLUListElement>('#list')!;
+  let forbidReads = false;
+  const read = (value: number) => { assert.equal(forbidReads, false, 'an empty list must not flush pending layout'); return value; };
+  Object.defineProperty(scroll, 'clientHeight', { get: () => read(420) });
+  Object.defineProperty(list, 'offsetTop', { get: () => read(0) });
+  let nextFrame = 0;
+  const frames = new Map<number, FrameRequestCallback>();
+  Object.assign(window, {
+    requestAnimationFrame(callback: FrameRequestCallback) { frames.set(++nextFrame, callback); return nextFrame; },
+    cancelAnimationFrame(id: number) { frames.delete(id); },
+  });
+  const catalogue = createCatalogueWindow({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    list, scrollTarget: scroll });
+  for (const empty of [() => catalogue.clear(), () => catalogue.setEntries([])]) {
+    forbidReads = false;
+    catalogue.setEntries(Array.from({ length: 100 }, (_, index) => entry(index)));
+    scroll.dispatchEvent(new window.Event('scroll'));
+    assert.equal(frames.size, 1);
+    forbidReads = true;
+    empty();
+    empty();
+    assert.equal(frames.size, 0, 'clearing cancels the pending scroll render');
+    scroll.dispatchEvent(new window.Event('scroll'));
+    assert.equal(frames.size, 0, 'a hidden empty catalogue schedules no measurement');
+    assert.equal(catalogue.inspect().connectedRows, 0);
+    assert.equal(list.style.height, '0px');
+  }
+  catalogue.destroy();
+});
+
+test('keyboard focus measures once before scrolling and materializes the requested row', () => {
+  const { document, window } = parseHTML('<div id="scroll"><ul id="list"></ul></div>');
+  const scroll = document.querySelector<HTMLElement>('#scroll')!;
+  const list = document.querySelector<HTMLUListElement>('#list')!;
+  let scrolled = false, topReads = 0, heightReads = 0, scrollTop = 0;
+  Object.defineProperty(scroll, 'scrollTop', { get: () => scrollTop, set(value: number) { scrollTop = value; scrolled = true; } });
+  Object.defineProperty(scroll, 'clientHeight', { get() { assert.equal(scrolled, false); heightReads++; return 420; } });
+  Object.defineProperty(list, 'offsetTop', { get() { assert.equal(scrolled, false); topReads++; return 0; } });
+  Object.assign(window, { requestAnimationFrame: () => 1, cancelAnimationFrame() {} });
+  const catalogue = createCatalogueWindow({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    list, scrollTarget: scroll });
+  catalogue.setEntries(Array.from({ length: 100 }, (_, index) => entry(index)));
+  topReads = heightReads = 0;
+  assert.equal(catalogue.focus(70), true);
+  assert.equal(topReads, 1);
+  assert.equal(heightReads, 1);
+  assert.equal(scrollTop, 71 * 56 - 420);
+  assert.ok(list.querySelector('[data-catalogue-index="70"]'));
+  catalogue.destroy();
+});

@@ -23,7 +23,7 @@ await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
-type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
+type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
 type MockFactory = { navigation: MockPreparation };
 type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
 type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
@@ -41,7 +41,7 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
   let current: WorldCameraPose = { referenceFrame: 'world', epochJdTt: 1,
     pose: { positionM: [0,0,10000], orientationXyzw: [0,0,0,1] } };
   const paints: WorldCameraPose[] = [], resources = { destroyed: 0, destroy() { this.destroyed++; } };
-  const windowTarget = { performance: { now: () => time }, requestAnimationFrame(fn: FrameRequestCallback) { callbacks.set(++next, fn); return next; },
+  const windowTarget = { performance: { now: () => time }, matchMedia: () => ({ matches: true }), requestAnimationFrame(fn: FrameRequestCallback) { callbacks.set(++next, fn); return next; },
     cancelAnimationFrame(id: number) { callbacks.delete(id); } };
   const navigation: MockNavigation = { ...navigationFixture(frames[0], () => current, () => { throw new Error("optics overridden"); }), frame: frames[0], capture: () => current,
     activePreparedFocus: null,
@@ -50,7 +50,7 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
     optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000, heightPixels: 2000,
       framingRadiusPixels: 200, detailHandoffDiameterPixels: 14, visibleRect: null }),
     apply(value) { current = value; paints.push(value); } };
-  const factory: MockFactory = { navigation: { frame: frames[1], prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
+  const factory: MockFactory = { navigation: { frame: frames[1], framingRadius: async () => 200, prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
   const service = createPreparedWorldNavigation({ objects, windowTarget: windowTarget as unknown as Window, documentTarget: documentTarget as unknown as Document });
   const controller = new AbortController();
   return { service, controller, resources, navigation, factory, paints, documentTarget, windowTarget,
@@ -64,6 +64,12 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
     wheel() { const event = new Event('wheel', { cancelable: true }); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); return event; },
     get pending() { return callbacks.size; } };
 }
+function assertFlightInputReleased(f: ReturnType<typeof fixtureFactory>) {
+  for (const name of ['pointerdown', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assert.equal(getEventListeners(f.documentTarget, 'wheel').length, 1, 'The navigation owner retains one native wheel listener');
+  assert.equal(f.wheel().defaultPrevented, false, 'A settled or cancelled flight no longer intercepts wheel input');
+}
+
 function deferred<T = void>() {
   let complete: ((value: T) => void) | undefined;
   const promise = new Promise<T>(done => { complete = done; });
@@ -91,7 +97,7 @@ const range = (pose: WorldCameraPose["pose"], origin: readonly number[]) => Math
 
 const photographicArrival: PreparedArrivalView = { defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,-1,0,0,0,-1] };
 
-test('billboard covers complete attachment at its baked pose before the mesh finishes responsive framing', async () => {
+test('billboard covers attachment at the final viewport framing with no second camera flight', async () => {
   const arrival: PreparedArrivalView = { ...photographicArrival, billboard: {
     url: '/scenes/body/arrival.webp', lens: 'photo', size: 1024, distanceM: 8000,
     focalPixels: 1000, rotation: photographicArrival.rotation } };
@@ -105,13 +111,45 @@ test('billboard covers complete attachment at its baked pose before the mesh fin
   const handoff = await drainFrames(f, { task: f.start({ stage }) });
   assert.equal(handoff.mountOptions.progressiveActivation, false);
   const initial = required(handoff.mountOptions.initialWorldCamera);
-  assert.ok(Math.abs(presentWorldCamera(initial, f.factory.navigation.frame, f.navigation.optics()).distanceM - 8000) < 0.01);
-  assert.equal(document.querySelector('img')?.dataset.arrivalBillboard, 'mounting');
-  await drainFrames(f, { task: handoff.afterMount(f.mounted()) });
-  assert.equal(document.querySelector('img'), null);
-  const actual = presentWorldCamera(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
   const expected = presentWorldCamera(target, f.factory.navigation.frame, f.navigation.optics());
-  assert.ok(Math.abs(actual.distanceM - expected.distanceM) < 0.01);
+  const mountedProjection = presentWorldCamera(initial, f.factory.navigation.frame, f.navigation.optics());
+  assert.ok(Math.abs(mountedProjection.distanceM - arrival.billboard!.distanceM) < 0.01);
+  assert.ok(Math.abs(mountedProjection.silhouette!.tangentialSemiAxis - expected.silhouette!.tangentialSemiAxis) < 0.01);
+  assert.equal(document.querySelector('img')?.dataset.arrivalBillboard, 'mounting');
+  const arrived = f.paints.length;
+  const mount = f.mounted(), publication = deferred<boolean>(), apply = mount.navigation.apply;
+  mount.navigation.apply = (world, options) => { apply(world, options); return publication.promise; };
+  const completion = handoff.afterMount(mount);
+  await nextTurn();
+  f.step(5000); await nextTurn();
+  assert.equal(document.querySelector('img')?.style.opacity, '1', 'elapsed time cannot reveal an unacknowledged mesh');
+  assert.equal(f.input().defaultPrevented, true, 'the covered destination cannot start a drag');
+  assert.equal(f.wheel().defaultPrevented, true, 'the covered destination cannot zoom');
+  assert.equal(document.querySelector('img')?.dataset.arrivalBillboard, 'mounting');
+  publication.resolve(true); await nextTurn();
+  assert.equal(document.querySelector('img'), null, 'readiness removes the opaque cover in one swap');
+  await drainFrames(f, { task: completion });
+  assert.equal(document.querySelector('img'), null);
+  for (const camera of f.paints.slice(arrived)) {
+    closePose(camera.pose, initial.pose);
+    assert.equal(camera.projectionScale, initial.projectionScale);
+  }
+  const actual = presentWorldCamera(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
+  assert.ok(Math.abs(actual.distanceM - arrival.billboard!.distanceM) < 0.01);
+});
+
+test('cross-object arrival uses the destination framing allowance', async () => {
+  const f = fixtureFactory(photographicArrival);
+  f.factory.navigation.framingRadius = async () => 100;
+  const cameraViewport = { read() { throw new Error('The destination owns viewport measurement'); },
+    subscribe() { return () => {}; }, invalidate() {}, destroy() {} };
+  const handoff = await drainFrames(f, { task: f.start({ cameraViewport }) });
+  const mount = f.mounted();
+  handoff.mountOptions.onNavigationReady?.(mount.navigation);
+  await drainFrames(f, { task: handoff.afterMount(mount) });
+  const arrived = presentWorldCamera(mount.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
+  assert.ok(Math.abs(arrived.silhouette!.tangentialSemiAxis - 100) < 1e-6,
+    'the destination fit replaces the departing body\'s 200-pixel allowance');
 });
 
 test('scene selection and cross-object flight use the prepared photographic face', async () => {
@@ -168,7 +206,7 @@ test('a falsy camera publication failure rejects and releases native flight list
     await rejected;
     assert.equal(f.pending, 0);
     assert.equal(getEventListeners(f.controller.signal, 'abort').length, 0);
-    for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+    assertFlightInputReleased(f);
   }
 });
 
@@ -297,7 +335,7 @@ test('overview preserves the latest drawn camera through slow preparation, witho
   const task = f.start({ preserveView: true });
   await nextTurn();
   assert.equal(f.pending, 0, 'No flight frame is scheduled');
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assertFlightInputReleased(f);
   f.input();
   const latest: WorldCameraPose = { ...f.navigation.capture(), pose: { positionM: [7e8, 2e8, 3e8], orientationXyzw: [0, 0, 0, 1] } };
   f.navigation.apply(latest);
@@ -431,7 +469,7 @@ test('handoff precedes large destination approach and continues the same numeric
   closePose(required(f.paints.at(-1)).pose, target.pose);
   assertContinuousPaints(f.paints, frames);
   assert.equal(f.pending, 0);
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assertFlightInputReleased(f);
 });
 
 test('slow asset preparation holds only the distant checkpoint and resumes after readiness', async () => {
@@ -466,7 +504,7 @@ test('cancellation between prepared handoff and mount releases resources and all
   const f = fixtureFactory(), task = f.start();
   f.tick(0); f.tick(5000); await drainFrames(f, { task });
   f.controller.abort();
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assertFlightInputReleased(f);
   assert.equal(f.resources.destroyed, 1);
   assert.equal(f.pending, 0);
 });
@@ -488,7 +526,7 @@ test('an already cancelled request cannot start a frame or retain input listener
   f.tick(0);
   assert.equal(f.paints.length, 0);
   assert.equal(f.pending, 0);
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assertFlightInputReleased(f);
   assert.equal(f.resources.destroyed, 1);
 });
 
@@ -565,7 +603,7 @@ test('refocusing the selected object paints one existing owner without reloading
   closePose(f.navigation.capture().pose, target.pose);
   assert.equal(f.resources.destroyed, 0);
   assert.equal(f.pending, 0);
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assertFlightInputReleased(f);
 });
 
 test('the application keeps flying while destination groups activate, then transfers the live pose without a reset', async () => {
@@ -599,7 +637,7 @@ test('session cancellation during activation stops the flight before afterMount 
   assert.equal(context.length,count);
   assert.equal(f.pending,0);
   assert.equal(f.resources.destroyed,1);
-  for (const name of ['pointerdown','wheel','keydown']) assert.equal(getEventListeners(f.documentTarget,name).length,0);
+  assertFlightInputReleased(f);
 });
 
 test('an activating detail waits for its world publication and interruption preserves the last acknowledged pose', async () => {
@@ -670,7 +708,7 @@ test('replacement departure uses the retained world while its previous detail ow
   await drainFrames(f, { task: nextHandoff.afterMount(mount) });
   closePose(f.navigation.capture().pose, target.pose);
   assert.equal(f.pending, 0);
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  assertFlightInputReleased(f);
 });
 
 
@@ -702,6 +740,17 @@ test('centering changes the focus at the same range and orientation, then focus 
   assert.ok(range(mount.navigation.capture().pose, mount.navigation.frame.originM) < 2e6);
 });
 
+test('flights retain the same native wheel listener until navigation is destroyed', async () => {
+  const f = fixtureFactory(), listener = getEventListeners(f.documentTarget, 'wheel')[0];
+  for (let index = 0; index < 2; index++) {
+    await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal }) });
+    assertFlightInputReleased(f);
+    assert.equal(getEventListeners(f.documentTarget, 'wheel')[0], listener);
+  }
+  f.service.destroy();
+  assert.equal(getEventListeners(f.documentTarget, 'wheel').length, 0);
+});
+
 test('a wheel during a flight hurries the arrival instead of stopping it', async () => {
   const normal = fixtureFactory(), hurried = fixtureFactory();
   const fly = (f: ReturnType<typeof fixtureFactory>) => f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal });
@@ -719,7 +768,7 @@ test('a wheel during a flight hurries the arrival instead of stopping it', async
   const normalFrames = await frames(normal, normalTask), hurriedFrames = await frames(hurried, hurriedTask);
   assert.ok(hurriedFrames < normalFrames / 2, `A hurried flight arrives in under half the frames (${hurriedFrames} of ${normalFrames})`);
   closePose(hurried.navigation.capture().pose, normal.navigation.capture().pose);
-  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(hurried.documentTarget, name).length, 0);
+  assertFlightInputReleased(hurried);
 });
 
 test('a wheel, click or key between bodies hurries a prepared navigation to the destination instead of abandoning it', async () => {
@@ -733,7 +782,7 @@ test('a wheel, click or key between bodies hurries a prepared navigation to the 
     required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
     await drainFrames(f, { task: handoff.afterMount({ ...lifecycle, navigation: f.navigation }) });
     assert.equal(f.pending, 0);
-    for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+    assertFlightInputReleased(f);
     return { frames: context.length + f.paints.length, pose: f.navigation.capture().pose };
   };
   const normal = await run(null);

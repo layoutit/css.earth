@@ -17,6 +17,7 @@ export function createWorldSelectionTarget(from: WorldCameraPose, frame: Prepare
   const range = distanceForSilhouetteRadius(frame.bodyRadiusM, viewport.focalPixels,
     radius, viewport.principalOffsetPixels);
   return Object.freeze({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+    ...(from.projectionScale === undefined ? {} : { projectionScale: from.projectionScale }),
     pose: Object.freeze({ positionM: Object.freeze([frame.originM[0] + direction[0] * range,
       frame.originM[1] + direction[1] * range, frame.originM[2] + direction[2] * range] as const),
       orientationXyzw: Object.freeze([...from.pose.orientationXyzw] as const) }) });

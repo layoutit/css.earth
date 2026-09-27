@@ -161,6 +161,7 @@ export function createSceneRouter({
       destroyed = true;
       destroyActiveScene();
       cameraMotion.cancel();
+      context?.navigation.destroy();
       world.destroy();
       if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
@@ -282,7 +283,7 @@ export function createSceneRouter({
       // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
-      const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion });
+      const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
       const selection = registry.createSceneSelection({ objectId,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
@@ -295,6 +296,7 @@ export function createSceneRouter({
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
       navigable = id => worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
     contextTask = task;

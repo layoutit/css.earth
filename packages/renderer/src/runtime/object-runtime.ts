@@ -187,7 +187,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       },
       optics() {
         const state = getOrbit().state();
-        return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
+        return { focalPixels: state.focal, projectionScale: state.projectionScale, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
           visibleRect: state.visibleRect ?? null,
           widthPixels: latestWorldPublication?.stageViewport.widthPixels,
           heightPixels: latestWorldPublication?.stageViewport.heightPixels,

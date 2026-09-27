@@ -77,6 +77,25 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   const cssPoint = [translation[0] - 12, translation[1] + 9, translation[2] + 15];
   const cssScreen = [0,1].map(axis => published.principalOffset[axis]! + focal * (cssPoint[axis]! - published.principalOffset[axis]!) / (focal - cssPoint[2]!));
   screen.forEach((value, axis) => expect(value).toBeCloseTo(cssScreen[axis]!, 10));
+  // Optical framing changes only the camera root transform. CSS perspective
+  // stays fixed, while the physical projection used by labels/picking includes
+  // the same focal multiplier. A point with depth must agree, not just a disc.
+  const perspective = Reflect.get(options.cameraElement.style, 'perspective');
+  const beforeFramingReads = layoutReads;
+  dolly.camera.setProjectionScale(3.25);
+  const enlarged = dolly.prepare().commit();
+  expect(Reflect.get(options.cameraElement.style, 'perspective')).toBe(perspective);
+  expect(Reflect.get(options.cameraElement.style, 'scale')).toBe('3.25');
+  expect(enlarged.projection.focalPixels).toBe(focal * 3.25);
+  expect(enlarged.stageViewport.projectionScale).toBe(3.25);
+  expect(dolly.camera.capture(options.worldContext.frame).projectionScale).toBe(3.25);
+  expect(Reflect.get(options.sceneElement.style, 'transform')).toContain(`translate3d(120px, -70px, ${focal - 1200}px)`);
+  for (const axis of [0, 1]) {
+    const projected = enlarged.projection.focalPixels * eye[axis]! / -eye[2]!;
+    expect(projected).toBeCloseTo(cssScreen[axis]! * 3.25, 10);
+  }
+  expect(layoutReads).toBe(beforeFramingReads);
+  dolly.camera.setProjectionScale(1);
   place(dolly, [120, -70, -1e6]);
   const distant = dolly.prepare().commit();
   expect(distant.levelOfDetail!.stage).toBe('marker');

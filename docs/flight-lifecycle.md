@@ -11,9 +11,10 @@ from the last drawn pose and retains the same destination-detail hold.
 
 Every registered detail has a prepared world frame and mounts through the
 application world context. The shared viewport and frame presenter are required
-mount inputs. The physical dolly is the only object camera: wheel input changes
-distance, and one scene rotation determines the registered sky and local Sun
-direction. Saved poses contain that scene rotation only. The persistent universe
+mount inputs. Wheel input changes physical distance, and one scene rotation
+determines the registered sky and local Sun direction. The camera also carries
+an optical framing scale, shared by the mesh, universe, labels and picking.
+Saved views retain that scale as well as the physical pose. The persistent universe
 owns sky rendering; detail mounts allocate no hidden sky nodes or resize observers.
 Camera publications carry their captured world pose and stage viewport, so the
 runtime forwards them without remeasuring the camera DOM. Application navigation
@@ -21,12 +22,59 @@ owns history restoration; each detail only writes its current saved view.
 
 `createCameraFlight` owns scheduling, acceleration, cancellation and completion
 for world navigation, prepared-focus flights and native surface fly-to. Each
-path supplies its existing camera sampling math. World navigation installs one
-set of input listeners for the whole journey. A handoff holds the flight at its
+path supplies its existing camera sampling math. World navigation retains one
+document wheel listener for the navigation owner's lifetime and switches only
+its active callback. Adding or removing a nonpassive document wheel listener at
+arrival invalidated event-region styles across the scene in iPad WebKit.
+Pointer and keyboard interruption listeners remain scoped to each journey.
+A handoff holds the flight at its
 acknowledged pose while that exact view is prepared, then changes the presenter
 and releases the hold. It does not create a departure or continuation runner.
 The incoming detail and persistent world still acknowledge one publication
 together; cancellation prevents a late worker reply from moving either one.
+
+The shell handoff must not force layout merely to clear search results. Closing
+search, refreshing its selection, rebinding the object and an empty filter all
+clear the catalogue without measuring its viewport, and cancel any queued scroll
+render. Keyboard focus measures before scrolling and passes those measurements
+to the row renderer. Reading `offsetTop` after replacing shell content forced a
+35.5 ms style recalculation inside the final flight callback on the traced iPad.
+The [native capture receipt](../evidence/ui/arrival-handoff-2026-09-27/receipt.json)
+records the callback dropping from 50.2 to 12.6 ms after removing that read.
+Safari still recalculates styles afterward; the incoming mesh's first paint and
+the total handoff stall remain. This change removes forced synchronous layout,
+not all arrival rendering work.
+
+## Prepared arrival perspective
+
+For the default lens, an arrival billboard covers one flight to the final
+framing. Its preparation metadata supplies the exact camera distance and
+orientation. Responsive fitting chooses the apparent size and derives an
+optical framing scale at that same distance. Cross-object selection reads the
+destination's responsive camera plan, including its prepared shape fit, before
+starting the flight; it does not inherit the departing body's size allowance.
+Scaling a distant photograph to
+match a closer mesh's bounding sphere would change the visible surface features
+at the reveal, even when their outlines agree.
+
+The optical scale travels with the world camera and varies within the same
+flight. CSS perspective stays fixed: a two-dimensional transform on the detail
+camera root implements the effective focal length. Mesh depth translation uses
+the unscaled CSS focal length; projected labels, picking, material selection and
+the persistent universe use the effective focal length. A viewport records which
+scale its focal length already includes, so it cannot be applied twice.
+
+The detail is prepared at the final camera and attaches atomically behind the
+opaque image. Scene readiness waits for decoded selection, complete attachment
+and a rendering opportunity. After the destination acknowledges that same camera,
+the image is removed in one swap and normal input can resume. Elapsed time cannot
+release the cover. The camera stays at that same pose and optical scale.
+A thin indeterminate line at the top of the shared header follows the navigation
+lifetime. It animates only its transform, becomes a static line for reduced
+motion, and clears when navigation completes or is cancelled.
+Decode and connected activation are observable; the
+browser exposes no promise that certifies GPU residency, so native device frames
+remain part of qualification.
 
 The application frame queue owns publication of that complete view. It commits
 the worker-planned world, then the captured camera, before camera subscribers
@@ -48,7 +96,7 @@ checks the generated bank against the checked-in tree and descriptor hash.
 Runtime only restores these prepared leaves over successive frames and gives the
 final batch a rendering opportunity before resolving readiness. It never
 derives geometry or chooses a different asset bank. Direct and reduced-motion
-arrivals remain atomic. A flight holds before the destination needs its detailed
+arrivals and arrivals covered by a billboard remain atomic. A flight holds before the destination needs its detailed
 surface if activation is still pending.
 
 The application owns viewport measurement across mounts. Object cameras and

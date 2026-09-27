@@ -146,7 +146,18 @@ and native iPad screen grabs are active:
 pnpm ipad:run --start mars --fly moon --name mars-to-moon
 pnpm ipad:run --start ceres --zoom -200 --drag '{"from":[400,500],"to":[600,530],"seconds":1}' --fly venus --name ceres-to-venus
 pnpm ipad:run --start earth --fly lutetia --heap-snapshot --name earth-to-lutetia-memory
+pnpm ipad:run --live --start earth --fly lutetia --name live-earth-to-lutetia
 ```
+
+`--live` targets `https://css.earth` (or an explicit HTTPS `--origin`) without building locally. Flights use the same
+`objectnavigationquery` and `objectnavigate` events as the app's selectable world markers, then verify the destination
+is ready and visible. The flight receipt records the displayed release version. Native frames and WebKit tracing
+remain enabled; internal scene diagnostics may be absent in production, and local source maps are not applied to it.
+Add `--style-writes` for the existing DOM-write diagnostic; it adds overhead and is for locating changes rather than comparing timing.
+`style-writes.json` includes bounded, timestamped class/data/hidden state changes as well as aggregate writes. Align its
+relative times with the `cssEarth:capture:style-writes-start` trace marker; device and host wall clocks can differ.
+Also inspect listener lifetimes when styles spike without a DOM write: WebKit tracks wheel listeners in event-region
+styles. Adding/removing a document wheel listener between flight segments can invalidate the whole scene.
 
 Use `--origin http://<Mac-LAN-IP>:<port>` when the preview uses a different port. A JSON scenario can express a longer
 sequence: `pnpm ipad:run --scenario journey.json --name long-journey`. Its shape is
@@ -168,7 +179,7 @@ Use Perfetto to plot all memory categories. These are WebKit's accounting catego
 The snapshots pause JavaScript outside the interaction recording. Read their retainers when counters disagree with
 cleanup; a zero resource-owner count alone does not prove that every JavaScript or browser allocation was freed.
 
-The command validates body names against the object registry, uses the performance router bridge for flights, verifies
+The command validates body names against the object registry, uses the performance router bridge for preview flights, verifies
 ready destination routes, and fails if an action cannot complete. Direct `tap`, `drag`, `type`, and `zoom` actions are
 `page-dispatched`: Web Inspector sends pointer and wheel events through the app's input handlers. This iPad's iOS 26.6 refuses CoreDevice HID remote touch
 (`Remote control requires iOS 27.0 or later`), and WebInspector Automation's `touch()` emits no events on it. The report

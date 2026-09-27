@@ -1,6 +1,6 @@
 import type { PhysicalCameraPose } from './types.js';
 export interface SharedPlayback { times: readonly number[]; speed: number; motionRequested: boolean; }
-export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; bodyCenterKilometers?: readonly [number, number, number]; }
+export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; bodyCenterKilometers?: readonly [number, number, number]; projectionScale?: number; }
 export interface SharedView { camera: PhysicalSharedCamera; playback: SharedPlayback; preparedEpochJdTt: number | null; }
 function invalid(key = "v"): never { throw new Error(`Invalid “${key}” in this view link.`); }
 function base64url(bytes: Uint8Array) {
@@ -41,7 +41,9 @@ function poseMatrix(value: unknown) {
 function validateShared(view: unknown): asserts view is SharedView {
   record(view, ["camera", "preparedEpochJdTt", "playback"], "view");
   const camera = view.camera, playback = view.playback;
-  record(camera, ["distanceKilometers", "pose", "bodyCenterKilometers"], "camera");
+  record(camera, ["distanceKilometers", "pose", "bodyCenterKilometers", "projectionScale"], "camera");
+  if (camera.projectionScale !== undefined && (typeof camera.projectionScale !== 'number' ||
+      !Number.isFinite(camera.projectionScale) || camera.projectionScale <= 0)) invalid('camera');
   if (typeof camera.distanceKilometers !== "number" || !Number.isFinite(camera.distanceKilometers) || camera.distanceKilometers <= 0) invalid("camera");
   if (camera.bodyCenterKilometers !== undefined) {
     const centre = camera.bodyCenterKilometers;
@@ -86,6 +88,7 @@ export function formatSharedView(view: SharedView) {
   const values = camera.bodyCenterKilometers ? [...camera.bodyCenterKilometers] : [camera.distanceKilometers], playback = view.playback;
   if (view.preparedEpochJdTt !== null) { flags |= 2; values.push(view.preparedEpochJdTt); }
   if (playback.speed !== 1) { flags |= 8; values.push(playback.speed); }
+  if (camera.projectionScale !== undefined && camera.projectionScale !== 1) { flags |= 256; values.push(camera.projectionScale); }
   if (playback.motionRequested) flags |= 16;
   const matrix = poseMatrix(view.camera.pose.scene), quaternion = matrixQuaternion(matrix);
   let largest = 0;
@@ -110,7 +113,7 @@ export function formatSharedView(view: SharedView) {
 
 function parseCurrentShared(bytes: Uint8Array): SharedView {
   const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
-  if (flags & 0x0f04 || (flags & 32 && flags & 0xc0)) invalid();
+  if (flags & 0x0e04 || (flags & 32 && flags & 0xc0)) invalid();
   let offset = 2;
   const read = () => {
     if (offset + 8 > bytes.length) invalid();
@@ -125,6 +128,7 @@ function parseCurrentShared(bytes: Uint8Array): SharedView {
   };
   if (flags & 2) view.preparedEpochJdTt = read();
   const speed = flags & 8 ? read() : 1;
+  if (flags & 256) view.camera.projectionScale = read();
   let matrix;
   if (flags & 32) {
     matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];

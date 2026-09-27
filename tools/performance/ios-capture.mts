@@ -832,7 +832,9 @@ const RECORDING_BADGE = (seconds: number) => `(() => {
  * signal get a wheel counted as moving for 700 ms). The invariant is judged on the moving writes. Aggregated in the page
  * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
 export const STYLE_WRITES_LOGGER = `(() => {
-  const t0 = performance.now(), entries = new Map(), perFrame = [];
+  const t0 = performance.now(), epochMs = performance.timeOrigin + t0, entries = new Map(), perFrame = [], stateChanges = [];
+  console.timeStamp('cssEarth:capture:style-writes-start');
+  let droppedStateChanges = 0;
   let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, coasting = false, wheelUntil = 0;
   const moving = () => announced || performance.now() < wheelUntil;
   // objectmotionchange also says whether the camera coasts on inertia, the only motion the contract gates.
@@ -870,7 +872,16 @@ export const STYLE_WRITES_LOGGER = `(() => {
         const before = parse(record.oldValue), after = parse(element.getAttribute('style'));
         for (const [property, value] of after) if (before.get(property) !== value) bump(who + ' { ' + property + ' }', value, at, inMotion);
         for (const property of before.keys()) if (!after.has(property)) bump(who + ' { ' + property + ' } removed', '', at, inMotion);
-      } else if (record.oldValue !== element.getAttribute(name)) bump(who + ' [' + name + ']', element.getAttribute(name), at, inMotion);
+      } else if (record.oldValue !== element.getAttribute(name)) {
+        const value = element.getAttribute(name);
+        bump(who + ' [' + name + ']', value, at, inMotion);
+        // Preserve the order of state changes: aggregated first/last times hide an intermediate
+        // ancestor mutation that can invalidate the whole scene during a camera flight.
+        if (name === 'class' || name === 'hidden' || name === 'aria-busy' || name.startsWith('data-')) {
+          if (stateChanges.length < 10000) stateChanges.push({ at, element: who, attribute: name, before: record.oldValue, value });
+          else droppedStateChanges++;
+        }
+      }
     }
   });
   observer.observe(document.documentElement, { subtree: true, attributes: true, attributeOldValue: true, childList: true });
@@ -882,7 +893,7 @@ export const STYLE_WRITES_LOGGER = `(() => {
     observer.disconnect(); cancelAnimationFrame(frame);
     for (const type of ['objectrotationchange', 'objectmotionchange']) document.removeEventListener(type, onMotion, true);
     removeEventListener('wheel', onWheel, { capture: true });
-    return { entries: [...entries.values()].sort((a, b) => b.moving - a.moving || b.count - a.count), perFrame };
+    return { epochMs, entries: [...entries.values()].sort((a, b) => b.moving - a.moving || b.count - a.count), perFrame, stateChanges, droppedStateChanges };
   } };
   return true;
 })()`;

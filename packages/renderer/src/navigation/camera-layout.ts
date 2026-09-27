@@ -2,8 +2,9 @@ import type { CameraPlan } from './types.js';
 export interface ResponsiveZoomOptions { plan: CameraPlan; mobile: boolean; framingReferenceZoom?: number; viewport: import('./camera-viewport.js').CameraViewport; }
 import { smoothstep } from "@cssearth/engine";
 
-/** Share of a portrait tablet's open scene area (between header and drawer) the focus body spans on arrival. */
-export const MOBILE_OPEN_AREA_SHARE = .75;
+/** Share of a portrait tablet's open scene area (between header and drawer) the focus body spans on arrival.
+ * Leave more room around the body: .60 is a 20% smaller diameter than the previous .75 framing. */
+export const MOBILE_OPEN_AREA_SHARE = .60;
 /** Phones frame a little closer while leaving the tablet fit unchanged. */
 export const PHONE_OPEN_AREA_SHARE = .82;
 

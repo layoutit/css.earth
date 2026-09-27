@@ -162,8 +162,10 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     const listTop = list.offsetTop;
     return { listTop: Number.isFinite(listTop) ? listTop : 0, scrollTop: scrollTarget.scrollTop || 0, height: scrollTarget.clientHeight || 420 };
   };
-  const render = (viewport = measure()) => {
+  const render = (measured?: ReturnType<typeof measure>) => {
     frame = null;
+    if (!entries.length) return;
+    const viewport = measured ?? measure();
     const relativeTop = Math.max(0, viewport.scrollTop - viewport.listTop);
     const visibleRows = Math.max(1, Math.ceil(viewport.height / ROW_PITCH));
     const start = Math.max(0, Math.floor(relativeTop / ROW_PITCH) - OVERSCAN_ROWS);
@@ -193,11 +195,26 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     }
   };
   const invalidate = () => {
-    if (frame === null) frame = windowTarget.requestAnimationFrame(() => render());
+    if (entries.length && frame === null) frame = windowTarget.requestAnimationFrame(() => render());
   };
   scrollTarget.addEventListener('scroll', invalidate, { passive: true });
 
+  const cancelRender = () => {
+    if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+    frame = null;
+  };
+  // Closing, an empty search and an object handoff need no viewport. Measuring
+  // here forced the shell's pending style/layout work into the flight frame.
+  const clear = () => {
+    cancelRender();
+    entries = [];
+    for (const view of active.values()) { view.item.remove(); spare.push(view); }
+    active.clear();
+    if (list.style.height !== '0px') list.style.height = '0px';
+  };
   const setEntries = (next: readonly CatalogueIndexEntry[]) => {
+    if (!next.length) { clear(); return; }
+    cancelRender();
     const viewport = measure();
     entries = next;
     for (const [index, view] of active) {
@@ -209,7 +226,7 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
         spare.push(view);
       }
     }
-    list.style.height = next.length ? `${next.length * ROW_PITCH - 8}px` : '0px';
+    list.style.height = `${next.length * ROW_PITCH - 8}px`;
     render(viewport);
   };
 
@@ -217,14 +234,15 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
     setEntries,
     focus(index: number) {
       if (!Number.isInteger(index) || index < 0 || index >= entries.length) return false;
-      const listTop = Number.isFinite(list.offsetTop) ? list.offsetTop : 0;
-      const rowTop = listTop + index * ROW_PITCH;
+      cancelRender();
+      const viewport = measure();
+      const rowTop = viewport.listTop + index * ROW_PITCH;
       const rowBottom = rowTop + ROW_PITCH;
-      const viewportTop = scrollTarget.scrollTop || 0;
-      const viewportBottom = viewportTop + (scrollTarget.clientHeight || 420);
-      if (rowTop < viewportTop) scrollTarget.scrollTop = rowTop;
-      else if (rowBottom > viewportBottom) scrollTarget.scrollTop = rowBottom - (scrollTarget.clientHeight || 420);
-      render();
+      const viewportBottom = viewport.scrollTop + viewport.height;
+      const scrollTop = rowTop < viewport.scrollTop ? rowTop
+        : rowBottom > viewportBottom ? rowBottom - viewport.height : viewport.scrollTop;
+      if (scrollTop !== viewport.scrollTop) scrollTarget.scrollTop = scrollTop;
+      render({ ...viewport, scrollTop });
       active.get(index)?.anchor.focus();
       return true;
     },
@@ -232,12 +250,11 @@ export function createCatalogueWindow({ documentTarget, windowTarget, list, scro
       selection = next;
       for (const [index, view] of active) bindRow(documentTarget, view, entries[index]!, index, selection);
     },
-    clear() { setEntries([]); },
+    clear,
     inspect() { return Object.freeze({ entries: entries.length, connectedRows: active.size, spareRows: spare.length }); },
     destroy() {
       scrollTarget.removeEventListener('scroll', invalidate);
-      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
-      frame = null;
+      cancelRender();
       entries = [];
       active.clear();
       spare.length = 0;

@@ -36,6 +36,9 @@ export function bindPreparedSurfaceHit(plan: PreparedSurfaceHit, target: HTMLEle
     const range = plan.lensRanges?.find(range => range.lensId === selectedLens?.());
     if (plan.lensRanges && !range) return false;
     const bounds = camera.getBoundingClientRect(), style = getComputedStyle(camera), focal = parseFloat(style.perspective);
+    // The camera root's optical framing is a uniform 2D scale. Its bounds are
+    // scaled client pixels; CSS perspective and mesh matrices use local pixels.
+    const scale = Number.parseFloat(style.scale) || 1;
     const principal = style.perspectiveOrigin.split(' ').map(parseFloat);
     if (!(focal > 0) || principal.length !== 2 || principal.some(n => !Number.isFinite(n))) return false;
     // Retained mesh ancestors use zero transform origins. Their current matrices
@@ -46,9 +49,9 @@ export function bindPreparedSurfaceHit(plan: PreparedSurfaceHit, target: HTMLEle
       node = node.parentElement;
     }
     if (node !== camera) return false;
-    const inverse = matrix.inverse(), offset = [principal[0] - bounds.width / 2, principal[1] - bounds.height / 2];
+    const inverse = matrix.inverse(), offset = [principal[0] - bounds.width / (2 * scale), principal[1] - bounds.height / (2 * scale)];
     const eye = inverse.transformPoint(new DOMPoint(offset[0], offset[1], focal));
-    const ray = inverse.transformPoint(new DOMPoint(clientX - bounds.x - principal[0], clientY - bounds.y - principal[1], -focal, 0));
+    const ray = inverse.transformPoint(new DOMPoint((clientX - bounds.x) / scale - principal[0], (clientY - bounds.y) / scale - principal[1], -focal, 0));
     return rayHitsPreparedTriangles([eye.x, eye.y, eye.z], [ray.x, ray.y, ray.z], plan.triangles, plan.frontFace, range);
   };
 }
