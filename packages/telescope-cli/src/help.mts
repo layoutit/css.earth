@@ -1,4 +1,4 @@
-export const VERSION = '0.1.0';
+export const VERSION = '0.2.0';
 
 export const SHORT_HELP = `Telescope — explore observations and turn qualified data into outputs.
 

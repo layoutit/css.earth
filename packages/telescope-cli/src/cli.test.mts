@@ -65,7 +65,7 @@ test('default help is concise; explicit help keeps the full command reference',a
   assert.match(full.stdout.join(''),/--max-science-bytes/u);
   const version=mockIo(false,false);
   assert.equal(await main(['--version'],'/workspace',text=>version.io.write(text),version.io,mockServices('/tmp').services),0);
-  assert.equal(version.stdout.join(''),'0.1.0\n');
+  assert.equal(version.stdout.join(''),'0.2.0\n');
 });
 
 test('packaged entrypoint recognizes the current science workspace script',()=>{

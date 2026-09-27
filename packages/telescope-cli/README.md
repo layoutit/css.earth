@@ -14,7 +14,7 @@ source subpaths the workspace's tools import:
 
 ```sh
 pnpm --filter @cssearth/telescope-cli pack --pack-destination .
-npm install -g ./cssearth-telescope-cli-0.1.0.tgz
+npm install -g ./cssearth-telescope-cli-0.2.0.tgz
 export CSSEARTH_WORKSPACE=/path/to/css.earth
 ```
 
@@ -119,7 +119,7 @@ another query rather than changing the saved selection.
 
 Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. Progress goes to stderr. Exit codes: **0** exploration/retrieval completed or a scientific request was fulfilled; **1** operation failed; **2** invalid arguments; **3** no retrievable choices or delivered data still has unresolved requirements; **4** delivered product refuses the request. Exploration exit 0 means the requested discovery or retrieval completed; it makes no scientific fulfillment claim.
 
-The installed command and the checkout it runs remain separate versioned components: the installed `telescope` binary finds a checkout and runs that checkout's copy of this package's sources, so updating the npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
+The installed command and the checkout it runs remain separate versioned components: the installed `telescope` binary finds a checkout and runs that checkout's copy of this package's sources, so updating the npm package does not update the checkout's science code. The binary and the checkout layout go together: `telescope` 0.2.0 runs `packages/telescope-cli/src/cli.mts` and needs a checkout that has it; 0.1.0 (the wrapper that was part of `@cssearth/telescope`) ran `tools/objects/telescopes/cli.mts`, which checkouts no longer have. Either version refuses a checkout without its entry and says no workspace was found. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
 
 ## Supported v1 boundary
 
