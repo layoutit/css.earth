@@ -46,7 +46,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'galaxy-catalog': ['volume'],
   'cluster-catalog': ['galaxy-catalog'],
   'galaxy-field': ['objects/sources'],
-  'objects/scene': ['presentation'],
+  'objects/scene': ['presentation', 'raster'],
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
   'objects/layers/observed-surfaces': ['raster', 'scene', 'objects/geometry'],

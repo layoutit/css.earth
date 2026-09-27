@@ -6,8 +6,8 @@
  * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the lens's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
 import { preparedScenePitch } from '@cssearth/engine';
-import { worldCameraFromPresentation } from '@cssearth/renderer/navigation';
-import { requireBodyFixedToIcrf } from '../../../src/platform/solar-geometry.mts';
+import { worldCameraFromPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { SolarGeometry } from './solar-geometry.ts';
 
 const DEGREE = Math.PI / 180;
 type Vector3 = readonly [number, number, number];
@@ -33,7 +33,7 @@ export function scenePitchDegrees(camera: DefaultViewCamera, controlPitch = came
   return preparedScenePitch(controlPitch, camera);
 }
 
-export function defaultViewGeometry(bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, controls?: { controlPitch: number; controlYaw: number }): DefaultViewGeometry {
+export function defaultViewGeometry(geometry: Pick<SolarGeometry, 'requireBodyFixedToIcrf'>, bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, controls?: { controlPitch: number; controlYaw: number }): DefaultViewGeometry {
   const pitch = scenePitchDegrees(camera, controls?.controlPitch), yaw = controls?.controlYaw ?? camera.defaultControlYawDegrees;
   // Presentation directions to CSS eye space (x right, y down, z toward the viewer): the scene matrix's linear part.
   const eyeFromPresentation = multiply(rotateX(pitch * DEGREE), rotateY(yaw * DEGREE));
@@ -42,7 +42,7 @@ export function defaultViewGeometry(bodyId: string, camera: DefaultViewCamera, f
   const { pose } = worldCameraFromPresentation({ rotation: rotation as never, bodyCenterUnits: [0, 0, -distanceUnits] }, frame as never);
   const offset = pose.positionM.map((value: number, axis: number) => value - frame.originM[axis]!) as unknown as Vector3;
   const length = Math.hypot(...offset), directionIcrf = offset.map(v => v / length) as unknown as Vector3;
-  const icrfToBody = transpose(rows(requireBodyFixedToIcrf(bodyId)));
+  const icrfToBody = transpose(rows(geometry.requireBodyFixedToIcrf(bodyId)));
   const body = apply(icrfToBody, directionIcrf);
   const presentationFromIcrf = transpose(rows(frame.presentationToReference));
   return Object.freeze({
@@ -61,8 +61,8 @@ export const angularSeparationDegrees = (a: { longitudeDegrees: number; latitude
 };
 
 /** A surface-observation lens names the body point its frame looks at; the default camera must look at it too. */
-export function assertDefaultViewFacesLens(bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, subObserver: { longitudeDegrees: number; latitudeDegrees: number }, maximumDegrees = 25) {
-  const view = defaultViewGeometry(bodyId, camera, frame);
+export function assertDefaultViewFacesLens(geometry: Pick<SolarGeometry, 'requireBodyFixedToIcrf'>, bodyId: string, camera: DefaultViewCamera, frame: DefaultViewFrame, subObserver: { longitudeDegrees: number; latitudeDegrees: number }, maximumDegrees = 25) {
+  const view = defaultViewGeometry(geometry, bodyId, camera, frame);
   const separation = angularSeparationDegrees(view.subCamera, subObserver);
   if (!(separation <= maximumDegrees)) throw new Error(`${bodyId}: the default camera looks at longitude ${view.subCamera.longitudeDegrees.toFixed(1)}, latitude ${view.subCamera.latitudeDegrees.toFixed(1)}, ${separation.toFixed(1)} degrees from the lens's sub-observer point (${subObserver.longitudeDegrees}, ${subObserver.latitudeDegrees}); the limit is ${maximumDegrees}.`);
   return { view, separation };

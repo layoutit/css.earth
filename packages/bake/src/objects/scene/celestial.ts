@@ -1,14 +1,17 @@
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadCelestialAdapters, type SolarSource, type StarfieldPlan, type SunPlan } from './adapters.js';
+import { loadCelestialAdapters, type SolarSource, type StarfieldPlan, type SunPlan } from './celestial-adapters.ts';
+import type { SolarGeometry } from './solar-geometry.ts';
 
 export interface CelestialConfig {
   readonly schema: 'cssearth-celestial-preparation@2'; readonly sources: readonly string[];
   /** False for a star: no directional Sun is prepared and sun.json is written as null. */
   readonly directionalSun: boolean;
 }
-export interface CelestialContext { readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly config: unknown; }
+export interface CelestialContext { readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly config: unknown;
+  /** The generated solar geometry (`src/platform/solar-geometry.mts`), which the host loads and passes in. */
+  readonly solarGeometry: SolarGeometry; }
 export interface CelestialAssets { readonly sky: StarfieldPlan; readonly sun: SunPlan | null; }
 const schema = 'cssearth-celestial-preparation@2';
 const sourceDigest = /^[a-f0-9]{64}$/;
@@ -36,10 +39,10 @@ async function verifySources(sourceDirectory: string, paths: readonly string[]):
 function solarSource(value: unknown): SolarSource { const source = record(value, 'solar-system source'); if (typeof source.bodyId !== 'string' || typeof source.displayName !== 'string') throw new TypeError('Solar-system source is invalid.'); return Object.freeze({ bodyId: source.bodyId, displayName: source.displayName }); }
 
 /** Prepare the sky orientation and directional Sun into renderer-neutral JSON. The shared universe draws both. */
-export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config }: CelestialContext): Promise<CelestialAssets> {
+export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config, solarGeometry }: CelestialContext): Promise<CelestialAssets> {
   if (typeof sourceDirectory !== 'string' || typeof publicDirectory !== 'string' || typeof outputDirectory !== 'string') throw new TypeError('Celestial preparation needs source, public, and output directories.');
   const options = profile(config); await verifySources(sourceDirectory, options.sources);
-  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(); api.requireSceneObject(solar.bodyId);
+  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(solarGeometry); api.requireSceneObject(solar.bodyId);
   await mkdir(outputDirectory, { recursive: true });
   const sky = json(api.prepareCubicSky({ objectId: solar.bodyId, cameraContract: api.cubicSkyCamera }));
   // A star has no directional Sun; sun.json records null so the runtime contract sees the absence explicitly.

@@ -7,7 +7,7 @@ import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
-import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
+import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks, readDefaultLensCoverage, coverageDirection, visibleCoverageShare } from '@cssearth/bake/objects/scene';
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }
@@ -70,12 +70,11 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     : approachSource ? [await approachDirection()] : undefined;
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
-  const coverageModule = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/default-view/lens-coverage.mts')).href) as typeof import('./default-view/lens-coverage.mts');
-  const coverage = !observation?.length && light === 'sun' ? await coverageModule.readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
-  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light, coverage: coverage && coverageModule.coverageDirection(coverage) });
+  const coverage = !observation?.length && light === 'sun' ? await readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
+  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light, coverage: coverage && coverageDirection(coverage) });
   if (coverage) {
-    const shown = coverageModule.visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, angles));
-    const design = coverageModule.visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, LIT_DEFAULT_VIEW));
+    const shown = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, angles));
+    const design = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, LIT_DEFAULT_VIEW));
     if (shown < design) throw new Error(`${descriptor.id}: the default camera (yaw ${angles.defaultControlYawDegrees.toFixed(1)}) shows ${(shown * 100).toFixed(1)}% of the ${coverage.lens} map's data, less than the design pose's ${(design * 100).toFixed(1)}%.`);
   }
   // Only a solved lane takes the derived pose; a typed lane keeps the camera its own bakes were made for.

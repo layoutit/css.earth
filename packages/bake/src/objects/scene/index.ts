@@ -17,3 +17,9 @@ export * from './world-navigation-materials.ts';
 export * from './camera-source.ts';
 // The seams and projection block every generated sphere is written with.
 export * from './sphere-projection.ts';
+// The default view a photograph lens's camera must face and the default lens's data coverage the default camera turns toward,
+// and an object's sky orientation and directional Sun, from the solar geometry the host passes in.
+export * from './default-view.ts';
+export * from './default-lens-coverage.ts';
+export * from './celestial.ts';
+export type { SolarSource, StarfieldPlan, SunPlan } from './celestial-adapters.ts';
