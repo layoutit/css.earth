@@ -171,14 +171,17 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       : binding.kind === "class" ? stage.classList.contains(binding.name) : styleValue(stage, binding.name);
     context.own(() => {
       if (!owned()) return;
-      if (binding.kind === "attribute") writeAttribute(stage, binding.name, typeof previous === "string" ? previous : null);
-      else if (binding.kind === "class") stage.classList.toggle(binding.name, previous === true);
-      else writeStyle(stage, binding.name, String(previous));
+      if (binding.kind === "attribute") {
+        const value = typeof previous === "string" ? previous : null;
+        if (readAttribute(stage, binding.name) !== value) writeAttribute(stage, binding.name, value);
+      } else if (binding.kind === "class") {
+        if (stage.classList.contains(binding.name) !== previous) stage.classList.toggle(binding.name, previous === true);
+      } else if (styleValue(stage, binding.name) !== String(previous)) writeStyle(stage, binding.name, String(previous));
     });
   }
   for (const name of definition.tree.stageClasses) {
     const previous = stage.classList.contains(name);
-    context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
+    context.own(() => { if (owned() && stage.classList.contains(name) !== previous) stage.classList.toggle(name, previous); });
   }
   if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
   const textureBindings = new Map((definition.tree.textureBindings ?? []).map(binding =>

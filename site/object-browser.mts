@@ -350,7 +350,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         documentTarget.querySelector('.object-sidebar-search-clear')?.setAttribute('href', object.route);
       }
       destinations?.present(null); features?.refresh();
-      refreshSelection();
+      // The shell publishes once after all incoming content owners are bound.
     },
     presentDestination(value: DestinationPresentation | null) { destinations?.present(value); },
     destroy() {

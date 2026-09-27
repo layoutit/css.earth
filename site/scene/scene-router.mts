@@ -318,12 +318,12 @@ export function createSceneRouter({
     }
     const shell = shellOwner.shell!;
     session.shell = shell;
-    if (replacement) current.commit(replacement.request.subject, objectId);
+    if (replacement) current.commit(replacement.request.subject, objectId, false);
     if (replacement?.selectionTransition) replacement.selectionTransition.arrive({ content: replacement.content, subject: current.current });
     else {
       if (replacement) shell.setObject(replacement.content);
-      shell.presentSelection();
     }
+    publishSelection();
   }
 
   async function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
@@ -514,14 +514,15 @@ export function createSceneRouter({
       subject?.kind === 'overview' ? subject.overview.scope : undefined);
     if (stage.dataset) {
       const current = subject ?? { kind: 'object' as const, objectId };
-      stage.dataset.selection = current.kind === 'overview' ? current.overview.scope
+      const value = current.kind === 'overview' ? current.overview.scope
         : current.kind === 'focus' ? current.id : current.kind === 'satellite-system' ? current.hostId : current.objectId;
+      if (stage.dataset.selection !== value) stage.dataset.selection = value;
     }
     publication.publish();
   }
   function commitSelection(ready: RouterContext, request: NavigationRequest, transition?: ShellNavigationTransition | null) {
     const current = ready.selection, wasOverview = current.context.kind === 'overview';
-    current.commit(request.subject, objectId);
+    current.commit(request.subject, objectId, false);
     transition?.arrive({ subject: current.current });
     publishSelection();
     if (!wasOverview && current.current.kind === 'overview') aimAtSystemCenter(ready);

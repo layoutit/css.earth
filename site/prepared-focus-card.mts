@@ -54,7 +54,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
     const previous = currentPresentation?.objectId;
     currentPresentation = record && preparedFocusObjectId(record) === presentation?.objectId ? presentation : null;
-    if (datasetTab) datasetTab.hidden = !currentPresentation;
+    if (datasetTab && datasetTab.hidden !== !currentPresentation) datasetTab.hidden = !currentPresentation;
     if (record && (record.id !== currentRecordId || previous !== currentPresentation?.objectId))
       showTab(currentPresentation ? 'dataset' : 'factsheet');
     currentRecordId = record?.id;
@@ -82,8 +82,9 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (unavailable) {
       const objectId = record && preparedFocusObjectId(record);
       const missing = objectId && unavailableIds.has(objectId);
-      unavailable.hidden = !missing;
-      unavailable.textContent = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
+      if (unavailable.hidden !== !missing) unavailable.hidden = !missing;
+      const message = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
+      if (unavailable.textContent !== message) unavailable.textContent = message;
     }
     if (!record) return;
     root.dataset.preparedFocusId = record.id;

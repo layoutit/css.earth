@@ -253,7 +253,9 @@ export function createPerspectiveDolly({
       const [bodyX, bodyY, bodyZ] = genericPresentation.translateCssPixels;
       worldContext.onWorldPublish?.(publishedWorld, { focalPixels: focal, projectionScale, principalOffsetPixels: stageViewport.principalOffsetPixels });
       if (projectionScale !== publishedProjectionScale) {
-        cameraElement.style.scale = String(projectionScale);
+        // Match the CSS scalar precision; sub-serialization differences must not rewrite the same scale.
+        const value = String(Number(projectionScale.toFixed(6)));
+        if (cameraElement.style.scale !== value) cameraElement.style.scale = value;
         publishedProjectionScale = projectionScale;
       }
       const genericBody = genericBodyProjection(genericPresentation, bodyRadius, focal);

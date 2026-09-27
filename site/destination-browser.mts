@@ -22,8 +22,9 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset }
   const present = (value: DestinationPresentation | null) => {
     if (events.signal.aborted) return;
     const opening = value !== null && panel.hidden;
-    panel.hidden = value === null;
-    panel.ariaBusy = String(value?.flying ?? false);
+    const hidden = value === null, busy = String(value?.flying ?? false);
+    if (panel.hidden !== hidden) panel.hidden = hidden;
+    if (panel.ariaBusy !== busy) panel.ariaBusy = busy;
     if (value) {
       heading.textContent = value.name;
       context.textContent = value.context;

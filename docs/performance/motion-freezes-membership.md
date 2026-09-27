@@ -89,3 +89,5 @@ navigation readiness gate releases them. Busy status uses ARIA, without a cosmet
 A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
 billboard handoff. An adopted server-rendered tree is already connected and keeps its existing ownership.
+
+Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.

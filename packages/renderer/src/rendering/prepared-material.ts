@@ -125,7 +125,7 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
           if (rotation.physical) {
             if(element.style.rotate)element.style.removeProperty('rotate');
             // These prepared textures carry their centre in the physical matrix.
-            if (write('transformOrigin', '0 0')) state.transformWrites++;
+            if (write('transformOrigin', '0px 0px')) state.transformWrites++;
           }
           if (write('transform', transform)) state.transformWrites++;
         } else if (rotation.kind === "angle") {

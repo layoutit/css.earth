@@ -51,16 +51,17 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
   let subject: SceneSubject = initial.kind === 'focus'
     ? { ...initial, record: initialFocus?.id === initial.id ? initialFocus : null, sources: [], presentation: null,
       context: { kind: 'object', objectId } } : initial;
-  function publish(next: SceneSubject) {
+  function publish(next: SceneSubject, notify = true) {
     if (subject === next) return false;
-    subject = next; onChange(); return true;
+    subject = next; if (notify) onChange(); return true;
   }
   return {
     get current() { return subject; },
     get context() { return selectionContext(subject); },
-    commit(target: SelectionTarget, mountedObjectId: string) {
+    /** Navigation binds incoming content before its single explicit publication. */
+    commit(target: SelectionTarget, mountedObjectId: string, notify = true) {
       if (target.kind !== 'focus') {
-        return selectionKey(target) === selectionKey(subject) ? false : publish(target);
+        return selectionKey(target) === selectionKey(subject) ? false : publish(target, notify);
       }
       const context = selectionContext(subject);
       const host = context.kind === 'object' ? context.objectId
@@ -68,7 +69,7 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
       const retained = subject.kind === 'focus' && subject.id === target.id ? subject : null;
       if (retained && host === mountedObjectId) return false;
       return publish({ ...target, record: retained?.record ?? null, sources: retained?.sources ?? [], presentation: retained?.presentation ?? null,
-        context: host === mountedObjectId ? context : { kind: 'object', objectId: mountedObjectId } });
+        context: host === mountedObjectId ? context : { kind: 'object', objectId: mountedObjectId } }, notify);
     },
     focus(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null) {
       return publish(record ? { kind: 'focus', id: record.id, record, sources, presentation, context: selectionContext(subject) }

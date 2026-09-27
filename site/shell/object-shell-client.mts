@@ -93,9 +93,13 @@ export function mountObjectShell({
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
     if (information && information.dataset.cardSubject !== subject) information.dataset.cardSubject = subject;
   }
+  let presentedSubject: ReturnType<typeof readSelection> | null = null;
   function presentSelection() {
     if (lifetime.disposed) return;
-    const subject = readSelection(), focus = subject.kind === 'focus' ? subject : null;
+    const subject = readSelection();
+    if (presentedSubject === subject) { updateBodyCard(); return; }
+    presentedSubject = subject;
+    const focus = subject.kind === 'focus' ? subject : null;
     focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
     if (focus) loadFocusBanks();
     objectBrowser.refreshSelection();
@@ -201,7 +205,6 @@ export function mountObjectShell({
         arrived = true;
         settlePreview(keep);
         if (content) setObject(content, { preserveSidebar });
-        presentSelection();
       },
       dispose() {
         if (navigationTransition !== transition) return;
@@ -276,7 +279,7 @@ export function mountObjectShell({
     disposeContent();
     content.apply({ preserveSidebar });
     objectId = content.id;
-    focusCard.set(null);
+    presentedSubject = null;
     objectBrowser.bindObject(content.id);
     mountContent(content.id);
   }

@@ -61,8 +61,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     // changed a native control. The current controls then own that newer intent.
     if (stage.dataset.preparedSettings) initialObjectSelection(definition.controls, initialLens, JSON.parse(stage.dataset.preparedSettings));
     const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
-    delete stage.dataset.preparedDataset;
-    delete stage.dataset.preparedSettings;
+    if (stage.dataset.preparedDataset !== undefined) delete stage.dataset.preparedDataset;
+    if (stage.dataset.preparedSettings !== undefined) delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
     const lifetime = environment.createLifetime();
