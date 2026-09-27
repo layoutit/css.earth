@@ -24,9 +24,7 @@ import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
-import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
-import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
-import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '@cssearth/bake/objects/layers/observation';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
@@ -501,7 +499,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const gravity = surface.science.gravityDarkening === undefined ? null : await (async () => {
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
           await source.validatePath(path);
-          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('./gravity-darkening.mts');
+          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('@cssearth/bake/objects/layers/observation');
           const { parseCieTable } = await import('@cssearth/bake/objects/color');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
           const { readCie1931ColorMatching } = await import('@cssearth/bake/objects/sources');

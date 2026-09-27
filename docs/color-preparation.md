@@ -178,7 +178,7 @@ against MAST and what they cost. A recipe may set `pointSources: "mask"` to repo
 ## Star photospheres
 
 A star whose surface is not imaged still has a measured colour: its spectrum. The `stellar-photometric-color` kind
-([stellar-photometric-color.mts](../tools/objects/observation/stellar/stellar-photometric-color.mts)) reads one archived spectrum
+([stellar-photometric-color.ts](../packages/bake/src/objects/layers/observation/stellar/stellar-photometric-color.ts)) reads one archived spectrum
 in its own layout, averages it into 1 nm bins from 380 to 780 nm, weights it by the CIE 1931 2° observer and converts it to
 sRGB with the D65 white, brightest channel full. It reads HST CALSPEC and the STIS libraries, Gaia DR3 XP, X-Shooter, UVES,
 LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. Plain column tables can carry a one-sigma error column: a bin below zero within three errors counts as no light, and the colour range is the spectrum moved one error down and up. A record may set `gamut: 'desaturate'` when a measured colour falls outside sRGB; the least white needed to bring it inside is mixed in and reported. A stretch with no data inside
@@ -229,7 +229,7 @@ the two differ by more than 12 levels in any channel unless the record states th
 The plate is a round overlay fitted to the sphere's outline at its drawn size, geometry scale included.
 
 **Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
-fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.mts](../tools/objects/observation/gravity-darkening.mts)
+fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.ts](../packages/bake/src/objects/layers/observation/gravity-darkening.ts)
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's
 equatorial radius and temperature to come back within their errors. The measured flattening is drawn as an ellipsoid.
 

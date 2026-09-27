@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
-import { card } from '../../../tests/fixtures/fits/helpers.mts';
+import { card } from '../../fixtures/fits/helpers.mts';
 import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, parseTilePins, wiseAtlasUrl } from '@cssearth/bake/objects/raster';
 
 const size = 64, scale = 0.01;

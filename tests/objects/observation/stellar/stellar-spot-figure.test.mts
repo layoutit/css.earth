@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { sourceLoad, sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceLoad, sourceTest } from '../../source-test.mts';
 import { srgbToLinear } from '@cssearth/bake/objects/color';
-import { limbDarkeningPlate } from './stellar-photometric-color.mts';
-import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar-spot-figure.mts';
+import { limbDarkeningPlate } from '@cssearth/bake/objects/layers/observation';
+import { addSpotFigureToLimbPlate, parseSpotFigureModel } from '@cssearth/bake/objects/layers/observation';
 
 const root = new URL('../../../../src/objects/hd-189733/source/photometry/', import.meta.url);
 const record = JSON.parse(await readFile(new URL('narrett-2024-band-model.json', root), 'utf8'));

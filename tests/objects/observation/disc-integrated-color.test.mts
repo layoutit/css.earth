@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { discIntegratedColor, filterReflectance, parseCieTable, parseDiscColorRecord } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';

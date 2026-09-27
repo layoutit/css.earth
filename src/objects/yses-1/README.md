@@ -14,7 +14,7 @@ YSES 1 is a 17-million-year-old analogue of the young Sun. Two giant planets orb
 
 **The second planet.** YSES 1 c, 6 Jupiter masses at about 320 au (Bohn et al. 2020), is not built: its astrometry does not yet constrain an orbit (Roberts et al. 2025, section 5), and a planet here is placed by its orbit ([ledger](investigations.json)).
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar/stellar-photometric-color.mts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 4,573 K (the record) and log g 4.43 (from the record's mass and radius (packages/astronomy/data/bodies/yses-1.json)): a model, since no fit of this star's limb exists.
+**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/layers/observation/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 4,573 K (the record) and log g 4.43 (from the record's mass and radius (packages/astronomy/data/bodies/yses-1.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 

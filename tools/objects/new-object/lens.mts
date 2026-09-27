@@ -1,7 +1,7 @@
 /** A star's colour lens installed in a generated package: the colour record and its spectra, the limb law, the raster surface, the
  * catalogue and surface colour, the lens control, the dataset text, the manifest entries, the acquisition steps and the marker
  * recipe. Shared by placed stars (generate.mts) and companion stars on hosted orbits (hosted.mts), which are the same lens. */
-import { loadStellarPhotometricColor, type StellarColor } from '../observation/stellar/stellar-photometric-color.mts';
+import { loadStellarPhotometricColor, type StellarColor } from '@cssearth/bake/objects/layers/observation';
 import type { ColorChoice } from './color.mts';
 import type { LimbChoice } from './limb.mts';
 

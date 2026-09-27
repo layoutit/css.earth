@@ -20,8 +20,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { hostLitGray, linearToSrgb } from '@cssearth/bake/objects/color';
-import { loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { loadStellarPhotometricColor, quadraticIntensity } from '../observation/stellar/stellar-photometric-color.mts';
+import { loadDiscBandColor, loadStellarPhotometricColor, quadraticIntensity } from '@cssearth/bake/objects/layers/observation';
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { readFile, readdir } from 'node:fs/promises';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from '@cssearth/bake/objects/color';
-import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from './gravity-darkening.mts';
+import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from '@cssearth/bake/objects/layers/observation';
 import { planckRadiance } from '@cssearth/bake/objects/raster';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
