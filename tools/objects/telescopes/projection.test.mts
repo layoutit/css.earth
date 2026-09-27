@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { parseGeometry } from './projection.mts';
 import { verifiedProduct, localOutput } from './verified-product.mts';
-import { parseCli } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';

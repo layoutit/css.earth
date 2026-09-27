@@ -12,7 +12,7 @@ import { requireArray, requireRecord } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { sha256File } from '@cssearth/core/node';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
-import { parseCli } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 let root:string;
 const sourceRequest={target:'fixture',wavelengthMicrometres:[1,6],kind:'cube',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'};
 const sourceAssessment={status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}};

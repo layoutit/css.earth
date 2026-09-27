@@ -5,7 +5,8 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { deliverSource } from './archive-source.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
-import { formatArtifact, main } from './cli.mts';
+import { formatArtifact } from './cli-format.mts';
+import { main } from './cli.mts';
 import { assessSourceRelevance } from './source-relevance.mts';
 import { SIMBAD_TAP } from '@cssearth/telescope/node';
 

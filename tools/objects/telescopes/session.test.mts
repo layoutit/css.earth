@@ -12,7 +12,7 @@ import { type QueryInputs } from './query-contract.mts';
 import { selectedProductInput } from './selected-product.mts';
 import { saveSession, saveExploration, getSession, sessionRequest, savedChoice, type SessionServices } from './session.mts';
 import { explorationAnswer } from './exploration.mts';
-import { parseCli } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 import { SERVICES } from './vo/discovery.mts';
 import { matchProductSoftware } from './ascl.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';

@@ -149,7 +149,7 @@ assert t['wavelength'].unit==u.um and t['value'].unit==u.erg/(u.s*u.cm**2*u.AA)
 });
 
 test('output CLI selections remain explicit and sampling is reproducible',async()=>{
- const {parseCli}=await import('./cli.mts');const {shuffled}=await import('./survey-delivery.mts');
+ const {parseCli}=await import('./cli-arguments.mts');const {shuffled}=await import('./survey-delivery.mts');
  const args=['export','result.json','--output','spectrum','--hdu','1','--pixel','25,27','--out','chart'];
  const parsed=parseCli(args);assert.equal(parsed.command,'export');if(parsed.command==='export')assert.deepEqual(parsed.selection,{kind:'spectrum',hdu:1,pixel:[25,27]});
  assert.throws(()=>parseCli(['export','result.json','--output','image','--hdu','-1','--out','chart']),/nonnegative/);
