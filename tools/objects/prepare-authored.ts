@@ -17,7 +17,7 @@ import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
-import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
+import { attachSurfaceFeatures, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
   /** Write mode: regenerated reviewed images replace their source copies and pins instead of failing. */

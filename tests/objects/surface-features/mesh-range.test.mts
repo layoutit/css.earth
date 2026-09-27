@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { selectFeatureMeshRange } from './attach.ts';
+import { sourceTest } from '../source-test.mts';
+import { selectFeatureMeshRange } from '@cssearth/bake/objects/surface-features';
 const test = sourceTest();
 const ranges = [{ lensId: 'shape', start: 0, count: 100 }, { lensId: 'photo', start: 100, count: 200 },
   { lensId: 'regions', start: 100, count: 200 }, { lensId: 'science', start: 300, count: 150 }];

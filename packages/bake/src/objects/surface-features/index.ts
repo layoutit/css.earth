@@ -2,8 +2,9 @@
 // nomenclature from its shapefile and DBF archives, Natural Earth vectors, landing sites, landmarks placed on shape models,
 // ellipsoid projection and discovery zoom shares), source-backed feature notes, and the image-control fits that place
 // encounter and orthophoto landmarks and check published controls in native pixels. `packages/bake/cli/` holds the
-// landmark and control-check commands; attaching the banks to a globe stays in tools/objects.
+// landmark and control-check commands. `attach.ts` attaches the banks to a prepared globe for the host.
 export * from './archive.ts';
+export * from './attach.ts';
 export * from './catalog.ts';
 export * from './check-projected-controls.ts';
 export * from './dbf.ts';

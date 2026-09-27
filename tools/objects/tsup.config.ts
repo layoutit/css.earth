@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
 export default {
-  entry: ['prepare-authored.ts', 'prepare-world-navigation.ts', 'prepare-spatial-context.ts', 'content/prepare.ts', 'operations.ts', 'operations-acquisition.ts', 'surface-features/attach.ts', 'refresh-features.ts', 'refresh-photographs.ts'].map(path => resolve(root, 'tools/objects', path)),
+  entry: ['prepare-authored.ts', 'prepare-world-navigation.ts', 'prepare-spatial-context.ts', 'content/prepare.ts', 'operations.ts', 'operations-acquisition.ts', 'refresh-features.ts', 'refresh-photographs.ts'].map(path => resolve(root, 'tools/objects', path)),
   tsconfig: resolve(root, 'tools/objects/tsconfig.json'),
   format: ['esm'], target: 'node22', outDir: resolve(root, 'tools/objects/dist'), clean: true,
   splitting: false, sourcemap: false, dts: false,

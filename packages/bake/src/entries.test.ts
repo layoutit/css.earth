@@ -67,7 +67,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'asset-publication': ['delivery', 'objects/sources'],
   'site-assets': ['raster', 'runtime-source', 'objects/raster', 'objects/charts'],
   'navigation': ['astronomy', 'delivery', 'raster', 'sources', 'objects/raster'],
-  'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/layers/terrestrial'],
+  'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/scene', 'objects/layers/paged-ellipsoid', 'objects/layers/terrestrial'],
   'objects/provenance': ['objects/layers/terrestrial'],
   'objects/layers/terrestrial': ['astronomy', 'contract', 'prepared-presentation', 'photometry', 'raster', 'scene', 'presentation', 'objects/cameras', 'objects/content', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/material-composition', 'objects/layers/shape-model'],
 };

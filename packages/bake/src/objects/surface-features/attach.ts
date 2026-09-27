@@ -1,10 +1,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { AuthoredObjectDescriptor, SourceReference } from '@cssearth/objects';
-import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, renderedEllipsoidSampler } from '@cssearth/bake/objects/surface-features';
-import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig, SurfaceSampler } from '@cssearth/bake/objects/surface-features';
-import type { GeographicScene } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { authoredPresentationBasis } from '@cssearth/bake/objects/scene';
+import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.ts';
+import { parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures } from './surface-features.ts';
+import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig } from './surface-features.ts';
+import type { SurfaceSampler } from './ellipsoid.ts';
+import type { GeographicScene } from '../layers/paged-ellipsoid/index.ts';
+import { authoredPresentationBasis } from '../scene/index.ts';
 
 export interface FeatureContent { readonly searchLabel: string; readonly description: string; }
 type Verified = { readonly reference: SourceReference; readonly path: string; readonly value: unknown };
@@ -80,7 +82,7 @@ export async function pagedEllipsoidSurface({ descriptor, paged, recipe, sourceD
   const semiAxes = parseEllipsoidSemiAxes({ equatorial: meshRadiusUnits, polar: meshRadiusUnits * shape.polarRadiusKm / shape.radiusKm });
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(sourceDirectory, recipe.surfaceMap), 'utf8')));
   const scene = geographicScene(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
-  const { prepareLocationPoint } = await import('@cssearth/bake/objects/layers/paged-ellipsoid');
+  const { prepareLocationPoint } = await import('../layers/paged-ellipsoid/index.ts');
   const sampler = renderedEllipsoidSampler(axes, axes.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
     // The lane maps signed longitudes; the catalogue keeps positive-east 0–360°.
     const point = prepareLocationPoint(scene, longitudeDeg > 180 ? longitudeDeg - 360 : longitudeDeg, latitudeDeg);
