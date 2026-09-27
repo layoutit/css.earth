@@ -6454,7 +6454,7 @@
             "kind": "facility",
             "facilityId": "vlti",
             "missionId": "eso-vlti-matisse-betelgeuse",
-            "evidence": "The image is reconstructed from the 111 calibrated MATISSE files pinned in this manifest by tools/objects/interferometry/image-star.mts with the season tools/objects/interferometry/seasons/betelgeuse-matisse-2018-12."
+            "evidence": "The image is reconstructed from the 111 calibrated MATISSE files pinned in this manifest by tools/objects/interferometry/image-star.mts with the season tools/objects/interferometry/seasons/betelgeuse-matisse-2018-12. That command and season now live in packages/telescope-cli/src/archives/interferometry/."
           }
         ]
       },
@@ -6492,7 +6492,7 @@
             "kind": "facility",
             "facilityId": "vlti",
             "missionId": "eso-vlti-matisse-betelgeuse",
-            "evidence": "The image is reconstructed from the 48 calibrated MATISSE files pinned in this manifest by tools/objects/interferometry/image-star.mts with the season tools/objects/interferometry/seasons/betelgeuse-matisse-2020-12."
+            "evidence": "The image is reconstructed from the 48 calibrated MATISSE files pinned in this manifest by tools/objects/interferometry/image-star.mts with the season tools/objects/interferometry/seasons/betelgeuse-matisse-2020-12. That command and season now live in packages/telescope-cli/src/archives/interferometry/."
           }
         ]
       },
