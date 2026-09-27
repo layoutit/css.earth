@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-103",
+  "card": {
+    "text": "The host star of WASP-103 b, an ultra-hot giant with a 22-hour year.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201323014",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract",
+        "label": "Gillon et al. (2014), Astronomy & Astrophysics 562 L3",
+        "checked": "2026-09-27",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2014): st_teff 6110, st_rad 1.436, st_mass 1.22"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "This 6,110 K star hosts WASP-103 b. Its displayed colour comes from its Gaia spectrum.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201323014",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract",
+        "label": "Gillon et al. (2014), Astronomy & Astrophysics 562 L3",
+        "checked": "2026-09-27",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2014): st_teff 6110, st_rad 1.436, st_mass 1.22"
+      },
+      {
+        "catalogueId": "source-wasp-103-gaia-xp",
+        "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4439085988769170432&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "label": "Gaia DR3 sampled XP spectrum",
+        "checked": "2026-09-27",
+        "locator": "source_id 4439085988769170432; sampled flux integrated through CIE colour matching functions."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

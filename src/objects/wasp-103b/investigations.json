@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-103b",
+  "entries": [
+    {
+      "id": "sparc-mitgcm-pressure-temperature",
+      "subject": "Kreidberg et al. 2018 released three-dimensional atmosphere",
+      "status": "included",
+      "finding": "Seven exact pressure slices of the 64 longitude by 30 latitude by 53 pressure grid. The 0.11542-bar extrema (923.14 and 3359.4 K) match the paper section 6. Source is the Drag3-named table read by the authors Figure 8 script; the paper describes this comparison as tau_drag = 10^4 s. No figure digitization, new fit or new GCM run.",
+      "evidence": [
+        "https://arxiv.org/abs/1805.00029",
+        "https://github.com/lkreidberg/2017_wasp103/blob/425f2e8fe694760266398257a71eaa991ab322fd/Figures/fig7_model_comparison.py"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+        }
+      ]
+    },
+    {
+      "id": "spherical-harmonic-fits",
+      "subject": "HST and Spitzer observation-fitted thermal maps",
+      "status": "deferred",
+      "finding": "Author repository releases SPIDERMAN fit parameters and saved fits. The selected lens explores the GCM pressure field; observation-derived fits would be a distinct quantity and view.",
+      "revisitWhen": "A comparison between simulated and observation-inferred temperature is requested.",
+      "evidence": [
+        "https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd/Figures"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+        }
+      ]
+    },
+    {
+      "id": "cheops-deformation",
+      "subject": "Barros et al. 2022 tidal deformation",
+      "status": "deferred",
+      "finding": "CHEOPS infers deformation at 3 sigma. The selected GCM solves on a sphere; stretching it to a separate inferred ellipsoid would change its spatial interpretation.",
+      "revisitWhen": "A dataset with a matching deformed geometry is selected.",
+      "evidence": [
+        "https://arxiv.org/abs/2201.03328"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+        }
+      ]
+    },
+    {
+      "id": "polar-samples",
+      "subject": "Latitude coverage of released GCM table",
+      "status": "excluded",
+      "finding": "The released file stops at +/-81.562 degrees. No extrapolation into the polar caps; these are grey in every slice.",
+      "revisitWhen": "The authors release the missing polar rows or a documented continuation.",
+      "evidence": [
+        "source/science/kreidberg-2018/pressure-temperature.dat"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+        }
+      ]
+    }
+  ]
+}

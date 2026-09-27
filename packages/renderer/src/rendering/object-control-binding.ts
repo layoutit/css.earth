@@ -139,10 +139,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   function stopPlayback() { playing = null; clearPlayTimer(); }
   function publishPlayback(next: Readonly<ObjectSelectionState>) {
-    const group = lensInputs.find(input => input.value === next.desired.lensId)
-      ?.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup ?? null;
-    // Entering a sequence starts its loop. A pause lasts until the reader leaves that sequence.
-    if (ready && group !== currentGroup) { stopPlayback(); playing = group; currentGroup = group; }
+    const step = lensInputs.find(input => input.value === next.desired.lensId)
+      ?.closest<HTMLElement>('[data-step-group]');
+    const group = step?.dataset.stepGroup ?? null;
+    // Depth and other manual groups can start paused. A pause lasts until the reader leaves the group.
+    if (ready && group !== currentGroup) { stopPlayback(); playing = step?.dataset.stepAutoplay === 'false' ? null : group; currentGroup = group; }
     const members = playing ? sequences.get(playing) : undefined;
     if (!ready || document.hidden || next.error || !members?.includes(next.desired.lensId ?? '')) stopPlayback();
     if (next.pending) clearPlayTimer();

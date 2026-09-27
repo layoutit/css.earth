@@ -63,7 +63,8 @@ const stepOf = (lens: Control) => {
     <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens, index) => (
         <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-system-dataset={lens.systemDataset ? lens.id : undefined}
-          data-step-group={lens.step?.group} data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
+          data-step-group={lens.step?.group} data-step-autoplay={lens.step?.autoplay === false ? 'false' : undefined}
+          data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
           <button
             class="object-observation-control object-thumbnail-leading"
             type="submit"

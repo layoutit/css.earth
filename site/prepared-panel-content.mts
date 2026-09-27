@@ -106,7 +106,8 @@ function lensControl(value: unknown): LensControl {
   const step = lens.step === undefined ? undefined : object(lens.step, 'lens step');
   return { id: text(lens.id, 'lens id'), label, thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
     ...(noData === undefined ? {} : { noData }),
-    ...(step === undefined ? {} : { step: { group: text(step.group, 'lens step group'), label: text(step.label, 'lens step label') } }),
+    ...(step === undefined ? {} : { step: { group: text(step.group, 'lens step group'), label: text(step.label, 'lens step label'),
+      ...(step.autoplay === undefined ? {} : { autoplay: optionalBoolean(step.autoplay, 'lens step autoplay') }) } }),
     ...(volume === undefined ? {} : { volume: { objectId: text(volume.objectId, 'volume object'), lensId: text(volume.lensId, 'volume lens'), surface: text(volume.surface, 'volume surface') } }),
     facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
 }

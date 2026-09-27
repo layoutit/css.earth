@@ -17,6 +17,7 @@ export * from './image-dem-science.ts';
 export * from './image-dem.ts';
 export * from './pds/isis3-raster.ts';
 export * from './latitude-belt-map.ts';
+export * from './lonlat-slice-table.ts';
 export * from './numpy/npy-dictionary-map.ts';
 export { readNpy, type SpinFrameTransfer, spinFrameTransfer, loadSpinFrameTransfer, decodeNpyLonLatGrid, loadNpyLonLatGrid, npyLonLatGridDependencies } from './numpy/npy-lonlat-grid.ts';
 export * from './numpy/npy-pickle.ts';

@@ -67,6 +67,8 @@ export interface LensStep {
   group: string;
   /** What distinguishes this step, such as "1.45 µm". */
   label: string;
+  /** Start this group's loop automatically; false keeps depth or other manual selections still. */
+  autoplay?: boolean;
 }
 
 export interface ChartRecipe {

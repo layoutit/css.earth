@@ -32,10 +32,10 @@ test('a collapsed dataset preview follows the listed member of a selected sequen
 
 afterEach(() => vi.useRealTimers());
 
-function sequence() {
+function sequence(autoplay = true) {
   const ids = ['first', 'last', 'other'];
   const { document, Event } = parseHTML(`<main></main><section class="object-information-panel"><div class="object-lenses">
-    <form data-dataset-form>${ids.map(id => `<div data-lens-option ${id !== 'other' ? 'data-step-group="dates"' : ''}>
+    <form data-dataset-form>${ids.map(id => `<div data-lens-option ${id !== 'other' ? `data-step-group="dates" data-step-autoplay="${autoplay}"` : ''}>
       <button type="submit" name="dataset" value="${id}" aria-controls="details-${id}">${id}</button></div>`).join('')}</form></div>
     ${ids.map(id => `<div id="details-${id}" data-lens-details="${id}">${id !== 'other' ?
       '<button type="button" data-dataset-play="dates" disabled>Play</button>' : ''}</div>`).join('')}
@@ -87,6 +87,23 @@ test('sequence playback wraps, waits for the pending map, and pauses without ano
   h.click('[value="last"]'); h.commit();
   vi.advanceTimersByTime(1500);
   expect(h.actions.at(-1)).toBe('first');
+  h.binding.destroy();
+});
+
+test('a manual group stays at its selected depth until playback is requested', () => {
+  vi.useFakeTimers();
+  const h = sequence(false);
+  vi.advanceTimersByTime(10000);
+  expect(h.actions).toEqual([]);
+  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
+  h.click('#details-last [data-dataset-play]');
+  vi.advanceTimersByTime(1500);
+  expect(h.actions).toEqual(['first']);
+  h.commit();
+  h.click('[value="other"]'); h.commit();
+  h.click('[value="last"]'); h.commit();
+  vi.advanceTimersByTime(10000);
+  expect(h.actions).toEqual(['first', 'other', 'last']);
   h.binding.destroy();
 });
 

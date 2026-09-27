@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201323014",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gillon et al. (2014): WASP-103 b: a new planet at the edge of tidal disruption",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1401.2784"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201323014"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014A&A...562L...3G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201323014",
+      "label": "Astronomy & Astrophysics 562 L3"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G",
+      "checkedOn": "2026-09-27",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gillon et al. (2014), Astronomy & Astrophysics 562 L3",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 562 L3",
+  "creators": [
+    "M. Gillon",
+    "D. R. Anderson",
+    "A. Collier-Cameron",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

@@ -1,0 +1,245 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p0.webp",
+      "bytes": 212,
+      "sha256": "6ef9679694c1f61839cc09eb07449663473b898d24dc029a2166e67317de50c3"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p1.webp",
+      "bytes": 344,
+      "sha256": "c8d07d97fb32877346d9ab116aa1618222bda0068a4f25745f015f41310251c2"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p2.webp",
+      "bytes": 582,
+      "sha256": "326df8afbb6dd358d82ac81e9b67b2d2d7015a78fe97ff405aeb44d48f293c5a"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p3.webp",
+      "bytes": 962,
+      "sha256": "01863b48f45f88b6e51aeaead086f314c145ec8406e067c0459c0a17fe6fb877"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p4.webp",
+      "bytes": 554,
+      "sha256": "7a78b6a6fcd4ec127a743aea7a734a3bb39dbcd6d682fd9ad3bf19698986a011"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p5.webp",
+      "bytes": 214,
+      "sha256": "b35cef0298314d805b86e8111c6b190572f873015843264b7f8a341dc1b6da8a"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-lens-temperature-p6.webp",
+      "bytes": 44,
+      "sha256": "f48b1064e98c311c636f6a0d004d67862a686a5858e721fdcf92708a621771cb"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p0@2x.webp",
+      "bytes": 18850,
+      "sha256": "801b079629b4e823b643601f69c00c1cfb41ea2cadf6de038e93b2514a754cec"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p1@2x.webp",
+      "bytes": 20080,
+      "sha256": "19af2ee67860900a10cc10334435c59b0e62912dcdfdb0c774394e217a0a337d"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p2@2x.webp",
+      "bytes": 16234,
+      "sha256": "518dda55b493208c45d6059a1ab2b030982c757e42bb04ee173edb81db599f99"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p3@2x.webp",
+      "bytes": 14716,
+      "sha256": "492c76cdf37f4fde81404f46be8c6cf038439223e70261d2f5a23fe61535346d"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p4@2x.webp",
+      "bytes": 11564,
+      "sha256": "d3f5f5cf65308b6b9aa3265915bfb6875cb7570af892aa928c8471e70a0cdf46"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p5@2x.webp",
+      "bytes": 10274,
+      "sha256": "5d33fb64c550df52eeec3525acfbe5fb5c21c2f40fe70b2689413105bfb2f6b2"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-poles-temperature-p6@2x.webp",
+      "bytes": 7584,
+      "sha256": "1d2f18c622b73d4ffe604f044b7bfb8f3ccb4f92921ec59c60b06055671c7db1"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p0@2x.webp",
+      "bytes": 106252,
+      "sha256": "4a2843a97857abdf26a116be7d52af4f76ab73e69f05176d6d9f45ae43baf457"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p1@2x.webp",
+      "bytes": 130348,
+      "sha256": "b4428ab7fd6f8ff0cb2a73b2917bcfa9d114ffd686cacf7895ce035677bd6e30"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p2@2x.webp",
+      "bytes": 144164,
+      "sha256": "8acb9418eb40a64e150eec9f5af7ad2c1cf2d2b9270825e2c25e24cb674a972f"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p3@2x.webp",
+      "bytes": 61308,
+      "sha256": "a5a08d6372ffcd97b57a39109f942deffa2c24daac57c068a1ea23e7bcc4e44c"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p4@2x.webp",
+      "bytes": 36074,
+      "sha256": "0c89b8d1967f64ea8f0d7d130c564a9abedaee37f998b1e3388489539a2dbd26"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p5@2x.webp",
+      "bytes": 22738,
+      "sha256": "8d0e6c50f6434c5398736cb876e8cc04638881530d1e715cb49c4f191687c2ab"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-103b-surface-temperature-p6@2x.webp",
+      "bytes": 4348,
+      "sha256": "4bdc1528d6e7740720ce42bc2cc721be834b2c8bbab60ee9e3246f177af7205f"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 4999,
+      "sha256": "efecf1b99118177519cf599dd09c5ef850852a3bb6cd42a42115264f114cbaa5"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1408,
+      "sha256": "68e512a1008aa15caf6a37d258a6373d2e77564f30aa823ce2629c1a6ab565b9"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2032,
+      "sha256": "cf5e279ec5b4ab881830e5c7bcb0073315f0240548ca16b771b745a51d93f546"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 11063,
+      "sha256": "f0133a90ce34635ad3f5bc050921dab1c73fab84aba72aed4db911cdc600ad97"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 14614,
+      "sha256": "f9412439f92d40015b2fc6ee3a07507e92bd83b9ce763bc32b74bace29daf59e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 622,
+      "sha256": "0c5ab3a036865b27e70f14934e7400fc17e5c8174237476122c81a2884d7267f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p0.webp",
+      "bytes": 2046,
+      "sha256": "b65f71606cd2d52a57f0e9ab9ce3a9e65835b7cbb9f4dc8eda1595ad68dc1219"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p1.webp",
+      "bytes": 2420,
+      "sha256": "6a5024080a91d2c62c5e2f9e094bd06abc4abadc3cc3a6caeba6a1d7c17750fa"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p2.webp",
+      "bytes": 2318,
+      "sha256": "ccb427a26374fec469f0a5060da6c011f8713983349c1ec56aa7149f0ce481bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p3.webp",
+      "bytes": 2090,
+      "sha256": "3716ed7a7c4fa3b90fbd439928ad938259999aa8841627acf72829e9b5fbf25e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p4.webp",
+      "bytes": 1422,
+      "sha256": "2fc687ba24fedb0d22ffe0c10c6a73405d5582c0ef333fca574ccd9c2d475ab0"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p5.webp",
+      "bytes": 1172,
+      "sha256": "0fba0369a866d1d1a24d957c5c1bd739b5e3f04f5e3b1128fc511fa849a6b85c"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-p6.webp",
+      "bytes": 788,
+      "sha256": "abe1d93179b96724094cb4d343bf0a422a06470da786bbc80aa69bef04292559"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 519392,
+      "sha256": "2ef8f77f9b4411ca8e47aa7f206925a966e356e7a90c39fff854164105995fbf"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 393860,
+      "sha256": "741eb4705a50bc13c9a4d186d60076b230f128b30b2916c181f1b515fdefe49a"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1202,
+      "sha256": "09fdb07aa52309a6e4b29216c9d40c51002b5689effb997fb2011d72b832176e"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2167,
+      "sha256": "e8a44857e281bb0207918bf09f7ea36ac510714676579c0fe7e4ec2821b89985"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1160,
+      "sha256": "b601b9704022ceae5d185ece3882cd84ff40ff5e42f505eaeda210d7de368356"
+    }
+  ]
+}

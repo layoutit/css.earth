@@ -1,0 +1,44 @@
+{
+  "id": "arxiv-1805-00029",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kreidberg et al. (2018): Global Climate and Atmospheric Composition of the Ultra-hot Jupiter WASP-103b from HST and Spitzer Phase Curve Observations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1805.00029"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aac3df"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1805.00029",
+      "label": "Paper"
+    },
+    {
+      "role": "archive",
+      "url": "https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd",
+      "label": "Author data and analysis"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1805.00029",
+      "checkedOn": "2026-09-26",
+      "locator": "Section 6 and Figure 8: SPARC/MITgcm, spherical geometry, temperature in kelvin at pressure in bar"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 156, 17",
+  "creators": [
+    "Laura Kreidberg",
+    "Vivien Parmentier",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

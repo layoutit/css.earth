@@ -1,0 +1,175 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-103b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-103 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature-p0",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-p1",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-p2",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-p3",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-p4",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-p5",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "temperature-p6",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 109239.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-103b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-103 b",
+      "classification": "exoplanet",
+      "color": "#f98e09",
+      "distanceAu": 112514709,
+      "description": "A 22-hour year, explored through a published climate simulation.",
+      "systemName": "WASP-103 system",
+      "order": 1844,
+      "context": {
+        "order": 1844
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5898932281773809000,
+        -15623299435877407000,
+        2104761268589890800
+      ],
+      "presentationToReference": [
+        -0.28935695409168466,
+        -0.9562016290569171,
+        0.044170099701953854,
+        -0.949052837218946,
+        0.292597553469065,
+        0.11698454543480016,
+        0.12478487602851523,
+        0.008069466699568938,
+        0.9921510058563328
+      ],
+      "orbitUpReference": [
+        0.9562016290569171,
+        -0.292597553469065,
+        -0.008069466699568938
+      ],
+      "metersPerUnit": 352386.4516129032,
+      "bodyRadiusM": 109239800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

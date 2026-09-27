@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-103b",
+  "card": {
+    "text": "A 22-hour year, explored through a published climate simulation.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1805-00029",
+        "url": "https://arxiv.org/abs/1805.00029",
+        "label": "Kreidberg et al. (2018)",
+        "checked": "2026-09-26",
+        "locator": "Section 6; Figure 8; released SPARC/MITgcm pressure-temperature grid"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Explore how temperature changes through the simulated atmosphere of this ultra-hot giant.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1805-00029",
+        "url": "https://arxiv.org/abs/1805.00029",
+        "label": "Kreidberg et al. (2018)",
+        "checked": "2026-09-26",
+        "locator": "Section 6; Figure 8; released SPARC/MITgcm pressure-temperature grid"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature-p0": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    },
+    "temperature-p1": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    },
+    "temperature-p2": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    },
+    "temperature-p3": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    },
+    "temperature-p4": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    },
+    "temperature-p5": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    },
+    "temperature-p6": {
+      "title": "SPARC/MITgcm atmosphere",
+      "detail": "Climate simulation",
+      "summary": "Published atmospheric model in false color. Change pressure to explore depth; grey caps lack released samples."
+    }
+  }
+}
