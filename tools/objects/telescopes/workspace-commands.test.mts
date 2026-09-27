@@ -72,6 +72,16 @@ test('the F16 volume bake refuses an invalid descriptor with the class and messa
   } finally { await fixture.cleanup(); }
 });
 
+const alive = (pid: number) => { try { process.kill(pid, 0); return true; } catch { return false; } };
+async function readPid(path: string) {
+  for (let attempt = 0; attempt < 200; attempt++) { const pid = Number(await readFile(path, 'utf8').catch(() => '0')); if (pid) return pid; await new Promise(accept => setTimeout(accept, 50)); }
+  throw new Error(`${path} was never written`);
+}
+async function gone(pid: number) {
+  for (let attempt = 0; attempt < 100 && alive(pid); attempt++) await new Promise(accept => setTimeout(accept, 50));
+  return !alive(pid);
+}
+
 test('terminating the telescope stops the workspace command it is running', async () => {
   const fixture = await workspace(`import { writeFileSync } from 'node:fs';
 writeFileSync(process.argv[2], String(process.pid));
@@ -89,5 +99,22 @@ setInterval(() => {}, 1000);
     assert.deepEqual(await closed, { code: null, signal: 'SIGTERM' }, 'the telescope ends by the signal it received');
     for (let attempt = 0; attempt < 100 && alive(pid); attempt++) await new Promise(accept => setTimeout(accept, 50));
     assert.equal(alive(pid), false, 'the workspace command stopped with it');
+  } finally { await fixture.cleanup(); }
+});
+
+test('terminating the telescope also stops the processes the workspace command started', async () => {
+  const fixture = await workspace(`import { spawn } from 'node:child_process';
+spawn(process.execPath, ['-e', 'require("node:fs").writeFileSync(process.argv[1], String(process.pid)); setInterval(() => {}, 1000);', process.argv[2]], { stdio: 'ignore' });
+setInterval(() => {}, 1000);
+`);
+  const pidFile = resolve(fixture.directory, 'grandchild.pid');
+  try {
+    const child = spawn(process.execPath, [resolve(fixture.directory, 'dispatch.mts'), pidFile], { cwd: ROOT, stdio: 'ignore' });
+    const closed = new Promise(accept => child.once('close', accept));
+    const pid = await readPid(pidFile);
+    child.kill('SIGTERM'); await closed;
+    const stopped = await gone(pid);
+    if (!stopped) process.kill(pid, 'SIGKILL');
+    assert.ok(stopped, 'the grandchild stopped with the telescope');
   } finally { await fixture.cleanup(); }
 });

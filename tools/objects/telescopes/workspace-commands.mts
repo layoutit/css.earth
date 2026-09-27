@@ -13,13 +13,16 @@ export interface WorkspaceCommand { readonly script: string; readonly source: st
 
 /** Run a workspace entry with the telescope's own Node and return its answer's result. */
 export async function runWorkspaceCommand(root: string, command: WorkspaceCommand, args: readonly string[]): Promise<ProcessResult> {
-  const child = spawn(process.execPath, [resolve(root, command.script), ...args], { cwd: root, stdio: ['inherit', 2, 2, 'ipc'] });
+  // Its own process group, so a signal reaches every process the command starts (a bake's steps) as well as the command.
+  // The commands read no input; a process outside the terminal's session could not read it anyway.
+  const child = spawn(process.execPath, [resolve(root, command.script), ...args], { cwd: root, detached: true, stdio: ['ignore', 2, 2, 'ipc'] });
+  const signalGroup = (signal: NodeJS.Signals) => { try { process.kill(-child.pid!, signal); } catch { /* The group has already ended. */ } };
   let answer: ProcessAnswer | undefined;
   child.on('message', message => { answer ??= parseProcessAnswer(message); });
   // The command is part of the telescope's own run: a signal the telescope receives stops it too, and the telescope then
   // ends by that signal as it did when it ran the command in process; if the telescope exits first, the command goes with it.
   let received: NodeJS.Signals | undefined;
-  const forward = (signal: NodeJS.Signals) => { received ??= signal; child.kill(signal); }, orphan = () => { child.kill('SIGKILL'); };
+  const forward = (signal: NodeJS.Signals) => { received ??= signal; signalGroup(signal); }, orphan = () => { signalGroup('SIGKILL'); };
   process.on('SIGINT', forward); process.on('SIGTERM', forward); process.on('exit', orphan);
   const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => accept(status ?? (signal === 'SIGINT' ? 130 : 143))); })
     .finally(() => { process.off('SIGINT', forward); process.off('SIGTERM', forward); process.off('exit', orphan); });
