@@ -3,11 +3,15 @@ import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '@cssearth/objects/sources';
 import { validateObjectProvenance } from '@cssearth/objects/provenance';
-import { manifestSources } from '@cssearth/bake/sources';
+import { manifestSources } from './context-source-records.ts';
 import { requireInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
-import { VOLUME_METADATA_FILENAMES } from '@cssearth/bake/delivery';
-export const contextProvenanceCompilerClosure = ['tools/prepare/prepare-context-provenance.mts', 'packages/bake/src/sources/context-source-records.ts'];
-export async function prepareContextProvenance({ root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) } = {}) {
+import { VOLUME_METADATA_FILENAMES } from '../delivery/index.ts';
+export const contextProvenanceCompilerClosure = ['packages/bake/src/sources/prepare-context-provenance.ts', 'packages/bake/src/sources/context-source-records.ts'];
+/** Compile each context package's provenance record and presentation from its manifest, recipes and inventory pins. `route`
+ * is the application route that shows the context objects; the application passes it in. */
+export async function prepareContextProvenance({ route, root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) }: {
+  route: string; root?: string; input?: (path: string) => Promise<Buffer>;
+}) {
   const results = [];
   const generator = await input(contextProvenanceCompilerClosure[0]!);
   for (const path of contextProvenanceCompilerClosure.slice(1)) await input(path);
@@ -69,7 +73,7 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
     const next = mergeInventory(inventory, 'prepared', runtimeAssets);
     const outputs = [...metadata.map(item => ({ path: resolve(root, base, 'prepared', item.filename), text: item.text })),
       { path: resolve(root, base, 'inventory.json'), text: inventoryText(next) }];
-    results.push({ id, name: sourceText(presentation.name), route: '/sun/', base, controls: [], provenance, outputs });
+    results.push({ id, name: sourceText(presentation.name), route, base, controls: [], provenance, outputs });
   }
   return results;
 }

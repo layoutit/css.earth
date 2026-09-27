@@ -4,8 +4,8 @@ import { relative, resolve } from 'node:path';
 import { readFile, readdir } from 'node:fs/promises';
 import { prepareFacilities } from '../prepare/prepare-facilities.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance } from '../prepare/prepare-volume-provenance.mts';
-import { prepareContextProvenance } from '../prepare/prepare-context-provenance.mts';
-import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
+import { prepareContextProvenance, readPreparedContextProvenance } from '@cssearth/bake/sources';
+import { CONTEXT_ROUTE } from '../../src/platform/dataset-destination.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
@@ -32,18 +32,18 @@ export function sourceCheckMode(value = process.env.CSSEARTH_SOURCE_CHECK_MODE):
   throw new TypeError(`Unknown source check mode: ${value}`);
 }
 export const sourceTestVolumes = () => sourceCheckMode() === 'published' ? readPreparedVolumeProvenance() : prepareVolumeProvenance();
-export const sourceTestContexts = () => sourceCheckMode() === 'published' ? readPreparedContextProvenance() : prepareContextProvenance();
+export const sourceTestContexts = () => sourceCheckMode() === 'published' ? readPreparedContextProvenance({ route: CONTEXT_ROUTE }) : prepareContextProvenance({ route: CONTEXT_ROUTE });
 export const prepareTestFacilities = (options: Parameters<typeof prepareFacilities>[0] = {}) =>
   prepareFacilities({ ...options, packageMode: sourceCheckMode() });
 
 export async function sourceTestGeneratedPaths(mode = sourceCheckMode()): Promise<string[]> {
   sourceCheckMode(mode);
   if (mode === 'published') {
-    const packages = [...await readPreparedVolumeProvenance(), ...await readPreparedContextProvenance()];
+    const packages = [...await readPreparedVolumeProvenance(), ...await readPreparedContextProvenance({ route: CONTEXT_ROUTE })];
     // These are the two metadata records consumed by each reader, not the object's whole asset inventory.
     // A newly introduced runtime, scene or image dependency must still fail the catalogue closure check.
     return [...bodyPages(), ...packages.flatMap(({ base }) => ['provenance.json', 'presentation.json'].map(file => `${base}/prepared/${file}`))];
   }
-  return [...bodyPages(), ...[...await prepareVolumeProvenance(), ...await prepareContextProvenance()].flatMap(volume =>
+  return [...bodyPages(), ...[...await prepareVolumeProvenance(), ...await prepareContextProvenance({ route: CONTEXT_ROUTE })].flatMap(volume =>
     volume.outputs.map(output => relative(process.cwd(), output.path)))];
 }

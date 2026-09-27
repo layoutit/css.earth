@@ -1,6 +1,5 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
-import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
-import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
+import { prepareContextProvenance, contextProvenanceCompilerClosure, readPreparedContextProvenance } from '@cssearth/bake/sources';
 import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '@cssearth/objects/provenance';
@@ -27,7 +26,7 @@ import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.m
 import type { FactsheetSourceTransport } from '../assets/restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
-import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
+import { CONTEXT_ROUTE, DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
@@ -158,8 +157,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   // and previews from their sources, but catalog-only publication must never invent a second package identity.
   const volumes = packageMode === 'published'
     ? [...await readPreparedVolumeProvenance({ root, input }),
-      ...await readPreparedContextProvenance({ root, input })]
-    : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
+      ...await readPreparedContextProvenance({ route: CONTEXT_ROUTE, root, input })]
+    : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ route: CONTEXT_ROUTE, root, input })];
   for (const volume of volumes) {
     const document = validateObjectProvenance(volume.provenance, volume.id);
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
