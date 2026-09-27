@@ -92,7 +92,9 @@ export function parseApplycal(line: string): CalibrationApplication {
   const extra = [...values.keys()].filter(name => !required.includes(name));
   // An argument this route does not replay would change the calibration silently.
   if (extra.length) throw new TypeError(`applycal states arguments this route does not replay: ${extra.join(', ')}.`);
-  const gaintable = listOf(values.get('gaintable'), 'gaintable').map(value => stringOf(value, 'gaintable entry'));
+  // Later pipeline releases write each table with the path it had on ALMA's own processing machine
+  // (`/opt/dared/.../working/<table>`); the delivery ships the tables by name, so the name is what this route applies.
+  const gaintable = listOf(values.get('gaintable'), 'gaintable').map(value => stringOf(value, 'gaintable entry').split('/').at(-1)!);
   const gainfield = listOf(values.get('gainfield'), 'gainfield').map(value => stringOf(value, 'gainfield entry'));
   const interp = listOf(values.get('interp'), 'interp').map(value => stringOf(value, 'interp entry'));
   const calwt = listOf(values.get('calwt'), 'calwt').map(value => {

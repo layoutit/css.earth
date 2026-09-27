@@ -83,3 +83,14 @@ test('a cont.dat this route cannot read is refused rather than imaged blindly', 
   assert.throws(() => continuumSelection([]), /at least one range/u);
   assert.throws(() => continuumSelection([{ spectralWindow: 1, lowGHz: 1, highGHz: 2, frame: 'LSRK' }, { spectralWindow: 1, lowGHz: 3, highGHz: 4, frame: 'TOPO' }]), /mix reference frames/u);
 });
+
+test('a record that states each table by its path on ALMA’s processing machine applies the table the delivery ships', async () => {
+  // ALMA 2019.1.00696.S (ε Eridani, Cycle 7 pipeline): every gaintable is written as /opt/dared/.../working/<table>.
+  const text = await readFile(resolve(root, 'tests/fixtures/alma/uid___A002_Xe539c7_X12189.ms.calapply.txt'), 'utf8');
+  assert.ok(text.includes("'/opt/dared/"), 'the fixture carries the machine paths this test is about');
+  const applications = parseCalibrationRecord(text);
+  const tables = requiredTables(applications);
+  assert.ok(tables.length > 0 && tables.every(table => !table.includes('/')), 'each table is applied by the name it is shipped under');
+  assert.ok(tables.includes('uid___A002_Xe539c7_X12189.ms.h_tsyscal.s6_5.tsyscal.tbl'));
+  assert.deepEqual(applications.map(application => application.intent), ['PHASE', 'BANDPASS,AMPLITUDE', 'TARGET']);
+});

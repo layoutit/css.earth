@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { parseCalibrationRecord } from './alma-calibration.mts';
 import { pipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration } from './alma-selfcal.mts';
-import { applycalStatement, pipelineTcleanArguments, restoreScript, type ReplayedFlags } from './alma-restore.mts';
+import { applycalStatement, deliveryImagingScript, executionOfTarball, loggedVisibilities, pipelineTcleanArguments, restoreScript, type ReplayedFlags } from './alma-restore.mts';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const record = () => readFile(resolve(root, 'tests/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');
@@ -135,4 +135,38 @@ test('a delivery whose self-calibration did not succeed is imaged without it', a
   // The shipped calibration still carries its own spectral-window maps; it is the self-calibration tables that are absent.
   assert.ok(!script.includes('Target_R_Dor_'));
   assert.ok(script.includes("tclean(vis=['R_Dor.targets.ms']"), 'the targets split is still what gets imaged');
+});
+
+test('a delivery of several executions is restored one tarball at a time, each split named as the pipeline named it', async () => {
+  // The archive names each raw tarball for its execution; the bare asdm.tar of a single-execution delivery names none.
+  assert.equal(executionOfTarball('/raw/2019.1.00696.S_uid___A002_Xe539c7_X12189.asdm.sdm.tar'), 'uid___A002_Xe539c7_X12189');
+  assert.equal(executionOfTarball('/work/asdm.tar'), null);
+  const script = restoreScript({ asdm: '/raw/uid___A002_X1', visibilities: 'uid___A002_X1.ms', applications: parseCalibrationRecord(await record()),
+    flags, plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x', scratch: '/fast', split: 'uid___A002_X1_target.ms', splitOnly: true });
+  assert.ok(script.includes("outputvis='/fast/uid___A002_X1_target.ms'"), 'the split carries the name the delivery\u2019s imaging call uses');
+  assert.ok(script.includes("ready = '/fast/uid___A002_X1_target.ms.ready'"));
+  assert.ok(!script.includes('tclean(') && !script.includes('exportfits('), 'one execution alone is not imaged');
+  const compiled = spawnSync('python3', ['-c', 'import ast, sys; ast.parse(sys.stdin.read())'], { input: script, encoding: 'utf8' });
+  assert.equal(compiled.status, 0, compiled.stderr);
+});
+
+test('the executions of a delivery are imaged together, in the order its logged call lists them', async () => {
+  // The final continuum call of ALMA 2019.1.00696.S (\u03b5 Eridani, a six-pointing mosaic observed in five sessions).
+  const mosaic = pipelineImaging(await fixture('casa_commands.mosaic.tclean.log'), 'eps_eri');
+  const order = ['uid___A002_Xe59f51_X1822_target.ms', 'uid___A002_Xe539c7_X4ec3_target.ms', 'uid___A002_Xe539c7_Xc742_target.ms',
+    'uid___A002_Xe5aacf_X1929_target.ms', 'uid___A002_Xe539c7_X12189_target.ms'];
+  assert.deepEqual(loggedVisibilities(mosaic), order, 'the log\u2019s order, not the order the tarballs were downloaded in');
+  const script = deliveryImagingScript({ imaging: mosaic, imageBase: '/work/eps_eri.restored', scratch: '/fast' });
+  assert.ok(script.includes(`tclean(vis=[${order.map(name => `'/fast/${name}'`).join(', ')}]`));
+  // The per-execution selections are lists parallel to vis, passed as the log wrote them.
+  const passed = pipelineTcleanArguments(mosaic);
+  assert.equal(passed.get('gridder'), "'mosaic'");
+  assert.equal(passed.get('weighting'), "'briggs'");
+  assert.equal(passed.get('threshold'), "'3.87e-05Jy'");
+  assert.equal((passed.get('scan') ?? '').match(/'[^']*'/gu)?.length, 5, 'one scan list per execution');
+  // A split that was never finished stops the run before tclean, instead of an image with fewer executions than the archive's.
+  assert.ok(script.indexOf("if missing: sys.exit(") < script.indexOf('tclean('));
+  assert.ok(script.includes("exportfits(imagename='/fast/eps_eri.restored.image.pbcor', fitsimage='/work/eps_eri.restored.fits'"));
+  const compiled = spawnSync('python3', ['-c', 'import ast, sys; ast.parse(sys.stdin.read())'], { input: script, encoding: 'utf8' });
+  assert.equal(compiled.status, 0, compiled.stderr);
 });

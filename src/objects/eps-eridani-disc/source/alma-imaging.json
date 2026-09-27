@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-alma-imaging-recipe@1",
+  "citation": {
+    "text": "Booth et al. (2023), MNRAS 521, 6180, \"The clumpy structure of ε Eridani's debris disc revisited by ALMA\"",
+    "url": "https://arxiv.org/abs/2303.13584",
+    "locator": "section 2 and Figure 1: natural weighting, multi-frequency synthesis over the full bandwidth of all four spectral windows, multiscale CLEAN with scales of 0, 1.4 and 7 arcsec, a 25 microJy/beam threshold, an elliptical mask covering the disc and a circular mask covering the source north-west of it; the synthesised beam is 1.6 x 1.2 arcsec at 102 degrees east of north and the image rms is 14 microJy/beam"
+  },
+  "measurementSets": [
+    "uid___A002_Xe59f51_X1822_target.ms",
+    "uid___A002_Xe539c7_X4ec3_target.ms",
+    "uid___A002_Xe539c7_Xc742_target.ms",
+    "uid___A002_Xe5aacf_X1929_target.ms",
+    "uid___A002_Xe539c7_X12189_target.ms"
+  ],
+  "field": "eps_eri",
+  "spw": "19,21,23,25",
+  "weighting": "natural",
+  "deconvolver": "multiscale",
+  "scalesArcsec": [0, 1.4, 7],
+  "threshold": "25uJy",
+  "gridder": "mosaic",
+  "cellArcsec": 0.19,
+  "imageSize": [378, 420],
+  "phaseCentre": "ICRS 03:32:54.5185 -009.27.29.501",
+  "pblimit": 0.2,
+  "mask": {
+    "regions": [
+      "ellipse [[03:32:54.521, -09.27.29.49], [28.1arcsec, 23.4arcsec], -1.1deg]",
+      "circle [[03:32:53.325, -09.27.04.61], 2.5arcsec]"
+    ],
+    "source": "The paper describes the masks without sizes. The ellipse is centred on the star's position in these data (Booth et al. 2023, Table 2, central source) and reaches two ring widths beyond the ring's centre line, 69.6 + 2 x 10.5 = 90.6 au (Table 3), 28.1 arcsec at the Gaia DR3 parallax of 310.577 mas; its minor axis is that times cos 33.7 degrees and its position angle -1.1 degrees (Table 3). The circle covers the north-west source at its Table 2 position with a radius of 2.5 arcsec, about 1.5 beams."
+  },
+  "chosen": [
+    "The pixel size (0.19 arcsec) and image size (378 x 420) are the pipeline's for these data; the paper does not state its grid.",
+    "The phase centre is the pipeline's; the paper shows offsets from the star.",
+    "The primary-beam limit (0.2) is the pipeline's; the paper does not state one.",
+    "The mask sizes are this route's reconstruction from the paper's own ring and source measurements (see mask.source)."
+  ],
+  "published": {
+    "beamArcsec": [1.6, 1.2],
+    "beamPositionAngleDeg": 102,
+    "noiseMicroJyPerBeam": 14
+  }
+}
