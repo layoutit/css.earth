@@ -12,7 +12,7 @@
 // follows the silhouette. A step is written on the group's own leaves, so a change restyles only them; before the first
 // write they inherit the body's initial step from the system node. The node builder writes the lengths and transform;
 // the presentation bindings, measured in a browser, write each factor, the groups and the steps
-// (tools/prepared/prepared-presentation-bindings.mts), so every generator shares one rule.
+// (`prepared-presentation/prepared-presentation-bindings.ts`), so every generator shares one rule.
 import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from '@cssearth/renderer/rendering/prepared-silhouette-steps.ts';
 import type { PreparedTexturePlacements } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 
@@ -111,7 +111,7 @@ export function leafBoxBlocks(centres: readonly (readonly number[])[], bodyCentr
 
 /** PreparedTexturePlacements for blocks of leaf corners, in scene coordinates: each block's bounding sphere, mean outward
  * direction and largest angle to any corner, and the body's centre and nearest corner. Rounded outward as the texture
- * placements are (tools/prepared/prepared-presentation-bindings.mts): a larger bound and spread, and a smaller body, only
+ * placements are (`prepared-presentation/prepared-presentation-bindings.ts`): a larger bound and spread, and a smaller body, only
  * ever count more leaves as seen. */
 export function leafBoxPlacements(blocks: ReadonlyMap<string, readonly (readonly number[])[]>, bodyCentre: readonly number[]): PreparedTexturePlacements {
   const length = (vector: readonly number[]) => Math.hypot(...vector), minus = (a: readonly number[], b: readonly number[]) => a.map((value, axis) => value - b[axis]!);

@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '../../packages/catalog/src/spatial.ts';
-import { parsePreparedClusterCatalog } from '../../packages/catalog/src/clusters.ts';
+import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
+import { parsePreparedClusterCatalog } from '@cssearth/catalog';
 import { sourceObject } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
 import type { SourceUse } from '@cssearth/objects/provenance';

@@ -16,12 +16,12 @@ import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, 
 import { hasErrorCode } from '@cssearth/core';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
-import { manifestSources } from '../sources/context-source-records.mts';
+import { manifestSources } from '@cssearth/bake/sources';
 import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
 import { fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
-export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/sources/context-source-records.mts',
+export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
   'tools/objects/observation/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 
 const integer = (value: unknown): number => {

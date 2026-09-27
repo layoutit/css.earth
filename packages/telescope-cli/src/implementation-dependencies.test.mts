@@ -125,6 +125,25 @@ test('the provenance records and the runtime asset closure are followed into @cs
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the catalogue readers are followed into @cssearth/catalog, as when the spatial citations and navigation imported them by path', async () => {
+  const CATALOGUE = ['packages/catalog/src/clusters.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/spatial.ts'];
+  for (const entry of ['packages/bake/src/sources/spatial-source-citations.ts', 'tools/prepare/prepare-facilities.mts', 'packages/bake/src/navigation/navigation-destinations.ts']) {
+    const paths = new Set((await implementationFingerprint(WORKSPACE, [entry])).files.map(file => file.path));
+    for (const path of CATALOGUE) assert.ok(paths.has(path), `${entry} identity names ${path}`);
+  }
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-catalog-'));
+  try {
+    await writeFile(resolve(root, 'entry.mts'), "import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';\nexport const used=[parsePreparedGalaxyCatalog];\n");
+    await mkdir(resolve(root, 'packages/catalog/src'), { recursive: true });
+    await writeFile(resolve(root, 'packages/catalog/src/spatial.ts'), 'export const parsePreparedGalaxyCatalog=()=>1;\n');
+    await writeFile(resolve(root, 'packages/catalog/src/index.ts'), "export * from './spatial.js';\n");
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/catalog/src/index.ts', 'packages/catalog/src/spatial.ts']);
+    await writeFile(resolve(root, 'packages/catalog/src/spatial.ts'), 'export const parsePreparedGalaxyCatalog=()=>2;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the FITS reader package is followed into its sources, as when it was a local module; other packages stay external', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-fits-'));
   try {

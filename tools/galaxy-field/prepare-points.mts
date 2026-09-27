@@ -7,7 +7,7 @@ import { fitClouds } from './cloud-fit.mts';
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { manifestSources } from '../sources/context-source-records.mts';
+import { manifestSources } from '@cssearth/bake/sources';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { loadScientificCatalogue } from './catalogue.mts';
 const root=process.cwd();

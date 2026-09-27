@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '@cssearth/objects/provenance';
-import { spatialSourceCitations } from './spatial-source-citations.mts';
+import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 test('published spatial measurements join canonical Sources and remain citations', async () => {

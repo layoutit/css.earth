@@ -7,7 +7,7 @@ import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from 'node:
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
-import { factsheetCitations } from '../../tools/sources/source-catalogue-inputs.mts';
+import { factsheetCitations } from '@cssearth/bake/sources';
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '@cssearth/objects/provenance';
 import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';

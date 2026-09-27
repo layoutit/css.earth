@@ -1,4 +1,4 @@
-import { preparationEvidenceApplies, recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
+import { preparationEvidenceApplies, recordPreparationEvidence } from '@cssearth/bake/sources';
 import { productInputRoles } from '@cssearth/objects/provenance';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
