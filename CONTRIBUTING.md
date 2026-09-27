@@ -215,7 +215,9 @@ import of a shared package names no entry it can trace to a source file.
 `output/architecture/`.
 
 The same check applies repository rules that have no baseline, so any finding
-fails it: the nebula boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
+fails it: no file under a retired `tools/` folder (`RETIRED_FOLDERS` in
+`repository-rules.mts`; a move that empties a folder adds it), and the nebula
+boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 `pnpm check:nebula-boundaries` is an alias of the check). Not yet enforced:
 unused files in library folders (untangle item K).
 

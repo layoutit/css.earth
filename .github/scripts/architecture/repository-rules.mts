@@ -11,7 +11,46 @@ export interface RepositoryRule {
   readonly check: (root: string, files: readonly string[]) => readonly string[];
 }
 
+/** Folders whose code has moved to its canonical home (`packages/*`, `.github/scripts`, `evidence/`). A file under one
+ * means code went back to a retired location. Each move that empties a folder appends it here. */
+export const RETIRED_FOLDERS: readonly string[] = [
+  'tools/audits',
+  'tools/ci/architecture',
+  'tools/evidence',
+  'tools/fits',
+  'tools/kernel-banks',
+  'tools/objects/archives',
+  'tools/objects/astronomy-packages',
+  'tools/objects/astroquery',
+  'tools/objects/celestia-comets',
+  'tools/objects/chandra',
+  'tools/objects/comet-67p',
+  'tools/objects/gemini',
+  'tools/objects/geographic-pages',
+  'tools/objects/keck',
+  'tools/objects/pds',
+  'tools/objects/spitzer',
+  'tools/objects/static-surface',
+  'tools/objects/telescopes',
+  'tools/photometry',
+  'tools/references',
+  'tools/spice',
+];
+
+/** One finding per file inside a retired folder. */
+export function retiredFiles(files: readonly string[], folders: readonly string[] = RETIRED_FOLDERS): string[] {
+  return files.flatMap(file => {
+    const folder = folders.find(item => file.startsWith(`${item}/`));
+    return folder === undefined ? [] : [`${file}: ${folder}/ is retired; put the file in the folder its code moved to`];
+  });
+}
+
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
+  {
+    id: 'retired-folders',
+    description: 'no file lives under a retired tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
+    check: (_root, files) => retiredFiles(files),
+  },
   {
     id: 'nebula-boundaries',
     description: 'the nebula packages follow their public dependency graph, @cssearth/bake/volume keeps its host-neutral rules, '
