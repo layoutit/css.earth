@@ -1,20 +1,16 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 12,
+    "largestCycle": 8,
     "layerOrder": [
       "tools/objects(root)",
-      "tools/objects/giant-layers",
-      "tools/objects/material-composition",
       "tools/prepare",
       "tools/objects/new-object",
       "tools/objects/source-authoring",
       "tools/sources",
-      "tools/objects/paged-ellipsoid",
       "tools/objects/content",
       "tools/ci",
       "tools/assets",
-      "tools/objects/giant-observations",
       "site/scene",
       "site/shell",
       "site/navigation",
@@ -41,7 +37,6 @@
       {"from":"tools/assets","to":"tools/objects(root)","imports":1},
       {"from":"tools/assets","to":"tools/prepare","imports":1},
       {"from":"tools/ci","to":"tools/prepare","imports":1},
-      {"from":"tools/objects/giant-observations","to":"tools/objects(root)","imports":1},
       {"from":"tools/objects/new-object","to":"tools/prepare","imports":1},
       {"from":"tools/objects/source-authoring","to":"tools/objects/new-object","imports":1}
     ]
@@ -49,7 +44,6 @@
   "rules": {
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
-      {"from":"labs/experiments/native-scroll/context.mts","to":"site/prepared-navigation-markers.d.mts"},
       {"from":"labs/experiments/native-scroll/preview.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts","to":"tools/objects/circumstellar/author.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/sources/sky-bands.ts","to":"tools/objects/observation/sky-band-composite.mts"},
@@ -78,9 +72,6 @@
     "packages-import-only-packages": [
       {"from":"packages/bake/cli/report-investigations.mts","to":"tools/prepare/prepare-catalog.mts"},
       {"from":"packages/bake/src/density/retirement.test.ts","to":"tools/cli/bundle-renderer.mts"},
-      {"from":"packages/bake/src/presentation/composite-settings.test.ts","to":"tools/objects/geometry-adapters.ts"},
-      {"from":"packages/bake/src/presentation/presentation.test.ts","to":"tools/objects/geometry-adapters.ts"},
-      {"from":"packages/bake/src/scene/scene.test.ts","to":"tools/objects/geometry-adapters.ts"},
       {"from":"packages/renderer/src/navigation/camera-viewport.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/perspective-dolly.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},
