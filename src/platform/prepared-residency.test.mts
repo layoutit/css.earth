@@ -6,7 +6,7 @@ import type { PreparedResidencyOptions, PreparedResourcePool, PreparedResourceEn
 import type { PreparedImage } from '@cssearth/renderer/platform/prepared-image-store';
 import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { requireRecord, requireArray } from '@cssearth/core';
-import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
+import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','uranus','saturn'].map(async id=>[id,parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));
 const assetUrl=(definition: ObjectRuntimeDefinition,key: string | null)=>{assert.ok(key); const asset=definition.assets.entries.find(entry=>entry.key===key);assert.ok(asset,`Actual prepared resource ${key} is missing`);return asset.url;};
 

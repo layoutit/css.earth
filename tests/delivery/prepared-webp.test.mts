@@ -4,14 +4,14 @@ import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { promisify } from "node:util";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import cwebpPath from "cwebp-bin";
 import sharp from "sharp";
 import {
   optimizePreparedDisplayLosslessWebp,
   optimizePreparedLosslessWebp,
-} from "./prepared-webp.mts";
+} from "@cssearth/bake/delivery";
 
 assert.equal(typeof cwebpPath, 'string');
 const encoder = String(cwebpPath);

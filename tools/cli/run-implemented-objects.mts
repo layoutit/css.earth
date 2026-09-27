@@ -6,7 +6,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { SCENE_OBJECTS } from "../../site/objects.mts";
-import { authoredObject } from '../sources/authored-object.mts';
+import { authoredObject } from '@cssearth/bake/sources';
 
 export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>; onSpawn?: (pid: number) => void;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}

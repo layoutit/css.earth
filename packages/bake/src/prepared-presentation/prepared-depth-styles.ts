@@ -1,6 +1,6 @@
 import type { Page } from 'playwright';
 import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.mts';
+import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
 type MinimalPresentation = {id: string; tree: PreparedTree; variants: {writes: readonly PreparedWrite[]}[]};
 
 /** Prove that moving a source leaf to a projected carrier preserves its CSS

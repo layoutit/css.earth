@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { findSceneReferences } from './check-asset-origin-scenes.mts';
+import { findSceneReferences } from '@cssearth/bake/delivery';
 
 async function withDistDir(files: Record<string, string>, run: (dir: string) => Promise<void>) {
   const dir = await mkdtemp(join(tmpdir(), 'asset-origin-scenes-'));

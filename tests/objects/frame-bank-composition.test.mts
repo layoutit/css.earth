@@ -1,6 +1,6 @@
-import {requireObjectRuntimeDefinition} from '../../tools/contract/object-runtime-contract.mts';
+import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import {shape,array,text,number,optional} from '@cssearth/core';
-import {required} from '../../tools/contract/test-values.mts';
+import {required} from '@cssearth/objects/node/contract';
 import { sourceTest } from './source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';

@@ -8,7 +8,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { publishSourceBytes } from "./source-acquisition.mts";
+import { publishSourceBytes } from "@cssearth/bake/delivery";
 import { ASSET_LOCATIONS, type AssetLocation } from "../../src/platform/runtime-asset-closure.mts";
 import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from "./runtime-assets.mts";
 

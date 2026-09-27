@@ -51,6 +51,24 @@ its validators accept); the renderer never imports the bake.
   preparation and the runtime ownership checks share. It parses a runtime module into ESTree with its original ranges,
   resolves its imports to source files through each package's exports and tsup entries, and reads names, keys and static
   object properties. It imports no topic.
+- `src/prepared-presentation/` is published as `@cssearth/bake/prepared-presentation` (Node only): the passes that rewrite
+  a compiled prepared presentation: depth partitions of a body's projected surface in a proven visibility order, the
+  cascade check (Playwright's Chromium) that keeps each moved leaf's computed style, and the interior fill of a cut-open
+  body. It imports `presentation`. Its tests are `node --test` suites in `tests/prepared-presentation/`.
+- `src/delivery/` is published as `@cssearth/bake/delivery` (Node only): writing and publishing prepared output. The
+  atomic prepared-set and text writers, the page metadata written beside a restored runtime, the WebP encodings prepared
+  images are optimised with, the pinned source bytes an acquisition publishes, the verify-after-publish gate for the asset
+  host, and the scan for `/scenes/` references an asset-origin build left behind (`packages/bake/cli/check-asset-origin-scenes.mts`).
+  `packages/bake/cli/publish-source-cache.mts` mirrors an object's downloads into the source cache with it. It imports no
+  topic. Its tests are `node --test` suites in `tests/delivery/`.
+- `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
+  object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
+  physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure.
+  It imports `runtime-source`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned JPL moon catalogue
+  (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
+- `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
+  writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
+  and the renderer's object controls. It imports `presentation`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,

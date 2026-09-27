@@ -1,29 +1,28 @@
 // Maintainer command: mirror an object's downloaded source inputs into R2 under source-cache/<object id>/<manifest path>,
 // addressed the way the manifest names them and additive. Two forms:
 //
-//   node tools/assets/publish-source-cache.mts --object=<id> [...]
+//   node packages/bake/cli/publish-source-cache.mts --object=<id> [...]
 //     Publishes every download this repository knows how to mirror for that object: a volume's publisher previews
 //     and sky-band composites (source/presentation.json, under .local/) and every source/manifest.json input with an
 //     archive origin. Skips a file that is not present locally (run restore-source-inputs first).
 //
-//   node tools/assets/publish-source-cache.mts --file=<path> --key=<object id>/<manifest path>
+//   node packages/bake/cli/publish-source-cache.mts --file=<path> --key=<object id>/<manifest path>
 //     Publishes exactly one file under the key a restorer will ask for.
 //
-// Same verify-after-publish contract as publish-runtime-assets.mts: HEAD every key, retry a miss with a per-key
+// Same verify-after-publish contract as tools/assets/publish-runtime-assets.mts: HEAD every key, retry a miss with a per-key
 // `wrangler r2 object put`, byte-verify, exit non-zero on any remaining failure.
 import { sha256 } from '@cssearth/core/node';
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sourceCacheKey } from '@cssearth/bake/objects/sources';
-import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
-import { verifyPublished, reportVerification, type PublishAsset } from './publish-verification.mts';
+import { RUNTIME_ASSET_ORIGIN, sourceCacheKey } from '@cssearth/bake/objects/sources';
+import { verifyPublished, reportVerification, type PublishAsset } from '@cssearth/bake/delivery';
 
 const BUCKET = 'cssearth-assets';
 const CONTENT_TYPE = 'application/octet-stream';
 const CACHE_CONTROL = 'public,max-age=31536000,immutable';
-const projectRoot = resolve(import.meta.dirname, '../..');
+const projectRoot = resolve(import.meta.dirname, '../../..');
 
 function run(command: string, args: readonly string[]): Promise<void> {
   return new Promise((accept, reject) => {

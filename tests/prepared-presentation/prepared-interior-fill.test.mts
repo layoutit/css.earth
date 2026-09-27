@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { interiorFillInset, preparedSurfaceMean } from './prepared-interior-fill.mts';
+import { interiorFillInset, preparedSurfaceMean } from '@cssearth/bake/prepared-presentation';
 
 test('reserves space for the complete antialiased circle, independent of body shape', () => {
   assert(interiorFillInset * (1+4/512) < 1);
@@ -20,7 +20,7 @@ test('averages active prepared pages together and ignores transparent padding', 
   } finally { await rm(directory,{recursive:true,force:true}); }
 });
 test('write-mode preparation reads the surface mean from staged scene assets, not the published copy', async () => {
-  const { withPreparedInteriorFill } = await import('./prepared-interior-fill.mts');
+  const { withPreparedInteriorFill } = await import('@cssearth/bake/prepared-presentation');
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-fill-staged-'));
   try {
     const staged = join(directory, 'body-surface@2x.webp');

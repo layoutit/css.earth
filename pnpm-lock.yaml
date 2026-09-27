@@ -283,18 +283,27 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.69.0
         version: 8.69.0(eslint@10.10.0(jiti@2.6.1))(typescript@5.9.3)
+      cwebp-bin:
+        specifier: 8.0.0
+        version: 8.0.0
       geotiff:
         specifier: 3.0.5
         version: 3.0.5
       h5wasm:
         specifier: 0.10.3
         version: 0.10.3
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
       meshoptimizer:
         specifier: 1.2.0
         version: 1.2.0
       playwright:
         specifier: 1.60.0
         version: 1.60.0
+      robust-predicates:
+        specifier: 3.0.3
+        version: 3.0.3
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)

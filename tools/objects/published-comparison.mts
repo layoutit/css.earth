@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { readPdfImage } from '../sources/pdf-image.mts';
+import { readPdfImage } from '@cssearth/bake/sources';
 import { lamBytes } from './sphere-survey/lam.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForLens, observerCaster, turnedOrientation, type TurnableCaster } from '@cssearth/bake/objects/layers/terrestrial';
 import { decodeCalibratedCamera, loadCameraShape } from '@cssearth/bake/objects/geometry';

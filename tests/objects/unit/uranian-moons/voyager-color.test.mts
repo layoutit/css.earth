@@ -7,7 +7,7 @@ const test = sourceTest();
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { requireRecord } from "@cssearth/core";
-import { required } from "../../../../tools/contract/test-values.mts";
+import { required } from "@cssearth/objects/node/contract";
 
 const MOONS = ["miranda", "ariel", "umbriel", "titania", "oberon"] as const;
 const root = resolve(import.meta.dirname, "../../../..");

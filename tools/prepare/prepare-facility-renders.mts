@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import { Quaternion, Vector3, MathUtils } from 'three';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { RenderRequest, renderFacility, recipe } from '../facility-renders/render.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { prepareArtworkRefresh } from '../facility-renders/refresh.mts';
 import { getFacilityPose, inwardDirection } from '../facility-renders/poses.mts';
 

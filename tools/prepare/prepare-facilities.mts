@@ -6,7 +6,7 @@ import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '../../src/platform/source-usage.mts';
 import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usage.mts';
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
-import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
+import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
 import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
@@ -23,7 +23,7 @@ import type { ExplorationImage } from '../../src/platform/prepared-exploration.m
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from '../assets/restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
@@ -34,7 +34,7 @@ export const explorationCompilerClosure = [
   'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'tools/prepare/prepare-navigation-destinations.mts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
-  'site/source/agency-logos.json', 'tools/sources/read-source-catalogue.mts',
+  'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'src/platform/source-usage.mts', 'packages/objects/src/node/source-manifest.ts',
   'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
   'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,

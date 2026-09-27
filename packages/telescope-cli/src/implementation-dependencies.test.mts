@@ -65,6 +65,25 @@ test('the runtime-source reader is followed into @cssearth/bake/runtime-source, 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the prepared, asset, source and contract libraries are followed into their package sources, as when they sat under tools/', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-leaves-'));
+  try {
+    const entries = [['@cssearth/bake/prepared-presentation', 'packages/bake/src/prepared-presentation'], ['@cssearth/bake/delivery', 'packages/bake/src/delivery'],
+      ['@cssearth/bake/sources', 'packages/bake/src/sources'], ['@cssearth/bake/contract', 'packages/bake/src/contract'],
+      ['@cssearth/objects/node/contract', 'packages/objects/src/node/contract']] as const;
+    await writeFile(resolve(root, 'entry.mts'), `${entries.map(([specifier], index) => `import { v${index} } from '${specifier}';`).join('\n')}\nexport const used=[${entries.map((_, index) => `v${index}`).join(',')}];\n`);
+    for (const [index, [, directory]] of entries.entries()) {
+      await mkdir(resolve(root, directory), { recursive: true });
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
+      await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    }
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    await writeFile(resolve(root, 'packages/bake/src/delivery/value.ts'), 'export const v1=10;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the FITS reader package is followed into its sources, as when it was a local module; other packages stay external', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-fits-'));
   try {

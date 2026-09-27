@@ -1,10 +1,10 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
-import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
+import { preparePageMetadata } from '@cssearth/bake/delivery';
 import {parseObjectDescriptor} from '@cssearth/objects';
-import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
+import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
-import type {CheckedObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
-import type {RecompiledPresentation} from '../prepared/prepared-depth-partitions.mts';
+import type {CheckedObjectRuntimeDefinition} from '@cssearth/bake/contract';
+import type {RecompiledPresentation} from '@cssearth/bake/prepared-presentation';
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
  * bindings (facing planes, depth partitions, interior fill). Facing planes are browser-measured against the solved
  * system node, so this is only safe when that solve did not move: refuse rather than publish stale geometry. */
@@ -24,9 +24,9 @@ import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { authoredObject } from '../sources/authored-object.mts';
+import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { inventoryPreparedAssets, readInventory } from '../../src/platform/runtime-asset-closure.mts';
 

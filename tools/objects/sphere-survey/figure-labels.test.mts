@@ -3,7 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { readPdfImage } from '../../sources/pdf-image.mts';
+import { readPdfImage } from '@cssearth/bake/sources';
 import { figureBands, figureCells, parseComparisonSpec, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
 import { glyphTemplates, readLabel } from './figure-labels.mts';
 

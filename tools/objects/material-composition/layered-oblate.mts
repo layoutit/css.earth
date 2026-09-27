@@ -38,7 +38,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '@cssearth/bake/scene';
-import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
+import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '@cssearth/bake/delivery';
 import { verifyObservationSources } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '@cssearth/bake/objects/geometry';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';

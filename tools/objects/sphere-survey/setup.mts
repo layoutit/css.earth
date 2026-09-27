@@ -17,7 +17,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
-import { readPdfImage } from '../../sources/pdf-image.mts';
+import { readPdfImage } from '@cssearth/bake/sources';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
 import { tableInput } from '../sphere-horizons.mts';

@@ -12,9 +12,9 @@ import type { ObjectText, TextContext, TextFinding } from '../../site/object-tex
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
 import { sourceResolver } from '@cssearth/objects/sources';
-import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
+import { readSourceCatalog } from '@cssearth/bake/sources';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
 
 const root = resolve(import.meta.dirname, '../..');

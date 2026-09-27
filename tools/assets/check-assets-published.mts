@@ -181,7 +181,7 @@ async function headCheck(fetcher: HeadFetcher, origin: string, asset: RuntimeAss
     return { ok: false, reason: `HTTP ${response.status}`, kind: throttled ? "throttled" : "missing", status: response.status,
       retryAfterMs: throttled ? retryAfterMs(response.headers.get("retry-after")) : null };
   }
-  // A compressed (e.g. brotli) response can omit content-length entirely — see publish-verification.mts's headOk.
+  // A compressed (e.g. brotli) response can omit content-length entirely — see headOk in packages/bake/src/delivery/publish-verification.ts.
   const contentLength = response.headers.get("content-length") ?? null;
   if (contentLength !== null && Number(contentLength) !== asset.bytes) {
     return { ok: false, reason: `content-length mismatch: expected ${asset.bytes}, got ${contentLength}`, kind: "missing", retryAfterMs: null };

@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { partitionSurface, prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
+import { partitionSurface, prepareDepthPartitions, restoreDepthSource } from '@cssearth/bake/prepared-presentation';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
-import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
+import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import type { PreparedPresentationDefinition, PreparedTree } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedDepthOrder } from '@cssearth/renderer/rendering/prepared-depth-partitions.ts';
 import type { SurfacePoint, SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';

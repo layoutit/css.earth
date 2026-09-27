@@ -40,6 +40,11 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/world-context` | the spatial world context: sources, bodies, orbit banks, system and group views, hyperbolic paths | Node only |
 | `@cssearth/bake/nebula` | nebula delivery recipes and identities, compact density, finite-emission and compiler deliveries, catalogue fields and star sprites, sky frames, render-element budgets, replay references | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/environment` | the replay of an environment object's missing runtime images through the bakes above | Node only (`node:*`) |
+| `@cssearth/bake/runtime-source` | the runtime-source reader: a runtime module parsed into ESTree with its original ranges, imports resolved to source files through package exports and tsup entries, names, keys and static object properties | Node only (`node:*`, the ESLint parser, Vite) |
+| `@cssearth/bake/prepared-presentation` | passes that rewrite a compiled prepared presentation: depth partitions in a proven visibility order, the cascade check that keeps each moved leaf's computed style, the interior fill of a cut-open body | Node only (`node:*`, `sharp`, Playwright) |
+| `@cssearth/bake/delivery` | the atomic prepared-set and text writers, prepared page metadata, the WebP encodings prepared images are optimised with, pinned source bytes an acquisition publishes, the verify-after-publish gate, the scan for `/scenes/` references an asset-origin build left | Node only (`node:*`, `sharp`, `cwebp-bin`) |
+| `@cssearth/bake/sources` | an object's authored descriptor, the independent records of the source catalogue, the authored physical world frame checked against a prepared scene and runtime, images embedded in a published PDF figure | Node only (`node:*`) |
+| `@cssearth/bake/contract` | the checked object runtime definition and its prepared resource catalogue, validated against the prepared-presentation contract and the renderer's object controls | Node only |
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
 | `@cssearth/bake/objects/geometry` | shape models (including ASCII VTK POLYDATA) and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
 | `@cssearth/bake/objects/cameras` | observer-computed cameras from an ephemeris and a spin state or IAU pole model, the SPICE kernel banks bound to the source-manifest reader | Node only |
@@ -63,6 +68,10 @@ packages/bake/
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
 │   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
+├── src/runtime-source/, src/prepared-presentation/, src/delivery/, src/sources/, src/contract/
+│                  the runtime-source reader, presentation passes, prepared delivery, source records and the object
+│                  runtime contract: one entry each
+├── cli/           command entries (`node packages/bake/cli/<command>.mts`); nothing imports them
 ├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, layers/<kind>/: the shared object libraries, one entry each
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
@@ -78,7 +87,8 @@ another topic.
 (Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`. The raster
 lane's surface test also reads the observation lens sampler from `src/objects/layers/observation/`. The photometry tests live
 in `tests/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
-The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The scene suite
+The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The prepared-presentation, delivery and
+sources tests are `node --test` suites in `tests/prepared-presentation/`, `tests/delivery/` and `tests/sources/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,

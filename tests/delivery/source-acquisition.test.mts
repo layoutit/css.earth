@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 
-import { publishSourceBytes } from "./source-acquisition.mts";
+import { publishSourceBytes } from "@cssearth/bake/delivery";
 
 test("publishes source bytes atomically and leaves no partial file behind", async (t) => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-acquisition-"));

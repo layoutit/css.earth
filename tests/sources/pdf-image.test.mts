@@ -1,10 +1,10 @@
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { deflateSync } from 'node:zlib';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { readPdfImage } from './pdf-image.mts';
+import { readPdfImage } from '@cssearth/bake/sources';
 
 const pixels = Uint8Array.from([255, 0, 0, 0, 255, 0, 0, 0, 255, 10, 20, 30]);
 function pdf(dictionary: string, body: Uint8Array, trailer = '') {

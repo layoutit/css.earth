@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { manifestSources } from '../sources/context-source-records.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { loadScientificCatalogue } from './catalogue.mts';
 const root=process.cwd();
 const manifest=sourceObject(JSON.parse(await readFile('src/objects/nearby-universe/source/manifest.json','utf8')));

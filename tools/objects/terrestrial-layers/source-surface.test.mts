@@ -1,4 +1,4 @@
-import { required, fixtureRecord } from '../../contract/test-values.mts';
+import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { parseShapeLens, parseObjShape, createShapeSurfaceSampler } from '@cssearth/bake/objects/geometry';
 import { shape, array, text, number, optional, requireArray } from '@cssearth/core';
 import { fixtureSource } from '../test-source-fixture.mts';

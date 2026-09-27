@@ -138,7 +138,7 @@ jobs:
           pnpm build:deploy
           pnpm check:deploy-assets
       - name: Check no page references a same-origin /scenes/ address
-        run: node tools/assets/check-asset-origin-scenes.mts dist
+        run: node packages/bake/cli/check-asset-origin-scenes.mts dist
       - name: Check production page invariants and asset URLs
         env:
           ASSET_ORIGIN: https://earth-assets.lowpoly.cc

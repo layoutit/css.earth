@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, stat, utimes } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { writePreparedText } from './write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 
 test('unchanged prepared publication preserves mtime and only changed bytes are written', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-write-'));
