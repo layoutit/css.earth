@@ -43,6 +43,9 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
   },
   // The Juno archive and spacecraft share their name with the shipped asteroid 3 Juno: the archive's own paths, PDS volume root,
   // telescope name and software name say Juno the mission, never the body.
+  'programs.mts': {
+    'a50128d59f482a86171394eb7a2d1824df7c5d2788c4b2cbc5600ead757d5fd9': ['juno'], // the Juno archive's name among the moved archives
+  },
   'juno/archive-ledger.mts': {
     '98f745235ce9487aa372dfaa14986b354fb0dd51c87f95b29907f6ca79243846': ['juno'], // guide: generator and ledger paths
     '37538b827ce5e37bb4a50e809be2bc580d498b767f11d46ce867f907ffbd7687': ['juno'], // ledger path
