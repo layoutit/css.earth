@@ -138,6 +138,41 @@ test('billboard covers attachment at the final viewport framing with no second c
   assert.ok(Math.abs(actual.distanceM - arrival.billboard!.distanceM) < 0.01);
 });
 
+test('billboard arrival converges its projected size before completing across viewports', async () => {
+  const arrival: PreparedArrivalView = { ...photographicArrival, billboard: {
+    url: '/scenes/body/arrival.webp', lens: 'photo', size: 1024, distanceM: 8000,
+    focalPixels: 1000, rotation: photographicArrival.rotation } };
+  for (const [widthPixels, heightPixels, framingRadiusPixels] of [[390, 844, 100], [820, 1180, 240], [1440, 900, 300]]) {
+    for (const hz of [60, 120]) {
+      const f = fixtureFactory(arrival), { document, window } = parseHTML('<html><body><main></main></body></html>');
+      Object.defineProperty(window.HTMLImageElement.prototype, 'decode', { configurable: true, value: async () => {} });
+      Object.defineProperty(document, 'defaultView', { value: f.windowTarget });
+      const optics = { ...f.navigation.optics(), widthPixels, heightPixels, framingRadiusPixels };
+      f.navigation.optics = () => optics;
+      f.factory.navigation.framingRadius = async () => framingRadiusPixels;
+      await drainFrames(f, { task: f.start({ stage: required(document.querySelector('main')) }), stepMs: 1000 / hz });
+      const radii = f.paints.map(world => required(presentWorldCamera(world, f.factory.navigation.frame, optics).silhouette).tangentialSemiAxis);
+      const finalStep = Math.abs(required(radii.at(-1)) - required(radii.at(-2)));
+      assert.ok(finalStep < 0.25, `${widthPixels}x${heightPixels} at ${hz} Hz snaps the final edge by ${finalStep.toFixed(3)} px`);
+      assert.ok(Math.abs(required(radii.at(-1)) - framingRadiusPixels) < 0.01, 'arrival retains its prepared responsive fit');
+      f.controller.abort();
+      await nextTurn();
+    }
+  }
+});
+
+test('a stationary camera with unfinished optical zoom does not complete early', async () => {
+  const f = fixtureFactory(), from = f.navigation.capture();
+  const target = { ...from, projectionScale: 2 };
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { ...lifecycle, navigation: f.navigation },
+    signal: f.controller.signal, targetWorldCamera: target }) });
+  const scales = f.paints.map(world => world.projectionScale ?? 1);
+  assert.ok(scales.length > 2, 'a zoom-only flight must publish intermediate views');
+  assert.equal(scales[0], 1);
+  assert.equal(scales.at(-1), 2);
+  assert.ok(2 / required(scales.at(-2)) - 1 < 0.001, 'the final optical step must also be visually negligible');
+});
+
 test('cross-object arrival uses the destination framing allowance', async () => {
   const f = fixtureFactory(photographicArrival);
   f.factory.navigation.framingRadius = async () => 100;

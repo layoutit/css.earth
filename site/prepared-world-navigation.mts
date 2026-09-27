@@ -472,8 +472,11 @@ function createWorldFlight({ motion, owner, from, flight, anchors, signal, reduc
       elapsedS = reducedMotion ? requestedElapsedS
         : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
       if (!reducedMotion) elapsedS = easeArrivalInto(flight, previousElapsed, elapsedS, stepS, sample);
-      if (permittedEndS >= flight.durationS && arrivalIsInvisible(flight, anchors, sample)) elapsedS = flight.durationS;
-      const world = worldSample(flight, from, elapsedS, sample, targetProjectionScale);
+      let world = worldSample(flight, from, elapsedS, sample, targetProjectionScale);
+      if (permittedEndS >= flight.durationS && arrivalIsInvisible(flight, anchors, world, targetProjectionScale)) {
+        elapsedS = flight.durationS;
+        world = worldSample(flight, from, elapsedS, sample, targetProjectionScale);
+      }
       const acknowledge = (shown = true) => {
         if (running.signal.aborted) return 'idle' as const;
         if (!shown) { elapsedS = previousElapsed; return 'idle' as const; }
@@ -494,9 +497,11 @@ function createWorldFlight({ motion, owner, from, flight, anchors, signal, reduc
 
 function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample: FlightSample, targetProjectionScale = from.projectionScale ?? 1): WorldCamera {
   sampleSelectionFlightInto(flight, elapsedS, sample);
-  const progress = flight.durationS > 0 ? Math.min(1, elapsedS / flight.durationS) : 1;
+  // Position, orientation and optical scale follow the same eased path. Raw
+  // clock progress can leave a visible zoom unfinished when the pose arrives.
+  const progress = sample.progress;
   const startScale = from.projectionScale ?? 1;
-  const projectionScale = progress === 1 ? targetProjectionScale
+  const projectionScale = progress === 0 ? startScale : progress === 1 ? targetProjectionScale
     : Math.exp(Math.log(startScale) + (Math.log(targetProjectionScale) - Math.log(startScale)) * progress);
   return { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
     ...(projectionScale === 1 ? {} : { projectionScale }),
@@ -532,9 +537,11 @@ function easeArrivalInto(flight: Flight, fromElapsedS: number, toElapsedS: numbe
   return low;
 }
 // The rest of a flight is invisible once the camera is within the arrival tolerance of its final
-// pose: that fraction of its depth to the nearest anchor surface, and that many radians of turn.
-function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, sample: FlightSample) {
-  const [x, y, z] = sample.positionM, end = flight.to.positionM, q = sample.orientationXyzw, r = flight.to.orientationXyzw;
+// pose: that fraction of its depth to the nearest anchor surface, that many radians of turn,
+// and that fraction of optical scale. A stationary pose can still be visibly zooming.
+function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, world: WorldCamera, targetProjectionScale: number) {
+  if (Math.abs((world.projectionScale ?? 1) / targetProjectionScale - 1) > FLIGHT_ARRIVAL_TOLERANCE) return false;
+  const [x, y, z] = world.pose.positionM, end = flight.to.positionM, q = world.pose.orientationXyzw, r = flight.to.orientationXyzw;
   let depthM = Infinity;
   for (const anchor of anchors) depthM = Math.min(depthM, Math.hypot(x - anchor.positionM[0], y - anchor.positionM[1], z - anchor.positionM[2]) - anchor.radiusM);
   const cosine = Math.min(1, Math.abs(q[0] * r[0] + q[1] * r[1] + q[2] * r[2] + q[3] * r[3]));

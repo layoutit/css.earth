@@ -73,9 +73,11 @@ Scaling a distant photograph to
 match a closer mesh's bounding sphere would change the visible surface features
 at the reveal, even when their outlines agree.
 
-The optical scale travels with the world camera and varies within the same
-flight. CSS perspective stays fixed: a two-dimensional transform on the detail
-camera root implements the effective focal length. Mesh depth translation uses
+The optical scale travels with the world camera and follows the same eased
+progress as position and rotation. Completion checks its remaining relative
+change as well as the pose, so arriving at the prepared position cannot snap
+an unfinished zoom to its endpoint. CSS perspective stays fixed: a two-dimensional
+transform on the detail camera root implements the effective focal length. Mesh depth translation uses
 the unscaled CSS focal length; projected labels, picking, material selection and
 the persistent universe use the effective focal length. A viewport records which
 scale its focal length already includes, so it cannot be applied twice.
