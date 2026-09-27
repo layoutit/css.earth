@@ -4,7 +4,7 @@
 
 /** The archives whose programs sit beside their code, in `src/archives/<archive>/programs`. JWST pins its time series,
  * its imaging and cube programs and its starlight-subtraction programs in three such folders, one beside each tool's code. */
-export type MovedArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst' | 'jwst' | 'jwst/imaging' | 'jwst/klip';
+export type MovedArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst' | 'jwst' | 'jwst/imaging' | 'jwst/klip' | 'ihw';
 
 export interface ArchivePrograms {
   /** The repository-relative directory the programs and their receipts are in now. */

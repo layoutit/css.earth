@@ -28,6 +28,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/objects/comet-67p',
   'tools/objects/gemini',
   'tools/objects/geographic-pages',
+  'tools/objects/ihw',
   'tools/objects/jwst/imaging',
   'tools/objects/jwst/klip',
   'tools/objects/jwst/programs',

@@ -213,7 +213,7 @@ test('every capability entry names a mode the ledgers use, and the modes without
 
 test('every receipt path a committed-ledger answer shows exists in this checkout, including receipts recorded before their programs moved', async () => {
   const shown: string[] = [];
-  for (const target of ['charon', 'hydra', 'didymos', 'io', 'europa', 'ganymede', 'bennu']) {
+  for (const target of ['charon', 'hydra', 'didymos', 'io', 'europa', 'ganymede', 'bennu', 'halley']) {
     const answer = queryCapabilities({ target, wavelengthMicrometres: [0.1, 30], time: { any: true }, kind: 'image', result: 'telescope-product' },
       await loadQueryInputs(ROOT, target));
     const text = formatAnswer(answer);
@@ -226,5 +226,6 @@ test('every receipt path a committed-ledger answer shows exists in this checkout
   }
   assert.ok(shown.filter(path => path.includes('/pds/programs/')).length >= 3, 'the PDS receipts of Charon, Hydra and Didymos are shown');
   assert.ok(shown.filter(path => path.includes('/spitzer/programs/')).length >= 1, 'the Spitzer receipt of Bennu is shown');
+  assert.ok(shown.filter(path => path.includes('/ihw/programs/')).length >= 1, 'the IHW receipt of Halley is shown');
   for (const path of new Set(shown)) await access(resolve(ROOT, path)).catch(() => assert.fail(`the answer shows ${path}, which does not exist`));
 });
