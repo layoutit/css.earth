@@ -61,11 +61,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     // changed a native control. The current controls then own that newer intent.
     if (stage.dataset.preparedSettings) initialObjectSelection(definition.controls, initialLens, JSON.parse(stage.dataset.preparedSettings));
     const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
-    delete stage.dataset.preparedDataset;
-    delete stage.dataset.preparedSettings;
+    if (stage.dataset.preparedDataset !== undefined) delete stage.dataset.preparedDataset;
+    if (stage.dataset.preparedSettings !== undefined) delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
     const lifetime = environment.createLifetime();
+    let preserveControls = false;
     // Startup mounts the prepared groups, activates them (connected and painted once), then publishes readiness after a paint.
     // `ready` settles once: resolved at readiness or by an earlier destroy, rejected by an earlier fatal error.
     let phase: 'mounting' | 'activated' | 'ready' = 'mounting';
@@ -168,10 +169,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
-      apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal }) {
+      apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal; departing?: boolean }) {
         if (lifetime.disposed || options?.signal.aborted) return options ? Promise.resolve(false) : undefined;
         setAllowed(false);
-        return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal);
+        return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal, options?.departing);
       },
       preparedFocus() { return getOrbit().preparedFocus(); },
       // Every prepared group is connected and painted once: an arriving flight
@@ -187,7 +188,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       },
       optics() {
         const state = getOrbit().state();
-        return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
+        return { focalPixels: state.focal, projectionScale: state.projectionScale, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
           visibleRect: state.visibleRect ?? null,
           widthPixels: latestWorldPublication?.stageViewport.widthPixels,
           heightPixels: latestWorldPublication?.stageViewport.heightPixels,
@@ -229,7 +230,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
-      destroy() {
+      destroy(options: { preserveControls?: boolean } = {}) {
+        preserveControls = options.preserveControls === true;
         resolveReady();
         const errors = lifetime.destroy();
         if (errors.length) throw new AggregateError(errors, "Object cleanup failed.");
@@ -299,16 +301,23 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       try { return callback(); } catch (error) { fatal(error); }
     }
-    function publish(publication: OrbitPublication) {
+    function publish(publication: OrbitPublication, departing = false) {
       if (lifetime.disposed) return;
+      // Commit the first hidden view so material and feature owners retire their
+      // visible state. Later departure frames still acknowledge the world camera,
+      // but must not schedule detail/readout work for the scene being left behind.
+      const hiddenDeparture = departing && publication.levelOfDetail.stage === 'marker'
+        && previousPublication?.levelOfDetail.stage === 'marker';
       reference ??= publication;
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision, motionAtRest: playback.motionAtRest() });
       previousPublication = publication;
-      selection?.setView(currentView);
-      surfaceFeatures?.publish(currentView);
+      if (!hiddenDeparture) {
+        selection?.setView(currentView);
+        surfaceFeatures?.publish(currentView);
+      }
       latestWorldPublication = publication;
       publishWorldSnapshot(publication);
-      notifyView();
+      if (!departing) notifyView();
     }
     function publishWorldSnapshot(publication: OrbitPublication) {
       if (orbit === null) return;
@@ -329,7 +338,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           }
           return committed;
         }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error) });
-      context.own(() => controls?.destroy());
+      context.own(() => controls?.destroy({ preserveControls }));
       // A claimed preflight bank already completed and released default startup.
       // Re-running it would pin obsolete lighting rows beside the incoming view.
       const startup = await lifetime.wait<boolean | void | null>(preparedResources ? preparedResources.ready : Promise.resolve(true));
@@ -337,7 +346,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Resolve any new projection before attaching the detailed scene. The
       // application-owned snapshot normally survives the handoff unchanged.
       viewport.read(cameraPlan.projection.cssPerspective);
-      mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation);
+      mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation, true);
       if (lifetime.disposed) return;
       syncPagePlayback();
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
@@ -352,30 +361,16 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
-      if (definition.features) {
-        if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
-        const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
-        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
-          scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
-          navigation, flightLimits: () => ({ minimumDistanceM: definition.camera.dolly.minimumDistanceRadii * worldFrame.bodyRadiusM }),
-          onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
-          ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
-            fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
-          lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
-        context.own(() => surfaceFeatures?.destroy());
-        if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);
-        surfaceFeatures.setLens({ id: initialSelection.lensId });
-      }
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
-        // Connected activation exclusively owns group display during mount.
+        // Connected activation owns leaf attachment during mount.
         // Dolly staging takes over only for subsequent LOD re-entry.
         canStageReveal: () => phase !== 'mounting',
          directionalSunPlan: definition.sun ?? null, worldContext,
         cameraPlan, viewport, cameraMotion, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
-        onPublish: publication => guarded(() => publish(publication)), onError: fatal });
+        onPublish: (publication, departing) => guarded(() => publish(publication, departing)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);
       if (lifetime.disposed) return;
@@ -393,6 +388,30 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const initialized = await lifetime.wait(selection.start());
       if (lifetime.disposed || initialized.cancelled) return;
       if (!initialized.value) throw new Error("Initial object selection did not commit.");
+      // Preflight readiness can be seconds old; direct mounts just decoded in
+      // selection.start(). Refresh the claimed bank before its first CSS paint.
+      if (preparedResources) {
+        const decoded = await lifetime.wait(resources.decodeForPaint());
+        if (lifetime.disposed || decoded.cancelled || !decoded.value) return;
+      }
+      // Initial selection, material and camera writes land on detached prepared roots.
+      // The existing paced leaf activation starts only after this single connection.
+      mounted.connect();
+      if (definition.features) {
+        if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
+        const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
+        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
+          scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
+          navigation, flightLimits: () => ({ minimumDistanceM: definition.camera.dolly.minimumDistanceRadii * worldFrame.bodyRadiusM }),
+          onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
+          ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
+            fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
+          lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
+        context.own(() => surfaceFeatures?.destroy());
+        if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);
+        surfaceFeatures.setLens({ id: initialSelection.lensId });
+      }
+      if (currentView) surfaceFeatures?.publish(currentView);
       if (navigation) onNavigationReady?.(navigation);
       await lifetime.wait(mounted.activate());
       if (lifetime.disposed) return;

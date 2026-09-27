@@ -130,6 +130,7 @@ test('a departed focus outside the view cannot blank the surrounding orbit field
   }
   // Preserve the close-up fade when the selected disc really fills the view:
   // context lines soften to the shared close-detail floor.
+  input.selectionPreview = undefined;
   input.world.pose.positionM = [0, 0, plan.focus.radiusM * 5];
   expect(Math.max(...calculate(input).projectedBodies.map(body => body.orbitVisibility))).toBeLessThanOrEqual(.3);
 });
@@ -696,4 +697,25 @@ test('a minor path that cannot show is never requested; highlighting it requests
   current.bodies.forEach((body, index) => { body.highlighted = dots.has(points[index]!.id); });
   planner(current);
   expect(planner.takeWantedOrbits().some(id => dots.has(id))).toBe(true);
+});
+
+test('destination orbit fading completes during approach, before the detail selection changes', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const target = plan.bodies.find(body => body.id === 'lutetia')!;
+  input.selectedId = 'earth'; input.selectionPreview = target.id;
+  input.overview = false; input.navigationInFlight = true;
+  const sample = (share: number) => {
+    const diameter = share * input.viewport.heightPixels!;
+    input.world.pose.positionM = [target.positionM[0], target.positionM[1], target.positionM[2] +
+      Math.hypot(target.radiusM, 2 * input.viewport.focalPixels * target.radiusM / diameter)];
+    return structuredClone(calculate(input).projectedBodies.map(body => ({ index: body.index,
+      opacity: body.orbitVisibility, segments: body.segments })));
+  };
+  const wide = sample(.1), nearing = sample(.2), arrived = sample(.35);
+  const fading = wide.filter(body => body.opacity > 0 && body.segments.length > 0);
+  expect(fading.length).toBeGreaterThan(0);
+  expect(nearing.some(body => body.opacity > 0 && body.opacity < wide.find(before => before.index === body.index)!.opacity)).toBe(true);
+  expect(arrived.every(body => body.opacity === 0)).toBe(true);
+  input.selectedId = target.id; input.selectionPreview = undefined; input.navigationInFlight = false;
+  expect(sample(.35)).toEqual(arrived);
 });

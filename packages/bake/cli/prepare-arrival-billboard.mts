@@ -22,8 +22,8 @@ function option(flag: string, fallback: string) {
 }
 const origin = option('--origin', 'http://127.0.0.1:4212'), size = Number(option('--size', '1024'));
 const output = resolve(root, option('--output', 'output/billboards/arrival-batch'));
-// A fixed physical handoff gives every viewport the same prepared perspective;
-// the activated detailed scene then continues to the responsive close-up.
+// Record one prepared perspective. The arrival uses this distance and orientation,
+// with optical framing to fit each viewport, then reveals the detail without a second zoom.
 const distanceRadii = Number(option('--distance-radii', '8'));
 const all = args.includes('--all'), force = args.includes('--force');
 const ids = args.filter(arg => !['--all', '--force'].includes(arg));
@@ -134,7 +134,7 @@ try {
         if (extent >= captureSize / 2 - 4) {
           await writeFile(resolve(output, `${object.id}-clipped.png`), shot);
           // Some rings and emission plates extend beyond the reference body
-          // radius. Move the prepared handoff back until the entire scene fits.
+          // radius. Move the preparation camera back until the entire scene fits.
           distanceM *= 2;
           continue;
         }

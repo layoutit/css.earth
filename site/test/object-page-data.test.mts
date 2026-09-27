@@ -36,6 +36,8 @@ test('all registry objects own ordered CSS and scene-bound page metadata',async(
   const page=await loadObjectPageData(id);
   const styles=objectPageStyles(descriptor);
   assert.equal(styles.at(-1),'site/object-shell.css');
+  assert.deepEqual(objectPageStyles(descriptor, { navigation: true }), styles.slice(0, -1),
+    `${id}: navigation never resends the shared shell CSS`);
   for(const path of styles) await access(new URL(`../../${path}`,import.meta.url));
   const transport=await readPreparedObjectBytes(id);
   const data=JSON.parse(transport.bytes.toString('utf8')).data;

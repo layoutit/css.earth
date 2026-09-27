@@ -141,8 +141,8 @@ test("pending controls project desired values while pressed lenses remain commit
   const rings = h.settingInputs.find(input => input.name === "rings"); assert.ok(rings); rings.checked = false; rings.emit("change");
   const selectedLens = h.lensInputs.find(input => input.value === h.initial.lensId); assert.ok(selectedLens);
   assert.equal(rings.checked, false); assert.equal(selectedLens.attributes["aria-pressed"], "true");
-  assert.equal(h.lensRoot.classList.contains("is-loading"), true);
-  assert.equal(h.settingsRoot.classList.contains("is-loading"), true);
+  assert.equal(h.lensRoot.classList.contains("is-loading"), false, "pending controls do not toggle ancestor styling");
+  assert.equal(h.settingsRoot.classList.contains("is-loading"), false);
   assert.equal(h.settingsRoot.attributes["aria-busy"], "true"); assert.equal(rings.disabled, false);
   h.setState({ ...h.state(), desired: h.initial, committed: h.initial, pending: false, error: "decode" });
   reject(new Error("decode")); await flush();
@@ -217,4 +217,16 @@ test("a preceding focused galaxy lens bank cannot replace the mounted body's con
   focusInput.emit("click"); assert.equal(h.actions.length, 0);
   h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 1);
   h.binding.destroy(); assert.equal(focusInput.disabled, false);
+});
+
+test("replacement releases control listeners without resetting retained DOM", () => {
+  const h = harness(); h.ready();
+  const speed = h.settingInputs.find(input => input.name === "speed"); assert.ok(speed);
+  speed.disabled = false;
+  h.binding.destroy({ preserveControls: true });
+  assert.equal(h.binding.stats().listenerCount, 0);
+  assert.equal(speed.dataset.runtimeReady, "true");
+  assert.equal(speed.disabled, false);
+  speed.emit("input"); h.lensInputs[0].emit("click");
+  assert.equal(h.actions.length, 0);
 });

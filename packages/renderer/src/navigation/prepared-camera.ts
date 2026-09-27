@@ -3,7 +3,7 @@ import type { PositionM } from '@cssearth/engine';
 import type { CameraAngles, CameraDelta, CameraPose, CameraUpdate, PerspectiveCameraPlan, TrackballMetrics } from './types.js';
 import { createCameraOrientation } from './camera-orientation.js';
 import { distanceForSilhouetteRadius, rotationFromMatrix3d, silhouetteRadiusAtDistance } from '../solar-system/heliocentric-geometry.js';
-import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
+import { cameraProjectionScale, worldCameraViewport, presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition } from './world-camera-math.js';
 import { validatePreparedNavigationFocus } from './prepared-focus.js';
@@ -15,8 +15,10 @@ import { clamp } from '@cssearth/core';
 /** The live camera stays in its prepared local frame for float64 precision.
  * Input, focus changes and restored observers mutate this owner; frame capture is read-only. */
 export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldContext: PerspectiveWorldContext,
-  optics: () => WorldCameraViewport, sunDirection: Vector3 | null | undefined,
+  baseOptics: () => WorldCameraViewport, sunDirection: Vector3 | null | undefined,
   createOrientation = createCameraOrientation) {
+  let projectionScale = 1;
+  const optics = () => worldCameraViewport({ projectionScale }, baseOptics());
   const bodyRadius = worldContext.bodyRadiusUnits, kilometersPerUnit = worldContext.kilometersPerUnit;
   const maximumDistance = cameraPlan.dolly.maximumDistanceOverOrbitExtent * worldContext.maximumExtentUnits;
   const framingReferenceZoom = worldContext.framingReferenceZoom ?? cameraPlan.defaultZoom;
@@ -131,9 +133,10 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     const rotation = readRotation(), bodyCenterUnits = bodyCenter;
     return bodyCenterUnits === null
       ? worldCameraFromCenteredPresentation({ rotation, distanceUnits: detailState().distance }, frame, optics())
-      : worldCameraFromPresentation({ rotation, bodyCenterUnits }, frame);
+      : worldCameraFromPresentation({ rotation, bodyCenterUnits }, frame, projectionScale);
   }
   function adopt(world: WorldCameraPose, frame: PreparedWorldCameraFrame) {
+    projectionScale = cameraProjectionScale(world.projectionScale);
     const presentation = presentWorldCamera(world, frame, optics());
     setBodyCenter(presentation.bodyCenterUnits);
     orientation.setSceneRotation(presentation.rotation);
@@ -195,6 +198,8 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
       ...(partial.rotY === undefined ? {} : { rotY: partial.rotY }) });
   }
   return Object.freeze({
+    get projectionScale() { return projectionScale; },
+    setProjectionScale(value: number) { projectionScale = cameraProjectionScale(value); aliasZoom = null; },
     get state() { return inputState(); },
     dolly(update: Pick<CameraUpdate, "zoom" | "distance" | "distanceKilometers">) { updateInput(update); },
     rotate(delta: CameraDelta) {

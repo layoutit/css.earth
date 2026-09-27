@@ -37,3 +37,20 @@ test('the caption box offered to the context planner is the box it publishes for
   expect(label.rect(camera, viewport, body(10), { ...view, overview: true })).toBeNull();
   label.destroy();
 });
+
+test('the prepared destination caption keeps its node and transform when preview becomes selected', () => {
+  const owner = mountSelectedBodyLabel(host, clock), node = owner.label;
+  let measurements = 0;
+  Object.defineProperties(node, { offsetWidth: { get: () => { measurements++; return 50; } }, offsetHeight: { get: () => 18 } });
+  const destination = { ...body(10), id: 'lutetia', name: 'Lutetia', radiusM: 1.4 };
+  owner.prepare(destination);
+  const approaching = owner.publish(camera, viewport, destination, { ...view, preview: destination.id });
+  const transform = node.style.transform;
+  const settled = owner.publish(camera, viewport, destination, view);
+  expect(settled).toEqual(approaching);
+  expect(node.style.transform).toBe(transform);
+  expect(owner.label).toBe(node);
+  expect(measurements).toBe(1);
+  expect(node.textContent).toBe('Lutetia');
+  owner.destroy();
+});

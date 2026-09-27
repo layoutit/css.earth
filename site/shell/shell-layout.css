@@ -131,6 +131,35 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   pointer-events: none;
 }
 
+.explorer-navigation-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.explorer-navigation-progress > span {
+  display: block;
+  width: 25%;
+  height: 100%;
+  background: #bdbdbd;
+  animation: destination-loading 1.4s ease-in-out infinite paused;
+}
+
+.explorer-navigation-progress[aria-hidden="false"] { opacity: 0.55; }
+.explorer-navigation-progress[aria-hidden="false"] > span { animation-play-state: running; }
+
+@keyframes destination-loading {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explorer-navigation-progress > span { animation: none; width: 100%; }
+}
+
 .explorer-brand-row {
   /* Center the wordmark's lowercase band, 10.055/22 em below its prepared ink top, on the
      row, level with the search text. */
@@ -692,9 +721,10 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* An on-screen keyboard covers the bottom of the layout viewport without
        shrinking it, so the sheet gives up that much room. */
     --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-lift) - var(--sheet-keyboard, 0px));
-    /* The tucked stop leaves only the grabber. The controller measures the first content stop from the visible card. */
+    /* The peek is a shared layout stop, independent of card length and destination.
+       Cap it to the available sheet height on short viewports. */
     --sheet-tucked: calc(20px + var(--explorer-safe-bottom));
-    --sheet-peek: var(--sheet-tucked);
+    --sheet-peek: min(var(--sheet-height), calc(280px + var(--explorer-safe-bottom)));
     --sheet-half: max(50dvh, var(--sheet-peek));
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
@@ -703,7 +733,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
        follows the finger. */
     --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
   }
-  /* Wait for the measured content stop before showing the sheet and its riders. */
+  /* Wait for the controller to publish the initial snap state. */
   body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: hidden; }
   body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
   body[data-object-shell][data-sheet="full"] { --sheet-rest: 0px; }
@@ -858,7 +888,11 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
    filters, which sit to the right of search on the sheet's top edge, move with it and scroll sideways.
    The sheet lays its card out in two columns. Landscape tablets already get the desktop side panel. */
 @media (orientation: portrait) and (min-width: 700px) {
-  body[data-object-shell] { --tablet-search-width: min(360px, 40vw); }
+  body[data-object-shell] {
+    --tablet-search-width: min(360px, 40vw);
+    /* Two-column cards need less resting height than the stacked phone card. */
+    --sheet-peek: min(var(--sheet-height), calc(176px + var(--explorer-safe-bottom)));
+  }
   .explorer-shell-header { column-gap: 20px; }
 
   .object-search-toolbar { right: auto; width: var(--tablet-search-width); }

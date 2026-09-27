@@ -88,8 +88,8 @@ export function createApplicationWorldContext() {
           setNavigationInFlight: frames.setNavigationInFlight,
           connectNavigation: contextNavigation.connect,
           applyFocus: contextNavigation.apply,
-          previewSelection(id?: string | null) {
-            if (!lifetime.disposed) layer.previewSelection(id);
+          previewSelection(id?: string | null, framingScale?: number) {
+            if (!lifetime.disposed) layer.previewSelection(id, framingScale);
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale?: number) {
             if (lifetime.disposed) return;

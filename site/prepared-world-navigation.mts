@@ -1,5 +1,5 @@
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
-import { arrivalBillboardHandoff, prepareArrivalBillboard } from './arrival-billboard.mts';
+import { canUseArrivalBillboard, frameArrivalBillboard, prepareArrivalBillboard } from './arrival-billboard.mts';
 import type { ObjectEntry } from './objects.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser/browser-types.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
@@ -21,15 +21,17 @@ interface WorldFlightRequest {
   reducedMotion?: boolean; paused?: boolean; limitElapsedS?: () => number; canFinish?: () => boolean;
   windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>;
   documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>;
+  bindWheel(handler: (event: Event) => void): () => void;
+  targetProjectionScale?: number;
   onPaint?: (world: WorldCamera, elapsedS: number) => void;
   interruptible?: () => boolean;
 }
 
-import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
+import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
+import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;
@@ -42,11 +44,23 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
   const find = (id: string) => objects.find(object => object.id === id);
   const frames = { get: (id: string) => find(id)?.worldFrame };
   const arrivals = { get: (id: string) => find(id)?.discovery?.arrival };
+  // WebKit includes wheel listeners in its inherited event-region style. Removing/readding
+  // a document listener between approach and close-up restyled the whole scene on the iPad.
+  // Keep the native listener for this navigation owner's lifetime; only its flight changes.
+  let wheelInput: ((event: Event) => void) | null = null;
+  const onWheel = (event: Event) => wheelInput?.(event);
+  documentTarget.addEventListener('wheel', onWheel, { capture: true, passive: false });
+  const bindWheel = (handler: (event: Event) => void) => {
+    wheelInput = handler;
+    return () => { if (wheelInput === handler) wheelInput = null; };
+  };
   function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
     const framed = createWorldSelectionTarget(from, frame, optics), arrival = arrivals.get(id);
     if (!arrival || !arrival.lensIds.includes(lens ?? arrival.defaultLens)) return framed;
     const distanceUnits = presentWorldCamera(framed, frame, optics).distanceUnits;
-    return worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits }, frame, optics);
+    const oriented = worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits }, frame, optics);
+    return arrival.billboard && (lens ?? arrival.defaultLens) === arrival.defaultLens
+      ? frameArrivalBillboard(arrival, oriented, frame, optics) : oriented;
   }
   let lastCamera: WorldCamera | null = null, lastOptics: Optics | null = null;
   const supports = (from: string, to: string) => {
@@ -54,6 +68,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
     return Boolean(a && b && a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt);
   };
   return Object.freeze({ supports, motion,
+    destroy() { wheelInput = null; documentTarget.removeEventListener('wheel', onWheel, { capture: true }); },
     centerTarget({ objectId, fromId, mount, force = false }: TargetRequest) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
@@ -148,8 +163,9 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       owner.setPreparedFocus?.(null);
       const running = createWorldFlight({ motion, owner, from, flight,
+        targetProjectionScale: target.projectionScale,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
-        windowTarget, documentTarget, onPaint(world) {
+        windowTarget, documentTarget, bindWheel, onPaint(world) {
           lastCamera = world;
           if (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
               world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis])) timing.mark('first-motion');
@@ -198,16 +214,24 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const query = url ? new URL(url).searchParams : null;
       if ((query?.getAll('v').length ?? 0) > 1) throw new TypeError('A destination URL may contain only one saved view.');
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
+      let targetOptics = optics;
+      if (!saved && !targetWorldCamera && cameraViewport) {
+        const factory = await toFactory;
+        if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
+        const framingRadiusPixels = await factory.navigation.framingRadius(cameraViewport,
+          windowTarget.matchMedia(MOBILE_VIEWPORT_QUERY).matches, signal);
+        targetOptics = { ...optics, framingRadiusPixels };
+      }
       const target = targetWorldCamera ?? (saved ? savedWorldCamera(saved, targetFrame, optics)
-        : selectionTarget(from, targetFrame, optics, toId, query?.get('dataset')));
+        : selectionTarget(from, targetFrame, targetOptics, toId, query?.get('dataset')));
       const arrival = arrivals.get(toId);
-      const handoff = stage && !saved && !targetWorldCamera && !reducedMotion
-        ? arrivalBillboardHandoff(arrival, target, targetFrame, optics, query?.get('dataset')) : null;
-      const billboard = handoff ? await prepareArrivalBillboard(stage!, arrival!, targetFrame, signal) : null;
+      const useBillboard = stage && !saved && !targetWorldCamera && !reducedMotion &&
+        canUseArrivalBillboard(arrival, target, targetFrame, optics, query?.get('dataset'));
+      const billboard = useBillboard ? await prepareArrivalBillboard(stage!, arrival!, targetFrame, signal) : null;
       if (billboard) timing.mark('billboard-ready');
-      // The image and newly attached detail meet at the same prepared perspective.
-      // The detail then owns the remaining zoom to the responsive endpoint.
-      const flight = createSelectionFlight({ from: from.pose, to: (handoff ?? target).pose,
+      // One flight reaches the final viewport framing. The billboard covers the
+      // entire approach and the detail attaches at that same stationary camera.
+      const flight = createSelectionFlight({ from: from.pose, to: target.pose,
         focusPositionM: targetFocusPositionM ?? targetFrame.originM, durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       const anchors = [frames.get(fromId)!, targetFrame].map(frame => ({
         positionM: frame.originM, radiusM: frame.bodyRadiusM,
@@ -217,7 +241,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       // A replacement can arrive while the previous detail is still activating.
       // Its retirement must not retire the application's camera progression.
       let departureOwner = source ?? (presentWorld ? { apply(world: WorldCamera) {
-        return presentWorld(world, optics, { signal: running.signal });
+        return presentWorld(world, worldCameraViewport(world, optics), { signal: running.signal });
       } } : null);
       const approachLimitS = billboard ? flight.durationS : departureOwner && !reducedMotion
         ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
@@ -236,16 +260,17 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       if (publisher.held) reachHandoff();
       let drawn = reducedMotion ? target : from;
       const running = createWorldFlight({ motion, from, flight, anchors,
+        targetProjectionScale: target.projectionScale,
         signal: AbortSignal.any([signal, ownership.signal]), reducedMotion,
-        paused: publisher.held, windowTarget, documentTarget,
+        paused: publisher.held, windowTarget, documentTarget, bindWheel,
         limitElapsedS: () => publisher.kind === 'destination' ||
           publisher.kind === 'mounting' && publisher.owner?.detailActivated?.() ? flight.durationS : approachLimitS,
         canFinish: () => publisher.kind === 'destination',
         interruptible: () => !billboard && (!moved || drawnElapsedS >= approachLimitS),
         owner: { apply(world) {
-          if (publisher.kind === 'departure') return departureOwner?.apply(world, { signal: running.signal });
+          if (publisher.kind === 'departure') return departureOwner?.apply(world, { signal: running.signal, departing: true });
           if (publisher.kind === 'destination') return publisher.owner.apply(world, { signal: running.signal });
-          return presentWorld?.(world, optics, { signal: activationSignal,
+          return presentWorld?.(world, worldCameraViewport(world, optics), { signal: activationSignal,
             commit: () => {
               if (publisher.kind === 'mounting') void publisher.owner?.apply(world, { signal: running.signal });
             } });
@@ -280,7 +305,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const preparation = Promise.resolve(toFactory).then(factory => {
         if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
         return factory.navigation.prepare({ signal: ownership.signal, cameraViewport,
-          getView: () => ({ world: handoff ?? drawn, viewport: optics }) });
+          getView: () => ({ world: billboard ? target : drawn, viewport: optics }) });
       }).then(value => {
         ownership.own(value);
         if (running.signal.aborted) { ownership.dispose(); throw cancellationReason(running.signal); }
@@ -308,10 +333,9 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
           mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree,
             initialWorldCamera, initialProjection: preparedLease.projection({ world: initialWorldCamera, viewport: optics }),
             arrivingByFlight: true,
-            // The opaque arrival image covers one complete attachment at the
-            // final pose, matching a direct load. Do not toggle individual
-            // triangle membership while Safari builds the 3D paint contexts.
-            ...(billboard ? { progressiveActivation: false } : {}),
+            // Connect prepared leaf batches under the stationary opaque image.
+            // Readiness includes every batch and the final first-paint gate.
+            ...(billboard ? { progressiveActivation: true } : {}),
             ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
               if (running.signal.aborted || publisher.kind !== 'mounting') return;
               publisher.owner = owner; void owner.apply(drawn, { signal: running.signal });
@@ -328,8 +352,10 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
               if (billboard) {
                 if (publication && !(await publication)) throw cancellationReason(running.signal);
                 billboard.publish(drawn, incomingOwner.optics());
-                timing.mark('billboard-reveal');
-                await billboard.reveal();
+                // Scene activation already awaited decoded selection, complete
+                // attachment and a rendering opportunity. This publication
+                // acknowledges the same final camera before its cover is removed.
+                billboard.destroy();
                 timing.mark('billboard-removed');
               }
               if (reducedMotion) {
@@ -337,15 +363,6 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
                 running.complete();
               } else running.resume();
               if (!(await running.finished).completed) throw cancellationReason(running.signal);
-              if (handoff && Math.abs(presentWorldCamera(target, targetFrame, optics).distanceM /
-                  presentWorldCamera(handoff, targetFrame, optics).distanceM - 1) > 1e-5) {
-                const closeupFrom = incomingOwner.capture();
-                const closeup = createWorldFlight({ motion, owner: incomingOwner, from: closeupFrom,
-                  flight: createSelectionFlight({ from: closeupFrom.pose, to: target.pose,
-                    focusPositionM: targetFrame.originM, durationS: 0.8 }), anchors, signal,
-                  windowTarget, documentTarget, onPaint(world) { lastCamera = world; } });
-                if (!(await closeup.finished).completed) throw cancellationReason(closeup.signal);
-              }
               lastCamera = incomingOwner.capture(); lastOptics = incomingOwner.optics();
             } catch (error) { running.cancel(error); throw error; }
             finally {
@@ -428,10 +445,11 @@ function detailHandoffTime(flight: Flight, from: WorldCamera, frame: WorldFrame,
 
 function createWorldFlight({ motion, owner, from, flight, anchors, signal, reducedMotion = false, paused = false,
   limitElapsedS = () => flight.durationS, canFinish = () => true,
-  windowTarget, documentTarget, onPaint = () => {}, interruptible = () => true }: WorldFlightRequest) {
+  windowTarget, documentTarget, bindWheel, targetProjectionScale = 1, onPaint = () => {}, interruptible = () => true }: WorldFlightRequest) {
   let elapsedS = 0, publishedElapsed: number | null = null;
   const sample = createSelectionFlightSample();
-  const events = ['pointerdown', 'keydown', 'wheel'];
+  const events = ['pointerdown', 'keydown'];
+  let releaseWheel = () => {};
   function input(event: Event) {
     if (!isFlightInput(event)) return;
     if (event.type === 'wheel' || !interruptible()) {
@@ -443,7 +461,10 @@ function createWorldFlight({ motion, owner, from, flight, anchors, signal, reduc
     }
   }
   const running = motion.start({ windowTarget, signal, paused,
-    onFinish() { for (const event of events) documentTarget.removeEventListener(event, input, { capture: true }); },
+    onFinish() {
+      releaseWheel();
+      for (const event of events) documentTarget.removeEventListener(event, input, { capture: true });
+    },
     advance(clockS, stepS) {
       const permittedEndS = reducedMotion ? flight.durationS : limitElapsedS();
       const requestedElapsedS = reducedMotion ? flight.durationS : Math.min(flight.durationS, permittedEndS, clockS);
@@ -451,8 +472,11 @@ function createWorldFlight({ motion, owner, from, flight, anchors, signal, reduc
       elapsedS = reducedMotion ? requestedElapsedS
         : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
       if (!reducedMotion) elapsedS = easeArrivalInto(flight, previousElapsed, elapsedS, stepS, sample);
-      if (permittedEndS >= flight.durationS && arrivalIsInvisible(flight, anchors, sample)) elapsedS = flight.durationS;
-      const world = worldSample(flight, from, elapsedS, sample);
+      let world = worldSample(flight, from, elapsedS, sample, targetProjectionScale);
+      if (permittedEndS >= flight.durationS && arrivalIsInvisible(flight, anchors, world, targetProjectionScale)) {
+        elapsedS = flight.durationS;
+        world = worldSample(flight, from, elapsedS, sample, targetProjectionScale);
+      }
       const acknowledge = (shown = true) => {
         if (running.signal.aborted) return 'idle' as const;
         if (!shown) { elapsedS = previousElapsed; return 'idle' as const; }
@@ -464,13 +488,23 @@ function createWorldFlight({ motion, owner, from, flight, anchors, signal, reduc
       return publication && typeof publication.then === 'function' ? publication.then(acknowledge) : acknowledge();
     },
   });
-  if (!running.signal.aborted) for (const event of events) documentTarget.addEventListener(event, input, { capture: true, passive: false });
+  if (!running.signal.aborted) {
+    releaseWheel = bindWheel(input);
+    for (const event of events) documentTarget.addEventListener(event, input, { capture: true, passive: false });
+  }
   return running;
 }
 
-function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample: FlightSample): WorldCamera {
+function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample: FlightSample, targetProjectionScale = from.projectionScale ?? 1): WorldCamera {
   sampleSelectionFlightInto(flight, elapsedS, sample);
+  // Position, orientation and optical scale follow the same eased path. Raw
+  // clock progress can leave a visible zoom unfinished when the pose arrives.
+  const progress = sample.progress;
+  const startScale = from.projectionScale ?? 1;
+  const projectionScale = progress === 0 ? startScale : progress === 1 ? targetProjectionScale
+    : Math.exp(Math.log(startScale) + (Math.log(targetProjectionScale) - Math.log(startScale)) * progress);
   return { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
+    ...(projectionScale === 1 ? {} : { projectionScale }),
     pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
 }
 // A flight held back by the clearance cap would meet its target at full speed and stop dead. The
@@ -503,9 +537,11 @@ function easeArrivalInto(flight: Flight, fromElapsedS: number, toElapsedS: numbe
   return low;
 }
 // The rest of a flight is invisible once the camera is within the arrival tolerance of its final
-// pose: that fraction of its depth to the nearest anchor surface, and that many radians of turn.
-function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, sample: FlightSample) {
-  const [x, y, z] = sample.positionM, end = flight.to.positionM, q = sample.orientationXyzw, r = flight.to.orientationXyzw;
+// pose: that fraction of its depth to the nearest anchor surface, that many radians of turn,
+// and that fraction of optical scale. A stationary pose can still be visibly zooming.
+function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, world: WorldCamera, targetProjectionScale: number) {
+  if (Math.abs((world.projectionScale ?? 1) / targetProjectionScale - 1) > FLIGHT_ARRIVAL_TOLERANCE) return false;
+  const [x, y, z] = world.pose.positionM, end = flight.to.positionM, q = world.pose.orientationXyzw, r = flight.to.orientationXyzw;
   let depthM = Infinity;
   for (const anchor of anchors) depthM = Math.min(depthM, Math.hypot(x - anchor.positionM[0], y - anchor.positionM[1], z - anchor.positionM[2]) - anchor.radiusM);
   const cosine = Math.min(1, Math.abs(q[0] * r[0] + q[1] * r[1] + q[2] * r[2] + q[3] * r[3]));

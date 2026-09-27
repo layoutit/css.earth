@@ -1,3 +1,4 @@
+import { bindInputEvent } from './shared-input-surface.js';
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import { screenPicking } from './screen-picking.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
@@ -156,28 +157,21 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   const cancel = () => { clearHover(); pointer = null; gesture.second = null; gesture.consumeRelease = false; };
   // Window capture precedes document flight interruption even after an owner
   // handoff rebinds us. Native pointerdown.detail cannot identify click two.
-  windowTarget.addEventListener('pointerdown', down, { capture: true });
-  windowTarget.addEventListener('pointermove', move, { capture: true });
-  windowTarget.addEventListener('pointerup', up, { capture: true });
-  windowTarget.addEventListener('pointercancel', cancel, { capture: true });
-  windowTarget.addEventListener('mousedown', mouseDown, { capture: true });
-  windowTarget.addEventListener('click', click, { capture: true });
-  windowTarget.addEventListener('dblclick', doubleClick, { capture: true });
-  windowTarget.addEventListener('blur', clearHover);
-  windowTarget.addEventListener('wheel', clearHover, { capture: true });
-  inputSurface.addEventListener('pointerleave', clearHover);
+  const releases = [
+    bindInputEvent(inputSurface, 'picking:pointerdown', windowTarget, 'pointerdown', down, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:pointermove', windowTarget, 'pointermove', move, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:pointerup', windowTarget, 'pointerup', up, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:pointercancel', windowTarget, 'pointercancel', cancel, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:mousedown', windowTarget, 'mousedown', mouseDown, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:click', windowTarget, 'click', click, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:dblclick', windowTarget, 'dblclick', doubleClick, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:blur', windowTarget, 'blur', clearHover),
+    bindInputEvent(inputSurface, 'picking:wheel', windowTarget, 'wheel', clearHover, { capture: true }),
+    bindInputEvent(inputSurface, 'picking:pointerleave', inputSurface, 'pointerleave', clearHover),
+  ];
   return () => {
     clearHover();
     unsubscribe(); unsubscribeMotion();
-    windowTarget.removeEventListener('pointerdown', down, { capture: true });
-    windowTarget.removeEventListener('pointermove', move, { capture: true });
-    windowTarget.removeEventListener('pointerup', up, { capture: true });
-    windowTarget.removeEventListener('pointercancel', cancel, { capture: true });
-    windowTarget.removeEventListener('mousedown', mouseDown, { capture: true });
-    windowTarget.removeEventListener('click', click, { capture: true });
-    windowTarget.removeEventListener('dblclick', doubleClick, { capture: true });
-    windowTarget.removeEventListener('blur', clearHover);
-    windowTarget.removeEventListener('wheel', clearHover, { capture: true });
-    inputSurface.removeEventListener('pointerleave', clearHover);
+    for (const release of releases) release();
   };
 }

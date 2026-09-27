@@ -146,7 +146,44 @@ and native iPad screen grabs are active:
 pnpm ipad:run --start mars --fly moon --name mars-to-moon
 pnpm ipad:run --start ceres --zoom -200 --drag '{"from":[400,500],"to":[600,530],"seconds":1}' --fly venus --name ceres-to-venus
 pnpm ipad:run --start earth --fly lutetia --heap-snapshot --name earth-to-lutetia-memory
+pnpm ipad:run --live --start earth --fly lutetia --name live-earth-to-lutetia
 ```
+
+`--live` targets `https://css.earth` (or an explicit HTTPS `--origin`) without building locally. Flights use the same
+`objectnavigationquery` and `objectnavigate` events as the app's selectable world markers, then verify the destination
+is ready and visible. The flight receipt records the displayed release version. Native frames and WebKit tracing
+remain enabled; internal scene diagnostics may be absent in production, and local source maps are not applied to it.
+Add `--debug` to harvest the DOM-to-compositor chain on the real iPad. It is diagnostic instrumentation; use a normal run for frame-time comparisons.
+
+```sh
+pnpm ipad:run --debug --start earth --fly lutetia --screenshot arrived --name lutetia-mount-debug
+```
+
+The export automatically includes:
+
+- `causes.json`: synchronous DOM/style/listener calls, caller stacks, before/after child counts, stable node and parent IDs, inserted node IDs, and observer frame numbers.
+- `layers.jsonl`: event-driven native layer snapshots, bounds, backing bytes, paint counts, structural compositing reasons, and DOM identity mappings. Parents without layers are included. Samples are written during recording so a failed run retains them.
+- `compositor-checkpoints.json`: computed styles and bounding boxes at route arrival and the end of recording, including explicit omitted-node counts.
+- `analysis.json` and every DevTools slice: attachment operations joined to each leaf parent's observed layer presence. Separate diagnostic lanes preserve exact timestamp markers and include overhead.
+
+Debug exports also include `analysis.json.paint` and a **Diagnostic mesh / atlas / decode evidence** lane in the full trace and its slices:
+
+- Connected subtree membership, leaf counts, inline image references, and later image writes grouped by observer frame. Joins use retained node IDs.
+- The app's existing `HTMLImageElement.decode()` calls, URL, completion/rejection, intrinsic dimensions and explicitly paired WebKit timestamps. The probe never starts a decode; completion does not establish GPU upload or continued decoded-image residency. Decodes before installation remain unobserved.
+- Native layer-node descriptions from Inspector's DOM tree, and a count of paints exposing native node IDs. Paints without IDs stay unmapped; clip rectangles do not prove face identity.
+- Each connection's first subsequent paint, explicitly a temporal observation rather than an inferred mutation-to-paint causal edge. Attachment inspection is limited to 30,000 nodes, with omissions reported.
+
+Use `pnpm ipad:run --debug --native page ...` to request the existing Instruments Time Profiler capture in the same journey. On a physical device it records all processes and filters exported samples to the identified WebContent process. Native export resolves addresses against installed Xcode device binaries only after UUID verification, preserving ASLR load addresses; `native-symbols.json` records coverage and unresolved binaries. The validated Instruments clock is retained in `native-toc.xml` for offline rebuilds; a missing clock or empty selected-process samples is an explicit export error. Expensive paint summaries include the sampled native stacks within their intervals. `ios-capture.mts --rebuild <capture>` can reprocess existing native recordings with these symbols. Inspect native export errors and sample coverage before drawing native-stack conclusions; a successful WebKit capture does not prove Instruments produced samples. Normal runs leave these hooks and native profiling off.
+
+Native image-lifecycle samples surface encoded-buffer replacement and live/dead resource pruning in the diagnostic lane, preserving the native call chain without inventing an image URL or a complete call count. Native stack summaries separate threads and retain decoder/shareable-bitmap paths during decode calls and mesh activation. Their host-wall-clock alignment with WebKit is approximate: overlapping samples do not identify a particular image or supply exact per-paint CPU percentages. Inspect the native stack itself to establish the execution path.
+
+Native snapshots are asynchronous observations, not atomic transactions or proof that pixels reached the screen. Reports retain coalesced event counts, errors, unmapped nodes and unpaired clocks. GPU tile eviction reasons are not exposed by this Inspector protocol. Layer IDs and Inspector node IDs must never be joined by array position or across remappings; the page-side retained node identity provides that link.
+
+Add `--style-writes` for the existing DOM-write diagnostic; it adds overhead and is for locating changes rather than comparing timing.
+`style-writes.json` includes bounded, timestamped class/data/hidden state changes as well as aggregate writes. Align its
+relative times with the `cssEarth:capture:style-writes-start` trace marker; device and host wall clocks can differ.
+Also inspect listener lifetimes when styles spike without a DOM write: WebKit tracks wheel listeners in event-region
+styles. Adding/removing a document wheel listener between flight segments can invalidate the whole scene.
 
 Use `--origin http://<Mac-LAN-IP>:<port>` when the preview uses a different port. A JSON scenario can express a longer
 sequence: `pnpm ipad:run --scenario journey.json --name long-journey`. Its shape is
@@ -168,7 +205,7 @@ Use Perfetto to plot all memory categories. These are WebKit's accounting catego
 The snapshots pause JavaScript outside the interaction recording. Read their retainers when counters disagree with
 cleanup; a zero resource-owner count alone does not prove that every JavaScript or browser allocation was freed.
 
-The command validates body names against the object registry, uses the performance router bridge for flights, verifies
+The command validates body names against the object registry, uses the performance router bridge for preview flights, verifies
 ready destination routes, and fails if an action cannot complete. Direct `tap`, `drag`, `type`, and `zoom` actions are
 `page-dispatched`: Web Inspector sends pointer and wheel events through the app's input handlers. This iPad's iOS 26.6 refuses CoreDevice HID remote touch
 (`Remote control requires iOS 27.0 or later`), and WebInspector Automation's `touch()` emits no events on it. The report

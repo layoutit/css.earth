@@ -82,3 +82,16 @@ test('repreparation starts from canonical topology and reproduces the final dept
     property: '--local-material', source: 'billboard-opacity', precision: 6 }] };
   assert.equal((await preparePresentationBindings(changed, root, { pageStyles: objectPageStyles })).depthPartitions, undefined);
 });
+
+test('texture consumers are prepared from CSS inheritance and nearer overrides', async () => fixture(async ({ root, definition, css, setCss }) => {
+  await setCss(css + ' .leaf { background-image:var(--texture); }');
+  const prepared = await preparePresentationBindings({ ...definition, variants: definition.variants.map(variant => ({ ...variant,
+    writes: [...variant.writes,
+      { kind: 'texture', target: 1, name: '--texture', resource: 'base', quoted: true },
+      { kind: 'texture', target: 4, name: '--texture', resource: 'override', quoted: true }],
+  })) }, root, { pageStyles: objectPageStyles });
+  assert.deepEqual(prepared.tree.textureBindings, [
+    { target: 1, name: '--texture', leaves: [3] },
+    { target: 4, name: '--texture', leaves: [5] },
+  ]);
+}));

@@ -6,7 +6,7 @@ import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
-import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
+import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createSettlePacer } from './settle-pacer.js';
@@ -41,6 +41,8 @@ export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */
   activationGroups?: readonly (readonly number[])[];
+  /** Offline CSS consumers of each selection-owned image binding. */
+  textureBindings?: readonly { target: number; name: string; leaves: readonly number[] }[];
   nodes: readonly { tag: string; parent: number; className: string | null; style: string; properties: readonly number[]; attributes: Readonly<Record<string, string>> }[];
   properties: readonly { name: string; value: string; custom: boolean }[]; camera: number; scene: number; stageClasses: readonly string[];
 }
@@ -77,6 +79,7 @@ export interface PreparedFramePublication { selection: ObjectSelection; view: Pr
 import { preparedScenePitch } from "@cssearth/engine";
 import { createPreparedMaterialPublisher } from "./prepared-material.js";
 import { prepareConnectedActivation } from './prepared-activation.js';
+import { prepareTextureActivation } from './prepared-texture-activation.js';
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 
 const matches = (variant: PreparedVariant, selection: ObjectSelection) => Object.entries(variant.when).every(([name, value]) => selection[name] === value);
@@ -153,7 +156,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 
 // No geometry, atlas addressing, band grouping, source conversion, or package
 // callbacks enter this builder. The ordered records are final prepared DOM.
-export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, progressiveActivation = false) {
+export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, progressiveActivation = false, deferConnection = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
     : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin,
       new Set(definition.variants.flatMap(variant => variant.hiddenSubtrees ?? [])));
@@ -168,18 +171,32 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       : binding.kind === "class" ? stage.classList.contains(binding.name) : styleValue(stage, binding.name);
     context.own(() => {
       if (!owned()) return;
-      if (binding.kind === "attribute") writeAttribute(stage, binding.name, typeof previous === "string" ? previous : null);
-      else if (binding.kind === "class") stage.classList.toggle(binding.name, previous === true);
-      else writeStyle(stage, binding.name, String(previous));
+      if (binding.kind === "attribute") {
+        const value = typeof previous === "string" ? previous : null;
+        if (readAttribute(stage, binding.name) !== value) writeAttribute(stage, binding.name, value);
+      } else if (binding.kind === "class") {
+        if (stage.classList.contains(binding.name) !== previous) stage.classList.toggle(binding.name, previous === true);
+      } else if (styleValue(stage, binding.name) !== String(previous)) writeStyle(stage, binding.name, String(previous));
     });
   }
   for (const name of definition.tree.stageClasses) {
     const previous = stage.classList.contains(name);
-    context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
+    context.own(() => { if (owned() && stage.classList.contains(name) !== previous) stage.classList.toggle(name, previous); });
   }
   if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
-  const activate = prepareConnectedActivation(preparedTree && progressiveActivation
-    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own);
+  const textureBindings = new Map((definition.tree.textureBindings ?? []).map(binding =>
+    [`${binding.target}:${binding.name}`, binding.leaves.map(index => nodes[index])] as const));
+  const surfaceScenes = [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])];
+  const textureLeaves = new Set([...textureBindings.values()].flat());
+  const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && definition.tree.textureBindings?.length
+    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])
+      .filter(node => textureLeaves.has(node) && surfaceScenes.some(scene => scene.contains(node)))) : [], context.own);
+  const activate = definition.tree.textureBindings?.length ? textureActivation.activate : prepareConnectedActivation(preparedTree && progressiveActivation
+    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own,
+    // Empty structural anchors can be leaves after preparation partitions the
+    // surface. Hit testing and feature binding need their ancestry immediately.
+    [definition.surfaceHit?.target, definition.features?.target].flatMap(index => index === undefined ? [] : [nodes[index]]),
+    [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])]);
   // The same prepared groups let the camera bring a resolving mesh back in stages.
   const revealGroups = Object.freeze((definition.tree.activationGroups ?? []).map(group => Object.freeze(group.map(index => nodes[index]))));
   // Disable CSS-owned motion before attachment. Prepared handles below own its
@@ -192,9 +209,12 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     return { animation, plan, duration: plan.duration };
   });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.
-  for (const root of roots) stage.appendChild(root);
-  if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
-  for (const name of definition.tree.stageClasses) stage.classList.add(name);
+  const connect = () => {
+    for (const root of roots) if (root.parentNode !== stage) stage.appendChild(root);
+    if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
+    for (const name of definition.tree.stageClasses) if (!stage.classList.contains(name)) stage.classList.add(name);
+  };
+  if (!deferConnection) connect();
   const animations = definition.animations.map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, easing: "linear", fill: "both" });
     animation.id = plan.id; context.registerAnimation(animation, { mode: plan.mode });
@@ -209,7 +229,14 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
-  return Object.freeze({ cameraElement, sceneElement, activate, revealGroups,
+  function publishStyle(index: number, name: string, value: string) {
+    const leaves = textureBindings.get(`${index}:${name}`);
+    if (leaves) {
+      for (const leaf of leaves) textureActivation.write(leaf, value);
+      styleWrites += leaves.length;
+    } else if (!samePreparedStyle(styleValue(target(index), name), name, value)) { writeStyle(target(index), name, value); styleWrites++; }
+  }
+  return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.features ? { featureTarget: nodes[definition.features.target] } : {}),
@@ -238,9 +265,9 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       const contentWrites = writes.filter(binding => !profileDisplay(binding, "none") && !profileDisplay(binding, "block"));
       const publish = (binding: typeof writes[number]) => {
         const element = target(binding.target);
-        if (binding.kind === "attribute") writeAttribute(element, binding.name, binding.value);
-        else if (binding.kind === "class") element.classList.toggle(binding.name, binding.value);
-        else { writeStyle(element, binding.name, binding.value); styleWrites++; }
+        if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
+        else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
+        else publishStyle(binding.target, binding.name, binding.value);
       };
       // Alternative radial meshes address different atlas layouts. Hide the
       // outgoing profile before changing their shared image, then reveal the
@@ -249,7 +276,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // rendering one mesh with another mesh's texel addresses.
       for (const binding of hiddenProfiles) publish(binding);
       for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
-        writeStyle(target(binding.target), binding.name, "none"); styleWrites++;
+        publishStyle(binding.target, binding.name, "none");
       }
       for (const binding of contentWrites) publish(binding);
       for (const binding of shownProfiles) publish(binding);

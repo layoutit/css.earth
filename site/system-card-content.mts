@@ -25,11 +25,13 @@ export function createSystemCardContent(documentTarget: Document) {
     for (const { node, home, destination } of entries) {
       if (onSystem) { if (node.parentElement !== destination) destination.append(node); }
       else if (node.previousElementSibling !== home) home.after(node);
-      if (node.tagName === 'DETAILS') node.toggleAttribute('open', onSystem || home.hasAttribute('data-system-content-open'));
+      const open = onSystem || home.hasAttribute('data-system-content-open');
+      if (node.tagName === 'DETAILS' && node.hasAttribute('open') !== open) node.toggleAttribute('open', open);
     }
     for (const selector of ['[data-system-datasets]', '[data-system-galleries]']) {
       const root = documentTarget.querySelector<HTMLElement>(selector);
-      if (root) root.hidden = !onSystem || !entries.some(entry => root.contains(entry.destination));
+      const hidden = !onSystem || !entries.some(entry => root?.contains(entry.destination));
+      if (root && root.hidden !== hidden) root.hidden = hidden;
     }
   };
   return { show, restore() { show(false); for (const { home } of entries) home.remove(); } };

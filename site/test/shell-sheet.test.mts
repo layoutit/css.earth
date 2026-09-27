@@ -66,6 +66,31 @@ function mountSheet() {
     pointer, runFrames, inline, readers: [sheet, toolbar, categories] };
 }
 
+test('replacing selected card content leaves the resting sheet and camera layout untouched', async () => {
+  const { document, sheet, toolbar, categories, runFrames, controller } = mountSheet();
+  const bodyStyle = document.body.getAttribute('style');
+  const drawer = sheet.querySelector('.object-drawer-content')!;
+  const selected = document.createElement('section');
+  selected.className = 'object-selected-panel';
+  let geometryReads = 0;
+  Object.assign(selected, {
+    getClientRects() { geometryReads++; return []; },
+    getBoundingClientRect() { geometryReads++; return { top: 0, bottom: 194.125 }; },
+  });
+  drawer.append(selected);
+  for (const introduction of ['Short introduction.', 'An introduction with enough text to wrap onto another line.']) {
+    selected.textContent = introduction;
+    selected.setAttribute('data-card-subject', introduction);
+    await Promise.resolve();
+    runFrames();
+    assert.equal(geometryReads, 0, 'card changes never measure a new resting stop');
+    assert.equal(document.body.getAttribute('style'), bodyStyle, 'card changes cannot resize the shared viewport');
+    assert.equal(document.body.dataset.sheet, 'peek');
+    for (const element of [sheet, toolbar, categories]) assert.equal(element.style.transform ?? '', '');
+  }
+  controller.destroy();
+});
+
 test('a drag writes its offset on the sheet and the search riding on it, never on the body', () => {
   const { document, sheet, toolbar, categories, pointer, inline } = mountSheet();
   const body = document.body.getAttribute('style');

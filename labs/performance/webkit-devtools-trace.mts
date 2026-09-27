@@ -7,10 +7,13 @@
 // No converter exists upstream (searched 2026-09-26), so this is the smallest one: names, threads and frames only.
 // Counter events are preserved; Perfetto displays all category/device counters. A capture taken with --screens
 // carries screens/<epoch ms>.jpg, the iPad's real screen, which becomes DevTools' screenshot filmstrip.
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { gunzipSync } from 'node:zlib';
+import { restoreSchedulingStacks } from './webkit-trace-clues.mts';
 import { pathToFileURL } from 'node:url';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
+import { writeNavigationAnalysis } from './webkit-trace-slices.mts';
 
 /** WebKit timeline record type → Chrome trace event name. Unlisted types keep their WebKit name. */
 export const DEVTOOLS_NAMES: Readonly<Record<string, string>> = {
@@ -27,7 +30,17 @@ export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: numbe
   const source = requireRecord(trace, 'trace'), events = requireArray(source.traceEvents, 'traceEvents').filter(isRecord);
   const metadata = isRecord(source.metadata) ? source.metadata : {}, url = typeof metadata.url === 'string' ? metadata.url : '';
   const page = events.filter(event => event.pid === 1 && typeof event.ts === 'number' && (event.ph === 'X' || event.ph === 'i'));
-  const start = Math.min(...page.map(event => event.ts as number));
+  const start = page.reduce((n, event) => Math.min(n, Number(event.ts)), Infinity);
+  // A debug capture can contain hundreds of thousands of records. A sorted interval
+  // sweep finds containing native calls without a quadratic scan or argument spreading.
+  const roots = new Set<Record<string, unknown>>();
+  let greatestEnd = -Infinity, greatestStart = Infinity;
+  for (const event of page.filter(e => e.ph === 'X' && e.name !== 'RenderingFrame' && typeof e.dur === 'number')
+    .sort((a, b) => Number(a.ts) - Number(b.ts) || Number(b.dur) - Number(a.dur))) {
+    const ts = Number(event.ts), end = ts + Number(event.dur);
+    if (!(greatestEnd > end || greatestEnd === end && greatestStart < ts)) roots.add(event);
+    if (end > greatestEnd) { greatestEnd = end; greatestStart = ts; }
+  }
   const out: Record<string, unknown>[] = [
     { ph: 'M', name: 'process_name', pid: PID, tid: MAIN, args: { name: 'Renderer' } },
     { ph: 'M', name: 'thread_name', pid: PID, tid: MAIN, args: { name: 'CrRendererMain' } },
@@ -37,7 +50,7 @@ export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: numbe
     { ph: 'I', s: 't', name: 'SetLayerTreeId', cat: 'disabled-by-default-devtools.timeline', pid: PID, tid: MAIN, ts: start, args: { data: { frame: FRAME, layerTreeId: 1 } } },
   ];
   let frame = 0;
-  for (const event of events) if (event.ph === 'C') out.push({ ...event });
+  for (const event of events) if (event.ph === 'C' || (event.pid !== 1 && (event.ph === 'X' || event.ph === 'M'))) out.push({ ...event });
   for (const event of page) {
     const type = String(event.name), ts = event.ts as number, dur = typeof event.dur === 'number' ? event.dur : 0;
     const data: Record<string, unknown> = { ...(isRecord(event.args) && isRecord(event.args.data) ? event.args.data : {}), frame: FRAME };
@@ -56,11 +69,10 @@ export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: numbe
     if (type === 'FunctionCall') Object.assign(data, { url: data.scriptName ?? '', lineNumber: data.scriptLine, columnNumber: data.scriptColumn, functionName: '' });
     if (event.ph === 'i') { out.push({ ph: 'I', s: 't', name, cat: CATEGORY, pid: PID, tid: MAIN, ts, args: { data, webkit: type } }); continue; }
     // Chrome's main thread runs everything inside a RunTask; a top-level WebKit record is one task.
-    const depthZero = !page.some(other => other !== event && other.ph === 'X' && other.name !== 'RenderingFrame' && typeof other.dur === 'number'
-      && (other.ts as number) <= ts && (other.ts as number) + other.dur >= ts + dur && ((other.ts as number) < ts || other.dur > dur));
+    const depthZero = roots.has(event);
     if (depthZero) out.push({ ph: 'X', name: 'RunTask', cat: 'disabled-by-default-devtools.timeline', pid: PID, tid: MAIN, ts, dur, args: {} });
     out.push({ ph: 'X', name, cat: CATEGORY, pid: PID, tid: MAIN, ts, dur,
-      args: name === 'Layout' ? { beginData: { frame: FRAME }, endData: {}, webkit: type } : { data, webkit: type } });
+      args: name === 'Layout' ? { beginData: data, endData: {}, webkit: type } : { data, webkit: type } });
     if (type === 'Composite') out.push({ ph: 'I', s: 't', name: 'DrawFrame', cat: 'disabled-by-default-devtools.timeline.frame', pid: PID, tid: COMPOSITOR, ts: ts + dur, args: { layerTreeId: 1, frameSeqId: frame } });
   }
   if (screens.length) {
@@ -81,9 +93,16 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
     const receipt: unknown = await readFile(resolve(dir, 'report.json'), 'utf8').then(JSON.parse, () => null);
     copy.metadata.capture = { directory: resolve(dir), screenSource: screens.length ? 'device-screen' : 'none', screenFrames: screens.length,
       ...(isRecord(receipt) ? { checkout: receipt.checkout ?? null, checkoutRole: receipt.checkoutRole ?? null,
-        revision: receipt.revision ?? null, trackedChanges: receipt.trackedChanges ?? null } : {}) };
+        revision: receipt.revision ?? null, trackedChanges: receipt.trackedChanges ?? null, debug: receipt.debug === true } : {}) };
     if (!screens.length) console.error(`${dir}: no native device-screen frames; DevTools will have no screenshot filmstrip. Inspect existing device PNGs or record a visual trace with --screens.`);
-    await writeFile(resolve(dir, 'trace.devtools.json'), JSON.stringify(copy) + '\n');
+    const raw: unknown = await readFile(resolve(dir, 'raw.json.gz')).then(bytes => JSON.parse(gunzipSync(bytes).toString('utf8')), () => null);
+    restoreSchedulingStacks(copy, raw);
+    const analysis = await writeNavigationAnalysis(copy, dir, receipt, raw);
+    console.log(`${dir}/analysis.json: ${analysis.views.length} prepared views`);
+    // The live viewer discovers only complete exports, including their slices.
+    const temporary = resolve(dir, `trace.devtools.${process.pid}.tmp`);
+    await writeFile(temporary, JSON.stringify(copy) + '\n');
+    await rename(temporary, resolve(dir, 'trace.devtools.json'));
     console.log(`${dir}/trace.devtools.json: ${copy.traceEvents.length} events, ${screens.length} device-screen frames`);
   }
 }

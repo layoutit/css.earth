@@ -11,9 +11,10 @@ from the last drawn pose and retains the same destination-detail hold.
 
 Every registered detail has a prepared world frame and mounts through the
 application world context. The shared viewport and frame presenter are required
-mount inputs. The physical dolly is the only object camera: wheel input changes
-distance, and one scene rotation determines the registered sky and local Sun
-direction. Saved poses contain that scene rotation only. The persistent universe
+mount inputs. Wheel input changes physical distance, and one scene rotation
+determines the registered sky and local Sun direction. The camera also carries
+an optical framing scale, shared by the mesh, universe, labels and picking.
+Saved views retain that scale as well as the physical pose. The persistent universe
 owns sky rendering; detail mounts allocate no hidden sky nodes or resize observers.
 Camera publications carry their captured world pose and stage viewport, so the
 runtime forwards them without remeasuring the camera DOM. Application navigation
@@ -21,12 +22,97 @@ owns history restoration; each detail only writes its current saved view.
 
 `createCameraFlight` owns scheduling, acceleration, cancellation and completion
 for world navigation, prepared-focus flights and native surface fly-to. Each
-path supplies its existing camera sampling math. World navigation installs one
-set of input listeners for the whole journey. A handoff holds the flight at its
+path supplies its existing camera sampling math. World navigation retains one
+document wheel listener for the navigation owner's lifetime and switches only
+its active callback. Adding or removing a nonpassive document wheel listener at
+arrival invalidated event-region styles across the scene in iPad WebKit.
+Pointer and keyboard interruption listeners remain scoped to each journey.
+A handoff holds the flight at its
 acknowledged pose while that exact view is prepared, then changes the presenter
 and releases the hold. It does not create a departure or continuation runner.
 The incoming detail and persistent world still acknowledge one publication
 together; cancellation prevents a late worker reply from moving either one.
+
+The shell handoff must not force layout merely to clear search results. Closing
+search, refreshing its selection, rebinding the object and an empty filter all
+clear the catalogue without measuring its viewport, and cancel any queued scroll
+render. Keyboard focus measures before scrolling and passes those measurements
+to the row renderer. Reading `offsetTop` after replacing shell content forced a
+35.5 ms style recalculation inside the final flight callback on the traced iPad.
+The [native capture receipt](../evidence/ui/arrival-handoff-2026-09-27/receipt.json)
+records the callback dropping from 50.2 to 12.6 ms after removing that read.
+Safari still recalculates styles afterward; the incoming mesh's first paint and
+the total handoff stall remain. This change removes forced synchronous layout,
+not all arrival rendering work.
+
+The first document head installs the shared shell CSS and its object's CSS.
+Navigation fragments send only their object's authored CSS; shared marker styles
+live in the cached application stylesheet. Navigation installs missing object
+styles during content preparation and keeps them installed for the document's
+lifetime, including when a flight is cancelled. Existing styles reuse their DOM
+nodes. Arrival changes the stage's object identity without removing the previous
+object's rules or reinserting the destination's rules. The retained settings
+panel keeps controls by name, adds/removes only capabilities that change, and
+keeps its hidden native form and view-context inputs. Its shared settings controller
+survives object changes with the same listeners, checked values and accessibility
+state; only object-owned controls are rebound. Sources update in place.
+Readiness stays on the existing root attributes; the startup spinner is removed.
+Unused body lifecycle classes are not published, and synchronous scene replacement skips publication of the
+intermediate disposed session. Repeated link selection and settings publication
+write only changed values.
+The [retention receipt](../evidence/ui/arrival-handoff-2026-09-27/retained-styles-receipt.json)
+records three runs per stylesheet variant: the median largest handoff restyle
+falls from 35.9 to 6.9 ms. Lutetia's navigation response sends 2,152 bytes of
+inline CSS instead of 39,026 (uncompressed). The final round trip adds one
+stylesheet and removes none; the main arrival Composite still costs 183 ms,
+including 72 ms of Paint.
+
+## Prepared arrival perspective
+
+For the default lens, an arrival billboard covers one flight to the final
+framing. Its preparation metadata supplies the exact camera distance and
+orientation. Responsive fitting chooses the apparent size and derives an
+optical framing scale at that same distance. Cross-object selection reads the
+destination's responsive camera plan, including its prepared shape fit, before
+starting the flight; it does not inherit the departing body's size allowance.
+Scaling a distant photograph to
+match a closer mesh's bounding sphere would change the visible surface features
+at the reveal, even when their outlines agree.
+
+The optical scale travels with the world camera and follows the same eased
+progress as position and rotation. Completion checks its remaining relative
+change as well as the pose, so arriving at the prepared position cannot snap
+an unfinished zoom to its endpoint. CSS perspective stays fixed: a two-dimensional
+transform on the detail camera root implements the effective focal length. Mesh depth translation uses
+the unscaled CSS focal length; projected labels, picking, material selection and
+the persistent universe use the effective focal length. A viewport records which
+scale its focal length already includes, so it cannot be applied twice.
+
+The persistent universe prepares the destination caption, including the shape's
+prepared framing scale, before camera motion. One retained label follows the body
+below its silhouette through preview and selection; arrival does not replace its
+text, remeasure it, or change to another placement rule. Orbit projection and
+occlusion also use the preview destination. Its projected disc size drives the
+existing close-up fade during approach, including unrelated paths, so switching
+the selected detail does not retire an entire orbit field at the final pose.
+
+The detail is prepared at the final camera and attaches atomically behind the
+opaque image. Scene readiness waits for decoded selection, complete attachment
+and a rendering opportunity. After the destination acknowledges that same camera,
+the image is removed in one swap and normal input can resume. Elapsed time cannot
+release the cover. The camera stays at that same pose and optical scale.
+Decode and connected activation are observable; the
+browser exposes no promise that certifies GPU residency, so native device frames
+remain part of qualification.
+
+A preflight decode is not a pin on browser-decoded pixels. Before connecting an
+incoming scene, the resource owner rechecks `decode()` on its committed resident
+image handles. Shared atlas aliases are checked once; optional prewarm images
+are excluded. Direct mounts already decode in initial selection and skip this
+refresh. The existing billboard and lifetime cancellation cover the asynchronous
+check. This does not claim GPU residency or replace the subsequent paint gate.
+The owner's `paintDecodeChecks` diagnostic counts these checks separately from
+initial resource completions.
 
 The application frame queue owns publication of that complete view. It commits
 the worker-planned world, then the captured camera, before camera subscribers
@@ -40,6 +126,14 @@ motion or during the visible approach. Drag and inertia remain native input
 motions. Reduced-motion handoffs publish their endpoint and complete without
 waiting for an animation frame.
 
+Authored scene CSS remains an input to baking. The site's build removes its
+`@keyframes` and animation declarations from delivered scene styles through
+`preparedMotionCss`; prepared motion records and runtime animation handles own
+playback. SSR and mounting already disable CSS animation on those targets.
+Shell animations retain their separate owner. This avoids transporting unused
+motion definitions and inserting them into the live document's cascade during
+navigation. The all-body CSS check covers every stylesheet declared by an object.
+
 Preparation supplies `tree.activationGroups` for every registered object. Each
 group contains at most 64 existing sibling leaves; containers and leaves whose
 display belongs to selection are excluded. The preparation pipeline writes this
@@ -48,8 +142,13 @@ checks the generated bank against the checked-in tree and descriptor hash.
 Runtime only restores these prepared leaves over successive frames and gives the
 final batch a rendering opportunity before resolving readiness. It never
 derives geometry or chooses a different asset bank. Direct and reduced-motion
-arrivals remain atomic. A flight holds before the destination needs its detailed
+arrivals and arrivals covered by a billboard remain atomic. A flight holds before the destination needs its detailed
 surface if activation is still pending.
+
+The bottom sheet has shared responsive resting stops in shell CSS. Card replacement,
+intro length and dataset controls cannot change its height, the search row position,
+or the camera viewport. The sheet controller observes user gestures and viewport
+keyboard changes; it does not observe or measure card content.
 
 The application owns viewport measurement across mounts. Object cameras and
 world overlays consume its published bounds and projection. Resize and scroll

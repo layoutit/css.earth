@@ -1,0 +1,322 @@
+{
+  "schema": "cssearth-retained-arrival-evidence@1",
+  "scenario": "Earth to Lutetia; separate Earth to Lutetia to Earth round trip",
+  "device": {
+    "model": "iPad15,7",
+    "system": "26.6"
+  },
+  "baseRevision": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
+  "finalBuild": {
+    "schema": "cssearth-performance-build@1",
+    "head": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
+    "sourceDigest": "e945a2aa96fa1e47b9f8252cd487dc766232b70c375e49f0195bcce53cd1030c",
+    "builtAt": "2026-09-27T03:13:42.903Z"
+  },
+  "experiments": {
+    "baseline": [
+      {
+        "capture": "tablet-containment-baseline-2-2026-09-27T02-36-05-810Z",
+        "callbackMs": 13.116,
+        "styleInsideCallbackMs": 0,
+        "largestStyleMs": 35.859,
+        "styleTotalMs": 47.485,
+        "handoffToRemovalMs": 347.69,
+        "largestCommit": {
+          "ms": 186.955,
+          "stages": {
+            "commit": 115.72899999999997,
+            "paint": 71.04399999999862,
+            "layout": 0.182
+          }
+        },
+        "traceSha256": "f5a9b4187bbd4ce5d4c0e862501b05de913a4c26b86a50d742b0c303344fdee5",
+        "contentBeforeMotionMs": 391.31100000000015
+      },
+      {
+        "capture": "tablet-containment-baseline-2026-09-27T02-35-15-509Z",
+        "callbackMs": 12.298,
+        "styleInsideCallbackMs": 0,
+        "largestStyleMs": 35.265,
+        "styleTotalMs": 46.581,
+        "handoffToRemovalMs": 332.585,
+        "largestCommit": {
+          "ms": 181.455,
+          "stages": {
+            "commit": 109.19099999999997,
+            "paint": 72.17899999999891,
+            "layout": 0.085
+          }
+        },
+        "traceSha256": "8a49356f69041564be4c995312b7bfc6740d7a91ae6e781d3f596c86c5611521",
+        "contentBeforeMotionMs": 168.35600000000022
+      },
+      {
+        "capture": "tablet-containment-baseline-3-2026-09-27T02-36-26-924Z",
+        "callbackMs": 12.816,
+        "styleInsideCallbackMs": 0,
+        "largestStyleMs": 36.248,
+        "styleTotalMs": 48.043,
+        "handoffToRemovalMs": 320.967,
+        "largestCommit": {
+          "ms": 186.791,
+          "stages": {
+            "commit": 113.67399999999996,
+            "paint": 73.02099999999899,
+            "layout": 0.096
+          }
+        },
+        "traceSha256": "a67e0da612fea89fa15f47d6e4b6d47b3dd2c981cf9d27d9f530f40885dd5aec",
+        "contentBeforeMotionMs": 195.85400000000027
+      }
+    ],
+    "retainAtHandoff": {
+      "build": {
+        "schema": "cssearth-performance-build@1",
+        "head": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
+        "sourceDigest": "e415ec1022503c40acbe298f6e6ec79c601a61b0cd7d52f85ebd177f6a5cf4b1",
+        "builtAt": "2026-09-27T03:00:18.967Z"
+      },
+      "runs": [
+        {
+          "capture": "tablet-retain-visited-styles-2-2026-09-27T03-01-26-275Z",
+          "callbackMs": 13.349,
+          "styleInsideCallbackMs": 0,
+          "largestStyleMs": 7,
+          "styleTotalMs": 13.821000000000002,
+          "handoffToRemovalMs": 299.596,
+          "largestCommit": {
+            "ms": 185.132,
+            "stages": {
+              "commit": 114.06799999999997,
+              "paint": 70.97199999999854,
+              "layout": 0.092
+            }
+          },
+          "traceSha256": "03568be5da0a002538a223db9e14a54c2eb742f95abba47cf4752feb056c43a0",
+          "contentBeforeMotionMs": 138.74199999999973
+        },
+        {
+          "capture": "tablet-retain-visited-styles-2026-09-27T03-00-21-930Z",
+          "callbackMs": 13.165,
+          "styleInsideCallbackMs": 0,
+          "largestStyleMs": 6.952,
+          "styleTotalMs": 13.908,
+          "handoffToRemovalMs": 299.363,
+          "largestCommit": {
+            "ms": 184.25,
+            "stages": {
+              "commit": 112.52499999999996,
+              "paint": 71.62999999999936,
+              "layout": 0.095
+            }
+          },
+          "traceSha256": "e12a06b3a815593ef9214550b7b179796dfcb28e8383619ac8d6ddfde2b228ae",
+          "contentBeforeMotionMs": 152.94699999999966
+        },
+        {
+          "capture": "tablet-retain-visited-styles-3-2026-09-27T03-01-47-714Z",
+          "callbackMs": 13.388,
+          "styleInsideCallbackMs": 0,
+          "largestStyleMs": 6.916,
+          "styleTotalMs": 13.693000000000001,
+          "handoffToRemovalMs": 300.602,
+          "largestCommit": {
+            "ms": 186.374,
+            "stages": {
+              "commit": 114.88699999999996,
+              "paint": 71.38299999999913,
+              "layout": 0.104
+            }
+          },
+          "traceSha256": "4e01f11f824fea592491a32a90c30065ef20fb75004f43c9f880bcf85966f355",
+          "contentBeforeMotionMs": 161.84799999999996
+        }
+      ]
+    },
+    "installDuringPreparation": {
+      "build": {
+        "schema": "cssearth-performance-build@1",
+        "head": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
+        "sourceDigest": "180523f45ff577200be91b9bfd8ffe53a7d376892087b309b0236d6a9f2f4d22",
+        "builtAt": "2026-09-27T03:05:27.668Z"
+      },
+      "runs": [
+        {
+          "capture": "tablet-styles-before-arrival-2-2026-09-27T03-06-35-949Z",
+          "callbackMs": 10.339,
+          "styleInsideCallbackMs": 0,
+          "largestStyleMs": 6.905,
+          "styleTotalMs": 13.265,
+          "handoffToRemovalMs": 299.02,
+          "largestCommit": {
+            "ms": 182.428,
+            "stages": {
+              "commit": 110.06399999999998,
+              "paint": 72.26199999999886,
+              "layout": 0.102
+            }
+          },
+          "traceSha256": "509d4d8a99df9266dfc4151cee715b8edb892337001b10a2acf0bfdc6d0d314b",
+          "contentBeforeMotionMs": 185.98599999999988
+        },
+        {
+          "capture": "tablet-styles-before-arrival-2026-09-27T03-05-30-647Z",
+          "callbackMs": 10.179,
+          "styleInsideCallbackMs": 0,
+          "largestStyleMs": 6.798,
+          "styleTotalMs": 14.889000000000001,
+          "handoffToRemovalMs": 432.513,
+          "largestCommit": {
+            "ms": 149.952,
+            "stages": {
+              "paint": 92.716,
+              "commit": 57.14799999999996,
+              "layout": 0.088
+            }
+          },
+          "traceSha256": "15f0f49986a212a6497408fa982b4ca9328148286f959cf43f7eaece9482a175",
+          "contentBeforeMotionMs": 173.62800000000016
+        },
+        {
+          "capture": "tablet-styles-before-arrival-3-2026-09-27T03-06-56-937Z",
+          "callbackMs": 10.528,
+          "styleInsideCallbackMs": 0,
+          "largestStyleMs": 7.098,
+          "styleTotalMs": 13.879,
+          "handoffToRemovalMs": 282.565,
+          "largestCommit": {
+            "ms": 183.588,
+            "stages": {
+              "commit": 112.73099999999997,
+              "paint": 70.75999999999856,
+              "layout": 0.097
+            }
+          },
+          "traceSha256": "89e4bb866edc9f7eb2dfaf5e421d145ed27335a4b3c96a7c8534f484923b4825",
+          "contentBeforeMotionMs": 207.01800000000003
+        }
+      ]
+    }
+  },
+  "final": {
+    "capture": "tablet-retained-arrival-final-2026-09-27T03-14-52-642Z",
+    "callbackMs": 10.267,
+    "styleInsideCallbackMs": 0,
+    "largestStyleMs": 6.91,
+    "styleTotalMs": 13.460999999999997,
+    "handoffToRemovalMs": 299.31,
+    "largestCommit": {
+      "ms": 183.25,
+      "stages": {
+        "commit": 111.31799999999997,
+        "paint": 71.8399999999985,
+        "layout": 0.092
+      }
+    },
+    "traceSha256": "37a607d22f30cd72e9b51ebe1ae747df6f1b0b8930cf5476aaf87299a6ba1c7b",
+    "contentBeforeMotionMs": 197.42599999999993
+  },
+  "roundTrip": {
+    "capture": "tablet-retained-arrival-round-trip-2026-09-27T03-13-45-926Z",
+    "reportSha256": "ce16c3bd9d703d83e5fc775b075be3ba07928c88e50e3f593e51ce03fefa0a1f",
+    "checks": [
+      {
+        "phase": "earth-start",
+        "styles": [
+          "src/renderers/css/styles/earth-surfaces.css",
+          "site/object-shell.css",
+          "site/components/ObjectSwatchStyles.astro",
+          "/_astro/ObjectPage.CvJX629F.css",
+          "/_astro/BodyOverview.jYZ4dm0d.css"
+        ],
+        "hiddenInputs": 8
+      },
+      {
+        "phase": "lutetia-arrival",
+        "styles": 6,
+        "hiddenInputs": 8,
+        "retainedControls": [
+          "motion",
+          "shadows",
+          "surfaceLabels",
+          "threeDStars",
+          "heliosphere",
+          "illustrationModels"
+        ],
+        "formAction": "/lutetia/",
+        "events": [
+          {
+            "kind": "add",
+            "name": "src/renderers/css/styles/lutetia-surfaces.css",
+            "at": 4571
+          }
+        ]
+      },
+      {
+        "phase": "earth-return",
+        "styles": 6,
+        "hiddenInputs": 8,
+        "retainedControls": [
+          "motion",
+          "shadows",
+          "surfaceLabels",
+          "threeDStars",
+          "heliosphere",
+          "illustrationModels"
+        ],
+        "formAction": "/earth/",
+        "events": [
+          {
+            "kind": "add",
+            "name": "src/renderers/css/styles/lutetia-surfaces.css",
+            "at": 4571
+          }
+        ]
+      }
+    ]
+  },
+  "bytes": {
+    "unit": "uncompressed bytes of minified built output",
+    "navigationInlineCss": {
+      "before": 39026,
+      "after": 2152
+    },
+    "navigationHtml": {
+      "before": 93059,
+      "after": 56085
+    },
+    "removedDuplicateCss": 36874
+  },
+  "frames": {
+    "billboardRemovalEpochMs": 1790478900885.822,
+    "beforeOffsetMs": -172.822021484375,
+    "afterOffsetMs": 20.177978515625,
+    "artifacts": [
+      {
+        "file": "retained-filmstrip.png",
+        "source": "filmstrip.png",
+        "bytes": 209172,
+        "sha256": "57eaf4c761abb99acc9121ca54a8a53e608ad3e9f51f778d7dfa399fffcc7739"
+      },
+      {
+        "file": "retained-covered.jpg",
+        "source": "screens/1790478900713.jpg",
+        "bytes": 83857,
+        "sha256": "4d8e6ce5e9324d94c120f5f2e5573fff6d981da89b1f387a4e515f52eab044b3"
+      },
+      {
+        "file": "retained-revealed.jpg",
+        "source": "screens/1790478900906.jpg",
+        "bytes": 77564,
+        "sha256": "30ba4022d9de1b86851edfb6846c3ef007c8d3eb75716403146de405b2ca0cf5"
+      }
+    ]
+  },
+  "limits": [
+    "Normal iPad journeys include native screen sampling; timings describe instrumented runs.",
+    "Three matched runs isolate retention, and three more move first installation into preparation. The final normal run also retains shell controls and removes duplicate CSS transport.",
+    "The largest arrival Composite still includes about 72 ms of Paint. Retention fixes stylesheet invalidation, not the complete arrival stall.",
+    "The round trip adds a head MutationObserver and identity assertions for correctness only; it is not a timing comparison.",
+    "The original receipt and original images preserve the earlier catalogue-flush experiment; these retained-* images show the final build."
+  ]
+}

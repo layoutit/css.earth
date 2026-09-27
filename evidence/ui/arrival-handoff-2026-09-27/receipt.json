@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-arrival-handoff-evidence@1",
+  "scenario": "Earth to Lutetia",
+  "testedSource": {
+    "baseRevision": "86ec01713f9c09b4b936a90184947980d77ba2bb",
+    "trackedChanges": true,
+    "performanceBuild": {
+      "schema": "cssearth-performance-build@1",
+      "head": "86ec01713f9c09b4b936a90184947980d77ba2bb",
+      "sourceDigest": "f9c0cb80f8d0d7d4ce5368c6033e9f768ea68a8ff10a6ffd279cbe134f752dc7",
+      "builtAt": "2026-09-27T02:18:31.056Z"
+    }
+  },
+  "device": {
+    "model": "iPad15,7",
+    "system": "26.6"
+  },
+  "before": {
+    "capture": "tablet-arrival-destination-fit-2026-09-27T02-02-31-632Z",
+    "traceSha256": "68b0ac6bf592eec52ef2bfc914025d5cd331b073a9628d95a96cfc04ef3c9db1",
+    "callbackMs": 50.206,
+    "styleInsideCallbackMs": 36.903,
+    "largestHandoffStyleMs": 35.48,
+    "compositeMs": 184.648,
+    "paintInsideCompositeMs": 72.666,
+    "handoffToCoverRemovalMs": 322.003,
+    "stopwatchEpochMs": 1790474551945,
+    "coverRemovalEpochMs": 1790474559770.718
+  },
+  "after": {
+    "capture": "tablet-arrival-no-empty-layout-2026-09-27T02-18-33-814Z",
+    "traceSha256": "25e5daa1c4dcacb10fb93f7fe4f3bf7746159c11d121b0faa976de6d2a663346",
+    "callbackMs": 12.563,
+    "styleInsideCallbackMs": 0,
+    "largestHandoffStyleMs": 35.392,
+    "compositeMs": 183.754,
+    "paintInsideCompositeMs": 70.822,
+    "handoffToCoverRemovalMs": 349.269,
+    "stopwatchEpochMs": 1790475513879,
+    "coverRemovalEpochMs": 1790475521765.894
+  },
+  "artifacts": [
+    {
+      "file": "filmstrip.png",
+      "source": "filmstrip.png",
+      "sha256": "dcda4e1fc324c0ff6432c6e3d89392139e694819476dd9db86bb0b8defb97a0e",
+      "bytes": 210943
+    },
+    {
+      "file": "covered.jpg",
+      "source": "screens/1790475521621.jpg",
+      "sha256": "aff87c457169d6171cec1260a485fa94c51c6f193326c97709067942d5c1e1a9",
+      "bytes": 83865
+    },
+    {
+      "file": "revealed.jpg",
+      "source": "screens/1790475522042.jpg",
+      "sha256": "7a56311168e87f935dad29409ca6cbf79de1218b7cd7b54e4f276100d4e50b0d",
+      "bytes": 80146
+    }
+  ],
+  "interpretation": [
+    "The catalogue fix removes the synchronous geometry read and its style flush from the animation callback. It does not remove the following style invalidation or initial mesh paint.",
+    "The same source worktree differs between the two captures only in the catalogue window runtime; focused regression tests and documentation also changed.",
+    "Native device frames visually qualify the covered arrival and revealed mesh. They do not certify GPU residency or establish a repeated-run timing benchmark.",
+    "Jankmonster cached slices count all Paint children in the main arrival Composite; these paint durations are included in the Composite duration."
+  ]
+}

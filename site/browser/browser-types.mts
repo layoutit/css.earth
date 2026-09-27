@@ -14,9 +14,18 @@ export function requiredElement<T extends Element = HTMLElement>(root: ParentNod
 }
 export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
   if (panel.hidden !== hidden) panel.hidden = hidden;
-  const inert = hidden || panel.getAttribute('aria-busy') === 'true';
+  // Loading gates belong to the card's individual controls, not its retained container.
+  const inert = hidden;
   if (panel.hasAttribute('inert') !== inert) panel.toggleAttribute('inert', inert);
 }
 
 export type ShellCamera = Pick<ObjectSceneLifecycle, 'navigation' | 'sharedView'>;
 export interface PlaybackState { readonly allowed: boolean; readonly reason: string; readonly motionRequested?: boolean; }
+
+/** Shared link presentation publishes only changed selection state. */
+export function setLinkSelected(anchor: Element, selected: boolean): void {
+  if (anchor.classList.contains('is-active') !== selected) anchor.classList.toggle('is-active', selected);
+  if (selected) {
+    if (anchor.getAttribute('aria-current') !== 'page') anchor.setAttribute('aria-current', 'page');
+  } else if (anchor.hasAttribute('aria-current')) anchor.removeAttribute('aria-current');
+}

@@ -128,6 +128,17 @@ it("smallest-three encoding covers every omitted component and exact rounded-mat
   assert.deepEqual(parseSharedView(query), input);
 });
 
+it('view links retain optical framing and reject invalid lens scales', () => {
+  const input = parseSharedView(formatSharedView(physical()))!;
+  input.camera.pose.scene = identity;
+  input.camera.projectionScale = 3.25;
+  assert.deepEqual(parseSharedView(formatSharedView(input)), input);
+  for (const scale of [0, -1, NaN, Infinity]) {
+    input.camera.projectionScale = scale;
+    assert.throws(() => formatSharedView(input));
+  }
+});
+
 it("current format rejects duplicate camera data, reserved flags, invalid smallest-three values and truncation", () => {
   const mutations: ((value: SharedView) => void)[] = [
     value => { Reflect.set(value.camera, 'zoom', 1); }, value => { Reflect.set(value.camera, 'controlPitch', 0); },

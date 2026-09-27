@@ -1,9 +1,10 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { requiredElement } from '../browser/browser-types.mts';
+import { requiredElement, setLinkSelected } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 import { createNavigationStyles, type NavigationStyleStage } from './navigation-styles.mts';
 import { publishPreparedDescriptor, readPreparedDescriptor } from '../prepared-descriptor.mts';
+import { updateSettingsPanel, updateShellElement } from './navigation-shell-content.mts';
 export interface NavigationContent {
   readonly id: string;
   readonly name: string;
@@ -77,32 +78,33 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               incomingStyles.apply();
               committed = true;
               signal.removeEventListener('abort', dispose);
-              for (const selector of ['.object-information-panel', '.object-settings-panel', '[data-settings-form]']) {
+              for (const selector of ['.object-information-panel', '.object-settings-panel']) {
                 const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
                 if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
                 // The selection preview was imported from this same fragment and
                 // keeps its retained nodes. Only a registry-only preview, whose
                 // fragment had not arrived, is replaced by the destination card.
                 if (preserveSidebar && selector === '.object-information-panel' && !target.querySelector(':scope > [data-card-preview]')) continue;
-                target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
+                if (selector === '.object-settings-panel') updateSettingsPanel(target, incoming);
+                else target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
               }
+              // The hidden form and its view-context inputs belong to the shell.
+              // Native submission refreshes their values from the current URL.
               for (const selector of [...required, '[data-settings-form]', '.object-sidebar-view-all', '.object-sheet-handle', '.object-settings-action']) {
                 const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
                 if (!target || !incoming) continue;
                 for (const name of ['id', 'action', 'aria-label', 'aria-controls', 'aria-labelledby', 'popovertarget', 'placeholder', 'data-has-destinations']) {
                   const value = incoming.getAttribute(name);
-                  if (value === null) target.removeAttribute(name); else target.setAttribute(name, value);
+                  if (target.getAttribute(name) !== value) {
+                    if (value === null) target.removeAttribute(name); else target.setAttribute(name, value);
+                  }
                 }
               }
               const footer = documentTarget.querySelector<HTMLElement>('.object-attribution-footer'), incomingFooter = incomingSource.querySelector('.object-attribution-footer');
               if (footer) {
-                footer.hidden = !incomingFooter;
+                if (footer.hidden !== !incomingFooter) footer.hidden = !incomingFooter;
                 if (incomingFooter) {
-                  footer.replaceChildren(...[...incomingFooter.childNodes].map(node => documentTarget.importNode(node, true)));
-                  for (const name of ['href', 'aria-label', 'title', 'data-source-document', 'data-source-label']) {
-                    const value = incomingFooter.getAttribute(name);
-                    if (value === null) footer.removeAttribute(name); else footer.setAttribute(name, value);
-                  }
+                  updateShellElement(footer, incomingFooter);
                 }
               } else if (incomingFooter) {
                 const readout = documentTarget.querySelector('.object-view-readout') ?? documentTarget.body;
@@ -116,22 +118,21 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
                 const target = documentTarget.head.querySelector(`${incoming.tagName}[${key}="${incoming.getAttribute(key)}"]`);
                 if (target) {
                   const value = incoming.tagName === 'LINK' ? 'href' : 'content';
-                  target.setAttribute(value, incoming.getAttribute(value) ?? '');
+                  const next = incoming.getAttribute(value) ?? '';
+                  if (target.getAttribute(value) !== next) target.setAttribute(value, next);
                 } else documentTarget.head.append(documentTarget.importNode(incoming, true));
               }
-              documentTarget.body.dataset.objectShell = object.id;
+              // The shell marker is structural; scene identity belongs to the stage.
               requiredElement(documentTarget, '.object-browser').id = `${object.id}-object-browser`;
               publishPreparedDescriptor(documentTarget, descriptor);
               const stage = requiredElement(documentTarget, '.object-stage'), input = documentTarget.querySelector('.object-input-surface');
-              stage.dataset.objectId = object.id;
+              if (stage.dataset.objectId !== object.id) stage.dataset.objectId = object.id;
               stage.setAttribute('aria-label', `Interactive 3D CSS visualization of ${object.name}`);
               input?.setAttribute('aria-label', `Explore ${object.name}`);
               // Anchors expose their resolved origin and path: ~500 menu links need no URL parse.
               for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.object-link')) {
                 const selected = objectLinkIsCurrent(anchor, windowTarget.location.origin, object.route);
-                if (selected) anchor.setAttribute('aria-current', 'page');
-                else if (anchor.getAttribute('aria-current') === 'page') anchor.removeAttribute('aria-current');
-                anchor.classList.toggle('is-active', selected);
+                setLinkSelected(anchor, selected);
               }
             } finally { releaseSource(); }
           },

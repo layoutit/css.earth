@@ -7,6 +7,7 @@ import { performanceSourceMaps } from "./site/build/source-maps.mts";
 import { packageSources } from "./site/build/package-sources.mts";
 import { searchServer } from './site/server/search-server.mts';
 import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
+import { preparedMotionCss } from "./tools/prepare/prepared-motion-css.mts";
 import { assetOrigin } from "./site/asset-origin.mts";
 
 function cssEarthVersion() {
@@ -53,6 +54,7 @@ export default defineConfig({
     },
   } }],
   vite: {
+    css: { postcss: { plugins: [preparedMotionCss(process.cwd())] } },
     plugins: [searchServer(), performanceSourceMaps(), packageSources()],
     // Workers are bundled on their own plugins. They read the objects package from its sources too, so a worker keeps only
     // the object contracts it calls; renderer modules in a worker keep the bundling they had.

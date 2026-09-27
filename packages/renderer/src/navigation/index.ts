@@ -2,7 +2,7 @@
 export { formatSharedView, parseSharedView } from './view-url.js';
 export type { SharedView, SharedPlayback } from './view-url.js';
 export { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
-export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
+export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera, worldCameraViewport } from './world-camera.js';
 export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './world-camera-math.js';
 export type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 export type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';

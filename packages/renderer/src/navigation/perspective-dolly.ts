@@ -4,7 +4,7 @@ import type { CameraPlan, PerspectiveCameraPlan, Vector3, LevelOfDetailPlan, Orb
 import type { BodyProjection } from '../solar-system/types.js';
 import type { VisibleRect } from '../solar-system/types.js';
 import type { CameraViewport } from './camera-viewport.js';
-import { presentWorldCamera, worldCameraSilhouetteDiameter } from './world-camera.js';
+import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { createPreparedCamera } from './prepared-camera.js';
 import { createCameraOrientation } from './camera-orientation.js';
@@ -165,8 +165,8 @@ export function createPerspectiveDolly({
       Math.abs(worldContext.frame.bodyRadiusM / (bodyRadius * kilometersPerUnit * 1000) - 1) > 1e-9) {
     throw new TypeError('Perspective world context units disagree with its prepared frame.');
   }
-  // Object packages own their prepared perspective as data; the root is never
-  // scaled, so its eye is the one the world context publishes.
+  // Keep CSS perspective fixed. Optical framing scales this root in 2D; every
+  // projection consumer receives the equivalent effective focal length.
   cameraElement.style.perspective = cameraPlan.projection.cssPerspective;
   cameraElement.style.scale = '1';
   let focal = 0;
@@ -183,6 +183,7 @@ export function createPerspectiveDolly({
   let projectedBody: BodyProjection | null = null;
   let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
   let publishedSceneTransform: string | null = null;
+  let publishedProjectionScale = 1;
   let transformWrites = 0;
 
   const measure = () => {
@@ -246,10 +247,17 @@ export function createPerspectiveDolly({
   function publishPresentation(snapshot: ReturnType<typeof camera.captureFrame> & { focal: number; viewportWidth: number; viewportHeight: number; principalOffset: readonly number[]; stageViewport: WorldCameraViewport }) {
       const { distance, rotation, focal, viewportWidth, viewportHeight,
         principalOffset, stageViewport, scenePresentation, world: publishedWorld } = snapshot;
-      const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
+      const projectionScale = publishedWorld.projectionScale ?? 1;
+      const viewport = { focalPixels: focal, projectionScale, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
       const genericPresentation = presentWorldCamera(publishedWorld, worldContext.frame, viewport);
       const [bodyX, bodyY, bodyZ] = genericPresentation.translateCssPixels;
-      worldContext.onWorldPublish?.(publishedWorld, { focalPixels: focal, principalOffsetPixels: stageViewport.principalOffsetPixels });
+      worldContext.onWorldPublish?.(publishedWorld, { focalPixels: focal, projectionScale, principalOffsetPixels: stageViewport.principalOffsetPixels });
+      if (projectionScale !== publishedProjectionScale) {
+        // Match the CSS scalar precision; sub-serialization differences must not rewrite the same scale.
+        const value = String(Number(projectionScale.toFixed(6)));
+        if (cameraElement.style.scale !== value) cameraElement.style.scale = value;
+        publishedProjectionScale = projectionScale;
+      }
       const genericBody = genericBodyProjection(genericPresentation, bodyRadius, focal);
       projectedBody = genericBody;
       lod = levelOfDetailFor(levelOfDetail, genericBody.silhouetteDiameter);
@@ -263,7 +271,7 @@ export function createPerspectiveDolly({
       if (!hidden) {
         const transform =
           `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
-          `${formatNumber(bodyZ)}px) ` +
+          `${formatNumber(bodyZ - focal + focal / projectionScale)}px) ` +
           `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
           `${cameraPlan.sceneScale}) ${scenePresentation}`;
         if (transform !== publishedSceneTransform) {
@@ -298,14 +306,16 @@ export function createPerspectiveDolly({
   }
   function preparePresentation() {
     const captured = camera.captureFrame();
-    const snapshot = { ...captured, focal, viewportWidth, viewportHeight, principalOffset, stageViewport };
-    return { ...captured, viewport: stageViewport, commit: () => publishPresentation(snapshot) };
+    const projectedViewport = worldCameraViewport(captured.world, stageViewport);
+    const snapshot = { ...captured, focal: projectedViewport.focalPixels, viewportWidth, viewportHeight, principalOffset, stageViewport: projectedViewport };
+    return { ...captured, viewport: projectedViewport, commit: () => publishPresentation(snapshot) };
   }
 
   return Object.freeze({
     camera,
     viewport(): WorldCameraViewport {
-      return { focalPixels: focal, principalOffsetPixels: [principalOffset[0]!, principalOffset[1]!] };
+      return worldCameraViewport({ projectionScale: camera.projectionScale },
+        { focalPixels: focal, principalOffsetPixels: [principalOffset[0]!, principalOffset[1]!] });
     },
     remeasure() {
       const zoom = camera.state.zoom;
@@ -335,7 +345,7 @@ export function createPerspectiveDolly({
         opticalCenterY: bounds.y + bounds.height / 2 + principalOffset[1],
         radius,
         surfaceRadius: radius,
-        focalLength: focal,
+        focalLength: focal * camera.projectionScale,
         viewportWidth: stageBounds.width,
         viewportCenterX: (stageBounds.left ?? 0) + stageBounds.width / 2,
         viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
@@ -350,7 +360,8 @@ export function createPerspectiveDolly({
         distanceKilometers: distance * kilometersPerUnit,
         distanceRadii: distance / bodyRadius,
         levelOfDetail: lod,
-        focal,
+        focal: focal * camera.projectionScale,
+        projectionScale: camera.projectionScale,
         principalOffset,
         visibleRect,
         offAxisDegrees: projectedBody?.offAxisDegrees ?? null,

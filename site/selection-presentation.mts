@@ -1,7 +1,7 @@
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import { requiredElement, setPanelHidden, type BrowserWindow } from './browser/browser-types.mts';
+import { requiredElement, setPanelHidden, setLinkSelected, type BrowserWindow } from './browser/browser-types.mts';
 import type { CatalogueSelection } from './catalogue/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
@@ -27,7 +27,10 @@ export function createSelectionPresentation(documentTarget: Document, {
   let currentSystemHeader = SOLAR_SYSTEM_ID, systemHeadersLoading: Promise<void> | null = null;
   const showSystemHeader = (id: string) => {
     currentSystemHeader = id;
-    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === id);
+    for (const header of systemHeaders) {
+      const current = header.dataset.systemHeader === id;
+      if (header.hasAttribute('data-system-current') !== current) header.toggleAttribute('data-system-current', current);
+    }
     // Native pages already carry their own system header; only live navigation loads others.
     if (!system || !windowTarget || systemHeadersLoading || systemHeaders.some(header => header.dataset.systemHeader === id)) return;
     systemHeadersLoading = fetchSystemHeaders(url => windowTarget.fetch(url)).then(html => {
@@ -66,28 +69,28 @@ export function createSelectionPresentation(documentTarget: Document, {
     setPanelHidden(context, !showContext);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
     showSystemHeader(headerSystemId);
-    if (solarSystemFacts) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
+    if (solarSystemFacts && solarSystemFacts.hidden !== (headerSystemId !== SOLAR_SYSTEM_ID)) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
     const navigationSelection = subject.kind === 'focus' ? subject.id
       : subject.kind === 'overview' ? subject.overview.scope === 'system' ? subject.overview.systemId : subject.overview.scope
       : subject.kind === 'satellite-system' ? subject.hostId
       : subject.objectId;
     selectNavigation(navigationSelection);
-    context.setAttribute('aria-label', subject.kind === 'focus'
+    const label = subject.kind === 'focus'
       ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
       : subject.kind === 'overview' ? largeScale?.dataset.largeScaleName ?? overviewName(subject.overview)
       : subject.kind === 'satellite-system' ? objectName(subject.hostId) || 'Selected system'
-      : objectName(subject.objectId) || 'Selected object');
-    documentTarget.documentElement.dataset.selection = subject.kind === 'focus' ? 'prepared-focus'
+      : objectName(subject.objectId) || 'Selected object';
+    if (context.getAttribute('aria-label') !== label) context.setAttribute('aria-label', label);
+    const kind = subject.kind === 'focus' ? 'prepared-focus'
       : subject.kind === 'overview' ? subject.overview.scope : subject.kind === 'satellite-system' ? 'satellite-system' : 'object';
+    if (documentTarget.documentElement.dataset.selection !== kind) documentTarget.documentElement.dataset.selection = kind;
     const selection = subject.kind === 'focus' ? { kind: 'prepared-focus', id: subject.id } as const
       : subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const
       : subject.kind === 'satellite-system' ? { kind: 'scene', id: subject.hostId } as const : null;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
       const selected = selection?.kind === 'prepared-focus' ? anchor.dataset.preparedFocusId === selection.id
         : selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
-      anchor.classList.toggle('is-active', selected);
-      if (selected) anchor.setAttribute('aria-current', 'page');
-      else anchor.removeAttribute('aria-current');
+      setLinkSelected(anchor, selected);
     }
     return selection;
   };

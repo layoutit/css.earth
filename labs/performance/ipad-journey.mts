@@ -13,6 +13,7 @@ import { OBJECTS } from '../../site/objects.mts';
 import type { Step } from './ios-capture.mts';
 
 export const JOURNEY_INPUT_SOURCE = 'page-dispatched' as const;
+export type FlightSource = 'scene-router' | 'objectnavigate';
 export type Point = readonly [number, number];
 
 export type JourneyAction =
@@ -88,8 +89,25 @@ function resolveObject(value: string, label: string) {
 
 const pageScript = (body: string) => `(() => {\n  if (document.visibilityState !== 'visible') throw new Error('Journey target is not the visible Safari tab.');\n  const source = ${JSON.stringify(JOURNEY_INPUT_SOURCE)};\n${body}\n})()`;
 
-function flightScript(id: string): string {
+function flightScript(id: string, flightSource: FlightSource): string {
   const object = resolveObject(id, 'flight');
+  if (flightSource === 'objectnavigate') return pageScript(`  return (async () => {
+    const objectId = ${JSON.stringify(object.id)}, deadline = Date.now() + 30000;
+    while (true) {
+      if (document.visibilityState !== 'visible') throw new Error('Journey target is not the visible Safari tab.');
+      if (document.documentElement.dataset.ready === 'error') throw new Error('Journey start scene failed.');
+      const query = new CustomEvent('objectnavigationquery', { bubbles: true, cancelable: true, detail: { objectId } });
+      document.dispatchEvent(query);
+      if (document.documentElement.dataset.ready === 'true' && query.defaultPrevented) break;
+      if (Date.now() >= deadline) throw new Error('Live navigation is not ready for ' + objectId + '.');
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    const selected = new CustomEvent('objectnavigate', { bubbles: true, cancelable: true, detail: { objectId } });
+    document.dispatchEvent(selected);
+    if (!selected.defaultPrevented) throw new Error('Live app did not accept navigation to ' + objectId + '.');
+    return { source: 'objectnavigate', action: 'fly', objectId, url: location.href,
+      version: document.querySelector('a[aria-label^="GitHub v"]')?.getAttribute('aria-label') ?? null };
+  })();`);
   return pageScript(`  const control = window.__cssEarthControl;
   if (!control || typeof control.fly !== 'function') throw new Error('Journey flight: the performance router bridge is unavailable. Build and serve with --mode performance.');
   return control.fly(${JSON.stringify(object.id)});`);
@@ -132,13 +150,13 @@ function typeScript(text: string): string {
 }
 
 /** Compile a validated semantic journey into ios-capture's existing step language. */
-export function compileJourney(journey: Journey): Step[] {
+export function compileJourney(journey: Journey, flightSource: FlightSource = 'scene-router'): Step[] {
   const normalized = parseJourney(journey);
   // start selects the URL before capture.  A fly is an in-capture UI action and
   // the route step waits after the Safari page has swapped contexts.
   const steps: Step[] = [];
   for (const action of normalized.actions) {
-    if ('fly' in action) steps.push({ script: flightScript(action.fly) }, { route: resolveObject(action.fly, 'flight').route });
+    if ('fly' in action) steps.push({ script: flightScript(action.fly, flightSource) }, { route: resolveObject(action.fly, 'flight').route });
     else if ('zoom' in action) steps.push({ script: zoomScript(action.zoom) });
     else if ('tap' in action) steps.push({ script: gestureScript('tap', action.tap) });
     else if ('drag' in action) steps.push({ script: gestureScript('drag', action.drag.from, action.drag.to, action.drag.seconds) });

@@ -99,7 +99,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
       createOrbit(orbitConfiguration) {
         orbitArguments = orbitConfiguration; orbitConfiguration.onPublish?.(publication);
         const state = (): ReturnType<Orbit["state"]> => ({ ...publication,
-          distance: 12345000, distanceKilometers: 12345, distanceRadii: 12345000, focal: 1000, principalOffset: [0,0], visibleRect: null, offAxisDegrees: null, silhouetteRadius: null,
+          distance: 12345000, distanceKilometers: 12345, distanceRadii: 12345000, focal: 1000, projectionScale: 1, principalOffset: [0,0], visibleRect: null, offAxisDegrees: null, silhouetteRadius: null,
           levelOfDetail: { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 }, pitch: publication.controlPitch, pose: { schema: "cssearth-camera-pose@2" as const, scene: matrix } });
         return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, preparedFocus: () => null, setPreparedFocus() { throw new Error("Focus changes are outside this mount fixture."); }, async flyToPreparedFocus() { throw new Error("Focus flights are outside this mount fixture."); }, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { events.push("camera:reset"); Object.assign(publication, value); return state(); }, state, sharedState: () => ({ distanceKilometers: 12345, pose: { schema: "cssearth-camera-pose@2", scene: matrix } }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
       },
@@ -251,4 +251,34 @@ test("optional warm decode failure is recoverable while native cleanup failure i
 test('mount rejects an uncompiled motion document instead of discovering live CSS animations', () => {
   const { motion, ...uncompiled } = moonDefinition;
   assert.throws(() => createObjectRuntime(uncompiled), /motion bindings must be prepared/);
+});
+
+
+test("hidden departure frames keep world publication without rescheduling detail or readouts", async t => {
+  const h = harness(); t.after(h.restore); await h.complete();
+  let worlds = 0, readouts = 0;
+  assert.ok(h.runtime.navigation);
+  h.runtime.navigation.subscribe(() => worlds++);
+  h.runtime.sharedView.subscribe(() => readouts++);
+  const publish = h.orbitArguments().onPublish!;
+  const visible: OrbitPublication = { ...publicationForTest(), sunViewDirection: [1, 0, 0] };
+  const hidden: OrbitPublication = { ...visible, levelOfDetail: { ...visible.levelOfDetail, stage: "marker" } };
+  const frames = () => h.selection().stats().framePublications;
+  const before = frames();
+  publish(hidden, true);
+  assert.deepEqual(h.errors, []);
+  assert.equal(frames(), before + 1, "first hidden view retires visible detail");
+  const hiddenReadouts = readouts;
+  assert.ok(hiddenReadouts > 0);
+  for (let frame = 0; frame < 30; frame++) publish({ ...hidden, worldCamera: {
+    ...hidden.worldCamera, pose: { ...hidden.worldCamera.pose, positionM: [frame + 1, 0, 10000] },
+  } }, true);
+  assert.equal(worlds, 31, "every acknowledged world frame remains published");
+  assert.equal(frames(), before + 1, "no hidden departure material work");
+  assert.equal(readouts, hiddenReadouts, "no hidden departure readout RAFs");
+  publish(hidden);
+  assert.equal(frames(), before + 2, "ordinary overview publications remain live after interruption");
+  publish(visible, true);
+  assert.equal(frames(), before + 3, "a resolving source resumes detail publication");
+  assert.ok(readouts > hiddenReadouts, "readout subscriptions resume with live detail");
 });

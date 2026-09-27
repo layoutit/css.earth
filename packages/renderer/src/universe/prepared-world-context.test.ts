@@ -2137,13 +2137,12 @@ test('one retained flight caption survives the sprite fade through arrival', () 
 test.each([null, 'venus'])('flights to %s retain system annotations and orbit cutouts without enabling picking', destination => {
   const root = mount(1), layer = mounted.get(root)!;
   const nodes = all(root);
-  layer.previewSelection(null);
+  layer.previewSelection(destination);
   const picking = screenPicking(root.parentNode! as unknown as HTMLElement);
   const before = layer.inspect().map(entry => ({ id: entry.id, label: entry.mover.style.opacity,
     indicator: entry.mover.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })),
     navigate: entry.billboard.dataset.objectNavigate }));
   expect(picking.pick(30, -20)).not.toBeNull();
-  layer.previewSelection(destination);
   layer.setNavigationInFlight(true);
   for (const previous of before) {
     const entry = layer.inspect().find(entry => entry.id === previous.id)!;
@@ -2162,7 +2161,7 @@ test.each([null, 'venus'])('flights to %s retain system annotations and orbit cu
   layer.destroy();
 });
 
-test('selection emphasis previews immediately without changing the detailed occluder', () => {
+test('selection emphasis previews immediately and restores the selected detail when cleared', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const sun = find(root, 'contextGroup', 'sun'), mercury = find(root, 'contextGroup', 'mercury');
   layer.previewSelection('mercury');

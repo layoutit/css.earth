@@ -173,3 +173,19 @@ test("warm handoff keeps a published decoded URL while releasing its native slot
   expect(owner.stats().pools[0].nativeSlots).toBe(0);
   owner.destroy();
 });
+
+test('initial presentation values commit before roots enter the live stage', () => {
+  const document = new PresentationDocument(), stage = new PresentationElement(document);
+  const mounted = mountPreparedPresentation(stage as unknown as HTMLElement, {
+    own() {}, registerAnimation() {}, seekAnimation() {},
+  }, {
+    camera: {} as never, tree: { nodes: [
+      { tag: 'div', parent: -1, className: null, style: '', properties: [], attributes: {} },
+    ], properties: [], camera: 0, scene: 0, stageClasses: [] },
+    variants: [], materials: [], animations: [], viewBindings: [],
+  }, undefined, undefined, false, true);
+  expect(stage.children).toHaveLength(0);
+  expect(mounted.cameraElement.parentNode).toBeNull();
+  mounted.connect(); mounted.connect();
+  expect(stage.children).toEqual([mounted.cameraElement]);
+});

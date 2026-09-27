@@ -1,3 +1,4 @@
+import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
 import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
@@ -47,8 +48,8 @@ interface Entry {
 
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(2)).toString(); }
 
-/** Retained nomenclature labels for one prepared body. The outline/caption pool mounts with the
- * scene; the default-map label pool and catalogue stay absent until the first interaction.
+/** Retained nomenclature labels for one prepared body. The outline and label pools stay absent
+ * until the catalogue is requested; once created they remain resident for the scene.
  * Search-only features load one small bank when selected. Hover and activation use the shared picker. */
 /** Feature framing on arrival: the published diameter spans this share of the shorter viewport side. */
 const ARRIVAL_DIAMETER_SHARE = 0.45;
@@ -72,16 +73,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;z-index:1;pointer-events:none';
   // The outline chords paint beneath the labels; both are screen-space children of one root.
   const outline: HTMLElement[] = [];
-  for (let index = 0; index < plan.outline.pieces; index++) {
-    const piece = document.createElement('s');
-    piece.dataset.featureOutlinePiece = '';
-    piece.style.cssText = 'position:absolute;left:0;top:0;width:1px;transform-origin:0 50%;visibility:hidden;pointer-events:none';
-    root.appendChild(piece);
-    outline.push(piece);
-  }
   const entries: Entry[] = [];
   const caption = surfaceFeatureCaption(root), tooltip = caption.element;
-  host.appendChild(root);
   const picking = screenPicking(pickingHost);
   const fader = createOpacityFader(windowTarget);
   const controller = new AbortController();
@@ -140,6 +133,14 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   };
   const createEntries = () => {
     if (entries.length) return;
+    if (!root.isConnected) host.appendChild(root);
+    for (let index = 0; index < plan.outline.pieces; index++) {
+      const piece = document.createElement('s');
+      piece.dataset.featureOutlinePiece = '';
+      piece.style.cssText = 'position:absolute;left:0;top:0;width:1px;transform-origin:0 50%;visibility:hidden;pointer-events:none';
+      root.insertBefore(piece, tooltip);
+      outline.push(piece);
+    }
     for (let index = 0; index < plan.catalog.count; index++) createEntry();
   };
   // Label picks are consumed by the shared picker before they bubble, so a click that
@@ -153,10 +154,12 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     clearSelection();
   };
   const onKey = (event: KeyboardEvent) => { if (labelsEnabled()) requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
-  windowTarget.addEventListener('pointerdown', onPress, { capture: true });
-  inputSurface.addEventListener('wheel', onWheel, { passive: true });
-  windowTarget.addEventListener('click', onSurfaceClick);
-  windowTarget.addEventListener('keydown', onKey);
+  const releaseInput = [
+    bindInputEvent(inputSurface, 'features:pointerdown', windowTarget, 'pointerdown', onPress, { capture: true }),
+    bindInputEvent(inputSurface, 'features:wheel', inputSurface, 'wheel', onWheel, { passive: true }),
+    bindInputEvent(inputSurface, 'features:click', windowTarget, 'click', onSurfaceClick),
+    bindInputEvent(inputSurface, 'features:keydown', windowTarget, 'keydown', onKey),
+  ];
   lifetime.onDispose(destroy);
   const occlusion = labelOcclusionFor(host.ownerDocument);
   lifetime.onDispose(occlusion.subscribe(() => refresh()));
@@ -186,8 +189,18 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       onError(failure);
     });
   }
+  function canDraw() {
+    const range = zoomRange();
+    zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
+    return labelsEnabled() && load.kind === 'loaded' && enabled && Boolean(view?.projection)
+      && (zoomGate || pinnedIndex !== null) && view?.levelOfDetail.stage === 'geometry';
+  }
   function schedule() {
-    if (destroyed || pendingFrame !== null) return;
+    if (destroyed) return;
+    syncLoop();
+    // A changing camera is not work for an empty/disabled label layer. Keep
+    // one pass when visible labels or a caption actually need to be cleared.
+    if (pendingFrame !== null || loopFrame !== null || (!canDraw() && visible.size === 0 && shownIndex === null)) return;
     pendingFrame = windowTarget!.requestAnimationFrame(() => { pendingFrame = null; refresh(); });
   }
   function populate(start: number) {
@@ -233,12 +246,12 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     return (await pending).features.find(feature => feature.id === id) ?? null;
   }
   // Labels follow a playing scene every frame. They are off by default; with them off there is nothing to follow.
-  const following = () => !destroyed && playing && labelsEnabled();
+  const following = () => !destroyed && playing && canDraw();
   function loop() {
     loopFrame = null;
     if (!following()) return;
     refresh();
-    loopFrame = windowTarget!.requestAnimationFrame(loop);
+    syncLoop();
   }
   function syncLoop() {
     if (following() && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
@@ -268,11 +281,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     frames++;
     const projection = view?.projection;
     const range = zoomRange();
-    zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
     // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
-    if (!labelsEnabled() || load.kind !== 'loaded' || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view !== null && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
+    if (!canDraw() || !projection) { hideAll(); return; }
     requirePhysicalProjection(projection);
     // Retained mesh ancestors use zero transform origins; their current matrices
     // carry the body spin exactly as painted. Camera transforms are already in
@@ -413,14 +425,11 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
     document.body.removeEventListener('objectsurfacelabelschange', onLabelsChange);
-    windowTarget!.removeEventListener('pointerdown', onPress, { capture: true });
-    inputSurface.removeEventListener('wheel', onWheel);
-    windowTarget!.removeEventListener('click', onSurfaceClick);
-    windowTarget!.removeEventListener('keydown', onKey);
+    for (const release of releaseInput) release();
     entries.forEach((entry, index) => { entry.element.removeEventListener('click', activations[index]!); if (entry.hideTimer !== null) clearTimeout(entry.hideTimer); });
     picking.remove(root);
     fader.destroy();
-    root.remove();
+    if (root.isConnected) root.remove();
   }
   return Object.freeze({
     root, lensIds: plan.lensIds,

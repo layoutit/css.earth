@@ -169,7 +169,8 @@ function mountOrbitStrokes(host: HTMLElement, dashed: boolean, id?: string, colo
           pool.written[run]!.set(points); pointWrites++;
           let text = '';
           for (let i = 0; i < points.length; i += 2) text += (i ? ' ' : '') + points[i] + ',' + points[i + 1];
-          polyline(level, run).setAttribute('points', text);
+          const line = polyline(level, run);
+          if (line.getAttribute('points') !== text) line.setAttribute('points', text);
         }
         for (let run = runs.length; run < pool.written.length; run++) {
           if (!pool.written[run]) continue;

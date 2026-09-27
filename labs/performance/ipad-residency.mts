@@ -26,7 +26,7 @@ function installResidencyProbe() {
     const painted = groups.filter(group => group.querySelector('polyline[points]'));
     const billboard = document.querySelector<HTMLImageElement>('img[data-arrival-billboard]');
     return { atEpochMs: performance.timeOrigin + performance.now(), url: location.href, objectId, visibility: document.visibilityState,
-      scene: { ready: document.body.classList.contains('ready'), lifetime: call(runtime, 'lifetime'),
+      scene: { ready: document.documentElement.dataset.ready === 'true', lifetime: call(runtime, 'lifetime'),
         resources: call(runtime, 'resources'), presentation: call(runtime, 'presentation') },
       dom: { elements: document.querySelectorAll('*').length, stages: document.querySelectorAll('.object-stage').length,
         sceneElements: stage?.querySelectorAll('*').length ?? 0 },

@@ -73,12 +73,12 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, l
       }
     },
     setIllustrationModelsEnabled(enabled: boolean) {
-      if (lifetime.disposed) return;
+      if (lifetime.disposed || illustrations === (enabled === true)) return;
       illustrations = enabled === true;
       update();
     },
     setHighlightedClassification(classification: string | null) {
-      if (lifetime.disposed) return;
+      if (lifetime.disposed || highlighted === classification) return;
       highlighted = classification;
       update();
     },

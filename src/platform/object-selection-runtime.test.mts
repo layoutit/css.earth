@@ -220,11 +220,16 @@ test("a native selection write failure retires the session with no successful co
   const h = harness(); t.after(h.restore); await h.ready(); const before = h.changes.length;
   const topographyVariant = earthDefinition.variants.find(variant => variant.when.lensId === "topography"); assert.ok(topographyVariant);
   const binding = topographyVariant.writes.find(write => write.kind === "texture" && write.resource !== null);
-  assert.ok(binding); const target = binding.target === -1 ? h.stage : h.created[binding.target]; assert.ok(target);
-  if (binding.name.startsWith("--")) {
+  assert.ok(binding);
+  const textureBinding = earthDefinition.tree.textureBindings?.find(candidate => candidate.target === binding.target && candidate.name === binding.name);
+  const target = textureBinding ? h.created[textureBinding.leaves[0]] : binding.target === -1 ? h.stage : h.created[binding.target];
+  const property = textureBinding ? "backgroundImage" : binding.name;
+  assert.ok(target);
+  // Inject at the actual native setter, including prepared leaf-local texture publication.
+  if (property.startsWith("--")) {
     const set = target.style.setProperty.bind(target.style);
-    target.style.setProperty = (name, value) => { if (name === binding.name) throw new Error("native selection write failed"); return set(name, value); };
-  } else Object.defineProperty(target.style, binding.name, { set() { throw new Error("native selection write failed"); } });
+    target.style.setProperty = (name, value) => { if (name === property) throw new Error("native selection write failed"); return set(name, value); };
+  } else Object.defineProperty(target.style, property, { set() { throw new Error("native selection write failed"); } });
   const request = h.lens("topography"), rejected = assert.rejects(request, /native selection write failed/);
   await h.resolveJobs(); await rejected; assert.equal(h.fatal.length, 1); assert.equal(h.lifetime.disposed, true);
   assert.ok(h.changes.slice(before).every(change => change.pending)); assert.equal(h.resources.stats().images.entries.length, 0);

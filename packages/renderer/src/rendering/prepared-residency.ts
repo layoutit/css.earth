@@ -38,7 +38,7 @@ export function createPreparedResidency({
   const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}) });
   const cache = new Map<string, CacheEntry>(), mount = new Set<string>(), warmed = new Set<string>(), tickets = new WeakMap<PreparedResidencyTicket, TicketState>();
   let committed = new Set<string>(), used = new Set<string>(), startup = new Set<string>(), warm: string[] = [];
-  let pending: TicketState | null = null, destroyed = false, frameReads: Set<string> | null = null, sequence = 0, decodes = 0;
+  let pending: TicketState | null = null, destroyed = false, frameReads: Set<string> | null = null, sequence = 0, decodes = 0, paintDecodeChecks = 0;
 
   function assetFor(key: string): PreparedResourceEntry {
     const entry = catalog.get(key);
@@ -209,6 +209,17 @@ export function createPreparedResidency({
       const result = await awaitKeys(startup);
       return destroyed || result.some(value => value === null) ? null : true;
     },
+    async decodeForPaint() {
+      if (destroyed) return false;
+      // Retaining an Image does not pin WebKit's decoded pixels. A preflight
+      // lease can outlive that cache while the camera approaches. Recheck only
+      // the selected resident handles immediately before connecting their DOM.
+      const handles = new Set([...committed].map(key => images.read(publishedUrl(key)))
+        .filter(image => image !== null));
+      paintDecodeChecks += handles.size;
+      await Promise.all([...handles].map(image => image.decode()));
+      return !destroyed;
+    },
     finishStartup() {
       warm = [...startup].filter(key => policyFor(assetFor(key).pool).retention !== "warm");
       try { releaseWarmed(startup); } finally { startup.clear(); }
@@ -275,7 +286,7 @@ export function createPreparedResidency({
       frameReads = null;
     },
     stats() {
-      return Object.freeze({ decodes, committed: Object.freeze([...committed]),
+      return Object.freeze({ decodes, paintDecodeChecks, committed: Object.freeze([...committed]),
         pending: Object.freeze([...(pending?.required ?? [])]), used: Object.freeze([...used]),
         warmed: Object.freeze([...warmed]),
         pools: Object.freeze([...policies.values()].map(policy => Object.freeze({

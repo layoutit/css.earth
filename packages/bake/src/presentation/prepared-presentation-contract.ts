@@ -1,3 +1,4 @@
+import { requireTextureBindings } from '@cssearth/renderer/validation/texture-bindings.ts';
 import { requireTextureLevels, requireTexturePlacements } from '@cssearth/renderer/validation/prepared-texture-levels.ts';
 import { isArray } from '@cssearth/core';
 import type { ObjectControls } from "@cssearth/renderer/runtime/object-contract.ts";
@@ -91,7 +92,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const resource = (key: string | null, nullable = false) => { if (!(nullable && key === null) && !resources.has(key!)) fail(`undeclared resource ${key}`); };
   const resourceList = (list: readonly string[], label: string) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;
-  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses", "activationGroups"]);
+  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses", "activationGroups", "textureBindings"]);
   for (const property of array(tree.properties,"prepared style properties")) {
     record(property,"prepared style property",["name","value","custom"]);string(property.name,"prepared property name");
     if(typeof property.value!=="string"||typeof property.custom!=="boolean")fail("prepared property assignment is invalid");
@@ -119,6 +120,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     }
     if (/\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:|(?:linear|radial|conic)-gradient\s*\(/i.test(entry.style)) fail("unsupported scene style");
   }
+  requireTextureBindings(tree.textureBindings, tree.nodes);
   node(tree.camera); node(tree.scene);
   if (tree.nodes[tree.camera].parent !== -1 || !ancestor(tree.scene, tree.camera)) fail("one camera root must own the scene");
   if (tree.nodes.filter(entry => /(?:^|\s)polycss-camera(?:\s|$)/.test(entry.className ?? "")).length !== 1 ||

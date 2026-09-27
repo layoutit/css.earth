@@ -35,6 +35,7 @@
 // it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
+import { symbolicateNativeXml } from './native-symbols.mts';
 import { execFile, spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, readFile, writeFile, readdir, realpath, rm } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
@@ -46,6 +47,8 @@ import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readSourceMap } from './trace-brief.mts';
+import { startLayerSampler } from './ipad-layer-sampler.mts';
+import { INSTALL_TRACE_CAUSES, STOP_TRACE_CAUSES } from './ipad-trace-causes.mts';
 import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';
 
 const run = promisify(execFile);
@@ -119,7 +122,7 @@ export function parseSteps(value: unknown): Step[] {
 const PROBE_EXPRESSION = `(() => {
   const app = window.__cssEarth, read = key => { try { return app ? app[key] : undefined; } catch (error) { return 'unreadable'; } };
   const error = read('error');
-  return { path: location.pathname, ready: read('ready') ?? document.body.classList.contains('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
+  return { path: location.pathname, ready: read('ready') ?? (document.documentElement.dataset.ready === 'true'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
     overview: read('overview'), mountedObjectCount: read('mountedObjectCount'), lifecycle: read('lifecycle'),
     error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
 })()`;
@@ -359,12 +362,12 @@ function inspector(socketUrl: string) {
     swaps: () => swaps };
 }
 
-/** Waits until the page has loaded and the app reports itself ready or failed. The shell marks its own body, which is
- * what the site's other checks read; the diagnostics hook is only present in builds that publish it. Evaluations
+/** Waits until the page has loaded and the app reports itself ready or failed. Root readiness is available in
+ * production too; the diagnostics hook is only present in builds that publish it. Evaluations
  * during the navigation itself can fail; they count as not ready. */
 async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120_000): Promise<void> {
-  const expression = "document.readyState === 'complete' && (document.body.classList.contains('ready') || " +
-    "document.body.classList.contains('error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
+  const expression = "document.readyState === 'complete' && ((document.documentElement.dataset.ready === 'true') || " +
+    "(document.documentElement.dataset.ready === 'error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
@@ -517,10 +520,16 @@ async function subtreeLayers(session: ReturnType<typeof inspector>, selector: st
   const reply = await session.send('LayerTree.layersForNode', { nodeId });
   const layers = isRecord(reply.result) && Array.isArray(reply.result.layers) ? reply.result.layers.filter(isRecord) : [];
   const listed = [];
-  for (const layer of layers.slice(0, 400)) {
+  for (const layer of layers) {
     const why = await session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId });
     const flags = isRecord(why.result) && isRecord(why.result.compositingReasons) ? why.result.compositingReasons : {};
-    listed.push({ layerId: layer.layerId, nodeId: layer.nodeId ?? null, paintCount: typeof layer.paintCount === 'number' ? layer.paintCount : 0,
+    // Structural layers are the depth/compositing ancestry, not bitmap leaves.
+    // Keep their DOM identity so arrival/reload captures can identify missing carriers.
+    const attributes = layer.memory === 0 && typeof layer.nodeId === 'number'
+      ? await session.send('DOM.getAttributes', { nodeId: layer.nodeId }) : null;
+    listed.push({ layerId: layer.layerId, nodeId: layer.nodeId ?? null,
+      ...(attributes && isRecord(attributes.result) ? { attributes: attributes.result.attributes } : {}),
+      paintCount: typeof layer.paintCount === 'number' ? layer.paintCount : 0,
       memoryKb: Math.round((typeof layer.memory === 'number' ? layer.memory : 0) / 1024), bounds: layer.bounds ?? null,
       reasons: Object.entries(flags).filter(([, on]) => on === true).map(([reason]) => reason) });
   }
@@ -747,10 +756,27 @@ async function exportTimeProfile(native: string, pid: number | null): Promise<{ 
     // Instruments may still be finishing the file when its recorder exits; the first export can then fail with no message.
     const exportTable = async (attempt = 1): Promise<string> => run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 })
       .then(result => result.stdout, async (error: unknown) => { if (attempt >= 5) throw error; await wait(2000); return exportTable(attempt + 1); });
-    const stdout = await exportTable();
-    const toc = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 }).then(result => result.stdout, () => '');
-    const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
-    return { summary: summariseTimeProfile(stdout), samples: timeProfileSamples(stdout, pid), startMs: start ? Date.parse(start) : null };
+    // xctrace can crash exporting the TOC after successfully exporting samples.
+    // Retry that read too; never silently present an empty native lane as success.
+    const exportClock = async (attempt = 1): Promise<number> => {
+      try {
+        const clockFile = resolve(native, '..', 'native-toc.xml');
+        const toc = await readFile(clockFile, 'utf8').catch(async () => {
+          const result = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 });
+          return result.stdout;
+        });
+        const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
+        const time = start ? Date.parse(start) : NaN;
+        if (!Number.isFinite(time)) throw new Error('Native trace clock origin is unavailable.');
+        await writeFile(clockFile, toc);
+        return time;
+      } catch (error) { if (attempt >= 3) throw error; await wait(2000); return exportClock(attempt + 1); }
+    };
+    const startMs = await exportClock();
+    const stdout = await symbolicateNativeXml(await exportTable(), native);
+    const samples = timeProfileSamples(stdout, pid);
+    if (!samples.length) throw new Error(`Native trace contains no samples for ${pid === null ? 'the recorded processes' : `page PID ${pid}`}.`);
+    return { summary: summariseTimeProfile(stdout), samples, startMs };
   } catch (error) { return { summary: { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }, samples: [], startMs: null }; }
 }
 
@@ -832,7 +858,9 @@ const RECORDING_BADGE = (seconds: number) => `(() => {
  * signal get a wheel counted as moving for 700 ms). The invariant is judged on the moving writes. Aggregated in the page
  * (one entry per element and change) so a coasting globe does not ship megabytes; the capture's own badge is ignored. */
 export const STYLE_WRITES_LOGGER = `(() => {
-  const t0 = performance.now(), entries = new Map(), perFrame = [];
+  const t0 = performance.now(), epochMs = performance.timeOrigin + t0, entries = new Map(), perFrame = [], stateChanges = [];
+  console.timeStamp('cssEarth:capture:style-writes-start');
+  let droppedStateChanges = 0;
   let frameWrites = 0, frameMoving = 0, frameStart = t0, announced = false, coasting = false, wheelUntil = 0;
   const moving = () => announced || performance.now() < wheelUntil;
   // objectmotionchange also says whether the camera coasts on inertia, the only motion the contract gates.
@@ -870,7 +898,16 @@ export const STYLE_WRITES_LOGGER = `(() => {
         const before = parse(record.oldValue), after = parse(element.getAttribute('style'));
         for (const [property, value] of after) if (before.get(property) !== value) bump(who + ' { ' + property + ' }', value, at, inMotion);
         for (const property of before.keys()) if (!after.has(property)) bump(who + ' { ' + property + ' } removed', '', at, inMotion);
-      } else if (record.oldValue !== element.getAttribute(name)) bump(who + ' [' + name + ']', element.getAttribute(name), at, inMotion);
+      } else if (record.oldValue !== element.getAttribute(name)) {
+        const value = element.getAttribute(name);
+        bump(who + ' [' + name + ']', value, at, inMotion);
+        // Preserve the order of state changes: aggregated first/last times hide an intermediate
+        // ancestor mutation that can invalidate the whole scene during a camera flight.
+        if (name === 'class' || name === 'hidden' || name === 'aria-busy' || name.startsWith('data-')) {
+          if (stateChanges.length < 10000) stateChanges.push({ at, element: who, attribute: name, before: record.oldValue, value });
+          else droppedStateChanges++;
+        }
+      }
     }
   });
   observer.observe(document.documentElement, { subtree: true, attributes: true, attributeOldValue: true, childList: true });
@@ -882,7 +919,7 @@ export const STYLE_WRITES_LOGGER = `(() => {
     observer.disconnect(); cancelAnimationFrame(frame);
     for (const type of ['objectrotationchange', 'objectmotionchange']) document.removeEventListener(type, onMotion, true);
     removeEventListener('wheel', onWheel, { capture: true });
-    return { entries: [...entries.values()].sort((a, b) => b.moving - a.moving || b.count - a.count), perFrame };
+    return { epochMs, entries: [...entries.values()].sort((a, b) => b.moving - a.moving || b.count - a.count), perFrame, stateChanges, droppedStateChanges };
   } };
   return true;
 })()`;
@@ -1075,7 +1112,7 @@ export function options(args: readonly string[]) {
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
   return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes') || args.includes('--debug'), debug: args.includes('--debug'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
@@ -1434,7 +1471,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     let last: unknown = null, enabledAtSwap = session.swaps();
     while (Date.now() < deadline) {
       if (session.swaps() !== enabledAtSwap) { await enableDomains(); enabledAtSwap = session.swaps(); }
-      const reply = await session.send('Runtime.evaluate', { expression: `({url: location.href, pathname: location.pathname, visible: document.visibilityState === 'visible', ready: document.readyState === 'complete' && document.body.classList.contains('ready'), failed: document.body.classList.contains('error')})`, returnByValue: true });
+      const reply = await session.send('Runtime.evaluate', { expression: `({url: location.href, pathname: location.pathname, visible: document.visibilityState === 'visible', ready: document.readyState === 'complete' && (document.documentElement.dataset.ready === 'true'), failed: (document.documentElement.dataset.ready === 'error')})`, returnByValue: true });
       const state = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
       last = state;
       if (isRecord(state) && state.failed === true) throw new Error(`The destination page failed while navigating to ${pathname}: ${JSON.stringify(state)}`);
@@ -1477,8 +1514,14 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await writeFile(resolve(out, `heap.${phase}.json`), heap.result.snapshotData);
   };
   await heapSnapshot('before');
+  const compositorCheckpoints: unknown[] = [];
   const residencySnapshots: unknown[] = [await evaluate(INSTALL_RESIDENCY_PROBE)];
   const residencyCheckpoint = async (step: number) => {
+    if (option.debug && (step === steps.length || 'route' in (steps[step] ?? {}))) {
+      const state = await evaluate('window.__captureCauses ? window.__captureCauses.checkpoint() : null');
+      compositorCheckpoints.push({ step, state });
+      await writeFile(resolve(out, 'compositor-checkpoints.json'), JSON.stringify(compositorCheckpoints) + '\n');
+    }
     const value = await evaluate(READ_RESIDENCY_PROBE);
     residencySnapshots.push(isRecord(value) ? { ...value, step } : { step, error: 'Residency probe unavailable after navigation.' });
   };
@@ -1505,6 +1548,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
+  let activeLayers: Awaited<ReturnType<typeof startLayerSampler>> | null = null;
+  let debugInstalled = false;
   let activeScreens: { stop(): Promise<number> } | null = null;
   let activeMonitors: Awaited<ReturnType<typeof deviceMonitors>> | null = null;
   try {
@@ -1517,18 +1562,20 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   }
   recording = true;
   await session.send('CPUProfiler.startTracking');
-  await session.send('Timeline.start', { maxCallStackDepth: 8 });
+  await session.send('Timeline.start', { maxCallStackDepth: option.debug ? 32 : 8 });
   // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
   // --eval runs one expression in the page before recording: an experiment's switch (hide a layer, set a flag).
   if (option.eval) await evaluate(option.eval);
   await evaluate(INPUT_LOGGER);
   const styleWritesStarted = Date.now();
   if (option.styleWrites) await evaluate(STYLE_WRITES_LOGGER);
+  if (option.debug) { await evaluate(INSTALL_TRACE_CAUSES); debugInstalled = true; }
   // Set up Web Inspector before streaming native screenshots. On the real iPad,
   // starting the screen sampler earlier can starve these inspector commands.
   const screens = target.kind === 'device' && option.screens
     ? await (deviceScreensSession ? deviceScreensSession.startScreens(out) : deviceScreens(option.pymobiledevice3, udid, out)) : null;
   activeScreens = screens;
+  if (option.debug) activeLayers = await startLayerSampler(session, resolve(out, 'layers.jsonl'));
   stage('trace and screen sampler ready');
   const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
   // Full screen and viewport captures have separate actions and provenance.
@@ -1548,9 +1595,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
         selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }),
         captureScreen, file => snapshotViewport(session, file), awaitRoute, args.includes('--strict-steps'), residencyCheckpoint);
     } catch (error) {
-      xctrace?.kill('SIGINT');
-      await Promise.allSettled([monitors?.stop(), screens?.stop(), session.send('Timeline.stop'), session.send('CPUProfiler.stopTracking')]);
-      session.close(); proxy?.kill();
+      // Preserve the app error before the outer cleanup tears down Inspector.
+      await writeFile(resolve(out, 'failure.json'), JSON.stringify({ error: error instanceof Error ? error.message : String(error),
+        steps: marks, console: events.filter(event => event.method === 'Console.messageAdded') }, null, 2) + '\n');
       throw error;
     }
   }
@@ -1564,6 +1611,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     console.error('Recording stopped.');
   }
   const durationMs = Date.now() - started;
+  await activeLayers?.stop(); activeLayers = null;
   stage('actions complete');
   const { samples: deviceSamples = null, ...deviceSummary } = (monitors ? await monitors.stop() : null) ?? {};
   activeMonitors = null;
@@ -1594,6 +1642,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
   await residencyCheckpoint(steps.length);
+  if (debugInstalled) { const causes = await evaluate(STOP_TRACE_CAUSES); debugInstalled = false; await writeFile(resolve(out, 'causes.json'), JSON.stringify(causes) + '\n'); }
   const retired = await evaluate(STOP_RESIDENCY_PROBE);
   const residency = { snapshots: residencySnapshots, released: isRecord(retired) && Array.isArray(retired.released) ? retired.released : [],
     droppedReleases: isRecord(retired) ? retired.dropped : null };
@@ -1669,6 +1718,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter,
       source: 'WebKit category accounting; endpoints after GC, continuous samples without forced GC; not process physical footprint', samples: memoryUpdates }, residency,
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
+    diagnostic: { enabled: option.debug, timingComparable: !option.debug && !option.styleWrites, checkpoints: compositorCheckpoints.length },
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
     native: nativeSummary, pixels, files: (await readdir(out)).sort(),
   };
@@ -1677,7 +1727,14 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
   } catch (error) {
+    await activeLayers?.stop().catch(() => null);
+    if (debugInstalled) await evaluate(STOP_TRACE_CAUSES).then(value => writeFile(resolve(out,'causes.json'),JSON.stringify(value)+'\n')).catch(() => null);
     xctrace?.kill('SIGINT');
+    // Stop Inspector observers before the automation page closes. The iPad's
+    // 2026-09-27 08:21:29 crash was inside InspectorMemoryAgent's live callback.
+    await Promise.allSettled([session.send('Memory.stopTracking'), session.send('CPUProfiler.stopTracking'),
+      session.send('ScriptProfiler.stopTracking'), session.send('Timeline.stop'),
+      ...[...workers.keys()].map(worker => session.send('ScriptProfiler.stopTracking', {}, worker))]);
     await Promise.allSettled([activeScreens?.stop(), activeMonitors?.stop()]);
     session.close(); proxy?.kill();
     throw error;

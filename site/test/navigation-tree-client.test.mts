@@ -29,7 +29,13 @@ test('deferred navigation materializes only the selected path from its verified 
   const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
   assert.equal(root.querySelectorAll('a').length, 0, 'cold tree retains no deferred rows');
 
+  await controller.setVisible(false);
+  const hiddenMarkup = root.outerHTML;
+  await controller.select('branch');
   await controller.select('leaf');
+  assert.equal(requests, 0, 'hidden selections do not fetch or materialize the tree');
+  assert.equal(root.outerHTML, hiddenMarkup, 'hidden selections leave retained DOM untouched');
+  await controller.setVisible(true);
 
   assert.equal(requests, 1);
   assert.equal(root.querySelectorAll('a').length, 2, 'only the selected two-row path materializes');
@@ -155,5 +161,36 @@ test('a deferred selection that finishes after a newer one leaves the newer entr
 
   assert.equal(root.querySelector('a[data-atlas-object="other"]')?.getAttribute('aria-current'), 'page');
   assert.equal(root.querySelector('a[aria-current]:not([data-atlas-object="other"])'), null);
+  controller.destroy();
+});
+
+
+test('closing while a branch loads prevents hidden mutations and reopening uses the latest selection', async () => {
+  const payload: NavigationTreePayload = {
+    schema: NAVIGATION_TREE_SCHEMA, roots: ['root'], nodes: {
+      root: { label: 'Root', objectId: null, place: true, count: 1, marker: null, children: ['leaf'], href: null, focusId: null },
+      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1, marker: null, children: [], href: '/leaf/', focusId: null },
+    },
+  };
+  const { document, window } = parseHTML('<div data-object-navigation-tree data-atlas-tree-src="/tree.json"><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary>Root</summary></details><details data-atlas-depth="0" data-atlas-key="other"><summary>Other</summary><a data-atlas-object="other">Other</a><details data-atlas-depth="1"><summary>Retained branch</summary></details></details></div>');
+  let respond!: (response: Response) => void;
+  window.fetch = () => new Promise<Response>(resolve => { respond = resolve; });
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+  const pending = controller.select('leaf');
+  await controller.setVisible(false);
+  const before = root.outerHTML;
+  await controller.select('other');
+  respond(new Response(JSON.stringify(payload)));
+  await pending;
+  assert.equal(root.outerHTML, before, 'an in-flight load cannot publish into a closed tree');
+  await controller.setVisible(true);
+  assert.equal(root.querySelector('a[data-atlas-object="other"]')?.getAttribute('aria-current'), 'page');
+  assert.equal(root.querySelector('a[data-atlas-object="leaf"]'), null, 'superseded selection never materializes');
+  const branch = root.querySelector<HTMLDetailsElement>('details[data-atlas-depth="1"]')!;
+  branch.open = true;
+  await controller.setVisible(false);
+  await controller.setVisible(true);
+  assert.equal(branch.open, true, 'reopening preserves manually expanded branches');
   controller.destroy();
 });

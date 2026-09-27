@@ -74,12 +74,14 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
     if (measuredId === body.id) return;
     label.textContent = body.name;
     label.dataset.selectedBodyLabel = body.id;
-    if (body.labelCase === 'upper') label.dataset.labelCase = 'upper'; else delete label.dataset.labelCase;
+    if (body.labelCase === 'upper') label.dataset.labelCase = 'upper'; else if ('labelCase' in label.dataset) delete label.dataset.labelCase;
     measuredId = body.id;
     width = label.offsetWidth;
     height = label.offsetHeight;
   };
   return Object.freeze({ label,
+    /** Set and measure the destination name before its first camera publication. */
+    prepare: measure,
     /** The caption's box for a camera the context is about to plan, so the context's own labels keep clear of it. */
     rect(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint, flags: SelectedLabelFlags): LabelScreenRect | null {
       if (measuredId !== body.id) return null;

@@ -1,3 +1,4 @@
+import { requireTextureBindings } from './texture-bindings.js';
 import { array, attribute, boolean, choice, fail, finite, integer, record, text, unique } from './guards.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedTree, PreparedWrite } from '../rendering/prepared-presentation.js';
@@ -52,7 +53,7 @@ export function ancestor(child: number, parent: number, tree: PreparedTree): boo
 }
 const unsupportedStyle = /\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:|(?:linear|radial|conic)-gradient\s*\(/i;
 export function requireTree(value: unknown): asserts value is PreparedTree {
-  const tree = record(value, 'tree', ['nodes', 'properties', 'camera', 'scene', 'stageClasses', 'activationGroups']);
+  const tree = record(value, 'tree', ['nodes', 'properties', 'camera', 'scene', 'stageClasses', 'activationGroups', 'textureBindings']);
   const properties = array(tree.properties, 'prepared style properties');
   for (const input of properties) {
     const property = record(input, 'prepared property', ['name', 'value', 'custom']);
@@ -81,6 +82,7 @@ export function requireTree(value: unknown): asserts value is PreparedTree {
       attribute(name); text(content, 'attribute value', true);
     }
   }
+  requireTextureBindings(tree.textureBindings, tree.nodes as PreparedTree['nodes']);
   const camera = integer(tree.camera, 'camera node'), scene = integer(tree.scene, 'scene node');
   if (camera >= nodes.length || scene >= nodes.length || parents[camera] !== -1) fail('camera/scene reference is invalid');
   let owned = false;

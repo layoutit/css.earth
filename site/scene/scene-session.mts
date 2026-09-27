@@ -43,6 +43,7 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
   const lifetime = createSceneLifetime(), controller = new AbortController();
   let state: SceneSessionState = { kind: 'loading', activation: 'idle', mount: null };
   let lastCommand: boolean | null = null;
+  let preserveControls = false;
   let viewUrl: ReturnType<typeof bindViewUrl> | null = null;
   lifetime.onDispose(() => controller.abort());
   lifetime.onDispose(() => { const owner = viewUrl; viewUrl = null; owner?.destroy(); });
@@ -80,7 +81,7 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
       // Observe readiness and own cleanup even if that callback retired us.
       const ready = Promise.resolve(mount?.ready);
       ready.catch(() => {});
-      session.own(() => mount?.destroy?.());
+      session.own(() => mount?.destroy?.({ preserveControls }));
       if (!session.live) return false;
       requireSceneLifecycle(mount, objectId);
       state = { kind: 'loading', activation: 'mounting', mount };
@@ -106,8 +107,9 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
       }
       return true;
     },
-    dispose(error?: unknown, { flush = true } = {}) {
+    dispose(error?: unknown, { flush = true, preserveControls: transferControls = false } = {}) {
       if (!session.live) return [];
+      preserveControls = transferControls;
       // No callback or late native promise may reanimate a retired session.
       state = error === undefined ? { kind: 'disposed' }
         : { kind: 'failed', error: error instanceof Error ? error : new Error(errorMessage(error)) };

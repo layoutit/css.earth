@@ -113,8 +113,8 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       const offset = `translate(${Math.round((x - projected.x) * 1e6) / 1e6}px,${Math.round((y - projected.y) * 1e6) / 1e6}px)`;
       if (labelOffset === offset) return;
       const [labelX, labelY] = offset.match(/-?[\d.]+/g)!.map(Number);
-      marker.style.setProperty('--context-label-x', `${labelX}px`);
-      marker.style.setProperty('--context-label-y', `${labelY}px`);
+      if (marker.style.getPropertyValue('--context-label-x') !== `${labelX}px`) marker.style.setProperty('--context-label-x', `${labelX}px`);
+      if (marker.style.getPropertyValue('--context-label-y') !== `${labelY}px`) marker.style.setProperty('--context-label-y', `${labelY}px`);
       labelOffset = offset;
     },
   };

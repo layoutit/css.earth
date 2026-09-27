@@ -1,3 +1,5 @@
+import { afterSceneFrame } from './scene-frame.mts';
+import { retainInputSurface } from '@cssearth/renderer';
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
 import { selectSceneFeature } from './scene-feature.mts';
@@ -73,6 +75,8 @@ export function createSceneRouter({
   reportError = (error) => console.error(error),
   persistentWorldContext,
 }: RouterOptions) {
+  const sharedInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
+  const releaseInput = sharedInput ? retainInputSurface(sharedInput) : () => {};
   const scenes = createSceneSessions();
   let mountTask: Promise<boolean | undefined> | null = null;
   const preferences = createWorldPreferences({ getWorld: () => world.current,
@@ -92,7 +96,7 @@ export function createSceneRouter({
   const subject = (): SceneSubject => context?.selection.current ?? { kind: 'object', objectId };
   const contentTransport = createNavigationContent({ documentTarget, windowTarget });
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
-  let reducedMotionActive = false;
+  let reducedMotionActive = reducedMotion?.matches === true;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
     if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
@@ -138,6 +142,8 @@ export function createSceneRouter({
   // These survive scene teardown so a persisted document can restore itself.
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
+  documentTarget.addEventListener("visibilitychange", syncPlayback);
+  reducedMotion?.addEventListener("change", syncReducedMotion);
   mountTask = mountApplication();
   // The iPad trace harness drives this same navigation path as the shell. Keep
   // the control out of ordinary builds; a performance build opts in explicitly.
@@ -160,7 +166,11 @@ export function createSceneRouter({
       if (destroyed) return;
       destroyed = true;
       destroyActiveScene();
+      releaseInput();
+      documentTarget.removeEventListener("visibilitychange", syncPlayback);
+      reducedMotion?.removeEventListener("change", syncReducedMotion);
       cameraMotion.cancel();
+      context?.navigation.destroy();
       world.destroy();
       if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
@@ -175,13 +185,6 @@ export function createSceneRouter({
     const session = scenes.start({ objectId, request, url: request?.url ?? windowTarget.location?.href,
       onFailure: fail, onCleanupError: report });
     try {
-      documentTarget.addEventListener("visibilitychange", syncPlayback);
-      session.own(() =>
-        documentTarget.removeEventListener("visibilitychange", syncPlayback));
-      reducedMotionActive = reducedMotion?.matches === true;
-      reducedMotion?.addEventListener("change", syncReducedMotion);
-      session.own(() =>
-        reducedMotion?.removeEventListener("change", syncReducedMotion));
       publication.publish();
       const requestMotion = (next: boolean) => {
         if (!scenes.isCurrent(session)) return;
@@ -201,8 +204,7 @@ export function createSceneRouter({
           // The prepared sidebar swap and the detail mount each restyle and lay out
           // hundreds of nodes. Let the swap render in its own frame first, so an
           // arriving flight does not drop a frame for both at once.
-          const rendered = await session.wait(new Promise<void>(resolve =>
-            windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
+          const rendered = await session.wait(afterSceneFrame(windowTarget, session.signal));
           if (rendered.cancelled || !scenes.isCurrent(session)) return;
         }
         publication.publish();
@@ -228,7 +230,7 @@ export function createSceneRouter({
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
-      delete documentTarget.documentElement.dataset.bodyPending;
+      if ('bodyPending' in documentTarget.documentElement.dataset) delete documentTarget.documentElement.dataset.bodyPending;
       if (!ready) {
         windowTarget.performance?.mark?.('cssearth:body-ready');
         const loaded = await session.wait(ensureContext());
@@ -282,7 +284,7 @@ export function createSceneRouter({
       // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
-      const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion });
+      const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
       const selection = registry.createSceneSelection({ objectId,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
@@ -295,6 +297,7 @@ export function createSceneRouter({
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
       navigable = id => worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
     contextTask = task;
@@ -315,12 +318,12 @@ export function createSceneRouter({
     }
     const shell = shellOwner.shell!;
     session.shell = shell;
-    if (replacement) current.commit(replacement.request.subject, objectId);
+    if (replacement) current.commit(replacement.request.subject, objectId, false);
     if (replacement?.selectionTransition) replacement.selectionTransition.arrive({ content: replacement.content, subject: current.current });
     else {
       if (replacement) shell.setObject(replacement.content);
-      shell.presentSelection();
     }
+    publishSelection();
   }
 
   async function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
@@ -385,8 +388,13 @@ export function createSceneRouter({
         loadObject, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current, stage });
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
+      // The camera acknowledgement resolves inside its RAF. Keep scene teardown
+      // and shell publication out of that rendering turn; the resident billboard
+      // continues to cover the arrival. Cancellation keeps the old scene intact.
+      const presented = await request.lifetime.wait(afterSceneFrame(windowTarget, request.signal));
+      if (presented.cancelled || !requests.owns(request)) return false;
       request.timing.mark('handoff');
-      if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false });
+      if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
       const result = await mountApplication({ context: ready, factory, content, handoff, request, selectionTransition });
@@ -468,18 +476,20 @@ export function createSceneRouter({
     } catch (error) { fail(session, error); }
   }
 
-  function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true } = {}) {
+  function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true, publish = true } = {}) {
     if (!scenes.isCurrent(session)) return;
     const retired = DIAGNOSTICS_ENABLED ? observeSceneRetirement(windowTarget, session.objectId) : null;
     // Detach and invalidate before any user cleanup or native wait can finish.
-    const cleanupErrors = session.dispose(error === null ? undefined : error, { flush });
+    const cleanupErrors = session.dispose(error === null ? undefined : error, { flush, preserveControls: preserveShell });
     retired?.();
     if (!preserveShell) {
       hasPresented = false;
       const owner = shellOwner; shellOwner = null;
       try { owner?.shell?.destroy(); } catch (error) { cleanupErrors.push(error); }
     }
-    publication.publish();
+    // A replacement starts its loading session synchronously after retirement.
+    // Do not project the intermediate absence of a scene onto the retained shell.
+    if (publish) publication.publish();
     for (const failure of cleanupErrors) report(failure);
   }
 
@@ -509,14 +519,15 @@ export function createSceneRouter({
       subject?.kind === 'overview' ? subject.overview.scope : undefined);
     if (stage.dataset) {
       const current = subject ?? { kind: 'object' as const, objectId };
-      stage.dataset.selection = current.kind === 'overview' ? current.overview.scope
+      const value = current.kind === 'overview' ? current.overview.scope
         : current.kind === 'focus' ? current.id : current.kind === 'satellite-system' ? current.hostId : current.objectId;
+      if (stage.dataset.selection !== value) stage.dataset.selection = value;
     }
     publication.publish();
   }
   function commitSelection(ready: RouterContext, request: NavigationRequest, transition?: ShellNavigationTransition | null) {
     const current = ready.selection, wasOverview = current.context.kind === 'overview';
-    current.commit(request.subject, objectId);
+    current.commit(request.subject, objectId, false);
     transition?.arrive({ subject: current.current });
     publishSelection();
     if (!wasOverview && current.current.kind === 'overview') aimAtSystemCenter(ready);

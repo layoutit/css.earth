@@ -155,6 +155,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let selected = plan.focus;
         // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
         let captionBody: typeof selected = selected;
+        let previewCaption: typeof selected | null = null;
+        const caption = () => previewCaption ?? captionBody;
+        const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: detailedFocus !== null, preview: selectionPreview });
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
         let publishedScale = '';
         background.mount();
@@ -164,7 +167,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // share its viewport and depth band from outside its changing CSS scope.
         const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationOpacities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
         // The selected body's own label is the close-up's; overviews label every body.
-        const publishSuppressedLabels = () => spatial.setBodyVisibility({ labelSuppressed: overview ? [] : [selected.id] });
+        const publishSuppressedLabels = () => spatial.setBodyVisibility({
+          labelSuppressed: [...(!overview ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
+        });
         publishSuppressedLabels();
         const bodyAnnotations = spatial.inspect();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
@@ -211,10 +216,19 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The context's labels keep clear of the selected body's caption, placed for the same camera.
-            const caption = selectedLabel.rect(world, viewport, captionBody, { overview, focused: detailedFocus !== null, preview: selectionPreview });
-            return spatial.captureFrame(world, viewport, caption ? [caption] : []);
+            const rect = selectedLabel.rect(world, viewport, caption(), captionFlags());
+            return spatial.captureFrame(world, viewport, rect ? [rect] : []);
           },
-          previewSelection(id?: string | null) { selectionPreview = id; spatial.previewSelection(id); },
+          previewSelection(id?: string | null, framingScale?: number) {
+            if (framingScale !== undefined && !(framingScale > 0 && framingScale <= 1)) throw new TypeError('Invalid preview framing scale.');
+            const body = id ? [plan.focus, ...plan.bodies].find(body => body.id === id) : undefined;
+            previewCaption = body ? framingScale === undefined && id === selected.id ? captionBody
+              : { ...body, radiusM: body.radiusM / (framingScale ?? 1) } : null;
+            selectionPreview = id;
+            selectedLabel.prepare(caption());
+            publishSuppressedLabels();
+            spatial.previewSelection(id);
+          },
           setOverview(enabled: boolean, scope?: string) {
             overview = enabled;
             spatial.setOverview(enabled);
@@ -243,6 +257,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = body;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
+            selectedLabel.prepare(caption());
             spatial.selectObject(id);
             publishSuppressedLabels();
             root.dataset.selectedObject = id;
@@ -262,9 +277,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
               }
               spatial.publish(world, viewport, frame);
-              const selectedRect = selectedLabel.publish(world, viewport, captionBody, {
-                overview, focused: detailedFocus !== null, preview: selectionPreview,
-              });
+              const selectedRect = selectedLabel.publish(world, viewport, caption(), captionFlags());
               const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
                 ...coveredTopRects(viewport)];
               labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,

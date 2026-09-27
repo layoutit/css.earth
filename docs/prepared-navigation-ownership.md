@@ -27,6 +27,8 @@ implementations; there is no separate platform mount or codec.
 
 Saved views use one binary format (version 5), with a physical rotation, either
 a distance or translated body centre, an explicit epoch and playback state.
+An optional optical framing scale uses flag `0x100`; older version-5 links omit
+it and retain scale 1. It preserves the arrival perspective when a view reloads.
 Capture has no angular-camera fallback, and restoration requires the same epoch.
 Versions 1–4, the former JSON format and the unused Galaxio codec are unsupported. Dataset links
 use `?dataset=<id>`; `#dataset=...` is an ordinary fragment and does not select a
@@ -51,6 +53,16 @@ Navigation checks the exact last drawn view before handoff. The source keeps
 moving while assets and detached nodes become ready. Input cancels a pending
 flight through the same signal and keeps the drawn camera. The sidebar is a
 separate selection owner, so mounting never replaces it with an intermediate card.
+
+Outgoing flight publications keep the world camera current. Once the actual
+prepared LOD hides the source mesh, the first hidden view retires its visible
+material and feature state. Subsequent hidden departure frames skip material
+and surface-feature publication. Departure readouts retain their prior value instead
+of scheduling work for a replaced card. The feature layer itself requests frames
+only when labels can be drawn or existing labels need clearing. Ordinary camera
+input and destination publication remain live; a resolving source immediately resumes detail work.
+This uses the renderer's marker state, not a timer or the destination billboard's
+presence.
 
 ## Explicit native motion
 

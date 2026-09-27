@@ -180,3 +180,45 @@ test('a second preflight checkpoint replaces a ready unpublished selection inste
   expect(adopted.resources.has('c')).toBe(true); expect(adopted.resources.has('d')).toBe(true);
   adopted.destroy();
 });
+
+
+test('first-paint decode rechecks selected handles once without refetching or publishing readiness', async () => {
+  const calls: string[] = [], ready = vi.fn();
+  const assets: PreparedAssets = {
+    entries: [{ key: 'surface', url: '/atlas.webp', pool: 'material' }, { key: 'poles', url: '/atlas.webp', pool: 'material' }, { key: 'other', url: '/other.webp', pool: 'material' }],
+    pools: [{ id: 'material', capacity: 3, concurrency: 2, retention: 'mount', reuse: false }], startup: [],
+  };
+  const images: { src: string; decoding: 'async'; naturalWidth: number; naturalHeight: number; decode(): Promise<void> }[] = [];
+  const residency = createPreparedResidency({ assets, onReady: ready, createImage() {
+    const image = { src: '', decoding: 'async' as const, naturalWidth: 1, naturalHeight: 1, async decode() { calls.push(this.src); } };
+    images.push(image); return image;
+  } });
+  const ticket = residency.request({ required: ['surface', 'poles'], prewarm: ['other'] });
+  await ticket.ready; residency.commit(ticket);
+  await vi.waitFor(() => expect(residency.resources.has('other')).toBe(true));
+  calls.length = 0; ready.mockClear();
+  expect(await residency.decodeForPaint()).toBe(true);
+  expect(calls).toEqual(['/atlas.webp']);
+  expect(images).toHaveLength(2);
+  expect(ready).not.toHaveBeenCalled();
+  expect(residency.stats().paintDecodeChecks).toBe(1);
+  residency.destroy(); expect(await residency.decodeForPaint()).toBe(false);
+});
+
+test('first-paint decode propagates failure and remains cancelled after its owner retires', async () => {
+  let rejectNext: ((reason: Error) => void) | null = null;
+  let delayed = false;
+  const assets: PreparedAssets = { entries: [{ key: 'surface', url: '/atlas.webp', pool: 'material' }],
+    pools: [{ id: 'material', capacity: 1, concurrency: 1, retention: 'mount', reuse: false }], startup: [] };
+  const residency = createPreparedResidency({ assets, createImage: () => ({ src: '', decoding: 'async', naturalWidth: 1, naturalHeight: 1,
+    decode: () => delayed ? new Promise<void>((_resolve, reject) => { rejectNext = reject; }) : Promise.resolve() }) });
+  const ticket = residency.request({ required: ['surface'] }); await ticket.ready; residency.commit(ticket);
+  delayed = true;
+  const pending = residency.decodeForPaint();
+  const failed = expect(pending).rejects.toThrow('discarded');
+  residency.destroy();
+  if (!rejectNext) throw new Error('No pending decode');
+  const reject: (reason: Error) => void = rejectNext;
+  reject(new Error('discarded')); await failed;
+  expect(await residency.decodeForPaint()).toBe(false);
+});

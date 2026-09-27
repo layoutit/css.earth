@@ -18,7 +18,7 @@ export function mountInformationCard(drawer: HTMLElement, objectId: string,
   const tabs = retain(createInformationTabsController(drawer, lifetime));
   const dataset = drawer.querySelector<HTMLDetailsElement>('.object-information-panel > .object-dataset-content');
   // The dataset is a desktop tab and a stacked mobile section, always expanded.
-  if (dataset) dataset.open = true;
+  if (dataset && !dataset.open) dataset.open = true;
   retain(createChartPixelAlignmentController(drawer, windowTarget));
   return {
     show: tabs.show,
@@ -62,7 +62,7 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
       tab.dispatchEvent(new tab.ownerDocument.defaultView!.Event('change', { bubbles: true }));
     }
     const section = sections.find(panel => panel.dataset.informationPanel === id);
-    if (section) section.open = true;
+    if (section && !section.open) section.open = true;
   }, destroy };
 }
 
@@ -121,7 +121,8 @@ function restorePanelState(panels: readonly Panel[], objectId: string, windowTar
       for (const [name, panel] of panels) {
         // Older saved lists predate the main tree disclosures; keep their authored default openness.
         if (!openPanels.has(TREE_PANEL_STATE) && panel.classList.contains('atlas-tree-disclosure')) continue;
-        panel.open = openPanels.has(name);
+        const open = openPanels.has(name);
+        if (panel.open !== open) panel.open = open;
       }
     }
   } catch {}

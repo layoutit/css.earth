@@ -17,8 +17,10 @@ export function applySprite(element:HTMLElement, sprite:SpriteWithUrl) {
 }
 
 export function applySpriteImage(element:HTMLElement, sprite:SpriteImage) {
-  element.style.backgroundImage = `url("${sprite.url}")`;
-  element.style.backgroundPosition = `${(sprite.index /
-    Math.max(1, sprite.count - 1) * 100).toFixed(4)}% center`;
-  element.style.backgroundSize = `${sprite.count * 100}% 100%`;
+  const image = `url("${sprite.url}")`;
+  const position = `${Number((sprite.index / Math.max(1, sprite.count - 1) * 100).toFixed(4))}% center`;
+  const size = `${sprite.count * 100}% 100%`;
+  if (element.style.backgroundImage !== image) element.style.backgroundImage = image;
+  if (element.style.backgroundPosition !== position) element.style.backgroundPosition = position;
+  if (element.style.backgroundSize !== size) element.style.backgroundSize = size;
 }

@@ -1336,10 +1336,6 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   display: none;
 }
 
-.object-lenses.is-loading .object-observation-control {
-  cursor: progress;
-}
-
 .object-setting-control > input[type="checkbox"] {
   position: absolute;
   width: 1px;
