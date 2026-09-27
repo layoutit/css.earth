@@ -432,6 +432,1686 @@
         "kind": "local",
         "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
       }
+    },
+    {
+      "id": "opal-2014a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 22, 2014a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2014a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 22, 2014a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2014a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 22, 2014a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2014a-f658n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 22, 2014a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 23, 2015a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 23, 2015a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 23, 2015a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 23, 2015a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 24, 2016a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 24, 2016a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 24, 2016a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 24, 2016a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 25, 2017a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 25, 2017a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 25, 2017a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 25, 2017a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 26, 2018a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 26, 2018a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 26, 2018a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 26, 2018a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 27, 2019a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 27, 2019a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 27, 2019a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 27, 2019a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 28, 2020a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 28, 2020a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 28, 2020a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 28, 2020a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 29, 2021a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 29, 2021a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 29, 2021a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 29, 2021a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 30, 2022a; publisher RGB composite; http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits",
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 30, 2022a; component coverage FITS; http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits",
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 30, 2022a; component coverage FITS; http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits",
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 30, 2022a; component coverage FITS; http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2023a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 31, 2023a; publisher RGB composite; https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2023a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 31, 2023a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2023a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 31, 2023a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2023a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 31, 2023a; component coverage FITS; https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 32, 2024a; publisher RGB composite; https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 32, 2024a; component coverage FITS; https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 32, 2024a; component coverage FITS; https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 32, 2024a; component coverage FITS; https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 33, 2025a; publisher RGB composite; https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 33, 2025a; component coverage FITS; https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 33, 2025a; component coverage FITS; https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "acquisition": "Download the original OPAL v1 global map; see preparation/acquisition.json.",
+      "redistribution": "Original public OPAL high-level science product.",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal",
+            "role": "material",
+            "evidence": "OPAL Cycle 33, 2025a; component coverage FITS; https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.mts';
 
 export interface Measurement { x: number; xLow: number; xHigh: number; y: number; minus: number; plus: number }
 export interface MeasurementSource {
@@ -120,30 +121,21 @@ export async function readMeasuredSpectrum(root: string, input: unknown) {
   return { recipe, points, model };
 }
 
-const escape = (s: string) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-
 /** Prepared SVG in the existing chart panel. Horizontal bars are wavelength coverage, vertical bars are published errors. */
 export function renderMeasuredSpectrum({ recipe: r, points, model }: Awaited<ReturnType<typeof readMeasuredSpectrum>>) {
-  const width = 306, height = 220 + r.notes.length * 15;
-  const x = (v: number) => 40 + (v - r.x.minimum) / (r.x.maximum - r.x.minimum) * 255;
-  const y = (v: number) => 166 - (v - r.y.minimum) / (r.y.maximum - r.y.minimum) * 132;
-  const n = (v: number) => v.toFixed(3);
+  const height = 260 + (r.model ? 17 : 0) + r.notes.length * 15;
+  const x = linearScale(r.x.minimum, r.x.maximum, CHART.left, CHART.right);
+  const y = linearScale(r.y.minimum, r.y.maximum, CHART.bottom, CHART.top);
+  const n = coordinate;
   const line = (x1: number, y1: number, x2: number) => `M${n(x1)} ${n(y1)}H${n(x2)}`;
-  const grid = r.y.ticks.map(v => `<path d="M40 ${n(y(v))}H295" stroke-opacity="${v === 0 ? '.3' : '.1'}"/><text x="34" y="${n(y(v) + 4)}" text-anchor="end" stroke="none">${v}</text>`).join('');
-  const ticks = r.x.ticks.map(v => `<text x="${n(x(v))}" y="184" text-anchor="${v === r.x.minimum ? 'start' : v === r.x.maximum ? 'end' : 'middle'}">${v}</text>`).join('');
+  const axes = chartAxes({ x, y, xTicks: ticks(r.x.ticks), yTicks: ticks(r.y.ticks), xLabel: r.x.label, yLabel: r.y.label });
   let pen = false;
   const path = model.map(p => { if (p.y === null) { pen = false; return ''; } const d = `${pen ? 'L' : 'M'}${n(x(p.x))} ${n(y(p.y))}`; pen = true; return d; }).join(' ');
   const bars = points.map(p => `<g class="measurement" data-x="${p.x}" data-y="${p.y}" data-minus="${p.minus}" data-plus="${p.plus}">
+    ${r.mode === 'band' ? `<rect class="measurement-interval" x="${n(x(p.xLow))}" y="${n(y(p.y + p.plus))}" width="${n(x(p.xHigh) - x(p.xLow))}" height="${n(y(p.y - p.minus) - y(p.y + p.plus))}" fill="${CHART.neutral}" fill-opacity="${CHART.bandOpacity}" stroke="none"/>` : ''}
     <path d="${line(x(p.xLow), y(p.y), x(p.xHigh))} M${n(x(p.x))} ${n(y(p.y + p.plus))}V${n(y(p.y - p.minus))}"/>
-    ${r.mode === 'points' ? `<circle cx="${n(x(p.x))}" cy="${n(y(p.y))}" r="1.7" fill="#d5d8e0" stroke="none"/>` : ''}</g>`).join('');
-  const notes = r.notes.map((note, i) => `<text x="0" y="${221 + i * 15}" fill-opacity=".8">${escape(note)}</text>`).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="${r.id}-title ${r.id}-desc" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#b8bbc4">
-    <title id="${r.id}-title">${escape(r.title)}</title><desc id="${r.id}-desc">${escape(r.description)}</desc>
-    <metadata>${escape(JSON.stringify({ ...r.metadata, measuredBins: points.length, modelSamplesShown: model.length }))}</metadata>
-    <text x="0" y="13">${escape(r.y.label)}</text>
-    <g stroke="#b8bbc4" stroke-width=".6">${grid}</g>
-    ${r.model ? `<text x="295" y="28" text-anchor="end" fill="#e6ab64">${escape(r.model.label)}</text><path class="published-model" d="${path}" fill="none" stroke="#e6ab64" stroke-width="1.2"/>` : ''}
-    <g stroke="#b8bbc4" stroke-width=".7" fill="none">${bars}</g>
-    ${ticks}<text x="167.5" y="203" text-anchor="middle">${escape(r.x.label)}</text>${notes}
-  </svg>\n`;
+    ${r.mode === 'points' ? `<circle cx="${n(x(p.x))}" cy="${n(y(p.y))}" r="1.7" fill="${CHART.neutral}" stroke="none"/>` : ''}</g>`).join('');
+  const fit = r.model ? `<path class="published-model" d="${path}" fill="none" stroke="${CHART.amber}" stroke-width="1.5"/><path d="M0 244H19" stroke="${CHART.amber}" stroke-width="1.5"/><text x="26" y="248">${escapeXml(r.model.label)}</text>` : '';
+  return chartDocument({ ...r, metadata: { ...r.metadata, measuredBins: points.length, modelSamplesShown: model.length } },
+    axes + fit + `<g stroke="${CHART.neutral}" stroke-width=".7" fill="none">${bars}</g>` + chartNotes(r.notes, 264 + (r.model ? 17 : 0)), { height });
 }

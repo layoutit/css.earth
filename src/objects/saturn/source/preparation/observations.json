@@ -1,0 +1,1191 @@
+{
+  "schema": "cssearth-observed-surfaces@1",
+  "sources": [
+    {
+      "id": "opal-2018a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4885014,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4881972,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4882006,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4882008,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4885086,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4876568,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4876618,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "expectedBytes": 4885052,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-f395n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-f502n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f502n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-f631n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f631n_v1_globalmap.fits",
+      "expectedBytes": 6482880,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "lenses": [
+    {
+      "id": "visible-2018a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2018a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2018a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2018a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2018a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            491,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2019a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2019a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2019a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2019a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2019a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            491,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2020a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2020a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2020a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2020a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2020a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            499,
+            665
+          ],
+          [
+            781,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2021a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2021a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2021a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2021a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2021a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            520,
+            629
+          ],
+          [
+            821,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2022a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2022a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2022a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2022a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2022a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            503,
+            577
+          ],
+          [
+            814,
+            816
+          ],
+          [
+            818,
+            820
+          ],
+          [
+            826,
+            826
+          ],
+          [
+            839,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2023a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2023a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2023a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2023a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2023a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            473,
+            533
+          ],
+          [
+            858,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2024a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2024a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2024a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2024a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2024a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            0,
+            0
+          ],
+          [
+            459,
+            472
+          ],
+          [
+            869,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "visible-2025a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2025a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-visible-2025a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-visible-2025a.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-lens-visible-2025a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f502n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f631n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            0,
+            12
+          ],
+          [
+            14,
+            17
+          ],
+          [
+            432,
+            442
+          ],
+          [
+            896,
+            899
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 1800
+      },
+      "planetographicAxisRatio": 1.1086012802589948
+    }
+  ]
+}

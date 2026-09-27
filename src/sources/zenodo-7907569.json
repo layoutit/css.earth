@@ -1,0 +1,36 @@
+{
+  "id": "zenodo-7907569",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Products and Models for \"A broadband thermal emission spectrum of the ultra-hot Jupiter WASP-18b\"",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.7907569"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/7907569",
+      "label": "Zenodo record"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/7907569",
+      "checkedOn": "2026-09-26",
+      "locator": "WASP_18b_data_Nature.zip; Atmosphere/retrieval_posteriors/LPC_Ahsohdiss_fehtiovo-4nak-2_retrieved_PT.txt; CC BY 4.0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Coulombe et al. (2023), CC BY 4.0",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/7907569"
+    }
+  ],
+  "publisher": "Zenodo"
+}

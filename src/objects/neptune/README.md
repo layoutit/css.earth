@@ -111,3 +111,41 @@ snapshots remain available without treating an embedded moon system as the
 active Neptune scene.
 
 </details>
+
+## Hubble dates
+
+The existing dataset stepper now selects 9 dated [OPAL](https://archive.stsci.edu/hlsp/opal) visible-colour maps. One rotation is selected from each included observing cycle, preserving one observation instead of averaging weather from separate rotations. The opening Visible color view remains the established presentation.
+
+| Observation starts (UTC) | Rotation | Release | Source pixels |
+| --- | --- | --- | --- |
+| 2017-10-06 | 2017a | [Cycle 24](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-24) | 721 × 361 |
+| 2018-09-09 | 2018a | [Cycle 25](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-25) | 721 × 361 |
+| 2019-09-28 | 2019a | [Cycle 26](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-26) | 721 × 361 |
+| 2020-08-19 | 2020a | [Cycle 27](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-27) | 721 × 361 |
+| 2021-09-06 | 2021a | [Cycle 28](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-28) | 721 × 361 |
+| 2022-09-18 | 2022a | [Cycle 29](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-29) | 721 × 361 |
+| 2023-09-22 | 2023a | [Cycle 30](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-30) | 721 × 361 |
+| 2025-06-28 | 2025a | [Cycle 31](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-31) | 721 × 361 |
+| 2025-08-24 | 2025b | [Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-32) | 721 × 361 |
+
+The RGB TIFF and its three component FITS files are recorded in [the source manifest](source/manifest.json) and restored by [the acquisition recipe](source/preparation/acquisition.json). These are publisher mosaics with contrast enhancement and arbitrary channel scaling, not calibrated colour comparisons between years. Each date combines exposures over a rotation, and the scene camera, Sun and rings do not reproduce the original observing geometry.
+
+All selected releases place 360° west longitude at the left, decreasing to the right, matching the current surface. Their 721-column maps include the repeated longitude endpoint. Planetographic rows move onto the unchanged 24,764 / 24,341 km ellipsoid. The FITS headers in the 2021 release omit DATE-OBS; its date comes from the release README's rotation-1 interval. There is no 2024 release in this sequence; Cycle 31 was observed in June 2025 and Cycle 32 in August 2025. The selected releases use the existing colour-map Minnaert coefficients, red/green/blue 0.50 / 0.80 / 0.88. The examined 2015–16 maps used red 0.55 and remain deferred until a separate prepared lighting bank is selected for them. The 2015 map also has a 180° longitude origin.
+
+[The observation recipe](source/preparation/observations.json) intersects finite component coverage and polar-connected zero fill before resampling; isolated dark observations remain valid. Declared fully unobserved rows also seed connected gaps. Missing neighbours never supply colour during interpolation. The shared gray graticule marks missing coverage in the surface, pole tiles and previews; the date views contain no polar continuation or feature inpainting. Publisher seam interpolation and edge artifacts inside valid coverage remain part of the source.
+
+The existing observed-surface preparer writes these maps for the body's current texture layout, using the shared Jupiter coverage helpers. It remaps planetographic latitude, packs the retained bands and projects the pole tiles at preparation time. The browser selects prepared files through the existing date group; it does not interpret FITS, derive imagery or replace the mounted scene.
+
+Source inspection compared the TIFF rows with the component FITS rows; all selected maps correlate more strongly in stored row order than after a north/south flip. This checks orientation, not absolute colour calibration. The unit check exercises component-mask intersection, a connected interior ring gap, retained isolated zero samples and longitude reversal. Browser and delivery evidence for this change is recorded below.
+
+### Date sequence evidence
+
+Checked on 27 September 2026 at `323a8c2f52803627462db448e52ccfa3c073363d`; subsequent changes add documentation and retained evidence only. Chrome exercised all 9 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
+
+[Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. It also retains the two examined but deferred early releases. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
+
+The three packages restored 479 files (160.17 MB) into an empty directory, with every byte count and SHA-256 matching its inventory. This body adds 2.90 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
+
+![Dated OPAL map with the shared sequence controls](evidence/opal-dates-desktop.webp)
+
+A dated map was also inspected with Shadows enabled and flood lighting; both reused the unchanged material bank and reported no runtime error.

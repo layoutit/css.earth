@@ -1,269 +1,74 @@
-export interface ChartIdentity { id:string;title:string;description:string;metadata:Record<string,unknown>; }
-export interface ReflectancePoint { wavelength:number;total:number; }
-export interface PressureLayer { pressure:number;temperature:number; }
-export interface PhasePoint { phaseAngle:number;dimmingMagnitude:number; }
-export interface LightCurvePoint { hours:number;flux:number; }
-export interface LightCurveEvent { hours:number;label:string; }
-const FONT =
-  "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
-const GRID_COLOR = "#fff";
-const GRID_OPACITY = ".05";
-const LABEL_COLOR = "#b8bbc4";
-const SERIES_COLOR = "#b8bbc4";
-const CHART_WIDTH = 306;
-const CHART_HEIGHT = 141;
-const CHART_CONTENT_TRANSFORM = "scale(.95625 .9578313253)";
-const CHART_SCALE_Y = 159 / 166;
-const CHART_FONT_SIZE = Number((13 / CHART_SCALE_Y).toFixed(3));
-const PLOT_RIGHT = 320;
+import { CHART, chartAxes, chartDocument, chartLine, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.mts';
+import type { ChartIdentity } from './chart-style.mts';
+export type { ChartIdentity } from './chart-style.mts';
+export interface ReflectancePoint { wavelength: number; total: number }
+export interface PressureLayer { pressure: number; temperature: number }
+export interface PhasePoint { phaseAngle: number; dimmingMagnitude: number }
+export interface LightCurvePoint { hours: number; flux: number }
+export interface LightCurveEvent { hours: number; label: string }
 
-export function renderReflectanceChart({
-  id,
-  title,
-  description,
-  metadata,
-  points,
-  maximum,
-}: ChartIdentity & {points:readonly ReflectancePoint[];maximum:number}) {
-  validateChartIdentity({ id, title, description, metadata });
-  if (!Array.isArray(points) || points.length < 2 ||
-      points.some(({ wavelength, total }, index) =>
-        !Number.isFinite(wavelength) || !Number.isFinite(total) ||
-        index > 0 && wavelength <= points[index - 1].wavelength) ||
-      !Number.isFinite(maximum) || maximum <= 0) {
-    throw new TypeError("Reflectance chart data is incompatible.");
-  }
-  const first = points[0].wavelength;
-  const last = points[points.length-1].wavelength;
-  if (first > 0.35 || last < 0.75 || last > 1.01) {
-    throw new RangeError("Reflectance chart wavelength range is incompatible.");
-  }
-  const pointPath = points.map(({ wavelength, total }, index) => {
-    const x = (wavelength - first) / (last - first) * PLOT_RIGHT;
-    const y = 106 - total / maximum * 98;
-    return `${index === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`;
-  }).join(" ");
-  const visibleStart = (0.38 - 0.35) / 0.65 * PLOT_RIGHT;
-  const visibleEnd = (0.75 - 0.35) / 0.65 * PLOT_RIGHT;
-  const visibleWidth = visibleEnd - visibleStart;
-  const infraredWidth = PLOT_RIGHT - visibleEnd;
-  const labelX = (wavelength:number) =>
-    (wavelength - 0.35) / 0.65 * PLOT_RIGHT;
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-reflectance-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-reflectance-title ${id}-reflectance-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
-  <title id="${id}-reflectance-title">${escapeXmlText(title)}</title>
-  <desc id="${id}-reflectance-description">${escapeXmlText(description)}</desc>
-  <metadata>${serializeMetadata(metadata)}</metadata>
-  <defs>
-    <linearGradient id="${id}-visible-spectrum" gradientUnits="userSpaceOnUse" x1="${visibleStart}" x2="${visibleEnd}">
-      <stop stop-color="#5d2e91"/>
-      <stop offset=".12" stop-color="#4243a5"/>
-      <stop offset=".26" stop-color="#2761b7"/>
-      <stop offset=".4" stop-color="#2098b5"/>
-      <stop offset=".53" stop-color="#35a660"/>
-      <stop offset=".65" stop-color="#d5ca48"/>
-      <stop offset=".76" stop-color="#e38b37"/>
-      <stop offset=".88" stop-color="#d1493b"/>
-      <stop offset="1" stop-color="#7d242d"/>
-    </linearGradient>
-  </defs>
-  <g fill="${GRID_COLOR}" fill-opacity="${GRID_OPACITY}" shape-rendering="crispEdges">
-    <rect x="0" y="${axisY(8)}" width="${CHART_WIDTH}" height="1"/>
-    <rect x="0" y="${axisY(57)}" width="${CHART_WIDTH}" height="1"/>
-  </g>
-  <g transform="${CHART_CONTENT_TRANSFORM}">
-  <g fill="${LABEL_COLOR}" opacity=".65">
-    <text x="0" y="141">wavelength (nm)</text>
-    <text x="${labelX(0.75)}" y="141" text-anchor="middle">750</text>
-    <text x="${PLOT_RIGHT}" y="141" text-anchor="end">1000</text>
-  </g>
-  <path class="object-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
-  <rect x="0" y="114" width="${visibleStart}" height="6" fill="#261735"/>
-  <rect x="${visibleStart}" y="114" width="${visibleWidth}" height="6" fill="url(#${id}-visible-spectrum)"/>
-  <rect x="${visibleEnd}" y="114" width="${infraredWidth}" height="6" fill="#32191d"/>
-  </g>
-</svg>
-`;
+export function renderReflectanceChart(input: ChartIdentity & { points: readonly ReflectancePoint[]; maximum: number }) {
+  const { points, maximum } = input;
+  if (!Array.isArray(points) || points.length < 2 || points.some((p, i) => !Number.isFinite(p.wavelength) || !Number.isFinite(p.total) || p.total < 0 || p.total > maximum ||
+      i > 0 && p.wavelength <= points[i - 1].wavelength) || !Number.isFinite(maximum) || maximum <= 0) throw new TypeError('Reflectance chart data is incompatible.');
+  const first = points[0].wavelength, last = points.at(-1)!.wavelength;
+  if (first > .35 || last < .78 || last > 1.01) throw new RangeError('Reflectance chart wavelength range is incompatible.');
+  const x = linearScale(first, last, CHART.left, CHART.right), y = linearScale(0, maximum, CHART.bottom, CHART.top);
+  // Illustrative 380–780 nm visible region, not a sharp physical boundary:
+  // https://cie.co.at/eilvterm/17-21-003 says the limits depend on flux and observer.
+  const regions = [{ start: first, end: .38, label: 'UV', color: CHART.purple },
+    { start: .38, end: .78, label: 'Visible', color: CHART.green }, { start: .78, end: last, label: 'Near-IR', color: CHART.amber }];
+  const shading = regions.map(r => `<rect x="${coordinate(x(r.start))}" y="29" width="${coordinate(x(r.end) - x(r.start))}" height="174" fill="${r.color}" fill-opacity=".07"/>`).join('');
+  const legend = `<path d="M0 245H19" stroke="${CHART.neutral}" stroke-width="1.5"/><text x="26" y="249">Reflectance</text><text x="0" y="274">Shading · approx.</text>` +
+    regions.map((r, i) => `<rect x="${100 + i * 70}" y="267" width="10" height="7" fill="${r.color}" fill-opacity=".5"/><text x="${115 + i * 70}" y="274">${r.label}</text>`).join('');
+  const axes = chartAxes({ x, y, xTicks: [first, .5, .75, last].map(value => ({ value, label: String(Math.round(value * 1000)) })),
+    yTicks: ticks([0, maximum / 2, maximum]), xLabel: 'Wavelength (nm)', yLabel: 'Reflectance (I/F)' });
+  return chartDocument({ ...input, description: `${input.description} Background shading marks approximate wavelength regions, with illustrative boundaries at 380 and 780 nm.` }, shading + axes + chartLine(points.map(p => ({ x: x(p.wavelength), y: y(p.total) })), CHART.neutral) + legend,
+    { className: 'object-reflectance-chart', height: 289 });
 }
 
-export function renderTemperaturePressureChart({
-  id,
-  title,
-  description,
-  metadata,
-  layers,
-  pressureMinimum,
-  pressureMaximum,
-  temperatureMinimum,
-  temperatureMaximum,
-  pressureTicks,
-}: ChartIdentity & {layers:readonly PressureLayer[];pressureMinimum:number;pressureMaximum:number;temperatureMinimum:number;temperatureMaximum:number;pressureTicks:readonly {pressure:number;label:string}[]}) {
-  validateChartIdentity({ id, title, description, metadata });
-  if (!Array.isArray(layers) || layers.length < 2 ||
-      layers.some(({ pressure, temperature }) =>
-        !Number.isFinite(pressure) || pressure <= 0 ||
-        !Number.isFinite(temperature)) ||
-      !Number.isFinite(pressureMinimum) || pressureMinimum <= 0 ||
-      !Number.isFinite(pressureMaximum) || pressureMaximum <= pressureMinimum ||
-      !Number.isFinite(temperatureMinimum) ||
-      !Number.isFinite(temperatureMaximum) ||
-      temperatureMaximum <= temperatureMinimum ||
-      !Array.isArray(pressureTicks) || pressureTicks.length === 0 ||
-      pressureTicks.some(({ pressure, label }) =>
-        !Number.isFinite(pressure) || pressure < pressureMinimum ||
-        pressure > pressureMaximum || typeof label !== "string")) {
-    throw new TypeError("Temperature-pressure chart data is incompatible.");
-  }
-  const profileX = (temperature:number) =>
-    (temperature - temperatureMinimum) /
-    (temperatureMaximum - temperatureMinimum) * PLOT_RIGHT;
-  const profileY = (pressure:number) => 8 +
-    (Math.log10(pressure) - Math.log10(pressureMinimum)) /
-    (Math.log10(pressureMaximum) - Math.log10(pressureMinimum)) * 114;
-  const profilePath = layers.map(({ pressure, temperature }, index) =>
-    `${index === 0 ? "M" : "L"}${profileX(temperature).toFixed(2)} ` +
-    profileY(pressure).toFixed(2)).join(" ");
-  const grid = pressureTicks.map(({ pressure }) =>
-    `<rect x="0" y="${axisY(profileY(pressure))}" width="${CHART_WIDTH}" height="1"/>`
-  ).join(" ");
-  const temperatureMidpoint =
-    (temperatureMinimum + temperatureMaximum) / 2;
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-temperature-pressure-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-temperature-pressure-title ${id}-temperature-pressure-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
-  <title id="${id}-temperature-pressure-title">${escapeXmlText(title)}</title>
-  <desc id="${id}-temperature-pressure-description">${escapeXmlText(description)}</desc>
-  <metadata>${serializeMetadata(metadata)}</metadata>
-  <g fill="${GRID_COLOR}" fill-opacity="${GRID_OPACITY}" shape-rendering="crispEdges">${grid}</g>
-  <g transform="${CHART_CONTENT_TRANSFORM}">
-  <g fill="${LABEL_COLOR}" opacity=".65">
-    <text x="0" y="141">temperature (K)</text>
-    <text x="${PLOT_RIGHT / 2}" y="141" text-anchor="middle">${temperatureMidpoint}</text>
-    <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${temperatureMaximum}</text>
-  </g>
-  <path class="object-chart-line" d="${profilePath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
-  </g>
-</svg>
-`;
+export function renderTemperaturePressureChart(input: ChartIdentity & {
+  layers: readonly PressureLayer[]; pressureMinimum: number; pressureMaximum: number; temperatureMinimum: number; temperatureMaximum: number;
+  pressureTicks: readonly { pressure: number; label: string }[];
+}) {
+  const { layers, pressureMinimum, pressureMaximum, temperatureMinimum, temperatureMaximum, pressureTicks } = input;
+  if (!Array.isArray(layers) || layers.length < 2 || !(pressureMinimum > 0 && pressureMaximum > pressureMinimum && temperatureMaximum > temperatureMinimum) ||
+      layers.some(p => !Number.isFinite(p.pressure) || !Number.isFinite(p.temperature) || p.pressure < pressureMinimum || p.pressure > pressureMaximum ||
+        p.temperature < temperatureMinimum || p.temperature > temperatureMaximum) || !Array.isArray(pressureTicks) || !pressureTicks.length ||
+      pressureTicks.some(t => t.pressure < pressureMinimum || t.pressure > pressureMaximum || !Number.isFinite(t.pressure) || typeof t.label !== 'string'))
+    throw new TypeError('Temperature-pressure chart data is incompatible.');
+  const x = linearScale(temperatureMinimum, temperatureMaximum, CHART.left, CHART.right);
+  const logY = linearScale(Math.log(pressureMinimum), Math.log(pressureMaximum), CHART.top, CHART.bottom), y = (p: number) => logY(Math.log(p));
+  const axes = chartAxes({ x, y, xTicks: ticks([temperatureMinimum, (temperatureMinimum + temperatureMaximum) / 2, temperatureMaximum]),
+    yTicks: pressureTicks.map(t => ({ value: t.pressure, label: t.label })), xLabel: 'Temperature (K)', yLabel: 'Pressure (bar)', direction: 'Higher atmosphere ↑' });
+  return chartDocument(input, axes + chartLine(layers.map(p => ({ x: x(p.temperature), y: y(p.pressure) }))) +
+    chartNotes([`Atmospheric model · ${layers.length} layers.`]), { className: 'object-temperature-pressure-chart' });
 }
 
-export function renderPhotometricPhaseChart({
-  id,
-  title,
-  description,
-  metadata,
-  points,
-}: ChartIdentity & {points:readonly PhasePoint[]}) {
-  validateChartIdentity({ id, title, description, metadata });
-  if (!Array.isArray(points) || points.length < 3 ||
-      points.some(({ phaseAngle, dimmingMagnitude }, index) =>
-        !Number.isFinite(phaseAngle) || phaseAngle < 0 || phaseAngle > 180 ||
-        !Number.isFinite(dimmingMagnitude) ||
-        index > 0 && phaseAngle <= points[index - 1].phaseAngle) ||
-      points[0].phaseAngle !== 0) {
-    throw new TypeError("Photometric phase chart data is incompatible.");
-  }
-  const lastAngle = points[points.length-1].phaseAngle;
-  const dimming = points.map(({ dimmingMagnitude }) => dimmingMagnitude);
-  const minimum = Math.min(...dimming);
-  const maximum = Math.max(...dimming);
-  if (maximum - minimum <= 0) {
-    throw new RangeError("Photometric phase chart has no brightness range.");
-  }
-  const pointPath = points.map(({ phaseAngle, dimmingMagnitude }, index) => {
-    const x = phaseAngle / lastAngle * PLOT_RIGHT;
-    const y = 8 + (dimmingMagnitude - minimum) / (maximum - minimum) * 98;
-    return `${index === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`;
-  }).join(" ");
-  const midpoint = Math.round(lastAngle / 2);
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-photometric-phase-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-photometric-phase-title ${id}-photometric-phase-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
-  <title id="${id}-photometric-phase-title">${escapeXmlText(title)}</title>
-  <desc id="${id}-photometric-phase-description">${escapeXmlText(description)}</desc>
-  <metadata>${serializeMetadata(metadata)}</metadata>
-  <g fill="${GRID_COLOR}" fill-opacity="${GRID_OPACITY}" shape-rendering="crispEdges">
-    <rect x="0" y="${axisY(8)}" width="${CHART_WIDTH}" height="1"/>
-    <rect x="0" y="${axisY(57)}" width="${CHART_WIDTH}" height="1"/>
-  </g>
-  <g transform="${CHART_CONTENT_TRANSFORM}">
-  <g fill="${LABEL_COLOR}" opacity=".65">
-    <text x="0" y="141">phase angle (°)</text>
-    <text x="${PLOT_RIGHT / 2}" y="141" text-anchor="middle">${midpoint}</text>
-    <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${lastAngle}</text>
-  </g>
-  <path class="object-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
-  </g>
-</svg>
-`;
+export function renderPhotometricPhaseChart(input: ChartIdentity & { points: readonly PhasePoint[] }) {
+  const { points } = input;
+  if (!Array.isArray(points) || points.length < 3 || points[0].phaseAngle !== 0 || points.some((p, i) => !Number.isFinite(p.phaseAngle) || p.phaseAngle < 0 || p.phaseAngle > 180 ||
+      !Number.isFinite(p.dimmingMagnitude) || i > 0 && p.phaseAngle <= points[i - 1].phaseAngle)) throw new TypeError('Photometric phase chart data is incompatible.');
+  const last = points.at(-1)!.phaseAngle, values = points.map(p => p.dimmingMagnitude), minimum = Math.min(...values), maximum = Math.max(...values);
+  if (!(maximum > minimum)) throw new RangeError('Photometric phase chart has no brightness range.');
+  const x = linearScale(0, last, CHART.left, CHART.right), y = linearScale(minimum, maximum, CHART.top, CHART.bottom);
+  const axes = chartAxes({ x, y, xTicks: ticks([0, last / 2, last]), yTicks: ticks([0, maximum / 2, maximum]),
+    xLabel: 'Phase angle (°)', yLabel: 'V-band dimming (mag)', direction: 'Fainter ↓' });
+  return chartDocument(input, axes + chartLine(points.map(p => ({ x: x(p.phaseAngle), y: y(p.dimmingMagnitude) }))) +
+    chartNotes(['Relative to phase angle 0°.']), { className: 'object-photometric-phase-chart' });
 }
 
-/** A time series of relative brightness: hours from the first sample across, the change from the median in parts per million up,
- * with a short label over each named event (a transit or an eclipse). */
-export function renderLightCurveChart({ id, title, description, metadata, points, events, axisLabel }:
-  ChartIdentity & { points:readonly LightCurvePoint[];events:readonly LightCurveEvent[];axisLabel:string }) {
-  validateChartIdentity({ id, title, description, metadata });
-  if (!Array.isArray(points) || points.length < 3 || typeof axisLabel !== "string" || !axisLabel ||
-      points.some(({ hours, flux }, index) => !Number.isFinite(hours) || !Number.isFinite(flux) || index > 0 && hours <= points[index - 1]!.hours) ||
-      points[0]!.hours !== 0 || !Array.isArray(events) || events.some(({ hours, label }) => !Number.isFinite(hours) || typeof label !== "string" || !label)) {
-    throw new TypeError("Light curve chart data is incompatible.");
-  }
-  const last = points.at(-1)!.hours;
-  const fluxes = points.map(({ flux }) => flux), minimum = Math.min(...fluxes), maximum = Math.max(...fluxes);
-  if (maximum - minimum <= 0) throw new RangeError("Light curve chart has no brightness range.");
-  const x = (hours:number) => hours / last * PLOT_RIGHT, y = (flux:number) => 18 + (maximum - flux) / (maximum - minimum) * 88;
-  const pointPath = points.map(({ hours, flux }, index) => `${index === 0 ? "M" : "L"}${x(hours).toFixed(2)} ${y(flux).toFixed(2)}`).join(" ");
-  const eventLabels = events.filter(({ hours }) => hours >= 0 && hours <= last)
-    .map(({ hours, label }) => `<text x="${x(hours).toFixed(2)}" y="11" text-anchor="middle">${escapeXmlText(label)}</text>`).join("\n    ");
-  const midpoint = Math.round(last / 2);
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="object-light-curve-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-light-curve-title ${id}-light-curve-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
-  <title id="${id}-light-curve-title">${escapeXmlText(title)}</title>
-  <desc id="${id}-light-curve-description">${escapeXmlText(description)}</desc>
-  <metadata>${serializeMetadata(metadata)}</metadata>
-  <g fill="${GRID_COLOR}" fill-opacity="${GRID_OPACITY}" shape-rendering="crispEdges">
-    <rect x="0" y="${axisY(18)}" width="${CHART_WIDTH}" height="1"/>
-    <rect x="0" y="${axisY(106)}" width="${CHART_WIDTH}" height="1"/>
-  </g>
-  <g transform="${CHART_CONTENT_TRANSFORM}">
-  <g fill="${LABEL_COLOR}" opacity=".65">
-    <text x="0" y="141">${escapeXmlText(axisLabel)}</text>
-    <text x="${x(midpoint).toFixed(2)}" y="141" text-anchor="middle">${midpoint}</text>
-    <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${Math.round(last)}</text>
-    ${eventLabels}
-  </g>
-  <path class="object-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
-  </g>
-</svg>
-`;
-}
-
-function validateChartIdentity({ id, title, description, metadata }: ChartIdentity) {
-  if (!/^[a-z][a-z0-9-]*$/u.test(id) ||
-      typeof title !== "string" || title.length === 0 ||
-      typeof description !== "string" || description.length === 0 ||
-      !metadata || typeof metadata !== "object" || Array.isArray(metadata)) {
-    throw new TypeError("Scientific chart identity is incompatible.");
-  }
-}
-
-function axisY(value:number) {
-  return Math.round(value * CHART_SCALE_Y);
-}
-
-function serializeMetadata(metadata:Record<string,unknown>) {
-  let serialized;
-  try {
-    serialized = JSON.stringify(metadata);
-  } catch (cause) {
-    throw new TypeError("Scientific chart metadata is not serializable.", { cause });
-  }
-  if (typeof serialized !== "string") {
-    throw new TypeError("Scientific chart metadata is not serializable.");
-  }
-  return escapeXmlText(serialized);
-}
-
-function escapeXmlText(value:unknown) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+/** Preserve the supplied binned values and event positions; this renderer performs no time-series reduction. */
+export function renderLightCurveChart(input: ChartIdentity & { points: readonly LightCurvePoint[]; events: readonly LightCurveEvent[]; axisLabel: string }) {
+  const { points, events, axisLabel } = input;
+  if (!Array.isArray(points) || points.length < 3 || points[0].hours !== 0 || typeof axisLabel !== 'string' || !axisLabel ||
+      points.some((p, i) => !Number.isFinite(p.hours) || !Number.isFinite(p.flux) || i > 0 && p.hours <= points[i - 1].hours) ||
+      !Array.isArray(events) || events.some(e => !Number.isFinite(e.hours) || typeof e.label !== 'string' || !e.label)) throw new TypeError('Light curve chart data is incompatible.');
+  const last = points.at(-1)!.hours, values = points.map(p => p.flux), minimum = Math.min(...values), maximum = Math.max(...values);
+  if (!(maximum > minimum)) throw new RangeError('Light curve chart has no brightness range.');
+  const x = linearScale(0, last, CHART.left, CHART.right), y = linearScale(minimum, maximum, CHART.bottom, CHART.top);
+  const axes = chartAxes({ x, y, xTicks: ticks([0, last / 2, last]), yTicks: ticks([...new Set([minimum, ...(minimum < 0 && maximum > 0 ? [0] : [(minimum + maximum) / 2]), maximum])]), xLabel: axisLabel, yLabel: 'Relative flux (ppm)' });
+  const markers = events.filter(e => e.hours >= 0 && e.hours <= last).map(e => `<path d="M${coordinate(x(e.hours))} 29V203" stroke="${CHART.amber}" stroke-opacity=".3" stroke-dasharray="2 3"/><text x="${coordinate(x(e.hours))}" y="25" text-anchor="middle" fill="${CHART.amber}">${escapeXml(e.label)}</text>`).join('');
+  return chartDocument(input, axes + markers + chartLine(points.map(p => ({ x: x(p.hours), y: y(p.flux) }))) +
+    chartNotes(['Relative to the median flux.', 'Dashed lines mark the named events.']), { className: 'object-light-curve-chart', height: 290 });
 }

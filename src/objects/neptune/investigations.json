@@ -215,6 +215,48 @@
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
       ]
+    },
+    {
+      "id": "opal-dated-visible-maps",
+      "subject": "Dated Hubble OPAL visible-colour sequence (9 rotations)",
+      "status": "included",
+      "finding": "One publisher RGB composite per included cycle, component FITS coverage, source-backed map frame and observation dates. Gray grid preserves missing coverage. Current scene lighting and rings remain a presentation, not the historical observing geometry. See the Hubble dates section of the README.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-24",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-25",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-26",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-27",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-28",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-29",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-30",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-31",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-32",
+        "https://github.com/layoutit/css.earth/blob/323a8c2f52803627462db448e52ccfa3c073363d/src/objects/neptune/README.md#hubble-dates"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "323a8c2f52803627462db448e52ccfa3c073363d"
+        }
+      ]
+    },
+    {
+      "id": "opal-2015-2016-dated-maps",
+      "subject": "OPAL Cycles 22–23 dated maps",
+      "status": "deferred",
+      "finding": "The TIFF and component FITS maps were acquired and inspected. Their red-channel Minnaert coefficient is 0.55 rather than the existing visible bank's 0.50; the 2015 map also starts at 180 degrees west longitude.",
+      "revisitWhen": "A separately prepared lighting bank for the older red-channel coefficient is in scope.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-22",
+        "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-23",
+        "https://github.com/layoutit/css.earth/blob/323a8c2f52803627462db448e52ccfa3c073363d/src/objects/neptune/README.md#hubble-dates"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "323a8c2f52803627462db448e52ccfa3c073363d"
+        }
+      ]
     }
   ]
 }

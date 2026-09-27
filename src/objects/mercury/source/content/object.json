@@ -311,7 +311,7 @@
       "open": true,
       "src": "/scenes/mercury/mercury-surface-albedo.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Area-weighted global mean MESSENGER MASCS reflectance from 350 to 1000 nanometers, prepared from 60,704 usable one-degree cells per channel.",
       "source": {
         "id": "mascs-spectrum",
@@ -325,7 +325,7 @@
       "open": false,
       "src": "/scenes/mercury/mercury-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Mercury V-band brightness change across phase angles from zero to 170 degrees.",
       "source": {
         "id": "scientific-charts",

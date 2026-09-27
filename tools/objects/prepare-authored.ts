@@ -366,6 +366,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     objectDirectory: write ? objectDirectory : outputDirectory,
+    preparedDirectory: outputDirectory,
     values: [raster, celestial, scene, runtime, content,
       // Observed surfaces and radial layers publish their own files; the manifest reads them by url, as it reads every other asset.
       ...[observed, radial].filter(entry => entry !== null).map(entry => {

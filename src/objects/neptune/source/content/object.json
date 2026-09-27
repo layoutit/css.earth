@@ -213,6 +213,195 @@
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
         "notes": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 57° N, where the map is not fully observed, boundary continuation supplies an illustrative cap, not measured spectral coverage."
+      },
+      {
+        "id": "visible-2017a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2017-10-06"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2017a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2017a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2017a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2017-10-06",
+        "notes": "Hubble OPAL 2017a, starting 2017-10-06. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2017a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-24"
+        }
+      },
+      {
+        "id": "visible-2018a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2018-09-09"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2018a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2018a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2018a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2018-09-09",
+        "notes": "Hubble OPAL 2018a, starting 2018-09-09. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2018a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-25"
+        }
+      },
+      {
+        "id": "visible-2019a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2019-09-28"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2019a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2019a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2019a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2019-09-28",
+        "notes": "Hubble OPAL 2019a, starting 2019-09-28. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2019a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-26"
+        }
+      },
+      {
+        "id": "visible-2020a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2020-08-19"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2020a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2020a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2020a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2020-08-19",
+        "notes": "Hubble OPAL 2020a, starting 2020-08-19. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2020a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-27"
+        }
+      },
+      {
+        "id": "visible-2021a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2021-09-06"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2021a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2021a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2021a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2021-09-06",
+        "notes": "Hubble OPAL 2021a, starting 2021-09-06. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2021a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-28"
+        }
+      },
+      {
+        "id": "visible-2022a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2022-09-18"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2022a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2022a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2022a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2022-09-18",
+        "notes": "Hubble OPAL 2022a, starting 2022-09-18. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2022a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-29"
+        }
+      },
+      {
+        "id": "visible-2023a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2023-09-22"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2023a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2023a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2023a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2023-09-22",
+        "notes": "Hubble OPAL 2023a, starting 2023-09-22. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2023a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-30"
+        }
+      },
+      {
+        "id": "visible-2025a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2025-06-28"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2025a.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2025a@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2025a@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2025-06-28",
+        "notes": "Hubble OPAL 2025a, starting 2025-06-28. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2025a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-31"
+        }
+      },
+      {
+        "id": "visible-2025b",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2025-08-24"
+        },
+        "thumbnail": "/scenes/neptune/neptune-lens-visible-2025b.webp",
+        "surface": "/scenes/neptune/neptune-surface-visible-2025b@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-visible-2025b@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2025-08-24",
+        "notes": "Hubble OPAL 2025b, starting 2025-08-24. Published F467M/F547M/F657N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component. Compare cloud patterns; release colour processing varies. The scene lighting follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2025b-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-32"
+        }
       }
     ]
   },
@@ -245,7 +434,7 @@
       "open": true,
       "src": "/scenes/neptune/neptune-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Neptune from 350 to 1000 nanometers, showing strong methane absorption toward the near infrared.",
       "titleKey": "reflectance",
       "source": {
@@ -259,7 +448,7 @@
       "open": false,
       "src": "/scenes/neptune/neptune-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Neptune V-band brightness change across phase angles from zero to 133 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -272,7 +461,7 @@
       "open": false,
       "src": "/scenes/neptune/neptune-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Neptune atmospheric temperature from 100 bar to 0.1 microbar in the NASA PSG vertical atmosphere model.",
       "titleKey": "temperaturePressure",
       "source": {

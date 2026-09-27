@@ -213,6 +213,26 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | A default camera angle, a body orientation or an off-limb plate turn | Nothing authored: `packages/bake/src/objects/scene/default-camera.ts` derives the camera (photograph frames, a self-luminous body facing the Sun, or the lit design pose); the world-navigation stage solves the system node so the drawn body is in the ecliptic presentation frame; `prepareSkyNorthScreenAngleDegrees` turns the plate. Recipes that state `initialScenePitchDegrees`, `defaultControlYawDegrees` or `offLimb.rotationDegrees` are refused | Amalthea (photo mosaic), Betelgeuse (star and plate), Callisto (lit pose) | `tools/objects/default-view/geometry.mts` measures the result through the runtime camera math | The world-navigation stage owns the pose: `node tools/prepare/cli/prepare-object-json.mts --keep-bindings` re-applies a rule change to every object in seconds; the five planet lanes bake lighting at the rule's pitch and re-bake only when it changes |
 | The default camera of a photograph lens on the planet route | `tools/objects/default-view/geometry.mts` (`assertDefaultViewFacesLens`, run by `prepare-authored` for every `surface-observation` lens) | Betelgeuse `default-view.test.mts` | The runtime's scene matrix and `worldCameraFromPresentation` give the sub-camera point and the screen angle of any direction without a browser | Preparation refuses a default view more than 25 degrees from the lens's sub-observer point; the test pins the browser-measured angles |
 
+For scientific charts, start with the [recipe catalog](../../../../docs/chart-recipes.md).
+Reuse its six prepared families and shared axes, typography and palette. Give
+every axis a quantity, units and numeric ticks. Standalone curves and measured
+points are neutral off-white; reserve color for multiple series and annotations.
+Separate curve keys from shaded regions. Only draw
+uncertainty when the source supplies it. Inspect the mounted panel at desktop
+and mobile widths, including labels, legends and the image's intrinsic size.
+
+For deposited temperature–pressure retrievals, use the
+[reusable chart recipe](../../../../docs/retrieved-profile-charts.md). The shared chart step accepts
+`kind: retrieved-profile` through `tools/objects/charts/retrieved-profile.mts`.
+WASP-18b's `source/content/charts.json` binds each table's native pressure unit,
+column order, row count and absolute credible bounds. The preparer keeps native
+samples within the displayed range, interpolates only boundary crossings in
+log-pressure, refuses extrapolation or clipped intervals, and emits one SVG
+image for the shared panel. Check independent values against the published
+figure as well as parser invariants; label these as model retrievals and state
+which pressures the observation constrains. `retrieved-profile.test.mts` owns
+those checks. A spectrum or phase curve alone does not establish local profiles.
+
 For `controlled-shape-color`, each band set is one observing triplet. A point is
 colored only where all three of its bands qualify, and band sets compete for a
 point like the frames of a monochrome mosaic. Level matching scales the three

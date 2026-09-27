@@ -74,6 +74,294 @@
       "expectedPath": "atmosphere/psg-neptune-r240-rif.txt",
       "selector": "numeric-lines",
       "rowCount": 253
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2017a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2018a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2019a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2020a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2021a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2022a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2023a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f657n_v1_globalmap.fits"
     }
   ]
 }

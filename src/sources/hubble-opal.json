@@ -1,0 +1,35 @@
+{
+  "id": "hubble-opal",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hubble Outer Planet Atmospheres Legacy global maps",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.17909/T9G593"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/hlsp/opal",
+      "label": "OPAL releases"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/uranus/source/preparation/observations.json",
+      "locator": "/lenses"
+    },
+    {
+      "path": "src/objects/neptune/source/preparation/observations.json",
+      "locator": "/lenses"
+    },
+    {
+      "path": "src/objects/saturn/source/preparation/observations.json",
+      "locator": "/lenses"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

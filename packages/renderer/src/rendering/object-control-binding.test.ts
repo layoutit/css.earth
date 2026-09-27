@@ -1,6 +1,7 @@
-import { expect, test } from 'vitest';
+import { afterEach, expect, test, vi } from 'vitest';
 import { parseHTML } from 'linkedom';
-import { publishDatasetSelection } from './object-control-binding.js';
+import { createObjectControlBinding, publishDatasetSelection } from './object-control-binding.js';
+import type { ObjectSelectionState } from './object-selection-runtime.js';
 
 test('a collapsed dataset preview follows the listed member of a selected sequence', () => {
   const document = parseHTML(`<section class="object-lenses">
@@ -27,4 +28,78 @@ test('a collapsed dataset preview follows the listed member of a selected sequen
   expect(selected()).toEqual(['other']);
   expect(root.querySelector<HTMLSelectElement>('select')?.value).toBe('other');
   expect(details.map(({ panel }) => panel.hidden)).toEqual([true, true, false]);
+});
+
+afterEach(() => vi.useRealTimers());
+
+function sequence() {
+  const ids = ['first', 'last', 'other'];
+  const { document, Event } = parseHTML(`<main></main><section class="object-information-panel"><div class="object-lenses">
+    <form data-dataset-form>${ids.map(id => `<div data-lens-option ${id !== 'other' ? 'data-step-group="dates"' : ''}>
+      <button type="submit" name="dataset" value="${id}" aria-controls="details-${id}">${id}</button></div>`).join('')}</form></div>
+    ${ids.map(id => `<div id="details-${id}" data-lens-details="${id}">${id !== 'other' ?
+      '<button type="button" data-dataset-play="dates" disabled>Play</button>' : ''}</div>`).join('')}
+    </section>`);
+  const form = document.querySelector('form')!;
+  // Linkedom does not implement form.elements or button.value.
+  for (const button of form.querySelectorAll('button')) button.value = button.getAttribute('value')!;
+  Object.defineProperty(form, 'elements', { value: [...form.querySelectorAll('button')] });
+  let state: ObjectSelectionState = { desired: { lensId: 'last' }, committed: { lensId: 'last' }, committedBy: null,
+    plan: null, pending: false, loadingMaterial: false, ready: true, error: null, viewRevision: null };
+  const actions: string[] = [];
+  const binding = createObjectControlBinding({ stage: document.querySelector('main')!,
+    controls: { lenses: { defaultLens: 'last', controls: ids.map(id => ({ id, label: id })) }, settings: null },
+    initialSelection: state.desired, getState: () => state,
+    onAction(action) {
+      if (action.kind !== 'lens') throw new Error('Expected a dataset action');
+      actions.push(action.id);
+      state = { ...state, desired: { lensId: action.id }, pending: true };
+      binding.publish();
+    }, onError: error => { throw error; } });
+  binding.setReady();
+  const click = (selector: string) => document.querySelector(selector)!.dispatchEvent(new Event('click', { cancelable: true }));
+  return { binding, document, actions, click,
+    commit() { state = { ...state, committed: state.desired, pending: false }; binding.publish(); },
+    hide() { Object.defineProperty(document, 'hidden', { value: true }); document.dispatchEvent(new Event('visibilitychange')); } };
+}
+
+test('sequence playback wraps, waits for the pending map, and pauses without another selection', () => {
+  vi.useFakeTimers();
+  const h = sequence();
+  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Pause');
+  vi.advanceTimersByTime(1500);
+  expect(h.actions).toEqual(['first']);
+  vi.advanceTimersByTime(10000);
+  expect(h.actions).toEqual(['first']);
+  h.commit();
+  vi.advanceTimersByTime(1499);
+  expect(h.actions).toEqual(['first']);
+  vi.advanceTimersByTime(1);
+  expect(h.actions).toEqual(['first', 'last']);
+  h.commit();
+  h.click('#details-last [data-dataset-play]');
+  vi.advanceTimersByTime(10000);
+  expect(h.actions).toEqual(['first', 'last']);
+  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
+  h.binding.publish();
+  expect(vi.getTimerCount()).toBe(0);
+  h.click('[value="other"]'); h.commit();
+  h.click('[value="last"]'); h.commit();
+  vi.advanceTimersByTime(1500);
+  expect(h.actions.at(-1)).toBe('first');
+  h.binding.destroy();
+});
+
+test.each(['manual', 'hidden', 'unready', 'destroy'] as const)('playback stops on %s', reason => {
+  vi.useFakeTimers();
+  const h = sequence();
+  if (reason === 'manual') { h.click('[value="other"]'); h.commit(); }
+  if (reason === 'hidden') h.hide();
+  if (reason === 'unready') h.binding.setReady(false);
+  if (reason === 'destroy') h.binding.destroy();
+  const actions = [...h.actions];
+  vi.advanceTimersByTime(10000);
+  expect(h.actions).toEqual(actions);
+  expect(vi.getTimerCount()).toBe(0);
+  h.binding.destroy();
 });

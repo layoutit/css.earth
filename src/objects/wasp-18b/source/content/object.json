@@ -1707,7 +1707,21 @@
     "titleKey": "settings",
     "controls": []
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "wasp-18b-hotspot-profile",
+      "titleKey": "temperaturePressure",
+      "src": "/scenes/wasp-18b/wasp-18b-hotspot-profile.svg",
+      "width": 306,
+      "height": 371,
+      "alt": "Two atmospheric retrievals of the JWST hotspot spectrum compared with the HyDRA retrieval of the whole-dayside spectrum. Lines show median temperatures and shaded bands the published one-sigma credible intervals. Pressure increases downward on a logarithmic axis; lower pressure is higher atmosphere. Dashed horizontal lines mark the approximately 0.1–1 bar range probed by the observation. The plotted profiles are model inferences, not direct temperature measurements.",
+      "source": {
+        "id": "wasp-18b-hydra-hotspot-profile",
+        "path": "../manifest.json",
+        "url": "https://www.nature.com/articles/s41550-025-02666-9/figures/4"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",
