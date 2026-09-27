@@ -1,3 +1,4 @@
+import { isSharedInputSurface, bindInputEvent } from './shared-input-surface.js';
 import type { SceneLifetime } from "@cssearth/engine";
 interface CameraInputListeners { inputSurface: HTMLElement; windowTarget: Window; lifetime: SceneLifetime;
   guardNative<Args extends unknown[], Result>(callback: (...args: Args) => Result): (...args: Args) => Result | undefined;
@@ -9,8 +10,7 @@ export function bindCameraInputListeners({ inputSurface, windowTarget, lifetime,
   onPointerDown, onPointerMove, endPointer, onMouseDown, onDoubleClick, onWheel, onMotionCommand }: CameraInputListeners): void {
     const listen = <K extends keyof HTMLElementEventMap>(name: K, callback: (event: HTMLElementEventMap[K]) => void, options?: AddEventListenerOptions) => {
       const guarded = guardNative(callback);
-      lifetime.onDispose(() => inputSurface.removeEventListener(name, guarded));
-      inputSurface.addEventListener(name, guarded, options);
+      lifetime.onDispose(bindInputEvent(inputSurface, `camera:${name}`, inputSurface, name, guarded, options));
     };
     listen("pointerdown", onPointerDown);
     listen("pointermove", onPointerMove);
@@ -20,11 +20,9 @@ export function bindCameraInputListeners({ inputSurface, windowTarget, lifetime,
     listen("mousedown", onMouseDown);
     listen("dblclick", onDoubleClick);
     listen("wheel", onWheel, { passive: false });
-    lifetime.onDispose(() => inputSurface.style.removeProperty("user-select"));
-    lifetime.onDispose(() => inputSurface.style.removeProperty("cursor"));
+    if (!isSharedInputSurface(inputSurface)) lifetime.onDispose(() => inputSurface.style.removeProperty("user-select"));
     for (const [target,type] of [[windowTarget,"keydown"],[inputSurface.ownerDocument,"visibilitychange"]] as const) {
       if (!target?.addEventListener || !target?.removeEventListener) continue;
-      lifetime.onDispose(() => target.removeEventListener(type,onMotionCommand));
-      target.addEventListener(type,onMotionCommand);
+      lifetime.onDispose(bindInputEvent(inputSurface, `camera:${type}`, target, type, onMotionCommand));
     }
 }

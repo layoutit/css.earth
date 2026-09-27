@@ -1,3 +1,4 @@
+import { retainInputSurface } from '@cssearth/renderer';
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
 import { selectSceneFeature } from './scene-feature.mts';
@@ -73,6 +74,8 @@ export function createSceneRouter({
   reportError = (error) => console.error(error),
   persistentWorldContext,
 }: RouterOptions) {
+  const sharedInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
+  const releaseInput = sharedInput ? retainInputSurface(sharedInput) : () => {};
   const scenes = createSceneSessions();
   let mountTask: Promise<boolean | undefined> | null = null;
   const preferences = createWorldPreferences({ getWorld: () => world.current,
@@ -92,7 +95,7 @@ export function createSceneRouter({
   const subject = (): SceneSubject => context?.selection.current ?? { kind: 'object', objectId };
   const contentTransport = createNavigationContent({ documentTarget, windowTarget });
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
-  let reducedMotionActive = false;
+  let reducedMotionActive = reducedMotion?.matches === true;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
     if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
@@ -138,6 +141,8 @@ export function createSceneRouter({
   // These survive scene teardown so a persisted document can restore itself.
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
+  documentTarget.addEventListener("visibilitychange", syncPlayback);
+  reducedMotion?.addEventListener("change", syncReducedMotion);
   mountTask = mountApplication();
   // The iPad trace harness drives this same navigation path as the shell. Keep
   // the control out of ordinary builds; a performance build opts in explicitly.
@@ -160,6 +165,9 @@ export function createSceneRouter({
       if (destroyed) return;
       destroyed = true;
       destroyActiveScene();
+      releaseInput();
+      documentTarget.removeEventListener("visibilitychange", syncPlayback);
+      reducedMotion?.removeEventListener("change", syncReducedMotion);
       cameraMotion.cancel();
       context?.navigation.destroy();
       world.destroy();
@@ -176,13 +184,6 @@ export function createSceneRouter({
     const session = scenes.start({ objectId, request, url: request?.url ?? windowTarget.location?.href,
       onFailure: fail, onCleanupError: report });
     try {
-      documentTarget.addEventListener("visibilitychange", syncPlayback);
-      session.own(() =>
-        documentTarget.removeEventListener("visibilitychange", syncPlayback));
-      reducedMotionActive = reducedMotion?.matches === true;
-      reducedMotion?.addEventListener("change", syncReducedMotion);
-      session.own(() =>
-        reducedMotion?.removeEventListener("change", syncReducedMotion));
       publication.publish();
       const requestMotion = (next: boolean) => {
         if (!scenes.isCurrent(session)) return;

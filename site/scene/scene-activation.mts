@@ -1,3 +1,4 @@
+import { bindInputEvent } from '@cssearth/renderer';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -106,14 +107,14 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         removeRefinementListeners();
         if (isCurrent(session)) mount.refineTextures?.();
       };
-      const removeRefinementListeners = () => {
-        windowTarget.removeEventListener('pointerdown', releaseRefinement);
-        windowTarget.removeEventListener('wheel', releaseRefinement);
-        windowTarget.removeEventListener('keydown', releaseRefinement);
-      };
-      windowTarget.addEventListener('pointerdown', releaseRefinement, { once: true });
-      windowTarget.addEventListener('wheel', releaseRefinement, { once: true, passive: true });
-      windowTarget.addEventListener('keydown', releaseRefinement, { once: true });
+      const surface = windowTarget.document.querySelector<HTMLElement>('.object-input-surface');
+      const releases = ['pointerdown', 'wheel', 'keydown'].map(type => {
+        if (surface) return bindInputEvent(surface, `refinement:${type}`, windowTarget, type, releaseRefinement,
+          type === 'wheel' ? { passive: true } : {});
+        windowTarget.addEventListener(type, releaseRefinement);
+        return () => windowTarget.removeEventListener(type, releaseRefinement);
+      });
+      const removeRefinementListeners = () => { for (const release of releases) release(); };
       session.own(removeRefinementListeners);
     }
     shell.setCamera?.(mount);

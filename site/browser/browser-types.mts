@@ -14,7 +14,8 @@ export function requiredElement<T extends Element = HTMLElement>(root: ParentNod
 }
 export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
   if (panel.hidden !== hidden) panel.hidden = hidden;
-  const inert = hidden || panel.getAttribute('aria-busy') === 'true';
+  // Loading gates belong to the card's individual controls, not its retained container.
+  const inert = hidden;
   if (panel.hasAttribute('inert') !== inert) panel.toggleAttribute('inert', inert);
 }
 

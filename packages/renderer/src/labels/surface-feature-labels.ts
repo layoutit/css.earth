@@ -1,3 +1,4 @@
+import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
 import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
@@ -153,10 +154,12 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     clearSelection();
   };
   const onKey = (event: KeyboardEvent) => { if (labelsEnabled()) requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
-  windowTarget.addEventListener('pointerdown', onPress, { capture: true });
-  inputSurface.addEventListener('wheel', onWheel, { passive: true });
-  windowTarget.addEventListener('click', onSurfaceClick);
-  windowTarget.addEventListener('keydown', onKey);
+  const releaseInput = [
+    bindInputEvent(inputSurface, 'features:pointerdown', windowTarget, 'pointerdown', onPress, { capture: true }),
+    bindInputEvent(inputSurface, 'features:wheel', inputSurface, 'wheel', onWheel, { passive: true }),
+    bindInputEvent(inputSurface, 'features:click', windowTarget, 'click', onSurfaceClick),
+    bindInputEvent(inputSurface, 'features:keydown', windowTarget, 'keydown', onKey),
+  ];
   lifetime.onDispose(destroy);
   const occlusion = labelOcclusionFor(host.ownerDocument);
   lifetime.onDispose(occlusion.subscribe(() => refresh()));
@@ -413,10 +416,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
     document.body.removeEventListener('objectsurfacelabelschange', onLabelsChange);
-    windowTarget!.removeEventListener('pointerdown', onPress, { capture: true });
-    inputSurface.removeEventListener('wheel', onWheel);
-    windowTarget!.removeEventListener('click', onSurfaceClick);
-    windowTarget!.removeEventListener('keydown', onKey);
+    for (const release of releaseInput) release();
     entries.forEach((entry, index) => { entry.element.removeEventListener('click', activations[index]!); if (entry.hideTimer !== null) clearTimeout(entry.hideTimer); });
     picking.remove(root);
     fader.destroy();

@@ -1,3 +1,4 @@
+import { bindInputEvent } from './shared-input-surface.js';
 import type { RuntimePolicy, WheelInputKind, WheelZoomInertia, WheelZoomPinch } from './runtime-policy.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
@@ -251,12 +252,12 @@ export function createPreparedWheelZoomControls({
     else setMotion({ kind: 'dolly', frame: requestFrame(animate), previousTimestamp: event.timeStamp, targetDistance, expiresAt });
   };
   const guardedWheel = guard(onWheel);
-  inputSurface.addEventListener("wheel", guardedWheel, { passive:false });
+  const releaseWheel = bindInputEvent(inputSurface, "zoom:wheel", inputSurface, "wheel", guardedWheel, { passive: false });
   function destroy() {
     if (disposed) return;
     disposed = true;
     stop();
-    inputSurface.removeEventListener("wheel", guardedWheel);
+    releaseWheel();
   }
   return Object.freeze({
     stop,

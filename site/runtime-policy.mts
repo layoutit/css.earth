@@ -1,3 +1,4 @@
+import { isSharedInputSurface } from '@cssearth/renderer';
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./browser/shell-contract-types.mts";
 
@@ -180,6 +181,8 @@ export const bindResponsiveOrbitPolicy: RuntimePolicy["bindResponsiveOrbitPolicy
     if (destroyed) return;
     // No layout scrolls the page over the scene any more, so wheels always zoom.
     controls.update({ wheel: true });
+    // The retained shell declares touch-action in its stylesheet.
+    if (isSharedInputSurface(inputSurface)) return;
     if (mediaQuery.matches) {
       inputSurface.style.touchAction = MOBILE_TOUCH_ACTION;
     } else {
@@ -201,7 +204,7 @@ export const bindResponsiveOrbitPolicy: RuntimePolicy["bindResponsiveOrbitPolicy
     destroyed = true;
     const errors = [error];
     try { mediaQuery.removeEventListener("change", onChange); } catch (failure) { errors.push(failure); }
-    try { inputSurface.style.removeProperty("touch-action"); } catch (failure) { errors.push(failure); }
+    try { if (!isSharedInputSurface(inputSurface)) inputSurface.style.removeProperty("touch-action"); } catch (failure) { errors.push(failure); }
     if (errors.length > 1) throw new AggregateError(errors, errorMessage(error), { cause: error });
     throw error;
   }
@@ -215,7 +218,7 @@ export const bindResponsiveOrbitPolicy: RuntimePolicy["bindResponsiveOrbitPolicy
       if (destroyed) return;
       destroyed = true;
       mediaQuery.removeEventListener("change", onChange);
-      inputSurface.style.removeProperty("touch-action");
+      if (!isSharedInputSurface(inputSurface)) inputSurface.style.removeProperty("touch-action");
   }
 };
 

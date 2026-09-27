@@ -44,6 +44,9 @@ export function mountObjectShell({
   let contentLifetime: SceneLifetime | null = null;
   let minimapController: ReturnType<typeof createSurfaceMinimap>;
   let viewReadout: ReturnType<typeof createViewReadout>;
+  let boundCardMaps: HTMLElement[] = [];
+  let surfaceReader: ReturnType<typeof createSurfaceMapReader>;
+  let releaseArrivalControls = () => {};
   let navigationTransition: (ShellNavigationTransition & { cardView: 'detail' | 'overview' | null;
     cardSubject: 'body' | 'satellite-system' | null }) | null = null;
   let camera: ShellCamera | null = null;
@@ -119,6 +122,10 @@ export function mountObjectShell({
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime,
       () => `${objectId}:${selectionKey(objectBrowser.readSubject())}`));
     settingsController = own(createSettingsController(documentTarget, windowTarget, preferences, lifetime));
+    surfaceReader = own(createSurfaceMapReader({ documentTarget, windowTarget }));
+    minimapController = own(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
+      onInteraction() { preferences.set('motionEnabled', false); } }));
+    viewReadout = own(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => navigationTransition?.dispose());
     mountContent(objectId);
@@ -159,6 +166,7 @@ export function mountObjectShell({
       const hidden = String(!active);
       if (navigationProgress && navigationProgress.ariaHidden !== hidden) navigationProgress.ariaHidden = hidden;
       viewReadout.setNavigationInFlight(active);
+      if (!active) { releaseArrivalControls(); releaseArrivalControls = () => {}; }
     },
     destroy() {
       const errors = lifetime.destroy();
@@ -216,8 +224,11 @@ export function mountObjectShell({
           const previous = [...panel.childNodes], previousBusy = panel.ariaBusy;
           let pendingControls: (readonly [HTMLElement, boolean])[] = [];
           settleCard = keep => {
-            if (keep) { for (const [node, inert] of pendingControls) node.inert = inert; }
-            else panel.replaceChildren(...previous);
+            if (keep) releaseArrivalControls = () => {
+              for (const [node, inert] of pendingControls) if (node.inert !== inert) node.inert = inert;
+              pendingControls = [];
+            };
+            else { panel.replaceChildren(...previous); bindCardMaps(); }
             panel.ariaBusy = previousBusy;
           };
           const showCard = (card: Element) => {
@@ -233,6 +244,7 @@ export function mountObjectShell({
               .map(node => [node, node.inert] as const);
             for (const [node] of pendingControls) node.inert = true;
             createInformationTabsController(drawer, previewLifetime, 'overview');
+            bindCardMaps();
           };
           const cached = fragments.peek(object.id);
           const card = cached?.document.querySelector('.object-information-panel');
@@ -269,6 +281,14 @@ export function mountObjectShell({
     mountContent(content.id);
   }
 
+  function bindCardMaps() {
+    const next = [...drawer.querySelectorAll<HTMLElement>('.object-surface-minimap')];
+    if (next.length === boundCardMaps.length && next.every((map, index) => map === boundCardMaps[index])) return;
+    boundCardMaps = next;
+    surfaceReader.reset();
+    minimapController.bindObject();
+    viewReadout.bindObject();
+  }
   function disposeContent() {
     const errors = contentLifetime?.destroy() ?? [];
     contentLifetime = null;
@@ -276,14 +296,9 @@ export function mountObjectShell({
   }
   function mountContent(id: string) {
     const owner = contentLifetime = createSceneLifetime();
-    const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationCard = mountInformationCard(drawer, id, windowTarget, owner);
     settingsController.bindObject();
-    const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
-    minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
-      onInteraction() { preferences.set('motionEnabled', false); },
-    }));
-    viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
+    bindCardMaps();
     const subject = readSelection();
     viewReadout.setPreparedFocus(subject.kind === 'focus' ? subject.record : null);
     informationCard.activatePanels();

@@ -102,7 +102,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               }
               const footer = documentTarget.querySelector<HTMLElement>('.object-attribution-footer'), incomingFooter = incomingSource.querySelector('.object-attribution-footer');
               if (footer) {
-                footer.hidden = !incomingFooter;
+                if (footer.hidden !== !incomingFooter) footer.hidden = !incomingFooter;
                 if (incomingFooter) {
                   updateShellElement(footer, incomingFooter);
                 }
@@ -118,14 +118,15 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
                 const target = documentTarget.head.querySelector(`${incoming.tagName}[${key}="${incoming.getAttribute(key)}"]`);
                 if (target) {
                   const value = incoming.tagName === 'LINK' ? 'href' : 'content';
-                  target.setAttribute(value, incoming.getAttribute(value) ?? '');
+                  const next = incoming.getAttribute(value) ?? '';
+                  if (target.getAttribute(value) !== next) target.setAttribute(value, next);
                 } else documentTarget.head.append(documentTarget.importNode(incoming, true));
               }
-              documentTarget.body.dataset.objectShell = object.id;
+              // The shell marker is structural; scene identity belongs to the stage.
               requiredElement(documentTarget, '.object-browser').id = `${object.id}-object-browser`;
               publishPreparedDescriptor(documentTarget, descriptor);
               const stage = requiredElement(documentTarget, '.object-stage'), input = documentTarget.querySelector('.object-input-surface');
-              stage.dataset.objectId = object.id;
+              if (stage.dataset.objectId !== object.id) stage.dataset.objectId = object.id;
               stage.setAttribute('aria-label', `Interactive 3D CSS visualization of ${object.name}`);
               input?.setAttribute('aria-label', `Explore ${object.name}`);
               // Anchors expose their resolved origin and path: ~500 menu links need no URL parse.

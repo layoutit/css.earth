@@ -156,7 +156,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 
 // No geometry, atlas addressing, band grouping, source conversion, or package
 // callbacks enter this builder. The ordered records are final prepared DOM.
-export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, progressiveActivation = false) {
+export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, progressiveActivation = false, deferConnection = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
     : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage, definition.assetOrigin,
       new Set(definition.variants.flatMap(variant => variant.hiddenSubtrees ?? [])));
@@ -206,9 +206,12 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     return { animation, plan, duration: plan.duration };
   });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.
-  for (const root of roots) stage.appendChild(root);
-  if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
-  for (const name of definition.tree.stageClasses) stage.classList.add(name);
+  const connect = () => {
+    for (const root of roots) if (root.parentNode !== stage) stage.appendChild(root);
+    if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
+    for (const name of definition.tree.stageClasses) if (!stage.classList.contains(name)) stage.classList.add(name);
+  };
+  if (!deferConnection) connect();
   const animations = definition.animations.map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, easing: "linear", fill: "both" });
     animation.id = plan.id; context.registerAnimation(animation, { mode: plan.mode });
@@ -228,9 +231,9 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     if (leaves) {
       for (const leaf of leaves) textureActivation.write(leaf, value);
       styleWrites += leaves.length;
-    } else { writeStyle(target(index), name, value); styleWrites++; }
+    } else if (styleValue(target(index), name) !== value) { writeStyle(target(index), name, value); styleWrites++; }
   }
-  return Object.freeze({ cameraElement, sceneElement, activate, revealGroups,
+  return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.features ? { featureTarget: nodes[definition.features.target] } : {}),
@@ -259,8 +262,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       const contentWrites = writes.filter(binding => !profileDisplay(binding, "none") && !profileDisplay(binding, "block"));
       const publish = (binding: typeof writes[number]) => {
         const element = target(binding.target);
-        if (binding.kind === "attribute") writeAttribute(element, binding.name, binding.value);
-        else if (binding.kind === "class") element.classList.toggle(binding.name, binding.value);
+        if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
+        else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
         else publishStyle(binding.target, binding.name, binding.value);
       };
       // Alternative radial meshes address different atlas layouts. Hide the

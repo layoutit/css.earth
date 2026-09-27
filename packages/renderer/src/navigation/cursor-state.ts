@@ -1,3 +1,4 @@
+import { isSharedInputSurface } from './shared-input-surface.js';
 const cursors = new WeakMap<HTMLElement, { base: string; hover: string | null }>();
 
 function stateFor(surface: HTMLElement) {
@@ -9,7 +10,8 @@ function stateFor(surface: HTMLElement) {
 }
 
 function apply(surface: HTMLElement, state: { base: string; hover: string | null }) {
-  surface.style.cursor = state.hover ?? state.base;
+  const cursor = state.hover ?? state.base;
+  if (surface.style.cursor !== cursor) surface.style.cursor = cursor;
 }
 
 export function setBaseCursor(surface: HTMLElement, cursor: string) {
@@ -26,5 +28,5 @@ export function setHoverCursor(surface: HTMLElement, cursor: string | null) {
 
 export function clearCursor(surface: HTMLElement) {
   cursors.delete(surface);
-  surface.style.cursor = '';
+  if (!isSharedInputSurface(surface) && surface.style.cursor !== '') surface.style.cursor = '';
 }

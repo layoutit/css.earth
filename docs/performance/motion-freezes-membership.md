@@ -73,3 +73,19 @@ be seen mid-motion.
 
 `node tools/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
 page makes while it coasts. It exits 1 on anything outside this table.
+
+## Object arrival ownership
+
+The application retains the input surface's native camera, wheel, picking and surface-feature input listeners across
+object changes. Each scene leases a callback; retirement clears that callback, and application disposal removes the
+native listeners. This preserves native dispatch order and avoids rebuilding Safari's event regions at every handoff.
+The shell stylesheet owns touch handling and text selection on that surface. Standalone renderer mounts still clean
+up their own listeners and inline input styles.
+
+The shell also owns the minimap controller, surface reader and footer readout. Replacing a preview card binds only its
+new map nodes; arriving at that same card does not bind them a second time. Destination controls stay inert until the
+navigation readiness gate releases them. Busy status uses ARIA, without a cosmetic loading class that restyles the dataset subtree.
+
+A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
+the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
+billboard handoff. An adopted server-rendered tree is already connected and keeps its existing ownership.

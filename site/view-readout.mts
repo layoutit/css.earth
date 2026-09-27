@@ -13,7 +13,7 @@ import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-con
 import { viewDistance } from './overview-context.mts';
 import { dotN as dot } from '@cssearth/core';
 type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
-interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
+interface ViewReadout { bindObject(): void; setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 
 export function measurePreparedFocusView(world: WorldCameraPose, focus: PreparedFocus, focalPixels: number) {
   const forward = rotateWorldPosition(worldRotationFromQuaternion(world.pose.orientationXyzw), [0, 0, -1]);
@@ -24,7 +24,7 @@ export function measurePreparedFocusView(world: WorldCameraPose, focus: Prepared
 
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
   const root = documentTarget.querySelector<HTMLElement>('.object-view-readout');
-  if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
+  if (!root) return { bindObject() {}, setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
   const dateGroup = requiredElement(root, '.object-view-date'), date = requiredElement(root, '[data-view-date]');
   const coordinates = requiredElement(root, '.object-view-coordinates');
   const latitude = requiredElement(root, '[data-view-latitude]'), longitude = requiredElement(root, '[data-view-longitude]');
@@ -34,13 +34,14 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const scale = requiredElement(root, '.object-view-scale'), scaleLabel = requiredElement(root, '[data-view-scale-label]');
   const ruler = requiredElement(root, '.object-view-ruler');
   const measure = requiredElement(root, '.object-view-measure');
-  const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
+  let maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
   const configs = new Map(maps.map(map => [map, parseSurfaceMapConfig(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, flying = false, moving = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
   let overviewScope: OverviewScope = 'system';
   let preparedFocus: PreparedFocus | null = null;
+  const hidden = (element: HTMLElement, value: boolean) => { if (element.hidden !== value) element.hidden = value; };
   const write = (element: HTMLElement, value: string) => { if (element.textContent !== value) element.textContent = value; };
   /** Drop a scheduled render: the page hid, a flight began, or the readout retired. */
   const cancelPending = () => {
@@ -50,8 +51,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   };
   /** A reading that no longer describes the view. Without a camera the scene date goes too. */
   const clearReading = ({ date }: { date: boolean }) => {
-    if (date) dateGroup.hidden = true;
-    coordinates.hidden = true; scale.hidden = true; write(altitude, '—');
+    if (date) hidden(dateGroup, true);
+    hidden(coordinates, true); hidden(scale, true); write(altitude, '—');
   };
   function render() {
     frame = null;
@@ -64,7 +65,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)
       : surfaceMapContext(map ? configs.get(map) : undefined, camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
-    dateGroup.hidden = !Number.isFinite(world.epochJdTt);
+    hidden(dateGroup, !Number.isFinite(world.epochJdTt));
     const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
     // The surface picking math loads after the first frame; the readout fills in when it arrives.
@@ -79,12 +80,12 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
     if (distanceGroup) distanceGroup.title = distance.title;
-    coordinates.hidden = !value?.coordinates;
+    hidden(coordinates, !value?.coordinates);
     if (value?.coordinates) {
       write(latitude, formatViewCoordinate(value.coordinates.latitude, 'N', 'S'));
       write(longitude, formatViewCoordinate(value.coordinates.longitude, 'E', 'W'));
     }
-    scale.hidden = !value?.scale;
+    hidden(scale, !value?.scale);
     if (value?.scale) {
       write(scaleLabel, value.scale.label);
       ruler.style.width = `${value.scale.pixels.toFixed(2)}px`;
@@ -119,9 +120,16 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     else refresh();
   }, { signal: events.signal });
   return {
+    bindObject() {
+      const next = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
+      if (next.length === maps.length && next.every((map, index) => map === maps[index])) return;
+      maps = next; configs.clear();
+      for (const map of maps) configs.set(map, parseSurfaceMapConfig(map.dataset.surfaceMinimap));
+      refresh();
+    },
     setPreparedFocus(record) { preparedFocus = record; refresh(); },
     setOverviewScope(scope) { overviewScope = scope; refresh(); },
-    setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(() => schedule()) ?? null; refresh(); },
+    setCamera(next) { if (camera === next) return; unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(() => schedule()) ?? null; refresh(); },
     setPlaybackState(state) {
       const changed = playing !== state.allowed || playbackReason !== state.reason;
       playing = state.allowed; playbackReason = state.reason;

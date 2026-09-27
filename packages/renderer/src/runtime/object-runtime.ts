@@ -337,7 +337,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Resolve any new projection before attaching the detailed scene. The
       // application-owned snapshot normally survives the handoff unchanged.
       viewport.read(cameraPlan.projection.cssPerspective);
-      mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation);
+      mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation, true);
       if (lifetime.disposed) return;
       syncPagePlayback();
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
@@ -352,20 +352,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
-      if (definition.features) {
-        if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
-        const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
-        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
-          scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
-          navigation, flightLimits: () => ({ minimumDistanceM: definition.camera.dolly.minimumDistanceRadii * worldFrame.bodyRadiusM }),
-          onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
-          ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
-            fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
-          lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
-        context.own(() => surfaceFeatures?.destroy());
-        if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);
-        surfaceFeatures.setLens({ id: initialSelection.lensId });
-      }
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
@@ -393,6 +379,24 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const initialized = await lifetime.wait(selection.start());
       if (lifetime.disposed || initialized.cancelled) return;
       if (!initialized.value) throw new Error("Initial object selection did not commit.");
+      // Initial selection, material and camera writes land on detached prepared roots.
+      // The existing paced leaf activation starts only after this single connection.
+      mounted.connect();
+      if (definition.features) {
+        if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
+        const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
+        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
+          scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
+          navigation, flightLimits: () => ({ minimumDistanceM: definition.camera.dolly.minimumDistanceRadii * worldFrame.bodyRadiusM }),
+          onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
+          ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
+            fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
+          lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
+        context.own(() => surfaceFeatures?.destroy());
+        if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);
+        surfaceFeatures.setLens({ id: initialSelection.lensId });
+      }
+      if (currentView) surfaceFeatures?.publish(currentView);
       if (navigation) onNavigationReady?.(navigation);
       await lifetime.wait(mounted.activate());
       if (lifetime.disposed) return;

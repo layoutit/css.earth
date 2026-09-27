@@ -33,9 +33,11 @@ export function publishDatasetPreview(root: ParentNode | null, buttons: readonly
   }
   if (select && selected) {
     for (const option of select.querySelectorAll('option')) {
-      option.toggleAttribute('selected', option.value === selected);
+      const selectedOption = option.value === selected;
+      if (option.hasAttribute('selected') !== selectedOption) option.toggleAttribute('selected', selectedOption);
       const button = buttons.find(button => button.value === option.value);
-      option.disabled = !button || button.disabled;
+      const disabled = !button || button.disabled;
+      if (option.disabled !== disabled) option.disabled = disabled;
     }
     if (select.value !== selected) select.value = selected;
   }
@@ -142,7 +144,6 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     }
     for (const root of busyRoots) {
       const busy = !ready || next.pending === true;
-      if (root.classList.contains("is-loading") !== busy) root.classList.toggle("is-loading", busy);
       setAttribute(root, "aria-busy", String(busy));
     }
     for (const input of lensInputs) {
@@ -230,11 +231,15 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
     for (const input of [...lensInputs, ...settingsInputs]) {
-      try { input.disabled = input.type !== 'submit' && !input.hasAttribute('form'); if (input.name === "speed") { input.disabled = true; input.dataset.runtimeReady = "false"; } }
+      try {
+        const disabled = input.name === 'speed' || input.type !== 'submit' && !input.hasAttribute('form');
+        if (input.disabled !== disabled) input.disabled = disabled;
+        if (input.name === 'speed' && input.dataset.runtimeReady !== 'false') input.dataset.runtimeReady = 'false';
+      }
       catch (error) { errors.push(error); }
     }
     for (const root of busyRoots) {
-      try { root.classList.remove("is-loading"); root.setAttribute("aria-busy", "false"); }
+      try { setAttribute(root, 'aria-busy', 'false'); }
       catch (error) { errors.push(error); }
     }
     return errors;

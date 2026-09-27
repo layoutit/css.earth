@@ -109,6 +109,7 @@ export function createSurfaceMapReader({ documentTarget, windowTarget }: { docum
       }
       return surfaceSnapshot(body, scene, config, camera.navigation, windowTarget, entry.axes);
     },
+    reset() { observer?.disconnect(); entries.clear(); },
     destroy() {
       disposed = true; observer?.disconnect(); entries.clear();
       if (observer) windowTarget.removeEventListener('resize', resize);

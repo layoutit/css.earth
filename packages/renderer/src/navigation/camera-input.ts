@@ -1,3 +1,4 @@
+import { isSharedInputSurface } from './shared-input-surface.js';
 import { validateDragControlsOptions } from './camera-input-options.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { MatrixDragControlsOptions } from './camera-input-options.js';
@@ -517,7 +518,7 @@ export function createUnboundedMatrixDragControls({
         else if (inputSurface.ownerDocument.hidden) cameraMotion.arrive();
       }),
     });
-    inputSurface.style.userSelect = "none";
+    if (!isSharedInputSurface(inputSurface) && inputSurface.style.userSelect !== "none") inputSurface.style.userSelect = "none";
     syncCursor();
   } catch (error) {
     const errors = lifetime.destroy();

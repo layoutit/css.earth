@@ -20,23 +20,16 @@ export function loadSurfacePreview(map: HTMLElement) {
 }
 
 export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onInteraction, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; onInteraction(): void; surfaceReader?: SurfaceMapReader }) {
-  const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap], .object-surface-minimap')];
+  let maps: HTMLElement[] = [];
+  const mapEvents = new Map<HTMLElement, AbortController>();
   const events = new AbortController();
-  const elements = new Map<HTMLElement, MapElements>(maps.map(map => [map, {
-    config: map.dataset.surfaceMinimap ? parseSurfaceMapConfig(map.dataset.surfaceMinimap) : null,
-    rectangles: [...map.querySelectorAll<HTMLElement>('.object-minimap-viewport')],
-    size: null,
-  }]));
+  const elements = new Map<HTMLElement, MapElements>();
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let disposed = false;
   let playing = false, pinching = false;
   const pointers = new Map<number, { x: number; y: number }>();
   let pinchDistance: number | null = null;
   let visibleMaps: HTMLElement[] = [];
-  const tabs = new Map(maps.map(map => {
-    const panel = map.closest<HTMLElement>('[data-information-panel]');
-    const input = panel?.id ? documentTarget.getElementById(panel.id.replace(/-content$/, '-tab')) : null;
-    return [map, input instanceof windowTarget.HTMLInputElement ? input : null] as const;
-  }));
+  const tabs = new Map<HTMLElement, HTMLInputElement | null>();
   const active = (map: HTMLElement) => map.isConnected && !documentTarget.hidden &&
     !map.closest('[hidden], details:not([open])') && (tabs.get(map)?.checked ?? true);
 
@@ -131,8 +124,10 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       clientX: bounds.left + bounds.width / 2, clientY: bounds.top + bounds.height / 2,
     }));
   }
-  for (const map of maps) {
-    if (!elements.get(map)!.config) continue;
+  function bindMap(map: HTMLElement) {
+    if (!elements.get(map)!.config) return;
+    const events = new AbortController();
+    mapEvents.set(map, events);
     map.addEventListener('pointerdown', event => {
       if (!camera?.navigation || event.button !== 0) return;
       event.preventDefault(); event.stopPropagation();
@@ -179,12 +174,8 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     }, { signal: events.signal });
     map.addEventListener('dragstart', event => event.preventDefault(), { signal: events.signal });
   }
-  const observer = maps.length ? new windowTarget.MutationObserver(syncVisibility) : null;
-  // Watch visibility/connection owners, not our own rectangle's hidden writes.
-  const ancestors = new Set<HTMLElement>();
-  for (const map of maps) for (let node: HTMLElement | null = map; node; node = node.parentElement) ancestors.add(node);
-  for (const node of ancestors) observer?.observe(node, { childList: true, attributes: true, attributeFilter: ['hidden', 'open'] });
-  const resize = maps.length && windowTarget.ResizeObserver ? new windowTarget.ResizeObserver(entries => {
+  const observer = new windowTarget.MutationObserver(syncVisibility);
+  const resize = windowTarget.ResizeObserver ? new windowTarget.ResizeObserver(entries => {
     for (const entry of entries) {
       const box = entry.borderBoxSize?.[0];
       const item = entry.target instanceof windowTarget.HTMLElement ? elements.get(entry.target) : undefined;
@@ -194,24 +185,50 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     }
     syncVisibility();
   }) : null;
-  for (const map of maps) resize?.observe(map);
+  function bindObject() {
+    const next = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap], .object-surface-minimap')];
+    if (next.length === maps.length && next.every((map, index) => map === maps[index])) return;
+    for (const map of maps) if (!next.includes(map)) {
+      mapEvents.get(map)?.abort(); mapEvents.delete(map);
+      elements.delete(map); tabs.delete(map); resize?.unobserve(map);
+    }
+    maps = next; pointers.clear(); pinching = false; pinchDistance = null;
+    for (const map of maps) if (!elements.has(map)) {
+      elements.set(map, { config: map.dataset.surfaceMinimap ? parseSurfaceMapConfig(map.dataset.surfaceMinimap) : null,
+        rectangles: [...map.querySelectorAll<HTMLElement>('.object-minimap-viewport')], size: null });
+      const panel = map.closest<HTMLElement>('[data-information-panel]');
+      const input = panel?.id ? documentTarget.getElementById(panel.id.replace(/-content$/, '-tab')) : null;
+      tabs.set(map, input instanceof windowTarget.HTMLInputElement ? input : null);
+      bindMap(map); resize?.observe(map);
+    }
+    observer.disconnect();
+    // Only rebuild observations when the card's actual map nodes change.
+    const ancestors = new Set<HTMLElement>();
+    for (const map of maps) for (let node: HTMLElement | null = map; node; node = node.parentElement) ancestors.add(node);
+    for (const node of ancestors) observer.observe(node, { childList: true, attributes: true, attributeFilter: ['hidden', 'open'] });
+    syncVisibility();
+  }
   windowTarget.addEventListener('resize', () => {
     for (const item of elements.values()) item.size = null;
     syncVisibility();
   }, { signal: events.signal });
   documentTarget.addEventListener('visibilitychange', syncVisibility, { signal: events.signal });
   drawer.addEventListener('change', syncVisibility, { signal: events.signal });
-  syncVisibility();
+  bindObject();
   return {
+    bindObject,
     setPlaybackState(state: PlaybackState) { playing = state.allowed; schedule(); },
     setCamera(next: ShellCamera | null) {
+      if (camera === next) return;
       unsubscribe?.(); unsubscribe = null; camera = next;
       pointers.clear(); pinching = false; pinchDistance = null;
-      for (const map of maps) delete map.dataset.dragging;
+      for (const map of maps) if (map.dataset.dragging !== undefined) delete map.dataset.dragging;
       syncVisibility();
     },
     destroy() {
-      disposed = true; unsubscribe?.(); observer?.disconnect(); resize?.disconnect(); events.abort();
+      disposed = true; unsubscribe?.(); observer.disconnect(); resize?.disconnect(); events.abort();
+      for (const scope of mapEvents.values()) scope.abort();
+      mapEvents.clear(); elements.clear(); tabs.clear(); maps = [];
       if (frame !== null) windowTarget.cancelAnimationFrame(frame);
       pointers.clear(); camera = null;
     },
