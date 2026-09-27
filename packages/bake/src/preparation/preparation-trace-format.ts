@@ -1,4 +1,4 @@
-// The record format shared by the preparation trace (tools/prepare/preparation-trace.mts) and the preparation cache.
+// The record format shared by the preparation trace (packages/bake/cli/preparation-trace.mts) and the preparation cache.
 // Keep this entry free of project imports but `@cssearth/core`: the trace loads it before it starts recording, so
 // anything it imported would be missing from every record.
 import { sha256 } from '@cssearth/core/node';

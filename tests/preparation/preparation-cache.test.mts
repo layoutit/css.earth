@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { lstat, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
-import type { PreparationTraces } from "./preparation-cache.mts";
+import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "@cssearth/bake/preparation";
+import type { PreparationTraces } from "@cssearth/bake/preparation";
 import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorDigest } from "@cssearth/bake/preparation";
 import type { PreparationAccess, TracedCommand, TracedState } from "@cssearth/bake/preparation";
 
@@ -202,7 +202,7 @@ test("another body's descriptor that preparation reads through the prepared regi
     "readFileSync('src/objects/moon/object.json');\nwriteFileSync('prepared.json', JSON.stringify(readPreparedObjects(process.cwd()).requireSceneObject('sun').name));\n");
   const trace = join(root, "traces");
   const { spawnSync } = await import("node:child_process");
-  const run = spawnSync(process.execPath, [`--import=${import.meta.resolve("./preparation-trace.mts")}`, "prepare.mjs"], { cwd: root, encoding: "utf8",
+  const run = spawnSync(process.execPath, [`--import=${import.meta.resolve("../../packages/bake/cli/preparation-trace.mts")}`, "prepare.mjs"], { cwd: root, encoding: "utf8",
     env: { ...process.env, [PREPARATION_TRACE_VARIABLE]: trace } });
   assert.equal(run.status, 0, run.stderr);
   const traces = await readPreparationTraces(trace);

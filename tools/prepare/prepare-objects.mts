@@ -19,8 +19,7 @@ export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEv
 
 import cwebpPath from "cwebp-bin";
 import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../cli/run-implemented-objects.mts";
-import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
-import { PREPARATION_TRACE_VARIABLE } from '@cssearth/bake/preparation';
+import { PREPARATION_TRACE_VARIABLE, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from '@cssearth/bake/preparation';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
@@ -28,7 +27,7 @@ const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../.."))
 
 const sharedSteps = ["cli/prepare-shell-titles.mts", "cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
-const traceModule = new URL("./preparation-trace.mts", import.meta.url).href;
+const traceModule = new URL("../../packages/bake/cli/preparation-trace.mts", import.meta.url).href;
 
 const require = createRequire(import.meta.url);
 
@@ -58,7 +57,7 @@ export function tracedPreparationEnvironment(traceDirectory: string, environment
 
 /**
  * Reuse a body's prepared files while everything its last preparation read is unchanged. Each preparation runs
- * with tools/prepare/preparation-trace.mts, and its receipt lists exactly the files that run read and wrote.
+ * with packages/bake/cli/preparation-trace.mts, and its receipt lists exactly the files that run read and wrote.
  */
 export async function runCachedPreparationObjects({ projectRoot = process.cwd(), force = false,
   objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
