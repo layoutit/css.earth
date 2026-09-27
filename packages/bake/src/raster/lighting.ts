@@ -48,7 +48,7 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     const pending = new Set<Promise<void>>();
     const fromBank = async (file: string) => {
         const source = resolve(bankDirectory!, file);
-        if (!existsSync(source)) throw new Error(`Lighting bank ${recipe.bank} has no ${file} under ${LIGHTING_BANK_ROOT}/${recipe.bank}; bake it: node tools/objects/dist/prepare-lighting-bank.js.`);
+        if (!existsSync(source)) throw new Error(`Lighting bank ${recipe.bank} has no ${file} under ${LIGHTING_BANK_ROOT}/${recipe.bank}; bake it: node packages/bake/cli/prepare-lighting-bank.mts.`);
         await copyFile(source, resolve(publicDirectory, file));
     };
     for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
