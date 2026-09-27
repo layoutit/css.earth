@@ -625,7 +625,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   channel factors), which is largest near the limb.
 - **Colour tie.** A colour map whose archive scaling is arbitrary (Saturn's
   OPAL TIF) names a whole-disc colour computed once from a published spectrum
-  ([whole-disc-colour.mts](../packages/bake/src/objects/raster/whole-disc-colour.ts)). The map's
+  ([whole-disc-colour.ts](../packages/bake/src/objects/raster/whole-disc-colour.ts)). The map's
   green and blue are scaled by one gain each so that, once the limb law is put
   back, the flood-lit disc integrates to that colour: the target ratios are the
   colour's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
