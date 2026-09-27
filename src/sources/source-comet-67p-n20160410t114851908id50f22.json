@@ -1,0 +1,28 @@
+{
+  "id": "source-comet-67p-n20160410t114851908id50f22",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Rosetta OSIRIS NAC N20160410T114851908ID50F22 — SHAP7 georeferenced radiance",
+  "identifiers": [
+    {
+      "type": "PDS3 PRODUCT_ID",
+      "value": "N20160410T114851908ID50F22.IMG"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160410t114851908id50f22.img",
+      "label": "Archived IMG product"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/comet-67p/source/manifest.json",
+      "locator": "/inputs/47"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "RO-C-OSINAC-5-EXT2-67P-M28-GEO-V1.0"
+}

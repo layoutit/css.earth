@@ -37,10 +37,8 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   // Shape-model bodies anchor on their picking mesh: the sampler's body-fixed frame is the tool's 0° edge with the shared axes.
   if (radialTerrain && !(hit?.triangles?.length && typeof hit.target === 'number')) throw new TypeError('Shape-model surface features need the prepared hit mesh.');
   const featureConfig = parseSurfaceFeaturesConfig(config.value);
-  const ranges = featureConfig.landmarks ? hit?.lensRanges?.filter(range => featureConfig.lensIds.includes(range.lensId)) ?? [] : [];
-  if (featureConfig.landmarks && hit?.lensRanges?.length && (ranges.length !== 1 || featureConfig.lensIds.some(id => id !== ranges[0]!.lensId))) throw new TypeError('Features on alternative shapes must select one matching lens range.');
-  const range = ranges[0];
-  if (range && (!Number.isSafeInteger(range.start) || !Number.isSafeInteger(range.count) || range.start < 0 || range.count < 1 || range.start + range.count > (hit?.triangles?.length ?? 0))) throw new TypeError('Invalid feature mesh range.');
+  const range = featureConfig.landmarks && hit?.lensRanges?.length
+    ? selectFeatureMeshRange(featureConfig.lensIds, hit.lensRanges, hit.triangles?.length ?? 0) : undefined;
   const hitMesh = radialTerrain && hit?.triangles && typeof hit.target === 'number' ? { target: hit.target, triangles: range ? hit.triangles.slice(range.start, range.start + range.count) : hit.triangles } : undefined;
   // The paged ellipsoid lane renders an oblate flat-leaf globe whose equatorial radius is the mesh radius: geodetic
   // catalogue positions anchor where its leaf frames draw them, checked against the authored reference ellipsoid.
@@ -60,6 +58,17 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
       : features.catalog.landmarks || (features.catalog.sites && !parseSurfaceFeaturesConfig(config.value).archive)
       ? `${features.catalog.features.length.toLocaleString('en')} surface places from mission maps and cited studies`
       : `${features.catalog.features.length.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
+}
+
+/** Several datasets can share one mesh, but a landmark catalogue cannot cross mesh ranges. */
+export function selectFeatureMeshRange(lensIds: readonly string[], ranges: readonly { lensId: string; start: number; count: number }[], triangleCount: number) {
+  const selected = ranges.filter(range => lensIds.includes(range.lensId)), first = selected[0];
+  if (!first || selected.length !== lensIds.length || new Set(selected.map(range => range.lensId)).size !== lensIds.length ||
+      selected.some(range => range.start !== first.start || range.count !== first.count))
+    throw new TypeError('Features on alternative shapes must select datasets sharing one matching mesh range.');
+  if (!Number.isSafeInteger(first.start) || !Number.isSafeInteger(first.count) || first.start < 0 || first.count < 1 || first.start + first.count > triangleCount)
+    throw new TypeError('Invalid feature mesh range.');
+  return first;
 }
 
 /** The paged lane's own geodetic mapping (the one its city destinations use) becomes the feature sampler. The lane

@@ -1,0 +1,28 @@
+{
+  "id": "source-comet-67p-n20160410t114851908id40f22",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Rosetta OSIRIS NAC N20160410T114851908ID40F22 — calibrated radiance and detector quality",
+  "identifiers": [
+    {
+      "type": "PDS3 PRODUCT_ID",
+      "value": "N20160410T114851908ID40F22.IMG"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160410t114851908id40f22.img",
+      "label": "Archived IMG product"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/comet-67p/source/manifest.json",
+      "locator": "/inputs/46"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "RO-C-OSINAC-4-EXT2-67PCHURYUMOV-M28-V2.0"
+}

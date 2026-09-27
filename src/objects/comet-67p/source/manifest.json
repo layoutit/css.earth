@@ -10,7 +10,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/11/30/new-comet-shape-model/"
       ],
-      "acquisition": "Restore the exact source URL; validate its byte count and SHA-256.",
+      "acquisition": "Restore the stated provider product from the versioned source URL.",
       "redistribution": "Retain ESA/Rosetta/NAVCAM credits and the CC BY-SA 3.0 IGO notice.",
       "consumers": [
         "shape"
@@ -92,7 +92,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -121,7 +121,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -150,7 +150,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -179,7 +179,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -208,7 +208,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -237,7 +237,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -266,7 +266,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -295,7 +295,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -324,8 +324,8 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
-      "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
+      "redistribution": "Published ESA PSA mesh used for VIRTIS display geometry and ambiguity masking; retain shape archive and team attribution.",
       "consumers": [
         "virtis-science"
       ],
@@ -349,10 +349,11 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
-      "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
+      "redistribution": "Published ESA PSA mesh used for VIRTIS display geometry and ambiguity masking; retain shape archive and team attribution.",
       "consumers": [
-        "virtis-science"
+        "virtis-science",
+        "shape"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -384,7 +385,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -422,7 +423,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -457,7 +458,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -495,7 +496,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -530,7 +531,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -568,7 +569,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -603,7 +604,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -641,7 +642,7 @@
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
@@ -666,11 +667,12 @@
       "licenseEvidence": [
         "https://data.mendeley.com/datasets/2845znt54k/1"
       ],
-      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "acquisition": "Restore the original product from the stated versioned release URL.",
       "redistribution": "Retain authors, dataset DOI and CC BY 4.0 attribution.",
       "consumers": [
         "surface-geology",
-        "features"
+        "features",
+        "shape"
       ],
       "projection": {
         "type": "cartesian-triangle-cells",
@@ -698,7 +700,7 @@
       "licenseEvidence": [
         "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
       ],
-      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "acquisition": "Restore the original product from the stated versioned release URL.",
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
@@ -723,7 +725,7 @@
       "licenseEvidence": [
         "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
       ],
-      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "acquisition": "Restore the original product from the stated versioned release URL.",
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
@@ -748,7 +750,7 @@
       "licenseEvidence": [
         "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
       ],
-      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "acquisition": "Restore the original product from the stated versioned release URL.",
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
@@ -773,7 +775,7 @@
       "licenseEvidence": [
         "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
       ],
-      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "acquisition": "Restore the original product from the stated versioned release URL.",
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
@@ -798,7 +800,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -827,7 +829,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -856,7 +858,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -885,7 +887,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -914,7 +916,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -943,7 +945,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -972,7 +974,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -1001,7 +1003,7 @@
       "licenseEvidence": [
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
       ],
-      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the original PDS IMG from the stated versioned collection.",
       "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
       "consumers": [
         "osiris-observation"
@@ -1101,7 +1103,7 @@
         "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Archive-native PDS3 detached label retained with team and archive credit.",
       "consumers": [
         "telescope-api"
@@ -1137,7 +1139,7 @@
         "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Archive-native PDS3 fixed-length ASCII table retained with team and archive credit.",
       "consumers": [
         "telescope-api"
@@ -1173,7 +1175,7 @@
         "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Archive-native PDS3 detached label retained with team and archive credit.",
       "consumers": [
         "telescope-api"
@@ -1209,7 +1211,7 @@
         "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "acquisition": "Restore the original product through the acquisition recipe and its versioned archive URL.",
       "redistribution": "Archive-native PDS3 fixed-length ASCII table retained with team and archive credit.",
       "consumers": [
         "telescope-api"
@@ -1231,6 +1233,180 @@
             "catalogueId": "pds-consert-4-fss-v1-0",
             "role": "material",
             "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.tab"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n20160409t151852044id40f22",
+      "path": "observations/n20160409t151852044id40f22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160409t151852044id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original PDS product from its versioned collection. Its attached label defines the image dimensions, calibration and geometry.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2016-04-09T15:20:16.680",
+      "interpretation": "Paired level-4 radiance and detector-quality flags; radiance must match the level-5 image pixel for pixel.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t151852044id40f22",
+            "role": "material",
+            "evidence": "PDS DATA_SET_ID and PRODUCT_ID in the attached label of this exact input."
+          }
+        ]
+      }
+    },
+    {
+      "id": "n20160409t151852044id50f22",
+      "path": "observations/n20160409t151852044id50f22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160409t151852044id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original PDS product from its versioned collection. Its attached label defines the image dimensions, calibration and geometry.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2016-04-09T15:20:16.680",
+      "interpretation": "Calibrated radiance and corrected DLR SPG SHAP7 4M-facet Cartesian backplanes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t151852044id50f22",
+            "role": "material",
+            "evidence": "PDS DATA_SET_ID and PRODUCT_ID in the attached label of this exact input."
+          }
+        ]
+      }
+    },
+    {
+      "id": "n20160409t173352247id40f22",
+      "path": "observations/n20160409t173352247id40f22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160409t173352247id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original PDS product from its versioned collection. Its attached label defines the image dimensions, calibration and geometry.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2016-04-09T17:35:16.886",
+      "interpretation": "Paired level-4 radiance and detector-quality flags; radiance must match the level-5 image pixel for pixel.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t173352247id40f22",
+            "role": "material",
+            "evidence": "PDS DATA_SET_ID and PRODUCT_ID in the attached label of this exact input."
+          }
+        ]
+      }
+    },
+    {
+      "id": "n20160409t173352247id50f22",
+      "path": "observations/n20160409t173352247id50f22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160409t173352247id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original PDS product from its versioned collection. Its attached label defines the image dimensions, calibration and geometry.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2016-04-09T17:35:16.886",
+      "interpretation": "Calibrated radiance and corrected DLR SPG SHAP7 4M-facet Cartesian backplanes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t173352247id50f22",
+            "role": "material",
+            "evidence": "PDS DATA_SET_ID and PRODUCT_ID in the attached label of this exact input."
+          }
+        ]
+      }
+    },
+    {
+      "id": "n20160410t114851908id40f22",
+      "path": "observations/n20160410t114851908id40f22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160410t114851908id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original PDS product from its versioned collection. Its attached label defines the image dimensions, calibration and geometry.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2016-04-10T11:50:16.568",
+      "interpretation": "Paired level-4 radiance and detector-quality flags; radiance must match the level-5 image pixel for pixel.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160410t114851908id40f22",
+            "role": "material",
+            "evidence": "PDS DATA_SET_ID and PRODUCT_ID in the attached label of this exact input."
+          }
+        ]
+      }
+    },
+    {
+      "id": "n20160410t114851908id50f22",
+      "path": "observations/n20160410t114851908id50f22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160410t114851908id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original PDS product from its versioned collection. Its attached label defines the image dimensions, calibration and geometry.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2016-04-10T11:50:16.568",
+      "interpretation": "Calibrated radiance and corrected DLR SPG SHAP7 4M-facet Cartesian backplanes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160410t114851908id50f22",
+            "role": "material",
+            "evidence": "PDS DATA_SET_ID and PRODUCT_ID in the attached label of this exact input."
           }
         ]
       }
@@ -1447,6 +1623,96 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
+      }
+    },
+    {
+      "path": "reference/n20160409t151852044id40f22.lbl",
+      "purpose": "Attached image label from the exact April 2016 product; calibration HISTORY remains in the full IMG.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160409t151852044id40f22.img",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t151852044id40f22",
+            "role": "reference",
+            "evidence": "Extracted attached label of this exact IMG."
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/n20160409t151852044id50f22.lbl",
+      "purpose": "Attached image label from the exact April 2016 product; calibration HISTORY remains in the full IMG.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160409t151852044id50f22.img",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t151852044id50f22",
+            "role": "reference",
+            "evidence": "Extracted attached label of this exact IMG."
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/n20160409t173352247id40f22.lbl",
+      "purpose": "Attached image label from the exact April 2016 product; calibration HISTORY remains in the full IMG.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160409t173352247id40f22.img",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t173352247id40f22",
+            "role": "reference",
+            "evidence": "Extracted attached label of this exact IMG."
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/n20160409t173352247id50f22.lbl",
+      "purpose": "Attached image label from the exact April 2016 product; calibration HISTORY remains in the full IMG.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160409t173352247id50f22.img",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160409t173352247id50f22",
+            "role": "reference",
+            "evidence": "Extracted attached label of this exact IMG."
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/n20160410t114851908id40f22.lbl",
+      "purpose": "Attached image label from the exact April 2016 product; calibration HISTORY remains in the full IMG.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/data/img/n20160410t114851908id40f22.img",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160410t114851908id40f22",
+            "role": "reference",
+            "evidence": "Extracted attached label of this exact IMG."
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/n20160410t114851908id50f22.lbl",
+      "purpose": "Attached image label from the exact April 2016 product; calibration HISTORY remains in the full IMG.",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/data/img/n20160410t114851908id50f22.img",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20160410t114851908id50f22",
+            "role": "reference",
+            "evidence": "Extracted attached label of this exact IMG."
+          }
+        ]
       }
     }
   ]

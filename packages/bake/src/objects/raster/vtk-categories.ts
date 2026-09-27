@@ -3,7 +3,7 @@ import {parseVtkLens,parseVtkGrid} from './source-records.ts';
 import {shape,text,number} from '@cssearth/core';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createIndexedShape} from '../geometry/index.ts';
+import {createIndexedShape, decodeVtkMesh} from '../geometry/index.ts';
 import {loadSbmtSymbols} from './sbmt-symbols.ts';
 
 const local = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.split('/').includes('..');
@@ -38,27 +38,9 @@ export function validateVtkCategories(value: unknown, terrainValue: unknown) {
 
 export function decodeVtkCategories(text: string, value: unknown) {
   const grid=parseVtkGrid(value);
-  const tokens = text.trim().split(/\s+/); let at = tokens.indexOf('POINTS');
-  if (!text.startsWith('# vtk DataFile Version 2.0\n') || !text.includes('\nASCII\nDATASET POLYDATA\n') || at < 0) throw new Error('Unsupported categorical VTK header.');
-  const take = (expected: string) => {if (tokens[at++] !== expected) throw new Error('Unexpected categorical VTK field: ' + expected);};
-  const integer = () => {const n = Number(tokens[at++]); if (!Number.isSafeInteger(n)) throw new Error('Non-integer VTK index.'); return n;};
-  take('POINTS'); const vertexCount = integer(); take('float');
-  if (vertexCount !== grid.expectedVertices) throw new Error('VTK vertex count changed.');
-  const positions = Array.from({length: vertexCount}, () => Array.from({length: 3}, () => {
-    const n = Number(tokens[at++]) * grid.metersPerUnit;
-    if (!Number.isFinite(n)) throw new Error('Non-finite VTK coordinate.'); return n;
-  }));
-  take('POLYGONS'); const faceCount = integer(), entries = integer();
-  if (faceCount !== grid.expectedFaces || entries !== faceCount * 4) throw new Error('VTK polygon count changed.');
-  const indices = Array.from({length: faceCount}, () => {
-    if (integer() !== 3) throw new Error('Categorical VTK requires triangles.');
-    return [integer(), integer(), integer()];
-  });
-  take('CELL_DATA'); if (integer() !== faceCount) throw new Error('VTK cell count changed.');
-  take('SCALARS'); take(grid.field); take('integer'); take('1'); take('LOOKUP_TABLE'); take('default');
-  const values = Int32Array.from({length: faceCount}, integer);
-  if (at !== tokens.length) throw new Error('Unconsumed categorical VTK data.');
-  return {positions, indices, values};
+  const { positions, indices, cellField } = decodeVtkMesh(text, grid);
+  if (!cellField || cellField.name !== grid.field) throw new Error('Unexpected categorical VTK field.');
+  return { positions, indices, values: cellField.values };
 }
 
 export async function loadVtkCategories(root: string, value: unknown, renderedMesh: SourceMesh) {

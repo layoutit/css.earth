@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-surface-landmarks@1",
   "source": "Thomas et al. (2018), SHAP7 regional units",
-  "frame": "SHAP7 body-fixed Cartesian metres; same Cheops frame as MTP019. Display axes are read from presentation/surface-map.json.",
+  "frame": "SHAP7 body-fixed Cartesian metres. Region anchors use the matching SHAP7 picking mesh shared by OSIRIS, regions and geology; they are not transferred to RMOC or SHAP5. Display axes come from presentation/surface-map.json.",
   "vtk": {
     "path": "geology/shap7-regions.vtk",
     "bytes": 6309622,

@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { createHash } from 'node:crypto';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -48,7 +47,7 @@ test('a small mapped region inside a coarse triangle gets an interior point with
   try {
     const vtk = '# vtk DataFile Version 2.0\nSmall source region\nASCII\nDATASET POLYDATA\nPOINTS 3 float\n0 0 10\n1 0 10\n0 1 10\nPOLYGONS 1 4\n3 0 1 2\nCELL_DATA 1\nSCALARS Region integer 1\nLOOKUP_TABLE default\n1\n';
     await writeFile(join(directory, 'regions.vtk'), vtk);
-    const doc = { ...document({ regionId: 1 }), vtk: { path: 'regions.vtk', bytes: Buffer.byteLength(vtk), sha256: createHash('sha256').update(vtk).digest('hex'),
+    const doc = { ...document({ regionId: 1 }), vtk: { path: 'regions.vtk', bytes: Buffer.byteLength(vtk),
       grid: { metersPerUnit: 1, expectedVertices: 3, expectedFaces: 1, field: 'Region' }, maximumDistanceMeters: 0.01 } };
     const ctx = context(directory), before = JSON.stringify(ctx.hitMesh);
     const result = await prepareLandmarks(doc, ctx, axes, 0), anchor = result.features[0]!.anchorUnits;
@@ -59,7 +58,7 @@ test('a small mapped region inside a coarse triangle gets an interior point with
     assert.equal(JSON.stringify(ctx.hitMesh), before);
     await assert.rejects(prepareLandmarks({ ...doc, entries: [{ ...entry, position: { regionId: 2 } }] }, ctx, axes, 0), /Unknown mapped region/u);
     await writeFile(join(directory, 'regions.vtk'), vtk.replace('\n1\n', '\n0\n'));
-    await assert.rejects(prepareLandmarks(doc, ctx, axes, 0), /region mesh changed/u);
+    await assert.rejects(prepareLandmarks(doc, ctx, axes, 0), /Unknown mapped region/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

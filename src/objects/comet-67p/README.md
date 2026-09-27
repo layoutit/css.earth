@@ -7,18 +7,78 @@
 | View | Source | What it means |
 | --- | --- | --- |
 | Shape | ESA/RMOC MTP019 NAVCAM model | Reduced to 1,000 triangles. Default gray is an authored material, not measured color. |
-| OSIRIS | Eight calibrated orange-filter photographs: August 2014 and October–November 2015 | Grayscale composite with solar-distance, disk and approximate phase correction; not measured albedo. |
+| OSIRIS | Eleven calibrated orange-filter photographs: August 2014, October–November 2015 and April 2016 | Grayscale composite with solar-distance, disk and approximate phase correction; not measured albedo. |
 | Albedo, spectral slope, absorption and ice | [Rosetta VIRTIS maps](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/) | Reflectivity, its change with wavelength, infrared absorption and modeled ice. Registration near the neck is uncertain. |
 | Surface places | [Thomas et al. (2018)](https://doi.org/10.1016/j.pss.2018.05.019) and the [released SHAP7 regional map, v1](https://doi.org/10.17632/2845znt54k.1) | 26 named regional labels, plus the existing Agilkia and Abydos Philae sites. |
 | Geology | [ESA OSIRIS geological map, v1.0](https://doi.org/10.5270/esa-kokoti7) | Lines and dots mark mapped features; their display widths are not measured sizes. |
 
 The displayed rotation phase is arbitrary. Grid marks missing or rejected imagery.
-The [southern coverage report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md) describes
-the current eight-image selection and its calibration.
+Each dataset uses its own source-backed shape: RMOC for the neutral model,
+SHAP7 for OSIRIS, regions and geology, and SPC SHAP5 for the four VIRTIS maps.
+The shared camera and scene select one prepared mesh at a time.
 
-[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. The September 2026 audit checked newer OSIRIS images, later VIRTIS maps, public shape releases and the producer’s geometry-cube route. Unresolved access remains recorded separately from excluded data.
 
 ## Evidence
+
+The September 2026 upgrade is measured in [dataset-upgrade.json](evidence/dataset-upgrade.json).
+The [independent shape comparison](evidence/source-shape-comparison.json) uses the
+original GEO coordinates, before display tessellation. Across eleven frames,
+median distance to the old RMOC source is 3.17–8.80 m; to the released SHAP7
+source it is 0.31–0.34 m. Each SHAP7 95th percentile is below 1.38 m. These are
+model disagreements on sampled detector pixels, not uncertainty estimates.
+
+At 64 samples per retained triangle, weighted by triangle area, the eight existing
+images cover 88.85% of the SHAP7 display surface. The final eleven-image
+preparation uses 128 samples per triangle and covers 90.81%. The old installed
+RMOC preparation reports 80.89% on its different display mesh. The three new
+images supply the selected photograph over 17.67% of the SHAP7 surface, with
+measured nadir pixel scales 0.62, 0.73 and 1.01 m. Atlas density and mesh reduction
+still limit the displayed detail; those source scales do not describe every
+displayed texel.
+
+### Delivery, cost and browser checks
+
+All 69 published runtime files were installed into an empty destination and
+verified by byte count and SHA-256. The six new original image products were
+also restored without local reuse. The runtime inventory grows from 28,120,249
+to 52,372,515 bytes (28.12 to 52.37 MB). This is the complete install, including
+optional lighting assets, not a measured cold page download.
+
+| Prepared mesh | Visible triangles | Atlas pixels | One decoded RGBA atlas |
+| --- | ---: | --- | ---: |
+| RMOC neutral model | 1,000 | 1,957 × 2,092 | 16.38 MB |
+| SHAP7 OSIRIS, regions and geology | 1,992 | 3,921 × 4,158 | 65.21 MB |
+| SPC SHAP5 VIRTIS maps | 1,498 | 2,399 × 2,557 | 24.54 MB |
+
+The mounted scene retains 4,490 `u` leaves across the three banks; exactly one
+bank is displayed for every dataset. Decoded atlas figures are width × height ×
+4, not measured GPU residency. OSIRIS mean surface area per interior texel
+corresponds to 2.61 m, compared with 5.06 m before; it is not uniform resolution.
+
+The [browser record](evidence/dataset-upgrade.json) covers all eight dataset
+buttons, rotation and zoom, Shadows through Settings, and the Hapi feature card.
+The inspected images come from the restored package in the Codex in-app browser,
+1280 × 720. They prove those flows and reveal remaining visual defects; Chrome
+DPR 1/2 captures and a matched drag-cadence comparison remain unmeasured. The PR
+stays draft pending that visual and performance qualification.
+
+[Whole-body view](evidence/upgrade-osiris.png) ·
+[Close-up defects](evidence/upgrade-close.png) ·
+[Prepared shadows](evidence/upgrade-shadows.png) ·
+[Hapi on SHAP7](evidence/upgrade-hapi.png)
+
+Source, preparation and independent decoder checks passed 40 tests; retained
+runtime, URL, text and source-record checks passed 13; bake boundary checks
+passed five. Typechecking, affected TypeScript lint, package builds and the
+preparation bundle passed. No full site production build was run. The evidence
+binds these results to the base commit and hashes of the changed inputs, code
+and delivered inventory; documentation-only commits do not change that scope.
+
+### Earlier versions
+
+The records below apply to their stated revisions, not to the new meshes or
+eleven-image selection.
 
 - **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
@@ -49,11 +109,11 @@ separates those results from the comet checks. Earlier runs are retained below.
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `osiris` | 8 | 0 | — | — | — | its other 8 frames | 2 of 8 | — | 5 of 8, -0.50° | — | ×1.14 | registered |
+| `osiris` | 11 | 0 | — | — | — | its other 11 frames | 2 of 11 | — | 11 of 11, 0.00° | — | ×1.20 | registered |
 
 Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
@@ -62,16 +122,21 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 Surface places use the native, released SHAP7 regional map and Thomas et al.'s
 Table 1 names. The 26 regional points are representative on-region locations,
-not published centres or boundaries. They transfer to the unchanged 1,000-triangle
-RMOC display mesh only when the point is within 100 m of that surface. The two
+not published centres or boundaries. They are projected within 100 m onto the
+matching SHAP7 display mesh and appear only on OSIRIS, regions and geology. The two
 Philae sites remain unsized coordinates from their cited ESA release or paper.
 Neither set supplies IAU feature nomenclature.
 
 - Photographed shadows, seams and real seasonal differences remain. The composite
   spans a perihelion passage; it cannot measure surface change.
-- Phase correction extends the published 1.3–54° fit to observations at 47–64°.
+- Phase correction extends the published 1.3–54° fit to the older observations reaching 64°. The new frames are at 41–51°.
   It omits roughness and multiple scattering.
-- The matched browser crops compare atlas versions; they do not establish pixel
+- Close zoom exposes stretched texture, triangle-edge seams and abrupt gray
+  rejected patches, especially around the neck. The 1,992-face display remains
+  much coarser than the 124,938-face source. Its largest reported closest-point
+  displacement is 68.70 m; the simplifier's 46.48 m estimate is not a distance
+  bound. These defects remain visible in the retained close-up evidence.
+- Browser views compare rendered datasets; they do not establish pixel
   matching with native photographs.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
@@ -110,9 +175,12 @@ A connected triangle mesh preserves overhangs at the neck. The `radial-terrain` 
 
 #### Shape
 
-meshoptimizer 1.2.0 reduces the released mesh to 1,000 closed, consistently wound triangles. It
-preserves both lobes, the neck and recessed surfaces without a radial resample.
-[`evidence/terrain.json`](evidence/terrain.json) records topology and the simplifier's estimated error; that estimate is
+meshoptimizer 1.2.0 retains the original connectivity before simplifying each
+source separately: 1,000 RMOC triangles, 1,992 SHAP7 triangles and 1,498 SHAP5
+triangles. Each remains closed and consistently wound, preserving both lobes,
+the neck and recessed surfaces without a radial resample.
+The upgrade evidence records each mesh’s topology and simplifier error;
+[`evidence/terrain.json`](evidence/terrain.json) preserves the earlier RMOC preparation; that estimate is
 not a Hausdorff bound or the source measurement uncertainty.
 
 #### Shape model material
@@ -128,14 +196,20 @@ input is omitted from the surface-map panel.
 
 #### OSIRIS mosaic
 
-Eight calibrated exposures span 2014-08-05T19:44:22.918 UTC to
-2015-11-15T05:08:11.274 UTC. Four August 2014 photographs remain; four
-October–November 2015 photographs replace the earlier September close-ups.
+Eleven calibrated exposures span 2014-08-05T19:44:22.918 UTC to
+2016-04-10T11:50:16.568 UTC: four August 2014, four October–November 2015,
+and three April 2016 photographs. The later close-ups improve selected detail
+without displacing useful broader coverage.
 The single orange filter supplies grayscale only.
 
-The new inputs come from the [MTP022 GEO archive](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/)
+The 2015 inputs come from the [MTP022 GEO archive](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/)
 and its [L4 radiance and quality archive](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/).
-The southern GEO inputs are level 5 DDR, with level 4 RDR companions. Each exposure
+The April inputs come from the [MTP028 GEO archive](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/)
+and its [L4 quality collection](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-4-ext2-67pchuryumov-m28-v2.0/).
+[Feller et al. (2019)](https://doi.org/10.1051/0004-6361/201833807), Table 6,
+identifies this observing sequence. Actual acquisition times, filters and
+backplane versions come from each selected product’s attached label.
+The GEO inputs are level 5 DDR, with level 4 RDR companions. Each exposure
 retains its original attached label. The companion L4 image must match every GEO
 radiance pixel and its observation identity
 before its quality flags are used. Positive VALID is required, LOSSY is explicitly
@@ -147,38 +221,45 @@ quality, geometry and photometry permit.
 
 The corrected GEO shape identifier is required by the archive errata. A projective
 camera fitted from archived XYZ/pixel correspondences must predict the remaining
-pixels within 0.01 source pixel. Retained triangle texels match the closest original
-RMOC source triangle within 50 m; every source pixel contributor must lie within
-20 m of that point, with emission ≤80° and an independent full-RMOC visibility ray
-agreeing within 0.5 m. The largest recorded camera holdout residual is below 0.0025
-source pixel. No geometry limit was relaxed for the southern images.
+pixels within 0.01 source pixel. Each retained texel samples the closest full
+125K SHAP7 source point. Each bilinear contributor must be within 20 m of that
+point, with emission ≤80° and independent visibility on the same full SHAP7
+mesh agreeing within 0.5 m. The archive uses the denser 4M SHAP7 release; the
+source-shape comparison above measures their disagreement. Camera-fit residuals
+check the archived projection, not transfer accuracy. The source-distance
+report records display simplification separately; there is no 50 m cutoff on
+the photographic closest-point query.
 
 Atlas bleed stays on its own retained face. Grid denotes rejected or absent
 photography, not uncertainty in the underlying shape.
 
 #### OSIRIS compositing
 
-At every accepted point, select the observation with the lowest maximum source
-emission angle. Residual brightness gains use only co-located positive samples
+At every accepted point, select the qualified observation with the finest
+projected surface resolution, accounting for its pixel scale and emission angle.
+Brightness never chooses an image. Residual brightness gains use only co-located positive samples
 with incidence and emission ≤65°. This restriction applies to the brightness fit;
 display pixels retain the 80° limits. The fit requires at least 128 overlap samples,
-a median absolute deviation of log ratios ≤0.25 and gains within a 1.35× budget.
-The first image is the reference; final gains range from 0.908 to 1.157.
-
-The fit uses 64 samples per triangle. An independent set of 63 disjoint samples
-produces gains within 0.8% of those values. [Calibration check](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/calibration.json).
+a median level error ≤0.07 and gains within a 1.35× budget.
+The first image is the reference; the eleven-frame trial gains span
+0.881–1.044, within the unchanged budget. The fit uses 128 samples per triangle;
+an independent 127-sample grid changes every fitted gain by less than 0.54%.
+The former 64/63 grids differed by up to 6.01%; denser sampling resolves
+that sensitivity without loosening any quality gate.
 These residual adjustments follow the disk and phase corrections below.
 
-The lossless source-index raster identified by [`evidence/osiris-source-index.json`](evidence/osiris-source-index.json)
-binds every atlas texel to its exposure, with zero for no accepted observation.
-It is an inspection output, not a browser asset.
+Preparation emits a lossless source-index raster binding atlas texels to their
+selected exposure, with zero for no accepted observation. It is an inspection
+output, not a browser asset. [`evidence/osiris-source-index.json`](evidence/osiris-source-index.json)
+preserves the earlier mosaic; current per-image selection areas and rejection
+counts are in the upgrade evidence.
 
 #### OSIRIS illumination
 
 The [OSIRIS calibration pipeline, §3.13](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/osiris_cal_pipeline_v06.pdf)
 defines `I/F = π d² radiance / solarFlux`. Solar distance, flux and their units come
 from each original calibration HISTORY. Already-normalized inputs are rejected.
-This conversion accounts for the different solar distances of the 2014 and 2015
+This conversion accounts for the different solar distances of the 2014, 2015 and 2016
 observations.
 
 [Fornasier et al. (2015)](https://doi.org/10.1051/0004-6361/201525901) provides the
@@ -191,8 +272,9 @@ operate on linear source pixels before interpolation.
 
 This single-scattering approximation omits roughness and multiple scattering;
 it is not the full Hapke model or measured albedo. Photographed cast shadows and
-surface changes remain. The first observation supplies one common 1–99% linear
-grayscale stretch after the residual brightness adjustments.
+surface changes remain. All selected surface samples supply the authored 1.9–99.3 percentile range
+after residual brightness adjustments. The linear quantity is then sRGB-encoded
+once for display.
 
 Shadows off displays the corrected image uniformly lit and remains the default.
 Shadows on adds the prepared Sun lighting. Residual photographed shadows are
@@ -211,7 +293,8 @@ model, Shadows off uses three authored fill lights to inspect the shape.
 
 #### Runtime
 
-1,000 native `u` triangles. Geometry, atlas pixels, light/shadow computation and
+Three prepared mesh banks share one scene; only the selected bank is visible.
+Geometry, atlas pixels, light/shadow computation and
 transforms are prepared. Runtime switches prepared resources through the existing
 object contract. No tails or dust simulation are included.
 
@@ -224,7 +307,7 @@ The OSIRIS thumbnail samples the same normalized observation on the same retaine
 mesh, viewed toward its acquisition camera. Its dedicated flat minimap withholds
 ambiguous radial intersections; runtime never uses that map to choose a surface
 sheet. [OSIRIS provenance](source/reference/osiris-georeference.json) records the
-manual hashes, quality-bit interpretation and correction limits.
+manuals, quality-bit interpretation and correction limits.
 
 #### September registration results
 
@@ -261,8 +344,10 @@ retain their earlier versions and results.
 
 Regions uses Thomas et al. (2018), SHAP7 categorical region cells, version 1, DOI
 [10.17632/2845znt54k.1](https://doi.org/10.17632/2845znt54k.1), CC BY 4.0. The 124,938 source
-triangles carry 26 region IDs; they are sampled onto the existing 1,000-triangle RMOC display
-without changing its geometry.
+triangles carry 26 region IDs. Their own Cartesian geometry now supplies the
+1,992-triangle display for regions, geology and OSIRIS. Region transfer returns
+to the same source mesh, with a 1 mm identity tolerance rather than the old
+50 m registration allowance between different models.
 
 Geology uses European Space Agency (2021), ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0, DOI
 [10.5270/esa-kokoti7](https://doi.org/10.5270/esa-kokoti7), and Leon-Dasi, Besse, Grieger and
@@ -281,8 +366,17 @@ The Rosetta archive `RO-C-VIRTIS-5-67P-MAPS-V1.0` supplies albedo, spectral slop
 absorption and modeled ice maps from August–September 2014. These are separate quantities with
 separate legends. Modeled ice is a model result.
 
-Registration is approximate; missing samples and ambiguous mapping near the neck remain
-gridded. The [VIRTIS report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-VIRTIS.md) contains the decoding and
+The four scalar datasets now use their own 96,834-facet SPC SHAP5 source,
+reduced to 1,498 display triangles. The later archived release is not established
+as the original VIRTIS pipeline’s SHAP5 v1.1, so angular registration remains
+approximate. Missing values, physically rejected values and ambiguous radial
+cells remain gridded; the 3×3 cell-footprint and individual-ray checks remain.
+
+A measured alternative confirms that later does not mean better coverage:
+the MTP006 albedo table has 166,159 valid cells (64.10%); MTP009 has 45,878
+(17.70%), adding only 662 cells while losing 120,943. These are grid-cell counts,
+not surface areas or a valid seasonal-change analysis. The current four maps
+remain selected. [Original-table comparison](evidence/virtis-albedo-comparison.json). The [VIRTIS report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-VIRTIS.md) contains the decoding and
 registration method.
 
 </details>

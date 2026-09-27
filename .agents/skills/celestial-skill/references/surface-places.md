@@ -11,7 +11,8 @@ or explicitly inferred model anatomy. Keep mission names distinct from IAU names
 Derive region anchors from the released map and check them against the unchanged
 display mesh; a label point does not establish a region centre, size or boundary.
 For alternative meshes, select the matching prepared `surfaceHit.lensRanges`
-entry and expose those places only on that dataset. A shared body name does not
+range and expose those places only on datasets sharing that exact range.
+Several datasets may share one mesh; different mesh ranges require separate qualification. A shared body name does not
 make coordinates transferable between models. Keep approximate placement visible
 in the caption. Unresolved photograph-to-shape registration cannot establish a
 terrain landmark; neither can a camera direction alone.

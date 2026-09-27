@@ -10,8 +10,11 @@ const MEDIAN_ERROR = Math.sqrt(Math.PI / 2) * 1.4826;
  * minimum 64 pairs. A scattered but well-sampled overlap then counts, and a precise one needs no authored spread. */
 export const MAXIMUM_LEVEL_ERROR = .07;
 
+/** Dense calibration remains bounded preparation work; regional high-resolution mosaics need more overlap support. */
+export const MAXIMUM_OVERLAP_SAMPLES = 256;
+
 export function sampleTrianglePoints(faces: Pick<PreparedTriangle, "vertices">[], count: number) {
-  if (!Number.isInteger(count) || count < 4 || count > 64) throw new Error('Invalid overlap sample count.');
+  if (!Number.isInteger(count) || count < 4 || count > MAXIMUM_OVERLAP_SAMPLES) throw new Error('Invalid overlap sample count.');
   return faces.flatMap(({ vertices: [a, b, c] }) => Array.from({ length: count }, (_, i) => {
     const u = Math.sqrt((i + .5) / count), v = (i * .6180339887498949 + .5) % 1;
     return a.map((n, axis) => n * (1 - u) + b[axis] * u * (1 - v) + c[axis] * u * v);

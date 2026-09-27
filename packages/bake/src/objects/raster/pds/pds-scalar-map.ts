@@ -118,5 +118,6 @@ export async function loadScalarMap(root: string, value: unknown, mesh?: SourceM
     sourceGrid: lens.grid, sourceUnits: lens.sourceUnits, displayUnits: lens.displayUnits, valueTransform: lens.valueTransform,
     sourceValidRange: lens.sourceValidRange ?? null, scale: [lens.minimum, lens.maximum],
     sampling: 'Nearest explicit half-degree coordinate; no interpolation; longitude wraps; polar degenerate cell withheld.',
-    registration: 'Cheops angular transfer to the full RMOC mesh, bounded closest-point transfer to retained triangles. SHAP5 and RMOC 3x3 footprint rays plus each sample direction must be unique. Later archived SHAP5 is an ambiguity cross-check, not the original SHAP5 v1.1 geometry or an exact registration.' } };
+    ambiguityReference: recipe.path,
+    registration: 'Planetocentric angular transfer to the selected full source mesh, with bounded closest-point transfer from retained triangles. The selected mesh and declared ambiguity reference must both have unique rays throughout each 3x3 cell footprint and at the sampled direction. A later reference release does not establish exact registration to the map’s original shape.' } };
 }

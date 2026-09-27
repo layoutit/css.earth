@@ -38,7 +38,7 @@ interface GeoSchema {
 export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
   // Archive backplanes carry each pixel's surface point; the camera is fitted to them.
   'osiris-geo': { camera: 'backplane-fit', frame: { required: ['qualityPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['radiometry'] },
-    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
+    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 24 },
   // AMICA admits lossy frames and counts them in the report; one flat field serves every frame.
   'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, lens: { required: ['filter', 'flatPath'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 10 },
@@ -101,7 +101,7 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
-    { selections: ['lowest-emission', 'recipe-order'], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
+    { selections: ['lowest-emission', 'recipe-order', ...(recipe.format === 'osiris-geo' ? ['finest-resolution'] : [])], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
   // Every band composite is a scientific visualization, not natural colour: it states so and starts its range at zero.
@@ -274,7 +274,8 @@ export const geoFormat: SurfaceObservationFormat = {
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
     const range = recipe.display.displayRange, color = schemaOf(recipe.format).color;
     const policy: SurfacePolicy = { format: recipe.format,
-      selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
+      selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order'
+        : recipe.selection === 'finest-resolution' ? 'finest-resolution' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
       // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
       display: { ...(range && color ? { range: 'stated-range', low: range[0], high: range[1], units: color.units,
