@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { UPGRADE_FACTOR, bodyArchiveNames, citedDois, imageryVerdict, opusImagesUrl, opusTargets, parseOpusFrames, shippedImagery } from './imagery-candidates.mts';
+import { UPGRADE_FACTOR, bodyArchiveNames, citedDois, imageryVerdict, opusImagesUrl, opusTargets, parseOpusFrames, shippedImagery } from '@cssearth/bake/objects/candidates';
 
 test('OPUS covered bodies are the names of its centre-resolution fields', () => {
   const fields = { data: { 'Surface Geometry Constraints': {

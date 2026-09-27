@@ -1,8 +1,5 @@
-#!/usr/bin/env node
-/** Before wiring or re-registering a photograph lens, find whether a public archive holds finer frames than the body ships.
- *
- *   node tools/objects/imagery-candidates.mts [<object-id> ...] [--minimum-pixels 50] [--json]
- *   node tools/objects/imagery-candidates.mts --archives <object-id> ... [--json]
+/** Before wiring or re-registering a photograph lens, find whether a public archive holds finer frames than the body ships
+ * (`packages/bake/cli/imagery-candidates.mts` prints what these find).
  *
  * `--archives` searches the observatory archives OPUS does not index, for bodies seen from the ground or from Earth orbit: ALMA,
  * ESO raw frames, MAST (Hubble, JWST) by the names the body is observed under (its catalogue name and, for a numbered small
@@ -15,13 +12,14 @@
  * natural-colour or monochrome map lens's native scale (their prepared reports).
  * The verdict is advisory: finer frames still need a camera, registration and reuse terms before they can ship. */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import { createRequire } from 'node:module';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations } from '@cssearth/bake/objects/candidates';
+import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations } from './archive-search.ts';
 
 const OPUS = 'https://opus.pds-rings.seti.org/api';
-const ROOT = resolve(import.meta.dirname, '../..');
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
 /** A frame must be at least twice as fine as the shipped one to count as an upgrade: finer by less is within footprint and mesh error. */
 export const UPGRADE_FACTOR = 2;
 
@@ -187,31 +185,4 @@ export async function archiveCandidates(ids: readonly string[]) {
     results.push({ id, names, citedDois: cited, archives, leads: archiveLeads(archives) });
   }
   return results;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href && process.argv.includes('--archives')) {
-  const results = await archiveCandidates(process.argv.slice(2).filter(argument => !argument.startsWith('--')));
-  if (process.argv.includes('--json')) { console.log(JSON.stringify(results, null, 2)); process.exit(0); }
-  for (const result of results) {
-    console.log(`${result.id}: searched as ${result.names.map(name => `"${name}"`).join(', ')}; ${result.citedDois.length} cited DOIs checked for deposits`);
-    for (const group of result.archives.alma) console.log(`  ALMA targets matched in ${group.proposal}: ${group.targets.join(', ')}`);
-    for (const lead of result.leads) console.log(`  ${lead}`);
-    if (!result.leads.length) console.log('  no archive leads');
-  }
-  process.exit(0);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), minimumIndex = args.indexOf('--minimum-pixels');
-  const ids = args.filter((argument, index) => !argument.startsWith('--') && (minimumIndex < 0 || index !== minimumIndex + 1));
-  const { results, skipped } = await imageryCandidates(ids, { minimumPixels: minimumIndex >= 0 ? Number(args[minimumIndex + 1]) : 50 });
-  if (args.includes('--json')) { console.log(JSON.stringify({ results, skipped }, null, 2)); process.exit(0); }
-  const km = (value: number | null | undefined) => value === null || value === undefined ? '—' : value < 1 ? `${(value * 1000).toFixed(0)} m` : `${value.toFixed(2)} km`;
-  for (const result of results) {
-    const shipped = result.verdict === 'shipped-unknown' ? 'unknown (no surfaces report, or imagery without a stated scale)'
-      : result.shipped?.meters ? `${km(result.shipped.meters / 1000)} (${result.shipped.kind} ${result.shipped.lens})` : 'no imagery lens';
-    const best = result.opusBest ? `${km(result.opusBest.centerKmPerPixel)} ${result.opusBest.instrument} ${result.opusBest.opusId}${result.opusBest.phaseDegrees === null ? '' : ` at ${result.opusBest.phaseDegrees.toFixed(0)}°`}` : '—';
-    console.log(`${result.verdict.padEnd(12)} ${result.id.padEnd(12)} shipped ${shipped}; OPUS best ${best}; ${result.pixelsAcross === null ? '' : `diameter ${result.pixelsAcross.toFixed(0)} px; `}${result.factor === null ? '' : `${result.factor.toFixed(1)}× finer; `}${result.opusImages} images`);
-  }
-  if (skipped.length) console.log(`skipped (no mean radius in packages/astronomy/data/bodies): ${skipped.join(', ')}`);
 }
