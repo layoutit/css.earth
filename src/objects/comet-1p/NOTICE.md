@@ -24,13 +24,13 @@ The original composite retains dust contamination and illumination.
 Encounter geometry: Giotto HMC and Vega TVS teams, International Halley Watch,
 NASA PDS; Vega ephemerides distributed by NASA SPDF. Rotation compilation:
 Samarasinha, Mueller, Belton and Jorda (2004), archived by NASA PDS (2006),
-DOI 10.26007/XDRA-4H55. Exact original tables and geometry-header pins accompany
+DOI 10.26007/XDRA-4H55. Exact original tables and geometry-header paths accompany
 [the registration](source/reference/giotto-registration.json).
 
 Vega photography: Vega 2 TVS team; KFKI processing team; International Halley
 Watch; NASA Planetary Data System. Dataset
 `VEGA2-C-TVS-3-RDR-HALLEY-PROCESSED-V1.0` (1997), products T11190 and T11194.
-Original filtered image samples and their headers are hash-pinned beside the
+Original filtered image samples and their headers are identified beside the
 [encounter registration](source/reference/encounter-registration.json). These
 are publicly distributed scientific archive data. Retain the original team
 credits and dataset citation with derived photography, maps, atlases and

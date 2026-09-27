@@ -83,7 +83,8 @@ export function createVegaSampler(mesh:SourceMesh, observation:Observation, mask
   };
 }
 
-export async function prepareEncounters(sourceDirectory:string) {
+export async function prepareEncounters(sourceDirectory:string, width = 512) {
+  assert.ok(Number.isSafeInteger(width) && width >= 256 && width <= 4096 && width % 2 === 0, 'Expected an even encounter-map width between 256 and 4096.');
   const registrationBytes=await readFile(resolve(sourceDirectory,'reference/encounter-registration.json'));
   const registration=parseRegistration(JSON.parse(registrationBytes.toString()));
   assert.equal(registration.schema,'cssearth-halley-encounter-registration@1');
@@ -92,7 +93,13 @@ export async function prepareEncounters(sourceDirectory:string) {
   const mesh=parsePdsRadiusTable(shapeBytes.toString(),{stepDegrees:5,longitudeDirection:'east-positive',metersPerUnit:1000,expectedVertices:2522,expectedFaces:5040});
   const photo=await sharp(resolve(sourceDirectory,'giotto/hmc_best.gif')).toColourspace('srgb').removeAlpha().raw().toBuffer({resolveWithObject:true});
   const giotto=createGiottoSampler(mesh,giottoRegistration,{data:photo.data,...photo.info});
-  const vega=[];
+  const vega: {
+    id: string;
+    filter: ReturnType<typeof decodeVegaImage>['cards'][string];
+    geometry: Awaited<ReturnType<typeof deriveVegaCamera>>;
+    outline: ReturnType<typeof validateVegaOutline>;
+    sample: ReturnType<typeof createVegaSampler>;
+  }[] = [];
   for(const observation of registration.observations) {
     const image=decodeVegaImage(await readFile(resolve(sourceDirectory,`vega/${observation.id}.img`)),await readFile(resolve(sourceDirectory,`vega/${observation.id}.hdr`)));
     assert.equal(observation.utc.slice(11,19),image.cards['TIM--OBS']);
@@ -144,22 +151,23 @@ export async function prepareEncounters(sourceDirectory:string) {
   // Anchor Vega to its closest-approach NIR image. The six Giotto/Vega detector
   // blocks are too sparse for a common gain; Giotto retains its original RGB.
   const gains=[1,vegaFit.gain];
-  const width=512,height=256,rgb=Buffer.alloc(width*height*3),attribution=Buffer.alloc(width*height),counts=[0,0,0,0];
+  const height=width/2,rgb=Buffer.alloc(width*height*3),attribution=Buffer.alloc(width*height),counts=[0,0,0,0];
+  const samplePoint = (point: readonly number[], faceId: number) => {
+    const g = giotto(point, faceId);
+    if (g) return { color: g.color, source: 1, clipped: false };
+    const winner = selectVegaCandidate(vega.map(o => o.sample(point, faceId)));
+    if (!winner) return null;
+    const value = winner.value.dn * gains[winner.index];
+    return { color: Array<number>(3).fill(Math.min(255, Math.max(1, Math.round(value)))), source: winner.index + 2, clipped: value > 255 };
+  };
   let clippedPixels=0;
   for(let y=0;y<height;y++) for(let x=0;x<width;x++) {
     const longitude=(x+.5)*360/width,latitude=90-(y+.5)*180/height,l=longitude*radians,b=latitude*radians;
     const hit=mesh.hit(longitude,latitude);assert.ok(hit);
     const point=[Math.cos(b)*Math.cos(l),Math.cos(b)*Math.sin(l),Math.sin(b)].map(n=>n*hit.radius);
-    const g=giotto(point,hit.faceId);let color:number[]|null=g?.color??null,source=g?1:0;
-    if(!g) {
-      const winner=selectVegaCandidate(vega.map(o=>o.sample(point,hit.faceId)));
-      if(winner) {
-        const value=winner.value.dn*gains[winner.index];
-        if(value>255) clippedPixels++;
-        color=Array(3).fill(Math.min(255,Math.max(1,Math.round(value))));source=winner.index+2;
-      }
-    }
-    const index=y*width+x; if(color) rgb.set(color,index*3);attribution[index]=source;counts[source]++;
+    const sample = samplePoint(point, hit.faceId), index = y * width + x, source = sample?.source ?? 0;
+    if (sample) { rgb.set(sample.color, index * 3); if (sample.clipped) clippedPixels++; }
+    attribution[index] = source; counts[source]++;
   }
   const png=await sharp(rgb,{raw:{width,height,channels:3}}).png().toBuffer();
   const report={schema:'cssearth-halley-encounter-projection-report@1',
@@ -167,10 +175,10 @@ export async function prepareEncounters(sourceDirectory:string) {
     observations:[{id:'giotto',displayGain:1},...vega.map((o,i)=>({id:o.id,filter:o.filter,geometry:o.geometry,outline:o.outline,displayGain:gains[i]}))],
     selection:'Retain every accepted Giotto RGB sample. Else choose the qualified Vega sample with the smallest foreshortening-adjusted pixel size; ties follow observation order.',
     masks:registration.mask,photometricCorrection:'None. Only T11194 receives a fitted relative display gain; this is not a spectral or reflectance calibration.',clippedPixels,
-    map:{width,height,attributionCounts:counts},
-    attribution:{width,height,encoding:'One unsigned byte per input-map texel, row-major; no padding or bleed. Same orientation as encounters.png.',codes:['gap','giotto',...vega.map(o=>o.id)]},
+    map:{width,height,bytes:png.length,attributionCounts:counts},
+    attribution:{width,height,bytes:attribution.length,encoding:'One unsigned byte per input-map texel, row-major; no padding or bleed. Same orientation as encounters.png.',codes:['gap','giotto',...vega.map(o=>o.id)]},
     coverage:{sourceAreaSquareKm:totalArea/1e6,samplesPerTriangle:7,triangles:mesh.indices.length,beforePercent:oldArea/totalArea*100,afterPercent:newArea/totalArea*100,perSourcePercent:perSourceArea.map(a=>a/totalArea*100)},overlap:overlapReport};
-  return {png,attribution,report};
+  return {png,attribution,report,samplePoint,mesh};
 }
 
 if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {

@@ -4,8 +4,8 @@ const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
-import { decodeGiottoFrame, loadPinned } from '../objects/comet-1p/inspect-giotto.mts';
+import { parseGiottoIndex, surveyGiottoIndex } from '../objects/comet-1p/giotto-index.mts';
+import { decodeGiottoFrame, loadIntakeSource, parseIntakeManifest } from '../objects/comet-1p/inspect-giotto.mts';
 
 function fixture(extra: string[][] = []): [Buffer, Buffer, Buffer] {
   const cards = [
@@ -50,16 +50,57 @@ test('IHW decoder cross-checks PDS dimensions and refuses truncated or nonzero p
   assert.throws(() => decodeGiottoFrame(...badPadding), /padding/);
 });
 
-test('intake refuses modified cached sources without silently replacing them', async () => {
+test('intake accepts current path-based records and refuses truncated cached sources', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'halley-giotto-test-'));
   try {
-    const data = Buffer.from('pinned source');
-    const entry = { url: 'https://example.invalid/source.img', file: 'source.img', bytes: data.length, sha256: createHash('sha256').update(data).digest('hex') };
+    const data = Buffer.from('source bytes');
+    const entry = { url: 'https://example.invalid/source.img', file: 'source.img', bytes: data.length };
     await writeFile(join(directory, entry.file), data);
-    assert.deepEqual(await loadPinned(directory, entry), data);
-    const changed = Buffer.from('changed data!');
+    assert.deepEqual(await loadIntakeSource(directory, entry), data);
+    const changed = Buffer.from('short');
     await writeFile(join(directory, entry.file), changed);
-    await assert.rejects(Reflect.apply(loadPinned, undefined, [directory, entry, true]), /Source pin mismatch/);
+    await assert.rejects(Reflect.apply(loadIntakeSource, undefined, [directory, entry, true]), /Source byte-count mismatch/);
     assert.deepEqual(await readFile(join(directory, entry.file)), changed);
+  } finally { await rm(directory, { recursive: true }); }
+});
+
+// The schema migration removed digest pins from source records. Exercise the
+// tracked manifest so intake cannot quietly retain the obsolete requirement.
+test('intake parses the current source manifest without digest pins', async () => {
+  const manifest = parseIntakeManifest(JSON.parse(await readFile(
+    new URL('../../src/objects/comet-1p/source/reference/giotto-hmc-intake.json', import.meta.url), 'utf8')));
+  assert.ok(manifest.frames.length > 0);
+  assert.ok(manifest.frames.every(frame => frame.header.bytes > 0 && frame.image.bytes > 0));
+});
+
+test('archive indexes preserve detector modes and reject malformed rows', () => {
+  const mdm = 'hmc01814 77 80 3436 -294.722560 C CLEAR 1 0 1 1';
+  const sdm = 'hmc00001 104 112 681 -11307.695000 C CLEAR 0';
+  assert.deepEqual(parseGiottoIndex(mdm, 'mdm')[0], {
+    id: 'hmc01814', width: 77, height: 80, imageId: 3436,
+    timeToEncounterSeconds: -294.72256, sensor: 'C', filter: 'CLEAR',
+    superpixels: [1, 0, 1, 1], mode: 'mdm',
+  });
+  assert.deepEqual(parseGiottoIndex(sdm, 'sdm')[0].superpixels, [0]);
+  for (const invalid of [mdm.replace('77', '0'), mdm.replace('CLEAR', 'GUESS'),
+    mdm.replace('1 0 1 1', '1 6 1 1'), mdm.replace('-294.722560', 'NaN')]) {
+    assert.throws(() => parseGiottoIndex(invalid, 'mdm'));
+  }
+  assert.throws(() => parseGiottoIndex(sdm, 'mdm'));
+  assert.throws(() => parseGiottoIndex('', 'sdm'));
+});
+
+test('archive survey is offline by default and refuses duplicate image identifiers', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'halley-index-test-'));
+  try {
+    await assert.rejects(surveyGiottoIndex(directory), { code: 'ENOENT' });
+    await writeFile(join(directory, 'imghsigi.idx'), 'hmc00001 104 112 681 -11307.695000 C CLEAR 0');
+    await writeFile(join(directory, 'imghmigi.idx'), 'hmc01814 77 80 3436 -294.722560 C CLEAR 1 0 1 1');
+    const survey = await surveyGiottoIndex(directory);
+    assert.equal(survey.report.totalImages, 2);
+    assert.equal(survey.frames.length, 1);
+    assert.equal(survey.frames[0].image.bytes, 14400, 'Native FITS blocks include raster padding');
+    await writeFile(join(directory, 'imghmigi.idx'), 'hmc00001 77 80 3436 -294.722560 C CLEAR 1 0 1 1');
+    await assert.rejects(surveyGiottoIndex(directory), /Duplicate archive image/);
   } finally { await rm(directory, { recursive: true }); }
 });
