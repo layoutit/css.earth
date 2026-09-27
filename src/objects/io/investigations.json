@@ -125,17 +125,22 @@
     },
     {
       "id": "jiram-pre-orbit-37",
-      "subject": "JIRAM Io frames before orbit 37 (2018 to 2021)",
+      "subject": "Early JIRAM Io frames through the original sunlit-disc-fit route",
       "status": "excluded",
-      "finding": "Mura et al. (2024), Section 2.2: most images before orbit 37 are heavily saturated and fit only for locating hot spots, so their radiances are not mapped. A trial with them raised coverage to 49% but carried saturation streaks.",
+      "finding": "Mura et al. (2024), Section 2.2: most images before orbit 37 are heavily saturated and fit only for locating hot spots, so their radiances are not mapped. A trial with them raised coverage to 49% but carried saturation streaks. That direct-RDR trial remains excluded. The separately qualified Perry registered-product route now retains unsaturated portions of early frames using published geometry, explicit detector masks and cold-column subtraction; it does not recover saturated values.",
       "evidence": [
         "https://doi.org/10.3389/fspas.2024.1369472",
-        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/README.md"
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47/src/objects/io/README.md#registered-volcanic-heat-27-september-2026"
       ],
       "checked": [
         {
           "date": "2026-09-21",
           "commit": "d6d719b618fbcc16a70c0aa4fe650f71199a4d11"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47"
         }
       ],
       "revisitWhen": "A saturation correction for early JIRAM Io frames is published, or the lens shows hot-spot locations rather than radiance."
@@ -144,14 +149,15 @@
       "id": "jiram-orbits-51-to-60",
       "subject": "Remaining JIRAM Io close-pass coverage in orbits 51 to 60",
       "status": "deferred",
-      "finding": "The existing mosaic tool already intersects the triaxial ellipsoid. Orbits 51 and 53 now contribute 31 registered frames. Trials of all 17 orbit-57 and 22 orbit-58 images produced no cells with three qualified night-side observations; partial-disc fits were too sparse. Volumes 59 and 60 were absent from the examined archive. Orbits 52, 54 and 55 were indexed but not reduced; orbit 56 listed auxiliary products only. More southern coverage remains unqualified.",
+      "finding": "The existing mosaic tool already intersects the triaxial ellipsoid. Orbits 51 and 53 now contribute 31 registered frames. Trials of all 17 orbit-57 and 22 orbit-58 images produced no cells with three qualified night-side observations; partial-disc fits were too sparse. Volumes 59 and 60 were absent from the examined archive. Perry registered products now qualify PJ55 (42 accepted frames, 74,649 winning cells). Orbits 52 and 54 were indexed but not reduced; orbit 56 listed auxiliary products only. The current registered mosaic reaches 50.125S; remaining southern gaps are unqualified.",
       "evidence": [
         "https://doi.org/10.3389/fspas.2024.1369472",
         "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/source/science/jiram/recipe.json",
         "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/README.md",
         "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/evidence/jiram-close-passes/orbit57-receipt.json",
         "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/evidence/jiram-close-passes/orbit58-receipt.json",
-        "https://atmos.nmsu.edu/PDS/data/"
+        "https://atmos.nmsu.edu/PDS/data/",
+        "https://github.com/layoutit/css.earth/blob/c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47/src/objects/io/source/science/jiram/perry-receipt.json"
       ],
       "checked": [
         {
@@ -161,6 +167,10 @@
         {
           "date": "2026-09-27",
           "commit": "734ad10780629e11b09707ff5d0c0f5601ecb02e"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47"
         }
       ],
       "revisitWhen": "Additional sequences pass the existing registration and three-frame overlap checks, or a supported partial-disc registration method qualifies the 57/58 trials; revisit 59/60 when archive products are available."
@@ -217,6 +227,42 @@
           "commit": "734ad10780629e11b09707ff5d0c0f5601ecb02e"
         }
       ]
+    },
+    {
+      "id": "perry-2025-registered-jiram",
+      "subject": "Perry et al. (2025) registered M-band FITS release through PJ55",
+      "status": "included",
+      "finding": "All 2374 published M-band FITS frames in 27 orbit directories were screened. Published planetographic geometry and detector masks support 378 accepted frames on 17 contributing visits, covering 58.42% of spherical area on a 0.25-degree grid. Three native PDS comparisons match all radiance samples exactly after horizontal flipping. Cold-column medians and three-frame per-visit medians preserve the existing display scale; 60 of 72 bright local maxima match independent catalogue positions within 3 degrees. Mixed dates, smear, residual tracks, withheld saturation and southern gaps remain; absolute radiometry and total heat flow are not qualified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47/src/objects/io/README.md#registered-volcanic-heat-27-september-2026",
+        "https://github.com/layoutit/css.earth/blob/c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47/src/objects/io/evidence/jiram-perry/qualification.json",
+        "https://doi.org/10.3847/PSJ/adbae3",
+        "https://rgcps.asu.edu/juno/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47"
+        }
+      ]
+    },
+    {
+      "id": "perry-daylight-distant-background",
+      "subject": "Additional registered JIRAM coverage from daylight and distant images",
+      "status": "deferred",
+      "finding": "The Perry release reports full M-band observational coverage, but the current night-side radiance mosaic admits 58.42% under its terminator, saturation, cold-column and overlap cuts. Distant images often lack 32 qualified cold samples in a detector column. Daylight subtraction and an alternative background method have not been qualified for this map; reducing those limits alone would admit unsupported radiance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47/src/objects/io/source/science/jiram/perry-receipt.json",
+        "https://github.com/layoutit/css.earth/blob/c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47/src/objects/io/README.md#registered-volcanic-heat-27-september-2026",
+        "https://doi.org/10.3847/PSJ/adbae3"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47"
+        }
+      ],
+      "revisitWhen": "An independently checked reflected-sunlight removal or background estimator qualifies the excluded observations without saturation or reflection artifacts."
     }
   ]
 }

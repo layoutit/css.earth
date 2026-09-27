@@ -520,9 +520,9 @@
           }
         },
         "source": {
-          "id": "io-jiram-m-night-recipe",
+          "id": "io-jiram-perry-recipe",
           "path": "../manifest.json",
-          "url": "https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT"
+          "url": "https://doi.org/10.3847/PSJ/adbae3"
         },
         "facts": [
           {
@@ -533,7 +533,7 @@
           {
             "id": "coverage",
             "label": "Coverage",
-            "value": "24% of the surface; 65 frames on six visits, April 2022–July 2023"
+            "value": "58% of the surface; 378 frames on 17 visits, July 2017–October 2023"
           },
           {
             "id": "scale",
@@ -541,7 +541,7 @@
             "value": "Mura et al. (2024), Frontiers, Fig. 2"
           }
         ],
-        "notes": "Heat from Io's volcanoes at 4.8 µm, reduced from 65 registered Juno JIRAM frames on six visits, April 2022–July 2023. The May and July close passes add finer detail on a 0.25° map grid; their detector samples at or above 10,000 DN are withheld. A cold-night background is subtracted within each detector column to reduce reflection streaks. Color shows band radiance above that background on Mura et al. (2024), Figure 2's fixed scale, not temperature. About 24% of the surface is covered, mostly in the north. Dates are mixed; smear and registration uncertainty remain. Gray grid marks missing or withheld data.",
+        "notes": "Night-side volcanic glow at 4.8 µm from 378 registered JIRAM frames across 17 visits, July 2017–October 2023, using Perry et al. (2025) geometry and detector masks. About 58% of Io is covered. Color shows band radiance above a cold-night column background on Mura et al. (2024), Figure 2's scale, not temperature. Dates and image resolution vary; saturation, unsupported backgrounds and unobserved areas remain missing. Gray grid marks those gaps. Residual detector artifacts and smear remain.",
         "noData": true
       }
     ],

@@ -1020,44 +1020,123 @@
           }
         ]
       }
+    },
+    {
+      "id": "io-jiram-perry-recipe",
+      "path": "science/jiram/perry-recipe.json",
+      "origin": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
+      "licenseEvidence": [
+        "https://doi.org/10.3847/PSJ/adbae3"
+      ],
+      "acquisition": "Run node tools/objects/juno/jiram-registered-mosaic.mts src/objects/io/source/science/jiram/perry-recipe.json --inputs output/io-perry/inputs --fetch. curl reads the release ZIP directory and verifies each selected member CRC; 7z extracts M-band FITS. PDS indexes supply exact exposure times. The recipe screens all published M-band frames in its orbit archives.",
+      "redistribution": "The generated float map is restored from source-cache; source FITS remain in the ignored input directory. Recipe, detached label and measured receipt are tracked.",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "perry-2025-jiram-io",
+            "role": "material",
+            "evidence": "Appendix B processed M-band radiance, longitude, latitude, emission, range and saturation mask, through PJ55."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
       "id": "io-jiram-m-night-map",
-      "path": "science/jiram/io-jiram-m-night-2023-background.IMG",
-      "origin": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-m-night-2023-background.IMG",
-      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
-      "license": "Public NASA mission data",
+      "path": "science/jiram/io-jiram-perry-2017-2023.IMG",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-perry-2017-2023.IMG",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
       "consumers": [
         "volcanic-heat"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
         "inputs": [
-          "io-jiram-m-night-recipe"
+          "io-jiram-perry-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "catalogueId": "perry-2025-jiram-io",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
+            "evidence": "Appendix B processed M-band radiance, longitude, latitude, emission, range and saturation mask, through PJ55."
           }
         ]
       }
     },
     {
       "id": "io-jiram-m-night-label",
-      "path": "science/jiram/io-jiram-m-night-2023-background.LBL",
-      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "path": "science/jiram/io-jiram-perry-2017-2023.LBL",
+      "origin": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+        "inputs": [
+          "io-jiram-perry-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "perry-2025-jiram-io",
+            "role": "material",
+            "evidence": "Appendix B processed M-band radiance, longitude, latitude, emission, range and saturation mask, through PJ55."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-m-night-receipt",
+      "path": "science/jiram/perry-receipt.json",
+      "origin": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+        "inputs": [
+          "io-jiram-perry-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "perry-2025-jiram-io",
+            "role": "material",
+            "evidence": "Appendix B processed M-band radiance, longitude, latitude, emission, range and saturation mask, through PJ55."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-six-visit-map",
+      "path": "science/jiram/io-jiram-m-night-2023-background.IMG",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-m-night-2023-background.IMG",
       "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
       "license": "Public NASA mission data",
       "consumers": [
-        "volcanic-heat"
+        "historical-evidence"
       ],
       "recipe": {
         "generator": "tools/objects/juno/jiram-mosaic.mts",
@@ -1078,13 +1157,40 @@
       }
     },
     {
-      "id": "io-jiram-m-night-receipt",
+      "id": "io-jiram-six-visit-label",
+      "path": "science/jiram/io-jiram-m-night-2023-background.LBL",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "historical-evidence"
+      ],
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-six-visit-receipt",
       "path": "science/jiram/receipt.json",
       "origin": "https://atmos.nmsu.edu/PDS/data/",
       "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
       "license": "Public NASA mission data",
       "consumers": [
-        "volcanic-heat"
+        "historical-evidence"
       ],
       "recipe": {
         "generator": "tools/objects/juno/jiram-mosaic.mts",
