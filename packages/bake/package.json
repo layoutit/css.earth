@@ -179,6 +179,11 @@
       "import": "./dist/delivery.js",
       "default": "./dist/delivery.js"
     },
+    "./sources": {
+      "types": "./dist/sources.d.ts",
+      "import": "./dist/sources.js",
+      "default": "./dist/sources.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -201,6 +206,7 @@
     "cwebp-bin": "8.0.0",
     "geotiff": "3.0.5",
     "h5wasm": "0.10.3",
+    "linkedom": "^0.18.13",
     "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
     "robust-predicates": "3.0.3",

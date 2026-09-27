@@ -1,7 +1,7 @@
 import { isDeepStrictEqual } from 'node:util';
 import { resolve } from 'node:path';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
+import type { RuntimeSourceReader } from '../runtime-source/index.ts';
 
 export interface AuthoredWorldFrameReceiptInput {
   descriptor: unknown;

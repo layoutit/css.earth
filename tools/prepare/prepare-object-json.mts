@@ -24,7 +24,7 @@ import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { authoredObject } from '../sources/authored-object.mts';
+import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';

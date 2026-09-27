@@ -292,6 +292,9 @@ importers:
       h5wasm:
         specifier: 0.10.3
         version: 0.10.3
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
       meshoptimizer:
         specifier: 1.2.0
         version: 1.2.0

@@ -14,7 +14,7 @@ import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
 import { readPreparedJsonExports } from "../prepared/check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from '@cssearth/bake/runtime-source';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '../prepared/prepared-object-source.mts';
-import { requireAuthoredWorldFrameReceipt } from '../sources/authored-world-frame.mts';
+import { requireAuthoredWorldFrameReceipt } from '@cssearth/bake/sources';
 import { readContextObjects } from '../prepare/prepare-catalog.mts';
 
 const registryPath = "site/objects.mts";
