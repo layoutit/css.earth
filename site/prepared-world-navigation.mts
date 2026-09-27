@@ -268,7 +268,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         canFinish: () => publisher.kind === 'destination',
         interruptible: () => !billboard && (!moved || drawnElapsedS >= approachLimitS),
         owner: { apply(world) {
-          if (publisher.kind === 'departure') return departureOwner?.apply(world, { signal: running.signal });
+          if (publisher.kind === 'departure') return departureOwner?.apply(world, { signal: running.signal, departing: true });
           if (publisher.kind === 'destination') return publisher.owner.apply(world, { signal: running.signal });
           return presentWorld?.(world, worldCameraViewport(world, optics), { signal: activationSignal,
             commit: () => {

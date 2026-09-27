@@ -189,8 +189,18 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       onError(failure);
     });
   }
+  function canDraw() {
+    const range = zoomRange();
+    zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
+    return labelsEnabled() && load.kind === 'loaded' && enabled && Boolean(view?.projection)
+      && (zoomGate || pinnedIndex !== null) && view?.levelOfDetail.stage === 'geometry';
+  }
   function schedule() {
-    if (destroyed || pendingFrame !== null) return;
+    if (destroyed) return;
+    syncLoop();
+    // A changing camera is not work for an empty/disabled label layer. Keep
+    // one pass when visible labels or a caption actually need to be cleared.
+    if (pendingFrame !== null || loopFrame !== null || (!canDraw() && visible.size === 0 && shownIndex === null)) return;
     pendingFrame = windowTarget!.requestAnimationFrame(() => { pendingFrame = null; refresh(); });
   }
   function populate(start: number) {
@@ -236,12 +246,12 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     return (await pending).features.find(feature => feature.id === id) ?? null;
   }
   // Labels follow a playing scene every frame. They are off by default; with them off there is nothing to follow.
-  const following = () => !destroyed && playing && labelsEnabled();
+  const following = () => !destroyed && playing && canDraw();
   function loop() {
     loopFrame = null;
     if (!following()) return;
     refresh();
-    loopFrame = windowTarget!.requestAnimationFrame(loop);
+    syncLoop();
   }
   function syncLoop() {
     if (following() && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
@@ -271,11 +281,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     frames++;
     const projection = view?.projection;
     const range = zoomRange();
-    zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
     // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
-    if (!labelsEnabled() || load.kind !== 'loaded' || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view !== null && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
+    if (!canDraw() || !projection) { hideAll(); return; }
     requirePhysicalProjection(projection);
     // Retained mesh ancestors use zero transform origins; their current matrices
     // carry the body spin exactly as painted. Camera transforms are already in

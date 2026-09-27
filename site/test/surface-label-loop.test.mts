@@ -1,3 +1,4 @@
+import { physicalProjectionFromCamera } from '@cssearth/renderer/prepared-data/physical-projection.ts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -28,6 +29,9 @@ test('surface labels keep no frame loop while they are off, the default', () => 
     transport: () => new Promise<Response>(() => {}) });
 
   labels.setPlaying(true);
+  for (let frame = 0; frame < 30; frame++) labels.publish({ projection: physicalProjectionFromCamera([1,0,0,0,1,0,0,0,1], [0,0,-3], 1, { focalPixels: 1000, principalOffsetPixels: [0,0] }),
+    levelOfDetail: { stage: 'marker', silhouetteDiameter: 1, markerOpacity: 1, proxyOpacity: 1, billboardOpacity: 0 }, zoom: 1 });
+  assert.equal(frames.size, 0, 'camera publications do not schedule disabled labels');
   run(); run();
   assert.equal(frames.size, 0, 'playing scene, labels off: no frame is requested');
   assert.equal(labels.stats().frames, 0);
@@ -35,7 +39,8 @@ test('surface labels keep no frame loop while they are off, the default', () => 
   document.body.dataset.surfaceLabels = 'on';
   document.body.dispatchEvent(new window.Event('objectsurfacelabelschange'));
   run(); run();
-  assert.ok(labels.stats().frames >= 2, 'turning labels on starts the loop');
+  assert.equal(frames.size, 0, 'enabled labels with no loaded catalogue cannot draw');
+  assert.equal(labels.stats().frames, 0);
 
   document.body.dataset.surfaceLabels = 'off';
   document.body.dispatchEvent(new window.Event('objectsurfacelabelschange'));

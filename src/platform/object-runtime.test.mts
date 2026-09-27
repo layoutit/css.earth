@@ -252,3 +252,32 @@ test('mount rejects an uncompiled motion document instead of discovering live CS
   const { motion, ...uncompiled } = moonDefinition;
   assert.throws(() => createObjectRuntime(uncompiled), /motion bindings must be prepared/);
 });
+
+
+test("hidden departure frames keep world publication without rescheduling detail or readouts", async t => {
+  const h = harness(); t.after(h.restore); await h.complete();
+  let worlds = 0, readouts = 0;
+  h.runtime.navigation.subscribe(() => worlds++);
+  h.runtime.sharedView.subscribe(() => readouts++);
+  const publish = h.orbitArguments().onPublish!;
+  const visible: OrbitPublication = { ...publicationForTest(), sunViewDirection: [1, 0, 0] };
+  const hidden = { ...visible, levelOfDetail: { ...visible.levelOfDetail, stage: "marker" } };
+  const frames = () => h.selection().stats().framePublications;
+  const before = frames();
+  publish(hidden, true);
+  assert.deepEqual(h.errors, []);
+  assert.equal(frames(), before + 1, "first hidden view retires visible detail");
+  const hiddenReadouts = readouts;
+  assert.ok(hiddenReadouts > 0);
+  for (let frame = 0; frame < 30; frame++) publish({ ...hidden, worldCamera: {
+    ...hidden.worldCamera, pose: { ...hidden.worldCamera.pose, positionM: [frame + 1, 0, 10000] },
+  } }, true);
+  assert.equal(worlds, 31, "every acknowledged world frame remains published");
+  assert.equal(frames(), before + 1, "no hidden departure material work");
+  assert.equal(readouts, hiddenReadouts, "no hidden departure readout RAFs");
+  publish(hidden);
+  assert.equal(frames(), before + 2, "ordinary overview publications remain live after interruption");
+  publish(visible, true);
+  assert.equal(frames(), before + 3, "a resolving source resumes detail publication");
+  assert.ok(readouts > hiddenReadouts, "readout subscriptions resume with live detail");
+});

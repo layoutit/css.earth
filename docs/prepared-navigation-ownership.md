@@ -54,6 +54,16 @@ moving while assets and detached nodes become ready. Input cancels a pending
 flight through the same signal and keeps the drawn camera. The sidebar is a
 separate selection owner, so mounting never replaces it with an intermediate card.
 
+Outgoing flight publications keep the world camera current. Once the actual
+prepared LOD hides the source mesh, the first hidden view retires its visible
+material and feature state. Subsequent hidden departure frames skip material
+and surface-feature publication. Departure readouts retain their prior value instead
+of scheduling work for a replaced card. The feature layer itself requests frames
+only when labels can be drawn or existing labels need clearing. Ordinary camera
+input and destination publication remain live; a resolving source immediately resumes detail work.
+This uses the renderer's marker state, not a timer or the destination billboard's
+presence.
+
 ## Explicit native motion
 
 `tools/prepared/prepared-presentation-bindings.mts` reads each object's imported authored CSS

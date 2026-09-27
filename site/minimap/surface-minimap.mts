@@ -84,7 +84,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     if (playing && visible) schedule();
   }
   const schedule = () => {
-    if (!disposed && visibleMaps.some(active) && frame === null) frame = windowTarget.requestAnimationFrame(render);
+    if (!disposed && camera && visibleMaps.some(active) && frame === null) frame = windowTarget.requestAnimationFrame(render);
   };
   function syncVisibility() {
     visibleMaps = maps.filter(active);
@@ -223,6 +223,13 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       unsubscribe?.(); unsubscribe = null; camera = next;
       pointers.clear(); pinching = false; pinchDistance = null;
       for (const map of maps) if (map.dataset.dragging !== undefined) delete map.dataset.dragging;
+      // Retirement has no new view to draw. Keep the last preview until the
+      // next camera binds instead of queuing a null-camera pass during handoff.
+      if (!next) {
+        if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+        frame = null;
+        return;
+      }
       syncVisibility();
     },
     destroy() {

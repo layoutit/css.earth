@@ -20,7 +20,7 @@ import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prep
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; projectionScale?: number; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & ReturnType<PerspectiveDolly['state']>;
 export interface OrbitPublication extends CameraAngles { worldCamera: WorldCameraPose; sceneMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection: PhysicalProjection; distance: number; focal: number; viewportWidth: number; viewportHeight: number; stageViewport: WorldCameraViewport; principalOffset: readonly number[]; body: PerspectivePublication['body']; levelOfDetail: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { framePresenter: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; directionalSunPlan?: DirectionalSunPlan | null; worldContext: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport: import('./camera-viewport.js').CameraViewport; objectId: string; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; revealGroups?: readonly (readonly HTMLElement[])[];
+export interface RetainedOrbitOptions { framePresenter: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; directionalSunPlan?: DirectionalSunPlan | null; worldContext: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport: import('./camera-viewport.js').CameraViewport; objectId: string; onPublish?: (publication: OrbitPublication, departing?: boolean) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
   canReveal?: () => boolean;
   canStageReveal?: () => boolean; }
@@ -133,7 +133,7 @@ export function createRetainedCubicSkyOrbit({
   let viewportEpoch = 0, requestedPublication = 0, presentedPublication = 0;
   let presentedWorld: WorldCameraPose | null = null;
   const publicationState = () => ({ requestedRevision: requestedPublication, presentedRevision: presentedPublication, presentedWorld });
-  const publish = (signal?: AbortSignal) => {
+  const publish = (signal?: AbortSignal, departing = false) => {
     if (lifetime.disposed) return;
     const captured = perspective.prepare();
     const { scenePresentation: sceneMatrix, sunDirection, zoom, controlPitch, controlYaw, counterRotationFor } = captured;
@@ -170,19 +170,19 @@ export function createRetainedCubicSkyOrbit({
         principalOffset: projected.principalOffset,
         body: projected.body,
         levelOfDetail: projected.levelOfDetail,
-      }));
+      }), departing);
       publications += 1;
     };
     return framePresenter.present({
       world: captured.world, viewport: captured.viewport, commit, current, fail: retireFailure }, signal);
   };
-  const adoptWorldCamera = (world: WorldCameraPose, frame: PreparedWorldCameraFrame, signal?: AbortSignal) => {
+  const adoptWorldCamera = (world: WorldCameraPose, frame: PreparedWorldCameraFrame, signal?: AbortSignal, departing = false) => {
     if (lifetime.disposed) return;
     try {
       validateWorldFrame(frame);
       controls.stop();
       camera.adopt(world, frame);
-      return publish(signal);
+      return publish(signal, departing);
     } catch (error) { retireFailure(error); throw error; }
   };
   const mobileQuery = matchMedia(runtimePolicy.MOBILE_VIEWPORT_QUERY);
@@ -300,10 +300,10 @@ export function createRetainedCubicSkyOrbit({
       return camera.capture(frame);
     },
     /** Flight writes carry their cancellation signal and acknowledge presentation. */
-    applyWorldCamera(world: WorldCameraPose, frame: PreparedWorldCameraFrame, signal?: AbortSignal) {
+    applyWorldCamera(world: WorldCameraPose, frame: PreparedWorldCameraFrame, signal?: AbortSignal, departing = false) {
       if (signal?.aborted) return Promise.resolve(false);
       if (!signal) cameraMotion.cancel();
-      return adoptWorldCamera(world, frame, signal);
+      return adoptWorldCamera(world, frame, signal, departing);
     },
     rebaseScene(change: DOMMatrix) {
       if (lifetime.disposed) return;

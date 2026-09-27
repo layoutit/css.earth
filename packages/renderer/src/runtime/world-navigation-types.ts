@@ -11,7 +11,7 @@ export interface ObjectWorldNavigation {
   /** The retained surface may differ from the current overview focus. */
   readonly detailFrame?: PreparedWorldCameraFrame;
   capture(): WorldCameraPose;
-  apply(pose: WorldCameraPose, options?: { signal: AbortSignal }): void | Promise<boolean>;
+  apply(pose: WorldCameraPose, options?: { signal: AbortSignal; departing?: boolean }): void | Promise<boolean>;
   preparedFocus(): PreparedNavigationFocus | null;
   setPreparedFocus(focus: PreparedNavigationFocus | null): void;
   flyToPreparedFocus(focus: PreparedNavigationFocus, options?: PreparedFocusFlightOptions): Promise<{ completed: boolean }>;

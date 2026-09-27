@@ -168,10 +168,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
-      apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal }) {
+      apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal; departing?: boolean }) {
         if (lifetime.disposed || options?.signal.aborted) return options ? Promise.resolve(false) : undefined;
         setAllowed(false);
-        return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal);
+        return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal, options?.departing);
       },
       preparedFocus() { return getOrbit().preparedFocus(); },
       // Every prepared group is connected and painted once: an arriving flight
@@ -299,16 +299,23 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       try { return callback(); } catch (error) { fatal(error); }
     }
-    function publish(publication: OrbitPublication) {
+    function publish(publication: OrbitPublication, departing = false) {
       if (lifetime.disposed) return;
+      // Commit the first hidden view so material and feature owners retire their
+      // visible state. Later departure frames still acknowledge the world camera,
+      // but must not schedule detail/readout work for the scene being left behind.
+      const hiddenDeparture = departing && publication.levelOfDetail.stage === 'marker'
+        && previousPublication?.levelOfDetail.stage === 'marker';
       reference ??= publication;
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision, motionAtRest: playback.motionAtRest() });
       previousPublication = publication;
-      selection?.setView(currentView);
-      surfaceFeatures?.publish(currentView);
+      if (!hiddenDeparture) {
+        selection?.setView(currentView);
+        surfaceFeatures?.publish(currentView);
+      }
       latestWorldPublication = publication;
       publishWorldSnapshot(publication);
-      notifyView();
+      if (!departing) notifyView();
     }
     function publishWorldSnapshot(publication: OrbitPublication) {
       if (orbit === null) return;
@@ -361,7 +368,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         canStageReveal: () => phase !== 'mounting',
          directionalSunPlan: definition.sun ?? null, worldContext,
         cameraPlan, viewport, cameraMotion, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
-        onPublish: publication => guarded(() => publish(publication)), onError: fatal });
+        onPublish: (publication, departing) => guarded(() => publish(publication, departing)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);
       if (lifetime.disposed) return;

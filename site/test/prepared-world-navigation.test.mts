@@ -827,3 +827,17 @@ test('a wheel, click or key between bodies hurries a prepared navigation to the 
     closePose(hurried.pose, normal.pose);
   }
 });
+
+
+test('only the departing owner receives departure publications', async () => {
+  const f = fixtureFactory(), modes: (boolean | undefined)[] = [];
+  const apply = f.navigation.apply;
+  f.navigation.apply = (world, options) => { modes.push(options?.departing); return apply(world, options); };
+  const handoff = await drainFrames(f, { task: f.start() });
+  assert.ok(modes.length > 0);
+  assert.ok(modes.every(value => value === true));
+  const count = modes.length;
+  await drainFrames(f, { task: handoff.afterMount(f.mounted()) });
+  assert.ok(modes.length > count);
+  assert.ok(modes.slice(count).every(value => value === undefined), 'destination detail always publishes');
+});
