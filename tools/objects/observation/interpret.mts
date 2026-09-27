@@ -13,7 +13,7 @@ import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, obse
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
-import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
+import { loadSurfaceObservation, type SurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
 import { skyDisplayRaster } from '@cssearth/fits';

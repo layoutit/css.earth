@@ -10,9 +10,9 @@ import { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { parseSolidPreparationSource, decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, project } from '@cssearth/bake/objects/layers/terrestrial';
 import { radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadRadialTerrain } from '../terrestrial-layers/radial-terrain.mts';
-import { fitBackplaneCamera } from './cameras.mts';
-import { parseGeoLens } from './formats/geo.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
+import { fitBackplaneCamera } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseGeoLens } from '@cssearth/bake/objects/layers/terrestrial';
 
 const summary = (values: number[]) => {
   values.sort((a, b) => a - b);

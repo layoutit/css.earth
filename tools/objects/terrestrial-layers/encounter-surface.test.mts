@@ -2,10 +2,10 @@ import { required } from '../../contract/test-values.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import {sampleFootprint} from '../surface-observations/footprint.mts';
-import {castSourceRays} from '../surface-observations/geometry.mts';
-import {validateEncounterImageReference} from '../surface-observations/formats/encounter.mts';
-import type {PixelGeometry} from '../surface-observations/contract.mts';
+import {sampleFootprint} from '@cssearth/bake/objects/layers/terrestrial';
+import {castSourceRays} from '@cssearth/bake/objects/layers/terrestrial';
+import {validateEncounterImageReference} from '@cssearth/bake/objects/layers/terrestrial';
+import type {PixelGeometry} from '@cssearth/bake/objects/layers/terrestrial';
 import { validateEncounterControls, encounterCamera } from '@cssearth/bake/objects/layers/terrestrial';
 const sample=()=>{
  const accepted=new Uint8Array([1,1,1,1]),xyz=new Float64Array([0,0,0,1,0,0,0,1,0,1,1,0]),emissions=[0,10,20,30];

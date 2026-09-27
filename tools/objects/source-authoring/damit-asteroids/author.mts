@@ -20,7 +20,7 @@ import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/object
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
-import { loadRadialTerrain } from '../../terrestrial-layers/radial-terrain.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');

@@ -80,7 +80,7 @@ test('terrain preparation verifies categorical output pins named by either histo
   const {mkdtemp,writeFile,rm}=await import('node:fs/promises');
   const {tmpdir}=await import('node:os');
   const {join}=await import('node:path');
-  const {loadRadialTerrain}=await import('./radial-terrain.mts');
+  const {loadRadialTerrain}=await import('@cssearth/bake/objects/layers/terrestrial');
   const directory=await mkdtemp(join(tmpdir(),'constraint-source-'));
   t.after(()=>rm(directory,{recursive:true,force:true}));
   await writeFile(join(directory,'source.tab'),table);

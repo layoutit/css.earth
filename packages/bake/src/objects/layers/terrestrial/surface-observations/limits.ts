@@ -1,5 +1,5 @@
 /** Transfer limits that follow from each frame's measured pixel footprint and the source mesh error, instead of per-format constants. */
-import type { ObservationFrame, TransferLimits } from './contract.mts';
+import type { ObservationFrame, TransferLimits } from './contract.ts';
 
 /** The most diagonal pixel footprints a contributor may lie from the sampled point. It caps a per-sample footprint limit, and a fixed
  * limit may not exceed it for the coarsest frame at the emission limit. */

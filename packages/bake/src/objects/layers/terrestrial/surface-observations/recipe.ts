@@ -6,9 +6,9 @@
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
 import { array, number, optional, shape, text } from '@cssearth/core';
-import { MAXIMUM_OVERLAP_SAMPLES } from './levels.mts';
-import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
-import { checkKeys } from '@cssearth/bake/objects/raster';
+import { MAXIMUM_OVERLAP_SAMPLES } from './levels.ts';
+import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.ts';
+import { checkKeys } from '../../../raster/index.ts';
 
 /** Keys every lens has, and the two a mosaic adds. */
 export const LENS_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;

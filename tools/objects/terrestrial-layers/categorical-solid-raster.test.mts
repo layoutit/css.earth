@@ -7,7 +7,7 @@ import { mkdtemp, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mts';
+import { prepareSolidRasters, prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '@cssearth/bake/scene';
 const test = sourceTest();
 

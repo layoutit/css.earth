@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from '@cssearth/bake/objects/layers/terrestrial';
-import { matrixCamera } from '../surface-observations/cameras.mts';
+import { matrixCamera } from '@cssearth/bake/objects/layers/terrestrial';
 
 const loaded = await sourceLoad(async () => {
   const table = readFileSync(new URL('../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8');

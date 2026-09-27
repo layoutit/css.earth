@@ -4,9 +4,9 @@ import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { parseRadialLoaderConfig } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { loadSurfaceObservation } from '../../../tools/objects/surface-observations/index.mts';
+import { loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 
 export async function loadLens(body: string, lensId: string, change: (recipe: Record<string, unknown>) => void = () => {}) {
   const sourceDirectory = resolve('src/objects', body, 'source');

@@ -1,18 +1,18 @@
 /** The surface-observation route: one validator and one loader for every photograph format. See README.md. */
-import type { SurfaceOptions } from '@cssearth/bake/objects/layers/terrestrial';
-import type { SurfaceObservationFormat } from './contract.mts';
+import type { SurfaceOptions } from '../contracts.ts';
+import type { SurfaceObservationFormat } from './contract.ts';
 import { requireRecord, requireString } from '@cssearth/core';
-import { GEO_FORMATS, geoFormat } from './formats/geo.mts';
-import { encounterFormat } from './formats/encounter.mts';
-import { orthographicFormat } from './formats/orthographic.mts';
-import { controlledCameraFormat, controlledColorFormat } from './formats/controlled-camera.mts';
-import { junocamFormat } from './formats/junocam.mts';
-import { JUNOCAM_FORMAT } from '@cssearth/bake/objects/layers/terrestrial';
-import { createSurfaceObservation, type SurfaceObservation } from './surface.mts';
-import { TILT, parseRefinement, refinementDecision, refinementKept, registrationStage, tiltDecision } from './registration.mts';
-import { tiltedCamera, turnedCamera } from './cameras.mts';
+import { GEO_FORMATS, geoFormat } from './formats/geo.ts';
+import { encounterFormat } from './formats/encounter.ts';
+import { orthographicFormat } from './formats/orthographic.ts';
+import { controlledCameraFormat, controlledColorFormat } from './formats/controlled-camera.ts';
+import { junocamFormat } from './formats/junocam.ts';
+import { JUNOCAM_FORMAT } from '../missions/junocam.ts';
+import { createSurfaceObservation, type SurfaceObservation } from './surface.ts';
+import { TILT, parseRefinement, refinementDecision, refinementKept, registrationStage, tiltDecision } from './registration.ts';
+import { tiltedCamera, turnedCamera } from './cameras.ts';
 
-export type { SurfaceObservation, SurfaceObservationReport } from './surface.mts';
+export type { SurfaceObservation, SurfaceObservationReport } from './surface.ts';
 
 /** Every format an owner can name in `raster.surfaceObservations`. A new archive product adds an adapter here. */
 export const SURFACE_OBSERVATION_FORMATS: Readonly<Record<string, SurfaceObservationFormat>> = {

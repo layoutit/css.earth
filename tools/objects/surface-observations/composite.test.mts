@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { FootprintSample, ObservationFrame } from './contract.mts';
-import { bandSetFrame, stripFrame, type Strip } from './composite.mts';
+import type { FootprintSample, ObservationFrame } from '@cssearth/bake/objects/layers/terrestrial';
+import { bandSetFrame, stripFrame, type Strip } from '@cssearth/bake/objects/layers/terrestrial';
 
 const accepted = (radiance: number): FootprintSample => ({ radiance, gain: 1, separationMeters: 0, maximumEmissionDegrees: 10, maximumIncidenceDegrees: 20 });
 /** Strip `index` holds scene rows 100 * index to 100 * index + 128, so neighbours share 28 rows; it answers with its own index. */

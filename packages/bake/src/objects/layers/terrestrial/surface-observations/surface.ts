@@ -1,12 +1,12 @@
 import { cross3 as cross } from '@cssearth/core';
 /** The shared surface transfer: from qualified frames to the atlas sampler, the flat preview and the report. */
-import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '@cssearth/bake/objects/layers/terrestrial';
+import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../contracts.ts';
 import type { SourceInput } from '@cssearth/objects/node';
-import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.mts';
-import { missingCoverageColor } from '@cssearth/bake/raster';
-import { edgeWeights, finestOnSurface, fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
-import { qualifiedFace } from './geometry.mts';
-import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '@cssearth/bake/objects/color';
+import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.ts';
+import { missingCoverageColor } from '../../../../raster/index.ts';
+import { edgeWeights, finestOnSurface, fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.ts';
+import { qualifiedFace } from './geometry.ts';
+import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '../../../color/index.ts';
 
 export const SURFACE_OBSERVATION_REPORT = 'cssearth-surface-observation-report@1';
 const EDGE_WEIGHTED_AVERAGE = { method: 'Every frame that qualifies at a point contributes its levelled value, weighted by how deep inside its usable disc the point lies (zero at the limb, the terminator and the emission limit, one at the deepest pixel) over its pixel area at the target; so a frame fades out at its edge instead of stopping there.',

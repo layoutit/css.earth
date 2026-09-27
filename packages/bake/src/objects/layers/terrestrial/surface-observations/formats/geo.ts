@@ -4,22 +4,31 @@ import { sha256 } from '@cssearth/core/node';
  * (OSIRIS reflectance, L'LORRI, New Horizons LORRI and MVIC) and cameras derived from SPICE kernels. GEO_SCHEMAS states what
  * each format adds to the lens shape every format shares (recipe.mts).
  */
-import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import type { NumericRaster, SpiceCameraDeclaration } from '@cssearth/bake/objects/raster';
-import { decodeProfile, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement, parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
+import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.ts';
+import type { NumericRaster, SpiceCameraDeclaration } from '../../../../raster/index.ts';
+import { decodeProfile, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement, parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '../../../../raster/index.ts';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale, decodeAmicaGeo, decodeOsirisReflectance, decodeLlorri, decodeNearMsi, parseNearCameraClosure, decodeNewHorizonsLorri, decodeArrokothMvic, decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT, refineCameraByLimb, decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT, ABERRATIONS, validPublishedPhotometryShape } from '@cssearth/bake/objects/layers/terrestrial';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale } from '../../missions/osiris-geo.ts';
+import { decodeAmicaGeo } from '../../missions/amica-geo.ts';
+import { decodeOsirisReflectance } from '../../missions/archived-camera.ts';
+import { decodeLlorri } from '../../missions/llorri-geo.ts';
+import { decodeNearMsi, parseNearCameraClosure } from '../../missions/near-msi.ts';
+import { decodeNewHorizonsLorri, decodeArrokothMvic } from '../../missions/new-horizons-geo.ts';
+import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from '../../missions/pds4-geometry-cube.ts';
+import { refineCameraByLimb } from '../../registration/limb-refinement.ts';
+import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT, ABERRATIONS } from '../../missions/spice-camera.ts';
+import { validPublishedPhotometryShape } from '../../records/published-photometry.ts';
 import { loadKernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
-import { bandColorDisplay, type BandColorDisplay } from '@cssearth/bake/objects/color';
-import { fittedCamera, matrixCamera } from '../cameras.mts';
-import { archiveBackplanes, castSourceRays } from '../geometry.mts';
-import { cameraFrame } from '../footprint.mts';
-import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
-import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { kernelBankPaths } from '../../../../cameras/index.ts';
+import { bandColorDisplay, type BandColorDisplay } from '../../../../color/index.ts';
+import { fittedCamera, matrixCamera } from '../cameras.ts';
+import { archiveBackplanes, castSourceRays } from '../geometry.ts';
+import { cameraFrame } from '../footprint.ts';
+import { diskPhotometry, publishedPhotometry } from '../photometry.ts';
+import { deriveLimits } from '../limits.ts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 /** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
 interface GeoSchema {

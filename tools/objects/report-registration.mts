@@ -9,8 +9,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { COMPARISON_SPEC_FILE, parseComparisonSpec } from './surface-observations/published-comparison.mts';
-import { offsetAgreementDegrees, VERDICT_DEGREES } from './surface-observations/registration.mts';
+import { COMPARISON_SPEC_FILE, parseComparisonSpec } from '@cssearth/bake/objects/layers/terrestrial';
+import { offsetAgreementDegrees, VERDICT_DEGREES } from '@cssearth/bake/objects/layers/terrestrial';
 import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from '@cssearth/bake/objects/layers/terrestrial';
 
 export const REGISTRATION_BLOCK_BEGIN = '<!-- registration-report:begin -->';

@@ -11,12 +11,12 @@ import { prepareSunReferenceViewDirection, prepareEclipticPresentationFrame } fr
 import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
-import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mts';
+import { prepareSolidRasters, prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
-import { prepareRadialMaterials } from './radial-materials.mts';
-import { loadRadialModels, combineRadialModels } from './radial-models.mts';
+import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadRadialModels, combineRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
 import { validateRadialTableProfile, validateFacetFieldRecipe } from '@cssearth/bake/objects/geometry';
-import { validateSurfaceObservation } from '../surface-observations/index.mts';
+import { validateSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 type SolidConfig=ReturnType<typeof parseSolidPreparationSource>;
 type Directories={sourceDirectory:string;publicDirectory:string;outputDirectory:string};

@@ -1,8 +1,9 @@
 /** The photometry stage: every route's brightness treatment as one gain function with its report. */
-import type { ObservationPhotometry } from './contract.mts';
-import type { DiskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
+import type { ObservationPhotometry } from './contract.ts';
+import type { DiskPhotometry } from '../contracts.ts';
 import type { SourceManifest } from '@cssearth/objects/node';
-import { observationGain, resolvePublishedPhotometry, type PublishedPhotometryBlock } from '@cssearth/bake/objects/layers/terrestrial';
+import { observationGain } from '../missions/osiris-geo.ts';
+import { resolvePublishedPhotometry, type PublishedPhotometryBlock } from '../records/published-photometry.ts';
 
 /** A published model record carries every pixel to its reference geometry. */
 export async function publishedPhotometry(sourceDirectory: string, manifest: SourceManifest | undefined, block: PublishedPhotometryBlock): Promise<ObservationPhotometry> {

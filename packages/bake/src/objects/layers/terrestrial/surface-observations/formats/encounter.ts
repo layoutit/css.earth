@@ -1,18 +1,21 @@
 import assert from 'node:assert/strict';
 /** Encounter FITS photographs: calibrated flyby images whose cameras come from a registered control network. */
 import { sha256 } from '@cssearth/core/node';
-import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.mts';
-import type { SourceMesh } from '@cssearth/bake/objects/geometry';
-import { decodeProfile, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
+import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.ts';
+import type { SourceMesh } from '../../../../geometry/index.ts';
+import { decodeProfile, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer, checkKeys } from '../../../../raster/index.ts';
 import { array, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeEncounterFits, encounterCamera, validateEncounterControls, validPublishedPhotometryShape } from '@cssearth/bake/objects/layers/terrestrial';
-import { castSourceRays } from '../geometry.mts';
-import { cameraFrame } from '../footprint.mts';
-import { retainedPhotometry, publishedPhotometry } from '../photometry.mts';
-import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { decodeEncounterFits } from '../../missions/encounter-fits.ts';
+import { encounterCamera } from '../../missions/encounter-camera.ts';
+import { validateEncounterControls } from '../../missions/encounter-controls.ts';
+import { validPublishedPhotometryShape } from '../../records/published-photometry.ts';
+import { castSourceRays } from '../geometry.ts';
+import { cameraFrame } from '../footprint.ts';
+import { retainedPhotometry, publishedPhotometry } from '../photometry.ts';
+import { deriveLimits } from '../limits.ts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 const CONTEXT = 'encounter photography recipe';
 

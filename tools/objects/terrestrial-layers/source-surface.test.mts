@@ -2,7 +2,7 @@ import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { parseShapeLens, parseObjShape, createShapeSurfaceSampler } from '@cssearth/bake/objects/geometry';
 import { shape, array, text, number, optional, requireArray } from '@cssearth/core';
 import { fixtureSource } from '../test-source-fixture.mts';
-import type { RadialMaterialSurface } from './solid-contract.mts';
+import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
@@ -10,7 +10,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { prepareRadialMaterials } from './radial-materials.mts';
+import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
 const parseFixture = shape({cases:array(shape({id:text,sourcePath:text,oldFirstRayHeight:number,

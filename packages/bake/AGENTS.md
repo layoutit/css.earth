@@ -77,7 +77,7 @@ its validators accept); the renderer never imports the bake.
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
     scripts and modules that still read platform files stay in `tools/objects/`. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
-    old `tools/objects/terrestrial-layers/` paths; `tools/prepare/preparation-generator.mts` binds those names to this code.
+    old `tools/objects/terrestrial-layers/` paths; `packages/bake/src/objects/sources/preparation-generator.ts` binds those names to this code.
   Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
   oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
   (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.

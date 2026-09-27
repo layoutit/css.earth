@@ -40,7 +40,7 @@ archive-conformance validator.
 ## Calibration text is an explicit archive convention
 
 Cassini RMS labels retain CISSCAL's `UNITS = 'I/F'` inside the root `DESCRIPTION`.
-The [calibrated-colour check](../tools/objects/surface-observations/formats/pds3-reflectance.mts)
+The [calibrated-colour check](../packages/bake/src/objects/layers/terrestrial/surface-observations/formats/pds3-reflectance.ts)
 reads that report only for Cassini ISS, requires its CISSCAL heading and one
 unambiguous units line, and never exposes the line as a general PDS3 attribute.
 An explicit non-I/F units field cannot be overridden by this report.

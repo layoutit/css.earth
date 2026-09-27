@@ -1,9 +1,9 @@
 import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
 import type { PreparedDirectionalSunPlan } from '@cssearth/bake/presentation';
 import type { PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation';
-import type { prepareSolidMaterial } from './solid-raster.mts';
+import type { prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SolidRasterGrid } from '@cssearth/bake/objects/layers/terrestrial';
-import type { combineRadialModels } from './radial-models.mts';
+import type { combineRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
 import type { createSourceManifest } from '@cssearth/objects/node';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';

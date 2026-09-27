@@ -5,23 +5,26 @@
  * becomes one frame made of its strips, and the three bands one colour photograph, so everything after the frame is the
  * shared route: footprints, photometry, selection between photographs, level matching, display and the report.
  */
-import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
+import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.ts';
+import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer, checkKeys } from '../../../../raster/index.ts';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
-import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
+import { kernelBankPaths } from '../../../../cameras/index.ts';
 import { etToUtc } from '@cssearth/spice';
-import { ABERRATIONS, project, CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry, refineStripEpochs, validateStripRefinement } from '@cssearth/bake/objects/layers/terrestrial';
-import { bandColorDisplay } from '@cssearth/bake/objects/color';
-import { matrixCamera, type PixelDistortion } from '../cameras.mts';
-import { castSourceRays } from '../geometry.mts';
-import { cameraFrame } from '../footprint.mts';
-import { bandSetFrame, stripFrame, type Strip } from '../composite.mts';
-import { diskPhotometry } from '../photometry.mts';
-import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { ABERRATIONS } from '../../missions/spice-camera.ts';
+import { project } from '../../missions/osiris-geo.ts';
+import { CROP_MARGIN_PIXELS, FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FORMAT, decodeJunocam, frameletCamera, junocamPixelMapping, limbCamera, litStrips, refinableStrips, stripPixels, type JunocamGeometry } from '../../missions/junocam.ts';
+import { refineStripEpochs, validateStripRefinement } from '../../registration/strip-refinement.ts';
+import { bandColorDisplay } from '../../../../color/index.ts';
+import { matrixCamera, type PixelDistortion } from '../cameras.ts';
+import { castSourceRays } from '../geometry.ts';
+import { cameraFrame } from '../footprint.ts';
+import { bandSetFrame, stripFrame, type Strip } from '../composite.ts';
+import { diskPhotometry } from '../photometry.ts';
+import { deriveLimits } from '../limits.ts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 const CONTEXT = 'JunoCam observation recipe';
 /** The bands of the colour photograph, in display order. */
