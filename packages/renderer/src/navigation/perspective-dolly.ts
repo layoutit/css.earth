@@ -97,19 +97,11 @@ export function validatePerspectiveCameraPlan(plan: CameraPlan): PerspectiveCame
   return plan;
 }
 
-/** Keep two source texels per CSS pixel before starting detail, then finish
- * the handoff at native proxy resolution. This is independent of device DPR. */
-export function levelOfDetailForProxy(plan: LevelOfDetailPlan, pixels?: number): LevelOfDetailPlan {
-  if (pixels === undefined) return plan;
-  if (!Number.isFinite(pixels) || pixels <= 0) throw new TypeError('Invalid prepared proxy resolution.');
-  return { ...plan, billboardFullDiscPixels: Math.max(plan.billboardFullDiscPixels, pixels / 2),
-    billboardFadeStartDiscPixels: Math.max(plan.billboardFadeStartDiscPixels, pixels) };
-}
-
 // The prepared proxy remains opaque throughout the billboard band. Detail starts
 // only when it outgrows that band; the shared world owns the visible proxy.
-export function levelOfDetailFor(prepared: LevelOfDetailPlan, silhouetteDiameter: number, proxyPixels?: number) {
-  const levelOfDetail = levelOfDetailForProxy(prepared, proxyPixels);
+export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDiameter: number) {
+  // Context image resolution does not qualify its geometry or viewing direction.
+  // The prepared body owns when its real mesh must replace the navigation icon.
   const proxyOpacity = clamp(
     (levelOfDetail.billboardFadeStartDiscPixels - silhouetteDiameter) /
       (levelOfDetail.billboardFadeStartDiscPixels -

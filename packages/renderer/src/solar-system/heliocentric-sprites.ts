@@ -1,7 +1,7 @@
 export interface Sprite {url?:string;index:number;count:number;size:number;}
 export interface SpriteImage {url:string;index:number;count:number;}
 /** `detail` is a larger prepared image of the same marker, drawn from `fromDiameterPixels`. */
-export interface SpriteWithUrl extends Sprite {url:string; minimumDiameterPixels?: number; proxyPixels?: number;
+export interface SpriteWithUrl extends Sprite {url:string; minimumDiameterPixels?: number;
   detail?: SpriteImage & {fromDiameterPixels:number};}
 
 /** Readable core for an unresolved body that remains a navigation target. */
