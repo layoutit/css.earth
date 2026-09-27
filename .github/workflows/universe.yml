@@ -160,7 +160,7 @@ jobs:
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
-        # retired tools/ folders and the nebula boundaries), which has no baseline. It reads every source file this sparse tree keeps, so a
+        # retired tools/ folders, the nebula boundaries and declared workspace dependencies), which has no baseline. It reads every source file this sparse tree keeps, so a
         # missing one stops it as incomplete rather than passing. About eight seconds.
         run: pnpm check:architecture
       - name: Test the shared object libraries

@@ -1,6 +1,7 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import { checkDeclaredDependencies } from './declared-dependencies.mts';
 import { checkNebulaBoundaries } from './nebula-packages.mts';
 
 export interface RepositoryRule {
@@ -59,6 +60,11 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
     description: 'the nebula packages follow their public dependency graph, @cssearth/bake/volume keeps its host-neutral rules, '
       + 'and runtime and preparation code reach neither the lab nor bake sources except through the allowed public entries (nebula-packages.mts, nebula-inbound.mts)',
     check: root => checkNebulaBoundaries(root),
+  },
+  {
+    id: 'declared-dependencies',
+    description: 'a packages/* file imports another workspace package only when its package.json declares it (declared-dependencies.mts)',
+    check: checkDeclaredDependencies,
   },
 ];
 
