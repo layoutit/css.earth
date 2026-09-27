@@ -122,7 +122,7 @@ squarely, own those texels instead of leaving them grey. Both policies are
 documented in [the colour preparation guide](../../../docs/color-preparation.md#current-routes-and-scope-of-the-repair).
 The whole lens then takes one brightness gain against the monochrome base, the median over every footprint boundary (a per-observation match would re-open the seams, and the two coarsest sets never border the base); the brightest 0.1 % of texels may clip.
 
-Tests. `node --test tools/objects/voyager-iss/*.test.mts tools/objects/terrestrial-layers/photometric-observations.test.mts`
+Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts`
 covers the limb fit, the tile writer and both composer policies on synthetic
 data; `node --test tests/objects/unit/triton/*.test.mts` pins the placement
 report, the manifest pins, the solved gains and the withheld counts of this run.

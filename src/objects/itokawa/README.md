@@ -177,7 +177,7 @@ The controlled-camera holdouts reached maximum residuals of 0.00000842/0.0000087
 
 [Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/itokawa/amica.test.mts).
 
-- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/amica-ddr.py` reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. `tools/objects/terrestrial-layers/amica-geo.oracle.test.mts` requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
+- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/amica-ddr.py` reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/amica-geo.oracle.test.mts) (now [`tests/objects/terrestrial/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts)) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
 
 ### Registration
 
@@ -221,7 +221,7 @@ Elevation atlas colors use the nearest point on the full source triangle surface
 
 The flat longitude/latitude preview cannot represent more than one source surface on a center ray, so ambiguous sample cells and their interpolation footprints are withheld. The three-dimensional Elevation atlas is baked directly from source-surface correspondence and does not paint this preview onto the body. Cartographic relief uses the matched source facet normal in a local east/north/up frame; optional Sun lighting uses that same normal. Full source connectivity is retained before simplification. Photographic/albedo datasets keep their original mapping and are not recalibrated by this scalar correction.
 
-`node --test tools/objects/terrestrial-layers/source-surface.test.mts` checks exact pinned-source facet regressions for Itokawa, Ryugu, Eros and Bennu. `python3 tools/objects/terrestrial-layers/verify-source-surface.py itokawa` (NumPy required) independently verifies the fixture against every triangle of the full original source using planar projection plus closest edges. These numerical checks establish scalar correspondence; they do not replace browser visual qualification.
+`node --test tests/objects/terrestrial/source-surface.test.mts` checks exact pinned-source facet regressions for Itokawa, Ryugu, Eros and Bennu. `python3 tests/objects/terrestrial/verify-source-surface.py itokawa` (NumPy required) independently verifies the fixture against every triangle of the full original source using planar projection plus closest edges. These numerical checks establish scalar correspondence; they do not replace browser visual qualification.
 
 **Qualification limits**
 
