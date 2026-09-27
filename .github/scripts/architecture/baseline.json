@@ -139,7 +139,7 @@
       {"from":"packages/telescope-cli/src/archives/interferometry/calibrate-pionier.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/archives/interferometry/eso-associations.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts","to":"tests/objects/source-test.mts"},
-      {"from":"packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts","to":"tools/oracles/fixture.mts"},
+      {"from":"packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts","to":"tests/oracles/fixture.mts"},
       {"from":"packages/telescope-cli/src/archives/interferometry/image-star.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/archives/interferometry/lost-fringes.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/archives/interferometry/oifits-concat.test.mts","to":"tests/objects/source-test.mts"},

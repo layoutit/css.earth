@@ -3,7 +3,7 @@ import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
 import { decodeNpyLonLatGrid, readNpy } from '@cssearth/bake/objects/raster';
-import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList } from '../../../tools/oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 
 /** numpy as the oracle for the .npy reader and nearest-node lookup over Psyche's ALMA thermal-inertia grid. */

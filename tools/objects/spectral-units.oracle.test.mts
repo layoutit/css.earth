@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readOracleFixture } from '../oracles/fixture.mts';
+import { readOracleFixture } from '../../tests/oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { brightnessTemperatureKelvin, planckIntensity } from '@cssearth/telescope-cli/archives/interferometry/alma-disc-selfcal';
 import { rayleighPerSample } from '@cssearth/telescope-cli/archives/hst/line-stack-reduction';
