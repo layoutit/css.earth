@@ -130,7 +130,7 @@ node tools/prepare/cli/prepare-object.mts <id>
 ```
 
 ```bash
-node tools/objects/report-registration.mts <id> --write
+node packages/bake/cli/report-registration.mts <id> --write
 ```
 
 Install and prepare one body at a time: the text step checks every package,

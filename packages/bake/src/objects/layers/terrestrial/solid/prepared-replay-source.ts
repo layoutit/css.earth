@@ -1,5 +1,5 @@
 import type {CameraPlan} from '@cssearth/renderer/navigation/types.ts';
-import type {PreparedProjectiveTextureLeaf} from '@cssearth/bake/presentation';
+import type {PreparedProjectiveTextureLeaf} from '../../../../presentation/index.ts';
 import {type Decoder,requireRecord,shape,text,number,array,optional,dictionary,boolean} from '@cssearth/core';
 export interface ReplayRings {
  leaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
@@ -12,10 +12,10 @@ export interface SolidReplayScene {
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
 }
-import {camera} from '@cssearth/bake/objects/scene';
+import {camera} from '../../../scene/index.ts';
 import {parse} from '@cssearth/core/schema';
-import {validatePreparedCubicSky} from '@cssearth/bake/presentation';
-import {validateDirectionalSunPlan} from '@cssearth/bake/presentation';
+import {validatePreparedCubicSky} from '../../../../presentation/index.ts';
+import {validateDirectionalSunPlan} from '../../../../presentation/index.ts';
 
 const cameraPlan=(value:unknown)=>parse(value,camera,'saved camera');
 const matrix=(value:unknown)=>typeof value==='string'?value:array(number)(value);
@@ -28,7 +28,7 @@ export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:option
 const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
 const surfaceFields=shape({id:text,textureScale:optional(number),displaySampling:optional(text),map:asset,surface:asset,thumbnail:asset,
   polesUrl:optional(text),shadowSurface:optional(asset),layout:value=>value});
-const surface:Decoder<import('@cssearth/bake/objects/layers/terrestrial').SolidSurface>=(value:unknown)=>Object.assign({},requireRecord(value),surfaceFields(value));
+const surface:Decoder<import('./solid-contract.ts').SolidSurface>=(value:unknown)=>Object.assign({},requireRecord(value),surfaceFields(value));
 export const parseReplaySurfaces=shape({surfaces:array(surface)});
 export const parseReplayMaterial=shape({surfaces:array(surface),lighting:shape({url:text,columns:number,rowCount:number,frameCount:number,
   frames:array(shape({resource:text,frame:number,row:number,backgroundPosition:text,backgroundSize:text}))})});

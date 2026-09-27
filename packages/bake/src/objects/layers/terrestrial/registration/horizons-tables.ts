@@ -1,6 +1,6 @@
 /** JPL Horizons tables for exact exposure starts: the observer table at each start and the heliocentric table at each start
  * less the light time over the observer range, asked in batches of 25 epochs (Horizons refuses longer time lists) and joined
- * into one table; and the refresh steps that ask for exactly those queries again. `tools/objects/sphere-horizons.mts` writes
+ * into one table; and the refresh steps that ask for exactly those queries again. `packages/bake/cli/sphere-horizons.mts` writes
  * them beside a lens's frames and pins them in its manifest. */
 import { horizonsRows, observerRowValues, rowJd } from './observer-cameras.ts';
 

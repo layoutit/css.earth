@@ -4,9 +4,9 @@
  * re-derived camera is re-measured in the time it takes to load the frames rather than the time it takes to pack an
  * atlas. The atlas, the transfer counts and everything else in the report are left as preparation wrote them.
  *
- *   node tools/objects/registration-stage.mts <object-id>          measure and print
- *   node tools/objects/registration-stage.mts <object-id> --write  measure, rewrite the report in both prepared intermediates and the README block
- *   node tools/objects/registration-stage.mts --all --write         the same for every body with a camera lens
+ *   node packages/bake/cli/registration-stage.mts <object-id>          measure and print
+ *   node packages/bake/cli/registration-stage.mts <object-id> --write  measure, rewrite the report in both prepared intermediates and the README block
+ *   node packages/bake/cli/registration-stage.mts --all --write         the same for every body with a camera lens
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -17,11 +17,11 @@ import { loadRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
 import { radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
 import { loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
-import { registrationBlockFor, withRegistrationBlock } from './report-registration.mts';
+import { registrationBlockFor, withRegistrationBlock } from '@cssearth/bake/objects/layers/terrestrial';
 
-const ROOT = resolve(import.meta.dirname, '../..');
+const ROOT = resolve(import.meta.dirname, '../../..');
 const [selector, flag] = process.argv.slice(2);
-if (!selector || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/registration-stage.mts <object-id>|--all [--write]'); process.exit(2); }
+if (!selector || (flag !== undefined && flag !== '--write')) { console.error('usage: node packages/bake/cli/registration-stage.mts <object-id>|--all [--write]'); process.exit(2); }
 
 if (selector === '--all') {
   // Every body with a camera lens, one after another; a rule change in the stage is re-measured across the set this way.

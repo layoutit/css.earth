@@ -16,12 +16,12 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { authorSourceRecords } from '../../sources/author-source-records.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../report-registration.mts';
+import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '@cssearth/bake/objects/layers/terrestrial';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '@cssearth/bake/objects/layers/terrestrial';
 import { OBSERVER_CAMERAS_FILE } from '@cssearth/bake/objects/layers/terrestrial';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
 import { INVESTIGATION_SURVEY_DIRECTORY } from '../../investigations/investigation-survey.mts';
-import { writeHorizonsOperations } from '../sphere-horizons.mts';
+import { writeHorizonsOperations } from '@cssearth/bake/objects/layers/terrestrial';
 import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './setup.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
@@ -222,7 +222,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   if (missing.length) console.log(`Still missing, restore them before preparing (node tools/objects/dist/operations.js acquire ${objectId}): ${missing.join(', ')}.`);
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
   console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
-    `  node tools/prepare/cli/prepare-object.mts ${objectId}`, `  node tools/objects/report-registration.mts ${objectId} --write`,
+    `  node tools/prepare/cli/prepare-object.mts ${objectId}`, `  node packages/bake/cli/report-registration.mts ${objectId} --write`,
     `  commit, then pnpm publish:runtime-assets --object=${objectId}`].join('\n'));
 }
 

@@ -34,7 +34,7 @@ export interface SolidSceneConfig {
   presentation:{defaultLens:string};
 }
 type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
-type SolidScene=ReturnType<typeof import('../../prepared/prepared-replay-source.mts').parseSolidReplayScene>;
+type SolidScene=ReturnType<typeof import('@cssearth/bake/objects/layers/terrestrial').parseSolidReplayScene>;
 
 /** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */
 export function solidCameraAngles(config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {

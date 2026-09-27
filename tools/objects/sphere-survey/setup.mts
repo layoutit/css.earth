@@ -20,7 +20,7 @@ import { readFitsHdu } from '@cssearth/fits';
 import { readPdfImage } from '@cssearth/bake/sources';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
-import { tableInput } from '../sphere-horizons.mts';
+import { tableInput } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsCommand, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
 import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';

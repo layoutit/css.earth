@@ -120,7 +120,8 @@ its validators accept); the renderer never imports the bake.
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
     as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
-    scripts and modules that still read platform files stay in `tools/objects/`. A source manifest's `generator` records
+    scripts and modules that still read platform files stay in `tools/objects/`; the terrestrial commands that derive
+    observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the

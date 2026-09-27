@@ -3,8 +3,8 @@
  * into the recipe. The body's `source/preparation/observer-cameras.json` names the rotation model, the Horizons tables
  * and the centre rule; the frames' own headers state their exposures; the lens mesh places the limb.
  *
- *   node tools/objects/observer-cameras.mts <object-id>          report the derived fields beside the stated ones
- *   node tools/objects/observer-cameras.mts <object-id> --write  state the derived fields in the recipe and re-pin it
+ *   node packages/bake/cli/observer-cameras.mts <object-id>          report the derived fields beside the stated ones
+ *   node packages/bake/cli/observer-cameras.mts <object-id> --write  state the derived fields in the recipe and re-pin it
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -12,9 +12,9 @@ import { requireArray, requireRecord } from '@cssearth/core';
 import { deriveObserverCameras, loadObserverCameraInputs, recipeFields, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 
-const ROOT = resolve(import.meta.dirname, '../..');
+const ROOT = resolve(import.meta.dirname, '../../..');
 const [objectId, flag] = process.argv.slice(2);
-if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/observer-cameras.mts <object-id> [--write]'); process.exit(2); }
+if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node packages/bake/cli/observer-cameras.mts <object-id> [--write]'); process.exit(2); }
 
 const sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source');
 const { record, recipe, lens, frames } = await loadObserverCameraInputs(sourceDirectory);

@@ -1,17 +1,15 @@
 /**
  * The registration stage's numbers as a body README states them, generated from the prepared report so no residual
  * is ever typed by hand. The README carries the block between two markers; `--write` replaces it, and the shared
- * test refuses a README whose block differs from what its prepared report gives.
- *
- *   node tools/objects/report-registration.mts <object-id>          print the block
- *   node tools/objects/report-registration.mts <object-id> --write  write it between the markers in the body README
+ * test refuses a README whose block differs from what its prepared report gives. `packages/bake/cli/report-registration.mts`
+ * prints or writes it.
  */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { COMPARISON_SPEC_FILE, parseComparisonSpec } from '@cssearth/bake/objects/layers/terrestrial';
-import { offsetAgreementDegrees, VERDICT_DEGREES } from '@cssearth/bake/objects/layers/terrestrial';
-import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from '@cssearth/bake/objects/layers/terrestrial';
+import { COMPARISON_SPEC_FILE, parseComparisonSpec } from '../surface-observations/published-comparison.ts';
+import { offsetAgreementDegrees, VERDICT_DEGREES } from '../surface-observations/registration.ts';
+import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './observer-cameras.ts';
 
 export const REGISTRATION_BLOCK_BEGIN = '<!-- registration-report:begin -->';
 export const REGISTRATION_BLOCK_END = '<!-- registration-report:end -->';
@@ -104,19 +102,4 @@ export async function shippedComparisons(objectDirectory: string): Promise<Shipp
 
 export async function registrationBlockFor(objectDirectory: string) {
   return registrationBlock(JSON.parse(await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8')), await shippedComparisons(objectDirectory));
-}
-
-const invoked = process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href;
-if (invoked) {
-  const [objectId, flag] = process.argv.slice(2);
-  if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/report-registration.mts <object-id> [--write]'); process.exit(2); }
-  const directory = resolve(import.meta.dirname, '../../src/objects', objectId), block = await registrationBlockFor(directory);
-  if (block === null) { console.log(`${objectId}: no lens carries a registration stage.`); process.exit(0); }
-  console.log(block);
-  if (flag === '--write') {
-    const path = resolve(directory, 'README.md'), { readme, replaced } = withRegistrationBlock(await readFile(path, 'utf8'), block);
-    if (!replaced) throw new Error(`${objectId}/README.md carries no registration-report markers.`);
-    await writeFile(path, readme);
-    console.log(`Wrote the block into ${objectId}/README.md.`);
-  }
 }

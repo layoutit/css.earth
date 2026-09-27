@@ -1,8 +1,6 @@
 /**
- * Write the two JPL Horizons tables a ground-based lens's cameras are derived from, for exactly its frames.
- *
- *   node tools/objects/sphere-horizons.mts <object-id>          fetch both tables and report them without writing
- *   node tools/objects/sphere-horizons.mts <object-id> --write  write them where the observer-cameras record names them and pin them in the manifest
+ * Write the two JPL Horizons tables a ground-based lens's cameras are derived from, for exactly its frames
+ * (`packages/bake/cli/sphere-horizons.mts` fetches, reports and writes them).
  *
  * The observer table is Paranal (code 309) at each frame's exposure start as the frame's own header states it, the
  * epoch the derivation matches rows by. Its quantities are right ascension and declination, angular diameter, range
@@ -13,14 +11,16 @@
  * table holding those exact queries, so the tables can be asked for again and their rows compared.
  */
 import { readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
+import { dirname, resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { BATCH, HORIZONS_API, horizonsCommand, horizonsRefreshOperations, horizonsTables, loadObserverCameraInputs, zimpolExposure } from '@cssearth/bake/objects/layers/terrestrial';
+import { HORIZONS_API, horizonsCommand, horizonsRefreshOperations } from './horizons-tables.ts';
+import { loadObserverCameraInputs, zimpolExposure } from './observer-cameras.ts';
 
-const ROOT = resolve(import.meta.dirname, '../..');
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
 /** A lens's two refresh steps in its acquisition plan, replacing any it had for those paths. */
 export async function writeHorizonsOperations(objectId: string, sourceDirectory: string) {
   const { record, frames } = await loadObserverCameraInputs(sourceDirectory);
@@ -43,7 +43,7 @@ const TABLES = {
 export function tableInput(objectId: string, kind: keyof typeof TABLES, path: string, bytes: Uint8Array) {
   return { id: `${objectId}-${TABLES[kind].suffix}`, path, origin: HORIZONS_API, credit: 'NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons',
     license: 'Public ephemeris service output; cite JPL Horizons.',
-    acquisition: 'Response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.',
+    acquisition: 'Response from the JPL Horizons API for this target and observer code 309, Paranal, written by packages/bake/cli/sphere-horizons.mts.',
     redistribution: 'Public NASA/JPL output; retain the citation.', consumers: ['sphere-sighting-geometry'], coverage: TABLES[kind].coverage };
 }
 
@@ -60,22 +60,4 @@ export async function writeHorizonsTables(objectId: string, sourceDirectory: str
   }
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   return declared;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, flag, ...rest] = process.argv.slice(2);
-  if (!objectId || rest.length || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/sphere-horizons.mts <object-id> [--write]'); process.exit(2); }
-  const sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source');
-  const { record, frames } = await loadObserverCameraInputs(sourceDirectory);
-  const command = horizonsCommand(JSON.parse(await readFile(resolve(ROOT, 'packages/astronomy/data/bodies', `${objectId}.json`), 'utf8')));
-  const starts: number[] = [];
-  for (const frame of frames) starts.push(zimpolExposure(readFitsHdu(await readFile(resolve(sourceDirectory, frame.path))).header).startJd);
-  const tables = await horizonsTables(command, starts);
-  console.log(`${objectId}: target '${command}', ${frames.length} frames, ${tables.epochs.length} exposure starts, ${Math.ceil(tables.epochs.length / BATCH)} request(s) per table.`);
-  if (flag === '--write') {
-    const declared = await writeHorizonsTables(objectId, sourceDirectory, record.ephemeris, tables);
-    await writeHorizonsOperations(objectId, sourceDirectory);
-    console.log(`Wrote ${record.ephemeris.observer} and ${record.ephemeris.heliocentric}, pinned them in the manifest and wrote their refresh steps; run node tools/sources/pin-object-documents.mts ${objectId}.`);
-    if (declared.length) console.log(`Declared ${declared.join(' and ')} as new inputs; run node tools/sources/author-source-records.mts ${objectId} to bind them.`);
-  }
 }
