@@ -23,7 +23,7 @@ export const PREPARATION_CODE = ['tools/', 'packages/bake/'] as const;
 export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
- * (`astro.config.mts` wires `tools/performance` and `tools/prepare` into the Astro build). Astro pages
+ * (`astro.config.mts` wires `site/build` and `tools/prepare` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 

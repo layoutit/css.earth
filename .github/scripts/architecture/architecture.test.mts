@@ -146,7 +146,7 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['packages/renderer/src/stars/bank.ts', 'packages/bake/src/stars/index.ts', 'type'], ['packages/renderer/src/stars/bank.test.ts', 'packages/bake/src/stars/index.ts'],
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
     ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
-    ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/performance/p.mts'],
+    ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/prepare/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
     ['tools/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'tools/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
   ));
