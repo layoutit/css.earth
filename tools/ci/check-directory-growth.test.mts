@@ -74,4 +74,5 @@ test('the real count comes from git, so generated output cannot enter the baseli
   }
   const counts = await countModules();
   assert.ok((counts.get('src/platform')?.implementations ?? 0) > 0, 'the real tree is still counted');
+  assert.ok((counts.get('.github/scripts/ci')?.implementations ?? 0) > 0, 'the CI scripts in .github/scripts are counted too');
 });
