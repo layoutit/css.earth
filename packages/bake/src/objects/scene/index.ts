@@ -15,3 +15,5 @@ export * from './focused-camera.ts';
 export * from './world-navigation-sources.ts';
 export * from './world-navigation-materials.ts';
 export * from './camera-source.ts';
+// The seams and projection block every generated sphere is written with.
+export * from './sphere-projection.ts';

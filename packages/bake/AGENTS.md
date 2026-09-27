@@ -84,7 +84,8 @@ its validators accept); the renderer never imports the bake.
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
     camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
-    projection it adds to rotating material tracks, and a recipe's camera source. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    projection it adds to rotating material tracks, a recipe's camera source, and the seams and projection block every generated
+    sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
@@ -102,7 +103,8 @@ its validators accept); the renderer never imports the bake.
     no topic. The recipe dispatcher, spectrum reader and compact spectrum stay in
     `tools/objects/charts/`: `site/prepare-body-overview.mts` uses them, and the runtime may not import the bake.
   - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
-    payload), the shared lens vocabulary, lens steps and prepared legends, and each lens control's billboard colour. It
+    payload), the shared lens vocabulary, lens steps and prepared legends, each lens control's billboard colour, and the legend
+    labels a palette lens derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload stays in `tools/objects/content/`.
   - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
     vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control

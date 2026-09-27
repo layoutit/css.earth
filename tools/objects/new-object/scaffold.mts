@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
-import { sphereProjection } from '../sphere-projection.mts';
+import { sphereProjection } from '@cssearth/bake/objects/scene';
 
 export const TODO = 'TODO(new-object)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;

@@ -824,7 +824,7 @@ square lids from both sides; on iPad Safari that pushed past the outline at the 
 ![Kepler-452 b on iPad Safari before the fix: two bulges at the poles](images/polar-caps/kepler-452b-ipad-lemon.webp)
 
 Generated spheres now take their seams from one shared setting
-([sphere-projection.mts](../tools/objects/sphere-projection.mts)): exact tiling, a half-texel overscan and the stepped
+([sphere-projection.ts](../packages/bake/src/objects/scene/sphere-projection.ts)): exact tiling, a half-texel overscan and the stepped
 silhouette outset, with the overlap derived from each map's texels per cell.
 
 Spherical and ellipsoidal objects share one retained interior disc behind their

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { derivedLegendLabels, legendLabelChanges, withDerivedLegendLabels } from './legend-labels.mts';
+import { derivedLegendLabels, legendLabelChanges, withDerivedLegendLabels } from '@cssearth/bake/objects/content';
 
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../..');
 const json = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as Record<string, unknown>;
 
 test('labels are the stretch as a fraction of its top, at the low end, midpoint and top', () => {
