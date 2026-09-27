@@ -6,8 +6,8 @@ import { parseMeasuredSpectrum,readMeasuredSpectrum,renderMeasuredSpectrum } fro
 import type { MeasuredSpectrumRecipe } from './measured-spectrum.mts';
 import { parseRetrievedProfile, readRetrievedProfile, renderRetrievedProfile, type RetrievedProfileRecipe } from './retrieved-profile.mts';
 import { parseFitsGalleryImageRecipe,renderFitsGalleryImage } from './fits-gallery-image.mts';
-import { renderLightCurveChart,renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.js';
-import type { ChartIdentity } from './chart-svg.js';
+import { renderLightCurveChart,renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.ts';
+import type { ChartIdentity } from './chart-svg.ts';
 type JsonMap=Record<string,unknown>;
 interface Identity {id:string;title:string;description:string;output:string;metadata:JsonMap;}
 interface Spectrum extends Identity {kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
@@ -34,6 +34,7 @@ export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
 }
 export async function prepareChartAssets({sourceDirectory,publicDirectory,config}:{sourceDirectory:string;publicDirectory:string;config:unknown}) {
  const recipe=parseChartAssetRecipe(config);await mkdir(publicDirectory,{recursive:true});const urls:string[]=[];
+ const dimensions:{src:string;width:number;height:number}[]=[];
  for(const chart of recipe.charts){const identity:ChartIdentity={id:chart.id,title:chart.title,description:chart.description,metadata:{...chart.metadata}};let svg:string;
   if(chart.kind==='measured-spectrum'){
    svg=renderMeasuredSpectrum(await readMeasuredSpectrum(sourceDirectory,chart));
@@ -68,7 +69,10 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
    const zero=evaluate(0),points=Array.from({length:chart.sampleCount},(_,index)=>{const phaseAngle=chart.maximumAngleDegrees*index/(chart.sampleCount-1);return {phaseAngle,dimmingMagnitude:evaluate(phaseAngle)-zero};});
    svg=renderPhotometricPhaseChart({...identity,points});
   }
-  await writeFile(path(publicDirectory,chart.output),svg);urls.push(recipe.publicBase+chart.output);
+  const {width,height}=await sharp(Buffer.from(svg)).metadata();
+  if(!width||!height)throw new TypeError('Prepared chart has no intrinsic dimensions.');
+  const src=recipe.publicBase+chart.output;dimensions.push({src,width,height});
+  await writeFile(path(publicDirectory,chart.output),svg);urls.push(src);
  }
  let gallery:unknown;
  if(recipe.gallery){const source=record(JSON.parse(await readFile(path(sourceDirectory,recipe.gallery.source),'utf8')) as unknown,'gallery');if(source.schema!==recipe.gallery.schema||!Array.isArray(source.items)||source.items.length!==recipe.gallery.itemCount)throw new TypeError('Gallery source schema or item count drifted.');for(const key of ['id','qualification','credit','sourcePage'])string(source[key],`gallery.${key}`);const ids=new Set<string>(),files=new Set<string>();const items=[];
@@ -77,5 +81,5 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
    const file=await readFile(path(sourceDirectory,String(item.sourcePath))),bytes=item.fits===undefined?file:(await renderFitsGalleryImage(file,parseFitsGalleryImageRecipe(item.fits))).bytes,metadata=await sharp(bytes).metadata();if(metadata.width!==item.width||metadata.height!==item.height)throw new TypeError('Gallery source dimensions drifted.');await writeFile(path(publicDirectory,filename),bytes);const src=recipe.publicBase+filename;urls.push(src);items.push({id,label:item.label,src,width:item.width,height:item.height,alt:item.alt,caption:item.caption,sourceUrl:item.sourceUrl});}
   gallery={schema:'cssearth-prepared-gallery@1',id:source.id,open:false,qualification:source.qualification,credit:source.credit,sourcePage:source.sourcePage,items};
  }
- return {urls,...(gallery?{gallery}:{})};
+ return {urls,dimensions,...(gallery?{gallery}:{})};
 }

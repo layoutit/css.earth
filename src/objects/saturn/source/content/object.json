@@ -341,7 +341,7 @@
       "open": true,
       "src": "/scenes/saturn/saturn-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Saturn from 350 to 1000 nanometers, including the methane absorption band at 889 nanometers.",
       "titleKey": "reflectance",
       "source": {
@@ -355,7 +355,7 @@
       "open": false,
       "src": "/scenes/saturn/saturn-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Saturn globe-only V-band brightness change across phase angles from zero to 150 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -368,7 +368,7 @@
       "open": false,
       "src": "/scenes/saturn/saturn-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Saturn atmospheric temperature from 10 bar to 2 nanobar, showing the cold tropopause and warmer upper atmosphere.",
       "titleKey": "temperaturePressure",
       "source": {

@@ -225,7 +225,7 @@
       "titleKey": "reflectedLight",
       "src": "/scenes/hd-189733b/hd-189733b-hst-albedo.svg",
       "width": 306,
-      "height": 280,
+      "height": 320,
       "alt": "Six HST/STIS geometric albedo estimates from Evans et al. (2013), Table 1. Horizontal bars are wavelength coverage; vertical bars are the published asymmetric 1-sigma errors. The negative estimate is retained. No values beyond 570 nm are inferred.",
       "source": {
         "id": "hd-189733b-evans-2013-albedo",
@@ -238,7 +238,7 @@
       "titleKey": "broadbandAlbedo",
       "src": "/scenes/hd-189733b/hd-189733b-cheops-albedo.svg",
       "width": 306,
-      "height": 280,
+      "height": 320,
       "alt": "Krenn et al. (2023) geometric albedo 0.076 plus or minus 0.016, integrated over the CHEOPS 350-1100 nm passband after thermal correction. The horizontal bar spans the whole passband. The central error bar is a layout position, not a representative wavelength.",
       "source": {
         "id": "hd-189733b-krenn-2023-albedo",
@@ -251,7 +251,7 @@
       "titleKey": "transmissionSpectrum",
       "src": "/scenes/hd-189733b/hd-189733b-jwst-transmission.svg",
       "width": 306,
-      "height": 280,
+      "height": 337,
       "alt": "Fu et al. (2024) JWST NIRCam transmission spectrum: all 139 measured bins, including overlapping wavelength coverage, with their errors. Gold line: deposited free-retrieval median model. Transit depth is the fraction of starlight blocked during transit. No fitting or offsets are added here.",
       "source": {
         "id": "hd-189733b-fu-2024-spectrum",

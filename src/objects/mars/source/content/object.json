@@ -931,7 +931,7 @@
       "open": true,
       "src": "/scenes/mars/mars-reflectance-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Mars from 350 to 998 nanometers.",
       "titleKey": "reflectance",
       "source": {
@@ -945,7 +945,7 @@
       "open": false,
       "src": "/scenes/mars/mars-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Mars V-band brightness change across phase angles from zero to 180 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -958,7 +958,7 @@
       "open": false,
       "src": "/scenes/mars/mars-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Mars atmospheric temperature and pressure through 244 kilometers altitude.",
       "titleKey": "temperaturePressure",
       "source": {

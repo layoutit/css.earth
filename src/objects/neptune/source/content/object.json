@@ -245,7 +245,7 @@
       "open": true,
       "src": "/scenes/neptune/neptune-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Neptune from 350 to 1000 nanometers, showing strong methane absorption toward the near infrared.",
       "titleKey": "reflectance",
       "source": {
@@ -259,7 +259,7 @@
       "open": false,
       "src": "/scenes/neptune/neptune-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Neptune V-band brightness change across phase angles from zero to 133 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -272,7 +272,7 @@
       "open": false,
       "src": "/scenes/neptune/neptune-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Neptune atmospheric temperature from 100 bar to 0.1 microbar in the NASA PSG vertical atmosphere model.",
       "titleKey": "temperaturePressure",
       "source": {

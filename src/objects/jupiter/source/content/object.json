@@ -537,7 +537,7 @@
       "open": true,
       "src": "/scenes/jupiter/jupiter-reflectance-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Jupiter from 350 to 998 nanometers.",
       "titleKey": "reflectance",
       "source": {
@@ -551,7 +551,7 @@
       "open": false,
       "src": "/scenes/jupiter/jupiter-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Jupiter V-band brightness change across phase angles from zero to 130 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -564,7 +564,7 @@
       "open": false,
       "src": "/scenes/jupiter/jupiter-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Modeled Jupiter atmospheric temperature from 10 bar to 10 nanobar.",
       "titleKey": "temperaturePressure",
       "source": {

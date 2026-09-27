@@ -245,7 +245,7 @@
       "open": true,
       "src": "/scenes/uranus/uranus-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Uranus from 350 to 1000 nanometers from a checked NASA PSG response.",
       "titleKey": "reflectance",
       "source": {
@@ -259,7 +259,7 @@
       "open": false,
       "src": "/scenes/uranus/uranus-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Uranus V-band brightness change across phase angles from zero to 154 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -272,7 +272,7 @@
       "open": false,
       "src": "/scenes/uranus/uranus-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Uranus atmospheric temperature by pressure from the checked NASA PSG model configuration.",
       "titleKey": "temperaturePressure",
       "source": {

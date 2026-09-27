@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml } from './chart-style.mts';
 
 interface ProfileSource {
   path: string; label: string; color: string; pressureUnit: 'Pa' | 'bar'; expectedRows: number;
@@ -98,26 +99,19 @@ export async function readRetrievedProfile(root: string, input: unknown) {
   return { recipe, series };
 }
 
-const escape = (s: string) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 export function renderRetrievedProfile({ recipe: r, series }: Awaited<ReturnType<typeof readRetrievedProfile>>) {
   const x = (t: number) => 42 + (t - r.temperature.minimum) / (r.temperature.maximum - r.temperature.minimum) * 252;
   const y = (p: number) => 29 + Math.log(p / r.pressure.minimum) / Math.log(r.pressure.maximum / r.pressure.minimum) * 174;
-  const n = (v: number) => v.toFixed(3), height = 260 + series.length * 17 + r.notes.length * 15;
+  const n = coordinate, height = 260 + series.length * 17 + r.notes.length * 15;
+  const color = (source: ProfileSource) => series.length === 1 ? CHART.neutral : source.color;
   const path = (points: readonly ProfilePoint[], key: 'median' | 'lower' | 'upper', start = 'M') => points.map((p, i) => `${i ? 'L' : start}${n(x(p[key]))} ${n(y(p.pressure))}`).join(' ');
-  const bands = series.map(({ source: s, points }) => `<path class="profile-interval" d="${path(points, 'lower')} ${path([...points].reverse(), 'upper', 'L')} Z" fill="${s.color}" fill-opacity=".18"/>`).join('');
-  const curves = series.map(({ source: s, points }, i) => `<path class="profile-median" d="${path(points, 'median')}" fill="none" stroke="${s.color}" stroke-width="1.5"${i === 1 ? ' stroke-dasharray="4 2"' : ''}/>`).join('');
-  const legend = series.map(({ source: s }, i) => `<path d="M0 ${244 + i * 17}H19" stroke="${s.color}" stroke-width="1.5"${i === 1 ? ' stroke-dasharray="4 2"' : ''}/><text x="26" y="${248 + i * 17}">${escape(s.label)}</text>`).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 306 ${height}" role="img" aria-labelledby="${r.id}-title ${r.id}-desc" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#b8bbc4">
-<title id="${r.id}-title">${escape(r.title)}</title><desc id="${r.id}-desc">${escape(r.description)}</desc>
-<metadata>${escape(JSON.stringify({ ...r.metadata, pressureUnit: 'bar', temperatureUnit: 'K', pressureRange: [r.pressure.minimum, r.pressure.maximum], nativeRows: r.series.map(s => s.expectedRows) }))}</metadata>
-<text x="0" y="13">Pressure (bar)</text><text x="294" y="13" text-anchor="end">Higher atmosphere ↑</text>
-${r.pressure.ticks.map(t => `<path d="M42 ${n(y(t.value))}H294" stroke="#b8bbc4" stroke-opacity=".1"/><text x="35" y="${n(y(t.value) + 4)}" text-anchor="end">${escape(t.label)}</text>`).join('')}
-${bands}
-${[r.probedPressure.minimum, r.probedPressure.maximum].map(p => `<path class="probed-pressure" d="M42 ${n(y(p))}H294" stroke="#b8bbc4" stroke-opacity=".6" stroke-dasharray="2 3"/>`).join('')}
-${curves}
-${r.temperature.ticks.map(t => `<text x="${n(x(t.value))}" y="218" text-anchor="${t.value === r.temperature.minimum ? 'start' : t.value === r.temperature.maximum ? 'end' : 'middle'}">${escape(t.label)}</text>`).join('')}
-<text x="168" y="233" text-anchor="middle">Temperature (K)</text>
-${legend}
-${r.notes.map((note, i) => `<text x="0" y="${264 + series.length * 17 + i * 15}" fill-opacity=".85">${escape(note)}</text>`).join('')}
-</svg>\n`;
+  const bands = series.map(({ source: s, points }) => `<path class="profile-interval" d="${path(points, 'lower')} ${path([...points].reverse(), 'upper', 'L')} Z" fill="${color(s)}" fill-opacity="${CHART.bandOpacity}"/>`).join('');
+  const curves = series.map(({ source: s, points }, i) => `<path class="profile-median" d="${path(points, 'median')}" fill="none" stroke="${color(s)}" stroke-width="1.5"${i === 1 ? ' stroke-dasharray="4 2"' : ''}/>`).join('');
+  const legend = series.map(({ source: s }, i) => `<path d="M0 ${244 + i * 17}H19" stroke="${color(s)}" stroke-width="1.5"${i === 1 ? ' stroke-dasharray="4 2"' : ''}/><text x="26" y="${248 + i * 17}">${escapeXml(s.label)}</text>`).join('');
+  const axes = chartAxes({ x, y, xTicks: r.temperature.ticks, yTicks: r.pressure.ticks,
+    xLabel: 'Temperature (K)', yLabel: 'Pressure (bar)', direction: 'Higher atmosphere ↑' });
+  const probed = [r.probedPressure.minimum, r.probedPressure.maximum].map(p => `<path class="probed-pressure" d="M42 ${n(y(p))}H294" stroke="${CHART.label}" stroke-opacity=".6" stroke-dasharray="2 3"/>`).join('');
+  return chartDocument({ ...r, metadata: { ...r.metadata, pressureUnit: 'bar', temperatureUnit: 'K',
+    pressureRange: [r.pressure.minimum, r.pressure.maximum], nativeRows: r.series.map(s => s.expectedRows) } },
+    axes + bands + probed + curves + legend + chartNotes(r.notes, 264 + series.length * 17), { height });
 }

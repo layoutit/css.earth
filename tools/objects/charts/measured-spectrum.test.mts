@@ -41,7 +41,10 @@ test('retains asymmetric errors and renders an integrated band without a wavelen
     await writeFile(join(root, 'band.json'), JSON.stringify({ schema: 'cssearth-measured-spectrum@1', measurements: [{ xLow: 0, xHigh: 4, y: 1, minus: .1, plus: .2 }] }));
     const data = await readMeasuredSpectrum(root, { ...recipe, mode: 'band', source: { path: 'band.json', format: 'records', yScale: 1, expectedRows: 1 } });
     assert.deepEqual(data.points[0], { x: 2, xLow: 0, xHigh: 4, y: 1, minus: .1, plus: .2 });
-    assert.doesNotMatch(renderMeasuredSpectrum(data), /<circle|published-model/);
+    const svg = renderMeasuredSpectrum(data);
+    assert.doesNotMatch(svg, /<circle|published-model/);
+    // The complete 0–4 passband is shaded between absolute bounds .9 and 1.2.
+    assert.match(svg, /class="measurement-interval" x="42\.000" y="110\.200" width="252\.000" height="8\.700"/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 test('rejects unsafe paths and malformed scales and axes before reading', () => {
