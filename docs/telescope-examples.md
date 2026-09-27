@@ -119,7 +119,7 @@ world coordinates, so no sky direction is claimed here; the picture is the detec
 Ceres is resolved, about 52 pixels across at half its peak brightness, but this is a small, blurred disc: the wide glow
 around it is the adaptive optics halo, which is in the data, and there is no surface detail to see at this scale.
 
-`node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47`
+`node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47`
 
 ## Chandra: Cassiopeia A in X-rays
 

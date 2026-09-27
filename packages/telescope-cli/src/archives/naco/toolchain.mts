@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /** Install and locate the pinned ESO VLT/NACO pipeline under output/toolchains/naco (ignored by git).
  *
- *   node tools/objects/naco/toolchain.mts install [--cache <dir> ...]
- *   node tools/objects/naco/toolchain.mts verify
- *   node tools/objects/naco/toolchain.mts recipes
+ *   node packages/telescope-cli/src/archives/naco/toolchain.mts install [--cache <dir> ...]
+ *   node packages/telescope-cli/src/archives/naco/toolchain.mts verify
+ *   node packages/telescope-cli/src/archives/naco/toolchain.mts recipes
  *
  * The kit is ESO's own, downloaded from ftp.eso.org and verified against both digests this repository can state for it: the
  * sha256 measured here, and the BSD `cksum` value ESO publishes beside the kit. Its `install_pipeline` builds erfa, fftw, cpl,
@@ -24,9 +24,11 @@ import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const repository = resolve(import.meta.dirname, '../../..');
-export const DESCRIPTOR = resolve(import.meta.dirname, 'toolchain.json');
+const repository = WORKSPACE;
+/** The toolchain pin stays in the checkout beside the programs it reduces. */
+export const DESCRIPTOR = resolve(WORKSPACE, 'tools/objects/naco/toolchain.json');
 export const TOOLCHAIN_ROOT = resolve(repository, 'output/toolchains/naco');
 
 const exists = (path: string) => access(path).then(() => true, () => false);
@@ -119,7 +121,7 @@ export async function installNacoToolchain(caches: readonly string[] = []) {
 export async function nacoToolchainPath() {
   const { digest } = await nacoToolchainDescriptor();
   const marker = await readFile(resolve(TOOLCHAIN_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown, 'installed.json'), () => null);
-  if (!marker) throw new Error('The NACO toolchain is not installed: node tools/objects/naco/toolchain.mts install');
+  if (!marker) throw new Error('The NACO toolchain is not installed: node packages/telescope-cli/src/archives/naco/toolchain.mts install');
   if (marker.descriptorSha256 !== digest) throw new Error('The NACO toolchain was built from another toolchain.json; reinstall it.');
   return TOOLCHAIN_ROOT;
 }

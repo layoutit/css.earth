@@ -2,7 +2,7 @@
 import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
 /** Compare two independently commanded NACO jitter sequences of one night, sample by sample: the only oracle this route has.
  *
- *   node tools/objects/naco/compare.mts <program id> <work directory> <tpl_start> <tpl_start>
+ *   node packages/telescope-cli/src/archives/naco/compare.mts <program id> <work directory> <tpl_start> <tpl_start>
  *
  * The Hubble and JWST routes compare a re-run against the archive's own product. NACO has none. On 19 September 2026
  * `ivoa.ObsCore` held nine NAOS+CONICA Phase 3 products, all of them GW170817, and the archive's calselector returned no
@@ -35,7 +35,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence } from '@cssearth/telescope/node';
+import { addProductEvidence, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
 import { PROGRAMS, readProgram } from './archive.mts';
 
@@ -44,7 +44,7 @@ export const NOD_HALVES = ['a-half', 'b-half'] as const;
 
 /** A path inside the repository, as the repository sees it: a receipt is committed, so it never carries a local absolute
  * path. A path outside the repository is recorded as it is, because nothing here can shorten it honestly. */
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 export const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 import { readReduction, type ReductionResult } from './reduce.mts';
 

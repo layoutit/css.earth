@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Pin one night of NACO jitter imaging and the calibration frames its reduction needs, as a NACO program.
  *
- *   node tools/objects/naco/archive.mts <program id> <prog_id> <object> [--night YYYY-MM-DD]
+ *   node packages/telescope-cli/src/archives/naco/archive.mts <program id> <prog_id> <object> [--night YYYY-MM-DD]
  *
  * NACO is `NAOS+CONICA` in the ESO archive's raw table, not `NACO`; `instrument = 'NACO'` returns nothing. A program records
  * one night's science exposures and, from the archive's own calibration association tree, the darks and flats ESO associates
@@ -26,9 +26,10 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { archiveHeader, column, type RawRow } from '@cssearth/telescope/node';
 import { associationTree, type Association } from '@cssearth/telescope/node';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows, WORKSPACE } from '@cssearth/telescope/node';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/naco/programs');
 export const SCHEMA = 'cssearth-naco-program@1';
 export const INSTRUMENT = 'NAOS+CONICA';
 export const TAP = 'https://archive.eso.org/tap_obs';

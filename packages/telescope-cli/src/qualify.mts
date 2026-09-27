@@ -17,10 +17,10 @@ import { compareCubeWithMast, runSpec3 } from '../../../tools/objects/jwst/cubes
 import { DEFAULT_CRDS_CONTEXT, pinImagingProgram } from '../../../tools/objects/jwst/imaging/archive.mts';
 import { JWST_CUBE_COVERAGE } from '../../../tools/objects/jwst/imaging/bands.mts';
 import { JWST_LEDGER } from '../../../tools/objects/jwst/archive-ledger.mts';
-import { PROGRAMS as NACO_PROGRAMS, pinProgram as pinNacoProgram, writeProgram as writeNacoProgram } from '../../../tools/objects/naco/archive.mts';
-import { NACO_LEDGER } from '../../../tools/objects/naco/archive-ledger.mts';
-import { compareTemplates } from '../../../tools/objects/naco/compare.mts';
-import { reduceProgram as reduceNacoProgram } from '../../../tools/objects/naco/reduce.mts';
+import { PROGRAMS as NACO_PROGRAMS, pinProgram as pinNacoProgram, writeProgram as writeNacoProgram } from './archives/naco/archive.mts';
+import { NACO_LEDGER } from './archives/naco/archive-ledger.mts';
+import { compareTemplates } from './archives/naco/compare.mts';
+import { reduceProgram as reduceNacoProgram } from './archives/naco/reduce.mts';
 import { qualifyPdsArchiveProduct } from './archives/pds/archive-final.mts';
 import { buildPdsLedger } from './archives/pds/archive-ledger.mts';
 import { productRecordPath } from '@cssearth/telescope';

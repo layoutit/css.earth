@@ -9,6 +9,10 @@
       "types": "./src/archives/ledger.mts",
       "default": "./src/archives/ledger.mts"
     },
+    "./archives/naco/archive": {
+      "types": "./src/archives/naco/archive.mts",
+      "default": "./src/archives/naco/archive.mts"
+    },
     "./archives/sky-position": {
       "types": "./src/archives/sky-position.mts",
       "default": "./src/archives/sky-position.mts"

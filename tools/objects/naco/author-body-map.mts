@@ -21,7 +21,7 @@ import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
-import { readProgram } from './archive.mts';
+import { readProgram } from '@cssearth/telescope-cli/archives/naco/archive';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
