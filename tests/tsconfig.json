@@ -18,7 +18,7 @@
     "../tools/**/*.test.mts",
     "../tools/**/*.spec.ts",
     "../tools/**/*.spec.mts",
-    "../tools/audits/**/*.mts",
+    "../.github/scripts/audits/**/*.mts",
     "../packages/**/*.test.ts",
     "../packages/**/*.test.mts",
     "../packages/**/*.spec.ts",

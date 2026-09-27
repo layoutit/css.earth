@@ -96,7 +96,7 @@ function boundaryRoleFor(path: string): BoundaryRole | undefined {
     .replace(/^labs\/nebula\/packages\/lab\/src\/(features|server\/workflows)\/evidence-fusion\//u, 'labs/nebula/packages/lab/src/$1/')
     .replace(/^labs\/nebula\/packages\/lab\/src\/server\/routes\/evidence-fusion\.ts$/u, 'labs/nebula/packages/lab/src/server/routes/fusion.ts');
   // Audits and external-oracle comparisons produce evidence; they may use test harnesses.
-  if (path.startsWith('tools/audits/') || path.startsWith('tools/oracles/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(rolePath)) return 'evidence';
+  if (path.startsWith('.github/scripts/audits/') || path.startsWith('tools/oracles/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(rolePath)) return 'evidence';
   return undefined;
 }
 

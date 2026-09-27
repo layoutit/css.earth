@@ -234,7 +234,7 @@ export function checkDocumentation(root: string, baseRef: string | null): Docume
 function main(args: string[]): void {
   const all = args.length === 1 && args[0] === '--all';
   const base = args.length === 2 && args[0] === '--base' ? args[1] : undefined;
-  if (!all && !base) throw new Error('Usage: node tools/audits/check-documentation-links.mts --all | --base <ref>');
+  if (!all && !base) throw new Error('Usage: node .github/scripts/audits/check-documentation-links.mts --all | --base <ref>');
   const root = git(process.cwd(), ['rev-parse', '--show-toplevel']).toString('utf8').trim();
   if (realpathSync(root) !== realpathSync(process.cwd())) throw new Error('Run from the repository root');
   const result = checkDocumentation(root, base ?? null);

@@ -52,13 +52,13 @@ jobs:
         # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
         # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
         run: |
-          node --test tools/audits/check-documentation-links.test.mts
-          python3 tools/audits/test_provenance_documentation_inventory.py
-          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
+          node --test .github/scripts/audits/check-documentation-links.test.mts
+          python3 .github/scripts/audits/test_provenance_documentation_inventory.py
+          python3 .github/scripts/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
+            node .github/scripts/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
           else
-            node tools/audits/check-documentation-links.mts --all
+            node .github/scripts/audits/check-documentation-links.mts --all
           fi
       - name: Check tracked files against ignore rules
         if: ${{ !cancelled() }}
