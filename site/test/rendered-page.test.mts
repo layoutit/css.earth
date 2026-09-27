@@ -69,3 +69,22 @@ test('planet and asteroid pages retain their satellite-system card beside one sc
   assert.ok(mercury);
   assert.equal(mercury.querySelector('[data-satellite-system]'), null);
 });
+
+
+test('information tab rules belong to the prepared scene head, never the replaceable card', async () => {
+  for (const route of ['earth', 'lutetia', 'bennu', 'ceres', 'navigation/earth', 'navigation/lutetia']) {
+    const document = await page(route);
+    assert.ok(document, `${route} has no dist build`);
+    const card = document.querySelector('.object-information-panel');
+    assert.ok(card);
+    assert.equal(card.querySelectorAll('style').length, 0, `${route}: replacing a card must not remove stylesheets`);
+    const sheets = [...document.head.querySelectorAll('style[data-object-style^="site/information-tabs/"]')];
+    assert.ok(sheets.length > 0);
+    const css = sheets.map(sheet => sheet.textContent).join('\n');
+    assert.ok(!css.includes('--information-panel-display'));
+    for (const tab of document.querySelectorAll('[data-information-tab]')) {
+      assert.ok(css.includes('#' + tab.id + ')'), `${route}: prepared selection rule for ${tab.id}`);
+      assert.ok(document.getElementById(tab.getAttribute('aria-controls')!));
+    }
+  }
+});

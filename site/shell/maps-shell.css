@@ -647,7 +647,7 @@
 /* Keep the Dataset count visible without moving the tab labels. */
 .object-card-tabs .object-tab-count { display: inline; }
 .object-card-tabpanel {
-  display: var(--information-panel-display, block);
+  display: block;
   padding: 8px var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
 }
 .object-information-panel > .object-factsheet-content {

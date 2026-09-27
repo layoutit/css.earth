@@ -153,6 +153,21 @@ pnpm ipad:run --live --start earth --fly lutetia --name live-earth-to-lutetia
 `objectnavigationquery` and `objectnavigate` events as the app's selectable world markers, then verify the destination
 is ready and visible. The flight receipt records the displayed release version. Native frames and WebKit tracing
 remain enabled; internal scene diagnostics may be absent in production, and local source maps are not applied to it.
+Add `--debug` to harvest the DOM-to-compositor chain on the real iPad. It is diagnostic instrumentation; use a normal run for frame-time comparisons.
+
+```sh
+pnpm ipad:run --debug --start earth --fly lutetia --screenshot arrived --name lutetia-mount-debug
+```
+
+The export automatically includes:
+
+- `causes.json`: synchronous DOM/style/listener calls, caller stacks, before/after child counts, stable node and parent IDs, inserted node IDs, and observer frame numbers.
+- `layers.jsonl`: event-driven native layer snapshots, bounds, backing bytes, paint counts, structural compositing reasons, and DOM identity mappings. Parents without layers are included. Samples are written during recording so a failed run retains them.
+- `compositor-checkpoints.json`: computed styles and bounding boxes at route arrival and the end of recording, including explicit omitted-node counts.
+- `analysis.json` and every DevTools slice: attachment operations joined to each leaf parent's observed layer presence. Separate diagnostic lanes preserve exact timestamp markers and include overhead.
+
+Native snapshots are asynchronous observations, not atomic transactions or proof that pixels reached the screen. Reports retain coalesced event counts, errors, unmapped nodes and unpaired clocks. GPU tile eviction reasons are not exposed by this Inspector protocol. Layer IDs and Inspector node IDs must never be joined by array position or across remappings; the page-side retained node identity provides that link.
+
 Add `--style-writes` for the existing DOM-write diagnostic; it adds overhead and is for locating changes rather than comparing timing.
 `style-writes.json` includes bounded, timestamped class/data/hidden state changes as well as aggregate writes. Align its
 relative times with the `cssEarth:capture:style-writes-start` trace marker; device and host wall clocks can differ.

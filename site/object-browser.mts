@@ -57,9 +57,12 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       !(browser instanceof windowTarget.HTMLElement)) {
     throw new Error("Object shell object browser is incomplete.");
   }
+  let open = searchCard.hasAttribute('data-search-submitted');
+  let showingSearchResults = false;
   const searchPresentation = createSearchPresentation(documentTarget);
   const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
+  void navigation?.setVisible(open);
   lifetime.onDispose(() => navigation?.destroy());
   const presentation = createSelectionPresentation(documentTarget, {
     windowTarget, selectNavigation: current => { void navigation?.select(current); },
@@ -81,7 +84,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     const solarSystem = navigationRoot.querySelector<HTMLDetailsElement>('details[data-atlas-depth="0"][data-atlas-key="solar-system"]');
     if (solarSystem) solarSystem.open = true;
   };
-  let showingSearchResults = false;
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
   let resultsScrolled = false;
@@ -102,17 +104,16 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const presentEmpty = () => { setEmptyHidden(!showingSearchResults || shown.objects > 0 || shown.features !== 0); };
   const destinations = createDestinationBrowser({
     documentTarget,
-    onSelected() { render(false); search.blur(); },
+    onSelected() { setOpen(false); search.blur(); },
     onReset: onResetDestination,
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
     documentTarget, objectId: readObjectId(),
     onResults(count) { shown.features = count; presentEmpty(); },
-    onSelected() { render(false); search.blur(); },
+    onSelected() { setOpen(false); search.blur(); },
   });
   lifetime.onDispose(() => features?.destroy());
-  let open = searchCard.hasAttribute('data-search-submitted');
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Coalesce synchronous selection updates before notifying the scene.
@@ -131,6 +132,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const presentSelection = () => catalogue.setSelection(presentation.present(currentSubject(), catalogue.sources));
   const presentBrowser = () => {
     searchPresentation.present(open, showingSearchResults);
+    void navigation?.setVisible(open && !showingSearchResults);
     browser.toggleAttribute('data-navigation-filtered', open && showingSearchResults);
     trigger.ariaExpanded = search.ariaExpanded = String(open);
     trigger.title = trigger.ariaLabel = open ? 'Collapse celestial objects' : 'Browse celestial objects';
@@ -151,7 +153,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       Object.assign(shown, { query, classification: null, objects: 0, features: 0 } satisfies ShownSearch);
       markCategory();
       presentEmpty();
-      void navigation?.reset();
       void features?.search('');
       return;
     }
@@ -163,44 +164,50 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
     presentEmpty();
   };
-  const render = (next: boolean) => {
-    presentSelection();
-    // Only an actual open/close transition may reset a scrolled result list.
-    const changed = open !== next;
-    if (changed) resetResultsScroll();
+  const setOpen = (next: boolean) => {
+    if (open === next) return;
+    resetResultsScroll();
     open = next;
-    const currentUrl = new URL(windowTarget.location.href);
-    for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
-      input.value = currentUrl.searchParams.get(input.name) ?? '';
-      input.disabled = !input.value;
-    }
-    if (next) void catalogue.ensureLoaded();
-    if (next) filter();
-    else {
+    if (next) {
+      const currentUrl = new URL(windowTarget.location.href);
+      for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
+        input.value = currentUrl.searchParams.get(input.name) ?? '';
+        input.disabled = !input.value;
+      }
+      void catalogue.ensureLoaded();
+      filter();
+    } else {
       presentBrowser();
-      void navigation?.reset();
       catalogue.clearWindow();
-      // Closing clears the rendered window, so the next open must filter again even for the same query.
       shown.query = null;
       markCategory();
     }
-    if (changed && !lifetime.disposed) onSearchChange(next);
+    if (!lifetime.disposed) onSearchChange(next);
+  };
+  const showResults = () => {
+    presentSelection();
+    if (open) filter();
+    else setOpen(true);
+  };
+  const refreshSelection = () => {
+    presentSelection();
+    if (open) filter();
   };
 
   // Focus first: focusing search opens the mobile sheet for the keyboard, and closing
   // the results must still return the sheet to where the search found it.
-  const closeKeepingFocus = () => { search.focus(); render(false); };
+  const closeKeepingFocus = () => { search.focus(); setOpen(false); };
   trigger.addEventListener("click", event => {
     event.preventDefault();
     if (open) { closeKeepingFocus(); return; }
-    render(true);
+    showResults();
     search.focus();
   }, {
     signal: events.signal,
   });
   searchCard.addEventListener('submit', event => {
     event.preventDefault();
-    render(true);
+    showResults();
   }, { signal: events.signal });
   // Clearing empties the query and returns to the selected card, like Escape.
   documentTarget.querySelector<HTMLElement>('.object-sidebar-search-clear')?.addEventListener('click', event => {
@@ -218,11 +225,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       event.preventDefault();
       if (button.ariaPressed === 'true') {
         search.value = '';
-        render(false);
+        setOpen(false);
         return;
       }
       search.value = button.dataset.searchQuery ?? "";
-      render(true);
+      showResults();
       requiredElement(documentTarget, '.object-sidebar').scrollTop = 0;
     }, { signal: events.signal });
     button.addEventListener('keydown', event => {
@@ -232,7 +239,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
-    if (!open) render(true);
+    if (!open) showResults();
     else filter();
   }, { signal: events.signal });
   // Source result rows have explicit visibility. Reading every row's geometry
@@ -248,11 +255,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         if (event.key === "Enter") first.click(); else first.focus();
       }
     } else if (event.key === "Enter") {
-      event.preventDefault(); render(true); return;
+      event.preventDefault(); showResults(); return;
     }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
-    render(false);
+    setOpen(false);
   }, { signal: events.signal });
   browser.addEventListener("keydown", (event) => {
     if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
@@ -279,13 +286,13 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   browser.addEventListener('click', event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     if (!(event.target instanceof windowTarget.Element) || !event.target.closest('a[data-prepared-focus-id]')) return;
-    render(false);
+    setOpen(false);
     search.blur();
   }, { signal: events.signal });
   // Pressing or wheeling the scene leaves the search: the results close and the typed query stays for reopening.
   const sceneInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
   for (const type of ['pointerdown', 'wheel'] as const) {
-    sceneInput?.addEventListener(type, () => { if (open) { render(false); search.blur(); } }, { signal: events.signal, passive: true });
+    sceneInput?.addEventListener(type, () => { if (open) { setOpen(false); search.blur(); } }, { signal: events.signal, passive: true });
   }
   documentTarget.addEventListener("pointerdown", (event) => {
     if (documentTarget.activeElement !== search ||
@@ -293,7 +300,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         searchCard.contains(event.target)) return;
     search.blur();
   }, { signal: events.signal });
-  render(open);
+  presentBrowser();
+  refreshSelection();
 
   const previewSelection = (subject: SceneSubject) => {
     const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
@@ -301,12 +309,14 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     subjectOverride = preview;
     // Choosing a result ends that search; a cancelled flight gives the query back.
     search.value = '';
-    render(false);
+    setOpen(false);
+    presentSelection();
     return () => {
       if (subjectOverride !== preview) return;
       subjectOverride = previous;
       if (!search.value) search.value = previousQuery;
-      render(open || previousOpen);
+      refreshSelection();
+      setOpen(open || previousOpen);
     };
   };
   return Object.freeze({
@@ -322,11 +332,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       if (subject.kind === 'focus') {
         if (subjectOverride) subjectOverride.hideFocus = false;
       } else subjectOverride = null;
-      if (subject.kind === 'overview' && subject.overview.scope === 'system' && subject.overview.systemId === SOLAR_SYSTEM_ID) {
+      if (open && !showingSearchResults && subject.kind === 'overview' && subject.overview.scope === 'system' && subject.overview.systemId === SOLAR_SYSTEM_ID) {
         collapseSolarSystemBranches();
       }
       if (subject.kind === 'overview') destinations?.present(null);
-      render(open);
+      refreshSelection();
     },
     bindObject(id: string) {
       // A completed flight publishes the selection, but a newer search owns
@@ -340,7 +350,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         documentTarget.querySelector('.object-sidebar-search-clear')?.setAttribute('href', object.route);
       }
       destinations?.present(null); features?.refresh();
-      render(open);
+      refreshSelection();
     },
     presentDestination(value: DestinationPresentation | null) { destinations?.present(value); },
     destroy() {
@@ -348,7 +358,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       destinations?.destroy();
       catalogue.showInlineRows();
       setEmptyHidden(true);
-      render(false);
+      setOpen(false);
     },
   });
 }

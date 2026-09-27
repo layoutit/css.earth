@@ -1,4 +1,5 @@
 ---
+import { prepareInformationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
@@ -30,6 +31,8 @@ interface Props {
 }
 
 const { objectId, navigation = false, scene, descriptor } = Astro.props;
+const objectUi = await Astro.slots.render('object-ui');
+const tabStyles = prepareInformationTabStyles(objectUi);
 const objectRecord = requireSceneObject(objectId);
 const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID });
 ---
@@ -85,13 +88,14 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     </script>}
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="object-head" />
+    {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
     <title>{seo.title}</title>
     {!navigation && <ObjectSwatchStyles />}
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->
     <div class="object-ui-layer">
-      <slot name="object-ui" />
+      <Fragment set:html={objectUi} />
     </div>
     <!--search-shell:end-->
     <!--prepared-descriptor:start-->

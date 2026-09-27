@@ -333,9 +333,9 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
           mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree,
             initialWorldCamera, initialProjection: preparedLease.projection({ world: initialWorldCamera, viewport: optics }),
             arrivingByFlight: true,
-            // Attach the complete mesh under the stationary opaque image.
-            // Incremental attachment left missing triangles in native iPad frames.
-            ...(billboard ? { progressiveActivation: false } : {}),
+            // Connect prepared leaf batches under the stationary opaque image.
+            // Readiness includes every batch and the final first-paint gate.
+            ...(billboard ? { progressiveActivation: true } : {}),
             ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
               if (running.signal.aborted || publisher.kind !== 'mounting') return;
               publisher.owner = owner; void owner.apply(drawn, { signal: running.signal });

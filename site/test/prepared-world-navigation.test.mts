@@ -109,7 +109,7 @@ test('billboard covers attachment at the final viewport framing with no second c
   const target = createWorldSelectionTarget(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
   assert.ok(target);
   const handoff = await drainFrames(f, { task: f.start({ stage }) });
-  assert.equal(handoff.mountOptions.progressiveActivation, false);
+  assert.equal(handoff.mountOptions.progressiveActivation, true);
   const initial = required(handoff.mountOptions.initialWorldCamera);
   const expected = presentWorldCamera(target, f.factory.navigation.frame, f.navigation.optics());
   const mountedProjection = presentWorldCamera(initial, f.factory.navigation.frame, f.navigation.optics());

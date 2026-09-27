@@ -30,6 +30,8 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
   const url = root.dataset.atlasTreeSrc || null;
   const events = new AbortController();
   let selected = root.dataset.atlasCurrent ?? '';
+  let visible = true, revision = 0;
+  let presented: string | null = null;
   let payloadPromise: Promise<NavigationTreePayload> | null = null;
 
   const load = () => {
@@ -87,6 +89,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
   const materialize = async (details: HTMLDetailsElement, supplied?: NavigationTreePayload) => {
     if (!details.hasAttribute('data-atlas-lazy')) return;
     const payload = supplied ?? await load();
+    if (!visible || events.signal.aborted) return;
     const key = details.dataset.atlasKey;
     const node = key ? payload.nodes[key] : null;
     if (!node) throw new Error(`Navigation branch is missing: ${key ?? ''}.`);
@@ -102,7 +105,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
   };
   root.addEventListener('toggle', event => {
     const details = event.target;
-    if (details instanceof windowTarget.HTMLDetailsElement && details.open && details.hasAttribute('data-atlas-lazy')) {
+    if (visible && details instanceof windowTarget.HTMLDetailsElement && details.open && details.hasAttribute('data-atlas-lazy')) {
       details.ariaBusy = 'true';
       void materialize(details).catch(report).finally(() => { details.removeAttribute('aria-busy'); });
     }
@@ -110,13 +113,15 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
 
   const select = async (objectId: string) => {
     selected = objectId;
-    root.dataset.atlasCurrent = objectId;
+    const ownRevision = ++revision;
+    if (!visible || events.signal.aborted || presented === objectId) return;
+    const current = () => visible && !events.signal.aborted && revision === ownRevision;
     let target = anchorByObject(objectId);
     if (!target && url) {
       try {
         const payload = await load();
         // A later selection owns the tree once this one yields.
-        if (selected !== objectId) return;
+        if (!current()) return;
         const parent = new Map<string, string>();
         for (const [key, node] of Object.entries(payload.nodes)) for (const child of node.children) parent.set(child, key);
         const path: string[] = [];
@@ -126,12 +131,15 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
           const details = detailsByKey(key);
           if (!details) break;
           await materialize(details, payload);
-          if (selected !== objectId) return;
+          if (!current()) return;
           details.open = true;
         }
         target = anchorByObject(objectId);
-      } catch (error) { report(error); }
+      } catch (error) { if (current()) report(error); return; }
     }
+    if (!current()) return;
+    root.dataset.atlasCurrent = objectId;
+    presented = objectId;
     for (const anchor of root.querySelectorAll<HTMLAnchorElement>('a[data-atlas-object][aria-current]')) anchor.removeAttribute('aria-current');
     target?.setAttribute('aria-current', 'page');
     const selectedRoot = target?.closest<HTMLDetailsElement>('details[data-atlas-depth="0"]') ?? null;
@@ -147,7 +155,15 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
 
   return Object.freeze({
     select,
+    async setVisible(next: boolean) {
+      if (visible === next) return;
+      visible = next;
+      revision++;
+      if (visible) await select(selected);
+    },
     async reset() {
+      presented = null;
+      if (!visible || events.signal.aborted) return;
       for (const branch of root.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) branch.open = false;
       await select(selected);
     },

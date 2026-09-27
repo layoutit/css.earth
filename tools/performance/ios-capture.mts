@@ -46,6 +46,8 @@ import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readSourceMap } from './trace-brief.mts';
+import { startLayerSampler } from './ipad-layer-sampler.mts';
+import { INSTALL_TRACE_CAUSES, STOP_TRACE_CAUSES } from './ipad-trace-causes.mts';
 import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';
 
 const run = promisify(execFile);
@@ -517,10 +519,16 @@ async function subtreeLayers(session: ReturnType<typeof inspector>, selector: st
   const reply = await session.send('LayerTree.layersForNode', { nodeId });
   const layers = isRecord(reply.result) && Array.isArray(reply.result.layers) ? reply.result.layers.filter(isRecord) : [];
   const listed = [];
-  for (const layer of layers.slice(0, 400)) {
+  for (const layer of layers) {
     const why = await session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId });
     const flags = isRecord(why.result) && isRecord(why.result.compositingReasons) ? why.result.compositingReasons : {};
-    listed.push({ layerId: layer.layerId, nodeId: layer.nodeId ?? null, paintCount: typeof layer.paintCount === 'number' ? layer.paintCount : 0,
+    // Structural layers are the depth/compositing ancestry, not bitmap leaves.
+    // Keep their DOM identity so arrival/reload captures can identify missing carriers.
+    const attributes = layer.memory === 0 && typeof layer.nodeId === 'number'
+      ? await session.send('DOM.getAttributes', { nodeId: layer.nodeId }) : null;
+    listed.push({ layerId: layer.layerId, nodeId: layer.nodeId ?? null,
+      ...(attributes && isRecord(attributes.result) ? { attributes: attributes.result.attributes } : {}),
+      paintCount: typeof layer.paintCount === 'number' ? layer.paintCount : 0,
       memoryKb: Math.round((typeof layer.memory === 'number' ? layer.memory : 0) / 1024), bounds: layer.bounds ?? null,
       reasons: Object.entries(flags).filter(([, on]) => on === true).map(([reason]) => reason) });
   }
@@ -1086,7 +1094,7 @@ export function options(args: readonly string[]) {
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
   return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes') || args.includes('--debug'), debug: args.includes('--debug'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
@@ -1488,8 +1496,14 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await writeFile(resolve(out, `heap.${phase}.json`), heap.result.snapshotData);
   };
   await heapSnapshot('before');
+  const compositorCheckpoints: unknown[] = [];
   const residencySnapshots: unknown[] = [await evaluate(INSTALL_RESIDENCY_PROBE)];
   const residencyCheckpoint = async (step: number) => {
+    if (option.debug && (step === steps.length || 'route' in (steps[step] ?? {}))) {
+      const state = await evaluate('window.__captureCauses ? window.__captureCauses.checkpoint() : null');
+      compositorCheckpoints.push({ step, state });
+      await writeFile(resolve(out, 'compositor-checkpoints.json'), JSON.stringify(compositorCheckpoints) + '\n');
+    }
     const value = await evaluate(READ_RESIDENCY_PROBE);
     residencySnapshots.push(isRecord(value) ? { ...value, step } : { step, error: 'Residency probe unavailable after navigation.' });
   };
@@ -1516,6 +1530,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
+  let activeLayers: Awaited<ReturnType<typeof startLayerSampler>> | null = null;
+  let debugInstalled = false;
   let activeScreens: { stop(): Promise<number> } | null = null;
   let activeMonitors: Awaited<ReturnType<typeof deviceMonitors>> | null = null;
   try {
@@ -1528,18 +1544,20 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   }
   recording = true;
   await session.send('CPUProfiler.startTracking');
-  await session.send('Timeline.start', { maxCallStackDepth: 8 });
+  await session.send('Timeline.start', { maxCallStackDepth: option.debug ? 32 : 8 });
   // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
   // --eval runs one expression in the page before recording: an experiment's switch (hide a layer, set a flag).
   if (option.eval) await evaluate(option.eval);
   await evaluate(INPUT_LOGGER);
   const styleWritesStarted = Date.now();
   if (option.styleWrites) await evaluate(STYLE_WRITES_LOGGER);
+  if (option.debug) { await evaluate(INSTALL_TRACE_CAUSES); debugInstalled = true; }
   // Set up Web Inspector before streaming native screenshots. On the real iPad,
   // starting the screen sampler earlier can starve these inspector commands.
   const screens = target.kind === 'device' && option.screens
     ? await (deviceScreensSession ? deviceScreensSession.startScreens(out) : deviceScreens(option.pymobiledevice3, udid, out)) : null;
   activeScreens = screens;
+  if (option.debug) activeLayers = await startLayerSampler(session, resolve(out, 'layers.jsonl'));
   stage('trace and screen sampler ready');
   const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
   // Full screen and viewport captures have separate actions and provenance.
@@ -1559,9 +1577,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
         selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }),
         captureScreen, file => snapshotViewport(session, file), awaitRoute, args.includes('--strict-steps'), residencyCheckpoint);
     } catch (error) {
-      xctrace?.kill('SIGINT');
-      await Promise.allSettled([monitors?.stop(), screens?.stop(), session.send('Timeline.stop'), session.send('CPUProfiler.stopTracking')]);
-      session.close(); proxy?.kill();
+      // Preserve the app error before the outer cleanup tears down Inspector.
+      await writeFile(resolve(out, 'failure.json'), JSON.stringify({ error: error instanceof Error ? error.message : String(error),
+        steps: marks, console: events.filter(event => event.method === 'Console.messageAdded') }, null, 2) + '\n');
       throw error;
     }
   }
@@ -1575,6 +1593,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     console.error('Recording stopped.');
   }
   const durationMs = Date.now() - started;
+  await activeLayers?.stop(); activeLayers = null;
   stage('actions complete');
   const { samples: deviceSamples = null, ...deviceSummary } = (monitors ? await monitors.stop() : null) ?? {};
   activeMonitors = null;
@@ -1605,6 +1624,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
   await residencyCheckpoint(steps.length);
+  if (debugInstalled) { const causes = await evaluate(STOP_TRACE_CAUSES); debugInstalled = false; await writeFile(resolve(out, 'causes.json'), JSON.stringify(causes) + '\n'); }
   const retired = await evaluate(STOP_RESIDENCY_PROBE);
   const residency = { snapshots: residencySnapshots, released: isRecord(retired) && Array.isArray(retired.released) ? retired.released : [],
     droppedReleases: isRecord(retired) ? retired.dropped : null };
@@ -1680,6 +1700,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter,
       source: 'WebKit category accounting; endpoints after GC, continuous samples without forced GC; not process physical footprint', samples: memoryUpdates }, residency,
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
+    diagnostic: { enabled: option.debug, timingComparable: !option.debug && !option.styleWrites, checkpoints: compositorCheckpoints.length },
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
     native: nativeSummary, pixels, files: (await readdir(out)).sort(),
   };
@@ -1688,7 +1709,14 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
   } catch (error) {
+    await activeLayers?.stop().catch(() => null);
+    if (debugInstalled) await evaluate(STOP_TRACE_CAUSES).then(value => writeFile(resolve(out,'causes.json'),JSON.stringify(value)+'\n')).catch(() => null);
     xctrace?.kill('SIGINT');
+    // Stop Inspector observers before the automation page closes. The iPad's
+    // 2026-09-27 08:21:29 crash was inside InspectorMemoryAgent's live callback.
+    await Promise.allSettled([session.send('Memory.stopTracking'), session.send('CPUProfiler.stopTracking'),
+      session.send('ScriptProfiler.stopTracking'), session.send('Timeline.stop'),
+      ...[...workers.keys()].map(worker => session.send('ScriptProfiler.stopTracking', {}, worker))]);
     await Promise.allSettled([activeScreens?.stop(), activeMonitors?.stop()]);
     session.close(); proxy?.kill();
     throw error;

@@ -179,7 +179,11 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   }
   if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
   const activate = prepareConnectedActivation(preparedTree && progressiveActivation
-    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own);
+    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own,
+    // Empty structural anchors can be leaves after preparation partitions the
+    // surface. Hit testing and feature binding need their ancestry immediately.
+    [definition.surfaceHit?.target, definition.features?.target].flatMap(index => index === undefined ? [] : [nodes[index]]),
+    [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])]);
   // The same prepared groups let the camera bring a resolving mesh back in stages.
   const revealGroups = Object.freeze((definition.tree.activationGroups ?? []).map(group => Object.freeze(group.map(index => nodes[index]))));
   // Disable CSS-owned motion before attachment. Prepared handles below own its
