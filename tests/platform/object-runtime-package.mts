@@ -9,7 +9,7 @@ import type { ObjectRuntimeDefinition } from "@cssearth/renderer";
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
 import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 import { createSceneLifetime } from "@cssearth/engine";
-import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { initialObjectSelection } from "@cssearth/renderer/testing";
 // Feature catalogues use the checked-in fixture bytes; these image-lifetime
 // tests have no network service. Camera behavior has its own platform fixtures.

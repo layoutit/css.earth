@@ -1,4 +1,4 @@
-import { required, fixtureRecord } from '../../contract/test-values.mts';
+import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { requireArray, requireString } from '@cssearth/core';
 import { parseGeologyLens, loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile, decodeGeologyAttributes, decodeGeologyPolygons } from '@cssearth/bake/objects/raster';
 import assert from 'node:assert/strict';

@@ -1,4 +1,4 @@
-import { required, fixtureRecord } from '../../contract/test-values.mts';
+import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { fixtureSource } from '../test-source-fixture.mts';
 import { createIndexedShape, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';

@@ -7,7 +7,7 @@ import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
 import { nodeName, propertyKey, staticObjectProperties } from '@cssearth/bake/runtime-source';
 import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mts';
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '@cssearth/bake/presentation';
-import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
+import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import { requireAuthoredWorldFrame } from '@cssearth/bake/sources';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 

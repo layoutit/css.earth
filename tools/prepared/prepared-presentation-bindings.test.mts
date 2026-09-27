@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
-import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
+import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import type { PresentationSource } from '@cssearth/bake/prepared-presentation';
 import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 

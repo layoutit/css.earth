@@ -9,7 +9,7 @@ import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticOb
 import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
 import { definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
-import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
 import { readPreparedJsonExports } from "../prepared/check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from '@cssearth/bake/runtime-source';

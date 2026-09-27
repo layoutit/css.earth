@@ -1,4 +1,4 @@
-import {loadObjectTestDefinition} from '../contract/object-test-data.mts';
+import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';

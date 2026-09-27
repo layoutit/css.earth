@@ -25,6 +25,11 @@
       "types": "./dist/node.d.ts",
       "import": "./dist/node.js",
       "require": "./dist/node.cjs"
+    },
+    "./node/contract": {
+      "types": "./dist/node/contract.d.ts",
+      "import": "./dist/node/contract.js",
+      "require": "./dist/node/contract.cjs"
     }
   },
   "scripts": {

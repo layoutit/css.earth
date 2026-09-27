@@ -9,7 +9,7 @@ import type { Node } from 'estree';
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import type { ObjectEntry } from '@cssearth/objects';
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
-import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { requireAuthoredWorldFrame } from '@cssearth/bake/sources';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';

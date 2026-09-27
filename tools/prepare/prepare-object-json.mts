@@ -1,9 +1,9 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { preparePageMetadata } from '@cssearth/bake/delivery';
 import {parseObjectDescriptor} from '@cssearth/objects';
-import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
+import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
-import type {CheckedObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
+import type {CheckedObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import type {RecompiledPresentation} from '@cssearth/bake/prepared-presentation';
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
  * bindings (facing planes, depth partitions, interior fill). Facing planes are browser-measured against the solved

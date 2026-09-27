@@ -12,7 +12,7 @@ import * as geometry from '../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseSolidReplayScene } from '../prepared/prepared-replay-source.mts';
-import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
+import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 
 type Vector = readonly number[];
 type EpochStateSource = { centerBodyId: string; positionKm: Vector; parentHeliocentricState: { positionKm: Vector; velocityKmPerDay: Vector } };

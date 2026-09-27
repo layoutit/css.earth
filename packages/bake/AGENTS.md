@@ -66,6 +66,9 @@ its validators accept); the renderer never imports the bake.
   physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure.
   It imports `runtime-source`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned JPL moon catalogue
   (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
+- `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
+  writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
+  and the renderer's object controls. It imports `presentation`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,

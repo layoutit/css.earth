@@ -1,4 +1,4 @@
-import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import { prepareFrameLookup } from "@cssearth/bake/presentation";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";

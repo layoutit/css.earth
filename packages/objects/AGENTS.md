@@ -3,6 +3,8 @@
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.
 Own the source catalogue (`src/sources/`, browser-safe) and the source-manifest format (`src/node/`, the Node-only
 `@cssearth/objects/node` entry); the main and `sources` entries never import `node/`.
+`src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
+against its contract (its final prepared definition, and fixture values required before a test inspects them).
 An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.

@@ -1,6 +1,6 @@
-import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "@cssearth/bake/presentation";
-import { requirePreparedPresentation } from "@cssearth/bake/presentation";
-import type { PreparedPresentationContract } from "@cssearth/bake/presentation";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../presentation/index.ts";
+import { requirePreparedPresentation } from "../presentation/index.ts";
+import type { PreparedPresentationContract } from "../presentation/index.ts";
 import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { isRecord, requireRecord } from '@cssearth/core';

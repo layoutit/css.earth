@@ -32,7 +32,8 @@
     "src/runtime-source",
     "src/prepared-presentation",
     "src/delivery",
-    "src/sources"
+    "src/sources",
+    "src/contract"
   ],
   "exclude": [
     "src/**/*.test.ts"
