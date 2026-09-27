@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -253,7 +253,7 @@ test('a search box is that many degrees on the sky, not that many degrees of rig
 
 test('the checked-in guide is the one the ledger generates', async () => {
   const ledger = JSON.parse(await readFile(CHANDRA_LEDGER.files.ledger, 'utf8')) as Parameters<typeof chandraLedgerGuide>[0];
-  assert.equal(await readFile(CHANDRA_LEDGER.files.guide, 'utf8'), chandraLedgerGuide(ledger), 'run node tools/objects/chandra/archive-ledger.mts');
+  assert.equal(await readFile(CHANDRA_LEDGER.files.guide, 'utf8'), chandraLedgerGuide(ledger), 'run node packages/telescope-cli/src/archives/chandra/archive-ledger.mts');
 });
 
 test('Jupiter reproduces event for event on HRC-I, and its disc lands in the object-centred frame', async () => {

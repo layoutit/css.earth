@@ -22,7 +22,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fitsImageAccessor, imageExtent, readFitsHdus, type FitsHeader, skyDisplayRaster, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
-import { column, eventTable } from '../../../tools/objects/chandra/events.mts';
+import { column, eventTable } from './archives/chandra/events.mts';
 import { decodeJunocam } from '@cssearth/bake/objects/layers/terrestrial';
 import { WORKSPACE } from '@cssearth/telescope/node';
 

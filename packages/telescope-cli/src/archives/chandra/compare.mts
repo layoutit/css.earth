@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Compare the re-run level-2 event list of an observation with the archive's own, event by event: the oracle for reprocess.mts.
  *
- *   node tools/objects/chandra/compare.mts <program id> <obsid> <run directory> [--raw <dir>]...
+ *   node packages/telescope-cli/src/archives/chandra/compare.mts <program id> <obsid> <run directory> [--raw <dir>]...
  *
  * An event list is a table, not an image, and standard data processing drops events as well as changing them, so the two lists
  * are not row for row. They are matched on what the instrument telemetered and no processing rewrites: for ACIS the chip the
@@ -24,7 +24,7 @@ import { access, readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { FitsHeader } from '@cssearth/fits';
-import { addProductEvidence, readProductRecord, runDigest } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, runDigest, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductRecord } from '@cssearth/telescope';
 import { chandraFile, observationMode, PROGRAMS, type ChandraFile } from './archive.mts';
 import { column, eventColumn, eventTable, gunzipFile, requireEventColumn, scalar, type EventTable } from './events.mts';
@@ -44,7 +44,7 @@ const KEYS: Readonly<Record<string, readonly string[]>> = {
 const IMAGE_BLOCKS = 1024;
 /** One ACIS or HRC sky pixel, in arcseconds; the level-2 sky grid is stated in them (TCDLT of the sky columns). */
 const SKY_PIXEL_ARCSEC = 0.492;
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 
 /** The CIAO and CALDB that made this event list, from the record the run wrote beside it. The machine running the comparison has
  * its own installed CIAO and CALDB, which may be years from the ones that made the event list and are never what a receipt

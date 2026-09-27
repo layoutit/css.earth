@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Find a Chandra observation's files in the Chandra Data Archive and pin them as a Chandra program.
  *
- *   node tools/objects/chandra/archive.mts <program id> <obsid> [<obsid> ...]
+ *   node packages/telescope-cli/src/archives/chandra/archive.mts <program id> <obsid> [<obsid> ...]
  *
  * For each observation the program records every FITS file the archive keeps under that obsid: the level-1 inputs standard data
  * processing reads (the level-1 event list, the aspect solution and its quality, bad pixels, the mask, the mission timeline and
@@ -27,9 +27,10 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows, WORKSPACE } from '@cssearth/telescope/node';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/chandra/programs');
 export const TAP = 'https://cda.cfa.harvard.edu/cxctap';
 export const ARCHIVE = 'https://cxc.cfa.harvard.edu/cdaftp/byobsid';
 const NAME = /^[A-Za-z0-9._-]+$/u;

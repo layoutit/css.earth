@@ -1,7 +1,7 @@
 /** What a Chandra receipt has to say for the observation it names to count as reproduced. Everything here runs against a
  * scratch copy of the pinned programs, so nothing asks the Chandra Data Archive anything. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -70,5 +70,5 @@ test('a receipt is read as the external value it is', () => {
 
 test('every receipt beside the pinned programs is accepted', async () => {
   const pinned = await pinnedState();
-  assert.deepEqual(pinned.problems, [], 'run node tools/objects/chandra/archive-ledger.mts --local');
+  assert.deepEqual(pinned.problems, [], 'run node packages/telescope-cli/src/archives/chandra/archive-ledger.mts --local');
 });

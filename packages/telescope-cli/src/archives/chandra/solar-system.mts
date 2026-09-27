@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Put a moving target's events in the object-centred frame, and check where the body lands.
  *
- *   node tools/objects/chandra/solar-system.mts <program id> <obsid> <work directory>
+ *   node packages/telescope-cli/src/archives/chandra/solar-system.mts <program id> <obsid> <work directory>
  *
  * A Chandra event list is in fixed sky coordinates, so a planet drifts across it during the observation. CIAO's `sso_freeze`
  * re-projects the events into the frame that moves with the body, from the ephemerides the archive itself ships under the
@@ -28,7 +28,7 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/telescope';
 import { astroqueryRows } from '@cssearth/telescope/node';
 import type { FitsHeader } from '@cssearth/fits';
@@ -233,7 +233,7 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
   const path = resolve(PROGRAMS, `${id}.${obsid}.solar-system.json`);
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
   // Where the body landed is added to the record of each run whose list was measured, naming that list and this receipt.
-  const receiptPath = relative(resolve(import.meta.dirname, '../../..'), path);
+  const receiptPath = relative(WORKSPACE, path);
   await addProductEvidence(reproRecord, [discRegistration(written[0]!, receiptPath, horizons.angularDiameterArcseconds)], recorded => resolve(repro, recorded));
   await addProductEvidence(freezeRecord, [discRegistration(basename(frozen), receiptPath, horizons.angularDiameterArcseconds)], recorded => resolve(work, recorded));
   return { path, receipt, program };

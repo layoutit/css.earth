@@ -1,6 +1,6 @@
 /** Live, bounded source identities from existing Chandra and Spitzer archive owners. */
-import { observationsOf, chandraShippedObjects as chandraObjects } from '../../../tools/objects/chandra/archive-ledger.mts';
-import { cxcQuery, TAP as CHANDRA_TAP } from '../../../tools/objects/chandra/archive.mts';
+import { observationsOf, chandraShippedObjects as chandraObjects } from './archives/chandra/archive-ledger.mts';
+import { cxcQuery, TAP as CHANDRA_TAP } from './archives/chandra/archive.mts';
 import { observationRecords, spitzerShippedObjects as spitzerObjects } from './archives/spitzer/archive-ledger.mts';
 import { SEARCH as SPITZER_SEARCH, shaSearch } from './archives/spitzer/archive.mts';
 import { leadTime, saveArchiveLeadEvidence, type ArchiveLeadFilter, type ArchiveLeadService, type ChandraSourceLead, type SpitzerSourceLead } from './archive-leads.mts';

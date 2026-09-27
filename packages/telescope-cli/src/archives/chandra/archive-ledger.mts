@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /** What the Chandra Data Archive holds, what it holds for this project's objects, and how far this toolkit has been proved.
  *
- *   node tools/objects/chandra/archive-ledger.mts        # rewrite data/chandra/ledger.json and docs/chandra-ledger.md
- *   node tools/objects/chandra/archive-ledger.mts --local   # rewrite only the part the pinned programs and receipts own
+ *   node packages/telescope-cli/src/archives/chandra/archive-ledger.mts        # rewrite data/chandra/ledger.json and docs/chandra-ledger.md
+ *   node packages/telescope-cli/src/archives/chandra/archive-ledger.mts --local   # rewrite only the part the pinned programs and receipts own
  *
  * Three parts, none of them declared by hand:
  *   - the archive's own counts, by instrument, grating and exposure mode, from server-side COUNT(*) over cxc.observation;
@@ -18,10 +18,11 @@
  *
  * A pointing whose target name marks it as background, blank sky, an offset or a calibration field is never counted as an
  * observation of an object, however close to one it lands. */
+import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { countRecord, isCommand, ledgerFiles, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
+import { countRecord, isCommand, ledgerFiles, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
 import { cxcQuery, observationMode, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
 
 const OBJECTS = resolve(REPOSITORY, 'src/objects');
@@ -37,14 +38,16 @@ export const OBJECT_RADIUS_DEGREES = 0.25;
 /** A shipped object the ledger searches for. A moving target has no fixed position and is found by the names the archive gives
  * it; everything else is found by a box about the position this repository states. */
 export interface ShippedObject { readonly id: string; readonly raDeg?: number; readonly decDeg?: number; readonly source: string }
-/** The archive's own names for a shipped Solar System body, which is caught by name and never by position. */
-export const MOVING_TARGETS: Readonly<Record<string, readonly string[]>> = {
-  venus: ['VENUS'], mars: ['MARS'], jupiter: ['JUPITER'], saturn: ['SATURN'], uranus: ['URANUS'], pluto: ['PLUTO', 'PLUTO(134340)'],
-  titan: ['TITAN'], moon: ['MOON'], earth: ['EARTH'],
-  'comet-2p': ['COMET2P/ENCKE'], 'comet-8p': ['COMET8P/TUTTLE'], 'comet-9p': ['COMET9P/TEMPEL1'],
-  'comet-17p': ['COMET17P/HOLMES'], 'comet-46p': ['46P/WIRTANEN'], 'comet-103p': ['COMET103P/HARTLEY2'],
-  'comet-2i': ['C/2019Q4BORISOV'], 'comet-c2013-a1': ['COMETC/2013A1SIDINGSPRING'],
-};
+/** The archive's own names for a shipped Solar System body, which is caught by name and never by position. They are data beside the
+ * programs, because this package names no body. */
+export const CHANDRA_MOVING_TARGETS = 'tools/objects/chandra/moving-targets.json';
+export function chandraMovingTargets(path = resolve(REPOSITORY, CHANDRA_MOVING_TARGETS)): Readonly<Record<string, readonly string[]>> {
+  const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Chandra moving targets');
+  if (record.schema !== 'cssearth-archive-moving-targets@1') throw new TypeError(`${path} is not an archive moving-target list.`);
+  return Object.fromEntries(Object.entries(requireRecord(record.targets, 'moving targets'))
+    .map(([id, names]) => [id, requireArray(names, `${id} archive names`).map(name => requireString(name, `${id} archive name`))]));
+}
+export const MOVING_TARGETS = chandraMovingTargets();
 
 /** Every shipped object that states a sky position, from the files that own it: a nebula catalogue beside the object, the
  * prepared Local Group catalogue, or the body record's own star position. Nothing is listed here that the repository does not
@@ -96,7 +99,7 @@ export function objectBox(object: ShippedObject, radiusDegrees = OBJECT_RADIUS_D
 export async function chandraShippedObjects(): Promise<ShippedObject[]> {
   const ids = new Set(await shippedObjectIds());
   const moving = Object.keys(MOVING_TARGETS).filter(id => ids.has(id))
-    .map(id => ({ id, source: 'tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)' }));
+    .map(id => ({ id, source: CHANDRA_MOVING_TARGETS }));
   const fixed = (await shippedSkyObjects()).filter(object => !MOVING_TARGETS[object.id]);
   return [...moving, ...fixed].sort((a, b) => a.id.localeCompare(b.id));
 }
@@ -270,7 +273,7 @@ export function chandraLedgerGuide(ledger: Awaited<ReturnType<typeof surveyChand
   const modes = Object.entries(ledger.modes) as [string, { state: string; program?: string; obsid?: number; target?: string; why?: string }][];
   return `# Chandra archive ledger
 
-Generated by \`node tools/objects/chandra/archive-ledger.mts\` from [data/chandra/ledger.json](../data/chandra/ledger.json); do not edit by hand. Counts come from the Chandra Data Archive's own TAP service, the object list from this repository, and every mode's state from the pinned programs and their receipts. Measured ${ledger.measured}. The route itself is described in [Chandra](chandra.md).
+Generated by \`node packages/telescope-cli/src/archives/chandra/archive-ledger.mts\` from [data/chandra/ledger.json](../data/chandra/ledger.json); do not edit by hand. Counts come from the Chandra Data Archive's own TAP service, the object list from this repository, and every mode's state from the pinned programs and their receipts. Measured ${ledger.measured}. The route itself is described in [Chandra](chandra.md).
 
 ## The archive
 

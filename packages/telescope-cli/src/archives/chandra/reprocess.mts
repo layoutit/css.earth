@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run standard data processing on a pinned Chandra observation, from its level-1 products.
  *
- *   node tools/objects/chandra/reprocess.mts <program id> <obsid> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
+ *   node packages/telescope-cli/src/archives/chandra/reprocess.mts <program id> <obsid> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
  *
  * The pinned files are taken from a --raw directory that already holds them or downloaded from the Chandra Data Archive, each at
  * its pinned size and digest; a digest missing from the program is measured and written back. They keep the archive's own paths

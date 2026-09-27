@@ -135,7 +135,7 @@ exposure rather than anything in the rendering. This observation is new here: th
 already on disk was a deliberately offset pointing that keeps the Crab Nebula off the detector, so Cas A was pinned and
 reprocessed, and the toolkit's event-by-event comparison against the archive matched all 839,545 events.
 
-`node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
+`node packages/telescope-cli/src/archives/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
 
 ## Spitzer, IRAC: NGC 3132 in the infrared
 
