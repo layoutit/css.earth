@@ -418,6 +418,9 @@ importers:
 
   packages/renderer:
     dependencies:
+      '@cssearth/catalog':
+        specifier: workspace:*
+        version: link:../catalog
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
@@ -431,9 +434,6 @@ importers:
       '@cssearth/bake':
         specifier: workspace:*
         version: link:../bake
-      '@cssearth/catalog':
-        specifier: workspace:*
-        version: link:../catalog
       '@cssearth/volume-viewer':
         specifier: workspace:*
         version: link:../../labs/nebula/packages/volume-viewer
@@ -517,6 +517,9 @@ importers:
       '@cssearth/renderer':
         specifier: workspace:*
         version: link:../renderer
+      '@cssearth/spice':
+        specifier: workspace:*
+        version: link:../spice
       '@cssearth/telescope':
         specifier: workspace:*
         version: link:../telescope
