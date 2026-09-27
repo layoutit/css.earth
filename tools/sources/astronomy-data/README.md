@@ -1,4 +1,4 @@
-# Planetary data ledger
+# Astronomy data ledger
 
 `ledger.sqlite` owns the audit data and work status. [PROPOSALS.md](PROPOSALS.md)
 contains the 131 proposed work scopes and their acceptance conditions. IDs are
@@ -12,10 +12,10 @@ Small Bodies Node, and JAXA DARTS. It changes no application or prepared assets.
 From the repository root, with the project's supported Node version:
 
 ```sh
-node tools/audits/planetary-data/serve.mts
-node tools/audits/planetary-data/slice.mts --source=opus --target=Mimas --format=json
-node tools/audits/planetary-data/slice.mts --proposal=111 --format=tsv
-sqlite3 -header -column tools/audits/planetary-data/ledger.sqlite \
+node tools/sources/astronomy-data/serve.mts
+node tools/sources/astronomy-data/slice.mts --source=opus --target=Mimas --format=json
+node tools/sources/astronomy-data/slice.mts --proposal=111 --format=tsv
+sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
@@ -56,8 +56,8 @@ COMMIT;
 Git stores the database as a binary file. Review changes through a text export:
 
 ```sh
-sqlite3 tools/audits/planetary-data/ledger.sqlite .dump > /tmp/planetary-ledger.sql
-node tools/audits/planetary-data/verify.mts
+sqlite3 tools/sources/astronomy-data/ledger.sqlite .dump > /tmp/astronomy-data.sql
+node tools/sources/astronomy-data/verify.mts
 ```
 
 For a revision comparison, extract the old database with `git show` to `/tmp`,
@@ -69,9 +69,9 @@ without accounting for the other edits.
 Public collectors write to ignored scratch output and never replace the ledger:
 
 ```sh
-OPUS_WORK_DIR=output/opus-refresh node tools/audits/planetary-data/collect-opus.mts
-ARCHIVE_WORK_DIR=output/archive-refresh node tools/audits/planetary-data/collect-archives.mts umd
-ARCHIVE_WORK_DIR=output/archive-refresh node tools/audits/planetary-data/collect-archives.mts darts
+OPUS_WORK_DIR=output/opus-refresh node tools/sources/astronomy-data/collect-opus.mts
+ARCHIVE_WORK_DIR=output/archive-refresh node tools/sources/astronomy-data/collect-archives.mts umd
+ARCHIVE_WORK_DIR=output/archive-refresh node tools/sources/astronomy-data/collect-archives.mts darts
 ```
 
 Use a new output directory for fresh retrievals. Review additions, removals,
@@ -160,7 +160,8 @@ retained evidence hashes, OPUS partition reconciliation, label byte counts,
 proposal writeups/joins, filters and exports. These checks establish ledger
 consistency, not scientific acceptance of the proposed datasets.
 
-The [browser capture](evidence/ledger-slice.jpg) records the final SQLite viewer.
+The [browser capture](evidence/ledger-slice.jpg) records the SQLite migration viewer,
+before its heading was renamed to Astronomy data ledger.
 The `validation:sqlite-migration` evidence entry records the compared revision,
 migration extent, commands and browser cases. Browser version and DPR were not
 recorded; this is no claim of pixel parity.
