@@ -74,15 +74,19 @@ async function readBaseline(root: string): Promise<Baseline> {
 
 export async function check(root: string, update: boolean): Promise<boolean> {
   const started = performance.now();
-  const measurement = measure(await buildImportGraph(root, { details: false }));
+  // The repository rules read the checkout, not the graph: report their findings even when the graph stops as incomplete.
+  const findings = repositoryFindings(root, repositoryFiles(root));
+  const broken = isBroken(findings);
+  const measurement = measure(await buildImportGraph(root, { details: false }).catch((error: unknown) => {
+    if (broken) console.error(formatFindings(findings));
+    throw error;
+  }));
   // Only an update may start from a missing baseline; a check without one is a broken checkout.
   const baseline = await readBaseline(root).catch((error: unknown) => {
     if (update && hasErrorCode(error, 'ENOENT')) return undefined;
     throw error;
   });
   const delta = baseline && compare(baseline, measurement);
-  const findings = repositoryFindings(root, repositoryFiles(root));
-  const broken = isBroken(findings);
   const seconds = ((performance.now() - started) / 1000).toFixed(1);
   if (delta) console.log(formatDelta(delta));
   console.log(formatFindings(findings));
