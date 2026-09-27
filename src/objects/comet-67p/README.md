@@ -209,6 +209,8 @@ and its [L4 quality collection](https://pds-smallbodies.astro.umd.edu/holdings/r
 [Feller et al. (2019)](https://doi.org/10.1051/0004-6361/201833807), Table 6,
 identifies this observing sequence. Actual acquisition times, filters and
 backplane versions come from each selected product’s attached label.
+The [ten-header candidate survey](evidence/osiris-april-candidates.json) separates
+the three complete image trials from phase-incompatible and deferred products.
 The GEO inputs are level 5 DDR, with level 4 RDR companions. Each exposure
 retains its original attached label. The companion L4 image must match every GEO
 radiance pixel and its observation identity
