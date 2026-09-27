@@ -27,7 +27,7 @@ Run of 2026-09-23 (this version):
 - The reader was compared with the paper's Fig. 1 epoch-1 radial panel, decoded through its colour bar: correlation 0.945 over 43,412 figure pixels, median difference 0.4 G. Mirrored in longitude the correlation is −0.50; mirrored in latitude, 0.59. The figure is not redistributed, so this was a one-off check.
 - The longitude direction was read from the same figure's phase ticks against the epoch-1 Stokes V fits, as described above.
 - [`iota-horologii-views.png`](evidence/iota-horologii-views.png): ι Horologii's Colour (its default), Radial field October 2015 and Azimuthal field December 2015, and Luhman 16 B's interpolated Brightness, on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready.
-- [`lens-steps.test.mts`](../../../tests/objects/content/lens-steps.test.mts) checks that the stepped datasets form groups of consecutive steps with distinct labels.
+- [`lens-steps.test.mts`](https://github.com/layoutit/css.earth/blob/a9ea4f6338b6cd25a5f132dbe64140e3df2f5388/tools/objects/content/lens-steps.test.mts) (now [`tests/objects/content/lens-steps.test.mts`](../../../tests/objects/content/lens-steps.test.mts)) checks that the stepped datasets form groups of consecutive steps with distinct labels.
 
 ## Known problems
 
