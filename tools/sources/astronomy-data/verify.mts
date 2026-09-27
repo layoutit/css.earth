@@ -48,6 +48,7 @@ assert.deepEqual(counts, {
   opus: 549,
   pds: 189,
   photojournal: 2593,
+  trek: 2076,
   umd: 3880,
   usgs: 1643,
 });
@@ -57,6 +58,7 @@ assert.deepEqual(listings, {
   "darts-index": 2,
   "opus-geometry": 221,
   "opus-volumes": 990,
+  "trek-observations": 4,
   "umd-holdings": 5110,
 });
 const receipt = object(evidence("opus:receipt")),

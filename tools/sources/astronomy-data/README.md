@@ -5,7 +5,7 @@ contains the 131 proposed work scopes and their acceptance conditions. IDs are
 permanent. There is one database, no database service and no ORM.
 
 The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland
-Small Bodies Node, and JAXA DARTS. It changes no application or prepared assets.
+Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets.
 
 ## Query the ledger
 
@@ -96,6 +96,7 @@ USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-f
 TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
 node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
 node tools/sources/astronomy-data/apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
+python tools/sources/astronomy-data/cleanup/collect_trek.py tools/sources/astronomy-data/ledger.sqlite --dry-run   # NASA Trek map layers; TREK_CACHE keeps pages
 python tools/sources/astronomy-data/cleanup/instruments.py tools/sources/astronomy-data/ledger.sqlite --dry-run   # needs sqlite-utils; rebuilds missions and instruments
 ```
 

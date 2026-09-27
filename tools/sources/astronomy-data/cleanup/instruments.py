@@ -16,7 +16,8 @@ ALIAS = {  # the same mission under another archive's name
     "near-shoemaker": "near", "cassini-huygens": "cassini", "galileo-orbiter": "galileo", "go": "galileo",
     "mars-reconnaissance-orbiter": "mro", "lunar-reconnaissance-orbiter": "lro", "mars-global-surveyor": "mgs",
     "mars-exploration-rover": "mer", "mars-science-laboratory": "msl", "stardust": "stardust", "sdu": "stardust",
-    "huygens": "cassini", "epoxi": "deep-impact", "deep-impact-epoxi": "deep-impact",  # Huygens is Cassini's probe; EPOXI is Deep Impact's extended mission
+    "huygens": "cassini", "epoxi": "deep-impact", "deep-impact-epoxi": "deep-impact",
+    "mex": "mars-express", "viking-orbiter": "viking",  # Huygens is Cassini's probe; EPOXI is Deep Impact's extended mission
 }
 mid_of = lambda name: ALIAS.get(slug(name), slug(name))
 def mission(name, kind="spacecraft", aliases=()):
@@ -169,6 +170,21 @@ for r in rows:
             codes = [c for c in codes if c != "OSIRIS"]
         for c in codes:
             instrument(mid, CODES.get(c, c), c, raw, src, did)
+    elif src == "trek":
+        # Trek names mission and instrument in its own fields, sometimes several at once ("Lunar Reconnaissance Orbiter
+        # and Kaguya", "LOLA and TC"): split both and pair them by position when the counts match.
+        split = lambda v: [x.strip() for x in re.split(r",\s*(?:and\s+)?|\s+and\s+|;", v or "") if x.strip()]
+        ms = [re.sub(r"^(Apollo)(\d)", r"\1 \2", m) for m in split(d.get("mission")) if m.lower() != "mixed"]
+        insts = split(raw)
+        if not ms or not insts:
+            if insts:
+                unresolved["trek: instrument without mission"] += 1
+            continue
+        for n, i in enumerate(insts):
+            m = ms[n] if len(ms) == len(insts) else ms[0]
+            mid = mission(m)
+            short = i.isupper() and len(i) <= 8
+            instrument(mid, CODES.get(i, i) if short else re.sub(r"\s*\([^()]+\)", "", i).strip() or i, acronym_of(i) or (i if short else ""), raw, src, did)
     elif src == "photojournal":
         ms = sorted({mid_of(m) for m in parts(d.get("mission") or "")})
         for i in parts(raw):
@@ -228,6 +244,6 @@ with db.conn:
         "detail": "missions, instruments and dataset_instruments rebuilt from each archive's instrument field: OPUS 'Mission INSTR' "
                   "or a telescope; DARTS mission:/instrument: keywords (first mission name, the rest aliases); Maryland PDS3 id "
                   "prefix for the mission and its instrument codes; Photojournal mission and instrument slugs, a several-mission "
-                  "row taking the mission the instrument has in single-mission rows. USGS and PSI PDS4 state no instrument.",
+                  "row taking the mission the instrument has in single-mission rows. USGS and PSI PDS4 state no instrument; Trek names mission and instrument in its own fields.",
     })
 print("written")
