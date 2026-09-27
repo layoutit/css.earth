@@ -8,8 +8,8 @@
 //   node .github/scripts/ci/commit-message.mts --range <a>..<b>    check every commit in a range (CI)
 //   node .github/scripts/ci/commit-message.mts --install           install the commit-msg hook into this clone (pnpm install)
 import { execFile } from 'node:child_process';
-import { chmod, copyFile, mkdir, readFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { chmod, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 
@@ -72,24 +72,52 @@ async function commitsIn(range: string, root: string): Promise<RangeCommit[]> {
   });
 }
 
-/** Install the tracked hook as this clone's commit-msg hook, unless the clone already runs `.githooks/` or has a
- * different commit-msg hook of its own (never overwritten). A worktree shares its main clone's hooks. */
+/** The hooks directory `--install` owns, inside the clone's common Git directory, so every worktree shares it. */
+export const HOOKS_DIRECTORY = 'cssearth-hooks';
+
+/** Runs the calling worktree's own tracked hook. It names no checker path, so it stays correct on every branch
+ * layout, and it lives outside `.git/hooks`, which an older branch's installer overwrites. */
+export const DISPATCHER = `#!/bin/sh
+# ${HOOK_MARKER}: run this worktree's tracked ${HOOK_SOURCE}. Written by \`pnpm install\`.
+root=$(git rev-parse --show-toplevel) || exit 0
+[ -f "$root/${HOOK_SOURCE}" ] || exit 0
+exec sh "$root/${HOOK_SOURCE}" "$@"
+`;
+
+const git = async (root: string, ...args: string[]) => (await execFileAsync('git', args, { cwd: root })).stdout.trim();
+
+/** Point this clone's core.hooksPath at a dispatcher that runs each worktree's own tracked hook. Git then never reads
+ * `.git/hooks`, so a copy an older branch's installer writes there cannot replace the check; that installer also
+ * returns early once core.hooksPath is set. Leaves any core.hooksPath already configured (including the pre-push
+ * opt-in `.githooks`) and never disables a hook of the contributor's own in `.git/hooks`. */
 export async function installHook(root: string): Promise<string> {
-  let hooksPath: string;
+  let common: string, configured: string;
   try {
-    const configured = await execFileAsync('git', ['config', '--get', 'core.hooksPath'], { cwd: root }).catch(() => ({ stdout: '' }));
-    if (configured.stdout.trim()) return `core.hooksPath is ${configured.stdout.trim()}; ${HOOK_SOURCE} applies when that path is .githooks.`;
-    hooksPath = resolve(root, (await execFileAsync('git', ['rev-parse', '--git-path', 'hooks'], { cwd: root })).stdout.trim());
+    common = resolve(root, await git(root, 'rev-parse', '--git-common-dir'));
+    configured = await git(root, 'config', '--get', 'core.hooksPath').catch(() => '');
   } catch {
     return 'Not a Git checkout; no hook installed.';
   }
-  const target = resolve(hooksPath, 'commit-msg');
-  const existing = await readFile(target, 'utf8').catch(() => undefined);
-  if (existing !== undefined && !existing.includes(HOOK_MARKER)) return `${target} already exists and was left unchanged.`;
-  await mkdir(dirname(target), { recursive: true });
-  await copyFile(resolve(root, HOOK_SOURCE), target);
+  // Not `git rev-parse --git-path hooks`: that answers core.hooksPath once it is set.
+  const legacy = resolve(common, 'hooks'), directory = resolve(common, HOOKS_DIRECTORY), target = resolve(directory, 'commit-msg');
+  if (configured && resolve(root, configured) !== directory) return `core.hooksPath is ${configured}; left unchanged (${HOOK_SOURCE} applies when that path is .githooks).`;
+  if (!configured) {
+    const own: string[] = [];
+    for (const name of await readdir(legacy).catch(() => [] as string[])) {
+      if (name.endsWith('.sample')) continue;
+      const text = await readFile(resolve(legacy, name), 'utf8').catch(() => '');
+      if (!(name === 'commit-msg' && text.includes(HOOK_MARKER))) own.push(name);
+    }
+    if (own.length) return `${legacy} has hooks of your own (${own.join(', ')}); left unchanged. Set core.hooksPath to run ${HOOK_SOURCE}.`;
+  }
+  await mkdir(directory, { recursive: true });
+  await writeFile(target, DISPATCHER);
   await chmod(target, 0o755);
-  return `Installed the commit-msg hook at ${target}.`;
+  await git(root, 'config', 'core.hooksPath', directory);
+  // The copy an earlier install left in .git/hooks is no longer read; remove it so nothing looks installed twice.
+  const copy = resolve(legacy, 'commit-msg');
+  if ((await readFile(copy, 'utf8').catch(() => '')).includes(HOOK_MARKER)) await rm(copy, { force: true });
+  return `Installed the commit-msg hook: core.hooksPath is ${directory}.`;
 }
 
 async function main(args: readonly string[]): Promise<number> {
