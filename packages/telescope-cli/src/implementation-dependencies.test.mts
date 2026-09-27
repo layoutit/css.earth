@@ -51,6 +51,20 @@ test('fingerprints generated-module imports through authored sources without a d
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the runtime-source reader is followed into @cssearth/bake/runtime-source, as when it sat under tools/ci', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-runtime-source-'));
+  try {
+    await writeFile(resolve(root, 'entry.mts'), "import { parseRuntimeSource } from '@cssearth/bake/runtime-source';\nexport const used=[parseRuntimeSource];\n");
+    await mkdir(resolve(root, 'packages/bake/src/runtime-source'), { recursive: true });
+    await writeFile(resolve(root, 'packages/bake/src/runtime-source/runtime-source-graph.ts'), 'export const parseRuntimeSource=()=>1;\n');
+    await writeFile(resolve(root, 'packages/bake/src/runtime-source/index.ts'), "export * from './runtime-source-graph.ts';\n");
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/bake/src/runtime-source/index.ts', 'packages/bake/src/runtime-source/runtime-source-graph.ts']);
+    await writeFile(resolve(root, 'packages/bake/src/runtime-source/runtime-source-graph.ts'), 'export const parseRuntimeSource=()=>2;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the FITS reader package is followed into its sources, as when it was a local module; other packages stay external', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-fits-'));
   try {
