@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kalliope-arrival.webp",
+      "bytes": 37112,
+      "sha256": "80d498e0db695b803032512be8b1994b30dbb6522a19cf0a2e5a0bec4b847902"
+    },
+    {
+      "location": "public",
       "filename": "kalliope-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "kalliope-zimpol-thumbnail.webp",
       "bytes": 1136,
       "sha256": "dc9cd89b4d396d90e381eb4fe550cad225a59b1c131eabf4bab11518323694a0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "825f77b7d694e8633da8032c1ac7355bc89b8dcf361eba580edb743f17cdfaf4"
     },
     {
       "location": "prepared",

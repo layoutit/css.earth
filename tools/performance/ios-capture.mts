@@ -46,6 +46,7 @@ import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readSourceMap } from './trace-brief.mts';
+import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';
 
 const run = promisify(execFile);
 const root = resolve(import.meta.dirname, '../..');
@@ -61,6 +62,7 @@ export type Step =
   | { readonly screenshot: string }
   | { readonly viewport: string }
   | { readonly probe: string }
+  | { readonly route: string }
   | { readonly layers: string; readonly selector?: string }
   | { readonly script: string };
 
@@ -80,6 +82,11 @@ export function parseSteps(value: unknown): Step[] {
     if ('type' in step) return { type: requireString(step.type, label) };
     if ('wait' in step) return { wait: requireFiniteNumber(step.wait, label) };
     if ('script' in step) return { script: requireString(step.script, label) };
+    if ('route' in step) {
+      const route = requireString(step.route, label);
+      if (!/^\/[a-z0-9/-]*\/$/u.test(route)) throw new TypeError(`${label}: route must be a site pathname ending in /.`);
+      return { route };
+    }
     if ('probe' in step) {
       const name = requireString(step.probe, label);
       if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: probe names are lowercase words and dashes.`);
@@ -133,16 +140,26 @@ export function screenshotArtifact(step: Step): string | null {
 
 async function perform(steps: readonly Step[], target: Target, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
   evaluate: (expression: string) => Promise<unknown>, snapshotLayers: (selector?: string) => Promise<unknown>,
-  captureScreen: (file: string) => Promise<void>, captureViewport: (file: string) => Promise<void>) {
+  captureScreen: (file: string) => Promise<void>, captureViewport: (file: string) => Promise<void>,
+  awaitRoute: (pathname: string) => Promise<unknown>, strictSteps = false,
+  afterStep?: (index: number) => Promise<void>) {
   const udid = target.udid;
-  for (const step of steps) {
+  for (const [index, step] of steps.entries()) {
     const label = JSON.stringify(step);
     const mark: { label: string; at: number; value?: unknown } = { label, at: Date.now() - started };
     marks.push(mark);
+    if (strictSteps) console.error(`iPad step ${index + 1}/${steps.length}: ${'script' in step ? 'page input' : label}`);
     // A scripted step changes the page to measure a change before it is prepared (a leaf's raster size, say). Its result
     // is recorded beside the step, so a capture says what it did.
-    if ('script' in step) mark.value = await evaluate(step.script).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    if ('script' in step) {
+      try { mark.value = await evaluate(step.script); }
+      catch (error) {
+        mark.value = { error: error instanceof Error ? error.message : String(error) };
+        if (strictSteps) throw error;
+      }
+    }
     else if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    else if ('route' in step) mark.value = await awaitRoute(step.route);
     // A layer snapshot mid-journey: which layers have repainted most so far, before the tree changes again.
     else if ('layers' in step) mark.value = await snapshotLayers(step.selector).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
     else if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
@@ -165,6 +182,8 @@ async function perform(steps: readonly Step[], target: Target, out: string, mark
     }
     else await run('axe', ['drag', '--start-x', String(step.drag.from[0]), '--start-y', String(step.drag.from[1]),
       '--end-x', String(step.drag.to[0]), '--end-y', String(step.drag.to[1]), '--duration', String(step.drag.seconds), '--udid', udid]);
+    await afterStep?.(index);
+    if (strictSteps) console.error(`iPad step ${index + 1}/${steps.length} complete${mark.value === undefined ? '' : `: ${JSON.stringify(mark.value).slice(0, 180)}`}`);
   }
 }
 
@@ -237,8 +256,15 @@ async function inspectorPages(port: number): Promise<{ url: string; webSocketDeb
 }
 
 /** The tab on screen: Safari lists background tabs too, and a hidden tab runs no animation frames. */
-async function visiblePage(pages: readonly { url: string; webSocketDebuggerUrl: string }[]) {
-  for (const page of pages) {
+async function visiblePage(pages: readonly { url: string; webSocketDebuggerUrl: string }[], expectedUrl?: string | null) {
+  // A device can retain many background Safari targets. Inspect only the route
+  // this capture requested; probing each hidden page can cost five seconds.
+  const candidates = expectedUrl ? pages.filter(page => {
+    try { return sameCapturePage(expectedUrl, page.url); } catch { return false; }
+  }) : pages;
+  // The newly launched Safari page is usually listed last. Visibility remains
+  // the final authority if another tab has the same route.
+  for (const page of [...candidates].reverse()) {
     const session = inspector(page.webSocketDebuggerUrl);
     try {
       await Promise.race([session.ready, wait(5000).then(() => { throw new Error('no page target'); })]);
@@ -247,26 +273,26 @@ async function visiblePage(pages: readonly { url: string; webSocketDebuggerUrl: 
       if (value === 'visible') return page;
     } catch { /* a tab that cannot answer is not the one on screen */ } finally { session.close(); }
   }
-  throw new Error('No visible Safari tab; bring cssEarth to the front in Safari.');
+  throw new Error(expectedUrl ? `No visible Safari tab for ${expectedUrl}.` : 'No visible Safari tab; bring cssEarth to the front in Safari.');
 }
 
 /** Reuse a running proxy that lists pages; otherwise start one on the simulator's live socket, or over USB for a device.
  * Attaches to the visible tab. */
-async function connectProxy(port: number, target: Target): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
+async function connectProxy(port: number, target: Target, expectedUrl?: string | null): Promise<{ page: { url: string; webSocketDebuggerUrl: string }; proxy: ChildProcess | null }> {
   const listed = await inspectorPages(port).catch(() => []);
   if (listed.length) {
     // A proxy left running for a simulator answers on the same port: a device capture reuses only its own device's proxy.
     const running = target.kind === 'device' ? (await run('ps', ['-Ao', 'args=']).catch(() => ({ stdout: '' }))).stdout.split('\n') : [];
     if (target.kind === 'device' && !running.some(line => line.includes('ios_webkit_debug_proxy') && line.includes(`${target.udid}:${port}`)))
       throw new Error(`Port ${port} already serves Web Inspector pages that are not device ${target.udid}'s (a simulator proxy?): stop it with pkill ios_webkit_debug_proxy, or pass --port <n>.`);
-    return { page: await visiblePage(listed), proxy: null };
+    return { page: await visiblePage(listed, expectedUrl), proxy: null };
   }
   const proxy = spawn('ios_webkit_debug_proxy', target.kind === 'device' ? ['-c', `${target.udid}:${port}`]
     : ['-s', `unix:${await inspectorSocket(target.udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
   for (let attempt = 0; attempt < 20; attempt++) {
     await wait(500);
     const pages = await inspectorPages(port).catch(() => []);
-    if (pages.length) return { page: await visiblePage(pages), proxy };
+    if (pages.length) return { page: await visiblePage(pages, expectedUrl), proxy };
   }
   proxy.kill();
   throw new Error(target.kind === 'device'
@@ -319,12 +345,16 @@ function inspector(socketUrl: string) {
   /** A command that never answers resolves empty after 20 s, so one stuck domain cannot hang the capture. */
   const send = (method: string, params: Message = {}, worker?: string) => new Promise<Message>(done => {
     const id = ++sequence, message = { id, method, params };
-    pending.set(id, done);
-    setTimeout(() => { if (pending.delete(id)) done({ timeout: method }); }, 20000);
+    const timer = setTimeout(() => { if (pending.delete(id)) done({ timeout: method }); }, 20000);
+    pending.set(id, reply => { clearTimeout(timer); done(reply); });
     if (worker) post({ id: ++sequence, method: 'Worker.sendMessageToWorker', params: { workerId: worker, message: JSON.stringify(message) } });
     else post(message);
   });
-  return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => socket.close(),
+  return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => {
+    for (const resolvePending of pending.values()) resolvePending({ error: 'inspector closed' });
+    pending.clear();
+    socket.close();
+  },
     /** How many times the page moved to a new process; its domains must then be enabled again. */
     swaps: () => swaps };
 }
@@ -528,14 +558,16 @@ async function layerTree(session: ReturnType<typeof inspector>, options: { byMem
     const resolved = await session.send('DOM.resolveNode', { nodeId });
     const objectId = isRecord(resolved.result) && isRecord(resolved.result.object) ? resolved.result.object.objectId : null;
     if (typeof objectId !== 'string') return null;
-    const call = await session.send('Runtime.callFunctionOn', { objectId, returnByValue: true, functionDeclaration: `function () {
+    try {
+      const call = await session.send('Runtime.callFunctionOn', { objectId, returnByValue: true, functionDeclaration: `function () {
       const element = this.nodeType === 1 ? this : this.parentElement; if (!element) return null;
       const style = getComputedStyle(element);
       const data = [...element.attributes].filter(attribute => attribute.name.startsWith('data-') || attribute.name === 'id').map(attribute => attribute.name + '=' + attribute.value.slice(0, 40));
       const path = []; for (let node = element; node && path.length < 4; node = node.parentElement) path.push(node.tagName.toLowerCase() + (node.className && typeof node.className === 'string' ? '.' + node.className.trim().split(/\\s+/).slice(0, 2).join('.') : ''));
       return { path: path.join(' < '), data, image: style.backgroundImage.slice(0, 160), size: element.offsetWidth + 'x' + element.offsetHeight };
     }` });
-    return isRecord(call.result) && isRecord(call.result.result) ? call.result.result.value ?? null : null;
+      return isRecord(call.result) && isRecord(call.result.result) ? call.result.result.value ?? null : null;
+    } finally { await session.send('Runtime.releaseObject', { objectId }); }
   };
   const described = [];
   for (const layer of largest) described.push({ layer, element: await describe(layer.nodeId) });
@@ -1043,7 +1075,7 @@ export function options(args: readonly string[]) {
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
   return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), screens: args.includes('--screens'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
@@ -1118,7 +1150,8 @@ export function devicePageProcess(samples: readonly unknown[]): number | null {
 export function traceEvents(records: readonly unknown[], stopwatchEpochMs: number,
   device: { graphics: readonly unknown[]; webContent: readonly unknown[] } | null, metadata: Record<string, unknown>,
   cpu: { updates: readonly unknown[]; workers: ReadonlyMap<string, string> } = { updates: [], workers: new Map() },
-  native: { samples: readonly NativeSample[]; offsetUs: number } | null = null) {
+  native: { samples: readonly NativeSample[]; offsetUs: number } | null = null,
+  evidence: { memory?: readonly unknown[]; snapshots?: readonly unknown[]; released?: readonly unknown[] } = {}) {
   const events: Record<string, unknown>[] = [
     { ph: 'M', name: 'process_name', pid: 1, tid: 1, args: { name: 'Safari web content (page)' } },
     { ph: 'M', name: 'thread_name', pid: 1, tid: 1, args: { name: 'WebKit timeline' } },
@@ -1132,6 +1165,20 @@ export function traceEvents(records: readonly unknown[], stopwatchEpochMs: numbe
     if (Array.isArray(record.children)) record.children.forEach(visit);
   };
   records.forEach(visit);
+  // WebKit category accounting is distinct from the device's physical footprint.
+  for (const update of evidence.memory ?? []) {
+    if (!isRecord(update) || typeof update.timestamp !== 'number' || !Array.isArray(update.categories)) continue;
+    events.push({ ph: 'C', name: 'WebKit memory MiB', pid: 1, tid: 1, ts: micros(update.timestamp),
+      args: Object.fromEntries(update.categories.filter(isRecord).filter(category => typeof category.type === 'string' && typeof category.size === 'number')
+        .map(category => [String(category.type), Math.round(Number(category.size) / 1048576 * 100) / 100])) });
+  }
+  for (const [name, records] of [['cssEarth residency', evidence.snapshots ?? []], ['cssEarth scene released', evidence.released ?? []]] as const) {
+    for (const data of records) {
+      if (!isRecord(data) || typeof data.atEpochMs !== 'number') continue;
+      events.push({ ph: 'i', s: 't', name, cat: 'cssearth.memory', pid: 1, tid: 1,
+        ts: Math.round((data.atEpochMs - stopwatchEpochMs) * 1000), args: { data } });
+    }
+  }
   // WebKit's CPU profiler, every 500 ms: one counter track per thread ("CPU % Main Thread", "CPU % worker …"), so a
   // stretch where the timeline shows no work still shows which thread was busy.
   for (const update of cpu.updates) {
@@ -1292,8 +1339,15 @@ async function deviceMonitors(binary: string, udid: string, out: string, pid: nu
 }
 
 
-export async function captureIosMoment(args: readonly string[]) {
+interface DeviceScreens {
+  startScreens(out: string): Promise<{ stop(): Promise<number> }>;
+  screenshot(file: string): Promise<void>;
+}
+
+export async function captureIosMoment(args: readonly string[], deviceScreensSession?: DeviceScreens) {
   const option = options(args);
+  const setupStarted = Date.now();
+  const stage = (label: string) => { if (args.includes('--stage-timing')) console.error(`iPad ${label}: ${((Date.now() - setupStarted) / 1000).toFixed(1)} s`); };
   const steps = option.stepsFile ? parseSteps(JSON.parse(await readFile(resolve(option.stepsFile), 'utf8'))) : [];
   if (option.device && steps.some(step => 'screenshot' in step) && !option.open && !option.expectUrl)
     throw new TypeError('A device screen step needs --open <url> or --expect-url <url> to identify the Safari page before capture.');
@@ -1301,10 +1355,12 @@ export async function captureIosMoment(args: readonly string[]) {
   const udid = target.udid;
   requireStepsFor(target, steps);
   const device = target.kind === 'device' ? await deviceInfo(udid) : null;
+  stage('device ready');
   const out = resolve(root, 'output/performance/ios-captures', `${option.name}-${new Date().toISOString().replace(/[:.]/gu, '-')}`);
-  const { page, proxy } = await connectProxy(option.port, target);
+  const { page, proxy } = await connectProxy(option.port, target, option.expectUrl);
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
+  stage('visible page attached');
   // A fixed status-bar clock keeps simulator screenshots of the same view identical across captures.
   if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'override', '--time', '9:41']);
   const events: Message[] = [], workers = new Map<string, string>();
@@ -1331,6 +1387,7 @@ export async function captureIosMoment(args: readonly string[]) {
     if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
   };
   await enableDomains();
+  stage('Web Inspector ready');
   // --open loads the page in this same tab, so each capture starts from a fresh load in the tab on screen.
   // --settle then counts from the moment the app reports its body loaded, not from the navigation.
   const open = option.open?.startsWith('/') ? `${option.origin ?? await networkOrigin()}${option.open}` : option.open;
@@ -1361,10 +1418,30 @@ export async function captureIosMoment(args: readonly string[]) {
   // script that returns a promise (a replay, a scripted camera move) finishes before the capture goes on.
   const evaluate = async (expression: string) => {
     const reply = await session.send('Runtime.evaluate', { expression: `Promise.resolve((${expression}))`, returnByValue: false });
+    if ('timeout' in reply || 'error' in reply || isRecord(reply.result) && reply.result.wasThrown === true)
+      throw new Error(`Web Inspector could not evaluate the step: ${JSON.stringify(reply).slice(0, 500)}`);
     const promise = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.objectId : null;
-    if (typeof promise !== 'string') return null;
-    const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
-    return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
+    if (typeof promise !== 'string') throw new Error(`Web Inspector returned no step result: ${JSON.stringify(reply).slice(0, 500)}`);
+    try {
+      const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
+      if ('timeout' in settled || 'error' in settled || isRecord(settled.result) && settled.result.wasThrown === true)
+        throw new Error(`Web Inspector step failed: ${JSON.stringify(settled).slice(0, 500)}`);
+      return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
+    } finally { await session.send('Runtime.releaseObject', { objectId: promise }); }
+  };
+  const awaitRoute = async (pathname: string): Promise<unknown> => {
+    const deadline = Date.now() + 90_000;
+    let last: unknown = null, enabledAtSwap = session.swaps();
+    while (Date.now() < deadline) {
+      if (session.swaps() !== enabledAtSwap) { await enableDomains(); enabledAtSwap = session.swaps(); }
+      const reply = await session.send('Runtime.evaluate', { expression: `({url: location.href, pathname: location.pathname, visible: document.visibilityState === 'visible', ready: document.readyState === 'complete' && document.body.classList.contains('ready'), failed: document.body.classList.contains('error')})`, returnByValue: true });
+      const state = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
+      last = state;
+      if (isRecord(state) && state.failed === true) throw new Error(`The destination page failed while navigating to ${pathname}: ${JSON.stringify(state)}`);
+      if (isRecord(state) && state.pathname === pathname && state.ready === true && state.visible === true) return { url: state.url, ready: true, visible: true };
+      await wait(300);
+    }
+    throw new Error(`Safari did not arrive at ready ${pathname} within 90 s; last state ${JSON.stringify(last)}.`);
   };
   // A device replay first calibrates: three taps on a transparent shield give the map from page to display coordinates.
   let replay: { plan: ReturnType<typeof touchPlan>; affine: Affine; hits: unknown } | null = null;
@@ -1393,15 +1470,30 @@ export async function captureIosMoment(args: readonly string[]) {
     await writeFile(resolve(out, 'replay.json'), JSON.stringify({ source: relative(root, resolve(option.replay!)), ...replay }, null, 2) + '\n');
   }
   const memoryBefore = await memorySample(session, events);
+  const heapSnapshot = async (phase: 'before' | 'after') => {
+    if (!args.includes('--heap-snapshot')) return;
+    const heap = await session.send('Heap.snapshot');
+    if (!isRecord(heap.result) || typeof heap.result.snapshotData !== 'string') throw new Error('WebKit returned no heap snapshot.');
+    await writeFile(resolve(out, `heap.${phase}.json`), heap.result.snapshotData);
+  };
+  await heapSnapshot('before');
+  const residencySnapshots: unknown[] = [await evaluate(INSTALL_RESIDENCY_PROBE)];
+  const residencyCheckpoint = async (step: number) => {
+    const value = await evaluate(READ_RESIDENCY_PROBE);
+    residencySnapshots.push(isRecord(value) ? { ...value, step } : { step, error: 'Residency probe unavailable after navigation.' });
+  };
   const recordingStart = events.length;
+  await session.send('Memory.startTracking');
 
   // Instruments first, so the native trace covers the whole moment.
   const native = resolve(out, 'native.trace');
   // On a device, --native page attaches Instruments to the iPad's own web content process over USB: WebKit's native
   // stacks for work its timeline does not record (an 848 ms Composite with 2.5 ms of timeline work, 2026-09-26).
   // The developer disk image unmounts when the device restarts; the samplers and Instruments need it. 0.7 s when mounted.
-  if (target.kind === 'device') await run(option.pymobiledevice3, ['mounter', 'auto-mount'], { env: deviceEnv(udid) }).catch(() => undefined);
-  const devicePid = target.kind === 'device' ? await deviceWebContentPid(option.pymobiledevice3, udid) : null;
+  if (target.kind === 'device' && (option.native !== 'off' || option.deviceMonitors || option.screens && !deviceScreensSession))
+    await run(option.pymobiledevice3, ['mounter', 'auto-mount'], { env: deviceEnv(udid) }).catch(() => undefined);
+  const devicePid = target.kind === 'device' && (option.deviceMonitors || option.native !== 'off')
+    ? await deviceWebContentPid(option.pymobiledevice3, udid) : null;
   const pagePid = option.native === 'page' ? (target.kind === 'device' ? devicePid : await pageProcess()) : null;
   // iOS refuses to attach Instruments to WebKit's system process ("Cannot find process for provided pid"), so on a device
   // page mode samples every process and keeps the page's pid when the samples are exported.
@@ -1413,8 +1505,11 @@ export async function captureIosMoment(args: readonly string[]) {
   xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
-  const monitors = target.kind === 'device' ? await deviceMonitors(option.pymobiledevice3, udid, out, devicePid) : null;
-  const screens = target.kind === 'device' && option.screens ? await deviceScreens(option.pymobiledevice3, udid, out) : null;
+  let activeScreens: { stop(): Promise<number> } | null = null;
+  let activeMonitors: Awaited<ReturnType<typeof deviceMonitors>> | null = null;
+  try {
+  const monitors = target.kind === 'device' && option.deviceMonitors ? await deviceMonitors(option.pymobiledevice3, udid, out, devicePid) : null;
+  activeMonitors = monitors;
   // --no-js-samples leaves JavaScriptCore's sampling profiler off: it costs the page frames, so timing questions run without it.
   if (option.jsSamples) {
     await session.send('ScriptProfiler.startTracking', { includeSamples: true });
@@ -1423,15 +1518,21 @@ export async function captureIosMoment(args: readonly string[]) {
   recording = true;
   await session.send('CPUProfiler.startTracking');
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
-  const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
   // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
   // --eval runs one expression in the page before recording: an experiment's switch (hide a layer, set a flag).
   if (option.eval) await evaluate(option.eval);
   await evaluate(INPUT_LOGGER);
   const styleWritesStarted = Date.now();
   if (option.styleWrites) await evaluate(STYLE_WRITES_LOGGER);
+  // Set up Web Inspector before streaming native screenshots. On the real iPad,
+  // starting the screen sampler earlier can starve these inspector commands.
+  const screens = target.kind === 'device' && option.screens
+    ? await (deviceScreensSession ? deviceScreensSession.startScreens(out) : deviceScreens(option.pymobiledevice3, udid, out)) : null;
+  activeScreens = screens;
+  stage('trace and screen sampler ready');
+  const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
   // Full screen and viewport captures have separate actions and provenance.
-  const captureScreen = target.kind === 'device' ? (file: string) => deviceScreen(option.pymobiledevice3, udid, file)
+  const captureScreen = target.kind === 'device' ? (file: string) => deviceScreensSession?.screenshot(file) ?? deviceScreen(option.pymobiledevice3, udid, file)
     : async (file: string) => { await run('axe', ['screenshot', '--output', file, '--udid', udid]); };
   if (replay) {
     marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay!)), contacts: replay.plan.events.length }), at: 0, value: { skippedFingers: replay.plan.skippedFingers } });
@@ -1445,7 +1546,7 @@ export async function captureIosMoment(args: readonly string[]) {
     try {
       await perform(steps, target, out, marks, started, evaluate,
         selector => selector ? subtreeLayers(session, selector) : layerTree(session, { byPaints: 60, byMemory: 0, reasons: false }),
-        captureScreen, file => snapshotViewport(session, file));
+        captureScreen, file => snapshotViewport(session, file), awaitRoute, args.includes('--strict-steps'), residencyCheckpoint);
     } catch (error) {
       xctrace?.kill('SIGINT');
       await Promise.allSettled([monitors?.stop(), screens?.stop(), session.send('Timeline.stop'), session.send('CPUProfiler.stopTracking')]);
@@ -1463,8 +1564,12 @@ export async function captureIosMoment(args: readonly string[]) {
     console.error('Recording stopped.');
   }
   const durationMs = Date.now() - started;
+  stage('actions complete');
   const { samples: deviceSamples = null, ...deviceSummary } = (monitors ? await monitors.stop() : null) ?? {};
+  activeMonitors = null;
   const filmstripCount = screens ? await screens.stop() : 0;
+  activeScreens = null;
+  stage('screen sampler stopped');
   if (screens) console.error(`${filmstripCount} device screen grabs for the filmstrip.`);
   // The capture goes on without a sampler, but says so here rather than only in the report.
   for (const [sampler, result] of Object.entries(deviceSummary)) if (isRecord(result) && typeof result.error === 'string')
@@ -1476,6 +1581,7 @@ export async function captureIosMoment(args: readonly string[]) {
   if (styleWrites) await writeFile(resolve(out, 'style-writes.json'), JSON.stringify({ startedMs: styleWritesStarted, ...styleWrites }, null, 1) + '\n');
   if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   await session.send('Timeline.stop');
+  await session.send('Memory.stopTracking');
   await session.send('CPUProfiler.stopTracking');
   await session.send('ScriptProfiler.stopTracking');
   for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
@@ -1487,6 +1593,12 @@ export async function captureIosMoment(args: readonly string[]) {
   const moment = events.slice(recordingStart);
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
+  await residencyCheckpoint(steps.length);
+  const retired = await evaluate(STOP_RESIDENCY_PROBE);
+  const residency = { snapshots: residencySnapshots, released: isRecord(retired) && Array.isArray(retired.released) ? retired.released : [],
+    droppedReleases: isRecord(retired) ? retired.dropped : null };
+  await writeFile(resolve(out, 'residency.json'), JSON.stringify(residency, null, 2) + '\n');
+  await heapSnapshot('after');
   session.close(); proxy?.kill();
 
   // Page side.
@@ -1507,6 +1619,8 @@ export async function captureIosMoment(args: readonly string[]) {
   const javascript = Object.fromEntries([...stacks].map(([target, list]) => [target, summariseSamples(list, frame => namer.name(frame))]));
   const timeline = summariseTimeline(timelineRecords);
   const cpuUpdates = moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event);
+  const memoryUpdates = moment.filter(event => event.method === 'Memory.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event);
+  const evidence = { memory: memoryUpdates, ...residency };
   // What jankmonster's report reads beside a trace (its record.mjs writes the same file for Chrome).
   const [width, height] = Array.isArray(viewport) ? viewport : [];
   await writeFile(resolve(out, 'trace.recording.json'), JSON.stringify({
@@ -1541,8 +1655,8 @@ export async function captureIosMoment(args: readonly string[]) {
   const nativeSamples = 'samples' in nativeResult && nativeResult.startMs !== null ? { samples: nativeResult.samples, offsetUs: (nativeResult.startMs - stopwatchEpochMs) * 1000 } : null;
   // Everything trace.json is made from, so --rebuild can remake it (a failed export, a new track) without a new take.
   await writeFile(resolve(out, 'raw.json.gz'), gzipSync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1', moment, stopwatchEpochMs, deviceSamples,
-    workers: [...workers], pagePid, metadata: { url, endUrl, target: target.kind, ...(device ? { device } : {}) } })));
-  await writeFile(resolve(out, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, { url, endUrl, target: target.kind, ...(device ? { device } : {}) }, { updates: cpuUpdates, workers }, nativeSamples)) + '\n');
+    workers: [...workers], pagePid, evidence, metadata: { url, endUrl, target: target.kind, ...(device ? { device } : {}) } })));
+  await writeFile(resolve(out, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, { url, endUrl, target: target.kind, ...(device ? { device } : {}) }, { updates: cpuUpdates, workers }, nativeSamples, evidence)) + '\n');
 
   const pixels = option.compare ? await compareScreenshots(out, (await baselineCaptures(option.compare))[0]!, steps) : null;
   const revision = (await run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' }))).stdout.trim() || null;
@@ -1552,7 +1666,8 @@ export async function captureIosMoment(args: readonly string[]) {
     ...(device ? { device, deviceMetrics: deviceSummary } : {}), durationMs, steps: marks,
     screenshots: marks.flatMap(mark => isRecord(mark.value) && typeof mark.value.file === 'string' && typeof mark.value.source === 'string' ? [mark.value] : []),
     filmstrip: screens ? { source: 'device-screen', frames: filmstripCount } : null, workers: Object.fromEntries(workers),
-    sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter },
+    sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter,
+      source: 'WebKit category accounting; endpoints after GC, continuous samples without forced GC; not process physical footprint', samples: memoryUpdates }, residency,
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
     native: nativeSummary, pixels, files: (await readdir(out)).sort(),
@@ -1561,6 +1676,12 @@ export async function captureIosMoment(args: readonly string[]) {
   await writeFile(resolve(out, 'README.md'), readme(report));
   if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
+  } catch (error) {
+    xctrace?.kill('SIGINT');
+    await Promise.allSettled([activeScreens?.stop(), activeMonitors?.stop()]);
+    session.close(); proxy?.kill();
+    throw error;
+  }
 }
 
 type ReadmeInput = { name: string; url: string; endUrl: unknown; checkout: string; revision: string | null; trackedChanges: boolean | null; durationMs: number;
@@ -1577,7 +1698,8 @@ function readme(r: ReadmeInput): string {
     ...(r.screenshots.length || r.filmstrip ? ['## Visual evidence', '',
       ...r.screenshots.map(shot => `- ${shot.file}: ${shot.source}, ${shot.width}×${shot.height}, Safari page ${shot.pageUrl}`),
       ...(r.filmstrip ? [`- screens/*.jpg: ${r.filmstrip.frames} ${r.filmstrip.source} frames; continuous grabbing can affect timing.`] : []), ''] : []),
-    `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
+    `Memory (WebKit categories in MiB, endpoints after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}. This is not process physical footprint.`, '',
+    'Residency and cleanup: [residency.json](residency.json). The trace includes memory counters and scene-release timestamps. Optional heaps: `heap.before.json` and `heap.after.json`.', '',
     ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
       .map(step => { const label: unknown = JSON.parse(step.label), name = isRecord(label)
         ? label.probe ?? label.screenshot ?? label.viewport ?? (label.replay ? 'replay' : 'script') : 'script';
@@ -1687,7 +1809,7 @@ export async function rebuildTrace(dir: string) {
   const nativeSamples = exported && exported.startMs !== null ? { samples: exported.samples, offsetUs: (exported.startMs - stopwatchEpochMs) * 1000 } : null;
   const deviceSamples = isRecord(raw.deviceSamples) ? raw.deviceSamples as { graphics: unknown[]; webContent: unknown[] } : null;
   await writeFile(resolve(dir, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, isRecord(raw.metadata) ? raw.metadata : {},
-    { updates: cpuUpdates, workers }, nativeSamples)) + '\n');
+    { updates: cpuUpdates, workers }, nativeSamples, isRecord(raw.evidence) ? raw.evidence : {})) + '\n');
   console.log(`${dir}/trace.json rebuilt${nativeSamples ? `, ${nativeSamples.samples.length} native samples` : hasNative ? `, native export failed: ${exported && 'error' in exported.summary ? exported.summary.error.trim() : '?'}` : ''}`);
 }
 

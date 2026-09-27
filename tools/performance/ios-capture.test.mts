@@ -3,6 +3,19 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
+test('memory and residency evidence share the trace clock and preserve category units', () => {
+  const trace = traceEvents([], 1000, null, {}, undefined, null, {
+    memory: [{ timestamp: 2, categories: [{ type: 'page', size: 10485760 }, { type: 'javascript', size: 524288 }] }],
+    snapshots: [{ atEpochMs: 3500, objectId: 'lutetia', orbits: { groups: 673 } }],
+    released: [{ atEpochMs: 3100, objectId: 'earth', after: { resources: { releases: 3 } } }],
+  });
+  const events = trace.traceEvents.filter(event => event.ph !== 'M');
+  assert.deepEqual(events[0], { ph: 'C', name: 'WebKit memory MiB', pid: 1, tid: 1, ts: 2000000, args: { page: 10, javascript: .5 } });
+  assert.equal(events[1]?.ts, 2500000);
+  assert.equal(events[2]?.ts, 2100000);
+  assert.equal(events[2]?.name, 'cssEarth scene released');
+});
+
 test('steps are validated before anything records', () => {
   assert.deepEqual(parseSteps([{ tap: [194, 94] }, { type: 'saturn' }, { wait: 1.5 }, { screenshot: 'after' },
     { drag: { from: [100, 380], to: [320, 400], seconds: 1.5 } }]).length, 5);

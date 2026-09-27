@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eunomia-arrival.webp",
+      "bytes": 36668,
+      "sha256": "666fccc86700fec736fe18638e3786e504eace6cca9ac54ea007d53016a45e71"
+    },
+    {
+      "location": "public",
       "filename": "eunomia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "eunomia-zimpol-thumbnail.webp",
       "bytes": 1368,
       "sha256": "fc1df4d362c2ab703dbf8ba4e87bbd0f27dda585443c2a0939244ed5e49f9ad4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "58a1d8c6e13566e436ba714a2ca13113665a0695cc305a2df26720c747bec8d6"
     },
     {
       "location": "prepared",

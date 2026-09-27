@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "antares-arrival.webp",
+      "bytes": 14138,
+      "sha256": "66e23d10e1e734eea8a09eb841d20b0ee14302e294dd4c2223964285190d460c"
+    },
+    {
+      "location": "public",
       "filename": "antares-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
@@ -18,6 +24,12 @@
       "filename": "antares-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "ee0d98fae23efd5f49c5d5f482c135a863e244d852f78aa80dc46f36535b5136"
     },
     {
       "location": "prepared",

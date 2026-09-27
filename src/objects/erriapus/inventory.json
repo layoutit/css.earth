@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "erriapus-arrival.webp",
+      "bytes": 33274,
+      "sha256": "7ed1b23074bf7489cb93b1aa89b1ed321e28d193a2a82eab9cec0c0ba19e2750"
+    },
+    {
+      "location": "public",
       "filename": "erriapus-model-shadow-alpha@2x.webp",
       "bytes": 139932,
       "sha256": "5a276b496cdcc62878a2797a073d20871e4e2af3bb914d93a8e9b56035099c16"
@@ -30,6 +36,12 @@
       "filename": "erriapus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "f99cfa53a1b8060ea81fbb95387b00906e9669d66c9208d748968129c8e3766f"
     },
     {
       "location": "prepared",

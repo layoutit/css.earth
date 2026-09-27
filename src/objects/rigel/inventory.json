@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rigel-arrival.webp",
+      "bytes": 17596,
+      "sha256": "faef89d1087f488f71b2b54f8fefcd05543db7ccc94767755ab3c22fa86e78c7"
+    },
+    {
+      "location": "public",
       "filename": "rigel-lens-color.webp",
       "bytes": 44,
       "sha256": "b0543e2c79d5e6bfe142682640510af7b037eac09fe6be524e7545d43532a28e"
@@ -18,6 +24,12 @@
       "filename": "rigel-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "6f4f63bd1f8eb1d75330e1fd9eff761c509a3994fb3f82ea0d876c57d265ee6b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 366,
+      "sha256": "f9582e836b5cfe175d66d4a7e32e267ee5a49e5f183e2b617903727fd7d98ba9"
     },
     {
       "location": "prepared",

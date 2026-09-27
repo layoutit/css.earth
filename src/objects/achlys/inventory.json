@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "achlys-arrival.webp",
+      "bytes": 39824,
+      "sha256": "7a5321db211b259f8d957bce44ea34e442e1af825cd5cf9ebebc6c5587a68bad"
+    },
+    {
+      "location": "public",
       "filename": "achlys-model-shadow-alpha@2x.webp",
       "bytes": 137270,
       "sha256": "055fb2aeb22fbe615bef5c7c2b24ca882a24366c59c6a4e9040253d1cb0c4992"
@@ -30,6 +36,12 @@
       "filename": "achlys-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "997519685cb52437894770e0acd41bc4b51619b297985c25523396c8c0276d96"
     },
     {
       "location": "prepared",

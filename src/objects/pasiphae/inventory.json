@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pasiphae-arrival.webp",
+      "bytes": 36476,
+      "sha256": "fad411df9452247d5721f42988e3c63390a9fe9d124930e5da04991a2630b06b"
+    },
+    {
+      "location": "public",
       "filename": "pasiphae-model-shadow-alpha@2x.webp",
       "bytes": 128118,
       "sha256": "5b91f9d118157f46aa34247f5895469e12aa83837a83367cf9e4797f77b706be"
@@ -30,6 +36,12 @@
       "filename": "pasiphae-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "73a6a5d2c535085293bc64cd2cfc52b7a8a3e2b3e3e2533fba4b69fa3f858849"
     },
     {
       "location": "prepared",

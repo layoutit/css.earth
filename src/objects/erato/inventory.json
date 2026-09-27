@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "erato-arrival.webp",
+      "bytes": 45300,
+      "sha256": "915882268ce924d1e614193e7940b0cca5b085c68c1ac3c717695c022a6da84e"
+    },
+    {
+      "location": "public",
       "filename": "erato-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "erato-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "3d23fbab30829d2defc3b1063b114d2434c88fd193f087d0d9c510df26ce5495"
     },
     {
       "location": "prepared",

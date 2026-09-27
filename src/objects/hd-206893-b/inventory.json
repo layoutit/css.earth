@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-206893-b-arrival.webp",
+      "bytes": 18712,
+      "sha256": "208469de2d57cbc595770fbf6af6a6e4c6f1815f310a883dbabab752dd390d96"
+    },
+    {
+      "location": "public",
       "filename": "hd-206893-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "92e8c7d69923b065f07f2448f3c8fa714135e710f4404d163c530e209341c671"
@@ -18,6 +24,12 @@
       "filename": "hd-206893-b-surface-infrared@2x.webp",
       "bytes": 178,
       "sha256": "51dc20cf04baf88c1c33b54ddd61764e54699791b13911d07d0753e19db61593"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 314,
+      "sha256": "507905e20b3c7798a07afae1c3ab6cdee00906388589b7f6533888f1c78dcafd"
     },
     {
       "location": "prepared",

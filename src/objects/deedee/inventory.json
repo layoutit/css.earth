@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "deedee-arrival.webp",
+      "bytes": 36066,
+      "sha256": "4a5ebbec812edfc7ef0e16e8c78877cbceb5b231adc26df37e32fa07977c45dd"
+    },
+    {
+      "location": "public",
       "filename": "deedee-model-shadow-alpha@2x.webp",
       "bytes": 125030,
       "sha256": "ce9054e2fd1f91a9e6f1b3e4c7814105688ec431ce0c52f40db1810423913011"
@@ -30,6 +36,12 @@
       "filename": "deedee-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "f99b65c780e3549700e0e4d26e9c2d6a2d740cc992e532de5a2808b55ccaa508"
     },
     {
       "location": "prepared",

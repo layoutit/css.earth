@@ -370,6 +370,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
+        // Connected activation exclusively owns group display during mount.
+        // Dolly staging takes over only for subsequent LOD re-entry.
+        canStageReveal: () => phase !== 'mounting',
          directionalSunPlan: definition.sun ?? null, worldContext,
         cameraPlan, viewport, cameraMotion, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
         onPublish: publication => guarded(() => publish(publication)), onError: fatal });

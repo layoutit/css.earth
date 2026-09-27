@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "squannit-arrival.webp",
+      "bytes": 26786,
+      "sha256": "9280871f79c0eac69cf2e1c08a645200ec719da6ba79e62ee547239954aae747"
+    },
+    {
+      "location": "public",
       "filename": "squannit-model-shadow-alpha@2x.webp",
       "bytes": 214018,
       "sha256": "8c363d883900e3f10f027122960ba2f1c62760a2f5f40b676dbd430070f9ad62"
@@ -30,6 +36,12 @@
       "filename": "squannit-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 312,
+      "sha256": "c0f8a33b500083618185861b7296c43e6855111a9be52e7f2fe7c70c92e66211"
     },
     {
       "location": "prepared",

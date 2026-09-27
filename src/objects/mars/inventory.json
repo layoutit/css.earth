@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mars-arrival.webp",
+      "bytes": 132076,
+      "sha256": "f0b22b15c24a72ae2cc620ff414333ec6ce2c9e11e6e6fefded63ee79b5bfd2e"
+    },
+    {
+      "location": "public",
       "filename": "mars-features.json",
       "bytes": 6046258,
       "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78"
@@ -96,6 +102,12 @@
       "filename": "mars-temperature-pressure-profile.svg",
       "bytes": 2423,
       "sha256": "bfde0a93253a49fbd6badbc66a15cb89a3340d6f1d9dfb43c1a02b6ef336f474"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "80bb8271e2012361da18ff1608630af76d815d28d2460aff7b4f3a7055d19893"
     },
     {
       "location": "prepared",

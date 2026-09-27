@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "quaoar-arrival.webp",
+      "bytes": 53174,
+      "sha256": "8110d5c94b3f4e88330795ff226a091a613ad9347dc3961a9e1a74965144f59e"
+    },
+    {
+      "location": "public",
       "filename": "quaoar-model-shadow-alpha@2x.webp",
       "bytes": 124374,
       "sha256": "9ef7d188683c7a5699ce5b482b1ce9d1a56f7332a5c5fb22f764a9646a152031"
@@ -36,6 +42,12 @@
       "filename": "quaoar-rings.webp",
       "bytes": 18308,
       "sha256": "b47a52147504514abc555ae763800106da5f4947753af3462d5593cd5928c2d5"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "d6196761052038430fa97f1910697f4cfb92268b825e7e8a9ac1f7460bdafd46"
     },
     {
       "location": "prepared",

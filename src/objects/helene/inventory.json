@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "helene-arrival.webp",
+      "bytes": 56372,
+      "sha256": "592868e5f9c1d3ab51334faec740d8e967ae4f87a29a42afe34ed11279a5e7f5"
+    },
+    {
+      "location": "public",
       "filename": "helene-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -96,6 +102,12 @@
       "filename": "helene-normal-thumbnail.webp",
       "bytes": 1946,
       "sha256": "6c68a218e209df059404e22f3762014ee2ced65baf70511cbdf6db9ec4251f78"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "c079ccbcde8cbb8fa956bd2fb8725d6824aa3540cc329247b5310c44eda3ce55"
     },
     {
       "location": "prepared",

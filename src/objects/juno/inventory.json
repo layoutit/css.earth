@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "juno-arrival.webp",
+      "bytes": 35620,
+      "sha256": "e3d48c8855f3b3a8355af3e5daf12ed26026aae394105d6b0b5fcc0d58cc6e43"
+    },
+    {
+      "location": "public",
       "filename": "juno-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "juno-zimpol-thumbnail.webp",
       "bytes": 1840,
       "sha256": "da209f38509bf5116e53ba08c503cdf9be6538f68fd29f518fb6d35098b989b8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 294,
+      "sha256": "05042ce9510e10b40de715d7099262141897a1ddd99a36ef0662492adac1fd77"
     },
     {
       "location": "prepared",

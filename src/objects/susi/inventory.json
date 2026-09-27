@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "susi-arrival.webp",
+      "bytes": 40722,
+      "sha256": "1a326d3574e450a846de50cff3d2759a118bb36043355528c92e8957aa4f1044"
+    },
+    {
+      "location": "public",
       "filename": "susi-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "susi-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "32bbfd4903a443b01fd5ccf57390eb6fc5cb6d56faed876153d266b9fdb81f3a"
     },
     {
       "location": "prepared",

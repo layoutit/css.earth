@@ -39,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "deimos-arrival.webp",
+      "bytes": 37750,
+      "sha256": "48eb4779533fe865123fcbfec1ea696ba23ddc637dff8d108b2b166adbee0dc8"
+    },
+    {
+      "location": "public",
       "filename": "deimos-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -144,6 +150,12 @@
       "filename": "deimos-slope-thumbnail.webp",
       "bytes": 686,
       "sha256": "b064c94f670f0e15f35d8fe7dcae1799dd7481772153c7e71a54b1469c258c2d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "3567f6f13fb6c218c878ff8bedc3ff444859ab8ad74a2adaf6a522df83327a7a"
     },
     {
       "location": "prepared",

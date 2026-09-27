@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "galatea-arrival.webp",
+      "bytes": 31496,
+      "sha256": "4067e3e030e34093bdb00714a7499f128c52980870e5eb6f69568e80d7e41017"
+    },
+    {
+      "location": "public",
       "filename": "galatea-model-shadow-alpha@2x.webp",
       "bytes": 141044,
       "sha256": "2ee6a20aa21a431454bd1e3ae379a875235495000c37c2e970705c64b8666dc2"
@@ -30,6 +36,12 @@
       "filename": "galatea-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "2939c6a4fd49fc5a0d7df91c5733fc74dc6dcd8d56859b5526cff80f4cccf607"
     },
     {
       "location": "prepared",

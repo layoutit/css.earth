@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dh-tau-arrival.webp",
+      "bytes": 33468,
+      "sha256": "908557c13500f5066e035aa96a207b084f305a16d1b3fecdaad9abe20333a7a4"
+    },
+    {
+      "location": "public",
       "filename": "dh-tau-lens-color.webp",
       "bytes": 44,
       "sha256": "eb8feb07617529288dfc26f212914ca802b9197670f3dfde39a0cc784cd4ae89"
@@ -24,6 +30,12 @@
       "filename": "dh-tau-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "6523867374edc61c14055d6d29ac35b87d3314c726644e5d388634ac7feff6e2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "7aa9140d28eae5efad235dc477838e2d5c30b2d74bd33bcb268e5ef10cf09056"
     },
     {
       "location": "prepared",

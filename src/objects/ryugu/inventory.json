@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ryugu-arrival.webp",
+      "bytes": 61346,
+      "sha256": "f4bb9818aad69d4ca6450b55ccc02f3319a39d01d0181dd9a82332583d754efd"
+    },
+    {
+      "location": "public",
       "filename": "ryugu-close-up-shadow-alpha@2x.webp",
       "bytes": 590616,
       "sha256": "8b62bd972c70cceaed7d25f84ddd2a7b6f4cb7c641717c24d064b2faa3749ae2"
@@ -204,6 +210,12 @@
       "filename": "ryugu-thermal-inertia-thumbnail.webp",
       "bytes": 8612,
       "sha256": "145375d4f777d49cc4cf87d6baff11dea2eaad35676e49fe5ec8730e20d3bb2f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 293,
+      "sha256": "7532868059f226639f61ff77ef7e925579c04a78182de49450404df6c4e2985b"
     },
     {
       "location": "prepared",

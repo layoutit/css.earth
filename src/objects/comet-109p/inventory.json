@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-109p-arrival.webp",
+      "bytes": 35054,
+      "sha256": "ee1de9e7671f3bdbfe87cf7c05bcef867e53f7ef47e5ecc21e9963b69eb99c38"
+    },
+    {
+      "location": "public",
       "filename": "comet-109p-model-shadow-alpha@2x.webp",
       "bytes": 101614,
       "sha256": "ebaa2b5768586fa140836c7802ca1d4f51770bfc525e308cd70dd2f4cb6b0f2d"
@@ -30,6 +36,12 @@
       "filename": "comet-109p-model-thumbnail.webp",
       "bytes": 976,
       "sha256": "0c4618a908e87372cd608c817086a77e4ddf6bd8301816fded2558fe2591e4d0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 305,
+      "sha256": "6d2f9bf80d6712d0be69c7427edd3b5659284fa3a9031d191131a0d60edb1b17"
     },
     {
       "location": "prepared",

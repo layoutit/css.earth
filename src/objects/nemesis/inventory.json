@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nemesis-arrival.webp",
+      "bytes": 35862,
+      "sha256": "6c7d7b25b510ea8e1f3e9f4f3a0f987a5a6b9fa0f5f6e3d1b8fc7b7aca8593c0"
+    },
+    {
+      "location": "public",
       "filename": "nemesis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "nemesis-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "d923c6364353052e2c4d767f20677df171d65e5139ec65ff516e5b0c64062c64"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eudora-arrival.webp",
+      "bytes": 51182,
+      "sha256": "4673b3831e04abf1790cff93883f7a947e96086eb3f4bdccf61cff9c702ea604"
+    },
+    {
+      "location": "public",
       "filename": "eudora-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "eudora-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "c38424e5427d7266976c81b19679649d74ef8b698dfa218f68e84c89a9e8d930"
     },
     {
       "location": "prepared",

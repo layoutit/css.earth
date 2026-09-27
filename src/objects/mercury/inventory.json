@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "mercury-arrival.webp",
+      "bytes": 138806,
+      "sha256": "d5e7f11236ee24cbee949debc5054b5afe9ad3bfea62a25a4a41148fd6bf1ab0"
+    },
+    {
+      "location": "public",
       "filename": "mercury-features.json",
       "bytes": 954620,
       "sha256": "036ac4e31bf6c1045dfd8662ab5008c408f224c398fcb44eba02d562a45f3e28"
@@ -336,6 +342,12 @@
       "filename": "mercury-surface-topography@2x.jpg",
       "bytes": 2360840,
       "sha256": "dde79996f5cd553ccf95ae50bff979850af3bd73ad56be16a2d4bc44601c8dff"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "5dd2c7d2df8c2c97fd552967aeebc16b8d9be16a5418e8379351259800e74915"
     },
     {
       "location": "prepared",

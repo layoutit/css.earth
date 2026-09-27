@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2002-ce26-arrival.webp",
+      "bytes": 37908,
+      "sha256": "6ae30e492a5f84ee550e8e8162e3fa561b3222ae322b675ce6a1befe79da4e70"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2002-ce26-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "asteroid-2002-ce26-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 320,
+      "sha256": "f4bae7dadbfd7f78f69eaf092e4a0f87a3432d0d752d29579b58eb7ca3b3b9b5"
     },
     {
       "location": "prepared",

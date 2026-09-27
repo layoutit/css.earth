@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ijiraq-arrival.webp",
+      "bytes": 35118,
+      "sha256": "eca06ec558886611b62a54c1f644cdbf1751292a2ead17ad7c1c296c01f5ae68"
+    },
+    {
+      "location": "public",
       "filename": "ijiraq-model-shadow-alpha@2x.webp",
       "bytes": 140262,
       "sha256": "0f64d45fec7b97a1179375fe06bd8b5158599f3fc2c8aedbf3a228d9b162f9b0"
@@ -30,6 +36,12 @@
       "filename": "ijiraq-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "6309c435d7459714a39a4ea50f96c980a5d99fafab524f983be377cd5abee39f"
     },
     {
       "location": "prepared",

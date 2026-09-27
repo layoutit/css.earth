@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-189733b-arrival.webp",
+      "bytes": 26272,
+      "sha256": "afa7f37fa0be9718894c97c2300cfe357c0b999547b2960276146150b8c213d7"
+    },
+    {
+      "location": "public",
       "filename": "hd-189733b-cheops-albedo.svg",
       "bytes": 2354,
       "sha256": "af84310ed8a6edde78b4fdf868b7be5ec5d75655af8e2a444789bfd98f7bc39e"
@@ -72,6 +78,12 @@
       "filename": "hd-189733b-surface-uncertainty@2x.webp",
       "bytes": 25622,
       "sha256": "85dc1166cce97184be9b76eee57c3fc63875d892166a57bc85c4dd4603ae9776"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 321,
+      "sha256": "b0302cf166425394af43aa5dc45c95184f3fea67bef124e334e0b95a78308c13"
     },
     {
       "location": "prepared",

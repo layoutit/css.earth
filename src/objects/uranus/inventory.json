@@ -117,6 +117,12 @@
     },
     {
       "location": "public",
+      "filename": "uranus-arrival.webp",
+      "bytes": 98198,
+      "sha256": "865a74b5be909b6acf47de7d69c5c0da01580af17eae23ad19b55fef3c1944d0"
+    },
+    {
+      "location": "public",
       "filename": "uranus-atmosphere-spectrum.svg",
       "bytes": 5663,
       "sha256": "255f496796ffa420914e3438c12d0b2341dac965fc0bcaf1733afe69fa1189e5"
@@ -228,6 +234,12 @@
       "filename": "uranus-temperature-pressure-profile.svg",
       "bytes": 2033,
       "sha256": "7af1c85bb503655f2f2a895d5b496bdc885ffb38f2f5282225f6271c7a8b16de"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "40a46765784b3a6b4bb66f02b4a91801693e4de7585e7b5f8943ddd1136a1672"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "elektra-arrival.webp",
+      "bytes": 35662,
+      "sha256": "53e8364bd996aa0dc9f692bd297f7cf5d6ce7cb3e55c3fca3e9d7bea108be0a2"
+    },
+    {
+      "location": "public",
       "filename": "elektra-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "elektra-zimpol-thumbnail.webp",
       "bytes": 1270,
       "sha256": "929f26f98d65ac4be7e71d366a0f8d60b04b475d9c99be028d91c8da54d9e5eb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "566229a14094489a8732fe82857f065610e489dc2d933c986231302beb7e512c"
     },
     {
       "location": "prepared",

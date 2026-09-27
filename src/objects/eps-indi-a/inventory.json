@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eps-indi-a-arrival.webp",
+      "bytes": 17342,
+      "sha256": "b55d679107a0b1c2c38a8da768b3e35ddeec5ca9cdd05afdcb525aab3b1454bf"
+    },
+    {
+      "location": "public",
       "filename": "eps-indi-a-lens-color.webp",
       "bytes": 44,
       "sha256": "eddc932588438d742f46f65c99b240fb3fddc69db8eaa17a5149cc1777ad34c9"
@@ -18,6 +24,12 @@
       "filename": "eps-indi-a-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "240d1c8107495304a52e17cfff673c22b248a60c473018bef278f518606be9a7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "642f5b68f4c95f3742e4f7a5366cb7c376406bb42cf37a9ce037ad8fe4b25b0b"
     },
     {
       "location": "prepared",

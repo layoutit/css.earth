@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pds-70-arrival.webp",
+      "bytes": 29388,
+      "sha256": "de22966c031e79e5cbb2fc2f8809187eef99583ed1b085fdc39fa920aef9f574"
+    },
+    {
+      "location": "public",
       "filename": "pds-70-lens-color.webp",
       "bytes": 44,
       "sha256": "fd940368466507dda97077938c7a2d40e6d12bfcb5f593106201a8a176570918"
@@ -24,6 +30,12 @@
       "filename": "pds-70-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "7b1e5a7f8e45fc58405089c8cb0e88d4c83af8288d4d899cb9fdb30a8212e97e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "9be9f2f13924230d98e30686d470762db2385e42ba0cb6096e1b009ea903760e"
     },
     {
       "location": "prepared",

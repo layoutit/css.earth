@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vhs-1256-1257-companion-arrival.webp",
+      "bytes": 30462,
+      "sha256": "ce2ee8f403cffb998ab812d6bf01e3eea85a95d329009706e11215b994c75f62"
+    },
+    {
+      "location": "public",
       "filename": "vhs-1256-1257-companion-lens-color.webp",
       "bytes": 44,
       "sha256": "96e61b5482f3de4aeda5722c0e48c6dcd74c8ea0239e77c8c82de7a19e998e57"
@@ -24,6 +30,12 @@
       "filename": "vhs-1256-1257-companion-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "2bc7ef9e955c156879c6e8bf5c1f2f168b4170f1d03b3aa45245d164fe97c7c1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 332,
+      "sha256": "f69d1547449055cd8437fa2b8b5663a23fb3a72f4061045f838ffa1beb1937f1"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "v1358-orionis-arrival.webp",
+      "bytes": 27496,
+      "sha256": "d0590a743af3d07657a1c76dae8531d3716f2d231da5f2826b1733f9d25f6381"
+    },
+    {
+      "location": "public",
       "filename": "v1358-orionis-lens-azimuthal-field-2013.webp",
       "bytes": 348,
       "sha256": "44cfc165a3dc420b17abd030c433c311557f5c56c2d1f97cb059bd35ff7da9e9"
@@ -168,6 +174,12 @@
       "filename": "v1358-orionis-surface-radial-field-2017@2x.webp",
       "bytes": 28794,
       "sha256": "e7312f0bf7b9ab4b57e16e07f5338664c282b2f7c2f82f4fd499ca3daab9ec03"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "d1a1ce2c6f97578dac38fd9411e34709aacf9e721fb06111a87fd37c84f115f4"
     },
     {
       "location": "prepared",

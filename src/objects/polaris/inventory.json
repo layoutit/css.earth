@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polaris-arrival.webp",
+      "bytes": 27954,
+      "sha256": "1fe0188d7ae0887812ffa5c4dc6884966d768397715bce7d4106ac0ab8162726"
+    },
+    {
+      "location": "public",
       "filename": "polaris-lens-color.webp",
       "bytes": 44,
       "sha256": "fb2fd3d3d023c702e42ca878a6f699691cbd995bae4302228ed9e605c4b59810"
@@ -24,6 +30,12 @@
       "filename": "polaris-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "530c0883272379988dc79222a182ed08e5463f3c5b7afc6257ce2d1591145f3f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "812bfff6105f3715a19f07f767c6177fed9ac53186821ef9b19492015b70bc15"
     },
     {
       "location": "prepared",

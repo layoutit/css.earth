@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "flora-arrival.webp",
+      "bytes": 31468,
+      "sha256": "8d1c9235b412db7f9a99b924b6cb8b5a92c08f8b598cef26eb101ec7082dc579"
+    },
+    {
+      "location": "public",
       "filename": "flora-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "flora-zimpol-thumbnail.webp",
       "bytes": 1730,
       "sha256": "f8e3fda541fc6d9458e3d3677b74890921b0a50cbfd90f72ed53fa6367c1b481"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "c75238cce397c117be03d6f7e67c16b36bb17e5eb3710238e14bdab944d7d419"
     },
     {
       "location": "prepared",

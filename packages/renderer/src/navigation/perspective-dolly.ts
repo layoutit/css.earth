@@ -22,7 +22,9 @@ export interface PerspectiveDollyOptions { sunDirection?: Vector3 | null; camera
   /** Prepared activation groups of the mesh; a resolving mesh returns through them in stages. */
   revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
-  canReveal?: () => boolean; }
+  canReveal?: () => boolean;
+  /** Initial connected activation owns the groups until it finishes. */
+  canStageReveal?: () => boolean; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['prepare']>['commit']>;
 
@@ -143,6 +145,7 @@ export function createPerspectiveDolly({
   viewport,
   revealGroups = [],
   canReveal,
+  canStageReveal = () => true,
   sunDirection,
 }: PerspectiveDollyOptions, createOrientation = createCameraOrientation) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
@@ -269,7 +272,7 @@ export function createPerspectiveDolly({
           transformWrites += 1;
         }
       }
-      if (revealGroups.length && revealView) {
+      if (revealGroups.length && revealView && canStageReveal()) {
         if (hidden && revealFrame !== null) { revealClock!.cancel(revealFrame); revealFrame = null; }
         if (!hidden && sceneElement.hidden) {
           revealTo(0, true);

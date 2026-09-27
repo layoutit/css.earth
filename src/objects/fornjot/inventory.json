@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "fornjot-arrival.webp",
+      "bytes": 34894,
+      "sha256": "53b13694628279ab06e79c21b9f4da0f74ce4e6bbc77de9f5a205e854dbca36b"
+    },
+    {
+      "location": "public",
       "filename": "fornjot-model-shadow-alpha@2x.webp",
       "bytes": 140710,
       "sha256": "539d79254f7759b2923de9f25e6f1207684eeea62799774fb461de194c928faf"
@@ -30,6 +36,12 @@
       "filename": "fornjot-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "f8b2d868ba7df2c934b205bb8c42c0d84b7bf428c388e59fa73b869e27f20090"
     },
     {
       "location": "prepared",

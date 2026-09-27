@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "albion-arrival.webp",
+      "bytes": 35080,
+      "sha256": "7b2814a18771a9bd0aa70273afc684cf6d0d1b02eb303e0bd4589418263409c5"
+    },
+    {
+      "location": "public",
       "filename": "albion-model-shadow-alpha@2x.webp",
       "bytes": 127692,
       "sha256": "2b1e7e3991228b6684d86500a52f6259f73f08c2a635a58ff566237bbd907d9c"
@@ -30,6 +36,12 @@
       "filename": "albion-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 309,
+      "sha256": "1b0bc82855bdc8c77788fd681d48a9b3260019ec7e208775eeb7d55c53655e13"
     },
     {
       "location": "prepared",

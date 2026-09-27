@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "carlova-arrival.webp",
+      "bytes": 38342,
+      "sha256": "94bbe331e721ca0720cbc7add915466b624355808420134d737a55af38f9a410"
+    },
+    {
+      "location": "public",
       "filename": "carlova-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "carlova-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "f6211e506fc263592576eb6f60dc9589b1a1a6387a04794da629f3376841237c"
     },
     {
       "location": "prepared",

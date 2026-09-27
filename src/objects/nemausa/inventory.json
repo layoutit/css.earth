@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nemausa-arrival.webp",
+      "bytes": 31326,
+      "sha256": "32fa5c0303985cfa06344c1b180973d4d6569b11892dcc6a2a1b3c879bca0057"
+    },
+    {
+      "location": "public",
       "filename": "nemausa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "nemausa-zimpol-thumbnail.webp",
       "bytes": 1714,
       "sha256": "0bde184f601bdb4d726379f191b2368d009e61f0654ff773a86e6992a8a1667b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "6b33f48778b476c3e4d5104b2584582561eb46c6b0aa35a34585909b15f852fc"
     },
     {
       "location": "prepared",

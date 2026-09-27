@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kleopatra-arrival.webp",
+      "bytes": 19892,
+      "sha256": "e980d3b8a31d7683876990f22a0f453f37847a49dac9fc14b65adcb4b6528e61"
+    },
+    {
+      "location": "public",
       "filename": "kleopatra-shape-shadow-alpha@2x.webp",
       "bytes": 537696,
       "sha256": "4e33fc22cee0a1fcc96b84dc665304dd44d781adb753c3455ba57eb8358dac60"
@@ -48,6 +54,12 @@
       "filename": "kleopatra-zimpol-thumbnail.webp",
       "bytes": 874,
       "sha256": "10ca59afcfdd11c223d146ddd0c332d8da1812a1cc5e558e0556b2b5e5814e15"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "a16bedb3cd53beb791de65f03f343b2d02c1e0bdeb4551a1b85bff681f758615"
     },
     {
       "location": "prepared",

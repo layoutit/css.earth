@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bienor-arrival.webp",
+      "bytes": 38560,
+      "sha256": "8fa04cca736ac4d86baa84cc5e6ea837cc86d51cab86be4908f0f902b6780778"
+    },
+    {
+      "location": "public",
       "filename": "bienor-model-shadow-alpha@2x.webp",
       "bytes": 129302,
       "sha256": "0da6bf7dfa48adc3385aac20ff167342145e7218dd90f8128ae346205a079131"
@@ -30,6 +36,12 @@
       "filename": "bienor-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "6efcfccdd40e1427b5903f080388a139ca87120c11bf55dfe2e74eea3f8a34bd"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aspasia-arrival.webp",
+      "bytes": 41012,
+      "sha256": "a62be53a731b3e8d7a1c225d85c6a8e574b843d644e6beb77fc6f7527861709e"
+    },
+    {
+      "location": "public",
       "filename": "aspasia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "aspasia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "857130bf4b793eb10fed656d931f7293ff7bd7bf73e5f74565b7f55ab0f82e0e"
     },
     {
       "location": "prepared",

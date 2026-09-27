@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "loge-arrival.webp",
+      "bytes": 36152,
+      "sha256": "28400b51e9f077fef41f0a184705c488d1a06893fe5f1f575258a2321b84c1f8"
+    },
+    {
+      "location": "public",
       "filename": "loge-model-shadow-alpha@2x.webp",
       "bytes": 138390,
       "sha256": "0c895b170077aeb52f666d1b2039cadfd54bb883d5ad24b416ffc04d7e100aa7"
@@ -30,6 +36,12 @@
       "filename": "loge-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "6bf812cb7831b3c65e250a367e2f8656516190638940fec3fcf7218358ab46fa"
     },
     {
       "location": "prepared",

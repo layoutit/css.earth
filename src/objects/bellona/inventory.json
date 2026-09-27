@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bellona-arrival.webp",
+      "bytes": 34624,
+      "sha256": "5aa6179ead99b16413e72bad38a23add2217c131aea9584284738b94d4b3c8d5"
+    },
+    {
+      "location": "public",
       "filename": "bellona-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "bellona-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "5717d535dc01a7621449ab072ab56f97be0c3dd9f069e0d045fda79c331b8931"
     },
     {
       "location": "prepared",

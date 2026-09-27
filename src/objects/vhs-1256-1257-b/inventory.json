@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vhs-1256-1257-b-arrival.webp",
+      "bytes": 14150,
+      "sha256": "bfa60537c69eb9b98dff07d056c99a875621c07722930313b5c99b22e1042e1c"
+    },
+    {
+      "location": "public",
       "filename": "vhs-1256-1257-b-lens-shape.webp",
       "bytes": 44,
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
@@ -18,6 +24,12 @@
       "filename": "vhs-1256-1257-b-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 322,
+      "sha256": "8204e0bbe0c1e620ffeeab6d1bb4eacc0150564791460931798eff7dcc86a295"
     },
     {
       "location": "prepared",

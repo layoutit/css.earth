@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "asteroid-2008-ev5-arrival.webp",
+      "bytes": 39908,
+      "sha256": "d757175117b9dba00ff4226360e1c68dd9a6d81dbe0fdb93ee8efd07dd78f897"
+    },
+    {
+      "location": "public",
       "filename": "asteroid-2008-ev5-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "asteroid-2008-ev5-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 316,
+      "sha256": "dd9264e46092b0714ec193d398f401ce9c2a4c3645fc7742454a4c221537a2e5"
     },
     {
       "location": "prepared",

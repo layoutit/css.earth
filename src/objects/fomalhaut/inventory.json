@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "fomalhaut-arrival.webp",
+      "bytes": 28242,
+      "sha256": "3343b6dfcf23105f392476ac234ad3173a6e6db76eade19bc169ad4a2c319916"
+    },
+    {
+      "location": "public",
       "filename": "fomalhaut-lens-color.webp",
       "bytes": 44,
       "sha256": "e5ed762d929ff45ae5b4854bff9b4d5fb13f54382b89a53c758cff412173c042"
@@ -24,6 +30,12 @@
       "filename": "fomalhaut-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "0d90fd381c7fc1c72c9e094e65628bdf230aeec9e75a9d9ced0fcedb0f706497"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "4181d7fab5f0de385ef1284307d2268ce82194047347b128caafa98e907a3b66"
     },
     {
       "location": "prepared",

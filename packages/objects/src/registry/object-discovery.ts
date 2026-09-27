@@ -12,7 +12,7 @@ export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> 
   if (!isRecord(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference', 'hostsImagery', 'sourceColor'].includes(key)) ||
       typeof value.featured !== 'boolean' || typeof value.imagery !== 'boolean' || typeof value.illustration !== 'boolean' ||
       value.illustration && (value.imagery || value.featured)) throw new TypeError('Invalid prepared object discovery.');
-  if (value.arrival !== undefined && !value.imagery) throw new TypeError('A photographic arrival requires imagery.');
+  // Arrival presentation is independent of whether the dataset is photographic.
   if (value.orientationReference !== undefined && (!Number.isInteger(value.orientationReference) || Number(value.orientationReference) < 1)) throw new TypeError('Invalid object orientation reference.');
   if (value.hostsImagery !== undefined && (value.hostsImagery !== true || value.imagery)) throw new TypeError('Only a star without imagery of its own is marked as hosting imagery.');
   if (value.sourceColor !== undefined && (value.sourceColor !== true || value.imagery)) throw new TypeError('Only a body without imagery is marked by its source colour.');

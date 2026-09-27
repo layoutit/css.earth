@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "golevka-arrival.webp",
+      "bytes": 37932,
+      "sha256": "56a3f4e2b0ce1bd781292deaab28c5b12ca66f2a3389146a9825e6d19264b943"
+    },
+    {
+      "location": "public",
       "filename": "golevka-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "golevka-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "5a48103a15b7f80e2cc57d71d6ca4e1d81a9a2ce014aeb225f42682485aa5dbb"
     },
     {
       "location": "prepared",

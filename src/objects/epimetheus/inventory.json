@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "epimetheus-arrival.webp",
+      "bytes": 63170,
+      "sha256": "e46e4ec33641f6ba41c5f5d6c64aa1609feecd2ea67f213c46e489e5fdd7a248"
+    },
+    {
+      "location": "public",
       "filename": "epimetheus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "epimetheus-normal-thumbnail.webp",
       "bytes": 2068,
       "sha256": "f782aa1d59be48ffd58e74e8687515443d804223f1cff51eb3a5ac013c16ebe0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "a3f41d2cbcad3c60c8ac96ebc5beb8a4ec76a943f6b141639bc78da244e3dd14"
     },
     {
       "location": "prepared",

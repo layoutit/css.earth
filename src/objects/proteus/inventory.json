@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "proteus-arrival.webp",
+      "bytes": 72092,
+      "sha256": "f87911ccc64dfd5272fb84520c04e518fbb08bc5d837d14661d4a3f857643c4c"
+    },
+    {
+      "location": "public",
       "filename": "proteus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -96,6 +102,12 @@
       "filename": "proteus-normal-thumbnail.webp",
       "bytes": 2164,
       "sha256": "c6851794f4a90704b55698c35fd697222920c77efd2c0a7c93462d437a5f2604"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "4ee0b02cf5178624673a92888fea126366aab9df8259ddaf54ee8076aca02ccd"
     },
     {
       "location": "prepared",

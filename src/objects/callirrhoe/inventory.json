@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "callirrhoe-arrival.webp",
+      "bytes": 37816,
+      "sha256": "92b33f03f70b9bce62046fc7b89044b4f0e9e6e5a7dea68c57eb2d32fafd51df"
+    },
+    {
+      "location": "public",
       "filename": "callirrhoe-model-shadow-alpha@2x.webp",
       "bytes": 130514,
       "sha256": "c74d6cc39ef1fe54adedaa09c26f200d679e80a94409c3eb493cd677c219afce"
@@ -30,6 +36,12 @@
       "filename": "callirrhoe-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "4bb0183a48367867d5cd1d1c4ae3d0ddddd8a5fced5b5f258e3e66876514aa22"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hungaria-arrival.webp",
+      "bytes": 32442,
+      "sha256": "2524d57a8d35cb0d606cf435a7d3e9a905d0da8ceaf393c99cdabd0336d51a57"
+    },
+    {
+      "location": "public",
       "filename": "hungaria-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "hungaria-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "607125f33b229f5d2d88164af2e173bb743a247f565eb79b85980286d766143d"
     },
     {
       "location": "prepared",

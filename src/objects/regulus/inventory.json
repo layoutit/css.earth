@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "regulus-arrival.webp",
+      "bytes": 62940,
+      "sha256": "f9ef1caec7b8d4ec917ea454c1e3d3a0afa57a5ffb6f3dd569d36f95c2d8a5f7"
+    },
+    {
+      "location": "public",
       "filename": "regulus-lens-color.webp",
       "bytes": 194,
       "sha256": "b3fcf716d052f859024e1a96f8cc639b6c1a087ca9cd273c5a0c91d4481ed8b2"
@@ -24,6 +30,12 @@
       "filename": "regulus-surface-color@2x.webp",
       "bytes": 2130,
       "sha256": "468ec424d6f7d7eda2e88f1b786a8f1b6e96f0685a13baf0236e46078cae9c1b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 366,
+      "sha256": "75489a66794be8f505d72c6c5953aab33361e92587729a2e62f70a93c6bc6b95"
     },
     {
       "location": "prepared",

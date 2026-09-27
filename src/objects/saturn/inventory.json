@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "saturn-arrival.webp",
+      "bytes": 177106,
+      "sha256": "fd513587ab338a8103d09c1d0f48b77d59a0e6285da0256dcede659839d5aeb1"
+    },
+    {
+      "location": "public",
       "filename": "saturn-atmosphere-spectrum.svg",
       "bytes": 5773,
       "sha256": "ef2eb1133e4a81dc78f1b380cc4b9e4a9b07f75faaf56aaec2cd002d1d8e3f56"
@@ -1140,6 +1146,12 @@
       "filename": "saturn-view-interior.webp",
       "bytes": 234,
       "sha256": "1fdac1dc6258f31610b70d800888ed3cf5d001f7db16cdf28169ad5fd712f831"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "5f6b9c744078ea17369e2450564e14e6ed6585a5959f4589cdc6eae4f12196b8"
     },
     {
       "location": "prepared",

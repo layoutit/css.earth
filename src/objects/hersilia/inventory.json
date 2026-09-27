@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hersilia-arrival.webp",
+      "bytes": 36824,
+      "sha256": "95c791f571698b1775817a6f37cd0ff44d52bc11f1bed63422a82545f5d5ddd9"
+    },
+    {
+      "location": "public",
       "filename": "hersilia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "hersilia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "17474a26d936d580c9164546e2df9112a0206caa9abd6efb9298282b9d36b791"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "medea-arrival.webp",
+      "bytes": 37190,
+      "sha256": "9cc83868d6d61793804ab930b8e824967c8b033633534af135e04cc5bc0a65f9"
+    },
+    {
+      "location": "public",
       "filename": "medea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "medea-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "db22b1003516ef3bda2f576a1fb5f480c449bd9fe67825620986d70802982c5e"
     },
     {
       "location": "prepared",

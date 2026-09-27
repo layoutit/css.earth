@@ -39,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "didymos-arrival.webp",
+      "bytes": 38880,
+      "sha256": "7f2d8a804fffd0c624d4bbf2e58e9fd1d59f07a2037ee671f150cbdada34686b"
+    },
+    {
+      "location": "public",
       "filename": "didymos-draco-shadow-alpha@2x.webp",
       "bytes": 600636,
       "sha256": "17a6ae5b403945ac60bfc2fa2e5f1b4eb82498820664fa4d1eec153c5a7c9bbd"
@@ -156,6 +162,12 @@
       "filename": "didymos-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "69bfbc3772f11abc99b95fe45ddb11ec6099a0c9c0951be677eed156182fa3a4"
     },
     {
       "location": "prepared",

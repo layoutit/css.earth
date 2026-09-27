@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "laomedeia-arrival.webp",
+      "bytes": 35082,
+      "sha256": "46d7112c5da8b5a3d6d72a59cecac51e880122ae4021c8a7c015b006474a1ef1"
+    },
+    {
+      "location": "public",
       "filename": "laomedeia-model-shadow-alpha@2x.webp",
       "bytes": 130548,
       "sha256": "a7f3a55ee3fd2bf6274416654c3ce84daa1e32633bea555d102d0ab6c5d7c97f"
@@ -30,6 +36,12 @@
       "filename": "laomedeia-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "72538410801fbcf3f02835d4311a5525e07cfd14a55a81234397af399fc01b13"
     },
     {
       "location": "prepared",

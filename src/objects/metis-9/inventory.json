@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "metis-9-arrival.webp",
+      "bytes": 36982,
+      "sha256": "ce9bf5c2bf9cbc76cd235252abc6f306dc01233e0d9564a08343433bd6e7a67c"
+    },
+    {
+      "location": "public",
       "filename": "metis-9-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "metis-9-zimpol-thumbnail.webp",
       "bytes": 1610,
       "sha256": "d06a07637766cc716d66530c593830baefd585d3e3f5f10382d7b26572b3c5ed"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "d87372ea9b8cda1b3c4385df12b599dbb28cff7be0775cc1ae6391b8ebf5a54d"
     },
     {
       "location": "prepared",

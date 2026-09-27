@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kepler-186-arrival.webp",
+      "bytes": 29872,
+      "sha256": "dd1995807fe3ad81e783c6dee72f0bb0dee1527e5a8f189d67b6a7ac89115012"
+    },
+    {
+      "location": "public",
       "filename": "kepler-186-lens-color.webp",
       "bytes": 44,
       "sha256": "20c53e01381d5162f30d4845466eb2cf7496aacc72d6f64ac24c6e52bb27025d"
@@ -24,6 +30,12 @@
       "filename": "kepler-186-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "77d677cd405a96aa08adc7041a238faa42f00c438fd71553f279fab47e52c8dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "9cc88090a7135a1920f210cbbffe68097b7361c10543bd3dd65bb8ca23e4e971"
     },
     {
       "location": "prepared",

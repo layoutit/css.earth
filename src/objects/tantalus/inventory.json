@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tantalus-arrival.webp",
+      "bytes": 34786,
+      "sha256": "c9f7f06b1c3609df409efa69fe3c76d7974af57390989ead80f3ea5d5971eb52"
+    },
+    {
+      "location": "public",
       "filename": "tantalus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "tantalus-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "bd654a4eccc27f8d91a13fce182b77295a5761b937919b659dc127e4af436819"
     },
     {
       "location": "prepared",

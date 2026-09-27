@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "varuna-arrival.webp",
+      "bytes": 31226,
+      "sha256": "6101f6b7d02cba9362790f57c02f192e5a4fbbeaa830ff00a75781272d03b92c"
+    },
+    {
+      "location": "public",
       "filename": "varuna-model-shadow-alpha@2x.webp",
       "bytes": 135306,
       "sha256": "aff6e5c597c06b9b123456c0eebe04385afd8458266cfb0d8d5d7d7a1acdb35d"
@@ -30,6 +36,12 @@
       "filename": "varuna-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "ba50811a7e327a46f2da959795976c54ded0f0d7b62c5e22d782c2c52eab2cf6"
     },
     {
       "location": "prepared",

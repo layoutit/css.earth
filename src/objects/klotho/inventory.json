@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "klotho-arrival.webp",
+      "bytes": 37164,
+      "sha256": "d63a513c12938f9d626b4908af59c9b04c5207fcf9f1b68ce34b2d9af98b4c85"
+    },
+    {
+      "location": "public",
       "filename": "klotho-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "klotho-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "0313957f839a685978318f56afc89306880bf4f7377584b42b4b5788c386236e"
     },
     {
       "location": "prepared",

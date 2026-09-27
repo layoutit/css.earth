@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-209458b-arrival.webp",
+      "bytes": 35218,
+      "sha256": "f7aada321abc3916239c23fdec2054f0a754fb4d8195a96c774e0c78ef2f67e4"
+    },
+    {
+      "location": "public",
       "filename": "hd-209458b-lens-temperature.webp",
       "bytes": 162,
       "sha256": "c3523facfd415b00e3934c00221ffeff270c8ffad4c8fab76cee5b1d92af32a0"
@@ -246,6 +252,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 310,
+      "sha256": "5eb6613346c6f4b195e2ad271d258dcc5bf0ad53841a0a44042427143d2a470c"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vanth-arrival.webp",
+      "bytes": 36686,
+      "sha256": "9ace6b2bf5d42ca776c71be9bf153ea78450e5d29c88c9f0709e4f8b7bfcd594"
+    },
+    {
+      "location": "public",
       "filename": "vanth-model-shadow-alpha@2x.webp",
       "bytes": 129178,
       "sha256": "b8a535d03ab4f81a6539d1805553764050f0948b30a2bc0fe3b0dd444e490712"
@@ -30,6 +36,12 @@
       "filename": "vanth-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "d5be0901cc03c650e8fecf481b10ebdb1d390cd624e960db81f8b8f47e44ba73"
     },
     {
       "location": "prepared",

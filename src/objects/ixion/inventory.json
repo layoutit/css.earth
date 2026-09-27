@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ixion-arrival.webp",
+      "bytes": 34966,
+      "sha256": "97812addd709db550e68f8cf2075130a101d4ed4c9af1ce3590fec88c7442a7c"
+    },
+    {
+      "location": "public",
       "filename": "ixion-model-shadow-alpha@2x.webp",
       "bytes": 129016,
       "sha256": "a2eea70380f3c0936d9d54fe74c0d89583cd659f3fdd1ddbb3e0e395086530ea"
@@ -30,6 +36,12 @@
       "filename": "ixion-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 306,
+      "sha256": "9773e005ed8b938e9c04f7cea824daa397eec583bbcd9f36a188bfdde4fc7728"
     },
     {
       "location": "prepared",

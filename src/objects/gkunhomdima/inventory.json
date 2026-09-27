@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gkunhomdima-arrival.webp",
+      "bytes": 36260,
+      "sha256": "ce7619793b2fc799c2c4deea337203ddd084d79f2d3e094d6517c5c42737b6e0"
+    },
+    {
+      "location": "public",
       "filename": "gkunhomdima-model-shadow-alpha@2x.webp",
       "bytes": 124576,
       "sha256": "022fc828ae9262c63fcb8cc672673aaa6ec958d88eeb373bc6c3cd012f90051e"
@@ -30,6 +36,12 @@
       "filename": "gkunhomdima-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 318,
+      "sha256": "bbef2f8deeb57be2d0dfceb028cc64a610fc108f915806897eb9475315a2c9ac"
     },
     {
       "location": "prepared",
