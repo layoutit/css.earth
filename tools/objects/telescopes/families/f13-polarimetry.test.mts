@@ -1,7 +1,7 @@
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest(); import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'; import { tmpdir } from 'node:os'; import { resolve } from 'node:path'; import {spawn} from 'node:child_process'; import {createHash} from 'node:crypto';
-import { headerBlock, padBlock } from '../../interferometry/fits-table.mts'; import { member } from './common.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster'; import { member } from './common.mts';
 import { BETELGEUSE_ZIMPOL_V, describeDegreeLinearPolarization, describeStokesFits, exportIntensityDolp, extractStokesFits, inspectIntensityDolp, inspectStokesFits } from './f13-polarimetry.mts'; import { astroqueryToolchain } from '@cssearth/telescope/node';import{executeFamilyOperation}from'../family-operation.mts';
 const fits=(width=2,height=2)=>{const values=Buffer.alloc(width*height*4);for(let i=0;i<width*height;i++)values.writeFloatBE(i+1,i*4);return Buffer.concat([headerBlock([['SIMPLE',true],['BITPIX',-32],['NAXIS',2],['NAXIS1',width],['NAXIS2',height]]),padBlock(values)]);};
 test('F13 exposes DOLP as DOLP and refuses a fabricated Stokes interpretation',()=>{const intensity=member('intensity','intensity.fits','science',fits()),dolp=member('dolp','dolp.fits','science',fits());const d=describeDegreeLinearPolarization({id:'betelgeuse-zimpol',target:'betelgeuse',intensity,dolp,shape:[2,2],producingRecord:'ESO Phase 3'});assert.deepEqual(d.components.map(c=>c.id),['intensity','degree-linear-polarization']);assert.match(d.issues[0]?.reason??'',/No Stokes Q\/U\/V/);});

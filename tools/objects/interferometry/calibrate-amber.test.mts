@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { calibratorDatabase, planAmberNight } from './calibrate-amber.mts';
 import { coOvertoneLines, measureCoShift } from './co-wavelength.mts';
 import { parseRawTable } from './eso-pipeline.mts';
-import { binaryTable, numbers, readFitsHdus, tableColumn, text } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, text } from '@cssearth/bake/objects/raster';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const fixture = resolve(import.meta.dirname, 'fixtures/amber-2013-12-07-raw-frames.csv');

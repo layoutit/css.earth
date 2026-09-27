@@ -7,7 +7,7 @@ const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { readFitsHdus, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { centredCrop, readEventsFile, streamEvents, timeTagPicture, timeTagProduct, type TimeTagRun } from './timetag-frame.mts';
 import {

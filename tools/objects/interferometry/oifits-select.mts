@@ -23,7 +23,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell } from '@cssearth/bake/objects/raster';
 
 export interface SelectOptions { readonly windowsMetres?: readonly (readonly [number, number])[]; readonly mjdRange?: readonly [number, number]; readonly half?: 'even' | 'odd'; readonly wavelengthScale?: number;
   readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number; readonly vis2Minimum?: number } }

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseRawFrames, planPionierNight } from './calibrate-pionier.mts';
-import { readChannelRows } from './oifits-rows.mts';
+import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { matchVis2 } from './author-comparison.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');

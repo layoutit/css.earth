@@ -7,7 +7,7 @@
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { readChannelRows } from './oifits-rows.mts';
+import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { toolchainPath } from './toolchain.mts';
 
 export interface SqueezeRecipe {

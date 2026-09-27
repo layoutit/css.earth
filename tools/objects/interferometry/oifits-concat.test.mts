@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn } from './fits-table.mts';
-import { subsetOifits } from './oifits-concat.mts';
+import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn } from '@cssearth/bake/objects/raster';
+import { subsetOifits } from '@cssearth/bake/objects/layers/observation';
 
 const table = (name: string, columns: Parameters<typeof binaryTableHdu>[1], rows: Parameters<typeof binaryTableHdu>[2], cards: Parameters<typeof binaryTableHdu>[3]) => binaryTableHdu(name, columns, rows, cards);
 const input = (array = 'ARRAY', observableArray = array) => Buffer.concat([

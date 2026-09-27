@@ -7,7 +7,7 @@ import { GRAVITY_REDUCTION } from './calibrate-gravity.mts';
 import { MATISSE_REDUCTION } from './calibrate-matisse.mts';
 import { archiveFrameId, parseAssociationTree, reduceAssociation, stepFiles, type InstrumentReduction, type ReductionIo } from './eso-associations.mts';
 import { parseHeaderCards, type EsoHeader } from './eso-pipeline.mts';
-import { binaryTable, numbers, readFitsHdus, tableColumn, text, type BinaryTable } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, text, type BinaryTable } from '@cssearth/bake/objects/raster';
 
 const fixture = (name: string) => resolve(import.meta.dirname, 'fixtures', name);
 const repository = resolve(import.meta.dirname, '../../..');

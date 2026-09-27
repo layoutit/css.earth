@@ -20,8 +20,8 @@ import { canonical, requireArray, requireFiniteNumber, requireRecord, requireStr
  * time and resolution. A heat snapshot is never averaged with a band depth, and two snapshots of a changing quantity are
  * never averaged as if they were one without the caller saying so. */
 import { sha256 } from '@cssearth/core/node';
-import { parseResolutionEvidence, type ResolutionEvidence } from './resolution-evidence.mts';
-import { combineBodyMaps, type BodyMap } from './jwst/cubes/body-map.mts';
+import { parseResolutionEvidence, type ResolutionEvidence } from './resolution-evidence.ts';
+import { combineBodyMaps, type BodyMap } from './body-map.ts';
 
 export const BODY_MAP_SCHEMA = 'cssearth-body-map@1';
 const ARCSEC_PER_RADIAN = 206_264.806_247;

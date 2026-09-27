@@ -28,10 +28,10 @@ import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssear
 import { placeResolvedDisc } from '../../resolved-disc-map.mts';
 import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';
-import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
-import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../../body-map-product.mts';
+import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 import { sha256, sha256File } from '@cssearth/core/node';
-import { bodyMapFits, type BodyMap } from './body-map.mts';
+import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 

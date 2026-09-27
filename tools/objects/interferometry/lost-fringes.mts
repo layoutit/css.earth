@@ -15,7 +15,7 @@
  *
  * A lost baseline is flagged with its error set to 1e10, and so is every closure phase using it: pndrs gives no weight to a sample
  * whose error is 1e5 or more when it averages exposures and builds transfer functions. */
-import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell } from '@cssearth/bake/objects/raster';
 
 export const LOST_FRINGE_RATIO = 0.1;
 export const LOST_FRINGE_MINIMUM_NEIGHBOUR = 0.002;

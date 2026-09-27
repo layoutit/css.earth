@@ -1,11 +1,11 @@
-import { bodyMapFits } from './jwst/cubes/body-map.mts';
+import { bodyMapFits } from '@cssearth/bake/objects/layers/observation';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { formatBodyMapProduct, type BodyMapProduct } from './body-map-product.mts';
+import { formatBodyMapProduct, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
 import type { ObservationSelection } from './telescopes/query.mts';
 

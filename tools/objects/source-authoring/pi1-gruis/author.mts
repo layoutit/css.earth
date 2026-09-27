@@ -10,7 +10,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
-import { readChannelRows } from '../../interferometry/oifits-rows.mts';
+import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 

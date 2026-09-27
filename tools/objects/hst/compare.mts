@@ -23,7 +23,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../interferometry/fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '@cssearth/bake/objects/raster';
 import { mastFile } from '@cssearth/telescope/node';
 import { addProductEvidence } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductRecord } from '@cssearth/telescope';

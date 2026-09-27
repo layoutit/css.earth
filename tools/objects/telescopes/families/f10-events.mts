@@ -1,6 +1,6 @@
 /** F10 public baseline for a bounded Chandra EVENTS+GTI product. Counts remain counts; no response or flux is inferred. */
 import{gunzipSync}from'node:zlib';
-import{binaryTable,numbers,readFitsHdus,tableColumn}from'../../interferometry/fits-table.mts';
+import{binaryTable,numbers,readFitsHdus,tableColumn}from'@cssearth/bake/objects/raster';
 import{eventTable,requireEventColumn,scalar}from'../../chandra/events.mts';
 import type{FamilyHandler,FamilyOperation}from'../family-handlers.mts';
 import type{DescriptorMember,ProductDescriptor}from'../product-descriptor.mts';

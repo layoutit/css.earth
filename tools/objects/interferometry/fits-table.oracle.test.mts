@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readOracleFixture, readOracleInput } from '../../oracles/fixture.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { binaryTable, findTable, numbers, readFitsHdus, tableColumn, text, writeCell } from './fits-table.mts';
+import { binaryTable, findTable, numbers, readFitsHdus, tableColumn, text, writeCell } from '@cssearth/bake/objects/raster';
 
 const fixture = await readOracleFixture('fits/binary-table.json');
 const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/binary-table-columns.fits');

@@ -16,12 +16,12 @@ import { exportPhotometryCsv, previewSed, sedPlotData, sedTable, type Photometry
 import { binTimeSeries, exportTimeSeriesCsv, foldTimeSeries, previewTimeSeries, selectTimeSeries, timeSeriesPlotData, type TimeSample } from './families/f06-time-series.mts';
 import { readAstrometryCsv, astrometryTrackData, exportAstrometryCsv, inspectAstrometry, previewAstrometryTrack, propagateAstrometry, selectAstrometryRows, type AstrometryRow } from './families/f09-astrometry.mts';
 import { energyHistogram, exportSelectedEventsCsv, gtiLightCurve, inspectChandraEvents, nativeCountImage, previewCountImage, previewEnergyHistogram, previewLightCurve, type EventSelection } from './families/f10-events.mts';
-import { readTessLightCurve } from '../eclipse-map/transit-limb-darkening.mts';
+import { readTessLightCurve } from '@cssearth/bake/objects/raster';
 import { dynamicSpectrumSpectrum, dynamicSpectrumTimeSeries, exportDynamicSpectrumCsv, inspectWindRad1, selectDynamicSpectrum } from './families/f07-dynamic-spectrum.mts';
 import { extractSlitRegionSpectrum, slitProfileTable, slitScanSummary } from './families/f04-slit-profile.mts';
 import { dolpPreview, extractStokesFits, inspectIntensityDolp, inspectStokesFits, previewStokesExtraction } from './families/f13-polarimetry.mts';
-import { readChannelRows } from '../interferometry/oifits-rows.mts';
-import { subsetOifits, type OifitsRowSelection } from '../interferometry/oifits-concat.mts';
+import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
+import { subsetOifits, type OifitsRowSelection } from '@cssearth/bake/objects/layers/observation';
 import { delayDopplerCoordinateView, delayDopplerProfile, inspectDelayDopplerFits, previewDelayDoppler } from './families/f15-radar.mts';
 import { selectSpatialComponents } from './families/f16/f16-spatial-physical.mts';
 import { contextFromPhysicalGridDescriptor, cropPhysicalCartesianGrid, exportPhysicalCartesianNative, inspectPhysicalCartesianGrid, preparePhysicalCartesianVolume, slicePhysicalCartesianGrid, type GridCrop, type GridSlice, type PhysicalGridPlacement, type PhysicalGridTransfer } from './families/f16/f16-cartesian-grid.mts';

@@ -5,7 +5,7 @@
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { linearToSrgb } from '@cssearth/bake/objects/color';
 import { gunzipSync } from 'node:zlib';
-import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn } from '@cssearth/bake/objects/raster';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 export type StellarColorRecord = {
@@ -200,7 +200,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
     if (recipe.source === 'grid') return { recipe, coefficients: interpolateQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
     if (recipe.source === 'published') return { recipe, coefficients: readPublishedLimbDarkening(JSON.parse((await read(recipe.path)).toString('utf8'))) };
     const [{ readTessLightCurve, fitTransitLimbDarkening }, { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry }] =
-      await Promise.all([import('../../eclipse-map/transit-limb-darkening.mts'), import('@cssearth/astronomy')]);
+      await Promise.all([import('@cssearth/bake/objects/raster'), import('@cssearth/astronomy')]);
     if (!(HOSTED_PLANET_IDS as readonly string[]).includes(recipe.planet)) throw new TypeError(`Limb darkening from transits needs a hosted planet: ${recipe.planet}.`);
     const planet = recipe.planet as (typeof HOSTED_PLANET_IDS)[number], hostId = BODIES[planet].parent;
     if (!(STAR_IDS as readonly (string | null)[]).includes(hostId)) throw new TypeError(`${planet} does not orbit a placed star.`);
@@ -456,7 +456,7 @@ export type LimbDarkeningRecipe = {
   readonly law: 'quadratic'; readonly source: 'table'; readonly path: string; readonly star: string;
   readonly columns: { readonly u1: string; readonly u2: string; readonly u1Upper: string; readonly u1Lower: string; readonly u2Upper: string; readonly u2Lower: string };
 } | {
-  /** Fitted here to the planet's transits in pinned TESS light curves (tools/objects/eclipse-map/transit-limb-darkening.mts). */
+  /** Fitted here to the planet's transits in pinned TESS light curves (packages/bake/src/objects/raster/eclipse-map/transit-limb-darkening.ts). */
   readonly law: 'quadratic'; readonly source: 'tess-transits'; readonly planet: string; readonly lightCurves: readonly string[];
 } | {
   /** Coefficients published in a paper's text or table (no machine-readable input): a transcription record at `path`

@@ -2,7 +2,7 @@
 import { dirname, resolve } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 import { inspectFits } from '../qualify-source.mts';
-import { readFitsHdus } from '../../interferometry/fits-table.mts';
+import { readFitsHdus } from '@cssearth/bake/objects/raster';
 import { describeFitsTable } from '../families/f08-table.mts';
 import { readProductScience } from '../product-science.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
@@ -55,7 +55,7 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec, poli
       inputs: [...acquisition.outputs.map(output => ({ role: 'acquired product and metadata', identity: output.path, bytes: output.bytes })),
         { role: 'acquisition record', identity: 'acquisition.json', ...await fileSize(acquired.record) }],
       parameters: { acquisition: spec.key, observation: { decoder: spec.decoder, kind: spec.kind, target: spec.request.target }, operation: spec.operation, family: 'F08', hdu: tables[0]! },
-      software: [...acquisition.software, { name: 'cssEarth VO F08 table qualification', version: digest(await Promise.all(['./qualify.mts', '../families/f08-table.mts', '../../interferometry/fits-table.mts'].map(path => readFile(new URL(path, import.meta.url), 'utf8')))) }] };
+      software: [...acquisition.software, { name: 'cssEarth VO F08 table qualification', version: digest(await Promise.all(['./qualify.mts', '../families/f08-table.mts', '../../../../packages/bake/src/objects/raster/fits/fits-table.ts'].map(path => readFile(new URL(path, import.meta.url), 'utf8')))) }] };
     await writeProductRecord(productRecord, run, [...acquisition.outputs.map(output => ({ path: output.path, file: resolve(outputRoot, output.path) })),
       { path: 'acquisition.json', file: acquired.record }, { path: 'qualification.json', file: receipt }, { path: 'descriptor.json', file: descriptorFile }],
       [{ kind: 'archive-retrieval-origin', product: 'science.fits', receipt: 'origin.json',

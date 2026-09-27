@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readChannelRows } from './oifits-rows.mts';
+import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { compareSpotMaps, limbDarkenedVisibility, normalStream, reconstructionVerdict, reproducibility, simulateSpotlessDisc, spotMap, SPOT_CONTRAST_RATIO } from './spotless-disc.mts';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;

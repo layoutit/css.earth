@@ -21,7 +21,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureCoShift, MINIMUM_CO_CORRELATION } from './co-wavelength.mts';
 import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from './eso-pipeline.mts';
-import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn, writeCell } from './fits-table.mts';
+import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn, writeCell } from '@cssearth/bake/objects/raster';
 import { toolchainPath } from './toolchain.mts';
 
 export const AMBER_COLUMNS = ['dp_id', 'dp_cat', 'dp_type', 'dp_tech', 'object', 'target', 'ob_name', 'tpl_start', 'tpl_id', 'exposure', 'ins_mode', 'release_date', 'access_estsize'];

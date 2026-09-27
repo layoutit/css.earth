@@ -9,7 +9,7 @@ import { imagingProductRun, pipelineSoftware, recordProductEvidence } from '../i
 import { sameRun, runDigest, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { compareSamples, cubeComparisonScope, archivePlaneOffset, requestedSpectralGrid } from './spec3.mts';
-import type { SpectralCube } from './spectral-cube.mts';
+import type { SpectralCube } from '@cssearth/bake/objects/layers/observation';
 
 const file = (name: string, sha256: string) => ({ name, uri: `mast:JWST/product/${name}`, bytes: 4096, sha256 });
 const program = parseImagingProgram({

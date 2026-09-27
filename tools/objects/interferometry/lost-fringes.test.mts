@@ -3,7 +3,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { binaryTable, numbers, readFitsHdus, tableColumn } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn } from '@cssearth/bake/objects/raster';
 import { findLostFringes, pairVisibilities, removeLostFringes, type ExposureVisibilities } from './lost-fringes.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');

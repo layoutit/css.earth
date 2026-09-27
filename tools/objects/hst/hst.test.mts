@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '../interferometry/fits-table.mts';
+import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '@cssearth/bake/objects/raster';
 import { parseHstProgram, PROGRAMS, suffixOf } from './archive.mts';
 import { HST_CONFIGURATIONS, isNotAnObject, hubbleLedgerGuide, matchTarget, parseHubbleLedger, repositoryState, HST_LEDGER } from './archive-ledger.mts';
 import type { NamedShippedObject as ShippedObject } from '../archives/targets.mts';

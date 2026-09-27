@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import { primaryHdu, binaryTableHdu } from '../../interferometry/fits-table.mts';
+import { primaryHdu, binaryTableHdu } from '@cssearth/bake/objects/raster';
 import { readEsoSpectrum, describeEsoSpectrum } from './f03-eso-spectrum.mts';
 import { exportSpectrumCsv, spectrumPreviewSamples } from './f03-spectrum.mts';
 

@@ -6,7 +6,7 @@ import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } fr
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
 import { assessInput, assessRequest, type RequestSatisfaction } from './request-satisfaction.mts';
-import { parseAcceptedAssumptions, type ResolutionAssumption } from '../resolution-evidence.mts';
+import { parseAcceptedAssumptions, type ResolutionAssumption } from '@cssearth/bake/objects/layers/observation';
 /** Which observations in the archives might measure a quantity on a target, and what stays unknown until one is read.
  *
  * The ledgers hold what each archive has per object and per mode: how many observations, which programmes, which programs are
@@ -33,7 +33,7 @@ import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { flagValue, hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readJsonSource } from '@cssearth/bake/objects/sources';
-import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '../body-map-product.mts';
+import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';

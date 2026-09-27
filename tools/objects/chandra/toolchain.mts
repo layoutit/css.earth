@@ -18,7 +18,7 @@ import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { findTable, tableColumn, text } from '../interferometry/fits-table.mts';
+import { findTable, tableColumn, text } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const repository = resolve(import.meta.dirname, '../../..');

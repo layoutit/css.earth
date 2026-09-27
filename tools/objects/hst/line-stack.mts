@@ -34,7 +34,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { sha256 } from '@cssearth/core/node';
 import { addProductEvidence, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';

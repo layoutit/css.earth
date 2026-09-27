@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto';
 import { build } from 'esbuild';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { parseBodyMapProduct } from '../../body-map-product.mts';
+import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { assertBodyMapPlanes } from '../../body-map-publication.mts';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { sha256 } from '@cssearth/core/node';

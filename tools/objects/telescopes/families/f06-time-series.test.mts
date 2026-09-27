@@ -1,4 +1,4 @@
-import assert from'node:assert/strict';import{sourceTest}from'../../../../tests/objects/source-test.mts';import{readFile}from'node:fs/promises';import{resolve}from'node:path';import{readTessLightCurve}from'../../eclipse-map/transit-limb-darkening.mts';import{member}from'./common.mts';import{binTimeSeries,describeTimeSeries,foldTimeSeries,selectTimeSeries,timeSeriesPlotData}from'./f06-time-series.mts';
+import assert from'node:assert/strict';import{sourceTest}from'../../../../tests/objects/source-test.mts';import{readFile}from'node:fs/promises';import{resolve}from'node:path';import{readTessLightCurve}from'@cssearth/bake/objects/raster';import{member}from'./common.mts';import{binTimeSeries,describeTimeSeries,foldTimeSeries,selectTimeSeries,timeSeriesPlotData}from'./f06-time-series.mts';
 const root=resolve(import.meta.dirname,'../../../..'),path='src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits';
 const test=sourceTest();
 let loading:Promise<{bytes:Buffer;samples:{id:string;segment:string;time:number;value:number;uncertainty:number}[]}>|undefined;

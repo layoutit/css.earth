@@ -47,7 +47,7 @@ BP/RP sampled spectrum, the record names that spectrum instead (`spectrum:
 gaia-xp-sampled`) and the measured flux replaces the Planck model: HD 189733 A and B.
 A limb-darkening law measured from a transiting planet draws a limb plate, either read
 from a published table (WASP-43) or fitted to pinned TESS light curves
-([transit-limb-darkening.mts](../tools/objects/eclipse-map/transit-limb-darkening.mts),
+([transit-limb-darkening.mts](../packages/bake/src/objects/raster/eclipse-map/transit-limb-darkening.ts),
 HD 189733 A). A star with such a colour stays on the map even without imagery
 (discovery `sourceColor`).
 

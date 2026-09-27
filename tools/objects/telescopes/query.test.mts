@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
-import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
+import { BODY_MAP_SCHEMA } from '@cssearth/bake/objects/layers/observation';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, QUERY_HELP, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
 import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from '@cssearth/telescope/node';

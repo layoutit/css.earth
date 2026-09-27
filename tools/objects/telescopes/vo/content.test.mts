@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { binaryTableHdu, primaryHdu } from '../../interferometry/fits-table.mts';
+import { binaryTableHdu, primaryHdu } from '@cssearth/bake/objects/raster';
 import { inspectVoFits } from './content.mts';
 
 test('native FITS content dispatch refuses an event table without disguising it as an image', () => {

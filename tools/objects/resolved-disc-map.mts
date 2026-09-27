@@ -7,8 +7,8 @@
  * grid, and writing the complete observation geometry used by the body-map contract.
  */
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
-import { fitDiscCentre, projectBandMap, topRowFirst, type BodyMap, type DiscCentre } from './jwst/cubes/body-map.mts';
-import type { AngularResolution, BodyMapObservation } from './body-map-product.mts';
+import { fitDiscCentre, projectBandMap, topRowFirst, type BodyMap, type DiscCentre } from '@cssearth/bake/objects/layers/observation';
+import type { AngularResolution, BodyMapObservation } from '@cssearth/bake/objects/layers/observation';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const AU_KM = 1.495978707e8;

@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import { rememberQualification, loadQualifiedObservations } from './qualified-observations.mts';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
-import { PROFILE_ASSUMPTIONS } from '../resolution-evidence.mts';
+import { PROFILE_ASSUMPTIONS } from '@cssearth/bake/objects/layers/observation';
 import { assessRequest } from './request-satisfaction.mts';
 test('qualification readback binds facts to the exact output, receipt and producing record', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'qualified-observation-'));

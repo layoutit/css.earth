@@ -1,7 +1,7 @@
 /** ESO SDP single-record spectra. The existing FITS reader owns byte layout;
  * ESO owns WAVE/FLUX/ERR and QUAL=0. Native indices survive exclusions as IDs.
  * https://www.eso.org/sci/observing/phase3/p3sdpstd.pdf */
-import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn } from '@cssearth/bake/objects/raster';
 import { requireString } from '@cssearth/core';
 import type { ProductDescriptor } from '../product-descriptor.mts';
 import { descriptor } from './common.mts';
