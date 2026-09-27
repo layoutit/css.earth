@@ -46,7 +46,7 @@ assert.deepEqual(counts, {
   "opus-geometry": 221,
   "opus-volumes": 990,
   pds: 189,
-  photojournal: 717,
+  photojournal: 2593,
   umd: 3880,
   "umd-holdings": 5110,
   usgs: 1643,
@@ -91,6 +91,18 @@ for (const r of rows) {
   assert.ok(r.id && r.source && r.reason.length > 15);
   assert.match(r.url, /^https?:\/\//);
   for (const p of r.proposals) assert.ok(plans.some((plan) => plan.id === p));
+  // A decision cites something a reader can open: a PR, a file or a record, never a conversation.
+  assert.doesNotMatch(r.reason, /\bchat\b|\bconversation\b/i, `${r.source} ${r.id} cites a chat`);
+  const d = object(r.details);
+  // A row without a target says why: its label names none, or its source records none.
+  if (!r.target.trim()) assert.ok(typeof d.targetNote === "string" && d.targetNote.length > 15, `${r.source} ${r.id} has no target and no note`);
+  // Every Photojournal row keeps its downloadable files, so a map can be told from a picture without opening the page.
+  if (r.source === "photojournal") assert.ok(Array.isArray(d.files), `photojournal ${r.id} records no files`);
+  // Every USGS row keeps the files its product page offers; the first screen's copied reasons are replaced per product.
+  if (r.source === "usgs") {
+    assert.ok(Array.isArray(d.files), `usgs ${r.id} records no files`);
+    assert.doesNotMatch(r.reason, /^(The original catalogue screen did not establish|Mars implementation is excluded by the user)/, `usgs ${r.id} keeps a copied screen reason`);
+  }
 }
 const mimas = slice(
   rows,
