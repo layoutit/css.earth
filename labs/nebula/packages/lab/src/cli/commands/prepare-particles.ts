@@ -120,7 +120,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
       type: 'density-volume', properties: { volume: frame,
         preparation: { source: 'source/volume.json' } } });
     console.log(`PARTICLES_BAKE ${target.id}: ${(100 * provenance.display.massRetention).toFixed(2)}% stellar mass inside display bounds`);
-    const baked = spawnSync(process.execPath, [resolve(root, 'tools/objects/dist/prepare-volume.js'), objectDirectory], { stdio: 'inherit' });
+    const baked = spawnSync(process.execPath, [resolve(root, 'packages/bake/cli/prepare-volume.mts'), objectDirectory], { stdio: 'inherit' });
     if (baked.error) throw baked.error;
     if (baked.status !== 0) throw new Error(`Shared volume bake failed for ${target.id}.`);
   }

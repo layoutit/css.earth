@@ -10,7 +10,7 @@ import { parseGalaxyRecipe } from './config.ts';
 import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.ts';
 import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './prepare.ts';
 import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from './source.ts';
-import { prepareGalaxyCatalogObject } from '../../../../tools/objects/prepare-galaxy-catalog.ts';
+import { prepareGalaxyCatalogObject } from './prepare-object.ts';
 import type { AuthorMetadata, CsvRow } from './types.ts';
 
 const directory = resolve('src/objects/local-group');

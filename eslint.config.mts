@@ -78,8 +78,9 @@ export default [
   },
   {
     // The raster lane reads prepared-asset constants the renderer owns (`@cssearth/renderer/rendering/*`); build-time code may
-    // import the runtime package, never the reverse. Other topics stay on the rule above.
-    files: ['packages/bake/src/raster/**/*.ts'],
+    // import the runtime package, never the reverse. The layered provenance bindings read the same canonical image density.
+    // Other topics stay on the rule above.
+    files: ['packages/bake/src/raster/**/*.ts', 'packages/bake/src/objects/provenance/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {

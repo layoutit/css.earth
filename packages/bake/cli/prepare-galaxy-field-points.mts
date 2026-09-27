@@ -1,15 +1,13 @@
 import { sha256 } from '@cssearth/core/node';
 import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import { sourceObject } from '@cssearth/objects/sources';
-import { readFieldRecipe } from './recipe.mts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
-import { fitClouds } from './cloud-fit.mts';
+import { fitClouds, loadScientificCatalogue, readFieldRecipe } from '@cssearth/bake/galaxy-field';
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { manifestSources } from '@cssearth/bake/sources';
 import { writePreparedSet } from '@cssearth/bake/delivery';
-import { loadScientificCatalogue } from './catalogue.mts';
 const root=process.cwd();
 const manifest=sourceObject(JSON.parse(await readFile('src/objects/nearby-universe/source/manifest.json','utf8')));
 if(manifest.schema!=='cssearth-volume-source-manifest@1'||manifest.pathBase!=='repository')throw new TypeError('Invalid galaxy field source manifest');

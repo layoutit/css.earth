@@ -2,16 +2,17 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile, mkdir, mkdtemp, rm, cp, copyFile } from 'node:fs/promises';
-import { prepareContextProvenance } from '../prepare/prepare-context-provenance.mts';
-import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
+import { prepareContextProvenance, readPreparedContextProvenance } from '@cssearth/bake/sources';
+import { CONTEXT_ROUTE } from '../../src/platform/dataset-destination.mts';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
 
 
 test('context provenance binds every declared output and installs one complete inventory', async () => {
-  const contexts=await prepareContextProvenance();
+  const contexts=await prepareContextProvenance({route:CONTEXT_ROUTE});
   assert.deepEqual(contexts.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
+  assert.ok(contexts.every(context=>context.route==='/sun/'));
   for(const context of contexts){
     const inventories=context.outputs.filter(o=>o.path.endsWith('/inventory.json'));
     assert.equal(inventories.length,1,'the inventory is published once, at the body root');
@@ -31,17 +32,19 @@ test('context provenance binds every declared output and installs one complete i
 });
 
 test('deploy catalogue recovery reads prepared contexts without authoring intermediates', async () => {
-  const contexts = await readPreparedContextProvenance({ input: path => {
+  const contexts = await readPreparedContextProvenance({ route: CONTEXT_ROUTE, input: path => {
     assert.doesNotMatch(path, /sun\/prepared\/world-context\.json/u);
     return readFile(path);
   } });
   assert.deepEqual(contexts.map(context => context.id), ['galaxy-clusters', 'local-group', 'nearby-universe']);
   assert.ok(contexts.every(context => context.outputs.length === 0));
+  // The application route passed in is what the catalogue links each context to: the Sun's scene.
+  assert.ok(contexts.every(context => context.route === '/sun/'));
 });
 test('changed prepared bytes are rejected; an authored source document is read as it is', async () => {
-  await prepareContextProvenance({input:async path=>{ const bytes=await readFile(path); return path==='src/objects/nearby-universe/source/preparation/field.json' ? Buffer.concat([bytes,Buffer.from(' ')]) : bytes; }});
+  await prepareContextProvenance({route:CONTEXT_ROUTE,input:async path=>{ const bytes=await readFile(path); return path==='src/objects/nearby-universe/source/preparation/field.json' ? Buffer.concat([bytes,Buffer.from(' ')]) : bytes; }});
   for(const target of ['src/objects/local-group/inventory.json']) {
-    await assert.rejects(prepareContextProvenance({input:async path=>{
+    await assert.rejects(prepareContextProvenance({route:CONTEXT_ROUTE,input:async path=>{
       const bytes=await readFile(path);if(path !== target) return bytes;
       if(path.endsWith('inventory.json')) {
         const inventory=JSON.parse(bytes.toString());
@@ -69,9 +72,9 @@ test('offline context recovery is independent of installed generated images and 
     'src/objects/sun/source/navigation/universe.json',
     join(root,'src/objects/sun/source/navigation/universe.json'),
   );
-  const offline=await prepareContextProvenance({root,input:path=>readFile(/^(tools|packages)\//u.test(path)?path:join(root,path))});
+  const offline=await prepareContextProvenance({route:CONTEXT_ROUTE,root,input:path=>readFile(/^(tools|packages)\//u.test(path)?path:join(root,path))});
   assert.deepEqual(offline.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
-  const installed=await prepareContextProvenance();
+  const installed=await prepareContextProvenance({route:CONTEXT_ROUTE});
   assert.deepEqual(offline.map(c=>c.provenance),installed.map(c=>c.provenance));
   assert.deepEqual(offline.map(c=>c.outputs.map(o=>o.text)),installed.map(c=>c.outputs.map(o=>o.text)));
 });

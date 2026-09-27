@@ -10,10 +10,11 @@ export interface PreparedContextProvenance {
 }
 
 /** Read the prepared context packages installed by setup:assets. Deploy catalogue compilation must not replay
- * authoring provenance against a platform-specific generated intermediate. */
-export async function readPreparedContextProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)) }: {
-  root?: string; input?: (path: string) => Promise<Buffer>;
-} = {}): Promise<PreparedContextProvenance[]> {
+ * authoring provenance against a platform-specific generated intermediate. `route` is the application route that shows the
+ * context objects; the application passes it in. */
+export async function readPreparedContextProvenance({ route, root = process.cwd(), input = path => readFile(resolve(root, path)) }: {
+  route: string; root?: string; input?: (path: string) => Promise<Buffer>;
+}): Promise<PreparedContextProvenance[]> {
   const results: PreparedContextProvenance[] = [];
   for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).sort((a,b)=>a.name.localeCompare(b.name))) {
     if (!folder.isDirectory()) continue;
@@ -30,7 +31,7 @@ export async function readPreparedContextProvenance({ root = process.cwd(), inpu
     if (products.length !== provenance.products.length || products.some((product, index) => product.id !== provenance.products[index]?.id)) {
       throw new Error(`Prepared context presentation differs from provenance: ${id}`);
     }
-    results.push({ id, name: sourceText(presentation.name), route: '/sun/', base, controls: [], provenance, outputs: [] });
+    results.push({ id, name: sourceText(presentation.name), route, base, controls: [], provenance, outputs: [] });
   }
   return results;
 }

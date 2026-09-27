@@ -23,8 +23,7 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await copyFile(resolve(project, 'tools/assets/restore-source-inputs.mts'), resolve(root, 'tools/assets/restore-source-inputs.mts'));
-  await copyFile(resolve(project, 'tools/assets/runtime-assets.mts'), resolve(root, 'tools/assets/runtime-assets.mts'));
-  // `runtime-assets.mts` imports `RUNTIME_ASSET_ORIGIN` from here; without it the fixture root cannot resolve.
+  // `restore-source-inputs.mts` imports `RUNTIME_ASSET_ORIGIN` from here, and a test redirects it to a local server.
   await copyFile(resolve(project, 'tools/assets/asset-origin.mts'), resolve(root, 'tools/assets/asset-origin.mts'));
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));

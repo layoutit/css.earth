@@ -43,7 +43,9 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'density': ['sky', 'volume-leaves', 'volume'],
   'image-layers': ['volume-leaves'],
   'environment': ['image-layers', 'shell', 'stars', 'density', 'volume'],
+  'galaxy-catalog': ['volume'],
   'cluster-catalog': ['galaxy-catalog'],
+  'galaxy-field': ['objects/sources'],
   'objects/scene': ['presentation'],
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
@@ -55,10 +57,12 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/stellar': ['objects/color', 'objects/raster', 'objects/sources'],
   'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
   'prepared-presentation': ['presentation', 'raster'],
-  'sources': ['runtime-source', 'objects/content'],
+  'delivery': ['objects/sources'],
+  'sources': ['runtime-source', 'objects/content', 'delivery'],
   'contract': ['presentation'],
   'navigation': ['raster', 'objects/raster'],
   'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/layers/terrestrial'],
+  'objects/provenance': ['objects/layers/terrestrial'],
   'objects/layers/terrestrial': ['photometry', 'raster', 'scene', 'presentation', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/material-composition', 'objects/layers/shape-model'],
 };
 

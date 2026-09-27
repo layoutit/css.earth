@@ -4,7 +4,7 @@ import { mkdtemp, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { assembleRuntimeAssets } from './runtime-assets.js';
+import { assembleRuntimeAssets } from '@cssearth/bake/delivery';
 const test = sourceTest();
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');

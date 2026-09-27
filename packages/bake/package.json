@@ -96,6 +96,11 @@
       "import": "./dist/galaxy-catalog.js",
       "default": "./dist/galaxy-catalog.js"
     },
+    "./galaxy-field": {
+      "types": "./dist/galaxy-field.d.ts",
+      "import": "./dist/galaxy-field.js",
+      "default": "./dist/galaxy-field.js"
+    },
     "./cluster-catalog": {
       "types": "./dist/cluster-catalog.d.ts",
       "import": "./dist/cluster-catalog.js",
@@ -190,6 +195,11 @@
       "types": "./dist/objects/candidates.d.ts",
       "import": "./dist/objects/candidates.js",
       "default": "./dist/objects/candidates.js"
+    },
+    "./objects/provenance": {
+      "types": "./dist/objects/provenance.d.ts",
+      "import": "./dist/objects/provenance.js",
+      "default": "./dist/objects/provenance.js"
     },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",

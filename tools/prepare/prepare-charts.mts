@@ -1,6 +1,6 @@
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { selectedObjectIds } from '../assets/runtime-assets.mts';
+import { selectedObjectIds } from '@cssearth/bake/delivery';
 import { parseChartAssetRecipe } from '../objects/charts/charts.ts';
 import { refreshObjectCharts } from '../objects/content/refresh-charts.mts';
 import { refuseDirectRun } from '../cli/library-entry.mts';

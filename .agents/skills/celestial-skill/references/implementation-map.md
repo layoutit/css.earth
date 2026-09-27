@@ -49,7 +49,7 @@ fallback requirements are not the current authored-package template.
 | Identity, route, lazy loading | Body `object.json` → `tools/prepare/prepare-catalog.mts` → `site/objects.mts`; `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `packages/renderer/src/validation/` |
-| Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare/prepare-object-json.mts` |
+| Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `packages/bake/src/delivery/publication.ts`, `tools/prepare/prepare-object-json.mts` |
 | Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `packages/bake/src/objects/sources/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `packages/renderer/src/runtime/shell-contract.ts`, `site/scene/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |

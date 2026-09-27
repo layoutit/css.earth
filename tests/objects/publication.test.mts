@@ -6,7 +6,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { preparedAssetWrites, publishPreparedObject, readPreparedBinaryOutputs, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
+import { preparedAssetWrites, publishPreparedObject, readPreparedBinaryOutputs, readPreparedJsonOutputs } from '@cssearth/bake/delivery';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });

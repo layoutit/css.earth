@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { inventoryText, readInventory, type InventoryAsset } from '@cssearth/objects/node';
-import { inventoryAssets } from '../../assets/runtime-assets.mts';
+import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '../../assets/setup.mts';
 import { writePreparedSet, type PreparedOutput } from '@cssearth/bake/delivery';
 import { parseChartAssetRecipe, prepareChartAssets } from '../charts/charts.ts';

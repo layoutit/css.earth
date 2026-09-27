@@ -13,7 +13,7 @@ import { parsePresentationProfile, prepareCssPresentation, type PresentationInpu
 import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
-import { prepareRuntimeManifest } from './runtime-assets.js';
+import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
 
@@ -139,7 +139,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const projectRoot = process.cwd(), stageRoot = resolve(projectRoot, '.local/object-preparation');
     await mkdir(stageRoot, { recursive: true });
     // Publication refuses files the inventory does not list; say so before the run, not after it.
-    const { unownedPublicFiles } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
+    const { unownedPublicFiles } = await import('@cssearth/bake/delivery');
     const strays = await unownedPublicFiles(id, objectDirectory, publicDirectory);
     if (strays.length) throw new Error(`${id}: ${relative(projectRoot, publicDirectory)} holds ${strays.length} file(s) inventory.json does not list (${strays.slice(0, 5).join(', ')}${strays.length > 5 ? ', ...' : ''}); publication would refuse them. Move them out of that directory and run again.`);
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
@@ -204,7 +204,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
         await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
       }
-      const { publishPreparedObject } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
+      const { publishPreparedObject } = await import('@cssearth/bake/delivery');
       await publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot });
       return Object.freeze({ ...result, definition: finalized.definition,
         scene: JSON.parse(await readFile(resolve(stagedData, 'scene.json'), 'utf8')) as unknown });

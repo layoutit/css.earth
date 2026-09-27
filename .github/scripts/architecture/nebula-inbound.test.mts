@@ -22,7 +22,7 @@ function fixture() {
 test('normal runtime and preparation reject all public research imports, including erased types and reexports', () => {
   const f = fixture();
   try {
-    for (const path of ['site/runtime.mts', 'src/runtime.ts', 'packages/engine/src/runtime.ts', 'tools/nebula/application/prepare.ts']) {
+    for (const path of ['site/runtime.mts', 'src/runtime.ts', 'packages/engine/src/runtime.ts', 'packages/bake/cli/prepare-nebulae.mts']) {
       for (const name of ['nebula-lab', 'nebula-reconstruction', 'volume-viewer']) {
         for (const source of [
           `import '@cssearth/${name}/public';`, `export * from '@cssearth/${name}/public';`,
@@ -135,6 +135,9 @@ test('root research dependencies remain development-only and computed policy sta
     f.write('tools/nebula/application/load.ts', 'export const load = (plugin: string) => import(plugin);');
     assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
     f.write('tools/nebula/application/load.ts', 'export {};');
+    f.write('packages/bake/cli/prepare-nebulae.mts', 'export const load = (plugin: string) => import(plugin);');
+    assert.ok(f.check().some(error => error.includes('unchecked computed nebula')), 'the application nebula entry is the compact adapter');
+    f.write('packages/bake/cli/prepare-nebulae.mts', 'export {};');
     f.write('site/plugin.mts', "const prefix = '@cssearth/nebula-lab/'; export const load = (name: string) => import(prefix + name);");
     assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
     f.write('site/plugin.mts', "const prefix = '@cssearth/bake/'; export const load = (name: string) => import(prefix + name);");

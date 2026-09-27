@@ -71,7 +71,7 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
 // Repository-volume restoration runs before the generated site catalogue exists in the nebula CI lane.
 // Keep the body registry lazy: that mode discovers its packages directly from src/objects instead.
 const ids = repositoryVolumeMode ? await repositoryVolumeObjectIds() :
-  (await import('./runtime-assets.mts')).selectedObjectIds(argumentsList);
+  (await import('@cssearth/bake/delivery')).selectedObjectIds(argumentsList, projectRoot);
 for (const id of ids) {
   const volumeSource = resolve(projectRoot, 'src/objects', id, 'source');
   if (repositoryVolumeMode) {
@@ -99,7 +99,7 @@ for (const id of ids) {
       }
       if (recipe.sky) {
         const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
-          import('@cssearth/bake/sky'), import('./setup.mts'), import('./runtime-assets.mts'),
+          import('@cssearth/bake/sky'), import('./setup.mts'), import('@cssearth/bake/delivery'),
         ]);
         const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
         if (skyRecipe.stars) {

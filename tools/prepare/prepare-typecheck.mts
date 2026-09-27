@@ -5,9 +5,9 @@ import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { promisify } from 'node:util';
 import ts from 'typescript';
-import { type RuntimeAssetLocation, inventoryAssets } from '../assets/runtime-assets.mts';
+import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '../assets/setup.mts';
-import { volumeMetadataAssets } from '../assets/runtime-assets.mts';
+import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readPreparedObjects } from '@cssearth/objects/node';
 

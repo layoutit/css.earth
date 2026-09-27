@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { acquireGalaxyFieldSources } from './acquire.mts';
+import { acquireGalaxyFieldSources } from '@cssearth/bake/galaxy-field';
 import { sourceCacheUrl } from '@cssearth/bake/objects/sources';
 
 const MIRROR_ORIGIN = 'https://mirror.example';

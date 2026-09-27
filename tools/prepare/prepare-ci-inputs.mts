@@ -1,7 +1,7 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { resolve } from 'node:path';
-import { inventoryAssets, inventoriedObjectIds, volumeMetadataAssets } from '../assets/runtime-assets.mts';
-import type { RuntimeAssetLocation } from '../assets/runtime-assets.mts';
+import { inventoryAssets, inventoriedObjectIds, volumeMetadataAssets } from '@cssearth/bake/delivery';
+import type { RuntimeAssetLocation } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '../assets/setup.mts';
 
 const projectRoot = resolve(import.meta.dirname, '../..');

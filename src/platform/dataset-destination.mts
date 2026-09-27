@@ -1,6 +1,9 @@
 import { sourceId, sourceText } from '@cssearth/objects/sources';
 import type { DatasetHost, DatasetRoutes } from '@cssearth/objects/provenance';
 
+/** The application route that shows the context objects (the Sun's scene); preparation records it for each context package. */
+export const CONTEXT_ROUTE = '/sun/';
+
 /** Only these two application routes may select a prepared object's dataset. */
 export function datasetDestination(objectId: string, route: string, lensId: string): string {
   sourceId(objectId); sourceId(lensId);

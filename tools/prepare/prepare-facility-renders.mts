@@ -10,7 +10,8 @@ import { Quaternion, Vector3, MathUtils } from 'three';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { RenderRequest, renderFacility, recipe } from '../facility-renders/render.mts';
 import { writePreparedSet } from '@cssearth/bake/delivery';
-import { prepareArtworkRefresh } from '../facility-renders/refresh.mts';
+import { prepareArtworkRefresh } from '@cssearth/bake/sources';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 import { getFacilityPose, inwardDirection } from '../facility-renders/poses.mts';
 
 declare global { interface Window { FacilityRender: { renderFacility: typeof renderFacility; recipe: typeof recipe }; } }
@@ -131,7 +132,7 @@ try {
   }
   if (!inspectAxes && !inspectRolls) {
     library.renderer = { ...await page.evaluate(() => { if (!('FacilityRender' in window)) throw new Error('Renderer not loaded'); return window.FacilityRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
-      implementation: Object.fromEntries(await Promise.all(['tools/prepare/prepare-facility-renders.mts', 'tools/facility-renders/render.mts', 'tools/facility-renders/poses.mts', 'tools/facility-renders/refresh.mts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
+      implementation: Object.fromEntries(await Promise.all(['tools/prepare/prepare-facility-renders.mts', 'tools/facility-renders/render.mts', 'tools/facility-renders/poses.mts', 'packages/bake/src/sources/facility-artwork-refresh.ts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
     library.composition = { background: 'transparent for model renders', displaySize: [296, 148], preserveAspectRatio: true, fitPolicy: 'Center retained source geometry; alpha bounds with 6px padding supply sidebar crop.' };
     await writeFile(resolve(output, 'render-report.json'), JSON.stringify(reports, null, 2) + '\n');
     await writeFile(resolve(output, 'render-library.candidate.json'), JSON.stringify(library, null, 2) + '\n');
@@ -139,7 +140,7 @@ try {
       if (!(await readFile(libraryPath)).equals(libraryBefore)) throw new Error('Artwork library changed during rendering; review before retrying');
       const next = Buffer.from(JSON.stringify(library, null, 2) + '\n');
       const images = new Map(await Promise.all(selected.map(async entry => ['public' + requireString(entry.url), await readFile(resolve(output, `rendered/${requireString(entry.id)}.webp`))] satisfies [string, Buffer])));
-      const graphs = await prepareArtworkRefresh(root, libraryBefore, next, images);
+      const graphs = await prepareArtworkRefresh(root, libraryBefore, next, images, DATASET_ROUTES);
       await writePreparedSet([...selected.map(entry => ({ path: resolve(root, 'public' + requireString(entry.url)), source: resolve(output, `rendered/${requireString(entry.id)}.webp`) })),
         { path: libraryPath, text: next }, ...graphs]);
     }

@@ -22,7 +22,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { inventoryAssets, inventoriedObjectIds } from './runtime-assets.mts';
+import { inventoryAssets, inventoriedObjectIds } from '@cssearth/bake/delivery';
 
 export const BUCKET = 'cssearth-assets';
 export const PRUNE_PREFIX = 'runtime-assets/';

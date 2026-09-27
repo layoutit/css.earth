@@ -1,4 +1,4 @@
-import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from './runtime-assets.js';
+import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '@cssearth/bake/delivery';
 import { containedPath, parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';

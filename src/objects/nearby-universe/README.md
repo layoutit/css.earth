@@ -29,7 +29,7 @@ byte-for-byte; it is an acquisition/reproduction check, not scientific acceptanc
 
 [Context provenance tests](../../../tools/contract/context-provenance.test.mts) verify
 output and inventory pins and reject changed bytes.
-[Catalogue tests](../../../tools/galaxy-field/catalogue.test.mts) check distance
+[Catalogue tests](../../../tests/galaxy-field/catalogue.test.mts) check distance
 modulus scale and Cartesian axes. Runtime setup tests exercise installation,
 verified reuse, manifest mirrors and unsafe paths. The renderer uses 170 field
 elements; that bound does not prove a frame rate.

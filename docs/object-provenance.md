@@ -22,7 +22,7 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
 1. The object source manifest owns input identity, acquisition information,
    credits, rights and optional human-readable source titles and product URLs.
 2. The authored recipe owns the transformation and its parameters. The shared
-   preparation-family bindings in `tools/objects/provenance-recipes.mts` identify
+   preparation-family bindings in `packages/bake/src/objects/provenance/provenance-recipes.ts` identify
    consumed inputs and outputs for each operation.
 3. `prepareAuthoredObject` finalizes provenance after preparing assets, content
    and previews. The write path also finishes CSS bindings, navigation and page
@@ -110,7 +110,7 @@ not certify worldwide imagery coverage or remote availability.
 
 The authored write path finishes CSS bindings, navigation, shared-bank transport,
 page metadata and the descriptor in staging. Only then does
-`tools/objects/publication.mts` publish images, minimaps, prepared JSON and root
+`packages/bake/src/delivery/publication.ts` publish images, minimaps, prepared JSON and root
 metadata together through the existing `writePreparedSet` helper.
 
 A caught write failure restores replaced and retired files and removes newly
@@ -125,7 +125,7 @@ instantaneous multi-file switch for live readers or recovery from process
 termination or power loss.
 
 The publication and prepared-set tests exercise staging, replacement and rollback.
-Use the current tests of `tools/objects/publication.mts` and
+Use the current tests of `packages/bake/src/delivery/publication.ts` and
 `packages/bake/src/delivery/write-prepared-set.ts` (`tests/objects/publication.test.mts`,
 `tests/delivery/write-prepared-set.test.mts`), with their required inputs installed.
 These checks do not replace a visual or scientific oracle.

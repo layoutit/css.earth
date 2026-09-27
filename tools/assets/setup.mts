@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import type { RuntimeAssetLocation } from './runtime-assets.mts';
+import type { RuntimeAssetLocation } from '@cssearth/bake/delivery';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
 const TRANSIENT_RETRIES = 3, RETRY_BACKOFF_MS = 500;
@@ -11,7 +11,7 @@ import { pathToFileURL } from "node:url";
 import { publishSourceBytes } from "@cssearth/bake/delivery";
 import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
 import { ASSET_LOCATIONS, type AssetLocation } from '@cssearth/objects/node';
-import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from "./runtime-assets.mts";
+import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from '@cssearth/bake/delivery';
 
 /** `node tools/assets/setup.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
 export function readAllowMissingFlag(args: readonly string[] = []) {

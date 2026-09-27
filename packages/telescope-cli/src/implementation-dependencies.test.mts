@@ -105,6 +105,26 @@ test('the navigation, surface-preview, preparation and thread-pool libraries are
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the galaxy-field and layered-provenance libraries are followed into their bake sources, as when they sat under tools/', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b4-'));
+  try {
+    const entries = [['@cssearth/bake/galaxy-field', 'packages/bake/src/galaxy-field'], ['@cssearth/bake/objects/provenance', 'packages/bake/src/objects/provenance']] as const;
+    await writeFile(resolve(root, 'entry.mts'), `${entries.map(([specifier], index) => `import { v${index} } from '${specifier}';`).join('\n')}\nexport const used=[${entries.map((_, index) => `v${index}`).join(',')}];\n`);
+    for (const [index, [, directory]] of entries.entries()) {
+      await mkdir(resolve(root, directory), { recursive: true });
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
+      await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    }
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    for (const [index, [, directory]] of entries.entries()) {
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index + 10};\n`);
+      assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, directory);
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the provenance records and the runtime asset closure are followed into @cssearth/objects, as when they sat under src/platform', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-objects-platform-'));
   try {

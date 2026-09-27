@@ -59,13 +59,13 @@ await answerParent(async () => { throw new TypeError('invalid descriptor', { cau
 });
 
 test('the F16 volume bake refuses an invalid descriptor with the class and message of the in-process call', async () => {
-  const fixture = await workspace('', resolve(ROOT, 'tools/objects/dist/prepare-volume.js'));
+  const fixture = await workspace('', resolve(ROOT, 'packages/bake/cli/prepare-volume.mts'));
   try {
     const object = resolve(fixture.directory, 'object');
     await mkdir(object);
     await writeFile(resolve(object, 'object.json'), JSON.stringify({ schema: 'cssearth-object@1', id: 'x', type: 'density-volume', properties: { volume: {}, preparation: { source: 'source/volume.json' } } }));
-    const { prepareDensityVolumeObject } = await import('../../../tools/objects/prepare-volume.ts');
-    const direct = await prepareDensityVolumeObject({ objectDirectory: object }).then(() => undefined, (error: unknown) => error);
+    const [{ prepareDensityVolumeObject }, { inventoryPreparedAssets }] = await Promise.all([import('@cssearth/bake/density'), import('@cssearth/objects/node')]);
+    const direct = await prepareDensityVolumeObject({ objectDirectory: object, inventory: inventoryPreparedAssets }).then(() => undefined, (error: unknown) => error);
     assert.ok(direct instanceof TypeError);
     const { stdout, stderr } = await fixture.run([object]);
     assert.deepEqual(JSON.parse(stdout), { error: { class: 'TypeError', message: direct.message } });
