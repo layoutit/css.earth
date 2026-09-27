@@ -116,7 +116,6 @@
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/objects.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/system-framing.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"tools/prepare/prepare-catalog.mts"},
-      {"from":"packages/renderer/src/volume/loader.test.ts","to":"src/platform/runtime-asset-closure.mts"},
       {"from":"packages/renderer/src/volume/prepared-volume-lenses.test.ts","to":"labs/nebula/packages/volume-viewer/src/scene/cloud-inspection.ts"},
       {"from":"packages/renderer/src/volume/prepared-volume-runtime.test.ts","to":"labs/nebula/packages/volume-viewer/src/scene/tone-resources.ts"},
       {"from":"packages/telescope-cli/src/archives/chandra/archive-ledger.test.mts","to":"tests/objects/source-test.mts"},
