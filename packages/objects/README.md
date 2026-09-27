@@ -35,12 +35,17 @@ application reads the catalogue with it. `@cssearth/objects/node` is the Node-on
 entry for source manifests: their validation, coverage and byte-range checks and the
 portable relative-path rule their entries follow. Nothing else in the package imports
 it. The manifests themselves stay beside each body.
+`@cssearth/objects/node/contract` is a second Node-only entry: the helpers tests use to
+check an object against its contract (its final prepared definition, read from
+`src/objects/<id>/prepared/object.json`, and fixture values required before a test
+inspects them).
 
 ```text
 packages/objects/
 ├── src/           Generic TypeScript implementation and tests
 │   ├── sources/   Source catalogue (`@cssearth/objects/sources`)
 │   └── node/      Source manifests (`@cssearth/objects/node`, Node only)
+│       └── contract/ Object test helpers (`@cssearth/objects/node/contract`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
