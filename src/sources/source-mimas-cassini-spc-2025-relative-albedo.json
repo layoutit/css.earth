@@ -1,0 +1,27 @@
+{
+  "id": "source-mimas-cassini-spc-2025-relative-albedo",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mimas SPC relative-albedo map",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:satellite-mimas.cassini.shape-models-maps:data:mimas_albedo_g::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.xml",
+      "label": "PDS4 source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mimas/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -37,6 +37,10 @@
     "elevation": {
       "title": "SPC terrain model",
       "summary": "Height above or below a 198.2 km sphere, including Mimas's slightly oval shape."
+    },
+    "relative-albedo": {
+      "title": "SPC relative-brightness model",
+      "summary": "Cassini images and the shape model estimate where the surface is brighter or darker than the map average."
     }
   }
 }
