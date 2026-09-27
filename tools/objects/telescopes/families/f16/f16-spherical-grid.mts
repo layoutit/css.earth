@@ -10,7 +10,8 @@ import type { DescriptorMember, ProductDescriptor } from '../../product-descript
 import { descriptor, stable } from '../common.mts';
 import { physicalVolumeEncoding, type PhysicalGridTransfer, type PinnedGridFile } from './f16-cartesian-grid.mts';
 import { STEREO_COR1_F16_PROFILE } from '../../observation-families.mts';
-import { PREPARE_VOLUME_COMMAND, runWorkspaceScript } from '../../workspace-commands.mts';
+import { runWorkspaceScript } from '../../workspace-commands.mts';
+import { PREPARE_VOLUME_COMMAND } from '../../workspace-commands/prepare-volume.mts';
 
 export interface SphericalGridContext {
   readonly profileId: typeof STEREO_COR1_F16_PROFILE;

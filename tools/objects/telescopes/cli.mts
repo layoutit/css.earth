@@ -28,7 +28,8 @@ import { fetchGeminiSource } from './gemini-source.mts';
 import { fetchOpusSource } from './opus-source.mts';
 import { fetchChandraSource } from './chandra-source.mts';
 import { fetchSpitzerSource } from './spitzer-source.mts';
-import { NEW_OBJECT_COMMAND, runWorkspaceCommand } from './workspace-commands.mts';
+import { runWorkspaceCommand } from './workspace-commands.mts';
+import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
 

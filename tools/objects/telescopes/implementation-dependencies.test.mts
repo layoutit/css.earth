@@ -124,3 +124,18 @@ test('the shared object libraries are followed into their bake sources, as when 
     }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('a workspace command the operation runs as a process is followed into its source, as when the operation imported it', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-dispatch-'));
+  try {
+    await mkdir(resolve(root, 'workspace-commands'), { recursive: true });
+    await writeFile(resolve(root, 'entry.mts'), "import { BAKE } from './workspace-commands/bake.mts'; export const run = BAKE;\n");
+    await writeFile(resolve(root, 'workspace-commands/bake.mts'), "export const BAKE = { script: 'dist/bake.js', source: 'bake.mts' };\n");
+    await writeFile(resolve(root, 'bake.mts'), "import { step } from './step.mts'; export const bake = step;\n");
+    await writeFile(resolve(root, 'step.mts'), 'export const step = 1;\n');
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['bake.mts', 'entry.mts', 'step.mts', 'workspace-commands/bake.mts']);
+    await writeFile(resolve(root, 'step.mts'), 'export const step = 2;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

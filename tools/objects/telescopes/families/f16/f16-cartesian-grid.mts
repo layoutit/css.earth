@@ -8,7 +8,8 @@ import {encodeDensityKtx2} from '@cssearth/bake/density';
 import type {FamilyHandler,FamilyOperation} from '../../family-handlers.mts';
 import type {DescriptorMember,ProductDescriptor} from '../../product-descriptor.mts';
 import {descriptor,stable} from '../common.mts';
-import { PREPARE_VOLUME_COMMAND, runWorkspaceScript } from '../../workspace-commands.mts';
+import { runWorkspaceScript } from '../../workspace-commands.mts';
+import { PREPARE_VOLUME_COMMAND } from '../../workspace-commands/prepare-volume.mts';
 
 export interface PinnedGridFile {readonly path:string}
 /** This declaration is deliberately required: XYZ labels alone do not establish physical meaning. */

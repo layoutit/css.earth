@@ -5,10 +5,9 @@ import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
 
-/** `telescope new-object`: the object generator and the bake it hands its objects to. */
-export const NEW_OBJECT_COMMAND = 'tools/objects/new-object/cli.mts';
-/** The built density-volume preparation, as `#preparation/prepare-volume` resolves it. */
-export const PREPARE_VOLUME_COMMAND = 'tools/objects/dist/prepare-volume.js';
+/** A workspace entry: the script the telescope runs, and the source that script is built from. Each is declared in its own
+ * `workspace-commands/<name>.mts`, which an implementation identity follows into `source`. */
+export interface WorkspaceCommand { readonly script: string; readonly source: string }
 /** The exit code of an entry that failed with an error, whose stdout then holds only `workspaceCommandFailure(error)`. */
 export const WORKSPACE_COMMAND_FAILED = 70;
 
@@ -29,8 +28,8 @@ function raised(text: string): Error {
 
 /** Run a workspace entry with the telescope's own Node. Its stderr is the telescope's; its stdout is returned as the result
  * text, and with `output: 'stderr'` it goes to stderr too, as the telescope keeps instrument logging off stdout. */
-export async function runWorkspaceCommand(root: string, script: string, args: readonly string[], { output = 'text' }: { readonly output?: 'text' | 'stderr' } = {}): Promise<{ text: string; code: number }> {
-  const child = spawn(process.execPath, [resolve(root, script), ...args], { cwd: root, stdio: ['inherit', output === 'text' ? 'pipe' : 2, 2] });
+export async function runWorkspaceCommand(root: string, command: WorkspaceCommand, args: readonly string[], { output = 'text' }: { readonly output?: 'text' | 'stderr' } = {}): Promise<{ text: string; code: number }> {
+  const child = spawn(process.execPath, [resolve(root, command.script), ...args], { cwd: root, stdio: ['inherit', output === 'text' ? 'pipe' : 2, 2] });
   let text = '';
   child.stdout?.setEncoding('utf8').on('data', (chunk: string) => { text += chunk; });
   const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => accept(status ?? (signal === 'SIGINT' ? 130 : 143))); });
@@ -39,7 +38,7 @@ export async function runWorkspaceCommand(root: string, script: string, args: re
 }
 
 /** Run a workspace entry whose result is the files it writes; a non-zero exit is an error. */
-export async function runWorkspaceScript(root: string, script: string, args: readonly string[]): Promise<void> {
-  const { code } = await runWorkspaceCommand(root, script, args, { output: 'stderr' });
-  if (code !== 0) throw new Error(`${script} ${args.join(' ')} exited with ${code}.`);
+export async function runWorkspaceScript(root: string, command: WorkspaceCommand, args: readonly string[]): Promise<void> {
+  const { code } = await runWorkspaceCommand(root, command, args, { output: 'stderr' });
+  if (code !== 0) throw new Error(`${command.script} ${args.join(' ')} exited with ${code}.`);
 }
