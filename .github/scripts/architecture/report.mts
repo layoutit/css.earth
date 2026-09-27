@@ -8,7 +8,7 @@ import { cycleClosingEdges, folderCycles, folderGraph, folderStats, layerOrder }
 import { buildImportGraph } from './graph.mts';
 import { LAYER_RULES } from './rules.mts';
 
-const UPDATE_HINT = 'Run `pnpm check:architecture --update-baseline` and commit tools/ci/architecture/baseline.json.';
+const UPDATE_HINT = 'Run `pnpm check:architecture --update-baseline` and commit .github/scripts/architecture/baseline.json.';
 const ADDED_EDGE_LIMIT = 20;
 const imports = (edges: readonly { imports: number }[]) => edges.reduce((sum, edge) => sum + edge.imports, 0);
 

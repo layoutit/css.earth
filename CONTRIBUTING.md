@@ -205,7 +205,7 @@ from. It groups the files into folders and fails when a change adds:
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 
 Type-only imports count. Existing cases are listed in
-`tools/ci/architecture/baseline.json`, so they do not fail the check. If the
+`.github/scripts/architecture/baseline.json`, so they do not fail the check. If the
 check reports that something got better, or that a change looks like a rename,
 run `pnpm check:architecture --update-baseline` and commit the baseline. It needs
 every source file on disk and the shared packages built (`pnpm install` does

@@ -159,7 +159,7 @@ jobs:
         run: node .github/scripts/ci/build-ci.mts lint
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
-        # tools/ci/architecture/baseline.json does not record. It reads every source file this sparse tree keeps, so a
+        # .github/scripts/architecture/baseline.json does not record. It reads every source file this sparse tree keeps, so a
         # missing one stops it as incomplete rather than passing. About three seconds.
         run: pnpm check:architecture
       - name: Test the shared object libraries
