@@ -12,7 +12,7 @@
       "configuration": "ACS/WFC",
       "records": "wide-field pictures, 0.35–1.1 µm",
       "draws": "pictures of galaxies, nebulae and Solar System bodies",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [],
       "checked": [],
       "archiveFinal": {
@@ -27,7 +27,7 @@
       "configuration": "ACS/HRC",
       "records": "high-resolution pictures and slitless spectra",
       "draws": "pictures of small bodies",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [
         "beta-pictoris-9987",
         "beta-pictoris-9987-short"
@@ -48,7 +48,7 @@
       "configuration": "ACS/SBC",
       "records": "far-ultraviolet pictures and prism spectra",
       "draws": "aurorae and gas around a body",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [
         "europa-11085"
       ],
@@ -67,7 +67,7 @@
       "configuration": "WFC3/UVIS",
       "records": "pictures, 0.2–1 µm",
       "draws": "pictures of planets, moons and nebulae",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [
         "europa-15419"
       ],
@@ -86,7 +86,7 @@
       "configuration": "WFC3/IR",
       "records": "pictures and slitless spectra, 0.8–1.7 µm",
       "draws": "pictures; exoplanet transit spectra",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [],
       "checked": [],
       "archiveFinal": {
@@ -101,7 +101,7 @@
       "configuration": "STIS/CCD",
       "records": "spectra and pictures, 0.2–1 µm",
       "draws": "surface and atmosphere spectra",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [
         "europa-14650",
         "europa-15419"
@@ -122,7 +122,7 @@
       "configuration": "STIS/NUV-MAMA",
       "records": "near-ultraviolet spectra and pictures",
       "draws": "ultraviolet spectra of a body",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [],
       "checked": [],
       "archiveFinal": {
@@ -137,7 +137,7 @@
       "configuration": "STIS/FUV-MAMA",
       "records": "far-ultraviolet spectra and pictures",
       "draws": "aurorae and escaping gas",
-      "tool": "tools/objects/hst/calibrate.mts",
+      "tool": "packages/telescope-cli/src/archives/hst/calibrate.mts",
       "programs": [
         "europa-13040"
       ],

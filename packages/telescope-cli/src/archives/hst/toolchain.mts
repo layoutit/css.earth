@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { readToolchainDescriptor } from '@cssearth/telescope-cli/archives/toolchain-descriptor';
+import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 /** Install and locate the pinned HST calibration environment of toolchain.json under output/toolchains/hst (ignored by git).
  *
- *   node tools/objects/hst/toolchain.mts install
- *   node tools/objects/hst/toolchain.mts verify
+ *   node packages/telescope-cli/src/archives/hst/toolchain.mts install
+ *   node packages/telescope-cli/src/archives/hst/toolchain.mts verify
  *
  * micromamba creates Python and hstcal from conda-forge; hstcal carries the instrument pipelines as the executables STScI ships
  * them (cs0.e is calstis, calwf3.e, calacs.e). pip then installs requirements.lock, every package at its pinned version, without
@@ -13,23 +13,25 @@ import { readToolchainDescriptor } from '@cssearth/telescope-cli/archives/toolch
  * Reference files are not part of the environment: CRDS fetches the ones a pinned context selects into the cache under this
  * root the first time a calibration runs (calibrate.mts). */
 import { spawnSync } from 'node:child_process';
-import { runToolchainProcess } from '@cssearth/telescope/node';
+import { runToolchainProcess, WORKSPACE } from '@cssearth/telescope/node';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-const repository = resolve(import.meta.dirname, '../../..');
+const repository = WORKSPACE;
+/** The toolchain's pins (descriptor and lock) stay in the checkout beside the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'tools/objects/hst');
 export const HST_ROOT = resolve(repository, 'output/toolchains/hst');
 
 export async function installHst() {
-  const { entry, digest } = await readToolchainDescriptor(import.meta.dirname), prefix = resolve(HST_ROOT, 'env');
+  const { entry, digest } = await readToolchainDescriptor(PINS), prefix = resolve(HST_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(HST_ROOT, { recursive: true, force: true });
   await mkdir(HST_ROOT, { recursive: true });
   const env = { MAMBA_ROOT_PREFIX: resolve(HST_ROOT, 'mamba') };
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(import.meta.dirname, requireString(entry.requirements))]);
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
   await rm(resolve(HST_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(HST_ROOT, 'installed.json'), `${JSON.stringify({ id: 'hst', pinsSha256: digest }, null, 2)}\n`);
   return HST_ROOT;
@@ -41,9 +43,9 @@ export interface HstToolchain { readonly python: string; readonly binaries: Read
  * cache of its own and the pinned context, so reference files are the ones that context selects. `bin` is on PATH because
  * stistools, wfc3tools and acstools spawn the executables by name. Refuses a missing install or one built from other pins. */
 export async function hstToolchain(crdsContext: string): Promise<HstToolchain> {
-  const { entry, digest } = await readToolchainDescriptor(import.meta.dirname), bin = resolve(HST_ROOT, 'env/bin');
+  const { entry, digest } = await readToolchainDescriptor(PINS), bin = resolve(HST_ROOT, 'env/bin');
   const marker = await readFile(resolve(HST_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The HST toolchain is not installed: node tools/objects/hst/toolchain.mts install');
+  if (!marker) throw new Error('The HST toolchain is not installed: node packages/telescope-cli/src/archives/hst/toolchain.mts install');
   if (marker.pinsSha256 !== digest) throw new Error('The HST toolchain was installed from other pins; reinstall it.');
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {

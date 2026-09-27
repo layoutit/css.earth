@@ -4,7 +4,7 @@
  * still far brighter than a debris disc; a star of similar colour observed behind the same occulter in the same orbit sequence
  * carries the same pattern, and scaled and shifted onto the science star it removes it.
  *
- *   node tools/objects/hst/psf-subtract.mts <subtraction id> <work directory> [--raw <dir>]...
+ *   node packages/telescope-cli/src/archives/hst/psf-subtract.mts <subtraction id> <work directory> [--raw <dir>]...
  *
  * The subtraction is described by `programs/<id>.psf-subtraction.json`: the pinned HST program, and for each filter the science
  * observations at each telescope roll and the reference star's, each a long and a shorter association. Every association is

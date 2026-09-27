@@ -9,13 +9,13 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { PROGRAMS } from './archive.mts';
+import { PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
 import { overlapAgreement, readReferenceSpectrum, scanPath, strongest } from './slit-scan-map.mts';
 import {
   acrossSlitCentre, acrossSlitSign, addFeatureless, apertureOffset, bandFromReflectance, bandStrength, discChord,
   featurelessMean, newFeatureless, parseSlitScan, polynomialFit, quantiles, ratioAgainst, referenceFlux, reflectance,
   scanImage, skyOffset, type ReferenceSpectrum, type ScanBand, type ScanReduction, type SlitScanDefinition,
-} from './slit-scan-reduction.mts';
+} from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';
 
 const REDUCTION: ScanReduction = { skyRowsFromDisc: [40, 110], discProfileWindowAngstrom: [4000, 5500], discEdgeFraction: 0.5,
   rowSearchPixels: 25, minimumHalfChordArcsec: 0.15, acrossSlitSearchArcsec: 0.3, acrossSlitStepArcsec: 0.002, imageHalfWidthRadii: 2.5 };

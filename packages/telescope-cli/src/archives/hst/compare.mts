@@ -2,7 +2,7 @@
 import { sampleStatistics, type FitsHeader } from '@cssearth/fits';
 /** Compare the re-run products of an observation with the archive's own, sample by sample: the oracle for calibrate.mts.
  *
- *   node tools/objects/hst/compare.mts <program id> <observation> <run directory> [--raw <dir>]...
+ *   node packages/telescope-cli/src/archives/hst/compare.mts <program id> <observation> <run directory> [--raw <dir>]...
  *
  * Every pinned product the run also wrote is compared. Both files are read with this repository's FITS reader, and the two
  * must be on one grid: an image extension of the same shape, a table of the same rows and columns. A different shape is not
@@ -24,14 +24,14 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '@cssearth/bake/objects/raster';
-import { mastFile } from '@cssearth/telescope/node';
+import { mastFile, WORKSPACE } from '@cssearth/telescope/node';
 import { addProductEvidence } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductRecord } from '@cssearth/telescope';
 import { PROGRAMS, suffixOf } from './archive.mts';
 import { readHstProgram } from './calibrate.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 
 /** A product's own account of how it was made; a reproduction that differs starts here. */
 const RUN_CARDS = ['CAL_VER', 'OPUS_VER', 'PROCTIME', 'FILENAME', 'DATE'];

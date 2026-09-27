@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run an HST instrument's own pipeline from the raw exposure of a pinned observation.
  *
- *   node tools/objects/hst/calibrate.mts <program id> <observation> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
+ *   node packages/telescope-cli/src/archives/hst/calibrate.mts <program id> <observation> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
  *
  * The pinned inputs are taken from a --raw directory that already holds them or downloaded from MAST, each at its pinned size
  * and digest; a digest missing from the program is measured and written back. They are copied into <work>/run, because the

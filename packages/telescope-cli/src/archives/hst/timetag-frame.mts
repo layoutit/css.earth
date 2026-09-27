@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Rebuild one STIS TIME-TAG exposure in a moving target's own rest frame.
  *
- *   node tools/objects/hst/timetag-frame.mts <definition id> <files directory> <output directory> [--fetch] [--receipt]
+ *   node packages/telescope-cli/src/archives/hst/timetag-frame.mts <definition id> <files directory> <output directory> [--fetch] [--receipt]
  *
  * A MAMA detector in TIME-TAG mode records a position and a time for every photon. When the telescope follows a body that
  * moves, and a drift is commanded on top of that to spread detector blemishes out, the body wanders across the detector and
@@ -300,7 +300,7 @@ export function timeTagProduct(run: TimeTagRun): Buffer {
     ['NEVENTS', run.eventsPlaced, 'TIME-TAG events counted on this grid'],
     ['DRIFTPIX', run.driftPixels, 'detector pixels the target moved'],
     ['GEOCORR', 'OMIT', 'detector geometric distortion is not corrected'],
-    ['STACKID', definition.id], ['ORIGIN', 'cssEarth tools/objects/hst/timetag-frame.mts'],
+    ['STACKID', definition.id], ['ORIGIN', 'cssEarth packages/telescope-cli/src/archives/hst/timetag-frame.mts'],
   ];
   const extension = (values: Float64Array, name: string, unit: string, note: string) => {
     const data = Buffer.alloc(values.length * 4);
@@ -351,7 +351,7 @@ export function timeTagPicture(run: TimeTagRun): Buffer {
     // The crop is centred, so the target stands at continuous `crop.size / 2` in it and FITS names that place one further on.
     ['CRPIX1', crop.size / 2 + 0.5, 'the target at mid-exposure'], ['CRPIX2', crop.size / 2 + 0.5], ['CRVAL1', run.place.rightAscensionDegrees], ['CRVAL2', run.place.declinationDegrees],
     ['CD1_1', -degreesPerPixel, 'east is left'], ['CD1_2', 0], ['CD2_1', 0], ['CD2_2', degreesPerPixel, 'north is up'],
-    ['KMPERPIX', definition.grid.kmPerPixel, 'km at the target'], ['BODYRPIX', run.radiusGridPixels, 'pixels, the target radius on this grid'], ['STACKID', definition.id], ['ORIGIN', 'cssEarth tools/objects/hst/timetag-frame.mts']]), padBlock(data)]);
+    ['KMPERPIX', definition.grid.kmPerPixel, 'km at the target'], ['BODYRPIX', run.radiusGridPixels, 'pixels, the target radius on this grid'], ['STACKID', definition.id], ['ORIGIN', 'cssEarth packages/telescope-cli/src/archives/hst/timetag-frame.mts']]), padBlock(data)]);
 }
 
 export async function writeProducts(run: TimeTagRun, outputDirectory: string): Promise<readonly string[]> {

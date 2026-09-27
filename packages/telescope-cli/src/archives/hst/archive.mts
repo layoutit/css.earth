@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Find an HST observation's files on MAST and pin them as an HST program.
  *
- *   node tools/objects/hst/archive.mts <program id> <crds context> <obs_id> [<obs_id> ...]
+ *   node packages/telescope-cli/src/archives/hst/archive.mts <program id> <crds context> <obs_id> [<obs_id> ...]
  *
  * For each observation (e.g. od9l12010) the program records the raw exposures and the files the instrument pipeline reads
  * beside them (`_wav` wavecal, `_asn` association, `_spt` support, `_jit` jitter), and the calibrated products the archive
@@ -28,9 +28,10 @@ import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { binaryTable, numbers, tableColumn, text as cell } from '@cssearth/bake/objects/raster';
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile } from '@cssearth/telescope/node';
+import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/hst/programs');
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** What an instrument pipeline reads: the raw exposure, and the wavecal, association, support and jitter files beside it. */
 export const INPUT_KINDS = ['RAW', 'WAV', 'ASN', 'SPT', 'JIT'] as const;

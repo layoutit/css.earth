@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -7,15 +7,15 @@ import { join } from 'node:path';
 import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '@cssearth/bake/objects/raster';
 import { parseHstProgram, PROGRAMS, suffixOf } from './archive.mts';
 import { HST_CONFIGURATIONS, isNotAnObject, hubbleLedgerGuide, matchTarget, parseHubbleLedger, repositoryState, HST_LEDGER } from './archive-ledger.mts';
-import type { NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
+import type { NamedShippedObject as ShippedObject } from '../targets.mts';
 import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
 import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
 import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from './compare.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { readHstFileHdus } from './product-file.mts';
 
-const REPOSITORY = join(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 const file = (name: string, bytes = 1000) => ({ name, uri: `mast:HST/product/${name}`, bytes });
 const program = (overrides: Record<string, unknown> = {}) => ({
   schema: 'cssearth-hst-program@1', id: 'test', programme: '14650', target: 'EUROPA-45', crdsContext: 'hst_1358.pmap',

@@ -2,7 +2,7 @@
 /** The Hubble ledger: what the public archive holds in each instrument configuration, which of it this repository can already
  * re-calibrate, and which of the objects it ships Hubble has observed.
  *
- *   node tools/objects/hst/archive-ledger.mts [--write] [--local]
+ *   node packages/telescope-cli/src/archives/hst/archive-ledger.mts [--write] [--local]
  *
  * Read only against MAST. Hubble's archive is a hundred times the size of a single programme's listing — about 1.5 million
  * observations — so nothing is listed that can be counted. Each configuration's total is a server-side COUNT_BIG, and the
@@ -34,8 +34,8 @@ import { runDigest } from '@cssearth/telescope/node';
 import { parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
-import { isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
-import { namedShippedObjects, normaliseTargetName, readJsonOrNull, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
+import { isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
+import { namedShippedObjects, normaliseTargetName, readJsonOrNull, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '../targets.mts';
 
 
 /** The two capabilities a configuration has, which are never one capability.
@@ -52,7 +52,7 @@ import { namedShippedObjects, normaliseTargetName, readJsonOrNull, targetNameInd
  * products with no raw exposure behind it. */
 export const recalibrationTool = (configuration: string): string | null => {
   const [instrument, detector] = configuration.split('/');
-  return instrument !== undefined && detector !== undefined && PIPELINES[instrument] ? 'tools/objects/hst/calibrate.mts' : null;
+  return instrument !== undefined && detector !== undefined && PIPELINES[instrument] ? 'packages/telescope-cli/src/archives/hst/calibrate.mts' : null;
 };
 
 /** MAST's HST configurations (CAOM's instrument_name) and what each records. What can be done with them is derived. */
@@ -390,7 +390,7 @@ export function hubbleLedgerGuide(ledger: Ledger): string {
   const lines = [
     '# Hubble ledger',
     '',
-    `What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [\`archive-ledger.mts\`](../tools/objects/hst/archive-ledger.mts) from MAST on ${ledger.archiveDate}; the routes it checks are in [Hubble](hubble.md).`,
+    `What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [\`archive-ledger.mts\`](archive-ledger.mts) from MAST on ${ledger.archiveDate}; the routes it checks are in [Hubble](hubble.md).`,
     '',
     `The collection holds ${thousands(ledger.observations.collection)} public observations. The configurations below account for ${thousands(ledger.observations.counted)}; ${thousands(ledger.observations.other)} are in configurations this file does not name. ${thousands(ledger.observations.moving)} observations are of moving targets, which is the Solar System.`,
     '',

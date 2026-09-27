@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** The archive's own final product of an observation a retired instrument took, pinned and read here.
  *
- *   node tools/objects/hst/archive-final.mts <program id> <work directory> [--raw <dir>]...
+ *   node packages/telescope-cli/src/archives/hst/archive-final.mts <program id> <work directory> [--raw <dir>]...
  *
  * Hubble's retired instruments cannot be re-calibrated here: their pipelines are not in the pinned toolchain, and STScI has
  * frozen their calibration. That is one fact about this repository. It is not the same fact as whether usable observations
@@ -48,13 +48,13 @@ import { sha256File } from '@cssearth/core/node';
 import { positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { mastFile, mastRequest, type MastFile } from '@cssearth/telescope/node';
+import { mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
 import { assertInputPins, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 export const ARCHIVE_FINAL_SCHEMA = 'cssearth-hst-archive-final@1';
 /** The stage a product record carries for a file this repository did not make. */
 export const ARCHIVE_FINAL_STAGE = 'archive-final';

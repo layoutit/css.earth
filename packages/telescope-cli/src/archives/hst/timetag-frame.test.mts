@@ -2,7 +2,7 @@
  * an archive product: the synthetic exposure below is a few thousand events around a dark disc that drifts, written into a
  * FITS file with the same two tables a STIS TIME-TAG product carries. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -10,13 +10,14 @@ import { resolve } from 'node:path';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { readFitsHdus, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { centredCrop, readEventsFile, streamEvents, timeTagPicture, timeTagProduct, type TimeTagRun } from './timetag-frame.mts';
+import { WORKSPACE } from '@cssearth/telescope/node';
 import {
   azimuthalRatio, backgroundSurface, boxSums, findDisc, goodTimeIntervals, gridLatitudeDegrees, gridRadii, inGoodTime,
   limbStatistics, liveSeconds, parseTimeTagDefinition, quadraticFit, restFramePixel, significanceBins, sliceLiveSeconds,
   spanSeconds, type TimeTagSector,
 } from './timetag-reduction.mts';
 
-const PINNED = resolve(import.meta.dirname, 'programs/europa-transit-2014-01-26.timetag.json');
+const PINNED = resolve(WORKSPACE, 'tools/objects/hst/programs/europa-transit-2014-01-26.timetag.json');
 const definition = parseTimeTagDefinition(JSON.parse(await readFile(PINNED, 'utf8')));
 
 test('the pinned definition parses, and names the file, the target and the claim it is about', () => {

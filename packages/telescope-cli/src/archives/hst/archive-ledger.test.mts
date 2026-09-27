@@ -1,7 +1,7 @@
 /** What a Hubble receipt has to say for the configuration it names to count as re-calibrated. Everything here runs against a
  * scratch copy of the pinned programs, so nothing asks MAST anything. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -65,7 +65,7 @@ test('a receipt is read as the external value it is', () => {
 
 test('every receipt beside the pinned programs is accepted', async () => {
   const { problems } = await repositoryReceipts();
-  assert.deepEqual(problems, [], 'run node tools/objects/hst/archive-ledger.mts --local');
+  assert.deepEqual(problems, [], 'run node packages/telescope-cli/src/archives/hst/archive-ledger.mts --local');
 });
 
 /** A scratch repository holding one archive-final program and whatever record a case writes beside it. */
@@ -86,7 +86,7 @@ test('an instrument whose pipeline is retired can still be qualified on the arch
     // The two capabilities never bleed into one another: nothing was re-calibrated on HRS/1 and no pipeline for it exists here.
     assert.equal(configurations.get('HRS/1'), undefined, 'an archive-final program is not a pinned re-calibration program');
     assert.equal(recalibrationTool('HRS/1'), null);
-    assert.equal(recalibrationTool('WFC3/IR'), 'tools/objects/hst/calibrate.mts', 'a pipeline that is installed is named even where nothing has been run on it');
+    assert.equal(recalibrationTool('WFC3/IR'), 'packages/telescope-cli/src/archives/hst/calibrate.mts', 'a pipeline that is installed is named even where nothing has been run on it');
     assert.equal(recalibrationTool('STIS'), null, 'a configuration with no detector is a product of products, with no raw exposure behind it');
   } finally { await rm(root, { recursive: true, force: true }); }
 });

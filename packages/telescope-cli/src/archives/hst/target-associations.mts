@@ -3,9 +3,9 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource } from '@cssearth/telescope/node';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource, WORKSPACE } from '@cssearth/telescope/node';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+const ROOT = WORKSPACE;
 export const TARGET_ASSOCIATIONS = resolve(ROOT, 'data/telescopes/target-associations.json');
 
 export async function verifyHstTargetAssociations(sources: readonly TargetAssociationSource[]) {

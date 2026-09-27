@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run AstroDrizzle on a re-calibrated exposure, with the settings the archive's own drizzled product records.
  *
- *   node tools/objects/hst/drizzle.mts <program id> <observation> <work directory> [--max-rss-gib <n>]
+ *   node packages/telescope-cli/src/archives/hst/drizzle.mts <program id> <observation> <work directory> [--max-rss-gib <n>]
  *
  * This is not the instrument pipeline. `_drz` and `_drc` are made after it, by drizzlepac, from the `_flt`/`_flc` the pipeline
  * wrote; so the inputs here are the re-run's own products (calibrate.mts), and the settings are read from the archive's

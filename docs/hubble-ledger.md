@@ -1,6 +1,6 @@
 # Hubble ledger
 
-What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [`archive-ledger.mts`](../tools/objects/hst/archive-ledger.mts) from MAST on 2026-09-22; the routes it checks are in [Hubble](hubble.md).
+What Hubble's public archive holds, what this repository can re-calibrate from raw, whose archive-final products it has pinned and read, and which of the objects it ships Hubble has observed. Written by [`archive-ledger.mts`](archive-ledger.mts) from MAST on 2026-09-22; the routes it checks are in [Hubble](hubble.md).
 
 The collection holds 1,493,155 public observations. The configurations below account for 1,492,205; 950 are in configurations this file does not name. 51,505 observations are of moving targets, which is the Solar System.
 

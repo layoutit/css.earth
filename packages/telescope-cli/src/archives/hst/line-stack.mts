@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Stack STIS long-slit line images of a moving Solar System target in the target's own frame.
  *
- *   node tools/objects/hst/line-stack.mts <stack id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
+ *   node packages/telescope-cli/src/archives/hst/line-stack.mts <stack id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
  *
  * A G140L exposure through the 52X2 slit holds a picture of a small body at every emission line: along the slit the body is
  * resolved, and at a line narrow enough the across-slit axis is a picture too. This stage takes every such exposure a
@@ -207,7 +207,7 @@ export function stackProduct(definition: LineStackDefinition, set: StackSet, han
     ['BODYRAD', definition.bodyRadiusKm, 'km, the radius one unit stands for'],
     ['ORIENT', 'body north up, celestial east left'], ['HANDEDNS', handedness, 'image +x of the exposure on the sky'],
     ['NFRAMES', new Set(set.accumulator.frames).size], ['EXPTIME', set.accumulator.exposureSeconds, 'seconds, summed over the frames'],
-    ['STACKID', definition.id], ['ORIGIN', 'cssEarth tools/objects/hst/line-stack.mts'],
+    ['STACKID', definition.id], ['ORIGIN', 'cssEarth packages/telescope-cli/src/archives/hst/line-stack.mts'],
   ];
   return Buffer.concat([
     headerBlock([['SIMPLE', true, 'conforms to FITS standard'], ['BITPIX', 8], ['NAXIS', 0], ['EXTEND', true], ...cards]),
@@ -234,7 +234,7 @@ export function measureSet(definition: LineStackDefinition, set: StackSet): SetM
 export async function lineStackSoftware(): Promise<ProductSoftware[]> {
   const sources = await Promise.all(['line-stack.mts', 'line-stack-reduction.mts', 'line-stack-ephemeris.mts']
     .map(name => readFile(resolve(import.meta.dirname, name))));
-  return [{ name: 'cssearth tools/objects/hst/line-stack.mts', version: sha256(Buffer.concat(sources)) }];
+  return [{ name: 'cssearth packages/telescope-cli/src/archives/hst/line-stack.mts', version: sha256(Buffer.concat(sources)) }];
 }
 
 /** What identifies one stacked set: the frames that went into this one at their pinned sizes and digests, the definition and

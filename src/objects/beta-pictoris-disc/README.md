@@ -33,7 +33,7 @@ The tangent share is the fraction of a midplane column's light that lies within 
 
 ## The Hubble colour lens
 
-The archive's ACS/HRC products still carry the star. [`psf-subtract.mts`](../../../tools/objects/hst/psf-subtract.mts) removes it, as described in the [Hubble guide](../../../docs/hubble.md#a-coronagraphs-starlight-removed):
+The archive's ACS/HRC products still carry the star. [`psf-subtract.mts`](../../../packages/telescope-cli/src/archives/hst/psf-subtract.mts) removes it, as described in the [Hubble guide](../../../docs/hubble.md#a-coronagraphs-starlight-removed):
 
 1. All 18 associations of programme 9987 are recalibrated from raw with calacs. The re-run of `j8qj15060` matches the archive's combined product, 72% of samples bit-identical, the largest relative difference 1.5e-5.
 2. Alpha Pictoris, the reference star, is divided by the flux ratios Golimowski et al. state, 1.65, 1.75 and 1.90 in F435W, F606W and F814W, and shifted onto Beta Pic. Only the shift is fitted: 0.6 to 0.9 pixel, against the paper's 0.8.
@@ -50,11 +50,11 @@ Nothing is drawn within 1.5 arcseconds (29 au), where Golimowski et al. find the
 
 Runs of 2026-09-22, this version:
 
-- `node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst` made the six ACS products, pinned by digest in the recipe; each has its product record beside it.
-- `node tools/objects/hst/compare.mts beta-pictoris-9987 j8qj15060 …` wrote the archive comparison receipts in `tools/objects/hst/programs/`.
+- `node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst` made the six ACS products, pinned by digest in the recipe; each has its product record beside it.
+- `node packages/telescope-cli/src/archives/hst/compare.mts beta-pictoris-9987 j8qj15060 …` wrote the archive comparison receipts in `tools/objects/hst/programs/`.
 - `node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc` solved all three lenses; the two older lenses reproduced their previous errors exactly.
 - `node tools/objects/circumstellar/author.mts beta-pictoris-disc` measured all three lenses (numbers above).
-- [`edge-on-disc.test.mts`](../../../tools/objects/circumstellar/edge-on-disc.test.mts): a synthetic edge-on disc's midplane is recovered from its own projection; the ridge stays on the main disc beside a tilted secondary one; a deposited array read north up and east left puts a north-east source north-east. [`psf-subtract.test.mts`](../../../tools/objects/hst/psf-subtract.test.mts): every association the subtraction names is pinned through its band on its star, and a missing or impossible flux ratio is refused.
+- [`edge-on-disc.test.mts`](../../../tools/objects/circumstellar/edge-on-disc.test.mts): a synthetic edge-on disc's midplane is recovered from its own projection; the ridge stays on the main disc beside a tilted secondary one; a deposited array read north up and east left puts a north-east source north-east. [`psf-subtract.test.mts`](../../../packages/telescope-cli/src/archives/hst/psf-subtract.test.mts): every association the subtraction names is pinned through its band on its star, and a missing or impossible flux ratio is refused.
 
 ## Known problems
 
