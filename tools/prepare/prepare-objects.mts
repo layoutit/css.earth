@@ -18,11 +18,13 @@ export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEv
 }
 
 import cwebpPath from "cwebp-bin";
-import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../cli/run-implemented-objects.mts";
 import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
+import { readPreparedObjects } from "@cssearth/objects/node";
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
 const sharedSteps = ["cli/prepare-shell-titles.mts", "cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";

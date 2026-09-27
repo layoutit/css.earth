@@ -5,7 +5,7 @@ import type { LeafImagePixels } from './projector.ts';
 
 export interface LeafImageSources {
   objectId: string; profile: GeometryProfile; raster: RasterRecipe;
-  /** The prepared lens controls (content/lenses.ts): every lens names its surface and pole images. */
+  /** The prepared lens controls (`@cssearth/bake/objects/content`, lenses.ts): every lens names its surface and pole images. */
   lenses: unknown;
   /** The prepared cutaway images (preparation/raster/interior.ts); required with a cutaway. */
   interior?: unknown;

@@ -29,6 +29,9 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/scene': 'src/objects/scene/index.ts',
     'nebula': 'src/nebula/index.ts',
     'objects/sources': 'src/objects/sources/index.ts',
+    'objects/charts': 'src/objects/charts/index.ts',
+    'objects/content': 'src/objects/content/index.ts',
+    'objects/surface-features': 'src/objects/surface-features/index.ts',
     'objects/layers/observation': 'src/objects/layers/observation/index.ts',
     'objects/layers/shape-model': 'src/objects/layers/shape-model/index.ts',
     'objects/layers/cutaway': 'src/objects/layers/cutaway/index.ts',
@@ -37,7 +40,12 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/layers/observed-surfaces': 'src/objects/layers/observed-surfaces/index.ts',
     'objects/layers/paged-ellipsoid': 'src/objects/layers/paged-ellipsoid/index.ts',
     'objects/layers/terrestrial': 'src/objects/layers/terrestrial/index.ts',
-    'runtime-source': 'src/runtime-source/index.ts' }
+    'objects/stellar': 'src/objects/stellar/index.ts',
+    'runtime-source': 'src/runtime-source/index.ts',
+    'prepared-presentation': 'src/prepared-presentation/index.ts',
+    'delivery': 'src/delivery/index.ts',
+    'sources': 'src/sources/index.ts',
+    'contract': 'src/contract/index.ts' }
 
 /** Declarations come from one `tsc` pass over the sources (`tsconfig.build.json`, emitted per file under `dist/types/`),
  * not tsup's `dts`: its rollup bundling of every entry in one worker grew past Node's default heap as topics were added,

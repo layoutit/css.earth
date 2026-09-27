@@ -29,7 +29,11 @@
     "src/cluster-catalog",
     "src/world-context",
     "src/nebula",
-    "src/runtime-source"
+    "src/runtime-source",
+    "src/prepared-presentation",
+    "src/delivery",
+    "src/sources",
+    "src/contract"
   ],
   "exclude": [
     "src/**/*.test.ts"

@@ -14,7 +14,7 @@ import { validateObjectProvenance } from '../../src/platform/object-provenance.m
 import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '../../src/platform/object-provenance.mts';
 import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import { manifestSources } from '../sources/context-source-records.mts';
 import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';

@@ -8,7 +8,8 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { publishSourceBytes } from "./source-acquisition.mts";
+import { publishSourceBytes } from "@cssearth/bake/delivery";
+import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
 import { ASSET_LOCATIONS, type AssetLocation } from "../../src/platform/runtime-asset-closure.mts";
 import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from "./runtime-assets.mts";
 
@@ -119,11 +120,12 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  */
 export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string) {
   // A deploy runs setup before `pnpm build:tools` writes the scene catalogue; its second setup run derives the files.
-  if (!existsSync(new URL("../../site/prepared-object-catalog.mts", import.meta.url))) {
+  const checkout = resolve(import.meta.dirname, "../..");
+  if (Object.values(PREPARED_CATALOGUE).some(path => !existsSync(resolve(checkout, path)))) {
     console.log("Derived page data not written: the scene catalogue is not generated. Run pnpm build:tools && pnpm prepare:object-json.");
     return { pages: 0, provenance: 0 };
   }
-  const { SCENE_OBJECTS } = await import("../../site/objects.mts");
+  const SCENE_OBJECTS = readPreparedObjects(checkout).sceneObjects;
   const { provenanceIsRegenerated } = await import("../../src/platform/runtime-asset-closure.mts");
   const scene = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id));
   const missing = (id: string, file: string) => !existsSync(resolve(root, "src/objects", id, "prepared", file));

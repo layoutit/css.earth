@@ -1,8 +1,10 @@
 # Objects package instructions
 
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.
-Own the source catalogue (`src/sources/`, browser-safe) and the source-manifest format (`src/node/`, the Node-only
-`@cssearth/objects/node` entry); the main and `sources` entries never import `node/`.
+Own the source catalogue (`src/sources/`, browser-safe), the source-manifest format and preparation's read of the
+registry (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main and `sources` entries never import `node/`.
+`src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
+against its contract (its final prepared definition, and fixture values required before a test inspects them).
 An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.
@@ -10,7 +12,10 @@ Keep one shared object contract; application discovery remains in the existing r
 decoding (`defineObjects`, `catalogEntry`), the discovery, distance, arrival and prepared-focus parsers, the classification
 categories, the fact order, the destination-name normalisation preparation and search share, the context colour and
 world-rotation validation. `site/objects.mts` stays the one `OBJECTS` registry: it binds these contracts to the shell's
-scene loader. The registry here never loads a scene, reads a file or lists an object.
+scene loader. The registry here never loads a scene, reads a file or lists an object. Preparation reads that same
+registry with `readPreparedObjects` (`src/node/prepared-registry.ts`): the prepared catalogue decoded with the same
+contracts, without a scene loader. It is a read of the one registry, never a second list; keep it assembled as
+`site/objects.mts` assembles `OBJECTS`.
 Preparation must remain reproducible from source inputs and provenance outside packages.
 
 ## Shared package contract

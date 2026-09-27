@@ -1,4 +1,4 @@
-import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
+import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import { createObjectRuntime } from '@cssearth/renderer';
 import { createSceneLifetime } from '@cssearth/engine';
 import { createPreparedResidency } from '../../src/platform/prepared-residency.mts';

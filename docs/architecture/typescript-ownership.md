@@ -2,7 +2,7 @@
 
 Application, preparation, source-authoring, tests, executable fixture helpers and capture/oracle implementations are required to use strictly checked TypeScript. Native Node tools use erasable `.mts` source; browser and package code is bundled from `.ts` or `.mts`. Compiled package imports retain their `.js` extension, while source-only Node imports name the actual `.mts` file. Preparation declarations come from their implementations.
 
-The [ownership inventory](../../tools/ci/typescript-ownership.json) has no remaining authored JavaScript backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
+The [ownership inventory](../../.github/scripts/checks/typescript-ownership.json) has no remaining authored JavaScript backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
 Evidence tooling lives under `.github/scripts/audits/` and `tools/oracles/` or in files named
 `capture`, `captures` or `evidence`; it may import test harnesses, while runtime
 owners may import neither test nor evidence modules.
@@ -76,7 +76,7 @@ Choose the checks for the affected owner; these are available entry points, not 
 mandatory full-suite checklist for every migration:
 
 ```sh
-node tools/ci/typescript-ownership.mts
+node .github/scripts/checks/typescript-ownership.mts
 pnpm typecheck
 pnpm typecheck:oracles
 pnpm test:packages

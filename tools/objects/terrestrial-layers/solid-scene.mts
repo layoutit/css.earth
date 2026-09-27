@@ -22,9 +22,9 @@ import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-objec
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import { prepareMaterialTracks } from '@cssearth/bake/presentation';
 import { requirePreparedPresentation } from '@cssearth/bake/presentation';
-import { requirePreparedResourceCatalog } from '../../contract/object-runtime-contract.mts';
+import { requirePreparedResourceCatalog } from '@cssearth/bake/contract';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
-import { restoreDepthSource } from '../../prepared/prepared-depth-partitions.mts';
+import { restoreDepthSource } from '@cssearth/bake/prepared-presentation';
 import { publishedImageSize } from '@cssearth/bake/objects/layers/shape-model';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 export interface SolidSceneConfig {

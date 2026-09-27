@@ -3,7 +3,8 @@
  * in this package's code.
  *
  * This is a heuristic scan, not a proof. It catches a shipped id written as a whole string or template segment, as any word of
- * one (paths, queries, space-separated lists, sentences) and as a property key, quoted or not, in any case. It does not catch a
+ * one (paths, queries, space-separated lists, sentences), as the leading parts of a hyphenated word (a program id built on a
+ * body id, `comet-1p-nnsn1121`) and as a property key, quoted or not, in any case. It does not catch a
  * name it cannot see as one id: a multi-word spelling ('WASP-43 b', 'Alpha Centauri A'), a name built from pieces, or one read
  * from anywhere but this package's code. The exemptions below are holes by design: an exact listed string (a label, a guide
  * sentence) may name its listed ids, and a listed field is exempt on its owning type. Every exemption names one module and an
@@ -40,6 +41,7 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
     '05fa21e09706e69d7f4c08c00195a0572f739cf0aae6d696b59809141b7d2054': ['iau'], // IAU pole model error
     '52110340b309d27b371e2118a5391c33714c30986c43ca98c318fdbffc13c59b': ['iau'], // IAU text PCK error
     '27756f050e14a1cb1c1ee867f0eace9ea4d9fcb81b8bee089469f1ebd5fd7b17': ['sun'], // label of the listed sun field
+    'b8f25eea06888a43abc51e80dcc8ce0d98b5051d7911f69e2ec3d417dc3d41a0': ['iau'], // IAU text PCK kind
   },
   // The Juno archive and spacecraft share their name with the shipped asteroid 3 Juno: the archive's own paths, PDS volume root,
   // telescope name and software name say Juno the mission, never the body.
@@ -85,6 +87,9 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
   },
 };
 
+/** Every leading run of a hyphenated word's parts: a program id built on a body id (`comet-1p-nnsn1121`) names that body. */
+const hyphenPrefixes = (word: string) => word.split('-').slice(1).map((_, index, rest) => word.split('-').slice(0, index + 1).join('-'))
+  .filter(prefix => prefix.length > 0 && prefix !== word);
 const compact = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/gu, '');
 const sha256 = (text: string) => createHash('sha256').update(text).digest('hex');
 const PROPERTY_NAMES = [ts.isPropertyAssignment, ts.isShorthandPropertyAssignment, ts.isPropertySignature, ts.isPropertyDeclaration,
@@ -127,7 +132,7 @@ function bodyMentions(file: string, text: string, bodies: ReadonlySet<string>): 
       const lower = node.text.trim().toLowerCase();
       const unhosted = lower.replace(/\b[a-z][a-z0-9+.-]*:\/\/[^/?#\s]*/gu, ' ');
       const words = [lower, ...unhosted.split(/[^a-z0-9_-]+/u).map(part => part.replace(/^[_-]+|[_-]+$/gu, ''))];
-      const named = [...new Set(words.filter(word => bodies.has(word)))];
+      const named = [...new Set(words.flatMap(word => [word, ...hyphenPrefixes(word)]).filter(word => bodies.has(word)))];
       const allowed = PROSE[file]?.[sha256(node.text)] ?? [];
       const keyExempt = ts.isStringLiteral(node) && exemptField(node, node.text);
       for (const id of named) if (!allowed.includes(id) && !keyExempt) found.push(`${file}: ${JSON.stringify(node.text)} (${sha256(node.text)}) names ${id}`);
@@ -168,6 +173,8 @@ test('the scope scan catches a body in every place code can name it, and nothing
   assert.equal(scan('const query = `SELECT obs_id FROM caom2.Observation WHERE target_name = ${quote} AND o.instrument_name LIKE \'%\' OR target_name = \'Ganymede\'`;').length, 1,
     'a word of a template query');
   assert.equal(scan("const targets = 'io europa ganymede'.split(' ');").length, 3, 'each word of a space-separated list');
+  assert.equal(scan("const program = 'europa-1250'; const pair = 'alpha-centauri-a-b1';").length, 2, 'a program id built on a body id');
+  assert.equal(scan("const model = 'ionosphere-model'; const kind = 'moonlight-io2';").length, 0, 'a body id is a whole hyphen-separated part, not any substring');
   assert.equal(scan("const note = 'Europa is an example here';").length, 1, 'a sentence is read word by word');
   assert.equal(scan("// 'callisto'\n/* { europa: 1 } */ const row = { moon: 'x' };").length, 1, 'comments are not names; an ordinary field is one');
 });

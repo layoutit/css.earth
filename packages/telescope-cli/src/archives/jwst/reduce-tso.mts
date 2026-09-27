@@ -4,7 +4,7 @@ import { findOne } from './find-product.mts';
  *
  *   node packages/telescope-cli/src/archives/jwst/reduce-tso.mts <program directory> <work directory> [--raw <directory>]
  *
- * A program directory (tools/objects/jwst/programs/<id>) pins the raw segments by name and size, the CRDS context, the
+ * A program directory (packages/telescope-cli/src/archives/jwst/programs/<id>) pins the raw segments by name and size, the CRDS context, the
  * Eureka! control files, and an author's deposited light curve to compare with. The run:
  *
  * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume,
@@ -29,9 +29,13 @@ import { createReadStream, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { archivePrograms } from '../programs.mts';
 import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
 import { mastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
+
+/** The pinned time-series programs, one directory each, and the joint fits of several visits, sit beside this code. */
+export const JWST_PROGRAMS = archivePrograms('jwst');
 
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {

@@ -41,7 +41,7 @@ The recorded `image3.mts` command for this picture uses
 `--grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json`. That grid
 recipe is absent from this checkout, and no current NGC 3132 shared-grid recipe
 was found. The program record at
-[`ngc-3132-2733.json`](../tools/objects/jwst/imaging/programs/ngc-3132-2733.json)
+[`ngc-3132-2733.json`](../packages/telescope-cli/src/archives/jwst/imaging/programs/ngc-3132-2733.json)
 still identifies the exposures, but it does not replace the missing grid.
 
 ## JWST, NIRSpec: the ring around SN 1987A

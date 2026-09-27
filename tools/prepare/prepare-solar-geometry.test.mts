@@ -7,12 +7,14 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packages/astronomy/tools/scene-ephemeris.mts';
 import { loadAstronomyPackage } from './astronomy/astronomy-package.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import * as geometry from '../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseSolidReplayScene } from '../prepared/prepared-replay-source.mts';
-import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
+import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 type Vector = readonly number[];
 type EpochStateSource = { centerBodyId: string; positionKm: Vector; parentHeliocentricState: { positionKm: Vector; velocityKmPerDay: Vector } };
@@ -116,7 +118,7 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
 
 test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
   const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
-  const { restoreDepthSource } = await import('../prepared/prepared-depth-partitions.mts');
+  const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json'));
@@ -145,7 +147,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
 
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
   const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
-  const { restoreDepthSource } = await import('../prepared/prepared-depth-partitions.mts');
+  const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json')),
     scene = parseSolidReplayScene(await read('prepared/scene.json'));

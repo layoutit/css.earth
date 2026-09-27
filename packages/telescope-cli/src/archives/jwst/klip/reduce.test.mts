@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readKlipProgram } from './reduce.mts';
+import { jwstToolchain } from '../toolchain.mts';
 
 test('the HR 8799 programme pins the exposures and the settings Balmer et al. (2025) reduced', async () => {
   const program = await readKlipProgram('hr-8799-1194');
@@ -43,4 +44,9 @@ test('the 51 Eridani programme pins the F410M exposures and the settings Balmer 
   assert.deepEqual([settings.klip.mode, settings.klip.annuli, settings.klip.subsections, settings.klip.numbasis], [['RDI'], [8], [4], [50, 150]]);
   assert.equal(settings.firstAnnulusOuterArcsec, 0.5);
   assert.equal(settings.spectralType, 'F0IV');
+});
+
+test('the spaceKLIP toolchain reads its descriptor and lock beside this code before it looks for an installed environment', async () => {
+  // Installed or not, the pins are read first: a missing descriptor or lock fails with ENOENT, anything else is about the install.
+  await jwstToolchain('klip', 'jwst_1256.pmap').catch((error: unknown) => assert.doesNotMatch(String(error), /ENOENT/u));
 });

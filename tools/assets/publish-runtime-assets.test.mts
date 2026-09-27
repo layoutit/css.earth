@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { contentType, publishAssets } from './publish-runtime-assets.mts';
-import type { PublishAsset } from './publish-verification.mts';
+import type { PublishAsset } from '@cssearth/bake/delivery';
 
 async function fixture(t: TestContext) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-publisher-test-'));

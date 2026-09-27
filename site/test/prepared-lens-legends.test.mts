@@ -1,5 +1,5 @@
 import {requireRecord, requireArray} from '@cssearth/core';
-import {parseObjectContentFixture} from './object-content-fixture.mts';
+import {parseObjectContentFixture} from '../../tests/objects/content/object-content-fixture.mts';
 import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mts";
 import { prepareObjectContent } from "#preparation/content/prepare";
@@ -10,7 +10,7 @@ import { OBJECTS } from "../objects.mts";
 import {
   prepareLensCategoryLegend,
   prepareLensScaleLegend,
-} from "../../tools/objects/content/prepared-lens-legends.mts";
+} from '@cssearth/bake/objects/content';
 
 test("prepares a frozen, smoothly sampled scale legend", () => {
   const legend = prepareLensScaleLegend({

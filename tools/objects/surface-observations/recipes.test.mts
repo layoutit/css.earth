@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readdir, readFile } from 'node:fs/promises';
-import { fixtureRecord } from '../../contract/test-values.mts';
+import { fixtureRecord } from '@cssearth/objects/node/contract';
 import { parseTerrestrialProfile } from '../terrestrial-layers/index.mts';
 
 const planets = new URL('../../../src/objects/', import.meta.url);

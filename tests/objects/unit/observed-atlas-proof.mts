@@ -1,6 +1,6 @@
 import {numericRaster} from '@cssearth/bake/objects/raster';
 import { array, dictionary, number, optional, shape, text, requireFiniteNumber, invertPreparedAffineMatrix4 } from '@cssearth/core';
-import {required} from '../../../tools/contract/test-values.mts';
+import {required} from '@cssearth/objects/node/contract';
 import type {GeoTIFFImage} from 'geotiff';
 import assert from 'node:assert/strict';
 import {readFile, type FileHandle} from 'node:fs/promises';

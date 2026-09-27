@@ -51,6 +51,24 @@ its validators accept); the renderer never imports the bake.
   preparation and the runtime ownership checks share. It parses a runtime module into ESTree with its original ranges,
   resolves its imports to source files through each package's exports and tsup entries, and reads names, keys and static
   object properties. It imports no topic.
+- `src/prepared-presentation/` is published as `@cssearth/bake/prepared-presentation` (Node only): the passes that rewrite
+  a compiled prepared presentation: depth partitions of a body's projected surface in a proven visibility order, the
+  cascade check (Playwright's Chromium) that keeps each moved leaf's computed style, and the interior fill of a cut-open
+  body. It imports `presentation`. Its tests are `node --test` suites in `tests/prepared-presentation/`.
+- `src/delivery/` is published as `@cssearth/bake/delivery` (Node only): writing and publishing prepared output. The
+  atomic prepared-set and text writers, the page metadata written beside a restored runtime, the WebP encodings prepared
+  images are optimised with, the pinned source bytes an acquisition publishes, the verify-after-publish gate for the asset
+  host, and the scan for `/scenes/` references an asset-origin build left behind (`packages/bake/cli/check-asset-origin-scenes.mts`).
+  `packages/bake/cli/publish-source-cache.mts` mirrors an object's downloads into the source cache with it. It imports no
+  topic. Its tests are `node --test` suites in `tests/delivery/`.
+- `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
+  object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
+  physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure.
+  It imports `runtime-source`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned JPL moon catalogue
+  (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
+- `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
+  writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
+  and the renderer's object controls. It imports `presentation`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
@@ -77,6 +95,22 @@ its validators accept); the renderer never imports the bake.
     left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
     directory is found on first use; the matcher that binds a manifest's recorded generator name to today's code; and the
     idle-timeout stream relay pinned downloads go through.
+  - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,
+    reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style. It imports
+    no topic. The recipe dispatcher, spectrum reader and compact spectrum stay in
+    `tools/objects/charts/`: `site/prepare-body-overview.mts` uses them, and the runtime may not import the bake.
+  - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
+    payload), the shared lens vocabulary, lens steps and prepared legends, and each lens control's billboard colour. It
+    imports no topic. The content preparer that reads factsheets and writes the payload stays in `tools/objects/content/`.
+  - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
+    vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
+    fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
+    commands). It imports `objects/geometry`, `objects/raster` and `objects/layers/terrestrial`; attaching the banks to a
+    globe stays in `tools/objects/surface-features/`.
+  - `objects/stellar`: a star's colour lens from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
+    from a published figure or occultation, and Roche-von Zeipel gravity darkening. It imports `objects/color`,
+    `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
+    compiler identity reaches, so that identity does not pin the source-manifest readers.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
@@ -89,9 +123,10 @@ its validators accept); the renderer never imports the bake.
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
     `surface-observations/`; the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
-  Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
-  oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
-  (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
+  Their tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` once the
+  pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the
+  repository's test helpers; they import the entries. `pnpm test:bake-objects`
+  (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
   render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `tools/nebula/prepare.mts` is its

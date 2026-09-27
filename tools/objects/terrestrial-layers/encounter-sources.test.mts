@@ -1,4 +1,4 @@
-import { required, fixtureRecord } from '../../contract/test-values.mts';
+import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import {requireArray,shape,array,text,number,nullable} from '@cssearth/core';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();

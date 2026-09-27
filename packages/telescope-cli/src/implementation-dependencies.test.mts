@@ -65,6 +65,25 @@ test('the runtime-source reader is followed into @cssearth/bake/runtime-source, 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the prepared, asset, source and contract libraries are followed into their package sources, as when they sat under tools/', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-leaves-'));
+  try {
+    const entries = [['@cssearth/bake/prepared-presentation', 'packages/bake/src/prepared-presentation'], ['@cssearth/bake/delivery', 'packages/bake/src/delivery'],
+      ['@cssearth/bake/sources', 'packages/bake/src/sources'], ['@cssearth/bake/contract', 'packages/bake/src/contract'],
+      ['@cssearth/objects/node/contract', 'packages/objects/src/node/contract']] as const;
+    await writeFile(resolve(root, 'entry.mts'), `${entries.map(([specifier], index) => `import { v${index} } from '${specifier}';`).join('\n')}\nexport const used=[${entries.map((_, index) => `v${index}`).join(',')}];\n`);
+    for (const [index, [, directory]] of entries.entries()) {
+      await mkdir(resolve(root, directory), { recursive: true });
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
+      await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    }
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    await writeFile(resolve(root, 'packages/bake/src/delivery/value.ts'), 'export const v1=10;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the FITS reader package is followed into its sources, as when it was a local module; other packages stay external', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-fits-'));
   try {
@@ -121,7 +140,7 @@ test('the telescope library is followed into its sources, as when its modules sa
 
 test('the shared object libraries are followed into their bake sources, as when they sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-bake-objects-'));
-  const topics = ['cameras', 'color', 'geometry', 'raster', 'scene', 'sources', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
+  const topics = ['cameras', 'charts', 'color', 'content', 'geometry', 'raster', 'scene', 'sources', 'stellar', 'surface-features', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
   try {
     await writeFile(resolve(root, 'entry.mts'), `${topics.map(topic => `import * as ${topic.replace(/\W/gu, '_')} from '@cssearth/bake/objects/${topic}';`).join(' ')}\nexport const used=[${topics.map(topic => topic.replace(/\W/gu, '_')).join(',')}];\n`);
     for (const topic of topics) {

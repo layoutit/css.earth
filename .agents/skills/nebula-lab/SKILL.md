@@ -60,7 +60,7 @@ remain unchanged and report when over budget. See
 - **lab** — React app, processing server, CLI orchestration, recipes, viewer adapters.
 - **volume-viewer** — the retained-DOM scene.
 
-`pnpm check:nebula-boundaries` enforces the graph: a package may import itself, anything may
+`pnpm check:nebula-boundaries` (an alias of `pnpm check:architecture`, whose `nebula-boundaries` rule this is) enforces the graph: a package may import itself, anything may
 import `@cssearth/bake/volume`, and only `lab` may import the rest. **In the cssEarth app only preparation code
 (`tools/` and `packages/bake/`) may import `@cssearth/bake`; the runtime imports
 nothing from it, not even a type.** Never widen the rule to make code fit;

@@ -73,13 +73,13 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",
     "@cssearth/engine": "workspace:*",
     "@cssearth/objects": "workspace:*"
   },
   "devDependencies": {
     "@cssearth/bake": "workspace:*",
-    "@cssearth/catalog": "workspace:*",
     "@cssearth/volume-viewer": "workspace:*",
     "@types/node": "^26.4.0",
     "linkedom": "^0.18.13",

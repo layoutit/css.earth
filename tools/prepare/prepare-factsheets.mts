@@ -8,11 +8,13 @@ const parseManifest=shape({inputs:array(entry_),documents:array(entry_),generate
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { orderFacts } from '@cssearth/objects';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 
 /** Re-publish authored facts without rebaking imagery or changing scene state. Reader text has its own publisher, prepare-text. */

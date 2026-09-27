@@ -11,7 +11,7 @@ import { parseSolidPreparationSource, retainedPhotographicAtlas } from '@csseart
 import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareSolidRasters, prepareSolidSurfacePoles } from '@cssearth/bake/objects/layers/terrestrial';
-import { lensBillboardColors } from './content/billboard-colors.mts';
+import { lensBillboardColors } from '@cssearth/bake/objects/content';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 import { repinObjectJson } from '../prepare/prepare-object-json.mts';

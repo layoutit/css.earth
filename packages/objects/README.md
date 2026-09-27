@@ -19,6 +19,12 @@ preparation tools share: `defineObjects()` and `catalogEntry()` assemble and dec
 `orderFacts()` orders factsheets, `normalizeDestinationQuery()` is the name normalisation preparation writes and search
 reads, `contextColour()` picks a body's world-context colour, and `validateWorldRotation()` checks a rotation. The host
 binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
+Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
+prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`, in catalogue order) with these contracts and binds a
+`loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
+test (run in the universe runtime lane) holds both reads equal. Some preparation code still imports `site/objects.mts`:
+`tools/cli/run-implemented-objects.mts`, `tools/prepare/prepare-arrival-billboard.mts` and the object-runtime ownership
+check. They move to this reader, or out of preparation, in later slices.
 
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
 physical frame, bounds, and pinned preparation source. Volume images, concrete
@@ -32,15 +38,20 @@ and compiled rendering leaves stay with the object and preparation adapter.
 `@cssearth/objects/sources` is the source catalogue: its records, citations and
 bindings and the validators every one passes. It stays browser-safe, because the
 application reads the catalogue with it. `@cssearth/objects/node` is the Node-only
-entry for source manifests: their validation, coverage and byte-range checks and the
-portable relative-path rule their entries follow. Nothing else in the package imports
-it. The manifests themselves stay beside each body.
+entry for source manifests (their validation, coverage and byte-range checks and the
+portable relative-path rule their entries follow) and for preparation's read of the
+registry. Nothing else in the package imports it. The manifests themselves stay beside each body.
+`@cssearth/objects/node/contract` is a second Node-only entry: the helpers tests use to
+check an object against its contract (its final prepared definition, read from
+`src/objects/<id>/prepared/object.json`, and fixture values required before a test
+inspects them).
 
 ```text
 packages/objects/
 ├── src/           Generic TypeScript implementation and tests
 │   ├── sources/   Source catalogue (`@cssearth/objects/sources`)
-│   └── node/      Source manifests (`@cssearth/objects/node`, Node only)
+│   └── node/      Source manifests and the prepared registry read (`@cssearth/objects/node`, Node only)
+│       └── contract/ Object test helpers (`@cssearth/objects/node/contract`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```

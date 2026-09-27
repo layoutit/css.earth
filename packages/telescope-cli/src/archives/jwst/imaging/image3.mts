@@ -99,7 +99,7 @@ export async function eurekaPins(): Promise<{ toolchainDigest: string; software:
   const installed = await readFile(resolve(EUREKA_ROOT, 'installed.json'), 'utf8')
     .catch(() => { throw new Error('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
   const marker = requireRecord(JSON.parse(installed) as unknown, 'installed.json');
-  return { toolchainDigest: requireString(marker.pinsSha256, 'installed pins sha256'), software: pipelineSoftware(await readFile(resolve(WORKSPACE, 'tools/objects/jwst/requirements.lock'), 'utf8')) };
+  return { toolchainDigest: requireString(marker.pinsSha256, 'installed pins sha256'), software: pipelineSoftware(await readFile(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
 }
 
 /** What identifies one level-3 run of a pinned program band: the exposures it was given at their pinned digests, the settings

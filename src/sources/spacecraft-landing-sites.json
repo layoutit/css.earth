@@ -91,7 +91,7 @@
       "kind": "limitation",
       "text": "Coordinates are stated in the frame each page uses (latitude kind and longitude convention recorded per site); 19 sites without published numbers are left out and listed in the working notes; traverses cover Apollo 11 and 12 EVAs, Curiosity and Perseverance only.",
       "scope": "Prepared site labels and traces.",
-      "evidence": "tools/objects/surface-features/sites.ts validates every document."
+      "evidence": "packages/bake/src/objects/surface-features/sites.ts validates every document."
     }
   ]
 }

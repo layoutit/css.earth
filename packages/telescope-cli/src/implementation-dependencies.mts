@@ -18,7 +18,9 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
  * and `tools/prepared/` libraries and the `src/preparation/` topics before their `@cssearth/bake/<topic>` entries, and the shared object libraries under
  * `tools/objects/` before `@cssearth/bake/objects/<topic>`, the source catalogue and manifest checks (`src/platform/source-*.mts`)
  * before `@cssearth/objects/sources` and `@cssearth/objects/node`, and the renderer's world-rotation validation before it joined
- * `@cssearth/objects`; following them keeps every operation identified by the code it ran. Other packages stay external, as they always were. */
+ * `@cssearth/objects`, and the `tools/prepared/`, `tools/assets/`, `tools/sources/` and `tools/contract/` libraries before
+ * `@cssearth/bake/{prepared-presentation,delivery,sources,contract}` and `@cssearth/objects/node/contract`; following them keeps
+ * every operation identified by the code it ran. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
@@ -50,6 +52,9 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/raster': 'packages/bake/src/objects/raster/index.ts',
   '@cssearth/bake/objects/scene': 'packages/bake/src/objects/scene/index.ts',
   '@cssearth/bake/objects/sources': 'packages/bake/src/objects/sources/index.ts',
+  '@cssearth/bake/objects/charts': 'packages/bake/src/objects/charts/index.ts',
+  '@cssearth/bake/objects/content': 'packages/bake/src/objects/content/index.ts',
+  '@cssearth/bake/objects/surface-features': 'packages/bake/src/objects/surface-features/index.ts',
   '@cssearth/bake/objects/layers/observation': 'packages/bake/src/objects/layers/observation/index.ts',
   '@cssearth/bake/objects/layers/shape-model': 'packages/bake/src/objects/layers/shape-model/index.ts',
   '@cssearth/bake/objects/layers/cutaway': 'packages/bake/src/objects/layers/cutaway/index.ts',
@@ -58,7 +63,13 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/layers/observed-surfaces': 'packages/bake/src/objects/layers/observed-surfaces/index.ts',
   '@cssearth/bake/objects/layers/paged-ellipsoid': 'packages/bake/src/objects/layers/paged-ellipsoid/index.ts',
   '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
+  '@cssearth/bake/objects/stellar': 'packages/bake/src/objects/stellar/index.ts',
   '@cssearth/bake/runtime-source': 'packages/bake/src/runtime-source/index.ts',
+  '@cssearth/bake/prepared-presentation': 'packages/bake/src/prepared-presentation/index.ts',
+  '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',
+  '@cssearth/bake/sources': 'packages/bake/src/sources/index.ts',
+  '@cssearth/bake/contract': 'packages/bake/src/contract/index.ts',
+  '@cssearth/objects/node/contract': 'packages/objects/src/node/contract/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its

@@ -20,8 +20,9 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const repository = WORKSPACE;
 export type ToolchainId = 'eureka' | 'klip';
-/** The toolchains' pins (descriptors and locks) stay in the checkout beside the programs they reduce. */
-const DESCRIPTORS: Record<ToolchainId, string> = { eureka: resolve(WORKSPACE, 'tools/objects/jwst/toolchain.json'), klip: resolve(WORKSPACE, 'tools/objects/jwst/klip/toolchain.json') };
+/** The toolchains' pins (descriptors and locks) sit beside this code and the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst');
+const DESCRIPTORS: Record<ToolchainId, string> = { eureka: resolve(PINS, 'toolchain.json'), klip: resolve(PINS, 'klip/toolchain.json') };
 const NAMES: Record<ToolchainId, string> = { eureka: 'Eureka!', klip: 'spaceKLIP' };
 export const toolchainRoot = (id: ToolchainId) => resolve(repository, 'output/toolchains', id);
 export const EUREKA_ROOT = toolchainRoot('eureka');

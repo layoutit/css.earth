@@ -1,12 +1,15 @@
-import {loadObjectTestDefinition} from '../contract/object-test-data.mts';
+import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { refuseStaleKeptBindings } from './prepare-object-json.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+import { resolve } from 'node:path';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 test('--keep-bindings refuses when the solved system transform moved', () => {
   // A body outside any solved lane (world-context focus, or a lane with nothing to solve) carries no system transform.

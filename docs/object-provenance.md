@@ -125,8 +125,9 @@ instantaneous multi-file switch for live readers or recovery from process
 termination or power loss.
 
 The publication and prepared-set tests exercise staging, replacement and rollback.
-Use the current tests beside `tools/objects/publication.mts` and
-`tools/prepared/write-prepared-set.mts`, with their required inputs installed.
+Use the current tests of `tools/objects/publication.mts` and
+`packages/bake/src/delivery/write-prepared-set.ts` (`tests/objects/publication.test.mts`,
+`tests/delivery/write-prepared-set.test.mts`), with their required inputs installed.
 These checks do not replace a visual or scientific oracle.
 
 ## Source and mission presentation

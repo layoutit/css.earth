@@ -6,7 +6,7 @@ interface InteriorLensPlan {id:string;model:string;qualification:string;palette:
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared/prepared-webp.mts';
+import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '@cssearth/bake/delivery';
 import {writeLossyWebp} from '@cssearth/bake/raster';
 import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {dotVector as dot3} from '@cssearth/bake/objects/geometry';

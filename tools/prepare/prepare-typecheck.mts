@@ -5,11 +5,13 @@ import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { promisify } from 'node:util';
 import ts from 'typescript';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { type RuntimeAssetLocation, inventoryAssets } from '../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../assets/setup.mts';
 import { volumeMetadataAssets } from '../assets/runtime-assets.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const exec = promisify(execFile);
 const projectRoot = resolve(import.meta.dirname, '../..');

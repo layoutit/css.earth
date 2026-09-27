@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { OBJECTS } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS } from '../objects.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+import { resolve } from 'node:path';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../object-entry.mts';
 import { knownObject, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
 
@@ -16,6 +18,14 @@ test('every prepared entry rebuilds the object the registry holds', () => {
     assert.equal(typeof (rebuilt as { loadScene?: unknown }).loadScene, typeof (object as { loadScene?: unknown }).loadScene, object.id);
   }
   assert.equal(objectEntry('not-an-object'), null);
+});
+
+test('preparation reads the registry the application holds, without its scene loader', async () => {
+  const prepared = readPreparedObjects(resolve(import.meta.dirname, '../..'));
+  assert.deepEqual(facts(prepared.objects), facts(OBJECTS));
+  assert.deepEqual(prepared.sceneObjects.map(object => object.id), REGISTERED_SCENE_OBJECTS.map(object => object.id));
+  assert.equal(prepared.requireSceneObject('mars').name, REGISTERED_SCENE_OBJECTS.find(object => object.id === 'mars')?.name);
+  await assert.rejects(prepared.requireSceneObject('mars').loadScene(), /cannot mount a scene/);
 });
 
 test('the directory loads each object once, and only objects', async () => {

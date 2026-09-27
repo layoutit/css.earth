@@ -306,7 +306,7 @@ async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyB
   if ('program' in input && route.acquisition.kind === 'jwst') {
     const { plane, header, run } = await image3Plane(recipe.grid, input, route.acquisition.band, io);
     return { plane, acquisition: { kind: 'jwst-image3', program: input.program,
-      program_file: `tools/objects/jwst/imaging/programs/${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
+      program_file: `packages/telescope-cli/src/archives/jwst/imaging/programs/${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
       limits: 'The pipeline\u2019s image3 stage (tweakreg, skymatch, outlier detection, resample) re-run from MAST\u2019s level-2 members onto the recipe grid, north up, so the exposures are resampled once. Pixels no exposure covered are missing.' } };
   }
   if ('product' in input && input.product !== undefined && route.acquisition.kind === 'jwst') {

@@ -1,4 +1,4 @@
-import { fixtureRecord } from '../../../contract/test-values.mts';
+import { fixtureRecord } from '@cssearth/objects/node/contract';
 import { requireString } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';

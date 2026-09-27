@@ -6,7 +6,7 @@ import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
 import { compileSourceUsage } from '../../src/platform/source-usage.mts';
 import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usage.mts';
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
-import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
+import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
 import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
@@ -15,7 +15,6 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '../../src/platform/exploration-catalog.mts';
 import { compileContributions } from '../../src/platform/exploration-contributions.mts';
 import { parsePreparedExploration, parseExplorationImage } from '../../src/platform/prepared-exploration.mts';
@@ -23,18 +22,22 @@ import type { ExplorationImage } from '../../src/platform/prepared-exploration.m
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from '../assets/restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+
 export const explorationCompilerClosure = [
   'tools/prepare/prepare-facilities.mts', 'tools/sources/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
-  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/prepare/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'packages/objects/src/registry/object-schema.ts',
-  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-catalog.mts', 'tools/prepare/prepare-catalog.mts',
+  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/prepare/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
+  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'tools/prepare/prepare-catalog.mts',
   'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'tools/prepare/prepare-navigation-destinations.mts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
-  'site/source/agency-logos.json', 'tools/sources/read-source-catalogue.mts',
+  'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'src/platform/source-usage.mts', 'packages/objects/src/node/source-manifest.ts',
   'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
   'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,

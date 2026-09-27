@@ -1,11 +1,15 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import trackedTest from 'node:test';
+import { access, mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { assembleJwstLedger, JWST_MODES, JWST_TIME_SERIES, jwstLedgerGuide, matchTarget, parseJwstLedger, repositoryState, jwstShippedObjects, withRepositoryState, type Ledger } from './archive-ledger.mts';
 import type { NamedShippedObject as ShippedObject } from '../targets.mts';
+import { JWST_IMAGING_PROGRAMS } from './imaging/archive.mts';
+import { JWST_KLIP_PROGRAMS } from './klip/reduce.mts';
+import { JWST_PROGRAMS } from './reduce-tso.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const repository = WORKSPACE;
@@ -68,9 +72,9 @@ test('a ledger counts observations by object and mode', () => {
 
 /** A scratch repository holding one imaging program of two modes, and whatever receipts a case writes beside it. */
 async function scratch(receipts: Readonly<Record<string, string>>) {
-  const root = await mkdtemp(resolve(tmpdir(), 'jwst-ledger-')), imaging = resolve(root, 'tools/objects/jwst/imaging/programs');
+  const root = await mkdtemp(resolve(tmpdir(), 'jwst-ledger-')), imaging = resolve(root, JWST_IMAGING_PROGRAMS.path);
   await mkdir(imaging, { recursive: true });
-  await mkdir(resolve(root, 'tools/objects/jwst/programs'), { recursive: true });
+  await mkdir(resolve(root, JWST_PROGRAMS.path), { recursive: true });
   await writeFile(resolve(imaging, 'mixed-9999.json'), `${JSON.stringify({ schema: 'cssearth-jwst-imaging-program@1', id: 'mixed-9999', programme: '9999', target: 'MIXED', crdsContext: 'jwst_1535.pmap',
     bands: [
       { band: 'NIRCAM-F470N', observation: 'jw09999-o001_t001_nircam_f444w-f470n', stage: 'image3',
@@ -130,3 +134,11 @@ test('a receipt no pinned program holds a band for is reported rather than ignor
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+// Plain node:test: the programs are tracked, so a checkout always holds them, and a folder the code cannot find is a failure,
+// never an unrestored download to skip.
+trackedTest('the ledger and the reducers read the pinned programs where they are tracked, beside the JWST archive code', async () => {
+  for (const programs of [JWST_PROGRAMS, JWST_IMAGING_PROGRAMS, JWST_KLIP_PROGRAMS]) {
+    assert.ok(programs.path.startsWith('packages/telescope-cli/src/archives/jwst/'), programs.path);
+    assert.ok((await readdir(resolve(repository, programs.path))).length > 0, `${programs.path} holds no programs`);
+  }
+});

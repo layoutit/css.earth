@@ -14,16 +14,18 @@
  * position of every science exposure in the association (jwst 2.0.1, assign_mtwcs), so leaving any of them out moves the grid.
  * The band comes from the product's filter and pupil. The association fixes the membership; the program stores it, so a re-run
  * of the mosaic step uses the same exposures MAST used. Digests are added the first time a file is downloaded (imaging.mts).
- * The program is written to tools/objects/jwst/imaging/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/jwst/imaging/programs/<program id>.json. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { MAST_CACHE, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
+import { archivePrograms } from '../../programs.mts';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
-/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/jwst/imaging/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const JWST_IMAGING_PROGRAMS = archivePrograms('jwst/imaging');
+export const PROGRAMS = resolve(WORKSPACE, JWST_IMAGING_PROGRAMS.path);
 export const DEFAULT_CRDS_CONTEXT = 'jwst_1535.pmap';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 

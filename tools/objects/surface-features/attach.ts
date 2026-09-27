@@ -2,10 +2,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { AuthoredObjectDescriptor, SourceReference } from '@cssearth/objects';
-import { parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures } from './index.js';
-import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig } from './index.js';
-import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.js';
-import type { SurfaceSampler } from './ellipsoid.js';
+import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, renderedEllipsoidSampler } from '@cssearth/bake/objects/surface-features';
+import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig, SurfaceSampler } from '@cssearth/bake/objects/surface-features';
 import type { GeographicScene } from '../paged-ellipsoid/geographic/contracts.mts';
 import { authoredPresentationBasis } from '@cssearth/bake/objects/scene';
 

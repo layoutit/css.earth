@@ -1,16 +1,12 @@
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { readSpectrumData } from './spectrum-data.mts';
-import { parseMeasuredSpectrum,readMeasuredSpectrum,renderMeasuredSpectrum } from './measured-spectrum.mts';
-import type { MeasuredSpectrumRecipe } from './measured-spectrum.mts';
-import { parseRetrievedProfile, readRetrievedProfile, renderRetrievedProfile, type RetrievedProfileRecipe } from './retrieved-profile.mts';
-import { parseFitsGalleryImageRecipe,renderFitsGalleryImage } from './fits-gallery-image.mts';
-import { renderLightCurveChart,renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.ts';
-import type { ChartIdentity } from './chart-svg.ts';
+import { readSpectrumData, type SpectrumRecipe } from './spectrum-data.mts';
+import { parseFitsGalleryImageRecipe, parseMeasuredSpectrum, parseRetrievedProfile, readMeasuredSpectrum, readRetrievedProfile, renderFitsGalleryImage, renderLightCurveChart, renderMeasuredSpectrum, renderPhotometricPhaseChart, renderReflectanceChart, renderRetrievedProfile, renderTemperaturePressureChart } from '@cssearth/bake/objects/charts';
+import type { ChartIdentity, MeasuredSpectrumRecipe, RetrievedProfileRecipe } from '@cssearth/bake/objects/charts';
 type JsonMap=Record<string,unknown>;
 interface Identity {id:string;title:string;description:string;output:string;metadata:JsonMap;}
-interface Spectrum extends Identity {kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
+type Spectrum=SpectrumRecipe;
 interface Pressure extends Identity {kind:'pressure';source:string;layerCount:number;temperatureMinimum:number;temperatureMaximum:number;temperatureRoundingStep?:number;includePressureRangeMetadata?:boolean;pressureTicks:{pressure:number;label:string}[];}
 interface Phase extends Identity {kind:'phase';sampleCount:number;maximumAngleDegrees:number;segments:({maximumAngleDegrees:number;coefficients:number[];kind:'polynomialMagnitude'}|{maximumAngleDegrees:number;coefficients:number[];kind:'albedoPolynomialMagnitude';constant:number})[];}
 interface LightCurve extends Identity {kind:'light-curve';source:string;timeField:string;fluxField:string;maskField?:string;binMinutes:number;axisLabel:string;events:{time:number;label:string}[];}

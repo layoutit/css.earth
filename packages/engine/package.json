@@ -22,9 +22,6 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run"
   },
-  "dependencies": {
-    "@cssearth/astronomy": "workspace:*"
-  },
   "devDependencies": {
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",

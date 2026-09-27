@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { readPreparedObjects } from '@cssearth/objects/node';
 
 type Scene = typeof import('@cssearth/bake/presentation');
 export type StarfieldPlan = ReturnType<Scene['prepareCubicSky']>;
@@ -12,8 +13,8 @@ export interface SolarSource {
 /** Load native TypeScript preparers with their implementation-owned signatures. */
 export async function loadCelestialAdapters() {
   const path = (value: string): string => pathToFileURL(resolve(process.cwd(), value)).href;
-  const [objects, scene, contract, geometry] = await Promise.all([
-    import(path('site/objects.mts')) as Promise<typeof import('../../../site/objects.mts')>,
+  const objects = readPreparedObjects(process.cwd());
+  const [scene, contract, geometry] = await Promise.all([
     import('@cssearth/bake/objects/scene'),
     import('@cssearth/bake/presentation'),
     import(path('src/platform/solar-geometry.mts')) as Promise<typeof import('../../../src/platform/solar-geometry.mts')>,

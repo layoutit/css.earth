@@ -4,7 +4,7 @@ Use these six prepared chart families in the shared Charts panel. Each plot is
 one SVG image; sample counts do not add elements to the application's DOM.
 Recipes, input tables and scientific qualifications belong to the object.
 Axes, typography, grid, colors and spacing belong to the
-[shared chart style](../tools/objects/charts/chart-style.mts).
+[shared chart style](../packages/bake/src/objects/charts/chart-style.ts).
 
 ![Eight examples covering the six chart families and measured-spectrum variants](images/chart-recipes.png)
 

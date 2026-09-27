@@ -4,10 +4,12 @@ import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { previewSite } from "../cli/preview.mts";
 import { inventoriedObjectIds } from "../assets/runtime-assets.mts";
 import { writeLossyWebp } from "@cssearth/bake/raster";
+import { readPreparedObjects } from "@cssearth/objects/node";
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
 // Plain captures of the built CSS scenes: no added artwork, text, or branding.
 // Card captures use the shared sidebar background and omit the surrounding sky.
