@@ -20,7 +20,7 @@ export interface MarkerDescriptor { presentation?: unknown; schema: string; obje
 import { readFile } from "node:fs/promises";
 
 import sharp, { type Sharp } from "sharp";
-import { blackFillCoverage, paintMissingCoverage } from "@cssearth/bake/raster";
+import { blackFillCoverage, paintMissingCoverage } from "../raster/index.ts";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 const OBJECT_ID = /^[a-z][a-z0-9-]*$/u;
@@ -84,7 +84,7 @@ export async function readMarkerImage(source: MarkerSource, sourcePath: string) 
   const bytes = await validateMarkerSourceBytes(source, sourcePath);
   if (!source.raster) return sharp(bytes);
   if (typeof source.width !== "number" || typeof source.height !== "number" || !Number.isSafeInteger(source.width) || !Number.isSafeInteger(source.height) || source.width < 1 || source.height < 1) throw new TypeError("Marker source raster dimensions are invalid.");
-  const {readObservation} = await import('@cssearth/bake/objects/raster');
+  const {readObservation} = await import('../objects/raster/index.ts');
   const {rgb, missing} = await readObservation('/', {...source, path: sourcePath}, source.raster, source.width, source.height);
   const info = {width: source.width, height: source.height, channels: 3 as const};
   return sharp(paintMissingCoverage(rgb, info, missing), {raw: info});

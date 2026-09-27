@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 import type { ObjectEntry } from '@cssearth/objects';
-import type { MarkerDescriptor } from './marker-recipe.mts';
+import type { MarkerDescriptor } from '@cssearth/bake/navigation';
 import type { MarkerPresentation } from '../../src/navigation/marker-presentation.mts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
@@ -34,7 +34,7 @@ import {
   readMarkerImage,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
-} from "./marker-recipe.mts";
+} from "@cssearth/bake/navigation";
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import { encodeLossyWebp } from '@cssearth/bake/raster';

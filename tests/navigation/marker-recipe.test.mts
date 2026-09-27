@@ -3,18 +3,18 @@ import { createHash } from "node:crypto";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { contextMarkerSprite } from "../../src/navigation/marker-presentation.mts";
 
-import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "./prepare-navigation.mts";
+import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "../../tools/prepare/prepare-navigation.mts";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
   renderMarker,
-} from "./marker-recipe.mts";
+} from "@cssearth/bake/navigation";
 
 const marsMarker = validateMarkerDescriptor(await loadObjectMarkerDescriptor("mars", resolve(import.meta.dirname, "../..")));
 

@@ -1,9 +1,9 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parsePreparedGalaxyCatalog } from '../../packages/catalog/src/spatial.ts';
-import { parsePreparedClusterCatalog, isPreparedCluster } from '../../packages/catalog/src/clusters.ts';
-import { parsePreparedNebulaCatalog, isPreparedNebula } from '../../packages/catalog/src/nebulae.ts';
-import type { PreparedCatalogObject } from '../../packages/catalog/src/clusters.ts';
+import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
+import { parsePreparedClusterCatalog, isPreparedCluster } from '@cssearth/catalog';
+import { parsePreparedNebulaCatalog, isPreparedNebula } from '@cssearth/catalog';
+import type { PreparedCatalogObject } from '@cssearth/catalog';
 import { defineObjects, definePreparedFocus, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord, hasErrorCode } from '@cssearth/core';
 

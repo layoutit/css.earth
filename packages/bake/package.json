@@ -216,6 +216,11 @@
       "import": "./dist/contract.js",
       "default": "./dist/contract.js"
     },
+    "./navigation": {
+      "types": "./dist/navigation.d.ts",
+      "import": "./dist/navigation.js",
+      "default": "./dist/navigation.js"
+    },
     "./thread-pool": {
       "types": "./dist/thread-pool.d.ts",
       "import": "./dist/thread-pool.js",

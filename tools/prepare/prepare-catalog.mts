@@ -5,7 +5,7 @@ import { dirname, relative, resolve, sep } from 'node:path';
 import { catalogEntry, defineObjects, type CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { prepareSceneDistance, readPreparedFocusObjects } from './prepare-navigation-destinations.mts';
+import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES } from '@cssearth/astronomy';
