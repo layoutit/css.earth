@@ -9,7 +9,7 @@ import { parseCli } from './cli.mts';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
-import { inspectMeasurementSphere } from './sphere/sphere-lane.mts';
+import { inspectMeasurementSphere } from '../telescope-sphere/sphere-lane.mts';
 import { bodyMapFits } from '@cssearth/bake/objects/layers/observation';
 import { formatBodyMapProduct, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { sha256File } from '@cssearth/core/node';

@@ -3,15 +3,15 @@ import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
-import { inventoryAssets } from '../../../assets/runtime-assets.mts';
-import { installRuntimeAssets } from '../../../assets/setup.mts';
+import { inventoryAssets } from '../../assets/runtime-assets.mts';
+import { installRuntimeAssets } from '../../assets/setup.mts';
 import { requireRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
-import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 
