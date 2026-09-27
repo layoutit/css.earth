@@ -31,7 +31,7 @@ type Inventory = {
 const javascript = /\.(?:c|m)?jsx?$/u;
 const code = /\.(?:[cm]?[jt]sx?|astro)$/u;
 const categories: Category[] = ['authored', 'generated', 'vendor', 'configuration', 'facade'];
-const manifestPath = 'tools/ci/typescript-ownership.json';
+const manifestPath = '.github/scripts/checks/typescript-ownership.json';
 const astroCompiler: unknown = createRequire(import.meta.resolve('astro/package.json'))('@astrojs/compiler-rs');
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -261,7 +261,7 @@ export function auditOwnership(root: string): Inventory {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const rootIndex = args.indexOf('--root');
-  const root = rootIndex === -1 ? resolve(dirname(fileURLToPath(import.meta.url)), '../..') : resolve(args[rootIndex + 1] ?? '.');
+  const root = rootIndex === -1 ? resolve(dirname(fileURLToPath(import.meta.url)), '../../..') : resolve(args[rootIndex + 1] ?? '.');
   try {
     const inventory = auditOwnership(root);
     if (args.includes('--json')) console.log(JSON.stringify(inventory, null, 2));
