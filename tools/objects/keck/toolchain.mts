@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
+import { readToolchainDescriptor } from '../archives/toolchain-descriptor.mts';
 /** Install and locate the pinned Keck reduction environment of toolchain.json under output/toolchains/keck (ignored by git).
  *
  *   node tools/objects/keck/toolchain.mts install

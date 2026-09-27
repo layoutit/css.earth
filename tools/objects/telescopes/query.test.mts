@@ -7,7 +7,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '@cssearth/bake/objects/layers/observation';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
-import { assessObservationSelection, formatAnswer, ledgerModeKeys, loadQueryInputs, mergeIntervals, MODES_SCHEMA, parseModeCapabilities, QUERY_HELP, queryCapabilities, selectObservation, type Candidate, type CapabilityAnswer, type QueryInputs } from './query.mts';
+import { assessObservationSelection, formatAnswer, loadQueryInputs, QUERY_HELP, queryCapabilities, selectObservation } from './query.mts';
+import { ledgerModeKeys, mergeIntervals, parseModeCapabilities } from './query-modes.mts';
+import { MODES_SCHEMA, type Candidate, type CapabilityAnswer, type QueryInputs } from './query-contract.mts';
 import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from '@cssearth/telescope/node';
 
 const ROOT = resolve(import.meta.dirname, '../../..');

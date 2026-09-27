@@ -5,7 +5,7 @@ import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { CAPTION_LIMIT, abstractText, arxivQuery, displayName, evidenceScore, extractCaptions, hostNames, isChallenge, mentions, openAlexQuery, parseArxivResponse, parseOpenAlexResponse, rankWorks, relevantCaptions, searchPapers } from './papers.mts';
-import { parseCli } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 
 const fixtures = resolve(import.meta.dirname, '../../../tests/fixtures/telescope-papers');
 const openAlex = async (): Promise<unknown> => JSON.parse(await readFile(resolve(fixtures, 'openalex-works.json'), 'utf8'));

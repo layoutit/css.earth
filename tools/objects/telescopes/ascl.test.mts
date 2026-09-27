@@ -5,7 +5,8 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
-import { main, parseCli } from './cli.mts';
+import { main } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 
 const rows={
   1:{ascl_id:'1708.004',title:'Astroquery: Access to online data resources',abstract:'Query archives.',site_list:['https://github.com/astropy/astroquery'],preferred_citation:'Cite the Astroquery paper.'},

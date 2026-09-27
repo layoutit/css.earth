@@ -80,10 +80,20 @@ export function followedWorkspaceSources(root: string): Plugin {
   } };
 }
 
+/** A workspace command the telescope runs as a process of its own (a `workspace-commands/<name>.mts` module) is code the
+ * operation runs, as it was when the operation imported it: the command's `source` entry joins the identity. */
+const COMMAND_MODULE = /(^|\/)workspace-commands\/[\w-]+\.mts$/u;
+async function dispatchedSources(root: string, inputs: readonly string[]): Promise<string[]> {
+  const sources: string[] = [];
+  for (const input of inputs) if (COMMAND_MODULE.test(input.split(sep).join('/')))
+    for (const match of (await readFile(resolve(root, input), 'utf8')).matchAll(/\bsource: '([^']+)'/gu)) sources.push(resolve(root, match[1]!));
+  return sources;
+}
+
 export async function implementationFingerprint(root: string, entries: readonly string[]): Promise<ImplementationFingerprint> {
   const absolute = entries.map(entry => isAbsolute(entry) ? entry : resolve(root, entry));
   const canonicalRoot = realpathSync(root);
-  const result = await build({ absWorkingDir: root, entryPoints: absolute, outdir: resolve(root, '.fingerprint-output'), bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
+  const bundle = (entryPoints: readonly string[]) => build({ absWorkingDir: root, entryPoints: [...entryPoints], outdir: resolve(root, '.fingerprint-output'), bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
     packages: 'external', conditions: ['types'], treeShaking: false, logLevel: 'silent', plugins: [followedWorkspaceSources(root), {
       name: 'authored-generated-imports',
       setup(builder) {
@@ -99,6 +109,12 @@ export async function implementationFingerprint(root: string, entries: readonly 
         });
       },
     }] });
+  let entryPoints = absolute, result = await bundle(entryPoints);
+  for (;;) {
+    const dispatched = (await dispatchedSources(root, Object.keys(result.metafile.inputs))).filter(path => !entryPoints.includes(path));
+    if (!dispatched.length) break;
+    entryPoints = [...entryPoints, ...dispatched]; result = await bundle(entryPoints);
+  }
   const paths = Object.keys(result.metafile.inputs).map(path => resolve(root, path)).filter(path => !relative(root, path).startsWith('..')).sort();
   const files = await Promise.all(paths.map(async path => { const bytes = await readFile(path); return { path: relative(root, path), sha256: createHash('sha256').update(bytes).digest('hex'), bytes }; }));
   const digest = createHash('sha256');

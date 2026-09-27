@@ -27,13 +27,13 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, readFitsImage } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { ALMA, horizonsTables } from '../sphere-horizons.mts';
+import { ALMA, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { placeResolvedDisc } from '../resolved-disc-map.mts';
+import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 import { sha256 } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../telescopes/body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');

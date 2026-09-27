@@ -109,7 +109,7 @@ export function ciCacheKeys({ root = resolve(import.meta.dirname, '../..'), runt
 }
 
 // The package digest hashes every tracked file under packages/. The two non-tsup builds read only
-// package-local files (astronomy's body-records reads packages/astronomy/data; telescope bundles its CLI),
+// package-local files (astronomy's body-records reads packages/astronomy/data; telescope-cli bundles its command),
 // so a change to their scripts or data changes the digest without a separate hash list to keep current.
 const fileHash = (path: string) => createHash('sha256').update(readFileSync(path)).digest('hex');
 const BUILD_CONFIG_FIELDS = new Set(['entry', 'outDir', 'tsconfig', 'format', 'external', 'dts', 'sourcemap', 'clean', 'target', 'splitting']);
@@ -229,9 +229,9 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
   let packageDigest = full.buildDigest;
   try {
     for (const pkg of packages) {
-      const supported = pkg.script === 'tsup' || pkg.directory === 'packages/astronomy' && pkg.script === 'node tools/body-records.mts && tsup' || pkg.directory === 'packages/telescope' && pkg.script === 'node build.mts';
+      const supported = pkg.script === 'tsup' || pkg.directory === 'packages/astronomy' && pkg.script === 'node tools/body-records.mts && tsup' || pkg.directory === 'packages/telescope-cli' && pkg.script === 'node build.mts';
       if (!supported) throw new TypeError(`Unaudited package build: ${pkg.directory}`);
-      const config = pkg.directory === 'packages/telescope' ? null : resolve(root, pkg.directory, 'tsup.config.ts');
+      const config = pkg.directory === 'packages/telescope-cli' ? null : resolve(root, pkg.directory, 'tsup.config.ts');
       await closure(pkg.directory, config, packageInputs, packageOptions);
     }
     packageDigest = narrowHash(packageInputs, packageOptions);

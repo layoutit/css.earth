@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { acquireGalaxyFieldSources } from './acquire.mts';
-import { sourceCacheUrl } from '../assets/source-mirror.mts';
+import { sourceCacheUrl } from '@cssearth/bake/objects/sources';
 
 const MIRROR_ORIGIN = 'https://mirror.example';
 

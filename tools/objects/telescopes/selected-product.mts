@@ -4,7 +4,7 @@ import { readProductRecord, fileSize } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
 import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
 import { loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
-import type { ObservationSelection } from './query.mts';
+import type { ObservationSelection } from './query-contract.mts';
 export async function selectedProductInput(root:string, selection:ObservationSelection) {
  const stated=selection.product;
  if(!stated)throw new Error('The selection has no qualified artifact; qualify and select a product first.');

@@ -454,6 +454,9 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
+      '@cssearth/fits':
+        specifier: workspace:*
+        version: link:../fits
     devDependencies:
       '@types/node':
         specifier: ^26.4.0
@@ -467,6 +470,15 @@ importers:
       vitest:
         specifier: ^3.1.1
         version: 3.2.7(@types/debug@4.1.13)(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
+
+  packages/telescope-cli:
+    devDependencies:
+      '@types/node':
+        specifier: ^26.4.0
+        version: 26.4.0
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
 
 packages:
 

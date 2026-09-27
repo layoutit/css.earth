@@ -17,7 +17,7 @@ and the difference is kept visible everywhere: see [two capabilities, never one]
 ## Saved questions with the Telescope CLI
 
 `pnpm telescope` provides a saved query and retrieval workflow over this API. The
-`@cssearth/telescope` npm package exposes the same command as `telescope`; it uses an
+`@cssearth/telescope-cli` npm package exposes the same command as `telescope`; it uses an
 existing css.earth science workspace for the catalogue, archive clients and instrument
 pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
 Python environments or download the repository during installation.
@@ -819,7 +819,7 @@ product remains a detector image: the label supplies no value units, celestial W
 quality array, and the query preserves angular resolution as unresolved.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
-JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its
+JWST, ALMA and NACO meet at `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`: an adapter supplies a north-up/east-left value plane, its
 one-sigma uncertainty, plate scale and observation identity; the shared stage fits the limb and owns the ephemeris, rotation,
 camera, projection and complete body-map observation. Hubble's slit scan has different image formation and joins at the final
 body-map contract. The product record pins the recipe, observation products, ephemerides and rotation model that the map stage
@@ -828,7 +828,7 @@ read, along with the output plane and its body-map metadata.
 Publication performs the query and verifies the whole chain in one command:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node tools/cli/run-typed-module.mjs tools/objects/telescopes/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
   --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \

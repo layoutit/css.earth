@@ -6,7 +6,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireFiniteNumber } from '@cssearth/core';
-import { firstSkyPosition } from '../archive-sky-position.mts';
+import { firstSkyPosition } from './sky-position.mts';
 import { REPOSITORY, shippedObjectIds } from './ledger.mts';
 
 /** A target name reduced to letters and digits, so `52_EUROPA`, `52 Europa` and `Europa___ 05-47` compare by their letters. */

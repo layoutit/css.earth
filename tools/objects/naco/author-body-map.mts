@@ -14,13 +14,13 @@ import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bodyMapFits, topRowFirst } from '@cssearth/bake/objects/layers/observation';
 import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../telescopes/body-map-publication.mts';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
-import { placeResolvedDisc } from '../resolved-disc-map.mts';
-import { horizonsTables } from '../sphere-horizons.mts';
+import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
+import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { esoHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
+import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
 import { readProgram } from './archive.mts';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 

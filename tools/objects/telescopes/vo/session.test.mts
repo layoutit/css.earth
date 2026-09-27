@@ -20,7 +20,7 @@ import { parseSnapshot, normalizeSnapshot, SERVICES } from './discovery.mts';
 import { planAccess } from './access.mts';
 import { jsonValue } from '@cssearth/telescope/node';
 import { qualifyVoProduct } from './qualify.mts';
-import type { QueryInputs } from '../query.mts';
+import type { QueryInputs } from '../query-contract.mts';
 
 test('confirmed direct FITS table reaches F08 export through saved exploration and get', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-table-session-'));

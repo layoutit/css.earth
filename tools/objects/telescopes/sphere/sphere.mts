@@ -7,7 +7,7 @@ import { build } from 'esbuild';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { assertBodyMapPlanes } from '../../body-map-publication.mts';
+import { assertBodyMapPlanes } from '../body-map-publication.mts';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { sha256 } from '@cssearth/core/node';
 import { verifiedProduct, localOutput } from '../verified-product.mts';
@@ -15,11 +15,19 @@ import { contextTarget, sourceContext } from '../delivery-context.mts';
 import { followedWorkspaceSources } from '../implementation-dependencies.mts';
 
 const root=resolve(import.meta.dirname,'../../../..');
-type SphereOwner=typeof import('./sphere-lane.mts');
+/** The rendering lane this export runs: `tools/objects/telescope-sphere/sphere-lane.mts` in the workspace, compiled from there
+ * at run time because it reads the checkout's prepared bodies and assets and renders through the application shell. */
+const SPHERE_LANE='tools/objects/telescope-sphere/sphere-lane.mts';
+interface SpherePrepared{readonly inputs:readonly {readonly role:string;readonly identity:string;readonly sha256:string;readonly bytes:number}[];readonly owner:Record<string,unknown>}
+interface SphereOwner{
+  inspectMeasurementSphere(root:string,target:string):Promise<unknown>;
+  measurementSphere(root:string,target:string,texture:string,output:string,focus:{longitudeDegrees:number;latitudeDegrees:number;zoom:number}):Promise<SpherePrepared>;
+  sphereHtml(prepared:SpherePrepared,metadata:Record<string,unknown>,title:string,legend:string):string;
+}
 async function loadSphereOwner(){
   await mkdir(resolve(root,'work'),{recursive:true});const directory=await mkdtemp(resolve(root,'work/telescope-sphere-owner-'));
   // The FITS reader is bundled from its sources, so the implementation digest below covers it as it did when it was local.
-  const compiled=await build({entryPoints:[resolve(root,'tools/objects/telescopes/sphere/sphere-lane.mts')],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[followedWorkspaceSources(root)]});
+  const compiled=await build({entryPoints:[resolve(root,SPHERE_LANE)],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[followedWorkspaceSources(root)]});
   const moduleFile=resolve(directory,'lane.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   const owner:SphereOwner=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);return {compiled,owner,cleanup:()=>rm(directory,{recursive:true,force:true})};
 }

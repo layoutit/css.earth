@@ -6,9 +6,9 @@
  * resolved limb, computing the body camera from the pinned geometry and rotation model, projecting onto the common body
  * grid, and writing the complete observation geometry used by the body-map contract.
  */
-import { observerCamera, type BodyOrientation, type ObserverSighting } from '@cssearth/bake/objects/cameras';
-import { fitDiscCentre, projectBandMap, topRowFirst, type BodyMap, type DiscCentre } from '@cssearth/bake/objects/layers/observation';
-import type { AngularResolution, BodyMapObservation } from '@cssearth/bake/objects/layers/observation';
+import { observerCamera, type BodyOrientation, type ObserverSighting } from '../../../cameras/index.ts';
+import { fitDiscCentre, projectBandMap, topRowFirst, type BodyMap, type DiscCentre } from './body-map.ts';
+import type { AngularResolution, BodyMapObservation } from './body-map-product.ts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const AU_KM = 1.495978707e8;

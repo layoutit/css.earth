@@ -4,6 +4,8 @@ export * from './product-record.js';
 export * from './paths.js';
 export * from './toolchain-process.js';
 export * from './toolchain-python.js';
+export * from './eso-pipeline.js';
+export * from './eso-associations.js';
 export * from './vo-contracts.js';
 export * from './sky-target.js';
 export * from './toolchain.js';

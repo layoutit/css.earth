@@ -6,7 +6,7 @@ import { requireArray, requireRecord, requireString, requireFiniteNumber } from 
 import { fileSize } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
 import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from './body-map-publication.mts';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { projectWithPlanetMapper } from '@cssearth/telescope/node';
@@ -80,7 +80,7 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
     assertBodyMapPlanes(plane,product);const bytes=Buffer.from(JSON.stringify(product,null,2)+'\n');await writeFile(resolve(staging,'map.fits.body-map.json'),bytes);
     await writeFile(resolve(staging,'navigation.json'),JSON.stringify({...nav,sourceContext:context,sourceResolution:{angularResolutionArcsec:facts.angularResolutionArcsec??null,evidence:facts.resolutionEvidence??[]},publication:'not-evaluated'},null,2)+'\n');
     const names=['navigation.json','texture.png','poles.png','figure.png'],extras=await Promise.all(names.map(async path=>({path,bytes:await readFile(resolve(staging,path))})));
-    const implementation=sha256(Buffer.concat(await Promise.all(['projection.mts','../../../packages/telescope/src/node/projection.ts','../../../packages/bake/src/objects/layers/observation/body-maps/body-map-product.ts','../body-map-publication.mts'].map(path=>readFile(new URL(path,import.meta.url))))));
+    const implementation=sha256(Buffer.concat(await Promise.all(['projection.mts','../../../packages/telescope/src/node/projection.ts','../../../packages/bake/src/objects/layers/observation/body-maps/body-map-product.ts','body-map-publication.mts'].map(path=>readFile(new URL(path,import.meta.url))))));
     const software=[{name:'cssEarth projection',version:implementation},...Object.entries(requireRecord(nav.software)).map(([name,v])=>({name,version:requireString(v)}))];
     const record=bodyMapProductRecord(product,plane,bytes,inputs,software,(await astroqueryToolchain()).digest,extras);
     await checkPins(inputs);await writeFile(resolve(staging,'map.fits.product.json'),formatProductRecord(record));

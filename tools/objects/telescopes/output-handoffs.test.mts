@@ -11,7 +11,7 @@ import { writeProductRecord } from '@cssearth/telescope/node';
 import { sha256File } from '@cssearth/core/node';
 import { exportOutput,listOutputs } from './outputs.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
-import { parseCli } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 
 test('PDS arrays retain integer flags, special constants and associated uncertainty through figure export',async()=>{
@@ -86,7 +86,7 @@ test('physical inspection and export share the existing loader, frame and credit
 
 
 test('inactive sphere images are removed without changing geometry or active textures',async()=>{
- const {clearInactiveImageBindings}=await import('./sphere/sphere-assets.mts');
+ const {clearInactiveImageBindings}=await import('../telescope-sphere/sphere-assets.mts');
  const properties=[{name:'--surface-image',value:'url("/surface.webp")'},{name:'--interior-image',value:'url("/interior.webp"), url("/surface.webp")'},{name:'--transform',value:'rotateY(24deg) scale(2)'},{name:'--different-image',value:'url("/interior.webp-extra")'}];
  const original=structuredClone(properties),result=clearInactiveImageBindings(properties,[{url:'/interior.webp'}]);
  assert.deepEqual(result.inactiveImageProperties,['--interior-image']);

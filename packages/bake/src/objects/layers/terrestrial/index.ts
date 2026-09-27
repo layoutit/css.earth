@@ -39,6 +39,7 @@ export * from './records/solid-source.ts';
 export * from './registration/controlled-orthographic-mosaic.ts';
 export * from './registration/image-feature-matching.ts';
 export * from './registration/limb-refinement.ts';
+export * from './registration/horizons-tables.ts';
 export * from './registration/observer-cameras.ts';
 export * from './registration/orthographic-observation.ts';
 export * from './registration/registration-sweeps.ts';

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { selectedProductInput } from './telescopes/selected-product.mts';
-import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from './telescopes/request-satisfaction.mts';
+import { selectedProductInput } from './selected-product.mts';
+import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from './request-satisfaction.mts';
 /** Bind one scientific question and selected archive program to the exact body-map bytes published for it.
  *
  * The instrument-specific stages still do the science. This module supplies the missing boundary between them: a body map is
@@ -16,7 +16,8 @@ import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { parseProductRecord, productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { runDigest, sameRun } from '@cssearth/telescope/node';
-import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ConstraintVerdict, type ObservationSelection } from './telescopes/query.mts';
+import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
+import { type ConstraintVerdict, type ObservationSelection } from './query-contract.mts';
 
 export const BODY_MAP_PUBLICATION_STAGE = 'body-map';
 export const TELESCOPE_LAYER_SCHEMA = 'cssearth-telescope-layer@1';
@@ -141,7 +142,7 @@ export function assertMapAnswersRequest(product: BodyMapProduct, selection: Obse
 }
 
 /** Verify the complete chain at publication time and return the small descriptor the body package can consume. */
-export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection, root = resolve(import.meta.dirname, '../..')): Promise<TelescopeLayer> {
+export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection, root = resolve(import.meta.dirname, '../../..')): Promise<TelescopeLayer> {
   const metadataPath = resolve(mapPath), product = parseBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
@@ -195,7 +196,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program'), map = flagValue(args, '--map');
   if (!telescope || !mode || !programme || !map) throw new TypeError('Usage: body-map-publication.mts --target <id> --wavelength <from,to> --kind <kind> (--from <ISO> --to <ISO> | --any-time) (--min-arcsec <N> | --min-km <N> | --min-elements <N>) --result body-map --select-telescope <name> --select-mode <mode> --program <id> --map <map.fits.body-map.json> [--out <layer.json>]');
-  const request = requestFromArguments(args), answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../..'), request.target));
+  const request = requestFromArguments(args), answer = queryCapabilities(request, await loadQueryInputs(resolve(import.meta.dirname, '../../..'), request.target));
   const layer = await qualifyBodyMap(map, selectObservation(answer, telescope, mode, programme)), text = `${JSON.stringify(layer, null, 2)}\n`, out = flagValue(args, '--out');
   if (out) await writeFile(resolve(out), text); else process.stdout.write(text);
 }

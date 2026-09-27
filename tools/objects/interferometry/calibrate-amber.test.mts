@@ -5,7 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { calibratorDatabase, planAmberNight } from './calibrate-amber.mts';
 import { coOvertoneLines, measureCoShift } from './co-wavelength.mts';
-import { parseRawTable } from './eso-pipeline.mts';
+import { parseRawTable } from '@cssearth/telescope/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, text } from '@cssearth/bake/objects/raster';
 
 const repository = resolve(import.meta.dirname, '../../..');

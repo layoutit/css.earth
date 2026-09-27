@@ -16,7 +16,8 @@ import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { RUNTIME_ASSET_ORIGIN, sourceCacheKey } from './source-mirror.mts';
+import { sourceCacheKey } from '@cssearth/bake/objects/sources';
+import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
 import { verifyPublished, reportVerification, type PublishAsset } from './publish-verification.mts';
 
 const BUCKET = 'cssearth-assets';

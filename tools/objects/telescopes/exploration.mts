@@ -2,7 +2,9 @@
 import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget } from '@cssearth/telescope/node';
 import { flagValue } from '@cssearth/core';
 import { PRODUCT_KINDS, type ProductKind } from './recipe-request.mts';
-import { assessSearchCoverage, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue, type ArchiveSelection, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query.mts';
+import { assessSearchCoverage, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query-contract.mts';
+import { indexedTargetObservations } from './query-modes.mts';
+import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './query.mts';
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from '@cssearth/telescope';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';

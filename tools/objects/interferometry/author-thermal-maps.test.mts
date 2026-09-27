@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { cutDisc } from './author-thermal-maps.mts';
-import { ALMA, observerQuery } from '../sphere-horizons.mts';
+import { ALMA, observerQuery } from '@cssearth/bake/objects/layers/terrestrial';
 
 test('the disc cutout follows the uv-plane offset: east is toward the first column, north toward later rows', () => {
   const width = 200, height = 200, values = new Float64Array(width * height);

@@ -9,7 +9,7 @@ import { requireArray, requireRecord } from '@cssearth/core';
 import { mkdir, readFile, writeFile, rename, rm, open, realpath } from 'node:fs/promises';
 import { dirname, resolve, basename, relative } from 'node:path';
 import { Readable } from 'node:stream';
-import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
+import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { withIdleTimeout } from '@cssearth/bake/objects/sources';
 import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor, readRiceCompressedImage } from '@cssearth/fits';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements } from '@cssearth/telescope';

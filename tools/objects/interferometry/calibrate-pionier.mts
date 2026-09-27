@@ -21,11 +21,11 @@ import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from './eso-pipeline.mts';
+import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from '@cssearth/telescope/node';
 import { findLostFringes, pairVisibilities, removeLostFringes } from './lost-fringes.mts';
 import { toolchainPath } from './toolchain.mts';
 
-export { rawFrame } from './eso-pipeline.mts';
+export { rawFrame } from '@cssearth/telescope/node';
 
 export interface RawFrame { readonly dpId: string; readonly dpType: string; readonly dpCategory: string; readonly object: string; readonly programme: string; readonly templateStart: string }
 export interface PionierBlock { readonly object: string; readonly role: 'science' | 'calibrator'; readonly exposures: readonly string[]; readonly dark: string }

@@ -24,8 +24,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { archiveHeader, column, type RawRow } from '../interferometry/eso-pipeline.mts';
-import { associationTree, type Association } from '../interferometry/eso-associations.mts';
+import { archiveHeader, column, type RawRow } from '@cssearth/telescope/node';
+import { associationTree, type Association } from '@cssearth/telescope/node';
 import { tapRows } from '@cssearth/telescope/node';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');

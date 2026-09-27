@@ -11,7 +11,7 @@
  *
  * The interferometry toolchains install the same way, but that installer reads its own descriptor and its own list of ids
  * (tools/objects/interferometry/toolchain.mts), and NACO is not an interferometer. What is shared is what runs the result:
- * `esoEnvironment` and `runRecipe` from eso-pipeline.mts, which this module does not repeat.
+ * `esoEnvironment` and `runRecipe` from `@cssearth/telescope/node` (`eso-pipeline.ts`), which this module does not repeat.
  *
  * An installed toolchain records the sha256 of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
  * pin. The verified archive is deleted after the build. */

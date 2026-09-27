@@ -19,7 +19,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { horizonsCommand, horizonsTables } from '../sphere-horizons.mts';
+import { horizonsCommand, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { qualifiedFace, shadingNormal } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SourceMesh } from '@cssearth/bake/objects/geometry';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';

@@ -17,7 +17,8 @@ import { OPUS_SERVICE } from './opus.mts';
 import { openFitsSource } from './fits-source.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { openPdsSource, preparePdsSource } from './pds-source.mts';
-import { main, parseCli } from './cli.mts';
+import { main } from './cli.mts';
+import { parseCli } from './cli-arguments.mts';
 import { executeFamilyOperation } from './family-operation.mts';
 import { readSourceQuestion } from './source-relevance.mts';
 
