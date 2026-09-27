@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { bakePackage, bakeVolumeEntries, checkNebulaBoundaries, nebulaPackages } from './package-boundaries.mts';
+import { bakePackage, bakeVolumeEntries, checkNebulaBoundaries, nebulaPackages } from './nebula-packages.mts';
 
 const bakeManifest = (write: (path: string, value: string) => void, dependencies: Record<string, string> = {}) => write('packages/bake/package.json', JSON.stringify({
   name: bakePackage, private: true, exports: { './volume': './dist/volume.js', './volume/node': './dist/volume/node.js' }, dependencies,

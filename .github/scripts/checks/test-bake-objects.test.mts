@@ -22,7 +22,7 @@ test('a test joins the object-library run exactly when it imports an @cssearth/b
 });
 
 test('the checkout selects the moved libraries\' own tests', () => {
-  const root = resolve(import.meta.dirname, '../..');
+  const root = resolve(import.meta.dirname, '../../..');
   const tracked = execFileSync('git', ['ls-files', '-z', '--', ...BAKE_OBJECT_TEST_PATHS], { cwd: root, encoding: 'utf8' }).split('\0').filter(Boolean);
   const selected = bakeObjectTests(tracked, path => readFileSync(resolve(root, path), 'utf8'));
   for (const path of ['tools/objects/color-transfer.test.mts', 'tools/objects/terrestrial-layers/obj-shape.test.mts',

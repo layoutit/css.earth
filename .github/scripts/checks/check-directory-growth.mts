@@ -9,8 +9,8 @@
  * Ratcheted, not absolute: today's counts are the baseline, so existing debt is visible without
  * blocking work, and the tree cannot get flatter while it is being fixed.
  *
- *   node tools/ci/check-directory-growth.mts           fail if any directory exceeds its baseline
- *   node tools/ci/check-directory-growth.mts --write   record the current counts as the baseline
+ *   node .github/scripts/checks/check-directory-growth.mts           fail if any directory exceeds its baseline
+ *   node .github/scripts/checks/check-directory-growth.mts --write   record the current counts as the baseline
  */
 import { execFile } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -20,7 +20,7 @@ import { promisify } from 'node:util';
 
 /** A directory may hold this many authored modules before it is counted at all. */
 export const FREE_ALLOWANCE = 20;
-export const BASELINE_PATH = 'tools/ci/directory-growth-baseline.json';
+export const BASELINE_PATH = '.github/scripts/checks/directory-growth-baseline.json';
 const ROOTS = ['src', 'site', 'tools', 'packages', 'labs', '.github/scripts'];
 const CODE = /\.(?:ts|mts|tsx|astro)$/u;
 

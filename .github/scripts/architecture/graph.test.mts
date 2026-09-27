@@ -105,6 +105,19 @@ test('workspace imports resolve through exports and tsup entries, built or not, 
   });
 });
 
+test('template-literal dynamic imports become edges in .ts and .astro files; computed specifiers are out of reach', async () => {
+  await withFixture({
+    'site/late.mts': 'export const late = () => import(`./uses.mts`);\n',
+    'site/Late.astro': '---\nconst late = await import(`./uses.mts`);\n---\n<div />\n',
+    'site/computed.mts': "const name = './uses.mts';\nexport const computed = () => import(name);\nexport const templated = () => import(`${name}`);\n",
+  }, async root => {
+    const graph = await buildImportGraph(root, { details: false });
+    assert.deepEqual(targets(graph, 'site/late.mts'), ['site/uses.mts'], 'dependency-cruiser reads a no-expression template literal');
+    assert.deepEqual(targets(graph, 'site/Late.astro'), ['site/uses.mts'], 'and so does the Astro scanner');
+    assert.deepEqual(targets(graph, 'site/computed.mts'), [], 'a computed specifier names no file until it runs');
+  });
+});
+
 test('a workspace import the graph cannot place stops the check instead of vanishing', async () => {
   await withFixture({ 'site/gone.mts': "import '@x/bake/gone';\n" }, async root => {
     await assert.rejects(buildImportGraph(root, { details: false }), (error: unknown) =>

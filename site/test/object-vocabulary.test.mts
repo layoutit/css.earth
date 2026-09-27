@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '../..');
 const SERVES_EVERY_OBJECT = ['site', 'src/platform', 'src/navigation', 'src/renderers', 'packages/renderer', ...['raster', 'scene', 'presentation', 'volume-leaves', 'stars', 'shell', 'sky', 'density', 'image-layers', 'environment',
   'galaxy-catalog', 'cluster-catalog', 'world-context', 'runtime-source'].map(topic => `packages/bake/src/${topic}`), 'packages/bake/cli', 'src/styles',
-  'tools/cli', 'tools/prepare', 'tools/assets', 'tools/contract', 'tools/sources', 'tools/ci', 'atlas'];
+  'tools/cli', 'tools/prepare', 'tools/assets', 'tools/contract', 'tools/sources', 'tools/ci', '.github/scripts', 'atlas'];
 const SCIENCE_TERM = /exoplanet|planetar|dwarf.?planet|hosted.?planet|minor.?planet/iu;
 /** Names in those directories that do mean planets, and why. */
 const PLANET_NAMES = new Map([

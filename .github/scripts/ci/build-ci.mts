@@ -109,7 +109,7 @@ async function execute(task: CiBuildTask, root: string): Promise<void> {
   });
 }
 
-export async function buildCi({ root = resolve(import.meta.dirname, '../..'), mode, cacheHit = false, digest,
+export async function buildCi({ root = resolve(import.meta.dirname, '../../..'), mode, cacheHit = false, digest,
   packageCacheHit = cacheHit, packageDigest = digest, run = execute,
 }: { root?: string; mode: CiBuildMode; cacheHit?: boolean; digest: string; packageCacheHit?: boolean;
   packageDigest?: string; run?: (task: CiBuildTask, root: string) => Promise<void> }) {
@@ -146,7 +146,7 @@ export async function buildCi({ root = resolve(import.meta.dirname, '../..'), mo
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const mode = process.argv[2];
-  if (process.argv.length !== 3 || (mode !== 'lint' && mode !== 'full')) throw new TypeError('Usage: node tools/ci/build-ci.mts lint|full');
+  if (process.argv.length !== 3 || (mode !== 'lint' && mode !== 'full')) throw new TypeError('Usage: node .github/scripts/ci/build-ci.mts lint|full');
   const flag = (name: string, fallback = false) => {
     const value = process.env[name];
     if (value === undefined || value === '') return fallback;

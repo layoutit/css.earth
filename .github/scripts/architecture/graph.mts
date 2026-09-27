@@ -233,7 +233,7 @@ export async function buildImportGraph(checkout: string, options: BuildOptions):
   if (unresolved.length) {
     throw new UnresolvedImportError(`${unresolved.length} imports of workspace packages did not become edges, for example:\n`
       + unresolved.slice(0, 5).map(item => `  ${item.from}: ${item.specifier} (${item.reason})`).join('\n')
-      + '\nFix the package exports or its tsup entries, or teach tools/ci/architecture/workspaces.mts the new form.');
+      + '\nFix the package exports or its tsup entries, or teach .github/scripts/architecture/workspaces.mts the new form.');
   }
   return { files, edges: edges.filter(edge => files.has(edge.to)) };
 }

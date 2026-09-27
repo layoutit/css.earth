@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
+import { checkNebulaInboundBoundaries } from './nebula-inbound.mts';
 
 function fixture() {
   const root = mkdtempSync(resolve(tmpdir(), 'nebula-inbound-'));

@@ -5,11 +5,11 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, stat, symlink, writeFile } from
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import ts from 'typescript';
 
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../..');
 function readConfig(path: string) {
   const source = ts.readConfigFile(path, ts.sys.readFile);
   if (source.error) throw new Error(ts.flattenDiagnosticMessageText(source.error.messageText, '\n'));

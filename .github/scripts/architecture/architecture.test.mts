@@ -5,8 +5,9 @@ import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-im
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
-import { readCiSteps } from '../../../.github/scripts/ci/check-ci.mts';
-import { formatDelta } from './report.mts';
+import { readCiSteps } from '../ci/check-ci.mts';
+import { formatDelta, formatFindings } from './report.mts';
+import { isBroken, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
 import { isTestPath, zoneOf } from './zones.mts';
@@ -74,6 +75,13 @@ test('Astro frontmatter and bundled scripts become import specifiers', () => {
     ['./Card.astro', false, ['default']], ['../shape', true, ['Shape']], ['../site-thing.mts', false, ['a', 'b']],
     ['../client.mts', false, ['run']], ['../entry.ts', false, []],
   ]);
+});
+
+test('a dynamic import of a no-expression template literal is a specifier; a computed one is not', () => {
+  const found = moduleSpecifiers("await import(`./a.mts`);\nawait import('./b.mts');\nconst name = './c.mts'; await import(name);\nawait import(`./${name}`);\n", 'site/x.ts');
+  assert.deepEqual(found.map(item => [item.specifier, item.typeOnly, item.symbols]), [['./a.mts', false, ['(dynamic)']], ['./b.mts', false, ['(dynamic)']]]);
+  assert.deepEqual(astroSpecifiers("---\nconst late = await import(`../late.mts`);\n---\n<script>import(`../client.mts`);</script>", 'site/X.astro')
+    .map(item => item.specifier), ['../late.mts', '../client.mts']);
 });
 
 test('type-level imports are import specifiers: typeof import() and import().Name', () => {
@@ -271,7 +279,24 @@ test('an added and a removed entry that share a target or a source folder look l
 
 test('Contract lint, and so pnpm check:ci, runs the check after the packages are built', () => {
   const steps = readCiSteps(readFileSync(new URL('../../../.github/workflows/universe.yml', import.meta.url), 'utf8'), 'lint').map(step => step.run.trim());
-  const build = steps.indexOf('node tools/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
+  const build = steps.indexOf('node .github/scripts/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
   assert.ok(build >= 0, 'the lint job builds the shared packages');
   assert.ok(check > build, 'the lint job runs pnpm check:architecture after that build');
+});
+
+test('a repository rule has no baseline: any finding breaks the check and is printed', () => {
+  const rule = { id: 'no-x', description: 'no file is named x', check: (_root: string, files: readonly string[]) => files.filter(file => file.endsWith('/x')) };
+  const clean = repositoryFindings('/unused', ['a/y'], [rule]), found = repositoryFindings('/unused', ['a/y', 'a/x'], [rule]);
+  assert.equal(isBroken(clean), false);
+  assert.equal(isBroken(found), true);
+  assert.doesNotMatch(formatFindings(clean), /broken/u);
+  assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'nebula-boundaries'], 'the nebula boundary checks are an architecture rule');
+});
+
+test('a file under a retired tools/ folder is a finding; a sibling folder with a longer name is not', () => {
+  assert.deepEqual(retiredFiles(['tools/objects/pds/programs/x.json', 'tools/objects/pds-labels/x.mts', 'tools/objects/pds', 'tools/prepare/x.mts'], ['tools/objects/pds']),
+    ['tools/objects/pds/programs/x.json: tools/objects/pds/ is retired; put the file in the folder its code moved to']);
+  assert.ok(RETIRED_FOLDERS.every(folder => folder.startsWith('tools/') && !folder.endsWith('/')), 'retired folders are tools/ folders, named without a trailing slash');
+  assert.deepEqual([...RETIRED_FOLDERS].sort(), RETIRED_FOLDERS, 'kept sorted');
 });

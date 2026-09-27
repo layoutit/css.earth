@@ -2,14 +2,14 @@ import { isRecord } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { fileURLToPath } from 'node:url';
 import { ESLint } from 'eslint';
 import { parse } from '@typescript-eslint/parser';
 import type { PathLike } from 'node:fs';
 
-const root = fileURLToPath(new URL('../../', import.meta.url));
+const root = fileURLToPath(new URL('../../../', import.meta.url));
 const eslint = new ESLint({ cwd: root });
 const packageNames = ['astronomy', 'catalog', 'engine', 'objects'];
 

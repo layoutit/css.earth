@@ -205,7 +205,7 @@ from. It groups the files into folders and fails when a change adds:
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 
 Type-only imports count. Existing cases are listed in
-`tools/ci/architecture/baseline.json`, so they do not fail the check. If the
+`.github/scripts/architecture/baseline.json`, so they do not fail the check. If the
 check reports that something got better, or that a change looks like a rename,
 run `pnpm check:architecture --update-baseline` and commit the baseline. It needs
 every source file on disk and the shared packages built (`pnpm install` does
@@ -214,9 +214,12 @@ import of a shared package names no entry it can trace to a source file.
 `pnpm arch:map` writes the full folder map, cycles and per-folder counts to
 `output/architecture/`.
 
-Not yet enforced: unused files in library folders (untangle item K), and the
-nebula boundary checks in `tools/nebula/package-boundaries.mts` and
-`tools/nebula/inbound-boundaries.mts`, which still run separately.
+The same check applies repository rules that have no baseline, so any finding
+fails it: no file under a retired `tools/` folder (`RETIRED_FOLDERS` in
+`repository-rules.mts`; a move that empties a folder adds it), and the nebula
+boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
+`pnpm check:nebula-boundaries` is an alias of the check). Not yet enforced:
+unused files in library folders (untangle item K).
 
 Reference implementations live under `tools/oracles/` with their own pinned
 Python environment (`node tools/oracles/setup.mts`); their fixtures under `tests/oracles/`

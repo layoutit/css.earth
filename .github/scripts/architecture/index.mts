@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /** Layer rules and the folder dependency map. CI runs the check in the Contract lint job, so `pnpm check:pr` (alias `pnpm check:ci`) runs it too.
  *
- *   pnpm check:architecture                     fail if a change adds a folder cycle edge or a forbidden import
- *   pnpm check:architecture --update-baseline   record the current state as tools/ci/architecture/baseline.json
+ *   pnpm check:architecture                     fail if a change adds a folder cycle edge or a forbidden import, or breaks a
+ *                                               repository rule (repository-rules.mts; `pnpm check:nebula-boundaries` is an alias)
+ *   pnpm check:architecture --update-baseline   record the current state as .github/scripts/architecture/baseline.json
  *   pnpm arch:map                               write the JSON views to output/architecture/
  *
  * The check is a ratchet: existing debt is recorded in the baseline, so it is visible without blocking
@@ -13,7 +14,7 @@ import { pathToFileURL } from 'node:url';
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const root = resolve(import.meta.dirname, '../../..'), [command, ...rest] = process.argv.slice(2);
-  const usage = 'Usage: node tools/ci/architecture/index.mts check [--update-baseline] | map';
+  const usage = 'Usage: node .github/scripts/architecture/index.mts check [--update-baseline] | map';
   const update = rest.length === 1 && rest[0] === '--update-baseline';
   if (!(command === 'map' && rest.length === 0) && !(command === 'check' && (rest.length === 0 || update))) {
     console.error(usage); process.exitCode = 2;

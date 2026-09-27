@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { buildBaseline, countModules, growth, isExempt, trackedFiles, FREE_ALLOWANCE } from './check-directory-growth.mts';
 

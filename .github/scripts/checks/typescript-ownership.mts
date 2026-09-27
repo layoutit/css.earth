@@ -31,7 +31,7 @@ type Inventory = {
 const javascript = /\.(?:c|m)?jsx?$/u;
 const code = /\.(?:[cm]?[jt]sx?|astro)$/u;
 const categories: Category[] = ['authored', 'generated', 'vendor', 'configuration', 'facade'];
-const manifestPath = 'tools/ci/typescript-ownership.json';
+const manifestPath = '.github/scripts/checks/typescript-ownership.json';
 const astroCompiler: unknown = createRequire(import.meta.resolve('astro/package.json'))('@astrojs/compiler-rs');
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -111,7 +111,13 @@ function sourceFiles(root: string): string[] {
 }
 
 function literalValue(node: unknown): string | undefined {
-  return isRecord(node) && node.type === 'Literal' && typeof node.value === 'string' ? node.value : undefined;
+  if (!isRecord(node)) return undefined;
+  if (node.type === 'Literal') return typeof node.value === 'string' ? node.value : undefined;
+  // A template literal without expressions names its module as plainly as a quoted string; one with an expression
+  // is computed and, like `import(variable)`, out of reach of this static guard.
+  if (node.type !== 'TemplateLiteral' || !isArray(node.expressions) || node.expressions.length > 0 || !isArray(node.quasis)) return undefined;
+  const [quasi] = node.quasis;
+  return isRecord(quasi) && isRecord(quasi.value) && typeof quasi.value.cooked === 'string' ? quasi.value.cooked : undefined;
 }
 
 function literalImports(node: unknown, imports: string[] = []): string[] {
@@ -261,7 +267,7 @@ export function auditOwnership(root: string): Inventory {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const rootIndex = args.indexOf('--root');
-  const root = rootIndex === -1 ? resolve(dirname(fileURLToPath(import.meta.url)), '../..') : resolve(args[rootIndex + 1] ?? '.');
+  const root = rootIndex === -1 ? resolve(dirname(fileURLToPath(import.meta.url)), '../../..') : resolve(args[rootIndex + 1] ?? '.');
   try {
     const inventory = auditOwnership(root);
     if (args.includes('--json')) console.log(JSON.stringify(inventory, null, 2));

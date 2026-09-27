@@ -4,7 +4,12 @@
  * only by an Astro component (item K listed 11 such files). The scanner reads the frontmatter and each
  * bundled `<script>` with the TypeScript parser; `graph.mts` resolves each specifier with the cruise's own
  * resolver (`resolver.mts`). Only specifiers that name a repository file become edges; npm packages and
- * `astro:*` virtual modules are external. */
+ * `astro:*` virtual modules are external.
+ *
+ * Computed specifiers are out of reach here and in the cruise: `import(name)`, a template literal with an expression
+ * (`import(\`${directory}/x.mts\`)`) and `import(new URL('…', import.meta.url).href)` name no file until they run, so
+ * they add no edge. The nebula-boundaries rule (`nebula-inbound.mts`) resolves constant ones for the lab and bake
+ * boundaries, and flags the rest where they could reach those packages. */
 import ts from 'typescript';
 
 export interface AstroSpecifier { readonly specifier: string; readonly typeOnly: boolean; readonly symbols: readonly string[] }
@@ -43,7 +48,8 @@ export function moduleSpecifiers(text: string, fileName = 'module.ts'): AstroSpe
       const typeOnly = Boolean(clause?.isTypeOnly) || (ts.isExportDeclaration(node) && node.isTypeOnly) || elementsTypeOnly;
       found.push({ specifier: node.moduleSpecifier.text, typeOnly, symbols });
     } else if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword
-      && node.arguments[0] && ts.isStringLiteral(node.arguments[0])) {
+      && node.arguments[0] && ts.isStringLiteralLike(node.arguments[0])) {
+      // A quoted or a no-expression template literal (`import(\`./x.mts\`)`), as dependency-cruiser reads it in .ts files.
       found.push({ specifier: node.arguments[0].text, typeOnly: false, symbols: ['(dynamic)'] });
     } else if (ts.isImportTypeNode(node) && ts.isLiteralTypeNode(node.argument) && ts.isStringLiteral(node.argument.literal)) {
       // `typeof import('…')` and `import('…').Name`: a type-level import with no import declaration.

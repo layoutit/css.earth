@@ -11,7 +11,7 @@ import type { ImportGraph } from './graph.mts';
 import { compareViolations, evaluateRules, LAYER_RULES, type LayerRule, type Violation } from './rules.mts';
 import { byText, zoneOf } from './zones.mts';
 
-export const BASELINE_PATH = 'tools/ci/architecture/baseline.json';
+export const BASELINE_PATH = '.github/scripts/architecture/baseline.json';
 export const BASELINE_SCHEMA = 'cssearth-architecture-baseline@1';
 
 export interface CycleEdge { readonly from: string; readonly to: string; readonly imports: number }
