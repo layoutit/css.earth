@@ -65,7 +65,7 @@ and the limits:
 - A lens names the model as its `photometry`; its display range and level
   matching stay in their own recipe blocks.
 
-Surface-observation lenses with Sun geometry (`tools/objects/surface-observations/`),
+Surface-observation lenses with Sun geometry (`packages/bake/src/objects/layers/terrestrial/surface-observations/`),
 controlled-camera lenses included, accept this block. Filter-colour lenses refuse it, because a model fitted in
 one filter would change band ratios. Observed-colour lenses keep their
 per-observation ISIS Lunar-Lambert weights, and ISIS2 orthographic images carry

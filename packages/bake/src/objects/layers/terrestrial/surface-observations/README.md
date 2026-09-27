@@ -11,9 +11,11 @@ own geometry file. The runtime only displays the prepared atlas.
 decode → camera → pixel geometry → photometry → footprint → surface transfer → report
 ```
 
-The stages below live in the terrestrial layer's shared libraries,
-[`packages/bake/src/objects/layers/terrestrial/surface-observations/`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/)
-(`@cssearth/bake/objects/layers/terrestrial`); this folder keeps their tests, evidence and the OSIRIS shape comparison.
+The stages below are the modules beside this README, part of the terrestrial layer's shared libraries
+(`@cssearth/bake/objects/layers/terrestrial`). Their tests are in
+[`tests/objects/surface-observations/`](../../../../../../../tests/objects/surface-observations/), the pipeline evidence in
+[`evidence/photograph-pipeline/`](../../../../../../../evidence/photograph-pipeline/), and the OSIRIS shape comparison is
+[`packages/bake/cli/osiris-shape-comparison.mts`](../../../../../cli/osiris-shape-comparison.mts).
 
 A body owner names a format and its pins in `raster.surfaceObservations`. A
 format adapter decodes the product and builds its camera and pixel geometry.
@@ -51,15 +53,15 @@ new route.
 | `controlled-shape-color` | `formats/controlled-camera.ts` | The same cameras for three sequential filters, measured again against reference images | Source-mesh rays |
 | `isis2-orthographic` | `formats/orthographic.ts` | None: every pixel names a DEM post | Registered DEM posts |
 
-The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
+The [implementation map](../../../../../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
 
 A JunoCam image is a stack of strips, each read at its own instant from a spinning spacecraft, so `junocam-camera` builds one camera per strip and joins them
-with [`composite.ts`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/composite.ts): the strips of a filter make a band, and three bands make a colour photograph. The [JunoCam guide](../../../docs/junocam.md)
+with [`composite.ts`](composite.ts): the strips of a filter make a band, and three bands make a colour photograph. The [JunoCam guide](../../../../../../../docs/junocam.md)
 records the route and what it measured on Europa.
 
 The NEAR MSI adapter retains calibrated I/F with its original illumination.
-Mathilde's [source method](../../../src/objects/mathilde/README.md) records the
+Mathilde's [source method](../../../../../../../src/objects/mathilde/README.md) records the
 reconstructed image table, inferred detector conventions, raw-data checks and
 limits of silhouette registration on the visualization shape.
 
@@ -146,7 +148,7 @@ report records them.
   authored `displayRange`: the MVIC cube's format names the bands and their data-number
   quantity, which the decoder checks against the native label, and a controlled
   colour lens checks each filter and its I/F units in the native labels. Floating
-  samples receive the [shared IEC sRGB transfer](../../../packages/bake/src/objects/color/color-transfer.ts) once,
+  samples receive the [shared IEC sRGB transfer](../../../color/color-transfer.ts) once,
   after surface transfer, and the report records the band policy. Encoding does
   not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
@@ -163,7 +165,7 @@ report records them.
   nearest pixel the lens cannot use (off the body, past the emission or
   incidence limit, or disqualified) as a fraction of the frame's deepest
   pixel's, so a frame fades out at its limb and terminator instead of stopping
-  there; see [`contour.mts`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/contour.ts). The SPHERE team mapped Vesta the same
+  there; see [`contour.mts`](contour.ts). The SPHERE team mapped Vesta the same
   way ([Fétick et al. 2019](https://doi.org/10.1051/0004-6361/201834749),
   section 4.4): epochs averaged with weights that fall toward the limb, the
   contour itself left out. The paper states no width for its Gaussian weight;
@@ -203,9 +205,9 @@ report records them.
 
 A ground-based frame ships pixels and instrument metadata, and its camera is computed rather than read. Everything that computation needs is pinned beside the body and named in `source/preparation/observer-cameras.json`: the rotation model (a light-curve inversion spin record with its verified column order, or an IAU pole model in a text PCK with its NAIF body code), the two pinned Horizons tables, the epoch rule and the centre rule. `node packages/bake/cli/observer-cameras.mts <object> --write` derives the eight controlled-camera fields and the disc centre for every frame of the lens and states them in the recipe; `tests/objects/terrestrial/observer-cameras.test.mts` refuses a recipe that drifts from what its inputs give, for every body that carries the record. Nothing in such a recipe is fitted.
 
-For a body of the VLT/SPHERE asteroid survey, `node tools/objects/sphere-survey/setup.mts <object>` does all of this in a scratch copy and measures the result against the survey's figure, and `install.mts` writes it into the package; the [recipe](../../../.agents/skills/celestial-skill/references/sphere-survey-photographs.md) gives the steps. `node packages/bake/cli/sphere-horizons.mts <object> --write` writes and pins the two Horizons tables for exactly the lens's frames: Paranal rows at each frame's stated exposure start, which is the time the derivation matches rows by, and heliocentric vectors one light time earlier. Horizons refuses a list of more than 25 times, so the tool asks in batches and joins the rows. For the six bodies whose tables were made by hand, it reproduces their positions exactly and their ranges and vectors to within a kilometre.
+For a body of the VLT/SPHERE asteroid survey, `node tools/objects/sphere-survey/setup.mts <object>` does all of this in a scratch copy and measures the result against the survey's figure, and `install.mts` writes it into the package; the [recipe](../../../../../../../.agents/skills/celestial-skill/references/sphere-survey-photographs.md) gives the steps. `node packages/bake/cli/sphere-horizons.mts <object> --write` writes and pins the two Horizons tables for exactly the lens's frames: Paranal rows at each frame's stated exposure start, which is the time the derivation matches rows by, and heliocentric vectors one light time earlier. Horizons refuses a list of more than 25 times, so the tool asks in batches and joins the rows. For the six bodies whose tables were made by hand, it reproduces their positions exactly and their ranges and vectors to within a kilometre.
 
-A spin record's column order is not the reader's choice. `terrestrial-layers/spin-record-reading.mts` reads the release both ways and keeps the reading within 5° of the published pole: the one in the body's `reference/model-properties.json` when that cites the paper, otherwise the one the rotation in `observer-cameras.json` states with its source and table (a DAMIT-shaped body carries the survey's Table A.1 pole there). It refuses when neither reading is that close, or when the two readings are within 2° of each other. A record that states a pole a few degrees past the pole is folded to the same axis, with half a turn added to its phase so the body frame stays the record's own; Elektra's is the case. `loadOrientation` refuses a record that states the other order. Of the survey releases in the repository, only Eleonora's and Nemesis's cannot be read this way; their ledgers record it, and `spin-record-reading.test.mts` checks that they do.
+A spin record's column order is not the reader's choice. `terrestrial-layers/spin-record-reading.mts` reads the release both ways and keeps the reading within 5° of the published pole: the one in the body's `reference/model-properties.json` when that cites the paper, otherwise the one the rotation in `observer-cameras.json` states with its source and table (a DAMIT-shaped body carries the survey's Table A.1 pole there). It refuses when neither reading is that close, or when the two readings are within 2° of each other. A record that states a pole a few degrees past the pole is folded to the same axis, with half a turn added to its phase so the body frame stays the record's own; Elektra's is the case. `loadOrientation` refuses a record that states the other order. Of the survey releases in the repository, only Eleonora's and Nemesis's cannot be read this way; their ledgers record it, and `tests/objects/terrestrial/spin-record-reading.test.mts` checks that they do.
 
 Two rules came out of measuring the route on Vesta, where a Dawn mosaic exists to measure against. The epoch is the exposure midpoint, from the frame's own `ESO DET SEQ1 EXPTIME`: an 81 s ZIMPOL exposure of a body turning 1600 degrees a day moves the longitude by 0.75 degrees between start and midpoint, and the start was wrong by that much. The disc centre is the limb, not the brightness centroid: the centroid sits toward the Sun at any phase angle, so `limbCentre` in `terrestrial-layers/registration-sweeps.mts` aligns the outline the lens mesh projects to the outline the frame shows and takes the first harmonic of the residual as the centre error.
 
@@ -275,17 +277,17 @@ the atlas transfer counts.
 
 ## Evidence
 
-[`evidence/photograph-pipeline`](evidence/photograph-pipeline/) compares the
+[`evidence/photograph-pipeline`](../../../../../../../evidence/photograph-pipeline/) compares the
 prepared images that moving every photograph lens onto this contract changed
 with `main` at `3785f09de`:
 
-- [Six minimap sheets](evidence/photograph-pipeline/minimaps-01.webp) show each
+- [Six minimap sheets](../../../../../../../evidence/photograph-pipeline/minimaps-01.webp) show each
   changed 640 × 320 minimap on `main`, on the branch and as a Pixelmatch diff.
   51 minimaps changed, one of them (Epimetheus false colour) only in its
   encoding; 55 are byte-identical.
-- [The context sheet](evidence/photograph-pipeline/contexts.webp) does the same
+- [The context sheet](../../../../../../../evidence/photograph-pipeline/contexts.webp) does the same
   for the 23 changed context images.
-- [`evidence.json`](evidence/photograph-pipeline/evidence.json) pins both inputs
+- [`evidence.json`](../../../../../../../evidence/photograph-pipeline/evidence.json) pins both inputs
   and each diff by size and SHA-256 and records the compared and mismatched
   pixels. `diffs/` keeps every diff at full size.
 - The browser views of ten lenses at 1440 × 1000 and DPR 2 were never
@@ -302,7 +304,7 @@ For an OSIRIS dataset moved to another source mesh, compare the native GEO
 Cartesian samples with both source shapes independently of the display atlas:
 
 ```sh
-node tools/objects/surface-observations/osiris-shape-comparison.mts comet-67p osiris output/67p-shape-comparison.json
+node packages/bake/cli/osiris-shape-comparison.mts comet-67p osiris output/67p-shape-comparison.json
 ```
 
 The report keeps detector-weighted closest-point distances and reprojection

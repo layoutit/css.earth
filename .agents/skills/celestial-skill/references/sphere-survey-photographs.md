@@ -3,7 +3,7 @@
 This recipe photographs a main-belt asteroid from the VLT/SPHERE imaging survey
 of Vernazza et al. (2021), using the survey's deconvolved ZIMPOL frames. The lens
 ships on the survey's own comparison figure, as the
-[rule for ground-based lenses](../../../../tools/objects/surface-observations/README.md#observer-computed-cameras)
+[rule for ground-based lenses](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#observer-computed-cameras)
 explains. Two commands do the work; Iris and Hebe are the worked examples.
 
 ## Before you start
@@ -158,7 +158,7 @@ Survey lenses average their frames where they overlap (`edge-weighted-average`):
 each frame fades out toward its disc edge, where deconvolution rings, instead
 of one frame per point switching abruptly. The rule, its source and its
 measurements are in the
-[route policy](../../../../tools/objects/surface-observations/README.md#route-policy).
+[route policy](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#route-policy).
 
 ![Kleopatra and Kalliope in the app's default view, one frame per point on the left and the edge-weighted average on the right](sphere-survey-blend.webp)
 

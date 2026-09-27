@@ -165,7 +165,7 @@ the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../packages/bake/src/objects/acquisition/) handle
 instrument-specific calibration and geometry. The
-[surface-observation pipeline](../tools/objects/surface-observations/README.md)
+[surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md)
 also fits and validates cameras and applies photometric corrections.
 
 [loadScienceSurface](../packages/bake/src/objects/raster/scientific-raster.ts)
@@ -282,7 +282,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 | --- | --- |
 | Geographic or projected map | [scienceMapPoint](../packages/bake/src/objects/raster/scientific-raster.ts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../packages/bake/src/scene/solid-body-surface.ts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../packages/bake/src/objects/raster/obj-uv-fits.ts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts) selects among qualified frames. |
+| Registered photograph | The [surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts) selects among qualified frames. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler

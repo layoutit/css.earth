@@ -12,7 +12,7 @@ title: "archive: <mission> <instrument> <product type>"
 
 **What the archive offers:** per-pixel geometry, SPICE kernels, catalog cameras, calibration level, and any published photometric model you found.
 
-**Which stage is missing:** identify decoding, source interpretation, map sampling, camera/body-frame reconstruction or surface correspondence as applicable. A controlled map need not reconstruct its original cameras. Use the [photographic investigation routes](../../.agents/skills/celestial-skill/references/photographic-investigation.md) and, for individual observations, the [surface-observation contract](../../tools/objects/surface-observations/README.md#adding-an-archive-product).
+**Which stage is missing:** identify decoding, source interpretation, map sampling, camera/body-frame reconstruction or surface correspondence as applicable. A controlled map need not reconstruct its original cameras. Use the [photographic investigation routes](../../.agents/skills/celestial-skill/references/photographic-investigation.md) and, for individual observations, the [surface-observation contract](../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#adding-an-archive-product).
 
 Use this template when a handoff is requested. Authorized shared-tooling work may
 start with one consuming body; opening an issue does not replace that implementation.

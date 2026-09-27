@@ -277,10 +277,10 @@ for availability; this reference does not establish merge or deployment status.
 | --- | --- |
 | Observation pins, quality policy, photometry and transfer limits | `src/objects/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
 | OSIRIS decoding, companion identity and quality flags | `packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.ts` |
-| Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `tools/objects/surface-observations/`, described in its [README](../../../../tools/objects/surface-observations/README.md) |
+| Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `packages/bake/src/objects/layers/terrestrial/surface-observations/`, described in its [README](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md) |
 | Deterministic surface samples, bounded overlap gains and observation selection | `packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts` |
 | Atlas baking and lossless observation-index output | `packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts` |
-| Selection/level regressions and prepared provenance checks | `tools/objects/surface-observations/levels.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
+| Selection/level regressions and prepared provenance checks | `tests/objects/surface-observations/levels.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
 | Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/objects/comet-67p/README.md) |
 
 Inspect the actual recipe/schema before reuse. The OSIRIS decoder and quality
@@ -339,8 +339,8 @@ without a frame kernel, as they do in SPICE. A recipe may constrain separation
 among bilinear image contributors. This is distinct from correspondence between
 the displayed mesh and the source mesh; applying a contributor-distance limit to
 that correspondence can create false coverage holes. Use the current
-[transfer policy](../../../../tools/objects/surface-observations/README.md#route-policy)
-and [contributor limits](../../../../tools/objects/surface-observations/README.md#transfer-limits)
+[transfer policy](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#route-policy)
+and [contributor limits](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#transfer-limits)
 rather than copying a distance from another body.
 
 Archived and kernel pointing carries the archive's error: a fraction of a pixel
