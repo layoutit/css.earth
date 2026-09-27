@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
-import { preparationMaterial } from '../../src/platform/preparation-evidence.mts';
-import type { PreparationEvidence } from '../../src/platform/preparation-evidence.mts';
-import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
+import { preparationMaterial } from '@cssearth/objects/provenance';
+import type { PreparationEvidence } from '@cssearth/objects/provenance';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 
 export const preparationMaterialDigest = (document: ProvenanceDocument) =>
   createHash('sha256').update(JSON.stringify(preparationMaterial(document))).digest('hex');

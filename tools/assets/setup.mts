@@ -10,7 +10,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { publishSourceBytes } from "@cssearth/bake/delivery";
 import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
-import { ASSET_LOCATIONS, type AssetLocation } from "../../src/platform/runtime-asset-closure.mts";
+import { ASSET_LOCATIONS, type AssetLocation } from '@cssearth/objects/node';
 import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from "./runtime-assets.mts";
 
 /** `node tools/assets/setup.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
@@ -126,7 +126,7 @@ export async function deriveRestoredPreparedFiles(ids: readonly string[], root: 
     return { pages: 0, provenance: 0 };
   }
   const SCENE_OBJECTS = readPreparedObjects(checkout).sceneObjects;
-  const { provenanceIsRegenerated } = await import("../../src/platform/runtime-asset-closure.mts");
+  const { provenanceIsRegenerated } = await import('@cssearth/objects/node');
   const scene = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id));
   const missing = (id: string, file: string) => !existsSync(resolve(root, "src/objects", id, "prepared", file));
   const pages: string[] = [], provenance: string[] = [];

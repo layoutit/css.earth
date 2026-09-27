@@ -4,12 +4,12 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import type { ContextAvailability } from '../../src/platform/context-availability.mts';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import type { ContextAvailability } from '@cssearth/objects/provenance';
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 import { hasErrorCode } from '@cssearth/core';
-import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../..');
 type PublicAssetAvailability = 'local' | 'manifest';

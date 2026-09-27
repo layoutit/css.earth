@@ -1,7 +1,7 @@
 import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
-import type { InputRole } from '../../src/platform/product-input-evidence.mts';
+import type { InputRole } from '@cssearth/objects/provenance';
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '@cssearth/core';
-import { parseCapture } from '../../src/platform/exploration-catalog.mts';
+import { parseCapture } from '@cssearth/objects/provenance';
 import { parseSourceBinding } from '@cssearth/objects/sources';
 
 export {requireRecord as record, requireString as text};

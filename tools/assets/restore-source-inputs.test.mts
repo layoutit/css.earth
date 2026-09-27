@@ -8,7 +8,7 @@ import test, { type TestContext } from 'node:test';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
-import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '@cssearth/objects/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;

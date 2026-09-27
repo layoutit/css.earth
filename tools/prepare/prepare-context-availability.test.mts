@@ -5,7 +5,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { inspectContextAvailability, prepareContextAvailability } from './prepare-context-availability.mts';
-import { parseContextAvailability } from '../../src/platform/context-availability.mts';
+import { parseContextAvailability } from '@cssearth/objects/provenance';
 import { writeContextPackage } from '../../tests/fixtures/context-package.mts';
 import { readPreparedVolumeProvenance } from './prepare-volume-provenance.mts';
 

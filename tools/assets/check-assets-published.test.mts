@@ -10,7 +10,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { promisify } from 'node:util';
 import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from './check-assets-published.mts';
-import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 const execFileAsync = promisify(execFile);
 const ok = () => new Response(null, { status: 200, headers: { 'content-length': '12' } });
@@ -262,7 +262,7 @@ test('addedAssetKeys checks everything when key-construction code changed or the
     changedPaths: async () => ['tools/assets/runtime-assets.mts', 'src/objects/hebe/inventory.json'], inventoryAt: async () => null });
   assert.deepEqual(widened, { all: true, reason: 'tools/assets/runtime-assets.mts changed' });
   const closure = await addedAssetKeys('origin/main', { mergeBase: async () => 'b'.repeat(40),
-    changedPaths: async () => ['src/platform/runtime-asset-closure.mts'], inventoryAt: async () => null });
+    changedPaths: async () => ['packages/objects/src/node/runtime-asset-closure.ts'], inventoryAt: async () => null });
   assert.equal(closure.all, true);
   const unrelated = await addedAssetKeys('origin/main', { mergeBase: async () => { throw new Error('no merge base'); } });
   assert.equal(unrelated.all, true);

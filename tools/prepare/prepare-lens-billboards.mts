@@ -12,7 +12,7 @@ import sharp from 'sharp';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../..');
 const OUTPUT = { metadata: 'site/prepared-lens-billboards.json', atlas: 'site/prepared-lens-billboards.webp' };

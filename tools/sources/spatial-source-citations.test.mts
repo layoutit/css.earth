@@ -5,12 +5,13 @@ const test = sourceTest();
 import { resolve } from 'node:path';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceResolver } from '@cssearth/objects/sources';
-import { compileSourceUsage } from '../../src/platform/source-usage.mts';
+import { compileSourceUsage } from '@cssearth/objects/provenance';
 import { spatialSourceCitations } from './spatial-source-citations.mts';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 test('published spatial measurements join canonical Sources and remain citations', async () => {
   const root = resolve(import.meta.dirname, '../..'), sources = sourceResolver(await readSourceCatalog(root));
-  const edges = await spatialSourceCitations(root, sources), usage = compileSourceUsage([], sources, edges);
+  const edges = await spatialSourceCitations(root, sources), usage = compileSourceUsage([], sources, DATASET_ROUTES, edges);
   assert.equal(new Set(edges.map(e => e.catalogueId)).size, 216);
   assert.ok(edges.every(e => e.kind === 'citation' && e.consumerKind === 'spatial-measurement' && e.lensIds.length === 0));
   const distance = edges.find(e => e.consumerId === 'andromeda_01/distance')!;

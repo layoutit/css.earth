@@ -1,23 +1,24 @@
-import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
+import { parsePreparedSources } from '@cssearth/objects/provenance';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
-import { compileContributions, contributionViews, parseContributionGraph } from '../../src/platform/exploration-contributions.mts';
-import type { ContributionGraph, ContributionObject } from '../../src/platform/exploration-contributions.mts';
-import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
-import { explorationArray, explorationId, explorationRecord, explorationText } from '../../src/platform/exploration-catalog.mts';
-import type { Capture } from '../../src/platform/exploration-catalog.mts';
-import type { ExplorationImage } from '../../src/platform/prepared-exploration.mts';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import { parsePreparedExploration } from '@cssearth/objects/provenance';
+import { compileContributions, contributionViews, parseContributionGraph } from '@cssearth/objects/provenance';
+import type { ContributionGraph, ContributionObject } from '@cssearth/objects/provenance';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
+import { explorationArray, explorationId, explorationRecord, explorationText } from '@cssearth/objects/provenance';
+import type { Capture } from '@cssearth/objects/provenance';
+import type { ExplorationImage } from '@cssearth/objects/provenance';
 import { sourceTestVolumes as prepareVolumeProvenance } from '../../tools/sources/source-test-inputs.mts';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-const { sources } = parsePreparedSources(await json('../prepared-sources.json'));
-const prepared = parsePreparedExploration(await json('../prepared-facilities.json'), sources);
+const { sources } = parsePreparedSources(await json('../prepared-sources.json'), DATASET_ROUTES);
+const prepared = parsePreparedExploration(await json('../prepared-facilities.json'), sources, DATASET_ROUTES);
 const catalog = prepared.catalog;
 const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/objects/${id}/prepared/provenance.json`), id);
 const missions = Object.fromEntries(catalog.missions.map(mission => [mission.id, mission]));
@@ -55,7 +56,7 @@ async function objectInput(id: string, document: ProvenanceDocument | null = nul
   }) } } };
   return { id, name: object.name, route: object.route, controls: page.controls.lenses?.controls ?? [], provenance: document ?? await provenance(id) };
 }
-async function graphFor(id: string, document: ProvenanceDocument | null = null): Promise<ContributionGraph> { return compileContributions([await objectInput(id, document)], catalog); }
+async function graphFor(id: string, document: ProvenanceDocument | null = null): Promise<ContributionGraph> { return compileContributions([await objectInput(id, document)], catalog, DATASET_ROUTES); }
 const ids = (graph: ContributionGraph, lens: string, domain: 'mission' | 'facility' = 'mission'): string[] => [...new Set(graph.edges.filter(edge => edge.lensIds.includes(lens)).flatMap(edge => {
   const a = edge.attribution;
   if (domain === 'mission') return a.kind !== 'unresolved' && a.missionId ? [a.missionId] : [];
@@ -128,9 +129,9 @@ test('every migrated capture stays bound to its source; the full prepared graph 
   }
   assert.ok(authored >= 374); assert.ok(captured > 300 && captured <= authored);
   objects.push(...await prepareVolumeProvenance());
-  const graph = compileContributions(objects, catalog);
+  const graph = compileContributions(objects, catalog, DATASET_ROUTES);
   assert.deepEqual(graph, prepared.graph);
-  assert.deepEqual(compileContributions(objects, catalog), graph);
+  assert.deepEqual(compileContributions(objects, catalog, DATASET_ROUTES), graph);
   for (const [id, edgeIds] of Object.entries(graph.byFacility)) {
     assert.ok(edgeIds.every(index => {
       const attribution = graph.edges[index]?.attribution;
@@ -204,7 +205,7 @@ test('unknown identities, impossible capture pairs, stale lenses and damaged ind
   const duplicateCapture: Capture = { attributions: [impossibleCapture.attributions[0]!, impossibleCapture.attributions[0]!] };
   Reflect.set(source, 'capture', duplicateCapture); assert.throws(() => validateObjectProvenance(document));
   const object = await objectInput('mercury'); Reflect.set(object, 'controls', []);
-  assert.throws(() => compileContributions([object], catalog), /Unknown prepared dataset/);
+  assert.throws(() => compileContributions([object], catalog, DATASET_ROUTES), /Unknown prepared dataset/);
   const graph = structuredClone(prepared.graph); Reflect.set(graph.byFacility, 'messenger', []);
-  assert.throws(() => parseContributionGraph(graph, catalog), /Inconsistent contribution index/);
+  assert.throws(() => parseContributionGraph(graph, catalog, DATASET_ROUTES), /Inconsistent contribution index/);
 });

@@ -2,9 +2,9 @@ import { sha256 } from '@cssearth/core/node';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '@cssearth/objects/sources';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
 import { manifestSources } from '../sources/context-source-records.mts';
-import { requireInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import { VOLUME_METADATA_FILENAMES } from '../assets/runtime-assets.mts';
 export const contextProvenanceCompilerClosure = ['tools/prepare/prepare-context-provenance.mts', 'tools/sources/context-source-records.mts'];
 export async function prepareContextProvenance({ root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) } = {}) {

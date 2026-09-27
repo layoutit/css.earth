@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { computePruneCandidates, currentlyInventoriedKeys, listRuntimeAssetKeys } from './prune-runtime-assets.mts';
-import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 test('computePruneCandidates keeps only keys absent from the inventory, and totals their bytes', () => {
   const live = [

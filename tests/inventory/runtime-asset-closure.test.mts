@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 
 import {
   assembleRuntimeAssetClosure, inventoryPreparedAssets, inventoryPublicAssets, normalizeRuntimeAssetUrls,
   readInventory, updateInventory, validateInventory, verifyInventory,
-} from "./runtime-asset-closure.mts";
+} from "@cssearth/objects/node";
 
 const digest = (text: string) => createHash("sha256").update(text).digest("hex");
 

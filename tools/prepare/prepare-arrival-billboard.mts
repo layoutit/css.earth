@@ -10,7 +10,7 @@ import { writeLossyWebp } from '@cssearth/bake/raster';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parseArrivalBillboard } from '@cssearth/objects';
-import { readInventory, updateInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory, updateInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../..'), args = process.argv.slice(2);
 function option(flag: string, fallback: string) {

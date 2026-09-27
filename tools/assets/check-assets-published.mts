@@ -35,7 +35,7 @@ async function gitInventoryAt(base: string, path: string, root: string): Promise
  */
 const SCOPE_WIDENING_PATHS = new Set([
   "tools/assets/runtime-assets.mts",
-  "src/platform/runtime-asset-closure.mts",
+  "packages/objects/src/node/runtime-asset-closure.ts",
 ]);
 
 const INVENTORY_PATH = /^src\/objects\/([^/]+)\/inventory\.json$/u;

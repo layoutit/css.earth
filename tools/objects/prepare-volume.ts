@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { answerParent } from '@cssearth/core/node';
 import { prepareDensityVolumeObject as prepareDensityVolume } from '@cssearth/bake/density';
-import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 /** The density-volume preparation with this checkout's inventory of the published prepared closure. */
 export const prepareDensityVolumeObject = (options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string }) =>

@@ -1,7 +1,7 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { resolve } from 'node:path';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
 import { prepareFacilities } from './prepare-facilities.mts';
 import { writePreparedSet } from '@cssearth/bake/delivery';

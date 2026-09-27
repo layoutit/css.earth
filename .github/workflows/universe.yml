@@ -196,7 +196,7 @@ jobs:
         run: |
           node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" "tools/ci/*.test.mts" ".github/scripts/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
             tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts \
-            "src/platform/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
+            "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 
   typecheck:
     name: Typecheck

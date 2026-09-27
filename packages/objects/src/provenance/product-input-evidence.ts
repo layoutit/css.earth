@@ -1,5 +1,5 @@
-import type { ProvenanceDocument, ProvenanceProduct } from './object-provenance.mts';
-import { sourceArray, sourceEnum, sourceObject, sourceText } from '@cssearth/objects/sources';
+import type { ProvenanceDocument, ProvenanceProduct } from './object-provenance.js';
+import { sourceArray, sourceEnum, sourceObject, sourceText } from '../sources/catalog.js';
 
 export const INPUT_ROLES = ['appearance', 'geometry', 'placement', 'registration', 'calibration', 'reference', 'unknown'] as const;
 export type InputRole = typeof INPUT_ROLES[number];
