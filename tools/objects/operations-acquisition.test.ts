@@ -28,12 +28,12 @@ test('an empty acquisition plan is valid when every source input is already trac
   assert.deepEqual(plan.operations,[]);
 });
 
-test('a compact GeoTIFF restores from the source cache and rejects an invalid recipe before replacing bytes',()=>temporary(async directory=>{
+for(const kind of ['geotiff-grid','geotiff-image'] as const)test(`${kind} restores from the source cache and rejects an invalid recipe before replacing bytes`,()=>temporary(async directory=>{
   const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{
-    kind:'geotiff-grid',path:'source.img',recipePath:'grid.json',groups:['refresh']}]});
-  const recipe={schema:'cssearth-geotiff-grid@1',source:{url:'https://example.test/native.tif',productId:'native',
+    kind,path:'source.img',recipePath:'grid.json',groups:['refresh']}]});
+  const recipe={schema:kind==='geotiff-image'?'cssearth-geotiff-image@1':'cssearth-geotiff-grid@1',source:{url:'https://example.test/native.tif',productId:'native',
     width:8,height:4,origin:[-180,90],resolution:[45,-45],coordinates:'degrees',radius:1000,centerLongitude:0,
-    noData:-9999,bits:32,sampleFormat:3},output:{width:4,height:2,radius:1000}};
+    noData:kind==='geotiff-image'?0:-9999,bits:kind==='geotiff-image'?8:32,sampleFormat:kind==='geotiff-image'?1:3,samples:1},output:{width:4,height:2,radius:1000}};
   const bytes=Buffer.from('compact fixture bytes'),manifest=rawManifest(bytes);
   await writeFile(join(directory,'grid.json'),JSON.stringify(recipe));
   const urls:string[]=[];

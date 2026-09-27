@@ -1,0 +1,35 @@
+{
+  "id": "source-mercury-usgs-messenger-loi-native",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MESSENGER MDIS higher-Sun global mosaic",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_loi_global_mosaic_166m",
+      "label": "USGS product and downloads"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/25"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins APL; Carnegie Science; USGS Astrogeology",
+      "scope": "Native USGS mosaic and its reduced display image.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "United States government work / NASA-PDS data; cite USGS authors",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,681 @@
+{
+  "schema": "cssearth-geotiff-image-conversion@1",
+  "source": {
+    "url": "https://planetarymaps.usgs.gov/mosaic//Mercury_MESSENGER_MDIS_Basemap_LOI_Mosaic_Global_166m.tif",
+    "productId": "MESS-H-MDIS-5-RDR-LOI-V1.0",
+    "width": 92160,
+    "height": 46080,
+    "origin": [
+      -7663601.119166941,
+      3831800.5595834707
+    ],
+    "resolution": [
+      166.310788176,
+      -166.310788176
+    ],
+    "coordinates": "meters",
+    "radius": 2439400,
+    "centerLongitude": 0,
+    "noData": 0,
+    "bits": 8,
+    "sampleFormat": 1,
+    "samples": 1
+  },
+  "output": {
+    "width": 4096,
+    "height": 2048,
+    "radius": 2439400
+  },
+  "processing": "Native pixel-area mean over each output footprint; all-zero no-data pixels excluded. No observed area is gray grid; partial footprints average only their observations. No gap reconstruction or new contrast stretch.",
+  "sourceIdentity": {
+    "bytes": 4247471083,
+    "sha256": "8ce6dc7e57e727af8d2f07bbf7b929ba29081d15399ede7311cbc5cb2c9c398a"
+  },
+  "missing": 153426,
+  "partial": 1283104,
+  "anchors": [
+    {
+      "x": 0,
+      "y": 0,
+      "rgb": [
+        221,
+        221,
+        221
+      ],
+      "observedFraction": 0.9111111111111111
+    },
+    {
+      "x": 512,
+      "y": 0,
+      "rgb": [
+        204,
+        204,
+        204
+      ],
+      "observedFraction": 0.7777777777777778
+    },
+    {
+      "x": 1024,
+      "y": 0,
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "observedFraction": 0.9555555555555556
+    },
+    {
+      "x": 1536,
+      "y": 0,
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "observedFraction": 0.9555555555555556
+    },
+    {
+      "x": 2048,
+      "y": 0,
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 0,
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 0,
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "observedFraction": 0.9111111111111111
+    },
+    {
+      "x": 3584,
+      "y": 0,
+      "rgb": [
+        232,
+        232,
+        232
+      ],
+      "observedFraction": 0.8666666666666667
+    },
+    {
+      "x": 0,
+      "y": 256,
+      "rgb": [
+        74,
+        74,
+        74
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 512,
+      "y": 256,
+      "rgb": [
+        182,
+        182,
+        182
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 256,
+      "rgb": [
+        142,
+        142,
+        142
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 256,
+      "rgb": [
+        94,
+        94,
+        94
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 256,
+      "rgb": [
+        112,
+        112,
+        112
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 256,
+      "rgb": [
+        126,
+        126,
+        126
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 256,
+      "rgb": [
+        146,
+        146,
+        146
+      ],
+      "observedFraction": 0.9851851851851852
+    },
+    {
+      "x": 3584,
+      "y": 256,
+      "rgb": [
+        89,
+        89,
+        89
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 0,
+      "y": 512,
+      "rgb": [
+        107,
+        107,
+        107
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 512,
+      "y": 512,
+      "rgb": [
+        86,
+        86,
+        86
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 512,
+      "rgb": [
+        63,
+        63,
+        63
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 512,
+      "rgb": [
+        88,
+        88,
+        88
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 512,
+      "rgb": [
+        112,
+        112,
+        112
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 512,
+      "rgb": [
+        141,
+        141,
+        141
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 512,
+      "rgb": [
+        99,
+        99,
+        99
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3584,
+      "y": 512,
+      "rgb": [
+        94,
+        94,
+        94
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 0,
+      "y": 768,
+      "rgb": [
+        102,
+        102,
+        102
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 512,
+      "y": 768,
+      "rgb": [
+        112,
+        112,
+        112
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 768,
+      "rgb": [
+        122,
+        122,
+        122
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 768,
+      "rgb": [
+        131,
+        131,
+        131
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 768,
+      "rgb": [
+        91,
+        91,
+        91
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 768,
+      "rgb": [
+        90,
+        90,
+        90
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 768,
+      "rgb": [
+        187,
+        187,
+        187
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3584,
+      "y": 768,
+      "rgb": [
+        95,
+        95,
+        95
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 0,
+      "y": 1024,
+      "rgb": [
+        89,
+        89,
+        89
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 512,
+      "y": 1024,
+      "rgb": [
+        91,
+        91,
+        91
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 1024,
+      "rgb": [
+        112,
+        112,
+        112
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 1024,
+      "rgb": [
+        78,
+        78,
+        78
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 1024,
+      "rgb": [
+        90,
+        90,
+        90
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 1024,
+      "rgb": [
+        88,
+        88,
+        88
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 1024,
+      "rgb": [
+        88,
+        88,
+        88
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3584,
+      "y": 1024,
+      "rgb": [
+        97,
+        97,
+        97
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 0,
+      "y": 1280,
+      "rgb": [
+        77,
+        77,
+        77
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 512,
+      "y": 1280,
+      "rgb": [
+        80,
+        80,
+        80
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 1280,
+      "rgb": [
+        72,
+        72,
+        72
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 1280,
+      "rgb": [
+        70,
+        70,
+        70
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 1280,
+      "rgb": [
+        87,
+        87,
+        87
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 1280,
+      "rgb": [
+        118,
+        118,
+        118
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 1280,
+      "rgb": [
+        66,
+        66,
+        66
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3584,
+      "y": 1280,
+      "rgb": [
+        84,
+        84,
+        84
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 0,
+      "y": 1536,
+      "rgb": [
+        45,
+        45,
+        45
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 512,
+      "y": 1536,
+      "rgb": [
+        83,
+        83,
+        83
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 1536,
+      "rgb": [
+        95,
+        95,
+        95
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 1536,
+      "rgb": [
+        83,
+        83,
+        83
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 1536,
+      "rgb": [
+        68,
+        68,
+        68
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 1536,
+      "rgb": [
+        109,
+        109,
+        109
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 1536,
+      "rgb": [
+        74,
+        74,
+        74
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3584,
+      "y": 1536,
+      "rgb": [
+        79,
+        79,
+        79
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 0,
+      "y": 1792,
+      "rgb": [
+        63,
+        63,
+        63
+      ],
+      "observedFraction": 0.7466666666666667
+    },
+    {
+      "x": 512,
+      "y": 1792,
+      "rgb": [
+        124,
+        124,
+        124
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1024,
+      "y": 1792,
+      "rgb": [
+        60,
+        60,
+        60
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 1536,
+      "y": 1792,
+      "rgb": [
+        69,
+        69,
+        69
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2048,
+      "y": 1792,
+      "rgb": [
+        99,
+        99,
+        99
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 2560,
+      "y": 1792,
+      "rgb": [
+        86,
+        86,
+        86
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3072,
+      "y": 1792,
+      "rgb": [
+        246,
+        246,
+        246
+      ],
+      "observedFraction": 1
+    },
+    {
+      "x": 3584,
+      "y": 1792,
+      "rgb": [
+        89,
+        89,
+        89
+      ],
+      "observedFraction": 1
+    }
+  ],
+  "maximumRowBytes": 2304000,
+  "outputBytes": 10707765,
+  "outputSha256": "0941612ff27dd5dfb74188005e9d927af5206852ce28dd7e81fa1074b9c43130"
+}

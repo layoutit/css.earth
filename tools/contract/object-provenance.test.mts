@@ -297,19 +297,18 @@ test('spacecraft photographs bind their image, registration, and source-shape de
   }
 });
 
-test('Mercury coverage completion binds all three maps; previews retain their parent lineage', async () => {
+test('Mercury native maps bind their reduction recipes without reconstructed polar coverage', async () => {
   const objectDirectory = resolve('src/objects/mercury');
   const document = await prepareObjectProvenance({ objectDirectory, publicDirectory: resolve('public/scenes/mercury'), basis: 'recovered', write: false });
   assert.deepEqual(new Set(productSourceIds(document, 'enhanced')), new Set([
-    'usgs-messenger-enhanced-global-z3', 'usgs-messenger-bdr-global-z3', 'usgs-messenger-topography-z3',
+    'usgs-messenger-enhanced-native', 'mercury-native-enhanced-recipe',
   ]));
   const enhanced = requireValue(document.products.find(product => product.id === 'enhanced'), 'Mercury enhanced product');
   const interpretation = requireRecord(requireValue(enhanced.interpretation, 'Mercury enhanced interpretation'), 'Mercury enhanced interpretation');
-  const coverageCompletion = requireRecord(interpretation.coverageCompletion, 'Mercury coverage completion');
   assert.equal(requireBoolean(interpretation.falseColor, 'Mercury enhanced false color'), true);
-  assert.equal(requireBoolean(coverageCompletion.directEnhancedColorClaim, 'Mercury direct enhanced color claim'), false);
-  assert.equal(coverageCompletion.filledPixelCount, 295167);
-  assert.deepEqual(new Set(productSourceIds(document, 'preview:enhanced')), new Set(enhanced.inputs));
+  assert.equal(interpretation.coverageCompletion, undefined);
+  assert.deepEqual(new Set(productSourceIds(document, 'loi')), new Set(['usgs-messenger-loi-native', 'mercury-native-loi-recipe']));
+  assert.deepEqual(new Set(productSourceIds(document, 'preview:enhanced')), new Set(productSourceIds(document, 'enhanced')));
   assert.ok(document.sources.some(source => source.path === 'spectrum/mascs-global-area-weighted-mean.json'));
   assert.ok(!document.sources.some(source => /stars\/|maps\/globe.asset|psg.*rif/iu.test(source.path)));
 });

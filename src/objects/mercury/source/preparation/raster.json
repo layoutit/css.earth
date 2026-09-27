@@ -26,39 +26,24 @@
   "surfaces": [
     {
       "id": "normal",
-      "source": "maps/mercury-bdr-global.png",
+      "source": "maps/native/bdr.png",
       "falseColor": false,
-      "output": "mercury-surface-{id}{suffix}.jpg",
-      "encoding": {
-        "format": "jpeg",
-        "encoder": "libjpeg",
-        "progressive": false,
-        "quality": 85,
-        "grayscale": true
-      },
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp"
+    },
+    {
+      "id": "loi",
+      "source": "maps/native/loi.png",
+      "falseColor": false,
+      "output": "mercury-surface-{id}{suffix}.webp",
       "thumbnail": "mercury-lens-{id}.webp"
     },
     {
       "id": "enhanced",
-      "source": "maps/mercury-enhanced-global.png",
+      "source": "maps/native/enhanced.png",
       "falseColor": true,
-      "output": "mercury-surface-{id}{suffix}.jpg",
-      "encoding": {
-        "format": "jpeg",
-        "encoder": "libjpeg",
-        "progressive": false,
-        "quality": 85,
-        "chromaSubsampling": "4:2:0"
-      },
-      "thumbnail": "mercury-lens-{id}.webp",
-      "coverage": {
-        "normal": "maps/mercury-bdr-global.png",
-        "topography": "maps/mercury-topography-global.png",
-        "references": [
-          "usgs-messenger-bdr-global-z3",
-          "usgs-messenger-topography-z3"
-        ]
-      }
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp"
     },
     {
       "id": "topography",

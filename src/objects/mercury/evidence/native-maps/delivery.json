@@ -1,0 +1,41 @@
+{
+  "testedBase": "7d1a553b68af8c749cc734f7bd9710085762d839",
+  "runtime": {
+    "root": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/mercury-fresh-assets-N9jTxV",
+    "files": 76,
+    "bytes": 23630778,
+    "install": {
+      "installed": 76,
+      "reused": 0,
+      "skipped": 0
+    }
+  },
+  "sources": {
+    "root": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/mercury-fresh-sources-TuFIBg",
+    "requests": [
+      "https://earth-assets.lowpoly.cc/source-cache/mercury/maps/native/bdr.png",
+      "https://earth-assets.lowpoly.cc/source-cache/mercury/maps/native/loi.png",
+      "https://earth-assets.lowpoly.cc/source-cache/mercury/maps/native/enhanced.png"
+    ],
+    "files": [
+      {
+        "path": "maps/native/bdr.png",
+        "bytes": 9626572,
+        "sha256": "da37ede4dfdf97e064e9923314e1ac15b629d2d704fc6a716b68bf81d187364d",
+        "exact": true
+      },
+      {
+        "path": "maps/native/loi.png",
+        "bytes": 10707765,
+        "sha256": "0941612ff27dd5dfb74188005e9d927af5206852ce28dd7e81fa1074b9c43130",
+        "exact": true
+      },
+      {
+        "path": "maps/native/enhanced.png",
+        "bytes": 22750282,
+        "sha256": "2371eaae80c48e47967121d2c3ced7189831508fd97a29b3adc4e46583f4e374",
+        "exact": true
+      }
+    ]
+  }
+}
