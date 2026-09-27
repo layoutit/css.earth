@@ -1,6 +1,9 @@
 /** Folder grouping ("zones") and test detection for the architecture map.
  *
- * A zone is the folder a file is counted in: `packages/<name>`, `labs/nebula-pkg/<name>`,
+ * A zone is the folder a file is counted in: `packages/<name>`, `labs/nebula-pkg/<name>`, the topics of
+ * `@cssearth/bake` (`packages/bake/src/<topic>`, `packages/bake/src/objects/<topic>`,
+ * `packages/bake/src/objects/layers/<kind>`, `packages/bake/cli`, `packages/bake/authoring/<body>`), so a cycle
+ * between bake topics shows instead of hiding inside one package,
  * `src/renderers/css/<sub>`, `src/preparation/<sub>`, `tools/objects/<sub>`, `site/<sub>`, `.github/scripts/<sub>`, and
  * `<area>/<sub>` elsewhere. Loose files in a folder form a `(root)` zone, for example `site(root)`.
  * Files at the repository root, such as `astro.config.mts`, form the `(repository root)` zone.
@@ -12,6 +15,7 @@ export function zoneOf(file: string): string {
   const parts = file.split('/');
   const [top = '', second = '', third = '', fourth = ''] = parts;
   if (parts.length === 1) return REPOSITORY_ROOT_ZONE;
+  if (file.startsWith('packages/bake/')) return bakeZone(parts);
   if (top === 'packages') return `packages/${second}`;
   if (file.startsWith('labs/nebula/packages/')) return `labs/nebula-pkg/${fourth}`;
   if (top === 'labs') return 'labs/nebula(app)';
@@ -22,6 +26,19 @@ export function zoneOf(file: string): string {
   if (top === 'site') return parts.length > 2 ? `site/${second}` : 'site(root)';
   if (top === 'src' || top === 'tools' || top === 'tests') return parts.length > 2 ? `${top}/${second}` : `${top}(root)`;
   return top;
+}
+
+function bakeZone(parts: readonly string[]): string {
+  const [, , area = '', topic = '', kind = '', layer = ''] = parts;
+  if (area === 'src') {
+    if (parts.length === 4) return 'packages/bake/src(root)';
+    if (topic === 'objects' && kind === 'layers' && parts.length > 6) return `packages/bake/src/objects/layers/${layer}`;
+    if (topic === 'objects' && parts.length > 5) return `packages/bake/src/objects/${kind}`;
+    return parts.length > 4 ? `packages/bake/src/${topic}` : 'packages/bake/src(root)';
+  }
+  if (area === 'cli') return 'packages/bake/cli';
+  if (area === 'authoring' && parts.length > 4) return `packages/bake/authoring/${topic}`;
+  return 'packages/bake(root)';
 }
 
 /** The top-level area of a zone: `packages`, `src`, `site`, `tools`, `labs`, `tests`, `netlify`… */

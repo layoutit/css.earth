@@ -27,6 +27,14 @@ const TANGLED: readonly (readonly [string, string])[] = [
 test('folders follow the prototype zones', () => {
   const expected: Record<string, string> = {
     'packages/core/src/validate.ts': 'packages/core',
+    'packages/bake/src/raster/index.ts': 'packages/bake/src/raster',
+    'packages/bake/src/volume/node/index.ts': 'packages/bake/src/volume',
+    'packages/bake/src/objects/color/index.ts': 'packages/bake/src/objects/color',
+    'packages/bake/src/objects/layers/giant/index.ts': 'packages/bake/src/objects/layers/giant',
+    'packages/bake/src/entries.test.ts': 'packages/bake/src(root)',
+    'packages/bake/cli/kernel-bank.mts': 'packages/bake/cli',
+    'packages/bake/authoring/comet-1p/x.mts': 'packages/bake/authoring/comet-1p',
+    'packages/bake/tsup.config.ts': 'packages/bake(root)',
     'labs/nebula/packages/volume-core/src/x.ts': 'labs/nebula-pkg/volume-core',
     'labs/nebula/run.mts': 'labs/nebula(app)',
     'src/renderers/css/navigation/x.ts': 'src/renderers/css/navigation',
@@ -46,6 +54,12 @@ test('folders follow the prototype zones', () => {
   for (const file of ['site/test/x.mts', 'tools/a.test.mts', 'tests/objects/x.mts', 'src/x/fixtures/a.json', 'tools/ci/foo-harness.mts'])
     assert.equal(isTestPath(file), true, file);
   assert.equal(isTestPath('tools/ci/testing-tools.mts'), false);
+});
+
+test('a cycle between two bake topics is a folder cycle, not hidden inside the package', () => {
+  const folders = folderGraph(graph(['packages/bake/src/raster/a.ts', 'packages/bake/src/scene/index.ts'],
+    ['packages/bake/src/scene/b.ts', 'packages/bake/src/raster/index.ts']));
+  assert.deepEqual(folderCycles(folders), [['packages/bake/src/raster', 'packages/bake/src/scene']]);
 });
 
 test('Astro frontmatter and bundled scripts become import specifiers', () => {
