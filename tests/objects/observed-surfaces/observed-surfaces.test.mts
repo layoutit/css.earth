@@ -1,7 +1,7 @@
 import { fixtureRecord } from '@cssearth/objects/node/contract';
 import { requireArray } from '@cssearth/core';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import {createHash} from 'node:crypto';
 import {readFile,mkdtemp,readdir,rm,writeFile} from 'node:fs/promises';
@@ -10,7 +10,7 @@ import {join} from 'node:path';
 import sharp from 'sharp';
 import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
 import type {PolarProjection} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {card} from '../../../tests/fixtures/fits/helpers.mts';
+import {card} from '../../fixtures/fits/helpers.mts';
 
 test('dated component coverage normalizes longitude and preserves isolated dark observations',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'opal-components-'));
