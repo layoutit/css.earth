@@ -1,6 +1,6 @@
 """Re-make one Spitzer/IRAC level-2 mosaic from the level-1 frames the archive mosaicked.
 
-Driven by tools/objects/spitzer/mosaic.mts, which validates the pins first and passes one JSON job on argv[1]. Nothing here
+Driven by packages/telescope-cli/src/archives/spitzer/mosaic.mts, which validates the pins first and passes one JSON job on argv[1]. Nothing here
 reaches the network, reads a configuration file or opens a window.
 
 This is not the observatory's software. Spitzer's own mosaicker is MOPEX, and the toolkit records, as a measurement, that its

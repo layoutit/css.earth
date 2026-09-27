@@ -23,8 +23,8 @@ So: **obtainable without a login, yes; runnable here, no.** IRS spectroscopy (SP
 A pinned Python environment: numpy, astropy, reproject, scipy, installed with `--no-deps` from `requirements.lock` so nothing is resolved at install time. `toolchain.json` and the lock are hashed together, and a run refuses an environment built from other pins.
 
 ```
-node tools/objects/spitzer/toolchain.mts install     # measured 27 s
-node tools/objects/spitzer/toolchain.mts verify
+node packages/telescope-cli/src/archives/spitzer/toolchain.mts install     # measured 27 s
+node packages/telescope-cli/src/archives/spitzer/toolchain.mts verify
 ```
 
 Measured versions: numpy 2.5.3, astropy 8.0.1, reproject 0.21.0, scipy 1.18.1, python 3.12.14; pins `57d10b4f335a`.
@@ -32,10 +32,10 @@ Measured versions: numpy 2.5.3, astropy 8.0.1, reproject 0.21.0, scipy 1.18.1, p
 ## The stages
 
 ```
-node tools/objects/spitzer/archive.mts  ngc3132-4416768 4416768 --channels 1,2,3,4
-node tools/objects/spitzer/mosaic.mts   ngc3132-4416768
-node tools/objects/spitzer/compare.mts  ngc3132-4416768
-node tools/objects/spitzer/archive-ledger.mts --write
+node packages/telescope-cli/src/archives/spitzer/archive.mts  ngc3132-4416768 4416768 --channels 1,2,3,4
+node packages/telescope-cli/src/archives/spitzer/mosaic.mts   ngc3132-4416768
+node packages/telescope-cli/src/archives/spitzer/compare.mts  ngc3132-4416768
+node packages/telescope-cli/src/archives/spitzer/archive-ledger.mts --write
 ```
 
 For an observation returned by the shared capability query, the same stages are available through the checked dispatcher:
@@ -137,13 +137,13 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 
 | What | Where |
 | --- | --- |
-| Pinned environment | [`tools/objects/spitzer/toolchain.json`](../tools/objects/spitzer/toolchain.json), [`toolchain.mts`](../tools/objects/spitzer/toolchain.mts), [`requirements.lock`](../tools/objects/spitzer/requirements.lock) |
-| Pin an observation | [`tools/objects/spitzer/archive.mts`](../tools/objects/spitzer/archive.mts) |
-| Re-make the mosaic | [`tools/objects/spitzer/mosaic.mts`](../tools/objects/spitzer/mosaic.mts), [`mosaic.py`](../tools/objects/spitzer/mosaic.py) |
-| Compare and receipt | [`tools/objects/spitzer/compare.mts`](../tools/objects/spitzer/compare.mts) |
-| Ledger | [`tools/objects/spitzer/archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
+| Pinned environment | [`tools/objects/spitzer/toolchain.json`](../tools/objects/spitzer/toolchain.json), [`toolchain.mts`](../packages/telescope-cli/src/archives/spitzer/toolchain.mts), [`requirements.lock`](../tools/objects/spitzer/requirements.lock) |
+| Pin an observation | [`packages/telescope-cli/src/archives/spitzer/archive.mts`](../packages/telescope-cli/src/archives/spitzer/archive.mts) |
+| Re-make the mosaic | [`packages/telescope-cli/src/archives/spitzer/mosaic.mts`](../packages/telescope-cli/src/archives/spitzer/mosaic.mts), [`mosaic.py`](../packages/telescope-cli/src/archives/spitzer/mosaic.py) |
+| Compare and receipt | [`packages/telescope-cli/src/archives/spitzer/compare.mts`](../packages/telescope-cli/src/archives/spitzer/compare.mts) |
+| Ledger | [`packages/telescope-cli/src/archives/spitzer/archive-ledger.mts`](../packages/telescope-cli/src/archives/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
 | Pinned observation and receipts | `tools/objects/spitzer/programs/` |
-| Tests | [`tools/objects/spitzer/spitzer.test.mts`](../tools/objects/spitzer/spitzer.test.mts), 14 tests, no network |
+| Tests | [`packages/telescope-cli/src/archives/spitzer/spitzer.test.mts`](../packages/telescope-cli/src/archives/spitzer/spitzer.test.mts), 14 tests, no network |
 
 ### Three gaps in the colour example
 

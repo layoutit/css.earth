@@ -1,7 +1,7 @@
 /** Selected Gemini raw FITS through the existing CADC archive owner. */
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { CADC_TAP, downloadUrl, query as cadcQuery } from '../../../tools/objects/gemini/cadc.mts';
-import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from '../../../tools/objects/gemini/archive.mts';
+import { CADC_TAP, downloadUrl, query as cadcQuery } from './archives/gemini/cadc.mts';
+import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from './archives/gemini/archive.mts';
 import { deliverSource, readSavedSource } from './archive-source.mts';
 
 const exact = (name: string, uri: string, bytes: number, md5: string, observation: string) =>

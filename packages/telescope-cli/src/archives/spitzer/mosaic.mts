@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-make a pinned observation's level-2 mosaics from its level-1 frames.
  *
- *   node tools/objects/spitzer/mosaic.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
+ *   node packages/telescope-cli/src/archives/spitzer/mosaic.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
  *
  * The inputs are checked against the program's pins before anything reads them, so a run cannot quietly use different bytes
  * than the ones the program names. Which frames go in is read from the observation, not chosen here: the archive's mosaic

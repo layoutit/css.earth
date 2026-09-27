@@ -293,7 +293,7 @@ function geminiModes(value: unknown, target: string): TargetMode[] {
     const receipts = evidence.map(item => requireString(item.receipt, 'receipt'));
     return { telescope: 'Gemini', mode, archiveDate, observations: { count, scope: 'object-total' as const }, programmes: [], dates: [],
       toolkit: { ...(state === 'unsupported' ? { routeState: 'refused', refusedBecause: entry ? requireString(entry.reason, `${mode} reason`) : 'No capability row.' }
-        : { routeState: state, tool: 'tools/objects/gemini/reduce.mts' }), programs, checked: state === 'reduced' && receipts.length ? programs : [], receipts } };
+        : { routeState: state, tool: 'packages/telescope-cli/src/archives/gemini/reduce.mts' }), programs, checked: state === 'reduced' && receipts.length ? programs : [], receipts } };
   });
 }
 

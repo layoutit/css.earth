@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-archive-moving-targets@1",
+  "targets": {
+    "venus": [
+      "VENUS"
+    ],
+    "mars": [
+      "MARS"
+    ],
+    "jupiter": [
+      "JUPITER"
+    ],
+    "saturn": [
+      "SATURN"
+    ],
+    "uranus": [
+      "URANUS"
+    ],
+    "pluto": [
+      "PLUTO",
+      "PLUTO(134340)"
+    ],
+    "titan": [
+      "TITAN"
+    ],
+    "moon": [
+      "MOON"
+    ],
+    "earth": [
+      "EARTH"
+    ],
+    "comet-2p": [
+      "COMET2P/ENCKE"
+    ],
+    "comet-8p": [
+      "COMET8P/TUTTLE"
+    ],
+    "comet-9p": [
+      "COMET9P/TEMPEL1"
+    ],
+    "comet-17p": [
+      "COMET17P/HOLMES"
+    ],
+    "comet-46p": [
+      "46P/WIRTANEN"
+    ],
+    "comet-103p": [
+      "COMET103P/HARTLEY2"
+    ],
+    "comet-2i": [
+      "C/2019Q4BORISOV"
+    ],
+    "comet-c2013-a1": [
+      "COMETC/2013A1SIDINGSPRING"
+    ]
+  }
+}

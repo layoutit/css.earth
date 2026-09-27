@@ -165,7 +165,7 @@ test('PDS products rejected by normalization are not reported as an empty archiv
 
 test('an indexed observation exposes a telescope-owned qualification action when qualification is the only blocker', () => {
   const ledger = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', searched: ['bennu'], modes: [
-    { mode: 'IRAC Map', tool: 'tools/objects/spitzer/mosaic.mts', programs: [], checked: [], receipts: [] }],
+    { mode: 'IRAC Map', tool: 'packages/telescope-cli/src/archives/spitzer/mosaic.mts', programs: [], checked: [], receipts: [] }],
   holdings: [{ object: 'bennu', modes: { 'IRAC Map': 1 }, records: [
     { id: '21415424', programme: '289', mode: 'IRAC Map', title: 'Bennu', startIso: '2007-05-08T16:23:47.636Z', endIso: '2007-05-08T16:27:43.816Z' }] }] };
   const request = { target: 'bennu', wavelengthMicrometres: [3.5, 3.9] as const, time: { any: true as const }, angularResolutionArcsec: 2,

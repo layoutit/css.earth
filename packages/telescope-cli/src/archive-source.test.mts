@@ -5,9 +5,9 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { gzipSync } from 'node:zlib';
 import { sha256 } from '@cssearth/core/node';
-import { CADC_TAP } from '../../../tools/objects/gemini/cadc.mts';
-import { TAP as CHANDRA_TAP, obsidDirectory, type ChandraObservation } from '../../../tools/objects/chandra/archive.mts';
-import { SEARCH as SPITZER_SEARCH } from '../../../tools/objects/spitzer/archive.mts';
+import { CADC_TAP } from './archives/gemini/cadc.mts';
+import { TAP as CHANDRA_TAP, obsidDirectory, type ChandraObservation } from './archives/chandra/archive.mts';
+import { SEARCH as SPITZER_SEARCH } from './archives/spitzer/archive.mts';
 import { deliverSource, downloadSource, readSavedSource } from './archive-source.mts';
 import { fetchGeminiSource } from './gemini-source.mts';
 import { fetchChandraSource } from './chandra-source.mts';
@@ -239,7 +239,7 @@ test('Spitzer revalidates its AOR and pins one named FITS product', async () => 
   try {
     const exploration = await saved(root, SPITZER_SEARCH, { aorKey, targetName: 'Bennu', instrument: 'IRAC', mode: 'IRAC Map', startIso: '2005-01-01T00:00:00.000Z' },
       [{ reqkey: String(aorKey), targetname: 'Bennu', modedisplayname: 'IRAC Map' }], 10000);
-    const query: typeof import('../../../tools/objects/spitzer/archive.mts').shaSearch = async request => request.id === 'aorByRequestID'
+    const query: typeof import('./archives/spitzer/archive.mts').shaSearch = async request => request.id === 'aorByRequestID'
       ? [{ reqkey: String(aorKey), targetname: 'Bennu', modedisplayname: 'IRAC Map' }] : [product];
     const result = await fetchSpitzerSource(exploration, 1, resolve(root, 'out'), query, async () => fileResponse(fits), async url =>
       [url.replace('_maic.fits', '_munc.fits'), url.replace('_maic.fits', '_mcov.fits')]);

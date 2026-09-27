@@ -135,7 +135,7 @@ exposure rather than anything in the rendering. This observation is new here: th
 already on disk was a deliberately offset pointing that keeps the Crab Nebula off the detector, so Cas A was pinned and
 reprocessed, and the toolkit's event-by-event comparison against the archive matched all 839,545 events.
 
-`node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
+`node packages/telescope-cli/src/archives/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
 
 ## Spitzer, IRAC: NGC 3132 in the infrared
 
@@ -150,7 +150,7 @@ because its shell is brightest at 8 microns, and the stars are blue-white becaus
 scattered single-colour specks are cosmic ray hits that survived in one channel only; a few dark pixels near the centre
 are missing from channel 4. This is the same nebula as the NIRCam picture above, at nearly seven times the pixel size.
 
-`node tools/objects/spitzer/mosaic.mts ngc3132-4416768`
+`node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768`
 
 ## Keck II, KCWI: a patch of the Orion Nebula
 
@@ -181,7 +181,7 @@ coordinates, north is 0.1 degrees and east 269.9 degrees clockwise from up. The 
 and the comet moved between the four exposures, so it appears as a row of overlapping images whose comae run together
 into one smear rather than as a single object. Some of the points near it are ordinary stars.
 
-`node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science`
+`node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science`
 
 ## Juno, JunoCam: one strip set of Europa
 

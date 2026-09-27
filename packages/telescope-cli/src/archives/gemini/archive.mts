@@ -2,7 +2,7 @@
 /** Pin a Gemini programme's raw science frames and the calibrations the archive associates with them, as a
  * cssearth-gemini-program@1.
  *
- *   node tools/objects/gemini/archive.mts <program id> <proposal id> <filter> [--days 15] [--start YYYY-MM-DD]
+ *   node packages/telescope-cli/src/archives/gemini/archive.mts <program id> <proposal id> <filter> [--days 15] [--start YYYY-MM-DD]
  *
  * Every file is pinned by its CAOM artifact URI, its byte count and the archive's own md5, with our sha256 added the first
  * time it is downloaded. Beside them the pin records what the frame is: the CAOM observation, its type (OBJECT, BIAS, FLAT),
@@ -36,8 +36,10 @@ import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
 import { artifactName, isRawName, primaryHeaderBytes, query, requireMd5, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
 import { sha256File } from '@cssearth/core/node';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/gemini/programs');
 /** What a raw Gemini frame can be. `ACQUISITION` is a pointing exposure: real data, never a science frame. */
 export const FRAME_TYPES = ['OBJECT', 'BIAS', 'DARK', 'FLAT', 'ARC', 'ACQUISITION'] as const;
 export const CALIBRATION_KINDS = ['BIAS', 'DARK', 'FLAT'] as const;

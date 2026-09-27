@@ -2,7 +2,7 @@
 /** What the Gemini archive holds for this project's bodies, and what this toolkit has actually proven, derived rather than
  * declared.
  *
- *   node tools/objects/gemini/archive-ledger.mts        writes data/gemini/ledger.json and docs/gemini-ledger.md
+ *   node packages/telescope-cli/src/archives/gemini/archive-ledger.mts        writes data/gemini/ledger.json and docs/gemini-ledger.md
  *
  * Every count comes from the archive, counted server-side by an ADQL `GROUP BY` rather than by downloading rows and counting
  * them here. Every capability's state comes from the pinned programs and the receipts beside them: an instrument counts as
@@ -21,14 +21,15 @@
  * The Galilean moons get a census of their own, because Europa is this project's showcase body and the answer for it is a
  * negative one that a summary line would hide. Its three neighbours are asked for beside it so that "is there anything here
  * for the Galilean moons" is answered from the archive rather than from one moon and a guess. */
+import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord, type EvidenceKind } from '@cssearth/telescope';
 import { PROGRAMS, parseGeminiProgram, type GeminiProgram } from './archive.mts';
 import { query } from './cadc.mts';
-import { isCommand, ledgerFiles, receiptProblem, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
-import { matchNumberedTarget, type NumberedTargetNames } from '@cssearth/telescope-cli/archives/targets';
+import { isCommand, ledgerFiles, receiptProblem, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
+import { matchNumberedTarget, type NumberedTargetNames } from '../targets.mts';
 
 const SCHEMA = 'cssearth-gemini-ledger@1';
 export const COLLECTION = 'GEMINI';
@@ -81,10 +82,24 @@ export interface MoonRow {
   readonly filter: string; readonly frames: number; readonly programmes: readonly string[];
 }
 
-/** The four Galilean moons, as this project ships them. Europa is the showcase body and the other three are asked for
- * beside it, because "does Gemini hold anything usable for the Galilean moons" is one question and answering it for one moon
- * would leave the other three to a guess. */
-export const GALILEAN = ['io', 'europa', 'ganymede', 'callisto'] as const;
+/** The group of shipped objects the ledger takes a census of by name (the Galilean moons, as this project ships them: one
+ * question for the group, not one moon and a guess), and the words its guide uses for them. They are data beside the programs
+ * (`tools/objects/gemini/ledger-focus.json`), because this package names no body. */
+export interface LedgerFocus {
+  readonly objects: readonly string[]; readonly heading: string; readonly group: string; readonly all: string;
+  readonly member: string; readonly rows: string;
+}
+export const GEMINI_LEDGER_FOCUS = 'tools/objects/gemini/ledger-focus.json';
+export function geminiLedgerFocus(path = resolve(REPOSITORY, GEMINI_LEDGER_FOCUS)): LedgerFocus {
+  const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Gemini ledger focus');
+  if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);
+  const text = (key: string) => requireString(record[key], `focus ${key}`);
+  return { objects: requireArray(record.objects, 'focus objects').map(id => requireString(id, 'focus object')), heading: text('heading'),
+    group: text('group'), all: text('all'), member: text('member'), rows: text('rows') };
+}
+let focus: LedgerFocus | undefined;
+/** The focus, read on first use, so a missing file fails the query that needs it and not the module's import. */
+const ledgerFocus = () => focus ??= geminiLedgerFocus();
 export interface CapabilityState {
   readonly instrument: string;
   readonly science: number;
@@ -185,7 +200,7 @@ export function observationsOf(rows: readonly Record<string, string>[], shipped:
  * ephemeris. A numbered target such as `52 Europa` is a different body and carries its number, so it cannot reach a query
  * that asks for these names exactly. */
 export async function galileanRows(today: string): Promise<MoonRow[]> {
-  const names = GALILEAN.flatMap(moon => {
+  const names = ledgerFocus().objects.flatMap(moon => {
     const capitalised = `${moon[0]!.toUpperCase()}${moon.slice(1)}`;
     return [capitalised, `${capitalised}.eph`];
   });
@@ -338,7 +353,7 @@ export function scienceInstruments(rows: readonly MoonRow[], moon: string, capab
  * instruments that took those frames is one this toolkit has actually proven. */
 export function galileanNote(rows: readonly MoonRow[], capabilities: readonly CapabilityState[] = []): string {
   const said: string[] = [];
-  for (const moon of GALILEAN) {
+  for (const moon of ledgerFocus().objects) {
     const instruments = scienceInstruments(rows, moon, capabilities);
     if (!rows.some(row => row.moon === moon)) { said.push(`${moon}: nothing public at all.`); continue; }
     if (!instruments.length) { said.push(`${moon}: pointing exposures only, and no science frame of any kind.`); continue; }
@@ -347,15 +362,15 @@ export function galileanNote(rows: readonly MoonRow[], capabilities: readonly Ca
       `${proven.length ? `Reducible here through ${proven.map(entry => entry.instrument).join(', ')}.`
         : 'No instrument that observed it has been proven by this toolkit, so nothing here can be reduced for it.'}`);
   }
-  const withScience = GALILEAN.filter(moon => hasScience(rows, moon));
-  const reducible = GALILEAN.filter(moon => scienceInstruments(rows, moon, capabilities).some(entry => entry.state === 'reduced'));
-  const count = (many: readonly string[]) => many.length === GALILEAN.length ? 'all four' : many.length ? String(many.length) : 'none';
-  return [`Of the four Galilean moons, ${count(withScience)} have public Gemini science frames` +
+  const withScience = ledgerFocus().objects.filter(moon => hasScience(rows, moon));
+  const reducible = ledgerFocus().objects.filter(moon => scienceInstruments(rows, moon, capabilities).some(entry => entry.state === 'reduced'));
+  const count = (many: readonly string[]) => many.length === ledgerFocus().objects.length ? ledgerFocus().all : many.length ? String(many.length) : 'none';
+  return [`Of ${ledgerFocus().group}, ${count(withScience)} have public Gemini science frames` +
     `${withScience.length ? ` (${withScience.join(', ')})` : ''}, and ${count(reducible)}` +
-    `${reducible.length && reducible.length < GALILEAN.length ? ` (${reducible.join(', ')})` : ''} ` +
+    `${reducible.length && reducible.length < ledgerFocus().objects.length ? ` (${reducible.join(', ')})` : ''} ` +
     'were taken on an instrument this toolkit has proven.',
-    'What decides whether anything can be done with a moon is not whether frames exist but whether the instrument that took ' +
-    'them is one this toolkit has proven, so each moon is listed with the state of every instrument that observed it.',
+    `What decides whether anything can be done with a ${ledgerFocus().member} is not whether frames exist but whether the instrument that took ` +
+    `them is one this toolkit has proven, so each ${ledgerFocus().member} is listed with the state of every instrument that observed it.`,
     ...said].join(' ');
 }
 
@@ -367,7 +382,7 @@ export function ledgerMarkdown(ledger: Ledger): string {
   return [
     '# What the Gemini archive holds for cssEarth',
     '',
-    `Written by \`tools/objects/gemini/archive-ledger.mts\` from the archive itself on ${ledger.measured}. Nothing here is`,
+    `Written by \`packages/telescope-cli/src/archives/gemini/archive-ledger.mts\` from the archive itself on ${ledger.measured}. Nothing here is`,
     'typed in by hand: the counts are the archive\'s own `GROUP BY` results and each capability\'s state is read from the',
     'pinned programs and the receipts beside them. Re-run the command to bring it up to date.',
     '',
@@ -392,11 +407,11 @@ export function ledgerMarkdown(ledger: Ledger): string {
               .map(entry => [entry.instrument, String(entry.science), entry.reason]))].join('\n')
       : '',
     '',
-    '## Every public Gemini frame of the Galilean moons',
+    `## ${ledgerFocus().heading}`,
     '',
     ledger.galileanMoons.note,
     '',
-    table(['moon', 'instrument', 'type', 'intent', 'filter or band', 'frames', 'programmes'],
+    table([ledgerFocus().member, 'instrument', 'type', 'intent', 'filter or band', 'frames', 'programmes'],
       ledger.galileanMoons.rows.map(row => [row.moon, row.instrument, row.type, row.intent, row.filter || 'none',
         String(row.frames), row.programmes.join(', ') || 'none'])),
     '',
@@ -431,7 +446,7 @@ export const GEMINI_LEDGER: ArchiveLedger<Ledger> = {
   guide: ledger => `${ledgerMarkdown(ledger)}\n`,
   survey: args => surveyGemini(args[0] ? resolve(args[0]) : null), writes: 'always',
   summary: ledger => [`${ledger.instruments.length} instruments, ${ledger.objects.length} shipped objects, ` +
-    `${ledger.galileanMoons.rows.length} Galilean rows, ${ledger.capabilities.filter(entry => entry.state === 'reduced').length} reduced. ` +
+    `${ledger.galileanMoons.rows.length} ${ledgerFocus().rows}, ${ledger.capabilities.filter(entry => entry.state === 'reduced').length} reduced. ` +
     `${ledger.receiptProblems.length} receipt problem(s).`],
 };
 

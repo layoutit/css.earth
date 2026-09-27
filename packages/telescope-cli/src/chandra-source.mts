@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { cxcQuery, chandraObservation, obsidDirectory, TAP } from '../../../tools/objects/chandra/archive.mts';
+import { cxcQuery, chandraObservation, obsidDirectory, TAP } from './archives/chandra/archive.mts';
 import { deliverSource, rawHttpsFetch, readSavedSource } from './archive-source.mts';
 import { describeChandraEvents } from './families/f10-events.mts';
 

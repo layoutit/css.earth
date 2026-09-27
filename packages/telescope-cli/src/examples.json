@@ -196,7 +196,7 @@
       "colour": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "command": "node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi",
+        "command": "node packages/telescope-cli/src/archives/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi",
         "definition": "tools/objects/chandra/programs/casa-acisi.json"
       },
       "note": "Representative colour, not what an eye would see: the same event list split into a soft, a medium and a hard energy band, on one set of bins. One dot is one detected X-ray photon, so this is counts, not brightness, and the graininess is the photon statistics of a short exposure."
@@ -234,7 +234,7 @@
       "colour": { "kind": "channels", "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "command": "node tools/objects/spitzer/mosaic.mts ngc3132-4416768",
+        "command": "node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768",
         "definition": "tools/objects/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
       },
       "note": "Representative colour, not what an eye would see: three of the four re-made IRAC channels put into red, green and blue. The four channels are mosaicked onto one grid, so no channel is resampled."
@@ -276,7 +276,7 @@
       "colour": { "kind": "greys" },
       "enlarge": 1,
       "product": {
-        "command": "node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
+        "command": "node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
         "definition": "tools/objects/gemini/programs/comet-3i-gs2025bdd102.json"
       },
       "note": "Four 25 second frames stacked by the observatory's own DRAGONS recipe on this toolkit's master bias and flat."

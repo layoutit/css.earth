@@ -216,7 +216,7 @@
     },
     {
       "mechanic": "Spitzer archive discovery and byte retrieval",
-      "implementation": "tools/objects/spitzer/archive.mts",
+      "implementation": "packages/telescope-cli/src/archives/spitzer/archive.mts",
       "reason": "Astroquery IRSA did not complete the live spitzer_sha SIA query used to qualify this route. The proven implementation remains whole."
     }
   ]

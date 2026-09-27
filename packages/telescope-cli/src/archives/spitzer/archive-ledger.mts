@@ -2,7 +2,7 @@
 /** The Spitzer ledger: what the Heritage Archive holds for the objects this repository ships, by observing mode, which of
  * those modes this toolkit can re-make, and how far that is proved.
  *
- *   node tools/objects/spitzer/archive-ledger.mts [--write] [--local]
+ *   node packages/telescope-cli/src/archives/spitzer/archive-ledger.mts [--write] [--local]
  *
  * Read only against IRSA. Spitzer's archive is asked one question per object, and the question depends on what the object is:
  *
@@ -24,13 +24,14 @@
  * checked only then. --write replaces data/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
  * repository's own state from the ledger already on disk, for when a program is pinned or a receipt written and nothing the
  * archive said has changed. */
+import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { firstSkyPosition } from '@cssearth/telescope-cli/archives/sky-position';
+import { firstSkyPosition } from '../sky-position.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
-import { isCommand, ledgerFiles, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
+import { isCommand, ledgerFiles, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
 
 const SCHEMA = 'cssearth-spitzer-ledger@4';
 /** How many objects are asked at once. The archive's backend builds a temporary table for every question, so this stays small. */
@@ -42,7 +43,7 @@ const stringList = (value: unknown, label: string): string[] => requireArray(val
  * it. A mode the archive returns that is not in this table is still counted and named in the ledger, so nothing is lost by
  * this list being incomplete. */
 export const SPITZER_MODES: readonly { readonly mode: string; readonly records: string; readonly tool: string | null; readonly note?: string }[] = [
-  { mode: 'IRAC Map', records: 'mapped pictures in the four IRAC channels, 3.6 to 8.0 micron', tool: 'tools/objects/spitzer/mosaic.mts' },
+  { mode: 'IRAC Map', records: 'mapped pictures in the four IRAC channels, 3.6 to 8.0 micron', tool: 'packages/telescope-cli/src/archives/spitzer/mosaic.mts' },
   { mode: 'IRAC Map PC', records: 'pictures held on one pointing, the mode exoplanet transits were watched in', tool: null, note: 'The archive mosaics these too, so the same stage would run; none is pinned here.' },
   { mode: 'IRAC IER', records: 'pictures taken on an engineering request rather than a normal observation', tool: null },
   { mode: 'IRAC Post-Cryo Map', records: 'mapped pictures in the two channels that kept working after the cryogen ran out', tool: null, note: 'The same stage would run; none is pinned here.' },
@@ -285,16 +286,26 @@ export function parseSpitzerLedger(value: unknown): Ledger {
 const table = (header: readonly string[], rows: readonly (readonly string[])[]) =>
   [`| ${header.join(' | ')} |`, `| ${header.map(() => '---').join(' | ')} |`, ...rows.map(row => `| ${row.join(' | ')} |`)].join('\n');
 
+/** The group of objects the guide answers for by name, and what it says of them: data beside the programs, because this package
+ * names no body. */
+export interface LedgerFocus { readonly heading: string; readonly objects: readonly string[]; readonly noneObserved: string; readonly allObserved: string }
+export const SPITZER_LEDGER_FOCUS = resolve(REPOSITORY, 'tools/objects/spitzer/ledger-focus.json');
+export function spitzerLedgerFocus(path = SPITZER_LEDGER_FOCUS): LedgerFocus {
+  const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Spitzer ledger focus');
+  if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);
+  return { heading: requireString(record.heading, 'focus heading'), objects: requireArray(record.objects, 'focus objects').map(id => requireString(id, 'focus object')),
+    noneObserved: requireString(record.noneObserved, 'focus text when none is observed'), allObserved: requireString(record.allObserved, 'focus text when all are observed') };
+}
+
 export function spitzerLedgerGuide(ledger: Ledger): string {
-  const galileans = ['io', 'europa', 'ganymede', 'callisto'];
-  const observed = new Set(ledger.holdings.map(entry => entry.object));
-  const missingGalileans = galileans.filter(id => !observed.has(id));
+  const focus = spitzerLedgerFocus(), observed = new Set(ledger.holdings.map(entry => entry.object));
+  const missing = focus.objects.filter(id => !observed.has(id));
   // The same question, asked of other moving bodies in the same pass: what makes an empty answer an answer.
   const worked = ledger.holdings.filter(entry => entry.askedAs.startsWith('NAIF ')).slice(0, 3);
   return [
     '# Spitzer archive ledger',
     '',
-    `What the Spitzer Heritage Archive at IRSA holds for the ${ledger.shippedObjects} objects this repository ships, what this toolkit can re-make, and how far that is proved. Written by [\`archive-ledger.mts\`](../tools/objects/spitzer/archive-ledger.mts) from IRSA on ${ledger.archiveDate}; the route it checks is [Spitzer](spitzer.md).`,
+    `What the Spitzer Heritage Archive at IRSA holds for the ${ledger.shippedObjects} objects this repository ships, what this toolkit can re-make, and how far that is proved. Written by [\`archive-ledger.mts\`](../packages/telescope-cli/src/archives/spitzer/archive-ledger.mts) from IRSA on ${ledger.archiveDate}; the route it checks is [Spitzer](spitzer.md).`,
     '',
     '## What Spitzer observed, by mode',
     '',
@@ -314,11 +325,11 @@ export function spitzerLedgerGuide(ledger: Ledger): string {
       ledger.holdings.map(entry => [entry.name, entry.classification, entry.askedAs, String(entry.observations),
         Object.entries(entry.modes).map(([mode, count]) => `${mode} ${count}`).join(', ')])),
     '',
-    '## The Galilean moons',
+    `## ${focus.heading}`,
     '',
-    missingGalileans.length === galileans.length
-      ? `Spitzer has no observation of Io, Europa, Ganymede or Callisto in this archive. Each was asked for by its own NAIF id (501, 502, 503, 504) and the archive returned no observation request for any of them, and none for Jupiter itself (599) either. That is a measured answer and not an untried one: the same search, in the same pass, returned ${worked.length ? worked.map(entry => `${entry.observations} for ${entry.name}`).join(', ') : 'observations for other moving bodies'}, so it works and the holding is empty. Europa is this repository's showcase body and Spitzer contributes nothing to it.`
-      : `The archive holds observations for ${galileans.filter(id => observed.has(id)).join(', ')}; ${missingGalileans.length ? `it holds none for ${missingGalileans.join(', ')}.` : 'it holds some for all four.'} See the table above for what and in which mode.`,
+    missing.length === focus.objects.length
+      ? focus.noneObserved.replace('{worked}', worked.length ? worked.map(entry => `${entry.observations} for ${entry.name}`).join(', ') : 'observations for other moving bodies')
+      : `The archive holds observations for ${focus.objects.filter(id => observed.has(id)).join(', ')}; ${missing.length ? `it holds none for ${missing.join(', ')}.` : focus.allObserved} See the table above for what and in which mode.`,
     '',
     '## What this ledger does not say',
     '',

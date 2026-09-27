@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /** Install and locate the pinned CIAO environment of toolchain.json under output/toolchains/chandra (ignored by git).
  *
- *   node tools/objects/chandra/toolchain.mts solve     # re-resolve toolchain.json into packages.lock
- *   node tools/objects/chandra/toolchain.mts install
- *   node tools/objects/chandra/toolchain.mts verify
+ *   node packages/telescope-cli/src/archives/chandra/toolchain.mts solve     # re-resolve toolchain.json into packages.lock
+ *   node packages/telescope-cli/src/archives/chandra/toolchain.mts install
+ *   node packages/telescope-cli/src/archives/chandra/toolchain.mts verify
  *
  * micromamba creates the environment from packages.lock, an @EXPLICIT list of package URLs with their md5, so every install gets
  * the same 217 packages: the CXC channel's ciao, ciao-contrib and caldb_main, and their conda-forge dependencies. `solve`
@@ -20,13 +20,16 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { findTable, tableColumn, text } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const repository = resolve(import.meta.dirname, '../../..');
+const repository = WORKSPACE;
+/** The toolchain's pins (descriptor and solved lock) stay in the checkout beside the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'tools/objects/chandra');
 export const CHANDRA_ROOT = resolve(repository, 'output/toolchains/chandra');
-const LOCK = resolve(import.meta.dirname, 'packages.lock');
+const LOCK = resolve(PINS, 'packages.lock');
 
 async function descriptor() {
-  const text = await readFile(resolve(import.meta.dirname, 'toolchain.json'), 'utf8');
+  const text = await readFile(resolve(PINS, 'toolchain.json'), 'utf8');
   const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
   const lock = await readFile(LOCK, 'utf8');
   return { entry, lock, digest: createHash('sha256').update(text).update(lock).digest('hex') };
@@ -54,7 +57,7 @@ export async function solveChandra() {
     .map(value => requireRecord(value, 'package'))
     .map(entry => ({ name: requireString(entry.name, 'name'), version: requireString(entry.version, 'version'), url: requireString(entry.url, 'url'), md5: requireString(entry.md5, 'md5') }))
     .sort((a, b) => a.name.localeCompare(b.name) || a.version.localeCompare(b.version));
-  const head = ['# Solved by micromamba on osx-arm64 from toolchain.json (channels: cxc ciao, conda-forge).', '# Regenerate: node tools/objects/chandra/toolchain.mts solve', '@EXPLICIT'];
+  const head = ['# Solved by micromamba on osx-arm64 from toolchain.json (channels: cxc ciao, conda-forge).', '# Regenerate: node packages/telescope-cli/src/archives/chandra/toolchain.mts solve', '@EXPLICIT'];
   await writeFile(LOCK, `${[...head, ...links.map(entry => `${entry.url}#${entry.md5}`)].join('\n')}\n`);
   return links.length;
 }
@@ -91,7 +94,7 @@ export async function chandraVersions(): Promise<{ ciao: string; caldb: string }
 export async function chandraToolchain(): Promise<ChandraToolchain> {
   const { entry, digest } = await descriptor(), prefix = resolve(CHANDRA_ROOT, 'env'), bin = resolve(prefix, 'bin');
   const marker = await readFile(resolve(CHANDRA_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Chandra toolchain is not installed: node tools/objects/chandra/toolchain.mts install');
+  if (!marker) throw new Error('The Chandra toolchain is not installed: node packages/telescope-cli/src/archives/chandra/toolchain.mts install');
   if (marker.pinsSha256 !== digest) throw new Error('The Chandra toolchain was installed from other pins; reinstall it.');
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
