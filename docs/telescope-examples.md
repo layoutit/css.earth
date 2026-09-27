@@ -4,8 +4,8 @@ Each virtual telescope in this repository re-runs an observatory's own software 
 FITS image, a cube, a map, or a list of detected photons. This page shows one picture per instrument, made from a
 product that toolkit has already produced here. Nothing on this page is an archive preview or a press image.
 
-Every picture comes from one renderer, `tools/objects/telescopes/example-picture.mts`, and one checked-in recipe,
-`tools/objects/telescopes/examples.json`. The recipe states the file, the extension or plane, the pixel window, the unit
+Every picture comes from one renderer, `packages/telescope-cli/src/example-picture.mts`, and one checked-in recipe,
+`packages/telescope-cli/src/examples.json`. The recipe states the file, the extension or plane, the pixel window, the unit
 the numbers are in, the two values drawn as black and white, the stretch between them, which way up the picture is, the
 whole-number enlargement and the colours. Three pictures are in colour, because three measurements of the same target
 exist on one pixel grid: each measurement is stretched on its own limits in its own unit and put straight into red,
@@ -20,7 +20,7 @@ examples, rerun the chain with:
 
 ```
 <the toolkit command listed below>                  # re-makes the product
-node tools/objects/telescopes/example-picture.mts   # re-makes every picture in docs/telescopes
+node packages/telescope-cli/src/example-picture.mts   # re-makes every picture in docs/telescopes
 ```
 
 Products live in the git-ignored `output/` and `.local/` directories of the worktree the toolkit ran in, so the recipe

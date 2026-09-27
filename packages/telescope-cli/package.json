@@ -1,9 +1,32 @@
 {
   "name": "@cssearth/telescope-cli",
   "version": "0.1.0",
-  "description": "Query and retrieve pinned telescope products with their scientific evidence.",
+  "description": "The telescope command: explore, retrieve and qualify telescope products, and turn them into outputs.",
   "type": "module",
   "license": "MIT",
+  "exports": {
+    "./body-map-publication": {
+      "types": "./src/body-map-publication.mts",
+      "default": "./src/body-map-publication.mts"
+    },
+    "./query": {
+      "types": "./src/query.mts",
+      "default": "./src/query.mts"
+    },
+    "./query-contract": {
+      "types": "./src/query-contract.mts",
+      "default": "./src/query-contract.mts"
+    },
+    "./request-satisfaction": {
+      "types": "./src/request-satisfaction.mts",
+      "default": "./src/request-satisfaction.mts"
+    },
+    "./selected-product": {
+      "types": "./src/selected-product.mts",
+      "default": "./src/selected-product.mts"
+    },
+    "./package.json": "./package.json"
+  },
   "bin": {
     "telescope": "dist/telescope.mjs"
   },
@@ -27,8 +50,22 @@
     "prepack": "npm run build",
     "typecheck": "tsc -p tsconfig.json"
   },
+  "dependencies": {
+    "@cssearth/astronomy": "workspace:*",
+    "@cssearth/bake": "workspace:*",
+    "@cssearth/core": "workspace:*",
+    "@cssearth/fits": "workspace:*",
+    "@cssearth/objects": "workspace:*",
+    "@cssearth/renderer": "workspace:*",
+    "@cssearth/telescope": "workspace:*",
+    "esbuild": "0.27.7",
+    "linkedom": "^0.18.13",
+    "pngjs": "7.0.0",
+    "sharp": "0.35.3"
+  },
   "devDependencies": {
     "@types/node": "^26.4.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@types/pngjs": "6.0.5"
   }
 }

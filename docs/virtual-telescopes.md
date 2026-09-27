@@ -288,7 +288,7 @@ source directory; it may name the science input itself for an attached-label pro
 For example:
 
 ```sh
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target sun --wavelength 0.0170,0.0172 \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 
@@ -409,9 +409,9 @@ even when the delivered bytes are fully verified.
 For reproducible empirical delivery checks:
 
 ```sh
-node tools/objects/telescopes/survey-delivery.mts output/survey --random 20
+node packages/telescope-cli/src/survey-delivery.mts output/survey --random 20
 # Repeat with the seed written in output/survey/survey.json:
-node tools/objects/telescopes/survey-delivery.mts output/replay --random 20 SEED
+node packages/telescope-cli/src/survey-delivery.mts output/replay --random 20 SEED
 ```
 
 The pool comprises body packages with a locally available numeric product under 256 MB,
@@ -650,17 +650,17 @@ whether it has a `--local` pass, whether receipt problems fail the run, the JSON
 
 The ledgers say what each archive holds per object and per mode. Where an archive exposes a stable observation identity, a
 ledger can also retain the complete observation index; Spitzer records every AORKEY, programme and observing interval. The capability
-query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
+query ([`packages/telescope-cli/src/query.mts`](../packages/telescope-cli/src/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
 care about?* These commands require Node 22.18.x or Node 24+. When the shell's Node is older, the package launcher uses the
 newest compatible Node already installed under NVM, or `CSSEARTH_NODE`; it reports a concrete recovery only when neither exists.
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
   --any-time --range-km 630000000 --radius-km 1560.8 --min-elements 8 --result body-map
 ```
 
-`node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
+`node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
 smaller `--min-arcsec` or `--min-km` asks for sharper data. For machine input, `pnpm --silent telescope:query ... --json`
 writes JSON alone; ordinary `pnpm` prints its script banner before the program's stdout.
 
@@ -747,7 +747,7 @@ that resolves to several modes, or to none, is listed separately as unassigned e
 Hubble STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths through another detector, so it is never
 carried there.
 
-The authored capability input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength intervals, aperture,
+The authored capability input is [`modes.json`](../packages/telescope-cli/src/modes.json): each mode's wavelength intervals, aperture,
 pixel scale, documented point spread function where there is one, and product kind, with the handbook page every number was
 read from. JWST's cube modes take their intervals from `jwst/imaging/bands.mts`, which already states them band by band. A
 mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers. A
@@ -767,7 +767,7 @@ and Keck modes remain visible where those sourced capability facts have not been
 The query can make an explicit selection instead of silently treating the first candidate as the answer:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250
 ```
@@ -828,7 +828,7 @@ read, along with the output plane and its body-map metadata.
 Publication performs the query and verifies the whole chain in one command:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
   --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \
@@ -1007,7 +1007,7 @@ so an unchanged checkout does not need a renderer build to identify a family ope
 
 ## From a delivered product to an output
 
-`tools/objects/telescopes/outputs.mts` is the final boundary after `session.mts` delivery.
+`packages/telescope-cli/src/outputs.mts` is the final boundary after `session.mts` delivery.
 The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSON`.
 [The command guide](../packages/telescope/README.md#outputs) covers selectors and files.
 
@@ -1365,7 +1365,7 @@ Place each downloaded kernel under the recipe's `kernels/` directory; changed ar
 are refused. The executable oracle is:
 
 ```sh
-node tools/objects/telescopes/sphere/sphere-oracle.mts \
+node packages/telescope-cli/src/sphere/sphere-oracle.mts \
   europa-map/map.fits.product.json europa-sphere/sphere.product.json \
   europa-band/image.fits output/sphere-oracle
 ```

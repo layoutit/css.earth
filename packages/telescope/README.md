@@ -58,7 +58,7 @@ When `outputs` reports family operations for a fetched source, `telescope family
 
 To prepare a WWT display image as a static source, run `telescope wwt-image RUN/explore.json --pick N --level 0..3 --out NEW_DIRECTORY`. The WWT numbers shown by `explore` are separate from observation numbers. For supported top-down TAN sky imagesets, this writes `image.png` and `source.json` with the pinned catalog revision, image credit, positioning metadata, each tile URL and SHA-256, and the assembled image hash. Level 3 is capped at 64 tiles and a 2048 × 2048 PNG. An authored image-layer recipe can point to `image.png` as its source and `source.json` as its provenance input. The command does not alter a body or deploy tiles. Check the image publisher's reuse terms before publishing a derived asset.
 
-To read WWT-hosted scientific FITS data, run `telescope wwt-fits data/wwt/phat-fits.json --set PHAT-f475w --level 0 --x 0 --y 0 --out NEW_DIRECTORY`. This retrieves one original FITS tile from WWT's published PHAT collection, checks its 256 × 256 numeric primary array with Astropy, and saves the original FITS, a full-resolution numeric FITS image, CSV samples, a figure, the pinned WTML/catalog, and a product record with source URL and hashes. The collection has f475w and f814w imagesets. An individual tile is bounded to 8 MiB, and this command does not start a rendering engine. The published tile has no BUNIT, uncertainty array, or celestial WCS in its FITS header: those scientific requirements remain unresolved. WTML supplies placement for WWT, not a per-tile FITS WCS or proof of the original untiled PHAT product. To snapshot another WWT FITS WTML collection with `wwt-data-formats` 0.18.1, run `CSSEARTH_WWT_PYTHON=... node tools/objects/telescopes/wwt/wwt-fits-catalog-build.mts COLLECTION.wtml HTTPS_SOURCE_URL CATALOG.json`; keep the WTML beside its snapshot.
+To read WWT-hosted scientific FITS data, run `telescope wwt-fits data/wwt/phat-fits.json --set PHAT-f475w --level 0 --x 0 --y 0 --out NEW_DIRECTORY`. This retrieves one original FITS tile from WWT's published PHAT collection, checks its 256 × 256 numeric primary array with Astropy, and saves the original FITS, a full-resolution numeric FITS image, CSV samples, a figure, the pinned WTML/catalog, and a product record with source URL and hashes. The collection has f475w and f814w imagesets. An individual tile is bounded to 8 MiB, and this command does not start a rendering engine. The published tile has no BUNIT, uncertainty array, or celestial WCS in its FITS header: those scientific requirements remain unresolved. WTML supplies placement for WWT, not a per-tile FITS WCS or proof of the original untiled PHAT product. To snapshot another WWT FITS WTML collection with `wwt-data-formats` 0.18.1, run `CSSEARTH_WWT_PYTHON=... node packages/telescope-cli/src/wwt/wwt-fits-catalog-build.mts COLLECTION.wtml HTTPS_SOURCE_URL CATALOG.json`; keep the WTML beside its snapshot.
 
 `telescope explore m31` also lists these two numeric FITS imagesets as separately numbered **WWT FITS source leads**. The target association is curated from [MAST's PHAT record](https://archive.stsci.edu/hlsp/phat), not inferred from the tile geometry. Use `telescope wwt-fits RUN/explore.json --pick N --level 0 --x 0 --y 0 --out NEW_DIRECTORY` to follow one saved lead; the command checks its catalog and association before retrieval. These leads are not numbered observation choices, and neither the target association nor a downloaded tile establishes field coverage or detection.
 
@@ -158,7 +158,7 @@ pnpm --silent telescope outputs output/ceres-telescope/pick-N/result.json --json
 
 For a constrained scientific question, save a `query` with explicit kind, time and resolution criteria in its own new directory, then use the same `get` and `outputs` sequence. A `get` can deliver valid data with exit 3 when its request remains unresolved. `outputs` reports what this exact artifact can support; an archive hit or declared product kind alone does not establish a surface layer.
 
-`export --output body-map` projects a verified 2D image with explicit navigation, but its generated observation has no ledger mode or program and its resolution is sampling-only. It is not directly a scientifically published layer: [`body-map-publication.mts`](../../tools/objects/telescopes/body-map-publication.mts) checks an author-produced map, its selected observation identity, measurement definition and evidence separately. `export --output sphere` packages the projected map with an existing standard sphere as **standalone HTML**, not a dataset in the normal site scene.
+`export --output body-map` projects a verified 2D image with explicit navigation, but its generated observation has no ledger mode or program and its resolution is sampling-only. It is not directly a scientifically published layer: [`body-map-publication.mts`](../telescope-cli/src/body-map-publication.mts) checks an author-produced map, its selected observation identity, measurement definition and evidence separately. `export --output sphere` packages the projected map with an existing standard sphere as **standalone HTML**, not a dataset in the normal site scene.
 
 To add a site lens, use that body's [source manifest and package guide](../../src/objects/README.md) and its existing [surface preparation owner](../../docs/surface-preparation.md). Record the selected source, interpretation, coverage and limits; prepare and inspect the body-owned assets and controls. [Ceres's clay-band recipe](../../src/objects/ceres/source/preparation/raster.json) is an example of an existing source-backed site lens, independent of the CLI sphere export. There is no general telescope command that promotes an arbitrary delivery into every body's renderer.
 
@@ -315,11 +315,11 @@ reinstall.
 
 What stays outside the package: each archive's own clients, programs and ledgers (`tools/objects/<archive>/`, with the
 ledger machinery they share in `tools/objects/archives/`), the telescope command (`@cssearth/telescope-cli`, whose
-implementation is still `tools/objects/telescopes/`), and every object-specific use of a product.
+implementation is still `packages/telescope-cli/src/`), and every object-specific use of a product.
 
 ## Independent output checks
 
-The [output oracle](../../tools/objects/telescopes/output-oracle.mts) reads the original pinned
+The [output oracle](../telescope-cli/src/output-oracle.mts) reads the original pinned
 FITS data independently of the production reducer. Specutils 2.4.0 integrates the spectral
 windows; Photutils 3.0.0 measures rectangular apertures. Native plane and pixel exports compare
 directly with FITS slices. The reference tools are optional test dependencies, installed without
@@ -328,8 +328,8 @@ changing the production astronomy environment:
 ```sh
 output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
 work/telescope-oracles/env/bin/python -m pip install -c packages/telescope/toolchains/requirements.lock -r packages/telescope/toolchains/oracle-requirements.txt
-node tools/objects/telescopes/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
-CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test tools/objects/telescopes/cube-outputs.test.mts
+node packages/telescope-cli/src/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
+CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test packages/telescope-cli/src/cube-outputs.test.mts
 ```
 
 Each comparison writes a residual figure and a JSON report identifying the source hash,

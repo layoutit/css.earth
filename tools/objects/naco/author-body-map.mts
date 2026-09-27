@@ -14,7 +14,7 @@ import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bodyMapFits, topRowFirst } from '@cssearth/bake/objects/layers/observation';
 import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../telescopes/body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
 import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
