@@ -4,9 +4,9 @@ import { createHash } from 'node:crypto';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
+const test = sourceTest();
 
 const OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
-const test = sourceTest();
 
 // Run after prepare:object-json. The checked-in tree gate also runs in CI
 // without requiring generated transports or an asset download.
