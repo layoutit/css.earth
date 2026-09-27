@@ -1,8 +1,8 @@
 # @cssearth/telescope-cli
 
 The `telescope` command: explore observations of a target, retrieve an exact chosen product with its qualification evidence,
-and turn qualified data into outputs. Its user guide, commands, exit codes and output formats are in the
-[telescope package README](../telescope/README.md).
+and turn qualified data into outputs. Until the command's implementation moves into this package, its user guide, commands,
+exit codes and output formats stay in the [telescope package README](../telescope/README.md), which the help text links to.
 
 The command runs against a **css.earth science checkout**, which holds the telescope's implementation
 (`tools/objects/telescopes/`), the source manifests and any required Python environments. It finds the checkout from
