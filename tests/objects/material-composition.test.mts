@@ -6,7 +6,7 @@ import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProject
 import { polarQuad, validateMaterialRecipe, prepareLayeredLeafLayouts } from '@cssearth/bake/objects/layers/material-composition';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear, validateRelativePath } from '@cssearth/bake/objects/layers/giant';
 import {fitTextureGeometry} from '@cssearth/bake/scene';
-import {prepareLayeredOblateObject,isLayeredOblateRecipe} from '../../tools/objects/material-composition/index.mts';
+import {prepareLayeredOblateObject,isLayeredOblateRecipe} from '@cssearth/bake/objects/layers/material-composition';
 const objectDirectory=new URL('../../src/objects/saturn/',import.meta.url).pathname;
 
 test('oblate ray arithmetic preserves facing and positive-root conventions without body dispatch',()=>{

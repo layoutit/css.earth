@@ -1,26 +1,34 @@
 import { sha256 } from '@cssearth/core/node';
-import {readAuthoredSources} from '@cssearth/bake/objects/sources';
+import {readAuthoredSources} from '../../sources/index.ts';
 import {parse} from '@cssearth/core/schema';
-import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer';
-import { layeredRecipe, spectralRecipe, radialMotionRecipe, layeredPresentationRecipe, prepareRadialMotionAndShadow, prepareSpectralMaterialVariants, prepareLayeredLeafLayouts } from '@cssearth/bake/objects/layers/material-composition';
-import {cutawayRecipe} from '@cssearth/bake/objects/layers/cutaway';
-import { parseRadialLayerRecipe, prepareGiantLayers } from '@cssearth/bake/objects/layers/giant';
+import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer/prepared-data/object-format.ts';
+import { layeredRecipe } from './layered-recipe.ts';
+import { spectralRecipe } from './spectral-recipe.ts';
+import { radialMotionRecipe } from './radial-motion-recipe.ts';
+import { layeredPresentationRecipe } from './presentation-recipe.ts';
+import { prepareRadialMotionAndShadow } from './radial-motion.ts';
+import { prepareSpectralMaterialVariants } from './spectral-variants.ts';
+import { prepareLayeredLeafLayouts } from './leaf-layouts.ts';
+import {cutawayRecipe} from '../cutaway/index.ts';
+import { parseRadialLayerRecipe, prepareGiantLayers } from '../giant/index.ts';
 import {shape,text,number,boolean,array,isRecord,requireRecord} from '@cssearth/core';
 import {createSourceManifest} from '@cssearth/objects/node';
-import type {prepareObjectContentAssets} from '../content/prepare.ts';
+import type {ContentPreparationContext, PreparedObjectContentAssets} from '../../content/index.ts';
 import {mkdir,readFile,realpath,writeFile,rm} from 'node:fs/promises';
 import {relative,resolve,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {inventoryPublicAssets} from '@cssearth/objects/node';
-import {requirePreparedPresentation} from '@cssearth/bake/presentation';
-import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '@cssearth/bake/presentation';
-import { withFocusedCamera } from '@cssearth/bake/objects/scene';
-import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
-import {prepareMaterialTracks} from '@cssearth/bake/presentation';
-import {prepareCutawayMaterials, createLayeredOblatePreparation, prepareLayeredOblatePresentation} from '@cssearth/bake/objects/layers/material-composition';
-import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
+import {requirePreparedPresentation} from '../../../presentation/index.ts';
+import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../presentation/index.ts';
+import { withFocusedCamera } from '../../scene/index.ts';
+import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
+import {prepareMaterialTracks} from '../../../presentation/index.ts';
+import { prepareCutawayMaterials } from './cutaway-materials.ts';
+import { createLayeredOblatePreparation } from './layered-oblate.ts';
+import { prepareLayeredOblatePresentation } from './presentation.ts';
+import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '../observed-surfaces/index.ts';
 
 
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -29,7 +37,7 @@ const writeJson=(path:string,value:unknown)=>writeFile(path,JSON.stringify(value
 export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-layered-oblate-preparation@1';
 
 /** A full source-to-consumer pipeline; no runtime product is a preparation input. */
-export async function prepareLayeredOblateObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:typeof prepareObjectContentAssets}) {
+export async function prepareLayeredOblateObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>}) {
   if(typeof prepareContent!=='function')throw new TypeError('Layered preparation requires the shared content compiler.');
   // Each phase can atomically replace a decoded image at the same path. The
   // previous separate-process pipeline never reused cached file-loader nodes.

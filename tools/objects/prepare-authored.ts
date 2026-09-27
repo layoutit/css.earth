@@ -242,7 +242,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const sourceDirectory = resolve(objectDirectory, 'source');
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@1') {
     genericLaneOnly();
-    const { prepareLayeredOblateObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/material-composition/index.mts')).href) as typeof import('./material-composition/index.mts');
+    const { prepareLayeredOblateObject } = await import('@cssearth/bake/objects/layers/material-composition');
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
   }
   if (source(sources, 'paged-ellipsoid')) {

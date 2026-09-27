@@ -228,9 +228,8 @@ its validators accept); the renderer never imports the bake.
     `cutaway-materials.ts` moved over the 600-line limit and are exempt in `eslint.config.mts` until they are split, as is
     the paged-ellipsoid `assets.ts`. The material atlas tile writer, bilinear samplers and relative-path check live in `giant`
     (`material-atlas.ts`, `relative-path.ts`), below `material-composition`, so the giant material bake, layered
-    presentation, object preparation (`object.ts`) and observed polar surfaces sit in `giant` without a topic cycle. The
-    layered-oblate object preparation stays in `tools/objects/material-composition/` until the renderer gives its prepared
-    CSS object format a source export. Code that reads
+    presentation, object preparation (`object.ts`) and observed polar surfaces sit in `giant` without a topic cycle.  The
+    layered-oblate object preparation is `material-composition`'s `object.ts`. Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
     entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
     `SolidSceneSolarGeometry`), the shape-model entry (`shape-model.ts`) and the paged-ellipsoid object (`object.ts`) take it

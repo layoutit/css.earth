@@ -44,7 +44,7 @@ weather path did not alter the Cassini UVIS ring recipe.
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
 The recipe binds Saturn's settings to the shared
-[material-composition preparer](../../../tools/objects/material-composition/index.mts),
+[material-composition preparer](../../../packages/bake/src/objects/layers/material-composition/object.ts),
 which uses the shared radial, cutaway, sky and content preparation modules.
 
 - The material overlay has one colour and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.
