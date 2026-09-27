@@ -1,22 +1,29 @@
-import { readAuthoredSources } from '@cssearth/bake/objects/sources';
+import { readAuthoredSources } from '../../sources/index.ts';
 import { parse } from '@cssearth/core/schema';
-import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc, prepareNormalizedDiscPresentation } from '@cssearth/bake/objects/layers/giant';
-import { parseEllipsoidMaterialRecipe } from './materials.mts';
-import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '@cssearth/bake/objects/layers/observed-surfaces';
-import { parseObservedPolarRecipe } from '../giant-observations/index.mts';
+import { bandedGeometryRecipe } from './geometry-contract.ts';
+import { normalizedPresentationRecipe } from './normalized-presentation-contract.ts';
+import { layeredPresentationRecipe } from './presentation-contract.ts';
+import { parsePhotometricDiscRecipe, preparePhotometricDisc } from './photometric-disc.ts';
+import { prepareGiantLayers, parseRadialLayerRecipe } from './giant-layers.ts';
+import { rasterAnnularField } from './rings.ts';
+import { prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels } from './geometry.ts';
+import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.ts';
+import { parseEllipsoidMaterialRecipe } from './ellipsoid-materials.ts';
+import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '../observed-surfaces/index.ts';
+import { parseObservedPolarRecipe } from './observed-polar.ts';
 import { shape, text, number, optional, array, isRecord, requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
-import type { prepareObjectContentAssets } from '../content/prepare.ts';
+import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
-import { withFocusedCamera } from '@cssearth/bake/objects/scene';
-import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
-import { requirePreparedPresentation } from '@cssearth/bake/presentation';
-import { prepareEllipsoidMaterials } from './materials.mts';
-import { prepareLayeredSurfacePresentation } from './presentation.mts';
-import { prepareObservedPolarSurfaces, polarImageProjection } from '../giant-observations/index.mts';
+import { withFocusedCamera } from '../../scene/index.ts';
+import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
+import { requirePreparedPresentation } from '../../../presentation/index.ts';
+import { prepareEllipsoidMaterials } from './ellipsoid-materials.ts';
+import { prepareLayeredSurfacePresentation } from './layered-surface-presentation.ts';
+import { prepareObservedPolarSurfaces, polarImageProjection } from './observed-polar.ts';
 
 
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -57,7 +64,7 @@ export function prepareSharedCelestial(namespace:string) {
 
 /** Full source regeneration. publicDirectory/outputDirectory are explicitly
  * supplied preparation destinations, never implicitly canonical asset roots. */
-export async function prepareLayeredGiantObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:typeof prepareObjectContentAssets}) {
+export async function prepareLayeredGiantObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>}) {
   if(typeof prepareContent!=='function')throw new TypeError('Shared content preparation capability is required.');
   const root=await realpath(objectDirectory),sourceDirectory=resolve(root,'source'),raw=await readJson(resolve(root,'object.json')),{descriptor,sources}=await readAuthoredSources(root,raw);
   if(!write&&resolve(publicDirectory)===resolve(root,'../../../public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');

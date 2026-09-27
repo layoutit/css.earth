@@ -1,18 +1,18 @@
 import { sha256 } from '@cssearth/core/node';
 import { isArray, shape, array, number, optional } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
-import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from '@cssearth/bake/objects/layers/giant';
-import type { Vector3, ReadonlyVector3 } from '@cssearth/bake/objects/geometry';
+import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from './material-contract.ts';
+import type { Vector3, ReadonlyVector3 } from '../../geometry/index.ts';
 import type { WebpOptions } from 'sharp';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { worldPositionToCss } from '@layoutit/polycss';
-import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '@cssearth/bake/objects/geometry';
-import { writeMaterialAtlasTile, sampleRgbaBilinear } from '@cssearth/bake/objects/layers/giant';
+import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '../../geometry/index.ts';
+import { writeMaterialAtlasTile, sampleRgbaBilinear } from './material-atlas.ts';
 
-import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '@cssearth/bake/delivery';
+import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../delivery/index.ts';
 
 const clamp=(value: number,low=0,high=1)=>Math.max(low,Math.min(high,value));
 const scale=(vector: ReadonlyVector3,value: number): Vector3=>[vector[0]*value,vector[1]*value,vector[2]*value];

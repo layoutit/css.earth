@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from './source-test.mts';
 const test = sourceTest();
-import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '../../tools/objects/observed-coverage.mts';
+import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {measureScalarCoverage,finitePercentiles} from '@cssearth/bake/objects/layers/observed-surfaces';
 
 test('polar fill is unavailable while black terrain, faint signal and negative finite measurements survive',()=>{

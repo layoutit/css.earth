@@ -1,18 +1,21 @@
 import { sha256 } from '@cssearth/core/node';
 import type {Channels} from 'sharp';
-import type {ObservedRgb, PolarDetails, DetailImage} from '@cssearth/bake/objects/layers/giant';
-import {parseObservedPolarSource} from '@cssearth/bake/objects/layers/giant';
+import type { ObservedRgb, PolarDetails } from './polar-continuation.ts';
+import type { DetailImage } from './polar-source-contract.ts';
+import { parseObservedPolarSource } from './polar-source-contract.ts';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {packProjectiveSurfaceRaster} from '@cssearth/bake/scene';
-import {planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
+import {packProjectiveSurfaceRaster} from '../../../scene/index.ts';
+import {planetographicRowsToMeshLatitude} from '../../geometry/index.ts';
 import { readFitsPrimary } from '@cssearth/fits';
-import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {latitudeRasterBands, preparePolarContinuationAtlas, preparePolarSurfaceTransition, compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection} from '@cssearth/bake/objects/layers/giant';
-import {validateRelativePath} from '@cssearth/bake/objects/layers/giant';
-import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mts';
+import {verifyObservationSources} from '../observed-surfaces/index.ts';
+import { latitudeRasterBands } from './geometry.ts';
+import { preparePolarContinuationAtlas, preparePolarSurfaceTransition } from './polar-continuation.ts';
+import { compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection } from './polar-dome.ts';
+import { validateRelativePath } from './relative-path.ts';
+import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../observed-surfaces/index.ts';
+import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-surfaces/index.ts';
 
 export function parseObservedPolarRecipe(input: unknown) {
   const config=parseObservedPolarSource(input);

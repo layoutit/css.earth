@@ -266,7 +266,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
     genericLaneOnly();
-    const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mts')).href) as typeof import('./giant-layers/object.mts');
+    const { prepareLayeredGiantObject } = await import('@cssearth/bake/objects/layers/giant');
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
