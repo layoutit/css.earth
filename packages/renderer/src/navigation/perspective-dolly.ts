@@ -97,12 +97,19 @@ export function validatePerspectiveCameraPlan(plan: CameraPlan): PerspectiveCame
   return plan;
 }
 
-// The stage from the projected disc. Presentation policy: a resolving body goes
-// from its marker straight to its mesh; no billboard disc is drawn. The marker
-// fades in over the mesh, which stays painted until the marker is opaque and
-// then hides. The prepared billboard band only times the selected navigation
-// marker's fade over the mesh (`proxyOpacity`).
-export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDiameter: number) {
+/** Keep two source texels per CSS pixel before starting detail, then finish
+ * the handoff at native proxy resolution. This is independent of device DPR. */
+export function levelOfDetailForProxy(plan: LevelOfDetailPlan, pixels?: number): LevelOfDetailPlan {
+  if (pixels === undefined) return plan;
+  if (!Number.isFinite(pixels) || pixels <= 0) throw new TypeError('Invalid prepared proxy resolution.');
+  return { ...plan, billboardFullDiscPixels: Math.max(plan.billboardFullDiscPixels, pixels / 2),
+    billboardFadeStartDiscPixels: Math.max(plan.billboardFadeStartDiscPixels, pixels) };
+}
+
+// The prepared proxy remains opaque throughout the billboard band. Detail starts
+// only when it outgrows that band; the shared world owns the visible proxy.
+export function levelOfDetailFor(prepared: LevelOfDetailPlan, silhouetteDiameter: number, proxyPixels?: number) {
+  const levelOfDetail = levelOfDetailForProxy(prepared, proxyPixels);
   const proxyOpacity = clamp(
     (levelOfDetail.billboardFadeStartDiscPixels - silhouetteDiameter) /
       (levelOfDetail.billboardFadeStartDiscPixels -
@@ -117,11 +124,11 @@ export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDia
     0,
     1,
   );
-  const stage = markerOpacity >= 1 ? "marker" : "geometry";
+  const stage = markerOpacity >= 1 ? "marker" : proxyOpacity >= 1 ? "billboard" : "geometry";
   return Object.freeze({
     stage,
     silhouetteDiameter,
-    billboardOpacity: 0,
+    billboardOpacity: proxyOpacity * (1 - markerOpacity),
     markerOpacity,
     proxyOpacity,
   });
@@ -264,7 +271,7 @@ export function createPerspectiveDolly({
       // A marker-stage body is its proxy (see the presentation policy above).
       // An undrawn mesh publishes no material, so it also waits for the one its
       // resolving camera commits instead of revealing an untextured globe.
-      const hidden = lod.stage === 'marker' || (canReveal !== undefined && !canReveal());
+      const hidden = lod.stage !== 'geometry' || (canReveal !== undefined && !canReveal());
       // A hidden scene draws nothing: its transform is formatted and written only
       // while shown, so marker-stage motion and fly-tos skip it, and the entry
       // below writes the current pose before the scene is shown.

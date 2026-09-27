@@ -49,7 +49,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
     returnIndex = 1;
   } else if (statements.length !== 1) fail();
   const returned = kind(kind(statements[returnIndex], 'ReturnStatement').argument, 'CallExpression');
-  if (returned.arguments.length !== 4 || bindings.get(named(returned.callee))?.name !== 'loadNavigableObject' || named(returned.arguments[0]) !== descriptorInput || named(returned.arguments[3]) !== named(loader.params[1])) fail();
+  if (![4, 5].includes(returned.arguments.length) || bindings.get(named(returned.callee))?.name !== 'loadNavigableObject' || named(returned.arguments[0]) !== descriptorInput || named(returned.arguments[3]) !== named(loader.params[1])) fail();
   const transportObject = kind(returned.arguments[1], 'ObjectExpression');
   // Loading validates the required world frame and supplies it to the sole native binding.
   if (named(returned.arguments[2]) !== 'bindPackagedObject') fail();
@@ -88,6 +88,17 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
     if (parts.length === 1) return node?.type === 'Identifier' && node.name === parts[0];
     return node?.type === 'MemberExpression' && !node.computed && named(node.property) === parts.at(-1) && memberIs(node.object, parts.slice(0, -1));
   };
+  // Optional proxy resolution must come from this descriptor's prepared navigation context.
+  if (returned.arguments.length === 5) {
+    const unwrap = (node: Node): Node => node.type === 'ChainExpression' ? node.expression : node;
+    const pixels = kind(unwrap(returned.arguments[4]!), 'MemberExpression');
+    const context = kind(unwrap(pixels.object), 'MemberExpression');
+    const lookup = kind(unwrap(context.object), 'MemberExpression');
+    const marker = bindings.get(named(lookup.object));
+    if (pixels.computed || named(pixels.property) !== 'pixels' || context.computed || named(context.property) !== 'context' ||
+        !lookup.computed || !memberIs(lookup.property, [descriptorInput, 'id']) ||
+        marker?.name !== 'PREPARED_NAVIGATION_MARKERS' || marker.source !== './prepared-navigation-markers.mjs') fail();
+  }
   const declarations = method.body.body.filter(node => node.type === 'VariableDeclaration').flatMap(node => node.declarations);
   const address = declarations.find(node => node.init?.type === 'TemplateLiteral');
   if (!address || address.id.type !== 'Identifier') fail();

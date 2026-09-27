@@ -99,18 +99,19 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
   const textureResources = levelResources === undefined && !Object.keys(fallback).length ? undefined
     : { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([key, level]) => [key, fallback[level] ?? level])) };
   const content = variant.required.map(key => textureResources?.[key] ?? key);
-  // An opaque proxy stands for a marker-stage body, so its mesh is not drawn
+  // An opaque proxy stands for a marker- or billboard-stage body, so its mesh is not drawn
   // (see perspective-dolly.ts). Mounting one there decoded a full surface set
   // for pixels no one sees. Its group is neither required nor warmed until the
   // camera resolves the body, which re-plans and decodes before it appears.
-  const deferredTextures = (view?.levelOfDetail?.stage ?? "geometry") === "marker";
+  const deferredTextures = (view?.levelOfDetail?.stage ?? "geometry") !== "geometry";
   const required = new Set(definition.resourceOrder === "materials-first" || deferredTextures ? [] : content);
   const prewarm = new Set<string>(), materials: Record<string, PreparedMaterialDemand> = {};
   for (const selected of variant.materials) {
     if (!view) throw new TypeError('Prepared material demand requires a view.');
     const track = definition.materials.find(track => track.id === selected.track);
     if (!track) throw new TypeError(`Unprepared material track: ${selected.track}.`);
-    const state = resolvePreparedMaterialDemand(track, selected, view);
+    const resolved = resolvePreparedMaterialDemand(track, selected, view);
+    const state = deferredTextures ? { ...resolved, required: [], prewarm: [] } : resolved;
     for (const key of state.required) required.add(key);
     for (const key of state.prewarm) prewarm.add(key);
     materials[track.id] = state;

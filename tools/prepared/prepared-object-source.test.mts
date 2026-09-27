@@ -8,6 +8,8 @@ test('the descriptor transport reads the complete object or, adopting its page, 
   const source = await readFile(new URL('../../site/packaged-object-runtime.mts', import.meta.url), 'utf8');
   assert.doesNotThrow(() => requireDescriptorAdapterSource(source, 'loadPackagedObject'));
   for (const changed of [
+    source.replace('PREPARED_NAVIGATION_MARKERS[descriptorInput.id]?.context?.pixels', '240'),
+    source.replace('PREPARED_NAVIGATION_MARKERS[descriptorInput.id]?.context?.pixels', 'PREPARED_NAVIGATION_MARKERS[other.id]?.context?.pixels'),
     source.replace("? 'first-view' : 'object'", "? 'full' : 'object'"),
     source.replace("${adoptsServerMarkup(descriptorInput.id) ? 'first-view' : 'object'}.json", 'object.json'),
     source.replace('adoptsServerMarkup(descriptorInput.id) ?', 'Math.random() > .5 ?'),

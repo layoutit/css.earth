@@ -224,6 +224,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       get billboardShown() { return paint.billboardShown; }, get center() { return paint.center; },
       closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
+      proxyPixels: sprite?.proxyPixels,
       dotDiameter: sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null,
       orbitTransform: '',
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
@@ -341,8 +342,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
-          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
-          labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
+          indicatorShown, indicatorRadius, orbitAppearance, proxyPixels }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
+          labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance, proxyPixels })) };
   };
   const layer = Object.freeze({ root,
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */

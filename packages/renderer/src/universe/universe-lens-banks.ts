@@ -1,3 +1,4 @@
+import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -15,6 +16,7 @@ interface LensBank {
   readonly facts: LensBankBillboard;
   readonly billboardIndex: number;
   mounted: LensMount | null;
+  textures: ReturnType<typeof createVolumeTextureReadiness> | null;
   loading: Promise<void> | null;
   generation: number;
   explicitEnabled: boolean | undefined;
@@ -45,7 +47,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
   let billboardCount = 0, useClock = 0, coasting = false;
   const banks: LensBank[] = declarations.map((declared, index) => ({
     id: declared.id, facts: facts[index]!, billboardIndex: facts[index]!.billboard ? billboardCount++ : -1,
-    mounted: null, loading: null, generation: 0, explicitEnabled: undefined,
+    mounted: null, textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     pendingSelection: undefined, pendingStarsVisible: undefined,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
     publishedOpacity: NaN, residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0,
@@ -58,6 +60,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
     bank.mounted = null;
     bank.loading = null;
     mounted?.destroy();
+    bank.textures?.destroy(); bank.textures = null;
   });
   const billboardEntries = banks.flatMap(bank => bank.facts.billboard
     ? [{ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard }] : []);
@@ -86,6 +89,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
   function evict(bank: LensBank) {
     if (!bank.mounted || bank.visible || bank.subscribers > 0) return false;
     bank.mounted.destroy();
+    bank.textures?.destroy(); bank.textures = null;
     bank.mounted = null;
     bank.residentNodes = 0;
     bank.publishedOpacity = NaN;
@@ -129,6 +133,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
       } catch (error) { mounted.destroy(); throw error; }
       if (lifetime.disposed || generation !== bank.generation) { mounted.destroy(); return; }
       bank.mounted = mounted;
+      bank.textures = createVolumeTextureReadiness(() => { requestPublication?.(); });
       const pointVisibility = prepared.payload.pointVisibility!;
       bank.framing = { frame: loadedFrame, radiusUnits: prepared.payload.framingRadiusUnits, visibility: {
         hiddenBelowRadiusPixels: Math.max(pointVisibility.hiddenBelowRadiusPixels, visibility.hiddenBelowRadiusPixels),
@@ -223,19 +228,24 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
         const presentationOpacity = bank.id === detailedObjectId ? 1 : detailContextOpacity;
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
         const shown = bank.enabled ? presentationOpacity * contextOpacity : 0;
-        const opacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+        const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+        const incoming = bank.id === detailedObjectId;
+        const ready = bank.mounted && bank.textures?.ready(shown > 0 && (requestedOpacity > 0 || incoming)
+          ? bank.mounted.textureUrls({ world, viewport }, incoming) : []);
+        const opacity = ready ? requestedOpacity : 0;
         const billboard = bank.facts.billboard;
         if (billboards && billboard) {
-          const billboardOpacity = shown * projectedVolumeOpacity(world, viewport, frame, billboard.radiusUnits) * (bank.mounted ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1);
+          const billboardOpacity = shown * projectedVolumeOpacity(world, viewport, frame, billboard.radiusUnits) * (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1);
           billboards.publish(bank.billboardIndex, billboardOpacity, world, viewport);
         }
         if (!bank.mounted) {
-          const visible = opacity > 0 && projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
+          const visible = requestedOpacity > 0 && projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
           if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
           if (visible && !coasting) void ensureLoaded(bank).catch(() => {});
           continue;
         }
-        const visible = opacity > 0;
+        // Keep a demanded bank resident while its images decode behind the billboard.
+        const visible = requestedOpacity > 0;
         if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
         if (opacity !== bank.publishedOpacity) {
           // Both retained roots carry the bank's visibility, including foreground clouds.
@@ -250,7 +260,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
           // A coast leaves the published state stale on purpose: the first publication after it applies it.
           if (!coasting) bank.publishedOpacity = opacity;
         }
-        bank.mounted.publish({ world, viewport }, visible);
+        bank.mounted.publish({ world, viewport }, visible && Boolean(ready));
       }
       if (residencyChanged) trimWarmResidency();
     },

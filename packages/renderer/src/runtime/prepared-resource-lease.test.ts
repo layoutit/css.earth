@@ -222,3 +222,17 @@ test('first-paint decode propagates failure and remains cancelled after its owne
   reject(new Error('discarded')); await failed;
   expect(await residency.decodeForPaint()).toBe(false);
 });
+
+
+test('view-driven preflight skips the close-up startup bank until detail is requested', async () => {
+  const assets: PreparedAssets = { entries: [{key:'surface',url:'/surface.webp',pool:'material'}],
+    pools: [{id:'material',capacity:1,concurrency:1,reuse:false,retention:'selection',eviction:'unused'}], startup:['surface'] };
+  const decode = vi.fn(async () => {});
+  const lease = prepareObjectResources(assets, {startup:false, createResources: options => createPreparedResidency({...options,
+    createImage: () => ({src:'',decoding:'async',naturalWidth:1,naturalHeight:1,decode})})});
+  await lease.prepareDemand(() => ({required:[]}));
+  expect(decode).not.toHaveBeenCalled();
+  await lease.prepareDemand(() => ({required:['surface']}));
+  expect(decode).toHaveBeenCalledOnce();
+  lease.destroy();
+});

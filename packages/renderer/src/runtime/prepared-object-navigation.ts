@@ -6,7 +6,7 @@ import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { viewSunDirectionToPhysicalLightDirection } from '../solar-system/directional-sun-coordinate.js';
 import { initialObjectSelection } from './object-contract.js';
-import { resolvePreparedPresentation, selectedPreparedVariant } from '../rendering/prepared-presentation.js';
+import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
 import type { CameraViewport } from '../navigation/camera-viewport.js';
@@ -18,26 +18,22 @@ export interface ObjectPreparationView { world: WorldCameraPose; viewport: World
  * material resolver as the mounted presentation, without constructing a scene. */
 export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame) {
   const selection = initialObjectSelection(definition.controls);
-  if (!selectedPreparedVariant(definition, selection).materials.length) {
-    const plan = resolvePreparedPresentation(definition, { selection, view: null, initial: true });
-    return (_view: ObjectPreparationView) => plan;
-  }
   const { camera, sun } = definition;
-  const orientation = createCameraOrientation({ cameraPlan: camera,
+  const orientation = definition.materials.length ? createCameraOrientation({ cameraPlan: camera,
     controlPitch: camera.defaultControlPitchDegrees, controlYaw: camera.defaultControlYawDegrees,
-    sunDirection: sun?.localDirection });
+    sunDirection: sun?.localDirection }) : null;
   const light = () => {
-    const direction = orientation.sunViewDirection();
+    const direction = orientation?.sunViewDirection() ?? null;
     return direction && sun ? viewSunDirectionToPhysicalLightDirection(direction) : direction;
   };
-  const reference = { sceneMatrix: orientation.scene(), sunViewDirection: light() };
+  const reference = { sceneMatrix: orientation?.scene() ?? '', sunViewDirection: light() };
   return ({ world, viewport }: ObjectPreparationView) => {
     const presentation = presentWorldCamera(world, frame, viewport);
-    orientation.setSceneRotation(presentation.rotation);
+    orientation?.setSceneRotation(presentation.rotation);
     const radius = frame.bodyRadiusM / frame.metersPerUnit;
     const diameter = worldCameraSilhouetteDiameter(presentation, radius);
     return resolvePreparedPresentation(definition, { selection, initial: true, view: {
-      sceneMatrix: orientation.scene(), sunViewDirection: light(), reference,
+      sceneMatrix: orientation?.scene() ?? '', sunViewDirection: light(), reference,
       levelOfDetail: levelOfDetailFor(camera.levelOfDetail, diameter),
     } });
   };
@@ -62,7 +58,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       // Resolve a new authored projection while the outgoing scene is intact.
       // Attachment only consumes this application-owned snapshot.
       cameraViewport?.read(definition.camera.projection.cssPerspective);
-      const resources = prepareObjectResources(definition.assets, { signal, assetOrigin: definition.assetOrigin });
+      const resources = prepareObjectResources(definition.assets, { signal, startup: false, assetOrigin: definition.assetOrigin });
       let tree: PreparedTreeLease | undefined;
       const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
       const destroy = () => { resources.destroy(); tree?.destroy(); };
@@ -72,7 +68,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
         return resources.prepareDemand(() => demand!(read()));
       };
       try {
-        // One bounded bank completes startup, then follows the incoming view.
+        // The incoming camera owns demand; the default close-up startup bank must not decode first.
         await Promise.all([prepareView(getView), construction]);
         return Object.freeze({ frame, definition, resources, tree, prepareView, destroy,
           projection(view: ObjectPreparationView) {

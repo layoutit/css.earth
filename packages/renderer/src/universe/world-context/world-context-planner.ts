@@ -62,6 +62,7 @@ export function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number,
 
 /** UI measurements and the last committed annotation state, without DOM handles. */
 export interface WorldBodyPresentation {
+  proxyPixels?: number;
   hovered: boolean;
   bodyHidden?: boolean;
   orbitHidden: boolean;
@@ -200,7 +201,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const selectedEye = frame.eye(selected);
       const selectedDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
-      const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter);
+      const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter, selectedEntry.proxyPixels);
       // A departed focus can cross the eye plane while its detail still owns
       // selection. Its unprojectable diameter is not a screen-filling disc:
       // only a visible focus may fade the surrounding orbit field.
@@ -356,7 +357,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         }
         if (entry.orbit) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
         const appearance = entry.orbitAppearance;
-        const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
+        const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter, entry.proxyPixels);
         // An explicit category names bodies even when their orbits are subpixel.
         // The shared system fade and annotation collision budget still apply.
         // A planet of a placed star is the whole of its system on screen: its circle does not fade with the size of its orbit,

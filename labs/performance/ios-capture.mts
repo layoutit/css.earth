@@ -774,18 +774,24 @@ async function exportTimeProfile(native: string, pid: number | null): Promise<{ 
     };
     const startMs = await exportClock();
     const stdout = await symbolicateNativeXml(await exportTable(), native);
-    const samples = timeProfileSamples(stdout, pid);
+    const allSamples = timeProfileSamples(stdout, null);
+    await writeFile(resolve(native, '..', 'native-samples.json.gz'), gzipSync(JSON.stringify({
+      schema: 'cssearth-native-samples@1', startMs, selectedPid: pid,
+      alignment: 'Host wall-clock approximation; not synchronized to WebKit or proof of event-level causality.',
+      samples: allSamples,
+    })));
+    const samples = pid === null ? allSamples : allSamples.filter(sample => sample.pid === pid);
     if (!samples.length) throw new Error(`Native trace contains no samples for ${pid === null ? 'the recorded processes' : `page PID ${pid}`}.`);
     return { summary: summariseTimeProfile(stdout), samples, startMs };
   } catch (error) { return { summary: { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }, samples: [], startMs: null }; }
 }
 
-export type NativeSample = { ns: number; weightNs: number; pid: number; thread: string; frames: string[] };
+export type NativeSample = { ns: number; weightNs: number; pid: number; process?: string; thread: string; frames: string[] };
 
 /** Every Time Profiler sample with its time from the recording start, its thread and its stack (leaf first), keeping one
  * process when pid is given. xctrace writes each repeated value once with an id and refers to it after (ref="…"). */
 export function timeProfileSamples(xml: string, pid: number | null): NativeSample[] {
-  const text = new Map<string, string>(), numbers = new Map<string, number>(), stacks = new Map<string, string[]>(), threads = new Map<string, { name: string; pid: number }>();
+  const text = new Map<string, string>(), numbers = new Map<string, number>(), stacks = new Map<string, string[]>(), threads = new Map<string, { name: string; pid: number; process: string }>();
   const decode = (value: string) => value.replace(/&amp;/gu, '&').replace(/&lt;/gu, '<').replace(/&gt;/gu, '>').replace(/&quot;/gu, '"').replace(/&apos;/gu, "'");
   const samples: NativeSample[] = [];
   for (const row of xml.split('<row>').slice(1)) {
@@ -796,15 +802,16 @@ export function timeProfileSamples(xml: string, pid: number | null): NativeSampl
     const timeId = ref('sample-time'), weightId = ref('weight'), threadId = ref('thread'), backtraceId = ref('backtrace');
     if (threadId && !threads.has(threadId)) {
       const fmt = text.get(threadId) ?? '', owner = Number(fmt.match(/pid: (\d+)\)/u)?.[1] ?? NaN);
-      threads.set(threadId, { name: fmt.replace(/ \(.*$/u, ''), pid: owner });
+      threads.set(threadId, { name: fmt.replace(/ \(.*$/u, ''), pid: owner, process: fmt.match(/\((.*), pid: \d+\)/u)?.[1] ?? 'unknown' });
     }
     const thread = threadId ? threads.get(threadId) : undefined;
-    if (!thread || (pid !== null && thread.pid !== pid)) continue;
+    if (!thread) continue;
     if (backtraceId && !stacks.has(backtraceId)) {
       const block = row.slice(row.indexOf('<backtrace'), row.indexOf('</backtrace>'));
       stacks.set(backtraceId, [...block.matchAll(/<frame (?:id="\d+" name="([^"]*)"|ref="(\d+)")/gu)].map(m => decode(m[1] ?? text.get(m[2]!) ?? '?')));
     }
-    samples.push({ ns: numbers.get(timeId ?? '') ?? 0, weightNs: numbers.get(weightId ?? '') ?? 1e6, pid: thread.pid, thread: thread.name, frames: stacks.get(backtraceId ?? '') ?? [] });
+    if (pid !== null && thread.pid !== pid) continue;
+    samples.push({ ns: numbers.get(timeId ?? '') ?? 0, weightNs: numbers.get(weightId ?? '') ?? 1e6, pid: thread.pid, process: thread.process, thread: thread.name, frames: stacks.get(backtraceId ?? '') ?? [] });
   }
   return samples;
 }
@@ -1232,20 +1239,32 @@ export function traceEvents(records: readonly unknown[], stopwatchEpochMs: numbe
   // Instruments' native samples of the page's process, one slice per sample on its own thread's track, named by the
   // leaf frame with the stack in args: what WebKit did when its timeline records nothing.
   if (native?.samples.length) {
-    events.push({ ph: 'M', name: 'process_name', pid: 3, tid: 0, args: { name: 'Page process native stacks (Instruments)' } });
+    const pids = new Map<number, number>();
     const tids = new Map<string, number>(), next = new Map<NativeSample, number>(), last = new Map<string, NativeSample>();
-    // A sample is drawn until the next one on its thread at most: samples closer than their 1 ms weight would overlap,
-    // and Perfetto drops overlapping slices ("slice_drop_overlapping_complete_event", 17 in one take).
+    const key = (sample: NativeSample) => `${sample.pid}:${sample.thread}`;
+    // Thread names are not unique across processes. Never clip GPU samples against WebContent samples.
     for (const sample of [...native.samples].sort((a, b) => a.ns - b.ns)) {
-      const previous = last.get(sample.thread);
+      const previous = last.get(key(sample));
       if (previous) next.set(previous, sample.ns);
-      last.set(sample.thread, sample);
+      last.set(key(sample), sample);
     }
     for (const sample of native.samples) {
-      if (!tids.has(sample.thread)) { tids.set(sample.thread, tids.size + 1); events.push({ ph: 'M', name: 'thread_name', pid: 3, tid: tids.get(sample.thread), args: { name: sample.thread } }); }
+      if (!pids.has(sample.pid)) {
+        const pid = 3 + pids.size;
+        pids.set(sample.pid, pid);
+        events.push({ ph: 'M', name: 'process_name', pid, tid: 0,
+          args: { name: `${sample.process ?? "Native process"} (${sample.pid}; approximate clock)` } });
+      }
+      const pid = pids.get(sample.pid)!;
+      if (!tids.has(key(sample))) {
+        tids.set(key(sample), tids.size + 1);
+        events.push({ ph: 'M', name: 'thread_name', pid, tid: tids.get(key(sample)), args: { name: sample.thread } });
+      }
       const ts = Math.round(native.offsetUs + sample.ns / 1e3), end = Math.round(native.offsetUs + Math.min(sample.ns + sample.weightNs, next.get(sample) ?? Infinity) / 1e3);
-      events.push({ ph: 'X', name: sample.frames[0] ?? '?', cat: 'native', pid: 3, tid: tids.get(sample.thread), ts, dur: Math.max(0, end - ts),
-        args: { stack: sample.frames.slice(0, 40).join(' < '), weightMs: sample.weightNs / 1e6 } });
+      events.push({ ph: 'X', name: sample.frames[0] ?? '?', cat: 'native', pid, tid: tids.get(key(sample)), ts, dur: Math.max(0, end - ts),
+        args: { stack: sample.frames.slice(0, 40).join(' < '), weightMs: sample.weightNs / 1e6,
+          nativePid: sample.pid, process: sample.process, thread: sample.thread, nativeSampleNs: sample.ns,
+          alignment: 'Host wall-clock approximation; overlap does not establish event-level causality.' } });
     }
   }
   if (device) {

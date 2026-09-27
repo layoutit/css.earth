@@ -110,3 +110,18 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
   expect(() => requireTextureLevels(sheet, both, new Set(['a', 'b', 'sheet']))).not.toThrow();
   expect(() => requireTextureLevels({ ...sheet, levels: [{ ...sheet.levels[0], tiles: { a: { x: 0, y: 0, scale: 0.5 } } }, sheet.levels[1]] }, both, new Set(['a', 'b', 'sheet']))).toThrow(/tile a/);
 });
+
+
+test('system-scale proxies require no detail images and acquire them on geometry entry', () => {
+  const at = (stage: string) => ({sceneMatrix: '', sunViewDirection: null,
+    levelOfDetail: {stage, silhouetteDiameter: 13, billboardOpacity: 1, markerOpacity: 0}});
+  for (const stage of ['marker', 'billboard']) {
+    const plan = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at(stage)});
+    expect(plan.deferredTextures).toBe(true);
+    expect(plan.required).toEqual([]);
+    expect(plan.prewarm).toEqual([]);
+  }
+  const detail = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at('geometry')});
+  expect(detail.required).toEqual(['a-small']);
+  expect(detail.deferredTextures).toBeUndefined();
+});

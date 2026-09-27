@@ -30,15 +30,25 @@ test('keeps worker and main-thread native paths separate and labels clock overla
  const trace={traceEvents:[stamp('cssEarth:decode:1:begin',1),stamp('cssEarth:decode:1:end',10),
   {name:'thread_name',ts:0,pid:3,tid:1,ph:'M',args:{name:'Main Thread'}},
   {name:'thread_name',ts:0,pid:3,tid:2,ph:'M',args:{name:'Worker'}},
-  {name:'decode',ts:3,pid:3,tid:1,ph:'X',args:{stack,weightMs:1}},
-  {name:'decode',ts:4,pid:3,tid:2,ph:'X',args:{stack,weightMs:1}}]};
+  {name:'decode',ts:3,pid:3,tid:1,ph:'X',cat:'native',args:{stack,weightMs:1}},
+  {name:'decode',ts:4,pid:3,tid:2,ph:'X',cat:'native',args:{stack,weightMs:1}}]};
  const result=paintClues(trace,{decodes:[{id:1,url:'a.webp',status:'resolved'}]},[]);
  assert.deepEqual(result.decodes[0].native.imageWork.map(group=>group.thread),['Main Thread','Worker']);
  assert.match(result.decodes[0].native.relation,/Approximate clock overlap/);
 });
 
 test('surfaces decoded-data destruction from native cache callbacks without inventing image identity', () => {
- const result=paintClues({traceEvents:[{name:'sample',ts:100,pid:3,tid:1,ph:'X',args:{stack:'ImageFrame::clearImage < CachedImage::didReplaceSharedBufferContents < NetworkProcessConnection::didCacheResource'}}]},null,[]);
+ const result=paintClues({traceEvents:[{name:'sample',ts:100,pid:3,tid:1,ph:'X',cat:'native',args:{stack:'ImageFrame::clearImage < CachedImage::didReplaceSharedBufferContents < NetworkProcessConnection::didCacheResource'}}]},null,[]);
  assert.equal(result.nativeImageLifecycle[0].reason,'encoded-buffer replacement');
  assert.match(result.nativeImageLifecycle[0].relation,/image URL unavailable/);
+});
+
+
+test('commit evidence includes GPU samples without merging same-named threads', () => {
+ const trace={traceEvents:[{name:'Commit',ph:'X',pid:1,tid:1,ts:100,dur:1000},
+  {name:'copy',cat:'native',ph:'X',pid:3,tid:1,ts:200,args:{stack:'copy',nativePid:40}},
+  {name:'copy',cat:'native',ph:'X',pid:4,tid:1,ts:200,args:{stack:'copy',nativePid:50}}]};
+ const result=paintClues(trace,null,[]);
+ assert.equal(result.expensiveCommits[0].native.sampleCount,2);
+ assert.deepEqual(result.expensiveCommits[0].native.stacks.map(row=>row.pid),[40,50]);
 });

@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { afterEach, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import { mountPreparedCssSky, preparedSkyCameraTransform } from './prepared-sky-runtime.js';
 import { validatePreparedCssSky } from './validation.js';
 import type { PreparedCssSky } from './types.js';
@@ -17,6 +17,12 @@ import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../../../../tests/renderer/canonical-point-field-fixture.js';
 import { parseLensBillboards } from '../universe/lens-billboards.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
+
+beforeEach(() => vi.stubGlobal('Image', class {
+  src = ''; decoding = 'async'; complete = true; naturalWidth = 1; naturalHeight = 1;
+  async decode() {}
+  removeAttribute() { this.src = ''; }
+}));
 
 const LENS_PIN = '0'.repeat(64);
 /** Declared lens banks with the prepared facts the universe reads before fetching any of them. These fixtures
@@ -383,6 +389,10 @@ test('shared universe draws only resolved nebulae and never prefetches their len
       const independent = findBank(bank.id);
       if (!visible && !independent) continue; // not yet fetched: the first (invisible) distance, nothing to check
       expect(independent).toBeDefined();
+      if (visible) await vi.waitFor(() => {
+        mounted.publish(camera, viewport, spatialFrame);
+        expect(independent!.style.opacity).toBe('1');
+      });
       expect(independent!.style.opacity).toBe(visible ? '1' : '0');
       expect(independent!.style.display).toBe(visible ? 'block' : 'none');
       // The galactic bank has the same silhouette but fades with the galaxy, which is zero here: its lenses are
@@ -676,7 +686,11 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     mounted.publish(near, viewport, spatialFrame);
     expect(loadVolumeLens.mock.calls.map(([id]) => id)).toEqual(['focus-bank', 'warm-bank']);
     expect(loadImageLayer).not.toHaveBeenCalled(); expect(fetchResource).not.toHaveBeenCalled();
-    expect(findBank('focus-bank').style.display).toBe('block');
+    expect(findBank('focus-bank').style.display).toBe('none');
+    await vi.waitFor(() => {
+      mounted.publish(near, viewport, spatialFrame);
+      expect(findBank('focus-bank').style.display).toBe('block');
+    });
     expect(findBank('warm-bank').style.display).toBe('none'); expect(mw.style.display).toBe('none');
     expect(near).toEqual(savedPose);
     const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
@@ -694,6 +708,10 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
       mounted.setStellarPointsEnabled(false); mounted.setStellarPointsEnabled(true);
       expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
+      if (multiplier > 0) await vi.waitFor(() => {
+        mounted.publish(camera(radii), viewport, spatialFrame);
+        expect(Number(findBank('warm-bank').style.opacity)).toBeGreaterThan(0);
+      });
       const selectedOpacity = Number(findBank('focus-bank').style.opacity);
       expect(selectedOpacity).toBeGreaterThan(0);
       expect(Number(findBank('warm-bank').style.opacity)).toBeCloseTo(multiplier * selectedOpacity, 12);
@@ -707,7 +725,11 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     mounted.selectGalaxy('catalogue:image-bank', focus('catalogue:image-bank')); mounted.publish(near, viewport, spatialFrame);
     expect(imageRoot.style.display).toBe(''); expect(findBank('focus-bank').style.display).toBe('none');
     mounted.selectGalaxy(null); mounted.publish(near, viewport, spatialFrame);
-    expect(mw.style.display).toBe(''); expect(findBank('focus-bank').style.display).toBe('block');
+    expect(mw.style.display).toBe('');
+    await vi.waitFor(() => {
+      mounted.publish(near, viewport, spatialFrame);
+      expect(findBank('focus-bank').style.display).toBe('block');
+    });
     mounted.selectGalaxy('catalogue-only', focus('catalogue-only')); mounted.publish(near, viewport, spatialFrame);
     expect(mw.style.display).toBe('');
     expect(() => mounted.selectGalaxy('catalogue:focus-bank', focus('mismatch'))).toThrow('focus');

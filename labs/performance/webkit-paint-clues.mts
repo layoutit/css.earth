@@ -6,28 +6,36 @@ const rows = (value: unknown) => Array.isArray(value) ? value.filter(isRecord) :
 const urls = (value: unknown) => typeof value === 'string'
   ? [...value.matchAll(/url\(["']?([^"')]+)["']?\)/g)].map(match => match[1]!) : [];
 export function paintClues(trace: unknown, diagnostic: unknown, layerSamples: readonly unknown[], baseUrl?: string) {
-  const events = rows(isRecord(trace) ? trace.traceEvents : []).filter((event): event is Record<string, unknown> & TraceEvent => isTraceEvent(event));
+  const allEvents = rows(isRecord(trace) ? trace.traceEvents : []);
+  const events = allEvents.filter((event): event is Record<string, unknown> & TraceEvent => isTraceEvent(event));
   const source = isRecord(diagnostic) ? diagnostic : {};
   const absolute = (url: string) => { try { return new URL(url, baseUrl).href; } catch { return url; } };
   const causes = traceCauses(trace, diagnostic);
-  const nativeSamples = events.filter(event => event.pid === 3 && event.ph === 'X');
-  const nativeThreads = new Map(events.filter(event => event.pid === 3 && event.name === 'thread_name')
-    .map(event => [event.tid, String(event.args?.name ?? event.tid)]));
+  const nativeSamples = events.filter(event => event.cat === 'native' && event.ph === 'X');
+  const nativeThreads = new Map(allEvents.filter(event => event.pid !== 1 && event.name === 'thread_name')
+    .map(event => [`${event.pid}:${event.tid}`, String(isRecord(event.args) ? event.args.name ?? event.tid : event.tid)]));
+  const nativeProcesses = new Map(allEvents.filter(event => event.name === 'process_name')
+    .map(event => [Number(event.pid), String(isRecord(event.args) ? event.args.name ?? event.pid : event.pid)]));
   // Native timestamps use a host-wall-clock bridge, not a shared WebKit clock. These are
   // contextual samples, never exact paint ownership, image identity or elapsed-time shares.
   const nativeEvidence = (startUs: number | null, endUs: number | null) => {
     const selected = startUs === null || endUs === null ? [] : nativeSamples.filter(sample => sample.ts >= startUs && sample.ts < endUs);
-    const groups = new Map<string, { thread: string; stack: string; samples: number; weightMs: number }>();
+    const groups = new Map<string, { pid: number; process: string; thread: string; stack: string; samples: number; weightMs: number }>();
     for (const sample of selected) {
       const stack = typeof sample.args?.stack === 'string' ? sample.args.stack : sample.name;
-      const key = `${sample.tid}:${stack}`;
-      const group = groups.get(key) ?? { thread: nativeThreads.get(sample.tid) ?? String(sample.tid), stack, samples: 0, weightMs: 0 };
+      const key = `${sample.pid}:${sample.tid}:${stack}`;
+      const group = groups.get(key) ?? { pid: Number(sample.args?.nativePid ?? sample.pid), process: nativeProcesses.get(Number(sample.pid)) ?? String(sample.pid), thread: nativeThreads.get(`${sample.pid}:${sample.tid}`) ?? String(sample.tid), stack, samples: 0, weightMs: 0 };
       group.samples++; group.weightMs += typeof sample.args?.weightMs === 'number' ? sample.args.weightMs : 0;
       groups.set(key, group);
     }
     const stacks = [...groups.values()].sort((a,b) => b.weightMs-a.weightMs);
     const imageWork = stacks.filter(group => /decodeWebP|createFrameImageAtIndex|createFromImagePixels|recordNativeImageUse/.test(group.stack));
-    return { sampleCount: selected.length, distinctStacks: stacks.length, stacks: stacks.slice(0, 8), imageWork,
+    const processes = [...new Set(stacks.map(group => group.pid))].map(pid => {
+      const entries = stacks.filter(group => group.pid === pid);
+      return { pid, process: entries[0]!.process, sampleCount: entries.reduce((n, group) => n + group.samples, 0),
+        distinctStacks: entries.length, stacks: entries.slice(0, 8) };
+    });
+    return { processes, sampleCount: selected.length, distinctStacks: stacks.length, stacks: stacks.slice(0, 8), imageWork,
       relation: 'Approximate clock overlap only; native stacks prove execution paths, not the image URL. Concurrent weights are not elapsed-time attribution.' };
   };
   const nativeImageLifecycle = nativeSamples.flatMap(sample => {
@@ -36,7 +44,7 @@ export function paintClues(trace: unknown, diagnostic: unknown, layerSamples: re
       : stack.includes('pruneLiveResourcesToSize') ? 'live-resource pruning'
       : stack.includes('pruneDeadResourcesToSize') ? 'dead-resource pruning'
       : /destroyDecodedData|destroyDecodedFrames|destroyNativeImageAtIndex/.test(stack) ? 'decoded-image destruction' : null;
-    return reason ? [{ sourceUs: sample.ts, thread: nativeThreads.get(sample.tid) ?? String(sample.tid), reason, stack,
+    return reason ? [{ sourceUs: sample.ts, thread: nativeThreads.get(`${sample.pid}:${sample.tid}`) ?? String(sample.tid), reason, stack,
       relation: 'Sample of native execution, not a complete event count; image URL unavailable.' }] : [];
   });
   const times = new Map<number, { startUs?: number; endUs?: number }>();
@@ -88,7 +96,12 @@ export function paintClues(trace: unknown, diagnostic: unknown, layerSamples: re
       nativeStackCoverage: { distinctStacks: native.distinctStacks, shown: native.stacks.length, relation: native.relation },
       identity: 'unavailable; native DOM snapshots are not an exact paint-time identity mapping' };
   });
-  return { enabled: Array.isArray(source.attachments), coverage: source.paintCoverage ?? null, decodes, attachments, expensivePaints, nativeImageLifecycle,
+  const expensiveCommits = events.filter(event => event.pid === 1 && event.name === 'Commit')
+    .sort((a, b) => (b.dur ?? 0) - (a.dur ?? 0)).slice(0, 20).map(event => ({
+      sourceUs: event.ts, durationMs: (event.dur ?? 0) / 1000,
+      native: nativeEvidence(event.ts, event.ts + (event.dur ?? 0)),
+    }));
+  return { expensiveCommits, enabled: Array.isArray(source.attachments), coverage: source.paintCoverage ?? null, decodes, attachments, expensivePaints, nativeImageLifecycle,
     nativePaintNodes: nativeNodes, paintEvents: paints.length, paintsWithNodeId: paints.filter(event => typeof dataOf(event).nodeId === 'number').length,
     limitations: ['Debug collection adds overhead; use a normal trace for timing.',
       'Native and WebKit clocks are bridged through host wall time; exact cross-profiler interval attribution is unavailable.',
