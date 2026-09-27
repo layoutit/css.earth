@@ -1,6 +1,6 @@
 import type {RasterImage} from '@cssearth/bake/objects/layers/observation';
-import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
-import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.mts';
+import type {SurfacePreviewDirectories} from '@cssearth/bake/surface-previews';
+import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from '@cssearth/bake/surface-previews';
 import {parsePagedProfile} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';

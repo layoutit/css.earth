@@ -221,6 +221,11 @@
       "import": "./dist/navigation.js",
       "default": "./dist/navigation.js"
     },
+    "./surface-previews": {
+      "types": "./dist/surface-previews.d.ts",
+      "import": "./dist/surface-previews.js",
+      "default": "./dist/surface-previews.js"
+    },
     "./thread-pool": {
       "types": "./dist/thread-pool.d.ts",
       "import": "./dist/thread-pool.js",

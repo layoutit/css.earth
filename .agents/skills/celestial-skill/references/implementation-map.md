@@ -61,7 +61,7 @@ fallback requirements are not the current authored-package template.
 Minimap preparation accepts authored source paths and prepared source records.
 For a prepared surface, `map.url` identifies the preview image; its `source`
 object records provenance and must not be treated as a file path. The parser
-lives in `tools/prepare/surface-preview-source.mts`.
+lives in `packages/bake/src/surface-previews/surface-preview-source.ts`.
 
 For an unbound body, use the shared prepared hyperbolic path with explicit open
 endpoints and an epoch vertex. Do not wrap its anomaly, close its last edge or

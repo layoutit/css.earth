@@ -71,6 +71,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/sources': 'packages/bake/src/sources/index.ts',
   '@cssearth/bake/contract': 'packages/bake/src/contract/index.ts',
   '@cssearth/bake/navigation': 'packages/bake/src/navigation/index.ts',
+  '@cssearth/bake/surface-previews': 'packages/bake/src/surface-previews/index.ts',
   '@cssearth/bake/thread-pool': 'packages/bake/src/thread-pool/index.ts',
   '@cssearth/objects/node/contract': 'packages/objects/src/node/contract/index.ts',
 };
