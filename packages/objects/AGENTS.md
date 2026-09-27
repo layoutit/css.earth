@@ -1,8 +1,12 @@
 # Objects package instructions
 
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.
-Own the source catalogue (`src/sources/`, browser-safe), the source-manifest format and preparation's read of the
-registry (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main and `sources` entries never import `node/`.
+Own the source catalogue (`src/sources/`, browser-safe), the provenance, exploration and source-usage records the
+application reads and preparation writes (`src/provenance/`, the browser-safe `@cssearth/objects/provenance` entry; the
+application's dataset routes come in as `DatasetRoutes`, never named here), the
+source-manifest format, preparation's read of the registry and the runtime asset closure that owns each object's
+inventory (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main, `sources` and `provenance` entries never
+import `node/`.
 `src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
 against its contract (its final prepared definition, and fixture values required before a test inspects them).
 An object type describes supported behavior and data, not an individual planet.
