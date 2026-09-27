@@ -1,54 +1,72 @@
 import { buildPolyMeshTransform } from '@layoutit/polycss';
 import { multiply, reflection, rotation, type Matrix3 } from '@cssearth/bake/objects/scene';
 
-type Input = Record<string, any>;
+/** An authored source or prepared runtime record, read as JSON. The reads below keep JavaScript's own property semantics, so
+ * an ill-formed record fails, or is accepted, exactly where an untyped read would. */
+type Value = unknown;
+/** `value?.[key]`: undefined for null or undefined, else the property as JavaScript reads it (a primitive's included). */
+const optional = (value: Value, key: Value): Value =>
+  value === null || value === undefined ? undefined : (Object(value) as Readonly<Record<string, Value>>)[String(key)];
+/** `value[key]`: a required read, failing on null or undefined with JavaScript's own TypeError. */
+function required(value: Value, key: string): Value {
+  if (value === null || value === undefined) throw new TypeError(`Cannot read properties of ${String(value)} (reading '${key}')`);
+  return optional(value, key);
+}
+/** Unary minus as JavaScript applies it to a JSON value. */
+const negated = (value: Value): number => -Number(value);
 const IDENTITY: Matrix3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 export interface AuthoredPresentationBasis { readonly bodyToPresentation: Matrix3; readonly sourceRadiusUnits: number; readonly tilePixels: number; }
 
 /** Read each capability's existing authored axes; object identities never select a backend. */
 /** `systemMatrix` is the solved system node transform of a lane whose frame is the ecliptic presentation frame. */
-export function authoredPresentationBasis(sources: ReadonlyMap<string, Input>, systemMatrix: Matrix3): AuthoredPresentationBasis {
+export function authoredPresentationBasis(sources: ReadonlyMap<string, Value>, systemMatrix: Matrix3): AuthoredPresentationBasis {
   const model = sources.get('shape-model');
-  if (model?.schema === 'cssearth-shape-model@1') return checked(systemMatrix, model.displayRadius, 50);
+  if (optional(model, 'schema') === 'cssearth-shape-model@1') return checked(systemMatrix, required(model, 'displayRadius'), 50);
   const solar = sources.get('solar-system'), terrestrial = sources.get('terrestrial');
   const geometry = sources.get('geometry'), presentation = sources.get('presentation'), paged = sources.get('paged-ellipsoid');
-  if (solar?.schema === 'cssearth-solar-system-preparation@1') {
-    return checked(systemMatrix, solar.bodyRadiusUnits, 50);
+  if (optional(solar, 'schema') === 'cssearth-solar-system-preparation@1') {
+    return checked(systemMatrix, required(solar, 'bodyRadiusUnits'), 50);
   }
-  if (terrestrial?.schema === 'cssearth-terrestrial-preparation@1') {
-    if (terrestrial.kind === 'solid-observation-body') return checked(systemMatrix, terrestrial.geometry.radius, 50);
+  if (optional(terrestrial, 'schema') === 'cssearth-terrestrial-preparation@1') {
+    if (required(terrestrial, 'kind') === 'solid-observation-body') return checked(systemMatrix, required(required(terrestrial, 'geometry'), 'radius'), 50);
   }
-  if (geometry?.schema === 'cssearth-layered-oblate-preparation@1') {
-    const p = geometry.parameters;
-    return checked(chain(mesh([0, 0, p.objectPresentationNodeDegrees]), mesh([p.objectObliquityDegrees, 0, 0]), mesh([0, 0, p.meshRotationZ])), p.equatorialRadius, p.tileSize);
+  if (optional(geometry, 'schema') === 'cssearth-layered-oblate-preparation@1') {
+    const p = required(geometry, 'parameters');
+    return checked(chain(mesh([0, 0, required(p, 'objectPresentationNodeDegrees')]), mesh([required(p, 'objectObliquityDegrees'), 0, 0]), mesh([0, 0, required(p, 'meshRotationZ')])),
+      required(p, 'equatorialRadius'), required(p, 'tileSize'));
   }
-  if (geometry?.schema === 'cssearth-banded-ellipsoid@1') {
-    if (presentation?.schema === 'cssearth-normalized-disc-presentation@1') {
-      return checked(chain(mesh(presentation.systemRotation), mesh([0, 0, -presentation.bodyRotationZDegrees])), geometry.shape.equatorialRadius, geometry.planOptions.tileSize);
+  if (optional(geometry, 'schema') === 'cssearth-banded-ellipsoid@1') {
+    const radius = () => required(required(geometry, 'shape'), 'equatorialRadius'), tile = () => required(required(geometry, 'planOptions'), 'tileSize');
+    if (optional(presentation, 'schema') === 'cssearth-normalized-disc-presentation@1') {
+      return checked(chain(mesh(required(presentation, 'systemRotation')), mesh([0, 0, negated(required(presentation, 'bodyRotationZDegrees'))])), radius(), tile());
     }
-    if (presentation?.schema === 'cssearth-layered-surface-presentation@1') {
-      return checked(chain(authoredTransform(presentation.systemTransform), authoredTransform(presentation.meshTransform)), geometry.shape.equatorialRadius, geometry.planOptions.tileSize);
+    if (optional(presentation, 'schema') === 'cssearth-layered-surface-presentation@1') {
+      return checked(chain(authoredTransform(required(presentation, 'systemTransform')), authoredTransform(required(presentation, 'meshTransform'))), radius(), tile());
     }
   }
-  if (paged?.schema === 'cssearth-paged-ellipsoid@1') {
-    const p = paged.geometry;
-    return checked(multiply(systemMatrix, chain(mesh([0, 0, p.MESH_ROTATION_Z]))), p.EQUATORIAL_RADIUS, p.TILE_SIZE);
+  if (optional(paged, 'schema') === 'cssearth-paged-ellipsoid@1') {
+    const p = required(paged, 'geometry');
+    return checked(multiply(systemMatrix, chain(mesh([0, 0, required(p, 'MESH_ROTATION_Z')]))), required(p, 'EQUATORIAL_RADIUS'), required(p, 'TILE_SIZE'));
   }
   throw new TypeError('Authored capability has no physical presentation basis. Supply numerical frame preparation for this capability.');
 }
 
-function authoredTransform(value: Input): string {
-  if (value?.kind === 'literal' && typeof value.value === 'string') return value.value;
-  if (value?.kind === 'mesh-sequence' && Array.isArray(value.rotations)) return value.rotations.map(mesh).join(' ');
+function authoredTransform(value: Value): string {
+  const literal = optional(value, 'value'), rotations = optional(value, 'rotations');
+  if (optional(value, 'kind') === 'literal' && typeof literal === 'string') return literal;
+  if (optional(value, 'kind') === 'mesh-sequence' && Array.isArray(rotations)) return rotations.map((rotation: Value) => mesh(rotation)).join(' ');
   throw new TypeError('Unsupported authored presentation transform.');
 }
-function mesh(rotation: readonly number[]): string {
-  if (!Array.isArray(rotation) || rotation.length !== 3 || rotation.some(value => !Number.isFinite(value))) throw new TypeError('Authored mesh rotation must be finite.');
+const finiteTriple = (value: Value): value is readonly [number, number, number] =>
+  Array.isArray(value) && value.length === 3 && !value.some((entry: Value) => !Number.isFinite(entry));
+function mesh(rotation: Value): string {
+  if (!finiteTriple(rotation)) throw new TypeError('Authored mesh rotation must be finite.');
   return buildPolyMeshTransform({ rotation: [...rotation] as [number, number, number] }) ?? '';
 }
-function checked(bodyToPresentation: Matrix3, sourceRadiusUnits: number, tilePixels: number): AuthoredPresentationBasis {
+const positive = (value: Value): value is number => typeof value === 'number' && Number.isFinite(value) && value > 0;
+function checked(bodyToPresentation: Matrix3, sourceRadiusUnits: Value, tilePixels: Value): AuthoredPresentationBasis {
   rotation(bodyToPresentation);
-  if (![sourceRadiusUnits, tilePixels].every(value => Number.isFinite(value) && value > 0)) throw new TypeError('Authored scene dimensions must be positive.');
+  if (!positive(sourceRadiusUnits) || !positive(tilePixels)) throw new TypeError('Authored scene dimensions must be positive.');
   return { bodyToPresentation, sourceRadiusUnits, tilePixels };
 }
 
@@ -62,39 +80,43 @@ export const POLYCSS_SURFACE_PLACEMENT: SurfaceMapPlacement = Object.freeze({ pr
  * prepared epoch. On that node a latitude and longitude sit where the surface map places them, exactly as the feature labels
  * are drawn: along the prime, east and north axes, with longitudes counted from the map's left edge. CSS 3D space is
  * left-handed (x right, y down, z toward the viewer), so this map is a reflection. */
-export function renderedBodyToPresentation(definition: Input, id: string, placement: SurfaceMapPlacement): Matrix3 {
+export function renderedBodyToPresentation(definition: Value, id: string, placement: SurfaceMapPlacement): Matrix3 {
   const drawn = multiply(chain(...drawnChain(definition, id).transforms), surfacePlacementMatrix(id, placement));
   reflection(drawn);
   return drawn;
 }
 
 /** The retained nodes from the scene's child down to the surface node, with each node's transform (a spin at its first keyframe). */
-function drawnChain(definition: Input, id: string): { readonly nodes: readonly number[]; readonly transforms: readonly string[] } {
-  const nodes = definition.tree?.nodes;
+/** Its nodes are the indices the tree's `parent` links name, and its transforms the node texts `chain` reads as CSS. */
+function drawnChain(definition: Value, id: string): { readonly nodes: readonly Value[]; readonly transforms: readonly Value[] } {
+  const nodes = optional(required(definition, 'tree'), 'nodes');
   if (!Array.isArray(nodes)) throw new TypeError(`${id}: the prepared runtime has no retained tree.`);
-  const classes = (node: Input) => String(node?.className ?? '').split(/\s+/u);
-  const featureTarget = definition.features?.target;
-  const target = Number.isSafeInteger(featureTarget) ? featureTarget as number
-    : nodes.findIndex((node: Input) => classes(node).some(name => [`${id}-body`, `${id}-body-polar`, 'shape-model-body'].includes(name)));
-  if (!nodes[target]) throw new TypeError(`${id}: the prepared tree has no surface node.`);
-  const spins = new Map<number, string>();
-  for (const motion of Array.isArray(definition.motion) ? definition.motion : []) {
-    const first = Array.isArray(motion?.keyframes) ? motion.keyframes.find((frame: Input) => frame?.offset === 0) : undefined;
-    if (Number.isSafeInteger(motion?.target) && typeof first?.transform === 'string') spins.set(motion.target, first.transform);
+  const node = (index: Value): Value => optional(nodes, index);
+  const classes = (entry: Value) => String(optional(entry, 'className') ?? '').split(/\s+/u);
+  const featureTarget = optional(optional(definition, 'features'), 'target');
+  const target: Value = Number.isSafeInteger(featureTarget) ? featureTarget
+    : nodes.findIndex((entry: Value) => classes(entry).some(name => [`${id}-body`, `${id}-body-polar`, 'shape-model-body'].includes(name)));
+  if (!node(target)) throw new TypeError(`${id}: the prepared tree has no surface node.`);
+  const spins = new Map<Value, string>(), motions = optional(definition, 'motion');
+  for (const motion of Array.isArray(motions) ? motions as Value[] : []) {
+    const keyframes = optional(motion, 'keyframes');
+    const first = Array.isArray(keyframes) ? keyframes.find((frame: Value) => optional(frame, 'offset') === 0) as Value : undefined;
+    const transform = optional(first, 'transform'), motionTarget = optional(motion, 'target');
+    if (Number.isSafeInteger(motionTarget) && typeof transform === 'string') spins.set(motionTarget, transform);
   }
-  const path: number[] = [], transforms: string[] = [];
-  for (let cursor = target; !classes(nodes[cursor]).includes('polycss-scene'); cursor = nodes[cursor].parent) {
-    if (!nodes[cursor] || path.length > nodes.length) throw new TypeError(`${id}: the surface node is not inside the prepared scene.`);
+  const path: Value[] = [], transforms: Value[] = [];
+  for (let cursor = target; !classes(node(cursor)).includes('polycss-scene'); cursor = required(node(cursor), 'parent')) {
+    if (!node(cursor) || path.length > nodes.length) throw new TypeError(`${id}: the surface node is not inside the prepared scene.`);
     path.unshift(cursor);
     transforms.unshift(spins.get(cursor) ?? nodeTransform(definition, cursor) ?? '');
   }
   return { nodes: path, transforms };
 }
-function nodeTransform(definition: Input, index: number): string | undefined {
-  const node = definition.tree.nodes[index];
-  const property = Array.isArray(node.properties) ? node.properties.map((entry: number) => definition.tree.properties?.[entry])
-    .find((entry: Input) => entry?.name === 'transform')?.value : undefined;
-  return property ?? /(?:^|;)\s*transform:([^;]*)/u.exec(String(node.style ?? ''))?.[1];
+function nodeTransform(definition: Value, index: Value): Value {
+  const tree = required(definition, 'tree'), node = optional(required(tree, 'nodes'), index), entries = required(node, 'properties');
+  const property = Array.isArray(entries) ? optional(entries.map((entry: Value) => optional(optional(tree, 'properties'), entry))
+    .find((entry: Value) => optional(entry, 'name') === 'transform') as Value, 'value') : undefined;
+  return property ?? /(?:^|;)\s*transform:([^;]*)/u.exec(String(optional(node, 'style') ?? ''))?.[1];
 }
 function surfacePlacementMatrix(id: string, placement: SurfaceMapPlacement): Matrix3 {
   const { prime, east, north, mapLeftEdgeLongitudeDeg } = placement, edge = mapLeftEdgeLongitudeDeg * Math.PI / 180;
@@ -109,7 +131,7 @@ function surfacePlacementMatrix(id: string, placement: SurfaceMapPlacement): Mat
  * `innerTransforms` (outermost first, spins at their first keyframe) over the surface map's placement. A lane that bakes
  * images through its node angles calls this before it builds its tree; the world-navigation stage re-solves the drawn tree
  * and refuses any difference. */
-export function solveSystemMatrix(id: string, intended: Matrix3, innerTransforms: readonly string[], placement: SurfaceMapPlacement): Matrix3 {
+export function solveSystemMatrix(id: string, intended: Matrix3, innerTransforms: readonly Value[], placement: SurfaceMapPlacement): Matrix3 {
   reflection(intended);
   const matrix = multiply(intended, transposeMatrix(multiply(chain(...innerTransforms), surfacePlacementMatrix(id, placement))));
   rotation(matrix);
@@ -126,24 +148,32 @@ export interface SolvedSystemTransform { readonly from: string; readonly to: str
 /** The transform of the body's outermost mesh node (the scene's child on the drawn chain) that draws the body in `intended`, a
  * body-fixed to presentation reflection. Everything below that node (spin phase, polar carriers, the surface map's placement and
  * left edge) stays as prepared and is solved through, so no lane restates it. */
-export function solveSystemTransform(definition: Input, id: string, placement: SurfaceMapPlacement, intended: Matrix3): SolvedSystemTransform {
+export function solveSystemTransform(definition: Value, id: string, placement: SurfaceMapPlacement, intended: Matrix3): SolvedSystemTransform {
   reflection(intended);
   const { transforms } = drawnChain(definition, id);
   const from = transforms[0];
   if (!from || transforms.length < 2) throw new TypeError(`${id}: the drawn chain has no system node above its surface.`);
-  const system = chain(from);
+  const text = cssText(from), system = chain(text);
   const matrix = solveSystemMatrix(id, intended, transforms.slice(1), placement), to = matrix3dText(matrix);
   // An unchanged node keeps its exact prepared text, so a body already drawn in its frame republishes byte for byte.
   const same = system.every((value, index) => Math.abs(value - matrix[index]!) < 1e-12);
-  return { from, to: same ? from : to, matrix: same ? system : matrix };
+  return { from: text, to: same ? text : to, matrix: same ? system : matrix };
 }
 const transposeMatrix = (m: Matrix3): Matrix3 => [m[0], m[3], m[6], m[1], m[4], m[7], m[2], m[5], m[8]];
 
-/** CSS is interpreted only during preparation; retained runtime consumes the numeric result. */
-export function chain(...transforms: string[]): Matrix3 {
-  return transforms.reduce((left, value) => multiply(left, cssRotation(value)), IDENTITY);
+/** CSS is interpreted only during preparation; retained runtime consumes the numeric result. Each transform is read as CSS
+ * text, and anything else fails as it reaches its turn. */
+export function chain(...transforms: readonly Value[]): Matrix3 {
+  return transforms.reduce<Matrix3>((left, value) => multiply(left, cssRotation(value)), IDENTITY);
 }
-function cssRotation(value: string): Matrix3 {
+/** A transform read as CSS text; any other value fails with the TypeError calling `value.replace` on it would raise. */
+function cssText(value: Value): string {
+  if (typeof value === 'string') return value;
+  if (value === null || value === undefined) throw new TypeError(`Cannot read properties of ${String(value)} (reading 'replace')`);
+  throw new TypeError('value.replace is not a function');
+}
+function cssRotation(transform: Value): Matrix3 {
+  const value = cssText(transform);
   let remaining = value.replace(/^transform:/u, '').trim(), result = IDENTITY;
   if (!remaining || remaining === 'none') return result;
   for (const match of remaining.matchAll(/matrix3d\(([^)]+)\)|rotate([XYZ])\((-?[\d.e+]+)deg\)/gu)) {
