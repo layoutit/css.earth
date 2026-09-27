@@ -33,11 +33,9 @@
       "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "Committed scientific source snapshot with credit and product qualification.",
       "consumers": [
-        "assets",
-        "lenses",
-        "scene"
+        "interior"
       ],
-      "title": "MESSENGER MDIS monochrome mosaic",
+      "title": "Legacy Trek BDR snapshot for the interior illustration",
       "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products",
       "attributionGroup": {
@@ -60,122 +58,6 @@
         "references": [
           {
             "catalogueId": "source-mercury-usgs-messenger-bdr-global-z3",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "usgs-messenger-enhanced-global-z3",
-      "path": "maps/mercury-enhanced-global.png",
-      "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
-      "credit": "NASA Solar System Treks; USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
-      "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": [
-        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
-      ],
-      "acquisition": "Stitch the complete 16 by 8 level-3 NASA Solar System Treks WMTS tile matrix for the USGS 665 m enhanced-color global mosaic into its native 4096 by 2048 equirectangular level-3 image.",
-      "redistribution": "Committed NASA Trek/USGS enhanced-color product snapshot; natural color is not claimed. Source no-data is completed only in prepared outputs and is explicitly qualified there.",
-      "consumers": [
-        "assets",
-        "lenses",
-        "scene"
-      ],
-      "title": "MESSENGER MDIS enhanced-color mosaic",
-      "displayCredit": "USGS · NASA/MESSENGER",
-      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
-      "attributionGroup": {
-        "id": "messenger-mdis-global-maps",
-        "label": "MESSENGER MDIS global maps",
-        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "messenger",
-            "missionId": "messenger",
-            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-usgs-messenger-enhanced-global-z3",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "usgs-messenger-topography-z3",
-      "path": "maps/mercury-topography-global.png",
-      "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png",
-      "credit": "NASA Solar System Treks; USGS Astrogeology MESSENGER DEM v2 colour hillshade; NASA/PDS",
-      "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": [
-        "maps/messenger_shade_newyork.asset",
-        "maps/messenger_shade_newyork.wms"
-      ],
-      "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
-      "redistribution": "Committed scientific source snapshot with credit and false-color qualification.",
-      "consumers": [
-        "assets",
-        "lenses",
-        "scene"
-      ],
-      "title": "MESSENGER global DEM 665 m v2 color hillshade",
-      "displayCredit": "USGS · NASA/MESSENGER",
-      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m",
-      "attributionGroup": {
-        "id": "messenger-mdis-global-maps",
-        "label": "MESSENGER MDIS global maps",
-        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "messenger",
-            "missionId": "messenger",
-            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-usgs-messenger-topography-z3",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "usgs-messenger-topography-legend",
-      "path": "maps/mercury-topography-legend.png",
-      "origin": "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png",
-      "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
-      "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": [
-        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
-      ],
-      "acquisition": "Pinned ancillary legend published with the USGS Mercury MESSENGER MDIS DEM Global Color Shaded Relief 2 km product.",
-      "redistribution": "Committed scientific legend snapshot with product credit.",
-      "consumers": [
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mercury-usgs-messenger-topography-legend",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
@@ -615,6 +497,192 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-messenger-bdr-native",
+      "path": "maps/native/bdr.png",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m.tif",
+      "credit": "Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins APL; Carnegie Science; USGS Astrogeology",
+      "license": "United States government work / NASA-PDS data; cite USGS authors",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_global_basemap_bdr_166m"
+      ],
+      "acquisition": "Native USGS GeoTIFF, edition 1 (2016), reduced by the pixel-area mean in maps/native/bdr.json; output retains -180 to 180 degrees east and north-up ordering. All-zero no-data footprints become gray grid. Partial footprints use only observed pixels. No new contrast stretch.",
+      "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ],
+      "title": "MESSENGER MDIS BDR low-Sun monochrome mosaic",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_global_basemap_bdr_166m",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_global_basemap_bdr_166m"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-bdr-native",
+            "role": "material",
+            "evidence": "USGS native GeoTIFF, edition 1 (2016); product and grid are declared by the acquisition recipe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mercury-native-bdr-recipe",
+      "path": "maps/native/bdr.json",
+      "origin": "Repository-authored reduction recipe for the linked USGS GeoTIFF.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
+      }
+    },
+    {
+      "id": "usgs-messenger-loi-native",
+      "path": "maps/native/loi.png",
+      "origin": "https://planetarymaps.usgs.gov/mosaic//Mercury_MESSENGER_MDIS_Basemap_LOI_Mosaic_Global_166m.tif",
+      "credit": "Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins APL; Carnegie Science; USGS Astrogeology",
+      "license": "United States government work / NASA-PDS data; cite USGS authors",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_loi_global_mosaic_166m"
+      ],
+      "acquisition": "Native USGS GeoTIFF, edition 1 (2016), reduced by the pixel-area mean in maps/native/loi.json; output retains -180 to 180 degrees east and north-up ordering. All-zero no-data footprints become gray grid. Partial footprints use only observed pixels. No new contrast stretch.",
+      "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ],
+      "title": "MESSENGER MDIS LOI higher-Sun monochrome mosaic",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_loi_global_mosaic_166m",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_loi_global_mosaic_166m"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-loi-native",
+            "role": "material",
+            "evidence": "USGS native GeoTIFF, edition 1 (2016); product and grid are declared by the acquisition recipe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mercury-native-loi-recipe",
+      "path": "maps/native/loi.json",
+      "origin": "Repository-authored reduction recipe for the linked USGS GeoTIFF.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
+      }
+    },
+    {
+      "id": "usgs-messenger-enhanced-native",
+      "path": "maps/native/enhanced.png",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m.tif",
+      "credit": "Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins APL; Carnegie Science; USGS Astrogeology",
+      "license": "United States government work / NASA-PDS data; cite USGS authors",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
+      ],
+      "acquisition": "Native USGS GeoTIFF, edition 1 (2016), reduced by the pixel-area mean in maps/native/enhanced.json; output retains -180 to 180 degrees east and north-up ordering. All-zero no-data footprints become gray grid. Partial footprints use only observed pixels. No new contrast stretch.",
+      "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ],
+      "title": "MESSENGER MDIS enhanced-color mosaic",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-enhanced-native",
+            "role": "material",
+            "evidence": "USGS native GeoTIFF, edition 1 (2016); product and grid are declared by the acquisition recipe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mercury-native-enhanced-recipe",
+      "path": "maps/native/enhanced.json",
+      "origin": "Repository-authored reduction recipe for the linked USGS GeoTIFF.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -730,6 +798,138 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored presentation link, read by site/prepare-body-overview.mts."
+      }
+    },
+    {
+      "id": "usgs-messenger-bdr-native-label",
+      "path": "maps/native/bdr.lbl",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/17ebee80-ed66-485a-9b06-5ffd10e935e3/resource/d93c4396-bda1-46e8-a9a8-63d908514764/download/mercury_messenger_mdis_basemap_bdr_mosaic_global_166m_pds3.lbl",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "Publisher detached PDS3 label.",
+      "redistribution": "Original source metadata.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-bdr-native",
+            "role": "reference",
+            "evidence": "Detached label linked from the USGS product page."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-bdr-native-metadata",
+      "path": "maps/native/bdr-metadata.json",
+      "origin": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_global_basemap_bdr_166m",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "USGS catalogue fields retrieved 2026-09-26 and checked against native TIFF headers on 2026-09-27.",
+      "redistribution": "Source metadata transcription.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-bdr-native",
+            "role": "reference",
+            "evidence": "USGS publisher metadata, including the display stretch and illumination selection."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-loi-native-label",
+      "path": "maps/native/loi.lbl",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/9d047a09-a10d-4e2a-865a-9b5e1b465315/resource/0091208c-1526-4931-8440-f9ae1af9ea72/download/mercury_messenger_mdis_basemap_loi_mosaic_global_166m_pds3.lbl",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "Publisher detached PDS3 label.",
+      "redistribution": "Original source metadata.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-loi-native",
+            "role": "reference",
+            "evidence": "Detached label linked from the USGS product page."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-loi-native-metadata",
+      "path": "maps/native/loi-metadata.json",
+      "origin": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_loi_global_mosaic_166m",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "USGS catalogue fields retrieved 2026-09-26 and checked against native TIFF headers on 2026-09-27.",
+      "redistribution": "Source metadata transcription.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-loi-native",
+            "role": "reference",
+            "evidence": "USGS publisher metadata, including the display stretch and illumination selection."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-enhanced-native-label",
+      "path": "maps/native/enhanced.lbl",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/3599a192-1df1-49c7-a328-f5936df16155/resource/4f14da2a-c1c3-4b0a-b6ac-6aaeeca9123c/download/mercury_messenger_mdis_basemap_enhancedcolor_mosaic_global_665m_pds3.lbl",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "Publisher detached PDS3 label.",
+      "redistribution": "Original source metadata.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-enhanced-native",
+            "role": "reference",
+            "evidence": "Detached label linked from the USGS product page."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-enhanced-native-metadata",
+      "path": "maps/native/enhanced-metadata.json",
+      "origin": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "USGS catalogue fields retrieved 2026-09-26 and checked against native TIFF headers on 2026-09-27.",
+      "redistribution": "Source metadata transcription.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-enhanced-native",
+            "role": "reference",
+            "evidence": "USGS publisher metadata, including the display stretch and illumination selection."
+          }
+        ]
       }
     }
   ]

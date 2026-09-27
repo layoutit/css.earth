@@ -119,55 +119,59 @@
     "controls": [
       {
         "id": "normal",
-        "label": "750 nm",
+        "label": "Monochrome",
         "thumbnail": "mercury-lens-normal.webp",
-        "surface": "mercury-surface-normal@2x.jpg",
+        "surface": "mercury-surface-normal@2x.webp",
         "source": {
-          "id": "messenger-bdr",
-          "url": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+          "id": "usgs-messenger-bdr-native",
+          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_global_basemap_bdr_166m"
         },
         "poles": "mercury-poles-normal@2x.webp",
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
         "view": "exterior",
-        "notes": "MESSENGER at 750 nm"
+        "notes": "MESSENGER MDIS BDR, edition 1 (2016). Images were selected with the Sun about 16° above the local horizon to show terrain. USGS corrected reflectance and stretched 0.0005–0.25 I/F into this 8-bit display image. Brightness is not directly comparable with the higher-Sun map. Native spacing is about 166 m; the display is reduced to 4,096 pixels around the equator. Gray grid marks missing source coverage.",
+        "step": {
+          "group": "monochrome",
+          "label": "Low Sun"
+        },
+        "noData": true
+      },
+      {
+        "id": "loi",
+        "label": "Monochrome",
+        "thumbnail": "mercury-lens-loi.webp",
+        "surface": "mercury-surface-loi@2x.webp",
+        "source": {
+          "id": "usgs-messenger-loi-native",
+          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_loi_global_mosaic_166m"
+        },
+        "poles": "mercury-poles-loi@2x.webp",
+        "falseColor": false,
+        "filter": "MESSENGER MDIS LOI global monochrome basemap",
+        "view": "exterior",
+        "notes": "MESSENGER MDIS LOI, edition 1 (2016). Images were selected with the Sun about 45° above the local horizon. USGS corrected reflectance and stretched 0.005–about 0.2 I/F into this 8-bit display image. Brightness is not directly comparable with the low-Sun map. Native spacing is about 166 m; the display is reduced to 4,096 pixels around the equator. Gray grid marks missing source coverage.",
+        "step": {
+          "group": "monochrome",
+          "label": "Higher Sun"
+        },
+        "noData": true
       },
       {
         "id": "enhanced",
         "label": "Enhanced",
         "thumbnail": "mercury-lens-enhanced.webp",
-        "surface": "mercury-surface-enhanced@2x.jpg",
+        "surface": "mercury-surface-enhanced@2x.webp",
         "source": {
-          "id": "messenger-enhanced",
+          "id": "usgs-messenger-enhanced-native",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
         },
         "poles": "mercury-poles-enhanced@2x.webp",
         "falseColor": true,
-        "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
+        "filter": "USGS MESSENGER MDIS native enhanced-color mosaic",
         "view": "exterior",
-        "legend": {
-          "kind": "categories",
-          "title": "Enhanced-color terrain",
-          "items": [
-            {
-              "label": "Dark material",
-              "description": "Low-reflectance material",
-              "color": "#4265aa"
-            },
-            {
-              "label": "Lava plains",
-              "description": "Volcanic plains",
-              "color": "#ba985e"
-            },
-            {
-              "label": "Young rays",
-              "description": "Young crater rays",
-              "color": "#c5deef"
-            }
-          ],
-          "sourceUrl": "https://science.nasa.gov/resource/mercury-false-color-rotation-movie/"
-        },
-        "notes": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage."
+        "notes": "USGS enhanced-color mosaic, edition 1 (2016). Red is principal component 2, green is principal component 1, and blue is the 430/1000 nm ratio. These colors emphasize differences in the surface; they are not natural colors or a map of specific minerals. Native spacing is about 665 m; the display is reduced to 4,096 pixels around the equator. Gray grid marks missing coverage, including the polar gaps. No color is reconstructed there.",
+        "noData": true
       },
       {
         "id": "topography",
@@ -284,7 +288,8 @@
       "normal": "Monochrome",
       "enhanced": "Enhanced color",
       "topography": "Elevation",
-      "interior": "Cross section"
+      "interior": "Cross section",
+      "loi": "Monochrome"
     }
   },
   "settings": {

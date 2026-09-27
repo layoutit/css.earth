@@ -17,6 +17,7 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
+| Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../tools/objects/acquisition/geotiff-image.mts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
@@ -519,8 +520,6 @@ These still set their own encoding:
 - Earth's full pages keep the qualities its recipe declares; its smaller
   texture levels follow their page, lossy ones through the lane.
 - Lighting rows and their billboards carry shading in alpha and stay lossless.
-- Mercury's JPEG maps keep their recipe quality (85). Chrome decodes them about
-  three times faster than lossy WebP, which costs about 30 % more bytes.
 - Saturn's layered and spectral materials keep their encodings.
 - Image-layer galaxies (M31, M33), the LMC and SMC volume banks and the Milky
   Way sky keep their recipe qualities.

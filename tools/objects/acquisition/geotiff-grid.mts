@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { createHash } from 'node:crypto';
-import { BaseClient, BaseResponse, fromCustomClient, fromFile, writeArrayBuffer } from 'geotiff';
+import { BaseClient, BaseResponse, fromCustomClient, fromFile, writeArrayBuffer, type GeoTIFFImage } from 'geotiff';
 
 type Pair = [number, number];
 export interface GeoTiffGridRecipe {
@@ -134,6 +134,25 @@ export function encodeGeoTiffGrid(values: Float32Array, recipe: GeoTiffGridRecip
       2054, 0, 1, 9102, 2057, 34736, 1, 0, 2058, 34736, 1, 0, 2061, 0, 1, 0]}));
 }
 
+export function assertGeoTiffGrid(image: GeoTIFFImage, s: GeoTiffGridRecipe['source'], samples = 1): void {
+  const keys = image.getGeoKeys(), dir = image.getFileDirectory();
+  const origin = image.getOrigin(), resolution = image.getResolution();
+  if (!keys || keys.GTRasterTypeGeoKey !== 1 || keys.GeogSemiMajorAxisGeoKey !== s.radius ||
+      keys.GeogSemiMinorAxisGeoKey !== s.radius || (keys.GeogPrimeMeridianLongGeoKey ?? 0) !== 0 ||
+      (s.coordinates === 'degrees' ? keys.GTModelTypeGeoKey !== 2 || keys.GeogAngularUnitsGeoKey !== 9102 || s.centerLongitude !== 0
+        : keys.GTModelTypeGeoKey !== 1 || keys.ProjCoordTransGeoKey !== 17 || keys.ProjLinearUnitsGeoKey !== 9001 ||
+          (keys.ProjCenterLongGeoKey ?? keys.ProjNatOriginLongGeoKey) !== s.centerLongitude ||
+          (keys.ProjCenterLatGeoKey ?? keys.ProjNatOriginLatGeoKey ?? 0) !== 0 ||
+          (keys.ProjStdParallel1GeoKey ?? 0) !== 0 || (keys.ProjFalseEastingGeoKey ?? 0) !== 0 || (keys.ProjFalseNorthingGeoKey ?? 0) !== 0) ||
+      image.getWidth() !== s.width || image.getHeight() !== s.height || image.getSamplesPerPixel() !== samples ||
+      image.getGDALNoData() !== s.noData || origin[0] !== s.origin[0] || origin[1] !== s.origin[1] ||
+      resolution[0] !== s.resolution[0] || resolution[1] !== s.resolution[1] ||
+      dir.getValue('BitsPerSample')?.length !== samples || Array.from(dir.getValue('BitsPerSample') ?? []).some(value => value !== s.bits) ||
+      dir.getValue('SampleFormat') !== undefined && dir.getValue('SampleFormat')?.length !== samples ||
+      Array.from(dir.getValue('SampleFormat') ?? [1]).some(value => value !== s.sampleFormat))
+    throw new Error(`GeoTIFF native grid/encoding changed: ${s.productId}.`);
+}
+
 export async function prepareGeoTiffGrid(recipe: GeoTiffGridRecipe, options: {
   localPath?: string; transport?: typeof fetch; progress?: (completeRows: number, totalRows: number) => void;
 } = {}) {
@@ -141,20 +160,8 @@ export async function prepareGeoTiffGrid(recipe: GeoTiffGridRecipe, options: {
   const tiff = options.localPath ? await fromFile(options.localPath)
     : await fromCustomClient(client!, {maxRanges: 0, allowFullFile: false});
   try {
-    const image = await tiff.getImage(), keys = image.getGeoKeys(), dir = image.getFileDirectory(), s = recipe.source;
-    const origin = image.getOrigin(), resolution = image.getResolution();
-    if (!keys || keys.GTRasterTypeGeoKey !== 1 || keys.GeogSemiMajorAxisGeoKey !== s.radius ||
-        keys.GeogSemiMinorAxisGeoKey !== s.radius || (keys.GeogPrimeMeridianLongGeoKey ?? 0) !== 0 ||
-        (s.coordinates === 'degrees' ? keys.GTModelTypeGeoKey !== 2 || keys.GeogAngularUnitsGeoKey !== 9102 || s.centerLongitude !== 0
-          : keys.GTModelTypeGeoKey !== 1 || keys.ProjCoordTransGeoKey !== 17 || keys.ProjLinearUnitsGeoKey !== 9001 ||
-            (keys.ProjCenterLongGeoKey ?? keys.ProjNatOriginLongGeoKey) !== s.centerLongitude ||
-            (keys.ProjCenterLatGeoKey ?? keys.ProjNatOriginLatGeoKey ?? 0) !== 0 ||
-            (keys.ProjStdParallel1GeoKey ?? 0) !== 0 || (keys.ProjFalseEastingGeoKey ?? 0) !== 0 || (keys.ProjFalseNorthingGeoKey ?? 0) !== 0) ||
-        image.getWidth() !== s.width || image.getHeight() !== s.height || image.getSamplesPerPixel() !== 1 ||
-        image.getGDALNoData() !== s.noData || origin[0] !== s.origin[0] || origin[1] !== s.origin[1] ||
-        resolution[0] !== s.resolution[0] || resolution[1] !== s.resolution[1] ||
-        dir.getValue('BitsPerSample')?.[0] !== s.bits || (dir.getValue('SampleFormat')?.[0] ?? 1) !== s.sampleFormat)
-      throw new Error(`GeoTIFF native grid/encoding changed: ${s.productId}.`);
+    const image = await tiff.getImage(), s = recipe.source;
+    assertGeoTiffGrid(image, s);
     // Reading a single scanline of a tiled file can decode a whole tile row.
     // Bound that working set independently of the output size.
     const nativeRowBytes = Math.ceil(s.width / image.getTileWidth()) * image.getTileWidth() * image.getTileHeight() * s.bits / 8;
