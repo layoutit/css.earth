@@ -6,10 +6,10 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import type { AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { promisify } from 'node:util';
-import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from './check-assets-published.mts';
+import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from '@cssearth/bake/asset-publication';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 const execFileAsync = promisify(execFile);

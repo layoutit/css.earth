@@ -1,16 +1,16 @@
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
-import { appendFile } from "node:fs/promises";
-import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
 import { promisify } from "node:util";
 import { Agent, fetch as undiciFetch } from "undici";
-import { inventoryAssets, inventoriedObjectIds, type RuntimeAssetLocation } from '@cssearth/bake/delivery';
-import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
+import { inventoryAssets, inventoriedObjectIds, type RuntimeAssetLocation } from '../delivery/index.ts';
+import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
 import { isRecord } from "@cssearth/core";
 
 const execFileAsync = promisify(execFile);
-const defaultRoot = resolve(import.meta.dirname, "../..");
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const defaultRoot = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
 
 async function git(root: string, args: readonly string[]): Promise<string> {
   const { stdout } = await execFileAsync("git", [...args], { cwd: root, maxBuffer: 1024 * 1024 * 64 });
@@ -146,7 +146,7 @@ export function createHeadFetcher({ connections = MAX_CONNECTIONS } = {}): { fet
   return { fetcher: (url, init) => undiciFetch(url, { ...init, dispatcher: agent }), close: () => agent.close() };
 }
 
-function errorText(error: unknown): string { return error instanceof Error ? error.message : String(error); }
+export function errorText(error: unknown): string { return error instanceof Error ? error.message : String(error); }
 
 /**
  * undici wraps the socket error (ECONNRESET, ETIMEDOUT, EAI_AGAIN, UND_ERR_SOCKET) in `cause`; report that code.
@@ -299,29 +299,4 @@ export function gateVerdict(result: CheckAssetsPublishedResult, { reportOnly = f
   const failed = !reportOnly && (result.notFound.length > 0 || requireVerified && (result.otherMisses.length > 0 || result.unverified.length > 0));
   if (!result.notFound.length && !result.otherMisses.length && !result.unverified.length) lines.push("", "Every checked file is published.");
   return { exitCode: failed ? 1 : 0, report: lines.join("\n") };
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2);
-  const option = (name: string) => args.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
-  const addedSinceArg = option("added-since"), concurrencyArg = option("concurrency");
-  const lastGreen = args.includes("--added-since-last-green"), reportOnly = args.includes("--report-only"), requireVerified = args.includes("--require-verified");
-  const objectArgs = args.filter(arg => !/^--(?:added-since|concurrency)=/u.test(arg) && arg !== "--added-since-last-green" && arg !== "--report-only" && arg !== "--require-verified");
-  if (addedSinceArg !== undefined && lastGreen) throw new Error("Use --added-since=<ref> or --added-since-last-green, not both.");
-  if (reportOnly && requireVerified) throw new Error('A verified deploy cannot be report-only.');
-  const concurrency = concurrencyArg === undefined ? undefined : Number(concurrencyArg);
-  if (concurrency !== undefined && (!Number.isInteger(concurrency) || concurrency < 1)) throw new Error(`Invalid --concurrency=${concurrencyArg}`);
-  let addedSince = addedSinceArg;
-  if (lastGreen) {
-    let sha: string | null = null;
-    try { sha = await lastGreenMainSha(); }
-    catch (error) { console.warn(`Could not look up the last green main run (${errorText(error)}); checking every key.`); }
-    if (sha === null) console.warn("No green main run to compare with; checking every key.");
-    else addedSince = sha;
-  }
-  const result = await checkAssetsPublished(objectArgs, { ...(addedSince ? { addedSince } : {}), ...(concurrency ? { concurrency } : {}) });
-  const { exitCode, report } = gateVerdict(result, { reportOnly, requireVerified });
-  console.log(report);
-  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `### Published assets\n\n${report}\n`);
-  process.exitCode = exitCode;
 }

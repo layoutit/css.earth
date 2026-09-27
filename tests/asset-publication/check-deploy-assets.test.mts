@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { checkPublishedWorldPair, runtimeAssetUrls, unknownRuntimeAssetUrls } from './check-deploy-assets.mts';
+import { checkPublishedWorldPair, runtimeAssetUrls, unknownRuntimeAssetUrls } from '@cssearth/bake/asset-publication';
 
 const hash = 'a'.repeat(64);
 const known = `https://earth-assets.lowpoly.cc/runtime-assets/${hash}/datasets/preview@2x.webp`;

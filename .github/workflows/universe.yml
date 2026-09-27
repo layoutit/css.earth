@@ -194,7 +194,7 @@ jobs:
         # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
-          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" "tools/ci/*.test.mts" ".github/scripts/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" "tools/ci/*.test.mts" ".github/scripts/architecture/*.test.mts" "tools/assets/*.test.mts" "tests/asset-publication/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
             tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts \
             "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 

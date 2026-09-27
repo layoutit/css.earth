@@ -3,11 +3,11 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { execFile, spawn } from "node:child_process";
 import { promisify } from "node:util";
-import { join, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
-import { inventoryAssets, inventoriedObjectIds } from '@cssearth/bake/delivery';
-import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
-import { verifyPublished, reportVerification, type PublishAsset } from "@cssearth/bake/delivery";
+import { createRequire } from "node:module";
+import { dirname, join, resolve } from "node:path";
+import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
+import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
+import { verifyPublished, reportVerification, type PublishAsset } from "../delivery/index.ts";
 
 const BUCKET = "cssearth-assets";
 const CACHE_CONTROL = "public,max-age=31536000,immutable";
@@ -106,7 +106,7 @@ async function findMisses<T extends PublishAsset>(assets: readonly T[], fetcher:
 // packages/bake/src/delivery/publish-verification.ts. `wrangler r2 bulk put` has silently dropped a subset of a batch before, which
 // is exactly what that verification pass catches.
 export async function publishRuntimeAssets(objectIds: readonly string[], { since }: { since?: string } = {}): Promise<void> {
-  const root = resolve(import.meta.dirname, "../..");
+  const root = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
   const ids = inventoriedObjectIds(objectIds, root);
   const assets = await inventoryAssets(root, ids);
   if (since === undefined) return publishAssets(assets);
@@ -149,9 +149,4 @@ export async function publishAssets(assets: readonly PublishAsset[], options: Pu
   }
   reportVerification(result);
   console.log(`Verified ${assets.length} key(s) live on ${RUNTIME_ASSET_ORIGIN}.`);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), since = args.find(arg => arg.startsWith("--since="))?.slice("--since=".length);
-  await publishRuntimeAssets(args.filter(arg => !arg.startsWith("--since=")), since === undefined ? {} : { since });
 }
