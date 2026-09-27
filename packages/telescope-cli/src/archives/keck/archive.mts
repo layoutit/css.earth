@@ -17,7 +17,7 @@
  * Nothing about the observation is stated here that the archive does not: every recorded field is a KOA catalogue column or a
  * card of the file's own header, and a program that names a file the archive does not list is refused when it is read.
  *
- * The program is written to tools/objects/keck/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/keck/programs/<program id>.json. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,7 +28,7 @@ import { INSTRUMENT_TABLES, instrumentTable, koaCalibrations, koaDownload, koaPr
   type InstrumentTable } from './koa.mts';
 
 /** The pinned programs stay with the bodies' records in the checkout, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/keck/programs');
+export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/keck/programs');
 export const DOWNLOADS = resolve(WORKSPACE, '.local/keck');
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** A KOA file name: the instrument's two characters, the UT date, the second of the night, and for some instruments a

@@ -262,7 +262,7 @@ export function keckLedgerGuide(ledger: Ledger) {
   const lines = ['# What Keck holds', '',
     `Written by \`packages/telescope-cli/src/archives/keck/archive-ledger.mts\` from the [Keck Observatory Archive](${ledger.archive}) on ${ledger.measured}.`,
     'Every count is the archive\'s own, taken with one grouped query per instrument. Every state is worked out from the pinned',
-    `programs and the receipts beside them in \`tools/objects/keck/programs\`, not declared. ${ledger.shippedObjects} objects are shipped by this project.`,
+    `programs and the receipts beside them in \`packages/telescope-cli/src/archives/keck/programs\`, not declared. ${ledger.shippedObjects} objects are shipped by this project.`,
     '', '## By instrument', '',
     '| instrument | science frames | on shipped objects | objects | pipeline | state |', '|---|---|---|---|---|---|'];
   for (const mode of ledger.modes) lines.push(`| ${mode.instrument} | ${number(mode.frames)} | ${mode.objectFrames.toLocaleString('en-US')} | ${mode.objects} | ${mode.pipeline} | ${mode.state} |`);

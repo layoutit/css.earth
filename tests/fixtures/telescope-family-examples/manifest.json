@@ -413,7 +413,7 @@
         "requiredCases": []
       },
       "source": {
-        "path": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+        "path": "packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
         "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F18.json enumerate-members --out example-output/F18",

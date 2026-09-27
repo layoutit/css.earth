@@ -271,7 +271,7 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
     const receipt = {
       schema: 'cssearth-keck-reproduction@1', program: id, koaid, product: stageOf(product.name),
       instrument: program.instrument, configuration: observation.configuration, target: observation.targetName,
-      toolchain: 'tools/objects/keck/toolchain.json',
+      toolchain: 'packages/telescope-cli/src/archives/keck/toolchain.json',
       // `bytes` is what the program records; `read` is what was on disk when the samples were read. A receipt that
       // quietly replaced the first with the second would say a comparison was against the archive's product whatever bytes it
       // actually read, so both are written and the two have to be equal.

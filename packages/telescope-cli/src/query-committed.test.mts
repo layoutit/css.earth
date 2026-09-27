@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { restoredSources, sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { formatAnswer, loadQueryInputs, queryCapabilities, selectObservation } from './query.mts';
@@ -209,4 +209,21 @@ test('every capability entry names a mode the ledgers use, and the modes without
   const recorded = new Set(loaded.capabilities.map(entry => `${entry.telescope} ${entry.mode}`));
   assert.deepEqual([...keys].filter(key => !recorded.has(key)).sort(), WITHOUT_CAPABILITIES);
   for (const entry of loaded.capabilities) assert.match(entry.citation, /^https:\/\//u, `${entry.mode} cites where its numbers were read`);
+});
+
+test('every receipt path a committed-ledger answer shows exists in this checkout, including receipts recorded before their programs moved', async () => {
+  const shown: string[] = [];
+  for (const target of ['charon', 'hydra', 'didymos', 'io', 'europa', 'ganymede']) {
+    const answer = queryCapabilities({ target, wavelengthMicrometres: [0.1, 30], time: { any: true }, kind: 'image', result: 'telescope-product' },
+      await loadQueryInputs(ROOT, target));
+    const text = formatAnswer(answer);
+    for (const entry of answer.candidates) for (const receipt of entry.evidence.receipts) {
+      // Keck and Gemini ledgers name a receipt by its file name within the archive's programs, not by a checkout path.
+      if (!receipt.includes('/')) continue;
+      assert.ok(text.includes(receipt), `${target}: ${receipt} is not in the displayed answer`);
+      shown.push(receipt);
+    }
+  }
+  assert.ok(shown.filter(path => path.includes('/pds/programs/')).length >= 3, 'the PDS receipts of Charon, Hydra and Didymos are shown');
+  for (const path of new Set(shown)) await access(resolve(ROOT, path)).catch(() => assert.fail(`the answer shows ${path}, which does not exist`));
 });

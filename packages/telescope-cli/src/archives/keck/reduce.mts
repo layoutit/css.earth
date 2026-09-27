@@ -165,7 +165,7 @@ export async function reduceObservation(id: string, koaid: string, run: string):
   const observation = program.observations.find(entry => entry.koaid === koaid);
   if (!observation) throw new Error(`${id} pins no observation ${koaid}.`);
   const how = REDUCIBLE[program.instrument];
-  if (!how) throw new Error(`No pipeline for ${program.instrument} is installed here; see tools/objects/keck/toolchain.json.`);
+  if (!how) throw new Error(`No pipeline for ${program.instrument} is installed here; see packages/telescope-cli/src/archives/keck/toolchain.json.`);
   const toolchain = await keckToolchain();
   const channel = how.channel(observation.science.name);
   const configuration = await runConfiguration(toolchain, how);
