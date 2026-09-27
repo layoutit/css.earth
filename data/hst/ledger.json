@@ -27,17 +27,22 @@
       "configuration": "ACS/HRC",
       "records": "high-resolution pictures and slitless spectra",
       "draws": "pictures of small bodies",
-      "note": "The detector stopped working in 2007.",
       "tool": "tools/objects/hst/calibrate.mts",
-      "programs": [],
-      "checked": [],
+      "programs": [
+        "beta-pictoris-9987",
+        "beta-pictoris-9987-short"
+      ],
+      "checked": [
+        "beta-pictoris-9987"
+      ],
       "archiveFinal": {
         "programs": [],
         "qualified": []
       },
       "observations": 35937,
       "movingObservations": 2228,
-      "shippedObjects": 19
+      "shippedObjects": 19,
+      "note": "The detector stopped working in 2007."
     },
     {
       "configuration": "ACS/SBC",
@@ -151,7 +156,6 @@
       "configuration": "STIS",
       "records": "co-added spectra the archive builds from several visits (HASP)",
       "draws": "nothing on its own",
-      "note": "A product of products; there is no raw exposure to re-calibrate.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -161,13 +165,13 @@
       },
       "observations": 8165,
       "movingObservations": 143,
-      "shippedObjects": 34
+      "shippedObjects": 34,
+      "note": "A product of products; there is no raw exposure to re-calibrate."
     },
     {
       "configuration": "COS/FUV",
       "records": "far-ultraviolet point-source spectra",
       "draws": "nothing yet",
-      "note": "calcos is not installed.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -177,13 +181,13 @@
       },
       "observations": 27317,
       "movingObservations": 193,
-      "shippedObjects": 17
+      "shippedObjects": 17,
+      "note": "calcos is not installed."
     },
     {
       "configuration": "COS/NUV",
       "records": "near-ultraviolet point-source spectra",
       "draws": "nothing yet",
-      "note": "calcos is not installed.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -193,13 +197,13 @@
       },
       "observations": 13874,
       "movingObservations": 290,
-      "shippedObjects": 18
+      "shippedObjects": 18,
+      "note": "calcos is not installed."
     },
     {
       "configuration": "WFPC2/PC",
       "records": "pictures on the planetary camera, 1994–2009",
       "draws": "pictures of Solar System bodies",
-      "note": "calwp2 is retired and not in hstcal.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -213,13 +217,13 @@
       },
       "observations": 202677,
       "movingObservations": 8747,
-      "shippedObjects": 52
+      "shippedObjects": 52,
+      "note": "calwp2 is retired and not in hstcal."
     },
     {
       "configuration": "WFPC2/WFC",
       "records": "pictures on the three wide-field chips",
       "draws": "pictures of extended objects",
-      "note": "calwp2 is retired and not in hstcal.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -229,7 +233,8 @@
       },
       "observations": 20292,
       "movingObservations": 2340,
-      "shippedObjects": 11
+      "shippedObjects": 11,
+      "note": "calwp2 is retired and not in hstcal."
     },
     {
       "configuration": "WFPC2",
@@ -250,7 +255,6 @@
       "configuration": "NICMOS/NIC1",
       "records": "near-infrared pictures at the finest sampling",
       "draws": "nothing yet",
-      "note": "calnica is retired and not in hstcal.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -260,13 +264,13 @@
       },
       "observations": 26812,
       "movingObservations": 397,
-      "shippedObjects": 12
+      "shippedObjects": 12,
+      "note": "calnica is retired and not in hstcal."
     },
     {
       "configuration": "NICMOS/NIC2",
       "records": "near-infrared pictures and coronagraphy",
       "draws": "nothing yet",
-      "note": "calnica is retired and not in hstcal.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -276,13 +280,13 @@
       },
       "observations": 40531,
       "movingObservations": 900,
-      "shippedObjects": 13
+      "shippedObjects": 13,
+      "note": "calnica is retired and not in hstcal."
     },
     {
       "configuration": "NICMOS/NIC3",
       "records": "near-infrared pictures and grism spectra",
       "draws": "nothing yet",
-      "note": "calnica is retired and not in hstcal.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -292,13 +296,13 @@
       },
       "observations": 47611,
       "movingObservations": 116,
-      "shippedObjects": 5
+      "shippedObjects": 5,
+      "note": "calnica is retired and not in hstcal."
     },
     {
       "configuration": "FOC/96",
       "records": "faint-object camera pictures, 1990–2002",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -308,13 +312,13 @@
       },
       "observations": 5441,
       "movingObservations": 247,
-      "shippedObjects": 9
+      "shippedObjects": 9,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "FOC/48",
       "records": "faint-object camera pictures in its other format",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -324,13 +328,13 @@
       },
       "observations": 1254,
       "movingObservations": 4,
-      "shippedObjects": 0
+      "shippedObjects": 0,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "FOS/BL",
       "records": "faint-object spectrograph, blue detector, 1990–1997",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -344,13 +348,13 @@
       },
       "observations": 11180,
       "movingObservations": 575,
-      "shippedObjects": 20
+      "shippedObjects": 20,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "FOS/RD",
       "records": "faint-object spectrograph, red detector, 1990–1997",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -360,13 +364,13 @@
       },
       "observations": 12200,
       "movingObservations": 599,
-      "shippedObjects": 27
+      "shippedObjects": 27,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "WFPC/PC",
       "records": "the first wide-field camera, 1990–1993",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -376,7 +380,8 @@
       },
       "observations": 9520,
       "movingObservations": 465,
-      "shippedObjects": 13
+      "shippedObjects": 13,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "ACS",
@@ -397,7 +402,6 @@
       "configuration": "COS-STIS",
       "records": "co-added spectra the archive builds from COS and STIS visits together (HASP)",
       "draws": "nothing on its own",
-      "note": "A product of products.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -407,7 +411,8 @@
       },
       "observations": 875,
       "movingObservations": 0,
-      "shippedObjects": 0
+      "shippedObjects": 0,
+      "note": "A product of products."
     },
     {
       "configuration": "COS",
@@ -428,7 +433,6 @@
       "configuration": "HRS",
       "records": "the Goddard high resolution spectrograph, 1990–1997",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -438,13 +442,13 @@
       },
       "observations": 3703,
       "movingObservations": 176,
-      "shippedObjects": 10
+      "shippedObjects": 10,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "HRS/1",
       "records": "the same spectrograph on its first detector",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -458,13 +462,13 @@
       },
       "observations": 6424,
       "movingObservations": 709,
-      "shippedObjects": 9
+      "shippedObjects": 9,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "HRS/2",
       "records": "the same spectrograph on its second detector",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -474,7 +478,8 @@
       },
       "observations": 14122,
       "movingObservations": 608,
-      "shippedObjects": 14
+      "shippedObjects": 14,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "HSP/UNK/POL",
@@ -540,7 +545,6 @@
       "configuration": "WFPC/WFC",
       "records": "the first wide-field camera, wide-field chips",
       "draws": "nothing yet",
-      "note": "Its pipeline is retired.",
       "tool": null,
       "programs": [],
       "checked": [],
@@ -550,7 +554,8 @@
       },
       "observations": 6226,
       "movingObservations": 94,
-      "shippedObjects": 3
+      "shippedObjects": 3,
+      "note": "Its pipeline is retired."
     },
     {
       "configuration": "FGS",
