@@ -10,7 +10,8 @@ import { withFocusedCamera } from '@cssearth/bake/objects/scene';
 import { prepareCubicSky } from '@cssearth/bake/presentation';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
 import type { preparePagedEllipsoidAssets } from './assets.mts';
-import { readPagedEllipsoid } from './context.mts';
+import { readPagedEllipsoid } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 import { preparePagedEllipsoidPresentation } from './presentation.mts';
 import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.mts';
 import { preparePlaces } from './geographic/places.mts';
@@ -36,7 +37,7 @@ const write = (directory: string, name: string, value: unknown) => writeFile(res
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
 export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
-  const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(objectDirectory);
+  const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, objectDirectory);
   // The raw imagery is read only by the stages a reuse-images run reuses; it may be absent from this checkout.
   if (!reuseImages) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
