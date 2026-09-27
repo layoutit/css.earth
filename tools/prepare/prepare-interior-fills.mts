@@ -3,10 +3,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
 import { repinObjectJson } from './prepare-object-json.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 /** Refresh only fill metadata, reading existing local images. No surface,
  * texture, lighting, geometry, motion, facing or depth bank is rebuilt. */

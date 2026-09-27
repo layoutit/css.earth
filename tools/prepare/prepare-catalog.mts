@@ -3,6 +3,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { catalogEntry, defineObjects, type CatalogEntry } from '@cssearth/objects';
+import { PREPARED_CATALOGUE } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance, readPreparedFocusObjects } from './prepare-navigation-destinations.mts';
 
@@ -133,9 +134,9 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     if (entry.classification !== 'star' || discovery.imagery) continue;
     if ([...withImagery].some(child => parents[child]?.parent === id)) discovery.hostsImagery = true;
   }
-  await writeGenerated(resolve(projectRoot, 'site/prepared-object-discovery.json'), JSON.stringify(Object.fromEntries(discoveries)) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-object-distances.json'), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-focus-objects.json'), JSON.stringify(focuses) + '\n');
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.discoveries), JSON.stringify(Object.fromEntries(discoveries)) + '\n');
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.distances), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
+  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.focuses), JSON.stringify(focuses) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,

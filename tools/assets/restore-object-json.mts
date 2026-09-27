@@ -3,11 +3,13 @@ import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { serializeObjectJson } from '../prepare/prepare-object-json.mts';
 import { preparePageMetadata } from '@cssearth/bake/delivery';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 

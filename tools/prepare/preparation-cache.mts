@@ -145,8 +145,8 @@ async function checkoutPath(root: string) {
  * Decide what a traced preparation read (inputs) and wrote (outputs). A path the run wrote is an output even when
  * the run read it first: preparation reads its previous outputs, so reusing a receipt assumes preparing again from
  * them reproduces them. An object.json is split by owner: the body's authored view is an input and its preparation
- * pins are an output; another body's descriptor that reached the run only through site/objects.mts counts only the
- * registry fields.
+ * pins are an output; another body's descriptor that reached the run only through the registry (site/objects.mts, or
+ * `readPreparedObjects` from @cssearth/objects/node, which loads descriptors as modules too) counts only the registry fields.
  */
 async function classifyTrace(root: string, objectId: string, traces: PreparationTraces, sharedFiles: readonly string[]) {
   const inside = await checkoutPath(root), refusals = [...traces.unsupported];

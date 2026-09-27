@@ -36,16 +36,16 @@ import {
   validateMarkerSourceBytes,
 } from "./marker-recipe.mts";
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
-import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { loadAstronomyPackage } from "./astronomy/astronomy-package.mts";
 import { authoredObject } from '@cssearth/bake/sources';
+import { readPreparedObjects } from "@cssearth/objects/node";
 
 const markerTileSize = 16;
 export const BODY_MARKER_ATLAS_PAGE_SIZE = 256;
 const PLANET_MARKER_PLANETS = Object.freeze(
-  SCENE_OBJECTS
+  readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects
     .toSorted((left, right) => left.distance.meters - right.distance.meters),
 );
 

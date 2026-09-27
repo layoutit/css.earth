@@ -5,11 +5,13 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node
 import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const project = resolve(import.meta.dirname, '../..');
 const pin = (path: string, _bytes: Uint8Array) => ({ path });

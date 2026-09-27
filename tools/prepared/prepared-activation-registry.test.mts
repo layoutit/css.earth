@@ -2,8 +2,11 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { SCENE_OBJECTS as OBJECTS } from '../../site/objects.mts';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
+import { readPreparedObjects } from '@cssearth/objects/node';
+import { resolve } from 'node:path';
+
+const OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 // The same registry that ships the application owns this gate. A new object
 // cannot opt out by omitting a browser profile or a hand-maintained test list.

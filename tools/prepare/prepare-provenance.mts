@@ -1,6 +1,5 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { resolve } from 'node:path';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
@@ -8,6 +7,9 @@ import { prepareFacilities } from './prepare-facilities.mts';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import type { PreparedOutput } from '@cssearth/bake/delivery';
 import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 /**
  * Each body's `prepared/provenance.json` is a build output: the source chain of its manifest, recipes and prepared

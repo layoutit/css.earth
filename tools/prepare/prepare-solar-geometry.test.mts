@@ -7,12 +7,14 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packages/astronomy/tools/scene-ephemeris.mts';
 import { loadAstronomyPackage } from './astronomy/astronomy-package.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import * as geometry from '../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseSolidReplayScene } from '../prepared/prepared-replay-source.mts';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 type Vector = readonly number[];
 type EpochStateSource = { centerBodyId: string; positionKm: Vector; parentHeliocentricState: { positionKm: Vector; velocityKmPerDay: Vector } };
