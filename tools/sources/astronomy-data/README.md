@@ -40,7 +40,7 @@ Open `ledger.sqlite` in a SQLite browser for direct editing.
 
 | Table                 | Owns |
 | --------------------- | ---- |
-| `datasets`            | One row per dataset (9,214): stable source/id, title, target text, instrument, count, decision, reason, source URL; native metadata in `details_json` |
+| `datasets`            | One row per dataset (9,214): stable source/id, title, target text, instrument, count, decision, reason, source URL, family; native metadata in `details_json`. Maryland archives Rosetta per tracking pass and mission phase, so `family` groups those rows by title (6,509 families in all) |
 | `inventory`           | Listings that repeat datasets (6,369): OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
 | `bodies`              | Every body a dataset names: cssEarth id when cssEarth catalogues it, name, kind, parent, cssEarth package |
 | `dataset_bodies`      | Dataset-to-body links with the name the source used; `role` is `parent` for a Photojournal tag of a tagged body's parent |

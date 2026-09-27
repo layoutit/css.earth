@@ -179,6 +179,9 @@ const linked = new Set(
 for (const r of rows)
   if (!linked.has(r.source + "\0" + r.id))
     assert.ok(typeof object(r.details).targetNote === "string" || !r.target.trim(), `${r.source} ${r.id} names "${r.target}" but links to no body`);
+// Every dataset belongs to a family (apply-structure.mts); only Maryland groups several rows into one.
+assert.deepEqual(db.prepare("SELECT source,id FROM datasets WHERE family='' LIMIT 1").all(), []);
+assert.deepEqual(db.prepare("SELECT DISTINCT source FROM datasets WHERE source<>'umd' AND family<>id").all(), []);
 // A parent named in `bodies` exists as a body, and only the Photojournal marks parent tags.
 assert.deepEqual(db.prepare("SELECT id FROM bodies WHERE parent<>'' AND parent NOT IN (SELECT id FROM bodies)").all(), []);
 assert.deepEqual(db.prepare("SELECT DISTINCT source FROM dataset_bodies WHERE role='parent' AND source<>'photojournal'").all(), []);

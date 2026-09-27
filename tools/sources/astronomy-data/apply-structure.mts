@@ -8,7 +8,10 @@
 // - Rebuilds `bodies` and `dataset_bodies` from each dataset's full target list (details.targets when a source shortened
 //   the target text) through bodies.mts: every body keyed by its cssEarth id when cssEarth catalogues it, otherwise by
 //   its own name with a kind read from its designation. A Photojournal tag of a tagged body's parent is role `parent`.
-// Running it again only rebuilds the two body tables.
+// - Sets `datasets.family`. Maryland archives Rosetta per tracking pass and per mission phase (1,660 rows are one RSI
+//   gravity series), so its rows group by title without the session date, mission phase and version; every other
+//   archive already lists one row per dataset, so each row is its own family.
+// Running it again rebuilds the two body tables and the families.
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { databasePath, root } from "./model.mts";
@@ -16,11 +19,21 @@ import { bodyCatalogue, type Body } from "./bodies.mts";
 import { object, string } from "./collect/client.mts";
 
 const dry = process.argv.includes("--dry-run");
+// "Rosetta-Orbiter RSI Escort 3 67P Gravity Measurement - 2014-12-14T06:44" and its 1,659 siblings are one series.
+function marylandFamily(title: string): string {
+  return title
+    .replace(/\s+-\s+\d{4}-\d\d-\d\d.*$/, "")
+    .replace(/\bMTP\d+\b/g, "")
+    .replace(/\b(Prelanding|Escort \d|Extension \d|Comet Escort \d)\b/g, "")
+    .replace(/\bv\d+(\.\d+)?\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 const inventorySources = ["opus-volumes", "opus-geometry", "umd-holdings", "darts-collections", "darts-index"];
 const catalogue = await bodyCatalogue(resolve(root, "../../.."));
 const db = new DatabaseSync(databasePath);
 db.exec("PRAGMA foreign_keys=ON");
-const counts = { inventoryMoved: 0, inventoryLinksMoved: 0, bodies: 0, links: 0, parentLinks: 0, datasetsWithoutBody: 0 };
+const counts = { families: 0, inventoryMoved: 0, inventoryLinksMoved: 0, bodies: 0, links: 0, parentLinks: 0, datasetsWithoutBody: 0 };
 db.exec("BEGIN");
 try {
   db.exec(`CREATE TABLE IF NOT EXISTS inventory(source TEXT NOT NULL,id TEXT NOT NULL,title TEXT NOT NULL,target TEXT NOT NULL,instrument TEXT NOT NULL,record_count INTEGER NOT NULL CHECK(record_count>=0),decision TEXT NOT NULL,reason TEXT NOT NULL,url TEXT NOT NULL,details_json TEXT NOT NULL CHECK(json_valid(details_json)),PRIMARY KEY(source,id)) STRICT;
@@ -33,6 +46,14 @@ try {
   db.prepare(`DELETE FROM dataset_proposals WHERE source IN (${marks})`).run(...inventorySources);
   db.prepare(`DELETE FROM datasets WHERE source IN (${marks})`).run(...inventorySources);
 
+  if (!db.prepare("SELECT 1 FROM pragma_table_info('datasets') WHERE name='family'").get())
+    db.exec("ALTER TABLE datasets ADD COLUMN family TEXT NOT NULL DEFAULT ''");
+  const setFamily = db.prepare("UPDATE datasets SET family=? WHERE source=? AND id=?");
+  for (const r of db.prepare("SELECT source,id,title FROM datasets").all()) {
+    const source = string(r.source), id = string(r.id);
+    setFamily.run(source === "umd" ? marylandFamily(string(r.title)) : id, source, id);
+  }
+  counts.families = Number(db.prepare("SELECT count(DISTINCT source||char(0)||family) n FROM datasets").get()?.n);
   db.exec(`DROP TABLE IF EXISTS dataset_bodies; DROP TABLE IF EXISTS bodies;
     CREATE TABLE bodies(id TEXT PRIMARY KEY,name TEXT NOT NULL,kind TEXT NOT NULL,parent TEXT NOT NULL,cssearth_object TEXT NOT NULL,catalogued INTEGER NOT NULL CHECK(catalogued IN (0,1))) STRICT;
     CREATE TABLE dataset_bodies(source TEXT NOT NULL,dataset_id TEXT NOT NULL,body_id TEXT NOT NULL REFERENCES bodies(id),name_in_source TEXT NOT NULL,role TEXT NOT NULL CHECK(role IN ('target','parent')),PRIMARY KEY(source,dataset_id,body_id),FOREIGN KEY(source,dataset_id) REFERENCES datasets(source,id)) STRICT;`);
