@@ -23,7 +23,7 @@ await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
-type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
+type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; framingScale(): Promise<number>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
 type MockFactory = { navigation: MockPreparation };
 type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
 type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
@@ -50,7 +50,7 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
     optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000, heightPixels: 2000,
       framingRadiusPixels: 200, detailHandoffDiameterPixels: 14, visibleRect: null }),
     apply(value) { current = value; paints.push(value); } };
-  const factory: MockFactory = { navigation: { frame: frames[1], framingRadius: async () => 200, prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
+  const factory: MockFactory = { navigation: { frame: frames[1], framingRadius: async () => 200, framingScale: async () => 1, prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
   const service = createPreparedWorldNavigation({ objects, windowTarget: windowTarget as unknown as Window, documentTarget: documentTarget as unknown as Document });
   const controller = new AbortController();
   return { service, controller, resources, navigation, factory, paints, documentTarget, windowTarget,

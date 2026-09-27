@@ -192,16 +192,23 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const height = viewport.heightPixels!;
       const project = (eye: readonly number[]): readonly number[] => [ox + focal * eye[0] / -eye[2], oy + focal * eye[1] / -eye[2]];
       const selected = selectedEntry.body;
-      const frame = createWorldFrameProjection(plan.focus, selected, toEye, project);
+      // Orbit occlusion and close-up fading follow the destination during the
+      // approach. Attaching its detail must not change a stationary orbit field.
+      const orbitFocus = bodies.find(entry => entry.body.id === selectionPreview) ?? selectedEntry;
+      const orbitOverview = selectionPreview ? false : overview;
+      const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected);
-      const focusDiameter = selectedEye[2] < -selected.radiusM
+      const selectedDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
-      const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
+      const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter);
       // A departed focus can cross the eye plane while its detail still owns
       // selection. Its unprojectable diameter is not a screen-filling disc:
       // only a visible focus may fade the surrounding orbit field.
-      const [selectedX, selectedY] = project(selectedEye);
-      const focusInView = selectedEye[2] < -selected.radiusM &&
+      const focusEye = frame.eye(orbitFocus.body), focusRadius = orbitFocus.body.radiusM;
+      const focusDiameter = focusEye[2] < -focusRadius
+        ? 2 * focal * focusRadius / Math.sqrt(focusEye[2] ** 2 - focusRadius ** 2) : Number.POSITIVE_INFINITY;
+      const [selectedX, selectedY] = project(focusEye);
+      const focusInView = focusEye[2] < -focusRadius &&
         Math.abs(selectedX) < width / 2 + focusDiameter / 2 &&
         Math.abs(selectedY) < height / 2 + focusDiameter / 2;
       const focusShare = focusInView ? focusDiameter / height : 0;
@@ -210,9 +217,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // Once detail fills the view, distant systems' coarse orbit bounds can surround the camera even though no
       // stroke reaches the screen. Keep the selected host's direct orbiters, or a selected satellite's siblings;
       // fetch other paths on a wider view or when the user targets them.
-      const closeDetail = !overview && focusShare >= plan.camera.presentation.orbitLineFade.hiddenAboveDiscHeightShare;
-      const closeFamilyCenter = selectedEntry.orbit && !systemFade.isSystemStar(selectedEntry.orbit.centerBodyId)
-        ? selectedEntry.orbit.centerBodyId : selectedId;
+      const closeFamilyCenter = orbitFocus.orbit && !systemFade.isSystemStar(orbitFocus.orbit.centerBodyId)
+        ? orbitFocus.orbit.centerBodyId : orbitFocus.body.id;
       const near = opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -258,8 +264,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const { body } = entry;
         const isSelected = !overview && body.id === selectedId;
         const nearSelected = entry.orbit?.centerBodyId === closeFamilyCenter;
-        const bodyOrbitOpacity = isSelected ? ownOrbitOpacity : closeDetail && !nearSelected &&
-          !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? 0 : orbitOpacity;
+        const isOrbitFocus = !orbitOverview && body.id === orbitFocus.body.id;
+        const bodyOrbitOpacity = isOrbitFocus ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
+          !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? orbitOpacity * ownOrbitOpacity : orbitOpacity;
         const systemOpacity = systemFade.of(entry.index);
         // Category visibility never removes the object the user is inspecting.
         if (entry.bodyHidden && !isSelected) {
@@ -291,7 +298,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // The retained locator indicators (the anchor and placed stars) are also the galactic locators.
         // Unresolved foreground points cannot occlude this annotation; physical sprites keep exact occlusion.
         const annotationVisible = prominentOrbiter ? depth > body.radiusM : isLocator ? inFrame && !(selectedId !== body.id &&
-          focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
+          selectedDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
         const hovered = entry.hovered, highlighted = entry.highlighted === true;
         // Satellites keep the complete, uniform path from the shared policy,
@@ -319,7 +326,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
         if (entry.orbit && systemOpacity > 0 && bodyOrbitOpacity > 0 &&
             (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
-          const projector = isSelected ? createPreparedRingProjector({ toEye, toEyeAt, project, hidden: occlusion.hidden,
+          const projector = isOrbitFocus ? createPreparedRingProjector({ toEye, toEyeAt, project, hidden: occlusion.hidden,
             mayOcclude: occlusion.mayOcclude, depthFade: selectedOrbitDepthFade(Math.hypot(...eye)),
             near, clipX: width / 2, clipY: height / 2 }) : projectorFor(occlusion);
           if (skipped || inactiveSatellite) {
@@ -344,7 +351,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
             measuredExtent = null;
             const level = entry.levels[detailLevel(entry)]!;
             segments = projector(level.vertices, level.trail, level.activeChords, fullOrbit,
-              isSelected ? selectedOrbitProjection : entry.orbitProjection, entry.orbit.closed !== false);
+              isOrbitFocus ? selectedOrbitProjection : entry.orbitProjection, entry.orbit.closed !== false);
           }
         }
         if (entry.orbit) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
@@ -487,8 +494,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // marker/mesh. Suppressing the duplicate context caption must not remove
       // its selected locator. Reserve that fixed footprint before other labels;
       // the normal circle LOD still retires it when the surface resolves.
-      const selectedLocator = !overview && emphasizedId === selectedId ? projectedBodies.find(projected =>
-        projected.entry.body.id === selectedId && projected.entry.labelSuppressed && projected.circle &&
+      const selectedLocator = emphasizedId !== null ? projectedBodies.find(projected =>
+        projected.entry.body.id === emphasizedId && projected.entry.labelSuppressed && projected.circle &&
         projected.annotationVisible && projected.markerOpacity > 0) : undefined;
       const locatorRadius = BODY_INDICATOR_DIAMETER / 2;
       const locatorRects = selectedLocator ? [{ left: selectedLocator.x - locatorRadius, right: selectedLocator.x + locatorRadius,
@@ -531,11 +538,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // Ordinary collision decluttering must not blink an orbit during camera motion.
         // The selected object's path and planets in a selected placed star's
         // system remain available when their captions are intentionally absent.
-        const selectedSystemPlanet = entry.orbit.centerBodyId === selectedId && entry.orbit.centerBodyId !== plan.focus.id &&
+        const selectedSystemPlanet = entry.orbit.centerBodyId === orbitFocus.body.id && entry.orbit.centerBodyId !== plan.focus.id &&
           systemFade.isSystemStar(entry.orbit.centerBodyId);
         if (anonymousMinor || projected.inFrame && !entry.labelShown && (entry.labelHidden || !projected.nameable) &&
             !systemFade.hasAuthoredRange(entry.index) &&
-            !selectedSystemPlanet && (overview || entry.body.id !== selectedId)) projected.orbitVisibility = 0;
+            !selectedSystemPlanet && (orbitOverview || entry.body.id !== orbitFocus.body.id)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;

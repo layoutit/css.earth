@@ -82,6 +82,14 @@ the unscaled CSS focal length; projected labels, picking, material selection and
 the persistent universe use the effective focal length. A viewport records which
 scale its focal length already includes, so it cannot be applied twice.
 
+The persistent universe prepares the destination caption, including the shape's
+prepared framing scale, before camera motion. One retained label follows the body
+below its silhouette through preview and selection; arrival does not replace its
+text, remeasure it, or change to another placement rule. Orbit projection and
+occlusion also use the preview destination. Its projected disc size drives the
+existing close-up fade during approach, including unrelated paths, so switching
+the selected detail does not retire an entire orbit field at the final pose.
+
 The detail is prepared at the final camera and attaches atomically behind the
 opaque image. Scene readiness waits for decoded selection, complete attachment
 and a rendering opportunity. After the destination acknowledges that same camera,
@@ -116,6 +124,11 @@ final batch a rendering opportunity before resolving readiness. It never
 derives geometry or chooses a different asset bank. Direct and reduced-motion
 arrivals and arrivals covered by a billboard remain atomic. A flight holds before the destination needs its detailed
 surface if activation is still pending.
+
+The bottom sheet has shared responsive resting stops in shell CSS. Card replacement,
+intro length and dataset controls cannot change its height, the search row position,
+or the camera viewport. The sheet controller observes user gestures and viewport
+keyboard changes; it does not observe or measure card content.
 
 The application owns viewport measurement across mounts. Object cameras and
 world overlays consume its published bounds and projection. Resize and scroll

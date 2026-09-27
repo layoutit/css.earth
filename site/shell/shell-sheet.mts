@@ -9,8 +9,8 @@ interface SheetGesture {
   fromHandle: boolean; capture: HTMLElement; active: boolean; lastY: number; lastTime: number; velocity: number;
 }
 
-// Phones and portrait tablets share a bottom sheet. Its resting stop follows
-// the rendered dataset selector on phones and the introduction on tablets.
+// Phones and portrait tablets share a bottom sheet. CSS owns its resting stops;
+// changing the selected card must never move the sheet or resize the camera viewport.
 export function createSheetController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime, readSelectionKey: () => string) {
   const sheet = documentTarget.querySelector(".object-sidebar");
   const handle = documentTarget.querySelector(".object-sheet-handle");
@@ -41,71 +41,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   let readingPosition: { key: string; top: number } | null = null;
   let handleReadingPosition: number | null = null;
   const readingKey = readSelectionKey;
-  let peekFrame = 0;
-  const drawer = sheet.querySelector<HTMLElement>('.object-drawer-content');
-  const visible = (node: HTMLElement) => node.getClientRects().length > 0 &&
-    node.closest('[hidden], [inert], [aria-busy="true"]') === null;
-  const firstVisible = (root: ParentNode, selector: string) => {
-    for (const node of root.querySelectorAll<HTMLElement>(selector)) if (visible(node)) return node;
-    return null;
-  };
-  const peekTarget = () => {
-    const card = firstVisible(sheet, '.object-selected-content .object-prepared-information-panel, .object-selected-content .object-information-panel');
-    if (!card) return firstVisible(sheet, '.object-selected-panel');
-    const introduction = firstVisible(card, '.object-selected-panel .object-introduction');
-    const picker = firstVisible(card, '.object-lens-picker-display');
-    const header = firstVisible(card, '.object-selected-panel');
-    if (picker) {
-      // The two-column card puts the intro left of the selector; the stacked
-      // card puts the selector after it. Follow the end of the visible column.
-      return introduction && introduction.getBoundingClientRect().right <= picker.getBoundingClientRect().left
-        ? introduction : picker;
-    }
-    // A dataset change can briefly hide the native picker while its selected
-    // details update. Keep the last measured stop until it is visible again.
-    if (card.querySelector('.object-lens-picker-display') && card.dataset.cardView !== 'overview') return null;
-    return introduction ?? header;
-  };
-  const refreshPeek = () => {
-    if (!mobile.matches || gesture?.active) return;
-    const target = peekTarget();
-    if (!target) return;
-    const height = sheet.offsetHeight;
-    if (height <= 0) return;
-    const contentGap = drawer ? Number.parseFloat(windowTarget.getComputedStyle(drawer).rowGap) || 0 : 0;
-    const safeBottom = Number.parseFloat(windowTarget.getComputedStyle(sheet).paddingBottom) || 0;
-    // Both rectangles move together while the sheet snaps. Add scrollTop so a
-    // previously opened sheet still measures the selector's content position.
-    const contentBottom = target.getBoundingClientRect().bottom - sheet.getBoundingClientRect().top + sheet.scrollTop;
-    const wanted = contentBottom + contentGap + safeBottom;
-    const peek = Math.min(height, Math.max(0, wanted));
-    const previous = Number.parseFloat(body.style.getPropertyValue('--sheet-peek'));
-    if (Number.isFinite(peek) && (!Number.isFinite(previous) || Math.abs(previous - peek) >= 0.5)) {
-      body.style.setProperty('--sheet-peek', `${peek}px`);
-    }
-    // On a short viewport the whole sheet can be shorter than the content up
-    // to the selector. Scroll the resting sheet only by the uncovered part.
-    if (state === 'peek' && Number.isFinite(wanted)) sheet.scrollTop = Math.max(0, wanted - height);
-  };
-  const schedulePeek = () => {
-    if (peekFrame) return;
-    peekFrame = windowTarget.requestAnimationFrame(() => { peekFrame = 0; if (!lifetime.disposed && !signal.aborted) refreshPeek(); });
-  };
-  const resizePeek = windowTarget.ResizeObserver ? new windowTarget.ResizeObserver(schedulePeek) : null;
-  resizePeek?.observe(sheet);
-  if (drawer) resizePeek?.observe(drawer);
-  const mutationPeek = windowTarget.MutationObserver && drawer ? new windowTarget.MutationObserver(schedulePeek) : null;
-  if (drawer) mutationPeek?.observe(drawer, { subtree: true, childList: true, attributes: true,
-    attributeFilter: ['hidden', 'open', 'inert', 'aria-busy', 'data-card-view', 'data-card-subject'] });
-  windowTarget.addEventListener('resize', schedulePeek, { signal });
-  const stopPeek = () => {
-    if (peekFrame) windowTarget.cancelAnimationFrame(peekFrame);
-    peekFrame = 0;
-    resizePeek?.disconnect();
-    mutationPeek?.disconnect();
-  };
   lifetime.onDispose(() => {
-    stopPeek();
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     if (settleTimer) windowTarget.clearTimeout(settleTimer);
     snapFrame = settleTimer = 0;
@@ -170,7 +106,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     sheet.classList.add("is-dragging");
     state = next;
     body.dataset.sheet = next;
-    if (next === 'peek') schedulePeek();
     handle.checked = next === "half" || next === "full";
     handle.setAttribute("aria-label", next === "tucked" ? "Show information sheet"
       : next === "peek" ? "Expand information sheet" : "Collapse information sheet");
@@ -235,7 +170,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       if (Math.hypot(dx, dy) < dragSlopPixels) return;
       // Sideways swipes belong to carousels; pulling up an open sheet scrolls it.
       if (Math.abs(dx) > Math.abs(dy) || (state === "full" && !drag.fromHandle && dy < 0)) {
-        gesture = null;
+      gesture = null;
         return;
       }
       drag.active = true;
@@ -335,7 +270,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     endSettle();
     sheet.classList.remove("is-dragging");
     clearOffset();
-    schedulePeek();
   }, { signal });
   // Typing in search opens a keyboard over the sheet it just opened. The layout
   // viewport keeps its height, so the visual viewport reports the lost room.
@@ -353,7 +287,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   visual?.addEventListener("scroll", followKeyboard, { signal });
   lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
-  refreshPeek();
   body.dataset.sheet = state;
   return Object.freeze({
     // A choice from search reveals its card over the scene.
@@ -368,13 +301,11 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     },
     destroy() {
       events.abort();
-      stopPeek();
       gesture = null;
       deferredSearchFocus = false;
       endSettle();
       sheet.classList.remove("is-dragging");
       clearOffset();
-      body.style.removeProperty('--sheet-peek');
       delete body.dataset.sheet;
     },
   });

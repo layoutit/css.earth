@@ -80,6 +80,8 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
     height = label.offsetHeight;
   };
   return Object.freeze({ label,
+    /** Set and measure the destination name before its first camera publication. */
+    prepare: measure,
     /** The caption's box for a camera the context is about to plan, so the context's own labels keep clear of it. */
     rect(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint, flags: SelectedLabelFlags): LabelScreenRect | null {
       if (measuredId !== body.id) return null;

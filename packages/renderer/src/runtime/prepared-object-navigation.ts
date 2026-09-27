@@ -46,6 +46,10 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
 /** One readiness contract for both already-decoded and deferred object packages. */
 export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => Promise<ObjectRuntimeDefinition>, frame: PreparedWorldCameraFrame) {
   return Object.freeze({ frame,
+    /** The shared caption uses the same prepared shape extent before and after attachment. */
+    async framingScale(signal: AbortSignal) {
+      return (await abortable(load(signal), signal)).camera.framingScale ?? 1;
+    },
     async framingRadius(viewport: CameraViewport, mobile: boolean, signal: AbortSignal) {
       const { camera } = await abortable(load(signal), signal);
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });

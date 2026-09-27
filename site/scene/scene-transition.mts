@@ -101,7 +101,13 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
     });
   const factoryTask = contentTransport.descriptor(object, { signal: request.signal })
     .then(descriptor => loadObject(object.id, descriptor, request.signal))
-    .then(factory => { request.timing.mark('factory-ready'); return factory; });
+    .then(async factory => {
+      if (factory.navigation && request.subject.kind !== 'overview' && request.subject.kind !== 'focus') {
+        const framingScale = await factory.navigation.framingScale(request.signal);
+        if (requests.owns(request)) getWorld()?.previewSelection(object.id, framingScale);
+      }
+      request.timing.mark('factory-ready'); return factory;
+    });
   // The registry already owns the physical frames. Start the camera while
   // the destination factory, content and texture bank load independently.
   requests.advance(request, 'flying');
