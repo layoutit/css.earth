@@ -48,7 +48,7 @@ packages/spice/
 ## Evidence
 
 The package's tests are self-contained: they build DAF files and text kernels in memory. The comparisons with SpiceyPy
-live beside the scripts that write their fixtures in [`tools/oracles/spice/`](../../tools/oracles/README.md):
+live beside the scripts that write their fixtures in [`tests/oracles/spice/`](../../tests/oracles/README.md):
 `dart-draco.oracle.test.mts` (the fifteen pinned DART kernels: time, clock, states with every aberration correction,
 every frame class and the DRACO camera), `small-kernel.oracle.test.mts` (one LSK and one PCK) and
 `new-horizons-approach.oracle.test.mts` (the approach sides of Pluto and Charon). They need the kernels restored first.

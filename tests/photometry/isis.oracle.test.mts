@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readOracleFixture, assertPinnedReferences } from '../../tools/oracles/fixture.mts';
+import { readOracleFixture, assertPinnedReferences } from '../oracles/fixture.mts';
 import { radianceFactor, type ScatteringAngles } from '@cssearth/bake/photometry';
 import type { HapkeModel, ParticlePhaseFunction } from '@cssearth/bake/photometry';
 
 /**
- * USGS ISIS3 as the oracle. tools/oracles/isis/photometric-truth.py reads the truth
+ * USGS ISIS3 as the oracle. tests/oracles/isis/photometric-truth.py reads the truth
  * files of ISIS's photometric model unit tests at the 10.0.0_LTS commit: the
  * parameters, the (phase, incidence, emission) geometries, and the values that
  * ISIS's own Hapke.cpp, LunarLambert.cpp, Minnaert.cpp and LommelSeeliger.cpp

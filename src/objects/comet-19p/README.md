@@ -24,7 +24,7 @@ Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/
 
 The [terrain-place browser record](evidence/terrain-places/browser.json) covers all four search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show the MICAS labels and qualified captions. Shadows stay Off, all 2,856 retained leaves survive the selections, and switching to DLR hides the labels. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
-- **Reader oracle, 2026-09-12:** `tools/oracles/isis2/borrelly-micas.py` reads the four pinned MICAS cubes with pvl and numpy. [`tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts) (now [`tests/objects/terrestrial/isis2-qube.oracle.test.mts`](../../../tests/objects/terrestrial/isis2-qube.oracle.test.mts)) requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/isis2/borrelly-micas.py`](https://github.com/layoutit/css.earth/blob/de8b0ae4187a49d17e32dff1f2b3a715f0217805/tools/oracles/isis2/borrelly-micas.py) (now [`tests/oracles/isis2/borrelly-micas.py`](../../../tests/oracles/isis2/borrelly-micas.py)) reads the four pinned MICAS cubes with pvl and numpy. [`tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts) (now [`tests/objects/terrestrial/isis2-qube.oracle.test.mts`](../../../tests/objects/terrestrial/isis2-qube.oracle.test.mts)) requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
 
 ### Registration
 
@@ -149,7 +149,7 @@ original image. Both states remain available.
 
 All inputs and source documents are pinned in `source/manifest.json`.
 The [contributor guide](../README.md) covers shared commands. The body-specific
-registration audit is under `tools/oracles/comet-19p/registration.py`
+registration audit is under `tests/oracles/comet-19p/registration.py`
 and requires NumPy and SciPy.
 The broader qualification and delivery evidence is in
 [`docs/comets/BORRELLY.md`](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md).

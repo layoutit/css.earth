@@ -695,7 +695,7 @@ export function summariseTimeProfile(xml: string, limit = 30) {
 
 // ---- Pixels ---------------------------------------------------------------------------------------------------------
 
-/** The settings tools/investigations/compare-visual-evidence.mts uses; antialiased pixels count, so 0 means identical. */
+/** The settings labs/investigations/compare-visual-evidence.mts uses; antialiased pixels count, so 0 means identical. */
 export const PIXEL_SETTINGS = { threshold: 0.1, includeAA: true, alpha: 0.2, diffColor: [255, 0, 0] as [number, number, number] };
 
 /** Differing pixels between two same-sized RGBA images, and the diff image pixelmatch draws. */

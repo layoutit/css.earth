@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from '@cssearth/bake/objects/layers/terrestrial';
-import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../../tools/oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** astropy as the oracle for the encounter FITS reader, one product per instrument layout: Deep Impact ITS, Stardust NAVCAM and MRI. */

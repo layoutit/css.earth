@@ -116,7 +116,7 @@ instead of editing a shared list or atlas position.
 - **Spectral absorption maps:** Charon's `source/science/leisa/bands.json`
   pairs LEISA spectra with wavelength and geometry cubes.
   `packages/bake/src/objects/layers/observation/spectral-band-maps.ts` prepares footprint-limited
-  numeric maps; `tools/oracles/fits/charon-leisa.py` independently checks the
+  numeric maps; `tests/oracles/fits/charon-leisa.py` independently checks the
   native samples and arithmetic. Follow the spectral guidance in
   [scientific faithfulness](scientific-faithfulness.md).
 - **A sourced shape model:** Haumea's `source/preparation/shape-model.json` uses
@@ -185,7 +185,7 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
 | New Horizons LORRI calibrated FITS, uncertainty and quality HDUs | `nh-lorri-camera` | Arrokoth `lorri` | Camera pins with a qualified attitude for the exact mesh; native TAN-SIP WCS | `new-horizons-geo.test.mts` (Astropy pixels and WCS) |
 | Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; its native PDS label confirms the bands and data-number quantity, and the recipe declares one `displayRange` | `new-horizons-geo.test.mts` (Astropy pixels) |
-| Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/oracles/spice/dart-draco.oracle.test.mts` |
+| Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tests/oracles/spice/dart-draco.oracle.test.mts` |
 | A push-frame colour image from a spinning spacecraft, with SPICE kernels and no geometry | `junocam-camera` | The four JunoCam images of Europa (29 September 2022), measured in the [JunoCam guide](../../../../docs/junocam.md) | Frame and label pins; the `spice` block naming the kernel bank, kernels in load order, bodies, the label's target name and the body frame; `epochRefinement` budgets for the two epochs fitted to the lit limb; retained illumination or a disk function; a `displayRange` from 0 | `junocam.test.mts` (the instrument kernel's own field-of-view vectors), `strip-refinement.test.mts` (known epochs recovered from a synthetic spinning camera), `packages/spice/src/camera.test.ts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
 | Published camera controls for a shape model, or the Galileo SSI image catalog | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame pins with the control network's camera fields or a `cameraCatalog`, photometry, transfer limits, level matching | None yet; preparation refuses a frame whose camera puts more than a quarter of its lit shape on sky |
@@ -384,8 +384,8 @@ if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 ## Oracles
 
 The pipeline derives nothing from an oracle; an oracle recomputes what the
-pipeline computed so a test can compare. `tools/oracles/` holds them with a
-pinned Python environment (`node tools/oracles/setup.mts`, `tools/oracles/requirements.txt`),
+pipeline computed so a test can compare. `tests/oracles/` holds them with a
+pinned Python environment (`node tests/oracles/setup.mts`, `tests/oracles/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions, input
 paths and byte counts. Existing decoder references include
 SpiceyPy for `@cssearth/spice` (a microsecond in time, a millimetre in position, a
@@ -404,10 +404,10 @@ fixtures. Camera controls still need their geometric checks. Regenerate a fixtur
 only when its tool or inputs change, and say so in the PR. ALE and usgscsm (pixel models and
 distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
 photometric models are checked against the truth files of their unit tests,
-which need no ISIS install. See `tools/oracles/README.md`.
+which need no ISIS install. See `tests/oracles/README.md`.
 
 For SUM/INFO image-to-shape investigations, use the optional
-[native SBMT preparation oracle](../../../../tools/oracles/sbmt/README.md).
+[native SBMT preparation oracle](../../../../tests/oracles/sbmt/README.md).
 Add a source-pinned case to its shared inventory rather than writing a body-only
 reference script. Its staged comparison separates pointing, visible intercepts,
 FITS samples and UV projection. SBMT's angular UV approximation is not exact
@@ -428,7 +428,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Restore missing declared source files | `node tools/objects/dist/operations.js acquire <id>` |
 | Check declared source-file coverage without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only`; this does not verify source digests |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:objects -- --object=<id>` |
-| Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, then `node tools/oracles/run.mts [group/name ...]` |
+| Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, then `node tests/oracles/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
 | Prepare one authored object end to end, resumable by step | `node tools/prepare/cli/prepare-object.mts <id> [--from <step>] [--reuse-images]` (a paged-ellipsoid or raster body redraws only its lighting and atmosphere banks by default when nothing else changed; `prepare-authored.js <id> --write --full` bakes everything; `--reuse-images` forces the redraw-only run and stops after the prepare step): stale install and builds, reader text budgets and the Sun's installed files, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
 | Say which build a run would read stale | `node tools/ci/check-stale-builds.mts` |

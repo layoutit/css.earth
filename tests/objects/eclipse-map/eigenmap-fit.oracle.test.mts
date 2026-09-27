@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { readOracleFixture } from '../../../tools/oracles/fixture.mts';
+import { readOracleFixture } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { eigencurveBasis } from '@cssearth/bake/objects/raster';
 

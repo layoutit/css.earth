@@ -114,7 +114,7 @@ Check each point against the source before merging a record:
   unit tests of USGS ISIS 10.0.0_LTS, to six significant digits. The cases cover
   Hapke with shadow hiding, roughness and both ISIS phase functions, plus
   Lunar-Lambert, Minnaert and Lommel-Seeliger.
-  [`photometric-truth.py`](../../../../tools/oracles/isis/photometric-truth.py) reads the truth
+  [`photometric-truth.py`](../../../../tests/oracles/isis/photometric-truth.py) reads the truth
   files at the pinned commit, and the fixture records each file's URL and sha256.
 - `whole-disc-colour.test.mts` checks the record parser, the Minnaert disc
   means 2/(2k+1), the tie and the luminance factor and shoulder on synthetic maps.

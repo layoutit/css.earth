@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFitsImage } from '@cssearth/fits';
-import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
+import { readOracleFixture, readOracleInput } from '../../tests/oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { asinhBandDisplay, encodeAsinhBands } from '@cssearth/bake/objects/color';
 

@@ -225,10 +225,10 @@ only when `dependencies` ships it, since tsup inlines a `devDependencies` packag
 (`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. Not yet enforced:
 unused files in library folders (untangle item K).
 
-Reference implementations live under `tools/oracles/` with their own pinned
-Python environment (`node tools/oracles/setup.mts`); their fixtures under `tests/oracles/`
+Reference implementations live under `tests/oracles/` with their own pinned
+Python environment (`node tests/oracles/setup.mts`); the fixtures beside them
 are committed evidence, and the comparing tests run without Python. See
-[tools/oracles/README.md](tools/oracles/README.md) before adding or regenerating
+[tests/oracles/README.md](tests/oracles/README.md) before adding or regenerating
 one. When an archive product has no reader, route or kernel bank yet, open an
 issue from the archive-product template instead of writing a reader for one body.
 

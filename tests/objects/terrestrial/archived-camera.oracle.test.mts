@@ -3,7 +3,7 @@ import { sourceLoad, sourceTest } from '../source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisReflectance, acceptOsirisQuality } from '@cssearth/bake/objects/layers/terrestrial';
-import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../../tools/oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** pvl and numpy as the oracle for the OSIRIS level-4 reflectance reader behind the archived-camera route (Steins). */

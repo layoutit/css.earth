@@ -18,7 +18,7 @@ Every band uses the same linear 0.05–0.40 I/F display range. The publisher cor
 
 ### Native SBMT comparison, 14 September 2026
 
-The [shared SBMT oracle](../../../tools/oracles/sbmt/README.md) reads this body's
+The [shared SBMT oracle](../../../tests/oracles/sbmt/README.md) reads this body's
 full Gaskell ver128q mesh and the 537×244 NEAR MSI exposure M0146235607 directly.
 Its [corrected SUM](source/observations/M0146235607.SUM) and
 [SPICE INFO](source/observations/M0146235607F4_2P_CIF_DBL.INFO) are separate camera

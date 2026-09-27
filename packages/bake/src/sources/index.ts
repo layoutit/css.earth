@@ -5,15 +5,19 @@
 // citations; the source records a context manifest lists, the factsheet citations and source inventory the source
 // catalogue compiles, the bibliography citations of the prepared galaxy and cluster catalogues, and the digest that
 // says whether a recorded preparation still applies to a provenance record; the context packages' provenance, compiled
-// from their manifests or read as installed, at the application route passed in; and the facility artwork refresh, which
-// swaps model-render bytes under unchanged attribution. It imports `runtime-source`,
-// `objects/content` and `delivery`.
+// from their manifests or read as installed, at the application route passed in; the facility artwork refresh, which
+// swaps model-render bytes under unchanged attribution; and the investigation ledgers beside each object and facility,
+// the shared investigation surveys they quote (`data/investigations/`) and the report over them
+// (`packages/bake/cli/report-investigations.mts`). It imports `runtime-source`, `objects/content` and `delivery`.
 export * from './authored-object.ts';
 export * from './authored-world-frame.ts';
 export * from './cite-pinned-facts.ts';
 export * from './context-source-records.ts';
 export * from './facility-artwork-refresh.ts';
 export * from './factsheet-sources.ts';
+export * from './investigation-ledger.ts';
+export * from './investigation-report.ts';
+export * from './investigation-survey.ts';
 export * from './object-information-sources.ts';
 export * from './pdf-image.ts';
 export * from './preparation-evidence.ts';
