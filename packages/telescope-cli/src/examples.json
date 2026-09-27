@@ -159,7 +159,7 @@
       "enlarge": 5,
       "product": {
         "command": "node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47",
-        "definition": "tools/objects/naco/programs/ceres-080C0881.COADDED_IMG.reproduction.json"
+        "definition": "packages/telescope-cli/src/archives/naco/programs/ceres-080C0881.COADDED_IMG.reproduction.json"
       },
       "note": "Ceres is resolved but small: about 52 pixels across at half its peak brightness, in the Ks filter through the S13 camera. The glow around it is the adaptive optics halo, which is blur in the data, not a rendering artefact, and the disc shows no surface detail at this scale."
     },

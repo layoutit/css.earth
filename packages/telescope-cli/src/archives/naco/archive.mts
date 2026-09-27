@@ -19,7 +19,7 @@
  * The archive access is this repository's own: `PyVO`, `archiveHeader` and `rawFrame` from the interferometry
  * modules, and `associationTree` for the calibration tree. Nothing here repeats them.
  *
- * The program is written to tools/objects/naco/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/naco/programs/<program id>.json. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,8 +28,8 @@ import { archiveHeader, column, type RawRow } from '@cssearth/telescope/node';
 import { associationTree, type Association } from '@cssearth/telescope/node';
 import { tapRows, WORKSPACE } from '@cssearth/telescope/node';
 
-/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/naco/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs');
 export const SCHEMA = 'cssearth-naco-program@1';
 export const INSTRUMENT = 'NAOS+CONICA';
 export const TAP = 'https://archive.eso.org/tap_obs';

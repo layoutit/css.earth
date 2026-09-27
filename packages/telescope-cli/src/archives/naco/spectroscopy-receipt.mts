@@ -18,7 +18,7 @@
  * The geometry is read from the frames' own headers and recorded whether or not the target is resolved, because it is what
  * says where on the sky the slit was.
  *
- * The receipt is written to tools/objects/naco/programs/<program id>.spectrum.reproduction.json. */
+ * The receipt is written to packages/telescope-cli/src/archives/naco/programs/<program id>.spectrum.reproduction.json. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

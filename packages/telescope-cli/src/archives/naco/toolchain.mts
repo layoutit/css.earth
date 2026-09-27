@@ -27,8 +27,8 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const repository = WORKSPACE;
-/** The toolchain pin stays in the checkout beside the programs it reduces. */
-export const DESCRIPTOR = resolve(WORKSPACE, 'tools/objects/naco/toolchain.json');
+/** The toolchain pin sits beside this code and the programs it reduces. */
+export const DESCRIPTOR = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/toolchain.json');
 export const TOOLCHAIN_ROOT = resolve(repository, 'output/toolchains/naco');
 
 const exists = (path: string) => access(path).then(() => true, () => false);
