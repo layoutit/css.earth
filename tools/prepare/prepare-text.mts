@@ -14,7 +14,7 @@ import { sourceResolver } from '@cssearth/objects/sources';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedText } from '@cssearth/bake/delivery';
-import { refreshPreparedInventory } from './prepare-object-json.mts';
+import { refreshPreparedInventory } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
