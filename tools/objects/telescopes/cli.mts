@@ -35,6 +35,7 @@ import { fetchGeminiSource } from './gemini-source.mts';
 import { fetchOpusSource } from './opus-source.mts';
 import { fetchChandraSource } from './chandra-source.mts';
 import { fetchSpitzerSource } from './spitzer-source.mts';
+import { NEW_OBJECT_COMMAND, runWorkspaceCommand } from './workspace-commands.mts';
 export { HELP, SHORT_HELP };
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);
@@ -683,25 +684,7 @@ export async function main(args: readonly string[], root = resolve(import.meta.d
         const result=options.product?await matchProductSoftware(options.product):await searchAscl(options.query!);
         text=options.json?`${JSON.stringify(result)}\n`:formatAscl(result);code=result.mode==='query'&&!result.entries?.length?3:0;
       }else if(options.command==='new-object'){
-        const {runNewObject,formatNewObject,specFromArchive}=await import('../new-object/generate.mts'),{prepareObjects}=await import('../../prepare/prepare-object.mts');
-        const progress=(line:string)=>io.error(`${line}\n`);
-        if(options.ids&&options.refresh){
-          const {mkdir,writeFile}=await import('node:fs/promises'),{refreshSpec}=await import('../new-object/refresh.mts'),path=resolve(root,'output/new-object/refresh.json');
-          await mkdir(resolve(root,'output/new-object'),{recursive:true});await writeFile(path,`${JSON.stringify(await refreshSpec(root,options.ids),null,2)}\n`);
-          const results=await runNewObject(path,{root,progress,refresh:true}),good=results.filter(result=>!result.failed).map(result=>result.id);
-          const baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{progress,...(options.bake?{}:{to:'page'})}):true;
-          text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results);code=baked&&!results.some(result=>result.failed)?0:1;
-        }else if(options.ids){
-          const baked=await prepareObjects(options.ids,{progress});
-          text=options.json?`${JSON.stringify({baked:baked?options.ids:[]})}\n`:baked?`${options.ids.length} object(s) baked.\n`:'';code=baked?0:1;
-        }else if(options.hosts){
-          const result=await specFromArchive(options.hosts,options.out!,{root,progress:line=>io.error(`${line}\n`)});
-          text=options.json?`${JSON.stringify(result)}\n`:`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`;code=result.entries?0:3;
-        }else{
-          const results=await runNewObject(options.spec!,{root,progress:line=>io.error(`${line}\n`),skipExisting:options.skipExisting});
-          const good=results.filter(result=>!result.failed).map(result=>result.id),baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{progress,...(options.bake?{}:{to:'page'})}):true;
-          text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results)+(results.length&&baked&&options.bake?`${results.length} objects baked.\n`:results.length&&baked&&options.check?`${results.length} objects passed the bake's first steps.\n`:'');code=baked&&!results.some(result=>result.failed)?0:1;
-        }
+        ({text,code}=await runWorkspaceCommand(root,NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
         const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
