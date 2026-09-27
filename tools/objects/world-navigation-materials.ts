@@ -1,5 +1,5 @@
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4 } from '@cssearth/core';
-import type { AuthoredPresentationBasis } from './world-navigation-sources.js';
+import type { AuthoredPresentationBasis } from '@cssearth/bake/objects/scene';
 
 type Data = Record<string, any>;
 const identity=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];

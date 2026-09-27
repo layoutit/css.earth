@@ -56,6 +56,38 @@
       ],
       "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
       "url": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.IMG",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_CENTER.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_CENTER.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.IMG",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_CENTER.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_CENTER.LBL"
     }
   ]
 }

@@ -7,7 +7,7 @@ import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig } from './
 import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.js';
 import type { SurfaceSampler } from './ellipsoid.js';
 import type { GeographicScene } from '../paged-ellipsoid/geographic/contracts.mts';
-import { authoredPresentationBasis } from '../world-navigation-sources.js';
+import { authoredPresentationBasis } from '@cssearth/bake/objects/scene';
 
 export interface FeatureContent { readonly searchLabel: string; readonly description: string; }
 type Verified = { readonly reference: SourceReference; readonly path: string; readonly value: unknown };

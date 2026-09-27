@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { discIntegratedColor, filterReflectance, parseCieTable, parseDiscColorRecord } from '@cssearth/bake/objects/color';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 const root = new URL('../../../src/objects/makemake/source/', import.meta.url);
 const read = async (path: string) => readFile(new URL(path, root));

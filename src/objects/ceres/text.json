@@ -50,6 +50,16 @@
       "title": "Dawn VIR 3.1 µm band depth",
       "detail": "Dawn VIR",
       "summary": "Ammonium contains nitrogen and hydrogen; absorption near 3.1 µm traces it in surface minerals."
+    },
+    "clay-centre": {
+      "title": "Dawn VIR 2.7 µm band centre",
+      "detail": "Dawn VIR",
+      "summary": "Wavelength of clay absorption, nearly uniform across Ceres. Scan artifacts remain; poles are unmeasured."
+    },
+    "ammonium-centre": {
+      "title": "Dawn VIR 3.1 µm band centre",
+      "detail": "Dawn VIR",
+      "summary": "Position of the ammonium absorption, not its depth or abundance. Archive striping remains; poles are unmeasured."
     }
   }
 }

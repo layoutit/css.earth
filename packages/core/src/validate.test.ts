@@ -33,7 +33,7 @@ describe('predicates', () => {
   });
 });
 
-describe('getters (the tools/sources/source-values dialect)', () => {
+describe('getters (the bake objects/sources source-values dialect)', () => {
   it('return the value unchanged', () => {
     const value = { a: 1 }, list = [1];
     expect(requireRecord(value)).toBe(value);
