@@ -7,7 +7,7 @@ import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
-import { contextMarkerSprite } from "../../src/navigation/marker-presentation.mts";
+import { contextMarkerSprite } from "@cssearth/renderer/navigation/marker-presentation.ts";
 
 import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "../../tools/prepare/prepare-navigation.mts";
 import {

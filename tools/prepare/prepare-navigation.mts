@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 import sharp from "sharp";
 import type { ObjectEntry } from '@cssearth/objects';
 import type { MarkerDescriptor } from '@cssearth/bake/navigation';
-import type { MarkerPresentation } from '../../src/navigation/marker-presentation.mts';
+import type { MarkerPresentation } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 type MarkerPlanet = Pick<ObjectEntry, 'id' | 'classification'>;
@@ -35,7 +35,7 @@ import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "@cssearth/bake/navigation";
-import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
+import { validateMarkerPresentation } from "@cssearth/renderer/navigation/marker-presentation.ts";
 import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { loadAstronomyPackage } from "@cssearth/bake/astronomy";

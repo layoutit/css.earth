@@ -1,4 +1,4 @@
-import { resolveMarkerStyle, type PreparedNavigationMarker } from '../../src/navigation/marker-presentation.mts';
+import { resolveMarkerStyle, type PreparedNavigationMarker } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 import { APPLICATION_WORLD_CONTEXT as context } from '../world-context-plan.mts';
