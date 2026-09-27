@@ -605,7 +605,7 @@ function requireContextFrame(value: unknown, objectId: string) {
     if (orbit !== undefined && (!isRecord(orbit) || !identity(orbit.centerBodyId))) fail('body orbit parent or prepared vertices are invalid');
     const point = {id: body.id, positionM: body.positionM, ...(isRecord(orbit) ? {orbit: {centerBodyId: requireString(orbit.centerBodyId)}} : {})};
     points.set(body.id, point);
-    return {...point, orbit};
+    return {...point, orbit, plainDot: body.plainDot === true};
   });
   if (context.orbitCenters !== undefined) {
     if (!isRecord(context.orbitCenters)) fail('orbit centre inventory is invalid');
@@ -620,6 +620,12 @@ function requireContextFrame(value: unknown, objectId: string) {
     const orbit = requireRecord(body.orbit), parent = points.get(requireString(orbit.centerBodyId));
     const open = orbit.closed === false;
     if (summary) {
+      // A plain dot's orbit is pathless: its parent and bounding spheres, nothing else.
+      if (body.plainDot === true) {
+        if (!parent || parent.id === body.id || !vector(orbit.centerPositionM) || !orbit.centerPositionM.every((value, axis) => value === parent.positionM[axis]) ||
+            Object.keys(orbit).some(key => !['centerBodyId', 'centerPositionM', 'bounds', 'lod'].includes(key))) fail(`plain dot ${body.id} orbit summary is not pathless`);
+        continue;
+      }
       if (!parent || parent.id === body.id || !vector(orbit.centerPositionM) || !orbit.centerPositionM.every((value, axis) => value === parent.positionM[axis]) ||
           typeof orbit.vertexCount !== 'number' || !Number.isSafeInteger(orbit.vertexCount) || orbit.vertexCount < 8 || typeof orbit.fullTrail !== 'boolean' ||
           ['verticesM', 'trail', 'activeChords', 'extentChords', 'bodyVertexIndex', 'trailModel'].some(key => orbit[key] !== undefined) ||

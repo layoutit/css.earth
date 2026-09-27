@@ -1910,6 +1910,23 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   layer.destroy();
 });
 
+test('a plain dot mounts no orbit leaves: its summary orbit is pathless', () => {
+  const full = plan(1), document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const sphere = { centerM: [0, 0, 0], radiusM: 101 };
+  const summary = parsePreparedWorldContextSummary({ schema: 'cssearth-world-context-summary@1', frame: full.frame, focus: full.focus, camera: full.camera,
+    volume: full.volume, system: full.system, stars: full.stars, sky: full.sky, orbitBanks: { venus: 64 },
+    bodies: full.bodies.map(({ orbit, ...body }) => body.id === 'mercury'
+      ? { ...body, plainDot: true, orbit: { centerBodyId: 'sun', centerPositionM: [0, 0, 0], bounds: sphere, lod: { bounds: sphere } } }
+      : { ...body, orbit: { centerBodyId: 'sun', centerPositionM: [0, 0, 0], vertexCount: orbit!.vertexCount, fullTrail: orbit!.fullTrail, bounds: sphere, lod: { bounds: sphere } } }) });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: summary,
+    sprites: { sun: sprite, venus: sprite }, plainDots: { ids: ['mercury'], minimumDiameterPixels: 2 } });
+  const root = layer.root as unknown as FakeElement;
+  expect([root, ...all(root)].filter(element => element.dataset.contextOrbit !== undefined).map(element => element.dataset.contextOrbit)).toEqual(['venus']);
+  expect(layer.inspect().find(body => body.id === 'mercury')!.billboard.dataset.contextPlainDot).toBe('');
+  layer.destroy();
+});
+
 test('a plain dot needs no sprite, paints its colour and is never a pick or navigation target', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
@@ -2555,6 +2572,18 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   for (const [index, body] of decoded.bodies.entries()) {
     const truth = full.bodies[index]!.orbit;
     if (!truth) { expect(body.orbit, body.id).toBeUndefined(); continue; }
+    // A plain dot draws no path: no bank holds it, and its summary orbit is its parent and the full file's rounded spheres.
+    const pathless = summary.bodies[index]!;
+    if (pathless.plainDot) {
+      expect(summary.orbitBanks![body.id], body.id).toBeUndefined(); expect(body.orbit, body.id).toBeUndefined();
+      const { centerBodyId, centerPositionM, bounds, lod } = pathless.orbit!;
+      expect(Object.keys(pathless.orbit!).sort(), body.id).toEqual(['bounds', 'centerBodyId', 'centerPositionM', 'lod']);
+      expect([centerBodyId, centerPositionM], body.id).toEqual([truth.centerBodyId, truth.centerPositionM]);
+      for (const [rounded, exact] of [[bounds!, truth.bounds!], [lod!.bounds, truth.lod!.bounds]] as const) {
+        expect(rounded.radiusM, body.id).toBeGreaterThanOrEqual(exact.radiusM + Math.hypot(...rounded.centerM.map((value, axis) => value - exact.centerM[axis]!)));
+      }
+      continue;
+    }
     const { verticesM, bounds, lod, ...rest } = body.orbit!;
     const { verticesM: trueVertices, bounds: trueBounds, lod: trueLod, ...trueRest } = truth;
     expect(rest, body.id).toEqual(trueRest);
@@ -2575,7 +2604,7 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   }
   // Each path is its own bank, named by its body. A bank of another size, one for a body the summary does not pin, or one
   // whose body carries another's path never decodes.
-  expect(banks.size).toBe(summary.bodies.filter(body => body.orbit).length);
+  expect(banks.size).toBe(summary.bodies.filter(body => body.orbit?.vertexCount !== undefined).length);
   const earth = banks.get('earth')!;
   expect([...decodeWorldOrbitBank(summary, 'earth', earth).keys()]).toEqual(['earth']);
   expect(() => decodeWorldOrbitBank(summary, 'earth', earth.slice(0, earth.byteLength - 8))).toThrow(/its summary says/);

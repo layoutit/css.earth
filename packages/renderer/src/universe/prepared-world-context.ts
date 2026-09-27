@@ -200,7 +200,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size;visibility:hidden`;
     mover.appendChild(marker);
     root.appendChild(mover);
-    const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
+    const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit ?? null : null;
+    // A pathless orbit (a plain dot's) places and fades its body but draws nothing: it mounts no orbit leaves.
+    const drawsPath = orbit?.vertexCount !== undefined;
     const orbitRoot = host.ownerDocument.createElement('div');
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
@@ -210,15 +212,15 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (body.contextColor) orbitRoot.style.color = body.contextColor;
-    if (orbit) root.insertBefore(orbitRoot, mover);
+    if (drawsPath) root.insertBefore(orbitRoot, mover);
     const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
       ...(colour ? { color: colour } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
-    const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null);
+    const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, drawsPath);
     const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, body, sprite, locator);
-    return { index, body, sprite, unpackaged, plainDot, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, interaction,
+    return { index, body, sprite, unpackaged, plainDot, marker, mover, orbit, drawsPath, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, interaction,
       paint,
       get markerShown() { return paint.markerShown; }, get markerDiameter() { return paint.markerDiameter; },
       get billboardShown() { return paint.billboardShown; }, get center() { return paint.center; },
@@ -573,12 +575,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
         // The paint owner names the node that carries the orbit's presentation.
         const orbitPaint = entry.piecePool.presentation;
-        if (entry.orbit && orbitShown) {
+        if (entry.drawsPath && orbitShown) {
           if (orbitRenderer === 'bars' && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
           if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
           fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
-        if (entry.orbit && (mask & ContextChange.orbit)) {
+        if (entry.drawsPath && (mask & ContextChange.orbit)) {
           const orbitTransform = 'none';
           if (orbitRenderer === 'bars' && entry.orbitTransform !== orbitTransform) {
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;

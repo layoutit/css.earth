@@ -23,7 +23,7 @@ export interface PreparedContextPoint {
   readonly systemName?: string;
   /** Its catalogue discovery record, which the application reads for world visibility; opaque to the renderer. */
   readonly discovery?: Readonly<Record<string, unknown>>;
-  /** Not a map target: drawn as a plain dot, its path in its own bank (packages/bake/src/world-context/spatial-context.ts). */
+  /** Not a map target: one plain dot with no caption, ring or path. Its summary orbit is pathless (packages/bake/src/world-context/spatial-context.ts). */
   readonly plainDot?: true;
   readonly positionM: PositionM;
   readonly radiusM: number;
@@ -59,19 +59,21 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly orbit?: PreparedContextOrbit;
 }
 /** What the main thread knows about an orbit: its parent, extent and size. The
- * planner worker alone reads the path itself (`PreparedContextOrbitGeometry`). */
+ * planner worker alone reads the path itself (`PreparedContextOrbitGeometry`).
+ * A plain dot's orbit is pathless: its parent and bounding spheres, with no vertex count and no bank. */
 export interface PreparedContextOrbit {
   readonly centerBodyId: string; readonly centerPositionM: PositionM;
-  /** Path vertex count; the retained stroke pool holds two segments per vertex. */
-  readonly vertexCount: number;
-  /** Every trail weight is 1: the whole path draws at full strength. */
-  readonly fullTrail: boolean;
+  /** Path vertex count; the retained stroke pool holds two segments per vertex. Absent on a pathless orbit. */
+  readonly vertexCount?: number;
+  /** Every trail weight is 1: the whole path draws at full strength. Absent on a pathless orbit. */
+  readonly fullTrail?: boolean;
   readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number };
   readonly lod?: { readonly bounds: { readonly centerM: PositionM; readonly radiusM: number } };
   readonly closed?: false; readonly displayExtentAu?: number;
 }
 /** An orbit's path as typed arrays: the planner worker reads them straight from the binary orbit bank. */
 export interface PreparedContextOrbitGeometry extends PreparedContextOrbit {
+  readonly vertexCount: number; readonly fullTrail: boolean;
   /** Vertices as consecutive x, y, z metres. */
   readonly verticesM: Float64Array; readonly trail: Float64Array;
   readonly activeChords?: Uint32Array; readonly extentChords?: Uint32Array; readonly lod?: PreparedOrbitLod;
@@ -456,6 +458,8 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap
   const orbits = new Map([...banks].flatMap(([id, bytes]) => [...decodeWorldOrbitBank(plan, id, bytes)]));
   const bodies = plan.bodies.map(body => {
     if (!body.orbit) return body as PreparedContextGeometryBody;
+    // A plain dot's orbit is pathless and no bank holds it; the decoded geometry carries no orbit for it.
+    if (body.plainDot) { const { orbit: _pathless, ...placed } = body; return Object.freeze(placed); }
     const orbit = orbits.get(body.id);
     if (!orbit) throw new TypeError(`${body.id}: no bank holds its orbit.`);
     return Object.freeze({ ...body, orbit });
@@ -463,7 +467,13 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap
   const { orbitBanks: _pins, ...rest } = plan;
   return Object.freeze({ ...rest, schema: 'cssearth-world-context@1', bodies: Object.freeze(bodies) });
 }
-function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
+function parseSummaryOrbit(value: unknown, id: string, plainDot: boolean): PreparedContextOrbit {
+  if (plainDot) {
+    const orbit = record(value, `plain dot ${id} orbit`, ['centerBodyId', 'centerPositionM', 'bounds', 'lod']);
+    return Object.freeze({ centerBodyId: text(orbit.centerBodyId, `plain dot ${id} orbit parent`), centerPositionM: vector(orbit.centerPositionM, `plain dot ${id} orbit centre`),
+      bounds: sphere(orbit.bounds, `plain dot ${id} orbit bounds`),
+      lod: Object.freeze({ bounds: sphere(record(orbit.lod, `plain dot ${id} orbit detail levels`, ['bounds']).bounds, `plain dot ${id} orbit detail bounds`) }) });
+  }
   const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
   const vertexCount = finite(orbit.vertexCount, 'orbit vertex count');
   if (!Number.isSafeInteger(vertexCount) || vertexCount < 8) throw new TypeError('Context orbit must carry at least eight prepared vertices.');
@@ -514,7 +524,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
       ...(input.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(input.orbitsWithinM, `context body ${String(input.id)} orbit range`) }),
       ...(input.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}) };
     if (input.orbit === undefined) return Object.freeze(body);
-    if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
+    if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit, body.id, body.plainDot === true) });
     return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focus.id, renderedIds, body.id) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
@@ -554,9 +564,9 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   }
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
-  // Every orbit's bank is pinned, and every pin holds an orbit.
+  // Every path's bank is pinned, and every pin holds a path; a pathless orbit (a plain dot's) has none.
   if (orbitBanks) {
-    const banks = new Set(bodies.flatMap(body => body.orbit ? [body.id] : []));
+    const banks = new Set(bodies.flatMap(body => body.orbit?.vertexCount !== undefined ? [body.id] : []));
     for (const bank of banks) if (orbitBanks[bank] === undefined) throw new TypeError(`The world context summary pins no orbit bank ${bank}.`);
     for (const id of Object.keys(orbitBanks)) if (!banks.has(id)) throw new TypeError(`Orbit bank ${id} holds no orbit.`);
   }

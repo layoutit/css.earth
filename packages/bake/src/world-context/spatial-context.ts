@@ -39,7 +39,8 @@ export interface WorldContextPointSource {
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
  * (`contextColour` in @cssearth/objects). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
 /** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
- * dot, and the planner reads its path only when it is named. */
+ * dot, one element with no caption, ring or path. The full context keeps its path; the browser's summary keeps only the
+ * orbit's parent and bounding spheres, which fade the dot with its orbit's size, and no bank carries its path. */
 type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
@@ -300,6 +301,8 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
+    // A plain dot never draws its path: it keeps its parent and the spheres that fade it with its orbit's size, and no path.
+    if (body.plainDot) return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }) }) });
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
       bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
   })) });
@@ -384,9 +387,10 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
 }
 /** One orbit bank per path, named by its body: the planner worker reads a path when a frame would draw it, so a page
  * downloads only the paths its views draw. A bank per orbit centre carried every path around that centre: the Sun view
- * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path). */
+ * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path).
+ * A plain dot draws no path, so it has no bank. */
 export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
-  return prepared.bodies.filter(body => body.orbit).map(body => body.id).sort()
+  return prepared.bodies.filter(body => body.orbit && !body.plainDot).map(body => body.id).sort()
     .map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.id === id) }));
 }
 export interface PreparedOrbitLodLevel {

@@ -52,7 +52,7 @@ scope.onmessage = ({ data }) => {
       const source = data.source;
       const plan = parsePreparedWorldContextSummary(data.plan);
       banks = { plan, source, requested: new Set(),
-        bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) };
+        bankOf: new Map(plan.bodies.flatMap(body => body.orbit?.vertexCount !== undefined ? [[body.id, body.id] as const] : [])) };
       initialise(plan, data.annotationPriorities, data.annotationLandmarks);
     } else if ('plan' in data) {
       banks = null;

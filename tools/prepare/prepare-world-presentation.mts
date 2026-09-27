@@ -50,11 +50,13 @@ export function isDefaultContextFeature(object: { id: string; classification: st
 
 export function prepareWorldPresentation() {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
+  // A plain dot's orbit is pathless in the world summary: there is no path to hide.
+  const plainDots = new Set(APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.plainDot).map(body => body.id));
   return {
     schema: 'cssearth-world-presentation@1',
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
-    hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
+    hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object) && !plainDots.has(object.id)).map(object => object.id), ...minor],
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },

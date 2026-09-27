@@ -680,7 +680,7 @@ test('host detail defers satellite paths until each planetary system is opened',
   }
 });
 
-test('a minor path that cannot show is never requested; highlighting it requests its bank', async () => {
+test('a plain dot never requests a path, even highlighted: its orbit is pathless', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
   const points = [summary.focus, ...summary.bodies], dots = new Set(summary.bodies.filter(body => body.plainDot).map(body => body.id));
@@ -693,10 +693,11 @@ test('a minor path that cannot show is never requested; highlighting it requests
   const wanted = planner.takeWantedOrbits();
   expect(wanted).toContain('earth');
   expect(wanted.filter(id => dots.has(id))).toEqual([]);
-  // Highlighting the asteroids names them, so their paths can show and their banks are read.
+  // Highlighting the asteroids can name them; a plain dot is still measured by its bounds and never reads a path.
   current.bodies.forEach((body, index) => { body.highlighted = dots.has(points[index]!.id); });
   planner(current);
-  expect(planner.takeWantedOrbits().some(id => dots.has(id))).toBe(true);
+  expect(planner.takeWantedOrbits().filter(id => dots.has(id))).toEqual([]);
+  expect(summary.bodies.filter(body => body.plainDot).every(body => body.orbit?.vertexCount === undefined && summary.orbitBanks![body.id] === undefined)).toBe(true);
 });
 
 test('destination orbit fading completes during approach, before the detail selection changes', () => {
