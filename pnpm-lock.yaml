@@ -93,6 +93,9 @@ importers:
       dependency-cruiser:
         specifier: 18.4.0
         version: 18.4.0
+      enhanced-resolve:
+        specifier: 5.25.1
+        version: 5.25.1
       esbuild:
         specifier: 0.27.7
         version: 0.27.7
@@ -141,6 +144,9 @@ importers:
       three:
         specifier: 0.180.0
         version: 0.180.0
+      tsconfig-paths-webpack-plugin:
+        specifier: 4.2.0
+        version: 4.2.0
       tsx:
         specifier: 4.23.15
         version: 4.23.15
