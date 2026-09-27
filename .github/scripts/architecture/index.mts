@@ -13,7 +13,7 @@ import { pathToFileURL } from 'node:url';
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const root = resolve(import.meta.dirname, '../../..'), [command, ...rest] = process.argv.slice(2);
-  const usage = 'Usage: node tools/ci/architecture/index.mts check [--update-baseline] | map';
+  const usage = 'Usage: node .github/scripts/architecture/index.mts check [--update-baseline] | map';
   const update = rest.length === 1 && rest[0] === '--update-baseline';
   if (!(command === 'map' && rest.length === 0) && !(command === 'check' && (rest.length === 0 || update))) {
     console.error(usage); process.exitCode = 2;

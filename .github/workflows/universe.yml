@@ -158,7 +158,7 @@ jobs:
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node .github/scripts/ci/build-ci.mts lint
       - name: Check the architecture against its baseline
-        # Fails when a change adds a folder-cycle edge or a forbidden import (tools/ci/architecture/rules.mts) that
+        # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # tools/ci/architecture/baseline.json does not record. It reads every source file this sparse tree keeps, so a
         # missing one stops it as incomplete rather than passing. About three seconds.
         run: pnpm check:architecture
@@ -192,7 +192,7 @@ jobs:
         # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
-          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" "tools/ci/*.test.mts" "tools/ci/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" "tools/ci/*.test.mts" ".github/scripts/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
             "src/platform/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 
   typecheck:
