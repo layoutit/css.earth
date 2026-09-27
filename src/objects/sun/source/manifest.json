@@ -1447,7 +1447,7 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
+      "origin": "Repository-authored object content: NASA Science facts with citations, dataset descriptions, legends and resources",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -1526,6 +1526,58 @@
           }
         ]
       }
+    },
+    {
+      "id": "sdo-aia-193-cr2311-synoptic-map",
+      "path": "sdo/synoptic/AIA0193/CR2311.fits",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0193/CR2311.fits",
+      "credit": "NASA/SDO and the AIA science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "NASA SDO AIA 193 Å Carrington Rotation 2311 synoptic FITS map, downloaded unchanged",
+      "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "sdo",
+            "missionId": "sdo",
+            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0193/CR2311.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-aia-193-cr2311-synoptic-map",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sun-overview-reference",
+      "path": "presentation/overview.json",
+      "origin": "Repository-authored article reference for the Sun overview",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
     }
   ],
   "generatedIntermediates": [],

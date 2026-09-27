@@ -146,3 +146,14 @@ test('a plain Uint8Array, even one at an offset into a larger buffer, reads exac
     assert.deepEqual([...readFitsImage(shifted.subarray(1)).values], values);
   }
 });
+
+test('an unterminated wavelength label preserves original cards without weakening structural parsing', () => {
+  const record = "WAVELNTH= '193 = Fe XII, XXIV".padEnd(80);
+  const image = readFitsImage(imageFixture(-64, [0, 1000, NaN, 2.5], [record]));
+  assert.equal(image.header.WAVELNTH, '193 = Fe XII, XXIV');
+  assert.ok(image.cards.includes(record));
+  assert.match(image.warnings[0]!, /Unterminated WAVELNTH/);
+  assert.deepEqual([...image.values], [0, 1000, NaN, 2.5]);
+  for (const [key, value] of [['OBJECT', "'193 = Fe XII, XXIV"], ['BSCALE', "'2"], ['WAVELNTH', "'193 / ambiguous"], ['WAVELNTH', "'193 = Fe XII&"]])
+    assert.throws(() => fitsCardValue(card(key!, value!)), /Unterminated/);
+});

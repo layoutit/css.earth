@@ -1,0 +1,35 @@
+{
+  "id": "source-sun-sdo-aia-193-cr2311-synoptic-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Sun · sdo aia 193 cr2311 synoptic map",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0193/CR2311.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/sun/source/manifest.json",
+      "locator": "/inputs/49"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/SDO and the AIA science team",
+      "scope": "The sdo aia 193 cr2311 synoptic map input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA media usage guidelines and SDO data use policy",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
