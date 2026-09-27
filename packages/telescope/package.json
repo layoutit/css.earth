@@ -44,7 +44,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@cssearth/core": "workspace:*"
+    "@cssearth/core": "workspace:*",
+    "@cssearth/fits": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

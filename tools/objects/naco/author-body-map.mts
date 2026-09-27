@@ -20,7 +20,7 @@ import { productRecordPath, type ProductInput, type ProductSoftware } from '@css
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { esoHeader, type EsoHeader } from '../interferometry/eso-pipeline.mts';
+import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
 import { readProgram } from './archive.mts';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 

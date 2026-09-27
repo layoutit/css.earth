@@ -20,7 +20,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureCoShift, MINIMUM_CO_CORRELATION } from './co-wavelength.mts';
-import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from './eso-pipeline.mts';
+import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe, type RawRow } from '@cssearth/telescope/node';
 import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn, writeCell } from '@cssearth/bake/objects/raster';
 import { toolchainPath } from './toolchain.mts';
 

@@ -454,6 +454,9 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
+      '@cssearth/fits':
+        specifier: workspace:*
+        version: link:../fits
     devDependencies:
       '@types/node':
         specifier: ^26.4.0

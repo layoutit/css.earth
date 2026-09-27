@@ -6,8 +6,8 @@ import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseAssociationTree } from '../interferometry/eso-associations.mts';
-import { parseRawTable } from '../interferometry/eso-pipeline.mts';
+import { parseAssociationTree } from '@cssearth/telescope/node';
+import { parseRawTable } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord } from '@cssearth/telescope/node';
 import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles, type NacoFrame, type NacoProgram } from './archive.mts';
