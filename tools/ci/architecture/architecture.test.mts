@@ -114,19 +114,50 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   const violations = evaluateRules(graph(
     ['packages/p/src/a.ts', 'src/platform/x.mts'], ['packages/p/src/a.test.ts', 'tools/helper.mts'],
     ['src/renderers/css/x.ts', 'tools/prepared/y.mts'], ['src/renderers/css/x.ts', 'tools/prepared/y.mts'],
-    ['src/renderers/css/preparation/z.ts', 'tools/objects/w.mts'], ['site/a.mts', 'src/preparation/stars/s.ts'],
+    ['site/a.mts', 'packages/bake/src/stars/index.ts'], ['site/b.mts', 'tools/prepared/y.mts', 'type'],
+    ['packages/renderer/src/stars/bank.ts', 'packages/bake/src/stars/index.ts', 'type'], ['packages/renderer/src/stars/bank.test.ts', 'packages/bake/src/stars/index.ts'],
+    ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
     ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
     ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/performance/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
   ));
   const pairs = (rule: string) => (violations.get(rule) ?? []).map(item => `${item.from}>${item.to}`);
   assert.deepEqual(pairs('packages-import-only-packages'), ['packages/p/src/a.test.ts>tools/helper.mts', 'packages/p/src/a.ts>src/platform/x.mts']);
-  assert.deepEqual(pairs('nothing-imports-applications'), ['src/renderers/css/preparation/z.ts>tools/objects/w.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts', 'tools/objects/o.mts>site/objects.mts']);
-  assert.deepEqual(pairs('runtime-imports-no-preparation'), ['site/a.mts>src/preparation/stars/s.ts', 'src/renderers/css/x.ts>tools/prepared/y.mts'],
-    'renderer preparation code is preparation, not runtime');
+  assert.deepEqual(pairs('nothing-imports-applications'), ['site/b.mts>tools/prepared/y.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts', 'tools/objects/o.mts>site/objects.mts']);
+  assert.deepEqual(pairs('runtime-imports-no-preparation'), [
+    'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts', 'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>tools/prepared/y.mts',
+  ], 'the renderer package is runtime, type-only imports count, and its tests may use bake');
   assert.deepEqual(pairs('nothing-imports-prepare-scripts'), ['tools/objects/o.mts>tools/prepare/cli/prepare-x.mts'],
     'a prepare entry is never imported; its library beside it may be');
   assert.deepEqual([...violations.keys()], LAYER_RULES.map(rule => rule.id));
+});
+
+test('packages/telescope never imports @cssearth/bake: production, tests and type-only imports', () => {
+  const violations = evaluateRules(graph(
+    ['packages/telescope/src/archive.ts', 'packages/bake/src/raster/index.ts'],
+    ['packages/telescope/src/archive.test.ts', 'packages/bake/src/volume/index.ts'],
+    ['packages/telescope/src/node/fetch.ts', 'packages/bake/src/objects/color/index.ts', 'type'],
+    ['packages/telescope/src/archive.ts', 'packages/core/src/index.ts'], ['packages/telescope-cli/src/run.mts', 'packages/bake/src/raster/index.ts'],
+    ['packages/bake/src/raster/index.ts', 'packages/telescope/src/index.ts'],
+  ));
+  assert.deepEqual((violations.get('telescope-imports-no-bake') ?? []).map(item => `${item.from}>${item.to}`), [
+    'packages/telescope/src/archive.test.ts>packages/bake/src/volume/index.ts',
+    'packages/telescope/src/archive.ts>packages/bake/src/raster/index.ts',
+    'packages/telescope/src/node/fetch.ts>packages/bake/src/objects/color/index.ts',
+  ], 'the telescope CLI and bake itself may use the telescope library');
+});
+
+test('bake nebula/ and objects/ never import each other, in either direction', () => {
+  const violations = evaluateRules(graph(
+    ['packages/bake/src/nebula/frame.ts', 'packages/bake/src/objects/color/index.ts'],
+    ['packages/bake/src/objects/raster/lane.test.ts', 'packages/bake/src/nebula/index.ts', 'type'],
+    ['packages/bake/src/nebula/index.ts', 'packages/bake/src/nebula/objects.ts'], ['packages/bake/src/nebula/frame.ts', 'packages/objects/src/index.ts'],
+    ['packages/bake/src/nebula/frame.ts', 'packages/bake/src/volume/index.ts'], ['packages/bake/src/objects/color/index.ts', 'packages/bake/src/raster/index.ts'],
+  ));
+  assert.deepEqual((violations.get('bake-nebula-and-objects-independent') ?? []).map(item => `${item.from}>${item.to}`), [
+    'packages/bake/src/nebula/frame.ts>packages/bake/src/objects/color/index.ts',
+    'packages/bake/src/objects/raster/lane.test.ts>packages/bake/src/nebula/index.ts',
+  ], 'nebula/objects.ts and the @cssearth/objects package are not bake objects/');
 });
 
 test('the ratchet passes the baseline tree and fails only when something gets worse', () => {

@@ -16,8 +16,11 @@ export interface Violation { readonly from: string; readonly to: string }
 const under = (path: string, ...prefixes: readonly string[]) => prefixes.some(prefix => path.startsWith(prefix));
 const topLevel = (path: string) => path.includes('/') ? path.slice(0, path.indexOf('/')) : '';
 
-/** Code that bakes assets ahead of runtime. `packages/bake` is the planned home (items H, I, J). */
-export const PREPARATION_CODE = ['tools/', 'src/preparation/', 'src/renderers/css/preparation/', 'packages/bake/'] as const;
+/** Code that bakes assets ahead of runtime: `tools/` and `@cssearth/bake` (items H, I, J moved the rest there). */
+export const PREPARATION_CODE = ['tools/', 'packages/bake/'] as const;
+
+/** The runtime: the site and the CSS renderer package's sources. */
+export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
  * (`astro.config.mts` wires `tools/performance` and `tools/prepare` into the Astro build). Astro pages
@@ -25,6 +28,8 @@ export const PREPARATION_CODE = ['tools/', 'src/preparation/', 'src/renderers/cs
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
 export const APPLICATION_TREES = ['tools', 'site', 'labs'] as const;
+
+const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
 
 export const LAYER_RULES: readonly LayerRule[] = [
   {
@@ -41,14 +46,25 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'runtime-imports-no-preparation',
-    description: 'src/renderers/ and site/ must not import tools/ or preparation code (type-only imports count)',
-    forbids: (from, to) => (from.startsWith('site/') || (from.startsWith('src/renderers/') && !from.startsWith('src/renderers/css/preparation/')))
-      && under(to, ...PREPARATION_CODE),
+    description: 'site/ and packages/renderer/src/ must not import tools/ or @cssearth/bake (type-only imports count; tests may)',
+    forbids: (from, to) => under(from, ...RUNTIME_CODE) && under(to, ...PREPARATION_CODE),
   },
   {
     id: 'nothing-imports-prepare-scripts',
     description: 'tools/prepare/cli/ holds the prepare entry scripts: nothing imports them, including other entries (type-only imports count); the libraries beside them in tools/prepare/ may be imported',
     forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
+  },
+  {
+    id: 'telescope-imports-no-bake',
+    description: 'packages/telescope must never import @cssearth/bake: acquisition stays below preparation (tests and type-only imports count)',
+    forbids: (from, to) => from.startsWith('packages/telescope/') && to.startsWith('packages/bake/'),
+    includeTests: true,
+  },
+  {
+    id: 'bake-nebula-and-objects-independent',
+    description: 'in @cssearth/bake, nebula/ and objects/ never import each other, in either direction (tests and type-only imports count)',
+    forbids: (from, to) => (from.startsWith(BAKE_NEBULA) && to.startsWith(BAKE_OBJECTS)) || (from.startsWith(BAKE_OBJECTS) && to.startsWith(BAKE_NEBULA)),
+    includeTests: true,
   },
 ];
 
