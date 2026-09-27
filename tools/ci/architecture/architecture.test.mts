@@ -201,13 +201,15 @@ test('the ratchet passes the baseline tree and fails only when something gets wo
   assert.deepEqual(fixed.rules.find(rule => rule.rule === 'nothing-imports-applications')?.removed, [{ from: 'tools/objects/o.mts', to: 'site/objects.mts' }]);
 });
 
-test('cycle growth printed after new forbidden imports is marked as their consequence', () => {
+test('cycle growth printed after new forbidden imports is marked as possibly following from them, not caused by them', () => {
   const base = measure(graph(...TANGLED));
   const baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(base))));
   const both = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts'], ['src/a/one.mts', 'tools/x.mts']))));
-  assert.match(both, /tools\/x\.mts\n {2}The cycle growth below is a consequence of the imports above[^\n]*\n {2}cycle-closing folder edge src\/b -> src\/a/u);
+  // Here the new forbidden import (src/a -> tools/x) does not cause the new cycle edge (src/b -> src/a), so the line must not claim it does.
+  assert.match(both, /tools\/x\.mts\n {2}The cycle growth below may follow from the forbidden imports above[^\n]*\n {2}cycle-closing folder edge src\/b -> src\/a/u);
+  assert.doesNotMatch(both, /consequence|caused by/u);
   const cycleOnly = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts']))));
-  assert.doesNotMatch(cycleOnly, /consequence/u, 'nothing above to be a consequence of');
+  assert.doesNotMatch(cycleOnly, /may follow from/u, 'no forbidden import above to point at');
 });
 
 test('external JSON is validated before use', () => {

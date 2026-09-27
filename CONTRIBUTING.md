@@ -187,8 +187,9 @@ documentation audits. Skip it once with `git push --no-verify` or
 
 `pnpm check:architecture` shows how your change moves the folder graph: which
 folders import which. CI runs it in the Contract lint job, so `pnpm check:pr`
-runs it too. It resolves every import in the source trees, including `.astro`
-files, root config files and files you have not added to Git yet. An import of
+(alias `pnpm check:ci`) runs it too. It resolves every import in the source
+trees, including `.astro` files, root config files and files you have not added
+to Git yet. An import of
 a shared package counts as an import of the source file its entry is built
 from. It groups the files into folders and fails when a change adds:
 

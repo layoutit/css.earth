@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Layer rules and the folder dependency map. CI runs the check in the Contract lint job, so `pnpm check:ci` does too.
+/** Layer rules and the folder dependency map. CI runs the check in the Contract lint job, so `pnpm check:pr` (alias `pnpm check:ci`) runs it too.
  *
  *   pnpm check:architecture                     fail if a change adds a folder cycle edge or a forbidden import
  *   pnpm check:architecture --update-baseline   record the current state as tools/ci/architecture/baseline.json
