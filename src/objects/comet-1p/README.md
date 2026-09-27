@@ -60,7 +60,7 @@ node --test tools/contract/inspect-halley-giotto.test.mts tools/objects/comet-1p
 pnpm -s telescope papers comet-1p --instrument Giotto --json --out output/halley-papers
 ```
 
-Omit `--download` to rerun intake from its local cache. Measured source identities are retained in the diagnostic reports, not imposed as manifest pins. The 13 focused tests, tools and preparation typechecks, and changed-file lint passed with this audit's code and inputs. Runtime/browser/delivery checks were not repeated because no runtime assets or interactions changed; older browser evidence remains tied to its original revisions below.
+Omit `--download` to rerun intake from its local cache. Measured source identities are retained in the diagnostic reports, not imposed as manifest pins. The 13 focused tests, tools and preparation typechecks, and changed-file lint passed with the code and inputs in [audit revision 09c569a8b0](https://github.com/layoutit/css.earth/commit/09c569a8b0832efa4bc0186610480f49a74eebfc); the subsequent ledger update changes documentation only. Halley’s 27 ledger entries parse successfully, and the investigation-report tests and body-reference check pass. The global investigation-index rebuild stops at the empty ab-pic ledger, identical at base revision `7fcfc08cd8`; its generated index is therefore not refreshed here. Runtime/browser/delivery checks were not repeated because no runtime assets or interactions changed; older browser evidence remains tied to its original revisions below.
 
 ### Encounter mosaic
 
