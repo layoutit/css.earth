@@ -16,8 +16,9 @@ export interface Violation { readonly from: string; readonly to: string }
 const under = (path: string, ...prefixes: readonly string[]) => prefixes.some(prefix => path.startsWith(prefix));
 const topLevel = (path: string) => path.includes('/') ? path.slice(0, path.indexOf('/')) : '';
 
-/** Code that bakes assets ahead of runtime: `tools/` and `@cssearth/bake` (items H, I, J moved the rest there). */
-export const PREPARATION_CODE = ['tools/', 'packages/bake/'] as const;
+/** Code that works ahead of runtime: `tools/`, `@cssearth/bake` (items H, I, J moved the rest there) and the telescope command
+ * `@cssearth/telescope-cli`, whose archive reductions and programs moved out of `tools/objects/`. */
+export const PREPARATION_CODE = ['tools/', 'packages/bake/', 'packages/telescope-cli/'] as const;
 
 /** The runtime: the site and the CSS renderer package's sources. */
 export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
@@ -46,7 +47,7 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'runtime-imports-no-preparation',
-    description: 'site/ and packages/renderer/src/ must not import tools/ or @cssearth/bake (type-only imports count; tests may)',
+    description: 'site/ and packages/renderer/src/ must not import tools/, @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
     forbids: (from, to) => under(from, ...RUNTIME_CODE) && under(to, ...PREPARATION_CODE),
   },
   {
