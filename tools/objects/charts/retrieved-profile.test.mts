@@ -3,6 +3,8 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseRetrievedProfile, readProfileTable, profileWindow, readRetrievedProfile, renderRetrievedProfile } from './retrieved-profile.mts';
+import { prepareObjectProvenance } from '../provenance.mts';
+import { productSourceIds } from '../../../src/platform/object-provenance.mts';
 
 const root = resolve(import.meta.dirname, '../../..');
 const source = resolve(root, 'src/objects/wasp-18b/source');
@@ -53,9 +55,17 @@ test('the source tables agree with Figure 4 at independently read pressure and t
 });
 
 test('rejects unsafe recipes and clipped uncertainties', async () => {
-    await assert.rejects(readRetrievedProfile(source, { ...recipe, temperature: { minimum: 2800, maximum: 3500, ticks: [{ value: 2800, label: '2800' }, { value: 3500, label: '3500' }] } }), /clip/);
-    for (const path of ['../outside', '/absolute', 'a\\b', '']) assert.throws(() => parseRetrievedProfile({ ...recipe, series: [{ ...recipe.series[0], path }] }), /path/);
-    assert.throws(() => parseRetrievedProfile({ ...recipe, series: [{ ...recipe.series[0], pressureUnit: 'mbar' }] }), /unit/);
-    assert.throws(() => parseRetrievedProfile({ ...recipe, pressure: { ...recipe.pressure, minimum: 0 } }), /positive/);
-    assert.throws(() => readProfileTable('0 0 0 0 0 0\n', recipe.series[0]!), /pressure/);
+  await assert.rejects(readRetrievedProfile(source, { ...recipe, temperature: { minimum: 2800, maximum: 3500, ticks: [{ value: 2800, label: '2800' }, { value: 3500, label: '3500' }] } }), /clip/);
+  for (const path of ['../outside', '/absolute', 'a\\b', '']) assert.throws(() => parseRetrievedProfile({ ...recipe, series: [{ ...recipe.series[0], path }] }), /path/);
+  assert.throws(() => parseRetrievedProfile({ ...recipe, series: [{ ...recipe.series[0], pressureUnit: 'mbar' }] }), /unit/);
+  assert.throws(() => parseRetrievedProfile({ ...recipe, pressure: { ...recipe.pressure, minimum: 0 } }), /positive/);
+  assert.throws(() => readProfileTable('0 0 0 0 0 0\n', recipe.series[0]!), /pressure/);
+});
+
+test('generated chart provenance binds all three deposited tables', async () => {
+  const provenance = await prepareObjectProvenance({ objectDirectory: resolve(source, '..'),
+    publicDirectory: resolve(root, 'public/scenes/wasp-18b'), basis: 'recovered', write: false });
+  assert.deepEqual(productSourceIds(provenance, 'chart:0').sort(), [
+    'wasp-18b-hydra-dayside-profile', 'wasp-18b-hydra-hotspot-profile', 'wasp-18b-pyratbay-hotspot-profile',
+  ]);
 });
