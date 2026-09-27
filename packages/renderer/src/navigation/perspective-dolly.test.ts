@@ -210,10 +210,13 @@ it('stops the zoom where one CSS pixel shows the least surface arc the imagery s
 });
 
 
-it('uses prepared proxy resolution consistently across system and detail views', () => {
+it('uses the prepared geometry threshold before a context icon fills a body view', () => {
   const plan = scene.camera.levelOfDetail;
-  expect(levelOfDetailFor(plan, 37, 240).stage).toBe('billboard');
-  expect(levelOfDetailFor(plan, 120, 240).proxyOpacity).toBe(1);
-  expect(levelOfDetailFor(plan, 180, 240).proxyOpacity).toBe(.5);
-  expect(levelOfDetailFor(plan, 240, 240).proxyOpacity).toBe(0);
+  expect(levelOfDetailFor(plan, 13).stage).toBe('billboard');
+  expect(levelOfDetailFor(plan, 14).proxyOpacity).toBe(1);
+  expect(levelOfDetailFor(plan, 17).proxyOpacity).toBe(.5);
+  expect(levelOfDetailFor(plan, 20).proxyOpacity).toBe(0);
+  // Saturn's 900px context image previously overrode the threshold to 450px.
+  expect(levelOfDetailFor(plan, 37).stage).toBe('geometry');
+  expect(levelOfDetailFor(plan, 439).proxyOpacity).toBe(0);
 });
