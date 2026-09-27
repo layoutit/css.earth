@@ -302,7 +302,7 @@
       "enlarge": 1,
       "product": {
         "command": "node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc",
-        "definition": "tools/objects/juno/programs/europa-pj45.json"
+        "definition": "packages/telescope-cli/src/archives/juno/programs/europa-pj45.json"
       },
       "note": "This is the archive's calibrated push-frame image as the instrument records it, not a cast or projected picture: the JunoCam toolkit's cast stage has not been run in this worktree. The window keeps 640 of the 1648 columns, so the strips are cut at both ends."
     }

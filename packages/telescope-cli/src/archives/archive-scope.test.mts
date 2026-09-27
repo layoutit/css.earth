@@ -52,8 +52,7 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
   },
   'juno/archive.mts': {
     '8779ece9a511118801da540fa3fe5c241828d6b4e47f333f0d3c5e9b5efb2366': ['juno'], // PDS Juno volume root
-    'eb255fa0a802c6b325ea22e1254d7c62f4c07f43058e6d4dc5bfa8ed02821ec5': ['juno'], // pinned programs directory
-    'a50128d59f482a86171394eb7a2d1824df7c5d2788c4b2cbc5600ead757d5fd9': ['juno'], // kernel bank name
+    'a50128d59f482a86171394eb7a2d1824df7c5d2788c4b2cbc5600ead757d5fd9': ['juno'], // kernel bank name; the archive whose programs are read
   },
   'juno/measure.mts': {
     '8182e3e46af5bec6923f830ea7dde2dd8de3ada47d1f281bc71fbe7ea53689c4': ['juno'], // own path in the software digest
