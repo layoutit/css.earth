@@ -12,3 +12,5 @@ export * from './galactic-frame.ts';
 export * from './astrometric-sky-registration.ts';
 export * from './solar-system-scene.ts';
 export * from './focused-camera.ts';
+export * from './world-navigation-sources.ts';
+export * from './camera-source.ts';

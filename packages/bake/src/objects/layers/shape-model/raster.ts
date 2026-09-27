@@ -1,12 +1,12 @@
-import type { ShapeModelConfig } from '@cssearth/bake/objects/layers/shape-model';
+import type { ShapeModelConfig } from './source.ts';
 import sharp from 'sharp';
-import { lambertAttenuationAtlas } from '@cssearth/bake/objects/geometry';
+import { lambertAttenuationAtlas } from '../../geometry/index.ts';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
-import { loadDiscIntegratedColor } from '@cssearth/bake/objects/color';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
-import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
+import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster, packProjectiveSurfaceRaster } from '../../../scene/index.ts';
+import { loadDiscIntegratedColor } from '../../color/index.ts';
+import { readCie1931ColorMatching } from '../../sources/index.ts';
+import { prepareGlbSurface } from './glb-surface.ts';
 interface OutputDirectories {publicDirectory:string;publicBase:string;}
 
 function uniformSurface(width:number, height:number, [red, green, blue]:readonly number[]) {

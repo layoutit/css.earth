@@ -1002,11 +1002,11 @@
     {
       "id": "io-jiram-m-night-recipe",
       "path": "science/jiram/recipe.json",
-      "origin": "Repository-authored reduction recipe pinning 59 Juno JIRAM imager RDR frames (JNO-J-JIRAM-3-RDR-V1.0) by volume, product id and SHA-256, and the Juno kernel-bank files each visit uses",
+      "origin": "Repository-authored reduction recipe selecting 90 Juno JIRAM RDR frames on six visits by volume and product id, with matching raw EDR detector checks on the 31 close-pass frames.",
       "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors",
       "license": "Public NASA mission data; repository-authored recipe",
-      "acquisition": "Frames listed by the PDS volume indexes, screened by Io range and by the SPICE camera, restored by node tools/objects/juno/jiram-mosaic.mts --fetch and checked against their pins.",
-      "redistribution": "The recipe and the reduced map are kept in Git; the frames are fetched from the archive by pin.",
+      "acquisition": "Native products and geometry kernels are named by the recipe. Run node tools/objects/juno/jiram-mosaic.mts src/objects/io/source/science/jiram/recipe.json --frames output/jiram/frames --fetch. Labels validate product identity, layout and matched EDR exposures; the measured receipt records byte identities.",
+      "redistribution": "Recipe, labels and measured receipt are tracked; original frames and generated map bytes are restored from the archive or source cache.",
       "consumers": [
         "volcanic-heat"
       ],
@@ -1016,7 +1016,7 @@
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Every frame pinned in science/jiram/recipe.json by product id and SHA-256."
+            "evidence": "science/jiram/recipe.json lists native product ids, volumes, kernel files and detector limits; science/jiram/receipt.json records the measured inputs and registration."
           }
         ]
       }
@@ -1025,8 +1025,8 @@
   "generatedIntermediates": [
     {
       "id": "io-jiram-m-night-map",
-      "path": "science/jiram/io-jiram-m-night.IMG",
-      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "path": "science/jiram/io-jiram-m-night-2023-background.IMG",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-m-night-2023-background.IMG",
       "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
       "license": "Public NASA mission data",
       "consumers": [
@@ -1045,14 +1045,14 @@
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
           }
         ]
       }
     },
     {
       "id": "io-jiram-m-night-label",
-      "path": "science/jiram/io-jiram-m-night.LBL",
+      "path": "science/jiram/io-jiram-m-night-2023-background.LBL",
       "origin": "https://atmos.nmsu.edu/PDS/data/",
       "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
       "license": "Public NASA mission data",
@@ -1072,7 +1072,7 @@
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
           }
         ]
       }
@@ -1099,7 +1099,7 @@
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
           }
         ]
       }

@@ -3,9 +3,9 @@ const parseRingProfile = shape({textureSize:number,bands:array(shape({id:text,se
 export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { prepareRingLeaves } from '@cssearth/bake/objects/layers/shape-model';
-import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
-import { publishedImageSize } from '../shape-model/raster.mts';
+import { prepareRingLeaves } from '../shape-model/index.ts';
+import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
+import { publishedImageSize } from '../shape-model/index.ts';
 
 /** Ring geometry and display assumptions are authored by the body. */
 export function validateTerrestrialRings(input: unknown, referenceRadiusKm: number): asserts input is TerrestrialRings | undefined {

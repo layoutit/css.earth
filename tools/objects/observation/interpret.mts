@@ -22,7 +22,7 @@ import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSou
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
@@ -503,7 +503,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('./gravity-darkening.mts');
           const { parseCieTable } = await import('@cssearth/bake/objects/color');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
-          const { readCie1931ColorMatching } = await import('../../references/reference-bank.mts');
+          const { readCie1931ColorMatching } = await import('@cssearth/bake/objects/sources');
           const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
           return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record), equatorK: surfaceTemperature(record, Math.PI / 2) };
         })();

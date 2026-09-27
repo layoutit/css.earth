@@ -1,14 +1,15 @@
 import { resolve } from 'node:path';
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
-import { readJsonSource } from '../../sources/source-values.mts';
+import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '@cssearth/bake/presentation';
-import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.mts';
+import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { createAtmospherePreparation } from './atmosphere.mts';
+import { createAtmospherePreparation } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { preparePagedEllipsoidScene } from './scene.mts';
-import { prepareEllipsoidAttitude } from './attitude.mts';
+import { prepareEllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const json = readJsonSource;
 
@@ -34,7 +35,7 @@ export async function readPagedEllipsoid(objectDirectory: string) {
   // The body sits in its ecliptic presentation frame; the surface map the feature labels use says where its longitudes start.
   const features = sources.get('features')?.value as { surfaceMap?: unknown } | undefined;
   const surfaceMap = typeof features?.surfaceMap === 'string' ? await json(resolve(sourceDirectory, features.surfaceMap)) as { mapLeftEdgeLongitudeDeg?: unknown } : null;
-  const attitude = prepareEllipsoidAttitude(descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
+  const attitude = prepareEllipsoidAttitude(solarGeometry, descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
     mapLeftEdgeLongitudeDeg: surfaceMap ? requireFiniteNumber(surfaceMap.mapLeftEdgeLongitudeDeg, 'surface map left edge') : 0 });
   // Block pages need every cell's size before a face names its page: one pass measures the cells, the next lays them out.
   const cellSizes = preparePagedEllipsoidScene({ config, interiorSource, atmosphereModel, atmosphere, raster, attitude }).surfaceRasterPlan.cells.map(cell => cell.size);

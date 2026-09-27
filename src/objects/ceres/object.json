@@ -81,6 +81,16 @@
               "id": "ammonium-band",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "clay-centre",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ammonium-centre",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

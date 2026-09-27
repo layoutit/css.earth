@@ -1,8 +1,8 @@
 import type {Vec3} from '@layoutit/polycss';
 import type { PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import type {createAtmospherePreparation, AtmosphereConfiguration} from './atmosphere.mts';
+import type {createAtmospherePreparation, AtmosphereConfiguration} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import {requireFiniteNumber} from '@cssearth/core';
-import type {EllipsoidAttitude} from './attitude.mts';
+import type {EllipsoidAttitude} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import {preparedControlPitch} from '@cssearth/engine';
 import {LIT_DEFAULT_VIEW} from '@cssearth/bake/objects/scene';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
