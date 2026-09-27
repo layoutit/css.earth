@@ -67,6 +67,7 @@
     ]
   },
   "rules": {
+    "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
       {"from":"labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts","to":"tools/objects/circumstellar/author.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/sources/sky-bands.ts","to":"tools/objects/observation/sky-band-composite.mts"},
@@ -254,6 +255,7 @@
     "runtime-imports-no-preparation": [
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/compact-spectrum.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/spectrum-data.mts"}
-    ]
+    ],
+    "telescope-imports-no-bake": []
   }
 }
