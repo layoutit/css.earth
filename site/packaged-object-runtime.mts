@@ -1,4 +1,3 @@
-import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { SceneFactory } from './browser/browser-types.mts';
@@ -49,5 +48,5 @@ export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },
-  }, bindPackagedObject, signal, PREPARED_NAVIGATION_MARKERS[descriptorInput.id]?.context?.pixels);
+  }, bindPackagedObject, signal);
 }
