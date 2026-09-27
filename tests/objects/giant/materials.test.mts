@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
-import { writeMaterialAtlasTile } from '@cssearth/bake/objects/layers/material-composition';
+import { writeMaterialAtlasTile } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 test('material row gutters copy the source frame edge exactly',()=>{
  const source=Buffer.from([1,2,3,255,4,5,6,128,7,8,9,64,10,11,12,0]),output=Buffer.alloc(4*4*4);

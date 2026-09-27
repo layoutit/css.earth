@@ -10,7 +10,7 @@ import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { worldPositionToCss } from '@layoutit/polycss';
 import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '@cssearth/bake/objects/geometry';
-import { writeMaterialAtlasTile, sampleRgbaBilinear } from '@cssearth/bake/objects/layers/material-composition';
+import { writeMaterialAtlasTile, sampleRgbaBilinear } from '@cssearth/bake/objects/layers/giant';
 
 import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '@cssearth/bake/delivery';
 

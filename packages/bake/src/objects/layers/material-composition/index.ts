@@ -11,7 +11,6 @@ export * from './presentation-recipe.ts';
 export * from './presentation-source.ts';
 export * from './radial-motion-recipe.ts';
 export * from './radial-motion.ts';
-export * from './raster.ts';
 export * from './recipe.ts';
 export * from './rgba.ts';
 export * from './spectral-recipe.ts';

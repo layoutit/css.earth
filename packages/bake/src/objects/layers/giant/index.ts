@@ -3,6 +3,7 @@
 export * from './geometry-contract.ts';
 export * from './geometry.ts';
 export * from './giant-layers.ts';
+export * from './material-atlas.ts';
 export * from './material-contract.ts';
 export * from './normalized-disc-presentation.ts';
 export * from './normalized-presentation-contract.ts';
@@ -12,4 +13,5 @@ export * from './polar-continuation.ts';
 export * from './polar-dome.ts';
 export * from './polar-source-contract.ts';
 export * from './presentation-contract.ts';
+export * from './relative-path.ts';
 export * from './rings.ts';

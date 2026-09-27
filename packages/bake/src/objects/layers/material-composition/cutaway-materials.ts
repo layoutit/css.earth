@@ -13,7 +13,8 @@ import {dotVector as dot3} from '../../geometry/index.ts';
 
 /** Interior cutaways are smooth illustrations, written in the lossy lane (lossy-lane.ts). */
 const INTERIOR_WEBP = { alphaQuality: 100, effort: 6 } as const;
-import {validateMaterialRecipe,validateRelativePath} from './recipe.ts';
+import {validateMaterialRecipe} from './recipe.ts';
+import {validateRelativePath} from '../giant/index.ts';
 /** Declared radial composition, two-face cutaway shading, and polar wedge rasters. */
 export async function prepareCutawayMaterials({sourceDirectory,publicDirectory,config:input,objectLightDirection}: {sourceDirectory:string;publicDirectory:string;config:unknown;objectLightDirection:ReadonlyVector3}) {
   const config=parse(input,cutawayRecipe,'cutaway material recipe');

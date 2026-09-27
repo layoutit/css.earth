@@ -10,7 +10,7 @@ import {planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry'
 import { readFitsPrimary } from '@cssearth/fits';
 import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {latitudeRasterBands, preparePolarContinuationAtlas, preparePolarSurfaceTransition, compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection} from '@cssearth/bake/objects/layers/giant';
-import {validateRelativePath} from '@cssearth/bake/objects/layers/material-composition';
+import {validateRelativePath} from '@cssearth/bake/objects/layers/giant';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mts';
 

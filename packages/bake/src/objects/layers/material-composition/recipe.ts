@@ -1,4 +1,5 @@
 import {parse, object, string, optional, dictionary} from '@cssearth/core/schema';
+import { validateRelativePath } from '../giant/index.ts';
 const materialBase = object({schema:string,namespace:string,publicPrefix:string,files:optional(dictionary(string))});
 /** Shared address and numeric checks run before raster allocation or writes. */
 export function validateMaterialRecipe(input: unknown, schema: string) {
@@ -13,9 +14,4 @@ export function validateMaterialRecipe(input: unknown, schema: string) {
   };
   finite(input);
   return config;
-}
-
-export function validateRelativePath(path: unknown) {
-  if (typeof path !== 'string' || !path || path.startsWith('/') || path.includes('\\') || path.split('/').some(part => !part || part === '.' || part === '..')) throw new TypeError('Unsafe material-relative path.');
-  return path;
 }
