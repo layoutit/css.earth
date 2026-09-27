@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { featureDiscoveryZoomShare } from './catalog.js';
+import { sourceTest } from '../source-test.mts';
+import { featureDiscoveryZoomShare } from '@cssearth/bake/objects/surface-features';
 const test = sourceTest();
 
 test('a sparse catalogue reveals its names while the whole body fits on screen', () => {

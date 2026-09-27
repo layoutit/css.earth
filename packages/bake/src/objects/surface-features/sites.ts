@@ -2,9 +2,9 @@
 // document is repository-authored: every coordinate quotes the public page it was read from (NASA NSSDCA, PDS, LROC,
 // mission releases, papers) and the traverse paths are pinned data products (PDS PLACES localisation tables, LROC
 // Apollo shapefiles). Sites are unsized points ranked like a 20 km feature; traverses are open traces.
-import { parseDbf } from './dbf.js';
-import { parseShpRecords } from './shp.js';
-import { unzipMember } from './archive.js';
+import { parseDbf } from './dbf.ts';
+import { parseShpRecords } from './shp.ts';
+import { unzipMember } from './archive.ts';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 

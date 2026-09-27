@@ -1,11 +1,10 @@
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadPdsPlateShape } from '@cssearth/bake/objects/geometry';
-import { fitImageControls } from './image-controls.mts';
-import type { ImageControlsFit } from './image-controls.mts';
+import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '../layers/terrestrial/index.ts';
+import { loadPdsPlateShape } from '../geometry/index.ts';
+import { fitImageControls } from './image-controls.ts';
+import type { ImageControlsFit } from './image-controls.ts';
 
 type Pixel = readonly [number, number];
 type Vec = readonly [number, number, number];
@@ -168,10 +167,4 @@ export async function projectEncounterLandmarks(objectId: string, write = false)
   const outputs = [{ path: resolve(sourceDirectory, 'features/landmarks.json'), content: json(landmarks) }, { path: resolve(sourceDirectory, 'features/evidence/image-landmarks.json'), content: json(evidence) }];
   await commitEncounterLandmarkOutputs(outputs, write);
   return { landmarks, evidence };
-}
-
-const [objectId, ...arguments_] = process.argv.slice(2);
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  if (!objectId || arguments_.some(argument => argument !== '--write')) throw new Error('Usage: project-encounter-landmarks.mts <objectId> [--write]');
-  await projectEncounterLandmarks(objectId, arguments_.includes('--write'));
 }

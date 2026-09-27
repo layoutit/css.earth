@@ -2,13 +2,12 @@
  * image pixels. This measures discrepancies; it never fits or qualifies a camera. */
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { resolve, basename, dirname } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { resolve, basename } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsPrimary } from '@cssearth/fits';
-import { loadObjShape } from '@cssearth/bake/objects/geometry';
-import { matrixCamera } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadObjShape } from '../geometry/index.ts';
+import { matrixCamera } from '../layers/terrestrial/index.ts';
 
 type Pixel = readonly [number, number];
 interface Control { id: string; longitudeDegrees: number; latitudeDegrees: number; observedPixel: Pixel; regionPixels: readonly [number, number, number, number]; identification: string; }
@@ -108,12 +107,4 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
   await writeFile(resolve(outputDirectory, 'projected-controls.json'), JSON.stringify(report, null, 2) + '\n');
   await sharp({ create: { width: fullWidth, height: fullHeight, channels: 3, background: '#141a20' } }).composite([...panels.map((p, i) => ({ input: p, left: 24 + i * (panelWidth + 24), top: 76 })), { input: title }]).png().toFile(resolve(outputDirectory, 'projected-controls.png'));
   return report;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [recipe, inputs, output, ...extra] = process.argv.slice(2);
-  if (!recipe || !inputs || !output || extra.length) throw new Error('Usage: node tools/objects/surface-features/check-projected-controls.mts RECIPE INPUT_DIRECTORY OUTPUT_DIRECTORY');
-  if (resolve(output) === dirname(resolve(recipe))) throw new Error('Write diagnostics to an output directory, then inspect them before promotion.');
-  const report = await checkProjectedControlRecipe(resolve(recipe), resolve(inputs), resolve(output));
-  console.log(JSON.stringify(report.models.map(m => ({ model: m.id, controls: m.controls.map(c => ({ id: c.id, visible: c.visible, residualPixels: c.residualPixels, distanceFromRegionPixels: c.distanceFromIdentificationRegionPixels })) })), null, 2));
 }

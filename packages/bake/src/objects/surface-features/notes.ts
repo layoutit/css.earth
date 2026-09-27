@@ -4,10 +4,10 @@
 // tooltip shows the note with its licence. Run through tools/prepare-feature-notes.mts.
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseDbf } from './dbf.js';
-import { parseSurfaceFeaturesConfig } from './index.js';
-import { unzipMember } from './archive.js';
-import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.js';
+import { parseDbf } from './dbf.ts';
+import { parseSurfaceFeaturesConfig } from './surface-features.ts';
+import { unzipMember } from './archive.ts';
+import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.ts';
 import { isRecord } from '@cssearth/core';
 
 

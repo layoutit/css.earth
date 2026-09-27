@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parseProjectedControls, inspectProjectedControls, checkProjectedControlRecipe } from './check-projected-controls.mts';
+import { parseProjectedControls, inspectProjectedControls, checkProjectedControlRecipe } from '@cssearth/bake/objects/surface-features';
 
 const control = (id: string, lon: number, lat: number, x = 50, y = 50) => ({ id, longitudeDegrees: lon, latitudeDegrees: lat, observedPixel: [x, y], regionPixels: [45, 45, 55, 55], identification: 'Analytic test fixture, not a scientific control.' });
 const unit = (v: number[]) => v.map(x => x / Math.hypot(...v));

@@ -364,7 +364,7 @@ DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
 cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
 
 For an initial comparison of published planetocentric coordinates with native
-image picks, `tools/objects/surface-features/check-projected-controls.mts` replays
+image picks, `packages/bake/cli/check-projected-controls.mts` replays
 a pinned `cssearth-projected-controls@1` recipe. It uses the existing FITS reader,
 OBJ mesh and archived-camera contract, reports visibility and pixel discrepancies,
 and renders the native picks beside projected positions. It does not fit a camera,

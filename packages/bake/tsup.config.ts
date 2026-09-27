@@ -31,6 +31,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/sources': 'src/objects/sources/index.ts',
     'objects/charts': 'src/objects/charts/index.ts',
     'objects/content': 'src/objects/content/index.ts',
+    'objects/surface-features': 'src/objects/surface-features/index.ts',
     'objects/layers/observation': 'src/objects/layers/observation/index.ts',
     'objects/layers/shape-model': 'src/objects/layers/shape-model/index.ts',
     'objects/layers/cutaway': 'src/objects/layers/cutaway/index.ts',

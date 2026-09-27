@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { fitImageControls } from './image-controls.mts';
+import { fitImageControls } from '@cssearth/bake/objects/surface-features';
 
 const close = (actual: number, expected: number, tolerance = 1e-9) => assert.ok(Math.abs(actual - expected) <= tolerance, `${actual} is not within ${tolerance} of ${expected}`);
 const transformed = (model: 'similarity' | 'reflected-similarity', coefficients: readonly [number, number, number, number], [x, y]: readonly [number, number]) => {

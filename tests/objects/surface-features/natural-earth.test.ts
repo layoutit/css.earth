@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { loadNaturalEarthRows, naturalEarthZoomShare, parseNaturalEarthConfig } from './natural-earth.js';
+import { loadNaturalEarthRows, naturalEarthZoomShare, parseNaturalEarthConfig } from '@cssearth/bake/objects/surface-features';
 
 const earthSource = resolve(process.cwd(), 'src/objects/earth/source');
 const recipe = async () => JSON.parse(await readFile(resolve(earthSource, 'preparation/features.json'), 'utf8')).naturalEarth;

@@ -1,9 +1,8 @@
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { decodeIsis2Qube } from '@cssearth/bake/objects/layers/terrestrial';
-import { fitImageControls } from './image-controls.mts';
+import { decodeIsis2Qube } from '../layers/terrestrial/index.ts';
+import { fitImageControls } from './image-controls.ts';
 
 type Pixel = readonly [number, number];
 type Vec = readonly [number, number, number];
@@ -296,10 +295,3 @@ export async function projectOrthophotoLandmarks(objectId: string, write: boolea
   );
   return evidence;
 }
-async function main() {
-  const [objectId, ...args] = process.argv.slice(2);
-  if (!objectId || args.some((a) => a !== '--write'))
-    throw new TypeError('Usage: project-orthophoto-landmarks.mts <objectId> [--write]');
-  await projectOrthophotoLandmarks(objectId, args.includes('--write'));
-}
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) void main();

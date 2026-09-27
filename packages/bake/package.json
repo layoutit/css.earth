@@ -134,6 +134,11 @@
       "import": "./dist/objects/content.js",
       "default": "./dist/objects/content.js"
     },
+    "./objects/surface-features": {
+      "types": "./dist/objects/surface-features.d.ts",
+      "import": "./dist/objects/surface-features.js",
+      "default": "./dist/objects/surface-features.js"
+    },
     "./objects/layers/observation": {
       "types": "./dist/objects/layers/observation.d.ts",
       "import": "./dist/objects/layers/observation.js",

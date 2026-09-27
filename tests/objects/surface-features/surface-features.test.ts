@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { parseDbf } from './dbf.js';
-import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from './index.js';
-import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from './geometry.js';
-import { parseShpPolylines } from './shp.js';
+import { sourceTest } from '../source-test.mts';
+import { parseDbf } from '@cssearth/bake/objects/surface-features';
+import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from '@cssearth/bake/objects/surface-features';
+import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from '@cssearth/bake/objects/surface-features';
+import { parseShpPolylines } from '@cssearth/bake/objects/surface-features';
 import { dot3 as dot } from '@cssearth/core';
 const test = sourceTest();
 
@@ -189,7 +189,7 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
 });
 
 test('ellipsoid samplers put geodetic positions on the reference ellipsoid and check a rendered surface against it', async () => {
-  const { ellipsoidSampler, ellipsoidSurfacePoint, normalizedEllipsoidRadius, renderedEllipsoidSampler, surfaceCoordinates } = await import('./ellipsoid.js');
+  const { ellipsoidSampler, ellipsoidSurfacePoint, normalizedEllipsoidRadius, renderedEllipsoidSampler, surfaceCoordinates } = await import('@cssearth/bake/objects/surface-features');
   const semiAxes = { equatorial: 11500, polar: 11500 * 6356.752 / 6378.137 };
   for (const [lon, lat] of [[281.53, -0.18], [103.82, 1.35], [338.06, 64.15], [0, 90], [180, -90]] as const) {
     const point = ellipsoidSurfacePoint(lon, lat, axes, 180, semiAxes);
@@ -203,7 +203,7 @@ test('ellipsoid samplers put geodetic positions on the reference ellipsoid and c
   assert.ok(Math.abs(point[2] - semiAxes.polar * Math.sqrt(1 - (Math.hypot(point[0], point[1]) / semiAxes.equatorial) ** 2)) < 1e-6);
   assert.deepEqual(pure.plan(), { ...semiAxes, north: axes.north, minimumShare: 1, maximumShare: 1 });
   // The shared preparation casts map directions: the cast recovers the geodetic position from its normal and rounds like every mesh coordinate.
-  const { ellipsoidSurfaceCast } = await import('./ellipsoid.js');
+  const { ellipsoidSurfaceCast } = await import('@cssearth/bake/objects/surface-features');
   const cast = ellipsoidSurfaceCast(pure, axes, 180);
   assert.deepEqual(cast.onSurface(surfaceDirection(338.06, 64.15, axes, 180)), point.map(value => Number(value.toFixed(3))));
   assert.deepEqual(cast.plan(), pure.plan());

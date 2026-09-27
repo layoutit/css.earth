@@ -3,9 +3,9 @@
 // turns each pinned layer into rows shaped like the Gazetteer attribute table so the shared preparation ranks, anchors,
 // outlines and indexes them without a second pipeline. Places have no published size: they are unsized points; countries
 // use Natural Earth's label point; regions carry their bounding box as the extent; rivers carry their centreline as an open trace.
-import { parseDbf } from './dbf.js';
-import { parseShpRecords } from './shp.js';
-import { unzipMember } from './archive.js';
+import { parseDbf } from './dbf.ts';
+import { parseShpRecords } from './shp.ts';
+import { unzipMember } from './archive.ts';
 import { resolve } from 'node:path';
 
 export interface NaturalEarthClass {

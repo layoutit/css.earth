@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parseLandmarks, prepareLandmarks } from './landmarks.js';
-import type { SurfaceFeaturePreparationContext } from './index.js';
+import { parseLandmarks, prepareLandmarks } from '@cssearth/bake/objects/surface-features';
+import type { SurfaceFeaturePreparationContext } from '@cssearth/bake/objects/surface-features';
 
 const axes = { prime: [0, 1, 0] as const, east: [1, 0, 0] as const, north: [0, 0, 1] as const, mapLeftEdgeLongitudeDeg: 0 };
 const entry = { id: '80000000', name: 'Test region', kind: 'region', type: 'Mission region', minimumZoomShare: 0.4,

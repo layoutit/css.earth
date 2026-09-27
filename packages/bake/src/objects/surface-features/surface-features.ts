@@ -1,17 +1,17 @@
-import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeSearchText } from './catalog.js';
-import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.js';
-import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand } from './geometry.js';
-import { unzipMember } from './archive.js';
+import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
+import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.ts';
+import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand } from './geometry.ts';
+import { unzipMember } from './archive.ts';
 import { sha256 } from '@cssearth/core/node';
 import { surfaceFeatureBankIndex } from '@cssearth/renderer/labels/surface-feature-banks.ts';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { extname, relative, resolve } from 'node:path';
-import { parseDbf } from './dbf.js';
-import { parseFeatureNotes, type FeatureNotes } from './notes-schema.js';
-import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.js';
-import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.js';
-import { prepareLandmarks } from './landmarks.js';
-import { parseShpPolylines } from './shp.js';
+import { parseDbf } from './dbf.ts';
+import { parseFeatureNotes, type FeatureNotes } from './notes-schema.ts';
+import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.ts';
+import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.ts';
+import { prepareLandmarks } from './landmarks.ts';
+import { parseShpPolylines } from './shp.ts';
 import { dot3 as dot } from '@cssearth/core';
 /** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
 const SITE_ZOOM_SHARE = 0.6;

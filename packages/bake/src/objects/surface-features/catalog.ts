@@ -1,4 +1,4 @@
-import type { prepareLandmarks } from './landmarks.js';
+import type { prepareLandmarks } from './landmarks.ts';
 export interface TraceSummary { readonly source: string; readonly sourcePage: string; readonly license: string; readonly snapshotDate: string; readonly traces: number; readonly matched: number; readonly byCode: Readonly<Record<string, number>>; readonly unmatched: readonly string[]; readonly maximumVertices: number; }
 
 export const PREPARED_SURFACE_FEATURES_SCHEMA = 'cssearth-prepared-surface-features@1';

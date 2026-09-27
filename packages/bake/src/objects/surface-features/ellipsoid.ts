@@ -1,5 +1,5 @@
-import { surfaceDirection } from './geometry.js';
-import type { SurfaceFeatureAxes } from './catalog.js';
+import { surfaceDirection } from './geometry.ts';
+import type { SurfaceFeatureAxes } from './catalog.ts';
 import { dot3 as dot } from '@cssearth/core';
 
 /** Ellipsoid anchoring for the shared feature preparation. Catalogue positions are geodetic (positive-east

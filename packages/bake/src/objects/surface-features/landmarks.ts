@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeVtkCategories } from '@cssearth/bake/objects/raster';
-import { createIndexedShape } from '@cssearth/bake/objects/geometry';
-import { normalizeSearchText } from './catalog.js';
-import { projectRadial, surfaceDirection } from './geometry.js';
-import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.js';
-import type { SurfaceFeaturePreparationContext } from './index.js';
+import { decodeVtkCategories } from '../raster/index.ts';
+import { createIndexedShape } from '../geometry/index.ts';
+import { normalizeSearchText } from './catalog.ts';
+import { projectRadial, surfaceDirection } from './geometry.ts';
+import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.ts';
+import type { SurfaceFeaturePreparationContext } from './surface-features.ts';
 import { dot3 as dot } from '@cssearth/core';
 
 type Vec = readonly [number, number, number];
