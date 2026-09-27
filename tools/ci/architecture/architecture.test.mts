@@ -1,18 +1,19 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { astroScriptBlocks, astroSpecifiers, resolveSpecifier, type ResolveContext } from './astro-imports.mts';
+import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
 import { formatDelta } from './report.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
+import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
 import { isTestPath, zoneOf } from './zones.mts';
 
 /** A small graph from `from -> to` pairs; every named path becomes a file. */
-function graph(...pairs: readonly (readonly [string, string])[]): ImportGraph {
+function graph(...pairs: readonly (readonly [string, string] | readonly [string, string, 'type'])[]): ImportGraph {
   const files = new Map<string, { test: boolean; script: boolean; entryHint: boolean; loc: number }>();
-  for (const path of pairs.flat()) files.set(path, { test: isTestPath(path), script: false, entryHint: false, loc: 1 });
-  return { files, edges: pairs.map(([from, to]) => ({ from, to, test: isTestPath(from), symbols: [], typeOnly: false })) };
+  for (const [from, to] of pairs) for (const path of [from, to]) files.set(path, { test: isTestPath(path), script: false, entryHint: false, loc: 1 });
+  return { files, edges: pairs.map(([from, to, kind]) => ({ from, to, test: isTestPath(from), symbols: [], typeOnly: kind === 'type' })) };
 }
 
 // src/a -> src/b -> src/c -> src/a is one folder cycle; packages/p is a clean leaf.
@@ -57,24 +58,47 @@ test('Astro frontmatter and bundled scripts become import specifiers', () => {
   ]);
 });
 
-test('Astro specifiers resolve like the cruise: extensions, .js to .ts, workspaces and #imports', () => {
-  const context: ResolveContext = {
-    tracked: new Set(['site/shape.ts', 'src/r/residency.ts', 'packages/core/src/index.ts', 'labs/p/src/api.ts', 'tools/objects/lens.ts', 'site/components/Card.astro']),
-    workspaces: [
-      { name: '@x/core', directory: 'packages/core', exports: { '.': { types: './dist/index.d.ts' } } },
-      { name: '@x/lab', directory: 'labs/p', exports: { './api': './src/api.ts' } },
-    ],
-    imports: { '#preparation/*': { types: './tools/objects/*.ts', default: './tools/objects/dist/*.js' } },
-  };
-  const from = 'site/components/X.astro';
-  assert.equal(resolveSpecifier(from, '../shape', context), 'site/shape.ts');
-  assert.equal(resolveSpecifier(from, './Card.astro', context), 'site/components/Card.astro');
-  assert.equal(resolveSpecifier(from, '../../src/r/residency.js', context), 'src/r/residency.ts');
-  assert.equal(resolveSpecifier(from, '@x/core', context), 'packages/core/src/index.ts', 'an unbuilt dist entry counts as the source entry');
-  assert.equal(resolveSpecifier(from, '@x/lab/api', context), 'labs/p/src/api.ts');
-  assert.equal(resolveSpecifier(from, '#preparation/lens', context), 'tools/objects/lens.ts');
-  assert.equal(resolveSpecifier(from, 'astro/types', context), undefined, 'npm packages are external');
-  assert.equal(resolveSpecifier(from, '../prepared-generated.json', context), undefined, 'untracked output is not an edge');
+test('type-level imports are import specifiers: typeof import() and import().Name', () => {
+  const found = moduleSpecifiers("type A = typeof import('@x/a');\ntype B = import('../b.ts').Shape<number>;\nlet c: import('./c').Deep.Name;\n", 'site/x.ts');
+  assert.deepEqual(found.map(item => [item.specifier, item.typeOnly, item.symbols]), [
+    ['@x/a', true, ['*']], ['../b.ts', true, ['Shape']], ['./c', true, ['Deep']],
+  ]);
+  assert.deepEqual(astroSpecifiers("---\ntype P = typeof import('../p.mts');\n---\n", 'site/X.astro').map(item => item.specifier), ['../p.mts']);
+});
+
+test('tsup entries are read from each config form this repository uses, and anything else is refused', () => {
+  assert.deepEqual([...tsupEntries("export default defineConfig({ entry: ['src/index.ts'] })", 'a')], [['index', 'src/index.ts']]);
+  assert.deepEqual([...tsupEntries("export default defineConfig({ entry: ['src/a.ts', 'src/node/b.ts'] })", 'a')], [['a', 'src/a.ts'], ['node/b', 'src/node/b.ts']]);
+  assert.deepEqual([...tsupEntries("export default defineConfig({ entry: { index: 'src/index.ts', 'node/index': './src/node/index.ts' } })", 'b')],
+    [['index', 'src/index.ts'], ['node/index', 'src/node/index.ts']]);
+  assert.deepEqual([...tsupEntries("const entry: Record<string, string> = { 'objects/color': 'src/objects/color/index.ts' };\nexport default defineConfig({ entry })", 'c')],
+    [['objects/color', 'src/objects/color/index.ts']]);
+  assert.deepEqual([...tsupEntries("export default { entry: { 'platform/orbit': fileURLToPath(new URL('./src/navigation/orbit.ts', import.meta.url)) } }", 'd')],
+    [['platform/orbit', 'src/navigation/orbit.ts']]);
+  assert.throws(() => tsupEntries("export default { entry: glob('src/*.ts') }", 'e'), /cannot read the tsup entry/u);
+  assert.throws(() => tsupEntries('export default {}', 'f'), /expected one tsup `entry`/u);
+});
+
+test('a dist target resolves to the source of the tsup entry that builds it, through the package exports', () => {
+  const [bake, lab] = workspacePackages(new Map([
+    ['packages/bake/package.json', { manifest: { name: '@x/bake', exports: {
+      './volume/node': { types: './dist/volume/node.d.ts', import: './dist/volume/node.js' },
+      './platform/*': { types: './dist/platform/*.d.ts' },
+    } }, tsup: "const entry = { 'volume/node': 'src/volume/node/index.ts', 'platform/orbit': 'src/nav/orbit.ts' };\nexport default { entry };" }],
+    ['labs/p/package.json', { manifest: { name: '@x/lab', exports: { './api': './src/api.ts' } } }],
+  ]));
+  const workspaces = [bake!, lab!];
+  const tracked = new Set(['packages/bake/src/volume/node/index.ts', 'packages/bake/src/nav/orbit.ts', 'labs/p/src/api.ts']);
+  assert.deepEqual(builtSource('packages/bake/dist/volume/node.d.ts', workspaces), { source: 'packages/bake/src/volume/node/index.ts' });
+  assert.deepEqual(builtSource('packages/bake/dist/volume/node.js', workspaces), { source: 'packages/bake/src/volume/node/index.ts' });
+  assert.match(JSON.stringify(builtSource('packages/bake/dist/types/volume/node/index.d.ts', workspaces)), /not the output of a tsup entry/u);
+  assert.equal(builtSource('packages/bake/src/volume/node/index.ts', workspaces), undefined);
+  assert.deepEqual(workspaceSource('@x/bake/volume/node', bake!, workspaces, tracked), { source: 'packages/bake/src/volume/node/index.ts' });
+  assert.deepEqual(workspaceSource('@x/bake/platform/orbit', bake!, workspaces, tracked), { source: 'packages/bake/src/nav/orbit.ts' });
+  assert.deepEqual(workspaceSource('@x/lab/api', lab!, workspaces, tracked), { source: 'labs/p/src/api.ts' });
+  assert.match(JSON.stringify(workspaceSource('@x/bake', bake!, workspaces, tracked)), /not exported/u, 'bake has no main entry');
+  assert.deepEqual([...exportTargets({ types: 'dist/index.d.ts', main: 'dist/index.js' }, 'p')], [['.', 'dist/index.d.ts']]);
+  assert.deepEqual([...exportTargets({ exports: { types: './dist/index.d.ts', import: './dist/index.js' } }, 'p')], [['.', './dist/index.d.ts']]);
 });
 
 test('strongly connected folders, the greedy layer order and the edges that close each cycle', () => {

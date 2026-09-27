@@ -9,7 +9,7 @@ export const CRUISE_ROOTS = ['packages', 'src', 'site', 'tools', 'labs', 'tests'
 export const ROOT_CONFIG_FILE = /^[^/]+\.config\.[cm]?[jt]s$/u;
 
 /** Resolution follows the repository's own TypeScript, tsconfig, `package.json#imports` and pnpm
- * workspace rules; the `.astro` scanner tries the same extensions in order. The `prepared/` exclude is
+ * workspace rules; `.astro` imports go through the same resolver (`resolver.mts`). The `prepared/` exclude is
  * anchored to bodies' baked output: a bare `/prepared/` also hid the 23 source files in `tools/prepared/`. */
 export const RESOLVE_EXTENSIONS = ['.ts', '.mts', '.tsx', '.js', '.mjs', '.cjs', '.d.ts', '.d.mts', '.json', '.astro'];
 

@@ -2,13 +2,10 @@
  *
  * dependency-cruiser has no `.astro` transpiler, so without this the graph misses every import made
  * only by an Astro component (item K listed 11 such files). The scanner reads the frontmatter and each
- * bundled `<script>` with the TypeScript parser, then resolves each specifier with the same extension
- * order, workspace packages and `package.json#imports` the cruise uses. Only specifiers that name a
- * tracked repository file become edges; npm packages and `astro:*` virtual modules are external. */
+ * bundled `<script>` with the TypeScript parser; `graph.mts` resolves each specifier with the cruise's own
+ * resolver (`resolver.mts`). Only specifiers that name a repository file become edges; npm packages and
+ * `astro:*` virtual modules are external. */
 import ts from 'typescript';
-import { posix } from 'node:path';
-import { isRecord, requireRecord, requireString } from '@cssearth/core';
-import { RESOLVE_EXTENSIONS } from './cruiser-config.mts';
 
 export interface AstroSpecifier { readonly specifier: string; readonly typeOnly: boolean; readonly symbols: readonly string[] }
 
@@ -48,6 +45,10 @@ export function moduleSpecifiers(text: string, fileName = 'module.ts'): AstroSpe
     } else if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword
       && node.arguments[0] && ts.isStringLiteral(node.arguments[0])) {
       found.push({ specifier: node.arguments[0].text, typeOnly: false, symbols: ['(dynamic)'] });
+    } else if (ts.isImportTypeNode(node) && ts.isLiteralTypeNode(node.argument) && ts.isStringLiteral(node.argument.literal)) {
+      // `typeof import('…')` and `import('…').Name`: a type-level import with no import declaration.
+      const qualifier = node.qualifier === undefined ? '*' : ts.isIdentifier(node.qualifier) ? node.qualifier.text : node.qualifier.getText().split('.')[0] ?? '*';
+      found.push({ specifier: node.argument.literal.text, typeOnly: true, symbols: [qualifier] });
     }
     ts.forEachChild(node, visit);
   };
@@ -57,83 +58,4 @@ export function moduleSpecifiers(text: string, fileName = 'module.ts'): AstroSpe
 
 export function astroSpecifiers(source: string, fileName: string): AstroSpecifier[] {
   return astroScriptBlocks(source).flatMap(block => moduleSpecifiers(block, `${fileName}.ts`));
-}
-
-export interface WorkspacePackage { readonly name: string; readonly directory: string; readonly exports: unknown }
-export interface ResolveContext {
-  /** Repository files (tracked, or new and not ignored); only these can be edge targets. */
-  readonly tracked: ReadonlySet<string>;
-  readonly workspaces: readonly WorkspacePackage[];
-  /** The root `package.json#imports` map. */
-  readonly imports: Readonly<Record<string, unknown>>;
-}
-
-/** The `types` target of an export or import condition, as the cruise's condition order picks it. */
-function conditionTarget(value: unknown): string | undefined {
-  if (typeof value === 'string') return value;
-  if (!isRecord(value)) return undefined;
-  for (const condition of ['types', 'import', 'require', 'node', 'default']) {
-    const target = conditionTarget(value[condition]);
-    if (target !== undefined) return target;
-  }
-  return undefined;
-}
-
-/** TypeScript's own rule: a `.js`, `.mjs` or `.cjs` specifier may name the `.ts`, `.mts` or `.cts` source, or the
- * tracked declaration that stands in for a generated module. */
-const SOURCE_FOR_OUTPUT: Readonly<Record<string, readonly string[]>> = { '.js': ['.ts', '.tsx', '.d.ts'], '.mjs': ['.mts', '.d.mts'], '.cjs': ['.cts', '.d.cts'] };
-
-/** A generated module (untracked) is counted as its tracked declaration, so the graph is the same whether or
- * not the checkout has run its preparation steps: `site/prepared-shell-titles.mjs` becomes `….d.mts`. */
-export function trackedStandIn(path: string, tracked: ReadonlySet<string>): string | undefined {
-  if (tracked.has(path)) return path;
-  const match = /^(.*)\.([cm]?)[jt]s$/u.exec(path);
-  if (!match) return undefined;
-  const declaration = `${match[1]}.d.${match[2]}ts`;
-  return tracked.has(declaration) ? declaration : undefined;
-}
-
-function candidates(base: string): string[] {
-  const output = /\.[cm]?js$/u.exec(base)?.[0];
-  const sources = output === undefined ? [] : (SOURCE_FOR_OUTPUT[output] ?? []).map(extension => base.slice(0, -output.length) + extension);
-  return [base, ...sources, ...RESOLVE_EXTENSIONS.map(extension => base + extension), ...RESOLVE_EXTENSIONS.map(extension => `${base}/index${extension}`)];
-}
-
-/** A compiled `dist/` target of a shared package counts as its source entry, whether or not it is built. */
-export function packageEntry(directory: string): string { return `${directory}/src/index.ts`; }
-
-export function resolveSpecifier(from: string, raw: string, context: ResolveContext): string | undefined {
-  const specifier = raw.replace(/[?#].*$/u, '');
-  const pick = (base: string) => candidates(posix.normalize(base)).find(path => context.tracked.has(path));
-  if (specifier.startsWith('.')) return pick(posix.join(posix.dirname(from), specifier));
-  if (specifier.startsWith('/')) return pick(specifier.slice(1));
-  if (raw.startsWith('#')) {
-    for (const [pattern, value] of Object.entries(context.imports)) {
-      const [prefix = '', suffix = ''] = pattern.split('*');
-      const matches = pattern.includes('*') ? raw.startsWith(prefix) && raw.endsWith(suffix) : raw === pattern;
-      const target = conditionTarget(value);
-      if (!matches || target === undefined) continue;
-      const middle = pattern.includes('*') ? raw.slice(prefix.length, raw.length - suffix.length) : '';
-      return pick(target.replace('*', middle));
-    }
-    return undefined;
-  }
-  const workspace = context.workspaces.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
-  if (!workspace) return undefined;
-  const key = specifier === workspace.name ? '.' : `.${specifier.slice(workspace.name.length)}`;
-  const target = isRecord(workspace.exports) ? conditionTarget(workspace.exports[key]) : undefined;
-  if (target === undefined || /(^|\/)dist\//u.test(target)) {
-    const entry = packageEntry(workspace.directory);
-    return context.tracked.has(entry) ? entry : undefined;
-  }
-  return pick(posix.join(workspace.directory, target));
-}
-
-/** Workspace packages from their manifests, given the tracked `package.json` paths under the workspace globs. */
-export function workspacePackages(manifests: ReadonlyMap<string, unknown>): WorkspacePackage[] {
-  return [...manifests].flatMap(([path, value]) => {
-    const manifest = requireRecord(value, path);
-    if (manifest.name === undefined) return [];
-    return [{ name: requireString(manifest.name, `${path} name`), directory: posix.dirname(path), exports: manifest.exports }];
-  });
 }
