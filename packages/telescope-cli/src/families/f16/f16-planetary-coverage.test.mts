@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import { sourceTest } from '../../../../../tests/objects/source-test.mts';
-const test = sourceTest();import {fileURLToPath} from 'node:url';
+const test = sourceTest();import {resolve} from 'node:path';import {WORKSPACE} from '@cssearth/telescope/node';
 import {APOLLO_PSE_STATIONS,CONSERT_67P_FSS_RANGING,F16_PLANETARY_COVERAGE_HANDLER,describeSparsePlanetaryCoverage,exportSparsePlanetaryCoverageCsv,exportSparsePlanetaryCoverageJson,inspectSparsePlanetaryCoverage,pairPds3AsciiRows,pds3AsciiRows,pds3GeometryUnit,readFdsnStationRows,readPds3AsciiTable,refuseSparseCoveragePromotion,sparseCoverageSamples,type SparseCoverageKind,type SparsePlanetaryCoverageInput} from './f16-planetary-coverage.mts';
 import {member} from '../common.mts';
 
-const root=(path:string)=>fileURLToPath(new URL(`../../../../${path}`,import.meta.url));
+const root=(path:string)=>resolve(WORKSPACE,path);
 const consert=(name:string)=>root(`tests/fixtures/telescope-families/consert-67p-fss/${name}`);
 const consertPackage=(name:string)=>root(`src/objects/comet-67p/source/telescopes/consert/${name}`);
 const apolloPse=root('src/objects/moon/source/telescopes/apollo-pse/stationxml.xa.0.sxml');
