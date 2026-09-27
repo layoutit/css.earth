@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Compare a re-run's products with the archive's own, sample by sample: the oracle for reduce.mts.
  *
- *   node tools/objects/keck/compare.mts <program id> <koaid> <run directory>
+ *   node packages/telescope-cli/src/archives/keck/compare.mts <program id> <koaid> <run directory>
  *
  * Every product the program pins from KOA is looked for in the run by the stage it names (`_icubed`, `_icubes`, `_intf` and the
  * rest of the KCWI DRP's suffixes), and the pair is compared. Both files are read with this repository's FITS reader, and the
@@ -21,11 +21,11 @@ import { pathToFileURL } from 'node:url';
 import { positionalArguments, requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { assertInputPins, addProductEvidence, fileSize, readProductRecord } from '@cssearth/telescope/node';
+import { assertInputPins, addProductEvidence, fileSize, readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput } from '@cssearth/telescope';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 
 /** What comparing our cube with the archive's own establishes, for the record of the run that made ours.
  *
@@ -194,7 +194,7 @@ export function selectRunProduct(names: readonly string[], stage: string, observ
  * comparing its products against this observation's archive product would compare two different frames. */
 export async function assertRunIsFor(run: string, id: string, koaid: string) {
   const text = await readFile(resolve(run, 'run.json'), 'utf8').catch(() => null);
-  if (text === null) throw new Error(`${run} holds no run.json, so what it reduced is not known; re-run tools/objects/keck/reduce.mts ${id} ${koaid}.`);
+  if (text === null) throw new Error(`${run} holds no run.json, so what it reduced is not known; re-run packages/telescope-cli/src/archives/keck/reduce.mts ${id} ${koaid}.`);
   const entry = requireRecord(JSON.parse(text) as unknown, 'run.json');
   const program = requireString(entry.program, 'run.json program'), made = requireString(entry.koaid, 'run.json koaid');
   if (program !== id || made !== koaid) throw new Error(`${run} is the run of ${program} ${made}, not of ${id} ${koaid}.`);
@@ -212,7 +212,7 @@ export async function runProduct(redux: string, product: KeckFile, names: readon
   const path = resolve(redux, match);
   if (!await access(path).then(() => true, () => false)) return null;
   const record = await readProductRecord(productRecordPath(path));
-  if (!record) throw new Error(`${match} has no product record beside it, so what it was made from is not known; re-run tools/objects/keck/reduce.mts, which writes one with every product.`);
+  if (!record) throw new Error(`${match} has no product record beside it, so what it was made from is not known; re-run packages/telescope-cli/src/archives/keck/reduce.mts, which writes one with every product.`);
   const made = (record.parameters as { koaid?: unknown }).koaid;
   if (made !== observation.koaid) throw new Error(`${match} was made from ${String(made)}, not from ${observation.koaid}.`);
   if (!record.inputs.some(input => input.identity === observation.science.name && input.bytes === observation.science.bytes))

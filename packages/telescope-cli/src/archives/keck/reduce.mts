@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run the archive's own pipeline over a pinned Keck observation.
  *
- *   node tools/objects/keck/reduce.mts <program id> <koaid> [<run directory>]
+ *   node packages/telescope-cli/src/archives/keck/reduce.mts <program id> <koaid> [<run directory>]
  *
  * The frames the program pins are staged into the run directory under the names the observatory wrote them with, because the
  * KCWI DRP reads a night by that convention (`kb<yymmdd>_<frame>.fits`) and KOA stores them under its own ids. Every staged
@@ -32,12 +32,12 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { positionalArguments } from '@cssearth/core';
-import { assertInputPins, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputPins, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';
 import { keckToolchain, keckToolchainDigest, type KeckToolchain } from './toolchain.mts';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 
 /** The instruments this toolkit can re-run: the pipeline's executable, the channel a frame belongs to, the arguments that
  * reduce that channel, and the configuration file the pipeline ships and this run edits only to turn plotting off. */
@@ -94,7 +94,7 @@ export async function stageFrames(program: KeckProgram, observation: KeckObserva
   if (channel && !wanted.length) throw new Error(`${observation.koaid}: the program pins no calibration of its own channel.`);
   for (const file of [...wanted, observation.science]) {
     const source = resolve(DOWNLOADS, program.id, 'lev0', file.name);
-    if (!await stat(source).then(() => true, () => false)) throw new Error(`${file.name} is not downloaded: node tools/objects/keck/archive.mts ${program.id} ${program.instrument} ${observation.koaid}`);
+    if (!await stat(source).then(() => true, () => false)) throw new Error(`${file.name} is not downloaded: node packages/telescope-cli/src/archives/keck/archive.mts ${program.id} ${program.instrument} ${observation.koaid}`);
     const name = stagedName(file);
     await copyFile(source, resolve(directory, name));
     staged.push(name);

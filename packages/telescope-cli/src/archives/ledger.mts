@@ -1,5 +1,5 @@
 /** One way to write an archive ledger: what an archive holds for the objects this repository ships, and how far this toolkit
- * has been proved on it. Each archive (`tools/objects/<archive>/archive-ledger.mts`) supplies an `ArchiveLedger`: how to
+ * has been proved on it. Each archive (its `archive-ledger.mts`) supplies an `ArchiveLedger`: how to
  * survey the archive, how to read its ledger back, how to render its guide page, and the few ways its command genuinely
  * differs. This module owns the rest, the same for every archive: where the two files are, how they are written, the
  * `--local` pass that retakes only the repository's own state, and how receipt problems are said and counted.
@@ -10,8 +10,9 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-export const REPOSITORY = resolve(import.meta.dirname, '../../..');
+export const REPOSITORY = WORKSPACE;
 
 /** The two files a ledger is: the JSON record and the guide page generated from it, both repository-relative. */
 export interface LedgerFiles { readonly ledger: string; readonly guide: string }

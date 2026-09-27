@@ -143,13 +143,18 @@ test('a workspace command the operation runs as a process is followed into its s
 test('the telescope command package is followed into its sources, as when its modules sat under tools/objects/telescopes', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-cli-'));
   try {
-    await writeFile(resolve(root, 'entry.mts'), "import { query } from '@cssearth/telescope-cli/query'; export const used = query;\n");
-    await mkdir(resolve(root, 'packages/telescope-cli/src'), { recursive: true });
+    await writeFile(resolve(root, 'entry.mts'), "import { query } from '@cssearth/telescope-cli/query'; import { ledger } from '@cssearth/telescope-cli/archives/ledger'; export const used = [query, ledger];\n");
+    await mkdir(resolve(root, 'packages/telescope-cli/src/archives'), { recursive: true });
     await writeFile(resolve(root, 'packages/telescope-cli/src/query.mts'), "import { step } from './step.mts'; export const query = step;\n");
     await writeFile(resolve(root, 'packages/telescope-cli/src/step.mts'), 'export const step = 1;\n');
+    await writeFile(resolve(root, 'packages/telescope-cli/src/archives/ledger.mts'), 'export const ledger = 1;\n');
     const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/telescope-cli/src/query.mts', 'packages/telescope-cli/src/step.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/telescope-cli/src/archives/ledger.mts', 'packages/telescope-cli/src/query.mts', 'packages/telescope-cli/src/step.mts'],
+      'a nested subpath (archives/ledger) is followed as a single-segment one is');
+    await writeFile(resolve(root, 'packages/telescope-cli/src/archives/ledger.mts'), 'export const ledger = 2;\n');
+    const ledgerChanged = await implementationFingerprint(root, ['entry.mts']);
+    assert.notEqual(ledgerChanged.sha256, before.sha256);
     await writeFile(resolve(root, 'packages/telescope-cli/src/step.mts'), 'export const step = 2;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, ledgerChanged.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

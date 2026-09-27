@@ -77,7 +77,7 @@ async function rendererSource(specifier: string): Promise<string | undefined> {
 /** The telescope command's modules were relative modules under `tools/objects/telescopes/` before they became
  * `@cssearth/telescope-cli`; its subpath entries name their source (`@cssearth/telescope-cli/query` → `src/query.mts`). */
 function telescopeCliSource(specifier: string): string | undefined {
-  const subpath = /^@cssearth\/telescope-cli\/([a-z][a-z-]*)$/u.exec(specifier)?.[1];
+  const subpath = /^@cssearth\/telescope-cli\/([a-z][a-z-]*(?:\/[a-z][a-z-]*)*)$/u.exec(specifier)?.[1];
   return subpath ? `packages/telescope-cli/src/${subpath}.mts` : undefined;
 }
 /** An esbuild plugin that bundles the followed workspace entries from their sources under `root`. */

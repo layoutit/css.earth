@@ -1,12 +1,12 @@
 import { sampleStatistics as statistics } from '@cssearth/fits';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseAssociationTree } from '@cssearth/telescope/node';
+import { parseAssociationTree, WORKSPACE } from '@cssearth/telescope/node';
 import { parseRawTable } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord } from '@cssearth/telescope/node';
@@ -15,7 +15,7 @@ import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRu
 import { addComparisonEvidence, overlapOf, repositoryPath } from './compare.mts';
 import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
 import { bucketOf, nacoLedgerGuide, observationsOf, NACO_LEDGER, NACO_TARGET_NAMES } from './archive-ledger.mts';
-import { matchNumberedTarget, parseNumberedTarget } from '../archives/targets.mts';
+import { matchNumberedTarget, parseNumberedTarget } from '../targets.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
 import { median, supportOf, traceDirection, widthOf } from './spectrum.mts';
 
@@ -195,7 +195,7 @@ test('two mosaics are compared over the rectangle both hold', () => {
 });
 
 test('a receipt records a path the repository can read, never a local absolute one', () => {
-  const inside = resolve(import.meta.dirname, '../../../.local/naco/x/jitter/naco_img_jitter.fits');
+  const inside = resolve(WORKSPACE, '.local/naco/x/jitter/naco_img_jitter.fits');
   assert.equal(repositoryPath(inside), '.local/naco/x/jitter/naco_img_jitter.fits');
   assert.equal(repositoryPath('/somewhere/else/naco_img_jitter.fits'), '/somewhere/else/naco_img_jitter.fits');
 });
@@ -383,11 +383,11 @@ test('observations group by shipped object and keep both spellings of a name', (
 });
 
 test('the ledger on disk is the one the guide states, and its states come from the programs beside it', async () => {
-  const ledger = requireRecord(JSON.parse(await readFile(resolve(import.meta.dirname, '../../../data/naco/ledger.json'), 'utf8')) as unknown, 'ledger.json');
+  const ledger = requireRecord(JSON.parse(await readFile(resolve(WORKSPACE, 'data/naco/ledger.json'), 'utf8')) as unknown, 'ledger.json');
   assert.equal(ledger.schema, NACO_LEDGER.schema);
   assert.equal(ledger.instrument, 'NAOS+CONICA');
   const modes = requireArray(ledger.modes, 'modes').map(item => requireRecord(item, 'mode'));
-  const programs = await readdir(resolve(import.meta.dirname, 'programs'));
+  const programs = await readdir(resolve(WORKSPACE, 'tools/objects/naco/programs'));
   for (const mode of modes) {
     const pinned = requireArray(mode.programs, 'programs').map(value => requireString(value));
     const receipts = requireArray(mode.receipts, 'receipts').map(value => requireString(value));
@@ -398,7 +398,7 @@ test('the ledger on disk is the one the guide states, and its states come from t
     else if (pinned.length) assert.equal(mode.state, 'pinned');
   }
   // The guide is generated from the ledger, so regenerating it from the same ledger must reproduce the file on disk.
-  const guide = await readFile(resolve(import.meta.dirname, '../../../docs/naco-ledger.md'), 'utf8');
+  const guide = await readFile(resolve(WORKSPACE, 'docs/naco-ledger.md'), 'utf8');
   assert.equal(nacoLedgerGuide(ledger as never), guide);
 });
 
@@ -464,7 +464,7 @@ test('the slit geometry is read from the frames own headers, and a missing card 
 });
 
 test('the Europa receipt states what was measured, including that it is not resolved along the slit', async () => {
-  const receipt = requireRecord(JSON.parse(await readFile(resolve(import.meta.dirname, 'programs/europa-088C0833.spectrum.reproduction.json'), 'utf8')) as unknown, 'receipt');
+  const receipt = requireRecord(JSON.parse(await readFile(resolve(WORKSPACE, 'tools/objects/naco/programs/europa-088C0833.spectrum.reproduction.json'), 'utf8')) as unknown, 'receipt');
   assert.equal(receipt.schema, 'cssearth-naco-spectrum@1');
   assert.equal(receipt.object, 'EUROPA');
   assert.equal(receipt.arcs, false, 'the night associates no arc frames, so no wavelength calibration was run');

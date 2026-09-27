@@ -1,7 +1,7 @@
 /** What a NACO receipt has to say for the mode it names to count as reduced. Everything here runs against a scratch programs
  * directory, so nothing asks the ESO archive anything. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -79,5 +79,5 @@ test('a receipt is read against the program it claims', () => {
 
 test('every receipt beside the pinned programs is accepted', async () => {
   const { problems } = await modeStates({ imaging: 1, spectroscopy: 1 });
-  assert.deepEqual(problems, [], 'run node tools/objects/naco/archive-ledger.mts --local');
+  assert.deepEqual(problems, [], 'run node packages/telescope-cli/src/archives/naco/archive-ledger.mts --local');
 });

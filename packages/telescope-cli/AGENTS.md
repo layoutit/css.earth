@@ -10,8 +10,10 @@ and exit codes unchanged unless that is the change. The command guide is [README
 This package is the layer above the libraries: it imports `@cssearth/telescope`, `@cssearth/bake` and the other packages, and
 `@cssearth/telescope` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
 `@cssearth/telescope/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
-- the archive folders (`tools/objects/<archive>/`), which it still imports by relative path until they are split into the
-  archive clients that belong here and the per-body programs and authoring that belong with the bodies;
+- the archive folders not yet split (`tools/objects/{chandra,gemini,hst,jwst,juno,spitzer}/`), which it still imports by
+  relative path. Keck, PDS and NACO are split: their clients, reducers and ledger builders are `src/archives/<archive>/`,
+  beside the ledger machinery all archives share (`src/archives/`), and only their programs, toolchain pins and per-body
+  authoring stay in `tools/objects/<archive>/`, which the code reads through `WORKSPACE`;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
 

@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { sha256 } from '@cssearth/core/node';
-import { TAP_SYNC } from '../../../tools/objects/keck/koa.mts';
+import { TAP_SYNC } from './archives/keck/koa.mts';
 import { fetchKeckSource } from './keck-source.mts';
 import { openFitsSource } from './fits-source.mts';
 import { readSourceQuestion } from './source-relevance.mts';

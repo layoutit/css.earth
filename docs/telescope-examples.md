@@ -119,7 +119,7 @@ world coordinates, so no sky direction is claimed here; the picture is the detec
 Ceres is resolved, about 52 pixels across at half its peak brightness, but this is a small, blurred disc: the wide glow
 around it is the adaptive optics halo, which is in the data, and there is no surface detail to see at this scale.
 
-`node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47`
+`node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47`
 
 ## Chandra: Cassiopeia A in X-rays
 
@@ -168,7 +168,7 @@ background, and the vertical striping is slice-to-slice calibration residual, no
 because it is what the Keck toolkit has actually produced, and it should be replaced once a real science exposure is
 reduced.
 
-`node tools/objects/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits`
+`node packages/telescope-cli/src/archives/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits`
 
 ## Gemini South, GMOS: the interstellar comet 3I/ATLAS
 

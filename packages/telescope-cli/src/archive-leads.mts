@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from '@cssearth/telescope/node';
-import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../../../tools/objects/keck/koa.mts';
+import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from './archives/keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from '../../../tools/objects/gemini/cadc.mts';
 import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from '../../../tools/objects/gemini/archive.mts';
 import type { TargetCatalogueEntry } from '@cssearth/telescope';

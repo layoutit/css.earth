@@ -28,7 +28,7 @@ Two other things are worth knowing before reading the code.
 
 ## Stages
 
-1. **Install the software.** `node tools/objects/naco/toolchain.mts install` downloads ESO's own NACO kit and builds it into
+1. **Install the software.** `node packages/telescope-cli/src/archives/naco/toolchain.mts install` downloads ESO's own NACO kit and builds it into
    `output/toolchains/naco` (ignored by git). The kit is pinned in [toolchain.json](../tools/objects/naco/toolchain.json) by
    byte count, sha256, and the BSD `cksum` value ESO publishes beside it — that last one is the only digest ESO states for a
    kit, so it is checked as well as the sha256 and a swapped file is caught by ESO's own number. `install_pipeline` builds
@@ -221,24 +221,24 @@ program records `arcs: false` and the reduction carries it into the receipt.
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
-node tools/objects/naco/toolchain.mts install
-node tools/objects/naco/toolchain.mts verify
-node tools/objects/naco/archive.mts ceres-080C0881 "080.C-0881(C)" CERES
-node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47
-node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:45:32
-node tools/objects/naco/compare.mts ceres-080C0881 .local/naco/ceres-080C0881 2007-11-11T02:38:47 2007-11-11T02:45:32
+node packages/telescope-cli/src/archives/naco/toolchain.mts install
+node packages/telescope-cli/src/archives/naco/toolchain.mts verify
+node packages/telescope-cli/src/archives/naco/archive.mts ceres-080C0881 "080.C-0881(C)" CERES
+node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47
+node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:45:32
+node packages/telescope-cli/src/archives/naco/compare.mts ceres-080C0881 .local/naco/ceres-080C0881 2007-11-11T02:38:47 2007-11-11T02:45:32
 node tools/objects/naco/author-body-map.mts ceres ceres-080C0881 \
   .local/naco/ceres-080C0881/jitter-2007-11-11T023847/naco_img_jitter.fits \
   --raw .local/naco/ceres-080C0881/raw
 
-node tools/objects/naco/archive.mts europa-088C0833 "088.C-0833(B)" EUROPA --night 2012-01-03
-node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833
-node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half a-half
-node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half b-half
-node tools/objects/naco/spectroscopy-receipt.mts europa-088C0833 .local/naco/europa-088C0833
+node packages/telescope-cli/src/archives/naco/archive.mts europa-088C0833 "088.C-0833(B)" EUROPA --night 2012-01-03
+node packages/telescope-cli/src/archives/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833
+node packages/telescope-cli/src/archives/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half a-half
+node packages/telescope-cli/src/archives/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half b-half
+node packages/telescope-cli/src/archives/naco/spectroscopy-receipt.mts europa-088C0833 .local/naco/europa-088C0833
 
-node tools/objects/naco/archive-ledger.mts
-node --test tools/objects/naco/naco.test.mts
+node packages/telescope-cli/src/archives/naco/archive-ledger.mts
+node --test packages/telescope-cli/src/archives/naco/naco.test.mts
 ```
 
 `.local/naco` is ignored by git; `--raw <dir>` takes the pinned frames from a directory that already holds them instead of

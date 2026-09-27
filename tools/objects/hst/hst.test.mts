@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '@cssearth/bake/objects/raster';
 import { parseHstProgram, PROGRAMS, suffixOf } from './archive.mts';
 import { HST_CONFIGURATIONS, isNotAnObject, hubbleLedgerGuide, matchTarget, parseHubbleLedger, repositoryState, HST_LEDGER } from './archive-ledger.mts';
-import type { NamedShippedObject as ShippedObject } from '../archives/targets.mts';
+import type { NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
 import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
 import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
 import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from './compare.mts';

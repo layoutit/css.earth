@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { WORKSPACE } from '@cssearth/telescope/node';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { inspectPdsProduct, mergePdsDiscovery, pdsTargetNameCandidates } from './discover.mts';
 import { requireRecord, requireString } from '@cssearth/core';
@@ -12,7 +13,7 @@ test('PDS target-name candidates normalize a PDS3 designation without storing a 
 });
 
 test('a mapped multiband PDS label becomes one product-level observation without filling its wavelength gaps', async () => {
-  const path = resolve(import.meta.dirname, '../../../src/objects/charon/source/observations/nh_charon_color_mosaic.lblx');
+  const path = resolve(WORKSPACE, 'src/objects/charon/source/observations/nh_charon_color_mosaic.lblx');
   const bytes = await readFile(path), labelUri = 'https://example.test/nh_charon_color_mosaic.lblx';
   const result = inspectPdsProduct({ lid: 'urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic',
     lidvid: 'urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0', version: '1.0',

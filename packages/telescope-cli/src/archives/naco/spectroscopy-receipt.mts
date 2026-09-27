@@ -3,7 +3,7 @@
  * target's trace is across the slit against the telluric standard's, and the geometry another stage would need to place a
  * spectral strip on the body.
  *
- *   node tools/objects/naco/spectroscopy-receipt.mts <program id> <work directory>
+ *   node packages/telescope-cli/src/archives/naco/spectroscopy-receipt.mts <program id> <work directory>
  *
  * There is no external oracle. ESO publishes no Phase 3 product and no master calibration for NACO, and ESO's own telescope
  * bibliography records no publication for programme 088.C-0833(B) — the two papers it lists for 088.C-0833 are both the
@@ -23,7 +23,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
-import { archiveHeader, type EsoHeader } from '@cssearth/telescope/node';
+import { archiveHeader, type EsoHeader, WORKSPACE } from '@cssearth/telescope/node';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';
 import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
@@ -178,7 +178,7 @@ export async function writeSpectrumReceipt(programId: string, work: string): Pro
   return value;
 }
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

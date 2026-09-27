@@ -20,6 +20,6 @@ Install or check one with `node tools/objects/astronomy-toolchains.mts astroquer
 A descriptor's or lock's bytes are the identity of an installed environment: changing any of them asks every checkout to
 reinstall.
 
-What stays outside the package: each archive's own clients, programs and ledgers (`tools/objects/<archive>/`, with the
-ledger machinery they share in `tools/objects/archives/`), the telescope command (`@cssearth/telescope-cli`), and every
-object-specific use of a product.
+What stays outside the package: the telescope command (`@cssearth/telescope-cli`) with each archive's clients, reducers and
+ledger builders and the ledger machinery they share, the archives' pinned programs and toolchain pins
+(`tools/objects/<archive>/`), and every object-specific use of a product.

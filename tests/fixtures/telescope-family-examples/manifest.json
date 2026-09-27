@@ -425,7 +425,7 @@
         "assertion": "The owner writes output.product.json and the focused public-path test reopens and verifies every recorded output pin."
       },
       "owner": "packages/telescope-cli/src/family-operation.mts#compoundOutput",
-      "independentCheck": "tools/objects/pds/archive-final.test.mts",
+      "independentCheck": "packages/telescope-cli/src/archives/pds/archive-final.test.mts",
       "limit": "Enumerates an exact member closure; membership does not imply common calibration, frame, or decoder."
     }
   ]

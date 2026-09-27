@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** What the Keck Observatory Archive holds, for this project's objects, derived rather than declared.
  *
- *   node tools/objects/keck/archive-ledger.mts      writes data/keck/ledger.json and docs/keck-ledger.md
+ *   node packages/telescope-cli/src/archives/keck/archive-ledger.mts      writes data/keck/ledger.json and docs/keck-ledger.md
  *
  * Every count comes from KOA, counted server-side by an ADQL `GROUP BY` rather than by downloading rows and counting them
  * here. Every mode's state comes from the pinned programs and the product records and receipts beside them:
@@ -24,8 +24,8 @@ import { readProductRecord } from '@cssearth/telescope/node';
 import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';
-import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
-import { normaliseTargetName } from '../archives/targets.mts';
+import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
+import { normaliseTargetName } from '../targets.mts';
 
 const SCHEMA = 'cssearth-keck-ledger@1';
 
@@ -260,7 +260,7 @@ const number = (value: number | null) => value === null ? 'not counted' : value.
 
 export function keckLedgerGuide(ledger: Ledger) {
   const lines = ['# What Keck holds', '',
-    `Written by \`tools/objects/keck/archive-ledger.mts\` from the [Keck Observatory Archive](${ledger.archive}) on ${ledger.measured}.`,
+    `Written by \`packages/telescope-cli/src/archives/keck/archive-ledger.mts\` from the [Keck Observatory Archive](${ledger.archive}) on ${ledger.measured}.`,
     'Every count is the archive\'s own, taken with one grouped query per instrument. Every state is worked out from the pinned',
     `programs and the receipts beside them in \`tools/objects/keck/programs\`, not declared. ${ledger.shippedObjects} objects are shipped by this project.`,
     '', '## By instrument', '',

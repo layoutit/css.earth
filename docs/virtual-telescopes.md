@@ -641,10 +641,10 @@ The ledgers say how much of each archive these routes have been proved on:
 [JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
 [JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md), [Keck](keck-ledger.md) and [IHW Halley](ihw-halley.md).
 The eight archive ledgers (all but IHW Halley's) are written the same way by
-[`tools/objects/archives/ledger.mts`](../tools/objects/archives/ledger.mts): each archive's `archive-ledger.mts` states how
+[`packages/telescope-cli/src/archives/ledger.mts`](../packages/telescope-cli/src/archives/ledger.mts): each archive's `archive-ledger.mts` states how
 to survey its archive, read its ledger back and render its page, and the few ways its command differs (which passes write,
 whether it has a `--local` pass, whether receipt problems fail the run, the JSON indent). Its
-[test](../tools/objects/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
+[test](../packages/telescope-cli/src/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
 
 ## Asking which observations might measure something
 
@@ -801,7 +801,7 @@ source-label target names against PDS context products through Peppi; cssEarth k
 is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/pds/discover.mts --archive pds --target charon --write
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target charon --write
 ```
 
 Peppi exhausts the target's `Product_Observational` records across processing levels. cssEarth verifies every returned label against the Registry,

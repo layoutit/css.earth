@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run the ESO NACO pipeline on a pinned program, from the raw frames.
  *
- *   node tools/objects/naco/reduce.mts <program id> <work directory> [--raw <dir>] [--template <tpl_start>]
+ *   node packages/telescope-cli/src/archives/naco/reduce.mts <program id> <work directory> [--raw <dir>] [--template <tpl_start>]
  *
  * Three recipes, in the order the pipeline manual gives them: `naco_img_dark` over the associated darks, `naco_img_twflat`
  * over the twilight flats with those darks, and `naco_img_jitter` over the science frames with the master dark, the master

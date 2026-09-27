@@ -14,7 +14,7 @@ import { archiveMasterPin, binning, checkAgainstArchive, compareOnDetector, over
   skyToPixel, statistics, storedOrigin,
   wcsShift, type Wcs } from './compare.mts';
 import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, observationsOf, RECEIPT_SCHEMA, type Ledger, type MoonRow, GEMINI_TARGET_NAMES } from './archive-ledger.mts';
-import { matchNumberedTarget, parseNumberedTarget } from '../archives/targets.mts';
+import { matchNumberedTarget, parseNumberedTarget } from '@cssearth/telescope-cli/archives/targets';
 import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { sha256File } from '@cssearth/core/node';
