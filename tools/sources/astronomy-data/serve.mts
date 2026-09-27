@@ -109,7 +109,8 @@ function labels(): Record<string, string> {
   return out;
 }
 // What cssEarth knows about each body: its kind and parent from packages/astronomy/data/bodies, and whether it has an
-// object package. A ledger body matches a record by id, hyphenated name or comet id ("67p" is comet-67p).
+// object package. A ledger body matches a record by id, hyphenated name ("3i/atlas" is 3i-atlas) or comet id ("67p"
+// is comet-67p).
 const repository = resolve(root, "../../..");
 const packages = new Set(
   (await readdir(resolve(repository, "src/objects"), { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name),
@@ -128,7 +129,7 @@ for (const file of await readdir(resolve(repository, "packages/astronomy/data/bo
 // row into two groups, so their children stay at the top level.
 const roots = new Set(["sun", "sgr-a-star"]);
 const catalogue: ViewerData["catalogue"] = {};
-const idOf = (token: string) => [token, token.replaceAll(" ", "-"), "comet-" + token].find((c) => known.has(c) || packages.has(c)) ?? "";
+const idOf = (token: string) => [token, token.replaceAll(/[\s/]+/g, "-"), "comet-" + token].find((c) => known.has(c) || packages.has(c)) ?? "";
 const proposalList = await proposals();
 for (const token of [...recorded, ...proposalList.flatMap((p) => p.bodies)]) {
   const id = idOf(token), record = known.get(id);

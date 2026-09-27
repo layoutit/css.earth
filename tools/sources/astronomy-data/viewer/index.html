@@ -54,8 +54,11 @@ th.sortable:hover, th[aria-sort="ascending"], th[aria-sort="descending"] { color
 .caret { font: inherit; color: var(--shell-text-muted); background: none; border: 0; padding: 0; width: 20px; text-align: left; cursor: pointer; }
 .caret:hover { color: var(--shell-text); }
 .sub-inline { color: var(--shell-text-muted); font: var(--shell-font-metadata); margin-left: 6px; }
+tbody tr.link:not(.system):not(.member) td:first-child { padding-left: 20px; }
 tr.member td:first-child { padding-left: 40px; }
 tr.member td { color: var(--shell-text-secondary); }
+tr.kind td { font: var(--shell-font-section-heading); color: var(--shell-text); padding-top: 28px; border-bottom: 1px solid var(--shell-border); cursor: pointer; }
+tr.kind:first-child td { padding-top: 12px; }
 .loading { color: var(--shell-text-muted); }
 @media (max-width: 700px) { td.reason, th.reason, td.hide, th.hide { display: none; } tr.member td:first-child { padding-left: 24px; } .filters input[type="search"] { width: 100%; } }
 </style>

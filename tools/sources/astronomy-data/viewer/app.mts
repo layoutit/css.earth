@@ -88,7 +88,6 @@ const statsOf = (e: Entry) => system.get(e) ?? own.get(e) ?? stats([], []);
 type Column = { key: string; label: string; numeric: boolean; value: (e: Entry, s: Stats) => number | string; cls?: string };
 const columns: Column[] = [
   { key: "body", label: "Body", numeric: false, value: (e) => name(e.token).toLowerCase() },
-  { key: "kind", label: "Kind", numeric: false, value: (e) => info(e.token).kind, cls: "hide" },
   { key: "cssearth", label: "In cssEarth", numeric: false, value: (e) => (info(e.token).object ? "yes" : ""), cls: "hide" },
   { key: "proposals", label: "Proposals", numeric: true, value: (_, s) => s.proposals.length },
   { key: "priority", label: "Best priority", numeric: true, value: (_, s) => (Number.isFinite(s.priority) ? s.priority : Infinity) },
@@ -109,6 +108,7 @@ const state = {
   sort: columns.some((c) => c.key === url.get("sort")) ? (url.get("sort") ?? "proposals") : "proposals",
   ascending: url.get("dir") === "asc",
   expanded: new Set<string>(),
+  closedKinds: new Set<string>(),
 };
 function saveUrl(extra: Record<string, string> = {}) {
   const p = new URLSearchParams();
@@ -149,8 +149,8 @@ function compare(a: Entry, b: Entry, sa = statsOf(a), sb = statsOf(b)): number {
 // ---------- the table
 
 function cells(e: Entry, s: Stats, label: string): string {
-  const kind = info(e.token).kind, object = info(e.token).object;
-  return `<td>${label}</td><td class="meta hide">${esc(human(kind))}</td><td class="meta hide">${object ? "Yes" : ""}</td><td class="n">${s.proposals.length || ""}</td><td class="n">${
+  const object = info(e.token).object;
+  return `<td>${label}</td><td class="meta hide">${object ? "Yes" : ""}</td><td class="n">${s.proposals.length || ""}</td><td class="n">${
     Number.isFinite(s.priority) ? s.priority : ""
   }</td><td class="n hide">${s.blocked || ""}</td><td class="n">${s.candidates || ""}</td><td class="n">${s.review || ""}</td><td class="n hide">${s.images || ""}</td><td class="n">${
     number(s.rows.length)
@@ -163,27 +163,59 @@ function childrenWord(e: Entry): string {
   const n = e.children.length;
   return `${number(n)} ${word === "body" ? (n === 1 ? "body" : "bodies") : word + (n === 1 ? "" : "s")}`;
 }
+// Section order and headings for the kinds packages/astronomy uses; a kind missing here sorts after them.
+const kindOrder = ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "star", "black-hole", "exoplanet", ""];
+const kindHeading: Record<string, string> = {
+  planet: "Planets",
+  "dwarf-planet": "Dwarf planets",
+  satellite: "Moons",
+  asteroid: "Asteroids",
+  "trans-neptunian": "Trans-Neptunian objects",
+  comet: "Comets",
+  interstellar: "Interstellar objects",
+  star: "Stars",
+  "black-hole": "Black holes",
+  exoplanet: "Exoplanets",
+  "": "Unclassified",
+};
+const kindRank = (k: string) => (kindOrder.includes(k) ? kindOrder.indexOf(k) : kindOrder.length - 1.5);
+function entryRows(e: Entry, active: boolean): string[] {
+  if (!e.children.length)
+    return passes(e) ? [`<tr class="link" data-body="${esc(e.token)}">${cells(e, own.get(e) ?? stats([], []), esc(name(e.token)))}</tr>`] : [];
+  const members = [...(e.token === other ? [] : [e]), ...[...e.children].sort((a, b) => compare(a, b, own.get(a), own.get(b)))];
+  const shown = active ? members.filter(passes) : members;
+  if (!shown.length) return [];
+  const open = active || state.expanded.has(e.token);
+  const caret = `<button class="caret" data-toggle="${esc(e.token)}" aria-expanded="${open}" aria-label="Show ${esc(childrenWord(e))}">${open ? "▾" : "▸"}</button>`;
+  const out = [
+    `<tr class="link system" data-body="${esc(e.token)}" data-system="1">${cells(e, statsOf(e), `${caret}${esc(name(e.token))} <span class="sub-inline">${e.token === other ? "" : "system · "}${esc(childrenWord(e))}</span>`)}</tr>`,
+  ];
+  if (open)
+    for (const m of shown)
+      out.push(
+        `<tr class="link member" data-body="${esc(m.token)}">${cells(m, own.get(m) ?? stats([], []), m === e ? esc(name(e.token)) + ' <span class="sub-inline">itself</span>' : esc(name(m.token)))}</tr>`,
+      );
+  return out;
+}
 function tableRows(): string {
-  const out: string[] = [];
   const active = filtering();
-  for (const e of [...top].sort((a, b) => compare(a, b))) {
-    if (!e.children.length) {
-      if (passes(e)) out.push(`<tr class="link" data-body="${esc(e.token)}">${cells(e, own.get(e) ?? stats([], []), esc(name(e.token)))}</tr>`);
-      continue;
-    }
-    const members = [...(e.token === other ? [] : [e]), ...[...e.children].sort((a, b) => compare(a, b, own.get(a), own.get(b)))];
-    const shown = active ? members.filter(passes) : members;
-    if (!shown.length) continue;
-    const open = active || state.expanded.has(e.token);
-    const caret = `<button class="caret" data-toggle="${esc(e.token)}" aria-expanded="${open}" aria-label="Show ${esc(childrenWord(e))}">${open ? "▾" : "▸"}</button>`;
+  const groups = new Map<string, Entry[]>();
+  for (const e of top) {
+    const kind = e.token === other ? "other" : info(e.token).kind;
+    groups.set(kind, [...(groups.get(kind) ?? []), e]);
+  }
+  const order = [...groups.keys()].sort((a, b) => (a === "other" ? 1 : b === "other" ? -1 : kindRank(a) - kindRank(b) || a.localeCompare(b)));
+  const out: string[] = [];
+  for (const kind of order) {
+    const members = (groups.get(kind) ?? []).sort((a, b) => compare(a, b));
+    const rows = members.map((e) => entryRows(e, active)).filter((r) => r.length);
+    if (!rows.length) continue;
+    const heading = kind === "other" ? "Not in the cssEarth catalogue" : kindHeading[kind] ?? human(kind);
+    const closed = !active && state.closedKinds.has(kind);
     out.push(
-      `<tr class="link system" data-body="${esc(e.token)}" data-system="1">${cells(e, statsOf(e), `${caret}${esc(name(e.token))} <span class="sub-inline">${e.token === other ? "" : "system · "}${esc(childrenWord(e))}</span>`)}</tr>`,
+      `<tr class="kind" data-kind="${esc(kind)}"><td colspan="${columns.length}"><button class="caret" aria-expanded="${!closed}">${closed ? "▸" : "▾"}</button>${esc(heading)} <span class="sub-inline">${number(rows.length)}</span></td></tr>`,
     );
-    if (open)
-      for (const m of shown)
-        out.push(
-          `<tr class="link member" data-body="${esc(m.token)}">${cells(m, own.get(m) ?? stats([], []), m === e ? esc(name(e.token)) + ' <span class="sub-inline">itself</span>' : esc(name(m.token)))}</tr>`,
-        );
+    if (!closed) out.push(...rows.flat());
   }
   return out.join("");
 }
@@ -273,6 +305,13 @@ main.addEventListener("click", (event) => {
     const t = toggle.dataset.toggle;
     if (state.expanded.has(t)) state.expanded.delete(t);
     else state.expanded.add(t);
+    return refreshRows();
+  }
+  const section = target.closest<HTMLElement>("tr[data-kind]");
+  if (section?.dataset.kind !== undefined) {
+    const k = section.dataset.kind;
+    if (state.closedKinds.has(k)) state.closedKinds.delete(k);
+    else state.closedKinds.add(k);
     return refreshRows();
   }
   const th = target.closest<HTMLElement>("th[data-sort]");

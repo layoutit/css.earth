@@ -20,7 +20,7 @@ sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
 ```
 
 The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. It is one
-table of every body the ledger names, with its kind, whether cssEarth has it,
+table of every body the ledger names, grouped by kind, with whether cssEarth has it,
 its proposals, best priority, blocked proposals, candidate and needs-review
 records, preview images, records and sources. Moons and exoplanets sit inside
 their system; a system row adds up its members, counting each record once. Kind
