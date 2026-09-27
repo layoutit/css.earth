@@ -149,7 +149,8 @@ export default [
   },
   {
     // Moved unchanged from tools/objects, which warns instead of failing on the line limit; splitting them is separate work.
-    // The layered-oblate and cutaway bakes and the navigation preparation were held byte-identical across the move, so none is split here.
+    // The layered-oblate and cutaway bakes were held byte-identical across the move, so neither module is split here. The navigation
+    // preparation moved with only its imports, checkout root and a lazy registry read changed; its outputs stayed byte-identical.
     files: ['packages/bake/src/objects/layers/material-composition/layered-oblate.ts', 'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts',
       'packages/bake/src/navigation/prepare-navigation.ts'],
     rules: { 'max-lines': 'off' },
