@@ -1,4 +1,4 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -9,9 +9,9 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, textureT
 import { leafRasterScale, requireOutwardCap } from '@cssearth/bake/scene';
 import { floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, loadWholeDiscColour } from '@cssearth/bake/objects/raster';
-import { prepareSurfaceColour, widestPublishedImage } from './layered-oblate.mts';
+import { prepareSurfaceColour, widestPublishedImage } from '@cssearth/bake/objects/layers/material-composition';
 import { polarQuad } from '@cssearth/bake/objects/layers/material-composition';
-import { assertCapFacesOut } from '../../../tests/objects/polar-caps.mts';
+import { assertCapFacesOut } from '../polar-caps.mts';
 
 const image = (path: string, width: number, height: number) =>
   sharp({ create: { width, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).webp({ lossless: true }).toFile(path);

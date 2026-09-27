@@ -145,6 +145,12 @@ export default [
     rules: { 'max-lines': 'off' },
   },
   {
+    // Moved unchanged from tools/objects, which warns instead of failing on the line limit; splitting them is separate work.
+    // The layered-oblate and cutaway bakes were held byte-identical across the move, so neither module is split here.
+    files: ['packages/bake/src/objects/layers/material-composition/layered-oblate.ts', 'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
     files: ['packages/engine/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

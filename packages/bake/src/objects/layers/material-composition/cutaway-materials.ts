@@ -1,19 +1,19 @@
 import { sha256 } from '@cssearth/core/node';
 import {parse} from '@cssearth/core/schema';
-import { cutawayRecipe, interiorSource, type InteriorSource } from '@cssearth/bake/objects/layers/cutaway';
-import type {ReadonlyVector3, Vector3} from '@cssearth/bake/objects/geometry';
+import { cutawayRecipe, interiorSource, type InteriorSource } from '../cutaway/index.ts';
+import type {ReadonlyVector3, Vector3} from '../../geometry/index.ts';
 interface InteriorLensPlan {id:string;model:string;qualification:string;palette:InteriorSource['palette'];sectionResponse:{innerFloor:number;startRadius:number;exponent:number};shellGain:{metallic:number;core:number};filter?:string;wavelength?:string}
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '@cssearth/bake/delivery';
-import {writeLossyWebp} from '@cssearth/bake/raster';
-import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {dotVector as dot3} from '@cssearth/bake/objects/geometry';
+import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../../delivery/index.ts';
+import {writeLossyWebp} from '../../../raster/index.ts';
+import {verifyObservationSources} from '../observed-surfaces/index.ts';
+import {dotVector as dot3} from '../../geometry/index.ts';
 
 /** Interior cutaways are smooth illustrations, written in the lossy lane (lossy-lane.ts). */
 const INTERIOR_WEBP = { alphaQuality: 100, effort: 6 } as const;
-import {validateMaterialRecipe,validateRelativePath} from '@cssearth/bake/objects/layers/material-composition';
+import {validateMaterialRecipe,validateRelativePath} from './recipe.ts';
 /** Declared radial composition, two-face cutaway shading, and polar wedge rasters. */
 export async function prepareCutawayMaterials({sourceDirectory,publicDirectory,config:input,objectLightDirection}: {sourceDirectory:string;publicDirectory:string;config:unknown;objectLightDirection:ReadonlyVector3}) {
   const config=parse(input,cutawayRecipe,'cutaway material recipe');
