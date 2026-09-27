@@ -112,7 +112,7 @@ def main(job_path: str) -> None:
     out_header["FOOTTHRS"] = (threshold, "least fractional overlap a frame may contribute")
     out_header["BGMATCH"] = (passes, "zero-mean additive background matching passes")
     out_header["IMSKFATL"] = (int(job["fatalImaskBits"]), "imask bits that reject a pixel")
-    out_header["ORIGIN"] = "cssEarth tools/objects/spitzer"
+    out_header["ORIGIN"] = "cssEarth packages/telescope-cli/src/archives/spitzer"
     out_header["PIPELINE"] = ("open re-mosaic", "NOT the Spitzer Science Center pipeline")
     fits.PrimaryHDU(combined.astype(np.float32), header=out_header).writeto(job["output"], overwrite=True)
 
