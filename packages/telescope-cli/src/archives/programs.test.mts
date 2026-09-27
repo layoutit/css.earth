@@ -26,3 +26,11 @@ test('a written or recognised path names one file among the programs, never a pa
     assert.throws(() => spitzer.recorded(name), /not the name of a file/u, name);
   }
 });
+
+test('JWST keeps one programs folder beside each tool that reads it, each found where its former folder was', () => {
+  assert.equal(archivePrograms('jwst').path, 'packages/telescope-cli/src/archives/jwst/programs');
+  assert.equal(archivePrograms('jwst/imaging').current('tools/objects/jwst/imaging/programs/europa-1250.json'),
+    'packages/telescope-cli/src/archives/jwst/imaging/programs/europa-1250.json');
+  assert.deepEqual(archivePrograms('jwst/klip').recorded('hr-8799-1194.json'),
+    ['packages/telescope-cli/src/archives/jwst/klip/programs/hr-8799-1194.json', 'tools/objects/jwst/klip/programs/hr-8799-1194.json']);
+});

@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { compareLightCurves, parseLightCurve, type LightCurve } from './compare-light-curves.mts';
 import { JWST_PROGRAMS, readProgram, renderSettings } from './reduce-tso.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
+import { eurekaToolchain } from './toolchain.mts';
 
 const repository = WORKSPACE;
 const program = resolve(WORKSPACE, JWST_PROGRAMS.path, 'wasp-43b-miri-1366');
@@ -136,4 +137,9 @@ test('the TRAPPIST-1b phase-curve program pins the whole visit as MIRI photometr
   }
   // One worker, because this machine runs one heavy job at a time.
   assert.match(stage3, /^ncpu\s+1$/mu);
+});
+
+test('the Eureka! toolchain reads its descriptor and lock beside this code before it looks for an installed environment', async () => {
+  // Installed or not, the pins are read first: a missing descriptor or lock fails with ENOENT, anything else is about the install.
+  await eurekaToolchain('jwst_1535.pmap').catch((error: unknown) => assert.doesNotMatch(String(error), /ENOENT/u));
 });
