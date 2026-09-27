@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-2102-09091",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Miller-Jones et al. (2021): Cygnus X-1 contains a 21-solar mass black hole -- implications for massive star winds",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2102.09091"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.abb3363"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2102.09091",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/science.abb3363",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2102.09091",
+      "checkedOn": "2026-09-27",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Miller-Jones et al. (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2102.09091"
+    }
+  ],
+  "creators": [
+    "James C. A. Miller-Jones",
+    "Arash Bahramian",
+    "Jerome A. Orosz",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

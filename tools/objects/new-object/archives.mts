@@ -138,6 +138,9 @@ export async function identify(resolver: Resolver, target: string | undefined, g
   return { ...ids, gaia: source };
 }
 
+/** How a citation names one author: the surname, or a collaboration's whole name ("GRAVITY Collaboration", not "Collaboration"). */
+export const isCollaboration = (creator: string) => /\b(collaboration|consortium|team)\b/iu.test(creator);
+export const citedName = (creator: string) => isCollaboration(creator) ? creator.trim() : creator.split(' ').at(-1)!;
 export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly wikipedia?: { readonly revision?: string }; readonly url: string; readonly page?: true }
 // arXiv's Atom feed and Crossref's JSON both carry HTML entities in titles and journal names ("A&amp;A").
 const clean = (value: string) => decodeEntities(value).replace(/\s+/gu, ' ').trim();

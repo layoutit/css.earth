@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { discDensity, fitDiscEnvelope, ringGeometry, type SkyPlane } from './disc-envelope.mts';
+import { discDensity, fitDiscEnvelope, ringGeometry, smoothToBeam, subtractPointSources, type SkyPlane } from './disc-envelope.mts';
+import type { SkyProjection } from '@cssearth/fits';
 
 const SIZE = 64, HALF = 140, STEP = 2 * HALF / SIZE;
 
@@ -56,4 +57,49 @@ test('a spherical shell is not drawn as a ring', () => {
 test('a ridge that is mostly noise is refused', () => {
   const sky = render(() => 0, 1);
   assert.throws(() => ringGeometry(sky, { innerMaskUnits: 30, outerUnits: 120 }), /ridge is found in only/u);
+});
+
+/** A north-up, east-left image of 0.19 arcsec pixels about RA 53.2, Dec -9.46, with an ALMA-like beam. */
+const W = 120, H = 110, PIXEL = 0.19, RA0 = 53.2, DEC0 = -9.46, COS = Math.cos(DEC0 * Math.PI / 180);
+const projection: SkyProjection = {
+  pixelOf: (ra, dec) => [(W - 1) / 2 - (ra - RA0) * COS * 3600 / PIXEL, (H - 1) / 2 + (dec - DEC0) * 3600 / PIXEL],
+  skyOf: (x, y) => [RA0 - (x - (W - 1) / 2) * PIXEL / 3600 / COS, DEC0 + (y - (H - 1) / 2) * PIXEL / 3600],
+  scaleArcsec: PIXEL,
+};
+const header = { BMAJ: 1.288 / 3600, BMIN: 0.955 / 3600, BPA: -78.3 };
+/** A point source as the image shows it: the beam, drawn independently of the code under test, at an offset in arcsec. */
+function pointImage(peak: number, eastArcsec: number, northArcsec: number, majorArcsec = 1.288, minorArcsec = 0.955, paDeg = -78.3) {
+  const values = new Float64Array(W * H), k = 2 * Math.sqrt(2 * Math.log(2)), pa = paDeg * Math.PI / 180;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const e = -(x - (W - 1) / 2) * PIXEL - eastArcsec, n = (y - (H - 1) / 2) * PIXEL - northArcsec;
+    const along = e * Math.sin(pa) + n * Math.cos(pa), across = e * Math.cos(pa) - n * Math.sin(pa);
+    values[y * W + x] = peak * Math.exp(-((along * k / majorArcsec) ** 2 + (across * k / minorArcsec) ** 2) / 2);
+  }
+  return values;
+}
+
+test('a point source at its published position and peak is removed to nothing', () => {
+  const image = pointImage(990e-6, 3.1, -2.4);
+  const cleaned = subtractPointSources('synthetic', image, W, H, header, projection, [{ raDeg: RA0 + 3.1 / 3600 / COS, decDeg: DEC0 - 2.4 / 3600, peak: 990e-6 }]);
+  // Within 0.001% of the peak: the synthetic projection's scale is taken at the image centre.
+  assert.ok(Math.max(...cleaned.map(Math.abs)) < 1e-8, `left ${Math.max(...cleaned.map(Math.abs))}`);
+});
+
+test('smoothing to a larger beam keeps the peak of a point source and scales an even field by the ratio of the beam areas', () => {
+  // A point source's peak per beam is its flux, whatever the beam; an even field's Jy per beam grows with the beam's area.
+  const smoothed = smoothToBeam('synthetic', pointImage(1e-3, 0, 0), W, H, header, projection, { majorArcsec: 1.6, minorArcsec: 1.2, positionAngleDeg: 102 });
+  const expected = pointImage(1e-3, 0, 0, 1.6, 1.2, 102);
+  assert.ok(Math.abs(Math.max(...smoothed) / Math.max(...expected) - 1) < 0.01, `peak ${Math.max(...smoothed)} against ${Math.max(...expected)}`);
+  const worst = Math.max(...expected.map((v, i) => Math.abs(v - smoothed[i]!)));
+  assert.ok(worst < 0.02e-3, `shape differs by ${worst}`);
+  const even = smoothToBeam('synthetic', new Float64Array(W * H).fill(1), W, H, header, projection, { majorArcsec: 1.6, minorArcsec: 1.2, positionAngleDeg: 102 });
+  assert.ok(Math.abs(even[(H >> 1) * W + (W >> 1)]! - (1.6 * 1.2) / (1.288 * 0.955)) < 1e-9);
+  assert.throws(() => smoothToBeam('synthetic', even, W, H, header, projection, { majorArcsec: 1, minorArcsec: 0.8, positionAngleDeg: 0 }), /does not fit inside the target beam/u);
+});
+
+test('a published ring width is scored as stated, not searched', () => {
+  const sky = render(discDensity(ring), 0.02);
+  const geometry = ringGeometry(sky, { innerMaskUnits: 30, outerUnits: 120 });
+  const fit = fitDiscEnvelope(sky, geometry, { innerMaskUnits: 30, outerUnits: 120, nearSidePositionAngleDeg: 190, heightOfRadius: 0.05, publishedWidthUnits: 11 });
+  assert.equal(fit.ring.gaussianWidthUnits, 11);
 });

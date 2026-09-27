@@ -65,6 +65,49 @@ test('the colour comes from the first route that reads, the cross-check from the
   const none = await chooseColor(spec, row, { main: 'x' }, archive, cmf);
   assert.equal(none.route, 'planck');
   assert.match(String((none.record.temperature as { published: { citation: string } }).published.citation), /no uncertainty/u);
+  // Routes the spec skips are not archives that lack the star: the spec's reason is the Planck colour's reason, said once.
+  const reason = 'Dust reddens every spectrum of this star';
+  const skipped = await chooseColor(parseStarSpec({ ...star, color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason } }), row, { main: 'x', hd: 39587, hr: 2047 }, archive, cmf);
+  assert.equal(skipped.route, 'planck');
+  assert.equal(skipped.summary.split(reason.toLowerCase()).length + skipped.summary.split(reason).length - 2, 1, skipped.summary);
+  assert.doesNotMatch(skipped.summary, /[Nn]o archive holds a spectrum/u);
+  assert.deepEqual(skipped.tried, ['stis-ngsl: skipped', 'gaia-xp: skipped', 'pulkovo: skipped', 'kiehling: skipped', 'kharitonov: skipped', 'burnashev: skipped']);
+});
+
+test('a black hole companion is a record only: a mass, no temperature, and no radius unless one is measured', async () => {
+  const cited = { value: 21.2, source: 'Miller-Jones et al. (2021), Table 1', url: 'https://arxiv.org/abs/2102.09091' };
+  const orbit = { elements: { periodDays: 5.599836, semiMajorAxisStellarRadii: 2.3528, inclinationDegrees: 152.49, eccentricity: 0.0189, argumentOfPeriapsisDegrees: 126.6, transitTimeBmjdTdb: 41160.8322, ascendingNodePositionAngleDegrees: 64.1 }, epoch: 'periastron', source: 's', url: cited.url };
+  const hole = { id: 'test-hole', name: 'Test Hole', description: 'A black hole.', paper: star.paper, blackHole: true, mass: cited, orbit };
+  const spec = parseStarSpec({ ...star, companions: [hole] }).companions[0]!;
+  assert.equal(spec.blackHole, true);
+  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...hole, temperature: { ...cited, value: 1e4 } }] }), /a black hole has no effective temperature/u);
+  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...hole, mass: undefined }] }), /a black hole needs its cited mass/u);
+  assert.throws(() => parseStarSpec({ ...star, planets: [{ ...hole, radius: cited }] }), /only a companion may be a black hole/u);
+  const { hostedRecord } = await import('./hosted.mts');
+  const host = { spec: { id: 'test-star', system: 'Test system' } as never, body: { physical: { meanRadiusKm: 15514110 }, star: { distanceParsecs: 2252.75 } } };
+  const record = await hostedRecord(spec, host, 1, {} as Archive, root);
+  const body = record.body as { classification: string; physical: Record<string, unknown>; physicalNotes: string };
+  assert.equal(body.classification, 'black-hole');
+  assert.equal(body.physical.meanRadiusKm, 0, 'no source measures its size');
+  assert.equal(body.physical.effectiveTemperatureK, undefined);
+  assert.match(body.physicalNotes, /No source measures a size/u);
+  assert.equal(record.radius, undefined);
+});
+
+test('a body another owner records is packaged from that record, and the spec\'s cited values must reproduce it', async () => {
+  const s2 = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/s2.json'), 'utf8'));
+  const cite = (value: number) => ({ value, source: 'Habibi et al. (2017), Table 3', url: 'https://arxiv.org/abs/1708.06353' });
+  const entry = { id: 's2', name: 'S2', description: 'A star.', paper: { url: 'https://arxiv.org/abs/2112.07478', credit: 'GRAVITY (2022)' }, radius: cite(5.53), mass: cite(13.6), temperature: cite(28513),
+    orbit: { record: true, source: 'GRAVITY Collaboration (2022), Table 1', url: 'https://arxiv.org/abs/2112.07478' } };
+  const spec = parseObjectSpecs([{ host: 'sgr-a-star', companions: [entry] }]).additions[0]!.companions[0]!;
+  assert.throws(() => parseObjectSpecs([{ host: 'sgr-a-star', companions: [{ ...entry, orbit: { record: 'yes' } }] }]), /record is true or absent/u);
+  const { hostedRecord } = await import('./hosted.mts'), host = { spec: { id: 'sgr-a-star', system: 'Sagittarius A* system' } as never, body: {} };
+  const kept = await hostedRecord(spec, host, 0, {} as Archive, root);
+  assert.equal(kept.kept, true);
+  assert.deepEqual(kept.body, s2, 'the record is kept as its owner wrote it');
+  assert.deepEqual(kept.orbit, s2.hostedOrbit);
+  await assert.rejects(hostedRecord({ ...spec, radius: cite(5.6) }, host, 0, {} as Archive, root), /s2\.json physical\.meanRadiusKm is 3847221; the spec's cited value gives 3895920/u);
+  await assert.rejects(hostedRecord(spec, { ...host, spec: { id: 'vega', system: 'x' } as never }, 0, {} as Archive, root), /has parent sgr-a-star, not vega/u);
 });
 
 test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', async () => {

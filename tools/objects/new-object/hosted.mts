@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { scaffoldHostedPlanetFiles, TODO as HOSTED_TODO } from '../new-hosted-planet.mts';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { parseCieTable } from '@cssearth/bake/objects/color';
-import { type Archive, type Publication } from './archives.mts';
+import { citedName, isCollaboration, type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { quoteSource } from './prose.mts';
@@ -27,11 +27,33 @@ const fixed = (value: number, digits: number) => Number(value.toFixed(digits));
 export interface HostedRecord {
   readonly spec: HostedSpec; readonly hostId: string; readonly system: string; readonly body: Record<string, unknown>; readonly order: number;
   readonly orbit: HostedOrbit; readonly orbitCitation: { readonly text: string; readonly url?: string; readonly bibcode?: string; readonly label: string };
-  readonly radius: Cited; readonly mass: Cited & { readonly limit?: true; readonly unmeasured?: true }; readonly documents: Map<string, string>; readonly todo: readonly string[];
+  /** Absent only for a black hole no source measures the size of. */
+  readonly radius: Cited | undefined; readonly mass: Cited & { readonly limit?: true; readonly unmeasured?: true }; readonly documents: Map<string, string>; readonly todo: readonly string[];
+  /** The astronomy record exists under another owner and is kept as it is: only the package is written. */
+  readonly kept?: true;
+}
+
+/** A body whose astronomy record another owner writes (spec route { "record": true }): its orbit and values are the record's, and the
+ * spec's cited radius, mass and temperature must reproduce them, so the package's facts cannot drift from the record they describe. */
+async function keptRecord(spec: HostedSpec, host: { readonly spec: StarSpec; readonly body: Record<string, any> }, root: string): Promise<HostedRecord> {
+  const o = spec.orbit as Extract<HostedSpec['orbit'], { record: true }>, path = `packages/astronomy/data/bodies/${spec.id}.json`;
+  const body = JSON.parse(await readFile(resolve(root, path), 'utf8')) as Record<string, any>, physical = body.physical ?? {};
+  if (physical.parent !== host.spec.id) throw new Error(`${spec.id}: ${path} has parent ${physical.parent}, not ${host.spec.id}.`);
+  if (!body.hostedOrbit) throw new Error(`${spec.id}: ${path} has no hostedOrbit to package.`);
+  const star = spec.kind === 'companion', unit = star ? { r: SOLAR_RADIUS_KM, gm: GM_SUN } : { r: JUPITER_RADIUS_KM, gm: JUPITER_GM };
+  const agree = (field: string, recorded: number, cited: number, digits: number) => {
+    if (Math.abs(recorded - cited) > 0.5 * 10 ** -digits) throw new Error(`${spec.id}: ${path} ${field} is ${recorded}; the spec's cited value gives ${cited}. The record's owner and the spec must agree.`);
+  };
+  agree('physical.meanRadiusKm', Number(physical.meanRadiusKm), fixed(spec.radius!.value * unit.r, 0), 0);
+  agree('physical.gravitationalParameterKm3PerS2', Number(physical.gravitationalParameterKm3PerS2), fixed(spec.mass!.value * unit.gm, 0), 0);
+  if (spec.temperature) agree('physical.effectiveTemperatureK', Number(physical.effectiveTemperatureK), spec.temperature.value, 0);
+  return { spec, hostId: host.spec.id, system: host.spec.system, body, order: Number(body.order), orbit: body.hostedOrbit as HostedOrbit,
+    orbitCitation: { text: o.source, url: o.url, label: o.source }, radius: spec.radius!, mass: spec.mass!, documents: new Map(), todo: [], kept: true };
 }
 
 /** The orbit and physical values of one hosted body, and the files that record how the orbit was chosen. */
 export async function hostedRecord(spec: HostedSpec, host: { readonly spec: StarSpec; readonly body: Record<string, any> }, order: number, archive: Archive, root: string): Promise<HostedRecord> {
+  if ('record' in spec.orbit) return keptRecord(spec, host, root);
   const hostRadiusKm = Number(host.body.physical.meanRadiusKm), distance = Number(host.body.star.distanceParsecs), documents = new Map<string, string>(), todo: string[] = [];
   let orbit: HostedOrbit, assembled: AssembledOrbit | undefined, citation: HostedRecord['orbitCitation'];
   if ('whereistheplanet' in spec.orbit) {
@@ -54,7 +76,7 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     orbit = assembled.orbit; if (assembled.todo) todo.push(assembled.todo);
     const row = assembled.row ?? assembled.rows.find(entry => spec.orbit && 'reference' in spec.orbit && spec.orbit.reference ? entry.reference === spec.orbit.reference || entry.label === spec.orbit.reference : entry.isDefault) ?? assembled.rows[0]!;
     citation = { text: `${row.label}${row.bibcode ? ` (${row.bibcode})` : ''}, via the NASA Exoplanet Archive`, ...(row.url ? { url: row.url } : {}), ...(row.bibcode ? { bibcode: row.bibcode } : {}), label: row.label };
-  } else {
+  } else if ('elements' in spec.orbit) {
     const e = spec.orbit.elements, cite = `${spec.orbit.source} (${spec.orbit.url})`;
     orbit = { periodDays: e.periodDays!, semiMajorAxisStellarRadii: e.semiMajorAxisStellarRadii!, inclinationDegrees: e.inclinationDegrees!, eccentricity: e.eccentricity!,
       ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: e.argumentOfPeriapsisDegrees }), ...(spec.orbit.epoch ? { epochDefinition: spec.orbit.epoch } : {}), transitTimeBmjdTdb: e.transitTimeBmjdTdb!,
@@ -63,21 +85,23 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
         ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsis: `${cite}: omega ${e.argumentOfPeriapsisDegrees} degrees (the star's)` }), phase: `${cite}: ${spec.orbit.epoch === 'periastron' ? 'periastron passage' : spec.orbit.epoch === 'superior-conjunction' ? 'the body behind its host (superior conjunction)' : 'transit (inferior conjunction)'} at ${e.transitTimeBmjdTdb} BMJD_TDB`,
         orientation: e.ascendingNodePositionAngleDegrees === undefined ? 'Display convention: the orbit\'s position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).' : `${cite}: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north` } };
     citation = { text: spec.orbit.source, url: spec.orbit.url, label: spec.orbit.source };
-  }
+  } else throw new Error(`${spec.id}: unreachable orbit route.`);
   const fromRow = (picked: AssembledOrbit['mass'] | undefined, label: string): Cited & { limit?: true; unmeasured?: true } => {
     if (!picked) throw new Error(`${spec.id}: give ${label} with its source; no archive row supplies it.`);
     return { value: picked.value, ...(picked.limit ? { limit: true as const } : {}), ...(picked.unmeasured ? { unmeasured: true as const } : {}), source: picked.unmeasured ? picked.row.label : `${picked.row.label}${picked.row.bibcode ? ` (${picked.row.bibcode})` : ''}, via the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   };
-  const radius = spec.radius ?? fromRow(assembled?.radius, 'radius'), mass = spec.mass ?? fromRow(assembled?.mass, 'mass');
+  const blackHole = spec.blackHole === true;
+  const radius = blackHole ? spec.radius : spec.radius ?? fromRow(assembled?.radius, 'radius'), mass = spec.mass ?? fromRow(assembled?.mass, 'mass');
   const star = spec.kind === 'companion', unit = star ? { r: SOLAR_RADIUS_KM, gm: GM_SUN, rn: 'solar radii', mn: 'solar masses', rper: 'km per solar radius', gmn: 'the JPL solar GM' }
     : { r: JUPITER_RADIUS_KM, gm: JUPITER_GM, rn: 'Jupiter radii', mn: 'Jupiter masses', rper: 'km per Jupiter radius', gmn: "JPL's Jupiter GM" };
-  const radiusKm = radius.value * unit.r, t = spec.temperature;
-  const body = { id: spec.id, classification: star ? 'star' : 'exoplanet', order,
-    physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(radiusKm, 1), gravitationalParameterKm3PerS2: ('limit' in mass && mass.limit) || ('unmeasured' in mass && mass.unmeasured) ? 0 : fixed(mass.value * unit.gm, 2), parent: host.spec.id, ...(star ? { effectiveTemperatureK: t!.value } : {}) },
-    physicalNotes: `Radius ${radius.value}${radius.uncertainty ? ` +/- ${radius.uncertainty}` : ''} ${unit.rn} from ${radius.source} (${radius.url}): ${fixed(radiusKm, 1).toLocaleString('en-US')} km at ${unit.r.toLocaleString('en-US')} ${unit.rper}. `
+  const radiusKm = radius ? radius.value * unit.r : 0, t = spec.temperature;
+  const body = { id: spec.id, classification: blackHole ? 'black-hole' : star ? 'star' : 'exoplanet', order,
+    physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(radiusKm, 1), gravitationalParameterKm3PerS2: ('limit' in mass && mass.limit) || ('unmeasured' in mass && mass.unmeasured) ? 0 : fixed(mass.value * unit.gm, 2), parent: host.spec.id, ...(star && !blackHole ? { effectiveTemperatureK: t!.value } : {}) },
+    physicalNotes: (radius ? `Radius ${radius.value}${radius.uncertainty ? ` +/- ${radius.uncertainty}` : ''} ${unit.rn} from ${radius.source} (${radius.url}): ${fixed(radiusKm, 1).toLocaleString('en-US')} km at ${unit.r.toLocaleString('en-US')} ${unit.rper}. `
+      : 'No source measures a size for this black hole (no shadow or horizon is resolved), so the radius is the records\' unmeasured 0 and it is drawn as a point. ')
       + ('unmeasured' in mass && mass.unmeasured ? `No mass is measured: ${mass.source} (${mass.url}), so GM is 0, the records' unpublished value.`
         : 'limit' in mass && mass.limit ? `No mass is measured: ${mass.source} (${mass.url}) gives only an upper limit of ${mass.value} ${unit.mn}, so GM is 0, the records' unpublished value.`
-        : `GM from the mass ${mass.value}${mass.uncertainty ? ` +/- ${mass.uncertainty}` : ''} ${unit.mn} (${mass.source}, ${mass.url}) times ${unit.gmn}.`) + `${t ? ` Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).` : ''} A sphere: no oblateness is measured.`,
+        : `GM from the mass ${mass.value}${mass.uncertainty ? ` +/- ${mass.uncertainty}` : ''} ${unit.mn} (${mass.source}, ${mass.url}) times ${unit.gmn}.`) + `${t ? ` Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).` : ''}${blackHole ? '' : ' A sphere: no oblateness is measured.'}`,
     hostedOrbit: orbit };
   return { spec, hostId: host.spec.id, system: host.spec.system, body, order, orbit, orbitCitation: citation, radius, mass, documents, todo };
 }
@@ -85,18 +109,21 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
 /** The package of a hosted body whose astronomy record is built into the astronomy package. */
 export async function hostedPackage(record: HostedRecord, hostBody: unknown, publications: Map<string, Publication>, archive: Archive, root: string, epochJdTt: number) {
   const { spec } = record, id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, star = spec.kind === 'companion', t = spec.temperature;
+  if (spec.blackHole) throw new Error(`${id}: a black hole companion is an astronomy record only; it has no package.`);
+  const radius = record.radius;
+  if (!radius) throw new Error(`${id}: a packaged body needs its cited radius.`);
   const scaffold = scaffoldHostedPlanetFiles({ id, name: spec.name, system: record.system, description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order: record.order,
     rotation: record.orbit.eccentricity === 0 && !star ? 'synchronous' : 'unmeasured', ...(t ? { selfLuminous: { temperatureK: t.value, source: `${t.source} (${t.url})` } } : {}) }, record.body, hostBody, epochJdTt);
   const files: PackageFiles = new Map(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
-  const recordOf = (url: string | undefined) => url ? publications.get(url) : undefined, label = (url: string | undefined, fallback: string) => { const p = recordOf(url); return p && p.creators.length ? `${p.creators[0]!.split(' ').at(-1)}${p.creators.length > 2 ? ' et al.' : ''} ${p.year}` : fallback; };
+  const recordOf = (url: string | undefined) => url ? publications.get(url) : undefined, label = (url: string | undefined, fallback: string) => { const p = recordOf(url); return p && p.creators.length ? `${citedName(p.creators[0]!)}${p.creators.length > 2 && !isCollaboration(p.creators[0]!) ? ' et al.' : ''} ${p.year}` : fallback; };
   const fact = (url: string | undefined, fallback: string, path: string, locator: string) => { const p = recordOf(url); if (!p) throw new Error(`${id}: no publication record for ${url ?? fallback}; cite it by arXiv, DOI or ADS link.`); return { catalogueId: p.id, url: p.url, label: label(url, fallback), checked: CHECKED, path, locator }; };
 
   let colorHex: string | undefined, limbSentence: string | undefined;
   if (star) {
     const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-    const logg = fixed(Math.log10(record.mass.value * GM_SUN * 1e15 / (record.radius.value * SOLAR_RADIUS_KM * 1e5) ** 2), 2);
+    const logg = fixed(Math.log10(record.mass.value * GM_SUN * 1e15 / (radius.value * SOLAR_RADIUS_KM * 1e5) ** 2), 2);
     const limb = await chooseLimb(id, t!.value, logg, archive);
-    const color = planckChoice(id, t!, 'The archives do not resolve this companion from its star', [], cmf);
+    const color = planckChoice(id, t!, spec.colorReason ?? 'The archives do not resolve this companion from its star', [], cmf);
     const installed = await installColorLens(files, id, color, limb);
     colorHex = installed.hex; limbSentence = limb.sentence;
     const measurements = read(`${s}/measurements.json`);
@@ -123,12 +150,12 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   files.set(`${s}/measurements.json`, json(measurements));
 
   const content = read(`${s}/content/object.json`), period = record.orbit.periodDays;
-  const radiusValue = star ? `${Number(record.radius.value.toPrecision(2))} solar radii` : record.radius.value >= 0.3 ? `${Number(record.radius.value.toPrecision(2))} Jupiter radii` : `${Number((record.radius.value * JUPITER_RADIUS_KM / EARTH_RADIUS_KM).toPrecision(2))} Earth radii`;
+  const radiusValue = star ? `${Number(radius.value.toPrecision(2))} solar radii` : radius.value >= 0.3 ? `${Number(radius.value.toPrecision(2))} Jupiter radii` : `${Number((radius.value * JUPITER_RADIUS_KM / EARTH_RADIUS_KM).toPrecision(2))} Earth radii`;
   const periodValue = period < 2 ? `${Math.round(period * 24)} hours` : period < 1000 ? `${Number(period.toPrecision(3))} days` : `${Math.round(period / 365.25)} years`;
   // A value the archive calculates from a relation, not a paper's measurement, says so on the fact itself, not only in its source.
   const model = (value: Cited) => value.source.includes('a model, not a measurement') ? ' (model)' : '';
   content.panel.facts = [
-    { id: 'radius', label: 'Radius', value: `${radiusValue}${model(record.radius)}`, source: fact(record.radius.url, record.radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
+    { id: 'radius', label: 'Radius', value: `${radiusValue}${model(radius)}`, source: fact(radius.url, radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
     { id: 'period', label: 'Year', value: periodValue, source: fact(record.orbitCitation.url, record.orbitCitation.label, 'source/measurements.json', 'orbitalPeriodDays; orbitalPeriodSource') },
     { id: 'mass', label: 'Mass', value: record.mass.unmeasured ? 'Not measured' : `${record.mass.limit ? 'Under ' : ''}${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses${model(record.mass)}`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
   // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
@@ -138,7 +165,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     const hostLit = String(control.notes).match(/ The gray takes the colour of [^.]*'s light, as its colour lens measures it\./u)?.[0] ?? '';
     control.notes = `No image or colour of ${spec.name} is published: the sphere has its measured size, and the gray marks an unresolved surface. ${t ? 'It glows with its own heat, so no starlight falls on it.' : "The lighting is its own star's, at the measured orbit."}${hostLit}`;
   }
-  content.provenance.physical.credit = `Radius from ${record.radius.source}; mass from ${record.mass.source}; orbit from ${record.orbitCitation.text}`;
+  content.provenance.physical.credit = `Radius from ${radius.source}; mass from ${record.mass.source}; orbit from ${record.orbitCitation.text}`;
   files.set(`${s}/content/object.json`, json(content));
   const rotation = read(`${s}/preparation/rotation.json`);
   rotation.source = String(rotation.source).replace(` (${HOSTED_TODO}: name the literature checked)`, ' in the sources this package cites');
@@ -161,12 +188,12 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   for (const [path, value] of record.documents) files.set(`${s}/${path}`, value);
 
   const hosted = star ? 'companion star' : 'planet';
-  files.set(`${o}/NOTICE.md`, [`# ${spec.name} credits`, `Radius: ${record.radius.source}. Mass: ${record.mass.source}.${t ? ` Temperature: ${t.source}.` : ''}`,
+  files.set(`${o}/NOTICE.md`, [`# ${spec.name} credits`, `Radius: ${radius.source}. Mass: ${record.mass.source}.${t ? ` Temperature: ${t.source}.` : ''}`,
     `Orbit: ${record.orbitCitation.text}${'whereistheplanet' in spec.orbit ? '; the posterior distributed by whereistheplanet (Wang et al. 2021)' : ''}.`,
     ...star ? ['Colour: a Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).'] : colorCredit ? [colorCredit] : []].join('\n\n') + '\n');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', spec.text ? `${spec.text.introduction} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
-    ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
+    ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',

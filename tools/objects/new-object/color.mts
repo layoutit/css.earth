@@ -188,10 +188,12 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
   const context: Context = { spec, row, ids, archive, cmf }, candidates: Candidate[] = [], tried: string[] = [];
   // Every route is probed at once; the candidates are then taken in the routes' quality order.
   const probed = await Promise.all((Object.keys(ROUTES) as ColorRoute[]).map(async route => {
-    if (spec.color?.skip.includes(route)) return { route, found: `skipped (${spec.color.reason})` as const };
+    if (spec.color?.skip.includes(route)) return { route, found: 'skipped' as const };
     return { route, found: await ROUTES[route](context) };
   }));
+  // The spec's reason for skipping routes is said once, in the summary.
   for (const { route, found } of probed) {
+    if (found === 'skipped') { tried.push(`${route}: skipped`); continue; }
     if (typeof found === 'string') { tried.push(`${route}: ${found}`); continue; }
     if (candidates.length === 2) { tried.push(`${route}: found, not needed after the colour and its cross-check`); continue; }
     try { candidates.push({ ...found, ...evaluate(found.bytes, found.record(''), cmf) }); }
@@ -207,7 +209,12 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
       redistribution: 'One archived spectrum or catalogue file, unchanged, with citation', consumers: ['assets', 'lenses'], ...(binding ? { sourceBinding: binding } : {}) });
     if (binding && Object.keys(candidate.catalogue!.record).length) catalogue.push(candidate.catalogue!);
   };
-  if (!primary) return planckChoice(id, spec.temperature, `No archive holds a spectrum of this star (${tried.join('; ')})`, tried, cmf);
+  if (!primary) {
+    // Routes the spec skips are not archives that lack the star: say the spec's reason, and only then what the searched routes found.
+    const searched = tried.filter(entry => !entry.endsWith(': skipped')), skipped = tried.length - searched.length;
+    const why = [skipped ? spec.color!.reason : undefined, searched.length ? `${skipped ? 'no other archive' : 'No archive'} holds a spectrum of this star (${searched.join('; ')})` : undefined].filter(Boolean).join('; and ');
+    return planckChoice(id, spec.temperature, why, tried, cmf);
+  }
   const primaryPath = `photometry/${primary.file}`;
   addFile(primary, primaryPath, `${id}-${primary.route}`);
   const record: Record<string, unknown> = primary.route === 'gaia-xp'
@@ -231,7 +238,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow, ids: Identifiers
       : { sourceBinding: { kind: 'catalogued', references: [{ catalogueId: primary.catalogue!.id, role: 'material', evidence: `src/objects/${id}/source/photometry/stellar-color.json#/measuredSpectrum` }, CMF_METHOD] } }) });
   return { record, files, acquisition, inputs, catalogue, color: primary.color, route: primary.route, tried, ...(crossCheck ? { crossCheck } : {}), ...(todo ? { todo } : {}),
     credits: [`Colour: ${primary.source}, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).${second ? ` Cross-check: ${second.source}.` : ''}`],
-    summary: `${primary.source}${second ? `, cross-checked against ${second.source} (${crossCheck!.difference} levels apart at most, the threshold is ${CROSS_CHECK_AGREEMENT})` : ''}` };
+    summary: `${primary.source}${second ? `, cross-checked against ${second.source} (${crossCheck!.difference} levels apart at most, the threshold is ${CROSS_CHECK_AGREEMENT})` : ''}${spec.color?.skip.length ? ` (the routes marked skipped are not used: ${spec.color.reason})` : ''}` };
 }
 
 /** The colour of a Planck spectrum at the cited temperature: for a star no archive holds a spectrum of, or a companion the archives

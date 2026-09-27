@@ -12,7 +12,7 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorLens, json } from './lens.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
+import { citedName, isCollaboration, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { Cited, StarSpec } from './spec.mts';
@@ -116,7 +116,7 @@ export function publicationRecord(publication: Publication) {
   if (publication.bibcode && !publication.arxiv && !publication.doi) return { id: publication.id, kind: 'publication', identityLevel: 'work', title: `Reference ${publication.bibcode}, as the NASA Exoplanet Archive cites it.`, identifiers,
     links: [{ role: 'landing', url: publication.url, label: 'Published reference' }], evidence: [{ url: publication.url, checkedOn: CHECKED, locator: 'ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)' }], relations: [],
     statements: [{ kind: 'limitation', text: 'Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.', scope: 'citation', evidence: publication.url }], publicationDate: publication.year };
-  const lead = publication.creators[0]?.split(' ').at(-1) ?? 'Anonymous', authors = publication.creators.length > 2 ? `${lead} et al.` : publication.creators.map(name => name.split(' ').at(-1)).join(' & ');
+  const lead = publication.creators[0] ? citedName(publication.creators[0]) : 'Anonymous', authors = publication.creators.length > 2 ? (isCollaboration(publication.creators[0]!) ? lead : `${lead} et al.`) : publication.creators.map(citedName).join(' & ');
   return { id: publication.id, kind: 'publication', identityLevel: 'work', title: `${authors} (${publication.year}): ${publication.title}`, identifiers,
     links: [{ role: 'archive', url: publication.url, label: publication.arxiv ? 'arXiv preprint' : 'Publisher' }, ...publication.doi && publication.arxiv ? [{ role: 'landing', url: `https://doi.org/${publication.doi}`, label: publication.publisher ?? 'Journal version' }] : []],
     evidence: [{ url: publication.url, checkedOn: CHECKED, locator: publication.arxiv ? 'arXiv API record: title, authors, journal reference' : 'Crossref record: title, authors, container' }],
@@ -234,7 +234,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `Placement: Gaia DR3 source ${row.sourceId}: position${place.cited ? '' : ', parallax'}${row.pmra === undefined ? '' : ', proper motion'}${row.radialVelocity !== undefined ? ' and radial velocity' : ''}${place.cited ? `; distance: ${place.cited.source}` : ''}. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.`,
   ];
   files.set(`${o}/NOTICE.md`, `${credits.join('\n\n')}\n`);
-  const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter(Boolean).join(', ');
+  const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter((name): name is string => Boolean(name) && name !== spec.name).join(', ');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
     spec.text ? `${spec.text.introduction}${names ? ` It is also ${names}.` : ''} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name}${names ? ` (${names})` : ''} is ${distance.toFixed(1)} parsecs away. ${TODO}: what the star is and why it is here, from ${spec.paper.credit}.`, '',
     `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}. log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.`, '',
@@ -246,7 +246,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
     ...limb.limbDarkening ? ['- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.'] : [],
-    ...spec.notes.map(note => `- **Not shown.** ${note}.`),
+    ...spec.notes.map(note => `- **Not shown.** ${note.replace(/\.$/u, '')}.`),
     ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
 
@@ -349,15 +349,18 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   const universe = await existingBodies(root);
   for (const entry of [...specs, ...specs.flatMap(spec => [...spec.planets, ...spec.companions]), ...additions.flatMap(addition => [...addition.planets, ...addition.companions])]) {
     if (refresh) { if (!await exists(`src/objects/${entry.id}/${STORED_SPEC}`)) throw new Error(`${entry.id}: no ${STORED_SPEC}; refresh only regenerates what new-object made.`); continue; }
-    for (const path of [`src/objects/${entry.id}`, `packages/astronomy/data/bodies/${entry.id}.json`]) if (await exists(path)) throw new Error(`${path} already exists; the generator never overwrites an object (refresh regenerates one it made: --refresh ${entry.id}).`);
+    // A kept record (orbit route { "record": true }) exists by definition: only its package must be new.
+    const kept = 'orbit' in entry && 'record' in entry.orbit;
+    if (kept && !await exists(`packages/astronomy/data/bodies/${entry.id}.json`)) throw new Error(`${entry.id}: the record route packages packages/astronomy/data/bodies/${entry.id}.json, which does not exist.`);
+    for (const path of [`src/objects/${entry.id}`, ...kept ? [] : [`packages/astronomy/data/bodies/${entry.id}.json`]]) if (await exists(path)) throw new Error(`${path} already exists; the generator never overwrites an object (refresh regenerates one it made: --refresh ${entry.id}).`);
     const held = duplicateName(universe, entry.name);
-    if (held) throw new Error(`${entry.id}: ${entry.name} is already in the universe as ${held}.`);
+    if (held && !(kept && held === entry.id)) throw new Error(`${entry.id}: ${entry.name} is already in the universe as ${held}.`);
   }
   // An object without an order takes the next free one after every body the astronomy package holds.
   const bodies = resolve(root, 'packages/astronomy/data/bodies'), taken: number[] = [];
   for (const name of await readdir(bodies)) taken.push(Number((JSON.parse(await readFile(resolve(bodies, name), 'utf8')) as { order?: number }).order ?? 0));
   let next = Math.max(...taken) + 1;
-  const results: NewObjectResult[] = [], hosted: unknown[] = [];
+  const results: NewObjectResult[] = [], hosted: unknown[] = [], recordsOnly: string[] = [];
   const total = specs.length + additions.length, started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
   let done = 0;
   // Orders are handed out before the systems run, so the numbering does not depend on which finishes first.
@@ -381,9 +384,11 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   const hostedRecordFor = async (entry: StarSpec['planets'][number], host: { spec: StarSpec; body: Record<string, any> }) => {
     try {
       const record = await hostedRecord(entry, host, orders.get(entry.id)!, liveArchive, root);
-      progress(`  ${entry.id}: orbit from ${'whereistheplanet' in entry.orbit ? `whereistheplanet ${entry.orbit.whereistheplanet}` : 'archive' in entry.orbit ? record.orbitCitation.label : 'the cited elements'} (P ${record.orbit.periodDays} d, a/R* ${record.orbit.semiMajorAxisStellarRadii})${record.todo.length ? `; noted: ${record.todo.join('; ')}` : ''}`);
-      await writeFile(resolve(root, `packages/astronomy/data/bodies/${entry.id}.json`), `${JSON.stringify(record.body, null, 1)}\n`);
-      hosted.push({ ...record, documents: Object.fromEntries(record.documents) });
+      progress(`  ${entry.id}: orbit from ${'whereistheplanet' in entry.orbit ? `whereistheplanet ${entry.orbit.whereistheplanet}` : 'archive' in entry.orbit ? record.orbitCitation.label : 'record' in entry.orbit ? `its kept record (${record.orbitCitation.label})` : 'the cited elements'} (P ${record.orbit.periodDays} d, a/R* ${record.orbit.semiMajorAxisStellarRadii})${record.todo.length ? `; noted: ${record.todo.join('; ')}` : ''}`);
+      if (!record.kept) await writeFile(resolve(root, `packages/astronomy/data/bodies/${entry.id}.json`), `${JSON.stringify(record.body, null, 1)}\n`);
+      // A black hole companion is its record alone: drawn in its star's system, with no package (spec.mts).
+      if (entry.blackHole) { recordsOnly.push(entry.id); results.push({ id: entry.id, kind: entry.kind, files: 1, todo: [], orbit: `cited elements (${record.orbitCitation.label}); astronomy record only` }); }
+      else hosted.push({ ...record, documents: Object.fromEntries(record.documents) });
     } catch (error) { failed(entry.id, entry.kind, error); }
   };
   const queue = [...specs];
@@ -397,9 +402,11 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     const host = { spec: { id: addition.host, system: String(descriptor.properties.catalog.systemName ?? `${body.physical.name} system`) } as StarSpec, body };
     for (const entry of [...addition.planets, ...addition.companions]) await hostedRecordFor(entry, host);
   }
-  if (hosted.length) {
-    progress(`Rebuilding the astronomy package with ${hosted.length} orbit${hosted.length === 1 ? '' : 's'}, then writing their packages (${elapsed()})`);
+  if (hosted.length || recordsOnly.length) {
+    progress(`Rebuilding the astronomy package with ${hosted.length + recordsOnly.length} orbit${hosted.length + recordsOnly.length === 1 ? '' : 's'}${hosted.length ? ', then writing their packages' : ''} (${elapsed()})`);
     execFileSync('pnpm', ['-s', 'build:astronomy'], { cwd: root, stdio: ['ignore', 'ignore', 'inherit'] });
+  }
+  if (hosted.length) {
     await mkdir(resolve(root, dirname(HANDOFF)), { recursive: true }); await writeFile(resolve(root, HANDOFF), json({ refresh, records: hosted }));
     const out = execFileSync(process.execPath, [resolve(root, 'tools/objects/new-object.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
     for (const result of JSON.parse(out) as NewObjectResult[]) { results.push(result); if (result.failed) progress(`  ${result.id}: FAILED, not written: ${result.failed}`); }
@@ -418,7 +425,7 @@ export async function runHostedPhase(handoff: string, root = process.cwd()): Pro
     try {
       const record = { ...saved, documents: new Map(Object.entries(saved.documents as Record<string, string>)) };
       const hostBody = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${record.hostId}.json`), 'utf8'));
-      const urls = [record.spec.paper.url, record.spec.text?.quotes?.url, record.radius.url, record.mass.url, record.orbitCitation.url, record.spec.temperature?.url].filter((url): url is string => typeof url === 'string');
+      const urls = [record.spec.paper.url, record.spec.text?.quotes?.url, record.radius?.url, record.mass.url, record.orbitCitation.url, record.spec.temperature?.url].filter((url): url is string => typeof url === 'string');
       const publications = new Map<string, Publication>();
       for (const url of new Set(urls)) { const publication = await fetchPublication(liveArchive, url); if (publication) publications.set(url, publication); }
       const { files, hex } = await hostedPackage(record, hostBody, publications, liveArchive, root, SOLAR_GEOMETRY_EPOCH_JD_TT);
@@ -430,13 +437,13 @@ export async function runHostedPhase(handoff: string, root = process.cwd()): Pro
       // Every hosted body's marker is drawn from its default lens: a companion's colour, a planet's colour or map.
       const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
       results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
-        orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'cited elements',
+        orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'record' in record.spec.orbit ? `its kept record (${record.orbitCitation.label})` : 'cited elements',
         todo: [...record.todo, ...record.spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence']] });
     } catch (error) { results.push({ id: saved.spec.id, kind: saved.spec.kind, files: 0, todo: [], failed: reason(error) }); }
   }
   return results;
 }
-export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n  Still to write: ${result.todo.join('; ')}.`).join('\n')}\nReplace every ${TODO}, then bake: node tools/prepare/cli/prepare-object.mts <id>\n`;
+export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n${result.todo.length ? `  Still to write: ${result.todo.join('; ')}.` : ''}`).join('\n')}\nReplace every ${TODO}, then bake: node tools/prepare/cli/prepare-object.mts <id>\n`;
 
 /** A spec file for planet hosts, from the NASA Exoplanet Archive (from-archive.mts); hosts already in the universe get their
  * new planets as host additions. */

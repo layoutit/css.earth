@@ -1,0 +1,470 @@
+{
+  "schema": "cssearth-volume-provenance@1",
+  "title": "ε Eridani dust ring: ALMA continuum imaging given the depth of the fitted ring",
+  "kind": "observed-sky-image-on-fitted-envelope",
+  "authors": [],
+  "organizations": [
+    "ALMA (ESO/NAOJ/NRAO)"
+  ],
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "dataLicenseDeclaration": "https://almascience.eso.org/alma-data/data-policy",
+    "note": "ALMA data are released under CC BY 4.0; the observatory asks for its standard acknowledgement, which the host star's NOTICE.md carries."
+  },
+  "sources": [
+    {
+      "id": "dust-b6-cont",
+      "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pbcor.fits",
+      "landing": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S",
+      "bytes": 648000,
+      "role": "ALMA 12-m array, a six-pointing mosaic in a compact configuration Band 6 continuum, 230 to 248 GHz (1.3 mm) image from its archive, the dust leaves"
+    },
+    {
+      "id": "dust-primary-beam",
+      "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pb.fits.gz",
+      "landing": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S",
+      "bytes": 361117,
+      "role": "the primary beam of ALMA project 2019.1.00696.S, member OUS uid://A001/X1465/X27ff, pipeline continuum image eps_eri_sci.spw19_21_23_25.cont.I.pbcor, which the dust image is multiplied by"
+    }
+  ],
+  "paper": [
+    {
+      "lens": "dust",
+      "citation": "Booth et al. (2023), MNRAS 521, 6180, Table 3, arXiv:2303.13584",
+      "url": "https://arxiv.org/abs/2303.13584"
+    }
+  ],
+  "measured": {
+    "sceneOriginRaDecDeg": [
+      53.225364475322294,
+      -9.458106329436308
+    ],
+    "distancePc": 3.219989125999438,
+    "arcsecPerUnit": 0.31056005497832684,
+    "grid": {
+      "size": 200,
+      "halfUnits": 105,
+      "slabs": 100
+    },
+    "lenses": {
+      "dust": {
+        "bands": [
+          {
+            "band": "ALMA-B6-CONT",
+            "mosaic": "member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pbcor.fits",
+            "observed": "2019-12-22T02:21:14.207999",
+            "starRaDecDeg": [
+              53.227203241699954,
+              -9.458145186059166
+            ],
+            "starPixel": [
+              188.1987970365774,
+              210.9394510403837
+            ],
+            "mosaicArcsecPerPixel": 0.18999999997768802,
+            "background": -0.0000011391733840164367,
+            "noise": 0.0000164305265839072,
+            "backgroundPixels": 11147,
+            "unit": "Jy/beam"
+          }
+        ],
+        "channels": {
+          "red": [
+            "ALMA-B6-CONT"
+          ],
+          "green": [
+            "ALMA-B6-CONT"
+          ],
+          "blue": [
+            "ALMA-B6-CONT"
+          ]
+        },
+        "stellarFluxJy": {
+          "ALMA-B6-CONT": 1
+        },
+        "stellarFluxSource": "Not divided by the star: at 1.3 mm the ring is the dust's own thermal emission, not scattered starlight, and it is shown in its own brightness, Jy per beam.",
+        "innerMaskUnits": 0,
+        "lightEndsUnits": 76.65,
+        "radialProfile": [
+          {
+            "radiusUnits": 1.05,
+            "median": 5.942423513261019e-7,
+            "samples": 12
+          },
+          {
+            "radiusUnits": 3.1500000000000004,
+            "median": -0.0000022097899545769906,
+            "samples": 32
+          },
+          {
+            "radiusUnits": 5.25,
+            "median": 0.0000033258579605899286,
+            "samples": 52
+          },
+          {
+            "radiusUnits": 7.3500000000000005,
+            "median": 0.000008910497854230925,
+            "samples": 74
+          },
+          {
+            "radiusUnits": 9.450000000000001,
+            "median": 0.00000788006218499504,
+            "samples": 88
+          },
+          {
+            "radiusUnits": 11.55,
+            "median": 0.000010581290553091094,
+            "samples": 122
+          },
+          {
+            "radiusUnits": 13.65,
+            "median": 0.000008909290954761673,
+            "samples": 134
+          },
+          {
+            "radiusUnits": 15.75,
+            "median": 0.0000083379882198642,
+            "samples": 152
+          },
+          {
+            "radiusUnits": 17.85,
+            "median": 0.00000799138069851324,
+            "samples": 188
+          },
+          {
+            "radiusUnits": 19.95,
+            "median": 0.000010368439689045772,
+            "samples": 194
+          },
+          {
+            "radiusUnits": 22.05,
+            "median": 0.000010882353308261372,
+            "samples": 220
+          },
+          {
+            "radiusUnits": 24.150000000000002,
+            "median": 0.0000044377343328960706,
+            "samples": 244
+          },
+          {
+            "radiusUnits": 26.25,
+            "median": 6.072564247006085e-7,
+            "samples": 250
+          },
+          {
+            "radiusUnits": 28.35,
+            "median": 0.0000027848207082570298,
+            "samples": 286
+          },
+          {
+            "radiusUnits": 30.450000000000003,
+            "median": 0.0000023668476387683768,
+            "samples": 310
+          },
+          {
+            "radiusUnits": 32.550000000000004,
+            "median": -0.0000026008628992713057,
+            "samples": 318
+          },
+          {
+            "radiusUnits": 34.65,
+            "median": -0.000004428268766787369,
+            "samples": 346
+          },
+          {
+            "radiusUnits": 36.75,
+            "median": -0.00000656407291899086,
+            "samples": 368
+          },
+          {
+            "radiusUnits": 38.85,
+            "median": -0.000006025870334269712,
+            "samples": 390
+          },
+          {
+            "radiusUnits": 40.95,
+            "median": -0.000005803943622595398,
+            "samples": 398
+          },
+          {
+            "radiusUnits": 43.050000000000004,
+            "median": -0.0000046721738726773765,
+            "samples": 438
+          },
+          {
+            "radiusUnits": 45.15,
+            "median": -0.000007673257641727105,
+            "samples": 446
+          },
+          {
+            "radiusUnits": 47.25,
+            "median": -0.000006926991318323417,
+            "samples": 470
+          },
+          {
+            "radiusUnits": 49.35,
+            "median": -0.000007055484729789896,
+            "samples": 494
+          },
+          {
+            "radiusUnits": 51.45,
+            "median": -0.000008690061804372817,
+            "samples": 512
+          },
+          {
+            "radiusUnits": 53.550000000000004,
+            "median": -0.000006950016540940851,
+            "samples": 530
+          },
+          {
+            "radiusUnits": 55.650000000000006,
+            "median": -0.000007692891813348979,
+            "samples": 554
+          },
+          {
+            "radiusUnits": 57.75,
+            "median": -0.000006211580057424726,
+            "samples": 578
+          },
+          {
+            "radiusUnits": 59.85,
+            "median": -0.0000017782424492907012,
+            "samples": 594
+          },
+          {
+            "radiusUnits": 61.95,
+            "median": 0.0000021208873022260377,
+            "samples": 622
+          },
+          {
+            "radiusUnits": 64.05,
+            "median": 0.000009531988325761631,
+            "samples": 636
+          },
+          {
+            "radiusUnits": 66.15,
+            "median": 0.000020915067580062896,
+            "samples": 656
+          },
+          {
+            "radiusUnits": 68.25,
+            "median": 0.00002944752668554429,
+            "samples": 686
+          },
+          {
+            "radiusUnits": 70.35000000000001,
+            "median": 0.000028155604013591073,
+            "samples": 700
+          },
+          {
+            "radiusUnits": 72.45,
+            "median": 0.000024243721782113425,
+            "samples": 714
+          },
+          {
+            "radiusUnits": 74.55,
+            "median": 0.000014770457710255869,
+            "samples": 742
+          },
+          {
+            "radiusUnits": 76.65,
+            "median": 0.000005768082246504491,
+            "samples": 770
+          },
+          {
+            "radiusUnits": 78.75,
+            "median": -0.000002113252548952005,
+            "samples": 786
+          },
+          {
+            "radiusUnits": 80.85000000000001,
+            "median": -0.0000046177456169971265,
+            "samples": 808
+          },
+          {
+            "radiusUnits": 82.95,
+            "median": -0.000008059912033786532,
+            "samples": 822
+          },
+          {
+            "radiusUnits": 85.05,
+            "median": -0.000009071341082744766,
+            "samples": 836
+          },
+          {
+            "radiusUnits": 87.15,
+            "median": -0.0000075747352639155,
+            "samples": 866
+          },
+          {
+            "radiusUnits": 89.25,
+            "median": -0.000004923767392028822,
+            "samples": 898
+          },
+          {
+            "radiusUnits": 91.35000000000001,
+            "median": -0.000005920107923884643,
+            "samples": 900
+          },
+          {
+            "radiusUnits": 93.45,
+            "median": -0.000004785762939718552,
+            "samples": 944
+          },
+          {
+            "radiusUnits": 95.55,
+            "median": -0.000005970694928691955,
+            "samples": 942
+          },
+          {
+            "radiusUnits": 97.65,
+            "median": -0.00000576694810661138,
+            "samples": 966
+          },
+          {
+            "radiusUnits": 99.75,
+            "median": -0.0000048968204282573424,
+            "samples": 1018
+          },
+          {
+            "radiusUnits": 101.85000000000001,
+            "median": -0.000002063644842564827,
+            "samples": 990
+          },
+          {
+            "radiusUnits": 103.95,
+            "median": -3.104676693510555e-8,
+            "samples": 1052
+          }
+        ],
+        "ridgeSamples": 0,
+        "ringCentreUnits": [
+          0,
+          0
+        ],
+        "semiMajorUnits": 69.6,
+        "semiMinorUnits": 57.90400690028158,
+        "inclinationDeg": 33.7,
+        "positionAngleDeg": 178.9,
+        "ridgeResidualUnits": 0,
+        "binningSpread": {
+          "semiMajorUnits": 0,
+          "inclinationDeg": 0,
+          "positionAngleDeg": 0
+        },
+        "ringGeometry": "published fit, not measured",
+        "published": {
+          "citation": "Booth et al. (2023), MNRAS 521, 6180, Table 3, arXiv:2303.13584",
+          "url": "https://arxiv.org/abs/2303.13584",
+          "inclinationDeg": 33.7,
+          "positionAngleDeg": -1.1,
+          "toleranceDeg": 5,
+          "radiusUnits": 69.6,
+          "radiusTolerance": 0.1,
+          "widthFwhmUnits": 10.5
+        },
+        "differences": {
+          "radius": 0,
+          "inclinationDeg": 0,
+          "positionAngleDeg": 0
+        },
+        "envelope": {
+          "shape": "measured-profile-disc",
+          "residualRms": 0.000015032049362498832,
+          "cubeFaceShare": {
+            "gaussianRing": 4.9441442664037044e-51,
+            "measuredProfileDisc": 5.988682830500789e-22
+          },
+          "heightUnits": 4.280399999999999,
+          "fittedRing": {
+            "gaussianWidthUnits": 4.4589394515121,
+            "gaussianHeightUnits": 4.280399999999999,
+            "residualRms": 0.000015288298474442204
+          },
+          "signalRms": 0.000017343752388499346,
+          "scoredPixels": 28500,
+          "alternatives": {
+            "sphericalShell": {
+              "radiusUnits": 66.11999999999999,
+              "gaussianWidthUnits": 3.3059999999999996,
+              "residualRms": 0.000016802999801046907
+            },
+            "constantDepthResidualRms": 0.000017339661647613012
+          },
+          "heightResiduals": [
+            {
+              "heightOfRadius": 0.02,
+              "residualRms": 0.000015221159633158121
+            },
+            {
+              "heightOfRadius": 0.05,
+              "residualRms": 0.000015260314149949784
+            },
+            {
+              "heightOfRadius": 0.0615,
+              "residualRms": 0.000015288298474442204
+            },
+            {
+              "heightOfRadius": 0.1,
+              "residualRms": 0.000015437787893504628
+            },
+            {
+              "heightOfRadius": 0.2,
+              "residualRms": 0.00001599932536980627
+            }
+          ],
+          "search": {
+            "widthOfRadius": [
+              0.04,
+              0.6,
+              0.02
+            ],
+            "heightOfRadius": [
+              0.02,
+              0.05,
+              0.1,
+              0.2
+            ],
+            "shellRadiusOfRidge": [
+              0.6,
+              1.4,
+              0.05
+            ],
+            "shellWidthOfRadius": [
+              0.05,
+              0.8,
+              0.05
+            ]
+          }
+        },
+        "exposureGain": 0.16878709939904113,
+        "topAlpha": 0.5,
+        "faceOnOpacity": {
+          "drawnColumns": 8615,
+          "median": 0.3155524941997029,
+          "p90": 0.4559361787630164,
+          "max": 0.49684059186531937
+        },
+        "droppedShare": [
+          0,
+          0,
+          0
+        ],
+        "filledVoxels": 321518
+      }
+    }
+  },
+  "models": {
+    "dust": "Fitted ring, in the colour map the publisher shows. The archive image (ALMA project 2019.1.00696.S, member OUS uid://A001/X1465/X27ff, pipeline continuum image eps_eri_sci.spw19_21_23_25.cont.I.pbcor) is read through its own WCS onto a sky plane in astronomical units, about the star where its catalogue position and proper motion put it on 2019-12-22T02:21:14.207999. 3 point sources (star, NW, SE) are removed first, each the image's own beam at its published position and peak (Booth et al. (2023), MNRAS 521, 6180, Table 2 (arXiv:2303.13584), from gaussian fits to their primary-beam-corrected long-baseline image of these data: the central source at 3h32m54.521s −9°27′29.49″ with a peak of 1020 ± 50 µJy per beam, which they conclude is the star itself (its photosphere, chromosphere and corona; section 3), the north-west one at 3h32m53.325s −9°27′04.61″ with 990 ± 60 and the south-east one at 3h32m55.307s −9°27′47.66″ with 270 ± 30, both background sources; they model all three as fixed point sources in their fit of the disc. A point source's peak per beam is its flux, whatever the beam). It is multiplied by the same product's primary beam (Booth et al. (2023) show their image without the primary-beam correction, so its noise is even across the mosaic (Figure 1 caption); the product's own primary beam undoes the pipeline's correction, 0.53 at the star and 0.87 in the median on the ring). It is smoothed to a 1.6″ × 1.2″ beam at 102° and rescaled to Jy per that beam (the beam of Booth et al. (2023, section 2) for their Figure 1, 1.6″ × 1.2″ at 102° east of north, from natural weighting of these same observations; this image's pipeline weighting gave 1.288″ × 0.955″ at −78.3°). Its background, the median in the 4–12″ annulus, is subtracted; it is the dust's own glow, not starlight, so it is not divided by the star, and the one band feeds every channel. The ring's geometry is not measured on this image: it is the fit of Booth et al. (2023), MNRAS 521, 6180, Table 3, arXiv:2303.13584 to the same observations, 69.6 au, 10.5 au wide at half maximum, inclination 33.7°, line of nodes at position angle -1.1°, centred on the star (this image's ridge rises above five times its per-pixel noise in only 5 of 24 azimuths, too faint to trace; Booth et al. (2023) fit a gaussian ring, the star and the two background sources to their naturally weighted dirty image of these same observations by MCMC (section 4.2, Table 3)). Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of 1.50e-5 against a signal of 1.73e-5, where a single gaussian ring of radial width 4.5 au leaves 1.53e-5, a spherical shell 1.68e-5 and constant depth, what an extrusion assumes, 1.73e-5. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is 0.0615 of its radius, from the model Wolff et al. (2025, AJ 170, 244, Table 4, arXiv:2509.24976) run for this belt, whose orbital inclinations have a standard deviation of 0.087 (their disk aspect ratio dh/dr): orbits tilted that much put the dust a root-mean-square 0.087/√2 = 0.0615 of the radius above and below the plane, and the drawn gaussian has that height. It is their model's input, not a measurement; at 34° the image cannot resolve the thickness (the projection changes by 5.1% across the heights tried), and which side is nearer is a convention: the east side is drawn nearer. Wolff et al. (2025, AJ 170, 244, section 5.1) take the belt to be nearly coplanar with planet b, and the planet's orbit (Thompson et al. 2025, AJ 170, 301, Table 3: inclined 40°, ascending node at 186°, against the ring's 33.7° and −1.1° in Booth et al. 2023) comes nearest the observer at position angle 96°, as this application draws it. Each column is shown in the colour the publisher's map gives its value, linear from -50.66 to 90 µJy/beam (the colour bar of Booth et al. (2023), Figure 1, left panel, decoded from the figure in the paper's arXiv source: matplotlib's inferno map, linear from −50.66 to 90.00 µJy per beam, brighter values at the top colour). Every channel shares one depth profile, so each column is spread along the ring and keeps its colour. The top of the map reaches an alpha of 0.5, the renderer's convention for a volume; the median drawn line of sight reaches 0.32. The image is drawn from 0 au to the grid edge at 105 au, tapering from 77 au, where the mean brightness in the disc plane falls to its per-pixel noise."
+  },
+  "limitations": [
+    "One image, one epoch, one wavelength: no third axis was observed. The depth is the ring that best projects to the image, an inference from that projection, not a measurement.",
+    "Which side of the inclined ring is nearer the observer is stated in the recipe from the literature; the image alone cannot tell.",
+    "The ring’s vertical thickness is not measured: it is a published model’s, which the recipe names; at this inclination the projection barely changes with it.",
+    "Azimuthal brightness differences in the image are kept as measured; the ring model supplies only the depth.",
+    "The image is the archive pipeline’s, not the paper’s own: made from the same observations with other weighting and cleaning, it is noisier and its ring fainter than the published figure even at the paper’s resolution. Emission fainter than the drawn noise is not claimed.",
+    "The colours are the publisher’s colour map for brightness at one wavelength, not colours an eye would see.",
+    "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model.",
+    "Nothing finer than the image’s beam, its pixels or the grid’s cells is in the drawn volume."
+  ]
+}
