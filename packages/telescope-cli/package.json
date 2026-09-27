@@ -21,6 +21,10 @@
       "types": "./src/archives/hst/slit-scan-reduction.mts",
       "default": "./src/archives/hst/slit-scan-reduction.mts"
     },
+    "./archives/interferometry/alma-disc-selfcal": {
+      "types": "./src/archives/interferometry/alma-disc-selfcal.mts",
+      "default": "./src/archives/interferometry/alma-disc-selfcal.mts"
+    },
     "./archives/jwst/imaging/bands": {
       "types": "./src/archives/jwst/imaging/bands.mts",
       "default": "./src/archives/jwst/imaging/bands.mts"

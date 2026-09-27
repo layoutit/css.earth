@@ -10,7 +10,7 @@
  * cfitsio, wcslib, gsl, esorex and the naco recipes into `pipeline`, and unpacks the static calibration into `calib`.
  *
  * The interferometry toolchains install the same way, but that installer reads its own descriptor and its own list of ids
- * (tools/objects/interferometry/toolchain.mts), and NACO is not an interferometer. What is shared is what runs the result:
+ * (packages/telescope-cli/src/archives/interferometry/toolchain.mts), and NACO is not an interferometer. What is shared is what runs the result:
  * `esoEnvironment` and `runRecipe` from `@cssearth/telescope/node` (`eso-pipeline.ts`), which this module does not repeat.
  *
  * An installed toolchain records the sha256 of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another

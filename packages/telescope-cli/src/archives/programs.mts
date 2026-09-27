@@ -39,3 +39,23 @@ export function archivePrograms(archive: MovedArchive): ArchivePrograms {
       return isFileName(name) ? `${path}/${name}` : recorded;
     } };
 }
+
+/** Archives that moved beside their code as a whole folder, programs or not. The interferometry toolchain descriptor names the
+ * ROTIR Julia environment by its repository path, and that descriptor's text is hashed into the digest an installed toolchain
+ * records, so it keeps the path it was written with. */
+export type MovedArchiveFolder = 'interferometry';
+const MOVED_FOLDERS: readonly MovedArchiveFolder[] = ['interferometry'];
+
+/** A recorded repository path as it is found in this checkout: a path inside a moved archive folder's former location becomes the
+ * same path inside its current one; any other path, including one that steps out of the former folder, is kept as recorded. */
+export function currentArchivePath(recorded: string): string {
+  for (const archive of MOVED_FOLDERS) {
+    const former = `tools/objects/${archive}/`;
+    if (!recorded.startsWith(former)) continue;
+    const rest = recorded.slice(former.length);
+    const parts = rest.split('/');
+    return rest.length > 0 && !rest.includes('\\') && parts.every(part => part !== '' && part !== '.' && part !== '..')
+      ? `packages/telescope-cli/src/archives/${archive}/${rest}` : recorded;
+  }
+  return recorded;
+}

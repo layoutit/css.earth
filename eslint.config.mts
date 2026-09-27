@@ -140,6 +140,11 @@ export default [
     rules: { 'max-lines': 'off' },
   },
   {
+    // Moved unchanged from tools/objects/interferometry, where the limit only warned; splitting it is separate work.
+    files: ['packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
     files: ['packages/engine/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {

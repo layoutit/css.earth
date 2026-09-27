@@ -15,7 +15,7 @@ import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { loadSurfaceObservation, type SurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
-import { readReconstruction } from '../interferometry/beam-convolve.mts';
+import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '@cssearth/bake/objects/raster';
 import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';

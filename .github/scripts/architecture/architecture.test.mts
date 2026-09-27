@@ -145,6 +145,8 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['site/a.mts', 'packages/bake/src/stars/index.ts'], ['site/b.mts', 'tools/prepared/y.mts', 'type'],
     ['packages/renderer/src/stars/bank.ts', 'packages/bake/src/stars/index.ts', 'type'], ['packages/renderer/src/stars/bank.test.ts', 'packages/bake/src/stars/index.ts'],
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
+    ['site/c.mts', 'packages/telescope-cli/src/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
+    ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/query.mts'],
     ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
     ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/prepare/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
@@ -155,8 +157,9 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>tools/ci/z.mts', 'site/b.mts>tools/prepared/y.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts',
     'tools/ci/x.mts>.github/scripts/ci/y.mts', 'tools/objects/o.mts>site/objects.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
-    'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts', 'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>tools/prepared/y.mts',
-  ], 'the renderer package is runtime, type-only imports count, and its tests may use bake');
+    'packages/renderer/src/sky/d.ts>packages/telescope-cli/src/archives/programs.mts', 'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts',
+    'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>tools/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/query.mts',
+  ], 'the renderer package is runtime, type-only imports count, neither runtime owner reaches bake or the telescope command, and tests may');
   assert.deepEqual(pairs('nothing-imports-prepare-scripts'), ['tools/objects/o.mts>tools/prepare/cli/prepare-x.mts'],
     'a prepare entry is never imported; its library beside it may be');
   assert.deepEqual([...violations.keys()], LAYER_RULES.map(rule => rule.id));

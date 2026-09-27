@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { archivePrograms } from './programs.mts';
+import { archivePrograms, currentArchivePath } from './programs.mts';
 // Plain node:test: path arithmetic only.
 
 const spitzer = archivePrograms('spitzer');
@@ -33,4 +33,13 @@ test('JWST keeps one programs folder beside each tool that reads it, each found 
     'packages/telescope-cli/src/archives/jwst/imaging/programs/europa-1250.json');
   assert.deepEqual(archivePrograms('jwst/klip').recorded('hr-8799-1194.json'),
     ['packages/telescope-cli/src/archives/jwst/klip/programs/hr-8799-1194.json', 'tools/objects/jwst/klip/programs/hr-8799-1194.json']);
+});
+
+test('a path inside a folder that moved whole is found at the same place beside the archive code; anything else is kept', () => {
+  assert.equal(currentArchivePath('tools/objects/interferometry/rotir'), 'packages/telescope-cli/src/archives/interferometry/rotir');
+  assert.equal(currentArchivePath('tools/objects/interferometry/seasons/a/season.json'), 'packages/telescope-cli/src/archives/interferometry/seasons/a/season.json');
+  for (const recorded of ['tools/objects/interferometry', 'tools/objects/interferometry/', 'tools/objects/interferometry/../chandra/toolchain.json',
+    'tools/objects/interferometry/rotir/..', 'tools/objects/interferometry//rotir', 'tools/objects/interferometry/./rotir', 'tools/objects/interferometryX/rotir',
+    'tools/objects/spitzer/programs/a.json', 'packages/telescope-cli/src/archives/interferometry/rotir', 'rotir'])
+    assert.equal(currentArchivePath(recorded), recorded, recorded);
 });

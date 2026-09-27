@@ -117,7 +117,7 @@
       "colour": { "kind": "ramp", "stops": [[0, "#000000"], [0.35, "#7a1500"], [0.7, "#e06b1e"], [1, "#fff6c8"]] },
       "enlarge": 5,
       "product": {
-        "command": "node tools/objects/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
+        "command": "node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
         "definition": "output/alma-europa/selfcal/Europa.selfcal.receipt.json (this stage has no pinned program file; the run states its parameters on the command line and records them in the receipt)"
       },
       "note": "The disc is 768 milliarcseconds across and the restoring beam 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. The fine east-west streaks across the disc are about 2 K, the image noise at the beam scale, not surface features."
@@ -137,8 +137,8 @@
       "colour": { "kind": "greys" },
       "enlarge": 6,
       "product": {
-        "command": "node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse",
-        "definition": "tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
+        "command": "node packages/telescope-cli/src/archives/interferometry/image-star.mts packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse",
+        "definition": "packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
       },
       "note": "This is a reconstruction, not a photograph: the interferometer measures a handful of spatial frequencies and the image is the one that fits them. The toolkit convolved it with a 4 milliarcsecond beam, as interferometric images are shown; nothing further is smoothed here."
     },
