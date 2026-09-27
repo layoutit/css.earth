@@ -1,0 +1,849 @@
+Object = ocams2isis
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2017-08-25
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T09:48:50
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Import OSIRIS-REx Camera Suite (OCAMS) files into ISIS
+                       format"
+
+  Group = UserParameters
+    FROM = fits/20190926T173825S519_map_iofL2b_V004.fits
+    TO   = data/20190926T173825S519_map_iofL2b_V004.cub
+  End_Group
+End_Object
+
+Object = spiceinit
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-01-11
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T09:51:10
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Update SPICE data (kernels, pointing, and position) for
+                       a camera cube"
+
+  Group = UserParameters
+    FROM         = data/20190926T173825S519_map_iofL2b_V004.cub
+    WEB          = false
+    ATTACH       = TRUE
+    CKSMITHED    = FALSE
+    CKRECON      = TRUE
+    CKPREDICTED  = FALSE
+    CKNADIR      = FALSE
+    SPKSMITHED   = FALSE
+    SPKRECON     = TRUE
+    SPKPREDICTED = FALSE
+    PCK          = /opt/isis3/data/osirisrex/kernels/pck/bennu_v15.tpc
+    SCLK         = /opt/isis3/data/osirisrex/kernels/sclk/ORX_SCLKSCET.00049.-
+                   tsc
+    SPK          = /opt/isis3/data/osirisrex/kernels/spk/orx_190915_191029_19-
+                   1014_od191-N-M6R-L-M11R_v1.bsp
+    SHAPE        = user
+    MODEL        = /opt/isis3/data/osirisrex/kernels/dsk/g_00570mm_alt_obj_00-
+                   00n00000_v016.bds
+    STARTPAD     = 0.0
+    ENDPAD       = 0.0
+    URL          = https://services.isis.astrogeology.usgs.gov/cgi-bin/spicei-
+                   nit.cgi
+    PORT         = 443
+  End_Group
+End_Object
+
+Object = jigsaw
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-06-04
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T10:01:43
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Improves camera pointing and a whole lot more!"
+
+  Group = UserParameters
+    FROMLIST                              = data/20190926T173831S664_map_iofL-
+                                            2v_V004.all.lis
+    HELDLIST                              = data/20190926T173831S664_map_iofL-
+                                            2v_V004.hold.lis
+    CNET                                  = data/20190926T173831S664_map_iofL-
+                                            2v_V004.valid.net
+    ONET                                  = data/20190926T173831S664_map_iofL-
+                                            2v_V004.resected.net
+    OBSERVATIONS                          = No
+    RADIUS                                = no
+    UPDATE                                = yes
+    OUTLIER_REJECTION                     = no
+    REJECTION_MULTIPLIER                  = 3.0
+    ERRORPROPAGATION                      = no
+    MODEL1                                = NONE
+    SIGMA0                                = 1.0e-10
+    MAXITS                                = 50
+    CAMSOLVE                              = angles
+    TWIST                                 = yes
+    OVEREXISTING                          = No
+    SPSOLVE                               = positions
+    OVERHERMITE                           = No
+    SOLVETARGETBODY                       = false
+    CONTROL_POINT_COORDINATE_TYPE_BUNDLE  = rectangular
+    CONTROL_POINT_COORDINATE_TYPE_REPORTS = rectangular
+    CAMERA_ANGLES_SIGMA                   = 0.1
+    FILE_PREFIX                           = data/20190926T173831S664_map_iofL-
+                                            2v_V004
+    BUNDLEOUT_TXT                         = yes
+    IMAGESCSV                             = yes
+    OUTPUT_CSV                            = yes
+    RESIDUALS_CSV                         = yes
+  End_Group
+End_Object
+
+Object = phocube
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2019-03-14
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T12:49:35
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Create photometric and geometric information bands for
+                       an image cube"
+
+  Group = UserParameters
+    FROM                             = data/20190926T173825S519_map_iofL2b_V0-
+                                       04.cub
+    TO                               = data/20190926T173825S519_map_iofL2b_V0-
+                                       04.pho.cub
+    SOURCE                           = CAMERA
+    DN                               = yes
+    PHASE                            = TRUE
+    EMISSION                         = TRUE
+    INCIDENCE                        = TRUE
+    LOCALEMISSION                    = yes
+    LOCALINCIDENCE                   = yes
+    LATITUDE                         = TRUE
+    LONGITUDE                        = TRUE
+    PIXELRESOLUTION                  = FALSE
+    LINERESOLUTION                   = FALSE
+    SAMPLERESOLUTION                 = FALSE
+    DETECTORRESOLUTION               = FALSE
+    OBLIQUEDETECTORRESOLUTION        = FALSE
+    NORTHAZIMUTH                     = FALSE
+    SUNAZIMUTH                       = FALSE
+    SPACECRAFTAZIMUTH                = FALSE
+    OFFNADIRANGLE                    = FALSE
+    SUBSPACECRAFTGROUNDAZIMUTH       = FALSE
+    SUBSOLARGROUNDAZIMUTH            = FALSE
+    MORPHOLOGYRANK                   = FALSE
+    ALBEDORANK                       = FALSE
+    RADEC                            = FALSE
+    BODYFIXED                        = FALSE
+    SUNILLUMINATIONMASK              = FALSE
+    SURFACEOBLIQUEDETECTORRESOLUTION = FALSE
+  End_Group
+End_Object
+
+Object = fx
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2016-10-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:08:56
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Apply generalized arithmetic operations using multiple
+                       cube files"
+
+  Group = UserParameters
+    F1       = data/20190926T173825S519_map_iofL2b_V004.pho.cub+1
+    F2       = 20190926T173825S519_map_iofL2b_V004.pho_pmeas.cub
+    F3       = 20190926T173825S519_map_iofL2b_V004.pho_pref.cub
+    TO       = ./outtmp.bDbcYG.cub
+    EQUATION = f1*f3/f2
+    MODE     = CUBES
+  End_Group
+End_Object
+
+Object = handmos
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-08-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:08:58
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Hand place a cube into a mosaic"
+
+  Group = UserParameters
+    FROM           = ./outtmp.bDbcYG.cub
+    MOSAIC         = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub+1
+    PRIORITY       = ONTOP
+    INSAMPLE       = 1
+    INLINE         = 1
+    INBAND         = 1
+    OUTSAMPLE      = 1
+    OUTLINE        = 1
+    OUTBAND        = 1
+    MATCHBANDBIN   = FALSE
+    MATCHDEM       = FALSE
+    HIGHSATURATION = FALSE
+    LOWSATURATION  = FALSE
+    NULL           = FALSE
+    CREATE         = NO
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:01
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addg
+    GRPNAME = Photometry
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:03
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = InputFile
+    VALUE   = data/20190926T173825S519_map_iofL2b_V004.pho.cub
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:04
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = OutputFile
+    VALUE   = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:06
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = ShapeModel
+    VALUE   = g_00570mm_alt_obj_0000n00000_v016.bds
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:07
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = RADFFile
+    VALUE   = /export/ipwg/share/deliveries/Photometry/20190808/radf_ape_b.fi-
+              ts
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:08
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = Model
+    VALUE   = rolo
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:10
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = Backplanes
+    VALUE   = 1;2;5;6
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:11
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = ReferencePhaseAngle
+    VALUE   = 0
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:13
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = ReferenceIncidenceAngle
+    VALUE   = 0
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:14
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = ReferenceEmissionAngle
+    VALUE   = 0
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:15
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = Smoothing
+    VALUE   = 101
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:17
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = EmissionAngleTrim
+    VALUE   = N/A
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:18
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = IncidenceAngleTrim
+    VALUE   = N/A
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:20
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = C0
+    VALUE   = 0.0098985210061073
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:21
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = C1
+    VALUE   = 0.53204643726349
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:23
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = A1
+    VALUE   = -0.0023684322368354
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:24
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = A2
+    VALUE   = 4.19200659962371e-05
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:26
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = A3
+    VALUE   = -4.38166978256049e-07
+  End_Group
+End_Object
+
+Object = editlab
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-04-24
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:09:27
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Modifies cube labels"
+
+  Group = UserParameters
+    FROM    = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub
+    OPTIONS = addkey
+    GRPNAME = Photometry
+    KEYWORD = A4
+    VALUE   = 1.84979997985835e-09
+  End_Group
+End_Object
+
+Object = fx
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2016-10-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:18:11
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Apply generalized arithmetic operations using multiple
+                       cube files"
+
+  Group = UserParameters
+    F1       = data/20190926T173825S519_map_iofL2b_V004.pcorr.cub+1
+    TO       = data/20190926T173825S519_map_iofL2b_V004.respice.cub
+    EQUATION = f1
+    MODE     = CUBES
+  End_Group
+End_Object
+
+Object = spiceinit
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-01-11
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:18:46
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Update SPICE data (kernels, pointing, and position) for
+                       a camera cube"
+
+  Group = UserParameters
+    FROM         = data/20190926T173825S519_map_iofL2b_V004.respice.cub
+    WEB          = false
+    ATTACH       = TRUE
+    CKSMITHED    = FALSE
+    CKRECON      = TRUE
+    CKPREDICTED  = FALSE
+    CKNADIR      = FALSE
+    SPKSMITHED   = FALSE
+    SPKRECON     = TRUE
+    SPKPREDICTED = FALSE
+    PCK          = /opt/isis3/data/osirisrex/kernels/pck/bennu_v15.tpc
+    SCLK         = /opt/isis3/data/osirisrex/kernels/sclk/ORX_SCLKSCET.00049.-
+                   tsc
+    SPK          = /opt/isis3/data/osirisrex/kernels/spk/orx_190915_191029_19-
+                   1014_od191-N-M6R-L-M11R_v1.bsp
+    SHAPE        = user
+    MODEL        = /opt/isis3/data/osirisrex/kernels/dsk/g_12630mm_spc_obj_00-
+                   00n00000_v028.bds
+    STARTPAD     = 0.0
+    ENDPAD       = 0.0
+    URL          = https://services.isis.astrogeology.usgs.gov/cgi-bin/spicei-
+                   nit.cgi
+    PORT         = 443
+  End_Group
+End_Object
+
+Object = jigsaw
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-06-04
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:19:59
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Improves camera pointing and a whole lot more!"
+
+  Group = UserParameters
+    FROMLIST                              = data/20190926T173831S664_map_iofL-
+                                            2v_V004.all.lis
+    HELDLIST                              = data/20190926T173831S664_map_iofL-
+                                            2v_V004.hold.lis
+    CNET                                  = data/20190926T173831S664_map_iofL-
+                                            2v_V004.valid.net
+    ONET                                  = data/20190926T173831S664_map_iofL-
+                                            2v_V004.resected.net
+    OBSERVATIONS                          = No
+    RADIUS                                = no
+    UPDATE                                = yes
+    OUTLIER_REJECTION                     = no
+    REJECTION_MULTIPLIER                  = 3.0
+    ERRORPROPAGATION                      = no
+    MODEL1                                = NONE
+    SIGMA0                                = 1.0e-10
+    MAXITS                                = 50
+    CAMSOLVE                              = angles
+    TWIST                                 = yes
+    OVEREXISTING                          = No
+    SPSOLVE                               = positions
+    OVERHERMITE                           = No
+    SOLVETARGETBODY                       = false
+    CONTROL_POINT_COORDINATE_TYPE_BUNDLE  = rectangular
+    CONTROL_POINT_COORDINATE_TYPE_REPORTS = rectangular
+    CAMERA_ANGLES_SIGMA                   = 0.1
+    FILE_PREFIX                           = data/20190926T173831S664_map_iofL-
+                                            2v_V004
+    BUNDLEOUT_TXT                         = yes
+    IMAGESCSV                             = yes
+    OUTPUT_CSV                            = yes
+    RESIDUALS_CSV                         = yes
+  End_Group
+End_Object
+
+Object = phocube
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2019-03-14
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T13:47:43
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Create photometric and geometric information bands for
+                       an image cube"
+
+  Group = UserParameters
+    FROM                             = data/20190926T173825S519_map_iofL2b_V0-
+                                       04.respice.cub
+    TO                               = data/20190926T173825S519_map_iofL2b_V0-
+                                       04.repho.cub
+    SOURCE                           = CAMERA
+    DN                               = yes
+    PHASE                            = TRUE
+    EMISSION                         = TRUE
+    INCIDENCE                        = TRUE
+    LOCALEMISSION                    = yes
+    LOCALINCIDENCE                   = yes
+    LATITUDE                         = TRUE
+    LONGITUDE                        = TRUE
+    PIXELRESOLUTION                  = FALSE
+    LINERESOLUTION                   = FALSE
+    SAMPLERESOLUTION                 = FALSE
+    DETECTORRESOLUTION               = FALSE
+    OBLIQUEDETECTORRESOLUTION        = FALSE
+    NORTHAZIMUTH                     = FALSE
+    SUNAZIMUTH                       = FALSE
+    SPACECRAFTAZIMUTH                = FALSE
+    OFFNADIRANGLE                    = FALSE
+    SUBSPACECRAFTGROUNDAZIMUTH       = FALSE
+    SUBSOLARGROUNDAZIMUTH            = FALSE
+    MORPHOLOGYRANK                   = FALSE
+    ALBEDORANK                       = FALSE
+    RADEC                            = FALSE
+    BODYFIXED                        = yes
+    SUNILLUMINATIONMASK              = FALSE
+    SURFACEOBLIQUEDETECTORRESOLUTION = FALSE
+  End_Group
+End_Object
+
+Object = cam2map
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2016-06-29
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T14:01:04
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Convert camera image to a map projection"
+
+  Group = UserParameters
+    FROM          = data/20190926T173825S519_map_iofL2b_V004.repho.cub
+    MAP           = data/20190926T173831S664_map_iofL2v_V004.equi.cub
+    TO            = data/20190926T173825S519_map_iofL2b_V004.equi.cub
+    MATCHMAP      = yes
+    PIXRES        = CAMERA
+    DEFAULTRANGE  = MINIMIZE
+    LONSEAM       = AUTO
+    INTERP        = CUBICCONVOLUTION
+    WARPALGORITHM = AUTOMATIC
+  End_Group
+End_Object
+
+Object = cubeit
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2017-05-19
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-03-09T14:55:50
+  HostName          = ipwg-5
+  UserName          = dgolish
+  Description       = "Stacks individual cubes into one cube"
+
+  Group = UserParameters
+    FROMLIST = ./listtmp.2iQxSn.lis
+    TO       = set02.bvwx.cub
+  End_Group
+End_Object
+
+Object = maptrim
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2013-11-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-08-20T11:57:10
+  HostName          = Unknown
+  UserName          = danidg
+  Description       = "Trim edges of a map projected image"
+
+  Group = UserParameters
+    FROM   = set02.bvwx.cub
+    TO     = set02.bvwx.maptrim.cub
+    MODE   = TRIM
+    MINLAT = -21
+    MAXLAT = 25
+    MINLON = 0
+    MAXLON = 360
+  End_Group
+End_Object
+
+Object = automos
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-08-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-08-20T12:01:29
+  HostName          = Unknown
+  UserName          = danidg
+  Description       = "Create a mosaic using a list of map projected cubes"
+
+  Group = UserParameters
+    FROMLIST       = set_01.lis
+    MOSAIC         = mos_01.cub
+    PRIORITY       = ONTOP
+    GRANGE         = AUTO
+    TRACK          = FALSE
+    MATCHBANDBIN   = TRUE
+    MATCHDEM       = FALSE
+    HIGHSATURATION = FALSE
+    LOWSATURATION  = FALSE
+    NULL           = FALSE
+  End_Group
+End_Object
+
+Object = mapmos
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-08-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-08-20T12:48:45
+  HostName          = Unknown
+  UserName          = danidg
+  Description       = "Create a mosaic using map projected cubes"
+
+  Group = UserParameters
+    FROM           = mos_01.cub
+    MOSAIC         = mos_01_containcopy.cub
+    PRIORITY       = ONTOP
+    CREATE         = NO
+    TRACK          = FALSE
+    MATCHBANDBIN   = false
+    MATCHDEM       = FALSE
+    HIGHSATURATION = FALSE
+    LOWSATURATION  = FALSE
+    NULL           = FALSE
+  End_Group
+End_Object
+
+Object = mask
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2015-03-22
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-08-20T12:51:22
+  HostName          = Unknown
+  UserName          = danidg
+  Description       = "Set pixels to NULL using a mask cube"
+
+  Group = UserParameters
+    FROM     = mos_01_containcopy.cub
+    MASK     = ../masks/mos_01_mask.cub
+    TO       = mos_01.lsmasked.cub
+    MINIMUM  = 1
+    PRESERVE = INSIDE
+    SPIXELS  = NULL
+  End_Group
+End_Object
+
+Object = automos
+  IsisVersion       = "3.6.1  | 2019-03-14"
+  ProgramVersion    = 2018-08-13
+  ProgramPath       = /opt/isis3dev/isis3bbdrtf/isis/bin
+  ExecutionDateTime = 2020-08-20T13:01:02
+  HostName          = Unknown
+  UserName          = danidg
+  Description       = "Create a mosaic using a list of map projected cubes"
+
+  Group = UserParameters
+    FROMLIST       = globalmos.lis
+    MOSAIC         = bvwx.globalmos.cub
+    PRIORITY       = ONTOP
+    GRANGE         = AUTO
+    TRACK          = FALSE
+    MATCHBANDBIN   = TRUE
+    MATCHDEM       = FALSE
+    HIGHSATURATION = FALSE
+    LOWSATURATION  = FALSE
+    NULL           = FALSE
+  End_Group
+End_Object
+
+Object = explode
+  IsisVersion       = "3.5.2.0 stable | 2018-04-06"
+  ProgramVersion    = 2008-05-12
+  ProgramPath       = /opt/isis3/isis/bin
+  ExecutionDateTime = 2020-08-21T10:20:04
+  HostName          = Unknown
+  UserName          = danidg
+  Description       = "Extracts each band of a cube into a separate one band
+                       file"
+
+  Group = UserParameters
+    FROM = bvwx.globalmos.cub
+    TO   = globalmos
+  End_Group
+End_Object
+
+Object = gdal_translate
+  GdalVersion       = 3.11.4
+  ProgramPath       = /home/thare/miniforge3/envs/gdal3/bin
+  ExecutionDateTime = 2026-01-12T23:13:29
+  HostName          = IGSWZA281W0214
+  UserName          = thare
+  Description       = "GDAL conversion"
+
+  Group = UserParameters
+    FROM = globalmos.b.cub
+    TO   = Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.lbl
+  End_Group
+End_Object

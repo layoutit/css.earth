@@ -43,19 +43,44 @@
   },
   "datasets": {
     "normal": {
-      "title": "MSI 550 nm reflectance map",
-      "detail": "MSI · 550 nm",
-      "summary": "Corrected 550 nm reflectance, stretched from 0.05 to 0.40; some photographed shading remains."
+      "title": "NEAR MSI · 550 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in green light, corrected for illumination. All bands share one scale; gray marks missing data."
     },
     "infrared": {
-      "title": "MSI 950 nm albedo map",
-      "detail": "MSI · 950 nm",
-      "summary": "Corrected 950 nm reflectance on the same brightness scale as the 550 nm view."
+      "title": "NEAR MSI · 950 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
     },
     "elevation": {
       "title": "Shape-derived radial height",
       "detail": "Shape-derived height",
       "summary": "Height above or below an 8,420 m sphere. The outline is simplified."
+    },
+    "blue": {
+      "title": "NEAR MSI · 450 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in blue light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "near-infrared-760": {
+      "title": "NEAR MSI · 760 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "near-infrared-900": {
+      "title": "NEAR MSI · 900 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "near-infrared-1000": {
+      "title": "NEAR MSI · 1000 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "near-infrared-1050": {
+      "title": "NEAR MSI · 1050 nm",
+      "detail": "NEAR MSI",
+      "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
     }
   }
 }

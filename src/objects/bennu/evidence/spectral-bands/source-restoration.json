@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-spectral-source-restoration@1",
+  "method": "Production zip-member acquisition into empty temporary destinations, using locally cached publisher ZIP archives. Each extracted member compared byte-for-byte with the source consumed by preparation; no source-cache mirror or existing member files used.",
+  "body": "bennu",
+  "files": [
+    {
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.tif",
+      "bytes": 78996830,
+      "sha256": "735286dd1349f583cd97b5d4cf615e9065bcbd89fd73a92943b32a977924013b"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.lbl",
+      "bytes": 1498,
+      "sha256": "9f125848b1e971c0f08e6b08d0f6a1413a528ea7db22376bbf3b29fd6a2c35c7"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.History.IsisCube",
+      "bytes": 28028,
+      "sha256": "0c986152a5dd5b6dc580f46aa475dc9bead74efe44b87901d72c3e485d2817fa"
+    },
+    {
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.tif",
+      "bytes": 78996830,
+      "sha256": "9f844238aeb6a659e3d76c8241c3d1fac1158d42677abfec497080339f1ad112"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.lbl",
+      "bytes": 1498,
+      "sha256": "de661817d47619cf03644bd72d8d87c267413b090678fed2c3237f06e267e117"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.History.IsisCube",
+      "bytes": 28028,
+      "sha256": "f1a364036955db414ba9399eb392e543948534834adb5a0579c9e3e5e2298699"
+    },
+    {
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.tif",
+      "bytes": 78996830,
+      "sha256": "5e57a52f8a26cba48c2a46d6e7d64a22073e5bfcf525df35bcdc79411bef7e3b"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.lbl",
+      "bytes": 1498,
+      "sha256": "deec45d1d2176df9eb7bbf985048e8aa3edeaa7532a07ba1c1b9942fb7c12736"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.History.IsisCube",
+      "bytes": 28028,
+      "sha256": "b91ef0ffd625b053a304e2de887e9d6d19e7b00aaa516a5b68a8c393ead37130"
+    },
+    {
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.tif",
+      "bytes": 78996830,
+      "sha256": "f82deca4ba3b91d3d2d3403f10b344ea88c7387332b3e6b3bdd626c19d522532"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.lbl",
+      "bytes": 1498,
+      "sha256": "3cb6e4d6df5e86c1781a98eb20d2b5989a3f2b1577bbbb43644602a58bc51136"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.History.IsisCube",
+      "bytes": 28028,
+      "sha256": "acc98c33b3eb9cdcdabcea9b58dbff84c3d607f3de407ccbce4c8804334f2f30"
+    }
+  ]
+}

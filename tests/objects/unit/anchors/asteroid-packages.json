@@ -167,6 +167,10 @@
   "lenses": [
    "normal",
    "surface",
+   "blue",
+   "green",
+   "red",
+   "near-infrared",
    "spectral",
    "elevation"
   ],
@@ -371,8 +375,13 @@
  "eros": {
   "claim": "eros preserves its measured shape, lenses, native raster triangles and physical context",
   "lenses": [
+   "blue",
    "normal",
+   "near-infrared-760",
+   "near-infrared-900",
    "infrared",
+   "near-infrared-1000",
+   "near-infrared-1050",
    "elevation"
   ],
   "radiusM": 8420.0

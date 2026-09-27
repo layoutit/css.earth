@@ -196,6 +196,186 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       }
+    },
+    {
+      "id": "bennu-blue",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "blue",
+      "label": "Blue · 473 nm",
+      "falseColor": false,
+      "width": 6284,
+      "height": 3142,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "MapCam 473 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-bennu-blue",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm"
+          }
+        ]
+      },
+      "productVersion": "USGS MapCam photometric mosaics v2, 2025-08-04"
+    },
+    {
+      "id": "bennu-green",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "green",
+      "label": "Green · 550 nm",
+      "falseColor": false,
+      "width": 6284,
+      "height": 3142,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "MapCam 550 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-bennu-green",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm"
+          }
+        ]
+      },
+      "productVersion": "USGS MapCam photometric mosaics v2, 2025-08-04"
+    },
+    {
+      "id": "bennu-red",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "red",
+      "label": "Red · 698 nm",
+      "falseColor": false,
+      "width": 6284,
+      "height": 3142,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "MapCam 698 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-bennu-red",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm"
+          }
+        ]
+      },
+      "productVersion": "USGS MapCam photometric mosaics v2, 2025-08-04"
+    },
+    {
+      "id": "bennu-near-infrared",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "near-infrared",
+      "label": "Near infrared · 847 nm",
+      "falseColor": false,
+      "width": 6284,
+      "height": 3142,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "MapCam 847 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-bennu-near-infrared",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm"
+          }
+        ]
+      },
+      "productVersion": "USGS MapCam photometric mosaics v2, 2025-08-04"
     }
   ],
   "generatedIntermediates": [
@@ -355,6 +535,86 @@
           }
         ]
       }
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.History.IsisCube",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.History.IsisCube",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.History.IsisCube",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.History.IsisCube",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
     }
   ]
 }

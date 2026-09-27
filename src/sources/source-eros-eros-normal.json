@@ -2,8 +2,13 @@
   "id": "source-eros-eros-normal",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Monochrome",
-  "identifiers": [],
+  "title": "Eros · NEAR MSI 550 nm reflectance",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter1::1.0"
+    }
+  ],
   "links": [
     {
       "role": "landing",

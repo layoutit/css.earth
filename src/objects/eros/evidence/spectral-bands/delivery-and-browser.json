@@ -1,0 +1,201 @@
+{
+  "schema": "cssearth-body-delivery-check@1",
+  "date": "2026-09-27",
+  "base": "7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05",
+  "body": "eros",
+  "install": {
+    "inventorySha256": "6deabe021b92e24112f82501f786ef3d0a05063027656b9dd06d03df7d6fe2a0",
+    "files": 65,
+    "bytes": 37798819,
+    "previousBytes": 14340853,
+    "installed": 65,
+    "reused": 0,
+    "skipped": 0,
+    "source": "https://earth-assets.lowpoly.cc",
+    "verification": "Production installRuntimeAssets into an empty destination; every file size and SHA-256 verified. No source preparation in the installation.",
+    "sharedWorldInventorySha256": "6902d05a2d4054bb5b756bcfcbc33cfc57ed873fdfc5f23d62d2f7d1ab7f2aa9"
+  },
+  "geometry": {
+    "existingFullSizeAtlasesByteIdentical": true,
+    "bodyLeavesExactlyEqual": true,
+    "sceneNumericToleranceSignificantDigits": 14,
+    "explanation": "Bennu scene JSON is semantically identical; Eros camera fractions differ only in floating-point serialization at approximately 1e-16."
+  },
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "body": "eros",
+    "records": [
+      {
+        "id": "blue",
+        "url": "http://127.0.0.1:4277/eros/?dataset=blue&v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "NEAR MSI · 450 nm\nPlay\nBlue · 450 nm · 1 of 7\n\nNo data\n\nBrightness in blue light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": true,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "normal",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "NEAR MSI · 550 nm\nPlay\nGreen · 550 nm · 2 of 7\n\nNo data\n\nBrightness in green light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "near-infrared-760",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA&dataset=near-infrared-760",
+        "description": "NEAR MSI · 760 nm\nPlay\nNear infrared · 760 nm · 3 of 7\n\nNo data\n\nBrightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "near-infrared-900",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA&dataset=near-infrared-900",
+        "description": "NEAR MSI · 900 nm\nPlay\nNear infrared · 900 nm · 4 of 7\n\nNo data\n\nBrightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "infrared",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA&dataset=infrared",
+        "description": "NEAR MSI · 950 nm\nPlay\nNear infrared · 950 nm · 5 of 7\n\nNo data\n\nBrightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "near-infrared-1000",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA&dataset=near-infrared-1000",
+        "description": "NEAR MSI · 1000 nm\nPlay\nNear infrared · 1000 nm · 6 of 7\n\nNo data\n\nBrightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "near-infrared-1050",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA&dataset=near-infrared-1050",
+        "description": "NEAR MSI · 1050 nm\nPlay\nNear infrared · 1050 nm · 7 of 7\n\nNo data\n\nBrightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": true,
+        "retained": true,
+        "scenes": 1
+      }
+    ],
+    "keyboardRetained": true,
+    "phone": {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false
+    },
+    "directAndPoseChecks": [
+      {
+        "body": "eros",
+        "query": "?dataset=infrared",
+        "selected": "infrared",
+        "url": "http://127.0.0.1:4277/eros/?dataset=infrared&v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "retained": true,
+        "sceneCount": 1
+      },
+      {
+        "body": "eros",
+        "query": "",
+        "selected": "normal",
+        "url": "http://127.0.0.1:4277/eros/?v=UMJAVU9DzE1RV0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "retained": true,
+        "sceneCount": 1
+      },
+      {
+        "body": "eros",
+        "query": "?dataset=near-infrared-1000",
+        "selected": "near-infrared-1000",
+        "url": "http://127.0.0.1:4277/eros/?dataset=near-infrared-1000&v=UMJALjvZc_zTREFCxzNAAAAAv-Isqa79ev8_3_AKUGsF-z_HP6usYqEOAAA",
+        "retained": true,
+        "sceneCount": 1
+      }
+    ],
+    "errors": [],
+    "sharedWorld": "Existing main Sun inventory; no Sun changes are part of this addition.",
+    "inspected": [
+      "overview.webp",
+      "lighting.webp",
+      "close.webp",
+      "phone.webp"
+    ]
+  },
+  "atlasSizes": [
+    {
+      "filename": "eros-blue-surface@2x.webp",
+      "encodedBytes": 1129280,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-elevation-surface@2x.webp",
+      "encodedBytes": 451840,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-infrared-surface@2x.webp",
+      "encodedBytes": 2714020,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-near-infrared-1000-surface@2x.webp",
+      "encodedBytes": 2122750,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-near-infrared-1050-surface@2x.webp",
+      "encodedBytes": 1356614,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-near-infrared-760-surface@2x.webp",
+      "encodedBytes": 2554606,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-near-infrared-900-surface@2x.webp",
+      "encodedBytes": 2015854,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    },
+    {
+      "filename": "eros-normal-surface@2x.webp",
+      "encodedBytes": 1551466,
+      "width": 3503,
+      "height": 3720,
+      "decodedRgbaBytes": 52124640
+    }
+  ],
+  "limits": [
+    "Installation bytes and decoded RGBA estimates are not cold network transfer or GPU residency measurements.",
+    "Browser captures use the development server. No production performance benchmark is claimed.",
+    "Native values qualify input decoding and display transfer, not new physical map-to-shape registration.",
+    "Shadows on uses the existing display lighting, not reconstruction of the mission photometric model."
+  ]
+}
