@@ -145,7 +145,11 @@ its validators accept); the renderer never imports the bake.
     in `giant` they would close a topic cycle. Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
     scripts and modules that still read platform files stay in `tools/objects/`; the terrestrial commands that derive
-    observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`. A source manifest's `generator` records
+    observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
+    with the band-alignment, camera-reference and L'LORRI overlap commands and the archived-camera Python that runs the
+    camera reference beside it. `tools/objects/terrestrial-layers/` keeps only the pipeline entry (`index.mts`) and the solid
+    scene (`solid-scene.mts`): both read the generated solar geometry as a module, and the solid scene loads the astronomy
+    package through `tools/prepare/astronomy/`. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
@@ -154,8 +158,10 @@ its validators accept); the renderer never imports the bake.
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Their tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` once the
   pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the
-  repository's test helpers; they import the entries. A node test that needs none of those helpers sits beside its module
-  (`objects/layers/paged-ellipsoid/*.test.ts`); Vitest skips `src/objects/**/*.test.ts`. `pnpm test:bake-objects`
+  repository's test helpers; they import the entries. The terrestrial tests, the source-surface fixture and its independent
+  Python verifier are in `tests/objects/terrestrial/`. A node test that needs none of those helpers sits beside its module
+  (`objects/layers/paged-ellipsoid/*.test.ts`, `objects/layers/terrestrial/triangle-alpha-atlas.test.ts`,
+  `objects/raster/observed/observed-geotiff.test.ts`); Vitest skips `src/objects/**/*.test.ts`. `pnpm test:bake-objects`
   (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
