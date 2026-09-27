@@ -251,9 +251,9 @@
         "displaySampling": "nearest",
         "surfaceSampling": {
           "method": "closest-registered-surface",
-          "renderedMeshPath": "shape/mtp019.obj",
+          "renderedMeshPath": "geology/shap7-regions.vtk",
           "maximumDistanceMeters": 50,
-          "maximumRegistrationDistanceMeters": 50
+          "maximumRegistrationDistanceMeters": 0.001
         },
         "categories": [
           {
@@ -432,9 +432,9 @@
         "displaySampling": "nearest",
         "surfaceSampling": {
           "method": "closest-registered-surface",
-          "renderedMeshPath": "shape/mtp019.obj",
+          "renderedMeshPath": "geology/shap7-regions.vtk",
           "maximumDistanceMeters": 50,
-          "maximumRegistrationDistanceMeters": 50
+          "maximumRegistrationDistanceMeters": 0.001
         },
         "categories": [
           {
@@ -627,12 +627,30 @@
             "path": "observations/n20151115t050650703id50f22.img",
             "qualityPath": "observations/n20151115t050650703id40f22.img",
             "startTime": "2015-11-15T05:08:11.274"
+          },
+          {
+            "id": "n20160409t151852044id50f22",
+            "path": "observations/n20160409t151852044id50f22.img",
+            "qualityPath": "observations/n20160409t151852044id40f22.img",
+            "startTime": "2016-04-09T15:20:16.680"
+          },
+          {
+            "id": "n20160409t173352247id50f22",
+            "path": "observations/n20160409t173352247id50f22.img",
+            "qualityPath": "observations/n20160409t173352247id40f22.img",
+            "startTime": "2016-04-09T17:35:16.886"
+          },
+          {
+            "id": "n20160410t114851908id50f22",
+            "path": "observations/n20160410t114851908id50f22.img",
+            "qualityPath": "observations/n20160410t114851908id40f22.img",
+            "startTime": "2016-04-10T11:50:16.568"
           }
         ],
         "radiometry": "radiance-factor",
-        "selection": "lowest-emission",
+        "selection": "finest-resolution",
         "levelMatching": {
-          "samplesPerTriangle": 64,
+          "samplesPerTriangle": 128,
           "minimumPairs": 128,
           "maximumGain": 1.35,
           "maximumAngleDegrees": 65
@@ -641,7 +659,7 @@
           "maximumSeparationMeters": 20,
           "maximumEmissionDegrees": 80,
           "visibilityToleranceMeters": 0.5,
-          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must be within 20 m of the closest RMOC source point; the same point must be visible in the full RMOC mesh."
+          "interpretation": "Acceptance bounds, not source accuracy estimates. Every bilinear contributor must be within 20 m of the closest released 125K SHAP7 source point, independently visible on that same mesh. The GEO backplanes use the denser 4M SHAP7 release."
         },
         "photometry": {
           "model": "lommel-seeliger",
@@ -671,7 +689,7 @@
         "metadata": {
           "label": "OSIRIS mosaic",
           "falseColor": false,
-          "coverage": "Eight OSIRIS orange-filter photographs from August 2014 and October–November 2015. Unsupported surface patches retain the grid."
+          "coverage": "Eleven orange-filter photographs from August 2014, October–November 2015 and April 2016, on the released SHAP7 mesh; approximately 91% qualified displayed area. Missing coverage remains gridded."
         }
       }
     ]
@@ -740,7 +758,118 @@
           }
         ]
       }
-    }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "path": "geology/shap7-regions.vtk",
+        "format": "vtk-polydata",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 62471,
+          "expectedFaces": 124938
+        },
+        "faceBudget": 2500,
+        "texelsPerFace": 8192,
+        "simplification": {
+          "targetFaces": 2000,
+          "maximumErrorMeters": 50,
+          "method": "source-meshoptimizer"
+        },
+        "primitive": "u",
+        "sourceLighting": {
+          "maximumDistanceMeters": 150,
+          "rayOffsetMeters": 0.25,
+          "ambient": 0.16,
+          "diffuse": 0.84,
+          "floodLights": [
+            {
+              "direction": [
+                0,
+                0,
+                1
+              ],
+              "weight": 0.36
+            },
+            {
+              "direction": [
+                0,
+                1,
+                0
+              ],
+              "weight": 0.24
+            },
+            {
+              "direction": [
+                1,
+                0,
+                0
+              ],
+              "weight": 0.24
+            }
+          ]
+        },
+        "lensId": "osiris",
+        "additionalLensIds": [
+          "regions",
+          "geology"
+        ]
+      },
+      {
+        "path": "science/cg_spc_shap5_097k_cart.wrl",
+        "format": "vrml-mesh",
+        "grid": {
+          "expectedVertices": 48420,
+          "expectedFaces": 96834,
+          "metersPerUnit": 1000
+        },
+        "faceBudget": 2000,
+        "texelsPerFace": 4096,
+        "simplification": {
+          "targetFaces": 1500,
+          "maximumErrorMeters": 50,
+          "method": "source-meshoptimizer"
+        },
+        "primitive": "u",
+        "sourceLighting": {
+          "maximumDistanceMeters": 150,
+          "rayOffsetMeters": 0.25,
+          "ambient": 0.16,
+          "diffuse": 0.84,
+          "floodLights": [
+            {
+              "direction": [
+                0,
+                0,
+                1
+              ],
+              "weight": 0.36
+            },
+            {
+              "direction": [
+                0,
+                1,
+                0
+              ],
+              "weight": 0.24
+            },
+            {
+              "direction": [
+                1,
+                0,
+                0
+              ],
+              "weight": 0.24
+            }
+          ]
+        },
+        "lensId": "albedo",
+        "additionalLensIds": [
+          "slope",
+          "absorption",
+          "ice"
+        ]
+      }
+    ]
   },
   "celestial": {
     "sunSource": "JPL Horizons osculating elements; ESA/RMOC measured pole in the Cheops frame.",

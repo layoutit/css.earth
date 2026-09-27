@@ -1,6 +1,6 @@
 import type { PreparedTriangle, RadialSamplingProfile, RadialFaces, TerrainGrid } from '@cssearth/bake/objects/geometry';
 import type { createSourceManifest } from '@cssearth/objects/node';
-import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '@cssearth/bake/objects/geometry';
+import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadVtkShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '@cssearth/bake/objects/geometry';
 import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
 import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
 import { parseRadialSource, loadEllipsoidParameters, loadContactEllipsoids, completeImageDem, reduceCompletedImageDem, preparePdsConstraintMap } from '@cssearth/bake/objects/layers/terrestrial';
@@ -37,6 +37,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     : profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
     : ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format ?? '') ? loadObjShape
     : profile.format === 'vrml-mesh' ? loadVrmlShape
+    : profile.format === 'vtk-polydata' ? loadVtkShape
     : profile.format === 'pds-plate-model' ? loadPdsPlateShape
     : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape
     // A radial table simplified with source preservation needs its source mesh; a radially resampled one keeps the height field.

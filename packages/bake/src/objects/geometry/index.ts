@@ -5,6 +5,7 @@
 export * from './contracts.ts';
 export * from './shape-records.ts';
 export * from './obj-shape.ts';
+export * from './vtk-shape.ts';
 export * from './fits-facet-field.ts';
 export * from './mesh-face-pairs.ts';
 export * from './open-surface.ts';

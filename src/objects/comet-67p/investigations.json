@@ -6,15 +6,19 @@
       "id": "rmoc-mtp019-shape",
       "subject": "ESA/RMOC MTP019 NAVCAM shape",
       "status": "included",
-      "finding": "The publicly restorable MTP019 model supplies the current 1,000-triangle display and its documented Cheops frame. It preserves the neck and overhangs; the neutral material is illustrative.",
+      "finding": "MTP019 remains the 1,000-triangle neutral shape. OSIRIS, regions and geology now use the released SHAP7 regional geometry; the four VIRTIS datasets use SPC SHAP5. The shared camera selects one prepared mesh bank.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/source/preparation/acquisition.json"
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -38,16 +42,21 @@
       "id": "osiris-shap5",
       "subject": "OSIRIS SHAP5 global shape",
       "status": "deferred",
-      "finding": "The source survey identified a public global stereo-photogrammetric model and multiple resolutions. It is not the current display input.",
+      "finding": "The earlier DLR stereo-photogrammetric SHAP5 is not selected: OSIRIS GEO products name corrected DLR SPG SHAP7. This entry is distinct from the LAM/PSI SPC SHAP5 mesh now used for VIRTIS.",
       "revisitWhen": "A source and detail comparison demonstrates a worthwhile improvement within the display budget and checks every affected dataset registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -55,16 +64,21 @@
       "id": "dlr-textured-shap7",
       "subject": "DLR SHAP7 textured-model access",
       "status": "unresolved",
-      "finding": "The recorded survey found a description with access by contacting the provider. It did not obtain that textured model or establish exact texture registration and redistribution terms. The separately released SHAP7 region map is already used.",
+      "finding": "The provider still describes a registered textured SHAP7 collection available by contact. Exact 4M geometry, texture mapping and redistribution were not obtained through a public package. The separately licensed 125K SHAP7 regional release is used and its disagreement with GEO is measured.",
       "revisitWhen": "A public or already-authorized textured package supplies exact geometry, texture mapping and reuse terms.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://europlanet.dlr.de/Rosetta/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -72,16 +86,21 @@
       "id": "miard-albedo",
       "subject": "MiARD 625 nm albedo release",
       "status": "unresolved",
-      "finding": "On the recorded 8 September survey, HTTPS timed out, HTTP returned 503 and the Commission mirror returned HDS-010. No data, registration, coverage or reuse inspection was completed; these failures are not evidence that the product is absent.",
+      "finding": "The original publication route timed out again in the September 2026 audit. No retrieved albedo pixels or reuse record were qualified. This access failure does not establish that the product is absent.",
       "revisitWhen": "A working original or authoritative mirror permits inspection of the actual release.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://www.miard.eu/homepage/publications/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -89,15 +108,20 @@
       "id": "miard-shap8",
       "subject": "MiARD SHAP8 publication route",
       "status": "unresolved",
-      "finding": "The publication route was not successfully retrieved in the retained survey. No statement about model availability or suitability follows from that failure.",
+      "finding": "The original publication route remained unreachable in the September 2026 audit. No SHAP8 model or coordinate frame was qualified; this does not establish absence.",
       "revisitWhen": "The original release or authoritative publication can be retrieved with its model version and frame.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md"
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -121,15 +145,19 @@
       "id": "osiris-august-2014",
       "subject": "Four August 2014 orange-filter OSIRIS observations",
       "status": "included",
-      "finding": "The selected GEO radiance, SHAP7 XYZ and matching L4 quality products supply the retained northern photographs. Full camera and quality checks precede transfer to the RMOC display mesh.",
+      "finding": "The four original corrected GEO/L4 pairs remain in the eleven-frame selection. They now transfer to the public 125K SHAP7 source and its 1,992-face display; native-pixel model disagreements and unchanged transfer gates are recorded.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/source/reference/osiris-georeference.json"
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -137,15 +165,19 @@
       "id": "osiris-southern-2015",
       "subject": "OSIRIS 26 October, 31 October, 4 November and 15 November 2015",
       "status": "included",
-      "finding": "These four corrected-SHAP7 GEO/L4 pairs replace the September close-ups in the eight-image mosaic. The retained matched trial increased accepted displayed area to 71.26%; seasonal differences and photographed shadows remain, so it is not a change map.",
+      "finding": "The four October-November 2015 corrected GEO/L4 pairs remain in the eleven-frame SHAP7 mosaic. Final accepted display area is 90.81%; this combines changed source geometry, display sampling and three April 2016 observations, so it is not a same-surface before/after comparison or a change map.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md"
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -219,15 +251,20 @@
       "id": "virtis-albedo",
       "subject": "VIRTIS albedo map",
       "status": "included",
-      "finding": "The archived 2014 VIRTIS map supplies reflectivity values with missing samples retained. Registration is approximate and ambiguous correspondence near the neck remains gridded.",
+      "finding": "The original MTP006 reflectivity map remains selected on its own SPC SHAP5 display. A later MTP009 table has 17.70% valid grid cells versus 64.10% for MTP006 and is not a coverage replacement. The archived SHAP5 release is later than pipeline v1.1; radial ambiguity remains withheld.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -235,15 +272,20 @@
       "id": "virtis-spectral-slope",
       "subject": "VIRTIS spectral slope map",
       "status": "included",
-      "finding": "The archived map supplies reflectivity change with wavelength, with its own legend and validity. It does not describe terrain steepness.",
+      "finding": "The original MTP006 reflectivity-change map remains selected on SPC SHAP5 geometry, with its own units, legend and validity. It does not describe terrain steepness; the later shape is not proven identical to pipeline v1.1.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -251,15 +293,20 @@
       "id": "virtis-absorption",
       "subject": "VIRTIS 3.2 micrometre absorption map",
       "status": "included",
-      "finding": "The archive supplies infrared absorption values as a distinct measured quantity. Missing and ambiguously registered source cells are not filled.",
+      "finding": "The original MTP006 3.2 micrometre map remains selected on SPC SHAP5 geometry. Missing, physically rejected and ambiguous angular cells are withheld; a change of shape cannot recover absent measurements.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -267,15 +314,20 @@
       "id": "virtis-modeled-ice",
       "subject": "VIRTIS modeled ice map",
       "status": "included",
-      "finding": "The selected ice map is a model result, retained with its own interpretation and legend. It is not a direct photograph or an unqualified measured abundance.",
+      "finding": "The original MTP006 modeled-ice map remains selected on SPC SHAP5 geometry. It is a model result, not direct imagery or an unqualified measured abundance; missing and ambiguous angular cells remain withheld.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -283,15 +335,20 @@
       "id": "shap7-regions",
       "subject": "Released SHAP7 regional map",
       "status": "included",
-      "finding": "Version 1 supplies 26 categorical regions on 124,938 source triangles. The map and representative region places transfer within the current source-distance budget; their points are not published centers or IAU nomenclature.",
+      "finding": "Version 1 supplies 26 categorical regions on 124,938 Cartesian source triangles under CC BY 4.0. These coordinates now also supply the 1,992-face display for OSIRIS, regions and geology. Category registration compares the same source geometry at 1 mm tolerance; named region points remain representative locations.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://doi.org/10.17632/2845znt54k.1"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -299,15 +356,20 @@
       "id": "esa-osiris-geology",
       "subject": "ESA-AURORA OSIRIS geology",
       "status": "included",
-      "finding": "The released map supplies paths and feature centers in 17 studied regions. Display widths are map symbols, not measured feature dimensions; unsupported correspondence remains missing.",
+      "finding": "The release supplies 843 paths and 2,265 feature centres in 17 studied regions, now transferred through the matching SHAP7 source and display. Symbol widths are not measured feature sizes; unsupported correspondence remains missing.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
         "https://doi.org/10.5270/esa-kokoti7"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
         }
       ]
     },
@@ -315,14 +377,133 @@
       "id": "philae-sites",
       "subject": "Agilkia and Abydos sites",
       "status": "included",
-      "finding": "The existing sites retain unsized coordinates from their cited ESA release or paper. They do not acquire surveyed boundaries or precise physical dimensions through the shared place labels.",
+      "finding": "Agilkia and Abydos keep their cited unsized coordinates. They and the representative regional places are eligible only on the shared SHAP7 display bank: OSIRIS, regions and geology. The Hapi route and card were inspected in the restored package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-67p/README.md"
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
+        }
+      ]
+    },
+    {
+      "id": "spc-shap5-virtis-display",
+      "subject": "SPC SHAP5 geometry for VIRTIS",
+      "status": "included",
+      "finding": "The public 96,834-face LAM/PSI SPC SHAP5 is reduced to 1,498 display faces for all four VIRTIS quantities. Closed topology and angular-ambiguity checks pass. This is a better source-family match, not proof of exact registration to the original v1.1 map geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
+        }
+      ]
+    },
+    {
+      "id": "osiris-april-2016",
+      "subject": "OSIRIS April 9-10 2016 orange-filter close-ups",
+      "status": "included",
+      "finding": "Three complete corrected-SHAP7 GEO/L4 pairs pass native-camera, detector-quality, visibility and unchanged photometric checks. Their nadir scales are 0.62-1.01 m and their selected footprint is 17.67% of the display surface. Eleven-frame coverage is 90.81%; atlas density and simplified geometry limit displayed detail.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/README.md",
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/dataset-upgrade.json",
+        "https://doi.org/10.1051/0004-6361/201833807"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
+        }
+      ]
+    },
+    {
+      "id": "virtis-mtp009-albedo",
+      "subject": "Later VIRTIS MTP009 albedo table",
+      "status": "deferred",
+      "finding": "Decoded MTP009 has 45,878 valid cells versus 166,159 in MTP006; it adds 662 cells and loses 120,943. It is not selected as a coverage replacement, and the two observing periods are not silently merged.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/57de6f3dc3808ae3d724702514e356d1a539996e/src/objects/comet-67p/evidence/virtis-albedo-comparison.json",
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m009_m009_v01.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
+        }
+      ],
+      "revisitWhen": "A dated comparison or scientifically qualified seasonal combination justifies a separate product."
+    },
+    {
+      "id": "virtis-ge7-cubes",
+      "subject": "VIRTIS final spectra and extended GE7 geometry",
+      "status": "deferred",
+      "finding": "The producer documents Cartesian pixel-corner coordinates and plate IDs with calibrated spectra, using SPC SHAP7 v1.8. This could avoid angular sheet ambiguity, but it is not a ready-made replacement for the albedo, slope, absorption and ice products. No cube-to-quantity reconstruction was qualified.",
+      "evidence": [
+        "https://sites-lira.obspm.fr/data-services/virtis-rosetta-archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
+        }
+      ],
+      "revisitWhen": "A validated cube reader, matching geometry, quality interpretation and published derivations qualify each scientific quantity."
+    },
+    {
+      "id": "shapeviewer-rosetta-bundle",
+      "subject": "Comet Toolbox ShapeViewer Rosetta bundle",
+      "status": "unresolved",
+      "finding": "The public Rosetta_67P.zip was retrieved and contains DLR SPG SHAP7 200K and 50K shape files. No explicit dataset redistribution license was established from the package; a software license does not settle those data terms. These meshes were not added to runtime.",
+      "evidence": [
+        "https://www.comet-toolbox.com/download/missions/Rosetta_67P.zip"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "57de6f3dc3808ae3d724702514e356d1a539996e"
+        }
+      ],
+      "revisitWhen": "An authoritative license and exact geometry/frame binding permit a source-fit comparison."
+    },
+    {
+      "id": "osiris-april-phase-envelope",
+      "subject": "Five April GEO headers outside the retained phase envelope",
+      "status": "excluded",
+      "finding": "The inspected 9 April 07:25, 19:29 and 20:15 UTC and 10 April 05:25 and 06:37 UTC products have centre phase 70.53, 30.33, 25.56, 31.25 and 36.12 degrees. They fall outside the current 40-70 degree normalization envelope. Their full images were not qualified.",
+      "revisitWhen": "A published and validated photometric treatment supports the actual phase range without simply widening the current gates.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/6b5fde48844b18d76858fbeec8c0a81c680086fd/src/objects/comet-67p/evidence/osiris-april-candidates.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "6b5fde48844b18d76858fbeec8c0a81c680086fd"
+        }
+      ]
+    },
+    {
+      "id": "osiris-april-additional-60-degree-frames",
+      "subject": "Two additional April GEO header candidates near 61 degrees",
+      "status": "deferred",
+      "finding": "9 April 12:15 and 10 April 18:28 UTC headers name corrected SHAP7 and the orange filter, at phases 60.63 and 60.99 degrees. Only headers were inspected. These products were not acquired completely or compared against the accepted eleven-frame mosaic.",
+      "revisitWhen": "An incremental coverage or detail trial justifies the additional full products and their extrapolated phase correction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/6b5fde48844b18d76858fbeec8c0a81c680086fd/src/objects/comet-67p/evidence/osiris-april-candidates.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "6b5fde48844b18d76858fbeec8c0a81c680086fd"
         }
       ]
     }

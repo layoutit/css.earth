@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { parseTerrestrialProfile } from './index.mts';
-import { radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { alternativeForLens, radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
@@ -49,11 +49,11 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
 
 test('an alternative model owns its observation mesh and sampler state', async () => {
   const profile = await read('comet-67p');
-  const alternative = structuredClone(profile.geometry.radialTerrain);
-  profile.geometry.radialTerrainAlternatives = [{ ...alternative, lensId: 'osiris' }];
+  const alternative = fixtureRecord(alternativeForLens(profile.geometry.radialTerrainAlternatives, 'osiris'));
+  assert.notEqual(alternative.path, profile.geometry.radialTerrain.path, 'the observation uses a distinct source mesh');
   assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS samples its declared alternative mesh');
   // The OSIRIS lens validates against its own model, which must preserve the source mesh like the default.
-  delete profile.geometry.radialTerrainAlternatives[0].simplification.method;
+  delete fixtureRecord(alternative, 'simplification').method;
   assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh must preserve its source');
 
   const observation = { samplePoint() { return null; } };

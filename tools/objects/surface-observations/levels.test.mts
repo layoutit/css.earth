@@ -189,3 +189,12 @@ test('the authored mosaic binds distinct images and rejects ambiguous frame poli
     const changed = structuredClone(recipe); alter(changed); assert.throws(() => validateSurfaceObservation(changed, shape), /source-bound/);
   }
 });
+
+// Dense regional overlaps must keep the same geometric support and reject unbounded work.
+test('dense overlap sampling stays inside the source triangle and remains bounded', () => {
+  const faces = [{ vertices: [[0, 0, 0], [1, 0, 0], [0, 1, 0]] }];
+  const samples = sampleTrianglePoints(faces, 256);
+  assert.equal(samples.length, 256);
+  assert.ok(samples.every(([x, y, z]) => x > 0 && y > 0 && x + y < 1 && z === 0));
+  assert.throws(() => sampleTrianglePoints(faces, 257), /sample count/);
+});

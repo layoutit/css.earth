@@ -6,6 +6,7 @@
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
 import { array, number, optional, shape, text } from '@cssearth/core';
+import { MAXIMUM_OVERLAP_SAMPLES } from './levels.mts';
 import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 import { checkKeys } from '@cssearth/bake/objects/raster';
 
@@ -70,7 +71,7 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
       (levels !== undefined && (!Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
         !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
         (levels.samplesPerTriangle === undefined ? rules.samplesPerTriangle === 'required'
-          : !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64) ||
+          : !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > MAXIMUM_OVERLAP_SAMPLES) ||
         (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)))) ||
       (display.percentiles === undefined) === (display.displayRange === undefined) || !rules.displays.includes(kind) ||
       !Array.isArray(range) || range.length !== 2 || !range.every(Number.isFinite) || !(range[0] < range[1]) ||

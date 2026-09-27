@@ -292,3 +292,16 @@ with `main` at `3785f09de`:
 bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
 locates change. The sheets were inspected against `main` at native resolution,
 and the body READMEs record what that found.
+
+For an OSIRIS dataset moved to another source mesh, compare the native GEO
+Cartesian samples with both source shapes independently of the display atlas:
+
+```sh
+node tools/objects/surface-observations/osiris-shape-comparison.mts comet-67p osiris output/67p-shape-comparison.json
+```
+
+The report keeps detector-weighted closest-point distances and reprojection
+displacements separate from surface coverage and camera-fit residuals. It includes
+points later withheld by photometry or visibility, so it cannot be used as a
+displayed-pixel accuracy claim. OSIRIS mosaics accept up to 24 source-bound frames
+and can select the finest projected surface resolution among qualified samples.
