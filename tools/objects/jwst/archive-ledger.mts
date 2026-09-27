@@ -17,7 +17,7 @@ import { sampleAgreement } from './sample-agreement.mts';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastRequest } from './mast.mts';
+import { mastRequest } from '@cssearth/telescope/node';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
 import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
 import { namedShippedObjects, normaliseTargetName, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';

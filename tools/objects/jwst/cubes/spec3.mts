@@ -39,7 +39,7 @@ import { requireRecord } from '@cssearth/core';
 import { productRecordPath, type ProductInput, type ProductRun } from '@cssearth/telescope';
 import { readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { eurekaToolchain } from '../toolchain.mts';
-import { mastFile } from '../mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { PROGRAMS } from '../imaging/archive.mts';
 import { bandOfHeader, JWST_BANDS, type JwstBand } from '../imaging/bands.mts';

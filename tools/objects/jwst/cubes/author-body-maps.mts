@@ -26,7 +26,7 @@ import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, require
 import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
-import { mastFile } from '../mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '../imaging/image3.mts';
 import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';

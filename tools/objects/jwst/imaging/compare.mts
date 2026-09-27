@@ -19,7 +19,7 @@ import { pathToFileURL } from 'node:url';
 import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { skyProjection } from '@cssearth/fits';
-import { mastFile } from '../mast.mts';
+import { mastFile } from '@cssearth/telescope/node';
 import { PROGRAMS } from './archive.mts';
 import { bandOfHeader } from './bands.mts';
 import { readImagingProgram, recordProductEvidence } from './image3.mts';

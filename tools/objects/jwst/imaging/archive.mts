@@ -19,7 +19,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '../mast.mts';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope/node';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
