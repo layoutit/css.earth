@@ -67,10 +67,10 @@ The pointing offsets are inside the kernel's stated jitter. The ephemeris offset
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
 node tools/kernel-banks/kernel-bank.mts acquire juno
-node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc
-node tools/objects/juno/measure.mts europa-pj45 output/juno/europa-pj45 --horizons
-node tools/objects/juno/archive-ledger.mts
-node --test tools/objects/juno/*.test.mts tools/objects/terrestrial-layers/junocam.test.mts tools/objects/terrestrial-layers/strip-refinement.test.mts tools/objects/surface-observations/composite.test.mts tools/objects/surface-observations/junocam.test.mts
+node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc
+node packages/telescope-cli/src/archives/juno/measure.mts europa-pj45 output/juno/europa-pj45 --horizons
+node packages/telescope-cli/src/archives/juno/archive-ledger.mts
+node --test packages/telescope-cli/src/archives/juno/*.test.mts tools/objects/juno/*.test.mts tools/objects/terrestrial-layers/junocam.test.mts tools/objects/terrestrial-layers/strip-refinement.test.mts tools/objects/surface-observations/composite.test.mts tools/objects/surface-observations/junocam.test.mts
 pnpm build:spice && pnpm --filter @cssearth/spice test
 ```
 

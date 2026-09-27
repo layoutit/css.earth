@@ -29,6 +29,18 @@
       "types": "./src/archives/jwst/imaging/image3.mts",
       "default": "./src/archives/jwst/imaging/image3.mts"
     },
+    "./archives/juno/archive": {
+      "types": "./src/archives/juno/archive.mts",
+      "default": "./src/archives/juno/archive.mts"
+    },
+    "./archives/juno/archive-ledger": {
+      "types": "./src/archives/juno/archive-ledger.mts",
+      "default": "./src/archives/juno/archive-ledger.mts"
+    },
+    "./archives/juno/measure": {
+      "types": "./src/archives/juno/measure.mts",
+      "default": "./src/archives/juno/measure.mts"
+    },
     "./archives/ledger": {
       "types": "./src/archives/ledger.mts",
       "default": "./src/archives/ledger.mts"

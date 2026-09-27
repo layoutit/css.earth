@@ -7,10 +7,10 @@ const test = sourceTest();
 import { kernelBankRoot } from '@cssearth/spice/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
-import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
-import { castingObjects, holdings, junoCamLedgerGuide, junoTargetObject, measuredPrograms, objectStates, type Ledger, JUNO_LEDGER } from './archive-ledger.mts';
+import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from '@cssearth/telescope-cli/archives/juno/archive';
+import { castingObjects, holdings, junoCamLedgerGuide, junoTargetObject, measuredPrograms, objectStates, type Ledger, JUNO_LEDGER } from '@cssearth/telescope-cli/archives/juno/archive-ledger';
 import { shippedObjectIds } from '@cssearth/telescope-cli/archives/ledger';
-import { POLICY, RECEIPT_SCHEMA, addRegistrationEvidence, ellipsoidMesh, registrationRun, registrationSoftware } from './measure.mts';
+import { POLICY, RECEIPT_SCHEMA, addRegistrationEvidence, ellipsoidMesh, registrationRun, registrationSoftware } from '@cssearth/telescope-cli/archives/juno/measure';
 
 // Two lines of JNOJNC_0024/INDEX/INDEX.TAB as the PDS serves them, and a methane image made from the second.
 const EUROPA = '"JNOJNC_0024","JUNOCAM-RDR","JUNO-J-JUNOCAM-3-RDR-L1A-V1.0","JNCR_2022272_45C00001_V01",2022-09-29T09:38:05.691,2022-09-29T09:38:16.079,"3                  ","Europa                                                                                                         ",7.4133e+08 <km> ,1515.1 <km>          ,11.7571                  ,0.3597                    ,"EUROPA     ","DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.LBL",2023-02-02T20:23:40,"5a1c0c3d0e0f4a8a9b0c1d2e3f405162"';
@@ -133,7 +133,7 @@ test('every pinned program has a receipt for exactly its images, from its kernel
 test('the ledger page is the ledger, and its states are what the programs, receipts and packages give', async () => {
   const ledger = JSON.parse(await readFile(JUNO_LEDGER.files.ledger, 'utf8')) as Ledger;
   assert.equal(ledger.schema, JUNO_LEDGER.schema);
-  assert.equal(await readFile(JUNO_LEDGER.files.guide, 'utf8'), junoCamLedgerGuide(ledger), 'docs/junocam-ledger.md is generated; run node tools/objects/juno/archive-ledger.mts');
+  assert.equal(await readFile(JUNO_LEDGER.files.guide, 'utf8'), junoCamLedgerGuide(ledger), 'docs/junocam-ledger.md is generated; run node packages/telescope-cli/src/archives/juno/archive-ledger.mts');
   assert.deepEqual(ledger.objects, objectStates(ledger.targets, await measuredPrograms(), await castingObjects(new Set(await shippedObjectIds()))));
   assert.equal(ledger.calibratedImages, Object.values(ledger.byFilterCombination).reduce((sum, n) => sum + n, 0));
   assert.equal(ledger.targets.reduce((sum, entry) => sum + entry.images, 0), ledger.calibratedImages);

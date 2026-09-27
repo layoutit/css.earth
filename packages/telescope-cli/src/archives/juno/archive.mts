@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /** JunoCam in the PDS: read a volume's index, and pin the calibrated colour images of one target as a program.
  *
- *   node tools/objects/juno/archive.mts <program id> <volume> <target> <naif id> <body frame> [--orbit <n>]
- *   node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45
+ *   node packages/telescope-cli/src/archives/juno/archive.mts <program id> <volume> <target> <naif id> <body frame> [--orbit <n>]
+ *   node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45
  *
  * The PDS Cartography and Imaging Sciences Node serves JunoCam as numbered volumes, each with a fixed-format index of its
  * products. A program names the images of one target by URL and size; the measuring tool adds each file's digest the first
@@ -12,9 +12,10 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
 export const VOLUMES = 'https://planetarydata.jpl.nasa.gov/img/data/juno/';
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/juno/programs');
 export const PROGRAM_SCHEMA = 'cssearth-junocam-program@1';
 /** The kernel bank and the kernels a JunoCam camera reads, in load order. The trajectory and attitude kernels cover one perijove each, so a program names its own. */
 export const KERNEL_SET = 'juno';
