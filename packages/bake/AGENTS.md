@@ -13,7 +13,7 @@ its validators accept); the renderer never imports the bake.
 - `src/photometry/` is published as `@cssearth/bake/photometry` (Node only): published photometric models, their
   records and normalization, and the limb laws and PSG limb profiles preparation draws from them. It imports no topic.
 - `src/raster/` is published as `@cssearth/bake/raster` (Node only): raster recipes and their validation, surface maps,
-  pages and poles, the lighting, limb and atmosphere banks, interiors, missing-coverage painting and the lossy WebP lane.
+  pages and poles, the lighting, limb and atmosphere banks, the prepared atmosphere frame and composite, interiors, missing-coverage painting and the lossy WebP lane.
   It imports `photometry`.
 - `src/scene/` is published as `@cssearth/bake/scene` (Node only): geometry profiles, projected surface leaves and their
   raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials, solid-body surfaces and
@@ -58,7 +58,8 @@ its validators accept); the renderer never imports the bake.
   - `objects/scene`: the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the frames
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
-    camera. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, and a recipe's
+    camera source. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
@@ -66,7 +67,9 @@ its validators accept); the renderer never imports the bake.
     photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
-    files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes.
+    files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
+    left unchecked for their consumer; and the shared reference banks under `src/references/` (the CIE 1931 table), whose
+    directory is found on first use.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
