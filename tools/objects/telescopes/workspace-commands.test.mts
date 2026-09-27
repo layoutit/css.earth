@@ -138,3 +138,16 @@ await answerParent(() => new Promise(() => {}));
     assert.deepEqual(stopped, [true, true], 'the command and its own process stopped when the telescope died');
   } finally { await fixture.cleanup(); }
 });
+
+test('an answer counts only if the command then exits as it answered: a later failure is reported, not the answer', async () => {
+  const fixture = await workspace(`import { answerParent } from '@cssearth/core/node';
+await answerParent(async () => ({ text: 'done\\n', code: 0 }));
+setTimeout(() => { throw new Error('late failure'); }, 10);
+`);
+  try {
+    const { stdout } = await fixture.run();
+    const { error } = JSON.parse(stdout) as { error?: { class: string; message: string } };
+    assert.equal(error?.class, 'Error');
+    assert.match(error?.message ?? '', /answered, then exited with 1/u);
+  } finally { await fixture.cleanup(); }
+});

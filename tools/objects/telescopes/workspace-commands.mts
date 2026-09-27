@@ -24,11 +24,15 @@ export async function runWorkspaceCommand(root: string, command: WorkspaceComman
   let received: NodeJS.Signals | undefined;
   const forward = (signal: NodeJS.Signals) => { received ??= signal; signalGroup(signal); }, orphan = () => { signalGroup('SIGKILL'); };
   process.on('SIGINT', forward); process.on('SIGTERM', forward); process.on('exit', orphan);
-  const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => accept(status ?? (signal === 'SIGINT' ? 130 : 143))); })
+  let stoppedBy: NodeJS.Signals | null = null;
+  const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => { stoppedBy = signal; accept(status ?? (signal === 'SIGINT' ? 130 : 143)); }); })
     .finally(() => { process.off('SIGINT', forward); process.off('SIGTERM', forward); process.off('exit', orphan); });
   if (received) { process.kill(process.pid, received); await new Promise(() => {}); }
   if (answer && 'failure' in answer) throw raisedProcessFailure(answer.failure);
   if (!answer) throw new Error(`${command.script} exited with ${code} without answering.`);
+  // The answer is final only if the command then ended as it said: a later failure or signal is what happened.
+  if (stoppedBy !== null) throw new Error(`${command.script} answered, then was stopped by ${stoppedBy}.`);
+  if (code !== answer.result.code) throw new Error(`${command.script} answered, then exited with ${code}.`);
   return answer.result;
 }
 
