@@ -10,7 +10,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { orderFacts } from '@cssearth/objects';
 import { writePreparedText } from '@cssearth/bake/delivery';
-import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
+import { verifyFactsheetSources } from '@cssearth/bake/sources';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 

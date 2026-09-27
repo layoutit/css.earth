@@ -8,7 +8,7 @@ import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usa
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
-import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
+import { verifyFactsheetSources } from '@cssearth/bake/sources';
 import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
 import type { SourceInventoryEntry } from '../sources/source-catalogue-inputs.mts';
 import { existsSync } from 'node:fs';
@@ -41,7 +41,7 @@ export const explorationCompilerClosure = [
   'packages/objects/src/sources/catalog.ts', 'src/platform/source-usage.mts', 'packages/objects/src/node/source-manifest.ts',
   'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
   'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
-  'tools/sources/factsheet-sources.mts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
+  'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
   'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',

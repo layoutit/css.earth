@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import test, { type TestContext } from 'node:test';
 import { createServer } from 'node:http';
-import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
+import { restoreFactsheetEvidence } from '../../tools/assets/restore-factsheet-evidence.mts';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
-import { factsheetCitations } from './source-catalogue-inputs.mts';
+import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
+import { factsheetCitations } from '../../tools/sources/source-catalogue-inputs.mts';
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
 import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '../../src/platform/source-usage.mts';
 

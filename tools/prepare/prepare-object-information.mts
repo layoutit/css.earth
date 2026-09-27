@@ -18,9 +18,9 @@ import {
   objectInformationSource,
   validateObjectInformationSnapshot,
   requireObjectInformationSnapshot,
-} from "../sources/object-information-sources.mts";
+} from "@cssearth/bake/sources";
 
-import type { ObjectInformationSource, ObjectInformationSnapshot } from '../sources/object-information-sources.mts';
+import type { ObjectInformationSource, ObjectInformationSnapshot } from '@cssearth/bake/sources';
 type FileOperations = ReturnType<typeof defaultFileOperations>;
 interface SerializedSnapshot {id: string; bytes: string;}
 interface NasaRecord {id: number; title: {rendered: string}; link: string; modified: string;}

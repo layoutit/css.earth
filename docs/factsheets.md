@@ -39,7 +39,7 @@ uncertainty threshold; those dated selections are not a current catalogue.
    `source/editorial/factsheet-review.json`, and pin that file in the manifest.
    Keep the source units, uncertainty and any calculation in that record.
    A value copied from a record the body pins needs no hand-written citation:
-   `node tools/sources/cite-pinned-facts.mts -- <object-id>` cites it when the displayed value equals the
+   `node packages/bake/cli/cite-pinned-facts.mts -- <object-id>` cites it when the displayed value equals the
    record at its displayed precision. It reads the JPL Horizons queries, the JPL
    Small-Body Database record (`--fetch` pins a missing one), the DAMIT model
    record, the JPL satellite table rows it copies into
@@ -64,7 +64,7 @@ the cited facts in the prepared source catalogue. The dataset's Sources card
 shows product citations, not this factsheet index. A published fact names its
 source: preparation and Sources refuse a fact without one, and no source is
 ever inferred. A value no record proves is not a fact the site shows; remove it
-(`node tools/sources/cite-pinned-facts.mts -- <object-id> --prune` removes what the pinned records cannot
+(`node packages/bake/cli/cite-pinned-facts.mts -- <object-id> --prune` removes what the pinned records cannot
 cite) rather than leaving it uncited.
 
 The facts-only preparer preserves the other content and scene data, checks the

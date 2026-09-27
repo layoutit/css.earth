@@ -16,7 +16,7 @@ const test = sourceTest();
 import {
   OBJECT_INFORMATION_SOURCES,
   validateObjectInformationSnapshot,
-} from "../sources/object-information-sources.mts";
+} from "@cssearth/bake/sources";
 import { publishObjectInformation } from "./prepare-object-information.mts";
 import type { PathLike } from "node:fs";
 

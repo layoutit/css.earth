@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { citePinnedFacts, conversionsFor, discoveryMatches, displayedValue, equalAtDisplayedPrecision, fieldMeasures, parseHorizonsElements, parseSatelliteTable, recordCitation, recordLeaves, smallBodyQuery, statedNumbers } from './cite-pinned-facts.mts';
+import { citePinnedFacts, conversionsFor, discoveryMatches, displayedValue, equalAtDisplayedPrecision, fieldMeasures, parseHorizonsElements, parseSatelliteTable, recordCitation, recordLeaves, smallBodyQuery, statedNumbers } from '@cssearth/bake/sources';
 
 const ELEMENTS = [
   '# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27588%3B%27&EPHEM_TYPE=ELEMENTS',

@@ -4,7 +4,7 @@ import { readFile, realpath } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUrl } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
-import type { Fact } from '@cssearth/bake/objects/content';
+import type { Fact } from '../objects/content/index.ts';
 import { orderFacts } from '@cssearth/objects';
 import { hasErrorCode } from '@cssearth/core';
 

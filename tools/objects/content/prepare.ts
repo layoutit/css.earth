@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
 import { lensBillboardColors, prepareLensLabels, prepareLenses } from "@cssearth/bake/objects/content";
-import { parseFactsheet, verifyFactsheetSources } from '../../sources/factsheet-sources.mts';
+import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
 import type {
   ContentPreparationContext,
   ObjectContentSource,

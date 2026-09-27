@@ -63,9 +63,11 @@ its validators accept); the renderer never imports the bake.
   topic. Its tests are `node --test` suites in `tests/delivery/`.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
-  physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure.
-  It imports `runtime-source`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned JPL moon catalogue
-  (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
+  physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure;
+  the checks of a factsheet's cited source evidence, the object-information source records, and the citations of
+  factsheet values from the records a body pins (`packages/bake/cli/cite-pinned-facts.mts` is their command). It imports
+  `runtime-source` and `objects/content`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
+  JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls. It imports `presentation`.
