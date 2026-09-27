@@ -1,8 +1,9 @@
 /** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the real
  * ledgers use, so nothing asks an archive anything; the last cases run on the committed ledgers themselves. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { restoredSources, sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '@cssearth/bake/objects/layers/observation';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
@@ -504,7 +505,11 @@ test('the committed archive ledgers expose sourced capabilities without inventin
   assert.throws(() => selectObservation(selectableEuropa, 'Keck', 'NIRSPEC', 'europa-nirspec-2006a-c213ol'), /has no usable toolkit/u);
 });
 
-test('Itokawa retains Spitzer refusals and exposes pinned native sources without inventing their suitability', async () => {
+test('Itokawa retains Spitzer refusals and exposes pinned native sources without inventing their suitability', async t => {
+  // The native images are read from their downloaded FITS headers, which a bare clone does not hold: skip until they are restored.
+  const manifest = JSON.parse(await readFile(resolve(ROOT, 'src/objects/itokawa/source/manifest.json'), 'utf8')) as { inputs: { path: string; origin?: string }[] };
+  const pinned = restoredSources('itokawa', ...manifest.inputs.filter(input => /\.fits?$/u.test(input.path) && /^https?:/u.test(input.origin ?? '')).map(input => input.path));
+  if (pinned.skip) return t.skip(pinned.skip);
   const answer = queryCapabilities({ target: 'itokawa', wavelengthMicrometres: [2, 2.2], time: { fromIso: '2005-09-01', toIso: '2005-10-31' },
     surfaceResolutionKm: 0.1, kind: 'image', result: 'body-map' }, await loadQueryInputs(ROOT, 'itokawa'));
   const archive = answer.candidates.filter(entry => entry.telescope === 'Spitzer');
