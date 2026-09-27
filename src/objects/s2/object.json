@@ -103,7 +103,7 @@
       "classification": "star",
       "color": "#a3bcff",
       "distanceAu": 1707252516.6,
-      "description": "A hot young star on a 16-year orbit around Sagittarius A*, the Milky Way's central black hole.",
+      "description": "A hot young star that swings around the Milky Way's central black hole every 16 years.",
       "systemName": "Galactic Centre",
       "order": 1253,
       "context": {
@@ -114,27 +114,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -13959741082259575000,
-        -222925492788392300000,
-        -123851505411757360000
+        -13959741082259556000,
+        -222925492788392330000,
+        -123851505411757340000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.4450487254505532,
+        0.5274394740836094,
+        -0.7236983025772852,
+        -0.3959809784871207,
+        0.8407521933895683,
+        0.36923544519318885,
+        -0.8032002842698828,
+        -0.12224299770962542,
+        -0.5830316911281443
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.5274394740836094,
+        -0.8407521933895683,
+        0.12224299770962542
       ],
-      "metersPerUnit": 15512987.903225806,
+      "metersPerUnit": 12410390.322580645,
       "bodyRadiusM": 3847221000
     }
   },

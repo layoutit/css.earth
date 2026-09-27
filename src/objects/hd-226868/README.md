@@ -26,6 +26,8 @@ HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely ac
 
 ## Evidence
 
+[The rendered page](evidence/rendered-page.png) (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck colour, with no limb darkening (no model grid reaches its surface gravity).
+
 Generated 2026-09-27 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
 
