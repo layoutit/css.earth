@@ -49,6 +49,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'delivery': 'src/delivery/index.ts',
     'sources': 'src/sources/index.ts',
     'contract': 'src/contract/index.ts',
+    'astronomy': 'src/astronomy/index.ts',
     'navigation': 'src/navigation/index.ts',
     'surface-previews': 'src/surface-previews/index.ts',
     'preparation': 'src/preparation/index.ts',

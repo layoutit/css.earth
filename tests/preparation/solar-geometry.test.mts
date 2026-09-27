@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packages/astronomy/tools/scene-ephemeris.mts';
-import { loadAstronomyPackage } from './astronomy/astronomy-package.mts';
+import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
 import * as geometry from '../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
@@ -117,7 +117,7 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
 });
 
 test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
-  const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
+  const { refreshSolidSceneEpoch } = await import('@cssearth/bake/objects/layers/terrestrial');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
@@ -130,7 +130,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   const index = definition.tree.nodes.findIndex(node => node.className?.split(' ').includes('mimas-system'));
   assert.equal(Reflect.set(requireSnapshot(definition.tree.nodes[index], 'Mimas system carrier'), 'style', `transform:${oldTransform}`), true);
   const surfacesReport = await read('prepared/surfaces.json');
-  const result = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport });
+  const result = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport, solarGeometry: geometry });
   assert.equal(result.scene.systemTransform, prepareEclipticPresentationFrame(geometry, 'mimas').cssTransform);
   assert.notEqual(result.scene.systemTransform, oldTransform);
   assert.equal(requireSnapshot(result.definition.tree.nodes[index], 'refreshed Mimas system carrier').style, `transform:${result.scene.systemTransform}`);
@@ -142,11 +142,11 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   assert.equal(result.definition.materials, definition.materials);
   assert.equal(result.definition.surfaceHit, definition.surfaceHit);
   definition.tree.nodes.forEach((node, i) => { if (i !== index) assert.equal(result.definition.tree.nodes[i], node); });
-  assert.deepEqual(await refreshSolidSceneEpoch({ config, ...result, surfacesReport }), result, 'refresh is idempotent');
+  assert.deepEqual(await refreshSolidSceneEpoch({ config, ...result, surfacesReport, solarGeometry: geometry }), result, 'refresh is idempotent');
 });
 
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
-  const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
+  const { refreshSolidSceneEpoch } = await import('@cssearth/bake/objects/layers/terrestrial');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json')),
@@ -155,8 +155,8 @@ test('epoch refresh restores a compiled surface before updating its physical fra
   assert.ok(requireSnapshot(definition.depthPartitions?.groups, 'compiled depth groups').length > 1, 'exercise actual compiled source carriers');
   const original = structuredClone(definition);
   const surfacesReport = await read('prepared/surfaces.json');
-  const expected = await refreshSolidSceneEpoch({ config, scene, definition: restoreDepthSource(definition), surfacesReport });
-  const actual = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport });
+  const expected = await refreshSolidSceneEpoch({ config, scene, definition: restoreDepthSource(definition), surfacesReport, solarGeometry: geometry });
+  const actual = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport, solarGeometry: geometry });
   assert.deepEqual(actual, expected);
   assert.deepEqual(definition, original, 'refresh does not mutate the retained prepared bank');
   assert.deepEqual(requireSnapshot(actual.definition.surfaceHit, 'refreshed surface hit').triangles, requireSnapshot(definition.surfaceHit, 'prepared surface hit').triangles);

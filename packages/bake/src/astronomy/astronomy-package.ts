@@ -8,13 +8,15 @@
 // preparation dependency only, and its results are checked in.
 
 import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
 
 export const ASTRONOMY_PACKAGE = "@cssearth/astronomy";
 export const ASTRONOMY_BUILD_COMMAND = "pnpm build:astronomy";
+/** The build, found through this package's own name so the path holds from the sources and from `dist/`. */
 export const ASTRONOMY_BUILD_ENTRY = resolve(
-  import.meta.dirname,
-  "../../../packages/astronomy/dist/index.js",
+  dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")),
+  "../astronomy/dist/index.js",
 );
 
 export async function loadAstronomyPackage(

@@ -4,7 +4,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readdir, readFile } from 'node:fs/promises';
 import { fixtureRecord } from '@cssearth/objects/node/contract';
-import { parseTerrestrialProfile } from '../terrestrial-layers/index.mts';
+import { parseTerrestrialProfile } from '@cssearth/bake/objects/layers/terrestrial';
 
 const planets = new URL('../../../src/objects/', import.meta.url);
 const authored: { id: string; profile: { raster: { surfaceObservations: unknown[] } } }[] = [];

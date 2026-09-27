@@ -226,6 +226,11 @@
       "import": "./dist/contract.js",
       "default": "./dist/contract.js"
     },
+    "./astronomy": {
+      "types": "./dist/astronomy.d.ts",
+      "import": "./dist/astronomy.js",
+      "default": "./dist/astronomy.js"
+    },
     "./navigation": {
       "types": "./dist/navigation.d.ts",
       "import": "./dist/navigation.js",

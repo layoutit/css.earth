@@ -125,6 +125,21 @@ test('the galaxy-field and layered-provenance libraries are followed into their 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the astronomy package loader is followed into its bake source, as when it sat under tools/prepare/astronomy', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b5-'));
+  try {
+    const directory = 'packages/bake/src/astronomy';
+    await writeFile(resolve(root, 'entry.mts'), "import { v0 } from '@cssearth/bake/astronomy';\nexport const used=[v0];\n");
+    await mkdir(resolve(root, directory), { recursive: true });
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
+    await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the provenance records and the runtime asset closure are followed into @cssearth/objects, as when they sat under src/platform', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-objects-platform-'));
   try {

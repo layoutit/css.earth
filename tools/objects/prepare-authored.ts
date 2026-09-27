@@ -97,6 +97,11 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
     summary: changes.map(change => `${change.lensId} ${JSON.stringify(change.authored)} -> ${JSON.stringify(change.derived)}`).join('; ') };
 }
 
+/** The generated solar geometry, read from the checkout at run time: it is written after the packages build, so the bake takes it as a
+ * parameter. The generated module satisfies the preparers' contracts as it is; typing it by the module keeps drift a type error. */
+const solarGeometry = async () =>
+  await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href) as typeof import('../../src/platform/solar-geometry.mts');
+
 /** A photograph lens states the body point its frame looks at; the default camera must look there too (default-view/geometry.mts). The check
  * reads the final frame, which follows the body as drawn. */
 async function assertDefaultViewsFaceLenses(objectDirectory: string, definition: Record<string, unknown>, frame: unknown): Promise<void> {
@@ -259,17 +264,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   if (source(sources, 'shape-model')) {
     genericLaneOnly();
-    const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mts')).href) as typeof import('./shape-model/index.mts');
-    const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
+    const { prepareShapeModel } = await import('@cssearth/bake/objects/layers/shape-model');
+    const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets, solarGeometry: await solarGeometry() });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: outputDirectory, allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
     const terrestrial = record(required(sources, 'terrestrial').value, 'terrestrial');
     if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
-    const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mts')).href) as typeof import('./terrestrial-layers/index.mts');
+    const { prepareTerrestrialLayers } = await import('@cssearth/bake/objects/layers/terrestrial');
     const terrestrialPrepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
-      config: terrestrial, prepareContent: prepareObjectContentAssets, replaceReviewedImages });
+      config: terrestrial, prepareContent: prepareObjectContentAssets, replaceReviewedImages, solarGeometry: await solarGeometry() });
     const terrestrialAttached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: terrestrialPrepared.definition as unknown as Record<string, unknown> });
     if (terrestrialAttached.features) await writeFeatureContent(outputDirectory, terrestrialAttached.features);
     // Triangle faces also publish atlases masked to their triangles, for browsers without corner-shape.

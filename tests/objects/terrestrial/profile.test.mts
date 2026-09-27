@@ -2,7 +2,7 @@ import { fixtureRecord } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
 import { readFile } from 'node:fs/promises';
-import { parseTerrestrialProfile } from '../../../tools/objects/terrestrial-layers/index.mts';
+import { parseTerrestrialProfile } from '@cssearth/bake/objects/layers/terrestrial';
 import { alternativeForLens, radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));

@@ -24,7 +24,7 @@ the planets, moons, asteroids and comets in the [shared world](source/presentati
 not just the solar maps above. Each body keeps its imagery, shape, measurements
 and full acknowledgments in its [own object package](../).
 
-The [shared orbital preparation](../../../tools/prepare/prepare-solar-geometry.mts)
+The [shared orbital preparation](../../../packages/bake/cli/prepare-solar-geometry.mts)
 combines analytical models with retained Horizons states. These prepared
 positions and orbit paths use the displayed scene epoch; they are not live
 ephemerides. The footer's provider list combines the existing prepared source

@@ -38,7 +38,7 @@ import {
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import { encodeLossyWebp } from '@cssearth/bake/raster';
-import { loadAstronomyPackage } from "./astronomy/astronomy-package.mts";
+import { loadAstronomyPackage } from "@cssearth/bake/astronomy";
 import { authoredObject } from '@cssearth/bake/sources';
 import { readPreparedObjects } from "@cssearth/objects/node";
 

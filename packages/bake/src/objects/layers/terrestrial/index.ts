@@ -1,5 +1,5 @@
-// `@cssearth/bake/objects/layers/terrestrial` (Node only): the shared libraries of the terrestrial layer pipeline; its entry scripts
-// and host-bound modules stay in tools/objects.
+// `@cssearth/bake/objects/layers/terrestrial` (Node only): the terrestrial layer pipeline (`prepareTerrestrialLayers`), its solid
+// scene and shared libraries. The host passes the generated solar geometry in.
 export * from './alternative-lenses.ts';
 export * from './contact-ellipsoids.ts';
 export * from './contracts.ts';
@@ -51,6 +51,7 @@ export * from './retained-atlas.ts';
 export * from './rings.ts';
 export * from './scientific-focus.ts';
 export * from './shape-material.ts';
+export * from './solid-scene.ts';
 export * from './solid/prepared-replay-source.ts';
 export * from './solid/solid-contract.ts';
 export * from './solid/solid-raster.ts';
@@ -75,4 +76,5 @@ export * from './surface-observations/published-comparison.ts';
 export * from './surface-observations/recipe.ts';
 export * from './surface-observations/registration.ts';
 export * from './surface-observations/surface.ts';
+export * from './terrestrial-layers.ts';
 export * from './triangle-alpha-atlas.ts';

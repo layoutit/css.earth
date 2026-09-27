@@ -1,28 +1,32 @@
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
-import type { prepareObjectContentAssets } from '../content/prepare.ts';
-import { parseShapeModelConfig, parseShapeContent, prepareRingLeaves, ringQuadStyle, prepareShapeLighting, prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from '@cssearth/bake/objects/layers/shape-model';
+import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
+import { parseShapeModelConfig, parseShapeContent } from './source.ts';
+import { prepareRingLeaves, ringQuadStyle } from './rings.ts';
+import { prepareShapeLighting } from './lighting.ts';
+import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.ts';
 import { requireRecord, requireString } from '@cssearth/core';
-import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
+import { requireObjectRuntimeDefinition } from '../../../contract/index.ts';
+import { loadAstronomyPackage } from '../../../astronomy/index.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
+interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>;
+  /** The generated solar geometry (`src/platform/solar-geometry.mts`), which the host loads and passes in. */
+  solarGeometry:SolarGeometry;}
 
 import { createSourceManifest } from '@cssearth/objects/node';
-import { prepareSolidBodySurface } from '@cssearth/bake/scene';
-import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '@cssearth/bake/objects/scene';
-import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
-import { requirePreparedPresentation } from '@cssearth/bake/presentation';
-import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
-import { createPreparedNodeTree, prepareCssomDeclarationReads } from '@cssearth/bake/presentation';
-import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
+import { prepareSolidBodySurface } from '../../../scene/index.ts';
+import { prepareSolarSystemScene, prepareSolarSystemSunPresentation, type SolarGeometry } from '../../scene/index.ts';
+import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
+import { requirePreparedPresentation } from '../../../presentation/index.ts';
+import { preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
+import { createPreparedNodeTree, prepareCssomDeclarationReads } from '../../../presentation/index.ts';
+import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
 
 const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');
 
 /** Observational shape parameters, prepared through the same retained object runtime. */
-export async function prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent }:ShapeContext) {
+export async function prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry }:ShapeContext) {
   const config = parseShapeModelConfig(sources.get('shape-model')?.value), id = descriptor.id, shape = descriptor.recipe.shape;
   if (config.schema !== 'cssearth-shape-model@1' || !['sphere', 'ellipsoid'].includes(shape.kind)) throw new TypeError('Expected a spherical or ellipsoidal shape model.');
   const axes = [shape.radiusKm, shape.secondaryRadiusKm ?? shape.radiusKm, shape.polarRadiusKm ?? shape.radiusKm];
