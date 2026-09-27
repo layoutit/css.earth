@@ -89,6 +89,58 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "robidel-bland-pia24027",
+      "subject": "Published global infrared display mosaic",
+      "status": "included",
+      "finding": "NASA PIA24027 is an 8192 by 4096 RGB equirectangular map centered at zero longitude. It combines Robidel 2020 VIMS infrared maps and Bland 2018 controlled ISS detail, with seams and artifacts removed by the producer. Used as a false-color photographic composite, not as a numeric spectral measurement.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
+        "https://doi.org/10.1016/j.icarus.2020.113848",
+        "https://doi.org/10.1029/2018EA000399",
+        "evidence/infrared-mosaic/published-grid.jpg"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
+        }
+      ]
+    },
+    {
+      "id": "filacchione-2022-spectrophotometry",
+      "subject": "Published photometrically corrected numeric spectral maps",
+      "status": "deferred",
+      "finding": "Read the full author manuscript, sections 3 to 5, Table 3 and Figure 11; checked the publisher landing page and INAF repository. The paper describes median 0.5-degree footprint bins and wavelength-dependent photometric correction and says maps are online, but the inspected releases exposed the paper and raw PDS archive, not a retrievable numeric map product. The figure retains polar gaps and residual seams. No numeric map was extracted from its color legend.",
+      "revisitWhen": "A released numeric map with coordinates and missing-data definitions is located, or a separately validated reproduction of the published method is undertaken.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2021.114803",
+        "https://openaccess.inaf.it/entities/publication/30596495-3f2f-49f7-a7fb-a1aca47c3390"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
+        }
+      ]
+    },
+    {
+      "id": "ntinos-super-resolution",
+      "subject": "Enceladus super-resolution infrared mapping",
+      "status": "deferred",
+      "finding": "The 2025 EPSC-DPS abstract describes revised navigation, global photometric correction and overlap-based super-resolution. The inspected conference and institutional records did not expose a downloadable map or reproducible processing release.",
+      "revisitWhen": "The numeric maps, navigation and method release become retrievable.",
+      "evidence": [
+        "https://doi.org/10.5194/epsc-dps2025-400",
+        "https://www.ipgp.fr/en/research/phds/__trashed-2/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
+        }
+      ]
     }
   ]
 }

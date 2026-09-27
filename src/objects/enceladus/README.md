@@ -14,9 +14,92 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 - The selected DSK is `cas_enceladus_ssd_spc_0256icq_v2.bds`, delivered in the Cassini SPICE archive in June 2026.
 
+- Infrared color: [NASA PIA24027](https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/), the published Robidel (2020) infrared / Bland (2018) visible-camera composite.
+
 - Ice absorption and Infrared ratio use six calibrated VIMS observations with matched navigation backplanes. The [source interpretation](source/vims-chemistry/INTERPRETATION.md) defines every channel, coordinate, mask, overlap rule and scientific limit.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
+## Published global infrared mosaic
+
+**Infrared color** uses NASA's original 8192 × 4096 RGB TIFF, released on
+2020-09-29. [Robidel et al. (2020)](https://doi.org/10.1016/j.icarus.2020.113848)
+corrected VIMS spectra for viewing and illumination geometry before mosaicking.
+The release combines their 3.1/1.65 µm ratio (red), 2.0 µm reflectance (green)
+and 1.8 µm reflectance (blue) with the controlled ISS camera detail of
+[Bland et al. (2018)](https://doi.org/10.1029/2018EA000399).
+The producer removed seams and artifacts to make the global display composite.
+The red tint highlights ice-related spectral differences; it is not a heat,
+ice-abundance or crystallinity scale. Camera texture is finer than the infrared
+measurements. The release does not supply a validity mask or the numeric
+spectral channels behind its stretched colors.
+
+The [published coordinate grid](evidence/infrared-mosaic/published-grid.jpg)
+places 0° at the image center, 90°W at one quarter, 90°E at three quarters,
+and ±180° at the edges. North is up; the equator is halfway down. Its spherical
+equirectangular projection has radius 252.1 km, so latitude maps directly to
+our planetocentric surface directions. We checked those distributed grid
+positions and both poles rather than using the mislabeled longitudes in the
+original paper's Figures 9 and 11; see the
+[corrigendum](https://doi.org/10.1016/j.icarus.2020.113954).
+The [native-pixel check](evidence/infrared-mosaic/source-sampling.json) compares
+nine geographic samples, including all four image corners, against direct RGB
+reads from the original TIFF; all agree exactly. This checks texture addressing,
+not spacecraft pointing. The shared reader rolls the zero-centered image into
+its 0–360° texture frame.
+Native 2 × 2 footprint sampling and the existing lossy image lane produce the
+same retained triangle atlas used by the other photographic views.
+No new recoloring, gap filling, photometric correction or geometry is applied.
+
+This geographic placement preserves the published map. It does not make its
+2018 ISS control solution identical to the corrected JPL v2 shape. Bland §2.3
+also describes errors from projecting a triaxial body onto a sphere and omitting
+libration. Local image-to-shape offsets and photographed shadows remain possible;
+the existing globe Shadows control adds approximate lighting to the composite.
+
+The six-observation **Ice absorption** and **Infrared ratio** views retain their
+original partial coverage and interpretation. Expanding that custom mapping was
+investigated but is not the source of the new view. The full
+[Filacchione et al. (2022) paper](https://doi.org/10.1016/j.icarus.2021.114803)
+provides a stronger basis for future quantitative maps: wavelength-dependent
+photometric correction and median 0.5° footprint bins. Its Figure 11 still has
+polar gaps and residual seams. We inspected its publisher and INAF releases but
+have not retrieved the promised numeric map files. The
+[Ntinos et al. (2025) abstract](https://doi.org/10.5194/epsc-dps2025-400)
+describes further navigation and super-resolution work; a downloadable map was
+not found in the inspected records. These findings and reopening conditions are
+recorded in the investigation ledger.
+
+### Delivery checks for this view
+
+The 2026-09-27 checks used `b33089487811511e7015aa5a629e692f4a328e2d`
+plus this PR's Enceladus source, recipe, reader text and inventory changes.
+[Desktop](evidence/infrared-mosaic/globe.png) and
+[south-polar](evidence/infrared-mosaic/south-pole.png) captures show the delivered
+composite; the [browser record](evidence/infrared-mosaic/browser-checks.json)
+records Chrome 153.0.8010.54, camera and settings. Desktop at 1440 × 900
+(DPR 1 and 2) and the mobile panel at 390 × 844 (DPR 2) had no page errors or
+failed HTTP responses. Shadows and globe rotation were inspected separately.
+Fine triangle-boundary lines remain visible on the existing mesh, especially
+with Shadows enabled.
+
+The full Enceladus bake passed. All 19 affected source-reader and source-binding
+tests and all three Enceladus runtime-package tests passed; the latter exercise
+every lens and setting through the shared retained selection owner. Source-file
+coverage, body-reference checks and the reader-text publisher/check passed.
+The parsed scene is exactly equal to the published baseline, and existing globe
+texture bytes are unchanged. The full bake also regenerated the normal and
+elevation minimaps through the current shared preparation; those small previews
+were inspected, not claimed byte-identical. The unchanged arrival image is retained.
+
+All 56 runtime assets were published and
+[freshly restored](evidence/infrared-mosaic/restoration.json) from R2 with the
+standard installer's byte-count and SHA-256 checks: 32,151,471 bytes for the
+whole Enceladus package. The final browser captures use those restored files.
+Each cold browser case fetched the same 1,928,874-byte infrared surface texture;
+this is the texture body size, not the full page transfer. No full-site build
+was run. The all-object sprite preparation encountered an unrelated missing
+Moon texture; it had already generated the Enceladus sprite.
 
 ## Evidence
 

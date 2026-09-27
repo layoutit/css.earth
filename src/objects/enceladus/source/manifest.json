@@ -653,6 +653,56 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "cassini-robidel-bland-infrared",
+      "path": "observations/PIA24027.tif",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia24/pia24027/PIA24027.tif",
+      "catalog": "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
+      "credit": "NASA/JPL-Caltech/University of Arizona/LPG/CNRS/University of Nantes/Space Science Institute",
+      "license": "NASA/JPL image use policy; retain the full published credit",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.jpl.nasa.gov/images/pia24027-enceladus-in-the-infrared-map-view/"
+      ],
+      "acquisition": "Download the original TIFF from the NASA release using the infrared-mosaic acquisition group.",
+      "redistribution": "Educational visualization with the published credit; prepared resampling and display encoding are cssEarth derivatives.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "infrared",
+      "label": "Infrared color",
+      "falseColor": true,
+      "width": 8192,
+      "height": 4096,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 252100,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Global display composite. The producer removed seams and artifacts and superimposed ISS camera detail. No measurement-validity mask is supplied; displayed coverage is not independent infrared measurement coverage.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-cassini-robidel-bland-infrared",
+            "role": "material",
+            "evidence": "NASA PIA24027, released 2020-09-29; Robidel et al. (2020) infrared maps plus Bland et al. (2018) ISS mosaic."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
