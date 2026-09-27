@@ -9,10 +9,10 @@ calibrations and scientific limits.
 ## Reading the maps
 
 Each dataset's short description explains the quantity before naming its
-method. The existing **Dataset details** disclosure explains the scale,
-measurement or model, coverage and limits. A mineral percentage is by weight;
+method. The legend gives the units and marks missing coverage; the body README
+and linked source records explain the method and limits. A mineral percentage is by weight;
 an elevation needs a stated zero level; a model index is not an age or a
-temperature. The scientific names remain in the labels, legends or details so
+temperature. The scientific names remain in the labels and legends so
 readers can trace them to the source.
 
 For the lunar mineral descriptions, see NASA's

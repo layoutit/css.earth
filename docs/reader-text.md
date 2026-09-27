@@ -35,7 +35,7 @@ lists those.
 The chooser's right-hand label identifies where the dataset comes from: for
 example, **Magellan**, **Kaguya MI**, **USGS** or **VLTI/PIONIER**. For a published
 model, use the author or archive. Keep explanations of the quantity in the
-summary and **Dataset details**. Members of a group from the same source share
+summary. Members of a group from the same source share
 that source label; dates and other differences belong in the arrow selector.
 
 ## Dataset groups
@@ -48,7 +48,7 @@ and an interior model answer different questions and keep separate entries.
 In the body's `source/content/object.json`, give consecutive lens controls the
 same `label` and `step.group`, with a distinct `step.label` for each member.
 The chooser lists the group once. The selected member supplies its description,
-source, legend and details; the arrows select its neighbors. Each member keeps
+source and legend; the arrows select its neighbors. Each member keeps
 its original dataset ID and URL. A date group runs in chronological order;
 its existing default can remain a middle member.
 
@@ -63,10 +63,10 @@ million while its other element scales use weight percent. Ceres's band depths
 are absorption strengths, not mineral percentages. Date selectors do not turn
 stellar reconstructions into confirmed images of surface changes.
 
-The short summary should explain the quantity in ordinary words. Use the
-existing **Dataset details** disclosure for a scale example, the measurement
-method and limits. Keep necessary scientific names, and explain them when first
-used. Check the group, arrows, direct links and details at desktop and phone
+The short summary should explain the quantity in ordinary words. Keep necessary
+scientific names, and explain them when first used. Put full measurement methods,
+scale examples and qualifications in the body README and linked source records.
+Check the group, arrows, direct links and descriptions at desktop and phone
 widths; changing the selected map must retain the mounted scene.
 
 ## Publish and check

@@ -374,3 +374,8 @@ which earlier scientific and browser evidence still applies to this version.
 The later [gallery removal check](evidence/usgs-numeric/gallery-removal.json)
 confirms that Surface photographs is absent on desktop, mobile and the built
 page. The four panorama files are absent from the delivery inventory.
+
+The [final dataset UI check](../moon/evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+and Surface photographs are absent from all 1,453 generated pages. Browser
+checks cover the Moon, Venus and WASP-12b; the final screenshots show the
+short description, legend and source link.

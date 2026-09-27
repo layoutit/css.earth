@@ -360,3 +360,8 @@ accuracy or establish how well readers understand the explanations.
 The [current-main integration check](evidence/usgs-numeric/integration.json) records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.
+
+The [final dataset UI check](evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+and Surface photographs are absent from all 1,453 generated pages. Browser
+checks cover the Moon, Venus and WASP-12b; the final screenshots show the
+short description, legend and source link.

@@ -864,10 +864,3 @@
 .object-facility-emblem { position: absolute; right: 0; top: 0; z-index: 2; display: block; width: 44px; height: 44px; }
 .object-facility-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; opacity: .8; }
 .object-facility a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
-/* Labels, format notes and bibliographies are needed to read a dataset but are
-   not the dataset, so they fold away under the source that requires them. */
-
-/* Authored per-lens figures stay available without crowding the selected lens. */
-.object-lens-facts { margin-top: 10px; font-size: 12px; }
-.object-lens-facts summary { cursor: pointer; color: var(--shell-text-muted); }
-.object-lens-facts .object-facts { margin-top: 6px; }
