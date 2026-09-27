@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { parseResolutionEvidence, parseAcceptedAssumptions, supportsMeasuredResolution, PROFILE_ASSUMPTIONS } from '@cssearth/bake/objects/layers/observation';
 import { requestFromArguments } from '@cssearth/telescope-cli/query';

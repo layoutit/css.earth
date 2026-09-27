@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 
-import { readHostedOrbitRecord } from '../../packages/astronomy/tools/lib/generator-records.mts';
+import { readHostedOrbitRecord } from '../../../packages/astronomy/tools/lib/generator-records.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../..');
 const source = resolve(root, 'tests/fixtures/hosted-orbits/trappist-1f-agol2021');
 const manifest = requireRecord(JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')));
 const qualification = requireRecord(JSON.parse(await readFile(resolve(source, 'qualification.json'), 'utf8')));

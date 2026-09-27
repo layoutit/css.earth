@@ -1,17 +1,17 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
-} from "../../src/platform/solar-geometry.mts";
+} from "../../../src/platform/solar-geometry.mts";
 import { prepareEclipticPresentationFrame } from
   "@cssearth/bake/objects/scene";
 import { prepareSunReferenceViewDirection } from
   "@cssearth/bake/objects/scene";
 import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const BODIES = [
   "mercury",

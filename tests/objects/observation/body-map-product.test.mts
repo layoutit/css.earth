@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import type { BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
@@ -76,7 +76,7 @@ test('no production code averages placed maps except through the policy', async 
   const { readFile, readdir } = await import('node:fs/promises');
   const offenders: string[] = [];
   // The telescope command's modules left tools/objects for packages/telescope-cli; they are production code here too.
-  for (const [root, prefix] of [[new URL('./', import.meta.url), ''], [new URL('../../packages/telescope-cli/src/', import.meta.url), 'telescope-cli/']] as const)
+  for (const [root, prefix] of [[new URL('../../../tools/objects/', import.meta.url), ''], [new URL('../../../packages/telescope-cli/src/', import.meta.url), 'telescope-cli/']] as const)
     for (const entry of await readdir(root, { recursive: true })) {
       if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
       if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(`${prefix}${entry}`);

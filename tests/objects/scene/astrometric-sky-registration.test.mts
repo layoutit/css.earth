@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 
 import { prepareAstrometricSkySceneRegistration } from "@cssearth/bake/objects/scene";
@@ -13,10 +13,10 @@ import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
-} from "../../src/platform/solar-geometry.mts";
+} from "../../../src/platform/solar-geometry.mts";
 import { prepareEclipticPresentationFrame } from
   "@cssearth/bake/objects/scene";
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 // IAU 1976 obliquity at J2000 (84381.448 arcseconds): the J2000 ecliptic north
 // pole in ICRF is +z tilted about +x by it. Independent of the prepared

@@ -1,16 +1,16 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 
 import {
   viewSunDirectionToPhysicalLightDirection,
   viewSunDirectionToPreparedLightDirection,
 } from "@cssearth/renderer/platform/directional-sun-coordinate";
-import { requireBodyFixedSunDirection } from "../../src/platform/solar-geometry.mts";
+import { requireBodyFixedSunDirection } from "../../../src/platform/solar-geometry.mts";
 import { prepareSunReferenceViewDirection } from
   "@cssearth/bake/objects/scene";
 import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 // A view direction lies in front of the camera when `forward = -z` is positive.
 function forward(viewDirection: readonly number[]) {

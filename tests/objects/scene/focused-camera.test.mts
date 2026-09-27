@@ -1,11 +1,11 @@
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
 import { focusedCameraProjection } from '@cssearth/bake/objects/scene';
 
-const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8'));
+const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`../../../src/objects/${path}`, import.meta.url), 'utf8'));
 
 test("an object camera without its own projection shares the sky's focal length", () => {
   const sky = prepared('earth/prepared/sky.json') as PreparedCubicSkyPlan;
