@@ -1,17 +1,19 @@
-import type {MaterialSourceTrack} from '@cssearth/bake/presentation';
+import type {MaterialSourceTrack} from '../../../presentation/index.ts';
 import {parse} from '@cssearth/core/schema';
-import { layeredPresentationRecipe, parseLayeredLenses, parseLayeredAtlas, prepareAtlasRows, prepareAtlasStill } from '@cssearth/bake/objects/layers/material-composition';
+import { layeredPresentationRecipe } from './presentation-recipe.ts';
+import { parseLayeredLenses, parseLayeredAtlas } from './presentation-source.ts';
+import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.ts';
 import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
-import type {createLayeredOblatePreparation} from './layered-oblate.mts';
-import type {prepareLayeredLeafLayouts} from '@cssearth/bake/objects/layers/material-composition';
-import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
-import type { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
-import type { PreparedNode } from '@cssearth/bake/presentation';
+import type {createLayeredOblatePreparation} from './layered-oblate.ts';
+import type {prepareLayeredLeafLayouts} from './leaf-layouts.ts';
+import type {prepareCutawayMaterials} from './cutaway-materials.ts';
+import type { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
+import type { PreparedNode } from '../../../presentation/index.ts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 
-import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/platform/prepared-object-assets";
-import { PREPARED_PRESENTATION_SCHEMA } from "@cssearth/bake/presentation";
-import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
+import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
+import { PREPARED_PRESENTATION_SCHEMA } from "../../../presentation/index.ts";
+import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 function prepareTransform(value:string|null|undefined) {

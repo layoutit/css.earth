@@ -27,5 +27,6 @@ test('the checkout selects the moved libraries\' own tests', () => {
   const selected = bakeObjectTests(tracked, path => readFileSync(resolve(root, path), 'utf8'));
   for (const path of ['tools/objects/color-transfer.test.mts', 'tools/objects/terrestrial-layers/obj-shape.test.mts',
     'tools/objects/terrestrial-layers/observer-camera.test.mts', 'tools/objects/terrestrial-layers/scientific-raster.test.mts',
-    'tools/objects/authored-rotation.test.mts']) assert.ok(selected.includes(path), path);
+    'tools/objects/authored-rotation.test.mts', 'packages/bake/src/objects/layers/paged-ellipsoid/parallel-assets.test.ts',
+    'packages/bake/src/objects/layers/paged-ellipsoid/texture-levels.test.ts']) assert.ok(selected.includes(path), path);
 });

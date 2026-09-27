@@ -1,7 +1,8 @@
-import { linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
+import { linearToSrgb, srgbToLinear } from '../../color/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
-import type { RingMotionPoint, prepareRadialMotionAndShadow, prepareSpectralMaterialVariants } from '@cssearth/bake/objects/layers/material-composition';
+import type { RingMotionPoint, prepareRadialMotionAndShadow } from './radial-motion.ts';
+import type { prepareSpectralMaterialVariants } from './spectral-variants.ts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
 interface RetainedLeaf {style:string;tag?:string;className?:string;projectiveTextureLayer?:ReturnType<typeof prepareProjectiveTextureLayer>;}
 interface PointGroup {population:string;durationSeconds:number;expansionGroupIndex?:number;points:RingMotionPoint[];}
@@ -11,7 +12,7 @@ interface AtlasPlanMetadata {model:string;defaultVariant?:string;defaultPrepared
   maximumRetainedAtlasCount:number;initialDecodedWorkingSetBytes:number;maximumDecodedWorkingSetBytes:number;fullAtlasDecodedRgbaBytes:number;}
 type AtlasPlan=AtlasPlanMetadata & (AtlasVariant & {variants?:undefined}|{variants:Record<string,AtlasVariant>});
 import type {Polygon,Vec3,PolyTextureImageSource,ComputeTextureAtlasPlanOptions} from '@layoutit/polycss';
-import type { SilhouetteOptions, Vector3, ReadonlyVector3 } from '@cssearth/bake/objects/geometry';
+import type { SilhouetteOptions, Vector3, ReadonlyVector3 } from '../../geometry/index.ts';
 type Pole='north'|'south';
 interface LayeredPolygon extends Polygon {textureImageSource:PolyTextureImageSource;latitudeIndex?:number;longitudeIndex?:number;lightingFaceIndex?:number;polarCap?:Pole;polarRole?:string;}
 interface SurfaceAsset {url:string;url2x:string;width:number;height:number;asset2x:{width:number};}
@@ -23,9 +24,13 @@ interface FixedMaterialOptions extends RingRaster {objectLight:ReadonlyVector3;o
   textureUrl?:string;outputSize?:number;preparedMeshSilhouette?:boolean;materialMode?:string;}
 const mapVector3=(fn:(axis:number)=>number):Vector3=>[fn(0),fn(1),fn(2)];
 import {parse,object,number} from '@cssearth/core/schema';
-import { layeredRecipe, polarQuad, extractRgbaBounds, visibleRgbaMatches, writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear, validateMaterialRecipe } from '@cssearth/bake/objects/layers/material-composition';
-import {interiorSource} from '@cssearth/bake/objects/layers/cutaway';
-import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
+import { layeredRecipe } from './layered-recipe.ts';
+import { polarQuad } from './texture-geometry.ts';
+import { extractRgbaBounds, visibleRgbaMatches } from './rgba.ts';
+import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.ts';
+import { validateMaterialRecipe } from './recipe.ts';
+import {interiorSource} from '../cutaway/index.ts';
+import type {prepareCutawayMaterials} from './cutaway-materials.ts';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   ringGroups:PointGroup[];
@@ -37,14 +42,14 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
-import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '@cssearth/bake/scene';
-import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '@cssearth/bake/delivery';
-import { verifyObservationSources } from '@cssearth/bake/objects/layers/observed-surfaces';
-import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '@cssearth/bake/objects/geometry';
-import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';
-import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '@cssearth/bake/objects/raster';
-import { tieBandRatios } from '@cssearth/bake/objects/raster';
-import type { BandRatioPolicy } from '@cssearth/bake/objects/raster';
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '../../../scene/index.ts';
+import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../delivery/index.ts';
+import { verifyObservationSources } from '../observed-surfaces/index.ts';
+import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '../../geometry/index.ts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../../photometry/index.ts';
+import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../raster/index.ts';
+import { tieBandRatios } from '../../raster/index.ts';
+import type { BandRatioPolicy } from '../../raster/index.ts';
 
 /** The pixel width of the widest of these published images, read from each file's header. */
 export async function widestPublishedImage(paths:readonly string[], owner:string) {
@@ -1349,7 +1354,7 @@ function prepareOrbitMaterialAtlas({
   for (let frameIndex = 0;
     frameIndex < PLANET_ORBIT_MATERIAL_FRAME_COUNT;
     frameIndex += 1) {
-    // Flood lit (shadows off), a bank ships one frame alone: the last, full phase (presentation.mts). The others are
+    // Flood lit (shadows off), a bank ships one frame alone: the last, full phase (presentation.ts). The others are
     // never drawn, so they are not computed.
     if (shadowless && frameIndex !== PLANET_ORBIT_MATERIAL_FRAME_COUNT - 1) continue;
     const amount = frameIndex / (PLANET_ORBIT_MATERIAL_FRAME_COUNT - 1);

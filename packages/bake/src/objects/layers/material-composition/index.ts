@@ -2,8 +2,11 @@
 // manifest-named generators and host-bound modules stay in tools/objects.
 export * from './atlas-rows.ts';
 export * from './coplanar-raster.ts';
+export * from './cutaway-materials.ts';
+export * from './layered-oblate.ts';
 export * from './layered-recipe.ts';
 export * from './leaf-layouts.ts';
+export * from './presentation.ts';
 export * from './presentation-recipe.ts';
 export * from './presentation-source.ts';
 export * from './radial-motion-recipe.ts';

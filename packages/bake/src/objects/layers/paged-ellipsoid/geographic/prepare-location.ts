@@ -1,8 +1,8 @@
 import { preparedControlPitch } from "@cssearth/engine";
-import { polarGeographicUv } from "./wmts-polar-geometry.mts";
-import { prepareCityPageGeometry,cityGeographicFrame } from "./page-geometry.mts";
+import { polarGeographicUv } from "./wmts-polar-geometry.ts";
+import { prepareCityPageGeometry,cityGeographicFrame } from "./page-geometry.ts";
 
-import type { PageGeometry, GeographicScene, BodyAttitude, CameraPolicy } from './contracts.mts';
+import type { PageGeometry, GeographicScene, BodyAttitude, CameraPolicy } from './contracts.ts';
 const degrees = (radians: number) => radians * 180 / Math.PI;
 const radians = (degrees: number) => degrees * Math.PI / 180;
 const longitude360 = (longitude: number) => (longitude % 360 + 360) % 360;

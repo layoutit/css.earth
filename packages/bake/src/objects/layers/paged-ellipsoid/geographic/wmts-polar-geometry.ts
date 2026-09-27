@@ -1,7 +1,7 @@
-import { prepareCityPageGeometry } from "./page-geometry.mts";
-import { preparePageTextureQuad } from "./wms-page-geometry.mts";
+import { prepareCityPageGeometry } from "./page-geometry.ts";
+import { preparePageTextureQuad } from "./wms-page-geometry.ts";
 
-import type { GeographicScene, PageGeometry, TileAddress, WmtsPage } from './contracts.mts';
+import type { GeographicScene, PageGeometry, TileAddress, WmtsPage } from './contracts.ts';
 import { dotN as dot } from '@cssearth/core';
 const caps = new WeakMap<GeographicScene, PageGeometry[]>();
 const latitude = (row: number, zoom: number) => Math.atan(Math.sinh(Math.PI*(1-2*row/2**zoom)))*180/Math.PI;

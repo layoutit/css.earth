@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { parsePlacesConfig, parsePlacesManifest, parseGeographicScene, parseBodyAttitude, numericSource } from './source-records.mts';
+import { parsePlacesConfig, parsePlacesManifest, parseGeographicScene, parseBodyAttitude, numericSource } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 
 const earth = new URL('../../../../src/objects/earth/', import.meta.url);
 async function json(path: string): Promise<unknown> { return JSON.parse(await readFile(new URL(path, earth), 'utf8')); }

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 import { writeMaterialAtlasTile } from '@cssearth/bake/objects/layers/material-composition';
 const test = sourceTest();
 test('material row gutters copy the source frame edge exactly',()=>{

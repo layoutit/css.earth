@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 import { packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 import { domeRingWarp, latitudeRasterBands } from '@cssearth/bake/objects/layers/giant';
-import { compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings } from './polar-dome.mts';
+import { compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 
 const projection = { edgeLatitudeDegrees: 64, scale: 1.035 };

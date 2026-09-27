@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 import { TEXELS_PER_CSS_PIXEL, leafRasterScale, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from '@cssearth/bake/objects/layers/giant';
-import { publishedLeafImages } from './object.mts';
+import { publishedLeafImages } from '../../../tools/objects/giant-layers/object.mts';
 import { readFile } from 'node:fs/promises';
-import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
-import { polarImageProjection } from '../giant-observations/index.mts';
-import { writeDomeRings } from '../giant-observations/polar-dome.mts';
+import { assertPolarCaps, poleOfClass } from '../polar-caps.mts';
+import { polarImageProjection } from '../../../tools/objects/giant-observations/index.mts';
+import { writeDomeRings } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 
 const ringUrl = '/scenes/hypothetical/rings@2x.webp';

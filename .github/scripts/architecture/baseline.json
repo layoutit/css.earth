@@ -1,14 +1,13 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 19,
+    "largestCycle": 18,
     "layerOrder": [
       "tools/objects(root)",
       "tools/objects/giant-layers",
       "tools/objects/material-composition",
       "tools/objects/shape-model",
       "tools/objects/sphere-survey",
-      "tools/objects/surface-features",
       "tools/investigations",
       "tools/prepare",
       "tools/objects/observation",
@@ -108,7 +107,6 @@
       {"from":"packages/renderer/src/navigation/perspective-dolly.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"src/platform/test/orbit-fixture.mts"},
-      {"from":"packages/renderer/src/navigation/surface-target.test.ts","to":"tools/objects/paged-ellipsoid/geographic/prepare-location.mts"},
       {"from":"packages/renderer/src/navigation/world-camera-picking.test.mts","to":"site/runtime-policy.mts"},
       {"from":"packages/renderer/src/navigation/world-camera.test.ts","to":"src/objects/mercury/source/presentation/solar-system.json"},
       {"from":"packages/renderer/src/navigation/world-camera.test.ts","to":"src/objects/venus/source/presentation/solar-system.json"},

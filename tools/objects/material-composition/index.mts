@@ -19,9 +19,7 @@ import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '@cssearth/bake/presentatio
 import { withFocusedCamera } from '@cssearth/bake/objects/scene';
 import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
 import {prepareMaterialTracks} from '@cssearth/bake/presentation';
-import {prepareCutawayMaterials} from '../cutaway/materials.mts';
-import {createLayeredOblatePreparation} from './layered-oblate.mts';
-import {prepareLayeredOblatePresentation} from './presentation.mts';
+import {prepareCutawayMaterials, createLayeredOblatePreparation, prepareLayeredOblatePresentation} from '@cssearth/bake/objects/layers/material-composition';
 import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
 
 

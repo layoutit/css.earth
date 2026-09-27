@@ -1,8 +1,7 @@
 import { sha256 } from '@cssearth/core/node';
 import type {Channels} from 'sharp';
-import type {ObservedRgb, PolarDetails} from './polar-continuation.mts';
-import type {DetailImage} from './source-contract.mts';
-import {parseObservedPolarSource} from './source-contract.mts';
+import type {ObservedRgb, PolarDetails, DetailImage} from '@cssearth/bake/objects/layers/giant';
+import {parseObservedPolarSource} from '@cssearth/bake/objects/layers/giant';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -10,12 +9,10 @@ import {packProjectiveSurfaceRaster} from '@cssearth/bake/scene';
 import {planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
 import { readFitsPrimary } from '@cssearth/fits';
 import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {latitudeRasterBands} from '@cssearth/bake/objects/layers/giant';
+import {latitudeRasterBands, preparePolarContinuationAtlas, preparePolarSurfaceTransition, compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection} from '@cssearth/bake/objects/layers/giant';
 import {validateRelativePath} from '@cssearth/bake/objects/layers/material-composition';
-import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from './polar-continuation.mts';
-import {measureScalarCoverage,finitePercentiles,falseColorMap} from './scalar-coverage.mts';
+import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mts';
-import {compositePolarOverlay,layoutPolarAtlasForCaps,writeDomeRings,type DomeRingWarp,type PoleProjection} from './polar-dome.mts';
 
 export function parseObservedPolarRecipe(input: unknown) {
   const config=parseObservedPolarSource(input);
