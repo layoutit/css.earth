@@ -31,30 +31,37 @@ for (const r of db.prepare("SELECT id,content,sha256 FROM evidence").all()) {
   );
 }
 const rows = loadRows(),
+  inventory = loadRows("inventory"),
   plans = loadProposals();
-const counts = Object.fromEntries(
-  db
-    .prepare("SELECT source,count(*) n FROM datasets GROUP BY source")
-    .all()
-    .map((r) => [string(r.source), number(r.n)]),
-);
+const perSource = (table: string) =>
+  Object.fromEntries(
+    db
+      .prepare(`SELECT source,count(*) n FROM ${table} GROUP BY source`)
+      .all()
+      .map((r) => [string(r.source), number(r.n)]),
+  );
+const counts = perSource("datasets"),
+  listings = perSource("inventory");
 assert.deepEqual(counts, {
   darts: 360,
-  "darts-collections": 46,
-  "darts-index": 2,
   opus: 549,
-  "opus-geometry": 221,
-  "opus-volumes": 990,
   pds: 189,
   photojournal: 2593,
   umd: 3880,
-  "umd-holdings": 5110,
   usgs: 1643,
+});
+// Listings that repeat datasets live in `inventory`, never in `datasets` (apply-structure.mts).
+assert.deepEqual(listings, {
+  "darts-collections": 46,
+  "darts-index": 2,
+  "opus-geometry": 221,
+  "opus-volumes": 990,
+  "umd-holdings": 5110,
 });
 const receipt = object(evidence("opus:receipt")),
   total = number(receipt.totalRecords);
 const opus = rows.filter((r) => r.source === "opus"),
-  volumes = rows.filter((r) => r.source === "opus-volumes");
+  volumes = inventory.filter((r) => r.source === "opus-volumes");
 const sum = (r: typeof rows) => r.reduce((n, r) => n + r.count, 0);
 assert.equal(sum(opus), total);
 assert.equal(sum(volumes), total);
@@ -87,7 +94,7 @@ for (const p of plans) {
   assert.ok(markdown.includes("\n## P" + p.id + "\n"));
   assert.ok(p.next_step.trim());
 }
-for (const r of rows) {
+for (const r of [...rows, ...inventory]) {
   assert.ok(r.id && r.source && r.reason.length > 15);
   assert.match(r.url, /^https?:\/\//);
   for (const p of r.proposals) assert.ok(plans.some((plan) => plan.id === p));
@@ -132,7 +139,7 @@ assert.equal(
   2,
 );
 assert.equal(
-  rows.filter(
+  inventory.filter(
     (r) => r.source === "umd-holdings" && r.decision === "unindexed-holding",
   ).length,
   1239,
@@ -162,11 +169,25 @@ for (const name of ["README.md", "PROPOSALS.md"]) {
       assert.ok(markdown.includes("\n## P" + hash.slice(1) + "\n"));
   }
 }
+// Every dataset that names a target links to at least one body; a dataset without one says why in its record.
+const linked = new Set(
+  db
+    .prepare("SELECT DISTINCT source||char(0)||dataset_id k FROM dataset_bodies")
+    .all()
+    .map((r) => string(r.k)),
+);
+for (const r of rows)
+  if (!linked.has(r.source + "\0" + r.id))
+    assert.ok(typeof object(r.details).targetNote === "string" || !r.target.trim(), `${r.source} ${r.id} names "${r.target}" but links to no body`);
+// A parent named in `bodies` exists as a body, and only the Photojournal marks parent tags.
+assert.deepEqual(db.prepare("SELECT id FROM bodies WHERE parent<>'' AND parent NOT IN (SELECT id FROM bodies)").all(), []);
+assert.deepEqual(db.prepare("SELECT DISTINCT source FROM dataset_bodies WHERE role='parent' AND source<>'photojournal'").all(), []);
 db.close();
 console.log(
   JSON.stringify(
     {
       sources: counts,
+      inventory: listings,
       proposals: plans.length,
       nativeLabels: labels.length,
       opusRecords: total,

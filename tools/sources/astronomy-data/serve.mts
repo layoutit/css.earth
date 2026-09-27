@@ -1,29 +1,21 @@
 import { createServer, type ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
 import { stripTypeScriptTypes } from "node:module";
-import { root, loadRows, loadProposals, type Row } from "./model.mts";
-import { bodyCatalogue, type Body } from "./viewer/catalogue.mts";
+import { root, loadRows, openLedger, string, type Row } from "./model.mts";
 import type {
   ViewerData,
   ViewerRow,
-  ViewerProposal,
 } from "./viewer/shape.mts";
 // The ledger viewer: one page (viewer/index.html, viewer/app.mts) over one read-only data endpoint. Exports and
 // filtered slices stay with slice.mts.
 const rows = loadRows();
 const sources = [
   ["opus", "OPUS"],
-  ["opus-volumes", "OPUS volumes"],
-  ["opus-geometry", "OPUS geometry index"],
   ["photojournal", "Photojournal"],
   ["pds", "PSI PDS4"],
   ["usgs", "USGS"],
   ["umd", "Maryland"],
-  ["umd-holdings", "Maryland inventory"],
   ["darts", "DARTS"],
-  ["darts-collections", "DARTS collections"],
-  ["darts-index", "DARTS indexes"],
 ].map(([id, label]) => ({ id, label }));
 for (const r of rows)
   if (!sources.some((s) => s.id === r.source))
@@ -58,68 +50,31 @@ function listed(r: Row): ViewerRow {
     target: r.target,
     bodies: [],
     instrument: r.instrument,
-    decision: r.decision,
-    reason: r.reason,
+    count: r.count,
     url: r.url,
     thumbnail,
     size: largest?.size ?? "",
     date: field(r.details, "date"),
   };
 }
-// PDS4 and Maryland rows shorten their target text ("…; +6 more") but keep every target in details.targets.
-function targetsOf(r: Row): string[] {
-  const d = r.details;
-  const all = d && typeof d === "object" && "targets" in d && Array.isArray(d.targets) ? d.targets.filter((t): t is string => typeof t === "string") : [];
-  return all.length ? all : r.target.split(";");
+// Bodies and their dataset links come from the ledger's `bodies` and `dataset_bodies` tables (apply-structure.mts).
+const db = openLedger();
+const catalogue: ViewerData["catalogue"] = {};
+const labels: Record<string, string> = {};
+for (const b of db.prepare("SELECT * FROM bodies").all()) {
+  const id = string(b.id);
+  catalogue[id] = { kind: string(b.kind), parent: string(b.parent), object: string(b.cssearth_object), catalogued: b.catalogued === 1 };
+  labels[id] = string(b.name);
 }
-const catalogue = await bodyCatalogue(resolve(root, "../../.."));
-const bodies: ViewerData["catalogue"] = {};
-const labels: Record<string, string> = { several: "Several bodies" };
-const add = (b: Body) => {
-  bodies[b.key] = { kind: b.kind, parent: b.parent, object: b.object, catalogued: b.catalogued };
-  labels[b.key] ??= b.label;
-  // A parent the ledger never names still needs its own row to hold its moons.
-  if (b.parent && !bodies[b.parent]) {
-    const up = catalogue.known.get(b.parent);
-    bodies[b.parent] = { kind: up?.kind ?? "", parent: "", object: "", catalogued: true };
-    labels[b.parent] ??= up?.name || b.parent;
-  }
-};
-// The Photojournal tags a moon's images with its planet too; such a record counts for the moon.
-function ownBodies(r: Row): string[] {
-  const found = targetsOf(r).map(catalogue.body).filter((b): b is Body => !!b);
-  found.forEach(add);
-  const keys = [...new Set(found.map((b) => b.key))];
-  if (r.source !== "photojournal") return keys;
-  const parents = new Set(keys.map(catalogue.parentOf));
-  const kept = keys.filter((k) => !parents.has(k));
-  return kept.length ? kept : keys;
+// A Photojournal tag of a parent body is not that body's data, so the page lists only `target` links.
+const linked = new Map<string, string[]>();
+for (const l of db.prepare("SELECT source,dataset_id,body_id FROM dataset_bodies WHERE role='target'").all()) {
+  const key = string(l.source) + "\0" + string(l.dataset_id);
+  linked.set(key, [...(linked.get(key) ?? []), string(l.body_id)]);
 }
-const listedRows = rows.map((r) => ({ ...listed(r), bodies: ownBodies(r) }));
-const markdown = await readFile(root + "/PROPOSALS.md", "utf8");
-const proposals: ViewerProposal[] = loadProposals().map((p) => {
-  const writeup = markdown.split("\n## P" + p.id + "\n")[1]?.split("\n## P")[0]?.trim();
-  if (!writeup) throw Error(`PROPOSALS.md has no writeup for P${p.id}`);
-  // Bodies from the "Content owners:" line, else from the title ("Moon and Mercury: …") when cssEarth knows them;
-  // "Asteroids: …" and the like go under "several".
-  const owners = [...(/^Content owners: (.*)$/m.exec(writeup)?.[1] ?? "").matchAll(/\[([^\]]+)\]\(/g)].map((m) => m[1]);
-  const titled = p.title.split(":")[0].split(/,\s*|\s+and\s+/);
-  const found = (owners.length ? owners : titled).map(catalogue.body).filter((b): b is Body => !!b && b.catalogued);
-  found.forEach(add);
-  return {
-    id: p.id,
-    title: p.title,
-    status: p.status,
-    priority: p.priority,
-    nextStep: p.next_step,
-    blocker: p.blocker,
-    prUrl: p.pr_url,
-    bodies: found.length ? [...new Set(found.map((b) => b.key))] : ["several"],
-    writeup: writeup.replace(/^### .*\n+/, ""),
-  };
-});
-bodies.several = { kind: "cross-body", parent: "", object: "", catalogued: true };
-const data: ViewerData = { rows: listedRows, proposals, sources, labels, catalogue: bodies };
+db.close();
+const listedRows = rows.map((r) => ({ ...listed(r), bodies: linked.get(r.source + "\0" + r.id) ?? [] }));
+const data: ViewerData = { rows: listedRows, sources, labels, catalogue };
 const page = await readFile(root + "/viewer/index.html", "utf8");
 const script = stripTypeScriptTypes(await readFile(root + "/viewer/app.mts", "utf8"));
 const json = JSON.stringify(data);

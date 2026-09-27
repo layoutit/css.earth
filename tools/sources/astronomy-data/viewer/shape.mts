@@ -6,28 +6,16 @@ export type ViewerRow = {
   target: string;
   bodies: string[];
   instrument: string;
-  decision: string;
-  reason: string;
+  // Records the row stands for: observations in an OPUS slice, 1 elsewhere.
+  count: number;
   url: string;
   thumbnail: string;
   size: string;
   date: string;
 };
-export type ViewerProposal = {
-  id: string;
-  title: string;
-  status: string;
-  priority: number;
-  nextStep: string;
-  blocker: string;
-  prUrl: string;
-  bodies: string[];
-  writeup: string;
-};
 export type ViewerSource = { id: string; label: string };
 export type ViewerData = {
   rows: ViewerRow[];
-  proposals: ViewerProposal[];
   sources: ViewerSource[];
   labels: Record<string, string>;
   // Per body token: its kind and parent body from packages/astronomy, and its src/objects package id if cssEarth has one.

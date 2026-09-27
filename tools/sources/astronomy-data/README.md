@@ -38,12 +38,15 @@ filtered JSON and TSV exports. The server reads the ledger once; restart it
 after editing the database. `AUDIT_DB` selects another file for comparisons.
 Open `ledger.sqlite` in a SQLite browser for direct editing.
 
-| Table               | Owns                                                                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `datasets`          | Stable source/id, title, target, instrument, count, decision, reason, source URL; native metadata and retrieval records in `details_json` |
-| `proposals`         | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date                                             |
-| `dataset_proposals` | Many-to-many links between records and proposed work                                                                                      |
-| `evidence`          | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes                                       |
+| Table                 | Owns |
+| --------------------- | ---- |
+| `datasets`            | One row per dataset (9,214): stable source/id, title, target text, instrument, count, decision, reason, source URL; native metadata in `details_json` |
+| `inventory`           | Listings that repeat datasets (6,369): OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
+| `bodies`              | Every body a dataset names: cssEarth id when cssEarth catalogues it, name, kind, parent, cssEarth package |
+| `dataset_bodies`      | Dataset-to-body links with the name the source used; `role` is `parent` for a Photojournal tag of a tagged body's parent |
+| `proposals`           | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date |
+| `dataset_proposals`   | Links between datasets and proposed work (`inventory_proposals` for inventory rows) |
+| `evidence`            | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes |
 
 Use `proposed`, `qualifying`, `blocked`, `in-progress`, `shipped`, `rejected` or
 `deferred` for proposal status. A source row's `decision` describes that source;
@@ -88,6 +91,7 @@ PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node tools/sources/astronomy-d
 USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-files.mts
 TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
 node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
+node tools/sources/astronomy-data/apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
 ```
 
 - **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a

@@ -68,22 +68,25 @@ export function loadProposals(): Proposal[] {
     db.close();
   }
 }
-export function loadRows(): Row[] {
+// `datasets` holds datasets; `inventory` holds the listings that repeat them (OPUS volumes and geometry, Maryland
+// holdings, DARTS collections and indexes).
+export function loadRows(table: "datasets" | "inventory" = "datasets"): Row[] {
   const db = openLedger();
   try {
     const joins = new Map<string, string[]>();
+    const [links, column] = table === "datasets" ? ["dataset_proposals", "dataset_id"] : ["inventory_proposals", "inventory_id"];
     for (const r of db
       .prepare(
-        "SELECT * FROM dataset_proposals ORDER BY CAST(proposal_id AS INTEGER)",
+        `SELECT source, ${column} AS row_id, proposal_id FROM ${links} ORDER BY CAST(proposal_id AS INTEGER)`,
       )
       .all()) {
-      const key = JSON.stringify([r.source, r.dataset_id]);
+      const key = JSON.stringify([r.source, r.row_id]);
       const ids = joins.get(key) ?? [];
       ids.push(string(r.proposal_id));
       joins.set(key, ids);
     }
     return db
-      .prepare("SELECT * FROM datasets ORDER BY source,id")
+      .prepare(`SELECT * FROM ${table} ORDER BY source,id`)
       .all()
       .map((r) => ({
         id: string(r.id),
