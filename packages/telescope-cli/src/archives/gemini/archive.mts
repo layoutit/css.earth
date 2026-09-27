@@ -28,7 +28,7 @@
  * Each pinned science frame's primary header is also checked against CAOM (instrument, object, exposure), and a
  * disagreement stops the pin.
  *
- * The program is written to tools/objects/gemini/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/gemini/programs/<program id>.json. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -39,7 +39,7 @@ import { sha256File } from '@cssearth/core/node';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 /** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/gemini/programs');
+export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini/programs');
 /** What a raw Gemini frame can be. `ACQUISITION` is a pointing exposure: real data, never a science frame. */
 export const FRAME_TYPES = ['OBJECT', 'BIAS', 'DARK', 'FLAT', 'ARC', 'ACQUISITION'] as const;
 export const CALIBRATION_KINDS = ['BIAS', 'DARK', 'FLAT'] as const;

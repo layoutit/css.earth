@@ -99,12 +99,12 @@ hands the re-run an oracle for free.
 ## Measured
 
 One slice: the interstellar comet 3I/ATLAS, which this project ships as `comet-3i`. Measured on 19 September 2026 with the
-pin in [toolchain.json](../tools/objects/gemini/toolchain.json), on an Apple silicon Mac (macOS 24.6, arm64).
+pin in [toolchain.json](../packages/telescope-cli/src/archives/gemini/toolchain.json), on an Apple silicon Mac (macOS 24.6, arm64).
 
 **Software.** DRAGONS **4.2.2**, with numpy 2.5.3, astropy 8.0.1 and Python 3.12.14, built for `osx-64` and run under
 Rosetta 2. The installed environment is 1.6 GB. Its licence is BSD, as the conda package declares.
 
-**[Programme GS-2025B-DD-102](../tools/objects/gemini/programs/comet-3i-gs2025bdd102.json)** (PI Bryce Bolin), a Director's
+**[Programme GS-2025B-DD-102](../packages/telescope-cli/src/archives/gemini/programs/comet-3i-gs2025bdd102.json)** (PI Bryce Bolin), a Director's
 Discretionary programme released at once and public since 2025-09-05. The pinned sequence is **four 25 s GMOS-S `r` frames**
 beginning 2025-09-05T23:27:40Z, on `GMOS + Ham-2` binned 2 by 2 over the full 3072 by 2112 read-out. Three calibration sets,
 each one archive master with the raw frames that master names:

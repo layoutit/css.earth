@@ -21,8 +21,8 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const repository = WORKSPACE;
-/** The toolchain's pins (descriptor and lock) stay in the checkout beside the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'tools/objects/gemini');
+/** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini');
 export const GEMINI_ROOT = resolve(repository, 'output/toolchains/gemini');
 const DESCRIPTOR = resolve(PINS, 'toolchain.json');
 

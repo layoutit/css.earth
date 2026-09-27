@@ -84,12 +84,12 @@ export interface MoonRow {
 
 /** The group of shipped objects the ledger takes a census of by name (the Galilean moons, as this project ships them: one
  * question for the group, not one moon and a guess), and the words its guide uses for them. They are data beside the programs
- * (`tools/objects/gemini/ledger-focus.json`), because this package names no body. */
+ * (`packages/telescope-cli/src/archives/gemini/ledger-focus.json`), because this package's code names no body. */
 export interface LedgerFocus {
   readonly objects: readonly string[]; readonly heading: string; readonly group: string; readonly all: string;
   readonly member: string; readonly rows: string;
 }
-export const GEMINI_LEDGER_FOCUS = 'tools/objects/gemini/ledger-focus.json';
+export const GEMINI_LEDGER_FOCUS = 'packages/telescope-cli/src/archives/gemini/ledger-focus.json';
 export function geminiLedgerFocus(path = resolve(REPOSITORY, GEMINI_LEDGER_FOCUS)): LedgerFocus {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Gemini ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);

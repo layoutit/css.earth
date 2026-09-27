@@ -29,7 +29,7 @@
  * the neighbouring whole-pixel shifts, and if one of those agrees better than the WCS's own answer the comparison is refused
  * and the shifts are reported. Nothing is resampled to make two products agree.
  *
- * The receipt is written to tools/objects/gemini/programs/<program id>.<product>.reproduction.json, and the evidence it
+ * The receipt is written to packages/telescope-cli/src/archives/gemini/programs/<program id>.<product>.reproduction.json, and the evidence it
  * establishes is added to the product record beside the product it is about. */
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
