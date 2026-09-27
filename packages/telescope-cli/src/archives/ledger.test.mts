@@ -19,7 +19,7 @@ const TRACKED: readonly Tracked[] = [
   { archive: 'hst', ledger: 'data/hst/ledger.json', guide: 'docs/hubble-ledger.md', indent: 2, load: async () => (await import('../../../../tools/objects/hst/archive-ledger.mts')).HST_LEDGER as ArchiveLedger<unknown> },
   { archive: 'juno', ledger: 'data/juno/ledger.json', guide: 'docs/junocam-ledger.md', indent: 2, rendersParsed: false, load: async () => (await import('../../../../tools/objects/juno/archive-ledger.mts')).JUNO_LEDGER as ArchiveLedger<unknown> },
   { archive: 'jwst', ledger: 'data/jwst/ledger.json', guide: 'docs/jwst-ledger.md', indent: 1, load: async () => (await import('../../../../tools/objects/jwst/archive-ledger.mts')).JWST_LEDGER as ArchiveLedger<unknown> },
-  { archive: 'keck', ledger: 'data/keck/ledger.json', guide: 'docs/keck-ledger.md', indent: 2, load: async () => (await import('../../../../tools/objects/keck/archive-ledger.mts')).KECK_LEDGER as ArchiveLedger<unknown> },
+  { archive: 'keck', ledger: 'data/keck/ledger.json', guide: 'docs/keck-ledger.md', indent: 2, load: async () => (await import('./keck/archive-ledger.mts')).KECK_LEDGER as ArchiveLedger<unknown> },
   { archive: 'naco', ledger: 'data/naco/ledger.json', guide: 'docs/naco-ledger.md', indent: 2, load: async () => (await import('../../../../tools/objects/naco/archive-ledger.mts')).NACO_LEDGER as ArchiveLedger<unknown> },
   { archive: 'spitzer', ledger: 'data/spitzer/ledger.json', guide: 'docs/spitzer-ledger.md', indent: 2, load: async () => (await import('../../../../tools/objects/spitzer/archive-ledger.mts')).SPITZER_LEDGER as ArchiveLedger<unknown> },
 ];

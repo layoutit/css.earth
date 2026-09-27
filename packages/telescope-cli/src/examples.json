@@ -255,7 +255,7 @@
       "colour": { "kind": "greys" },
       "enlarge": [14, 6],
       "product": {
-        "command": "node tools/objects/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits",
+        "command": "node packages/telescope-cli/src/archives/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits",
         "definition": "tools/objects/keck/programs/m42-kcwi-2023b-u124.json"
       },
       "note": "The eleven wavelength planes from 5004 to 5014 Angstroms added together, which is the bright doubly ionised oxygen line at 5007 Angstroms. Adding planes moves no sample and smooths nothing. This is a 5 second exposure on a 24 by 69 spaxel field, so it is coarse and noisy."

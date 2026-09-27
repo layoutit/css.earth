@@ -168,7 +168,7 @@ background, and the vertical striping is slice-to-slice calibration residual, no
 because it is what the Keck toolkit has actually produced, and it should be replaced once a real science exposure is
 reduced.
 
-`node tools/objects/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits`
+`node packages/telescope-cli/src/archives/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits`
 
 ## Gemini South, GMOS: the interstellar comet 3I/ATLAS
 

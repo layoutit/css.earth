@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Pin a Keck observation in the Keck Observatory Archive as a Keck program.
  *
- *   node tools/objects/keck/archive.mts <program id> <instrument> <koaid> [<koaid> ...] [--nights <n>]
+ *   node packages/telescope-cli/src/archives/keck/archive.mts <program id> <instrument> <koaid> [<koaid> ...] [--nights <n>]
  *
  * For each science frame the program records three things, each file by its KOA download URL, byte count and sha256, all of
  * them fetched under .local/keck/<program id> so a re-run reads what the pin names:
@@ -23,11 +23,13 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readFitsFileHdus } from '@cssearth/fits/node';
+import { WORKSPACE } from '@cssearth/telescope/node';
 import { INSTRUMENT_TABLES, instrumentTable, koaCalibrations, koaDownload, koaProducts, koaQuery, lev0Url, lev1Url,
   type InstrumentTable } from './koa.mts';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
-export const DOWNLOADS = resolve(import.meta.dirname, '../../../.local/keck');
+/** The pinned programs stay with the bodies' records in the checkout, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/keck/programs');
+export const DOWNLOADS = resolve(WORKSPACE, '.local/keck');
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** A KOA file name: the instrument's two characters, the UT date, the second of the night, and for some instruments a
  * sequence. The second character can be a digit: NIRC2 writes `N2.`, KCWI `KB.` and `KR.`, OSIRIS `OS.`. */

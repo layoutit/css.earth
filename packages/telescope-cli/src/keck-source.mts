@@ -4,7 +4,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
-import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from '../../../tools/objects/keck/koa.mts';
+import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from './archives/keck/koa.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
 import { parseLimits } from '@cssearth/telescope/node';
@@ -82,7 +82,7 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
     await writeFile(resolve(staging, 'discovery.json'), evidenceBytes);
     await writeFile(resolve(staging, 'current-metadata.json'), metadata);
     await writeFile(resolve(staging, 'source.json'), `${JSON.stringify(report, null, 2)}\n`);
-    const implementation = sha256(Buffer.concat(await Promise.all([new URL('keck-source.mts', import.meta.url), new URL('../../../tools/objects/keck/koa.mts', import.meta.url)].map(path => readFile(path)))));
+    const implementation = sha256(Buffer.concat(await Promise.all([new URL('keck-source.mts', import.meta.url), new URL('./archives/keck/koa.mts', import.meta.url)].map(path => readFile(path)))));
     await writeProductRecord(resolve(staging, 'output.product.json'), {
       telescope: 'Keck Observatory Archive', stage: 'telescope-keck-source',
       inputs: [{ role: 'saved exploration', identity: resolve(explorationPath), bytes: explorationBytes.length, sha256: sha256(explorationBytes) },

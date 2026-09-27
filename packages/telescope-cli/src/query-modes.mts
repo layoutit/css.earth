@@ -310,7 +310,7 @@ function keckModes(value: unknown, target: string): TargetMode[] {
     const programs = entry ? stringList(entry.programs, `${mode} programs`).map(name => name.replace(/\.json$/u, '')) : [], receipts = entry ? stringList(entry.receipts, `${mode} receipts`) : [];
     const reduced = state === 'reduced';
     return { telescope: 'Keck', mode, archiveDate, observations: { count: requireFiniteNumber(count, `${mode} frames`), scope: 'this-mode' as const }, programmes: [], dates: [],
-      toolkit: { ...(reduced ? { routeState: state, tool: 'tools/objects/keck/reduce.mts' }
+      toolkit: { ...(reduced ? { routeState: state, tool: 'packages/telescope-cli/src/archives/keck/reduce.mts' }
         : { routeState: 'refused', refusedBecause: entry ? requireString(entry.reason, `${mode} reason`) : 'No mode row.' }),
         programs, checked: reduced && receipts.length ? programs : [], receipts } };
   });
