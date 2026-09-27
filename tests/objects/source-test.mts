@@ -26,24 +26,36 @@ export async function sourceLoad<T>(load: () => Promise<T> | T): Promise<Restore
   }
 }
 
-const tracked = (path: string): boolean => {
-  try { execFileSync('git', ['ls-files', '--error-unmatch', '--', path], { cwd: root, stdio: 'ignore' }); return true; }
-  catch { return false; }
-};
+/** Whether a repository path is tracked and, when it is, whether this checkout holds it: a sparse checkout leaves tracked files
+ * it excludes out of the working tree with the skip-worktree bit (`git ls-files -t` reports `S`). */
+export type CheckoutState = 'untracked' | 'checked-out' | 'outside-sparse-checkout';
+export function checkoutState(path: string, repository = root): CheckoutState {
+  let listed: string;
+  try { listed = execFileSync('git', ['ls-files', '-t', '-z', '--', path], { cwd: repository, encoding: 'utf8' }); }
+  catch { return 'untracked'; }
+  const line = listed.split('\0').find(entry => entry.slice(2) === path);
+  return line === undefined ? 'untracked' : line.startsWith('S ') ? 'outside-sparse-checkout' : 'checked-out';
+}
 
 /**
- * Why a test can skip: it read an input that a bare clone does not hold. Tracked files always exist, so the only files that
- * can be absent are downloads, archive members, restored prepared outputs and generated intermediates, all untracked; a
- * toolchain that is not installed is the same kind of absence. Everything else stays a failure.
+ * Why a test can skip: it read an input that this checkout does not hold. A full checkout holds every tracked file, so the
+ * only files that can be absent are downloads, archive members, restored prepared outputs and generated intermediates, all
+ * untracked, and tracked files a sparse checkout excludes (CI's lint job leaves most body data out); a toolchain that is not
+ * installed is the same kind of absence. A tracked file missing from its checkout, and everything else, stays a failure.
  */
-export function missingSourceReason(error: unknown, objectId: string | null = null): string | null {
+export function missingSourceReason(error: unknown, objectId: string | null = null, stateOf: (path: string) => CheckoutState = checkoutState): string | null {
   if (!(error instanceof Error)) return null;
   const objects = resolve(root, 'src/objects') + sep, inside = root + sep;
   // sharp names an absent input in its message instead of an ENOENT code and path.
   const sharpMissing = /^Input file is missing: (.+)$/u.exec(error.message)?.[1];
   const code = sharpMissing ? 'ENOENT' : 'code' in error ? error.code : undefined;
   const path = sharpMissing ? resolve(sharpMissing) : 'path' in error && typeof error.path === 'string' ? resolve(error.path) : null;
-  if (code === 'ENOENT' && path && path.startsWith(inside) && !tracked(path.slice(inside.length))) {
+  const state = code === 'ENOENT' && path && path.startsWith(inside) ? stateOf(path.slice(inside.length).split(sep).join('/')) : 'checked-out';
+  if (path && state === 'outside-sparse-checkout') {
+    const relative = path.slice(inside.length);
+    return `${relative} is outside this sparse checkout; run git sparse-checkout add '/${relative.split(sep).join('/')}'`;
+  }
+  if (path && state === 'untracked') {
     const relative = path.slice(inside.length);
     if (path.startsWith(objects)) {
       const [id, directory] = relative.slice('src/objects/'.length).split(sep);
