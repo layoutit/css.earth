@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
+import { readCiSteps } from '../check-ci.mts';
 import { formatDelta } from './report.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
@@ -228,4 +230,11 @@ test('an added and a removed entry that share a target or a source folder look l
   const pairs = likelyRenames('r', [{ from: 'site/new.mts', to: 'tools/x.mts' }, { from: 'src/a/n.mts', to: 'tools/q.mts' }, { from: 'labs/z.mts', to: 'site/k.mts' }],
     [{ from: 'site/old.mts', to: 'tools/x.mts' }, { from: 'src/a/o.mts', to: 'tools/p.mts' }]);
   assert.deepEqual(pairs.map(pair => `${pair.removed.from}=>${pair.added.from}`), ['site/old.mts=>site/new.mts', 'src/a/o.mts=>src/a/n.mts']);
+});
+
+test('Contract lint, and so pnpm check:ci, runs the check after the packages are built', () => {
+  const steps = readCiSteps(readFileSync(new URL('../../../.github/workflows/universe.yml', import.meta.url), 'utf8'), 'lint').map(step => step.run.trim());
+  const build = steps.indexOf('node tools/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
+  assert.ok(build >= 0, 'the lint job builds the shared packages');
+  assert.ok(check > build, 'the lint job runs pnpm check:architecture after that build');
 });
