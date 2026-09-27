@@ -60,6 +60,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'delivery': ['objects/sources'],
   'sources': ['runtime-source', 'objects/content', 'delivery'],
   'contract': ['presentation'],
+  'site-assets': ['raster', 'runtime-source', 'objects/raster', 'objects/charts'],
   'navigation': ['astronomy', 'delivery', 'raster', 'sources', 'objects/raster'],
   'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/layers/terrestrial'],
   'objects/provenance': ['objects/layers/terrestrial'],

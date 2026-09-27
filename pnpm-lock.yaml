@@ -241,6 +241,9 @@ importers:
 
   packages/bake:
     dependencies:
+      '@cesium/engine':
+        specifier: 26.3.0
+        version: 26.3.0
       '@cssearth/astronomy':
         specifier: workspace:*
         version: link:../astronomy

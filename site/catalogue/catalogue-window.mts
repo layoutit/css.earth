@@ -18,7 +18,7 @@ interface RowView {
 }
 export type CatalogueSelection = Readonly<{ kind: CatalogueIndexEntry['kind']; id: string }> | null;
 
-/** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare/prepare-search-thumbnails.mts`). */
+/** The prepared search thumbnail of a scene object with a context sprite (`packages/bake/src/site-assets/prepare-search-thumbnails.ts`). */
 export function searchPreviewUrl(objectId: string): string | null {
   return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
 }

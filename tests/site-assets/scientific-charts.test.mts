@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parseHTML } from "linkedom";
 import { requireRecord } from "@cssearth/core";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 
 import {
@@ -12,7 +12,7 @@ import {
   prepareScientificCharts,
   samplePhaseCurve,
   validateScientificChartsContext,
-} from "./prepare-scientific-charts.mts";
+} from "@cssearth/bake/site-assets";
 
 const context = validateScientificChartsContext(JSON.parse(await readFile(new URL(
   "../../site/source/scientific-charts/planetary-context.json",
