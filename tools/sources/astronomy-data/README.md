@@ -72,7 +72,20 @@ Public collectors write to ignored scratch output and never replace the ledger:
 OPUS_WORK_DIR=output/opus-refresh node tools/sources/astronomy-data/collect-opus.mts
 ARCHIVE_WORK_DIR=output/archive-refresh node tools/sources/astronomy-data/collect-archives.mts umd
 ARCHIVE_WORK_DIR=output/archive-refresh node tools/sources/astronomy-data/collect-archives.mts darts
+PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node tools/sources/astronomy-data/collect-photojournal.mts
+USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-files.mts
+TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
+node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
 ```
+
+- **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a
+  map, mosaic, globe, hemisphere, projection or atlas (plurals included), or a caption stating a map projection or a
+  global map or mosaic. Each row keeps its downloadable files with their pixel sizes and the caption phrases that chose
+  it. New rows get a decision and a reason built from their own evidence (`collect/photojournal-review.mts`).
+- **USGS.** Each product's files are read from its own Astropedia page. A row's reason says what that page offers.
+- **Targets.** Rows collected without a target get the one their archive label states: PDS4 `<Target_Identification>`,
+  or PDS3 `TARGET_NAME` in `catalog/dataset.cat`, kept as stated (for example `CHECKOUT`). Rows whose source states
+  none keep an empty target and a `targetNote` saying so.
 
 Use a new output directory for fresh retrievals. Review additions, removals,
 versions and changed source metadata before a database transaction. Preserve
@@ -83,21 +96,21 @@ snapshot counts when accepting a new collection. Scratch HTML is never committed
 
 ## Coverage and limits
 
-The 27 September 2026 snapshot keeps different inventory populations separate:
+The 27 September 2026 snapshot keeps different inventory populations separate. Rows without a target carry a `targetNote` saying why:
 
-| Source population               |  Rows | What was checked                                                               |
-| ------------------------------- | ----: | ------------------------------------------------------------------------------ |
-| OPUS instrument/target slices   |   549 | Exact queries, metadata samples and explicit screening decisions               |
-| OPUS instrument/volume entries  |   990 | Catalogue inventory; 985 distinct volumes/bundles                              |
-| OPUS geometry-index memberships |   221 | Overlapping geometry entries, not detections                                   |
-| Photojournal                    |   717 | Earlier individual reviews retained                                            |
-| PSI PDS4                        |   189 | Earlier bundle review and proposal links retained                              |
-| USGS                            | 1,643 | Earlier catalogue review and proposal links retained                           |
-| Maryland indexed descriptions   | 3,880 | Every linked description requested; 3,878 parsed, two HTTP 404s                |
-| Maryland root holdings          | 5,110 | Directory inventory; 1,239 have no description in the audited indexes          |
-| DARTS dataset directory         |   360 | Every published science metadata entry parsed, including one typed Observation |
-| DARTS collection directory      |    46 | Mission/collection metadata, separate from dataset entries                     |
-| DARTS catalogue documents       |     2 | DataCatalog and ItemList containers                                            |
+| Source population               |  Rows | What was checked                                                                                                                     |
+| ------------------------------- | ----: | ------------------------------------------------------------------------------------------------------------------------------------ |
+| OPUS instrument/target slices   |   549 | Exact queries, metadata samples and explicit screening decisions                                                                     |
+| OPUS instrument/volume entries  |   990 | Catalogue inventory; 985 distinct volumes/bundles                                                                                    |
+| OPUS geometry-index memberships |   221 | Overlapping geometry entries, not detections                                                                                         |
+| Photojournal                    | 2,593 | 717 earlier individual reviews retained; 1,876 added by title or caption, each with its own evidence; files and pixel sizes recorded |
+| PSI PDS4                        |   189 | Earlier bundle review and proposal links retained; 186 targets read from the bundle labels                                           |
+| USGS                            | 1,643 | Earlier catalogue review retained; every product page's files recorded; one missed ISIS cube reopened                                |
+| Maryland indexed descriptions   | 3,880 | Every linked description requested; 3,878 parsed, two HTTP 404s; 466 targets read from PDS3/PDS4 labels                              |
+| Maryland root holdings          | 5,110 | Directory inventory; 1,239 have no description in the audited indexes                                                                |
+| DARTS dataset directory         |   360 | Every published science metadata entry parsed, including one typed Observation                                                       |
+| DARTS collection directory      |    46 | Mission/collection metadata, separate from dataset entries                                                                           |
+| DARTS catalogue documents       |     2 | DataCatalog and ItemList containers                                                                                                  |
 
 Do not add these into a unique-dataset or observation count. An entry may be a
 version, mirror, bundle, collection, channel, session or container. The database
