@@ -8,10 +8,12 @@ This package supplies the command, not the observatory pipelines or catalogue. I
 
 Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its documented dependencies. Run `node tools/objects/astronomy-toolchains.mts astroquery install` once for the pinned archive client, then use `verify` in place of `install` to check its imports and versions. The environment is shared by checkouts with the same pins; installation does not copy it into each checkout. PDS decoding uses `node tools/objects/astronomy-toolchains.mts pds install`. Some reduction routes require additional instrument toolchains described by their existing guides.
 
-Inside the repository, use `pnpm telescope --help` after installing its dependencies. To test the distributable from the repository:
+Inside the repository, use `pnpm telescope --help` after installing its dependencies. To test the distributable from the repository,
+pack it with pnpm, which writes the packed manifest from `publishConfig`: the binary alone, with no dependencies and none of the
+source subpaths the workspace's tools import:
 
 ```sh
-npm pack ./packages/telescope-cli
+pnpm --filter @cssearth/telescope-cli pack --pack-destination .
 npm install -g ./cssearth-telescope-cli-0.1.0.tgz
 export CSSEARTH_WORKSPACE=/path/to/css.earth
 ```
