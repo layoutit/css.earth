@@ -42,6 +42,7 @@ export * from './registration/registration-sweeps.ts';
 export * from './registration/spin-record-reading.ts';
 export * from './registration/strip-refinement.ts';
 export * from './retained-atlas.ts';
+export * from './rings.ts';
 export * from './scientific-focus.ts';
 export * from './shape-material.ts';
 export * from './source-mesh-lighting.ts';

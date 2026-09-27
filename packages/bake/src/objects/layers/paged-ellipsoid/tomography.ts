@@ -1,7 +1,8 @@
-import {readJsonSource} from '../../sources/source-values.mts';
+import {readJsonSource} from '../../sources/index.ts';
 import {requireFiniteNumber} from '@cssearth/core';
-import {parseTomographyRecipe} from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import type { TomographyRecipe, Cutaway } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { parseTomographyRecipe } from './source-contract.ts';
+import type { TomographyRecipe } from './source-contract.ts';
+import type { Cutaway } from './contracts.ts';
 interface TomographyInterior extends Record<string, unknown> {tomographyPath?: string; layers: readonly {id: string; outerRadiusKm: number}[];}
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

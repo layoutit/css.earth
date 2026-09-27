@@ -2,9 +2,7 @@
  * ecliptic presentation frame (ecliptic north up, the Sun to the left at zero yaw), and every baked light and view direction is
  * the same chain applied in PolyCSS world coordinates (world X/Y are CSS Y/X), with the body-fixed Sun as the light. */
 import { buildPolyMeshTransform } from '@layoutit/polycss';
-import { prepareEclipticPresentationFrame } from '@cssearth/bake/objects/scene';
-import { chain, matrix3dText, POLYCSS_SURFACE_PLACEMENT, solveSystemMatrix } from '../world-navigation-sources.ts';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import { prepareEclipticPresentationFrame, chain, matrix3dText, POLYCSS_SURFACE_PLACEMENT, solveSystemMatrix, type SolarGeometry } from '../../../scene/index.ts';
 
 type Matrix3 = readonly [number, number, number, number, number, number, number, number, number];
 type Vector3 = readonly [number, number, number];
@@ -33,7 +31,7 @@ export interface EllipsoidAttitude {
   viewToObject(vector: readonly number[], scenePitchDegrees: number, controlYawDegrees?: number): Vector3;
 }
 
-export function prepareEllipsoidAttitude(bodyId: string, { meshRotationZDegrees, mapLeftEdgeLongitudeDeg }: { meshRotationZDegrees: number; mapLeftEdgeLongitudeDeg: number }): EllipsoidAttitude {
+export function prepareEllipsoidAttitude(solarGeometry: SolarGeometry, bodyId: string, { meshRotationZDegrees, mapLeftEdgeLongitudeDeg }: { meshRotationZDegrees: number; mapLeftEdgeLongitudeDeg: number }): EllipsoidAttitude {
   const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
   const meshTransform = buildPolyMeshTransform({ rotation: [0, 0, meshRotationZDegrees] }) ?? '';
   const systemMatrix = solveSystemMatrix(bodyId, frame.basis.flat() as unknown as Matrix3, [meshTransform], { ...POLYCSS_SURFACE_PLACEMENT, mapLeftEdgeLongitudeDeg });

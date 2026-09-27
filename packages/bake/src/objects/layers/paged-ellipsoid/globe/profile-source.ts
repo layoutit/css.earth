@@ -1,9 +1,10 @@
 import {array, boolean, dictionary, literal, number, object, optional, parse, record, string, tuple, union, type Guard, type Infer} from '@cssearth/core/schema';
-import type {PagedAssetConfiguration} from './asset-contract.mts';
-import type { PagedRasterConfiguration, PagedGeometryParameters } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import {DERIVED_CAMERA_ANGLE_FIELDS, recipeCamera} from '../camera-source.mts';
+import type {PagedAssetConfiguration} from './asset-contract.ts';
+import type { PagedRasterConfiguration } from '../surface-raster.ts';
+import type { PagedGeometryParameters } from '../scene-contract.ts';
+import {DERIVED_CAMERA_ANGLE_FIELDS, recipeCamera} from '../../../scene/index.ts';
 import {preparedControlPitch} from '@cssearth/engine';
-import {LIT_DEFAULT_VIEW} from '@cssearth/bake/objects/scene';
+import {LIT_DEFAULT_VIEW} from '../../../scene/index.ts';
 
 const geometry: Guard<PagedGeometryParameters> = object({BODY_LATITUDE_SEGMENTS: number, BODY_LONGITUDE_SEGMENTS: number, EQUATORIAL_RADIUS: number,
   TILE_SIZE: number, SEAM_BLEED: number, PLANET_SEAM_BLEED: number, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE: number,

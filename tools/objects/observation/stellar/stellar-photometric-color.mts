@@ -6,7 +6,7 @@ import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/cor
 import { linearToSrgb } from '@cssearth/bake/objects/color';
 import { gunzipSync } from 'node:zlib';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../interferometry/fits-table.mts';
-import { readCie1931ColorMatching } from '../../../references/reference-bank.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;

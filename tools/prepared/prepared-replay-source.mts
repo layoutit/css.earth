@@ -12,7 +12,7 @@ export interface SolidReplayScene {
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
 }
-import {camera} from '../objects/camera-source.mts';
+import {camera} from '@cssearth/bake/objects/scene';
 import {parse} from '@cssearth/core/schema';
 import {validatePreparedCubicSky} from '@cssearth/bake/presentation';
 import {validateDirectionalSunPlan} from '@cssearth/bake/presentation';

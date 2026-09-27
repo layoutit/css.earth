@@ -1,6 +1,6 @@
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
-import { parseShapeModelConfig, parseShapeContent, prepareRingLeaves, ringQuadStyle, prepareShapeLighting } from '@cssearth/bake/objects/layers/shape-model';
+import { parseShapeModelConfig, parseShapeContent, prepareRingLeaves, ringQuadStyle, prepareShapeLighting, prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from '@cssearth/bake/objects/layers/shape-model';
 import { requireRecord, requireString } from '@cssearth/core';
 import { requireObjectRuntimeDefinition } from '../../contract/object-runtime-contract.mts';
 import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
@@ -17,7 +17,6 @@ import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 import { requirePreparedPresentation } from '@cssearth/bake/presentation';
 import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { createPreparedNodeTree, prepareCssomDeclarationReads } from '@cssearth/bake/presentation';
-import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.mts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
 
 const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');

@@ -5,7 +5,7 @@ import { createInterface } from 'node:readline';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { readJsonSource } from '../sources/source-values.mts';
+import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireRecord } from '@cssearth/core';
 import type { JsonRecord } from './trace-model.mts';
 import { recordOf } from './trace-model.mts';

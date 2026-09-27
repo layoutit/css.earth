@@ -1,15 +1,16 @@
 import type {SourceManifest} from '@cssearth/objects/node';
-import type {PreparedDirectionalSunPlan} from '@cssearth/bake/presentation';
+import type {PreparedDirectionalSunPlan} from '../../../../presentation/index.ts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {viewSunDirectionToPreparedLightDirection} from '@cssearth/renderer/platform/directional-sun-coordinate';
+import {viewSunDirectionToPreparedLightDirection} from '@cssearth/renderer/solar-system/directional-sun-coordinate.ts';
 import {requireFiniteNumber, requireRecord} from '@cssearth/core';
 import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
-import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '@cssearth/bake/photometry';
-import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../prepared/prepared-atmosphere.mts';
-import {readJsonSource} from '../../sources/source-values.mts';
-import { applyDisplayGamma, parseAtmosphereResponse } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '../../../../photometry/index.ts';
+import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../../../raster/index.ts';
+import {readJsonSource} from '../../../sources/index.ts';
+import { applyDisplayGamma } from '../display-tone.ts';
+import { parseAtmosphereResponse } from '../source-contract.ts';
 
 export interface AtmosphereConfiguration {
   material: {tileSize: number; presentationSize: number; framesPerShard: number; discRadius: number;
