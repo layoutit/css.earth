@@ -47,7 +47,9 @@ export function chandraMovingTargets(path = resolve(REPOSITORY, CHANDRA_MOVING_T
   return Object.fromEntries(Object.entries(requireRecord(record.targets, 'moving targets'))
     .map(([id, names]) => [id, requireArray(names, `${id} archive names`).map(name => requireString(name, `${id} archive name`))]));
 }
-export const MOVING_TARGETS = chandraMovingTargets();
+let movingTargetList: Readonly<Record<string, readonly string[]>> | undefined;
+/** The moving-target list, read on first use, so a missing file fails the query that needs it and not the module's import. */
+export const movingTargets = () => movingTargetList ??= chandraMovingTargets();
 
 /** Every shipped object that states a sky position, from the files that own it: a nebula catalogue beside the object, the
  * prepared Local Group catalogue, or the body record's own star position. Nothing is listed here that the repository does not
@@ -98,9 +100,10 @@ export function objectBox(object: ShippedObject, radiusDegrees = OBJECT_RADIUS_D
 /** Every shipped object the ledger searches for: the moving targets this module names, then everything with a stated position. */
 export async function chandraShippedObjects(): Promise<ShippedObject[]> {
   const ids = new Set(await shippedObjectIds());
-  const moving = Object.keys(MOVING_TARGETS).filter(id => ids.has(id))
+  const targets = movingTargets();
+  const moving = Object.keys(targets).filter(id => ids.has(id))
     .map(id => ({ id, source: CHANDRA_MOVING_TARGETS }));
-  const fixed = (await shippedSkyObjects()).filter(object => !MOVING_TARGETS[object.id]);
+  const fixed = (await shippedSkyObjects()).filter(object => !targets[object.id]);
   return [...moving, ...fixed].sort((a, b) => a.id.localeCompare(b.id));
 }
 
@@ -124,7 +127,7 @@ export async function observationsOf(object: ShippedObject, query: typeof cxcQue
   const instrument = filter?.instrument ? ` AND instrument='${escape(filter.instrument)}'` : '';
   const nextDay = filter?.toIso ? new Date(Date.parse(`${filter.toIso.slice(0, 10)}T00:00:00.000Z`) + 86_400_000).toISOString().slice(0, 10) : undefined;
   const time = filter?.fromIso && nextDay ? ` AND start_date >= '${filter.fromIso.slice(0, 10)}' AND start_date < '${nextDay}'` : '';
-  const names = MOVING_TARGETS[object.id];
+  const names = movingTargets()[object.id];
   if (names) {
     const clause = names.map(name => `target_name='${escape(name)}'`).join(' OR ');
     const rows = await query(`SELECT ${columns} FROM cxc.observation WHERE (${clause}) AND status='archived'${instrument}${time}${limit === undefined ? '' : ' ORDER BY exposure_time DESC, obsid'}`);
@@ -243,8 +246,9 @@ export async function surveyChandra() {
   for (const object of objects) {
     const rows = await observationsOf(object);
     if (!rows.length) continue;
-    observed[object.id] = { matchedBy: MOVING_TARGETS[object.id] ? 'target name' : 'sky position',
-      ...(MOVING_TARGETS[object.id] ? { archiveNames: MOVING_TARGETS[object.id] } : { position: { raDeg: object.raDeg, decDeg: object.decDeg } }), source: object.source,
+    const archiveNames = movingTargets()[object.id];
+    observed[object.id] = { matchedBy: archiveNames ? 'target name' : 'sky position',
+      ...(archiveNames ? { archiveNames } : { position: { raDeg: object.raDeg, decDeg: object.decDeg } }), source: object.source,
       observations: rows.length, totalExposureKs: +rows.reduce((sum, entry) => sum + entry.exposureKs, 0).toFixed(1),
       longest: rows.slice(0, 3).map(entry => ({ obsid: entry.obsid, target: entry.targetName, instrument: entry.instrument, grating: entry.grating, exposureKs: entry.exposureKs, startDate: entry.startDate })) };
   }

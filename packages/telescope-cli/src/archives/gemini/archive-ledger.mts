@@ -97,7 +97,9 @@ export function geminiLedgerFocus(path = resolve(REPOSITORY, GEMINI_LEDGER_FOCUS
   return { objects: requireArray(record.objects, 'focus objects').map(id => requireString(id, 'focus object')), heading: text('heading'),
     group: text('group'), all: text('all'), member: text('member'), rows: text('rows') };
 }
-export const FOCUS = geminiLedgerFocus();
+let focus: LedgerFocus | undefined;
+/** The focus, read on first use, so a missing file fails the query that needs it and not the module's import. */
+const ledgerFocus = () => focus ??= geminiLedgerFocus();
 export interface CapabilityState {
   readonly instrument: string;
   readonly science: number;
@@ -198,7 +200,7 @@ export function observationsOf(rows: readonly Record<string, string>[], shipped:
  * ephemeris. A numbered target such as `52 Europa` is a different body and carries its number, so it cannot reach a query
  * that asks for these names exactly. */
 export async function galileanRows(today: string): Promise<MoonRow[]> {
-  const names = FOCUS.objects.flatMap(moon => {
+  const names = ledgerFocus().objects.flatMap(moon => {
     const capitalised = `${moon[0]!.toUpperCase()}${moon.slice(1)}`;
     return [capitalised, `${capitalised}.eph`];
   });
@@ -351,7 +353,7 @@ export function scienceInstruments(rows: readonly MoonRow[], moon: string, capab
  * instruments that took those frames is one this toolkit has actually proven. */
 export function galileanNote(rows: readonly MoonRow[], capabilities: readonly CapabilityState[] = []): string {
   const said: string[] = [];
-  for (const moon of FOCUS.objects) {
+  for (const moon of ledgerFocus().objects) {
     const instruments = scienceInstruments(rows, moon, capabilities);
     if (!rows.some(row => row.moon === moon)) { said.push(`${moon}: nothing public at all.`); continue; }
     if (!instruments.length) { said.push(`${moon}: pointing exposures only, and no science frame of any kind.`); continue; }
@@ -360,15 +362,15 @@ export function galileanNote(rows: readonly MoonRow[], capabilities: readonly Ca
       `${proven.length ? `Reducible here through ${proven.map(entry => entry.instrument).join(', ')}.`
         : 'No instrument that observed it has been proven by this toolkit, so nothing here can be reduced for it.'}`);
   }
-  const withScience = FOCUS.objects.filter(moon => hasScience(rows, moon));
-  const reducible = FOCUS.objects.filter(moon => scienceInstruments(rows, moon, capabilities).some(entry => entry.state === 'reduced'));
-  const count = (many: readonly string[]) => many.length === FOCUS.objects.length ? FOCUS.all : many.length ? String(many.length) : 'none';
-  return [`Of ${FOCUS.group}, ${count(withScience)} have public Gemini science frames` +
+  const withScience = ledgerFocus().objects.filter(moon => hasScience(rows, moon));
+  const reducible = ledgerFocus().objects.filter(moon => scienceInstruments(rows, moon, capabilities).some(entry => entry.state === 'reduced'));
+  const count = (many: readonly string[]) => many.length === ledgerFocus().objects.length ? ledgerFocus().all : many.length ? String(many.length) : 'none';
+  return [`Of ${ledgerFocus().group}, ${count(withScience)} have public Gemini science frames` +
     `${withScience.length ? ` (${withScience.join(', ')})` : ''}, and ${count(reducible)}` +
-    `${reducible.length && reducible.length < FOCUS.objects.length ? ` (${reducible.join(', ')})` : ''} ` +
+    `${reducible.length && reducible.length < ledgerFocus().objects.length ? ` (${reducible.join(', ')})` : ''} ` +
     'were taken on an instrument this toolkit has proven.',
-    `What decides whether anything can be done with a ${FOCUS.member} is not whether frames exist but whether the instrument that took ` +
-    `them is one this toolkit has proven, so each ${FOCUS.member} is listed with the state of every instrument that observed it.`,
+    `What decides whether anything can be done with a ${ledgerFocus().member} is not whether frames exist but whether the instrument that took ` +
+    `them is one this toolkit has proven, so each ${ledgerFocus().member} is listed with the state of every instrument that observed it.`,
     ...said].join(' ');
 }
 
@@ -405,11 +407,11 @@ export function ledgerMarkdown(ledger: Ledger): string {
               .map(entry => [entry.instrument, String(entry.science), entry.reason]))].join('\n')
       : '',
     '',
-    `## ${FOCUS.heading}`,
+    `## ${ledgerFocus().heading}`,
     '',
     ledger.galileanMoons.note,
     '',
-    table([FOCUS.member, 'instrument', 'type', 'intent', 'filter or band', 'frames', 'programmes'],
+    table([ledgerFocus().member, 'instrument', 'type', 'intent', 'filter or band', 'frames', 'programmes'],
       ledger.galileanMoons.rows.map(row => [row.moon, row.instrument, row.type, row.intent, row.filter || 'none',
         String(row.frames), row.programmes.join(', ') || 'none'])),
     '',
@@ -444,7 +446,7 @@ export const GEMINI_LEDGER: ArchiveLedger<Ledger> = {
   guide: ledger => `${ledgerMarkdown(ledger)}\n`,
   survey: args => surveyGemini(args[0] ? resolve(args[0]) : null), writes: 'always',
   summary: ledger => [`${ledger.instruments.length} instruments, ${ledger.objects.length} shipped objects, ` +
-    `${ledger.galileanMoons.rows.length} ${FOCUS.rows}, ${ledger.capabilities.filter(entry => entry.state === 'reduced').length} reduced. ` +
+    `${ledger.galileanMoons.rows.length} ${ledgerFocus().rows}, ${ledger.capabilities.filter(entry => entry.state === 'reduced').length} reduced. ` +
     `${ledger.receiptProblems.length} receipt problem(s).`],
 };
 

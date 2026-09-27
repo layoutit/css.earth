@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { addProductEvidence, readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
-import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, MOVING_TARGETS, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
+import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
 import { reprocessParameters, reprocessRun, writeReprocessRecord } from './reprocess.mts';
