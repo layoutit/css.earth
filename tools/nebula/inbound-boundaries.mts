@@ -35,7 +35,9 @@ function files(directory: string): string[] {
 function policy(path: string): Policy {
   // `tests/` holds test fixtures and helpers only; a runtime module that imports one is still checked through its own closure.
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/')) return 'test';
-  if (path.startsWith('tools/') || path.startsWith('packages/bake/') ||
+  // `@cssearth/telescope-cli` is the telescope command, preparation tooling that was `tools/objects/telescopes/` before it
+  // became a package: it imports the bake by design, as that folder did.
+  if (path.startsWith('tools/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
       /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }

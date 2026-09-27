@@ -12,5 +12,5 @@ export default {
   metafile: true,
   // `@cssearth/renderer` is bundled, as it was when it was relative modules: its source subpaths are TypeScript whose sibling
   // imports name `.js`, which Node cannot load unbundled.
-  external: ['@cssearth/astronomy', '@cssearth/bake', '@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@cssearth/spice', '@cssearth/telescope', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
+  external: ['@cssearth/astronomy', '@cssearth/bake', '@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@cssearth/spice', '@cssearth/telescope', '@cssearth/telescope-cli', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
 };

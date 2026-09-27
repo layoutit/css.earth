@@ -179,7 +179,7 @@ native products through `telescope:query`: 28 HMI continuum frames, the HMI radi
 AIA 171/304 synoptic maps. No solar branch is required in the shared query or qualification code.
 
 ```sh
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target sun --wavelength 0.0170,0.0172 \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 

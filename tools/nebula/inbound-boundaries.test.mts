@@ -45,7 +45,7 @@ test('preparation accepts the public bake entries while the runtime accepts none
   const f = fixture();
   try {
     f.write('tools/prepare.mts', "import {value} from '@cssearth/bake/public'; export {value as core} from '@cssearth/bake/public';");
-    for (const path of ['tools/objects/volume.ts', 'packages/bake/src/volume/other.ts']) {
+    for (const path of ['tools/objects/volume.ts', 'packages/bake/src/volume/other.ts', 'packages/telescope-cli/src/query.mts']) {
       f.write(path, "import {value, type Contract} from '@cssearth/bake/public'; export {value};"); assert.deepEqual(f.check(), [], path);
       f.write(path, 'export {};');
     }
@@ -228,5 +228,21 @@ test('source-looking directories are never read as modules and directory entry p
     f.write('vendor/entry/index.ts', "export * from '@cssearth/nebula-lab/public';");
     f.write('site/runtime.mts', "import '../vendor/entry';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via vendor/entry/index.ts')));
+  } finally { f.cleanup(); }
+});
+
+test('the telescope command is preparation like the tools folder it came from; a runtime package stays refused', () => {
+  const f = fixture();
+  try {
+    const computed = "const at = String(Math.random()); await import(at + 'packages/bake');";
+    f.write('packages/telescope-cli/src/implementation.mts', `import {value} from '@cssearth/bake/public'; ${computed} export {value};`);
+    assert.deepEqual(f.check(), [], 'the command imports the bake and loads bake modules it computes');
+    f.write('packages/telescope-cli/src/implementation.mts', "import '@cssearth/nebula-lab/public';");
+    assert.ok(f.check().some(error => error.includes('closure forbids')), 'the command still may not reach the lab');
+    f.write('packages/telescope-cli/src/implementation.mts', 'export {};');
+    for (const source of ["import {value} from '@cssearth/bake/public'; export {value};", computed]) {
+      f.write('packages/renderer/src/volume/loader.ts', source);
+      assert.ok(f.check().some(error => error.includes('runtime closure forbids') || error.includes('unchecked computed')), source);
+    }
   } finally { f.cleanup(); }
 });

@@ -176,7 +176,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
     } else {
       // The audited telescope builder has one entry and no custom loaders or generation.
       config = {};
-      entries = [resolve(cwd, 'src/cli.mts')];
+      entries = [resolve(cwd, 'src/bin.mts')];
     }
     options.push(JSON.stringify([directory, normalizedOptions(config)]));
     const tsconfig = typeof config.tsconfig === 'string' ? resolve(cwd, config.tsconfig) : resolve(cwd, 'tsconfig.json');
