@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
-import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
+import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory } from '@cssearth/objects/node';
 
