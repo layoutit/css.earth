@@ -73,7 +73,7 @@
     "setup:assets": "pnpm prepare:shell && pnpm setup:asset-data",
     "setup:asset-data": "node tools/assets/setup.mts",
     "setup:prepared": "node tools/assets/setup.mts --location=prepared",
-    "test": "pnpm test:packages && pnpm test:renderer && pnpm test:node && pnpm test:preparation --universe && pnpm test:lab",
+    "test": "pnpm test:packages && pnpm test:renderer && pnpm test:node && pnpm test:telescope-cli && pnpm test:preparation --universe && pnpm test:lab",
     "test:packages": "pnpm -r --filter \"./packages/**\" test",
     "test:preparation": "node tools/contract/test-preparation.mts",
     "test:bake-objects": "node tools/ci/test-bake-objects.mts",
