@@ -1,7 +1,7 @@
 import { fixtureRecord } from '@cssearth/objects/node/contract';
 import { required } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from '@cssearth/bake/objects/layers/terrestrial';
 import { validateSurfaceObservation, loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';

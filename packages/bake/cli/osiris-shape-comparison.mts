@@ -1,6 +1,6 @@
 /** Compare OSIRIS Cartesian backplanes with the selected and base source meshes.
  * This measures source-model disagreement, independently of display tessellation and atlas density.
- * node tools/objects/surface-observations/osiris-shape-comparison.mts <body> <lens> <output.json> */
+ * node packages/bake/cli/osiris-shape-comparison.mts <body> <lens> <output.json> */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
