@@ -77,6 +77,13 @@ test('Astro frontmatter and bundled scripts become import specifiers', () => {
   ]);
 });
 
+test('a dynamic import of a no-expression template literal is a specifier; a computed one is not', () => {
+  const found = moduleSpecifiers("await import(`./a.mts`);\nawait import('./b.mts');\nconst name = './c.mts'; await import(name);\nawait import(`./${name}`);\n", 'site/x.ts');
+  assert.deepEqual(found.map(item => [item.specifier, item.typeOnly, item.symbols]), [['./a.mts', false, ['(dynamic)']], ['./b.mts', false, ['(dynamic)']]]);
+  assert.deepEqual(astroSpecifiers("---\nconst late = await import(`../late.mts`);\n---\n<script>import(`../client.mts`);</script>", 'site/X.astro')
+    .map(item => item.specifier), ['../late.mts', '../client.mts']);
+});
+
 test('type-level imports are import specifiers: typeof import() and import().Name', () => {
   const found = moduleSpecifiers("type A = typeof import('@x/a');\ntype B = import('../b.ts').Shape<number>;\nlet c: import('./c').Deep.Name;\n", 'site/x.ts');
   assert.deepEqual(found.map(item => [item.specifier, item.typeOnly, item.symbols]), [
