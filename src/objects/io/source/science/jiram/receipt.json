@@ -16,8 +16,804 @@
     "src/spice/juno/spk/spk_rec_221127_230104_230111.bsp": "00a12656ab7b3aadb7ccf0390aae1d5fc8ba800f75734c0d299490299f855ae8",
     "src/spice/juno/ck/juno_sc_rec_221210_221215_v01.bc": "00998ffc7e9e38da39bb81c7b67c14c8aa7cb0e80e584adb168af6f7e7968668",
     "src/spice/juno/spk/spk_rec_230211_230321_230327.bsp": "22ab39db2294b7f2e7dc15121ed759b12d1e256ad373a3560c6a1e0821119944",
-    "src/spice/juno/ck/juno_sc_rec_230226_230304_v01.bc": "63f0737e7c1826a2b8baff17151ef32f653b002879635a8d8686bac8cd5ad9fe"
+    "src/spice/juno/ck/juno_sc_rec_230226_230304_v01.bc": "63f0737e7c1826a2b8baff17151ef32f653b002879635a8d8686bac8cd5ad9fe",
+    "src/spice/juno/spk/spk_rec_230428_230605_230613.bsp": "27cd34767025b778ba22f76af20eac86733f038732b759c43fafbf83b8f04449",
+    "src/spice/juno/ck/juno_sc_rec_230514_230520_v01.bc": "d2fd73738c5209d779ea8b923db844551fa7e826a45b31ab0a314d63ad948b87",
+    "src/spice/juno/spk/spk_rec_230713_230820_230823.bsp": "bbc65a15c93bb2fd3c9236271806ae604d126e00fed9c31a54583cee484a5096",
+    "src/spice/juno/ck/juno_sc_rec_230730_230805_v01.bc": "2738bfc93a8aa50d76bd53289221573e1797dbf69548e7f15d869e5a8bdb53b6"
   },
+  "inputs": [
+    {
+      "productId": "JIR_IMG_RDR_2022099T115524_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "d0c34744b232a58ee22d1bd90557249be063c408501c2c3c8da006901ada2abf",
+      "labelSha256": "74d63f488688c93eeaec6a3d7c2cd9941560d73c47b297d4081337f27fa4de84"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115555_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "fc8bf6dffea05d6fb21b908cc64a2db2f56c815cf1cced00f501f8e22c114c65",
+      "labelSha256": "027f68b95fb0cc04276d542819ae16bcdcef1d9bfd30715d171bee81d8b846fb"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115625_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "cbc9dc0c3ff406feefb58c2968238723b47a5ff25665c5f0f68894eadf13b71e",
+      "labelSha256": "6856887d62cd21831eecf86d948b914b4a35e59a83db9444aa5a35ade99f030f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115656_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "9d38a02627d3ee86d31c694e2d0370c589d45a61cfd88a1f81e2cf5258feb6a1",
+      "labelSha256": "1194f21d6fdaa0a58b1c18b49bc43351b505e0503629aca182124014f7e049dc"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115726_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "bf69a0d959001bf282e1068f58f392288d5f5619d784ed7f74dcad2b892fab96",
+      "labelSha256": "b29da421dcd8fab18f0db51ff6c68f992b6e236d5e976ccda1047a3dc66e01a1"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115757_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "8a4a5f60cd207d98afb46f8fe57956ada38ca63cf80056613c1a5a5c43e99e6e",
+      "labelSha256": "1dc076e26a8bae585f37173017a9bf605d080f665a8c1979fac6229795a158f4"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115827_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "661e9925451b85b5bc5d64d23ebeb3ddc15c18620a98b47dc6faf7a0f00e0a1f",
+      "labelSha256": "bc076ac7d12875813551b57ed7e10b84fe6ad26d3de29614cbaa19366231c99a"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115858_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "300add8188bbdbd6fc6df4360c54670255230f75b5a4b2c106263a2665b78380",
+      "labelSha256": "81e61cb6258f365ca58e75a0add046bede0d03c4276e7da15b56d1643b771c19"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115928_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "522ac2bbabbd6a6e2c8f90b4bf520c9c80496917f0eed6aa983c845662da9188",
+      "labelSha256": "b7fede7ca9b593847fcca524a97b67c7d40e07a185653c20eb8f0af690e1633f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T115959_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "506f41a5aa1ecdd75dc1f082b1740fbee0896e061aadf9de9b006900a5ca8b13",
+      "labelSha256": "938a8da330c14260858c8d4796240223158d384d2101a1951670ded6c4da59c1"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120029_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "9fd0f44f91cc5cea7d706dee858d40c4bbb2fe7d4a02e4aed90a3106e2e3c228",
+      "labelSha256": "d9c499b6eff15504ab986bcad9f134f560f82ffa750f4e0c303e691f938f3f05"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120100_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "86855b1bf7cd21cdb47b469babff3b148a8eb8aaa6fbec8a3c9814305df72c9d",
+      "labelSha256": "2c5358343f47c641e2a35efab2162106b8a70eadf5d7c7c97b716c3491988bab"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120130_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "0668fe04276a4581ec10bafb04d82ac2ee3150fa577be48b7673afa2154adce4",
+      "labelSha256": "be123de7cc7a118ab43e5630f593deacb1deb524700a59f6e69b9444c7793f8e"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120201_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "d68334dd0d27a2fbe6776c1f358136710993b540ca05c0736c204e64b0d0b0cb",
+      "labelSha256": "df02b353a330f703f96d0023c1450e5100896c4635589d4b874d5d99d9ac63ae"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120231_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "5c1f0393e63e7bb846721d8606c11bbd3653aff8cbd116aabbb676740ddacd37",
+      "labelSha256": "fbbc1239bcf81f06398d6694b4b82030c3168a6b6bc52a50fb2cfe10cc09781a"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120302_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "03dac2c4c5f0cda4f3207bac5ddaa7c1e67329445c6b3ba8e321b68b3b94425d",
+      "labelSha256": "271c0c5a817c3d9892b43ac8d1040de3951ee312d6f97e2292a297cd10812cc3"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120332_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "d5242c00c6a3f48ffc7086c217ec5d0ca2ff3c2acfa254369f60df4ba2d7fec1",
+      "labelSha256": "2e8a1b870461ef9e30aadc773ce4920199d64e9f789bbbd4df139ac1c9294c19"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120403_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "b1178d10b8b8641765f3deeb16d9ef3c0d5cfe9e243a152904154e02d985abf9",
+      "labelSha256": "da04b7e06440732f44e378f68c544ba533ffc4badc70165352a9974d44d09a74"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120433_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "3f06fac7c1cc76fb863a11eedc687a104e148354a2b0edccd7521c1971e8f5e3",
+      "labelSha256": "7e454fb4191ca434fea7161b90a56cd4329637b561352266fd997e413e456b1c"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022099T120504_V01",
+      "volume": "jnojir_2041",
+      "imageSha256": "d766639c715271778e7a25ee329b75f6d63ae6432fc51622ca6d16ec97e10066",
+      "labelSha256": "7f07aa787286333ed302207bdcca07e5ecef3252e6d5a6f2bdb0fe204a9f57ac"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045116_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "078ed081384fd02b30ea913ec2381bc891d566c5fe411afd2a7a9169cb3fe9ef",
+      "labelSha256": "c6c446b5e79a098de4184826cbf32a68fc5d728312f767bfe9ee6ffb71fccd15"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045147_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "9d4e53741dea8203bf0d16c528413f1ff456ab7e9b2d368961dd9f0ef8812d2c",
+      "labelSha256": "5546a2ef0d357ec3b3eec9e5f0d9c93bc53ad62c8bd78e4cf73d137628aeceea"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045217_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "4856c076603553cb352ff14e59774446a9dd54f857ee4b4c127166d304feb33b",
+      "labelSha256": "9e78c5ada48046f978ccbbfd29f6d47ebb33a1b0851d8517d0c9012463ca819e"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045247_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "8ac2f140a893a0a348b1508eb9cb3c576d5dbdd2a9377dea6125770377906853",
+      "labelSha256": "50be220bb79747a7bcc4fb41a1435d2c422e0172f5a83cf0c38459120de28301"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045318_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "78071d43f91d7ece380162ed9a5e00ad75949f1e3918bf1816e2b74fae8a7064",
+      "labelSha256": "f2698e3478eecbfd2972115faad601350c4fb9285a5fa54e4b2684d9cf019673"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045348_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "02c3f472df034af66b385a45538ad86f6caade2d7c2a120582b501ba0a6c71d6",
+      "labelSha256": "b5b19eede6f42f6b1aaa4ba07b24e4ee285c11970bdc40f7e5e4fb0c92fd0967"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045418_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "e80c5b2c5994a0b88215a545f93b098b108f6d3e48d8b63c3d7bb8141ad1f901",
+      "labelSha256": "4e58d8deebe536bc4c2240e8d85afd2a7d2d1907bc0a5497f077c57a2a47acc2"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045448_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "f67eb7a6a1aff009c1e817741030202ef43dfc49d05f62e647552f58c83d9632",
+      "labelSha256": "3f6c3c674e0024adcfa652d71db80b9ae904bc93dbcc39581f52f15773d037d0"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045519_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "5fb2984cbca316fda59a2ea6e81d4312b967723b024926ffc1e138df9916a2fc",
+      "labelSha256": "f4ee1e07feb92be1a32458b2f18e2b09ff00a109435bf1657d40c2125b7f98d7"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045549_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "600e0cb62e08f0534b3a91aa2c9928848296251869930468efd67beb7cb35e19",
+      "labelSha256": "ea078caffd73260c463a5ff615b1f7d775f642dc65b2d27f5b9153a62db7c86b"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045619_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "01a7cac164c53b9162239ff3a476ce796fc5373eade3df93630553a8ac3ca3b9",
+      "labelSha256": "9a15c39a5367e1e61aaa6a22aef88188f25a7b0e60b3357df55992f6e28d446f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045650_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "e5ed288c81fcd7ebca8fca2337e02ebd47a289cb31da560757905a85c32e2fe7",
+      "labelSha256": "886456a5d11b5b0508ea8133f2900a97ea688501c90214030286efef413d2654"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045720_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "9ee7c7b8b2bb240bba26af15b5ca238697dfa7cf2dcf58b949b4d21f9bdd5926",
+      "labelSha256": "b3fc7cbedb8f8f06379840db204faac7e34ac8737176d3d8bd9f1f194683c8f5"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045750_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "2ac1cc36fd199937c25377fc698eeddd2aea5d2ab5a527c02b3816186049dbeb",
+      "labelSha256": "5ecb8ee0657596f6bed8d75e8e19d22fb8bc012c960785d1b80c8b2cdbfde4e5"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045820_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "b7095a2a70f1a1352406b200a135e53da47cb1044b871fcb9823fc9d1cda3da9",
+      "labelSha256": "2bcaadc424ae8244a479d0f51c947d84ab04c2b751217d9ecfcac327d50c8e8f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045851_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "37e91544e00332286c76019d4c9763d9f8e1fda49b10719edf8bc928b3357993",
+      "labelSha256": "3387da59c7febb19156e4e903fbdd483e6d2c2c490ec2ff4ee0b97abe71b205a"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045921_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "5864d70d42c4485b1fbb63cd05fb1799829e10507653ad9650f2d2c718762685",
+      "labelSha256": "1a115fd30ea3bc9e61ecf7decb9f112d1eb6e8b70048f4e231fbb002cc6b8fb0"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T045951_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "8f9f912ee41fd774b1b59b072bde7792826408fb7c572228bf72d50210249ab9",
+      "labelSha256": "3e15ad2ff168ea7b7254cf1ae8197db34d94a426b25a7fe014b492547a6b2333"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022186T050021_V01",
+      "volume": "jnojir_2043",
+      "imageSha256": "fcf39e8e930fa5362c013392ecf20af77b7dc8071739ad71eb23d7275ba753c0",
+      "labelSha256": "dbed7682f4fbb40f58d17175c9a634d77993c921a31eae7ae96db2623c27c523"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232208_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "107a163dd0639fdccbda4039fb9b5e8bf3b51ec813ad7a9fa88f023e2085356e",
+      "labelSha256": "aef0f6645902f7bc1124bb099314420ee9da679cdf209e132dd5e61832037ce7"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232239_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "8f6a601ba791c0672d914335933656da265a5ec9e37047f00bde9ee54841b564",
+      "labelSha256": "cb76ef40556f569c545318e388122e0e7c391f7d0f6a8176b32c3bef64b5814b"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232309_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "5facb20ad142ef0f55eb137ddb07a2a31bb3b40144af99a43aff013eb7c25690",
+      "labelSha256": "684374f18a8b37aa653b410adf08153fbc8d4dec4e0b4d6d5b0f85962efa9ac2"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232339_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "b65a151e47b09e9aee7eae212c1405950f2b7ddcd6feaa1f2e6fea9abaf619f9",
+      "labelSha256": "9c9edbeeea29792b9c69b65b1e2bdce79a2d1b8798f6ae392885f04c49338544"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232409_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "3bf3794fa8ccee6dde16f964a8f1e4dc8bdb8ae3dae89726ea3a932e354134c5",
+      "labelSha256": "351f3bb398b86861c3a4ca99269fe4dc483f34f3e9826233b7477ba5cb8a3d4f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232440_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "87586d8a702eeeeef3dd94a347b8aa25b767b33ff35e71af7c3329288e57b8d2",
+      "labelSha256": "5ced30d8b16c485f224f3794b67fb8500893cd80fba77320c776ce61c78ebe7c"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232510_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "d81cee191a80a3465fea1d5286aba57a790f37c5dc8c6cd999267e46e0f12491",
+      "labelSha256": "5044f0d550bb5fd6b9cc0c96f4ec606c684af09d4b63e21d51a41ca343c36f11"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232540_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "d13cf1cfd9e6d2fb0fae132a8ead046320ff27681574ee920e658c377b70eff9",
+      "labelSha256": "c2c86c1eb1b03fc6029cde91b7037b72d5dbef2bb8f616e7911b91e8d9c83ff9"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232610_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "a3a466898eec2e6830545797658172be3c6537e61828a620ee711ae9af0f02d3",
+      "labelSha256": "a8561103bd04f4419d9f61ca6f472f49687ee704819db083ce38115d4291b524"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2022348T232641_V01",
+      "volume": "jnojir_2047",
+      "imageSha256": "ddcb52a7459955046ef67295d649b6388df20848faf004ce220954dd9fda5a80",
+      "labelSha256": "d1ec94bdcbe25c92166893deffef7144c8655621ac35fba0001eb71362b08e29"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011643_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "2f8f95272f05756ef210e8e6d8309d2e3372f6c06bb58af7c60b5cec0d24c784",
+      "labelSha256": "8232758ac5269812780bf47510ae1e66f1f1f7183de93206b6ad1f038a6527a5"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011714_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "f1b3fedd720411f4980879b8b589b45256d433a9692bb197cef31ad95c4773fd",
+      "labelSha256": "6991100cb7f9b0dcc95bf6d0dc64ffd63d30398fc4f06d50a37afd5fea1108b0"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011744_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "a01ea2c03a4ba73b6cfcca9167f621e4d731c0ac205996190d12bb7d70d66fa2",
+      "labelSha256": "fc792b7886140a39a8ed1e3dc15f7f80d9f729bf9dc57031a8c9c244aa25117e"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011815_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "ae464c4e025565dc05e920c156db8cc56e930316bfa4106de771672c58228234",
+      "labelSha256": "68d890bb501c031b3672241bb90215d3595a4201d9144c946639109ec9fc563e"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011845_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "e1b1bee938c3e1a20a8bdec4fe0683b09dfed9261bd0aa53c630bb2fc1323401",
+      "labelSha256": "1b01cc0f408506c7b29f53f46caa659714f3825f57fb341d3b48a31f122ece60"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011916_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "ff6ad98c9d696313ba4b9155d023ccbdccb0afc1b6e09c6a99f8c1366a4878d8",
+      "labelSha256": "6c67301abdd4c663bbe2c21f3cb17cecda3497888a2c7b6aacaea56ff70f5795"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T011946_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "620e78f84a91ef8090cd2eb317deb7ffd5fc218ceee4c185a79f3416f3d3088c",
+      "labelSha256": "b72cb7ea5f6a276b9783d0a70f082bd6a6f9a1e3909c6370802fddbfd78dcea1"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T012017_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "0dc61dfdad2e7a8127379d24c22b9ddd70d3a00fa71daa55a76ec0397bcb8368",
+      "labelSha256": "f730af037e877ba1c3546760e8b0cd8fdcd2d0e8e01373069c97304b7b49400e"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T012047_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "16b5e3adcf2c419d53c394e7d60a4be8f327bbffbff75cb7ee2465070f89086f",
+      "labelSha256": "1c168c06d66d954e2d3c7dd6c8ebb4dfdba15c3fef0af25c3f99628429557eb4"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023060T012118_V01",
+      "volume": "jnojir_2049",
+      "imageSha256": "998fee1c7381a8f977eb23511d731f8d91a3323a5f5ce52a384e650758102b30",
+      "labelSha256": "244acd1a375ce4ad241a189af0bf0dce57972ed4d290570104be36c2e91eaed5"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T024021_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "883ae787754202cf83fc5e7b6adc7c5b2c09ca8508e3d66073735db9582a4d4d",
+      "labelSha256": "f936b676bc350a6785eebac2cdb55a2098a716a9f04a75c9682269bbc3d96b74"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T024122_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "bc047eec61f762b1cf7f68841e2ca2df9fde83ad8d3df49749dc6b9e9655c18c",
+      "labelSha256": "d3694f420bd1fe56549d90ad1bd5d7892737db757b9a22d5fcf616de5cfc8f05"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T025027_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "53cd772c6b19dc0de80e1a4184383113762338a3f45a77f036bd6247cf56834d",
+      "labelSha256": "a17b34dc17e8eb89cbff39b60b3d013a38c190a48028ce1afe8ce20843139010"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T025128_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "c56b7b3e6731b479533e02dd1970dffb5005175a7cfbcecd44150da592b15709",
+      "labelSha256": "c8b1ca93c946501a3f7479e3716ae5eac2351c4f8503c59bcd6a2979e235052e"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T025228_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "acbe0beb27d886d59595c5fe42c2b7c281ed28dd1f339b787134acc70969dc37",
+      "labelSha256": "414b26dc50053eeb9b3acc4b8d9b69702ffd39a8a679618d2037f32697c28a05"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030104_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "f7a31b539884571ec1b4dd04cf1f4c0e357b65ab4879b20a2c6e15ede652a695",
+      "labelSha256": "40910887c37733fd066f7293ac1ef17aaf0bb22e4878c630f455cdf6d5babf50"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030205_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "a1664a5e562b804e142c96b89702e205efba38785ff682d21fcbf5b59d092a49",
+      "labelSha256": "a26a197639bb9c04dac3e635b4c8bdbcfbb94111fc004bf4464286e457a99d58"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030305_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "b1851445964ec944504217ae205965552ad6c85cdd34c562873eb53466c6031a",
+      "labelSha256": "8c3d4077904f4d8c3b2a12c57ef33863aa82f59e9262ae66551f1e63b1f3e5c6"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030406_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "95af323268972bc04d53b2cb678a01895b9365ad688ba9bd98e0ed9af6313712",
+      "labelSha256": "80917845d7dd1acb2b8dca1d480e46989393d56405d1b656fde7656950de24f3"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030507_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "104ed9d8d1c6ce50b9fa6bdc0cd72cfd1c58a7a9997be100534436cd58ba6030",
+      "labelSha256": "99f8d42dba3b558f54455b1f685376d1d1f9cbb5a7301cc102680d4bf344c254"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031010_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "2451cbf29e59262295f729ba438c72eb3dad2840f289baf57fc3cc71911413aa",
+      "labelSha256": "76bf43248b192e8f5b6b1ba79c2f9d77733092bf3e5ca67dcb9fd01eb0b1b150"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031111_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "739f06ce5a4e0895cfb1625986e6d52473a9d9522e4e8b2fa6366d8ba9c1b2d4",
+      "labelSha256": "cbf1382c9a36b9b88e3c6016c7fca8d10ff540c89ec24e666b72fb51671135fb"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031212_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "dc28f046c6c49968a12fbf3fa1251ce44ad5cdc1f5c0e4b96eaaea38512dfc41",
+      "labelSha256": "e8590833ea67018c0674f67fe69db66d34b2476299ea20ae80bf760abd17f74c"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031313_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "3be804276fb07e9daeffb7cf4e567ed468f7594b1c66ac0727f4db79e06824fc",
+      "labelSha256": "63cd5468e287ce63a8978512d310a793a999cc1b6c2235ed8042bf6d07b8141f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031414_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "ad9d743b8caba21daee81a3ccd7b3002a36161f698bba0669fa893619a58adcd",
+      "labelSha256": "781f491b2fe98de163c33cf3a4cf959c2f793e3755d7946aea780c7ea302abcb"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031514_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "9a258f11c20e615c0bb0a6bccbb5174fbbc5fc25b3d2fae2e3cea580ce40accb",
+      "labelSha256": "e27f592ea50dbfa6cccd8deac322fa1c75a44c48ff9e135bd84594375c6f5843"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031615_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "4e8ad05263019a5cca5b7a1d577a0e7ff12666ff86a92bd47c3b14a05bd10851",
+      "labelSha256": "38209189556bee72bf8dc1f51feb52b1c685f7afedf846cac83f9672be56191b"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T032017_V01",
+      "volume": "jnojir_2051",
+      "imageSha256": "2f12c885ea5af6b1ccf0b3bce47317d5fc7d2b6f07b52e252ea86e2a01518567",
+      "labelSha256": "d2a8b5f0036b663b832a241d279c3b6f054971e84105525eeca33af6028ec8fa"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T043915_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "10f98e8a1ca9a9c21141c84fac62b5ecf8a3659a2d3d06dfc596d0e851141661",
+      "labelSha256": "d86ad6c14b1a2f99cd34d7109cb87951af643489a36a3c3d0270807010a42c9a"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T043946_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "a2b22faab7557ad7aaae605076a1840af226dbf98a6c8bce2a8db04f4dc50ecb",
+      "labelSha256": "47dad90037578a5377bfafc37c66c5b599e0006a7f370d56d6e10bf8be2f637c"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044017_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "87a6d731128ccdc5e83c8c054b8f1b52025d3a7f49b0aceadc1da79861094caa",
+      "labelSha256": "601b73085b472d6091bb8dc005ed1de36cae7d941754371fb02b4639dad7220f"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044047_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "b89d954a07dda9a79262bf44aa2e8166edd53b063780141a51450ad2e6bba077",
+      "labelSha256": "1c92b6577a709fbe347be0ecb0c2d7cc666098492c5377f86514c468d4015b7d"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044118_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "c0c08b38b875b961e2b34325a4465ed9a4cba3ba5ba3b84d8247ff80c460c892",
+      "labelSha256": "0262a73edc71d966e1ef03f4cdf444609955252ff0832078c1c08d76666381ca"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044149_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "5dd096fed274a7efb73e021d4120bbfba67d71252fd79d3fdcff58a078a9e427",
+      "labelSha256": "be932a258b4b3fa619416ba325fe1a439afa079539fc59962cd0a3fc51ca2277"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044219_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "7cb4ae8c942d2c1054c8ec2c6f6ddfd6cc485221675461d6ef6a4796590d3837",
+      "labelSha256": "66724e493a78d04255fdd2f32a1634deaae8805ec01f116a1edb6782df2a0103"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044250_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "7d3d9a3939f00cb0690936ffabb4e8d930d6ecd0a5e1b3ee712ef11da054c604",
+      "labelSha256": "1eb68360e0b6fb707507be5bc1b8c3c898d4ee004b5565a86ee305639658ad62"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044321_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "ef66a5cb9087792ae62d81096c790f303f091a58c9aa802f119db78f315e6901",
+      "labelSha256": "4cdfbf83b09057916c5595477e3848090f106bd689920aa479da264e47c75492"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044351_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "ff74387049b29c89b4faf0fc7547329f79259e36756aa2e82bd9e8d7e40fa782",
+      "labelSha256": "b22d4938a5b8bbc48597b0180c708548be54879265ed30e9d3c8aa9c429e50f1"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044422_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "2cfbbb5ad2cd9d309b96c2741489a6f5a92f78eba69bdad21de773834072ccf1",
+      "labelSha256": "04716db1d8fb2b18ebe80bdd126bdc224a3e9eda6258d411edf412433bd298e0"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044453_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "21213c9b477c290fa6f92f9d140e6797358fc6fca122ad66694da9ca7e79de3c",
+      "labelSha256": "a87e3a4c18386f0863602bf736ce99a0a7246e6dc035f802879fd8caa41c0764"
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044523_V01",
+      "volume": "jnojir_2053",
+      "imageSha256": "823b35019f15ff26052a7e1e543cea01afb525dc170c116573cea3a330338c1a",
+      "labelSha256": "2f74bdee51fcb171f6666d4ef6a58f17960147a77c02753db98878bada89b2f0"
+    }
+  ],
+  "detectorChecks": [
+    {
+      "productId": "JIR_IMG_EDR_2023136T024021_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "c52f8895c205919e1f570c45f5bb397d57f439c2213318405425bac150229b4c",
+      "labelSha256": "c712ef0680cf0d69e585ce07a9d96c4fa8f57847cf1243dfc42282fcda7a4dc3",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T024122_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "4fc5a996ad774db8030e3d9210cc2850c52077eb3a3a0c4048676ac273bdb8ee",
+      "labelSha256": "4f28805f3def0025ee3cda549475afc4ae036a67195be1b297bbe9abbab1310c",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T025027_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "c00271630bc8a7f8a6877051ff5f03fc0f94127245aca5139e8ca2e570909271",
+      "labelSha256": "8a72f14775bcd5c0e8502d645ee2a7abad8321e7d0393a4258a7ba2fa1c91f8e",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T025128_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "2d46d2d1babb7ef4b72b16204d7ff40ba98ee61adee3d94401cef4f45d0bf230",
+      "labelSha256": "138ddd47ff66f78d535c364023618c2f704cbc118e0e514ded68a24eb092e038",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T025228_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "61b32ceba3c687504a7460aeea1ab73afb06122dda960cea5aaaac92b540cc3b",
+      "labelSha256": "94484986d7bd0d2697ba4b86842b6902183950cfab919a8d87eca610de2c1aff",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T030104_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "88c5ae308ba129913fb4df347a40ee24323dece468452f9db714694506b10208",
+      "labelSha256": "9a5df78cfc2a19696d31903286b9d72326dd814345c91097bb0fc3194c23843a",
+      "maximumDn": 10000,
+      "withheldPixels": 6
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T030205_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "6691634d311929a4e174d8f072a42a6fee470cef08dba8c67265e2ff6c3527a8",
+      "labelSha256": "5f56798a05041953ff79881d1ad198106725481c4bf61b007888f62189e3af7d",
+      "maximumDn": 10000,
+      "withheldPixels": 9
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T030305_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "181ca6be0e334b6a27495afff644e554ed62e182e0a2cfddc4dda100bab296c6",
+      "labelSha256": "0e5e71ec3934e4a27ceec8167cf7544dee4132b2e65d9113da13d692de86533e",
+      "maximumDn": 10000,
+      "withheldPixels": 3
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T030406_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "a19438b84df61e2ab980c1ae9800ef739884667be534a80a0bdced62cc50942c",
+      "labelSha256": "d71d8d2acbe8b45121e2eb5ca82e3f35e11aefcac6ecef1cbee1a31b18751524",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T030507_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "965ab2c36a14b276403bc3b522563326868231d8895e7cac029a7bbbbca5a128",
+      "labelSha256": "03e088319ba2f3f0687b5811905ae4005cc4e70c82870ed797bf7a4f9655f515",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031010_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "bfe04022aa1cfdb9545f67b853418e1426d95e2a3a155e35da54b34bd1eb4a7a",
+      "labelSha256": "c2025022ef382371985478b7682b23fd981b27951d438140d5e70c1d2a968dcb",
+      "maximumDn": 10000,
+      "withheldPixels": 12
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031111_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "5ac18eb6b32404ca13bb39811adfc552385cc64ee25e54fe20d81dabffa4589c",
+      "labelSha256": "2c2851821763106a0a474dd3fd28804b7915d7b9ccce0d68a04615ab3634c1f3",
+      "maximumDn": 10000,
+      "withheldPixels": 14
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031212_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "45f7d91e53ffee5a44a3f7a3348e9d4ecf2a4563956842ee8bf8dae41e9ebbdd",
+      "labelSha256": "fb36d63119ae7fbd792b65cc098f896b46b9cfa9c7e924ae2ad191787f4c6aaa",
+      "maximumDn": 10000,
+      "withheldPixels": 5
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031313_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "c26b5d969b85134d5fdf1af16f6065a341e17a5bbe09c679cfc4d40a14f3d2b4",
+      "labelSha256": "55b80081d107cbb53166f9a9384ae0d2f875637ce5342c96a51686102a00db4f",
+      "maximumDn": 10000,
+      "withheldPixels": 7
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031414_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "fd2f3b9c00e570272dee95da998cbfed48176a5ff75b2526eb7ca754b8c242bf",
+      "labelSha256": "64c242c114123408fb6d2685695e958af02baf9422ef82dc4863edfb7d69e333",
+      "maximumDn": 10000,
+      "withheldPixels": 1
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031514_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "ce03248d1a5e8c709f73f2fd0c54f97ef4d479700ca3588c8e625c2e1956c5e3",
+      "labelSha256": "f03d3b03c58c6ef8af128b83f9125d25c881176e38e7487365572367a85f3ace",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T031615_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "299ecadbad8941e4068129c1f3046f52445578e48cc28b1e28bcd1a90ec83afc",
+      "labelSha256": "0a19633e6c3eb921e77e6b4cba60124bfd9a21d322d2869dc6fe8e06802b4b6a",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023136T032017_V01",
+      "volume": "jnojir_1051",
+      "imageSha256": "5981f91169ff7765d2ae36102f2f43fb5466849bc6087ba5fcfc7b72424a8c9c",
+      "labelSha256": "2ea4238472d9958d582546bf3c9553f31cbcae626e72668ed33e2565d8910898",
+      "maximumDn": 10000,
+      "withheldPixels": 76
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T043915_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "82dd691de061f3d8550dff75854c044ace93634c735aebdd55898fd396fef104",
+      "labelSha256": "b4b36512f8a1481f44ce7d575d2c4eab371d91d647c4784a601dea0d9822086a",
+      "maximumDn": 10000,
+      "withheldPixels": 3
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T043946_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "98febb7a22cf288e8cf37968503e0d7058a34ffbb7b4141eb01d879874a60c72",
+      "labelSha256": "0298584e2e17feca6588a49297eeb65ebb1873283efb1fdff121acbfc15f90a7",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044017_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "70a616041bd82ff02728762ece9264a6248cd81c7a72f6ca6e4a8bc9b24a416f",
+      "labelSha256": "a7a8a8eb40b8689df0304430c4133eec7b1175061b243ba0e19a1197ee2d8f65",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044047_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "fbb16adc133a78aa0114a4c762d5083e9c1c68b908f4a5cc28955f188b3e7a5a",
+      "labelSha256": "d28766568280de55e108ca93a45fae90ec7c55ee9a90453781e114c56e0ed3e1",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044118_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "6b59217d90034689a30652787961bca0d4e123cb41ac5f0f5a620d9182041e08",
+      "labelSha256": "d5355ec7733ce77ca3e0b509d67ac3349e471a38acc75afe23ea4e054df7f1fe",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044149_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "4aa1797f7c895fbd8759b94cf1c0dc8ee9893b1a1731e7911a04a9ae9a4ca93b",
+      "labelSha256": "a962f37777f13a94f75761e5e3d510cd01a30500d3ae413ee349a532b8bacfc6",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044219_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "c38dde6af6ed1c3175d7e80a6553b70555b4c0571ebb67411642c66fc267f135",
+      "labelSha256": "b54eb01b5559acae2d19fe3a066b4667925961976bbae75a93d42864be6da696",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044250_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "7f6ff48f30206e9d2738e51edd6a51b9794a2e4a9d2246000c54cdff026fe1fe",
+      "labelSha256": "699100c3152ba9fa6e318c2da85d2a539942ac1a04e9dd7536626deacf1a9d18",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044321_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "f1a0309e92743a5186a7db3a1b7645e3193454f067438fd4ad7ff7906762e259",
+      "labelSha256": "61229f4cae41f388c6156001a1941d6f87bca4d477773f1f8284269bd85646e0",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044351_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "f0068c7ae71cc770ed1598bf4ac61261354779fb52de983ddad336b058d7fe92",
+      "labelSha256": "1f1eec0fce573c9b321d47665afa11b78f92582fea3c7d2c4224c3e3a2600cdf",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044422_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "4e85f65f07b7882449bab5cb048af919432457ec3299a326733df97919901896",
+      "labelSha256": "a22ee754f13f67e39acae734aeb0c2dc351f6836207b4a6abf4d5b55998c7fd2",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044453_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "71943cd4134ee3a414106ec1be77208c86957c84cafaca1f7aea6a8739bfde81",
+      "labelSha256": "8048779ca6165fb49fca0274e10698f7f46e9d6807aa74d59dc32fe0381c949f",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    },
+    {
+      "productId": "JIR_IMG_EDR_2023212T044523_V01",
+      "volume": "jnojir_1053",
+      "imageSha256": "0e64ee6170e6664373d3191a0346b4fa4582d14604ac7eba978f324438e64193",
+      "labelSha256": "281c0297aa4005fe68163d3e1766dcba6d2ec02c91c3ed9073a129eda95c2fbc",
+      "maximumDn": 10000,
+      "withheldPixels": 0
+    }
+  ],
   "radiiKm": [
     1829.4,
     1819.4,
@@ -25,30 +821,40 @@
   ],
   "ifovRadians": 0.000237767,
   "coverage": {
-    "cells": 259200,
-    "nightCells": 57224,
-    "fraction": 0.2207716049382716
+    "cells": 1036800,
+    "nightCells": 240067,
+    "fraction": 0.23154610339506174
   },
   "visits": [
     {
       "id": "2022-04-09T11",
       "frames": 20,
-      "winningCells": 2724
+      "winningCells": 8532
     },
     {
       "id": "2022-07-05T04",
       "frames": 19,
-      "winningCells": 6265
+      "winningCells": 24169
     },
     {
       "id": "2022-12-14T23",
       "frames": 10,
-      "winningCells": 29098
+      "winningCells": 61762
     },
     {
       "id": "2023-03-01T01",
       "frames": 10,
-      "winningCells": 19137
+      "winningCells": 11092
+    },
+    {
+      "id": "2023-05-16",
+      "frames": 18,
+      "winningCells": 79707
+    },
+    {
+      "id": "2023-07-31",
+      "frames": 13,
+      "winningCells": 54805
     }
   ],
   "frames": [
@@ -180,6 +986,11 @@
       "phaseDegrees": 89.66,
       "litPixels": 7634,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 4,
@@ -196,6 +1007,11 @@
       "phaseDegrees": 89.24,
       "litPixels": 7645,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 26,
+        "median": 0.00039999998989515007,
+        "maximum": 0.0009500000160187483
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.54,
@@ -212,6 +1028,11 @@
       "phaseDegrees": 88.83,
       "litPixels": 7666,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 43,
+        "median": 0.00039999998989515007,
+        "maximum": 0.0017999999690800905
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 1.98,
@@ -228,6 +1049,11 @@
       "phaseDegrees": 88.41,
       "litPixels": 7683,
       "sunlitRadiance": 0.02342,
+      "background": {
+        "columns": 55,
+        "median": 0.00044999999227002263,
+        "maximum": 0.001500000013038516
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.11,
@@ -244,6 +1070,11 @@
       "phaseDegrees": 88.01,
       "litPixels": 7697,
       "sunlitRadiance": 0.02198,
+      "background": {
+        "columns": 59,
+        "median": 0.00039999998989515007,
+        "maximum": 0.001600000075995922
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.32,
@@ -260,6 +1091,11 @@
       "phaseDegrees": 87.6,
       "litPixels": 7706,
       "sunlitRadiance": 0.0224,
+      "background": {
+        "columns": 60,
+        "median": 0.00039999998989515007,
+        "maximum": 0.0018500000005587935
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.23,
@@ -276,6 +1112,11 @@
       "phaseDegrees": 87.19,
       "litPixels": 7733,
       "sunlitRadiance": 0.02276,
+      "background": {
+        "columns": 61,
+        "median": 0.00044999999227002263,
+        "maximum": 0.0020000000949949026
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.12,
@@ -292,6 +1133,11 @@
       "phaseDegrees": 86.79,
       "litPixels": 7741,
       "sunlitRadiance": 0.02237,
+      "background": {
+        "columns": 61,
+        "median": 0.00039999998989515007,
+        "maximum": 0.002050000010058284
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.03,
@@ -308,6 +1154,11 @@
       "phaseDegrees": 86.39,
       "litPixels": 7762,
       "sunlitRadiance": 0.0226,
+      "background": {
+        "columns": 59,
+        "median": 0.00044999999227002263,
+        "maximum": 0.0012499999720603228
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 1.95,
@@ -324,6 +1175,11 @@
       "phaseDegrees": 85.99,
       "litPixels": 7777,
       "sunlitRadiance": 0.02275,
+      "background": {
+        "columns": 31,
+        "median": 0.00039999998989515007,
+        "maximum": 0.0007999999797903001
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2,
@@ -340,6 +1196,11 @@
       "phaseDegrees": 85.59,
       "litPixels": 7798,
       "sunlitRadiance": 0.02268,
+      "background": {
+        "columns": 3,
+        "median": 0.00039999998989515007,
+        "maximum": 0.00039999998989515007
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.18,
@@ -356,6 +1217,11 @@
       "phaseDegrees": 85.19,
       "litPixels": 7650,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 1.76,
@@ -508,6 +1374,11 @@
       "phaseDegrees": 94,
       "litPixels": 11259,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.11,
@@ -524,6 +1395,11 @@
       "phaseDegrees": 93.53,
       "litPixels": 11366,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 44,
+        "median": 0.0006625000096391886,
+        "maximum": 0.0015750000020489097
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.05,
@@ -540,6 +1416,11 @@
       "phaseDegrees": 93.05,
       "litPixels": 11460,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 70,
+        "median": 0.0006250000151339918,
+        "maximum": 0.004699999932199717
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.19,
@@ -556,6 +1437,11 @@
       "phaseDegrees": 92.58,
       "litPixels": 11554,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 82,
+        "median": 0.0006625000096391886,
+        "maximum": 0.003800000064074993
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.26,
@@ -572,6 +1458,11 @@
       "phaseDegrees": 92.11,
       "litPixels": 11650,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 87,
+        "median": 0.0006000000284984708,
+        "maximum": 0.002749999985098839
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.37,
@@ -588,6 +1479,11 @@
       "phaseDegrees": 91.63,
       "litPixels": 11744,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 91,
+        "median": 0.0006500000017695129,
+        "maximum": 0.0024500000290572643
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.17,
@@ -604,6 +1500,11 @@
       "phaseDegrees": 91.16,
       "litPixels": 11843,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 92,
+        "median": 0.000699999975040555,
+        "maximum": 0.0022499999031424522
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.39,
@@ -620,6 +1521,11 @@
       "phaseDegrees": 90.69,
       "litPixels": 11938,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 88,
+        "median": 0.000674999988405034,
+        "maximum": 0.0027000000700354576
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.9,
@@ -636,6 +1542,11 @@
       "phaseDegrees": 90.22,
       "litPixels": 12046,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 68,
+        "median": 0.0005499999970197678,
+        "maximum": 0.0016250000335276127
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 2.79,
@@ -652,6 +1563,11 @@
       "phaseDegrees": 89.74,
       "litPixels": 12144,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 28,
+        "median": 0.000512500002514571,
+        "maximum": 0.002899999963119626
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 3.73,
@@ -787,6 +1703,11 @@
       "phaseDegrees": 91.59,
       "litPixels": 20319,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 102,
+        "median": 0.0006000000284984708,
+        "maximum": 0.005350000225007534
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 3.69,
@@ -803,6 +1724,11 @@
       "phaseDegrees": 91.07,
       "litPixels": 20402,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 117,
+        "median": 0.000699999975040555,
+        "maximum": 0.0035500000230968
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 4.13,
@@ -819,6 +1745,11 @@
       "phaseDegrees": 90.56,
       "litPixels": 20499,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 121,
+        "median": 0.0005000000237487257,
+        "maximum": 0.004100000020116568
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 3.87,
@@ -835,6 +1766,11 @@
       "phaseDegrees": 90.04,
       "litPixels": 20594,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 115,
+        "median": 0.000699999975040555,
+        "maximum": 0.002950000111013651
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 3.31,
@@ -851,6 +1787,11 @@
       "phaseDegrees": 89.54,
       "litPixels": 20698,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 102,
+        "median": 0.0003499999875202775,
+        "maximum": 0.002099999925121665
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 3.05,
@@ -918,6 +1859,11 @@
       "phaseDegrees": 87.5,
       "litPixels": 17453,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 97,
+        "median": 0.0003000000142492354,
+        "maximum": 0.002899999963119626
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 5.02,
@@ -934,6 +1880,11 @@
       "phaseDegrees": 86.96,
       "litPixels": 26551,
       "sunlitRadiance": null,
+      "background": {
+        "columns": 115,
+        "median": 0.000699999975040555,
+        "maximum": 0.006800000090152025
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 3.99,
@@ -950,6 +1901,11 @@
       "phaseDegrees": 86.41,
       "litPixels": 30048,
       "sunlitRadiance": 0.02292,
+      "background": {
+        "columns": 123,
+        "median": 0.0006000000284984708,
+        "maximum": 0.006200000178068876
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 4.89,
@@ -966,6 +1922,11 @@
       "phaseDegrees": 85.85,
       "litPixels": 30731,
       "sunlitRadiance": 0.02149,
+      "background": {
+        "columns": 120,
+        "median": 0.00039999998989515007,
+        "maximum": 0.006000000052154064
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 5.28,
@@ -982,6 +1943,11 @@
       "phaseDegrees": 85.28,
       "litPixels": 31472,
       "sunlitRadiance": 0.02117,
+      "background": {
+        "columns": 118,
+        "median": 0.0005000000237487257,
+        "maximum": 0.006800000090152025
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 4.99,
@@ -998,6 +1964,11 @@
       "phaseDegrees": 84.71,
       "litPixels": 32201,
       "sunlitRadiance": 0.02159,
+      "background": {
+        "columns": 115,
+        "median": 0.0005000000237487257,
+        "maximum": 0.006399999838322401
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 4.35,
@@ -1014,11 +1985,667 @@
       "phaseDegrees": 84.13,
       "litPixels": 32273,
       "sunlitRadiance": 0.01988,
+      "background": {
+        "columns": 105,
+        "median": 0.00039999998989515007,
+        "maximum": 0.006400000303983688
+      },
       "registration": {
         "method": "lit-disc",
         "dx": 4.24,
         "dy": -536.56,
         "correlation": 0.7206
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T024021_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T02:40:19.226",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 64995,
+      "phaseDegrees": 106.6,
+      "litPixels": 15744,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 64,
+        "median": 0.0008750000270083547,
+        "maximum": 0.00793750025331974
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 0.85,
+        "dy": -532.93,
+        "correlation": 0.8246
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T024122_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T02:41:19.869",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 63530,
+      "phaseDegrees": 106.14,
+      "litPixels": 16757,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 139,
+        "median": 0.0010000000474974513,
+        "maximum": 0.0073124999180436134
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.02,
+        "dy": -533.87,
+        "correlation": 0.7651
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T025027_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T02:50:25.201",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 51345,
+      "phaseDegrees": 100.62,
+      "litPixels": 28880,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 86,
+        "median": 0.001687500043772161,
+        "maximum": 0.01549999974668026
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.64,
+        "dy": -532.84,
+        "correlation": 0.7953
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T025128_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T02:51:25.914",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 50130,
+      "phaseDegrees": 99.82,
+      "litPixels": 31034,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 170,
+        "median": 0.0012499999720603228,
+        "maximum": 0.01425000000745058
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.17,
+        "dy": -535.02,
+        "correlation": 0.7156
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T025228_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T02:52:26.626",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 48951,
+      "phaseDegrees": 98.97,
+      "litPixels": 33011,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 212,
+        "median": 0.0010000000474974513,
+        "maximum": 0.013875000178813934
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.19,
+        "dy": -535.15,
+        "correlation": 0.5345
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030104_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:01:02.050",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 40821,
+      "phaseDegrees": 89.82,
+      "litPixels": 56597,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 9,
+        "median": 0.0031250000465661287,
+        "maximum": 0.00787500012665987
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 0.82,
+        "dy": -536.82,
+        "correlation": 0.9228
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030205_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:02:02.837",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 40138,
+      "phaseDegrees": 88.51,
+      "litPixels": 60320,
+      "sunlitRadiance": 0.02314,
+      "background": {
+        "columns": 122,
+        "median": 0.000750000006519258,
+        "maximum": 0.007625000085681677
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.08,
+        "dy": -536.21,
+        "correlation": 0.9126
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030305_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:03:03.624",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 39525,
+      "phaseDegrees": 87.16,
+      "litPixels": 64140,
+      "sunlitRadiance": 0.02079,
+      "background": {
+        "columns": 177,
+        "median": 0.0006249999860301614,
+        "maximum": 0.007625000085681677
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.19,
+        "dy": -538.24,
+        "correlation": 0.7289
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030406_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:04:04.410",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38986,
+      "phaseDegrees": 85.77,
+      "litPixels": 55406,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 219,
+        "median": 0.0005000000237487257,
+        "maximum": 0.00712500000372529
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.17,
+        "dy": -538.55,
+        "correlation": 0.5688
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T030507_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:05:05.197",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38524,
+      "phaseDegrees": 84.36,
+      "litPixels": 41840,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 248,
+        "median": 0.0005000000237487257,
+        "maximum": 0.007249999791383743
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.15,
+        "dy": -539.56,
+        "correlation": 0.5894
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031010_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:10:08.466",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 37441,
+      "phaseDegrees": 77.1,
+      "litPixels": 82852,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": -0.05,
+        "dy": -536.86,
+        "correlation": 0.7506
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031111_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:11:09.267",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 37480,
+      "phaseDegrees": 75.67,
+      "litPixels": 84724,
+      "sunlitRadiance": 0.03214,
+      "background": {
+        "columns": 39,
+        "median": 0.0010000000474974513,
+        "maximum": 0.009499999694526196
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 1.69,
+        "dy": -535.66,
+        "correlation": 0.8744
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031212_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:12:10.065",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 37604,
+      "phaseDegrees": 74.28,
+      "litPixels": 86195,
+      "sunlitRadiance": 0.03111,
+      "background": {
+        "columns": 88,
+        "median": 0.000937500037252903,
+        "maximum": 0.00937500037252903
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.06,
+        "dy": -536.94,
+        "correlation": 0.9186
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031313_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:13:10.866",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 37813,
+      "phaseDegrees": 72.92,
+      "litPixels": 87297,
+      "sunlitRadiance": 0.02954,
+      "background": {
+        "columns": 122,
+        "median": 0.000750000006519258,
+        "maximum": 0.00925000011920929
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.88,
+        "dy": -535.32,
+        "correlation": 0.9095
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031414_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:14:11.666",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38106,
+      "phaseDegrees": 71.61,
+      "litPixels": 76285,
+      "sunlitRadiance": 0.02698,
+      "background": {
+        "columns": 154,
+        "median": 0.0005000000237487257,
+        "maximum": 0.00800000037997961
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.18,
+        "dy": -535.89,
+        "correlation": 0.8374
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031514_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:15:12.467",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38480,
+      "phaseDegrees": 70.35,
+      "litPixels": 56997,
+      "sunlitRadiance": 0.02324,
+      "background": {
+        "columns": 184,
+        "median": 0.0002500000118743628,
+        "maximum": 0.005249999929219484
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.85,
+        "dy": -538.25,
+        "correlation": 0.7899
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T031615_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:16:13.267",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38934,
+      "phaseDegrees": 69.15,
+      "litPixels": 35714,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 160,
+        "median": 0,
+        "maximum": 0.0035000001080334187
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 5.67,
+        "dy": -542.45,
+        "correlation": 0.8917
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023136T032017_V01",
+      "visit": "2023-05-16",
+      "utc": "2023-05-16T03:20:15.640",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 41470,
+      "phaseDegrees": 65.03,
+      "litPixels": 78843,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.13,
+        "dy": -536.06,
+        "correlation": 0.7668
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T043915_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:39:13.443",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 40215,
+      "phaseDegrees": 101.51,
+      "litPixels": 45547,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 225,
+        "median": 0.0012499999720603228,
+        "maximum": 0.014499999582767487
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.34,
+        "dy": -538.63,
+        "correlation": 0.5129
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T043946_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:39:44.112",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 39487,
+      "phaseDegrees": 101.17,
+      "litPixels": 47344,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 228,
+        "median": 0.0010000000474974513,
+        "maximum": 0.014000000432133675
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.26,
+        "dy": -538.64,
+        "correlation": 0.547
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044017_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:40:14.779",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38767,
+      "phaseDegrees": 100.81,
+      "litPixels": 49524,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 231,
+        "median": 0.0010000000474974513,
+        "maximum": 0.014000000432133675
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.24,
+        "dy": -538.69,
+        "correlation": 0.536
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044047_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:40:45.447",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 38055,
+      "phaseDegrees": 100.44,
+      "litPixels": 51920,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 207,
+        "median": 0.0012499999720603228,
+        "maximum": 0.014000000432133675
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.42,
+        "dy": -541.19,
+        "correlation": 0.5537
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044118_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:41:16.114",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 37352,
+      "phaseDegrees": 100.06,
+      "litPixels": 54693,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 182,
+        "median": 0.001500000013038516,
+        "maximum": 0.013249999843537807
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.61,
+        "dy": -534.81,
+        "correlation": 0.5617
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044149_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:41:46.783",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 36658,
+      "phaseDegrees": 99.65,
+      "litPixels": 57539,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 155,
+        "median": 0.001500000013038516,
+        "maximum": 0.013500000350177288
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.78,
+        "dy": -534.02,
+        "correlation": 0.5912
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044219_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:42:17.450",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 35974,
+      "phaseDegrees": 99.23,
+      "litPixels": 60403,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 127,
+        "median": 0.0012499999720603228,
+        "maximum": 0.013125000521540642
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.64,
+        "dy": -534.52,
+        "correlation": 0.7594
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044250_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:42:48.119",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 35301,
+      "phaseDegrees": 98.79,
+      "litPixels": 63259,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 97,
+        "median": 0.000750000006519258,
+        "maximum": 0.011874999850988388
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.33,
+        "dy": -537.88,
+        "correlation": 0.8615
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044321_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:43:18.787",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 34638,
+      "phaseDegrees": 98.33,
+      "litPixels": 66289,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 66,
+        "median": 0.000750000006519258,
+        "maximum": 0.012249999679625034
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.74,
+        "dy": -537.44,
+        "correlation": 0.9022
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044351_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:43:49.454",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 33988,
+      "phaseDegrees": 97.85,
+      "litPixels": 69485,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 33,
+        "median": 0.0010000000474974513,
+        "maximum": 0.012749999761581421
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.7,
+        "dy": -537.5,
+        "correlation": 0.9182
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044422_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:44:20.123",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 33349,
+      "phaseDegrees": 97.35,
+      "litPixels": 72710,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 2.79,
+        "dy": -536.79,
+        "correlation": 0.9166
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044453_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:44:50.791",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 32724,
+      "phaseDegrees": 96.83,
+      "litPixels": 73065,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 3.78,
+        "dy": -534.72,
+        "correlation": 0.8924
+      }
+    },
+    {
+      "productId": "JIR_IMG_RDR_2023212T044523_V01",
+      "visit": "2023-07-31",
+      "utc": "2023-07-31T04:45:21.458",
+      "unit": "W/(m^2*sr)",
+      "rangeKm": 32112,
+      "phaseDegrees": 96.29,
+      "litPixels": 63201,
+      "sunlitRadiance": null,
+      "background": {
+        "columns": 0,
+        "median": null,
+        "maximum": null
+      },
+      "registration": {
+        "method": "lit-disc",
+        "dx": 4.61,
+        "dy": -533.61,
+        "correlation": 0.8254
       }
     }
   ]

@@ -533,7 +533,7 @@
           {
             "id": "coverage",
             "label": "Coverage",
-            "value": "22% of Io; 34 Juno JIRAM frames, orbits 41–49"
+            "value": "24% of the surface; 65 frames on six visits, April 2022–July 2023"
           },
           {
             "id": "scale",
@@ -541,7 +541,7 @@
             "value": "Mura et al. (2024), Frontiers, Fig. 2"
           }
         ],
-        "notes": "Heat from Io's volcanoes at 4.8 µm, our own reduction of 34 Juno JIRAM frames from orbits 41, 43, 47 and 49 (April 2022 to March 2023), the orbits Mura et al. (2024) mapped. Only the night side is kept, where no sunlight is reflected. Each hot spot's total output agrees with the paper's; its peak is lower, because we do not sharpen the images as they do. Color follows the linear scale of their Figure 2. Gray grid: never seen at night in these orbits, including the south and Loki Patera.",
+        "notes": "Heat from Io's volcanoes at 4.8 µm, reduced from 65 registered Juno JIRAM frames on six visits, April 2022–July 2023. The May and July close passes add finer detail on a 0.25° map grid; their detector samples at or above 10,000 DN are withheld. A cold-night background is subtracted within each detector column to reduce reflection streaks. Color shows band radiance above that background on Mura et al. (2024), Figure 2's fixed scale, not temperature. About 24% of the surface is covered, mostly in the north. Dates are mixed; smear and registration uncertainty remain. Gray grid marks missing or withheld data.",
         "noData": true
       }
     ],

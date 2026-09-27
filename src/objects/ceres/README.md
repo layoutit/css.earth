@@ -23,6 +23,33 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
+### Band-centre maps (27 September 2026)
+
+**Clay band centre** and **Ammonium band centre** use the native
+`CMT_MOSAIC-BI_CENTER` and `CMT_MOSAIC-BII_CENTER` products in Dawn VIR global
+mosaics V1.0. They measure the wavelength of the absorption minimum, in µm,
+through the same detached-label reader as the existing Clay band. Source samples
+are unchanged: nearest sampling, no stripe correction or invented polar fill.
+
+The ranges, **2.71–2.75 µm** and **3.02–3.08 µm**, come from
+[Ammannito et al. (2016), LPSC 3020, Figure 2](https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf).
+The black-to-white heat palette is an authored display choice; values outside
+the range use its end colors. It is not a percentile stretch. The paper finds
+nearly constant band positions, not changing clay composition. Band centre
+does not measure abundance. The archive preserves stripes and checkerboard
+artifacts that must not be interpreted as deposits.
+
+The [numeric inspection](evidence/band-centres/measurements.json) validates both
+4102 × 1367 big-endian float rasters against their native labels and records
+coordinate samples, missing values and clipping counts. Median positions are
+2.7320 and 3.0614 µm; 98.84% and 98.88% of cells inside the roughly ±60° source
+band are valid. Poles remain missing. The 2.7 µm median is 0.005 µm above the
+conference paper's reported mean. The archived product was released in 2018;
+the cause of this offset is unverified, and this is not a pixel reproduction
+of the 2016 figure.
+The archive's record-count and acquisition-date inconsistencies described below
+also occur in the centre labels.
+
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
 | View | Both prepared levels, before → current |

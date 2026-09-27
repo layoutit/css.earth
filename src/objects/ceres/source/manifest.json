@@ -543,6 +543,226 @@
           }
         ]
       }
+    },
+    {
+      "id": "dawn-vir-ceres-bi-center-img",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_CENTER.IMG",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the native PDS3 product from DWNCVIR_2, release 1.0; its detached label validates identity, layout and map frame.",
+      "redistribution": "Public NASA PDS data; original binary restored from its origin or source cache, derived maps retain attribution.",
+      "consumers": [
+        "clay-centre"
+      ],
+      "lensId": "clay-centre",
+      "label": "Clay band centre",
+      "falseColor": true,
+      "format": "pds3-float-map",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          59.981887771699,
+          -60.002788883527
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 470000
+      },
+      "coverage": "Wavelength of the OH absorption in Mg-rich clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 2.71–2.75 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_CENTER.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-vir-ceres-bi-center-lbl",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_CENTER.LBL",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the native PDS3 product from DWNCVIR_2, release 1.0; its detached label validates identity, layout and map frame.",
+      "redistribution": "Native detached PDS3 label retained in Git.",
+      "consumers": [
+        "clay-centre"
+      ],
+      "lensId": "clay-centre",
+      "label": "Clay band centre",
+      "falseColor": true,
+      "format": "pds3-float-map",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          59.981887771699,
+          -60.002788883527
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 470000
+      },
+      "coverage": "Wavelength of the OH absorption in Mg-rich clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 2.71–2.75 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_CENTER.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-vir-ceres-bii-center-img",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_CENTER.IMG",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the native PDS3 product from DWNCVIR_2, release 1.0; its detached label validates identity, layout and map frame.",
+      "redistribution": "Public NASA PDS data; original binary restored from its origin or source cache, derived maps retain attribution.",
+      "consumers": [
+        "ammonium-centre"
+      ],
+      "lensId": "ammonium-centre",
+      "label": "Ammonium band centre",
+      "falseColor": true,
+      "format": "pds3-float-map",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          59.981887771699,
+          -60.002788883527
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 470000
+      },
+      "coverage": "Wavelength of the ammonium absorption in clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 3.02–3.08 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_CENTER.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-vir-ceres-bii-center-lbl",
+      "path": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_CENTER.LBL",
+      "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+      ],
+      "acquisition": "Retrieve the native PDS3 product from DWNCVIR_2, release 1.0; its detached label validates identity, layout and map frame.",
+      "redistribution": "Native detached PDS3 label retained in Git.",
+      "consumers": [
+        "ammonium-centre"
+      ],
+      "lensId": "ammonium-centre",
+      "label": "Ammonium band centre",
+      "falseColor": true,
+      "format": "pds3-float-map",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          59.981887771699,
+          -60.002788883527
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 470000
+      },
+      "coverage": "Wavelength of the ammonium absorption in clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 3.02–3.08 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BII_CENTER.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-vir-ceres-global-mosaics-v1",
+            "role": "material",
+            "evidence": "PDS3 data set DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, volume DWNCVIR_2, file listed under DATA/"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

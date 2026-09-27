@@ -5,9 +5,9 @@
  *   node tools/objects/juno/jiram-mosaic.mts <recipe.json> --frames <directory> [--fetch] [--previews <directory>]
  *
  * Frames are read from `--frames` (an ignored scratch directory such as output/jiram/frames); `--fetch` downloads any
- * missing frame and label from the archive the recipe names and checks it against its pin.
+ * missing frame and label from the archive the recipe names and validates their product identity and layout.
  *
- * The recipe pins JIRAM RDR frames (PDS3 `JNO-J-JIRAM-3-RDR-V1.0`) grouped by visit, and the Juno kernel-bank files each
+ * The recipe selects JIRAM RDR frames (PDS3 `JNO-J-JIRAM-3-RDR-V1.0`) grouped by visit, and the Juno kernel-bank files each
  * visit needs, and names the target (NAIF id, body-fixed frame, the label TARGET_NAME values accepted, the reference radius
  * written to the output label), the band (instrument id and pixel-model keys, which lines of 128- and 256-line frames hold
  * it, the unit written to the label) and the side to keep. For every frame the camera comes from the kernels (the band's
@@ -21,7 +21,8 @@
  * thermal emission and no reflected sunlight, or `day`, lit cells with solar incidence below `maximumIncidenceDegrees`.
  * Each cell takes the median of the frames of one visit that saw it on that side (at least `minimumFramesPerVisit` of
  * them, which removes the single-frame particle hits), and across visits the visit that saw it with the smallest pixel
- * footprint. Values are the archived band radiance, unchanged; cells never seen on that side are missing.
+ * footprint. An optional night-column background subtracts detector reflections before projection; it measures radiance
+ * above the cold background, not total thermal output. Cells without qualified observations remain missing.
  *
  * Output: a PDS3 simple-cylindrical float map with a detached label, as `pds3-float-map` reads it, and a receipt with
  * every frame's registration. */
@@ -41,8 +42,8 @@ export const RECEIPT_SCHEMA = 'cssearth-jiram-mosaic-receipt@1';
 /** The JIRAM imager: 432 samples, each band filter 128 lines. */
 const JUNO = -61, WIDTH = 432, BAND_LINES = 128;
 
-export interface JiramFrame { readonly productId: string; readonly volume: string; readonly imageSha256: string; readonly labelSha256: string }
-export interface JiramVisit { readonly id: string; readonly kernels: readonly string[]; readonly frames: readonly JiramFrame[] }
+export interface JiramFrame { readonly productId: string; readonly volume: string }
+export interface JiramVisit { readonly id: string; readonly kernels: readonly string[]; readonly frames: readonly JiramFrame[]; readonly maximumDetectorDn?: number }
 /** Where a frame of this many lines holds the band; a mode prefix, when stated, is required of the frame's INSTRUMENT_MODE_ID. */
 export interface JiramBandLayout { readonly firstLine: number; readonly modePrefix?: string }
 export interface JiramRecipe {
@@ -50,6 +51,7 @@ export interface JiramRecipe {
   readonly target: { readonly name: string; readonly naifId: number; readonly bodyFrame: string; readonly labelNames: readonly string[]; readonly referenceRadiusKm: number };
   readonly band: { readonly name: string; readonly instrument: number; readonly pixels: PixelModelKeys; readonly frameLines: Readonly<Record<'128' | '256', JiramBandLayout | undefined>>; readonly unit: string };
   readonly side: 'night' | 'day';
+  readonly background?: { readonly method: 'night-column-median'; readonly minimumSamples: number };
   readonly output: { readonly image: string; readonly label: string; readonly receipt: string; readonly productId: string; readonly pixelsPerDegree: number };
   readonly policy: {
     readonly minimumFramesPerVisit: number; readonly maximumEmissionDegrees: number; readonly terminatorFootprints: number;
@@ -69,10 +71,13 @@ export function parseRecipe(value: unknown): JiramRecipe {
   const strings = (v: unknown, what: string) => requireArray(v, what).map((s, i) => requireString(s, `${what}[${i}]`));
   const visits = requireArray(recipe.visits, 'visits').map((v, i) => {
     const visit = requireRecord(v, `visit ${i}`);
-    return { id: requireString(visit.id, 'visit id'), kernels: strings(visit.kernels, 'visit kernels'), frames: requireArray(visit.frames, 'frames').map((f, j) => {
+    const maximumDetectorDn = visit.maximumDetectorDn === undefined ? undefined : requireFiniteNumber(visit.maximumDetectorDn, 'maximumDetectorDn');
+    if (maximumDetectorDn !== undefined && (!(maximumDetectorDn > 0) || !Number.isInteger(maximumDetectorDn))) throw new Error('maximumDetectorDn must be a positive integer.');
+    return { id: requireString(visit.id, 'visit id'), kernels: strings(visit.kernels, 'visit kernels'), ...(maximumDetectorDn === undefined ? {} : {maximumDetectorDn}), frames: requireArray(visit.frames, 'frames').map((f, j) => {
       const frame = requireRecord(f, `frame ${j}`);
-      return { productId: requireString(frame.productId, 'productId'), volume: requireString(frame.volume, 'volume'),
-        imageSha256: requireString(frame.imageSha256, 'imageSha256'), labelSha256: requireString(frame.labelSha256, 'labelSha256') };
+      const productId = requireString(frame.productId, 'productId'), volume = requireString(frame.volume, 'volume');
+      if (!/^JIR_IMG_RDR_\d{7}T\d{6}_V\d{2}$/u.test(productId) || !/^jnojir_2\d{3}$/u.test(volume)) throw new TypeError('Expected a JIRAM RDR image and archive volume.');
+      return { productId, volume };
     }) };
   });
   const output = requireRecord(recipe.output, 'output'), policy = requireRecord(recipe.policy, 'policy'), unitScale = requireRecord(recipe.unitScale, 'unitScale');
@@ -96,6 +101,12 @@ export function parseRecipe(value: unknown): JiramRecipe {
   };
   const side = recipe.side;
   if (side !== 'night' && side !== 'day') throw new Error('The JIRAM mosaic side must be night or day.');
+  let background: JiramRecipe['background'];
+  if (recipe.background !== undefined) {
+    const entry = requireRecord(recipe.background, 'background'), minimumSamples = integer(entry, 'minimumSamples');
+    if (side !== 'night' || entry.method !== 'night-column-median' || minimumSamples < 1 || minimumSamples > BAND_LINES) throw new Error('Column background requires a night map and 1–128 samples.');
+    background = { method: 'night-column-median', minimumSamples };
+  }
   if (side === 'day' && policy.maximumIncidenceDegrees === undefined) throw new Error('A day-side JIRAM mosaic needs policy.maximumIncidenceDegrees.');
   const labelNames = strings(target.labelNames, 'target labelNames');
   if (!labelNames.length) throw new Error('target labelNames must name at least one TARGET_NAME.');
@@ -106,7 +117,7 @@ export function parseRecipe(value: unknown): JiramRecipe {
       pixels: { focalLength: { key: focalLength.key, unit: 'mm' }, pixelPitch: { key: pixelPitch.key, unit: pixelPitch.unit === 'mm' ? 'mm' : 'micrometre' },
         center: keys('center'), boresight: keys('boresight'), samples: keys('samples'), lines: keys('lines'), frame: keys('frame'), origin: n(pixels, 'origin'), column: keys('column'), row: keys('row') },
       frameLines: { '128': layout('128'), '256': layout('256') } },
-    side,
+    side, ...(background === undefined ? {} : { background }),
     output: { image: requireString(output.image, 'output image'), label: requireString(output.label, 'output label'), receipt: requireString(output.receipt, 'output receipt'),
       productId: requireString(output.productId, 'output productId'), pixelsPerDegree: n(output, 'pixelsPerDegree') },
     policy: { minimumFramesPerVisit: n(policy, 'minimumFramesPerVisit'), maximumEmissionDegrees: n(policy, 'maximumEmissionDegrees'), terminatorFootprints: n(policy, 'terminatorFootprints'),
@@ -208,6 +219,7 @@ export function correlate(image: Float32Array, model: Float32Array, w: number, p
 }
 
 interface FrameResult { productId: string; visit: string; utc: string; rangeKm: number; phaseDegrees: number; unit: string; litPixels: number; sunlitRadiance?: number;
+  background?: { columns: number; median: number | null; maximum: number | null };
   registration: { method: 'lit-disc' | 'rejected'; dx: number; dy: number; correlation: number; reason?: string };
   camera: SpiceCamera; values: Float32Array }
 
@@ -220,7 +232,7 @@ function sunlitRadiance(frame: FrameResult, radii: readonly number[]) {
     const point = intersect(frame.camera, radii, x, y);
     if (!point) continue;
     const n = normalAt(point, radii), toCamera = frame.camera.positionKm.map((v, i) => v - point[i]), mu = dot(n, toCamera) / Math.hypot(...toCamera), mu0 = dot(n, frame.camera.sunDirection);
-    if (mu0 > 0.7 && mu > 0.7) ratios.push(frame.values[y * WIDTH + x] / mu0);
+    if (mu0 > 0.7 && mu > 0.7 && Number.isFinite(frame.values[y * WIDTH + x])) ratios.push(frame.values[y * WIDTH + x] / mu0);
   }
   return ratios.length >= 20 ? median(ratios) : undefined;
 }
@@ -253,6 +265,38 @@ function projectFrame(frame: FrameResult, radii: readonly number[], ppd: number,
 
 const median = (list: number[]) => { list.sort((a, b) => a - b); const m = list.length >> 1; return list.length % 2 ? list[m] : (list[m - 1] + list[m]) / 2; };
 
+/** Estimate the additive column background from cold night-side samples. Localised hot spots occupy a minority of a
+ * column; the median leaves their excess radiance intact. Never infer a background from illuminated pixels, interpolate
+ * between columns, or clamp negative residuals. Columns without enough samples remain missing. */
+export function subtractColumnBackground(values: Float32Array, night: Uint8Array, minimumSamples: number) {
+  if (values.length !== WIDTH * BAND_LINES || night.length !== values.length || !Number.isInteger(minimumSamples) || minimumSamples < 1 || minimumSamples > BAND_LINES) throw new Error('Invalid JIRAM column-background inputs.');
+  const corrected = new Float32Array(values.length).fill(NaN), offsets = new Float32Array(WIDTH).fill(NaN), counts = new Uint16Array(WIDTH);
+  for (let x = 0; x < WIDTH; x++) {
+    const samples: number[] = [];
+    for (let y = 0; y < BAND_LINES; y++) { const i = y * WIDTH + x; if (night[i] && Number.isFinite(values[i])) samples.push(values[i]); }
+    counts[x] = samples.length;
+    if (samples.length < minimumSamples) continue;
+    const offset = median(samples); offsets[x] = offset;
+    for (let y = 0; y < BAND_LINES; y++) { const i = y * WIDTH + x; corrected[i] = values[i] - offset; }
+  }
+  return { values: corrected, offsets, counts };
+}
+
+/** Only use observed night-side pixels satisfying the map's emission and terminator margins. The cold surface is below
+ * JIRAM's sensitivity (Mura et al. 2024, §4.2); illuminated terrain and off-body reflections cannot set this baseline. */
+function nightBackgroundMask(camera: SpiceCamera, radii: readonly number[], policy: JiramRecipe['policy'], ifov: number, meanRadius: number) {
+  const night = new Uint8Array(WIDTH * BAND_LINES), cosEmission = Math.cos(policy.maximumEmissionDegrees * Math.PI / 180);
+  for (let y = 0; y < BAND_LINES; y++) for (let x = 0; x < WIDTH; x++) {
+    const point = intersect(camera, radii, x, y);
+    if (!point) continue;
+    const normal = normalAt(point, radii), toCamera = camera.positionKm.map((v, i) => v - point[i]), range = Math.hypot(...toCamera), mu = dot(normal, toCamera) / range;
+    if (mu < cosEmission) continue;
+    const margin = Math.min(1, policy.terminatorFootprints * range * ifov / mu / meanRadius);
+    if (dot(normal, camera.sunDirection) <= -margin) night[y * WIDTH + x] = 1;
+  }
+  return night;
+}
+
 /** Per-visit medians, then the finest visit per cell. */
 function combine(visits: { id: string; projections: { values: Float32Array; footprint: Float32Array }[] }[], cells: number, minimumFrames: number) {
   const out = new Float32Array(cells).fill(NaN), best = new Float32Array(cells).fill(Infinity), source = new Int16Array(cells).fill(-1), perVisit: Float32Array[] = [];
@@ -270,28 +314,72 @@ function combine(visits: { id: string; projections: { values: Float32Array; foot
   return { map: out, footprint: best, source, perVisit };
 }
 
-/** A pinned frame's image and label from the frames directory, fetched from the archive first when asked. */
-async function pinnedFrame(recipe: JiramRecipe, frame: JiramFrame, directory: string, fetchMissing: boolean) {
-  const read = async (name: string, digest: string) => {
+/** Restore the declared native image and label; validate their identity and layout before caching them.
+ * Source byte identities belong to the measured receipt, not the authored recipe. */
+export async function readArchivedFrame(recipe: JiramRecipe, frame: JiramFrame, directory: string, fetchMissing: boolean, fetcher: typeof fetch = fetch) {
+  const read = async (name: string) => {
     const path = resolve(directory, name);
     let bytes = await readFile(path).catch(() => undefined);
     if (!bytes && fetchMissing) {
-      const response = await fetch(`${recipe.archive}/${frame.volume}/DATA/${name}`);
+      const response = await fetcher(`${recipe.archive}/${frame.volume}/DATA/${name}`);
       if (!response.ok) throw new Error(`${name}: archive answered ${response.status}.`);
       bytes = Buffer.from(await response.arrayBuffer());
-      if (sha256(bytes) === digest) { await mkdir(directory, { recursive: true }); await writeFile(path, bytes); }
     }
     if (!bytes) throw new Error(`${name} is missing from ${directory}; run with --fetch.`);
-    if (sha256(bytes) !== digest) throw new Error(`${name} does not match its pin.`);
     return bytes;
   };
-  return Promise.all([read(`${frame.productId}.IMG`, frame.imageSha256), read(`${frame.productId}.LBL`, frame.labelSha256)]);
+  const [image, label] = await Promise.all([read(`${frame.productId}.IMG`), read(`${frame.productId}.LBL`)]);
+  const text = label.toString('latin1');
+  if (pds3Keyword(text, 'PRODUCT_ID') !== frame.productId || pds3Keyword(text, 'DATA_SET_ID') !== 'JNO-J-JIRAM-3-RDR-V1.0') throw new Error(`${frame.productId}: archive product identity differs from the recipe.`);
+  decodeFrame(image, text, recipe);
+  await mkdir(directory, { recursive: true });
+  await Promise.all([writeFile(resolve(directory, `${frame.productId}.IMG`), image), writeFile(resolve(directory, `${frame.productId}.LBL`), label)]);
+  return [image, label] as const;
+}
+
+/** The matching EDR supplies detector DN before radiometric calibration. Withhold non-linear pixels using the
+ * published limit, rather than trying to recover a DN threshold from calibrated RDR radiance. */
+export function detectorMask(bytes: Buffer, label: string, rdrLabel: string, recipe: Pick<JiramRecipe, 'band'>, maximumDn: number) {
+  const id = (pds3Keyword(rdrLabel, 'SOURCE_PRODUCT_ID') ?? '').replace(/\.IMG$/u, '');
+  const lines = Number(pds3Keyword(label, 'LINES'));
+  const layout = lines === 128 || lines === 256 ? recipe.band.frameLines[lines === 128 ? '128' : '256'] : undefined;
+  if (!/^JIR_IMG_EDR_\d{7}T\d{6}_V\d{2}$/u.test(id) || pds3Keyword(label, 'PRODUCT_ID') !== id ||
+      pds3Keyword(label, 'DATA_SET_ID') !== 'JNO-J-JIRAM-2-EDR-V1.0' || pds3Keyword(label, 'DATA_QUALITY_ID') !== '1' ||
+      pds3Keyword(label, 'SAMPLE_TYPE') !== 'LSB_INTEGER' || pds3Keyword(label, 'SAMPLE_BITS') !== '16' ||
+      Number(pds3Keyword(label, 'LINE_SAMPLES')) !== WIDTH || !layout || bytes.length !== WIDTH * lines * 2 ||
+      ['START_TIME', 'STOP_TIME', 'EXPOSURE_DURATION', 'INSTRUMENT_MODE_ID'].some(key => !pds3Keyword(label, key) || pds3Keyword(label, key) !== pds3Keyword(rdrLabel, key))) {
+    throw new Error('JIRAM EDR identity, exposure or detector layout differs from its RDR.');
+  }
+  const mask = new Uint8Array(WIDTH * BAND_LINES);
+  for (let i = 0; i < mask.length; i++) mask[i] = bytes.readInt16LE((layout.firstLine * WIDTH + i) * 2) >= maximumDn ? 1 : 0;
+  return mask;
+}
+
+async function readDetectorMask(recipe: JiramRecipe, frame: JiramFrame, rdrLabel: string, directory: string, fetchMissing: boolean, maximumDn: number) {
+  const productId = frame.productId.replace('_RDR_', '_EDR_'), volume = frame.volume.replace('jnojir_2', 'jnojir_1');
+  const buffers: Buffer[] = [];
+  for (const ext of ['IMG', 'LBL']) {
+    const name = `${productId}.${ext}`, path = resolve(directory, name);
+    let bytes = await readFile(path).catch(() => undefined);
+    if (!bytes && fetchMissing) {
+      const response = await fetch(`${recipe.archive}/${volume}/DATA/${name}`);
+      if (!response.ok) throw new Error(`${name}: archive answered ${response.status}.`);
+      bytes = Buffer.from(await response.arrayBuffer());
+    }
+    if (!bytes) throw new Error(`${name} is missing; run with --fetch.`);
+    buffers.push(bytes);
+  }
+  const [image, label] = buffers;
+  const mask = detectorMask(image, label.toString('latin1'), rdrLabel, recipe, maximumDn);
+  await Promise.all([writeFile(resolve(directory, `${productId}.IMG`), image), writeFile(resolve(directory, `${productId}.LBL`), label)]);
+  return {mask, productId, volume, imageSha256: sha256(image), labelSha256: sha256(label), maximumDn, withheldPixels: mask.reduce((n,v)=>n+v,0)};
 }
 
 export async function runMosaic(recipePath: string, framesDirectory: string, fetchMissing = false, previews?: string) {
   const root = dirname(recipePath), recipe = parseRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
   const ppd = recipe.output.pixelsPerDegree, cells = 360 * ppd * 180 * ppd, padX = recipe.policy.searchCrossTrackPixels, padY = recipe.policy.searchAlongTrackPixels;
-  const frames: FrameResult[] = [], kernelsUsed = new Map<string, string>();
+  const frames: FrameResult[] = [], kernelsUsed = new Map<string, string>(), inputs: {productId: string; volume: string; imageSha256: string; labelSha256: string}[] = [];
+  const detectorChecks: Omit<Awaited<ReturnType<typeof readDetectorMask>>, 'mask'>[] = [];
   let radii: number[] = [], ifov = 0;
   for (const visit of recipe.visits) {
     const paths = await kernelBankPaths(recipe.kernelSet, [...recipe.commonKernels, ...visit.kernels]);
@@ -299,17 +387,24 @@ export async function runMosaic(recipePath: string, framesDirectory: string, fet
     for (const k of set.kernels) kernelsUsed.set(k.path.slice(k.path.indexOf('src/spice/')), k.sha256);
     radii = numbers(set.pool, `BODY${recipe.target.naifId}_RADII`); ifov = numbers(set.pool, `INS${recipe.band.instrument}_IFOV`)[0];
     for (const pinned of visit.frames) {
-      const [bytes, labelBytes] = await pinnedFrame(recipe, pinned, framesDirectory, fetchMissing);
+      const [bytes, labelBytes] = await readArchivedFrame(recipe, pinned, framesDirectory, fetchMissing);
+      inputs.push({...pinned, imageSha256: sha256(bytes), labelSha256: sha256(labelBytes)});
       const label = labelBytes.toString('latin1'), decoded = decodeFrame(bytes, label, recipe);
       const scale = recipe.unitScale[decoded.unit];
       if (scale === undefined) throw new Error(`${pinned.productId}: no stated scale for the archived unit ${decoded.unit}.`);
       const values = decoded.values.map(v => v * scale);
+      const registrationValues = values.slice();
+      if (visit.maximumDetectorDn !== undefined) {
+        const {mask, ...record} = await readDetectorMask(recipe, pinned, label, framesDirectory, fetchMissing, visit.maximumDetectorDn);
+        detectorChecks.push(record);
+        for (let i = 0; i < values.length; i++) if (mask[i]) values[i] = NaN;
+      }
       const et = (utcToEt(set.leapSeconds, `${decoded.start}Z`) + utcToEt(set.leapSeconds, `${decoded.stop}Z`)) / 2;
       const camera = spiceCamera({ pool: set.pool, ephemeris: set.ephemeris, rotation: set.rotation, observer: JUNO, target: recipe.target.naifId, bodyFrame: recipe.target.bodyFrame, instrument: recipe.band.instrument, et, aberration: 'LT+S', pixels: recipe.band.pixels });
       const { model, w, lit } = litModel(camera, radii, padX, padY);
       const base = { productId: pinned.productId, visit: visit.id, utc: decoded.start, rangeKm: camera.report.rangeKm, phaseDegrees: camera.report.phaseAngleDegrees, unit: decoded.unit, litPixels: lit, values };
       if (lit < recipe.policy.minimumLitPixels) { frames.push({ ...base, camera, registration: { method: 'rejected', dx: 0, dy: 0, correlation: NaN, reason: 'too little sunlit disc in the search window' } }); continue; }
-      const fit = correlate(registrationImage(values), model, w, padX, padY);
+      const fit = correlate(registrationImage(registrationValues), model, w, padX, padY);
       const accepted = fit.correlation >= recipe.policy.minimumCorrelation && !fit.atSearchEdge;
       frames.push({ ...base, camera: accepted ? shiftCamera(camera, fit.dx, fit.dy) : camera,
         registration: accepted ? { method: 'lit-disc', dx: fit.dx, dy: fit.dy, correlation: fit.correlation }
@@ -329,14 +424,23 @@ export async function runMosaic(recipePath: string, framesDirectory: string, fet
       frame.registration = { ...frame.registration, method: 'rejected', reason: `offset ${Math.round(frame.registration.dx)}, ${Math.round(frame.registration.dy)} disagrees with the visit's ${Math.round(dx)}, ${Math.round(dy)}` };
     }
   }
+  for (const frame of frames) if (frame.registration.method === 'lit-disc') {
+    frame.sunlitRadiance = sunlitRadiance(frame, radii);
+    if (recipe.background) {
+      const result = subtractColumnBackground(frame.values, nightBackgroundMask(frame.camera, radii, recipe.policy, ifov, meanRadius), recipe.background.minimumSamples);
+      const offsets = Array.from(result.offsets).filter(Number.isFinite).sort((a, b) => a - b);
+      frame.background = { columns: offsets.length, median: offsets.length ? median(offsets) : null, maximum: offsets.at(-1) ?? null };
+      frame.values = result.values;
+    }
+  }
   const final = build(f => f.registration.method !== 'rejected');
-  for (const frame of frames) if (frame.registration.method === 'lit-disc') frame.sunlitRadiance = sunlitRadiance(frame, radii);
   await writeMap(root, recipe, final.map);
   const covered = final.map.reduce((n, v) => n + (Number.isFinite(v) ? 1 : 0), 0);
-  const receipt = { schema: RECEIPT_SCHEMA, recipe: recipe.output.productId, side: recipe.side, kernels: Object.fromEntries(kernelsUsed), radiiKm: radii, ifovRadians: ifov,
+  const receipt = { schema: RECEIPT_SCHEMA, recipe: recipe.output.productId, side: recipe.side, kernels: Object.fromEntries(kernelsUsed), inputs, detectorChecks, radiiKm: radii, ifovRadians: ifov,
     coverage: { cells, [`${recipe.side}Cells`]: covered, fraction: covered / cells },
     visits: recipe.visits.map((v, i) => ({ id: v.id, frames: frames.filter(f => f.visit === v.id).length, winningCells: final.source.reduce((n, s) => n + (s === i ? 1 : 0), 0) })),
     frames: frames.map(f => ({ productId: f.productId, visit: f.visit, utc: f.utc, unit: f.unit, rangeKm: Math.round(f.rangeKm), phaseDegrees: +f.phaseDegrees.toFixed(2), litPixels: f.litPixels, sunlitRadiance: f.sunlitRadiance === undefined ? null : +f.sunlitRadiance.toPrecision(4),
+      ...(f.background ? { background: f.background } : {}),
       registration: { ...f.registration, dx: +f.registration.dx.toFixed(2), dy: +f.registration.dy.toFixed(2), correlation: +f.registration.correlation.toFixed(4) } })) };
   await writeFile(resolve(root, recipe.output.receipt), `${JSON.stringify(receipt, null, 2)}\n`);
   if (previews) await writePreviews(previews, frames, radii, final, ppd);
@@ -352,7 +456,7 @@ async function writeMap(root: string, recipe: JiramRecipe, map: Float32Array) {
     'PDS_VERSION_ID = PDS3', 'RECORD_TYPE = FIXED_LENGTH', `RECORD_BYTES = ${width * 4}`, `FILE_RECORDS = ${height}`, `^IMAGE = "${name}"`,
     `DATA_SET_ID = "CSSEARTH-${recipe.target.name}-JIRAM-${recipe.band.name}-${recipe.side.toUpperCase()}-MOSAIC-V1"`, `PRODUCT_ID = "${recipe.output.productId}"`, `TARGET_NAME = "${recipe.target.name}"`,
     'SOURCE_DATA_SET_ID = "JNO-J-JIRAM-3-RDR-V1.0"', `SOURCE_PRODUCT_COUNT = ${recipe.visits.reduce((n, v) => n + v.frames.length, 0)}`,
-    `NOTE = "${recipe.side === 'night' ? 'Night' : 'Day'}-side JIRAM ${recipe.band.name}-band band radiance: per-visit medians, finest visit per cell. Written by tools/objects/juno/jiram-mosaic.mts."`,
+    `NOTE = "${recipe.side === 'night' ? 'Night' : 'Day'}-side JIRAM ${recipe.band.name}-band band radiance${recipe.background ? ' above per-column cold-night background' : ''}: per-visit medians, finest visit per cell. Written by tools/objects/juno/jiram-mosaic.mts."`,
     'OBJECT = IMAGE', `  LINES = ${height}`, `  LINE_SAMPLES = ${width}`, '  SAMPLE_TYPE = PC_REAL', '  SAMPLE_BITS = 32', `  UNIT = "${recipe.band.unit}"`,
     '  SCALING_FACTOR = 1', '  OFFSET = 0', `  MISSING_CONSTANT = ${missing.toExponential()}`, 'END_OBJECT = IMAGE',
     'OBJECT = IMAGE_MAP_PROJECTION', '  MAP_PROJECTION_TYPE = "EQUIRECTANGULAR"', '  COORDINATE_SYSTEM_NAME = "PLANETOCENTRIC"', '  COORDINATE_SYSTEM_TYPE = "BODY-FIXED ROTATING"',
@@ -368,7 +472,8 @@ async function writeMap(root: string, recipe: JiramRecipe, map: Float32Array) {
 async function writePreviews(directory: string, frames: FrameResult[], radii: readonly number[], final: ReturnType<typeof combine>, ppd: number) {
   await mkdir(directory, { recursive: true });
   for (const frame of frames) {
-    const top = Array.from(frame.values).sort((a, b) => a - b)[Math.floor(0.998 * frame.values.length)] || 1, rgb = Buffer.alloc(WIDTH * BAND_LINES * 3);
+    const sorted = Array.from(frame.values).filter(Number.isFinite).sort((a, b) => a - b);
+    const top = sorted[Math.floor(0.998 * (sorted.length - 1))] || 1, rgb = Buffer.alloc(WIDTH * BAND_LINES * 3);
     for (let i = 0; i < frame.values.length; i++) { const v = Math.round(255 * Math.sqrt(Math.max(0, Math.min(1, frame.values[i] / top)))); rgb.fill(v, i * 3, i * 3 + 3); }
     for (let y = 0; y < BAND_LINES; y++) for (let x = 0; x < WIDTH; x++) {
       const here = intersect(frame.camera, radii, x, y), right = intersect(frame.camera, radii, x + 1, y), below = intersect(frame.camera, radii, x, y + 1);
