@@ -20,7 +20,7 @@ import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '@cssearth/bake
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '@cssearth/bake/objects/layers/terrestrial';
 import { OBSERVER_CAMERAS_FILE } from '@cssearth/bake/objects/layers/terrestrial';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
-import { INVESTIGATION_SURVEY_DIRECTORY } from '../../investigations/investigation-survey.mts';
+import { INVESTIGATION_SURVEY_DIRECTORY } from '@cssearth/bake/sources';
 import { writeHorizonsOperations } from '@cssearth/bake/objects/layers/terrestrial';
 import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './setup.mts';
 

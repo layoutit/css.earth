@@ -1,14 +1,13 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 18,
+    "largestCycle": 17,
     "layerOrder": [
       "tools/objects(root)",
       "tools/objects/giant-layers",
       "tools/objects/material-composition",
       "tools/objects/shape-model",
       "tools/objects/sphere-survey",
-      "tools/investigations",
       "tools/prepare",
       "tools/objects/observation",
       "tools/ci",
@@ -66,6 +65,7 @@
       {"from":"labs/performance/ipad-journey.mts","to":"site/objects.mts"},
       {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"},
       {"from":"labs/performance/navigation-capture.mts","to":"tools/cli/preview.mts"},
+      {"from":"packages/bake/cli/report-investigations.mts","to":"tools/prepare/prepare-catalog.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/compact-spectrum.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/spectrum-data.mts"},
       {"from":"tools/ci/check-object-runtime-ownership.mts","to":"site/objects.mts"},
@@ -98,6 +98,7 @@
     "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
+      {"from":"packages/bake/cli/report-investigations.mts","to":"tools/prepare/prepare-catalog.mts"},
       {"from":"packages/bake/src/density/retirement.test.ts","to":"tools/cli/bundle-renderer.mts"},
       {"from":"packages/bake/src/presentation/composite-settings.test.ts","to":"tools/objects/geometry-adapters.ts"},
       {"from":"packages/bake/src/presentation/presentation.test.ts","to":"tools/objects/geometry-adapters.ts"},

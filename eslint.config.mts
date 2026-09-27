@@ -13,7 +13,7 @@ export default [
     // `tools`, `src` and `site` — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
     // the debt is pre-existing and this is meant to make it visible, not to block work on it.
-    files: ['.github/scripts/**/*.{ts,mts}', 'tools/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
+    files: ['.github/scripts/**/*.{ts,mts}', 'tools/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['warn', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],

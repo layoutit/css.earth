@@ -8,7 +8,7 @@
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { readInvestigationSurveys, type InvestigationSurvey } from './investigation-survey.mts';
+import { readInvestigationSurveys, type InvestigationSurvey } from './investigation-survey.ts';
 
 export const INVESTIGATION_LEDGER_SCHEMA = 'cssearth-investigation-ledger@1';
 export const INVESTIGATION_LEDGER_FILE = 'investigations.json';
