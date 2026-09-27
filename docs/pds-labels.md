@@ -62,14 +62,14 @@ duplicates, quoted commas, multiline values, comments, malformed inputs and limi
 They read the original tracked Tethys and Proteus labels for source-backed cases.
 [Calibration tests](../tools/objects/surface-observations/pds3-reflectance.test.mts)
 preserve the native CISSCAL and Voyager evidence and reject contradictory units.
-[PDS4 colour tests](../tools/objects/terrestrial-layers/observed-pds4.test.mts)
+[PDS4 colour tests](../tests/objects/terrestrial/observed-pds4.test.mts)
 pass corrupted offsets and projection fields through the actual decoder while
 retaining its existing exact RGB and missing-pixel expectations.
 
 ```bash
 pnpm --filter @cssearth/telescope test
 node --test tools/objects/surface-observations/pds3-reflectance.test.mts \
-  tools/objects/terrestrial-layers/observed-pds4.test.mts
+  tests/objects/terrestrial/observed-pds4.test.mts
 ```
 
 These checks need only tracked labels and synthetic image bytes, not downloaded
