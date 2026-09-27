@@ -35,14 +35,14 @@ lens. SBMT's archive uses the public access pair published by its client
 (`public` / `wide-open`); the acquisition plan records that public authorization
 header and verifies each downloaded file's bytes.
 
-The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+The photographic atlas samples each original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
-| View | Original grid | Both lighting images, before → current |
-| --- | --- | --- |
-| normal | 10682 × 5341 | 3.74 → 5.40 MB |
-| infrared | 10682 × 5341 | 5.96 → 7.82 MB |
+| Existing view | Original grid |
+| --- | --- |
+| normal | 10682 × 5341 |
+| infrared | 10682 × 5341 |
 
-Each atlas remains 2048 × 6400 pixels, with 796 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/eros/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Current atlases are 3503 × 3720 pixels, with 796 retained faces. The [delivery record](evidence/spectral-bands/delivery-and-browser.json) records each encoded file size and decoded RGBA estimate. Existing mesh leaves and full-size surface atlases match the main revision named there. Sampling details are in `prepared/surfaces.json`; source resolution, gaps and registration limits still apply.
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 52.033 / 132.260 / 275.739 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
