@@ -6,6 +6,8 @@ const test = sourceTest();
 import {
   renderReflectanceChart,
   renderTemperaturePressureChart,
+  renderPhotometricPhaseChart,
+  renderLightCurveChart,
 } from "./chart-svg.ts";
 
 test("renders deterministic representative Mars and Saturn reflectance data", () => {
@@ -26,15 +28,15 @@ test("renders deterministic representative Mars and Saturn reflectance data", ()
     };
     const first = renderReflectanceChart(input);
     assert.equal(renderReflectanceChart(input), first);
-    assert.match(first, /viewBox="0 0 306 141"/u);
-    assert.match(first, /font-family="ui-sans-serif,[^"]+" font-size="13\.572"/u);
-    assert.match(first, new RegExp(`<title id="${id}-reflectance-title">`));
-    assert.match(first, /<g fill="#fff" fill-opacity="\.05" shape-rendering="crispEdges">[\s\S]*?<rect x="0" y="8" width="306" height="1"\/>[\s\S]*?<rect x="0" y="55" width="306" height="1"\/>/u);
+    assert.match(first, /viewBox="0 0 306 289"/u);
+    assert.match(first, new RegExp(`<title id="${id}-title">`));
+    assert.match(first, /Reflectance \(I\/F\)/u);
+    for (const value of [0, maximum / 2, maximum, 350, 500, 750, 1000]) assert.ok(first.includes(`>${value}</text>`));
     assert.doesNotMatch(first, /stroke-dasharray/u);
-    assert.match(first, /class="object-chart-line" d="M0\.00 57\.00 L196\.92 8\.00 L320\.00 81\.50"/u);
-    assert.match(first, />wavelength \(nm\)<[\s\S]*?>750<[\s\S]*?>1000</u);
-    assert.doesNotMatch(first, />350<|>500<|wavelength · nm/u);
-    assert.doesNotMatch(first, /axis-maximum|axis-midpoint|>I\/F</u);
+    assert.match(first, /class="object-chart-line" d="M42\.000 116\.000 L197\.077 29\.000 L294\.000 159\.500"/u);
+    assert.match(first, />Wavelength \(nm\)</u);
+    assert.match(first, />Reflectance<.*>Shading · approx\.</u);
+    assert.doesNotMatch(first, /linearGradient|clipPath|<mask|<filter/u);
   }
 });
 
@@ -57,14 +59,11 @@ test("renders deterministic representative atmosphere profiles", () => {
   };
   const first = renderTemperaturePressureChart(input);
   assert.equal(renderTemperaturePressureChart(input), first);
-  assert.match(first, /viewBox="0 0 306 141"/u);
-  assert.match(first, /font-family="ui-sans-serif,[^"]+" font-size="13\.572"/u);
-  assert.match(first, /<g fill="#fff" fill-opacity="\.05" shape-rendering="crispEdges"><rect x="0" y="62" width="306" height="1"\/><\/g>/u);
+  assert.match(first, /viewBox="0 0 306 275"/u);
+  assert.match(first, /d="M42 116\.000H294"/u);
   assert.doesNotMatch(first, /stroke-dasharray/u);
-  assert.match(first, /class="object-chart-line" d="M320\.00 122\.00 L160\.00 65\.00 L0\.00 8\.00"/u);
-  assert.match(first, />temperature \(K\)<[\s\S]*?>150<[\s\S]*?>200</u);
-  assert.doesNotMatch(first, />100<|temperature · K/u);
-  assert.doesNotMatch(first, /axis-pressure|>Bar</u);
+  assert.match(first, /class="object-chart-line" d="M294\.000 203\.000 L168\.000 116\.000 L42\.000 29\.000"/u);
+  for (const label of ['Pressure (bar)', 'axis-pressure', 'Temperature (K)', '100', '150', '200']) assert.ok(first.includes(`>${label}</text>`));
 });
 
 test("escapes every interpolated XML text value", () => {
@@ -113,4 +112,20 @@ test("rejects malformed chart shapes and unsafe ids", () => {
 test("contains no object id or source record", async () => {
   const source = await readFile(new URL("./chart-svg.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /mars|saturn|107740|107933/iu);
+});
+
+test('phase dimming increases downward and flux increases upward with explicit units', () => {
+  const identity = { id: 'fixture', title: 'Fixture', description: 'Prepared data', metadata: {} };
+  const phase = renderPhotometricPhaseChart({ ...identity, points: [
+    { phaseAngle: 0, dimmingMagnitude: 0 }, { phaseAngle: 45, dimmingMagnitude: 1 }, { phaseAngle: 90, dimmingMagnitude: 2 },
+  ] });
+  assert.match(phase, /M42\.000 29\.000 L168\.000 116\.000 L294\.000 203\.000/);
+  for (const label of ['V-band dimming (mag)', 'Phase angle (°)', 'Fainter ↓', '0', '1', '2', '45', '90']) assert.ok(phase.includes(`>${label}</text>`));
+  const flux = renderLightCurveChart({ ...identity, axisLabel: 'Time (hours)', points: [
+    { hours: 0, flux: -1000 }, { hours: 1, flux: 0 }, { hours: 2, flux: 1000 },
+  ], events: [{ hours: 1, label: 'Transit' }, { hours: 3, label: 'Outside' }] });
+  assert.match(flux, /M42\.000 203\.000 L168\.000 116\.000 L294\.000 29\.000/);
+  assert.match(flux, /d="M168\.000 29V203"/);
+  assert.doesNotMatch(flux, /Outside/);
+  for (const label of ['Relative flux (ppm)', 'Time (hours)', '-1000', '0', '1000', 'Transit']) assert.ok(flux.includes(`>${label}</text>`));
 });

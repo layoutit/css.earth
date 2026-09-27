@@ -161,14 +161,14 @@ async function hashedAssets(root: string, filenames: readonly string[], objectId
 }
 
 /** Inventory the object's public scene textures from the URLs its runtime references. */
-export async function inventoryPublicAssets({ objectId, objectDirectory, urls, publicRoot, allowPreparationArtifacts = false,
+export async function inventoryPublicAssets({ objectId, objectDirectory, preparedDirectory = resolve(objectDirectory, 'prepared'), urls, publicRoot, allowPreparationArtifacts = false,
   gitTrackedPaths = defaultGitTrackedPaths }: {
-  objectId: string; objectDirectory: string; urls: readonly string[]; publicRoot: string; allowPreparationArtifacts?: boolean;
+  objectId: string; objectDirectory: string; preparedDirectory?: string; urls: readonly string[]; publicRoot: string; allowPreparationArtifacts?: boolean;
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
   // The arrival image belongs to navigation, so it is absent from the detail
   // runtime's texture entries. Keep its explicit prepared reference on rebakes.
-  const arrival: unknown = await readFile(resolve(objectDirectory, 'prepared/arrival-billboard.json'), 'utf8')
+  const arrival: unknown = await readFile(resolve(preparedDirectory, 'arrival-billboard.json'), 'utf8')
     .then(JSON.parse, error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   const references = [...urls];
   if (arrival !== null) {

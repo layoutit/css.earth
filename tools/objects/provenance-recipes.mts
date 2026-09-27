@@ -282,7 +282,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       });
   }
   records(recipe('charts')?.charts ?? []).forEach((plan, index) => add(`chart:${index}`, 'charts', `/charts/${index}`,
-    paths(plan.source), 'Prepare the authored scientific chart from its bound data and mathematical recipe.', {
+    paths([plan.source, ...(plan.kind === 'retrieved-profile' ? records(plan.series).map(series => series.path) : [])]),
+    'Prepare the authored scientific chart from its bound data and mathematical recipe.', {
       label: text(plan.title ?? plan.kind), urls: [prefix + plan.output], lensIds: [],
       interpretation: { kind: plan.kind, qualification: maybeRecord(plan.metadata)?.qualification },
     }));

@@ -439,7 +439,7 @@
       "open": true,
       "src": "/scenes/venus/venus-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Venus from 350 to 1000 nanometers using the checked NASA PSG atmosphere response.",
       "source": {
         "id": "venus-psg",
@@ -453,7 +453,7 @@
       "open": false,
       "src": "/scenes/venus/venus-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Venus V-band brightness change across phase angles from zero to 179 degrees.",
       "source": {
         "id": "scientific-charts",
@@ -466,7 +466,7 @@
       "open": false,
       "src": "/scenes/venus/venus-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Venus atmospheric temperature from 92.1 bar to the upper atmosphere in the checked NASA PSG model.",
       "source": {
         "id": "venus-psg-profile",

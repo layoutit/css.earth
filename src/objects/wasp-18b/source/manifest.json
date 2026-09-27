@@ -1106,6 +1106,85 @@
           }
         ]
       }
+    },
+    {
+      "id": "wasp-18b-hydra-hotspot-profile",
+      "path": "science/challener-2025/profiles/hydra-hotspot.txt",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "credit": "Challener, Weiner Mansfield, Cubillos, Piette et al. (2025)",
+      "license": "CC BY 4.0",
+      "acquisition": "Unchanged member WASP-18b 3D Mapping Archive/retrievals/HyDRA_retrievals/hotspot_group/EMAP_3group25bin_hot_diss_ph-_-6_retrieved_PT.txt from Zenodo release 14751570. Table column meanings are in the corresponding retrieval directory README.",
+      "redistribution": "Original published numerical table, CC BY 4.0; attribution retained.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-pyratbay-hotspot-profile",
+      "path": "science/challener-2025/profiles/pyratbay-hotspot.txt",
+      "origin": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "credit": "Challener, Weiner Mansfield, Cubillos, Piette et al. (2025)",
+      "license": "CC BY 4.0",
+      "acquisition": "Unchanged member WASP-18b 3D Mapping Archive/retrievals/PyratBay_retrievals/hotspot_group/pyratbay_WASP18b_hotspot_posterior_temperature.txt from Zenodo release 14751570. Table column meanings are in the corresponding retrieval directory README.",
+      "redistribution": "Original published numerical table, CC BY 4.0; attribution retained.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-14751570",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/14751570"
+          },
+          {
+            "catalogueId": "arxiv-2510-24708",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.24708"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-18b-hydra-dayside-profile",
+      "path": "science/coulombe-2023/hydra-dayside.txt",
+      "origin": "https://zenodo.org/api/records/7907569/files/WASP_18b_data_Nature.zip/content",
+      "credit": "Coulombe, Benneke, Challener, Piette et al. (2023)",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7907569"
+      ],
+      "acquisition": "Unchanged member WASP_18b_data_Nature/Atmosphere/retrieval_posteriors/LPC_Ahsohdiss_fehtiovo-4nak-2_retrieved_PT.txt from Zenodo release 7907569. HyDRA pressure in Pa; lower 2-sigma, lower 1-sigma, median, upper 1-sigma, upper 2-sigma temperatures in K. This is the dayside HyDRA comparison in Challener et al. (2025), Figure 4.",
+      "redistribution": "Original published numerical table, CC BY 4.0; attribution retained.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-7907569",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/7907569"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1149,6 +1228,13 @@
     },
     {
       "path": "preparation/rotation.json"
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared temperature-profile comparison; source columns, units, credible bounds and displayed pressure range."
+      }
     }
   ]
 }

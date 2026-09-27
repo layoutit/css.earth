@@ -4,24 +4,26 @@ import sharp from 'sharp';
 import { readSpectrumData } from './spectrum-data.mts';
 import { parseMeasuredSpectrum,readMeasuredSpectrum,renderMeasuredSpectrum } from './measured-spectrum.mts';
 import type { MeasuredSpectrumRecipe } from './measured-spectrum.mts';
+import { parseRetrievedProfile, readRetrievedProfile, renderRetrievedProfile, type RetrievedProfileRecipe } from './retrieved-profile.mts';
 import { parseFitsGalleryImageRecipe,renderFitsGalleryImage } from './fits-gallery-image.mts';
-import { renderLightCurveChart,renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.js';
-import type { ChartIdentity } from './chart-svg.js';
+import { renderLightCurveChart,renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.ts';
+import type { ChartIdentity } from './chart-svg.ts';
 type JsonMap=Record<string,unknown>;
 interface Identity {id:string;title:string;description:string;output:string;metadata:JsonMap;}
 interface Spectrum extends Identity {kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
 interface Pressure extends Identity {kind:'pressure';source:string;layerCount:number;temperatureMinimum:number;temperatureMaximum:number;temperatureRoundingStep?:number;includePressureRangeMetadata?:boolean;pressureTicks:{pressure:number;label:string}[];}
 interface Phase extends Identity {kind:'phase';sampleCount:number;maximumAngleDegrees:number;segments:({maximumAngleDegrees:number;coefficients:number[];kind:'polynomialMagnitude'}|{maximumAngleDegrees:number;coefficients:number[];kind:'albedoPolynomialMagnitude';constant:number})[];}
 interface LightCurve extends Identity {kind:'light-curve';source:string;timeField:string;fluxField:string;maskField?:string;binMinutes:number;axisLabel:string;events:{time:number;label:string}[];}
-export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase|LightCurve|MeasuredSpectrumRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
+export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase|LightCurve|MeasuredSpectrumRecipe|RetrievedProfileRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
 function record(value:unknown,label:string):JsonMap {if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as JsonMap;}
 function string(value:unknown,label:string):asserts value is string {if(typeof value!=='string'||!value.trim())throw new TypeError(`${label} must be text.`);}
 function path(root:string,value:string):string {if(value.startsWith('/')||value.includes('\\')||value.split('/').includes('..'))throw new TypeError('Unsafe chart source path.');return resolve(root,value);}
 function numericArray(value:unknown,label:string):number[]{if(!Array.isArray(value)||value.some(item=>typeof item!=='number'||!Number.isFinite(item)))throw new TypeError(`${label} must contain finite samples.`);return value;}
 export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
  const recipe=record(value,'charts');if(recipe.schema!=='cssearth-chart-assets@1'||!Array.isArray(recipe.charts))throw new TypeError('Unknown chart recipe schema.');string(recipe.publicBase,'publicBase');if(!recipe.publicBase.startsWith('/')||!recipe.publicBase.endsWith('/'))throw new TypeError('Chart asset base must be an absolute URL prefix.');
- for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase','light-curve','measured-spectrum'].includes(String(chart.kind)))throw new TypeError('Unknown chart operator.');
+ for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase','light-curve','measured-spectrum','retrieved-profile'].includes(String(chart.kind)))throw new TypeError('Unknown chart operator.');
   if(chart.kind==='measured-spectrum')parseMeasuredSpectrum(chart);
+  if(chart.kind==='retrieved-profile')parseRetrievedProfile(chart);
   if(chart.kind==='light-curve'){for(const key of ['source','timeField','fluxField','axisLabel'])string(chart[key],key);if(chart.maskField!==undefined)string(chart.maskField,'maskField');if(typeof chart.binMinutes!=='number'||!(chart.binMinutes>0)||!Array.isArray(chart.events))throw new TypeError('Invalid light curve profile.');for(const value of chart.events){const event=record(value,'event');if(typeof event.time!=='number'||!Number.isFinite(event.time))throw new TypeError('Invalid light curve event.');string(event.label,'event label');}}
   if(chart.kind==='spectrum'){string(chart.source,'source');if(!['json-columns','numeric-lines'].includes(String(chart.format))||typeof chart.pointCount!=='number'||!Number.isSafeInteger(chart.pointCount)||chart.pointCount<2||typeof chart.maximum!=='number'||!Number.isFinite(chart.maximum)||chart.maximum<=0||(chart.maximumRoundingScale!==undefined&&(typeof chart.maximumRoundingScale!=='number'||!Number.isFinite(chart.maximumRoundingScale)||chart.maximumRoundingScale<=0)))throw new TypeError('Invalid spectrum sampling profile.');}
   if(chart.kind==='pressure'){string(chart.source,'source');if(typeof chart.layerCount!=='number'||chart.layerCount<2||typeof chart.temperatureMinimum!=='number'||typeof chart.temperatureMaximum!=='number'||!Array.isArray(chart.pressureTicks)||(chart.temperatureRoundingStep!==undefined&&(typeof chart.temperatureRoundingStep!=='number'||!Number.isFinite(chart.temperatureRoundingStep)||chart.temperatureRoundingStep<=0))||(chart.includePressureRangeMetadata!==undefined&&typeof chart.includePressureRangeMetadata!=='boolean'))throw new TypeError('Invalid pressure profile.');}
@@ -32,9 +34,12 @@ export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
 }
 export async function prepareChartAssets({sourceDirectory,publicDirectory,config}:{sourceDirectory:string;publicDirectory:string;config:unknown}) {
  const recipe=parseChartAssetRecipe(config);await mkdir(publicDirectory,{recursive:true});const urls:string[]=[];
+ const dimensions:{src:string;width:number;height:number}[]=[];
  for(const chart of recipe.charts){const identity:ChartIdentity={id:chart.id,title:chart.title,description:chart.description,metadata:{...chart.metadata}};let svg:string;
   if(chart.kind==='measured-spectrum'){
    svg=renderMeasuredSpectrum(await readMeasuredSpectrum(sourceDirectory,chart));
+  }else if(chart.kind==='retrieved-profile'){
+   svg=renderRetrievedProfile(await readRetrievedProfile(sourceDirectory,chart));
   }else if(chart.kind==='spectrum'){
    const {points,maximum,metadata}=await readSpectrumData(sourceDirectory,chart);
    identity.metadata=metadata;
@@ -64,7 +69,10 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
    const zero=evaluate(0),points=Array.from({length:chart.sampleCount},(_,index)=>{const phaseAngle=chart.maximumAngleDegrees*index/(chart.sampleCount-1);return {phaseAngle,dimmingMagnitude:evaluate(phaseAngle)-zero};});
    svg=renderPhotometricPhaseChart({...identity,points});
   }
-  await writeFile(path(publicDirectory,chart.output),svg);urls.push(recipe.publicBase+chart.output);
+  const {width,height}=await sharp(Buffer.from(svg)).metadata();
+  if(!width||!height)throw new TypeError('Prepared chart has no intrinsic dimensions.');
+  const src=recipe.publicBase+chart.output;dimensions.push({src,width,height});
+  await writeFile(path(publicDirectory,chart.output),svg);urls.push(src);
  }
  let gallery:unknown;
  if(recipe.gallery){const source=record(JSON.parse(await readFile(path(sourceDirectory,recipe.gallery.source),'utf8')) as unknown,'gallery');if(source.schema!==recipe.gallery.schema||!Array.isArray(source.items)||source.items.length!==recipe.gallery.itemCount)throw new TypeError('Gallery source schema or item count drifted.');for(const key of ['id','qualification','credit','sourcePage'])string(source[key],`gallery.${key}`);const ids=new Set<string>(),files=new Set<string>();const items=[];
@@ -73,5 +81,5 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
    const file=await readFile(path(sourceDirectory,String(item.sourcePath))),bytes=item.fits===undefined?file:(await renderFitsGalleryImage(file,parseFitsGalleryImageRecipe(item.fits))).bytes,metadata=await sharp(bytes).metadata();if(metadata.width!==item.width||metadata.height!==item.height)throw new TypeError('Gallery source dimensions drifted.');await writeFile(path(publicDirectory,filename),bytes);const src=recipe.publicBase+filename;urls.push(src);items.push({id,label:item.label,src,width:item.width,height:item.height,alt:item.alt,caption:item.caption,sourceUrl:item.sourceUrl});}
   gallery={schema:'cssearth-prepared-gallery@1',id:source.id,open:false,qualification:source.qualification,credit:source.credit,sourcePage:source.sourcePage,items};
  }
- return {urls,...(gallery?{gallery}:{})};
+ return {urls,dimensions,...(gallery?{gallery}:{})};
 }
