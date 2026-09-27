@@ -21,7 +21,10 @@ reads, `contextColour()` picks a body's world-context colour, and `validateWorld
 binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
 Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
 prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`, in catalogue order) with these contracts and binds a
-`loadScene` that refuses to mount, so preparation never imports the application. A site test holds both reads equal.
+`loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
+test (run in the universe runtime lane) holds both reads equal. Some preparation code still imports `site/objects.mts`:
+`tools/cli/run-implemented-objects.mts`, `tools/prepare/prepare-arrival-billboard.mts` and the object-runtime ownership
+check. They move to this reader, or out of preparation, in later slices.
 
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
 physical frame, bounds, and pinned preparation source. Volume images, concrete
