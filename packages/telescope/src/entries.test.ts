@@ -16,11 +16,11 @@ async function sources(directory: string): Promise<string[]> {
 }
 const specifiers = (text: string) => [...text.matchAll(/(?:from|import)\s*\(?\s*['"]([^'"]+)['"]/gu)].map(match => match[1]!);
 
-it('the main entry stays host-neutral: only node/ and the command import Node built-ins, and nothing imports node/', async () => {
+it('the main entry stays host-neutral: only node/ imports Node built-ins, and nothing imports node/', async () => {
   const offenders: string[] = [];
   for (const path of await sources(source)) {
     const name = relative(source, path).replaceAll('\\', '/'), text = await readFile(path, 'utf8');
-    if (name.startsWith('node/') || name.endsWith('.mts')) continue;
+    if (name.startsWith('node/')) continue;
     for (const specifier of specifiers(text)) if (specifier.startsWith('node:') || /(^|\/)node(\/|$)/u.test(specifier)) offenders.push(`${name} -> ${specifier}`);
     if (/\bBuffer\b/u.test(text)) offenders.push(`${name} -> Buffer`);
   }

@@ -69,7 +69,7 @@ test('default help is concise; explicit help keeps the full command reference',a
 
 test('packaged entrypoint recognizes the current science workspace script',()=>{
   const root=resolve(import.meta.dirname,'../../..');
-  const result=spawnSync(process.execPath,['--import','tsx',resolve(root,'packages/telescope/src/cli.mts'),
+  const result=spawnSync(process.execPath,['--import','tsx',resolve(root,'packages/telescope-cli/src/cli.mts'),
     '--workspace',root,'unknown-command','--json'],{cwd:root,encoding:'utf8'});
   assert.equal(result.status,2);
   assert.match(result.stdout,/Unknown telescope command/u);

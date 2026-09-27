@@ -14,7 +14,7 @@ import { listArtifactOutputs } from './artifact-outputs.mts';
 import { projectOutput } from './projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery-context.mts';
-import { HELP, SHORT_HELP, VERSION } from '../../../packages/telescope/src/help.mts';
+import { HELP, SHORT_HELP, VERSION } from '../../../packages/telescope-cli/src/help.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, searchPapers } from './papers.mts';
 import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
