@@ -640,6 +640,458 @@
           }
         ]
       }
+    },
+    {
+      "id": "odyssey-grs-h2o-tab",
+      "path": "grs/h2o_5x5.tab",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/h2o_5x5.tab",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "water-equivalent"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "H2O_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-h2o-lbl",
+      "path": "grs/h2o_5x5.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/h2o_5x5.lbl",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "water-equivalent"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "H2O_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-cl-tab",
+      "path": "grs/cl_5x5.tab",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/cl_5x5.tab",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "chlorine"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "CL_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-cl-lbl",
+      "path": "grs/cl_5x5.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/cl_5x5.lbl",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "chlorine"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "CL_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-fe-tab",
+      "path": "grs/fe_5x5.tab",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/fe_5x5.tab",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "FE_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-fe-lbl",
+      "path": "grs/fe_5x5.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/fe_5x5.lbl",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "FE_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-si-tab",
+      "path": "grs/si_5x5.tab",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/si_5x5.tab",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "silicon"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "SI_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-si-lbl",
+      "path": "grs/si_5x5.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/si_5x5.lbl",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "silicon"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "SI_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-k-tab",
+      "path": "grs/k_5x5.tab",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/k_5x5.tab",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "potassium"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "K_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-k-lbl",
+      "path": "grs/k_5x5.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/k_5x5.lbl",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "potassium"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "K_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-th-tab",
+      "path": "grs/th_5x5.tab",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/th_5x5.tab",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "thorium"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "material",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "TH_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "odyssey-grs-th-lbl",
+      "path": "grs/th_5x5.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/th_5x5.lbl",
+      "credit": "NASA/Mars Odyssey GRS team; Boynton et al. (2007); PDS Geosciences Node",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified version 1.0 UNSMOOTHED/5x5 table and detached label from PDS.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "thorium"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "odyssey-grs-element-concentrations",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+            "locator": "TH_5X5; CONCENTRATION, SIGMA, SIGMA WITH CFS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "geology-shp",
+      "path": "geology/SIM3292_Global_Geology.shp",
+      "origin": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip",
+      "credit": "Tanaka et al. (2014), USGS Astrogeology",
+      "license": "United States government scientific data; retain source credit",
+      "acquisition": "Extract SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.shp; restored by source-cache.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-mars-sim3292",
+            "role": "material",
+            "evidence": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip"
+          }
+        ]
+      }
+    },
+    {
+      "id": "geology-dbf",
+      "path": "geology/SIM3292_Global_Geology.dbf",
+      "origin": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip",
+      "credit": "Tanaka et al. (2014), USGS Astrogeology",
+      "license": "United States government scientific data; retain source credit",
+      "acquisition": "Extract SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.dbf; restored by source-cache.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-mars-sim3292",
+            "role": "material",
+            "evidence": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip"
+          }
+        ]
+      }
+    },
+    {
+      "id": "geology-prj",
+      "path": "geology/SIM3292_Global_Geology.prj",
+      "origin": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip",
+      "credit": "Tanaka et al. (2014), USGS Astrogeology",
+      "license": "United States government scientific data; retain source credit",
+      "acquisition": "Extract SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.prj; restored by source-cache.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-mars-sim3292",
+            "role": "material",
+            "evidence": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip"
+          }
+        ]
+      }
+    },
+    {
+      "id": "geology-colours",
+      "path": "geology/sim3292-colors.json",
+      "origin": "https://pubs.usgs.gov/sim/3292/pdf/sim3292_map.pdf",
+      "credit": "Tanaka et al. (2014), USGS Astrogeology",
+      "license": "United States government scientific data; retain source credit",
+      "acquisition": "Read the published PDF legend vector fill colours; record their page bounds beside the colours.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-mars-sim3292",
+            "role": "material",
+            "evidence": "https://pubs.usgs.gov/sim/3292/pdf/sim3292_map.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "magnetic-coefficients",
+      "path": "magnetic/Langlais2019.sh.gz",
+      "origin": "https://zenodo.org/records/3876714/files/Langlais2019.sh.gz?download=1",
+      "credit": "Langlais, Thébault, Houliez, Purucker and Lillis (2019)",
+      "license": "Published scientific model; coefficients and computed values retained with author credit",
+      "acquisition": "Download the published spherical-harmonic coefficients, identical to supporting Table S1.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "magnetic"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "langlais-2019-crustal-field",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/3876714/files/Langlais2019.sh.gz?download=1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "magnetic-grid",
+      "path": "magnetic/radial-field.dat",
+      "origin": "https://zenodo.org/records/3876714",
+      "credit": "Langlais et al. (2019); pyshtools 4.14.1",
+      "license": "Published scientific model; coefficients and computed values retained with author credit",
+      "acquisition": "node tools/objects/prepare-magnetic-map.mts src/objects/mars/source/preparation/magnetic.json --python=<pinned interpreter>; restore the derived grid from source-cache.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "magnetic"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "langlais-2019-crustal-field",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/3876714"
+          }
+        ]
+      }
+    },
+    {
+      "id": "crust-original",
+      "path": "crust/Mars-thick-Khan2022-39-2900-2900.dat",
+      "origin": "https://zenodo.org/records/6477509/files/InSight-Crustal-Thickness-Archive.tar.gz?download=1",
+      "credit": "Wieczorek et al. (2022), Zenodo 6477509",
+      "license": "Published scientific grid, author credit retained",
+      "acquisition": "Extract grids/Mars-thick-Khan2022-39-2900-2900.dat from the archive. 721 north-to-south rows and 1441 eastward nodes, inclusive seam, 0.25 degrees; thickness in km.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "crust"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "wieczorek-2022-mars-crust",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/6477509/files/InSight-Crustal-Thickness-Archive.tar.gz?download=1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "crust-grid",
+      "path": "crust/thickness.dat",
+      "origin": "https://zenodo.org/records/6477509",
+      "credit": "Wieczorek et al. (2022); coordinate reordering by cssEarth",
+      "license": "Published scientific grid, author credit retained",
+      "acquisition": "node tools/objects/prepare-mars-crust.mts src/objects/mars/source/crust/Mars-thick-Khan2022-39-2900-2900.dat src/objects/mars/source/crust/thickness.dat",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "crust"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "wieczorek-2022-mars-crust",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/6477509"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -773,6 +1225,14 @@
       "origin": "https://hub.docker.com/r/nasapsg/psg",
       "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by cssEarth from PSG's own template.",
       "acquisition": "Written by `node tools/photometry/acquire-psg-limb-table.mts --body=mars --psg-name=Mars --altitudes=0,5,10,15,20,30,40,50,60,80,100 --lmax=43 --api=http://localhost:3000/api.php --container=psg`."
+    },
+    {
+      "path": "preparation/magnetic.json",
+      "purpose": "Reproducible preparation choices for the published model or observation reduction.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project recipe; source identities and acquisition routes are declared by its input records."
+      }
     }
   ]
 }

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "deneb-arrival.webp",
+      "bytes": 28030,
+      "sha256": "69063e29577cfee1daf969866e36f50dfe039075a55071d4347fa88df40b2b2b"
+    },
+    {
+      "location": "public",
       "filename": "deneb-lens-color.webp",
       "bytes": 44,
       "sha256": "47617d3f045247caad225b39c8b6872b668f0cbe1b012ba3903eb766eb9bd015"
@@ -24,6 +30,12 @@
       "filename": "deneb-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "97efb5db938ddeb2c0a41545aadc95d262bfed8a6999d3aa378ff5b8ed9631d2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 367,
+      "sha256": "22ebb799eea0f96ac9458b2a8ccb034485555bfdca9452373ae7cd942b78b5c4"
     },
     {
       "location": "prepared",

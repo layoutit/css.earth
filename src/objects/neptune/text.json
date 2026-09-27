@@ -67,6 +67,132 @@
           "locator": "OPAL Cycle 32 Neptune 2025b global map"
         }
       ]
+    },
+    "visible-2017a": {
+      "title": "Hubble 2017-10-06",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-24",
+          "label": "MAST · OPAL Cycle 24",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2017a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2018a": {
+      "title": "Hubble 2018-09-09",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-25",
+          "label": "MAST · OPAL Cycle 25",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2018a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2019a": {
+      "title": "Hubble 2019-09-28",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-26",
+          "label": "MAST · OPAL Cycle 26",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2019a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2020a": {
+      "title": "Hubble 2020-08-19",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-27",
+          "label": "MAST · OPAL Cycle 27",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2020a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2021a": {
+      "title": "Hubble 2021-09-06",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-28",
+          "label": "MAST · OPAL Cycle 28",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2021a; FITS DATE-OBS, with rotation date from the release README"
+        }
+      ]
+    },
+    "visible-2022a": {
+      "title": "Hubble 2022-09-18",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-29",
+          "label": "MAST · OPAL Cycle 29",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2022a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2023a": {
+      "title": "Hubble 2023-09-22",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-30",
+          "label": "MAST · OPAL Cycle 30",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2023a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2025a": {
+      "title": "Hubble 2025-06-28",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-31",
+          "label": "MAST · OPAL Cycle 31",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2025a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2025b": {
+      "title": "Hubble 2025-08-24",
+      "detail": "F467M / F547M / F657N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-32",
+          "label": "MAST · OPAL Cycle 32",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2025b; FITS DATE-OBS"
+        }
+      ]
     }
   }
 }

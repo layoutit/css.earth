@@ -6,7 +6,7 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
-import { readAuthoredSources, type VerifiedSource } from './authored-sources.js';
+import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects/sources';
 import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
@@ -366,6 +366,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     objectDirectory: write ? objectDirectory : outputDirectory,
+    preparedDirectory: outputDirectory,
     values: [raster, celestial, scene, runtime, content,
       // Observed surfaces and radial layers publish their own files; the manifest reads them by url, as it reads every other asset.
       ...[observed, radial].filter(entry => entry !== null).map(entry => {

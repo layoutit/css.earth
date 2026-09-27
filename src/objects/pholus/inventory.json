@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pholus-arrival.webp",
+      "bytes": 35288,
+      "sha256": "c85ed310495bacfbaf67f92bfd632a9d1003e038fa393ba817660c010b6e3b63"
+    },
+    {
+      "location": "public",
       "filename": "pholus-model-shadow-alpha@2x.webp",
       "bytes": 128986,
       "sha256": "d26e311f7401581448850501064c02e063570bb3971f0303fa402c683ae0933d"
@@ -30,6 +36,12 @@
       "filename": "pholus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "6c02f5b0e6ebd92f86c5cd2b7f66620587958a4aac05824ee94434a6b0930a7a"
     },
     {
       "location": "prepared",

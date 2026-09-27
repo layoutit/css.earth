@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sun-arrival.webp",
+      "bytes": 32138,
+      "sha256": "53027243bb5940ecc007e19e83cdf17864861743aa0fb32e27279787bf0d445d"
+    },
+    {
+      "location": "public",
       "filename": "sun-corona-chromosphere@2x.webp",
       "bytes": 104208,
       "sha256": "896d153a5458c725dc77d1cf9bf9795e95e8150f1745fe07a96df3625bb01590"
@@ -108,6 +114,12 @@
       "filename": "sun-surface-photosphere@2x.webp",
       "bytes": 12996,
       "sha256": "bcf7cebd894552c68861fdd879f292ef17b023e2f84bcdd6f5996090e63a7773"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "9cf3b0ba588f2adff9d51bfe04f9ee8d27a0e46386fa85c13861ed31fa8167a7"
     },
     {
       "location": "prepared",
@@ -246,6 +258,12 @@
       "filename": "system-views/earth.json",
       "bytes": 30373,
       "sha256": "a8e6bd8be5a911fc427e2e53ffc7c9a4cb4a823ae81236cd345d050557a61baf"
+    },
+    {
+      "location": "prepared",
+      "filename": "system-views/eps-eridani.json",
+      "bytes": 30424,
+      "sha256": "1b6b94776ab518729f068098d8ca833bbfe90ead2c8d4feafa17abcf68e582c7"
     },
     {
       "location": "prepared",
@@ -682,14 +700,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 450019,
-      "sha256": "98310facef759da3782641b07b3e07cdb55199ce3a89c9e9e0b4de574f9931d7"
+      "bytes": 451087,
+      "sha256": "35d8b06ec984b378de64100dc0b28200d447e814e44b7b4123d709c17c9c9bb5"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 9468662,
-      "sha256": "e0cc1d51e7251eb24e5cdfb4ab549864e85ea083d049ec23fb352978a694b768"
+      "bytes": 9512900,
+      "sha256": "19577ce5e6d17f741535bb739f2644c98960fc32ef1baf9df06c438f75ff1329"
     },
     {
       "location": "prepared",
@@ -1914,6 +1932,12 @@
       "filename": "world-orbits/epimetheus.bin",
       "bytes": 2880,
       "sha256": "007a21f9967849c23aa2c44d33654755cfa04ae668bda075d5aa7a39e9332434"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/eps-eridani-b.bin",
+      "bytes": 3128,
+      "sha256": "8fb30604520dd208e779a04493efe00867840aa973329c5fb4ce76f0278b9d1a"
     },
     {
       "location": "prepared",

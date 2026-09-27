@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "portia-arrival.webp",
+      "bytes": 34106,
+      "sha256": "f24e70e4548c05b97da034facef6bfa9e456914a75e3be2f7c08accecaadd41f"
+    },
+    {
+      "location": "public",
       "filename": "portia-model-shadow-alpha@2x.webp",
       "bytes": 143416,
       "sha256": "eabb0975bc18891c9f0bcbe3563d168d382ec42e439592f36eee2c4869dd0435"
@@ -30,6 +36,12 @@
       "filename": "portia-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 307,
+      "sha256": "10137f8efe486aa50282ecab582ec1f6ee6218ffb6ab2dbdf7b150d89cf134a3"
     },
     {
       "location": "prepared",

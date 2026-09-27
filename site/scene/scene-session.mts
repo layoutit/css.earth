@@ -1,13 +1,13 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { SceneFramePresenter } from './scene-world.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
-import type { MountOptions, SceneFactory } from '../browser-types.mts';
-import { errorMessage } from '../browser-types.mts';
+import type { MountOptions, SceneFactory } from '../browser/browser-types.mts';
+import { errorMessage } from '../browser/browser-types.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
-import type { ObjectShell } from '../object-shell-types.mts';
+import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import type { bindViewUrl } from '../view-url-runtime.mts';
-import { requireSceneLifecycle } from './scene-contract.mts';
+import { requireSceneLifecycle } from '@cssearth/renderer/runtime/shell-contract.ts';
 
 export type SceneSessionState =
   | { readonly kind: 'loading'; readonly activation: 'idle' | 'mounting' | 'restoring'; readonly mount: ObjectSceneLifecycle | null }

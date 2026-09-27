@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kelt-9b-arrival.webp",
+      "bytes": 27246,
+      "sha256": "9051f1c6762ebc6e95bfb7f3fead85befea044a0ec0d0c72cea887b74aa1da28"
+    },
+    {
+      "location": "public",
       "filename": "kelt-9b-lens-temperature.webp",
       "bytes": 174,
       "sha256": "cd1fdb93a36f05ca0e6868234c4b8666b02715cebdb5fbd8a83523e7bc7b4378"
@@ -18,6 +24,12 @@
       "filename": "kelt-9b-surface-temperature@2x.webp",
       "bytes": 14910,
       "sha256": "8aee0c33a65527b658d0799dcbd0dcfea740ced88765c16a0ccf25f9e3c2a6e9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 313,
+      "sha256": "abab0fc7d731d753895d2e508b92442f54ad9fca69d87824ed433867b555ed5d"
     },
     {
       "location": "prepared",

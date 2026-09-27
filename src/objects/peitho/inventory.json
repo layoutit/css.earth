@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "peitho-arrival.webp",
+      "bytes": 36760,
+      "sha256": "f187127d687a2e584a8361ba74c568ee103207ea282b8a6808da5342460731f9"
+    },
+    {
+      "location": "public",
       "filename": "peitho-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "peitho-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "f7900fdd64f839601d8c0265f94339256f451266f819da633a9fdd7acd0beedf"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gallia-arrival.webp",
+      "bytes": 45562,
+      "sha256": "cbc47d925ebe8319e59a7c741da828fd5e72166ab674e55d9fa3395f464060a4"
+    },
+    {
+      "location": "public",
       "filename": "gallia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "gallia-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "2d950099799469eb605578744a1f8aeff376015045aa163d546eaff38e998118"
     },
     {
       "location": "prepared",

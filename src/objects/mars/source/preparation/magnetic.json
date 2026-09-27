@@ -1,0 +1,7 @@
+{
+  "model": "langlais2019",
+  "coefficients": "magnetic/Langlais2019.sh.gz",
+  "radiusMeters": 3393500,
+  "output": "magnetic/radial-field.dat",
+  "source": "Langlais et al. (2019), Figure 6b; degree and order 134, 3393.5 km sphere. https://doi.org/10.1029/2018JE005854"
+}

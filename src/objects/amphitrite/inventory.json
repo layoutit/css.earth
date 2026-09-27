@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "amphitrite-arrival.webp",
+      "bytes": 39938,
+      "sha256": "cfa477e42b3daadf5fbeb2a2bee26c124d32449d8bd61fc149da2a50a32567c6"
+    },
+    {
+      "location": "public",
       "filename": "amphitrite-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "amphitrite-zimpol-thumbnail.webp",
       "bytes": 1916,
       "sha256": "0c61da009a2f71199f7f74da24e155cc3af956ef0b5767646cdeb0499993d656"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "c60c32ca456573bd7c16bed52c817b947188be5ba9d365b327fb5d431cca3239"
     },
     {
       "location": "prepared",

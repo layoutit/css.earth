@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "vindobona-arrival.webp",
+      "bytes": 41254,
+      "sha256": "86332f237da7bab3c59022f1a8b65d118109495a1945551f333af1a99e5f0d3d"
+    },
+    {
+      "location": "public",
       "filename": "vindobona-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "vindobona-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "dc0afd33fa1d8c08726b8c92cd7c62cdc1b8eb43f4523bcd1616bb4d4be98a72"
     },
     {
       "location": "prepared",

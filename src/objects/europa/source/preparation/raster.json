@@ -318,6 +318,272 @@
         },
         "textureScale": 0.5
       }
+    },
+    {
+      "id": "carbon-dioxide",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "jwst/carbon-dioxide.fits",
+      "falseColor": true,
+      "resolutionScale": 0.125,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "carbon-dioxide",
+        "label": "Carbon dioxide",
+        "minimum": 0,
+        "maximum": 0.18,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "0%",
+          "9%",
+          "18%"
+        ],
+        "units": "band depth",
+        "title": "JWST carbon dioxide",
+        "description": "Depth of the 4.25 µm CO₂ band in eight JWST NIRSpec cubes, November 2022–February 2025. Each view is placed on the surface it observed. About 300 km is the finest resolved detail; the 1° grid is resampling. Missing polar coverage remains empty.",
+        "format": "fits-image-map",
+        "path": "jwst/carbon-dioxide.fits",
+        "consumer": "jwst-carbon-dioxide",
+        "sourceUrl": "https://doi.org/10.1126/science.adg4155",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "extension": 1,
+        "name": "CO2 BAND DEPTH",
+        "primary": {
+          "TELESCOP": "JWST",
+          "OBJECT": "EUROPA",
+          "QUANTITY": "CO2 BAND DEPTH"
+        },
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "longitudeOrigin": 0,
+          "rowOrder": "north-to-south"
+        }
+      }
+    },
+    {
+      "id": "hydrogen-peroxide",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "jwst/hydrogen-peroxide.fits",
+      "falseColor": true,
+      "resolutionScale": 0.125,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "hydrogen-peroxide",
+        "label": "Hydrogen peroxide",
+        "minimum": -0.015,
+        "maximum": 0.065,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "−0.015",
+          "0.065"
+        ],
+        "units": "band depth",
+        "title": "JWST hydrogen peroxide",
+        "description": "Depth near 3.50 µm in eight JWST NIRSpec cubes, interpreted as H₂O₂ by Wu et al. (2024). Yoffe & Shahaf (2026) find a NIRSpec artefact in this band and exclude it from their analysis. This straight-line continuum proxy is not the published band area. Resolution is about 300 km.",
+        "format": "fits-image-map",
+        "path": "jwst/hydrogen-peroxide.fits",
+        "consumer": "jwst-hydrogen-peroxide",
+        "sourceUrl": "https://doi.org/10.3847/PSJ/ad7468",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "extension": 1,
+        "name": "H2O2 BAND DEPTH",
+        "primary": {
+          "TELESCOP": "JWST",
+          "OBJECT": "EUROPA",
+          "QUANTITY": "H2O2 BAND DEPTH"
+        },
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "longitudeOrigin": 0,
+          "rowOrder": "north-to-south"
+        }
+      }
+    },
+    {
+      "id": "sodium-chloride",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "hst/nacl-450nm.fits",
+      "falseColor": true,
+      "resolutionScale": 0.125,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "sodium-chloride",
+        "label": "Salt signature",
+        "minimum": 0,
+        "maximum": 200,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "0 Å",
+          "100 Å",
+          "200 Å"
+        ],
+        "units": "Angstrom",
+        "title": "450 nm absorption",
+        "description": "Strength of the 450 nm absorption band in Hubble STIS scans from four visits in 2017, interpreted as irradiated sodium chloride. The broad background cannot be fully separated, so compare places rather than absolute values. The slit resolves about 380 km; missing coverage remains empty.",
+        "format": "fits-image-map",
+        "path": "hst/nacl-450nm.fits",
+        "consumer": "hst-sodium-chloride",
+        "sourceUrl": "https://doi.org/10.1126/sciadv.aaw7123",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "extension": 1,
+        "name": "BAND STRENGTH",
+        "primary": {
+          "TELESCOP": "HST",
+          "OBJECT": "Europa",
+          "QUANTITY": "BAND STRENGTH"
+        },
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "longitudeOrigin": 0,
+          "rowOrder": "north-to-south"
+        }
+      }
+    },
+    {
+      "id": "junocam",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "observations/junocam/JNCR_2022272_45C00001_V01.IMG",
+      "falseColor": true,
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/iau-ellipsoid.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 16022,
+            "expectedFaces": 32040,
+            "stepDegrees": 2,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 1560.8,
+          "rows": 90,
+          "columns": 180,
+          "flatFaceErrorMeters": 480
+        },
+        "lens": {
+          "format": "junocam-camera",
+          "consumer": "junocam-observation",
+          "metadata": {
+            "label": "JunoCam",
+            "falseColor": true,
+            "coverage": "Four colour photographs JunoCam took on 29 September 2022, between 97 and 291 seconds after Juno passed 355 km above Europa, from 1,515 to 5,443 km up by their labels and 1.1 to 3.7 km per pixel. Each is a stack of strips through the camera's red, green and blue filters, every strip with its own camera from the Juno kernels; two epochs per photograph are fitted to Europa's lit limb. They cover 23 percent of the globe, around the sub-Jovian point, with the lighting they were taken in: the terminator runs down the western edge. The three bands share one display range, so the colour is JunoCam's own band ratios, not a natural-colour reconstruction. Surface the photographs do not reach keeps the grid."
+          },
+          "frames": [
+            {
+              "id": "jncr_2022272_45c00001_v01",
+              "path": "observations/junocam/JNCR_2022272_45C00001_V01.IMG",
+              "labelPath": "observations/junocam/JNCR_2022272_45C00001_V01.LBL",
+              "startTime": "2022-09-29T09:38:05.691Z"
+            },
+            {
+              "id": "jncr_2022272_45c00002_v01",
+              "path": "observations/junocam/JNCR_2022272_45C00002_V01.IMG",
+              "labelPath": "observations/junocam/JNCR_2022272_45C00002_V01.LBL",
+              "startTime": "2022-09-29T09:39:06.757Z"
+            },
+            {
+              "id": "jncr_2022272_45c00003_v01",
+              "path": "observations/junocam/JNCR_2022272_45C00003_V01.IMG",
+              "labelPath": "observations/junocam/JNCR_2022272_45C00003_V01.LBL",
+              "startTime": "2022-09-29T09:40:08.003Z"
+            },
+            {
+              "id": "jncr_2022272_45c00004_v01",
+              "path": "observations/junocam/JNCR_2022272_45C00004_V01.IMG",
+              "labelPath": "observations/junocam/JNCR_2022272_45C00004_V01.LBL",
+              "startTime": "2022-09-29T09:41:09.159Z"
+            }
+          ],
+          "spice": {
+            "kernelSet": "juno",
+            "kernels": [
+              "lsk/naif0012.tls",
+              "pck/pck00011.tpc",
+              "sclk/JNO_SCLKSCET.00211.tsc",
+              "fk/juno_v12.tf",
+              "ik/juno_junocam_v03.ti",
+              "spk/spk_rec_220909_221019_221027.bsp",
+              "ck/juno_sc_rec_220925_221001_v01.bc"
+            ],
+            "observer": -61,
+            "target": 502,
+            "targetName": "EUROPA",
+            "bodyFrame": "IAU_EUROPA",
+            "aberration": "LT+S"
+          },
+          "epochRefinement": {
+            "method": "mesh-limb-epochs",
+            "maximumPointingSeconds": 0.05,
+            "maximumEphemerisSeconds": 2,
+            "maximumResidualPixels": 1.5,
+            "minimumControls": 64,
+            "maximumControls": 1500,
+            "searchPixels": 64
+          },
+          "selection": "finest-resolution",
+          "levelMatching": {
+            "samplesPerTriangle": 8,
+            "minimumPairs": 128,
+            "maximumGain": 1.5,
+            "maximumAngleDegrees": 70
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "maximumEmissionDegrees": 80,
+            "visibilityToleranceMeters": 0.5,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within two diagonal pixel footprints of the closest point of the reference ellipsoid; a footprint is the pixel's range times the camera's 675 microradian pixel angle, stretched by the emission angle, 1.1 to 3.7 km at nadir across the four photographs. Emission is limited to 80 degrees, where a pixel stretches nearly six times along the surface. The ellipsoid is convex, so no point hides another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 85,
+            "maximumEmissionDegrees": 80,
+            "maximumGain": 1
+          },
+          "display": {
+            "basis": "authored",
+            "displayRange": [
+              0,
+              0.35
+            ]
+          }
+        }
+      },
+      "resolutionScale": 2,
+      "thumbnailFraming": {
+        "centerLongitudeDegrees": 30,
+        "centerLatitudeDegrees": 10,
+        "spanDegrees": 90
+      }
     }
   ],
   "lighting": {

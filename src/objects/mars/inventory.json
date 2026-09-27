@@ -3,9 +3,27 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mars-arrival.webp",
+      "bytes": 132076,
+      "sha256": "f0b22b15c24a72ae2cc620ff414333ec6ce2c9e11e6e6fefded63ee79b5bfd2e"
+    },
+    {
+      "location": "public",
       "filename": "mars-features.json",
       "bytes": 6046258,
       "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-chlorine.webp",
+      "bytes": 772,
+      "sha256": "94620da6357a905ff2fba9cdd7efdcac471d87fbf394c041a243457cc49510bc"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-crust.webp",
+      "bytes": 466,
+      "sha256": "3e0d1461cfbd7abb235bc988b84f8b7314c2cef49ac875dc110a6ffa6db57e33"
     },
     {
       "location": "public",
@@ -15,15 +33,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-lens-geology.webp",
+      "bytes": 1182,
+      "sha256": "130350d9a5b81b168c56b2b1f993f502a65e81f65c551e2cf560932d35de20b2"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-iron.webp",
+      "bytes": 772,
+      "sha256": "5f82f96b6273ab22574512639045c2698fb238d6138aab4f62d28563c6645ef5"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-magnetic.webp",
+      "bytes": 496,
+      "sha256": "b94f8cab9e0133d44b8176aec5f52d9e61f63c8343972977cabd077c04ea9328"
+    },
+    {
+      "location": "public",
       "filename": "mars-lens-normal.webp",
       "bytes": 408,
       "sha256": "7e8d826de9f91a935f1589acda5abb4662d44219a1670e9f0abbf0d432e13da3"
     },
     {
       "location": "public",
+      "filename": "mars-lens-potassium.webp",
+      "bytes": 686,
+      "sha256": "b03eddd2ec7f65d4387febdd5a9504b652bee909496254b5b968e10f963ab925"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-silicon.webp",
+      "bytes": 760,
+      "sha256": "c08f6f835b940597cae6e3d19e648539955e8cf68a2270983ab444689893bec7"
+    },
+    {
+      "location": "public",
       "filename": "mars-lens-thermal.webp",
       "bytes": 80,
       "sha256": "8456d240ce4955ca29f1e118c9c8c8f94019a49bf17ee0453ef6d781b0dcef0d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-thorium.webp",
+      "bytes": 676,
+      "sha256": "2352ae88516dd6681fe17b7af9e0761be88faf87ba8faf4e56d648f4f77dd56d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-water-equivalent.webp",
+      "bytes": 768,
+      "sha256": "a0a03743c5baede2daccfaf06baa51aa200ceea1016b13e77a51f99ef6883148"
     },
     {
       "location": "public",
@@ -46,8 +106,20 @@
     {
       "location": "public",
       "filename": "mars-photometric-phase-curve.svg",
-      "bytes": 4407,
-      "sha256": "2e45b136ec074a85265703c45a1d47c8ccbc2a0818f54c1d3dc08373af283a70"
+      "bytes": 5266,
+      "sha256": "b7eee33ca1a7fea6863f3ebcd8bdc8059c42b04d172f7347c96b47af533c82cc"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-chlorine@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-crust@2x.webp",
+      "bytes": 57270,
+      "sha256": "445766435963c05f5622bc55ba116fc24ea76902bd8f9e28665c16e41ccf0eba"
     },
     {
       "location": "public",
@@ -57,9 +129,39 @@
     },
     {
       "location": "public",
+      "filename": "mars-poles-geology@2x.webp",
+      "bytes": 7828,
+      "sha256": "6d3d7586b54c60760f793c533be1617d6cc02fb0cf63f95ace0a3360dbed3726"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-iron@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-magnetic@2x.webp",
+      "bytes": 90286,
+      "sha256": "3a6d04d2d898546d795a704d36c1d178d3ad41461b887cafdabfa8c769b82e66"
+    },
+    {
+      "location": "public",
       "filename": "mars-poles-normal@2x.webp",
       "bytes": 524794,
       "sha256": "384fa36bdb1c4a30c5c6e470489bdc3c9667ba8d1072b556a9b67d118271120c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-potassium@2x.webp",
+      "bytes": 17088,
+      "sha256": "4d2a26b825368440b4e390ecf70a77df9bc8508c9e96e22bbd90be0f37159724"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-silicon@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
     },
     {
       "location": "public",
@@ -69,9 +171,33 @@
     },
     {
       "location": "public",
+      "filename": "mars-poles-thorium@2x.webp",
+      "bytes": 17062,
+      "sha256": "14bd387f4e7b9ecd35597adc2fa42ff85ac27f01d8e2edf97d59244bf4b763a4"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-water-equivalent@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    },
+    {
+      "location": "public",
       "filename": "mars-reflectance-spectrum.svg",
-      "bytes": 5843,
-      "sha256": "3292ca20375fd7fb5a5e19f3b70e59064dfe67cf4216c709054ccac0832c95c9"
+      "bytes": 6695,
+      "sha256": "c52f4049b87fa1a501a60dfd626eef3b8a194bb59199e9976ef16766615d3fe9"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chlorine@2x.webp",
+      "bytes": 7926,
+      "sha256": "da12e20c418420a93b500ccbe1e52fa69400d8620ffd3ee47b40deb7544a3851"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-crust@2x.webp",
+      "bytes": 46302,
+      "sha256": "a42baafe346a90cf542f3d5692412777d5880a29dc9b8fef3125ac74f7efc8b8"
     },
     {
       "location": "public",
@@ -81,9 +207,39 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-geology@2x.webp",
+      "bytes": 225836,
+      "sha256": "57ef027cee8438ba96befac4376df95b21d169579a9bd944944ba8dd6176bca2"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-iron@2x.webp",
+      "bytes": 7946,
+      "sha256": "a77f18720f833cb9ef73d2285d92c3fc0d5ba04d6f9ec4dd2102df3754b439e5"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-magnetic@2x.webp",
+      "bytes": 48070,
+      "sha256": "05fb684b2bcb533807298055cc61b30584d77190fae3748a2964d00fc5d6de9c"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-normal@2x.webp",
       "bytes": 1940690,
       "sha256": "5f05635714009ea037390557948fdbb8b6a0544df7c544564f65a491ff4903a4"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-potassium@2x.webp",
+      "bytes": 5974,
+      "sha256": "1079ecf5d842ae8cae6425f8ba472513ef2b99dda69f11c0ecc47c14f5ab8a60"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-silicon@2x.webp",
+      "bytes": 7218,
+      "sha256": "631aa181149be714ac97b793d7b663479dce6a28bef023055d51baa530b5d20d"
     },
     {
       "location": "public",
@@ -93,33 +249,51 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-thorium@2x.webp",
+      "bytes": 5998,
+      "sha256": "06e9d2d375fd470f39c52045498b19e524a166ac96ae55dc8151032356ee2ab6"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-water-equivalent@2x.webp",
+      "bytes": 7950,
+      "sha256": "a67730edd26da17577b5cd3eebd8f46dd8c47ff5fd7518f272ed3de207231c3d"
+    },
+    {
+      "location": "public",
       "filename": "mars-temperature-pressure-profile.svg",
-      "bytes": 2423,
-      "sha256": "bfde0a93253a49fbd6badbc66a15cb89a3340d6f1d9dfb43c1a02b6ef336f474"
+      "bytes": 2904,
+      "sha256": "ef6da52b4a4c17d0842f84f6e6953fa4ab2568687376c566a25c5611ef726b22"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "80bb8271e2012361da18ff1608630af76d815d28d2460aff7b4f3a7055d19893"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2602,
-      "sha256": "b538783cdfce9c96946cd2e848450fb9d4b2896e8680eef7ef71b34e851a4606"
+      "bytes": 7524,
+      "sha256": "4deb428a9e2ab270c0501708680905b23906456cfab397f40f31a48b70260a17"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1547,
-      "sha256": "4ce2ea0d2afcea4f3e1e6e3103311c1478d73080937ba455f024d7a8c4883609"
+      "sha256": "7faf088b601097e93360e6b988acdfa65c05ffa0f8fcea866990d29c5a57298f"
     },
     {
       "location": "prepared",
       "filename": "content.json",
       "bytes": 4785,
-      "sha256": "e4ac536d9764c9bf5905660097c66b6650a8cde34e46e87a748bb23ee6a732fa"
+      "sha256": "3ea00865e7a6d3ad47224b4095877baf75875e06d74daa8c69213eccbd4df2b7"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 2101,
-      "sha256": "9d4cee2d8363cb48e2dfd0867f284bd0a03c03656e720d291bbb3040b9f3e507"
+      "bytes": 17740,
+      "sha256": "8a728b03ef5fb5491ac35d5405585e0a2b021c3a1adc30650425cff90fd790c6"
     },
     {
       "location": "prepared",
@@ -130,38 +304,92 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 3560,
-      "sha256": "aa73d91c64ebe5fb59cec110c6ba7796422d849590d861087851c3c64111b5d2"
+      "bytes": 24983,
+      "sha256": "a8bdf22439f096b3a33b40f16dec9150d89d6eabc8c207046ffca9d1308962dc"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 234,
-      "sha256": "145c63ec83c6eda131d52a0ec87e530e3798f208c3d2cf7ad461309282117e70"
+      "bytes": 907,
+      "sha256": "83eb3fa756ce02b22e34024781b5aa26743fddcf45ff895b2bd94140a7913d00"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/chlorine.webp",
+      "bytes": 5624,
+      "sha256": "1c1e5a0cf1d35373a6f6c93886dca5bc0004e5708a1658f0b74ae30989a45dc6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/crust.webp",
+      "bytes": 3842,
+      "sha256": "4bc7057a6084760bc265ee4467318cd19beb1c3035800e1874faaa5d823d8b9f"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 21438,
-      "sha256": "bd5f19080b98fb4ac686070ae6dba9be93ff5a69724de1994ac7c10c3ae69870"
+      "bytes": 21640,
+      "sha256": "9ba5a05bed36ccd7572d85eb0fde4c24fde15ef693782c898b750ae13eb424ca"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/geology.webp",
+      "bytes": 18228,
+      "sha256": "3c8362eddf83a05cae726ed9c5748ecc2b862361ab434de992db3b7d44d87ba6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/iron.webp",
+      "bytes": 5636,
+      "sha256": "5f901a2b2cb46acd04474ff7ddf5b8c0b0ca657edff3af67c576e783c2a982d8"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/magnetic.webp",
+      "bytes": 2842,
+      "sha256": "071e6ead127a07979fd0a933db5366d7e1cf456c5650838332c75ab44d71e2a2"
     },
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 11690,
-      "sha256": "1e011a76608aa4c56758da325362874fe6135549512c471c06b1f15083ade049"
+      "bytes": 12306,
+      "sha256": "8bb7da0e723dcb38c7f811e31e2c1c2b48792d66feb3ac323d0d2d68bafd5be6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/potassium.webp",
+      "bytes": 3974,
+      "sha256": "f7c92d73652a9535d1f9f70cf96947520e9947d4fae54ca8b580908db27bbc65"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/silicon.webp",
+      "bytes": 4992,
+      "sha256": "6d39ddf8b511563d83437b512c7c86aed20924b1f3d6d6e995c7ee53680a0127"
     },
     {
       "location": "prepared",
       "filename": "minimaps/thermal.webp",
-      "bytes": 11844,
-      "sha256": "b72401f2efd56a63eab6168d3a06955b103854691b11e1e04005f666b645ce90"
+      "bytes": 13288,
+      "sha256": "f8760e02a76ce7796a163bd1df857f98006835d6ec7e6191c32f28dd39520e23"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/thorium.webp",
+      "bytes": 3896,
+      "sha256": "1afdc0291d842b5e5748dc30bae43a72ba172da0386913b8b8141d91bac2c9ec"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/water-equivalent.webp",
+      "bytes": 5570,
+      "sha256": "411aa00a8d059ad29603d2442d87af3b0ff50e9ec983c0fd5212e1c14030062e"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 514922,
-      "sha256": "67fa5b5c016f076dc5e775213434df827a20c131541e9badcf4209005eb9cdaf"
+      "bytes": 564781,
+      "sha256": "a485d0c0f1881257377fb7bfdeeaf9db8b940c0c3b8bb8e6d7b3353f183f7bbf"
     },
     {
       "location": "prepared",
@@ -184,8 +412,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1123,
-      "sha256": "440c5f48fc5f403121f392a1dd1f44338aa4129274a0add035b231442acdc177"
+      "bytes": 2786,
+      "sha256": "2808d1a3c4012c1f6bb7bdbdd2f7494b3c88640de46b8fe5d470658e0a3d14bd"
     },
     {
       "location": "prepared",

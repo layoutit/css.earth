@@ -1,0 +1,22 @@
+{
+  "id": "usgs-mars-sim3292",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Geologic map of Mars, USGS SIM 3292",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pubs.usgs.gov/sim/3292/",
+      "label": "Geologic map of Mars, USGS SIM 3292"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/geology/sim3292-colors.json",
+      "locator": "/colors"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kiviuq-arrival.webp",
+      "bytes": 32570,
+      "sha256": "5f7c99f1ee732fe5ee75876694a5818102714d20e178e32495129769d90ace2f"
+    },
+    {
+      "location": "public",
       "filename": "kiviuq-model-shadow-alpha@2x.webp",
       "bytes": 132328,
       "sha256": "ab3bd7d9e46ce923157b91fade60693a82664950a48c1a81519d9c83183f9942"
@@ -30,6 +36,12 @@
       "filename": "kiviuq-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "9dc0cb6165057b076c1d5a4c4e28ab0fcb55b7462e2e3ed575c4f3321b219ee2"
     },
     {
       "location": "prepared",

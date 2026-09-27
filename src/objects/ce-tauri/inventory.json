@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ce-tauri-arrival.webp",
+      "bytes": 69646,
+      "sha256": "294ce6a74e4defb0c6eb879c75b4111510d60228ce66ff2d0be0c1d2b8d9ab1f"
+    },
+    {
+      "location": "public",
       "filename": "ce-tauri-context-pionier-2016-11@2x.webp",
       "bytes": 47590,
       "sha256": "328272d6c0a0900a72d1d00a3abef66fc481496b36bd520493918993c77f3d1b"
@@ -66,6 +72,12 @@
       "filename": "ce-tauri-surface-pionier-2016-12@2x.webp",
       "bytes": 58220,
       "sha256": "a8569610d30b00692999b9f6a9b3c47cb08dbce88a6f24850e0f29d6887cac1c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "ada1538c30aa15baa172f8c9bdb34b8ac56c0f5d9e619a8025a7cda1e5524467"
     },
     {
       "location": "prepared",

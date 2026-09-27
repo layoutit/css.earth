@@ -1,5 +1,5 @@
 import { formatSharedView, parseSharedView } from '@cssearth/renderer/navigation';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 import { withDataset } from '../dataset-url.mts';
 import type { createNavigationHistory } from '../navigation/navigation-history.mts';
 import { replaceNavigationUrl } from '../navigation/navigation-history.mts';

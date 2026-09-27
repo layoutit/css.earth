@@ -1,5 +1,5 @@
-import type { BrowserWindow } from '../browser-types.mts';
-import { requiredElement } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
+import { requiredElement } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 import { createNavigationStyles, type NavigationStyleStage } from './navigation-styles.mts';

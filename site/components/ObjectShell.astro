@@ -6,7 +6,7 @@ import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../object-shell-types";
 import { SCENE_OBJECTS } from "../objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
-import { requireObjectControls } from "../scene/scene-contract.mts";
+import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
 import SourcesLink from './SourcesLink.astro';
 import ObjectResults from "./ObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
@@ -27,7 +27,7 @@ import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { temperatureColor } from '@cssearth/engine';
 import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
-import { SEARCH_QUERY_LIMIT } from '../object-search.mts';
+import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 
 declare const __CSSEARTH_VERSION__: string;
 

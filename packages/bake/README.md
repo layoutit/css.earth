@@ -28,7 +28,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/photometry` | disk and phase functions, the Hapke model and roughness, normalization to a reference geometry, model records, limb laws from published models, PSG limb profiles for halos | Node only (`node:fs`, `sharp`) |
 | `@cssearth/bake/raster` | raster recipes and their validation, surface maps, pages and poles, lighting banks and limb overlays, atmospheres and halos, interiors, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/scene` | geometry profiles, projected surface leaves and their raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials, solid-body surfaces, the solid scene's perspective camera | Node only (`node:*`, PolyCSS) |
-| `@cssearth/bake/presentation` | the retained node tree, projective layouts and leaf boxes, offline CSSOM reads, activation groups, the row-bank cutaway, composite and emissive presentations | Node only (`node:*`, Playwright) |
+| `@cssearth/bake/presentation` | the retained node tree, projective layouts and leaf boxes, offline CSSOM reads, activation groups, the row-bank cutaway, composite and emissive presentations, the prepared-presentation contract and schemas, the cubic-sky and directional-Sun contracts and preparers | Node only (`node:*`, Playwright) |
 | `@cssearth/bake/volume-leaves` | the CSS volume compilers: slice stacks and detail planes as retained PolyCSS leaves, leaf bounds, depth order, volume impostors | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/stars` | point-field recipes, catalogue sources, palette, magnitude hierarchy and precision, point atlas and photometry, diffuse sky, the encoded point bank | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/shell` | surface-shell recipes, meshes and atlas, and the CSS shell compiler | Node only (`node:*`, PolyCSS) |
@@ -43,9 +43,10 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
 | `@cssearth/bake/objects/geometry` | shape models (including ASCII VTK POLYDATA) and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
 | `@cssearth/bake/objects/cameras` | observer-computed cameras from an ephemeris and a spin state or IAU pole model, the SPICE kernel banks bound to the source-manifest reader | Node only |
-| `@cssearth/bake/objects/scene` | the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the ecliptic presentation frame, default camera, Sun reference view direction and astrometric sky registration derived from the solar geometry the host passes in | Node only |
+| `@cssearth/bake/objects/scene` | the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the ecliptic presentation frame, default camera, Sun reference view direction and astrometric sky registration derived from the solar geometry the host passes in; an object's sky orientation, directional Sun, physical solar-system scene and focused camera | Node only |
 | `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology and symbols, eclipse and phase-curve maps, observed colour rasters and their photometric composition, their source records, the WISE atlas mosaic grid | Node only (`node:*`, `sharp`, `geotiff`) |
-| `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (mission decoders and cameras, registration, native photographs, solid and radial sources, atlases), giant (ring and disc geometry, photometric contracts), paged-ellipsoid (texture levels, surface banks, Earth rasters), material-composition (recipes, rasters, radial motion, spectral variants), cutaway and observed-surfaces contracts | Node only |
+| `@cssearth/bake/objects/sources` | authored source references read through the source manifest, pinned source files with their bindings, byte ranges and atomic publication | Node only |
+| `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (mission decoders and cameras, registration, native photographs, solid and radial sources, atlases), giant (ring and disc geometry, photometric contracts), paged-ellipsoid (texture levels, surface banks, Earth rasters), material-composition (recipes, rasters, radial motion, spectral variants), observation (science rasters and elevation, FITS maps, controlled and synoptic mosaics, band colours, plates and point sources), shape-model (source records, GLB surfaces, shape lighting, ring leaves), cutaway and observed-surfaces contracts | Node only |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -62,7 +63,7 @@ packages/bake/
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
 │   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
-├── src/objects/   color/, geometry/, cameras/, scene/, raster/, layers/<kind>/: the shared object libraries, one entry each
+├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, layers/<kind>/: the shared object libraries, one entry each
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -75,7 +76,7 @@ another topic.
 
 `pnpm --filter @cssearth/bake build` writes `dist/`; `pnpm --filter @cssearth/bake test` runs the package's tests
 (Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`. The raster
-lane's surface test also reads the observation lens sampler from `tools/objects/observation/`. The photometry tests stay
+lane's surface test also reads the observation lens sampler from `src/objects/layers/observation/`. The photometry tests stay
 in `tools/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
 The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies

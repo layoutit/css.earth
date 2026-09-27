@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-207496-arrival.webp",
+      "bytes": 31346,
+      "sha256": "9078c075e49a7639a89734d7e08a334b92972593fb59e83228895f8bba785152"
+    },
+    {
+      "location": "public",
       "filename": "hd-207496-lens-color.webp",
       "bytes": 44,
       "sha256": "c3f9e561dbe62d3f7f30d300cee6e51cb67f35210c73f609d49b800476c0eeeb"
@@ -24,6 +30,12 @@
       "filename": "hd-207496-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "21f7fc6337b6cc0197ad7471d888747717ffd56e6013f048ac25fa2f589ccb22"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "f6853d59adfb91a9406a6cc66a531c76a5b41a381e5a488c4f29ea13bd0216f9"
     },
     {
       "location": "prepared",

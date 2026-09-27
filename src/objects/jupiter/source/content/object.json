@@ -228,6 +228,283 @@
         },
         "notes": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
         "noData": true
+      },
+      {
+        "id": "visible-2015a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2015-01-19"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2015a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2015a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2015a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2015-01-19",
+        "notes": "Hubble OPAL release 2015a, starting 2015-01-19. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2015a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-22"
+        }
+      },
+      {
+        "id": "visible-2016a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2016-02-09"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2016a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2016a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2016a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2016-02-09",
+        "notes": "Hubble OPAL release 2016a, starting 2016-02-09. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2016a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-23"
+        }
+      },
+      {
+        "id": "visible-2017a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2017-04-03"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2017a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2017a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2017a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2017-04-03",
+        "notes": "Hubble OPAL release 2017a, starting 2017-04-03. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2017a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-24"
+        }
+      },
+      {
+        "id": "visible-2018a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2018-04-17"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2018a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2018a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2018a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2018-04-17",
+        "notes": "Hubble OPAL release 2018a, starting 2018-04-17. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2018a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-25"
+        }
+      },
+      {
+        "id": "visible-2019a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2019-06-26"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2019a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2019a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2019a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2019-06-26",
+        "notes": "Hubble OPAL release 2019a, starting 2019-06-26. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2019a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-26"
+        }
+      },
+      {
+        "id": "visible-2020a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2020-08-24"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2020a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2020a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2020a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2020-08-24",
+        "notes": "Hubble OPAL release 2020a, starting 2020-08-24. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2020a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-27"
+        }
+      },
+      {
+        "id": "visible-2021a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2021-09-04"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2021a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2021a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2021a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2021-09-04",
+        "notes": "Hubble OPAL release 2021a, starting 2021-09-04. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2021a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-28"
+        }
+      },
+      {
+        "id": "visible-2022a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2022-11-12"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2022a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2022a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2022a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2022-11-12",
+        "notes": "Hubble OPAL release 2022a, starting 2022-11-12. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2022a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-29"
+        }
+      },
+      {
+        "id": "visible-2024a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2024-01-05"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2024a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2024a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2024a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2024-01-05",
+        "notes": "Hubble OPAL release 2024a, starting 2024-01-05. Publisher colour composite (F395N, F502N, F658N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing and its red filter differ between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2024a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-30"
+        }
+      },
+      {
+        "id": "visible-2024c",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2024-11-19"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2024c.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2024c@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2024c-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2024-11-19",
+        "notes": "Hubble OPAL release 2024c, starting 2024-11-19. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2024c-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-31"
+        }
+      },
+      {
+        "id": "visible-2025a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2025-12-11"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-lens-visible-2025a.webp",
+        "surface": "/scenes/jupiter/jupiter-visible-2025a@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-visible-2025a-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2025-12-11",
+        "notes": "Hubble OPAL release 2025a, starting 2025-12-11. Publisher colour composite (F395N, F502N, F631N); gaps in any component remain missing. Each release combines exposures over a rotation. Colour processing differs between releases, so compare cloud morphology, not absolute colour.",
+        "source": {
+          "id": "opal-2025a-rgb",
+          "path": "../opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
+        }
+      },
+      {
+        "id": "magnetic",
+        "label": "Magnetic field",
+        "shortLabel": "Br",
+        "thumbnail": "/scenes/jupiter/jupiter-lens-magnetic.webp",
+        "surface": "/scenes/jupiter/jupiter-magnetic@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-magnetic-poles@2x.webp",
+        "falseColor": true,
+        "notes": "JRM33 radial magnetic field at the 1-bar ellipsoid (71,492 × 66,854 km), degree and order 13. Blue points inward; red points outward. Evaluated with the published PSH community code in System III east longitude; this is a model inferred from Juno measurements.",
+        "qualification": "JRM33 degree 13 · 1-bar ellipsoid",
+        "source": {
+          "id": "jrm33-radial-field",
+          "path": "../magnetic/radial-field.fits",
+          "url": "https://doi.org/10.1029/2021JE007055"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial field (gauss)",
+          "meta": "Negative inward · positive outward",
+          "sourceUrl": "https://doi.org/10.1029/2021JE007055",
+          "recipe": {
+            "palette": [
+              [
+                33,
+                102,
+                172
+              ],
+              [
+                247,
+                247,
+                247
+              ],
+              [
+                178,
+                24,
+                43
+              ]
+            ],
+            "labels": [
+              "−25",
+              "0",
+              "25"
+            ]
+          }
+        }
       }
     ]
   },
@@ -260,7 +537,7 @@
       "open": true,
       "src": "/scenes/jupiter/jupiter-reflectance-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Jupiter from 350 to 998 nanometers.",
       "titleKey": "reflectance",
       "source": {
@@ -274,7 +551,7 @@
       "open": false,
       "src": "/scenes/jupiter/jupiter-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Jupiter V-band brightness change across phase angles from zero to 130 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -287,7 +564,7 @@
       "open": false,
       "src": "/scenes/jupiter/jupiter-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Modeled Jupiter atmospheric temperature from 10 bar to 10 nanobar.",
       "titleKey": "temperaturePressure",
       "source": {

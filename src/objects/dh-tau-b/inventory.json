@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dh-tau-b-arrival.webp",
+      "bytes": 16594,
+      "sha256": "3eee91486ce7b87c152ce6aff47e4ac5e5719a6c8ba04d97cbf00a1a4b273458"
+    },
+    {
+      "location": "public",
       "filename": "dh-tau-b-lens-infrared.webp",
       "bytes": 44,
       "sha256": "6b5f90cabf54a316505905f7471c4500fecb12085273bf6bbcd1284e10ffb4b0"
@@ -18,6 +24,12 @@
       "filename": "dh-tau-b-surface-infrared@2x.webp",
       "bytes": 178,
       "sha256": "878a8bb017b6cb299c94f5f46d394d9a66995447bb7699944b7ca2477480d532"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 310,
+      "sha256": "406a8d7e79b61c9e7b645f677cee16b6d712a964141b08a0afd04c784919c739"
     },
     {
       "location": "prepared",

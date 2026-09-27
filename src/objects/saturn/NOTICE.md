@@ -27,3 +27,7 @@ rotation values, ring boundaries, and shadow phenomena. NASA does not endorse
 this presentation. The accelerated time scale, fixed camera, static light
 direction, prepared dust selection, visual scale, polar row fill, and
 PolyCSS topology are presentation choices documented in `README.md`.
+
+The dated OPAL sequence uses public Hubble WFC3/UVIS high-level science products from MAST under [CC BY 4.0](https://archive.stsci.edu/hlsp/opal), DOI [10.17909/T9G593](https://doi.org/10.17909/T9G593). Credit: NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team.
+
+This work used data acquired from the NASA/ESA HST Space Telescope, associated with OPAL program (PI: Simon, GO13937), and archived by the Space Telescope Science Institute, which is operated by the Association of Universities for Research in Astronomy, Inc., under NASA contract NAS 5-26555. All maps are available at https://doi.org/10.17909/T9G593.

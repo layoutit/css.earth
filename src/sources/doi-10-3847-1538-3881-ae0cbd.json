@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ae0cbd",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Thompson et al. (2025): Revised Mass and Orbit of <i>ε</i> Eridani b: A 1 <i>M</i> <sub>Jup</sub> Planet on a Near-circular Orbit",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2502.20561"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae0cbd"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....170..301T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae0cbd",
+      "label": "The Astronomical Journal 170 301"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T",
+      "checkedOn": "2026-09-26",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Thompson et al. (2025), The Astronomical Journal 170 301",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T"
+    }
+  ],
+  "publisher": "The Astronomical Journal 170 301",
+  "creators": [
+    "William Thompson",
+    "Eric L. Nielsen",
+    "Jean-Baptiste Ruffio",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

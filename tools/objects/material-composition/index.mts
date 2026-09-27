@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import {readAuthoredSources} from '../authored-sources.ts';
+import {readAuthoredSources} from '@cssearth/bake/objects/sources';
 import {parse} from '@cssearth/core/schema';
 import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer';
 import { layeredRecipe, spectralRecipe, radialMotionRecipe, layeredPresentationRecipe, prepareRadialMotionAndShadow, prepareSpectralMaterialVariants, prepareLayeredLeafLayouts } from '@cssearth/bake/objects/layers/material-composition';
@@ -14,15 +14,15 @@ import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {inventoryPublicAssets} from '../../../src/platform/runtime-asset-closure.mts';
-import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
-import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
-import {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
-import {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import {requirePreparedPresentation} from '@cssearth/bake/presentation';
+import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '@cssearth/bake/presentation';
+import { withFocusedCamera } from '@cssearth/bake/objects/scene';
+import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
 import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
 import {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import {createLayeredOblatePreparation} from './layered-oblate.mts';
 import {prepareLayeredOblatePresentation} from './presentation.mts';
-import {withFocusedCamera} from '../focused-camera.mts';
+import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
 
 
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -59,6 +59,21 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const baseCompiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:radial});
   const metadata=await baseCompiler.prepareBaseMaterialSurfaces();
   const materialLenses=await prepareSpectralMaterialVariants({...context,config:surface});
+  // Dated RGB observations share the body's visible-light material and rings.
+  const observationSource=sources.get('observations');
+  const observations=observationSource?parseObservedSurfaceRecipe(observationSource.value):null;
+  if(observations)await prepareObservedSurfaces({...context,config:observations,write:true});
+  const normal=materialLenses.controls.find(lens=>lens.id===materialLenses.defaultLens);
+  if(!normal)throw new Error('Layered observations require the default material.');
+  const observedLenses=(observations?.lenses??[]).map(lens=>{
+    const product=(kind:string)=>{
+      const matches=lens.products.filter(product=>product.kind===kind), selected=matches.find(product=>product.filename.includes('@2x'))??matches[0];
+      if(!selected)throw new Error(`Observation ${lens.id} has no ${kind} product.`);
+      return `${geometry.publicPrefix}${selected.filename}`;
+    };
+    return {...normal,id:lens.id,materialLens:materialLenses.defaultLens,surfaceUrl:product('surface'),surface2xUrl:product('surface'),polesUrl:product('poles'),thumbnailUrl:product('thumbnail')};
+  });
+  const presentationLenses={...materialLenses,controls:[...materialLenses.controls,...observedLenses]};
   const views=await prepareCutawayMaterials({...context,config:materials,objectLightDirection:radial.ringSource.shadowModel.objectLightDirection});
   const compiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:{...radial,lenses:materialLenses,views}});
   const material=await compiler.composeMaterialSurfaces(metadata);
@@ -73,14 +88,14 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   if(relative(projectRoot,stylesheetPath).startsWith('..'))throw new TypeError('Layered stylesheet escapes project.');
   const stylesheet=await readFile(stylesheetPath,'utf8');
   const layouts=prepareLayeredLeafLayouts({scene,stylesheet,config:presentationConfig});
-  const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,lenses:materialLenses,views,sky,sun});
+  const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,lenses:presentationLenses,views,sky,sun});
   const normalizedPresentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
   const presentation=withFocusedCamera(normalizedPresentation,sky);
   requirePreparedPresentation(presentation,{controls});
   const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls};
   // Only consumer-used scene data is published. Dormant moon/orbit generators,
   // raw masters and diagnostic shader metadata are not runtime dependencies.
-  const values={scene,sky,sun,runtime:definition,'material-lenses':materialLenses,views,layouts};
+  const values={scene,sky,sun,runtime:definition,'material-lenses':presentationLenses,views,layouts};
   for(const[name,value]of Object.entries(values))await writeJson(resolve(outputDirectory,`${name}.json`),value);
   await prepareLayeredConsumerManifest({id:descriptor.id,definition,content,stylesheet,publicDirectory,objectDirectory:write?objectRoot:outputDirectory});
   const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ino-arrival.webp",
+      "bytes": 43166,
+      "sha256": "0b0043e9ae5aee3604d5835aa931165b6120b28e328bf8637ec5bf8b6512580e"
+    },
+    {
+      "location": "public",
       "filename": "ino-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "ino-zimpol-thumbnail.webp",
       "bytes": 1718,
       "sha256": "1987227c40cda0c674336e858f6d269a068feb5f741e793b2bab7ca0f2a7a131"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 290,
+      "sha256": "82bbbc3d15d000d69d9889ca22491f5d24b012f9fd33909426a33030a15fcf91"
     },
     {
       "location": "prepared",

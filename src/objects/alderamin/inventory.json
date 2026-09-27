@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alderamin-arrival.webp",
+      "bytes": 51584,
+      "sha256": "338dcefe354a03e3909c4b0ad90839e0b612332e910bdac9a7da4401c0ad3c87"
+    },
+    {
+      "location": "public",
       "filename": "alderamin-lens-color.webp",
       "bytes": 186,
       "sha256": "c8ec77a309514c11912d96c1d153c95ba46c7f5a2832c1369002403cdd2d2394"
@@ -24,6 +30,12 @@
       "filename": "alderamin-surface-color@2x.webp",
       "bytes": 2492,
       "sha256": "c65cf7266be81488e78ae2aff4b7ee7a1c4d027a1a65850524f207d78ec4f6d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "d5c2bef1755b41950d63c0e3680827a1e7a785c73904cf8ed147bd92c0572676"
     },
     {
       "location": "prepared",

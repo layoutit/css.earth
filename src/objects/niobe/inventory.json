@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "niobe-arrival.webp",
+      "bytes": 37214,
+      "sha256": "6b6e5a8db07906a22080278c010dbdb2bcae677e554c006f389726042dc9f4b5"
+    },
+    {
+      "location": "public",
       "filename": "niobe-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "niobe-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 288,
+      "sha256": "bc0522ac21136d7d891c59173c9d49d36546fc8296d68a24982bac89a56509f5"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leda-arrival.webp",
+      "bytes": 34918,
+      "sha256": "8ba2280175bae8613e56b0478c440f67f1b169e6d5716adccd6ba71a050f8d34"
+    },
+    {
+      "location": "public",
       "filename": "leda-model-shadow-alpha@2x.webp",
       "bytes": 124142,
       "sha256": "82d2cd56dcb862cc1ccef6a3e844e3aab9a16da96e6dddf38160182208b4bb98"
@@ -30,6 +36,12 @@
       "filename": "leda-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "9f3a207d1e70071caae92895a6f054b25b14248188ee2976d57fd1d38d6fea13"
     },
     {
       "location": "prepared",

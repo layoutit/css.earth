@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "beta-pictoris-arrival.webp",
+      "bytes": 145642,
+      "sha256": "3e2f1785cee992332d2c3de04075aac498e18d4d8ef8af02b9f5d619d382ed36"
+    },
+    {
+      "location": "public",
       "filename": "beta-pictoris-lens-color.webp",
       "bytes": 44,
       "sha256": "e5ed762d929ff45ae5b4854bff9b4d5fb13f54382b89a53c758cff412173c042"
@@ -27,6 +33,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 390,
+      "sha256": "a45928f846ca725860a048be0cb74351b3cb278bf9527214ca9234a86a88d8b3"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
       "bytes": 2156,
       "sha256": "5c64cd9c5157245d3f0386963f58ea6d09084bd3f4e3d8b21806627544b133ca"
@@ -35,7 +47,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1412,
-      "sha256": "3f3939a7d3b5bfb038be1e24a590951b1496bd11ee8518f375d8c3cb02c6c13d"
+      "sha256": "45a6088928f4caf878ba8046b80f2ab42c13d7a646614c66a97df99bf4ba8471"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pandora-55-arrival.webp",
+      "bytes": 35046,
+      "sha256": "5d31dd48e665773b681ff5ea821368e7db17b0110f3552fa07e1bc965ade42bb"
+    },
+    {
+      "location": "public",
       "filename": "pandora-55-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "pandora-55-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "76b41339b480f4a44f6651b7b5d5e2142c0308ea41f202230c9aadebe3a37eb7"
     },
     {
       "location": "prepared",

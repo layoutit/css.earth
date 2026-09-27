@@ -5,7 +5,7 @@
 // renderer main thread called CrRendererMain whose work sits inside RunTask slices, and Chrome's event names. WebKit's
 // timeline records map onto those names one to one (the table below); the copy keeps WebKit's own name in args.webkit.
 // No converter exists upstream (searched 2026-09-26), so this is the smallest one: names, threads and frames only.
-// The USB device counters stay in trace.json (Perfetto); DevTools has no track for them. A capture taken with --screens
+// Counter events are preserved; Perfetto displays all category/device counters. A capture taken with --screens
 // carries screens/<epoch ms>.jpg, the iPad's real screen, which becomes DevTools' screenshot filmstrip.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -37,9 +37,15 @@ export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: numbe
     { ph: 'I', s: 't', name: 'SetLayerTreeId', cat: 'disabled-by-default-devtools.timeline', pid: PID, tid: MAIN, ts: start, args: { data: { frame: FRAME, layerTreeId: 1 } } },
   ];
   let frame = 0;
+  for (const event of events) if (event.ph === 'C') out.push({ ...event });
   for (const event of page) {
     const type = String(event.name), ts = event.ts as number, dur = typeof event.dur === 'number' ? event.dur : 0;
     const data: Record<string, unknown> = { ...(isRecord(event.args) && isRecord(event.args.data) ? event.args.data : {}), frame: FRAME };
+    if (event.cat === 'cssearth.memory') {
+      out.push({ ph: 'I', s: 't', name: 'TimeStamp', cat: CATEGORY, pid: PID, tid: MAIN, ts,
+        args: { data: { ...data, message: `${type}: ${String(data.objectId ?? '')}` }, webkit: type } });
+      continue;
+    }
     // A WebKit frame lasts until the next one: it becomes the frame boundary on the compositor, not a main-thread task.
     if (type === 'RenderingFrame') {
       frame++;

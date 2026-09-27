@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "demodokus-arrival.webp",
+      "bytes": 42816,
+      "sha256": "35615fe944fa556d764b176e2e73d3f3278819c9cd85c9551c2c31b1f3cd65b7"
+    },
+    {
+      "location": "public",
       "filename": "demodokus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "demodokus-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "a983190c10834c154ca8a41b20908663782f9f0cc638980d9ba17ea9cbb141c6"
     },
     {
       "location": "prepared",

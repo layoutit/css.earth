@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-arrival.webp",
+      "bytes": 31640,
+      "sha256": "4971023da1e7363b6922dad585eb02643cb8ebe17303cceed581b9c8a93e3cfd"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-lens-illustration.webp",
       "bytes": 1884,
       "sha256": "c2345f17a9cc06780dfc84fa32ba62df4772f4e73e94cd458d86c5d44a261df8"
@@ -246,6 +252,12 @@
       "filename": "trappist-1e-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "e5a516a101991a6846679fcede9fb738a30d60377f5e3a46f01daf84375a0095"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 315,
+      "sha256": "5a30d78c8961c0e73cedd849eb77aae888976489146eeea70ab2fcb12ae059fd"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "io-arrival.webp",
+      "bytes": 49070,
+      "sha256": "5325da619cdc6f91c7edc86129d136280cc68f551a70cffc7a9dc62447c4802b"
+    },
+    {
+      "location": "public",
       "filename": "io-enhanced@2x.webp",
       "bytes": 1043098,
       "sha256": "72b48161a126f2bdd61534c7e0579dd336f75cb5c1ac2f0abbcc89544c150907"
@@ -324,6 +330,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "36db942db509cd88aba2486bc0df002bfc93b1a1b9ff2ec20203ab522d441019"
     },
     {
       "location": "prepared",

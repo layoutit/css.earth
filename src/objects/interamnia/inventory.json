@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "interamnia-arrival.webp",
+      "bytes": 34488,
+      "sha256": "1d475d9e81ce9a8b34ac6cf9a8d5d3d82c0008728b0e88d64b958074cdddbd79"
+    },
+    {
+      "location": "public",
       "filename": "interamnia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "interamnia-zimpol-thumbnail.webp",
       "bytes": 1760,
       "sha256": "a17d42b0af00ecb74936ecccdd9d722f901095df4b6c75ee5609559fab229f4e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 306,
+      "sha256": "f2e8425a29589e68a7bbb71e6966dee5349002aadb1cea26d2c6273e489efd6f"
     },
     {
       "location": "prepared",

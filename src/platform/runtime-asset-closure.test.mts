@@ -19,6 +19,25 @@ test("normalizes only explicit safe local runtime URLs", () => {
   assert.throws(() => normalizeRuntimeAssetUrls({ objectId: "fixture", urls: ["/scenes/fixture/a.webp", "/scenes/fixture/a.webp"] }), /repeats runtime asset/);
 });
 
+test('repreparing detail textures preserves the navigation arrival image', async context => {
+  const root = await mkdtemp(resolve(tmpdir(), 'inventory-arrival-'));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const objectDirectory = resolve(root, 'src/objects/fixture'), publicRoot = resolve(root, 'public/scenes/fixture');
+  await mkdir(resolve(objectDirectory, 'prepared'), { recursive: true });
+  await mkdir(publicRoot, { recursive: true });
+  await writeFile(resolve(publicRoot, 'surface.webp'), 'surface');
+  await writeFile(resolve(publicRoot, 'arrival.webp'), 'arrival');
+  await writeFile(resolve(objectDirectory, 'prepared/arrival-billboard.json'), JSON.stringify({ url: '/scenes/fixture/arrival.webp' }));
+  const inventory = await inventoryPublicAssets({ objectId: 'fixture', objectDirectory, publicRoot, urls: ['/scenes/fixture/surface.webp'] });
+  assert.deepEqual(inventory?.assets.map(asset => asset.filename), ['arrival.webp', 'surface.webp']);
+  // Authored preparation writes its temporary inventory beside the staged records,
+  // rather than in a package with a nested prepared/ directory.
+  const preparedDirectory = resolve(objectDirectory, 'prepared');
+  const staged = await inventoryPublicAssets({ objectId: 'fixture', objectDirectory: preparedDirectory,
+    preparedDirectory, publicRoot, urls: ['/scenes/fixture/surface.webp'] });
+  assert.deepEqual(staged?.assets.map(asset => asset.filename), ['arrival.webp', 'surface.webp']);
+});
+
 test("one inventory per object: each location is written by its own stage and keeps the other's entries", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "inventory-"));
   context.after(() => rm(root, { force: true, recursive: true }));

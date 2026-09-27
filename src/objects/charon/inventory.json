@@ -399,6 +399,12 @@
     },
     {
       "location": "public",
+      "filename": "charon-arrival.webp",
+      "bytes": 86262,
+      "sha256": "2734849dcb62a99458dcd4c807ca4776930f9a117d57ac7b2a428724750e018f"
+    },
+    {
+      "location": "public",
       "filename": "charon-elevation-page-0-level-1625.webp",
       "bytes": 15788,
       "sha256": "5a3d585360d35fd6a92f69cd06ca58edab2c6d114c4ecce94e0a08cbb4f628cc"
@@ -1476,6 +1482,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 32134,
       "sha256": "8dd65a1467189627dc74c9523057ea019e2bb20278aee8151c3ff877ad052b21"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "9812e888532ec78ad7ef4bb8ae00e31d2376b95278a23cfe8d1c9eb64f212d65"
     },
     {
       "location": "prepared",

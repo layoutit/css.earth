@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "europa-arrival.webp",
+      "bytes": 101100,
+      "sha256": "b00ff276cfb4892dc5bb5d4b089aa6c46957ccc33a94c5791e1282be84f2fae0"
+    },
+    {
+      "location": "public",
+      "filename": "europa-carbon-dioxide@2x.webp",
+      "bytes": 42438,
+      "sha256": "4bbc93a1192cd3ee6b39785831bcacd1b7c98c4254f2ec584b940281f64e705e"
+    },
+    {
+      "location": "public",
       "filename": "europa-elevation@2x.webp",
       "bytes": 46540,
       "sha256": "6b1a48692cdfb54ff8fac2b2def291ca7fdc0974998067eb84958e15652cfdfa"
@@ -27,9 +39,27 @@
     },
     {
       "location": "public",
+      "filename": "europa-hydrogen-peroxide@2x.webp",
+      "bytes": 49482,
+      "sha256": "8a31860abc555a00d554edeadad5893a5dd4fe804651bb102ca810642dd27848"
+    },
+    {
+      "location": "public",
       "filename": "europa-infrared@2x.webp",
       "bytes": 159868,
       "sha256": "68951895ec0ca0b206b698485275ac379a059a1c1b196488b84a38d781289d18"
+    },
+    {
+      "location": "public",
+      "filename": "europa-junocam@2x.webp",
+      "bytes": 531808,
+      "sha256": "7ce71151197a3749c446e269951e2b4bc0455a468d551cff2b0db62983e349a4"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-carbon-dioxide.webp",
+      "bytes": 2934,
+      "sha256": "7e421200e4f541cc4478dd6a1a47692420e9b6c31bc158c333dcbbaf742aca88"
     },
     {
       "location": "public",
@@ -51,9 +81,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-lens-hydrogen-peroxide.webp",
+      "bytes": 2594,
+      "sha256": "7a164236b925375227da17ee0f24fc40b9a5b9a962a7ddefb9ffcabdf161981e"
+    },
+    {
+      "location": "public",
       "filename": "europa-lens-infrared.webp",
       "bytes": 582,
       "sha256": "619ae3f9e04fc20ffa27b4860479f4fca7a6e66f65367cdd04651573dafe9a5d"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-junocam.webp",
+      "bytes": 112,
+      "sha256": "c9db4918ac7bdf66bc9b24b421dc29181120de07c90905653320b5bf00cd8acc"
     },
     {
       "location": "public",
@@ -63,9 +105,21 @@
     },
     {
       "location": "public",
+      "filename": "europa-lens-sodium-chloride.webp",
+      "bytes": 2938,
+      "sha256": "26a2020d89e71d444f0e010587e3372880a5e6a67561b9447939853501f05840"
+    },
+    {
+      "location": "public",
       "filename": "europa-normal@2x.webp",
       "bytes": 4724244,
       "sha256": "825df31ff0198278e50aa5ee93ba0120c81f069ff81b7b1d1df3a718c92e2ca8"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-carbon-dioxide@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
     },
     {
       "location": "public",
@@ -87,15 +141,39 @@
     },
     {
       "location": "public",
+      "filename": "europa-poles-hydrogen-peroxide@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "location": "public",
       "filename": "europa-poles-infrared@2x.webp",
       "bytes": 48712,
       "sha256": "098aede4a8356ea87f179e793fe7f2c020cf31a6446fb89683f1774c8231c8ee"
     },
     {
       "location": "public",
+      "filename": "europa-poles-junocam@2x.webp",
+      "bytes": 35152,
+      "sha256": "a808e413976e72557dcf855c04b9c00f44cc10c08dcc8a5786f14e146b0b7d87"
+    },
+    {
+      "location": "public",
       "filename": "europa-poles-normal@2x.webp",
       "bytes": 141700,
       "sha256": "4530e8b2d4fbb1bcb190c57fbe2c0d9039809f7fcb254fbc3e860761a6eb16b6"
+    },
+    {
+      "location": "public",
+      "filename": "europa-poles-sodium-chloride@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "location": "public",
+      "filename": "europa-sodium-chloride@2x.webp",
+      "bytes": 44256,
+      "sha256": "50dc6f4020ba66d246da19ecaa28304fa70485c5d4223796c5cee9bfaee68fa1"
     },
     {
       "location": "public",
@@ -309,15 +387,21 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 300,
+      "sha256": "05a94fc5c4be109d786deb832767e98b7a18c0bcab7fd2ead00bd67ca7b94894"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
-      "bytes": 169297,
-      "sha256": "1bc5b1b7cb796a2ba2e1e79cad958097e56050c994cb2401981e13f1f1a754f2"
+      "bytes": 419681,
+      "sha256": "d7494b08b7780825efb76240df038d2cb378c86c237ba775fb56995ff2057828"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1421,
-      "sha256": "4d5dd2dfdf3d7498a80d779b2fce4d46eab1aeedf52c3c85950a0deed456781b"
+      "sha256": "478a1b5e9e528a61942ffd107f39580f567626d4aa4a6cee302d5315be47cfc7"
     },
     {
       "location": "prepared",
@@ -328,8 +412,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3623,
-      "sha256": "25fca700b0de82ce43d703fa20c7d6e0cd6223f7e76ee5556f163ecd454e97c5"
+      "bytes": 7989,
+      "sha256": "c04d7d7f50680d4153dbc55a316ad2bd594843d9ea8cf73f18ede05368872966"
     },
     {
       "location": "prepared",
@@ -339,15 +423,33 @@
     },
     {
       "location": "prepared",
+      "filename": "image-quality.json",
+      "bytes": 7113,
+      "sha256": "ab0213f69396979ff34ecc00b43b8bb6fdc5624479c301caa475b9a4b7a00325"
+    },
+    {
+      "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 5375,
-      "sha256": "35a593f9ff18cbaef9a693019d383b6bd1c3f287e7786492fb0ae3a212176845"
+      "bytes": 11620,
+      "sha256": "47dca31a4b4ddcfad4fb7e4b4f065edbe7141016101829d5be361db6be735079"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 26483,
+      "sha256": "b1edb15d8acf0fa2b2b18c60da03d372be03ad33d545d5d8035d291c73542147"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 384,
-      "sha256": "2cfe87534924f53c9bde7ed7b3573c46bf8544969b985330a735db322d6377d6"
+      "bytes": 726,
+      "sha256": "8f78250fc69c4bb73487c42dd94fb9268b3d1ff01d63c2c5c349da2d1f3145ce"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/carbon-dioxide.webp",
+      "bytes": 4104,
+      "sha256": "5abede597f220a3d10e52103611b6a52c8faf65aeae37b6bb25edf72e4a1ca3c"
     },
     {
       "location": "prepared",
@@ -369,9 +471,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/hydrogen-peroxide.webp",
+      "bytes": 4194,
+      "sha256": "aa56c896d9dcb583e730bda708f48cecdb2d3469704a37f0acc34f16b8563b18"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/infrared.webp",
       "bytes": 6410,
       "sha256": "40276e727bb43ec5dafdf6e3d7fe3d080fe81c8d2f106f3162738d29f871c311"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/junocam.webp",
+      "bytes": 2588,
+      "sha256": "6cbad9becf3135e89d5856f03be93b2d481c32e2ec189855e82d082238b1a65b"
     },
     {
       "location": "prepared",
@@ -381,9 +495,15 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/sodium-chloride.webp",
+      "bytes": 4814,
+      "sha256": "fe0cd35ae0516bb239090ad26ae6d5f5f5ebbdc4a7dac12e9115e76e8a934e03"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 579560,
-      "sha256": "f8e07b5ca2db598bc347b3577824f7734a542eeb544b246cbaa85a06bba4420f"
+      "bytes": 593624,
+      "sha256": "3b591cedf4239117ef3bbd90fba4064e81f9af6bc8e7ffddc995d7d2ece83879"
     },
     {
       "location": "prepared",
@@ -405,33 +525,21 @@
     },
     {
       "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1219,
-      "sha256": "82397d48d5e97cb528655c5dc03718f355c46607305c658f610e797d43ed09f1"
+      "filename": "surfaces.json",
+      "bytes": 11375,
+      "sha256": "f945ff9dfa44140826b694876944fac4950fcee06f85989a5ee868536d3b7d33"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2027,
-      "sha256": "9721f7996811b7afd7c7648ca69ecae3ad18b14847bd3f5fa40aca73662f5c37"
+      "bytes": 2772,
+      "sha256": "0b98451d7ed595712df7006871f6bfeb70cb081dafb4ad207a3e41b99a17175d"
     },
     {
       "location": "prepared",
-      "filename": "image-quality.json",
-      "bytes": 7113,
-      "sha256": "ab0213f69396979ff34ecc00b43b8bb6fdc5624479c301caa475b9a4b7a00325"
-    },
-    {
-      "location": "prepared",
-      "filename": "material.json",
-      "bytes": 26483,
-      "sha256": "b1edb15d8acf0fa2b2b18c60da03d372be03ad33d545d5d8035d291c73542147"
-    },
-    {
-      "location": "prepared",
-      "filename": "surfaces.json",
-      "bytes": 11375,
-      "sha256": "f945ff9dfa44140826b694876944fac4950fcee06f85989a5ee868536d3b7d33"
+      "filename": "world-navigation.json",
+      "bytes": 1219,
+      "sha256": "82397d48d5e97cb528655c5dc03718f355c46607305c658f610e797d43ed09f1"
     }
   ]
 }

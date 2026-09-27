@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mimas-arrival.webp",
+      "bytes": 128870,
+      "sha256": "67e34e62041dafe6f0d7ff5ec133bc1925c910101ed4336f55dbd87b1c05169c"
+    },
+    {
+      "location": "public",
       "filename": "mimas-elevation-legend.webp",
       "bytes": 240,
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
@@ -102,6 +108,12 @@
       "filename": "mimas-normal-thumbnail.webp",
       "bytes": 3512,
       "sha256": "5a2389f1edc4b94f766810fee2b2bfa95a546ad0e8f05d91b98adf86d603b981"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "057636c1a4dfc9fb9888047567dc6bb912beefcbad819ce1a5ba1c328ce3ea2a"
     },
     {
       "location": "prepared",

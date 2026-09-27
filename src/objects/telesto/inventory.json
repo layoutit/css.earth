@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "telesto-arrival.webp",
+      "bytes": 49396,
+      "sha256": "ed2327da064bb358c891e2ef75d985e0262dd965e0e8b0f96939d66da17ca331"
+    },
+    {
+      "location": "public",
       "filename": "telesto-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -96,6 +102,12 @@
       "filename": "telesto-normal-thumbnail.webp",
       "bytes": 1690,
       "sha256": "9107a9107d8ce8fc334e6427925e11faa421571ca5f50676e8567b751b69be9a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "5f03ccd1133452c292a8627e9c2de989875adc25331898289e342fe0644e143b"
     },
     {
       "location": "prepared",

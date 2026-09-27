@@ -280,6 +280,36 @@
       "path": "science/challener-2025/spec_lambin_25.npz",
       "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
       "member": "WASP-18b 3D Mapping Archive/eigenspectra/spec_lambin_25.npz"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/profiles/hydra-hotspot.txt",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/retrievals/HyDRA_retrievals/hotspot_group/EMAP_3group25bin_hot_diss_ph-_-6_retrieved_PT.txt"
+    },
+    {
+      "kind": "tar-gz-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/challener-2025/profiles/pyratbay-hotspot.txt",
+      "url": "https://zenodo.org/api/records/14751570/files/WASP-18b-3D-Mapping-Archive.tar.gz/content",
+      "member": "WASP-18b 3D Mapping Archive/retrievals/PyratBay_retrievals/hotspot_group/pyratbay_WASP18b_hotspot_posterior_temperature.txt"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/coulombe-2023/hydra-dayside.txt",
+      "url": "https://zenodo.org/api/records/7907569/files/WASP_18b_data_Nature.zip/content",
+      "member": "WASP_18b_data_Nature/Atmosphere/retrieval_posteriors/LPC_Ahsohdiss_fehtiovo-4nak-2_retrieved_PT.txt"
     }
   ]
 }

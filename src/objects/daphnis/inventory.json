@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "daphnis-arrival.webp",
+      "bytes": 38412,
+      "sha256": "56e28635600aeb79f4c3551d1448900324565fd9cebebef8fc813972ab401610"
+    },
+    {
+      "location": "public",
       "filename": "daphnis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "daphnis-normal-thumbnail.webp",
       "bytes": 1526,
       "sha256": "45ad1cdfc82c151bf6c60518ed7f373e23d552e11b02e635aec87a3c7ab2e826"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "edf89c4ab466f60ee0241b0a282eeb939e2f5cc7fdddb86ee7a8702701cf87d4"
     },
     {
       "location": "prepared",

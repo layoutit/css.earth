@@ -1,7 +1,7 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from './browser-types.mts';
+import type { BrowserWindow } from './browser/browser-types.mts';
 import type { ObjectEntry } from './objects.mts';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 import { objectTypeLabel } from './object-classification-label.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "proxima-centauri-arrival.webp",
+      "bytes": 18718,
+      "sha256": "049a59a1560ae443c49ac51ba001fd924aa64fa4d68c11f5d23d30cc42270f1c"
+    },
+    {
+      "location": "public",
       "filename": "proxima-centauri-lens-color.webp",
       "bytes": 44,
       "sha256": "2172156ae50ed344ff3dd542b15cd68b7900e03b84c23871ee1d3fe273b93e2b"
@@ -18,6 +24,12 @@
       "filename": "proxima-centauri-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "fa9af3dcf5fbb67a08d1f56fbffe0821dd102be80f38eedfeaecc76862503dfb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 389,
+      "sha256": "da3b03fd83ea7c92f5b09eb73e2ba160eea06aaf06f1b16796bb2b81a954b038"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "despina-arrival.webp",
+      "bytes": 41144,
+      "sha256": "c776aa48b5fe2ace9fa81daa60245abbdfab78b61f5eff931b282203e6d87fcf"
+    },
+    {
+      "location": "public",
       "filename": "despina-model-shadow-alpha@2x.webp",
       "bytes": 100702,
       "sha256": "fa3ea2494c8791d28c0809b9a33ebf8c26bfbb611029aa13f93a9acbdda2544d"
@@ -30,6 +36,12 @@
       "filename": "despina-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "ff3dbe71202c82a8f9ff9ebcfb6609c462e90eaff21b6726b92adbf51ede1873"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "larissa-arrival.webp",
+      "bytes": 36106,
+      "sha256": "4db4754cc7f8ca47ab524454cecc63e4c65705e73afd17195860972c352ae105"
+    },
+    {
+      "location": "public",
       "filename": "larissa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "larissa-normal-thumbnail.webp",
       "bytes": 2084,
       "sha256": "3a84bf89f0c8c589497dcd3fd85f2deb8740afddaf9c79d2a0f14ad7d1534a83"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "6e8f1e0c0119597c2ad1e1e9c69322ddba72729d637c48a70ce2f3daf5731879"
     },
     {
       "location": "prepared",

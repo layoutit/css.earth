@@ -3,7 +3,7 @@ import { publishDatasetPreview } from '@cssearth/renderer';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { preparedFocusObjectId } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 
 interface PreparedFocusCard {
   set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;

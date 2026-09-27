@@ -561,6 +561,50 @@
         "kind": "local",
         "reason": "Project-authored preparation parameters."
       }
+    },
+    {
+      "id": "emissivity-map",
+      "path": "emissivity/magellan.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif",
+      "credit": "NASA Magellan; USGS Astrogeology",
+      "license": "United States government scientific data; retain source credit",
+      "acquisition": "Download the unmodified USGS global microwave emissivity GeoTIFF.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "emissivity"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "magellan-global-emissivity",
+            "role": "material",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "emissivity-label",
+      "path": "emissivity/magellan.lbl",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/d81b186f-8ebe-4b62-a5e5-6e6df4c1f778/resource/c7bb8738-5e65-43a3-bfa2-ba8b5177f9fe/download/venus_magellan_microwaveemissivity_global_4641m.lbl",
+      "credit": "NASA Magellan; USGS Astrogeology",
+      "license": "United States government scientific data; retain source credit",
+      "acquisition": "Download the USGS product label; DN = emissivity * 10000 + 1.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "emissivity"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "magellan-global-emissivity",
+            "role": "material",
+            "evidence": "https://astrogeology.usgs.gov/ckan/dataset/d81b186f-8ebe-4b62-a5e5-6e6df4c1f778/resource/c7bb8738-5e65-43a3-bfa2-ba8b5177f9fe/download/venus_magellan_microwaveemissivity_global_4641m.lbl"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

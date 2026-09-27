@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-c2020-f3-arrival.webp",
+      "bytes": 34454,
+      "sha256": "239b6fd0690455e564809cd74a4c068480706a719e63eec6bef5e5f83a5dc783"
+    },
+    {
+      "location": "public",
       "filename": "comet-c2020-f3-model-shadow-alpha@2x.webp",
       "bytes": 97760,
       "sha256": "aa69c4629c9115c278eb70446fbc1e494f7a7de97b6e6e9d7ca0061765601046"
@@ -30,6 +36,12 @@
       "filename": "comet-c2020-f3-model-thumbnail.webp",
       "bytes": 958,
       "sha256": "252607b6c507265ce5eb22dcb56abf61c51ecce2749aa5f517fec2c148c8c8ed"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 312,
+      "sha256": "8f488913ed2fcd6391dda08b0f0298e2612312b16a31e1642f8cdc43af163cf7"
     },
     {
       "location": "prepared",

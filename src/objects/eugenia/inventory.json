@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eugenia-arrival.webp",
+      "bytes": 22506,
+      "sha256": "7cf84b0cf3d6de565b9274af0ebe6ee49639c4e5be30ec5904d5fd92eff695d2"
+    },
+    {
+      "location": "public",
       "filename": "eugenia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "eugenia-zimpol-thumbnail.webp",
       "bytes": 1444,
       "sha256": "bde878123f93281db0edb36d0aa151fa6e963e8bc8be5532f277e8273417953b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 288,
+      "sha256": "b3aabf5212f4c82bc508f4951766dd0ada59565e241ce452065ca33fb5078843"
     },
     {
       "location": "prepared",

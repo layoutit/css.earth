@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ausonia-arrival.webp",
+      "bytes": 37812,
+      "sha256": "e939a29841fdc99bb7a3645fabf42bb95c13d6abcbf2f49f88c6555e586a466d"
+    },
+    {
+      "location": "public",
       "filename": "ausonia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "ausonia-zimpol-thumbnail.webp",
       "bytes": 1304,
       "sha256": "0d1c1829563084da9a6a0a542cee661faa241f3e0c96cb2f65309477c7cda863"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "1a5bd280abb757a222c143a28449eebb6480269a90cd7e72dc200997eec48d5d"
     },
     {
       "location": "prepared",

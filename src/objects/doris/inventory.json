@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "doris-arrival.webp",
+      "bytes": 35266,
+      "sha256": "7764189086a64e5c1092d3b93378b0acff87489217d5f6cd9dec430c0c7d9aec"
+    },
+    {
+      "location": "public",
       "filename": "doris-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "doris-zimpol-thumbnail.webp",
       "bytes": 1572,
       "sha256": "f71eda3cde310324519f092b1e38b035b078a293d54df1c18b930d9cec227e1b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "a318b22847ecbed3b50072d02bb20de3e007c00fb984165bd2cc82b78b6f42c6"
     },
     {
       "location": "prepared",

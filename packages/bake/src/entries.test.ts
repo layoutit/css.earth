@@ -44,12 +44,15 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'image-layers': ['volume-leaves'],
   'environment': ['image-layers', 'shell', 'stars', 'density', 'volume'],
   'cluster-catalog': ['galaxy-catalog'],
+  'objects/scene': ['presentation'],
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
-  'objects/layers/observed-surfaces': ['scene', 'objects/geometry'],
-  'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/observed-surfaces'],
+  'objects/layers/observed-surfaces': ['raster', 'scene', 'objects/geometry'],
+  'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/sources', 'objects/layers/observed-surfaces'],
   'objects/layers/material-composition': ['raster', 'scene', 'objects/color', 'objects/geometry', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
-  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'objects/raster'],
+  'objects/layers/shape-model': ['presentation', 'scene', 'objects/scene', 'objects/layers/material-composition'],
+  'objects/layers/observation': ['raster', 'objects/color', 'objects/geometry', 'objects/raster'],
+  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'objects/raster', 'objects/layers/observation'],
   'objects/layers/terrestrial': ['photometry', 'raster', 'objects/cameras', 'objects/geometry', 'objects/raster', 'objects/scene'],
 };
 

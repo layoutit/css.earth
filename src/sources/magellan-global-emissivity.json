@@ -1,0 +1,22 @@
+{
+  "id": "magellan-global-emissivity",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Magellan global microwave emissivity 4641 m",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m",
+      "label": "Magellan global microwave emissivity 4641 m"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/emissivity/magellan.lbl",
+      "locator": "/lenses"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

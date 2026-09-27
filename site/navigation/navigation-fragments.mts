@@ -1,5 +1,5 @@
 import { objectIdAtPath } from '../root-object.mts';
-import type { BrowserWindow } from '../browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 
 /**
  * Destination cards and content come from the static `/navigation/<id>/`
@@ -66,10 +66,21 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
     return source;
   }
   function lease(id: string, html: string): NavigationFragmentLease {
-    const document = parse(id, html);
-    let active = true;
+    let document: Document | null = parse(id, html);
     activeDocuments++; parsedDocuments++;
-    return Object.freeze({ document, release() { if (!active) return; active = false; activeDocuments--; } });
+    return Object.freeze({
+      get document() {
+        if (!document) throw new Error('Navigation fragment document has been released.');
+        return document;
+      },
+      release() {
+        if (!document) return;
+        // Content callbacks can outlive their transition. A released lease must
+        // stop retaining the parsed DOM, not merely lower the ownership counter.
+        document = null;
+        activeDocuments--;
+      },
+    });
   }
   async function load(id: string) {
     const response = await fetchPage(`/navigation/${encodeURIComponent(id)}/`);

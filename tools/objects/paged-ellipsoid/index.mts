@@ -1,4 +1,4 @@
-import { requireObjectControls } from '../../../site/scene/scene-contract.mts';
+import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { readJsonSource } from '../../sources/source-values.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -6,14 +6,14 @@ import { parseBodyAttitude } from './geographic/source-records.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { verifySourceManifest } from '@cssearth/objects/node';
-import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
+import { withFocusedCamera } from '@cssearth/bake/objects/scene';
+import { prepareCubicSky } from '@cssearth/bake/presentation';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
 import type { preparePagedEllipsoidAssets } from './assets.mts';
 import { readPagedEllipsoid } from './context.mts';
 import { preparePagedEllipsoidPresentation } from './presentation.mts';
 import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.mts';
 import { preparePlaces } from './geographic/places.mts';
-import { withFocusedCamera } from '../focused-camera.mts';
 
 export interface PagedEllipsoidContext {
   objectDirectory: string; publicDirectory: string; outputDirectory: string; packDirectory?: string;

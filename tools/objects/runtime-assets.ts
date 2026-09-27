@@ -1,5 +1,5 @@
 /** Public asset closure and assembly, independent of source acquisition or CLI dispatch. */
-import { containedPath } from './source-files.ts';
+import { containedPath } from '@cssearth/bake/objects/sources';
 import { sha256 } from '@cssearth/core/node';
 import { inventoryPublicAssets, requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { requireRecord as object } from '@cssearth/core';
@@ -48,9 +48,9 @@ export async function stylesheetTexts():Promise<string[]> {
  return Promise.all(names.map(name=>readFile(resolve(directory,name),'utf8')));
 }
 
-export async function prepareRuntimeManifest({id,publicRoot,objectDirectory,values,allowPreparationArtifacts=false}:{id:string;publicRoot:string;objectDirectory:string;values:unknown[];allowPreparationArtifacts?:boolean}) {
+export async function prepareRuntimeManifest({id,publicRoot,objectDirectory,preparedDirectory,values,allowPreparationArtifacts=false}:{id:string;publicRoot:string;objectDirectory:string;preparedDirectory?:string;values:unknown[];allowPreparationArtifacts?:boolean}) {
  const urls=collectRuntimeAssetUrls(id,...values,...await stylesheetTexts());if(!urls.length)throw new Error('Prepared object has no runtime asset references.');
- const inventory=await inventoryPublicAssets({objectId:id,objectDirectory,urls,publicRoot,allowPreparationArtifacts});
+ const inventory=await inventoryPublicAssets({objectId:id,objectDirectory,preparedDirectory,urls,publicRoot,allowPreparationArtifacts});
  const manifest={assets:(inventory?.assets??[]).filter(asset=>asset.location==='public').map(({filename,bytes,sha256})=>({filename,bytes,sha256}))};
  await verifyAssetFiles(publicRoot,manifest,!allowPreparationArtifacts);
  return manifest;

@@ -1,4 +1,4 @@
-import type { BrowserWindow, ShellCamera } from './browser-types.mts';
+import type { BrowserWindow, ShellCamera } from './browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 interface RecordedEvent { type: string; time: number; name?: string; url?: string; duration?: number; transferSize?: number; decodedBodySize?: number; detail?: unknown; }
 interface Recording {

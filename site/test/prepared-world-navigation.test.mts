@@ -2,6 +2,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { getEventListeners } from 'node:events';
+import { parseHTML } from 'linkedom';
 import { setImmediate as nextTurn } from 'node:timers/promises';
 import { createSelectionFlight, sampleSelectionFlight, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, presentWorldCamera, formatSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
@@ -13,7 +14,7 @@ import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-nav
 import type { PreparedNavigationFocus } from '@cssearth/renderer/navigation/prepared-focus.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
-import type { SceneFactory } from '../browser-types.mts';
+import type { SceneFactory } from '../browser/browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import type { PreparedArrivalView } from '@cssearth/objects';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
@@ -52,7 +53,7 @@ function fixtureFactory(arrival?: PreparedArrivalView) {
   const factory: MockFactory = { navigation: { frame: frames[1], prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
   const service = createPreparedWorldNavigation({ objects, windowTarget: windowTarget as unknown as Window, documentTarget: documentTarget as unknown as Document });
   const controller = new AbortController();
-  return { service, controller, resources, navigation, factory, paints, documentTarget,
+  return { service, controller, resources, navigation, factory, paints, documentTarget, windowTarget,
     start({ toFactory = factory, ...options }: PrepareOptions = {}) { return service.prepare({ fromId: '0', toId: '1', fromMount: { sharedView: unusedSharedView, navigation },
       toFactory: toFactory as unknown as SceneFactory | Promise<SceneFactory>, signal: controller.signal, reducedMotion: false, ...options }); },
     mounted(): ObjectSceneLifecycle & { navigation: MockNavigation } { return { ...lifecycle, navigation: { ...navigation, frame: frames[1] } }; },
@@ -89,6 +90,29 @@ async function drainFrames<T>(fixture: ReturnType<typeof fixtureFactory>, { task
 const range = (pose: WorldCameraPose["pose"], origin: readonly number[]) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
 
 const photographicArrival: PreparedArrivalView = { defaultLens: 'photo', lensIds: ['photo'], rotation: [1,0,0,0,-1,0,0,0,-1] };
+
+test('billboard covers complete attachment at its baked pose before the mesh finishes responsive framing', async () => {
+  const arrival: PreparedArrivalView = { ...photographicArrival, billboard: {
+    url: '/scenes/body/arrival.webp', lens: 'photo', size: 1024, distanceM: 8000,
+    focalPixels: 1000, rotation: photographicArrival.rotation } };
+  const f = fixtureFactory(arrival), { document, window } = parseHTML('<html><body><div><main></main></div></body></html>');
+  Object.defineProperty(window.HTMLImageElement.prototype, 'decode', { configurable: true, value: async () => {} });
+  Object.defineProperty(document, 'defaultView', { value: f.windowTarget });
+  const stage = document.querySelector('main');
+  assert.ok(stage);
+  const target = createWorldSelectionTarget(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
+  assert.ok(target);
+  const handoff = await drainFrames(f, { task: f.start({ stage }) });
+  assert.equal(handoff.mountOptions.progressiveActivation, false);
+  const initial = required(handoff.mountOptions.initialWorldCamera);
+  assert.ok(Math.abs(presentWorldCamera(initial, f.factory.navigation.frame, f.navigation.optics()).distanceM - 8000) < 0.01);
+  assert.equal(document.querySelector('img')?.dataset.arrivalBillboard, 'mounting');
+  await drainFrames(f, { task: handoff.afterMount(f.mounted()) });
+  assert.equal(document.querySelector('img'), null);
+  const actual = presentWorldCamera(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
+  const expected = presentWorldCamera(target, f.factory.navigation.frame, f.navigation.optics());
+  assert.ok(Math.abs(actual.distanceM - expected.distanceM) < 0.01);
+});
 
 test('scene selection and cross-object flight use the prepared photographic face', async () => {
   const f = fixtureFactory(photographicArrival), frame = f.factory.navigation.frame, optics = f.navigation.optics();

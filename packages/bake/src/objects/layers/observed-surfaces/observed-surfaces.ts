@@ -9,6 +9,9 @@ import sharp from 'sharp';
 import { readFitsPrimary } from '@cssearth/fits';
 import { planetographicRowsToMeshLatitude } from '../../geometry/index.ts';
 import { packProjectiveSurfaceRaster } from '../../../scene/index.ts';
+import { missingCoverageColor } from '../../../raster/index.ts';
+import { resizeObservedRgb, sampleObservedRgb } from './coverage.ts';
+import { measureScalarCoverage } from './scalar-coverage.ts';
 
 
 const clamp = (value: number, low=0, high=1) => Math.max(low, Math.min(high,value));
@@ -30,7 +33,7 @@ export function parseObservedSurfaceRecipe(input: unknown) {
       const color=lens.decode.color;
       if(lens.decode.bitpix!==-32||!dimensions(lens.decode.width,lens.decode.height)||!color||![3,4].includes(color.channels)||!isArray(color.palette)||color.palette.length!==3||color.palette.some(rgb=>!isArray(rgb)||rgb.length!==3||rgb.some(c=>!Number.isSafeInteger(c)||c<0||c>255))||!isArray(color.percentiles)||color.percentiles.length!==2||!color.percentiles.every(fraction)||color.percentiles[0]>=color.percentiles[1]||color.percentiles[1]===1||!['sqrt','power'].includes(color.transfer)||!positive(color.exponent)||!fraction(color.minimumCoverage))throw new TypeError('Invalid scientific colour mapping.');
     }
-    if(lens.coverage&&!['boundary-mean','uniform-baseline'].includes(lens.coverage.kind))throw new TypeError('Unsupported coverage composition.');
+    if(lens.coverage?.kind==='component-fits'&&(lens.decode.kind!=='raster'||lens.decode.crop||lens.calibration||lens.coverage.sources.some(path=>!sourcePaths.has(path))))throw new TypeError('Component coverage requires an uncropped RGB map and declared FITS sources.');
     for(const continuation of[lens.decode.continuation,lens.coverage?.kind==='boundary-mean'?lens.coverage:null])if(continuation&&(!positive(continuation.exponent)||!positive(continuation.boundaryFraction)||continuation.boundaryFraction>=1||!Number.isFinite(continuation.minimumBoundarySum ?? 0)))throw new TypeError('Invalid boundary continuation.');
     if(lens.calibration&&(!sourcePaths.has(lens.calibration.source)||(lens.decode.kind !== 'raster' || lens.decode.channels!==3)))throw new TypeError('Invalid true-colour calibration input.');
     operations(lens.transforms);
@@ -38,7 +41,7 @@ export function parseObservedSurfaceRecipe(input: unknown) {
     for(const product of lens.products){
       if(!/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(product.filename)||outputs.has(product.filename)||!['surface','poles','thumbnail'].includes(product.kind)||!product.encoding)throw new TypeError('Invalid observation product.');outputs.add(product.filename);operations(product.transforms);
       if(product.kind==='surface'&&(!Number.isSafeInteger(product.packing?.bandCount)||product.packing.bandCount<1||!Number.isFinite(product.packing.gutter)||product.packing.gutter<0))throw new TypeError('Invalid surface packing.');
-      if(product.kind==='poles'){const p=product.projection;if(!p||!dimensions(p.tileSize,p.tileSize)||!isArray(p.poles)||!p.poles.length||p.poles.some(value=>!['north','south'].includes(value))||!positive(p.latitudeSegments)||!['nearest-closed','bilinear-wrapped'].includes(p.sampling)||!['direct-segment','boundary-difference'].includes(p.angularMode))throw new TypeError('Invalid polar projection.');}
+      if(product.kind==='poles'){const p=product.projection;if(!p||!dimensions(p.tileSize,p.tileSize)||!isArray(p.poles)||!p.poles.length||p.poles.some(value=>!['north','south'].includes(value))||!positive(p.latitudeSegments)||!['nearest-closed','bilinear-wrapped'].includes(p.sampling)||!['direct-segment','boundary-difference','orthographic'].includes(p.angularMode))throw new TypeError('Invalid polar projection.');}
     }
   }
   return config;
@@ -165,6 +168,13 @@ export function brightTailColor(data: Uint8Array,{share,maximum,luminance}: Brig
 
 function sampleMap(map: RasterMap,latitude: number,longitude: number,mode: PolarProjection['sampling']) {
   const {data,width,height,channels}=map;
+  if(map.missing){
+    const u=((longitude/(Math.PI*2))%1+1)%1, v=clamp((Math.PI/2-latitude)/Math.PI);
+    const x=mode==='nearest-closed'?Math.round(u*(width-1)):u*width;
+    const y=mode==='nearest-closed'?Math.round(v*(height-1)):v*(height-1);
+    return sampleObservedRgb({data,info:{width,height,channels},missing:map.missing},x,y,true)
+      ?? missingCoverageColor(u*360,latitude*180/Math.PI,180/height);
+  }
   if(mode==='nearest-closed'){
     const u=(longitude+Math.PI*2)%(Math.PI*2),x=Math.round(u/(Math.PI*2)*(width-1)),y=Math.round((Math.PI/2-latitude)/Math.PI*(height-1));
     return [...data.subarray((y*width+x)*channels,(y*width+x)*channels+channels)];
@@ -183,7 +193,8 @@ export function polarDiscAtlas(map: RasterMap,config: PolarProjection): RasterMa
     // Both angular expressions are authored arithmetic conventions, retained
     // because their rounding changes nearest/bilinear source texel selection.
     const extent=config.angularMode==='direct-segment'?Math.PI/config.latitudeSegments:Math.PI/2-(Math.PI/2-Math.PI/config.latitudeSegments);
-    const latitude=pole==='north'?Math.PI/2-r*extent:-Math.PI/2+r*extent;
+    const polarLatitude=config.angularMode==='orthographic'?Math.acos(Math.min(1,r*Math.sin(extent))):Math.PI/2-r*extent;
+    const latitude=pole==='north'?polarLatitude:-polarLatitude;
     const color=sampleMap(map,latitude,Math.atan2(ny,nx),config.sampling),offset=(y*tile*config.poles.length+index*tile+x)*4;
     output.set(color.slice(0,3),offset);output[offset+3]=color[3]??255;
   }
@@ -196,8 +207,43 @@ async function decodeRaster(bytes: Buffer | undefined,config: {channels: 3 | 4; 
   pipeline=config.channels===4?pipeline.ensureAlpha():pipeline.removeAlpha();
   const {data,info}=await pipeline.raw().toBuffer({resolveWithObject:true});return {data,width:info.width,height:info.height,channels:info.channels};
 }
+
+/** Intersect the three measured filters before resampling the publisher's RGB image.
+ * The recipe names whether the longitude endpoint repeats. Reversal and the
+ * declared offset put releases with different origins in the same body frame. */
+function componentCoverage(map: RasterMap, config: Extract<NonNullable<ReturnType<typeof parseObservedSurfaceRecipe>['lenses'][number]['coverage']>,{kind:'component-fits'}>, inputs: Map<string,Buffer>) : RasterMap {
+  const masks=config.sources.map(path=>{
+    const bytes=inputs.get(path);if(!bytes)throw new Error(`Missing component coverage ${path}`);
+    const scalar=readFitsPrimary(bytes);
+    if(scalar.width!==map.width||scalar.height!==map.height)throw new Error('RGB component coverage dimensions differ.');
+    return measureScalarCoverage(scalar,{noData:0,coverage:'polar-connected-zero',seedRows:config.unobservedRows.flatMap(([first,last])=>[first,last])}).missing;
+  });
+  const {width,height}=map,period=config.longitudePeriod,shift=config.longitudeOffsetDegrees/360*period;
+  if(!Number.isInteger(shift)||!Number.isInteger(period)||![width,width-1].includes(period)||period<1)throw new Error('Map longitude offset must match the source grid.');
+  for(const [first,last] of config.unobservedRows){
+    if(!Number.isInteger(first)||!Number.isInteger(last)||first<0||last<first||last>=height)throw new Error('Unobserved rows lie outside the source map.');
+    for(const mask of masks)mask.fill(1,first*width,(last+1)*width);
+  }
+  const data=Buffer.alloc(width*height*4),missing=new Uint8Array(width*height);
+  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+    const sx=((config.reverseLongitude?period-x:x)+shift+period)%period,from=y*width+sx,to=y*width+x;
+    missing[to]=Number(masks.some(mask=>mask[from]));
+    if(!missing[to]){data.set(map.data.subarray(from*map.channels,from*map.channels+3),to*4);data[to*4+3]=255;}
+  }
+  if(!missing.includes(0))throw new Error('RGB map has no common observed coverage.');
+  return {...map,data,channels:4,missing};
+}
 async function transformMap(map: RasterMap,operations?: readonly ObservationTransform[]): Promise<RasterMap> {
   if(!operations?.length)return map;
+  if(map.missing){
+    let result=map;
+    for(const op of operations){
+      if(op.kind!=='resize'||op.options&&op.options.fit!=='fill')throw new TypeError('Covered maps support only full-map resize operations.');
+      const resized=resizeObservedRgb({data:result.data,info:result,missing:result.missing!},op.width,op.height);
+      result={...result,...resized.info,data:resized.data,missing:resized.missing};
+    }
+    return result;
+  }
   let pipeline=sharp(map.data,{raw:{width:map.width,height:map.height,channels:map.channels}});
   for(const op of operations){if(op.kind==='flip')pipeline=pipeline.flip();else if(op.kind==='crop')pipeline=pipeline.extract(op.region);else if(op.kind==='resize')pipeline=pipeline.resize(op.width,op.height,op.options??{kernel:sharp.kernel.lanczos3});else if(op.kind==='sharpen')pipeline=pipeline.sharpen(op.options);else throw new TypeError('Unsupported observation transform.');}
   const {data,info}=await pipeline.raw().toBuffer({resolveWithObject:true});return {...map,data,width:info.width,height:info.height,channels:info.channels};
@@ -219,7 +265,7 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
   if(lensIds&&lenses.length!==lensIds.length)throw new Error('Observed surface selection requested an unknown lens.');
   const baselineIds=new Set(lenses.flatMap(lens=>lens.coverage?.kind==='uniform-baseline'&&lens.coverage.baseline?[lens.coverage.baseline]:[])),baselinesToPrepare=(config.baselines??[]).filter(recipe=>baselineIds.has(recipe.id));
   if(baselineIds.size!==baselinesToPrepare.length)throw new Error('Observed surface selection requested an unknown baseline.');
-  const sourcePaths=new Set([...lenses.flatMap(lens=>[lens.source,...(lens.calibration?[lens.calibration.source]:[])]),...baselinesToPrepare.map(recipe=>recipe.source)]);
+  const sourcePaths=new Set([...lenses.flatMap(lens=>[lens.source,...(lens.calibration?[lens.calibration.source]:[]),...(lens.coverage?.kind==='component-fits'?lens.coverage.sources:[])]),...baselinesToPrepare.map(recipe=>recipe.source)]);
   const inputs=await verifyObservationSources(sourceDirectory,lensIds?config.sources.filter(source=>sourcePaths.has(source.path)):config.sources),baselines=new Map<string, Baseline>(),maps=new Map<string, RasterMap>(),assets=[];
   for(const recipe of baselinesToPrepare){const map=await decodeRaster(inputs.get(recipe.source),{channels:3});baselines.set(recipe.id,centralDiscBaseline(map,recipe));}
   for(const lens of lenses){
@@ -231,6 +277,7 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
       let values=new Float32Array(fits.values);if(lens.decode.continuation)values=continueBoundaryMean(values,{width:fits.width,height:fits.height,channels:1,...lens.decode.continuation});
       map=percentileFalseColor(values,fits.width,fits.height,lens.decode.color);
     }else throw new TypeError('Unsupported observation decoder.');
+    if(lens.coverage?.kind==='component-fits')map=componentCoverage(map,lens.coverage,inputs);
     let calibration;
     if(lens.calibration){const target=await decodeRaster(inputs.get(lens.calibration.source),{crop:lens.calibration.targetSample,channels:3});calibration=affineColorCalibration(map,target,lens.calibration);}
     if(lens.coverage?.kind==='boundary-mean')map={...map,data:continueBoundaryMean(map.data,{...map,...lens.coverage})};
@@ -242,6 +289,7 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
     if(calibration){const data=Buffer.allocUnsafe(map.data.length);for(let offset=0;offset<data.length;offset+=3)for(let c=0;c<3;c++)data[offset+c]=Math.round(clamp(map.data[offset+c]*calibration.scale[c]+calibration.offset[c],0,255));map={...map,data,calibration};}
     // Maps indexed by planetographic latitude move to the parametric rows of the drawn ellipsoid.
     if(lens.planetographicAxisRatio!==undefined)map={...map,data:planetographicRowsToMeshLatitude(map.data,map.width,map.height,map.channels,lens.planetographicAxisRatio)};
+    if(map.missing)map.missing=Uint8Array.from({length:map.width*map.height},(_,i)=>map.data[i*4+3]===255?0:1);
     const nativePoleMap=map,transformedMap=await transformMap(map,lens.transforms);
     if(lens.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,lens.atmosphereColor);maps.set(lens.id,transformedMap);
     for(const product of productKinds?lens.products.filter(product=>productKinds.includes(product.kind)):lens.products){

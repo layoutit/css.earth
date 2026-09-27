@@ -21,9 +21,9 @@ its validators accept); the renderer never imports the bake.
   It imports `raster`. The host passes the physical scene and Sun directions in (`ScenePreparationAdapters`).
 - `src/presentation/` is published as `@cssearth/bake/presentation` (Node only): the retained node tree with its
   projective layouts and leaf boxes, offline CSSOM reads (Playwright's Chromium), activation groups, and the row-bank
-  cutaway, composite and emissive presentations. It imports `scene` and `raster`. The host passes material tracks, the
-  prepared-presentation contract and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or
-  platform modules itself.
+  cutaway, composite and emissive presentations; and the prepared-presentation contract with its schemas, and the cubic-sky
+  and directional-Sun contracts and preparers it validates. It imports `scene` and `raster`. The host passes material
+  tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself.
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
   slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
   It imports `scene` and `volume`.
@@ -57,13 +57,18 @@ its validators accept); the renderer never imports the bake.
     kernel banks bound to the source-manifest reader (`tools/kernel-banks/kernel-bank.mts` is their command line).
   - `objects/scene`: the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the frames
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
-    direction and the astrometric sky registration. The solar geometry is generated into the checkout
-    (`src/platform/solar-geometry.mts`) after the packages build, so the host passes it in (`SolarGeometry`).
+    direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
+    camera. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
+    `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
     photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
-  - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`):
+  - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
+    files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes.
+  - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
+    `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
     as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`). Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry

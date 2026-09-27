@@ -64,6 +64,10 @@
         {
           "id": "satellite-catalog",
           "path": "source/preparation/satellite-catalog.json"
+        },
+        {
+          "id": "observations",
+          "path": "source/preparation/observations.json"
         }
       ],
       "shape": {
@@ -100,6 +104,46 @@
             {
               "id": "cross-section",
               "source": "surface",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2018a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2019a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2020a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2021a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2022a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2023a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2024a",
+              "source": "observations",
+              "material": "projective"
+            },
+            {
+              "id": "visible-2025a",
+              "source": "observations",
               "material": "projective"
             }
           ]

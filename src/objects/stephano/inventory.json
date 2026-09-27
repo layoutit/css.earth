@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "stephano-arrival.webp",
+      "bytes": 35694,
+      "sha256": "fe6c642db3184cbb73687910a878c484a74f810491d4a335a4af2089ff4eddf0"
+    },
+    {
+      "location": "public",
       "filename": "stephano-model-shadow-alpha@2x.webp",
       "bytes": 125134,
       "sha256": "a9ebf9fc7cc3d555926bd5e9f4e358e2a1c19851856d1b216160b7d95a9dc0fc"
@@ -30,6 +36,12 @@
       "filename": "stephano-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "39f718775e038cf9efb259234068c02aa15d7ab04d934d561f72acd34a743e66"
     },
     {
       "location": "prepared",

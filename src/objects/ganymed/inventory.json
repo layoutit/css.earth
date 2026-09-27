@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ganymed-arrival.webp",
+      "bytes": 34342,
+      "sha256": "f40f815afb00a90a2c4efd32de9e0f00a159b6b9cec52f105fa1ede1beccb051"
+    },
+    {
+      "location": "public",
       "filename": "ganymed-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "ganymed-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "5ab59601c04b146795ee1b69ffecad69b8b2789d34fc47a9166e039c2cae9234"
     },
     {
       "location": "prepared",

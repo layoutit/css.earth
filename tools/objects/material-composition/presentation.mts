@@ -5,13 +5,12 @@ import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPr
 import type {createLayeredOblatePreparation} from './layered-oblate.mts';
 import type {prepareLayeredLeafLayouts} from '@cssearth/bake/objects/layers/material-composition';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
-import type {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
-import type {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import type { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
 import type { PreparedNode } from '@cssearth/bake/presentation';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/platform/prepared-object-assets";
-import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
+import { PREPARED_PRESENTATION_SCHEMA } from "@cssearth/bake/presentation";
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];

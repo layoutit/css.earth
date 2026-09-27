@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rasalhague-arrival.webp",
+      "bytes": 53996,
+      "sha256": "9b556263b70b9d80883e6e4883a58b8d6373271d524dee3691bbd5e3da14dda3"
+    },
+    {
+      "location": "public",
       "filename": "rasalhague-lens-color.webp",
       "bytes": 170,
       "sha256": "3d37a4df34de981571b2057eb24c5b929f0b1588076395dd7a1920e7b3d09ba4"
@@ -24,6 +30,12 @@
       "filename": "rasalhague-surface-color@2x.webp",
       "bytes": 2258,
       "sha256": "7d902cb4925ec0cbe45e1438cebdc56dc3281d2a5b47ca086613dc5274676772"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "e8df28c266d2d649a57e257b4bb1b430ba9feb3b066f0afec762b7c9bc2e2958"
     },
     {
       "location": "prepared",

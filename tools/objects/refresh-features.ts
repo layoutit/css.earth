@@ -8,7 +8,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
-import { readAuthoredSources } from './authored-sources.js';
+import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { parseRuntimeManifest } from './runtime-assets.js';
 
 const record = (value: unknown, label: string): Record<string, unknown> => { if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new TypeError(`${label} must be an object.`); return value as Record<string, unknown>; };

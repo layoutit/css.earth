@@ -50,12 +50,12 @@ fallback requirements are not the current authored-package template.
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `packages/renderer/src/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare/prepare-object-json.mts` |
-| Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `tools/objects/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
-| Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `site/scene/scene-contract.mts`, `site/scene/scene-router.mts` |
+| Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `packages/bake/src/objects/sources/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
+| Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `packages/renderer/src/runtime/shell-contract.ts`, `site/scene/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
 | Content, lens labels and minimap preparation | `tools/objects/content/` (lens labels and legends included), `tools/prepare/prepare-surface-minimaps.mts` |
-| Search and marker presentation | `site/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
+| Search and marker presentation | `site/search/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `packages/bake/src/world-context/hyperbolic-path.ts`, shared world-context preparation and orbit validation/projector |
 
 Minimap preparation accepts authored source paths and prepared source records.
@@ -115,7 +115,7 @@ instead of editing a shared list or atlas position.
   rules belong to its dataset.
 - **Spectral absorption maps:** Charon's `source/science/leisa/bands.json`
   pairs LEISA spectra with wavelength and geometry cubes.
-  `tools/objects/observation/spectral-band-maps.mts` prepares footprint-limited
+  `packages/bake/src/objects/layers/observation/spectral-band-maps.ts` prepares footprint-limited
   numeric maps; `tools/oracles/fits/charon-leisa.py` independently checks the
   native samples and arithmetic. Follow the spectral guidance in
   [scientific faithfulness](scientific-faithfulness.md).
@@ -200,7 +200,7 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | A published longitude/latitude grid of a surface property in another body frame | `npy-lonlat-grid` scientific format (`terrestrial-layers/npy-lonlat-grid.mts`): the release's `.npy` arrays unchanged, nearest-node cells, and a `frameTransfer` record naming the grid's published spin state and the mesh's spin file; `additionalLensIds` lets the lenses share an alternative mesh | Psyche `thermal-inertia`, `dielectric-constant` (Cambioni et al. 2022 ALMA maps on the ADAM mesh) | `tests/objects/unit/psyche/alma-frame.test.mts` reproduces the authors' sub-observer longitudes and registers the release altitude map by shape; `npy-lonlat-grid.oracle.test.mts` against numpy |
 | An unresolved body with published flux densities in three infrared bands | `disc-integrated-band-color` science kind on the raster route: a `cssearth-disc-band-color@1` record (bands longest first, one zero-based range shared by the sibling bodies), `falseColor: true`, painted uniformly | HR 8799 b-e `color` (JWST/NIRCam F460M, F430M, F410M, Balmer et al. 2025) | `tools/objects/observation/disc-band-color.test.mts` |
 | An unresolved body with published whole-disc colours and albedo | `disc-integrated-color` science kind on the raster route: cited colour record plus CIE 1931 and D65 tables, painted uniformly; discovery does not count it as imagery | Makemake `color`, Eris `color`; Haumea `color` on the shape-model route (`surfaces` list in `shape-model.json`) | `tools/objects/observation/disc-integrated-color.test.mts`, `site/test/object-discovery.test.mts`, `tests/objects/unit/haumea/shape.test.mts` |
-| A published illustrative model texture for a body with no imagery | `glb-base-color` science kind (`tools/objects/shape-model/glb-surface.mts`): the pinned GLB's base-colour texture carried through its own UVs; the lens id goes in `catalog.illustrationLenses`, so discovery never counts it, and it is never the default lens | Makemake, Eris, Haumea and 55 Cancri e `illustration` (NASA VTAD models) | `tools/objects/shape-model/glb-surface.test.mts`, `site/test/object-discovery.test.mts` |
+| A published illustrative model texture for a body with no imagery | `glb-base-color` science kind (`packages/bake/src/objects/layers/shape-model/glb-surface.ts`): the pinned GLB's base-colour texture carried through its own UVs; the lens id goes in `catalog.illustrationLenses`, so discovery never counts it, and it is never the default lens | Makemake, Eris, Haumea and 55 Cancri e `illustration` (NASA VTAD models) | `tools/objects/shape-model/glb-surface.test.mts`, `site/test/object-discovery.test.mts` |
 | A published artist's global map for a planet with no imagery | `equirectangular-illustration` science kind (`tools/objects/observation/interpret.mts`): a 2:1 map resized unchanged onto the sphere, left edge at 0°; `tools/objects/illustration-lens.mts` adds it to a hosted planet as a non-default lens listed in `catalog.illustrationLenses` | HD 189733 b, GJ 504 b, Kepler-452 b and TRAPPIST-1 b–h `illustration` (NASA Eyes on Exoplanets maps) | `tools/objects/observation/equirectangular-illustration.test.mts` |
 | A planet of another star with a published longitude-latitude map | Astronomy record `classification: exoplanet` with a `hostedOrbit` block around a placed star (`packages/astronomy/src/hostedOrbits.ts`), rotation `cssearth-synchronous-rotation@1` (`packages/bake/src/objects/scene/authored-rotation.ts`), and a `terrestrial-scientific` lens with `format: npy-dictionary-map` on the emissive route (`packages/bake/src/objects/raster/numpy/npy-pickle.ts`, `tar-member.mts`); paint the atlas from `outputLongitudeOrigin: -90` | WASP-43b `temperature`: Challener et al. (2024) JWST NIRSpec eclipse map, Zenodo tar read in place | `tests/objects/unit/wasp-43b/eclipse-map.test.mts` turns the map with the package's orbit and rotation (`packages/bake/src/objects/raster/eclipse-map/phase-curve.ts`) and fits the deposited light curve; `default-view.test.mts` pins the substellar view | Photometry cannot tell north from south; the orbit's node on the sky is a display convention |
 | A wide companion star whose orbit is not measured | Its own Gaia placement with `boundTo` and a `sources.binary` citation of the measurement that binds it (`packages/astronomy/tools/lib/generator-records.mts`); no orbit is drawn, and preparation carries the pair's centre of mass into the world context. A LOFTI fit (`tools/objects/binary-orbits/lofti-fit.py`) may be kept as evidence only: the candidate-orbit renderer was removed because the accepted orbits span a factor of ten in size | HD 189733 B | `site/test/object-systems.test.mts` | The companion lies on no orbit |
@@ -212,6 +212,26 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | A placed star with no measured rotation axis | `cssearth-display-orientation@1` rotation record with the pole set to sky north in the plane of the sky and `displayMeridianDegrees` facing the Earth; star record `presentationUp: display-axis` (`packages/astronomy/src/stars.ts`, read by `tools/prepare/prepare-solar-geometry.mts`) so the presentation frame and the camera orbit use that axis instead of the ecliptic pole | π¹ Gruis `pionier`: Paladini's image-ready PIONIER OIFITS from the OiDB read as is, `tools/objects/interferometry/oifits-rows.mts` for the per-channel fit | `tests/objects/unit/pi1-gruis/{camera,default-view}.test.mts` | The axis is a labelled convention; a star far from the ecliptic would otherwise never face its sub-Earth point |
 | A default camera angle, a body orientation or an off-limb plate turn | Nothing authored: `packages/bake/src/objects/scene/default-camera.ts` derives the camera (photograph frames, a self-luminous body facing the Sun, or the lit design pose); the world-navigation stage solves the system node so the drawn body is in the ecliptic presentation frame; `prepareSkyNorthScreenAngleDegrees` turns the plate. Recipes that state `initialScenePitchDegrees`, `defaultControlYawDegrees` or `offLimb.rotationDegrees` are refused | Amalthea (photo mosaic), Betelgeuse (star and plate), Callisto (lit pose) | `tools/objects/default-view/geometry.mts` measures the result through the runtime camera math | The world-navigation stage owns the pose: `node tools/prepare/cli/prepare-object-json.mts --keep-bindings` re-applies a rule change to every object in seconds; the five planet lanes bake lighting at the rule's pitch and re-bake only when it changes |
 | The default camera of a photograph lens on the planet route | `tools/objects/default-view/geometry.mts` (`assertDefaultViewFacesLens`, run by `prepare-authored` for every `surface-observation` lens) | Betelgeuse `default-view.test.mts` | The runtime's scene matrix and `worldCameraFromPresentation` give the sub-camera point and the screen angle of any direction without a browser | Preparation refuses a default view more than 25 degrees from the lens's sub-observer point; the test pins the browser-measured angles |
+
+For scientific charts, start with the [recipe catalog](../../../../docs/chart-recipes.md).
+Reuse its six prepared families and shared axes, typography and palette. Give
+every axis a quantity, units and numeric ticks. Standalone curves and measured
+points are neutral off-white; reserve color for multiple series and annotations.
+Separate curve keys from shaded regions. Only draw
+uncertainty when the source supplies it. Inspect the mounted panel at desktop
+and mobile widths, including labels, legends and the image's intrinsic size.
+
+For deposited temperature–pressure retrievals, use the
+[reusable chart recipe](../../../../docs/retrieved-profile-charts.md). The shared chart step accepts
+`kind: retrieved-profile` through `tools/objects/charts/retrieved-profile.mts`.
+WASP-18b's `source/content/charts.json` binds each table's native pressure unit,
+column order, row count and absolute credible bounds. The preparer keeps native
+samples within the displayed range, interpolates only boundary crossings in
+log-pressure, refuses extrapolation or clipped intervals, and emits one SVG
+image for the shared panel. Check independent values against the published
+figure as well as parser invariants; label these as model retrievals and state
+which pressures the observation constrains. `retrieved-profile.test.mts` owns
+those checks. A spectrum or phase curve alone does not establish local profiles.
 
 For `controlled-shape-color`, each band set is one observing triplet. A point is
 colored only where all three of its bands qualify, and band sets compete for a

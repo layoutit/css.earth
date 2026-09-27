@@ -114,6 +114,7 @@ export async function prepareObjectContentAssets({
   }
   let chartAssets: {
     urls: string[];
+    dimensions: { src: string; width: number; height: number }[];
     gallery?: { items: GalleryRecipe["items"]; qualification?: string };
   } | undefined;
   let chartConfig: unknown;
@@ -124,9 +125,10 @@ export async function prepareObjectContentAssets({
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
   if (chartConfig !== undefined) {
-    const { prepareChartAssets } = await import("./charts");
+    const { prepareChartAssets } = await import("../charts/charts");
     chartAssets = await prepareChartAssets({ sourceDirectory, publicDirectory, config: chartConfig }) as {
       urls: string[];
+      dimensions: { src: string; width: number; height: number }[];
       gallery?: { items: GalleryRecipe["items"]; qualification?: string };
     };
   }
@@ -139,7 +141,9 @@ export async function prepareObjectContentAssets({
     title: preparedWithAssets.title,
     facts: preparedWithAssets.facts,
     moreFacts: preparedWithAssets.moreFacts,
-    charts: preparedWithAssets.charts,
+    charts: preparedWithAssets.charts.map(chart => ({ ...chart,
+      ...chartAssets?.dimensions.find(image => image.src === chart.src),
+    })),
     galleries: preparedWithAssets.galleries.map((gallery, index) => ({
       ...gallery,
       ...(chartAssets?.gallery && index === 0 ? {

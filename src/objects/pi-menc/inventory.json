@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "pi-menc-arrival.webp",
+      "bytes": 29742,
+      "sha256": "21cc57a7f05adc0a8ca7d688b32926f41e784d9c70ca08693d59a4f3996f9682"
+    },
+    {
+      "location": "public",
       "filename": "pi-menc-lens-shape.webp",
       "bytes": 44,
       "sha256": "00d4a70547c36ef009088162a84f24bd944aab51aee77a82041c9486f93a2285"
@@ -228,6 +234,12 @@
       "filename": "pi-menc-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "d0024f7724f37340bdf9e78f89ac25ddf06165f0a532c55b2f0a9db72e98559e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "f3c91575d59e69eebbeb7aa59afb5ed367397dc0b7ac0edaf0d24eae0c51724a"
     },
     {
       "location": "prepared",

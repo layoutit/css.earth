@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bertha-arrival.webp",
+      "bytes": 43338,
+      "sha256": "78c23d66b5431150d40d3c87542c080083f8bf4236eaf60b1403359571f67c25"
+    },
+    {
+      "location": "public",
       "filename": "bertha-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "bertha-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "4e829907433442849a04aa709c8c117acc4c3fcbd1dada20584dfb34ef22bac8"
     },
     {
       "location": "prepared",

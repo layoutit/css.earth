@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "veritas-arrival.webp",
+      "bytes": 37712,
+      "sha256": "45ec34d17fbb4c83be8b8c18938bfac3b26361da8722a348cd5688b56fa7f524"
+    },
+    {
+      "location": "public",
       "filename": "veritas-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "veritas-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 299,
+      "sha256": "c30fbc0e22647739df1c3805d7c4c85705fcf9b2b330117749a52e764c2df2b4"
     },
     {
       "location": "prepared",

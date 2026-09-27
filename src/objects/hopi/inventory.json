@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hopi-arrival.webp",
+      "bytes": 35298,
+      "sha256": "d36df90c3e9d03daf6eca116c558f0b4e29867d9a0be8f3cdfd42790bb12866e"
+    },
+    {
+      "location": "public",
       "filename": "hopi-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "hopi-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "4e7cdf27bfd49cddd3250c7c58be899bf3112333ecf10e3b1e512a09df7200c5"
     },
     {
       "location": "prepared",

@@ -10,7 +10,7 @@ import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
 import { definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../src/platform/prepared-presentation-contract.mts";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
 import { readPreparedJsonExports } from "../prepared/check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '../prepared/prepared-object-source.mts';
@@ -130,7 +130,7 @@ function preparedLightingProjectionRecord(node: Node, file: string) {
 // JSON import names the same project file as `source`, and its attributes mean it
 // can only load data, never an executor, so it is the one computed import this
 // plan may contain.
-const worldContextNodeHelper = '../tools/prepared/prepared-world-context-node-source.mts';
+const worldContextNodeHelper = './prepared/prepared-world-context-node-source.mts';
 function worldContextPlanImport(ast: Program | null, file: string): {data: number; helper: number} | null {
   if (!ast || file !== 'site/world-context-plan.mts') return null;
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));

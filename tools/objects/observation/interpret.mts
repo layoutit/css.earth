@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { readRgba, paintMissingCoverage } from '@cssearth/bake/raster';
 import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '@cssearth/bake/raster';
-import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-synoptic.mts';
+import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationLens, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from '@cssearth/bake/objects/layers/observation';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
@@ -17,21 +17,16 @@ import { loadSurfaceObservation, type SurfaceObservation } from '../surface-obse
 import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
 import { skyDisplayRaster } from '@cssearth/fits';
-import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '@cssearth/bake/objects/raster';
 import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
-import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
-import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
-import { loadDiscBandColor } from './disc-band-color.mts';
-import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
+import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
-import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */

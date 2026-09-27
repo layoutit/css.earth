@@ -346,6 +346,63 @@
         "qualification": "JAXA/ISAS Akatsuki UVI Level 3b, 365 nm, 2023-08-30 10:04:46 UTC",
         "falseColor": false,
         "notes": "JAXA/ISAS Akatsuki UVI 365 nm ultraviolet image of the cloud tops, mapped by the mission to a 0.125-degree grid. One exposure on 2023-08-30 sees one hemisphere; the grey graticule marks the side the spacecraft could not see. Brightness is the measured radiance as observed."
+      },
+      {
+        "id": "emissivity",
+        "label": "Emissivity",
+        "shortLabel": "Emissivity",
+        "thumbnail": "venus-lens-emissivity.webp",
+        "surface": "venus-emissivity@2x.webp",
+        "poles": "venus-poles-emissivity@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "Magellan · USGS global GEDR · 4.64 km pixels",
+        "notes": "Magellan microwave emissivity, corrected for the antenna and atmosphere. Emission angle, surface roughness and tilt remain uncorrected. Missing observations stay empty.",
+        "source": {
+          "id": "magellan-global-emissivity",
+          "path": "../emissivity/magellan.tif",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Microwave emissivity",
+          "meta": "Dimensionless",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0.29",
+              "1.00"
+            ]
+          }
+        }
       }
     ],
     "labels": {
@@ -382,7 +439,7 @@
       "open": true,
       "src": "/scenes/venus/venus-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Venus from 350 to 1000 nanometers using the checked NASA PSG atmosphere response.",
       "source": {
         "id": "venus-psg",
@@ -396,7 +453,7 @@
       "open": false,
       "src": "/scenes/venus/venus-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Venus V-band brightness change across phase angles from zero to 179 degrees.",
       "source": {
         "id": "scientific-charts",
@@ -409,7 +466,7 @@
       "open": false,
       "src": "/scenes/venus/venus-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Venus atmospheric temperature from 92.1 bar to the upper atmosphere in the checked NASA PSG model.",
       "source": {
         "id": "venus-psg-profile",

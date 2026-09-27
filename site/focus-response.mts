@@ -5,7 +5,7 @@ import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSel
 import type { PreparedWorldCameraFrame, SharedView } from '@cssearth/renderer/navigation';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import { initialFocusCatalog, loadFocusCatalogs } from './focus-catalog.mts';
-import { requiredElement } from './browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from './focus-fragment.mts';

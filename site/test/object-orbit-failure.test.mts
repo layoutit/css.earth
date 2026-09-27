@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { required } from './navigation-test-values.mts';
-import { materialOrbitFixture } from '../../src/platform/test/object-material-orbit-fixture.mts';
+import { materialOrbitFixture } from '../../tests/platform/object-material-orbit-fixture.mts';
 
 for (const id of ['mercury', 'venus', 'mars']) {
   for (const event of ['wheel', 'drag', 'resize', 'invalidate', 'refresh', 'setState', 'media-change']) {

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eps-eridani",
+  "card": {
+    "text": "ε Eridani is a 5,039 K star 3.2 parsecs away with 1 known planet.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1112-0447",
+        "url": "https://arxiv.org/abs/1112.0447",
+        "label": "Baines & Armstrong (2011)",
+        "checked": "2026-09-26",
+        "locator": "Baines & Armstrong (2012), ApJ 744, 138, section 3: θLD 2.153 ± 0.028 mas, R 0.74 ± 0.01 solar radii, Teff 5039 ± 126 K; NASA Exoplanet Archive ps default row (THOMPSON_ET_AL_2025): st_mass 0.82"
+      },
+      {
+        "catalogueId": "wikipedia-epsilon-eridani",
+        "url": "https://en.wikipedia.org/wiki/Epsilon_Eridani",
+        "label": "Wikipedia, \"Epsilon Eridani\"",
+        "checked": "2026-09-26",
+        "locator": "Lead section, revision 1376485045",
+        "quote": "Epsilon Eridani, proper name Ran, is a star in the southern constellation of Eridanus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ε Eridani is a star of 5,039 K 3.2 parsecs away. Its planet is b, placed on the orbit its paper measured.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1112-0447",
+        "url": "https://arxiv.org/abs/1112.0447",
+        "label": "Baines & Armstrong (2011)",
+        "checked": "2026-09-26",
+        "locator": "Baines & Armstrong (2012), ApJ 744, 138, section 3: θLD 2.153 ± 0.028 mas, R 0.74 ± 0.01 solar radii, Teff 5039 ± 126 K; NASA Exoplanet Archive ps default row (THOMPSON_ET_AL_2025): st_mass 0.82"
+      },
+      {
+        "catalogueId": "wikipedia-epsilon-eridani",
+        "url": "https://en.wikipedia.org/wiki/Epsilon_Eridani",
+        "label": "Wikipedia, \"Epsilon Eridani\"",
+        "checked": "2026-09-26",
+        "locator": "Lead section, revision 1376485045",
+        "quote": "At a declination of −9.46°, it is visible from most of Earth's surface."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hebe-arrival.webp",
+      "bytes": 40158,
+      "sha256": "d24a7037551ba6263c4f3801b396cb219f30b9d9f0da4693650d63d4f835b78c"
+    },
+    {
+      "location": "public",
       "filename": "hebe-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "hebe-zimpol-thumbnail.webp",
       "bytes": 1632,
       "sha256": "470cdeb15ccbce677dbd5e4e61dc71de3399aa9a45d23f56d8f4f54680ecc3ad"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 292,
+      "sha256": "11179ab6e9f09d2b8786c96657694b47f75bf06b215b1cc596367d3648dfa416"
     },
     {
       "location": "prepared",

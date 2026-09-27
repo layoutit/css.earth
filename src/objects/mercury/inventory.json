@@ -213,6 +213,12 @@
     },
     {
       "location": "public",
+      "filename": "mercury-arrival.webp",
+      "bytes": 138806,
+      "sha256": "d5e7f11236ee24cbee949debc5054b5afe9ad3bfea62a25a4a41148fd6bf1ab0"
+    },
+    {
+      "location": "public",
       "filename": "mercury-features.json",
       "bytes": 954620,
       "sha256": "036ac4e31bf6c1045dfd8662ab5008c408f224c398fcb44eba02d562a45f3e28"
@@ -292,8 +298,8 @@
     {
       "location": "public",
       "filename": "mercury-photometric-phase-curve.svg",
-      "bytes": 4311,
-      "sha256": "57eab70b271a85aa63ee930a63cec65b9cc120b5abd7a989e289cedf541c687f"
+      "bytes": 5159,
+      "sha256": "918d4d5197b5cfc290ba7dd4248567b0dbecabe6897079968013a1e5bf879e3b"
     },
     {
       "location": "public",
@@ -316,8 +322,8 @@
     {
       "location": "public",
       "filename": "mercury-surface-albedo.svg",
-      "bytes": 7331,
-      "sha256": "25fc93bbbce2a391fe44634beb4cfa63c8c99f160dc5381a5a2fbd4c9510aa1f"
+      "bytes": 8523,
+      "sha256": "103d4a25e75c5f843594b50a69cb0b82d98a068586cf0f6abf3b3716a029bd72"
     },
     {
       "location": "public",
@@ -339,6 +345,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "5dd2c7d2df8c2c97fd552967aeebc16b8d9be16a5418e8379351259800e74915"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
       "bytes": 94282,
       "sha256": "095372d433b922756e0b86d567ec8a5d4e5c60a64b1cb5aa7402a0342723680a"
@@ -353,7 +365,7 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 4550,
-      "sha256": "9463cfd7f2e697b8bf1c5bb6122466eef5c659f2e9c766f41e05c194ae7316a3"
+      "sha256": "6134ac644d2f492d2509bad249376e0fa26cce8904f3d52a7f0d0815dec0cd95"
     },
     {
       "location": "prepared",

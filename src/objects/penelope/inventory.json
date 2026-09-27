@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "penelope-arrival.webp",
+      "bytes": 35220,
+      "sha256": "2bfdb7bfbe807c8820ed02bb5ded89a3bb8c29b81254e9bb34434cff2f55d235"
+    },
+    {
+      "location": "public",
       "filename": "penelope-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "penelope-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "6f2c7d2e8ca346d3ca28dac0aec2a63fdb37b232c7220641326e89bfd9cbe3b5"
     },
     {
       "location": "prepared",

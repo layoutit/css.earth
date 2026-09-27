@@ -28,6 +28,7 @@ import { loadEigenspectraTemperature } from './eclipse-map/eigenspectra-map.ts';
 import { loadHealpixNpyMap } from './healpix-map.ts';
 import { loadTecplotLonLatMap } from './tecplot-lonlat-map.ts';
 import { loadLatitudeBeltMap } from './latitude-belt-map.ts';
+import { loadPdsBinnedTable } from './pds/pds-binned-table.ts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -159,6 +160,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'healpix-npy-map') return loadHealpixNpyMap(root, value);
   if (lens.format === 'tecplot-lonlat-map') return loadTecplotLonLatMap(root, value);
   if (lens.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
+  if (lens.format === 'pds-binned-table') return loadPdsBinnedTable(root, value);
   if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (lens.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
   if (lens.format === 'isis3') {

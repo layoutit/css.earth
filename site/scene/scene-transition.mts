@@ -1,9 +1,9 @@
 import type { ObjectDescriptor } from '@cssearth/objects';
-import type { BrowserWindow, SceneFactory } from '../browser-types.mts';
+import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import type { createNavigationContent } from '../navigation/navigation-content.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectEntry } from '../objects.mts';
-import type { ShellNavigationTransition } from '../object-shell-types.mts';
+import type { ShellNavigationTransition } from '../shell/object-shell-types.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
@@ -81,7 +81,7 @@ export async function focusExistingScene({ session, request, selectionTransition
 
 /** Content, factory and flight prepare concurrently, with resources still owned by the request. */
 export function prepareSceneReplacement({ fromId, source, object, request, navigation, requests, loadObject,
-  contentTransport, reducedMotion, getWorld }: {
+  contentTransport, reducedMotion, getWorld, stage }: {
   fromId: string;
   source: SceneSession | null;
   object: ObjectEntry;
@@ -91,6 +91,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   loadObject(id: string, descriptor?: ObjectDescriptor, signal?: AbortSignal): Promise<SceneFactory>;
   contentTransport: ReturnType<typeof createNavigationContent>;
   reducedMotion: boolean;
+  stage?: HTMLElement;
   getWorld(): WorldContextMount | null;
 }) {
   const contentTask = contentTransport.load(object, { signal: request.signal })
@@ -106,7 +107,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   requests.advance(request, 'flying');
   const preparationTask = navigation.prepare({
     fromId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factoryTask,
-    signal: request.signal, url: request.url,
+    signal: request.signal, url: request.url, stage,
     reducedMotion,
     targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined,
     targetFocusPositionM: request.camera.kind === 'frame' ? request.camera.focusPositionM ?? undefined : undefined,

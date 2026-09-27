@@ -1,7 +1,6 @@
 import type {Vec3} from '@layoutit/polycss';
-import type {PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon} from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import type { PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type {createAtmospherePreparation, AtmosphereConfiguration} from './atmosphere.mts';
-import type {createPagedSurfaceRaster} from './surface-raster.mts';
 import {requireFiniteNumber} from '@cssearth/core';
 import type {EllipsoidAttitude} from './attitude.mts';
 import {preparedControlPitch} from '@cssearth/engine';

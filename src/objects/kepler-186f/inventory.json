@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kepler-186f-arrival.webp",
+      "bytes": 31404,
+      "sha256": "e25289b814416da54a168d029940581172c2b978de6350c30222d8a06225f9f0"
+    },
+    {
+      "location": "public",
       "filename": "kepler-186f-lens-shape.webp",
       "bytes": 44,
       "sha256": "c4b8328f96e8540cd84594bf2af9f28feb7f4b4348528c7b6f4fbc6ee433e1df"
@@ -228,6 +234,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 311,
+      "sha256": "9121c2b57f1de00eb3a7d4bf8b1ffa50d1a30c556cc1c8c8200ea541405e9235"
     },
     {
       "location": "prepared",

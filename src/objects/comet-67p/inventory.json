@@ -75,6 +75,12 @@
     },
     {
       "location": "public",
+      "filename": "comet-67p-arrival.webp",
+      "bytes": 43218,
+      "sha256": "fb8edd016ca06ea1271d670400794e6d36ef023aa5906e52e77891a002b0538a"
+    },
+    {
+      "location": "public",
       "filename": "comet-67p-features.json",
       "bytes": 28611,
       "sha256": "b8e93dbf7e429640da548af13e41a0fd5f077692019bdda97ff6cbac205a1bdf"
@@ -270,6 +276,12 @@
       "filename": "comet-67p-slope-thumbnail.webp",
       "bytes": 2558,
       "sha256": "7c4f5564ea14b19267f86febe31c0271f34962d7897b193020f5626b1564cd2a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "61756bc1c13a1a58618d6efc1fdd99d3ff2c69049f2eb39ad472f898b3e446d9"
     },
     {
       "location": "prepared",

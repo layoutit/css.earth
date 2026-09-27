@@ -1,0 +1,22 @@
+{
+  "id": "wieczorek-2022-mars-crust",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Wieczorek et al. (2022), InSight constraints on the global Martian crust",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2022JE007298",
+      "label": "Wieczorek et al. (2022), InSight constraints on the global Martian crust"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/preparation/raster.json",
+      "locator": "/surfaces"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

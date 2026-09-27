@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hat-p-11-arrival.webp",
+      "bytes": 28572,
+      "sha256": "457d1b18424cc471f8d9bbd1e4447870eace5add73e40d381a109323594927b0"
+    },
+    {
+      "location": "public",
       "filename": "hat-p-11-lens-color.webp",
       "bytes": 44,
       "sha256": "1884d891c5e27e86d76731c3bbe500c05a517541cf536fdd981b4aa9ef3a0ac2"
@@ -24,6 +30,12 @@
       "filename": "hat-p-11-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "a428f56c48ce17557f91424b84bdf7fe367eb0b6a5e59e11917a5b9f32050a31"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "67294375029c9ca9976e29d1ee2c9899b877e90adebf68e04a0004527e2923fd"
     },
     {
       "location": "prepared",

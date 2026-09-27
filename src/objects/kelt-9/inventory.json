@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kelt-9-arrival.webp",
+      "bytes": 34330,
+      "sha256": "aa8ddb25a1fe10c7ba61fc41cb7c29afafe8b716c337389d0d6964eb97e5cd95"
+    },
+    {
+      "location": "public",
       "filename": "kelt-9-lens-color.webp",
       "bytes": 122,
       "sha256": "41281781658bf342ac3776a811fc1efc6dfca160033054fe1172cb1844a7e287"
@@ -24,6 +30,12 @@
       "filename": "kelt-9-surface-color@2x.webp",
       "bytes": 1454,
       "sha256": "d5a257a7b85d79e613a0410d13b5769fae520df5f8248cae73663f62c2732f00"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 362,
+      "sha256": "d7a3ba69e79a043cecb8a60beb38e7ced50113aac2f576ba52272864e1248690"
     },
     {
       "location": "prepared",

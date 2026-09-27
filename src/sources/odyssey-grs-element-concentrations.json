@@ -1,0 +1,27 @@
+{
+  "id": "odyssey-grs-element-concentrations",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mars Odyssey GRS element concentrations, version 1.0",
+  "identifiers": [
+    {
+      "value": "10.1029/2007JE002887",
+      "type": "doi"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+      "label": "PDS Geosciences Node"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/grs/h2o_5x5.lbl",
+      "locator": "/lenses"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

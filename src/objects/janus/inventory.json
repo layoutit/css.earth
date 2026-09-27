@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "janus-arrival.webp",
+      "bytes": 52356,
+      "sha256": "ee02dc032f74468f22c6949b71b465a31c61b5a2940f2f8d21f565e1343d195d"
+    },
+    {
+      "location": "public",
       "filename": "janus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "janus-normal-thumbnail.webp",
       "bytes": 2002,
       "sha256": "62ee6280876d9fc14af13fd8c7b81c8ac2ec3d1d87463413fce800c0f7289073"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 366,
+      "sha256": "95627db66e30dff6f98cb89d13fa8fd04e86d06163a00ed975b6d3a9eca3bcec"
     },
     {
       "location": "prepared",

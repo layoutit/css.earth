@@ -1,7 +1,7 @@
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { SceneFactory } from './browser-types.mts';
-import { requiredElement } from './browser-types.mts';
+import type { SceneFactory } from './browser/browser-types.mts';
+import { requiredElement } from './browser/browser-types.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { loadNavigableObject, preparedObjectCapabilities,

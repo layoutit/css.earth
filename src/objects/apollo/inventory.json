@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "apollo-arrival.webp",
+      "bytes": 36598,
+      "sha256": "498e5be5f398971906af4aec70ccb848917510fdfd86ecb81401dd2528f6fae3"
+    },
+    {
+      "location": "public",
       "filename": "apollo-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "apollo-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "fed5a52f0b4e01e7b07592b8dc299994eb03bd46ba207ce0aa04188e95df4ae9"
     },
     {
       "location": "prepared",

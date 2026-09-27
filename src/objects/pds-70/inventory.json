@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pds-70-arrival.webp",
+      "bytes": 29388,
+      "sha256": "de22966c031e79e5cbb2fc2f8809187eef99583ed1b085fdc39fa920aef9f574"
+    },
+    {
+      "location": "public",
       "filename": "pds-70-lens-color.webp",
       "bytes": 44,
       "sha256": "fd940368466507dda97077938c7a2d40e6d12bfcb5f593106201a8a176570918"
@@ -27,6 +33,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "9be9f2f13924230d98e30686d470762db2385e42ba0cb6096e1b009ea903760e"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
       "bytes": 2019,
       "sha256": "9c6461d2629ffbe68806672e6de0322f536421c7ebffadee8a41c0e51b4c4de4"
@@ -35,7 +47,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1405,
-      "sha256": "176580a3c52463c7d94f0449955c63d242af9f864c77f7176d30af0602766211"
+      "sha256": "f61c20a86cca90a87cbdd353236aa236f6a6b3706d59edfa216c6d2d9899524b"
     },
     {
       "location": "prepared",

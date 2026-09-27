@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "amalthea-arrival.webp",
+      "bytes": 36232,
+      "sha256": "ddc0aecce02a4e9aac3a1b607b52ddb1f8b472045266ea085174b05f7b46641b"
+    },
+    {
+      "location": "public",
       "filename": "amalthea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -72,6 +78,12 @@
       "filename": "amalthea-normal-thumbnail.webp",
       "bytes": 1374,
       "sha256": "3a12d2c31ad5048f3df6db27cc80e3b97cf914f49223d3003a73838081cb7a8d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "6d27472f1d2d59569e7e16b56a3176c37028f2d13b783ce66e50d17ec1f3a333"
     },
     {
       "location": "prepared",

@@ -1,5 +1,5 @@
 import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from './runtime-assets.js';
-import { containedPath, parseSourceManifest, verifySources } from './source-files.js';
+import { containedPath, parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leucus-arrival.webp",
+      "bytes": 37894,
+      "sha256": "0801843dd8d2bae0b50ffe3210aab855a9393e4c204da51c5570b3db4943bff4"
+    },
+    {
+      "location": "public",
       "filename": "leucus-model-shadow-alpha@2x.webp",
       "bytes": 136100,
       "sha256": "67c847b2fb64e93e7e7a9ea46432e054d4b6c83f304aaa14b0ffb9aed45ad8cc"
@@ -30,6 +36,12 @@
       "filename": "leucus-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 308,
+      "sha256": "52ca17af241879036840398921c628032b830b43e5e9b37217f9ff30c8734af1"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "iota-horologii-arrival.webp",
+      "bytes": 26900,
+      "sha256": "d397cfaf88f8ca35a7578397793dc8d047d32180dbc9bdbc5aa0b99d10190cbe"
+    },
+    {
+      "location": "public",
       "filename": "iota-horologii-lens-azimuthal-field-01.webp",
       "bytes": 248,
       "sha256": "ee93792c5ee813ce4200cd4c1a857d86aed7cdc3a16d9615d8e233226cff7bdf"
@@ -672,6 +678,12 @@
       "filename": "iota-horologii-surface-radial-field-18@2x.webp",
       "bytes": 39890,
       "sha256": "8ddeffa7ef90d5f638c4439926d6ccbdefd29badd1ae04a36965c75bc0d86ce5"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "49b33f6a6b5dd48357b258b4ee802573e9ae2312d5bcf6972039aae5c8d00cd0"
     },
     {
       "location": "prepared",

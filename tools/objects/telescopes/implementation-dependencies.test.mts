@@ -106,7 +106,7 @@ test('the telescope library is followed into its sources, as when its modules sa
 
 test('the shared object libraries are followed into their bake sources, as when they sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-bake-objects-'));
-  const topics = ['cameras', 'color', 'geometry', 'raster', 'scene', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
+  const topics = ['cameras', 'color', 'geometry', 'raster', 'scene', 'sources', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
   try {
     await writeFile(resolve(root, 'entry.mts'), `${topics.map(topic => `import * as ${topic.replace(/\W/gu, '_')} from '@cssearth/bake/objects/${topic}';`).join(' ')}\nexport const used=[${topics.map(topic => topic.replace(/\W/gu, '_')).join(',')}];\n`);
     for (const topic of topics) {

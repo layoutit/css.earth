@@ -16,11 +16,13 @@ Original images, meshes and labels
 
 | Step | Implementation |
 | --- | --- |
-| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../tools/objects/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
+| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mts) |
+| Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
+| Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
 | Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mts) and [record generation](../tools/objects/provenance.mts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
@@ -678,6 +680,62 @@ in its README and recipe. Keep shared algorithm explanations here. Add a
 operation consumes inputs or emits products, and retain its original check results
 under the [evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result).
 
+## Arrival billboards
+
+Each body can publish one square, transparent image of its default dataset at
+the prepared arrival rotation. `pnpm prepare:arrival-billboards --all` prepares
+the registry; body ids select a smaller refresh. Run it against a current local
+performance build with `--origin http://127.0.0.1:4212`. The default image is
+1024 pixels square, starting at eight body radii and moving farther back when
+rings or emission extend beyond the capture. The tool renders
+the delivered CSS scene, including rings and atmosphere, waits for application
+readiness and image decoding, and checks the acknowledged camera distance,
+nonempty pixels and clipping. It uses the shared lossy WebP lane with alpha.
+
+The image and `prepared/arrival-billboard.json` are inventoried per body. Publish
+both through the ordinary R2 workflow before merging. Scratch receipts and the
+resumable batch report live under `output/billboards/arrival-batch/`; prepared
+images are not committed to Git. Use `--force` to refresh after changing the default camera,
+dataset, geometry, materials or renderer. A billboard does not change the
+body's imagery classification or extend the coverage of its source data.
+
+The runtime decodes the destination billboard before flight. It holds that
+retained image while the full destination scene attaches and paints at the
+same prepared perspective, then fades the image and finishes the zoom with
+the mesh to preserve responsive framing. Camera-root offsets and focal length
+come from the shared viewport. Saved views, other datasets, reduced motion
+and overview targets outside the baked distance retain their own navigation.
+No browser-specific camera or runtime image generation is involved.
+
+Decoded images and connected DOM do not prove GPU residency. Qualify the
+handoff with the [iPad journey recorder](../tools/performance/README.md),
+inspecting native frames through the reveal and final zoom. The same trace
+records released scene resources, DOM counts and WebKit memory categories.
+
+### Arrival evidence
+
+The 2026-09-26 preparation at `95d442c8c0` covers all 722 body scenes:
+1,444 inventoried files and 28,064,758 image bytes. Each image is 1024 square;
+its receipt matched the runtime, default dataset, camera rotation and both
+inventory hashes. Quaoar's rings required a distance of 16 radii; the other
+721 captures used eight. The [representative sheet](performance/evidence/arrival-billboards/overview.webp)
+shows the existing datasets, including their unobserved regions and modeled colours.
+
+The [Earth-to-Lutetia sequence](performance/evidence/arrival-billboards/earth-to-lutetia.webp)
+contains eight of 50 native iPad frames from the performance build at that
+revision (iPad15,7, iOS 26.6, portrait). Times are relative to the first screen
+grab. The 4.902, 5.213 and 5.377 second frames bracket the billboard reveal;
+the silhouette stays aligned, then the mesh finishes the responsive zoom.
+The route reached ready with no console errors. The scene-release record
+reported Earth's resource owners and decoded image entries cleared.
+Only documentation evidence was untracked during this run.
+
+The full capture remains under ignored
+`output/performance/ios-captures/all-body-billboard-handoff-2026-09-26T23-56-31-481Z/`.
+This is device evidence for that journey, not an exhaustive device test of all
+722 arrivals. Shared projection tests cover other viewport focal lengths and
+camera-root offsets; browser GPU residency still requires visual inspection.
+
 ## Refresh photographs without rebuilding geometry
 
 Existing single-model spacecraft observation lenses can refresh through the same
@@ -720,6 +778,15 @@ captions. It rejects scientific/emissive selections and new resource names.
 Unselected maps and the scene remain retained products; provenance records this
 as a partial refresh rather than a new full-package preparation. The ordinary
 full preparer uses the same image code.
+
+The observed-surface lane's `component-fits` coverage joins an RGB publisher map
+with its three component FITS maps. A sample must be finite and measured in every
+channel. Polar-connected zero fill and gaps connected to declared unobserved rows
+stay missing; isolated dark samples remain observed. The recipe declares any
+longitude reversal, offset and repeated endpoint before planetographic rows move
+onto the body ellipsoid. Coverage-aware interpolation feeds the surface, poles
+and thumbnail together. Uranus, Neptune and Saturn's OPAL date recipes use this
+path; their READMEs record the release-specific frame and photometry limits.
 
 LROC's `pds-float-map` interpretation reads attached PDS3 labels, validates the
 product version, band, projection and lunar reference sphere, then integrates

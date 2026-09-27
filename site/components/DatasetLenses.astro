@@ -142,6 +142,9 @@ const stepOf = (lens: Control) => {
             ><span class={`object-lens-step-chevron ${next ? 'is-next' : 'is-previous'}`} aria-hidden="true"></span></button>;
             return <div class="object-lens-steps" role="group" aria-label={`${lens.label} steps`}>
               {arrow(step.previous, false)}
+              {!focus && <button class="object-lens-step object-lens-play" type="button"
+                data-dataset-play={lens.step!.group} disabled aria-label="Play sequence" aria-pressed="false"
+                title="Loop through this sequence">Play</button>}
               <span class="object-lens-step-label">{lens.step!.label} · {step.index + 1} of {step.count}</span>
               {arrow(step.next, true)}
             </div>;

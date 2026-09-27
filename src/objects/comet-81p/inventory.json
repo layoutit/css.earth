@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "comet-81p-arrival.webp",
+      "bytes": 32062,
+      "sha256": "7cfec3c52d571f5d76f24fb850275a6d983c0cf7fa672d0de34d914f7fd928a4"
+    },
+    {
+      "location": "public",
       "filename": "comet-81p-features.json",
       "bytes": 4412,
       "sha256": "72a415c4b86c59b2415c35829f2e9c3731b1450155725b42da750551d4ed1810"
@@ -54,6 +60,12 @@
       "filename": "comet-81p-navcam-thumbnail.webp",
       "bytes": 2114,
       "sha256": "ee3024d87371ff0e4f062e2e6b7ea401913381dc0edad6a7f7250edc0eae06c9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 314,
+      "sha256": "fde81272e74081fd8bbc12dbb526ff06c50f7adab3d91acb30ad363d6049e45e"
     },
     {
       "location": "prepared",

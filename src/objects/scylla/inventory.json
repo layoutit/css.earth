@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "scylla-arrival.webp",
+      "bytes": 41656,
+      "sha256": "0a8053563d9a71b6d229f123f19d95211578c076df27e87c3696610e90b10ecf"
+    },
+    {
+      "location": "public",
       "filename": "scylla-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -66,6 +72,12 @@
       "filename": "scylla-shape-thumbnail.webp",
       "bytes": 44,
       "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 296,
+      "sha256": "7a58317400d44367bba36c8d16fb30a01b1364e694d4f7a582cceb79b6a17f82"
     },
     {
       "location": "prepared",

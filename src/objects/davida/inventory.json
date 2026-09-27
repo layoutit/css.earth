@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "davida-arrival.webp",
+      "bytes": 34868,
+      "sha256": "3802740730edbdc9fa99df6199f4b5a4a8703730ce7b38940951584810ae0be7"
+    },
+    {
+      "location": "public",
       "filename": "davida-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "davida-zimpol-thumbnail.webp",
       "bytes": 1474,
       "sha256": "ad3e4e6bef2d23f5cc42a19d636b949accc7b96dfbc1e83a7bb9ecfac50661fd"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "90f5c68abf0038fa137a7d7fff9835bd1308edaaaaf313cb9aedeaa1178a86ef"
     },
     {
       "location": "prepared",

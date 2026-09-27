@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "erinome-arrival.webp",
+      "bytes": 38356,
+      "sha256": "5541565892c488fb4c37be13a39aa9d6cf110465669f61caba02f92212da5f19"
+    },
+    {
+      "location": "public",
       "filename": "erinome-model-shadow-alpha@2x.webp",
       "bytes": 128036,
       "sha256": "2347cccfd3d109098bbf8a8c12c700a82793b0526bc9a64c1514f83dbaa6dde1"
@@ -30,6 +36,12 @@
       "filename": "erinome-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 298,
+      "sha256": "5dd9fca25ef5afabe1294176b99688932b6d9984b552cc95e948384f3657a234"
     },
     {
       "location": "prepared",

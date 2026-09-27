@@ -3,7 +3,7 @@ const parseRingProfile = shape({textureSize:number,bands:array(shape({id:text,se
 export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { prepareRingLeaves } from '../shape-model/rings.mts';
+import { prepareRingLeaves } from '@cssearth/bake/objects/layers/shape-model';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
 import { publishedImageSize } from '../shape-model/raster.mts';
 

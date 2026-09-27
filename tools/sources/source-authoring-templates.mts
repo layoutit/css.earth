@@ -1,5 +1,5 @@
 import { requireRecord, shape, text, number, array, optional, nullable, boolean } from '@cssearth/core';
-import { parseSourceManifest } from '#preparation/source-files';
+import { parseSourceManifest } from '@cssearth/bake/objects/sources';
 import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** Refresh bytes without discarding reviewed identity, credits or capture evidence. */

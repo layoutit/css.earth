@@ -29,8 +29,12 @@ class Root {
   readonly inputs: Input[];
   constructor(inputs: Input[]) { this.inputs = inputs; }
   // This is the narrow DOM boundary exercised by the renderer: it only reads these mock controls.
-  querySelectorAll<T extends Element>(): NodeListOf<T> { return this.inputs as unknown as NodeListOf<T>; }
+  querySelectorAll<T extends Element>(selector: string): NodeListOf<T> {
+    return (selector === 'input[name], button[name]' ? this.inputs : []) as unknown as NodeListOf<T>;
+  }
+  querySelector(): null { return null; }
   setAttribute(key: string, value: string): void { this.attributes[key] = value; }
+  getAttribute(key: string): string | null { return this.attributes[key] ?? null; }
   readonly classList = {
     toggle: (key: string, on?: boolean): boolean => { if (on) this.classes.add(key); else this.classes.delete(key); return on === true; },
     remove: (key: string): void => { this.classes.delete(key); },
@@ -38,7 +42,7 @@ class Root {
   };
 }
 type InformationPanel = { querySelector(selector: string): { elements: Input[]; closest(): Root } | null; querySelectorAll(): never[] };
-type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null; getElementById(id: string): { hidden: boolean } | null };
+type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null; getElementById(id: string): { hidden: boolean; querySelectorAll(): never[] } | null };
 type HarnessMutation = (parts: { lensInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; document: HarnessDocument; lensRoot: Root }) => void;
 function selectionState(initial: ObjectSelection): ObjectSelectionState {
   return { committed: null, committedBy: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
@@ -52,7 +56,7 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   const illustrationModels = new Input({ name: "illustrationModels" });
   settingInputs.push(motion, surfaceLabels, heliosphere, illustrationModels);
   const lensRoot = new Root(lensInputs), settingsRoot = new Root(settingInputs);
-  const panels = new Map(lensInputs.map(input => { input.setAttribute('aria-controls', input.value); return [input.value, { hidden: false }]; }));
+  const panels = new Map(lensInputs.map(input => { input.setAttribute('aria-controls', input.value); return [input.value, { hidden: false, querySelectorAll: (): never[] => [] }]; }));
   const form = { elements: lensInputs, closest: () => lensRoot };
   const information: InformationPanel = { querySelector: selector => selector === 'form[data-dataset-form]' ? form : null, querySelectorAll: () => [] };
   const document: HarnessDocument = { querySelector: selector => selector === ".object-information-panel" ? information : selector === ".object-lenses" ? lensRoot : settingsRoot,
@@ -184,7 +188,7 @@ test("one failed native listener removal does not stop the rest of control clean
 
 test("prepared dataset details follow committed selection through pending work", () => {
   const ids = moonControls.lenses?.controls.slice(0, 2).map(lens => lens.id) ?? []; assert.equal(ids.length, 2);
-  const legends = ids.map(() => ({ hidden: true }));
+  const legends = ids.map(() => ({ hidden: true, querySelectorAll: (): never[] => [] }));
   const h = harness(moonControls, ({ document }) => {
     const lookup = document.getElementById;
     document.getElementById = id => legends[ids.indexOf(id)] ?? lookup(id);

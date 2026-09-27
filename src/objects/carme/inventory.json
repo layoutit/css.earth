@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "carme-arrival.webp",
+      "bytes": 35554,
+      "sha256": "d9e3b0efb42d10cb0432ce92dece1eade0211defd7ca48d1e9a432c2d23a8251"
+    },
+    {
+      "location": "public",
       "filename": "carme-model-shadow-alpha@2x.webp",
       "bytes": 125390,
       "sha256": "3866b574980097072f748e006da9e3c15869cab6cf6be1aa6faadd67a57adf12"
@@ -30,6 +36,12 @@
       "filename": "carme-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "9b4444f52c1220d9ab3b60a8fc8d737c210e0846022471895fb083b34b0dedf7"
     },
     {
       "location": "prepared",

@@ -2,8 +2,8 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import type { PreparedCubicSkyPlan } from '../../src/platform/cubic-sky-contract.mts';
-import { focusedCameraProjection } from './focused-camera.mts';
+import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
+import { focusedCameraProjection } from '@cssearth/bake/objects/scene';
 
 const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8'));
 

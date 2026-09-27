@@ -18,6 +18,15 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 ## Evidence
 
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [emissivity](evidence/showcase/emissivity.png).
+
+### Magellan microwave emissivity (26 September 2026)
+
+[USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) is decoded by the existing GeoTIFF science reader. Its signed 16-bit DN converts to dimensionless emissivity as `(DN − 1) / 10,000`; −32,768 is missing. The 8,193 × 4,097 grid has 1,334,015 missing samples, and valid values range from 0.2926 to 0.9986. The displayed scale is 0.29–1.00 and uses lossless colour encoding.
+
+The product corrects antenna sidelobes and atmospheric effects; it does not correct emission angle, roughness or surface tilt. It is microwave emissivity, not visible colour, temperature or evidence of present volcanism. The source's simple cylindrical projection and 6,051 km reference sphere are read from its own GeoTIFF tags. [The label](source/emissivity/magellan.lbl) and [raster recipe](source/preparation/raster.json) retain the scale, missing value and georeferencing choices. The original cloud view remains the default.
+
+
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
 | View | Both prepared levels, before → current |

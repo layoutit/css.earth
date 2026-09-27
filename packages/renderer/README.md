@@ -25,12 +25,15 @@ It was `src/renderers/css` until 2026-09-26. The compilers that write its prepar
 The built entries are ESM with declarations in `dist/`. The site's client build compiles them from their sources
 instead ([package-sources.mts](../../tools/performance/package-sources.mts)); server rendering and Node tools use `dist/`.
 Node bundles that keep packages external still bundle this one ([bundle-renderer.mts](../../tools/cli/bundle-renderer.mts)),
-because its sources name their siblings `.js`.
+because its sources name their siblings `.js`. `src/runtime/shell-contract.ts` and `src/labels/universe-label-policy.ts` name
+theirs `.ts` instead, so plain-Node tools can load them without a bundler.
 
 Three small modules moved in from `src/platform` with the runtime, since the renderer was their only runtime owner:
 `src/runtime/shell-settings.ts` (the setting names the shared shell owns), `src/labels/surface-feature-banks.ts` (the
 feature-bank address that preparation writes and the labels read) and `src/validation/prepared-texture-levels.ts` (the
-texture-level validators). None is generic enough for `@cssearth/core`.
+texture-level validators). None is generic enough for `@cssearth/core`. The shell's object-controls and scene-lifecycle
+contract (`src/runtime/shell-contract.ts`) moved in later from `site/scene`, so `src/platform` and the tools can check a
+scene against it without importing the site.
 
 ```text
 packages/renderer/
@@ -42,7 +45,8 @@ packages/renderer/
 │   ├── validation/     parsers for every prepared format
 │   ├── prepared-data/  world context, ellipsoid projections
 │   ├── universe/       universe context and catalogues
-│   ├── solar-system/, sky/, stars/, volume/, shell/, image-layers/, labels/
+│   ├── solar-system/   heliocentric geometry, orbits, and the prepared cubic-sky and directional-Sun contracts
+│   ├── sky/, stars/, volume/, shell/, image-layers/, labels/
 │   └── styles/         runtime stylesheets
 ├── tsup.config.ts      built entries
 ├── AGENTS.md           package rules

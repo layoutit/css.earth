@@ -29,3 +29,6 @@
 No source mark or agency logo is reproduced. Source credits do not imply
 endorsement. Exact origins, hashes, licenses, and redistribution notes are in
 `source/manifest.json`.
+
+- Dated OPAL RGB maps and component coverage: NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team, MAST cycles 22–32; original product credits and reuse records remain in the source manifest.
+- JRM33 model: J. E. P. Connerney and colleagues (2022). Evaluation uses the PSH community code of R. J. Wilson and colleagues (2023), fetched unchanged under its GPL-3.0 license into the local toolchain cache. The repository distributes the computed scientific grid, not a vendored copy of PSH.

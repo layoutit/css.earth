@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eleonora-arrival.webp",
+      "bytes": 34308,
+      "sha256": "94a82aeb91c5600bb6371903f8c835eac2fbbef89219cecca42b6e630cdd6357"
+    },
+    {
+      "location": "public",
       "filename": "eleonora-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "eleonora-zimpol-thumbnail.webp",
       "bytes": 1500,
       "sha256": "caf7b527a324e140f2819b99b7bd63fcc0de11e26393f74331cd15980cd8a93b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "4f6446595c9548e580c49cb31031c7dc1f5fc88081989d00a58db4e3cc37c460"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "roxs-42b-arrival.webp",
+      "bytes": 29744,
+      "sha256": "fee8fb8c95b71a07637e058f0b81e0d3c7a89824e2a6924508a1f39b9806e82b"
+    },
+    {
+      "location": "public",
       "filename": "roxs-42b-lens-color.webp",
       "bytes": 44,
       "sha256": "57bcf63189a2b4436cb4f0d9482f71b26af40e1b8e3069899e3636e23d94c3d7"
@@ -24,6 +30,12 @@
       "filename": "roxs-42b-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "3d02f728419eda6b0d9d7593bcb0855d5914f40734d4a5f099968b3b4861dc65"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "f4e2d4b90171b0035354499ef9743dddb0f7d2ab12ccfd3c6320509ee235909f"
     },
     {
       "location": "prepared",

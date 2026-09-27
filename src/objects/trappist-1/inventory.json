@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "trappist-1-arrival.webp",
+      "bytes": 30548,
+      "sha256": "d57d3a03627411f1d5ab6712bb6e58c5e8935ea035eb3010254ad5ba18c651c5"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1-lens-color.webp",
       "bytes": 44,
       "sha256": "5611d83e227916722d56c30c948ea0445e6e987cbe3554450c22982aa04ba55b"
@@ -10,8 +16,8 @@
     {
       "location": "public",
       "filename": "trappist-1-light-curve-15um.svg",
-      "bytes": 4269,
-      "sha256": "70b786a73f932bd2159dfce21432b5272f5f4320434ddff6599d18001fabad24"
+      "bytes": 5468,
+      "sha256": "87e9b1c1f08ea3169663a03d3d4ea239e78441a0b093c0c9f6f434f8be2e2487"
     },
     {
       "location": "public",
@@ -33,6 +39,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "59ef5e2e7a57ed81e5b3e2662680730822ad96630642dbce8a9ed385471c8812"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
       "bytes": 2133,
       "sha256": "57bb7ddd23d422e9389c5ad1646b892eb297bfe745f3650c0c1a9f8894d5d825"
@@ -47,7 +59,7 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2196,
-      "sha256": "791ed2fd5d1cdb6eb4ef00e8dcf1503d99fb197ace2738eb90bfa2f87dd62b2e"
+      "sha256": "40e0d1ed7392a7e47a405baf3dca15697ae0d78680a5217c5df84500ebe99253"
     },
     {
       "location": "prepared",

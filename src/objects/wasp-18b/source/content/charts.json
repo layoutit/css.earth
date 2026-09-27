@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-18b/",
+  "charts": [
+    {
+      "kind": "retrieved-profile",
+      "id": "wasp-18b-hotspot-profile",
+      "title": "WASP-18b hotspot and whole-dayside temperature profiles",
+      "description": "Two atmospheric retrievals of the JWST hotspot spectrum compared with the HyDRA retrieval of the whole-dayside spectrum. Lines show median temperatures and shaded bands the published one-sigma credible intervals. Pressure increases downward on a logarithmic axis; lower pressure is higher atmosphere. Dashed horizontal lines mark the approximately 0.1–1 bar range probed by the observation. The plotted profiles are model inferences, not direct temperature measurements.",
+      "output": "wasp-18b-hotspot-profile.svg",
+      "metadata": {
+        "source": "Challener, Weiner Mansfield et al. (2025), Figure 4",
+        "doi": "10.1038/s41550-025-02666-9",
+        "deposit": "10.5281/zenodo.14751570",
+        "observation": "JWST NIRISS/SOSS, program 1366, 2022-08-24",
+        "quantity": "Retrieved atmospheric temperature",
+        "uncertainty": "Published lower and upper 1-sigma credible bounds; not errors added to the median",
+        "processing": "Native table samples; Pa divided by 100000 for HyDRA. Linear connections in log-pressure; interpolate only plot boundary crossings. No fitting.",
+        "probedPressureSource": "Figure 4 dashed lines, approximately 0.1 to 1 bar",
+        "comparisonDeposit": "10.5281/zenodo.7907569"
+      },
+      "series": [
+        {
+          "path": "science/challener-2025/profiles/hydra-hotspot.txt",
+          "label": "Hotspot · HyDRA",
+          "color": "#9478ff",
+          "pressureUnit": "Pa",
+          "expectedRows": 50,
+          "columns": {
+            "pressure": 0,
+            "median": 3,
+            "lower": 2,
+            "upper": 4
+          }
+        },
+        {
+          "path": "science/challener-2025/profiles/pyratbay-hotspot.txt",
+          "label": "Hotspot · Pyrat Bay",
+          "color": "#83c997",
+          "pressureUnit": "bar",
+          "expectedRows": 81,
+          "columns": {
+            "pressure": 0,
+            "median": 1,
+            "lower": 2,
+            "upper": 3
+          }
+        },
+        {
+          "path": "science/coulombe-2023/hydra-dayside.txt",
+          "label": "Whole dayside · HyDRA",
+          "color": "#e6ab64",
+          "pressureUnit": "Pa",
+          "expectedRows": 50,
+          "columns": {
+            "pressure": 0,
+            "median": 3,
+            "lower": 2,
+            "upper": 4
+          }
+        }
+      ],
+      "pressure": {
+        "minimum": 0.01,
+        "maximum": 10,
+        "ticks": [
+          {
+            "value": 0.01,
+            "label": "0.01"
+          },
+          {
+            "value": 0.1,
+            "label": "0.1"
+          },
+          {
+            "value": 1,
+            "label": "1"
+          },
+          {
+            "value": 10,
+            "label": "10"
+          }
+        ]
+      },
+      "temperature": {
+        "minimum": 2500,
+        "maximum": 3800,
+        "ticks": [
+          {
+            "value": 2500,
+            "label": "2500"
+          },
+          {
+            "value": 3000,
+            "label": "3000"
+          },
+          {
+            "value": 3500,
+            "label": "3500"
+          },
+          {
+            "value": 3800,
+            "label": "3800"
+          }
+        ]
+      },
+      "probedPressure": {
+        "minimum": 0.1,
+        "maximum": 1
+      },
+      "notes": [
+        "Hotspot fits and the whole-dayside fit.",
+        "Shading: published 1σ credible intervals.",
+        "Dashed bounds: JWST mainly probes 0.1–1 bar.",
+        "Temperature rises higher in this region."
+      ]
+    }
+  ]
+}

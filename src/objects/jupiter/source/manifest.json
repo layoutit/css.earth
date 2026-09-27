@@ -717,6 +717,1040 @@
           }
         ]
       }
+    },
+    {
+      "id": "opal-2015a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 22. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2015a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-22",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 22. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2015a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-22",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 22. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2015a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-22",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2015a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 22. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2015a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-22",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 23. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2016a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-23",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 23. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2016a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-23",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 23. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2016a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-23",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2016a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 23. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2016a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-23",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 24. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2017a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-24",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 24. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2017a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-24",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 24. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2017a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-24",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2017a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 24. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2017a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-24",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 25. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2018a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-25",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 25. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2018a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-25",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 25. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2018a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-25",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2018a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 25. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2018a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-25",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 26. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2019a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-26",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 26. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2019a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-26",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 26. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2019a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-26",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2019a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 26. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2019a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-26",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 27. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2020a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-27",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 27. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2020a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-27",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 27. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2020a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-27",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2020a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 27. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2020a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-27",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 28. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2021a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-28",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 28. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2021a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-28",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 28. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2021a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-28",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2021a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 28. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2021a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-28",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 29. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2022a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-29",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 29. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2022a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-29",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 29. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2022a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-29",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2022a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 29. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2022a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-29",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 30. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-30",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 30. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-30",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 30. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-30",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024a-f658n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f658n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f658n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 30. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-30",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f658n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024c-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 31. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024c"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-31",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024c-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 31. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024c"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-31",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024c-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 31. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024c"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-31",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2024c-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 31. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2024c"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-31",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-rgb",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 32. Publisher RGB composite.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2025a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-f395n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 32. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2025a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-f502n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f502n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f502n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 32. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2025a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f502n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opal-2025a-f631n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f631n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f631n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. Simon (GSFC), M. Wong (UC Berkeley), and the OPAL team",
+      "license": "Public Hubble OPAL high-level science products; retain NASA/ESA and OPAL credit",
+      "acquisition": "Unmodified released OPAL product, cycle 32. Used only for finite and polar-connected-zero coverage.",
+      "redistribution": "Prepared derivative with Hubble OPAL credit",
+      "consumers": [
+        "visible-2025a"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opal-jupiter-dated-maps",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32",
+            "locator": "hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f631n_v1_globalmap.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jrm33-radial-field",
+      "path": "magnetic/radial-field.fits",
+      "origin": "https://doi.org/10.1029/2021JE007055",
+      "credit": "Connerney et al. (2022); Wilson et al. (2023), PSH community code",
+      "license": "Published scientific model; coefficients and computed values retained with author credit",
+      "acquisition": "node tools/objects/prepare-magnetic-map.mts src/objects/jupiter/source/preparation/magnetic.json --python=<pinned interpreter>; restore the derived grid from source-cache.",
+      "redistribution": "Scientific data with author and agency credit",
+      "consumers": [
+        "magnetic"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jrm33-radial-field",
+            "role": "material",
+            "evidence": "https://doi.org/10.1029/2021JE007055"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -791,6 +1825,14 @@
       "origin": "https://doi.org/10.1088/0004-637X/812/1/55",
       "credit": "Amy A. Simon, Michael H. Wong and Glenn S. Orton; transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "preparation/magnetic.json",
+      "purpose": "Reproducible preparation choices for the published model or observation reduction.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project recipe; source identities and acquisition routes are declared by its input records."
+      }
     }
   ]
 }

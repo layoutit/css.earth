@@ -1,0 +1,22 @@
+{
+  "id": "source-europa-hst-sodium-chloride",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Europa STIS 450 nm absorption",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/sciadv.aaw7123",
+      "label": "NASA/ESA Hubble Space Telescope, programme 14650 (PI M. Brown); MAST (STScI)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/inputs/427"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

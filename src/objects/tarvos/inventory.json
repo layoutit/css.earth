@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tarvos-arrival.webp",
+      "bytes": 34452,
+      "sha256": "68018969c12a99865bc172d2ce92b52476f9168911d7a0c3f682ecd949449158"
+    },
+    {
+      "location": "public",
       "filename": "tarvos-model-shadow-alpha@2x.webp",
       "bytes": 136504,
       "sha256": "c6eeb223eb019dc32bc3a3d7f69dbc019f0d8ba9a7d98e3b8ff712fb4264b725"
@@ -30,6 +36,12 @@
       "filename": "tarvos-model-thumbnail.webp",
       "bytes": 444,
       "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 295,
+      "sha256": "d2b3a3d88ea1039cd45aea86b742e854ba054719250d105b09f814c02d3f1108"
     },
     {
       "location": "prepared",

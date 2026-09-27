@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import { required } from './navigation-test-values.mts';
-import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../view-format.mts';
+import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../minimap/view-format.mts';
 import { measurePreparedFocusView } from '../view-readout.mts';
-import { measureView } from '../surface-minimap-rectangle.mts';
+import { measureView } from '../minimap/surface-minimap-rectangle.mts';
 const test = sourceTest();
 
 const identity: WorldRotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];

@@ -81,6 +81,26 @@
               "id": "infrared",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "carbon-dioxide",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "hydrogen-peroxide",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "sodium-chloride",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "junocam",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

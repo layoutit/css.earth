@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "earth-arrival.webp",
+      "bytes": 82606,
+      "sha256": "cf25293970750b5689436fec90e7a049eb045cb1e9908ec46746af279e566515"
+    },
+    {
+      "location": "public",
       "filename": "earth-atmosphere-default.webp",
       "bytes": 82382,
       "sha256": "e48146ae70b93abb63c0f271009a207f57972a60cd257237d5464e81f22e49f5"
@@ -214,8 +220,8 @@
     {
       "location": "public",
       "filename": "earth-atmosphere-spectrum.svg",
-      "bytes": 4019,
-      "sha256": "3effbba1809d10c758c48e514ba68cc7861e3bdfafb942c0c4b6b19b47492db0"
+      "bytes": 4666,
+      "sha256": "9d34f16e89575c7eb609163c048aca581338fe13062c00d7d13fdcb2c90e68d6"
     },
     {
       "location": "public",
@@ -8272,8 +8278,8 @@
     {
       "location": "public",
       "filename": "earth-photometric-phase-curve.svg",
-      "bytes": 4275,
-      "sha256": "7e68d3fced4018177b03d959ff6725a8a5c4b6d219c073c05cb464afdc2501ae"
+      "bytes": 5149,
+      "sha256": "0997bcf8f4e8324cc8b46a3a6359544c0a7a79084d085ea24dd95a726f908932"
     },
     {
       "location": "public",
@@ -10342,8 +10348,8 @@
     {
       "location": "public",
       "filename": "earth-temperature-pressure-profile.svg",
-      "bytes": 2530,
-      "sha256": "a96608c5f3af770db2e57f1e5b420efe8d86805f98796e7a777543e17962ef61"
+      "bytes": 2961,
+      "sha256": "ab55e07440ef123702decc2f37f955998cdeed2fcbb02d8a4217f7bdc45b2296"
     },
     {
       "location": "public",
@@ -12471,6 +12477,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 297,
+      "sha256": "9ed1a8f554259e723b75fa1a391681dcec93a1cf06f8f680f2c1154a5a2900e0"
+    },
+    {
+      "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1394,
       "sha256": "7c1de0616b46f968687a3f17297f60c1fa3fdce65bc0aef546c6ffd83e1f922a"
@@ -12479,7 +12491,7 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 4304,
-      "sha256": "963b59ba8deb1003ceaffcf432d7a05ffd4b4adc3612ecccfb127f2da472dad9"
+      "sha256": "132baf8e0f7bc16baf56c6434ace6df9d40cbd53852a3af95b94a2b16212b11f"
     },
     {
       "location": "prepared",

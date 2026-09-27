@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "atlas-arrival.webp",
+      "bytes": 41242,
+      "sha256": "71522030a1e122027c18661cb35fc38bc629ad23da1014d86b79ec6a36cc1cab"
+    },
+    {
+      "location": "public",
       "filename": "atlas-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -84,6 +90,12 @@
       "filename": "atlas-normal-thumbnail.webp",
       "bytes": 1416,
       "sha256": "47365dff9646c3be1b2e7730b75e566848937f15d695902acca24152272578ed"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "58d7b94a7c4c471bd3f3b0df3477a4f651544d38fb24dcd023a198117e70a4a1"
     },
     {
       "location": "prepared",

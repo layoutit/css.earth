@@ -45,3 +45,7 @@ The added views derive from credited public USGS/NASA scientific products. Prese
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
 
 Feature caption notes: 12 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
+
+- Additional JWST/NIRSpec data: NASA, ESA, CSA and STScI, programs 1250, 4023 and 9230; carbon-dioxide interpretation Trumbo and Brown (2023), peroxide interpretation Wu and colleagues (2024), with the Yoffe and Shahaf (2026) dispute retained.
+- HST/STIS salt-signature observations: NASA, ESA and STScI; Trumbo, Brown and Hand (2019); CALSPEC solar reference.
+- JunoCam Europa flyby: NASA/JPL-Caltech/SwRI/MSSS; PDS raw product labels and JPL/NAIF kernels retained.

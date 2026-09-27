@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { BrowserWindow } from '../browser-types.mts';
-import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl, scheduleWhenIdle } from '../catalogue-fragment-loader.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
+import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentUrl, readCatalogueIndexUrl, scheduleWhenIdle } from '../catalogue/catalogue-fragment-loader.mts';
 
 class FakeUListElement { html: string; constructor(html: string) { this.html = html; } }
 class FakeDocument {
