@@ -1,5 +1,5 @@
 import { required } from '@cssearth/objects/node/contract';
-import { fixtureSource } from '../test-source-fixture.mts';
+import { fixtureSource } from '../../../tests/objects/test-source-fixture.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
