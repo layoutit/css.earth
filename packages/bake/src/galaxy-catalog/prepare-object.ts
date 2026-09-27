@@ -1,14 +1,19 @@
-import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample, parseGalaxyRecipe, text, prepareGalaxyCatalog, parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata, readBibliography } from '@cssearth/bake/galaxy-catalog';
+import { parseGalaxyRecipe, text } from './config.ts';
+import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.ts';
+import { readBibliography } from './bibliography.ts';
+import { prepareGalaxyCatalog } from './prepare.ts';
+import { parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata } from './source.ts';
 import { readInventory, updateInventory } from '@cssearth/objects/node';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/catalog';
 import { requireRecord as record } from '@cssearth/core';
-import { sourceBytes } from '@cssearth/bake/volume/node';
+import { sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import type { GalaxySource } from '@cssearth/bake/galaxy-catalog';
+import type { GalaxySource } from './types.ts';
 
+/** Prepare a galaxy-catalogue object: its catalogue and display sample from the pinned sources, and, written into the
+ * object's own `prepared/`, its inventory and descriptor. */
 export async function prepareGalaxyCatalogObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
   const recipeBytes = await readFile(resolve(sourceDirectory, 'catalogue.json'));
@@ -70,8 +75,4 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
   }
   console.log(`PREPARED GALAXY CATALOGUE: ${JSON.stringify(receipt)}`);
   return data;
-}
-if (process.argv[1] && /(?:^|[/\\])prepare-galaxy-catalog\.(?:ts|js|mjs)$/.test(process.argv[1]) && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  if (!process.argv[2] || process.argv[3]) throw new TypeError('Usage: prepare-galaxy-catalog <object-directory>');
-  await prepareGalaxyCatalogObject({ objectDirectory: process.argv[2] });
 }

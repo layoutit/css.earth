@@ -42,7 +42,7 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
     const engineRequire = createRequire(resolve('packages/engine/package.json'));
     const { build } = createRequire(engineRequire.resolve('tsup'))('esbuild') as { build(options: unknown): Promise<void> };
     const executable = join(root, 'prepare-volume.mjs');
-    await build({ entryPoints: [resolve('tools/objects/prepare-volume.ts')], outfile: executable,
+    await build({ entryPoints: [resolve('packages/bake/cli/prepare-volume.mts')], outfile: executable,
       bundle: true, platform: 'node', format: 'esm', target: 'node22', packages: 'external', plugins: [bundleRendererPackage] });
     const object = join(root, 'fixture'); await mkdir(join(object, 'source'), { recursive: true });
     const raw = Buffer.from(Array.from({ length: 8 }, () => [128, 0, 0, 0]).flat());

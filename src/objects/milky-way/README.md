@@ -30,8 +30,8 @@ From the repository root, with Node 24 (or 22.18+) and pnpm 10.33.0:
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:tools
 pnpm prepare:volume src/objects/milky-way
-node tools/objects/dist/prepare-stars.js src/objects/stellar-neighbourhood
-node tools/objects/dist/prepare-shell.js src/objects/heliosphere
+node packages/bake/cli/prepare-stars.mts src/objects/stellar-neighbourhood
+node packages/bake/cli/prepare-shell.mts src/objects/heliosphere
 pnpm prepare:world-context
 pnpm test:preparation --universe
 ```

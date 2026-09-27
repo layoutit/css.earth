@@ -21,7 +21,7 @@ From the repository root:
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:tools
-node tools/objects/dist/prepare-stars.js src/objects/stellar-neighbourhood
+node packages/bake/cli/prepare-stars.mts src/objects/stellar-neighbourhood
 pnpm test:preparation --universe
 ```
 

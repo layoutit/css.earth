@@ -67,7 +67,7 @@
     "prepare:shell-assets": "node tools/prepare/cli/prepare-shell-icons.mts",
     "prepare:typecheck": "node tools/prepare/cli/prepare-typecheck.mts",
     "prepare:titles": "node tools/prepare/cli/prepare-shell-titles.mts",
-    "prepare:volume": "node tools/objects/dist/prepare-volume.js",
+    "prepare:volume": "node packages/bake/cli/prepare-volume.mts",
     "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && node tools/prepare/cli/prepare-moon-labels.mts && node tools/prepare/cli/prepare-world-presentation.mts",
     "pretest": "pnpm prepare:shell",
     "preview": "node tools/cli/preview.mts",
