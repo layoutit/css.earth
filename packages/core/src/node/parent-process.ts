@@ -46,9 +46,18 @@ export async function answerParent(run: () => Promise<ProcessResult | void>): Pr
     if (result) { process.stdout.write(result.text); process.exitCode = result.code; }
     return;
   }
+  // A parent that dies without stopping us (killed outright) closes the channel: end with it, and with the processes we
+  // started when we lead our own process group, as the parent's command would have. Our own disconnect after answering is not that.
+  let answered = false;
+  process.once('disconnect', () => {
+    if (answered) return;
+    try { process.kill(-process.pid, 'SIGTERM'); } catch { /* Not a process group leader. */ }
+    process.exit(129);
+  });
   let answer: ProcessAnswer;
   try { const result = await run(); answer = { result: result ?? { text: '', code: 0 } }; }
   catch (error) { answer = { failure: processFailure(error) }; }
+  answered = true;
   await new Promise<void>((accept, reject) => { process.send!(answer, undefined, {}, error => { if (error) reject(error); else accept(); }); });
   process.exitCode = 'result' in answer ? answer.result.code : 1;
   process.disconnect?.();

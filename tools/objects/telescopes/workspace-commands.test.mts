@@ -118,3 +118,23 @@ setInterval(() => {}, 1000);
     assert.ok(stopped, 'the grandchild stopped with the telescope');
   } finally { await fixture.cleanup(); }
 });
+
+test('a workspace command ends, with the processes it started, when the telescope is killed outright', async () => {
+  const fixture = await workspace(`import { spawn } from 'node:child_process';
+import { writeFileSync } from 'node:fs';
+import { answerParent } from '@cssearth/core/node';
+writeFileSync(process.argv[2], String(process.pid));
+spawn(process.execPath, ['-e', 'require("node:fs").writeFileSync(process.argv[1], String(process.pid)); setInterval(() => {}, 1000);', process.argv[3]], { stdio: 'ignore' });
+await answerParent(() => new Promise(() => {}));
+`);
+  const childFile = resolve(fixture.directory, 'child.pid'), grandchildFile = resolve(fixture.directory, 'grandchild.pid');
+  try {
+    const dispatcher = spawn(process.execPath, [resolve(fixture.directory, 'dispatch.mts'), childFile, grandchildFile], { cwd: ROOT, stdio: 'ignore' });
+    const closed = new Promise(accept => dispatcher.once('close', accept));
+    const child = await readPid(childFile), grandchild = await readPid(grandchildFile);
+    dispatcher.kill('SIGKILL'); await closed;
+    const stopped = [await gone(child), await gone(grandchild)];
+    for (const pid of [child, grandchild]) if (alive(pid)) process.kill(pid, 'SIGKILL');
+    assert.deepEqual(stopped, [true, true], 'the command and its own process stopped when the telescope died');
+  } finally { await fixture.cleanup(); }
+});
