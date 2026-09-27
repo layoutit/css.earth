@@ -21,7 +21,7 @@ const TRACKED: readonly Tracked[] = [
   { archive: 'jwst', ledger: 'data/jwst/ledger.json', guide: 'docs/jwst-ledger.md', indent: 1, load: async () => (await import('../../../../tools/objects/jwst/archive-ledger.mts')).JWST_LEDGER as ArchiveLedger<unknown> },
   { archive: 'keck', ledger: 'data/keck/ledger.json', guide: 'docs/keck-ledger.md', indent: 2, load: async () => (await import('./keck/archive-ledger.mts')).KECK_LEDGER as ArchiveLedger<unknown> },
   { archive: 'naco', ledger: 'data/naco/ledger.json', guide: 'docs/naco-ledger.md', indent: 2, load: async () => (await import('./naco/archive-ledger.mts')).NACO_LEDGER as ArchiveLedger<unknown> },
-  { archive: 'spitzer', ledger: 'data/spitzer/ledger.json', guide: 'docs/spitzer-ledger.md', indent: 2, load: async () => (await import('../../../../tools/objects/spitzer/archive-ledger.mts')).SPITZER_LEDGER as ArchiveLedger<unknown> },
+  { archive: 'spitzer', ledger: 'data/spitzer/ledger.json', guide: 'docs/spitzer-ledger.md', indent: 2, load: async () => (await import('./spitzer/archive-ledger.mts')).SPITZER_LEDGER as ArchiveLedger<unknown> },
 ];
 
 for (const tracked of TRACKED) test(`the ${tracked.archive} ledger's tracked guide and JSON are the bytes its code writes`, async () => {

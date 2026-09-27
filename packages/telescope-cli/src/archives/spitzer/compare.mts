@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Compare a re-made mosaic with the archive's own, sample by sample, and write the receipt.
  *
- *   node tools/objects/spitzer/compare.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
+ *   node packages/telescope-cli/src/archives/spitzer/compare.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
  *
  * What this establishes, exactly. The archive's level-2 mosaic is a real external answer: the Spitzer Science Center made it
  * from the same level-1 frames with its own pipeline, and it is pinned here by byte count, sha256 and the archive's own MD5.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Find one Spitzer observation in the Spitzer Heritage Archive at IRSA and pin every file a re-mosaic needs.
  *
- *   node tools/objects/spitzer/archive.mts <program id> <aorkey> [--channels 1,2,3,4] [--data <dir>]
+ *   node packages/telescope-cli/src/archives/spitzer/archive.mts <program id> <aorkey> [--channels 1,2,3,4] [--data <dir>]
  *
  * What is pinned, per IRAC channel: the archive's own level-2 mosaic (`maic`) with its uncertainty (`munc`) and coverage
  * (`mcov`), and the level-1 frames that went into it, each as its corrected basic-calibrated image (`cbcd`), its uncertainty
@@ -37,9 +37,11 @@ import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { sha256File } from '@cssearth/core/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-export const PROGRAMS = resolve(import.meta.dirname, 'programs');
-export const REPOSITORY = resolve(import.meta.dirname, '../../..');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/spitzer/programs');
+export const REPOSITORY = WORKSPACE;
 export const SEARCH = 'https://irsa.ipac.caltech.edu/applications/Spitzer/SHA/sticky/CmdSrv';
 export const DATA = 'https://irsa.ipac.caltech.edu/ibe/data/spitzer';
 const SCHEMA = 'cssearth-spitzer-program@1';

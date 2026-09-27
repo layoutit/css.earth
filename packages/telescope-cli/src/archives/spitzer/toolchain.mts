@@ -2,8 +2,8 @@
 /** Install and locate the pinned Spitzer re-mosaic environment of toolchain.json under output/toolchains/spitzer (ignored by
  * git).
  *
- *   node tools/objects/spitzer/toolchain.mts install
- *   node tools/objects/spitzer/toolchain.mts verify
+ *   node packages/telescope-cli/src/archives/spitzer/toolchain.mts install
+ *   node packages/telescope-cli/src/archives/spitzer/toolchain.mts verify
  *
  * This is not the observatory's software. Spitzer's own post-BCD mosaicker is MOPEX, and `toolchain.json`'s `official` block
  * records, as a measurement with its date and machine, that its macOS build could not be run here: the binaries are x86_64
@@ -15,22 +15,24 @@
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is taken from PATH. */
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { runToolchainProcess } from '@cssearth/telescope/node';
+import { runToolchainProcess, WORKSPACE } from '@cssearth/telescope/node';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-const repository = resolve(import.meta.dirname, '../../..');
+const repository = WORKSPACE;
+/** The toolchain's pins (descriptor and lock) stay in the checkout beside the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'tools/objects/spitzer');
 export const SPITZER_ROOT = resolve(repository, 'output/toolchains/spitzer');
 /** The packages a run imports; a verify that cannot import one of these is a broken environment, not a warning. */
 export const REQUIRED_MODULES = ['numpy', 'astropy', 'reproject', 'scipy'] as const;
 
 export async function spitzerDescriptor() {
-  const path = resolve(import.meta.dirname, 'toolchain.json');
+  const path = resolve(PINS, 'toolchain.json');
   const text = await readFile(path, 'utf8');
   const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
-  const lock = await readFile(resolve(import.meta.dirname, requireString(entry.requirements)), 'utf8');
+  const lock = await readFile(resolve(PINS, requireString(entry.requirements)), 'utf8');
   return { entry, lock, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
 
@@ -41,7 +43,7 @@ export async function installSpitzer() {
   await mkdir(SPITZER_ROOT, { recursive: true });
   const env = { MAMBA_ROOT_PREFIX: resolve(SPITZER_ROOT, 'mamba') };
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(import.meta.dirname, requireString(entry.requirements))]);
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(PINS, requireString(entry.requirements))]);
   await rm(resolve(SPITZER_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   await writeFile(resolve(SPITZER_ROOT, 'installed.json'), `${JSON.stringify({ id: 'spitzer', pinsSha256: digest }, null, 2)}\n`);
   return SPITZER_ROOT;
@@ -61,7 +63,7 @@ export interface SpitzerToolchain {
 export async function spitzerToolchain(): Promise<SpitzerToolchain> {
   const { digest } = await spitzerDescriptor(), bin = resolve(SPITZER_ROOT, 'env/bin'), python = resolve(bin, 'python');
   const marker = await readFile(resolve(SPITZER_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Spitzer toolchain is not installed: node tools/objects/spitzer/toolchain.mts install');
+  if (!marker) throw new Error('The Spitzer toolchain is not installed: node packages/telescope-cli/src/archives/spitzer/toolchain.mts install');
   if (marker.pinsSha256 !== digest) throw new Error('The Spitzer toolchain was installed from other pins; reinstall it.');
   if (!await access(python).then(() => true, () => false)) throw new Error(`The Spitzer toolchain has no python at ${python}.`);
   return {

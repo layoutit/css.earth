@@ -1,6 +1,6 @@
 /** Pin one selected native Spitzer FITS file by AORKEY through the archive's existing SHA client. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { archiveUrl, mosaicCompanions, SEARCH, shaSearch } from '../../../tools/objects/spitzer/archive.mts';
+import { archiveUrl, mosaicCompanions, SEARCH, shaSearch } from './archives/spitzer/archive.mts';
 import { deliverSource, readSavedSource } from './archive-source.mts';
 
 const sourceName = (row: Readonly<Record<string, string>>): string | null => {

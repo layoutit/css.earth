@@ -150,7 +150,7 @@ because its shell is brightest at 8 microns, and the stars are blue-white becaus
 scattered single-colour specks are cosmic ray hits that survived in one channel only; a few dark pixels near the centre
 are missing from channel 4. This is the same nebula as the NIRCam picture above, at nearly seven times the pixel size.
 
-`node tools/objects/spitzer/mosaic.mts ngc3132-4416768`
+`node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768`
 
 ## Keck II, KCWI: a patch of the Orion Nebula
 
