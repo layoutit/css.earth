@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../source-test.mts';
+import { restoredSources, sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { loadNaturalEarthRows, naturalEarthZoomShare, parseNaturalEarthConfig } from '@cssearth/bake/objects/surface-features';
 
@@ -27,7 +27,10 @@ test('the recipe must say whether each class labels the map and give ordered dis
   assert.throws(() => parseNaturalEarthConfig({ ...valid, highlights: { tier: 5, ids: ['1', '1'] } }), /distinct/u);
 });
 
-test('the pinned Earth layers keep countries at label points, fold split parts and hide unlisted classes from the map', async () => {
+test('the pinned Earth layers keep countries at label points, fold split parts and hide unlisted classes from the map', async t => {
+  // The layers are unrestored downloads read through `unzip`, whose failure names no absent path, so name them first.
+  const archives = restoredSources('earth', ...(await recipe()).layers.map((layer: { archive: string }) => `features/${layer.archive}`));
+  if (archives.skip) return t.skip(archives.skip);
   const config = parseNaturalEarthConfig(await recipe());
   const rows = loadNaturalEarthRows(earthSource, 'features', config);
   const france = rows.find(row => row.layer === 'countries' && row.name === 'France')!;
