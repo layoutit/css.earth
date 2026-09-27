@@ -9,6 +9,16 @@ runs; they cannot be run from this checkout. The previews and their launchers
 under `labs/experiments/` still exist, as do the trace analyses under
 `tools/experiments/`.
 
+Blocks that list a retired helper keep the paths of their original run. The
+current experiment sources are checked and started with:
+
+```sh
+pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
+node labs/experiments/native-scroll/run.mts http://127.0.0.1:4349 4352
+node labs/experiments/native-resize/run.mts
+```
+
 The experiment used a native resize surface for rotation, inside a
 separate native scroll surface for zoom. Its retained Saturn scene was at
 `http://127.0.0.1:4352/saturn/?drag=resize`:
@@ -100,7 +110,7 @@ await build({ entryPoints: ['tests/experiments/native-scroll/camera-browser.mts'
   platform: 'node', format: 'esm', packages: 'external' });
 JS
 CSSEARTH_CHROME_LOG_STDIO=1 node output/native-scroll/camera-browser.mjs chromium
-pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../tools/experiments/native-scroll/tsconfig.json
 ```
 
 This is a local Saturn experiment, not a production camera replacement. The
@@ -188,7 +198,7 @@ CSS property for a resize hit target.
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/browser.mts
-pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../tools/experiments/native-resize/tsconfig.json
 ```
 
 The checks exercise five starting positions, one-pixel movement, repeated drags,
