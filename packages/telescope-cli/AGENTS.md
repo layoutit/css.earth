@@ -14,8 +14,12 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno, HST, JWST and IHW keep
   their programs, receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`,
   `moving-targets.json`, `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps one programs
-  folder beside each tool that reads it (`jwst/programs`, `jwst/imaging/programs`, `jwst/klip/programs`). Per-body
-  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the Io JIRAM maps) stays in
+  folder beside each tool that reads it (`jwst/programs`, `jwst/imaging/programs`, `jwst/klip/programs`). The
+  interferometry reduction (`src/archives/interferometry/`: ALMA restores, VLTI calibration, star imaging) keeps its
+  toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
+  it; `toolchains.json` still names the ROTIR environment at its former path, because an installed toolchain records the
+  digest of that text, and `currentArchivePath` in `src/archives/programs.mts` finds it here. Per-body
+  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the Io JIRAM maps, the ALMA thermal maps) stays in
   `tools/objects/<archive>/`. A receipt or ledger written before a move keeps the path it recorded;
   `src/archives/programs.mts` maps a recorded program path to its current location, for qualification, receipt writing and
   query display alike. No archive module names a body (`archives/archive-scope.test.mts`). That per-body JSON sits outside

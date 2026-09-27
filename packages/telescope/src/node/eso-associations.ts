@@ -1,6 +1,6 @@
 /** The ESO archive's calibration association trees (calselector, mode Raw2Raw): the tree ESO's own processing uses for a raw
  * science frame, fetched once and kept beside the reduction. The reductions that walk these trees stay with their
- * instruments (`tools/objects/interferometry/eso-associations.mts`). */
+ * instruments (`packages/telescope-cli/src/archives/interferometry/eso-associations.mts`). */
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
