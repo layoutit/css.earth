@@ -8,18 +8,17 @@ import { astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
 import { CRUISE_ROOTS, ROOT_CONFIG_FILE } from './cruiser-config.mts';
 import { ASTRO_SOURCE, buildImportGraph, CRUISED_SOURCE, cruiseRepository, EXCLUDED, readWorkspaces, repositoryFiles } from './graph.mts';
 import { createResolver } from './resolver.mts';
-import { workspaceOf } from './workspaces.mts';
+import { workspaceOf, workspaceSource } from './workspaces.mts';
 
 const root = realpathSync(resolve(import.meta.dirname, '../../..'));
 const files = repositoryFiles(root);
 const sources = files.filter(path => (CRUISE_ROOTS.some(top => path.startsWith(`${top}/`)) || ROOT_CONFIG_FILE.test(path))
   && (CRUISED_SOURCE.test(path) || ASTRO_SOURCE(path)) && !EXCLUDED.some(pattern => pattern.test(path)) && existsSync(resolve(root, path)));
 
-test('every @cssearth/* import in the repository is an edge into its package', async () => {
+test('every @cssearth/* import in the repository is an edge to the exact source file its entry is built from', async () => {
   const graph = await buildImportGraph(root, { details: false });
-  const workspaces = readWorkspaces(root, new Set(files));
-  const edges = new Map<string, string[]>();
-  for (const edge of graph.edges) (edges.get(edge.from) ?? edges.set(edge.from, []).get(edge.from)!).push(edge.to);
+  const tracked = new Set(files), workspaces = readWorkspaces(root, tracked);
+  const edges = new Set(graph.edges.map(edge => `${edge.from}\n${edge.to}`));
   const missing: string[] = [];
   let checked = 0;
   for (const path of sources) {
@@ -28,8 +27,11 @@ test('every @cssearth/* import in the repository is an edge into its package', a
     for (const { specifier } of specifiers) {
       if (!specifier.startsWith('@cssearth/')) continue;
       checked++;
+      // The expected target comes from the manifest and tsup entry alone, not from what the cruise resolved.
       const workspace = workspaceOf(specifier, workspaces);
-      if (!workspace || !(edges.get(path) ?? []).some(to => to.startsWith(`${workspace.directory}/`))) missing.push(`${path}: ${specifier}`);
+      const expected = workspace && workspaceSource(specifier, workspace, workspaces, tracked);
+      if (!expected || !('source' in expected)) missing.push(`${path}: ${specifier} (${expected ? expected.error : 'no workspace package'})`);
+      else if (!edges.has(`${path}\n${expected.source}`)) missing.push(`${path}: ${specifier} -> ${expected.source} (no such edge)`);
     }
   }
   assert.ok(checked > 1000, `expected the repository's workspace imports, found ${checked}`);
