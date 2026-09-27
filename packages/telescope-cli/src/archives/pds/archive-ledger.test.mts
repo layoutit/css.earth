@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { readdir } from 'node:fs/promises';
 import test from 'node:test';
-import { PDS_PROGRAMS, PDS_PROGRAMS_PATH } from './archive-final.mts';
+import { PDS_PROGRAMS } from './archive-final.mts';
+import { PDS_PROGRAMS_PATH } from './programs.mts';
 import { buildPdsLedger } from './archive-ledger.mts';
 // Plain node:test: it reads only the tracked programs and receipts beside this code.
 

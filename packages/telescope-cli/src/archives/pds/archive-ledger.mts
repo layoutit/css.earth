@@ -5,13 +5,12 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/telescope';
-import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS, PDS_PROGRAMS_PATH } from './archive-final.mts';
+import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS } from './archive-final.mts';
+import { pdsReceiptPath, recordedPdsReceiptPaths } from './programs.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const ROOT = WORKSPACE;
 export const PDS_LEDGER_SCHEMA = 'cssearth-pds-ledger@1';
-/** Where the programs lived when the receipts pinned before the move were written; a receipt keeps the path it recorded. */
-const RECORDED_PROGRAMS_PATHS = [PDS_PROGRAMS_PATH, 'tools/objects/pds/programs'] as const;
 
 export async function buildPdsLedger() {
   const names = (await readdir(PDS_PROGRAMS).catch(() => [])).filter(name => name.endsWith('.archive-final.json')).sort();
@@ -55,8 +54,7 @@ export async function buildPdsLedger() {
       mode = requireString(program.mode, 'program mode'), files = requireArray(program.files, 'program files').map(entry => requireRecord(entry, 'program file')),
       observation = requireRecord(program.observation, 'program observation'), discovery = requireRecord(program.discovery, 'program discovery');
     harvestDates.push(requireString(discovery.harvestIso, 'registry harvest').slice(0, 10));
-    const receipt = `${PDS_PROGRAMS_PATH}/${id}.archive-final.product.json`;
-    const recorded = new Set(RECORDED_PROGRAMS_PATHS.map(path => `${path}/${id}.archive-final.product.json`));
+    const receipt = pdsReceiptPath(id), recorded = new Set(recordedPdsReceiptPaths(id));
     const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
     const selection = requireRecord(record.parameters.selection, 'PDS selection'), science = files.find(file => file.role === 'science');
     const qualified = record.telescope === telescope && record.stage === 'archive-final' && selection.program === id && selection.target === target && selection.lidvid === program.lidvid
