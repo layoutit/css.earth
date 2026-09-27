@@ -5,12 +5,14 @@
 // citations; the source records a context manifest lists, the factsheet citations and source inventory the source
 // catalogue compiles, the bibliography citations of the prepared galaxy and cluster catalogues, and the digest that
 // says whether a recorded preparation still applies to a provenance record; the context packages' provenance, compiled
-// from their manifests or read as installed, at the application route passed in. It imports `runtime-source`,
+// from their manifests or read as installed, at the application route passed in; and the facility artwork refresh, which
+// swaps model-render bytes under unchanged attribution. It imports `runtime-source`,
 // `objects/content` and `delivery`.
 export * from './authored-object.ts';
 export * from './authored-world-frame.ts';
 export * from './cite-pinned-facts.ts';
 export * from './context-source-records.ts';
+export * from './facility-artwork-refresh.ts';
 export * from './factsheet-sources.ts';
 export * from './object-information-sources.ts';
 export * from './pdf-image.ts';
