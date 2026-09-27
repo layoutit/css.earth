@@ -24,7 +24,7 @@ const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as c
 const visibility = { hiddenBelowRadiusPixels: 1, fullAboveRadiusPixels: 2 };
 const payload: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'fixture', defaultLens: 'optical',
   framingRadiusUnits: 1, pointVisibility: visibility, lenses: [{ id: 'optical', label: 'Optical', title: 'Optical',
-    description: 'Fixture', sourceUrl: 'https://example.org', brightness: { overall: 1, x: 1, y: 1, z: 1 },
+    stars: { frame, points: [] }, description: 'Fixture', sourceUrl: 'https://example.org', brightness: { overall: 1, x: 1, y: 1, z: 1 },
     volume: { schema: 'cssearth-css-volume@1', id: 'fixture', frame, stacks: [], resources: [], provenance: {}, approximation: {} } }] };
 async function fixture() {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
