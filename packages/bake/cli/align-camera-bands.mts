@@ -21,7 +21,7 @@ const result=alignCameraBands({mesh,camera:controlledShapeCamera,reference,targe
 for(const report of result.reports){const corrected=report.correctedCamera;if(corrected)console.log(body,report.filter,'center',corrected.center,'north azimuth',corrected.northAzimuthDegrees,'fit',report.fit,'holdout',report.holdout);}
 const {patchRadiusPixels,patchSampleStepPixels,...settings}=BAND_ALIGNMENT_SETTINGS;
 await writeFile(outputPath,JSON.stringify({body,mode:checkOnly?'fixed-camera-validation':'feature-fit',recipeSha256:sha256(recipeText),referenceCamera:reference.frame,
- implementationSha256:sha256(await readFile(new URL('../../../packages/bake/src/objects/geometry/band-alignment.ts',import.meta.url))),
+ implementationSha256:sha256(await readFile(new URL('../src/objects/geometry/band-alignment.ts',import.meta.url))),
  mesh:{path:profile.path,sha256:sha256(await readFile(resolve(root,requireString(profile.path))))},
  settings:{patchRadiusPixels,patchSampleStepPixels,patchGridStepPixels:result.patchGridStepPixels,...settings},
  method:BAND_ALIGNMENT_METHOD,criteria:BAND_ALIGNMENT_CRITERIA,reports:result.reports},null,2)+'\n');
