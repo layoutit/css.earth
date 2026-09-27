@@ -3,7 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, transformPreparedPoint } from '@cssearth/core';
 import { createPreparedNodeTree } from '@cssearth/bake/presentation';
-import { prepareShapeLighting } from './lighting.mts';
+import { prepareShapeLighting } from '@cssearth/bake/objects/layers/shape-model';
 
 // Haumea's axes and display radius; any camera reference works, the plate follows it.
 const plate = (pixels: number) => {

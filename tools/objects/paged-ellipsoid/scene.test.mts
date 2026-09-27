@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { validateSourceManifest } from '@cssearth/objects/node';
-import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
+import { prepareDirectionalSun } from '@cssearth/bake/presentation';
 import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
 import { parsePagedProfile } from './profile-source.mts';
 import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';

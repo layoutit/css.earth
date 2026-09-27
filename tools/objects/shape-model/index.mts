@@ -1,25 +1,23 @@
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
-import { parseShapeModelConfig, parseShapeContent } from './source.mts';
+import { parseShapeModelConfig, parseShapeContent, prepareRingLeaves, ringQuadStyle, prepareShapeLighting } from '@cssearth/bake/objects/layers/shape-model';
 import { requireRecord, requireString } from '@cssearth/core';
 import { requireObjectRuntimeDefinition } from '../../contract/object-runtime-contract.mts';
 import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { prepareRingLeaves, ringQuadStyle } from './rings.mts';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
 
 import { createSourceManifest } from '@cssearth/objects/node';
 import { prepareSolidBodySurface } from '@cssearth/bake/scene';
-import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
-import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '../solar-system-scene.mts';
-import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
+import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '@cssearth/bake/objects/scene';
+import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import { requirePreparedPresentation } from '@cssearth/bake/presentation';
 import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { createPreparedNodeTree, prepareCssomDeclarationReads } from '@cssearth/bake/presentation';
 import { prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from './raster.mts';
-import { prepareShapeLighting } from './lighting.mts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '@cssearth/bake/objects/layers/material-composition';
 
 const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');
@@ -67,13 +65,13 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const cameraOptions = { bodyId: id, displayName: config.displayName };
   const rotation=sources.get('rotation');
   const observedPole = rotation && requireRecord(rotation.value).schema === 'cssearth-observed-pole@1';
-  const sunPresentation = { ...prepareSolarSystemSunPresentation(cameraOptions), source: `JPL Kepler orbit and ${observedPole ? 'authored observed pole' : 'arbitrary display orientation'}; arbitrary display phase`,
+  const sunPresentation = { ...prepareSolarSystemSunPresentation(solarGeometry, cameraOptions), source: `JPL Kepler orbit and ${observedPole ? 'authored observed pole' : 'arbitrary display orientation'}; arbitrary display phase`,
     qualification: 'Sun direction is computed at the shared prepared epoch. The surface longitude origin is an arbitrary display phase, not a measured rotational ephemeris.' };
   const sun = prepareDirectionalSun({ presentation: sunPresentation });
   const astronomy=await loadAstronomyPackage();
   const bodyId=(Object.keys(astronomy.BODIES) as Array<keyof typeof astronomy.BODIES>).find(key=>key===id);
   if(!bodyId)throw new TypeError(`Shape model has no astronomical body ${id}`);
-  const scene = await prepareSolarSystemScene({ ...cameraOptions, bodyId, bodyRadiusUnits: config.displayRadius,
+  const scene = await prepareSolarSystemScene(solarGeometry, { ...cameraOptions, bodyId, bodyRadiusUnits: config.displayRadius,
     bodyRadiusKilometers: axes[0], defaultZoom: .75, geometryScale: 1, starfield: sky });
   // Every lens binds its images to the same leaves, which hold the widest one at two texels per CSS pixel.
   const published = { publicDirectory, publicBase };

@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { prepareRingLeaves } from '../shape-model/rings.mts';
+import { prepareRingLeaves } from '@cssearth/bake/objects/layers/shape-model';
 import { prepareTerrestrialRings, validateTerrestrialRings } from './rings.mts';
 
 const band = (id: string, innerRadiusKm: number, outerRadiusKm: number, displayOpacity: number) => ({

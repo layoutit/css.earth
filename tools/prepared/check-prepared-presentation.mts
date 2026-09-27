@@ -8,7 +8,7 @@ import { parseAst } from "vite";
 import type { Node } from 'estree';
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import type { ObjectEntry } from '@cssearth/objects';
-import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../src/platform/prepared-presentation-contract.mts";
+import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
 import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';

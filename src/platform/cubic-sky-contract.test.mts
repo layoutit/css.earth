@@ -11,7 +11,7 @@ import {
   CUBIC_SKY_STANDARD,
   PREPARED_CUBIC_SKY_SCHEMA,
   validatePreparedCubicSky,
-} from "./cubic-sky-contract.mts";
+} from '@cssearth/bake/presentation';
 
 const runtimeSky = async (id: string) => requireRecord(await loadObjectTestDefinition(id)).sky;
 const OBJECT_SKIES = Object.freeze({

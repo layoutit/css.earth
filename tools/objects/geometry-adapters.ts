@@ -5,22 +5,21 @@ import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/cor
 import type { ScenePreparationAdapters } from '@cssearth/bake/scene';
 import type { PresentationHostAdapters } from '@cssearth/bake/presentation';
 import { prepareMaterialTracks } from '../prepare/prepare-materials.mts';
-import { requirePreparedPresentation } from '../../src/platform/prepared-presentation-contract.mts';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
-/** The presentation compiler's host: material tracks, the prepared-presentation contract and lens navigation. */
+/** The presentation compiler's host: material tracks and lens navigation. */
 export const presentationHostAdapters: PresentationHostAdapters = {
-  prepareMaterialTracks, requirePreparedPresentation, prepareLensNavigation: (bodyId, focus, camera) => prepareScientificNavigation(solarGeometry, bodyId, focus, camera),
+  prepareMaterialTracks, prepareLensNavigation: (bodyId, focus, camera) => prepareScientificNavigation(solarGeometry, bodyId, focus, camera),
 };
 
 /** Validate external scene records, then call the native TypeScript owners. */
 export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> {
   const path = (value: string): string => pathToFileURL(resolve(process.cwd(), value)).href;
   const [scene, geometry, skyContract] = await Promise.all([
-    import(path('tools/objects/solar-system-scene.mts')) as Promise<typeof import('./solar-system-scene.mts')>,
+    import('@cssearth/bake/objects/scene'),
     import(path('src/platform/solar-geometry.mts')) as Promise<typeof import('../../src/platform/solar-geometry.mts')>,
-    import(path('src/platform/cubic-sky-contract.mts')) as Promise<typeof import('../../src/platform/cubic-sky-contract.mts')>,
+    import('@cssearth/bake/presentation'),
   ]);
   const optionalNumber = (value: unknown) => value === undefined ? undefined : requireFiniteNumber(value);
   return {
@@ -45,12 +44,12 @@ export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> 
       const optional = (HOSTED_PLANET_IDS as readonly string[]).includes(input.bodyId);
       if (unlit && input.sun !== null) throw new TypeError('A placed star carries no directional light.');
       if (!unlit && !optional && input.sun === null) throw new TypeError('Physical scene requires its prepared directional Sun.');
-      return scene.prepareSolarSystemScene({ bodyId: input.bodyId as BodyId,
+      return scene.prepareSolarSystemScene(geometry, { bodyId: input.bodyId as BodyId,
         bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
         defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),
         starfield, light: (STAR_IDS as readonly string[]).includes(input.bodyId) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(input.bodyId) ? 'host' : 'sun' });
     },
     bodyFixedSunDirection(id) { const direction = geometry.requireBodyFixedSunDirection(id); return [direction[0], direction[1], direction[2]]; },
-    sunReferenceViewDirection(source) { return scene.prepareSolarSystemSunPresentation(source).referenceViewDirection; },
+    sunReferenceViewDirection(source) { return scene.prepareSolarSystemSunPresentation(geometry, source).referenceViewDirection; },
   };
 }

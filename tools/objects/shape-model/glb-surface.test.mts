@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { prepareGlbSurface } from './glb-surface.mts';
+import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
 
 const model = (id: string) => new URL(`../../../src/objects/${id}/source/nasa-${id}.glb`, import.meta.url);
 

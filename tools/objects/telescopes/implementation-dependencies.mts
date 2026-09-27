@@ -50,6 +50,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/scene': 'packages/bake/src/objects/scene/index.ts',
   '@cssearth/bake/objects/sources': 'packages/bake/src/objects/sources/index.ts',
   '@cssearth/bake/objects/layers/observation': 'packages/bake/src/objects/layers/observation/index.ts',
+  '@cssearth/bake/objects/layers/shape-model': 'packages/bake/src/objects/layers/shape-model/index.ts',
   '@cssearth/bake/objects/layers/cutaway': 'packages/bake/src/objects/layers/cutaway/index.ts',
   '@cssearth/bake/objects/layers/giant': 'packages/bake/src/objects/layers/giant/index.ts',
   '@cssearth/bake/objects/layers/material-composition': 'packages/bake/src/objects/layers/material-composition/index.ts',

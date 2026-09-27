@@ -4,12 +4,12 @@ import type { ObjectControls } from "@cssearth/renderer/runtime/object-contract.
 import type { ObjectRuntimeDefinition } from "@cssearth/renderer/runtime/object-runtime-types.ts";
 import type { PreparedWrite } from "@cssearth/renderer/rendering/prepared-presentation.ts";
 import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
-import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.mts";
-import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.mts";
+import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.ts";
+import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
 import type { EllipsoidProjectionPlan } from '@cssearth/renderer/prepared-data/prepared-ellipsoid-projection.ts';
-import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "@cssearth/renderer/testing";
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "@cssearth/renderer/testing";
-import type { PreparedVariant, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";
+import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "@cssearth/renderer/rendering/prepared-material.ts";
+import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "@cssearth/renderer/rendering/prepared-material.ts";
+import type { PreparedVariant, PreparedPresentationDefinition, PreparedSelectionNavigation } from "@cssearth/renderer/rendering/prepared-presentation.ts";
 import type { PreparedDepthOrder } from "@cssearth/renderer/rendering/prepared-depth-partitions.ts";
 type PreparedContractRotation = {
   reference: "prepared" | "initial"; baseDegrees: number; zeroAtPole: boolean;
@@ -36,11 +36,11 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
   destinations?: { catalog: { url: string; bytes: number; count: number; sha256: string }; defaultLens: string; statuses: { detail: string; overview: string } };
 };
 import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
-import { validatePreparedCubicSky } from "./cubic-sky-contract.mts";
-import { validateDirectionalSunPlan } from "./directional-sun-contract.mts";
+import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
+import { validateDirectionalSunPlan } from "./directional-sun-contract.ts";
 
-import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.mts";
-export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.mts";
+import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.ts";
+export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.ts";
 const tags = new Set(["div", "span", "s", "b", "u"]);
 function fail(message: string): never { throw new TypeError(`Prepared presentation: ${message}.`); }
 const scalar = (value: unknown) => value === null || ["string", "boolean"].includes(typeof value) || typeof value === "number" && Number.isFinite(value);

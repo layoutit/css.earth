@@ -14,8 +14,8 @@ export interface SolidReplayScene {
 }
 import {camera} from '../objects/camera-source.mts';
 import {parse} from '@cssearth/core/schema';
-import {validatePreparedCubicSky} from '../../src/platform/cubic-sky-contract.mts';
-import {validateDirectionalSunPlan} from '../../src/platform/directional-sun-contract.mts';
+import {validatePreparedCubicSky} from '@cssearth/bake/presentation';
+import {validateDirectionalSunPlan} from '@cssearth/bake/presentation';
 
 const cameraPlan=(value:unknown)=>parse(value,camera,'saved camera');
 const matrix=(value:unknown)=>typeof value==='string'?value:array(number)(value);
