@@ -10,14 +10,14 @@ and exit codes unchanged unless that is the change. The command guide is [README
 This package is the layer above the libraries: it imports `@cssearth/telescope`, `@cssearth/bake` and the other packages, and
 `@cssearth/telescope` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
 `@cssearth/telescope/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
-- the archive folders not yet split (`tools/objects/{hst,jwst}/`, and JunoCam's, which only a ledger test reads), which it
-  still imports by relative path. Keck, PDS, NACO, Chandra, Gemini and Spitzer are split: their clients, reducers and ledger
-  builders are `src/archives/<archive>/`, beside the ledger machinery all archives share (`src/archives/`), and only their
-  programs, toolchain pins, per-body authoring and the bodies a ledger or route is about (`ledger-focus.json`,
+- the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
+  ledger machinery they share (`src/archives/`), while its programs, toolchain pins, per-body authoring (the HST slit-scan
+  map, the JWST band maps, the NACO body map) and the bodies a ledger or route is about (`ledger-focus.json`,
   `moving-targets.json`, `horizons-bodies.json`) stay in `tools/objects/<archive>/`, which the code reads through `WORKSPACE`
   when a query needs it. No archive module names a body (`archives/archive-scope.test.mts`). That per-body JSON sits outside
   the module fingerprint closure, and a lock's `Regenerate:` header still naming the old tool path is refreshed at the next
-  solve, since the lock's text is hashed into `pinsSha256`;
+  solve, since the lock's text is hashed into `pinsSha256`. JunoCam's folder is not part of this package; only a ledger test
+  reads it;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
 
