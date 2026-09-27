@@ -45,7 +45,7 @@ export const explorationCompilerClosure = [
   'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
-  'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare/prepare-provenance.mts',
+  'tools/objects/provenance.mts', 'packages/bake/src/objects/provenance/provenance-records.ts', 'packages/bake/src/objects/provenance/provenance-recipes.ts', 'tools/prepare/prepare-provenance.mts',
 ] as const;
 
 interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;

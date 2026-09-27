@@ -22,7 +22,7 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
 1. The object source manifest owns input identity, acquisition information,
    credits, rights and optional human-readable source titles and product URLs.
 2. The authored recipe owns the transformation and its parameters. The shared
-   preparation-family bindings in `tools/objects/provenance-recipes.mts` identify
+   preparation-family bindings in `packages/bake/src/objects/provenance/provenance-recipes.ts` identify
    consumed inputs and outputs for each operation.
 3. `prepareAuthoredObject` finalizes provenance after preparing assets, content
    and previews. The write path also finishes CSS bindings, navigation and page

@@ -2,8 +2,8 @@ import { sha256 } from '@cssearth/core/node';
 import type { ProductInputEvidence } from '@cssearth/objects/provenance';
 import { recordPreparationEvidence } from '@cssearth/bake/sources';
 import {hasErrorCode} from '@cssearth/core';
-import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.mts';
-import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from './provenance-records.mts';
+import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from '@cssearth/bake/objects/provenance';
+import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from '@cssearth/bake/objects/provenance';
 type Identity = ReturnType<typeof identity>;
 type BoundSource = ReturnType<typeof sourceEntry> & {id: string; kind: string; consumers?: readonly string[]};
 type BoundProduct = Omit<ProductBinding, 'inputPaths' | 'urls' | 'inputRoles'> & {
@@ -15,7 +15,7 @@ import { createReadStream } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '@cssearth/objects/provenance';
-import { provenanceProducts } from './provenance-recipes.mts';
+import { provenanceProducts } from '@cssearth/bake/objects/provenance';
 
 
 const json = async (path: string) => record(JSON.parse(await readFile(path, 'utf8')));

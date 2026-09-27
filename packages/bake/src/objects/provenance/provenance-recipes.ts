@@ -1,7 +1,7 @@
-import { alternativeForLens } from '@cssearth/bake/objects/layers/terrestrial';
-import {record, records, maybeRecord, text, texts, optionalText, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
-import {CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY} from '@cssearth/renderer/platform/prepared-object-assets';
-import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.mts';
+import { alternativeForLens } from '../layers/terrestrial/index.ts';
+import {record, records, maybeRecord, text, texts, optionalText, namedRecords, textValues, provenanceManifest} from './provenance-records.ts';
+import {CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY} from '@cssearth/renderer/rendering/prepared-object-assets.ts';
+import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.ts';
 // Dependency bindings for the shared preparers. These follow acquisition paths
 // and recipe operations, never factsheet links, publisher names, or UI credits.
 // Unknown capabilities remain explicit gaps rather than receiving invented edges.
