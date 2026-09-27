@@ -475,7 +475,7 @@ importers:
         version: 3.2.7(@types/debug@4.1.13)(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
 
   packages/telescope-cli:
-    dependencies:
+    devDependencies:
       '@cssearth/astronomy':
         specifier: workspace:*
         version: link:../astronomy
@@ -497,6 +497,12 @@ importers:
       '@cssearth/telescope':
         specifier: workspace:*
         version: link:../telescope
+      '@types/node':
+        specifier: ^26.4.0
+        version: 26.4.0
+      '@types/pngjs':
+        specifier: 6.0.5
+        version: 6.0.5
       esbuild:
         specifier: 0.27.7
         version: 0.27.7
@@ -509,13 +515,6 @@ importers:
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
-    devDependencies:
-      '@types/node':
-        specifier: ^26.4.0
-        version: 26.4.0
-      '@types/pngjs':
-        specifier: 6.0.5
-        version: 6.0.5
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
