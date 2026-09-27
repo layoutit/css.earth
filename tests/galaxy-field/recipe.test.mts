@@ -4,9 +4,9 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { parseFieldRecipe } from './recipe.mts';
+import { parseFieldRecipe } from '@cssearth/bake/galaxy-field';
 
 const input: unknown = JSON.parse(await readFile(new URL('../../src/objects/nearby-universe/source/preparation/field.json', import.meta.url), 'utf8'));
 const recipe = parseFieldRecipe(input);
@@ -30,7 +30,7 @@ test('the galaxy field pins the authored frame contract, not rendered world geom
   // The frame contract is authored and tracked here; git is its record.
   await readFile(navigation.path);
   assert.equal(manifest.generatedIntermediates.length, 0);
-  const preparer = await readFile(new URL('./prepare-points.mts', import.meta.url), 'utf8');
+  const preparer = await readFile(new URL('../../packages/bake/cli/prepare-galaxy-field-points.mts', import.meta.url), 'utf8');
   assert.match(preparer, /sun\/source\/navigation\/universe\.json/u);
   assert.doesNotMatch(preparer, /sun\/prepared\/world-context\.json/u);
 });
@@ -49,7 +49,7 @@ test('the field bake replaces stale generated files and restores missing receipt
   await cp('src/objects/sun/source/navigation/universe.json',resolve(root,'src/objects/sun/source/navigation/universe.json'));
   await writeFile(resolve(root,base,'prepared/points.json'),'stale generation');
   await writeFile(resolve(root,base,'prepared/cloud.webp'),'stale generation');
-  const result=spawnSync(process.execPath,[fileURLToPath(new URL('./prepare-points.mts',import.meta.url))],{cwd:root,encoding:'utf8'});
+  const result=spawnSync(process.execPath,[fileURLToPath(new URL('../../packages/bake/cli/prepare-galaxy-field-points.mts',import.meta.url))],{cwd:root,encoding:'utf8'});
   assert.equal(result.status,0,result.stderr);
   assert.match(result.stdout,/POINTS PREPARED: 1800/);
   for(const path of ['prepared/points.json','prepared/cloud.webp','object.json']) {

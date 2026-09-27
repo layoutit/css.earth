@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { positionMpc, distanceModulusMpc, distanceModulusIntervalMpc } from './catalogue.mts';
+import { positionMpc, distanceModulusMpc, distanceModulusIntervalMpc } from '@cssearth/bake/galaxy-field';
 test('distance moduli and equatorial axes preserve physical scale and direction',()=>{
   assert.equal(distanceModulusMpc(25),1);assert.equal(distanceModulusMpc(30),10);
   assert.deepEqual(positionMpc(0,0,10),[10,0,0]);

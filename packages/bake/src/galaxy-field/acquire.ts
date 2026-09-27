@@ -1,20 +1,17 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { sourceArray, sourceObject, sourceText, sourcePath } from '@cssearth/objects/sources';
-import { fetchWithRetry, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
-
-const root = resolve(import.meta.dirname, '../..');
+import { fetchWithRetry, sourceCacheUrl } from '../objects/sources/index.ts';
 
 export interface AcquireGalaxyFieldOptions {
   /** Project root; only used to resolve catalogPath/directory when they are left relative. */
-  root?: string;
+  root: string;
   /** Repository-relative path to the pinned source catalogue. */
   catalogPath?: string;
   /** Repository-relative directory the pinned TSVs are cached under (must match each pin's own `path`). */
   directory?: string;
   /** Opt-in (default null/off): the real content-addressed mirror origin, named explicitly by a production caller
-   * (the CLI entry point below). Left off by default so an ordinary test or import never makes a surprise real
+   * (the command, `packages/bake/cli/acquire-galaxy-field.mts`). Left off by default so an ordinary test or import never makes a surprise real
    * request to it. */
   mirrorOrigin?: string | null;
   fetcher?: typeof fetch;
@@ -29,9 +26,9 @@ export interface AcquireGalaxyFieldOptions {
  *   3. the recorded VizieR TAP query itself, which stays the recorded provenance either way.
  * A clean build that has the mirror populated therefore never needs to reach VizieR at all.
  */
-export async function acquireGalaxyFieldSources({ root: projectRoot = root,
+export async function acquireGalaxyFieldSources({ root: projectRoot,
   catalogPath = 'src/objects/nearby-universe/source/catalogue.json', directory = '.local/galaxy-field/sources',
-  mirrorOrigin = null, fetcher = fetch }: AcquireGalaxyFieldOptions = {}): Promise<void> {
+  mirrorOrigin = null, fetcher = fetch }: AcquireGalaxyFieldOptions): Promise<void> {
   const pinned = sourceObject(JSON.parse(await readFile(resolve(projectRoot, catalogPath), 'utf8')));
   if (pinned.schema !== 'cssearth-galaxy-field-sources@1') throw new TypeError('Invalid field sources.');
   await mkdir(resolve(projectRoot, directory), { recursive: true });
@@ -59,8 +56,4 @@ export async function acquireGalaxyFieldSources({ root: projectRoot = root,
     await writeFile(absolutePath, bytes); console.log(`${id}: ${source.rows} rows, ${bytes.length} bytes`);
   }));
   console.log('Galaxy field sources restored.');
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await acquireGalaxyFieldSources({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
 }

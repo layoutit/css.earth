@@ -1,4 +1,4 @@
-import type { Point } from './catalogue.mts';
+import type { Point } from './catalogue.ts';
 /** Bounded k-means Gaussian count field. Covariances retain filament orientation. */
 export function fitClouds(points: readonly Point[], recipe: {count:number;iterations:number;minimumMembers:number;covarianceFloorMpc2:number;maximumBrightness:number;exposure:number}) {
   const k = Math.min(recipe.count, points.length);

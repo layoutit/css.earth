@@ -23,6 +23,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/cameras': 'src/objects/cameras/index.ts',
     'objects/geometry': 'src/objects/geometry/index.ts',
     'galaxy-catalog': 'src/galaxy-catalog/index.ts',
+    'galaxy-field': 'src/galaxy-field/index.ts',
     'cluster-catalog': 'src/cluster-catalog/index.ts',
     'world-context': 'src/world-context/index.ts',
     'objects/raster': 'src/objects/raster/index.ts',
