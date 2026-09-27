@@ -48,7 +48,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],
   'objects/layers/observed-surfaces': ['raster', 'scene', 'objects/geometry'],
-  'objects/layers/giant': ['photometry', 'scene', 'objects/color', 'objects/geometry', 'objects/sources', 'objects/layers/observed-surfaces'],
+  'objects/layers/giant': ['photometry', 'presentation', 'scene', 'objects/color', 'objects/geometry', 'objects/sources', 'objects/layers/observed-surfaces'],
   'objects/layers/material-composition': ['delivery', 'photometry', 'presentation', 'raster', 'scene', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/layers/cutaway', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
   'objects/layers/shape-model': ['presentation', 'scene', 'objects/color', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/material-composition'],
   'objects/layers/observation': ['raster', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster'],

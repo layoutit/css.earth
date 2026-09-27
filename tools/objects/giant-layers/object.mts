@@ -1,6 +1,6 @@
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { parse } from '@cssearth/core/schema';
-import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc } from '@cssearth/bake/objects/layers/giant';
+import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc, prepareNormalizedDiscPresentation } from '@cssearth/bake/objects/layers/giant';
 import { parseEllipsoidMaterialRecipe } from './materials.mts';
 import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { parseObservedPolarRecipe } from '../giant-observations/index.mts';
@@ -16,7 +16,6 @@ import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentat
 import { requirePreparedPresentation } from '@cssearth/bake/presentation';
 import { prepareEllipsoidMaterials } from './materials.mts';
 import { prepareLayeredSurfacePresentation } from './presentation.mts';
-import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.mts';
 import { prepareObservedPolarSurfaces, polarImageProjection } from '../giant-observations/index.mts';
 
 

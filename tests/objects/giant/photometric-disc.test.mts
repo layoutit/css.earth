@@ -1,6 +1,6 @@
 import { fixtureRecord } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import{readFile,mkdtemp,readdir,rm}from'node:fs/promises';
 import{join}from'node:path';

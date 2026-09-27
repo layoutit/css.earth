@@ -1,10 +1,10 @@
-import type {ObservedRgb} from './polar-continuation.mts';
-import type {domeRingWarp} from '@cssearth/bake/objects/layers/giant';
+import type {ObservedRgb} from './polar-continuation.ts';
+import type {domeRingWarp} from './geometry.ts';
 
 /** Two square pole tiles side by side, RGBA: the south tile first, then the north tile, as both atlas generators write them. */
 export interface PolarAtlas {data: Uint8Array; width: number; height: number}
 /** A pole tile's own projection: tile coordinates d in [-1, 1]² (y down) lie at radius r = |d| / scale, latitude
- * 90° − r·(90° − edge), and hold the map column (atan2(dx, −dy) + π) / 2π (polar-continuation.mts, observed-coverage.mts). */
+ * 90° − r·(90° − edge), and hold the map column (atan2(dx, −dy) + π) / 2π (polar-continuation.ts, tools/objects/observed-coverage.mts). */
 export interface PoleProjection {edgeLatitudeDegrees: number; scale: number}
 export type DomeRingWarp = ReturnType<typeof domeRingWarp>;
 
