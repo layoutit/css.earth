@@ -26,7 +26,7 @@
  * archive said has changed. */
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { firstSkyPosition } from '../archive-sky-position.mts';
+import { firstSkyPosition } from '../archives/sky-position.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
