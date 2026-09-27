@@ -11,7 +11,7 @@
  *   except the files the world step writes itself, and its page data is derived when missing. A run that prepares the
  *   Sun skips this. */
 import { refuseDirectRun } from '../cli/library-entry.mts';
-import { readFile } from 'node:fs/promises';
+import { access, readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
 import { hasErrorCode } from '@cssearth/core';
@@ -52,6 +52,22 @@ export async function restoreDriftedFiles(id: string, { projectRoot = root, keep
   }
   if (drifted.length) await installRuntimeAssets(drifted, { fetcher });
   return drifted.map(asset => `${asset.location}/${asset.filename}`);
+}
+
+/** Every other object's baked `prepared/` files that are missing or the wrong size. The catalogue and discovery steps read them, and
+ * the world and pins steps rebuild the Sun's world files from what they say: on 2026-09-27 a bake in a fresh worktree, before
+ * `pnpm setup:assets`, rebuilt them with the imagery flag of 725 bodies off. Sizes only; `restoreDriftedFiles` owns the hashes. */
+export async function missingPreparedFiles(ids: readonly string[], { projectRoot = root }: { projectRoot?: string } = {}) {
+  const objects = [];
+  for (const entry of await readdir(resolve(projectRoot, 'src/objects'), { withFileTypes: true })) {
+    if (entry.isDirectory() && !ids.includes(entry.name) && await access(resolve(projectRoot, 'src/objects', entry.name, 'inventory.json')).then(() => true, () => false)) objects.push(entry.name);
+  }
+  const missing: string[] = [];
+  for (const asset of await inventoryAssets(projectRoot, objects, { location: 'prepared' })) {
+    const size = await stat(asset.file).then(found => found.size, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return -1; throw error; });
+    if (size !== asset.bytes) missing.push(`${asset.id}/prepared/${asset.filename}`);
+  }
+  return missing;
 }
 
 refuseDirectRun(import.meta);

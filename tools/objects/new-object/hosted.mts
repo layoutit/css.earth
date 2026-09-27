@@ -60,7 +60,7 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
       ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: e.argumentOfPeriapsisDegrees }), ...(spec.orbit.epoch ? { epochDefinition: spec.orbit.epoch } : {}), transitTimeBmjdTdb: e.transitTimeBmjdTdb!,
       ascendingNodePositionAngleDegrees: e.ascendingNodePositionAngleDegrees ?? 0,
       sources: { period: `${cite}: P ${e.periodDays} d`, shape: `${cite}: a/R* ${e.semiMajorAxisStellarRadii}, inclination ${e.inclinationDegrees} degrees`, eccentricity: `${cite}: e ${e.eccentricity}`,
-        ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsis: `${cite}: omega ${e.argumentOfPeriapsisDegrees} degrees (the star's)` }), phase: `${cite}: ${spec.orbit.epoch === 'periastron' ? 'periastron passage' : 'transit (inferior conjunction)'} at ${e.transitTimeBmjdTdb} BMJD_TDB`,
+        ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsis: `${cite}: omega ${e.argumentOfPeriapsisDegrees} degrees (the star's)` }), phase: `${cite}: ${spec.orbit.epoch === 'periastron' ? 'periastron passage' : spec.orbit.epoch === 'superior-conjunction' ? 'the body behind its host (superior conjunction)' : 'transit (inferior conjunction)'} at ${e.transitTimeBmjdTdb} BMJD_TDB`,
         orientation: e.ascendingNodePositionAngleDegrees === undefined ? 'Display convention: the orbit\'s position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).' : `${cite}: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north` } };
     citation = { text: spec.orbit.source, url: spec.orbit.url, label: spec.orbit.source };
   }

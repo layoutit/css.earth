@@ -94,10 +94,12 @@ function draftQuotes(value: unknown, label: string): DraftQuotes {
   const quote = (key: 'card' | 'introduction') => { if (input[key] === undefined) return {}; const text = requireString(input[key], `${label}.${key}`); if (text.length > 300) throw new RangeError(`${label}.${key} is ${text.length} characters; a quote is 300 at most.`); return { [key]: text }; };
   return { url, title: requireString(input.title, `${label}.title`), revision: requireString(input.revision, `${label}.revision`), ...quote('card'), ...quote('introduction') };
 }
+export const HOSTED_EPOCHS = ['periastron', 'inferior-conjunction', 'superior-conjunction'] as const;
+export type HostedEpoch = typeof HOSTED_EPOCHS[number];
 export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
   | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string; readonly measured?: true }
-  | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: 'periastron' | 'inferior-conjunction'; readonly source: string; readonly url: string };
+  | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: HostedEpoch; readonly source: string; readonly url: string };
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
 /** Published flux densities in three infrared bands for the band-colour lens of an imaged planet (planet-lenses.mts): red, green,
@@ -128,11 +130,12 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
     const elements = requireRecord(o.elements, `${label}.elements`), unknown = Object.keys(elements).filter(key => !ELEMENT_KEYS.includes(key));
     if (unknown.length) throw new TypeError(`${label}.elements: unknown ${unknown.join(', ')} (${ELEMENT_KEYS.join(', ')}).`);
     for (const key of ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'transitTimeBmjdTdb']) requireFiniteNumber(elements[key], `${label}.elements.${key}`);
-    // An eccentric orbit says what its reference epoch is: a periastron passage or a transit (inferior conjunction).
+    // An eccentric orbit says what its reference epoch is: a periastron passage, the body in front of its host (a transit or primary
+    // eclipse, inferior conjunction), or behind it (an occultation or secondary eclipse, superior conjunction), as the paper times it.
     const epoch = o.epoch === undefined ? undefined : requireString(o.epoch, `${label}.epoch`);
-    if (epoch !== undefined && epoch !== 'periastron' && epoch !== 'inferior-conjunction') throw new TypeError(`${label}.epoch is periastron or inferior-conjunction, not ${epoch}.`);
-    if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (periastron or inferior-conjunction).`);
-    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as 'periastron' | 'inferior-conjunction' } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
+    if (epoch !== undefined && !(HOSTED_EPOCHS as readonly string[]).includes(epoch)) throw new TypeError(`${label}.epoch is ${HOSTED_EPOCHS.join(', ')}, not ${epoch}.`);
+    if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (${HOSTED_EPOCHS.join(', ')}).`);
+    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as HostedEpoch } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
   }
   throw new TypeError(`${label} needs whereistheplanet, archive or elements.`);
 }

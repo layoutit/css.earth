@@ -2,6 +2,7 @@
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
  *   node tools/objects/new-object.mts --from-archive HOST... --out spec.json
+ *   node tools/objects/new-object.mts --from-debcat SYSTEM... --out spec.json
  *   node tools/objects/new-object.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
@@ -31,8 +32,15 @@ export { neutralDiscMarker, scaffoldStar, scaffoldStarFiles, solarRadii, starSty
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
-  const specPath = option('spec'), handoff = option('hosted'), fromArchive = args.indexOf('--from-archive');
-  if (fromArchive >= 0) {
+  const specPath = option('spec'), handoff = option('hosted'), fromArchive = args.indexOf('--from-archive'), fromDebcat = args.indexOf('--from-debcat');
+  if (fromDebcat >= 0) {
+    // A draft spec for eclipsing binaries from DEBCat: `--from-debcat SYSTEM... --out spec.json` (new-object/debcat.mts).
+    const systems = args.slice(fromDebcat + 1).filter((argument, i, list) => !argument.startsWith('--') && !list[i - 1]?.startsWith('--')), out = option('out');
+    if (!systems.length || !out) throw new TypeError('Usage: new-object --from-debcat SYSTEM... --out spec.json');
+    const { specFromDebcat } = await import('./new-object/debcat.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const result = await specFromDebcat(systems, out, liveArchive);
+    process.stdout.write(`${result.report.join('\n')}\n${result.entries} drafts written to ${result.path}\n`);
+  } else if (fromArchive >= 0) {
     // A spec for planet hosts from the NASA Exoplanet Archive: `--from-archive HOST... --out spec.json`.
     const hosts = args.slice(fromArchive + 1).filter((argument, i, list) => !argument.startsWith('--') && !list[i - 1]?.startsWith('--')), out = option('out');
     if (!hosts.length || !out) throw new TypeError('Usage: new-object --from-archive HOST... --out spec.json');

@@ -563,3 +563,28 @@ describe('Kepler-16: a circumbinary planet', () => {
     }
   })
 })
+
+describe('an orbit timed at its superior conjunction', () => {
+  // Cygnus X-1 as Miller-Jones et al. (2021) and Brocksopp et al. (1999) publish it: the black hole behind its star at HJD 2441163.5424.
+  // The same orbit timed at periastron was worked out by hand for its record: true anomaly 143.4 degrees, 2.2103 d after periastron.
+  const star = { rightAscensionDegrees: 299.590295, declinationDegrees: 35.201579 }, radiusKm = 22.3 * 695700
+  const shared = { periodDays: 5.599836, semiMajorAxisStellarRadii: 2.3528, inclinationDegrees: 152.49, eccentricity: 0.0189, argumentOfPeriapsisDegrees: 126.6, ascendingNodePositionAngleDegrees: 64.1 }
+  const superior: HostedOrbit = { ...shared, epochDefinition: 'superior-conjunction', transitTimeBmjdTdb: 41163.0424, sources: {} as HostedOrbit['sources'] }
+  const periastron: HostedOrbit = { ...shared, epochDefinition: 'periastron', transitTimeBmjdTdb: 41160.8322, sources: {} as HostedOrbit['sources'] }
+  const sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+  it('puts the body behind its host at the stated time, as far along the line of sight as the tilt allows', () => {
+    const { positionKm } = hostedOrbitStateRelativeBmjdTdb(superior, star, radiusKm, superior.transitTimeBmjdTdb)
+    expect(dot(positionKm, sight) / Math.hypot(...positionKm)).toBeCloseTo(Math.sin((180 - 152.49) * Math.PI / 180), 3)
+  })
+  it('is the orbit the hand-computed periastron epoch describes', () => {
+    for (const t of [41163.0424, 50000, 61000.25]) {
+      const a = hostedOrbitStateRelativeBmjdTdb(superior, star, radiusKm, t).positionKm, b = hostedOrbitStateRelativeBmjdTdb(periastron, star, radiusKm, t).positionKm
+      // Both epochs are rounded to 1e-4 d, and the black hole moves about 41 million km a day: some 4,000 km of a 36-million-km
+      // orbit, 1.1e-4 of it. Half an orbit's error, the other conjunction, would be 2.
+      expect(Math.hypot(...a.map((v, axis) => v - b[axis]!)) / Math.hypot(...a)).toBeLessThan(2e-4)
+    }
+  })
+  it('refuses an epoch definition it does not know', () => {
+    expect(() => hostedOrbitStateRelativeBmjdTdb({ ...superior, epochDefinition: 'secondary-eclipse' as never }, star, radiusKm, 60000)).toThrow(/Unsupported hosted-orbit epoch definition: secondary-eclipse/)
+  })
+})
