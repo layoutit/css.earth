@@ -28,5 +28,6 @@ test('the checkout selects the moved libraries\' own tests', () => {
   for (const path of ['tools/objects/color-transfer.test.mts', 'tests/objects/terrestrial/obj-shape.test.mts',
     'tests/objects/terrestrial/observer-camera.test.mts', 'tests/objects/terrestrial/scientific-raster.test.mts',
     'tools/objects/authored-rotation.test.mts', 'packages/bake/src/objects/layers/paged-ellipsoid/parallel-assets.test.ts',
-    'packages/bake/src/objects/layers/paged-ellipsoid/texture-levels.test.ts']) assert.ok(selected.includes(path), path);
+    'packages/bake/src/objects/layers/paged-ellipsoid/texture-levels.test.ts', 'packages/bake/src/objects/layers/terrestrial/triangle-alpha-atlas.test.ts',
+    'packages/bake/src/objects/raster/observed/observed-geotiff.test.ts']) assert.ok(selected.includes(path), path);
 });
