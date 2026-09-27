@@ -176,10 +176,11 @@ its validators accept); the renderer never imports the bake.
   - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
     vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
-    commands). It imports `objects/geometry`, `objects/raster` and `objects/layers/terrestrial`; attaching the banks to a
-    globe stays in `tools/objects/surface-features/`.
+    commands), and attaching the banks to a prepared globe (`attach.ts`). It imports `objects/geometry`, `objects/raster`,
+    `objects/scene`, `objects/layers/paged-ellipsoid` and `objects/layers/terrestrial`.
   - `objects/stellar`: a star's colour lens from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
-    from a published figure or occultation, and Roche-von Zeipel gravity darkening. It imports `objects/color`,
+    from a published figure or occultation, and Roche-von Zeipel gravity darkening, with the GaiaXPy script that samples a
+    continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
     compiler identity reaches, so that identity does not pin the source-manifest readers.
   - `objects/candidates`: what public archives hold for a body or a star before it is reworked: read-only searches of
@@ -209,23 +210,36 @@ its validators accept); the renderer never imports the bake.
     imports `objects/cameras`, `objects/geometry` and `objects/layers/terrestrial`. `packages/bake/cli/sphere-survey-apparitions.mts`
     audits the shipped survey lenses; the setup and install commands stay in `tools/objects/sphere-survey/`, since setup imports
     `tools/objects/published-comparison.mts` and install imports `tools/sources/author-source-records.mts`.
+  - `objects/interpretation`: the observation interpreter the raster lane packs surfaces through (`createSurfaceInterpreter`
+    picks each surface's decoder: solar synoptic maps, terrestrial, shape-model, stellar and static observations, the
+    Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,
+    `objects/geometry`, `objects/raster`, `objects/scene`, `objects/sources`, `objects/stellar` and the observation,
+    shape-model and terrestrial layers. It is a topic of its own, outside `objects/layers/observation`, whose code the nebula
+    lab's compiler identity reaches. Its tests are in `tests/objects/interpretation/`.
+  - `objects/host-adapters`: what the authored preparation passes the scene and presentation compilers
+    (`loadGeometryAdapters`, `presentationHostAdapters`), each bound to the solar geometry the host passes in. It imports
+    `presentation`, `scene`, `objects/scene` and `objects/layers/terrestrial`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
     as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`, and `material-composition` → `cutaway`). The cutaway
     material bake lives in `material-composition` (`cutaway-materials.ts`): it reads that topic's recipe checks, and only the
     layered-oblate preparation uses it, so `cutaway` stays the contract below both. `layered-oblate.ts` and
-    `cutaway-materials.ts` moved over the 600-line limit and are exempt in `eslint.config.mts` until they are split. The giant
-    material bake, layered presentation, object preparation and observed polar surfaces stay in `tools/objects/`: they use
-    `material-composition`'s atlas tile writer and path check, and `material-composition` reads `giant`'s radial fields, so
-    in `giant` they would close a topic cycle. Code that reads
+    `cutaway-materials.ts` moved over the 600-line limit and are exempt in `eslint.config.mts` until they are split, as is
+    the paged-ellipsoid `assets.ts`. The material atlas tile writer, bilinear samplers and relative-path check live in `giant`
+    (`material-atlas.ts`, `relative-path.ts`), below `material-composition`, so the giant material bake, layered
+    presentation, object preparation (`object.ts`) and observed polar surfaces sit in `giant` without a topic cycle. The
+    layered-oblate object preparation stays in `tools/objects/material-composition/` until the renderer gives its prepared
+    CSS object format a source export. Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
     entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
-    `SolidSceneSolarGeometry`) and the shape-model entry (`shape-model.ts`) take it from `tools/objects/prepare-authored.ts`,
-    which loads the generated module. They reach the astronomy package through `astronomy`, the object runtime contract through
+    `SolidSceneSolarGeometry`), the shape-model entry (`shape-model.ts`) and the paged-ellipsoid object (`object.ts`) take it
+    from `tools/objects/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
+    asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
-    `objects/content`, as lower topics. The pipelines' other entry scripts and modules that still read platform files stay in
-    `tools/objects/`; the terrestrial commands that derive
+    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `tools/objects/paged-ellipsoid/`
+    for its per-body authoring and read the MUR colour table through `mur-image.ts`; the mantle-tomography extraction script
+    (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
     with the band-alignment, camera-reference and L'LORRI overlap commands and the archived-camera Python that runs the
     camera reference beside it. A source manifest's `generator` records
