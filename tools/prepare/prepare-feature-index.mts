@@ -1,6 +1,6 @@
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { isRecord } from '@cssearth/core';
 import { normalizeDestinationQuery } from '@cssearth/objects';
@@ -117,5 +117,4 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   return pin;
 }
 
-const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
-if (direct) console.log(JSON.stringify(await prepareFeatureIndex()));
+refuseDirectRun(import.meta);

@@ -51,7 +51,7 @@ uncertainty threshold; those dated selections are not a current catalogue.
    names or URLs, and text a record repeats, are not evidence: the same author
    wrote them. A discovery matches by year and every surname. `--check` reports
    without writing; `--prune` removes what no record proves.
-3. Run `node tools/prepare/prepare-factsheets.mts -- <object-id>` to publish facts and refresh their
+3. Run `node tools/prepare/cli/prepare-factsheets.mts -- <object-id>` to publish facts and refresh their
    preparation references. Add `--check` to verify without writing; omit the ID
    only when intentionally processing all bodies.
 
