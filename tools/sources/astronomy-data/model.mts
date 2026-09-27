@@ -19,8 +19,8 @@ export function bodiesOf(target: string): string[] {
   const tagged = target
     .split(";")
     .map((t) => t.trim().toLowerCase().replace(/^\(\d+\)\s*/, "").replace(/^\*\s+/, ""))
-    // "+6 more" ends a shortened list; it names no body.
-    .filter((t) => t && !/^\+\d+ mor/.test(t));
+    // "+6 more" ends a shortened list, and "Unspecified" or "none" says there is no target; neither names a body.
+    .filter((t) => t && !/^\+\d+ mor/.test(t) && !/^'?(unspecified|unknown|none|n\/a|unk)'?$/.test(t));
   return tagged.length > 1 ? tagged.filter((t) => t !== "sun") : tagged;
 }
 export type Row = {

@@ -14,7 +14,7 @@
 // Running it again rebuilds the two body tables and the families.
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { databasePath, root } from "./model.mts";
+import { bodiesOf, databasePath, root } from "./model.mts";
 import { bodyCatalogue, type Body } from "./bodies.mts";
 import { object, string } from "./collect/client.mts";
 
@@ -39,7 +39,7 @@ try {
   db.exec(`CREATE TABLE IF NOT EXISTS inventory(source TEXT NOT NULL,id TEXT NOT NULL,title TEXT NOT NULL,target TEXT NOT NULL,instrument TEXT NOT NULL,record_count INTEGER NOT NULL CHECK(record_count>=0),decision TEXT NOT NULL,reason TEXT NOT NULL,url TEXT NOT NULL,details_json TEXT NOT NULL CHECK(json_valid(details_json)),PRIMARY KEY(source,id)) STRICT;
     CREATE TABLE IF NOT EXISTS inventory_proposals(source TEXT NOT NULL,inventory_id TEXT NOT NULL,proposal_id TEXT NOT NULL REFERENCES proposals(id),PRIMARY KEY(source,inventory_id,proposal_id),FOREIGN KEY(source,inventory_id) REFERENCES inventory(source,id)) STRICT;`);
   const marks = inventorySources.map(() => "?").join(",");
-  counts.inventoryMoved = Number(db.prepare(`INSERT INTO inventory SELECT * FROM datasets WHERE source IN (${marks})`).run(...inventorySources).changes);
+  counts.inventoryMoved = Number(db.prepare(`INSERT INTO inventory SELECT source,id,title,target,instrument,record_count,decision,reason,url,details_json FROM datasets WHERE source IN (${marks})`).run(...inventorySources).changes);
   counts.inventoryLinksMoved = Number(
     db.prepare(`INSERT INTO inventory_proposals SELECT source,dataset_id,proposal_id FROM dataset_proposals WHERE source IN (${marks})`).run(...inventorySources).changes,
   );
@@ -75,7 +75,13 @@ try {
     const full = Array.isArray(details.targets) ? details.targets.filter((t): t is string => typeof t === "string") : [];
     // Meteorite and laboratory rows name samples, not bodies; a comma list names several targets.
     const sample = r.decision === "Laboratory reference" || /\blab\b|laboratory|meteorite/i.test(string(r.title));
-    const named = (full.length ? full : string(r.target).split(";")).flatMap((t) => t.split(/,\s*/));
+    let named = (full.length ? full : string(r.target).split(";")).flatMap((t) => t.split(/,\s*/));
+    // USGS titles start with the body ("Moon Kaguya TC Global Mosaic"); use it when the target field names none.
+    if (source === "usgs" && !named.some((t) => bodiesOf(t).length)) {
+      const words = string(r.title).split(/\s+/);
+      const lead = [words.slice(0, 2).join(" "), words[0]].find((w) => catalogue.body(w)?.catalogued);
+      if (lead) named = [lead];
+    }
     const found = new Map<string, { body: Body; name: string }>();
     for (const name of named) {
       const b = catalogue.body(name, sample);
