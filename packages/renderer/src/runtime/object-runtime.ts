@@ -66,6 +66,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
     const lifetime = environment.createLifetime();
+    let preserveControls = false;
     // Startup mounts the prepared groups, activates them (connected and painted once), then publishes readiness after a paint.
     // `ready` settles once: resolved at readiness or by an earlier destroy, rejected by an earlier fatal error.
     let phase: 'mounting' | 'activated' | 'ready' = 'mounting';
@@ -229,7 +230,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
-      destroy() {
+      destroy(options: { preserveControls?: boolean } = {}) {
+        preserveControls = options.preserveControls === true;
         resolveReady();
         const errors = lifetime.destroy();
         if (errors.length) throw new AggregateError(errors, "Object cleanup failed.");
@@ -336,7 +338,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           }
           return committed;
         }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error) });
-      context.own(() => controls?.destroy());
+      context.own(() => controls?.destroy({ preserveControls }));
       // A claimed preflight bank already completed and released default startup.
       // Re-running it would pin obsolete lighting rows beside the incoming view.
       const startup = await lifetime.wait<boolean | void | null>(preparedResources ? preparedResources.ready : Promise.resolve(true));

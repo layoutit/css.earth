@@ -224,7 +224,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     button.addEventListener('click', event => {
       event.preventDefault();
       if (button.ariaPressed === 'true') {
-        search.value = '';
+        if (search.value) search.value = '';
         setOpen(false);
         return;
       }
@@ -308,13 +308,13 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     const preview = { subject, hideFocus: true };
     subjectOverride = preview;
     // Choosing a result ends that search; a cancelled flight gives the query back.
-    search.value = '';
+    if (search.value) search.value = '';
     setOpen(false);
     presentSelection();
     return () => {
       if (subjectOverride !== preview) return;
       subjectOverride = previous;
-      if (!search.value) search.value = previousQuery;
+      if (!search.value && previousQuery) search.value = previousQuery;
       refreshSelection();
       setOpen(open || previousOpen);
     };

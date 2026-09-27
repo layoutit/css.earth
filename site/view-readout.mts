@@ -79,7 +79,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     const distance = viewDistance(world, navigation.frame, overviewScope, undefined, preparedFocus);
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
-    if (distanceGroup) distanceGroup.title = distance.title;
+    if (distanceGroup && distanceGroup.title !== distance.title) distanceGroup.title = distance.title;
     hidden(coordinates, !value?.coordinates);
     if (value?.coordinates) {
       write(latitude, formatViewCoordinate(value.coordinates.latitude, 'N', 'S'));
@@ -88,9 +88,11 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     hidden(scale, !value?.scale);
     if (value?.scale) {
       write(scaleLabel, value.scale.label);
-      ruler.style.width = `${value.scale.pixels.toFixed(2)}px`;
-      measure.style.width = `${value.scale.measurePixels.toFixed(2)}px`;
-      scale.title = `${value.scaleTitle}. Distance is measured from the left edge to the moving tick.`;
+      const rulerWidth = `${Number(value.scale.pixels.toFixed(2))}px`, measureWidth = `${Number(value.scale.measurePixels.toFixed(2))}px`;
+      if (ruler.style.width !== rulerWidth) ruler.style.width = rulerWidth;
+      if (measure.style.width !== measureWidth) measure.style.width = measureWidth;
+      const title = `${value.scaleTitle}. Distance is measured from the left edge to the moving tick.`;
+      if (scale.title !== title) scale.title = title;
     }
     if (playing) schedule();
   }

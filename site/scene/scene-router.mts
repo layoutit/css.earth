@@ -1,3 +1,4 @@
+import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
 import { createSceneView } from './scene-view.mts';
@@ -203,8 +204,7 @@ export function createSceneRouter({
           // The prepared sidebar swap and the detail mount each restyle and lay out
           // hundreds of nodes. Let the swap render in its own frame first, so an
           // arriving flight does not drop a frame for both at once.
-          const rendered = await session.wait(new Promise<void>(resolve =>
-            windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
+          const rendered = await session.wait(afterSceneFrame(windowTarget, session.signal));
           if (rendered.cancelled || !scenes.isCurrent(session)) return;
         }
         publication.publish();
@@ -230,7 +230,7 @@ export function createSceneRouter({
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
-      delete documentTarget.documentElement.dataset.bodyPending;
+      if ('bodyPending' in documentTarget.documentElement.dataset) delete documentTarget.documentElement.dataset.bodyPending;
       if (!ready) {
         windowTarget.performance?.mark?.('cssearth:body-ready');
         const loaded = await session.wait(ensureContext());
@@ -388,6 +388,11 @@ export function createSceneRouter({
         loadObject, contentTransport, reducedMotion: reducedMotionActive, getWorld: () => world.current, stage });
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
+      // The camera acknowledgement resolves inside its RAF. Keep scene teardown
+      // and shell publication out of that rendering turn; the resident billboard
+      // continues to cover the arrival. Cancellation keeps the old scene intact.
+      const presented = await request.lifetime.wait(afterSceneFrame(windowTarget, request.signal));
+      if (presented.cancelled || !requests.owns(request)) return false;
       request.timing.mark('handoff');
       if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
       objectId = object.id;
@@ -475,7 +480,7 @@ export function createSceneRouter({
     if (!scenes.isCurrent(session)) return;
     const retired = DIAGNOSTICS_ENABLED ? observeSceneRetirement(windowTarget, session.objectId) : null;
     // Detach and invalidate before any user cleanup or native wait can finish.
-    const cleanupErrors = session.dispose(error === null ? undefined : error, { flush });
+    const cleanupErrors = session.dispose(error === null ? undefined : error, { flush, preserveControls: preserveShell });
     retired?.();
     if (!preserveShell) {
       hasPresented = false;

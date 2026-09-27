@@ -6,7 +6,7 @@ import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
-import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
+import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createSettlePacer } from './settle-pacer.js';
@@ -234,7 +234,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     if (leaves) {
       for (const leaf of leaves) textureActivation.write(leaf, value);
       styleWrites += leaves.length;
-    } else if (styleValue(target(index), name) !== value) { writeStyle(target(index), name, value); styleWrites++; }
+    } else if (!samePreparedStyle(styleValue(target(index), name), name, value)) { writeStyle(target(index), name, value); styleWrites++; }
   }
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),

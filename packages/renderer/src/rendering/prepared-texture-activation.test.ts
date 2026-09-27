@@ -43,3 +43,13 @@ test('retiring during activation cancels image writes without changing membershi
   expect(f.leaves.every(leaf => leaf.isConnected)).toBe(true);
   expect(f.callbacks.size).toBe(0);
 });
+
+test('activating untextured leaves does not invalidate their retained styles', async () => {
+  const f = fixture(), changes: MutationRecord[] = [];
+  const observer = new f.root.ownerDocument.defaultView!.MutationObserver(records => changes.push(...records));
+  observer.observe(f.root, { attributes: true, subtree: true });
+  const ready = f.controller.activate();
+  f.paint(); f.paint(); f.paint(); await ready; await Promise.resolve();
+  expect(changes).toEqual([]);
+  observer.disconnect(); f.dispose();
+});

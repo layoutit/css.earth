@@ -5,7 +5,7 @@ import { opacityClockFor } from '../stars/opacity-clock.js';
 export function prepareTextureActivation(groups: readonly (readonly HTMLElement[])[], own: (cleanup: () => void) => unknown) {
   const batches = groups.filter(group => group.length);
   const pending = new Map(batches.flat().map(node => [node, node.style.backgroundImage || 'none']));
-  for (const node of pending.keys()) node.style.backgroundImage = 'none';
+  for (const node of pending.keys()) if (node.style.backgroundImage !== 'none') node.style.backgroundImage = 'none';
   const window = batches[0]?.[0].ownerDocument.defaultView;
   const clock = window ? opacityClockFor(window) : null;
   let disposed = false, frame: number | null = null, promise: Promise<void> | null = null;
@@ -30,7 +30,8 @@ export function prepareTextureActivation(groups: readonly (readonly HTMLElement[
         frame = null;
         if (disposed) { resolve(); return; }
         for (const node of batches[index++]) {
-          node.style.backgroundImage = pending.get(node) ?? 'none';
+          const image = pending.get(node) ?? 'none';
+          if (node.style.backgroundImage !== image) node.style.backgroundImage = image;
           pending.delete(node);
         }
         // Give the final batch a rendering opportunity before the normal paint gate.

@@ -66,7 +66,7 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
     const root = documentTarget.documentElement;
     setData(root, "scenePresented", String(read().hasPresented));
     setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
-    if (sceneState === 'ready' || sceneState === 'error') delete root.dataset.shellContext;
+    if (sceneState === 'ready' || sceneState === 'error') setData(root, 'shellContext', null);
     const busy = sceneState === "loading" ? "true" : "false";
     if (stage.ariaBusy !== busy) stage.ariaBusy = busy;
     setData(root, "playing", sceneState === "loading" || sceneState === "ready" ? String(playing) : null);

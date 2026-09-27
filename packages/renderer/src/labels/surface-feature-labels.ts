@@ -48,8 +48,8 @@ interface Entry {
 
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(2)).toString(); }
 
-/** Retained nomenclature labels for one prepared body. The outline/caption pool mounts with the
- * scene; the default-map label pool and catalogue stay absent until the first interaction.
+/** Retained nomenclature labels for one prepared body. The outline and label pools stay absent
+ * until the catalogue is requested; once created they remain resident for the scene.
  * Search-only features load one small bank when selected. Hover and activation use the shared picker. */
 /** Feature framing on arrival: the published diameter spans this share of the shorter viewport side. */
 const ARRIVAL_DIAMETER_SHARE = 0.45;
@@ -73,16 +73,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;z-index:1;pointer-events:none';
   // The outline chords paint beneath the labels; both are screen-space children of one root.
   const outline: HTMLElement[] = [];
-  for (let index = 0; index < plan.outline.pieces; index++) {
-    const piece = document.createElement('s');
-    piece.dataset.featureOutlinePiece = '';
-    piece.style.cssText = 'position:absolute;left:0;top:0;width:1px;transform-origin:0 50%;visibility:hidden;pointer-events:none';
-    root.appendChild(piece);
-    outline.push(piece);
-  }
   const entries: Entry[] = [];
   const caption = surfaceFeatureCaption(root), tooltip = caption.element;
-  host.appendChild(root);
   const picking = screenPicking(pickingHost);
   const fader = createOpacityFader(windowTarget);
   const controller = new AbortController();
@@ -141,6 +133,14 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   };
   const createEntries = () => {
     if (entries.length) return;
+    if (!root.isConnected) host.appendChild(root);
+    for (let index = 0; index < plan.outline.pieces; index++) {
+      const piece = document.createElement('s');
+      piece.dataset.featureOutlinePiece = '';
+      piece.style.cssText = 'position:absolute;left:0;top:0;width:1px;transform-origin:0 50%;visibility:hidden;pointer-events:none';
+      root.insertBefore(piece, tooltip);
+      outline.push(piece);
+    }
     for (let index = 0; index < plan.catalog.count; index++) createEntry();
   };
   // Label picks are consumed by the shared picker before they bubble, so a click that
@@ -429,7 +429,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     entries.forEach((entry, index) => { entry.element.removeEventListener('click', activations[index]!); if (entry.hideTimer !== null) clearTimeout(entry.hideTimer); });
     picking.remove(root);
     fader.destroy();
-    root.remove();
+    if (root.isConnected) root.remove();
   }
   return Object.freeze({
     root, lensIds: plan.lensIds,

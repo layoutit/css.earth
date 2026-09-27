@@ -105,3 +105,13 @@ test('URL replacement stays bounded and flush failures cannot skip native or bin
   assert.deepEqual(h.calls, ['pause', 'destroy']);
   assert.deepEqual(h.session.dispose(), []);
 });
+
+test('replacement transfers controls; ordinary disposal keeps native fallback cleanup', async () => {
+  for (const preserveControls of [false, true]) {
+    const h = fixture(); let received: boolean | undefined;
+    await h.session.activate(() => ({ ...h.native(), destroy(options) { received = options?.preserveControls; } }), h.stage, unusedMountOptions);
+    h.session.dispose(undefined, { preserveControls });
+    assert.equal(received, preserveControls);
+    assert.equal(h.session.live, false);
+  }
+});

@@ -91,3 +91,20 @@ the stage. Connection does not mean ready: the existing paced texture activation
 billboard handoff. An adopted server-rendered tree is already connected and keeps its existing ownership.
 
 Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.
+
+### Optional controls and scene retirement
+
+Disabled surface labels do not attach their feature root or allocate outline segments. The first catalogue request
+creates that retained pool before publication; camera and hover updates reuse it. Shared settings ignore unchanged
+preferences. During scene replacement, the outgoing control binding releases listeners without resetting DOM that
+the incoming owner replaces or adopts. Failure and ordinary disposal still restore the native fallback controls.
+
+The camera's handoff acknowledgement must not run outgoing teardown in the same RAF microtask checkpoint. The
+router yields through a rendering opportunity and a task before retirement, keeping the resident billboard and
+cancellation ownership intact. This separates required teardown from camera publication; it is not a paint-readiness
+guarantee or a fixed settling delay. The incoming scene still must acknowledge its prepared activation.
+
+Texture activation still gives each prepared batch a rendering opportunity, but leaves already showing their pending
+image receive no style assignment. Marker atlas swaps and label offsets, search clearing, readouts and readiness
+attributes likewise publish only changed values; fixed-precision lengths are formatted as their CSSOM values.
+Prepared space-separated RGB colors compare equal to their comma-separated CSSOM serialization, without suppressing genuine color changes.

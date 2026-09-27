@@ -226,10 +226,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const errors = cleanup();
     throw errors.length ? new AggregateError([error, ...errors], error instanceof Error ? error.message : String(error), { cause: error }) : error;
   }
-  function cleanup() {
+  function cleanup(preserveControls = false) {
     destroyed = true; ready = false;
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
+    if (preserveControls) return errors;
     for (const input of [...lensInputs, ...settingsInputs]) {
       try {
         const disabled = input.name === 'speed' || input.type !== 'submit' && !input.hasAttribute('form');
@@ -257,9 +258,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     },
     stats: () => Object.freeze({ ready, destroyed, actions, listenerCount: listeners.length,
       lensIds: Object.freeze([...lenses.keys()]), settings: Object.freeze([...settings.keys()]), state: lastState }),
-    destroy() {
+    destroy({ preserveControls = false }: { preserveControls?: boolean } = {}) {
       if (destroyed) return;
-      const errors = cleanup();
+      const errors = cleanup(preserveControls);
       if (errors.length) throw new AggregateError(errors, "Object control cleanup failed.");
     },
   });
