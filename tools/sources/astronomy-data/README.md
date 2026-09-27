@@ -19,22 +19,21 @@ sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. It has three
-views. **Proposals** lists the work by priority, with status, bodies, next step
-and blocker; a proposal opens its writeup and linked records. **Bodies** groups
-proposals and records by body, with the split of record decisions. **Records**
-filters every source row by source, decision, body, instrument and proposal,
-with the count each choice would leave. Photojournal and USGS rows show their
-published preview image. Opening a row shows its files and full retained record.
+The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. It is one
+table of every body the ledger names, with its kind, whether cssEarth has it,
+its proposals, best priority, blocked proposals, candidate and needs-review
+records, preview images, records and sources. Moons and exoplanets sit inside
+their system; a system row adds up its members, counting each record once. Kind
+and parent come from `packages/astronomy/data/bodies`, and the Sun and Sgr A*
+hold no systems. The table filters by name, kind, cssEarth membership,
+proposals and candidates, and sorts by any column. A row opens that body's, or
+that system's, proposals with their writeups and its records with previews.
 
-Search reads the whole retained record, so a PIA number, file name or label
-field finds its row. Search and the TSV and JSON exports use `slice()`, the rule
-`slice.mts` uses, so an export holds exactly the rows the page lists. A body
-filter drops the Sun when the Photojournal tags it only as a parent
-(`bodiesOf()` in `model.mts`). The page URL keeps the view, filters and open
-item, so a link reopens the same slice. The server reads the ledger once;
-restart it after editing the database. `AUDIT_DB` selects another file for
-comparisons. Open `ledger.sqlite` in a SQLite browser for direct editing.
+A Photojournal record that names a moon and its planet counts for the moon, and
+the Sun counts only when no other body is tagged. `slice.mts` keeps the
+filtered JSON and TSV exports. The server reads the ledger once; restart it
+after editing the database. `AUDIT_DB` selects another file for comparisons.
+Open `ledger.sqlite` in a SQLite browser for direct editing.
 
 | Table               | Owns                                                                                                                                      |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -183,8 +182,8 @@ retained evidence hashes, OPUS partition reconciliation, label byte counts,
 proposal writeups/joins, filters and exports. These checks establish ledger
 consistency, not scientific acceptance of the proposed datasets.
 
-The [records view capture](evidence/viewer-records.jpg) shows the current viewer:
-Photojournal rows for Enceladus with previews, and PIA24027 open with its files.
+The [viewer capture](evidence/viewer-records.jpg) shows the body table filtered to
+bodies with candidates, sorted by candidates, with the Earth, Jupiter and Saturn systems open.
 
 The [browser capture](evidence/ledger-slice.jpg) records the SQLite migration viewer,
 before its heading was renamed to Astronomy data ledger.

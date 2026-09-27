@@ -1,24 +1,16 @@
 import { createServer, type ServerResponse } from "node:http";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
+import { resolve } from "node:path";
 import { stripTypeScriptTypes } from "node:module";
-import {
-  root,
-  loadRows,
-  loadProposals,
-  slice,
-  tsv,
-  bodiesOf,
-  type Row,
-} from "./model.mts";
+import { root, loadRows, loadProposals, bodiesOf, type Row } from "./model.mts";
 import type {
   ViewerData,
   ViewerRow,
   ViewerProposal,
 } from "./viewer/shape.mts";
-// The ledger viewer: one page (viewer/index.html, viewer/app.mts) over four read-only endpoints. Search and export go
-// through slice(), the same filter rule slice.mts and verify.mts use, so what the page lists is what an export contains.
+// The ledger viewer: one page (viewer/index.html, viewer/app.mts) over one read-only data endpoint. Exports and
+// filtered slices stay with slice.mts.
 const rows = loadRows();
-const indexOf = new Map(rows.map((r, i) => [r, i]));
 const sources = [
   ["opus", "OPUS"],
   ["opus-volumes", "OPUS volumes"],
@@ -59,34 +51,31 @@ function listed(r: Row): ViewerRow {
   const thumbnail = r.source === "photojournal" && jpeg ? jpeg.url + "?w=320" : r.source === "usgs" && usgs ? usgs.url : "";
   const largest = [...f].sort((a, b) => b.area - a.area)[0];
   return {
-    key: r.source + ":" + r.id,
     source: r.source,
     id: r.id,
     title: r.title,
     target: r.target,
     bodies: bodiesOf(r.target),
     instrument: r.instrument,
-    count: r.count,
     decision: r.decision,
     reason: r.reason,
     url: r.url,
-    proposals: r.proposals,
     thumbnail,
     size: largest?.size ?? "",
     date: field(r.details, "date"),
   };
 }
+const recorded = new Set(rows.flatMap((r) => bodiesOf(r.target)));
 async function proposals(): Promise<ViewerProposal[]> {
   const markdown = await readFile(root + "/PROPOSALS.md", "utf8");
-  const linked = new Map<string, number>();
-  for (const r of rows) for (const p of r.proposals) linked.set(p, (linked.get(p) ?? 0) + 1);
   return loadProposals().map((p) => {
     const writeup = markdown.split("\n## P" + p.id + "\n")[1]?.split("\n## P")[0]?.trim();
     if (!writeup) throw Error(`PROPOSALS.md has no writeup for P${p.id}`);
-    // A writeup names its bodies on its "Content owners:" line; the others name them in the title ("Moon and Mercury: …").
+    // A writeup names its bodies on its "Content owners:" line. Otherwise its title may name them ("Moon and Mercury: …"),
+    // but only words a record also names count as bodies; "Taxonomy: …" or "Small bodies: …" go under "several".
     const owners = /^Content owners: (.*)$/m.exec(writeup)?.[1] ?? "";
     const named = [...owners.matchAll(/\[([^\]]+)\]\(/g)].map((m) => m[1].toLowerCase());
-    const titled = p.title.split(":")[0].split(/,\s*|\s+and\s+/).map((t) => t.trim().toLowerCase());
+    const titled = p.title.split(":")[0].split(/,\s*|\s+and\s+/).map((t) => t.trim().toLowerCase()).filter((t) => recorded.has(t));
     return {
       id: p.id,
       title: p.title,
@@ -95,16 +84,14 @@ async function proposals(): Promise<ViewerProposal[]> {
       nextStep: p.next_step,
       blocker: p.blocker,
       prUrl: p.pr_url,
-      updatedAt: p.updated_at,
-      bodies: named.length ? named : titled,
+      bodies: named.length ? named : titled.length ? titled : ["several"],
       writeup: writeup.replace(/^### .*\n+/, ""),
-      rows: linked.get(p.id) ?? 0,
     };
   });
 }
 function labels(): Record<string, string> {
   // Sources spell one body differently ("mars", "Mars", "(4) Vesta"); show the capitalised spelling.
-  const out: Record<string, string> = {};
+  const out: Record<string, string> = { several: "Several bodies" };
   for (const r of rows)
     for (const raw of r.target.split(";")) {
       const label = raw.trim().replace(/^\(\d+\)\s*/, "");
@@ -113,7 +100,50 @@ function labels(): Record<string, string> {
     }
   return out;
 }
-const data: ViewerData = { rows: rows.map(listed), proposals: await proposals(), sources, labels: labels() };
+// What cssEarth knows about each body: its kind and parent from packages/astronomy/data/bodies, and whether it has an
+// object package. A ledger body matches a record by id, hyphenated name or comet id ("67p" is comet-67p).
+const repository = resolve(root, "../../..");
+const packages = new Set(
+  (await readdir(resolve(repository, "src/objects"), { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name),
+);
+const known = new Map<string, { kind: string; parent: string; name: string }>();
+for (const file of await readdir(resolve(repository, "packages/astronomy/data/bodies"))) {
+  if (!file.endsWith(".json")) continue;
+  const record: unknown = JSON.parse(await readFile(resolve(repository, "packages/astronomy/data/bodies", file), "utf8"));
+  const id = field(record, "id");
+  if (!id) throw Error(`packages/astronomy/data/bodies/${file} has no id`);
+  const physical = record && typeof record === "object" && "physical" in record ? record.physical : undefined;
+  const satellite = record && typeof record === "object" && "satellite" in record ? record.satellite : undefined;
+  known.set(id, { kind: field(record, "classification"), parent: field(satellite, "parent") || field(physical, "parent"), name: field(physical, "name") });
+}
+// The Sun and Sgr A* are the roots of the Solar System and the Galaxy; nesting under them would fold nearly every
+// row into two groups, so their children stay at the top level.
+const roots = new Set(["sun", "sgr-a-star"]);
+const catalogue: ViewerData["catalogue"] = {};
+const idOf = (token: string) => [token, token.replaceAll(" ", "-"), "comet-" + token].find((c) => known.has(c) || packages.has(c)) ?? "";
+const proposalList = await proposals();
+for (const token of [...recorded, ...proposalList.flatMap((p) => p.bodies)]) {
+  const id = idOf(token), record = known.get(id);
+  const parent = record && !roots.has(record.parent) ? record.parent : "";
+  catalogue[token] = { kind: record?.kind ?? "", parent, object: packages.has(id) ? id : "" };
+  // A parent the ledger never names still needs its own row to hold its moons.
+  if (parent && !catalogue[parent] && !recorded.has(parent)) {
+    const up = known.get(parent);
+    catalogue[parent] = { kind: up?.kind ?? "", parent: "", object: packages.has(parent) ? parent : "" };
+  }
+}
+// The Photojournal tags a moon's images with its planet too ("earth; moon", "enceladus; saturn"). A record that names a
+// body and that body's parent counts for the body, so Earth and Saturn do not collect their moons' pictures.
+function ownBodies(r: Row): string[] {
+  const tagged = bodiesOf(r.target);
+  if (r.source !== "photojournal") return tagged;
+  const parents = new Set(tagged.map((t) => known.get(idOf(t))?.parent).filter(Boolean));
+  const kept = tagged.filter((t) => !parents.has(idOf(t)));
+  return kept.length ? kept : tagged;
+}
+const names = labels();
+for (const [id, record] of known) if (catalogue[id] && !names[id] && record.name) names[id] = record.name;
+const data: ViewerData = { rows: rows.map((r) => ({ ...listed(r), bodies: ownBodies(r) })), proposals: proposalList, sources, labels: names, catalogue };
 const page = await readFile(root + "/viewer/index.html", "utf8");
 const script = stripTypeScriptTypes(await readFile(root + "/viewer/app.mts", "utf8"));
 const json = JSON.stringify(data);
@@ -123,10 +153,9 @@ function send(res: ServerResponse, type: string, body: string, headers: Record<s
 }
 const port = Number(process.env.PORT ?? 4319);
 if (!Number.isSafeInteger(port) || port < 1 || port > 65535) throw Error("Invalid port");
-createServer(async (req, res) => {
+createServer((req, res) => {
   try {
     const url = new URL(req.url ?? "/", "http://127.0.0.1");
-    const params = new URLSearchParams(url.searchParams);
     if (url.pathname === "/")
       return send(res, "text/html", page, {
         "Content-Security-Policy":
@@ -134,31 +163,6 @@ createServer(async (req, res) => {
       });
     if (url.pathname === "/app.js") return send(res, "text/javascript", script);
     if (url.pathname === "/api/data") return send(res, "application/json", json);
-    if (url.pathname === "/api/doc") {
-      const name = params.get("name");
-      if (name !== "README.md" && name !== "PROPOSALS.md") throw Error("Unknown document");
-      return send(res, "text/markdown", await readFile(root + "/" + name, "utf8"));
-    }
-    if (url.pathname === "/api/record") {
-      const row = rows.find((r) => r.source === params.get("source") && r.id === params.get("id"));
-      if (!row) throw Error("Unknown record");
-      return send(res, "application/json", JSON.stringify(row));
-    }
-    if (url.pathname === "/api/match") {
-      // Text search reads the whole retained record, as slice() does, so a PIA number or a file name finds its row.
-      const found = slice(rows, new URLSearchParams({ q: params.get("q") ?? "" }));
-      return send(res, "application/json", JSON.stringify(found.map((r) => indexOf.get(r))));
-    }
-    if (url.pathname === "/api/export") {
-      const format = params.get("format") ?? "json";
-      if (format !== "json" && format !== "tsv") throw Error("format must be json or tsv");
-      const found = slice(rows, params);
-      params.delete("format");
-      const attachment = { "Content-Disposition": `attachment; filename="astronomy-data.${format}"` };
-      return format === "tsv"
-        ? send(res, "text/tab-separated-values", tsv(found), attachment)
-        : send(res, "application/json", JSON.stringify({ filters: Object.fromEntries(params), rows: found }, null, 2) + "\n", attachment);
-    }
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("Not found");
   } catch (error) {

@@ -1,18 +1,14 @@
-// What the viewer server sends the page. Rows carry list fields only; the page fetches a row's retained record when it
-// is opened, so the first load stays small.
+// What the viewer server sends the page: list fields only, not each row's retained record.
 export type ViewerRow = {
-  key: string;
   source: string;
   id: string;
   title: string;
   target: string;
   bodies: string[];
   instrument: string;
-  count: number;
   decision: string;
   reason: string;
   url: string;
-  proposals: string[];
   thumbnail: string;
   size: string;
   date: string;
@@ -25,10 +21,8 @@ export type ViewerProposal = {
   nextStep: string;
   blocker: string;
   prUrl: string;
-  updatedAt: string;
   bodies: string[];
   writeup: string;
-  rows: number;
 };
 export type ViewerSource = { id: string; label: string };
 export type ViewerData = {
@@ -36,4 +30,6 @@ export type ViewerData = {
   proposals: ViewerProposal[];
   sources: ViewerSource[];
   labels: Record<string, string>;
+  // Per body token: its kind and parent body from packages/astronomy, and its src/objects package id if cssEarth has one.
+  catalogue: Record<string, { kind: string; parent: string; object: string }>;
 };
