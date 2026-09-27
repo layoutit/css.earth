@@ -221,7 +221,7 @@
       "kind": "limitation",
       "text": "Lead summaries only, trimmed to whole sentences within 320 characters; Wikipedia is a tertiary source and the notes are captions, not scientific claims of this project.",
       "scope": "Tooltip and search context.",
-      "evidence": "tools/objects/surface-features/notes-schema.ts trims and validates every entry."
+      "evidence": "packages/bake/src/objects/surface-features/notes-schema.ts trims and validates every entry."
     }
   ]
 }

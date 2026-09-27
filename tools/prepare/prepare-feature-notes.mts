@@ -2,7 +2,7 @@
 //   node tools/prepare/prepare-feature-notes.mts <objectId> [...] [--wikidata <saved SPARQL result>]
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadArticleMap, prepareFeatureNotes } from '#preparation/surface-features/notes';
+import { loadArticleMap, prepareFeatureNotes } from '@cssearth/bake/objects/surface-features';
 
 const args = process.argv.slice(2), dumpIndex = args.indexOf('--wikidata');
 const dump = dumpIndex >= 0 ? args[dumpIndex + 1]! : null;

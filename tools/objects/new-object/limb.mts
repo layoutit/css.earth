@@ -7,7 +7,7 @@
  *
  * Outside both grids, or where a node is missing, no law is drawn and the reason is recorded; the value is never extrapolated.
  * A spec may decline a law with its own reason. */
-import { interpolateQuadraticLimbDarkening, type QuadraticLimbDarkening } from '../observation/stellar/stellar-photometric-color.mts';
+import { interpolateQuadraticLimbDarkening, type QuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { VIZIER_ASU, type Archive } from './archives.mts';
 
 interface Grid {

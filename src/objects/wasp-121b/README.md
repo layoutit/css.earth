@@ -24,7 +24,7 @@ Run of 2026-09-23 (this version):
 - The same test draws the map as this package does (longitude east of the substellar point) and integrates it through the package's own orbit and synchronous rotation ([phase-curve.ts](../../../packages/bake/src/objects/raster/eclipse-map/phase-curve.ts)), away from transit. It matches the deposited planet signal, which peaks at 3,861 ppm (NRS1) and 4,863 ppm (NRS2), to 0.75 and 1.52 ppm rms; mirrored east-west, 135 and 124 ppm.
 - A second test checks the conversion: every channel's term agrees across the 36 phase bins to 0.66 % or better, and each map peaks on the equator at the grid longitude nearest its fitted offset. It also checks the hottest temperatures and the grey fractions above.
 - [`wasp-121-default-views.png`](evidence/wasp-121-default-views.png): WASP-121, WASP-121b in NRS1 (its default) and WASP-121b in NRS2 on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready. The planet opens on its substellar point; the panel's small map shows the grey night-side cap.
-- [`lens-steps.test.mts`](../../../tools/objects/content/lens-steps.test.mts) checks that stepped datasets form groups of consecutive steps with distinct labels.
+- [`lens-steps.test.mts`](https://github.com/layoutit/css.earth/blob/a9ea4f6338b6cd25a5f132dbe64140e3df2f5388/tools/objects/content/lens-steps.test.mts) (now [`tests/objects/content/lens-steps.test.mts`](../../../tests/objects/content/lens-steps.test.mts)) checks that stepped datasets form groups of consecutive steps with distinct labels.
 
 ## Known problems
 
