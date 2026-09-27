@@ -18,7 +18,7 @@ async function git(root: string, args: readonly string[]): Promise<string> {
 
 async function gitChangedPaths(base: string, root: string): Promise<string[]> {
   // --no-renames: with rename detection on, `git diff --name-only` reports only a renamed file's new path, so a
-  // moved inventory would hide its old path. See tools/ci/object-scope-gate.mts's gitChangedPaths for the same fix.
+  // moved inventory would hide its old path. See .github/scripts/ci/object-scope-gate.mts's gitChangedPaths for the same fix.
   return (await git(root, ["diff", "--no-renames", "--name-only", base, "HEAD"])).split("\n").map(line => line.trim()).filter(Boolean);
 }
 

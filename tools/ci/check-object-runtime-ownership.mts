@@ -913,7 +913,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.arg
 } else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2);
   // One or more `--object <id>` pairs scope the audit to those objects; each occurrence is collected, not just
-  // the first, so a PR-scoped run (tools/ci/scope-runtime-ownership-check.mts) can name every object it touched.
+  // the first, so a PR-scoped run (.github/scripts/ci/scope-runtime-ownership-check.mts) can name every object it touched.
   const ids: string[] = [];
   for (let i = 0; i < args.length; i++) if (args[i] === "--object") { const id = args[i + 1]; if (id) { ids.push(id); i++; } }
   for (const id of ids) if (!OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);

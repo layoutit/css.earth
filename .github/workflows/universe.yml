@@ -47,22 +47,22 @@ jobs:
           # transferring the source-media bank before any validation job can start.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /tools/**/*.mts
+            /.github/scripts/**/*.mts
             /packages/core/src/validate.ts
             /.github/ci-areas.json
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
       - name: Classify what this change touched, and which heavy jobs it needs
-        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (tools/ci/ci-affected.mts).
+        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (.github/scripts/ci/ci-affected.mts).
         # A push to main always runs every job regardless of this output (see each job's `if:`); only a pull request
         # can skip one. `docs_only` is kept for callers outside this workflow that still read it.
         id: classify
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
+            node .github/scripts/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
           else
-            node tools/ci/ci-affected.mts push "${{ github.event.before }}"
+            node .github/scripts/ci/ci-affected.mts push "${{ github.event.before }}"
           fi
       - name: Check that every commit is one Conventional Commits line with no attribution
         # Required with the rest of this job. A local commit-msg hook gives the same answer earlier, but a hook can be
@@ -70,14 +70,14 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node tools/ci/commit-message.mts --range "origin/$GITHUB_BASE_REF..$HEAD_SHA"
+        run: node .github/scripts/ci/commit-message.mts --range "origin/$GITHUB_BASE_REF..$HEAD_SHA"
       - name: Scope the runtime ownership check
         id: ownership-scope
         # Computed here (this checkout already has the full history a merge-base diff needs) so the "Prepared
         # universe and shared renderer" job's own checkout can stay shallow. A push to main always keeps --all.
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            echo "args=$(node tools/ci/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
+            echo "args=$(node .github/scripts/ci/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
           else
             echo "args=--all" >> "$GITHUB_OUTPUT"
           fi
@@ -192,7 +192,7 @@ jobs:
         # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
-          node --test "tools/ci/*.test.mts" "tools/ci/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+          node --test ".github/scripts/ci/*.test.mts" "tools/ci/*.test.mts" "tools/ci/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
             "src/platform/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 
   typecheck:

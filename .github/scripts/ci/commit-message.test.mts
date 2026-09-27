@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { promisify } from 'node:util';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { MAX_LENGTH, cleanMessage, installHook, messageProblem, rangeProblems, type RangeCommit } from './commit-message.mts';
 const test = sourceTest();
 

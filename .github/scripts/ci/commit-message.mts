@@ -4,9 +4,9 @@
 // (the enforcement, since a hook can be skipped). Depends only on Node built-ins: CI runs it right after a sparse
 // checkout, before any install.
 //
-//   node tools/ci/commit-message.mts <message-file>      check one message (the commit-msg hook)
-//   node tools/ci/commit-message.mts --range <a>..<b>    check every commit in a range (CI)
-//   node tools/ci/commit-message.mts --install           install the commit-msg hook into this clone (pnpm install)
+//   node .github/scripts/ci/commit-message.mts <message-file>      check one message (the commit-msg hook)
+//   node .github/scripts/ci/commit-message.mts --range <a>..<b>    check every commit in a range (CI)
+//   node .github/scripts/ci/commit-message.mts --install           install the commit-msg hook into this clone (pnpm install)
 import { execFile } from 'node:child_process';
 import { chmod, copyFile, mkdir, readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -93,7 +93,7 @@ export async function installHook(root: string): Promise<string> {
 }
 
 async function main(args: readonly string[]): Promise<number> {
-  const root = resolve(import.meta.dirname, '../..');
+  const root = resolve(import.meta.dirname, '../../..');
   if (args[0] === '--install' && args.length === 1) {
     console.log(`commit-message: ${await installHook(root)}`);
     return 0;

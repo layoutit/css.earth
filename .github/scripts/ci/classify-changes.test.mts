@@ -3,7 +3,7 @@ import { execFile } from 'node:child_process';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { promisify } from 'node:util';
 import { classifyChanges, classifyChangedPaths, isDocPath } from './classify-changes.mts';
@@ -39,7 +39,7 @@ test('a body README or any other Markdown under src/objects/ is never a doc path
 
 test('ordinary source and config paths are not doc paths', () => {
   assert.equal(isDocPath('site/objects.mts'), false);
-  assert.equal(isDocPath('tools/ci/classify-changes.mts'), false);
+  assert.equal(isDocPath('.github/scripts/ci/classify-changes.mts'), false);
   assert.equal(isDocPath('package.json'), false);
   assert.equal(isDocPath('.github/workflows/universe.yml'), false);
 });

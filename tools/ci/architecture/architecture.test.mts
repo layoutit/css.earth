@@ -5,7 +5,7 @@ import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-im
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
-import { readCiSteps } from '../check-ci.mts';
+import { readCiSteps } from '../../../.github/scripts/ci/check-ci.mts';
 import { formatDelta } from './report.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';

@@ -1,6 +1,6 @@
 {
   "//": [
-    "Read by tools/ci/ci-affected.mts. Patterns use '**' for any depth,",
+    "Read by .github/scripts/ci/ci-affected.mts. Patterns use '**' for any depth,",
     "'*' for one path segment or a run of characters within a segment. `shared` is checked first against every",
     "changed path: one match there means the whole change is treated as shared, full run of every heavy job",
     "no matter what else changed. Otherwise each changed path is assigned to the first matching entry in `areas`,",
@@ -18,11 +18,11 @@
     "astro.config.mts",
     ".github/workflows/**",
     ".github/ci-areas.json",
-    "tools/ci/ci-affected.mts",
-    "tools/ci/check-ci.mts",
-    "tools/ci/classify-changes.mts",
-    "tools/ci/scope-runtime-ownership-check.mts",
-    "tools/ci/object-scope-gate.mts",
+    ".github/scripts/ci/ci-affected.mts",
+    ".github/scripts/ci/check-ci.mts",
+    ".github/scripts/ci/classify-changes.mts",
+    ".github/scripts/ci/scope-runtime-ownership-check.mts",
+    ".github/scripts/ci/object-scope-gate.mts",
     "src/platform/**",
     "site/objects.mts",
     "packages/objects/src/registry/**",
@@ -40,7 +40,7 @@
   ],
   "production": [
     ".github/workflows/nightly.yml", ".github/workflows/deploy.yml", ".github/ci-areas.json",
-    "tools/ci/ci-affected.mts", "package.json", "pnpm-lock.yaml", "site/**", "astro.config.mts",
+    ".github/scripts/ci/ci-affected.mts", "package.json", "pnpm-lock.yaml", "site/**", "astro.config.mts",
     "packages/renderer/src/rendering/**", "tools/prepare-*.mts", "tools/setup*.mts"
   ],
   "areas": [

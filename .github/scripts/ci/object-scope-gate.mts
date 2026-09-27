@@ -64,7 +64,7 @@ export function evaluateObjectScopeGate(paths: readonly string[], labels: readon
 
 /** Same decision, computing `paths` itself from a three-dot diff against `ref` (the PR's base branch). */
 export async function objectScopeGate(ref: string, labels: readonly PullRequestLabel[],
-  { root = resolve(import.meta.dirname, '../..'), limit, labelName,
+  { root = resolve(import.meta.dirname, '../../..'), limit, labelName,
     changedPaths = (gitRef: string) => gitChangedPaths(gitRef, root) }:
   { root?: string; limit?: number; labelName?: string; changedPaths?: (ref: string) => Promise<string[]> } = {}): Promise<ObjectScopeGateResult> {
   const paths = await changedPaths(ref);

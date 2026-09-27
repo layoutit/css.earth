@@ -1,6 +1,6 @@
 // Docs-only classification: a PR (or push) that touches nothing but documentation does not need the heavy
 // typecheck/prepared-test/nebula jobs — Contract lint alone (doc links and placement) is enough. Depends only on
-// Node built-ins, like tools/ci/object-scope-gate.mts, so it can run as an early CI step right after checkout.
+// Node built-ins, like .github/scripts/ci/object-scope-gate.mts, so it can run as an early CI step right after checkout.
 import { execFile } from 'node:child_process';
 import { appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -18,7 +18,7 @@ const UNKNOWN_PUSH_BASE = /^0+$/u;
 
 async function gitChangedPaths(mode: ChangeMode, ref: string, root: string): Promise<readonly string[] | undefined> {
   if (mode === 'push' && (!ref || UNKNOWN_PUSH_BASE.test(ref))) return undefined;
-  // pr: a three-dot diff against the PR's base branch, like tools/ci/object-scope-gate.mts — what the PR actually
+  // pr: a three-dot diff against the PR's base branch, like .github/scripts/ci/object-scope-gate.mts — what the PR actually
   // introduces relative to where it branched, not every commit the base gained meanwhile.
   // push: a two-dot diff against the previous tip of the branch — exactly what this push added.
   const args = mode === 'pr'
@@ -68,7 +68,7 @@ export function classifyChangedPaths(paths: readonly string[]): ChangeClassifica
  * reports every path as unresolved code — never docs-only, since that is the direction that can only make CI run
  * more, not skip something that should have run. */
 export async function classifyChanges(mode: ChangeMode, ref: string,
-  { root = resolve(import.meta.dirname, '../..'),
+  { root = resolve(import.meta.dirname, '../../..'),
     changedPaths = (m: ChangeMode, r: string) => gitChangedPaths(m, r, root) }:
   { root?: string; changedPaths?: (mode: ChangeMode, ref: string) => Promise<readonly string[] | undefined> } = {},
 ): Promise<ChangeClassification> {
