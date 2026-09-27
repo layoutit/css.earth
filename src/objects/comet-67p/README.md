@@ -108,7 +108,7 @@ The wider recorded runs include two missing Europa originals, three Earth fixtur
 failures and two registry-audit failures. The [report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md#verification-records)
 separates those results from the comet checks. Earlier runs are retained below.
 
-- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/osiris-geo.py` reads the pinned geometry product `n20140805t194314611id50f22.IMG` and its quality companion with pvl and numpy, not with the pipeline. `tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts` requires the decoder to reproduce 48 sampled values from each of the nine geometry planes and from the quality planes exactly, the quality-flag histogram of all 4,194,304 pixels, and the count of finite sigma values.
+- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/osiris-geo.py` reads the pinned geometry product `n20140805t194314611id50f22.IMG` and its quality companion with pvl and numpy, not with the pipeline. [`tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts) (now [`tests/objects/terrestrial/osiris-geo.oracle.test.mts`](../../../tests/objects/terrestrial/osiris-geo.oracle.test.mts)) requires the decoder to reproduce 48 sampled values from each of the nine geometry planes and from the quality planes exactly, the quality-flag histogram of all 4,194,304 pixels, and the count of finite sigma values.
 
 ### Registration
 

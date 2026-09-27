@@ -94,7 +94,7 @@ The original TIFF and font remain reacquirable, ignored inputs. Runtime assets a
 
 ## Preparation ownership
 
-This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`. The source-only registered color converter above produces a standard GeoTIFF; there is no body-specific runtime or alternate body preparation path.
+This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `packages/bake/src/objects/layers/terrestrial/`. The source-only registered color converter above produces a standard GeoTIFF; there is no body-specific runtime or alternate body preparation path.
 
 Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. Lighting stays lossless.
 

@@ -26,7 +26,7 @@ Juno passed Europa on 29 September 2022. With the bank's kernels the closest app
 
 - Juno's position relative to Europa from [`@cssearth/spice`](../packages/spice/README.md) agrees with JPL Horizons' merged Juno trajectory to 1.1 m or better at the four image epochs (the receipt's `horizons` block). This checks the type 1 SPK reader, which no earlier lens used on a spacecraft this fast.
 - The labels state the altitude and sub-spacecraft point at mid-image. Evaluated at the start time, this reader gives 95 to 118 km less altitude, which is five seconds of flight at the range rate.
-- Strip rays reproduce the field-of-view corner and boresight vectors that the instrument kernel lists for all four strips to 5 × 10⁻⁸ ([`junocam.test.mts`](../tools/objects/terrestrial-layers/junocam.test.mts)). NAIF computed those vectors with its own code, so this settles the distortion inverse and the half-pixel origin.
+- Strip rays reproduce the field-of-view corner and boresight vectors that the instrument kernel lists for all four strips to 5 × 10⁻⁸ ([`junocam.test.mts`](../tests/objects/terrestrial/junocam.test.mts)). NAIF computed those vectors with its own code, so this settles the distortion inverse and the half-pixel origin.
 
 **The limb fit.** Holdout points are limb points the fit never saw. The numbers are the [receipt](../packages/telescope-cli/src/archives/juno/programs/europa-pj45.registration.json)'s, written by `measure.mts` for the [pinned program](../packages/telescope-cli/src/archives/juno/programs/europa-pj45.json).
 
@@ -70,7 +70,7 @@ node packages/bake/cli/kernel-bank.mts acquire juno
 node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc
 node packages/telescope-cli/src/archives/juno/measure.mts europa-pj45 output/juno/europa-pj45 --horizons
 node packages/telescope-cli/src/archives/juno/archive-ledger.mts
-node --test packages/telescope-cli/src/archives/juno/*.test.mts tools/objects/juno/*.test.mts tools/objects/terrestrial-layers/junocam.test.mts tools/objects/terrestrial-layers/strip-refinement.test.mts tools/objects/surface-observations/composite.test.mts tools/objects/surface-observations/junocam.test.mts
+node --test packages/telescope-cli/src/archives/juno/*.test.mts tools/objects/juno/*.test.mts tests/objects/terrestrial/junocam.test.mts tests/objects/terrestrial/strip-refinement.test.mts tools/objects/surface-observations/composite.test.mts tools/objects/surface-observations/junocam.test.mts
 pnpm build:spice && pnpm --filter @cssearth/spice test
 ```
 

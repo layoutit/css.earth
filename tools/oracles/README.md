@@ -37,8 +37,8 @@ are older standalone audits; the groups below are fixture oracles.
 | USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tests/photometry/isis.oracle.test.mts` |
 
 Scripts are under `tools/oracles/`, fixtures under `tests/oracles/` with the
-same group and name, and the comparing tests beside the code they check (under
-`tools/objects/terrestrial-layers/` unless a path is given). The shared FITS reader is the
+same group and name, and the comparing tests under `tests/objects/terrestrial/` unless a path
+is given. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tools/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
 likewise sit beside their scripts in `tools/oracles/spice/`.
