@@ -42,9 +42,12 @@ same name (`fits/core.py` writes `fits/core.json`), and the comparing tests are 
 here from `tools/oracles/` still name that path in `generatedBy` until they are regenerated.
 Five files keep their bytes because body evidence pins their SHA-256: `isis-geotiff-grid.mts`,
 `lunar-mi-quality.mts`, `geotiff-image.mts`, `reflectance-mosaics.mts` and `tsconfig.json`. The
-four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`. The
-SBMT generator's bytes are its fixture's `generatorSha256`, so `sbmt/projection.mts` also keeps
-the old path it writes. The shared FITS reader is the
+four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`.
+
+Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
+only. Since `62cde1f331` it holds no runtime-lock or generator digest, while
+`tools/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
+test runs past its restored-source skips. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
 likewise sit beside their scripts in `tests/oracles/spice/`.
@@ -76,7 +79,7 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
 
 SBMT is an opt-in native backend: `node tests/oracles/setup.mts sbmt`, then
 `node tests/oracles/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock and generator digest. `node tests/oracles/test-sbmt.mts --unit`
+pinned executable/software lock (its fixture records no digest; see the known gap above). `node tests/oracles/test-sbmt.mts --unit`
 runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](sbmt/README.md).
 The commands below operate on the Python backends.

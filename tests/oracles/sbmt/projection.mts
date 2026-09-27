@@ -98,5 +98,5 @@ for (const c of definitions) {
 await mkdir(resolve(ORACLE_ROOT,'tests/oracles/sbmt'),{recursive:true});
 const destination = process.argv[2] ?? resolve(ORACLE_ROOT,'tests/oracles/sbmt/projection.json');
 if (!resolve(destination).startsWith(resolve(ORACLE_ROOT,'tests/oracles')+'/') && !resolve(destination).startsWith(resolve(ORACLE_ROOT,'output')+'/')) throw new Error('Oracle output must be test evidence or scratch');
-await writeFile(destination, JSON.stringify({schema:'cssearth-oracle-fixture@1',oracle:'SBMT',generatedBy:'tools/oracles/sbmt/projection.mts',tool,inputs,references:[],cases:output},null,2)+'\n');
+await writeFile(destination, JSON.stringify({schema:'cssearth-oracle-fixture@1',oracle:'SBMT',generatedBy:'tests/oracles/sbmt/projection.mts',tool,inputs,references:[],cases:output},null,2)+'\n');
 console.log(`Wrote ${destination}`);
