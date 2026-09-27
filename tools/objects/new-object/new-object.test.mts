@@ -684,3 +684,26 @@ test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY g
   // A star ATLAS reaches keeps its ATLAS law: the new grid only fills the gap.
   assert.equal((await chooseLimb('cool', 5800, 4.4, { ...archive, async text(_url, form) { return form?.['-source'] === 'J/A+A/529/A75/table-af' ? ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cgs]\tK\t[Sun]\tkm/s\t\t\t\t\t', ...[4, 4.5].flatMap(g => [5750, 5875].map(t => `${g}\t${t}\t0\t2\t0.45\t0.26\tV\tL\tA`))].join('\n') : tlusty; } })).grid, 'atlas');
 });
+
+test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one route table; what a catalogue lacks is left to cite', async () => {
+  const { parseApokascRow, draftFromApokasc } = await import('./apokasc.mts'), { parseCepheidRow, draftFromCepheid } = await import('./cepheids.mts'), { writeDrafts, DRAFT_ROUTES } = await import('./drafts.mts');
+  // Rows as VizieR serves them, 2026-09-27: J/ApJS/276/69 table4 and J/A+A/550/A70 table10.
+  const apokasc = ['KIC\tCatTab\tEvolSt\tMass\te_Mass\tRadius\te_Radius\tTeff\te_Teff\tloggSeis\te_loggSeis\tGaiaDR3', ' \t \t \tMsun\tMsun\tRsun\tRsun\tK\tK\t[cm.s-2]\t[cm.s-2]\t', '--------\t--------',
+    '  893214\tGold    \tRGB    \t    1.4404\t    0.0602\t   11.0014\t    0.2055\t 4718.9233\t   44.7811\t    2.5146\t    0.0050\t2050237616959273728',
+    ' 1026180\tDetectOl\tRC     \t    1.5334\t    0.0633\t   12.2361\t    0.2278\t 4576.1016\t   40.5161\t    2.4512\t    0.0050\t2050237174589477888'].join('\n');
+  const giant = draftFromApokasc(parseApokascRow(apokasc, '893214'));
+  assert.deepEqual([giant.id, giant.gaia, giant.radius.value, giant.mass.value, giant.temperature.value], ['kic-893214', '2050237616959273728', 11.0014, 1.4404, 4719]);
+  assert.match(giant.description, /^A red giant climbing its first giant branch in the Kepler field, 11\.0 solar radii and 1\.44 solar masses/u);
+  assert.doesNotThrow(() => parseStarSpec(giant), 'an APOKASC draft is a whole spec');
+  assert.throws(() => parseApokascRow(apokasc, '1026180'), /KIC 1026180 is in category DetectOl; only Gold and Silver/u);
+  const cepheids = ['recno\tLoc\tName\tE(B-V)\te_E(B-V)\tPer\tDist\te.D\tRad\te.R', ' \t \t \tmag\tmag\td\tpc\tpc\tRsun\tRsun', '--------\t-',
+    '     129\tL\tHV 1005  \t 0.100\t 0.005\t18.714651\t44096.6\t1141.7\t 82.6\t 2.1'].join('\n');
+  const { spec, missing } = draftFromCepheid(parseCepheidRow(cepheids, 'hv 1005'));
+  assert.deepEqual([spec.id, spec.radius.value, spec.distance.value, spec.distance.uncertainty], ['hv-1005', 82.6, 44096.6, 1141.7]);
+  assert.match(spec.description, /Large Magellanic Cloud that pulsates every 18\.71 days/u);
+  assert.match(spec.color.reason, /E\(B-V\) = 0\.1 \+\/- 0\.005/u);
+  assert.deepEqual(missing, ['temperature (a mean effective temperature, cited)', 'mass (cited, or "gaia-flame")']);
+  assert.throws(() => parseStarSpec(spec), /hv-1005\.(mass|temperature)/u, 'refused until its mass and temperature are cited');
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids']);
+  await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids/u);
+});

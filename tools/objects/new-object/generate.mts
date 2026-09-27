@@ -450,7 +450,8 @@ export const formatNewObject = (results: readonly NewObjectResult[]) => `${resul
 /** Hosts an archive draft reads at once. Measured 2026-09-24 on 24 hosts within 200 pc: one at a time (main's loop) took 158 s,
  * 4 took 27 s, 8 took 19 s and 16 took 18 s, each spec byte-identical; past 8 the archives, not the client, set the pace. */
 export const DRAFT_CONCURRENCY = 8;
-export async function specFromArchive(hosts: readonly string[], out: string, { root = process.cwd(), progress = (_line: string) => {} } = {}) {
+/** The `archive` draft route (drafts.mts): specs for planet hosts from the NASA Exoplanet Archive's default parameter sets. */
+export async function draftsFromArchive(hosts: readonly string[], { root = process.cwd(), progress = (_line: string) => {} } = {}) {
   const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./identity.mts');
   const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [], failed: string[] = [];
   // DRAFT_CONCURRENCY hosts are read at once; the spec and the report keep the order the hosts were given in.
@@ -474,6 +475,5 @@ export async function specFromArchive(hosts: readonly string[], out: string, { r
     stars.push(...companions);
     report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${companions.length ? `, ${companions.length} companion star${companions.length === 1 ? '' : 's'}` : ''}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}`);
   }
-  await mkdir(dirname(resolve(root, out)), { recursive: true }); await writeFile(resolve(root, out), json({ stars }));
-  return { path: out, entries: stars.length, report: [...report, ...failed.map(line => `left out: ${line}`)] };
+  return { stars, report: [...report, ...failed.map(line => `left out: ${line}`)] };
 }

@@ -6,8 +6,6 @@
  * DEBCat lists no inclination, eccentricity or eclipse time, and rounds the period too coarsely to time eclipses. The draft leaves them
  * out and names them with the paper to read them from, and the spec parser refuses the draft until a person has copied them in: the
  * tool never fills a gap. */
-import { writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
 
 export const DEBCAT = 'https://www.astro.keele.ac.uk/jkt/debcat/';
@@ -86,19 +84,16 @@ export function draftFromDebcat(row: DebcatRow): { readonly spec: Record<string,
   return { spec, missing: [`periodDays with the eclipse ephemeris it belongs to (DEBCat's ${row.periodDays} d is rounded)`, 'inclinationDegrees', 'eccentricity', 'argumentOfPeriapsisDegrees (when eccentric)', 'transitTimeBmjdTdb with its epoch (inferior- or superior-conjunction, or periastron)'] };
 }
 
-/** `new-object --from-debcat SYSTEM... --out spec.json`: the drafts, and for each the elements to copy from its paper. */
-export async function specFromDebcat(names: readonly string[], out: string, archive: Archive) {
+/** The `debcat` draft route (drafts.mts): the drafts, and for each the elements to copy from its paper. */
+export async function draftsFromDebcat(names: readonly string[], archive: Archive) {
   const rows = parseDebcat(await archive.text(DEBCAT)), stars: Record<string, unknown>[] = [], report: string[] = [];
   for (const name of names) {
     const entry = rows.find(candidate => candidate.name.toLowerCase() === name.trim().toLowerCase());
     if (!entry) throw new Error(`DEBCat has no system named ${name}; its names are GCVS, then Bayer, Flamsteed, HR, HD, TIC or Tycho (${DEBCAT}).`);
     if ('error' in entry) throw new Error(entry.error);
-    const row = entry.row;
-    const { spec, missing } = draftFromDebcat(row);
+    const { spec, missing } = draftFromDebcat(entry.row);
     stars.push(spec);
-    report.push(`${row.name}: copy ${missing.join(', ')} from ${row.references[0]!.label} (${row.references[0]!.url}) into ${String(spec.id)}'s companion orbit; add distance if Gaia DR3 cannot place it.`);
+    report.push(`${entry.row.name}: copy ${missing.join(', ')} from ${entry.row.references[0]!.label} (${entry.row.references[0]!.url}) into ${String(spec.id)}'s companion orbit; add distance if Gaia DR3 cannot place it.`);
   }
-  const path = resolve(out);
-  await writeFile(path, `${JSON.stringify({ stars }, null, 2)}\n`);
-  return { path, report, entries: stars.length };
+  return { stars, report };
 }
