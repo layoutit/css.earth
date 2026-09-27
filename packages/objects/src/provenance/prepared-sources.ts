@@ -1,6 +1,7 @@
-import { parseSourceCatalog, parseSourceBinding, sourceResolver, sourceArray, sourceObject, sourceText, sourcePath, sourceUnique } from '@cssearth/objects/sources';
-import { parseSourceUsage } from './source-usage.mts';
-export function parsePreparedSources(raw: unknown) {
+import { parseSourceCatalog, parseSourceBinding, sourceResolver, sourceArray, sourceObject, sourceText, sourcePath, sourceUnique } from '../sources/catalog.js';
+import { parseSourceUsage } from './source-usage.js';
+import type { DatasetRoutes } from './dataset-routes.js';
+export function parsePreparedSources(raw: unknown, routes: DatasetRoutes) {
   const value = sourceObject(raw,['schema','catalog','usage','inventory','closure']);
   if (value.schema !== 'cssearth-prepared-sources@1') throw new TypeError('Unsupported prepared sources.');
   const catalog = parseSourceCatalog(value.catalog), sources = sourceResolver(catalog);
@@ -11,5 +12,5 @@ export function parsePreparedSources(raw: unknown) {
   });
   sourceUnique(inventory.map(entry => `${entry.ownerPath}#${entry.localId}`),'inventory entry');
   const closure = Object.freeze([...sourceArray(value.closure, sourcePath)].sort());
-  return Object.freeze({catalog,sources,inventory,usage:parseSourceUsage(value.usage,sources),closure});
+  return Object.freeze({catalog,sources,inventory,usage:parseSourceUsage(value.usage,sources,routes),closure});
 }

@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
+import type { ProductInputEvidence } from '@cssearth/objects/provenance';
 import { recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
 import {hasErrorCode} from '@cssearth/core';
 import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.mts';
@@ -14,7 +14,7 @@ import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
-import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
+import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '@cssearth/objects/provenance';
 import { provenanceProducts } from './provenance-recipes.mts';
 
 

@@ -21,6 +21,11 @@
       "import": "./dist/sources.js",
       "require": "./dist/sources.cjs"
     },
+    "./provenance": {
+      "types": "./dist/provenance.d.ts",
+      "import": "./dist/provenance.js",
+      "require": "./dist/provenance.cjs"
+    },
     "./node": {
       "types": "./dist/node.d.ts",
       "import": "./dist/node.js",

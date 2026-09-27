@@ -9,7 +9,8 @@ import { resolve } from 'node:path';
 import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
 import { factsheetCitations } from '../../tools/sources/source-catalogue-inputs.mts';
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
-import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '../../src/platform/source-usage.mts';
+import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '@cssearth/objects/provenance';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const citation = { catalogueId: 'radius-table', url: 'https://example.invalid/radii', label: 'Radius table',
   checked: '2026-09-10', path: 'source/review.json', locator: '/references/0' };
@@ -26,7 +27,7 @@ test('facts sharing one evidence file retain separate claim citations and create
   const parsed = parseFactsheet(panel);
   assert.deepEqual(parsed, panel);
   const edges = factsheetCitations(parsed, 'src/objects/body/source/content.json', { id: 'body' });
-  const usage = compileSourceUsage([], sources, edges);
+  const usage = compileSourceUsage([], sources, DATASET_ROUTES, edges);
   assert.deepEqual(edges.map(edge => edge.catalogueId), ['radius-table', 'rotation-table']);
   assert.equal(edges[0].locator, '/panel/facts/0/source');
   assert.equal(edges[1].locator, '/panel/moreFacts/0/source');
@@ -37,7 +38,7 @@ test('facts sharing one evidence file retain separate claim citations and create
   for (const mutation of [{ kind: 'product-input' }, { lensIds: ['surface'] }, { productId: 'surface' }, { objectId: undefined }, { citationUrl: undefined }]) {
     const invalid = structuredClone(edges);
     Object.assign(invalid[0], mutation);
-    assert.throws(() => parseSourceUsage({ edges: invalid, datasets: [], ...sourceUsageIndexes(invalid) }, sources), /factsheet citation/);
+    assert.throws(() => parseSourceUsage({ edges: invalid, datasets: [], ...sourceUsageIndexes(invalid) }, sources, DATASET_ROUTES), /factsheet citation/);
   }
 });
 

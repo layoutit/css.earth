@@ -1,12 +1,12 @@
-import { parsePreparationEvidence } from './preparation-evidence.mts';
-import type { PreparationEvidence } from './preparation-evidence.mts';
-import { validateInputEvidence } from './product-input-evidence.mts';
-import type { ProductInputEvidence } from './product-input-evidence.mts';
+import { parsePreparationEvidence } from './preparation-evidence.js';
+import type { PreparationEvidence } from './preparation-evidence.js';
+import { validateInputEvidence } from './product-input-evidence.js';
+import type { ProductInputEvidence } from './product-input-evidence.js';
 import { isArray } from '@cssearth/core';
-import { parseCapture } from './exploration-catalog.mts';
-import type { Capture } from './exploration-catalog.mts';
-import { parseSourceBinding } from '@cssearth/objects/sources';
-import type { SourceBinding } from '@cssearth/objects/sources';
+import { parseCapture } from './exploration-catalog.js';
+import type { Capture } from './exploration-catalog.js';
+import { parseSourceBinding } from '../sources/catalog.js';
+import type { SourceBinding } from '../sources/catalog.js';
 export type ProvenanceJson = null | boolean | number | string | readonly ProvenanceJson[] | { readonly [key: string]: ProvenanceJson };
 export interface ProvenanceOperation { readonly url?: string; readonly [key: string]: ProvenanceJson | undefined; }
 export interface ProvenanceSource {

@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseRetrievedProfile, readProfileTable, profileWindow, readRetrievedProfile, renderRetrievedProfile } from '@cssearth/bake/objects/charts';
 import { prepareObjectProvenance } from '../../../tools/objects/provenance.mts';
-import { productSourceIds } from '../../../src/platform/object-provenance.mts';
+import { productSourceIds } from '@cssearth/objects/provenance';
 
 const root = resolve(import.meta.dirname, '../../..');
 const source = resolve(root, 'src/objects/wasp-18b/source');

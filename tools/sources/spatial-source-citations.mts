@@ -4,7 +4,7 @@ import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '../../packag
 import { parsePreparedClusterCatalog } from '../../packages/catalog/src/clusters.ts';
 import { sourceObject } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
-import type { SourceUse } from '../../src/platform/source-usage.mts';
+import type { SourceUse } from '@cssearth/objects/provenance';
 import { hasErrorCode } from '@cssearth/core';
 
 const quantityLabels: Readonly<Record<string, string>> = { skyPosition: 'Sky position', distance: 'Distance', halfLightRadius: 'Half-light radius', membership: 'Membership', redshift: 'Redshift' };

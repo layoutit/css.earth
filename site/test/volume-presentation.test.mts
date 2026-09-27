@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
-import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 
 const ids = ['optical', 'infrared'];
 const bank = { id: 'nebula', defaultLens: 'optical', lenses: ids.map(id => ({ id })) };

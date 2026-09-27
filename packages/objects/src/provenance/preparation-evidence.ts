@@ -1,5 +1,5 @@
-import type { ProvenanceDocument } from './object-provenance.mts';
-import { sourceDigest, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
+import type { ProvenanceDocument } from './object-provenance.js';
+import { sourceDigest, sourceObject, sourcePath, sourceText } from '../sources/catalog.js';
 
 /** The last byte-verified preparation, independent of later metadata recovery. */
 export interface PreparationEvidence {

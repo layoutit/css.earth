@@ -1,7 +1,8 @@
-import type { SourceResolver } from '@cssearth/objects/sources';
-import { explorationArray, explorationId, explorationRecord, explorationText, explorationUrl, parseAgencies, parseExplorationCatalog } from './exploration-catalog.mts';
-import type { Agency } from './exploration-catalog.mts';
-import { parseContributionGraph } from './exploration-contributions.mts';
+import type { SourceResolver } from '../sources/catalog.js';
+import { explorationArray, explorationId, explorationRecord, explorationText, explorationUrl, parseAgencies, parseExplorationCatalog } from './exploration-catalog.js';
+import type { Agency } from './exploration-catalog.js';
+import { parseContributionGraph } from './exploration-contributions.js';
+import type { DatasetRoutes } from './dataset-routes.js';
 export interface ExplorationSubject { readonly left: number; readonly top: number; readonly width: number; readonly height: number; }
 export interface ExplorationImage { readonly id: string; readonly src: string; readonly width: number; readonly height: number; readonly bytes: number; readonly kind: string; readonly sourceUrl: string; readonly credit: string; readonly subject?: ExplorationSubject; }
 export function parseExplorationImage(raw: unknown): ExplorationImage {
@@ -20,7 +21,7 @@ export function parseExplorationImage(raw: unknown): ExplorationImage {
   })();
   return Object.freeze({ id: explorationId(image.id), src, width: number(image.width), height: number(image.height), bytes: number(image.bytes), kind: explorationText(image.kind), sourceUrl: explorationUrl(image.sourceUrl), credit: explorationText(image.credit), ...(subject ? { subject } : {}) });
 }
-export function parsePreparedExploration(input: unknown, sources: SourceResolver) {
+export function parsePreparedExploration(input: unknown, sources: SourceResolver, routes: DatasetRoutes) {
   const value = explorationRecord(input, ['schema', 'catalog', 'agencies', 'images', 'emblems', 'graph']);
   if (value.schema !== 'cssearth-prepared-exploration@3') throw new TypeError('Unsupported prepared exploration catalogue.');
   const agencies: Readonly<Record<string, Agency>> = parseAgencies(value.agencies);
@@ -33,5 +34,5 @@ export function parsePreparedExploration(input: unknown, sources: SourceResolver
   const images = assets(value.images), emblems = assets(value.emblems);
   for (const entity of [...catalog.facilities, ...catalog.missions]) if (entity.imageId && !Object.hasOwn(images, entity.imageId)) throw new TypeError('Unknown exploration image.');
   for (const mission of catalog.missions) if (mission.emblemId && !Object.hasOwn(emblems, mission.emblemId)) throw new TypeError('Unknown mission emblem.');
-  return Object.freeze({ catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog) });
+  return Object.freeze({ catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog, routes) });
 }

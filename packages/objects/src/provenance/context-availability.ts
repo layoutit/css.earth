@@ -1,4 +1,4 @@
-import { sourceObject, sourceId, sourceText } from '@cssearth/objects/sources';
+import { sourceObject, sourceId, sourceText } from '../sources/catalog.js';
 
 export type ContextAvailability = Readonly<Record<string,
   { available: true } | { available: false; reason: string }>>;

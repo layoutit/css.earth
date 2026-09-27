@@ -1,6 +1,6 @@
-import type { ContributionGraph } from '../src/platform/exploration-contributions.mts';
-import type { ExplorationCatalog } from '../src/platform/exploration-catalog.mts';
-import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
+import type { ContributionGraph } from '@cssearth/objects/provenance';
+import type { ExplorationCatalog } from '@cssearth/objects/provenance';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 
 const datasetFacilityLabels: Readonly<Record<string, string>> = Object.freeze({ vst: 'VLT' });
 

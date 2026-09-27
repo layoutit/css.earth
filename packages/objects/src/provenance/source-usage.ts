@@ -1,8 +1,8 @@
-import { productSourceIds, validateObjectProvenance } from './object-provenance.mts';
-import type { ProvenanceDocument } from './object-provenance.mts';
-import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '@cssearth/objects/sources';
-import type { SourceResolver, SourceReference } from '@cssearth/objects/sources';
-import { objectDataset, parseDatasetDestination, type DatasetHost } from './dataset-destination.mts';
+import { productSourceIds, validateObjectProvenance } from './object-provenance.js';
+import type { ProvenanceDocument } from './object-provenance.js';
+import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '../sources/catalog.js';
+import type { SourceResolver, SourceReference } from '../sources/catalog.js';
+import { objectDataset, type DatasetHost, type DatasetRoutes } from './dataset-routes.js';
 
 export type SourceUseKind = 'product-input' | 'method' | 'citation' | 'shared-context' | 'artwork';
 export interface SourceUse {
@@ -33,7 +33,7 @@ export function sourceUsageIndexes(edges: readonly SourceUse[]) {
 }
 const useKind = (role: SourceReference['role']): SourceUseKind => role === 'material' ? 'product-input' : role === 'reference' ? 'citation' : role;
 /** All source relationships come from bindings and existing product lineage, never mission participation or URL matching. */
-export function compileSourceUsage(objects: readonly SourceUsageObject[], sources: SourceResolver, metadata: readonly SourceUse[] = []): SourceUsage {
+export function compileSourceUsage(objects: readonly SourceUsageObject[], sources: SourceResolver, routes: DatasetRoutes, metadata: readonly SourceUse[] = []): SourceUsage {
   const edges: SourceUse[] = [], datasets: SourceDataset[] = [];
   sourceUnique(objects.map(object => object.id), 'usage object');
   for (const object of objects) {
@@ -68,19 +68,19 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
       }
     }
     for (const lens of object.controls) if (usedLenses.has(lens.id)) {
-      const dataset = objectDataset(object,lens);
+      const dataset = objectDataset(object,lens,routes.destination);
       if (!datasets.some(known => known.objectId === dataset.objectId && known.lensId === dataset.lensId)) datasets.push(Object.freeze(dataset));
     }
   }
   edges.push(...metadata);
-  return parseSourceUsage({edges,datasets,...sourceUsageIndexes(edges)},sources);
+  return parseSourceUsage({edges,datasets,...sourceUsageIndexes(edges)},sources,routes);
 }
-export function parseSourceUsage(raw: unknown, sources: SourceResolver): SourceUsage {
+export function parseSourceUsage(raw: unknown, sources: SourceResolver, routes: DatasetRoutes): SourceUsage {
   const value = sourceObject(raw,['edges','datasets','bySource','byObject']);
   const datasets = sourceArray(value.datasets,raw => {
     const dataset = sourceObject(raw,['objectId','objectName','lensId','label','href','host']), objectId = sourceId(dataset.objectId),lensId = sourceId(dataset.lensId);
     const host = dataset.host === undefined ? undefined : (raw => Object.freeze({objectId:sourceId(raw.objectId),lensId:sourceId(raw.lensId)}))(sourceObject(dataset.host,['objectId','lensId']));
-    const href = parseDatasetDestination(dataset.href,objectId,lensId,host);
+    const href = routes.parse(dataset.href,objectId,lensId,host);
     return Object.freeze({objectId,lensId,href,objectName:sourceText(dataset.objectName),label:sourceText(dataset.label),...(host === undefined ? {} : {host})});
   });
   const keys = datasets.map(dataset => sourceDatasetKey(dataset.objectId,dataset.lensId)); sourceUnique(keys,'dataset destination');

@@ -26,7 +26,7 @@ whose own shape is credited to a ground telescope.
 
 ## Authoring and validation
 
-[`exploration-catalog.mts`](../../src/platform/exploration-catalog.mts) validates
+[`exploration-catalog.ts`](../../packages/objects/src/provenance/exploration-catalog.ts) validates
 unknown input and returns immutable records. Names, descriptions, facility kinds, settings,
 agencies, dates and status claims carry citations to the
 [Sources catalogue](../sources-catalogue.md), with a checked date and a field or
@@ -112,7 +112,7 @@ may be prose and must not be manufactured into a URL. Source records retain the
 original archive and acquisition links; the Sources card uses the published
 citation URL.
 
-The [contribution compiler](../../src/platform/exploration-contributions.mts)
+The [contribution compiler](../../packages/objects/src/provenance/exploration-contributions.ts)
 walks the existing source/product lineage, including dependencies and parent
 products. Each edge retains its object, product, source, lens IDs and attribution.
 All forward and reverse indexes come from this one edge set. Dataset destinations

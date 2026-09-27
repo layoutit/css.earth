@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { explorationDate, parseAgencies, parseCapture, parseExplorationCatalog as parse, validateCapture } from './exploration-catalog.mts';
+import { explorationDate, parseAgencies, parseCapture, parseExplorationCatalog as parse, validateCapture } from '@cssearth/objects/provenance';
 const agencies = parseAgencies({ NASA: { name: 'NASA', sourceUrl: 'https://www.nasa.gov/' } });
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
 const sources = sourceResolver(parseSourceCatalog({schema:'cssearth-source-catalog@1',records:[{
