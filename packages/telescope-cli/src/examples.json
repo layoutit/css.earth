@@ -197,7 +197,7 @@
       "enlarge": 2,
       "product": {
         "command": "node packages/telescope-cli/src/archives/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi",
-        "definition": "tools/objects/chandra/programs/casa-acisi.json"
+        "definition": "packages/telescope-cli/src/archives/chandra/programs/casa-acisi.json"
       },
       "note": "Representative colour, not what an eye would see: the same event list split into a soft, a medium and a hard energy band, on one set of bins. One dot is one detected X-ray photon, so this is counts, not brightness, and the graininess is the photon statistics of a short exposure."
     },

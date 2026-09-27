@@ -40,7 +40,7 @@ export const OBJECT_RADIUS_DEGREES = 0.25;
 export interface ShippedObject { readonly id: string; readonly raDeg?: number; readonly decDeg?: number; readonly source: string }
 /** The archive's own names for a shipped Solar System body, which is caught by name and never by position. They are data beside the
  * programs, because this package names no body. */
-export const CHANDRA_MOVING_TARGETS = 'tools/objects/chandra/moving-targets.json';
+export const CHANDRA_MOVING_TARGETS = 'packages/telescope-cli/src/archives/chandra/moving-targets.json';
 export function chandraMovingTargets(path = resolve(REPOSITORY, CHANDRA_MOVING_TARGETS)): Readonly<Record<string, readonly string[]>> {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Chandra moving targets');
   if (record.schema !== 'cssearth-archive-moving-targets@1') throw new TypeError(`${path} is not an archive moving-target list.`);

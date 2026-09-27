@@ -43,9 +43,9 @@ import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts
 /** Horizons' observer code for the Chandra X-ray Observatory: site 500 (body centre) of body -151. Verified live. */
 export const CHANDRA_OBSERVER = '500@-151';
 /** Horizons' body number for each moving target this route knows, by the name the archive puts in OBJECT. They are data beside
- * the programs (`tools/objects/chandra/horizons-bodies.json`), because this package names no body, and are read when a target is
+ * the programs (`packages/telescope-cli/src/archives/chandra/horizons-bodies.json`), because this package's code names no body, and are read when a target is
  * frozen, not when the module loads. */
-export const CHANDRA_HORIZONS_BODIES = 'tools/objects/chandra/horizons-bodies.json';
+export const CHANDRA_HORIZONS_BODIES = 'packages/telescope-cli/src/archives/chandra/horizons-bodies.json';
 export async function chandraHorizonsBodies(path = resolve(WORKSPACE, CHANDRA_HORIZONS_BODIES)): Promise<Readonly<Record<string, string>>> {
   const record = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, 'Chandra Horizons bodies');
   if (record.schema !== 'cssearth-chandra-horizons-bodies@1') throw new TypeError(`${path} is not a Chandra Horizons body list.`);
@@ -224,7 +224,7 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
 
   const receipt = {
     schema: 'cssearth-chandra-solar-system@2', program: id, obsid, target: entry.targetName,
-    instrument: `${entry.instrument}/${entry.detector}`, toolchain: 'tools/objects/chandra/toolchain.json',
+    instrument: `${entry.instrument}/${entry.detector}`, toolchain: 'packages/telescope-cli/src/archives/chandra/toolchain.json',
     // Two runs, two environments: the one that reprocessed the level-2 list, and the one that froze the archive's list here.
     reprocessedWith: { ciao: made.ciao, caldb: made.caldb }, frozenWith: { ciao: froze.ciao, caldb: froze.caldb },
     productRecords: { objectCentred: relative(work, reproRecord), objectCentredFromArchive: relative(work, freezeRecord) },

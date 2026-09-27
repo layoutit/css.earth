@@ -7,7 +7,7 @@
       "kind": "repository",
       "identity": "../../telescope-families/chandra-events/acisf06431N003_evt2.fits.gz"
     },
-    "producingRecord": "tools/objects/chandra/programs/polaris-vfaint.acisf06431N003_evt2.reproduction.json",
+    "producingRecord": "packages/telescope-cli/src/archives/chandra/programs/polaris-vfaint.acisf06431N003_evt2.reproduction.json",
     "sourceClassifications": [
       {
         "term": "event-list",
