@@ -5,15 +5,16 @@ This document records a historical input experiment. The browser helpers under
 the `perf:trace` package command, last existed before
 [revision `6e32bc459b`](https://github.com/layoutit/css.earth/tree/6e32bc459b%5E).
 Commands below that name those helpers or `perf:trace` describe the original
-runs; they cannot be run from this checkout. The preparation tools under
-`tools/experiments/` still exist.
+runs; they cannot be run from this checkout. The previews and their launchers
+under `labs/experiments/` still exist, as do the trace analyses under
+`tools/experiments/`.
 
 The experiment used a native resize surface for rotation, inside a
 separate native scroll surface for zoom. Its retained Saturn scene was at
 `http://127.0.0.1:4352/saturn/?drag=resize`:
 
 ```sh
-node tools/experiments/native-scroll/run.mts http://127.0.0.1:4349 4352
+node labs/experiments/native-scroll/run.mts http://127.0.0.1:4349 4352
 ```
 
 The upstream shell must already be running. Drag anywhere in the exposed scene,
@@ -99,7 +100,7 @@ await build({ entryPoints: ['tests/experiments/native-scroll/camera-browser.mts'
   platform: 'node', format: 'esm', packages: 'external' });
 JS
 CSSEARTH_CHROME_LOG_STDIO=1 node output/native-scroll/camera-browser.mjs chromium
-pnpm --filter @cssearth/engine exec tsc -p ../../tools/experiments/native-scroll/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
 ```
 
 This is a local Saturn experiment, not a production camera replacement. The
@@ -133,7 +134,7 @@ The local study at `http://127.0.0.1:4351/` shows a drag area that controls a se
 orientation indicator without application JavaScript. Start it from the repo root:
 
 ```sh
-node tools/experiments/native-resize/run.mts
+node labs/experiments/native-resize/run.mts
 ```
 
 The browser stores a resize directly in the element's inline `width` and `height`.
@@ -187,7 +188,7 @@ CSS property for a resize hit target.
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/browser.mts
-pnpm --filter @cssearth/engine exec tsc -p ../../tools/experiments/native-resize/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
 ```
 
 The checks exercise five starting positions, one-pixel movement, repeated drags,

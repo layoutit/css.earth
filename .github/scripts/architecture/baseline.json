@@ -59,6 +59,8 @@
   "rules": {
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
+      {"from":"labs/experiments/native-scroll/context.mts","to":"site/prepared-navigation-markers.d.mts"},
+      {"from":"labs/experiments/native-scroll/preview.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts","to":"tools/objects/circumstellar/author.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/sources/sky-bands.ts","to":"tools/objects/observation/sky-band-composite.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/viewer/inspection-camera-renderer.ts","to":"site/runtime-policy.mts"},
@@ -68,8 +70,6 @@
       {"from":"tools/cli/preview.mts","to":"site/server/search-server.mts"},
       {"from":"tools/cli/run-implemented-objects.mts","to":"site/objects.mts"},
       {"from":"tools/contract/object-package-contract.mts","to":"site/object-page-contract.mts"},
-      {"from":"tools/experiments/native-scroll/context.mts","to":"site/prepared-navigation-markers.d.mts"},
-      {"from":"tools/experiments/native-scroll/preview.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"tools/objects/content/prepare.ts","to":"site/prepared-shell-titles.d.mts"},
       {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"tools/performance/ipad-journey.mts","to":"site/objects.mts"},
