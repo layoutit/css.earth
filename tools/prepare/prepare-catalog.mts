@@ -10,7 +10,7 @@ import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/n
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES } from '@cssearth/astronomy';
 import { assetOrigin } from '../../site/asset-origin.mts';
-import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../..');
 const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');

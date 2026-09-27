@@ -20,7 +20,7 @@ export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEv
 import cwebpPath from "cwebp-bin";
 import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../cli/run-implemented-objects.mts";
 import { PREPARATION_TRACE_VARIABLE, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from '@cssearth/bake/preparation';
-import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;

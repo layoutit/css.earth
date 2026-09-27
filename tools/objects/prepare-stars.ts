@@ -2,7 +2,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { prepareStarsObject as prepareStars } from '@cssearth/bake/stars';
-import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 /** The star preparation with this checkout's inventory of the published prepared closure. */
 export const prepareStarsObject = (options: { objectDirectory: string; outputDirectory?: string }) => prepareStars({ ...options, inventory: inventoryPreparedAssets });

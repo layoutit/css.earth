@@ -13,7 +13,7 @@ import {relative,resolve,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
-import {inventoryPublicAssets} from '../../../src/platform/runtime-asset-closure.mts';
+import {inventoryPublicAssets} from '@cssearth/objects/node';
 import {requirePreparedPresentation} from '@cssearth/bake/presentation';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '@cssearth/bake/presentation';
 import { withFocusedCamera } from '@cssearth/bake/objects/scene';

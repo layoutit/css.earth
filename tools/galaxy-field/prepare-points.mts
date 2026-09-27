@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import { sourceObject } from '@cssearth/objects/sources';
 import { readFieldRecipe } from './recipe.mts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';

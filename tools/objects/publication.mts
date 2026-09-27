@@ -1,6 +1,6 @@
 import { parseRuntimeManifest } from './runtime-assets.ts';
 import { sha256 } from '@cssearth/core/node';
-import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import type { RuntimeManifest } from './runtime-assets.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';

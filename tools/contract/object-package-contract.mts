@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import type { ObjectEntry } from '@cssearth/objects';
 import { authoredObject } from '@cssearth/bake/sources';
 
-import { validateInventory, requireInventory, verifyInventory } from "../../src/platform/runtime-asset-closure.mts";
+import { validateInventory, requireInventory, verifyInventory } from '@cssearth/objects/node';
 import {
   validateSourceManifest,
   verifySourceManifest,

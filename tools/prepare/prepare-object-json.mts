@@ -27,7 +27,7 @@ import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
-import { inventoryPreparedAssets, readInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;

@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
-import { inventoryText, readInventory, type InventoryAsset } from '../../../src/platform/runtime-asset-closure.mts';
+import { inventoryText, readInventory, type InventoryAsset } from '@cssearth/objects/node';
 import { inventoryAssets } from '../../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../../assets/setup.mts';
 import { writePreparedSet, type PreparedOutput } from '@cssearth/bake/delivery';

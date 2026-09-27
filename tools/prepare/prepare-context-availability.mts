@@ -9,7 +9,7 @@ import type { ContextAvailability } from '@cssearth/objects/provenance';
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 import { hasErrorCode } from '@cssearth/core';
-import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../..');
 type PublicAssetAvailability = 'local' | 'manifest';
