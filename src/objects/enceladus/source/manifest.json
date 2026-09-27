@@ -146,7 +146,7 @@
         "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
       ],
       "catalog": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
-      "acquisition": "Pinned dsk-mesh acquisition operation; explicit Python environment in tools/objects/acquisition/DSK-RESTORATION.md.",
+      "acquisition": "Pinned dsk-mesh acquisition operation; explicit Python environment in packages/bake/src/objects/acquisition/DSK-RESTORATION.md.",
       "redistribution": "Retain source model and SPICE credits with deterministic conversion provenance.",
       "id": "jpl-spc-enceladus-v2-q256",
       "consumers": [
@@ -501,7 +501,7 @@
         "vims-chemistry/evidence/license-about.html",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Reproduce from the checked-in original C/N cubes with tools/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
+      "acquisition": "Reproduce from the checked-in original C/N cubes with packages/bake/src/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
       "redistribution": "Small derived float32 GeoTIFF retained with original attribution and processing notice.",
       "consumers": [
         "ice-absorption"
@@ -548,7 +548,7 @@
         "vims-chemistry/evidence/license-about.html",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Reproduce from the checked-in original C/N cubes with tools/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
+      "acquisition": "Reproduce from the checked-in original C/N cubes with packages/bake/src/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
       "redistribution": "Small derived float32 GeoTIFF retained with original attribution and processing notice.",
       "consumers": [
         "infrared-ratio"

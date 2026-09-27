@@ -17,7 +17,7 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
-| Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../tools/objects/acquisition/geotiff-image.mts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
+| Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
@@ -163,7 +163,7 @@ source processing occurs in the browser.
 [readObservation](../packages/bake/src/objects/raster/observed/observation-raster.ts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
-and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
+and encoding. [Acquisition tools](../packages/bake/src/objects/acquisition/) handle
 instrument-specific calibration and geometry. The
 [surface-observation pipeline](../tools/objects/surface-observations/README.md)
 also fits and validates cameras and applies photometric corrections.
@@ -220,7 +220,7 @@ other than ICRS or FK5 and is checked against Astropy in both directions.
 | Sky images | A celestial image states RA along columns and Dec along rows, unprojected (SQUEEZE) or with one zenithal projection, through `CDELT`, `CD`, `PC` or `CROTA2`. The display raster puts north on the first row and east on the first column. Rotated, skewed or axis-swapped images, other projections, a `LONPOLE` other than 180 and a reference point on a pole are refused, since a flip cannot display them. |
 | Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
 | Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. Decoding alone does not qualify a camera or a registration; Kleopatra's `zimpol` lens adds that separately, by computing the camera from the release's own spin record and an ephemeris rather than from the frames' inherited world-coordinate solution, which describes an uncropped frame and not the product. |
-| MUSE acquisition | The existing [Python converter](../tools/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
+| MUSE acquisition | The existing [Python converter](../packages/bake/src/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
 
 Value cards support quoted strings (including slashes and doubled quotes),
 booleans, finite numbers with `D` or `E` exponents and undefined optional values.

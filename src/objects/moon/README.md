@@ -184,7 +184,7 @@ The exact product labels, original hash pins, compact numeric grids and conversi
 receipts live in `source/science/diviner-ghrm/`; candidate selection and independent
 checks are recorded in the [lunar thermal source review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/source-review/INDEPENDENT-SCIENCE-REVIEW.md).
 
-The [shared converter](../../../tools/objects/acquisition/diviner-ghrm.py) runs
+The [shared converter](../../../packages/bake/src/objects/acquisition/diviner-ghrm.py) runs
 each `prepare-*.json` in that source directory. Use its `--source-directory` and
 `--output-directory` options to reproduce the compact grid separately and compare
 it with the pinned output.
@@ -286,7 +286,7 @@ Residual viewing/topographic effects remain, especially above 50 degrees.
 The older 2011 PDS noon map was inspected and rejected for its sparse coverage.
 
 Exact bytes, coordinates and validity rules are in the intake plans and receipts.
-See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
+See the [mapped-science conversion method](../../../packages/bake/src/objects/acquisition/MAPPED-SCIENCE.md).
 
 </details>
 

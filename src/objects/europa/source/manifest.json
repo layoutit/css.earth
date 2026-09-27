@@ -1484,7 +1484,7 @@
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
         "https://pubs.usgs.gov/publication/sim3513"
       ],
-      "acquisition": "Checked-in compact lossless unit grid, reproduced by tools/objects/acquisition/geology-grid.py from pinned source shapefiles using geology/prepare-grid.json.",
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from pinned source shapefiles using geology/prepare-grid.json.",
       "redistribution": "Retain authors, scale and interpretation; palette colors are not observations.",
       "consumers": [
         "geology"
@@ -1526,7 +1526,7 @@
         "https://pds.nasa.gov/datastandards/citing/",
         "https://doi.org/10.17189/4sz4-5024"
       ],
-      "acquisition": "Checked-in compact derived RGB map. Reproduce with tools/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
+      "acquisition": "Checked-in compact derived RGB map. Reproduce with packages/bake/src/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
       "redistribution": "Credited derived scientific visualization; authored channel display stretches are documented.",
       "consumers": [
         "surfaces"
@@ -1878,7 +1878,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6034904"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -1903,7 +1903,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6034904"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -1928,7 +1928,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6034904"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -1953,7 +1953,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6034904"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -2003,7 +2003,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6034904"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"

@@ -170,7 +170,7 @@
         "https://zenodo.org/records/4558194",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Checked-in compact numeric grid. Reproduce using tools/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
+      "acquisition": "Checked-in compact numeric grid. Reproduce using packages/bake/src/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
       "redistribution": "Adapted under CC-BY-4.0; coordinate sampling and authored palette identified.",
       "consumers": [
         "lenses"
@@ -198,7 +198,7 @@
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
         "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
       ],
-      "acquisition": "Checked-in compact lossless unit grid, reproduced by tools/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
       "redistribution": "Retain authors, scale and interpretation; palette colors are not observations.",
       "consumers": [
         "lenses"
@@ -393,7 +393,7 @@
       "licenseEvidence": [
         "https://doi.org/10.25346/S6/LFAVXU"
       ],
-      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_m.json",
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_m.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
         "lenses"
@@ -450,7 +450,7 @@
       "licenseEvidence": [
         "https://doi.org/10.25346/S6/LFAVXU"
       ],
-      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_anom.json",
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_anom.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
         "lenses"
@@ -507,7 +507,7 @@
       "licenseEvidence": [
         "https://doi.org/10.25346/S6/LFAVXU"
       ],
-      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-ra_sam.json",
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-ra_sam.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
         "lenses"

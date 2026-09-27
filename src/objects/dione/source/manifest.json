@@ -668,7 +668,7 @@
         "https://doi.org/10.17189/ctqe-ta30",
         "https://pds.nasa.gov/datastandards/citing/"
       ],
-      "acquisition": "Checked-in compact map; reproduce with tools/objects/acquisition/cassini-vims.py source/vims/prepare-maps.json.",
+      "acquisition": "Checked-in compact map; reproduce with packages/bake/src/objects/acquisition/cassini-vims.py source/vims/prepare-maps.json.",
       "redistribution": "Derived display composite or continuum-relative absorption indicator; retain scientific limitations.",
       "consumers": [
         "surfaces"
@@ -713,7 +713,7 @@
         "https://doi.org/10.17189/ctqe-ta30",
         "https://pds.nasa.gov/datastandards/citing/"
       ],
-      "acquisition": "Checked-in compact map; reproduce with tools/objects/acquisition/cassini-vims.py source/vims/prepare-maps.json.",
+      "acquisition": "Checked-in compact map; reproduce with packages/bake/src/objects/acquisition/cassini-vims.py source/vims/prepare-maps.json.",
       "redistribution": "Derived display composite or continuum-relative absorption indicator; retain scientific limitations.",
       "consumers": [
         "ice-absorption"

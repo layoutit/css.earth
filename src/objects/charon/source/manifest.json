@@ -178,7 +178,7 @@
         "https://pds.nasa.gov/datastandards/citing/",
         "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
       ],
-      "acquisition": "Checked-in lossless GeoTIFF wrapper of nh_charon_bond.img; no resampling. Reproduce with tools/objects/acquisition/pds4-byte-geotiff.py and science/prepare-bond-map.json.",
+      "acquisition": "Checked-in lossless GeoTIFF wrapper of nh_charon_bond.img; no resampling. Reproduce with packages/bake/src/objects/acquisition/pds4-byte-geotiff.py and science/prepare-bond-map.json.",
       "redistribution": "Retain producer citation and photometric-model interpretation.",
       "consumers": [
         "bond-albedo"
