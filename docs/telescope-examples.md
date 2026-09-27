@@ -94,7 +94,7 @@ highest, and the cooler edges are the poles and the limb. The disc is 768 millia
 is 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. Be careful with the fine east-west streaks:
 they are about 2 K, which is the image noise at the beam scale, not surface features.
 
-`node tools/objects/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch`
+`node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch`
 
 ## VLTI, MATISSE: the surface of Betelgeuse
 
@@ -107,7 +107,7 @@ frequencies and the image is the one that fits them, so read the bright and dark
 rather than as resolved features. The toolkit convolved it with a 4 milliarcsecond beam, as interferometric images are
 shown; nothing further is smoothed here.
 
-`node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse`
+`node packages/telescope-cli/src/archives/interferometry/image-star.mts packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse`
 
 ## VLT, NACO: Ceres from the ground
 
