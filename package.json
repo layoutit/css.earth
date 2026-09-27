@@ -45,7 +45,7 @@
     "ipad:inspect": "node labs/performance/ios-capture.mts --inspect",
     "ipad:run": "node labs/performance/ipad-run.mts",
     "lab:nebula": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
-    "lint": "eslint packages labs tools src site .github/scripts",
+    "lint": "eslint packages labs tools src site .github/scripts tests/oracles",
     "lint:packages": "eslint packages --max-warnings 0",
     "postinstall": "node .github/scripts/ci/commit-message.mts --install && pnpm build:tools",
     "prebuild": "node tools/cli/run-script-chain.mts build:prepare",
