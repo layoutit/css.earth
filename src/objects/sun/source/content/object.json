@@ -54,7 +54,7 @@
     "controls": [
       {
         "id": "photosphere",
-        "label": "Photosphere",
+        "label": "Visible surface",
         "shortLabel": "Continuum",
         "thumbnail": "sun-lens-photosphere.webp",
         "surface": "sun-surface-photosphere@2x.webp",
@@ -167,7 +167,7 @@
       },
       {
         "id": "chromosphere",
-        "label": "Chromosphere",
+        "label": "Lower atmosphere",
         "shortLabel": "304 Å",
         "thumbnail": "sun-lens-chromosphere.webp",
         "surface": "sun-surface-chromosphere@2x.webp",
@@ -177,10 +177,10 @@
           "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
         },
         "falseColor": true,
-        "qualification": "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map",
+        "qualification": "False-color NASA SDO/AIA 304 Å CR2311 synoptic map with source gaps marked",
         "legend": {
           "kind": "scale",
-          "title": "Relative EUV intensity",
+          "title": "Ultraviolet brightness",
           "labels": [
             "Lower",
             "Higher"
@@ -208,10 +208,11 @@
               "Higher"
             ]
           },
-          "meta": "304 Å",
+          "meta": "304 Å · false color",
           "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
         },
-        "notes": "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
+        "notes": "AIA 304 Å observations from 12 May–9 June 2026, combined over Carrington Rotation 2311. Colors show detector counts on a logarithmic display scale, not temperature. Gray grid marks missing data; observed zero and negative samples remain at the dark end. No polar continuation or separate off-limb photograph is added.",
+        "noData": true
       },
       {
         "id": "corona",
@@ -225,10 +226,10 @@
           "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
         },
         "falseColor": true,
-        "qualification": "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map",
+        "qualification": "False-color NASA SDO/AIA 171 Å CR2311 synoptic map with source gaps marked",
         "legend": {
           "kind": "scale",
-          "title": "Relative EUV intensity",
+          "title": "Ultraviolet brightness",
           "labels": [
             "Lower",
             "Higher"
@@ -256,10 +257,70 @@
               "Higher"
             ]
           },
-          "meta": "171 Å",
+          "meta": "171 Å · false color",
           "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
         },
-        "notes": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
+        "notes": "AIA 171 Å observations from 12 May–9 June 2026, combined over Carrington Rotation 2311. Colors show detector counts on a logarithmic display scale, not temperature. Gray grid marks missing data; observed zero and negative samples remain at the dark end. No polar continuation or separate off-limb photograph is added.",
+        "step": {
+          "group": "corona-bands",
+          "label": "171 Å",
+          "autoplay": false
+        },
+        "noData": true
+      },
+      {
+        "id": "corona-193",
+        "label": "Corona",
+        "shortLabel": "193 Å",
+        "thumbnail": "sun-lens-corona-193.webp",
+        "surface": "sun-surface-corona-193@2x.webp",
+        "poles": "sun-poles-corona-193@2x.webp",
+        "source": {
+          "id": "sdo-aia-193-cr2311-synoptic-map",
+          "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
+        },
+        "falseColor": true,
+        "qualification": "False-color NASA SDO/AIA 193 Å CR2311 synoptic map with source gaps marked",
+        "legend": {
+          "kind": "scale",
+          "title": "Ultraviolet brightness",
+          "labels": [
+            "Lower",
+            "Higher"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                10,
+                3,
+                0
+              ],
+              [
+                175,
+                86,
+                45
+              ],
+              [
+                255,
+                238,
+                190
+              ]
+            ],
+            "labels": [
+              "Lower",
+              "Higher"
+            ]
+          },
+          "meta": "193 Å · false color",
+          "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
+        },
+        "notes": "AIA 193 Å observations from 12 May–9 June 2026, combined over Carrington Rotation 2311. Colors show detector counts on a logarithmic display scale, not temperature. Gray grid marks missing data; observed zero and negative samples remain at the dark end. No polar continuation or separate off-limb photograph is added.",
+        "step": {
+          "group": "corona-bands",
+          "label": "193 Å",
+          "autoplay": false
+        },
+        "noData": true
       },
       {
         "id": "cor1-density",
@@ -367,7 +428,8 @@
       "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
       "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",
       "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311",
-      "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization"
+      "cor1-density": "NASA STEREO-B/SECCHI COR1 CR2053 P1 electron-density reconstruction, archive μ=10 regularization",
+      "corona-193": "NASA SDO AIA 193 angstrom Carrington Rotation 2311"
     }
   }
 }

@@ -21,6 +21,8 @@ import it. Reading files, and writing the transport image as a `Buffer`, need No
 | `@cssearth/fits/node` | `readFitsFileHdus` (headers located on disk without reading data), `readFitsFileRegion` (one image rectangle, optionally through an open handle), `sha256FitsData` | as the byte reader, plus `FITS region outside image.` |
 | | `encodeFits`: top-down Float32 samples to a primary float32 FITS `Buffer`, the inverse of `decodeFits` | `TypeError`: `FITS metadata cannot override the transport layout.` … |
 
+A released `WAVELNTH` label with a numeric wavelength and plain ion names may omit its closing quote. The reader preserves its text and original card and reports a warning; unterminated structural values remain errors.
+
 Samples keep native FITS order (the first stored row first) except in the transport image, BSCALE and BZERO are applied,
 integer BLANK becomes NaN, and a floating-point image's BLANK card is ignored with a warning, as Astropy does. Decoded
 allocations are bounded (512 MiB by default), and headers are scanned for at most 256 records.

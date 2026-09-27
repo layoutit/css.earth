@@ -1058,6 +1058,35 @@
         "The COR1A archive path and release README identify COR1-A while the FITS OBSRVTRY card says STEREO_B; that contradictory card is retained as a limitation rather than used as telescope identity.",
         "F16 classification establishes source-declared physical spherical coordinates and electron-density units; it does not independently validate the tomography."
       ]
+    },
+    {
+      "id": "sdo-aia-193-cr2311-synoptic-map",
+      "telescope": "SDO",
+      "mode": "AIA/193 synoptic",
+      "kind": "image",
+      "archiveProductId": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0193/CR2311.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "sdo-aia-193-cr2311-synoptic-map",
+          "role": "science"
+        }
+      ],
+      "identity": {
+        "TELESCOP": "SDO/AIA_2",
+        "WAVELNTH": "193 = Fe XII, XXIV",
+        "CAR_ROT": 2311
+      },
+      "units": "counts / Pixel",
+      "meaning": "CR2311 193 angstrom intensity synoptic map.",
+      "citation": "https://sdo.gsfc.nasa.gov/data/synoptic/",
+      "limitations": [
+        "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
+        "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
+        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied.",
+        "The released WAVELNTH card lacks a closing quote. The reader accepts the label with a warning and retains the original card."
+      ],
+      "centralWavelengthMicrometres": 0.0193
     }
   ]
 }

@@ -11,11 +11,11 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 | View | Source | What it means |
 | --- | --- | --- |
-| Photosphere | JSOC SDO/HMI `hmi.Ic_noLimbDark_720s`, 28 frames of CR2311 | Strips near the centre of each day’s disc form a map; JSOC removed the limb darkening. Colours and polar coverage are display choices. |
+| Visible surface | JSOC SDO/HMI `hmi.Ic_noLimbDark_720s`, 28 frames of CR2311 | Strips near the centre of each day’s disc form a map; JSOC removed the limb darkening. Colours and polar coverage are display choices. |
 | Magnetic field | JSOC HMI, CR2311 | Magnetic field pointing into or out of the Sun, shown in false color. |
-| Chromosphere | SDO AIA 304 Å CR2311 FITS | Logarithmic intensity in false color. |
-| Corona | SDO AIA 171 Å CR2311 FITS | Logarithmic intensity in false color. |
-| Outside the disk | AIA browse images, 27 May 2026 | Separate stationary images behind the matching globe view; not rotating global maps. |
+| Lower atmosphere | SDO AIA 304 Å CR2311 FITS | Ultraviolet light from the chromosphere and transition region, shown in false color. |
+| Corona · 171 Å | SDO AIA 171 Å CR2311 FITS | Ultraviolet light from the quiet corona and upper transition region. |
+| Corona · 193 Å | SDO AIA 193 Å CR2311 FITS | A different band sensitive to coronal and hot flare plasma. The arrows switch between the two corona maps. |
 
 ### Solar System overview
 
@@ -38,7 +38,35 @@ satellite is targeted.
 
 ## Evidence
 
-Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
+Checked on 27 September 2026 at [`7e6e703528`](https://github.com/layoutit/css.earth/commit/7e6e703528dd56b27efc81ce33d346a88202fb4e).
+The [check record](evidence/aia-cr2311-20260927/checks.json) records the native-source restoration,
+FITS and preparation tests, and desktop/mobile arrow checks. Both arrows retain the mounted
+scene and camera. The [mobile capture](evidence/aia-cr2311-20260927/corona-193-mobile.png)
+shows the same dataset at 390 × 844, DPR 2. These are display checks, not a new scientific review.
+
+![The 193 Å corona view, with its source map and wavelength arrows](evidence/aia-cr2311-20260927/corona-193-desktop.png)
+
+All 798 inventoried files restored from R2 into an empty scene installation and matched their
+recorded byte counts and hashes. Total install size is 18,510,138 bytes, up from 17,562,761;
+the new 193 Å images account for 331,234 bytes. These are installed sizes, not production
+page-transfer measurements. FITS tests, focused source/selector tests, bake boundaries and
+preparation typechecks passed. Two wider checks skipped unrelated missing inputs: the
+`a0952p69` descriptor for all-object legends and a Charon LEISA cube for the FITS fixture
+inventory. No full application build or all-body suite is claimed.
+
+The 193 Å addition and AIA gap repair use the same CR2311 geometry and existing renderer.
+The [FITS map tests](../../../tools/objects/observation/fits-map.test.mts) check north/south
+pixel centres, preserved zero and negative values, floating-point BLANK handling, native
+byte anchors, common observation dates and transparent off-limb plates. The prior row
+rounding displaced nearest-neighbour samples by half a source pixel; centre-based flooring
+removes that displacement.
+
+NASA's 193 Å file has an unterminated WAVELNTH string. The shared FITS reader accepts only
+a numeric wavelength followed by a plain ion label for that keyword, reports a warning,
+and preserves the original card. Other unterminated strings still fail. The downloaded
+file and its image samples are unchanged.
+
+Photosphere and longitude review (measured on `main` at 11ac994699; unchanged continuum and magnetic recipes retain these results):
 
 - The old photosphere was built from daily browse JPEGs and sampled each day's
   disc on the wrong side of its central meridian between frames. With the
@@ -77,7 +105,7 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   same places. The [oracle table](../../../tools/oracles/README.md) lists the
   committed fixture.
 - [Unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/sun) and the
-  the shared browser conformance harness
+  shared browser conformance harness
   define the package checks. The [four-lens render](source/reference/rendered-lenses.png)
   of this version was inspected after the scene reported ready: active regions
   sit in the same places in every lens.
@@ -91,8 +119,8 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   leaves up to 89° plus a centre cap; the limb plate's rim alpha (≤ 0.68 for
   the FITS lenses, ≤ 0.36 for the continuum) does not cover it. A polar band
   extension of the shared geometry would remove it.
-- Unobserved poles and missing samples are continued from nearby values.
-- These filled areas and color choices must not be read as additional observations.
+- The visible-surface and magnetic-field maps still continue unobserved polar values. These filled areas are display approximations. The ultraviolet maps instead mark their missing samples with the shared gray grid.
+- Ultraviolet colors are display scales for detector counts, not temperature or calibrated radiance. Brightness should not be compared numerically between wavelength bands.
 - The Sun has no entry in the shared solar geometry tables; its presentation
   axis (7.25° tilt) and world frame are authored in
   `source/presentation/solar-system.json` and `source/navigation/universe.json`,
@@ -118,35 +146,36 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   spaced in sine latitude. Preparation resamples it to equal latitude, keeps
   its east-positive longitude axis and uses a declared bipolar
   blue-to-amber false-colour scale.
-- Chromosphere: NASA SDO AIA 304 Å CR2311 FITS synoptic map, 3,600 × 1,080,
+- Lower atmosphere: NASA SDO AIA 304 Å CR2311 FITS synoptic map, 3,600 × 1,080,
   east-positive longitude as stored, displayed in false color with a
   logarithmic intensity scale.
-- Corona: NASA SDO AIA 171 Å CR2311 FITS synoptic map, 3,600 × 1,080,
+- Corona: NASA SDO AIA 171 Å and 193 Å CR2311 FITS synoptic maps, each 3,600 × 1,080,
   east-positive longitude as stored, displayed in false color with a
   logarithmic intensity scale.
 
 CR2311 covers 2026-05-12 through 2026-06-09. A synoptic map combines central meridian
 observations across one solar rotation; it is a full-surface temporal map, not a simultaneous
-snapshot. Preparation fills only missing AIA samples from the nearest valid latitude in the
-same checked map.
+snapshot. The three AIA headers give the same TAI interval: 2026-05-12 21:56:01 through
+2026-06-09 02:57:22. Preparation preserves nonfinite AIA samples as gaps. Finite zero and
+negative samples stay dark; the invalid floating-point BLANK=1000 card does not erase
+measured values of 1000. No latitude or Fourier polar continuation is applied to these maps.
 
 Each surface declares its interpretation in the `science.synoptic` block of
 `source/preparation/raster.json`; the shared observation adapter decodes the
 source values and applies the colour transform before the raster lane packs the
 latitude bands, projects the poles and encodes the textures at both prepared
-densities. The legends in `source/content/object.json` name the same palette stops
+densities. The 193 Å display uses an authored brown-to-cream palette and a logarithmic
+10–1100 counts/pixel range; the existing 171 Å and 304 Å palettes and ranges are retained.
+The legends in `source/content/object.json` name the same palette stops
 as the raster recipe.
 
 The continuum frames and FITS maps are processed mission products. Strip assembly,
-resampling, missing-sample filling and color mapping are our additional steps; the textures are
+resampling, coverage marking and color mapping are our additional steps; the textures are
 display outputs.
 
-The pinned 2026-05-27 AIA browse images are separate, Earth-facing observations. AIA 304 and
-171 contribute prepared off-limb context only to their matching lenses. The photosphere
-off-limb asset is transparent.
-
-These plates are stationary and sit behind the globe; they are never presented as a rotating
-global surface.
+The 2026-05-27 AIA browse photographs remain recorded as historical inputs, but no longer
+supply off-limb context. All off-limb plates are transparent. The existing prepared rim
+plate remains a display treatment, not a reconstruction of the corona outside the disk.
 
 </details>
 
@@ -159,9 +188,9 @@ from the 512 × 256 polar sprite, for 450 visible surface elements in total. Cam
 change the visible source texels, and the body animation rotates actual global longitudes around
 the authored solar axis.
 
-Because all longitudes converge at a pole, preparation replaces the rows inside one latitude
-band of each pole with the Fourier continuation of the band boundary before packing. This is a
-display treatment, not another pole observation.
+The visible-surface and magnetic-field maps use Fourier continuation inside one latitude
+band of each pole before packing. This is a display treatment, not another pole observation.
+The three ultraviolet maps retain their source samples and mark missing coverage instead.
 
 Each lens also has one source-derived, antialiased 512-pixel limb asset. It covers only the
 outer edge to smooth the visible corners of the surface elements; its transparent center does
@@ -174,9 +203,9 @@ opens.
 
 ## Virtual Telescope API
 
-The [source observation declarations](source/observations.json) expose 31 existing manifest-pinned
-native products through `telescope:query`: 28 HMI continuum frames, the HMI radial-field map, and
-AIA 171/304 synoptic maps. No solar branch is required in the shared query or qualification code.
+The [source observation declarations](source/observations.json) expose 32 manifest-declared
+native disk-map inputs through `telescope:query`: 28 HMI continuum frames, the HMI radial-field map,
+and AIA 171/193/304 synoptic maps. The declarations also include a COR1-A density cube. No solar branch is required in the shared query or qualification code.
 
 ```sh
 node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \

@@ -28,23 +28,23 @@
   "datasets": {
     "photosphere": {
       "title": "HMI continuum mosaic CR2311",
-      "detail": "Continuum",
-      "summary": "Visible-light observations from May–June 2026, color-adjusted, with polar gaps filled."
+      "detail": "NASA SDO / HMI",
+      "summary": "Visible surface and sunspots, assembled from May–June 2026 observations. Orange is false color; polar gaps are filled."
     },
     "magnetic": {
       "title": "HMI radial magnetic field CR2311",
-      "detail": "Radial field",
-      "summary": "Radial magnetic field on a nonlinear scale, from May–June 2026 rather than one instant."
+      "detail": "NASA SDO / HMI",
+      "summary": "Magnetic field pointing into or out of the Sun, assembled from May–June 2026 observations."
     },
     "chromosphere": {
       "title": "AIA 304 Å synoptic map CR2311",
-      "detail": "304 Å",
-      "summary": "304 Å measurements from May–June 2026; gaps use nearby latitudes, and the outer image is from 27 May."
+      "detail": "NASA SDO / AIA",
+      "summary": "False-color 304 Å observations of the lower atmosphere, combined over 12 May–9 June 2026."
     },
     "corona": {
       "title": "AIA 171 Å synoptic map CR2311",
-      "detail": "171 Å",
-      "summary": "171 Å images of the corona from May–June 2026, with gaps filled from nearby latitudes."
+      "detail": "NASA SDO / AIA",
+      "summary": "A false-color mosaic of 171 Å ultraviolet light from the outer atmosphere, observed 12 May–9 June 2026."
     },
     "cor1-density": {
       "title": "COR1-B density CR2053 · μ=10",
@@ -58,6 +58,11 @@
           "checked": "2026-09-20"
         }
       ]
+    },
+    "corona-193": {
+      "title": "AIA 193 Å synoptic map CR2311",
+      "detail": "NASA SDO / AIA",
+      "summary": "193 Å measurements reveal structures in the outer atmosphere. False-color mosaic, 12 May–9 June 2026."
     }
   }
 }

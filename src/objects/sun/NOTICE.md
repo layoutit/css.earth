@@ -1,6 +1,8 @@
 # Sun adapter notices
 
 Solar imagery: NASA/SDO and the AIA, EVE, and HMI science teams.
+The 171 Å, 193 Å and 304 Å maps are NASA SDO Carrington Rotation 2311
+synoptic products. Their colors and missing-coverage grid are display transforms.
 Full-surface HMI field map: Joint Science Operations Center, Stanford
 University, `hmi.mrsynop_small_720s[2311]`.
 
