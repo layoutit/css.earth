@@ -7,7 +7,7 @@ import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/inde
 import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from './config.ts';
 import { raster, hashFile, outputName } from './io.ts';
 import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
-/** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (tools/objects/thread-pool.ts). */
+/** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */
 export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
 /** A body's published limb: its models and the overlay's reference colour (packages/bake/src/photometry/limb.ts). */
 export interface PreparedLimb { readonly law: LimbLaw; readonly reference: Channels<number>; readonly referenceSource: string; readonly polarToEquatorial: number }
@@ -48,7 +48,7 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     const pending = new Set<Promise<void>>();
     const fromBank = async (file: string) => {
         const source = resolve(bankDirectory!, file);
-        if (!existsSync(source)) throw new Error(`Lighting bank ${recipe.bank} has no ${file} under ${LIGHTING_BANK_ROOT}/${recipe.bank}; bake it: node tools/objects/dist/prepare-lighting-bank.js.`);
+        if (!existsSync(source)) throw new Error(`Lighting bank ${recipe.bank} has no ${file} under ${LIGHTING_BANK_ROOT}/${recipe.bank}; bake it: node packages/bake/cli/prepare-lighting-bank.mts.`);
         await copyFile(source, resolve(publicDirectory, file));
     };
     for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {

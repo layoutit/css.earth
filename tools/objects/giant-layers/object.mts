@@ -1,6 +1,6 @@
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { parse } from '@cssearth/core/schema';
-import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc } from '@cssearth/bake/objects/layers/giant';
+import { bandedGeometryRecipe, normalizedPresentationRecipe, layeredPresentationRecipe, parsePhotometricDiscRecipe, prepareGiantLayers, parseRadialLayerRecipe, rasterAnnularField, prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels, preparePhotometricDisc, prepareNormalizedDiscPresentation } from '@cssearth/bake/objects/layers/giant';
 import { parseEllipsoidMaterialRecipe } from './materials.mts';
 import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { parseObservedPolarRecipe } from '../giant-observations/index.mts';
@@ -10,15 +10,13 @@ import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
-import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
-import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
+import { withFocusedCamera } from '@cssearth/bake/objects/scene';
+import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
+import { requirePreparedPresentation } from '@cssearth/bake/presentation';
 import { prepareEllipsoidMaterials } from './materials.mts';
 import { prepareLayeredSurfacePresentation } from './presentation.mts';
-import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.mts';
 import { prepareObservedPolarSurfaces, polarImageProjection } from '../giant-observations/index.mts';
-import { withFocusedCamera } from '../focused-camera.mts';
 
 
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));

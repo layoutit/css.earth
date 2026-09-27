@@ -1,0 +1,474 @@
+{
+  "testedCommit": "61d1042b5e2acd7b7363fe8535bf4c5d1742c06d",
+  "integratedMain": "1e27dd478f4a3dec8ffea79d154bcd999475fe67",
+  "earlierEvidenceCommit": "57de6f3dc3808ae3d724702514e356d1a539996e",
+  "reuse": "All 69 previously audited runtime files are byte-identical. Main contributes two existing arrival files only. Source geometry, recipes, numeric results and the earlier screenshots retain their original version binding.",
+  "inventorySha256": "379dd1f679dcab9e36c5256bff3dd9ab62a321d5d74e86e7bcc34d76cd1dd918",
+  "mainFiles": 69,
+  "mainBytes": 28163769,
+  "files": 71,
+  "bytes": 52416035,
+  "addedByMain": [
+    {
+      "location": "public",
+      "filename": "comet-67p-arrival.webp",
+      "bytes": 43218,
+      "sha256": "fb8edd016ca06ea1271d670400794e6d36ef023aa5906e52e77891a002b0538a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "61756bc1c13a1a58618d6efc1fdd99d3ff2c69049f2eb39ad472f898b3e446d9"
+    }
+  ],
+  "restoration": {
+    "method": "Production setupAssets with --object=comet-67p into an empty mkdtemp destination, deriving transport/page/lineage after restoration. Inventory byte counts and SHA-256 are checked by the installer.",
+    "result": {
+      "installed": 71,
+      "reused": 0,
+      "skipped": 0
+    },
+    "bytes": 52416035,
+    "assets": [
+      {
+        "filename": "comet-67p-absorption-legend.webp",
+        "location": "public",
+        "bytes": 220,
+        "sha256": "7f6869cf781947a3360039e40e25b3a8d3f6f14460709001bfd814b183b02af3"
+      },
+      {
+        "filename": "comet-67p-absorption-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2248806,
+        "sha256": "6691468405de60023aab9323a1a86e8e5563c2b5ee3002341acac9fa96601367"
+      },
+      {
+        "filename": "comet-67p-absorption-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1782482,
+        "sha256": "144a92f25203bd3949808cab83ed822a1c7ee6acfae31a6bf5e11aed202124e4"
+      },
+      {
+        "filename": "comet-67p-absorption-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 1773906,
+        "sha256": "bc104982e880b470cc6df4eb320d1702a559b7b5efc3e9addf6fd22a88f8e0da"
+      },
+      {
+        "filename": "comet-67p-absorption-surface@2x.webp",
+        "location": "public",
+        "bytes": 1258990,
+        "sha256": "930f6fdd866ad4d3f89cd68772e6ba93d2fbba6d061cfc525d823e7a918463b3"
+      },
+      {
+        "filename": "comet-67p-absorption-thumbnail.webp",
+        "location": "public",
+        "bytes": 2498,
+        "sha256": "92fe181f449abd189dd35599e92f8ed38b96b12b08ce9d8dfb62a549cf42b3b6"
+      },
+      {
+        "filename": "comet-67p-albedo-legend.webp",
+        "location": "public",
+        "bytes": 208,
+        "sha256": "bf57462a321e2ca29ef669f03d2ef450673aaeeda32c6a7c0db2694eccab12f8"
+      },
+      {
+        "filename": "comet-67p-albedo-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2209802,
+        "sha256": "8bf5fe2193619a8575ba56cff5efc4d01bf6154752d42e39931866518bab420f"
+      },
+      {
+        "filename": "comet-67p-albedo-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1737340,
+        "sha256": "b05a4f303d88fa554fe55d26f0e50f85530c53113c96632f5053142ba9607715"
+      },
+      {
+        "filename": "comet-67p-albedo-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 1781504,
+        "sha256": "ce819ffab80a430078399fb2198c5f2538d01b374ef355d6d7959d5fd6d10908"
+      },
+      {
+        "filename": "comet-67p-albedo-surface@2x.webp",
+        "location": "public",
+        "bytes": 1263408,
+        "sha256": "fea0e7dab965eb298b2c68de63a4ccca6cc77fb9079f1615a204bb8e3f29174d"
+      },
+      {
+        "filename": "comet-67p-albedo-thumbnail.webp",
+        "location": "public",
+        "bytes": 2478,
+        "sha256": "ff4766623be76a3d909a369103f0c4b88192789565c32d7a5254d151b95a4bbc"
+      },
+      {
+        "filename": "comet-67p-arrival.webp",
+        "location": "public",
+        "bytes": 43218,
+        "sha256": "fb8edd016ca06ea1271d670400794e6d36ef023aa5906e52e77891a002b0538a"
+      },
+      {
+        "filename": "comet-67p-features.json",
+        "location": "public",
+        "bytes": 28611,
+        "sha256": "b8e93dbf7e429640da548af13e41a0fd5f077692019bdda97ff6cbac205a1bdf"
+      },
+      {
+        "filename": "comet-67p-geology-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2849724,
+        "sha256": "e13aa9db3df459609aea149015a7eb677c0b11e11c87da0e1f7bf1be7c712249"
+      },
+      {
+        "filename": "comet-67p-geology-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1774918,
+        "sha256": "96a40854ad75bb1a096729b740922a12abf5e5e1b71f3803b9e83b47b506491c"
+      },
+      {
+        "filename": "comet-67p-geology-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 1351964,
+        "sha256": "b651cf32a052f33f99508df39a7d99f8b6e81fc7176dc4111194d77b059b5fac"
+      },
+      {
+        "filename": "comet-67p-geology-surface@2x.webp",
+        "location": "public",
+        "bytes": 452304,
+        "sha256": "2e272fc768d6603a198b5244c69523ed58170e26ebd5f2f49d926e547b4ba4c5"
+      },
+      {
+        "filename": "comet-67p-geology-thumbnail.webp",
+        "location": "public",
+        "bytes": 328,
+        "sha256": "ef379162b6c6a06b9674c2fcb4aa3ff3c5f708317cefcde46a12926c7ac6c08e"
+      },
+      {
+        "filename": "comet-67p-ice-legend.webp",
+        "location": "public",
+        "bytes": 200,
+        "sha256": "4294d8248b9469a1d72002cc9ceed96741f206863c0b7166e82884741671f1b0"
+      },
+      {
+        "filename": "comet-67p-ice-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 1604240,
+        "sha256": "89b12dc8187cd687dac4a45819301df0b6fa919875aa464f77edd171fa1297f6"
+      },
+      {
+        "filename": "comet-67p-ice-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1202850,
+        "sha256": "3da847dd5b37bd511dd67d82c0e874f7d240e36e5eae836ee132707b2fb0a620"
+      },
+      {
+        "filename": "comet-67p-ice-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 926710,
+        "sha256": "4af7d89b2a9693c54e6c4f734ef16006cf871ae0be33ecfdad438c02faf55810"
+      },
+      {
+        "filename": "comet-67p-ice-surface@2x.webp",
+        "location": "public",
+        "bytes": 435980,
+        "sha256": "fa72121e6d4bf44e0c95426e43e11f37fa6ec8fadb7d66490e7ffc5e104048e1"
+      },
+      {
+        "filename": "comet-67p-ice-thumbnail.webp",
+        "location": "public",
+        "bytes": 2086,
+        "sha256": "327cd9f09016574c85915dc28664886a1902d7b7837d695f1aa56029b81f4e5d"
+      },
+      {
+        "filename": "comet-67p-model-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 342516,
+        "sha256": "368e9fa0287a97bbdb152f2dbc273db4276048e84f3afef0014ffbebf4ff1419"
+      },
+      {
+        "filename": "comet-67p-model-shadow@2x.webp",
+        "location": "public",
+        "bytes": 87508,
+        "sha256": "dd6cf57ead6fad96a964dbbbfd737d5f3da801a8db3e72e045595645b10e067d"
+      },
+      {
+        "filename": "comet-67p-model-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 332720,
+        "sha256": "127de0839d4a545f6ac71890a5c00d83372ce4433eae425668945a986546a9e3"
+      },
+      {
+        "filename": "comet-67p-model-surface@2x.webp",
+        "location": "public",
+        "bytes": 82816,
+        "sha256": "cc40f291084bf99499b3d0d1f76e91b85d055e30b038374d43d7dbbee248e88e"
+      },
+      {
+        "filename": "comet-67p-model-thumbnail.webp",
+        "location": "public",
+        "bytes": 44,
+        "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192"
+      },
+      {
+        "filename": "comet-67p-osiris-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2111806,
+        "sha256": "14189c3b9609404885feabdfea02419016a11c4a08160416d5ab428c8813c818"
+      },
+      {
+        "filename": "comet-67p-osiris-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1614626,
+        "sha256": "6468f32be04a500a5fdba5217bc03286582b73669ee98ae045a7e4bb24318053"
+      },
+      {
+        "filename": "comet-67p-osiris-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2621418,
+        "sha256": "8270a744e684050da5b9e81dfc6eb43210ecf49b8d38707450bb74123f13749b"
+      },
+      {
+        "filename": "comet-67p-osiris-surface@2x.webp",
+        "location": "public",
+        "bytes": 2176544,
+        "sha256": "c928b0aea8373f99f2ed4c76a65799f2a6a6b73267a2f07526b219366bc61f36"
+      },
+      {
+        "filename": "comet-67p-osiris-thumbnail.webp",
+        "location": "public",
+        "bytes": 1710,
+        "sha256": "588d4e6676b7ccb28432393d09ad14408a012746cf1315d346f58a6a2a7bee9c"
+      },
+      {
+        "filename": "comet-67p-regions-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2517846,
+        "sha256": "e643ac63e2e1001c5da777b5ad3a27f778aa80b438d5b2e981357d780b6a347a"
+      },
+      {
+        "filename": "comet-67p-regions-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1385694,
+        "sha256": "b473d1e52307cb8650b33d243d4bdecde58803cc7b7710e4135a8a4c98c5c24f"
+      },
+      {
+        "filename": "comet-67p-regions-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 1143324,
+        "sha256": "fcf8b7dc79edc304eefeb5d1002fee50de49ed95eaa8e64664360ffb84679a5c"
+      },
+      {
+        "filename": "comet-67p-regions-surface@2x.webp",
+        "location": "public",
+        "bytes": 59772,
+        "sha256": "5ea5cabf9aa83322ea7538efa1fe9d741e421151fb1d3eb6a2e29508c5cc95b8"
+      },
+      {
+        "filename": "comet-67p-regions-thumbnail.webp",
+        "location": "public",
+        "bytes": 312,
+        "sha256": "79ec60c8ee5038211ddfa4e4e1ff7176e922d6b3f7608f6fb6bbbb5c006f660f"
+      },
+      {
+        "filename": "comet-67p-slope-legend.webp",
+        "location": "public",
+        "bytes": 240,
+        "sha256": "09eb8e6b705d3e829685e2bd68d7e2c3845c7da879e3710bc289ba0d138cf262"
+      },
+      {
+        "filename": "comet-67p-slope-shadow-alpha@2x.webp",
+        "location": "public",
+        "bytes": 2032280,
+        "sha256": "870ede941875e10d765f787d6100111c2bc8068db16ba4ef18189637bf337945"
+      },
+      {
+        "filename": "comet-67p-slope-shadow@2x.webp",
+        "location": "public",
+        "bytes": 1646940,
+        "sha256": "33239ca4b8d89dd7ea6faf8db827dfcdf338dbd48b7c6262a3df124e2d10c58a"
+      },
+      {
+        "filename": "comet-67p-slope-surface-alpha@2x.webp",
+        "location": "public",
+        "bytes": 966166,
+        "sha256": "d29401447f1a8b62aab87362dd6bd6304828b61f8aa97da95dbfa9d2432a3553"
+      },
+      {
+        "filename": "comet-67p-slope-surface@2x.webp",
+        "location": "public",
+        "bytes": 492318,
+        "sha256": "7a6c9d589e6a961f0100db1509bd526853be551a108248af8bc4ac148318c60e"
+      },
+      {
+        "filename": "comet-67p-slope-thumbnail.webp",
+        "location": "public",
+        "bytes": 2558,
+        "sha256": "7c4f5564ea14b19267f86febe31c0271f34962d7897b193020f5626b1564cd2a"
+      },
+      {
+        "filename": "arrival-billboard.json",
+        "location": "prepared",
+        "bytes": 302,
+        "sha256": "61756bc1c13a1a58618d6efc1fdd99d3ff2c69049f2eb39ad472f898b3e446d9"
+      },
+      {
+        "filename": "assets.json",
+        "location": "prepared",
+        "bytes": 2108,
+        "sha256": "9f07a2f3442335b2d39ab83ddebc4c095c49e2504a81ed5356c12c86d65686a7"
+      },
+      {
+        "filename": "content.json",
+        "location": "prepared",
+        "bytes": 4131,
+        "sha256": "05b47eccbb54366d8cc585fe866c080cbdd5e6a6d54e39465ffef4e0b701457a"
+      },
+      {
+        "filename": "controls.json",
+        "location": "prepared",
+        "bytes": 5835,
+        "sha256": "083ea23a01aaa86d3746b5a1ef954f0fb54845473edce343983fb085ef47e28b"
+      },
+      {
+        "filename": "features.json",
+        "location": "prepared",
+        "bytes": 673,
+        "sha256": "e73704b781b67fd7cd8231fe234d6f7cfa631487f35d1355e7e47abfdb4f3b3c"
+      },
+      {
+        "filename": "lenses.json",
+        "location": "prepared",
+        "bytes": 9185,
+        "sha256": "d85a3dabb23fbb40383a607630699b956a2fbc97d63bbeced6ef86cf7a1a111c"
+      },
+      {
+        "filename": "material.json",
+        "location": "prepared",
+        "bytes": 261619,
+        "sha256": "a082088d50e4419784c2cf1afc610fa7342193b99a9179d91190f6d981556f0a"
+      },
+      {
+        "filename": "minimaps.json",
+        "location": "prepared",
+        "bytes": 513,
+        "sha256": "4109cdc7cbab470379ba0b8ab9929596a53dccb3604228c33b6bc6b9c357e651"
+      },
+      {
+        "filename": "minimaps/absorption.webp",
+        "location": "prepared",
+        "bytes": 16062,
+        "sha256": "01d2abdb6c3079503606cac5522e00c197d1420487a23070bc3f754ed3a3f079"
+      },
+      {
+        "filename": "minimaps/albedo.webp",
+        "location": "prepared",
+        "bytes": 12886,
+        "sha256": "bced56ec80bc77242dd0045a8105a620f4d4e897209b6d95241563616b535d6d"
+      },
+      {
+        "filename": "minimaps/geology.webp",
+        "location": "prepared",
+        "bytes": 10516,
+        "sha256": "16720edd35aaac9ed650eaa430920ed42863e460a318164087295919aefd98e7"
+      },
+      {
+        "filename": "minimaps/ice.webp",
+        "location": "prepared",
+        "bytes": 8276,
+        "sha256": "f0966dccbbb68648e55b27813aaf3d8996573943a8af88047764e1bbce11a152"
+      },
+      {
+        "filename": "minimaps/osiris.webp",
+        "location": "prepared",
+        "bytes": 2760,
+        "sha256": "74906a681ef83b74c9fe97732049e863b140998294ca73853c7ce72971172777"
+      },
+      {
+        "filename": "minimaps/regions.webp",
+        "location": "prepared",
+        "bytes": 5320,
+        "sha256": "80402926209059edf8d40e4b3ec98756d0a3ab8505490d49faea7ea3f7d2a989"
+      },
+      {
+        "filename": "minimaps/slope.webp",
+        "location": "prepared",
+        "bytes": 14340,
+        "sha256": "441f8806f5f99d0d6c8075704587f9f8aba58b3ab34e28da759f5f81df290572"
+      },
+      {
+        "filename": "runtime.json",
+        "location": "prepared",
+        "bytes": 3773850,
+        "sha256": "a9345d2f42a965cdb871616ce7102cd62e44cbe75ee424878a24e465813dc74b"
+      },
+      {
+        "filename": "scene.json",
+        "location": "prepared",
+        "bytes": 3664569,
+        "sha256": "6cc90f43b9c6c0afc4a9cb29c24f22c98a6813cfaec995216eb03d7edfaf884a"
+      },
+      {
+        "filename": "sky.json",
+        "location": "prepared",
+        "bytes": 1186,
+        "sha256": "c6c6c1d3e089aaf703d73fe99d35b29ff7c57838af55285c59f36f93103091db"
+      },
+      {
+        "filename": "source-lighting-albedo.json",
+        "location": "prepared",
+        "bytes": 410,
+        "sha256": "3a6675a32bae4b15c2c1262054e4852774a003228f6df15c66d1da4e452d8349"
+      },
+      {
+        "filename": "source-lighting-osiris.json",
+        "location": "prepared",
+        "bytes": 413,
+        "sha256": "d8243136e5e72ff90936794bbf63d437194b49c31ce83568cde4c25532298582"
+      },
+      {
+        "filename": "source-lighting.json",
+        "location": "prepared",
+        "bytes": 404,
+        "sha256": "36f04ebb4c8792ae75c0e8ac490b271f010f1f6a10ca692196efe9e9d105859a"
+      },
+      {
+        "filename": "sun.json",
+        "location": "prepared",
+        "bytes": 880,
+        "sha256": "721d28168966ea9c8d3962e1ece0d5277ac588e95ab9e162345f2c9105d73d85"
+      },
+      {
+        "filename": "surfaces.json",
+        "location": "prepared",
+        "bytes": 261626,
+        "sha256": "6e3778c1459acaf27c5919c63ab0b7c492f0c2bb09410d7616c126440fa799af"
+      },
+      {
+        "filename": "text.json",
+        "location": "prepared",
+        "bytes": 3014,
+        "sha256": "de4b388805cbc00f0202c8daa2b5995bbe11561f3b3870dc3f8bc5298576ed86"
+      },
+      {
+        "filename": "world-navigation.json",
+        "location": "prepared",
+        "bytes": 1224,
+        "sha256": "2bfe7cad50495c4c81c3c470bca6ce3453a64b7789578e7fae99296c96e61f71"
+      }
+    ]
+  },
+  "checks": {
+    "affectedTests": {
+      "passed": 53,
+      "skipped": 0
+    },
+    "bakeBoundaryTests": {
+      "passed": 5
+    },
+    "packageBuild": "passed",
+    "preparationBundle": "passed",
+    "typecheck": "passed"
+  }
+}

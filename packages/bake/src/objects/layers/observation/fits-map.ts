@@ -1,25 +1,29 @@
 import { readFitsPrimary } from '@cssearth/fits';
 import { clamp } from '@cssearth/core';
+import { missingCoverageColor, type MissingCoverageStyle } from '../../../raster/index.ts';
 /** Data-defined latitude/longitude/color mapping of a FITS observation map (moved from the retired static lane). Decoding
  * belongs to @cssearth/fits. */
 export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}
   | {kind: 'positive-log'; palette: readonly (readonly number[])[]; range: readonly [number, number]};
-export interface FitsMapRecipe {bitpix: number; width: number; height: number; latitude: 'sine-latitude' | 'equirectangular'; positiveOnly?: boolean; nearestLatitudeLimit: number; color: FitsColor;}
+export interface FitsMapRecipe {bitpix: number; width: number; height: number; latitude: 'sine-latitude' | 'equirectangular'; positiveOnly?: boolean; nearestLatitudeLimit: number; missingCoverage?: MissingCoverageStyle; color: FitsColor;}
 export function prepareFitsMap(bytes: Buffer, width: number, height: number, recipe: FitsMapRecipe) {
   const fits = readFitsPrimary(bytes);
   if (fits.bitpix !== recipe.bitpix || fits.width !== recipe.width || fits.height !== recipe.height) throw new Error('Pinned synoptic FITS geometry changed.');
   if (!['sine-latitude', 'equirectangular'].includes(recipe.latitude)) throw new TypeError('Unsupported synoptic latitude mapping.');
+  if (recipe.missingCoverage && recipe.nearestLatitudeLimit !== 0) throw new TypeError('Marked FITS gaps cannot use latitude continuation.');
   const output = Buffer.alloc(width * height * 4);
   for (let y = 0; y < height; y++) {
     const latitude = Math.PI / 2 - (y + 0.5) / height * Math.PI;
     const sourceY = recipe.latitude === 'sine-latitude'
       ? clamp(Math.round((Math.sin(latitude) + 1) / 2 * (fits.height - 1)), 0, fits.height - 1)
-      : clamp(Math.round((1 - (y + 0.5) / height) * fits.height), 0, fits.height - 1);
+      : clamp(Math.floor((1 - (y + 0.5) / height) * fits.height), 0, fits.height - 1);
     for (let x = 0; x < width; x++) {
       // Source columns run in increasing longitude, as the mesh places every atlas: east longitude grows from the left edge.
       const sourceX = modulo(Math.floor((x + 0.5) / width * fits.width), fits.width);
       const value = nearestValidValue(fits, sourceX, sourceY, recipe);
-      const color = scientificFalseColor(value, recipe.color);
+      const color = recipe.missingCoverage && !Number.isFinite(value)
+        ? missingCoverageColor((x + 0.5) / width * 360, latitude * 180 / Math.PI, 180 / height, recipe.missingCoverage)
+        : scientificFalseColor(value, recipe.color);
       const offset = (y * width + x) * 4;
       output.set(color, offset); output[offset + 3] = 255;
     }
@@ -53,6 +57,6 @@ function nearestValidValue(fits: ReturnType<typeof readFitsPrimary>, x: number, 
       if (valid(candidate)) return candidate;
     }
   }
-  return 0;
+  return Number.NaN;
 }
 const modulo = (value: number, divisor: number) => ((value % divisor) + divisor) % divisor;

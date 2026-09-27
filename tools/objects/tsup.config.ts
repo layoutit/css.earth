@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
 export default {
-  entry: ['restore-environment-images.ts', 'prepare-galaxy-catalog.ts', 'prepare-image-layers.ts', 'prepare-authored.ts', 'prepare-lighting-bank.ts', 'prepare-world-navigation.ts', 'prepare-spatial-context.ts', 'prepare-volume.ts', 'prepare-stars.ts', 'prepare-shell.ts', 'content/prepare.ts', 'operations.ts', 'operations-acquisition.ts', 'surface-features/attach.ts', 'surface-features/notes.ts', 'refresh-features.ts', 'refresh-sphere-photographs.mts', 'refresh-photographs.ts'].map(path => resolve(root, 'tools/objects', path)),
+  entry: ['prepare-galaxy-catalog.ts', 'prepare-authored.ts', 'prepare-world-navigation.ts', 'prepare-spatial-context.ts', 'prepare-volume.ts', 'prepare-stars.ts', 'prepare-shell.ts', 'content/prepare.ts', 'operations.ts', 'operations-acquisition.ts', 'surface-features/attach.ts', 'refresh-features.ts', 'refresh-photographs.ts'].map(path => resolve(root, 'tools/objects', path)),
   tsconfig: resolve(root, 'tools/objects/tsconfig.json'),
   format: ['esm'], target: 'node22', outDir: resolve(root, 'tools/objects/dist'), clean: true,
   splitting: false, sourcemap: false, dts: false,
@@ -12,5 +12,5 @@ export default {
   metafile: true,
   // `@cssearth/renderer` is bundled, as it was when it was relative modules: its source subpaths are TypeScript whose sibling
   // imports name `.js`, which Node cannot load unbundled.
-  external: ['@cssearth/astronomy', '@cssearth/bake', '@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@cssearth/spice', '@cssearth/telescope', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
+  external: ['@cssearth/astronomy', '@cssearth/bake', '@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@cssearth/spice', '@cssearth/telescope', '@cssearth/telescope-cli', 'sharp', '@layoutit/polycss', 'meshoptimizer', 'yaml'],
 };

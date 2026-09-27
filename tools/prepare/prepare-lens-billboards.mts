@@ -4,6 +4,7 @@
 // From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: the atlas draws it there,
 // and its megabytes of lenses are fetched only once it is large on screen. Inputs are the restored prepared
 // lens payloads; the output records each payload's pinned sha256 so a stale atlas cannot pass for a fresh one.
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -11,7 +12,7 @@ import sharp from 'sharp';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { presentPhysicalPoseInVolume } from '../../packages/engine/dist/index.js';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../..');
 const OUTPUT = { metadata: 'site/prepared-lens-billboards.json', atlas: 'site/prepared-lens-billboards.webp' };
@@ -95,4 +96,4 @@ export async function prepareLensBillboards(projectRoot = root) {
   return { banks: banks.length, billboards: drawn.length, atlasBytes: atlas.length };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) console.log(await prepareLensBillboards());
+refuseDirectRun(import.meta);

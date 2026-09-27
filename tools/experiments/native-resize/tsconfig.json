@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "include": [
-    "*.mts",
-    "../../../tests/experiments/native-resize/*.mts"
-  ],
-  "exclude": []
-}

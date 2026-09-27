@@ -1,6 +1,6 @@
 // Entry script: node tools/prepare/cli/prepare-facilities.mts [--catalog-only] [--restored-only]. The work is in ../prepare-facilities.mts.
 import { prepareFacilities } from '../prepare-facilities.mts';
-import { RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 
 const args = process.argv.slice(2);
 if (args.some(arg => arg !== '--catalog-only' && arg !== '--restored-only'))

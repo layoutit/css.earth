@@ -1,0 +1,59 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 819926
+    ^Core     = Lunar_Kaguya_MIMap_MineralDeconv_OrthopyroxenePercent_50N50S.tif
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 184320
+      Lines   = 51200
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+  End_Object
+
+  Group = Archive
+    DataSetId               = Kaguya_MIMap_MineralDeconv_OrthopyroxenePercent
+    ProducerInstitutionName = "Univ. of Hawaii; Japan Aerospace Exploration Agency"
+    ProducerId              = JAXA
+    ProducerFullName        = "Lemelin M., et al."
+    ProductId               = "MI Mineral Map"
+    ProductVersionId        = "May 2016"
+    InstrumentHostName      = "SELENE/Kaguya"
+    InstrumentName          = "Multiband Imager (MI)"
+    InstrumentId            = MI
+    TargetName              = Moon
+  End_Group
+
+  Group = Mapping
+    TargetName           = Moon_2000
+    EquatorialRadius     = 1737400.0 <meters>
+    PolarRadius          = 1737400.0 <meters>
+    LatitudeType         = Planetocentric
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 180
+    MinimumLatitude      = -50.0
+    MinimumLongitude     = -180.0
+    MaximumLatitude      = 50.0
+    MaximumLongitude     = 180.0
+    ProjectionName       = SimpleCylindrical
+    CenterLongitude      = 0.0
+    CenterLatitude       = 0.0
+    CenterLatitudeRadius = 1737400.0
+    UpperLeftCornerX     = -5458203.07634690683
+    UpperLeftCornerY     = 1516167.52120747417
+    PixelResolution      = 59.2252937971669553 <meters/pixel>
+    Scale                = 512.0 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1770             
+End_Object
+End

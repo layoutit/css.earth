@@ -1,8 +1,8 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 
 export interface PreparedContextProvenance {
   id: string; name: string; route: string; base: string; controls: readonly never[]; provenance: ProvenanceDocument;

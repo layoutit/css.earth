@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-astronomy-package-ownership@1",
   "pythonBoundary": "packages/telescope/src/node/astroquery.ts",
-  "catalogPreparationPythonBoundary": "tools/objects/telescopes/wwt/wwt-catalog-build.mts",
+  "catalogPreparationPythonBoundary": "packages/telescope-cli/src/wwt/wwt-catalog-build.mts",
   "owners": [
     {
       "mechanic": "IVOA TAP requests and VOTable decoding",
@@ -191,7 +191,7 @@
   "retained": [
     {
       "mechanic": "SPHERE pinned Horizons text tables",
-      "implementation": "tools/objects/sphere-horizons.mts",
+      "implementation": "packages/bake/cli/sphere-horizons.mts with packages/bake/src/objects/layers/terrestrial/registration/sphere-horizons.ts",
       "reason": "The checked products consume Horizons VEC_TABLE=1 text as a pinned input. Astroquery 0.4.11 exposes parsed vectors or VEC_TABLE=3 text; changing this route requires migrating the pinned artifact and every receipt together. The complete existing route remains in one implementation."
     },
     {
@@ -206,7 +206,7 @@
     },
     {
       "mechanic": "streaming FITS and in-process WCS reads",
-      "implementation": "packages/fits (@cssearth/fits and its node entry) and tools/objects/interferometry/fits-table.mts",
+      "implementation": "packages/fits (@cssearth/fits and its node entry) and packages/bake/src/objects/raster/fits/fits-table.ts",
       "reason": "Existing in-process consumers retain subregion streaming, including repeated reads through an already open file handle. A tracked STIS image region agrees byte for byte with Astropy 8.0.1's memmap section; that one small fixture does not establish large-file memory or throughput superiority. Astropy owns scientific metadata qualification through science.mts; these consumers do not implement that qualification contract."
     },
     {
@@ -216,7 +216,7 @@
     },
     {
       "mechanic": "Spitzer archive discovery and byte retrieval",
-      "implementation": "tools/objects/spitzer/archive.mts",
+      "implementation": "packages/telescope-cli/src/archives/spitzer/archive.mts",
       "reason": "Astroquery IRSA did not complete the live spitzer_sha SIA query used to qualify this route. The proven implementation remains whole."
     }
   ]

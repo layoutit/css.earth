@@ -183,7 +183,7 @@
       "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "camera-reference"
       ],
@@ -199,7 +199,7 @@
       "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "osiris-observation"
       ],
@@ -215,7 +215,7 @@
       "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "osiris-observation"
       ],
@@ -253,7 +253,7 @@
       "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "camera-reference"
       ],
@@ -361,7 +361,7 @@
       "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "camera-reference"
       ],
@@ -377,7 +377,7 @@
       "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "osiris-observation"
       ],

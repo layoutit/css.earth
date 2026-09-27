@@ -28,62 +28,62 @@
   "datasets": {
     "normal": {
       "title": "MDIM 2.1 colorized global mosaic",
-      "detail": "Global mosaic",
+      "detail": "Viking / NASA",
       "summary": "Viking images with NASA Ames color; lighting and resolution vary."
     },
     "elevation": {
-      "title": "MOLA global color shaded relief",
-      "detail": "Shaded relief",
-      "summary": "Colors show height and shading shows slopes; there is no numeric readout."
+      "title": "Height of mountains and basins",
+      "detail": "MGS MOLA",
+      "summary": "Laser measurements reveal Mars’s mountains and deep basins; colors show height relative to a gravity-based zero level."
     },
     "thermal": {
       "title": "THEMIS daytime infrared mosaic",
-      "detail": "Infrared",
+      "detail": "Odyssey THEMIS",
       "summary": "Daytime infrared brightness from combined observations. Black bands at the edges are missing coverage."
     },
     "water-equivalent": {
       "title": "Odyssey GRS water equivalent",
-      "detail": "5° bins · 2002–2005",
+      "detail": "Odyssey GRS",
       "summary": "Hydrogen expressed as equivalent water. Source gaps and negative estimates remain visible."
     },
     "chlorine": {
       "title": "Odyssey GRS chlorine",
-      "detail": "5° bins · 2002–2005",
-      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+      "detail": "Odyssey GRS",
+      "summary": "Chlorine is an element often found in salts; colors estimate its amount in the upper layer of Martian ground."
     },
     "iron": {
       "title": "Odyssey GRS iron",
-      "detail": "5° bins · 2002–2005",
-      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+      "detail": "Odyssey GRS",
+      "summary": "Iron is an ingredient of many rocks; colors estimate its amount in the upper layer of Martian ground."
     },
     "silicon": {
       "title": "Odyssey GRS silicon",
-      "detail": "5° bins · 2002–2005",
-      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+      "detail": "Odyssey GRS",
+      "summary": "Silicon occurs in most rock-forming minerals; colors estimate its amount in the upper layer of Martian ground."
     },
     "potassium": {
       "title": "Odyssey GRS potassium",
-      "detail": "5° bins · 2002–2005",
-      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+      "detail": "Odyssey GRS",
+      "summary": "Potassium occurs in some rock-forming minerals; colors estimate its amount in the upper layer of Martian ground."
     },
     "thorium": {
       "title": "Odyssey GRS thorium",
-      "detail": "5° bins · 2002–2005",
-      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+      "detail": "Odyssey GRS",
+      "summary": "Thorium is a naturally radioactive element in rocks; colors estimate its amount in the upper layer of Martian ground."
     },
     "geology": {
       "title": "USGS SIM 3292 geologic units",
-      "detail": "USGS SIM 3292 · 2014",
+      "detail": "USGS",
       "summary": "Forty-four interpreted geologic units in the published map colours."
     },
     "magnetic": {
       "title": "Langlais 2019 radial field",
-      "detail": "Langlais 2019 · surface",
+      "detail": "Langlais et al. (2019)",
       "summary": "Radial crustal field inferred from MGS and MAVEN. Features smaller than about 160 km are unresolved."
     },
     "crust": {
       "title": "Wieczorek 2022 crust model",
-      "detail": "InSight-tied model · Fig. 2",
+      "detail": "Wieczorek et al. (2022)",
       "summary": "Model with 39 km beneath InSight and uniform crust density; one published example."
     }
   }

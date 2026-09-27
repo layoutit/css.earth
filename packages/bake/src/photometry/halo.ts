@@ -1,7 +1,7 @@
 /**
  * A planet's limb halo from one NASA Planetary Spectrum Generator profile: the radiance of a tangent line of sight at
  * each altitude with the Sun behind the observer, divided by the radiance of the disc centre under an overhead Sun from
- * the same model. The profile is computed once (tools/photometry/acquire-psg-limb-table.mts) and serves every lighting
+ * the same model. The profile is computed once (packages/bake/cli/acquire-psg-limb-table.mts) and serves every lighting
  * frame: a frame draws it where the tangent point faces the Sun and leaves the night side dark. PSG computes limb paths
  * with single scattering only and needs the Sun one degree above the tangent point's horizon, so multiply scattered
  * light and the brighter forward scattering of a backlit limb are not in the profile; the body README says so.

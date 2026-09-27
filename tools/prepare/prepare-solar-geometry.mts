@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { cross3 as cross, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 // Computes, for each body, the direction to the Sun, the J2000 ecliptic
@@ -25,335 +26,337 @@ import { cross3 as cross, requireArray, requireRecord, requireString } from '@cs
 // cssEarth builds this combined module locally; it is not committed.
 
 import type { BodyId, SceneSatelliteRecord, RotationElements } from "@cssearth/astronomy";
-import { readJsonSource } from "../sources/source-values.mts";
+import { readJsonSource } from "@cssearth/bake/objects/sources";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { loadAstronomyPackage } from "./astronomy/astronomy-package.mts";
 import { loadSceneEpochEphemeris } from "../../packages/astronomy/tools/scene-ephemeris.mts";
+import { readPreparedObjects } from "@cssearth/objects/node";
 
-// 2026-09-03T00:00:00 TT.
-const EPOCH_JD_TT = 2461286.5;
-const EPOCH_LABEL = "2026-09-03T00:00:00 TT";
-const sourceKey = (id: string) => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
+/** Write src/platform/solar-geometry.mts for the registered bodies at the pinned scene epoch and print each body's geometry. */
+export async function prepareSolarGeometry() {
+  // 2026-09-03T00:00:00 TT.
+  const EPOCH_JD_TT = 2461286.5;
+  const EPOCH_LABEL = "2026-09-03T00:00:00 TT";
+  const sourceKey = (id: string) => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
 
-function isIncluded<T extends string>(values: readonly T[], value: string): value is T { return (values as readonly string[]).includes(value); }
+  function isIncluded<T extends string>(values: readonly T[], value: string): value is T { return (values as readonly string[]).includes(value); }
 
-const {
-  DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
-  SMALL_BODY_IDS, asteroidElements,
-  COMET_IDS, cometElements,
-  STAR_IDS, starAstrometry, starStateKm,
-  HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedPlanetStateAboutCentreKm, hostedOrbitCentreStateKm, hostedBarycentreCompanion, hostedOrbitCentreId, hostedOrbit, hostedKeplerElements,
-  SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToParentKm,
-  SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
-  bodyRotationAt, ROTATING_BODY_IDS,
-  bodyFixedToIcrf,
-  OBLIQUITY_J2000_RAD,
-  BODIES: ASTRONOMY_BODY_DATA,
-} = await loadAstronomyPackage();
+  const {
+    DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
+    SMALL_BODY_IDS, asteroidElements,
+    COMET_IDS, cometElements,
+    STAR_IDS, starAstrometry, starStateKm,
+    HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedPlanetStateAboutCentreKm, hostedOrbitCentreStateKm, hostedBarycentreCompanion, hostedOrbitCentreId, hostedOrbit, hostedKeplerElements,
+    SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToParentKm,
+    SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
+    bodyRotationAt, ROTATING_BODY_IDS,
+    bodyFixedToIcrf,
+    OBLIQUITY_J2000_RAD,
+    BODIES: ASTRONOMY_BODY_DATA,
+  } = await loadAstronomyPackage();
 
-// A star other than the Sun is placed by its catalogue astrometry; the Sun itself is the origin and has no entry.
-const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
-// A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
-const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
-const PACKAGED = SCENE_OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
-  ((body.classification === "star" || body.classification === "black-hole") && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
-  if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
-  return body.id as BodyId;
-});
-// A star on a hosted orbit around a packaged placed host is drawn from its astronomy record without a package of its own.
-const RECORD_ONLY_HOSTED = (HOSTED_PLANET_IDS as readonly string[]).filter(id => !PACKAGED.includes(id as BodyId) &&
-  PACKAGED.includes((ASTRONOMY_BODY_DATA as Record<string, { parent: string | null }>)[id]!.parent as BodyId)) as BodyId[];
-const BODIES = [...PACKAGED, ...RECORD_ONLY_HOSTED];
-
-// The J2000 ecliptic north pole in ICRF: the ICRF +z axis tilted by the
-// obliquity about +x.
-const ECLIPTIC_NORTH_ICRF = Object.freeze([
-  0,
-  -Math.sin(OBLIQUITY_J2000_RAD),
-  Math.cos(OBLIQUITY_J2000_RAD),
-]);
-
-// IAU 2012 exact definition (Resolution B2).
-const ASTRONOMICAL_UNIT_KILOMETERS = 149597870.7;
-
-// Gaussian gravitational constant k, historically used to define the
-// astronomical system of units: GM_sun = k^2 in AU^3/day^2 by construction
-// (Gauss, 1809; still the IAU-adopted value). The astronomy build exports the
-// Sun's GM in km^3/s^2 instead (BODIES.sun.gravitationalParameterKm3PerS2 =
-// 132712440041.93938, JPL Horizons), which is not already in AU^3/day^2; but
-// converting it with the IAU 2012 AU (149597870.7 km) reproduces k^2 to
-// better than 1e-15 relative, so there is no "better" value to switch to and
-// k^2 is used directly below.
-const GAUSSIAN_GRAVITATIONAL_CONSTANT = 0.01720209895;
-const GM_SUN_AU3_PER_DAY2 = GAUSSIAN_GRAVITATIONAL_CONSTANT ** 2;
-
-// Confirms the claim above instead of merely asserting it in prose: convert
-// the build's own Sun GM into AU^3/day^2 and check it against k^2.
-{
-  const SECONDS_PER_DAY_LOCAL = 86400;
-  const gmSunFromBuild = ASTRONOMY_BODY_DATA.sun.gravitationalParameterKm3PerS2 *
-    SECONDS_PER_DAY_LOCAL ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3;
-  const relativeDifference =
-    Math.abs(gmSunFromBuild - GM_SUN_AU3_PER_DAY2) / GM_SUN_AU3_PER_DAY2;
-  if (relativeDifference > 1e-12) {
-    throw new Error(
-      `Gaussian k^2 (${GM_SUN_AU3_PER_DAY2}) disagrees with the astronomy ` +
-        `build's Sun GM converted to AU^3/day^2 (${gmSunFromBuild}) by ` +
-        `${relativeDifference}; re-derive GM_SUN_AU3_PER_DAY2 from the build.`,
-    );
-  }
-}
-
-// Object-owned orientation sources distinguish observed poles from display axes.
-// A record-only star has no package and no measured spin: the display orientation new-hosted-planet writes for an unmeasured
-// rotation, an axis along its hosted orbit's normal with the meridian at 90 degrees and no spin.
-const recordOnlyRotation = (id: BodyId): RotationElements => {
-  const parent = (ASTRONOMY_BODY_DATA as Record<string, { parent: string | null; meanRadiusKm: number }>)[id]!.parent!;
-  const elements = hostedKeplerElements(hostedOrbit(id as never), starAstrometry(parent as never), (ASTRONOMY_BODY_DATA as Record<string, { meanRadiusKm: number }>)[parent]!.meanRadiusKm);
-  const normal = [Math.sin(elements.inclinationRad) * Math.sin(elements.ascendingNodeRad), -Math.sin(elements.inclinationRad) * Math.cos(elements.ascendingNodeRad), Math.cos(elements.inclinationRad)];
-  return { poleRightAscensionRad: (Math.atan2(normal[1]!, normal[0]!) + 2 * Math.PI) % (2 * Math.PI), poleDeclinationRad: Math.asin(normal[2]!), primeMeridianRad: Math.PI / 2, spinRateRadPerDay: 0 };
-};
-const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
-  if (RECORD_ONLY_HOSTED.includes(id)) return [id, recordOnlyRotation(id)];
-  const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
-  const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
-  const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
-  if (!ref) return [id, null];
-  const { readAuthoredRotation } = await import('@cssearth/bake/objects/scene');
-  return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path) }, EPOCH_JD_TT)];
-})));
-const rotationAtEpoch = (id: BodyId): RotationElements => {
-  const authored = authoredRotations.get(id);
-  if (authored) return authored;
-  if (!isIncluded(ROTATING_BODY_IDS, id)) throw new Error(`no IAU rotation model for body: ${id}`);
-  return bodyRotationAt(id, EPOCH_JD_TT);
-};
-
-type EpochState = { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; centerBodyId: string; provenance: unknown; parentHeliocentricState?: SceneSatelliteRecord["parentHeliocentricState"]; gravitationalParametersKm3PerS2?: SceneSatelliteRecord["gravitationalParametersKm3PerS2"] };
-const epochStates = new Map<string, EpochState>(await loadSceneEpochEphemeris(EPOCH_JD_TT));
-for (const id of SCENE_SATELLITE_IDS) epochStates.set(id, sceneSatelliteStateKm(id, EPOCH_JD_TT));
-// A primary-specific satellite solution owns ONE heliocentric primary state
-// at this epoch. Every observer and the global context must use that same
-// origin; mixing it with an older parent conic breaks the physical hierarchy.
-const primaryStates = new Map<string, Pick<EpochState, "positionKm" | "velocityKmPerDay"> & { provenance?: unknown }>(
-  [...epochStates].filter(([, state]) => state.centerBodyId === "sun"));
-for (const state of epochStates.values()) {
-  if (!state.parentHeliocentricState) continue;
-  const primary = state.parentHeliocentricState;
-  const previous = primaryStates.get(state.centerBodyId);
-  if (previous && (['positionKm', 'velocityKmPerDay'] as const).some(key =>
-    primary[key].some((value, axis) => value !== previous[key][axis]))) {
-    throw new TypeError(`Incompatible primary states for ${state.centerBodyId}.`);
-  }
-  primaryStates.set(state.centerBodyId, primary);
-}
-const primaryState = (id: string) => {
-  const state = primaryStates.get(id);
-  if (!state) throw new TypeError(`No retained heliocentric state for ${id}.`);
-  return state;
-};
-const primaryPosition = (id: string) => primaryState(id).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
-const primaryVelocity = (id: string) => primaryState(id).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
-
-const entries = BODIES.map((body) => {
-  const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body), hosted = isHostedPlanet(body);
-  const hostedState = hosted ? hostedPlanetStateRelativeKm(body as Parameters<typeof hostedPlanetStateRelativeKm>[0], EPOCH_JD_TT) : null;
-  // A circumbinary orbit is drawn about the centre of mass of its host and companion: its own state about that centre, the
-  // three masses, and the centre placed off the host.
-  const companion = hosted ? hostedBarycentreCompanion(body as Parameters<typeof hostedBarycentreCompanion>[0]) : null;
-  const orbitCentreKm = companion ? hostedOrbitCentreStateKm(body as Parameters<typeof hostedOrbitCentreStateKm>[0], EPOCH_JD_TT).positionKm : null;
-  const hostedOrbitState = companion ? hostedPlanetStateAboutCentreKm(body as Parameters<typeof hostedPlanetStateAboutCentreKm>[0], EPOCH_JD_TT) : hostedState;
-  if (parent === null && !star) throw new TypeError(`Solar geometry requires an orbital parent for ${body}.`);
-  const isSatellite = parent !== null && parent !== "sun";
-  const epochState = isSatellite ? epochStates.get(body) : null;
-  if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
-  const moonPosition = hostedOrbitState ? hostedOrbitState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToParentKm(body, EPOCH_JD_TT) : null;
-  // ELP supplies the Earth's Moon position; take its centred derivative.
-  // Other satellite records already expose their analytic Kepler velocity.
-  const dt = 0.001;
-  const moonVelocity = !isSatellite ? null : hostedOrbitState ? hostedOrbitState.velocityKmPerDay : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
-    ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
-    : moonPositionRelativeToParentKm(body, EPOCH_JD_TT + dt).map((value, index) =>
-      (value - moonPositionRelativeToParentKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
-  const parentPosition = !isSatellite ? null : isSatellite
-    ? hostedState ? starStateKm(parent as Parameters<typeof starStateKm>[0], EPOCH_JD_TT).positionKm.map((value, axis) => (value + (orbitCentreKm?.[axis] ?? 0)) / ASTRONOMICAL_UNIT_KILOMETERS)
-      : primaryStates.has(parent)
-      ? primaryStates.get(parent)!.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-      : isIncluded(DWARF_PLANET_IDS, parent)
-      ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-      : isIncluded(SMALL_BODY_IDS, parent)
-      ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-      : primaryPosition(parent) : null;
-  // A hosted orbit is a published ellipse propagated at its measured period, not at the masses: its drawn orbit uses the
-  // gravitational parameter that ellipse implies, n^2 a^3, so the path drawn is the path the body moves on. Masses and a
-  // measured period disagree by up to a fifth of the axis (Kepler-186 f), and a circumbinary mean period differs from the
-  // osculating axis by design.
-  const hostedElements = hosted ? hostedKeplerElements(hostedOrbit(body as never), starAstrometry(parent as never),
-    (ASTRONOMY_BODY_DATA as Record<string, { meanRadiusKm: number }>)[parent!]!.meanRadiusKm) : null;
-  const mu = hostedElements
-    ? hostedElements.meanMotionRadPerDay ** 2 * (hostedElements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS) ** 3
-    : isSatellite
-    ? (epochState?.gravitationalParametersKm3PerS2?.combined ?? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
-       ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2)) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
-    : GM_SUN_AU3_PER_DAY2;
-  const kepler = isIncluded(DWARF_PLANET_IDS, body)
-    ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
-    : isIncluded(SMALL_BODY_IDS, body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
-    : isIncluded(COMET_IDS, body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
-  // A placed star: its catalogue position carried by its space velocity, in the same heliocentric ICRF frame.
-  const starState = star ? starStateKm(body as Parameters<typeof starStateKm>[0], EPOCH_JD_TT) : null;
-  const heliocentricAu = starState ? starState.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
-    ? parentPosition!.map((value, index) => value + moonPosition![index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
-    ? (primaryStates.get(body) ?? kepler).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-    : primaryPosition(body);
-  const velocityAuPerDay = starState ? starState.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
-    ? moonVelocity!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
-    ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-    : primaryVelocity(body);
-  const orbitPositionAu = isSatellite ? moonPosition!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
-  // Every body keeps its true Sun direction: the world context rebuilds heliocentric positions from it. A hosted planet's own
-  // light source is its host star, which its synchronous rotation record faces at longitude 0; its map is emissive.
-  const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
-  const orbitNormalIcrf = normalize(cross(orbitPositionAu, velocityAuPerDay));
-  const velocityIcrf = normalize(velocityAuPerDay);
-  // Columns of bodyFixedToIcrf are the body axes in ICRF, so its transpose
-  // takes an ICRF direction into the body-fixed frame.
-  const matrix = bodyFixedToIcrf(rotationAtEpoch(body));
-  const toBodyFixed = (icrf: readonly number[]) => normalize([
-    matrix[0] * icrf[0] + matrix[3] * icrf[1] + matrix[6] * icrf[2],
-    matrix[1] * icrf[0] + matrix[4] * icrf[1] + matrix[7] * icrf[2],
-    matrix[2] * icrf[0] + matrix[5] * icrf[1] + matrix[8] * icrf[2],
-  ]);
-  const bodyFixed = toBodyFixed(toSunIcrf);
-  // A placed star may put its own display axis up instead of the ecliptic pole: the camera orbit then lies in the star's
-  // equator, where its sub-Earth point is, instead of a plane the Earth may sit far outside of.
-  // A hosted planet's orbit plane has nothing to do with the Solar System's ecliptic; its own pole (the orbit normal) is up.
-  const eclipticNorth = hosted || star && starAstrometry(body as Parameters<typeof starAstrometry>[0]).presentationUp === 'display-axis' ? [0, 0, 1] : toBodyFixed(ECLIPTIC_NORTH_ICRF);
-  const orbitNormal = toBodyFixed(orbitNormalIcrf);
-  const orbitalVelocity = toBodyFixed(velocityIcrf);
-  const elements = rotationAtEpoch(body);
-  const orbitInclinationDegrees = Math.acos(dot(orbitNormalIcrf, ECLIPTIC_NORTH_ICRF)) *
-    180 / Math.PI;
-
-  // Heliocentric orbit from the vis-viva relation and the eccentricity
-  // vector, both derived from the state vector alone (no orbital elements
-  // used as input): a = 1 / (2/r - v^2/mu), e_vec = ((v^2 - mu/r) r -
-  // (r.v) v) / mu. See https://en.wikipedia.org/wiki/Orbital_eccentricity
-  // and https://en.wikipedia.org/wiki/Vis-viva_equation.
-  const heliocentricDistanceAu = Math.hypot(...heliocentricAu);
-  const orbitDistanceAu = Math.hypot(...orbitPositionAu);
-  const speedSquared = dot(velocityAuPerDay, velocityAuPerDay);
-  const semiMajorAxisAu = 1 /
-    (2 / orbitDistanceAu - speedSquared / mu);
-  const radialSpeed = dot(orbitPositionAu, velocityAuPerDay);
-  const eccentricityVectorIcrf = orbitPositionAu.map((component, index) =>
-    ((speedSquared - mu / orbitDistanceAu) *
-      component - radialSpeed * velocityAuPerDay[index]) / mu
-  );
-  const eccentricity = Math.hypot(...eccentricityVectorIcrf);
-  const radialDirectionIcrf = normalize(orbitPositionAu);
-  // An exactly circular orbit (a hosted orbit drawn at the gravitational parameter its own ellipse implies) has no
-  // perihelion; it is measured from the body's own direction, true anomaly 0.
-  const perihelionDirectionIcrf = eccentricity === 0 ? radialDirectionIcrf : normalize(eccentricityVectorIcrf);
-  const perihelionDirection = toBodyFixed(perihelionDirectionIcrf);
-  // True anomaly: angle from perihelion to the body, signed by the direction
-  // of motion (r.v > 0 while receding from perihelion, i.e. 0 < nu < 180).
-  // atan2 of the in-plane sine and cosine, signed by the orbit normal (r x v): acos alone loses about 1e-8 rad near 0 and
-  // 180 degrees, which is where a near-circular orbit's noise-defined perihelion can fall.
-  const sinTrueAnomaly = dot(cross(perihelionDirectionIcrf, radialDirectionIcrf), orbitNormalIcrf);
-  let trueAnomalyDegrees = Math.atan2(sinTrueAnomaly, dot(perihelionDirectionIcrf, radialDirectionIcrf)) * 180 / Math.PI;
-  if (trueAnomalyDegrees < 0) trueAnomalyDegrees += 360;
-
-  // Self-verification: the eccentricity vector must lie in the orbital
-  // plane (perpendicular to the orbit normal), and re-placing the body from
-  // its perihelion direction, orbit normal and true anomaly must reproduce
-  // the same body-fixed position already computed from the Sun direction.
-  const perihelionOrthogonality = dot(perihelionDirection, orbitNormal);
-  if (Math.abs(perihelionOrthogonality) > 1e-9) {
-    throw new Error(
-      `${body}: perihelion direction is not perpendicular to the orbit ` +
-        `normal (dot = ${perihelionOrthogonality}).`,
-    );
-  }
-  const trueAnomalyRad = trueAnomalyDegrees * Math.PI / 180;
-  const orbitTangent = cross(orbitNormal, perihelionDirection);
-  const reconstructedPositionBodyFixed = perihelionDirection.map(
-    (component, index) =>
-      orbitDistanceAu *
-      (Math.cos(trueAnomalyRad) * component +
-        Math.sin(trueAnomalyRad) * orbitTangent[index]),
-  );
-  const centerDirection = toBodyFixed(orbitPositionAu.map(value => -value));
-  const centerPositionAu = centerDirection.map(value => value * orbitDistanceAu);
-  const actualPositionBodyFixed = centerPositionAu.map(value => -value);
-  const positionReconstructionError = Math.hypot(
-    ...reconstructedPositionBodyFixed.map((component, index) =>
-      component - actualPositionBodyFixed[index]
-    ),
-  );
-  // The tolerance is absolute for Solar-System distances and relative beyond them: a placed star sits at ten million
-  // astronomical units, where double precision itself carries a few nanometres of an AU.
-  if (positionReconstructionError > 1e-9 * Math.max(1, orbitDistanceAu)) {
-    throw new Error(
-      `${body}: heliocentric orbit reconstruction from perihelion ` +
-        `direction, orbit normal and true anomaly disagrees with the ` +
-        `Sun-direction-derived position by ${positionReconstructionError} AU.`,
-    );
-  }
-
-  // A hosted planet is lit by its own star, not by the Sun: the body-fixed direction to the host, which its synchronous
-  // rotation record puts at longitude 0. Prepared separately so the Sun direction every other consumer reads stays the Sun's.
-  const starDirection = hostedState
-    ? toBodyFixed(normalize(hostedState.positionKm.map(value => -value)))
-    : null;
-  return Object.freeze({
-    body,
-    parent,
-    centreId: companion ? hostedOrbitCentreId(body as Parameters<typeof hostedOrbitCentreId>[0]) : parent,
-    centerPositionAu,
-    direction: bodyFixed,
-    starDirection,
-    eclipticNorth,
-    orbitNormal,
-    orbitalVelocity,
-    matrix: Object.freeze([...matrix]),
-    poleRightAscensionDegrees: elements.poleRightAscensionRad * 180 / Math.PI,
-    poleDeclinationDegrees: elements.poleDeclinationRad * 180 / Math.PI,
-    primeMeridianDegrees: elements.primeMeridianRad * 180 / Math.PI,
-    subsolarLatitudeDegrees: Math.asin(bodyFixed[2]) * 180 / Math.PI,
-    subsolarLongitudeDegrees:
-      Math.atan2(bodyFixed[1], bodyFixed[0]) * 180 / Math.PI,
-    // Angle between the body's north pole and ecliptic north. This is the
-    // pole's tilt against the ecliptic, not the obliquity to the body's own
-    // orbit (they differ by the orbital inclination).
-    poleTiltDegrees: Math.acos(eclipticNorth[2]) * 180 / Math.PI,
-    // Ecliptic latitude of the Sun as seen from the body.
-    sunEclipticLatitudeDegrees: Math.asin(
-      bodyFixed[0] * eclipticNorth[0] + bodyFixed[1] * eclipticNorth[1] +
-        bodyFixed[2] * eclipticNorth[2],
-    ) * 180 / Math.PI,
-    // Inclination of the orbit to the J2000 ecliptic, and the obliquity of
-    // the body's spin axis to its own orbit.
-    orbitInclinationDegrees,
-    obliquityToOrbitDegrees: Math.acos(orbitNormal[2]) * 180 / Math.PI,
-    // Flight-path angle: elevation of the velocity above the local horizontal
-    // (perpendicular to the orbit's radial direction); positive moving outward.
-    flightPathAngleDegrees: Math.asin(dot(velocityIcrf, radialDirectionIcrf)) * 180 /
-      Math.PI,
-    semiMajorAxisAu,
-    eccentricity,
-    heliocentricDistanceAu,
-    perihelionDirection,
-    trueAnomalyDegrees,
-    perihelionAu: semiMajorAxisAu * (1 - eccentricity),
-    aphelionAu: eccentricity < 1 ? semiMajorAxisAu * (1 + eccentricity) : null,
+  // A star other than the Sun is placed by its catalogue astrometry; the Sun itself is the origin and has no entry.
+  const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
+  // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
+  const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
+  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects.filter(body =>
+    ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
+    ((body.classification === "star" || body.classification === "black-hole") && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
+    if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
+    return body.id as BodyId;
   });
-});
+  // A star on a hosted orbit around a packaged placed host is drawn from its astronomy record without a package of its own.
+  const RECORD_ONLY_HOSTED = (HOSTED_PLANET_IDS as readonly string[]).filter(id => !PACKAGED.includes(id as BodyId) &&
+    PACKAGED.includes((ASTRONOMY_BODY_DATA as Record<string, { parent: string | null }>)[id]!.parent as BodyId)) as BodyId[];
+  const BODIES = [...PACKAGED, ...RECORD_ONLY_HOSTED];
 
-const module = `// Generated by tools/prepare-solar-geometry.mts. Do not edit by hand.
+  // The J2000 ecliptic north pole in ICRF: the ICRF +z axis tilted by the
+  // obliquity about +x.
+  const ECLIPTIC_NORTH_ICRF = Object.freeze([
+    0,
+    -Math.sin(OBLIQUITY_J2000_RAD),
+    Math.cos(OBLIQUITY_J2000_RAD),
+  ]);
+
+  // IAU 2012 exact definition (Resolution B2).
+  const ASTRONOMICAL_UNIT_KILOMETERS = 149597870.7;
+
+  // Gaussian gravitational constant k, historically used to define the
+  // astronomical system of units: GM_sun = k^2 in AU^3/day^2 by construction
+  // (Gauss, 1809; still the IAU-adopted value). The astronomy build exports the
+  // Sun's GM in km^3/s^2 instead (BODIES.sun.gravitationalParameterKm3PerS2 =
+  // 132712440041.93938, JPL Horizons), which is not already in AU^3/day^2; but
+  // converting it with the IAU 2012 AU (149597870.7 km) reproduces k^2 to
+  // better than 1e-15 relative, so there is no "better" value to switch to and
+  // k^2 is used directly below.
+  const GAUSSIAN_GRAVITATIONAL_CONSTANT = 0.01720209895;
+  const GM_SUN_AU3_PER_DAY2 = GAUSSIAN_GRAVITATIONAL_CONSTANT ** 2;
+
+  // Confirms the claim above instead of merely asserting it in prose: convert
+  // the build's own Sun GM into AU^3/day^2 and check it against k^2.
+  {
+    const SECONDS_PER_DAY_LOCAL = 86400;
+    const gmSunFromBuild = ASTRONOMY_BODY_DATA.sun.gravitationalParameterKm3PerS2 *
+      SECONDS_PER_DAY_LOCAL ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3;
+    const relativeDifference =
+      Math.abs(gmSunFromBuild - GM_SUN_AU3_PER_DAY2) / GM_SUN_AU3_PER_DAY2;
+    if (relativeDifference > 1e-12) {
+      throw new Error(
+        `Gaussian k^2 (${GM_SUN_AU3_PER_DAY2}) disagrees with the astronomy ` +
+          `build's Sun GM converted to AU^3/day^2 (${gmSunFromBuild}) by ` +
+          `${relativeDifference}; re-derive GM_SUN_AU3_PER_DAY2 from the build.`,
+      );
+    }
+  }
+
+  // Object-owned orientation sources distinguish observed poles from display axes.
+  // A record-only star has no package and no measured spin: the display orientation new-hosted-planet writes for an unmeasured
+  // rotation, an axis along its hosted orbit's normal with the meridian at 90 degrees and no spin.
+  const recordOnlyRotation = (id: BodyId): RotationElements => {
+    const parent = (ASTRONOMY_BODY_DATA as Record<string, { parent: string | null; meanRadiusKm: number }>)[id]!.parent!;
+    const elements = hostedKeplerElements(hostedOrbit(id as never), starAstrometry(parent as never), (ASTRONOMY_BODY_DATA as Record<string, { meanRadiusKm: number }>)[parent]!.meanRadiusKm);
+    const normal = [Math.sin(elements.inclinationRad) * Math.sin(elements.ascendingNodeRad), -Math.sin(elements.inclinationRad) * Math.cos(elements.ascendingNodeRad), Math.cos(elements.inclinationRad)];
+    return { poleRightAscensionRad: (Math.atan2(normal[1]!, normal[0]!) + 2 * Math.PI) % (2 * Math.PI), poleDeclinationRad: Math.asin(normal[2]!), primeMeridianRad: Math.PI / 2, spinRateRadPerDay: 0 };
+  };
+  const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
+    if (RECORD_ONLY_HOSTED.includes(id)) return [id, recordOnlyRotation(id)];
+    const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
+    const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
+    const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
+    if (!ref) return [id, null];
+    const { readAuthoredRotation } = await import('@cssearth/bake/objects/scene');
+    return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path) }, EPOCH_JD_TT)];
+  })));
+  const rotationAtEpoch = (id: BodyId): RotationElements => {
+    const authored = authoredRotations.get(id);
+    if (authored) return authored;
+    if (!isIncluded(ROTATING_BODY_IDS, id)) throw new Error(`no IAU rotation model for body: ${id}`);
+    return bodyRotationAt(id, EPOCH_JD_TT);
+  };
+
+  type EpochState = { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; centerBodyId: string; provenance: unknown; parentHeliocentricState?: SceneSatelliteRecord["parentHeliocentricState"]; gravitationalParametersKm3PerS2?: SceneSatelliteRecord["gravitationalParametersKm3PerS2"] };
+  const epochStates = new Map<string, EpochState>(await loadSceneEpochEphemeris(EPOCH_JD_TT));
+  for (const id of SCENE_SATELLITE_IDS) epochStates.set(id, sceneSatelliteStateKm(id, EPOCH_JD_TT));
+  // A primary-specific satellite solution owns ONE heliocentric primary state
+  // at this epoch. Every observer and the global context must use that same
+  // origin; mixing it with an older parent conic breaks the physical hierarchy.
+  const primaryStates = new Map<string, Pick<EpochState, "positionKm" | "velocityKmPerDay"> & { provenance?: unknown }>(
+    [...epochStates].filter(([, state]) => state.centerBodyId === "sun"));
+  for (const state of epochStates.values()) {
+    if (!state.parentHeliocentricState) continue;
+    const primary = state.parentHeliocentricState;
+    const previous = primaryStates.get(state.centerBodyId);
+    if (previous && (['positionKm', 'velocityKmPerDay'] as const).some(key =>
+      primary[key].some((value, axis) => value !== previous[key][axis]))) {
+      throw new TypeError(`Incompatible primary states for ${state.centerBodyId}.`);
+    }
+    primaryStates.set(state.centerBodyId, primary);
+  }
+  const primaryState = (id: string) => {
+    const state = primaryStates.get(id);
+    if (!state) throw new TypeError(`No retained heliocentric state for ${id}.`);
+    return state;
+  };
+  const primaryPosition = (id: string) => primaryState(id).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
+  const primaryVelocity = (id: string) => primaryState(id).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS);
+
+  const entries = BODIES.map((body) => {
+    const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body), hosted = isHostedPlanet(body);
+    const hostedState = hosted ? hostedPlanetStateRelativeKm(body as Parameters<typeof hostedPlanetStateRelativeKm>[0], EPOCH_JD_TT) : null;
+    // A circumbinary orbit is drawn about the centre of mass of its host and companion: its own state about that centre, the
+    // three masses, and the centre placed off the host.
+    const companion = hosted ? hostedBarycentreCompanion(body as Parameters<typeof hostedBarycentreCompanion>[0]) : null;
+    const orbitCentreKm = companion ? hostedOrbitCentreStateKm(body as Parameters<typeof hostedOrbitCentreStateKm>[0], EPOCH_JD_TT).positionKm : null;
+    const hostedOrbitState = companion ? hostedPlanetStateAboutCentreKm(body as Parameters<typeof hostedPlanetStateAboutCentreKm>[0], EPOCH_JD_TT) : hostedState;
+    if (parent === null && !star) throw new TypeError(`Solar geometry requires an orbital parent for ${body}.`);
+    const isSatellite = parent !== null && parent !== "sun";
+    const epochState = isSatellite ? epochStates.get(body) : null;
+    if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
+    const moonPosition = hostedOrbitState ? hostedOrbitState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToParentKm(body, EPOCH_JD_TT) : null;
+    // ELP supplies the Earth's Moon position; take its centred derivative.
+    // Other satellite records already expose their analytic Kepler velocity.
+    const dt = 0.001;
+    const moonVelocity = !isSatellite ? null : hostedOrbitState ? hostedOrbitState.velocityKmPerDay : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
+      ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
+      : moonPositionRelativeToParentKm(body, EPOCH_JD_TT + dt).map((value, index) =>
+        (value - moonPositionRelativeToParentKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
+    const parentPosition = !isSatellite ? null : isSatellite
+      ? hostedState ? starStateKm(parent as Parameters<typeof starStateKm>[0], EPOCH_JD_TT).positionKm.map((value, axis) => (value + (orbitCentreKm?.[axis] ?? 0)) / ASTRONOMICAL_UNIT_KILOMETERS)
+        : primaryStates.has(parent)
+        ? primaryStates.get(parent)!.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+        : isIncluded(DWARF_PLANET_IDS, parent)
+        ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+        : isIncluded(SMALL_BODY_IDS, parent)
+        ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+        : primaryPosition(parent) : null;
+    // A hosted orbit is a published ellipse propagated at its measured period, not at the masses: its drawn orbit uses the
+    // gravitational parameter that ellipse implies, n^2 a^3, so the path drawn is the path the body moves on. Masses and a
+    // measured period disagree by up to a fifth of the axis (Kepler-186 f), and a circumbinary mean period differs from the
+    // osculating axis by design.
+    const hostedElements = hosted ? hostedKeplerElements(hostedOrbit(body as never), starAstrometry(parent as never),
+      (ASTRONOMY_BODY_DATA as Record<string, { meanRadiusKm: number }>)[parent!]!.meanRadiusKm) : null;
+    const mu = hostedElements
+      ? hostedElements.meanMotionRadPerDay ** 2 * (hostedElements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS) ** 3
+      : isSatellite
+      ? (epochState?.gravitationalParametersKm3PerS2?.combined ?? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
+         ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2)) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
+      : GM_SUN_AU3_PER_DAY2;
+    const kepler = isIncluded(DWARF_PLANET_IDS, body)
+      ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
+      : isIncluded(SMALL_BODY_IDS, body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
+      : isIncluded(COMET_IDS, body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
+    // A placed star: its catalogue position carried by its space velocity, in the same heliocentric ICRF frame.
+    const starState = star ? starStateKm(body as Parameters<typeof starStateKm>[0], EPOCH_JD_TT) : null;
+    const heliocentricAu = starState ? starState.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
+      ? parentPosition!.map((value, index) => value + moonPosition![index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
+      ? (primaryStates.get(body) ?? kepler).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : primaryPosition(body);
+    const velocityAuPerDay = starState ? starState.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : isSatellite
+      ? moonVelocity!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
+      ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : primaryVelocity(body);
+    const orbitPositionAu = isSatellite ? moonPosition!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
+    // Every body keeps its true Sun direction: the world context rebuilds heliocentric positions from it. A hosted planet's own
+    // light source is its host star, which its synchronous rotation record faces at longitude 0; its map is emissive.
+    const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
+    const orbitNormalIcrf = normalize(cross(orbitPositionAu, velocityAuPerDay));
+    const velocityIcrf = normalize(velocityAuPerDay);
+    // Columns of bodyFixedToIcrf are the body axes in ICRF, so its transpose
+    // takes an ICRF direction into the body-fixed frame.
+    const matrix = bodyFixedToIcrf(rotationAtEpoch(body));
+    const toBodyFixed = (icrf: readonly number[]) => normalize([
+      matrix[0] * icrf[0] + matrix[3] * icrf[1] + matrix[6] * icrf[2],
+      matrix[1] * icrf[0] + matrix[4] * icrf[1] + matrix[7] * icrf[2],
+      matrix[2] * icrf[0] + matrix[5] * icrf[1] + matrix[8] * icrf[2],
+    ]);
+    const bodyFixed = toBodyFixed(toSunIcrf);
+    // A placed star may put its own display axis up instead of the ecliptic pole: the camera orbit then lies in the star's
+    // equator, where its sub-Earth point is, instead of a plane the Earth may sit far outside of.
+    // A hosted planet's orbit plane has nothing to do with the Solar System's ecliptic; its own pole (the orbit normal) is up.
+    const eclipticNorth = hosted || star && starAstrometry(body as Parameters<typeof starAstrometry>[0]).presentationUp === 'display-axis' ? [0, 0, 1] : toBodyFixed(ECLIPTIC_NORTH_ICRF);
+    const orbitNormal = toBodyFixed(orbitNormalIcrf);
+    const orbitalVelocity = toBodyFixed(velocityIcrf);
+    const elements = rotationAtEpoch(body);
+    const orbitInclinationDegrees = Math.acos(dot(orbitNormalIcrf, ECLIPTIC_NORTH_ICRF)) *
+      180 / Math.PI;
+
+    // Heliocentric orbit from the vis-viva relation and the eccentricity
+    // vector, both derived from the state vector alone (no orbital elements
+    // used as input): a = 1 / (2/r - v^2/mu), e_vec = ((v^2 - mu/r) r -
+    // (r.v) v) / mu. See https://en.wikipedia.org/wiki/Orbital_eccentricity
+    // and https://en.wikipedia.org/wiki/Vis-viva_equation.
+    const heliocentricDistanceAu = Math.hypot(...heliocentricAu);
+    const orbitDistanceAu = Math.hypot(...orbitPositionAu);
+    const speedSquared = dot(velocityAuPerDay, velocityAuPerDay);
+    const semiMajorAxisAu = 1 /
+      (2 / orbitDistanceAu - speedSquared / mu);
+    const radialSpeed = dot(orbitPositionAu, velocityAuPerDay);
+    const eccentricityVectorIcrf = orbitPositionAu.map((component, index) =>
+      ((speedSquared - mu / orbitDistanceAu) *
+        component - radialSpeed * velocityAuPerDay[index]) / mu
+    );
+    const eccentricity = Math.hypot(...eccentricityVectorIcrf);
+    const radialDirectionIcrf = normalize(orbitPositionAu);
+    // An exactly circular orbit (a hosted orbit drawn at the gravitational parameter its own ellipse implies) has no
+    // perihelion; it is measured from the body's own direction, true anomaly 0.
+    const perihelionDirectionIcrf = eccentricity === 0 ? radialDirectionIcrf : normalize(eccentricityVectorIcrf);
+    const perihelionDirection = toBodyFixed(perihelionDirectionIcrf);
+    // True anomaly: angle from perihelion to the body, signed by the direction
+    // of motion (r.v > 0 while receding from perihelion, i.e. 0 < nu < 180).
+    // atan2 of the in-plane sine and cosine, signed by the orbit normal (r x v): acos alone loses about 1e-8 rad near 0 and
+    // 180 degrees, which is where a near-circular orbit's noise-defined perihelion can fall.
+    const sinTrueAnomaly = dot(cross(perihelionDirectionIcrf, radialDirectionIcrf), orbitNormalIcrf);
+    let trueAnomalyDegrees = Math.atan2(sinTrueAnomaly, dot(perihelionDirectionIcrf, radialDirectionIcrf)) * 180 / Math.PI;
+    if (trueAnomalyDegrees < 0) trueAnomalyDegrees += 360;
+
+    // Self-verification: the eccentricity vector must lie in the orbital
+    // plane (perpendicular to the orbit normal), and re-placing the body from
+    // its perihelion direction, orbit normal and true anomaly must reproduce
+    // the same body-fixed position already computed from the Sun direction.
+    const perihelionOrthogonality = dot(perihelionDirection, orbitNormal);
+    if (Math.abs(perihelionOrthogonality) > 1e-9) {
+      throw new Error(
+        `${body}: perihelion direction is not perpendicular to the orbit ` +
+          `normal (dot = ${perihelionOrthogonality}).`,
+      );
+    }
+    const trueAnomalyRad = trueAnomalyDegrees * Math.PI / 180;
+    const orbitTangent = cross(orbitNormal, perihelionDirection);
+    const reconstructedPositionBodyFixed = perihelionDirection.map(
+      (component, index) =>
+        orbitDistanceAu *
+        (Math.cos(trueAnomalyRad) * component +
+          Math.sin(trueAnomalyRad) * orbitTangent[index]),
+    );
+    const centerDirection = toBodyFixed(orbitPositionAu.map(value => -value));
+    const centerPositionAu = centerDirection.map(value => value * orbitDistanceAu);
+    const actualPositionBodyFixed = centerPositionAu.map(value => -value);
+    const positionReconstructionError = Math.hypot(
+      ...reconstructedPositionBodyFixed.map((component, index) =>
+        component - actualPositionBodyFixed[index]
+      ),
+    );
+    // The tolerance is absolute for Solar-System distances and relative beyond them: a placed star sits at ten million
+    // astronomical units, where double precision itself carries a few nanometres of an AU.
+    if (positionReconstructionError > 1e-9 * Math.max(1, orbitDistanceAu)) {
+      throw new Error(
+        `${body}: heliocentric orbit reconstruction from perihelion ` +
+          `direction, orbit normal and true anomaly disagrees with the ` +
+          `Sun-direction-derived position by ${positionReconstructionError} AU.`,
+      );
+    }
+
+    // A hosted planet is lit by its own star, not by the Sun: the body-fixed direction to the host, which its synchronous
+    // rotation record puts at longitude 0. Prepared separately so the Sun direction every other consumer reads stays the Sun's.
+    const starDirection = hostedState
+      ? toBodyFixed(normalize(hostedState.positionKm.map(value => -value)))
+      : null;
+    return Object.freeze({
+      body,
+      parent,
+      centreId: companion ? hostedOrbitCentreId(body as Parameters<typeof hostedOrbitCentreId>[0]) : parent,
+      centerPositionAu,
+      direction: bodyFixed,
+      starDirection,
+      eclipticNorth,
+      orbitNormal,
+      orbitalVelocity,
+      matrix: Object.freeze([...matrix]),
+      poleRightAscensionDegrees: elements.poleRightAscensionRad * 180 / Math.PI,
+      poleDeclinationDegrees: elements.poleDeclinationRad * 180 / Math.PI,
+      primeMeridianDegrees: elements.primeMeridianRad * 180 / Math.PI,
+      subsolarLatitudeDegrees: Math.asin(bodyFixed[2]) * 180 / Math.PI,
+      subsolarLongitudeDegrees:
+        Math.atan2(bodyFixed[1], bodyFixed[0]) * 180 / Math.PI,
+      // Angle between the body's north pole and ecliptic north. This is the
+      // pole's tilt against the ecliptic, not the obliquity to the body's own
+      // orbit (they differ by the orbital inclination).
+      poleTiltDegrees: Math.acos(eclipticNorth[2]) * 180 / Math.PI,
+      // Ecliptic latitude of the Sun as seen from the body.
+      sunEclipticLatitudeDegrees: Math.asin(
+        bodyFixed[0] * eclipticNorth[0] + bodyFixed[1] * eclipticNorth[1] +
+          bodyFixed[2] * eclipticNorth[2],
+      ) * 180 / Math.PI,
+      // Inclination of the orbit to the J2000 ecliptic, and the obliquity of
+      // the body's spin axis to its own orbit.
+      orbitInclinationDegrees,
+      obliquityToOrbitDegrees: Math.acos(orbitNormal[2]) * 180 / Math.PI,
+      // Flight-path angle: elevation of the velocity above the local horizontal
+      // (perpendicular to the orbit's radial direction); positive moving outward.
+      flightPathAngleDegrees: Math.asin(dot(velocityIcrf, radialDirectionIcrf)) * 180 /
+        Math.PI,
+      semiMajorAxisAu,
+      eccentricity,
+      heliocentricDistanceAu,
+      perihelionDirection,
+      trueAnomalyDegrees,
+      perihelionAu: semiMajorAxisAu * (1 - eccentricity),
+      aphelionAu: eccentricity < 1 ? semiMajorAxisAu * (1 + eccentricity) : null,
+    });
+  });
+
+  const module = `// Generated by tools/prepare-solar-geometry.mts. Do not edit by hand.
 //
 // Unit direction from each body to the Sun, the J2000 ecliptic north pole,
 // the body's orbit normal (normalize(r x v) relative to its orbit centre)
@@ -566,22 +569,25 @@ export function requireBodyOrbit(bodyId: string): BodyOrbit {
 }
 `;
 
-const target = resolve(
-  import.meta.dirname,
-  "../../src/platform/solar-geometry.mts",
-);
-await writeFile(target, module);
-for (const entry of entries) {
-  console.log(
-    `${entry.body.padEnd(8)} subsolar lat ` +
-      `${entry.subsolarLatitudeDegrees.toFixed(3).padStart(8)}°  lon ` +
-      `${entry.subsolarLongitudeDegrees.toFixed(3).padStart(9)}°  ` +
-      `pole tilt ${entry.poleTiltDegrees.toFixed(2).padStart(6)}°  ` +
-      `Sun ecl. lat ${entry.sunEclipticLatitudeDegrees.toFixed(2).padStart(6)}°  ` +
-      `orbit incl. ${entry.orbitInclinationDegrees.toFixed(3).padStart(6)}°`,
+  const target = resolve(
+    import.meta.dirname,
+    "../../src/platform/solar-geometry.mts",
   );
+  await writeFile(target, module);
+  for (const entry of entries) {
+    console.log(
+      `${entry.body.padEnd(8)} subsolar lat ` +
+        `${entry.subsolarLatitudeDegrees.toFixed(3).padStart(8)}°  lon ` +
+        `${entry.subsolarLongitudeDegrees.toFixed(3).padStart(9)}°  ` +
+        `pole tilt ${entry.poleTiltDegrees.toFixed(2).padStart(6)}°  ` +
+        `Sun ecl. lat ${entry.sunEclipticLatitudeDegrees.toFixed(2).padStart(6)}°  ` +
+        `orbit incl. ${entry.orbitInclinationDegrees.toFixed(3).padStart(6)}°`,
+    );
+  }
+  console.log(`Prepared solar geometry -> ${target}`);
 }
-console.log(`Prepared solar geometry -> ${target}`);
+
+refuseDirectRun(import.meta);
 
 function normalize(vector: readonly number[]) {
   const magnitude = Math.hypot(...vector);

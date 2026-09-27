@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-geotiff-grid@1",
+  "source": {
+    "url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+    "productId": "mars_mgs_mola_dem_463m",
+    "width": 46080,
+    "height": 23040,
+    "origin": [
+      -10669675.197320545,
+      5334837.598660273
+    ],
+    "resolution": [
+      463.0935415503709,
+      -463.0935415503709
+    ],
+    "coordinates": "meters",
+    "radius": 3396190,
+    "centerLongitude": 0,
+    "noData": -32768,
+    "bits": 16,
+    "sampleFormat": 2
+  },
+  "output": {
+    "width": 2048,
+    "height": 1024,
+    "radius": 3396190
+  }
+}

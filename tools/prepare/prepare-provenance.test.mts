@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-import type { PreparedOutput } from '../prepared/write-prepared-set.mts';
+import type { PreparedOutput } from '@cssearth/bake/delivery';
 import { recoverObjectProvenance } from './prepare-provenance.mts';
 const test = sourceTest();
 

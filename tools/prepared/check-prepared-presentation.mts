@@ -6,15 +6,17 @@ import { relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import type { Node } from 'estree';
-import { SCENE_OBJECTS } from "../../site/objects.mts";
 import type { ObjectEntry } from '@cssearth/objects';
-import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../src/platform/prepared-presentation-contract.mts";
-import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
-import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
+import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
+import { requireAuthoredWorldFrame } from '@cssearth/bake/sources';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../ci/runtime-ast.mts';
-import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
+import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '@cssearth/bake/runtime-source';
+import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
+import { readPreparedObjects } from "@cssearth/objects/node";
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
 export interface PreparedJsonExport { name: string; value: unknown; }
 export function readPreparedJsonModule(source: string, expectedExport?: string): PreparedJsonExport {
@@ -63,7 +65,7 @@ export function requirePreparedDefinitionSource(source: string): string {
   const id = values.get('id');
   if (values.size !== 3 || !["schema", "id", "controls"].every(key => values.has(key)) ||
       bindings.get(nodeName(values.get("schema")) ?? '')?.name !== "PREPARED_OBJECT_RUNTIME_SCHEMA" ||
-      bindings.get(nodeName(values.get("schema")) ?? '')?.path !== "../../../platform/prepared-schema.mts" ||
+      bindings.get(nodeName(values.get("schema")) ?? '')?.path !== "../../../../packages/bake/src/presentation/prepared-schema.ts" ||
       bindings.get(nodeName(values.get("controls")) ?? '')?.name !== "objectControls" ||
       bindings.get(nodeName(values.get("controls")) ?? '')?.path !== "../site/control-content.mjs" ||
       id?.type !== "Literal" || typeof id.value !== "string" || imports.length !== 3) {

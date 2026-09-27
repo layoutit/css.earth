@@ -21,10 +21,10 @@ A hot Jupiter's map reaches this project as a light curve, not as a picture: the
 
 ## From raw exposures
 
-`tools/objects/jwst/reduce-tso.mts` turns raw JWST time-series exposures into the light curves the fit reads, with [Eureka!](https://github.com/kevin218/Eureka) on the STScI `jwst` pipeline.
+`packages/telescope-cli/src/archives/jwst/reduce-tso.mts` turns raw JWST time-series exposures into the light curves the fit reads, with [Eureka!](https://github.com/kevin218/Eureka) on the STScI `jwst` pipeline.
 
-- **Toolchain.** `tools/objects/jwst/toolchain.mts install` builds Python 3.11 with micromamba and installs `requirements.lock`, every package at its pinned version or commit, under `output/toolchains/eureka`. One patch is applied: Eureka! 1.4 crashes on a scalar detector gain, which MIRI uses. The CRDS reference context is pinned per program, so reference files match the recorded run.
-- **Program.** A directory under `tools/objects/jwst/programs/` pins the raw segments by name and size, the control files, and the deposit to compare with. `wasp-43b-miri-1366` holds the 30 segments (44.2 GB) of the WASP-43b MIRI phase curve, with Bell et al. (2024)'s Eureka! v1 settings carried over to Eureka! 1.4's option names.
+- **Toolchain.** `packages/telescope-cli/src/archives/jwst/toolchain.mts install` builds Python 3.11 with micromamba and installs `requirements.lock`, every package at its pinned version or commit, under `output/toolchains/eureka`. One patch is applied: Eureka! 1.4 crashes on a scalar detector gain, which MIRI uses. The CRDS reference context is pinned per program, so reference files match the recorded run.
+- **Program.** A directory under `packages/telescope-cli/src/archives/jwst/programs/` pins the raw segments by name and size, the control files, and the deposit to compare with. `wasp-43b-miri-1366` holds the 30 segments (44.2 GB) of the WASP-43b MIRI phase curve, with Bell et al. (2024)'s Eureka! v1 settings carried over to Eureka! 1.4's option names.
 - **Run.** Stages 1 and 2 go in batches of five segments, one worker, and a batch does not start with less than half the memory free: a segment's ramp fit peaks near 17 GB. Stage 3 extracts every segment, and Stage 4 makes the white light curve and 14 channels. All of them are exported to CSV, as is the deposit. So is the star's median extracted count spectrum, the band response for a temperature map. `--raw` points at segments already on disk; missing ones download from MAST with resume.
 - **Check.** `compare-light-curves.mts` pairs integrations by time and reports correlation, the difference after a straight-line drift, scatter and errors. `reduce-tso.test.mts` holds the run to Bell et al.'s published curves.
 
@@ -49,7 +49,7 @@ The two reductions differ by a straight-line drift of 2,221 ppm per day, which a
 
 Their curves are outlier-clipped, which is why their scatter is lower.
 
-[`hd-189733b-raw-map.test.mts`](../tools/objects/eclipse-map/hd-189733b-raw-map.test.mts) fits a map to both raw eclipses with the model of their ThERESA configuration:
+[`hd-189733b-raw-map.test.mts`](../tests/objects/eclipse-map/hd-189733b-raw-map.test.mts) fits a map to both raw eclipses with the model of their ThERESA configuration:
 - MIRI only, degree 5, 3 eigencurves.
 - Their clipping and baselines.
 - An exponential ramp and decorrelation vectors on eclipse 1.
@@ -80,14 +80,14 @@ WASP-43b's offset moved with two choices the data barely constrain: the detector
 
 ## Checks
 
-- [`spherical-harmonics.test.mts`](../tools/objects/eclipse-map/spherical-harmonics.test.mts): the harmonics are orthonormal on the sphere and match their closed forms at degree 1.
-- [`eigenmap-fit.test.mts`](../tools/objects/eclipse-map/eigenmap-fit.test.mts):
+- [`spherical-harmonics.test.mts`](../tests/objects/eclipse-map/spherical-harmonics.test.mts): the harmonics are orthonormal on the sphere and match their closed forms at degree 1.
+- [`eigenmap-fit.test.mts`](../tests/objects/eclipse-map/eigenmap-fit.test.mts):
   - Jacobi eigenvectors diagonalize a random symmetric matrix.
   - A synthetic map with its hot spot 20° east and 15° south, integrated on a finer grid with 30 ppm noise, comes back where it was put when BIC chooses the model. The posterior covers the injected longitude.
   - The temperature inversion returns the star's temperature for a planet as bright per area as the star.
-- [`eigenmap-fit.oracle.test.mts`](../tools/objects/eclipse-map/eigenmap-fit.oracle.test.mts): the production eigencurve decomposition matches NumPy's independent LAPACK SVD under the signed-harmonic convention in pinned ThERESA source. Sign-invariant eigenmap and eigencurve projectors cover full-rank, rank-deficient and uniformly rescaled inputs.
-- [`numerics.oracle.test.mts`](../tools/objects/eclipse-map/numerics.oracle.test.mts): independent NumPy and Astropy results cover spherical harmonics, the weighted linear fit, posterior covariance, Planck radiance and brightness-temperature inversion. Phase-curve tests separately enforce uniform-sphere normalization and mirror/time-reversal symmetry through eclipse.
-- [`transit-fit.test.mts`](../tools/objects/eclipse-map/transit-fit.test.mts): an eccentric transit made with the shared orbit geometry and an independent 2,500-ring stellar-disc integration is recovered by the batman/SciPy boundary. The real WASP-43b check below independently holds its timing to Hammond et al.'s propagated ephemeris.
+- [`eigenmap-fit.oracle.test.mts`](../tests/objects/eclipse-map/eigenmap-fit.oracle.test.mts): the production eigencurve decomposition matches NumPy's independent LAPACK SVD under the signed-harmonic convention in pinned ThERESA source. Sign-invariant eigenmap and eigencurve projectors cover full-rank, rank-deficient and uniformly rescaled inputs.
+- [`numerics.oracle.test.mts`](../tests/objects/eclipse-map/numerics.oracle.test.mts): independent NumPy and Astropy results cover spherical harmonics, the weighted linear fit, posterior covariance, Planck radiance and brightness-temperature inversion. Phase-curve tests separately enforce uniform-sphere normalization and mirror/time-reversal symmetry through eclipse.
+- [`transit-fit.test.mts`](../tests/objects/eclipse-map/transit-fit.test.mts): an eccentric transit made with the shared orbit geometry and an independent 2,500-ring stellar-disc integration is recovered by the batman/SciPy boundary. The real WASP-43b check below independently holds its timing to Hammond et al.'s propagated ephemeris.
 - [`tests/objects/unit/wasp-43b/eigenmap-fit.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/wasp-43b/eigenmap-fit.test.mts): on the deposited JWST NIRSpec white-light curve of WASP-43b, the fit must reproduce ThERESA run with the corrected axis.
 
 | Degree 3, 6 eigencurves, positive | This fit | ThERESA, axis corrected |
@@ -114,7 +114,7 @@ A planet package can fit its map during preparation instead of shipping a map fi
 - **Offset.** `meridionalOffset` is Hammond et al. (2024)'s longitudinal offset: where the map, averaged over latitude with weight cos(latitude), peaks. It compares with a phase curve's peak offset; the map's own hottest point can differ.
 - **Model choice.** Every candidate degree and eigencurve count is fitted. The lowest BIC wins, except that models within 2 of it count as equal, and then the one with fewest parameters, then the lowest degree, is taken. A recipe that lists one model fixes it.
 - **Band temperature.** A light curve adds up the star's counts over its band. So the temperature is the one at which the count-weighted planet-to-star intensity, Σ C_i·B(λ_i, T)/I_i ÷ Σ C_i, equals π·value·(1 + s_corr)/rp². C_i can be the star's own extracted counts per detector column, or a filter transmission times wavelength times the stellar intensity. I_i is a model stellar spectrum averaged over each sample's extent. The inversion is tabulated in 0.25 K steps. With one sample and a blackbody star it reduces to `brightnessTemperature`.
-- **Checks.** [`light-curve-map.test.mts`](../tools/objects/eclipse-map/light-curve-map.test.mts) tests the reduction to one wavelength, a band with an uneven star and uneven counts, bin averages, and an injected map under a ramp and a drift. [WASP-43b's lens test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/wasp-43b/lens-fits.test.mts) runs its shipped recipes. It compares the MIRI dayside and nightside with Bell et al. (2024): 1,527 K against 1,524 ± 35 K, and 840 K against 863 ± 23 K.
+- **Checks.** [`light-curve-map.test.mts`](../tests/objects/eclipse-map/light-curve-map.test.mts) tests the reduction to one wavelength, a band with an uneven star and uneven counts, bin averages, and an injected map under a ramp and a drift. [WASP-43b's lens test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/wasp-43b/lens-fits.test.mts) runs its shipped recipes. It compares the MIRI dayside and nightside with Bell et al. (2024): 1,527 K against 1,524 ± 35 K, and 840 K against 863 ± 23 K.
 
 ### A published fit, drawn as the paper made it
 
@@ -127,4 +127,4 @@ When a paper publishes its phase-curve model but no map file, the `published-pha
   ![WASP-12 b brightness temperature at 3.6 µm by longitude in 2010 and 2013, hottest 33° east and 14° west of noon](images/wasp-12b-phase-curve-maps.webp)
 - **SPIDERMAN.** A SPIDERMAN spherical-harmonic fit is evaluated by SPIDERMAN itself, in its own pinned environment ([spiderman.ts](../packages/telescope/src/node/spiderman.ts)), with the paper's coefficients under SPIDERMAN's own parameter names. [WASP-76b](../src/objects/wasp-76b/README.md) uses it.
 - **Temperature.** The intensity ratio is 2J/rp² for the sinusoid map and π·value·(1 + dilution)/rp² for SPIDERMAN. It becomes a brightness temperature at the band's wavelength against the star's band temperature that the paper's own eclipse depth, radius ratio and day side imply. The paper's night side, converted the same way from the model, is the check.
-- **Checks.** [`published-phase-curve-map.test.mts`](../tools/objects/terrestrial-layers/published-phase-curve-map.test.mts) integrates the sinusoid map over the visible hemisphere and gets the light curve back to 1e-9. It holds each planet to its paper's amplitude, offset, day side and night side.
+- **Checks.** [`published-phase-curve-map.test.mts`](../tests/objects/terrestrial/published-phase-curve-map.test.mts) integrates the sinusoid map over the visible hemisphere and gets the light curve back to 1e-9. It holds each planet to its paper's amplitude, offset, day side and night side.

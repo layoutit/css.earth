@@ -23,7 +23,7 @@ Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes
 
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 
-- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/osiris-reflectance.py` reads the pinned WAC reflectance product `w20080905t183606461id4df17.img` with pvl and numpy. `tools/objects/terrestrial-layers/archived-camera.oracle.test.mts` requires the decoder to reproduce 48 sampled I/F values exactly and the accept or reject decision for 48 sampled quality flags.
+- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/osiris-reflectance.py` reads the pinned WAC reflectance product `w20080905t183606461id4df17.img` with pvl and numpy. [`tools/objects/terrestrial-layers/archived-camera.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/archived-camera.oracle.test.mts) (now [`tests/objects/terrestrial/archived-camera.oracle.test.mts`](../../../tests/objects/terrestrial/archived-camera.oracle.test.mts)) requires the decoder to reproduce 48 sampled I/F values exactly and the accept or reject decision for 48 sampled quality flags.
 
 ### Registration
 
@@ -89,11 +89,11 @@ The normal quality policy requires VALID bit 0, explicitly permits LOSSY bit 3, 
 
 **Reproduction and source closure**
 
-`source/preparation/camera.json` selects the exact image, original kernels and control evidence. `source/observations/*-camera.json` is a checked-in preparation input bound by image, mesh and provenance hashes. Restore its kernels with `node tools/assets/restore-source-inputs.mts --object=steins`, then reproduce it with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/objects/steins/source` (NumPy, SciPy, Astropy and SpiceyPy), then run the existing authored preparation command. No camera fitting, source mesh queries, photometric correction or atlas construction runs in the application. All atlases, coverage, thumbnails and surface minimaps consume the same qualified sampler. The camera/source tests use original-file samples, rejected quality cases and independent geometric anchors; the PR records separate browser and source-restoration results.
+`source/preparation/camera.json` selects the exact image, original kernels and control evidence. `source/observations/*-camera.json` is a checked-in preparation input bound by image, mesh and provenance hashes. Restore its kernels with `node tools/assets/restore-source-inputs.mts --object=steins`, then reproduce it with `python packages/bake/cli/prepare-archived-camera.py src/objects/steins/source` (NumPy, SciPy, Astropy and SpiceyPy), then run the existing authored preparation command. No camera fitting, source mesh queries, photometric correction or atlas construction runs in the application. All atlases, coverage, thumbnails and surface minimaps consume the same qualified sampler. The camera/source tests use original-file samples, rejected quality cases and independent geometric anchors; the PR records separate browser and source-restoration results.
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added camera with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/objects/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node tools/objects/dist/prepare-authored.js steins --write`.
+Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node tools/objects/dist/prepare-authored.js steins --write`.
 
 Both original resampled reflectance files retain their sigma and quality arrays, and each now has its own pinned camera profile and camera JSON. The released camera frame, optical scale and body orientation reproduce the added image’s independent archived RA/Dec to 0.000004 degrees. Neither image supplies a surface-intercept anchor. No image-to-shape fit is claimed. The source/model footprint diagnostic gives a symmetric 95th-percentile limb distance of 2.83 and 3.0 source pixels; this thresholded diagnostic includes optical blur and shape differences and is not a detector quality mask or absolute registration accuracy.
 

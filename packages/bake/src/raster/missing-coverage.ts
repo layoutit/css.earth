@@ -2,13 +2,13 @@ export interface CoverageRaster { width: number; height: number; channels: numbe
 // Prepare-only cartographic styling. Gray is a data gap, never inferred terrain.
 // Images without validity channels may restrict exact black fill to a polar edge.
 // Interior photographed black and nonzero edge pixels remain observations.
-export function blackFillCoverage(data: Uint8Array, { width, height, channels }: CoverageRaster, { southConnected = false, northConnected = false } = {}) {
+export function blackFillCoverage(data: Uint8Array, { width, height, channels }: CoverageRaster, { southConnected = false, northConnected = false, seedRows = [] }: {southConnected?:boolean;northConnected?:boolean;seedRows?:readonly number[]} = {}) {
   const missing = new Uint8Array(width * height);
   const black = (i: number) => {
     for (let c = 0; c < channels; c++) if (data[i * channels + c] !== 0) return false;
     return true;
   };
-  if (!southConnected && !northConnected) {
+  if (!southConnected && !northConnected && !seedRows.length) {
     for (let i = 0; i < missing.length; i++) missing[i] = Number(black(i));
     return missing;
   }
@@ -20,6 +20,10 @@ export function blackFillCoverage(data: Uint8Array, { width, height, channels }:
   for (let x = 0; x < width; x++) {
     if (northConnected) visit(x);
     if (southConnected) visit((height - 1) * width + x);
+  }
+  for(const row of seedRows){
+    if(!Number.isInteger(row)||row<0||row>=height)throw new RangeError('Coverage seed row lies outside the raster.');
+    for(let x=0;x<width;x++)visit(row*width+x);
   }
   while (head < tail) {
     const i = queue[head++], x = i % width;

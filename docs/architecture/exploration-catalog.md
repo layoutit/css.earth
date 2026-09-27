@@ -26,7 +26,7 @@ whose own shape is credited to a ground telescope.
 
 ## Authoring and validation
 
-[`exploration-catalog.mts`](../../src/platform/exploration-catalog.mts) validates
+[`exploration-catalog.ts`](../../packages/objects/src/provenance/exploration-catalog.ts) validates
 unknown input and returns immutable records. Names, descriptions, facility kinds, settings,
 agencies, dates and status claims carry citations to the
 [Sources catalogue](../sources-catalogue.md), with a checked date and a field or
@@ -57,13 +57,13 @@ bytes and credits. A spacecraft shows NASA's official artwork and a telescope or
 ground station a published photograph, both recorded in
 [`photograph-records.json`](../../site/source/facilities/photograph-records.json)
 and prepared by
-[`prepare-facility-photographs.mts`](../../tools/prepare/prepare-facility-photographs.mts)
+[`prepare-facility-photographs.mts`](../../packages/bake/cli/prepare-facility-photographs.mts)
 into the same library, where `source.kind` tells artwork, a photograph and a
 model render apart. Only spacecraft NASA publishes no artwork for are rendered
 from a 3D model; [facility thumbnails](../facility-thumbnails.md) explains both routes.
 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
-committed files. `node tools/prepare/prepare-facility-photographs.mts` re-acquires each recorded
+committed files. `node packages/bake/cli/prepare-facility-photographs.mts` re-acquires each recorded
 file and prepares it to the library's frame.
 `node tools/prepare/prepare-facility-renders.mts` clears the flat sidebar background out of the
 approved renders to alpha, flood-filling only from the frame edges and refusing
@@ -112,7 +112,7 @@ may be prose and must not be manufactured into a URL. Source records retain the
 original archive and acquisition links; the Sources card uses the published
 citation URL.
 
-The [contribution compiler](../../src/platform/exploration-contributions.mts)
+The [contribution compiler](../../packages/objects/src/provenance/exploration-contributions.ts)
 walks the existing source/product lineage, including dependencies and parent
 products. Each edge retains its object, product, source, lens IDs and attribution.
 All forward and reverse indexes come from this one edge set. Dataset destinations

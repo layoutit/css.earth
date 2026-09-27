@@ -11,7 +11,7 @@ re-reduced here; that page is written from the archive and from the receipts, no
 ## What the archive serves, and to whom
 
 KOA is run for W. M. Keck Observatory by NExScI at IPAC. **Public data needs no account**, and none was created. Three
-anonymous interfaces are used, all through [`koa.mts`](../tools/objects/keck/koa.mts):
+anonymous interfaces are used, all through [`koa.mts`](../packages/telescope-cli/src/archives/keck/koa.mts):
 
 - **`TAP/sync`**, ADQL over one table per instrument (`koa_kcwi`, `koa_nirspec`, `koa_nirc2`, `koa_osiris` and the rest) plus
   `koa_reduced_data`. The service rewrites an anonymous query to hold only rows whose proprietary period has run out
@@ -40,9 +40,9 @@ Downloads are `getKOA/nph-getKOA?filehand=` for a raw frame and `KoaAPI/nph-dnlo
 
 ## Stages
 
-1. **Install the software.** `node tools/objects/keck/toolchain.mts install` builds the pinned environment under
+1. **Install the software.** `node packages/telescope-cli/src/archives/keck/toolchain.mts install` builds the pinned environment under
    `output/toolchains/keck` (ignored by git): micromamba Python 3.12 from conda-forge, then
-   [requirements.lock](../tools/objects/keck/requirements.lock), the KCWI DRP's own `pip-compile` output with the pipeline
+   [requirements.lock](../packages/telescope-cli/src/archives/keck/requirements.lock), the KCWI DRP's own `pip-compile` output with the pipeline
    added, installed with `--no-deps`, so the environment is that file and nothing else. `verify` prints the versions. The
    install records the sha256 of the descriptor and the lock together, a run refuses an environment built from other pins, and
    that same digest goes into the record of every product a run makes.
@@ -107,7 +107,7 @@ Downloads are `getKOA/nph-getKOA?filehand=` for a raw frame and `KoaAPI/nph-dnlo
 ## Measured
 
 One KCWI observation, measured on 19 September 2026 on an Apple silicon Mac with the pins in
-[toolchain.json](../tools/objects/keck/toolchain.json).
+[toolchain.json](../packages/telescope-cli/src/archives/keck/toolchain.json).
 
 **The observation.** M42, KCWI blue, grating BL at 4499.90 angstroms, Medium IFU, binning 2,2, readout TUP. Programme
 `2023B_U124` (PI Jones), frame `KB.20231209.37031.94.fits`, 5 s, 2023-12-09 10:17:11.94 UT, 10,166,400 bytes. 48 of the 89
@@ -188,7 +188,7 @@ under NOT REPRODUCED rather than by leaving it out.
   own **NSDRP 0.9.16**, which is not PypeIt. Agreement with them would be agreement between two different pipelines, which is
   not what the rest of this route means by reproducing the archive. Every other Europa programme, Paganini's water-vapour
   campaign included, has no archive product at all. One 2006A observation is **pinned** here
-  ([europa-nirspec-2006a-c213ol](../tools/objects/keck/programs/europa-nirspec-2006a-c213ol.json): 53 calibrations, 57 archive
+  ([europa-nirspec-2006a-c213ol](../packages/telescope-cli/src/archives/keck/programs/europa-nirspec-2006a-c213ol.json): 53 calibrations, 57 archive
   products) so the next step is ready and this claim can be checked; it is **not reduced**.
 - **DEIMOS, ESI, LRIS, MOSFIRE, NIRES.** PypeIt supports all of them and is not installed here. KOA publishes no reduced
   product for them either (its DEIMOS level 1 is JPEG quick-looks), so a re-run would have nothing to be checked against.
@@ -219,14 +219,14 @@ recorded as it is rather than worked around.
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
-node tools/objects/keck/toolchain.mts install
-node tools/objects/keck/toolchain.mts verify
-node tools/objects/keck/archive.mts m42-kcwi-2023b-u124 kcwi KB.20231209.37031.94.fits
-node tools/objects/keck/reduce.mts  m42-kcwi-2023b-u124 KB.20231209.37031.94.fits
-node tools/objects/keck/compare.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits \
+node packages/telescope-cli/src/archives/keck/toolchain.mts install
+node packages/telescope-cli/src/archives/keck/toolchain.mts verify
+node packages/telescope-cli/src/archives/keck/archive.mts m42-kcwi-2023b-u124 kcwi KB.20231209.37031.94.fits
+node packages/telescope-cli/src/archives/keck/reduce.mts  m42-kcwi-2023b-u124 KB.20231209.37031.94.fits
+node packages/telescope-cli/src/archives/keck/compare.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits \
   output/keck/m42-kcwi-2023b-u124/KB.20231209.37031.94
-node tools/objects/keck/archive-ledger.mts
-node --test tools/objects/keck/keck.test.mts
+node packages/telescope-cli/src/archives/keck/archive-ledger.mts
+node --test packages/telescope-cli/src/archives/keck/keck.test.mts
 ```
 
 `.local/keck` and `output/keck` are ignored by git. For the M42 observation the pinned raw frames are 531 MB and the archive's

@@ -19,10 +19,10 @@ const run = (args: string[], command = process.execPath) => {
 run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tools/oracles/fits/core.oracle.test.mts', 'tools/oracles/fits/sky-orientation.oracle.test.mts', 'tools/oracles/fits/sky-projection.oracle.test.mts',
   'tools/oracles/fits/file-region.oracle.test.mts', 'tools/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
-  'tools/objects/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tools/objects/observation/wise-atlas-mosaic.oracle.test.mts',
-  'tools/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'tools/objects/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
+  'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
+  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
-    .map(name => `tools/objects/terrestrial-layers/${name}.test.mts`)];
+    .map(name => `tests/objects/terrestrial/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);
 run(['labs/nebula/run.mts', 'test', 'getsf', 'sampled-prior', 'ownership', 'source-pin']);
 if (args.includes('--unit')) process.exit(0);
@@ -97,10 +97,10 @@ if (missing.length) {
 run(['--test', '--test-concurrency=1',
   'tools/oracles/fits/synoptic.test.mts',
   'tools/oracles/fits/pallas.test.mts',
-  'tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts',
-  'tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts',
-  'tools/objects/terrestrial-layers/pds4-geometry-cube.oracle.test.mts',
-  'tools/objects/terrestrial-layers/new-horizons-geo.test.mts',
-  'tools/objects/observation/spectral-band-maps.test.mts',
+  'tests/objects/terrestrial/encounter-fits.oracle.test.mts',
+  'tests/objects/terrestrial/llorri-geo.oracle.test.mts',
+  'tests/objects/terrestrial/pds4-geometry-cube.oracle.test.mts',
+  'tests/objects/terrestrial/new-horizons-geo.test.mts',
+  'tests/objects/observation/spectral-band-maps.test.mts',
   'tests/objects/unit/pluto/leisa.test.mts', 'tests/objects/unit/arrokoth/source.test.mts',
   'tests/objects/unit/didymos/albedo.test.mts', 'tests/objects/unit/dimorphos/albedo.test.mts']);

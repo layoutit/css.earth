@@ -52,13 +52,13 @@ jobs:
         # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
         # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
         run: |
-          node --test tools/audits/check-documentation-links.test.mts
-          python3 tools/audits/test_provenance_documentation_inventory.py
-          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
+          node --test .github/scripts/audits/check-documentation-links.test.mts
+          python3 .github/scripts/audits/test_provenance_documentation_inventory.py
+          python3 .github/scripts/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
+            node .github/scripts/audits/check-documentation-links.mts --base "${CI_BASE_REF:-origin/$GITHUB_BASE_REF}"
           else
-            node tools/audits/check-documentation-links.mts --all
+            node .github/scripts/audits/check-documentation-links.mts --all
           fi
       - name: Check tracked files against ignore rules
         if: ${{ !cancelled() }}
@@ -102,7 +102,7 @@ jobs:
       - name: Hash tracked build and compiler inputs
         if: ${{ !cancelled() }}
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         if: ${{ !cancelled() }}
         id: package-cache
@@ -144,9 +144,9 @@ jobs:
         # read navigation, world context and title assets, so they need the same `full` build they had on the gate.
         run: |
           if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_UNIVERSE" != true ] && [ "$CI_AUDIT_PREPARATION" != true ]; then
-            node tools/ci/build-ci.mts lint
+            node .github/scripts/ci/build-ci.mts lint
           else
-            node tools/ci/build-ci.mts full
+            node .github/scripts/ci/build-ci.mts full
           fi
       - name: Check every object's package files and source restoration plan
         if: ${{ !cancelled() }}
@@ -177,15 +177,15 @@ jobs:
           fi
           node tools/assets/restore-object-json.mts
           node tools/prepare/cli/prepare-provenance.mts --objects-only
-          node tools/prepare/prepare-feature-index.mts
+          node tools/prepare/cli/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node tools/prepare/cli/prepare-facilities.mts --catalog-only
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             # Authoring replays volume provenance from pinned FITS.
             node tools/assets/restore-source-inputs.mts --repository-volumes
-            CSSEARTH_SOURCE_CHECK_MODE=author node --test "src/platform/exploration-*.test.mts" "tools/sources/*.test.mts" "tools/prepare/prepare-factsheets.test.mts" "tools/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tools/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tools/sources/*.test.mts" "tests/sources/*.test.mts" "tools/prepare/prepare-factsheets.test.mts" "tools/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tools/objects/surface-observations/*.test.mts"
           else
-            CSSEARTH_SOURCE_CHECK_MODE=published node --test "src/platform/exploration-*.test.mts" "tools/sources/*.test.mts" "tools/prepare/prepare-factsheets.test.mts" "tools/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tools/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tools/sources/*.test.mts" "tests/sources/*.test.mts" "tools/prepare/prepare-factsheets.test.mts" "tools/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tools/objects/surface-observations/*.test.mts"
           fi
       - name: Reproduce the prepared bank and the galaxy field from their pinned inputs
         if: ${{ !cancelled() }}

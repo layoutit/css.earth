@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import type { BodyMap } from './jwst/cubes/body-map.mts';
-import { combineUnderPolicy, assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from './body-map-product.mts';
+import type { BodyMap } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 
 const salt: MeasurementDefinition = { quantity: 'equivalent width', units: 'Angstrom', timeDependence: 'surface-property', source: 'Trumbo, Brown & Hand 2019, doi:10.1126/sciadv.aaw7123',
   method: { kind: 'equivalent-width', bandAngstrom: [3500, 5300], continuum: { model: 'polynomial', order: 3, anchorsAngstrom: [[3100, 3500], [5300, 5500]] }, reference: 'mean of spectra without the band' } };
@@ -74,11 +74,13 @@ test('a resolution limit looks at both axes of the beam', () => {
 
 test('no production code averages placed maps except through the policy', async () => {
   const { readFile, readdir } = await import('node:fs/promises');
-  const root = new URL('./', import.meta.url), offenders: string[] = [];
-  for (const entry of await readdir(root, { recursive: true })) {
-    if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
-    if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(entry);
-  }
+  const offenders: string[] = [];
+  // The telescope command's modules left tools/objects for packages/telescope-cli; they are production code here too.
+  for (const [root, prefix] of [[new URL('./', import.meta.url), ''], [new URL('../../packages/telescope-cli/src/', import.meta.url), 'telescope-cli/']] as const)
+    for (const entry of await readdir(root, { recursive: true })) {
+      if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
+      if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(`${prefix}${entry}`);
+    }
   // The slit-scan stage compares trial placements with the averaging primitive as a diagnostic; its shipped map goes through the policy.
   assert.deepEqual(offenders.filter(entry => entry !== 'hst/slit-scan-map.mts'), []);
 });

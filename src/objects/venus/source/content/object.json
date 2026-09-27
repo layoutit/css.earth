@@ -154,182 +154,68 @@
         "label": "Elevation",
         "thumbnail": "venus-lens-elevation.webp",
         "surface": "venus-elevation@2x.webp",
-        "source": {
-          "id": "magellan-elevation",
-          "url": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
-        },
         "poles": "venus-poles-elevation@2x.webp",
+        "source": {
+          "id": "usgs-venus-elevation-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m"
+        },
         "material": "venus-observation-material@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",
+          "meta": "m above 6,051 km sphere",
           "labels": [
-            "−3",
-            "4",
-            "11"
+            "−3,000",
+            "4,500",
+            "12,000"
           ],
-          "meta": "km relative to a 6,051 km radius",
-          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m",
           "recipe": {
             "palette": [
-              [
-                98,
-                68,
-                134
-              ],
-              [
-                108,
-                63,
-                151
-              ],
-              [
-                108,
-                63,
-                151
-              ],
-              [
-                108,
-                63,
-                151
-              ],
-              [
-                108,
-                63,
-                153
-              ],
-              [
-                89,
-                62,
-                153
-              ],
-              [
-                67,
-                92,
-                164
-              ],
-              [
-                70,
-                168,
-                105
-              ],
-              [
-                111,
-                167,
-                69
-              ],
-              [
-                165,
-                136,
-                58
-              ],
-              [
-                163,
-                98,
-                61
-              ],
-              [
-                166,
-                82,
-                62
-              ],
-              [
-                171,
-                72,
-                64
-              ],
-              [
-                173,
-                64,
-                63
-              ],
-              [
-                179,
-                57,
-                64
-              ],
-              [
-                178,
-                56,
-                76
-              ],
-              [
-                174,
-                55,
-                89
-              ],
-              [
-                172,
-                57,
-                107
-              ],
-              [
-                170,
-                58,
-                127
-              ],
-              [
-                172,
-                56,
-                148
-              ],
-              [
-                161,
-                58,
-                153
-              ],
-              [
-                145,
-                63,
-                153
-              ],
-              [
-                136,
-                62,
-                157
-              ],
-              [
-                124,
-                61,
-                154
-              ],
-              [
-                113,
-                62,
-                152
-              ],
-              [
-                104,
-                64,
-                154
-              ],
-              [
-                102,
-                62,
-                152
-              ],
-              [
-                102,
-                62,
-                152
-              ],
-              [
-                102,
-                62,
-                152
-              ]
+              "#243b85",
+              "#40a0c4",
+              "#dddac4",
+              "#ce9449",
+              "#89382d"
             ],
             "labels": [
-              "−3",
-              "4",
-              "11"
+              "−3,000",
+              "4,500",
+              "12,000"
             ]
-          }
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m"
         },
-        "legendNote": "From the USGS legend. Colors wrap: peaks above about 8 km turn purple again, like lowlands below 0 km. Shading is radar, not height.",
-        "shortLabel": "DEM",
-        "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "falseColor": true,
-        "notes": "USGS/NASA Magellan C3-MIDR radar mosaic overlain with colorized topography. Hue shows elevation from −3 to 11 km on a 6,051 km reference radius and wraps back to purple above about 8 km; brightness is the radar image. This archival scientific visualization is not visible surface color."
+        "qualification": "Magellan GTDR version 2, reprojected by USGS. Native elevation is in meters above a 6,051 km sphere. The grid spacing is about 4.64 km; radar footprints are coarser. Missing source cells remain missing.",
+        "notes": "Venus has no sea level to use as a baseline. This map measures height above or below a sphere with a radius of 6,051 km. Meters above the reference sphere. Negative values lie below it; positive values lie above it. Blue is lower and warm colors are higher. Magellan radar altimetry, assembled as the GTDR version 2 map and reprojected by USGS. The source grid is spaced about 4.64 km apart, but each radar measurement covers a larger area. Small terrain features are unresolved. Gray grid marks missing source data.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Venus has no sea level to use as a baseline. This map measures height above or below a sphere with a radius of 6,051 km."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Meters above the reference sphere. Negative values lie below it; positive values lie above it. Blue is lower and warm colors are higher."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Magellan radar altimetry, assembled as the GTDR version 2 map and reprojected by USGS."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The source grid is spaced about 4.64 km apart, but each radar measurement covers a larger area. Small terrain features are unresolved."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data."
+          }
+        ]
       },
       {
         "id": "ultraviolet",
@@ -349,26 +235,24 @@
       },
       {
         "id": "emissivity",
-        "label": "Emissivity",
-        "shortLabel": "Emissivity",
+        "label": "Microwave emission",
         "thumbnail": "venus-lens-emissivity.webp",
         "surface": "venus-emissivity@2x.webp",
         "poles": "venus-poles-emissivity@2x.webp",
-        "material": "venus-observation-material@2x.webp",
-        "falseColor": true,
-        "noData": true,
-        "qualification": "Magellan · USGS global GEDR · 4.64 km pixels",
-        "notes": "Magellan microwave emissivity, corrected for the antenna and atmosphere. Emission angle, surface roughness and tilt remain uncorrected. Missing observations stay empty.",
         "source": {
           "id": "magellan-global-emissivity",
-          "path": "../emissivity/magellan.tif",
+          "path": "../science/usgs/emissivity.tif",
           "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m"
         },
+        "material": "venus-observation-material@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Microwave emissivity",
-          "meta": "Dimensionless",
-          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m",
+          "meta": "Fraction of ideal emission",
+          "labels": [
+            "0.29",
+            "1.00"
+          ],
           "recipe": {
             "palette": [
               [
@@ -401,12 +285,183 @@
               "0.29",
               "1.00"
             ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m"
+        },
+        "falseColor": true,
+        "qualification": "Magellan horizontal-polarization microwave emissivity at 13 cm, adjusted for atmospheric effects. Emission angles vary from about 48° to 15°; the product is not corrected for emission angle or surface roughness. Native DN converts as (DN − 1) / 10,000.",
+        "notes": "Magellan measured heat emitted at a 13 cm wavelength, which passes through Venus’s clouds. Emissivity helps describe the surface’s electrical properties. A value of 1 is an ideal emitter at the same temperature and viewing angle; 0.5 emits half as much. This is a ratio, not a temperature. Magellan’s radiometer measurements were corrected for the atmosphere and unwanted antenna response. Viewing angle, roughness and surface tilt affect the result. This product does not correct all of them; one value cannot identify a rock type. Gray grid marks missing source data.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Magellan measured heat emitted at a 13 cm wavelength, which passes through Venus’s clouds. Emissivity helps describe the surface’s electrical properties."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "A value of 1 is an ideal emitter at the same temperature and viewing angle; 0.5 emits half as much. This is a ratio, not a temperature."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Magellan’s radiometer measurements were corrected for the atmosphere and unwanted antenna response."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Viewing angle, roughness and surface tilt affect the result. This product does not correct all of them; one value cannot identify a rock type."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data."
           }
-        }
+        ]
+      },
+      {
+        "id": "reflectivity",
+        "label": "Radar reflectivity",
+        "thumbnail": "venus-lens-reflectivity.webp",
+        "surface": "venus-reflectivity@2x.webp",
+        "poles": "venus-poles-reflectivity@2x.webp",
+        "source": {
+          "id": "usgs-venus-reflectivity-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_fresnel_reflectivity_4641m"
+        },
+        "material": "venus-observation-material@2x.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Radar reflectivity",
+          "meta": "reflectivity",
+          "labels": [
+            "0",
+            "0.25",
+            "≥0.5"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "0.25",
+              "≥0.5"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_fresnel_reflectivity_4641m"
+        },
+        "falseColor": true,
+        "qualification": "Magellan Fresnel reflectivity from a model fit to radar echoes. It describes microwave scattering, not visible brightness or a unique composition. Native DN converts as (DN − 1) / 200.",
+        "notes": "The radar echo depends on the ground’s electrical properties and texture. Scientists fit an echo model to estimate Fresnel reflectivity. A dimensionless ratio: higher values mean greater reflectivity in the model. Values at or above 0.5 share the brightest color. Magellan radar echoes were fitted with a surface-scattering model. This is an inferred surface property, not the raw echo brightness. Several materials can give similar values. The map does not uniquely identify composition or show visible surface color. Gray grid marks missing source data.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The radar echo depends on the ground’s electrical properties and texture. Scientists fit an echo model to estimate Fresnel reflectivity."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "A dimensionless ratio: higher values mean greater reflectivity in the model. Values at or above 0.5 share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Magellan radar echoes were fitted with a surface-scattering model. This is an inferred surface property, not the raw echo brightness."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Several materials can give similar values. The map does not uniquely identify composition or show visible surface color."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data."
+          }
+        ]
+      },
+      {
+        "id": "roughness",
+        "label": "Surface roughness",
+        "thumbnail": "venus-lens-roughness.webp",
+        "surface": "venus-roughness@2x.webp",
+        "poles": "venus-poles-roughness@2x.webp",
+        "source": {
+          "id": "usgs-venus-roughness-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_meter_scale_slope_4641m"
+        },
+        "material": "venus-observation-material@2x.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Radar roughness",
+          "meta": "RMS slope · degrees",
+          "labels": [
+            "0",
+            "12.7",
+            "25.4"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "12.7",
+              "25.4"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_meter_scale_slope_4641m"
+        },
+        "falseColor": true,
+        "qualification": "Magellan GSDR meter-scale surface roughness inferred from Hagfors radar-echo fits, expressed as RMS slope in degrees. This is not the slope of the elevation grid. Native DN converts as (DN − 1) / 10.",
+        "notes": "This describes small slopes and bumps within the area measured by radar. It helps compare smooth plains with rougher terrain. RMS slope in degrees: a measure of how much the small surface slopes vary. Higher values mean rougher ground. A Hagfors model fitted to Magellan radar echoes estimates the spread of slopes; the source calls this GSDR roughness. These are slopes at meter scales, not the slope between neighboring elevation-map cells. A 10° value is not a measured 10° hillside. Gray grid marks missing source data.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "This describes small slopes and bumps within the area measured by radar. It helps compare smooth plains with rougher terrain."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "RMS slope in degrees: a measure of how much the small surface slopes vary. Higher values mean rougher ground."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "A Hagfors model fitted to Magellan radar echoes estimates the spread of slopes; the source calls this GSDR roughness."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "These are slopes at meter scales, not the slope between neighboring elevation-map cells. A 10° value is not a measured 10° hillside."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data."
+          }
+        ]
       }
     ],
     "labels": {
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "emissivity": "Microwave emission",
+      "reflectivity": "Radar reflectivity",
+      "roughness": "Surface roughness"
     }
   },
   "settings": {
@@ -439,7 +494,7 @@
       "open": true,
       "src": "/scenes/venus/venus-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Venus from 350 to 1000 nanometers using the checked NASA PSG atmosphere response.",
       "source": {
         "id": "venus-psg",
@@ -453,7 +508,7 @@
       "open": false,
       "src": "/scenes/venus/venus-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Venus V-band brightness change across phase angles from zero to 179 degrees.",
       "source": {
         "id": "scientific-charts",
@@ -466,7 +521,7 @@
       "open": false,
       "src": "/scenes/venus/venus-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Venus atmospheric temperature from 92.1 bar to the upper atmosphere in the checked NASA PSG model.",
       "source": {
         "id": "venus-psg-profile",
@@ -475,56 +530,7 @@
       }
     }
   ],
-  "galleries": [
-    {
-      "id": "surface-photographs",
-      "titleKey": "surfacePhotos",
-      "open": false,
-      "qualification": "Exact institutional archive files. These are historical camera panoramas with the source archive's assembly and tonal processing, not modern restorations.",
-      "items": [
-        {
-          "id": "venera-9",
-          "label": "Venera 9 · 1975",
-          "src": "/scenes/venus/venus-venera-9.gif",
-          "width": 980,
-          "height": 234,
-          "alt": "Black-and-white Venera 9 surface panorama showing angular rocks, soil, the horizon, and part of the lander.",
-          "caption": "One of the first photos returned from the surface of another planet; angular rocks and lander hardware are visible.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/GIF/venera9.gif"
-        },
-        {
-          "id": "venera-10",
-          "label": "Venera 10 · 1975",
-          "src": "/scenes/venus/venus-venera-10.gif",
-          "width": 980,
-          "height": 250,
-          "alt": "Black-and-white Venera 10 surface panorama showing flat rock slabs, fine material, and parts of the lander.",
-          "caption": "Flat rock slabs and fine surface material appear beneath diffuse daylight; spacecraft parts occupy the foreground.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/GIF/venera10.gif"
-        },
-        {
-          "id": "venera-13",
-          "label": "Venera 13 · 1982",
-          "src": "/scenes/venus/venus-venera-13.jpg",
-          "width": 969,
-          "height": 438,
-          "alt": "Two black-and-white Venera 13 surface panoramas showing slab-like rocks, soil, calibration targets, and lander hardware.",
-          "caption": "Two camera panoramas show slab-like rocks, soil, calibration targets, and lander hardware.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/JPEG/venera13.jpg"
-        },
-        {
-          "id": "venera-14",
-          "label": "Venera 14 · 1982",
-          "src": "/scenes/venus/venus-venera-14.jpg",
-          "width": 983,
-          "height": 492,
-          "alt": "Two black-and-white Venera 14 surface panoramas showing layered rock slabs and parts of the lander.",
-          "caption": "Two camera panoramas show layered rock slabs and spacecraft hardware at the landing site.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/JPEG/venera14.jpg"
-        }
-      ]
-    }
-  ],
+  "galleries": [],
   "resources": [
     {
       "label": "NASA",

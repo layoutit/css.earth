@@ -3,10 +3,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
-import { prepareLensLabels } from "./prepare-lens-labels.mts";
-import { prepareLenses } from "./lenses";
-import { lensBillboardColors } from "./billboard-colors.mts";
-import { parseFactsheet, verifyFactsheetSources } from '../../sources/factsheet-sources.mts';
+import { lensBillboardColors, prepareLensLabels, prepareLenses } from "@cssearth/bake/objects/content";
+import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
 import type {
   ContentPreparationContext,
   ObjectContentSource,
@@ -15,7 +13,7 @@ import type {
   PreparedObjectContentDocument,
   PreparedRasterAssets,
   GalleryRecipe,
-} from "./types";
+} from "@cssearth/bake/objects/content";
 
 const titleMap: Record<string, { label: string; src: string; width: number; height: number }> = {
   facts: PREPARED_SHELL_TITLES.facts,
@@ -114,6 +112,7 @@ export async function prepareObjectContentAssets({
   }
   let chartAssets: {
     urls: string[];
+    dimensions: { src: string; width: number; height: number }[];
     gallery?: { items: GalleryRecipe["items"]; qualification?: string };
   } | undefined;
   let chartConfig: unknown;
@@ -127,6 +126,7 @@ export async function prepareObjectContentAssets({
     const { prepareChartAssets } = await import("../charts/charts");
     chartAssets = await prepareChartAssets({ sourceDirectory, publicDirectory, config: chartConfig }) as {
       urls: string[];
+      dimensions: { src: string; width: number; height: number }[];
       gallery?: { items: GalleryRecipe["items"]; qualification?: string };
     };
   }
@@ -139,7 +139,9 @@ export async function prepareObjectContentAssets({
     title: preparedWithAssets.title,
     facts: preparedWithAssets.facts,
     moreFacts: preparedWithAssets.moreFacts,
-    charts: preparedWithAssets.charts,
+    charts: preparedWithAssets.charts.map(chart => ({ ...chart,
+      ...chartAssets?.dimensions.find(image => image.src === chart.src),
+    })),
     galleries: preparedWithAssets.galleries.map((gallery, index) => ({
       ...gallery,
       ...(chartAssets?.gallery && index === 0 ? {

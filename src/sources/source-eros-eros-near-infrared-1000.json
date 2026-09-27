@@ -1,0 +1,46 @@
+{
+  "id": "source-eros-eros-near-infrared-1000",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eros · NEAR MSI 1000 nm reflectance",
+  "identifiers": [
+    {
+      "type": "archive-member",
+      "value": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip#data/eros_nearmsi_filter6.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eros/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "scope": "The eros near infrared 1000 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    },
+    {
+      "kind": "limitation",
+      "text": "The supplied filter 6 PDS4 XML repeats the filter 1 logical identifier. The archived TIFF filename and ISIS BandBin group identify filter 6 at 1000 nm.",
+      "scope": "Provider identity for the 1000 nm band.",
+      "evidence": "src/objects/eros/source/reference/eros_nearmsi_filter6.xml and eros_nearmsi_filter6.lbl"
+    }
+  ]
+}

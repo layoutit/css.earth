@@ -3,8 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
-import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
-import { parsePreparedExploration, parseExplorationImage } from '../../src/platform/prepared-exploration.mts';
+import { parsePreparedSources } from '@cssearth/objects/provenance';
+import { parsePreparedExploration, parseExplorationImage } from '@cssearth/objects/provenance';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 /** Refresh only artwork bytes/crops. Existing attribution and every unrelated
  * input must still match; this does not reacquire or rebake celestial datasets. */
@@ -12,7 +13,7 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
   const previous = requireRecord(JSON.parse(before.toString())), next = requireRecord(JSON.parse(after.toString()));
   const facilities = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-facilities.json'), 'utf8')));
   const sources = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-sources.json'), 'utf8')));
-  const validatedSources = parsePreparedSources(sources), validatedFacilities = parsePreparedExploration(facilities, validatedSources.sources);
+  const validatedSources = parsePreparedSources(sources, DATASET_ROUTES), validatedFacilities = parsePreparedExploration(facilities, validatedSources.sources, DATASET_ROUTES);
   const previousEntries = requireArray(previous.entries).map(value => requireRecord(value));
   const nextEntries = requireArray(next.entries).map(value => requireRecord(value));
   assert.deepEqual(previousEntries.map(entry => entry.id), nextEntries.map(entry => entry.id), 'Artwork membership changed');
@@ -32,7 +33,7 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
     prepared.push(image);
   }
   facilities.images = prepared;
-  parsePreparedExploration(facilities, validatedSources.sources); parsePreparedSources(sources);
+  parsePreparedExploration(facilities, validatedSources.sources, DATASET_ROUTES); parsePreparedSources(sources, DATASET_ROUTES);
   return [{ path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(facilities, null, 2) + '\n' },
     { path: resolve(root, 'site/prepared-sources.json'), text: JSON.stringify(sources, null, 2) + '\n' }];
 }

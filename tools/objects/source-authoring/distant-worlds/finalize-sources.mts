@@ -8,7 +8,7 @@ await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
-import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 const root = resolve(import.meta.dirname, '../../../..');

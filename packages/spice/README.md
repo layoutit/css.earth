@@ -27,13 +27,13 @@ A kernel bank is one pinned set of a mission's kernels under the checkout's `src
 committed. The package finds `src/spice` from its own package name, so the path is the same from `src/`, from `dist/`
 and from any caller. A bank's `manifest.json` has the shape of a body's source manifest, and that format belongs to
 `@cssearth/objects/node`, so `kernelBanks` takes the manifest reader as an argument.
-[`tools/kernel-banks/kernel-bank.mts`](../../tools/kernel-banks/kernel-bank.mts) binds the banks to
+[`packages/bake/cli/kernel-bank.mts`](../bake/cli/kernel-bank.mts) binds the banks to
 `@cssearth/objects/node` (`createSourceManifest`) for the preparation tools, and it is also the command line:
 
 ```sh
-node tools/kernel-banks/kernel-bank.mts acquire <set>        # restore missing kernels, then verify every pin
-node tools/kernel-banks/kernel-bank.mts verify <set>         # verify every pin
-node tools/kernel-banks/kernel-bank.mts add <set> <url>...   # download, pin and append kernels [--credit] [--license] [--catalogue]
+node packages/bake/cli/kernel-bank.mts acquire <set>        # restore missing kernels, then verify every pin
+node packages/bake/cli/kernel-bank.mts verify <set>         # verify every pin
+node packages/bake/cli/kernel-bank.mts add <set> <url>...   # download, pin and append kernels [--credit] [--license] [--catalogue]
 ```
 
 ```text

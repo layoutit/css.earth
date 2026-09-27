@@ -2,7 +2,7 @@
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
 // catalogue, the runtime plan, the content document, the runtime asset manifest, the prepared provenance and the
 // object descriptor. Usage: node tools/objects/dist/refresh-features.js <objectId> [...]
-import { updateInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { updateInventory } from '@cssearth/objects/node';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

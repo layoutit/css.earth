@@ -47,22 +47,22 @@ jobs:
           # transferring the source-media bank before any validation job can start.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /tools/**/*.mts
+            /.github/scripts/**/*.mts
             /packages/core/src/validate.ts
             /.github/ci-areas.json
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
       - name: Classify what this change touched, and which heavy jobs it needs
-        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (tools/ci/ci-affected.mts).
+        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (.github/scripts/ci/ci-affected.mts).
         # A push to main always runs every job regardless of this output (see each job's `if:`); only a pull request
         # can skip one. `docs_only` is kept for callers outside this workflow that still read it.
         id: classify
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
+            node .github/scripts/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
           else
-            node tools/ci/ci-affected.mts push "${{ github.event.before }}"
+            node .github/scripts/ci/ci-affected.mts push "${{ github.event.before }}"
           fi
       - name: Check that every commit is one Conventional Commits line with no attribution
         # Required with the rest of this job. A local commit-msg hook gives the same answer earlier, but a hook can be
@@ -70,14 +70,14 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node tools/ci/commit-message.mts --range "origin/$GITHUB_BASE_REF..$HEAD_SHA"
+        run: node .github/scripts/ci/commit-message.mts --range "origin/$GITHUB_BASE_REF..$HEAD_SHA"
       - name: Scope the runtime ownership check
         id: ownership-scope
         # Computed here (this checkout already has the full history a merge-base diff needs) so the "Prepared
         # universe and shared renderer" job's own checkout can stay shallow. A push to main always keeps --all.
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            echo "args=$(node tools/ci/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
+            echo "args=$(node .github/scripts/ci/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
           else
             echo "args=--all" >> "$GITHUB_OUTPUT"
           fi
@@ -138,7 +138,7 @@ jobs:
         run: pnpm check:body-references
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -156,14 +156,25 @@ jobs:
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/ci/build-ci.mts lint
+        run: node .github/scripts/ci/build-ci.mts lint
+      - name: Check the architecture against its baseline
+        # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
+        # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
+        # retired tools/ folders, the nebula boundaries and declared workspace dependencies), which has no baseline. It reads every source file this sparse tree keeps, so a
+        # missing one stops it as incomplete rather than passing. About eight seconds.
+        run: pnpm check:architecture
       - name: Test the shared object libraries
-        # The node tests of @cssearth/bake/objects/<topic> stay beside the pipelines in tools/objects/, which no other PR step
-        # runs; tools/ci/test-bake-objects.mts selects every test that imports an object entry, and unrestored downloads skip.
+        # The node tests of @cssearth/bake/objects/<topic> sit beside the pipelines in tools/objects/, under tests/objects/ or beside
+        # their module in packages/bake/src/objects/, which no other PR step runs; .github/scripts/checks/test-bake-objects.mts selects
+        # every test that imports an object entry, and unrestored downloads skip.
         # They read the generated solar geometry built above and five tracked geology shapefiles (5.4 MB) the sparse tree leaves out.
         run: |
           git sparse-checkout add '/src/objects/**/*.shp'
           pnpm test:bake-objects
+      - name: Test the telescope command
+        # Every node test of @cssearth/telescope-cli (query, sessions, families, archive leads, the process boundary), selected by
+        # location rather than by what it imports; a test whose toolchain or restored input is absent skips and names it.
+        run: pnpm test:telescope-cli
       - name: Check physical frame receipts
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
         run: node tools/ci/check-object-runtime-ownership.mts --receipts
@@ -179,11 +190,13 @@ jobs:
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
         # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
         # path (tools/assets/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
-        # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
+        # dry-run report, the runner behind `pnpm check:pr`, and the test helper that decides which absent inputs skip (untracked
+        # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
-          node --test "tools/ci/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
-            "src/platform/runtime-asset-*.test.mts"
+          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" "tools/ci/*.test.mts" ".github/scripts/architecture/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+            tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts \
+            "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 
   typecheck:
     name: Typecheck
@@ -215,7 +228,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -244,7 +257,7 @@ jobs:
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/ci/build-ci.mts full
+        run: node .github/scripts/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Test that tools/prepare libraries load silently and refuse to run by their old path
@@ -286,7 +299,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -313,7 +326,7 @@ jobs:
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/ci/build-ci.mts full
+        run: node .github/scripts/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
@@ -357,7 +370,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -377,9 +390,9 @@ jobs:
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: |
           if [ "$CI_UNIVERSE_LANE" = shell ]; then
-            node tools/ci/build-ci.mts full
+            node .github/scripts/ci/build-ci.mts full
           else
-            node tools/ci/build-ci.mts full
+            node .github/scripts/ci/build-ci.mts full
           fi
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
@@ -403,7 +416,7 @@ jobs:
           # Restoring the Sun's published assets replaces the context generated by build-ci.
           # Rebuild all three context files together from this checkout's catalogue before testing it.
           pnpm prepare:world-context
-          node tools/prepare/prepare-feature-index.mts
+          node tools/prepare/cli/prepare-feature-index.mts
       - name: Test the selected universe lane
         # Each runner owns its writers and CPU budget. Native runner discovery is unchanged.
         env:
@@ -463,7 +476,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -481,7 +494,7 @@ jobs:
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/ci/build-ci.mts full
+        run: node .github/scripts/ci/build-ci.mts full
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
@@ -498,7 +511,7 @@ jobs:
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
               node --test --test-concurrency=1 tests/objects/publication.test.mts \
-                tools/prepared/write-prepared-set.test.mts tools/prepare/preparation-cache.test.mts \
+                tests/delivery/write-prepared-set.test.mts tests/preparation/preparation-cache.test.mts \
                 tools/prepare/prepare-objects.test.mts
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
@@ -553,7 +566,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci/ci-cache-key.mts
+        run: node .github/scripts/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: output/tsbuildinfo/nebula-*.tsbuildinfo
@@ -572,12 +585,11 @@ jobs:
         run: pnpm test:packages
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps --only-shell chromium
-      - name: Check all nebula packages, tests and dependency boundaries
+      - name: Check all nebula packages and tests
+        # Their dependency boundaries are the architecture check's nebula-boundaries rule, which Contract lint runs on every change.
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-        run: |
-          pnpm typecheck:nebula
-          pnpm check:nebula-boundaries
+        run: pnpm typecheck:nebula
       - name: Test numerical owners, durable jobs and isolated React controls
         # Explicit cache-independent selection. Do not substitute test:lab:nebula:
         # that command restores real source assets before running the wider suite.

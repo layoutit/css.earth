@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import { sourceObject } from '@cssearth/objects/sources';
 import { readFieldRecipe } from './recipe.mts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
@@ -7,8 +7,8 @@ import { fitClouds } from './cloud-fit.mts';
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { manifestSources } from '../sources/context-source-records.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import { manifestSources } from '@cssearth/bake/sources';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { loadScientificCatalogue } from './catalogue.mts';
 const root=process.cwd();
 const manifest=sourceObject(JSON.parse(await readFile('src/objects/nearby-universe/source/manifest.json','utf8')));

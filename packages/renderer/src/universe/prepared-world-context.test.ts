@@ -1,6 +1,6 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
-import { required } from '../../../../tools/contract/test-values.mts';
+import { required } from '@cssearth/objects/node/contract';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';

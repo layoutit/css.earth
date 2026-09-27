@@ -1,4 +1,5 @@
 import { sourceId, sourceText } from '@cssearth/objects/sources';
+import type { DatasetHost, DatasetRoutes } from '@cssearth/objects/provenance';
 
 /** Only these two application routes may select a prepared object's dataset. */
 export function datasetDestination(objectId: string, route: string, lensId: string): string {
@@ -7,22 +8,6 @@ export function datasetDestination(objectId: string, route: string, lensId: stri
   if (route === `/sun/?focus=${encodeURIComponent(objectId)}`) return `${route}&focusLens=${encodeURIComponent(lensId)}`;
   throw new TypeError('Invalid dataset object route.');
 }
-
-/** Where a prepared object's lens is reached: its own dataset, or, for a volume attached to a body, the body's dataset that
- * shows it. An attached volume is no place of its own, so it never gets a destination of its own. */
-export function objectDataset(object: { readonly id: string; readonly name: string; readonly route: string;
-  readonly hostedBy?: { readonly objectId: string; readonly name: string; readonly route: string; readonly datasets: Readonly<Record<string, { readonly lensId: string; readonly label: string }>> } },
-  lens: { readonly id: string; readonly label: string }) {
-  const hosted = object.hostedBy;
-  if (hosted === undefined) return { objectId: object.id, objectName: object.name, lensId: lens.id, label: lens.label, href: datasetDestination(object.id, object.route, lens.id) };
-  const dataset = hosted.datasets[lens.id];
-  if (dataset === undefined) throw new TypeError(`No dataset of ${hosted.objectId} shows ${object.id}/${lens.id}.`);
-  return { objectId: object.id, objectName: hosted.name, lensId: lens.id, label: dataset.label, href: datasetDestination(hosted.objectId, hosted.route, dataset.lensId),
-    host: { objectId: hosted.objectId, lensId: dataset.lensId } };
-}
-
-/** The body dataset a hosted lens is reached through. */
-export interface DatasetHost { readonly objectId: string; readonly lensId: string }
 
 /** Exact canonical URLs reject cross-object links, duplicate parameters and external destinations; a hosted lens's URL is its
  * host dataset's. */
@@ -35,3 +20,7 @@ export function parseDatasetDestination(value: unknown, ownerId: string, ownerLe
   }
   return href;
 }
+
+/** The application's dataset routes, which the provenance compilers and parsers in `@cssearth/objects/provenance` take. Marked
+ * pure so a client bundle that only reads URLs drops it. */
+export const DATASET_ROUTES: DatasetRoutes = /* @__PURE__ */ Object.freeze({ destination: datasetDestination, parse: parseDatasetDestination });

@@ -7,9 +7,10 @@ import { resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { sourceBytes } from '@cssearth/bake/volume/node';
-import { publishSourceBytes } from './source-acquisition.mts';
+import { publishSourceBytes } from '@cssearth/bake/delivery';
 import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
-import { fetchWithRetry, RUNTIME_ASSET_ORIGIN, sourceCacheUrl } from './source-mirror.mts';
+import { fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
+import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 const argumentsList = process.argv.slice(2);

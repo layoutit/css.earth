@@ -1,12 +1,12 @@
 import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from "@cssearth/renderer";
 import { requireRecord, requireArray } from "@cssearth/core";
-import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
-import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "./prepared-presentation-contract.mts";
-import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
+import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "@cssearth/bake/presentation";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 
 type FixtureVariant = { when: Record<string, string | number | boolean | null>; required: string[]; writes: unknown[]; materials: unknown[] };
 export function presentationFixture(definition: ObjectRuntimeDefinition) {

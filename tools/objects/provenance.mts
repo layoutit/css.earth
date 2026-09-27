@@ -1,6 +1,6 @@
 import { sha256 } from '@cssearth/core/node';
-import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
-import { recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
+import type { ProductInputEvidence } from '@cssearth/objects/provenance';
+import { recordPreparationEvidence } from '@cssearth/bake/sources';
 import {hasErrorCode} from '@cssearth/core';
 import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.mts';
 import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from './provenance-records.mts';
@@ -14,7 +14,7 @@ import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
-import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
+import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '@cssearth/objects/provenance';
 import { provenanceProducts } from './provenance-recipes.mts';
 
 
@@ -125,6 +125,15 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     const verificationOperations = acquisitionOperations.filter(operation => operation.expectedPath === path) ?? [];
     const dependencies = acquisitionOperation?.fileSource
       ? [await bindSource(text(acquisitionOperation.fileSource), new Set([...visiting, path]))] : [];
+    if (acquisitionOperation?.kind === 'geotiff-grid' || acquisitionOperation?.kind === 'geotiff-image') {
+      const recipePath = text(acquisitionOperation.recipePath);
+      const {readGeoTiffGridRecipe} = await import('./acquisition/geotiff-grid.mts');
+      if (acquisitionOperation.kind === 'geotiff-image') {
+        const {readGeoTiffImageRecipe} = await import('./acquisition/geotiff-image.mts');
+        await readGeoTiffImageRecipe(sourceDirectory, recipePath);
+      } else await readGeoTiffGridRecipe(sourceDirectory, recipePath);
+      dependencies.push(await bindSource(recipePath, new Set([...visiting, path])));
+    }
     if (acquisitionOperation?.kind === 'mapped-composition') {
       const recipePath = text(acquisitionOperation.recipePath), recipeEntry = byPath.get(recipePath);
       if (!recipeEntry) throw new Error(`Unbound composition recipe: ${recipePath}.`);

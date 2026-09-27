@@ -35,6 +35,15 @@
     "src/galaxy-catalog",
     "src/cluster-catalog",
     "src/world-context",
-    "src/nebula"
+    "src/nebula",
+    "src/runtime-source",
+    "src/prepared-presentation",
+    "src/delivery",
+    "src/sources",
+    "src/contract",
+    "src/thread-pool",
+    "src/navigation",
+    "src/surface-previews",
+    "src/preparation"
   ]
 }

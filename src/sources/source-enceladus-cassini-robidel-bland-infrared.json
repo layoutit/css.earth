@@ -1,0 +1,22 @@
+{
+  "id": "source-enceladus-cassini-robidel-bland-infrared",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PIA24027: Enceladus in the Infrared (Map View)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
+      "label": "NASA release and map description"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/enceladus/source/manifest.json",
+      "locator": "/inputs/22"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

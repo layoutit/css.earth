@@ -22,7 +22,7 @@ const plan = parsePreparedWorldContext({ schema:'cssearth-world-context@1', fram
   focus:{id:'sun',name:'Sun',color:'#f5a623',positionM:[0,0,0],radiusM:10,pointSource:{absoluteMagnitude:4.832125665882298,color:'#fff5e0',proximityEnhancement:{fullDistanceM:1e12,fadeOutDistanceM:1e14,radiusMultiplier:1.6,brightnessMultiplier:1.5}}},bodies:[{id:'mercury',name:'Mercury',color:'#999999',positionM:[1,0,0],radiusM:1,orbit:{centerBodyId:'sun',centerPositionM:[0,0,0],verticesM:[[1,0,0],[1,0,0],[1,0,0],[1,0,0],[1,0,0],[1,0,0],[1,0,0],[1,0,0]],trail:[1,1,1,1,1,1,1,1]}}],
   camera:{minimumDistanceM:11,maximumDistanceM:1e25,framingReferenceZoom:1,presentation:{projection:{model:'css-perspective-shared-with-sky',cssPerspective:'1px'},dolly:{model:'multiplicative-wheel-distance',wheelStepPerDelta:.1,minimumDistanceRadii:1.1,maximumDistanceOverOrbitExtent:1},levelOfDetail:{model:'silhouette-diameter-crossfade',billboardFadeStartDiscPixels:20,billboardFullDiscPixels:14,markerFadeStartDiscPixels:8,markerFullDiscPixels:4.5},orbitLineFade:{visibleBelowDiscHeightShare:.1,hiddenAboveDiscHeightShare:.2},drag:{model:'screen-axis-tumble'}}},volume:{objectId:'milky-way',fadeStartDistanceM:1e18,fullDistanceM:1e19},stars:{objectId:'stellar-neighbourhood',fadeStartDistanceM:1e12,fullDistanceM:1e15},system:{fadeOutStartDistanceM:1e14,hiddenDistanceM:1e15},sky:{sceneRegistration:'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)'} });
 const field: PreparedCssPointField = { schema:'cssearth-css-point-field@1',id:'stars',frame:{referenceFrame:'sun-icrf',epochJdTt:1,originM:[0,0,0],localToReferenceXyzw:[0,0,0,1],metersPerUnit:parsec,boundsUnits:{min:[-1,-1,-1],max:[1,1,1]}},stars:[{id:'star',positionUnits:[0,0,-1],absoluteMagnitude:0,colorIndex:0,name:null,coverageAnchor:false}],nodes:[{positionUnits:[0,0,-1],radiusUnits:0,absoluteMagnitude:0,colorIndex:0,first:0,count:1,children:[]}],atlas:{path:'points.png',columns:2,tileSize:32,colors:[[255,245,224],[0,0,0]],haloRadii:2.5},photometry:{minimumMagnitude:-10,maximumMagnitude:20,step:10,floor:1/255,limitingMagnitude:20,hintsLimitMagnitude:10,minimumRadiusPx:.6,samples:[{radiusPx:1,luminance:1},{radiusPx:1,luminance:.5},{radiusPx:1,luminance:.1},{radiusPx:1,luminance:0}]},policy:{activeSlots:1,transitionSlots:1,maxErrorPx:2,transitionMs:100},labels:{activeSlots:1,transitionSlots:1,capHeightPx:12,gapPx:7,maxAlpha:.55,fadeMs:300},resources:[{path:'points.png',sha256:'0'.repeat(64),bytes:1,width:64,height:32}] };
-const viewport={focalPixels:400,principalOffsetPixels:[0,0] as const};
+const viewport={focalPixels:400,widthPixels:800,heightPixels:600,principalOffsetPixels:[0,0] as const};
 const world = (distanceM:number) => ({referenceFrame:'sun-icrf',epochJdTt:1,pose:{positionM:[0,0,distanceM] as const,orientationXyzw:[0,0,0,1] as const}});
 
 test('focus point schema is optional, exact, and rejects malformed photometry', () => {
@@ -93,6 +93,32 @@ test('mount retains one PSF node, activates the actual point hit target, and rem
   layer!.publish(world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}});
   expect(element.style.visibility).toBe('hidden'); expect(element.style.pointerEvents).toBe('none');
   layer!.destroy(); expect(host.children).not.toContain(element);
+});
+
+test('off-screen focus points leave keyboard navigation after the coast, using the measured viewport', () => {
+  const document = new Document(), host = document.createElement(), before = document.createElement();
+  host.appendChild(before);
+  const layer = mountWorldContextPointSource({ host: host as unknown as HTMLElement,
+    before: before as unknown as globalThis.Element, plan, field, resolveResource: path => path })!;
+  const visible = world(10 * parsec);
+  const outside = { ...visible, pose: { ...visible.pose, positionM: [1000 * parsec, 0, 10 * parsec] as const } };
+  layer.publish(visible, viewport);
+  const element = layer.element as unknown as Element;
+  expect(element.tabIndex).toBe(0);
+  const attributes = new Map(element.attributes), data = { ...element.dataset };
+  layer.setCoasting(true);
+  layer.publish(outside, viewport);
+  expect(element.tabIndex).toBe(0);
+  expect(element.attributes).toEqual(attributes);
+  expect(element.dataset).toEqual(data);
+  layer.setCoasting(false);
+  layer.publish(outside, viewport);
+  expect(element.tabIndex).toBe(-1);
+  expect(element.attributes.has('role')).toBe(false);
+  layer.publish(visible, viewport);
+  expect(element.tabIndex).toBe(0);
+  expect(element.attributes.get('aria-label')).toBe('Go to Sun');
+  layer.destroy();
 });
 
 

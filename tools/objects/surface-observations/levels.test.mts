@@ -1,12 +1,12 @@
-import { fixtureRecord } from '../../contract/test-values.mts';
-import { required } from '../../contract/test-values.mts';
+import { fixtureRecord } from '@cssearth/objects/node/contract';
+import { required } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from './levels.mts';
-import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
-import { namedLevelRefusal } from './surface.mts';
-import { observingSeasons } from './formats/controlled-camera.mts';
+import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from '@cssearth/bake/objects/layers/terrestrial';
+import { validateSurfaceObservation, loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
+import { namedLevelRefusal } from '@cssearth/bake/objects/layers/terrestrial';
+import { observingSeasons } from '@cssearth/bake/objects/layers/terrestrial';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -188,4 +188,13 @@ test('the authored mosaic binds distinct images and rejects ambiguous frame poli
 (r: unknown) => fixtureRecord(r,"levelMatching")["maximumGain"] = 3, (r: unknown) => fixtureRecord(r)["frames"] = [], (r: unknown) => fixtureRecord(r)["path"] = fixtureRecord(r,"frames",0)["path"]]) {
     const changed = structuredClone(recipe); alter(changed); assert.throws(() => validateSurfaceObservation(changed, shape), /source-bound/);
   }
+});
+
+// Dense regional overlaps must keep the same geometric support and reject unbounded work.
+test('dense overlap sampling stays inside the source triangle and remains bounded', () => {
+  const faces = [{ vertices: [[0, 0, 0], [1, 0, 0], [0, 1, 0]] }];
+  const samples = sampleTrianglePoints(faces, 256);
+  assert.equal(samples.length, 256);
+  assert.ok(samples.every(([x, y, z]) => x > 0 && y > 0 && x + y < 1 && z === 0));
+  assert.throws(() => sampleTrianglePoints(faces, 257), /sample count/);
 });

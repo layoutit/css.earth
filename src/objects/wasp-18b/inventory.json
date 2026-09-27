@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "wasp-18b-hotspot-profile.svg",
+      "bytes": 7381,
+      "sha256": "d78b43b07216b44e348a0e58b0e9211fbd9693bc7580cb783742998a60a53dc4"
+    },
+    {
+      "location": "public",
       "filename": "wasp-18b-lens-temperature-0-89um.webp",
       "bytes": 232,
       "sha256": "e81d2f0796cdafa179599db6b3acf97859ae465527a4b250504d169d62535e54"
@@ -472,14 +478,14 @@
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 1407,
-      "sha256": "172fa172dfe0dcdb5546aed6c1394195e00f62f3dcc45739667a277ea4ba2a56"
+      "bytes": 1535,
+      "sha256": "38c6705b02aa6ce42ccea18cd299a13e624137124c323c3f0ba6a8370e76c09a"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1624,
-      "sha256": "fcac5e8b3f2ca81ae19ce8e316b3b218ea3475b5f353a9caae069d88077b3324"
+      "bytes": 2445,
+      "sha256": "6217d92d66ed23a2c1b971bff1c4937e2f06f72aab4e02a755594225c046f031"
     },
     {
       "location": "prepared",

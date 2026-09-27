@@ -40,6 +40,8 @@ The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus 
 
 Each object has datasets assigned, with selectable views of its available products. A view can be a true-colour or single-filter photograph, an enhanced- or false-colour mosaic, a thermal, infrared, ultraviolet or radar map, topography, or an interior model.
 
+Sequences such as **Hubble dates** start looping when opened. Each map stays on screen for 1.5 seconds before the next begins loading. Use **Pause** or the arrows to inspect one step; leaving the sequence or hiding the tab stops playback.
+
 The data comes from spacecraft, landers and telescopes, including:
 
 - **Planetary missions:** MESSENGER, Cassini, Galileo, Juno, Dawn, New Horizons, Voyager 1 and 2, Rosetta, Hayabusa and Hayabusa2, OSIRIS-REx, NEAR Shoemaker, DART and LICIACube, Magellan, the Viking orbiters and landers, LRO, MRO and Mars Odyssey.
@@ -55,7 +57,7 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 - **FITS and PDS:** FITS images and tables, including Rice-compressed ones, with their sky orientation, and PDS3 and PDS4 labels ([`@cssearth/fits`](packages/fits/README.md), [PDS labels](docs/pds-labels.md)).
 - **SPICE:** kernels, clocks, frames and pointing, used to place a spacecraft's camera for each photograph ([`@cssearth/spice`](packages/spice/README.md)).
 - **Surface imagery:** image decoding, shape-model reduction, UV mapping and texture atlases ([surface preparation](docs/surface-preparation.md), [colour preparation](docs/color-preparation.md)).
-- **Photometry:** Hapke and disc models that separate a surface's brightness from its lighting and viewing angles ([`tools/photometry/`](tools/photometry/README.md)).
+- **Photometry:** Hapke and disc models that separate a surface's brightness from its lighting and viewing angles ([`packages/bake/src/photometry/`](packages/bake/src/photometry/README.md)).
 - **Interferometry:** calibration and image reconstruction for stellar surfaces from raw VLTI and ALMA observations ([interferometric imaging](docs/interferometric-imaging.md)).
 - **Eclipse mapping:** exoplanet maps fitted from raw JWST light curves ([eclipse mapping](docs/eclipse-mapping.md)).
 - **Nebulae and galaxies:** 3D volumes and galaxy fields from surveys and catalogues ([prepared nebulae](docs/nebulae/README.md), [galaxies](docs/galaxies/README.md)); the volume bake is [`@cssearth/bake/volume`](packages/bake/README.md).

@@ -4,8 +4,8 @@ Each virtual telescope in this repository re-runs an observatory's own software 
 FITS image, a cube, a map, or a list of detected photons. This page shows one picture per instrument, made from a
 product that toolkit has already produced here. Nothing on this page is an archive preview or a press image.
 
-Every picture comes from one renderer, `tools/objects/telescopes/example-picture.mts`, and one checked-in recipe,
-`tools/objects/telescopes/examples.json`. The recipe states the file, the extension or plane, the pixel window, the unit
+Every picture comes from one renderer, `packages/telescope-cli/src/example-picture.mts`, and one checked-in recipe,
+`packages/telescope-cli/src/examples.json`. The recipe states the file, the extension or plane, the pixel window, the unit
 the numbers are in, the two values drawn as black and white, the stretch between them, which way up the picture is, the
 whole-number enlargement and the colours. Three pictures are in colour, because three measurements of the same target
 exist on one pixel grid: each measurement is stretched on its own limits in its own unit and put straight into red,
@@ -20,7 +20,7 @@ examples, rerun the chain with:
 
 ```
 <the toolkit command listed below>                  # re-makes the product
-node tools/objects/telescopes/example-picture.mts   # re-makes every picture in docs/telescopes
+node packages/telescope-cli/src/example-picture.mts   # re-makes every picture in docs/telescopes
 ```
 
 Products live in the git-ignored `output/` and `.local/` directories of the worktree the toolkit ran in, so the recipe
@@ -41,7 +41,7 @@ The recorded `image3.mts` command for this picture uses
 `--grid src/objects/ngc-3132/source/sky-bands/jwst-nircam.json`. That grid
 recipe is absent from this checkout, and no current NGC 3132 shared-grid recipe
 was found. The program record at
-[`ngc-3132-2733.json`](../tools/objects/jwst/imaging/programs/ngc-3132-2733.json)
+[`ngc-3132-2733.json`](../packages/telescope-cli/src/archives/jwst/imaging/programs/ngc-3132-2733.json)
 still identifies the exposures, but it does not replace the missing grid.
 
 ## JWST, NIRSpec: the ring around SN 1987A
@@ -54,7 +54,7 @@ is the brightest thing in this cube. Brightness is surface brightness in MJy/sr,
 100. North is up and east left. The knots on the ring are where the shock from the 1987 explosion is running into gas
 the star shed long before it died. Grey is outside the cube's footprint.
 
-`node tools/objects/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05`
+`node packages/telescope-cli/src/archives/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05`
 
 ## JWST, MIRI: the Ring Nebula at 7.7 microns
 
@@ -68,7 +68,7 @@ central white dwarf and a few stars run past the top of the range and clip to wh
 had no MIRI product of an extended target, so the programme was pinned and the stage re-run, and the toolkit's own
 comparison against the archive's mosaic agrees to about 2 parts in 10 million of the RMS brightness.
 
-`node tools/objects/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720`
+`node packages/telescope-cli/src/archives/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720`
 
 ## Hubble, STIS: the 450 nm sodium chloride band on Europa
 
@@ -94,7 +94,7 @@ highest, and the cooler edges are the poles and the limb. The disc is 768 millia
 is 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. Be careful with the fine east-west streaks:
 they are about 2 K, which is the image noise at the beam scale, not surface features.
 
-`node tools/objects/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch`
+`node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch`
 
 ## VLTI, MATISSE: the surface of Betelgeuse
 
@@ -107,7 +107,7 @@ frequencies and the image is the one that fits them, so read the bright and dark
 rather than as resolved features. The toolkit convolved it with a 4 milliarcsecond beam, as interferometric images are
 shown; nothing further is smoothed here.
 
-`node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse`
+`node packages/telescope-cli/src/archives/interferometry/image-star.mts packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse`
 
 ## VLT, NACO: Ceres from the ground
 
@@ -119,7 +119,7 @@ world coordinates, so no sky direction is claimed here; the picture is the detec
 Ceres is resolved, about 52 pixels across at half its peak brightness, but this is a small, blurred disc: the wide glow
 around it is the adaptive optics halo, which is in the data, and there is no surface detail to see at this scale.
 
-`node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47`
+`node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47`
 
 ## Chandra: Cassiopeia A in X-rays
 
@@ -135,7 +135,7 @@ exposure rather than anything in the rendering. This observation is new here: th
 already on disk was a deliberately offset pointing that keeps the Crab Nebula off the detector, so Cas A was pinned and
 reprocessed, and the toolkit's event-by-event comparison against the archive matched all 839,545 events.
 
-`node tools/objects/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
+`node packages/telescope-cli/src/archives/chandra/reprocess.mts casa-acisi 210 .local/chandra/casa-acisi`
 
 ## Spitzer, IRAC: NGC 3132 in the infrared
 
@@ -150,7 +150,7 @@ because its shell is brightest at 8 microns, and the stars are blue-white becaus
 scattered single-colour specks are cosmic ray hits that survived in one channel only; a few dark pixels near the centre
 are missing from channel 4. This is the same nebula as the NIRCam picture above, at nearly seven times the pixel size.
 
-`node tools/objects/spitzer/mosaic.mts ngc3132-4416768`
+`node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768`
 
 ## Keck II, KCWI: a patch of the Orion Nebula
 
@@ -168,7 +168,7 @@ background, and the vertical striping is slice-to-slice calibration residual, no
 because it is what the Keck toolkit has actually produced, and it should be replaced once a real science exposure is
 reduced.
 
-`node tools/objects/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits`
+`node packages/telescope-cli/src/archives/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits`
 
 ## Gemini South, GMOS: the interstellar comet 3I/ATLAS
 
@@ -181,7 +181,7 @@ coordinates, north is 0.1 degrees and east 269.9 degrees clockwise from up. The 
 and the comet moved between the four exposures, so it appears as a row of overlapping images whose comae run together
 into one smear rather than as a single object. Some of the points near it are ordinary stars.
 
-`node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science`
+`node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science`
 
 ## Juno, JunoCam: one strip set of Europa
 
@@ -195,4 +195,4 @@ is rotated and the strips are not combined, which is why the limb steps sideways
 fraction of a second after the one above it, with the spacecraft spinning. The window keeps 640 of the 1,648 columns.
 The JunoCam toolkit's cast stage, which would place these strips on the body, has not been run in this worktree.
 
-`node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels ...`
+`node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels ...`

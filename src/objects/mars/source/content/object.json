@@ -126,67 +126,67 @@
         "thumbnail": "mars-lens-elevation.webp",
         "surface": "mars-surface-elevation@2x.webp",
         "poles": "mars-poles-elevation@2x.webp",
-        "legend": {
-          "kind": "scale",
-          "title": "Relative elevation",
-          "labels": [
-            "Lower",
-            "Higher"
-          ],
-          "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
-          "recipe": {
-            "palette": [
-              [
-                52,
-                27,
-                142
-              ],
-              [
-                43,
-                102,
-                204
-              ],
-              [
-                45,
-                190,
-                198
-              ],
-              [
-                82,
-                220,
-                107
-              ],
-              [
-                230,
-                240,
-                88
-              ],
-              [
-                224,
-                102,
-                72
-              ],
-              [
-                242,
-                242,
-                242
-              ]
-            ],
-            "labels": [
-              "Lower",
-              "Higher"
-            ]
-          }
-        },
         "source": {
-          "id": "elevation",
-          "path": "../manifest.json"
+          "id": "usgs-mars-elevation-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m"
         },
         "material": "mars-observation-material@2x.webp",
-        "shortLabel": "MOLA",
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "meta": "m above GMM-2B areoid",
+          "labels": [
+            "−9,000",
+            "6,500",
+            "22,000"
+          ],
+          "recipe": {
+            "palette": [
+              "#243b85",
+              "#40a0c4",
+              "#dddac4",
+              "#ce9449",
+              "#89382d"
+            ],
+            "labels": [
+              "−9,000",
+              "6,500",
+              "22,000"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m"
+        },
         "falseColor": true,
-        "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
-        "notes": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout."
+        "qualification": "USGS MOLA global DEM, from Mars Global Surveyor laser measurements in 1999–2001. Heights are meters above the GMM-2B areoid, truncated to degree and order 50. Native spacing is about 463 m; the publisher interpolated gaps. The areoid is a gravity-based reference surface, not a fixed-radius sphere.",
+        "notes": "Mars has no global ocean. Its reference level, called the areoid, follows gravity and plays a role similar to sea level on Earth. Meters above the GMM-2B areoid. Blue is lower and warm colors are higher; negative values are below the reference level. Mars Global Surveyor’s MOLA laser measured the surface in 1999–2001. USGS assembled the elevation grid. The source spacing is about 463 m, and the publisher filled gaps by interpolation. This globe shows a coarser sample of that grid. Gray grid marks missing source data.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Mars has no global ocean. Its reference level, called the areoid, follows gravity and plays a role similar to sea level on Earth."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Meters above the GMM-2B areoid. Blue is lower and warm colors are higher; negative values are below the reference level."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Mars Global Surveyor’s MOLA laser measured the surface in 1999–2001. USGS assembled the elevation grid."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The source spacing is about 463 m, and the publisher filled gaps by interpolation. This globe shows a coarser sample of that grid."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data."
+          }
+        ]
       },
       {
         "id": "thermal",
@@ -263,7 +263,7 @@
       },
       {
         "id": "chlorine",
-        "label": "Chlorine",
+        "label": "Surface elements",
         "shortLabel": "Cl",
         "thumbnail": "mars-lens-chlorine.webp",
         "surface": "mars-surface-chlorine@2x.webp",
@@ -281,7 +281,7 @@
         "legend": {
           "kind": "scale",
           "title": "Chlorine (wt%)",
-          "meta": "5° bins · 2002–2005",
+          "meta": "wt%",
           "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
           "recipe": {
             "palette": [
@@ -316,11 +316,37 @@
               "1.04"
             ]
           }
-        }
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Chlorine"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Weight percent: 1% means one part of this element per 100 parts of material by weight."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Mars Odyssey’s gamma-ray spectrometer measured radiation from the ground between June 2002 and April 2005."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each source cell covers 5° of latitude and longitude. The display keeps those cells; it does not resolve individual deposits."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "Measurement uncertainty can produce negative estimates, which remain visible. Gray marks missing data; the source tables include error estimates."
+          }
+        ]
       },
       {
         "id": "iron",
-        "label": "Iron",
+        "label": "Surface elements",
         "shortLabel": "Fe",
         "thumbnail": "mars-lens-iron.webp",
         "surface": "mars-surface-iron@2x.webp",
@@ -338,7 +364,7 @@
         "legend": {
           "kind": "scale",
           "title": "Iron (wt%)",
-          "meta": "5° bins · 2002–2005",
+          "meta": "wt%",
           "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
           "recipe": {
             "palette": [
@@ -373,11 +399,37 @@
               "25.86"
             ]
           }
-        }
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Iron"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Weight percent: 1% means one part of this element per 100 parts of material by weight."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Mars Odyssey’s gamma-ray spectrometer measured radiation from the ground between June 2002 and April 2005."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each source cell covers 5° of latitude and longitude. The display keeps those cells; it does not resolve individual deposits."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "Measurement uncertainty can produce negative estimates, which remain visible. Gray marks missing data; the source tables include error estimates."
+          }
+        ]
       },
       {
         "id": "silicon",
-        "label": "Silicon",
+        "label": "Surface elements",
         "shortLabel": "Si",
         "thumbnail": "mars-lens-silicon.webp",
         "surface": "mars-surface-silicon@2x.webp",
@@ -395,7 +447,7 @@
         "legend": {
           "kind": "scale",
           "title": "Silicon (wt%)",
-          "meta": "5° bins · 2002–2005",
+          "meta": "wt%",
           "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
           "recipe": {
             "palette": [
@@ -430,11 +482,37 @@
               "29.21"
             ]
           }
-        }
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Silicon"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Weight percent: 1% means one part of this element per 100 parts of material by weight."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Mars Odyssey’s gamma-ray spectrometer measured radiation from the ground between June 2002 and April 2005."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each source cell covers 5° of latitude and longitude. The display keeps those cells; it does not resolve individual deposits."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "Measurement uncertainty can produce negative estimates, which remain visible. Gray marks missing data; the source tables include error estimates."
+          }
+        ]
       },
       {
         "id": "potassium",
-        "label": "Potassium",
+        "label": "Surface elements",
         "shortLabel": "K",
         "thumbnail": "mars-lens-potassium.webp",
         "surface": "mars-surface-potassium@2x.webp",
@@ -452,7 +530,7 @@
         "legend": {
           "kind": "scale",
           "title": "Potassium (wt%)",
-          "meta": "5° bins · 2002–2005",
+          "meta": "wt%",
           "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
           "recipe": {
             "palette": [
@@ -487,11 +565,37 @@
               "0.67"
             ]
           }
-        }
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Potassium"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Weight percent: 1% means one part of this element per 100 parts of material by weight."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Mars Odyssey’s gamma-ray spectrometer measured radiation from the ground between June 2002 and April 2005."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each source cell covers 5° of latitude and longitude. The display keeps those cells; it does not resolve individual deposits."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "Measurement uncertainty can produce negative estimates, which remain visible. Gray marks missing data; the source tables include error estimates."
+          }
+        ]
       },
       {
         "id": "thorium",
-        "label": "Thorium",
+        "label": "Surface elements",
         "shortLabel": "Th",
         "thumbnail": "mars-lens-thorium.webp",
         "surface": "mars-surface-thorium@2x.webp",
@@ -509,7 +613,7 @@
         "legend": {
           "kind": "scale",
           "title": "Thorium (ppm)",
-          "meta": "5° bins · 2002–2005",
+          "meta": "ppm",
           "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
           "recipe": {
             "palette": [
@@ -544,7 +648,33 @@
               "2.17"
             ]
           }
-        }
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Thorium"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Parts per million (ppm): 1 ppm means one part thorium per million parts of material by weight."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Mars Odyssey’s gamma-ray spectrometer measured radiation from the ground between June 2002 and April 2005."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each source cell covers 5° of latitude and longitude. The display keeps those cells; it does not resolve individual deposits."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "Measurement uncertainty can produce negative estimates, which remain visible. Gray marks missing data; the source tables include error estimates."
+          }
+        ]
       },
       {
         "id": "geology",
@@ -931,7 +1061,7 @@
       "open": true,
       "src": "/scenes/mars/mars-reflectance-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Mars from 350 to 998 nanometers.",
       "titleKey": "reflectance",
       "source": {
@@ -945,7 +1075,7 @@
       "open": false,
       "src": "/scenes/mars/mars-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Mars V-band brightness change across phase angles from zero to 180 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -958,7 +1088,7 @@
       "open": false,
       "src": "/scenes/mars/mars-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Mars atmospheric temperature and pressure through 244 kilometers altitude.",
       "titleKey": "temperaturePressure",
       "source": {

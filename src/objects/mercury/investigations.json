@@ -6,16 +6,21 @@
       "id": "usgs-mdis-bdr-monochrome",
       "subject": "USGS MESSENGER MDIS Basemap BDR global mosaic",
       "status": "included",
-      "finding": "The default Monochrome lens uses the USGS MDIS Map Projected Basemap RDR acquired as NASA Trek zoom-3 WMTS tiles; the product's own declaration identifies it as a one-band global reflectance map from NAC or WAC 750 nm images, and no display colour is added.",
+      "finding": "The exterior Monochrome view now uses the native USGS BDR GeoTIFF, reduced by pixel-area averaging. The old Trek BDR snapshot is retained only for the interior illustration.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L7",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L57",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json"
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
         }
       ]
     },
@@ -23,53 +28,70 @@
       "id": "usgs-mdis-enhanced-color",
       "subject": "USGS MESSENGER MDIS 665 m enhanced-colour mosaic",
       "status": "included",
-      "finding": "The Enhanced color lens stitches the official NASA Solar System Treks level-3 matrix of the 665 m enhanced-colour mosaic into a 4096 by 2048 snapshot without resampling; it is false colour built from a PC2/PC1/430-to-1000 nm ratio.",
+      "finding": "The exterior Enhanced color view now uses the native USGS RGB GeoTIFF. Missing polar coverage is gray grid; the former Trek image and modeled completion are retired.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L8",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json"
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
         }
       ]
     },
     {
       "id": "enhanced-color-polar-completion",
       "subject": "Modelled completion of the enhanced-colour polar no-data pixels",
-      "status": "unresolved",
-      "finding": "The USGS product carries neutral-black no-data near the poles, and preparation completes those pixels from latitude-coherent observed chroma and local BDR detail; the README states the filled poles are not direct observations.",
-      "revisitWhen": "An enhanced-colour mosaic with observed polar coverage is released.",
+      "status": "excluded",
+      "finding": "Retired the modeled polar completion. Native enhanced-color observations are reduced directly; missing source footprints are gray grid.",
+      "revisitWhen": "Do not synthesize missing observations. A future observed product may replace the gaps.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L8",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58"
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/enhanced-check.json"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
         }
       ]
     },
     {
       "id": "usgs-shaded-relief-topography",
       "subject": "USGS MESSENGER global colour shaded relief (DEM v2 hillshade)",
-      "status": "included",
-      "finding": "The Topography lens uses the USGS global colour shaded-relief product as NASA Trek zoom-3 tiles with its published elevation legend; it is false colour, and the default 750 nm lens carries no legend.",
+      "status": "excluded",
+      "finding": "The numeric DEM replaced the colored hillshade in PR #835. Its last remaining use, as a fallback for enhanced-color polar reconstruction, is now retired.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L9",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L59",
-        "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png"
+        "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
         }
-      ]
+      ],
+      "revisitWhen": "Use the numeric DEM and its matching scale; the old colored hillshade is not a numeric elevation input."
     },
     {
       "id": "nasa-facts-interior",
@@ -266,6 +288,40 @@
         {
           "date": "2026-09-25",
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+        }
+      ]
+    },
+    {
+      "id": "usgs-numeric-surfaces",
+      "subject": "Native numeric USGS products and compact display grids",
+      "status": "included",
+      "finding": "MESSENGER DEM v2 replaces the colored topography input. Native DN uses 0.5 m per unit; central-meridian 180 placement checked against independent native bytes.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7d1a553b68af8c749cc734f7bd9710085762d839/src/objects/mercury/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/7d1a553b68af8c749cc734f7bd9710085762d839/src/objects/mercury/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
+        }
+      ]
+    },
+    {
+      "id": "native-mdis-bdr-loi-enhanced",
+      "subject": "Native USGS BDR, LOI and enhanced-color GeoTIFFs, edition 1 (2016)",
+      "status": "included",
+      "finding": "BDR and LOI share the Monochrome arrow selector. All three maps use native area means at the existing 4K display size. Publisher display stretches are retained and qualified separately. Enhanced-color polar gaps remain missing; no terrain or neighboring hue is used to reconstruct them.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/bdr-check.json",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/loi-check.json",
+        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/enhanced-check.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
         }
       ]
     }

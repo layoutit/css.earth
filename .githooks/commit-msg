@@ -1,9 +1,9 @@
 #!/bin/sh
 # cssearth-commit-message-hook: one Conventional Commits line per authored commit, no attribution.
-# Installed by `pnpm install` (tools/ci/commit-message.mts --install); CI checks the same rules on every PR.
-# Skip once with git commit --no-verify.
+# Run by the dispatcher `pnpm install` sets as core.hooksPath (.github/scripts/ci/commit-message.mts --install), or
+# directly when core.hooksPath is .githooks; CI checks the same rules on every PR. Skip once with git commit --no-verify.
 command -v node >/dev/null 2>&1 || exit 0
 root=$(git rev-parse --show-toplevel) || exit 0
 # A branch from before the check existed has no checker; CI still checks its commits.
-[ -f "$root/tools/ci/commit-message.mts" ] || exit 0
-exec node "$root/tools/ci/commit-message.mts" "$1"
+[ -f "$root/.github/scripts/ci/commit-message.mts" ] || exit 0
+exec node "$root/.github/scripts/ci/commit-message.mts" "$1"

@@ -112,7 +112,7 @@ Omit `--object` to publish everything under `src/objects/`. The publisher is inc
 
 A second cache, `source-cache/<object id>/<manifest path>`, mirrors downloaded
 inputs by the same path their source manifest names. Restorers try it before the
-origin URL when a file is missing. `node tools/assets/publish-source-cache.mts
+origin URL when a file is missing. `node packages/bake/cli/publish-source-cache.mts
 --object=<id>` publishes that object's available downloads; restore them first
 with `node tools/assets/restore-source-inputs.mts --object=<id>`. To publish one
 file, use `--file=<path> --key=<object id>/<manifest path>`. The publisher verifies
@@ -183,7 +183,47 @@ To run the fast subset before every push, opt in with `git config core.hooksPath
 pre-push hook runs `pnpm check:pr --quick`, which runs the `Contract lint` merge
 gate and the advisory repository audit, skipping the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
-`CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
+`CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath` (the next `pnpm install` restores the
+commit-msg dispatcher).
+
+`pnpm check:architecture` shows how your change moves the folder graph: which
+folders import which. CI runs it in the Contract lint job, so `pnpm check:pr`
+(alias `pnpm check:ci`) runs it too. It resolves every import in the source
+trees, including `.astro` files, root config files and files you have not added
+to Git yet. An import of
+a shared package counts as an import of the source file its entry is built
+from. It groups the files into folders and fails when a change adds:
+
+- an import that closes a folder cycle;
+- an import from `packages/*` into any other tree;
+- an import into `tools/`, `site/` or `labs/` from outside that tree (Netlify
+  functions and root `*.config.*` files are allowed);
+- an import of `tools/` or `@cssearth/bake` from `site/` or
+  `packages/renderer/src/` (renderer tests may use bake);
+- an import of a `tools/prepare/` script, including from another prepare script;
+- an import of `@cssearth/bake` from `packages/telescope`, tests included;
+- an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
+
+Type-only imports count. Existing cases are listed in
+`.github/scripts/architecture/baseline.json`, so they do not fail the check. If the
+check reports that something got better, or that a change looks like a rename,
+run `pnpm check:architecture --update-baseline` and commit the baseline. It needs
+every source file on disk and the shared packages built (`pnpm install` does
+both). It stops, rather than passing, when a source file is missing or an
+import of a shared package names no entry it can trace to a source file.
+`pnpm arch:map` writes the full folder map, cycles and per-folder counts to
+`output/architecture/`.
+
+The same check applies repository rules that have no baseline, so any finding
+fails it: no file under a retired `tools/` folder (`RETIRED_FOLDERS` in
+`repository-rules.mts`; a move that empties a folder adds it), the nebula
+boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
+`pnpm check:nebula-boundaries` is an alias of the check), and declared
+dependencies: a `packages/*` file imports another workspace package only when
+its own `package.json` declares it, and outside tests of a package tsup builds
+only when `dependencies` ships it, since tsup inlines a `devDependencies` package
+(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. Not yet enforced:
+unused files in library folders (untangle item K).
 
 Reference implementations live under `tools/oracles/` with their own pinned
 Python environment (`node tools/oracles/setup.mts`); their fixtures under `tests/oracles/`
@@ -196,7 +236,7 @@ GitHub Actions always runs Contract lint and the Object-scope gate. It also
 always runs Typecheck, the prepared-universe tests, the prepared-universe
 preparation and galaxy field job, and the nebula and renderer tests on every push
 to `main`; on a pull request it runs only the ones `.github/ci-areas.json` maps
-your changed paths to (`tools/ci/ci-affected.mts`, computed by the "Classify
+your changed paths to (`.github/scripts/ci/ci-affected.mts`, computed by the "Classify
 changes" job) — a job it skips still reports success, never failure, so it never
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
@@ -234,8 +274,10 @@ Write every commit as one [Conventional Commits](https://www.conventionalcommits
 Split a change into small steps so each line explains one step. Git's own merge, revert and `--fixup` messages are
 accepted as Git writes them.
 
-`pnpm install` installs a `commit-msg` hook that checks each message as you commit (it leaves an existing hook of your
-own in place). CI runs the same check over every commit in a pull request as part of the required `Classify changes`
+`pnpm install` installs a `commit-msg` hook that checks each message as you commit: it points `core.hooksPath` at a
+small dispatcher in `.git/cssearth-hooks/` that runs each worktree's own `.githooks/commit-msg`. It leaves hooks of
+your own in `.git/hooks` and any `core.hooksPath` you already set in place. The `publish-assets.yml` asset job runs lifecycle scripts, so
+its throwaway checkout gets this `core.hooksPath` too; it never commits there, so the setting is harmless. CI runs the same check over every commit in a pull request as part of the required `Classify changes`
 job, so reword a rejected commit with `git rebase -i` rather than skipping the hook.
 
 ## Pull requests

@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-directory-growth@1",
+  "allowance": 20,
+  "directories": {
+    "labs/nebula/packages/lab/browser": {
+      "implementations": 46,
+      "tests": 2
+    },
+    "labs/nebula/packages/lab/src/cli/commands": {
+      "implementations": 53,
+      "tests": 7
+    },
+    "labs/nebula/packages/lab/src/server/workflows/density": {
+      "implementations": 18,
+      "tests": 21
+    },
+    "packages/astronomy/src": {
+      "implementations": 24,
+      "tests": 19
+    },
+    "packages/renderer/src/navigation": {
+      "implementations": 31,
+      "tests": 15
+    },
+    "packages/renderer/src/rendering": {
+      "implementations": 29,
+      "tests": 17
+    },
+    "packages/renderer/src/universe": {
+      "implementations": 24,
+      "tests": 15
+    },
+    "packages/telescope-cli/src": {
+      "implementations": 44,
+      "tests": 31
+    },
+    "packages/telescope-cli/src/archives/interferometry": {
+      "implementations": 27,
+      "tests": 21
+    },
+    "packages/telescope-cli/src/families": {
+      "implementations": 26,
+      "tests": 23
+    },
+    "site": {
+      "implementations": 101,
+      "tests": 2
+    },
+    "site/components": {
+      "implementations": 36,
+      "tests": 0
+    },
+    "site/test": {
+      "implementations": 10,
+      "tests": 70
+    },
+    "src/platform": {
+      "implementations": 55,
+      "tests": 40
+    },
+    "tools/objects": {
+      "implementations": 56,
+      "tests": 24
+    },
+    "tools/objects/paged-ellipsoid": {
+      "implementations": 26,
+      "tests": 1
+    },
+    "tools/prepare": {
+      "implementations": 51,
+      "tests": 18
+    }
+  }
+}

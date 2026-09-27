@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireInventory } from '../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '@cssearth/objects/node';
 import { preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl, type PreparedAssetOrigin } from '@cssearth/renderer';
 import { isRecord } from '@cssearth/core';
 import type { ObjectDescriptor } from '@cssearth/objects';

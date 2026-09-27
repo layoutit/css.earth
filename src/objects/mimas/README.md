@@ -1,12 +1,14 @@
 # Mimas
 
+Mimas shows two Cassini image mosaics, terrain, and a shape-linked map of relative surface brightness.
+
 ## Sources
 
 - [NASA 2017 monochrome map](https://science.nasa.gov/resource/mimas-global-map-june-2017/): Cassini ISS, 5760 × 2880, 16 pixels/degree, 216 m/pixel on the 198.2 km cartographic sphere.
 
 - [NASA/JPL 2014 enhanced-color map](https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/): 6356 × 3178, infrared–green–ultraviolet.
 
-- [Weirich, Gaskell, Palmer and Domingue (2025), Mimas SPC Shape Models and Assessment Products V1.0](https://sbn.psi.edu/pds/resource/weirichmimasshape.html), NASA PDS, DOI [10.26033/y8wv-r303](https://doi.org/10.26033/y8wv-r303).
+- [Weirich, Gaskell, Palmer and Domingue (2025), Mimas SPC Shape Models and Assessment Products V1.0](https://sbn.psi.edu/pds/resource/weirichmimasshape.html), NASA PDS, DOI [10.26033/y8wv-r303](https://doi.org/10.26033/y8wv-r303). This bundle supplies the shape, radius and relative-albedo grids.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -25,6 +27,8 @@ Each atlas remains 4096 × 11520 pixels, with 720 retained faces. The scene byte
 
 - On 1,800 independent viewing directions, the candidate differs from the Q128 surface by about 0.9 km at the median and 2.5 km at the 95th percentile; these are approximation errors, not measurement uncertainties.
 
+- The native relative-albedo GeoTIFF contains 2,468,642 valid cells from 0.582471 to 1.407658. Three independently decoded [source anchors](source/validation/relative-albedo-anchors.json) check its byte layout, coordinates and values before preparation.
+
 ## Known problems
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mimas (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
@@ -35,7 +39,7 @@ Feature notes: 2 of the labelled names carry a caption note, the lead summary of
 
 - The published rectangular display maps provide no validity mask or missing-value code.
 
-- **Elevation:** All source cells are valid, but the GeoTIFF geotransform ends at 359.1517° E and 89.5759° S, short of the label's nominal global bounds. We honor the actual georeference and mark those narrow edge gaps with the shared gray grid.
+- **Elevation and relative brightness:** All source cells are valid, but both GeoTIFF geotransforms end at 359.1517° E and 89.5759° S, short of the labels’ nominal global bounds. We honor the actual georeference and mark those narrow edge gaps with the shared gray grid.
 
 - The surface is a coarse approximation of the source mesh; it does not reproduce every small crater. Flood and optional directional Shadows are baked from the mesh normals; photographed local shading is not reconstructed.
 
@@ -67,6 +71,12 @@ The Cassini-derived numeric radius GeoTIFF is 2222 × 1111 at 559.13 m grid spac
 Preparation converts center-relative radius in meters into height in kilometers: `radius * 0.001 - 198.2`. The reference is the archive's 198.2 km sphere, not the astronomy package's 198.8 km mean radius. Color spans −12.5 to +12.5 km and includes the body's broad oval shape. Brightness shows northwest cartographic relief, using the source radius and latitude-dependent spacing, with no height exaggeration. Bilinear interpolation stays within the measured raster; the shared 8192 × 4096 texture layout adds no terrain detail. Shape-aware flood lighting and optional directional Shadows remain available, as on the other lenses.
 
 No stretching, extrapolation or gap filling is applied. Those texture-coverage gaps do not limit geometry: the separate, complete OBJ release supplies the surface shape.
+
+## Relative brightness
+
+The PDS product calls this quantity relative albedo. It is the brightness field solved together with the Cassini stereophotoclinometry shape model, normalized around a map average of about 1. A cell at 0.9 is 10% darker than that average; a cell at 1.1 is 10% brighter. It is not visible color, geometric albedo or calibrated reflectance. Terrain, shadows and the model solution can affect it.
+
+The native `mimas_albedo_g.tif` grid is 2,222 × 1,111 float cells at 559.13 m spacing. Every stored cell is valid. Values span 0.582471–1.407658; 98% fall between 0.889682 and 1.115714. The display uses 0.9–1.1 so the broad pattern is visible and saturates the sparse extremes. Preparation uses the GeoTIFF’s actual 180° E centered geotransform, bilinear source sampling and the shared missing-data grid for the narrow eastern and southern areas outside the raster. It does not stretch or fill the source. This lens uses the supported quarter-density atlas: its 2,048 × 1,024 working raster closely matches the native grid instead of oversampling a lossless numeric layer.
 
 ## Geometry and scope
 

@@ -1,11 +1,11 @@
-import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
 import { cameraMotionSignalFor } from '@cssearth/renderer/navigation';
 import { createPreparedResidency } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture, preparedSelectionFixture } from "./test/object-runtime-package.mts";
+import { retainedPresentationFixture, preparedSelectionFixture } from "../../tests/platform/object-runtime-package.mts";
 import { mountPreparedPresentation } from '@cssearth/renderer/testing';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
@@ -16,7 +16,7 @@ import type { PreparedResidencyTicket } from '@cssearth/renderer/rendering/prepa
 import type { PreparedPresentationContext, PreparedPresentationPlan, PreparedView } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 const saturnDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn'));
-import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };

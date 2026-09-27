@@ -6,9 +6,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord } from '@cssearth/core';
-import type { PixelGeometry } from './contract.mts';
-import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraLens } from './formats/controlled-camera.mts';
-import { publishedPhotometry } from './photometry.mts';
+import type { PixelGeometry } from '@cssearth/bake/objects/layers/terrestrial';
+import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { publishedPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 
 const root = resolve(import.meta.dirname, '../../..');
 

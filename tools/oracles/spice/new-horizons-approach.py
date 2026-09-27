@@ -3,7 +3,7 @@
 SPICE toolkit finds each closest approach from the pinned new-horizons kernel bank and writes the reverse inbound velocity in
 the body-fixed frame at that instant; new-horizons-approach.oracle.test.mts beside this script compares @cssearth/spice's
 spacecraftApproach against it.
-Usage: node tools/kernel-banks/kernel-bank.mts acquire new-horizons
+Usage: node packages/bake/cli/kernel-bank.mts acquire new-horizons
        .local/oracles/venv/bin/python tools/oracles/spice/new-horizons-approach.py
 """
 import json, sys

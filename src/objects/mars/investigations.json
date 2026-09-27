@@ -286,7 +286,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17°, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
+      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17\u00b0, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
       "evidence": [
         "https://doi.org/10.1016/j.pss.2012.12.005",
         "https://arxiv.org/abs/1208.4518"
@@ -470,6 +470,23 @@
         }
       ],
       "revisitWhen": "A matched dated pair is chosen and prepared with its archive coverage."
+    },
+    {
+      "id": "usgs-numeric-surfaces",
+      "subject": "Native numeric USGS products and compact display grids",
+      "status": "included",
+      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid.",
+      "evidence": [
+        "evidence/usgs-numeric/numeric-checks.json",
+        "README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+          "scope": "Working changes above the named base; evidence records tested file hashes."
+        }
+      ]
     }
   ]
 }

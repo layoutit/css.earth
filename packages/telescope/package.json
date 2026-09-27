@@ -1,7 +1,7 @@
 {
   "name": "@cssearth/telescope",
   "version": "0.1.0",
-  "description": "Query and retrieve pinned telescope products with their scientific evidence.",
+  "description": "The telescope library: product records, PDS labels, and the archive and astronomy-package clients the workspace shares.",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -19,9 +19,6 @@
     "./package.json": "./package.json"
   },
   "license": "MIT",
-  "bin": {
-    "telescope": "dist/telescope.mjs"
-  },
   "files": [
     "dist",
     "README.md"
@@ -38,13 +35,14 @@
     "directory": "packages/telescope"
   },
   "scripts": {
-    "build": "node build.mts && tsup",
+    "build": "tsup",
     "prepack": "npm run build",
-    "typecheck": "tsc -p tsconfig.json && tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
+    "typecheck": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
     "test": "vitest run"
   },
   "dependencies": {
-    "@cssearth/core": "workspace:*"
+    "@cssearth/core": "workspace:*",
+    "@cssearth/fits": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-geotiff-image@1",
+  "source": {
+    "url": "https://planetarymaps.usgs.gov/mosaic//Mercury_MESSENGER_MDIS_Basemap_LOI_Mosaic_Global_166m.tif",
+    "productId": "MESS-H-MDIS-5-RDR-LOI-V1.0",
+    "width": 92160,
+    "height": 46080,
+    "origin": [
+      -7663601.119166941,
+      3831800.5595834707
+    ],
+    "resolution": [
+      166.310788176,
+      -166.310788176
+    ],
+    "coordinates": "meters",
+    "radius": 2439400,
+    "centerLongitude": 0,
+    "noData": 0,
+    "bits": 8,
+    "sampleFormat": 1,
+    "samples": 1
+  },
+  "output": {
+    "width": 4096,
+    "height": 2048,
+    "radius": 2439400
+  }
+}

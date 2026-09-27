@@ -78,6 +78,90 @@
             "lineOffset": 1133.5
           }
         }
+      },
+      {
+        "id": "blue",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.25,
+          "origin": [
+            -785.5,
+            392.75
+          ],
+          "displayRange": [
+            0,
+            0.08
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
+        "id": "green",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.25,
+          "origin": [
+            -785.5,
+            392.75
+          ],
+          "displayRange": [
+            0,
+            0.08
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
+        "id": "red",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.25,
+          "origin": [
+            -785.5,
+            392.75
+          ],
+          "displayRange": [
+            0,
+            0.08
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
+        "id": "near-infrared",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.25,
+          "origin": [
+            -785.5,
+            392.75
+          ],
+          "displayRange": [
+            0,
+            0.08
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
       }
     ],
     "scientific": [

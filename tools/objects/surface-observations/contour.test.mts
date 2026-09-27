@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { contourDepth, contourDistances } from './contour.mts';
+import { contourDepth, contourDistances } from '@cssearth/bake/objects/layers/terrestrial';
 
 // A deterministic generator keeps the random masks reproducible.
 function random(seed: number) {

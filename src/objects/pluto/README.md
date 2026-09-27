@@ -1,5 +1,7 @@
 # Pluto
 
+**Surface ices.** The dataset selector groups Methane, Nitrogen, Water under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).

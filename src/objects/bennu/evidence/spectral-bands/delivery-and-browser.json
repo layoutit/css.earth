@@ -1,0 +1,158 @@
+{
+  "schema": "cssearth-body-delivery-check@1",
+  "date": "2026-09-27",
+  "base": "7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05",
+  "body": "bennu",
+  "install": {
+    "inventorySha256": "06fee1ecc39b468fd63449622de66c19460ca7853bb7e0b8f81f0a3623582157",
+    "files": 65,
+    "bytes": 53778038,
+    "previousBytes": 35272553,
+    "installed": 65,
+    "reused": 0,
+    "skipped": 0,
+    "source": "https://earth-assets.lowpoly.cc",
+    "verification": "Production installRuntimeAssets into an empty destination; every file size and SHA-256 verified. No source preparation in the installation.",
+    "sharedWorldInventorySha256": "6902d05a2d4054bb5b756bcfcbc33cfc57ed873fdfc5f23d62d2f7d1ab7f2aa9"
+  },
+  "geometry": {
+    "existingFullSizeAtlasesByteIdentical": true,
+    "bodyLeavesExactlyEqual": true,
+    "sceneNumericToleranceSignificantDigits": 14,
+    "explanation": "Bennu scene JSON is semantically identical; Eros camera fractions differ only in floating-point serialization at approximately 1e-16."
+  },
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "body": "bennu",
+    "records": [
+      {
+        "id": "blue",
+        "url": "http://127.0.0.1:4277/bennu/?dataset=blue&v=UMI_9npWnu7efUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "OSIRIS-REx MapCam · 473 nm\nPlay\nBlue · 473 nm · 1 of 4\n\nNo data\n\nBrightness in blue light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": true,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "green",
+        "url": "http://127.0.0.1:4277/bennu/?dataset=green&v=UMI_9npWnu7efUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "OSIRIS-REx MapCam · 550 nm\nPlay\nGreen · 550 nm · 2 of 4\n\nNo data\n\nBrightness in green light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "red",
+        "url": "http://127.0.0.1:4277/bennu/?dataset=red&v=UMI_9npWnu7efUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "OSIRIS-REx MapCam · 698 nm\nPlay\nRed · 698 nm · 3 of 4\n\nNo data\n\nBrightness in red light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": false,
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "near-infrared",
+        "url": "http://127.0.0.1:4277/bennu/?dataset=near-infrared&v=UMI_9npWnu7efUFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "OSIRIS-REx MapCam · 847 nm\nPlay\nNear infrared · 847 nm · 4 of 4\n\nNo data\n\nBrightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data.",
+        "previousDisabled": false,
+        "nextDisabled": true,
+        "retained": true,
+        "scenes": 1
+      }
+    ],
+    "keyboardRetained": true,
+    "phone": {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false
+    },
+    "directAndPoseChecks": [
+      {
+        "body": "bennu",
+        "query": "?dataset=red",
+        "selected": "red",
+        "url": "http://127.0.0.1:4277/bennu/?dataset=red&v=UMI_27EKTM3IrEFCxzNAAAAAv-HduXBUG-k_3cIm6rIhTD_FqY-ng5pRAAA",
+        "retained": true,
+        "sceneCount": 1
+      }
+    ],
+    "errors": [],
+    "sharedWorld": "Existing main Sun inventory; no Sun changes are part of this addition.",
+    "inspected": [
+      "overview.webp",
+      "lighting.webp",
+      "close.webp",
+      "phone.webp"
+    ]
+  },
+  "atlasSizes": [
+    {
+      "filename": "bennu-blue-surface@2x.webp",
+      "encodedBytes": 1654272,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-elevation-surface@2x.webp",
+      "encodedBytes": 1204086,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-green-surface@2x.webp",
+      "encodedBytes": 2142174,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-near-infrared-surface@2x.webp",
+      "encodedBytes": 1796514,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-normal-surface@2x.webp",
+      "encodedBytes": 3438902,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-red-surface@2x.webp",
+      "encodedBytes": 2031534,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-spectral-surface@2x.webp",
+      "encodedBytes": 2584072,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    },
+    {
+      "filename": "bennu-surface-surface@2x.webp",
+      "encodedBytes": 5454336,
+      "width": 3513,
+      "height": 3728,
+      "decodedRgbaBytes": 52385856
+    }
+  ],
+  "limits": [
+    "Installation bytes and decoded RGBA estimates are not cold network transfer or GPU residency measurements.",
+    "Browser captures use the development server. No production performance benchmark is claimed.",
+    "Native values qualify input decoding and display transfer, not new physical map-to-shape registration.",
+    "Shadows on uses the existing display lighting, not reconstruction of the mission photometric model."
+  ]
+}

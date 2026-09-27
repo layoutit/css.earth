@@ -2,13 +2,13 @@ import { isArray, isRecord, requireRecord, requireArray, requireString } from '@
 import { isDeepStrictEqual } from 'node:util';
 import { dirname, relative, resolve } from 'node:path';
 import type { Node, FunctionDeclaration } from 'estree';
-import { parseRuntimeSource } from '../ci/runtime-source-graph.mts';
-import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
-import { nodeName, propertyKey, staticObjectProperties } from '../ci/runtime-ast.mts';
+import { parseRuntimeSource } from '@cssearth/bake/runtime-source';
+import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
+import { nodeName, propertyKey, staticObjectProperties } from '@cssearth/bake/runtime-source';
 import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mts';
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../../src/platform/prepared-schema.mts';
-import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
-import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '@cssearth/bake/presentation';
+import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
+import { requireAuthoredWorldFrame } from '@cssearth/bake/sources';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 
 export function requireDescriptorAdapterSource(text: string, exported: string): string {

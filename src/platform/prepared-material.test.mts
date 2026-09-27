@@ -1,5 +1,5 @@
-import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
-import { prepareFrameLookup } from "../../tools/prepare/prepare-materials.mts";
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
+import { prepareFrameLookup } from "@cssearth/bake/presentation";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -7,7 +7,7 @@ const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialFrame } from '@cssearth/renderer/testing';
 import { selectedPreparedVariant } from '@cssearth/renderer/testing';
 import { initialObjectSelection } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture } from "./test/object-runtime-package.mts";
+import { retainedPresentationFixture } from "../../tests/platform/object-runtime-package.mts";
 import definitionJson from "../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { bandDepth, openSpectralCube, windowMean } from './spectral-cube.mts';
+import { bandDepth, openSpectralCube, windowMean } from '@cssearth/bake/objects/layers/observation';
 
 const card = (key: string, value: string | number | boolean) => `${key.padEnd(8)}= ${typeof value === 'string' ? `'${value.padEnd(8)}'`.padEnd(20) : String(value === true ? 'T' : value).padStart(20)}`.padEnd(80);
 const block = (cards: string[]) => Buffer.from([...cards, 'END'.padEnd(80)].join('').padEnd(Math.ceil((cards.length + 1) / 36) * 2880));

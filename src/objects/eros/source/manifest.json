@@ -85,7 +85,9 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
-      }
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
+      "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter1::1.0"
     },
     {
       "id": "eros-infrared",
@@ -116,7 +118,7 @@
             "kind": "facility",
             "facilityId": "near-shoemaker",
             "missionId": "near-shoemaker",
-            "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
           }
         ]
       },
@@ -129,7 +131,9 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
-      }
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
+      "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter4::1.0"
     },
     {
       "id": "usgs-gazetteer-eros-nomenclature-center-pts",
@@ -200,6 +204,235 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "eros-blue",
+      "path": "maps/eros_nearmsi_filter2.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "blue",
+      "label": "Blue · 450 nm",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 2, 450 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-blue",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+          }
+        ]
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
+      "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter2::1.0"
+    },
+    {
+      "id": "eros-near-infrared-760",
+      "path": "maps/eros_nearmsi_filter3.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "near-infrared-760",
+      "label": "Near infrared · 760 nm",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 3, 760 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-near-infrared-760",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+          }
+        ]
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
+      "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter3::1.0"
+    },
+    {
+      "id": "eros-near-infrared-900",
+      "path": "maps/eros_nearmsi_filter5.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "near-infrared-900",
+      "label": "Near infrared · 900 nm",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 5, 900 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-near-infrared-900",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+          }
+        ]
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
+      "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter5::1.0"
+    },
+    {
+      "id": "eros-near-infrared-1000",
+      "path": "maps/eros_nearmsi_filter6.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "near-infrared-1000",
+      "label": "Near infrared · 1000 nm",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 6, 1000 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-near-infrared-1000",
+            "role": "material",
+            "evidence": "The archive member data/eros_nearmsi_filter6.tif and its ISIS label identify filter 6 at 1000 nm. The unmodified PDS4 XML mistakenly repeats filter 1’s logical identifier, so that identifier is not adopted for this band."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+          }
+        ]
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0"
+    },
+    {
+      "id": "eros-near-infrared-1050",
+      "path": "maps/eros_nearmsi_filter7.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified GeoTIFF extracted from the published ZIP; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "near-infrared-1050",
+      "label": "Near infrared · 1050 nm",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 7, 1050 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-near-infrared-1050",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+          }
+        ]
+      },
+      "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
+      "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter7::1.0"
     }
   ],
   "generatedIntermediates": [
@@ -371,6 +604,106 @@
           }
         ]
       }
+    },
+    {
+      "path": "reference/eros_nearmsi_filter2.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter2.xml",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter3.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter3.xml",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter5.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter5.xml",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter6.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter6.xml",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter7.lbl",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
+    },
+    {
+      "path": "reference/eros_nearmsi_filter7.xml",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "acquisition": "Unmodified native archive label or processing history; see preparation/acquisition.json.",
+      "consumers": [
+        "surfaces"
+      ]
     }
   ]
 }

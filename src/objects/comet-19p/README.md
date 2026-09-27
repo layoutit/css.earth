@@ -24,7 +24,7 @@ Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/
 
 The [terrain-place browser record](evidence/terrain-places/browser.json) covers all four search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show the MICAS labels and qualified captions. Shadows stay Off, all 2,856 retained leaves survive the selections, and switching to DLR hides the labels. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
-- **Reader oracle, 2026-09-12:** `tools/oracles/isis2/borrelly-micas.py` reads the four pinned MICAS cubes with pvl and numpy. `tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts` requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
+- **Reader oracle, 2026-09-12:** `tools/oracles/isis2/borrelly-micas.py` reads the four pinned MICAS cubes with pvl and numpy. [`tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts) (now [`tests/objects/terrestrial/isis2-qube.oracle.test.mts`](../../../tests/objects/terrestrial/isis2-qube.oracle.test.mts)) requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
 
 ### Registration
 
@@ -46,7 +46,7 @@ The [terrain-place browser record](evidence/terrain-places/browser.json) covers 
 
 The [control measurements](source/features/control-measurements.json) retain two image matches: the annotated unit map to its unannotated photograph, then that photograph to the archived orthophoto. Interior patches use fixed checkerboard fit/holdout partitions; white map annotations, weak matches and ambiguous matches are excluded before fitting. Every retained control contributes to the reported residuals. Initial image alignment and the fitted correction are separate in the recipe.
 
-The [landmark recipe](source/features/image-registration.json) pins those measurements and all four native cubes. `node tools/objects/surface-features/project-orthophoto-landmarks.mts comet-19p` recomputes the affine fits, reads each XYZ sample and compares the resulting landmarks and evidence. The 16 m sample spacing oversamples the roughly 150 m source terrain. Subpixel image residuals do not increase that terrain resolution.
+The [landmark recipe](source/features/image-registration.json) pins those measurements and all four native cubes. `node packages/bake/cli/project-orthophoto-landmarks.mts comet-19p` recomputes the affine fits, reads each XYZ sample and compares the resulting landmarks and evidence. The 16 m sample spacing oversamples the roughly 150 m source terrain. Subpixel image residuals do not increase that terrain resolution.
 
 Preparation applies the existing −2200 m Z translation once and attaches each point to the unchanged display within 85 m. Since this image-plane datum is arbitrary, a radial direction can point through the gridded rear. These labels opt into the local display facet's normal for facing and the existing camera flight. Neither the renderer nor the mesh changes.
 

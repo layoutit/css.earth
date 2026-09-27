@@ -1,32 +1,31 @@
-import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
-import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
+import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
+import type { PreparedDirectionalSunPlan } from '@cssearth/bake/presentation';
 import type { PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation';
-import type { prepareSolidMaterial } from './solid-raster.mts';
+import type { prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SolidRasterGrid } from '@cssearth/bake/objects/layers/terrestrial';
-import type { combineRadialModels } from './radial-models.mts';
+import type { combineRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
 import type { createSourceManifest } from '@cssearth/objects/node';
-import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
+import type { MaterialSourceTrack } from '@cssearth/bake/presentation';
 import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
+import { prepareScientificNavigation, prepareTerrestrialRings } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface, preparePerspectiveCamera } from '@cssearth/bake/scene';
 import { prepareAstrometricSkySceneRegistration, prepareEclipticPresentationFrame, photographDirections, prepareDefaultCameraAngles, prepareSunReferenceViewDirection } from '@cssearth/bake/objects/scene';
 import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
-import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/bake/presentation';
 import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
-import { prepareMaterialTracks } from '../../prepare/prepare-materials.mts';
-import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
-import { requirePreparedResourceCatalog } from '../../contract/object-runtime-contract.mts';
+import { prepareMaterialTracks } from '@cssearth/bake/presentation';
+import { requirePreparedPresentation } from '@cssearth/bake/presentation';
+import { requirePreparedResourceCatalog } from '@cssearth/bake/contract';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
-import { restoreDepthSource } from '../../prepared/prepared-depth-partitions.mts';
-import { prepareTerrestrialRings } from './rings.mts';
-import { publishedImageSize } from '../shape-model/raster.mts';
+import { restoreDepthSource } from '@cssearth/bake/prepared-presentation';
+import { publishedImageSize } from '@cssearth/bake/objects/layers/shape-model';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
@@ -35,7 +34,7 @@ export interface SolidSceneConfig {
   presentation:{defaultLens:string};
 }
 type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
-type SolidScene=ReturnType<typeof import('../../prepared/prepared-replay-source.mts').parseSolidReplayScene>;
+type SolidScene=ReturnType<typeof import('@cssearth/bake/objects/layers/terrestrial').parseSolidReplayScene>;
 
 /** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */
 export function solidCameraAngles(config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {

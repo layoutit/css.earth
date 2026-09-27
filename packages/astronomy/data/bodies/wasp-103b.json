@@ -1,0 +1,28 @@
+{
+  "id": "wasp-103b",
+  "classification": "exoplanet",
+  "order": 1844,
+  "physical": {
+    "name": "WASP-103 b",
+    "horizonsCode": null,
+    "meanRadiusKm": 109239.8,
+    "gravitationalParameterKm3PerS2": 188762932.53,
+    "parent": "wasp-103"
+  },
+  "physicalNotes": "Radius 1.528 Jupiter radii from Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A%26A...562L...3G/abstract): 109,239.8 km at 71,492 km per Jupiter radius. GM from the mass 1.49 Jupiter masses (Gillon et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014A&A...562L...3G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014A%26A...562L...3G/abstract) times JPL's Jupiter GM. The spherical geometry belongs to the selected SPARC/MITgcm model. The separate CHEOPS tidal-deformation inference is not transferred onto this model.",
+  "hostedOrbit": {
+    "periodDays": 0.925542,
+    "semiMajorAxisStellarRadii": 2.978,
+    "inclinationDegrees": 86.3,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 56459.09957,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2014): P 0.925542 d",
+      "shape": "Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2014): a/R* 2.978; Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2014): inclination 86.3 degrees",
+      "eccentricity": "Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2016): e 0",
+      "phase": "Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2014): transit mid-time 2456459.59957 BJD, taken as BJD_TDB",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
+  }
+}

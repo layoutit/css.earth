@@ -7,6 +7,10 @@ browser's compositor applies without style, layout or paint.
 Nothing appears, disappears, or changes its look, size, stacking or accessibility state. Nothing forces layout. The held
 changes land once the coast stops, a paced slice per frame.
 
+Navigation targets expose a named button role only while available. Repeated publication of the same target writes
+no accessibility attributes; a focus point outside the measured viewport leaves the tab order after the coast.
+Minimap arrow keys read the current camera on keydown, without publishing camera coordinates as DOM attributes.
+
 While a hand or the app drives the camera (a drag, an active zoom or pinch, a flight), the view keeps updating, so you
 can see where you are heading. Crossings between levels of detail are staged ahead: the next level is made resident at
 opacity 0, paced, so the crossing itself is a crossfade.
@@ -71,7 +75,7 @@ The footer readout (distance, coordinates, the scale ruler) holds its last readi
 once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to
 be seen mid-motion.
 
-`node tools/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
+`node labs/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
 page makes while it coasts. It exits 1 on anything outside this table.
 
 ## Object arrival ownership

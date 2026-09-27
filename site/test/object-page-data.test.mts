@@ -7,7 +7,7 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mts';
 import {objectPageStyles} from '../object-page-contract.mts';
-import {preparePageMetadata} from '../../tools/prepared/prepared-page-metadata.mts';
+import {preparePageMetadata} from '@cssearth/bake/delivery';
 import {SCENE_OBJECTS} from '../objects.mts';
 
 test('page metadata is emitted from the runtime without needing scene bytes',async t=>{

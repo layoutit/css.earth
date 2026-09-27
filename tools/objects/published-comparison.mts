@@ -14,11 +14,11 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { readPdfImage } from '../sources/pdf-image.mts';
+import { readPdfImage } from '@cssearth/bake/sources';
 import { lamBytes } from './sphere-survey/lam.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForLens, observerCaster, turnedOrientation, type TurnableCaster } from '@cssearth/bake/objects/layers/terrestrial';
 import { decodeCalibratedCamera, loadCameraShape } from '@cssearth/bake/objects/geometry';
-import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
+import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const SWEEP = { from: -30, to: 30, step: 2 };

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { expect, test, vi } from 'vitest';
-import { requireInventory } from '../../../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '@cssearth/objects/node';
 import { loadPreparedCssVolume } from './loader.js';
 
 async function fixture() {

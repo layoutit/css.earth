@@ -1,9 +1,10 @@
+import { surveyGiottoIndex } from './giotto-index.mts';
 import { sha256 } from '@cssearth/core/node';
 import {hasErrorCode,requireRecord,shape,text,number,array} from '@cssearth/core';
-export interface PinnedIntakeFile {file:string;url:string;bytes:number;sha256:string;}
-export const parsePinnedIntakeFile=shape({file:text,url:text,bytes:number,sha256:text});
-const parseManifest=shape({shape:shape({path:text,absoluteUncertaintyKm:array(number)}),guide:parsePinnedIntakeFile,
-  frames:array(shape({id:text,imageId:number,sensor:text,filter:text,header:parsePinnedIntakeFile,image:parsePinnedIntakeFile,label:parsePinnedIntakeFile}))});
+export interface IntakeFile {file:string;url:string;bytes:number;}
+export const parseIntakeFile=shape({file:text,url:text,bytes:number});
+export const parseIntakeManifest=shape({shape:shape({path:text,absoluteUncertaintyKm:array(number)}),guide:parseIntakeFile,
+  frames:array(shape({id:text,imageId:number,sensor:text,filter:text,header:parseIntakeFile,image:parseIntakeFile,label:parseIntakeFile}))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -59,7 +60,7 @@ export function decodeGiottoFrame(headerBytes:Buffer, imageBytes:Buffer, labelBy
     paddingBytes: imageBytes.length - rasterBytes };
 }
 
-export async function loadPinned(directory:string, entry:PinnedIntakeFile, download = false) {
+export async function loadIntakeSource(directory:string, entry:IntakeFile, download = false) {
   const path = resolve(directory, entry.file);
   let bytes;
   try { bytes = await readFile(path); } catch (error) {
@@ -67,11 +68,11 @@ export async function loadPinned(directory:string, entry:PinnedIntakeFile, downl
     const response = await fetch(entry.url, { signal: AbortSignal.timeout(30_000) });
     if (!response.ok) throw new Error(`${entry.url}: HTTP ${response.status}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Source pin mismatch: ${entry.file}`);
+    if (bytes.length !== entry.bytes) throw new Error(`Source byte-count mismatch: ${entry.file}`);
     await mkdir(directory, { recursive: true });
     await writeFile(path, bytes);
   }
-  if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Source pin mismatch: ${entry.file}`);
+  if (bytes.length !== entry.bytes) throw new Error(`Source byte-count mismatch: ${entry.file}`);
   return bytes;
 }
 
@@ -83,21 +84,23 @@ const xml = (value:unknown) => String(value).replaceAll('&', '&amp;').replaceAll
 
 async function main() {
   const args = process.argv.slice(2);
-  if (args.some(a => a !== '--download' && !a.startsWith('--output='))) {
-    throw new Error('Usage: node tools/objects/comet-1p/inspect-giotto.mts [--download] [--output=directory]');
+  if (args.some(a => a !== '--download' && a !== '--all-clear-mdm' && !a.startsWith('--output='))) {
+    throw new Error('Usage: node tools/objects/comet-1p/inspect-giotto.mts [--download] [--all-clear-mdm] [--output=directory]');
   }
   const output = resolve(args.find(a => a.startsWith('--output='))?.slice(9) ?? resolve(root, 'output/comet-intake/halley-giotto/repro'));
   const input = resolve(output, 'source');
   const manifestBytes = await readFile(manifestPath),raw:unknown=JSON.parse(manifestBytes.toString("utf8"));
-  const manifest=Object.assign({},requireRecord(raw),parseManifest(raw));
+  const manifest=Object.assign({},requireRecord(raw),parseIntakeManifest(raw));
   const shapeBytes = await readFile(resolve(sourceRoot, manifest.shape.path));
   await mkdir(output, { recursive: true });
-  await loadPinned(input, manifest.guide, args.includes('--download'));
+  const guideBytes = await loadIntakeSource(input, manifest.guide, args.includes('--download'));
   const { default: sharp } = await import('sharp');
+  const survey = args.includes('--all-clear-mdm') ? await surveyGiottoIndex(input, args.includes('--download')) : undefined;
+  const selectedFrames = survey?.frames ?? manifest.frames;
   const frames = [], layers = [];
-  for (let i = 0; i < manifest.frames.length; i++) {
-    const source = manifest.frames[i];
-    const bytes = await Promise.all((['header', 'image', 'label'] as const).map(k => loadPinned(input, source[k], args.includes('--download'))));
+  for (let i = 0; i < selectedFrames.length; i++) {
+    const source = selectedFrames[i];
+    const bytes = await Promise.all((['header', 'image', 'label'] as const).map(k => loadIntakeSource(input, source[k], args.includes('--download'))));
     const frame = decodeGiottoFrame(bytes[0],bytes[1],bytes[2]), h = frame.header;
     if (Number(h['IMAGE-ID']) !== source.imageId || h.SENSOR !== source.sensor || h.FILTER !== source.filter) {
       throw new Error(`Source identity disagreement: ${source.id}`);
@@ -107,6 +110,12 @@ async function main() {
     const sensorIndex = 'BCDE'.indexOf(h.SENSOR);
     if (!(scale > 0) || !Number.isFinite(seconds) || superpixels.length !== 4 || sensorIndex < 0 ||
         superpixels.some(v => !Number.isInteger(v) || v < 0 || v > 5)) throw new Error('Incomplete frame geometry.');
+    const indexed = survey?.report.selectedFrames[i];
+    if (indexed && (frame.width !== indexed.width || frame.height !== indexed.height ||
+        Math.abs(seconds - indexed.timeToEncounterSeconds) > 1e-6 ||
+        superpixels.some((value, index) => value !== indexed.superpixels[index]))) {
+      throw new Error(`Archive index/header geometry disagreement: ${source.id}`);
+    }
     const samples = Array.from(frame.radiance).filter(Number.isFinite).sort((a,b) => a-b);
     if (samples.length === 0) throw new Error('Frame has no valid samples.');
     const low = percentile(samples, .01), high = percentile(samples, .99);
@@ -132,18 +141,19 @@ async function main() {
       imageFieldKm: [frame.width * scale, frame.height * scale],
       shapeUncertaintyInImagePixels: manifest.shape.absoluteUncertaintyKm.map(v => v / scale),
       rasterBytes: frame.rasterBytes, paddingBytes: frame.paddingBytes, header: h,
-      sourceFiles: (['header', 'image', 'label'] as const).map(k => source[k]),
+      sourceFiles: (['header', 'image', 'label'] as const).map((k, index) => ({ ...source[k], sha256: sha256(bytes[index]) })),
       preview: { file: `${source.id}.png`, bytes: png.length, sha256: sha256(png) } });
   }
   const title = '<svg width="1360" height="65"><g font-family="Arial,sans-serif" fill="#e5eaf1"><text x="0" y="25" font-size="25">Halley / Giotto encounter frames</text><text x="0" y="53" font-size="17">Native pixels enlarged 4×; per-frame contrast stretch. Blue marks invalid raster samples. No surface registration.</text></g></svg>';
   layers.push({ input: Buffer.from(title), left: 24, top: 12 });
   const footnote = '<svg width="1360" height="65"><g font-family="Arial,sans-serif" font-size="17" fill="#b5c2d3"><text x="0" y="22">Valid raster ≠ observed nucleus surface: dust, illumination and optical blur remain in these frames.</text><text x="0" y="49">Giotto HMC / Keller, Thomas, Curdt, Schwarz / IHW / NASA PDS. Local scientific inspection only.</text></g></svg>';
-  layers.push({ input: Buffer.from(footnote), left: 24, top: 911 });
-  const sheet = await sharp({ create: { width: 1400, height: 988, channels: 3, background: '#141823' } }).composite(layers).png().toBuffer();
+  layers.push({ input: Buffer.from(footnote), left: 24, top: 91 + Math.ceil(selectedFrames.length / 4) * 410 });
+  const sheet = await sharp({ create: { width: 1400, height: 168 + Math.ceil(selectedFrames.length / 4) * 410, channels: 3, background: '#141823' } }).composite(layers).png().toBuffer();
   await writeFile(resolve(output, 'contact-sheet.png'), sheet);
   const report = {
     schema: 'cssearth-halley-giotto-intake-report@1', manifest: { path: 'src/objects/comet-1p/source/reference/giotto-hmc-intake.json', sha256: sha256(manifestBytes) },
-    shape: manifest.shape, dataset: manifest.dataset, guide: manifest.guide, frames,
+    archiveSurvey: survey?.report, shape: { ...manifest.shape, sha256: sha256(shapeBytes) },
+    dataset: manifest.dataset, guide: { ...manifest.guide, sha256: sha256(guideBytes) }, frames,
     result: { status: 'UNQUALIFIED_SURFACE_LENS', projectedSurfacePixels: null,
       missingEvidence: ['Source-controlled mapping from Stooke body coordinates to the encounter camera.',
         'Validated surface coverage excluding foreground dust and unresolved limb/terminator pixels.',
@@ -153,7 +163,7 @@ async function main() {
     localContactSheet: { file: 'contact-sheet.png', bytes: sheet.length, sha256: sha256(sheet) },
   };
   await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
-  console.log(`Decoded ${frames.length} pinned frames; ${report.result.status}.\n${output}/contact-sheet.png\n${output}/report.json`);
+  console.log(`Decoded ${frames.length} source frames; ${report.result.status}.\n${output}/contact-sheet.png\n${output}/report.json`);
 }
 
 if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {

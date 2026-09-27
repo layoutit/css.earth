@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { parseAst } from 'vite';
 import type { ClassDeclaration, ImportDeclaration } from 'estree';
 import { requireRecord } from '@cssearth/core';
-import { sourceStart, sourceEnd, nodeName } from '../ci/runtime-ast.mts';
+import { sourceStart, sourceEnd, nodeName } from '@cssearth/bake/runtime-source';
 
 const require = createRequire(import.meta.url);
 const version = requireRecord(JSON.parse(await readFile(require.resolve('@cesium/engine/package.json'), 'utf8'))).version;

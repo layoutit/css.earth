@@ -28,7 +28,7 @@
 
 - The [terrain-place browser record](evidence/terrain-places/browser.json) covers all three search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show qualified captions on the photographs. Both matching datasets retain the labels; Shadows stay Off and all 992 leaves survive selection. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
-- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. [`tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts) (now [`tests/objects/terrestrial/encounter-fits.oracle.test.mts`](../../../tests/objects/terrestrial/encounter-fits.oracle.test.mts)) requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
 
 ### Registration
 
@@ -92,7 +92,7 @@ The original tables are restorable from exact URL/hash pins. Context imagery is 
 
 The two pinned NASA JPEGs are NASA-served presentation renditions, not native detector products. Manual diagram controls use interior ridges and depression rims. Image matching uses a fixed grid and checkerboard fit/holdout partition; weak and ambiguous patches are rejected by correlation before fitting. A reflected similarity accounts for the detector's upward-increasing rows. The resulting pixels pass through the existing N2073 source camera and the original PDS mesh.
 
-The [image-registration recipe](source/features/image-registration.json) pins every consumed image, camera and shape input. Run `node tools/objects/surface-features/project-encounter-landmarks.mts comet-81p` to compare regenerated coordinates and residuals; add `--write` only when intentionally updating them. Feature preparation then checks that the unchanged display has a surface within 55 m of each source point. That display tolerance is separate from image-placement uncertainty.
+The [image-registration recipe](source/features/image-registration.json) pins every consumed image, camera and shape input. Run `node packages/bake/cli/project-encounter-landmarks.mts comet-81p` to compare regenerated coordinates and residuals; add `--write` only when intentionally updating them. Feature preparation then checks that the unchanged display has a surface within 55 m of each source point. That display tolerance is separate from image-placement uncertainty.
 
 Brownlee's dimensions describe each feature's extent: Mayo is roughly 1.2 km across; Left Foot's northern lobe is about 650 m wide and 140 m deep; Right Foot is roughly 1 km across, with a southeast cliff exceeding 150 m. These are not circular region boundaries. The labels use the shared point treatment.
 

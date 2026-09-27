@@ -1,6 +1,6 @@
 # Spitzer archive ledger
 
-What the Spitzer Heritage Archive at IRSA holds for the 519 objects this repository ships, what this toolkit can re-make, and how far that is proved. Written by [`archive-ledger.mts`](../tools/objects/spitzer/archive-ledger.mts) from IRSA on 2026-09-19; the route it checks is [Spitzer](spitzer.md).
+What the Spitzer Heritage Archive at IRSA holds for the 519 objects this repository ships, what this toolkit can re-make, and how far that is proved. Written by [`archive-ledger.mts`](../packages/telescope-cli/src/archives/spitzer/archive-ledger.mts) from IRSA on 2026-09-19; the route it checks is [Spitzer](spitzer.md).
 
 ## What Spitzer observed, by mode
 
@@ -10,7 +10,7 @@ Counts are observations of this repository's objects, not of the archive. "Re-ma
 | --- | --- | --- | --- | --- | --- |
 | IRAC Map PC | pictures held on one pointing, the mode exoplanet transits were watched in | 4372 | none | 0 | 0 |
 | MIPS Phot | photometry at 24, 70 and 160 micron | 318 | none | 0 | 0 |
-| IRAC Map | mapped pictures in the four IRAC channels, 3.6 to 8.0 micron | 317 | `tools/objects/spitzer/mosaic.mts` | 5 | 5 |
+| IRAC Map | mapped pictures in the four IRAC channels, 3.6 to 8.0 micron | 317 | `packages/telescope-cli/src/archives/spitzer/mosaic.mts` | 5 | 5 |
 | IRS Stare | spectra of one point, 5 to 38 micron | 312 | none | 0 | 0 |
 | IRS Map | spectra stepped across a target, which build a spectral cube | 165 | none | 0 | 0 |
 | MIPS SED | low-resolution spectra around 70 micron | 38 | none | 0 | 0 |

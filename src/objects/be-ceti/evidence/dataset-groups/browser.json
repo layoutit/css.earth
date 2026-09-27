@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-dataset-browser-check@1",
+  "date": "2026-09-27T01:59:22.055Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
+  "testedFiles": {
+    "source/content/object.json": "b57054573f7e5da89d534b3c06f93cf429dff6ecd9698d23bd97c559169f45b1",
+    "text.json": "31148c430c57fbe05bf8710db22eb6b0d38240477acb6b56437c8f72e6058815",
+    "inventory.json": "50c7a24f3e71c0eff7cfdb48fb8a4e5f176f2c99fc602d11d3003d07af4c71fb"
+  },
+  "tests": {
+    "sourceLabels": {
+      "body": "be-ceti",
+      "dataset": "radial-field",
+      "labels": [
+        {
+          "id": "color",
+          "source": "Willamo et al. (2022)"
+        },
+        {
+          "id": "radial-field",
+          "source": "ESO HARPSpol"
+        },
+        {
+          "id": "meridional-field",
+          "source": "ESO HARPSpol"
+        },
+        {
+          "id": "azimuthal-field",
+          "source": "ESO HARPSpol"
+        }
+      ],
+      "url": "http://127.0.0.1:4277/be-ceti/?dataset=radial-field&v=UEJBShU2A01oYEFCxzNAAAAAv8OW-Ri3tU-_w5b5GLe1Tz_mF1ACJA2xAAA",
+      "scenes": 1
+    },
+    "group": {
+      "body": "be-ceti",
+      "firstPreviousDisabled": true,
+      "lastNextDisabled": true,
+      "keyboardPrevious": "meridional-field",
+      "retainedAfterKeyboard": true,
+      "results": [
+        {
+          "id": "radial-field",
+          "url": "http://127.0.0.1:4277/be-ceti/?dataset=radial-field&v=UEJBShU2A01oYEFCxzNAAAAAv8OW-Ri3tU-_w5b5GLe1Tz_mF1ACJA2xAAA",
+          "step": "Outward / inward · 1 of 3",
+          "legend": "-43\n0\n+43 G",
+          "headings": [
+            "Radial field, Dec 2017"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "meridional-field",
+          "url": "http://127.0.0.1:4277/be-ceti/?dataset=meridional-field&v=UEJBShU2A01oYEFCxzNAAAAAv8OW-Ri3tU-_w5b5GLe1Tz_mF1ACJA2xAAA",
+          "step": "North / south · 2 of 3",
+          "legend": "-43\n0\n+43 G",
+          "headings": [
+            "Meridional field, Dec 2017"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "azimuthal-field",
+          "url": "http://127.0.0.1:4277/be-ceti/?dataset=azimuthal-field&v=UEJBShU2A01oYEFCxzNAAAAAv8OW-Ri3tU-_w5b5GLe1Tz_mF1ACJA2xAAA",
+          "step": "Around the star · 3 of 3",
+          "legend": "-43\n0\n+43 G",
+          "headings": [
+            "Azimuthal field, Dec 2017"
+          ],
+          "retained": true,
+          "scenes": 1
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "file": "be-ceti-radial-field.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 190254,
+      "sha256": "07d83a5975453b32ee429d5c3ff5da7353d85ee657689eb4d0f72a831aaf7ccf",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}

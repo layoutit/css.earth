@@ -1,9 +1,9 @@
 import {parseSaturnScene,parseSaturnViews,parseSaturnLenses,parseSaturnLayouts} from './fixtures/saturn-prepared.mts';
 import {parseTitle,parsePanel,parseContent} from './fixtures/prepared-schemas.mts';
 import {parsePreparedObjectRuntime} from '@cssearth/renderer';
-import {requireObjectRuntimeDefinition} from '../../tools/contract/object-runtime-contract.mts';
-import {validatePreparedCubicSky} from '../../src/platform/cubic-sky-contract.mts';
-import {validateDirectionalSunPlan} from '../../src/platform/directional-sun-contract.mts';
+import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
+import {validatePreparedCubicSky} from '@cssearth/bake/presentation';
+import {validateDirectionalSunPlan} from '@cssearth/bake/presentation';
 import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

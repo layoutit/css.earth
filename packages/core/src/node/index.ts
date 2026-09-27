@@ -2,3 +2,4 @@
 // browser entry.
 export * from './hash.js';
 export * from './project-root.js';
+export * from './parent-process.js';

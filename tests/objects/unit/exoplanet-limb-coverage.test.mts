@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
+import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../../site/objects.mts';
-import { readJsonSource } from '../../../tools/sources/source-values.mts';
+import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { projectRoot } from '../fixtures.mts';
 import { sourceTest } from '../source-test.mts';
@@ -10,7 +11,14 @@ const test = sourceTest();
 const planets = SCENE_OBJECTS.filter(object => object.classification === 'exoplanet');
 
 test('every registered exoplanet bakes the source-radius silhouette through a lit or emissive path', async () => {
-  assert.equal(planets.length, 87);
+  // Every exoplanet the astronomy catalogue holds is registered, so none escapes the checks below.
+  const bodies = resolve(projectRoot, 'packages/astronomy/data/bodies');
+  const catalogued = [];
+  for (const file of readdirSync(bodies).filter(name => name.endsWith('.json'))) {
+    const body = requireRecord(await readJsonSource(resolve(bodies, file)), file);
+    if (body.classification === 'exoplanet') catalogued.push(requireString(body.id, `${file} id`));
+  }
+  assert.deepEqual(planets.map(({ id }) => id).sort(), catalogued.sort());
   for (const { id } of planets) {
     const directory = resolve(projectRoot, 'src/objects', id);
     const measurements = requireRecord(await readJsonSource(resolve(directory, 'source/measurements.json')), `${id} measurements`);
@@ -38,7 +46,8 @@ test('every registered exoplanet bakes the source-radius silhouette through a li
       for (const surface of requireArray(raster.surfaces, `${id} surfaces`)) {
         const lens = requireRecord(surface, 'surface');
         const name = requireString(lens.id, `${id} lens`);
-        assert.ok(assets.some(asset => typeof asset.filename === 'string' && asset.filename.includes(`-limb-${name}@2x.webp`)), `${id}/${name} must publish its transparent plate`);
+        // The plate is wholly transparent, and the raster lane publishes no plate without a visible pixel (826219f0cc).
+        assert.ok(!assets.some(asset => typeof asset.filename === 'string' && asset.filename.includes(`-limb-${name}@2x.webp`)), `${id}/${name} publishes no empty plate`);
       }
     }
   }
@@ -50,7 +59,7 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     const astronomy = requireRecord(await readJsonSource(resolve(projectRoot, 'packages/astronomy/data/bodies', `${id}.json`)), `${id} astronomy`);
     hosts.add(requireString(requireRecord(astronomy.physical, `${id} physical`).parent, `${id} host`));
   }
-  assert.equal(hosts.size, 56);
+  assert.equal(hosts.size, 58);
   const shapeOnly: string[] = [], uniform: string[] = [];
   for (const id of hosts) {
     const directory = resolve(projectRoot, 'src/objects', id);

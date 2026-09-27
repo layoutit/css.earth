@@ -10,7 +10,7 @@ import pixelmatch from "pixelmatch";
 
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { optimizePreparedQ75Webp } from "../../tools/prepared/prepared-webp.mts";
+import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import {
   BODY_MARKER_ATLAS_PAGE_SIZE,
   loadMarkerDescriptors,

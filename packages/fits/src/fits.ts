@@ -80,6 +80,10 @@ function fitsLiteral(field: string, card: string): FitsValue {
         throw new Error('Invalid FITS string suffix.');
       return value.trimEnd();
     }
+    // Released wavelength labels can omit the final quote. Accept only this
+    // non-structural keyword, with a numeric wavelength and a plain ion label;
+    // original cards remain available separately from the interpreted value.
+    if (card.slice(0, 8).trim() === 'WAVELNTH' && /^'\d+(?:\.\d+)? = [A-Za-z][A-Za-z0-9 ,+-]* +$/u.test(text)) return text.slice(1).trimEnd();
     throw new Error('Unterminated FITS string.');
   }
   const value = text.split('/')[0].trim();
@@ -153,6 +157,8 @@ export function readFitsHdu(bytes: Uint8Array, start = 0) {
   const scale = optionalNumber(header, 'BSCALE', 1), zero = optionalNumber(header, 'BZERO', 0);
   let blank: number | undefined;
   const warnings: string[] = [];
+  if (cards.some(card => card.slice(0, 8).trim() === 'WAVELNTH' && (card.match(/'/gu) ?? []).length === 1))
+    warnings.push('Unterminated WAVELNTH string read as a literal label; original card preserved.');
   if (Object.hasOwn(header, 'BLANK')) {
     if (kind === 'BINTABLE') throw new Error('Invalid FITS BLANK for binary table.');
     if (bitpix < 0) {

@@ -1,0 +1,42 @@
+{
+  "base": "7d1a553b68af8c749cc734f7bd9710085762d839",
+  "pixelmatch": "7.2.0",
+  "threshold": 0.1,
+  "includeAA": false,
+  "crop": {
+    "left": 450,
+    "top": 235,
+    "width": 535,
+    "height": 535
+  },
+  "viewport": [
+    1440,
+    1000
+  ],
+  "dpr": 1,
+  "lighting": "shadows off",
+  "camera": "34°59′43.96″ N, 77°33′52.84″ E; altitude 9549 km",
+  "purpose": "Check visible registration and texture changes at the same camera. The old Trek maps and new native-derived maps have different sampling and encoding; differences are expected. These counts do not measure image quality or scientific accuracy. The existing photometric law is unchanged; lighting files were rebaked using the new BDR mean color.",
+  "results": [
+    {
+      "id": "normal",
+      "reference": "before-normal-crop.png",
+      "result": "after-normal-crop.png",
+      "diff": "normal-diff.png",
+      "referenceSha256": "a33867f4f86838646061587c306514b701ecd68193836aa459c1e6093836ce9e",
+      "resultSha256": "7fd0b4d5a920e8dff50c7cbf21ce44acb93e112da674a2f5338d10bec1ca22ed",
+      "mismatched": 214,
+      "pixels": 286225
+    },
+    {
+      "id": "enhanced",
+      "reference": "before-enhanced-crop.png",
+      "result": "after-enhanced-crop.png",
+      "diff": "enhanced-diff.png",
+      "referenceSha256": "14bc671d5fb07b3c06ed066104ebd1718d64c3ea5cc612876a48d00410664959",
+      "resultSha256": "45d35e6abea8ff293fbaf8aaee61c433c4cb25f9b20075dd2ca4f03fe33e2443",
+      "mismatched": 1605,
+      "pixels": 286225
+    }
+  ]
+}

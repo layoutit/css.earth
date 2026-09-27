@@ -1,5 +1,7 @@
 # Ceres
 
+**Mineral signatures.** The dataset selector groups Clay · 2.7 µm, Ammonium · 3.1 µm under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 The navigation marker uses its existing source map as a stylized identifier. The [marker recipe](source/preparation/navigation.json) crops and resizes it, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not an observer projection or a view at the scene epoch.
 
 ## Sources
@@ -20,6 +22,43 @@ Source selections, recorded trials and open questions are in the [investigation 
 - **Color scales for those two lenses** span each map's own 2nd to 98th percentile: 0.229 to 0.283 for the 2.7 µm band and 0.106 to 0.151 for the 3.1 µm band. The palette is the rainbow core of the bars in Frigeri et al. (2019), Figure 7: the sampled colors from blue through cyan, green and yellow to red, stops 45 to 56 of the 2.7 µm bar (#0001e3 to #e30001) and 19 to 38 of the 3.1 µm bar (#0101e0 to #e30001), whose rainbow is wider. The full bars spend four fifths of their length on flat dark blue and dark red, which fits the paper's narrow histograms but left most of these maps in the two dark ends. How the palette was sampled is under [Band-depth lenses](#band-depth-lenses).
 
 ## Evidence
+
+### Band-centre maps (27 September 2026)
+
+**Clay band centre** and **Ammonium band centre** use the native
+`CMT_MOSAIC-BI_CENTER` and `CMT_MOSAIC-BII_CENTER` products in Dawn VIR global
+mosaics V1.0. They measure the wavelength of the absorption minimum, in µm,
+through the same detached-label reader as the existing Clay band. Source samples
+are unchanged: nearest sampling, no stripe correction or invented polar fill.
+
+The ranges, **2.71–2.75 µm** and **3.02–3.08 µm**, come from
+[Ammannito et al. (2016), LPSC 3020, Figure 2](https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf).
+The black-to-white heat palette is an authored display choice; values outside
+the range use its end colors. It is not a percentile stretch. The paper finds
+nearly constant band positions, not changing clay composition. Band centre
+does not measure abundance. The archive preserves stripes and checkerboard
+artifacts that must not be interpreted as deposits.
+
+The [numeric inspection](evidence/band-centres/measurements.json) validates both
+4102 × 1367 big-endian float rasters against their native labels and records
+coordinate samples, missing values and clipping counts. Median positions are
+2.7320 and 3.0614 µm; 98.84% and 98.88% of cells inside the roughly ±60° source
+band are valid. Poles remain missing. The 2.7 µm median is 0.005 µm above the
+conference paper's reported mean. The archived product was released in 2018;
+the cause of this offset is unverified, and this is not a pixel reproduction
+of the 2016 figure.
+The archive's record-count and acquisition-date inconsistencies described below
+also occur in the centre labels.
+
+The [clay](evidence/band-centres/clay-centre.png) and
+[ammonium](evidence/band-centres/ammonium-centre.png) browser views were inspected
+on 27 September in Chromium at 1440 × 900, DPR 2, saved at 1440 pixels wide,
+with Shadows off. Switching lenses loaded each map's own title, units and image
+without page errors or failed requests; a 390 × 844, DPR 2 phone view also passed.
+The recipes and numeric checks are from `734ad10780629e11b09707ff5d0c0f5601ecb02e`;
+later changes retain main's Mineral signatures group and shorten these two
+selector subtitles to “Dawn VIR”. The shared focused checks and fresh delivery
+verification are recorded in [Io's qualification](../io/README.md#close-pass-volcanic-heat-27-september-2026).
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 

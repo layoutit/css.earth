@@ -2,9 +2,9 @@ import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { ObjectEntry } from '@cssearth/objects';
-import { authoredObject } from '../sources/authored-object.mts';
+import { authoredObject } from '@cssearth/bake/sources';
 
-import { validateInventory, requireInventory, verifyInventory } from "../../src/platform/runtime-asset-closure.mts";
+import { validateInventory, requireInventory, verifyInventory } from '@cssearth/objects/node';
 import {
   validateSourceManifest,
   verifySourceManifest,

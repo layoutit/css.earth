@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-family-example@1",
+  "family": "F17",
+  "source": "src/objects/mathilde/source/manifest.json",
+  "restorer": "packages/telescope-cli/src/families/f13-f17-examples.mts",
+  "members": [
+    {"id":"raw","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit","bytes":273600},
+    {"id":"calibrated","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit","bytes":535680},
+    {"id":"label","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml","bytes":15271}
+  ],
+  "liveProof": {"shape":[244,537],"filter":"0","startTime":"1997-06-27T12:55:52.496Z","rawMissingPixels":0,"rawSaturatedPixels":0,"export":"three reopened closure members plus calibration-bundle.json"},
+  "rights": "The Mathilde source manifest declares public mission scientific data with source labels and attribution retained. Archive bytes are restored on demand and are not committed here."
+}

@@ -27,24 +27,29 @@
   },
   "datasets": {
     "normal": {
-      "title": "MDIS Global Basemap BDR",
+      "title": "Low-Sun monochrome map",
       "detail": "MESSENGER MDIS",
-      "summary": "Grayscale brightness at 750 nm, which changes with the surface and the lighting of each image."
+      "summary": "Images taken with the Sun low in the sky bring out crater rims and ridges."
     },
     "enhanced": {
       "title": "MDIS Enhanced Color Mosaic",
       "detail": "MESSENGER MDIS",
-      "summary": "Colors separate surface materials; missing polar color is filled from nearby imagery."
+      "summary": "Enhanced colors make subtle differences in Mercury’s surface easier to see."
     },
     "topography": {
-      "title": "MESSENGER DEM hillshade",
+      "title": "Height of craters and plains",
       "detail": "USGS / MESSENGER",
-      "summary": "Colors show elevation and shading shows slopes, not the planet's visible color."
+      "summary": "Overlapping MESSENGER photographs reveal surface heights; colors show craters and plains above or below a reference sphere."
     },
     "interior": {
       "title": "Interior structure model",
       "detail": "NASA Science",
       "summary": "A large metallic core inside a rocky shell, sized by the structural model."
+    },
+    "loi": {
+      "title": "Higher-Sun monochrome map",
+      "detail": "MESSENGER MDIS",
+      "summary": "Images taken with the Sun higher in the sky show surface brightness patterns. The two maps use different brightness scales."
     }
   }
 }

@@ -169,6 +169,78 @@
       ],
       "path": "features/traverses/APOLLO_12.ZIP",
       "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP"
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/submicroscopic-iron.tif",
+      "recipePath": "science/usgs/submicroscopic-iron.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/fit-quality.tif",
+      "recipePath": "science/usgs/fit-quality.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/plagioclase-grain-size.tif",
+      "recipePath": "science/usgs/plagioclase-grain-size.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/plagioclase.tif",
+      "recipePath": "science/usgs/plagioclase.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/iron-oxide.tif",
+      "recipePath": "science/usgs/iron-oxide.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/olivine.tif",
+      "recipePath": "science/usgs/olivine.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/orthopyroxene.tif",
+      "recipePath": "science/usgs/orthopyroxene.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/clinopyroxene.tif",
+      "recipePath": "science/usgs/clinopyroxene.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/optical-maturity.tif",
+      "recipePath": "science/usgs/optical-maturity.json",
+      "groups": [
+        "refresh-usgs"
+      ]
     }
   ]
 }

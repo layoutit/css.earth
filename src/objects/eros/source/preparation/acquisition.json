@@ -97,6 +97,156 @@
       "headers": {
         "Authorization": "Basic cHVibGljOndpZGUtb3Blbg=="
       }
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter2.tif",
+      "path": "maps/eros_nearmsi_filter2.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter2.lbl",
+      "path": "reference/eros_nearmsi_filter2.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter2.xml",
+      "path": "reference/eros_nearmsi_filter2.xml"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter3.tif",
+      "path": "maps/eros_nearmsi_filter3.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter3.lbl",
+      "path": "reference/eros_nearmsi_filter3.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter3.xml",
+      "path": "reference/eros_nearmsi_filter3.xml"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter5.tif",
+      "path": "maps/eros_nearmsi_filter5.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter5.lbl",
+      "path": "reference/eros_nearmsi_filter5.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter5.xml",
+      "path": "reference/eros_nearmsi_filter5.xml"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter6.tif",
+      "path": "maps/eros_nearmsi_filter6.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter6.lbl",
+      "path": "reference/eros_nearmsi_filter6.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter6.xml",
+      "path": "reference/eros_nearmsi_filter6.xml"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter7.tif",
+      "path": "maps/eros_nearmsi_filter7.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter7.lbl",
+      "path": "reference/eros_nearmsi_filter7.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+      "member": "data/eros_nearmsi_filter7.xml",
+      "path": "reference/eros_nearmsi_filter7.xml"
     }
   ]
 }

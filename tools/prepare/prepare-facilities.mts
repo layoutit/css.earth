@@ -1,44 +1,48 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
-import { spatialSourceCitations } from '../sources/spatial-source-citations.mts';
+import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
-import { compileSourceUsage } from '../../src/platform/source-usage.mts';
-import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usage.mts';
-import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
-import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
-import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
-import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
+import { compileSourceUsage } from '@cssearth/objects/provenance';
+import type { SourceUse, SourceUsageObject } from '@cssearth/objects/provenance';
+import { parsePreparedSources } from '@cssearth/objects/provenance';
+import { readSourceCatalog } from '@cssearth/bake/sources';
+import { sourceInventory, metadataCitations, factsheetCitations } from '@cssearth/bake/sources';
+import { verifyFactsheetSources } from '@cssearth/bake/sources';
 import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
-import type { SourceInventoryEntry } from '../sources/source-catalogue-inputs.mts';
+import type { SourceInventoryEntry } from '@cssearth/bake/sources';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
-import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '../../src/platform/exploration-catalog.mts';
-import { compileContributions } from '../../src/platform/exploration-contributions.mts';
-import { parsePreparedExploration, parseExplorationImage } from '../../src/platform/prepared-exploration.mts';
-import type { ExplorationImage } from '../../src/platform/prepared-exploration.mts';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
+import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '@cssearth/objects/provenance';
+import { compileContributions } from '@cssearth/objects/provenance';
+import { parsePreparedExploration, parseExplorationImage } from '@cssearth/objects/provenance';
+import type { ExplorationImage } from '@cssearth/objects/provenance';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
-import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
+import type { ProvenanceDocument } from '@cssearth/objects/provenance';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from '../assets/restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+
 export const explorationCompilerClosure = [
-  'tools/prepare/prepare-facilities.mts', 'tools/sources/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
-  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/prepare/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'packages/objects/src/registry/object-schema.ts',
-  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-catalog.mts', 'tools/prepare/prepare-catalog.mts',
-  'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'tools/prepare/prepare-navigation-destinations.mts',
+  'tools/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
+  'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-provenance.ts', 'packages/objects/src/provenance/preparation-evidence.ts', 'packages/bake/src/sources/preparation-evidence.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
+  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'tools/prepare/prepare-catalog.mts',
+  'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
-  'site/source/agency-logos.json', 'tools/sources/read-source-catalogue.mts',
-  'packages/objects/src/sources/catalog.ts', 'src/platform/source-usage.mts', 'packages/objects/src/node/source-manifest.ts',
-  'src/platform/prepared-sources.mts', 'tools/sources/source-catalogue-inputs.mts',
-  'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
-  'tools/sources/factsheet-sources.mts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
+  'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
+  'packages/objects/src/sources/catalog.ts', 'packages/objects/src/provenance/source-usage.ts', 'packages/objects/src/node/source-manifest.ts',
+  'packages/objects/src/provenance/prepared-sources.ts', 'packages/bake/src/sources/source-catalogue-inputs.ts',
+  'src/platform/dataset-destination.mts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
+  'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
   'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
@@ -173,11 +177,11 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));
   const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,
-    usage:compileSourceUsage(objects,sources,metadata),inventory,closure:[...closure].sort()};
-  const preparedSources = parsePreparedSources(sourcePayload);
+    usage:compileSourceUsage(objects,sources,DATASET_ROUTES,metadata),inventory,closure:[...closure].sort()};
+  const preparedSources = parsePreparedSources(sourcePayload,DATASET_ROUTES);
   const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
-    graph: compileContributions(objects, catalog) };
-  const prepared = parsePreparedExploration(payload,sources);
+    graph: compileContributions(objects, catalog, DATASET_ROUTES) };
+  const prepared = parsePreparedExploration(payload,sources,DATASET_ROUTES);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
   const catalogueOutputs = [sourcesOutput,output];

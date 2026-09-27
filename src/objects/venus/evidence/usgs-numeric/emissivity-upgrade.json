@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-emissivity-comparison@1",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "sourceIdentity": "magellan-global-emissivity",
+  "unchanged": ["Native USGS product", "Calibration (DN - 1) / 10000", "Missing value -32768", "Palette", "Displayed range 0.29-1.00", "2048 by 1024 displayed grid"],
+  "previous": {
+    "assetSha256": "0a6e46340c31bfa2bd38d40c0ccf0e70b215db8246799bc9b2e2f85ae8e419bd",
+    "bytes": 182456,
+    "webpChunk": "VP8 ",
+    "encoding": "lossy",
+    "outputLongitudeOrigin": 0,
+    "originBasis": "Recipe omits outputLongitudeOrigin; paintScienceSurface defaults to 0."
+  },
+  "current": {
+    "assetSha256": "8be565d12d7a8210cc8bd1b971964ea4db07eb71fcff3295d6863031b5b394d5",
+    "bytes": 1142498,
+    "webpChunk": "VP8L",
+    "encoding": "lossless",
+    "outputLongitudeOrigin": -180,
+    "originBasis": "Explicit recipe matches source/presentation/surface-map.json mapLeftEdgeLongitudeDeg=180 modulo 360."
+  },
+  "verification": "Downloaded the published previous asset by inventory key and read its RIFF WebP chunk alongside the current asset. Compared the base recipe and current recipe with paintScienceSurface and the body's surface-map frame. Native-byte and physical-value checks are retained in numeric-checks.json. This is not an instrument-accuracy comparison."
+}

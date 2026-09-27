@@ -1,7 +1,7 @@
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { fitBackplaneSun, fittedCamera, tiltedCamera, turnedCamera } from './cameras.mts';
+import { fitBackplaneSun, fittedCamera, tiltedCamera, turnedCamera } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** A 10 km sphere seen from 200 km along +x, lit from a direction 40 degrees off the line of sight: backplanes as an archive would state them. */
 function backplanes(sun: readonly number[], size = 128) {

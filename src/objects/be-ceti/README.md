@@ -1,5 +1,7 @@
 # BE Ceti
 
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 BE Ceti is a young star like the Sun that turns once every 7.7 days. Its magnetic field, mapped in 2017, shows no sign of having flipped since 2013. It is also HD 1835, HR 88, HIP 1803.
@@ -28,7 +30,7 @@ Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts) 
 
 Run of 2026-09-23 (this version):
 
-- [`latitude-belt-map.test.mts`](../../../tools/objects/terrestrial-layers/latitude-belt-map.test.mts) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: becet.dat: paper 55 G and 16 G, read 55.0 G and 16.5 G. So the files are the maps the paper measured.
+- [`latitude-belt-map.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/latitude-belt-map.test.mts) (now [`tests/objects/terrestrial/latitude-belt-map.test.mts`](../../../tests/objects/terrestrial/latitude-belt-map.test.mts)) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: becet.dat: paper 55 G and 16 G, read 55.0 G and 16.5 G. So the files are the maps the paper measured.
 - The reader's own tests check that a cell centre keeps its value, that the interpolation wraps at longitude 0, and that a table with a misplaced cell or belts out of order is refused.
 
 ## Known problems

@@ -24,10 +24,10 @@ end in the same lens.
 `image-star.mts` runs stages 1 to 4 on one season of one star and ends with a verdict:
 
 ```bash
-node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/pi1-gruis-pionier-2014-09 output/stars/pi1-gruis-pionier-2014-09 --raw output/calibration/raw-pionier
+node packages/telescope-cli/src/archives/interferometry/image-star.mts packages/telescope-cli/src/archives/interferometry/seasons/pi1-gruis-pionier-2014-09 output/stars/pi1-gruis-pionier-2014-09 --raw output/calibration/raw-pionier
 ```
 
-A season is a folder under `tools/objects/interferometry/seasons/` with a `season.json` (`cssearth-star-season@1`). It names:
+A season is a folder under `packages/telescope-cli/src/archives/interferometry/seasons/` with a `season.json` (`cssearth-star-season@1`). It names:
 
 - the instrument and the target's name in the archive;
 - the nights (PIONIER, AMBER) or science exposures with any calibrator exposures (GRAVITY, MATISSE);
@@ -57,10 +57,10 @@ Error floors raise squared-visibility errors to a fraction of the value and to a
 
 ## Toolchains
 
-`tools/objects/interferometry/toolchains.json` pins every external code: SQUEEZE by commit, ROTIR by commit through a Julia 1.12.7 environment (`rotir/Project.toml` and `rotir/Manifest.toml`), and ESO's instrument kits by URL and sha256. Install one with:
+`packages/telescope-cli/src/archives/interferometry/toolchains.json` pins every external code: SQUEEZE by commit, ROTIR by commit through a Julia 1.12.7 environment (`rotir/Project.toml` and `rotir/Manifest.toml`), and ESO's instrument kits by URL and sha256. Install one with:
 
 ```bash
-node tools/objects/interferometry/toolchain.mts install amber
+node packages/telescope-cli/src/archives/interferometry/toolchain.mts install amber
 ```
 
 Toolchains install under `output/toolchains/`, which git ignores. Downloads are checked against their sha256 and deleted once built. An ESO kit builds with its own installer. PIONIER also builds Yorick from ESO's source package. AMBER's installer stops on Apple clang 17 (`gipaf.c` calls `cx_assert` without its header), so the descriptor states the repair and the tool rebuilds that one package and unpacks the calibration files. MATISSE 2.5.0 compiles its OpenMP loops out on macOS, so `mat_raw_estimates` ran on one core: 759 s for one Betelgeuse LM exposure. On macOS the tool builds LLVM's OpenMP runtime (20.1.8, pinned) into the pipeline prefix and rebuilds MATISSE against it with the guard removed in the slow files. The reduction runs 4 threads: 444 to 479 s for that exposure, at 13.3 to 14.6 GB peak. `mat_opd_wvpo.c` keeps its guard, because threaded it changed the band-edge channel's squared visibility and closure phase. With the rest threaded, the product matches the single-threaded one bit for bit, except the differential-phase error of the band-edge channel at 4.985 µm.

@@ -5,24 +5,28 @@ import { parseArrivalView, type PreparedArrivalView } from './arrival-view.js';
 export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; orientationReference?: number;
   /** A star without imagery of its own that a body with imagery orbits: its planetary system is on the map. */
   hostsImagery?: true;
+  /** A numerical simulation, qualified separately from an artistic illustration. */
+  simulation?: true;
   /** A star without imagery whose colour lens comes from its own measurements (a spectrum or a catalogued temperature): on the map. */
   sourceColor?: true; }
 
 export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> {
-  if (!isRecord(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference', 'hostsImagery', 'sourceColor'].includes(key)) ||
+  if (!isRecord(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'simulation', 'arrival', 'orientationReference', 'hostsImagery', 'sourceColor'].includes(key)) ||
       typeof value.featured !== 'boolean' || typeof value.imagery !== 'boolean' || typeof value.illustration !== 'boolean' ||
       value.illustration && (value.imagery || value.featured)) throw new TypeError('Invalid prepared object discovery.');
   // Arrival presentation is independent of whether the dataset is photographic.
+  if (value.simulation !== undefined && (value.simulation !== true || !value.illustration)) throw new TypeError('A simulation must be a qualified model without observed imagery.');
   if (value.orientationReference !== undefined && (!Number.isInteger(value.orientationReference) || Number(value.orientationReference) < 1)) throw new TypeError('Invalid object orientation reference.');
   if (value.hostsImagery !== undefined && (value.hostsImagery !== true || value.imagery)) throw new TypeError('Only a star without imagery of its own is marked as hosting imagery.');
   if (value.sourceColor !== undefined && (value.sourceColor !== true || value.imagery)) throw new TypeError('Only a body without imagery is marked by its source colour.');
   return Object.freeze({ ...(value.hostsImagery ? { hostsImagery: true as const } : {}), ...(value.sourceColor ? { sourceColor: true as const } : {}), featured: value.featured, imagery: value.imagery, illustration: value.illustration,
+    ...(value.simulation ? { simulation: true as const } : {}),
     ...(value.arrival === undefined ? {} : { arrival: parseArrivalView(value.arrival) }),
     ...(value.orientationReference === undefined ? {} : { orientationReference: Number(value.orientationReference) }) });
 }
 
 export function discoveryDescription(discovery: ObjectDiscovery): string | null {
-  return discovery.illustration ? 'Illustration only' : !discovery.imagery ? 'Shape only' : null;
+  return discovery.simulation ? 'Simulation' : discovery.illustration ? 'Illustration only' : !discovery.imagery ? 'Shape only' : null;
 }
 
 export function isDiscoveryAnchor(object: { classification: string }): boolean {

@@ -3,8 +3,8 @@ import { rm } from "node:fs/promises";
 
 import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
-import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
-import { packageSources } from "./tools/performance/package-sources.mts";
+import { performanceSourceMaps } from "./site/build/source-maps.mts";
+import { packageSources } from "./site/build/package-sources.mts";
 import { searchServer } from './site/server/search-server.mts';
 import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
 import { preparedMotionCss } from "./tools/prepare/prepared-motion-css.mts";

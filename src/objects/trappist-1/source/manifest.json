@@ -209,7 +209,7 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/trappist-1b-miri-3077 as light-curves/ours-white.csv: the 108 raw MIRI/F1500W segments of both exposures from MAST (CRDS context jwst_1535.pmap). The run of 2026-09-18 wrote this file byte for byte.",
+      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with tools/objects/jwst/programs/trappist-1b-miri-3077 as light-curves/ours-white.csv: the 108 raw MIRI/F1500W segments of both exposures from MAST (CRDS context jwst_1535.pmap). The run of 2026-09-18 wrote this file byte for byte. That program, unchanged, now lives in packages/telescope-cli/src/archives/jwst/programs/trappist-1b-miri-3077.",
       "redistribution": "Public JWST data, reduced here.",
       "consumers": [
         "charts"

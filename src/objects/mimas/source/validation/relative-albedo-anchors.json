@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-independent-scientific-anchors@1",
+  "sources": [
+    {
+      "path": "science/b2-intake/mimas_albedo_g.tif",
+      "expectedBytes": 9881891,
+      "validCells": 2468642,
+      "missingCells": 0,
+      "minimum": 0.5824710130691528,
+      "maximum": 1.4076579809188843,
+      "anchors": [
+        {
+          "row": 100,
+          "column": 100,
+          "longitudeEastDegrees": 16.244261977111563,
+          "latitudeDegrees": 73.75573802288798,
+          "value": 0.9397339224815369
+        },
+        {
+          "row": 550,
+          "column": 1100,
+          "longitudeEastDegrees": 177.8787095105689,
+          "latitudeDegrees": 1.0202366328321808,
+          "value": 0.9824621677398682
+        },
+        {
+          "row": 900,
+          "column": 2000,
+          "longitudeEastDegrees": 323.3497122906805,
+          "latitudeDegrees": -55.551820003877886,
+          "value": 1.0321788787841797
+        }
+      ]
+    }
+  ]
+}

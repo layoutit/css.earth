@@ -39,6 +39,16 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       : surfaceMapContext(elements.get(map)!.config ?? undefined, camera, documentTarget, windowTarget);
   }
 
+  function extent(state: NonNullable<ReturnType<typeof context>>) {
+    const geometry = loadedSurfaceGeometry(), navigation = camera?.navigation;
+    if (!geometry || !navigation) return null;
+    return geometry.surfaceViewRectangle({
+      eye: state.relative.map(x => x / navigation.frame.bodyRadiusM) as [number, number, number],
+      rotation: cssCameraAxesFromOrientation(state.world.pose.orientationXyzw),
+      view: surfaceMapViewport(state.scene, navigation.optics()), axes: state.axes,
+    });
+  }
+
   function render() {
     frame = null;
     if (disposed) return;
@@ -51,17 +61,13 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       const bounds = item.size ??= map.getBoundingClientRect();
       if (!bounds.width || !bounds.height) continue;
       const state = context(map);
-      // Flags only on change; nothing reads the map's centre, so it is not written.
+      // Flags only on change. Keyboard input reads its centre from the camera, never per-frame DOM attributes.
       if (map.dataset.ready !== String(Boolean(state))) map.dataset.ready = String(Boolean(state));
       if (!state || !camera?.navigation) continue;
       visible = true;
-      const geometry = loadedSurfaceGeometry();
-      if (!geometry) { void loadSurfaceGeometry().then(schedule); continue; }
-      const optics = camera.navigation.optics();
-      const view = surfaceMapViewport(state.scene, optics);
-      const extent = geometry.surfaceViewRectangle({ eye: state.relative.map(x => x / camera!.navigation!.frame.bodyRadiusM) as [number, number, number],
-        rotation: cssCameraAxesFromOrientation(state.world.pose.orientationXyzw), view, axes: state.axes });
-      const visibleView = String(Boolean(extent.bounds)), fullView = String(extent.bounds && extent.bounds.width >= 1 && extent.bounds.height >= 1);
+      const rectangle = extent(state);
+      if (!rectangle) { void loadSurfaceGeometry().then(schedule); continue; }
+      const visibleView = String(Boolean(rectangle.bounds)), fullView = String(rectangle.bounds && rectangle.bounds.width >= 1 && rectangle.bounds.height >= 1);
       if (map.dataset.visible !== visibleView) map.dataset.visible = visibleView;
       if (map.dataset.fullView !== fullView) map.dataset.fullView = fullView;
       // The viewport boxes follow the camera live: a documented shell exception (up to three small absolutely placed
@@ -71,14 +77,14 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
         if (rect.style[property] !== value) rect.style[property] = value;
       };
       rectangles.forEach((rect, i) => {
-        if (rect.hidden !== !extent.bounds) rect.hidden = !extent.bounds;
-        if (!extent.bounds) return;
-        set(rect, 'left', `${(extent.bounds.left + i - 1) * 100}%`);
-        set(rect, 'top', `${extent.bounds.top * 100}%`);
-        set(rect, 'width', `${extent.bounds.width * 100}%`);
-        set(rect, 'height', `${extent.bounds.height * 100}%`);
+        if (rect.hidden !== !rectangle.bounds) rect.hidden = !rectangle.bounds;
+        if (!rectangle.bounds) return;
+        set(rect, 'left', `${(rectangle.bounds.left + i - 1) * 100}%`);
+        set(rect, 'top', `${rectangle.bounds.top * 100}%`);
+        set(rect, 'width', `${rectangle.bounds.width * 100}%`);
+        set(rect, 'height', `${rectangle.bounds.height * 100}%`);
         set(rect, 'backgroundSize', `${bounds.width}px ${bounds.height}px`);
-        set(rect, 'backgroundPosition', `${-(extent.bounds.left + i - 1) * bounds.width}px ${-extent.bounds.top * bounds.height}px`);
+        set(rect, 'backgroundPosition', `${-(rectangle.bounds.left + i - 1) * bounds.width}px ${-rectangle.bounds.top * bounds.height}px`);
       });
     }
     if (playing && visible) schedule();
@@ -98,9 +104,8 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       if (visibleMaps.length) schedule();
     }
   }
-  function navigate(map: HTMLElement, u: number, v: number) {
-    const state = context(map);
-    if (!state || !camera?.navigation) return;
+  function navigate(map: HTMLElement, u: number, v: number, state = context(map)) {
+    if (!state || !camera?.navigation || !Number.isFinite(u) || !Number.isFinite(v)) return;
     onInteraction();
     const direction = mapDirection(u, Math.max(.001, Math.min(.999, v)), state.axes);
     camera.navigation.apply(orbitMapCamera(state.world, camera.navigation.frame.originM, direction));
@@ -163,11 +168,15 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture'] as const) map.addEventListener(type, release, { signal: events.signal });
     map.addEventListener('wheel', event => wheel(map, event), { passive: false, signal: events.signal });
     map.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
       const moves: Record<string, readonly [number, number]> = { ArrowLeft: [-.02, 0], ArrowRight: [.02, 0], ArrowUp: [0, -.04], ArrowDown: [0, .04] };
       if (moves[event.key]) {
         event.preventDefault();
+        const state = context(map);
+        if (!state) return;
+        const center = extent(state)?.center ?? directionOnMap(state.relative, state.axes);
         const [du, dv] = moves[event.key];
-        navigate(map, Number(map.dataset.centerU) + du, Number(map.dataset.centerV) + dv);
+        navigate(map, center.u + du, center.v + dv, state);
       } else if (['+', '=', '-'].includes(event.key)) {
         event.preventDefault(); wheel(map, { deltaY: event.key === '-' ? 100 : -100 });
       }

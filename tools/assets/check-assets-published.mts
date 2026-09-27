@@ -18,7 +18,7 @@ async function git(root: string, args: readonly string[]): Promise<string> {
 
 async function gitChangedPaths(base: string, root: string): Promise<string[]> {
   // --no-renames: with rename detection on, `git diff --name-only` reports only a renamed file's new path, so a
-  // moved inventory would hide its old path. See tools/ci/object-scope-gate.mts's gitChangedPaths for the same fix.
+  // moved inventory would hide its old path. See .github/scripts/ci/object-scope-gate.mts's gitChangedPaths for the same fix.
   return (await git(root, ["diff", "--no-renames", "--name-only", base, "HEAD"])).split("\n").map(line => line.trim()).filter(Boolean);
 }
 
@@ -35,7 +35,7 @@ async function gitInventoryAt(base: string, path: string, root: string): Promise
  */
 const SCOPE_WIDENING_PATHS = new Set([
   "tools/assets/runtime-assets.mts",
-  "src/platform/runtime-asset-closure.mts",
+  "packages/objects/src/node/runtime-asset-closure.ts",
 ]);
 
 const INVENTORY_PATH = /^src\/objects\/([^/]+)\/inventory\.json$/u;
@@ -181,7 +181,7 @@ async function headCheck(fetcher: HeadFetcher, origin: string, asset: RuntimeAss
     return { ok: false, reason: `HTTP ${response.status}`, kind: throttled ? "throttled" : "missing", status: response.status,
       retryAfterMs: throttled ? retryAfterMs(response.headers.get("retry-after")) : null };
   }
-  // A compressed (e.g. brotli) response can omit content-length entirely — see publish-verification.mts's headOk.
+  // A compressed (e.g. brotli) response can omit content-length entirely — see headOk in packages/bake/src/delivery/publish-verification.ts.
   const contentLength = response.headers.get("content-length") ?? null;
   if (contentLength !== null && Number(contentLength) !== asset.bytes) {
     return { ok: false, reason: `content-length mismatch: expected ${asset.bytes}, got ${contentLength}`, kind: "missing", retryAfterMs: null };

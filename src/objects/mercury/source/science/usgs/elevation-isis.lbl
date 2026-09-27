@@ -1,0 +1,60 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 92982
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 23040
+      Lines   = 11520
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = SignedWord
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 0.5
+    End_Group
+    ^Core     = Mercury_Messenger_USGS_DEM_Global_665m_v2.tif
+  End_Object
+
+  Group = BandBin
+    Name   = MedianRadius
+    Number = 5
+    Center = 5
+    Width  = 5
+  End_Group
+
+  Group = Mapping
+    ProjectionName       = Equirectangular
+    CenterLongitude      = 180.0
+    TargetName           = Mercury
+    EquatorialRadius     = 2439400.0
+    PolarRadius          = 2439400.0
+    LatitudeType         = Planetocentric
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 360
+    MinimumLatitude      = -90.0
+    MaximumLatitude      = 90.0
+    MinimumLongitude     = 0.0
+    MaximumLongitude     = 360.0
+    UpperLeftCornerX     = -7663601.11916700006 <meters>
+    UpperLeftCornerY     = 3831800.55958400015 <meters>
+    PixelResolution      = 665.243153000000007 <meters/pixel>
+    Scale                = 64.0 <pixels/degree>
+    CenterLatitude       = 0.0
+    CenterLatitudeRadius = 2439400.0
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1476             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 6575
+  ^History  = Mercury_Messenger_USGS_DEM_Global_665m_v2.History.IsisCube
+End_Object
+End

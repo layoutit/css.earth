@@ -45,7 +45,7 @@
       "kind": "limitation",
       "text": "Editorial cartographic selection and English names; not an official gazetteer, and populations are Natural Earth's estimates.",
       "scope": "Earth labels and their ranking.",
-      "evidence": "tools/objects/surface-features/natural-earth.ts reads the pinned attribute tables as published."
+      "evidence": "packages/bake/src/objects/surface-features/natural-earth.ts reads the pinned attribute tables as published."
     }
   ]
 }

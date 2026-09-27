@@ -34,15 +34,15 @@ jobs:
           # The gate counts object paths in Git's complete diff; it never reads those objects' data.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /tools/**/*.mts
+            /.github/scripts/**/*.mts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
       - name: Fail a PR that touches more than 12 object directories without the pipeline-change label
         # Labels come straight from the triggering pull_request event payload (no extra API call, no token scope
-        # beyond the workflow's default contents:read) — see tools/object-scope-gate.mts. BASE_REF goes through
+        # beyond the workflow's default contents:read) — see .github/scripts/ci/object-scope-gate.mts. BASE_REF goes through
         # env, not string interpolation into the shell command, so a base branch name can never inject shell syntax.
         env:
           PR_LABELS: ${{ toJson(github.event.pull_request.labels) }}
           BASE_REF: ${{ github.base_ref }}
-        run: node tools/ci/object-scope-gate.mts "origin/$BASE_REF" "$PR_LABELS"
+        run: node .github/scripts/ci/object-scope-gate.mts "origin/$BASE_REF" "$PR_LABELS"

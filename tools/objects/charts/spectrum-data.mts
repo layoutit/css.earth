@@ -1,6 +1,7 @@
 import { isArray, isRecord, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import type { ChartAssetRecipe } from './charts.ts';
-export type SpectrumRecipe = Extract<ChartAssetRecipe['charts'][number], {kind: 'spectrum'}>;
+/** A `spectrum` chart of an object's chart recipe (`charts.ts` dispatches every kind). It is declared here, not there, so the
+ * body overview (site/prepare-body-overview.mts) reads spectra without reaching the other chart kinds or @cssearth/bake. */
+export interface SpectrumRecipe {id:string;title:string;description:string;output:string;metadata:Record<string,unknown>;kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
 export interface SpectrumPoint {wavelength: number; total: number;}
 
 /** Decode the exact profile used by both prepared spectrum presentations. */

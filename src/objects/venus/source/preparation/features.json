@@ -16,7 +16,10 @@
   "lensIds": [
     "clouds",
     "radar",
-    "elevation"
+    "elevation",
+    "emissivity",
+    "reflectivity",
+    "roughness"
   ],
   "kinds": {
     "point": [

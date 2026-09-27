@@ -13,20 +13,18 @@ import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, obse
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
-import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
+import { loadSurfaceObservation, type SurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
-import { readReconstruction } from '../interferometry/beam-convolve.mts';
+import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '@cssearth/bake/objects/raster';
 import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
-import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
-import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
-import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
-import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
+import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '@cssearth/bake/objects/stellar';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
@@ -104,7 +102,7 @@ const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height
 /** Build the lane's `interpret` adapter once per prepared object. Decoded grids are cached per surface so the
  * two prepared densities decode each source once (the terrestrial lane painted a single @2x atlas). */
 const fits = object({ bitpix: number, width: number, height: number, latitude: literal('sine-latitude', 'equirectangular'),
-  positiveOnly: optional((v): v is boolean => typeof v === 'boolean'), nearestLatitudeLimit: number,
+  positiveOnly: optional((v): v is boolean => typeof v === 'boolean'), nearestLatitudeLimit: number, missingCoverage: optional(literal('gray', 'dark')),
   color: union(object({ kind: literal('signed-asinh'), palette: array(array(number)), softening: number, maximum: number }),
     object({ kind: literal('positive-log'), palette: array(array(number)), range: tuple(number, number) })) });
 const record = object({ file: string, record: string });
@@ -124,6 +122,7 @@ export function parseSynopticRecipe(value: unknown): SynopticRecipe {
     return { source: { kind: 'hmi-continuum-mosaic', ...input.continuum }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
   }
   if (!input.fits) throw new TypeError('A FITS synoptic map declares its FITS geometry and colour transform.');
+  if (input.fits.missingCoverage && input.polarStabilization) throw new TypeError('Marked FITS gaps cannot use polar continuation.');
   if (input.limb.mode === 'continuum-darkening') throw new TypeError('Continuum limb darkening needs the continuum mosaic source.');
   return { source: { kind: 'fits-map', fits: input.fits }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
 }
@@ -500,10 +499,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const gravity = surface.science.gravityDarkening === undefined ? null : await (async () => {
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
           await source.validatePath(path);
-          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('./gravity-darkening.mts');
+          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('@cssearth/bake/objects/stellar');
           const { parseCieTable } = await import('@cssearth/bake/objects/color');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
-          const { readCie1931ColorMatching } = await import('../../references/reference-bank.mts');
+          const { readCie1931ColorMatching } = await import('@cssearth/bake/objects/sources');
           const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
           return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record), equatorK: surfaceTemperature(record, Math.PI / 2) };
         })();

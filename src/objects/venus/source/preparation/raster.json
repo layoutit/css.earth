@@ -45,16 +45,50 @@
     },
     {
       "id": "elevation",
-      "source": "surface/venus-magellan-topography-wms.png",
+      "source": "science/usgs/elevation.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
       "thumbnail": "venus-lens-{id}.webp",
-      "exposure": [
-        1.4,
-        2.2,
-        0.9
-      ],
-      "sharpen": 0.65
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "elevation.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -3000,
+          "maximum": 12000,
+          "colors": [
+            "#243b85",
+            "#40a0c4",
+            "#dddac4",
+            "#ce9449",
+            "#89382d"
+          ],
+          "units": "m above 6,051 km sphere",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.17578125,
+              -0.17578125
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -99999
+          }
+        }
+      }
     },
     {
       "id": "ultraviolet",
@@ -68,7 +102,7 @@
         "filter": "365 nm",
         "observationMiddle": "2023-08-30T10:04:46.033",
         "converterId": "7b81c2b8b5a5",
-        "gain": 5e-9,
+        "gain": 5e-09,
         "gamma": 2.2,
         "referenceRadiusMeters": 6051800,
         "outputLongitudeOrigin": 180
@@ -77,57 +111,142 @@
     },
     {
       "id": "emissivity",
-      "source": "emissivity/magellan.tif",
+      "source": "science/usgs/emissivity.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
       "thumbnail": "venus-lens-{id}.webp",
       "science": {
-        "kind": "terrestrial-scientific",
-        "id": "emissivity",
-        "label": "Microwave emissivity",
-        "format": "geotiff",
-        "path": "emissivity/magellan.tif",
-        "consumer": "emissivity",
-        "sampling": "nearest",
-        "minimum": 0.29,
-        "maximum": 1,
-        "colors": [
-          "#440154",
-          "#3b528b",
-          "#21918c",
-          "#5ec962",
-          "#fde725"
-        ],
-        "labels": [
-          "0.29",
-          "1.00"
-        ],
-        "units": "Dimensionless",
-        "title": "Microwave emissivity",
-        "description": "Magellan · USGS global GEDR · 4.64 km pixels",
-        "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m",
-        "valueTransform": {
-          "scale": 0.0001,
-          "offset": -0.0001
-        },
-        "grid": {
-          "width": 8193,
-          "height": 4097,
-          "referenceRadiusMeters": 6051000,
-          "centerLongitude": 0,
-          "longitudeRange": [
-            -180,
-            180
+        "scientific": {
+          "format": "geotiff",
+          "path": "emissivity.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.29,
+          "maximum": 1,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
           ],
-          "noData": -32768,
-          "origin": [
-            -19014417.9036,
-            9509529.4812
+          "units": "emissivity",
+          "valueTransform": {
+            "scale": 0.0001,
+            "offset": -0.0001
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.17578125,
+              -0.17578125
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -99999
+          }
+        }
+      }
+    },
+    {
+      "id": "reflectivity",
+      "source": "science/usgs/reflectivity.tif",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "reflectivity.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 0.5,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
           ],
-          "resolution": [
-            4641.0588,
-            -4641.0588
-          ]
+          "units": "reflectivity",
+          "valueTransform": {
+            "scale": 0.005,
+            "offset": -0.005
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.17578125,
+              -0.17578125
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -99999
+          }
+        }
+      }
+    },
+    {
+      "id": "roughness",
+      "source": "science/usgs/roughness.tif",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "roughness.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 25.4,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "RMS slope \u00b7 degrees",
+          "valueTransform": {
+            "scale": 0.1,
+            "offset": -0.1
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.17578125,
+              -0.17578125
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -99999
+          }
         }
       }
     }

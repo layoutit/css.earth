@@ -14,7 +14,6 @@
         "charts",
         "features",
         "panel-content",
-        "surface-gallery",
         "lenses",
         "starfield",
         "sky-sun",
@@ -128,6 +127,16 @@
             },
             {
               "id": "emissivity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "reflectivity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "roughness",
               "source": "content",
               "material": "lighting"
             }

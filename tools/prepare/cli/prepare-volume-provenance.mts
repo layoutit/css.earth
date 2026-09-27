@@ -1,6 +1,6 @@
 // Entry script: node tools/prepare/cli/prepare-volume-provenance.mts [--object=<id>]. The work is in ../prepare-volume-provenance.mts.
 import { writeVolumeProvenance } from '../prepare-volume-provenance.mts';
-import { RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 
 const args = process.argv.slice(2);
 if (args.length > 1 || args.some(arg => !/^--object=[a-z][a-z0-9-]*$/.test(arg)))

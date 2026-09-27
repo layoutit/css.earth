@@ -2,8 +2,13 @@
   "id": "source-eros-eros-infrared",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Near infrared",
-  "identifiers": [],
+  "title": "Eros · NEAR MSI 950 nm reflectance",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter4::1.0"
+    }
+  ],
   "links": [
     {
       "role": "landing",

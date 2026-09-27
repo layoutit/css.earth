@@ -63,7 +63,8 @@ const stepOf = (lens: Control) => {
     <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens, index) => (
         <div id={`${objectId}-${lens.id}-option`} class="object-observation-option" data-lens-option data-system-dataset={lens.systemDataset ? lens.id : undefined}
-          data-step-group={lens.step?.group} data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
+          data-step-group={lens.step?.group} data-step-autoplay={lens.step?.autoplay === false ? 'false' : undefined}
+          data-step-listed={lens.step ? String(listed(lens)) : undefined} hidden={!listed(lens) || undefined}>
           <button
             class="object-observation-control object-thumbnail-leading"
             type="submit"
@@ -142,6 +143,9 @@ const stepOf = (lens: Control) => {
             ><span class={`object-lens-step-chevron ${next ? 'is-next' : 'is-previous'}`} aria-hidden="true"></span></button>;
             return <div class="object-lens-steps" role="group" aria-label={`${lens.label} steps`}>
               {arrow(step.previous, false)}
+              {!focus && <button class="object-lens-step object-lens-play" type="button"
+                data-dataset-play={lens.step!.group} disabled aria-label="Play sequence" aria-pressed="false"
+                title="Loop through this sequence">Play</button>}
               <span class="object-lens-step-label">{lens.step!.label} · {step.index + 1} of {step.count}</span>
               {arrow(step.next, true)}
             </div>;
@@ -149,15 +153,6 @@ const stepOf = (lens: Control) => {
           {borrowedLegend(lens) && <DatasetLegend {objectId} lens={borrowedLegend(lens)!} owner={lens.id} />}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>
-        {!focus && lens.facts && lens.facts.length > 0 && <details class="object-lens-facts">
-          <summary>Dataset details</summary>
-          <ul class="object-facts" aria-label={`${lens.label} facts`}>
-            {lens.facts.map((fact) => <li>
-              <span class="object-fact-label">{fact.label}</span>{" "}
-              <span class="object-fact-value">{fact.value}</span>
-            </li>)}
-          </ul>
-        </details>}
       </div>
     ))}
   </div>

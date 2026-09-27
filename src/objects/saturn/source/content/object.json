@@ -309,6 +309,174 @@
           "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/"
         },
         "notes": "Schematic interior layers based on models of Saturn. Boundaries, colors and exposed structure illustrate inferred composition; they are not photographs or a measured interior map."
+      },
+      {
+        "id": "visible-2018a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2018-06-06"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2018a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2018a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2018a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2018-06-06",
+        "notes": "Hubble OPAL 2018a, starting 2018-06-06. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2018a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-25"
+        }
+      },
+      {
+        "id": "visible-2019a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2019-06-19"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2019a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2019a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2019a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2019-06-19",
+        "notes": "Hubble OPAL 2019a, starting 2019-06-19. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2019a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-26"
+        }
+      },
+      {
+        "id": "visible-2020a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2020-07-04"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2020a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2020a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2020a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2020-07-04",
+        "notes": "Hubble OPAL 2020a, starting 2020-07-04. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2020a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-27"
+        }
+      },
+      {
+        "id": "visible-2021a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2021-09-12"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2021a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2021a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2021a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2021-09-12",
+        "notes": "Hubble OPAL 2021a, starting 2021-09-12. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2021a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-28"
+        }
+      },
+      {
+        "id": "visible-2022a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2022-09-21"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2022a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2022a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2022a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2022-09-21",
+        "notes": "Hubble OPAL 2022a, starting 2022-09-21. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2022a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-29"
+        }
+      },
+      {
+        "id": "visible-2023a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2023-10-22"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2023a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2023a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2023a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2023-10-22",
+        "notes": "Hubble OPAL 2023a, starting 2023-10-22. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2023a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2023a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-30"
+        }
+      },
+      {
+        "id": "visible-2024a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2024-08-22"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2024a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2024a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2024a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2024-08-22",
+        "notes": "Hubble OPAL 2024a, starting 2024-08-22. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2024a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2024a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-31"
+        }
+      },
+      {
+        "id": "visible-2025a",
+        "label": "Hubble dates",
+        "shortLabel": "Hubble",
+        "step": {
+          "group": "opal-visible",
+          "label": "2025-08-29"
+        },
+        "thumbnail": "/scenes/saturn/saturn-lens-visible-2025a.webp",
+        "surface": "/scenes/saturn/saturn-surface-visible-2025a@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-visible-2025a.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Hubble OPAL · 2025-08-29",
+        "notes": "Hubble OPAL 2025a, starting 2025-08-29. Published F395N/F502N/F631N colour composite, assembled over one rotation. Gray grid marks missing coverage in any component, including regions hidden by the rings. Compare cloud patterns; release colour processing varies. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "opal-2025a-rgb",
+          "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
+        }
       }
     ]
   },
@@ -341,7 +509,7 @@
       "open": true,
       "src": "/scenes/saturn/saturn-atmosphere-spectrum.svg",
       "width": 306,
-      "height": 141,
+      "height": 289,
       "alt": "Modeled disk reflectance of Saturn from 350 to 1000 nanometers, including the methane absorption band at 889 nanometers.",
       "titleKey": "reflectance",
       "source": {
@@ -355,7 +523,7 @@
       "open": false,
       "src": "/scenes/saturn/saturn-photometric-phase-curve.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Saturn globe-only V-band brightness change across phase angles from zero to 150 degrees.",
       "titleKey": "photometricPhase",
       "source": {
@@ -368,7 +536,7 @@
       "open": false,
       "src": "/scenes/saturn/saturn-temperature-pressure-profile.svg",
       "width": 306,
-      "height": 141,
+      "height": 275,
       "alt": "Saturn atmospheric temperature from 10 bar to 2 nanobar, showing the cold tropopause and warmer upper atmosphere.",
       "titleKey": "temperaturePressure",
       "source": {

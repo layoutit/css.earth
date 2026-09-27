@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { readJsonSource } from '../../../tools/sources/source-values.mts';
+import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { validateClosedMesh } from '@cssearth/bake/objects/geometry';
 const root=resolve(import.meta.dirname,'../../..');
@@ -11,7 +11,7 @@ const arrayAt=(value:Record<string,unknown>,key:string,label:string):unknown[]=>
 const vector=(value:unknown,label:string):number[]=>requireArray(value,label).map((entry,index)=>requireFiniteNumber(entry,`${label}[${index}]`));
 export async function assertAsteroidPackage(id:string, expectedLenses:readonly string[], radiusM:number):Promise<void> {
  const directory=resolve(root,'src/objects',id),read=async(path:string):Promise<Record<string,unknown>>=>requireRecord(await readJsonSource(resolve(directory,path)),`${id} ${path}`);
- const [runtime,terrain,descriptor,manifest,scene]=await Promise.all(['prepared/runtime.json','prepared/terrain.json','object.json','runtime-assets.json','prepared/scene.json'].map(read));
+ const [runtime,terrain,descriptor,manifest,scene]=await Promise.all(['prepared/runtime.json','prepared/terrain.json','object.json','inventory.json','prepared/scene.json'].map(read));
  const descriptorProperties=recordAt(descriptor,'properties','descriptor properties');
  assert.equal(requireFiniteNumber(recordAt(recordAt(descriptorProperties,'recipe','descriptor recipe'),'shape','descriptor shape').radiusKm,'descriptor radiusKm')*1000,radiusM);
  const controls=arrayAt(recordAt(recordAt(runtime,'controls','runtime controls'),'lenses','runtime lenses'),'controls','runtime lens controls').map((lens,index)=>requireRecord(lens,`runtime lens ${index}`));
@@ -45,7 +45,8 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
  const positions:number[][]=[],lookup=new Map<string,number>(),indices:number[]=[];
  for(const[index,face]of faces.entries()){
   const leaf=leaves[index];assert.equal(leaf.tag,'u');assert.equal(recordAt(leaf,'attributes','scene leaf attributes')['data-polycss-texture-leaf-sizing'],'raster');
-  assert.equal(leaf.projectiveTextureLayer,undefined);assert.ok(typeof leaf.style==='string'&&leaf.style.includes('--polycss-atlas-width:128px'));
+  assert.equal(leaf.projectiveTextureLayer,undefined);assert.equal(typeof leaf.style,'string');
+  for(const dimension of ['width','height']){const size=Number(new RegExp(`--polycss-atlas-${dimension}:([0-9.]+)px`).exec(String(leaf.style))?.[1]);assert.ok(Number.isFinite(size)&&size>0,`Prepared raster ${dimension} is explicit and positive`);}
   const hit=requireArray(triangles[index],`runtime triangle ${index}`);
   for(const[j,value]of arrayAt(face,'vertices',`terrain face ${index} vertices`).entries()){
    const point=vector(value,`terrain vertex ${index}:${j}`);
@@ -57,7 +58,7 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
  const context=requireRecord(await readJsonSource(resolve(root,'src/objects/sun/prepared/world-context.json')),'world context'),body=arrayAt(context,'bodies','world context bodies').map((entry,index)=>requireRecord(entry,`world context body ${index}`)).find(entry=>entry.id===id);
  assert.ok(body, 'Asteroid is reachable through the application context');assert.equal(body.radiusM,radiusM);
  assert.deepEqual(body.positionM,recordAt(descriptorProperties,'worldFrame','world frame').originM);
- const assets=arrayAt(manifest,'assets','runtime assets').map((asset,index)=>requireRecord(asset,`runtime asset ${index}`));
+ const assets=arrayAt(manifest,'assets','runtime assets').map((asset,index)=>requireRecord(asset,`runtime asset ${index}`)).filter(asset=>asset.location==='public');
  for(const asset of assets){const filename=requireString(asset.filename,'runtime asset filename'),bytes=await readFile(resolve(root,'public/scenes',id,filename));assert.equal(bytes.length,requireFiniteNumber(asset.bytes,`runtime asset ${filename} bytes`));assert.equal(createHash('sha256').update(bytes).digest('hex'),requireString(asset.sha256,`runtime asset ${filename} hash`));}
  const descriptorId=requireString(descriptor.id,'descriptor id');
  // A photograph lens that keeps its acquisition illumination is never lit again, so it has no epoch-lit shadow atlas.

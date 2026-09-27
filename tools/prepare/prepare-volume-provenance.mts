@@ -1,7 +1,7 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
-import { parseProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
-import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
+import { parseProductInputEvidence } from '@cssearth/objects/provenance';
+import type { ProductInputEvidence } from '@cssearth/objects/provenance';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -9,19 +9,19 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import type { Lens } from '../../site/object-shell-types.ts';
 import { validateDatasetText } from '../../site/dataset-content.mts';
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';
-import { parseCapture } from '../../src/platform/exploration-catalog.mts';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '../../src/platform/object-provenance.mts';
+import { parseCapture } from '@cssearth/objects/provenance';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '@cssearth/objects/provenance';
 import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
-import { writePreparedSet } from '../prepared/write-prepared-set.mts';
-import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
-import { manifestSources } from '../sources/context-source-records.mts';
+import { writePreparedSet } from '@cssearth/bake/delivery';
+import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
+import { manifestSources } from '@cssearth/bake/sources';
 import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
-import { fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
+import { fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
-export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/sources/context-source-records.mts',
+export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
   'tools/objects/observation/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 
 const integer = (value: unknown): number => {

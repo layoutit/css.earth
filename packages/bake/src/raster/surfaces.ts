@@ -82,13 +82,14 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         id: string;
         rgba: Uint8Array;
         fallback?: Uint8Array;
+        lossless?: boolean;
     }[] = [];
     for (const surface of config.surfaces) {
         let source: Uint8Array | undefined;
         let fallback: Uint8Array | undefined;
         let thumbnailSource: Buffer | undefined;
         let thumbnailLimb: InterpretedPlate | undefined;
-        if (config.resample === 'source-packed') {
+        if (config.resample === 'source-packed' && !surface.science) {
             source = await load(surface.source);
             if (surface.coverage) {
                 fallback = await load(surface.coverage.normal);
@@ -106,6 +107,11 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
             const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) }, width, height, density);
             nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height); nativePhotograph = interpreted.nativePhotograph;
+            if (config.resample === 'source-packed') {
+                if (!nearest) throw new TypeError('Source-packed science must retain nearest numeric sampling.');
+                source = pixels;
+                preparedSources.push({id: surface.id, rgba: pixels, lossless: true});
+            }
             if (interpreted.report) (interpretations[surface.id] ??= {})[density] = interpreted.report;
             if (config.emission) {
                 const plates = interpreted.plates;
@@ -191,8 +197,13 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             else await writeLossyWebp(raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha(), assetPath(publicDirectory, surface.thumbnail, 1, surface.id), { effort: 6 });
         }
         // The authored crop is in canonical-density map pixels.
-        if (config.thumbnail.crop)
-            await writeLossyWebp(sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, RASTER_DENSITY, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }), assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+        if (config.thumbnail.crop) {
+            const thumbnail = sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, RASTER_DENSITY, surface.id)).extract(config.thumbnail.crop)
+                .resize(config.thumbnail.size, config.thumbnail.size, {kernel: nearest ? 'nearest' : 'lanczos3'});
+            const path = assetPath(publicDirectory, surface.thumbnail, 1, surface.id);
+            if (nearest) await thumbnail.webp({lossless: true, effort: 6}).toFile(path);
+            else await writeLossyWebp(thumbnail, path);
+        }
         if (thumbnailLimb) {
             const plateSize = thumbnailLimb.size, disc = composeLimbPreview(thumbnailLimb, pixels);
             await writeLossyWebp(raster(disc, plateSize, plateSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }),
@@ -213,7 +224,9 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 for (let y = 0; y < tileSize; y++)
                     sprite.set(tile.subarray(y * tileSize * 4, (y + 1) * tileSize * 4), (y * width + poleIndex * tileSize) * 4);
             }
-            await writeLossyWebp(raster(sprite, width, tileSize), assetPath(publicDirectory, config.polesOutput, density, surface.id), { alphaQuality: 100 });
+            const image = raster(sprite, width, tileSize), path = assetPath(publicDirectory, config.polesOutput, density, surface.id);
+            if (surface.lossless) await image.webp({lossless: true, effort: 6}).toFile(path);
+            else await writeLossyWebp(image, path, { alphaQuality: 100 });
         }
     }
     return { metadata, decoded, interpretations };

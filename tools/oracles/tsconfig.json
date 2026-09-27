@@ -8,7 +8,11 @@
     "fixture.mts",
     "test-fits.mts",
     "test-sbmt.mts",
-    "../../tests/objects/unit/venus/oracle.test.mts"
+    "../../tests/objects/unit/venus/oracle.test.mts",
+    "isis-geotiff-grid.mts",
+    "geotiff-image.mts",
+    "lunar-mi-quality.mts",
+    "reflectance-mosaics.mts"
   ],
   "exclude": []
 }

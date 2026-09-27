@@ -48,7 +48,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Minnaert coefficients of the cloud tops from MESSENGER MASCS (Pérez-Hoyos et al. 2018, Fig. 2: 1.35 at 657 nm, 1.36 at 547 nm, 1.32 at 467 nm), read from the vector figure because the authors' data file is offline.",
+      "finding": "Minnaert coefficients of the cloud tops from MESSENGER MASCS (P\u00e9rez-Hoyos et al. 2018, Fig. 2: 1.35 at 657 nm, 1.36 at 547 nm, 1.32 at 467 nm), read from the vector figure because the authors' data file is offline.",
       "evidence": [
         "https://doi.org/10.1002/2017JE005406",
         "https://arxiv.org/abs/1801.03820"
@@ -185,6 +185,23 @@
         }
       ],
       "revisitWhen": "The numeric surface-emissivity grid and its atmosphere correction and gaps are established."
+    },
+    {
+      "id": "usgs-numeric-surfaces",
+      "subject": "Native numeric USGS products and compact display grids",
+      "status": "included",
+      "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts.",
+      "evidence": [
+        "evidence/usgs-numeric/numeric-checks.json",
+        "README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+          "scope": "Working changes above the named base; evidence records tested file hashes."
+        }
+      ]
     }
   ]
 }

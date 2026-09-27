@@ -2,7 +2,7 @@
  * The observer-camera derivation a body records beside its recipe, so every camera field a ground-based photograph
  * lens states is reproducible from pinned inputs: the rotation model, the pinned Horizons tables, each frame's own
  * header, and the lens mesh. `source/preparation/observer-cameras.json` names those inputs; the derivation reads
- * them and returns the controlled-camera fields the recipe must state. The command in `tools/objects/observer-cameras.mts`
+ * them and returns the controlled-camera fields the recipe must state. The command in `packages/bake/cli/observer-cameras.mts`
  * writes them, and the shared test refuses a recipe that drifts from its own inputs.
  */
 import { readFile } from 'node:fs/promises';

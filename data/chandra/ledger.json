@@ -82,7 +82,7 @@
       "archiveNames": [
         "COMET103P/HARTLEY2"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 14,
       "totalExposureKs": 73.6,
       "longest": [
@@ -117,7 +117,7 @@
       "archiveNames": [
         "COMET17P/HOLMES"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 3,
       "totalExposureKs": 30.1,
       "longest": [
@@ -152,7 +152,7 @@
       "archiveNames": [
         "C/2019Q4BORISOV"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 6,
       "totalExposureKs": 75,
       "longest": [
@@ -187,7 +187,7 @@
       "archiveNames": [
         "COMET2P/ENCKE"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 30,
       "totalExposureKs": 44.1,
       "longest": [
@@ -222,7 +222,7 @@
       "archiveNames": [
         "46P/WIRTANEN"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 18,
       "totalExposureKs": 82.2,
       "longest": [
@@ -257,7 +257,7 @@
       "archiveNames": [
         "COMET8P/TUTTLE"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 15,
       "totalExposureKs": 46.8,
       "longest": [
@@ -292,7 +292,7 @@
       "archiveNames": [
         "COMET9P/TEMPEL1"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 35,
       "totalExposureKs": 292.6,
       "longest": [
@@ -327,7 +327,7 @@
       "archiveNames": [
         "COMETC/2013A1SIDINGSPRING"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 2,
       "totalExposureKs": 21.6,
       "longest": [
@@ -354,7 +354,7 @@
       "archiveNames": [
         "EARTH"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 11,
       "totalExposureKs": 0,
       "longest": [
@@ -509,7 +509,7 @@
       "archiveNames": [
         "JUPITER"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 64,
       "totalExposureKs": 2021.8,
       "longest": [
@@ -800,7 +800,7 @@
       "archiveNames": [
         "MARS"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 3,
       "totalExposureKs": 102.5,
       "longest": [
@@ -835,7 +835,7 @@
       "archiveNames": [
         "MOON"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 6,
       "totalExposureKs": 0,
       "longest": [
@@ -871,7 +871,7 @@
         "PLUTO",
         "PLUTO(134340)"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 4,
       "totalExposureKs": 171.7,
       "longest": [
@@ -934,7 +934,7 @@
       "archiveNames": [
         "SATURN"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 9,
       "totalExposureKs": 328.8,
       "longest": [
@@ -1005,7 +1005,7 @@
       "archiveNames": [
         "TITAN"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 3,
       "totalExposureKs": 28.4,
       "longest": [
@@ -1076,7 +1076,7 @@
       "archiveNames": [
         "URANUS"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 3,
       "totalExposureKs": 79,
       "longest": [
@@ -1111,7 +1111,7 @@
       "archiveNames": [
         "VENUS"
       ],
-      "source": "tools/objects/chandra/archive-ledger.mts (MOVING_TARGETS)",
+      "source": "tools/objects/chandra/moving-targets.json",
       "observations": 44,
       "totalExposureKs": 302.2,
       "longest": [

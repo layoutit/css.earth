@@ -1,4 +1,4 @@
-import { parseContextAvailability } from '../src/platform/context-availability.mts';
+import { parseContextAvailability } from '@cssearth/objects/provenance';
 
 // Astro supplies the same startup inspection to server-rendered panels and the browser.
 // External values stay unknown until the runtime parser validates them.

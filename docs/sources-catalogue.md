@@ -100,7 +100,7 @@ pnpm test:node
 ```
 
 This is the broad native suite. For a focused edit, run the affected tests under
-`src/platform/`, `tools/sources/` and `tools/prepare/` after preparing the inputs
+`tests/provenance/`, `tools/sources/` and `tools/prepare/` after preparing the inputs
 they require. Source-dependent cases may skip on a bare checkout; report those
 separately. Neither a skipped case nor a catalogue refresh proves a surface bake.
 

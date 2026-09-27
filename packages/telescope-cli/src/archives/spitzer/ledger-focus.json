@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-archive-ledger-focus@1",
+  "heading": "The Galilean moons",
+  "objects": [
+    "io",
+    "europa",
+    "ganymede",
+    "callisto"
+  ],
+  "noneObserved": "Spitzer has no observation of Io, Europa, Ganymede or Callisto in this archive. Each was asked for by its own NAIF id (501, 502, 503, 504) and the archive returned no observation request for any of them, and none for Jupiter itself (599) either. That is a measured answer and not an untried one: the same search, in the same pass, returned {worked}, so it works and the holding is empty. Europa is this repository's showcase body and Spitzer contributes nothing to it.",
+  "allObserved": "it holds some for all four."
+}

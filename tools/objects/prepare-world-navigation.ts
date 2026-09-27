@@ -7,10 +7,7 @@ import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
-import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement } from './world-navigation-sources.js';
-import { LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame,
-  prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3 } from '@cssearth/bake/objects/scene';
-import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
+import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }

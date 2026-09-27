@@ -3,13 +3,14 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { datasetContributors, datasetSourceDetail } from '../dataset-context.mts';
-import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
-import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
+import { parsePreparedSources } from '@cssearth/objects/provenance';
+import { parsePreparedExploration } from '@cssearth/objects/provenance';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-const prepared = parsePreparedSources(await read('../prepared-sources.json'));
-const exploration = parsePreparedExploration(await read('../prepared-facilities.json'), prepared.sources);
+const prepared = parsePreparedSources(await read('../prepared-sources.json'), DATASET_ROUTES);
+const exploration = parsePreparedExploration(await read('../prepared-facilities.json'), prepared.sources, DATASET_ROUTES);
 const context = (objectId: string, lensId: string) => datasetContributors(objectId, lensId, exploration.graph, exploration.catalog);
 
 test('Mars elevation and thermal infrared select their own missions', () => {

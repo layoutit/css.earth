@@ -1,6 +1,6 @@
 // Reprepare selected photographs and their small previews, preserving the existing scene,
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
-import { updateInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { updateInventory } from '@cssearth/objects/node';
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { readFile, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

@@ -14,7 +14,7 @@ import { compileCssSurfaceShell } from './css-shell.ts';
 export async function prepareSurfaceShellObject(options: { objectDirectory: string; outputDirectory?: string; inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
   // A bake into the object's own prepared/ directory records its published closure through the host's inventory
-  // (`inventoryPreparedAssets` in src/platform/runtime-asset-closure.mts); a scratch bake records nothing.
+  // (`inventoryPreparedAssets` in packages/objects/src/node/runtime-asset-closure.ts); a scratch bake records nothing.
   if (outputDirectory === resolve(objectDirectory, 'prepared') && !options.inventory) throw new TypeError('A bake into the object\'s prepared directory needs the host inventory.');
   const descriptorPath = resolve(objectDirectory, 'object.json');
   const descriptor = parseObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);

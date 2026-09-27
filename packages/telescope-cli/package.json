@@ -1,0 +1,145 @@
+{
+  "name": "@cssearth/telescope-cli",
+  "version": "0.2.0",
+  "description": "The telescope command: explore, retrieve and qualify telescope products, and turn them into outputs.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./archives/hst/archive": {
+      "types": "./src/archives/hst/archive.mts",
+      "default": "./src/archives/hst/archive.mts"
+    },
+    "./archives/hst/line-stack-reduction": {
+      "types": "./src/archives/hst/line-stack-reduction.mts",
+      "default": "./src/archives/hst/line-stack-reduction.mts"
+    },
+    "./archives/hst/slit-scan-frames": {
+      "types": "./src/archives/hst/slit-scan-frames.mts",
+      "default": "./src/archives/hst/slit-scan-frames.mts"
+    },
+    "./archives/hst/slit-scan-reduction": {
+      "types": "./src/archives/hst/slit-scan-reduction.mts",
+      "default": "./src/archives/hst/slit-scan-reduction.mts"
+    },
+    "./archives/interferometry/alma-disc-selfcal": {
+      "types": "./src/archives/interferometry/alma-disc-selfcal.mts",
+      "default": "./src/archives/interferometry/alma-disc-selfcal.mts"
+    },
+    "./archives/jwst/imaging/bands": {
+      "types": "./src/archives/jwst/imaging/bands.mts",
+      "default": "./src/archives/jwst/imaging/bands.mts"
+    },
+    "./archives/jwst/imaging/image3": {
+      "types": "./src/archives/jwst/imaging/image3.mts",
+      "default": "./src/archives/jwst/imaging/image3.mts"
+    },
+    "./archives/juno/archive": {
+      "types": "./src/archives/juno/archive.mts",
+      "default": "./src/archives/juno/archive.mts"
+    },
+    "./archives/juno/archive-ledger": {
+      "types": "./src/archives/juno/archive-ledger.mts",
+      "default": "./src/archives/juno/archive-ledger.mts"
+    },
+    "./archives/juno/measure": {
+      "types": "./src/archives/juno/measure.mts",
+      "default": "./src/archives/juno/measure.mts"
+    },
+    "./archives/ledger": {
+      "types": "./src/archives/ledger.mts",
+      "default": "./src/archives/ledger.mts"
+    },
+    "./archives/naco/archive": {
+      "types": "./src/archives/naco/archive.mts",
+      "default": "./src/archives/naco/archive.mts"
+    },
+    "./archives/sky-position": {
+      "types": "./src/archives/sky-position.mts",
+      "default": "./src/archives/sky-position.mts"
+    },
+    "./archives/targets": {
+      "types": "./src/archives/targets.mts",
+      "default": "./src/archives/targets.mts"
+    },
+    "./archives/toolchain-descriptor": {
+      "types": "./src/archives/toolchain-descriptor.mts",
+      "default": "./src/archives/toolchain-descriptor.mts"
+    },
+    "./body-map-publication": {
+      "types": "./src/body-map-publication.mts",
+      "default": "./src/body-map-publication.mts"
+    },
+    "./query": {
+      "types": "./src/query.mts",
+      "default": "./src/query.mts"
+    },
+    "./query-contract": {
+      "types": "./src/query-contract.mts",
+      "default": "./src/query-contract.mts"
+    },
+    "./request-satisfaction": {
+      "types": "./src/request-satisfaction.mts",
+      "default": "./src/request-satisfaction.mts"
+    },
+    "./selected-product": {
+      "types": "./src/selected-product.mts",
+      "default": "./src/selected-product.mts"
+    },
+    "./sphere/native-scroll/carry-values": {
+      "types": "./src/sphere/native-scroll/carry-values.mts",
+      "default": "./src/sphere/native-scroll/carry-values.mts"
+    },
+    "./sphere/native-scroll/native-camera": {
+      "types": "./src/sphere/native-scroll/native-camera.mts",
+      "default": "./src/sphere/native-scroll/native-camera.mts"
+    },
+    "./sphere/native-scroll/resize-input": {
+      "types": "./src/sphere/native-scroll/resize-input.mts",
+      "default": "./src/sphere/native-scroll/resize-input.mts"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "telescope": "dist/telescope.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": "^22.18.0 || >=24.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      "./package.json": "./package.json"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/layoutit/css.earth.git",
+    "directory": "packages/telescope-cli"
+  },
+  "scripts": {
+    "build": "node build.mts",
+    "prepack": "npm run build",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@cssearth/astronomy": "workspace:*",
+    "@cssearth/bake": "workspace:*",
+    "@cssearth/core": "workspace:*",
+    "@cssearth/fits": "workspace:*",
+    "@cssearth/objects": "workspace:*",
+    "@cssearth/renderer": "workspace:*",
+    "@cssearth/spice": "workspace:*",
+    "@cssearth/telescope": "workspace:*",
+    "@types/node": "^26.4.0",
+    "@types/pngjs": "6.0.5",
+    "esbuild": "0.27.7",
+    "linkedom": "^0.18.13",
+    "pngjs": "7.0.0",
+    "sharp": "0.35.3",
+    "typescript": "^5.3.3"
+  }
+}

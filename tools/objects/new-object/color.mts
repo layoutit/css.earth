@@ -14,7 +14,7 @@
  * Planck spectrum at the cited temperature. Stretches of 380-780 nm with no sample are declared as gaps with their reason, as
  * the reader requires. */
 import { gunzipSync } from 'node:zlib';
-import { CROSS_CHECK_AGREEMENT, measuredSpectrumColor, planckColor, readMeasuredSpectrum, type MeasuredSpectrumRecord, type StellarColor } from '../observation/stellar/stellar-photometric-color.mts';
+import { CROSS_CHECK_AGREEMENT, measuredSpectrumColor, planckColor, readMeasuredSpectrum, type MeasuredSpectrumRecord, type StellarColor } from '@cssearth/bake/objects/stellar';
 import { ARI_TAP, BURNASHEV_PART2, KHARITONOV_CATALOG, ngslUrl, PULKOVO_TABLE5, VIZIER_ASU, xpSampledMirrorForm, xpSampledUrl, type Archive, type GaiaRow, type Identifiers } from './archives.mts';
 import type { Cited, ColorRoute, StarSpec } from './spec.mts';
 

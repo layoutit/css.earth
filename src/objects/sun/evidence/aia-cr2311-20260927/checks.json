@@ -1,0 +1,177 @@
+{
+  "testedCommit": "7e6e703528dd56b27efc81ce33d346a88202fb4e",
+  "checked": "2026-09-27",
+  "source": {
+    "operationCount": 1,
+    "path": "sdo/synoptic/AIA0193/CR2311.fits",
+    "bytes": 31106880,
+    "sha256": "86be4970a2538317048897dd71e25b637a6cb8433fb33a68182aef512e971239",
+    "identical": true
+  },
+  "delivery": {
+    "installed": 798,
+    "reused": 0,
+    "skipped": 0,
+    "elapsedSeconds": 2.7044928340000003,
+    "files": 798,
+    "bytes": 18510138,
+    "derived": [
+      {
+        "name": "object.json",
+        "bytes": 512957
+      },
+      {
+        "name": "page.json",
+        "bytes": 10546
+      },
+      {
+        "name": "provenance.json",
+        "bytes": 113059
+      }
+    ],
+    "inventorySha256": "ca089e4767d781350848be8d8ecca73190eba52bb313a5403df5d20243aa3d78",
+    "beforeBytes": 17562761,
+    "changedFiles": 25,
+    "removedFiles": [
+      "public/sun-corona-chromosphere@2x.webp",
+      "public/sun-corona-corona@2x.webp"
+    ],
+    "new193ImageBytes": 331234,
+    "installation": "setupAssets([\"--object=sun\"], emptyRoot), the implementation of pnpm setup:assets; no prepared files, source downloads or linked scene directories in the destination. Installed bytes were copied into the preview checkout before the final captures."
+  },
+  "checks": [
+    {
+      "command": "node tools/oracles/test-fits.mts --unit",
+      "result": "20 Vitest, 158 Node consumer and 16 sampled-source tests passed; zero failures. One oracle-fixture inventory check skipped because the unrelated Charon LEISA cube is not restored."
+    },
+    {
+      "command": "node --test tools/objects/observation/fits-map.test.mts tools/objects/observation/interpret-source-verification.test.mts site/test/dataset-picker.test.mts site/test/dataset-url.test.mts site/test/prepared-lens-labels.test.mts",
+      "result": "9 passed, zero failures or skips."
+    },
+    {
+      "command": "node --test tools/objects/observation/fits-map.test.mts site/test/scene-datasets.test.mts site/test/prepared-lens-legends.test.mts",
+      "result": "7 passed, zero failures; all-object legend check skipped because unrelated a0952p69 descriptor is absent."
+    },
+    {
+      "command": "pnpm --filter @cssearth/bake exec vitest run src/entries.test.ts",
+      "result": "5 passed."
+    },
+    {
+      "command": "pnpm --filter @cssearth/bake typecheck; pnpm typecheck:preparation",
+      "result": "Both passed."
+    },
+    {
+      "command": "node tools/prepare/cli/prepare-object.mts sun",
+      "result": "All stages completed, resuming from text after restoring the two unrelated cached page inputs needed by the catalogue."
+    }
+  ],
+  "browser": {
+    "browser": "154.0.8037.0",
+    "environment": "Local Astro development server; transfers include development modules and are not production measurements.",
+    "results": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1100
+        },
+        "dpr": 1,
+        "before": "http://127.0.0.1:4297/sun/?dataset=corona-193&v=UMJBTpscCy8JA0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "previous": "http://127.0.0.1:4297/sun/?dataset=corona&v=UMJBTpscCy8JA0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "after": "http://127.0.0.1:4297/sun/?dataset=corona-193&v=UMJBTpscCy8JA0FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "retained": true,
+        "mainCount": 1,
+        "dimensions": {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "dpr": 1
+        },
+        "errors": [],
+        "developmentTransfer": [
+          {
+            "phase": "cold",
+            "requests": 2062,
+            "bytes": 214037213
+          },
+          {
+            "phase": "171",
+            "requests": 3,
+            "bytes": 497840
+          },
+          {
+            "phase": "193",
+            "requests": 1,
+            "bytes": 19072
+          }
+        ]
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "dpr": 2,
+        "before": "http://127.0.0.1:4297/sun/?dataset=corona-193&v=UMJBTpscCy8JAkFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "previous": "http://127.0.0.1:4297/sun/?dataset=corona&v=UMJBTpscCy8JAkFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "after": "http://127.0.0.1:4297/sun/?dataset=corona-193&v=UMJBTpscCy8JAkFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "retained": true,
+        "mainCount": 1,
+        "dimensions": {
+          "width": 390,
+          "scrollWidth": 390,
+          "dpr": 2
+        },
+        "errors": [],
+        "developmentTransfer": [
+          {
+            "phase": "cold",
+            "requests": 2061,
+            "bytes": 213983897
+          },
+          {
+            "phase": "171",
+            "requests": 3,
+            "bytes": 497840
+          },
+          {
+            "phase": "193",
+            "requests": 1,
+            "bytes": 19072
+          }
+        ]
+      }
+    ],
+    "settings": "Emissive Sun; dataset and camera state are recorded in each URL. Shared renderer and camera code unchanged.",
+    "captures": [
+      {
+        "file": "corona-193-desktop.png",
+        "viewport": [
+          1440,
+          1100
+        ],
+        "dpr": 1,
+        "dataset": "corona-193"
+      },
+      {
+        "file": "corona-193-mobile.png",
+        "viewport": [
+          390,
+          844
+        ],
+        "dpr": 2,
+        "dataset": "corona-193",
+        "sheet": "expanded"
+      }
+    ],
+    "additionalInspectedViews": [
+      "171 Å",
+      "304 Å",
+      "193 Å after dragging the globe"
+    ],
+    "interpretation": "UI and source-to-display checks, not pixel parity with a simultaneous disk photograph. Both arrow directions retain one mounted main scene and preserve the camera URL. No page errors or horizontal overflow."
+  },
+  "limits": [
+    "Production network transfer and GPU memory were not measured. Development transfer totals include shared shell, background, object transport and development modules. Installed asset bytes are a different measure.",
+    "HMI polar continuation, the authored solar axis and the existing flat polar cap geometry remain unchanged.",
+    "The AIA maps combine observations across 12 May–9 June 2026; display colors represent detector counts, not temperature or calibrated radiance."
+  ]
+}

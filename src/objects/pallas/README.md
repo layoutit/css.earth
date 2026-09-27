@@ -198,7 +198,7 @@ Source pins live in [source/manifest.json](source/manifest.json); source/prepara
 The [diagnostic recipe](evidence/photographic-controls.json) pins the exact FITS
 image, ADAM and MPCD meshes, frozen cameras, published coordinates and tentative
 native picks. It uses the shared preparation tool
-[check-projected-controls.mts](../../../tools/objects/surface-features/check-projected-controls.mts).
+[check-projected-controls.mts](../../../packages/bake/cli/check-projected-controls.mts).
 The tool verifies input bytes before decoding, checks source-mesh visibility and
 reports each discrepancy without fitting or certifying the camera. It replays the
 retained candidate cameras; it does not yet reproduce their derivation as a full
@@ -211,7 +211,7 @@ the LAM downloads require the public-site header
 contains all three, so no new downloads are needed there.
 
 ```sh
-node tools/objects/surface-features/check-projected-controls.mts \
+node packages/bake/cli/check-projected-controls.mts \
   src/objects/pallas/evidence/photographic-controls.json \
   output/pallas-photographic-projection \
   output/pallas-photographic-projection/control-check

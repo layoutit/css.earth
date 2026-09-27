@@ -32,6 +32,22 @@
             16500
           ]
         }
+      },
+      {
+        "id": "infrared",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        },
+        "focus": {
+          "longitudeDegrees": 270,
+          "latitudeDegrees": -25,
+          "zoom": 1.1
+        }
       }
     ],
     "scientific": [

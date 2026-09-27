@@ -7,8 +7,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { preparedAssetWrites, publishPreparedObject, readPreparedBinaryOutputs, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
-import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
-import { writePreparedSet } from '../../tools/prepared/write-prepared-set.mts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
+import { writePreparedSet } from '@cssearth/bake/delivery';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
 test('private material masters stay staged while all consumer JSON is preflighted',async()=>{
  const root=await mkdtemp(join(tmpdir(),'cssearth-publication-json-'));

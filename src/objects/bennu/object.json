@@ -38,6 +38,26 @@
               "material": "lighting"
             },
             {
+              "id": "blue",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "green",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "red",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "near-infrared",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "spectral",
               "source": "content",
               "material": "lighting"

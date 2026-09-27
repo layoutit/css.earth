@@ -66,8 +66,26 @@
     "defaultLens": "normal",
     "controls": [
       {
+        "id": "blue",
+        "thumbnail": "/scenes/eros/eros-blue-thumbnail.webp",
+        "surface": "eros-blue-surface@2x.webp",
+        "poles": "eros-blue-surface@2x.webp",
+        "source": {
+          "id": "eros-blue",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Blue · 450 nm"
+        },
+        "notes": "NEAR MSI filter 2, 450 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+        "noData": true
+      },
+      {
         "id": "normal",
-        "label": "Monochrome",
+        "label": "Reflected light",
         "thumbnail": "/scenes/eros/eros-normal-thumbnail.webp",
         "surface": "eros-normal-surface@2x.webp",
         "poles": "eros-normal-surface@2x.webp",
@@ -76,11 +94,52 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain."
+        "notes": "NEAR MSI filter 1, 550 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+        "step": {
+          "group": "wavelengths",
+          "label": "Green · 550 nm"
+        },
+        "noData": true
+      },
+      {
+        "id": "near-infrared-760",
+        "thumbnail": "/scenes/eros/eros-near-infrared-760-thumbnail.webp",
+        "surface": "eros-near-infrared-760-surface@2x.webp",
+        "poles": "eros-near-infrared-760-surface@2x.webp",
+        "source": {
+          "id": "eros-near-infrared-760",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Near infrared · 760 nm"
+        },
+        "notes": "NEAR MSI filter 3, 760 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+        "noData": true
+      },
+      {
+        "id": "near-infrared-900",
+        "thumbnail": "/scenes/eros/eros-near-infrared-900-thumbnail.webp",
+        "surface": "eros-near-infrared-900-surface@2x.webp",
+        "poles": "eros-near-infrared-900-surface@2x.webp",
+        "source": {
+          "id": "eros-near-infrared-900",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Near infrared · 900 nm"
+        },
+        "notes": "NEAR MSI filter 5, 900 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+        "noData": true
       },
       {
         "id": "infrared",
-        "label": "Near infrared",
+        "label": "Reflected light",
         "thumbnail": "/scenes/eros/eros-infrared-thumbnail.webp",
         "surface": "eros-infrared-surface@2x.webp",
         "poles": "eros-infrared-surface@2x.webp",
@@ -89,7 +148,47 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+        "notes": "NEAR MSI filter 4, 950 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+        "noData": true,
+        "step": {
+          "group": "wavelengths",
+          "label": "Near infrared · 950 nm"
+        }
+      },
+      {
+        "id": "near-infrared-1000",
+        "thumbnail": "/scenes/eros/eros-near-infrared-1000-thumbnail.webp",
+        "surface": "eros-near-infrared-1000-surface@2x.webp",
+        "poles": "eros-near-infrared-1000-surface@2x.webp",
+        "source": {
+          "id": "eros-near-infrared-1000",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Near infrared · 1000 nm"
+        },
+        "notes": "NEAR MSI filter 6, 1000 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
+        "noData": true
+      },
+      {
+        "id": "near-infrared-1050",
+        "thumbnail": "/scenes/eros/eros-near-infrared-1050-thumbnail.webp",
+        "surface": "eros-near-infrared-1050-surface@2x.webp",
+        "poles": "eros-near-infrared-1050-surface@2x.webp",
+        "source": {
+          "id": "eros-near-infrared-1050",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Near infrared · 1050 nm"
+        },
+        "notes": "NEAR MSI filter 7, 1050 nm normal reflectance from the Golish 2023 deblurred release, corrected to zero incidence, emission and phase. Every filter uses the same linear 0.05–0.40 I/F grayscale stretch. Gray grid marks missing samples; values outside the display range clip without becoming missing data. Residual shading and source outliers remain. The maps use a 17 km cartographic sphere and the existing Gaskell display shape.",
         "noData": true
       },
       {

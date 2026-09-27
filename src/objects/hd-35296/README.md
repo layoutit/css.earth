@@ -1,5 +1,7 @@
 # HD 35296
 
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 HD 35296 is a young Sun-like star that turns in 3.5 days. Unlike the other fast spinners mapped with it, it has no dark spot over its pole. It is also HD 35296, HR 1780, HIP 25278.
@@ -29,7 +31,7 @@ Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts) 
 
 Run of 2026-09-23 (this version):
 
-- [`latitude-belt-map.test.mts`](../../../tools/objects/terrestrial-layers/latitude-belt-map.test.mts) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: hd35296.dat: paper 58 G and 21 G, read 58.0 G and 21.1 G. So the files are the maps the paper measured.
+- [`latitude-belt-map.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/latitude-belt-map.test.mts) (now [`tests/objects/terrestrial/latitude-belt-map.test.mts`](../../../tests/objects/terrestrial/latitude-belt-map.test.mts)) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: hd35296.dat: paper 58 G and 21 G, read 58.0 G and 21.1 G. So the files are the maps the paper measured.
 - The paper's Table 3 also gives the correlation of brightness with the strength of each field component. Over the deposited cells: hd35296.dat: paper (0.24, 0.26, 0.09), read (0.24, 0.26, -0.09) (radial, meridional, azimuthal). The sizes agree; the sign convention is not stated.
 - The reader's own tests check that a cell centre keeps its value, that the interpolation wraps at longitude 0, and that a table with a misplaced cell or belts out of order is refused.
 

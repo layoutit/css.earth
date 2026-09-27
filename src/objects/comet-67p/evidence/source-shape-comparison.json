@@ -1,0 +1,494 @@
+{
+  "schema": "cssearth-osiris-shape-comparison@1",
+  "objectId": "comet-67p",
+  "lensId": "osiris",
+  "recipeSha256": "3adf83fc729ce7d391441c6d63a5a21dbb3ee272b91dcc153bc0ac5b2cc7e376",
+  "method": "Every 1009th detector pixel from offset 503, excluding the camera-fitting grid. Native GEO validity and paired L4 flags apply. Compare each archive XYZ to the closest full-source point and reproject that point into the original camera. No emission, phase or visibility filtering; this deliberately includes points later withheld by the mosaic. Detector-weighted statistics are not surface coverage or measurement uncertainty.",
+  "meshes": [
+    {
+      "name": "base",
+      "path": "shape/mtp019.obj",
+      "sha256": "e90fd0b7d86bc826cf967e2e0234a945c55be7dfd2f710c00e11ed953b14f801"
+    },
+    {
+      "name": "selected",
+      "path": "geology/shap7-regions.vtk",
+      "sha256": "9af9fbedcdc04046786a1c3cb614938245f39cacba69639ba1847fa50fb1e963"
+    }
+  ],
+  "frames": [
+    {
+      "id": "aug05-1944",
+      "sourceSha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b",
+      "samples": 1760,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0023821706176153905,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 1760,
+            "p50": 5.415143227607463,
+            "p95": 16.56395762056641,
+            "maximum": 78.79083723933778
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 1760,
+            "p50": 1.1798303234513041,
+            "p95": 5.0212032205883546,
+            "maximum": 26.569060527695953
+          },
+          "withinTransfer": 1713
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 1760,
+            "p50": 0.3357451570649285,
+            "p95": 1.2184556628601928,
+            "maximum": 2.528605237708626
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 1760,
+            "p50": 0.07430805189940559,
+            "p95": 0.32851998254619413,
+            "maximum": 0.9974835358666012
+          },
+          "withinTransfer": 1760
+        }
+      ]
+    },
+    {
+      "id": "aug05-2344",
+      "sourceSha256": "2cbe1a4cef9576331eb52f387e1d2b72897f2605b41f35b579481e41fc557ed1",
+      "samples": 1808,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0017366666179933151,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 1808,
+            "p50": 3.9924480025797893,
+            "p95": 15.656434737281193,
+            "maximum": 45.047625108670104
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 1808,
+            "p50": 1.0743222487624373,
+            "p95": 5.04682730660237,
+            "maximum": 16.916033280556054
+          },
+          "withinTransfer": 1769
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 1808,
+            "p50": 0.3201486082207584,
+            "p95": 1.225162061856179,
+            "maximum": 3.317377798361986
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 1808,
+            "p50": 0.08239931268466177,
+            "p95": 0.37171437622648695,
+            "maximum": 0.9958234158346657
+          },
+          "withinTransfer": 1808
+        }
+      ]
+    },
+    {
+      "id": "aug06-0244",
+      "sourceSha256": "c431756b48ec0e00392be8a88d9847a33ec35121c4ca5139edc72ac5a2223d39",
+      "samples": 2457,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0018206471521182129,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 2457,
+            "p50": 4.268487946622164,
+            "p95": 16.090725566389622,
+            "maximum": 75.3080305673952
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 2457,
+            "p50": 1.0524800013692173,
+            "p95": 5.034826200091501,
+            "maximum": 29.855079101039493
+          },
+          "withinTransfer": 2404
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 2457,
+            "p50": 0.3295259325713973,
+            "p95": 1.1595248124692226,
+            "maximum": 4.148107198550298
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 2457,
+            "p50": 0.08401996970589752,
+            "p95": 0.3722996661133454,
+            "maximum": 1.8877541037091359
+          },
+          "withinTransfer": 2457
+        }
+      ]
+    },
+    {
+      "id": "aug06-0520",
+      "sourceSha256": "0552334b0799c77a0bd9d79a953459e1c28211ef7ff2bb333ef0d6be29d30326",
+      "samples": 2081,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.002413140803031524,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 2081,
+            "p50": 4.606928559445721,
+            "p95": 15.651361623975989,
+            "maximum": 49.77931162808102
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 2081,
+            "p50": 1.4159772108948898,
+            "p95": 5.711889833235455,
+            "maximum": 23.180868021793806
+          },
+          "withinTransfer": 2033
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 2081,
+            "p50": 0.32583137945089147,
+            "p95": 1.1730851772383508,
+            "maximum": 2.9280252051109503
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 2081,
+            "p50": 0.0991795086934543,
+            "p95": 0.4163636232356612,
+            "maximum": 1.2675064186619345
+          },
+          "withinTransfer": 2081
+        }
+      ]
+    },
+    {
+      "id": "n20151026-125938",
+      "sourceSha256": "86e92509e8413eb74ab39fd5d557dad8c9f4e8a5b5c982dc13c194a79a69749e",
+      "samples": 342,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0013115601365158238,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 342,
+            "p50": 5.443032604203255,
+            "p95": 16.43835271299213,
+            "maximum": 52.254352860344525
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 342,
+            "p50": 0.5241733324997262,
+            "p95": 2.2511067739142976,
+            "maximum": 8.43408912265924
+          },
+          "withinTransfer": 333
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 342,
+            "p50": 0.31043172324357254,
+            "p95": 1.1771800763443003,
+            "maximum": 2.4699428286645886
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 342,
+            "p50": 0.030546769847236335,
+            "p95": 0.1264787598633426,
+            "maximum": 0.38511704759955073
+          },
+          "withinTransfer": 342
+        }
+      ]
+    },
+    {
+      "id": "n20151031-234514",
+      "sourceSha256": "bd37d73e5f2b5f0ad5064a6975fe0bb8c7fb7b05b1b8cb8c0bd9528ba573a7ef",
+      "samples": 381,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0006956584578673325,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 381,
+            "p50": 8.799071736836726,
+            "p95": 39.42653285484208,
+            "maximum": 130.52802118016743
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 381,
+            "p50": 1.0330488296008142,
+            "p95": 3.5175230617137734,
+            "maximum": 11.846457467881825
+          },
+          "withinTransfer": 319
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 381,
+            "p50": 0.3209580594769318,
+            "p95": 1.3135411546412175,
+            "maximum": 2.7458914625156163
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 381,
+            "p50": 0.0366295493445352,
+            "p95": 0.13912155460400816,
+            "maximum": 0.5046753412611374
+          },
+          "withinTransfer": 381
+        }
+      ]
+    },
+    {
+      "id": "n20151104-112633",
+      "sourceSha256": "c52efdf3d8ac954f2eee09eef415fd216b715ef3fd6ef327ae965fcccf72b0ff",
+      "samples": 372,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0023264652118532153,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 372,
+            "p50": 7.67527441910253,
+            "p95": 36.12504511927266,
+            "maximum": 125.28142041059613
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 372,
+            "p50": 1.1298297715348902,
+            "p95": 5.821850001980594,
+            "maximum": 16.417992380105755
+          },
+          "withinTransfer": 311
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 372,
+            "p50": 0.3381392101693213,
+            "p95": 1.3777896128402027,
+            "maximum": 8.189737932288393
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 372,
+            "p50": 0.04631125479106536,
+            "p95": 0.22119966121084425,
+            "maximum": 0.9400617260718545
+          },
+          "withinTransfer": 372
+        }
+      ]
+    },
+    {
+      "id": "n20151115-050650",
+      "sourceSha256": "a552e2d9e692b68398bb5c18cc18fab8ff7172ac03b52cdd79fd15e0e2ce95a8",
+      "samples": 683,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.001389060936477135,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 683,
+            "p50": 5.876350427914497,
+            "p95": 17.401966722951133,
+            "maximum": 57.926628169114416
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 683,
+            "p50": 1.199757142268601,
+            "p95": 4.018161480399897,
+            "maximum": 19.33866339517226
+          },
+          "withinTransfer": 662
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 683,
+            "p50": 0.3105888295988907,
+            "p95": 1.2260750299457328,
+            "maximum": 3.4985628557254262
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 683,
+            "p50": 0.06397453648155092,
+            "p95": 0.2886437725864647,
+            "maximum": 0.8528413200510954
+          },
+          "withinTransfer": 683
+        }
+      ]
+    },
+    {
+      "id": "n20160409t151852044id50f22",
+      "sourceSha256": "0b654038310a98278d077bff516c8dcf376a5cb7384d2b2ed5b2b8ca82a0fdd2",
+      "samples": 3672,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.001017325161899583,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 3672,
+            "p50": 3.8799238218941134,
+            "p95": 15.677134930725812,
+            "maximum": 74.74256814503678
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 3672,
+            "p50": 3.041344868818242,
+            "p95": 14.996459489409293,
+            "maximum": 69.45504296999088
+          },
+          "withinTransfer": 3589
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 3672,
+            "p50": 0.3254005739249144,
+            "p95": 1.21061188301723,
+            "maximum": 5.689092657998282
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 3672,
+            "p50": 0.26288184401895087,
+            "p95": 1.1930928993481424,
+            "maximum": 7.19107010713281
+          },
+          "withinTransfer": 3672
+        }
+      ]
+    },
+    {
+      "id": "n20160409t173352247id50f22",
+      "sourceSha256": "0b8c4a916d15f4063132599bb4f3fc5da2699610917843fdb3f94262d0848e09",
+      "samples": 4100,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.000723646581244504,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 4100,
+            "p50": 3.1706327407929438,
+            "p95": 15.822749694364925,
+            "maximum": 39.39812984402219
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 4100,
+            "p50": 2.4234209555837216,
+            "p95": 17.900783849515676,
+            "maximum": 47.57874287606216
+          },
+          "withinTransfer": 3980
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 4100,
+            "p50": 0.32913743864622996,
+            "p95": 1.2005249589322884,
+            "maximum": 3.871772641509412
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 4100,
+            "p50": 0.22968061180915098,
+            "p95": 1.3497459041153022,
+            "maximum": 3.982712870990708
+          },
+          "withinTransfer": 4100
+        }
+      ]
+    },
+    {
+      "id": "n20160410t114851908id50f22",
+      "sourceSha256": "48f1ea95972001842e06b9559770bc46de19bf37dc76efcdec0fb2a7107599a6",
+      "samples": 3852,
+      "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
+      "cameraHoldoutMaximumPixels": 0.0005557585580977548,
+      "meshes": [
+        {
+          "name": "base",
+          "path": "shape/mtp019.obj",
+          "distancesMeters": {
+            "count": 3852,
+            "p50": 4.7645895464684624,
+            "p95": 17.995791594232482,
+            "maximum": 67.88950749911169
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 3852,
+            "p50": 3.0602359889557254,
+            "p95": 13.796795319056526,
+            "maximum": 60.980936987536666
+          },
+          "withinTransfer": 3710
+        },
+        {
+          "name": "selected",
+          "path": "geology/shap7-regions.vtk",
+          "distancesMeters": {
+            "count": 3852,
+            "p50": 0.32991836094086285,
+            "p95": 1.1920621962525981,
+            "maximum": 4.5899949113561975
+          },
+          "nearestPointDisplacementPixels": {
+            "count": 3852,
+            "p50": 0.21287102556119666,
+            "p95": 0.8869388757201345,
+            "maximum": 2.9170269918799847
+          },
+          "withinTransfer": 3852
+        }
+      ]
+    }
+  ]
+}

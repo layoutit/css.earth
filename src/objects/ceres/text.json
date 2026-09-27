@@ -28,28 +28,38 @@
   "datasets": {
     "normal": {
       "title": "FC visible-light mosaic",
-      "detail": "Global mosaic",
+      "detail": "Dawn FC",
       "summary": "Dawn's visible-light mosaic, with photographed shadows; some dark edges are uncertain."
     },
     "enhanced": {
       "title": "False-color mosaic PIA19977",
-      "detail": "False color",
+      "detail": "Dawn FC",
       "summary": "False colors from the 920, 750 and 440 nm bands, with photographed shadows."
     },
     "elevation": {
       "title": "HAMO digital terrain model",
-      "detail": "Shaded relief",
+      "detail": "Dawn FC / DLR",
       "summary": "Height above or below a 470 km sphere. Terrain beyond 60° latitude is withheld."
     },
     "clay-band": {
       "title": "Dawn VIR 2.7 µm band depth",
-      "detail": "Clay absorption",
-      "summary": "Clay band depth, colored over this map's own range. Deeper than Frigeri et al.'s, whose correction is unreleased."
+      "detail": "Dawn VIR",
+      "summary": "Clay-bearing minerals absorb infrared light near 2.7 µm; deeper absorption means a stronger signal, not a clay percentage."
     },
     "ammonium-band": {
       "title": "Dawn VIR 3.1 µm band depth",
-      "detail": "Ammonium absorption",
-      "summary": "Ammonium band depth from our own reduction of Dawn VIR cubes: no stripes, 99% covered, colored over its own range."
+      "detail": "Dawn VIR",
+      "summary": "Ammonium contains nitrogen and hydrogen; absorption near 3.1 µm traces it in surface minerals."
+    },
+    "clay-centre": {
+      "title": "Dawn VIR 2.7 µm band centre",
+      "detail": "Dawn VIR",
+      "summary": "Wavelength of clay absorption, nearly uniform across Ceres. Scan artifacts remain; poles are unmeasured."
+    },
+    "ammonium-centre": {
+      "title": "Dawn VIR 3.1 µm band centre",
+      "detail": "Dawn VIR",
+      "summary": "Position of the ammonium absorption, not its depth or abundance. Archive striping remains; poles are unmeasured."
     }
   }
 }

@@ -61,6 +61,26 @@
       "title": "Shape-derived radial height",
       "detail": "Shape-derived height",
       "summary": "Height above or below a 241 m sphere. Colors mix the overall shape with local relief."
+    },
+    "blue": {
+      "title": "OSIRIS-REx MapCam · 473 nm",
+      "detail": "OSIRIS-REx MapCam",
+      "summary": "Brightness in blue light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "green": {
+      "title": "OSIRIS-REx MapCam · 550 nm",
+      "detail": "OSIRIS-REx MapCam",
+      "summary": "Brightness in green light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "red": {
+      "title": "OSIRIS-REx MapCam · 698 nm",
+      "detail": "OSIRIS-REx MapCam",
+      "summary": "Brightness in red light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "near-infrared": {
+      "title": "OSIRIS-REx MapCam · 847 nm",
+      "detail": "OSIRIS-REx MapCam",
+      "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
     }
   }
 }

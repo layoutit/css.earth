@@ -1,0 +1,259 @@
+{
+  "testedRevision": "323a8c2f52803627462db448e52ccfa3c073363d",
+  "date": "2026-09-27",
+  "method": "Pearson correlation between the first listed component FITS plane and RGB channel sum, sampling every third row and column. Ignore nonpositive or nonfinite FITS samples and zero RGB sums. Compare stored row order with north/south reversal. This is an orientation diagnostic, not colour calibration or absolute geolocation.",
+  "correlationOrder": [
+    "stored",
+    "north-south-reversed"
+  ],
+  "observations": [
+    {
+      "body": "saturn",
+      "cycle": 25,
+      "rotation": "2018a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2018-06-06T04:37:47",
+      "dates": [
+        "2018-06-06T04:37:47",
+        "2018-06-06T04:34:06",
+        "2018-06-06T04:30:24"
+      ],
+      "unobservedRows": [
+        [
+          491,
+          899
+        ]
+      ],
+      "correlations": [
+        0.7786100545425725,
+        0.42247360222745645
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 26,
+      "rotation": "2019a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2019-06-19T23:54:09",
+      "dates": [
+        "2019-06-19T23:54:09",
+        "2019-06-19T23:50:28",
+        "2019-06-19T23:46:46"
+      ],
+      "unobservedRows": [
+        [
+          491,
+          899
+        ]
+      ],
+      "correlations": [
+        0.8336321857036438,
+        0.2831287211746753
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 27,
+      "rotation": "2020a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2020-07-04T19:23:16",
+      "dates": [
+        "2020-07-04T19:23:16",
+        "2020-07-04T19:19:35",
+        "2020-07-04T19:15:53"
+      ],
+      "unobservedRows": [
+        [
+          499,
+          665
+        ],
+        [
+          781,
+          899
+        ]
+      ],
+      "correlations": [
+        0.9273997446669695,
+        0.09761225856437353
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 28,
+      "rotation": "2021a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2021-09-12T10:35:40",
+      "dates": [
+        "2021-09-12T10:35:40",
+        "2021-09-12T10:31:59",
+        "2021-09-12T10:28:17"
+      ],
+      "unobservedRows": [
+        [
+          520,
+          629
+        ],
+        [
+          821,
+          899
+        ]
+      ],
+      "correlations": [
+        0.9278256095067313,
+        0.2016106838870872
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 29,
+      "rotation": "2022a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2022-09-21T20:50:25",
+      "dates": [
+        "2022-09-21T20:50:25",
+        "2022-09-21T20:46:44",
+        "2022-09-21T20:43:02"
+      ],
+      "unobservedRows": [
+        [
+          503,
+          577
+        ],
+        [
+          814,
+          816
+        ],
+        [
+          818,
+          820
+        ],
+        [
+          826,
+          826
+        ],
+        [
+          839,
+          899
+        ]
+      ],
+      "correlations": [
+        0.9232617273852209,
+        0.3286133958536623
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 30,
+      "rotation": "2023a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2023-10-22T02:51:58",
+      "dates": [
+        "2023-10-22T02:51:58",
+        "2023-10-22T02:49:45",
+        "2023-10-22T02:47:31"
+      ],
+      "unobservedRows": [
+        [
+          473,
+          533
+        ],
+        [
+          858,
+          899
+        ]
+      ],
+      "correlations": [
+        0.9566280542814702,
+        0.5305119502537163
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 31,
+      "rotation": "2024a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2024-08-22T06:08:52",
+      "dates": [
+        "2024-08-22T06:08:52",
+        "2024-08-22T06:05:11",
+        "2024-08-22T06:01:29"
+      ],
+      "unobservedRows": [
+        [
+          0,
+          0
+        ],
+        [
+          459,
+          472
+        ],
+        [
+          869,
+          899
+        ]
+      ],
+      "correlations": [
+        0.9711092612983286,
+        0.6977992787094247
+      ]
+    },
+    {
+      "body": "saturn",
+      "cycle": 32,
+      "rotation": "2025a",
+      "width": 1800,
+      "height": 900,
+      "rgbWidth": 1800,
+      "rgbHeight": 900,
+      "date": "2025-08-29T06:00:51",
+      "dates": [
+        "2025-08-29T06:00:51",
+        "2025-08-29T05:57:10",
+        "2025-08-29T05:53:28"
+      ],
+      "unobservedRows": [
+        [
+          0,
+          12
+        ],
+        [
+          14,
+          17
+        ],
+        [
+          432,
+          442
+        ],
+        [
+          896,
+          899
+        ]
+      ],
+      "correlations": [
+        0.9752198575929556,
+        0.781263662722403
+      ]
+    }
+  ]
+}

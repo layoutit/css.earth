@@ -5,16 +5,16 @@ import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Expression, CallExpression, VariableDeclarator } from "estree";
-import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
-import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
+import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from '@cssearth/bake/runtime-source';
+import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
 import { definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
-import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../src/platform/prepared-presentation-contract.mts";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
 import { readPreparedJsonExports } from "../prepared/check-prepared-presentation.mts";
-import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
+import { parseRuntimeSource, resolveRuntimeSource } from '@cssearth/bake/runtime-source';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '../prepared/prepared-object-source.mts';
-import { requireAuthoredWorldFrameReceipt } from '../sources/authored-world-frame.mts';
+import { requireAuthoredWorldFrameReceipt } from '@cssearth/bake/sources';
 import { readContextObjects } from '../prepare/prepare-catalog.mts';
 
 const registryPath = "site/objects.mts";
@@ -913,7 +913,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.arg
 } else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2);
   // One or more `--object <id>` pairs scope the audit to those objects; each occurrence is collected, not just
-  // the first, so a PR-scoped run (tools/ci/scope-runtime-ownership-check.mts) can name every object it touched.
+  // the first, so a PR-scoped run (.github/scripts/ci/scope-runtime-ownership-check.mts) can name every object it touched.
   const ids: string[] = [];
   for (let i = 0; i < args.length; i++) if (args[i] === "--object") { const id = args[i + 1]; if (id) { ids.push(id); i++; } }
   for (const id of ids) if (!OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);

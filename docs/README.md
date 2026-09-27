@@ -18,7 +18,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
-| Telescope CLI setup, saved queries and outputs, and the boundary to a normal body scene | [Telescope command guide](../packages/telescope/README.md) |
+| Telescope CLI setup, saved queries and outputs, and the boundary to a normal body scene | [Telescope command guide](../packages/telescope-cli/README.md) |
 | Pinning an observation, re-running the observatory's own software, and what each kind of check establishes | [Virtual telescopes](virtual-telescopes.md) |
 | Querying VO archives, selecting bounded science products and retaining acquisition evidence | [VO observation access](vo-observation-access.md) |
 | Which upstream packages own a mechanical boundary here, and which contracts stay ours | [Astronomy package ownership](astronomy-package-ownership.md) |
@@ -85,9 +85,9 @@ CI checks local Markdown, reference and HTML links, heading anchors, file placem
 and links from this index.
 It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
 Run the same check with
-`node tools/audits/check-documentation-links.mts --all`.
+`node .github/scripts/audits/check-documentation-links.mts --all`.
 
 For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
-run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
+run `python3 .github/scripts/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
 This reads committed files; add `--index` to include the staged change. It does
 not acquire sources or qualify scientific claims.

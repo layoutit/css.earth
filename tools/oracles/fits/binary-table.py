@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Astropy binary-table cells for tools/objects/interferometry/fits-table.mts binaryTable and numbers.
+"""Astropy binary-table cells for packages/bake/src/objects/raster/fits/fits-table.ts binaryTable and numbers.
 Run with the pinned oracle environment; never imports the TypeScript reader.
 The tiny table has every column type an OIFITS file here uses (D, E, I, J, K, L, B, A, complex C and M), an ESO HIERARCH card,
 an integer column with TNULL and one scaled column, which the reader must refuse rather than return unscaled.

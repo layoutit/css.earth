@@ -1,4 +1,4 @@
-import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
+import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();

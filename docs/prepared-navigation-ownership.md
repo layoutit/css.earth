@@ -66,7 +66,7 @@ presence.
 
 ## Explicit native motion
 
-`tools/prepared/prepared-presentation-bindings.mts` reads each object's imported authored CSS
+[`prepared-presentation-bindings.ts`](../packages/bake/src/prepared-presentation/prepared-presentation-bindings.ts) reads each object's imported authored CSS
 in offline Chromium and compiles transform-only native motion, including dataset
 specific durations. Both `prepared/runtime.json` and the pinned `prepared/object.json`
 contain these bindings. Unsupported keyframes, timing or changing motion membership

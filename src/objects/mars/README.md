@@ -1,5 +1,7 @@
 # Mars sources
 
+**Surface elements.** The dataset selector groups Chlorine, Iron, Silicon, Potassium, Thorium under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/usgs-numeric/browser.json).
+
 Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations on the shared raster lane used by Mercury and Venus, with modeled atmosphere charts and IAU nomenclature labels.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
@@ -11,7 +13,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | View or quantity | Source |
 | --- | --- |
 | Visible surface | [Viking MDIM 2.1](https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg), colorized by NASA Ames |
-| Elevation display | MOLA color shaded relief from [NASA Trek WMTS tiles](source/manifest.json) |
+| Elevation | [USGS MOLA numeric DEM](https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m), meters above the GMM-2B areoid |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
@@ -30,11 +32,11 @@ The [26 September 2026 browser and delivery record](evidence/showcase/browser.js
 | Water equivalent, chlorine, iron, silicon, potassium, thorium | [Odyssey GRS ELEMTS v1](https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html), observations 4 June 2002–3 April 2005. Unsmoothed 5° bins retain their native boundaries, negative estimates and each product's missing cells. Water equivalent is hydrogen expressed as H₂O, not a map of exposed ice. Five maps use weight percent; thorium converts weight percent to ppm by multiplying by 10,000. |
 | Magnetic field | [Langlais et al. (2019)](https://doi.org/10.1029/2018JE005854), degree/order 134, evaluated by pyshtools on the 3,393.5 km sphere of Figure 6b. This is a model inferred from MGS and MAVEN, with about 160 km resolution. The 0.5° grid displays radial field, blue inward and red outward, with zero neutral. |
 
-The crust-thickness view uses `Mars-thick-Khan2022-39-2900-2900.dat`, the precomputed [Wieczorek et al. (2022) Figure 2 example](https://doi.org/10.1029/2022JE007298) from [Zenodo 6477509](https://zenodo.org/records/6477509). It assumes 39 km beneath InSight and uniform crust density of 2,900 kg/m³. Its mean is about 57 km; the full model family spans 30–72 km. This example is not a unique consensus model. The deposited 0.25° node grid spans 5.579–116.811 km, consistent with the paper’s rounded 6–117 km. [The converter](../../../tools/objects/prepare-mars-crust.mts) only reverses rows and adds explicit coordinates for the existing Tecplot reader; it does not recalculate thickness.
+The crust-thickness view uses `Mars-thick-Khan2022-39-2900-2900.dat`, the precomputed [Wieczorek et al. (2022) Figure 2 example](https://doi.org/10.1029/2022JE007298) from [Zenodo 6477509](https://zenodo.org/records/6477509). It assumes 39 km beneath InSight and uniform crust density of 2,900 kg/m³. Its mean is about 57 km; the full model family spans 30–72 km. This example is not a unique consensus model. The deposited 0.25° node grid spans 5.579–116.811 km, consistent with the paper’s rounded 6–117 km. [The converter](../../../packages/bake/cli/prepare-mars-crust.mts) only reverses rows and adds explicit coordinates for the existing Tecplot reader; it does not recalculate thickness.
 
-The GRS value and uncertainty columns are decoded independently: a missing correction-factor error does not erase a concentration. The first four maps have 1,508 valid bins; potassium and thorium have all 2,592. Uncertainties remain in the original tables rather than becoming separate lenses. [Reader checks](../../../tools/objects/terrestrial-layers/pds-binned-table.test.mts) compare six published cells and exercise missing values, units, wrap and bin edges. Geology decoding finds all 44 declared units. The magnetic grid spans −8,365 to 11,206 nT; its coarser sampling is consistent with Figure 6b's reported extrema (−8,520 to 11,260 nT), not an exact reproduction of that figure's raster.
+The GRS value and uncertainty columns are decoded independently: a missing correction-factor error does not erase a concentration. The first four maps have 1,508 valid bins; potassium and thorium have all 2,592. Uncertainties remain in the original tables rather than becoming separate lenses. [Reader checks](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/pds-binned-table.test.mts) (now [`tests/objects/terrestrial/pds-binned-table.test.mts`](../../../tests/objects/terrestrial/pds-binned-table.test.mts)) compare six published cells and exercise missing values, units, wrap and bin edges. Geology decoding finds all 44 declared units. The magnetic grid spans −8,365 to 11,206 nT; its coarser sampling is consistent with Figure 6b's reported extrema (−8,520 to 11,260 nT), not an exact reproduction of that figure's raster.
 
-The [magnetic recipe](source/preparation/magnetic.json) is evaluated by [the preparation command](../../../tools/objects/prepare-magnetic-map.mts) with the versions in [the toolchain record](../../../packages/telescope/toolchains/magnetic-toolchain.json). No harmonic evaluation occurs in the browser. Quantitative and categorical textures use the existing lossless lane; the 5° GRS grid is deliberately not smoothed.
+The [magnetic recipe](source/preparation/magnetic.json) is evaluated by [the preparation command](../../../packages/bake/cli/prepare-magnetic-map.mts) with the versions in [the toolchain record](../../../packages/telescope/toolchains/magnetic-toolchain.json). No harmonic evaluation occurs in the browser. Quantitative and categorical textures use the existing lossless lane; the 5° GRS grid is deliberately not smoothed.
 
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
@@ -56,7 +58,7 @@ Landing sites: 14 spacecraft landing, touchdown or impact sites and 2 published 
 Feature notes: 644 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic (sha256 `1e9123a6…`) has fully black rows 0–28 (north of about 87.5° N) and rows 2034–2047 (south of about 88.8° S), and 2.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
-- The MOLA lens mosaic is stitched from NASA Trek zoom-3 WMTS tiles and the THEMIS lens is a USGS Astrogeology WMS GetMap of the global day-IR mosaic (2026-09-16); the source manifest pins those bytesed mosaics.
+- The THEMIS lens remains a USGS WMS snapshot (2026-09-16). MOLA now reads the numeric USGS DEM; its interpolated regions are inherited from that product.
 - The disc law is Vincendon's mean surface law with the atmosphere removed, like the Viking map; dust haze is not drawn over the disc. Beyond the limb, the halo is a PSG model, not a measurement: single scattering only, with the Sun one degree above the tangent point's horizon, and one Mars Climate Database dust and ice snapshot, so the real halo may be brighter and changes with the season and dust storms (see the `limb-halo` and `exi-measured-limb-halo` ledger entries). The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
 - The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
@@ -101,19 +103,21 @@ lane.
 
 ## Raster preparation
 
-Each lens is decoded and resampled with Lanczos3 to 4,096 by 2,048 texels
+The photographic lenses are decoded and resampled with Lanczos3 to 4,096 by 2,048 texels
 (`density-before-pack`; only the `@2x` level ships), packed into 16 latitude
 bands with a 32-texel gutter as one 4,160 by 3,072 image, and encoded as WebP.
 Each lens also gets a 1,024 by 512 pole image: two 512-pixel orthographic
-bilinear projections, one per pole. The 21,339 by 10,670
-Viking mosaic is resampled directly from its checked bytes; the MOLA and THEMIS
-snapshots are already 4,096 by 2,048. No exposure or sharpening curve is
-applied to any Mars lens.
+projections, one per pole. Numeric lenses use nearest sampling; photographs
+use bilinear sampling. The 21,339 by 10,670
+Viking imagery is resampled directly from its source; the THEMIS snapshot is
+already 4,096 by 2,048. MOLA samples a compact numeric grid with nearest
+sampling and lossless encoding. No exposure or sharpening curve is applied.
 
 - `Visible color`: USGS Viking MDIM 2.1 colorized global mosaic, about 1 km per
   pixel, NASA Ames color processing.
-- `Elevation`: USGS MOLA pseudo-color shaded relief (false color) with the
-  published palette legend.
+- `Elevation`: USGS MOLA numeric heights, colored by the declared −9,000 to
+  22,000 m scale. The palette and legend are generated together; the former
+  NASA Trek color-relief image no longer supplies this view.
 - `Thermal infrared`: USGS/ASU THEMIS daytime infrared brightness mosaic,
   shown as a qualified visual representation of daytime thermal response, not
   a calibrated temperature retrieval. See the coverage limitation above.
@@ -158,7 +162,7 @@ Rayleigh and Mie tuning, its ambient term and the terminator ramp are removed.
 Outside the disc, the halo comes from a NASA PSG limb profile of PSG's own Mars
 template (the Mars Climate Database 5.3 profile PSG attaches, Millour et al. 2015,
 with its dust and water ice), computed with a local nasapsg/psg container by
-[acquire-psg-limb-table.mts](../../../tools/photometry/acquire-psg-limb-table.mts)
+[acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts)
 into `source/atmosphere/psg-limb.json`. It is the radiance of a 1 km beam along a
 line of sight grazing the planet at each tangent altitude, with the Sun behind the
 viewer, divided by PSG's own disc-centre radiance under an overhead Sun, in the
@@ -223,3 +227,34 @@ their pins before replacing local files. See the
 ## Catalogue attribution
 
 The visible mosaic retains its collective Viking-orbiter capture credit. The catalogue distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors. The Missions tab presents that limit without assigning the mosaic to the landers or guessing individual mission links. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json).
+
+## Numeric USGS grid
+
+The selected native GeoTIFF, detached labels and compact-grid recipe are linked
+from [the source manifest](source/manifest.json). The compact grid keeps native
+samples; the display applies the declared units and palette. See the
+[shared acquisition and independent-check method](../../../docs/usgs-numeric-surfaces.md).
+No new terrain displacement is introduced.
+
+## Numeric-map qualification
+
+The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+the compact input digests and tested processing files, count coverage, and
+compare native byte samples at hemispheres, seams, extrema and gaps. Their
+calibration check runs before the display coverage masks; it does not validate
+the original instrument or scientific model.
+
+The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
+Sun world metadata, with no reused files. All 15 compact source grids restored
+from the source cache with native fallback disabled and matched byte for byte.
+
+The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+map descriptions, legends and retained scene. It includes screenshots; the
+[validation record](evidence/usgs-numeric/validation.json) names the checks
+and the local full-build limitation. These checks do not measure instrument
+accuracy or establish how well readers understand the explanations.
+
+The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+build, all 11 grouped selectors, source labels and phone playback. It explains
+which earlier scientific and browser evidence still applies to this version.

@@ -85,6 +85,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   // Step buttons submit a neighbouring dataset of a sequence; they are not the dataset's own control.
   const lensInputs = formButtons.filter(input => !input.hasAttribute('data-dataset-step'));
   const stepInputs = formButtons.filter(input => input.hasAttribute('data-dataset-step'));
+  const sequences = new Map<string, string[]>();
+  for (const input of lensInputs) {
+    const group = input.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup;
+    if (group) sequences.set(group, [...(sequences.get(group) ?? []), input.value]);
+  }
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !SHELL_SETTING_NAMES.has(input.name));
   const details = lensInputs.map(input => {
@@ -93,6 +98,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     if (!panel) throw new Error(`Rendered dataset details are missing: ${input.value}.`);
     return { id: input.value, panel };
   });
+  // The shell can move a dataset's details outside the form's original root.
+  const playInputs = details.flatMap(({ panel }) => [...panel.querySelectorAll<HTMLButtonElement>('[data-dataset-play]')]);
   const contexts = [...(information?.querySelectorAll<HTMLElement>('[data-dataset-context]') ?? [])];
   const busyRoots = new Set([lensRoot, settingsRoot].filter((root): root is Element => !!root));
   const lenses = new Map(lensInputs.map(input => [input.value, input]));
@@ -126,9 +133,45 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     }
   }
   let ready = false, destroyed = false, lastState: Readonly<ObjectSelectionState> | null = null, actions = 0;
+  let playing: string | null = null, currentGroup: string | null = null;
+  let playTimer: ReturnType<typeof setTimeout> | null = null;
+  function clearPlayTimer() {
+    if (playTimer !== null) clearTimeout(playTimer);
+    playTimer = null;
+  }
+  function stopPlayback() { playing = null; clearPlayTimer(); }
+  function publishPlayback(next: Readonly<ObjectSelectionState>) {
+    const step = lensInputs.find(input => input.value === next.desired.lensId)
+      ?.closest<HTMLElement>('[data-step-group]');
+    const group = step?.dataset.stepGroup ?? null;
+    // Depth and other manual groups can start paused. A pause lasts until the reader leaves the group.
+    if (ready && group !== currentGroup) { stopPlayback(); playing = step?.dataset.stepAutoplay === 'false' ? null : group; currentGroup = group; }
+    const members = playing ? sequences.get(playing) : undefined;
+    if (!ready || document.hidden || next.error || !members?.includes(next.desired.lensId ?? '')) stopPlayback();
+    if (next.pending) clearPlayTimer();
+    // Keep each committed map on screen for 1.5 seconds. Loading the next one never skips a date.
+    if (playing && members && members.length > 1 && !next.pending && playTimer === null) {
+      playTimer = setTimeout(() => {
+        playTimer = null;
+        const state = getState();
+        if (!ready || destroyed || document.hidden || state.pending || state.error || !playing) { publish(); return; }
+        const index = members.indexOf(state.committed?.lensId ?? '');
+        if (index < 0) { stopPlayback(); publish(); return; }
+        act({ kind: 'lens', id: members[(index + 1) % members.length] });
+      }, 1500);
+    }
+    for (const input of playInputs) {
+      const active = playing === input.dataset.datasetPlay;
+      if (input.disabled !== !ready) input.disabled = !ready;
+      setAttribute(input, 'aria-pressed', String(active));
+      setAttribute(input, 'aria-label', active ? 'Pause sequence' : 'Play sequence');
+      const label = active ? 'Pause' : 'Play';
+      if (input.textContent !== label) input.textContent = label;
+    }
+  }
   const nativeChanges = new Map<string, ObjectAction>();
   const listeners: (() => void)[] = [];
-  function listen(input: SettingInput, event: string, callback: EventListener) {
+  function listen(input: EventTarget, event: string, callback: EventListener) {
     input.addEventListener(event, callback);
     listeners.push(() => input.removeEventListener(event, callback));
   }
@@ -150,7 +193,14 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       const disabled = input.type === 'submit' ? false : !ready;
       if (input.disabled !== disabled) input.disabled = disabled;
     }
+    const focusedPlay = playInputs.find(input => input === document.activeElement);
     publishDatasetSelection(lensInputs, details, contexts, pressed, lensRoot);
+    publishPlayback(next);
+    // Each date owns its details panel; carry keyboard focus to its matching Pause button when it changes.
+    if (focusedPlay?.closest<HTMLElement>('[data-lens-details]')?.hidden) {
+      playInputs.find(input => input.dataset.datasetPlay === focusedPlay.dataset.datasetPlay &&
+        !input.closest<HTMLElement>('[data-lens-details]')?.hidden)?.focus();
+    }
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       if (nativeChanges.has(control.name)) continue;
@@ -183,16 +233,18 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       actions++;
       Promise.resolve(onAction(validated)).catch(error => {
         if (destroyed) return;
+        stopPlayback();
         publish();
         onError(error);
       });
-    } catch (error) { if (!destroyed) { publish(); onError(error); } }
+    } catch (error) { if (!destroyed) { stopPlayback(); publish(); onError(error); } }
   }
   try {
     publish();
     for (const [id, input] of lenses) listen(input, "click", event => {
       if (!ready) return;
       event.preventDefault();
+      stopPlayback();
       act({ kind: "lens", id });
     });
     for (const input of stepInputs) {
@@ -202,9 +254,22 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       listen(input, "click", event => {
         if (!ready) return;
         event.preventDefault();
+        stopPlayback();
         act({ kind: "lens", id: input.value });
       });
     }
+    for (const input of playInputs) {
+      const group = input.dataset.datasetPlay!;
+      if ((sequences.get(group)?.length ?? 0) < 2) throw new Error(`Playback requires a dataset sequence: ${group}.`);
+      listen(input, 'click', () => {
+        if (!ready) return;
+        const pause = playing === group;
+        stopPlayback();
+        if (!pause) playing = group;
+        publish();
+      });
+    }
+    if (playInputs.length) listen(document, 'visibilitychange', () => { if (document.hidden) { stopPlayback(); publish(); } });
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       const event = control.kind === "toggle" ? "change" : input.type === "range" ? "input" : "click";
@@ -228,6 +293,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   function cleanup(preserveControls = false) {
     destroyed = true; ready = false;
+    stopPlayback();
+    publishPlayback(getState());
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
     if (preserveControls) return errors;

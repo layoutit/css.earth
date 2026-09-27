@@ -32,7 +32,7 @@
       },
       {
         "id": "shape",
-        "label": "Nucleus model",
+        "label": "Neutral shape model",
         "value": "ESA/RMOC MTP019",
         "source": {
           "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
@@ -100,12 +100,12 @@
           {
             "id": "observed",
             "label": "Observed",
-            "value": "2014–2015"
+            "value": "2014–2016"
           },
           {
             "id": "coverage",
             "label": "Surface photographed",
-            "value": "About 71%"
+            "value": "About 91%"
           },
           {
             "id": "filter",
@@ -113,7 +113,7 @@
             "value": "Orange · 649 nm"
           }
         ],
-        "notes": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain.",
+        "notes": "Eleven Rosetta photographs show cliffs, pits and smoother plains across both lobes. April 2016 close-ups add finer detail. Grid marks gaps in the photography; original shadows and some seams remain.",
         "noData": true
       },
       {
@@ -521,13 +521,13 @@
     {
       "label": "OSIRIS",
       "role": "surface",
-      "description": "September 2014 corrected photographs and geometry",
-      "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/"
+      "description": "April 2016 close-up photographs and corrected SHAP7 geometry",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-ext2-67p-m28-geo-v1.0/"
     },
     {
       "label": "ESA/Rosetta/MPS · OSIRIS",
       "role": "observations",
-      "description": "Four calibrated orange-filter images, corrected geometry and matching detector-quality companions; CC BY-SA 4.0.",
+      "description": "August 2014 calibrated orange-filter photographs and detector-quality companions; CC BY-SA 4.0.",
       "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/"
     },
     {
@@ -571,6 +571,12 @@
       "role": "surface",
       "description": "Geological feature coordinates and mapping guide",
       "href": "https://doi.org/10.5270/esa-kokoti7"
+    },
+    {
+      "label": "ESA/Rosetta/MPS · OSIRIS 2015",
+      "role": "observations",
+      "description": "October–November 2015 southern photographs and corrected SHAP7 geometry; CC BY-SA 4.0.",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/"
     }
   ],
   "provenance": {

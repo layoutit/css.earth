@@ -13,7 +13,7 @@ export default [
     // `tools`, `src` and `site` — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
     // the debt is pre-existing and this is meant to make it visible, not to block work on it.
-    files: ['tools/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
+    files: ['.github/scripts/**/*.{ts,mts}', 'tools/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['warn', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],
@@ -92,8 +92,12 @@ export default [
     // The scene and presentation compilers read the renderer's prepared types, validators and silhouette steps, and the scene
     // projects leaves with PolyCSS, which the runtime uses to draw them.
     // The world frame's presentation and Sun directions name the renderer's vector types and its view-direction conversion.
+    // The prepared-presentation passes rewrite the renderer's prepared tree, depth order and interior disc, and the object
+    // runtime contract reads the renderer's prepared resources and object controls.
+    // The object-content contract names the renderer's object contract types, and surface features index the renderer's label banks.
     files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts', 'packages/bake/src/nebula/**/*.ts', 'packages/bake/src/world-context/**/*.ts', 'packages/bake/src/cluster-catalog/**/*.ts', 'packages/bake/src/galaxy-catalog/**/*.ts', 'packages/bake/src/environment/**/*.ts', 'packages/bake/src/image-layers/**/*.ts', 'packages/bake/src/density/**/*.ts', 'packages/bake/src/sky/**/*.ts', 'packages/bake/src/shell/**/*.ts', 'packages/bake/src/stars/**/*.ts', 'packages/bake/src/volume-leaves/**/*.ts', 'packages/bake/src/objects/layers/**/*.ts',
-      'packages/bake/src/objects/scene/**/*.ts'],
+      'packages/bake/src/objects/scene/**/*.ts', 'packages/bake/src/prepared-presentation/**/*.ts',
+      'packages/bake/src/contract/**/*.ts', 'packages/bake/src/objects/content/**/*.ts', 'packages/bake/src/objects/surface-features/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
@@ -133,6 +137,17 @@ export default [
     // bytes were held identical across the move, so the runtime module is not split here.
     files: ['packages/renderer/src/universe/prepared-world-context.ts', 'packages/renderer/src/universe/prepared-world-context.test.ts',
       'packages/renderer/src/universe/world-context/world-context-planner.test.ts', 'packages/renderer/src/sky/prepared-sky-runtime.test.ts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
+    // Moved unchanged from tools/objects/interferometry, where the limit only warned; splitting it is separate work.
+    files: ['packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
+    // Moved unchanged from tools/objects, which warns instead of failing on the line limit; splitting them is separate work.
+    // The layered-oblate and cutaway bakes were held byte-identical across the move, so neither module is split here.
+    files: ['packages/bake/src/objects/layers/material-composition/layered-oblate.ts', 'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts'],
     rules: { 'max-lines': 'off' },
   },
   {

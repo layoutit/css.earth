@@ -21,7 +21,7 @@ import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrome
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starStylesheet } from './new-object/scaffold.mts';
 import { temperatureCatalogueColor } from '@cssearth/bake/objects/color';
-import { sphereProjection } from './sphere-projection.mts';
+import { sphereProjection } from '@cssearth/bake/objects/scene';
 
 export const TODO = 'TODO(new-hosted-planet)';
 const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;

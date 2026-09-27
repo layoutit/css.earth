@@ -17,18 +17,22 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
+| Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../tools/objects/acquisition/geotiff-image.mts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mts) |
+| Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
+| Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
+| Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
 | Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mts) and [record generation](../tools/objects/provenance.mts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
-[The loader](../tools/objects/terrestrial-layers/radial-terrain.mts) assembles the
+[The loader](../packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts) assembles the
 source surface, atlas layout and retained leaves. It uses
 [mesh sampling and simplification](../packages/bake/src/objects/geometry/radial-mesh.ts),
 which can also run independently of source loading.
-[Material preparation](../tools/objects/terrestrial-layers/radial-materials.mts)
+[Material preparation](../packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts)
 consumes that prepared layout and writes textures through the shared
 [raster emitter](../packages/bake/src/objects/layers/terrestrial/raster-output.ts).
 [Lens selection](../packages/bake/src/objects/layers/terrestrial/alternative-lenses.ts)
@@ -142,6 +146,18 @@ document their recorded revision; they are not relabeled as a new full sweep.
   AcuA v1 is restored through each body’s acquisition plan and checked against its
   manifest. Its selected measurements remain in the calibration record.
 
+### Registered JIRAM radiance
+
+For Perry et al. (2025)'s registered Io FITS release,
+[`jiram-registered-mosaic.mts`](../tools/objects/juno/jiram-registered-mosaic.mts)
+transfers the published planetographic geometry into the existing camera,
+projection and per-visit combination code. It consumes the band-radiance plane
+and released detector masks, then retains qualified cold-night columns.
+The [Io method and recipe](../src/objects/io/README.md#registered-volcanic-heat-27-september-2026)
+state coordinate conventions, units, coverage limits and the curl/7z acquisition
+command. Its float output enters the existing PDS scientific-map lane; no
+source processing occurs in the browser.
+
 ### Image and numeric readers
 
 [readObservation](../packages/bake/src/objects/raster/observed/observation-raster.ts) selects
@@ -199,7 +215,7 @@ other than ICRS or FK5 and is checked against Astropy in both directions.
 | Multi-HDU observations | Encounter, LORRI/L'LORRI and MVIC adapters require their exact instrument layout, units and quality conventions. Named HDUs do not imply a camera model. |
 | Spectral and geometry cubes | LEISA uses bounded sample access without expanding a whole cube. PDS4 geometry labels must agree with FITS axes, element types and offsets; label special constants remain authoritative. |
 | Fixed facet tables | Only the declared `1J + 5E` BINTABLE profiles, with their mesh identity and centroid checks. Column scaling (`TSCAL`/`TZERO`) and null (`TNULL`) declarations are rejected, not ignored. |
-| OIFITS and ESO pipeline tables | [fits-table.mts](../tools/objects/interferometry/fits-table.mts) reads `D E I J K L B A` and complex `C M` columns, returns an integer column's `TNULL` as `NaN` and refuses to read or write a column scaled by `TSCAL`/`TZERO`. |
+| OIFITS and ESO pipeline tables | [fits-table.mts](../packages/bake/src/objects/raster/fits/fits-table.ts) reads `D E I J K L B A` and complex `C M` columns, returns an integer column's `TNULL` as `NaN` and refuses to read or write a column scaled by `TSCAL`/`TZERO`. |
 | ESO headers | HIERARCH keywords keep their namespace (`ESO DET NAME`, MATISSE's `PRO DISP COEF0`). Raw primaries reach 2,480 cards, so a header may span 256 records. Lower-case exponents are read as Astropy reads them. The archive's header service text is read one card per line. |
 | Sky images | A celestial image states RA along columns and Dec along rows, unprojected (SQUEEZE) or with one zenithal projection, through `CDELT`, `CD`, `PC` or `CROTA2`. The display raster puts north on the first row and east on the first column. Rotated, skewed or axis-swapped images, other projections, a `LONPOLE` other than 180 and a reference point on a pole are refused, since a flip cannot display them. |
 | Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
@@ -266,7 +282,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 | --- | --- |
 | Geographic or projected map | [scienceMapPoint](../packages/bake/src/objects/raster/scientific-raster.ts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../packages/bake/src/scene/solid-body-surface.ts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../packages/bake/src/objects/raster/obj-uv-fits.ts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../tools/objects/surface-observations/levels.mts) selects among qualified frames. |
+| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts) selects among qualified frames. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler
@@ -504,8 +520,6 @@ These still set their own encoding:
 - Earth's full pages keep the qualities its recipe declares; its smaller
   texture levels follow their page, lossy ones through the lane.
 - Lighting rows and their billboards carry shading in alpha and stay lossless.
-- Mercury's JPEG maps keep their recipe quality (85). Chrome decodes them about
-  three times faster than lossy WebP, which costs about 30 % more bytes.
 - Saturn's layered and spectral materials keep their encodings.
 - Image-layer galaxies (M31, M33), the LMC and SMC volume banks and the Milky
   Way sky keep their recipe qualities.
@@ -523,7 +537,7 @@ These still set their own encoding:
   maps.
 
 To repeat the measurement, run
-[`tools/prepare/lossy-lane-sweep.mts`](../tools/prepare/lossy-lane-sweep.mts)
+[`packages/bake/cli/lossy-lane-sweep.mts`](../packages/bake/cli/lossy-lane-sweep.mts)
 on the files a lane change replaces.
 
 [raster-output.ts](../packages/bake/src/objects/layers/terrestrial/raster-output.ts) writes
@@ -542,13 +556,13 @@ atmosphere do not depend on the body: 61 bodies carried the same lighting block
 and encoded the same 7 MB one by one. Such a block is now a bank named once in
 [lighting-banks.ts](../packages/bake/src/raster/lighting-banks.ts) and baked once
 into `public/lighting/<bank>/` (tracked, like the navigation atlases) by
-`node tools/objects/dist/prepare-lighting-bank.js`. A body's raster recipe names
+`node packages/bake/cli/prepare-lighting-bank.mts`. A body's raster recipe names
 it, `"lighting": { "bank": "sphere", ... }`, keeping only its presentation
 fields and metadata; the parser fills the bank's fields in, and the bake copies
 the bank's files into the body's scene directory instead of encoding them, so
 the body's prepared output, inventory and published files are what encoding
-would give. `prepare-lighting-bank.js --check`, run by
-[its test](../tools/objects/prepare-lighting-bank.test.ts), bakes each bank afresh
+would give. `prepare-lighting-bank.mts --check`, run by
+[its test](../tests/raster/lighting-bank-bake.test.ts), bakes each bank afresh
 and compares it with the tracked files byte for byte, so the copy is never stale.
 A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
 inline block and its own encode. The `sphere` bank's law is authored: a 0.35
@@ -562,7 +576,7 @@ at its viewing angle. The planets' lighting overlays put that back with the
 same published law, so the limb in the app is the limb the instrument saw.
 
 - **The law.** Each planet keeps its model in `source/photometry/`, one
-  [model record](../tools/photometry/README.md#model-records) per colour channel.
+  [model record](../packages/bake/src/photometry/README.md#model-records) per colour channel.
   [limb.mts](../packages/bake/src/photometry/limb.ts) evaluates it relative to the flood-lit
   disc centre, where incidence, emission and phase are all zero. The centre of
   the default view shows the map as published; every other pixel follows the
@@ -580,7 +594,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Mars | Hapke, surface only | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), OMEGA and CRISM |
   | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
   | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
-  | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../tools/photometry/fit-epic-limb.mts)) |
+  | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../packages/bake/cli/fit-epic-limb.mts)) |
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
@@ -611,7 +625,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   channel factors), which is largest near the limb.
 - **Colour tie.** A colour map whose archive scaling is arbitrary (Saturn's
   OPAL TIF) names a whole-disc colour computed once from a published spectrum
-  ([whole-disc-colour.mts](../tools/photometry/whole-disc-colour.mts)). The map's
+  ([whole-disc-colour.ts](../packages/bake/src/objects/raster/whole-disc-colour.ts)). The map's
   green and blue are scaled by one gain each so that, once the limb law is put
   back, the flood-lit disc integrates to that colour: the target ratios are the
   colour's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
@@ -624,7 +638,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   ![Saturn in the app: the live site, main with the F395N blue limb, and the colour tie; swatches compare centre, limb and whole disc with Karkoschka's colour](images/planet-limbs/saturn-true-colour.webp)
 - **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
   limb profile with the Sun behind the viewer, lit where the tangent point faces
-  the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
+  the Sun. [acquire-psg-limb-table.mts](../packages/bake/cli/acquire-psg-limb-table.mts)
   computes it once, against PSG's own disc centre, and
   [halo.mts](../packages/bake/src/photometry/halo.ts) reads it. PSG computes limb lines of
   sight with single scattering only
@@ -663,7 +677,7 @@ after building the tools and restoring Arrokoth's inputs:
 ```sh
 node tools/objects/dist/operations.js acquire arrokoth --verify-only
 node tools/objects/dist/prepare-authored.js arrokoth --write
-node --test tools/objects/terrestrial-layers/obj-uv-fits.test.mts
+node --test tests/objects/terrestrial/obj-uv-fits.test.mts
 ```
 
 The UV test checks interpolation, row order, missing values and bounded transfer.
@@ -706,7 +720,7 @@ and overview targets outside the baked distance retain their own navigation.
 No browser-specific camera or runtime image generation is involved.
 
 Decoded images and connected DOM do not prove GPU residency. Qualify the
-handoff with the [iPad journey recorder](../tools/performance/README.md),
+handoff with the [iPad journey recorder](../labs/performance/README.md),
 inspecting native frames through the reveal and final zoom. The same trace
 records released scene resources, DOM counts and WebKit memory categories.
 
@@ -777,6 +791,15 @@ Unselected maps and the scene remain retained products; provenance records this
 as a partial refresh rather than a new full-package preparation. The ordinary
 full preparer uses the same image code.
 
+The observed-surface lane's `component-fits` coverage joins an RGB publisher map
+with its three component FITS maps. A sample must be finite and measured in every
+channel. Polar-connected zero fill and gaps connected to declared unobserved rows
+stay missing; isolated dark samples remain observed. The recipe declares any
+longitude reversal, offset and repeated endpoint before planetographic rows move
+onto the body ellipsoid. Coverage-aware interpolation feeds the surface, poles
+and thumbnail together. Uranus, Neptune and Saturn's OPAL date recipes use this
+path; their READMEs record the release-specific frame and photometry limits.
+
 LROC's `pds-float-map` interpretation reads attached PDS3 labels, validates the
 product version, band, projection and lunar reference sphere, then integrates
 source pixel footprints before applying display gain/gamma. Source special values
@@ -801,7 +824,7 @@ square lids from both sides; on iPad Safari that pushed past the outline at the 
 ![Kepler-452 b on iPad Safari before the fix: two bulges at the poles](images/polar-caps/kepler-452b-ipad-lemon.webp)
 
 Generated spheres now take their seams from one shared setting
-([sphere-projection.mts](../tools/objects/sphere-projection.mts)): exact tiling, a half-texel overscan and the stepped
+([sphere-projection.ts](../packages/bake/src/objects/scene/sphere-projection.ts)): exact tiling, a half-texel overscan and the stepped
 silhouette outset, with the overlap derived from each map's texels per cell.
 
 Spherical and ellipsoidal objects share one retained interior disc behind their
@@ -809,7 +832,7 @@ leaves. An irregular body cannot use it: the disc's inner ellipsoid is limited b
 the nearest leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks
 outside it stay open. Irregular bodies close their cracks with seam repair in the
 leaves themselves, as PolyCSS prepares any solid mesh
-(`RADIAL_SEAM_REPAIR` in `tools/objects/terrestrial-layers/radial-terrain.mts`):
+(`RADIAL_SEAM_REPAIR` in `packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts`):
 
 - `buildSeamBleedPolygonEdges` names the edges each face shares with a
   neighbour. A shared edge overlaps it by 12 CSS pixels; a face with no shared

@@ -50,6 +50,118 @@
       "title": "Interior structure model",
       "detail": "Structure",
       "summary": "Colored layers show the inferred interior; the boundaries follow a model, not measurements."
+    },
+    "visible-2018a": {
+      "title": "Hubble 2018-06-06",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-25",
+          "label": "MAST · OPAL Cycle 25",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2018a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2019a": {
+      "title": "Hubble 2019-06-19",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-26",
+          "label": "MAST · OPAL Cycle 26",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2019a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2020a": {
+      "title": "Hubble 2020-07-04",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-27",
+          "label": "MAST · OPAL Cycle 27",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2020a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2021a": {
+      "title": "Hubble 2021-09-12",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-28",
+          "label": "MAST · OPAL Cycle 28",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2021a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2022a": {
+      "title": "Hubble 2022-09-21",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-29",
+          "label": "MAST · OPAL Cycle 29",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2022a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2023a": {
+      "title": "Hubble 2023-10-22",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-30",
+          "label": "MAST · OPAL Cycle 30",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2023a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2024a": {
+      "title": "Hubble 2024-08-22",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-31",
+          "label": "MAST · OPAL Cycle 31",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2024a; FITS DATE-OBS"
+        }
+      ]
+    },
+    "visible-2025a": {
+      "title": "Hubble 2025-08-29",
+      "detail": "F395N / F502N / F631N",
+      "summary": "Dated cloud map; gray grid marks unseen regions. Compare patterns, not absolute colour.",
+      "sources": [
+        {
+          "catalogueId": "hubble-opal",
+          "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
+          "label": "MAST · OPAL Cycle 32",
+          "checked": "2026-09-27",
+          "locator": "Rotation 2025a; FITS DATE-OBS"
+        }
+      ]
     }
   }
 }

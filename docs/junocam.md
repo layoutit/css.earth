@@ -13,10 +13,10 @@ So an image has no single camera. Each strip was read at its own instant, from i
 1. **Read the label** ([`junocam.ts`](../packages/bake/src/objects/layers/terrestrial/missions/junocam.ts)). The PDS3 label states the start time, the delay between frames, the filter order and the size. Only full-resolution calibrated products (`JUNOCAM-RDR`, 16-bit) are accepted. Their samples are reflectance: 10000 is a white Lambertian surface lit at normal incidence at the target's distance from the Sun (product SIS, `SAMPLE_BITS`).
 2. **Build one camera per strip.** The instrument kernel `juno_junocam_v03.ti` gives the focal length, pixel pitch, each strip's optical centre, two radial distortion coefficients, a start-time bias of 61.88 ms and an interframe delta of 1 ms. A frame's epoch is the label's start time, plus the bias, plus one delay with its delta per frame. At that epoch the kernels give the spacecraft's position, the camera frame's orientation, the body's orientation and the Sun, with light time and stellar aberration. [`@cssearth/spice`](../packages/spice/README.md)'s `spiceCamera` builds the pinhole camera; the distortion applies on top.
 3. **Fit two epochs to the limb** ([`strip-refinement.ts`](../packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts)). The kernel warns that the start time jitters by about 20 ms, and the spin turns the scene 6 pixels in that time. For each image two offsets are fitted to the lit limb that its strips show against the body's mesh: when the pointing is read, and where along its path the spacecraft is taken. Optics, distortion, the interframe delay and the Sun keep their source values. Limb points are split into a fit half and a holdout half. The holdout residual and both offsets must stay within the recipe's budget, or preparation stops.
-4. **Join the strips** ([`composite.mts`](../tools/objects/surface-observations/composite.mts)). Only the columns of a strip that can hold lit surface facing the camera are cast onto the mesh. Successive strips of one filter overlap by about 13 rows; a surface point in two strips is sampled in the one that holds it farther from the strip's edge. The strips of one filter make one band, and the red, green and blue bands make one colour photograph: a point is coloured only where all three bands see it.
+4. **Join the strips** ([`composite.mts`](../packages/bake/src/objects/layers/terrestrial/surface-observations/composite.ts)). Only the columns of a strip that can hold lit surface facing the camera are cast onto the mesh. Successive strips of one filter overlap by about 13 rows; a surface point in two strips is sampled in the one that holds it farther from the strip's edge. The strips of one filter make one band, and the red, green and blue bands make one colour photograph: a point is coloured only where all three bands see it.
 5. **Share the rest.** Footprints, photometry, selection between photographs, level matching, the display range and the report are the [surface-observation route](../tools/objects/surface-observations/README.md)'s, as for every other photograph.
 
-The kernels live in the shared bank [`src/spice/juno`](../src/spice/juno/manifest.json): only its manifest is committed, and `node tools/kernel-banks/kernel-bank.mts acquire juno` restores every kernel from NAIF (the preparation tools restore the ones they need on their own). The reconstructed trajectory `spk_rec_220909_221019_221027.bsp` carries its own Jupiter system, including the Europa ephemeris the navigation team updated from the flyby, so no separate satellite ephemeris is loaded.
+The kernels live in the shared bank [`src/spice/juno`](../src/spice/juno/manifest.json): only its manifest is committed, and `node packages/bake/cli/kernel-bank.mts acquire juno` restores every kernel from NAIF (the preparation tools restore the ones they need on their own). The reconstructed trajectory `spk_rec_220909_221019_221027.bsp` carries its own Jupiter system, including the Europa ephemeris the navigation team updated from the flyby, so no separate satellite ephemeris is loaded.
 
 ## Measured on Europa
 
@@ -26,9 +26,9 @@ Juno passed Europa on 29 September 2022. With the bank's kernels the closest app
 
 - Juno's position relative to Europa from [`@cssearth/spice`](../packages/spice/README.md) agrees with JPL Horizons' merged Juno trajectory to 1.1 m or better at the four image epochs (the receipt's `horizons` block). This checks the type 1 SPK reader, which no earlier lens used on a spacecraft this fast.
 - The labels state the altitude and sub-spacecraft point at mid-image. Evaluated at the start time, this reader gives 95 to 118 km less altitude, which is five seconds of flight at the range rate.
-- Strip rays reproduce the field-of-view corner and boresight vectors that the instrument kernel lists for all four strips to 5 × 10⁻⁸ ([`junocam.test.mts`](../tools/objects/terrestrial-layers/junocam.test.mts)). NAIF computed those vectors with its own code, so this settles the distortion inverse and the half-pixel origin.
+- Strip rays reproduce the field-of-view corner and boresight vectors that the instrument kernel lists for all four strips to 5 × 10⁻⁸ ([`junocam.test.mts`](../tests/objects/terrestrial/junocam.test.mts)). NAIF computed those vectors with its own code, so this settles the distortion inverse and the half-pixel origin.
 
-**The limb fit.** Holdout points are limb points the fit never saw. The numbers are the [receipt](../tools/objects/juno/programs/europa-pj45.registration.json)'s, written by `measure.mts` for the [pinned program](../tools/objects/juno/programs/europa-pj45.json).
+**The limb fit.** Holdout points are limb points the fit never saw. The numbers are the [receipt](../packages/telescope-cli/src/archives/juno/programs/europa-pj45.registration.json)'s, written by `measure.mts` for the [pinned program](../packages/telescope-cli/src/archives/juno/programs/europa-pj45.json).
 
 | Image | Altitude in label | Pixel at nadir | Pointing epoch | Ephemeris epoch | Holdout residual before | after |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -66,11 +66,11 @@ The pointing offsets are inside the kernel's stated jitter. The ephemeris offset
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
-node tools/kernel-banks/kernel-bank.mts acquire juno
-node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc
-node tools/objects/juno/measure.mts europa-pj45 output/juno/europa-pj45 --horizons
-node tools/objects/juno/archive-ledger.mts
-node --test tools/objects/juno/*.test.mts tools/objects/terrestrial-layers/junocam.test.mts tools/objects/terrestrial-layers/strip-refinement.test.mts tools/objects/surface-observations/composite.test.mts tools/objects/surface-observations/junocam.test.mts
+node packages/bake/cli/kernel-bank.mts acquire juno
+node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc
+node packages/telescope-cli/src/archives/juno/measure.mts europa-pj45 output/juno/europa-pj45 --horizons
+node packages/telescope-cli/src/archives/juno/archive-ledger.mts
+node --test packages/telescope-cli/src/archives/juno/*.test.mts tools/objects/juno/*.test.mts tests/objects/terrestrial/junocam.test.mts tests/objects/terrestrial/strip-refinement.test.mts tools/objects/surface-observations/composite.test.mts tools/objects/surface-observations/junocam.test.mts
 pnpm build:spice && pnpm --filter @cssearth/spice test
 ```
 

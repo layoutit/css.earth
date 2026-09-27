@@ -48048,7 +48048,7 @@
     {
       "mode": "IRAC Map",
       "records": "mapped pictures in the four IRAC channels, 3.6 to 8.0 micron",
-      "tool": "tools/objects/spitzer/mosaic.mts",
+      "tool": "packages/telescope-cli/src/archives/spitzer/mosaic.mts",
       "observationsForOurObjects": 317,
       "pinnedPrograms": 5,
       "checkedProducts": 5,

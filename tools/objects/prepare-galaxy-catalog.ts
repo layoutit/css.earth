@@ -1,5 +1,5 @@
 import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample, parseGalaxyRecipe, text, prepareGalaxyCatalog, parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata, readBibliography } from '@cssearth/bake/galaxy-catalog';
-import { readInventory, updateInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory, updateInventory } from '@cssearth/objects/node';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

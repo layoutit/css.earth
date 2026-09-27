@@ -32,6 +32,390 @@
       "origin": "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg",
       "credit": "NASA/JPL-Caltech",
       "license": "NASA media usage guidelines"
+    },
+    {
+      "id": "opal-2014a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif",
+      "expectedBytes": 262448,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2014a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2014a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2014a-f658n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2015a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 801304,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2015a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2015a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2015a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2016a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789878,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2016a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2016a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2016a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2017a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2017a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2017a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2017a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789918,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2018a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789880,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2019a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789916,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2020a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 792994,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2021a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789916,
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2022a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 787710,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2023a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif",
+      "expectedBytes": 787762,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2024a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-rgb",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "expectedBytes": 787756,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-f657n",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-f547m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "opal-2025a-f467m",
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
+      "license": "CC BY 4.0"
     }
   ],
   "lenses": [
@@ -482,6 +866,1506 @@
           "authority": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
           "model": "source-filter observed-disc chromatic mean with no synthesized local features"
         }
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2014a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2014a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2014a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2014a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2014a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2014a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            312,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2015a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2015a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2015a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2015a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2015a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2015a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            300,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2016a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2016a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2016a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2016a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2016a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2016a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            293,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2017a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2017a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2017a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2017a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2017a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2017a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            287,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2018a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2018a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2018a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2018a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2018a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2018a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            281,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2019a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2019a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2019a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2019a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2019a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2019a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            272,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2020a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2020a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2020a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2020a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2020a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2020a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            261,
+            360
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2021a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2021a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2021a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2021a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2021a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2021a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            254,
+            360
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2022a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2022a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2022a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2022a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2022a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2022a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            247,
+            360
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2023a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2023a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2023a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2023a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2023a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2023a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            235,
+            360
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2024a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2024a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2024a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2024a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2024a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2024a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            230,
+            360
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0234653425699756
+    },
+    {
+      "id": "visible-2025a",
+      "source": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2025a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 1920,
+              "height": 960
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 10
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2025a.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "uranus-surface-visible-2025a@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 3840,
+              "height": 1920
+            }
+          ],
+          "packing": {
+            "bandCount": 24,
+            "gutter": 20
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "uranus-poles-visible-2025a@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 24,
+            "angularMode": "boundary-difference",
+            "sampling": "nearest-closed"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "uranus-lens-visible-2025a.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "removeAlpha": true,
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "component-fits",
+        "sources": [
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits",
+          "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits"
+        ],
+        "unobservedRows": [
+          [
+            220,
+            360
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 720
       },
       "planetographicAxisRatio": 1.0234653425699756
     }

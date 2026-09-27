@@ -3,19 +3,22 @@ import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { datasetContributors } from '../../site/dataset-context.mts';
 import {
   PREPARED_TEXT_SCHEMA, catalogueTextWarnings, compositionWarnings, parseObjectText, readerTextErrors, readerTextWarnings,
 } from '../../site/object-text.mts';
 import type { ObjectText, TextContext, TextFinding } from '../../site/object-text.mts';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
-import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
+import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import { parsePreparedExploration } from '@cssearth/objects/provenance';
 import { sourceResolver } from '@cssearth/objects/sources';
-import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
+import { readSourceCatalog } from '@cssearth/bake/sources';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const root = resolve(import.meta.dirname, '../..');
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
@@ -80,7 +83,7 @@ export async function prepareText({ ids = [] as readonly string[], check = false
     ...catalogueTextWarnings(bodies.map(body => ({ text: body.text, name: body.context.name })))];
   let composition = 'checked';
   try {
-    const exploration = parsePreparedExploration(await readJson(resolve(projectRoot, 'site/prepared-facilities.json')), sourceResolver(sourceCatalog));
+    const exploration = parsePreparedExploration(await readJson(resolve(projectRoot, 'site/prepared-facilities.json')), sourceResolver(sourceCatalog), DATASET_ROUTES);
     const found = bodies.flatMap(body => compositionGroups(body, exploration).flatMap(blocks => compositionWarnings(body.id, blocks)));
     warnings.push(...new Map(found.map(finding => [JSON.stringify(finding), finding])).values());
   } catch (error) {

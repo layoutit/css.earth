@@ -78,7 +78,7 @@ V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole lens then take
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
 may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
 
-Tests. `node --test tools/objects/voyager-iss/*.test.mts tools/objects/terrestrial-layers/photometric-observations.test.mts`
+Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts`
 covers the limb fit, the tile writer's ground floor, and the composer's withheld, band-level,
 band-ratio and non-positive-sample rules on synthetic frames;
 `node --test tests/objects/unit/uranian-moons/voyager-color.test.mts` reads this moon's reports and

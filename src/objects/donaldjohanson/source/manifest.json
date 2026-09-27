@@ -150,7 +150,7 @@
       "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "camera-reference"
       ],
@@ -166,7 +166,7 @@
       "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-archived-camera.py; checked-in preparation input.",
       "consumers": [
         "llorri-observation"
       ],
@@ -248,7 +248,7 @@
       "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-llorri-overlap.mts --write.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-llorri-overlap.mts --write.",
       "consumers": [
         "camera-reference"
       ],
@@ -264,7 +264,7 @@
       "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
-      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-llorri-overlap.mts --write.",
+      "acquisition": "Reproduce with packages/bake/cli/prepare-llorri-overlap.mts --write.",
       "consumers": [
         "llorri-observation"
       ],

@@ -2,8 +2,8 @@ import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } f
 import { containedPath, parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
-import { publishSourceBytes } from '../assets/source-acquisition.mts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
+import { publishSourceBytes } from '@cssearth/bake/delivery';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 
@@ -35,7 +35,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
       catch{unmade.push(`${path}: run node ${generated.get(path)}`);}
      }
      await restoreMissingSources({sourceRoot,manifest,plan,missing:missing.filter(path=>!generated.has(path)),mirrorOrigin:RUNTIME_ASSET_ORIGIN});
-     if(unmade.length)throw new Error(`${id}: generated sources are missing and not on the source mirror; make them, then publish them with tools/assets/publish-source-cache.mts:\n${unmade.join('\n')}`);
+     if(unmade.length)throw new Error(`${id}: generated sources are missing and not on the source mirror; make them, then publish them with packages/bake/cli/publish-source-cache.mts:\n${unmade.join('\n')}`);
     }
    }
   }

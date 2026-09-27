@@ -14,8 +14,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '@cssearth/fits';
-import { headerBlock, padBlock } from '../../interferometry/fits-table.mts';
-import { readReconstruction } from '../../interferometry/beam-convolve.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
+import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 

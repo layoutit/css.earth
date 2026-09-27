@@ -1,5 +1,6 @@
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { presentationAdapters, type PresentationHostAdapters } from './adapters.ts';
+import { requirePreparedPresentation } from './prepared-presentation-contract.ts';
 import { prepareRowBankCutaway } from './row-bank-cutaway.ts';
 import { prepareComposite } from './composite.ts';
 import { prepareEmissive } from './emissive.ts';
@@ -38,7 +39,7 @@ export async function prepareCssPresentation(input: PresentationInputs, host: Pr
   const draft = await compile(input, adapters);
   const presentation = { ...draft, materials: adapters.prepareMaterialTracks(draft),
     tree: { ...draft.tree, activationGroups: prepareActivationGroups(draft) } };
-  adapters.requirePreparedPresentation(presentation, { controls: input.controls });
+  requirePreparedPresentation(presentation, { controls: input.controls });
   return parsePreparedObjectRuntime({ ...presentation, schema: 'cssearth-object-runtime@4',
     id: input.solarSource.bodyId, controls: input.controls });
 }

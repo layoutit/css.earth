@@ -108,7 +108,7 @@ Its 2631.2 km mean radius, pole/spin model, synchronous orbit and epoch come fro
 
 ## Preparation ownership
 
-This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`; no package-local executable preparer or runtime is required.
+This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `packages/bake/src/objects/layers/terrestrial/`; no package-local executable preparer or runtime is required.
 
 Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. Lighting stays lossless.
 

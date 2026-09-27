@@ -17,22 +17,22 @@
  *    judge it in evidence/jwst-band-maps.json.
  *
  * --check writes nothing and fails if any file would change. */
-import { selectedProductInput } from '../../telescopes/selected-product.mts';
-import type { ObservationSelection } from '../../telescopes/query.mts';
+import { selectedProductInput } from '@cssearth/telescope-cli/selected-product';
+import type { ObservationSelection } from '@cssearth/telescope-cli/query-contract';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { horizonsTables } from '../../sphere-horizons.mts';
+import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { placeResolvedDisc } from '../../resolved-disc-map.mts';
-import { mastFile } from '../mast.mts';
-import { readImagingProgram } from '../imaging/image3.mts';
-import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
-import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../../body-map-product.mts';
+import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
+import { mastFile } from '@cssearth/telescope/node';
+import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
+import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 import { sha256, sha256File } from '@cssearth/core/node';
-import { bodyMapFits, type BodyMap } from './body-map.mts';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
+import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');

@@ -1,0 +1,66 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 33416
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 8192
+      Lines   = 4096
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = SignedWord
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    ^Core     = Venus_Magellan_Topography_Global_4641m_v02.tif
+  End_Object
+
+  Group = Archive
+    DataSetId               = Magellan_GTDRtopo_SINUS_global_4641m_projected_s-
+                              inu0
+    ProducerInstitutionName = "Astrogeology Science Center"
+    ProducerId              = Astrogeology
+    ProducerFullName        = USGS
+    ProductId               = n/a
+    ProductVersionId        = n/a
+    InstrumentHostName      = n/a
+    InstrumentName          = n/a
+    InstrumentId            = n/a
+    TargetName              = Venus_1985
+    MissionPhaseName        = n/a
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = SimpleCylindrical
+    CenterLongitude    = 0.0
+    TargetName         = Venus
+    EquatorialRadius   = 6051000.0 <meters>
+    PolarRadius        = 6051000.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 180
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -19009777.2544 <meters>
+    UpperLeftCornerY   = 9504888.62719999999 <meters>
+    PixelResolution    = 4641.05889999999999 <meters/pixel>
+    Scale              = 22.7555550000000011 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1830             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 924
+  ^History  = Venus_Magellan_Topography_Global_4641m_v02.History.IsisCube
+End_Object
+End

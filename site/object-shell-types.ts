@@ -68,7 +68,7 @@ export interface LensControl {
   /** A dataset that draws a companion cloud and keeps the named dataset's prepared surface for the body itself. */
   volume?: { objectId: string; lensId: string; surface: string };
   /** One step of a dataset shown as a sequence: the panel lists the group once and steps through its members. */
-  step?: { group: string; label: string };
+  step?: { group: string; label: string; autoplay?: boolean };
   facts?: Fact[];
   legend?: {
     kind: "scale" | "categories";

@@ -27,16 +27,18 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, readFitsImage } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { ALMA, horizonsTables } from '../sphere-horizons.mts';
+import { ALMA, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { placeResolvedDisc } from '../resolved-disc-map.mts';
-import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '../body-map-product.mts';
+import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 import { sha256 } from '@cssearth/core/node';
-import { bodyMapFits, type BodyMap } from '../jwst/cubes/body-map.mts';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
+/** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */
+export const CUTOUT_ORIGIN = 'cssEarth tools/objects/interferometry/alma-disc-selfcal.mts';
 const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;
 
 export interface ThermalCutout { readonly size: number; readonly arcsecPerPixel: number; readonly midJd: number; readonly rmsKelvin: number; readonly kelvin: Float64Array }
@@ -85,7 +87,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         const rmsKelvin = requireFiniteNumber(stats.rmsJyPerBeam, 'rms') / requireFiniteNumber(stats.peakJyPerBeam, 'peak') * requireFiniteNumber(temperature.peakKelvin, 'peakKelvin');
         bytes = bodyMapFits({ width: cut.size, height: cut.size } as BodyMap, { TELESCOP: 'ALMA', OBJECT: String(header.OBJECT), SESSION: sessionId, 'DATE-OBS': String(header['DATE-OBS']), 'MJD-MID': String(requireFiniteNumber(geometry.mjd, 'geometry.mjd')),
           PIXSCALE: String(arcsecPerPixel), FREQHZ: String(requireFiniteNumber(final.frequencyHz, 'frequencyHz')), BMAJMAS: String(requireFiniteNumber(beam.majorMas, 'beam')), BMINMAS: String(requireFiniteNumber(beam.minorMas, 'beam')), BPADEG: String(requireFiniteNumber(beam.angleDegrees, 'beam')),
-          RMSK: String(rmsKelvin), FLUXSCAL: String(requireFiniteNumber(requireRecord(receipt.fluxScale, 'fluxScale').factor, 'flux scale')), ORIGIN: 'cssEarth tools/objects/interferometry/alma-disc-selfcal.mts' }, [{ name: 'BRIGHTNESS TEMPERATURE', units: 'K', values: cut.values }]);
+          RMSK: String(rmsKelvin), FLUXSCAL: String(requireFiniteNumber(requireRecord(receipt.fluxScale, 'fluxScale').factor, 'flux scale')), ORIGIN: CUTOUT_ORIGIN }, [{ name: 'BRIGHTNESS TEMPERATURE', units: 'K', values: cut.values }]);
         written.set(cutoutPath, bytes);
       }
       if (!bytes) throw new Error(`${id} ${mapId}: no cutout for ${sessionId}.`);

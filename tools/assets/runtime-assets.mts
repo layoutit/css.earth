@@ -1,10 +1,10 @@
-import type { InventoryAsset, AssetLocation } from '../../src/platform/runtime-asset-closure.mts';
+import type { InventoryAsset, AssetLocation } from '@cssearth/objects/node';
 /** An inventoried file with where it is served from and where it lives in this checkout. */
 export interface RuntimeAssetLocation extends InventoryAsset { id: string; key: string; url: string; file: string; }
 import { readFile, lstat } from "node:fs/promises";
 import { existsSync, readdirSync } from "node:fs";
 import { relative, resolve } from "node:path";
-import { INVENTORY_FILE, readInventory } from "../../src/platform/runtime-asset-closure.mts";
+import { INVENTORY_FILE, readInventory } from '@cssearth/objects/node';
 
 import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
 export { RUNTIME_ASSET_ORIGIN };

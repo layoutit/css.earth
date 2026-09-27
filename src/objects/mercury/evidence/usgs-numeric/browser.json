@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-dataset-browser-check@1",
+  "date": "2026-09-27T01:59:16.731Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
+  "testedFiles": {
+    "source/content/object.json": "ec758e4280ad85b346fda5e27cfd4c232dac250a86fc6f4671b870247e1ccd32",
+    "text.json": "7a4333a69f8c8ccae432d6624a3ad088aefa6fc177b37bef48efeedfb0507a72",
+    "inventory.json": "1f5421bb1b9dcd1d7ca07c9529f6beb2f541a29537d5725a1d72607e583c6457"
+  },
+  "tests": {
+    "sourceLabels": {
+      "body": "mercury",
+      "dataset": "topography",
+      "labels": [
+        {
+          "id": "normal",
+          "source": "MESSENGER MDIS"
+        },
+        {
+          "id": "enhanced",
+          "source": "MESSENGER MDIS"
+        },
+        {
+          "id": "topography",
+          "source": "USGS / MESSENGER"
+        },
+        {
+          "id": "interior",
+          "source": "NASA Science"
+        }
+      ],
+      "url": "http://127.0.0.1:4277/mercury/?dataset=topography&v=UMJAx2pztsTEPEFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+      "scenes": 1
+    },
+    "science": [
+      {
+        "id": "topography",
+        "url": "http://127.0.0.1:4277/mercury/?dataset=topography&v=UMJAx2pztsTEPEFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "normal",
+        "url": "http://127.0.0.1:4277/mercury/?v=UMJAx2pztsTEPEFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "enhanced",
+        "url": "http://127.0.0.1:4277/mercury/?v=UMJAx2pztsTEPEFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA&dataset=enhanced",
+        "retained": true,
+        "scenes": 1
+      },
+      {
+        "id": "details",
+        "text": "What it shows\nMercury has no sea level. Heights use a reference sphere with a radius of 2,439.4 km; zero means the surface of that sphere.\nReading the scale\nMeters above the reference sphere. Blue is lower and warm colors are higher; values beyond −6,000 or +6,000 m use endpoint colors.\nHow it was made\nUSGS matched surface points across MESSENGER images to build its 2016 global elevation model, version 2.\nLimits\nThe source spacing is about 665 m. The height model was filtered, smoothed and interpolated; this globe displays a coarser sample.\nCoverage\nGray grid marks missing source data."
+      },
+      {
+        "id": "lighting-and-drag",
+        "retained": true,
+        "scenes": 1
+      }
+    ]
+  },
+  "screenshots": [
+    {
+      "file": "mercury-topography.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 532106,
+      "sha256": "6c20f49e49f58ae8f9a621626f566f06aa887a3571d59dd27860ab1c4b0ee6b6",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "file": "mercury-normal.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 364602,
+      "sha256": "527da7f52afa197b436babba5a92d75a071a691c217082ea8bde6a7bdd9d67fa",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "file": "mercury-enhanced.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 677570,
+      "sha256": "59a0d4cc530bd05ddcc25f83b9b4c71ce594318111b0f507603a64fabfee84e2",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "file": "mercury-details.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 533622,
+      "sha256": "5bd0336cacca7e852a64c7c46161d6fb8c8f4505b7fe6d2ac6145d81ce5d8e79",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "file": "mercury-shadows.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 384036,
+      "sha256": "870cd00422391413efd786ab2775a679ec2e7e6e6bec6ed4430c2739642870c1",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "file": "mercury-rotated.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 509218,
+      "sha256": "c10b9bd5026630d3345dc52dd05baf763549046cc40dd691be8299f92598a618",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}

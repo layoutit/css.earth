@@ -1,0 +1,27 @@
+{
+  "id": "usgs-moon-submicroscopic-iron-numeric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon SELENE Kaguya MI Derived Submicroscopic Metallic Iron Mosaic 59m (May 2016 numeric product)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_AbundanceSMFe_50N50S.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/moon_selene_kaguya_mi_derived_submicroscopic_metallic_iron_mosaic_59m",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/35"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

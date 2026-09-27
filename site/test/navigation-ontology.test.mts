@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
-import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare/prepare-navigation-destinations.mts';
+import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '@cssearth/bake/navigation';
 import { distanceDescription, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { navigationTree, type TreeNode } from '../navigation/navigation-tree.mts';

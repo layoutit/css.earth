@@ -16,7 +16,7 @@ import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
-import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 interface ReleaseFile { readonly role: string; readonly path: string; readonly blob: string }

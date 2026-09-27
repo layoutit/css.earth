@@ -5,11 +5,12 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
 import { parseSourceCatalog, sourceObject, sourceResolver } from '@cssearth/objects/sources';
-import { compileSourceUsage } from '../../src/platform/source-usage.mts';
-import { parseAgencies, parseExplorationCatalog } from '../../src/platform/exploration-catalog.mts';
-import { compileContributions } from '../../src/platform/exploration-contributions.mts';
-import { productSourceIds } from '../../src/platform/object-provenance.mts';
+import { compileSourceUsage } from '@cssearth/objects/provenance';
+import { parseAgencies, parseExplorationCatalog } from '@cssearth/objects/provenance';
+import { compileContributions } from '@cssearth/objects/provenance';
+import { productSourceIds } from '@cssearth/objects/provenance';
 import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
+import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 test('one selected volume prepares without reading unrelated presentation inputs', async () => {
@@ -37,7 +38,7 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: await Promise.all(sourceFiles.filter(path => path.endsWith('.json')).map(async path => JSON.parse(await readFile(resolve(root, 'src/sources', path), 'utf8')))) }));
   const agencies = parseAgencies(JSON.parse(await readFile(resolve(root, 'site/source/agency-logos.json'), 'utf8')));
   const catalog = parseExplorationCatalog(JSON.parse(await readFile(resolve(root, 'site/source/facilities/catalog.json'), 'utf8')), agencies, sources);
-  const usage = compileSourceUsage(entries, sources), graph = compileContributions(entries, catalog);
+  const usage = compileSourceUsage(entries, sources, DATASET_ROUTES), graph = compileContributions(entries, catalog, DATASET_ROUTES);
   for (const entry of entries) {
     assert.equal(entry.provenance.basis, 'recovered');
     assert.equal(entry.route, entry.hostedBy ? `/${entry.hostedBy.objectId}/` : `/sun/?focus=${entry.id}`);

@@ -44,17 +44,17 @@
   "datasets": {
     "thermal": {
       "title": "Dayside heat",
-      "detail": "From its dayside temperature",
+      "detail": "NASA Exoplanet Archive",
       "summary": "The colour of a black body at the 3,028 K day side measured in eclipse."
     },
     "temperature-2010": {
       "title": "Spitzer heat map, 2010",
-      "detail": "Published fit",
+      "detail": "Spitzer IRAC",
       "summary": "Heat at 3.6 µm in 2010 from the paper's phase-curve fit: hottest east of noon. It varies only with longitude."
     },
     "temperature-2013": {
       "title": "Spitzer heat map, 2013",
-      "detail": "Published fit",
+      "detail": "Spitzer IRAC",
       "summary": "Heat at 3.6 µm in 2013 from the same paper: hottest west of noon, unlike 2010. It varies only with longitude."
     }
   }

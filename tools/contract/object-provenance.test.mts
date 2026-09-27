@@ -1,5 +1,5 @@
-import { preparationEvidenceApplies, recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
-import { productInputRoles } from '../../src/platform/product-input-evidence.mts';
+import { preparationEvidenceApplies, recordPreparationEvidence } from '@cssearth/bake/sources';
+import { productInputRoles } from '@cssearth/objects/provenance';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { prepareObjectProvenance } from '../objects/provenance.mts';
-import { productSourceIds, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
+import { productSourceIds, validateObjectProvenance } from '@cssearth/objects/provenance';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
@@ -96,6 +96,31 @@ test('acquired products retain their configuration input and verify its exact by
   const document = await prepareObjectProvenance(context);
   assert.deepEqual(new Set(productSourceIds(document, 'surface')), new Set(['observation', 'unused']));
   assert.deepEqual(requireValue(document.sources.find(source => source.id === 'observation'), 'observation source').dependencies, ['unused']);
+});
+
+test('numeric raster lineage resolves companion grids beside its source and retains acquisition recipes', async t => {
+  const context = await fixture(t), manifestPath = resolve(context.source, 'manifest.json');
+  await mkdir(resolve(context.source, 'science'));
+  await writeFile(resolve(context.source, 'science/quantity.tif'), 'quantity');
+  await writeFile(resolve(context.source, 'science/quality.tif'), 'quality');
+  await writeFile(resolve(context.source, 'science/grid.json'), JSON.stringify({schema:'cssearth-geotiff-grid@1',
+    source:{url:'https://example.org/native.tif',productId:'native',width:8,height:4,origin:[-180,90],resolution:[45,-45],
+      coordinates:'degrees',radius:1000,centerLongitude:0,noData:-9999,bits:32,sampleFormat:3},
+    output:{width:4,height:2,radius:1000}}));
+  const manifest = await read(manifestPath), inputs = requireArray(manifest.inputs), base = requireRecord(inputs[0]);
+  inputs.push({...base,id:'quantity',path:'science/quantity.tif'}, {...base,id:'quality',path:'science/quality.tif'});
+  requireArray(manifest.documents).push({id:'grid-recipe',path:'science/grid.json'});
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  const rasterPath = resolve(context.source, 'preparation/raster.json'), raster = await read(rasterPath);
+  const surface = requireRecord(requireArray(raster.surfaces)[0]);
+  surface.source = 'science/quantity.tif';
+  surface.science = {scientific:{path:'quantity.tif',qualityMasks:[{path:'quality.tif'}]}};
+  await writeFile(rasterPath, JSON.stringify(raster));
+  await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations:[
+    {kind:'geotiff-grid',path:'science/quantity.tif',recipePath:'science/grid.json'}]}));
+  const document = await prepareObjectProvenance(context);
+  assert.deepEqual(new Set(productSourceIds(document,'surface')), new Set(['quantity','quality','grid-recipe']));
+  assert.deepEqual(document.sources.find(source=>source.id==='quantity')?.dependencies,['grid-recipe']);
 });
 
 test('composition lineage follows the pinned conversion recipe to the native archive', async t => {
@@ -223,6 +248,8 @@ test('Saturn binds its actual base material and all contributing recipe identiti
     assert.ok(requireValue(document.products.find(product => product.id === id), `Saturn ${id} product`).recipeDependencies.includes('geometry'), id);
   }
   assert.ok(document.recipes.some(recipe => recipe.id === 'rings'));
+  const dated = requireValue(document.products.find(product => product.id === 'visible-2018a'), 'Saturn dated RGB product');
+  assert.deepEqual(dated.inputs, ['opal-2018a-rgb', 'opal-2018a-f395n', 'opal-2018a-f502n', 'opal-2018a-f631n']);
 });
 
 test('Earth globe provenance excludes the retired local noise dataset', async () => {
@@ -270,19 +297,18 @@ test('spacecraft photographs bind their image, registration, and source-shape de
   }
 });
 
-test('Mercury coverage completion binds all three maps; previews retain their parent lineage', async () => {
+test('Mercury native maps bind their reduction recipes without reconstructed polar coverage', async () => {
   const objectDirectory = resolve('src/objects/mercury');
   const document = await prepareObjectProvenance({ objectDirectory, publicDirectory: resolve('public/scenes/mercury'), basis: 'recovered', write: false });
   assert.deepEqual(new Set(productSourceIds(document, 'enhanced')), new Set([
-    'usgs-messenger-enhanced-global-z3', 'usgs-messenger-bdr-global-z3', 'usgs-messenger-topography-z3',
+    'usgs-messenger-enhanced-native', 'mercury-native-enhanced-recipe',
   ]));
   const enhanced = requireValue(document.products.find(product => product.id === 'enhanced'), 'Mercury enhanced product');
   const interpretation = requireRecord(requireValue(enhanced.interpretation, 'Mercury enhanced interpretation'), 'Mercury enhanced interpretation');
-  const coverageCompletion = requireRecord(interpretation.coverageCompletion, 'Mercury coverage completion');
   assert.equal(requireBoolean(interpretation.falseColor, 'Mercury enhanced false color'), true);
-  assert.equal(requireBoolean(coverageCompletion.directEnhancedColorClaim, 'Mercury direct enhanced color claim'), false);
-  assert.equal(coverageCompletion.filledPixelCount, 295167);
-  assert.deepEqual(new Set(productSourceIds(document, 'preview:enhanced')), new Set(enhanced.inputs));
+  assert.equal(interpretation.coverageCompletion, undefined);
+  assert.deepEqual(new Set(productSourceIds(document, 'loi')), new Set(['usgs-messenger-loi-native', 'mercury-native-loi-recipe']));
+  assert.deepEqual(new Set(productSourceIds(document, 'preview:enhanced')), new Set(productSourceIds(document, 'enhanced')));
   assert.ok(document.sources.some(source => source.path === 'spectrum/mascs-global-area-weighted-mean.json'));
   assert.ok(!document.sources.some(source => /stars\/|maps\/globe.asset|psg.*rif/iu.test(source.path)));
 });

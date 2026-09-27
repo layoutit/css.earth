@@ -1,0 +1,393 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/wasp-103b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "wasp-103b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-103b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature-p0",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p0",
+        "label": "0.000111 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 0.00011051
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 0.000111 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 0.000111 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    },
+    {
+      "id": "temperature-p1",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p1",
+        "label": "0.000889 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 0.00088933
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 0.000889 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 0.000889 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    },
+    {
+      "id": "temperature-p2",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p2",
+        "label": "0.0101 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 0.010131
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 0.0101 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 0.0101 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    },
+    {
+      "id": "temperature-p3",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p3",
+        "label": "0.115 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 0.11542
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 0.115 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 0.115 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    },
+    {
+      "id": "temperature-p4",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p4",
+        "label": "0.929 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 0.92882
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 0.929 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 0.929 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    },
+    {
+      "id": "temperature-p5",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p5",
+        "label": "10.6 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 10.581
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 10.6 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 10.6 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    },
+    {
+      "id": "temperature-p6",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-lens-{id}.webp",
+      "source": "science/kreidberg-2018/pressure-temperature.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-p6",
+        "label": "85.2 bar",
+        "format": "lonlat-slice-table",
+        "path": "science/kreidberg-2018/pressure-temperature.dat",
+        "columns": {
+          "longitude": 2,
+          "latitude": 3,
+          "value": 5
+        },
+        "slice": {
+          "column": 4,
+          "value": 85.152
+        },
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "kreidberg-2018-gcm",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Simulated atmospheric temperature at 85.2 bar. Grey caps: no released grid samples beyond 81.562° north or south.",
+        "title": "Climate simulation · 85.2 bar",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      },
+      "metadata": {
+        "simulation": true
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "wasp-103b-context-{id}{suffix}.webp",
+    "limbOutput": "wasp-103b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csswasp-103b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "sourceRadius": "measurements.json#radiusKm",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

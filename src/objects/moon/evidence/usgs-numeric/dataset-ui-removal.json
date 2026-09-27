@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-dataset-ui-removal-check@1",
+  "date": "2026-09-27T02:35:43.856Z",
+  "baseCommit": "47737daa41fcc2594d0a11085143d89ad75382fb",
+  "scope": "Shared Dataset details markup and styles removed above this commit. Venus Surface photographs was removed in the base. No dataset inputs, controls, prepared images or inventories changed. Earlier numerical, delivery and grouping checks retain their original scope. Phone capture was taken after the layout settled and shared playback was paused.",
+  "testedFiles": {
+    "site/components/DatasetLenses.astro": "62a0322d210f2cdcea768c84c3d6f4f9dcc24eb109c743077a2491b526d1a4c9",
+    "site/shell/maps-shell.css": "ecb4248b35ab20ccf77ab983bf42d3f7069e40307ce0bc61f32656513214a547"
+  },
+  "checks": {
+    "datasetChecks": {
+      "passed": 9,
+      "failed": 0,
+      "command": "node --import ./tests/register-vite-suffix.mts --test site/test/dataset-picker.test.mts site/test/dataset-response.test.mts site/test/prepared-lens-facts.test.mts"
+    },
+    "directAstroBuild": {
+      "passed": true,
+      "pages": 1453
+    },
+    "renderedPages": {
+      "passed": 4,
+      "failed": 0
+    },
+    "allBuiltPages": {
+      "pages": 1453,
+      "detailsAbsent": true,
+      "surfacePhotosAbsent": true
+    }
+  },
+  "browser": [
+    {
+      "body": "moon",
+      "dataset": "plagioclase",
+      "details": 0,
+      "gallery": 0,
+      "retained": true,
+      "scenes": 1,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "description": "Mineral in the bright highlands\nPause\nPlagioclase · 1 of 4\n0\n50\n100 weight %\n\nNo data\n\nPlagioclase is a mineral common in the Moon’s bright highland rocks; colors estimate its share of the surface material.\n\nView source ↗"
+    },
+    {
+      "body": "venus",
+      "dataset": "emissivity",
+      "details": 0,
+      "gallery": 0,
+      "retained": true,
+      "scenes": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "description": "How efficiently the surface emits\n0.29\n1.00 Fraction of ideal emission\n\nNo data\n\nWarm ground gives off microwaves; emissivity measures how efficiently it does so compared with an ideal emitter.\n\nView source ↗"
+    },
+    {
+      "body": "wasp-12b",
+      "dataset": "temperature-2010",
+      "details": 0,
+      "gallery": 0,
+      "retained": true,
+      "scenes": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "description": "Spitzer heat map, 2010\nPlay\n2010 · 1 of 2\n1000\n2050\n3100 K\n\nHeat at 3.6 µm in 2010 from the paper's phase-curve fit: hottest east of noon. It varies only with longitude.\n\nView source ↗"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "src/objects/moon/evidence/usgs-numeric/moon-clean-datasets.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 83950,
+      "sha256": "97f1e4803c8d4b5f0aa820ced0910983d023d10457c25119a52e81fa40ea9dcc",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "path": "src/objects/venus/evidence/usgs-numeric/venus-clean-datasets.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 429880,
+      "sha256": "c24c07bc93fa1871a6a3c4189cb81f5facdddba35265a1eb3011a50bf6341115",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}

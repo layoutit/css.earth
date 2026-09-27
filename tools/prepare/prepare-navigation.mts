@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 import type { ObjectEntry } from '@cssearth/objects';
-import type { MarkerDescriptor } from './marker-recipe.mts';
+import type { MarkerDescriptor } from '@cssearth/bake/navigation';
 import type { MarkerPresentation } from '../../src/navigation/marker-presentation.mts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
@@ -34,18 +34,18 @@ import {
   readMarkerImage,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
-} from "./marker-recipe.mts";
+} from "@cssearth/bake/navigation";
 import { validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
-import { SCENE_OBJECTS } from "../../site/objects.mts";
-import { optimizePreparedQ75Webp } from "../prepared/prepared-webp.mts";
+import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 import { loadAstronomyPackage } from "./astronomy/astronomy-package.mts";
-import { authoredObject } from '../sources/authored-object.mts';
+import { authoredObject } from '@cssearth/bake/sources';
+import { readPreparedObjects } from "@cssearth/objects/node";
 
 const markerTileSize = 16;
 export const BODY_MARKER_ATLAS_PAGE_SIZE = 256;
 const PLANET_MARKER_PLANETS = Object.freeze(
-  SCENE_OBJECTS
+  readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects
     .toSorted((left, right) => left.distance.meters - right.distance.meters),
 );
 

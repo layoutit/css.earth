@@ -1,5 +1,5 @@
 import { orbitFixture } from './test/orbit-fixture.mts';
-import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -8,12 +8,12 @@ import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeCapabili
 import type { PreparedImage } from "@cssearth/renderer/rendering/prepared-image-store.ts";
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
-import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { createPreparedPlayback } from '@cssearth/renderer/testing';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "./test/object-runtime-package.mts";
+import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "../../tests/platform/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
 // This mount harness records lifecycle calls; no page requests are made here.

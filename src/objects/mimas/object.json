@@ -66,6 +66,11 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "relative-albedo",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

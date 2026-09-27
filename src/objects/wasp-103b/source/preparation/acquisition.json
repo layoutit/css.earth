@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/kreidberg-2018/pressure-temperature.dat",
+      "url": "https://raw.githubusercontent.com/lkreidberg/2017_wasp103/425f2e8fe694760266398257a71eaa991ab322fd/Figures/GCM_From_Vivien/PTprofiles-WASP-103b-TiO-fix-3-Drag3-NEW-OPA-nit-1036800.dat"
+    }
+  ]
+}

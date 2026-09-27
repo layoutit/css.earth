@@ -1,8 +1,8 @@
 # What Keck holds
 
-Written by `tools/objects/keck/archive-ledger.mts` from the [Keck Observatory Archive](https://koa.ipac.caltech.edu) on 2026-09-19.
+Written by `packages/telescope-cli/src/archives/keck/archive-ledger.mts` from the [Keck Observatory Archive](https://koa.ipac.caltech.edu) on 2026-09-19.
 Every count is the archive's own, taken with one grouped query per instrument. Every state is worked out from the pinned
-programs and the receipts beside them in `tools/objects/keck/programs`, not declared. 519 objects are shipped by this project.
+programs and the receipts beside them in `packages/telescope-cli/src/archives/keck/programs`, not declared. 519 objects are shipped by this project.
 
 ## By instrument
 

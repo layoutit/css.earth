@@ -167,7 +167,7 @@ node tools/objects/dist/operations.js acquire arrokoth
 node tools/objects/arrokoth/prepare-photographic-cameras.mts
 node tools/objects/arrokoth/qualify-photographs.mts
 node tools/objects/dist/prepare-authored.js arrokoth --write
-node --test tools/objects/terrestrial-layers/new-horizons-geo.test.mts
+node --test tests/objects/terrestrial/new-horizons-geo.test.mts
 ```
 
 The Astropy fixture was captured with the repository's pinned Astropy 8.0.1 and

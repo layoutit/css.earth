@@ -17,9 +17,9 @@ and the difference is kept visible everywhere: see [two capabilities, never one]
 ## Saved questions with the Telescope CLI
 
 `pnpm telescope` provides a saved query and retrieval workflow over this API. The
-`@cssearth/telescope` npm package exposes the same command as `telescope`; it uses an
+`@cssearth/telescope-cli` npm package exposes the same command as `telescope`; it uses an
 existing css.earth science workspace for the catalogue, archive clients and instrument
-pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
+pipelines. See [package setup](../packages/telescope-cli/README.md). It does not bundle
 Python environments or download the repository during installation.
 
 Start with only a target to preserve the difference between discovery and a scientific request:
@@ -101,7 +101,7 @@ two-dimensional FITS science image's celestial WCS and reports `in-field`,
 full footprint test, moving-body ephemeris or calibration verdict. A Chandra
 event descriptor and a native OPUS PDS image keep their own operation routes;
 absence of a supported sky-image grid stays `unknown` rather than becoming a
-negative field claim. The [command guide](../packages/telescope/README.md#use)
+negative field claim. The [command guide](../packages/telescope-cli/README.md#use)
 shows the output and its limits.
 If a selected Chandra ObsID has several level-2 event files, or a Spitzer AOR has several science
 FITS products, fetch lists their exact names and requires `--file NAME`. It does not silently pick
@@ -288,7 +288,7 @@ source directory; it may name the science input itself for an attached-label pro
 For example:
 
 ```sh
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target sun --wavelength 0.0170,0.0172 \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 
@@ -409,9 +409,9 @@ even when the delivered bytes are fully verified.
 For reproducible empirical delivery checks:
 
 ```sh
-node tools/objects/telescopes/survey-delivery.mts output/survey --random 20
+node packages/telescope-cli/src/survey-delivery.mts output/survey --random 20
 # Repeat with the seed written in output/survey/survey.json:
-node tools/objects/telescopes/survey-delivery.mts output/replay --random 20 SEED
+node packages/telescope-cli/src/survey-delivery.mts output/replay --random 20 SEED
 ```
 
 The pool comprises body packages with a locally available numeric product under 256 MB,
@@ -641,26 +641,26 @@ The ledgers say how much of each archive these routes have been proved on:
 [JWST](jwst-ledger.md), [Hubble](hubble-ledger.md), [NACO](naco-ledger.md), [Chandra](chandra-ledger.md),
 [JunoCam](junocam-ledger.md), [Spitzer](spitzer-ledger.md), [Gemini](gemini-ledger.md), [Keck](keck-ledger.md) and [IHW Halley](ihw-halley.md).
 The eight archive ledgers (all but IHW Halley's) are written the same way by
-[`tools/objects/archives/ledger.mts`](../tools/objects/archives/ledger.mts): each archive's `archive-ledger.mts` states how
+[`packages/telescope-cli/src/archives/ledger.mts`](../packages/telescope-cli/src/archives/ledger.mts): each archive's `archive-ledger.mts` states how
 to survey its archive, read its ledger back and render its page, and the few ways its command differs (which passes write,
 whether it has a `--local` pass, whether receipt problems fail the run, the JSON indent). Its
-[test](../tools/objects/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
+[test](../packages/telescope-cli/src/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
 
 ## Asking which observations might measure something
 
 The ledgers say what each archive holds per object and per mode. Where an archive exposes a stable observation identity, a
 ledger can also retain the complete observation index; Spitzer records every AORKEY, programme and observing interval. The capability
-query ([`tools/objects/telescopes/query.mts`](../tools/objects/telescopes/query.mts)) turns that into an answer to one
+query ([`packages/telescope-cli/src/query.mts`](../packages/telescope-cli/src/query.mts)) turns that into an answer to one
 question: *which observing modes have ever pointed at this body, and could any of them, in principle, measure the thing I
 care about?* These commands require Node 22.18.x or Node 24+. When the shell's Node is older, the package launcher uses the
 newest compatible Node already installed under NVM, or `CSSEARTH_NODE`; it reports a concrete recovery only when neither exists.
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
   --any-time --range-km 630000000 --radius-km 1560.8 --min-elements 8 --result body-map
 ```
 
-`node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
+`node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
 smaller `--min-arcsec` or `--min-km` asks for sharper data. For machine input, `pnpm --silent telescope:query ... --json`
 writes JSON alone; ordinary `pnpm` prints its script banner before the program's stdout.
 
@@ -681,7 +681,7 @@ the MAST collection, exact observation ids, and the source that establishes the 
 does not copy the programme, instrument, filter, time, or archive target. The query asks current MAST rows for those facts
 through the pinned Astroquery client and refuses missing, duplicate, extra, or wrong-collection results. It therefore can find
 Nix in Hubble programme 10427's two ACS/WFC F606W visits while still reporting that MAST calls those pointings `PLUTO`; it
-does not turn every Pluto exposure into a Nix observation. `node tools/cli/run-typed-module.mjs tools/objects/hst/target-associations.mts` exercises that live boundary.
+does not turn every Pluto exposure into a Nix observation. `node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/hst/target-associations.mts` exercises that live boundary.
 
 MAST owns HST observation and product metadata. The checked-in HST ledger is a reproducible discovery snapshot and offline
 index, not an independent authority; it also records the cssEarth-specific layer MAST cannot know—available reducers, pinned
@@ -747,7 +747,7 @@ that resolves to several modes, or to none, is listed separately as unassigned e
 Hubble STIS/CCD map says nothing about STIS/FUV-MAMA, which sees other wavelengths through another detector, so it is never
 carried there.
 
-The authored capability input is [`modes.json`](../tools/objects/telescopes/modes.json): each mode's wavelength intervals, aperture,
+The authored capability input is [`modes.json`](../packages/telescope-cli/src/modes.json): each mode's wavelength intervals, aperture,
 pixel scale, documented point spread function where there is one, and product kind, with the handbook page every number was
 read from. JWST's cube modes take their intervals from `jwst/imaging/bands.mts`, which already states them band by band. A
 mode nobody has sourced is left out, and the query says "capabilities not recorded" for it rather than inventing numbers. A
@@ -767,7 +767,7 @@ and Keck modes remain visible where those sourced capability facts have not been
 The query can make an explicit selection instead of silently treating the first candidate as the answer:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250
 ```
@@ -801,7 +801,7 @@ source-label target names against PDS context products through Peppi; cssEarth k
 is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/pds/discover.mts --archive pds --target charon --write
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target charon --write
 ```
 
 Peppi exhausts the target's `Product_Observational` records across processing levels. cssEarth verifies every returned label against the Registry,
@@ -819,7 +819,7 @@ product remains a detector image: the label supplies no value units, celestial W
 quality array, and the query preserves angular resolution as unresolved.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
-JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its
+JWST, ALMA and NACO meet at `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`: an adapter supplies a north-up/east-left value plane, its
 one-sigma uncertainty, plate scale and observation identity; the shared stage fits the limb and owns the ephemeris, rotation,
 camera, projection and complete body-map observation. Hubble's slit scan has different image formation and joins at the final
 body-map contract. The product record pins the recipe, observation products, ephemerides and rotation model that the map stage
@@ -828,7 +828,7 @@ read, along with the output plane and its body-map metadata.
 Publication performs the query and verifies the whole chain in one command:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
   --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \
@@ -1007,9 +1007,9 @@ so an unchanged checkout does not need a renderer build to identify a family ope
 
 ## From a delivered product to an output
 
-`tools/objects/telescopes/outputs.mts` is the final boundary after `session.mts` delivery.
+`packages/telescope-cli/src/outputs.mts` is the final boundary after `session.mts` delivery.
 The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSON`.
-[The command guide](../packages/telescope/README.md#outputs) covers selectors and files.
+[The command guide](../packages/telescope-cli/README.md#outputs) covers selectors and files.
 
 Executable outputs include a native FITS plane, a pixel spectrum, a wavelength-weighted
 band image, a background-subtracted region mean spectrum and a continuum-subtracted feature map. Astropy owns coordinates and units; the shared scientific reader applies the
@@ -1114,7 +1114,7 @@ The new output arithmetic uses Astropy NDData. A separate reference tool reads t
 FITS cube and computes spectra with Photutils aperture sums and spectral integrals with
 specutils. It does not call the production reducer. These comparisons cover all finite output
 samples; units and missing-sample masks match exactly. Reproduction commands are in the
-[CLI guide](../packages/telescope/README.md#independent-output-checks).
+[CLI guide](../packages/telescope-cli/README.md#independent-output-checks).
 
 | Eris output | Independent reference | Valid samples | Maximum absolute difference |
 | --- | --- | ---: | ---: |
@@ -1365,7 +1365,7 @@ Place each downloaded kernel under the recipe's `kernels/` directory; changed ar
 are refused. The executable oracle is:
 
 ```sh
-node tools/objects/telescopes/sphere/sphere-oracle.mts \
+node packages/telescope-cli/src/sphere/sphere-oracle.mts \
   europa-map/map.fits.product.json europa-sphere/sphere.product.json \
   europa-band/image.fits output/sphere-oracle
 ```

@@ -15,8 +15,8 @@ import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '@cssearth/bake/objects/color';
 import { maskSaturatedStars, findPointSources } from '@cssearth/bake/objects/layers/observation';
-import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../jwst/imaging/bands.mts';
-import { runImage3 } from '../jwst/imaging/image3.mts';
+import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '@cssearth/telescope-cli/archives/jwst/imaging/bands';
+import { runImage3 } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
 import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,
   WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
 
@@ -61,7 +61,7 @@ export const SKY_BANDS: Readonly<Record<string, SkyBand>> = Object.freeze({
   // A coronagraph band is a PSF-subtracted image of one star's surroundings, not a band of the sky.
   ...Object.fromEntries(Object.values(JWST_BANDS).filter(entry => !entry.coronagraph).map(entry => [entry.id, jwst(entry)])),
 });
-/** JWST imaging bands (tools/objects/jwst/imaging/bands.mts): surface brightness in MJy/sr after the pipeline's photom step,
+/** JWST imaging bands (packages/telescope-cli/src/archives/jwst/imaging/bands.mts): surface brightness in MJy/sr after the pipeline's photom step,
  * either MAST's level-3 mosaic or the pipeline's image3 stage re-run onto the recipe grid. */
 function jwst(entry: JwstBand): SkyBand {
   return { label: entry.label, acquisition: { kind: 'jwst', band: entry }, toMJyPerSr: 1, reference: JWST_UNITS_REFERENCE,
@@ -269,7 +269,7 @@ async function mastProductPlane(grid: SkyGrid, input: { band: string; product: s
 }
 
 /** The image3 stage's mosaic on the recipe grid, named by program and band. A re-run reproduces its SCI data exactly
- * (measured). It is taken from the cache, or built by tools/objects/jwst/imaging/image3.mts from the program's members.
+ * (measured). It is taken from the cache, or built by packages/telescope-cli/src/archives/jwst/imaging/image3.mts from the program's members.
  * The mosaic must be the grid itself (shape, reference and scale) with no rotation, so it is only flipped into display order. */
 async function image3Plane(grid: SkyGrid, input: { band: string; program: string }, band: JwstBand, io: SkyBandIo) {
   const path = resolve(io.cache, 'jwst-image3', `${input.program}-${band.id}.fits`);
@@ -306,7 +306,7 @@ async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyB
   if ('program' in input && route.acquisition.kind === 'jwst') {
     const { plane, header, run } = await image3Plane(recipe.grid, input, route.acquisition.band, io);
     return { plane, acquisition: { kind: 'jwst-image3', program: input.program,
-      program_file: `tools/objects/jwst/imaging/programs/${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
+      program_file: `packages/telescope-cli/src/archives/jwst/imaging/programs/${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
       limits: 'The pipeline\u2019s image3 stage (tweakreg, skymatch, outlier detection, resample) re-run from MAST\u2019s level-2 members onto the recipe grid, north up, so the exposures are resampled once. Pixels no exposure covered are missing.' } };
   }
   if ('product' in input && input.product !== undefined && route.acquisition.kind === 'jwst') {

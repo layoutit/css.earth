@@ -125,8 +125,9 @@ instantaneous multi-file switch for live readers or recovery from process
 termination or power loss.
 
 The publication and prepared-set tests exercise staging, replacement and rollback.
-Use the current tests beside `tools/objects/publication.mts` and
-`tools/prepared/write-prepared-set.mts`, with their required inputs installed.
+Use the current tests of `tools/objects/publication.mts` and
+`packages/bake/src/delivery/write-prepared-set.ts` (`tests/objects/publication.test.mts`,
+`tests/delivery/write-prepared-set.test.mts`), with their required inputs installed.
 These checks do not replace a visual or scientific oracle.
 
 ## Source and mission presentation
@@ -159,7 +160,7 @@ For source bindings or product-lineage changes, run:
 pnpm test:node
 ```
 This is the broad native suite. For a focused change, select the relevant tests
-under `src/platform/`, `tools/contract/`, `tools/sources/` and the affected preparer.
+under `tests/provenance/`, `tools/contract/`, `tools/sources/` and the affected preparer.
 Report source-dependent skips separately. The suite does not reinstate the
 removed manifest-pin or provenance-retention checks, and a pass does not replace
 independent scientific qualification.

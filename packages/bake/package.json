@@ -7,7 +7,9 @@
   "files": [
     "dist"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/thread-pool.js"
+  ],
   "exports": {
     "./volume": {
       "types": "./dist/volume.d.ts",
@@ -124,10 +126,30 @@
       "import": "./dist/objects/sources.js",
       "default": "./dist/objects/sources.js"
     },
+    "./objects/charts": {
+      "types": "./dist/objects/charts.d.ts",
+      "import": "./dist/objects/charts.js",
+      "default": "./dist/objects/charts.js"
+    },
+    "./objects/content": {
+      "types": "./dist/objects/content.d.ts",
+      "import": "./dist/objects/content.js",
+      "default": "./dist/objects/content.js"
+    },
+    "./objects/surface-features": {
+      "types": "./dist/objects/surface-features.d.ts",
+      "import": "./dist/objects/surface-features.js",
+      "default": "./dist/objects/surface-features.js"
+    },
     "./objects/layers/observation": {
       "types": "./dist/objects/layers/observation.d.ts",
       "import": "./dist/objects/layers/observation.js",
       "default": "./dist/objects/layers/observation.js"
+    },
+    "./objects/layers/shape-model": {
+      "types": "./dist/objects/layers/shape-model.d.ts",
+      "import": "./dist/objects/layers/shape-model.js",
+      "default": "./dist/objects/layers/shape-model.js"
     },
     "./objects/layers/cutaway": {
       "types": "./dist/objects/layers/cutaway.d.ts",
@@ -159,11 +181,66 @@
       "import": "./dist/objects/layers/terrestrial.js",
       "default": "./dist/objects/layers/terrestrial.js"
     },
+    "./objects/stellar": {
+      "types": "./dist/objects/stellar.d.ts",
+      "import": "./dist/objects/stellar.js",
+      "default": "./dist/objects/stellar.js"
+    },
+    "./objects/candidates": {
+      "types": "./dist/objects/candidates.d.ts",
+      "import": "./dist/objects/candidates.js",
+      "default": "./dist/objects/candidates.js"
+    },
+    "./runtime-source": {
+      "types": "./dist/runtime-source.d.ts",
+      "import": "./dist/runtime-source.js",
+      "default": "./dist/runtime-source.js"
+    },
+    "./prepared-presentation": {
+      "types": "./dist/prepared-presentation.d.ts",
+      "import": "./dist/prepared-presentation.js",
+      "default": "./dist/prepared-presentation.js"
+    },
+    "./delivery": {
+      "types": "./dist/delivery.d.ts",
+      "import": "./dist/delivery.js",
+      "default": "./dist/delivery.js"
+    },
+    "./sources": {
+      "types": "./dist/sources.d.ts",
+      "import": "./dist/sources.js",
+      "default": "./dist/sources.js"
+    },
+    "./contract": {
+      "types": "./dist/contract.d.ts",
+      "import": "./dist/contract.js",
+      "default": "./dist/contract.js"
+    },
+    "./navigation": {
+      "types": "./dist/navigation.d.ts",
+      "import": "./dist/navigation.js",
+      "default": "./dist/navigation.js"
+    },
+    "./surface-previews": {
+      "types": "./dist/surface-previews.d.ts",
+      "import": "./dist/surface-previews.js",
+      "default": "./dist/surface-previews.js"
+    },
+    "./preparation": {
+      "types": "./dist/preparation.d.ts",
+      "import": "./dist/preparation.js",
+      "default": "./dist/preparation.js"
+    },
+    "./thread-pool": {
+      "types": "./dist/thread-pool.d.ts",
+      "import": "./dist/thread-pool.js",
+      "default": "./dist/thread-pool.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.cli.json",
     "test": "vitest run"
   },
   "dependencies": {
@@ -177,14 +254,20 @@
     "@cssearth/spice": "workspace:*",
     "@cssearth/telescope": "workspace:*",
     "@layoutit/polycss": "0.2.11",
+    "@typescript-eslint/parser": "^8.69.0",
+    "cwebp-bin": "8.0.0",
     "geotiff": "3.0.5",
     "h5wasm": "0.10.3",
+    "linkedom": "^0.18.13",
     "meshoptimizer": "1.2.0",
     "playwright": "1.60.0",
+    "robust-predicates": "3.0.3",
     "sharp": "0.35.3",
+    "vite": "7.3.1",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
+    "@types/estree": "^1.0.9",
     "@types/node": "^26.4.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",

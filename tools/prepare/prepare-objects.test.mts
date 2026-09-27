@@ -6,7 +6,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { runCachedPreparationObjects, tracedPreparationEnvironment } from "./prepare-objects.mts";
 import type { CachedPreparationOptions } from './prepare-objects.mts';
-import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
+import { PREPARATION_TRACE_VARIABLE } from '@cssearth/bake/preparation';
 import { runObjectCommand } from '../cli/run-implemented-objects.mts';
 import type { PreparationCommand, PreparationOptions, PreparationReport } from '../cli/run-implemented-objects.mts';
 
@@ -108,6 +108,6 @@ test("the traced environment adds the trace once and keeps other Node options", 
   const environment = tracedPreparationEnvironment("/traces", { NODE_OPTIONS: "--max-old-space-size=4096", PATH: "/bin" });
   assert.equal(environment[PREPARATION_TRACE_VARIABLE], "/traces");
   assert.equal(environment.PATH, "/bin");
-  assert.match(environment.NODE_OPTIONS ?? "", /^--max-old-space-size=4096 --import=file:\S+\/tools\/prepare\/preparation-trace\.mts$/u);
+  assert.match(environment.NODE_OPTIONS ?? "", /^--max-old-space-size=4096 --import=file:\S+\/packages\/bake\/cli\/preparation-trace\.mts$/u);
   assert.equal(tracedPreparationEnvironment("/traces", environment).NODE_OPTIONS, environment.NODE_OPTIONS);
 });

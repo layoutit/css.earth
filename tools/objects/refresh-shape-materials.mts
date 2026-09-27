@@ -9,15 +9,17 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { loadRadialTerrain } from './terrestrial-layers/radial-terrain.mts';
-import { prepareRadialMaterials } from './terrestrial-layers/radial-materials.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
+import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
 import { refreshObservationControls } from './refresh-surface-observations.mts';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
-import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.mts';
+import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
-import { validateMarkerDescriptor, renderMarker } from '../prepare/marker-recipe.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
+import { validateMarkerDescriptor, renderMarker } from '@cssearth/bake/navigation';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));

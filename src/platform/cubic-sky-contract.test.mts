@@ -1,5 +1,5 @@
 import { requireRecord, requireFiniteNumber } from '@cssearth/core';
-import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -11,7 +11,7 @@ import {
   CUBIC_SKY_STANDARD,
   PREPARED_CUBIC_SKY_SCHEMA,
   validatePreparedCubicSky,
-} from "./cubic-sky-contract.mts";
+} from '@cssearth/bake/presentation';
 
 const runtimeSky = async (id: string) => requireRecord(await loadObjectTestDefinition(id)).sky;
 const OBJECT_SKIES = Object.freeze({

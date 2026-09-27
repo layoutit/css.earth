@@ -4,10 +4,10 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '../surface-observations/published-comparison.mts';
+import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '@cssearth/bake/objects/layers/terrestrial';
 import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, unusedWords, withAnchoredLens, withRefreshedLens } from './install.mts';
 import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArguments, surveyFigures } from './setup.mts';
-import { horizonsCommand } from '../sphere-horizons.mts';
+import { horizonsCommand } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
 const json = (path: string) => JSON.parse(readFileSync(path, 'utf8'));

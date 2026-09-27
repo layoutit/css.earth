@@ -3,11 +3,40 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
-import { loadNativeSourcePoleSampler } from './surfaces.ts';
+import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
 import { parseRasterRecipe, prepareRasterAssets } from './assets.ts';
 import { loadNativeObservationPoleSampler, parseObservationLens } from '../objects/layers/observation/index.ts';
 
 describe('native source pole sampling', () => {
+    it('adds lossless numeric maps to source-packed angular poles without changing photographic assets', async () => {
+        const directory = await mkdtemp(join(tmpdir(), 'cssearth-numeric-angular-'));
+        try {
+            await sharp({create:{width:128,height:64,channels:3,background:'#488ecc'}}).png().toFile(join(directory,'photo.png'));
+            const base = {schema:'cssearth-raster-recipe@1',publicBase:'/scenes/test/',sourceWidth:128,sourceHeight:64,
+                width:64,height:32,latitudeBands:4,polarTile:16,resample:'source-packed',unpackedResizeBeforePack:true,
+                polarProjection:'angular-nearest',polesOutput:'poles-{id}{suffix}.webp',surfaceMetadata:{schema:'test@1'},
+                thumbnail:{size:8,crop:{left:12,top:12,width:16,height:16}},surfaces:[{id:'photo',source:'photo.png',falseColor:false,output:'{id}{suffix}.webp',thumbnail:'thumb-{id}.webp'}]};
+            await prepareSurfaces(parseRasterRecipe(base),directory,directory);
+            const names=['photo@2x.webp','poles-photo@2x.webp','thumb-photo.webp'];
+            const before=await Promise.all(names.map(name=>readFile(join(directory,name))));
+            const science={id:'height',source:'native.tif',falseColor:true,output:'{id}{suffix}.webp',thumbnail:'thumb-{id}.webp',
+                science:{scientific:{displaySampling:'nearest'}}};
+            const recipe={...base,surfaces:[...base.surfaces,science]},config=parseRasterRecipe(recipe);
+            await prepareSurfaces(config,directory,directory,async (_surface,width,height)=>{
+                const data=new Uint8Array(width*height*3);
+                for(let y=0;y<height;y++)for(let x=0;x<width;x++)data.set(y<height/2?[1,73,137]:[199,17,91],(y*width+x)*3);
+                return {data,channels:3,nearest:true};
+            });
+            for(let i=0;i<names.length;i++)expect(await readFile(join(directory,names[i]))).toEqual(before[i]);
+            for(const name of ['height@2x.webp','poles-height@2x.webp','thumb-height.webp']){
+                const bytes=await readFile(join(directory,name));expect(bytes.includes(Buffer.from('VP8L'))).toBe(true);
+                const rgba=await sharp(bytes).ensureAlpha().raw().toBuffer();
+                for(let i=0;i<rgba.length;i+=4)if(rgba[i+3])expect([[1,73,137],[199,17,91]]).toContainEqual([...rgba.subarray(i,i+3)]);
+            }
+            expect(()=>parseRasterRecipe({...recipe,sourceWidth:256})).toThrow(/canonical source dimensions/);
+            expect(()=>parseRasterRecipe({...recipe,surfaces:[{...science,science:{scientific:{displaySampling:'bilinear'}}}]})).toThrow(/nearest numeric/);
+        } finally {await rm(directory,{recursive:true,force:true});}
+    });
     it('packs a lower-resolution surface without changing the shared layout or pole dimensions', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-small-surface-'));
         try {

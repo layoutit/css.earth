@@ -4,6 +4,14 @@
     {
       "kind": "download",
       "groups": [
+        "infrared-mosaic"
+      ],
+      "path": "observations/PIA24027.tif",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia24/pia24027/PIA24027.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
         "refresh"
       ],
       "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",

@@ -16,9 +16,15 @@
     "n20151104-112633-path",
     "n20151104-112633-qualityPath",
     "n20151115-050650-path",
-    "n20151115-050650-qualityPath"
+    "n20151115-050650-qualityPath",
+    "n20160409t151852044id40f22",
+    "n20160409t151852044id50f22",
+    "n20160409t173352247id40f22",
+    "n20160409t173352247id50f22",
+    "n20160410t114851908id40f22",
+    "n20160410t114851908id50f22"
   ],
-  "frame": "Corrected GEO XYZ are in the 67P body frame used by the SHAP7 product; projective camera fitted from their pixel correspondences, checked against held-out pixels and the RMOC shape.",
+  "frame": "Corrected GEO XYZ use the DLR SPG SHAP7 4M frame. A projective camera fitted from their pixel correspondences is checked against held-out pixels; surface transfer uses the public 124,938-face SHAP7 regional release. Independent native-pixel shape disagreements are retained in evidence/source-shape-comparison.json.",
   "quality": {
     "radianceCompanion": "Every decoded L4 radiance pixel must equal its L5 counterpart before the quality map is used.",
     "requiredBit": 1,
@@ -50,9 +56,9 @@
     }
   ],
   "limits": [
-    "Eight orange-filter observations from August 2014 and October–November 2015; this is a visual composite across changing illumination and a perihelion passage, not simultaneous color or albedo. No extrapolation or backside fill.",
-    "RMOC and SHAP7 are distinct models; all sample correspondences are explicitly bounded.",
-    "Photographed cast shadows, real seasonal surface changes and unmodeled scattering effects remain. The published phase terms are a modest extrapolation beyond the original 1.3–54 degree fit to the selected frames at 47–64 degrees; accepted overlap gains provide an additional empirical check.",
+    "Eleven orange-filter observations from August 2014, October–November 2015 and April 2016 form a visual composite across changing illumination and a perihelion passage, not simultaneous color or albedo. No extrapolation or backside fill.",
+    "The public 125K SHAP7 and archival 4M SHAP7 are distinct resolutions. The transfer still requires every contributor within 20 m, emission within 80 degrees and independent visibility agreement within 0.5 m.",
+    "Photographed cast shadows, real seasonal surface changes and unmodeled scattering remain. The 1.3–54 degree published phase fit is extrapolated to older frames reaching 64 degrees; new frames are at 41–51 degrees.",
     "Positive, zero and negative finite radiance are retained when validity/geometry/photometry permit."
   ],
   "observations": [
@@ -95,12 +101,27 @@
       "id": "n20151115-050650",
       "startTime": "2015-11-15T05:08:11.274",
       "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20160409t151852044id50f22",
+      "startTime": "2016-04-09T15:20:16.680",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20160409t173352247id50f22",
+      "startTime": "2016-04-09T17:35:16.886",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20160410t114851908id50f22",
+      "startTime": "2016-04-10T11:50:16.568",
+      "filter": "FFP-Vis_Orange"
     }
   ],
   "mosaic": {
-    "selection": "Lowest maximum source emission angle among qualified observations; source order breaks exact ties. No brightness-based coverage rejection.",
-    "levels": "One bounded gain per observation, fitted from co-located positive samples with incidence and emission at most 65 degrees. The stricter angle limit applies only to the brightness fit. All accepted display pixels retain the original 80-degree geometric/photometric limits. The first observation anchors the display; the 1.35 residual-gain budget is unchanged. Use 64 deterministic surface samples per triangle; independently check the fitted gains with 63 disjoint samples per triangle.",
-    "display": "The first observation owns the common grayscale stretch.",
+    "selection": "Finest projected surface resolution among qualified observations, accounting for nadir pixel scale and emission angle. Source order breaks exact ties. Brightness never chooses an observation.",
+    "levels": "One bounded gain per observation from co-located positive samples with incidence and emission at most 65 degrees, at least 128 valid pairs and median level error at most 0.07. The first frame anchors the display; the residual-gain budget remains 1.35. Use 128 deterministic samples per retained triangle; an independent 127-sample grid changes all gains by less than 0.54%. Display keeps its original 80-degree limits.",
+    "display": "All selected surface samples supply the authored 1.9–99.3 percentile stretch. Encode the linearly stretched quantity to sRGB once for display.",
     "sourceIndex": "The prepared lossless source-index raster records the winning observation at every atlas texel; zero marks no qualified observation."
   }
 }

@@ -83,7 +83,7 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/beta-pictoris-disc/source/previews/visible.png
 
 # WASP-43b JWST reductions written by this repository's own pipeline
-# (tools/objects/jwst/reduce-tso.mts); repinned when the reduction reruns.
+# (packages/telescope-cli/src/archives/jwst/reduce-tso.mts); repinned when the reduction reruns.
 !src/objects/wasp-43b/source/science/jwst-1366-miri/white-5.0-10.5um.csv
 !src/objects/wasp-43b/source/science/jwst-1366-miri/stellar-counts.csv
 !src/objects/wasp-43b/source/science/bell-2024/eureka-v1-white-5.0-10.5um.csv
@@ -107,8 +107,6 @@ src/objects/*/.prepared/
 # Pinned PDS raster and vertex-facet source products.
 src/objects/*/source/**/*.IMG
 src/objects/*/source/**/*.IMG.gz
-# Io's night-side JIRAM map is this repository's own reduction (tools/objects/juno/jiram-mosaic.mts), 1 MB.
-!src/objects/io/source/science/jiram/io-jiram-m-night.IMG
 src/objects/*/source/**/*.tab
 src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds
@@ -302,7 +300,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/m45/.prepared-*/
 /src/objects/m8/.prepared-*/
 /src/objects/omega-centauri/.prepared-*/
-# SPICE kernels are restored from their origins, never committed: bank kernels by tools/kernel-banks/kernel-bank.mts,
+# SPICE kernels are restored from their origins, never committed: bank kernels by packages/bake/cli/kernel-bank.mts,
 # body kernels by their acquisition steps (tools/assets/restore-source-inputs.mts), evidence kernels by the script
 # that reads them.
 *.[tT][lL][sS]
@@ -347,3 +345,5 @@ src/objects/*/source/**/*.bpc
 
 # Published Mars crust model and its coordinate-only conversion
 src/objects/mars/source/crust/*.dat
+# Compact native-cell GeoTIFFs, restored by the USGS acquisition recipes or source cache.
+/src/objects/*/source/science/usgs/*.tif

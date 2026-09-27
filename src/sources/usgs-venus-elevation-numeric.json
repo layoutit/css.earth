@@ -1,0 +1,27 @@
+{
+  "id": "usgs-venus-elevation-numeric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Venus Magellan Global Topography 4641m",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_Topography_Global_4641m_v02.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/inputs/25"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

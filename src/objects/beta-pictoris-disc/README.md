@@ -6,7 +6,7 @@ This package draws the edge-on disc of dust around [Beta Pictoris](../beta-picto
 
 - **Visible light (default), 16 to 102 au.** Hubble's STIS coronagraph image at 0.58 micrometres, combined from programmes 7125 (1997), 12551 (2012) and 12923 (2013) by Ren et al. (2023, A&A 672, A114, [arXiv:2302.04273](https://arxiv.org/abs/2302.04273)). It is deposited at CDS as [`Beta_Pic_STIS.fits`](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114) and pinned by digest in the [recipe](source/circumstellar.json). It reaches 0.8 arcseconds from the star, so it covers the orbit of planet d, 26 au out.
 - **Colour, 29 to 135 au.** Hubble's ACS/HRC coronagraph through F435W, F606W and F814W on 1 October 2003, programme 9987, the run of Golimowski et al. (2006, AJ 131, 3109, [arXiv:astro-ph/0602292](https://arxiv.org/abs/astro-ph/0602292)). The starlight was removed here from the raw exposures ([below](#the-hubble-colour-lens)).
-- **2.1 and 4.1 micrometres, 49 to 124 au.** MAST's level-3 coronagraph mosaics of JWST/NIRCam F210M and F410M behind MASK335R, 21 March 2025, observation c1002 of GO programme 4758 (PI Y. Zhou), the rotation-monitoring run of [Zhou et al. (2026)](https://arxiv.org/abs/2607.13133). They are pinned with their coron3 associations in [`beta-pictoris-4758.json`](../../../tools/objects/jwst/imaging/programs/beta-pictoris-4758.json).
+- **2.1 and 4.1 micrometres, 49 to 124 au.** MAST's level-3 coronagraph mosaics of JWST/NIRCam F210M and F410M behind MASK335R, 21 March 2025, observation c1002 of GO programme 4758 (PI Y. Zhou), the rotation-monitoring run of [Zhou et al. (2026)](https://arxiv.org/abs/2607.13133). They are pinned with their coron3 associations in [`beta-pictoris-4758.json`](../../../packages/telescope-cli/src/archives/jwst/imaging/programs/beta-pictoris-4758.json).
 - **Recipe.** [`source/circumstellar.json`](source/circumstellar.json) names the lenses, their inputs, the stated conventions and stretches, and the published geometry each measurement is checked against. [`author.mts`](../../../tools/objects/circumstellar/author.mts) writes everything else in `source/` from it, and `--check` reproduces it byte for byte.
 
 **Where the star is.** The JWST mosaics' own pointing misses the star by 57 to 85 mas. Planet b, a point 0.54 arcseconds out in both, has an orbit that reproduces GRAVITY's astrometry to 1.3 mas (see [Beta Pictoris b](../beta-pictoris-b/README.md)). So the star is placed by the planet ([`registerStarByPlanet`](../../../tools/objects/circumstellar/edge-on-disc.mts)). The STIS deposit has no sky coordinates: its ReadMe puts the star at the array's centre, Ren et al. give the plate scale, 50.72 mas, and the orientation was measured here against the registered JWST images. In the ACS images the star is where its coronagraphic PSF is most nearly symmetric under a half turn.
@@ -33,7 +33,7 @@ The tangent share is the fraction of a midplane column's light that lies within 
 
 ## The Hubble colour lens
 
-The archive's ACS/HRC products still carry the star. [`psf-subtract.mts`](../../../tools/objects/hst/psf-subtract.mts) removes it, as described in the [Hubble guide](../../../docs/hubble.md#a-coronagraphs-starlight-removed):
+The archive's ACS/HRC products still carry the star. [`psf-subtract.mts`](../../../packages/telescope-cli/src/archives/hst/psf-subtract.mts) removes it, as described in the [Hubble guide](../../../docs/hubble.md#a-coronagraphs-starlight-removed):
 
 1. All 18 associations of programme 9987 are recalibrated from raw with calacs. The re-run of `j8qj15060` matches the archive's combined product, 72% of samples bit-identical, the largest relative difference 1.5e-5.
 2. Alpha Pictoris, the reference star, is divided by the flux ratios Golimowski et al. state, 1.65, 1.75 and 1.90 in F435W, F606W and F814W, and shifted onto Beta Pic. Only the shift is fitted: 0.6 to 0.9 pixel, against the paper's 0.8.
@@ -44,17 +44,17 @@ Nothing is drawn within 1.5 arcseconds (29 au), where Golimowski et al. find the
 
 **Colour.** The visible lens is one filter in grey, in the deposit's counts per pixel per second. The colour lens and the JWST lens are each filter's contrast to the star; the JWST lens takes the star's flux from Kammerer et al. (2024, Table 2), 26.14 Jy in F210M and 8.20 Jy in F410M. No lens has a published figure to fit a stretch to, so each stretch is stated: its top is the 99.5th percentile within the midplane strip, with log strength 10. Columns fade in from one to three times their noise.
 
-**What JWST programme 1411 adds, and why it is not drawn.** Its F182M image behind the smaller MASK210R (17 March 2023) is pinned in [`beta-pictoris-1411.json`](../../../tools/objects/jwst/imaging/programs/beta-pictoris-1411.json). MAST's automatic subtraction of it leaves speckle to about 1.5 arcseconds, and planet b stands only 2.7 times above the scatter around it. So it places neither the star nor the inner disc better than Hubble does.
+**What JWST programme 1411 adds, and why it is not drawn.** Its F182M image behind the smaller MASK210R (17 March 2023) is pinned in [`beta-pictoris-1411.json`](../../../packages/telescope-cli/src/archives/jwst/imaging/programs/beta-pictoris-1411.json). MAST's automatic subtraction of it leaves speckle to about 1.5 arcseconds, and planet b stands only 2.7 times above the scatter around it. So it places neither the star nor the inner disc better than Hubble does.
 
 ## Evidence
 
 Runs of 2026-09-22, this version:
 
-- `node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst` made the six ACS products, pinned by digest in the recipe; each has its product record beside it.
-- `node tools/objects/hst/compare.mts beta-pictoris-9987 j8qj15060 …` wrote the archive comparison receipts in `tools/objects/hst/programs/`.
+- `node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst` made the six ACS products, pinned by digest in the recipe; each has its product record beside it.
+- `node packages/telescope-cli/src/archives/hst/compare.mts beta-pictoris-9987 j8qj15060 …` wrote the archive comparison receipts in `tools/objects/hst/programs/`. Those receipts, unchanged, now live in [`packages/telescope-cli/src/archives/hst/programs/`](../../../packages/telescope-cli/src/archives/hst/programs/).
 - `node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc` solved all three lenses; the two older lenses reproduced their previous errors exactly.
 - `node tools/objects/circumstellar/author.mts beta-pictoris-disc` measured all three lenses (numbers above).
-- [`edge-on-disc.test.mts`](../../../tools/objects/circumstellar/edge-on-disc.test.mts): a synthetic edge-on disc's midplane is recovered from its own projection; the ridge stays on the main disc beside a tilted secondary one; a deposited array read north up and east left puts a north-east source north-east. [`psf-subtract.test.mts`](../../../tools/objects/hst/psf-subtract.test.mts): every association the subtraction names is pinned through its band on its star, and a missing or impossible flux ratio is refused.
+- [`edge-on-disc.test.mts`](../../../tools/objects/circumstellar/edge-on-disc.test.mts): a synthetic edge-on disc's midplane is recovered from its own projection; the ridge stays on the main disc beside a tilted secondary one; a deposited array read north up and east left puts a north-east source north-east. [`psf-subtract.test.mts`](../../../packages/telescope-cli/src/archives/hst/psf-subtract.test.mts): every association the subtraction names is pinned through its band on its star, and a missing or impossible flux ratio is refused.
 
 ## Known problems
 

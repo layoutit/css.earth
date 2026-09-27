@@ -28,8 +28,8 @@ Two other things are worth knowing before reading the code.
 
 ## Stages
 
-1. **Install the software.** `node tools/objects/naco/toolchain.mts install` downloads ESO's own NACO kit and builds it into
-   `output/toolchains/naco` (ignored by git). The kit is pinned in [toolchain.json](../tools/objects/naco/toolchain.json) by
+1. **Install the software.** `node packages/telescope-cli/src/archives/naco/toolchain.mts install` downloads ESO's own NACO kit and builds it into
+   `output/toolchains/naco` (ignored by git). The kit is pinned in [toolchain.json](../packages/telescope-cli/src/archives/naco/toolchain.json) by
    byte count, sha256, and the BSD `cksum` value ESO publishes beside it — that last one is the only digest ESO states for a
    kit, so it is checked as well as the sha256 and a swapped file is caught by ESO's own number. `install_pipeline` builds
    erfa, fftw, cpl, cfitsio, wcslib, gsl, esorex and the naco recipes; `verify` refuses an install built from another pin and
@@ -39,7 +39,7 @@ Two other things are worth knowing before reading the code.
    the tag the recipes read it under, its technique, filter, integration time, template and byte count. Byte counts come from
    a one-byte range request, so nothing is downloaded to pin it. Everything the raw table says about a frame is checked
    against that frame's own primary header from the archive's header service, and a disagreement stops the pin. The program
-   is written to `tools/objects/naco/programs/<program id>.json`; digests are added the first time a frame is downloaded.
+   is written to `packages/telescope-cli/src/archives/naco/programs/<program id>.json`; digests are added the first time a frame is downloaded.
 3. **Re-reduce.** `reduce.mts <program id> <work> [--template <tpl_start>|--half a-half|b-half]` downloads the pinned frames
    and runs the recipes its mode needs. Imaging: `naco_img_dark` over the associated darks, `naco_img_twflat` over the
    twilight flats with those darks, and `naco_img_jitter` over one object template with every sky frame of the night, the
@@ -70,7 +70,7 @@ Two other things are worth knowing before reading the code.
    halves' extracted one-dimensional spectra, measures the target's width across the slit against the night's telluric
    standard, and records the slit geometry.
 5. **Place a resolved image.** `author-body-map.mts <target> <program id> <naco_img_jitter.fits> --raw <raw-dir>` is the
-   NACO adapter to [`resolved-disc-map.mts`](../tools/objects/resolved-disc-map.mts), the same placement boundary now used by
+   NACO adapter to [`resolved-disc-map.ts`](../packages/bake/src/objects/layers/observation/body-maps/resolved-disc-map.ts), the same placement boundary now used by
    JWST and ALMA. The adapter checks the current reduction record and every raw pin, requires every object exposure to carry
    the same north-up/east-left TAN grid and zero requested position angle, and uses the recipe's shift-only coadd with a newly
    fitted disc centre. It publishes relative filter intensity with an explicit sky-noise uncertainty; no absolute calibration
@@ -84,14 +84,14 @@ Two other things are worth knowing before reading the code.
    owns pinning, the two independent template reductions, their comparison and the receipt.
 
 What is shared rather than repeated: the archive's raw table, the header service, the anonymous data-portal download and the
-esorex runner are `tools/objects/interferometry/eso-pipeline.mts`, the calibration association tree is
-`eso-associations.mts`, and resolved-image placement is `resolved-disc-map.mts`. NACO supplies only the facts peculiar to its
+esorex runner are `@cssearth/telescope/node` ([`eso-pipeline.ts`](../packages/telescope/src/node/eso-pipeline.ts)), the calibration association tree is
+[`eso-associations.ts`](../packages/telescope/src/node/eso-associations.ts), and resolved-image placement is `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`. NACO supplies only the facts peculiar to its
 product: how the recipe retained the detector axes, how relative intensity and its noise are measured, and which bytes prove it.
 
 ## Measured
 
 One slice: Ceres. Measured on 19 September 2026 with the pin in
-[toolchain.json](../tools/objects/naco/toolchain.json), on an Apple silicon Mac (macOS 24.6, arm64).
+[toolchain.json](../packages/telescope-cli/src/archives/naco/toolchain.json), on an Apple silicon Mac (macOS 24.6, arm64).
 
 **Software.** ESO's `naco-kit-4.4.13-15`, 37,596,448 bytes, sha256
 `5d708e5368021246a6367419a8bc246f1dc15631fe64cb6850bf066c250fac3e`, whose `cksum` is `1928251875 37596448` — the value ESO
@@ -102,7 +102,7 @@ AMBER and MATISSE kits. All fifteen recipes install and `esorex --recipes` lists
 `naco_util_spc_argon`, `naco_util_spc_model`. The pipeline is `naco/4.4.13` on esorex 3.13.11, with cpl 7.4, cfitsio 4.6.2,
 wcslib 8.4, gsl 2.8, fftw 3.3.10 and erfa 2.0.1. The installed toolchain is 54 MB once the build tree is deleted.
 
-**[Programme 080.C-0881(C)](../tools/objects/naco/programs/ceres-080C0881.json)**, the night of 11 November 2007, target
+**[Programme 080.C-0881(C)](../packages/telescope-cli/src/archives/naco/programs/ceres-080C0881.json)**, the night of 11 November 2007, target
 `CERES`. Three templates under `NACO_img_obs_GenericOffset`: two of twenty object frames (`02:38:47` and `02:45:32`) and one
 of nine sky frames (`02:53:07`), all Ks, DIT 2.0 s × NDIT 5. The archive's calibration tree gives 6 darks and 31 twilight
 flats. 66.4 MiB of science and 45.4 MiB of calibration, 86 frames, every one downloaded anonymously and digested. The pin
@@ -114,7 +114,7 @@ rather than by taking the first.
 
 Each sequence reduced in 4.5 s and 15.3 s through three recipes, at 0.60 GB and 0.73 GB of resident memory.
 
-**[Receipt](../tools/objects/naco/programs/ceres-080C0881.COADDED_IMG.reproduction.json).** The two sequences combined to
+**[Receipt](../packages/telescope-cli/src/archives/naco/programs/ceres-080C0881.COADDED_IMG.reproduction.json).** The two sequences combined to
 1553 × 1550 and 1515 × 1550 from a 1024 × 1024 detector, and the product carries no WCS. They share an origin: the brightest
 pixel — Ceres — is at (769, 803) in both, which is checked before anything is compared. Over the 1515 × 1550 rectangle both
 hold, 2,348,250 samples:
@@ -151,13 +151,13 @@ and both record SINFONI, the sister run 088.C-0833(A). Filtering the same query 
 returns 832 papers, so the filter works. So there is no published result to check this against, and the checks below are
 internal and physical.
 
-**[The night of 3 January 2012](../tools/objects/naco/programs/europa-088C0833.json).** 12 nods under one
+**[The night of 3 January 2012](../packages/telescope-cli/src/archives/naco/programs/europa-088C0833.json).** 12 nods under one
 `NACO_spec_obs_AutoNodOnSlit` template, DIT 3.5 s × NDIT 10, plus 6 spectroscopic flats, 3 darks and an 8-frame telluric
 standard taken through the same slit and grism twenty minutes later. 67.3 MiB. The archive associates **no arc frames** with
 any night of this programme, so `naco_spc_wavecal` has nothing to fit and no wavelength solution is claimed; the pinned
 program records `arcs: false` and the reduction carries it into the receipt.
 
-**[Receipt](../tools/objects/naco/programs/europa-088C0833.spectrum.reproduction.json).**
+**[Receipt](../packages/telescope-cli/src/archives/naco/programs/europa-088C0833.spectrum.reproduction.json).**
 
 - **The disc is not resolved along the slit.** Europa's profile across the slit is **2.69 px** full width at half maximum,
   0.148″ at the frame's own 0.0549″/px. The telluric standard — a point source through the same slit and grism — is
@@ -221,24 +221,24 @@ program records `arcs: false` and the reduction carries it into the receipt.
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
-node tools/objects/naco/toolchain.mts install
-node tools/objects/naco/toolchain.mts verify
-node tools/objects/naco/archive.mts ceres-080C0881 "080.C-0881(C)" CERES
-node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47
-node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:45:32
-node tools/objects/naco/compare.mts ceres-080C0881 .local/naco/ceres-080C0881 2007-11-11T02:38:47 2007-11-11T02:45:32
+node packages/telescope-cli/src/archives/naco/toolchain.mts install
+node packages/telescope-cli/src/archives/naco/toolchain.mts verify
+node packages/telescope-cli/src/archives/naco/archive.mts ceres-080C0881 "080.C-0881(C)" CERES
+node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47
+node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:45:32
+node packages/telescope-cli/src/archives/naco/compare.mts ceres-080C0881 .local/naco/ceres-080C0881 2007-11-11T02:38:47 2007-11-11T02:45:32
 node tools/objects/naco/author-body-map.mts ceres ceres-080C0881 \
   .local/naco/ceres-080C0881/jitter-2007-11-11T023847/naco_img_jitter.fits \
   --raw .local/naco/ceres-080C0881/raw
 
-node tools/objects/naco/archive.mts europa-088C0833 "088.C-0833(B)" EUROPA --night 2012-01-03
-node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833
-node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half a-half
-node tools/objects/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half b-half
-node tools/objects/naco/spectroscopy-receipt.mts europa-088C0833 .local/naco/europa-088C0833
+node packages/telescope-cli/src/archives/naco/archive.mts europa-088C0833 "088.C-0833(B)" EUROPA --night 2012-01-03
+node packages/telescope-cli/src/archives/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833
+node packages/telescope-cli/src/archives/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half a-half
+node packages/telescope-cli/src/archives/naco/reduce.mts europa-088C0833 .local/naco/europa-088C0833 --half b-half
+node packages/telescope-cli/src/archives/naco/spectroscopy-receipt.mts europa-088C0833 .local/naco/europa-088C0833
 
-node tools/objects/naco/archive-ledger.mts
-node --test tools/objects/naco/naco.test.mts
+node packages/telescope-cli/src/archives/naco/archive-ledger.mts
+node --test packages/telescope-cli/src/archives/naco/naco.test.mts
 ```
 
 `.local/naco` is ignored by git; `--raw <dir>` takes the pinned frames from a directory that already holds them instead of
