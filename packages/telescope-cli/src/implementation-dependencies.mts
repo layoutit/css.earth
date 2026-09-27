@@ -75,16 +75,32 @@ async function rendererSource(specifier: string): Promise<string | undefined> {
   return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
 }
 /** The telescope command's modules were relative modules under `tools/objects/telescopes/` before they became
- * `@cssearth/telescope-cli`; its subpath entries name their source (`@cssearth/telescope-cli/query` → `src/query.mts`). */
-function telescopeCliSource(specifier: string): string | undefined {
-  const subpath = /^@cssearth\/telescope-cli\/([a-z][a-z-]*(?:\/[a-z][a-z-]*)*)$/u.exec(specifier)?.[1];
-  return subpath ? `packages/telescope-cli/src/${subpath}.mts` : undefined;
+ * `@cssearth/telescope-cli`. A subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
+ * (`@cssearth/telescope-cli/archives/jwst/imaging/image3` → `src/archives/jwst/imaging/image3.mts`); a subpath the package does
+ * not export stays external, as Node would refuse it. The map is read from the fingerprinted checkout, once per bundle. */
+async function telescopeCliExports(root: string): Promise<ReadonlyMap<string, string>> {
+  let text: string;
+  try { text = await readFile(resolve(root, 'packages/telescope-cli/package.json'), 'utf8'); }
+  catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return new Map(); throw error; }
+  const manifest: unknown = JSON.parse(text);
+  const exports = typeof manifest === 'object' && manifest !== null && 'exports' in manifest ? manifest.exports : undefined;
+  if (typeof exports !== 'object' || exports === null) return new Map();
+  const sources = new Map<string, string>();
+  for (const [subpath, target] of Object.entries(exports)) {
+    const conditions: Readonly<Record<string, unknown>> = typeof target === 'object' && target !== null ? { ...target } : { default: target };
+    const source = conditions.types ?? conditions.default;
+    if (subpath.startsWith('./') && typeof source === 'string' && /^\.\/src\/[\w./-]+\.m?ts$/u.test(source) && !source.split('/').includes('..'))
+      sources.set(`@cssearth/telescope-cli/${subpath.slice(2)}`, `packages/telescope-cli/${source.slice(2)}`);
+  }
+  return sources;
 }
 /** An esbuild plugin that bundles the followed workspace entries from their sources under `root`. */
 export function followedWorkspaceSources(root: string): Plugin {
   return { name: 'followed-workspace-sources', setup(builder) {
+    let telescopeCli: Promise<ReadonlyMap<string, string>> | undefined;
     builder.onResolve({ filter: /^@cssearth\// }, async args => {
-      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(args.path) ?? telescopeCliSource(args.path);
+      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(args.path)
+        ?? (args.path.startsWith('@cssearth/telescope-cli/') ? (await (telescopeCli ??= telescopeCliExports(root))).get(args.path) : undefined);
       return source ? { path: resolve(root, source) } : undefined;
     });
   } };

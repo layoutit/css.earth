@@ -3,7 +3,8 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { WORKSPACE } from '@cssearth/telescope/node';
 import { implementationFingerprint } from './implementation-dependencies.mts';
 
 test('implementation identity follows transitive local TypeScript imports', async () => {
@@ -145,6 +146,8 @@ test('the telescope command package is followed into its sources, as when its mo
   try {
     await writeFile(resolve(root, 'entry.mts'), "import { query } from '@cssearth/telescope-cli/query'; import { ledger } from '@cssearth/telescope-cli/archives/ledger'; export const used = [query, ledger];\n");
     await mkdir(resolve(root, 'packages/telescope-cli/src/archives'), { recursive: true });
+    await writeFile(resolve(root, 'packages/telescope-cli/package.json'), JSON.stringify({ exports: {
+      './query': { types: './src/query.mts', default: './src/query.mts' }, './archives/ledger': './src/archives/ledger.mts' } }));
     await writeFile(resolve(root, 'packages/telescope-cli/src/query.mts'), "import { step } from './step.mts'; export const query = step;\n");
     await writeFile(resolve(root, 'packages/telescope-cli/src/step.mts'), 'export const step = 1;\n');
     await writeFile(resolve(root, 'packages/telescope-cli/src/archives/ledger.mts'), 'export const ledger = 1;\n');
@@ -156,5 +159,24 @@ test('the telescope command package is followed into its sources, as when its mo
     assert.notEqual(ledgerChanged.sha256, before.sha256);
     await writeFile(resolve(root, 'packages/telescope-cli/src/step.mts'), 'export const step = 2;\n');
     assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, ledgerChanged.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a telescope command subpath is followed to the source its package exports declare, digits included (imaging/image3)', async () => {
+  const specifier = '@cssearth/telescope-cli/archives/jwst/imaging/image3', source = 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts';
+  const composite = await implementationFingerprint(WORKSPACE, ['tools/objects/observation/sky-band-composite.mts']);
+  assert.ok(composite.files.some(file => file.path === source), 'the observation composite identity holds the JWST image3 source it imports');
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-cli-exports-'));
+  try {
+    await mkdir(resolve(root, dirname(source)), { recursive: true });
+    await writeFile(resolve(root, 'packages/telescope-cli/package.json'), await readFile(resolve(WORKSPACE, 'packages/telescope-cli/package.json')));
+    await writeFile(resolve(root, 'entry.mts'), `import { stage } from '${specifier}'; export const used = stage;\n`);
+    await writeFile(resolve(root, source), 'export const stage = 1;\n');
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', source], 'followed through the real exports entry');
+    await writeFile(resolve(root, source), 'export const stage = 2;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, 'a change to image3 moves the identity');
+    await writeFile(resolve(root, 'entry.mts'), "import { stage } from '@cssearth/telescope-cli/archives/jwst/imaging/unexported'; export const used = stage;\n");
+    assert.deepEqual((await implementationFingerprint(root, ['entry.mts'])).files.map(file => file.path), ['entry.mts'], 'an unexported subpath stays external');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
