@@ -13,9 +13,11 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 - the archive folders not yet split (`tools/objects/{hst,jwst}/`, and JunoCam's, which only a ledger test reads), which it
   still imports by relative path. Keck, PDS, NACO, Chandra, Gemini and Spitzer are split: their clients, reducers and ledger
   builders are `src/archives/<archive>/`, beside the ledger machinery all archives share (`src/archives/`), and only their
-  programs, toolchain pins, per-body authoring and the bodies a ledger is about (`ledger-focus.json`, `moving-targets.json`)
-  stay in `tools/objects/<archive>/`, which the code reads through `WORKSPACE`. No archive module names a body
-  (`archives/archive-scope.test.mts`);
+  programs, toolchain pins, per-body authoring and the bodies a ledger or route is about (`ledger-focus.json`,
+  `moving-targets.json`, `horizons-bodies.json`) stay in `tools/objects/<archive>/`, which the code reads through `WORKSPACE`
+  when a query needs it. No archive module names a body (`archives/archive-scope.test.mts`). That per-body JSON sits outside
+  the module fingerprint closure, and a lock's `Regenerate:` header still naming the old tool path is refreshed at the next
+  solve, since the lock's text is hashed into `pinsSha256`;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
 
