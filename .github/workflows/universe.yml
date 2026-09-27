@@ -157,6 +157,11 @@ jobs:
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts lint
+      - name: Check the architecture against its baseline
+        # Fails when a change adds a folder-cycle edge or a forbidden import (tools/ci/architecture/rules.mts) that
+        # tools/ci/architecture/baseline.json does not record. It reads every source file this sparse tree keeps, so a
+        # missing one stops it as incomplete rather than passing. About three seconds.
+        run: pnpm check:architecture
       - name: Test the shared object libraries
         # The node tests of @cssearth/bake/objects/<topic> stay beside the pipelines in tools/objects/, which no other PR step
         # runs; tools/ci/test-bake-objects.mts selects every test that imports an object entry, and unrestored downloads skip.
