@@ -152,6 +152,23 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   assert.deepEqual([...violations.keys()], LAYER_RULES.map(rule => rule.id));
 });
 
+test('nothing imports a package command entry: another entry, package code and tests, type-only imports included', () => {
+  const violations = evaluateRules(graph(
+    ['packages/bake/cli/fit-epic-limb.mts', 'packages/bake/cli/kernel-bank.mts'],
+    ['packages/bake/src/photometry/limb.ts', 'packages/bake/cli/fit-epic-limb.mts', 'type'],
+    ['tests/photometry/limb.test.mts', 'packages/telescope-cli/cli/run.mts'],
+    ['tools/prepare/x.mts', 'packages/bake/cli/kernel-bank.mts'],
+    ['packages/bake/cli/kernel-bank.mts', 'packages/bake/src/objects/cameras/index.ts'],
+    ['packages/bake/src/cli/x.ts', 'packages/bake/src/raster/index.ts'],
+  ));
+  assert.deepEqual((violations.get('nothing-imports-cli-entries') ?? []).map(item => `${item.from}>${item.to}`), [
+    'packages/bake/cli/fit-epic-limb.mts>packages/bake/cli/kernel-bank.mts',
+    'packages/bake/src/photometry/limb.ts>packages/bake/cli/fit-epic-limb.mts',
+    'tests/photometry/limb.test.mts>packages/telescope-cli/cli/run.mts',
+    'tools/prepare/x.mts>packages/bake/cli/kernel-bank.mts',
+  ], 'an entry may import libraries; a folder named cli inside src is not an entry folder');
+});
+
 test('packages/telescope never imports @cssearth/bake: production, tests and type-only imports', () => {
   const violations = evaluateRules(graph(
     ['packages/telescope/src/archive.ts', 'packages/bake/src/raster/index.ts'],

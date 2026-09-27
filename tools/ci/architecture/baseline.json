@@ -126,6 +126,7 @@
       {"from":"tools/sources/cite-pinned-facts.mts","to":"site/objects.mts"},
       {"from":"tools/sources/source-test-inputs.mts","to":"site/objects.mts"}
     ],
+    "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
       {"from":"packages/bake/src/density/retirement.test.ts","to":"tools/cli/bundle-renderer.mts"},
