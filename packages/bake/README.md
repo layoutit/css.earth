@@ -51,7 +51,10 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/objects/scene` | the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the ecliptic presentation frame, default camera, Sun reference view direction and astrometric sky registration derived from the solar geometry the host passes in; an object's sky orientation, directional Sun, physical solar-system scene and focused camera; the authored presentation basis and drawn node chain world navigation solves, the physical projection of rotating material tracks, and a recipe's camera source | Node only |
 | `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology and symbols, eclipse and phase-curve maps, observed colour rasters and their photometric composition, their source records, the WISE atlas mosaic grid, FITS binary tables, TESS transit limb darkening | Node only (`node:*`, `sharp`, `geotiff`) |
 | `@cssearth/bake/objects/sources` | authored source references read through the source manifest, pinned source files with their bindings, byte ranges and atomic publication, JSON source values, the shared reference banks (CIE 1931), the recorded-generator matcher, the idle-timeout download relay | Node only |
-| `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (mission decoders and cameras, registration, native photographs, solid and radial sources, atlases, ring sources, radial terrain and materials, solid rasters, the surface-observation pipeline), giant (ring and disc geometry, photometric contracts), paged-ellipsoid (texture levels, surface banks, Earth rasters, the globe's profile, attitude, atmosphere, asset contract, recipe context and scene, refresh sources, mantle tomography), material-composition (recipes, rasters, radial motion, spectral variants), observation (science rasters and elevation, FITS maps, controlled and synoptic mosaics, band colours, plates and point sources, OIFITS observables and image fits, body maps with their meaning, spectral-cube band depths and resolution evidence), shape-model (source records, GLB surfaces, shape lighting, ring leaves, surface rasters), cutaway and observed-surfaces contracts | Node only |
+| `@cssearth/bake/objects/charts` | chart renderers and readers (measured spectra, retrieved profiles, reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style | Node only |
+| `@cssearth/bake/objects/content` | the object-content contract, lens vocabulary, lens steps and prepared legends, lens billboard colours | Node only |
+| `@cssearth/bake/objects/surface-features` | surface-feature banks (IAU nomenclature, Natural Earth, landing sites, shape-model landmarks, ellipsoid projection), feature notes, image-control fits for encounter and orthophoto landmarks, the projected-control check | Node only |
+| `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (mission decoders and cameras, registration, native photographs, solid and radial sources, atlases, ring sources, radial terrain and materials, solid rasters, the surface-observation pipeline), giant (ring and disc geometry, photometric contracts), paged-ellipsoid (texture levels, surface banks, Earth rasters, the globe's profile, attitude, atmosphere, asset contract, recipe context and scene, refresh sources, mantle tomography), material-composition (recipes, rasters, radial motion, spectral variants), observation (science rasters and elevation, FITS maps, controlled and synoptic mosaics, band colours, plates and point sources, a star's spectral colour, spots and gravity darkening, OIFITS observables and image fits, body maps with their meaning, spectral-cube band depths and resolution evidence), shape-model (source records, GLB surfaces, shape lighting, ring leaves, surface rasters), cutaway and observed-surfaces contracts | Node only |
 
 Every entry validates what it reads and fails with a `TypeError` or `RangeError` naming the rule, such as
 `Invalid retained render-element profile.` A replay that would change an accepted bake fails instead of writing it,
@@ -72,7 +75,8 @@ packages/bake/
 │                  the runtime-source reader, presentation passes, prepared delivery, source records and the object
 │                  runtime contract: one entry each
 ├── cli/           command entries (`node packages/bake/cli/<command>.mts`); nothing imports them
-├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, layers/<kind>/: the shared object libraries, one entry each
+├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, charts/, content/, surface-features/, layers/<kind>/:
+│                  the shared object libraries, one entry each
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -93,7 +97,7 @@ sources tests are `node --test` suites in `tests/prepared-presentation/`, `tests
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,
 shell, sky, density-volume, image-layer, catalogue and world-context bakes, which read restored sources.
-The object libraries' tests stay beside the pipelines in `tools/objects/` (`node --test`), since they read body sources, kernel
+The object libraries' tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
 banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.

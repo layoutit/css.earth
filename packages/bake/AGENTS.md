@@ -95,6 +95,18 @@ its validators accept); the renderer never imports the bake.
     left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
     directory is found on first use; the matcher that binds a manifest's recorded generator name to today's code; and the
     idle-timeout stream relay pinned downloads go through.
+  - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,
+    reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style. It imports
+    no topic. The recipe dispatcher, spectrum reader and compact spectrum stay in
+    `tools/objects/charts/`: `site/prepare-body-overview.mts` uses them, and the runtime may not import the bake.
+  - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
+    payload), the shared lens vocabulary, lens steps and prepared legends, and each lens control's billboard colour. It
+    imports no topic. The content preparer that reads factsheets and writes the payload stays in `tools/objects/content/`.
+  - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
+    vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
+    fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
+    commands). It imports `objects/geometry`, `objects/raster` and `objects/layers/terrestrial`; attaching the banks to a
+    globe stays in `tools/objects/surface-features/`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
@@ -107,8 +119,9 @@ its validators accept); the renderer never imports the bake.
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
     `surface-observations/`; the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
-  Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
-  oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
+  Their tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` once the
+  pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the
+  repository's test helpers; they import the entries. `pnpm test:bake-objects`
   (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
