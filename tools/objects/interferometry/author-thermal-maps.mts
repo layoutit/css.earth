@@ -85,7 +85,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         const rmsKelvin = requireFiniteNumber(stats.rmsJyPerBeam, 'rms') / requireFiniteNumber(stats.peakJyPerBeam, 'peak') * requireFiniteNumber(temperature.peakKelvin, 'peakKelvin');
         bytes = bodyMapFits({ width: cut.size, height: cut.size } as BodyMap, { TELESCOP: 'ALMA', OBJECT: String(header.OBJECT), SESSION: sessionId, 'DATE-OBS': String(header['DATE-OBS']), 'MJD-MID': String(requireFiniteNumber(geometry.mjd, 'geometry.mjd')),
           PIXSCALE: String(arcsecPerPixel), FREQHZ: String(requireFiniteNumber(final.frequencyHz, 'frequencyHz')), BMAJMAS: String(requireFiniteNumber(beam.majorMas, 'beam')), BMINMAS: String(requireFiniteNumber(beam.minorMas, 'beam')), BPADEG: String(requireFiniteNumber(beam.angleDegrees, 'beam')),
-          RMSK: String(rmsKelvin), FLUXSCAL: String(requireFiniteNumber(requireRecord(receipt.fluxScale, 'fluxScale').factor, 'flux scale')), ORIGIN: 'cssEarth tools/objects/interferometry/alma-disc-selfcal.mts' }, [{ name: 'BRIGHTNESS TEMPERATURE', units: 'K', values: cut.values }]);
+          RMSK: String(rmsKelvin), FLUXSCAL: String(requireFiniteNumber(requireRecord(receipt.fluxScale, 'fluxScale').factor, 'flux scale')), ORIGIN: 'cssEarth packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts' }, [{ name: 'BRIGHTNESS TEMPERATURE', units: 'K', values: cut.values }]);
         written.set(cutoutPath, bytes);
       }
       if (!bytes) throw new Error(`${id} ${mapId}: no cutout for ${sessionId}.`);
