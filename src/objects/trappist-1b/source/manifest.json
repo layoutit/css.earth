@@ -161,7 +161,7 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/joint-emission.mts with packages/telescope-cli/src/archives/jwst/programs/trappist-1b-joint from the ten visits reduced by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with the trappist-1b-miri-3077, trappist-1b-miri-1177-007 to -011 and trappist-1c-miri-2304-001 to -004 programs (raw MIRI/F1500W segments from MAST, CRDS context jwst_1535.pmap). The run of 2026-09-18 wrote this file byte for byte.",
+      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/joint-emission.mts with tools/objects/jwst/programs/trappist-1b-joint from the ten visits reduced by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with the trappist-1b-miri-3077, trappist-1b-miri-1177-007 to -011 and trappist-1c-miri-2304-001 to -004 programs (raw MIRI/F1500W segments from MAST, CRDS context jwst_1535.pmap). The run of 2026-09-18 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "consumers": [
         "trappist-1b-miri-map"

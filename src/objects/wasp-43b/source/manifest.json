@@ -50,7 +50,7 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with packages/telescope-cli/src/archives/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-white.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
+      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-white.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "consumers": [
         "wasp-43b-miri-maps"
@@ -73,7 +73,7 @@
       "licenseEvidence": [
         "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
       ],
-      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with packages/telescope-cli/src/archives/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-stellar-counts.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
+      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-stellar-counts.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
       "redistribution": "Public JWST data, reduced here.",
       "consumers": [
         "wasp-43b-miri-maps"
@@ -98,7 +98,7 @@
         "https://zenodo.org/records/10525170",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with packages/telescope-cli/src/archives/jwst/programs/wasp-43b-miri-1366 as light-curves/author-white.csv: the deposit's eureka_v1.h5 white light exported in the same columns as this package's own curves (flux and error divided by the median). The run of 2026-09-17 wrote this file byte for byte. This is the light curve Hammond et al. (2024) mapped.",
+      "acquisition": "Written by packages/telescope-cli/src/archives/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/author-white.csv: the deposit's eureka_v1.h5 white light exported in the same columns as this package's own curves (flux and error divided by the median). The run of 2026-09-17 wrote this file byte for byte. This is the light curve Hammond et al. (2024) mapped.",
       "redistribution": "CC BY 4.0 with attribution.",
       "consumers": [
         "reconstruction-check"
