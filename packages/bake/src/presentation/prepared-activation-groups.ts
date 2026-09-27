@@ -1,7 +1,7 @@
 import type { PreparedTree, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 
 export type ActivationDefinition = {
-  tree: Pick<PreparedTree, 'camera' | 'scene'> & { nodes: readonly Pick<PreparedTree['nodes'][number], 'parent'>[] };
+  tree: Pick<PreparedTree, 'camera' | 'scene' | 'textureBindings'> & { nodes: readonly Pick<PreparedTree['nodes'][number], 'parent'>[] };
   variants: readonly Pick<PreparedVariant, 'writes'>[];
 };
 
@@ -23,6 +23,10 @@ export function prepareActivationGroups(definition: ActivationDefinition) {
   // actual retained parent so interleaved face records do not become hundreds
   // of one- or two-leaf activation frames. Sibling order is unchanged.
   const groups: number[][] = [];
-  for (const leaves of siblings.values()) for (let start = 0; start < leaves.length; start += 64) groups.push(leaves.slice(start, start + 64));
+  // Texture activation never edits the tree. Small sibling runs can share a
+  // frame; retaining one frame per parent would turn Earth's 966 image leaves
+  // into hundreds of mostly empty frames. Keep the same prepared leaf order.
+  const runs = definition.tree.textureBindings?.length ? [[...siblings.values()].flat()] : [...siblings.values()];
+  for (const leaves of runs) for (let start = 0; start < leaves.length; start += 64) groups.push(leaves.slice(start, start + 64));
   return groups;
 }

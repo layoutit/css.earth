@@ -22,3 +22,15 @@ test('interleaved prepared references form bounded sibling batches, not one fram
   assert.deepEqual(groups[0], Array.from({ length: 64 }, (_, i) => 4 + 2 * i));
   assert.deepEqual(groups[1], Array.from({ length: 64 }, (_, i) => 5 + 2 * i));
 });
+
+test('texture activation packs small parent runs without changing their prepared order', () => {
+  const definition: ActivationDefinition = { tree: { camera: 0, scene: 1,
+    nodes: [{ parent: -1 }, { parent: 0 }, ...Array.from({ length: 100 }, () => ({ parent: 1 })),
+      ...Array.from({ length: 200 }, (_, i) => ({ parent: 2 + i % 100 }))] }, variants: [] };
+  const original = prepareActivationGroups(definition);
+  definition.tree.textureBindings = [{ target: 1, name: '--image', leaves: original.flat() }];
+  const packed = prepareActivationGroups(definition);
+  assert.equal(original.length, 100);
+  assert.deepEqual(packed.map(group => group.length), [64, 64, 64, 8]);
+  assert.deepEqual(packed.flat(), original.flat());
+});

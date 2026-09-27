@@ -1,3 +1,4 @@
+import { prepareTextureBindings } from './prepared-texture-bindings.mts';
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.mts';
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '@cssearth/bake/raster';
 import { isRecord } from '@cssearth/core';
@@ -384,7 +385,8 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }
     if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
     onDepthResult?.({ id: source.id, source, compiled, surface, reason });
-    const activated = { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
+    const textured = { ...compiled, tree: { ...compiled.tree, textureBindings: await prepareTextureBindings(page, compiled) } };
+    const activated = { ...textured, tree: { ...textured.tree, activationGroups: prepareActivationGroups(textured) } };
     return withPreparedInteriorFill(activated, interior, assetRoot, gapExclusion);
   } finally { await page.close(); if (!suppliedBrowser) await browser.close(); }
 }

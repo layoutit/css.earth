@@ -41,6 +41,8 @@ export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */
   activationGroups?: readonly (readonly number[])[];
+  /** Offline CSS consumers of each selection-owned image binding. */
+  textureBindings?: readonly { target: number; name: string; leaves: readonly number[] }[];
   nodes: readonly { tag: string; parent: number; className: string | null; style: string; properties: readonly number[]; attributes: Readonly<Record<string, string>> }[];
   properties: readonly { name: string; value: string; custom: boolean }[]; camera: number; scene: number; stageClasses: readonly string[];
 }
@@ -77,6 +79,7 @@ export interface PreparedFramePublication { selection: ObjectSelection; view: Pr
 import { preparedScenePitch } from "@cssearth/engine";
 import { createPreparedMaterialPublisher } from "./prepared-material.js";
 import { prepareConnectedActivation } from './prepared-activation.js';
+import { prepareTextureActivation } from './prepared-texture-activation.js';
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 
 const matches = (variant: PreparedVariant, selection: ObjectSelection) => Object.entries(variant.when).every(([name, value]) => selection[name] === value);
@@ -178,7 +181,14 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
   if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
-  const activate = prepareConnectedActivation(preparedTree && progressiveActivation
+  const textureBindings = new Map((definition.tree.textureBindings ?? []).map(binding =>
+    [`${binding.target}:${binding.name}`, binding.leaves.map(index => nodes[index])] as const));
+  const surfaceScenes = [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])];
+  const textureLeaves = new Set([...textureBindings.values()].flat());
+  const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && definition.tree.textureBindings?.length
+    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])
+      .filter(node => textureLeaves.has(node) && surfaceScenes.some(scene => scene.contains(node)))) : [], context.own);
+  const activate = definition.tree.textureBindings?.length ? textureActivation.activate : prepareConnectedActivation(preparedTree && progressiveActivation
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own,
     // Empty structural anchors can be leaves after preparation partitions the
     // surface. Hit testing and feature binding need their ancestry immediately.
@@ -213,6 +223,13 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
+  function publishStyle(index: number, name: string, value: string) {
+    const leaves = textureBindings.get(`${index}:${name}`);
+    if (leaves) {
+      for (const leaf of leaves) textureActivation.write(leaf, value);
+      styleWrites += leaves.length;
+    } else { writeStyle(target(index), name, value); styleWrites++; }
+  }
   return Object.freeze({ cameraElement, sceneElement, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -244,7 +261,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         const element = target(binding.target);
         if (binding.kind === "attribute") writeAttribute(element, binding.name, binding.value);
         else if (binding.kind === "class") element.classList.toggle(binding.name, binding.value);
-        else { writeStyle(element, binding.name, binding.value); styleWrites++; }
+        else publishStyle(binding.target, binding.name, binding.value);
       };
       // Alternative radial meshes address different atlas layouts. Hide the
       // outgoing profile before changing their shared image, then reveal the
@@ -253,7 +270,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // rendering one mesh with another mesh's texel addresses.
       for (const binding of hiddenProfiles) publish(binding);
       for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
-        writeStyle(target(binding.target), binding.name, "none"); styleWrites++;
+        publishStyle(binding.target, binding.name, "none");
       }
       for (const binding of contentWrites) publish(binding);
       for (const binding of shownProfiles) publish(binding);
