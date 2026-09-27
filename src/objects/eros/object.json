@@ -28,12 +28,37 @@
           "projection": "equirectangular",
           "lenses": [
             {
+              "id": "blue",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "normal",
               "source": "content",
               "material": "lighting"
             },
             {
+              "id": "near-infrared-760",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "near-infrared-900",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "infrared",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "near-infrared-1000",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "near-infrared-1050",
               "source": "content",
               "material": "lighting"
             },

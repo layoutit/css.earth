@@ -1,0 +1,40 @@
+{
+  "id": "source-eros-eros-near-infrared-1050",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eros · NEAR MSI 1050 nm reflectance",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter7::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eros/source/manifest.json",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JHUAPL/NEAR MSI; D. R. Golish and colleagues; USGS Astrogeology",
+      "scope": "The eros near infrared 1050 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

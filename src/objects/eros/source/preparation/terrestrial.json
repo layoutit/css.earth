@@ -13,6 +13,27 @@
     "reportMissingPixels": true,
     "observations": [
       {
+        "id": "blue",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
         "id": "normal",
         "validity": {
           "kind": "geotiff-float-monochrome",
@@ -34,7 +55,91 @@
         }
       },
       {
+        "id": "near-infrared-760",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
+        "id": "near-infrared-900",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
         "id": "infrared",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
+        "id": "near-infrared-1000",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      },
+      {
+        "id": "near-infrared-1050",
         "validity": {
           "kind": "geotiff-float-monochrome",
           "noData": -3.4028226550889045e+38,

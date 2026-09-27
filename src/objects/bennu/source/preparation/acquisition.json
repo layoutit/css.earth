@@ -66,6 +66,126 @@
       ],
       "path": "features/BENNU_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.tif",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.lbl",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.History.IsisCube",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.History.IsisCube"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.tif",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.lbl",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.History.IsisCube",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.History.IsisCube"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.tif",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.lbl",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.History.IsisCube",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.History.IsisCube"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.tif",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.lbl",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.lbl"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
+      "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.History.IsisCube",
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.History.IsisCube"
     }
   ]
 }

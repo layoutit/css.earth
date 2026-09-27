@@ -3,9 +3,33 @@
   "assets": [
     {
       "location": "public",
-      "filename": "eros-arrival.webp",
-      "bytes": 78312,
-      "sha256": "85468338d9fce816fbeb9b73b6324797efb48fe1b9483876ccf2312e9a4bb78f"
+      "filename": "eros-blue-shadow-alpha@2x.webp",
+      "bytes": 654640,
+      "sha256": "ff8dbee0d55bd5ba368b5083bd08479e3832808071e07e2ecbaee23878d86154"
+    },
+    {
+      "location": "public",
+      "filename": "eros-blue-shadow@2x.webp",
+      "bytes": 393458,
+      "sha256": "427ef7958bae81b0f6663b066144c4b17f63ae35edc9ce6a319055d84ea102de"
+    },
+    {
+      "location": "public",
+      "filename": "eros-blue-surface-alpha@2x.webp",
+      "bytes": 1044380,
+      "sha256": "b26fed037fa4aabeea1b7a421c849b8af986c6199c32cb9cba3d74bb1f17e9c9"
+    },
+    {
+      "location": "public",
+      "filename": "eros-blue-surface@2x.webp",
+      "bytes": 1129280,
+      "sha256": "041120f51cf6cd3ea4a2590f4cf4a9be262f51f8277b7feada2fa637e3b56b9a"
+    },
+    {
+      "location": "public",
+      "filename": "eros-blue-thumbnail.webp",
+      "bytes": 3144,
+      "sha256": "4b1b0d0a0e7becb9a83c8c0b5c01838ad907e5866ed2f50e7d63228a85a949ac"
     },
     {
       "location": "public",
@@ -81,6 +105,126 @@
     },
     {
       "location": "public",
+      "filename": "eros-near-infrared-1000-shadow-alpha@2x.webp",
+      "bytes": 791124,
+      "sha256": "89fea7e5d787ce598839dacd2c2c2ac1d2fbb5a7dbf4577d9f42b30a7dd8c03c"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1000-shadow@2x.webp",
+      "bytes": 677454,
+      "sha256": "6ec575e50418dfcee54cc755c66968e21a1a8c51d3cf59df0ac5db57417ac22f"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1000-surface-alpha@2x.webp",
+      "bytes": 1572258,
+      "sha256": "c3263c8774531eff63ade082d34c4ad7f4d364b983691dd1e73007b4dda0ede9"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1000-surface@2x.webp",
+      "bytes": 2122750,
+      "sha256": "b0d2cdb586d358d30a3f069759743d4d535b284695740881b2b47a0e67abfbec"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1000-thumbnail.webp",
+      "bytes": 3388,
+      "sha256": "0e1498f965f0d048a8aa46c237ade3205090c1de059165d6e8a557f12a94a187"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1050-shadow-alpha@2x.webp",
+      "bytes": 724854,
+      "sha256": "e49eec6389753c85e51a3b94035ab90846a0925a847ede4a7f88c352097a775a"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1050-shadow@2x.webp",
+      "bytes": 517046,
+      "sha256": "b5b0806e487d04c50e7d6785367f5d020f7b9a26e729153f4a53025fb401bf0a"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1050-surface-alpha@2x.webp",
+      "bytes": 1208860,
+      "sha256": "9c8938c284fc25e8ac241386a075a570f0ca253c2067681d0960bc99c6e9811c"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1050-surface@2x.webp",
+      "bytes": 1356614,
+      "sha256": "a7b32e7cf24728a49b86e8d333a06b21a3c06e374babf2ac1a515aed8892d719"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-1050-thumbnail.webp",
+      "bytes": 3580,
+      "sha256": "277a0954402a92e1e333476781829c343c988f271607c7e94a818add96e8b80e"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-760-shadow-alpha@2x.webp",
+      "bytes": 896686,
+      "sha256": "9bf204b8e2501d2d3d439a3283fd0852d221ba1be650bc44661d25860a9007c2"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-760-shadow@2x.webp",
+      "bytes": 893590,
+      "sha256": "6dd3d67a737b54de58f4088a07487c10cdd0ec3988248b0d43c0466ab32ae5a7"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-760-surface-alpha@2x.webp",
+      "bytes": 1797504,
+      "sha256": "885ed9d156e3942650a3932f58a38a7be542759d497826c200165834e6b66bf7"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-760-surface@2x.webp",
+      "bytes": 2554606,
+      "sha256": "fb36f8e732ac3089861c3bb65aa6d1501f1df22cbc46f75841a24d5be2220774"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-760-thumbnail.webp",
+      "bytes": 3582,
+      "sha256": "e592d35181340d53c3547959ffb1264d11cdca3aeed704cee1c412dc79ca0239"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-900-shadow-alpha@2x.webp",
+      "bytes": 819562,
+      "sha256": "717eea97b5e5d07654eef6b79af1d24a5c416050d0b6c32e1b9f4ac92014439c"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-900-shadow@2x.webp",
+      "bytes": 720652,
+      "sha256": "733b9d2e75f993beef43f16abfb93a0de5383ca7b04bd902ba7790c5f3d9d950"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-900-surface-alpha@2x.webp",
+      "bytes": 1523028,
+      "sha256": "590cc51ba415150f879b2dc65ec8947e0d83f4942ec983fc1f2e74c205b4b11a"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-900-surface@2x.webp",
+      "bytes": 2015854,
+      "sha256": "72ee7849d04221ab74b2d49fe6093ae2240ed9ea688e31e266536db985d230a2"
+    },
+    {
+      "location": "public",
+      "filename": "eros-near-infrared-900-thumbnail.webp",
+      "bytes": 3470,
+      "sha256": "117313f83911865e8d67d3db61cfb2667861643a2b16ac0e4108500f1e6c1555"
+    },
+    {
+      "location": "public",
       "filename": "eros-normal-shadow-alpha@2x.webp",
       "bytes": 717422,
       "sha256": "8a845c94db8b541ec10dc741545d928f4d5a23dd6c5c5fb584439c990a31b2af"
@@ -118,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 703,
-      "sha256": "555a8445a3e291b6cc5c2b5851460167e6cac25a30001156fd7c74364906dc53"
+      "bytes": 2028,
+      "sha256": "74aeb313b0e306fb0719a17af1d871fda68fcf4bacba73f5cc40b56c5081017f"
     },
     {
       "location": "prepared",
@@ -130,8 +274,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 932,
-      "sha256": "17425498d66721ce50a4cfa0e8ce01d5d58b2e12c901a07939d6f09f511c1bce"
+      "bytes": 2046,
+      "sha256": "5a647a95f77d299be29620e69e09f8b00132fde7407d7b028d305e0e8da8a7c0"
     },
     {
       "location": "prepared",
@@ -142,50 +286,80 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 1773,
-      "sha256": "901f1677c71eeb3ab47d3b2d91e2d2a8bf3b847bdc0207821e424882ec09126b"
+      "bytes": 4737,
+      "sha256": "0c52c48de2cb3db938eee04eaaeb243e78a799e52b0a25430cb292a84d3d30b5"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 5484,
-      "sha256": "c4e22d4f46edf893a9000b0f5ba2dc82ef04350565bd4ef5699837d391e42ea1"
+      "bytes": 15004,
+      "sha256": "50fc43d9859375c2940cfd7aa449d7d962baec7b703c6639740c19593cca98f9"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 236,
-      "sha256": "a656f74d50a6852b0554bf858bb6a97c48b3894240c7968b8b9d85c36b772ef3"
+      "bytes": 679,
+      "sha256": "e3d1f1baa060b6383b4bfd9fd923f060178501d4728b357d152729c5562a9d00"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/blue.webp",
+      "bytes": 8540,
+      "sha256": "6a6ddd1e96c2b52a048ae63ac4a09202396fb5054990b868e9413fe7ec8d8610"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4790,
-      "sha256": "eb510993b8761e4f56758f9042b1b91b31b39633ce006c649e81475c30ddd814"
+      "bytes": 4888,
+      "sha256": "f20a31b44f1aada1bc6403901da795f2a9c758d1503e321762b4ea8cd068522d"
     },
     {
       "location": "prepared",
       "filename": "minimaps/infrared.webp",
-      "bytes": 15222,
-      "sha256": "2c7fdbc6294559a9f1fe9a34029d2288b38c4812c7d222835de36a56b0fdbc8c"
+      "bytes": 14892,
+      "sha256": "c37cfbb4334afe4ed12e98b420ccc8c94338714913837760a2bd5826a96aaf42"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/near-infrared-1000.webp",
+      "bytes": 13668,
+      "sha256": "c4fc5947d39e3ca957d66cd0550d00c54d0f99056e4e744de4ebcd015b952207"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/near-infrared-1050.webp",
+      "bytes": 13268,
+      "sha256": "d9c55d0713270262ae8826486726663eed78268db42ece4cb60b0099a8879d80"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/near-infrared-760.webp",
+      "bytes": 17818,
+      "sha256": "2fecb1f939252977d8fd41d1fc662bbf74623a0595115eb632dc51ec5c48cb5a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/near-infrared-900.webp",
+      "bytes": 16164,
+      "sha256": "4855f5f56d97a7a0001440ece9a0f9533d522edd028e90396f8e0bcbc681a805"
     },
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 11674,
-      "sha256": "4cc33f6b093cea872928b0ee0486245ad9fa4a93eae97ad5bff34b9363d8fb76"
+      "bytes": 11010,
+      "sha256": "3888f2fe1e86d4038b7960f3b69d4b814e3144178b69570caa6373c09e025d42"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 613478,
-      "sha256": "70ba0a0531af0eda94ca0064c59364453ab4e4252afc05fb811aa45384c66b9f"
+      "bytes": 623950,
+      "sha256": "9f400bbc531f75edaf306c29defb8c78e7343f4994550759382b52c06f3f2c7f"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 591664,
-      "sha256": "eabe046c9d3e40768d94d206b699fe842d6ab393c995f997c8bf3717a02bc036"
+      "bytes": 591657,
+      "sha256": "9e2f1c4154aeb8363883ad0118c2c95bd189d7dfbc4f064a6fe70c04f8c9d602"
     },
     {
       "location": "prepared",
@@ -202,14 +376,14 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 5486,
-      "sha256": "88b9fee3554f165d8ce228b025dcbf8c29e819adb0f9cb8b27bd02052cc5b81d"
+      "bytes": 15006,
+      "sha256": "875c1bc25bc6cc77cbf95b9e48c2be062307587f1269c7e87f379250c7841ee6"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1824,
-      "sha256": "5a8f056e9fe62df121c87440312d64e94b5f299883c7b71bcdbbf3fce2399a13"
+      "bytes": 2825,
+      "sha256": "06a2305480fc1119c4e6f3525e14e9351784895e1f720ec1603dd5ed0bc1c2a3"
     },
     {
       "location": "prepared",

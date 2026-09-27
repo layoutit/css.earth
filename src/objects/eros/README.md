@@ -4,9 +4,15 @@
 
 | View or property | Source and interpretation |
 | --- | --- |
-| Visible and near-infrared albedo | [USGS/Golish 2023 deblurred MSI release](https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics), 550 and 950 nm maps. Dimensionless I/F normalized to zero phase/incidence/emission, both displayed linearly over 0.05–0.40; not a quantitative mineral indicator. |
+| Visible and near-infrared albedo | [USGS/Golish 2023 deblurred MSI release](https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics), all seven filters: 450, 550, 760, 900, 950, 1000 and 1050 nm. Dimensionless I/F normalized to zero phase/incidence/emission, both displayed linearly over 0.05–0.40; not a quantitative mineral indicator. |
 | Shape and Elevation | [Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab), 196,608 released facets. Elevation is radius minus 8.42 km, not gravitational height. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/EROS/target) Eros centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
+
+## Reflected light
+
+One wavelength group contains all seven NEAR MSI maps, ordered from 450 to 1050 nm. The arrows select blue, green and five near-infrared bands. Darker areas reflect less light in the selected band. The existing 550 nm view remains the default, and the previous `normal` and `infrared` links still select 550 and 950 nm.
+
+Every band uses the same linear 0.05–0.40 I/F display range. The publisher corrected the data to zero incidence, emission and phase, and applied the 2023 deblurring method. Source gaps remain gray. A few source values lie well beyond the display range; they clip to black or white without being reclassified as missing. Residual shading and original mapping uncertainty remain.
 
 ## Evidence
 
@@ -29,14 +35,14 @@ lens. SBMT's archive uses the public access pair published by its client
 (`public` / `wide-open`); the acquisition plan records that public authorization
 header and verifies each downloaded file's bytes.
 
-The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+The photographic atlas samples each original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
-| View | Original grid | Both lighting images, before → current |
-| --- | --- | --- |
-| normal | 10682 × 5341 | 3.74 → 5.40 MB |
-| infrared | 10682 × 5341 | 5.96 → 7.82 MB |
+| Existing view | Original grid |
+| --- | --- |
+| normal | 10682 × 5341 |
+| infrared | 10682 × 5341 |
 
-Each atlas remains 2048 × 6400 pixels, with 796 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/eros/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Current atlases are 3503 × 3720 pixels, with 796 retained faces. The [delivery record](evidence/spectral-bands/delivery-and-browser.json) records each encoded file size and decoded RGBA estimate. Existing mesh leaves and full-size surface atlases match the main revision named there. Sampling details are in `prepared/surfaces.json`; source resolution, gaps and registration limits still apply.
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 52.033 / 132.260 / 275.739 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
@@ -44,7 +50,19 @@ The earlier source notes report Headless Chrome 152 checks of the then-selected 
 
 [Source anchors](../../../tests/objects/unit/anchors/asteroid-calibration.json) checked by the shared [calibration runner](../../../tests/objects/unit/asteroid-calibration.test.mts).
 
+The [native-value check](evidence/spectral-bands/native-values.json) compares all seven production samplers with independent float32 byte reads and coordinates from the original ISIS labels, including fractional footprints, source extrema and gaps. It verifies decoding and display transfer; it does not revalidate the mission’s calibration or physical registration.
+
+The native check passed 1,701 source probes. At most 0.13% of valid native samples in any band lie outside the common display range. The [restoration check](evidence/spectral-bands/source-restoration.json) extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
+
+The [delivery and browser record](evidence/spectral-bands/delivery-and-browser.json) identifies the tested inventories and the 27 September 2026 run. All seven wavelength controls, keyboard stepping and mobile layout passed in Headless Chrome; each switch kept one mounted scene. Eros’s existing default and infrared links were also checked. Every body asset installed from R2 into an empty destination with matching size and hash. The body install is 37.80 MB; this is not measured cold page transfer. Existing full-size atlases and mesh leaves are unchanged.
+
+Inspected evidence: [native map](evidence/spectral-bands/blue-native-map.webp), [overview](evidence/spectral-bands/overview.webp), [lighting](evidence/spectral-bands/lighting.webp), [close view](evidence/spectral-bands/close.webp), [phone controls](evidence/spectral-bands/phone.webp). The flat native map and rendered body are different projections, so no pixel-parity claim is made.
+
 ## Known problems
+
+Shadows on uses the package’s existing diffuse display lighting. It does not reconstruct the mission’s photometric model. Compare band brightness with Shadows off.
+
+The supplied 1000 nm PDS4 XML repeats the 550 nm product’s logical identifier. Its filename and the ISIS label’s FilterNumber 6 / Center 1000 nm identify the selected band. We preserve the original labels and identify this source by its archive member, rather than adopt the conflicting identifier.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Eros (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
@@ -93,7 +111,7 @@ The flat longitude/latitude preview cannot represent more than one source surfac
 
 **Qualification limits**
 
-**Initial survey, before the 950 nm addition:** Included: the 2023 USGS/Golish deblurred, zero-phase 550 nm albedo mosaic and the matching Gaskell Eros shape family. The 128q shape has 196,608 released facets before simplification. The archive also supplies six other spectral filters and a sinusoidal projection; these are retained in the archive but excluded as redundant or requiring a separately justified spectral composite. Older NEAR MSI basemaps and NLR plate models were considered; the newer corrected mosaic and its registered shape take precedence.
+The initial survey selected 550 nm, and a later addition selected 950 nm. This update includes the five remaining filters as comparable monochrome views. All seven use the archive’s Simple Cylindrical GeoTIFFs and the existing Gaskell Eros shape. The alternative sinusoidal products remain unused. The 128q shape has 196,608 released facets before simplification. Older basemaps and NLR plate models remain outside this selection.
 
 - [Mapping release](https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics)
 - [Shape](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab)
@@ -101,13 +119,11 @@ The flat longitude/latitude preview cannot represent more than one source surfac
 - Pole and spin: source/reference/eros_alex.tpc.txt
 
 The [USGS 2023 deblurred MSI release](https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics)
-provides seven filters in two map projections. This addition uses the original
-filter 4 **950 nm** equirectangular GeoTIFF, with its PDS4 and ISIS labels.
-The 450, 760, 900, 1000 and 1050 nm maps remain outside this selection;
-no custom ratio or color composite is synthesized. The 950 nm filter adds a
-complementary near-infrared observation to the existing 550 nm albedo.
+provides seven filters in two map projections. All seven original equirectangular
+GeoTIFFs are selected, with their PDS4 and ISIS labels. No custom ratio or
+color composite is synthesized.
 
-The two selected maps share 10,682 × 5,341 samples, 10 m pixels, a 17 km
+The seven selected maps share 10,682 × 5,341 samples, 10 m pixels, a 17 km
 cartographic radius and origin (−53,410, 26,710) m. The release registers them
 to the Gaskell control network and normalizes to phase/incidence/emission zero
 with a model for each filter. These are dimensionless I/F samples, displayed

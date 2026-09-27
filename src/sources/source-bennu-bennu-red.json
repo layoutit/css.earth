@@ -1,0 +1,35 @@
+{
+  "id": "source-bennu-bennu-red",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Bennu · OSIRIS-REx MapCam 698 nm reflectance",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "scope": "The bennu red input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public mission scientific data; cite the original authors and retain the archive notices.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -80,6 +80,78 @@
         "notes": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles."
       },
       {
+        "id": "blue",
+        "thumbnail": "/scenes/bennu/bennu-blue-thumbnail.webp",
+        "surface": "bennu-blue-surface@2x.webp",
+        "poles": "bennu-blue-surface@2x.webp",
+        "source": {
+          "id": "bennu-blue",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Blue · 473 nm"
+        },
+        "notes": "MapCam 473 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+        "noData": true
+      },
+      {
+        "id": "green",
+        "thumbnail": "/scenes/bennu/bennu-green-thumbnail.webp",
+        "surface": "bennu-green-surface@2x.webp",
+        "poles": "bennu-green-surface@2x.webp",
+        "source": {
+          "id": "bennu-green",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Green · 550 nm"
+        },
+        "notes": "MapCam 550 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+        "noData": true
+      },
+      {
+        "id": "red",
+        "thumbnail": "/scenes/bennu/bennu-red-thumbnail.webp",
+        "surface": "bennu-red-surface@2x.webp",
+        "poles": "bennu-red-surface@2x.webp",
+        "source": {
+          "id": "bennu-red",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Red · 698 nm"
+        },
+        "notes": "MapCam 698 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+        "noData": true
+      },
+      {
+        "id": "near-infrared",
+        "thumbnail": "/scenes/bennu/bennu-near-infrared-thumbnail.webp",
+        "surface": "bennu-near-infrared-surface@2x.webp",
+        "poles": "bennu-near-infrared-surface@2x.webp",
+        "source": {
+          "id": "bennu-near-infrared",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "label": "Reflected light",
+        "step": {
+          "group": "wavelengths",
+          "label": "Near infrared · 847 nm"
+        },
+        "notes": "MapCam 847 nm normal reflectance from the USGS 25 cm v2 release, corrected with the published ROLO model. Grayscale maps 0–0.08 I/F to black–white for all four bands. Valid negative values remain data and clip to black; values above 0.08 clip to white. Gray grid marks native missing samples, including the poles. The 250 m map reference sphere does not rescale the existing 241 m OLA v20 display shape; individual boulders may not align exactly.",
+        "noData": true
+      },
+      {
         "id": "spectral",
         "label": "Spectral color",
         "thumbnail": "/scenes/bennu/bennu-spectral-thumbnail.webp",
