@@ -16,7 +16,7 @@ HAT-P-11 b transits HAT-P-11 every 4.89 days and is 0.45 Jupiter radii across. O
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hat-p-11b.json).
 
-- The Illustration lens was added by [`illustration-lens.mts`](../../../tools/objects/illustration-lens.mts) and baked with the package on 2026-09-24. In headless Chrome the lens opens on the NASA art with no console errors ([the four new illustrated planets](../../../docs/images/illustrated-exoplanets-new-systems.webp)).
+- The Illustration lens was added by [`illustration-lens.mts`](../../../packages/bake/cli/illustration-lens.mts) and baked with the package on 2026-09-24. In headless Chrome the lens opens on the NASA art with no console errors ([the four new illustrated planets](../../../docs/images/illustrated-exoplanets-new-systems.webp)).
 
 ## Known problems
 

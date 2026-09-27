@@ -54,7 +54,7 @@
     "dev:prepare": "node tools/ci/check-stale-builds.mts --run && pnpm setup:asset-data && pnpm prepare:catalog && pnpm prepare:titles && node tools/prepare/cli/prepare-solar-geometry.mts && node tools/prepare/cli/prepare-navigation.mts --catalog-only && pnpm prepare:world-context && pnpm prepare:shell-assets && pnpm prepare:object-json && pnpm prepare:lens-billboards && pnpm prepare:search-thumbnails && pnpm prepare:environment-images && pnpm prepare:galaxy-field:data && node tools/prepare/cli/prepare-facilities.mts --catalog-only",
     "prepare:catalog": "node tools/prepare/cli/prepare-catalog.mts",
     "prepare:dataset-sprites": "node tools/prepare/cli/prepare-dataset-sprites.mts",
-    "prepare:environment-images": "node tools/objects/dist/restore-environment-images.js",
+    "prepare:environment-images": "node packages/bake/cli/restore-environment-images.mts",
     "prepare:galaxy-field": "pnpm prepare:galaxy-field:data && node tools/prepare/cli/prepare-provenance.mts",
     "prepare:galaxy-field:data": "node tools/galaxy-field/acquire.mts && node tools/galaxy-field/prepare-points.mts",
     "prepare:arrival-billboards": "node tools/prepare/prepare-arrival-billboard.mts",

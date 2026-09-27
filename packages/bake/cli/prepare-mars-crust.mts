@@ -1,5 +1,5 @@
 /** Reorder the deposited Figure 2 node grid into the existing Tecplot map format; no inversion or new model.
- * node tools/objects/prepare-mars-crust.mts <Mars-thick-Khan2022-39-2900-2900.dat> <output.dat>
+ * node packages/bake/cli/prepare-mars-crust.mts <Mars-thick-Khan2022-39-2900-2900.dat> <output.dat>
  * Archive Readme.txt: 721 north-to-south rows, 1441 east-longitude columns, 0.25 degrees, kilometres. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

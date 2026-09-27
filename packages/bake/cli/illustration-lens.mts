@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Add NASA's artist's concept of a hosted planet as a second, non-default Illustration lens.
 //
-//   node tools/objects/illustration-lens.mts --object=trappist-1e --map=<local copy of TRAPPIST-1_e.jpg> --checked=<date> --commit=<sha>
-//   node tools/objects/illustration-lens.mts --object=wasp-12b --model=<local copy of the GLB> --origin=<GLB url> --landing=<resource page> ...
+//   node packages/bake/cli/illustration-lens.mts --object=trappist-1e --map=<local copy of TRAPPIST-1_e.jpg> --checked=<date> --commit=<sha>
+//   node packages/bake/cli/illustration-lens.mts --object=wasp-12b --model=<local copy of the GLB> --origin=<GLB url> --landing=<resource page> ...
 //
 // A map is the texture NASA's Eyes on Exoplanets app wraps around the planet (credited NASA/JPL-Caltech; NASA calls each planet's look
 // an artist's concept). A model is a NASA Science 3D model credited to NASA Visualization Technology Applications and Development
@@ -22,7 +22,7 @@ const VTAD = 'NASA Visualization Technology Applications and Development (VTAD)'
 const LENS = 'illustration';
 
 type Json = Record<string, any>;
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../..');
 const read = async (path: string): Promise<Json> => JSON.parse(await readFile(resolve(root, path), 'utf8')) as Json;
 const write = (path: string, value: unknown) => writeFile(resolve(root, path), `${JSON.stringify(value, null, 2)}\n`);
 

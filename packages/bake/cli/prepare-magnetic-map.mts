@@ -1,5 +1,5 @@
 /** Evaluate the published model with its upstream library, then write an existing scalar-map format.
- * node tools/objects/prepare-magnetic-map.mts <source/preparation/magnetic.json> --python=<interpreter>
+ * node packages/bake/cli/prepare-magnetic-map.mts <source/preparation/magnetic.json> --python=<interpreter>
  * The interpreter needs the versions in magnetic-toolchain.json. PSH is fetched unchanged into output/toolchains. */
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
@@ -8,7 +8,7 @@ import {requireRecord,requireString,requireFiniteNumber} from '@cssearth/core';
 import {sha256} from '@cssearth/core/node';
 import {toolchainPython} from '@cssearth/telescope/node';
 
-const root=resolve(import.meta.dirname,'../..');
+const root=resolve(import.meta.dirname,'../../..');
 const script=String.raw`
 import importlib.metadata, importlib.util, json, sys
 import numpy as np
