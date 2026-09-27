@@ -137,20 +137,26 @@ export function restoreScript(options: {
         // inline commands later stages applied. A flag version would be restored by row, and rows differ between CASA versions.
         `flagdata(vis=${python(visibilities)}, mode='list', inpfile=${python(flags.commandFile)}, tbuff=[${flags.tbuff.join(', ')}], action='apply', flagbackup=False)`,
         ...(flags.inline.length ? [`flagdata(vis=${python(visibilities)}, mode='list', inpfile=${pythonList(flags.inline)}, action='apply', flagbackup=False)`] : []),
-        // Checked against the pipeline's own per-antenna count before anything is calibrated: a replay that flags other data
-        // than the pipeline did stops here, not after an hour of applycal and an image that is only slightly worse.
+        // The pipeline's per-antenna count is the state after hif_applycal. It is checked twice. Before anything is calibrated,
+        // so a replay that flags other data than the pipeline did stops here, not after an hour of applycal; a pair the
+        // pipeline ended fully flagged is left to the second check, because applycal flags all of an antenna's data when every
+        // gain solution it would apply is flagged (DV22 in ALMA 2019.1.00696.S). After applycal, every pair, with no exemption.
         `expected = json.loads(${python(JSON.stringify(flags.expected))})`,
-        'report, worst = {}, (0.0, None)',
-        'for spw, antennas in expected.items():',
-        `    counts = flagdata(vis=${python(visibilities)}, mode='summary', field=${python(plan.target)}, spw=spw)['antenna']`,
-        '    for name, theirs in antennas.items():',
-        "        ours = counts[name]['flagged'] / counts[name]['total']",
-        '        report[spw + " " + name] = [round(ours, 6), round(theirs, 6)]',
-        "        if abs(ours - theirs) >= worst[0]: worst = (abs(ours - theirs), f'spw {spw} {name}: {100 * ours:.2f}% here, {100 * theirs:.2f}% in the pipeline')",
-        `open(${python(`${imageBase}.flags.json`)}, 'w').write(json.dumps(report, indent=1))`,
-        `if worst[0] > ${FLAG_TOLERANCE}: sys.exit("The replayed flags differ from the pipeline's count: " + worst[1])`,
-        "steps.append(f'flags replayed; largest per-antenna difference from the pipeline {100 * worst[0]:.2f} points')",
-      ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
+        'def compare(stage, exempt_full):',
+        '    report, worst = {}, (0.0, None)',
+        '    for spw, antennas in expected.items():',
+        `        counts = flagdata(vis=${python(visibilities)}, mode='summary', field=${python(plan.target)}, spw=spw)['antenna']`,
+        '        for name, theirs in antennas.items():',
+        "            ours = counts[name]['flagged'] / counts[name]['total']",
+        '            report[spw + " " + name] = [round(ours, 6), round(theirs, 6)]',
+        '            if exempt_full and theirs >= 0.999999: continue',
+        "            if abs(ours - theirs) >= worst[0]: worst = (abs(ours - theirs), f'spw {spw} {name}: {100 * ours:.2f}% here, {100 * theirs:.2f}% in the pipeline')",
+        `    open(${python(`${imageBase}.flags.`)} + stage + '.json', 'w').write(json.dumps(report, indent=1))`,
+        `    if worst[0] > ${FLAG_TOLERANCE}: sys.exit("The replayed flags differ from the pipeline's count " + stage + ": " + worst[1])`,
+        '    return worst[0]',
+        "steps.append(f'flags replayed; largest per-antenna difference from the pipeline before calibration {100 * compare(\"before-calibration\", True):.2f} points')",
+        ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
+        "steps.append(f'after calibration, largest per-antenna difference from the pipeline {100 * compare(\"after-calibration\", False):.2f} points')",
       "open(calibrated, 'w').close()"].map(line => `    ${line}`),
       // Every science channel, science target only, and the spectral windows keep their numbers: the self-calibration maps are
       // indexed by absolute window id, so renumbering them here would misapply the solutions without failing.

@@ -170,3 +170,16 @@ test('the executions of a delivery are imaged together, in the order its logged 
   const compiled = spawnSync('python3', ['-c', 'import ast, sys; ast.parse(sys.stdin.read())'], { input: script, encoding: 'utf8' });
   assert.equal(compiled.status, 0, compiled.stderr);
 });
+
+test('the flags are checked before calibration, sparing only pairs the pipeline ended fully flagged, and again after it with none spared', async () => {
+  // The pipeline's per-antenna count is taken after hif_applycal, which flags all of an antenna's data when every gain solution it
+  // would apply is flagged (DV22 in ALMA 2019.1.00696.S: 2.38% flagged before calibration, 100% after).
+  const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
+    flags, plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x' });
+  const before = script.indexOf('compare("before-calibration", True)'), after = script.indexOf('compare("after-calibration", False)');
+  const firstApplycal = script.indexOf("applycal(vis='x.ms'"), lastApplycal = script.lastIndexOf("applycal(vis='x.ms'");
+  assert.ok(before > 0 && before < firstApplycal, 'a replay that flags other data stops before an hour of applycal');
+  assert.ok(after > lastApplycal && after < script.indexOf("open(calibrated, 'w')"), 'the finished calibration is checked before it is marked done');
+  assert.ok(script.includes('if exempt_full and theirs >= 0.999999: continue'));
+  assert.ok(script.includes("'/work/x.flags.' + stage + '.json'"), 'both comparisons are kept beside the delivery');
+});
