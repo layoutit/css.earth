@@ -45,6 +45,22 @@ Safari still recalculates styles afterward; the incoming mesh's first paint and
 the total handoff stall remain. This change removes forced synchronous layout,
 not all arrival rendering work.
 
+The first document head installs the shared shell CSS and its object's CSS.
+Navigation fragments send only their object's authored CSS; shared marker styles
+live in the cached application stylesheet. Navigation installs missing object
+styles during content preparation and keeps them installed for the document's
+lifetime, including when a flight is cancelled. Existing styles reuse their DOM
+nodes. Arrival changes the stage's object identity without removing the previous
+object's rules or reinserting the destination's rules. The retained settings
+panel keeps controls by name, adds/removes only capabilities that change, and
+keeps its hidden native form and view-context inputs. Sources update in place.
+The [retention receipt](../evidence/ui/arrival-handoff-2026-09-27/retained-styles-receipt.json)
+records three runs per stylesheet variant: the median largest handoff restyle
+falls from 35.9 to 6.9 ms. Lutetia's navigation response sends 2,152 bytes of
+inline CSS instead of 39,026 (uncompressed). The final round trip adds one
+stylesheet and removes none; the main arrival Composite still costs 183 ms,
+including 72 ms of Paint.
+
 ## Prepared arrival perspective
 
 For the default lens, an arrival billboard covers one flight to the final

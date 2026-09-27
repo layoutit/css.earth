@@ -138,8 +138,8 @@ const searchCategories = [
     <a class="object-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
       <GitHubIcon />
     </a>
-    <button class="object-header-action object-settings-action" type="button" popovertarget={`${objectId}-settings`}
-      aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`}>
+    <button class="object-header-action object-settings-action" type="button" popovertarget="object-settings"
+      aria-label="Settings" title="Settings" aria-controls="object-settings">
       <MaterialSymbol name="settings" />
     </button>
     <label class="object-header-action object-facility-action" title="Machines">
@@ -149,35 +149,35 @@ const searchCategories = [
   </div>
 </header>
 <div class="object-dataset-context-dock">
-<form id={`${objectId}-settings-form`} action={`/${objectId}/`} method="get" data-settings-form hidden>
+<form id="object-settings-form" action={`/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
   {['v', 'view', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
 </form>
 <section
-  id={`${objectId}-settings`}
+  id="object-settings"
   class="object-settings-panel explorer-settings-panel"
-  aria-labelledby={`${objectId}-settings-title`}
+  aria-labelledby="object-settings-title"
   popover="auto"
 >
-  <h2 id={`${objectId}-settings-title`}>{PREPARED_SHELL_TITLES.settings.label}</h2>
+  <h2 id="object-settings-title">{PREPARED_SHELL_TITLES.settings.label}</h2>
   <div class="object-settings">
     <label class="object-setting-control object-motion-setting-control">
-      <input class="object-motion-setting" type="checkbox" name="motion" aria-describedby={`${objectId}-motion-description`} disabled />
+      <input class="object-motion-setting" type="checkbox" name="motion" aria-describedby="object-motion-description" disabled />
       <span class="object-setting-text">Illustrative rotation</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
-      <span id={`${objectId}-motion-blocked`} class="object-motion-blocked" hidden>
+      <span id="object-motion-blocked" class="object-motion-blocked" hidden>
         Paused by reduced motion
       </span>
     </label>
-    <p id={`${objectId}-motion-description`} class="object-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
+    <p id="object-motion-description" class="object-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
     {speedSetting && <label class="object-setting-control object-speed-setting-control">
       <span class="object-setting-text">{speedSetting.label}</span>
       <input
-        id={`${objectId}-speed-setting`}
+        id="object-speed-setting"
         class="object-speed-setting"
         type="range"
         name={speedSetting.name}
-        form={`${objectId}-settings-form`}
+        form="object-settings-form"
         min="0"
         max="4"
         step="1"
@@ -188,7 +188,7 @@ const searchCategories = [
       />
     </label>}
     {shadowSetting && <label class="object-setting-control">
-      <input type="checkbox" name={shadowSetting.name} checked={shadowSetting.checked} form={`${objectId}-settings-form`} />
+      <input type="checkbox" name={shadowSetting.name} checked={shadowSetting.checked} form="object-settings-form" />
       <span class="object-setting-text">{shadowSetting.label}</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
     </label>}
@@ -208,23 +208,23 @@ const searchCategories = [
       <span class="object-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="object-setting-control">
-      <input class="object-illustration-models-setting" type="checkbox" name="illustrationModels" aria-describedby={`${objectId}-illustration-models-description`} disabled />
+      <input class="object-illustration-models-setting" type="checkbox" name="illustrationModels" aria-describedby="object-illustration-models-description" disabled />
       <span class="object-setting-text">Illustration models</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
     </label>
-    <p id={`${objectId}-illustration-models-description`} class="object-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
+    <p id="object-illustration-models-description" class="object-motion-description">Approximate stand-ins only. Body-specific meshes remain available without imagery.</p>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="object-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
         <span class="object-setting-text">{setting.label}</span>
       </button>
       ) : (
       <label class="object-setting-control">
-        <input type="checkbox" name={setting.name} checked={setting.checked} form={`${objectId}-settings-form`} />
+        <input type="checkbox" name={setting.name} checked={setting.checked} form="object-settings-form" />
         <span class="object-setting-text">{setting.label}</span>
         <span class="object-setting-switch" aria-hidden="true"></span>
       </label>
       ))}
-    <button class="object-setting-control object-settings-submit" type="submit" form={`${objectId}-settings-form`}>Apply settings</button>
+    <button class="object-setting-control object-settings-submit" type="submit" form="object-settings-form">Apply settings</button>
   </div>
 </section>
 </div>

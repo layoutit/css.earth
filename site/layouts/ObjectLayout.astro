@@ -86,7 +86,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="object-head" />
     <title>{seo.title}</title>
-    <ObjectSwatchStyles />
+    {!navigation && <ObjectSwatchStyles />}
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->

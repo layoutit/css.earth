@@ -8,7 +8,7 @@ export interface NavigationStyleStage {
   dispose(): void;
 }
 
-/** Stage a destination's styles, then publish them without moving retained links. */
+/** Install prepared object styles once, before arrival; stage other route styles. */
 export function createNavigationStyles(documentTarget: Document, windowTarget: BrowserWindow) {
   let current = [...documentTarget.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')];
   const styleKey = (element: StyleNode) => `style:${element.dataset.viteDevId ?? element.textContent}`;
@@ -35,6 +35,17 @@ export function createNavigationStyles(documentTarget: Document, windowTarget: B
           if (reused) { next.push({ element: reused }); continue; }
           const native = documentTarget.importNode(element, true), media = native.getAttribute('media');
           if (href !== null && native instanceof windowTarget.HTMLLinkElement) native.href = href;
+          if (native instanceof windowTarget.HTMLStyleElement && native.hasAttribute('data-object-style')) {
+            // ObjectPage emits shared shell/material rules and object-scoped
+            // rules. These are document residents, even if selection changes
+            // before arrival. Installing here keeps stylesheet work out of the
+            // handoff; cancellation and return visits never remove/reinsert it.
+            documentTarget.head.append(native);
+            current.push(native);
+            existing.set(key(native), native);
+            next.push({ element: native });
+            continue;
+          }
           next.push({ element: native, media });
           added.push(native);
           if (native instanceof windowTarget.HTMLLinkElement) {
@@ -54,7 +65,11 @@ export function createNavigationStyles(documentTarget: Document, windowTarget: B
           apply() {
             if (state !== 'prepared' || signal.aborted) throw new Error('Object styles no longer own this transition.');
             const retained = new Set(next.map(({ element }) => element));
-            for (const element of current) if (!retained.has(element)) element.remove();
+            // Keep the installed shared and object sheets across destinations.
+            for (const element of current) {
+              if (element.hasAttribute('data-object-style')) retained.add(element);
+              else if (!retained.has(element)) element.remove();
+            }
             for (const item of next) {
               if (item.media !== undefined) {
                 if (item.media === null) item.element.removeAttribute('media');
@@ -63,7 +78,7 @@ export function createNavigationStyles(documentTarget: Document, windowTarget: B
               // Moving an attached link clears its CSSStyleSheet until it reloads.
               if (item.element.parentNode !== documentTarget.head) documentTarget.head.append(item.element);
             }
-            current = next.map(({ element }) => element);
+            current = [...retained];
             state = 'applied';
             signal.removeEventListener('abort', dispose);
           },

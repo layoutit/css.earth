@@ -18,7 +18,7 @@ const contentFiles = import.meta.glob('../../src/objects/*/prepared/content.json
 const cssFiles = import.meta.glob<string>('../../src/**/*.css', { query: '?inline', import: 'default' });
 const descriptor = scene?.descriptor ?? await withPreparedAssetOrigin(preparedPage.descriptor);
 const preparedContent = await resolveSceneAddressesDeep(await contentFiles[`../../src/objects/${objectId}/prepared/content.json`]());
-const styles = await Promise.all(objectPageStyles(descriptor)
+const styles = await Promise.all(objectPageStyles(descriptor, { navigation })
   .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/object-shell.css' ? shellCss : await cssFiles[`../../${path}`]()) })));
 ---
 
