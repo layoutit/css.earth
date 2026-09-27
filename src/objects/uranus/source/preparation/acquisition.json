@@ -82,6 +82,390 @@
       "expectedPath": "atmosphere/psg-uranus-r240-rif.txt",
       "selector": "numeric-lines",
       "rowCount": 253
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m-f547m-f658n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2020a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2021a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits",
+      "url": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits",
+      "url": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits",
+      "url": "http://archive.stsci.edu/hlsps/opal/cycle30/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2022a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m-f547m-f657n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle31/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2023a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n-f547m-f467m_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2024a_f467m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f547m_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f467m_v1_globalmap.fits"
     }
   ]
 }

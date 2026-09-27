@@ -777,6 +777,15 @@ Unselected maps and the scene remain retained products; provenance records this
 as a partial refresh rather than a new full-package preparation. The ordinary
 full preparer uses the same image code.
 
+The observed-surface lane's `component-fits` coverage joins an RGB publisher map
+with its three component FITS maps. A sample must be finite and measured in every
+channel. Polar-connected zero fill and gaps connected to declared unobserved rows
+stay missing; isolated dark samples remain observed. The recipe declares any
+longitude reversal, offset and repeated endpoint before planetographic rows move
+onto the body ellipsoid. Coverage-aware interpolation feeds the surface, poles
+and thumbnail together. Uranus, Neptune and Saturn's OPAL date recipes use this
+path; their READMEs record the release-specific frame and photometry limits.
+
 LROC's `pds-float-map` interpretation reads attached PDS3 labels, validates the
 product version, band, projection and lunar reference sphere, then integrates
 source pixel footprints before applying display gain/gamma. Source special values

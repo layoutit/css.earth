@@ -265,3 +265,60 @@
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }
 }
+
+/* Dated OPAL maps reuse the retained visible-light scene. */
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2018a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2018a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2018a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2018a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2019a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2019a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2019a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2019a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2020a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2020a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2020a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2020a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2021a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2021a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2021a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2021a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2022a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2022a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2022a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2022a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2023a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2023a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2023a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2023a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2024a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2024a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2024a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2024a.webp") !important;
+}
+
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2025a"] .saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image: url("/scenes/saturn/saturn-surface-visible-2025a@2x.webp") !important;
+}
+.object-stage:where([data-object-id="saturn"])[data-lens="visible-2025a"] .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-visible-2025a.webp") !important;
+}

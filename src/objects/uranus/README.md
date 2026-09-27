@@ -118,3 +118,32 @@ limb turns grey-red as Hubble saw it. No floor, ambient term or terminator ramp
 remains. The browser only selects and transports these products.
 
 </details>
+
+## Hubble dates
+
+The existing dataset stepper now selects 12 dated [OPAL](https://archive.stsci.edu/hlsp/opal) visible-colour maps. One rotation is selected from each included observing cycle, preserving one observation instead of averaging weather from separate rotations. The opening Visible color view remains the established presentation.
+
+| Observation starts (UTC) | Rotation | Release | Source pixels |
+| --- | --- | --- | --- |
+| 2014-11-08 | 2014a | [Cycle 22](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-22) | 721 × 361 |
+| 2015-09-12 | 2015a | [Cycle 23](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-23) | 721 × 361 |
+| 2016-09-29 | 2016a | [Cycle 24](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-24) | 721 × 361 |
+| 2017-10-25 | 2017a | [Cycle 25](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-25) | 721 × 361 |
+| 2018-11-16 | 2018a | [Cycle 26](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-26) | 721 × 361 |
+| 2019-11-18 | 2019a | [Cycle 27](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-27) | 721 × 361 |
+| 2020-10-08 | 2020a | [Cycle 28](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-28) | 721 × 361 |
+| 2021-12-08 | 2021a | [Cycle 29](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-29) | 721 × 361 |
+| 2022-11-09 | 2022a | [Cycle 30](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30) | 721 × 361 |
+| 2023-09-17 | 2023a | [Cycle 31](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31) | 721 × 361 |
+| 2024-11-09 | 2024a | [Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32) | 721 × 361 |
+| 2025-10-23 | 2025a | [Cycle 33](https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33) | 721 × 361 |
+
+The RGB TIFF and its three component FITS files are recorded in [the source manifest](source/manifest.json) and restored by [the acquisition recipe](source/preparation/acquisition.json). These are publisher mosaics with contrast enhancement and arbitrary channel scaling, not calibrated colour comparisons between years. Each date combines exposures over a rotation, and the scene camera, Sun and rings do not reproduce the original observing geometry.
+
+The Cycle 22–28 READMEs place east longitude 0° at the left and increase it to the right. Cycles 29–33 place 0° at the right and increase it to the left. Preparation reverses the earlier columns, including the component validity masks, into the existing Cycle 33 surface frame. The 721-column maps include the repeated 360° endpoint. Their planetographic rows are sampled onto the unchanged 25,559 / 24,973 km ellipsoid. The three published Minnaert coefficients remain 0.57 / 0.80 / 0.85 across the selected releases (2014 uses F658N for red; later maps use F657N), so the dates share the existing lighting bank.
+
+[The observation recipe](source/preparation/observations.json) intersects finite component coverage and polar-connected zero fill before resampling; isolated dark observations remain valid. Declared fully unobserved rows also seed connected gaps. Missing neighbours never supply colour during interpolation. The shared gray graticule marks missing coverage in the surface, pole tiles and previews; the date views contain no polar continuation or feature inpainting. Publisher seam interpolation and edge artifacts inside valid coverage remain part of the source.
+
+The existing observed-surface preparer writes these maps for the body's current texture layout, using the shared Jupiter coverage helpers. It remaps planetographic latitude, packs the retained bands and projects the pole tiles at preparation time. The browser selects prepared files through the existing date group; it does not interpret FITS, derive imagery or replace the mounted scene.
+
+Source inspection compared the TIFF rows with the component FITS rows; all selected maps correlate more strongly in stored row order than after a north/south flip. This checks orientation, not absolute colour calibration. The unit check exercises component-mask intersection, a connected interior ring gap, retained isolated zero samples and longitude reversal. Browser and delivery evidence for this change is recorded below.

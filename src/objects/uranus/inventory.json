@@ -147,6 +147,78 @@
     },
     {
       "location": "public",
+      "filename": "uranus-lens-visible-2014a.webp",
+      "bytes": 1158,
+      "sha256": "0fbb0bc0e2b0627efd4ef4888a7904a39c324e63aa7012bc8b3ff8e7862fbf61"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2015a.webp",
+      "bytes": 1044,
+      "sha256": "5dca43135ba8ef79dfb976f18358575ca80f70af31ea8905244a0291285053c8"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2016a.webp",
+      "bytes": 1064,
+      "sha256": "2eda610e04b2ec3a315785960a1cc2a291b530c2ef0429a86d53245dbbeda34c"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2017a.webp",
+      "bytes": 1038,
+      "sha256": "4f18fe3364b95e12bf1d8c47e3b4ff1e0800c882a28b7ed2ee30e4d0ed0e2b33"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2018a.webp",
+      "bytes": 1048,
+      "sha256": "8a303b02ceba3ec6fabeec73bea6ec26854ba0d57f4670c15bbb5ca3bb475013"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2019a.webp",
+      "bytes": 1084,
+      "sha256": "99c27714af7c8261994e396f132317887e692b2a09e2039eca4fea34c2ca4e31"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2020a.webp",
+      "bytes": 1094,
+      "sha256": "db565b945637f437b6542ba608d994ccf0b0c30a42b823669b62322020df630a"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2021a.webp",
+      "bytes": 1058,
+      "sha256": "0e35360986a5c34195ff26ad52cac6247ad8725c0f92c82ac53b8659cb53db7e"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2022a.webp",
+      "bytes": 966,
+      "sha256": "c81bd72e0ffed86b44094799be9269e45efd8c6cc9b0aa1a723ccc5626d9ee4c"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2023a.webp",
+      "bytes": 932,
+      "sha256": "61bbe643991e911c2820b631999ec3d7d797dfcb2e40157d7621f036b3a225a3"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2024a.webp",
+      "bytes": 948,
+      "sha256": "54b171e743b71630853c831ed773ea2d1da132899916d0f7902e4c2b86d03ec5"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-visible-2025a.webp",
+      "bytes": 976,
+      "sha256": "bd4890320f8a20b75fa493a2d0821a078a9cf5faf644e98694ef78c0114a7b9b"
+    },
+    {
+      "location": "public",
       "filename": "uranus-photometric-phase-curve.svg",
       "bytes": 4394,
       "sha256": "22d5f86d3c207030f09bcf299bc7e552520afc790fec3fc0d4cd7809eac4daf3"
@@ -186,6 +258,150 @@
       "filename": "uranus-poles-normal@2x.webp",
       "bytes": 4302,
       "sha256": "18f1f0ffc98a583514606da02e4d44c935ee37ebf2beee56467e90a8438c7e18"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2014a.webp",
+      "bytes": 1230,
+      "sha256": "841c3b4a76f0e67aaa1c9be77cca3b21307f04fb043e166b9e002f06496ba196"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2014a@2x.webp",
+      "bytes": 2538,
+      "sha256": "85024e61ffb2096a87c939776fa50f05871572d73543c0c7b0568c93047829b7"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2015a.webp",
+      "bytes": 1046,
+      "sha256": "f96b5c4e6dbfe8904003e895d9132b9a2ac78a308494e1e138675677998fb599"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2015a@2x.webp",
+      "bytes": 2168,
+      "sha256": "383d73ffec34581e217f1c19fdcb387e106e677c08b10682590301908035a563"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2016a.webp",
+      "bytes": 1124,
+      "sha256": "d1b59164b9e4139a0c0ec003a730fd1a6ee6e375b05276468b3996bcd0a3667c"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2016a@2x.webp",
+      "bytes": 2316,
+      "sha256": "1392ab9d035f5776f27554f0edb0220677236e73f7531cd278fd94dbc89d1df9"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2017a.webp",
+      "bytes": 1266,
+      "sha256": "2876d00b420f2c028488d73a1131fd2aaa7a91787379e11f569d2aba2d2fa218"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2017a@2x.webp",
+      "bytes": 2586,
+      "sha256": "aeff533adb152591e6b4debd49a37929fddda9fcc011f020dc88f6e8bff614de"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2018a.webp",
+      "bytes": 1254,
+      "sha256": "d03af9891ad02b5408ddbe027c53d679c5f200f6a11dabb8b7ad3c130648df44"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2018a@2x.webp",
+      "bytes": 2508,
+      "sha256": "dc3243ea8267a350069c2e4690972b23f09e9e8b52ccbf124ec3f58b8e5a0446"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2019a.webp",
+      "bytes": 1306,
+      "sha256": "2c71eb8842c25c89fe18cf49a4e4a9d21c67b2fd54b316821f3bbd31f89fb6a8"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2019a@2x.webp",
+      "bytes": 2614,
+      "sha256": "b63158a7e515d2451c443fa81a8add941960d843786fcd3d6a2483a920c81e07"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2020a.webp",
+      "bytes": 1074,
+      "sha256": "2ffaa142e1e1e41c1da500978e97d0837e69f7bd684b132dbd9f0aaabfc1f972"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2020a@2x.webp",
+      "bytes": 2258,
+      "sha256": "4cb50159c887cfc615971825d6b371f4172d9e5d673a3e22b62452480eef8f53"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2021a.webp",
+      "bytes": 970,
+      "sha256": "ab92229774cc26a3e77dc3cb83f70c2e5954b920a08e0e2b58c6e8a62a32f958"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2021a@2x.webp",
+      "bytes": 2072,
+      "sha256": "d00150d4ff76aab15d9aef8c68dd1ba989987628e3a0326a5292720d171647a5"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2022a.webp",
+      "bytes": 1218,
+      "sha256": "aedd012498a4004796dd2efe8ba7bd173836f738f9a7b0e6ef54ee38c6f76b97"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2022a@2x.webp",
+      "bytes": 2576,
+      "sha256": "6e6247c7b2b3770831b92a9f070eceeb6ea707d2aa8ffaa5a7a9c94a9c2ee7d8"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2023a.webp",
+      "bytes": 958,
+      "sha256": "c307e7b6f00c53eb7c752d73757d912ae58937e9d0705c359bfdcd7c2336f768"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2023a@2x.webp",
+      "bytes": 2022,
+      "sha256": "7a11447668871a376991c422d905c5144d54158dab237da8c979d83fbbaf70c5"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2024a.webp",
+      "bytes": 1152,
+      "sha256": "720e084aa876de009e8afc694919fd3c9ffb9dbc3f2646ef7ca23e8fdbeffd33"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2024a@2x.webp",
+      "bytes": 2458,
+      "sha256": "b7419af065aa008e96f5d7ecaec2e8c950eed95d8403afaf471d19b91373d517"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2025a.webp",
+      "bytes": 1036,
+      "sha256": "7f83d45229646d13c3583719621dad9c92afc59c5d7e53ada155eadce386aff7"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-visible-2025a@2x.webp",
+      "bytes": 2188,
+      "sha256": "fd45a75ffe2669a790c9e589391ef6bf4156a50a371353c997678711ffa0f1a5"
     },
     {
       "location": "public",
@@ -231,6 +447,150 @@
     },
     {
       "location": "public",
+      "filename": "uranus-surface-visible-2014a.webp",
+      "bytes": 67286,
+      "sha256": "92383668ea58719ce659af0a7fe684d7886a1a2a5ed690efc1ad390abdce5688"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2014a@2x.webp",
+      "bytes": 174226,
+      "sha256": "292f24fe71e41bc6578114d00f69c8bae76e94b68c08a6d07c3e6827a2386823"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2015a.webp",
+      "bytes": 49908,
+      "sha256": "c1e7a4a64194c46f3e0f00743de8482fe87914d176c0b93560ff19e25f4a698a"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2015a@2x.webp",
+      "bytes": 121372,
+      "sha256": "c13dc43f58bfd4c009149e73bc5ec8309fcf5521ab511285397fb04928aea64a"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2016a.webp",
+      "bytes": 51970,
+      "sha256": "035152d63fa1d5b72b11117007f53aa14e67e1422b353e0ca2dbd516112eb88e"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2016a@2x.webp",
+      "bytes": 125552,
+      "sha256": "363df55ea63561af0ee988aee9ddb9fdbe18e1b39bc5880c4c7be48c411f98c3"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2017a.webp",
+      "bytes": 53042,
+      "sha256": "564ed2606a1081d4ac891cf97fc513487a8b8caee66c65cf69703a99014ef1c8"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2017a@2x.webp",
+      "bytes": 127810,
+      "sha256": "9f941f08d6281a5efa04b38a11c77d202f5fb26cf87ba6b8544a08b11f6125ef"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2018a.webp",
+      "bytes": 50800,
+      "sha256": "f4a529f02c0b8e59630d47bf73eb5a5cca5f67bd65a35c847574009c1142548e"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2018a@2x.webp",
+      "bytes": 122086,
+      "sha256": "bdce224168ff88d8afb3b87ffb54a83172923daca62dac497312a8c94637bba7"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2019a.webp",
+      "bytes": 53162,
+      "sha256": "9489311a36310ec44694dab63530755e0d89d4dea82dec74f13e662888559c5f"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2019a@2x.webp",
+      "bytes": 127654,
+      "sha256": "b3b8cd32c63a610c9958c4efcbf71535c7a20882861d45bd05e1cd6b1cb48849"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2020a.webp",
+      "bytes": 52386,
+      "sha256": "3427592028b9daf0ee4444dfdf9a27b6e7f32464ecb51ff6284bf9ec0fceeacb"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2020a@2x.webp",
+      "bytes": 126348,
+      "sha256": "c2675a9c316019009ad7de12ab3044e013479618143e497a7049fe2b9aa3dfd7"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2021a.webp",
+      "bytes": 51308,
+      "sha256": "35514d4ee69416ee818f175eab049ad287d211599f4b2f12774481992c0ef58b"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2021a@2x.webp",
+      "bytes": 124060,
+      "sha256": "9be620a1468bd0a73d96d60f839200b60a4792552d6de2583e2e370640f9b9d6"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2022a.webp",
+      "bytes": 51348,
+      "sha256": "bae8bf33b054020be9ccc79cf1c094a43a0f9ec7daaed6cb84a91072e3435e39"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2022a@2x.webp",
+      "bytes": 124608,
+      "sha256": "2d7e5d7414385444f297dcce79e06889791ba5bae0bdcfb623d04cbb77689373"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2023a.webp",
+      "bytes": 50234,
+      "sha256": "d5164d5bd5c17e3cdf325df81e4ed71b29b2e356284520fcf59f47da99ec0fe7"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2023a@2x.webp",
+      "bytes": 121362,
+      "sha256": "260ebd96e8747b7dda327e1f165065e36166c5395d41610b68c8190f38426dd4"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2024a.webp",
+      "bytes": 50108,
+      "sha256": "1f2cae72a4655311462a3d4892cac303f51ddb7ac45aa1405c7fc4a2f49010df"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2024a@2x.webp",
+      "bytes": 121298,
+      "sha256": "c422a2febbaab488cf7514cccc83207e52f9eeb6b5ee99d269fb88fd55d0108a"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2025a.webp",
+      "bytes": 49024,
+      "sha256": "7ee695601170ad438c23c686bc7f72d0d6ca28857f1667736a10cc0f921c3f55"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-visible-2025a@2x.webp",
+      "bytes": 118036,
+      "sha256": "cdb0be8a3ad38f4e2c62b39ba10b7c2f40a47f01767451d4ff114b96327aa9c2"
+    },
+    {
+      "location": "public",
       "filename": "uranus-temperature-pressure-profile.svg",
       "bytes": 2033,
       "sha256": "7af1c85bb503655f2f2a895d5b496bdc885ffb38f2f5282225f6271c7a8b16de"
@@ -251,7 +611,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1805,
-      "sha256": "b2f222450268c2a84e7a666e6be690f7d67481ee0dab2d315506fd2d9d4ad0c4"
+      "sha256": "f032552ea45eb0fd94af3396dd20764e2b52a5562b799b0c65a73a6eb2f62a10"
     },
     {
       "location": "prepared",
@@ -262,20 +622,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3335,
-      "sha256": "93b8bc7880d56ee6dd5e91297ae3e45435e15a8dbdfdaf56b24064940e8901fc"
+      "bytes": 5447,
+      "sha256": "8961446a1cf0bda1d6fca4873cff61adb0b2bf379defd895dd1a4c7ff9dfabe3"
     },
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 4205,
-      "sha256": "91c711e614f0deffdbc87e0c3fbf0ae8a2bed23bdbbf9e16150bf87a4da93b74"
+      "bytes": 13145,
+      "sha256": "7112310020d349a45e3e133ef72459964a37d2a39e3093e7ac9c647c1f05a6a0"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 242,
-      "sha256": "3ad553c48d9c637bee1b0407dda93362d9690cbe4ba25cba2a22ec8deac6a406"
+      "bytes": 1262,
+      "sha256": "dfeeec7e230d077a6384c919c0c089ecc063105887baf853ebb47f4141d4524c"
     },
     {
       "location": "prepared",
@@ -297,9 +657,81 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/visible-2014a.webp",
+      "bytes": 4652,
+      "sha256": "31679b0c8b558582a3922a8e3b6d51980645f923546f84a0d7fdbcd668f8e4f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2015a.webp",
+      "bytes": 4060,
+      "sha256": "70e13638c461665cba6c6d56af477558f535857f0108d5875ec52dc644379d5b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2016a.webp",
+      "bytes": 4176,
+      "sha256": "358946014404d61dc6acd4afffda29d26605908864aaab6ab8aedf1ae8cd6a7d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2017a.webp",
+      "bytes": 4148,
+      "sha256": "4f799e471bb6ee873bb51587d1cfde43bc1023b71dde33c59a0b46c3052f9bd9"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2018a.webp",
+      "bytes": 4160,
+      "sha256": "de353af79e558b2645e3284c899db77a104f2a31454619cea293c024499177d7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2019a.webp",
+      "bytes": 4132,
+      "sha256": "389f48e3c3bb648f04fd3a95d1502718511f30ea47321b2f96cc0e8a05739b75"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2020a.webp",
+      "bytes": 4146,
+      "sha256": "d2d2124d092211b465997ea9f484e1ac9f5494a3486990b92acadd2d17ccd733"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2021a.webp",
+      "bytes": 4042,
+      "sha256": "38c208a50d46552b4f1f343c7e2e4b3aadfc7c76ead11f36aa15a4b99cfc6e11"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2022a.webp",
+      "bytes": 4050,
+      "sha256": "6de11c68c9173071a685438f1fe7d0342acfdf2511da1cbca60399c58dd55cc2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2023a.webp",
+      "bytes": 3866,
+      "sha256": "cfd34c95e897036659397693185ab5872428d82804a83251d4c812092456bd10"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2024a.webp",
+      "bytes": 3962,
+      "sha256": "abfc3f8172d94a464aaf93ecddcdea78b41b7a4c641cd22d1607bea0d75a31d9"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/visible-2025a.webp",
+      "bytes": 3828,
+      "sha256": "f18ce1a235174047656d5a3703fdb24f0efcc3f05c65b8d151c685240eb10880"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1152517,
-      "sha256": "f67992ac378e112b7a29206df760dcd665a792e3212c0b846a689da4854a12eb"
+      "bytes": 1214173,
+      "sha256": "4bb193ccf953112648447951e5ed9875705f366965623c0a750c8925b1edbf92"
     },
     {
       "location": "prepared",
@@ -322,8 +754,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1106,
-      "sha256": "75cfdb504b1a31816c928dddfeea75d0a1466e9a295114291bec462a19854a99"
+      "bytes": 5702,
+      "sha256": "3ab758c7450721bc3aa98d16910e2b82ed3d494e658670225606927a7f72e819"
     },
     {
       "location": "prepared",

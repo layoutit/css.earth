@@ -543,3 +543,28 @@ The prepared image extends through the F ring's 140,612 km outer boundary and
 includes the documented D-ring ringlets at 67,580 km and 71,710 km.
 
 </details>
+
+## Hubble dates
+
+The existing dataset stepper now selects 8 dated [OPAL](https://archive.stsci.edu/hlsp/opal) visible-colour maps. One rotation is selected from each included observing cycle, preserving one observation instead of averaging weather from separate rotations. The opening Visible color view remains the established presentation.
+
+| Observation starts (UTC) | Rotation | Release | Source pixels |
+| --- | --- | --- | --- |
+| 2018-06-06 | 2018a | [Cycle 25](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-25) | 1800 × 900 |
+| 2019-06-19 | 2019a | [Cycle 26](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-26) | 1800 × 900 |
+| 2020-07-04 | 2020a | [Cycle 27](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-27) | 1800 × 900 |
+| 2021-09-12 | 2021a | [Cycle 28](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-28) | 1800 × 900 |
+| 2022-09-21 | 2022a | [Cycle 29](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-29) | 1800 × 900 |
+| 2023-10-22 | 2023a | [Cycle 30](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-30) | 1800 × 900 |
+| 2024-08-22 | 2024a | [Cycle 31](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-31) | 1800 × 900 |
+| 2025-08-29 | 2025a | [Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) | 1800 × 900 |
+
+The RGB TIFF and its three component FITS files are recorded in [the source manifest](source/manifest.json) and restored by [the acquisition recipe](source/preparation/acquisition.json). These are publisher mosaics with contrast enhancement and arbitrary channel scaling, not calibrated colour comparisons between years. Each date combines exposures over a rotation, and the scene camera, Sun and rings do not reproduce the original observing geometry.
+
+These 1,800 × 900 maps place 360° System III west longitude at the left, decreasing to the right. Planetographic rows move onto the unchanged 60,268 / 54,364 km ellipsoid. Missing rows between observed northern and southern regions are caused by ring occlusion; complete zero rows declared in the recipe seed the connected zero-fill mask, so adjacent partial gaps stay missing too. The pole tiles use the existing orthographic cap projection and atlas layout. The dates reuse the visible scene's rings and material bank. That bank uses the existing display-colour limb treatment, including the F467M blue proxy documented above; it does not reconstruct each release's photometry or the rings' historical opening angle. OPAL identifies moon transits and shadows as artifacts in the 2025 mosaics; those source pixels are retained.
+
+[The observation recipe](source/preparation/observations.json) intersects finite component coverage and polar-connected zero fill before resampling; isolated dark observations remain valid. Declared fully unobserved rows also seed connected gaps. Missing neighbours never supply colour during interpolation. The shared gray graticule marks missing coverage in the surface, pole tiles and previews; the date views contain no polar continuation or feature inpainting. Publisher seam interpolation and edge artifacts inside valid coverage remain part of the source.
+
+The existing observed-surface preparer writes these maps for the body's current texture layout, using the shared Jupiter coverage helpers. It remaps planetographic latitude, packs the retained bands and projects the pole tiles at preparation time. The browser selects prepared files through the existing date group; it does not interpret FITS, derive imagery or replace the mounted scene.
+
+Source inspection compared the TIFF rows with the component FITS rows; all selected maps correlate more strongly in stored row order than after a north/south flip. This checks orientation, not absolute colour calibration. The unit check exercises component-mask intersection, a connected interior ring gap, retained isolated zero samples and longitude reversal. Browser and delivery evidence for this change is recorded below.

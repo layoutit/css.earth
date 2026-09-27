@@ -774,6 +774,7 @@
   color: var(--shell-text-secondary); cursor: pointer;
 }
 .object-card-tabpanel .object-lens-step:disabled { opacity: 0.25; cursor: default; }
+.object-card-tabpanel .object-lens-play { width: 44px; flex-shrink: 0; font: var(--shell-font-caption); }
 .object-card-tabpanel .object-lens-step:not(:disabled):hover { color: var(--shell-text); background: rgb(255 255 255 / 0.08); }
 .object-card-tabpanel .object-lens-step:focus-visible { outline: 0; box-shadow: 0 0 0 1px var(--shell-focus); }
 /* The same drawn chevron as the search caret: two borders of a square, turned to point left or right. */

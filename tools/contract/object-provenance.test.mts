@@ -223,6 +223,8 @@ test('Saturn binds its actual base material and all contributing recipe identiti
     assert.ok(requireValue(document.products.find(product => product.id === id), `Saturn ${id} product`).recipeDependencies.includes('geometry'), id);
   }
   assert.ok(document.recipes.some(recipe => recipe.id === 'rings'));
+  const dated = requireValue(document.products.find(product => product.id === 'visible-2018a'), 'Saturn dated RGB product');
+  assert.deepEqual(dated.inputs, ['opal-2018a-rgb', 'opal-2018a-f395n', 'opal-2018a-f502n', 'opal-2018a-f631n']);
 });
 
 test('Earth globe provenance excludes the retired local noise dataset', async () => {
