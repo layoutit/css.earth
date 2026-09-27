@@ -70,7 +70,7 @@
     "prepare:volume": "node packages/bake/cli/prepare-volume.mts",
     "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && node tools/prepare/cli/prepare-moon-labels.mts && node tools/prepare/cli/prepare-world-presentation.mts",
     "pretest": "pnpm prepare:shell",
-    "preview": "node tools/cli/preview.mts",
+    "preview": "node site/server/preview.mts",
     "publish:runtime-assets": "node packages/bake/cli/publish-runtime-assets.mts",
     "setup:assets": "pnpm prepare:shell && pnpm setup:asset-data",
     "setup:asset-data": "node tools/assets/setup.mts",
@@ -106,7 +106,7 @@
     "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/!(rendered-page).test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \".github/scripts/**/*.test.mts\" \"tools/**/*.test.mts\" \"tools/**/*.test.ts\" \"labs/performance/*.test.mts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "test:universe:renderer": "pnpm test:renderer",
-    "test:universe:runtime": "node --test --test-concurrency=2 \"tools/prepared/prepared-activation-*.test.mts\" \"tests/presentation/prepared-activation-*.test.mts\" tools/prepare/prepare-context-availability.test.mts tools/assets/restore-object-json.test.mts site/test/object-directory.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node tools/ci/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
+    "test:universe:runtime": "node --test --test-concurrency=2 \"tests/presentation/prepared-activation-*.test.mts\" tools/prepare/prepare-context-availability.test.mts tools/assets/restore-object-json.test.mts site/test/object-directory.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node tools/ci/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
     "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts site/test/serialize-prepared-scene.test.mts && pnpm typecheck:oracles"
   },
   "dependencies": {

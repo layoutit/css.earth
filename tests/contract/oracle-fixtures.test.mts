@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '../../tests/oracles/fixture.mts';
-import { runtimeLock, generatorFingerprint } from '../../tests/oracles/sbmt/runtime.mts';
+import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '../oracles/fixture.mts';
+import { runtimeLock, generatorFingerprint } from '../oracles/sbmt/runtime.mts';
 
 /** Every committed oracle fixture comes from the pinned environment and the pinned inputs; runs in `pnpm test:platform` without Python or restored sources. */
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.

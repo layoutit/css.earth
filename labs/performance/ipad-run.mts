@@ -43,7 +43,7 @@ async function assertLocalBuiltPreview(origin: URL): Promise<void> {
   const owner = (await exec('lsof', ['-nP', '-a', '-p', pid, '-d', 'cwd', '-Fn'])).stdout.split('\n').find(line => line.startsWith('n'))?.slice(1);
   if (!owner || resolve(owner) !== root) throw new Error(`Port ${origin.port} belongs to ${owner ?? 'an unknown checkout'}, not ${root}.`);
   const command = (await exec('ps', ['-p', pid, '-o', 'command='])).stdout;
-  if (!/\b(?:astro|vite)(?:\.mjs)?\s+preview\b/u.test(command) && !command.includes('tools/cli/preview.mts'))
+  if (!/\b(?:astro|vite)(?:\.mjs)?\s+preview\b/u.test(command) && !command.includes('site/server/preview.mts'))
     throw new Error(`Port ${origin.port} is not a built preview. Server: ${command.trim()}`);
   const response = await fetch(new URL('/index.html', origin), { signal: AbortSignal.timeout(12_000) });
   await response.body?.cancel();

@@ -112,7 +112,7 @@ comparisons and the interpretation used for its model.
 
 ## Verification
 
-- `node --test tools/prepared/prepared-activation-registry.test.mts tools/prepared/prepared-activation-transport.test.mts`
+- `node --test tests/presentation/prepared-activation-registry.test.mts tests/presentation/prepared-activation-transport.test.mts`
   checks activation ownership and cancellation.
 - `node --test site/test/navigation-lifecycle.test.mts site/test/scene-session.test.mts`
   checks navigation and retained scene state.

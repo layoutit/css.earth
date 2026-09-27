@@ -392,7 +392,7 @@ SpiceyPy for `@cssearth/spice` (a microsecond in time, a millimetre in position,
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
 the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
-layouts. Comparing tests sit beside each reader, and `tools/contract/oracle-fixtures.test.mts`
+layouts. Comparing tests sit beside each reader, and `tests/contract/oracle-fixtures.test.mts`
 checks tool versions, declared input paths and recorded byte counts; it does not
 compare source digests. Missing inputs can skip source-dependent cases. A new scientific
 source-format parser, decoder or interpretation algorithm needs independent reference evidence.
