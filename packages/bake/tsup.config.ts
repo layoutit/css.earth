@@ -41,6 +41,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/layers/paged-ellipsoid': 'src/objects/layers/paged-ellipsoid/index.ts',
     'objects/layers/terrestrial': 'src/objects/layers/terrestrial/index.ts',
     'objects/stellar': 'src/objects/stellar/index.ts',
+    'objects/candidates': 'src/objects/candidates/index.ts',
     'runtime-source': 'src/runtime-source/index.ts',
     'prepared-presentation': 'src/prepared-presentation/index.ts',
     'delivery': 'src/delivery/index.ts',

@@ -5,7 +5,7 @@
  *
  * Public services, read only: SIMBAD for the star and every reference that cites it, the JMMC OiDB for interferometric
  * granules around its position grouped by instrument, calibration level and data PI, and VizieR for catalogues deposited
- * with those references, whose ReadMe is read for FITS images. `archive-search.mts` adds the leads those three cannot see: the
+ * with those references, whose ReadMe is read for FITS images. `@cssearth/bake/objects/candidates` adds the leads those three cannot see: the
  * star's measured diameter (JMMC JMDC), ALMA projects and how many beams they put across the disc, ESO raw frames from
  * interferometers and adaptive-optics imagers, Hubble and JWST imaging in MAST, and data deposits (DataCite) that cite a paper about the star. The verdict orders the routes that worked for the stars
  * already placed: an author-deposited image (CE Tauri), author-calibrated visibilities at level 3 (π¹ Gruis, Betelgeuse),
@@ -17,7 +17,7 @@
  * disc for an image. */
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations, measuredDiameters } from './archive-search.mts';
+import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations, measuredDiameters } from '@cssearth/bake/objects/candidates';
 import { astroqueryRows } from '@cssearth/telescope/node';
 
 

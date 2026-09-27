@@ -64,6 +64,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/layers/paged-ellipsoid': 'packages/bake/src/objects/layers/paged-ellipsoid/index.ts',
   '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
   '@cssearth/bake/objects/stellar': 'packages/bake/src/objects/stellar/index.ts',
+  '@cssearth/bake/objects/candidates': 'packages/bake/src/objects/candidates/index.ts',
   '@cssearth/bake/runtime-source': 'packages/bake/src/runtime-source/index.ts',
   '@cssearth/bake/prepared-presentation': 'packages/bake/src/prepared-presentation/index.ts',
   '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',

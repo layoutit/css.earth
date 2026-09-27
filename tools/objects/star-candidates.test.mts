@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 import { aboutStar, candidateVerdict, readmeImageLines, readmeInterferometric, summariseOidb } from './star-candidates.mts';
-import { fetchRetrying } from './archive-search.mts';
+import { fetchRetrying } from '@cssearth/bake/objects/candidates';
 const test = sourceTest();
 
 // The CE Tauri deposit's ReadMe, abridged to the lines the reader parses (CDS J/A+A/614/A12).

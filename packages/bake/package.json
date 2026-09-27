@@ -184,6 +184,11 @@
       "import": "./dist/objects/stellar.js",
       "default": "./dist/objects/stellar.js"
     },
+    "./objects/candidates": {
+      "types": "./dist/objects/candidates.d.ts",
+      "import": "./dist/objects/candidates.js",
+      "default": "./dist/objects/candidates.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",
