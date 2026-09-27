@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { refuseDirectRun } from '../cli/library-entry.mts';
+// Entry script: node packages/bake/cli/prepare-solar-geometry.mts, run by `pnpm build:tools` and `pnpm prepare:objects`.
 import { cross3 as cross, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 // Computes, for each body, the direction to the Sun, the J2000 ecliptic
@@ -30,7 +30,7 @@ import { readJsonSource } from "@cssearth/bake/objects/sources";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { loadAstronomyPackage } from "@cssearth/bake/astronomy";
-import { loadSceneEpochEphemeris } from "../../packages/astronomy/tools/scene-ephemeris.mts";
+import { loadSceneEpochEphemeris } from "../../astronomy/tools/scene-ephemeris.mts";
 import { readPreparedObjects } from "@cssearth/objects/node";
 
 /** Write src/platform/solar-geometry.mts for the registered bodies at the pinned scene epoch and print each body's geometry. */
@@ -60,7 +60,7 @@ export async function prepareSolarGeometry() {
   const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
   // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
   const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
-  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects.filter(body =>
+  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../../..")).sceneObjects.filter(body =>
     ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
     ((body.classification === "star" || body.classification === "black-hole") && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
     if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
@@ -571,7 +571,7 @@ export function requireBodyOrbit(bodyId: string): BodyOrbit {
 
   const target = resolve(
     import.meta.dirname,
-    "../../src/platform/solar-geometry.mts",
+    "../../../src/platform/solar-geometry.mts",
   );
   await writeFile(target, module);
   for (const entry of entries) {
@@ -587,7 +587,7 @@ export function requireBodyOrbit(bodyId: string): BodyOrbit {
   console.log(`Prepared solar geometry -> ${target}`);
 }
 
-refuseDirectRun(import.meta);
+await prepareSolarGeometry();
 
 function normalize(vector: readonly number[]) {
   const magnitude = Math.hypot(...vector);

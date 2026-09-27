@@ -138,7 +138,7 @@ jobs:
             # global feature index is a tracked catalogue, not an asset needed by this job.
             pnpm prepare:catalog
             pnpm build:astronomy
-            node tools/prepare/cli/prepare-solar-geometry.mts
+            node packages/bake/cli/prepare-solar-geometry.mts
             pnpm build:catalog
             node tools/prepare/cli/prepare-objects.mts "--object=$OBJECT"
           fi

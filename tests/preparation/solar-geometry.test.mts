@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -117,7 +117,7 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
 });
 
 test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
-  const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
+  const { refreshSolidSceneEpoch } = await import('../../tools/objects/terrestrial-layers/solid-scene.mts');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
@@ -146,7 +146,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
 });
 
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
-  const { refreshSolidSceneEpoch } = await import('../objects/terrestrial-layers/solid-scene.mts');
+  const { refreshSolidSceneEpoch } = await import('../../tools/objects/terrestrial-layers/solid-scene.mts');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json')),
