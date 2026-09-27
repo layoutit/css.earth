@@ -238,7 +238,7 @@ function sunlitRadiance(frame: FrameResult, radii: readonly number[]) {
 }
 
 /** Project one registered frame onto the map grid: cells on the recipe's side seen within the emission limit, nearest pixel. */
-function projectFrame(frame: FrameResult, radii: readonly number[], ppd: number, side: JiramRecipe['side'], policy: JiramRecipe['policy'], ifov: number, meanRadius: number) {
+export function projectFrame(frame: { camera: Pick<SpiceCamera, 'matrix' | 'positionKm' | 'sunDirection'>; values: Float32Array }, radii: readonly number[], ppd: number, side: JiramRecipe['side'], policy: Pick<JiramRecipe['policy'], 'maximumEmissionDegrees' | 'maximumIncidenceDegrees' | 'terminatorFootprints'>, ifov: number, meanRadius: number) {
   const width = 360 * ppd, height = 180 * ppd, camera = frame.camera, values = new Float32Array(width * height).fill(NaN), footprint = new Float32Array(width * height).fill(NaN);
   const cosEmission = Math.cos(policy.maximumEmissionDegrees * Math.PI / 180), cosIncidence = Math.cos((policy.maximumIncidenceDegrees ?? 90) * Math.PI / 180);
   for (let row = 0; row < height; row++) {
@@ -298,7 +298,7 @@ function nightBackgroundMask(camera: SpiceCamera, radii: readonly number[], poli
 }
 
 /** Per-visit medians, then the finest visit per cell. */
-function combine(visits: { id: string; projections: { values: Float32Array; footprint: Float32Array }[] }[], cells: number, minimumFrames: number) {
+export function combine(visits: { id: string; projections: { values: Float32Array; footprint: Float32Array }[] }[], cells: number, minimumFrames: number) {
   const out = new Float32Array(cells).fill(NaN), best = new Float32Array(cells).fill(Infinity), source = new Int16Array(cells).fill(-1), perVisit: Float32Array[] = [];
   visits.forEach((visit, index) => {
     const visitMap = new Float32Array(cells).fill(NaN);
@@ -448,7 +448,10 @@ export async function runMosaic(recipePath: string, framesDirectory: string, fet
 }
 
 /** PDS3 simple cylindrical map, east-positive planetocentric, 0 to 360 east, little-endian floats, detached label. */
-async function writeMap(root: string, recipe: JiramRecipe, map: Float32Array) {
+export async function writeMap(root: string, recipe: Pick<JiramRecipe, 'output' | 'side' | 'background'> & {
+  target: Pick<JiramRecipe['target'], 'name' | 'referenceRadiusKm'>; band: Pick<JiramRecipe['band'], 'name' | 'unit'>;
+  visits: readonly { frames: readonly unknown[] }[];
+}, map: Float32Array, producer = 'tools/objects/juno/jiram-mosaic.mts') {
   const ppd = recipe.output.pixelsPerDegree, width = 360 * ppd, height = 180 * ppd, missing = -1e32, bytes = Buffer.alloc(width * height * 4);
   for (let i = 0; i < map.length; i++) bytes.writeFloatLE(Number.isFinite(map[i]) ? map[i] : missing, i * 4);
   const name = recipe.output.image.split('/').pop()!;
@@ -456,7 +459,7 @@ async function writeMap(root: string, recipe: JiramRecipe, map: Float32Array) {
     'PDS_VERSION_ID = PDS3', 'RECORD_TYPE = FIXED_LENGTH', `RECORD_BYTES = ${width * 4}`, `FILE_RECORDS = ${height}`, `^IMAGE = "${name}"`,
     `DATA_SET_ID = "CSSEARTH-${recipe.target.name}-JIRAM-${recipe.band.name}-${recipe.side.toUpperCase()}-MOSAIC-V1"`, `PRODUCT_ID = "${recipe.output.productId}"`, `TARGET_NAME = "${recipe.target.name}"`,
     'SOURCE_DATA_SET_ID = "JNO-J-JIRAM-3-RDR-V1.0"', `SOURCE_PRODUCT_COUNT = ${recipe.visits.reduce((n, v) => n + v.frames.length, 0)}`,
-    `NOTE = "${recipe.side === 'night' ? 'Night' : 'Day'}-side JIRAM ${recipe.band.name}-band band radiance${recipe.background ? ' above per-column cold-night background' : ''}: per-visit medians, finest visit per cell. Written by tools/objects/juno/jiram-mosaic.mts."`,
+    `NOTE = "${recipe.side === 'night' ? 'Night' : 'Day'}-side JIRAM ${recipe.band.name}-band band radiance${recipe.background ? ' above per-column cold-night background' : ''}: per-visit medians, finest visit per cell. Written by ${producer}."`,
     'OBJECT = IMAGE', `  LINES = ${height}`, `  LINE_SAMPLES = ${width}`, '  SAMPLE_TYPE = PC_REAL', '  SAMPLE_BITS = 32', `  UNIT = "${recipe.band.unit}"`,
     '  SCALING_FACTOR = 1', '  OFFSET = 0', `  MISSING_CONSTANT = ${missing.toExponential()}`, 'END_OBJECT = IMAGE',
     'OBJECT = IMAGE_MAP_PROJECTION', '  MAP_PROJECTION_TYPE = "EQUIRECTANGULAR"', '  COORDINATE_SYSTEM_NAME = "PLANETOCENTRIC"', '  COORDINATE_SYSTEM_TYPE = "BODY-FIXED ROTATING"',

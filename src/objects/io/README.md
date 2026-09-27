@@ -12,7 +12,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - The VLT/MUSE views use original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 
-- **Volcanic heat:** our night-side 4.8 µm map from Juno JIRAM RDR images ([JNO-J-JIRAM-3-RDR-V1.0](https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT), PDS Atmospheres Node) and NAIF Juno kernels. Six visits span April 2022–July 2023, including close passes 51 and 53. Registration uses Io's triaxial ellipsoid and a Lambertian sunlit-disc model following [Mura et al. (2024)](https://doi.org/10.3389/fspas.2024.1369472); their Figure 2 supplies the fixed 0–0.15 W sr⁻¹ m⁻² color scale. A cold-night column background is subtracted before per-visit medians suppress single-frame particle hits; each map cell uses the finest available visit. [The recipe](source/science/jiram/recipe.json) names every product; [the receipt](source/science/jiram/receipt.json) records registration, measured byte identities and native EDR detector masks for the new close passes. This is band radiance, not temperature.
+- **Volcanic heat:** our night-side 4.8 µm map uses the registered JIRAM images, geometry and detector masks released with [Perry et al. (2025)](https://doi.org/10.3847/PSJ/adbae3), from [ASU](https://rgcps.asu.edu/juno/). It covers **58.42% of Io's spherical surface**, up from 24.12%, using 378 frames on 17 visits between July 2017 and October 2023. Color shows band radiance above a cold-column background, not temperature or total heat flow. [The recipe](source/science/jiram/perry-recipe.json) selects the release; [the measured receipt](source/science/jiram/perry-receipt.json) records screening, registration and byte identities.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -60,7 +60,90 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 - Focused checks are defined in the [unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/io).
 
-### Close-pass volcanic heat (27 September 2026)
+### Registered volcanic heat (27 September 2026)
+
+![Expanded night-side volcanic heat map](evidence/jiram-perry/heat-desktop.png)
+
+The published FITS release supplies per-pixel radiance, latitude, longitude,
+emission angle, slant range and nonlinear-response masks. Screening all 2,374
+M-band images in its 27 orbit directories yields 378 usable frames on 17 visits.
+The resulting 1440 × 720 map contains 534,232 valid cells: 51.53% of the
+rectangular grid, **58.42% weighted by spherical cell area**. Coverage reaches
+50.125°S and 88.125°N; it is still incomplete, especially in the south. The
+October 2023 visit, PJ55, supplies 74,649 winning cells. The 0.25° grid is
+sampling, not uniform spatial resolution.
+
+<details>
+<summary>Processing, independent checks and reproduction</summary>
+
+Perry et al., Appendix B defines the selected band-radiance values in
+W sr⁻¹ m⁻². The producer's [geometry code](https://github.com/volcanopele/juno/blob/fe0fea922b2531f0ff9e127a646301104067251d/jiramgeombackplane.py)
+uses west-positive longitude and SPICE planetographic latitude on an
+IAU_IO ellipsoid (radii 1829.4, 1819.4, 1815.7 km). The plane named
+`altitude` is surface-to-spacecraft distance, not height. Preparation inverts
+that coordinate convention, fits the existing camera model to every eighth
+pixel/line and checks separate, interleaved holdouts. The worst holdout error
+is 0.000219 pixels; the worst range discrepancy is 0.0149%. These measure
+transfer of the published geometry, not its absolute position accuracy.
+
+[Native-value checks](evidence/jiram-perry/native-values.json) compare three
+representative products from PJ16, PJ43 and PJ55 with their original calibrated
+PDS images. All 55,296 M-band values in each match exactly after a horizontal
+flip, with no vertical flip or unit scaling. Early PDS labels can misleadingly
+name spectral-radiance units; the released band-radiance plane and Appendix B
+are the unit authority here.
+
+The released saturation mask (including the stricter `_80` product where
+provided), off-body samples and emission beyond 75° are withheld. Exact PDS
+exposure start times, the producer's −0.62 s correction from PJ51 and a short
+light-time estimate from the published ranges place the Sun. The existing
+night-side rule keeps two projected pixel footprints away from the terminator.
+Each detector column needs 32 valid cold-night samples to establish its median
+background; unsupported columns stay missing. Per-visit medians require at
+least three frames, then each cell selects the visit with the finest footprint.
+There is no gap filling, smear correction or optional nonlinear flat-field
+correction. The old 0–0.15 display scale and object geometry are unchanged.
+
+[The position check](evidence/jiram-perry/map-check.json) finds 60 of 72 local
+peaks above 0.03 W sr⁻¹ m⁻² within 3° of a Davies et al. (2024) catalogue
+source, versus 13 with longitudes mirrored. Twelve peaks fall farther away.
+This supports orientation and approximate locations; it does not identify all
+peaks or qualify absolute radiometry. Faint detector tracks, smear and visit
+boundaries remain. The earlier saturation-streak trial remains a
+historical result; released geometry and explicit detector masks now support
+keeping unsaturated portions of earlier observations.
+
+Perry's reported full M-band observational coverage does not imply a complete
+radiance map under these cuts. Daylight subtraction and a background estimator
+for distant images need separate qualification before admitting those pixels.
+The previous four-visit integrated-output comparison below does not validate
+these added observations.
+
+Reproduce with `node tools/objects/juno/jiram-registered-mosaic.mts src/objects/io/source/science/jiram/perry-recipe.json --inputs output/io-perry/inputs --fetch`.
+The fetch route requires curl and 7z, requests only the nested FITS members of
+the release ZIP and checks their CRCs. A PJ43 archive restoration reproduced
+the independently acquired FITS bytes. The float map is restored through the
+source cache; the recipe, detached label and 525 kB screening receipt remain
+in Git. The receipt supports the complete accepted/rejected product selection
+and holds measured input identities and registration residuals.
+
+The [qualification record](evidence/jiram-perry/qualification.json) identifies
+the tested inputs, browser settings, focused tests and delivery checks.
+Inspected views include [the coverage edge](evidence/jiram-perry/coverage-edge.png),
+[Shadows on](evidence/jiram-perry/heat-shadows.png) and
+[the mobile dataset sheet](evidence/jiram-perry/heat-mobile.png).
+The four changed heat images total 263,490 bytes, 107,912 bytes more than the
+previous map. Other surface textures, geometry and lighting assets match the
+base inventory.
+
+</details>
+
+### Six-visit volcanic heat baseline (27 September 2026)
+
+The following results describe the preceding version at
+`734ad10780629e11b09707ff5d0c0f5601ecb02e`. They establish its own processing
+and coverage; the registered release above supersedes that map.
+
 
 Screened 38 frames from May 16 (orbit 51) and 43 from July 31 (orbit 53).
 The existing ellipsoid and registration policy qualified 18 and 13 respectively;
@@ -165,10 +248,10 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 
 - The scene is a mean-radius sphere, not a topographic shape model.
 
-- **Volcanic heat covers about 24% of Io's surface.** Only the observed night side is kept. The added May and July close passes improve detail, with coverage extending only to about 11°S. Gray grid marks the remaining gaps; this is not a global heat map.
+- **Volcanic heat covers about 58% of Io's surface.** Only qualified night-side observations are kept, reaching about 50°S. Gray grid marks missing and withheld measurements.
 - **Night side only.** Mura et al.'s maps also keep the day side and remove reflected sunlight afterwards with their photometric model. We do not model sunlight, so the day side is left out.
 - **Smear and residual artifacts remain.** Column-background subtraction removes the prominent reflection bands, but cannot recover resolution lost to spacecraft motion. Mura et al. use super-resolution and smear correction; we take medians of registered frames. A hot spot is often smaller than one detector pixel. Peaks must not be read as resolved lava boundaries. The old integrated-output agreement above does not establish absolute calibration for the new visits.
-- **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between April 2022 and July 2023. Hot spots vary, so the composite does not describe a single observation date.
+- **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between July 2017 and October 2023. Hot spots vary, so the composite does not describe a single observation date.
 
 [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 

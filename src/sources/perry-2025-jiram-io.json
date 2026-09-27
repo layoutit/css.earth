@@ -1,0 +1,23 @@
+{
+  "id": "perry-2025-jiram-io",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Registered JIRAM Io images and geometry, PJ5–PJ55",
+  "version": "Perry et al. (2025), perry_etal_2025.zip",
+  "identifiers": [{ "type": "DOI", "value": "10.3847/PSJ/adbae3" }],
+  "creators": ["Jason E. Perry", "Ashley Gerard Davies", "David A. Williams", "David M. Nelson"],
+  "publisher": "Arizona State University, Ronald Greeley Center for Planetary Studies",
+  "publicationDate": "2025-04-03",
+  "links": [
+    { "role": "landing", "url": "https://rgcps.asu.edu/juno/", "label": "ASU Juno data and publication" },
+    { "role": "original", "url": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip", "label": "Published processed products" },
+    { "role": "original", "url": "https://doi.org/10.3847/PSJ/adbae3", "label": "Hot Spot Detections and Volcanic Changes on Io during the Juno Epoch: Orbits PJ5 to PJ55" },
+    { "role": "original", "url": "https://github.com/volcanopele/juno/blob/fe0fea922b2531f0ff9e127a646301104067251d/jiramgeombackplane.py", "label": "Producer geometry code: planetographic coordinates and ellipsoid" }
+  ],
+  "evidence": [
+    { "url": "https://doi.org/10.3847/PSJ/adbae3", "checkedOn": "2026-09-27", "locator": "Appendix B, product units, missing values, nonlinear-response masks and ASU release; original content under CC BY 4.0" },
+    { "url": "https://github.com/volcanopele/juno/blob/fe0fea922b2531f0ff9e127a646301104067251d/jiramgeombackplane.py", "checkedOn": "2026-09-27", "locator": "IAU_IO, ELLIPSOID, bodvrd RADII, recpgr with a/c spheroid, vnorm(srfvec), and start-time correction from PJ51" }
+  ],
+  "relations": [],
+  "statements": []
+}

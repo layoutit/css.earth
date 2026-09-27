@@ -391,15 +391,15 @@
       "id": "volcanic-heat",
       "output": "io-{id}{suffix}.webp",
       "thumbnail": "io-lens-{id}.webp",
-      "source": "science/jiram/io-jiram-m-night-2023-background.IMG",
+      "source": "science/jiram/io-jiram-perry-2017-2023.IMG",
       "falseColor": true,
       "science": {
         "kind": "terrestrial-scientific",
         "id": "volcanic-heat",
         "label": "Volcanic heat",
         "format": "pds3-float-map",
-        "path": "science/jiram/io-jiram-m-night-2023-background.IMG",
-        "labelPath": "science/jiram/io-jiram-m-night-2023-background.LBL",
+        "path": "science/jiram/io-jiram-perry-2017-2023.IMG",
+        "labelPath": "science/jiram/io-jiram-perry-2017-2023.LBL",
         "grid": {
           "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
           "dataSetId": "CSSEARTH-IO-JIRAM-M-NIGHT-MOSAIC-V1",
@@ -424,9 +424,9 @@
             90
           ]
         },
-        "description": "Juno JIRAM 4.8 µm night side · Mura et al. 2024 scale",
-        "title": "Heat from Io's volcanoes at 4.8 µm, reduced from 65 registered Juno JIRAM frames on six visits, April 2022–July 2023. The May and July close passes add finer detail on a 0.25° map grid; their detector samples at or above 10,000 DN are withheld. A cold-night background is subtracted within each detector column to reduce reflection streaks. Color shows band radiance above that background on Mura et al. (2024), Figure 2's fixed scale, not temperature. About 24% of the surface is covered, mostly in the north. Dates are mixed; smear and registration uncertainty remain. Gray grid marks missing or withheld data.",
-        "sourceUrl": "https://atmos.nmsu.edu/PDS/data/PDS4/",
+        "description": "Juno JIRAM 4.8 µm night side · Perry et al. 2025 data",
+        "title": "Night-side volcanic glow at 4.8 µm from 378 registered JIRAM frames across 17 visits, July 2017–October 2023, using Perry et al. (2025) geometry and detector masks. About 58% of Io is covered. Color shows band radiance above a cold-night column background on Mura et al. (2024), Figure 2's scale, not temperature. Dates and image resolution vary; saturation, unsupported backgrounds and unobserved areas remain missing. Gray grid marks those gaps. Residual detector artifacts and smear remain.",
+        "sourceUrl": "https://doi.org/10.3847/PSJ/adbae3",
         "minimum": 0,
         "maximum": 0.15,
         "colors": [

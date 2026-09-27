@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-jiram-registered-mosaic@1",
+  "archive": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
+  "rawArchive": "https://atmos.nmsu.edu/PDS/data",
+  "method": "Perry et al. (2025), doi:10.3847/PSJ/adbae3, Appendix B. Band radiance, west-positive planetographic latitude/longitude, slant range, emission and nonlinear-response masks. Producer geometry: https://github.com/volcanopele/juno/blob/fe0fea922b2531f0ff9e127a646301104067251d/jiramgeombackplane.py. All published M-band FITS frames in the listed orbit archives are screened; only qualified cold-night columns enter the map.",
+  "orbits": [5, 6, 7, 9, 10, 11, 16, 17, 18, 20, 24, 25, 26, 27, 32, 33, 35, 37, 40, 41, 43, 44, 47, 49, 51, 53, 55],
+  "kernelSet": "juno",
+  "kernels": ["lsk/naif0012.tls", "pck/pck00011.tpc", "spk/jup363.bsp"],
+  "target": { "name": "IO", "naifId": 501, "bodyFrame": "IAU_IO", "referenceRadiusKm": 1821.49 },
+  "policy": {
+    "minimumFramesPerVisit": 3,
+    "maximumEmissionDegrees": 75,
+    "terminatorFootprints": 2,
+    "minimumBackgroundSamples": 32,
+    "maximumResidualPixels": 0.25,
+    "maximumRangeFraction": 0.01,
+    "visitGapMinutes": 30
+  },
+  "output": {
+    "image": "io-jiram-perry-2017-2023.IMG",
+    "label": "io-jiram-perry-2017-2023.LBL",
+    "receipt": "perry-receipt.json",
+    "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
+    "pixelsPerDegree": 4
+  }
+}

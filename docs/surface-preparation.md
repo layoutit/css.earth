@@ -144,6 +144,18 @@ document their recorded revision; they are not relabeled as a new full sweep.
   AcuA v1 is restored through each body’s acquisition plan and checked against its
   manifest. Its selected measurements remain in the calibration record.
 
+### Registered JIRAM radiance
+
+For Perry et al. (2025)'s registered Io FITS release,
+[`jiram-registered-mosaic.mts`](../tools/objects/juno/jiram-registered-mosaic.mts)
+transfers the published planetographic geometry into the existing camera,
+projection and per-visit combination code. It consumes the band-radiance plane
+and released detector masks, then retains qualified cold-night columns.
+The [Io method and recipe](../src/objects/io/README.md#registered-volcanic-heat-27-september-2026)
+state coordinate conventions, units, coverage limits and the curl/7z acquisition
+command. Its float output enters the existing PDS scientific-map lane; no
+source processing occurs in the browser.
+
 ### Image and numeric readers
 
 [readObservation](../packages/bake/src/objects/raster/observed/observation-raster.ts) selects

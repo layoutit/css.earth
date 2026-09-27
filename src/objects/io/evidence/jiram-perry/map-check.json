@@ -1,0 +1,878 @@
+{
+  "sourceCount": 343,
+  "ppd": 4,
+  "covered": 534232,
+  "total": 1036800,
+  "gridFraction": 0.5152700617283951,
+  "areaFraction": 0.5841750506765037,
+  "south": -50.125,
+  "north": 88.125,
+  "peaks": [
+    {
+      "latitude": 74.125,
+      "longitude": 353.125,
+      "value": 0.03999999910593033,
+      "nearest": {
+        "name": "1 JRM264",
+        "latitude": 69,
+        "longitude": 330.7,
+        "separation": 8.663788355261946
+      },
+      "mirroredSeparation": 7.268371904711216
+    },
+    {
+      "latitude": 68.875,
+      "longitude": 107.625,
+      "value": 0.0565049983561039,
+      "nearest": {
+        "name": "Chors P.",
+        "latitude": 68.5,
+        "longitude": 110.19999999999999,
+        "separation": 1.0081330839856706
+      },
+      "mirroredSeparation": 5.934322041309505
+    },
+    {
+      "latitude": 67.125,
+      "longitude": 329.375,
+      "value": 0.04662500321865082,
+      "nearest": {
+        "name": "1 JRM017",
+        "latitude": 67.7,
+        "longitude": 328.5,
+        "separation": 0.6660007263540576
+      },
+      "mirroredSeparation": 5.28559504791426
+    },
+    {
+      "latitude": 62.625,
+      "longitude": 232.125,
+      "value": 0.04899999871850014,
+      "nearest": {
+        "name": "Tvashtar 'C'",
+        "latitude": 63.5,
+        "longitude": 232.5,
+        "separation": 0.8913347781923664
+      },
+      "mirroredSeparation": 6.130518158629394
+    },
+    {
+      "latitude": 62.625,
+      "longitude": 236.625,
+      "value": 0.05525000020861626,
+      "nearest": {
+        "name": "Tvashtar 'B'",
+        "latitude": 62.9,
+        "longitude": 237.5,
+        "separation": 0.48579309257118436
+      },
+      "mirroredSeparation": 7.19378057855342
+    },
+    {
+      "latitude": 56.875,
+      "longitude": 293.625,
+      "value": 0.03440000116825104,
+      "nearest": {
+        "name": "0 JRM046 Tonatiuh B",
+        "latitude": 56.5,
+        "longitude": 294.5,
+        "separation": 0.6095473307193839
+      },
+      "mirroredSeparation": 4.7457865883734165
+    },
+    {
+      "latitude": 51.125,
+      "longitude": 275.875,
+      "value": 0.3169249892234802,
+      "nearest": {
+        "name": "1 JRM057 Tonatiuh A",
+        "latitude": 51.6,
+        "longitude": 275.6,
+        "separation": 0.5050816516202047
+      },
+      "mirroredSeparation": 2.1218982839347937
+    },
+    {
+      "latitude": 50.875,
+      "longitude": 230.875,
+      "value": 0.0572500005364418,
+      "nearest": {
+        "name": "Tvashtar 'A'",
+        "latitude": 59.3,
+        "longitude": 241.7,
+        "separation": 10.43032477799454
+      },
+      "mirroredSeparation": 6.885734833501798
+    },
+    {
+      "latitude": 50.125,
+      "longitude": 311.125,
+      "value": 0.10615000128746033,
+      "nearest": {
+        "name": "1 JRM031 Gurzil P.",
+        "latitude": 50.3,
+        "longitude": 312,
+        "separation": 0.5866543578636751
+      },
+      "mirroredSeparation": 0.8997781747587431
+    },
+    {
+      "latitude": 47.125,
+      "longitude": 230.625,
+      "value": 0.04024999961256981,
+      "nearest": {
+        "name": "Thor E.C.",
+        "latitude": 40.7,
+        "longitude": 226.2,
+        "separation": 7.169363785970958
+      },
+      "mirroredSeparation": 3.3548880238843872
+    },
+    {
+      "latitude": 44.375,
+      "longitude": 267.875,
+      "value": 0.16506248712539673,
+      "nearest": {
+        "name": "Asis P. (was Aluna P.)",
+        "latitude": 44.7,
+        "longitude": 268.1,
+        "separation": 0.36241667895256535
+      },
+      "mirroredSeparation": 7.726073649377164
+    },
+    {
+      "latitude": 43.625,
+      "longitude": 168.875,
+      "value": 0.03869999945163727,
+      "nearest": {
+        "name": "Fo P.",
+        "latitude": 43.5,
+        "longitude": 169,
+        "separation": 0.15436754579922576
+      },
+      "mirroredSeparation": 5.043432428642961
+    },
+    {
+      "latitude": 41.375,
+      "longitude": 157.375,
+      "value": 0.03970374912023544,
+      "nearest": {
+        "name": "Lei-Kung F. (SE)",
+        "latitude": 40.3,
+        "longitude": 153.7,
+        "separation": 2.980653425942449
+      },
+      "mirroredSeparation": 5.9692884405632185
+    },
+    {
+      "latitude": 40.375,
+      "longitude": 226.375,
+      "value": 1.6445000171661377,
+      "nearest": {
+        "name": "Thor E.C.",
+        "latitude": 40.7,
+        "longitude": 226.2,
+        "separation": 0.3511594312582152
+      },
+      "mirroredSeparation": 4.263416359148228
+    },
+    {
+      "latitude": 39.125,
+      "longitude": 283.875,
+      "value": 0.4880000054836273,
+      "nearest": {
+        "name": "Zal P.",
+        "latitude": 40.1,
+        "longitude": 285.5,
+        "separation": 1.5866994794102294
+      },
+      "mirroredSeparation": 9.519465655259602
+    },
+    {
+      "latitude": 38.875,
+      "longitude": 218.625,
+      "value": 0.20100000500679016,
+      "nearest": {
+        "name": "P151",
+        "latitude": 39,
+        "longitude": 218.7,
+        "separation": 0.13794291532123276
+      },
+      "mirroredSeparation": 4.820648619116126
+    },
+    {
+      "latitude": 38.375,
+      "longitude": 271.875,
+      "value": 0.11093749850988388,
+      "nearest": {
+        "name": "At'am P.",
+        "latitude": 37.9,
+        "longitude": 272.4,
+        "separation": 0.6293901313491609
+      },
+      "mirroredSeparation": 9.044056211449345
+    },
+    {
+      "latitude": 37.625,
+      "longitude": 241.125,
+      "value": 0.12462499737739563,
+      "nearest": {
+        "name": "Dusura P.",
+        "latitude": 37.5,
+        "longitude": 241,
+        "separation": 0.15950875611649565
+      },
+      "mirroredSeparation": 7.886912843459857
+    },
+    {
+      "latitude": 34.875,
+      "longitude": 222.625,
+      "value": 0.30799999833106995,
+      "nearest": {
+        "name": "P63",
+        "latitude": 35.6,
+        "longitude": 222.3,
+        "separation": 0.7720660493408387
+      },
+      "mirroredSeparation": 4.429696586940242
+    },
+    {
+      "latitude": 34.375,
+      "longitude": 348.125,
+      "value": 0.2345000058412552,
+      "nearest": {
+        "name": "0 JRM006 Gauwa P.",
+        "latitude": 35.6,
+        "longitude": 348.1,
+        "separation": 1.2251712002610902
+      },
+      "mirroredSeparation": 4.471255367447533
+    },
+    {
+      "latitude": 32.875,
+      "longitude": 259.625,
+      "value": 0.23793751001358032,
+      "nearest": {
+        "name": "Shango P.",
+        "latitude": 32.4,
+        "longitude": 259.5,
+        "separation": 0.486523422188301
+      },
+      "mirroredSeparation": 4.063074788963435
+    },
+    {
+      "latitude": 32.625,
+      "longitude": 184.625,
+      "value": 0.11048749834299088,
+      "nearest": {
+        "name": "P66",
+        "latitude": 33.8,
+        "longitude": 188.9,
+        "separation": 3.764344803329802
+      },
+      "mirroredSeparation": 7.52106041722889
+    },
+    {
+      "latitude": 31.625,
+      "longitude": 152.375,
+      "value": 0.07134250551462173,
+      "nearest": {
+        "name": "Isum (NE)",
+        "latitude": 32.2,
+        "longitude": 153,
+        "separation": 0.7823597302811144
+      },
+      "mirroredSeparation": 2.6182885847651174
+    },
+    {
+      "latitude": 31.625,
+      "longitude": 243.375,
+      "value": 0.05375000089406967,
+      "nearest": {
+        "name": "P162",
+        "latitude": 31.5,
+        "longitude": 243.5,
+        "separation": 0.16422269941505904
+      },
+      "mirroredSeparation": 2.5118294225076063
+    },
+    {
+      "latitude": 30.875,
+      "longitude": 128.875,
+      "value": 0.03571750223636627,
+      "nearest": {
+        "name": "0 JRM153 PFu1128",
+        "latitude": 29.7,
+        "longitude": 130.3,
+        "separation": 1.7013573705249936
+      },
+      "mirroredSeparation": 1.4177754771717581
+    },
+    {
+      "latitude": 30.125,
+      "longitude": 212.125,
+      "value": 0.15725001692771912,
+      "nearest": {
+        "name": "Arinna F.",
+        "latitude": 31.7,
+        "longitude": 210.7,
+        "separation": 1.9937698003291018
+      },
+      "mirroredSeparation": 3.1468655567622403
+    },
+    {
+      "latitude": 26.875,
+      "longitude": 183.625,
+      "value": 0.13482500612735748,
+      "nearest": {
+        "name": "Volund",
+        "latitude": 23.7,
+        "longitude": 183.9,
+        "separation": 3.1847173430372244
+      },
+      "mirroredSeparation": 7.077780102795973
+    },
+    {
+      "latitude": 26.125,
+      "longitude": 187.375,
+      "value": 0.03309999778866768,
+      "nearest": {
+        "name": "Volund",
+        "latitude": 23.7,
+        "longitude": 183.9,
+        "separation": 3.976253799812555
+      },
+      "mirroredSeparation": 4.12381154528481
+    },
+    {
+      "latitude": 24.375,
+      "longitude": 252.125,
+      "value": 0.09850000590085983,
+      "nearest": {
+        "name": "Monan P.",
+        "latitude": 20,
+        "longitude": 255.4,
+        "separation": 5.322555816638094
+      },
+      "mirroredSeparation": 5.804447935745658
+    },
+    {
+      "latitude": 24.125,
+      "longitude": 118.375,
+      "value": 0.0716399997472763,
+      "nearest": {
+        "name": "Girru P.",
+        "latitude": 22.8,
+        "longitude": 119.6,
+        "separation": 1.7373173433578315
+      },
+      "mirroredSeparation": 0.8453473000048113
+    },
+    {
+      "latitude": 22.875,
+      "longitude": 312.625,
+      "value": 0.04230000078678131,
+      "nearest": {
+        "name": "PFd1721",
+        "latitude": 22.2,
+        "longitude": 312.4,
+        "separation": 0.7062661892536669
+      },
+      "mirroredSeparation": 5.377293503698688
+    },
+    {
+      "latitude": 22.625,
+      "longitude": 244.375,
+      "value": 2.682499885559082,
+      "nearest": {
+        "name": "Amirani",
+        "latitude": 24,
+        "longitude": 244.8,
+        "separation": 1.4293180050583465
+      },
+      "mirroredSeparation": 3.6708160999938064
+    },
+    {
+      "latitude": 21.875,
+      "longitude": 213.875,
+      "value": 0.16574999690055847,
+      "nearest": {
+        "name": "P62",
+        "latitude": 22.3,
+        "longitude": 214,
+        "separation": 0.44050045114947983
+      },
+      "mirroredSeparation": 5.521369745365519
+    },
+    {
+      "latitude": 21.375,
+      "longitude": 273.375,
+      "value": 0.032625000923871994,
+      "nearest": {
+        "name": "Estan P.",
+        "latitude": 21.5,
+        "longitude": 272.4,
+        "separation": 0.916112606699574
+      },
+      "mirroredSeparation": 2.065629753166409
+    },
+    {
+      "latitude": 20.625,
+      "longitude": 245.375,
+      "value": 2.1554999351501465,
+      "nearest": {
+        "name": "P61",
+        "latitude": 18.7,
+        "longitude": 242.7,
+        "separation": 3.170196763339718
+      },
+      "mirroredSeparation": 5.107659975291179
+    },
+    {
+      "latitude": 20.625,
+      "longitude": 253.375,
+      "value": 0.1627500057220459,
+      "nearest": {
+        "name": "Monan P.",
+        "latitude": 20,
+        "longitude": 255.4,
+        "separation": 1.9992505853327562
+      },
+      "mirroredSeparation": 1.8916585726191177
+    },
+    {
+      "latitude": 19.625,
+      "longitude": 228.875,
+      "value": 0.28600001335144043,
+      "nearest": {
+        "name": "Yeloje P. (was Maju P.)",
+        "latitude": 19.5,
+        "longitude": 228.5,
+        "separation": 0.3748116735853716
+      },
+      "mirroredSeparation": 4.949641128024123
+    },
+    {
+      "latitude": 19.125,
+      "longitude": 185.125,
+      "value": 0.23262500762939453,
+      "nearest": {
+        "name": "Zamama",
+        "latitude": 18.4,
+        "longitude": 187.7,
+        "separation": 2.543631372132867
+      },
+      "mirroredSeparation": 9.562995882290535
+    },
+    {
+      "latitude": 17.375,
+      "longitude": 270.375,
+      "value": 0.12737499177455902,
+      "nearest": {
+        "name": "Gish Bar P.",
+        "latitude": 16.2,
+        "longitude": 269.7,
+        "separation": 1.3409784952534651
+      },
+      "mirroredSeparation": 4.286911921570459
+    },
+    {
+      "latitude": 16.625,
+      "longitude": 127.375,
+      "value": 0.03507000207901001,
+      "nearest": {
+        "name": "P13",
+        "latitude": 15.2,
+        "longitude": 128.8,
+        "separation": 1.9769883546591527
+      },
+      "mirroredSeparation": 2.9467272981130503
+    },
+    {
+      "latitude": 16.125,
+      "longitude": 235.875,
+      "value": 0.08699999749660492,
+      "nearest": {
+        "name": "Maui P.",
+        "latitude": 16.6,
+        "longitude": 235.7,
+        "separation": 0.5038048412930535
+      },
+      "mirroredSeparation": 4.595319524518345
+    },
+    {
+      "latitude": 14.625,
+      "longitude": 220.375,
+      "value": 0.04787500202655792,
+      "nearest": {
+        "name": "Ruaumoko P.",
+        "latitude": 14.8,
+        "longitude": 220.3,
+        "separation": 0.18943912266471447
+      },
+      "mirroredSeparation": 3.5800313435029283
+    },
+    {
+      "latitude": 14.625,
+      "longitude": 223.625,
+      "value": 0.07100000232458115,
+      "nearest": {
+        "name": "Camaxtli P.",
+        "latitude": 15.3,
+        "longitude": 223.2,
+        "separation": 0.7900677455059901
+      },
+      "mirroredSeparation": 6.119124314225071
+    },
+    {
+      "latitude": 12.125,
+      "longitude": 225.625,
+      "value": 0.03750000149011612,
+      "nearest": {
+        "name": "Tien Mu P.",
+        "latitude": 12.3,
+        "longitude": 225.7,
+        "separation": 0.1897321422384625
+      },
+      "mirroredSeparation": 6.228372807939079
+    },
+    {
+      "latitude": 10.125,
+      "longitude": 253.875,
+      "value": 0.10525000095367432,
+      "nearest": {
+        "name": "Ah Peku P.",
+        "latitude": 10.3,
+        "longitude": 253.3,
+        "separation": 0.5923313376357796
+      },
+      "mirroredSeparation": 8.780625525518941
+    },
+    {
+      "latitude": 9.125,
+      "longitude": 299.375,
+      "value": 0.1350249946117401,
+      "nearest": {
+        "name": "PFd1691",
+        "latitude": 11.1,
+        "longitude": 298.7,
+        "separation": 2.0837839482930147
+      },
+      "mirroredSeparation": 9.547470587053796
+    },
+    {
+      "latitude": 3.875,
+      "longitude": 284.375,
+      "value": 0.33787500858306885,
+      "nearest": {
+        "name": "\"Tawhaki P.\"",
+        "latitude": 3.4,
+        "longitude": 283.8,
+        "separation": 0.7449277010171023
+      },
+      "mirroredSeparation": 0.9884842819664724
+    },
+    {
+      "latitude": 0.625,
+      "longitude": 141.625,
+      "value": 0.032669998705387115,
+      "nearest": {
+        "name": "Ot P.",
+        "latitude": -1.1,
+        "longitude": 142.6,
+        "separation": 1.981454479876089
+      },
+      "mirroredSeparation": 3.323398764148846
+    },
+    {
+      "latitude": -0.625,
+      "longitude": 229.375,
+      "value": 3.915249824523926,
+      "nearest": {
+        "name": "1 JRM259",
+        "latitude": -2.1,
+        "longitude": 230.1,
+        "separation": 1.643448737296298
+      },
+      "mirroredSeparation": 4.055257043278347
+    },
+    {
+      "latitude": -2.125,
+      "longitude": 206.875,
+      "value": 2.995000123977661,
+      "nearest": {
+        "name": "Prometheus",
+        "latitude": -1.7,
+        "longitude": 205.8,
+        "separation": 1.155403630300514
+      },
+      "mirroredSeparation": 2.438771865480367
+    },
+    {
+      "latitude": -2.125,
+      "longitude": 247.875,
+      "value": 0.03450000286102295,
+      "nearest": {
+        "name": "P217",
+        "latitude": -5.3,
+        "longitude": 248.6,
+        "separation": 3.2563646315758144
+      },
+      "mirroredSeparation": 10.498346385233123
+    },
+    {
+      "latitude": -2.375,
+      "longitude": 227.125,
+      "value": 1.1104999780654907,
+      "nearest": {
+        "name": "1 JRM259",
+        "latitude": -2.1,
+        "longitude": 230.1,
+        "separation": 2.985421116890506
+      },
+      "mirroredSeparation": 4.976332468090847
+    },
+    {
+      "latitude": -2.375,
+      "longitude": 230.375,
+      "value": 4.658249855041504,
+      "nearest": {
+        "name": "1 JRM259",
+        "latitude": -2.1,
+        "longitude": 230.1,
+        "separation": 0.3887603139884001
+      },
+      "mirroredSeparation": 2.0855172929731447
+    },
+    {
+      "latitude": -4.125,
+      "longitude": 82.375,
+      "value": 0.06906875222921371,
+      "nearest": {
+        "name": "PV45",
+        "latitude": -6.5,
+        "longitude": 83.89999999999998,
+        "separation": 2.818860351608475
+      },
+      "mirroredSeparation": 3.581223862536547
+    },
+    {
+      "latitude": -4.875,
+      "longitude": 248.375,
+      "value": 1.2702499628067017,
+      "nearest": {
+        "name": "P217",
+        "latitude": -5.3,
+        "longitude": 248.6,
+        "separation": 0.4804702576809321
+      },
+      "mirroredSeparation": 8.832899955321148
+    },
+    {
+      "latitude": -5.125,
+      "longitude": 261.625,
+      "value": 1.2470624446868896,
+      "nearest": {
+        "name": "Sigurd P.",
+        "latitude": -5.8,
+        "longitude": 262,
+        "separation": 0.7713455798710944
+      },
+      "mirroredSeparation": 14.46532531324314
+    },
+    {
+      "latitude": -6.875,
+      "longitude": 323.125,
+      "value": 0.07144000381231308,
+      "nearest": {
+        "name": "Janus P.",
+        "latitude": -4.6,
+        "longitude": 321,
+        "separation": 3.1057220834416035
+      },
+      "mirroredSeparation": 2.468418593964324
+    },
+    {
+      "latitude": -10.375,
+      "longitude": 275.125,
+      "value": 0.04137500002980232,
+      "nearest": {
+        "name": "P225",
+        "latitude": -11.3,
+        "longitude": 275.2,
+        "separation": 0.9279283420692235
+      },
+      "mirroredSeparation": 3.814505425420088
+    },
+    {
+      "latitude": -10.875,
+      "longitude": 230.375,
+      "value": 1.5092499256134033,
+      "nearest": {
+        "name": "P95",
+        "latitude": -11.5,
+        "longitude": 232.1,
+        "separation": 1.8039390307775576
+      },
+      "mirroredSeparation": 4.65426024930726
+    },
+    {
+      "latitude": -12.625,
+      "longitude": 231.375,
+      "value": 1.4585001468658447,
+      "nearest": {
+        "name": "P95",
+        "latitude": -11.5,
+        "longitude": 232.1,
+        "separation": 1.3297654791111273
+      },
+      "mirroredSeparation": 4.17222434287897
+    },
+    {
+      "latitude": -13.125,
+      "longitude": 258.875,
+      "value": 0.11124999821186066,
+      "nearest": {
+        "name": "Itzamna P.",
+        "latitude": -15.3,
+        "longitude": 261,
+        "separation": 2.995565603771436
+      },
+      "mirroredSeparation": 6.489204402372337
+    },
+    {
+      "latitude": -16.875,
+      "longitude": 197.125,
+      "value": 0.3671249747276306,
+      "nearest": {
+        "name": "Culann (NW)",
+        "latitude": -18.6,
+        "longitude": 198.4,
+        "separation": 2.1095533687341934
+      },
+      "mirroredSeparation": 3.701625414331283
+    },
+    {
+      "latitude": -17.125,
+      "longitude": 103.625,
+      "value": 0.03174374997615814,
+      "nearest": {
+        "name": "Pele",
+        "latitude": -18.8,
+        "longitude": 104.4,
+        "separation": 1.8300476955459974
+      },
+      "mirroredSeparation": 4.8011312150286845
+    },
+    {
+      "latitude": -18.625,
+      "longitude": 219.375,
+      "value": 0.257625013589859,
+      "nearest": {
+        "name": "Tupan P.",
+        "latitude": -18.8,
+        "longitude": 219.6,
+        "separation": 0.27575234621532513
+      },
+      "mirroredSeparation": 5.882566477794624
+    },
+    {
+      "latitude": -21.875,
+      "longitude": 143.875,
+      "value": 0.03003999963402748,
+      "nearest": {
+        "name": "PFd 1367",
+        "latitude": -21.1,
+        "longitude": 146.3,
+        "separation": 2.3857923162086863
+      },
+      "mirroredSeparation": 4.3840616659148495
+    },
+    {
+      "latitude": -24.375,
+      "longitude": 138.875,
+      "value": 0.05478750169277191,
+      "nearest": {
+        "name": "Fd2315",
+        "latitude": -25.2,
+        "longitude": 136.5,
+        "separation": 2.3085766998911748
+      },
+      "mirroredSeparation": 5.752311710139948
+    },
+    {
+      "latitude": -26.375,
+      "longitude": 202.625,
+      "value": 0.6765000224113464,
+      "nearest": {
+        "name": "Tohil P.",
+        "latitude": -26.7,
+        "longitude": 203.2,
+        "separation": 0.6084820929926015
+      },
+      "mirroredSeparation": 6.975948781040161
+    },
+    {
+      "latitude": -31.875,
+      "longitude": 229.375,
+      "value": 0.06650000065565109,
+      "nearest": {
+        "name": "Malik P.",
+        "latitude": -34.5,
+        "longitude": 230.7,
+        "separation": 2.8495108780884597
+      },
+      "mirroredSeparation": 3.646472451360761
+    },
+    {
+      "latitude": -34.375,
+      "longitude": 233.375,
+      "value": 0.03565187379717827,
+      "nearest": {
+        "name": "Malik P.",
+        "latitude": -34.5,
+        "longitude": 230.7,
+        "separation": 2.2096622998993323
+      },
+      "mirroredSeparation": 6.240856394298979
+    },
+    {
+      "latitude": -35.125,
+      "longitude": 207.875,
+      "value": 0.03949999809265137,
+      "nearest": {
+        "name": "Shamash P. (SE)",
+        "latitude": -36.4,
+        "longitude": 208.2,
+        "separation": 1.3019853676059034
+      },
+      "mirroredSeparation": 6.677148607007523
+    },
+    {
+      "latitude": -39.125,
+      "longitude": 233.375,
+      "value": 0.03579374775290489,
+      "nearest": {
+        "name": "Malik P.",
+        "latitude": -34.5,
+        "longitude": 230.7,
+        "separation": 5.096089406631164
+      },
+      "mirroredSeparation": 6.104146148788561
+    },
+    {
+      "latitude": -47.375,
+      "longitude": 132.875,
+      "value": 0.042137499898672104,
+      "nearest": {
+        "name": "P143",
+        "latitude": -49,
+        "longitude": 124,
+        "separation": 6.131924799622944
+      },
+      "mirroredSeparation": 6.129533592329939
+    }
+  ],
+  "matched": 60,
+  "mirrored": 13
+}

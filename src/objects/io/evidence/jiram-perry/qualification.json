@@ -1,0 +1,183 @@
+{
+  "date": "2026-09-27",
+  "testedVersion": {
+    "baseCommit": "fbb2de820404f154b8d3322cebfaa03030b0bf0a",
+    "changes": "Uncommitted feat/io-perry-coverage implementation, source records and Io inventory included beside this evidence. No renderer, camera, geometry or interaction implementation changed.",
+    "imageSha256": "a8555dd327f6ea6c162ca7f528850c5ab598c9b21b8cf241f9347b046bd5c570",
+    "recipeSha256": "cb64acd6e2d4ce51fc1286683b69476d4550bd4bc933b83e492690fad42fa00d"
+  },
+  "scientific": {
+    "screenedFrames": 2374,
+    "acceptedFrames": 378,
+    "contributingVisits": 17,
+    "coverage": {
+      "cells": 1036800,
+      "validCells": 534232,
+      "gridFraction": 0.5152700617283951,
+      "sphericalAreaFraction": 0.5841750506765037
+    },
+    "maximumHoldoutResidualPixels": 0.00021834081101361269,
+    "maximumRangeFraction": 0.00014817077192175176,
+    "independentNativeValues": "native-values.json",
+    "positionCheck": "map-check.json",
+    "positionCheckMethod": "Local maxima above 0.03 W/(m2 sr) in a +/-1.5-degree grid window; compare great-circle distance to all 343 Davies 2024 Table A1 locations, using west-to-east longitude conversion. Ties keep the first grid sample. Count within 3 degrees and repeat with mirrored longitudes. Source rows use native fixed-width columns 38-42 latitude and 44-48 longitude.",
+    "limits": "Transfer precision is not absolute geolocation. Sixty of 72 peaks match within 3 degrees; 12 remain unmatched. Mixed dates, smear, residual detector tracks, saturation and southern gaps remain. No temperature, absolute radiometry or total heat-flow qualification."
+  },
+  "browser": {
+    "desktop": {
+      "version": "154.0.8037.0",
+      "url": "http://127.0.0.1:4318/io/?settings=1&v=UAO-dMmwKPXCkL5Rkm6XjU_fwMF7e33rsxVBQsczQAAAAL_EFGZGFpitv9TAXKGcsy-_5FY04i0zBAABAAAAAAAAAAA&dataset=volcanic-heat",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "dpr": 1,
+      "shadows": "off and on, inspected",
+      "rotation": "coverage-edge.png follows a drag on the globe; its URL is recorded above"
+    },
+    "dpr2": [
+      {
+        "version": "154.0.8037.0",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "dpr": 2,
+        "url": "http://127.0.0.1:4318/io/?dataset=volcanic-heat&v=UAO-dQp_S8an8L5Qt87ZFocrwMF7e33rsxZBQsczQAAAAL-xum2vyu_rv5nPaVcZ63C_1rCbEpC_AAABAAAAAAAAAAA",
+        "errors": [],
+        "failed": []
+      },
+      {
+        "version": "154.0.8037.0",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "dpr": 2,
+        "url": "http://127.0.0.1:4318/io/?dataset=volcanic-heat&v=UAO-dQp_S8an8L5Qt87ZFocrwMF7e33rsxZBQsczQAAAAL-xum2vyu_rv5nPaVcZ63C_1rCbEpC_AAABAAAAAAAAAAA",
+        "errors": [],
+        "failed": []
+      }
+    ],
+    "images": [
+      {
+        "file": "heat-desktop.png",
+        "bytes": 519355,
+        "sha256": "b7ef5241a1cb07d9c2d9af4787f5bb0a6de243739f2a7e954fa27c890f0f012a"
+      },
+      {
+        "file": "heat-mobile.png",
+        "bytes": 239919,
+        "sha256": "d542ceaec606d8c84a61ce06006ce179a2c11fffcec3f1c2220b9cbd2a58e624"
+      },
+      {
+        "file": "heat-shadows.png",
+        "bytes": 213884,
+        "sha256": "d1d91f93389b3cb1f9064b4a89a0ebc209f838a9871418456abcc2d7d19b1df4"
+      },
+      {
+        "file": "coverage-edge.png",
+        "bytes": 513043,
+        "sha256": "6ea5a7337c70caab874ee6ce791a38cc420606bce9626a6cbce2c97ec81a963c"
+      }
+    ],
+    "inspected": "Expanded globe and holes, lighting on/off, desktop DPR 1 and 2, mobile dataset map/legend and text. Mobile viewport emulation, not an iPad device capture.",
+    "console": "No page errors or failed asset requests in the fresh DPR2 desktop and mobile runs. Desktop console has unused normal-image preload warnings."
+  },
+  "checks": [
+    {
+      "command": "node --test tools/objects/juno/jiram-mosaic.test.mts tools/objects/juno/jiram-registered.test.mts",
+      "result": "9 passed"
+    },
+    {
+      "command": "pnpm typecheck:preparation",
+      "result": "passed"
+    },
+    {
+      "command": "node --test tools/objects/terrestrial-layers/pds-float-map.test.mts tests/objects/unit/runtime-package.test.mts tools/investigations/report-investigations.test.mts",
+      "result": "1866 passed, zero failed; the runtime-package file includes all body contracts"
+    },
+    {
+      "command": "node tools/prepare/cli/prepare-object.mts io --from prepare",
+      "result": "passed; unrelated generated Sun metadata and unchanged Io arrivals restored from the base inventory"
+    },
+    {
+      "command": "node tools/prepare/cli/prepare-text.mts io",
+      "result": "passed"
+    }
+  ],
+  "delivery": {
+    "files": 77,
+    "bytes": 12221875,
+    "changed": [
+      {
+        "filename": "io-lens-volcanic-heat.webp",
+        "bytes": 1148,
+        "sha256": "09990557c1514c62b26e73d530565cf1a7186a41a8ca2d7f9ebd16e999e3a8d6"
+      },
+      {
+        "filename": "io-poles-volcanic-heat@2x.webp",
+        "bytes": 22474,
+        "sha256": "5c19508a4426aa46c0d38eb3ad4b8444bc63bb644e2f7f7c20ade318ff58c057"
+      },
+      {
+        "filename": "io-volcanic-heat@2x.webp",
+        "bytes": 234822,
+        "sha256": "acab1e7b3cafb90f615c82f2ee043b04e8bb9c33ac51a4743977e74c84e90fa8"
+      },
+      {
+        "filename": "assets.json",
+        "bytes": 88707,
+        "sha256": "f9370cc4b31347828d345b3cd6edc0e13f1ef880bea72dbd73dabc5c73a81a6c"
+      },
+      {
+        "filename": "authored-preparation.json",
+        "bytes": 1417,
+        "sha256": "1634f7dee9573522b376bb3ec9635342305bfe44762584452cd1f4ac67d59b10"
+      },
+      {
+        "filename": "controls.json",
+        "bytes": 6898,
+        "sha256": "a5afd0b01d767fbb0fb290b0ac89080d9391c0420eff96b78f537efdae8a7221"
+      },
+      {
+        "filename": "lenses.json",
+        "bytes": 8864,
+        "sha256": "37fb60254081c0e43778d0c82e581a0c9dcb1f8a171d646903945b4fa5f2b7ba"
+      },
+      {
+        "filename": "minimaps/volcanic-heat.webp",
+        "bytes": 5046,
+        "sha256": "5af733df8407a66e08d99675d5fb3cab436e594701138652b4578876035a9ed5"
+      },
+      {
+        "filename": "runtime.json",
+        "bytes": 583100,
+        "sha256": "09331876a71ae1da2c73ada842d0ae63103cc796f169e8e3504533c6fd96a96b"
+      },
+      {
+        "filename": "text.json",
+        "bytes": 1843,
+        "sha256": "1a81259255318c998722154aded78eb9bb7dd19225573ef4ff3a0027f2d32f96"
+      }
+    ],
+    "result": {
+      "installed": 77,
+      "reused": 0,
+      "skipped": 0
+    },
+    "source": {
+      "url": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-perry-2017-2023.IMG",
+      "bytes": 4147200,
+      "sha256": "a8555dd327f6ea6c162ca7f528850c5ab598c9b21b8cf241f9347b046bd5c570"
+    }
+  },
+  "archiveRestore": {
+    "orbit": 43,
+    "productId": "JIR_IMG_RDR_2022186T045549_V01",
+    "method": "fetchFits range-download + ZIP CRC + 7z extraction in a fresh temporary directory",
+    "fitsSha256": "6de817b95a82f70c3f2cbb3d48a35f4243260c399eddf1d7df9126f84e6228c0",
+    "matchesIndependentAcquisition": true
+  },
+  "omitted": "No full pnpm build or full browser conformance run: this changes offline preparation and prepared source data only."
+}
