@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
 import type {ResizeOptions,Sharp} from 'sharp';
 import { DECORATIVE_WEBP, composeLimbPreview } from '@cssearth/bake/raster';

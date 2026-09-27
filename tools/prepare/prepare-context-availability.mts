@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { cross3 as cross, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 // Computes, for each body, the direction to the Sun, the J2000 ecliptic

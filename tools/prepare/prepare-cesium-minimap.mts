@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { parseAst } from 'vite';

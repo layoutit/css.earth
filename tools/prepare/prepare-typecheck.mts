@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawn } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';

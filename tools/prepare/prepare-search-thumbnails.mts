@@ -3,7 +3,7 @@
 // marker has a context sprite (`public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite; a
 // sprite photographed on black sky is cut out along the body's outline. A search list decodes dozens of these; the full
 // images would cost megabytes each.
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

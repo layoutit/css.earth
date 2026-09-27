@@ -5,7 +5,7 @@ import { inventoriedObjectIds } from '../assets/runtime-assets.mts';
 import { parseChartAssetRecipe } from '../objects/charts/charts.ts';
 import { escapeXml } from '../objects/charts/chart-style.mts';
 import { refreshObjectCharts } from '../objects/content/refresh-charts.mts';
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 
 // Illustrations use the same source recipes and SVG renderer as the live panels.
 export async function prepareChartCatalog(args: readonly string[] = [], root = resolve(import.meta.dirname, '../..')) {

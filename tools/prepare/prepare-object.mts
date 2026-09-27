@@ -16,7 +16,7 @@
  * that takes the id list (page data, reader text, markers, provenance) once with every id, and the authored preparation, the
  * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
  * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';

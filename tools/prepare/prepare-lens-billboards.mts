@@ -4,7 +4,7 @@
 // From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: the atlas draws it there,
 // and its megabytes of lenses are fetched only once it is large on screen. Inputs are the restored prepared
 // lens payloads; the output records each payload's pinned sha256 so a stale atlas cannot pass for a fresh one.
-import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
