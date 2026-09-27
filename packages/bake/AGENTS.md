@@ -71,6 +71,20 @@ its validators accept); the renderer never imports the bake.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls. It imports `presentation`.
+- `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the prepared focus objects and scene distances
+  the catalogue and search destinations are built from, and the marker recipes whose source bytes are checked and drawn
+  into navigation marker sprites. It imports `raster`, and `objects/raster` (loaded only when a marker is drawn from a
+  science raster). Its tests are `node --test` suites in `tests/navigation/`.
+- `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
+  minimap or preview raster is drawn from, read and checked. It imports no topic.
+- `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
+  of the preparation trace. `packages/bake/cli/preparation-trace.mts` is the trace itself, which
+  `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
+  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. Its tests
+  are `node --test` suites in `tests/preparation/`.
+- `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
+  libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
+  entry `package.json` lists under `sideEffects`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
@@ -115,6 +129,10 @@ its validators accept); the renderer never imports the bake.
     from a published figure or occultation, and Roche-von Zeipel gravity darkening. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
     compiler identity reaches, so that identity does not pin the source-manifest readers.
+  - `objects/candidates`: what public archives hold for a body or a star before it is reworked: read-only searches of
+    ALMA, the ESO archive, MAST, DataCite and the JMMC diameters (a query and a pure summary of its rows each), the imagery
+    candidates (OPUS frames finer than a body ships, archive leads for a named body) and the resolved-star candidates. It
+    imports no topic. `packages/bake/cli/imagery-candidates.mts` and `star-candidates.mts` print them.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
