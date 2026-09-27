@@ -1,6 +1,6 @@
 # Mars sources
 
-**Surface elements.** The dataset selector groups Chlorine, Iron, Silicon, Potassium, Thorium under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Surface elements.** The dataset selector groups Chlorine, Iron, Silicon, Potassium, Thorium under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/usgs-numeric/browser.json).
 
 Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations on the shared raster lane used by Mercury and Venus, with modeled atmosphere charts and IAU nomenclature labels.
 
