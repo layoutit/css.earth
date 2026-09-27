@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { cp,mkdtemp,writeFile,readFile,rm } from 'node:fs/promises';
+import { cp,mkdtemp,writeFile,readFile,rm,stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -72,6 +72,7 @@ test('physical handoffs refuse spectral deliveries and incompatible selectors',a
 test('physical inspection and export share the existing loader, frame and credit closure',async()=>{
   const root=await mkdtemp(resolve(tmpdir(),'spatial-inspection-')),source=resolve(import.meta.dirname,'../../../src/objects/stellar-neighbourhood'),copy=resolve(root,'stellar-neighbourhood');
   try{
+    await stat(resolve(source,'prepared/stars.json'));// Absent until restored; a copy outside the checkout would hide which input.
     await cp(source,copy,{recursive:true});const object=resolve(copy,'object.json');
     const inspected=await inspectSpatialObject(object),ready=await listArtifactOutputs(object);assert.ok(ready.outputs.some(output=>output.kind==='points'&&output.available));
     const handoff=await exportSpatialObject(object,'points',resolve(root,'handoff')),receipt=JSON.parse(await readFile(handoff.receipt,'utf8'));
