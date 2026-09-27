@@ -29,6 +29,7 @@
   "include": [
     "**/*.mts",
     "../.github/scripts/**/*.mts",
+    "../labs/experiments/**/*.mts",
     "../site/env.d.ts",
     "nebula/application/**/*.ts"
   ],

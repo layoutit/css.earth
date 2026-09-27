@@ -39,6 +39,7 @@ test('folders follow the prototype zones', () => {
     'packages/bake/tsup.config.ts': 'packages/bake(root)',
     'labs/nebula/packages/volume-core/src/x.ts': 'labs/nebula-pkg/volume-core',
     'labs/nebula/run.mts': 'labs/nebula(app)',
+    'labs/experiments/native-scroll/run.mts': 'labs/experiments',
     'src/renderers/css/navigation/x.ts': 'src/renderers/css/navigation',
     'src/renderers/css/index.ts': 'src/renderers/css(root)',
     'src/preparation/stars/x.ts': 'src/preparation/stars',

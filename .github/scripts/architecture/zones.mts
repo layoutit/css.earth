@@ -1,6 +1,7 @@
 /** Folder grouping ("zones") and test detection for the architecture map.
  *
- * A zone is the folder a file is counted in: `packages/<name>`, `labs/nebula-pkg/<name>`, the topics of
+ * A zone is the folder a file is counted in: `packages/<name>`, `labs/nebula-pkg/<name>`, `labs/<lab>` beside
+ * `labs/nebula(app)`, the topics of
  * `@cssearth/bake` (`packages/bake/src/<topic>`, `packages/bake/src/objects/<topic>`,
  * `packages/bake/src/objects/layers/<kind>`, `packages/bake/cli`, `packages/bake/authoring/<body>`), so a cycle
  * between bake topics shows instead of hiding inside one package,
@@ -18,7 +19,7 @@ export function zoneOf(file: string): string {
   if (file.startsWith('packages/bake/')) return bakeZone(parts);
   if (top === 'packages') return `packages/${second}`;
   if (file.startsWith('labs/nebula/packages/')) return `labs/nebula-pkg/${fourth}`;
-  if (top === 'labs') return 'labs/nebula(app)';
+  if (top === 'labs') return second === 'nebula' ? 'labs/nebula(app)' : `labs/${second}`;
   if (file.startsWith('src/renderers/css/')) return parts.length > 4 ? `src/renderers/css/${fourth}` : 'src/renderers/css(root)';
   if (file.startsWith('src/preparation/')) return parts.length > 3 ? `src/preparation/${third}` : 'src/preparation(root)';
   if (file.startsWith('tools/objects/')) return parts.length > 3 ? `tools/objects/${third}` : 'tools/objects(root)';

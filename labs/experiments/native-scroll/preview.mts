@@ -9,9 +9,9 @@ import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/hel
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
 import { serializePreparedScene } from '../../../site/prepared/serialize-prepared-scene.mts';
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
-import { addNativeResizeInput } from './resize-input.mts';
-import { addNativeCamera } from './native-camera.mts';
-import { carryViewportValues } from './carry-values.mts';
+import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
+import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
+import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4349';
