@@ -65,7 +65,13 @@ function listed(r: Row): ViewerRow {
     date: field(r.details, "date"),
   };
 }
-const recorded = new Set(rows.flatMap((r) => bodiesOf(r.target)));
+// PDS4 and Maryland rows shorten their target text ("…; +6 more") but keep every target in details.targets.
+function targetsOf(r: Row): string {
+  const d = r.details;
+  const all = d && typeof d === "object" && "targets" in d && Array.isArray(d.targets) ? d.targets.filter((t): t is string => typeof t === "string") : [];
+  return all.length ? all.join("; ") : r.target;
+}
+const recorded = new Set(rows.flatMap((r) => bodiesOf(targetsOf(r))));
 async function proposals(): Promise<ViewerProposal[]> {
   const markdown = await readFile(root + "/PROPOSALS.md", "utf8");
   return loadProposals().map((p) => {
@@ -90,13 +96,15 @@ async function proposals(): Promise<ViewerProposal[]> {
   });
 }
 function labels(): Record<string, string> {
-  // Sources spell one body differently ("mars", "Mars", "(4) Vesta"); show the capitalised spelling.
+  // Sources spell one body differently ("mars", "MARS", "(4) Vesta").
   const out: Record<string, string> = { several: "Several bodies" };
   for (const r of rows)
-    for (const raw of r.target.split(";")) {
-      const label = raw.trim().replace(/^\(\d+\)\s*/, "");
+    for (const raw of targetsOf(r).split(";")) {
+      const label = raw.trim().replace(/^\(\d+\)\s*/, "").replace(/^\*\s+/, "");
       const [key] = bodiesOf(label);
-      if (key && (!out[key] || (out[key] === out[key].toLowerCase() && label !== label.toLowerCase()))) out[key] = label;
+      // Prefer "Tempel 1" over "TEMPEL 1" over "tempel 1".
+      const score = (t: string) => (t !== t.toLowerCase() && t !== t.toUpperCase() ? 2 : t !== t.toLowerCase() ? 1 : 0);
+      if (key && (!out[key] || score(label) > score(out[key]))) out[key] = label;
     }
   return out;
 }
@@ -135,14 +143,18 @@ for (const token of [...recorded, ...proposalList.flatMap((p) => p.bodies)]) {
 // The Photojournal tags a moon's images with its planet too ("earth; moon", "enceladus; saturn"). A record that names a
 // body and that body's parent counts for the body, so Earth and Saturn do not collect their moons' pictures.
 function ownBodies(r: Row): string[] {
-  const tagged = bodiesOf(r.target);
+  const tagged = bodiesOf(targetsOf(r));
   if (r.source !== "photojournal") return tagged;
   const parents = new Set(tagged.map((t) => known.get(idOf(t))?.parent).filter(Boolean));
   const kept = tagged.filter((t) => !parents.has(idOf(t)));
   return kept.length ? kept : tagged;
 }
 const names = labels();
-for (const [id, record] of known) if (catalogue[id] && !names[id] && record.name) names[id] = record.name;
+// cssEarth's own name wins over a source's spelling ("EARTH", "earth").
+for (const token of Object.keys(catalogue)) {
+  const record = known.get(idOf(token));
+  if (record?.name) names[token] = record.name;
+}
 const data: ViewerData = { rows: rows.map((r) => ({ ...listed(r), bodies: ownBodies(r) })), proposals: proposalList, sources, labels: names, catalogue };
 const page = await readFile(root + "/viewer/index.html", "utf8");
 const script = stripTypeScriptTypes(await readFile(root + "/viewer/app.mts", "utf8"));

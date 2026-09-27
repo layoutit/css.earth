@@ -13,12 +13,14 @@ export function openLedger(): DatabaseSync {
 }
 // The bodies a target field names, lowercased and without a minor-planet number ("(162173) Ryugu" is "ryugu"). The
 // Photojournal tags a body with its parents too ("mars; sun"); the Sun counts only when it is the only body tagged, so
-// filtering by the Sun does not return 1,965 images of the planets that orbit it.
+// filtering by the Sun does not return 1,965 images of the planets that orbit it. SIMBAD's star prefix ("* bet Tau") is
+// dropped.
 export function bodiesOf(target: string): string[] {
   const tagged = target
     .split(";")
-    .map((t) => t.trim().toLowerCase().replace(/^\(\d+\)\s*/, ""))
-    .filter(Boolean);
+    .map((t) => t.trim().toLowerCase().replace(/^\(\d+\)\s*/, "").replace(/^\*\s+/, ""))
+    // "+6 more" ends a shortened list; it names no body.
+    .filter((t) => t && !/^\+\d+ mor/.test(t));
   return tagged.length > 1 ? tagged.filter((t) => t !== "sun") : tagged;
 }
 export type Row = {

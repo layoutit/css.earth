@@ -29,7 +29,10 @@ hold no systems. The table filters by name, kind, cssEarth membership,
 proposals and candidates, and sorts by any column. A row opens that body's, or
 that system's, proposals with their writeups and its records with previews.
 
-A Photojournal record that names a moon and its planet counts for the moon, and
+Bodies cssEarth does not know and no proposal names, such as calibration stars and
+lightcurve asteroids, sit in one Other targets group. PDS4 and Maryland rows are
+read from their full `targets` lists, not their shortened target text. A
+Photojournal record that names a moon and its planet counts for the moon, and
 the Sun counts only when no other body is tagged. `slice.mts` keeps the
 filtered JSON and TSV exports. The server reads the ledger once; restart it
 after editing the database. `AUDIT_DB` selects another file for comparisons.

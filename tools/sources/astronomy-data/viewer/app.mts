@@ -38,7 +38,16 @@ for (const e of entries.values()) {
   const parent = info(e.token).parent;
   if (parent && parent !== e.token) entry(parent).children.push(e);
 }
-const top = [...entries.values()].filter((e) => !info(e.token).parent || !entries.has(info(e.token).parent));
+// Bodies cssEarth knows, or that a proposal names, stand on their own. The thousands of other targets the sources list
+// (calibration stars, lightcurve asteroids, "Multiple asteroids") wait in one group.
+const other = "other-targets";
+data.labels[other] = "Other targets";
+const standalone = (e: Entry) => !!(info(e.token).kind || info(e.token).object || e.proposals.length || e.children.length);
+for (const e of [...entries.values()])
+  if (!info(e.token).parent && !standalone(e)) entry(other).children.push(e);
+const top = [...entries.values()].filter(
+  (e) => e.token === other || ((!info(e.token).parent || !entries.has(info(e.token).parent)) && standalone(e)),
+);
 
 type Stats = {
   rows: ViewerRow[];
@@ -149,9 +158,10 @@ function cells(e: Entry, s: Stats, label: string): string {
 }
 function childrenWord(e: Entry): string {
   const kinds = new Set(e.children.map((c) => info(c.token).kind));
-  const word = kinds.size === 1 && kinds.has("satellite") ? "moon" : kinds.size === 1 && kinds.has("exoplanet") ? "planet" : "body";
+  const word =
+    e.token === other ? "target" : kinds.size === 1 && kinds.has("satellite") ? "moon" : kinds.size === 1 && kinds.has("exoplanet") ? "planet" : "body";
   const n = e.children.length;
-  return `${n} ${word === "body" ? (n === 1 ? "body" : "bodies") : word + (n === 1 ? "" : "s")}`;
+  return `${number(n)} ${word === "body" ? (n === 1 ? "body" : "bodies") : word + (n === 1 ? "" : "s")}`;
 }
 function tableRows(): string {
   const out: string[] = [];
@@ -161,13 +171,13 @@ function tableRows(): string {
       if (passes(e)) out.push(`<tr class="link" data-body="${esc(e.token)}">${cells(e, own.get(e) ?? stats([], []), esc(name(e.token)))}</tr>`);
       continue;
     }
-    const members = [e, ...[...e.children].sort((a, b) => compare(a, b, own.get(a), own.get(b)))];
+    const members = [...(e.token === other ? [] : [e]), ...[...e.children].sort((a, b) => compare(a, b, own.get(a), own.get(b)))];
     const shown = active ? members.filter(passes) : members;
     if (!shown.length) continue;
     const open = active || state.expanded.has(e.token);
     const caret = `<button class="caret" data-toggle="${esc(e.token)}" aria-expanded="${open}" aria-label="Show ${esc(childrenWord(e))}">${open ? "▾" : "▸"}</button>`;
     out.push(
-      `<tr class="link system" data-body="${esc(e.token)}" data-system="1">${cells(e, statsOf(e), `${caret}${esc(name(e.token))} <span class="sub-inline">system · ${esc(childrenWord(e))}</span>`)}</tr>`,
+      `<tr class="link system" data-body="${esc(e.token)}" data-system="1">${cells(e, statsOf(e), `${caret}${esc(name(e.token))} <span class="sub-inline">${e.token === other ? "" : "system · "}${esc(childrenWord(e))}</span>`)}</tr>`,
     );
     if (open)
       for (const m of shown)
