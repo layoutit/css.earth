@@ -7,7 +7,7 @@ import { inventoryText, readInventory, type InventoryAsset } from '../../../src/
 import { inventoryAssets } from '../../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../../assets/setup.mts';
 import { writePreparedSet, type PreparedOutput } from '../../prepared/write-prepared-set.mts';
-import { parseChartAssetRecipe, prepareChartAssets } from './charts.ts';
+import { parseChartAssetRecipe, prepareChartAssets } from '../charts/charts.ts';
 
 /** Refresh existing charts and their intrinsic sizes without rebaking surfaces or galleries.
  * The full authored-preparation receipt is deliberately left alone: this is a partial preparation.
