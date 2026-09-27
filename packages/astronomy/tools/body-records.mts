@@ -41,19 +41,20 @@ function bodyRecord(value: unknown): BodyRecord {
   if (physical.effectiveTemperatureK !== undefined && (record.classification !== 'star' || !(physical.effectiveTemperatureK > 0))) {
     throw new TypeError(`A measured effective temperature belongs to a star and is positive: ${record.id} has ${physical.effectiveTemperatureK}.`);
   }
-  // Zero radius means no source measures one; only a star known from its hosted orbit alone may lack it (most S-stars).
-  if (physical.meanRadiusKm === 0 && (record.classification !== 'star' || record.hostedOrbit === undefined)) {
-    throw new TypeError(`Only a hosted star may have an unmeasured radius: ${record.id} has meanRadiusKm 0.`);
+  // Zero radius means no source measures one; only a star or black hole known from its hosted orbit alone may lack it (most S-stars,
+  // the black hole of Cygnus X-1).
+  if (physical.meanRadiusKm === 0 && (!['star', 'black-hole'].includes(record.classification) || record.hostedOrbit === undefined)) {
+    throw new TypeError(`Only a hosted star or black hole may have an unmeasured radius: ${record.id} has meanRadiusKm 0.`);
   }
   // A star or black hole beyond the Solar System is placed by its astrometry and orbits nothing this package models.
   if (record.star !== undefined && (!['star', 'black-hole'].includes(record.classification) || physical.parent !== null)) {
     throw new TypeError(`Placement astrometry belongs to a parentless star or black hole: ${record.id}.`);
   }
   // A hosted orbit is placed around its parent: every exoplanet has one, and a star may have one instead of its own placement
-  // (the S-stars around Sgr A*). The parent must be placed; readBodyRecords checks that.
+  // (the S-stars around Sgr A*), and so may a black hole (the one of Cygnus X-1). The parent must be placed; readBodyRecords checks that.
   if (record.classification === 'exoplanet' && record.hostedOrbit === undefined || record.hostedOrbit !== undefined &&
-    (!['exoplanet', 'star'].includes(record.classification) || physical.parent === null || record.star !== undefined)) {
-    throw new TypeError(`A hosted orbit belongs to an exoplanet or an unplaced star around a parent: ${record.id}.`);
+    (!['exoplanet', 'star', 'black-hole'].includes(record.classification) || physical.parent === null || record.star !== undefined)) {
+    throw new TypeError(`A hosted orbit belongs to an exoplanet or an unplaced star or black hole around a parent: ${record.id}.`);
   }
   const acquisition = record.acquisition;
   if (acquisition?.heliocentric && !['asteroid', 'comet', 'dwarfPlanet'].includes(acquisition.heliocentric.model)) throw new TypeError('Invalid heliocentric model.');

@@ -612,7 +612,7 @@ test('the Solar System begins revealing context as the distance readout hands fr
 
 test('inside its authored range a system draws every member orbit, named or not, and retires beyond it', () => {
   const recorded = plan.bodies.filter(body => body.unpackaged === true);
-  expect(recorded.map(body => body.id)).toEqual(expect.arrayContaining(['s2', 's301', 's1']));
+  expect(recorded.map(body => body.id)).toEqual(expect.arrayContaining(['s29', 's301', 's1']));
   // The application gives a recorded body the tier of a planet of its host's system.
   const calculate = createWorldContextPlanner(plan, Object.fromEntries(recorded.map(body => [body.id, labelImportance('planet')]))), input = view();
   const host = plan.bodies.find(body => body.id === 'sgr-a-star')!;

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "s2",
+  "card": {
+    "text": "A hot young star that swings around the Milky Way's central black hole every 16 years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2112-07478",
+        "url": "https://arxiv.org/abs/2112.07478",
+        "label": "GRAVITY Collaboration 2021",
+        "checked": "2026-09-27",
+        "locator": "Table 1: a, e and t_peri"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "At its closest, in 2018, it passed 120 au from Sagittarius A*, four times Neptune's distance from the Sun.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2112-07478",
+        "url": "https://arxiv.org/abs/2112.07478",
+        "label": "GRAVITY Collaboration 2021",
+        "checked": "2026-09-27",
+        "locator": "Table 1: a, e and t_peri"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

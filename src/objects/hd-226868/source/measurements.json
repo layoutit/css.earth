@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-226868",
+  "angularDiameterMas": 0.09,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 15,514,110 km at 2252.75 pc = 0.09 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 2252.749640729428,
+  "distanceSource": "Gaia DR3 parallax 0.4439 +/- 0.0149 mas (same row, RUWE 0.97): 2252.75 pc, no zero-point correction",
+  "radiusKm": 15514110,
+  "radiusSource": "Radius 22.3 solar radii from Miller-Jones et al. (2021), Science 371, 1046, Table 1: R1 = 22.3 solar radii (median; 5th-95th percentile 20.6-24.1), derived from their dynamical model at 2.22 kpc (https://arxiv.org/abs/2102.09091): 15,514,110 km at 695,700 km per solar radius. Mass 40.6 solar masses from Miller-Jones et al. (2021), Science 371, 1046, Table 1: M1 = 40.6 solar masses (median; 5th-95th percentile 33.5-48.3), fitted (https://arxiv.org/abs/2102.09091); GM is that mass times the JPL solar GM. Temperature 31138 K from Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted (https://arxiv.org/abs/2102.09091). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 31138,
+  "effectiveTemperatureSource": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted (https://arxiv.org/abs/2102.09091)",
+  "surfaceGravityLogg": 3.348,
+  "surfaceGravitySource": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived (https://arxiv.org/abs/2102.09091)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

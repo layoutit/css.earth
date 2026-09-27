@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1708-06353",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Habibi et al. (2017): Twelve years of spectroscopic monitoring in the Galactic Center: the closest look at S-stars near the black hole",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1708.06353"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/aa876f"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1708.06353",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/aa876f",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1708.06353",
+      "checkedOn": "2026-09-27",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Habibi et al. (2017)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1708.06353"
+    }
+  ],
+  "creators": [
+    "M. Habibi",
+    "S. Gillessen",
+    "F. Martins",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}
