@@ -3,7 +3,6 @@ import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { datasetContributors } from '../../site/dataset-context.mts';
 import {
   PREPARED_TEXT_SCHEMA, catalogueTextWarnings, compositionWarnings, parseObjectText, readerTextErrors, readerTextWarnings,
@@ -16,6 +15,9 @@ import { readSourceCatalog } from '@cssearth/bake/sources';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from './prepare-object-json.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const root = resolve(import.meta.dirname, '../..');
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));

@@ -29,7 +29,7 @@ const without = (value: unknown, key: string) => isRecord(value) ? Object.fromEn
 /**
  * object.json has three owners. Authors own the recipe and the catalogue entry; prepare:text owns the card
  * (catalog.description); the body's own preparation writes worldFrame, page.metadata and prepared.
- * registry: the fields site/objects.mts exposes for another body, without the card.
+ * registry: the fields the registry (site/objects.mts, or @cssearth/objects/node's readPreparedObjects) exposes for another body, without the card.
  * recipe: everything the body's authors own, without the card or the preparation pins.
  * pins: what the body's preparation writes.
  */

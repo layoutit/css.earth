@@ -23,12 +23,14 @@ export function refuseStaleKeptBindings(id: string, systemTransform: { readonly 
 import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { inventoryPreparedAssets, readInventory } from '../../src/platform/runtime-asset-closure.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const format = PREPARED_CSS_OBJECT_FORMAT;

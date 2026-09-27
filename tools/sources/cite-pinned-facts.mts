@@ -2,9 +2,11 @@ import assert from 'node:assert/strict';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { sha256 } from '@cssearth/core/node';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 /**
  * A published fact names its source. This tool cites an uncited factsheet value from a record the body pins (JPL

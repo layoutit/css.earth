@@ -1,10 +1,12 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { isRecord } from '@cssearth/core';
 import { normalizeDestinationQuery } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 /** One search index over every body's prepared named features, so a feature can be found
  * from any page. Each body's catalogue stays the byte-verified source; the index carries

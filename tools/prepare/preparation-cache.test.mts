@@ -6,7 +6,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import type { PreparationTraces } from "./preparation-cache.mts";
-import { PREPARATION_TRACE_SCHEMA, REGISTRY_MODULE, descriptorDigest } from "./preparation-trace-format.mts";
+import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorDigest } from "./preparation-trace-format.mts";
 import type { PreparationAccess, TracedCommand, TracedState } from "./preparation-trace-format.mts";
 
 async function fixture(run: (root: string) => Promise<void>) {
@@ -187,4 +187,28 @@ test("receipts reject path traversal and observe links through their targets", a
     await rm(join(outside, "bundle.js"));
     assert.equal(await observePreparationPath(root, "dist/bundle.js", "bytes"), null);
   } finally { await rm(outside, { recursive: true, force: true }); }
+}));
+
+test("another body's descriptor that preparation reads through the prepared registry counts only its registry fields", async () => fixture(async root => {
+  const frame = { referenceFrame: "sun-icrf", epochJdTt: 2461286.5, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 0, 1, 0, 1, 0], metersPerUnit: 1, bodyRadiusM: 1 };
+  const au = (value: number) => ({ meters: value * 149597870700, value, unit: "AU", quantity: "geometric", referencePoint: "heliocentre", epochJdTt: 2461286.5 });
+  for (const [id, classification] of [["sun", "star"], ["moon", "satellite"]]) await put(root, `src/objects/${id}/object.json`, JSON.stringify({ schema: "cssearth-object@1", id,
+    properties: { catalog: { name: id, systemName: "Solar System", classification, color: "#aabbcc", distanceAu: 1, description: "Card" }, worldFrame: frame } }));
+  await put(root, "site/prepared-object-distances.json", JSON.stringify({ sun: au(0), moon: au(1) }));
+  await put(root, "site/prepared-object-discovery.json", JSON.stringify({ sun: { featured: false, imagery: false, illustration: false }, moon: { featured: false, imagery: false, illustration: false } }));
+  await put(root, "site/prepared-focus-objects.json", "[]");
+  // The body's preparation reads its own descriptor and lists the registry, as a preparer that looks up another scene does.
+  await put(root, "prepare.mjs", `import { readFileSync, writeFileSync } from 'node:fs';\nconst { readPreparedObjects } = await import(${JSON.stringify(import.meta.resolve("@cssearth/objects/node"))});\n` +
+    "readFileSync('src/objects/moon/object.json');\nwriteFileSync('prepared.json', JSON.stringify(readPreparedObjects(process.cwd()).requireSceneObject('sun').name));\n");
+  const trace = join(root, "traces");
+  const { spawnSync } = await import("node:child_process");
+  const run = spawnSync(process.execPath, [`--import=${import.meta.resolve("./preparation-trace.mts")}`, "prepare.mjs"], { cwd: root, encoding: "utf8",
+    env: { ...process.env, [PREPARATION_TRACE_VARIABLE]: trace } });
+  assert.equal(run.status, 0, run.stderr);
+  const traces = await readPreparationTraces(trace);
+  await rm(trace, { recursive: true });
+  const { receipt, refusal } = await seal(root, traces);
+  assert.equal(refusal, null);
+  assert.deepEqual(evidence(receipt?.inputs ?? {}), { "prepare.mjs": "bytes", "site/prepared-focus-objects.json": "bytes", "site/prepared-object-discovery.json": "bytes",
+    "site/prepared-object-distances.json": "bytes", "src/objects/moon/object.json": "descriptor-recipe", "src/objects/sun/object.json": "descriptor-registry" });
 }));

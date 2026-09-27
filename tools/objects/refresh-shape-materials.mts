@@ -17,7 +17,9 @@ import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
 import { validateMarkerDescriptor, renderMarker } from '../prepare/marker-recipe.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));

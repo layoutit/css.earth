@@ -6,7 +6,9 @@ import { prepareFacilities } from '../prepare/prepare-facilities.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance } from '../prepare/prepare-volume-provenance.mts';
 import { prepareContextProvenance } from '../prepare/prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 /** Every prepared file an inventory restores from R2 (`src/objects/<id>/prepared/<filename>`): nothing under prepared/ is tracked. */
 export async function inventoriedPreparedPaths(root = process.cwd()): Promise<string[]> {

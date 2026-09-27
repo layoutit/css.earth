@@ -4,6 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
+import { readPreparedObjects } from '@cssearth/objects/node';
 import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '@cssearth/bake/world-context';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '@cssearth/bake/world-context';
 
@@ -76,8 +77,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
   // @cssearth/objects `contextColour`), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
-    const registry = (await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
-      SCENE_OBJECTS: readonly { id: string; color: string; classification: string; systemName: string }[] }).SCENE_OBJECTS;
+    const registry = readPreparedObjects(process.cwd()).sceneObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import(pathToFileURL(resolve(process.cwd(), 'src/navigation/marker-presentation.mts')).href) as typeof import('../../src/navigation/marker-presentation.mts');
     const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/jpl-mission-targets.mts')).href) as typeof import('../prepare/jpl-mission-targets.mts');
@@ -106,9 +106,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
-  const { SCENE_OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
-    SCENE_OBJECTS: readonly { id: string; classification: string }[];
-  };
+  const SCENE_OBJECTS = readPreparedObjects(process.cwd()).sceneObjects;
   const planetIds = new Set(SCENE_OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   const classifications = new Map(SCENE_OBJECTS.map(body => [body.id, body.classification]));
   // A planet of another star closes its orbit. A star on a hosted orbit (an S-star around Sgr A*) draws the half-orbit trail a

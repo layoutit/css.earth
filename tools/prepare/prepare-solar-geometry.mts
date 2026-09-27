@@ -29,9 +29,9 @@ import type { BodyId, SceneSatelliteRecord, RotationElements } from "@cssearth/a
 import { readJsonSource } from "@cssearth/bake/objects/sources";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { loadAstronomyPackage } from "./astronomy/astronomy-package.mts";
 import { loadSceneEpochEphemeris } from "../../packages/astronomy/tools/scene-ephemeris.mts";
+import { readPreparedObjects } from "@cssearth/objects/node";
 
 /** Write src/platform/solar-geometry.mts for the registered bodies at the pinned scene epoch and print each body's geometry. */
 export async function prepareSolarGeometry() {
@@ -60,7 +60,7 @@ export async function prepareSolarGeometry() {
   const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
   // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
   const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
-  const PACKAGED = SCENE_OBJECTS.filter(body =>
+  const PACKAGED = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects.filter(body =>
     ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
     ((body.classification === "star" || body.classification === "black-hole") && (isPlacedStar(body.id) || isHostedPlanet(body.id)))).map(body => {
     if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);

@@ -6,9 +6,11 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareObjectProvenance } from './provenance.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
+
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
