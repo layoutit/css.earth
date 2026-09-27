@@ -5,7 +5,7 @@ import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from '@cssearth/bake/objects/color';
-import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from '@cssearth/bake/objects/layers/observation';
+import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from '@cssearth/bake/objects/stellar';
 import { planckRadiance } from '@cssearth/bake/objects/raster';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 

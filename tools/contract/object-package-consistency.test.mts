@@ -10,7 +10,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { TODO, starStylesheet } from '../objects/new-object/scaffold.mts';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
-import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/layers/observation';
+import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 
 const root = resolve(import.meta.dirname, '../..');
 const objectsDirectory = resolve(root, 'src/objects');

@@ -9,7 +9,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadStellarPhotometricColor } from '@cssearth/bake/objects/layers/observation';
+import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { MARKER_PATH, starMarker } from '../context-markers.mts';
 import { requireArray, requireRecord, requireString, isRecord } from '@cssearth/core';
 

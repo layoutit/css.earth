@@ -3,10 +3,10 @@
 // into sRGB (D65 white), scaled so the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness
 // is not modelled. Limb darkening is drawn where a measurement gives it, or from a named model grid (below).
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { linearToSrgb } from '../../../color/index.ts';
+import { linearToSrgb } from '../color/index.ts';
 import { gunzipSync } from 'node:zlib';
-import { binaryTable, numbers, readFitsHdus, tableColumn } from '../../../raster/index.ts';
-import { readCie1931ColorMatching } from '../../../sources/index.ts';
+import { binaryTable, numbers, readFitsHdus, tableColumn } from '../raster/index.ts';
+import { readCie1931ColorMatching } from '../sources/index.ts';
 
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;
@@ -184,7 +184,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
   const record = parseStellarColorRecord(raw), crossRecord = parseStellarColorCrossCheck(requireRecord(raw).crossCheck);
   const result = await loadStellarColorOnly(read, science, record);
   if (!crossRecord) return { ...result, crossCheck: null };
-  const { parseCieTable } = await import('../../../color/index.ts');
+  const { parseCieTable } = await import('../color/index.ts');
   const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const color = measuredSpectrumColor(await loadMeasuredSpectrum(read, crossRecord.record), colorMatching, crossRecord.record.gaps);
   const difference = Math.max(...color.srgb.map((value, channel) => Math.abs(value - result.color.srgb[channel]!)));
@@ -192,7 +192,7 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
 }
 
 async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, record: StellarColorRecord) {
-  const { parseCieTable } = await import('../../../color/index.ts');
+  const { parseCieTable } = await import('../color/index.ts');
   const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const limbDarkening = science.limbDarkening === undefined ? null : await (async () => {
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);
@@ -200,7 +200,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
     if (recipe.source === 'grid') return { recipe, coefficients: interpolateQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
     if (recipe.source === 'published') return { recipe, coefficients: readPublishedLimbDarkening(JSON.parse((await read(recipe.path)).toString('utf8'))) };
     const [{ readTessLightCurve, fitTransitLimbDarkening }, { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry }] =
-      await Promise.all([import('../../../raster/index.ts'), import('@cssearth/astronomy')]);
+      await Promise.all([import('../raster/index.ts'), import('@cssearth/astronomy')]);
     if (!(HOSTED_PLANET_IDS as readonly string[]).includes(recipe.planet)) throw new TypeError(`Limb darkening from transits needs a hosted planet: ${recipe.planet}.`);
     const planet = recipe.planet as (typeof HOSTED_PLANET_IDS)[number], hostId = BODIES[planet].parent;
     if (!(STAR_IDS as readonly (string | null)[]).includes(hostId)) throw new TypeError(`${planet} does not orbit a placed star.`);

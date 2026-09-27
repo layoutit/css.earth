@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../source-test.mts';
 const test = sourceTest();
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
-import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from '@cssearth/bake/objects/layers/observation';
+import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 const root = new URL('../../../../src/objects/wasp-43/source/', import.meta.url);
@@ -69,7 +69,7 @@ test("WASP-43's TESS limb darkening is read from its pinned catalogue row and da
 });
 
 test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 189733 A pale orange-white, B, a red dwarf, orange', async () => {
-  const { readXpSampledSpectrum, xpSampledColor, XP_SAMPLED_WAVELENGTHS_NM } = await import('@cssearth/bake/objects/layers/observation');
+  const { readXpSampledSpectrum, xpSampledColor, XP_SAMPLED_WAVELENGTHS_NM } = await import('@cssearth/bake/objects/stellar');
   assert.deepEqual([XP_SAMPLED_WAVELENGTHS_NM[0], XP_SAMPLED_WAVELENGTHS_NM.at(-1), XP_SAMPLED_WAVELENGTHS_NM.length], [336, 1020, 343]);
   for (const [id, sourceId, srgb] of [['hd-189733', '1827242816201846144', [255, 226, 207]], ['hd-189733-companion', '1827242816176111360', [255, 201, 123]]] as const) {
     const system = new URL(`../../../src/objects/${id}/source/`, import.meta.url);
@@ -87,7 +87,7 @@ test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 1
 });
 
 test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectrum, with samples consistent with zero read as no emission', async () => {
-  const { readXpSampledSpectrum, xpSampledColor, NOISE_FLOOR_SIGMA } = await import('@cssearth/bake/objects/layers/observation');
+  const { readXpSampledSpectrum, xpSampledColor, NOISE_FLOOR_SIGMA } = await import('@cssearth/bake/objects/stellar');
   const system = new URL('../../../../src/objects/trappist-1/source', import.meta.url);
   const { color, range, temperature, spectrum } = await loadStellarPhotometricColor(
     async path => readFile(new URL(path, system)), {}, 'photometry/stellar-color.json');

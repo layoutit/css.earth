@@ -179,6 +179,11 @@
       "import": "./dist/objects/layers/terrestrial.js",
       "default": "./dist/objects/layers/terrestrial.js"
     },
+    "./objects/stellar": {
+      "types": "./dist/objects/stellar.d.ts",
+      "import": "./dist/objects/stellar.js",
+      "default": "./dist/objects/stellar.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",

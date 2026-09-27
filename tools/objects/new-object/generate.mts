@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorLens, json } from './lens.mts';
-import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/layers/observation';
+import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
 import { fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';

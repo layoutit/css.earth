@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../source-test.mts';
 import { hostedOrbit } from '@cssearth/astronomy';
-import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from '@cssearth/bake/objects/layers/observation';
+import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from '@cssearth/bake/objects/stellar';
 const test = sourceTest();
 
 const source = new URL('../../../../src/objects/hd-189733/source/photometry/haris-2025-spot-occultation.json', import.meta.url);

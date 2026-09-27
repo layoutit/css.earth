@@ -12,7 +12,7 @@ Epsilon Indi A is one of the nearest Sun-like stars, 3.6 parsecs away. JWST has 
 
 **Radial velocity.** Gaia DR3's -40.43 ± 0.13 km/s. Also HD 209100 and HIP 108870.
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/layers/observation/stellar/stellar-photometric-color.ts)). No limb darkening is drawn.
+**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). No limb darkening is drawn.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 

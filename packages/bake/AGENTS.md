@@ -107,6 +107,10 @@ its validators accept); the renderer never imports the bake.
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
     commands). It imports `objects/geometry`, `objects/raster` and `objects/layers/terrestrial`; attaching the banks to a
     globe stays in `tools/objects/surface-features/`.
+  - `objects/stellar`: a star's colour lens from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
+    from a published figure or occultation, and Roche-von Zeipel gravity darkening. It imports `objects/color`,
+    `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
+    compiler identity reaches, so that identity does not pin the source-manifest readers.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
