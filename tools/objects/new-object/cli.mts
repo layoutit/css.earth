@@ -1,13 +1,13 @@
 /** `telescope new-object`: the object generator and the bake it hands its objects to, run as the workspace's own process.
- * The telescope parses and checks the command line, then runs this with the parsed options as one JSON argument. Anything
- * the generator or the bake prints goes to stderr; stdout carries only the result text, which the telescope prints. */
+ * The telescope parses and checks the command line, then runs this with the parsed options as one JSON argument; the result
+ * text and exit code, or the failure, go back over the IPC channel, and everything printed here is the telescope's stderr. */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { answerParent } from '@cssearth/core/node';
 import { prepareObjects } from '../../prepare/prepare-object.mts';
 import { formatNewObject, runNewObject, specFromArchive } from './generate.mts';
 import { refreshSpec } from './refresh.mts';
-import { WORKSPACE_COMMAND_FAILED, workspaceCommandFailure } from '../telescopes/workspace-commands.mts';
 
 export interface NewObjectOptions {readonly spec?:string;readonly ids?:readonly string[];readonly hosts?:readonly string[];readonly out?:string;readonly check:boolean;readonly bake:boolean;readonly refresh:boolean;readonly skipExisting:boolean;readonly json:boolean}
 
@@ -44,10 +44,5 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
-  const root=resolve(import.meta.dirname,'../../..'),write=process.stdout.write.bind(process.stdout);
-  process.stdout.write=process.stderr.write.bind(process.stderr);
-  try{
-    const {text,code}=await newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),root,line=>{process.stderr.write(line);});
-    process.stdout.write=write;write(text);process.exitCode=code;
-  }catch(error){process.stdout.write=write;write(workspaceCommandFailure(error));process.exitCode=WORKSPACE_COMMAND_FAILED;}
+  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../..'),line=>{process.stderr.write(line);}));
 }
