@@ -182,6 +182,12 @@ for (const r of rows)
 // Every dataset belongs to a family (apply-structure.mts); only Maryland groups several rows into one.
 assert.deepEqual(db.prepare("SELECT source,id FROM datasets WHERE family='' LIMIT 1").all(), []);
 assert.deepEqual(db.prepare("SELECT DISTINCT source FROM datasets WHERE source<>'umd' AND family<>id").all(), []);
+// Instruments hang off missions, links off datasets and instruments (cleanup/instruments.py); only sources that state an
+// instrument link to one.
+assert.deepEqual(db.prepare("PRAGMA foreign_key_check(instruments)").all(), []);
+assert.deepEqual(db.prepare("PRAGMA foreign_key_check(dataset_instruments)").all(), []);
+assert.deepEqual(db.prepare("SELECT DISTINCT source FROM dataset_instruments WHERE source IN ('usgs','pds')").all(), []);
+assert.ok(number(db.prepare("SELECT count(DISTINCT source||char(0)||dataset_id) n FROM dataset_instruments").get()?.n) > 6000);
 // A parent named in `bodies` exists as a body, and only the Photojournal marks parent tags.
 assert.deepEqual(db.prepare("SELECT id FROM bodies WHERE parent<>'' AND parent NOT IN (SELECT id FROM bodies)").all(), []);
 assert.deepEqual(db.prepare("SELECT DISTINCT source FROM dataset_bodies WHERE role='parent' AND source<>'photojournal'").all(), []);

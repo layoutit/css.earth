@@ -44,6 +44,10 @@ Open `ledger.sqlite` in a SQLite browser for direct editing.
 | `inventory`           | Listings that repeat datasets (6,369): OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
 | `bodies`              | Every body a dataset names: cssEarth id when cssEarth catalogues it, name, kind, parent, cssEarth package |
 | `dataset_bodies`      | Dataset-to-body links with the name the source used; `role` is `parent` for a Photojournal tag of a tagged body's parent |
+| `missions`            | Every spacecraft, telescope or programme an instrument belongs to (117): id, name, kind, other names (DARTS "KAGUYA" is also "SELENE") |
+| `instruments`         | Every instrument (389), keyed by mission (`rosetta/osinac`, `mro/hirise`): name and abbreviation, one row even when archives spell it differently |
+| `dataset_instruments` | Dataset-to-instrument links with the name the source used; USGS and PSI PDS4 state no instrument |
+| `ledger_log`          | Each cleanup run: date, operation and the rules it applied |
 | `proposals`           | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date |
 | `dataset_proposals`   | Links between datasets and proposed work (`inventory_proposals` for inventory rows) |
 | `evidence`            | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes |
@@ -92,6 +96,7 @@ USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-f
 TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
 node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
 node tools/sources/astronomy-data/apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
+python tools/sources/astronomy-data/cleanup/instruments.py tools/sources/astronomy-data/ledger.sqlite --dry-run   # needs sqlite-utils; rebuilds missions and instruments
 ```
 
 - **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a
