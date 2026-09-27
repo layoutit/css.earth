@@ -18,6 +18,10 @@
       "implementations": 24,
       "tests": 19
     },
+    "packages/bake/cli": {
+      "implementations": 50,
+      "tests": 0
+    },
     "packages/renderer/src/navigation": {
       "implementations": 31,
       "tests": 15
