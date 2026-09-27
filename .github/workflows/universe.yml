@@ -183,11 +183,12 @@ jobs:
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
         # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
         # path (tools/assets/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
-        # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
+        # dry-run report, the runner behind `pnpm check:pr`, and the test helper that decides which absent inputs skip (untracked
+        # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
           node --test "tools/ci/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
-            "src/platform/runtime-asset-*.test.mts"
+            "src/platform/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 
   typecheck:
     name: Typecheck
