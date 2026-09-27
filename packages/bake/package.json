@@ -221,6 +221,11 @@
       "import": "./dist/objects/celestial.js",
       "default": "./dist/objects/celestial.js"
     },
+    "./objects/host-adapters": {
+      "types": "./dist/objects/host-adapters.d.ts",
+      "import": "./dist/objects/host-adapters.js",
+      "default": "./dist/objects/host-adapters.js"
+    },
     "./objects/interpretation": {
       "types": "./dist/objects/interpretation.d.ts",
       "import": "./dist/objects/interpretation.js",

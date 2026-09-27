@@ -49,6 +49,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/scene': ['presentation'],
   'objects/default-view': ['objects/scene', 'raster'],
   'objects/celestial': ['objects/scene', 'presentation'],
+  'objects/host-adapters': ['presentation', 'scene', 'objects/scene', 'objects/layers/terrestrial'],
   'objects/interpretation': ['raster', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/stellar', 'objects/layers/observation', 'objects/layers/shape-model', 'objects/layers/terrestrial'],
   'objects/raster': ['objects/scene', 'objects/geometry', 'objects/color', 'objects/cameras', 'raster', 'photometry'],
   'nebula': ['volume', 'volume-leaves', 'density', 'stars'],

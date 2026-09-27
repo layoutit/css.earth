@@ -1,25 +1,21 @@
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, type BodyId } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import type { ScenePreparationAdapters } from '@cssearth/bake/scene';
-import type { PresentationHostAdapters } from '@cssearth/bake/presentation';
-import { prepareMaterialTracks } from '@cssearth/bake/presentation';
-import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
+import type { ScenePreparationAdapters } from '../../scene/index.ts';
+import type { PresentationHostAdapters } from '../../presentation/index.ts';
+import { prepareMaterialTracks } from '../../presentation/index.ts';
+import { prepareScientificNavigation } from '../layers/terrestrial/index.ts';
+import type { SolarGeometry } from '../scene/index.ts';
 
-/** The presentation compiler's host: material tracks and lens navigation. */
-export const presentationHostAdapters: PresentationHostAdapters = {
-  prepareMaterialTracks, prepareLensNavigation: (bodyId, focus, camera) => prepareScientificNavigation(solarGeometry, bodyId, focus, camera),
-};
+/** The presentation compiler's host: material tracks and lens navigation, with the solar geometry the host loads. */
+export function presentationHostAdapters(solarGeometry: SolarGeometry): PresentationHostAdapters {
+  return { prepareMaterialTracks, prepareLensNavigation: (bodyId, focus, camera) => prepareScientificNavigation(solarGeometry, bodyId, focus, camera) };
+}
 
-/** Validate external scene records, then call the native TypeScript owners. */
-export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> {
-  const path = (value: string): string => pathToFileURL(resolve(process.cwd(), value)).href;
-  const [scene, geometry, skyContract] = await Promise.all([
-    import('@cssearth/bake/objects/scene'),
-    import(path('src/platform/solar-geometry.mts')) as Promise<typeof import('../../src/platform/solar-geometry.mts')>,
-    import('@cssearth/bake/presentation'),
+/** Validate external scene records, then call the native TypeScript owners with the solar geometry the host loads. */
+export async function loadGeometryAdapters(geometry: SolarGeometry): Promise<ScenePreparationAdapters> {
+  const [scene, skyContract] = await Promise.all([
+    import('../scene/index.ts'),
+    import('../../presentation/index.ts'),
   ]);
   const optionalNumber = (value: unknown) => value === undefined ? undefined : requireFiniteNumber(value);
   return {
