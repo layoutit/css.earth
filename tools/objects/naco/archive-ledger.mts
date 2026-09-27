@@ -19,8 +19,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { INSTRUMENT, MODES, PROGRAMS, rawQuery, REFUSED_TECHNIQUES, type NacoMode } from './archive.mts';
-import { countRecord, isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
-import { matchNumberedTarget, type NumberedTargetNames } from '../archives/targets.mts';
+import { countRecord, isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
+import { matchNumberedTarget, type NumberedTargetNames } from '@cssearth/telescope-cli/archives/targets';
 
 const SCHEMA = 'cssearth-naco-ledger@2';
 

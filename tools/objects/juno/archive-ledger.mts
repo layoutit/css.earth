@@ -18,7 +18,7 @@ import { parseTextKernel, number as kernelNumber } from '@cssearth/spice';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 import { FILTER_COMBINATIONS, KERNEL_SET, PROGRAMS, VOLUMES, fetchText, indexNumber, parseIndex, parseProductId, parseProgram, type IndexRow } from './archive.mts';
 import { POLICY, RECEIPT_SCHEMA } from './measure.mts';
-import { isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
+import { isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
 
 const SCHEMA = 'cssearth-junocam-ledger@1';
 const COLOUR = ['RED', 'GREEN', 'BLUE'];

@@ -28,7 +28,7 @@ import { readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { compareChannel, receiptPath } from '../../../tools/objects/spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../../../tools/objects/spitzer/archive.mts';
 import { SPITZER_LEDGER } from '../../../tools/objects/spitzer/archive-ledger.mts';
-import { refreshLocalLedger } from '../../../tools/objects/archives/ledger.mts';
+import { refreshLocalLedger } from './archives/ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../../../tools/objects/spitzer/mosaic.mts';
 import { loadQueryInputs, queryCapabilities } from './query.mts';
 import { qualificationConfigurationFromArguments, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';

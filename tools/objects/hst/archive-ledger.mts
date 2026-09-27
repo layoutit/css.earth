@@ -34,8 +34,8 @@ import { runDigest } from '@cssearth/telescope/node';
 import { parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
-import { isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../archives/ledger.mts';
-import { namedShippedObjects, normaliseTargetName, readJsonOrNull, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '../archives/targets.mts';
+import { isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
+import { namedShippedObjects, normaliseTargetName, readJsonOrNull, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
 
 
 /** The two capabilities a configuration has, which are never one capability.

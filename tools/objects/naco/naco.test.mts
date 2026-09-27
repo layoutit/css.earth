@@ -15,7 +15,7 @@ import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRu
 import { addComparisonEvidence, overlapOf, repositoryPath } from './compare.mts';
 import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
 import { bucketOf, nacoLedgerGuide, observationsOf, NACO_LEDGER, NACO_TARGET_NAMES } from './archive-ledger.mts';
-import { matchNumberedTarget, parseNumberedTarget } from '../archives/targets.mts';
+import { matchNumberedTarget, parseNumberedTarget } from '@cssearth/telescope-cli/archives/targets';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
 import { median, supportOf, traceDirection, widthOf } from './spectrum.mts';
 

@@ -27,8 +27,8 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord, type EvidenceKind } from '@cssearth/telescope';
 import { PROGRAMS, parseGeminiProgram, type GeminiProgram } from './archive.mts';
 import { query } from './cadc.mts';
-import { isCommand, ledgerFiles, receiptProblem, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
-import { matchNumberedTarget, type NumberedTargetNames } from '../archives/targets.mts';
+import { isCommand, ledgerFiles, receiptProblem, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
+import { matchNumberedTarget, type NumberedTargetNames } from '@cssearth/telescope-cli/archives/targets';
 
 const SCHEMA = 'cssearth-gemini-ledger@1';
 export const COLLECTION = 'GEMINI';

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readToolchainDescriptor } from '../archives/toolchain-descriptor.mts';
+import { readToolchainDescriptor } from '@cssearth/telescope-cli/archives/toolchain-descriptor';
 /** Install and locate the pinned Keck reduction environment of toolchain.json under output/toolchains/keck (ignored by git).
  *
  *   node tools/objects/keck/toolchain.mts install

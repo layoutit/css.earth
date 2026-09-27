@@ -24,8 +24,8 @@ import { readProductRecord } from '@cssearth/telescope/node';
 import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';
-import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
-import { normaliseTargetName } from '../archives/targets.mts';
+import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
+import { normaliseTargetName } from '@cssearth/telescope-cli/archives/targets';
 
 const SCHEMA = 'cssearth-keck-ledger@1';
 

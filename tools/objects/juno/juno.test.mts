@@ -9,7 +9,7 @@ import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
 import { castingObjects, holdings, junoCamLedgerGuide, junoTargetObject, measuredPrograms, objectStates, type Ledger, JUNO_LEDGER } from './archive-ledger.mts';
-import { shippedObjectIds } from '../archives/ledger.mts';
+import { shippedObjectIds } from '@cssearth/telescope-cli/archives/ledger';
 import { POLICY, RECEIPT_SCHEMA, addRegistrationEvidence, ellipsoidMesh, registrationRun, registrationSoftware } from './measure.mts';
 
 // Two lines of JNOJNC_0024/INDEX/INDEX.TAB as the PDS serves them, and a methane image made from the second.

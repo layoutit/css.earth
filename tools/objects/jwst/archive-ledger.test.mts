@@ -5,7 +5,7 @@ import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promise
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { assembleJwstLedger, JWST_MODES, JWST_TIME_SERIES, jwstLedgerGuide, matchTarget, parseJwstLedger, repositoryState, jwstShippedObjects, withRepositoryState, type Ledger } from './archive-ledger.mts';
-import type { NamedShippedObject as ShippedObject } from '../archives/targets.mts';
+import type { NamedShippedObject as ShippedObject } from '@cssearth/telescope-cli/archives/targets';
 
 const repository = resolve(import.meta.dirname, '../../..');
 const objects: ShippedObject[] = [{ id: 'titan', names: ['titan', 'Titan'] }, { id: 'pluto', names: ['pluto', 'Pluto'] }, { id: 'charon', names: ['charon', 'Charon'] },

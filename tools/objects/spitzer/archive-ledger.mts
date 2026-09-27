@@ -26,11 +26,11 @@
  * archive said has changed. */
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { firstSkyPosition } from '../archives/sky-position.mts';
+import { firstSkyPosition } from '@cssearth/telescope-cli/archives/sky-position';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
-import { isCommand, ledgerFiles, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../archives/ledger.mts';
+import { isCommand, ledgerFiles, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '@cssearth/telescope-cli/archives/ledger';
 
 const SCHEMA = 'cssearth-spitzer-ledger@4';
 /** How many objects are asked at once. The archive's backend builds a temporary table for every question, so this stays small. */

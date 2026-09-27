@@ -10,7 +10,7 @@ import { instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts'
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
 import { assertInputPins } from '@cssearth/telescope/node';
 import { checkReceipt, keckTargetObject, nameCandidates, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
-import { normaliseTargetName } from '../archives/targets.mts';
+import { normaliseTargetName } from '@cssearth/telescope-cli/archives/targets';
 import { assertNoPlotServer, configureWithoutPlots, pinnedInput, PLOT_SERVER_LINES, PLOTS_OFF, REDUCIBLE, reductionRun, stagedName } from './reduce.mts';
 import { archiveAgreement, assertRunIsFor, comparisonPins, pairExtensions, productStems, runProduct, selectRunProduct, stageOf } from './compare.mts';
 
