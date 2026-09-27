@@ -118,6 +118,7 @@ export function mountObjectShell({
       prefetch: id => { fragments.prefetch(id); prefetch(id); } }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime,
       () => `${objectId}:${selectionKey(objectBrowser.readSubject())}`));
+    settingsController = own(createSettingsController(documentTarget, windowTarget, preferences, lifetime));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => navigationTransition?.dispose());
     mountContent(objectId);
@@ -277,7 +278,7 @@ export function mountObjectShell({
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationCard = mountInformationCard(drawer, id, windowTarget, owner);
-    settingsController = retain(createSettingsController(documentTarget, windowTarget, preferences, owner));
+    settingsController.bindObject();
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
       onInteraction() { preferences.set('motionEnabled', false); },

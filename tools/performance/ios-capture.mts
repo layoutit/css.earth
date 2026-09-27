@@ -121,7 +121,7 @@ export function parseSteps(value: unknown): Step[] {
 const PROBE_EXPRESSION = `(() => {
   const app = window.__cssEarth, read = key => { try { return app ? app[key] : undefined; } catch (error) { return 'unreadable'; } };
   const error = read('error');
-  return { path: location.pathname, ready: read('ready') ?? document.body.classList.contains('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
+  return { path: location.pathname, ready: read('ready') ?? (document.documentElement.dataset.ready === 'true'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
     overview: read('overview'), mountedObjectCount: read('mountedObjectCount'), lifecycle: read('lifecycle'),
     error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
 })()`;
@@ -361,12 +361,12 @@ function inspector(socketUrl: string) {
     swaps: () => swaps };
 }
 
-/** Waits until the page has loaded and the app reports itself ready or failed. The shell marks its own body, which is
- * what the site's other checks read; the diagnostics hook is only present in builds that publish it. Evaluations
+/** Waits until the page has loaded and the app reports itself ready or failed. Root readiness is available in
+ * production too; the diagnostics hook is only present in builds that publish it. Evaluations
  * during the navigation itself can fail; they count as not ready. */
 async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120_000): Promise<void> {
-  const expression = "document.readyState === 'complete' && (document.body.classList.contains('ready') || " +
-    "document.body.classList.contains('error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
+  const expression = "document.readyState === 'complete' && ((document.documentElement.dataset.ready === 'true') || " +
+    "(document.documentElement.dataset.ready === 'error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
@@ -1453,7 +1453,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     let last: unknown = null, enabledAtSwap = session.swaps();
     while (Date.now() < deadline) {
       if (session.swaps() !== enabledAtSwap) { await enableDomains(); enabledAtSwap = session.swaps(); }
-      const reply = await session.send('Runtime.evaluate', { expression: `({url: location.href, pathname: location.pathname, visible: document.visibilityState === 'visible', ready: document.readyState === 'complete' && document.body.classList.contains('ready'), failed: document.body.classList.contains('error')})`, returnByValue: true });
+      const reply = await session.send('Runtime.evaluate', { expression: `({url: location.href, pathname: location.pathname, visible: document.visibilityState === 'visible', ready: document.readyState === 'complete' && (document.documentElement.dataset.ready === 'true'), failed: (document.documentElement.dataset.ready === 'error')})`, returnByValue: true });
       const state = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
       last = state;
       if (isRecord(state) && state.failed === true) throw new Error(`The destination page failed while navigating to ${pathname}: ${JSON.stringify(state)}`);

@@ -53,7 +53,13 @@ lifetime, including when a flight is cancelled. Existing styles reuse their DOM
 nodes. Arrival changes the stage's object identity without removing the previous
 object's rules or reinserting the destination's rules. The retained settings
 panel keeps controls by name, adds/removes only capabilities that change, and
-keeps its hidden native form and view-context inputs. Sources update in place.
+keeps its hidden native form and view-context inputs. Its shared settings controller
+survives object changes with the same listeners, checked values and accessibility
+state; only object-owned controls are rebound. Sources update in place.
+Readiness stays on the existing root attributes; the startup spinner is removed.
+Unused body lifecycle classes are not published, and synchronous scene replacement skips publication of the
+intermediate disposed session. Repeated link selection and settings publication
+write only changed values.
 The [retention receipt](../evidence/ui/arrival-handoff-2026-09-27/retained-styles-receipt.json)
 records three runs per stylesheet variant: the median largest handoff restyle
 falls from 35.9 to 6.9 ms. Lutetia's navigation response sends 2,152 bytes of

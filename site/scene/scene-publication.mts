@@ -30,7 +30,6 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
   getShell(): ObjectShell | null;
   getWorld(): WorldContextMount | null;
 }) {
-  let publishedBodyState = '';
   function readPublication() {
     const { state, mountedObjectCount, playing, pending, objectId, subject, motionEnabled, reducedMotionActive } = read();
     const sceneState: SceneState = state.kind === 'failed' ? 'error' : state.kind === 'disposed' ? 'destroyed' : state.kind;
@@ -65,20 +64,9 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
     getShell()?.setNavigationInFlight?.(inFlight);
     const { scene: state, sceneState, playing, playback } = readPublication();
     const root = documentTarget.documentElement;
-    const body = documentTarget.body;
-    // Scene state is republished at every navigation step. Only changes are written: removing
-    // and re-adding an unchanged body class restyled the whole document (2,745 elements).
     setData(root, "scenePresented", String(read().hasPresented));
     setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
     if (sceneState === 'ready' || sceneState === 'error') delete root.dataset.shellContext;
-    const bodyState = `${sceneState}:${!playing}`;
-    if (bodyState !== publishedBodyState) {
-      body.classList.remove("loading", "ready", "paused", "error");
-      if (sceneState === "loading") body.classList.add("loading");
-      else if (sceneState === "ready") { body.classList.add("ready"); if (!playing) body.classList.add("paused"); }
-      else if (sceneState === "error") body.classList.add("error");
-      publishedBodyState = bodyState;
-    }
     const busy = sceneState === "loading" ? "true" : "false";
     if (stage.ariaBusy !== busy) stage.ariaBusy = busy;
     setData(root, "playing", sceneState === "loading" || sceneState === "ready" ? String(playing) : null);

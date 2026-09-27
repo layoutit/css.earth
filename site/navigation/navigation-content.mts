@@ -1,5 +1,5 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { requiredElement } from '../browser/browser-types.mts';
+import { requiredElement, setLinkSelected } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 import { createNavigationStyles, type NavigationStyleStage } from './navigation-styles.mts';
@@ -131,9 +131,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               // Anchors expose their resolved origin and path: ~500 menu links need no URL parse.
               for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.object-link')) {
                 const selected = objectLinkIsCurrent(anchor, windowTarget.location.origin, object.route);
-                if (selected) anchor.setAttribute('aria-current', 'page');
-                else if (anchor.getAttribute('aria-current') === 'page') anchor.removeAttribute('aria-current');
-                anchor.classList.toggle('is-active', selected);
+                setLinkSelected(anchor, selected);
               }
             } finally { releaseSource(); }
           },

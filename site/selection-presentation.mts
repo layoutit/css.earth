@@ -1,7 +1,7 @@
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import { requiredElement, setPanelHidden, type BrowserWindow } from './browser/browser-types.mts';
+import { requiredElement, setPanelHidden, setLinkSelected, type BrowserWindow } from './browser/browser-types.mts';
 import type { CatalogueSelection } from './catalogue/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
@@ -85,9 +85,7 @@ export function createSelectionPresentation(documentTarget: Document, {
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
       const selected = selection?.kind === 'prepared-focus' ? anchor.dataset.preparedFocusId === selection.id
         : selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
-      anchor.classList.toggle('is-active', selected);
-      if (selected) anchor.setAttribute('aria-current', 'page');
-      else anchor.removeAttribute('aria-current');
+      setLinkSelected(anchor, selected);
     }
     return selection;
   };

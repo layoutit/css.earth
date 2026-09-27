@@ -14,7 +14,7 @@ export function createSettingsController(
   const illustrationModels = documentTarget.querySelector(".object-illustration-models-setting");
   const surfaceLabels = documentTarget.querySelector(".object-surface-labels-setting");
   const threeDStars = documentTarget.querySelector(".object-three-d-stars-setting");
-  const speed = documentTarget.querySelector(
+  let speed = documentTarget.querySelector<HTMLInputElement>(
     '.object-speed-setting[type="range"][name="speed"]',
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
@@ -32,35 +32,47 @@ export function createSettingsController(
     threeDStarsEnabled: threeDStars };
   type Toggle = keyof typeof inputs;
   const render = () => {
-    for (const key of Object.keys(inputs) as Toggle[]) inputs[key].checked = preferences.state[key];
-    if (speed) speed.disabled = !preferences.state.motionEnabled || speed.dataset?.runtimeReady === 'false';
-    documentTarget.body.dataset.illustrationModels = illustrationModels.checked ? 'on' : 'off';
-    documentTarget.body.dataset.surfaceLabels = surfaceLabels.checked ? 'on' : 'off';
+    for (const key of Object.keys(inputs) as Toggle[]) {
+      if (inputs[key].checked !== preferences.state[key]) inputs[key].checked = preferences.state[key];
+    }
+    const speedDisabled = !preferences.state.motionEnabled || speed?.dataset.runtimeReady === 'false';
+    if (speed && speed.disabled !== speedDisabled) speed.disabled = speedDisabled;
+    const illustrations = illustrationModels.checked ? 'on' : 'off', labels = surfaceLabels.checked ? 'on' : 'off';
+    if (documentTarget.body.dataset.illustrationModels !== illustrations) documentTarget.body.dataset.illustrationModels = illustrations;
+    if (documentTarget.body.dataset.surfaceLabels !== labels) documentTarget.body.dataset.surfaceLabels = labels;
   };
   for (const key of Object.keys(inputs) as Toggle[]) {
     const input = inputs[key];
-    input.disabled = false;
+    if (input.disabled) input.disabled = false;
     input.addEventListener('change', () => preferences.set(key, input.checked), { signal: events.signal });
   }
   lifetime.onDispose(preferences.subscribe(key => {
     render();
-    if (key === 'surfaceLabelsEnabled') documentTarget.body.dispatchEvent(new Event('objectsurfacelabelschange'));
+    if (key === 'surfaceLabelsEnabled') documentTarget.body.dispatchEvent(new windowTarget.Event('objectsurfacelabelschange'));
   }));
   render();
 
+  const row = motion.closest<HTMLElement>(".object-motion-setting-control")!;
+  const explanation = requiredElement(row, ".object-motion-blocked");
   return Object.freeze({
+    bindObject() {
+      const next = documentTarget.querySelector('.object-speed-setting[type="range"][name="speed"]');
+      if (next !== null && !(next instanceof windowTarget.HTMLInputElement)) throw new Error('Object speed control is invalid.');
+      speed = next;
+      render();
+    },
     setPlaybackState({ reason }: PlaybackState) {
       render();
-      const row = motion.closest<HTMLElement>(".object-motion-setting-control")!;
-      const explanation = requiredElement(row, ".object-motion-blocked");
       const blocked = preferences.state.motionEnabled && reason === "reduced-motion";
-      row.dataset.motionBlocked = String(blocked);
-      explanation.hidden = !blocked;
+      if (row.dataset.motionBlocked !== String(blocked)) row.dataset.motionBlocked = String(blocked);
+      if (explanation.hidden !== !blocked) explanation.hidden = !blocked;
       const descriptions = new Set((motion.getAttribute("aria-describedby") ?? "")
         .split(/\s+/u).filter(id => id && id !== explanation.id));
       if (blocked) descriptions.add(explanation.id);
-      if (descriptions.size) motion.setAttribute("aria-describedby", [...descriptions].join(" "));
-      else motion.removeAttribute("aria-describedby");
+      const description = [...descriptions].join(' ');
+      if (description) {
+        if (motion.getAttribute('aria-describedby') !== description) motion.setAttribute('aria-describedby', description);
+      } else if (motion.hasAttribute('aria-describedby')) motion.removeAttribute('aria-describedby');
     },
     destroy() {
       events.abort();

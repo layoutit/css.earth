@@ -95,10 +95,10 @@ function flightScript(id: string, flightSource: FlightSource): string {
     const objectId = ${JSON.stringify(object.id)}, deadline = Date.now() + 30000;
     while (true) {
       if (document.visibilityState !== 'visible') throw new Error('Journey target is not the visible Safari tab.');
-      if (document.body.classList.contains('error')) throw new Error('Journey start scene failed.');
+      if (document.documentElement.dataset.ready === 'error') throw new Error('Journey start scene failed.');
       const query = new CustomEvent('objectnavigationquery', { bubbles: true, cancelable: true, detail: { objectId } });
       document.dispatchEvent(query);
-      if (document.body.classList.contains('ready') && query.defaultPrevented) break;
+      if (document.documentElement.dataset.ready === 'true' && query.defaultPrevented) break;
       if (Date.now() >= deadline) throw new Error('Live navigation is not ready for ' + objectId + '.');
       await new Promise(resolve => setTimeout(resolve, 100));
     }

@@ -20,3 +20,11 @@ export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
 
 export type ShellCamera = Pick<ObjectSceneLifecycle, 'navigation' | 'sharedView'>;
 export interface PlaybackState { readonly allowed: boolean; readonly reason: string; readonly motionRequested?: boolean; }
+
+/** Shared link presentation publishes only changed selection state. */
+export function setLinkSelected(anchor: Element, selected: boolean): void {
+  if (anchor.classList.contains('is-active') !== selected) anchor.classList.toggle('is-active', selected);
+  if (selected) {
+    if (anchor.getAttribute('aria-current') !== 'page') anchor.setAttribute('aria-current', 'page');
+  } else if (anchor.hasAttribute('aria-current')) anchor.removeAttribute('aria-current');
+}

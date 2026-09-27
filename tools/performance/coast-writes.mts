@@ -37,7 +37,7 @@ try {
   for (const url of urls) {
     const page = await browser.newPage({ viewport: { width: Number(values.width), height: Number(values.height) }, deviceScaleFactor: 2 });
     const response = await page.goto(url, { waitUntil: 'load' });
-    const ready = response?.ok() === true && await page.waitForFunction(() => document.body.classList.contains('ready') ||
+    const ready = response?.ok() === true && await page.waitForFunction(() => document.documentElement.dataset.ready === 'true' ||
       Boolean((window as unknown as { __cssEarth?: { ready?: boolean } }).__cssEarth?.ready), undefined, { timeout: 120_000 }).then(() => true, () => false);
     if (!ready) { console.log(`${url}: never ready (HTTP ${response?.status() ?? '?'})`); failures++; await page.close(); continue; }
     // Let startup's own fades and loads finish before measuring motion.

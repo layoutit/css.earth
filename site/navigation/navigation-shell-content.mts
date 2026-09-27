@@ -1,3 +1,5 @@
+import { SHELL_SETTING_NAMES } from '@cssearth/renderer/runtime/shell-settings.ts';
+
 /** Update a retained shell fragment without replacing controls or unchanged text. */
 export function updateShellElement(target: Element, source: Element): void {
   for (const attribute of [...target.attributes]) {
@@ -43,8 +45,11 @@ export function updateSettingsPanel(target: Element, source: Element): void {
   for (const incoming of incomingRows) {
     const id = key(incoming), retained = previous.get(id);
     const row = retained?.tagName === incoming.tagName ? retained : target.ownerDocument.importNode(incoming, true);
-    if (row === retained) updateShellElement(row, incoming);
-    else if (retained) {
+    // Shared controls keep their live checked, disabled and accessibility state.
+    // Only object-owned rows adopt the incoming object's authored defaults.
+    const inputName = incoming.querySelector('input[name]')?.getAttribute('name') ?? '';
+    if (row === retained && !SHELL_SETTING_NAMES.has(inputName)) updateShellElement(row, incoming);
+    else if (row !== retained && retained) {
       if (cursor === retained) cursor = retained.nextElementSibling;
       retained.remove();
     }

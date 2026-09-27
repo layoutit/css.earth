@@ -39,7 +39,7 @@ test('live flights use the ordinary navigation event and require the app to acce
   assert.deepEqual(steps[1], { route: '/lutetia/' });
   const document = Object.assign(new EventTarget(), {
     visibilityState: 'visible',
-    body: { classList: { contains: (name: string) => name === 'ready' } },
+    documentElement: { dataset: { ready: 'true' } },
     querySelector: () => ({ getAttribute: () => 'GitHub v0.3770' }),
   });
   document.addEventListener('objectnavigationquery', event => event.preventDefault());

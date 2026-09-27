@@ -388,7 +388,7 @@ export function createSceneRouter({
       if (loaded.cancelled || !requests.owns(request)) return false;
       const [factory, content, handoff] = loaded.value;
       request.timing.mark('handoff');
-      if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false });
+      if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
       const result = await mountApplication({ context: ready, factory, content, handoff, request, selectionTransition });
@@ -470,7 +470,7 @@ export function createSceneRouter({
     } catch (error) { fail(session, error); }
   }
 
-  function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true } = {}) {
+  function retire(session: Session, error: unknown = null, { preserveShell = false, flush = true, publish = true } = {}) {
     if (!scenes.isCurrent(session)) return;
     const retired = DIAGNOSTICS_ENABLED ? observeSceneRetirement(windowTarget, session.objectId) : null;
     // Detach and invalidate before any user cleanup or native wait can finish.
@@ -481,7 +481,9 @@ export function createSceneRouter({
       const owner = shellOwner; shellOwner = null;
       try { owner?.shell?.destroy(); } catch (error) { cleanupErrors.push(error); }
     }
-    publication.publish();
+    // A replacement starts its loading session synchronously after retirement.
+    // Do not project the intermediate absence of a scene onto the retained shell.
+    if (publish) publication.publish();
     for (const failure of cleanupErrors) report(failure);
   }
 
