@@ -1,5 +1,7 @@
 # BE Ceti
 
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 BE Ceti is a young star like the Sun that turns once every 7.7 days. Its magnetic field, mapped in 2017, shows no sign of having flipped since 2013. It is also HD 1835, HR 88, HIP 1803.

@@ -130,6 +130,16 @@
               "id": "emissivity",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "reflectivity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "roughness",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

@@ -24,3 +24,5 @@ Feature names, centres, diameters, extents and name origins are from the Gazette
 Feature caption notes: 1749 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
 
 Landing, touchdown and impact sites (80, 2 traverses): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.
+
+Kaguya MI mineral, FeO, SMFe, OMAT, grain-size and fit-quality maps: Lemelin and co-authors, University of Hawaii, SELENE/Kaguya MI team, ISAS/JAXA and USGS Astrogeology; © JAXA/SELENE. Compact numeric sampling, unit conversions, palettes and coverage markers are cssEarth processing. Reuse follows the [Kaguya data FAQ](https://darts.isas.jaxa.jp/missions/kaguya/faq.html) and [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/). The scientific papers are cited, not redistributed.

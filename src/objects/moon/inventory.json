@@ -213,9 +213,9 @@
     },
     {
       "location": "public",
-      "filename": "moon-arrival.webp",
-      "bytes": 129878,
-      "sha256": "1d5469b45053060b55f57fe66870c9e207676fd826edbdc405d67f5e46133b2a"
+      "filename": "moon-clinopyroxene@2x.webp",
+      "bytes": 1974246,
+      "sha256": "5ede23313fc2189102c34a78c3b5b94ec689fa688a23a78f1d81593366af4d88"
     },
     {
       "location": "public",
@@ -243,6 +243,18 @@
     },
     {
       "location": "public",
+      "filename": "moon-iron-oxide@2x.webp",
+      "bytes": 2589932,
+      "sha256": "0306a345ffc526ae8cba6cb30f73009d508fc8dee22045466e49c65940f906fd"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-clinopyroxene.webp",
+      "bytes": 3888,
+      "sha256": "71c707011dd3227d02bee1c6f5dfbb2914e51c5e8d05d86f6d7a8768a9337bf4"
+    },
+    {
+      "location": "public",
       "filename": "moon-lens-crust.webp",
       "bytes": 2110,
       "sha256": "f0fa8617cc08bc89d00c91fa377e7165b930b62cb5b4e4dc619a2bbdbdc73857"
@@ -261,9 +273,45 @@
     },
     {
       "location": "public",
+      "filename": "moon-lens-iron-oxide.webp",
+      "bytes": 3726,
+      "sha256": "4cdd91144cdc20004b3e19a1b95268925fb3bed01842689d128f7fc025e6b4c3"
+    },
+    {
+      "location": "public",
       "filename": "moon-lens-midnight-temperature.webp",
       "bytes": 2886,
       "sha256": "d5e0ebb6708c40b868128a18e05f2fb0209631f1120ca7e3526de5e3cd7ec30a"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-olivine.webp",
+      "bytes": 3196,
+      "sha256": "e96e45af618abd101f19050985a21d6e8f8652563931f5dcd31dce8753e63bec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-optical-maturity.webp",
+      "bytes": 3176,
+      "sha256": "f3a562155cdc0c1a966c3559b0c12e7dbf0edfe719ed97921692692c51d8afd0"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-orthopyroxene.webp",
+      "bytes": 3808,
+      "sha256": "c39dda5a67b40bb025e11e4cf4bbb4d54c3ebb5928dc47ddf4f18bb82da4c04b"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-plagioclase-grain-size.webp",
+      "bytes": 264,
+      "sha256": "094e88bd3a5fa0ba4f76ce8f4c1d30cc69b5230804b62329ddccd3d0a3085c00"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-plagioclase.webp",
+      "bytes": 3072,
+      "sha256": "70794abf02572da167c18133bb54fb18118c3e3d47a5814d86105719154105c0"
     },
     {
       "location": "public",
@@ -276,6 +324,12 @@
       "filename": "moon-lens-silicate-signature.webp",
       "bytes": 3406,
       "sha256": "4bd18a1fdde955e121fb8e9de8f78dd7289ddb01371fd862bb2e5c466e17e2d2"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-submicroscopic-iron.webp",
+      "bytes": 1010,
+      "sha256": "551092ad4b58e53a1bacc0f2f316fa58ba8b12d6685dce58b3a68cfc0efc19c7"
     },
     {
       "location": "public",
@@ -297,6 +351,42 @@
     },
     {
       "location": "public",
+      "filename": "moon-olivine@2x.webp",
+      "bytes": 1671732,
+      "sha256": "df35a611f5aa2afa16ad9e0a69f62bd5583aae5a28d8aedb459dd0ebe7416e1d"
+    },
+    {
+      "location": "public",
+      "filename": "moon-optical-maturity@2x.webp",
+      "bytes": 2608948,
+      "sha256": "eb9af20c637862f1639ee7f8a5ef01fe3097fbb2ac953a0c6c85fad05a3f5594"
+    },
+    {
+      "location": "public",
+      "filename": "moon-orthopyroxene@2x.webp",
+      "bytes": 1985444,
+      "sha256": "7b2c2b0012b3f9edb7f7ae72835cba07a06a80ba82a0f74abf92ebef67014d5f"
+    },
+    {
+      "location": "public",
+      "filename": "moon-plagioclase-grain-size@2x.webp",
+      "bytes": 142700,
+      "sha256": "f21ac3edd9961c08f7762d3408a37a7bec6e9b8ea221404ecff2443e93aafbc0"
+    },
+    {
+      "location": "public",
+      "filename": "moon-plagioclase@2x.webp",
+      "bytes": 1395750,
+      "sha256": "77fd58e75879ffaf6ded99eb9e240754313935b10e3fafed3a32d8c1d5fac883"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-clinopyroxene@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-crust@2x.webp",
       "bytes": 340552,
       "sha256": "19335c9d0b5982bf2e53da2652db64a0be082878a59c19d327eec946862e4d95"
@@ -315,7 +405,43 @@
     },
     {
       "location": "public",
+      "filename": "moon-poles-iron-oxide@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-midnight-temperature@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-olivine@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-optical-maturity@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-orthopyroxene@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-plagioclase-grain-size@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-plagioclase@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
     },
@@ -328,6 +454,12 @@
     {
       "location": "public",
       "filename": "moon-poles-silicate-signature@2x.webp",
+      "bytes": 9464,
+      "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-submicroscopic-iron@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
     },
@@ -357,6 +489,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-submicroscopic-iron@2x.webp",
+      "bytes": 636494,
+      "sha256": "97284b492965c5682c901faaee7d1bb30049afb9ffe1c9ea26f2e39dc3e79aae"
+    },
+    {
+      "location": "public",
       "filename": "moon-surface@2x.webp",
       "bytes": 9433252,
       "sha256": "c048ad3def8fdaa7b02248b3e30869aaa99275e152a4320e4689bdcb5f7c3b0c"
@@ -369,21 +507,15 @@
     },
     {
       "location": "prepared",
-      "filename": "arrival-billboard.json",
-      "bytes": 297,
-      "sha256": "309b18c22d237a23549cc256a19bea88aee0e11705009ff093aaab2f66e57356"
-    },
-    {
-      "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91243,
-      "sha256": "0c788e1dfdb365d32a61763c18a6b24cf69ecfb21a035bc69552d89db9da10b0"
+      "bytes": 95497,
+      "sha256": "b34632c9b5df527fd2011d6370331adb4410a4a2449c88ccfe1736a3626e94ee"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1419,
-      "sha256": "5921451d6805dac2d5706775c9268d9b1d86e45210ec7d85810a153cb9e4388b"
+      "sha256": "54488b9168a8b9ac2753e7516aeaf781b967e433b68367c84c9f20c530999415"
     },
     {
       "location": "prepared",
@@ -394,8 +526,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 13957,
-      "sha256": "ccfe90c54514641f5c5ab82c9745306288aeebf05272b9b071ee3c19ec9d5e5d"
+      "bytes": 32622,
+      "sha256": "492c977cf19b4853a3cf3ad4b484c3f254196ea02732db0df66b3d5ddd2b9d14"
     },
     {
       "location": "prepared",
@@ -412,20 +544,26 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 18872,
-      "sha256": "1e5ad397293f39620a55af7120404501bcb4b96cbf6470fd4b428ca02f4c6261"
+      "bytes": 44803,
+      "sha256": "88a03b9937201bc0cc96eba12759fc9bb10894a6b01931f2e8b33792a4920cf2"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 675,
-      "sha256": "4844263349fc83425ed83bbd561c7658b9899601c77175f969a95e422f29b0d4"
+      "bytes": 1369,
+      "sha256": "fb7c1d4935cb76eea35ad7d15b132e2b340da300d21a3dc7cce75b6014641efd"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/clinopyroxene.webp",
+      "bytes": 24706,
+      "sha256": "2e930f2580790909ba66655a95e3c64044715899b4fd1e93a77eba2885550c3b"
     },
     {
       "location": "prepared",
       "filename": "minimaps/crust.webp",
-      "bytes": 32958,
-      "sha256": "dcae574ec1d046ea50f54acd8fb7b13877a5178bb5cadcf13b42869dcdaffcad"
+      "bytes": 33484,
+      "sha256": "58bdf97a491bd681aa36bdb0c701cfc2c0783bdbf639b549afd5919d07eec25e"
     },
     {
       "location": "prepared",
@@ -441,9 +579,45 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/iron-oxide.webp",
+      "bytes": 10170,
+      "sha256": "3f4fce2cd1c424acf3c980dd35e090f9397ee2bf37b37cf1ab09889cc23f6c77"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/midnight-temperature.webp",
       "bytes": 22560,
       "sha256": "e2ddfdf78de99739b3b23bde105cdd6dc433f8dff48f8dd9d25d1ba09a8a1a80"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/olivine.webp",
+      "bytes": 14410,
+      "sha256": "ddf1b21c5107eaec21603645cae01ebec0ccdc736257261b145a9de5a134ec3d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/optical-maturity.webp",
+      "bytes": 10654,
+      "sha256": "bd358d07245ff506cf038bc211ba39d6ac1cf78b6048307f8666ff6a22e6830e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/orthopyroxene.webp",
+      "bytes": 24310,
+      "sha256": "18919d502b4d45e4111ab85c62b7a34641ee3b61b240b96749fb7c66ef7fb6a5"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/plagioclase-grain-size.webp",
+      "bytes": 8384,
+      "sha256": "e1a858b2c71415101d66888cd6473695463ca81f10cbdf65428524f78da85477"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/plagioclase.webp",
+      "bytes": 11978,
+      "sha256": "6ea8dccceee59df6554a84b6cd0fb8ada670a360eb99ede0bf707305b9ddc6a5"
     },
     {
       "location": "prepared",
@@ -459,9 +633,15 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/submicroscopic-iron.webp",
+      "bytes": 35248,
+      "sha256": "9eec62c236dcd54cf8206161e45a320b1b4df69df094d8f4b288d701efc67e95"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/surface.webp",
-      "bytes": 20508,
-      "sha256": "e733a479b9a089c938da3272afdebb530ac0e0c7e3515a6c02ffffb6355c7b6b"
+      "bytes": 20944,
+      "sha256": "de4fbb6cd827d604bda80ed81b7cccb7ec7161ad634db6502db624efc6add868"
     },
     {
       "location": "prepared",
@@ -478,8 +658,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 595689,
-      "sha256": "00a2d8bf36e8f5fe60bdeabaaa03c9ab928cc2125fcf63a14f9989b6046ad7ec"
+      "bytes": 633801,
+      "sha256": "1b0df3a2b0a1fb7b3f6b45a679d41076ec6cb412eca5de717b9f1cda444dcc88"
     },
     {
       "location": "prepared",
@@ -502,8 +682,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2225,
-      "sha256": "ab42396fd13ed7c00537e12b723932589b28b3ee37b62113af1cc7d914a7ca68"
+      "bytes": 3843,
+      "sha256": "ddfd9f04daefaa3ace994205764616cbad8e3a5d395af3a954de1e8cd6c32c3c"
     },
     {
       "location": "prepared",

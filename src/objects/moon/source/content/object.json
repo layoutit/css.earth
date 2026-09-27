@@ -47,7 +47,7 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "27.32 days · synchronous",
+        "value": "27.32 days \u00b7 synchronous",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
           "label": "JPL Planetary Satellite Mean Orbital Parameters",
@@ -60,7 +60,7 @@
       {
         "id": "orbital-inclination",
         "label": "Inclination to ecliptic",
-        "value": "5.16°",
+        "value": "5.16\u00b0",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
           "label": "JPL Planetary Satellite Mean Orbital Parameters",
@@ -86,7 +86,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "3.344 ± 0.001 g/cm³",
+        "value": "3.344 \u00b1 0.001 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -115,7 +115,7 @@
         },
         "falseColor": false,
         "qualification": "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere.",
-        "notes": "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
+        "notes": "LROC WAC 643 nm photography, mapped from observations in 2009\u20132011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
         "noData": true
       },
       {
@@ -132,9 +132,9 @@
           "kind": "scale",
           "title": "Midnight temperature",
           "labels": [
-            "≤80",
+            "\u226480",
             "110",
-            "≥140"
+            "\u2265140"
           ],
           "recipe": {
             "palette": [
@@ -175,17 +175,17 @@
               ]
             ],
             "labels": [
-              "≤80",
+              "\u226480",
               "110",
-              "≥140"
+              "\u2265140"
             ]
           },
           "meta": "K",
           "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.xml"
         },
         "falseColor": true,
-        "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
-        "notes": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
+        "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009\u20132022. Colors span 80\u2013140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond \u00b170\u00b0. This combines many nights; it is not a current temperature map.",
+        "notes": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009\u20132022. Colors span 80\u2013140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond \u00b170\u00b0. This combines many nights; it is not a current temperature map.",
         "noData": true
       },
       {
@@ -202,9 +202,9 @@
           "kind": "scale",
           "title": "Observed minus modeled temperature",
           "labels": [
-            "≤−10",
+            "\u2264\u221210",
             "0",
-            "≥10"
+            "\u226510"
           ],
           "recipe": {
             "palette": [
@@ -245,17 +245,17 @@
               ]
             ],
             "labels": [
-              "≤−10",
+              "\u2264\u221210",
               "0",
-              "≥10"
+              "\u226510"
             ]
           },
           "meta": "K difference",
           "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.xml"
         },
         "falseColor": true,
-        "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
-        "notes": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+        "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span \u221210 to +10 K. Observations cover 2009\u20132022 within \u00b170\u00b0; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+        "notes": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span \u221210 to +10 K. Observations cover 2009\u20132022 within \u00b170\u00b0; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
         "noData": true
       },
       {
@@ -314,8 +314,8 @@
           "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.xml"
         },
         "falseColor": true,
-        "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
-        "notes": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
+        "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009\u20132022 at slope-adjusted midnight. Colors span 0\u20132%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond \u00b170\u00b0. This estimates rock area, not individual boulder counts.",
+        "notes": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009\u20132022 at slope-adjusted midnight. Colors span 0\u20132%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond \u00b170\u00b0. This estimates rock area, not individual boulder counts.",
         "noData": true
       },
       {
@@ -332,7 +332,7 @@
           "kind": "scale",
           "title": "Elevation above reference sphere",
           "labels": [
-            "−12",
+            "\u221212",
             "0",
             "12"
           ],
@@ -365,7 +365,7 @@
               ]
             ],
             "labels": [
-              "−12",
+              "\u221212",
               "0",
               "12"
             ]
@@ -375,7 +375,7 @@
         },
         "falseColor": true,
         "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
-        "notes": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
+        "notes": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent \u221212 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
       },
       {
         "id": "crust",
@@ -742,9 +742,9 @@
           "kind": "scale",
           "title": "Christiansen-feature wavelength",
           "labels": [
-            "≤8.0",
+            "\u22648.0",
             "8.25",
-            "≥8.5"
+            "\u22658.5"
           ],
           "recipe": {
             "palette": [
@@ -775,17 +775,17 @@
               ]
             ],
             "labels": [
-              "≤8.0",
+              "\u22648.0",
               "8.25",
-              "≥8.5"
+              "\u22658.5"
             ]
           },
-          "meta": "µm",
+          "meta": "\u00b5m",
           "sourceUrl": "https://zenodo.org/records/4558194"
         },
         "falseColor": true,
-        "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude",
-        "notes": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°.",
+        "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within \u00b170\u00b0 latitude",
+        "notes": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0\u20138.5 \u00b5m; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50\u00b0 latitude. Gray grid marks missing observations and latitudes beyond \u00b170\u00b0.",
         "noData": true
       },
       {
@@ -1053,6 +1053,549 @@
         "falseColor": true,
         "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
         "notes": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
+      },
+      {
+        "id": "submicroscopic-iron",
+        "label": "Tiny iron particles",
+        "thumbnail": "moon-lens-submicroscopic-iron.webp",
+        "surface": "moon-submicroscopic-iron@2x.webp",
+        "poles": "moon-poles-submicroscopic-iron@2x.webp",
+        "source": {
+          "id": "usgs-moon-submicroscopic-iron-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/moon_selene_kaguya_mi_derived_submicroscopic_metallic_iron_mosaic_59m"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Tiny metallic iron particles",
+          "meta": "weight %",
+          "labels": [
+            "0.5",
+            "3.75",
+            "\u22657"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0.5",
+              "3.75",
+              "\u22657"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/moon_selene_kaguya_mi_derived_submicroscopic_metallic_iron_mosaic_59m"
+        },
+        "falseColor": true,
+        "qualification": "Submicroscopic metallic iron (SMFe), a fitted space-weathering parameter. This release uses seven model amounts from 0.5 to 7 weight percent; these are spectral-model choices, not measured soil samples. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. Missing or negative fit-quality values are rejected; no confidence threshold is invented. The display samples native cells without filling gaps.",
+        "notes": "Solar-wind particles and tiny impacts change exposed lunar soil. Very small metallic iron particles help darken it and change its reflected light. Estimated percentage by weight. The model chooses from 0.5, 1, 2, 3, 4, 5 or 7%; yellow means more iron. Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. This quantity is called submicroscopic metallic iron (SMFe). The seven amounts are model choices. They are not laboratory measurements of samples collected at each location. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Solar-wind particles and tiny impacts change exposed lunar soil. Very small metallic iron particles help darken it and change its reflected light."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Estimated percentage by weight. The model chooses from 0.5, 1, 2, 3, 4, 5 or 7%; yellow means more iron."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. This quantity is called submicroscopic metallic iron (SMFe)."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The seven amounts are model choices. They are not laboratory measurements of samples collected at each location."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ]
+      },
+      {
+        "id": "plagioclase-grain-size",
+        "label": "Mineral grain size",
+        "thumbnail": "moon-lens-plagioclase-grain-size.webp",
+        "surface": "moon-plagioclase-grain-size@2x.webp",
+        "poles": "moon-poles-plagioclase-grain-size@2x.webp",
+        "source": {
+          "id": "usgs-moon-plagioclase-grain-size-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_plagioclase_grain_size_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Plagioclase grain size",
+          "meta": "Model choices \u00b7 micrometers",
+          "items": [
+            {
+              "label": "17 \u00b5m",
+              "color": "#426f85"
+            },
+            {
+              "label": "200 \u00b5m",
+              "color": "#fff2aa"
+            }
+          ],
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_plagioclase_grain_size_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "The spectral model chooses between 17 and 200 \u00b5m plagioclase grains. These two model classes are not a continuous measurement of individual grains. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. Missing or negative fit-quality values are rejected; no confidence threshold is invented. The display samples native cells without filling gaps.",
+        "notes": "The size of a mineral grain affects how it reflects light. This map shows which of two plagioclase grain sizes fits better. 17 \u00b5m = 0.017 mm; 200 \u00b5m = 0.2 mm. These are two separate choices, not a continuous size scale. Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. It tries these two sizes for plagioclase. The model does not measure individual grains. Other minerals keep the model\u2019s fixed grain size. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The size of a mineral grain affects how it reflects light. This map shows which of two plagioclase grain sizes fits better."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "17 \u00b5m = 0.017 mm; 200 \u00b5m = 0.2 mm. These are two separate choices, not a continuous size scale."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. It tries these two sizes for plagioclase."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The model does not measure individual grains. Other minerals keep the model\u2019s fixed grain size."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ]
+      },
+      {
+        "id": "plagioclase",
+        "label": "Mineral composition",
+        "thumbnail": "moon-lens-plagioclase.webp",
+        "surface": "moon-plagioclase@2x.webp",
+        "poles": "moon-poles-plagioclase@2x.webp",
+        "source": {
+          "id": "usgs-moon-plagioclase-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_plagioclase_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Plagioclase",
+          "meta": "weight %",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_plagioclase_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "Spectral mixture estimate of plagioclase abundance by weight. The authors warn that subdued absorption bands in mature soil can overestimate plagioclase; compare optical maturity. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. Missing or negative fit-quality values are rejected; no confidence threshold is invented. The display samples native cells without filling gaps.",
+        "notes": "Plagioclase is an ingredient of rock, also found in granite on Earth. It is abundant in the Moon\u2019s ancient highland crust. Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. Weathered soil weakens the mineral signal and can make this estimate too high. Compare the Surface weathering map. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Plagioclase is an ingredient of rock, also found in granite on Earth. It is abundant in the Moon\u2019s ancient highland crust."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Weathered soil weakens the mineral signal and can make this estimate too high. Compare the Surface weathering map."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ],
+        "step": {
+          "group": "mineral-composition",
+          "label": "Plagioclase"
+        }
+      },
+      {
+        "id": "olivine",
+        "label": "Mineral composition",
+        "thumbnail": "moon-lens-olivine.webp",
+        "surface": "moon-olivine@2x.webp",
+        "poles": "moon-poles-olivine@2x.webp",
+        "source": {
+          "id": "usgs-moon-olivine-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_olivine_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Olivine",
+          "meta": "weight %",
+          "labels": [
+            "0",
+            "25",
+            "\u226550"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "25",
+              "\u226550"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_olivine_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "Spectral mixture estimate of olivine abundance by weight. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. Missing or negative fit-quality values are rejected; no confidence threshold is invented. The display samples native cells without filling gaps.",
+        "notes": "Olivine forms as molten rock cools. Its distribution helps scientists compare the materials exposed at the lunar surface. Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Values of 50% or more share the brightest color. Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. These are estimates from light reflected by the surface. Weathering can hide mineral signals; the map does not measure rocks underground. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Olivine forms as molten rock cools. Its distribution helps scientists compare the materials exposed at the lunar surface."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Values of 50% or more share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "These are estimates from light reflected by the surface. Weathering can hide mineral signals; the map does not measure rocks underground."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ],
+        "step": {
+          "group": "mineral-composition",
+          "label": "Olivine"
+        }
+      },
+      {
+        "id": "orthopyroxene",
+        "label": "Mineral composition",
+        "thumbnail": "moon-lens-orthopyroxene.webp",
+        "surface": "moon-orthopyroxene@2x.webp",
+        "poles": "moon-poles-orthopyroxene@2x.webp",
+        "source": {
+          "id": "usgs-moon-orthopyroxene-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_orthopyroxene_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Orthopyroxene",
+          "meta": "weight %",
+          "labels": [
+            "0",
+            "25",
+            "\u226550"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "25",
+              "\u226550"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_orthopyroxene_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "Spectral mixture estimate of low-calcium orthopyroxene abundance by weight. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. Missing or negative fit-quality values are rejected; no confidence threshold is invented. The display samples native cells without filling gaps.",
+        "notes": "Pyroxenes are minerals found in rocks formed from molten material. This map estimates the low-calcium type, called orthopyroxene. Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Values of 50% or more share the brightest color. Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. This is the model\u2019s low-calcium mineral component. Weathered soil can weaken the reflected-light signal used to identify it. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Pyroxenes are minerals found in rocks formed from molten material. This map estimates the low-calcium type, called orthopyroxene."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Values of 50% or more share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "This is the model\u2019s low-calcium mineral component. Weathered soil can weaken the reflected-light signal used to identify it."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ],
+        "step": {
+          "group": "mineral-composition",
+          "label": "Low-calcium pyroxene"
+        }
+      },
+      {
+        "id": "clinopyroxene",
+        "label": "Mineral composition",
+        "thumbnail": "moon-lens-clinopyroxene.webp",
+        "surface": "moon-clinopyroxene@2x.webp",
+        "poles": "moon-poles-clinopyroxene@2x.webp",
+        "source": {
+          "id": "usgs-moon-clinopyroxene-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_clinopyroxene_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Clinopyroxene",
+          "meta": "weight %",
+          "labels": [
+            "0",
+            "25",
+            "\u226550"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "25",
+              "\u226550"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_clinopyroxene_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "Spectral mixture estimate of high-calcium clinopyroxene abundance by weight. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. Missing or negative fit-quality values are rejected; no confidence threshold is invented. The display samples native cells without filling gaps.",
+        "notes": "The model uses a calcium-rich type of pyroxene called clinopyroxene. Comparing it with low-calcium pyroxene helps distinguish rock mixtures. Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Values of 50% or more share the brightest color. Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals. The map estimates a mineral mixture from reflected light. Weathering can hide the signal; it is not a count of individual crystals. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The model uses a calcium-rich type of pyroxene called clinopyroxene. Comparing it with low-calcium pyroxene helps distinguish rock mixtures."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Percentage by weight: 50% means half the modeled material by weight. Yellow means more; dark blue means less. Values of 50% or more share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Kaguya measured reflected sunlight in nine wavelength bands. A model compared those measurements with mixtures of minerals."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The map estimates a mineral mixture from reflected light. Weathering can hide the signal; it is not a count of individual crystals."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ],
+        "step": {
+          "group": "mineral-composition",
+          "label": "High-calcium pyroxene"
+        }
+      },
+      {
+        "id": "iron-oxide",
+        "label": "Iron content",
+        "thumbnail": "moon-lens-iron-oxide.webp",
+        "surface": "moon-iron-oxide@2x.webp",
+        "poles": "moon-poles-iron-oxide@2x.webp",
+        "source": {
+          "id": "usgs-moon-iron-oxide-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_feo_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Iron content as FeO",
+          "meta": "weight % FeO",
+          "labels": [
+            "0",
+            "12.5",
+            "\u226525"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "12.5",
+              "\u226525"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_feo_weight_percent_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "FeO estimated by the published reflectance calibration, separately from the mineral-mixture fit. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. The display samples native cells without filling gaps. Values outside 0\u2013100 weight % and cells lacking a valid companion fit are masked.",
+        "notes": "Iron changes how lunar material reflects light. Scientists use that signal to estimate its iron content, expressed as FeO. FeO weight percent: 10% means 10 parts FeO per 100 parts of material by weight. Yellow means more; values at or above 25% share one color. A published calibration converts Kaguya\u2019s reflected-light measurements to FeO content, separately from the mineral-mixture model. Values outside 0\u2013100% are excluded, along with cells lacking a usable companion model fit. This is not a map of rust deposits. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Iron changes how lunar material reflects light. Scientists use that signal to estimate its iron content, expressed as FeO."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "FeO weight percent: 10% means 10 parts FeO per 100 parts of material by weight. Yellow means more; values at or above 25% share one color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "A published calibration converts Kaguya\u2019s reflected-light measurements to FeO content, separately from the mineral-mixture model."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Values outside 0\u2013100% are excluded, along with cells lacking a usable companion model fit. This is not a map of rust deposits."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ]
+      },
+      {
+        "id": "optical-maturity",
+        "label": "Surface weathering",
+        "thumbnail": "moon-lens-optical-maturity.webp",
+        "surface": "moon-optical-maturity@2x.webp",
+        "poles": "moon-poles-optical-maturity@2x.webp",
+        "source": {
+          "id": "usgs-moon-optical-maturity-numeric",
+          "url": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_optical_maturity_omat_50n50s_512ppd_59mpp"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Soil freshness \u00b7 OMAT",
+          "meta": "OMAT index",
+          "labels": [
+            "0 \u00b7 mature",
+            "0.25",
+            "\u22650.5 \u00b7 fresh"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0 \u00b7 mature",
+              "0.25",
+              "\u22650.5 \u00b7 fresh"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/kaguya_lunar_multiband_imager_mi_derived_optical_maturity_omat_50n50s_512ppd_59mpp"
+        },
+        "falseColor": true,
+        "qualification": "Optical maturity (OMAT) is a dimensionless reflectance index. Smaller values indicate more optically mature, space-weathered soil; this is not an exposure-age measurement. Kaguya MI derived map, May 2016 release, within \u00b150\u00b0 latitude. Colors show modeled values; gray grid marks missing data and the unmapped polar regions. The display samples native cells without filling gaps. Cells lacking a valid companion fit are masked to avoid treating unqualified zeros as mature terrain.",
+        "notes": "Solar-wind particles and tiny impacts alter exposed soil. This measure of the change in reflected light is called optical maturity (OMAT). Lower values mean more weathered soil; higher values mean fresher material. Values at or above 0.5 share the brightest color. The published OMAT formula combines two Kaguya wavelength bands after matching them to the Clementine calibration. The index has no units and does not give an age in years. Composition also affects interpretation. 50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Solar-wind particles and tiny impacts alter exposed soil. This measure of the change in reflected light is called optical maturity (OMAT)."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Lower values mean more weathered soil; higher values mean fresher material. Values at or above 0.5 share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "The published OMAT formula combines two Kaguya wavelength bands after matching them to the Clementine calibration."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The index has no units and does not give an age in years. Composition also affects interpretation."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
+          }
+        ]
       }
     ]
   },

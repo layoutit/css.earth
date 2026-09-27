@@ -1,0 +1,60 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 184974
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 46080
+      Lines   = 23040
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = SignedWord
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    ^Core     = Mars_MGS_MOLA_DEM_mosaic_global_463m.tif
+  End_Object
+
+  Group = Archive
+    DataSetId               = mola128_mola64_merge_90Nto90S_clon0
+    ProducerInstitutionName = "Astrogeology Science Center"
+    ProducerId              = Astrogeology
+    ProducerFullName        = "USGS and GSFC"
+    ProductId               = MOLA
+    ProductVersionId        = 2003
+    InstrumentHostName      = "Mars Global Surveyor"
+    InstrumentName          = "Mars Orbitor Laser Altimeter"
+    InstrumentId            = MOLA
+    TargetName              = Mars
+    MissionPhaseName        = Derived
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = Equirectangular
+    CenterLongitude    = 0.0
+    TargetName         = Mars
+    EquatorialRadius   = 3396190.0 <meters>
+    PolarRadius        = 3396190.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 180
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -10669675.197320545092225 <meters>
+    UpperLeftCornerY   = 5334837.598660272546113 <meters>
+    PixelResolution    = 463.093541550370901 <meters/pixel>
+    Scale              = 128.0 <pixel/degree>
+    CenterLatitude     = 0.0
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1703             
+End_Object
+
+End

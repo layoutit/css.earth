@@ -1,0 +1,163 @@
+{
+  "schema": "cssearth-dataset-browser-check@1",
+  "date": "2026-09-27T01:59:17.859Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
+  "testedFiles": {
+    "source/content/object.json": "7b84baf32f323bdcf47236d4530e9c03b9e96ead3b1d93842871bf45a57a3346",
+    "text.json": "23f095c9f8bafc95d1a2186faa41caaefea2db745f3720f1155e9ba4c42f36eb",
+    "inventory.json": "13b5d8e8c9a220c5a1618cd3ad0a0c0089f81028115eb90251f2da352a8af86e"
+  },
+  "tests": {
+    "sourceLabels": {
+      "body": "mars",
+      "dataset": "chlorine",
+      "labels": [
+        {
+          "id": "normal",
+          "source": "Viking / NASA"
+        },
+        {
+          "id": "elevation",
+          "source": "MGS MOLA"
+        },
+        {
+          "id": "thermal",
+          "source": "Odyssey THEMIS"
+        },
+        {
+          "id": "water-equivalent",
+          "source": "Odyssey GRS"
+        },
+        {
+          "id": "chlorine",
+          "source": "Odyssey GRS"
+        },
+        {
+          "id": "iron",
+          "source": "Odyssey GRS"
+        },
+        {
+          "id": "silicon",
+          "source": "Odyssey GRS"
+        },
+        {
+          "id": "potassium",
+          "source": "Odyssey GRS"
+        },
+        {
+          "id": "thorium",
+          "source": "Odyssey GRS"
+        },
+        {
+          "id": "geology",
+          "source": "USGS"
+        },
+        {
+          "id": "magnetic",
+          "source": "Langlais et al. (2019)"
+        },
+        {
+          "id": "crust",
+          "source": "Wieczorek et al. (2022)"
+        }
+      ],
+      "url": "http://127.0.0.1:4277/mars/?dataset=chlorine&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+      "scenes": 1
+    },
+    "group": {
+      "body": "mars",
+      "firstPreviousDisabled": true,
+      "lastNextDisabled": true,
+      "keyboardPrevious": "potassium",
+      "retainedAfterKeyboard": true,
+      "results": [
+        {
+          "id": "chlorine",
+          "url": "http://127.0.0.1:4277/mars/?dataset=chlorine&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Chlorine · 1 of 5",
+          "legend": "-0.27\n1.04 wt%\n\nNo data",
+          "headings": [
+            "Odyssey GRS chlorine"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "iron",
+          "url": "http://127.0.0.1:4277/mars/?dataset=iron&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Iron · 2 of 5",
+          "legend": "4.53\n25.86 wt%\n\nNo data",
+          "headings": [
+            "Odyssey GRS iron"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "silicon",
+          "url": "http://127.0.0.1:4277/mars/?dataset=silicon&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Silicon · 3 of 5",
+          "legend": "8.33\n29.21 wt%\n\nNo data",
+          "headings": [
+            "Odyssey GRS silicon"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "potassium",
+          "url": "http://127.0.0.1:4277/mars/?dataset=potassium&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Potassium · 4 of 5",
+          "legend": "-0.1\n0.67 wt%",
+          "headings": [
+            "Odyssey GRS potassium"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "thorium",
+          "url": "http://127.0.0.1:4277/mars/?dataset=thorium&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Thorium · 5 of 5",
+          "legend": "-0.89\n2.17 ppm",
+          "headings": [
+            "Odyssey GRS thorium"
+          ],
+          "retained": true,
+          "scenes": 1
+        }
+      ]
+    },
+    "science": {
+      "body": "mars",
+      "results": [
+        {
+          "id": "elevation",
+          "url": "http://127.0.0.1:4277/mars/?dataset=elevation&v=UMJA0ExLnH-c10FCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "description": "Height of mountains and basins\n−9,000\n6,500\n22,000 m above GMM-2B areoid\n\nNo data\n\nLaser measurements reveal Mars’s mountains and deep basins; colors show height relative to a gravity-based zero level.\n\nView source ↗\nDataset details",
+          "retained": true,
+          "scenes": 1
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "file": "mars-chlorine.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 146778,
+      "sha256": "0b10e6b28f40b866d68c8fdbc167188587156654d96df18573225fe2b87c0343",
+      "decodedPixelsEqualToCapture": true
+    },
+    {
+      "file": "mars-elevation.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 194372,
+      "sha256": "cc59e1d852166dbef5ef8600278680b1c858d627688f238409c8a4e646e6b523",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}

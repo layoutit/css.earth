@@ -285,15 +285,9 @@
     },
     {
       "location": "public",
-      "filename": "mercury-lens-topography-legend.webp",
-      "bytes": 2072,
-      "sha256": "d952712d2a284fcc06e26afc228d05dc161f3d8af3d422c48eb3daf50e04abdb"
-    },
-    {
-      "location": "public",
       "filename": "mercury-lens-topography.webp",
-      "bytes": 474,
-      "sha256": "9dfbdc04a3418d545035d968fca902f47d0cb5ca9840369d8c9584527cb127ae"
+      "bytes": 730,
+      "sha256": "fd91073b98fe2c382aac3f732081895a4e4220c72a273d487ef8afaf977454d8"
     },
     {
       "location": "public",
@@ -316,8 +310,8 @@
     {
       "location": "public",
       "filename": "mercury-poles-topography@2x.webp",
-      "bytes": 43076,
-      "sha256": "2f8fe6420c259c5abaff080c50bf70f32dd91d1962b0042fca9ae5ae9b1ed55d"
+      "bytes": 150816,
+      "sha256": "feb9f6c7427a14df28ba100dcdf0eb8c325c0b9f8c430bbeddc4c02354731ee0"
     },
     {
       "location": "public",
@@ -339,27 +333,21 @@
     },
     {
       "location": "public",
-      "filename": "mercury-surface-topography@2x.jpg",
-      "bytes": 2360840,
-      "sha256": "dde79996f5cd553ccf95ae50bff979850af3bd73ad56be16a2d4bc44601c8dff"
-    },
-    {
-      "location": "prepared",
-      "filename": "arrival-billboard.json",
-      "bytes": 302,
-      "sha256": "5dd2c7d2df8c2c97fd552967aeebc16b8d9be16a5418e8379351259800e74915"
+      "filename": "mercury-surface-topography@2x.webp",
+      "bytes": 2109316,
+      "sha256": "7d74d86ae385d6d907de7b328ac9a3b74134084c63a9dd59cccfde9e390f071a"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 94282,
-      "sha256": "095372d433b922756e0b86d567ec8a5d4e5c60a64b1cb5aa7402a0342723680a"
+      "bytes": 94286,
+      "sha256": "b3b44223810b40d1d7032be36e5098e466f3a07f20ef584587d5cc87b24c973c"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1550,
-      "sha256": "1e32f6bdaa0c754be54d71ac16253c03d156c888e950e82120fa3f72354f9e25"
+      "sha256": "b1b1c5ed82ff138fadae36054e8e9171325f7ba10fc6b0d506b99ff3db3c312c"
     },
     {
       "location": "prepared",
@@ -370,8 +358,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1941,
-      "sha256": "54a7804f3b60838073600a8e2ebbb400607182c2199dc1bc979cdb27d0ee55ff"
+      "bytes": 3695,
+      "sha256": "5d3b3d6fb8d02b5b208c20738e9b9d62809683d2344d29d9200081a34fd14cc4"
     },
     {
       "location": "prepared",
@@ -388,8 +376,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 3828,
-      "sha256": "2a7981679b30820337de1b394be8a1b6582e9bef5fd8595f252662a863295c9b"
+      "bytes": 5813,
+      "sha256": "ff92bee3bfeddd8f61f9cf0c6f6cb3d244d01decaf932c67c1c0898027431c8d"
     },
     {
       "location": "prepared",
@@ -412,14 +400,14 @@
     {
       "location": "prepared",
       "filename": "minimaps/topography.webp",
-      "bytes": 31692,
-      "sha256": "e7d275b5acd4b44c0ea689a3b23b7e941b468a3fe41649f96034f9ceff9ac017"
+      "bytes": 18346,
+      "sha256": "5b1c2839defdf3c3a22eecb8ee17aece5020125a3006eaa30052b18c50f8de86"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 870746,
-      "sha256": "965563c356d16743995713940731d86208e038046e4451deca7862b1611557a9"
+      "bytes": 872503,
+      "sha256": "42864b8c62d64ddc6128ea0324bba0ab263221b618ec0fb27b863ad227e5d417"
     },
     {
       "location": "prepared",
@@ -442,8 +430,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1293,
-      "sha256": "5c67e20e81ef6f42260af1a9c75f23d31b1e91aa0a85ac4ef35d50f2cb3a7416"
+      "bytes": 1342,
+      "sha256": "65ef353120ec228f0ba6136c9b30dc67dd7b04cf86d3d97556bb11dde9551f0e"
     },
     {
       "location": "prepared",

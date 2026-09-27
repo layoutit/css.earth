@@ -195,7 +195,7 @@
       },
       {
         "id": "methane-ice",
-        "label": "Methane ice",
+        "label": "Surface ices",
         "thumbnail": "pluto-lens-methane-ice.webp",
         "surface": "pluto-methane-ice@2x.webp",
         "poles": "pluto-poles-methane-ice@2x.webp",
@@ -251,11 +251,15 @@
           "sourceUrl": "https://zenodo.org/records/18825240"
         },
         "notes": "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
-        "noData": true
+        "noData": true,
+        "step": {
+          "group": "surface-ices",
+          "label": "Methane"
+        }
       },
       {
         "id": "nitrogen-ice",
-        "label": "Nitrogen ice",
+        "label": "Surface ices",
         "thumbnail": "pluto-lens-nitrogen-ice.webp",
         "surface": "pluto-nitrogen-ice@2x.webp",
         "poles": "pluto-poles-nitrogen-ice@2x.webp",
@@ -311,11 +315,15 @@
           "sourceUrl": "https://zenodo.org/records/18825240"
         },
         "notes": "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
-        "noData": true
+        "noData": true,
+        "step": {
+          "group": "surface-ices",
+          "label": "Nitrogen"
+        }
       },
       {
         "id": "water-ice",
-        "label": "Water ice",
+        "label": "Surface ices",
         "thumbnail": "pluto-lens-water-ice.webp",
         "surface": "pluto-water-ice@2x.webp",
         "poles": "pluto-poles-water-ice@2x.webp",
@@ -371,7 +379,11 @@
           "sourceUrl": "https://zenodo.org/records/18825240"
         },
         "notes": "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
-        "noData": true
+        "noData": true,
+        "step": {
+          "group": "surface-ices",
+          "label": "Water"
+        }
       }
     ]
   },

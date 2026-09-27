@@ -98,6 +98,31 @@ test('acquired products retain their configuration input and verify its exact by
   assert.deepEqual(requireValue(document.sources.find(source => source.id === 'observation'), 'observation source').dependencies, ['unused']);
 });
 
+test('numeric raster lineage resolves companion grids beside its source and retains acquisition recipes', async t => {
+  const context = await fixture(t), manifestPath = resolve(context.source, 'manifest.json');
+  await mkdir(resolve(context.source, 'science'));
+  await writeFile(resolve(context.source, 'science/quantity.tif'), 'quantity');
+  await writeFile(resolve(context.source, 'science/quality.tif'), 'quality');
+  await writeFile(resolve(context.source, 'science/grid.json'), JSON.stringify({schema:'cssearth-geotiff-grid@1',
+    source:{url:'https://example.org/native.tif',productId:'native',width:8,height:4,origin:[-180,90],resolution:[45,-45],
+      coordinates:'degrees',radius:1000,centerLongitude:0,noData:-9999,bits:32,sampleFormat:3},
+    output:{width:4,height:2,radius:1000}}));
+  const manifest = await read(manifestPath), inputs = requireArray(manifest.inputs), base = requireRecord(inputs[0]);
+  inputs.push({...base,id:'quantity',path:'science/quantity.tif'}, {...base,id:'quality',path:'science/quality.tif'});
+  requireArray(manifest.documents).push({id:'grid-recipe',path:'science/grid.json'});
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  const rasterPath = resolve(context.source, 'preparation/raster.json'), raster = await read(rasterPath);
+  const surface = requireRecord(requireArray(raster.surfaces)[0]);
+  surface.source = 'science/quantity.tif';
+  surface.science = {scientific:{path:'quantity.tif',qualityMasks:[{path:'quality.tif'}]}};
+  await writeFile(rasterPath, JSON.stringify(raster));
+  await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations:[
+    {kind:'geotiff-grid',path:'science/quantity.tif',recipePath:'science/grid.json'}]}));
+  const document = await prepareObjectProvenance(context);
+  assert.deepEqual(new Set(productSourceIds(document,'surface')), new Set(['quantity','quality','grid-recipe']));
+  assert.deepEqual(document.sources.find(source=>source.id==='quantity')?.dependencies,['grid-recipe']);
+});
+
 test('composition lineage follows the pinned conversion recipe to the native archive', async t => {
   const context = await fixture(t), manifestPath = resolve(context.source, 'manifest.json');
   const recipe = JSON.stringify({schema: 'cssearth-mapped-composition@1', target: 'Fixture', referenceRadiusMeters: 100,

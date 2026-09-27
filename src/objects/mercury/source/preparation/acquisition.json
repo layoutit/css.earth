@@ -127,6 +127,14 @@
       ],
       "path": "features/tectonic/global-tectonic-map.zip",
       "url": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded"
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/elevation.tif",
+      "recipePath": "science/usgs/elevation.json",
+      "groups": [
+        "refresh-usgs"
+      ]
     }
   ]
 }

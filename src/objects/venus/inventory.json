@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "venus-arrival.webp",
-      "bytes": 27502,
-      "sha256": "c4e2101691a80a00993e5a7fd14cd28089f7337ce4761e9947fce308d5f1c8d4"
-    },
-    {
-      "location": "public",
       "filename": "venus-atmosphere-spectrum.svg",
       "bytes": 5691,
       "sha256": "e3ebcf21f9ca7b8cec7c39209f92a63e7d70a850ff823fde795cccba70e1367e"
@@ -22,14 +16,14 @@
     {
       "location": "public",
       "filename": "venus-elevation@2x.webp",
-      "bytes": 1253420,
-      "sha256": "17fa56f79b6280bb8283067eb35781b312c33084bb18bbec9eecd10a4a56c8bf"
+      "bytes": 1280892,
+      "sha256": "f1a2494ca8b79b1883f2cb2d2c155a06aa5c51be585f8b1e8d4372b13cb544ca"
     },
     {
       "location": "public",
       "filename": "venus-emissivity@2x.webp",
-      "bytes": 182456,
-      "sha256": "0a6e46340c31bfa2bd38d40c0ccf0e70b215db8246799bc9b2e2f85ae8e419bd"
+      "bytes": 1142498,
+      "sha256": "8be565d12d7a8210cc8bd1b971964ea4db07eb71fcff3295d6863031b5b394d5"
     },
     {
       "location": "public",
@@ -46,20 +40,32 @@
     {
       "location": "public",
       "filename": "venus-lens-elevation.webp",
-      "bytes": 1756,
-      "sha256": "6481cc37b86eb0ad9035afeb01c9ea05939f870d2aa736564980255961787152"
+      "bytes": 2784,
+      "sha256": "3c562b928e307c71eec27fe747bdf39854bd6e7e4009e662e7ec408ab77b9ba3"
     },
     {
       "location": "public",
       "filename": "venus-lens-emissivity.webp",
-      "bytes": 760,
-      "sha256": "ac25d778dae4325c20ece25fa666a5dc1f0d3099c6f848b0da42b8a044c8bf43"
+      "bytes": 2744,
+      "sha256": "e358fb69bfe90aac35798c3bc6c9d63399ca6c9b005e456708b46eb518b16274"
     },
     {
       "location": "public",
       "filename": "venus-lens-radar.webp",
       "bytes": 1410,
       "sha256": "5a235993f72018cb7d41cac004417cd6bcf3af6ee9bf12272630e9a9136c8813"
+    },
+    {
+      "location": "public",
+      "filename": "venus-lens-reflectivity.webp",
+      "bytes": 2508,
+      "sha256": "f2054a451d55f608df3e74e4608eb7fe59bc2b98866d726cf790abe62135dadd"
+    },
+    {
+      "location": "public",
+      "filename": "venus-lens-roughness.webp",
+      "bytes": 2912,
+      "sha256": "4afb0b7bd4a6215dafcc82ac200e4c72c87467945a1cc57176d90fd74876b854"
     },
     {
       "location": "public",
@@ -100,20 +106,32 @@
     {
       "location": "public",
       "filename": "venus-poles-elevation@2x.webp",
-      "bytes": 483058,
-      "sha256": "ee34a96c428f8ecd3f028e6d2e08297ebe591c975c42a9545ce7563152a13b7f"
+      "bytes": 66346,
+      "sha256": "869b34ade9628639d87f92827e06a2d49e756af2658b3c81683bc9d5eafef2f3"
     },
     {
       "location": "public",
       "filename": "venus-poles-emissivity@2x.webp",
-      "bytes": 98388,
-      "sha256": "1551f7e0aa44a35f958440eb82727526d15598e1c498981d9229a2ff84ac7c3b"
+      "bytes": 37730,
+      "sha256": "47db323e59e6c023b6e70be76ba4143e28fe053d959fd92b747ce54b5ba7863d"
     },
     {
       "location": "public",
       "filename": "venus-poles-radar@2x.webp",
       "bytes": 445994,
       "sha256": "ca4c7703ed677382743e628b10a63bd75391a63981c3771aeb319542dd4c123e"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-reflectivity@2x.webp",
+      "bytes": 97204,
+      "sha256": "91db7e8fe8f7543548bc15b870b1c66ad756a1b7ee2381a663dd8451881af0f2"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-roughness@2x.webp",
+      "bytes": 147668,
+      "sha256": "f38ee4d23ac3887f967b3f70030cdf2443ef7008af1787eb2425f5dae838ceb4"
     },
     {
       "location": "public",
@@ -126,6 +144,18 @@
       "filename": "venus-radar@2x.webp",
       "bytes": 1012746,
       "sha256": "9a22f478d116717a14fe23cf41fd7f485dd4616161706faab20a56de38c82046"
+    },
+    {
+      "location": "public",
+      "filename": "venus-reflectivity@2x.webp",
+      "bytes": 1025760,
+      "sha256": "a3ff6ec547dec37ff98940dc03271fc2a8a64464668d8c2a72da16cb36345a4c"
+    },
+    {
+      "location": "public",
+      "filename": "venus-roughness@2x.webp",
+      "bytes": 1247984,
+      "sha256": "76887c9521cc8aed9af41495f63ac2a31549edefdd33dad9832e82bbc0fc9c47"
     },
     {
       "location": "public",
@@ -165,21 +195,15 @@
     },
     {
       "location": "prepared",
-      "filename": "arrival-billboard.json",
-      "bytes": 298,
-      "sha256": "91a5b42f9816cf546dbbe8b953661fd327fe17d905a55c375a9e586eb637fd9a"
-    },
-    {
-      "location": "prepared",
       "filename": "assets.json",
-      "bytes": 4738,
-      "sha256": "ee01dfda1be1f84c2fac7287f4a8e49632e73493f52cacfbbd4845c62dde742c"
+      "bytes": 5773,
+      "sha256": "47d78409527740b7f1446979482dfb4c715124011deb19e016bea58ae443bad5"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1548,
-      "sha256": "a8171630dab5879096542995d10fd28218589d01eac2b08a166f1d599ca86be1"
+      "sha256": "f70271c9b2a3235d692bf9c50d0e862b2a744eb222eb1b427d3d5d9c9a073bc0"
     },
     {
       "location": "prepared",
@@ -190,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3821,
-      "sha256": "4d395b55880973367940e868a7cd00e0f54434c01403e2a92ecea036b8cf093b"
+      "bytes": 9922,
+      "sha256": "833e305d7069770c27e5b49ff670e57b64431297bd718e63b69a44e4f7d269b1"
     },
     {
       "location": "prepared",
@@ -202,14 +226,14 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 6664,
-      "sha256": "f9b3b31db0043d7102cd80597ad89de6f8451504966b67e354065282fad31a8d"
+      "bytes": 14628,
+      "sha256": "02b30d7011879ef200283c6ea514d19f36a5c6968ed51f38a1a5600c14cde723"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 390,
-      "sha256": "3d6aec79d6037642c0116c4c81e26f5224c5fa8aa5b5cce63d0581551e2765ad"
+      "bytes": 550,
+      "sha256": "31b23f39fbc2b27c96f979ec0058202c797c90ae38f8ba2ab256843f59c45796"
     },
     {
       "location": "prepared",
@@ -220,20 +244,32 @@
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 33192,
-      "sha256": "0733334d74fb3f302999fc91d2c8838b558c3430bcab0c3a4660cf156e697402"
+      "bytes": 11268,
+      "sha256": "def63ea6310d63533865d41c3cf864d7a06a0622ccba1e37c2a8d65d336d9ec2"
     },
     {
       "location": "prepared",
       "filename": "minimaps/emissivity.webp",
-      "bytes": 10246,
-      "sha256": "e593a684d54a6f445ac49f2538ff0a3a70f96285d0d80a70671e12f8e914a81e"
+      "bytes": 10988,
+      "sha256": "d56bbdf010eed12f13d4d03b8e25a545eb9c0b8940fcb1bb3cd99b65b76a1d77"
     },
     {
       "location": "prepared",
       "filename": "minimaps/radar.webp",
       "bytes": 29366,
       "sha256": "2e3a354df16f179790b22b407dceebb64ed685401ef5d89f1b24a4a2a71bbb16"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/reflectivity.webp",
+      "bytes": 20014,
+      "sha256": "8adc5e751f735a7bc7e3eebe47b2ef872a007c6ec501de5f6d77d2124b64dba4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/roughness.webp",
+      "bytes": 16374,
+      "sha256": "601b99c02b262a9c33c4b388806631f69966a462b2f95999432359c7f5915b8b"
     },
     {
       "location": "prepared",
@@ -244,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 528939,
-      "sha256": "6b33028c15f045477c02e1dd96f3cbe4b59717aaffd8bb35a45229e11f6cb9f7"
+      "bytes": 542863,
+      "sha256": "95a4eca16cf5b4d13640fb9b31ff8555a1181be2e1000569f8e241aae17ad51f"
     },
     {
       "location": "prepared",
@@ -268,8 +304,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1555,
-      "sha256": "cece089dcad06943a2c16c3079aa8ebc25e02d9013a1194b0328b4f4e85b8d35"
+      "bytes": 1955,
+      "sha256": "e15aeda080a30d5f887b1788a9140d3fceb61565d53a051223b02a62bbe407e2"
     },
     {
       "location": "prepared",

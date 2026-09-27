@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-dataset-browser-check@1",
+  "date": "2026-09-27T01:59:18.576Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
+  "testedFiles": {
+    "source/content/object.json": "962bc4eb2cc52ed03cbe194f031ca49b3c69f7a26bda76e4a1d1e2b53eb326c8",
+    "text.json": "c307619f45722538ad3d1d339a1a4ef148da348dffd1fc8bbdbf7e31efdfba18",
+    "inventory.json": "091fee86ca61bfb140960a03f5c61e22b3d43eac00f6da93825284cf07f700af"
+  },
+  "tests": {
+    "sourceLabels": {
+      "body": "pluto",
+      "dataset": "methane-ice",
+      "labels": [
+        {
+          "id": "surface",
+          "source": "New Horizons MVIC"
+        },
+        {
+          "id": "topography",
+          "source": "New Horizons / USGS"
+        },
+        {
+          "id": "monochrome",
+          "source": "New Horizons / USGS"
+        },
+        {
+          "id": "methane-ice",
+          "source": "New Horizons LEISA"
+        },
+        {
+          "id": "nitrogen-ice",
+          "source": "New Horizons LEISA"
+        },
+        {
+          "id": "water-ice",
+          "source": "New Horizons LEISA"
+        }
+      ],
+      "url": "http://127.0.0.1:4277/pluto/?dataset=methane-ice&v=UEJAts9pmKiic0FCxzNAAAAAP4xcyf4GRFs_mOWcosyi6T_fqeh9BbdbAAEAAAAAAAAAAA",
+      "scenes": 1
+    },
+    "group": {
+      "body": "pluto",
+      "firstPreviousDisabled": true,
+      "lastNextDisabled": true,
+      "keyboardPrevious": "nitrogen-ice",
+      "retainedAfterKeyboard": true,
+      "results": [
+        {
+          "id": "methane-ice",
+          "url": "http://127.0.0.1:4277/pluto/?dataset=methane-ice&v=UEJAts9pmKiic0FCxzNAAAAAP4xcyf4GRFs_mOWcosyi6T_fqeh9BbdbAAEAAAAAAAAAAA",
+          "step": "Methane · 1 of 3",
+          "legend": "0\n50\n100 %\n\nNo data",
+          "headings": [
+            "LEISA methane ice",
+            "New Horizons"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "nitrogen-ice",
+          "url": "http://127.0.0.1:4277/pluto/?dataset=nitrogen-ice&v=UEJAts9pmKiic0FCxzNAAAAAP4xcyf4GRFs_mOWcosyi6T_fqeh9BbdbAAEAAAAAAAAAAA",
+          "step": "Nitrogen · 2 of 3",
+          "legend": "0\n50\n100 %\n\nNo data",
+          "headings": [
+            "LEISA nitrogen ice",
+            "New Horizons"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "water-ice",
+          "url": "http://127.0.0.1:4277/pluto/?dataset=water-ice&v=UEJAts9pmKiic0FCxzNAAAAAP4xcyf4GRFs_mOWcosyi6T_fqeh9BbdbAAEAAAAAAAAAAA",
+          "step": "Water · 3 of 3",
+          "legend": "0\n50\n100 %\n\nNo data",
+          "headings": [
+            "LEISA water ice",
+            "New Horizons"
+          ],
+          "retained": true,
+          "scenes": 1
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "file": "pluto-methane-ice.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 580838,
+      "sha256": "9c3b61adb7cff4d9bf835349f207445d0b2ae8ce3a0a2fdf1c6bed7625704369",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}

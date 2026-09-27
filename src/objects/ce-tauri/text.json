@@ -30,17 +30,17 @@
   "datasets": {
     "pionier-2016-11": {
       "title": "Photosphere, November 2016",
-      "detail": "H band, one side",
+      "detail": "VLTI/PIONIER",
       "summary": "The authors' image rebuilt from fringes measured by four telescopes, cast onto a sphere. Colour is infrared brightness."
     },
     "pionier-2016-12": {
       "title": "Photosphere, December 2016",
-      "detail": "H band, one side",
+      "detail": "VLTI/PIONIER",
       "summary": "The same method one month later; the cell pattern barely changed, and brightness keeps the same colour scale."
     },
     "color": {
       "title": "Photosphere colour",
-      "detail": "From its spectrum",
+      "detail": "Burnashev / CDS",
       "summary": "The colour of a measured spectrum of the star. No surface picture or edge darkening is measured."
     }
   }

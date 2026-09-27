@@ -1,5 +1,7 @@
 # HD 29615
 
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 HD 29615 is a young Sun-like star that turns in 2.3 days. Of the five stars in its study, it has the strongest magnetic field. It is also HD 29615, HIP 21632.

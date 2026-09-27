@@ -1,0 +1,27 @@
+{
+  "id": "usgs-venus-reflectivity-numeric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Venus Magellan Global Fresnel Reflectivity 4641m",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_FresnelReflectivity_Global_4641m.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_fresnel_reflectivity_4641m",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/inputs/27"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

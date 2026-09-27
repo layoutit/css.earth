@@ -1,5 +1,7 @@
 # χ¹ Orionis
 
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 χ¹ Orionis is a young Sun-like star 8.7 parsecs away, bright enough to see without a telescope. Its magnetic field may flip every few years. It is also HD 39587, HR 2047, HIP 27913.

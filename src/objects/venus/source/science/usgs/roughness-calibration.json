@@ -1,0 +1,11 @@
+{
+  "scale": 0.1,
+  "offset": -0.1,
+  "source": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MGN-V-RDRS-5-GDR-SLOPE-V1.0",
+  "reason": "The original PDS GSDR dataset description and USGS catalogue both define DN = slope_degrees × 10 + 1. The detached ISIS label instead gives Multiplier 0.005 and Base -0.1, which contradict that equation and produces negative roughness for some valid positive DNs. Use the primary PDS equation and retain the conflicting label.",
+  "corroboration": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_meter_scale_slope_4641m",
+  "labelScale": 0.005,
+  "labelOffset": -0.1,
+  "units": "degrees RMS slope",
+  "datasetId": "MGN-V-RDRS-5-GDR-SLOPE-V1.0"
+}

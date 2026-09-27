@@ -17,6 +17,7 @@ import { prepareDskMesh, validateDskMeshRecipe } from './acquisition/dsk-mesh.mt
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
 interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
 interface MappedComposition extends OperationBase {kind:'mapped-composition';path:string;recipePath:string;product:string;}
+interface GeoTiffGrid extends OperationBase {kind:'geotiff-grid';path:string;recipePath:string;}
 interface DskMesh extends OperationBase {kind:'dsk-mesh';path:string;recipe:Record<string,unknown>;}
 interface OperationBase { groups:string[]; }
 interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
@@ -32,7 +33,7 @@ interface RequestCheck extends OperationBase {kind:'verify-request';url:string;f
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
 /** A pinned JPL Horizons time-list table asked for again; Horizons dates each response, so its rows are compared, not its bytes. */
 interface HorizonsTimeList extends OperationBase {kind:'horizons-time-list';path:string;url:string;parameters:Record<string,string>;epochs:number[];}
-export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|TarGzMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|HorizonsTimeList;
+export type AcquisitionOperation=GeoTiffGrid|MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|TarGzMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|HorizonsTimeList;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
@@ -40,10 +41,10 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  // An empty plan is legal: a body whose every declared source input is already
  // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
- for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member','tar-gz-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+ for(const value of plan.operations){const step=record(value);if(!['geotiff-grid','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member','tar-gz-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
+  if(!['geotiff-grid','download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(['geotiff-grid','download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='horizons-time-list'){const parameters=record(step.parameters);if(Object.values(parameters).some(value=>typeof value!=='string')||'TLIST' in parameters||!Array.isArray(step.epochs)||!step.epochs.length||step.epochs.some(epoch=>typeof epoch!=='number'||!Number.isFinite(epoch)))throw new TypeError('Invalid Horizons time list.');}
   if(step.kind==='tar-gz-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')||step.member.split('/').includes('..')))throw new TypeError('Invalid tar.gz member.');
   if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
@@ -56,6 +57,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(step.kind==='request-download'&&step.replacements!==undefined){if(!Array.isArray(step.replacements))throw new TypeError('Response replacements must be an array.');for(const value of step.replacements){const replacement=record(value);if(typeof replacement.pattern!=='string'||typeof replacement.replacement!=='string'||replacement.flags!==undefined&&(typeof replacement.flags!=='string'||!/^[gimu]*$/.test(replacement.flags)))throw new TypeError('Invalid response text replacement.');new RegExp(replacement.pattern,replacement.flags as string|undefined);}}
   if(step.kind==='json-document')record(step.value);
   if(step.kind==='hrii-facets'&&(typeof step.recipePath!=='string'||!['fields','report'].includes(String(step.product))))throw new TypeError('Invalid HRII facet acquisition.');
+  if(step.kind==='geotiff-grid'&&typeof step.recipePath!=='string')throw new TypeError('GeoTIFF grid recipe is missing.');
   if(['spectral-band-maps','mapped-composition'].includes(String(step.kind))&&(typeof step.recipePath!=='string'||typeof step.product!=='string'||!/^[a-z][a-z0-9-]*$/.test(step.product)))throw new TypeError('Invalid numeric-map acquisition.');
   if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
   if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
@@ -154,6 +156,25 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    const bytes=step.product==='report'?new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'):result.products[step.product];
    if(!bytes)throw new Error(`Unknown spectral band map ${step.product}.`);
    await publish(step.path,bytes);
+  }
+  else if(step.kind==='geotiff-grid'){
+   const {readGeoTiffGridRecipe,prepareGeoTiffGrid}=await import('./acquisition/geotiff-grid.mts');
+   const recipe=await readGeoTiffGridRecipe(sourceRoot,step.recipePath);
+   if(mirrorOrigin){
+    const entry=manifest.inputs.find(entry=>entry.path===step.path);
+    if(!entry)throw new Error(`Undeclared GeoTIFF grid target: ${step.path}.`);
+    try{
+     const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,objectId,step.path));
+     if(response.ok&&response.body){
+      await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),8000),
+       declaredBytes:declaredDownloadBytes(entry,response)});
+      continue;
+     }
+     await response.body?.cancel();
+    }catch{/* Recreate the compact grid from its native publisher product on a cache miss. */}
+   }
+   const result=await prepareGeoTiffGrid(recipe,{transport:(url,init)=>transport.fetch(String(url),init)});
+   await publish(step.path,result.bytes);
   }
   else if(step.kind==='mapped-composition'){
    let result=compositionResults.get(step.recipePath);

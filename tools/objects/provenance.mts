@@ -125,6 +125,12 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     const verificationOperations = acquisitionOperations.filter(operation => operation.expectedPath === path) ?? [];
     const dependencies = acquisitionOperation?.fileSource
       ? [await bindSource(text(acquisitionOperation.fileSource), new Set([...visiting, path]))] : [];
+    if (acquisitionOperation?.kind === 'geotiff-grid') {
+      const recipePath = text(acquisitionOperation.recipePath);
+      const {readGeoTiffGridRecipe} = await import('./acquisition/geotiff-grid.mts');
+      await readGeoTiffGridRecipe(sourceDirectory, recipePath);
+      dependencies.push(await bindSource(recipePath, new Set([...visiting, path])));
+    }
     if (acquisitionOperation?.kind === 'mapped-composition') {
       const recipePath = text(acquisitionOperation.recipePath), recipeEntry = byPath.get(recipePath);
       if (!recipeEntry) throw new Error(`Unbound composition recipe: ${recipePath}.`);
