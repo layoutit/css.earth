@@ -15,7 +15,7 @@ import { refreshObservationControls } from './refresh-surface-observations.mts';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
+import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '@cssearth/bake/navigation';
 import { validateMarkerDescriptor, renderMarker } from '@cssearth/bake/navigation';
 import { readPreparedObjects } from '@cssearth/objects/node';
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Entry script: node tools/prepare/cli/prepare-navigation.mts [--catalog-only] [<object-id>...]. The work is in ../prepare-navigation.mts.
-import { prepareNavigation } from '../prepare-navigation.mts';
+// Entry script: node packages/bake/cli/prepare-navigation.mts [--catalog-only] [<object-id>...]. The work is in @cssearth/bake/navigation.
+import { prepareNavigation } from '@cssearth/bake/navigation';
 
 const args = process.argv.slice(2);
 const catalogOnly = args.includes('--catalog-only');

@@ -17,7 +17,7 @@ import {
   moveNavigationFile,
   prepareBodyMarkers,
   prepareNavigation,
-} from "../../tools/prepare/prepare-navigation.mts";
+} from "@cssearth/bake/navigation";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 // Sidebar thumbnails share the directory but belong to prepare-sidebar-thumbnails, whose manifest lists them.
