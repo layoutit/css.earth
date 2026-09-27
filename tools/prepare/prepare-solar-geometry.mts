@@ -17,7 +17,7 @@ import { cross3 as cross, requireArray, requireRecord, requireString } from '@cs
 // and orientations from the IAU/WGCCRE rotation
 // elements, both provided by the vendored astronomy package
 // (packages/astronomy, consumed through its own build; see
-// tools/prepare/astronomy/astronomy-package.mts). The orbit normal
+// packages/bake/src/astronomy/astronomy-package.ts). The orbit normal
 // is the specific angular momentum direction of the state vector,
 // normalize(r x v), and its angle to the
 // ecliptic pole reproduces the tabulated inclinations (Earth's, which defines
@@ -29,7 +29,7 @@ import type { BodyId, SceneSatelliteRecord, RotationElements } from "@cssearth/a
 import { readJsonSource } from "@cssearth/bake/objects/sources";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { loadAstronomyPackage } from "./astronomy/astronomy-package.mts";
+import { loadAstronomyPackage } from "@cssearth/bake/astronomy";
 import { loadSceneEpochEphemeris } from "../../packages/astronomy/tools/scene-ephemeris.mts";
 import { readPreparedObjects } from "@cssearth/objects/node";
 

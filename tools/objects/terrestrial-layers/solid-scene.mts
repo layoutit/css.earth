@@ -16,7 +16,7 @@ import { resolve } from 'node:path';
 import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface, preparePerspectiveCamera } from '@cssearth/bake/scene';
 import { prepareAstrometricSkySceneRegistration, prepareEclipticPresentationFrame, photographDirections, prepareDefaultCameraAngles, prepareSunReferenceViewDirection } from '@cssearth/bake/objects/scene';
-import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
+import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
 import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/bake/presentation';
 import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';

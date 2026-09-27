@@ -37,6 +37,7 @@
     "tools/prepare/prepare-navigation.mts",
     "tools/prepare/cli/prepare-navigation.mts",
     "packages/bake/src/navigation/**",
+    "packages/bake/src/astronomy/**",
     "tools/prepare/prepare-solar-geometry.mts",
     "tools/prepare/cli/prepare-solar-geometry.mts",
     "tools/objects/**",

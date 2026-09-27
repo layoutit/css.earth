@@ -3,7 +3,7 @@ import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { parseShapeModelConfig, parseShapeContent, prepareRingLeaves, ringQuadStyle, prepareShapeLighting, prepareModelRasters, prepareRingRaster, prepareSphereLighting, publishedImageSize } from '@cssearth/bake/objects/layers/shape-model';
 import { requireRecord, requireString } from '@cssearth/core';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.mts';
+import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
