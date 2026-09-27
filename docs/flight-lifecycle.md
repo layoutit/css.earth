@@ -126,6 +126,14 @@ motion or during the visible approach. Drag and inertia remain native input
 motions. Reduced-motion handoffs publish their endpoint and complete without
 waiting for an animation frame.
 
+Authored scene CSS remains an input to baking. The site's build removes its
+`@keyframes` and animation declarations from delivered scene styles through
+`preparedMotionCss`; prepared motion records and runtime animation handles own
+playback. SSR and mounting already disable CSS animation on those targets.
+Shell animations retain their separate owner. This avoids transporting unused
+motion definitions and inserting them into the live document's cascade during
+navigation. The all-body CSS check covers every stylesheet declared by an object.
+
 Preparation supplies `tree.activationGroups` for every registered object. Each
 group contains at most 64 existing sibling leaves; containers and leaves whose
 display belongs to selection are excluded. The preparation pipeline writes this
