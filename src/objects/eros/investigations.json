@@ -73,6 +73,23 @@
           "commit": "06011cc9dbc174e819eb05aee44f7293cd6f4d9d"
         }
       ]
+    },
+    {
+      "id": "selected-msi-seven-wavelengths",
+      "subject": "All seven MSI wavelength maps",
+      "status": "included",
+      "finding": "The five remaining Golish 2023 MSI maps at 450, 760, 900, 1000 and 1050 nm join the existing 550 and 950 nm maps in one Reflected light group. All seven retain the common 0.05–0.40 I/F display range, Gaskell shape and original cartographic frame. The 1000 nm XML repeats the 550 nm logical identifier; its filename and ISIS filter label identify the correct member, so the catalogue records that archive member. Independent native-byte probes pass. Existing 550/950 nm links, installed assets and all seven browser selections were checked.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/0667d877dd91b62b9828d5ede2155bb604899de9/src/objects/eros/README.md",
+        "https://github.com/layoutit/css.earth/blob/0667d877dd91b62b9828d5ede2155bb604899de9/src/objects/eros/evidence/spectral-bands/native-values.json",
+        "https://github.com/layoutit/css.earth/blob/0667d877dd91b62b9828d5ede2155bb604899de9/src/objects/eros/evidence/spectral-bands/delivery-and-browser.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "0667d877dd91b62b9828d5ede2155bb604899de9"
+        }
+      ]
     }
   ]
 }
