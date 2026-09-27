@@ -446,6 +446,170 @@
           "group": "mineral-signatures",
           "label": "Ammonium · 3.1 µm"
         }
+      },
+      {
+        "id": "clay-centre",
+        "label": "Clay band centre",
+        "thumbnail": "ceres-lens-clay-centre.webp",
+        "surface": "ceres-clay-centre@2x.webp",
+        "poles": "ceres-poles-clay-centre@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Clay band centre",
+          "labels": [
+            "2.71",
+            "2.73",
+            "2.75"
+          ],
+          "meta": "µm",
+          "sourceUrl": "https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                128
+              ],
+              [
+                176,
+                0,
+                0
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                255,
+                0
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "2.71",
+              "2.73",
+              "2.75"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-vir-ceres-bi-center-img",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Wavelength at the absorption minimum"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "60°S to 60°N; poles unmeasured"
+          },
+          {
+            "id": "scale",
+            "label": "Color scale",
+            "value": "Fixed published range; display heat palette"
+          }
+        ],
+        "notes": "Wavelength of the OH absorption in Mg-rich clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 2.71–2.75 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+        "noData": true
+      },
+      {
+        "id": "ammonium-centre",
+        "label": "Ammonium band centre",
+        "thumbnail": "ceres-lens-ammonium-centre.webp",
+        "surface": "ceres-ammonium-centre@2x.webp",
+        "poles": "ceres-poles-ammonium-centre@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Ammonium band centre",
+          "labels": [
+            "3.02",
+            "3.05",
+            "3.08"
+          ],
+          "meta": "µm",
+          "sourceUrl": "https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                128
+              ],
+              [
+                176,
+                0,
+                0
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                255,
+                0
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "3.02",
+              "3.05",
+              "3.08"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-vir-ceres-bii-center-img",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Wavelength at the absorption minimum"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "60°S to 60°N; poles unmeasured"
+          },
+          {
+            "id": "scale",
+            "label": "Color scale",
+            "value": "Fixed published range; display heat palette"
+          }
+        ],
+        "notes": "Wavelength of the ammonium absorption in clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 3.02–3.08 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+        "noData": true
       }
     ]
   },

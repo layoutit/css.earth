@@ -142,20 +142,28 @@
     },
     {
       "id": "jiram-orbits-51-to-60",
-      "subject": "JIRAM Io close passes of orbits 51 to 60 (late 2023 to 2024), down to 3 km per pixel, including the south",
+      "subject": "Remaining JIRAM Io close-pass coverage in orbits 51 to 60",
       "status": "deferred",
-      "finding": "Not yet screened with the SPICE camera. Mura et al. (2024) say Io is too large in these frames to fit as a sphere; the limb fit needs the ellipsoid, and the south would fill much of the missing coverage.",
+      "finding": "The existing mosaic tool already intersects the triaxial ellipsoid. Orbits 51 and 53 now contribute 31 registered frames. Trials of all 17 orbit-57 and 22 orbit-58 images produced no cells with three qualified night-side observations; partial-disc fits were too sparse. Volumes 59 and 60 were absent from the examined archive. Orbits 52, 54 and 55 were indexed but not reduced; orbit 56 listed auxiliary products only. More southern coverage remains unqualified.",
       "evidence": [
         "https://doi.org/10.3389/fspas.2024.1369472",
-        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/source/science/jiram/recipe.json"
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/source/science/jiram/recipe.json",
+        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/evidence/jiram-close-passes/orbit57-receipt.json",
+        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/evidence/jiram-close-passes/orbit58-receipt.json",
+        "https://atmos.nmsu.edu/PDS/data/"
       ],
       "checked": [
         {
           "date": "2026-09-21",
           "commit": "d6d719b618fbcc16a70c0aa4fe650f71199a4d11"
+        },
+        {
+          "date": "2026-09-27",
+          "commit": "734ad10780629e11b09707ff5d0c0f5601ecb02e"
         }
       ],
-      "revisitWhen": "The mosaic tool fits the limb with Io's ellipsoid and the orbits 51 to 60 frames are screened."
+      "revisitWhen": "Additional sequences pass the existing registration and three-frame overlap checks, or a supported partial-disc registration method qualifies the 57/58 trials; revisit 59/60 when archive products are available."
     },
     {
       "id": "davies-2024-thermal-sources",
@@ -189,6 +197,24 @@
         {
           "date": "2026-09-25",
           "commit": "7387444f62423f84fde33abc338b634681508d31"
+        }
+      ]
+    },
+    {
+      "id": "jiram-close-passes-51-53",
+      "subject": "JIRAM May and July 2023 close-pass night-side volcanic radiance",
+      "status": "included",
+      "finding": "18 orbit-51 and 13 orbit-53 frames add roughly 7.6–15.5 km near-nadir sampling. A 0.25-degree map combines six visits, masks new detector samples at or above 10000 DN, and subtracts each qualified detector column's cold-night median before projection. Coverage is 24.12% of spherical surface area, reaching 11.125S. Of 41 peaks above 0.03 W/(m2 sr), 35 are within 3 degrees of catalogue hot spots; absolute radiometry, individual peak identities and resolved lava boundaries remain unqualified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/source/science/jiram/recipe.json",
+        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/io/evidence/jiram-close-passes/final-map-check.json",
+        "https://doi.org/10.3847/PSJ/adbae3"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "734ad10780629e11b09707ff5d0c0f5601ecb02e"
         }
       ]
     }

@@ -328,14 +328,160 @@
      "volume": "jnojir_2049"
     }
    ]
+  },
+  {
+   "id": "2023-05-16",
+   "kernels": [
+    "spk/spk_rec_230428_230605_230613.bsp",
+    "spk/jup363.bsp",
+    "ck/juno_sc_rec_230514_230520_v01.bc"
+   ],
+   "frames": [
+    {
+     "productId": "JIR_IMG_RDR_2023136T024021_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T024122_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T025027_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T025128_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T025228_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T030104_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T030205_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T030305_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T030406_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T030507_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031010_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031111_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031212_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031313_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031414_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031514_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T031615_V01",
+     "volume": "jnojir_2051"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023136T032017_V01",
+     "volume": "jnojir_2051"
+    }
+   ],
+   "maximumDetectorDn": 10000
+  },
+  {
+   "id": "2023-07-31",
+   "kernels": [
+    "spk/spk_rec_230713_230820_230823.bsp",
+    "spk/jup363.bsp",
+    "ck/juno_sc_rec_230730_230805_v01.bc"
+   ],
+   "frames": [
+    {
+     "productId": "JIR_IMG_RDR_2023212T043915_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T043946_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044017_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044047_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044118_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044149_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044219_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044250_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044321_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044351_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044422_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044453_V01",
+     "volume": "jnojir_2053"
+    },
+    {
+     "productId": "JIR_IMG_RDR_2023212T044523_V01",
+     "volume": "jnojir_2053"
+    }
+   ],
+   "maximumDetectorDn": 10000
   }
  ],
  "output": {
-  "image": "io-jiram-m-night.IMG",
-  "label": "io-jiram-m-night.LBL",
+  "image": "io-jiram-m-night-2023-background.IMG",
+  "label": "io-jiram-m-night-2023-background.LBL",
   "receipt": "receipt.json",
   "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
-  "pixelsPerDegree": 2
+  "pixelsPerDegree": 4
  },
  "policy": {
   "minimumFramesPerVisit": 3,
@@ -350,5 +496,9 @@
  "unitScale": {
   "W/(m^2*sr)": 1,
   "W/(m^2*sr*micron)": 1
+ },
+ "background": {
+  "method": "night-column-median",
+  "minimumSamples": 32
  }
 }

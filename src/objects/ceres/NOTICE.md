@@ -30,3 +30,9 @@ Feature caption notes: 31 lead summaries from the English Wikipedia (Wikipedia c
 Clay band: Dawn VIR derived Ceres global mosaics V1.0, DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0 (De Sanctis, M.C., M.T. Capria, E. Ammannito, A. Frigeri, F. Tosi, M. Giardino, S. Fonte, F. Zambon, NASA Planetary Data System, 2018). Public NASA PDS scientific data; retain this credit with the derived maps. The color scales are sampled from Frigeri et al. (2019), Icarus 318, 14–21, Figure 7 (doi:10.1016/j.icarus.2018.04.019); only the sampled colors are used, not the figure. The ammonium result is Ammannito et al. (2016), Science 353, aaf4279.
 
 Ammonium band: our reduction of Dawn VIR calibrated infrared spectra, DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0 (M. C. De Sanctis; NASA Planetary Data System, Small Bodies Node, volumes DWNCSVIR_I1B and DWNCHVIR_I1B), public NASA mission data, with NAIF Dawn SPICE kernels. The processing follows Frigeri, A. et al. (2019), "The spectral parameter maps of Ceres from NASA/DAWN VIR data", Icarus 318, 14–21, [doi:10.1016/j.icarus.2018.04.019](https://doi.org/10.1016/j.icarus.2018.04.019), whose Figure 7 color bar supplies the palette.
+
+Clay band centre and Ammonium band centre: native `CMT_MOSAIC-BI_CENTER` and
+`CMT_MOSAIC-BII_CENTER`, from the same Dawn VIR global mosaics V1.0 release
+credited above. Numeric display ranges follow Ammannito et al. (2016),
+[LPSC 3020, Figure 2](https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf).
+The heat palette is authored; no paper figure is redistributed.

@@ -244,6 +244,128 @@
         "sampling": "nearest",
         "displaySampling": "nearest"
       }
+    },
+    {
+      "id": "clay-centre",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.IMG",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "clay-centre",
+        "label": "Clay band centre",
+        "format": "pds3-float-map",
+        "path": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.IMG",
+        "labelPath": "science/vir-mosaic/CMT_MOSAIC-BI_CENTER.LBL",
+        "grid": {
+          "productId": "CMT_MOSAIC-BI_CENTER",
+          "dataSetId": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0",
+          "targetName": "1 CERES",
+          "width": 4102,
+          "height": 1367,
+          "pixelsPerDegree": 11.393121506074,
+          "referenceRadiusMeters": 470000,
+          "centerLongitudeEastDegrees": 180,
+          "longitudeRangeEast": [
+            0,
+            360
+          ],
+          "sampleProjectionOffset": 2050.2618710933,
+          "lineProjectionOffset": 682.88093554667,
+          "projectionRotation": "0.0 <degree>",
+          "missingValue": -1e+32,
+          "sampleType": "IEEE_REAL",
+          "coordinateSystem": "PLANETOCENTRIC",
+          "latitudeRange": [
+            -60.002788883527,
+            59.981887771699
+          ]
+        },
+        "description": "Dawn VIR absorption wavelength",
+        "title": "Wavelength of the OH absorption in Mg-rich clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 2.71–2.75 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+        "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+        "minimum": 2.71,
+        "maximum": 2.75,
+        "colors": [
+          "#000000",
+          "#000080",
+          "#b00000",
+          "#ff8000",
+          "#ffff00",
+          "#ffffff"
+        ],
+        "labels": [
+          "2.71",
+          "2.73",
+          "2.75"
+        ],
+        "units": "µm",
+        "consumer": "clay-centre",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "ammonium-centre",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.IMG",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ammonium-centre",
+        "label": "Ammonium band centre",
+        "format": "pds3-float-map",
+        "path": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.IMG",
+        "labelPath": "science/vir-mosaic/CMT_MOSAIC-BII_CENTER.LBL",
+        "grid": {
+          "productId": "CMT_MOSAIC-BII_CENTER",
+          "dataSetId": "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0",
+          "targetName": "1 CERES",
+          "width": 4102,
+          "height": 1367,
+          "pixelsPerDegree": 11.393121506074,
+          "referenceRadiusMeters": 470000,
+          "centerLongitudeEastDegrees": 180,
+          "longitudeRangeEast": [
+            0,
+            360
+          ],
+          "sampleProjectionOffset": 2050.2618710933,
+          "lineProjectionOffset": 682.88093554667,
+          "projectionRotation": "0.0 <degree>",
+          "missingValue": -1e+32,
+          "sampleType": "IEEE_REAL",
+          "coordinateSystem": "PLANETOCENTRIC",
+          "latitudeRange": [
+            -60.002788883527,
+            59.981887771699
+          ]
+        },
+        "description": "Dawn VIR absorption wavelength",
+        "title": "Wavelength of the ammonium absorption in clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 3.02–3.08 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
+        "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+        "minimum": 3.02,
+        "maximum": 3.08,
+        "colors": [
+          "#000000",
+          "#000080",
+          "#b00000",
+          "#ff8000",
+          "#ffff00",
+          "#ffffff"
+        ],
+        "labels": [
+          "3.02",
+          "3.05",
+          "3.08"
+        ],
+        "units": "µm",
+        "consumer": "ammonium-centre",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
     }
   ],
   "lighting": {
