@@ -150,11 +150,11 @@ function compare(a: Entry, b: Entry, sa = statsOf(a), sb = statsOf(b)): number {
 
 function cells(e: Entry, s: Stats, label: string): string {
   const object = info(e.token).object;
-  return `<td>${label}</td><td class="meta hide">${object ? "Yes" : ""}</td><td class="n">${s.proposals.length || ""}</td><td class="n">${
+  return `<td>${label}</td><td class="meta hide">${object ? "Yes" : ""}</td><td class="n">${s.proposals.length ? number(s.proposals.length) : ""}</td><td class="n">${
     Number.isFinite(s.priority) ? s.priority : ""
-  }</td><td class="n hide">${s.blocked || ""}</td><td class="n">${s.candidates || ""}</td><td class="n">${s.review || ""}</td><td class="n hide">${s.images || ""}</td><td class="n">${
+  }</td><td class="n hide">${s.blocked ? number(s.blocked) : ""}</td><td class="n">${s.candidates ? number(s.candidates) : ""}</td><td class="n">${s.review ? number(s.review) : ""}</td><td class="n hide">${s.images ? number(s.images) : ""}</td><td class="n">${
     number(s.rows.length)
-  }</td><td class="n hide">${s.sources || ""}</td>`;
+  }</td><td class="n hide">${s.sources ? number(s.sources) : ""}</td>`;
 }
 function childrenWord(e: Entry): string {
   const kinds = new Set(e.children.map((c) => info(c.token).kind));
