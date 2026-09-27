@@ -28,6 +28,7 @@ import { archiveBackplanes, castSourceRays } from '../geometry.ts';
 import { cameraFrame } from '../footprint.ts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.ts';
 import { deriveLimits } from '../limits.ts';
+import { bandSetFrame } from '../composite.ts';
 import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 /** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
@@ -51,6 +52,10 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
   // AMICA admits lossy frames and counts them in the report; one flat field serves every frame.
   'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, lens: { required: ['filter', 'flatPath'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 10 },
+  // One registered AMICA sequence: each band carries its own geometry cube, detector frame and preflight flat.
+  'amica-gaskell-color': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath', 'filter', 'flatPath'] }, lens: { required: ['filter'] },
+    photometry: ['lommel-seeliger'], published: true, display: 'displayRange', maximumFrames: 3,
+    color: { bands: ['W', 'V', 'B'], inputQuantity: 'derived-band-value', units: 'reflectivity relative to AMICA V in W / V / B; false color' } },
   [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, lens: { required: ['filter', 'cube'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Archived cameras close over the exact source mesh, so they may also keep the acquisition illumination.
@@ -80,7 +85,8 @@ export const GEO_FORMATS = Object.keys(GEO_SCHEMAS);
 
 const CONTEXT = 'georeferenced observation recipe';
 export const parseGeoLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
-  frames: array(shape({ id: text, path: text, startTime: text, qualityPath: optional(text), labelPath: optional(text), originalPath: optional(text), cameraPath: optional(text) })),
+  frames: array(shape({ id: text, path: text, startTime: text, qualityPath: optional(text), labelPath: optional(text), originalPath: optional(text), cameraPath: optional(text),
+    filter: optional(text), flatPath: optional(text) })),
   filter: text, allowLossy: optional(boolean), radiometry: optional(text), flatPath: optional(text),
   cube: optional(parseGeometryCube), spice: optional(parseSpiceCamera), limbRefinement: optional(parseLimbRefinement),
   selection: optional(text), levelMatching: optional(parseLevelMatching), transfer: surfaceTransfer,
@@ -98,7 +104,7 @@ const schemaOf = (format: unknown) => {
 const cubeDeclaration = (recipe: Pick<GeoLens, 'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
 const spiceDeclaration = (recipe: Pick<GeoLens, 'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
 /** A frame's own inputs, the inputs its frames share and everything one frame consumes. Kernels from a shared bank are pinned by the bank's manifest, not the body's. */
-const framePaths = (frame: GeoFrame) => [frame.path, frame.qualityPath, frame.labelPath, frame.originalPath, frame.cameraPath].filter((path): path is string => path !== undefined);
+const framePaths = (frame: GeoFrame) => [frame.path, frame.qualityPath, frame.labelPath, frame.originalPath, frame.cameraPath, frame.flatPath].filter((path): path is string => path !== undefined);
 const sharedPaths = (recipe: GeoLens) => [...(recipe.flatPath === undefined ? [] : [recipe.flatPath]), ...(recipe.spice && !recipe.spice.kernelSet ? recipe.spice.kernels : [])];
 const consumedPaths = (recipe: GeoLens, frame: GeoFrame) => [...framePaths(frame), ...sharedPaths(recipe)];
 const within = (value: number | undefined, low: number, high: number) => value !== undefined && value >= low && value <= high;
@@ -109,13 +115,17 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
-  validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
+  const colorSet = recipe.format === 'amica-gaskell-color';
+  validateEnvelope(colorSet ? { ...recipe, frames: [{ id: recipe.id }], selection: undefined, levelMatching: undefined } : recipe,
+    [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
     { selections: ['lowest-emission', 'recipe-order', ...(recipe.format === 'osiris-geo' ? ['finest-resolution'] : [])], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
+  if (colorSet && (recipe.filter !== 'W / V / B' || recipe.frames.map(frame => frame.filter).join() !== 'W,V,B' || recipe.selection !== undefined || recipe.levelMatching !== undefined))
+    throw new TypeError('AMICA filter colour requires one W, V and B frame in display-channel order.');
   // Every band composite is a scientific visualization, not natural colour: it states so and starts its range at zero.
   if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true))
-    throw new TypeError('Band colour requires source-derived bands, false color and retained illumination.');
+    throw new TypeError('Band colour requires source-derived bands, a zero-based range and a false-color label.');
   if (recipe.radiometry !== undefined && recipe.radiometry !== 'radiance-factor') throw new TypeError('Invalid observation radiometry.');
   validatePhotometry(recipe, schema);
   if (recipe.spice) validateSpice(recipe.spice, recipe.frames);
@@ -187,8 +197,9 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     }
   }
   const identity = (decoded: { startTime?: unknown; filter?: unknown }) => {
-    if (decoded.startTime !== frame.startTime || decoded.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
-    return { startTime: frame.startTime, filter: recipe.filter };
+    const filter = recipe.format === 'amica-gaskell-color' ? frame.filter : recipe.filter;
+    if (decoded.startTime !== frame.startTime || decoded.filter !== filter) throw new Error('GEO observation identity changed.');
+    return { startTime: frame.startTime, filter: requireString(filter) };
   };
   const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid };
   // A declared limb refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
@@ -246,8 +257,8 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
       { fileName: basename(frame.path), cube: cubeDeclaration(recipe), filter: recipe.filter });
     return backplaneFrame(decoded, { reject: i => decoded.acceptPixel(i) ? null : 'quality', report: decoded.qualityReport }, decoded.shapeKernel);
   }
-  if (recipe.format === 'amica-gaskell') {
-    const decoded = decodeAmicaGeo(await read(frame.path), (await read(frame.labelPath)).toString('ascii'), await read(frame.originalPath), await read(recipe.flatPath));
+  if (recipe.format === 'amica-gaskell' || recipe.format === 'amica-gaskell-color') {
+    const decoded = decodeAmicaGeo(await read(frame.path), (await read(frame.labelPath)).toString('ascii'), await read(frame.originalPath), await read(frame.flatPath ?? recipe.flatPath));
     return backplaneFrame(decoded, { reject: i => decoded.acceptPixel(i) ? null : 'quality', lossy: () => decoded.qualityReport.outputMode === 'LOSSY', report: decoded.qualityReport }, decoded.shapeModel);
   }
   const decoded = decodeOsirisGeo(await read(frame.path));
@@ -275,11 +286,12 @@ export const geoFormat: SurfaceObservationFormat = {
     const recipe = parseGeoLens(value);
     // One photometric treatment serves every frame of a mosaic.
     const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(context.sourceDirectory, context.source.manifest, recipe.photometry) : diskPhotometry(recipe.photometry);
-    const frames: ObservationFrame[] = [];
+    const loaded: ObservationFrame[] = [];
     for (const frame of recipe.frames) {
       const paths = consumedPaths(recipe, frame);
-      frames.push(await loadGeoFrame(recipe, frame, { ...context, entries: context.entries.filter(entry => paths.includes(entry.path)) }, photometry));
+      loaded.push(await loadGeoFrame(recipe, frame, { ...context, entries: context.entries.filter(entry => paths.includes(entry.path)) }, photometry));
     }
+    const frames = recipe.format === 'amica-gaskell-color' ? [bandSetFrame(recipe.id, loaded, 'backplane-fit')] : loaded;
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
     const range = recipe.display.displayRange, color = schemaOf(recipe.format).color;
     const policy: SurfacePolicy = { format: recipe.format,

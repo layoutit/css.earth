@@ -10,32 +10,46 @@ const field = (label: string, key: string) => {
 };
 const string = (value: unknown) => typeof value === 'string' ? value.replace(/^'(.*)'$/, '$1').trim() : undefined;
 
+/** Ishiguro et al. (2010), table 9: conversion from each AMICA band to
+ * reflectivity relative to v. The factors are applied after flat-field and
+ * exposure normalization, before bands are combined or displayed. */
+export const AMICA_REFLECTIVITY_SCALE = { B: 1.254, V: 1, W: .645 } as const;
+type AmicaFilter = keyof typeof AMICA_REFLECTIVITY_SCALE;
+
 /** Original Gaskell DDR geometry, with the exact detector FITS and preflight
  * flat. DDR band 1 is vertically reversed relative to the FITS array; verify
  * every sample before applying the same reversal to the flat field.
  * Selected paired exposures already subtract bias/dark/smear onboard. */
 export function decodeAmicaGeo(compressed: Buffer, label: string, originalBytes: Buffer, flatBytes: Buffer) {
+  const width = Number(field(label, 'LINE_SAMPLES')), height = Number(field(label, 'LINES')),
+    filter = String(field(label, 'FILTER_NAME')).toUpperCase() as AmicaFilter;
   if (field(label, 'DATA_SET_ID') !== 'HAY-A-AMICA-3-AMICAGEOM-V1.0' ||
       field(label, 'INSTRUMENT_ID') !== 'AMICA' || field(label, 'TARGET_NAME') !== '25143 ITOKAWA' ||
-      field(label, 'FILTER_NAME') !== 'V' || field(label, 'SAMPLE_TYPE') !== 'IEEE_REAL' ||
+      !Object.hasOwn(AMICA_REFLECTIVITY_SCALE, filter) || field(label, 'SAMPLE_TYPE') !== 'IEEE_REAL' ||
       field(label, 'CORE_NULL') !== '16#F49DC5AE#' || field(label, 'BAND_STORAGE_TYPE') !== 'BAND_SEQUENTIAL' ||
-      ['LINES', 'LINE_SAMPLES'].some(key => Number(field(label, key)) !== 1024) ||
+      width !== height || ![512, 1024].includes(width) ||
       Number(field(label, 'SAMPLE_BITS')) !== 32 || Number(field(label, 'BANDS')) !== 16 ||
-      Number(field(label, 'RECORD_BYTES')) !== 4096 || Number(field(label, 'FILE_RECORDS')) !== 16384) {
+      Number(field(label, 'RECORD_BYTES')) !== width * 4 || Number(field(label, 'FILE_RECORDS')) !== height * 16) {
     throw new Error('Unsupported AMICA Gaskell DDR layout.');
   }
   const original = readFitsPrimary(originalBytes), flat = readFitsPrimary(flatBytes), h = requireRecord(original.header);
-  const startTime = field(label, 'START_TIME'), exposure = Number(h.EXP_0);
-  if (original.bitpix !== 8 || flat.bitpix !== -32 || [original, flat].some(f => f.width !== 1024 || f.height !== 1024 || f.scale !== 1 || f.zero !== 0) ||
-      string(h.TARGET) !== '25143 ITOKAWA' || string(h.OUT_MODE) !== 'LOSSY' || Number(h.QF) !== 0 || Number(h.BINNING) !== 1 ||
+  const startTime = field(label, 'START_TIME'), exposure = Number(h.EXP_0), outputMode = string(h.OUT_MODE),
+    startH = Number(h.START_H), startV = Number(h.START_V), detectorWidth = flat.width;
+  if (!['LOSSY', 'LOSS-LESS'].includes(outputMode ?? '') || original.bitpix !== (outputMode === 'LOSSY' ? 8 : 16) ||
+      flat.bitpix !== -32 || original.width !== width || original.height !== height || flat.width !== 1024 || flat.height !== 1024 ||
+      [original, flat].some(f => f.scale !== 1 || f.zero !== 0) ||
+      string(h.TARGET) !== '25143 ITOKAWA' || Number(h.QF) !== 0 || Number(h.BINNING) !== 1 ||
       Number(h.NSUBIMG) !== 2 || string(h.SUMDIF_0) !== 'SUM' || string(h.SUMDIF_1) !== 'DIFF' ||
-      string(h.FILTER_0) !== 'v' || string(h.FILTER_1) !== 'v' || string(requireRecord(flat.header).FILTER) !== 'v' ||
+      string(h.FILTER_0)?.toUpperCase() !== filter || string(h.FILTER_1)?.toUpperCase() !== filter ||
+      string(requireRecord(flat.header).FILTER)?.toUpperCase() !== filter ||
       !(exposure > 0) || Number(h.EXP_1) !== 1e-6 || Number.parseFloat(field(label, 'EXPOSURE_DURATION')) !== exposure ||
       string(h.UTC_0)?.replace(/\.$/, '') !== startTime ||
-      Number(h.START_H) !== 0 || Number(h.START_V) !== 0 || Number(h.LAST_H) !== 1023 || Number(h.LAST_V) !== 1023) {
+      !Number.isInteger(startH) || !Number.isInteger(startV) || startH < 0 || startV < 0 ||
+      Number(h.LAST_H) !== startH + width - 1 || Number(h.LAST_V) !== startV + height - 1 ||
+      startH + width > flat.width || startV + height > flat.height) {
     throw new Error('AMICA observation does not match the qualified paired-exposure product.');
   }
-  const bytes = gunzipSync(compressed), count = 1024 * 1024;
+  const bytes = gunzipSync(compressed), count = width * height;
   if (bytes.length !== count * 16 * 4) throw new Error('Truncated AMICA DDR cube.');
   const names = ['IMAGE', 'COORDINATE_X_IMAGE', 'COORDINATE_Y_IMAGE', 'COORDINATE_Z_IMAGE',
     null, null, 'DISTANCE_IMAGE', 'INCIDENCE_ANGLE_IMAGE', 'EMISSION_ANGLE_IMAGE', 'PHASE_ANGLE_IMAGE'];
@@ -49,22 +63,25 @@ export function decodeAmicaGeo(compressed: Buffer, label: string, originalBytes:
     }
     planes[name] = values;
   }
-  let defectiveFlatPixels = 0, clippedPixels = 0;
+  let defectiveFlatPixels = 0, clippedPixels = 0, nonlinearPixels = 0;
   for (let i = 0; i < count; i++) {
-    const sourceIndex = (1023 - Math.floor(i / 1024)) * 1024 + i % 1024;
-    const dn = original.values[sourceIndex], response = flat.values[sourceIndex];
+    const x = i % width, sourceY = height - 1 - Math.floor(i / width), sourceIndex = sourceY * width + x,
+      flatIndex = (startV + sourceY) * detectorWidth + startH + x;
+    const dn = original.values[sourceIndex], response = flat.values[flatIndex];
     if (dn !== planes.IMAGE[i]) throw new Error('AMICA DDR image differs from its original FITS companion.');
     if (!(response > 0) || !Number.isFinite(response)) { defectiveFlatPixels++; continue; }
-    if (dn === 255) { clippedPixels++; continue; }
+    if (outputMode === 'LOSSY' && dn === 255) { clippedPixels++; continue; }
+    if (outputMode === 'LOSS-LESS' && dn >= 3800) { nonlinearPixels++; continue; }
     accepted[i] = 1;
-    planes.IMAGE[i] = dn / response / exposure;
+    planes.IMAGE[i] = dn / response / exposure * AMICA_REFLECTIVITY_SCALE[filter];
   }
   const xyz = (i: number) => [planes.COORDINATE_X_IMAGE[i], planes.COORDINATE_Y_IMAGE[i], planes.COORDINATE_Z_IMAGE[i]];
   const valid = (i: number) => Number.isInteger(i) && i >= 0 && i < count && planes.DISTANCE_IMAGE[i] > 0 && xyz(i).every(Number.isFinite);
-  return { width: 1024, height: 1024, planes, xyz, valid, acceptPixel: (i: number) => accepted[i] === 1,
-    startTime, filter: 'V', shapeModel: 'Gaskell ver128q',
+  return { width, height, planes, xyz, valid, acceptPixel: (i: number) => accepted[i] === 1,
+    startTime, filter, shapeModel: 'Gaskell ver128q',
     qualityReport: { matchedOriginalPixels: count, originalArrayOrientation: 'vertical reversal verified pixel for pixel',
-      imageQualityFlag: 0, outputMode: 'LOSSY', defectiveFlatPixels, clippedPixels, exposureSeconds: exposure,
-      calibration: 'Archived SUM minus near-zero-exposure DIFF removes bias/dark/smear onboard; divide by the original preflight v flat and exposure. Relative detector brightness, not absolute radiance or albedo.',
-      limitations: 'Lossy 8-bit image; no pixel-quality plane, stray-light restoration, temporal flat correction or absolute calibration.' } };
+      detectorWindow: { startH, startV, width, height }, imageQualityFlag: 0, outputMode, defectiveFlatPixels, clippedPixels, nonlinearPixels,
+      exposureSeconds: exposure, reflectivityScaleRelativeToV: AMICA_REFLECTIVITY_SCALE[filter],
+      calibration: `Archived SUM minus near-zero-exposure DIFF removes bias/dark/smear onboard; divide by the original preflight ${filter.toLowerCase()} flat and exposure, then apply the published ${filter}-to-V reflectivity factor.`,
+      limitations: `${outputMode === 'LOSSY' ? 'Lossy 8-bit image; ' : ''}No pixel-quality plane, scattered-light restoration, temporal flat correction or absolute reflectance calibration.` } };
 }

@@ -171,6 +171,67 @@
           "coverage": "Ten Hayabusa AMICA v-band photographs from September and October 2005. The established brightness-reference frame comes first, then close-ups take priority over distant views. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows and seams remain. The grid marks unsupported surface coverage.",
           "falseColor": false
         }
+      },
+      {
+        "id": "amica-color",
+        "format": "amica-gaskell-color",
+        "consumer": "amica-color-observation",
+        "filter": "W / V / B",
+        "frames": [
+          {
+            "id": "amica-color-w",
+            "path": "observations/st_2487339240_w_ddr.img.gz",
+            "labelPath": "observations/st_2487339240_w_ddr.lbl",
+            "originalPath": "observations/st_2487339240_w.fit",
+            "flatPath": "observations/flat_w.fit",
+            "filter": "W",
+            "startTime": "2005-10-24T14:01:55"
+          },
+          {
+            "id": "amica-color-v",
+            "path": "observations/st_2487335302_v_ddr.img.gz",
+            "labelPath": "observations/st_2487335302_v_ddr.lbl",
+            "originalPath": "observations/st_2487335302_v.fit",
+            "flatPath": "observations/flat_v.fit",
+            "filter": "V",
+            "startTime": "2005-10-24T14:01:22"
+          },
+          {
+            "id": "amica-color-b",
+            "path": "observations/st_2487331445_b_ddr.img.gz",
+            "labelPath": "observations/st_2487331445_b_ddr.lbl",
+            "originalPath": "observations/st_2487331445_b.fit",
+            "flatPath": "observations/flat_b.fit",
+            "filter": "B",
+            "startTime": "2005-10-24T14:00:49"
+          }
+        ],
+        "transfer": {
+          "maximumSeparationMeters": 5,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.05,
+          "interpretation": "Common registered W, V and B coverage on the full source surface; all interpolation contributors within 5 m of the same point; full-source camera visibility to 0.05 m."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1.5
+        },
+        "display": {
+          "basis": "authored",
+          "displayRange": [
+            0,
+            32000
+          ]
+        },
+        "metadata": {
+          "label": "Multiband color",
+          "falseColor": true,
+          "coverage": "One Hayabusa AMICA sequence from 24 October 2005. W, V and B measurements are registered independently, calibrated to reflectivity relative to V, and displayed as red, green and blue. This is false color, not a natural-color photograph. Only terrain measured in all three filters is shown; the grid marks the rest."
+        }
       }
     ]
   },

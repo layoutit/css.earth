@@ -113,6 +113,7 @@ src/objects/comet-9p/source/science/hrii/*.tab -text -whitespace
 
 # Preserve the original AMICA fixed-width, CRLF archive labels.
 src/objects/itokawa/source/observations/*.lbl -text -whitespace
+src/objects/itokawa/source/reference/*.lbl -text -whitespace
 
 # SBMT pointing records retain their original padding and line endings.
 src/objects/*/source/observations/*.SUM -text -whitespace

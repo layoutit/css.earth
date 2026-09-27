@@ -32,6 +32,24 @@
       ]
     },
     {
+      "id": "selected-amica-multiband-color",
+      "subject": "AMICA multiband color",
+      "status": "included",
+      "finding": "One lossless 512×512 B/V/W sequence from 24 October 2005 is registered through its three Gaskell geometry cubes and displayed as one false-color lens. Each detector image stays below the published 3800-DN linearity limit. Preparation applies the filter-specific preflight flat, exposure normalization and Ishiguro et al. (2010) reflectivity factors B=1.254, V=1 and W=0.645. The neighboring P exposure is recorded as an audited candidate but excluded from the visible-color display because 960 nm is near-infrared.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487331445_b_ddr.lbl",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487335302_v_ddr.lbl",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487339240_w_ddr.lbl",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487343619_p_ddr.lbl",
+        "https://arxiv.org/abs/0912.4797"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27"
+        }
+      ]
+    },
+    {
       "id": "selected-shape-and-elevation",
       "subject": "Shape and Elevation",
       "status": "included",

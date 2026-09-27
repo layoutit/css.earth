@@ -48,7 +48,20 @@
           "id": "amica-sep24-path",
           "path": "../manifest.json"
         },
-        "notes": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
+        "notes": "Ten Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
+        "noData": true
+      },
+      {
+        "id": "amica-color",
+        "label": "Multiband color",
+        "thumbnail": "/scenes/itokawa/itokawa-amica-color-thumbnail.webp",
+        "surface": "itokawa-amica-color-surface@2x.webp",
+        "poles": "itokawa-amica-color-surface@2x.webp",
+        "source": {
+          "id": "amica-color-w-geometry",
+          "path": "../manifest.json"
+        },
+        "notes": "Hayabusa AMICA measured this view through W, V and B filters. They are shown as red, green and blue after the mission calibration. This is false color, not a natural-color photograph. The grid marks terrain outside the shared three-filter view.",
         "noData": true
       },
       {

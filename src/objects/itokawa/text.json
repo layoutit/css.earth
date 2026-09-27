@@ -51,6 +51,11 @@
       "title": "Shape-derived radial height",
       "detail": "Shape-derived height",
       "summary": "Height above or below a 165 m sphere. The outline is simplified."
+    },
+    "amica-color": {
+      "title": "AMICA multiband color",
+      "detail": "Hayabusa AMICA · JAXA",
+      "summary": "One registered W, V and B sequence. Color differences come from measured filters; gaps lie outside their shared view."
     }
   }
 }

@@ -38,6 +38,7 @@ new route.
 | --- | --- | --- | --- |
 | `osiris-geo` | `formats/geo.ts` | Fitted to the backplanes | Archive backplanes |
 | `amica-gaskell` | `formats/geo.ts` | Fitted to the backplanes | Archive backplanes |
+| `amica-gaskell-color` | `formats/geo.ts` | One fitted camera per registered AMICA filter | Archive backplanes |
 | `pds4-geometry-cube` | `formats/geo.ts` | Fitted to the backplanes | Archive backplanes |
 | `osiris-camera` | `formats/geo.ts` | Archived closure | Source-mesh rays |
 | `llorri-camera` | `formats/geo.ts` | Archived closure with TAN-SIP distortion, bound to a body the frame lists in its field of view | Source-mesh rays |
@@ -98,6 +99,7 @@ misspelt field fails instead of being ignored.
 | --- | --- | --- |
 | `osiris-geo` | `startTime`, `qualityPath` | `filter`, `allowLossy`, optional `radiometry` |
 | `amica-gaskell` | `startTime`, `labelPath`, `originalPath` | `filter` (`V`) and the shared `flatPath` |
+| `amica-gaskell-color` | `startTime`, `labelPath`, `originalPath`, `filter`, `flatPath` | `filter` (`W / V / B`); exactly one W, V and B frame, `metadata.falseColor` and a `displayRange` from 0 |
 | `pds4-geometry-cube` | `startTime`, `labelPath` | `filter`, `cube` |
 | `osiris-camera` | `startTime`, `cameraPath` | `filter`, `allowLossy`, optional `refinement` |
 | `llorri-camera`, `nh-lorri-camera` | `startTime`, `cameraPath` | `filter` |

@@ -317,6 +317,123 @@
       "headers": {
         "Authorization": "Basic cHVibGljOndpZGUtb3Blbg=="
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487339240_w_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487339240_w_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487339240_w_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487339240_w_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487339240_w.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051024/st_2487339240_w.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487335302_v_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487335302_v_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487335302_v_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487335302_v_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487335302_v.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051024/st_2487335302_v.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487331445_b_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487331445_b_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487331445_b_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2487331445_b_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2487331445_b.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051024/st_2487331445_b.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/flat_b.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_b.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/flat_b.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_b.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/flat_w.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_w.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/flat_w.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_w.lbl"
     }
   ]
 }

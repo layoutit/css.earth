@@ -2,8 +2,11 @@
 
 AMICA imagery and controlled geometry: JAXA/ISAS, the Hayabusa AMICA team,
 R. Gaskell and colleagues. Ten v-band observations from September–October
-2005 are preserved with their native labels and source pins. Retain the
-mission credits and the PDS/JAXA archive attribution in derived displays.
+2005 and one lossless B/V/W sequence from 24 October 2005 are preserved with
+their native labels and source pins. Multiband calibration follows Ishiguro et
+al. (2010), *The Hayabusa Spacecraft Asteroid Multi-Band Imaging Camera:
+AMICA*. Retain the mission credits and the PDS/JAXA archive attribution in
+derived displays.
 
 Physical and orbital data: NASA/JPL Horizons.
 

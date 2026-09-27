@@ -5,10 +5,44 @@
 | View or property | Source and interpretation |
 | --- | --- |
 | AMICA mosaic | Ten v-band observations from September–October 2005, with [Gaskell-controlled AMICA records](https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/), original FITS and preflight flat. The October close-ups take priority over distant September images where their qualified coverage overlaps. Relative detector brightness, not absolute radiance or albedo. |
+| AMICA multiband color | One lossless [W](source/observations/st_2487339240_w_ddr.lbl), [V](source/observations/st_2487335302_v_ddr.lbl) and [B](source/observations/st_2487331445_b_ddr.lbl) sequence from 24 October 2005. Each filter is registered through its own Gaskell geometry cube and calibrated to reflectivity relative to V. W, V and B are displayed as red, green and blue. This is false color, not a natural-color photograph or absolute reflectance map. |
 | Shape and Elevation | [Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab), derived from 775 AMICA images. Elevation is source radius minus 165 m; the original black-rock prime meridian is retained. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target) Itokawa centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+### AMICA multiband color, 27 September 2026
+
+The new view uses one three-filter sequence acquired over 66 seconds. Each
+archive product is a lossless 512×512 detector window covering columns and rows
+256–767. Preparation checks all 262,144 image samples in each geometry cube
+against the vertically reversed original FITS image, then reads the matching
+window from that filter's full-detector preflight flat. The B, V and W images
+peak at 3,082, 2,976 and 3,603 DN. All remain below the 3,800-DN linearity limit
+reported by [Ishiguro et al. (2010)](https://arxiv.org/abs/0912.4797).
+
+After flat-field and exposure normalization, the preparer applies that paper's
+Table 9 reflectivity factors: B 1.254, V 1 and W 0.645. Each band is
+disk-normalized with the same bounded Lommel–Seeliger treatment before the
+three measurements are sampled at one source-surface point. One shared display
+range preserves their ratios. A point appears only when all three independently
+registered frames qualify there. The neighboring P exposure is recorded in the
+[investigation ledger](investigations.json) but is not displayed: its 960 nm
+band is near-infrared, outside this B/V/W view.
+
+The common footprint covers 11.87% of the sampled display surface and accepts
+698,444 atlas texels. The three archived camera fits hold out between 184,000
+and 206,000 source pixels; their maximum residuals are below 0.000020 pixels.
+The surface transfer stays within its declared 5 m source-distance and
+pixel-separation limits and its 1.5× photometric-gain limit.
+
+![Itokawa with the single AMICA multiband-color control and its common B/V/W footprint](evidence/amica-multiband-color/browser.png)
+
+The bounded disk correction approximately normalizes broad illumination;
+photographed cast shadows remain. It does not remove scattered light or
+temporal flat changes, and the published factors make the non-V bands relative
+to V rather than absolute reflectance. The grid marks terrain outside the
+shared three-filter footprint.
 
 ### Native SBMT comparison, 14 September 2026
 
