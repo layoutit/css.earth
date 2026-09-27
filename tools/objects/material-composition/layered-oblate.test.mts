@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, textureTintFactors } from '@layoutit/polycss';
 import { leafRasterScale, requireOutwardCap } from '@cssearth/bake/scene';
 import { floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
-import { displayBandRatios, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
+import { displayBandRatios, loadWholeDiscColour } from '@cssearth/bake/objects/raster';
 import { prepareSurfaceColour, widestPublishedImage } from './layered-oblate.mts';
 import { polarQuad } from '@cssearth/bake/objects/layers/material-composition';
 import { assertCapFacesOut } from '../../../tests/objects/polar-caps.mts';

@@ -65,7 +65,7 @@ its validators accept); the renderer never imports the bake.
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
-    photometric composition, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
+    photometric composition, a planet's whole-disc colour record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
     tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source

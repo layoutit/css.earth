@@ -2,7 +2,7 @@
  * A planet's whole-disc colour, computed once from a published disc-integrated spectrum and recorded in
  * `source/photometry/<id>.json`; the body's manifest `documents` cite the archive product by URL. A colour map whose
  * archive scaling is arbitrary is tied to it with the band-ratio tie of the observation lanes
- * ([tieBandRatios](../objects/terrestrial-layers/photometric-observations.mts)): green and blue are scaled so their
+ * ([tieBandRatios](./photometric-observations.ts)): green and blue are scaled so their
  * cosine-weighted map means, divided by red's, meet the record's once the map's limb law is put back. The tie keeps red, so
  * keepLuminance then gives the map back its own mean luminance, with a soft shoulder instead of clipping. Spatial colour stays the
  * map's own. Every key is checked; unknown keys are refused.
@@ -10,8 +10,8 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import type { BandRatioPolicy } from '@cssearth/bake/objects/raster';
-import { CHANNEL_NAMES } from '@cssearth/bake/photometry';
+import type { BandRatioPolicy } from './contracts.ts';
+import { CHANNEL_NAMES } from '../../photometry/index.ts';
 
 export const WHOLE_DISC_COLOUR_SCHEMA = 'cssearth-whole-disc-colour@1';
 

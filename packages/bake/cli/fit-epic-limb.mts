@@ -5,7 +5,7 @@
  * glint, and the Minnaert law ln I = ln I0 + k ln mu0 + (k - 1) ln mu is fitted to the bin medians, weighted by pixel
  * count. The calibration factor cancels because the law is relative to the disc centre. Preparation only.
  *
- *   node tools/photometry/fit-epic-limb.mts --files=a.h5,b.h5,... [--write]
+ *   node packages/bake/cli/fit-epic-limb.mts --files=a.h5,b.h5,... [--write]
  *
  * A file may be the whole L1B frame or a subset holding the same dataset paths (the three bands' Image and Earth
  * Sun/View zenith and azimuth), read by byte range from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/; a subset
@@ -93,7 +93,7 @@ if (process.argv.includes('--write')) {
     model: { family: 'separable', disk: { family: 'minnaert', coefficient: k, coefficientPerDegree: 0 } },
     fit: { phaseDegrees: phase, incidenceDegrees: [0, emission], emissionDegrees: [0, emission] },
   }, null, 2) + '\n');
-  await writeFile(resolve(evidence, 'epic-limb-fit.json'), JSON.stringify({ tool: 'tools/photometry/fit-epic-limb.mts', binStep: STEP, minimumCosine: MINIMUM_COSINE, minimumPixels: MINIMUM_PIXELS, summary,
+  await writeFile(resolve(evidence, 'epic-limb-fit.json'), JSON.stringify({ tool: 'packages/bake/cli/fit-epic-limb.mts', binStep: STEP, minimumCosine: MINIMUM_COSINE, minimumPixels: MINIMUM_PIXELS, summary,
     frames: fits.map(fit => ({ ...fit, k: Math.round(fit.k * 10000) / 10000, bins: fit.bins.map(bin => ({ mu0: bin.mu0, mu: bin.mu, pixels: bin.pixels, residual: Math.round(bin.residual * 10000) / 10000 })) })) }, null, 1) + '\n');
   console.log('wrote the three records and the evidence');
 }

@@ -29,7 +29,7 @@ source records are in the repository history before that change.
 The linked reports identify their tested sources, prepared files and limitations.
 
 - **Measured limb, 25 September 2026:** Earth's limb law is fitted to six DSCOVR EPIC
-  frames from 2023 (one every two months, at staggered hours) by `tools/photometry/fit-epic-limb.mts`: Minnaert
+  frames from 2023 (one every two months, at staggered hours) by `packages/bake/cli/fit-epic-limb.mts`: Minnaert
   k 0.394 at 680 nm, 0.428 at 551 nm and 0.410 at 443 nm, with frame-to-frame spreads of 0.07, 0.04 and 0.03. Below
   0.5 the edge is brighter than the centre under full light, from the atmosphere and clouds seen at a slant.
   [Per-frame fits](evidence/epic-limb-fit.json).

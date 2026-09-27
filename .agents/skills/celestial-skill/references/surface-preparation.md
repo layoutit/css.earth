@@ -57,7 +57,7 @@ When baked illumination needs correction, try the following in preparation:
    instrument and filter: transcribe it into a `source/photometry/<id>.json`
    record, cite its publication with a `method` binding whose locator names the
    table, and name it from the recipe with a reference geometry and limits (see
-   `tools/photometry/README.md`). [ISIS photomet](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
+   `packages/bake/src/photometry/README.md`). [ISIS photomet](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
    describes the same reference-geometry normalization. Record filter and
    fitted-range mismatches. Without a published parameter set, a route's
    historical empirical form remains; label it an approximation. Neither implies
