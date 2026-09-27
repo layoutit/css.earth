@@ -42,7 +42,7 @@ images; it does not load Three.js or render models at runtime. Masters are
 the sidebar crop without discarding dark spacecraft parts as background.
 
 Each model has an authored 3D pose in
-[`tools/facility-renders/poses.mts`](../tools/facility-renders/poses.mts). Its record
+[`packages/bake/src/facility-renders/poses.ts`](../packages/bake/src/facility-renders/poses.ts). Its record
 identifies the prominent dish or instrument deck, a mission reference and the
 feature's approximate facing axis. The model rotates before capture so that axis
 projects down-left from the upper-right spacecraft card, with a slight turn
@@ -56,7 +56,7 @@ source models require another pose review.
 photograph or artwork file, checks its byte count and writes the thumbnails and
 their library entries. `--only=terra,cassini` limits the run.
 
-`node tools/prepare/prepare-facility-renders.mts` renders the model thumbnails for
+`node packages/bake/cli/prepare-facility-renders.mts` renders the model thumbnails for
 review, or with `--write` replaces the model images and library together after
 inspection. `--only=<id>` limits the selection. `--cache=<directory>` reuses
 verified downloads; `--output=<directory>` selects the review directory. Both
@@ -69,7 +69,7 @@ chosen quaternion in the pose record before regeneration.
 The render tool requires installed Chrome. Writing refreshes the facility/source
 graphs in the same transaction; it refuses changed source records or artwork
 membership. The fixed lighting recipe is in
-[`tools/facility-renders/render.mts`](../tools/facility-renders/render.mts).
+[`packages/bake/src/facility-renders/render.ts`](../packages/bake/src/facility-renders/render.ts).
 Rerenders on another GPU or browser may differ at antialiased edges. Normal
 builds reuse the committed images, and the artwork test in
 `site/test/dataset-facilities.test.mts` checks their byte counts, sizes and credits.

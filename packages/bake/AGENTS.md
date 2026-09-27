@@ -113,6 +113,10 @@ its validators accept); the renderer never imports the bake.
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
   suites in `tests/navigation/`, with the navigation preparation's in `site/test/`.
+- `src/facility-renders/` is published as `@cssearth/bake/facility-renders` (Node only): the illustrative poses of the rendered
+  facility models, and the types of the three.js renderer (`render.ts`) that `packages/bake/cli/prepare-facility-renders.mts`
+  bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
+  them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `tests/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
   not an object's own: dataset sprites and search thumbnails cut from prepared page and navigation images, the planets'
   photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`

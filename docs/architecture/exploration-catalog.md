@@ -65,7 +65,7 @@ from a 3D model; [facility thumbnails](../facility-thumbnails.md) explains both 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
 committed files. `node packages/bake/cli/prepare-facility-photographs.mts` re-acquires each recorded
 file and prepares it to the library's frame.
-`node tools/prepare/prepare-facility-renders.mts` clears the flat sidebar background out of the
+`node packages/bake/cli/prepare-facility-renders.mts` clears the flat sidebar background out of the
 approved renders to alpha, flood-filling only from the frame edges and refusing
 any change to artwork RGB, then records where each facility sits so a card can
 crop to it rather than to the empty frame around it.

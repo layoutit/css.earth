@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { Quaternion, Vector3 } from 'three';
-import { getFacilityPose, inwardDirection, facilityPoses } from './poses.mts';
+import { getFacilityPose, inwardDirection, facilityPoses } from '@cssearth/bake/facility-renders';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const library = requireRecord(JSON.parse(await readFile(new URL('../../site/source/facilities/render-library.json', import.meta.url), 'utf8')));
