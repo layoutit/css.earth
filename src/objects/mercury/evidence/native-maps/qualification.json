@@ -442,6 +442,15 @@
       "command": "pnpm exec astro build",
       "passed": true,
       "pages": 1453
+    },
+    {
+      "command": "node tools/ci/check-body-references.mts",
+      "passed": true
+    },
+    {
+      "command": "parseInvestigationLedger(mercury)",
+      "passed": true,
+      "entries": 18
     }
   ],
   "limits": [
