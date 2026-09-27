@@ -13,10 +13,10 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { loadRadialModels } from './terrestrial-layers/radial-models.mts';
+import { loadRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
 import { radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { loadSurfaceObservation } from './surface-observations/index.mts';
+import { loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 import { registrationBlockFor, withRegistrationBlock } from './report-registration.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');

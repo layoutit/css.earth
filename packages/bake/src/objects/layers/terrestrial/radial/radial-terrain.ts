@@ -1,13 +1,17 @@
-import type { PreparedTriangle, RadialSamplingProfile, RadialFaces, TerrainGrid } from '@cssearth/bake/objects/geometry';
+import type { PreparedTriangle, RadialSamplingProfile, RadialFaces, TerrainGrid } from '../../../geometry/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
-import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadVtkShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '@cssearth/bake/objects/geometry';
+import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadVtkShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '../../../geometry/index.ts';
 import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
-import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
-import { parseRadialSource, loadEllipsoidParameters, loadContactEllipsoids, completeImageDem, reduceCompletedImageDem, preparePdsConstraintMap } from '@cssearth/bake/objects/layers/terrestrial';
+import { matchesPreparationGenerator } from '../../../sources/index.ts';
+import { parseRadialSource } from '../records/radial-source.ts';
+import { loadEllipsoidParameters } from '../ellipsoid-parameters.ts';
+import { loadContactEllipsoids } from '../contact-ellipsoids.ts';
+import { completeImageDem, reduceCompletedImageDem } from '../image-dem-completion.ts';
+import { preparePdsConstraintMap } from '../pds-constraint-map.ts';
 import { resolve } from 'node:path';
-import { loadImageDem, loadPdsScalarGrid } from '@cssearth/bake/objects/raster';
+import { loadImageDem, loadPdsScalarGrid } from '../../../raster/index.ts';
 import { buildSeamBleedPolygonEdges, computeSolidTrianglePlan, SOLID_TRIANGLE_BLEED, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
-import { TEXELS_PER_CSS_PIXEL } from '@cssearth/bake/scene';
+import { TEXELS_PER_CSS_PIXEL } from '../../../../scene/index.ts';
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 

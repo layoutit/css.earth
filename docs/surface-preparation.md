@@ -28,11 +28,11 @@ Original images, meshes and labels
 | Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mts) and [record generation](../tools/objects/provenance.mts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
-[The loader](../tools/objects/terrestrial-layers/radial-terrain.mts) assembles the
+[The loader](../packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts) assembles the
 source surface, atlas layout and retained leaves. It uses
 [mesh sampling and simplification](../packages/bake/src/objects/geometry/radial-mesh.ts),
 which can also run independently of source loading.
-[Material preparation](../tools/objects/terrestrial-layers/radial-materials.mts)
+[Material preparation](../packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts)
 consumes that prepared layout and writes textures through the shared
 [raster emitter](../packages/bake/src/objects/layers/terrestrial/raster-output.ts).
 [Lens selection](../packages/bake/src/objects/layers/terrestrial/alternative-lenses.ts)
@@ -282,7 +282,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 | --- | --- |
 | Geographic or projected map | [scienceMapPoint](../packages/bake/src/objects/raster/scientific-raster.ts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../packages/bake/src/scene/solid-body-surface.ts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../packages/bake/src/objects/raster/obj-uv-fits.ts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../tools/objects/surface-observations/levels.mts) selects among qualified frames. |
+| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts) selects among qualified frames. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler
@@ -832,7 +832,7 @@ leaves. An irregular body cannot use it: the disc's inner ellipsoid is limited b
 the nearest leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks
 outside it stay open. Irregular bodies close their cracks with seam repair in the
 leaves themselves, as PolyCSS prepares any solid mesh
-(`RADIAL_SEAM_REPAIR` in `tools/objects/terrestrial-layers/radial-terrain.mts`):
+(`RADIAL_SEAM_REPAIR` in `packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts`):
 
 - `buildSeamBleedPolygonEdges` names the edges each face shares with a
   neighbour. A shared edge overlaps it by 12 CSS pixels; a face with no shared

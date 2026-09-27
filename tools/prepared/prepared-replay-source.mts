@@ -28,7 +28,7 @@ export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:option
 const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
 const surfaceFields=shape({id:text,textureScale:optional(number),displaySampling:optional(text),map:asset,surface:asset,thumbnail:asset,
   polesUrl:optional(text),shadowSurface:optional(asset),layout:value=>value});
-const surface:Decoder<import('../objects/terrestrial-layers/solid-contract.mts').SolidSurface>=(value:unknown)=>Object.assign({},requireRecord(value),surfaceFields(value));
+const surface:Decoder<import('@cssearth/bake/objects/layers/terrestrial').SolidSurface>=(value:unknown)=>Object.assign({},requireRecord(value),surfaceFields(value));
 export const parseReplaySurfaces=shape({surfaces:array(surface)});
 export const parseReplayMaterial=shape({surfaces:array(surface),lighting:shape({url:text,columns:number,rowCount:number,frameCount:number,
   frames:array(shape({resource:text,frame:number,row:number,backgroundPosition:text,backgroundSize:text}))})});

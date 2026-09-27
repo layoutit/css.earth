@@ -1,20 +1,25 @@
 import { sha256 } from '@cssearth/core/node';
-import { matchesPreparationGenerator } from '../../prepare/preparation-generator.mts';
-import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from './solid-contract.mts';
-import type { SciencePalette } from '@cssearth/bake/objects/raster';
-import type { PreparedTriangle, SourceSurfaceSample } from '@cssearth/bake/objects/geometry';
+import { matchesPreparationGenerator } from '../../../sources/index.ts';
+import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from '../solid/solid-contract.ts';
+import type { SciencePalette } from '../../../raster/index.ts';
+import type { PreparedTriangle, SourceSurfaceSample } from '../../../geometry/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN as dot } from '@cssearth/core';
-import { parseRadialSnapshot, createRasterEmitter, createSourceMeshLighting, prepareNativePhotographicAtlas, renderRadialSnapshot, neutralShapeAtlas, shapeFillIllumination } from '@cssearth/bake/objects/layers/terrestrial';
-import { requireTerrainMesh, closestTrianglePoint } from '@cssearth/bake/objects/geometry';
+import { parseRadialSnapshot } from '../records/radial-source.ts';
+import { createRasterEmitter } from '../raster-output.ts';
+import { createSourceMeshLighting } from '../source-mesh-lighting.ts';
+import { prepareNativePhotographicAtlas } from '../native-photograph.ts';
+import { renderRadialSnapshot } from '../radial-snapshot.ts';
+import { neutralShapeAtlas, shapeFillIllumination } from '../shape-material.ts';
+import { requireTerrainMesh, closestTrianglePoint } from '../../../geometry/index.ts';
 import { resolve, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { createSourceSurfacePainter } from '@cssearth/bake/objects/raster';
-import { missingCoverageColor } from '@cssearth/bake/raster';
-import { linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
+import { createSourceSurfacePainter } from '../../../raster/index.ts';
+import { missingCoverageColor } from '../../../../raster/index.ts';
+import { linearToSrgb, srgbToLinear } from '../../../color/index.ts';
 
 interface ObservationTransfer {
   interiorTexels: number; counts: Record<string, number>; sources?: Record<string, number>;

@@ -3,9 +3,9 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from '@cssearth/bake/objects/layers/terrestrial';
-import { sampleFootprint } from '../objects/surface-observations/footprint.mts';
-import { archiveBackplanes } from '../objects/surface-observations/geometry.mts';
-import { diskPhotometry } from '../objects/surface-observations/photometry.mts';
+import { sampleFootprint } from '@cssearth/bake/objects/layers/terrestrial';
+import { archiveBackplanes } from '@cssearth/bake/objects/layers/terrestrial';
+import { diskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 import type { DiskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** A decoded GEO frame as the footprint stage sees it: optional quality flags and disk photometry. */

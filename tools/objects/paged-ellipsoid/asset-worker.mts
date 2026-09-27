@@ -1,5 +1,6 @@
 import { parentPort, workerData } from 'node:worker_threads';
-import { readPagedEllipsoid } from './context.mts';
+import { readPagedEllipsoid } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 import { preparePagedEllipsoidAssets } from './assets.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 import type { PagedAssetJob } from '@cssearth/bake/objects/layers/paged-ellipsoid';
@@ -15,7 +16,7 @@ const job: PagedAssetJob = { mode,
   ...(slice ? { materialSlice: { index: Number(slice.index), count: Number(slice.count) } } : {}) };
 if (job.materialSlice && !(Number.isInteger(job.materialSlice.index) && Number.isInteger(job.materialSlice.count) && job.materialSlice.index >= 0 && job.materialSlice.index < job.materialSlice.count))
   throw new TypeError(`Invalid material slice: ${JSON.stringify(slice)}.`);
-const { config, sourceDirectory, atmosphere, atmosphereModel, raster, attitude, surfaceRasterPlan } = await readPagedEllipsoid(requireString(data.objectDirectory, 'object directory'));
+const { config, sourceDirectory, atmosphere, atmosphereModel, raster, attitude, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, requireString(data.objectDirectory, 'object directory'));
 const { assets } = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory: requireString(data.publicDirectory, 'public directory'),
   surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude, ...job });
 parentPort?.postMessage(assets);

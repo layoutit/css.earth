@@ -3,7 +3,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { COMPARISON_SPEC_FILE, axisDifferenceDegrees, belowTopLines, bestImageTurnDegrees, columnCells, figureBands, figureCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from './published-comparison.mts';
+import { COMPARISON_SPEC_FILE, axisDifferenceDegrees, belowTopLines, bestImageTurnDegrees, columnCells, figureBands, figureCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const DEGREE = Math.PI / 180;

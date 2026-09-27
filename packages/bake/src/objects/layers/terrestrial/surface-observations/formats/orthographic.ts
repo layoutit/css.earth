@@ -1,11 +1,11 @@
 /** A registered orthophoto on an image-plane DEM. Every image pixel names one released terrain post, so no camera is needed. */
-import type { ObservationFrame, SurfaceObservationFormat } from '../contract.mts';
-import { decodeProfile, dimensions, parseSurfaceGeometry, checkKeys } from '@cssearth/bake/objects/raster';
+import type { ObservationFrame, SurfaceObservationFormat } from '../contract.ts';
+import { decodeProfile, dimensions, parseSurfaceGeometry, checkKeys } from '../../../../raster/index.ts';
 import { array, number, shape, text, requireArray, requireRecord } from '@cssearth/core';
-import { OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope } from '../recipe.mts';
+import { OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope } from '../recipe.ts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeIsis2Qube } from '@cssearth/bake/objects/layers/terrestrial';
+import { decodeIsis2Qube } from '../../missions/isis2-qube.ts';
 
 const CONTEXT = 'orthographic observation';
 const parseOrthographicLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),

@@ -4,7 +4,7 @@ import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
 import type { PreparedDirectionalSunPlan } from '@cssearth/bake/presentation';
 import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import type { preparePagedEllipsoidScene } from './scene.mts';
+import type { preparePagedEllipsoidScene } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type { preparePlaces } from './geographic/places.mts';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 import { requireRecord, requireString } from '@cssearth/core';

@@ -58,8 +58,8 @@ its validators accept); the renderer never imports the bake.
   - `objects/scene`: the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the frames
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
-    camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, and a recipe's
-    camera source. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
+    projection it adds to rotating material tracks, and a recipe's camera source. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
@@ -68,8 +68,8 @@ its validators accept); the renderer never imports the bake.
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
     files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
-    left unchecked for their consumer; and the shared reference banks under `src/references/` (the CIE 1931 table), whose
-    directory is found on first use.
+    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
+    directory is found on first use; and the matcher that binds a manifest's recorded generator name to today's code.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
@@ -77,7 +77,11 @@ its validators accept); the renderer never imports the bake.
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
     scripts and modules that still read platform files stay in `tools/objects/`. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
-    old `tools/objects/terrestrial-layers/` paths; `tools/prepare/preparation-generator.mts` binds those names to this code.
+    old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
+    Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
+    surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
+    `surface-observations/`; the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
+    shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
   oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
   (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.

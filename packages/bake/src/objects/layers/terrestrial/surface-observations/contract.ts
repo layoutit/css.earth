@@ -8,10 +8,10 @@
  * shared: the bilinear footprint, the closest source point, visibility, selection, level matching,
  * the display range, area coverage, the preview and the report.
  */
-import type { SourceMesh } from '@cssearth/bake/objects/geometry';
-import type { SourceAccess, RadialSurface, SurfaceConfig } from '@cssearth/bake/objects/layers/terrestrial';
+import type { SourceMesh } from '../../../geometry/index.ts';
+import type { SourceAccess, RadialSurface, SurfaceConfig } from '../contracts.ts';
 import type { SourceInput } from '@cssearth/objects/node';
-import type { BandColorDisplay } from '@cssearth/bake/objects/color';
+import type { BandColorDisplay } from '../../../color/index.ts';
 
 /** A decoded photograph: calibrated values and the archive's own verdict on each pixel. */
 export interface ObservationImage {

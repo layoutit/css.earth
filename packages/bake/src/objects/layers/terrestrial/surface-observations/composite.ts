@@ -1,5 +1,5 @@
 /** Frames made of other frames: the filter bands of one colour photograph, and the strips of one push-frame band. */
-import type { CameraKind, FootprintSample, ObservationCamera, ObservationFrame } from './contract.mts';
+import type { CameraKind, FootprintSample, ObservationCamera, ObservationFrame } from './contract.ts';
 
 /** Three filter photographs shown together. Every band must qualify at a point, and the bands stay separate floats until display. */
 export function bandSetFrame(id: string, bands: readonly ObservationFrame[], cameraKind: CameraKind = 'control-network'): ObservationFrame {

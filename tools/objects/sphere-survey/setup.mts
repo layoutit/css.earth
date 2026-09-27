@@ -21,7 +21,7 @@ import { readPdfImage } from '../../sources/pdf-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
 import { horizonsCommand, horizonsTables, tableInput } from '../sphere-horizons.mts';
-import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../surface-observations/published-comparison.mts';
+import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
 import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import type { RadialSimplification } from '@cssearth/bake/objects/geometry';

@@ -7,7 +7,7 @@ import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '@cssearth/bake/presentation';
 import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
 import { parsePagedProfile, parseInteriorSource, createPagedSurfaceRaster, createAtmospherePreparation, prepareEllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { preparePagedEllipsoidScene } from './scene.mts';
+import { preparePagedEllipsoidScene } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const source = resolve(import.meta.dirname, '../../../src/objects/earth/source');

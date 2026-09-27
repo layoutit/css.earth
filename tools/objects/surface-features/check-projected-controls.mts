@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsPrimary } from '@cssearth/fits';
 import { loadObjShape } from '@cssearth/bake/objects/geometry';
-import { matrixCamera } from '../surface-observations/cameras.mts';
+import { matrixCamera } from '@cssearth/bake/objects/layers/terrestrial';
 
 type Pixel = readonly [number, number];
 interface Control { id: string; longitudeDegrees: number; latitudeDegrees: number; observedPixel: Pixel; regionPixels: readonly [number, number, number, number]; identification: string; }

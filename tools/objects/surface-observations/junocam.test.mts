@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { validateSurfaceObservation } from './index.mts';
+import { validateSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
 
 const geometry = { path: 'shape/iau-ellipsoid.tab', format: 'pds-radius-table', simplification: { method: 'source-mesh', maximumErrorMeters: 480 } };
 const frame = (n: number, startTime: string) => ({ id: `jncr_2022272_45c0000${n}_v01`, path: `observations/junocam/JNCR_2022272_45C0000${n}_V01.IMG`, labelPath: `observations/junocam/JNCR_2022272_45C0000${n}_V01.LBL`, startTime });

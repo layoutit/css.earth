@@ -11,6 +11,10 @@ own geometry file. The runtime only displays the prepared atlas.
 decode → camera → pixel geometry → photometry → footprint → surface transfer → report
 ```
 
+The stages below live in the terrestrial layer's shared libraries,
+[`packages/bake/src/objects/layers/terrestrial/surface-observations/`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/)
+(`@cssearth/bake/objects/layers/terrestrial`); this folder keeps their tests, evidence and the OSIRIS shape comparison.
+
 A body owner names a format and its pins in `raster.surfaceObservations`. A
 format adapter decodes the product and builds its camera and pixel geometry.
 Every later stage is shared, so a new archive product needs an adapter, not a
@@ -20,38 +24,38 @@ new route.
 
 | Stage | Module | What it does |
 | --- | --- | --- |
-| Decode | `formats/*.mts`, with the readers in `../terrestrial-layers/` | Reads the product, checks its identity against the recipe and applies the archive's own quality verdict to each pixel. |
-| Camera | `cameras.mts` | Projects surface points to detector pixels and casts rays back. A camera is fitted to archive backplanes, read from an archived closure, derived from SPICE kernels, taken from a registered control network, or computed for a ground-based frame by `packages/bake/src/objects/cameras/observer-camera.ts` from an ephemeris and a rotation model: a light-curve inversion spin state, or an IAU pole model read from a text PCK such as the shared `pck00011.tpc`. A limb refinement can rotate a SPICE or OSIRIS reflectance camera onto the mesh's lit limb. |
-| Pixel geometry | `geometry.mts` | Gives each pixel a surface point, a range and its incidence, emission and phase angles. They come from the archive's backplanes, or from the camera's rays cast onto the full source mesh with interpolated vertex normals; a ray-cast pixel also knows whether terrain shadows it. Hits on faces the source marks as unconstrained are withheld. |
-| Photometry | `photometry.mts` | One gain function per lens: a published model record, a disk function such as Lunar-Lambert, or the photograph's own shading. |
-| Footprint | `footprint.mts` | Interpolates the four pixels around a projected point. A pixel contributes only if it has geometry, passes quality, faces the camera within the emission limit, lies on the sampled surface patch, is lit when the photometry normalizes illumination and admits a gain. Each contributor is normalized before interpolation, and the point needs contributors carrying at least half of the bilinear weight. |
-| Surface transfer | `surface.mts` | Finds the closest source point for each displayed point and checks that the camera sees it. Then it selects a frame, matches levels between frames, sets the display range, measures area coverage and renders the flat preview. |
-| Report | `surface.mts` | Writes the same report for every format. |
+| Decode | `formats/*.ts`, with the readers in the layer's `missions/` | Reads the product, checks its identity against the recipe and applies the archive's own quality verdict to each pixel. |
+| Camera | `cameras.ts` | Projects surface points to detector pixels and casts rays back. A camera is fitted to archive backplanes, read from an archived closure, derived from SPICE kernels, taken from a registered control network, or computed for a ground-based frame by `packages/bake/src/objects/cameras/observer-camera.ts` from an ephemeris and a rotation model: a light-curve inversion spin state, or an IAU pole model read from a text PCK such as the shared `pck00011.tpc`. A limb refinement can rotate a SPICE or OSIRIS reflectance camera onto the mesh's lit limb. |
+| Pixel geometry | `geometry.ts` | Gives each pixel a surface point, a range and its incidence, emission and phase angles. They come from the archive's backplanes, or from the camera's rays cast onto the full source mesh with interpolated vertex normals; a ray-cast pixel also knows whether terrain shadows it. Hits on faces the source marks as unconstrained are withheld. |
+| Photometry | `photometry.ts` | One gain function per lens: a published model record, a disk function such as Lunar-Lambert, or the photograph's own shading. |
+| Footprint | `footprint.ts` | Interpolates the four pixels around a projected point. A pixel contributes only if it has geometry, passes quality, faces the camera within the emission limit, lies on the sampled surface patch, is lit when the photometry normalizes illumination and admits a gain. Each contributor is normalized before interpolation, and the point needs contributors carrying at least half of the bilinear weight. |
+| Surface transfer | `surface.ts` | Finds the closest source point for each displayed point and checks that the camera sees it. Then it selects a frame, matches levels between frames, sets the display range, measures area coverage and renders the flat preview. |
+| Report | `surface.ts` | Writes the same report for every format. |
 
 ## Formats
 
 | Recipe `format` | Adapter | Camera | Pixel geometry |
 | --- | --- | --- | --- |
-| `osiris-geo` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
-| `amica-gaskell` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
-| `pds4-geometry-cube` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
-| `osiris-camera` | `formats/geo.mts` | Archived closure | Source-mesh rays |
-| `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion, bound to a body the frame lists in its field of view | Source-mesh rays |
-| `near-msi-camera` | `formats/geo.mts` | Reconstructed image table and bounded limb refinement | Source-mesh rays; paired raw detector validity |
-| `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
-| `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
-| `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
-| `junocam-camera` | `formats/junocam.mts` | SPICE kernels, one camera per strip of a push-frame image, with the kernel's radial distortion and two epochs fitted to the lit limb | Source-mesh rays, cast only where a strip can hold lit surface |
-| `encounter-fits` | `formats/encounter.mts` | Registered control network | Source-mesh rays |
-| `controlled-shape-camera` | `formats/controlled-camera.mts` | A published control network (Thomas or Stooke shape releases) or the Galileo SSI image catalog | Source-mesh rays |
-| `controlled-shape-color` | `formats/controlled-camera.mts` | The same cameras for three sequential filters, measured again against reference images | Source-mesh rays |
-| `isis2-orthographic` | `formats/orthographic.mts` | None: every pixel names a DEM post | Registered DEM posts |
+| `osiris-geo` | `formats/geo.ts` | Fitted to the backplanes | Archive backplanes |
+| `amica-gaskell` | `formats/geo.ts` | Fitted to the backplanes | Archive backplanes |
+| `pds4-geometry-cube` | `formats/geo.ts` | Fitted to the backplanes | Archive backplanes |
+| `osiris-camera` | `formats/geo.ts` | Archived closure | Source-mesh rays |
+| `llorri-camera` | `formats/geo.ts` | Archived closure with TAN-SIP distortion, bound to a body the frame lists in its field of view | Source-mesh rays |
+| `near-msi-camera` | `formats/geo.ts` | Reconstructed image table and bounded limb refinement | Source-mesh rays; paired raw detector validity |
+| `nh-lorri-camera` | `formats/geo.ts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
+| `nh-mvic-camera` | `formats/geo.ts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
+| `spice-camera` | `formats/geo.ts` | SPICE kernels | Source-mesh rays |
+| `junocam-camera` | `formats/junocam.ts` | SPICE kernels, one camera per strip of a push-frame image, with the kernel's radial distortion and two epochs fitted to the lit limb | Source-mesh rays, cast only where a strip can hold lit surface |
+| `encounter-fits` | `formats/encounter.ts` | Registered control network | Source-mesh rays |
+| `controlled-shape-camera` | `formats/controlled-camera.ts` | A published control network (Thomas or Stooke shape releases) or the Galileo SSI image catalog | Source-mesh rays |
+| `controlled-shape-color` | `formats/controlled-camera.ts` | The same cameras for three sequential filters, measured again against reference images | Source-mesh rays |
+| `isis2-orthographic` | `formats/orthographic.ts` | None: every pixel names a DEM post | Registered DEM posts |
 
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
 
 A JunoCam image is a stack of strips, each read at its own instant from a spinning spacecraft, so `junocam-camera` builds one camera per strip and joins them
-with [`composite.mts`](composite.mts): the strips of a filter make a band, and three bands make a colour photograph. The [JunoCam guide](../../../docs/junocam.md)
+with [`composite.ts`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/composite.ts): the strips of a filter make a band, and three bands make a colour photograph. The [JunoCam guide](../../../docs/junocam.md)
 records the route and what it measured on Europa.
 
 The NEAR MSI adapter retains calibrated I/F with its original illumination.
@@ -88,7 +92,7 @@ misspelt field fails instead of being ignored.
   stated `displayRange`, and names its `basis`: `authored` when a contributor
   chose the stretch, or `source` with the `sourceId` of a consumed input that
   states it. Every lens is authored today.
-- `recipe.mts` checks the shared shape. Each adapter declares the rest:
+- `recipe.ts` checks the shared shape. Each adapter declares the rest:
 
 | Format | Each frame adds | The lens adds |
 | --- | --- | --- |
@@ -108,18 +112,18 @@ misspelt field fails instead of being ignored.
 
 ## Adding an archive product
 
-Write an adapter that implements `SurfaceObservationFormat` from `contract.mts`
-and register it in `index.mts`. The adapter:
+Write an adapter that implements `SurfaceObservationFormat` from `contract.ts`
+and register it in `observations.ts`. The adapter:
 
 1. declares what its frames and lens add to the shared recipe, checks them with
-   `recipe.mts` and names every pinned path the lens consumes;
+   `recipe.ts` and names every pinned path the lens consumes;
 2. decodes each frame into an `ObservationImage`;
 3. builds an `ObservationCamera` and a `PixelGeometry`, usually with
    `matrixCamera` or `fittedCamera` and `castSourceRays` or `archiveBackplanes`;
 4. passes them to `cameraFrame` and returns the frames with a `SurfacePolicy`.
 
-When a product needs a new kind of camera or geometry, extend `cameras.mts` or
-`geometry.mts` so the next adapter can reuse it.
+When a product needs a new kind of camera or geometry, extend `cameras.ts` or
+`geometry.ts` so the next adapter can reuse it.
 
 ## Route policy
 
@@ -159,7 +163,7 @@ report records them.
   nearest pixel the lens cannot use (off the body, past the emission or
   incidence limit, or disqualified) as a fraction of the frame's deepest
   pixel's, so a frame fades out at its limb and terminator instead of stopping
-  there; see [`contour.mts`](contour.mts). The SPHERE team mapped Vesta the same
+  there; see [`contour.mts`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/contour.ts). The SPHERE team mapped Vesta the same
   way ([Fétick et al. 2019](https://doi.org/10.1051/0004-6361/201834749),
   section 4.4): epochs averaged with weights that fall toward the limb, the
   contour itself left out. The paper states no width for its Gaussian weight;

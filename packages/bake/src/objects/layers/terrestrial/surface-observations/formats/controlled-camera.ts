@@ -3,24 +3,24 @@
  * shape releases or the Galileo SSI image catalog. The camera looks at the body origin from a stated latitude, longitude and range, and
  * its rays are cast onto the source mesh the network was controlled to. Three filters can be shown together as colour.
  */
-import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '@cssearth/bake/objects/raster';
-import { parseCameraFrame, checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '@cssearth/bake/objects/geometry';
+import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.ts';
+import { decodeProfile, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer, checkKeys } from '../../../../raster/index.ts';
+import { parseCameraFrame, checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '../../../../geometry/index.ts';
 import { array, boolean, number, optional, shape, text, requireArray, requireRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { validPublishedPhotometryShape } from '@cssearth/bake/objects/layers/terrestrial';
-import { bandColorDisplay, type BandColorDisplay } from '@cssearth/bake/objects/color';
+import { validPublishedPhotometryShape } from '../../records/published-photometry.ts';
+import { bandColorDisplay, type BandColorDisplay } from '../../../../color/index.ts';
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 import { readFitsPrimary } from '@cssearth/fits';
-import { pds3LabelHasReflectance } from './pds3-reflectance.mts';
-import { castSourceRays } from '../geometry.mts';
-import { cameraFrame } from '../footprint.mts';
-import { bandSetFrame } from '../composite.mts';
-import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
-import { deriveLimits } from '../limits.mts';
-import { MAXIMUM_LEVEL_FRAMES } from '../levels.mts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.mts';
+import { pds3LabelHasReflectance } from './pds3-reflectance.ts';
+import { castSourceRays } from '../geometry.ts';
+import { cameraFrame } from '../footprint.ts';
+import { bandSetFrame } from '../composite.ts';
+import { diskPhotometry, publishedPhotometry } from '../photometry.ts';
+import { deriveLimits } from '../limits.ts';
+import { MAXIMUM_LEVEL_FRAMES } from '../levels.ts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.ts';
 
 const CONTEXT = 'controlled camera recipe';
 /** The camera a control network states for one photograph. A frame that names an image catalog takes these from the catalog instead. */

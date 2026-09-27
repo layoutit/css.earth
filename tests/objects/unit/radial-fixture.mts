@@ -1,5 +1,5 @@
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseRadialSource, parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
 
 type LoadedRadialTerrain = NonNullable<Awaited<ReturnType<typeof loadRadialTerrain>>>;

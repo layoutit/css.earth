@@ -5,8 +5,8 @@ import { shape, text, number, array, requireRecord, requireString } from '@cssea
 import { bodies } from './catalog.mts';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-import { prepareSolidRasters } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
+import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
+import { prepareSolidRasters } from '@cssearth/bake/objects/layers/terrestrial';
 import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { createSourceManifest } from '@cssearth/objects/node';
 const parseNavigation = (v: unknown) => { const raw=requireRecord(v); return {...raw,source:shape({path:text})(raw.source)}; };

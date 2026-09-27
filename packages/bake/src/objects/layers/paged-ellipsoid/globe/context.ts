@@ -1,21 +1,22 @@
 import { resolve } from 'node:path';
-import { readAuthoredSources } from '@cssearth/bake/objects/sources';
-import { readJsonSource } from '@cssearth/bake/objects/sources';
+import { readAuthoredSources } from '../../../sources/index.ts';
+import { readJsonSource } from '../../../sources/index.ts';
 import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '@cssearth/objects/node';
-import { prepareDirectionalSun } from '@cssearth/bake/presentation';
-import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { createAtmospherePreparation } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { preparePagedEllipsoidScene } from './scene.mts';
-import { prepareEllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import { prepareDirectionalSun } from '../../../../presentation/index.ts';
+import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.ts';
+import { parseInteriorSource } from '../source-contract.ts';
+import { createPagedSurfaceRaster } from '../surface-raster.ts';
+import { createAtmospherePreparation } from './atmosphere.ts';
+import { preparePagedEllipsoidScene } from './scene.ts';
+import { prepareEllipsoidAttitude } from './attitude.ts';
+import type { SolarGeometry } from '../../../scene/index.ts';
 
 const json = readJsonSource;
 
 /** Read and check a paged ellipsoid's recipe and sources, and plan its scene. The preparation and each of its parallel
- * asset workers (asset-worker.mts) build their context here, so every stage reads the same inputs. */
-export async function readPagedEllipsoid(objectDirectory: string) {
+ * asset workers (tools/objects/paged-ellipsoid/asset-worker.mts) build their context here, so every stage reads the same inputs. */
+export async function readPagedEllipsoid(solarGeometry: SolarGeometry, objectDirectory: string) {
   const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };
   const config = parsePagedProfile(required('paged-ellipsoid')), bindingSource = parsePagedLensBindings(required('lens-bindings'));

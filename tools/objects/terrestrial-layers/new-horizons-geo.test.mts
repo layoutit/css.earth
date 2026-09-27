@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import { decodeNewHorizonsLorri, decodeArrokothMvic, newHorizonsCamera, bindSipCamera } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFitsPrimary } from '@cssearth/fits';
 import {array,number,nullable,optional,shape,text} from '@cssearth/core';
-import {validateSurfaceObservation} from '../surface-observations/index.mts';
+import {validateSurfaceObservation} from '@cssearth/bake/objects/layers/terrestrial';
 import {pinnedOracleVersions} from '../../oracles/fixture.mts';
 
 const source=new URL('../../../src/objects/arrokoth/source/',import.meta.url);
