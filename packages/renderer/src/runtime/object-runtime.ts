@@ -306,8 +306,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Commit the first hidden view so material and feature owners retire their
       // visible state. Later departure frames still acknowledge the world camera,
       // but must not schedule detail/readout work for the scene being left behind.
-      const hiddenDeparture = departing && publication.levelOfDetail.stage === 'marker'
-        && previousPublication?.levelOfDetail.stage === 'marker';
+      const hiddenDeparture = departing && publication.levelOfDetail.stage !== 'geometry'
+        && previousPublication?.levelOfDetail.stage !== 'geometry';
       reference ??= publication;
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision, motionAtRest: playback.motionAtRest() });
       previousPublication = publication;

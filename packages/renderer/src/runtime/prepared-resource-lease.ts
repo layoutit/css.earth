@@ -18,8 +18,8 @@ export interface PreparedResourceLease {
 }
 
 export function prepareObjectResources(assets: PreparedAssets, {
-  signal, createResources = createPreparedResidency, assetOrigin,
-}: { signal?: AbortSignal; createResources?: typeof createPreparedResidency; assetOrigin?: PreparedAssetOrigin } = {}): PreparedResourceLease {
+  signal, createResources = createPreparedResidency, assetOrigin, startup = true,
+}: { signal?: AbortSignal; createResources?: typeof createPreparedResidency; assetOrigin?: PreparedAssetOrigin; startup?: boolean } = {}): PreparedResourceLease {
   let state: LeaseState = { kind: 'starting' };
   const callbacks = () => state.kind === 'claimed' ? state.callbacks : null;
   const resources = createResources({ assets,
@@ -33,7 +33,7 @@ export function prepareObjectResources(assets: PreparedAssets, {
   const unavailable = () => state.kind === 'destroyed' || state.kind === 'claimed';
   const ready = (async () => {
     try {
-      if (unavailable() || !await resources.prepareStartup() || unavailable()) {
+      if (unavailable() || !(startup ? await resources.prepareStartup() : true) || unavailable()) {
         throw new DOMException('Object preparation was cancelled.', 'AbortError');
       }
       // Startup describes the default view, not the eventual incoming camera.
