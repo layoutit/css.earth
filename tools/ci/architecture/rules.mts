@@ -27,7 +27,7 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
-export const APPLICATION_TREES = ['tools', 'site', 'labs'] as const;
+export const APPLICATION_TREES = ['tools', 'site', 'labs', '.github'] as const;
 
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
 
@@ -40,7 +40,7 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'nothing-imports-applications',
-    description: 'tools/, site/ and labs/ are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
+    description: 'tools/, site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
     forbids: (from, to) => APPLICATION_TREES.some(tree => topLevel(to) === tree && topLevel(from) !== tree)
       && !ENTRY_GLUE.some(pattern => pattern.test(from)),
   },

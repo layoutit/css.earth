@@ -37,6 +37,8 @@ test('folders follow the prototype zones', () => {
     'site/components/X.astro': 'site/components',
     'site/objects.mts': 'site(root)',
     'tools/ci/x.mts': 'tools/ci',
+    '.github/scripts/ci/x.mts': '.github/scripts/ci',
+    '.github/scripts/x.mts': '.github/scripts(root)',
     'netlify/functions/x.mts': 'netlify',
     'astro.config.mts': '(repository root)',
   };
@@ -122,10 +124,12 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
     ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/performance/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
+    ['tools/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'tools/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
   ));
   const pairs = (rule: string) => (violations.get(rule) ?? []).map(item => `${item.from}>${item.to}`);
   assert.deepEqual(pairs('packages-import-only-packages'), ['packages/p/src/a.test.ts>tools/helper.mts', 'packages/p/src/a.ts>src/platform/x.mts']);
-  assert.deepEqual(pairs('nothing-imports-applications'), ['site/b.mts>tools/prepared/y.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts', 'tools/objects/o.mts>site/objects.mts']);
+  assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>tools/ci/z.mts', 'site/b.mts>tools/prepared/y.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts',
+    'tools/ci/x.mts>.github/scripts/ci/y.mts', 'tools/objects/o.mts>site/objects.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
     'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts', 'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>tools/prepared/y.mts',
   ], 'the renderer package is runtime, type-only imports count, and its tests may use bake');
