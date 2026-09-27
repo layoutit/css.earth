@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "@cssearth/bake/scene";
-import { assertPolarCaps } from "../../tests/objects/polar-caps.mts";
+import { assertPolarCaps } from "../objects/polar-caps.mts";
 
 // An independently readable coordinate image: red encodes longitude and green
 // encodes latitude. Check its prepared texels against actual CSS vertex mapping.

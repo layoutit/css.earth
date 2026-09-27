@@ -1,5 +1,5 @@
 import { required } from '@cssearth/objects/node/contract';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from '@cssearth/bake/objects/layers/terrestrial';

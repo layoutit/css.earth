@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import {
   createProjectiveSurfaceRasterLayout,
