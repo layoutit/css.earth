@@ -1,6 +1,6 @@
 import type { prepareTextureLevels, TextureLevelConfiguration, SurfaceBankLenses } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type { PreparedNode } from '@cssearth/bake/presentation';
-import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
+import type { MaterialSourceTrack } from '@cssearth/bake/presentation';
 import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
 import type { PreparedDirectionalSunPlan } from '@cssearth/bake/presentation';
 import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
@@ -22,7 +22,7 @@ import { PREPARED_PRESENTATION_SCHEMA } from "@cssearth/bake/presentation";
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
 import { seamOutsetBinding, seamOutsetInitialValue } from "@cssearth/bake/scene";
 import { textureTileStyles, tiledTextureKeys } from "@cssearth/renderer";
-import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
+import { prepareMaterialTracks } from "@cssearth/bake/presentation";
 import { surfaceBankInventory } from "@cssearth/bake/objects/layers/paged-ellipsoid";
 
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {

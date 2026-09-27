@@ -2,7 +2,7 @@ import {parse} from '@cssearth/core/schema';
 import { normalizedPresentationRecipe, type NormalizedPresentationRecipe, parsePhotometricDiscRecipe, prepareNormalizedDiscProjection, phaseLightDirection } from '@cssearth/bake/objects/layers/giant';
 import type { PhotometricRecipe, prepareBandedEllipsoid } from '@cssearth/bake/objects/layers/giant';
 import type {Vector3, ReadonlyVector3} from '@cssearth/bake/objects/geometry';
-import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
+import type {MaterialSourceTrack} from '@cssearth/bake/presentation';
 import type {PreparedCubicSkyPlan} from '@cssearth/bake/presentation';
 import type {PreparedDirectionalSunPlan} from '@cssearth/bake/presentation';
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
@@ -10,7 +10,7 @@ import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, 
 import{preparedResourcePool}from'@cssearth/renderer/platform/prepared-object-assets';
 import{PREPARED_PRESENTATION_SCHEMA}from'@cssearth/bake/presentation';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
-import{prepareMaterialTracks}from'../../prepare/prepare-materials.mts';
+import{prepareMaterialTracks}from'@cssearth/bake/presentation';
 import{rotateSequence}from'@cssearth/bake/objects/geometry';
 
 const round=(value:number)=>Number(value.toFixed(12));

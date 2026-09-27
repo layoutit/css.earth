@@ -4,7 +4,7 @@ import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, type BodyId } from '@cssearth/astr
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { ScenePreparationAdapters } from '@cssearth/bake/scene';
 import type { PresentationHostAdapters } from '@cssearth/bake/presentation';
-import { prepareMaterialTracks } from '../prepare/prepare-materials.mts';
+import { prepareMaterialTracks } from '@cssearth/bake/presentation';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 

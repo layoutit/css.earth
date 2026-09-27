@@ -1,4 +1,4 @@
-import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
+import type {MaterialSourceTrack} from '@cssearth/bake/presentation';
 import {parse} from '@cssearth/core/schema';
 import { layeredPresentationRecipe, parseLayeredLenses, parseLayeredAtlas, prepareAtlasRows, prepareAtlasStill } from '@cssearth/bake/objects/layers/material-composition';
 import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';

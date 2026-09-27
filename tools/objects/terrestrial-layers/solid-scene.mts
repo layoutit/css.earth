@@ -5,7 +5,7 @@ import type { prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrest
 import type { SolidRasterGrid } from '@cssearth/bake/objects/layers/terrestrial';
 import type { combineRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
 import type { createSourceManifest } from '@cssearth/objects/node';
-import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
+import type { MaterialSourceTrack } from '@cssearth/bake/presentation';
 import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
@@ -20,7 +20,7 @@ import { loadAstronomyPackage } from '../../prepare/astronomy/astronomy-package.
 import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/bake/presentation';
 import { preparedResourcePool } from '@cssearth/renderer/platform/prepared-object-assets';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
-import { prepareMaterialTracks } from '../../prepare/prepare-materials.mts';
+import { prepareMaterialTracks } from '@cssearth/bake/presentation';
 import { requirePreparedPresentation } from '@cssearth/bake/presentation';
 import { requirePreparedResourceCatalog } from '../../contract/object-runtime-contract.mts';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';

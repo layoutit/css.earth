@@ -1,5 +1,5 @@
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
-import { prepareFrameLookup } from "../../tools/prepare/prepare-materials.mts";
+import { prepareFrameLookup } from "@cssearth/bake/presentation";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sourceTest } from '../../tests/objects/source-test.mts';
