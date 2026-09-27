@@ -111,7 +111,7 @@ export async function compareWithMast(id: string, band: string, local: string, s
   const annuli = entry.stage === 'coron3' ? starAnnuli(theirs, theirProjection, oursAt) : undefined;
   const receipt = {
     schema: `cssearth-jwst-${entry.stage ?? 'image3'}-reproduction@2`, program: id, band, observation: entry.observation,
-    toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
+    toolchain: 'packages/telescope-cli/src/archives/jwst/toolchain.json', crdsContext: program.crdsContext,
     mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX },
     local: { name: basename(local), ...(await sha256File(local)), calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance, samples,
     wcs, differentWcs,

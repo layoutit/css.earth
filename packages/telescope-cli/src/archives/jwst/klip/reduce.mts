@@ -18,10 +18,12 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telescope/node';
+import { archivePrograms } from '../../programs.mts';
 import { jwstToolchain } from '../toolchain.mts';
 
-/** The pinned programs stay in the checkout beside the bodies' records, not in this package. */
-const PROGRAMS = resolve(WORKSPACE, 'tools/objects/jwst/klip/programs');
+/** The pinned programs sit beside this code, found through the checkout. */
+export const JWST_KLIP_PROGRAMS = archivePrograms('jwst/klip');
+const PROGRAMS = resolve(WORKSPACE, JWST_KLIP_PROGRAMS.path);
 
 export interface KlipBand { readonly band: string; readonly science: readonly string[]; readonly references: readonly string[] }
 export interface KlipProgram { readonly id: string; readonly crdsContext: string; readonly settings: Record<string, unknown>; readonly bands: readonly KlipBand[]; readonly files: ReadonlyMap<string, { readonly uri: string; readonly bytes: number }> }
@@ -122,7 +124,7 @@ export async function reduceKlip(id: string, bandName: string, work: string, opt
     { maxRssBytes: ceiling, progressLabel: `${id} ${bandName}` });
   const summary = requireRecord(JSON.parse(result.lastLine) as unknown, 'spaceKLIP result');
   const products = requireArray(summary.products, 'spaceKLIP products').map(value => requireString(value, 'spaceKLIP product'));
-  const record = { schema: 'cssearth-jwst-klip-run@1', program: id, band: bandName, crdsContext: program.crdsContext, toolchain: 'tools/objects/jwst/klip/toolchain.json',
+  const record = { schema: 'cssearth-jwst-klip-run@1', program: id, band: bandName, crdsContext: program.crdsContext, toolchain: 'packages/telescope-cli/src/archives/jwst/klip/toolchain.json',
     inputs: await Promise.all(files.map(async file => ({ name: basename(file), sha256: await sha256(file) }))),
     products: await Promise.all(products.map(async file => ({ path: file.startsWith(output) ? file.slice(output.length + 1) : file, sha256: await sha256(file) }))),
     workers, seconds: summary.seconds, peakRssGiB: +(result.peakRssBytes / 2 ** 30).toFixed(2) };

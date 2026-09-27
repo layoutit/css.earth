@@ -19,6 +19,8 @@ import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from '@cssearth/telescope/node';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
+import { JWST_IMAGING_PROGRAMS } from './imaging/archive.mts';
+import { JWST_PROGRAMS } from './reduce-tso.mts';
 import { countRecord, isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
 import { namedShippedObjects, normaliseTargetName, targetNameIndex, withoutMinorPlanetNumber, type NamedShippedObject as ShippedObject } from '../targets.mts';
 
@@ -144,7 +146,7 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
 export async function repositoryState(repository = REPOSITORY) {
   const state = new Map<string, { bands: number; programs: string[]; checked: string[] }>(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [], checked: [] }]));
   for (const band of Object.values(JWST_BANDS)) state.get(bandMode(band))!.bands++;
-  const imaging = resolve(repository, 'tools/objects/jwst/imaging/programs'), files = await readdir(imaging);
+  const imaging = resolve(repository, JWST_IMAGING_PROGRAMS.path), files = await readdir(imaging);
   const receiptProblems: string[] = [], receipts = new Map<string, ReproductionReceipt>();
   for (const file of files.filter(name => name.endsWith('.reproduction.json')).sort()) {
     try {
@@ -176,7 +178,7 @@ export async function repositoryState(repository = REPOSITORY) {
   for (const [key] of [...receipts].sort(([a], [b]) => a.localeCompare(b, 'en')))
     receiptProblems.push(`${key.replace('|', '.')}.reproduction.json: no pinned program holds that band.`);
   const timeSeries = new Map<string, { programs: string[]; checked: string[] }>();
-  const series = resolve(repository, 'tools/objects/jwst/programs');
+  const series = resolve(repository, JWST_PROGRAMS.path);
   for (const entry of (await readdir(series, { withFileTypes: true })).filter(item => item.isDirectory())) {
     // A directory without a program.json is a joint fit of several visits, not an observation.
     const program = await readJson(resolve(series, entry.name, 'program.json')).catch(error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });

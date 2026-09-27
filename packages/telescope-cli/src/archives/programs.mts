@@ -2,8 +2,9 @@
  * code. A tracked receipt or ledger keeps the path it recorded, so reading one back maps a former location to the current one
  * here, in one place, for every archive that has moved. */
 
-/** The archives whose programs sit beside their code, in `src/archives/<archive>/programs`. */
-export type MovedArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst';
+/** The archives whose programs sit beside their code, in `src/archives/<archive>/programs`. JWST pins its time series,
+ * its imaging and cube programs and its starlight-subtraction programs in three such folders, one beside each tool's code. */
+export type MovedArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst' | 'jwst' | 'jwst/imaging' | 'jwst/klip';
 
 export interface ArchivePrograms {
   /** The repository-relative directory the programs and their receipts are in now. */
