@@ -134,8 +134,10 @@ its validators accept); the renderer never imports the bake.
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
     camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
     projection it adds to rotating material tracks, a recipe's camera source, and the seams and projection block every generated
-    sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
-    so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
+    sphere is written with; the check that a photograph lens's default camera faces the lens, the default lens's data
+    coverage the default camera turns toward (read from its prepared minimap), and an object's sky orientation and
+    directional Sun. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    so the host passes it in (`SolarGeometry`); it imports `presentation` and `raster`. The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
@@ -171,6 +173,18 @@ its validators accept); the renderer never imports the bake.
   - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
     and outputs each preparation family records); `tools/objects/provenance.mts` compiles the record from them. It imports
     `objects/layers/terrestrial`.
+  - `objects/acquisition`: the converters a body's acquisition plan runs to restore a derived source from its pinned original
+    (a SPICE DSK to a welded mesh archive, GeoTIFF numeric grids and images read by byte range, mapped-composition fits, the
+    JPL satellite catalogue), and beside them the Python converters the body manifests name as reproduction routes, with their
+    pinned requirements and method notes (`MAPPED-SCIENCE.md`, `DSK-RESTORATION.md`). `dsk-mesh.ts` launches `dsk-mesh.py`
+    from this source folder, found by the package's name, so the path holds from `dist/`. It imports `raster` and
+    `objects/sources`. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
+    coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
+  - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
+    downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
+    imports `objects/cameras`, `objects/geometry` and `objects/layers/terrestrial`. `packages/bake/cli/sphere-survey-apparitions.mts`
+    audits the shipped survey lenses; the setup and install commands stay in `tools/objects/sphere-survey/`, since setup imports
+    `tools/objects/published-comparison.mts` and install imports `tools/sources/author-source-records.mts`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
@@ -195,7 +209,8 @@ its validators accept); the renderer never imports the bake.
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
-    `surface-observations/`; the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
+    `surface-observations/`, described in its README (its tests are in `tests/objects/surface-observations/`, its evidence in
+    `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Their tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` once the
   pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the
