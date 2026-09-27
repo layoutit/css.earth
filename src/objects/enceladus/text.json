@@ -47,6 +47,11 @@
       "title": "Partial Cassini VIMS spectral ratio",
       "detail": "Partial VIMS",
       "summary": "A 3.1/1.66 µm ratio sensitive to ice, where Cassini saw it. It does not measure temperature or crystallinity."
+    },
+    "infrared": {
+      "title": "Cassini global infrared mosaic",
+      "detail": "Robidel · 2020",
+      "summary": "Ice-related infrared colors with camera detail added. The published mosaic smooths seams; red is not a heat scale."
     }
   }
 }

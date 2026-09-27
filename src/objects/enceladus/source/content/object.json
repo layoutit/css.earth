@@ -69,7 +69,8 @@
       "elevation": "Elevation",
       "shape": "Shape",
       "ice-absorption": "Ice absorption",
-      "infrared-ratio": "Infrared ratio"
+      "infrared-ratio": "Infrared ratio",
+      "infrared": "Infrared color"
     },
     "controls": [
       {
@@ -84,6 +85,20 @@
         },
         "notes": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
         "noData": true
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared color",
+        "thumbnail": "/scenes/enceladus/enceladus-infrared-thumbnail.webp",
+        "surface": "enceladus-infrared-surface@2x.webp",
+        "poles": "enceladus-infrared-poles@2x.webp",
+        "source": {
+          "id": "cassini-robidel-bland-infrared",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/"
+        },
+        "falseColor": true,
+        "notes": "Published global Cassini mosaic: infrared colors from Robidel et al. (2020), with visible-camera detail from Bland et al. (2018). Red shows the 3.1/1.65 µm ratio; green and blue show 2.0 and 1.8 µm reflectance. The producer smoothed seams and artifacts. Colors highlight ice-related spectral differences; they do not measure temperature or ice percentage. Infrared detail is coarser than the camera texture."
       },
       {
         "id": "elevation",
@@ -209,6 +224,12 @@
       "role": "surface",
       "description": "Cassini controlled mosaic (2024)",
       "href": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-mosaic-100m-schenk"
+    },
+    {
+      "label": "NASA/JPL",
+      "role": "surface",
+      "description": "Published global infrared mosaic (Robidel/Bland)",
+      "href": "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/"
     },
     {
       "label": "LPI",
