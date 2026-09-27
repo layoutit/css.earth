@@ -38,12 +38,14 @@ import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 export const JWST_PROGRAMS = archivePrograms('jwst');
 
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
+/** Eureka!'s control-file names for its four stages (S1 to S4). */
+export type TsoStages = { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels?: string };
 export interface TsoProgram {
   readonly id: string; readonly eventName: string; readonly crdsContext: string; readonly batchSegments: number;
   /** How Stage 3 measures the star: a dispersed spectrum, or aperture photometry of an imaging time series. Photometry has one
    * channel, so it has no channel light curves and no per-column stellar counts. */
   readonly mode: 'spectroscopy' | 'photometry';
-  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels?: string };
+  readonly stages: TsoStages;
   readonly segments: readonly Segment[];
   /** The author's deposited light curve, when one exists. A visit whose authors deposited none is checked against published
    * values instead, outside this reduction. */
@@ -80,7 +82,7 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
     mode: record.mode === undefined ? 'spectroscopy' : requireString(record.mode) === 'photometry' ? 'photometry'
       : requireString(record.mode) === 'spectroscopy' ? 'spectroscopy' : (() => { throw new TypeError(`${directory}: mode must be spectroscopy or photometry.`); })(),
     stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4),
-      ...(stages.S4channels === undefined ? {} : { S4channels: requireString(stages.S4channels) }) },
+      ...(stages.S4channels === undefined ? {} : { S4channels: requireString(stages.S4channels) }) } satisfies TsoStages,
     segments,
     ...(record.oracle === undefined ? {} : { oracle: parseOracle(requireRecord(record.oracle, 'oracle')) }),
   };

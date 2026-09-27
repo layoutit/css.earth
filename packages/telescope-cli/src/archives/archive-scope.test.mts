@@ -23,10 +23,13 @@ import { WORKSPACE } from '@cssearth/telescope/node';
  * exemption covers only that type's member and the properties of an object literal written as that type (a `: Type` variable,
  * `satisfies Type` or `as Type`, `Omit<Type, …>` included), quoted or not; any other key with the same spelling still counts.
  * A Gemini Galilean row's `moon` is the member of the focus group it describes and is part of the published ledger; an HST
- * slit-scan program's Horizons `sun` is the illumination source it queries and is part of its program files. */
+ * slit-scan program's Horizons `sun` is the illumination source it queries and is part of its program files. A TSO program's `S2`
+ * is Eureka!'s Stage 2 control file. */
 const FIELDS = [
   { module: 'gemini/archive-ledger.mts', owner: 'MoonRow', field: 'moon' },
   { module: 'hst/slit-scan-reduction.mts', owner: 'ScanHorizons', field: 'sun' },
+  // Eureka!'s Stage 2, not the star S2 around Sgr A*.
+  { module: 'jwst/reduce-tso.mts', owner: 'TsoStages', field: 'S2' },
 ] as const;
 
 /** Strings that must keep a word that is also a shipped id, by module and the SHA-256 of their exact text, with the ids they may
@@ -69,6 +72,9 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
   },
   'jwst/cubes/resolution.mts': {
     '1275407a168186eb06f2c2e01691c7e95e64f71432af826dc1573b9c352cbfd2': ['io'], // embedded Python: astropy.io
+  },
+  'jwst/reduce-tso.mts': {
+    'c691872b67f8b477cdb190755893bc05fc43ed576c95f982e5c74ac5eb1e6151': ['s2'], // Eureka! Stage 2 control-file name prefix
   },
   'jwst/klip/reduce.mts': {
     '416de16796d0c31e2c06658650ef3f2c69405a8e715a7f7c982dbaedbc078ca9': ['io'], // embedded Python: astropy.io
