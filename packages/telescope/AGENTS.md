@@ -1,12 +1,11 @@
 # Telescope package instructions
 
-Own two things: the `telescope` command's thin wrapper (`src/cli.mts`, `src/help.mts`, bundled by `build.mts` into
-`dist/telescope.mjs`), and the telescope library the workspace's archive and preparation tools share. The command still
-finds a css.earth checkout and runs `tools/objects/telescopes/cli.mts` there; keep its arguments, help text, `--version`,
-`--workspace` / `CSSEARTH_WORKSPACE` lookup, TTY forwarding and exit codes unchanged unless that is the change.
+Own the telescope library the workspace's archive and preparation tools and the `telescope` command share. The command
+itself is [`@cssearth/telescope-cli`](../telescope-cli/AGENTS.md), a layer above this one: this package never imports it or
+`@cssearth/bake` (which imports this package's PDS label readers).
 
 The library holds archive-neutral telescope plumbing: product records, PDS3 and PDS4 label reading, target-name
-resolution, SIMBAD sky targets, cited target associations, the inline Python runner, and the clients of the pinned Python
+resolution, SIMBAD sky targets, cited target associations, the inline Python runner, the ESO archive and esorex clients, and the clients of the pinned Python
 astronomy packages with their toolchain pins. Mission or archive policy (which programs, which frames,
 how an archive's ledger is written) stays in `tools/objects/<archive>/`, and object-specific use of products stays in
 the bake. Nothing here names a body.

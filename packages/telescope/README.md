@@ -1,8 +1,8 @@
 # @cssearth/telescope
 
-The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. Its public interface is the command-line interface: `package.json` exposes a `telescope` binary, not an HTTP API. Inside the workspace the package is also the telescope library the archive and preparation tools share (see [Library](#library)); that library is a workspace interface, not a supported npm one.
+The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. Its public interface is the command-line interface: the [`@cssearth/telescope-cli`](../telescope-cli/README.md) package exposes a `telescope` binary, not an HTTP API. This guide describes that command. The `@cssearth/telescope` package itself is the telescope library the archive and preparation tools share (see [Library](#library)); that library is a workspace interface, not a supported npm one.
 
-This package supplies the command, not the observatory pipelines or catalogue. It uses a **css.earth science checkout** containing the telescope API, source manifests and any required Python environments. It can run from any directory with `--workspace PATH` or `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically. Acquisition and reduction caches stay in that checkout, while deliveries go to your `--out` directory. The package does not download a checkout, install Python, or run pipelines during npm installation.
+The command package supplies the command, not the observatory pipelines or catalogue. It uses a **css.earth science checkout** containing the telescope API, source manifests and any required Python environments. It can run from any directory with `--workspace PATH` or `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically. Acquisition and reduction caches stay in that checkout, while deliveries go to your `--out` directory. The package does not download a checkout, install Python, or run pipelines during npm installation.
 
 ## Setup
 
@@ -11,8 +11,8 @@ Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its docume
 Inside the repository, use `pnpm telescope --help` after installing its dependencies. To test the distributable from the repository:
 
 ```sh
-npm pack ./packages/telescope
-npm install -g ./cssearth-telescope-0.1.0.tgz
+npm pack ./packages/telescope-cli
+npm install -g ./cssearth-telescope-cli-0.1.0.tgz
 export CSSEARTH_WORKSPACE=/path/to/css.earth
 ```
 
@@ -117,7 +117,7 @@ another query rather than changing the saved selection.
 
 Use `--json` for machine-readable stdout and `--verbose` for detailed evidence. Progress goes to stderr. Exit codes: **0** exploration/retrieval completed or a scientific request was fulfilled; **1** operation failed; **2** invalid arguments; **3** no retrievable choices or delivered data still has unresolved requirements; **4** delivered product refuses the request. Exploration exit 0 means the requested discovery or retrieval completed; it makes no scientific fulfillment claim.
 
-The wrapper and scientific implementation remain separate versioned components: updating this npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
+The wrapper and scientific implementation remain separate versioned components: the command is the [`@cssearth/telescope-cli`](../telescope-cli/README.md) package, and updating it does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
 
 ## Supported v1 boundary
 
@@ -298,13 +298,14 @@ its prepared geometry and camera remain unchanged.
 
 ## Library
 
-The same package holds the archive-neutral telescope code the workspace's tools share. It is built by `pnpm build:telescope`
-(`build.mts` bundles the command into `dist/telescope.mjs`, then tsup builds the library beside it) and imported by name.
+This package is the archive-neutral telescope library the workspace's tools share; the command above is
+[`@cssearth/telescope-cli`](../telescope-cli/README.md), a package of its own. The library is built by `pnpm build:telescope` and
+imported by name.
 
 | entry | what it holds |
 |---|---|
 | `@cssearth/telescope` | product records (`PRODUCT_RECORD_SCHEMA`, `EVIDENCE_KINDS`, `parseProductRecord`, `productRecordPath`, `evidenceFor` and the record types); PDS3 and PDS4 label reading (`pds3Keyword`, `pds3Values`, `pds3TimeIso`, `pds4Elements`, `pds4Blocks`, `pds4Block`, `pds4Field`, `pds4Number`, `pds4ProductIdentity`, limits in [PDS labels](../../docs/pds-labels.md)); target-name resolution against the shipped catalogue (`resolveTarget`, `withRequestedTargetName`, `canonicalTargetRequest`, `TargetCatalogueEntry`). No Node built-ins. |
-| `@cssearth/telescope/node` | product records on disk (`writeProductRecord`, `readProductRecord`, `sameRun`, `runDigest`, `addProductEvidence`, `assertInputPins`, `fileSize`); the process boundary into the pinned Python astronomy packages (`astroquery`, `tapRows`, MAST, PDS, pyuvdata, science, plots, projection, transit, starry and SPIDERMAN clients); their installers; the VO metadata contracts; SIMBAD sky targets for names the catalogue does not ship (`resolveSkyTarget`, `parseSkyTarget`, `skyRegion`, `skyCatalogueEntry`); cited MAST target associations (`loadTargetAssociations`, `parseTargetAssociationSources`); inline Python under a pinned toolchain with a memory ceiling (`toolchainPython`, `freeMemoryPercent`); and `PACKAGE_ROOT`, `TOOLCHAINS`, `WORKSPACE`. |
+| `@cssearth/telescope/node` | product records on disk (`writeProductRecord`, `readProductRecord`, `sameRun`, `runDigest`, `addProductEvidence`, `assertInputPins`, `fileSize`); the process boundary into the pinned Python astronomy packages (`astroquery`, `tapRows`, MAST, PDS, pyuvdata, science, plots, projection, transit, starry and SPIDERMAN clients); the ESO archive's raw-frame table, headers and downloads, the esorex runner and the calselector association trees (`queryRawTable`, `rawFrames`, `esoHeader`, `runRecipe`, `associationTree`); their installers; the VO metadata contracts; SIMBAD sky targets for names the catalogue does not ship (`resolveSkyTarget`, `parseSkyTarget`, `skyRegion`, `skyCatalogueEntry`); cited MAST target associations (`loadTargetAssociations`, `parseTargetAssociationSources`); inline Python under a pinned toolchain with a memory ceiling (`toolchainPython`, `freeMemoryPercent`); and `PACKAGE_ROOT`, `TOOLCHAINS`, `WORKSPACE`. |
 
 The pinned toolchains are in [`toolchains/`](toolchains/): each descriptor, its hash-locked requirements, the licences and
 notices of what it installs ([NOTICE.md](toolchains/NOTICE.md)), and the [package ownership map](toolchains/ownership.json).
@@ -313,8 +314,8 @@ A descriptor's or lock's bytes are the identity of an installed environment: cha
 reinstall.
 
 What stays outside the package: each archive's own clients, programs and ledgers (`tools/objects/<archive>/`, with the
-ledger machinery they share in `tools/objects/archives/`), the telescope command's implementation
-(`tools/objects/telescopes/`), and every object-specific use of a product.
+ledger machinery they share in `tools/objects/archives/`), the telescope command (`@cssearth/telescope-cli`, whose
+implementation is still `tools/objects/telescopes/`), and every object-specific use of a product.
 
 ## Independent output checks
 
