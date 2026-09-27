@@ -3,14 +3,15 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pdsPackages } from '@cssearth/telescope/node';
+import { pdsPackages, WORKSPACE } from '@cssearth/telescope/node';
 import { pdsToolchain } from '@cssearth/telescope/node';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput, ProductRun } from '@cssearth/telescope';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+const ROOT = WORKSPACE;
 export const PDS_ARCHIVE_FINAL_SCHEMA = 'cssearth-pds-archive-final@1';
-export const PDS_PROGRAMS = resolve(import.meta.dirname, 'programs');
+/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
+export const PDS_PROGRAMS = resolve(WORKSPACE, 'tools/objects/pds/programs');
 const HEX32 = /^[0-9a-f]{32}$/u, SAFE_NAME = /^[A-Za-z0-9._-]+$/u, MAX_FILE_BYTES = 256 * 1024 * 1024;
 
 export interface PdsQualificationSpec {

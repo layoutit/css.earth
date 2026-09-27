@@ -6,11 +6,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope';
-import { pdsPackages } from '@cssearth/telescope/node';
+import { pdsPackages, WORKSPACE } from '@cssearth/telescope/node';
 import { normalizeDiscoveredPdsProduct, type DiscoveredPdsProduct } from './archive-final.mts';
 import { sourcePds3Observations } from './source-observations.mts';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+const ROOT = WORKSPACE;
 export const PDS_DISCOVERY_SCHEMA = 'cssearth-pds-discovery@1';
 export const PDS_DISCOVERY_STORE_SCHEMA = 'cssearth-pds-discovery@2';
 export const PDS_DISCOVERY = resolve(ROOT, 'data/pds/discovery.json');
@@ -160,7 +160,7 @@ export async function pdsTarget(root: string, id: string) {
   return { id, lid: targets[0]!.lid, name: targets[0]!.name };
 }
 
-export const DISCOVER_HELP = 'Usage: node tools/cli/run-typed-module.mjs tools/objects/pds/discover.mts --archive pds --target TARGET [--write]';
+export const DISCOVER_HELP = 'Usage: node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target TARGET [--write]';
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), archive = flagValue(args, '--archive'), target = flagValue(args, '--target');
   if (args.includes('--help') || args.includes('-h')) process.stdout.write(`${DISCOVER_HELP}\n`);

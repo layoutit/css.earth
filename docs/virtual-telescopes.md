@@ -801,7 +801,7 @@ source-label target names against PDS context products through Peppi; cssEarth k
 is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/pds/discover.mts --archive pds --target charon --write
+node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target charon --write
 ```
 
 Peppi exhausts the target's `Product_Observational` records across processing levels. cssEarth verifies every returned label against the Registry,

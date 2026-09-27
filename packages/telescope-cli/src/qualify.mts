@@ -21,8 +21,8 @@ import { PROGRAMS as NACO_PROGRAMS, pinProgram as pinNacoProgram, writeProgram a
 import { NACO_LEDGER } from '../../../tools/objects/naco/archive-ledger.mts';
 import { compareTemplates } from '../../../tools/objects/naco/compare.mts';
 import { reduceProgram as reduceNacoProgram } from '../../../tools/objects/naco/reduce.mts';
-import { qualifyPdsArchiveProduct } from '../../../tools/objects/pds/archive-final.mts';
-import { buildPdsLedger } from '../../../tools/objects/pds/archive-ledger.mts';
+import { qualifyPdsArchiveProduct } from './archives/pds/archive-final.mts';
+import { buildPdsLedger } from './archives/pds/archive-ledger.mts';
 import { productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { compareChannel, receiptPath } from '../../../tools/objects/spitzer/compare.mts';

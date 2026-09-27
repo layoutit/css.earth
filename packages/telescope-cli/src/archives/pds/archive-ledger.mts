@@ -6,8 +6,9 @@ import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/telescope';
 import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS } from './archive-final.mts';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+const ROOT = WORKSPACE;
 export const PDS_LEDGER_SCHEMA = 'cssearth-pds-ledger@1';
 
 export async function buildPdsLedger() {

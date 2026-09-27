@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { sourcePds3Observations } from './source-observations.mts';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+const ROOT = WORKSPACE;
 
 test('source-pinned Wild 2 PDS3 images enter the PDS adapter without inventing a filter width', async () => {
   const observations = await sourcePds3Observations(ROOT, 'comet-81p');
