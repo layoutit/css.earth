@@ -36,7 +36,7 @@ function packageOutputs(root: string): CompiledDirectory[] {
   });
 }
 
-/** Keep pnpm's native workspace dependency ordering (astronomy before engine, engine before renderer). Catalogue
+/** Keep pnpm's native workspace dependency ordering (catalog and engine before renderer). Catalogue
  * discovery imports compiled renderer navigation (@cssearth/renderer/navigation), so it waits for the packages build
  * even when warm files exist.
  * The preparation bundle ships JS only: type checks read its sources through the root `#preparation/*` imports.
