@@ -46,6 +46,8 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/provenance': 'src/objects/provenance/index.ts',
     'objects/acquisition': 'src/objects/acquisition/index.ts',
     'objects/sphere-survey': 'src/objects/sphere-survey/index.ts',
+    'objects/default-view': 'src/objects/default-view/index.ts',
+    'objects/celestial': 'src/objects/celestial/index.ts',
     'runtime-source': 'src/runtime-source/index.ts',
     'prepared-presentation': 'src/prepared-presentation/index.ts',
     'delivery': 'src/delivery/index.ts',

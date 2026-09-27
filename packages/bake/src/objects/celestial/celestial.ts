@@ -1,8 +1,8 @@
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadCelestialAdapters, type SolarSource, type StarfieldPlan, type SunPlan } from './celestial-adapters.ts';
-import type { SolarGeometry } from './solar-geometry.ts';
+import { loadCelestialAdapters, type SolarSource, type StarfieldPlan, type SunPlan } from './adapters.ts';
+import type { SolarGeometry } from '../scene/index.ts';
 
 export interface CelestialConfig {
   readonly schema: 'cssearth-celestial-preparation@2'; readonly sources: readonly string[];

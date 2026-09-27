@@ -1,7 +1,6 @@
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, prepareCubicSky, prepareDirectionalSun } from '../../presentation/index.ts';
-import type { SolarGeometry } from './solar-geometry.ts';
-import { prepareSolarSystemSunPresentation } from './solar-system-scene.ts';
+import { prepareSolarSystemSunPresentation, type SolarGeometry } from '../scene/index.ts';
 
 type Scene = typeof import('../../presentation/index.ts');
 export type StarfieldPlan = ReturnType<Scene['prepareCubicSky']>;

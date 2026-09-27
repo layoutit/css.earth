@@ -76,6 +76,8 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/provenance': 'packages/bake/src/objects/provenance/index.ts',
   '@cssearth/bake/objects/acquisition': 'packages/bake/src/objects/acquisition/index.ts',
   '@cssearth/bake/objects/sphere-survey': 'packages/bake/src/objects/sphere-survey/index.ts',
+  '@cssearth/bake/objects/default-view': 'packages/bake/src/objects/default-view/index.ts',
+  '@cssearth/bake/objects/celestial': 'packages/bake/src/objects/celestial/index.ts',
   '@cssearth/bake/runtime-source': 'packages/bake/src/runtime-source/index.ts',
   '@cssearth/bake/prepared-presentation': 'packages/bake/src/prepared-presentation/index.ts',
   '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',

@@ -134,10 +134,8 @@ its validators accept); the renderer never imports the bake.
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused
     camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
     projection it adds to rotating material tracks, a recipe's camera source, and the seams and projection block every generated
-    sphere is written with; the check that a photograph lens's default camera faces the lens, the default lens's data
-    coverage the default camera turns toward (read from its prepared minimap), and an object's sky orientation and
-    directional Sun. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
-    so the host passes it in (`SolarGeometry`); it imports `presentation` and `raster`. The prepared sky and Sun contracts and their preparers belong to
+    sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
+    so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
@@ -173,6 +171,14 @@ its validators accept); the renderer never imports the bake.
   - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
     and outputs each preparation family records); `tools/objects/provenance.mts` compiles the record from them. It imports
     `objects/layers/terrestrial`.
+  - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
+    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; and the default
+    lens's data coverage, read from its prepared minimap, that the default camera turns toward. It imports `objects/scene` and
+    `raster`.
+  - `objects/celestial`: an object's sky orientation and directional Sun, prepared into renderer-neutral JSON from its
+    celestial profile and the solar geometry the host passes in. It imports `objects/scene` and `presentation`.
+    `objects/default-view` and `objects/celestial` are topics of their own, not part of `objects/scene`, whose code the
+    nebula lab's compiler identity reaches, so that identity does not pin them.
   - `objects/acquisition`: the converters a body's acquisition plan runs to restore a derived source from its pinned original
     (a SPICE DSK to a welded mesh archive, GeoTIFF numeric grids and images read by byte range, mapped-composition fits, the
     JPL satellite catalogue), and beside them the Python converters the body manifests name as reproduction routes, with their

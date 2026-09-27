@@ -7,7 +7,7 @@
  * sub-observer point; a test pins the numbers the browser was measured to show. */
 import { preparedScenePitch } from '@cssearth/engine';
 import { worldCameraFromPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { SolarGeometry } from './solar-geometry.ts';
+import type { SolarGeometry } from '../scene/index.ts';
 
 const DEGREE = Math.PI / 180;
 type Vector3 = readonly [number, number, number];

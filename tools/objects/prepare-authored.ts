@@ -10,7 +10,8 @@ import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects
 import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
-import { assertDefaultViewFacesLens, prepareCelestialAssets } from '@cssearth/bake/objects/scene';
+import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
+import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
@@ -102,7 +103,7 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
 const solarGeometry = async () =>
   await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href) as typeof import('../../src/platform/solar-geometry.mts');
 
-/** A photograph lens states the body point its frame looks at; the default camera must look there too (`default-view.ts` in @cssearth/bake/objects/scene). The check
+/** A photograph lens states the body point its frame looks at; the default camera must look there too (@cssearth/bake/objects/default-view). The check
  * reads the final frame, which follows the body as drawn. */
 async function assertDefaultViewsFaceLenses(objectDirectory: string, definition: Record<string, unknown>, frame: unknown): Promise<void> {
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
