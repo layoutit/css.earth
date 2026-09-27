@@ -30,6 +30,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
   const sourceColors = new Set<string>();
   // Measured lenses that are not imagery: a whole-disc or photometric colour, or measured geometry in neutral gray.
   const measured = new Set<string>();
+  const simulated = new Set<string>();
   for (const recipe of recipes) {
     if (!isRecord(recipe)) throw new TypeError('Invalid discovery recipe.');
     const raster = isRecord(recipe.raster) ? recipe.raster : recipe;
@@ -39,6 +40,10 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
       if (!Array.isArray(entries)) throw new TypeError(`Invalid discovery ${key}.`);
       for (const entry of entries) {
         if (!isRecord(entry) || typeof entry.id !== 'string') throw new TypeError('Invalid observation lens.');
+        if (isRecord(entry.metadata) && entry.metadata.simulation !== undefined) {
+          if (typeof entry.metadata.simulation !== 'boolean') throw new TypeError('Simulation metadata must be boolean.');
+          if (entry.metadata.simulation && exposed.has(entry.id)) { simulated.add(entry.id); continue; }
+        }
         if (key === 'surfaces' && isRecord(entry.science) && entry.science.kind === 'stellar-photometric-color' && exposed.has(entry.id)) sourceColors.add(entry.id);
         if (isRecord(entry.science) && ['neutral-shape', 'black-shadow', 'disc-integrated-color', 'disc-integrated-band-color', 'stellar-photometric-color'].includes(String(entry.science.kind)) && exposed.has(entry.id)) measured.add(entry.id);
         if (isRecord(entry.metadata) && entry.metadata.modeled === true ||
@@ -52,13 +57,14 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
   }
   const imagery = observed.size > 0;
   // A measured lens beside an illustration keeps the body "Shape only"; the illustration still never counts as imagery.
-  const illustration = !imagery && !measured.size && [...exposed].some(id => policy.illustrationLenses.includes(id));
+  const illustration = !imagery && !measured.size && (simulated.size > 0 || [...exposed].some(id => policy.illustrationLenses.includes(id)));
   let arrival;
   if (photographed.size && camera !== undefined) {
     arrival = parseArrivalView({ defaultLens: controls.lenses.defaultLens, lensIds: [...photographed],
       rotation: preparedDefaultViewRotation(camera) });
   }
   return { imagery, illustration, featured: !illustration && (policy.featured || imagery), ...(arrival ? { arrival } : {}),
+    ...(illustration && simulated.size > 0 ? { simulation: true as const } : {}),
     // A star's colour lens from its spectrum or catalogued temperature is measured, though not an image of its surface.
     ...(!imagery && sourceColors.size ? { sourceColor: true as const } : {}),
     // An orientation reference outranks classification in universe annotations (the Sun, then Earth).

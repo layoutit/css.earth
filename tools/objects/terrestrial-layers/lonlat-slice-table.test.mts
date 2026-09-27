@@ -3,10 +3,24 @@ import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { parseLonLatSliceTable } from '@cssearth/bake/objects/raster';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { requireRecord } from '@cssearth/core';
+import { deriveObjectDiscovery } from '../../prepare/prepare-object-discovery.mts';
+import { parseObjectDiscovery, discoveryDescription } from '@cssearth/objects';
 
 const specification = { columns: { longitude: 2, latitude: 3, value: 5 }, slice: { column: 4, value: 0.1 }, coordinateToleranceDegrees: 0 };
 const rows = [-135, -45, 45, 135].flatMap(lon => [-60, 0, 60].flatMap(lat => [0.1, 1].map(p => [1, lon, lat, p, 1000 + lon + lat + 100 * p].join(','))));
 const text = rows.join('\n');
+
+test('the climate simulation is never advertised as observed imagery', async () => {
+  const read = async (path: string) => requireRecord(JSON.parse(await readFile(new URL(`../../../src/objects/wasp-103b/${path}`, import.meta.url), 'utf8')));
+  const descriptor = await read('object.json'), content = await read('source/content/object.json');
+  const discovery = deriveObjectDiscovery(requireRecord(descriptor.properties).catalog, content, [await read('source/preparation/raster.json')]);
+  assert.equal(discovery.imagery, false);
+  assert.equal(discovery.illustration, true);
+  assert.equal(discovery.simulation, true);
+  assert.equal(discoveryDescription(parseObjectDiscovery(discovery)), 'Simulation');
+  assert.throws(() => parseObjectDiscovery({ ...discovery, illustration: false }), /qualified model/);
+});
 
 test('numeric slices keep native values, interpolate in geographic coordinates and wrap only longitude', () => {
   const map = parseLonLatSliceTable(text, specification);
