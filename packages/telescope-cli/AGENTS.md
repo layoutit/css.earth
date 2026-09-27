@@ -25,6 +25,8 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `test:telescope-cli` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
+  The native CSS camera, resize input and carried viewport values that lane writes into its HTML are this package's
+  `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`); they followed the lane out of `tools/experiments/`.
 
 The workspace's tools import it only through the subpaths `package.json` exports. Its node tests run with
 `pnpm test:telescope-cli`; a test whose toolchain or restored input is absent skips and names it.

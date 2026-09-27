@@ -28,7 +28,7 @@ dimensions and preserves them after release. CSS reads them through view
 timelines and maps displacement to yaw/pitch at 0.3 degrees per pixel. Another
 drag continues from those dimensions. Nothing follows an unpressed pointer.
 
-`tools/experiments/native-scroll/resize-input.mts` owns this input. Its fixed
+[`resize-input.mts`](../packages/telescope-cli/src/sphere/native-scroll/resize-input.mts) owns this input. Its fixed
 origin, large native corner, independent zoom scrollport and clipped marker
 layer avoid resize jumps, zoom/rotation coupling and offscreen links enlarging
 the scroll range. The browser-specific resize corner is the nonstandard part.

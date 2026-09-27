@@ -13,7 +13,7 @@ import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 import { contextMarkerSprite } from '../../../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
 import type { OrbitSegment } from '@cssearth/renderer/solar-system/types.ts';
-import type { NativeCameraRotation } from './native-camera.mts';
+import type { NativeCameraRotation } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';
 import { BODY_INDICATOR_DIAMETER } from '@cssearth/renderer/universe/world-context/context-scale.ts';
 

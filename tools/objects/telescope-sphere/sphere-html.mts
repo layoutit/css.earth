@@ -7,9 +7,9 @@ import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-came
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/validation/world-frame.ts';
 import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
-import { addNativeCamera } from '../../experiments/native-scroll/native-camera.mts';
-import { addNativeResizeInput } from '../../experiments/native-scroll/resize-input.mts';
-import { carryViewportValues } from '../../experiments/native-scroll/carry-values.mts';
+import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
+import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
+import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
 import type { measurementSphere } from './sphere-lane.mts';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 

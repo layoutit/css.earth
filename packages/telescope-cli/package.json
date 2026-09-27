@@ -81,6 +81,18 @@
       "types": "./src/selected-product.mts",
       "default": "./src/selected-product.mts"
     },
+    "./sphere/native-scroll/carry-values": {
+      "types": "./src/sphere/native-scroll/carry-values.mts",
+      "default": "./src/sphere/native-scroll/carry-values.mts"
+    },
+    "./sphere/native-scroll/native-camera": {
+      "types": "./src/sphere/native-scroll/native-camera.mts",
+      "default": "./src/sphere/native-scroll/native-camera.mts"
+    },
+    "./sphere/native-scroll/resize-input": {
+      "types": "./src/sphere/native-scroll/resize-input.mts",
+      "default": "./src/sphere/native-scroll/resize-input.mts"
+    },
     "./package.json": "./package.json"
   },
   "bin": {
