@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
+import { WORKSPACE } from '@cssearth/telescope/node';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -166,7 +167,8 @@ test('every checked-in example states a product, a command and a pinned definiti
   const telescopes = new Set(examples.map(example => example.telescope));
   for (const telescope of ['JWST', 'Hubble', 'ALMA', 'VLTI', 'VLT', 'Chandra', 'Spitzer', 'Keck II', 'Gemini South', 'Juno']) assert.ok(telescopes.has(telescope), telescope);
   for (const example of examples) {
-    assert.ok(example.product.command.startsWith('node tools/objects/'), `${example.id} states the command that makes the product`);
+    const [runner, script] = example.product.command.split(' ');
+    assert.ok(runner === 'node' && script && (await stat(resolve(WORKSPACE, script)).then(entry => entry.isFile(), () => false)), `${example.id} states the command that makes the product`);
     assert.ok(example.note.length > 20, `${example.id} says what the picture shows and does not show`);
     assert.ok(!/[—–]/u.test(`${example.title}${example.note}${example.orientation.note}`), `${example.id} uses plain punctuation`);
     assert.ok(example.window.width * example.enlarge[0] <= 900 && example.window.height * example.enlarge[1] <= 900, `${example.id} fits in 900 pixels`);
