@@ -3,7 +3,7 @@
 Run from the cssEarth checkout:
 
 ```sh
-node tools/performance/trace-brief.mts /path/to/Trace.json.gz
+node labs/performance/trace-brief.mts /path/to/Trace.json.gz
 ```
 
 The same command is used by the agent. Sending a raw trace is sufficient; users
@@ -14,7 +14,7 @@ V8's single-string limit remains usable. Every event is retained for analysis;
 memory still grows with event count. For a multi-million-event recording:
 
 ```sh
-NODE_OPTIONS=--max-old-space-size=6144 node tools/performance/trace-brief.mts /path/to/Trace.json.gz
+NODE_OPTIONS=--max-old-space-size=6144 node labs/performance/trace-brief.mts /path/to/Trace.json.gz
 ```
 
 Run large reports sequentially. The loader validates JSON/gzip completion and
@@ -25,8 +25,8 @@ records the compressed SHA-256 and decoded byte count.
 `ios-capture.mts` records one moment of the site in Safari on the booted iOS Simulator:
 
 ```sh
-node tools/performance/ios-capture.mts --name typing --open http://127.0.0.1:4261/ --settle 25 --steps steps.json --dist dist
-node tools/performance/ios-capture.mts --name by-hand --seconds 15
+node labs/performance/ios-capture.mts --name typing --open http://127.0.0.1:4261/ --settle 25 --steps steps.json --dist dist
+node labs/performance/ios-capture.mts --name by-hand --seconds 15
 ```
 
 It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of
@@ -69,8 +69,8 @@ its frame rate and Safari's memory. `--runs <n>` repeats the capture; the number
 against three:
 
 ```sh
-node tools/performance/ios-capture.mts --name drag-before --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json
-node tools/performance/ios-capture.mts --name drag-after --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json --compare drag-before
+node labs/performance/ios-capture.mts --name drag-before --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json
+node labs/performance/ios-capture.mts --name drag-after --runs 3 --open http://127.0.0.1:4261/itokawa/ --steps drag.json --compare drag-before
 ```
 
 The dev server must be idle while it measures: a server busy with a bake or a file-watch storm times out and serves an
@@ -99,8 +99,8 @@ server on the network (`pnpm exec astro dev --host 0.0.0.0 --port 4210`). An `--
 this Mac's address (`--origin` overrides it):
 
 ```sh
-node tools/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
-node tools/performance/ios-capture.mts --device --name ipad-replay --open /jupiter/ --replay output/performance/ios-captures/ipad-drag-<time> --compare ipad-drag-before
+node labs/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
+node labs/performance/ios-capture.mts --device --name ipad-replay --open /jupiter/ --replay output/performance/ios-captures/ipad-drag-<time> --compare ipad-drag-before
 ```
 
 A `--seconds` recording plays a sound on the Mac when it starts and when it stops: use the device between the two.
@@ -245,9 +245,9 @@ it does not identify the exact statement executing between samples.
 Useful options:
 
 ```sh
-node tools/performance/trace-brief.mts /path/to/Trace.json.gz --url 4243 --build output/playwright/world-bank-site-v2
-node tools/performance/trace-brief.mts /path/to/Trace.json.gz --out /tmp/trace-report
-node tools/performance/trace-brief.mts /path/to/next-trace.json.gz --label "After change" \
+node labs/performance/trace-brief.mts /path/to/Trace.json.gz --url 4243 --build output/playwright/world-bank-site-v2
+node labs/performance/trace-brief.mts /path/to/Trace.json.gz --out /tmp/trace-report
+node labs/performance/trace-brief.mts /path/to/next-trace.json.gz --label "After change" \
   --compare output/performance/trace-briefs/previous/agent-brief.json
 ```
 
@@ -314,7 +314,7 @@ Missing recorder data, screenshots, per-node invalidations or allocation owners
 cannot be reconstructed from timing alone. The brief lists those missing signals
 instead of filling them with a guessed architectural cause.
 
-Run the focused tooling checks with `node --test "tools/performance/*.test.mts"`.
+Run the focused tooling checks with `node --test "labs/performance/*.test.mts"`.
 
 ## Capturing node-level style evidence
 
@@ -331,7 +331,7 @@ CSSEARTH_CAPTURE_ZOOM_PACKETS=8 \
 CSSEARTH_CAPTURE_ZOOM_CYCLES=1 \
 CSSEARTH_TRACE_INVALIDATIONS=1 \
 CSSEARTH_TRACE_DOM=1 \
-node tools/performance/navigation-capture.mts unique-capture-name
+node labs/performance/navigation-capture.mts unique-capture-name
 ```
 
 `CSSEARTH_CAPTURE_ROUTE` can supply a saved view URL path. For a frozen baseline,

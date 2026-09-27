@@ -75,5 +75,5 @@ The footer readout (distance, coordinates, the scale ruler) holds its last readi
 once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to
 be seen mid-motion.
 
-`node tools/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
+`node labs/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
 page makes while it coasts. It exits 1 on anything outside this table.

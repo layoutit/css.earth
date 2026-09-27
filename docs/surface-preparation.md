@@ -720,7 +720,7 @@ and overview targets outside the baked distance retain their own navigation.
 No browser-specific camera or runtime image generation is involved.
 
 Decoded images and connected DOM do not prove GPU residency. Qualify the
-handoff with the [iPad journey recorder](../tools/performance/README.md),
+handoff with the [iPad journey recorder](../labs/performance/README.md),
 inspecting native frames through the reveal and final zoom. The same trace
 records released scene resources, DOM counts and WebKit memory categories.
 
