@@ -40,6 +40,24 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
     '52110340b309d27b371e2118a5391c33714c30986c43ca98c318fdbffc13c59b': ['iau'], // IAU text PCK error
     '27756f050e14a1cb1c1ee867f0eace9ea4d9fcb81b8bee089469f1ebd5fd7b17': ['sun'], // label of the listed sun field
   },
+  // The Juno archive and spacecraft share their name with the shipped asteroid 3 Juno: the archive's own paths, PDS volume root,
+  // telescope name and software name say Juno the mission, never the body.
+  'juno/archive-ledger.mts': {
+    '98f745235ce9487aa372dfaa14986b354fb0dd51c87f95b29907f6ca79243846': ['juno'], // guide: generator and ledger paths
+    '37538b827ce5e37bb4a50e809be2bc580d498b767f11d46ce867f907ffbd7687': ['juno'], // ledger path
+  },
+  'juno/archive.mts': {
+    '8779ece9a511118801da540fa3fe5c241828d6b4e47f333f0d3c5e9b5efb2366': ['juno'], // PDS Juno volume root
+    'eb255fa0a802c6b325ea22e1254d7c62f4c07f43058e6d4dc5bfa8ed02821ec5': ['juno'], // pinned programs directory
+    'a50128d59f482a86171394eb7a2d1824df7c5d2788c4b2cbc5600ead757d5fd9': ['juno'], // kernel bank name
+  },
+  'juno/measure.mts': {
+    '8182e3e46af5bec6923f830ea7dde2dd8de3ada47d1f281bc71fbe7ea53689c4': ['juno'], // own path in the software digest
+    '7b31540d57d42170ba108b986033a90492f773f2166d43faafe71e57e1497296': ['juno'], // software name
+    'cf9e8f8db24f2351753dd8d80e4c4539e4050200a1d1a8938722461398795550': ['juno'], // telescope name in the run record
+    'eeabb1dfd902a7cf9589c0444975cf6d854087892b7a1ea01d2cba5e2d7940ca': ['iau'], // registration evidence sentence
+    'e4509b9c4276b29c88026803aebd246deed1f67bc8cebc81be89d6c42f1fcc0a': ['iau'], // IAU ellipsoid note
+  },
   'jwst/archive-ledger.mts': {
     '2b4a091e57bb97d1a7edc9c1abf91ea5a805b1a29e1dd176e88d6c79c94c497a': ['wasp-43b'], // JWST mode note
     '0e704283fd4c2bbf17b75c4c86a877351b2baa2586a408743182a86403fe5e21': ['titan', 'dione', 'moon'], // JWST guide Limits section

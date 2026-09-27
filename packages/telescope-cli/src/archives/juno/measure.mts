@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Measure how well a program's JunoCam images register to their target, and write the receipt beside the program.
  *
- *   node tools/objects/juno/measure.mts <program id> <work directory> [--raw <directory holding the pinned files>] [--horizons]
+ *   node packages/telescope-cli/src/archives/juno/measure.mts <program id> <work directory> [--raw <directory holding the pinned files>] [--horizons]
  *
  * For each image the two epochs of `strip-refinement.mts` are fitted to the lit limb of the target's IAU ellipsoid, the
  * one the program's text PCK states, and the receipt records the offsets and the limb residual on held-out points before
@@ -17,7 +17,7 @@ import { sha256 } from '@cssearth/core/node';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
@@ -70,9 +70,9 @@ export async function horizonsCheck(set: KernelSet, program: JunocamProgram) {
 /** The version of the software that measured a registration: the digest of the modules that decode an image, place it and fit
  * its limb. Nothing external runs, so there is no installed toolchain to pin. */
 export async function registrationSoftware(): Promise<ProductSoftware[]> {
-  const sources = await Promise.all(['measure.mts', '../../../packages/bake/src/objects/layers/terrestrial/missions/junocam.ts', '../../../packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts']
-    .map(name => readFile(resolve(import.meta.dirname, name))));
-  return [{ name: 'cssearth tools/objects/juno/measure.mts', version: sha256(Buffer.concat(sources)) }];
+  const sources = await Promise.all(['packages/telescope-cli/src/archives/juno/measure.mts', 'packages/bake/src/objects/layers/terrestrial/missions/junocam.ts',
+    'packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts'].map(name => readFile(resolve(WORKSPACE, name))));
+  return [{ name: 'cssearth packages/telescope-cli/src/archives/juno/measure.mts', version: sha256(Buffer.concat(sources)) }];
 }
 
 /** What identifies one registration: every image and label it measured and every kernel it read, each at its pinned size and
@@ -96,7 +96,7 @@ export function registrationRun(program: JunocamProgram, kernels: readonly { pat
 /** What fitting the lit limb establishes, added to the record of the run that measured it. It is registration against the
  * geometry the kernels state, and nothing else: it is not agreement with an archive product, and an error the kernels and the
  * fit share would not show in it. A receipt with no record beside it is refused rather than reported as checked. */
-export async function addRegistrationEvidence(receiptPath: string, repository = resolve(import.meta.dirname, '../../..')) {
+export async function addRegistrationEvidence(receiptPath: string, repository = WORKSPACE) {
   const product = basename(receiptPath);
   return addProductEvidence(productRecordPath(receiptPath), [{
     kind: 'geometric-registration', receipt: receiptPath, product,

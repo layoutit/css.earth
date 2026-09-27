@@ -195,4 +195,4 @@ is rotated and the strips are not combined, which is why the limb steps sideways
 fraction of a second after the one above it, with the spacecraft spinning. The window keeps 640 of the 1,648 columns.
 The JunoCam toolkit's cast stage, which would place these strips on the body, has not been run in this worktree.
 
-`node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels ...`
+`node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels ...`

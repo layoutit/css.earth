@@ -1,7 +1,7 @@
 /** What a JunoCam registration receipt has to say for the images it names to count as measured. Everything here runs against a
  * scratch copy of the pinned program, so nothing asks the PDS anything. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -75,5 +75,5 @@ test('a receipt is read against the program it claims', async () => {
 
 test('every receipt beside the pinned programs is accepted', async () => {
   const { problems } = await junoReceipts();
-  assert.deepEqual(problems, [], 'run node tools/objects/juno/archive-ledger.mts --local');
+  assert.deepEqual(problems, [], 'run node packages/telescope-cli/src/archives/juno/archive-ledger.mts --local');
 });
