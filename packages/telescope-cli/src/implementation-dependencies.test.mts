@@ -84,6 +84,27 @@ test('the prepared, asset, source and contract libraries are followed into their
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the navigation, surface-preview, preparation and thread-pool libraries are followed into their bake sources, as when they sat under tools/', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-libraries-'));
+  try {
+    const entries = [['@cssearth/bake/navigation', 'packages/bake/src/navigation'], ['@cssearth/bake/surface-previews', 'packages/bake/src/surface-previews'],
+      ['@cssearth/bake/preparation', 'packages/bake/src/preparation'], ['@cssearth/bake/thread-pool', 'packages/bake/src/thread-pool']] as const;
+    await writeFile(resolve(root, 'entry.mts'), `${entries.map(([specifier], index) => `import { v${index} } from '${specifier}';`).join('\n')}\nexport const used=[${entries.map((_, index) => `v${index}`).join(',')}];\n`);
+    for (const [index, [, directory]] of entries.entries()) {
+      await mkdir(resolve(root, directory), { recursive: true });
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
+      await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    }
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    for (const [index, [, directory]] of entries.entries()) {
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index + 10};\n`);
+      assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, directory);
+      await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the FITS reader package is followed into its sources, as when it was a local module; other packages stay external', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-fits-'));
   try {
