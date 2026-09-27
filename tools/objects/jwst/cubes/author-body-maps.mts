@@ -32,7 +32,7 @@ import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../../body-map-publication.mts';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../../telescopes/body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');

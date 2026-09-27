@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { formatBodyMapProduct, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
-import type { ObservationSelection } from './telescopes/query.mts';
+import type { ObservationSelection } from './query.mts';
 
 const plane = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH', units: 'band depth', values: new Float32Array(8).fill(1) }, { name: 'CO2 BAND DEPTH ERROR', units: 'band depth', values: new Float32Array(8).fill(.1) }]);
 const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
@@ -138,7 +138,7 @@ test('exact UTC request edges agree with their Julian dates',async()=>{
 
 test('publication establishes input kind only from a current qualified artifact with matching input bytes',async()=>{
  const {writeProductRecord,fileSize}=await import('@cssearth/telescope/node'),{productRecordPath}=await import('@cssearth/telescope');
- const {rememberQualification,loadQualifiedObservations}=await import('./telescopes/qualified-observations.mts');
+ const {rememberQualification,loadQualifiedObservations}=await import('./qualified-observations.mts');
  const f=await fixture(),root=f.directory,cube=resolve(root,'selected.fits'),receipt=resolve(root,'comparison.json');
  await writeFile(cube,'verified cube fixture');await writeFile(receipt,'{}');
  await writeProductRecord(productRecordPath(cube),{telescope:'JWST',stage:'fixture-cube',inputs:[],software:[],parameters:{}},[{path:'selected.fits',file:cube}]);

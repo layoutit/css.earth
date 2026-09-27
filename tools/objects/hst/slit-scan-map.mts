@@ -33,7 +33,7 @@ import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 import { sha256 as digestOf } from '@cssearth/core/node';
-import { bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
+import { bodyMapProductRecord, formatProductRecord } from '../telescopes/body-map-publication.mts';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 import {
   ACROSS_SLIT_DIRECTIONS, acrossSlitCentre, addFeatureless, bandFromReflectance, discChord, featurelessMean, newFeatureless,

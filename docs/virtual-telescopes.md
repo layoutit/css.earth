@@ -828,7 +828,7 @@ read, along with the output plane and its body-map metadata.
 Publication performs the query and verifies the whole chain in one command:
 
 ```
-node tools/cli/run-typed-module.mjs tools/objects/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node tools/cli/run-typed-module.mjs tools/objects/telescopes/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
   --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \
