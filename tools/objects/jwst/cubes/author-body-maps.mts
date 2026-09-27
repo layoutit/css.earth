@@ -18,7 +18,7 @@
  *
  * --check writes nothing and fails if any file would change. */
 import { selectedProductInput } from '../../telescopes/selected-product.mts';
-import type { ObservationSelection } from '../../telescopes/query.mts';
+import type { ObservationSelection } from '../../telescopes/query-contract.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';

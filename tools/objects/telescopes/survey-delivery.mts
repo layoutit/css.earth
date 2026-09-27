@@ -9,7 +9,8 @@ import { loadSourceProducts, type LoadedSourceProduct } from './source-products.
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { saveSession, getSession, type SessionServices } from './session.mts';
-import { requestFromArguments, type QueryInputs } from './query.mts';
+import { requestFromArguments } from './query.mts';
+import { type QueryInputs } from './query-contract.mts';
 import { assessRequest } from './request-satisfaction.mts';
 export function shuffled<T>(items:readonly T[],seed:string):T[]{
   let state=createHash('sha256').update(seed).digest().readUInt32LE();const result=[...items];

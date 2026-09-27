@@ -16,7 +16,8 @@ import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { parseProductRecord, productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { runDigest, sameRun } from '@cssearth/telescope/node';
-import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, type ConstraintVerdict, type ObservationSelection } from './query.mts';
+import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
+import { type ConstraintVerdict, type ObservationSelection } from './query-contract.mts';
 
 export const BODY_MAP_PUBLICATION_STAGE = 'body-map';
 export const TELESCOPE_LAYER_SCHEMA = 'cssearth-telescope-layer@1';

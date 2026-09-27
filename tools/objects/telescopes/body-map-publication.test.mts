@@ -7,7 +7,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { formatBodyMapProduct, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
-import type { ObservationSelection } from './query.mts';
+import type { ObservationSelection } from './query-contract.mts';
 
 const plane = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH', units: 'band depth', values: new Float32Array(8).fill(1) }, { name: 'CO2 BAND DEPTH ERROR', units: 'band depth', values: new Float32Array(8).fill(.1) }]);
 const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
