@@ -4,7 +4,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { preprocessCSS, resolveConfig } from 'vite';
 import { isRecord } from '@cssearth/core';
-import { preparedMotionCss } from './prepared-motion-css.mts';
+import { preparedMotionCss } from '../build/prepared-motion-css.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const config = await resolveConfig({ root, configFile: false, css: { postcss: { plugins: [preparedMotionCss(root)] } } }, 'build');
