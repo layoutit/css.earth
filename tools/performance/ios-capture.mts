@@ -35,6 +35,7 @@
 // it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
+import { symbolicateNativeXml } from './native-symbols.mts';
 import { execFile, spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, readFile, writeFile, readdir, realpath, rm } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
@@ -755,7 +756,7 @@ async function exportTimeProfile(native: string, pid: number | null): Promise<{ 
     // Instruments may still be finishing the file when its recorder exits; the first export can then fail with no message.
     const exportTable = async (attempt = 1): Promise<string> => run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 })
       .then(result => result.stdout, async (error: unknown) => { if (attempt >= 5) throw error; await wait(2000); return exportTable(attempt + 1); });
-    const stdout = await exportTable();
+    const stdout = await symbolicateNativeXml(await exportTable(), native);
     const toc = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 }).then(result => result.stdout, () => '');
     const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
     return { summary: summariseTimeProfile(stdout), samples: timeProfileSamples(stdout, pid), startMs: start ? Date.parse(start) : null };

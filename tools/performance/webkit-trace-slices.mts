@@ -1,3 +1,4 @@
+import { paintClues, paintTraceEvents } from './webkit-paint-clues.mts';
 /** Semantic navigation windows and exclusive cost pivots for every exported iPad trace. */
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
@@ -131,6 +132,7 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
   const causeData: unknown = await readFile(resolve(directory, 'causes.json'), 'utf8').then(JSON.parse, () => null);
   const layerLines = await readFile(resolve(directory, 'layers.jsonl'), 'utf8').catch(() => '');
   const layerSamples: unknown[] = layerLines.split('\n').filter(Boolean).map(line => JSON.parse(line));
+  const paint = paintClues(trace, causeData, layerSamples, isRecord(receipt) && typeof receipt.url === 'string' ? receipt.url : undefined);
   const compositor = compositorClues(trace, layerSamples, causeData);
   const clues = traceClues(trace, raw, analysis.views, styleWrites, causeData);
   // Maps annotate evidence once; saved annotations remain useful after dist is rebuilt.
@@ -153,7 +155,7 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
     await writeFile(resolve(directory, 'analysis.sources.json'), JSON.stringify({ sourceSha256: sourceHash, buildSources, locations }, null, 2) + '\n');
   }
   const enriched = parsedTrace(trace);
-  enriched.traceEvents.push(...causeTraceEvents(traceCauses(trace, causeData)), ...compositorTraceEvents(compositor));
+  enriched.traceEvents.push(...causeTraceEvents(traceCauses(trace, causeData)), ...compositorTraceEvents(compositor), ...paintTraceEvents(paint));
   // Also enrich the full export; slices below use the same diagnostic lane.
   const original = requireRecord(trace, 'trace'); original.traceEvents = enriched.traceEvents;
   const events = enriched.traceEvents.filter((e): e is Record<string, unknown> & TraceEvent => isTraceEvent(e));
@@ -175,7 +177,7 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
     slice.metadata.analysis = { label: view.label, sourceSha256: sourceHash, phase: view.phase };
     await writeFile(resolve(directory, view.path), JSON.stringify(slice) + '\n');
   }
-  const manifest = { ...analysis, capture: basename(directory), sourceSha256: sourceHash, clues, compositor, buildSources };
+  const manifest = { ...analysis, capture: basename(directory), sourceSha256: sourceHash, clues, compositor, paint, buildSources };
   const pending = resolve(directory, `analysis.${process.pid}.tmp`);
   await writeFile(pending, JSON.stringify(manifest, null, 2) + '\n');
   await rename(pending, resolve(directory, 'analysis.json'));

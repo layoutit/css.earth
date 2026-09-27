@@ -15,8 +15,9 @@ export function summariseLayerReply(reply: unknown) {
 const result = (reply: unknown) => isRecord(reply) && isRecord(reply.result) ? reply.result : null;
 const value = (reply: unknown) => { const r = result(reply); return r && isRecord(r.result) ? r.result.value : null; };
 export async function startLayerSampler(session: Inspector, file: string) {
-  const snapshots: unknown[] = [], identified = new Set<number>(), reasons = new Map<string, unknown>();
+  const snapshots: unknown[] = [], identified = new Set<number>(), reasons = new Map<string, unknown>(), paintNodes = new Set<number>();
   let rootNode: number | null = null;
+  const nativeChildren = new Map<number, unknown[]>();
   let stopped = false, wanted = false, pending: Promise<void> | null = null, sequence = 0, coalesced = 0;
   const save = async (record: unknown) => { snapshots.push(record); await appendFile(file, `${JSON.stringify(record)}\n`); };
   const evaluate = (expression: string) => session.send('Runtime.evaluate', { expression, returnByValue: true });
@@ -24,15 +25,31 @@ export async function startLayerSampler(session: Inspector, file: string) {
     const id = ++sequence, requestedAt = Date.now();
     try {
       await evaluate(`console.timeStamp('cssEarth:layers:${id}:begin')`);
-      if (rootNode === null) {
-        const document = result(await session.send('DOM.getDocument'));
-        const root = document && isRecord(document.root) ? document.root.nodeId : null;
-        if (typeof root !== 'number') throw new Error('No document for compositor observation.');
-        rootNode = root;
-      }
+      // getDocument refreshes Inspector's frontend node IDs. Use one full tree for this entire sample.
+      nativeChildren.clear();
+      const document = result(await session.send('DOM.getDocument'));
+      const rootValue = document && isRecord(document.root) ? document.root.nodeId : null;
+      if (typeof rootValue !== 'number') throw new Error('No document for compositor observation.');
+      rootNode = rootValue; identified.clear(); paintNodes.clear();
       const root = rootNode;
+      await session.send('DOM.requestChildNodes', { nodeId: root, depth: -1 });
       const dom = value(await evaluate('window.__captureCauses ? window.__captureCauses.snapshot() : null'));
       const tree = summariseLayerReply(await session.send('LayerTree.layersForNode', { nodeId: root }));
+      // One native DOM tree reply identifies all new layer nodes, avoiding a protocol roundtrip per face.
+      const missing = tree.layers.some(layer => typeof layer.nodeId === 'number' && !paintNodes.has(layer.nodeId));
+      if (missing) {
+        const wantedNodes = new Set(tree.layers.map(layer => layer.nodeId));
+        const visit = async (node: unknown, parent: number | null): Promise<void> => {
+          if (!isRecord(node)) return;
+          const id = typeof node.nodeId === 'number' ? node.nodeId : null;
+          if (id !== null && wantedNodes.has(id) && !paintNodes.has(id)) {
+            paintNodes.add(id);
+            await save({ kind: 'paint-node', generation: sequence, nodeId: id, parentNodeId: parent, name: node.nodeName, attributes: node.attributes ?? [], sampleId: sequence });
+          }
+          for (const child of nativeChildren.get(id ?? -1) ?? (Array.isArray(node.children) ? node.children : [])) await visit(child, id);
+        };
+        await visit(document?.root, null);
+      }
       // Include parents with NO layer, not just nodes already reported by LayerTree.
       const found = result(await session.send('DOM.querySelectorAll', { nodeId: root,
         selector: '.object-render-root, .object-render-root .polycss-mesh' }));
@@ -61,7 +78,9 @@ export async function startLayerSampler(session: Inspector, file: string) {
     if(pending){wanted=true;coalesced++;return;}
     pending=(async()=>{do{wanted=false;await sample();}while(wanted&&!stopped&&sequence<2000);})().finally(()=>{pending=null;});
   };
-  session.listen((_source,message)=>{if(message.method==='DOM.documentUpdated'){rootNode=null;identified.clear();}if(message.method==='LayerTree.layerTreeDidChange')request();});
+  session.listen((_source,message)=>{
+    if(message.method==='DOM.setChildNodes' && isRecord(message.params) && typeof message.params.parentId==='number' && Array.isArray(message.params.nodes)) nativeChildren.set(message.params.parentId,message.params.nodes);
+    if(message.method==='DOM.documentUpdated'){rootNode=null;identified.clear();paintNodes.clear();}if(message.method==='LayerTree.layerTreeDidChange')request();});
   await session.send('LayerTree.enable'); request();
   return { async stop(){stopped=true;await pending;await save({kind:'coverage',snapshots:sequence,coalesced,limit:2000,
     limitations:['No GPU tile residency/eviction reason exposed by this protocol.','Layer absence is an observation, not by itself proof of a paint defect.','Coalesced changes can hide intermediate states.']});return snapshots;} };

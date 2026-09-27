@@ -2,12 +2,24 @@
 export function installTraceCauses() {
   interface Operation {
     id: number; parentId: number | null; kind: string; property: string; target: number;
-    before: unknown; after: unknown; frame: number; structureBefore?: unknown; structureAfter?: unknown; arguments?: unknown[]; startMs: number; endMs: number; stack: string; threw: boolean;
+    before: unknown; after: unknown; frame: number; structureBefore?: unknown; structureAfter?: unknown; arguments?: unknown[]; mounted?: unknown[]; image?: string; startMs: number; endMs: number; stack: string; threw: boolean;
   }
   interface Target { id: number; label: string; ancestors: number[]; connected: boolean; }
   const operations: Operation[] = [], targets: Target[] = [], restores: (() => void)[] = [], unsupported: string[] = [];
   const ids = new WeakMap<object, number>(), owners = new WeakMap<object, Element>();
   const motion = new Map<string, { target: number; property: string; count: number; firstMs: number; lastMs: number; stack: string }>();
+  const attachments: unknown[] = [], decodes: { id: number; url: string; startMs: number; endMs: number | null; status: string; width: number; height: number; complete: boolean; stack: string }[] = [];
+  let attachmentNodes = 0, omittedAttachmentNodes = 0;
+  const imageValue = (value: object) => value instanceof HTMLElement || value instanceof SVGElement ? value.style.backgroundImage : '';
+  const mountedTree = (value: unknown) => {
+    if (!(value instanceof Element) || !(value.matches('.object-render-root') || value.closest('.object-render-root'))) return null;
+    const all = [value, ...value.querySelectorAll('*')], budget = Math.max(0, 30000 - attachmentNodes);
+    const nodes = all.slice(0, budget).map(node => ({ target: identify(node), parent: node.parentElement ? identify(node.parentElement) : null,
+      tag: node.localName, inline: node.getAttribute('style'), image: imageValue(node) }));
+    attachmentNodes += nodes.length; omittedAttachmentNodes += all.length - nodes.length;
+    return { root: identify(value), elements: all.length, leaves: all.filter(node => /^(U|B|S)$/.test(node.tagName)).length,
+      nodes, omitted: all.length - nodes.length };
+  };
   const limit = 60000;
   let nextId = 0, active: number | null = null, internal = false, stopped = false, dropped = 0;
   const epochMs = performance.timeOrigin;
@@ -72,10 +84,14 @@ export function installTraceCauses() {
     const operation: Operation = { id, parentId, kind, property, target: identify(target), before: brief(read()), after: null,
       frame: frameNumber, ...(kind === 'children' ? { structureBefore: structure(target), arguments: args.map(brief) } : {}),
       startMs: performance.now(), endMs: 0, stack: captureStack(), threw: false };
+    if (kind === 'children' && /^(appendChild|insertBefore|replaceChild|append|prepend|replaceChildren)$/.test(property)) {
+      const trees = args.map(mountedTree).filter(tree => tree !== null);
+      if (trees.length) { operation.mounted = trees.map(tree => ({ root: tree.root, elements: tree.elements, leaves: tree.leaves })); attachments.push({ operationId: id, trees }); }
+    }
     operations.push(operation); active = id; stamp(`${id}:begin`); internal = false;
     try { return invoke(); } catch (error) { operation.threw = true; throw error; }
     finally {
-      internal = true; stamp(`${id}:end`); operation.endMs = performance.now(); operation.after = brief(read()); if (kind === 'children') operation.structureAfter = structure(target); active = parentId; internal = false;
+      internal = true; stamp(`${id}:end`); operation.endMs = performance.now(); operation.after = brief(read()); if (kind === 'style' && /^(backgroundImage|background-image|cssText)$/.test(property)) operation.image = imageValue(target); if (kind === 'children') operation.structureAfter = structure(target); active = parentId; internal = false;
     }
   };
   const patch = (prototype: object, name: string, next: PropertyDescriptor) => {
@@ -104,6 +120,21 @@ export function installTraceCauses() {
       return observe(this, kind, name, () => Reflect.apply(get, this, []), () => Reflect.apply(set, this, [value]));
     } });
   };
+  // Observe the app's own decode promises, including detached Image objects. Never start an extra decode.
+  const decode = HTMLImageElement.prototype.decode;
+  if (typeof decode === 'function') patch(HTMLImageElement.prototype, 'decode', { value: function(this: HTMLImageElement) {
+    if (stopped || decodes.length >= 10000) return Reflect.apply(decode, this, []);
+    const row = { id: decodes.length + 1, url: this.currentSrc || this.src, startMs: performance.now(), endMs: null as number | null,
+      status: 'pending', width: this.naturalWidth, height: this.naturalHeight, complete: this.complete, stack: captureStack() };
+    decodes.push(row); originalStamp(`cssEarth:decode:${row.id}:begin`);
+    const done = (status: string) => { if (stopped) return; row.status = status; row.endMs = performance.now(); row.width = this.naturalWidth;
+      row.height = this.naturalHeight; row.complete = this.complete; originalStamp(`cssEarth:decode:${row.id}:end`); };
+    try {
+      const promise: Promise<void> = Reflect.apply(decode, this, []);
+      void promise.then(() => done('resolved'), () => done('rejected'));
+      return promise;
+    } catch (error) { done('threw'); throw error; }
+  } });
   // Associate CSS declarations and token lists with their owning element without DOM searches.
   const ownerGetter = (prototype: object, name: string) => {
     const descriptor = Object.getOwnPropertyDescriptor(prototype, name);
@@ -217,13 +248,15 @@ export function installTraceCauses() {
   stamp('ready');
   return { describeNode, snapshot, checkpoint, stop() {
     if (!stopped) { stopped = true; cancelAnimationFrame(frameHandle); observer.disconnect(); for (const restore of restores.reverse()) restore(); stamp('stopped'); }
-    return { schema: 'cssearth-trace-causes@1', epochMs, operations, targets, motion: [...motion.values()], mutations, dropped, unsupported,
+    return { schema: 'cssearth-trace-causes@1', epochMs, operations, targets, attachments, decodes, paintCoverage: { attachmentNodes, omittedAttachmentNodes, decodeLimit: 10000 }, motion: [...motion.values()], mutations, dropped, unsupported,
       limitations: ['Diagnostic wrappers add CPU cost; use a normal capture without --debug for timing.',
         'Transform/opacity writes are counted per target with a representative stack, not individually stamped.',
         'MutationObserver fallback records delivery time without a setter stack; style objects retained before installation can bypass hooks.',
         'String values are limited to 400 characters; operations and fallback mutations each cap at 60000.',
         'Listener calls preserve native behavior; automatic once/signal removals are not individually intercepted.',
         'Frame numbers are observer requestAnimationFrame turns, not proof of display presentation.',
+        'Decode promise completion is browser readiness, not proof of GPU upload or decoded-image residency; pre-install decodes are unobserved.',
+        'Attachment snapshots inspect inline declarations only; CSS-owned imagery requires checkpoint styles. Debug subtree traversal adds overhead.',
         'Target ancestry is DOM structure, not the set of nodes WebKit invalidated.'] };
   } };
 }

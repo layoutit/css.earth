@@ -80,6 +80,8 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
   const originText = takeOption(args, '--origin') ?? (live ? 'https://css.earth' : `http://${localAddress()}:4212`);
   const name = takeOption(args, '--name') ?? 'ipad-journey';
   const udid = takeOption(args, '--device');
+  const native = takeOption(args, '--native') ?? 'off';
+  if (!['off', 'page', 'all'].includes(native)) throw new TypeError('--native must be off, page or all.');
   const debug = args.includes('--debug');
   if (debug) args.splice(args.indexOf('--debug'), 1);
   const heapSnapshot = args.includes('--heap-snapshot');
@@ -125,7 +127,7 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
     const { out, report } = await captureIosMoment(['--device', ...(udid ? [udid] : []), '--name', name,
       '--expect-url', startUrl, '--steps', stepsPath, '--strict-steps', '--stage-timing', '--no-device-monitors', '--screens',
       // A local preview's source maps do not describe a deployed build.
-      '--dist', live ? '' : 'dist', '--settle', '2',
+      '--dist', live ? '' : 'dist', '--settle', '2', '--native', native,
       ...(debug ? ['--debug'] : []), ...(heapSnapshot ? ['--heap-snapshot'] : []), ...(styleWrites ? ['--style-writes'] : [])], deviceSession);
     stage('WebKit capture complete');
     if (!report.filmstrip || report.filmstrip.frames < 1) throw new Error(`Trace ${out} has no native iPad screen frames.`);

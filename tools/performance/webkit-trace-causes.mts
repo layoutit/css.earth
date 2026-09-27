@@ -31,7 +31,7 @@ export function traceCauses(value: unknown, diagnostic: unknown) {
     if (!isFiniteNumber(o.id) || !isFiniteNumber(o.target) || typeof o.kind !== 'string' || typeof o.property !== 'string') return [];
     const marker = markers.get(o.id), target = byTarget.get(o.target);
     return [{ id: o.id, parentId: isFiniteNumber(o.parentId) ? o.parentId : null, kind: o.kind, property: o.property,
-      target: target ?? { id: o.target, label: 'unknown' }, frame: o.frame, structureBefore: o.structureBefore, structureAfter: o.structureAfter, arguments: o.arguments, before: o.before, after: o.after, threw: o.threw === true,
+      target: target ?? { id: o.target, label: 'unknown' }, frame: o.frame, structureBefore: o.structureBefore, structureAfter: o.structureAfter, arguments: o.arguments, mounted: o.mounted, image: o.image, before: o.before, after: o.after, threw: o.threw === true,
       startUs: marker?.startUs ?? null, endUs: marker?.endUs ?? null, stack: javascriptStack(o.stack),
       clock: marker?.startUs !== undefined && marker?.endUs !== undefined ? 'paired WebKit timestamp IDs' : 'unmatched; excluded from timing joins' }];
   });
