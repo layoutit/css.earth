@@ -10,8 +10,9 @@ import type { ProductInput, ProductRun } from '@cssearth/telescope';
 
 const ROOT = WORKSPACE;
 export const PDS_ARCHIVE_FINAL_SCHEMA = 'cssearth-pds-archive-final@1';
-/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PDS_PROGRAMS = resolve(WORKSPACE, 'tools/objects/pds/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const PDS_PROGRAMS_PATH = 'packages/telescope-cli/src/archives/pds/programs';
+export const PDS_PROGRAMS = resolve(WORKSPACE, PDS_PROGRAMS_PATH);
 const HEX32 = /^[0-9a-f]{32}$/u, SAFE_NAME = /^[A-Za-z0-9._-]+$/u, MAX_FILE_BYTES = 256 * 1024 * 1024;
 
 export interface PdsQualificationSpec {
@@ -164,7 +165,7 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
         ...(structures.length === 1 ? { decodedStructure: structures[0] } : { decodedStructures: structures }),
         uncertaintySupplied: false, worldCoordinateSystemSupplied: false, surfaceRegistrationSupplied: surfaceResolutionKm !== undefined,
         ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm, mapProjection: optionalTextField(metadata, 'mapProjection'), longitudeDirection: optionalTextField(metadata, 'longitudeDirection') }) } } };
-  const receipt = `tools/objects/pds/programs/${spec.id}.archive-final.product.json`;
+  const receipt = `${PDS_PROGRAMS_PATH}/${spec.id}.archive-final.product.json`;
   const record = await writeProductRecord(recordPath, run, files.map(file => ({ path: file.name, file: resolve(work, file.name),
     ...(file.name === science.name ? { units: dataUnits, conventions: { filters: bands.map(band => `${band.filter}: ${band.interval[0]} to ${band.interval[1]} micrometres`).join('; '),
       registration: surfaceResolutionKm === undefined ? 'detector image only; no body-surface registration' : `${optionalTextField(metadata, 'mapProjection')} map at ${surfaceResolutionKm} km/pixel`, qualification: spec.use } } : {}) })),
