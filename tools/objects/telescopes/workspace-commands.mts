@@ -18,7 +18,8 @@ export async function runWorkspaceCommand(root: string, command: WorkspaceComman
   child.on('message', message => { answer ??= parseProcessAnswer(message); });
   const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => accept(status ?? (signal === 'SIGINT' ? 130 : 143))); });
   if (answer && 'failure' in answer) throw raisedProcessFailure(answer.failure);
-  return answer?.result ?? { text: '', code };
+  if (!answer) throw new Error(`${command.script} exited with ${code} without answering.`);
+  return answer.result;
 }
 
 /** Run a workspace entry whose result is the files it writes; a non-zero exit is an error. */
