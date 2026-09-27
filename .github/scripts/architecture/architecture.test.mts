@@ -6,7 +6,8 @@ import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWor
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
 import { readCiSteps } from '../ci/check-ci.mts';
-import { formatDelta } from './report.mts';
+import { formatDelta, formatFindings } from './report.mts';
+import { isBroken, REPOSITORY_RULES, repositoryFindings } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
 import { isTestPath, zoneOf } from './zones.mts';
@@ -274,4 +275,14 @@ test('Contract lint, and so pnpm check:ci, runs the check after the packages are
   const build = steps.indexOf('node .github/scripts/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
   assert.ok(build >= 0, 'the lint job builds the shared packages');
   assert.ok(check > build, 'the lint job runs pnpm check:architecture after that build');
+});
+
+test('a repository rule has no baseline: any finding breaks the check and is printed', () => {
+  const rule = { id: 'no-x', description: 'no file is named x', check: (_root: string, files: readonly string[]) => files.filter(file => file.endsWith('/x')) };
+  const clean = repositoryFindings('/unused', ['a/y'], [rule]), found = repositoryFindings('/unused', ['a/y', 'a/x'], [rule]);
+  assert.equal(isBroken(clean), false);
+  assert.equal(isBroken(found), true);
+  assert.doesNotMatch(formatFindings(clean), /broken/u);
+  assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
+  assert.ok(REPOSITORY_RULES.some(item => item.id === 'nebula-boundaries'), 'the nebula boundary checks are an architecture rule');
 });

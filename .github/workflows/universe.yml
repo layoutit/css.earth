@@ -159,8 +159,9 @@ jobs:
         run: node .github/scripts/ci/build-ci.mts lint
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
-        # .github/scripts/architecture/baseline.json does not record. It reads every source file this sparse tree keeps, so a
-        # missing one stops it as incomplete rather than passing. About three seconds.
+        # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
+        # the nebula boundaries), which has no baseline. It reads every source file this sparse tree keeps, so a
+        # missing one stops it as incomplete rather than passing. About eight seconds.
         run: pnpm check:architecture
       - name: Test the shared object libraries
         # The node tests of @cssearth/bake/objects/<topic> stay beside the pipelines in tools/objects/, which no other PR step
@@ -582,12 +583,11 @@ jobs:
         run: pnpm test:packages
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps --only-shell chromium
-      - name: Check all nebula packages, tests and dependency boundaries
+      - name: Check all nebula packages and tests
+        # Their dependency boundaries are the architecture check's nebula-boundaries rule, which Contract lint runs on every change.
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-        run: |
-          pnpm typecheck:nebula
-          pnpm check:nebula-boundaries
+        run: pnpm typecheck:nebula
       - name: Test numerical owners, durable jobs and isolated React controls
         # Explicit cache-independent selection. Do not substitute test:lab:nebula:
         # that command restores real source assets before running the wider suite.

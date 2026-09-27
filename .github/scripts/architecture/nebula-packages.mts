@@ -1,10 +1,10 @@
-/** Enforce the internal nebula dependency graph against actual source imports. */
+/** Enforce the internal nebula dependency graph against actual source imports. The architecture check runs it as its
+ * `nebula-boundaries` rule (`rules.mts`), with the inbound closure in `nebula-inbound.mts`. */
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { dirname, resolve, relative, extname } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
 import ts from 'typescript';
 import { isBuiltin } from 'node:module';
-import { checkNebulaInboundBoundaries } from './inbound-boundaries.mts';
+import { checkNebulaInboundBoundaries } from './nebula-inbound.mts';
 
 export const nebulaPackages = {
   lab: '@cssearth/nebula-lab',
@@ -211,11 +211,4 @@ export function checkNebulaBoundaries(root: string, requireAll = true): string[]
   }
   if (bake) checkBakeVolume(root, bakeDirectory, bake, objectIds, errors);
   return [...errors, ...checkNebulaInboundBoundaries(root)];
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-  const errors = checkNebulaBoundaries(root);
-  if (errors.length) { console.error(errors.join('\n')); process.exitCode = 1; }
-  else console.log(`NEBULA_BOUNDARIES_OK: all ${owners.length} private packages and ${bakeVolumeEntries.main} follow their public dependency graph`);
 }

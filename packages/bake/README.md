@@ -68,8 +68,8 @@ packages/bake/
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
 
-The nebula boundary checks (`pnpm check:nebula-boundaries`, from `tools/nebula/package-boundaries.mts` and
-`inbound-boundaries.mts`) keep the old packages' guarantees on this entry: the runtime closure imports nothing from
+The nebula boundary checks (the `nebula-boundaries` rule of `pnpm check:architecture`, in
+`.github/scripts/architecture/nebula-packages.mts` and `nebula-inbound.mts`) keep the old packages' guarantees on this entry: the runtime closure imports nothing from
 `@cssearth/bake`, the lab's reconstruction and viewer packages may import `@cssearth/bake/volume` but not its node
 entry, the main volume entry imports no platform dependency, and no volume source names an object, an object path or
 another topic.

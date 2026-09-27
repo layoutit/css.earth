@@ -5,7 +5,8 @@ import { hasErrorCode } from '@cssearth/core';
 import { resolve } from 'node:path';
 import { BASELINE_PATH, compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure, type Baseline, type Delta } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, folderStats, layerOrder } from './folders.mts';
-import { buildImportGraph } from './graph.mts';
+import { buildImportGraph, repositoryFiles } from './graph.mts';
+import { isBroken, REPOSITORY_RULES, repositoryFindings } from './repository-rules.mts';
 import { LAYER_RULES } from './rules.mts';
 
 const UPDATE_HINT = 'Run `pnpm check:architecture --update-baseline` and commit .github/scripts/architecture/baseline.json.';
@@ -55,6 +56,18 @@ export function formatDelta(delta: Delta): string {
   return lines.join('\n');
 }
 
+/** The repository rules' counts, then each broken rule with its findings. */
+export function formatFindings(findings: ReadonlyMap<string, readonly string[]>): string {
+  const lines = [...findings].map(([rule, items]) => `${rule}: ${items.length} findings (no baseline; any finding fails)`);
+  const broken = [...findings].filter(([, items]) => items.length > 0);
+  if (broken.length) lines.push('', 'Repository rules broken:');
+  for (const [rule, items] of broken) {
+    lines.push(`  ${rule}: ${REPOSITORY_RULES.find(item => item.id === rule)?.description ?? rule}`);
+    for (const item of items) lines.push(`    ${item}`);
+  }
+  return lines.join('\n');
+}
+
 async function readBaseline(root: string): Promise<Baseline> {
   return decodeBaseline(JSON.parse(await readFile(resolve(root, BASELINE_PATH), 'utf8')));
 }
@@ -68,15 +81,19 @@ export async function check(root: string, update: boolean): Promise<boolean> {
     throw error;
   });
   const delta = baseline && compare(baseline, measurement);
+  const findings = repositoryFindings(root, repositoryFiles(root));
+  const broken = isBroken(findings);
   const seconds = ((performance.now() - started) / 1000).toFixed(1);
   if (delta) console.log(formatDelta(delta));
+  console.log(formatFindings(findings));
   if (update) {
     const next = createBaseline(measurement);
     await writeFile(resolve(root, BASELINE_PATH), formatBaseline(next));
     console.log(`\nWrote ${BASELINE_PATH}: largest cycle ${next.cycles.largestCycle} folders, ${next.cycles.cycleClosingEdges.length} cycle-closing edges (${seconds} s).`);
-    return true;
+    if (broken) console.log('The baseline never records a repository rule finding: fix those before the check can pass.');
+    return !broken;
   }
-  const worse = delta !== undefined && isWorse(delta);
+  const worse = (delta !== undefined && isWorse(delta)) || broken;
   console.log(`\n${worse ? 'ARCHITECTURE_WORSE' : 'ARCHITECTURE_OK'}: compared with ${BASELINE_PATH} in ${seconds} s.`);
   return !worse;
 }

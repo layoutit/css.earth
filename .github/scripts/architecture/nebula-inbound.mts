@@ -1,4 +1,5 @@
-/** Inbound protection for the production application and its preparation closure.
+/** Inbound protection for the production application and its preparation closure, run by the architecture check's
+ * `nebula-boundaries` rule through `nebula-packages.mts`.
  * Unknown computed imports are rejected in the compact preparation adapter and when
  * their expression references nebula paths. General plugin loaders are not subjected
  * to blanket data-flow claims; literal/const/alias imports are resolved below.
@@ -37,7 +38,8 @@ function policy(path: string): Policy {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/')) return 'test';
   // `@cssearth/telescope-cli` is the telescope command, preparation tooling that was `tools/objects/telescopes/` before it
   // became a package: it imports the bake by design, as that folder did.
-  if (path.startsWith('tools/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
+  // `.github/scripts` holds the CI and repository checks: tooling, like `tools/`.
+  if (path.startsWith('tools/') || path.startsWith('.github/scripts/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
       /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }
@@ -165,7 +167,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
     if (direct) for (const candidate of [direct, ...['.ts', '.mts', '.tsx', '.js', '/index.ts'].map(ext => direct + ext)]) if (isFile(candidate)) return canonical(candidate);
     return direct;
   }
-  const sourceFiles = [...['src', 'site', 'tools', 'packages'].flatMap(path => files(resolve(root, path))),
+  const sourceFiles = [...['src', 'site', 'tools', '.github/scripts', 'packages'].flatMap(path => files(resolve(root, path))),
     ...readdirSync(root).filter(path => sourcePattern.test(path) && isFile(resolve(root, path))).map(path => resolve(root, path))];
   type Node = { label: string; imports: Import[]; accesses: { path: string; line: number }[]; unchecked: boolean; uncheckedBake: boolean; edges: { file: string; erased: boolean }[]; packages: { name: PackageName; erased: boolean; specifier: string }[] };
   const graph = new Map<string, Node>();

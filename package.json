@@ -38,7 +38,7 @@
     "check:directory-growth": "node .github/scripts/checks/check-directory-growth.mts",
     "check:ci": "node .github/scripts/ci/check-ci.mts",
     "check:pr": "node .github/scripts/ci/check-ci.mts",
-    "check:nebula-boundaries": "node tools/nebula/package-boundaries.mts",
+    "check:nebula-boundaries": "pnpm check:architecture",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
     "ipad": "node tools/cli/ipad.mts",
     "ipad:screen": "node tools/performance/ios-capture.mts --screen",
