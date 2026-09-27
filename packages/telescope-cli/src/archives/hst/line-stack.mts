@@ -36,7 +36,7 @@ import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { sha256 } from '@cssearth/core/node';
 import { addProductEvidence, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
-import { PROGRAMS } from './archive.mts';
+import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { accumulatedImage, addSample, discMetrics, gridPoint, inSubset, limbFallOff, median, newAccumulator, parseLineStack, radialProfile, rayleighPerSample, rejectionReason, quadraticFit, sampleFor, type Handedness, type LineStackDefinition, type StackAccumulator, type StackLine } from './line-stack-reduction.mts';
 import { readHorizonsResponses, stackEphemerides, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import { type Card, DEGREE, type FrameHeader, MJD_TO_JD, type PreparedFrame, type VisitRegistration, locateAcrossSlit, locateDiscRow, readFrameHeader, readFrameRegion, reflectedSunlight, skyByColumn } from './line-stack-frames.mts';
@@ -245,8 +245,8 @@ export async function stackRun(definition: LineStackDefinition, line: StackLine,
   software: readonly ProductSoftware[]): Promise<ProductRun> {
   const pinned = new Map(definition.frames.map(frame => [frame.name, frame]));
   const inputs: ProductInput[] = [
-    { role: 'stack definition', identity: `tools/objects/hst/programs/${definition.id}.stack.json`, ...await fileSize(stackPath(definition.id)) },
-    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, ...await fileSize(resolve(PROGRAMS, definition.horizons.responses)) },
+    { role: 'stack definition', identity: `${HST_PROGRAMS.path}/${definition.id}.stack.json`, ...await fileSize(stackPath(definition.id)) },
+    { role: 'Horizons responses', identity: `${HST_PROGRAMS.path}/${definition.horizons.responses}`, ...await fileSize(resolve(PROGRAMS, definition.horizons.responses)) },
     ...[...frames].sort().map(name => {
       const frame = pinned.get(name);
       if (!frame) throw new Error(`${name} went into the stack but is not a frame the definition pins.`);
@@ -336,7 +336,7 @@ export function stackReceipt(run: LineStackRun & { mirrored?: readonly StackSet[
   return {
     schema: 'cssearth-hst-line-stack-reproduction@1',
     stack: definition.id,
-    definition: `tools/objects/hst/programs/${definition.id}.stack.json`,
+    definition: `${HST_PROGRAMS.path}/${definition.id}.stack.json`,
     target: definition.target, instrument: definition.instrument, opticalElement: definition.opticalElement,
     handedness: definition.handedness,
     frames: {

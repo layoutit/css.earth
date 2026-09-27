@@ -80,7 +80,7 @@
         "requiredCases": []
       },
       "source": {
-        "path": "tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+        "path": "packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.reproduction.json",
         "url": "https://doi.org/10.1126/sciadv.aaw7123"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F04.json slit-scan-inspect --out example-output/F04",

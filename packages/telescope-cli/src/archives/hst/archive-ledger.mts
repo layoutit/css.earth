@@ -13,7 +13,7 @@
  * is 3% of the archive; a target is matched to a shipped object by name. For a body that does not move, the archive is asked
  * what lies within a small radius of where the object's own package puts it, which is one query per positioned object.
  *
- * Each configuration's state is read from this repository, not declared: the programs pinned in tools/objects/hst/programs and
+ * Each configuration's state is read from this repository, not declared: the programs pinned in packages/telescope-cli/src/archives/hst/programs and
  * the ones that carry a reproduction receipt naming an observation of that configuration and the MAST product the program pins
  * for it. A receipt that cannot be read, states another schema or names something else is reported as a problem and proves
  * nothing. --write replaces data/hst/ledger.json and docs/hubble-ledger.md. --local rewrites only that state, from the ledger
@@ -31,7 +31,7 @@ import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireStri
 import { mastRequest } from '@cssearth/telescope/node';
 import { evidenceFor, parseProductRecord, type ProductRecord } from '@cssearth/telescope';
 import { runDigest } from '@cssearth/telescope/node';
-import { parseHstProgram, PROGRAMS } from './archive.mts';
+import { HST_PROGRAMS, parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
 import { isCommand, ledgerFiles, nameList, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
@@ -230,7 +230,7 @@ export function archiveFinalQualification(program: ArchiveFinalProgram, record: 
 
 /** Every archive-final program in this repository, by the configuration it pins, with the ones a record qualifies. */
 export async function repositoryArchiveFinal(repository = REPOSITORY) {
-  const directory = resolve(repository, 'tools/objects/hst/programs'), files = (await readdir(directory).catch(() => [])).sort();
+  const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory).catch(() => [])).sort();
   const state = new Map<string, { programs: Set<string>; qualified: Set<string> }>(), problems: string[] = [];
   for (const file of files.filter(name => name.endsWith('.archive-final.json'))) {
     const id = file.slice(0, -'.archive-final.json'.length);
@@ -254,7 +254,7 @@ export async function repositoryArchiveFinal(repository = REPOSITORY) {
  * could not be accepted. A program counts as re-calibrated in a configuration only when a receipt names one of its observations
  * in that configuration and the MAST product the program pins for it, with the digest of what it compared. */
 export async function repositoryReceipts(repository = REPOSITORY) {
-  const directory = resolve(repository, 'tools/objects/hst/programs'), files = (await readdir(directory)).sort();
+  const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory)).sort();
   const state = new Map<string, { programs: Set<string>; checked: Set<string> }>(), problems: string[] = [];
   // A pinned program is `<id>.json`. Everything else here carries a second name segment (a reproduction receipt, a line
   // stack, the Horizons responses a line stack pins) and is not a program.

@@ -97,7 +97,7 @@
       "enlarge": 2,
       "product": {
         "command": "node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt",
-        "definition": "tools/objects/hst/programs/europa-salt-map.scan.json"
+        "definition": "packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json"
       },
       "note": "The four scans leave gaps; grey is where no scan reached or the surface was seen more than 60 degrees from face on."
     },

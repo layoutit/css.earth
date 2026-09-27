@@ -6,7 +6,7 @@ const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { PROGRAMS } from './archive.mts';
+import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { parseReproductionReceipt, recalibrationTool, repositoryReceipts } from './archive-ledger.mts';
 
 const read = async (name: string) => JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as Record<string, unknown>;
@@ -14,7 +14,7 @@ const read = async (name: string) => JSON.parse(await readFile(resolve(PROGRAMS,
 /** A scratch repository holding europa-15419, which pins one WFC3/UVIS observation and one STIS/CCD observation, and whatever
  * receipts a case writes beside it. The two configurations are what the states have to keep apart. */
 async function scratch(receipts: Readonly<Record<string, unknown>>) {
-  const root = await mkdtemp(resolve(tmpdir(), 'hst-ledger-')), directory = resolve(root, 'tools/objects/hst/programs');
+  const root = await mkdtemp(resolve(tmpdir(), 'hst-ledger-')), directory = resolve(root, HST_PROGRAMS.path);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, 'europa-15419.json'), `${JSON.stringify(await read('europa-15419.json'), null, 2)}\n`);
   for (const [name, value] of Object.entries(receipts))
@@ -70,7 +70,7 @@ test('every receipt beside the pinned programs is accepted', async () => {
 
 /** A scratch repository holding one archive-final program and whatever record a case writes beside it. */
 async function archiveScratch(record: unknown, program = 'europa-ghrs-5376') {
-  const root = await mkdtemp(resolve(tmpdir(), 'hst-archive-final-')), directory = resolve(root, 'tools/objects/hst/programs');
+  const root = await mkdtemp(resolve(tmpdir(), 'hst-archive-final-')), directory = resolve(root, HST_PROGRAMS.path);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, `${program}.archive-final.json`), `${JSON.stringify(await read(`${program}.archive-final.json`), null, 2)}\n`);
   if (record !== undefined) await writeFile(resolve(directory, `${program}.archive-final.product.json`), typeof record === 'string' ? record : `${JSON.stringify(record, null, 2)}\n`);
@@ -98,7 +98,7 @@ test('a program that moves a component to another unit of the same file is not q
   const program = await read('europa-wfpc2-11085.archive-final.json') as Record<string, unknown>;
   const record = await read('europa-wfpc2-11085.archive-final.product.json');
   const moved = { ...program, components: (program.components as Record<string, unknown>[]).map(entry => entry.role === 'science' ? { ...entry, hdu: 2 } : entry) };
-  const root = await mkdtemp(resolve(tmpdir(), 'hst-archive-final-')), directory = resolve(root, 'tools/objects/hst/programs');
+  const root = await mkdtemp(resolve(tmpdir(), 'hst-archive-final-')), directory = resolve(root, HST_PROGRAMS.path);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, 'europa-wfpc2-11085.archive-final.json'), `${JSON.stringify(moved, null, 2)}\n`);
   await writeFile(resolve(directory, 'europa-wfpc2-11085.archive-final.product.json'), `${JSON.stringify(record, null, 2)}\n`);

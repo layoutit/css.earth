@@ -20,8 +20,8 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const repository = WORKSPACE;
-/** The toolchain's pins (descriptor and lock) stay in the checkout beside the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'tools/objects/hst');
+/** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/hst');
 export const HST_ROOT = resolve(repository, 'output/toolchains/hst');
 
 export async function installHst() {

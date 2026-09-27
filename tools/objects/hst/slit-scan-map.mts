@@ -25,7 +25,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHdus } from '@cssearth/fits';
 import { requireFiniteNumber } from '@cssearth/core';
-import { PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
+import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@cssearth/bake/objects/layers/observation';
@@ -290,7 +290,7 @@ export function scanReceipt(run: SlitScanRun) {
     leading: hemisphere(from.map.depth, from.map.error, 0, 180), trailing: hemisphere(from.map.depth, from.map.error, 180, 360) });
   return {
     schema: 'cssearth-hst-slit-scan-map-reproduction@1',
-    scan: definition.id, definition: `tools/objects/hst/programs/${definition.id}.scan.json`,
+    scan: definition.id, definition: `${HST_PROGRAMS.path}/${definition.id}.scan.json`,
     target: definition.target, instrument: definition.instrument, opticalElement: definition.opticalElement, aperture: definition.aperture,
     band: { id: definition.band.id, quantity: definition.band.quantity, units: definition.band.units,
       bandAngstrom: definition.band.bandAngstrom, continuumWindowsAngstrom: definition.band.continuumWindowsAngstrom, continuumOrder: definition.band.continuumOrder,
@@ -418,10 +418,10 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
   await writeFile(resolve(outputDirectory, `${name}.body-map.json`), metadata);
   await writeFile(resolve(outputDirectory, 'registration.json'), registration);
   const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(PROGRAMS, definition.horizons.responses));
-  const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `tools/objects/hst/programs/${definition.id}.scan.json`, bytes: definitionBytes.byteLength },
+  const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `${HST_PROGRAMS.path}/${definition.id}.scan.json`, bytes: definitionBytes.byteLength },
     ...definition.frames.map(frame => ({ role: frame.rejected ? 'rejected archive frame' : 'archive rectified frame', identity: frame.uri, bytes: frame.bytes })),
     { role: 'solar reference', identity: definition.reference.url, bytes: definition.reference.bytes },
-    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, bytes: responsesBytes.byteLength },
+    { role: 'Horizons responses', identity: `${HST_PROGRAMS.path}/${definition.horizons.responses}`, bytes: responsesBytes.byteLength },
     { role: 'rotation model', identity: definition.orientation.path, bytes: rotationBytes.byteLength }];
   const software: ProductSoftware[] = [{ name: 'cssEarth slit-scan-map', version: '1' }, { name: 'node', version: process.versions.node }];
   const record = bodyMapProductRecord(product, fits, metadata, inputs, software, undefined, [{ path: 'registration.json', bytes: registration }]);

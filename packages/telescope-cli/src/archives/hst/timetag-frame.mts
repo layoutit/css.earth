@@ -31,7 +31,7 @@ import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { assertInputPins, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/telescope';
-import { PROGRAMS } from './archive.mts';
+import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import {
   azimuthalRatio, backgroundSurface, findDisc, goodTimeIntervals, gridLatitudeDegrees, inGoodTime, limbStatistics, liveSeconds,
@@ -380,7 +380,7 @@ export function timeTagReceipt(run: TimeTagRun) {
   return {
     schema: 'cssearth-hst-timetag-frame-reproduction@1',
     stack: definition.id,
-    definition: `tools/objects/hst/programs/${definition.id}.timetag.json`,
+    definition: `${HST_PROGRAMS.path}/${definition.id}.timetag.json`,
     target: definition.target, instrument: definition.instrument, opticalElement: definition.opticalElement,
     aperture: definition.aperture, programme: definition.programme, rootname: definition.rootname,
     exposure: {
@@ -435,7 +435,7 @@ export async function writeRecord(run: TimeTagRun, outputDirectory: string, writ
     },
     software: [{ name: 'node', version: process.versions.node }, { name: 'cssearth-hst-timetag-frame', version: '1' }],
   };
-  const receipt = `tools/objects/hst/programs/${definition.id}.timetag.reproduction.json`;
+  const receipt = `${HST_PROGRAMS.path}/${definition.id}.timetag.reproduction.json`;
   const evidence: ProductEvidence[] = [
     { kind: 'geometric-registration', receipt, product: image,
       establishes: `The target was followed across the detector and the events recounted on its own grid; the fitted drift misses the measured slice centres by ${run.trackResidualPixels.length ? Math.max(...run.trackResidualPixels).toFixed(2) : '0'} detector pixels at worst.` },
