@@ -83,7 +83,7 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/beta-pictoris-disc/source/previews/visible.png
 
 # WASP-43b JWST reductions written by this repository's own pipeline
-# (tools/objects/jwst/reduce-tso.mts); repinned when the reduction reruns.
+# (packages/telescope-cli/src/archives/jwst/reduce-tso.mts); repinned when the reduction reruns.
 !src/objects/wasp-43b/source/science/jwst-1366-miri/white-5.0-10.5um.csv
 !src/objects/wasp-43b/source/science/jwst-1366-miri/stellar-counts.csv
 !src/objects/wasp-43b/source/science/bell-2024/eureka-v1-white-5.0-10.5um.csv

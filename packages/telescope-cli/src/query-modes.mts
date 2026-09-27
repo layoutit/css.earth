@@ -4,7 +4,7 @@ import { inputWavelengths } from './recipe-request.mts';
 import { matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
 import { assessInput, assessRequest } from './request-satisfaction.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { JWST_CUBE_COVERAGE } from '../../../tools/objects/jwst/imaging/bands.mts';
+import { JWST_CUBE_COVERAGE } from './archives/jwst/imaging/bands.mts';
 import { sourceQualifiedObservations, type LoadedSourceProduct } from './source-products.mts';
 import { qualificationActionsFor } from './qualification-routes.mts';
 import type { TargetAssociation } from '@cssearth/telescope/node';

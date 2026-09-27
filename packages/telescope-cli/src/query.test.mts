@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { BODY_MAP_SCHEMA } from '@cssearth/bake/objects/layers/observation';
-import { JWST_CUBE_COVERAGE } from '../../../tools/objects/jwst/imaging/bands.mts';
+import { JWST_CUBE_COVERAGE } from './archives/jwst/imaging/bands.mts';
 import { assessObservationSelection, formatAnswer, QUERY_HELP, queryCapabilities, selectObservation } from './query.mts';
 import { mergeIntervals, parseModeCapabilities } from './query-modes.mts';
 import { MODES_SCHEMA, type Candidate, type CapabilityAnswer, type QueryInputs } from './query-contract.mts';
@@ -30,16 +30,16 @@ const CAPABILITIES = parseModeCapabilities({ schema: MODES_SCHEMA, modes: [
   { telescope: 'Juno', mode: 'JUNOCAM', wavelengths: [[0.42, 0.9]], pixelScaleArcsec: 138.7, kinds: ['strips'], citation }] });
 
 const JWST_LEDGER = { schema: 'cssearth-jwst-ledger@1', archiveDate: '2026-09-19', modes: [
-  { mode: 'NIRSPEC/IFU', tool: 'tools/objects/jwst/cubes/spec3.mts', programs: ['europa-1250', 'sn-1987a-1232'], checked: ['europa-1250'] },
+  { mode: 'NIRSPEC/IFU', tool: 'packages/telescope-cli/src/archives/jwst/cubes/spec3.mts', programs: ['europa-1250', 'sn-1987a-1232'], checked: ['europa-1250'] },
   { mode: 'MIRI/IFU', tool: null, programs: [], checked: [] },
-  { mode: 'NIRCAM/CORON', tool: 'tools/objects/jwst/imaging/coron3.mts', programs: ['hd-181327-2780'], checked: ['hd-181327-2780'] },
-  { mode: 'NIRCAM/IMAGE', tool: 'tools/objects/jwst/imaging/image3.mts', programs: ['ngc-3132-2733'], checked: [] }],
+  { mode: 'NIRCAM/CORON', tool: 'packages/telescope-cli/src/archives/jwst/imaging/coron3.mts', programs: ['hd-181327-2780'], checked: ['hd-181327-2780'] },
+  { mode: 'NIRCAM/IMAGE', tool: 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts', programs: ['ngc-3132-2733'], checked: [] }],
   objects: [{ id: 'europa', observations: { 'NIRSPEC/IFU': 13, 'MIRI/IFU': 12, 'NIRCAM/IMAGE': 6 }, programmes: ['1250', '4023'], drawn: ['NIRSPEC/IFU'] },
     { id: 'hd-181327', observations: { 'NIRCAM/CORON': 12 }, programmes: ['2780'], drawn: ['NIRCAM/CORON'] }] };
 const HST_LEDGER = { schema: 'cssearth-hst-ledger@1', archiveDate: '2026-09-19', configurations: [
-  { configuration: 'STIS/CCD', tool: 'tools/objects/hst/calibrate.mts', programs: ['europa-14650'], checked: ['europa-14650'] },
-  { configuration: 'STIS/FUV-MAMA', tool: 'tools/objects/hst/calibrate.mts', programs: ['europa-13040'], checked: ['europa-13040'] },
-  { configuration: 'STIS/NUV-MAMA', tool: 'tools/objects/hst/calibrate.mts', programs: [], checked: [] }],
+  { configuration: 'STIS/CCD', tool: 'packages/telescope-cli/src/archives/hst/calibrate.mts', programs: ['europa-14650'], checked: ['europa-14650'] },
+  { configuration: 'STIS/FUV-MAMA', tool: 'packages/telescope-cli/src/archives/hst/calibrate.mts', programs: ['europa-13040'], checked: ['europa-13040'] },
+  { configuration: 'STIS/NUV-MAMA', tool: 'packages/telescope-cli/src/archives/hst/calibrate.mts', programs: [], checked: [] }],
   movingTargets: [{ object: 'europa', observations: 895, configurations: ['STIS/CCD', 'STIS/FUV-MAMA', 'STIS/NUV-MAMA'] }], fixedTargets: [] };
 const CHANDRA_LEDGER = { schema: 'cssearth-chandra-ledger@1', measured: '2026-09-19', archive: { byInstrument: { 'HRC-I': 2006, 'ACIS-S': 14_863 } },
   modes: { 'ACIS-S no grating TIMED/FAINT': { state: 'reproduced', program: 'jupiter-acis', obsid: 18_676, target: 'Jupiter' } },
@@ -189,7 +189,7 @@ test('a cited target-in-field association exposes exact observations without cha
     { id: 'j96o01010', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427', mode: 'ACS/WFC', startIso: '2005-05-15T00:21:00.197Z', endIso: '2005-05-15T01:56:09.210Z', filter: 'F606W' },
     { id: 'j96o02010', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427', mode: 'ACS/WFC', startIso: '2005-05-18T03:06:58.213Z', endIso: '2005-05-18T03:46:03.197Z', filter: 'F606W' }] });
   const ledger = { ...HST_LEDGER, configurations: [...HST_LEDGER.configurations,
-    { configuration: 'ACS/WFC', tool: 'tools/objects/hst/calibrate.mts', programs: [], checked: [], archiveFinal: { programs: [], qualified: [] } }] };
+    { configuration: 'ACS/WFC', tool: 'packages/telescope-cli/src/archives/hst/calibrate.mts', programs: [], checked: [], archiveFinal: { programs: [], qualified: [] } }] };
   const answer = queryCapabilities({ target: 'nix', wavelengthMicrometres: [0.5, 0.7], time: { any: true }, angularResolutionArcsec: 1,
     kind: 'image', result: 'telescope-product' }, inputs([{ telescope: 'hst', value: ledger }], { targetAssociations: associations }));
   const acs = candidate(answer, 'ACS/WFC');
@@ -347,7 +347,7 @@ test('toolkit support separates a checked program of this target from a tool tha
   assert.deepEqual([nirspec.toolkitSupport.targetProgramPinned, nirspec.toolkitSupport.targetProgramChecked], [true, true]);
   assert.deepEqual([nirspec.toolkitSupport.productionMethod, nirspec.toolkitSupport.evidenceBasis, nirspec.toolkitSupport.acceptanceCriterion],
     ['local-pipeline', 'accepted-route-receipts', 'receipt-valid-for-pinned-program']);
-  assert.equal(nirspec.toolkitSupport.tool, 'tools/objects/jwst/cubes/spec3.mts');
+  assert.equal(nirspec.toolkitSupport.tool, 'packages/telescope-cli/src/archives/jwst/cubes/spec3.mts');
   assert.equal(candidate(answer, 'NIRCAM/IMAGE').toolkitSupport.level, 'tool-without-checked-program');
   assert.equal(candidate(answer, 'MIRI/IFU').toolkitSupport.level, 'none');
   assert.equal(candidate(answer, 'JUNOCAM').toolkitSupport.level, 'proven');

@@ -1,6 +1,6 @@
 # JWST ledger
 
-This page is written by [`archive-ledger.mts`](../tools/objects/jwst/archive-ledger.mts) from MAST's public archive as it stood on 2026-09-22, and from the programs pinned in this repository. It answers two questions: what kinds of JWST observation can this project already turn into something drawn, and which of the objects it ships has JWST observed. The numbers are in [`data/jwst/ledger.json`](../data/jwst/ledger.json). How each route works is in [JWST imaging](jwst-imaging.md) and [eclipse mapping](eclipse-mapping.md).
+This page is written by [`archive-ledger.mts`](../packages/telescope-cli/src/archives/jwst/archive-ledger.mts) from MAST's public archive as it stood on 2026-09-22, and from the programs pinned in this repository. It answers two questions: what kinds of JWST observation can this project already turn into something drawn, and which of the objects it ships has JWST observed. The numbers are in [`data/jwst/ledger.json`](../data/jwst/ledger.json). How each route works is in [JWST imaging](jwst-imaging.md) and [eclipse mapping](eclipse-mapping.md).
 
 ## Observing modes
 

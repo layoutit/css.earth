@@ -1,5 +1,5 @@
 /** From raw JWST exposures to an eclipse map: HD 189733b's two MIRI eclipses (program 2021, observations 002 and 011), reduced from
- * raw by tools/objects/jwst/reduce-tso.mts, fitted here with Lally et al. (2025)'s model and compared with the map they deposited
+ * raw by packages/telescope-cli/src/archives/jwst/reduce-tso.mts, fitted here with Lally et al. (2025)'s model and compared with the map they deposited
  * (Zenodo 15103479, output_E.npy). The run's outputs are ignored files, so the test runs where they are present.
  *
  * The model follows their ThERESA configuration, MIRI only: degree 5 with 3 eigencurves and positive emission; eclipse 1 clipped
@@ -82,7 +82,7 @@ function compareWithDeposit(fitted: Awaited<ReturnType<typeof fitMap>>, deposit:
 test('a map fitted to HD 189733b\'s two MIRI eclipses reduced from raw reproduces Lally et al. (2025)\'s deposited map', async context => {
   const paths = [resolve(run('002'), 'ours-white.csv'), resolve(run('011'), 'ours-white.csv'), resolve(run('002'), 'author-map.json'), resolve(run('002'), 'author-white.csv'), resolve(run('011'), 'author-white.csv')];
   if (!(await Promise.all(paths.map(path => access(path).then(() => true, () => false)))).every(Boolean)) {
-    context.skip('reduce programs hd-189733b-miri-2021-002 and -011 with tools/objects/jwst/reduce-tso.mts to cover this');
+    context.skip('reduce programs hd-189733b-miri-2021-002 and -011 with packages/telescope-cli/src/archives/jwst/reduce-tso.mts to cover this');
     return;
   }
   const deposit = (JSON.parse(await readFile(paths[2]!, 'utf8')) as { fmap: number[][] }).fmap;

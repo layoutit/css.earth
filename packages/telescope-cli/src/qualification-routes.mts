@@ -1,6 +1,6 @@
 import { flagValue } from '@cssearth/core';
-import { JWST_CUBE_COVERAGE } from '../../../tools/objects/jwst/imaging/bands.mts';
-import { bandOfFilters } from '../../../tools/objects/jwst/imaging/archive.mts';
+import { JWST_CUBE_COVERAGE } from './archives/jwst/imaging/bands.mts';
+import { bandOfFilters } from './archives/jwst/imaging/archive.mts';
 import { validateCapabilityRequest, type CapabilityRequest } from './recipe-request.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 

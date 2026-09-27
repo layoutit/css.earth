@@ -26,10 +26,10 @@ TRAPPIST-1b is measured. Longitude 0 faces the star.
 **Thermal map.** The lens is the 15 µm brightness temperature of a bare rock that this project fitted to JWST data it reduced from
 raw exposures. The data are the ten MIRI/F1500W visits Gillon, Ducrot et al. (2025) fitted together: the 59-hour phase curve of
 program 3077 (108 raw segments), five eclipses of b from program 1177 (Greene et al. 2023) and four eclipses of c from program 2304
-(Zieba et al. 2023). Each visit was reduced with [`reduce-tso.mts`](../../../tools/objects/jwst/reduce-tso.mts) on Bell's Eureka!
+(Zieba et al. 2023). Each visit was reduced with [`reduce-tso.mts`](../../../packages/telescope-cli/src/archives/jwst/reduce-tso.mts) on Bell's Eureka!
 settings, except the aperture, which counts edge pixels by their area inside the circle: Bell's whole-pixel aperture includes 78 or
 79 pixels as the star moves by 0.01 pixel, which put steps of about 650 ppm into his light curve. The ten visits were then fitted
-together by [`joint-emission.mts`](../../../tools/objects/jwst/joint-emission.mts) with Bell's model: transits and eclipses of b, c
+together by [`joint-emission.mts`](../../../packages/telescope-cli/src/archives/jwst/joint-emission.mts) with Bell's model: transits and eclipses of b, c
 and g, c's phase curve, a baseline, pointing terms and a Gaussian process for the star's own variability. What is left is b's own
 emission, [`b-emission-15um.csv`](source/science/jwst-trappist-1/b-emission-15um.csv). The lens fits a bare rock to it with
 [`bare-rock.ts`](../../../packages/bake/src/objects/raster/eclipse-map/bare-rock.ts), converting temperature to 15 µm flux through the F1500W response

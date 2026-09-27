@@ -25,7 +25,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHdus } from '@cssearth/fits';
 import { requireFiniteNumber } from '@cssearth/core';
-import { PROGRAMS } from './archive.mts';
+import { PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@cssearth/bake/objects/layers/observation';
@@ -33,8 +33,8 @@ import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyM
 import { sha256 as digestOf } from '@cssearth/core/node';
 import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
-import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from './slit-scan-reduction.mts';
-import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from './slit-scan-frames.mts';
+import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';
+import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from '@cssearth/telescope-cli/archives/hst/slit-scan-frames';
 
 /** The pinned reference spectrum, read from the binary table it is distributed as. Only two single-precision columns are
  * taken, named in the definition, and the wavelengths must rise; nothing else about the file is assumed. */

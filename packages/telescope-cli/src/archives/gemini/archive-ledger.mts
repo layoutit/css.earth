@@ -213,7 +213,7 @@ export async function galileanRows(today: string): Promise<MoonRow[]> {
     const key = [moon, row.instrument_name, row.type, row.intent, row.energy_bandpassName].join('|');
     const entry = byKey.get(key) ?? { frames: 0, programmes: new Set<string>(),
       row: { moon, instrument: row.instrument_name ?? '', type: row.type ?? '', intent: row.intent ?? '',
-        filter: row.energy_bandpassName ?? '' } };
+        filter: row.energy_bandpassName ?? '' } satisfies Omit<MoonRow, 'frames' | 'programmes'> };
     entry.frames += Number(row.n); entry.programmes.add(row.proposal_id ?? '');
     byKey.set(key, entry);
   }

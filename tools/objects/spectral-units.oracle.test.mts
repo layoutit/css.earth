@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readOracleFixture } from '../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { brightnessTemperatureKelvin, planckIntensity } from './interferometry/alma-disc-selfcal.mts';
-import { rayleighPerSample } from './hst/line-stack-reduction.mts';
+import { rayleighPerSample } from '@cssearth/telescope-cli/archives/hst/line-stack-reduction';
 
 const fixture = await readOracleFixture('physical-units/spectral.json');
 function relativeClose(actual: number, expected: number, label: string, tolerance = 3e-12) {

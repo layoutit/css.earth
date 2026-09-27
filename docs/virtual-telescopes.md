@@ -681,7 +681,7 @@ the MAST collection, exact observation ids, and the source that establishes the 
 does not copy the programme, instrument, filter, time, or archive target. The query asks current MAST rows for those facts
 through the pinned Astroquery client and refuses missing, duplicate, extra, or wrong-collection results. It therefore can find
 Nix in Hubble programme 10427's two ACS/WFC F606W visits while still reporting that MAST calls those pointings `PLUTO`; it
-does not turn every Pluto exposure into a Nix observation. `node tools/cli/run-typed-module.mjs tools/objects/hst/target-associations.mts` exercises that live boundary.
+does not turn every Pluto exposure into a Nix observation. `node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/hst/target-associations.mts` exercises that live boundary.
 
 MAST owns HST observation and product metadata. The checked-in HST ledger is a reproducible discovery snapshot and offline
 index, not an independent authority; it also records the cssEarth-specific layer MAST cannot know—available reducers, pinned
