@@ -10,6 +10,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
+import { sha256 } from '@cssearth/core/node';
 import { supportsMeasuredResolution } from '@cssearth/bake/objects/layers/observation';
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
@@ -40,9 +41,9 @@ export function bodyMapProductRecord(product: BodyMapProduct, plane: Buffer, met
   extraOutputs: readonly { readonly path: string; readonly bytes: Buffer; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }[] = []): ProductRecord {
   const planeName = product.planes.file, metadataName = `${planeName}.body-map.json`;
   return parseProductRecord({ schema: 'cssearth-telescope-product@1', ...bodyMapRun(product, inputs, software, toolchainDigest),
-    outputs: [{ path: planeName, bytes: plane.byteLength, units: product.definition.units },
-      { path: metadataName, bytes: metadata.byteLength, conventions: { schema: product.schema } },
-      ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength,
+    outputs: [{ path: planeName, bytes: plane.byteLength, sha256: sha256(plane), units: product.definition.units },
+      { path: metadataName, bytes: metadata.byteLength, sha256: sha256(metadata), conventions: { schema: product.schema } },
+      ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength, sha256: sha256(output.bytes),
         ...(output.units === undefined ? {} : { units: output.units }), ...(output.conventions === undefined ? {} : { conventions: output.conventions }) }))], evidence: [] });
 }
 
