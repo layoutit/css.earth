@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 // the object adapter do; the eight planet ids are only a reporting filter. Science code about planets lies outside.
 const root = resolve(import.meta.dirname, '../..');
 const SERVES_EVERY_OBJECT = ['site', 'src/platform', 'src/navigation', 'src/renderers', 'packages/renderer', ...['raster', 'scene', 'presentation', 'volume-leaves', 'stars', 'shell', 'sky', 'density', 'image-layers', 'environment',
-  'galaxy-catalog', 'cluster-catalog', 'world-context'].map(topic => `packages/bake/src/${topic}`), 'src/styles',
+  'galaxy-catalog', 'cluster-catalog', 'world-context', 'runtime-source'].map(topic => `packages/bake/src/${topic}`), 'packages/bake/cli', 'src/styles',
   'tools/cli', 'tools/prepare', 'tools/assets', 'tools/contract', 'tools/sources', 'tools/ci', 'atlas'];
 const SCIENCE_TERM = /exoplanet|planetar|dwarf.?planet|hosted.?planet|minor.?planet/iu;
 /** Names in those directories that do mean planets, and why. */

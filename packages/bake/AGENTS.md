@@ -47,6 +47,10 @@ its validators accept); the renderer never imports the bake.
   placed with the galaxy positions. It imports `galaxy-catalog`.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
   bodies, orbit banks, system and group views, hyperbolic paths). It imports no topic.
+- `src/runtime-source/` is published as `@cssearth/bake/runtime-source` (Node only): the runtime-source reader that
+  preparation and the runtime ownership checks share. It parses a runtime module into ESTree with its original ranges,
+  resolves its imports to source files through each package's exports and tsup entries, and reads names, keys and static
+  object properties. It imports no topic.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,

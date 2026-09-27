@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import test from 'node:test';
-import { resolveRuntimeSource } from './runtime-source-graph.mts';
+import { fileURLToPath } from 'node:url';
+import { test } from 'vitest';
+import { resolveRuntimeSource } from './runtime-source-graph.ts';
 
-const root = resolve(import.meta.dirname, '../..');
+const root = fileURLToPath(new URL('../../../..', import.meta.url));
 const options = { root, source: (path: string) => readFile(path, 'utf8') };
 const importer = resolve(root, 'site/source-documentation.mts');
 
