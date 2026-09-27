@@ -19,12 +19,22 @@ sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. Filters cover
-source, target, instrument, decision, proposal and text. Exports contain every
-matching row, independently of pagination. An empty source filter searches all
-sources. Proposal pages read current work status from SQLite on each request;
-restart the viewer after changing dataset rows. `AUDIT_DB` selects another file
-for comparisons. Open `ledger.sqlite` in a SQLite browser for direct editing.
+The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. It has three
+views. **Proposals** lists the work by priority, with status, bodies, next step
+and blocker; a proposal opens its writeup and linked records. **Bodies** groups
+proposals and records by body, with the split of record decisions. **Records**
+filters every source row by source, decision, body, instrument and proposal,
+with the count each choice would leave. Photojournal and USGS rows show their
+published preview image. Opening a row shows its files and full retained record.
+
+Search reads the whole retained record, so a PIA number, file name or label
+field finds its row. Search and the TSV and JSON exports use `slice()`, the rule
+`slice.mts` uses, so an export holds exactly the rows the page lists. A body
+filter drops the Sun when the Photojournal tags it only as a parent
+(`bodiesOf()` in `model.mts`). The page URL keeps the view, filters and open
+item, so a link reopens the same slice. The server reads the ledger once;
+restart it after editing the database. `AUDIT_DB` selects another file for
+comparisons. Open `ledger.sqlite` in a SQLite browser for direct editing.
 
 | Table               | Owns                                                                                                                                      |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -172,6 +182,9 @@ and collection receipts remain queryable in `evidence` instead of separate files
 retained evidence hashes, OPUS partition reconciliation, label byte counts,
 proposal writeups/joins, filters and exports. These checks establish ledger
 consistency, not scientific acceptance of the proposed datasets.
+
+The [records view capture](evidence/viewer-records.jpg) shows the current viewer:
+Photojournal rows for Enceladus with previews, and PIA24027 open with its files.
 
 The [browser capture](evidence/ledger-slice.jpg) records the SQLite migration viewer,
 before its heading was renamed to Astronomy data ledger.

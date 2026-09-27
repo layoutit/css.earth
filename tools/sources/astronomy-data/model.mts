@@ -11,6 +11,16 @@ export function openLedger(): DatabaseSync {
   db.exec("PRAGMA foreign_keys=ON");
   return db;
 }
+// The bodies a target field names, lowercased and without a minor-planet number ("(162173) Ryugu" is "ryugu"). The
+// Photojournal tags a body with its parents too ("mars; sun"); the Sun counts only when it is the only body tagged, so
+// filtering by the Sun does not return 1,965 images of the planets that orbit it.
+export function bodiesOf(target: string): string[] {
+  const tagged = target
+    .split(";")
+    .map((t) => t.trim().toLowerCase().replace(/^\(\d+\)\s*/, ""))
+    .filter(Boolean);
+  return tagged.length > 1 ? tagged.filter((t) => t !== "sun") : tagged;
+}
 export type Row = {
   id: string;
   source: string;
@@ -113,10 +123,7 @@ export function slice(rows: Row[], params: URLSearchParams): Row[] {
       (!params.get("instrument") ||
         r.instrument === params.get("instrument")) &&
       (!params.get("target") ||
-        r.target
-          .toLowerCase()
-          .split(/;\s*/)
-          .includes(params.get("target")!.toLowerCase())) &&
+        bodiesOf(r.target).includes(bodiesOf(params.get("target")!)[0])) &&
       (!params.get("decision") || r.decision === params.get("decision")) &&
       (!params.get("proposal") ||
         r.proposals.includes(String(Number(params.get("proposal"))))) &&

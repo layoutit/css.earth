@@ -87,6 +87,11 @@ jobs:
       - name: Install dependencies and prove the lockfile
         if: ${{ !cancelled() }}
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Check the astronomy data ledger
+        if: ${{ !cancelled() }}
+        # SQLite integrity, evidence hashes, source counts, proposal writeups and the viewer's filter and export rule.
+        # Nothing ran it after #869, so an edited ledger could drift from its own checks unseen.
+        run: node tools/sources/astronomy-data/verify.mts
       - name: Lint every authored tree
         if: ${{ !cancelled() }}
         # `tools`, `src` and `site` had no ESLint at all, so the size and boundary rules governed

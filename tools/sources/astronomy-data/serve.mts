@@ -1,195 +1,168 @@
-import { createServer } from "node:http";
+import { createServer, type ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
-import { root, loadRows, slice, tsv, loadProposals } from "./model.mts";
+import { stripTypeScriptTypes } from "node:module";
+import {
+  root,
+  loadRows,
+  loadProposals,
+  slice,
+  tsv,
+  bodiesOf,
+  type Row,
+} from "./model.mts";
+import type {
+  ViewerData,
+  ViewerRow,
+  ViewerProposal,
+} from "./viewer/shape.mts";
+// The ledger viewer: one page (viewer/index.html, viewer/app.mts) over four read-only endpoints. Search and export go
+// through slice(), the same filter rule slice.mts and verify.mts use, so what the page lists is what an export contains.
 const rows = loadRows();
-const esc = (v: unknown) =>
-  String(v ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-const template = (title: string, body: string) =>
-  `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><style>:root{color-scheme:dark;font:16px/1.55 system-ui;background:#16181b;color:#e2e5ea}body{max-width:1200px;margin:36px auto;padding:0 24px}h1{font-size:2.2rem;line-height:1.15}h2{font-size:1.1rem}a{color:#a4c9f9}form{display:flex;flex-wrap:wrap;gap:12px;padding:16px 0}label{display:flex;flex-direction:column;gap:4px}input,select,button,textarea{font:inherit;padding:7px;color:inherit;background:#24272d;border:1px solid #5d6670;border-radius:4px}select{max-width:min(24rem,80vw)}article{border-top:1px solid #42474f;padding:12px 0}.muted{color:#afb7c2}.notice{border-left:3px solid #caaa70;padding-left:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere}textarea{width:100%;height:65vh;box-sizing:border-box}nav{display:flex;gap:14px;flex-wrap:wrap}</style><body><nav><a href="/?source=">All sources</a><a href="/?source=opus">OPUS</a><a href="/?source=opus-volumes">OPUS volumes</a><a href="/?source=opus-geometry">Geometry index</a><a href="/?source=photojournal">Photojournal</a><a href="/?source=pds">PSI PDS4</a><a href="/?source=usgs">USGS</a><a href="/?source=umd">Maryland</a><a href="/?source=umd-holdings">Maryland inventory</a><a href="/?source=darts">DARTS</a><a href="/?source=darts-collections">DARTS collections</a><a href="/proposals">Proposals</a></nav>${body}</body></html>`;
-function render(params: URLSearchParams): string {
-  if (!params.has("source")) params.set("source", "opus");
-  const pageText = params.get("page") ?? "1";
-  if (!/^\d+$/.test(pageText)) throw Error("Invalid page");
-  const page = Math.max(1, Number(pageText));
-  params.delete("page");
-  const found = slice(rows, params),
-    format = params.get("format");
-  if (format === "tsv")
-    return template(
-      "Audit TSV",
-      `<h1>${found.length} exported rows</h1><p>Copy the selected TSV below. These are the complete matching rows, independent of pagination.</p><textarea readonly aria-label="Exported TSV">${esc(tsv(found))}</textarea>`,
-    );
-  if (format && format !== "json") throw Error("Unknown format");
-  const source = params.get("source") ?? "opus",
-    within = rows.filter((r) => !source || r.source === source);
-  const select = (key: "instrument" | "target" | "decision", label: string) => {
-    const options = [
-      ...new Set(
-        within
-          .flatMap((r) =>
-            key === "target" ? r.target.split(/;\s*/) : [r[key]],
-          )
-          .filter(Boolean),
-      ),
-    ].sort();
-    return `<label>${label}<select name="${key}"><option value="">All</option>${options.map((v) => `<option value="${esc(v)}"${params.get(key) === v ? " selected" : ""}>${esc(v)}</option>`).join("")}</select></label>`;
+const indexOf = new Map(rows.map((r, i) => [r, i]));
+const sources = [
+  ["opus", "OPUS"],
+  ["opus-volumes", "OPUS volumes"],
+  ["opus-geometry", "OPUS geometry index"],
+  ["photojournal", "Photojournal"],
+  ["pds", "PSI PDS4"],
+  ["usgs", "USGS"],
+  ["umd", "Maryland"],
+  ["umd-holdings", "Maryland inventory"],
+  ["darts", "DARTS"],
+  ["darts-collections", "DARTS collections"],
+  ["darts-index", "DARTS indexes"],
+].map(([id, label]) => ({ id, label }));
+for (const r of rows)
+  if (!sources.some((s) => s.id === r.source))
+    throw Error(`Row ${r.source}:${r.id} names a source the viewer has no label for`);
+type File = { url: string; name: string; mime: string; kind: string; area: number; size: string };
+function files(details: unknown): File[] {
+  if (!details || typeof details !== "object" || !("files" in details) || !Array.isArray(details.files)) return [];
+  return details.files.flatMap((f: unknown) => {
+    if (!f || typeof f !== "object" || !("url" in f) || typeof f.url !== "string") return [];
+    const text = (k: string) => (k in f && typeof (f as Record<string, unknown>)[k] === "string" ? String((f as Record<string, unknown>)[k]) : "");
+    const num = (k: string) => (k in f && typeof (f as Record<string, unknown>)[k] === "number" ? Number((f as Record<string, unknown>)[k]) : 0);
+    const width = num("width"), height = num("height");
+    return [{ url: f.url, name: text("name") || f.url.split("/").at(-1) || "", mime: text("mime"), kind: text("kind"), area: width * height, size: width && height ? `${width} × ${height} px` : "" }];
+  });
+}
+function field(details: unknown, key: string): string {
+  return details && typeof details === "object" && key in details && typeof (details as Record<string, unknown>)[key] === "string"
+    ? String((details as Record<string, unknown>)[key])
+    : "";
+}
+function listed(r: Row): ViewerRow {
+  const f = files(r.details);
+  // Photojournal images resize on request; USGS product pages publish their own thumb.png.
+  const jpeg = f.find((x) => x.mime === "image/jpeg");
+  const usgs = f.find((x) => x.name === "thumb.png") ?? f.find((x) => x.kind === "preview" && /\.(jpe?g|png)$/i.test(x.name));
+  const thumbnail = r.source === "photojournal" && jpeg ? jpeg.url + "?w=320" : r.source === "usgs" && usgs ? usgs.url : "";
+  const largest = [...f].sort((a, b) => b.area - a.area)[0];
+  return {
+    key: r.source + ":" + r.id,
+    source: r.source,
+    id: r.id,
+    title: r.title,
+    target: r.target,
+    bodies: bodiesOf(r.target),
+    instrument: r.instrument,
+    count: r.count,
+    decision: r.decision,
+    reason: r.reason,
+    url: r.url,
+    proposals: r.proposals,
+    thumbnail,
+    size: largest?.size ?? "",
+    date: field(r.details, "date"),
   };
-  const link = (updates: Record<string, string>) => {
-    const p = new URLSearchParams(params);
-    for (const [k, v] of Object.entries(updates)) p.set(k, v);
-    return "/?" + p;
-  };
-  const start = (page - 1) * 100,
-    shown = found.slice(start, start + 100);
-  return template(
-    "Astronomy data ledger",
-    `<h1>Astronomy data ledger</h1><p class="notice">Catalogue screening with 23 OPUS native product-label checks. Maryland and DARTS rows retain published metadata; native science arrays remain unqualified. Observation records can share an exposure or file. Geometry-index matches overlap and do not prove detection or useful coverage. The 717 Photojournal decisions retain their original individual review.</p><form method="get"><input type="hidden" name="source" value="${esc(source)}"><label>Search<input name="q" value="${esc(params.get("q"))}"></label>${select("instrument", "Instrument")}${select("target", "Target")}${select("decision", "Decision")}<label>Proposal<input name="proposal" value="${esc(params.get("proposal"))}" size="5"></label><button type="submit">Apply filters</button><a href="/?source=${esc(source)}">Clear</a></form><p><strong>${found.length} matching rows</strong> · <a href="${esc(link({ format: "json" }))}">Export JSON</a> · <a href="${esc(link({ format: "tsv" }))}">Copyable TSV</a> · <a href="/README.md">Method and limits</a></p><p class="muted">${found.length ? "Showing " + (start + 1) + "–" + Math.min(start + 100, found.length) : "No matches"}${page > 1 ? ' · <a href="' + esc(link({ page: String(page - 1) })) + '">Previous</a>' : ""}${start + 100 < found.length ? ' · <a href="' + esc(link({ page: String(page + 1) })) + '">Next</a>' : ""}</p>${shown
-      .map(
-        (r) =>
-          `<article><h2><a href="${esc(r.url)}">${esc(r.source === "opus" ? r.instrument + " · " + r.target : r.title)}</a></h2><p class="muted">${esc(r.decision)} · ${r.count.toLocaleString("en-US")} ${r.source.startsWith("opus") ? "OPUS records" : "source entry"}</p><p>${esc(r.reason)}</p><p>${r.proposals
-            .map(
-              (n) => '<a href="/proposals/' + esc(n) + '">P' + esc(n) + "</a>",
-            )
-            .join(
-              " · ",
-            )}</p><details><summary>Retained audit record</summary><pre>${esc(JSON.stringify(r.details, null, 2))}</pre></details></article>`,
-      )
-      .join("")}`,
-  );
+}
+async function proposals(): Promise<ViewerProposal[]> {
+  const markdown = await readFile(root + "/PROPOSALS.md", "utf8");
+  const linked = new Map<string, number>();
+  for (const r of rows) for (const p of r.proposals) linked.set(p, (linked.get(p) ?? 0) + 1);
+  return loadProposals().map((p) => {
+    const writeup = markdown.split("\n## P" + p.id + "\n")[1]?.split("\n## P")[0]?.trim();
+    if (!writeup) throw Error(`PROPOSALS.md has no writeup for P${p.id}`);
+    // A writeup names its bodies on its "Content owners:" line; the others name them in the title ("Moon and Mercury: …").
+    const owners = /^Content owners: (.*)$/m.exec(writeup)?.[1] ?? "";
+    const named = [...owners.matchAll(/\[([^\]]+)\]\(/g)].map((m) => m[1].toLowerCase());
+    const titled = p.title.split(":")[0].split(/,\s*|\s+and\s+/).map((t) => t.trim().toLowerCase());
+    return {
+      id: p.id,
+      title: p.title,
+      status: p.status,
+      priority: p.priority,
+      nextStep: p.next_step,
+      blocker: p.blocker,
+      prUrl: p.pr_url,
+      updatedAt: p.updated_at,
+      bodies: named.length ? named : titled,
+      writeup: writeup.replace(/^### .*\n+/, ""),
+      rows: linked.get(p.id) ?? 0,
+    };
+  });
+}
+function labels(): Record<string, string> {
+  // Sources spell one body differently ("mars", "Mars", "(4) Vesta"); show the capitalised spelling.
+  const out: Record<string, string> = {};
+  for (const r of rows)
+    for (const raw of r.target.split(";")) {
+      const label = raw.trim().replace(/^\(\d+\)\s*/, "");
+      const [key] = bodiesOf(label);
+      if (key && (!out[key] || (out[key] === out[key].toLowerCase() && label !== label.toLowerCase()))) out[key] = label;
+    }
+  return out;
+}
+const data: ViewerData = { rows: rows.map(listed), proposals: await proposals(), sources, labels: labels() };
+const page = await readFile(root + "/viewer/index.html", "utf8");
+const script = stripTypeScriptTypes(await readFile(root + "/viewer/app.mts", "utf8"));
+const json = JSON.stringify(data);
+function send(res: ServerResponse, type: string, body: string, headers: Record<string, string> = {}) {
+  res.writeHead(200, { "Content-Type": type + "; charset=utf-8", "Cache-Control": "no-store", ...headers });
+  res.end(body);
 }
 const port = Number(process.env.PORT ?? 4319);
-if (!Number.isSafeInteger(port) || port < 1 || port > 65535)
-  throw Error("Invalid port");
+if (!Number.isSafeInteger(port) || port < 1 || port > 65535) throw Error("Invalid port");
 createServer(async (req, res) => {
   try {
     const url = new URL(req.url ?? "/", "http://127.0.0.1");
-    let body: string;
-    if (
-      url.pathname === "/proposals" ||
-      url.pathname === "/proposals/index.html"
-    ) {
-      const plans = loadProposals();
-      body = template(
-        "Data proposals",
-        "<h1>" +
-          plans.length +
-          " proposals</h1><p>Current work status comes from SQLite. Open a proposal for its scope and acceptance conditions.</p>" +
-          plans
-            .map(
-              (p) =>
-                '<article><h2><a href="/proposals/' +
-                esc(p.id) +
-                '">P' +
-                esc(p.id) +
-                " · " +
-                esc(p.title) +
-                "</a></h2><p>" +
-                esc(p.status) +
-                " · Priority " +
-                p.priority +
-                "</p><p>" +
-                esc(p.next_step) +
-                "</p>" +
-                (p.blocker ? "<p>Blocker: " + esc(p.blocker) + "</p>" : "") +
-                (p.pr_url
-                  ? '<p><a href="' +
-                    esc(p.pr_url) +
-                    '">Implementation PR</a></p>'
-                  : "") +
-                "</article>",
-            )
-            .join(""),
-      );
-    } else if (/^\/proposals\/\d+$/.test(url.pathname)) {
-      const id = String(Number(url.pathname.split("/").at(-1)));
-      const p = loadProposals().find((p) => p.id === id);
-      if (!p) {
-        res.writeHead(404);
-        res.end("Unknown proposal");
-        return;
-      }
-      const md = await readFile(root + "/PROPOSALS.md", "utf8");
-      const section = md.split("\n## P" + id + "\n")[1]?.split("\n## P")[0];
-      if (!section) throw Error("Missing proposal writeup");
-      body = template(
-        p.title,
-        "<h1>P" +
-          esc(id) +
-          " · " +
-          esc(p.title) +
-          "</h1><p>" +
-          esc(p.status) +
-          " · Updated " +
-          esc(p.updated_at) +
-          "</p><p>Next: " +
-          esc(p.next_step) +
-          "</p>" +
-          (p.blocker ? "<p>Blocker: " + esc(p.blocker) + "</p>" : "") +
-          (p.pr_url
-            ? '<p><a href="' + esc(p.pr_url) + '">Implementation PR</a></p>'
-            : "") +
-          '<p><a href="/?source=&proposal=' +
-          esc(id) +
-          '">Linked audit rows from every source</a></p><pre>' +
-          esc(section.trim()) +
-          "</pre>",
-      );
-    } else if (
-      url.pathname === "/README.md" ||
-      url.pathname === "/PROPOSALS.md"
-    ) {
-      body = template(
-        "Audit guide",
-        "<pre>" + esc(await readFile(root + url.pathname, "utf8")) + "</pre>",
-      );
-    } else if (url.pathname === "/" || url.pathname === "/opus.html") {
-      if (url.searchParams.get("format") === "json") {
-        const params = new URLSearchParams(url.searchParams);
-        params.delete("page");
-        if (!params.has("source")) params.set("source", "opus");
-        res.writeHead(200, {
-          "Content-Type": "application/json; charset=utf-8",
-        });
-        res.end(
-          JSON.stringify(
-            { filters: Object.fromEntries(params), rows: slice(rows, params) },
-            null,
-            2,
-          ) + "\n",
-        );
-        return;
-      }
-      body = render(url.searchParams);
-    } else if (
-      url.pathname === "/catalogue.html" ||
-      url.pathname === "/photojournal.html"
-    ) {
-      res.writeHead(302, {
-        Location:
-          "/?source=" +
-          (url.pathname === "/photojournal.html" ? "photojournal" : "pds"),
+    const params = new URLSearchParams(url.searchParams);
+    if (url.pathname === "/")
+      return send(res, "text/html", page, {
+        "Content-Security-Policy":
+          "default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; connect-src 'self'; img-src https://assets.science.nasa.gov https://astrogeology.usgs.gov; base-uri 'none'; form-action 'none'",
       });
-      res.end();
-      return;
-    } else {
-      res.writeHead(404);
-      res.end("Not found");
-      return;
+    if (url.pathname === "/app.js") return send(res, "text/javascript", script);
+    if (url.pathname === "/api/data") return send(res, "application/json", json);
+    if (url.pathname === "/api/doc") {
+      const name = params.get("name");
+      if (name !== "README.md" && name !== "PROPOSALS.md") throw Error("Unknown document");
+      return send(res, "text/markdown", await readFile(root + "/" + name, "utf8"));
     }
-    res.writeHead(200, {
-      "Content-Type": "text/html; charset=utf-8",
-      "Content-Security-Policy":
-        "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'",
-    });
-    res.end(body);
+    if (url.pathname === "/api/record") {
+      const row = rows.find((r) => r.source === params.get("source") && r.id === params.get("id"));
+      if (!row) throw Error("Unknown record");
+      return send(res, "application/json", JSON.stringify(row));
+    }
+    if (url.pathname === "/api/match") {
+      // Text search reads the whole retained record, as slice() does, so a PIA number or a file name finds its row.
+      const found = slice(rows, new URLSearchParams({ q: params.get("q") ?? "" }));
+      return send(res, "application/json", JSON.stringify(found.map((r) => indexOf.get(r))));
+    }
+    if (url.pathname === "/api/export") {
+      const format = params.get("format") ?? "json";
+      if (format !== "json" && format !== "tsv") throw Error("format must be json or tsv");
+      const found = slice(rows, params);
+      params.delete("format");
+      const attachment = { "Content-Disposition": `attachment; filename="astronomy-data.${format}"` };
+      return format === "tsv"
+        ? send(res, "text/tab-separated-values", tsv(found), attachment)
+        : send(res, "application/json", JSON.stringify({ filters: Object.fromEntries(params), rows: found }, null, 2) + "\n", attachment);
+    }
+    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Not found");
   } catch (error) {
     res.writeHead(400, { "Content-Type": "text/plain; charset=utf-8" });
     res.end(error instanceof Error ? error.message : "Invalid request");
   }
-}).listen(port, "127.0.0.1", () =>
-  console.log("Ledger: http://127.0.0.1:" + port + "/?source=opus"),
-);
+}).listen(port, "127.0.0.1", () => console.log("Ledger: http://127.0.0.1:" + port + "/"));
