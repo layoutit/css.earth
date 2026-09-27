@@ -51,11 +51,12 @@ function prepareLegend(objectId: string, legend: LensRecipe["legend"]) {
 }
 
 /** Stepped lenses form groups of at least two consecutive members with distinct step labels; a group is never a lens id. */
-export function validateLensSteps(objectId: string, controls: readonly { id: string; step?: { group: string; label: string } }[]) {
+export function validateLensSteps(objectId: string, controls: readonly { id: string; step?: { group: string; label: string; autoplay?: boolean } }[]) {
   const seen = new Set<string>();
   controls.forEach((control, index) => {
     const step = control.step;
     if (step === undefined) return;
+    if (step.autoplay !== undefined && typeof step.autoplay !== 'boolean') throw new TypeError(`${objectId}/${control.id}: step autoplay must be boolean`);
     if (typeof step.group !== "string" || !/^[a-z][a-z0-9-]*$/u.test(step.group) || typeof step.label !== "string" || !step.label.trim()) {
       throw new TypeError(`${objectId}/${control.id}: a lens step needs a group id and a label`);
     }
@@ -68,6 +69,7 @@ export function validateLensSteps(objectId: string, controls: readonly { id: str
   for (const group of seen) {
     const members = controls.filter(control => control.step?.group === group);
     if (members.length < 2) throw new TypeError(`${objectId}: step group ${group} needs at least two steps`);
+    if (new Set(members.map(member => member.step!.autoplay ?? true)).size !== 1) throw new TypeError(`${objectId}: the steps of ${group} must agree on autoplay`);
     if (new Set(members.map(member => member.step!.label)).size !== members.length) throw new TypeError(`${objectId}: the steps of ${group} need distinct labels`);
   }
 }
@@ -110,7 +112,8 @@ export function prepareLenses(
         ...(facts?.length ? { facts } : {}),
         ...(legend ? { legend } : {}),
         ...(control.legendNote ? { legendNote: control.legendNote } : {}),
-        ...(control.step ? { step: { group: control.step.group, label: control.step.label } } : {}),
+        ...(control.step ? { step: { group: control.step.group, label: control.step.label,
+          ...(control.step.autoplay === undefined ? {} : { autoplay: control.step.autoplay }) } } : {}),
         surfaceUrl: surface?.url ?? assetUrl(objectId, control.surface),
         surface2xUrl: surface?.url2x ?? assetUrl(objectId, control.surface?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
         polesUrl: surface?.polesUrl ?? assetUrl(objectId, control.poles),

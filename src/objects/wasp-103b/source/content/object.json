@@ -1,0 +1,554 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-103b",
+  "displayName": "WASP-103 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201323014",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G",
+          "label": "Gillon et al. 2014",
+          "checked": "2026-09-27",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "22 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201323014",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G",
+          "label": "Gillon et al. 2014",
+          "checked": "2026-09-27",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.5 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201323014",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G",
+          "label": "Gillon et al. 2014",
+          "checked": "2026-09-27",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature-p3",
+    "controls": [
+      {
+        "id": "temperature-p0",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 0.000111 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p0.webp",
+        "surface": "wasp-103b-surface-temperature-p0@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p0@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.000111 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      },
+      {
+        "id": "temperature-p1",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 0.000889 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p1.webp",
+        "surface": "wasp-103b-surface-temperature-p1@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p1@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.000889 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      },
+      {
+        "id": "temperature-p2",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 0.0101 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p2.webp",
+        "surface": "wasp-103b-surface-temperature-p2@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p2@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.0101 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      },
+      {
+        "id": "temperature-p3",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 0.115 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p3.webp",
+        "surface": "wasp-103b-surface-temperature-p3@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p3@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.115 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      },
+      {
+        "id": "temperature-p4",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 0.929 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p4.webp",
+        "surface": "wasp-103b-surface-temperature-p4@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p4@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "0.929 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      },
+      {
+        "id": "temperature-p5",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 10.6 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p5.webp",
+        "surface": "wasp-103b-surface-temperature-p5@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p5@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "10.6 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      },
+      {
+        "id": "temperature-p6",
+        "label": "Temperature",
+        "qualification": "Climate simulation · 85.2 bar · False color",
+        "thumbnail": "wasp-103b-lens-temperature-p6.webp",
+        "surface": "wasp-103b-surface-temperature-p6@2x.webp",
+        "poles": "wasp-103b-poles-temperature-p6@2x.webp",
+        "source": {
+          "id": "wasp-103b-kreidberg-2018-gcm",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "noData": true,
+        "step": {
+          "group": "temperature",
+          "label": "85.2 bar",
+          "autoplay": false
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Atmospheric temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "legendNote": "One temperature scale at every level. Grey caps have no released samples."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kreidberg et al. (2018)",
+      "href": "https://arxiv.org/abs/1805.00029"
+    },
+    {
+      "label": "Data",
+      "role": "dataset",
+      "description": "Released numerical climate grid",
+      "href": "https://github.com/lkreidberg/2017_wasp103/blob/425f2e8fe694760266398257a71eaa991ab322fd/Figures/GCM_From_Vivien/PTprofiles-WASP-103b-TiO-fix-3-Drag3-NEW-OPA-nit-1036800.dat"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1805.00029",
+      "credit": "Kreidberg et al. (2018), AJ 156, 17; SPARC/MITgcm temperature field supplied by Vivien Parmentier"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-103b.json",
+      "credit": "Radius from Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive; mass from Gillon et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014A&A...562L...3G), via the NASA Exoplanet Archive; orbit from Gillon et al. 2014 (2014A&A...562L...3G), via the NASA Exoplanet Archive"
+    }
+  }
+}

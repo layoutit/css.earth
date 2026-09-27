@@ -1,0 +1,30 @@
+{
+ "id": "wasp-103",
+ "classification": "star",
+ "order": 1843,
+ "physical": {
+  "name": "WASP-103",
+  "horizonsCode": null,
+  "meanRadiusKm": 999025.2,
+  "gravitationalParameterKm3PerS2": 161909176851.16605,
+  "parent": null,
+  "effectiveTemperatureK": 6110
+ },
+ "physicalNotes": "Radius 1.436 +/- 0.052 solar radii from Gillon et al. 2014, the stellar radius of the default parameter set of WASP-103 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract): 999,025 km at 695,700 km per solar radius. Mass 1.22 +/- 0.039 solar masses from Gillon et al. 2014, the stellar mass of the default parameter set of WASP-103 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract); GM is that mass times the JPL solar GM. Temperature 6110 +/- 160 K from Gillon et al. 2014, the stellar temperature of the default parameter set of WASP-103 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 249.3148587222338,
+  "declinationDegrees": 7.1833761500126165,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 545.4871465435829,
+  "properMotionRaMasPerYear": -9.75637113720616,
+  "properMotionDecMasPerYear": 2.778835375694318,
+  "radialVelocityKmPerS": -40.69098,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4439085988769170432 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-103/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 1.8332 +/- 0.1073 mas (same row, RUWE 7.25): 545.49 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): -9.756, 2.779 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -40.69 +/- 1.00 km/s"
+  }
+ }
+}

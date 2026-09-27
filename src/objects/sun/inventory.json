@@ -639,6 +639,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/wasp-103.json",
+      "bytes": 30460,
+      "sha256": "9486a538f05ff534aed630ce96e2a0bf40f5cfc88104f7a8a778418e9d8e3a65"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/wasp-12.json",
       "bytes": 30429,
       "sha256": "2502ff817a71d04f1eff6c81c4e70abc2ac88d334cb33d1b0d19d5da103b5c93"
@@ -700,14 +706,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 452714,
-      "sha256": "9ce27f48144f23d1eb507eb9b024b3572d15285aeb7bc80ba653ce367af16e6d"
+      "bytes": 456966,
+      "sha256": "b4004037cbdc2b67f59c9a6ff00f02b00e5c4d422ea3391cf912daeb5c7028d4"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 9514527,
-      "sha256": "5437ee9095e3aa192a6afd955ca0dc36bdac8d0f981ac2d02e51683c4095bfba"
+      "bytes": 9563321,
+      "sha256": "3be2868c1b302001bafe33253f4e499c1a09a93ff922aa12df491becf31f99ea"
     },
     {
       "location": "prepared",
@@ -4674,6 +4680,12 @@
       "filename": "world-orbits/virtanen.bin",
       "bytes": 2872,
       "sha256": "bc24326de5fdf6d2dde76b9aa967d3357c7bef4d2c5bf03fd244c23a5320401e"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/wasp-103b.bin",
+      "bytes": 3136,
+      "sha256": "1beb1bfa1bf88172dad45e025e5f0b10f2d2ced8e319693304956b1b6422ef54"
     },
     {
       "location": "prepared",

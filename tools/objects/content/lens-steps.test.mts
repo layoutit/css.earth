@@ -12,3 +12,10 @@ test('stepped lenses form consecutive groups of at least two with distinct label
   assert.throws(() => validateLensSteps('x', [lens('temperature'), lens('t1', 'temperature'), lens('t2', 'temperature')]), /must not be a lens id/u);
   assert.throws(() => validateLensSteps('x', [{ id: 't1', step: { group: 'Temperature', label: 'a' } }, { id: 't2', step: { group: 'Temperature', label: 'b' } }]), /group id/u);
 });
+
+test('a manual group carries one consistent autoplay choice', () => {
+  const first = { id: 'upper', step: { group: 'pressure', label: '0.1 bar', autoplay: false } };
+  const last = { id: 'lower', step: { group: 'pressure', label: '1 bar', autoplay: false } };
+  assert.doesNotThrow(() => validateLensSteps('x', [first, last]));
+  assert.throws(() => validateLensSteps('x', [first, { ...last, step: { ...last.step, autoplay: true } }]), /agree on autoplay/);
+});

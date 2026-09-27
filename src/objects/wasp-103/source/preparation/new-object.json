@@ -1,0 +1,39 @@
+{
+  "id": "wasp-103",
+  "name": "WASP-103",
+  "system": "WASP-103 system",
+  "description": "The host star of WASP-103 b.",
+  "target": "WASP-103",
+  "gaia": "4439085988769170432",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract",
+    "credit": "Gillon et al. 2014"
+  },
+  "radius": {
+    "value": 1.436,
+    "source": "Gillon et al. 2014, the stellar radius of the default parameter set of WASP-103 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract",
+    "uncertainty": 0.052
+  },
+  "mass": {
+    "value": 1.22,
+    "source": "Gillon et al. 2014, the stellar mass of the default parameter set of WASP-103 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract",
+    "uncertainty": 0.039
+  },
+  "temperature": {
+    "value": 6110,
+    "source": "Gillon et al. 2014, the stellar temperature of the default parameter set of WASP-103 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...562L...3G/abstract",
+    "uncertainty": 160
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The host star of WASP-103 b, an ultra-hot giant with a 22-hour year.",
+    "introduction": "This 6,110 K star hosts WASP-103 b. Its displayed colour comes from its Gaia spectrum.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2014): st_teff 6110, st_rad 1.436, st_mass 1.22"
+  },
+  "notes": [],
+  "order": 1843
+}
