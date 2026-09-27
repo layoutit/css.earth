@@ -17,7 +17,7 @@ and the difference is kept visible everywhere: see [two capabilities, never one]
 ## Saved questions with the Telescope CLI
 
 `pnpm telescope` provides a saved query and retrieval workflow over this API. The
-`@cssearth/telescope` npm package exposes the same command as `telescope`; it uses an
+`@cssearth/telescope-cli` npm package exposes the same command as `telescope`; it uses an
 existing css.earth science workspace for the catalogue, archive clients and instrument
 pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
 Python environments or download the repository during installation.
