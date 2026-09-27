@@ -137,3 +137,15 @@ All selected releases place 360° west longitude at the left, decreasing to the 
 The existing observed-surface preparer writes these maps for the body's current texture layout, using the shared Jupiter coverage helpers. It remaps planetographic latitude, packs the retained bands and projects the pole tiles at preparation time. The browser selects prepared files through the existing date group; it does not interpret FITS, derive imagery or replace the mounted scene.
 
 Source inspection compared the TIFF rows with the component FITS rows; all selected maps correlate more strongly in stored row order than after a north/south flip. This checks orientation, not absolute colour calibration. The unit check exercises component-mask intersection, a connected interior ring gap, retained isolated zero samples and longitude reversal. Browser and delivery evidence for this change is recorded below.
+
+### Date sequence evidence
+
+Checked on 27 September 2026 at `323a8c2f52803627462db448e52ccfa3c073363d`; subsequent changes add documentation and retained evidence only. Chrome exercised all 9 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
+
+[Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. It also retains the two examined but deferred early releases. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
+
+The three packages restored 479 files (160.17 MB) into an empty directory, with every byte count and SHA-256 matching its inventory. This body adds 2.90 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
+
+![Dated OPAL map with the shared sequence controls](evidence/opal-dates-desktop.webp)
+
+A dated map was also inspected with Shadows enabled and flood lighting; both reused the unchanged material bank and reported no runtime error.

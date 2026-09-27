@@ -533,12 +533,13 @@
         "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-29",
         "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-30",
         "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-31",
-        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
+        "https://github.com/layoutit/css.earth/blob/323a8c2f52803627462db448e52ccfa3c073363d/src/objects/saturn/README.md#hubble-dates"
       ],
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "86ec01713f9c09b4b936a90184947980d77ba2bb"
+          "commit": "323a8c2f52803627462db448e52ccfa3c073363d"
         }
       ]
     }

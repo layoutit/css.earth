@@ -1,0 +1,311 @@
+{
+  "testedRevision": "323a8c2f52803627462db448e52ccfa3c073363d",
+  "date": "2026-09-27",
+  "method": "Pearson correlation between the first listed component FITS plane and RGB channel sum, sampling every third row and column. Ignore nonpositive or nonfinite FITS samples and zero RGB sums. Compare stored row order with north/south reversal. This is an orientation diagnostic, not colour calibration or absolute geolocation.",
+  "correlationOrder": [
+    "stored",
+    "north-south-reversed"
+  ],
+  "observations": [
+    {
+      "body": "uranus",
+      "cycle": 22,
+      "rotation": "2014a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2014-11-08T10:26:22",
+      "dates": [
+        "2014-11-08T10:26:22",
+        "2014-11-08T10:28:02",
+        "2014-11-08T10:33:36"
+      ],
+      "unobservedRows": [
+        [
+          312,
+          360
+        ]
+      ],
+      "correlations": [
+        0.864722672516945,
+        -0.21412653507389665
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 23,
+      "rotation": "2015a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2015-09-12T05:16:24",
+      "dates": [
+        "2015-09-12T05:16:24",
+        "2015-09-12T05:10:35",
+        "2015-09-12T05:11:59"
+      ],
+      "unobservedRows": [
+        [
+          300,
+          360
+        ]
+      ],
+      "correlations": [
+        0.8916240332480486,
+        -0.24268931060216908
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 24,
+      "rotation": "2016a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2016-09-29T10:20:17",
+      "dates": [
+        "2016-09-29T10:20:17",
+        "2016-09-29T10:21:57",
+        "2016-09-29T10:23:21"
+      ],
+      "unobservedRows": [
+        [
+          293,
+          360
+        ]
+      ],
+      "correlations": [
+        0.8886526700049446,
+        -0.24734065396508617
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 25,
+      "rotation": "2017a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2017-10-25T18:56:12",
+      "dates": [
+        "2017-10-25T18:56:12",
+        "2017-10-25T18:57:52",
+        "2017-10-25T18:59:16"
+      ],
+      "unobservedRows": [
+        [
+          287,
+          360
+        ]
+      ],
+      "correlations": [
+        0.8412499181755401,
+        -0.21069968560295424
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 26,
+      "rotation": "2018a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2018-11-16T10:23:12",
+      "dates": [
+        "2018-11-16T10:23:12",
+        "2018-11-16T10:24:52",
+        "2018-11-16T10:26:16"
+      ],
+      "unobservedRows": [
+        [
+          281,
+          360
+        ]
+      ],
+      "correlations": [
+        0.8545948981795893,
+        -0.2125282483775223
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 27,
+      "rotation": "2019a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2019-11-18T16:41:51",
+      "dates": [
+        "2019-11-18T16:41:51",
+        "2019-11-18T16:43:31",
+        "2019-11-18T16:44:55"
+      ],
+      "unobservedRows": [
+        [
+          272,
+          360
+        ]
+      ],
+      "correlations": [
+        0.8245497461072465,
+        -0.19027486047532235
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 28,
+      "rotation": "2020a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2020-10-08T11:34:57",
+      "dates": [
+        "2020-10-08T11:34:57",
+        "2020-10-08T11:36:35",
+        "2020-10-08T11:37:59"
+      ],
+      "unobservedRows": [
+        [
+          261,
+          360
+        ]
+      ],
+      "correlations": [
+        0.867718431997264,
+        -0.2453201418794246
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 29,
+      "rotation": "2021a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2021-12-08T00:35:31",
+      "dates": [
+        "2021-12-08T00:35:31",
+        "2021-12-08T00:37:09",
+        "2021-12-08T00:38:33"
+      ],
+      "unobservedRows": [
+        [
+          254,
+          360
+        ]
+      ],
+      "correlations": [
+        0.913672229111952,
+        -0.39738487070303613
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 30,
+      "rotation": "2022a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2022-11-09T10:08:16",
+      "dates": [
+        "2022-11-09T10:08:16",
+        "2022-11-09T10:09:54",
+        "2022-11-09T10:13:34"
+      ],
+      "unobservedRows": [
+        [
+          247,
+          360
+        ]
+      ],
+      "correlations": [
+        0.7670260787063877,
+        -0.2074343781865775
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 31,
+      "rotation": "2023a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2023-09-17T06:56:30",
+      "dates": [
+        "2023-09-17T06:56:30",
+        "2023-09-17T06:58:08",
+        "2023-09-17T07:07:06"
+      ],
+      "unobservedRows": [
+        [
+          235,
+          360
+        ]
+      ],
+      "correlations": [
+        0.8849853956061984,
+        -0.3246931620249378
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 32,
+      "rotation": "2024a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2024-11-09T07:13:49",
+      "dates": [
+        "2024-11-09T07:13:49",
+        "2024-11-09T07:04:51",
+        "2024-11-09T07:03:13"
+      ],
+      "unobservedRows": [
+        [
+          230,
+          360
+        ]
+      ],
+      "correlations": [
+        0.916358736747912,
+        -0.4359172621387804
+      ]
+    },
+    {
+      "body": "uranus",
+      "cycle": 33,
+      "rotation": "2025a",
+      "width": 721,
+      "height": 361,
+      "rgbWidth": 721,
+      "rgbHeight": 361,
+      "date": "2025-10-23T07:29:05",
+      "dates": [
+        "2025-10-23T07:29:05",
+        "2025-10-23T07:25:25",
+        "2025-10-23T07:23:47"
+      ],
+      "unobservedRows": [
+        [
+          220,
+          360
+        ]
+      ],
+      "correlations": [
+        0.9168951044208044,
+        -0.4978315328231247
+      ]
+    }
+  ]
+}

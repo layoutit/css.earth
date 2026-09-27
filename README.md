@@ -40,6 +40,8 @@ The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus 
 
 Each object has datasets assigned, with selectable views of its available products. A view can be a true-colour or single-filter photograph, an enhanced- or false-colour mosaic, a thermal, infrared, ultraviolet or radar map, topography, or an interior model.
 
+Sequences such as **Hubble dates** start looping when opened. Each map stays on screen for 1.5 seconds before the next begins loading. Use **Pause** or the arrows to inspect one step; leaving the sequence or hiding the tab stops playback.
+
 The data comes from spacecraft, landers and telescopes, including:
 
 - **Planetary missions:** MESSENGER, Cassini, Galileo, Juno, Dawn, New Horizons, Voyager 1 and 2, Rosetta, Hayabusa and Hayabusa2, OSIRIS-REx, NEAR Shoemaker, DART and LICIACube, Magellan, the Viking orbiters and landers, LRO, MRO and Mars Odyssey.
