@@ -127,9 +127,9 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       ? [await bindSource(text(acquisitionOperation.fileSource), new Set([...visiting, path]))] : [];
     if (acquisitionOperation?.kind === 'geotiff-grid' || acquisitionOperation?.kind === 'geotiff-image') {
       const recipePath = text(acquisitionOperation.recipePath);
-      const {readGeoTiffGridRecipe} = await import('./acquisition/geotiff-grid.mts');
+      const {readGeoTiffGridRecipe} = await import('@cssearth/bake/objects/acquisition');
       if (acquisitionOperation.kind === 'geotiff-image') {
-        const {readGeoTiffImageRecipe} = await import('./acquisition/geotiff-image.mts');
+        const {readGeoTiffImageRecipe} = await import('@cssearth/bake/objects/acquisition');
         await readGeoTiffImageRecipe(sourceDirectory, recipePath);
       } else await readGeoTiffGridRecipe(sourceDirectory, recipePath);
       dependencies.push(await bindSource(recipePath, new Set([...visiting, path])));
@@ -139,7 +139,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       if (!recipeEntry) throw new Error(`Unbound composition recipe: ${recipePath}.`);
       const bytes = await readFile(contained(sourceDirectory, recipePath));
       // Recovery reads this recipe to discover dependencies.
-      const {parseMappedCompositionRecipe} = await import('./acquisition/mapped-composition.mts');
+      const {parseMappedCompositionRecipe} = await import('@cssearth/bake/objects/acquisition');
       const plan = parseMappedCompositionRecipe(JSON.parse(bytes.toString('utf8')));
       if (!byPath.has(plan.input)) throw new Error(`Composition input is undeclared: ${plan.input}.`);
       const ancestors = new Set([...visiting, path]);

@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import sharp from 'sharp';
 import {writeArrayBuffer} from 'geotiff';
-import {parseGeoTiffImageRecipe, prepareGeoTiffImage} from './geotiff-image.mts';
+import {parseGeoTiffImageRecipe, prepareGeoTiffImage} from '@cssearth/bake/objects/acquisition';
 const recipe = (samples = 1) => parseGeoTiffImageRecipe({schema:'cssearth-geotiff-image@1',source:{
   url:'https://example.org/map.tif',productId:'fixture',width:8,height:4,origin:[-180,90],resolution:[45,-45],
   coordinates:'degrees',radius:1000,centerLongitude:0,noData:0,bits:8,sampleFormat:1,samples},output:{width:4,height:2,radius:1000}});

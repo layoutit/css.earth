@@ -2,11 +2,15 @@ import { sha256 } from '@cssearth/core/node';
 import {requireRecord,shape,text,number} from '@cssearth/core';
 const parseRecipe=shape({inputPath:text,member:text,spiceypyVersion:text,cspiceVersion:text,inputBytes:number,targetId:number,frameId:number,surfaceId:number,sourceVertices:number,sourceFaces:number,weldedVertices:number});
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
-import {resolve, isAbsolute, sep} from 'node:path';
+import {dirname, resolve, isAbsolute, sep} from 'node:path';
 import {tmpdir} from 'node:os';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
-import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
+
+/** The converter sits beside this module's source. The package root is found by the package's name, so the path is the same
+ * whether this runs from src/ or bundled into dist/. */
+const dskConverter = () => resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), 'src/objects/acquisition/dsk-mesh.py');
 
 export function validateDskMeshRecipe(value:unknown) {
   const recipe=parseRecipe(value);
@@ -45,7 +49,7 @@ export async function prepareDskMesh({sourceRoot, recipe:recipeValue}:{sourceRoo
   try {
     const destination = resolve(directory, 'mesh.zip');
     const {stdout} = await promisify(execFile)(python,
-      [fileURLToPath(new URL('../acquisition/dsk-mesh.py', import.meta.url)), path, JSON.stringify(recipe), destination],
+      [dskConverter(), path, JSON.stringify(recipe), destination],
       {maxBuffer: 1024 * 1024, timeout: 300000});
     const report = requireRecord(JSON.parse(stdout)), bytes = await readFile(destination);
     if (report.schema !== 'cssearth-dsk-mesh-conversion@1' || report.bytes !== bytes.length ||

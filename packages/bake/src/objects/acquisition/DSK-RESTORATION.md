@@ -4,7 +4,7 @@ The converter requires Python 3.12, SpiceyPy 6.0.3 (CSPICE N0067) and NumPy 2.3.
 
 ```sh
 python3.12 -m venv .local/dsk-python
-.local/dsk-python/bin/python -m pip install --require-hashes --only-binary=:all: -r tools/objects/acquisition/dsk-requirements.txt
+.local/dsk-python/bin/python -m pip install --require-hashes --only-binary=:all: -r packages/bake/src/objects/acquisition/dsk-requirements.txt
 CSSEARTH_SPICE_PYTHON="$PWD/.local/dsk-python/bin/python" node tools/objects/dist/operations.js acquire enceladus
 ```
 

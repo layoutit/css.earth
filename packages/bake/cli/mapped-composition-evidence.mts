@@ -5,7 +5,7 @@ import {dirname,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {requireArray,requireRecord,requireFiniteNumber} from '@cssearth/core';
-import {parseMappedCompositionRecipe,prepareMappedComposition} from './mapped-composition.mts';
+import {parseMappedCompositionRecipe,prepareMappedComposition} from '@cssearth/bake/objects/acquisition';
 import {loadScienceSurface} from '@cssearth/bake/objects/raster';
 
 const nativeGrid=(value:unknown)=>requireArray(value).map(row=>requireArray(row).map(v=>requireFiniteNumber(v)));

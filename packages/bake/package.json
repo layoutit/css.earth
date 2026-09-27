@@ -201,6 +201,11 @@
       "import": "./dist/objects/provenance.js",
       "default": "./dist/objects/provenance.js"
     },
+    "./objects/acquisition": {
+      "types": "./dist/objects/acquisition.d.ts",
+      "import": "./dist/objects/acquisition.js",
+      "default": "./dist/objects/acquisition.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",

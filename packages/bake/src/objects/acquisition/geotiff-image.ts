@@ -9,10 +9,10 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {Readable, Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
-import {containedPath} from '@cssearth/bake/objects/sources';
-import {missingCoverageColor} from '@cssearth/bake/raster';
-import {withIdleTimeout} from '@cssearth/bake/objects/sources';
-import {assertGeoTiffGrid, parseGeoTiffGridRecipe, type GeoTiffGridRecipe} from './geotiff-grid.mts';
+import {containedPath} from '../sources/index.ts';
+import {missingCoverageColor} from '../../raster/index.ts';
+import {withIdleTimeout} from '../sources/index.ts';
+import {assertGeoTiffGrid, parseGeoTiffGridRecipe, type GeoTiffGridRecipe} from './geotiff-grid.ts';
 
 export interface GeoTiffImageRecipe {
   schema: 'cssearth-geotiff-image@1';

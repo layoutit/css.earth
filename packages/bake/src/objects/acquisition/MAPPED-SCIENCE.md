@@ -13,13 +13,13 @@ remain excluded from Git. The compact output TIFFs are checked in deliberately.
 Run these from the repository root, using that environment's Python:
 
 ```
-python tools/objects/acquisition/geology-grid.py src/objects/moon/source/geology/prepare-grid.json
-python tools/objects/acquisition/coordinate-tiff-grid.py src/objects/moon/source/science/prepare-cf-map.json
-python tools/objects/acquisition/geology-grid.py src/objects/europa/source/geology/prepare-grid.json
-python tools/objects/acquisition/nims-composite.py src/objects/europa/source/nims/prepare-composite.json
-python tools/objects/acquisition/nims-composite.py src/objects/callisto/source/nims/prepare-composite.json
-python tools/objects/acquisition/pds4-byte-geotiff.py src/objects/charon/source/science/prepare-bond-map.json
-python tools/objects/acquisition/test_mapped_science.py
+python packages/bake/src/objects/acquisition/geology-grid.py src/objects/moon/source/geology/prepare-grid.json
+python packages/bake/src/objects/acquisition/coordinate-tiff-grid.py src/objects/moon/source/science/prepare-cf-map.json
+python packages/bake/src/objects/acquisition/geology-grid.py src/objects/europa/source/geology/prepare-grid.json
+python packages/bake/src/objects/acquisition/nims-composite.py src/objects/europa/source/nims/prepare-composite.json
+python packages/bake/src/objects/acquisition/nims-composite.py src/objects/callisto/source/nims/prepare-composite.json
+python packages/bake/src/objects/acquisition/pds4-byte-geotiff.py src/objects/charon/source/science/prepare-bond-map.json
+python packages/bake/src/objects/acquisition/test_mapped_science.py
 ```
 
 Each plan pins original bytes and coordinate conventions; each receipt pins the

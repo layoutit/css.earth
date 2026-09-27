@@ -4,7 +4,7 @@ import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fromArrayBuffer, writeArrayBuffer} from 'geotiff';
-import {parseGeoTiffGridRecipe, prepareGeoTiffGrid, sourcePixel, GridRangeClient} from './geotiff-grid.mts';
+import {parseGeoTiffGridRecipe, prepareGeoTiffGrid, sourcePixel, GridRangeClient} from '@cssearth/bake/objects/acquisition';
 
 const recipe = () => parseGeoTiffGridRecipe({schema: 'cssearth-geotiff-grid@1', source: {
   url: 'https://example.org/observations.tif', productId: 'native', width: 8, height: 2,

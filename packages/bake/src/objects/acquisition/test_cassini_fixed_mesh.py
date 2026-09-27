@@ -11,7 +11,7 @@ SPEC = importlib.util.spec_from_file_location('fixed_mesh', Path(__file__).with_
 mesh_module = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(mesh_module)
 FixedMesh = mesh_module.FixedMesh
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[5]
 TERRAIN = ROOT/'src/objects/phoebe/prepared/terrain.json'
 TERRAIN_SHA = 'a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178'
 

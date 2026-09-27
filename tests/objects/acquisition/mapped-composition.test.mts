@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import {createHash} from 'node:crypto';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {gzipSync} from 'node:zlib';
-import {convertMappedComposition,parseMappedCompositionRecipe} from './mapped-composition.mts';
+import {convertMappedComposition,parseMappedCompositionRecipe} from '@cssearth/bake/objects/acquisition';
 import {loadScienceSurface} from '@cssearth/bake/objects/raster';
 
 const grid = (f:(longitude:number,latitude:number)=>number) => Array.from({length:180},(_,y)=>Array.from({length:360},(_,x)=>f(x,y-90)));

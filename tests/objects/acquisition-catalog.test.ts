@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
 import { executeAcquisition, parseAcquisitionPlan } from '#preparation/operations-acquisition';
-import { prepareSatelliteCatalog } from '../../tools/objects/acquisition/satellite-catalog.mts';
+import { prepareSatelliteCatalog } from '@cssearth/bake/objects/acquisition';
 import type { SourceEntry } from '@cssearth/bake/objects/sources';
 const test = sourceTest();
 const digest=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
