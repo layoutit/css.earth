@@ -1,4 +1,4 @@
-import type { ObjectContentSource } from '../../tools/objects/content/types.ts';
+import type { ObjectContentSource } from '@cssearth/bake/objects/content';
 import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '@cssearth/core/schema';
 
 const source = object({ id: string, path: optional(string), url: optional(string) });

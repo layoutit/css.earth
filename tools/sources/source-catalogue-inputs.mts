@@ -1,7 +1,7 @@
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '@cssearth/objects/sources';
 import type { SourceBinding, SourceResolver } from '@cssearth/objects/sources';
 import type { SourceUse } from '../../src/platform/source-usage.mts';
-import type { Fact } from '../objects/content/types.js';
+import type { Fact } from '@cssearth/bake/objects/content';
 
 export function factsheetCitations(panel: { facts: readonly Fact[]; moreFacts: readonly Fact[] }, ownerPath: string, object: { id: string }): SourceUse[] {
   return (['facts', 'moreFacts'] as const).flatMap(group => panel[group].flatMap((fact, index): SourceUse[] => {

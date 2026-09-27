@@ -1,5 +1,5 @@
-import { prepareLensCategoryLegend, prepareLensScaleLegend } from "./prepared-lens-legends.mts";
-import type { LensRecipe, PreparedRasterAssets } from "./types";
+import { prepareLensCategoryLegend, prepareLensScaleLegend } from "./prepared-lens-legends.ts";
+import type { LensRecipe, PreparedRasterAssets } from "./types.ts";
 
 const assetUrl = (objectId: string, asset: string | undefined): string | undefined => {
   if (!asset) return undefined;

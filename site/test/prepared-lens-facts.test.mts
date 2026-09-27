@@ -1,11 +1,11 @@
-import {parseObjectContentFixture} from './object-content-fixture.mts';
+import {parseObjectContentFixture} from '../../tests/objects/content/object-content-fixture.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { loadObjectContent } from './load-object-content.mts';
 import { prepareObjectContent } from '#preparation/content/prepare';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import type { ObjectContentSource } from '../../tools/objects/content/types.ts';
+import type { ObjectContentSource } from '@cssearth/bake/objects/content';
 
 const preparedObject = (value: unknown): { readonly data: { readonly lenses: { readonly controls: readonly Record<string, unknown>[] } } } => {
   const object = requireRecord(value, 'prepared object');

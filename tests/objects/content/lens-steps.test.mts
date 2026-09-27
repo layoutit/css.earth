@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { validateLensSteps } from './lenses.ts';
+import { validateLensSteps } from '@cssearth/bake/objects/content';
 
 const lens = (id: string, group?: string, label = id) => ({ id, ...(group ? { step: { group, label } } : {}) });
 

@@ -3,9 +3,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
-import { prepareLensLabels } from "./prepare-lens-labels.mts";
-import { prepareLenses } from "./lenses";
-import { lensBillboardColors } from "./billboard-colors.mts";
+import { lensBillboardColors, prepareLensLabels, prepareLenses } from "@cssearth/bake/objects/content";
 import { parseFactsheet, verifyFactsheetSources } from '../../sources/factsheet-sources.mts';
 import type {
   ContentPreparationContext,
@@ -15,7 +13,7 @@ import type {
   PreparedObjectContentDocument,
   PreparedRasterAssets,
   GalleryRecipe,
-} from "./types";
+} from "@cssearth/bake/objects/content";
 
 const titleMap: Record<string, { label: string; src: string; width: number; height: number }> = {
   facts: PREPARED_SHELL_TITLES.facts,
