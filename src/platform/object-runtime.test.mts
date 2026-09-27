@@ -257,11 +257,12 @@ test('mount rejects an uncompiled motion document instead of discovering live CS
 test("hidden departure frames keep world publication without rescheduling detail or readouts", async t => {
   const h = harness(); t.after(h.restore); await h.complete();
   let worlds = 0, readouts = 0;
+  assert.ok(h.runtime.navigation);
   h.runtime.navigation.subscribe(() => worlds++);
   h.runtime.sharedView.subscribe(() => readouts++);
   const publish = h.orbitArguments().onPublish!;
   const visible: OrbitPublication = { ...publicationForTest(), sunViewDirection: [1, 0, 0] };
-  const hidden = { ...visible, levelOfDetail: { ...visible.levelOfDetail, stage: "marker" } };
+  const hidden: OrbitPublication = { ...visible, levelOfDetail: { ...visible.levelOfDetail, stage: "marker" } };
   const frames = () => h.selection().stats().framePublications;
   const before = frames();
   publish(hidden, true);

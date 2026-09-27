@@ -16,7 +16,7 @@ test('uses the refreshed native root and receives deep child identities before d
   if(method==='DOM.querySelectorAll')return {result:{nodeIds:[]}};
   return {result:{result:{value:{groups:[]}}}};
  }};
- try {const sampler=await startLayerSampler(session,file);await sampler.stop();const rows=(await readFile(file,'utf8')).trim().split('\n').map(JSON.parse);
+ try {const sampler=await startLayerSampler(session,file);await sampler.stop();const rows=(await readFile(file,'utf8')).trim().split('\n').map(line => JSON.parse(line));
   assert.equal(documents,1);assert.ok(rows.some(row=>row.kind==='paint-node'&&row.nodeId===101&&row.name==='U'));assert.equal(rows.some(row=>row.kind==='error'),false);
  }finally{await rm(directory,{recursive:true,force:true});}
 });

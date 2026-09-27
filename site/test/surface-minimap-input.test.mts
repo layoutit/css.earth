@@ -30,7 +30,7 @@ test('minimap arrow keys use the current camera without publishing centre attrib
   };
   const controller = createSurfaceMinimap({ drawer, documentTarget: document, windowTarget: window as unknown as BrowserWindow,
     onInteraction() {}, surfaceReader: {
-      read: () => ({ world, relative: world.pose.positionM, axes, scene: map, mapLeftEdgeLongitudeDeg: 0 }), destroy() {},
+      read: () => ({ world, relative: world.pose.positionM, axes, scene: map, mapLeftEdgeLongitudeDeg: 0 }), reset() {}, destroy() {},
     } });
   controller.setCamera({ navigation, sharedView: unusedSharedView });
   const key = (name: string) => {
