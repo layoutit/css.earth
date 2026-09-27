@@ -39,11 +39,15 @@ displayed texel.
 
 ### Delivery, cost and browser checks
 
-All 69 published runtime files were installed into an empty destination and
+All 71 published runtime files were installed into an empty destination and
 verified by byte count and SHA-256. The six new original image products were
-also restored without local reuse. The runtime inventory grows from 28,120,249
-to 52,372,515 bytes (28.12 to 52.37 MB). This is the complete install, including
-optional lighting assets, not a measured cold page download.
+also restored without local reuse. Against the integrated main revision, the
+runtime inventory grows from 28,163,769 to 52,416,035 bytes (28.16 to 52.42 MB).
+This is the complete install, including optional lighting assets, not a measured
+cold page download. The [integration record](evidence/integration.json) verifies
+that main added only its two existing arrival files to the earlier 69-file
+audit; all 69 audited files remain byte-identical. The 53 affected tests and five
+bake boundary tests, package builds and typechecking passed again after integration.
 
 | Prepared mesh | Visible triangles | Atlas pixels | One decoded RGBA atlas |
 | --- | ---: | --- | ---: |
