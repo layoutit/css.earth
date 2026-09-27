@@ -3,9 +3,10 @@ import { createHash } from 'node:crypto';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { createSurfaceInterpreter } from './interpret.mts';
+import { createSurfaceInterpreter } from '@cssearth/bake/objects/interpretation';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const bytes = Buffer.from('pinned');
 const pin = (path: string) => ({path});
@@ -19,7 +20,7 @@ test('selected surface verification skips unrelated sources but rejects changed 
   await writeFile(join(sourceDirectory, 'map'), bytes);
   await writeFile(join(sourceDirectory, 'manifest.json'), JSON.stringify({schema:'cssearth-authoritative-sources@2',
     inputs:[input('map',['selected']),input('unrelated',['other'])],generatedIntermediates:[],documents:[]}));
-  const options = {objectId:'fixture',displayName:'Fixture',sourceDirectory,recipe:{surfaces:[{id:'selected',source:'map'}]}};
+  const options = {objectId:'fixture',displayName:'Fixture',sourceDirectory,solarGeometry,recipe:{surfaces:[{id:'selected',source:'map'}]}};
   await createSurfaceInterpreter({...options,sourceVerification:'selected-surfaces'});
   await assert.rejects(createSurfaceInterpreter(options), /Missing: unrelated/);
 });
@@ -30,7 +31,7 @@ test('selected scientific labels remain pinned and photographic refresh stays re
   await writeFile(join(sourceDirectory, 'map'), bytes);
   await writeFile(join(sourceDirectory, 'manifest.json'), JSON.stringify({schema:'cssearth-authoritative-sources@2',
     inputs:[input('map',['selected'])],generatedIntermediates:[],documents:[pin('label')]}));
-  const options = {objectId:'fixture',displayName:'Fixture',sourceDirectory,recipe:{surfaces:[{id:'selected',source:'map',science:{scientific:{labelPath:'label'}}}]}};
+  const options = {objectId:'fixture',displayName:'Fixture',sourceDirectory,solarGeometry,recipe:{surfaces:[{id:'selected',source:'map',science:{scientific:{labelPath:'label'}}}]}};
   await assert.rejects(createSurfaceInterpreter({...options,sourceVerification:'selected-surfaces'}), /missing|ENOENT/);
   await writeFile(join(sourceDirectory, 'label'), bytes);
   await createSurfaceInterpreter({...options,sourceVerification:'selected-surfaces'});
@@ -44,6 +45,6 @@ test('selected mosaic decoding still verifies every declared group member', asyn
   await writeFile(join(sourceDirectory, 'manifest.json'), JSON.stringify({schema:'cssearth-authoritative-sources@2',
     inputs:[input('map',['frames']),input('second-frame',['frames'])],generatedIntermediates:[],documents:[]}));
   const surface = {id:'selected',source:'map',science:{kind:'terrestrial-mosaic',format:'pds3-byte-equirectangular',consumer:'frames'}};
-  const interpret = await createSurfaceInterpreter({objectId:'fixture',displayName:'Fixture',sourceDirectory,recipe:{surfaces:[surface]},sourceVerification:'selected-surfaces'});
+  const interpret = await createSurfaceInterpreter({objectId:'fixture',displayName:'Fixture',sourceDirectory,solarGeometry,recipe:{surfaces:[surface]},sourceVerification:'selected-surfaces'});
   await assert.rejects(interpret(surface, 4, 2, 1), /missing|ENOENT/);
 });

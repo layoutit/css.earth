@@ -221,6 +221,11 @@
       "import": "./dist/objects/celestial.js",
       "default": "./dist/objects/celestial.js"
     },
+    "./objects/interpretation": {
+      "types": "./dist/objects/interpretation.d.ts",
+      "import": "./dist/objects/interpretation.js",
+      "default": "./dist/objects/interpretation.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",

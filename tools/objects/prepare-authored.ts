@@ -330,8 +330,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(reused)}\n`);
   }
   const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig, shape,
-      interpret: await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts'))
-        .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig }) });
+      interpret: await (await import('@cssearth/bake/objects/interpretation'))
+        .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig, solarGeometry: await solarGeometry() }) });
   // A body may take its surfaces from an observed-surfaces recipe rather than this lane, which then prepares only its
   // lighting bank. The observed products are published beside it and the lenses name them, as they name any other surface.
   const observationsSource = source(sources, 'observations');

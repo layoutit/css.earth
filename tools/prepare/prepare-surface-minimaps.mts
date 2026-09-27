@@ -8,14 +8,15 @@ const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),exclude
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/observation/interpret.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '@cssearth/bake/objects/interpretation';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
 function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
   const key = `${objectDirectory}:${photographs ? recipe.surfaces.map(s => s.id).join(',') : 'complete'}`;
   let pending = interpreters.get(key);
   if (!pending) {
-    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe,
+    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe, solarGeometry,
       sourceVerification: photographs ? 'photographs' : 'complete' });
     interpreters.set(key, pending);
   }

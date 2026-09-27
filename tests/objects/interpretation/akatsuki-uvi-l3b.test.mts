@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import * as h5 from 'h5wasm/node';
-import { prepareAkatsukiUviMap, parseAkatsukiUviProfile, UVI_L3B_GRID } from './uvi-l3b.mts';
+import { prepareAkatsukiUviMap, parseAkatsukiUviProfile, UVI_L3B_GRID } from '@cssearth/bake/objects/interpretation';
 
 const { width: W, height: H, cellDegrees } = UVI_L3B_GRID;
 const RADIANS = Math.PI / 180;

@@ -1,4 +1,4 @@
-import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '@cssearth/bake/objects/scene';
+import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees, type SolarGeometry } from '../scene/index.ts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
 // keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-colour
@@ -7,29 +7,30 @@ import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '@
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { readRgba, paintMissingCoverage } from '@cssearth/bake/raster';
-import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '@cssearth/bake/raster';
-import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationLens, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from '@cssearth/bake/objects/layers/observation';
+import { readRgba, paintMissingCoverage } from '../../raster/index.ts';
+import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '../../raster/index.ts';
+import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationLens, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from '../layers/observation/index.ts';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
-import { loadSurfaceObservation, type SurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
-import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '@cssearth/bake/objects/geometry';
-import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
+import { loadSurfaceObservation, type SurfaceObservation } from '../layers/terrestrial/index.ts';
+import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '../geometry/index.ts';
+import { readReconstruction } from '../layers/observation/index.ts';
 import { skyDisplayRaster } from '@cssearth/fits';
-import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '@cssearth/bake/objects/raster';
-import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
-import { validateCategoricalGrid } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
-import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
-import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
-import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '@cssearth/bake/objects/stellar';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '../raster/index.ts';
+import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '../layers/terrestrial/index.ts';
+import { validateCategoricalGrid } from '../layers/terrestrial/index.ts';
+import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
+import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
+import { readCie1931ColorMatching } from '../sources/index.ts';
+import { prepareGlbSurface } from '../layers/shape-model/index.ts';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }
 interface Options { readonly objectId: string; readonly displayName: string; readonly sourceDirectory: string; readonly recipe: InterpreterRecipe;
+  /** The generated solar geometry (`src/platform/solar-geometry.mts`), which the host loads and passes in. */
+  readonly solarGeometry: SolarGeometry;
   /** Partial restores verify selected source pins and decoder groups; photographs additionally forbid scientific/model changes.
    * Full preparation (and solar synoptic preparation) verifies the entire package. */
   readonly sourceVerification?: 'complete' | 'photographs' | 'selected-surfaces'; }
@@ -130,7 +131,7 @@ export function parseSynopticRecipe(value: unknown): SynopticRecipe {
 /** Build the lane's `interpret` adapter once per prepared object: `science.synoptic` selects the solar decoders,
  * `science.kind` the terrestrial, shape-model or static decoders. Decoded grids are cached per surface so the two
  * prepared densities decode each source once. */
-export async function createSurfaceInterpreter({ objectId, displayName, sourceDirectory, recipe, sourceVerification = 'complete' }: Options): Promise<ObservationInterpretation> {
+export async function createSurfaceInterpreter({ objectId, displayName, sourceDirectory, recipe, solarGeometry, sourceVerification = 'complete' }: Options): Promise<ObservationInterpretation> {
   const solar = recipe.emission ? createSolarSynopticInterpreter({ sourceDirectory, emission: recipe.emission }) : null;
   const manifest = createSourceManifest({ objectId: objectId, objectName: displayName, sourceRoot: sourceDirectory }).then(async source => {
     if (sourceVerification === 'complete') await source.verify();
@@ -499,10 +500,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const gravity = surface.science.gravityDarkening === undefined ? null : await (async () => {
           const path = requireString(surface.science.gravityDarkening, 'science.gravityDarkening');
           await source.validatePath(path);
-          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('@cssearth/bake/objects/stellar');
-          const { parseCieTable } = await import('@cssearth/bake/objects/color');
+          const { parseGravityDarkeningRecord, gravityDarkenedRows, meanSurfaceTemperature, surfaceTemperature } = await import('../stellar/index.ts');
+          const { parseCieTable } = await import('../color/index.ts');
           const record = parseGravityDarkeningRecord(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')));
-          const { readCie1931ColorMatching } = await import('@cssearth/bake/objects/sources');
+          const { readCie1931ColorMatching } = await import('../sources/index.ts');
           const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
           return { record, rows: gravityDarkenedRows(record, color, colorMatching, height), meanK: meanSurfaceTemperature(record), equatorK: surfaceTemperature(record, Math.PI / 2) };
         })();
