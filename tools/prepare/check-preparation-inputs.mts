@@ -17,7 +17,7 @@ import { sha256 } from '@cssearth/core/node';
 import { hasErrorCode } from '@cssearth/core';
 import { parseObjectText, textBudgetErrors } from '../../site/object-text.mts';
 import type { TextFinding } from '../../site/object-text.mts';
-import { inventoryAssets } from '../assets/runtime-assets.mts';
+import { inventoryAssets } from '@cssearth/bake/delivery';
 import type { InventoryAsset } from '@cssearth/objects/node';
 import { installRuntimeAssets } from '../assets/setup.mts';
 

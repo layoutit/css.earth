@@ -5,7 +5,7 @@ import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from 
 import { validateObjectProvenance } from '@cssearth/objects/provenance';
 import { manifestSources } from '@cssearth/bake/sources';
 import { requireInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
-import { VOLUME_METADATA_FILENAMES } from '../assets/runtime-assets.mts';
+import { VOLUME_METADATA_FILENAMES } from '@cssearth/bake/delivery';
 export const contextProvenanceCompilerClosure = ['tools/prepare/prepare-context-provenance.mts', 'packages/bake/src/sources/context-source-records.ts'];
 export async function prepareContextProvenance({ root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) } = {}) {
   const results = [];

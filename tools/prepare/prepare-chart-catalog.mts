@@ -1,7 +1,7 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
-import { inventoriedObjectIds } from '../assets/runtime-assets.mts';
+import { inventoriedObjectIds } from '@cssearth/bake/delivery';
 import { parseChartAssetRecipe } from '../objects/charts/charts.ts';
 import { escapeXml } from '@cssearth/bake/objects/charts';
 import { refreshObjectCharts } from '../objects/content/refresh-charts.mts';

@@ -9,6 +9,7 @@ export * from './prepared-webp.ts';
 export * from './public-runtime-assets.ts';
 export * from './publication.ts';
 export * from './publish-verification.ts';
+export * from './runtime-assets.ts';
 export * from './source-acquisition.ts';
 export * from './write-prepared-set.ts';
 export * from './write-prepared-text.ts';

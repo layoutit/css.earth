@@ -5,7 +5,8 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import { Agent, fetch as undiciFetch } from "undici";
-import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN, type RuntimeAssetLocation } from "./runtime-assets.mts";
+import { inventoryAssets, inventoriedObjectIds, type RuntimeAssetLocation } from '@cssearth/bake/delivery';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { isRecord } from "@cssearth/core";
 
 const execFileAsync = promisify(execFile);
@@ -34,7 +35,7 @@ async function gitInventoryAt(base: string, path: string, root: string): Promise
  * scoped to the keys its inventories add.
  */
 const SCOPE_WIDENING_PATHS = new Set([
-  "tools/assets/runtime-assets.mts",
+  "packages/bake/src/delivery/runtime-assets.ts",
   "packages/objects/src/node/runtime-asset-closure.ts",
 ]);
 

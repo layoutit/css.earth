@@ -6,8 +6,7 @@ import { existsSync, readdirSync } from "node:fs";
 import { relative, resolve } from "node:path";
 import { INVENTORY_FILE, readInventory } from '@cssearth/objects/node';
 
-import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
-export { RUNTIME_ASSET_ORIGIN };
+import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
 
 function parseObjectArgs(args: readonly string[]): string[] {
   return args.filter(arg => arg !== "--").map(arg => {
@@ -22,7 +21,7 @@ const hasInventory = (root: string, id: string) => existsSync(resolve(root, `src
  * The objects with an inventory, or the `--object=<id>` selection. Discovered by scanning `src/objects/*`, an
  * open-ended registry, so a newly inventoried object needs no change here.
  */
-export function inventoriedObjectIds(args: readonly string[], root = resolve(import.meta.dirname, "../..")): string[] {
+export function inventoriedObjectIds(args: readonly string[], root: string): string[] {
   const ids = parseObjectArgs(args);
   const selected = ids.length ? ids : readdirSync(resolve(root, "src/objects"), { withFileTypes: true })
     .filter(entry => entry.isDirectory() && /^[a-z][a-z0-9-]*$/u.test(entry.name) && hasInventory(root, entry.name))
@@ -35,7 +34,7 @@ export function inventoriedObjectIds(args: readonly string[], root = resolve(imp
 }
 
 /** `--object=<id>` names any object package (its sources may precede a first bake); the default is every inventoried object. */
-export function selectedObjectIds(args: readonly string[], root = resolve(import.meta.dirname, "../..")): string[] {
+export function selectedObjectIds(args: readonly string[], root: string): string[] {
   const ids = parseObjectArgs(args);
   if (!ids.length) return inventoriedObjectIds([], root);
   if (new Set(ids).size !== ids.length || ids.some(id => !/^[a-z][a-z0-9-]*$/u.test(id) || !existsSync(resolve(root, `src/objects/${id}/object.json`)))) {
@@ -86,7 +85,7 @@ export async function inventoryAssets(root: string, objectIds: readonly string[]
 export const VOLUME_METADATA_FILENAMES = ['presentation.json', 'provenance.json'] as const;
 
 /** The volume and context objects, whose bulk data stays on R2 while a deploy catalogue reads only their metadata. */
-export async function volumeMetadataObjectIds(root = resolve(import.meta.dirname, "..")): Promise<string[]> {
+export async function volumeMetadataObjectIds(root: string): Promise<string[]> {
   const ids: string[] = [];
   for (const id of inventoriedObjectIds([], root)) {
     const text = await readFile(resolve(root, 'src/objects', id, 'source/presentation.json'), 'utf8').catch(() => null);
@@ -101,7 +100,7 @@ export async function volumeMetadataObjectIds(root = resolve(import.meta.dirname
 }
 
 /** Only the metadata a deploy catalogue needs; restoring every volume's bank here would be tens of gigabytes. */
-export async function volumeMetadataAssets(root = resolve(import.meta.dirname, "..")) {
+export async function volumeMetadataAssets(root: string) {
   const ids = await volumeMetadataObjectIds(root);
   const assets = await inventoryAssets(root, ids, { location: 'prepared', filenames: VOLUME_METADATA_FILENAMES });
   for (const id of ids) for (const filename of VOLUME_METADATA_FILENAMES) {

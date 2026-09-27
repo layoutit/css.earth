@@ -5,7 +5,8 @@ import { execFile, spawn } from "node:child_process";
 import { promisify } from "node:util";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from "./runtime-assets.mts";
+import { inventoryAssets, inventoriedObjectIds } from '@cssearth/bake/delivery';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { verifyPublished, reportVerification, type PublishAsset } from "@cssearth/bake/delivery";
 
 const BUCKET = "cssearth-assets";

@@ -3,7 +3,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
+import { inventoryAssets, inventoriedObjectIds } from '@cssearth/bake/delivery';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '@cssearth/renderer';
 
 const execFileAsync = promisify(execFile);

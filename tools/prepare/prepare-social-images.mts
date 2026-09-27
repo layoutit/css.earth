@@ -5,7 +5,7 @@ import { parseArgs } from "node:util";
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { previewSite } from "../cli/preview.mts";
-import { inventoriedObjectIds } from "../assets/runtime-assets.mts";
+import { inventoriedObjectIds } from "@cssearth/bake/delivery";
 import { writeLossyWebp } from "@cssearth/bake/raster";
 import { readPreparedObjects } from "@cssearth/objects/node";
 
@@ -18,7 +18,7 @@ const { values } = parseArgs({ options: {
   "base-url": { type: "string" },
   object: { type: "string", multiple: true, default: [] },
 } });
-const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`));
+const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`), resolve(import.meta.dirname, "../.."));
 const outputDirectory = values.card ? "public/overview" : "public/social";
 export const PORTRAIT_WIDTH = 600, PORTRAIT_HEIGHT = 315;
 await mkdir(outputDirectory, { recursive: true });

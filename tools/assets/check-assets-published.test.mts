@@ -259,8 +259,8 @@ test('a scoped gate still fails when an added key is missing', async t => {
 
 test('addedAssetKeys checks everything when key-construction code changed or there is no merge base', async () => {
   const widened = await addedAssetKeys('origin/main', { mergeBase: async () => 'b'.repeat(40),
-    changedPaths: async () => ['tools/assets/runtime-assets.mts', 'src/objects/hebe/inventory.json'], inventoryAt: async () => null });
-  assert.deepEqual(widened, { all: true, reason: 'tools/assets/runtime-assets.mts changed' });
+    changedPaths: async () => ['packages/bake/src/delivery/runtime-assets.ts', 'src/objects/hebe/inventory.json'], inventoryAt: async () => null });
+  assert.deepEqual(widened, { all: true, reason: 'packages/bake/src/delivery/runtime-assets.ts changed' });
   const closure = await addedAssetKeys('origin/main', { mergeBase: async () => 'b'.repeat(40),
     changedPaths: async () => ['packages/objects/src/node/runtime-asset-closure.ts'], inventoryAt: async () => null });
   assert.equal(closure.all, true);
@@ -272,7 +272,7 @@ test('a scope-widening change makes the gate check every inventoried key', async
   const root = await gitFixture();
   t.after(() => rm(root, { recursive: true, force: true }));
   const result = await checkAssetsPublished([], { root, addedSince: 'base', fetcher: async () => ok(),
-    findAddedKeys: async () => ({ all: true, reason: 'tools/assets/runtime-assets.mts changed' }) });
+    findAddedKeys: async () => ({ all: true, reason: 'packages/bake/src/delivery/runtime-assets.ts changed' }) });
   assert.equal(result.checked, 8);
 });
 

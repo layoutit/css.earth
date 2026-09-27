@@ -93,7 +93,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const presentation = await readFile(resolve(root, 'src/objects', ids[0], 'source/presentation.json'), 'utf8').then(text => JSON.parse(text) as { schema?: unknown }, () => null);
   if (!before.equals(await readFile(manifestPath)) && presentation?.schema === 'cssearth-volume-presentation-source@1') {
     const { writeVolumeProvenance } = await import('../prepare/prepare-volume-provenance.mts');
-    const { RUNTIME_ASSET_ORIGIN } = await import('../assets/runtime-assets.mts');
+    const { RUNTIME_ASSET_ORIGIN } = await import('@cssearth/bake/objects/sources');
     const results = await writeVolumeProvenance({ root, mirrorOrigin: RUNTIME_ASSET_ORIGIN });
     console.log(`Volume provenance recorded again for the changed manifest: ${results.length} volume packages.`);
   }

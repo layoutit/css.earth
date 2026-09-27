@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { inventoriedObjectIds, inventoryAssets } from './runtime-assets.mts';
+import { inventoriedObjectIds, inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from './setup.mts';
 
 
