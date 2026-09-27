@@ -48,6 +48,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/contract` | the checked object runtime definition and its prepared resource catalogue, validated against the prepared-presentation contract and the renderer's object controls | Node only |
 | `@cssearth/bake/astronomy` | preparation's access to the built astronomy package, with a build hint when it is missing | Node only (`node:*`) |
 | `@cssearth/bake/navigation` | prepared focus objects and scene distances for the catalogue and search destinations, navigation marker recipes and their sprites, and the navigation preparation that writes the marker atlases and presentation | Node only (`node:*`, `sharp`) |
+| `@cssearth/bake/site-assets` | the application's prepared assets that are not an object's own: dataset sprites, search thumbnails, the planets' phase charts and the vendored Cesium minimap excerpts | Node only (`node:*`, `sharp`, `vite`) |
 | `@cssearth/bake/surface-previews` | the prepared records a surface minimap or preview raster is drawn from | Node only (`node:*`) |
 | `@cssearth/bake/preparation` | the preparation cache and the preparation trace's record format | Node only (`node:*`) |
 | `@cssearth/bake/thread-pool` | sizes libuv's thread pool to the cores; imported for its side effect before other entries | Node only (`node:os`) |
@@ -81,7 +82,7 @@ packages/bake/
 │   src/galaxy-catalog/, src/galaxy-field/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
 ├── src/runtime-source/, src/prepared-presentation/, src/delivery/, src/sources/, src/contract/, src/astronomy/,
-│   src/navigation/, src/surface-previews/, src/preparation/, src/thread-pool/
+│   src/navigation/, src/site-assets/, src/surface-previews/, src/preparation/, src/thread-pool/
 │                  the runtime-source reader, presentation passes, prepared delivery, source records, the object
 │                  runtime contract, the astronomy package loader, navigation destinations and markers, surface-preview records, the preparation
 │                  cache and trace format, and the thread-pool sizing: one entry each
