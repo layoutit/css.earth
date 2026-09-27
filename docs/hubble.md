@@ -283,7 +283,8 @@ node packages/telescope-cli/src/archives/hst/compare.mts   europa-15419 idr203wt
 node packages/telescope-cli/src/archives/hst/drizzle.mts   europa-15419 idr203wtq .local/hst/europa-15419-idr203wtq
 node packages/telescope-cli/src/archives/hst/compare.mts   europa-15419 idr203wtq .local/hst/europa-15419-idr203wtq/drizzle
 node packages/telescope-cli/src/archives/hst/archive-ledger.mts --write
-node --test tools/objects/hst/*.test.mts
+pnpm test:telescope-cli
+node --import ./tests/register-vite-suffix.mts --test tools/objects/hst/slit-scan-map.test.mts
 ```
 
 The line stack is its own command, and takes a directory that already holds the pinned `_x2d` frames:
