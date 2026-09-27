@@ -21,7 +21,7 @@ import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import { readCoraltempAnomaly } from "./sst-anomaly.ts";
-import { verifyPreparedMurImage, writeMurLegend } from "./mur-image.ts";
+import { verifyPreparedMurImage, writeMurLegend } from "./globe/mur-image.ts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.ts";
 import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.ts";
 import { textureTintFactors } from "@layoutit/polycss";

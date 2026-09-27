@@ -1,10 +1,10 @@
-import { readJsonSource } from '../../sources/index.ts';
+import { readJsonSource } from '../../../sources/index.ts';
 import { requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { parseMurReceipt } from './source-contract.ts';
-import type { EnsoRecipe } from './contracts.ts';
+import { parseMurReceipt } from '../source-contract.ts';
+import type { EnsoRecipe } from '../contracts.ts';
 
 // The prepared NASA MUR anomaly image and its colour legend, read by the paged-ellipsoid assets. Acquiring and mosaicking the
 // tiles is Earth's authoring (tools/objects/paged-ellipsoid/mur-imagery.mts), which reads the colour table through this module.
