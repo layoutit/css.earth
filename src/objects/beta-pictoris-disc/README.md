@@ -51,7 +51,7 @@ Nothing is drawn within 1.5 arcseconds (29 au), where Golimowski et al. find the
 Runs of 2026-09-22, this version:
 
 - `node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst` made the six ACS products, pinned by digest in the recipe; each has its product record beside it.
-- `node packages/telescope-cli/src/archives/hst/compare.mts beta-pictoris-9987 j8qj15060 …` wrote the archive comparison receipts in `tools/objects/hst/programs/`.
+- `node packages/telescope-cli/src/archives/hst/compare.mts beta-pictoris-9987 j8qj15060 …` wrote the archive comparison receipts in `packages/telescope-cli/src/archives/hst/programs/`.
 - `node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc` solved all three lenses; the two older lenses reproduced their previous errors exactly.
 - `node tools/objects/circumstellar/author.mts beta-pictoris-disc` measured all three lenses (numbers above).
 - [`edge-on-disc.test.mts`](../../../tools/objects/circumstellar/edge-on-disc.test.mts): a synthetic edge-on disc's midplane is recovered from its own projection; the ridge stays on the main disc beside a tilted secondary one; a deposited array read north up and east left puts a north-east source north-east. [`psf-subtract.test.mts`](../../../packages/telescope-cli/src/archives/hst/psf-subtract.test.mts): every association the subtraction names is pinned through its band on its star, and a missing or impossible flux ratio is refused.

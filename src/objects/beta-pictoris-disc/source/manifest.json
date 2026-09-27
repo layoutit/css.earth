@@ -90,7 +90,7 @@
       "title": "HST programme 9987 \u00b7 ACS/HRC F435W, roll 1, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
-      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
       "lensId": "colour"
     },
@@ -113,7 +113,7 @@
       "title": "HST programme 9987 \u00b7 ACS/HRC F435W, roll 2, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
-      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
       "lensId": "colour"
     },
@@ -136,7 +136,7 @@
       "title": "HST programme 9987 \u00b7 ACS/HRC F606W, roll 1, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
-      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
       "lensId": "colour"
     },
@@ -159,7 +159,7 @@
       "title": "HST programme 9987 \u00b7 ACS/HRC F606W, roll 2, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
-      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
       "lensId": "colour"
     },
@@ -182,7 +182,7 @@
       "title": "HST programme 9987 \u00b7 ACS/HRC F814W, roll 1, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
-      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
       "lensId": "colour"
     },
@@ -205,7 +205,7 @@
       "title": "HST programme 9987 \u00b7 ACS/HRC F814W, roll 2, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
-      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "acquisition": "Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
       "lensId": "colour"
     }
