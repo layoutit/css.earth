@@ -1,14 +1,14 @@
 /**
  * Shared reference banks: one pinned copy of a standard table every body reads, under `src/references/<set>/`, instead of
  * a copy in each body that uses it. A bank's `manifest.json` has the shape of a body's source manifest and is verified the
- * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (tools/kernel-banks/kernel-bank.mts).
+ * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (`kernel-banks.ts` in objects/cameras).
  */
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 
-/** The banks' directory, found upward from this module: it runs from tools/references and bundled into tools/objects/dist. */
+/** The banks' directory, found upward from this module: it runs from its bake source and bundled into packages/bake/dist. */
 function findReferenceBankRoot(from: string): string {
   for (let directory = from; ; directory = dirname(directory)) {
     const candidate = resolve(directory, 'src/references');
@@ -17,12 +17,14 @@ function findReferenceBankRoot(from: string): string {
   }
 }
 
-export const REFERENCE_BANK_ROOT = findReferenceBankRoot(import.meta.dirname);
+// Found on first use rather than at import, so importing the sources entry never needs a checkout's src/references.
+let bankRoot: string | undefined;
+const referenceBanksRoot = () => bankRoot ??= findReferenceBankRoot(import.meta.dirname);
 const SET_ID = /^[a-z][a-z0-9-]*$/u;
 
 export function referenceBankRoot(set: string) {
   if (!SET_ID.test(set)) throw new TypeError(`Invalid reference bank id: ${set}`);
-  return resolve(REFERENCE_BANK_ROOT, set);
+  return resolve(referenceBanksRoot(), set);
 }
 
 /** A bank's manifest, validated and verifiable like a body's source manifest. */

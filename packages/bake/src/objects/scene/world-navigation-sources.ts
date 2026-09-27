@@ -1,5 +1,5 @@
 import { buildPolyMeshTransform } from '@layoutit/polycss';
-import { multiply, reflection, rotation, type Matrix3 } from '@cssearth/bake/objects/scene';
+import { multiply, reflection, rotation, type Matrix3 } from './world-navigation.ts';
 
 /** An authored source or prepared runtime record, read as JSON. The reads below keep JavaScript's own property semantics, so
  * an ill-formed record fails, or is accepted, exactly where an untyped read would. */

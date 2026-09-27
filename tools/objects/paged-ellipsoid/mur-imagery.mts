@@ -1,4 +1,4 @@
-import {readJsonSource} from '../../sources/source-values.mts';
+import {readJsonSource} from '@cssearth/bake/objects/sources';
 import {requireString} from '@cssearth/core';
 import {parseMurReceipt} from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type {EnsoRecipe, MurInventory, MurMosaic, MurTile} from '@cssearth/bake/objects/layers/paged-ellipsoid';

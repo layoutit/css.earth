@@ -10,7 +10,7 @@ import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-pres
 import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
+import { prepareScientificNavigation, prepareTerrestrialRings } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BASE_TILE } from '@layoutit/polycss';
@@ -25,8 +25,7 @@ import { requirePreparedPresentation } from '@cssearth/bake/presentation';
 import { requirePreparedResourceCatalog } from '../../contract/object-runtime-contract.mts';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
 import { restoreDepthSource } from '../../prepared/prepared-depth-partitions.mts';
-import { prepareTerrestrialRings } from './rings.mts';
-import { publishedImageSize } from '../shape-model/raster.mts';
+import { publishedImageSize } from '@cssearth/bake/objects/layers/shape-model';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;

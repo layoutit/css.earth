@@ -1,7 +1,6 @@
 import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '@cssearth/bake/objects/raster';
-import { validateTerrestrialRings } from './rings.mts';
+import { validateTerrestrialRings, parseSolidPreparationSource, scientificPreviewGrid, lensTextureGrid, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import { isArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
-import { parseSolidPreparationSource, scientificPreviewGrid, lensTextureGrid, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 import type { parseSolidScience } from '@cssearth/bake/objects/layers/terrestrial';
 import type { prepareObjectContentAssets } from '../content/prepare.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';

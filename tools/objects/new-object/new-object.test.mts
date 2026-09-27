@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { parseCieTable } from '@cssearth/bake/objects/color';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { readIdentifiers, type Archive, type GaiaRow } from './archives.mts';
 import { chooseColor, coverageGaps } from './color.mts';
 import { assembleArchiveOrbit, orbitizeHostedOrbit, parseArchiveRows } from './orbit.mts';

@@ -4,7 +4,7 @@ import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from './stellar-photometric-color.mts';
-import { readCie1931ColorMatching } from '../../../references/reference-bank.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 const root = new URL('../../../../src/objects/wasp-43/source/', import.meta.url);
 const read = async (path: string) => readFile(new URL(path, root));

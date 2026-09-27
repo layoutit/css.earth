@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
 import { prepareRingLeaves } from '@cssearth/bake/objects/layers/shape-model';
-import { prepareTerrestrialRings, validateTerrestrialRings } from './rings.mts';
+import { prepareTerrestrialRings, validateTerrestrialRings } from '@cssearth/bake/objects/layers/terrestrial';
 
 const band = (id: string, innerRadiusKm: number, outerRadiusKm: number, displayOpacity: number) => ({
   id, innerRadiusKm, outerRadiusKm, displayOpacity, displayValue: 160, segments: 64,

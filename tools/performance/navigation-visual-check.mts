@@ -4,7 +4,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { chromium } from 'playwright';
 import { previewSite } from '../cli/preview.mts';
-import { readJsonSource } from '../sources/source-values.mts';
+import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { recordOf } from './trace-model.mts';
 

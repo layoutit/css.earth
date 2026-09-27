@@ -2,3 +2,5 @@
 // and the pinned source files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes.
 export * from './authored-sources.ts';
 export * from './source-files.ts';
+export * from './source-values.ts';
+export * from './reference-bank.ts';

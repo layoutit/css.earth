@@ -7,7 +7,7 @@ import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheOmegaForFlattening, rocheRadius, surfaceTemperature } from './gravity-darkening.mts';
 import { planckRadiance } from '@cssearth/bake/objects/raster';
-import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
+import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 const objects = new URL('../../../src/objects/', import.meta.url);
 const record = async (id: string) => {

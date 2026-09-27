@@ -4,5 +4,6 @@
 export * from './glb-surface.ts';
 export * from './index.ts';
 export * from './lighting.ts';
+export * from './raster.ts';
 export * from './rings.ts';
 export * from './source.ts';

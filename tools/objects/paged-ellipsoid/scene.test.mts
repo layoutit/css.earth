@@ -6,11 +6,9 @@ import { resolve } from 'node:path';
 import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '@cssearth/bake/presentation';
 import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
-import { parsePagedProfile } from './profile-source.mts';
-import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { createAtmospherePreparation } from './atmosphere.mts';
-import { prepareEllipsoidAttitude } from './attitude.mts';
+import { parsePagedProfile, parseInteriorSource, createPagedSurfaceRaster, createAtmospherePreparation, prepareEllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { preparePagedEllipsoidScene } from './scene.mts';
+import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const source = resolve(import.meta.dirname, '../../../src/objects/earth/source');
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(source, path), 'utf8'));
@@ -24,7 +22,7 @@ async function earthScene() {
     sun: prepareDirectionalSun(), polarToEquatorial: config.polarRadiusKm / config.equatorialRadiusKm });
   const atmosphereModel = { outerRadiusRatio: 1, profile: {}, atmosphereSource: 'stand-in', law: { paths: [] }, reference: [0, 0, 0],
     referenceSource: 'stand-in' } as unknown as AtmosphereModel;
-  const attitude = prepareEllipsoidAttitude('earth', { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z, mapLeftEdgeLongitudeDeg: 0 });
+  const attitude = prepareEllipsoidAttitude(solarGeometry, 'earth', { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z, mapLeftEdgeLongitudeDeg: 0 });
   return preparePagedEllipsoidScene({ config, interiorSource: parseInteriorSource(await json(config.interiorPath)), atmosphereModel, atmosphere,
     raster: createPagedSurfaceRaster(config), attitude }).scene;
 }
