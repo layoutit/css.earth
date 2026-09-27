@@ -7,7 +7,8 @@ itself is [`@cssearth/telescope-cli`](../telescope-cli/AGENTS.md), a layer above
 The library holds archive-neutral telescope plumbing: product records, PDS3 and PDS4 label reading, target-name
 resolution, SIMBAD sky targets, cited target associations, the inline Python runner, the ESO archive and esorex clients, and the clients of the pinned Python
 astronomy packages with their toolchain pins. Mission or archive policy (which programs, which frames,
-how an archive's ledger is written) stays in `tools/objects/<archive>/`, and object-specific use of products stays in
+how an archive's ledger is written) stays with the telescope command (`packages/telescope-cli/src/archives/<archive>/`, and
+`tools/objects/<archive>/` for the archives not yet moved), and object-specific use of products stays in
 the bake. Nothing here names a body.
 
 Keep the main entry (`src/index.ts`) host-neutral: no Node built-ins, DOM globals or file I/O. `src/node/` is

@@ -22,4 +22,5 @@ reinstall.
 
 What stays outside the package: the telescope command (`@cssearth/telescope-cli`) with each archive's clients, reducers and
 ledger builders and the ledger machinery they share, the archives' pinned programs and toolchain pins
-(`tools/objects/<archive>/`), and every object-specific use of a product.
+(beside the archive's code in `packages/telescope-cli/src/archives/<archive>/`, or `tools/objects/<archive>/` for the
+archives not yet moved), and every object-specific use of a product.
