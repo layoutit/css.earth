@@ -132,7 +132,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Check shared body runtime behavior | `node --test tests/objects/unit/runtime-package.test.mts`; run affected scientific tests in `tests/objects/unit/` too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
 | Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "tools/sources/*.test.mts"`, or select the affected files |
-| Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, `node tools/oracles/run.mts`; see `tools/oracles/README.md` |
+| Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, `node tests/oracles/run.mts`; see `tests/oracles/README.md` |
 | Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
 | Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |

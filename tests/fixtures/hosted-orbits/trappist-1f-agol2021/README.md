@@ -10,7 +10,7 @@ at the commit `manifest.json` records, defines Table 2's transit epoch: in its
 plane-parallel convention, inferior conjunction has
 `f = 3*pi/2 - omega`.
 The source convention is checked by `tools/objects/hosted-orbit-source.test.mts`.
-`tools/oracles/astronomy/hosted-eccentric.py` reads `qualification.json` and
+`tests/oracles/astronomy/hosted-eccentric.py` reads `qualification.json` and
 regenerates six independent CSPICE states in the shared oracle fixture.
 
 The source convention is not the convention used by batman-style transit

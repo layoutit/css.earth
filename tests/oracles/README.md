@@ -3,7 +3,7 @@
 An oracle is a reference implementation that recomputes what the preparation
 pipeline computes, so a test can compare the two. The pipeline stays strict
 TypeScript and derives nothing from an oracle; the oracle only says whether the
-pipeline's result is right. `tools/oracles/comet-19p/` and `tools/oracles/venus/`
+pipeline's result is right. `tests/oracles/comet-19p/` and `tests/oracles/venus/`
 are older standalone audits; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
@@ -14,34 +14,40 @@ are older standalone audits; the groups below are fixture oracles.
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `eclipse-map/theresa-eigenbasis.py` | `tests/objects/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | NumPy, Astropy, following pinned ThERESA source | Eclipse-map harmonic normalization and signs, weighted linear fit and posterior covariance, Planck radiance and single/band brightness temperatures | `eclipse-map/numerics.py` | `tests/objects/eclipse-map/numerics.oracle.test.mts` |
 | [Native SBMT](sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
-| SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tools/oracles/spice/dart-draco.oracle.test.mts`, and `tools/oracles/spice/small-kernel.oracle.test.mts` for the LSK and PCK alone |
-| SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `tools/oracles/spice/new-horizons-approach.oracle.test.mts` |
+| SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tests/oracles/spice/dart-draco.oracle.test.mts`, and `tests/oracles/spice/small-kernel.oracle.test.mts` for the LSK and PCK alone |
+| SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `tests/oracles/spice/new-horizons-approach.oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `pds/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
 | pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `pds3/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
 | pvl, numpy | `archived-camera.mts`: the OSIRIS level-4 reflectance, sigma and quality planes (Steins) | `pds3/osiris-reflectance.py` | `archived-camera.oracle.test.mts` |
 | pvl, numpy, astropy | `amica-geo.mts`: the Hayabusa AMICA Gaskell DDR cube, detector FITS and flat field (Itokawa) | `pds3/amica-ddr.py` | `amica-geo.oracle.test.mts` |
 | astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `fits/llorri.py` | `llorri-geo.oracle.test.mts` |
 | astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `fits/encounter.py` | `encounter-fits.oracle.test.mts` |
-| astropy | Shared FITS numeric decoding, scaling, missing values, cube planes, image extensions and CONTINUE long strings | `fits/core.py` | `tools/oracles/fits/core.oracle.test.mts` |
-| astropy | `@cssearth/fits` `readRiceCompressedImage`: RICE_1 tile-compressed images (8-, 16- and 32-bit; constant, small-difference and directly coded blocks; JSOC's BSCALE, BZERO and table BLANK) and `hmi-continuum.mts` HMI pixels under CROTA2 through `astropy.wcs` | `fits/rice.py` | `tools/oracles/fits/rice.oracle.test.mts` |
+| astropy | Shared FITS numeric decoding, scaling, missing values, cube planes, image extensions and CONTINUE long strings | `fits/core.py` | `tests/oracles/fits/core.oracle.test.mts` |
+| astropy | `@cssearth/fits` `readRiceCompressedImage`: RICE_1 tile-compressed images (8-, 16- and 32-bit; constant, small-difference and directly coded blocks; JSOC's BSCALE, BZERO and table BLANK) and `hmi-continuum.mts` HMI pixels under CROTA2 through `astropy.wcs` | `fits/rice.py` | `tests/oracles/fits/rice.oracle.test.mts` |
 | astropy | `observation/wise-atlas-mosaic.mts`: AllWISE atlas SIN tile pixels to the hips2fits-convention TAN grid, near the centre and at a 24° field corner | `fits/wise-atlas-projection.py` | `observation/wise-atlas-mosaic.oracle.test.mts` |
-| astropy | `@cssearth/fits` `skyImageAxes` and `skyDisplayRaster`: which way RA and Dec run along columns and rows at the reference pixel (CDELT, CD, PC and CROTA2; linear and zenithal axes; SQUEEZE, hips2fits and ZIMPOL headers), the north-up east-left display raster, and refusal of rotated or skewed images | `fits/sky-orientation.py` | `tools/oracles/fits/sky-orientation.oracle.test.mts` |
-| astropy | `@cssearth/fits` `skyProjection` and `@cssearth/fits/node` `readFitsFileRegion`: pixel to ICRS and back for rotated, skewed and near-pole TAN headers, including a JWST NIRCam level-3 mosaic's WCS; refusal of SIP, TPV, SIN and FK4; one image region read from disk | `fits/sky-projection.py` | `tools/oracles/fits/sky-projection.oracle.test.mts` |
+| astropy | `@cssearth/fits` `skyImageAxes` and `skyDisplayRaster`: which way RA and Dec run along columns and rows at the reference pixel (CDELT, CD, PC and CROTA2; linear and zenithal axes; SQUEEZE, hips2fits and ZIMPOL headers), the north-up east-left display raster, and refusal of rotated or skewed images | `fits/sky-orientation.py` | `tests/oracles/fits/sky-orientation.oracle.test.mts` |
+| astropy | `@cssearth/fits` `skyProjection` and `@cssearth/fits/node` `readFitsFileRegion`: pixel to ICRS and back for rotated, skewed and near-pole TAN headers, including a JWST NIRCam level-3 mosaic's WCS; refusal of SIP, TPV, SIN and FK4; one image region read from disk | `fits/sky-projection.py` | `tests/oracles/fits/sky-projection.oracle.test.mts` |
 | astropy | `packages/bake/src/objects/raster/fits/fits-table.ts`: every OIFITS column type including complex C and M, TNULL read as NaN, HIERARCH keys, and refusal of TSCAL/TZERO-scaled columns | `fits/binary-table.py` | `packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts` |
 | astropy | `color-transfer.ts` (`@cssearth/bake/objects/color`) asinh band display: every byte of `make_lupton_rgb` (Lupton et al. 2004) for colour and one-band cases | `fits/lupton-asinh.py` | `tools/objects/color-transfer.oracle.test.mts` |
-| astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tools/oracles/fits/pallas.test.mts` |
-| astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tools/oracles/fits/synoptic.test.mts` |
+| astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tests/oracles/fits/pallas.test.mts` |
+| astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tests/oracles/fits/synoptic.test.mts` |
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `fits/charon-leisa.py` | `observation/spectral-band-maps.test.mts` |
 | pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `isis2/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
 | numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `npy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
 | USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tests/photometry/isis.oracle.test.mts` |
 
-Scripts are under `tools/oracles/`, fixtures under `tests/oracles/` with the
-same group and name, and the comparing tests under `tests/objects/terrestrial/` unless a path
-is given. The shared FITS reader is the
+Each script sits in `tests/oracles/<group>/` beside the fixture it writes, which has the
+same name (`fits/core.py` writes `fits/core.json`), and the comparing tests are under
+`tests/objects/terrestrial/` unless a path is given. Fixtures written before the scripts moved
+here from `tools/oracles/` still name that path in `generatedBy` until they are regenerated.
+Five files keep their bytes because body evidence pins their SHA-256: `isis-geotiff-grid.mts`,
+`lunar-mi-quality.mts`, `geotiff-image.mts`, `reflectance-mosaics.mts` and `tsconfig.json`. The
+four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`. The
+SBMT generator's bytes are its fixture's `generatorSha256`, so `sbmt/projection.mts` also keeps
+the old path it writes. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
-their scripts in `tools/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
-likewise sit beside their scripts in `tools/oracles/spice/`.
+their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
+likewise sit beside their scripts in `tests/oracles/spice/`.
 
 ## Rules
 
@@ -68,27 +74,27 @@ likewise sit beside their scripts in `tools/oracles/spice/`.
 
 ## Setup and use
 
-SBMT is an opt-in native backend: `node tools/oracles/setup.mts sbmt`, then
-`node tools/oracles/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock and generator digest. `node tools/oracles/test-sbmt.mts --unit`
-runs offline in CI; `node tools/oracles/test-sbmt.mts --restore` restores only its selected inputs
+SBMT is an opt-in native backend: `node tests/oracles/setup.mts sbmt`, then
+`node tests/oracles/run.mts sbmt/projection`. It uses the same fixture envelope with a
+pinned executable/software lock and generator digest. `node tests/oracles/test-sbmt.mts --unit`
+runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](sbmt/README.md).
 The commands below operate on the Python backends.
 
 ```bash
-node tools/oracles/setup.mts
+node tests/oracles/setup.mts
 ```
 
-creates `.local/oracles/venv` from `tools/oracles/requirements.txt`, which pins
+creates `.local/oracles/venv` from `tests/oracles/requirements.txt`, which pins
 every package, transitive ones included (Python 3.12; set `ORACLE_PYTHON` for
 another interpreter). Then regenerate every fixture, or name some:
 
 ```bash
-node tools/oracles/run.mts
+node tests/oracles/run.mts
 ```
 
 ```bash
-node tools/oracles/run.mts fits/llorri spice/dart-draco
+node tests/oracles/run.mts fits/llorri spice/dart-draco
 ```
 
 The inputs must be restored first (`node tools/objects/dist/operations.js acquire <id>`).

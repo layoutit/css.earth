@@ -9,7 +9,7 @@ import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '
 
 /**
  * NASA's pds4_tools as the oracle for the geometry-cube decoder.
- * tools/oracles/pds/dart-draco-cube.py reads every label-defined plane of the
+ * tests/oracles/pds/dart-draco-cube.py reads every label-defined plane of the
  * DRACO cube from its byte offset and samples values; the decoder must
  * reproduce them exactly, after its declared unit conversions.
  */

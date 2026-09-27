@@ -257,17 +257,17 @@ names the four native files, sizes and source URLs independently of production
 body acquisition. They are restored under ignored `.local/fits-reference/`;
 no Pallas body recipe or surface output changes here.
 
-`node tools/oracles/test-fits.mts --unit` runs the offline subset, including small checked-in
+`node tests/oracles/test-fits.mts --unit` runs the offline subset, including small checked-in
 Astropy-generated FITS files. CI runs this subset. It does not prove that the
 large archive files are available or that complete body preparation passed.
-Regenerate the small reference fixtures with `node tools/oracles/setup.mts`, then
-`node tools/oracles/run.mts fits/core`; normal tests need no Python environment.
+Regenerate the small reference fixtures with `node tests/oracles/setup.mts`, then
+`node tests/oracles/run.mts fits/core`; normal tests need no Python environment.
 
 The retained runner's full and `--restore` paths still name four removed per-body
 test files under `tests/objects/unit/`. They are not a working complete gate.
 Until that runner is repaired, restore the affected body's inputs with
 `node tools/assets/restore-source-inputs.mts --object=<id>` and select the existing
-FITS tests (`node tools/oracles/test-fits.mts --unit` runs the package's own tests and its
+FITS tests (`node tests/oracles/test-fits.mts --unit` runs the package's own tests and its
 Astropy comparisons) and the affected preparation owner's tests. Report missing
 archive inputs and source-dependent skips; do not claim a full FITS pass from
 the offline subset. A retained local copy must match the intended provider

@@ -102,7 +102,7 @@ Photosphere and longitude review (measured on `main` at 11ac994699; unchanged co
 - The JSOC segments are Rice tile-compressed FITS. `@cssearth/fits` (`packages/fits/src/rice.ts`)
   decodes them; on the full 13 May frame every one of the 16.8 million samples
   equals astropy's raw integer through BSCALE/BZERO, with BLANK samples in the
-  same places. The [oracle table](../../../tools/oracles/README.md) lists the
+  same places. The [oracle table](../../../tests/oracles/README.md) lists the
   committed fixture.
 - [Unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/sun) and the
   shared browser conformance harness

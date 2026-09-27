@@ -7,7 +7,7 @@ import { radianceFactor, type ScatteringAngles } from '@cssearth/bake/photometry
 import type { HapkeModel, ParticlePhaseFunction } from '@cssearth/bake/photometry';
 
 /**
- * USGS ISIS3 as the oracle. tools/oracles/isis/photometric-truth.py reads the truth
+ * USGS ISIS3 as the oracle. tests/oracles/isis/photometric-truth.py reads the truth
  * files of ISIS's photometric model unit tests at the 10.0.0_LTS commit: the
  * parameters, the (phase, incidence, emission) geometries, and the values that
  * ISIS's own Hapke.cpp, LunarLambert.cpp, Minnaert.cpp and LommelSeeliger.cpp
