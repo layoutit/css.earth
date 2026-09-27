@@ -6,7 +6,7 @@ import { sha256, sha256File } from '@cssearth/core/node';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from '../toolchain.mts';
 import { toolchainPython } from '@cssearth/telescope/node';
-import { openSpectralCube } from './spectral-cube.mts';
+import { openSpectralCube } from '@cssearth/bake/objects/layers/observation';
 import type { ProductFacts } from '../../telescopes/request-satisfaction.mts';
 
 export const RESOLUTION_METHOD = 'jwst-point-source-profile@1';

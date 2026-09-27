@@ -19,3 +19,4 @@ export * from './directional-sun-contract.ts';
 export * from './prepare-cubic-sky-source.ts';
 export * from './prepare-directional-sun.ts';
 export * from './prepared-presentation-contract.ts';
+export * from './prepare-materials.ts';

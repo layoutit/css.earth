@@ -8,7 +8,7 @@ import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErr
 import { readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
-import { parseResolutionEvidence } from '../resolution-evidence.mts';
+import { parseResolutionEvidence } from '@cssearth/bake/objects/layers/observation';
 import { parseRegion } from '@cssearth/telescope/node';
 
 export interface QualifiedObservation {

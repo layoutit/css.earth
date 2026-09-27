@@ -7,7 +7,7 @@ import { matchVis2, vis2Agreement } from './author-comparison.mts';
 import { readReconstruction } from './beam-convolve.mts';
 import { discStartImage, fitUniformDisc } from './disc-fit.mts';
 import { parseSeason, TWIN_SCALES } from './image-star.mts';
-import { readChannelRows } from './oifits-rows.mts';
+import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { selectOifits } from './oifits-select.mts';
 import { parseSqueezeFit, squeezeArguments } from './squeeze.mts';
 

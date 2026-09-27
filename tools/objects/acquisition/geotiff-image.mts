@@ -11,7 +11,7 @@ import {Readable, Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
 import {containedPath} from '@cssearth/bake/objects/sources';
 import {missingCoverageColor} from '@cssearth/bake/raster';
-import {withIdleTimeout} from '../../assets/source-mirror.mts';
+import {withIdleTimeout} from '@cssearth/bake/objects/sources';
 import {assertGeoTiffGrid, parseGeoTiffGridRecipe, type GeoTiffGridRecipe} from './geotiff-grid.mts';
 
 export interface GeoTiffImageRecipe {

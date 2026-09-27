@@ -17,7 +17,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction } from './beam-convolve.mts';
-import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell, writeComplexCell, type BinaryTable, type TableColumn } from './fits-table.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell, writeComplexCell, type BinaryTable, type TableColumn } from '@cssearth/bake/objects/raster';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;
 

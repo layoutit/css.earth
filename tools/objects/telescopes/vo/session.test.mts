@@ -14,7 +14,7 @@ import { delivery, listOutputs, exportOutput } from '../outputs.mts';
 import { listArtifactOutputs } from '../artifact-outputs.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { explorationAnswer } from '../exploration.mts';
-import { binaryTableHdu, primaryHdu } from '../../interferometry/fits-table.mts';
+import { binaryTableHdu, primaryHdu } from '@cssearth/bake/objects/raster';
 import { sessionRequest } from '../session.mts';
 import { parseSnapshot, normalizeSnapshot, SERVICES } from './discovery.mts';
 import { planAccess } from './access.mts';

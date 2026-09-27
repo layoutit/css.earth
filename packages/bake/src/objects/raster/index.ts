@@ -53,3 +53,5 @@ export * from './eclipse-map/light-curve-map.ts';
 export * from './eclipse-map/phase-curve.ts';
 export * from './eclipse-map/spherical-harmonics.ts';
 export * from './eclipse-map/transit-timing.ts';
+export * from './eclipse-map/transit-limb-darkening.ts';
+export * from './fits/fits-table.ts';

@@ -28,7 +28,7 @@ import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
 import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
-import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { assertInputPins, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';

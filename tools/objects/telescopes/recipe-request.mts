@@ -1,4 +1,4 @@
-import type { ResolutionAssumption } from '../resolution-evidence.mts';
+import type { ResolutionAssumption } from '@cssearth/bake/objects/layers/observation';
 import { parseLimits, parseRegion } from '@cssearth/telescope/node';
 /** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import { requireArray, requireFiniteNumber, requireString } from '@cssearth/core';

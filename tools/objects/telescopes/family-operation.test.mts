@@ -12,14 +12,14 @@ import{describeTimeSeries}from'./families/f06-time-series.mts';
 import{describeWindRad1,WIND_RAD1_FIXTURE}from'./families/f07-dynamic-spectrum.mts';
 import{describeAstrometry,readAstrometryCsv}from'./families/f09-astrometry.mts';
 import{describeCompound}from'./families/f18-compound.mts';
-import{readTessLightCurve}from'../eclipse-map/transit-limb-darkening.mts';
+import{readTessLightCurve}from'@cssearth/bake/objects/raster';
 import{describeDelayDoppler}from'./families/f15-radar.mts';
 import{describeOifits}from'./families/f12-oifits.mts';
 import{describeSpatialPhysicalObject}from'./families/f16/f16-spatial-physical.mts';
 import{describeUvfitsVisibility}from'./families/f11-measurement-set.mts';
 import{executeFamilyOperation,executableFamilyOperations}from'./family-operation.mts';
 import{listArtifactOutputs}from'./artifact-outputs.mts';
-import{binaryTableHdu,primaryHdu}from'../interferometry/fits-table.mts';
+import{binaryTableHdu,primaryHdu}from'@cssearth/bake/objects/raster';
 const root=resolve(import.meta.dirname,'../../..');
 const temporary=async()=>mkdtemp(resolve(tmpdir(),'family-operation-'));
 async function save(root:string,value:unknown){const path=resolve(root,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return path;}

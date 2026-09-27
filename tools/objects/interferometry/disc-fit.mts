@@ -6,7 +6,7 @@
  * past the null, whose squared visibilities and errors are both tiny, decide the fit and it lands in the wrong lobe (27.3 mas with
  * reduced chi-squared 1,002 there, against 18.17 mas). The resolution of the data is half the mean wavelength over the longest
  * baseline, the beam the spot maps are convolved with. */
-import type { ChannelRows } from './oifits-rows.mts';
+import type { ChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { writeReconstruction } from './beam-convolve.mts';
 import { limbDarkenedVisibility } from './spotless-disc.mts';
 

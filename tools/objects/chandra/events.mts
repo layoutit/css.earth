@@ -14,7 +14,7 @@ import { createGunzip } from 'node:zlib';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { stat } from 'node:fs/promises';
-import { readFitsHdus, type FitsHdu } from '../interferometry/fits-table.mts';
+import { readFitsHdus, type FitsHdu } from '@cssearth/bake/objects/raster';
 
 /** Bytes a cell of each form takes; `X` is counted in bits, so it is handled apart. */
 const TYPE_BYTES: Readonly<Record<string, number>> = { L: 1, B: 1, I: 2, J: 4, K: 8, A: 1, E: 4, D: 8 };

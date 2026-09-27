@@ -9,9 +9,9 @@
  *
  * The result is a full-world longitude-latitude grid, NaN where the body was not seen or was seen too obliquely, in the FITS
  * layout the scalar-map reader (`@cssearth/bake/objects/raster`, fits-image-map.ts) reads. */
-import { controlledShapeCamera } from '@cssearth/bake/objects/geometry';
-import type { ObserverCamera } from '@cssearth/bake/objects/cameras';
-import type { BandDepthMap } from './spectral-cube.mts';
+import { controlledShapeCamera } from '../../../geometry/index.ts';
+import type { ObserverCamera } from '../../../cameras/index.ts';
+import type { BandDepthMap } from './spectral-cube.ts';
 
 const DEGREE = Math.PI / 180;
 /** erfc to 1.2e-7 (Numerical Recipes erfcc). */

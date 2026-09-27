@@ -1,5 +1,5 @@
 /** Native content, rather than archive MIME or ObsCore classification, chooses a VO product profile. */
-import { readFitsHdus } from '../../interferometry/fits-table.mts';
+import { readFitsHdus } from '@cssearth/bake/objects/raster';
 
 export type VoContentProfile = {
   readonly member: string;

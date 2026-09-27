@@ -11,7 +11,7 @@ Two capabilities, kept apart. **Re-calibrated here** is whether a pipeline for t
 | Configuration | Observations | Of moving targets | Records | Re-calibrated here | Archive-final products |
 | --- | ---: | ---: | --- | --- | --- |
 | ACS/WFC | 174,060 | 483 | wide-field pictures, 0.35–1.1 µm | a pipeline is installed, none run | not pinned |
-| ACS/HRC | 35,937 | 2,228 | high-resolution pictures and slitless spectra | a pipeline is installed, none run. The detector stopped working in 2007. | not pinned |
+| ACS/HRC | 35,937 | 2,228 | high-resolution pictures and slitless spectra | beta-pictoris-9987 | not pinned |
 | ACS/SBC | 9,540 | 886 | far-ultraviolet pictures and prism spectra | europa-11085 | not pinned |
 | WFC3/UVIS | 206,662 | 23,524 | pictures, 0.2–1 µm | europa-15419 | not pinned |
 | WFC3/IR | 256,134 | 1,057 | pictures and slitless spectra, 0.8–1.7 µm | a pipeline is installed, none run | not pinned |
@@ -45,7 +45,7 @@ Two capabilities, kept apart. **Re-calibrated here** is whether a pipeline for t
 | WFPC/WFC | 6,226 | 94 | the first wide-field camera, wide-field chips | Its pipeline is retired. | not pinned |
 | FGS | 53,439 | 0 | fine guidance sensor astrometry and interferometry | no pipeline here | not pinned |
 
-Re-calibrated and checked against the archive's own product: ACS/SBC (europa-11085); WFC3/UVIS (europa-15419); STIS/CCD (europa-14650, europa-15419); STIS/FUV-MAMA (europa-13040).
+Re-calibrated and checked against the archive's own product: ACS/HRC (beta-pictoris-9987); ACS/SBC (europa-11085); WFC3/UVIS (europa-15419); STIS/CCD (europa-14650, europa-15419); STIS/FUV-MAMA (europa-13040).
 Archive-final products pinned, downloaded and read whole: WFPC2/PC (europa-wfpc2-11085); FOS/BL (europa-fos-5837); HRS/1 (europa-ghrs-5376). None of those is a re-calibration, and none of them is counted as one: what the route establishes is in [Hubble](hubble.md#archive-final-products-of-retired-instruments).
 Every other configuration is counted here and nothing more.
 

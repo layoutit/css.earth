@@ -5,8 +5,8 @@
  * OI_VIS amplitudes and phases are kept per baseline row, not per channel: a differential quantity (OIFITS 2 AMPTYP or
  * PHITYP "differential", and AMBER's amdlib phases, which state no type) is only defined relative to the other channels of
  * its row. `flagged` counts squared-visibility and closure-phase cells only, as it always has. */
-import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from './fits-table.mts';
-import { fitStatistics, type ImagePlane } from './image-fit.mts';
+import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../../../raster/index.ts';
+import { fitStatistics, type ImagePlane } from './image-fit.ts';
 
 export interface ChannelVis2 { readonly u: number; readonly v: number; readonly wavelengthMetres: number; readonly vis2: number; readonly error: number }
 export interface ChannelT3 { readonly u1: number; readonly v1: number; readonly u2: number; readonly v2: number; readonly wavelengthMetres: number; readonly phaseDegrees: number; readonly errorDegrees: number }

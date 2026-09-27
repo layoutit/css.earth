@@ -4,7 +4,7 @@ import type {prepareBandedEllipsoid} from '@cssearth/bake/objects/layers/giant';
 import {parseObservedSurfaceRecipe} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
 import type { PreparedNode, PreparedProjectiveTextureLeaf } from '@cssearth/bake/presentation';
-import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
+import type {MaterialSourceTrack} from '@cssearth/bake/presentation';
 import type {PreparedCubicSkyPlan} from '@cssearth/bake/presentation';
 import type {PreparedDirectionalSunPlan} from '@cssearth/bake/presentation';
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
@@ -12,7 +12,7 @@ import {preparedResourcePool} from '@cssearth/renderer/platform/prepared-object-
 import {PREPARED_PRESENTATION_SCHEMA} from '@cssearth/bake/presentation';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '@cssearth/bake/presentation';
 import {rasterEllipsoidMaterial} from './materials.mts';
-import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
+import {prepareMaterialTracks} from '@cssearth/bake/presentation';
 
 const url=(prefix:string,filename:string)=>`${prefix}${filename}`;
 function authoredTransform(config:LayeredPresentationRecipe['meshTransform']|LayeredPresentationRecipe['systemTransform']){return config.kind==='literal'?config.value:`transform:${config.rotations.map(rotation=>buildPolyMeshTransform({rotation})).join(' ')}`;}

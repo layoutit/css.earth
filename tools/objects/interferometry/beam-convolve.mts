@@ -2,7 +2,7 @@
  * the reconstruction's own pixel scale and axis cards. A reconstruction carries structure below the beam that the visibilities never
  * constrained; convolving to the beam before display shows only what the data resolve, as the source paper does. */
 import { readFitsImage, type FitsHeader, skyImageAxes, type SkyImageAxes } from '@cssearth/fits';
-import { headerBlock, padBlock } from './fits-table.mts';
+import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 
 export interface BeamImage { readonly width: number; readonly height: number; readonly values: Float64Array; readonly cards: readonly (readonly [string, string | number | boolean, string?])[] }
 export interface Reconstruction extends BeamImage { readonly header: FitsHeader; readonly axes: SkyImageAxes }

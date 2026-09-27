@@ -44,7 +44,7 @@ import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { PROGRAMS } from '../imaging/archive.mts';
 import { bandOfHeader, JWST_BANDS, type JwstBand } from '../imaging/bands.mts';
 import { eurekaPins, imagingMembers, imagingProductRun, level3ProductFacts, readImagingProgram, recordProductEvidence } from '../imaging/image3.mts';
-import { openSpectralCube, type SpectralCube } from './spectral-cube.mts';
+import { openSpectralCube, type SpectralCube } from '@cssearth/bake/objects/layers/observation';
 
 const SPEC3_CRFS = `
 import json, sys, time

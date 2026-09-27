@@ -3,7 +3,7 @@
  * different files never share a name, and one OI_TARGET is kept. Nothing is averaged, rescaled or re-weighted; flags travel
  * with their rows. This is the input an image-reconstruction code reads when the observations span several nights and
  * configurations but the authors published no merged file. */
-import { binaryTable, numbers, padBlock, readFitsHdus, tableColumn } from './fits-table.mts';
+import { binaryTable, numbers, padBlock, readFitsHdus, tableColumn } from '../../../raster/index.ts';
 
 const BLOCK = 2880, CARD = 80;
 

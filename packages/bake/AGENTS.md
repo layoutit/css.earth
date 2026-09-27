@@ -22,7 +22,8 @@ its validators accept); the renderer never imports the bake.
 - `src/presentation/` is published as `@cssearth/bake/presentation` (Node only): the retained node tree with its
   projective layouts and leaf boxes, offline CSSOM reads (Playwright's Chromium), activation groups, and the row-bank
   cutaway, composite and emissive presentations; and the prepared-presentation contract with its schemas, and the cubic-sky
-  and directional-Sun contracts and preparers it validates. It imports `scene` and `raster`. The host passes material
+  and directional-Sun contracts and preparers it validates, and the material-track source planning (frame lookups and banks)
+  the layer presentations build on. It imports `scene` and `raster`. The host passes material
   tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself.
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
   slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
@@ -64,12 +65,14 @@ its validators accept); the renderer never imports the bake.
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
-    photometric composition, the source records they read, and the WISE atlas mosaic grid. It imports `objects/scene`,
+    photometric composition, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
+    tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
     files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
     left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
-    directory is found on first use; and the matcher that binds a manifest's recorded generator name to today's code.
+    directory is found on first use; the matcher that binds a manifest's recorded generator name to today's code; and the
+    idle-timeout stream relay pinned downloads go through.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
