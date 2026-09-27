@@ -5,7 +5,7 @@
  *
  * A body whose raster recipe names a bank copies these files at its own bake instead of encoding them, so this check is what
  * makes the copy honest: the tracked bytes are the bytes the recipe encodes today. Every bank by default. */
-import './thread-pool.js';
+import '@cssearth/bake/thread-pool';
 import { mkdir, mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';

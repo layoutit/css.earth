@@ -7,7 +7,7 @@ import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/inde
 import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from './config.ts';
 import { raster, hashFile, outputName } from './io.ts';
 import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
-/** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (tools/objects/thread-pool.ts). */
+/** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */
 export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
 /** A body's published limb: its models and the overlay's reference colour (packages/bake/src/photometry/limb.ts). */
 export interface PreparedLimb { readonly law: LimbLaw; readonly reference: Channels<number>; readonly referenceSource: string; readonly polarToEquatorial: number }

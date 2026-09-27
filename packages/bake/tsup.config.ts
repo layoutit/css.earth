@@ -46,7 +46,8 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'prepared-presentation': 'src/prepared-presentation/index.ts',
     'delivery': 'src/delivery/index.ts',
     'sources': 'src/sources/index.ts',
-    'contract': 'src/contract/index.ts' }
+    'contract': 'src/contract/index.ts',
+    'thread-pool': 'src/thread-pool/index.ts' }
 
 /** Declarations come from one `tsc` pass over the sources (`tsconfig.build.json`, emitted per file under `dist/types/`),
  * not tsup's `dts`: its rollup bundling of every entry in one worker grew past Node's default heap as topics were added,

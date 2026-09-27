@@ -31,7 +31,7 @@ export interface PreparationStep {
 }
 
 /** Authored preparations running at once. A shape-only planet peaks at 3 GB with its lighting rows in flight and fills the
- * thread pool (tools/objects/thread-pool.ts); three fit a 36 GB machine beside the dev server, and more only share the cores. */
+ * thread pool (`@cssearth/bake/thread-pool`); three fit a 36 GB machine beside the dev server, and more only share the cores. */
 export const PREPARATIONS_AT_ONCE = 3;
 
 const node = (...args: string[]) => ['node', ...args];

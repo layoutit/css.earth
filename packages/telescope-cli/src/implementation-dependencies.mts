@@ -70,6 +70,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',
   '@cssearth/bake/sources': 'packages/bake/src/sources/index.ts',
   '@cssearth/bake/contract': 'packages/bake/src/contract/index.ts',
+  '@cssearth/bake/thread-pool': 'packages/bake/src/thread-pool/index.ts',
   '@cssearth/objects/node/contract': 'packages/objects/src/node/contract/index.ts',
 };
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an

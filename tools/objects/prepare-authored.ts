@@ -1,4 +1,4 @@
-import './thread-pool.js';
+import '@cssearth/bake/thread-pool';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';

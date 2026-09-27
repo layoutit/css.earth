@@ -33,7 +33,8 @@
     "src/prepared-presentation",
     "src/delivery",
     "src/sources",
-    "src/contract"
+    "src/contract",
+    "src/thread-pool"
   ],
   "exclude": [
     "src/**/*.test.ts"
