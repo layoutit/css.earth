@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-circumstellar-volume@1",
+  "id": "eps-eridani-disc",
+  "host": "eps-eridani",
+  "name": "ε Eridani dust ring",
+  "description": "The belt of dust 70 au from ε Eridani in its own glow at 1.3 millimetres, as ALMA imaged it in December 2019 (project 2019.1.00696.S), in the colour map Booth et al. (2023) show it in. Planet b orbits far inside it, at 3.5 au. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, and its thickness is the one Wolff et al. (2025) model, not a measurement.",
+  "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S",
+  "credit": "ALMA (ESO/NAOJ/NRAO), project 2019.1.00696.S (PI M. Booth); ALMA Science Archive pipeline image; Booth et al. 2023, MNRAS 521, 6180; Wolff et al. 2025, AJ 170, 244",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://almascience.eso.org/alma-data/data-policy",
+    "note": "ALMA data are released under CC BY 4.0; the observatory asks for its standard acknowledgement, which the host star's NOTICE.md carries."
+  },
+  "grid": {
+    "size": 200,
+    "halfUnits": 105,
+    "slabs": 100
+  },
+  "defaultLens": "dust",
+  "lenses": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "title": "The dust ring around ε Eridani in its own glow at 1.3 millimetres, from ALMA",
+      "summary": "The belt of dust 64 to 75 au from the star, far outside planet b's orbit, in its own glow at 1.3 mm, as ALMA imaged it.",
+      "description": "ALMA observed ε Eridani five times between 16 and 23 December 2019 at 1.3 millimetres, in six pointings around the star because the belt is wider than one antenna's field of view. What it sees is the dust's own faint heat, not starlight. This is the ALMA pipeline's image from the public archive, brought to the resolution of the image Booth et al. (2023) made from the same observations and shown in the colour map and scale of their Figure 1. It is noisier than theirs, and its ring is fainter. The star's own glow at the centre and the two sources Booth et al. find behind the disc are removed as they model them, so none is drawn as dust. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on it projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. How thick it is comes from the model Wolff et al. (2025) run for this belt, and its east side is drawn nearer on their assumption that it shares planet b's orbital plane. The star itself is the sphere at the centre.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B6-CONT",
+        "path": ".local/eps-eridani-disc/observations/member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pbcor.fits",
+        "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pbcor.fits",
+        "landing": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S",
+        "bytes": 648000,
+        "unit": "Jy/beam",
+        "filter": "Band 6 continuum, 230 to 248 GHz (1.3 mm)",
+        "instrument": "ALMA 12-m array, a six-pointing mosaic in a compact configuration",
+        "observed": "between 16 and 23 December 2019",
+        "title": "ALMA project 2019.1.00696.S, member OUS uid://A001/X1465/X27ff, pipeline continuum image eps_eri_sci.spw19_21_23_25.cont.I.pbcor",
+        "credit": "ALMA (ESO/NAOJ/NRAO), project 2019.1.00696.S (PI M. Booth); imaged by the ALMA pipeline (CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2019.1.00696.S.",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+        "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-09-26 and again on 2026-09-27, byte for byte the same (the product listed by DataLink for member OUS uid://A001/X1465/X27ff); restored from that origin or the R2 source cache when missing.",
+        "primaryBeam": {
+          "path": ".local/eps-eridani-disc/observations/member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pb.fits.gz",
+          "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X1465_X27ff.eps_eri_sci.spw19_21_23_25.cont.I.pb.fits.gz",
+          "bytes": 361117,
+          "title": "ALMA project 2019.1.00696.S, member OUS uid://A001/X1465/X27ff, pipeline primary beam eps_eri_sci.spw19_21_23_25.cont.I.pb",
+          "source": "Booth et al. (2023) show their image without the primary-beam correction, so its noise is even across the mosaic (Figure 1 caption); the product's own primary beam undoes the pipeline's correction, 0.53 at the star and 0.87 in the median on the ring"
+        }
+      },
+      "pointSources": {
+        "sources": [
+          {
+            "id": "star",
+            "raDeg": 53.2271708,
+            "decDeg": -9.4581917,
+            "peak": 0.00102
+          },
+          {
+            "id": "NW",
+            "raDeg": 53.2221875,
+            "decDeg": -9.4512806,
+            "peak": 0.00099
+          },
+          {
+            "id": "SE",
+            "raDeg": 53.2304458,
+            "decDeg": -9.4632389,
+            "peak": 0.00027
+          }
+        ],
+        "source": "Booth et al. (2023), MNRAS 521, 6180, Table 2 (arXiv:2303.13584), from gaussian fits to their primary-beam-corrected long-baseline image of these data: the central source at 3h32m54.521s −9°27′29.49″ with a peak of 1020 ± 50 µJy per beam, which they conclude is the star itself (its photosphere, chromosphere and corona; section 3), the north-west one at 3h32m53.325s −9°27′04.61″ with 990 ± 60 and the south-east one at 3h32m55.307s −9°27′47.66″ with 270 ± 30, both background sources; they model all three as fixed point sources in their fit of the disc. A point source's peak per beam is its flux, whatever the beam"
+      },
+      "smoothTo": {
+        "beamArcsec": [
+          1.6,
+          1.2
+        ],
+        "positionAngleDeg": 102,
+        "source": "the beam of Booth et al. (2023, section 2) for their Figure 1, 1.6″ × 1.2″ at 102° east of north, from natural weighting of these same observations; this image's pipeline weighting gave 1.288″ × 0.955″ at −78.3°"
+      },
+      "colorMap": {
+        "path": "booth-2023-figure-1-colormap.json",
+        "range": [
+          -50.66,
+          90.0
+        ],
+        "unitScale": 1000000,
+        "unit": "µJy/beam",
+        "source": "the colour bar of Booth et al. (2023), Figure 1, left panel, decoded from the figure in the paper's arXiv source: matplotlib's inferno map, linear from −50.66 to 90.00 µJy per beam, brighter values at the top colour"
+      },
+      "geometry": "ring",
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 2,
+        "source": "Stated, a display choice: a column fades in as its brightness rises from one to two times its per-pixel noise (16.4 µJy per beam, measured 4 to 12 arcseconds out), so empty sky is not drawn; the ring's median, 1.4 times the noise, is drawn at 40% and its brighter half in full. Every channel of a column is scaled alike, so no colour changes."
+      },
+      "channels": {
+        "red": [
+          "ALMA-B6-CONT"
+        ],
+        "green": [
+          "ALMA-B6-CONT"
+        ],
+        "blue": [
+          "ALMA-B6-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: at 1.3 mm the ring is the dust's own thermal emission, not scattered starlight, and it is shown in its own brightness, Jy per beam.",
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No mask: an interferometer image has no coronagraph, and the star's own emission, the central point source, is removed as Booth et al. (2023) model it (pointSources). The star is the host body's own sphere.",
+      "outerUnits": 100,
+      "backgroundAnnulusArcsec": [
+        4,
+        12
+      ],
+      "nearSidePositionAngleDeg": 96,
+      "nearSideSource": "the east side is drawn nearer. Wolff et al. (2025, AJ 170, 244, section 5.1) take the belt to be nearly coplanar with planet b, and the planet's orbit (Thompson et al. 2025, AJ 170, 301, Table 3: inclined 40°, ascending node at 186°, against the ring's 33.7° and −1.1° in Booth et al. 2023) comes nearest the observer at position angle 96°, as this application draws it",
+      "heightOfRadius": 0.0615,
+      "heightSource": "the model Wolff et al. (2025, AJ 170, 244, Table 4, arXiv:2509.24976) run for this belt, whose orbital inclinations have a standard deviation of 0.087 (their disk aspect ratio dh/dr): orbits tilted that much put the dust a root-mean-square 0.087/√2 = 0.0615 of the radius above and below the plane, and the drawn gaussian has that height. It is their model's input, not a measurement; at 34° the image cannot resolve the thickness",
+      "adoptPublishedRing": "this image's ridge rises above five times its per-pixel noise in only 5 of 24 azimuths, too faint to trace; Booth et al. (2023) fit a gaussian ring, the star and the two background sources to their naturally weighted dirty image of these same observations by MCMC (section 4.2, Table 3)",
+      "topAlpha": 0.5,
+      "published": {
+        "citation": "Booth et al. (2023), MNRAS 521, 6180, Table 3, arXiv:2303.13584",
+        "url": "https://arxiv.org/abs/2303.13584",
+        "radiusUnits": 69.6,
+        "widthFwhmUnits": 10.5,
+        "inclinationDeg": 33.7,
+        "positionAngleDeg": -1.1,
+        "toleranceDeg": 5,
+        "radiusTolerance": 0.1
+      }
+    }
+  ]
+}

@@ -52,6 +52,40 @@
         },
         "falseColor": false,
         "notes": "The colour of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 22049). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,039 K and log g 4.61 (u1 0.646, u2 0.128): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "dust-ring",
+        "label": "Dust ring · ALMA 1.3 mm",
+        "scope": "system",
+        "thumbnail": "eps-eridani-lens-color.webp",
+        "volume": {
+          "objectId": "eps-eridani-disc",
+          "lensId": "dust",
+          "surface": "color"
+        },
+        "notes": "The star in the colour of its spectrum, with the belt of dust 70 au out in its own glow at 1.3 millimetres, as ALMA imaged it in December 2019 (project 2019.1.00696.S). It is the ALMA pipeline's image from the public archive, brought to the resolution of the image Booth et al. (2023) made from the same observations and shown in the colour map and scale of their Figure 1. It is noisier than theirs, and its ring is fainter. The star's own glow and two sources behind the disc are removed as Booth et al. model them, and sky fainter than twice the image noise fades out. The ring's size and tilt (69.6 au, 33.7°) are Booth et al.'s fit to these observations. The image has no third axis, so the depth is inferred: a tilted ring projects to it better than a spherical shell or a constant depth. Its thickness is the one Wolff et al. (2025) use in their model of this belt, and its east side is drawn nearer on their assumption that it shares planet b's orbital plane. Planet b orbits at 3.5 au, far inside it.",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Brightness of the dust at 1.3 mm",
+          "items": [
+            {
+              "label": "Orange",
+              "description": "About 60 µJy per beam, the ring's brightest spots",
+              "color": "#fc9f07"
+            },
+            {
+              "label": "Red",
+              "description": "About 25 µJy per beam, the ring's typical brightness",
+              "color": "#c83f4b"
+            },
+            {
+              "label": "Purple",
+              "description": "About 0, empty sky; the image noise is 16 µJy per beam",
+              "color": "#84206b"
+            }
+          ]
+        }
       }
     ]
   },
