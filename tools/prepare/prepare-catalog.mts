@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';

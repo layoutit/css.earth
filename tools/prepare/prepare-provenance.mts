@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';

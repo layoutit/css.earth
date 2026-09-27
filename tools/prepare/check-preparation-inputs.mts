@@ -10,7 +10,7 @@
  *   run). Each file that differs from the Sun's inventory is restored from R2 by hash, as `pnpm setup:assets` does,
  *   except the files the world step writes itself, and its page data is derived when missing. A run that prepares the
  *   Sun skips this. */
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';

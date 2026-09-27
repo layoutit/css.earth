@@ -168,7 +168,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.cli.json",
     "test": "vitest run"
   },
   "dependencies": {

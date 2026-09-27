@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from '../sources/spatial-source-citations.mts';

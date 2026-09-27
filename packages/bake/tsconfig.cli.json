@@ -1,0 +1,10 @@
+{
+  "extends": "../../tools/tsconfig.json",
+  "compilerOptions": {
+    "incremental": false
+  },
+  "include": [
+    "cli/**/*.mts"
+  ],
+  "exclude": []
+}

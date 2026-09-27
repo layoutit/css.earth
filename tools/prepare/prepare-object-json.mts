@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';

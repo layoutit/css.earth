@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { randomUUID } from "node:crypto";
 import {

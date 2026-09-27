@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { resolve } from 'node:path';
 import { inventoryAssets, inventoriedObjectIds, volumeMetadataAssets } from '../assets/runtime-assets.mts';
 import type { RuntimeAssetLocation } from '../assets/runtime-assets.mts';

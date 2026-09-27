@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { refuseDirectRun } from '../../packages/bake/cli/library-entry.mts';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
 import {decodeProfile} from "@cssearth/bake/objects/raster";
