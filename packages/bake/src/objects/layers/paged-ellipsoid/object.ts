@@ -1,20 +1,29 @@
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import type { prepareObjectContentAssets } from '../content/prepare.ts';
-import { readJsonSource } from '@cssearth/bake/objects/sources';
+import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
+import { readJsonSource } from '../../sources/index.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { verifySourceManifest } from '@cssearth/objects/node';
-import { withFocusedCamera } from '@cssearth/bake/objects/scene';
-import { prepareCubicSky } from '@cssearth/bake/presentation';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '@cssearth/bake/presentation';
-import type { preparePagedEllipsoidAssets } from './assets.mts';
-import { readPagedEllipsoid, parseBodyAttitude, preparePagedEllipsoidPresentation, prepareLocationPoint, prepareLocationCamera, preparePlaces } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import { withFocusedCamera } from '../../scene/index.ts';
+import { prepareCubicSky } from '../../../presentation/index.ts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
+import type { preparePagedEllipsoidAssets } from './assets.ts';
+import { readPagedEllipsoid } from './globe/context.ts';
+import { parseBodyAttitude } from './geographic/source-records.ts';
+import { preparePagedEllipsoidPresentation } from './presentation.ts';
+import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.ts';
+import { preparePlaces } from './geographic/places.ts';
+import type { SolarGeometry } from '../../scene/index.ts';
 
 export interface PagedEllipsoidContext {
   objectDirectory: string; publicDirectory: string; outputDirectory: string; packDirectory?: string;
-  prepareContent: typeof prepareObjectContentAssets;
+  prepareContent: (context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>;
+  /** The generated solar geometry (`src/platform/solar-geometry.mts`), loaded by the host. */
+  solarGeometry: SolarGeometry;
+  /** The host's module that runs one asset job in a worker thread (`packages/bake/cli/paged-ellipsoid-asset-worker.mts`): it
+   * loads the solar geometry itself, so it is a command, not part of this library. */
+  assetWorker: URL;
   /** Reuse this object's published raster, overlay, place, page and texture-level outputs from outputDirectory and publicDirectory,
    * and prepare only what the presentation derives from them. Refuses when the recipe sources or the recomputed plan differ. */
   reuseImages?: boolean;
@@ -22,17 +31,15 @@ export interface PagedEllipsoidContext {
   acceptChanged?: readonly string[];
 }
 
-import { prepareTextureLevels, preparePagedEllipsoidAssetsInParallel } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-
-/** The module that runs one asset job in a worker thread: it reads the body's files, so it stays beside this pipeline. */
-const ASSET_WORKER = new URL('./asset-worker.mts', import.meta.url);
+import { prepareTextureLevels } from './texture-levels.ts';
+import { preparePagedEllipsoidAssetsInParallel } from './parallel-assets.ts';
 
 const json = readJsonSource;
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);
 
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
-export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
+export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry, assetWorker, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
   const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, objectDirectory);
   // The raw imagery is read only by the stages a reuse-images run reuses; it may be absent from this checkout.
   if (!reuseImages) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
@@ -69,10 +76,10 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
   // The atmosphere bank reads only the recipe and the body's photometry, so a reuse run redraws it.
-  const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ worker: ASSET_WORKER, objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
+  const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
     .map(asset => { if (!asset.startsWith(config.publicBase)) throw new Error(`${descriptor.id}: material asset ${asset} is outside ${config.publicBase}.`); return asset.slice(config.publicBase.length); }) : [];
   const rasterAssets = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
-    : await preparePagedEllipsoidAssetsInParallel({ worker: ASSET_WORKER, objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
+    : await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
   const context = { sourceDirectory, publicDirectory, config, scene };
   // The city catalogue is an authored capability (a search over GeoNames places on the globe), not a requirement of a globe.
   // It reads only the scene geometry, so a reuse-images run rebuilds it as well.

@@ -59,7 +59,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/stellar': ['objects/color', 'objects/raster', 'objects/sources'],
   'objects/acquisition': ['raster', 'objects/sources'],
   'objects/sphere-survey': ['objects/cameras', 'objects/geometry', 'objects/layers/terrestrial'],
-  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
+  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/color', 'objects/content', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
   'prepared-presentation': ['presentation', 'raster'],
   'delivery': ['objects/sources'],
   'sources': ['runtime-source', 'objects/content', 'delivery'],

@@ -462,7 +462,7 @@ To reproduce the source subset, install `numpy==2.3.5` and `h5py==3.14.0` in an 
 environment, download the URL pinned in `tomography.json`, then:
 
 ```sh
-python tools/objects/paged-ellipsoid/extract-tomography.py \
+python packages/bake/src/objects/layers/paged-ellipsoid/extract-tomography.py \
   /path/to/GLAD-M35.r0.1-n4c.nc \
   src/objects/earth/source/interior/tomography.json \
   src/objects/earth/source/interior/glad-m35-vsv-subset.f32.gz

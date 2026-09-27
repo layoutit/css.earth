@@ -246,12 +246,13 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
   }
   if (source(sources, 'paged-ellipsoid')) {
-    const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mts')).href) as typeof import('./paged-ellipsoid/index.mts');
+    const { preparePagedEllipsoidObject } = await import('@cssearth/bake/objects/layers/paged-ellipsoid');
     // A reuse-images run carries the published feature anchors; read them before the lane rewrites this directory.
     const publishedFeatures = reuseImages ? {
       runtime: record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'published runtime'),
       content: record(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')), 'published content') } : null;
-    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets, reuseImages, acceptChanged });
+    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
+      solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged });
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
     const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, prepared.definition as unknown as Record<string, unknown>, publishedFeatures)
       : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });

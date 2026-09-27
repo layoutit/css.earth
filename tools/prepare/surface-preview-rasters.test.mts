@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mts';
-import { preparePagedSurfaceMap } from '../objects/paged-ellipsoid/assets.mts';
+import { preparePagedSurfaceMap } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { prepareProjectiveTextureLayer } from '@cssearth/bake/scene';
 

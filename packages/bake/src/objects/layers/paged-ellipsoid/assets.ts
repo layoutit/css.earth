@@ -1,12 +1,18 @@
-import { applyLinearTint } from '@cssearth/bake/objects/color';
+import { applyLinearTint } from '../../color/index.ts';
 import { isArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import {basename} from 'node:path';
-import { writeLossyWebp } from '@cssearth/bake/raster';
+import { writeLossyWebp } from '../../../raster/index.ts';
 import type {WebpOptions} from 'sharp';
-import type {RasterInfo} from '@cssearth/bake/objects/layers/observation';
-import type { PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInput, ResizeKernel, Cutaway, InteriorSource, createPagedSurfaceRaster, NativeDeepOceanFill, NativePhotographicCloudComposite, PagedSurfaceRasterPlan, createAtmospherePreparation, EllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { applyDeepOceanFill, clearDeepOceanFillCache, readDeepOceanFill, resizeDeepOceanFill, parseInteriorSource, parseMapFocusBindings } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import {readJsonSource} from '@cssearth/bake/objects/sources';
+import type {RasterInfo} from '../observation/index.ts';
+import type { PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInput, ResizeKernel } from './globe/asset-contract.ts';
+import type { Cutaway } from './contracts.ts';
+import type { InteriorSource } from './scene-contract.ts';
+import type { createPagedSurfaceRaster, NativeDeepOceanFill, NativePhotographicCloudComposite, PagedSurfaceRasterPlan } from './surface-raster.ts';
+import type { createAtmospherePreparation } from './globe/atmosphere.ts';
+import type { EllipsoidAttitude } from './globe/attitude.ts';
+import { applyDeepOceanFill, clearDeepOceanFillCache, readDeepOceanFill, resizeDeepOceanFill } from './deep-ocean-fill.ts';
+import { parseInteriorSource, parseMapFocusBindings } from './source-contract.ts';
+import {readJsonSource} from '../../sources/index.ts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
@@ -14,14 +20,14 @@ interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; ca
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
-import { readCoraltempAnomaly } from "@cssearth/bake/objects/layers/paged-ellipsoid";
-import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mts";
-import { prepareElevationMap, writeElevationLegend } from "@cssearth/bake/objects/layers/paged-ellipsoid";
-import { prepareNightLightsMap, writeNightLightsLegend } from "@cssearth/bake/objects/layers/paged-ellipsoid";
+import { readCoraltempAnomaly } from "./sst-anomaly.ts";
+import { verifyPreparedMurImage, writeMurLegend } from "./mur-image.ts";
+import { prepareElevationMap, writeElevationLegend } from "./elevation.ts";
+import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.ts";
 import { textureTintFactors } from "@layoutit/polycss";
-import { cutInteriorPoles } from "@cssearth/bake/objects/layers/paged-ellipsoid";
-import { readMantleTomography, tomographyLegend } from "@cssearth/bake/objects/layers/paged-ellipsoid";
-import { applyDisplayGamma } from "@cssearth/bake/objects/layers/paged-ellipsoid";
+import { cutInteriorPoles } from "./interior-poles.ts";
+import { readMantleTomography, tomographyLegend } from "./tomography.ts";
+import { applyDisplayGamma } from "./display-tone.ts";
 
 
 /** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials. `materialSlice` runs
