@@ -7,7 +7,7 @@
  * reduced chi-squared 1,002 there, against 18.17 mas). The resolution of the data is half the mean wavelength over the longest
  * baseline, the beam the spot maps are convolved with. */
 import type { ChannelRows } from '@cssearth/bake/objects/layers/observation';
-import { writeReconstruction } from './beam-convolve.mts';
+import { writeReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { limbDarkenedVisibility } from './spotless-disc.mts';
 
 const MAS_PER_RADIAN = 206_264_806.247;

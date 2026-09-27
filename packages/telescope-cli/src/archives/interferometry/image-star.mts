@@ -12,7 +12,7 @@
  *    association trees. One calibration at a time.
  * 2. Select. Every calibrated file concatenated (oifits-concat.mts), then the season's wavelength windows and error floors
  *    (oifits-select.mts); for MATISSE, the beam-commuting repeats of each block averaged in continuum windows into one
- *    monochromatic file (matisse-continuum.mts).
+ *    monochromatic file (matisse-continuum.ts in @cssearth/bake/objects/layers/observation).
  * 3. Size. A uniform disc fitted around the reference diameter (disc-fit.mts): the start image, the spotless twins' size and the beam.
  * 4. Twins. The two interleaved halves of the data, a spotless limb-darkened disc on the season's sampling and errors
  *    (spotless-disc.mts), and the same two halves of that disc.
@@ -31,14 +31,14 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { imageCorrelation, matchVis2, vis2Agreement } from './author-comparison.mts';
-import { readReconstruction } from './beam-convolve.mts';
+import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { calibrateAmberWindow } from './calibrate-amber.mts';
 import { GRAVITY_REDUCTION } from './calibrate-gravity.mts';
 import { MATISSE_REDUCTION } from './calibrate-matisse.mts';
 import { calibratePionierWindow } from './calibrate-pionier.mts';
 import { discStartImage, fitUniformDisc } from './disc-fit.mts';
 import { calibrateFromAssociations } from './eso-associations.mts';
-import { mergeContinuum, mergedOifits, type ContinuumRecipe } from './matisse-continuum.mts';
+import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '@cssearth/bake/objects/layers/observation';
 import { concatenateOifits } from '@cssearth/bake/objects/layers/observation';
 import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { selectOifits } from './oifits-select.mts';
@@ -58,7 +58,7 @@ export interface Season {
   readonly referenceDiameterMas: number;
   readonly selection: {
     readonly windowsMetres: readonly (readonly [number, number])[]; readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number; readonly vis2Minimum?: number };
-    /** MATISSE: average the beam-commuting repeats of each block inside the windows into one monochromatic file (matisse-continuum.mts). */
+    /** MATISSE: average the beam-commuting repeats of each block inside the windows into one monochromatic file (matisse-continuum.ts in @cssearth/bake/objects/layers/observation). */
     readonly continuum?: ContinuumRecipe;
   };
   readonly recipe: SqueezeRecipe;

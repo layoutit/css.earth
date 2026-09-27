@@ -9,7 +9,7 @@
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
 import { readFitsHeader } from '@cssearth/fits';
-import { binaryTableHdu, findTable, numbers, primaryHdu, readFitsHdus, tableColumn, text } from '@cssearth/bake/objects/raster';
+import { binaryTableHdu, findTable, numbers, primaryHdu, readFitsHdus, tableColumn, text } from '../../../raster/index.ts';
 
 export interface ContinuumRecipe {
   /** Wavelength windows in micrometres, inclusive. */

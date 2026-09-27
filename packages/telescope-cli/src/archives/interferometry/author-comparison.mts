@@ -1,6 +1,6 @@
 /** Compare calibrated squared visibilities and reconstructed images with an author's published ones. */
 import type { ChannelVis2 } from '@cssearth/bake/objects/layers/observation';
-import { convolveGaussian, type BeamImage } from './beam-convolve.mts';
+import { convolveGaussian, type BeamImage } from '@cssearth/bake/objects/layers/observation';
 
 /** Pairs our calibrated squared visibilities with the author's for the same exposure: the nearest baseline vector (either sign)
  * within a metre with as many channels, matched in wavelength order. */

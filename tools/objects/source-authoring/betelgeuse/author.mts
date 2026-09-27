@@ -9,8 +9,8 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '@cssearth/telescope-cli/archives/interferometry/matisse-continuum';
-import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/telescope-cli/archives/interferometry/beam-convolve';
+import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '@cssearth/bake/objects/layers/observation';
+import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import sharp from 'sharp';
