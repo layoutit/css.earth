@@ -3,7 +3,7 @@
  * here, in one place, for every archive that has moved. */
 
 /** The archives whose programs sit beside their code, in `src/archives/<archive>/programs`. */
-export type MovedArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno';
+export type MovedArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst';
 
 export interface ArchivePrograms {
   /** The repository-relative directory the programs and their receipts are in now. */

@@ -17,7 +17,7 @@ import {
   spanSeconds, type TimeTagSector,
 } from './timetag-reduction.mts';
 
-const PINNED = resolve(WORKSPACE, 'tools/objects/hst/programs/europa-transit-2014-01-26.timetag.json');
+const PINNED = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/hst/programs/europa-transit-2014-01-26.timetag.json');
 const definition = parseTimeTagDefinition(JSON.parse(await readFile(PINNED, 'utf8')));
 
 test('the pinned definition parses, and names the file, the target and the claim it is about', () => {

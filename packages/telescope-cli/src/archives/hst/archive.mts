@@ -20,7 +20,7 @@
  * from MAST's product differs first in one of them (compare.mts).
  *
  * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (`@cssearth/telescope/node`).
- * The program is written to tools/objects/hst/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/hst/programs/<program id>.json. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -29,9 +29,11 @@ import { binaryTable, numbers, tableColumn, text as cell } from '@cssearth/bake/
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
+import { archivePrograms } from '../programs.mts';
 
-/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/hst/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const HST_PROGRAMS = archivePrograms('hst');
+export const PROGRAMS = resolve(WORKSPACE, HST_PROGRAMS.path);
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** What an instrument pipeline reads: the raw exposure, and the wavecal, association, support and jitter files beside it. */
 export const INPUT_KINDS = ['RAW', 'WAV', 'ASN', 'SPT', 'JIT'] as const;

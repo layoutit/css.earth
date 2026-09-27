@@ -151,7 +151,7 @@ export async function compareWithMast(id: string, observation: string, run: stri
     const receipt = {
       schema: 'cssearth-hst-reproduction@1', program: id, observation, product: pinned.name.replace(/\.fits$/u, ''),
       instrument: `${entry.instrument}/${entry.detector}`, opticalElement: entry.opticalElement,
-      toolchain: 'tools/objects/hst/toolchain.json', crdsContext: program.crdsContext,
+      toolchain: 'packages/telescope-cli/src/archives/hst/toolchain.json', crdsContext: program.crdsContext,
       mast: { ...pinned, sha256: (await sha256File(mastPath)).sha256, ...cards(theirPrimary, RUN_CARDS) },
       local: { sha256: (await sha256File(local)).sha256, ...cards(ourPrimary, RUN_CARDS) },
       differentSettings: differentSettings(ourPrimary, theirPrimary), differentGrid,

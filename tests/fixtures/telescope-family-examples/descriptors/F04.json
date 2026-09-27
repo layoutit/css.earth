@@ -5,9 +5,9 @@
     "target": "europa",
     "acquisition": {
       "kind": "repository",
-      "identity": "../../../../tools/objects/hst/programs/europa-salt-map.scan.json"
+      "identity": "../../../../packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json"
     },
-    "producingRecord": "tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+    "producingRecord": "packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.reproduction.json",
     "sourceClassifications": [
       {
         "term": "slit-scan spectroscopy",
@@ -29,13 +29,13 @@
   "members": [
     {
       "id": "definition",
-      "path": "../../../../tools/objects/hst/programs/europa-salt-map.scan.json",
+      "path": "../../../../packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json",
       "role": "provenance",
       "mediaType": "application/json"
     },
     {
       "id": "receipt",
-      "path": "../../../../tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
+      "path": "../../../../packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.reproduction.json",
       "role": "provenance",
       "mediaType": "application/json"
     }

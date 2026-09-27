@@ -11,10 +11,10 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 `@cssearth/telescope` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
 `@cssearth/telescope/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
-  ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer and Juno keep their programs,
-  receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`, `moving-targets.json`,
-  `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; HST and JWST keep theirs in
-  `tools/objects/<archive>/` until they move. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body
+  ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno and HST keep their
+  programs, receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`, `moving-targets.json`,
+  `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps its own in `tools/objects/jwst/`
+  until it moves. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body
   map, the Io JIRAM maps) stays in `tools/objects/<archive>/`. A receipt or ledger written before a move keeps the path it
   recorded; `src/archives/programs.mts` maps a recorded program path to its current location, for qualification, receipt
   writing and query display alike. No archive module names a body (`archives/archive-scope.test.mts`). That per-body JSON

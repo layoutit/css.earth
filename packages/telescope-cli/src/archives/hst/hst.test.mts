@@ -14,6 +14,7 @@ import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from 
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { readHstFileHdus } from './product-file.mts';
+import { hstToolchain } from './toolchain.mts';
 
 const REPOSITORY = WORKSPACE;
 const file = (name: string, bytes = 1000) => ({ name, uri: `mast:HST/product/${name}`, bytes });
@@ -426,4 +427,9 @@ test('AstroDrizzle reproduces the archive’s grid exactly; what it does not rep
     const weight = found.extensions.find(entry => entry.extname === 'WHT')!;
     assert.ok(weight.identicalShare < 1, `${product}: the weight image differs`);
   }
+});
+
+test('the toolchain reads its descriptor and lock beside this code before it looks for an installed environment', async () => {
+  // Installed or not, the pins are read first: a missing descriptor or lock fails with ENOENT, anything else is about the install.
+  await hstToolchain('hst_1358.pmap').catch((error: unknown) => assert.doesNotMatch(String(error), /ENOENT/u));
 });
