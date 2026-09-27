@@ -120,8 +120,8 @@ interface ProjectedBody<Entry> {
 /** `annotationLandmarks`: moons named across their star's system, like the orientation references (a sourced list of
  * each planet's major moons). */
 /** An orbit is planned from its summary (centre, bounds, size) until its centre's bank supplies the path (`attachOrbits`);
- * a frame that would draw or measure a path it lacks names that body (`takeWantedOrbits`) and draws no segments for it.
- * A pathless orbit (a plain dot's) is measured by its bounds alone: it is never drawn and never wanted. */
+ * a frame that would draw or measure a path it lacks names that body (`takeWantedOrbits`) and draws no segments for it. A
+ * pathless orbit (a plain dot's) is measured by its bounds alone: it is never drawn and never wanted. */
 type PlannerOrbit = PreparedContextOrbit | PreparedContextOrbitGeometry;
 const hasPath = (orbit: PlannerOrbit): orbit is PreparedContextOrbitGeometry => 'verticesM' in orbit;
 // Prepared detail levels are decoded once; each frame only selects one.
@@ -315,12 +315,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // Open trajectories have no physical apoapsis and read as unbounded
         // guide lines at system scale. Keep them quiet until the body itself
         // is hovered; closed orbits retain their normal category policy.
-        // A minor body whose caption is hidden shows its path only when targeted (the anonymous-minor rule below), so an
-        // untargeted one neither draws nor wants its path.
+        // A minor body whose caption is hidden shows its path only when targeted (the anonymous-minor rule below), so an untargeted one neither draws nor wants its path.
         const pathUnnamed = (annotationPriorities[body.id] ?? 2) < 2 && entry.labelHidden && !hovered && entry.highlighted !== true &&
           body.id !== emphasizedId;
-        const pathless = entry.orbit !== null && entry.orbit.vertexCount === undefined;
-        let skipped = pathless || hostDetailSatelliteOrbit || pathUnnamed || !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
+        let skipped = (entry.orbit !== null && entry.orbit.vertexCount === undefined) || hostDetailSatelliteOrbit || pathUnnamed || !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
         // Prepared trail bounds enclose the faded trail; a complete orbit uses the
         // prepared sphere around every vertex. Either way a path that cannot reach
         // the fade's first visible extent inside the viewport is not projected.
@@ -341,7 +339,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
             // no projection at all: hundreds of small hidden orbits skip here.
             const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
             const orbit = entry.orbit;
-            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit) && !pathless && !pathUnnamed && !hostDetailSatelliteOrbit) wantedOrbits.add(body.id);
+            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit) && orbit.vertexCount !== undefined && !pathUnnamed && !hostDetailSatelliteOrbit) wantedOrbits.add(body.id);
             measuredExtent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
               // An orbit whose bank has not arrived is measured by its prepared sphere until its path can be.
               : !hasPath(orbit) ? Math.max(1, Math.min(sphereDiameter, ORBIT_FULL_PIXELS))
