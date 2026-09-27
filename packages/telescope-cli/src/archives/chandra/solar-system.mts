@@ -42,11 +42,20 @@ import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts
 
 /** Horizons' observer code for the Chandra X-ray Observatory: site 500 (body centre) of body -151. Verified live. */
 export const CHANDRA_OBSERVER = '500@-151';
-/** Horizons' body number for each moving target this route knows, by the name the archive puts in OBJECT. */
-export const HORIZONS_BODIES: Readonly<Record<string, string>> = {
-  MERCURY: '199', VENUS: '299', MARS: '499', JUPITER: '599', SATURN: '699', URANUS: '799', NEPTUNE: '899', PLUTO: '999',
-  MOON: '301', TITAN: '606', IO: '501', EUROPA: '502', GANYMEDE: '503', CALLISTO: '504',
-};
+/** Horizons' body number for each moving target this route knows, by the name the archive puts in OBJECT. They are data beside
+ * the programs (`tools/objects/chandra/horizons-bodies.json`), because this package names no body, and are read when a target is
+ * frozen, not when the module loads. */
+export const CHANDRA_HORIZONS_BODIES = 'tools/objects/chandra/horizons-bodies.json';
+export async function chandraHorizonsBodies(path = resolve(WORKSPACE, CHANDRA_HORIZONS_BODIES)): Promise<Readonly<Record<string, string>>> {
+  const record = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, 'Chandra Horizons bodies');
+  if (record.schema !== 'cssearth-chandra-horizons-bodies@1') throw new TypeError(`${path} is not a Chandra Horizons body list.`);
+  return Object.fromEntries(Object.entries(requireRecord(record.bodies, 'Horizons bodies')).map(([name, body]) => {
+    if (name !== name.trim().toUpperCase()) throw new TypeError(`${path}: ${name} is not an archive OBJECT name in capitals.`);
+    const number = requireString(body, `${name} Horizons body`);
+    if (!/^-?\d+$/u.test(number)) throw new TypeError(`${path}: ${name} has no Horizons body number.`);
+    return [name, number];
+  }));
+}
 /** The archive's own ephemeris files: the spacecraft orbit, and the target's, which is named after the body. Solar, lunar and
  * aspect-angle ephemerides are neither. */
 const ORBIT = /(?:^|\/)orbitf[0-9A-Za-z]*_eph1\.fits(?:\.gz)?$/u;
@@ -156,8 +165,8 @@ export const FREEZE_PARAMETERS: Readonly<Record<string, string | number>> = { cl
 export async function freezeSolarSystem(id: string, obsid: number, work: string, options: { sources?: readonly string[] } = {}) {
   const { program, entry } = await chandraFiles(id, obsid, resolve(work, 'archive'), options.sources, 'inputs');
   const target = entry.targetName.trim().toUpperCase();
-  const horizonsBody = HORIZONS_BODIES[target];
-  if (!horizonsBody) throw new Error(`${target} is not a moving target this route knows: ${Object.keys(HORIZONS_BODIES).join(', ')}.`);
+  const bodies = await chandraHorizonsBodies(), horizonsBody = bodies[target];
+  if (!horizonsBody) throw new Error(`${target} is not a moving target this route knows: ${Object.keys(bodies).join(', ')}.`);
   const find = (match: (file: ChandraFile) => boolean, what: string) => {
     const found = entry.inputs.filter(match);
     if (found.length !== 1) throw new Error(`${obsid}: the pinned inputs hold ${found.length} ${what}, not one.`);

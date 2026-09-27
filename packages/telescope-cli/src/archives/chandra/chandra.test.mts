@@ -11,7 +11,7 @@ import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
 import { reprocessParameters, reprocessRun, writeReprocessRecord } from './reprocess.mts';
-import { discRegistration, freezeRun } from './solar-system.mts';
+import { chandraHorizonsBodies, discRegistration, freezeRun } from './solar-system.mts';
 
 const BLOCK = 2880, CARD = 80;
 const card = (key: string, value: string) => `${key.padEnd(8)}= ${value}`.padEnd(CARD).slice(0, CARD);
@@ -313,4 +313,21 @@ test('a frozen-frame receipt proves only the observation it names, and one that 
   const unreadable = await state();
   assert.equal(unreadable.frozen.size, 0, 'a receipt that does not parse is not a check');
   assert.match(unreadable.problems[0] ?? '', /test\.2798\.solar-system\.json/u);
+});
+
+test('the Horizons bodies of the moving-target route are validated data beside the programs, read when a target is frozen', async () => {
+  const tracked = await chandraHorizonsBodies();
+  assert.ok(Object.keys(tracked).length > 0);
+  for (const [name, body] of Object.entries(tracked)) assert.ok(name === name.toUpperCase() && /^-?\d+$/u.test(body), `${name}: ${body}`);
+  const directory = await mkdtemp(join(tmpdir(), 'chandra-horizons-'));
+  const refused = async (record: unknown, pattern: RegExp) => {
+    const path = join(directory, 'bodies.json');
+    await writeFile(path, JSON.stringify(record));
+    await assert.rejects(chandraHorizonsBodies(path), pattern);
+  };
+  await refused({ schema: 'other@1', bodies: {} }, /not a Chandra Horizons body list/u);
+  await refused({ schema: 'cssearth-chandra-horizons-bodies@1', bodies: { Target: '1' } }, /not an archive OBJECT name in capitals/u);
+  await refused({ schema: 'cssearth-chandra-horizons-bodies@1', bodies: { TARGET: 'one' } }, /no Horizons body number/u);
+  await refused({ schema: 'cssearth-chandra-horizons-bodies@1', bodies: { TARGET: 1 } }, /TARGET Horizons body/u);
+  await assert.rejects(chandraHorizonsBodies(join(directory, 'absent.json')), /ENOENT/u);
 });
