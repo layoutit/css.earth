@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { placeResolvedDisc } from './resolved-disc-map.mts';
+import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 
 const size = 41, radius = 8, values = new Float64Array(size * size), uncertainty = new Float64Array(size * size).fill(0.02);
 for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) values[y * size + x] = Math.hypot(x - 20, y - 20) <= radius ? 1 : 0;

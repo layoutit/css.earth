@@ -17,8 +17,8 @@ import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } f
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
-import { placeResolvedDisc } from '../resolved-disc-map.mts';
-import { horizonsTables } from '../sphere-horizons.mts';
+import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
+import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
 import { readProgram } from './archive.mts';

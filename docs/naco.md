@@ -70,7 +70,7 @@ Two other things are worth knowing before reading the code.
    halves' extracted one-dimensional spectra, measures the target's width across the slit against the night's telluric
    standard, and records the slit geometry.
 5. **Place a resolved image.** `author-body-map.mts <target> <program id> <naco_img_jitter.fits> --raw <raw-dir>` is the
-   NACO adapter to [`resolved-disc-map.mts`](../tools/objects/resolved-disc-map.mts), the same placement boundary now used by
+   NACO adapter to [`resolved-disc-map.ts`](../packages/bake/src/objects/layers/observation/body-maps/resolved-disc-map.ts), the same placement boundary now used by
    JWST and ALMA. The adapter checks the current reduction record and every raw pin, requires every object exposure to carry
    the same north-up/east-left TAN grid and zero requested position angle, and uses the recipe's shift-only coadd with a newly
    fitted disc centre. It publishes relative filter intensity with an explicit sky-noise uncertainty; no absolute calibration
@@ -84,8 +84,8 @@ Two other things are worth knowing before reading the code.
    owns pinning, the two independent template reductions, their comparison and the receipt.
 
 What is shared rather than repeated: the archive's raw table, the header service, the anonymous data-portal download and the
-esorex runner are `tools/objects/interferometry/eso-pipeline.mts`, the calibration association tree is
-`eso-associations.mts`, and resolved-image placement is `resolved-disc-map.mts`. NACO supplies only the facts peculiar to its
+esorex runner are `@cssearth/telescope/node` ([`eso-pipeline.ts`](../packages/telescope/src/node/eso-pipeline.ts)), the calibration association tree is
+[`eso-associations.ts`](../packages/telescope/src/node/eso-associations.ts), and resolved-image placement is `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`. NACO supplies only the facts peculiar to its
 product: how the recipe retained the detector axes, how relative intensity and its noise are measured, and which bytes prove it.
 
 ## Measured

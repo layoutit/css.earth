@@ -202,7 +202,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    await publish(step.path,new TextEncoder().encode(text));
   }
   else if(step.kind==='horizons-time-list'){
-   const [{timeListRows},{horizonsRows}]=await Promise.all([import('./sphere-horizons.mts'),import('@cssearth/bake/objects/layers/terrestrial')]);
+   const {timeListRows,horizonsRows}=await import('@cssearth/bake/objects/layers/terrestrial');
    const asked=await timeListRows(step.url,step.parameters,step.epochs,async url=>(await request(url)).text());
    const pinned=horizonsRows(await readFile(containedPath(sourceRoot,step.path),'utf8'));
    if(asked.length!==pinned.length||asked.some((row,index)=>row!==pinned[index]))throw new Error(`Horizons rows drifted from ${step.path}.`);

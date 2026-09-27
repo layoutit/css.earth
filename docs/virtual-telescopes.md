@@ -819,7 +819,7 @@ product remains a detector image: the label supplies no value units, celestial W
 quality array, and the query preserves angular resolution as unresolved.
 
 The instrument author then writes the final map, its `*.body-map.json`, and the shared `*.product.json`. Resolved images from
-JWST, ALMA and NACO meet at `tools/objects/resolved-disc-map.mts`: an adapter supplies a north-up/east-left value plane, its
+JWST, ALMA and NACO meet at `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`: an adapter supplies a north-up/east-left value plane, its
 one-sigma uncertainty, plate scale and observation identity; the shared stage fits the limb and owns the ephemeris, rotation,
 camera, projection and complete body-map observation. Hubble's slit scan has different image formation and joins at the final
 body-map contract. The product record pins the recipe, observation products, ephemerides and rotation model that the map stage
