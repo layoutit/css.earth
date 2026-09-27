@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /** Check a DRAGONS re-run against something that is not itself, and write the receipt.
  *
- *   node tools/objects/gemini/compare.mts <program id> <work directory> archive <bias|flat-bias|flat>
- *   node tools/objects/gemini/compare.mts <program id> <work directory> halves
+ *   node packages/telescope-cli/src/archives/gemini/compare.mts <program id> <work directory> archive <bias|flat-bias|flat>
+ *   node packages/telescope-cli/src/archives/gemini/compare.mts <program id> <work directory> halves
  *
  * Two checks, and they establish different things. Which one a product has is recorded in its own product record, so a
  * reader asks for the kind of evidence they need rather than trusting that a receipt exists.

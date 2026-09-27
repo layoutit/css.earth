@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Re-run DRAGONS, Gemini Observatory's own reduction platform, on a pinned programme's raw frames.
  *
- *   node tools/objects/gemini/reduce.mts <program id> <work directory> <stage> [--raw <dir>] [--half a|b]
+ *   node packages/telescope-cli/src/archives/gemini/reduce.mts <program id> <work directory> <stage> [--raw <dir>] [--half a|b]
  *
  * Three stages, in the order a GMOS image needs them, each a plain `reduce` call on the pinned raw frames:
  *
@@ -35,7 +35,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
 import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
-import { readProductRecord, sameRun, writeProductRecord, assertInputPins } from '@cssearth/telescope/node';
+import { readProductRecord, sameRun, writeProductRecord, assertInputPins, WORKSPACE } from '@cssearth/telescope/node';
 import { digestProgram, readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';
@@ -50,7 +50,7 @@ export type Half = (typeof HALVES)[number];
 
 /** A path inside the repository, as the repository sees it: a record is committed, so it never carries a local absolute
  * path. A path outside the repository is recorded as it is, because nothing here can shorten it honestly. */
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = WORKSPACE;
 export const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 
 /** What DRAGONS calls the product of each stage. `reduce` names its output for the first frame that went in and for what it

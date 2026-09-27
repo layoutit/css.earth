@@ -1,5 +1,5 @@
 # What the Gemini archive holds for cssEarth
-Written by `tools/objects/gemini/archive-ledger.mts` from the archive itself on 2026-09-19. Nothing here is
+Written by `packages/telescope-cli/src/archives/gemini/archive-ledger.mts` from the archive itself on 2026-09-19. Nothing here is
 typed in by hand: the counts are the archive's own `GROUP BY` results and each capability's state is read from the
 pinned programs and the receipts beside them. Re-run the command to bring it up to date.
 Every count here is of planes whose dataRelease has passed, so it is a census of what anyone can download without an account.

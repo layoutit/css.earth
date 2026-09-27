@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /** Install and locate the pinned DRAGONS environment of toolchain.json under output/toolchains/gemini (ignored by git).
  *
- *   node tools/objects/gemini/toolchain.mts install
- *   node tools/objects/gemini/toolchain.mts verify
+ *   node packages/telescope-cli/src/archives/gemini/toolchain.mts install
+ *   node packages/telescope-cli/src/archives/gemini/toolchain.mts verify
  *
  * micromamba builds the environment for osx-64, because DRAGONS has no osx-arm64 build; on Apple silicon Rosetta 2 translates
  * it. `install` resolves the packages of toolchain.json when packages.lock is absent and writes the lock micromamba resolved,
@@ -18,15 +18,18 @@ import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const repository = resolve(import.meta.dirname, '../../..');
+const repository = WORKSPACE;
+/** The toolchain's pins (descriptor and lock) stay in the checkout beside the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'tools/objects/gemini');
 export const GEMINI_ROOT = resolve(repository, 'output/toolchains/gemini');
-const DESCRIPTOR = resolve(import.meta.dirname, 'toolchain.json');
+const DESCRIPTOR = resolve(PINS, 'toolchain.json');
 
 async function descriptor() {
   const text = await readFile(DESCRIPTOR, 'utf8');
   const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
-  const lockPath = resolve(import.meta.dirname, requireString(entry.lock, 'lock'));
+  const lockPath = resolve(PINS, requireString(entry.lock, 'lock'));
   const lock = await readFile(lockPath, 'utf8').catch(() => '');
   return { entry, lock, lockPath, digest: createHash('sha256').update(text).update(lock).digest('hex') };
 }
@@ -78,7 +81,7 @@ export interface GeminiToolchain {
 export async function geminiToolchain(): Promise<GeminiToolchain> {
   const { entry, digest } = await descriptor(), bin = resolve(GEMINI_ROOT, 'env/bin');
   const marker = await readFile(resolve(GEMINI_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Gemini toolchain is not installed: node tools/objects/gemini/toolchain.mts install');
+  if (!marker) throw new Error('The Gemini toolchain is not installed: node packages/telescope-cli/src/archives/gemini/toolchain.mts install');
   if (marker.pinsSha256 !== digest) throw new Error('The Gemini toolchain was installed from other pins; reinstall it.');
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {

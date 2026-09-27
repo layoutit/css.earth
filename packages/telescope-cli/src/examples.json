@@ -276,7 +276,7 @@
       "colour": { "kind": "greys" },
       "enlarge": 1,
       "product": {
-        "command": "node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
+        "command": "node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
         "definition": "tools/objects/gemini/programs/comet-3i-gs2025bdd102.json"
       },
       "note": "Four 25 second frames stacked by the observatory's own DRAGONS recipe on this toolkit's master bias and flat."

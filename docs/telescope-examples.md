@@ -181,7 +181,7 @@ coordinates, north is 0.1 degrees and east 269.9 degrees clockwise from up. The 
 and the comet moved between the four exposures, so it appears as a row of overlapping images whose comae run together
 into one smear rather than as a single object. Some of the points near it are ordinary stars.
 
-`node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science`
+`node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science`
 
 ## Juno, JunoCam: one strip set of Europa
 

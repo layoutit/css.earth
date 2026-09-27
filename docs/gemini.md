@@ -44,7 +44,7 @@ hands the re-run an oracle for free.
 
 ## Stages
 
-1. **Install the software.** `node tools/objects/gemini/toolchain.mts install` builds the pinned DRAGONS environment under
+1. **Install the software.** `node packages/telescope-cli/src/archives/gemini/toolchain.mts install` builds the pinned DRAGONS environment under
    `output/toolchains/gemini` (ignored by git) and writes `packages.lock`, the explicit package list micromamba resolved, so
    a second machine gets the same builds by URL and digest. `verify` refuses an environment built from other pins.
    **There is no `osx-arm64` build of DRAGONS**: the Gemini channel's `osx-arm64` subdirectory holds only `qemu` and
@@ -220,25 +220,25 @@ NIFS 55 and NIRI 53, neither proven.
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
-node tools/objects/gemini/toolchain.mts install
-node tools/objects/gemini/toolchain.mts verify
+node packages/telescope-cli/src/archives/gemini/toolchain.mts install
+node packages/telescope-cli/src/archives/gemini/toolchain.mts verify
 
-node tools/objects/gemini/archive.mts comet-3i-gs2025bdd102 "GS-2025B-DD-102" r --days 15 --start 2025-09-05
+node packages/telescope-cli/src/archives/gemini/archive.mts comet-3i-gs2025bdd102 "GS-2025B-DD-102" r --days 15 --start 2025-09-05
 
-node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work bias
-node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work flat-bias
-node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work flat
-node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science
-node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science --half a
-node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science --half b
+node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work bias
+node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work flat-bias
+node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work flat
+node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science
+node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science --half a
+node packages/telescope-cli/src/archives/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science --half b
 
-node tools/objects/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work archive bias
-node tools/objects/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work archive flat-bias
-node tools/objects/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work archive flat
-node tools/objects/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work halves
+node packages/telescope-cli/src/archives/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work archive bias
+node packages/telescope-cli/src/archives/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work archive flat-bias
+node packages/telescope-cli/src/archives/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work archive flat
+node packages/telescope-cli/src/archives/gemini/compare.mts comet-3i-gs2025bdd102 .local/gemini/work halves
 
-node tools/objects/gemini/archive-ledger.mts .local/gemini/work
-node --test tools/objects/gemini/gemini.test.mts
+node packages/telescope-cli/src/archives/gemini/archive-ledger.mts .local/gemini/work
+node --test packages/telescope-cli/src/archives/gemini/gemini.test.mts
 ```
 
 `.local/gemini` is ignored by git; `--raw <dir>` takes the pinned frames from a directory that already holds them instead of

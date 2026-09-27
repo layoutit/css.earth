@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { gzipSync } from 'node:zlib';
 import { sha256 } from '@cssearth/core/node';
-import { CADC_TAP } from '../../../tools/objects/gemini/cadc.mts';
+import { CADC_TAP } from './archives/gemini/cadc.mts';
 import { TAP as CHANDRA_TAP, obsidDirectory, type ChandraObservation } from './archives/chandra/archive.mts';
 import { SEARCH as SPITZER_SEARCH } from './archives/spitzer/archive.mts';
 import { deliverSource, downloadSource, readSavedSource } from './archive-source.mts';
