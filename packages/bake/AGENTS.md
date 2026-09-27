@@ -89,6 +89,10 @@ its validators accept); the renderer never imports the bake.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls. It imports `presentation`.
+- `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
+  package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
+  It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
+  its test is `tests/preparation/solar-geometry.test.mts`.
 - `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the prepared focus objects and scene distances
   the catalogue and search destinations are built from, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites. It imports `raster`, and `objects/raster` (loaded only when a marker is drawn from a
@@ -164,13 +168,16 @@ its validators accept); the renderer never imports the bake.
     material bake, layered presentation, object preparation and observed polar surfaces stay in `tools/objects/`: they use
     `material-composition`'s atlas tile writer and path check, and `material-composition` reads `giant`'s radial fields, so
     in `giant` they would close a topic cycle. Code that reads
-    the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does. The pipelines' entry
-    scripts and modules that still read platform files stay in `tools/objects/`; the terrestrial commands that derive
+    the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
+    entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
+    `SolidSceneSolarGeometry`) and the shape-model entry (`shape-model.ts`) take it from `tools/objects/prepare-authored.ts`,
+    which loads the generated module. They reach the astronomy package through `astronomy`, the object runtime contract through
+    `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
+    `objects/content`, as lower topics. The pipelines' other entry scripts and modules that still read platform files stay in
+    `tools/objects/`; the terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
     with the band-alignment, camera-reference and L'LORRI overlap commands and the archived-camera Python that runs the
-    camera reference beside it. `tools/objects/terrestrial-layers/` keeps only the pipeline entry (`index.mts`) and the solid
-    scene (`solid-scene.mts`): both read the generated solar geometry as a module, and the solid scene loads the astronomy
-    package through `tools/prepare/astronomy/`. A source manifest's `generator` records
+    camera reference beside it. A source manifest's `generator` records
     what made an intermediate when it was made, so manifests keep naming the radial snapshot and PDS constraint map by their
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
