@@ -29,6 +29,9 @@
  *
  * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
+ * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
+ * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
+ * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
  * `radius` and `mass` may be "gaia-flame": the Gaia DR3 FLAME value of the same source, an archive product. `gravity` defaults to
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a
  * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records; ADS links are cited by
@@ -51,6 +54,8 @@ export interface StarSpec {
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius: Cited | 'gaia-flame'; readonly mass: Cited | 'gaia-flame'; readonly temperature: Cited;
   readonly gravity?: Cited; readonly radialVelocity?: Cited;
+  /** Parsecs, cited: replaces Gaia DR3's parallax distance (spec header). */
+  readonly distance?: Cited;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
@@ -168,7 +173,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -197,6 +202,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     temperature: cited(input.temperature, at('temperature'), [1000, 60000]),
     ...(input.gravity === undefined ? {} : { gravity: cited(input.gravity, at('gravity'), [-1, 9]) }),
     ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), [-1000, 1000]) }),
+    ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e7]) }),
     ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),

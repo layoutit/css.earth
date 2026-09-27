@@ -469,6 +469,46 @@ test('a whole star package from fixtures is what the bake accepts: declared file
   assert.deepEqual(stored, { ...spec, order: 9999 }, 'the stored spec reads back to the spec that made the package');
 });
 
+test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or missing parallax without one is refused', async () => {
+  const { generateStar, placement, PARALLAX_FLOOR_SIGMA } = await import('./generate.mts'), { parseGaiaRow } = await import('./archives.mts');
+  const gaia = '303374445376245632', header = 'source_id,ref_epoch,ra,dec,parallax,parallax_error,pmra,pmdec,radial_velocity,radial_velocity_error,ruwe,phot_g_mean_mag,bp_rp,has_xp_sampled,mass_flame,mass_flame_lower,mass_flame_upper,radius_flame,radius_flame_lower,radius_flame_upper';
+  // A two-parameter solution: a position and a magnitude, as Gaia DR3 gives a star in another galaxy.
+  const twoParameter = [header, `${gaia},2016.0,23.4424,30.7444,,,,,,,,19.2,-0.1,false,,,,,,`].join('\n');
+  const row = parseGaiaRow(twoParameter, gaia);
+  assert.equal(row.parallax, undefined); assert.equal(row.pmra, undefined); assert.equal(row.ruwe, undefined);
+  assert.throws(() => parseGaiaRow([header, `${gaia},2016.0,23.4,30.7,0.1,,1,1,,,1.0,19.2,-0.1,false,,,,,,`].join('\n'), gaia), /parallax_error empty while parallax, pmra, pmdec, ruwe are given/u);
+  const base = { ...star, id: 'test-far-star', name: 'Test Far Star', gaia, target: undefined, radius: { value: 12, source: 'a paper', url: star.paper.url }, mass: { value: 33, source: 'a paper', url: star.paper.url },
+    temperature: { value: 37000, source: 'a paper', url: star.paper.url }, radialVelocity: { value: -180, source: 'a paper', url: star.paper.url } };
+  assert.throws(() => placement(parseStarSpec(base), row), /has no parallax \(a two-parameter solution\); give distance with its source/u);
+  const distance = { value: 964000, uncertainty: 54000, source: 'Bonanos et al. (2006), ApJ 652, 313', url: star.paper.url };
+  const far = parseStarSpec({ ...base, distance });
+  const placed = placement(far, row);
+  assert.equal(placed.parsecs, 964000);
+  assert.match(placed.source, /Bonanos et al\. \(2006\).*964000 \+\/- 54000 pc; Gaia DR3 gives this source no parallax/u);
+  assert.deepEqual([placed.properMotion.ra, placed.properMotion.dec], [0, 0]);
+  assert.match(placed.properMotion.source, /two-parameter solution with no proper motion; zero is assumed \(at 964,000 pc, 1 mas\/yr would be 4,570 km\/s/u);
+  // A parallax under the floor places nothing by itself; a cited distance replaces it and says so.
+  const weak = { ...row, parallax: 0.4, parallaxError: 0.1, pmra: 1, pmdec: 2, ruwe: 1 } as GaiaRow;
+  assert.throws(() => placement(parseStarSpec(base), weak), new RegExp(`is 4\\.0 standard errors, under the ${PARALLAX_FLOOR_SIGMA} that places a star`, 'u'));
+  assert.match(placement(far, weak).source, /Gaia DR3 parallax 0\.4000 \+\/- 0\.1000 mas \(same row, RUWE 1\.00\), 4\.0 standard errors, is not used/u);
+  assert.equal(placement(parseStarSpec(base), { ...weak, parallax: 2, parallaxError: 0.1 }).parsecs, 500);
+  // The whole package: the record, the distance fact and the README all name the cited distance.
+  const arxiv = '<feed><entry><title>A paper</title><published>2006-01-01T00:00:00Z</published><author><name>A Bonanos</name></author></entry></feed>';
+  const archive: Archive = {
+    async text(url) { if (url.includes('gea.esac.esa.int/tap')) return twoParameter; if (url.includes('export.arxiv.org')) return arxiv; if (url.includes('asu-tsv')) return '#\n'; throw new Error(`unexpected ${url}`); },
+    async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
+  const spec = parseStarSpec({ ...base, distance, limb: { none: 'a test fixture' }, text: { card: 'A far star.', introduction: 'A star in another galaxy made from fixtures.', locator: 'fixture' } });
+  const generated = await generateStar(spec, { archive, root, order: 9998, universe: { ids: new Set(), names: new Map(), stars: [] },
+    resolver: async () => ({ mainId: 'Test Far Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
+  assertWholePackage(generated.files, spec.id, true);
+  const body = JSON.parse(String(generated.files.get(`packages/astronomy/data/bodies/${spec.id}.json`)));
+  assert.equal(body.star.distanceParsecs, 964000);
+  const facts = JSON.parse(String(generated.files.get(`src/objects/${spec.id}/source/content/object.json`))).panel.facts;
+  assert.deepEqual(facts.find((fact: { id: string }) => fact.id === 'distance').value, '964,000 parsecs');
+  assert.equal(facts.find((fact: { id: string }) => fact.id === 'distance').source.label, distance.source);
+  assert.match(String(generated.files.get(`src/objects/${spec.id}/README.md`)), /distance 964,000 pc from Bonanos et al\. \(2006\), ApJ 652, 313; Gaia DR3 gives it no parallax/u);
+});
+
 test('an imaged planet\'s K, H and J magnitudes become the band colour, each cited to its paper; a planet missing a band is named', async () => {
   const { draftUltracoolPhotometry, readCsv, ULTRACOOL } = await import('./ultracool.mts');
   const { parsePhotometryEntries } = await import('./spec.mts');
