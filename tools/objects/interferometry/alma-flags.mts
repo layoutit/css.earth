@@ -111,3 +111,31 @@ export function pipelineFlagSummary(casaLog: string, visibilities: string, field
   if (summary.size !== windows.length) throw new TypeError(`The summary covers ${summary.size} of ${windows.length} windows for ${field}.`);
   return summary;
 }
+
+/** The inline flag commands a flagdata task echoed to its CASA log for one measurement set, complete and in call order.
+ * The task echoes its own parameters (`flagdata::` lines, double-quoted items); the pipeline's own "Executing" line and the
+ * command log above it can truncate a long command, but the echo does not. Summaries are left out, as loggedFlagging does. */
+export function echoedFlagCommands(casaLog: string, visibilities: string): string[] {
+  const commands: string[] = [];
+  for (const line of casaLog.split('\n')) {
+    if (!/\bflagdata::/u.test(line) || !line.includes(`/${visibilities}",mode="list"`)) continue;
+    const list = /inpfile=\[(.*?)\],/u.exec(line);
+    if (!list) continue;
+    for (const [, item] of list[1]!.matchAll(/"([^"]*)"/gu)) if (!/\bmode='summary'/u.test(item!)) commands.push(item!.replace(/\s+/gu, ' ').trim());
+  }
+  return commands;
+}
+
+/** A command the log cut short starts inside a value (`23:58:12' field=...`) instead of at an argument. Each is replaced by
+ * the echoed command it is the tail of, taken in order and used once; a fragment no echoed command ends with stops the route
+ * rather than flagging less than the pipeline did. */
+export function completeInlineCommands(inline: readonly string[], echoed: readonly string[]): string[] {
+  let cursor = 0;
+  return inline.map(command => {
+    if (/^\w+='/u.test(command)) return command;
+    const at = echoed.findIndex((full, index) => index >= cursor && full.endsWith(command) && full.length > command.length);
+    if (at < 0) throw new TypeError(`The command log truncates the flag command "${command}", and no flagdata echo completes it.`);
+    cursor = at + 1;
+    return echoed[at]!;
+  });
+}

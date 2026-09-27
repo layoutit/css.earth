@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
+import { agentFlagCommands, completeInlineCommands, echoedFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const read = (name: string) => readFile(resolve(root, 'tests/fixtures/alma', name), 'utf8');
@@ -42,4 +42,21 @@ test('the pipeline’s per-antenna flag count is read for one field and every wi
   // Every other antenna loses its DV03 baseline and its auto-correlation: 2 of 41 rows.
   assert.ok(Math.abs(spw25.get('DA41')! - 2 / 41) < 1e-3);
   assert.throws(() => pipelineFlagSummary(log, vis, 'NOT_A_FIELD'), /covers 0 of 4/u);
+});
+
+test('a flag command the log cut short is completed from the task’s own echo, or the route stops', async () => {
+  // ALMA 2019.1.00696.S, stage 12: the command log and the pipeline's "Executing" line keep only the tail of each command;
+  // the flagdata task's own echo keeps it whole. The first file line is a call that also carried a summary.
+  const echo = await readFile(resolve(fileURLToPath(new URL('../../../', import.meta.url)), 'tests/fixtures/alma/casapy.flagdata-echo.log'), 'utf8');
+  const echoed = echoedFlagCommands(echo, 'uid___A002_Xe539c7_X12189.ms');
+  assert.equal(echoed.length, 8, 'four commands in each of the two calls, summaries left out');
+  assert.ok(echoed.every(command => command.startsWith("intent='CALIBRATE_BANDPASS#ON_SOURCE'")));
+  const fragment = "23:58:12' field='J0334-4008' reason='ultrahigh baseline timestamp'";
+  const completed = completeInlineCommands([fragment, fragment, "spw='25' antenna='DV03' reason='nmedian'"], echoed);
+  assert.equal(completed[0], echoed[0]);
+  assert.equal(completed[1], echoed[1], 'each echoed command is used once, in order');
+  assert.equal(completed[2], "spw='25' antenna='DV03' reason='nmedian'", 'a whole command is kept as the log wrote it');
+  assert.ok(completed[0]!.includes("timerange='2019/12/17/23:58:10~2019/12/17/23:58:12'"));
+  assert.throws(() => completeInlineCommands(["12' reason='nothing echoes this'"], echoed), /truncates the flag command/u);
+  assert.deepEqual(echoedFlagCommands(echo, 'uid___A002_Xe539c7_X4ec3.ms'), [], 'another measurement set’s echo is not taken');
 });

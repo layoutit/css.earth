@@ -28,7 +28,7 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseCalibrationRecord, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
 import { readFitsHeader } from '@cssearth/fits';
-import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
+import { agentFlagCommands, completeInlineCommands, echoedFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
 import { pipelineImaging, precisePhaseCentre, type PipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration, type SelfCalibration } from './alma-selfcal.mts';
 import { toolchainPath } from './toolchain.mts';
@@ -265,10 +265,13 @@ async function replayedFlags(work: string, unpacked: string, commands: string, v
   const agent = await findOne(out, name => name === `${visibilities}-agent_flagcmds.txt`, 'hifa_flagdata command file');
   const commandFile = resolve(work, 'weblog', `${visibilities}.flagcmds.txt`);
   await writeFile(commandFile, agentFlagCommands(await readFile(agent, 'utf8')).join('\n') + '\n');
-  const { tbuff, inline } = loggedFlagging(commands, visibilities);
-  // The count hif_applycal logged; the last stage that logged one for this set is the state the calibration left.
+  const logged = loggedFlagging(commands, visibilities), tbuff = logged.tbuff;
   const logs = (await readdir(out, { recursive: true })).filter(name => real(name) && name.endsWith('/casapy.log'))
     .sort((a, b) => Number(/stage(\d+)/u.exec(a)?.[1] ?? 0) - Number(/stage(\d+)/u.exec(b)?.[1] ?? 0));
+  // Commands the command log cut short are completed from the task's own echo in the stage logs, in the same order.
+  const echoed = (await Promise.all(logs.map(name => readFile(resolve(out, name), 'utf8')))).flatMap(text => echoedFlagCommands(text, visibilities));
+  const inline = completeInlineCommands(logged.inline, echoed);
+  // The count hif_applycal logged; the last stage that logged one for this set is the state the calibration left.
   let expected: Record<string, Record<string, number>> | null = null;
   for (const name of logs) {
     const text = await readFile(resolve(out, name), 'utf8');
