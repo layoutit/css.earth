@@ -1,12 +1,11 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 14,
+    "largestCycle": 13,
     "layerOrder": [
       "tools/objects(root)",
       "tools/objects/giant-layers",
       "tools/objects/material-composition",
-      "tools/objects/sphere-survey",
       "tools/prepare",
       "tools/ci",
       "tools/objects/new-object",
@@ -46,7 +45,6 @@
       {"from":"tools/objects/giant-observations","to":"tools/objects(root)","imports":1},
       {"from":"tools/objects/new-object","to":"tools/prepare","imports":1},
       {"from":"tools/objects/source-authoring","to":"tools/objects/new-object","imports":1},
-      {"from":"tools/objects/sphere-survey","to":"tools/objects(root)","imports":1},
       {"from":"tools/prepared","to":"tools/ci","imports":1}
     ]
   },
