@@ -55,7 +55,7 @@ its validators accept); the renderer never imports the bake.
     that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
     Lambert attenuation atlas and the radial-layer contract.
   - `objects/cameras`: observer-computed cameras from an ephemeris and a spin state or IAU pole model, and the shared SPICE
-    kernel banks bound to the source-manifest reader (`tools/kernel-banks/kernel-bank.mts` is their command line).
+    kernel banks bound to the source-manifest reader (`packages/bake/cli/kernel-bank.mts` is their command line).
   - `objects/scene`: the physical world frame navigation is solved in, authored synchronous and hosted rotations, and the frames
     derived from the prepared solar geometry: the ecliptic presentation frame, the default camera, the Sun's reference view
     direction and the astrometric sky registration, and from them an object's physical solar-system scene and focused

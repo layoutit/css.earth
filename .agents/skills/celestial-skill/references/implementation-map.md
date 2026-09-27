@@ -250,7 +250,7 @@ Routes with Sun geometry accept a published photometric model record (see
 `tools/photometry/README.md`), and [photometric models](photometric-models.md)
 lists which bodies have one. Kernels that serve several bodies of one mission
 live in a kernel bank under `src/spice/<mission>/`: add, restore and verify them
-with `node tools/kernel-banks/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
+with `node packages/bake/cli/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
 
 A star other than the Sun is a placed body. `packages/astronomy` carries its
 catalogue astrometry (`star` record: ICRS position and epoch, distance, proper

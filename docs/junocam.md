@@ -16,7 +16,7 @@ So an image has no single camera. Each strip was read at its own instant, from i
 4. **Join the strips** ([`composite.mts`](../packages/bake/src/objects/layers/terrestrial/surface-observations/composite.ts)). Only the columns of a strip that can hold lit surface facing the camera are cast onto the mesh. Successive strips of one filter overlap by about 13 rows; a surface point in two strips is sampled in the one that holds it farther from the strip's edge. The strips of one filter make one band, and the red, green and blue bands make one colour photograph: a point is coloured only where all three bands see it.
 5. **Share the rest.** Footprints, photometry, selection between photographs, level matching, the display range and the report are the [surface-observation route](../tools/objects/surface-observations/README.md)'s, as for every other photograph.
 
-The kernels live in the shared bank [`src/spice/juno`](../src/spice/juno/manifest.json): only its manifest is committed, and `node tools/kernel-banks/kernel-bank.mts acquire juno` restores every kernel from NAIF (the preparation tools restore the ones they need on their own). The reconstructed trajectory `spk_rec_220909_221019_221027.bsp` carries its own Jupiter system, including the Europa ephemeris the navigation team updated from the flyby, so no separate satellite ephemeris is loaded.
+The kernels live in the shared bank [`src/spice/juno`](../src/spice/juno/manifest.json): only its manifest is committed, and `node packages/bake/cli/kernel-bank.mts acquire juno` restores every kernel from NAIF (the preparation tools restore the ones they need on their own). The reconstructed trajectory `spk_rec_220909_221019_221027.bsp` carries its own Jupiter system, including the Europa ephemeris the navigation team updated from the flyby, so no separate satellite ephemeris is loaded.
 
 ## Measured on Europa
 
@@ -66,7 +66,7 @@ The pointing offsets are inside the kernel's stated jitter. The ephemeris offset
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24
-node tools/kernel-banks/kernel-bank.mts acquire juno
+node packages/bake/cli/kernel-bank.mts acquire juno
 node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc
 node packages/telescope-cli/src/archives/juno/measure.mts europa-pj45 output/juno/europa-pj45 --horizons
 node packages/telescope-cli/src/archives/juno/archive-ledger.mts
