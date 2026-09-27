@@ -1,6 +1,6 @@
 # Venus sources
 
-Venus shows a cloud map, Magellan radar and elevation displays, modeled atmosphere charts, and Venera surface photographs.
+Venus shows a cloud map, Magellan radar and elevation displays, and modeled atmosphere charts.
 
 The [navigation marker recipe](source/preparation/navigation.json) retains the existing credited image and crop, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). This stylized identifier does not represent the scene epoch or its illumination.
 
@@ -12,7 +12,6 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
 | Radar | [USGS Magellan synthetic-color radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) |
 | Elevation, emissivity, reflectivity, roughness | [USGS numeric Magellan products](source/science/usgs/), at about 4.64 km grid spacing |
-| Surface photographs | [PDS Venera collection](https://pds-geosciences.wustl.edu/missions/venera/) |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target) Venus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
@@ -61,7 +60,6 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 - The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
 - The Magellan color source map has a darker one-pixel column at both its left and right edges (mean brightness 108 against about 124 beside them). A thin dark line can show along 180° E at close zoom.
-- The Venera photographs include archive assembly and tonal processing. PDS distributes this material outside its formally archived collection.
 - The camera and background sky do not represent an observer at a stated epoch.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -315,26 +313,15 @@ They are prepared files; the browser does not call PSG or derive chart geometry.
 </details>
 
 <details>
-<summary>Venera photographs, processing and rights</summary>
+<summary>Archived Venera photographs and rights</summary>
 
 ## Venera surface photographs
 
-The Surface photos panel publishes the four historical panorama files listed by
-the NASA PDS Geosciences Node: Venera 9 and 10 GIFs from 1975, and Venera 13
-and 14 JPEGs from 1982. The checked files retain the institutional archive's
-assembly, annotation, and tonal processing. They are not recolored, restored,
-cropped, filtered, or recompressed by this repository. Preparation validates
-each source hash and pixel dimensions, then copies the exact bytes into the
-declared Venus runtime closure.
-
-The source page credits the Vernadsky Institute and Moscow Power Institute and
-states that the material is provided through PDS but is not formally archived
-there. The UI and manifest preserve that distinction: the institutes receive
-the image credit and PDS is named as the distributor. NASA Science's Venera 9
-caption supports the qualified description that it is one of the first photos
-returned from another planet's surface. Descriptions of visible rocks, soil,
-calibration targets, and lander parts are conservative observations of the
-checked files.
+The Surface photographs section has been removed from the application. Venus
+preparation no longer builds the gallery, and the runtime inventory no longer
+ships its four panorama images. The original source files and credits remain
+for the historical record: Venera 9 and 10 GIFs from 1975, and Venera 13 and 14
+JPEGs from 1982, distributed by the NASA PDS Geosciences Node.
 
 The committed `source/venera/RIGHTS.md` records the automatic-camera
 public-domain basis and its limits. That qualification does not extend to later
@@ -369,8 +356,8 @@ the original instrument or scientific model.
 The [failed label-only roughness comparison](evidence/usgs-numeric/roughness-label-conflict.json)
 is retained alongside the passing comparison using the cited PDS calibration.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,504
-runtime files (211,536,145 bytes) across the 13 changed bodies and the shared
+The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
@@ -380,6 +367,10 @@ map descriptions, legends and retained scene. It includes screenshots; the
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the final
+The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.
+
+The later [gallery removal check](evidence/usgs-numeric/gallery-removal.json)
+confirms that Surface photographs is absent on desktop, mobile and the built
+page. The four panorama files are absent from the delivery inventory.

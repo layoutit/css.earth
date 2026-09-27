@@ -47,7 +47,7 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "243.02 days \u00b7 retrograde",
+        "value": "243.02 days · retrograde",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -60,7 +60,7 @@
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "177.4\u00b0",
+        "value": "177.4°",
         "source": {
           "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
           "label": "NASA NSSDCA Venus Fact Sheet",
@@ -75,7 +75,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "4.867 \u00d7 10\u00b2\u2074 kg",
+        "value": "4.867 × 10²⁴ kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -88,7 +88,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "5.243 g/cm\u00b3",
+        "value": "5.243 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -101,7 +101,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "8.87 m/s\u00b2",
+        "value": "8.87 m/s²",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -530,56 +530,7 @@
       }
     }
   ],
-  "galleries": [
-    {
-      "id": "surface-photographs",
-      "titleKey": "surfacePhotos",
-      "open": false,
-      "qualification": "Exact institutional archive files. These are historical camera panoramas with the source archive's assembly and tonal processing, not modern restorations.",
-      "items": [
-        {
-          "id": "venera-9",
-          "label": "Venera 9 \u00b7 1975",
-          "src": "/scenes/venus/venus-venera-9.gif",
-          "width": 980,
-          "height": 234,
-          "alt": "Black-and-white Venera 9 surface panorama showing angular rocks, soil, the horizon, and part of the lander.",
-          "caption": "One of the first photos returned from the surface of another planet; angular rocks and lander hardware are visible.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/GIF/venera9.gif"
-        },
-        {
-          "id": "venera-10",
-          "label": "Venera 10 \u00b7 1975",
-          "src": "/scenes/venus/venus-venera-10.gif",
-          "width": 980,
-          "height": 250,
-          "alt": "Black-and-white Venera 10 surface panorama showing flat rock slabs, fine material, and parts of the lander.",
-          "caption": "Flat rock slabs and fine surface material appear beneath diffuse daylight; spacecraft parts occupy the foreground.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/GIF/venera10.gif"
-        },
-        {
-          "id": "venera-13",
-          "label": "Venera 13 \u00b7 1982",
-          "src": "/scenes/venus/venus-venera-13.jpg",
-          "width": 969,
-          "height": 438,
-          "alt": "Two black-and-white Venera 13 surface panoramas showing slab-like rocks, soil, calibration targets, and lander hardware.",
-          "caption": "Two camera panoramas show slab-like rocks, soil, calibration targets, and lander hardware.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/JPEG/venera13.jpg"
-        },
-        {
-          "id": "venera-14",
-          "label": "Venera 14 \u00b7 1982",
-          "src": "/scenes/venus/venus-venera-14.jpg",
-          "width": 983,
-          "height": 492,
-          "alt": "Two black-and-white Venera 14 surface panoramas showing layered rock slabs and parts of the lander.",
-          "caption": "Two camera panoramas show layered rock slabs and spacecraft hardware at the landing site.",
-          "sourceUrl": "https://pds-geosciences.wustl.edu/venera/JPEG/venera14.jpg"
-        }
-      ]
-    }
-  ],
+  "galleries": [],
   "resources": [
     {
       "label": "NASA",

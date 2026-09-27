@@ -346,8 +346,8 @@ eight views, including the shared fit mask and FeO physical domain. All
 16,777,216 comparisons pass. The four mineral fractions sum to one within
 4.48 × 10⁻⁸ at every cell with a valid companion fit.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,504
-runtime files (211,536,145 bytes) across the 13 changed bodies and the shared
+The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
@@ -357,6 +357,6 @@ map descriptions, legends and retained scene. It includes screenshots; the
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](evidence/usgs-numeric/integration.json) records the final
+The [current-main integration check](evidence/usgs-numeric/integration.json) records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.
