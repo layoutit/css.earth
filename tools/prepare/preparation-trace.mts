@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import workerThreads from 'node:worker_threads';
 import { CATALOG_MODULE, DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, descriptorDigest,
-  type PreparationAccess, type PreparationTrace, type TracedCommand, type TracedState } from './preparation-trace-format.mts';
+  type PreparationAccess, type PreparationTrace, type TracedCommand, type TracedState } from '@cssearth/bake/preparation';
 
 const directory = process.env[PREPARATION_TRACE_VARIABLE];
 if (!directory) throw new Error(`${PREPARATION_TRACE_VARIABLE} must name the preparation trace directory.`);

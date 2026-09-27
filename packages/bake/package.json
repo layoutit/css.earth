@@ -226,6 +226,11 @@
       "import": "./dist/surface-previews.js",
       "default": "./dist/surface-previews.js"
     },
+    "./preparation": {
+      "types": "./dist/preparation.d.ts",
+      "import": "./dist/preparation.js",
+      "default": "./dist/preparation.js"
+    },
     "./thread-pool": {
       "types": "./dist/thread-pool.d.ts",
       "import": "./dist/thread-pool.js",

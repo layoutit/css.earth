@@ -6,8 +6,8 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import type { PreparationTraces } from "./preparation-cache.mts";
-import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorDigest } from "./preparation-trace-format.mts";
-import type { PreparationAccess, TracedCommand, TracedState } from "./preparation-trace-format.mts";
+import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorDigest } from "@cssearth/bake/preparation";
+import type { PreparationAccess, TracedCommand, TracedState } from "@cssearth/bake/preparation";
 
 async function fixture(run: (root: string) => Promise<void>) {
   const root = await realpath(await mkdtemp(join(tmpdir(), "cssearth-preparation-cache-")));

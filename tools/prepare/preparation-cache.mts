@@ -6,7 +6,7 @@ import { createReadStream } from "node:fs";
 import { lstat, mkdir, readdir, readFile, realpath, rename, rm, stat, writeFile } from "node:fs/promises";
 import { basename, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, REGISTRY_MODULE, descriptorDigest,
-  type DescriptorView, type PreparationAccess, type TracedCommand, type TracedState } from './preparation-trace-format.mts';
+  type DescriptorView, type PreparationAccess, type TracedCommand, type TracedState } from '@cssearth/bake/preparation';
 
 export const PREPARATION_RECEIPT_SCHEMA = "cssearth-preparation-receipt@2";
 

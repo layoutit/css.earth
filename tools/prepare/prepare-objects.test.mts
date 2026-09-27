@@ -6,7 +6,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { runCachedPreparationObjects, tracedPreparationEnvironment } from "./prepare-objects.mts";
 import type { CachedPreparationOptions } from './prepare-objects.mts';
-import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
+import { PREPARATION_TRACE_VARIABLE } from '@cssearth/bake/preparation';
 import { runObjectCommand } from '../cli/run-implemented-objects.mts';
 import type { PreparationCommand, PreparationOptions, PreparationReport } from '../cli/run-implemented-objects.mts';
 
