@@ -223,7 +223,7 @@ and mobile widths, including labels, legends and the image's intrinsic size.
 
 For deposited temperature–pressure retrievals, use the
 [reusable chart recipe](../../../../docs/retrieved-profile-charts.md). The shared chart step accepts
-`kind: retrieved-profile` through `tools/objects/charts/retrieved-profile.mts`.
+`kind: retrieved-profile` through `packages/bake/src/objects/charts/retrieved-profile.ts`.
 WASP-18b's `source/content/charts.json` binds each table's native pressure unit,
 column order, row count and absolute credible bounds. The preparer keeps native
 samples within the displayed range, interpolates only boundary crossings in

@@ -1,6 +1,6 @@
-import { CHART, chartAxes, chartDocument, chartLine, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.mts';
-import type { ChartIdentity } from './chart-style.mts';
-export type { ChartIdentity } from './chart-style.mts';
+import { CHART, chartAxes, chartDocument, chartLine, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.ts';
+import type { ChartIdentity } from './chart-style.ts';
+export type { ChartIdentity } from './chart-style.ts';
 export interface ReflectancePoint { wavelength: number; total: number }
 export interface PressureLayer { pressure: number; temperature: number }
 export interface PhasePoint { phaseAngle: number; dimmingMagnitude: number }

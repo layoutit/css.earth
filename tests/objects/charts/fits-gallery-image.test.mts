@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
-import { fitsGalleryGreys, parseFitsGalleryImageRecipe, renderFitsGalleryImage } from './fits-gallery-image.mts';
+import { fitsGalleryGreys, parseFitsGalleryImageRecipe, renderFitsGalleryImage } from '@cssearth/bake/objects/charts';
 
 const card = (key: string, value: string) => `${key.padEnd(8)}= ${value.padStart(20)}`.padEnd(80);
 /** A 3 x 2 float image as the ALMA archive writes one: four axes, RA falling and Dec rising with the stored order. */

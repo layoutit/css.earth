@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.mts';
+import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.ts';
 
 export interface Measurement { x: number; xLow: number; xHigh: number; y: number; minus: number; plus: number }
 export interface MeasurementSource {

@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml } from './chart-style.mts';
+import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml } from './chart-style.ts';
 
 interface ProfileSource {
   path: string; label: string; color: string; pressureUnit: 'Pa' | 'bar'; expectedRows: number;

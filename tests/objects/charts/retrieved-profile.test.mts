@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseRetrievedProfile, readProfileTable, profileWindow, readRetrievedProfile, renderRetrievedProfile } from './retrieved-profile.mts';
-import { prepareObjectProvenance } from '../provenance.mts';
+import { parseRetrievedProfile, readProfileTable, profileWindow, readRetrievedProfile, renderRetrievedProfile } from '@cssearth/bake/objects/charts';
+import { prepareObjectProvenance } from '../../../tools/objects/provenance.mts';
 import { productSourceIds } from '../../../src/platform/object-provenance.mts';
 
 const root = resolve(import.meta.dirname, '../../..');

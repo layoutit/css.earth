@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 
 import {
@@ -8,7 +8,7 @@ import {
   renderTemperaturePressureChart,
   renderPhotometricPhaseChart,
   renderLightCurveChart,
-} from "./chart-svg.ts";
+} from '@cssearth/bake/objects/charts';
 
 test("renders deterministic representative Mars and Saturn reflectance data", () => {
   for (const [id, maximum] of [["mars", 0.16], ["saturn", 0.25]] as const) {
@@ -110,7 +110,7 @@ test("rejects malformed chart shapes and unsafe ids", () => {
 });
 
 test("contains no object id or source record", async () => {
-  const source = await readFile(new URL("./chart-svg.ts", import.meta.url), "utf8");
+  const source = await readFile(new URL("../../../packages/bake/src/objects/charts/chart-svg.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /mars|saturn|107740|107933/iu);
 });
 

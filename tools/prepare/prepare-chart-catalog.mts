@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
 import { inventoriedObjectIds } from '../assets/runtime-assets.mts';
 import { parseChartAssetRecipe } from '../objects/charts/charts.ts';
-import { escapeXml } from '../objects/charts/chart-style.mts';
+import { escapeXml } from '@cssearth/bake/objects/charts';
 import { refreshObjectCharts } from '../objects/content/refresh-charts.mts';
 import { refuseDirectRun } from '../cli/library-entry.mts';
 

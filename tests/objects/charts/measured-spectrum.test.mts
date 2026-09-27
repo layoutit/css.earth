@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readMeasuredSpectrum, renderMeasuredSpectrum, parseMeasuredSpectrum } from './measured-spectrum.mts';
+import { readMeasuredSpectrum, renderMeasuredSpectrum, parseMeasuredSpectrum } from '@cssearth/bake/objects/charts';
 
 const recipe = {
   kind: 'measured-spectrum', id: 'fixture', title: 'Measurements', description: 'Published bins',

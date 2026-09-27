@@ -74,9 +74,9 @@ that would clip a displayed uncertainty band. It performs no atmospheric fit.
    inspect the mounted panel on desktop and mobile. Publish the changed
    inventory through the [prepared-asset workflow](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 
-The implementation is [retrieved-profile.mts](../tools/objects/charts/retrieved-profile.mts),
+The implementation is [retrieved-profile.ts](../packages/bake/src/objects/charts/retrieved-profile.ts),
 dispatched by [charts.ts](../tools/objects/charts/charts.ts). Its focused check is
-`node --test tools/objects/charts/retrieved-profile.test.mts`.
+`node --test tests/objects/charts/retrieved-profile.test.mts`.
 It covers pressure conversion, interval interpretation, independent figure
 anchors, invalid inputs and the three-table provenance binding. An added body
 needs its own reference values; WASP-18b's anchors do not qualify another fit.

@@ -124,6 +124,11 @@
       "import": "./dist/objects/sources.js",
       "default": "./dist/objects/sources.js"
     },
+    "./objects/charts": {
+      "types": "./dist/objects/charts.d.ts",
+      "import": "./dist/objects/charts.js",
+      "default": "./dist/objects/charts.js"
+    },
     "./objects/layers/observation": {
       "types": "./dist/objects/layers/observation.d.ts",
       "import": "./dist/objects/layers/observation.js",
