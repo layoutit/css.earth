@@ -69,7 +69,7 @@ test('offline context recovery is independent of installed generated images and 
     'src/objects/sun/source/navigation/universe.json',
     join(root,'src/objects/sun/source/navigation/universe.json'),
   );
-  const offline=await prepareContextProvenance({root,input:path=>readFile(path.startsWith('tools/')?path:join(root,path))});
+  const offline=await prepareContextProvenance({root,input:path=>readFile(/^(tools|packages)\//u.test(path)?path:join(root,path))});
   assert.deepEqual(offline.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
   const installed=await prepareContextProvenance();
   assert.deepEqual(offline.map(c=>c.provenance),installed.map(c=>c.provenance));

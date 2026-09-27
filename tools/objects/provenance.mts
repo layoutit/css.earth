@@ -1,6 +1,6 @@
 import { sha256 } from '@cssearth/core/node';
 import type { ProductInputEvidence } from '@cssearth/objects/provenance';
-import { recordPreparationEvidence } from '../prepare/preparation-evidence.mts';
+import { recordPreparationEvidence } from '@cssearth/bake/sources';
 import {hasErrorCode} from '@cssearth/core';
 import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.mts';
 import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from './provenance-records.mts';
