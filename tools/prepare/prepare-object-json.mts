@@ -8,7 +8,7 @@ import type {RecompiledPresentation} from '@cssearth/bake/prepared-presentation'
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
  * bindings (facing planes, depth partitions, interior fill). Facing planes are browser-measured against the solved
  * system node, so this is only safe when that solve did not move: refuse rather than publish stale geometry. */
-type BindingOptions=Parameters<typeof preparePresentationBindings>[2] & {keepBindings?: boolean};
+type BindingOptions=Omit<Parameters<typeof preparePresentationBindings>[2], 'pageStyles'> & {keepBindings?: boolean};
 
 /** `--keep-bindings` keeps browser-measured facing planes and depth partitions from before this navigation pass.
  * Those are only trustworthy if the solved system transform they were measured against did not move: prepared
@@ -24,7 +24,8 @@ import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
-import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
+import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
+import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
@@ -72,7 +73,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
   if (options?.keepBindings) refuseStaleKeptBindings(id, preparedNavigation.systemTransform);
-  else definition = await preparePresentationBindings(definition, projectRoot, options);
+  else definition = await preparePresentationBindings(definition, projectRoot, { ...options, pageStyles: objectPageStyles });
   const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });

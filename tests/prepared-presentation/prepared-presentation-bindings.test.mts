@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
+import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
+import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import type { PresentationSource } from '@cssearth/bake/prepared-presentation';
 import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
@@ -42,7 +43,7 @@ async function fixture(run: (fixture: Fixture) => Promise<void>) {
 }
 
 test('source CSS compiles selection timing', async () => fixture(async ({ root, definition }) => {
-  const prepared = await preparePresentationBindings(definition, root);
+  const prepared = await preparePresentationBindings(definition, root, { pageStyles: objectPageStyles });
   assert.ok(prepared.motion);
   assert.equal(prepared.motion.length, 1);
   assert.equal(prepared.motion[0].target, 2);
@@ -54,24 +55,24 @@ test('source CSS compiles selection timing', async () => fixture(async ({ root, 
 
 test('explicit two-sided source leaves keep their own style', async () => fixture(async ({ root, definition }) => {
   const tree = { ...definition.tree, nodes: definition.tree.nodes.map((node, index) => index === 5 ? { ...node, style: 'backface-visibility:visible' } : node) };
-  const prepared = await preparePresentationBindings({ ...definition, tree }, root);
+  const prepared = await preparePresentationBindings({ ...definition, tree }, root, { pageStyles: objectPageStyles });
   assert.equal(prepared.tree.nodes[5].style, 'backface-visibility:visible');
   assert.equal(prepared.tree.nodes.length, definition.tree.nodes.length);
 }));
 
 test('unsupported motion cannot silently become an unowned native animation', async () => fixture(async ({ root, definition, css, setCss }) => {
   await setCss(css + ' [data-lens=slow] .moving { animation:none; }');
-  await assert.rejects(preparePresentationBindings(definition, root), /motion membership/);
+  await assert.rejects(preparePresentationBindings(definition, root, { pageStyles: objectPageStyles }), /motion membership/);
   await setCss(css + ' @keyframes spin { from { opacity:0; } to { opacity:1; } }');
-  await assert.rejects(preparePresentationBindings(definition, root), /linear transform keyframes/);
+  await assert.rejects(preparePresentationBindings(definition, root, { pageStyles: objectPageStyles }), /linear transform keyframes/);
 }));
 
 test('repreparation starts from canonical topology and reproduces the final depth transport', async () => {
   const root = fileURLToPath(new URL('../../', import.meta.url));
   const source = await mimasRuntime(root);
-  const first = await preparePresentationBindings(source, root);
+  const first = await preparePresentationBindings(source, root, { pageStyles: objectPageStyles });
   assert.ok(first.surfaceHit && first.depthPartitions && first.tree.activationGroups);
-  const second = await preparePresentationBindings(first, root);
+  const second = await preparePresentationBindings(first, root, { pageStyles: objectPageStyles });
   assert.deepEqual(second, first);
   assert.ok(first.depthPartitions.groups.length > 1);
   assert.ok(first.tree.activationGroups.length < 40);
@@ -79,5 +80,5 @@ test('repreparation starts from canonical topology and reproduces the final dept
   // a cached layout that can no longer follow that source's material state.
   const changed: PresentationSource = { ...first, viewBindings: [...first.viewBindings, { kind: 'view-property', target: first.surfaceHit.target,
     property: '--local-material', source: 'billboard-opacity', precision: 6 }] };
-  assert.equal((await preparePresentationBindings(changed, root)).depthPartitions, undefined);
+  assert.equal((await preparePresentationBindings(changed, root, { pageStyles: objectPageStyles })).depthPartitions, undefined);
 });

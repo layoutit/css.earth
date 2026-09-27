@@ -1,9 +1,9 @@
-import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from '@cssearth/bake/prepared-presentation';
-import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '@cssearth/bake/raster';
+import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.ts';
+import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../raster/index.ts';
 import { isRecord } from '@cssearth/core';
 import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PresentationSource, DepthSurface } from '@cssearth/bake/prepared-presentation';
+import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
 /** A leaf's fixed plane in scene space, which the depth preparation needs to prove a surface static. */
 type FacingBinding = { plane: [number, number, number, number]; tolerance: number };
 type MotionTrack = Omit<NonNullable<PreparedPresentationDefinition['motion']>[number], 'timings'> & {timings: {when: PreparedVariant['when']; duration: number}[]};
@@ -11,15 +11,18 @@ interface DepthResult {id: string; source: PresentationSource; compiled: Present
 
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { chromium, type Browser } from 'playwright';
-import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes } from '@cssearth/bake/presentation';
-import { prepareDepthPartitions, restoreDepthSource } from '@cssearth/bake/prepared-presentation';
-import { verifyDepthStyles } from '@cssearth/bake/prepared-presentation';
+import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes } from '../presentation/index.ts';
+import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.ts';
+import { verifyDepthStyles } from './prepared-depth-styles.ts';
+
+/** The stylesheets an object's page loads, in cascade order, as repository paths. The application owns its page, so it
+ * passes this in (`objectPageStyles` in `site/object-page-contract.mts`). */
+export type ObjectPageStyles = (descriptor: unknown) => readonly string[];
 
 /** Resolve authored motion offline. Runtime receives explicit animation
  * handles, never a live style discovery pass; the browser culls back faces. */
-export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult, interiorOnly = false, browser: suppliedBrowser, publicDirectory }: {onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser; publicDirectory?: string} = {}) {
+export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { pageStyles, onDepthResult, interiorOnly = false, browser: suppliedBrowser, publicDirectory }: {pageStyles: ObjectPageStyles; onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser; publicDirectory?: string}) {
   // A staged scene directory holds this object's assets flat; published assets live under public/scenes/<id>/.
   const assetRoot = publicDirectory ? (url: string) => {
     if (!url.startsWith(`/scenes/${input.id}/`)) throw new Error(`Interior fill asset ${url} is not this object's scene asset.`);
@@ -41,7 +44,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
   const ratios = shape?.kind === 'ellipsoid' && typeof shape.radiusKm === 'number'
     ? [1, typeof shape.secondaryRadiusKm === 'number' ? shape.secondaryRadiusKm / shape.radiusKm : 1,
       typeof shape.polarRadiusKm === 'number' ? shape.polarRadiusKm / shape.radiusKm : 1] : [1, 1, 1];
-  const styles = await Promise.all(objectPageStyles(descriptor).map(path => readFile(resolve(root, path), 'utf8')));
+  const styles = await Promise.all(pageStyles(descriptor).map(path => readFile(resolve(root, path), 'utf8')));
   const browser = suppliedBrowser ?? await chromium.launch({ headless: true });
   const page = await browser.newPage();
   try {

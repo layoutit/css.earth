@@ -4,7 +4,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
-import { preparePresentationBindings } from '../prepared/prepared-presentation-bindings.mts';
+import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
+import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { repinObjectJson } from './prepare-object-json.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -26,7 +27,7 @@ export async function prepareInteriorFills(ids: readonly string[], root = proces
     for (const id of selected) {
       const path = resolve(root, 'src/objects', id, 'prepared/runtime.json');
       const original = parsePreparedObjectRuntime(JSON.parse(await readFile(path, 'utf8')));
-      const prepared = await preparePresentationBindings(original, root, { interiorOnly: true, browser });
+      const prepared = await preparePresentationBindings(original, root, { pageStyles: objectPageStyles, interiorOnly: true, browser });
       parsePreparedObjectRuntime(prepared);
       const fill = prepared.viewBindings.find(binding => binding.kind === 'interior-disc');
       if (!fill) { console.log(JSON.stringify({ id, status: 'no-safe-interior' })); continue; }
