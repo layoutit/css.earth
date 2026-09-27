@@ -35,15 +35,16 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/sky` | cubic sky recipes, the EXR source and its acquisition, baked faces with near-star sprites, the CSS sky compiler | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/density` | density-volume acquisition and KTX2 encoding, column-depth spreading, fixed discs, slice atlases and their retirement, the density-volume preparation, lens-bank promotion | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/image-layers` | image-layer recipes, the diffuse Lanczos3 resampler, retained image layers as PolyCSS volume leaves | Node only (`node:*`, PolyCSS) |
-| `@cssearth/bake/galaxy-catalog` | galaxy catalogue recipes, CSV and archive sources, bibliography, galaxy positions and memberships, the display sample | Node only (`node:*`, `yaml`) |
+| `@cssearth/bake/galaxy-catalog` | galaxy catalogue recipes, CSV and archive sources, bibliography, galaxy positions and memberships, the display sample, the object preparation | Node only (`node:*`, `yaml`) |
+| `@cssearth/bake/galaxy-field` | the nearby-universe galaxy point field: the pinned catalogue acquisition, the scientific catalogue, the field recipe, the fitted clouds | Node only (`node:*`, network) |
 | `@cssearth/bake/cluster-catalog` | the galaxy-cluster catalogue, placed with the galaxy positions | Node only |
 | `@cssearth/bake/world-context` | the spatial world context: sources, bodies, orbit banks, system and group views, hyperbolic paths | Node only |
 | `@cssearth/bake/nebula` | nebula delivery recipes and identities, compact density, finite-emission and compiler deliveries, catalogue fields and star sprites, sky frames, render-element budgets, replay references | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/environment` | the replay of an environment object's missing runtime images through the bakes above | Node only (`node:*`) |
 | `@cssearth/bake/runtime-source` | the runtime-source reader: a runtime module parsed into ESTree with its original ranges, imports resolved to source files through package exports and tsup entries, names, keys and static object properties | Node only (`node:*`, the ESLint parser, Vite) |
 | `@cssearth/bake/prepared-presentation` | passes that rewrite a compiled prepared presentation: depth partitions in a proven visibility order, the cascade check that keeps each moved leaf's computed style, the interior fill of a cut-open body, the authored-motion bindings resolved against the object's page styles (passed in by the application) | Node only (`node:*`, `sharp`, Playwright) |
-| `@cssearth/bake/delivery` | the atomic prepared-set and text writers, prepared page metadata, the WebP encodings prepared images are optimised with, pinned source bytes an acquisition publishes, the verify-after-publish gate, the scan for `/scenes/` references an asset-origin build left | Node only (`node:*`, `sharp`, `cwebp-bin`) |
-| `@cssearth/bake/sources` | an object's authored descriptor, the independent records of the source catalogue, the authored physical world frame checked against a prepared scene and runtime, images embedded in a published PDF figure, factsheet source checks, object-information source records, pinned-fact citations, a context manifest's source records, the source catalogue's factsheet citations and inventory, the prepared galaxy and cluster catalogues' bibliography citations, the preparation-evidence digest | Node only (`node:*`) |
+| `@cssearth/bake/delivery` | the atomic prepared-set and text writers, prepared page metadata, the WebP encodings prepared images are optimised with, pinned source bytes an acquisition publishes, the verify-after-publish gate, the scan for `/scenes/` references an asset-origin build left, the inventoried runtime-asset locations, an object's public runtime manifest and the publication of a staged preparation | Node only (`node:*`, `sharp`, `cwebp-bin`) |
+| `@cssearth/bake/sources` | an object's authored descriptor, the independent records of the source catalogue, the authored physical world frame checked against a prepared scene and runtime, images embedded in a published PDF figure, factsheet source checks, object-information source records, pinned-fact citations, a context manifest's source records, the source catalogue's factsheet citations and inventory, the prepared galaxy and cluster catalogues' bibliography citations, the preparation-evidence digest, the context packages' provenance and the facility artwork refresh (at the routes the application passes in) | Node only (`node:*`) |
 | `@cssearth/bake/contract` | the checked object runtime definition and its prepared resource catalogue, validated against the prepared-presentation contract and the renderer's object controls | Node only |
 | `@cssearth/bake/navigation` | prepared focus objects and scene distances for the catalogue and search destinations, navigation marker recipes and their sprites | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/surface-previews` | the prepared records a surface minimap or preview raster is drawn from | Node only (`node:*`) |
@@ -59,6 +60,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/objects/content` | the object-content contract, lens vocabulary, lens steps and prepared legends, lens billboard colours, palette legend labels derived from the reported stretch | Node only |
 | `@cssearth/bake/objects/surface-features` | surface-feature banks (IAU nomenclature, Natural Earth, landing sites, shape-model landmarks, ellipsoid projection), feature notes, image-control fits for encounter and orthophoto landmarks, the projected-control check | Node only |
 | `@cssearth/bake/objects/stellar` | a star's colour lens from its measured, Gaia XP or Planck spectrum, limb darkening, starspots from a published figure or occultation, Roche-von Zeipel gravity darkening | Node only |
+| `@cssearth/bake/objects/provenance` | the record readers and recipe bindings a layered body's provenance is compiled from | Node only |
 | `@cssearth/bake/objects/candidates` | read-only public-archive searches (ALMA, ESO, MAST, DataCite, JMMC diameters), imagery candidates from OPUS, resolved-star candidates from SIMBAD, OiDB and VizieR | Node only (network) |
 | `@cssearth/bake/objects/layers/<kind>` | the libraries each layer pipeline shares: terrestrial (mission decoders and cameras, registration with its Horizons tables and README report, native photographs, solid and radial sources and the solid replay scene, atlases, ring sources, radial terrain and materials, solid rasters, the surface-observation pipeline), giant (ring and disc geometry, photometric contracts, the normalized-disc presentation, polar continuation and dome), paged-ellipsoid (texture levels, surface banks, Earth rasters, the globe's profile, attitude, atmosphere, asset contract, recipe context and scene, refresh sources, mantle tomography, the presentation, geographic pages, places and locations), material-composition (recipes, rasters, radial motion, spectral variants, the layered-oblate preparation and presentation, cutaway materials), observation (science rasters and elevation, FITS maps, controlled and synoptic mosaics, band colours, plates and point sources, OIFITS observables and image fits, body maps with their meaning, spectral-cube band depths and resolution evidence), shape-model (source records, GLB surfaces, shape lighting, ring leaves, surface rasters), cutaway and observed-surfaces contracts | Node only |
 
@@ -75,7 +77,7 @@ packages/bake/
 ├── src/scene/     the geometry scene compilers: `@cssearth/bake/scene`
 ├── src/presentation/ the CSS presentation compilers: `@cssearth/bake/presentation`
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
-│   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/, src/nebula/
+│   src/galaxy-catalog/, src/galaxy-field/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
 ├── src/runtime-source/, src/prepared-presentation/, src/delivery/, src/sources/, src/contract/, src/navigation/,
 │   src/surface-previews/, src/preparation/, src/thread-pool/
@@ -83,7 +85,7 @@ packages/bake/
 │                  runtime contract, navigation destinations and markers, surface-preview records, the preparation
 │                  cache and trace format, and the thread-pool sizing: one entry each
 ├── cli/           command entries (`node packages/bake/cli/<command>.mts`); nothing imports them
-├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, charts/, content/, surface-features/, stellar/, candidates/,
+├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, charts/, content/, surface-features/, stellar/, candidates/, provenance/,
 │                  layers/<kind>/: the shared object libraries, one entry each
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
@@ -101,7 +103,7 @@ lane's surface test also reads the observation lens sampler from `src/objects/la
 in `tests/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
 The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The prepared-presentation, delivery,
 sources, navigation and preparation tests are `node --test` suites in `tests/prepared-presentation/`, `tests/delivery/`,
-`tests/sources/`, `tests/navigation/` and `tests/preparation/`; the shared lighting-bank check is `tests/raster/`. The scene suite
+`tests/sources/`, `tests/navigation/`, `tests/preparation/` and `tests/galaxy-field/`; the shared lighting-bank check is `tests/raster/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,

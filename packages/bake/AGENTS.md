@@ -43,7 +43,13 @@ its validators accept); the renderer never imports the bake.
 - `src/environment/` is published as `@cssearth/bake/environment` (Node only): the environment-image replay. It
   imports `image-layers`, `shell`, `stars`, `density` and `volume`.
 - `src/galaxy-catalog/` is published as `@cssearth/bake/galaxy-catalog` (Node only): the galaxy catalogue bake (recipes,
-  CSV and archive sources, bibliography, positions, memberships, the display sample). It imports no topic.
+  CSV and archive sources, bibliography, positions, memberships, the display sample, and the object preparation that
+  writes them with the object's inventory and descriptor). It imports `volume` (its node entry).
+  `packages/bake/cli/prepare-galaxy-catalog.mts <object-directory>` is its command.
+- `src/galaxy-field/` is published as `@cssearth/bake/galaxy-field` (Node only): the nearby-universe galaxy point field
+  (the pinned catalogue acquisition through the source mirror, the scientific catalogue, the field recipe and the fitted
+  clouds). It imports `objects/sources`. `packages/bake/cli/acquire-galaxy-field.mts` and `prepare-galaxy-field-points.mts`
+  are `pnpm prepare:galaxy-field:data`. Its tests are `node --test` suites in `tests/galaxy-field/`.
 - `src/cluster-catalog/` is published as `@cssearth/bake/cluster-catalog` (Node only): the galaxy-cluster catalogue,
   placed with the galaxy positions. It imports `galaxy-catalog`.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
@@ -62,8 +68,11 @@ its validators accept); the renderer never imports the bake.
   atomic prepared-set and text writers, the page metadata written beside a restored runtime, the WebP encodings prepared
   images are optimised with, the pinned source bytes an acquisition publishes, the verify-after-publish gate for the asset
   host, and the scan for `/scenes/` references an asset-origin build left behind (`packages/bake/cli/check-asset-origin-scenes.mts`).
-  `packages/bake/cli/publish-source-cache.mts` mirrors an object's downloads into the source cache with it. It imports no
-  topic. Its tests are `node --test` suites in `tests/delivery/`.
+  `packages/bake/cli/publish-source-cache.mts` mirrors an object's downloads into the source cache with it. It also holds
+  the inventoried runtime-asset locations (the R2 key, URL and restore path of each inventoried file, for a checkout root
+  the caller passes in), the public scene images an object ships (its runtime manifest) and the publication of a staged
+  preparation into the object package. It imports `objects/sources`. Its tests are `node --test` suites in
+  `tests/delivery/`; the runtime-manifest and publication tests are in `tests/objects/`, where `pnpm test:preparation` finds them.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
   physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure;
@@ -71,8 +80,9 @@ its validators accept); the renderer never imports the bake.
   factsheet values from the records a body pins (`packages/bake/cli/cite-pinned-facts.mts` is their command); the source
   records a context manifest lists, the factsheet citations and source inventory the prepared source catalogue compiles, the
   bibliography citations of the prepared galaxy and cluster catalogues, and the digest that says whether a recorded
-  preparation still applies to a provenance record. It imports
-  `runtime-source` and `objects/content`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
+  preparation still applies to a provenance record; the context packages' provenance, compiled from their manifests or read
+  as installed, and the facility artwork refresh. The application passes in the route its context objects show at
+  (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
@@ -139,6 +149,9 @@ its validators accept); the renderer never imports the bake.
     ALMA, the ESO archive, MAST, DataCite and the JMMC diameters (a query and a pure summary of its rows each), the imagery
     candidates (OPUS frames finer than a body ships, archive leads for a named body) and the resolved-star candidates. It
     imports no topic. `packages/bake/cli/imagery-candidates.mts` and `star-candidates.mts` print them.
+  - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
+    and outputs each preparation family records); `tools/objects/provenance.mts` compiles the record from them. It imports
+    `objects/layers/terrestrial`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
@@ -174,7 +187,9 @@ its validators accept); the renderer never imports the bake.
   render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `packages/bake/cli/prepare-nebulae.mts` is its
   entry and records the prepared closure with the platform's inventory.
 - The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
-  inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none.
+  inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none. Their commands
+  (`packages/bake/cli/prepare-stars.mts`, `prepare-shell.mts`, `prepare-volume.mts`, the last also `pnpm prepare:volume`
+  and the telescope's F16 volume operation) pass `@cssearth/objects/node`'s.
 
 - `src/volume/` is published as `@cssearth/bake/volume`: the volume contracts, coordinates, fields, materials and
   sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,
