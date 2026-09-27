@@ -13,7 +13,7 @@ import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { createPreparedPlayback } from '@cssearth/renderer/testing';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "./test/object-runtime-package.mts";
+import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "../../tests/platform/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
 // This mount harness records lifecycle calls; no page requests are made here.

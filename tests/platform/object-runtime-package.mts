@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
-import * as runtimePolicy from "../../../site/runtime-policy.mts";
+import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "@cssearth/renderer";
@@ -9,7 +9,7 @@ import type { ObjectRuntimeDefinition } from "@cssearth/renderer";
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
 import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 import { createSceneLifetime } from "@cssearth/engine";
-import { requireObjectRuntimeDefinition } from "../../../tools/contract/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
 import { initialObjectSelection } from "@cssearth/renderer/testing";
 // Feature catalogues use the checked-in fixture bytes; these image-lifetime
 // tests have no network service. Camera behavior has its own platform fixtures.
@@ -19,7 +19,7 @@ export const fixtureObjectCapabilities = { ...preparedObjectCapabilities,
     assert.ok(mount);
     return mount({ ...options, transport: async url => {
       if (!url.startsWith('/scenes/') || url.includes('..')) throw new Error('Invalid fixture catalogue URL');
-      return new Response(new Uint8Array(await readFile(new URL(`../../../public${url}`, import.meta.url))));
+      return new Response(new Uint8Array(await readFile(new URL(`../../public${url}`, import.meta.url))));
     } });
   },
 };
