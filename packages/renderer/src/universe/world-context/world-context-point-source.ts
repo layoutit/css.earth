@@ -123,8 +123,15 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
       setStyle('transform', `translate(${appearance.x - size / 2}px,${appearance.y - size / 2}px) scale(${size / field.atlas.tileSize})`);
       const alpha = appearance.opacity * appearance.luminance;
       setStyle('opacity', String(alpha));
-      if (!coasting) navigation.update(alpha > .1 ? plan.focus.id : null, plan.focus.name);
-      target = alpha > .1 ? [{ element, rank: -1, shape: { kind: 'rect', left: appearance.x - size / 2,
+      // Projection already carries the measured viewport. Do not read layout
+      // to decide whether a retained point can receive keyboard focus.
+      const halfWidth = (viewport.widthPixels ?? 0) / 2, halfHeight = (viewport.heightPixels ?? 0) / 2;
+      const onScreen = halfWidth > 0 && halfHeight > 0 &&
+        appearance.x + size / 2 >= -halfWidth && appearance.x - size / 2 <= halfWidth &&
+        appearance.y + size / 2 >= -halfHeight + (viewport.coveredTopPixels ?? 0) && appearance.y - size / 2 <= halfHeight;
+      const interactive = alpha > .1 && onScreen;
+      if (!coasting) navigation.update(interactive ? plan.focus.id : null, plan.focus.name);
+      target = interactive ? [{ element, rank: -1, shape: { kind: 'rect', left: appearance.x - size / 2,
         top: appearance.y - size / 2, right: appearance.x + size / 2, bottom: appearance.y + size / 2 } }] : [];
       picking.publish(element, navigationEnabled ? target : []);
     },
