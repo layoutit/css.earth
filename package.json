@@ -77,6 +77,7 @@
     "test:packages": "pnpm -r --filter \"./packages/**\" test",
     "test:preparation": "node tools/contract/test-preparation.mts",
     "test:bake-objects": "node tools/ci/test-bake-objects.mts",
+    "test:telescope-cli": "node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=180000 \"packages/telescope-cli/src/**/*.test.mts\"",
     "test:renderer": "pnpm --filter @cssearth/renderer exec vitest run",
     "typecheck": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula",
     "typecheck:astro": "astro check --tsconfig site/astro.tsconfig.json",

@@ -164,6 +164,10 @@ jobs:
         run: |
           git sparse-checkout add '/src/objects/**/*.shp'
           pnpm test:bake-objects
+      - name: Test the telescope command
+        # Every node test of @cssearth/telescope-cli (query, sessions, families, archive leads, the process boundary), selected by
+        # location rather than by what it imports; a test whose toolchain or restored input is absent skips and names it.
+        run: pnpm test:telescope-cli
       - name: Check physical frame receipts
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
         run: node tools/ci/check-object-runtime-ownership.mts --receipts
