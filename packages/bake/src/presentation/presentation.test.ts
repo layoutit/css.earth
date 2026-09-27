@@ -44,7 +44,7 @@ describe('retained presentation compiler compatibility', () => {
     expect(() => parsePresentationProfile(profile)).toThrow(/one prepared density/);
   });
 });
-// Full raw output hashes from original JS helpers; see tools/evidence/presentation-typescript-parity.json.
+// Full raw output hashes from original JS helpers; see evidence/typescript-ownership/presentation-typescript-parity.json.
 // Mercury's hash was updated for JPEG surface maps, then for retiring its 1x surface levels.
 // Both hashes were updated for the stepped seam outset and matched raster overscan.
 const expectedDigests: Record<string, string> = {
