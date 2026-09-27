@@ -23,7 +23,6 @@ interface LensBank {
   pendingSelection: string | undefined;
   pendingStarsVisible: boolean | undefined;
   framing: { frame: DensityVolumeFrame; radiusUnits: number; visibility: PreparedPointVisibility };
-  publishedOpacity: number;
   residentNodes: number;
   visible: boolean;
   lastUsed: number;
@@ -50,7 +49,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
     mounted: null, textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     pendingSelection: undefined, pendingStarsVisible: undefined,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
-    publishedOpacity: NaN, residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0,
+    residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0,
     enabled: !facts[index]!.attached,
   }));
   const byId = new Map(banks.map(bank => [bank.id, bank]));
@@ -92,7 +91,6 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
     bank.textures?.destroy(); bank.textures = null;
     bank.mounted = null;
     bank.residentNodes = 0;
-    bank.publishedOpacity = NaN;
     bank.generation++;
     return true;
   }
@@ -140,7 +138,6 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
         fullAboveRadiusPixels: Math.max(pointVisibility.fullAboveRadiusPixels, visibility.fullAboveRadiusPixels) } };
       bank.enabled = bank.explicitEnabled ?? prepared.payload.attachedTo === undefined;
       bank.lastUsed = ++useClock;
-      bank.publishedOpacity = NaN;
       updateWeight(bank);
       trimWarmResidency();
       requestPublication?.();
@@ -247,18 +244,16 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
         // Keep a demanded bank resident while its images decode behind the billboard.
         const visible = requestedOpacity > 0;
         if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
-        if (opacity !== bank.publishedOpacity) {
-          // Both retained roots carry the bank's visibility, including foreground clouds.
-          for (const target of [bank.mounted.root, bank.mounted.frontRoot]) {
-            if (!target) continue;
-            // Coasting: a shown root only fades; a hidden one stays hidden until the coast stops.
-            if (coasting) { if (target.style.display !== 'none' && target.style.opacity !== String(opacity)) target.style.opacity = String(opacity); continue; }
-            if (target.style.opacity !== String(opacity)) target.style.opacity = String(opacity);
+        // Compare with the retained styles: a coast may have faded a displayed bank
+        // while membership stayed frozen. A cached pre-coast alpha would skip its restoration.
+        for (const target of [bank.mounted.root, bank.mounted.frontRoot]) {
+          if (!target) continue;
+          if (coasting && target.style.display === 'none') continue;
+          if (target.style.opacity !== String(opacity)) target.style.opacity = String(opacity);
+          if (!coasting) {
             const display = opacity > 0 ? 'block' : 'none';
             if (target.style.display !== display) target.style.display = display;
           }
-          // A coast leaves the published state stale on purpose: the first publication after it applies it.
-          if (!coasting) bank.publishedOpacity = opacity;
         }
         bank.mounted.publish({ world, viewport }, visible && Boolean(ready));
       }
