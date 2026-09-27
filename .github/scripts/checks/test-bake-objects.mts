@@ -5,8 +5,8 @@
  * A test belongs here when it imports an object entry; a moved library's tests therefore join without a list to maintain.
  * Tests whose restored sources are absent skip, as they do everywhere else.
  *
- *   node tools/ci/test-bake-objects.mts           run them (the packages must be built)
- *   node tools/ci/test-bake-objects.mts --list    print the selected test files */
+ *   node .github/scripts/checks/test-bake-objects.mts           run them (the packages must be built)
+ *   node .github/scripts/checks/test-bake-objects.mts --list    print the selected test files */
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -27,7 +27,7 @@ function trackedTests(root: string): string[] {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const root = resolve(import.meta.dirname, '../..');
+  const root = resolve(import.meta.dirname, '../../..');
   const tests = bakeObjectTests(trackedTests(root), path => readFileSync(resolve(root, path), 'utf8'));
   if (!tests.length) throw new Error('No test imports an @cssearth/bake/objects entry; the selection is broken.');
   if (process.argv.includes('--list')) console.log(tests.join('\n'));

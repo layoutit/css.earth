@@ -91,7 +91,7 @@ its validators accept); the renderer never imports the bake.
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Their tests stay beside the pipelines in `tools/objects/` (`node --test`), because they read body sources, kernel banks and
   oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects`
-  (`tools/ci/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
+  (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
   render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `tools/nebula/prepare.mts` is its

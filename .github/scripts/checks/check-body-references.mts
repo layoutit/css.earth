@@ -13,7 +13,7 @@
  *   kernel (kernel banks and bodies restore kernels from their origins).
  *   Our own Markdown notes are not archive documents.
  *
- *   node tools/ci/check-body-references.mts
+ *   node .github/scripts/checks/check-body-references.mts
  */
 import { execFile } from 'node:child_process';
 import { readFile } from 'node:fs/promises';

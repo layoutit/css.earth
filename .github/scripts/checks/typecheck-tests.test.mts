@@ -7,7 +7,7 @@ import test, { type TestContext } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 async function typecheckTests(root: string) {
-  const manifest: unknown = JSON.parse(await readFile(new URL('../../package.json', import.meta.url), 'utf8'));
+  const manifest: unknown = JSON.parse(await readFile(new URL('../../../package.json', import.meta.url), 'utf8'));
   assert.ok(typeof manifest === 'object' && manifest !== null && 'scripts' in manifest);
   const scripts = manifest.scripts;
   assert.ok(typeof scripts === 'object' && scripts !== null && 'typecheck:tests' in scripts);
