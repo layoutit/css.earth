@@ -486,7 +486,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "spectral-slope"
@@ -542,7 +542,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "spectral-slope"
@@ -598,7 +598,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "spectral-slope"
@@ -654,7 +654,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "visible-absorption"
@@ -710,7 +710,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "visible-absorption"
@@ -766,7 +766,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "visible-absorption"

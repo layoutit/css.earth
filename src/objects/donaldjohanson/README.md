@@ -84,7 +84,7 @@ The scene uses 800 native PolyCSS u raster leaves, 128 px cells and baked direct
 
 **Reproduction**
 
-The checked gzip OBJ is reproduced by `tools/objects/acquisition/export-dsk.py` from `source/shape/lcy_donj_k548_iso20m_v10.bds`, using `spiceypy==7.0.0`. CSPICE preserves the released vertex and plate data.
+The checked gzip OBJ is reproduced by `packages/bake/src/objects/acquisition/export-dsk.py` from `source/shape/lcy_donj_k548_iso20m_v10.bds`, using `spiceypy==7.0.0`. CSPICE preserves the released vertex and plate data.
 
 **Controlled L’LORRI observation (2026-09-08)**
 

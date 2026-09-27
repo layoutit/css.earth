@@ -150,7 +150,7 @@ No value-only dark-pixel heuristic is added.
 
 ## Preparation and independent checks
 
-Run `python tools/objects/acquisition/cassini-vims.py RECIPE.json` with the
+Run `python packages/bake/src/objects/acquisition/cassini-vims.py RECIPE.json` with the
 NumPy/Rasterio environment documented by the existing mapped-science acquisition
 requirements. The recipe is schema `cssearth-cassini-vims@1`. It pins the IMG,
 XML, HDR, wavelength table and guide, and must explicitly select the guide-grid

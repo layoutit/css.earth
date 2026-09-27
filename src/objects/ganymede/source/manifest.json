@@ -376,7 +376,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "oxygen-signature"
@@ -432,7 +432,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "oxygen-signature"
@@ -488,7 +488,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "oxygen-signature"
@@ -730,7 +730,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -755,7 +755,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -805,7 +805,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -830,7 +830,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"

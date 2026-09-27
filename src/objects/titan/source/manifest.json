@@ -1550,7 +1550,7 @@
         "https://creativecommons.org/licenses/by/4.0/",
         "https://doi.org/10.17632/f6jrtyfp66.2"
       ],
-      "acquisition": "Checked-in compact lossless grid; reproduce with tools/objects/acquisition/geology-grid.py source/geology/prepare-grid.json.",
+      "acquisition": "Checked-in compact lossless grid; reproduce with packages/bake/src/objects/acquisition/geology-grid.py source/geology/prepare-grid.json.",
       "redistribution": "Derived pixel-center unit raster; map palette adapted from NASA/JPL PIA23174.",
       "consumers": [
         "geology"

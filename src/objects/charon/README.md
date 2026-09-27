@@ -192,7 +192,7 @@ both tails. The migrated label's summary mentions Pluto in error; its title,
 target, LIDVID and data object identify Charon. The source label is retained.
 
 Exact bytes, coordinates and validity rules are in the intake plans and receipts.
-See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
+See the [mapped-science conversion method](../../../packages/bake/src/objects/acquisition/MAPPED-SCIENCE.md).
 
 </details>
 

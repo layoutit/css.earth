@@ -171,6 +171,26 @@ its validators accept); the renderer never imports the bake.
   - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
     and outputs each preparation family records); `tools/objects/provenance.mts` compiles the record from them. It imports
     `objects/layers/terrestrial`.
+  - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
+    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; and the default
+    lens's data coverage, read from its prepared minimap, that the default camera turns toward. It imports `objects/scene` and
+    `raster`.
+  - `objects/celestial`: an object's sky orientation and directional Sun, prepared into renderer-neutral JSON from its
+    celestial profile and the solar geometry the host passes in. It imports `objects/scene` and `presentation`.
+    `objects/default-view` and `objects/celestial` are topics of their own, not part of `objects/scene`, whose code the
+    nebula lab's compiler identity reaches, so that identity does not pin them.
+  - `objects/acquisition`: the converters a body's acquisition plan runs to restore a derived source from its pinned original
+    (a SPICE DSK to a welded mesh archive, GeoTIFF numeric grids and images read by byte range, mapped-composition fits, the
+    JPL satellite catalogue), and beside them the Python converters the body manifests name as reproduction routes, with their
+    pinned requirements and method notes (`MAPPED-SCIENCE.md`, `DSK-RESTORATION.md`). `dsk-mesh.ts` launches `dsk-mesh.py`
+    from this source folder, found by the package's name, so the path holds from `dist/`. It imports `raster` and
+    `objects/sources`. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
+    coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
+  - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
+    downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
+    imports `objects/cameras`, `objects/geometry` and `objects/layers/terrestrial`. `packages/bake/cli/sphere-survey-apparitions.mts`
+    audits the shipped survey lenses; the setup and install commands stay in `tools/objects/sphere-survey/`, since setup imports
+    `tools/objects/published-comparison.mts` and install imports `tools/sources/author-source-records.mts`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
@@ -195,7 +215,8 @@ its validators accept); the renderer never imports the bake.
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
-    `surface-observations/`; the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
+    `surface-observations/`, described in its README (its tests are in `tests/objects/surface-observations/`, its evidence in
+    `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Their tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` once the
   pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the

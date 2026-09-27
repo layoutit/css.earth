@@ -60,7 +60,7 @@ helpers are not a general XML parser or namespace resolver and do not expand ent
 [Label tests](../packages/telescope/src/pds-labels.test.ts) exercise ambiguous scopes,
 duplicates, quoted commas, multiline values, comments, malformed inputs and limits.
 They read the original tracked Tethys and Proteus labels for source-backed cases.
-[Calibration tests](../tools/objects/surface-observations/pds3-reflectance.test.mts)
+[Calibration tests](../tests/objects/surface-observations/pds3-reflectance.test.mts)
 preserve the native CISSCAL and Voyager evidence and reject contradictory units.
 [PDS4 colour tests](../tests/objects/terrestrial/observed-pds4.test.mts)
 pass corrupted offsets and projection fields through the actual decoder while
@@ -68,7 +68,7 @@ retaining its existing exact RGB and missing-pixel expectations.
 
 ```bash
 pnpm --filter @cssearth/telescope test
-node --test tools/objects/surface-observations/pds3-reflectance.test.mts \
+node --test tests/objects/surface-observations/pds3-reflectance.test.mts \
   tests/objects/terrestrial/observed-pds4.test.mts
 ```
 

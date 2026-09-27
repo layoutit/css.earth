@@ -10,7 +10,8 @@ import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects
 import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
-import { prepareCelestialAssets } from './celestial/index.js';
+import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
+import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
@@ -102,7 +103,7 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
 const solarGeometry = async () =>
   await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href) as typeof import('../../src/platform/solar-geometry.mts');
 
-/** A photograph lens states the body point its frame looks at; the default camera must look there too (default-view/geometry.mts). The check
+/** A photograph lens states the body point its frame looks at; the default camera must look there too (@cssearth/bake/objects/default-view). The check
  * reads the final frame, which follows the body as drawn. */
 async function assertDefaultViewsFaceLenses(objectDirectory: string, definition: Record<string, unknown>, frame: unknown): Promise<void> {
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
@@ -113,8 +114,7 @@ async function assertDefaultViewsFaceLenses(objectDirectory: string, definition:
     const frames = record(science.lens, 'surface-observation lens').frames;
     const lensFrame = Array.isArray(frames) && frames.length === 1 ? record(frames[0], 'lens frame') : null;
     if (!lensFrame || typeof lensFrame.observerWestLongitude !== 'number' || typeof lensFrame.observerLatitude !== 'number') continue;
-    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view/geometry.mts')).href) as typeof import('./default-view/geometry.mts');
-    assertDefaultViewFacesLens(descriptor.id, definition.camera as never, frame as never, { longitudeDegrees: -lensFrame.observerWestLongitude, latitudeDegrees: lensFrame.observerLatitude });
+    assertDefaultViewFacesLens(await solarGeometry(), descriptor.id, definition.camera as never, frame as never, { longitudeDegrees: -lensFrame.observerWestLongitude, latitudeDegrees: lensFrame.observerLatitude });
   }
 }
 
@@ -335,7 +335,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     : null;
   const celestial = reuseImages
     ? { sky: await publishedJson('sky'), sun: await publishedJson('sun') } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
-    : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value });
+    : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value, solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
   // A body outside the ephemeris tables (the Sun) frames its scene from the authored world context.
   const contextSource = source(sources, 'world-context');

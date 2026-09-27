@@ -201,6 +201,26 @@
       "import": "./dist/objects/provenance.js",
       "default": "./dist/objects/provenance.js"
     },
+    "./objects/acquisition": {
+      "types": "./dist/objects/acquisition.d.ts",
+      "import": "./dist/objects/acquisition.js",
+      "default": "./dist/objects/acquisition.js"
+    },
+    "./objects/sphere-survey": {
+      "types": "./dist/objects/sphere-survey.d.ts",
+      "import": "./dist/objects/sphere-survey.js",
+      "default": "./dist/objects/sphere-survey.js"
+    },
+    "./objects/default-view": {
+      "types": "./dist/objects/default-view.d.ts",
+      "import": "./dist/objects/default-view.js",
+      "default": "./dist/objects/default-view.js"
+    },
+    "./objects/celestial": {
+      "types": "./dist/objects/celestial.d.ts",
+      "import": "./dist/objects/celestial.js",
+      "default": "./dist/objects/celestial.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",

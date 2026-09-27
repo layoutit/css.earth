@@ -38,7 +38,7 @@ GeoTIFF itself specify **64 pixels per degree**. Preparation uses that actual gr
 
 The [acquisition recipes](source/maps/native) validate the GeoTIFF encoding and
 its planetocentric, positive-east, north-up frame on a 2,439.4 km sphere. The
-[offline reducer](../../../tools/objects/acquisition/geotiff-image.mts) reads bounded
+[offline reducer](../../../packages/bake/src/objects/acquisition/geotiff-image.ts) reads bounded
 row windows and averages native pixel areas into 4,096 × 2,048 images. It keeps
 the publisher's stretch and −180° left edge. An all-zero source pixel is missing;
 a black channel in an otherwise nonzero RGB pixel remains an observation. A

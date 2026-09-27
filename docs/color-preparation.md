@@ -70,7 +70,7 @@ this color repair does not promote its unresolved registration cases:
 
 - `controlled-shape-color`: Pan, Atlas, Daphnis, Prometheus, Pandora, Janus,
   Epimetheus, Hyperion and Proteus, through the
-  [shared surface-observation pipeline](../tools/objects/surface-observations/README.md).
+  [shared surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md).
   Each band set names its red, green and blue photographs, and native labels
   must agree with the selected filters and calibrated reflectance units. A point
   is colored only where all three bands qualify, and it keeps the one band set
@@ -104,7 +104,7 @@ this color repair does not promote its unresolved registration cases:
   Its values are derived band values, not untouched I/F. The reader validates
   the archived wavelengths and applies its explicit common display range once.
 - `nh-mvic-camera`: Arrokoth's registered, PSF-matched MVIC cube, through the
-  [shared surface-observation pipeline](../tools/objects/surface-observations/README.md).
+  [shared surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md).
   Its native PDS label binds BLUE/RED/NIR/CH4 order, wavelengths and data-number
   units. The selected NIR/red/blue values remain floating through the shared
   footprint, photometry and surface transfer; the same encoder finishes the

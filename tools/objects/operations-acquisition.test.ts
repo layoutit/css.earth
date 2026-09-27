@@ -8,7 +8,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { executeAcquisition, parseAcquisitionPlan } from './operations-acquisition.js';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
-import { convertMappedComposition, parseMappedCompositionRecipe } from './acquisition/mapped-composition.mts';
+import { convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 const test = sourceTest();
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');

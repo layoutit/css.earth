@@ -15,6 +15,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
+| Compact numeric maps from USGS products for the Moon, Venus, Mercury and Mars, and how they are read | [Numeric USGS surface maps](usgs-numeric-surfaces.md) |
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
