@@ -40,7 +40,7 @@ packages/renderer/
 ├── src/
 │   ├── index.ts, loader.ts, testing.ts, prepared-object-*.ts   entries, prepared-object loading and its worker
 │   ├── runtime/        object runtime, object contract, scene lifecycle
-│   ├── navigation/     world camera, camera input, flights, view URLs
+│   ├── navigation/     world camera, camera input, flights, view URLs, navigation marker presentation
 │   ├── rendering/      prepared presentation, residency, materials, leaf pools
 │   ├── validation/     parsers for every prepared format
 │   ├── prepared-data/  world context, ellipsoid projections
