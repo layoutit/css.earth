@@ -1,14 +1,20 @@
-import { readFile } from "node:fs/promises";
+import { DatabaseSync } from "node:sqlite";
+import { resolve } from "node:path";
 import { array, object, string, number } from "./collect/client.mts";
 export { array, object, string, number };
 export const root = import.meta.dirname;
-export async function json(path: string): Promise<unknown> {
-  return JSON.parse(await readFile(root + "/" + path, "utf8"));
+export const databasePath = resolve(
+  process.env.AUDIT_DB ?? root + "/ledger.sqlite",
+);
+export function openLedger(): DatabaseSync {
+  const db = new DatabaseSync(databasePath, { readOnly: true });
+  db.exec("PRAGMA foreign_keys=ON");
+  return db;
 }
-export const api = "https://opus.pds-rings.seti.org/opus/api/";
 export type Row = {
   id: string;
   source: string;
+  title: string;
   instrument: string;
   target: string;
   count: number;
@@ -18,120 +24,71 @@ export type Row = {
   url: string;
   details: unknown;
 };
-export function queryUrl(endpoint: string, params: unknown): string {
-  return (
-    api +
-    endpoint +
-    "?" +
-    new URLSearchParams(
-      Object.fromEntries(
-        Object.entries(object(params)).map(([k, v]) => [k, string(v)]),
-      ),
-    )
-  );
+export type Proposal = {
+  id: string;
+  slug: string;
+  title: string;
+  status: string;
+  priority: number;
+  next_step: string;
+  blocker: string;
+  pr_url: string;
+  updated_at: string;
+};
+export function loadProposals(): Proposal[] {
+  const db = openLedger();
+  try {
+    return db
+      .prepare("SELECT * FROM proposals ORDER BY priority, CAST(id AS INTEGER)")
+      .all()
+      .map((r) => ({
+        id: string(r.id),
+        slug: string(r.slug),
+        title: string(r.title),
+        status: string(r.status),
+        priority: number(r.priority),
+        next_step: string(r.next_step),
+        blocker: string(r.blocker),
+        pr_url: string(r.pr_url),
+        updated_at: string(r.updated_at),
+      }));
+  } finally {
+    db.close();
+  }
 }
-export async function loadRows(): Promise<Row[]> {
-  const opus = object(await json("evidence/opus.json")),
-    prior = object(await json("evidence/previous-audits.json"));
-  const result: Row[] = array(opus.rows).map((value) => {
-    const r = object(value);
-    return {
-      id: string(r.id),
-      source: "opus",
-      instrument: string(r.instrument),
-      target: string(r.target),
-      count: number(r.count),
-      decision: string(r.decision),
-      reason: string(r.reason),
-      proposals: array(r.proposals).map(string),
-      url: queryUrl("data.json", r.query),
-      details: r,
-    };
-  });
-  for (const value of array(prior.photojournal)) {
-    const r = object(value);
-    result.push({
-      id: string(r.pia),
-      source: "photojournal",
-      instrument: string(r.instrument),
-      target: string(r.target),
-      count: 1,
-      decision: string(r.decision),
-      reason: string(r.reason),
-      proposals: array(r.proposalIds).map((x) => string(x).split("-")[0]),
-      url: string(r.page),
-      details: r,
-    });
-  }
-  for (const value of array(prior.pdsBundles)) {
-    const r = object(value);
-    result.push({
-      id: string(r.lid),
-      source: "pds",
-      instrument: "",
-      target: "",
-      count: 1,
-      decision: string(r.originalCategory),
-      reason: string(r.originalAssessment),
-      proposals: array(r.proposalIds).map((x) => string(x).split("-")[0]),
-      url: string(r.source),
-      details: r,
-    });
-  }
-  for (const value of array(prior.usgs)) {
-    const r = object(value);
-    result.push({
-      id: string(r.id),
-      source: "usgs",
-      instrument: "",
-      target: string(r.target ?? ""),
-      count: 1,
-      decision: string(r.decision),
-      reason: string(r.reason),
-      proposals: array(r.proposalIds).map((x) => string(x).split("-")[0]),
-      url: string(r.url),
-      details: r,
-    });
-  }
-  for (const value of array(opus.volumes)) {
-    const r = object(value);
-    result.push({
-      id: string(r.bundleid) + " / " + string(r.instrument),
-      source: "opus-volumes",
-      instrument: string(r.instrument),
-      target: r.sample ? string(object(r.sample).target) : "",
-      count: number(r.count),
-      decision: "catalogue-inventory",
-      reason:
-        "Exact instrument/volume query and earliest product locator retained. This inventory row does not claim scientific review of every observation in the volume.",
-      proposals: [],
-      url: queryUrl("data.json", r.query),
-      details: r,
-    });
-  }
-  for (const value of array(opus.geometry)) {
-    const g = object(value);
-    for (const [target, count] of Object.entries(object(g.targets))) {
-      const params = {
-        instrument: string(g.instrument),
-        surfacegeometrytargetname: target,
-      };
-      result.push({
-        id: params.instrument + " / " + target,
-        source: "opus-geometry",
-        instrument: params.instrument,
-        target,
-        count: number(count),
-        decision: "geometry-index",
-        reason:
-          "Overlapping geometry-index membership. This may include an unresolved body or predicted position; it is not a detection, usable footprint or unique observation count. Inspect signal and geometry before inclusion.",
-        proposals: [],
-        url: queryUrl("data.json", params),
-        details: params,
-      });
+export function loadRows(): Row[] {
+  const db = openLedger();
+  try {
+    const joins = new Map<string, string[]>();
+    for (const r of db
+      .prepare(
+        "SELECT * FROM dataset_proposals ORDER BY CAST(proposal_id AS INTEGER)",
+      )
+      .all()) {
+      const key = JSON.stringify([r.source, r.dataset_id]);
+      const ids = joins.get(key) ?? [];
+      ids.push(string(r.proposal_id));
+      joins.set(key, ids);
     }
+    return db
+      .prepare("SELECT * FROM datasets ORDER BY source,id")
+      .all()
+      .map((r) => ({
+        id: string(r.id),
+        source: string(r.source),
+        title: string(r.title),
+        instrument: string(r.instrument),
+        target: string(r.target),
+        count: number(r.record_count),
+        decision: string(r.decision),
+        reason: string(r.reason),
+        url: string(r.url),
+        proposals: joins.get(JSON.stringify([r.source, r.id])) ?? [],
+        details: JSON.parse(string(r.details_json)),
+      }));
+  } finally {
+    db.close();
   }
-  return result;
 }
 export function slice(rows: Row[], params: URLSearchParams): Row[] {
   const allowed = new Set([
@@ -162,7 +119,7 @@ export function slice(rows: Row[], params: URLSearchParams): Row[] {
           .includes(params.get("target")!.toLowerCase())) &&
       (!params.get("decision") || r.decision === params.get("decision")) &&
       (!params.get("proposal") ||
-        r.proposals.includes(params.get("proposal")!)) &&
+        r.proposals.includes(String(Number(params.get("proposal"))))) &&
       q.every((word) => JSON.stringify(r).toLowerCase().includes(word)),
   );
 }

@@ -1,160 +1,168 @@
-# Planetary data opportunities
+# Planetary data ledger
 
-The audit joins PSI's PDS4 tree, the USGS catalogue, 717 individually reviewed
-Photojournal entries, and OPUS. The [110 proposals](proposals/README.md) include
-15 OPUS additions and OPUS extensions to 27 earlier proposals. They are work
-scopes with acceptance conditions, not 110 ready datasets.
+`ledger.sqlite` owns the audit data and work status. [PROPOSALS.md](PROPOSALS.md)
+contains the 131 proposed work scopes and their acceptance conditions. IDs are
+permanent. There is one database, no database service and no ORM.
 
-## OPUS findings
+The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland
+Small Bodies Node, and JAXA DARTS. It changes no application or prepared assets.
 
-The OPUS snapshot was collected on 27 September 2026 and compared with cssEarth
-at [`f1493dccc15d`](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3).
-Every published instrument/volume entry and every intended-target/instrument
-slice has an exact query and metadata sample. [The review table](opus-review.md)
-gives the disposition and proposal links for each target slice.
+## Query the ledger
 
-| Check | Result |
-| --- | ---: |
-| OPUS record count | 1,627,081 |
-| Instruments | 40 |
-| Distinct intended-target values, including calibration/unknown tags | 208 |
-| Instrument/target slices | 549 |
-| Instrument/volume entries | 990 |
-| Distinct volumes/bundles | 985 |
-| Sum of all target slices | 1,627,081 |
-| Sum of all instrument/volume entries | 1,627,081 |
-| Focused native product-label inspections | 23 |
-
-The two independent catalogue partitions reconcile exactly. They establish
-inventory coverage. They **do not** establish that every individual observation
-has been scientifically reviewed. An OPUS record can be a detector channel,
-derived cube or composite; records are not necessarily independent exposures
-or files. In particular, the VIMS VIS and IR records can name the same QUBE.
-
-The clearest additional work is:
-
-- [Saturn ring profiles](proposals/96-saturn-ring-opacity.md),
-  [Uranus ring profiles](proposals/97-uranus-ring-opacity.md) and
-  [Neptune ring measurements](proposals/98-neptune-ring-measurements.md).
-  Native tables distinguish optical depth, opacity, signal and uncertainty.
-- [Additional Saturn-moon infrared data](proposals/99-saturn-moon-vims.md).
-  Mimas and Hyperion are the main missing cases; Dione and several other moons
-  already have infrared views.
-- [Ultraviolet Saturn-moon spectra](proposals/100-saturn-moon-ultraviolet.md)
-  and [Jupiter-moon spectra](proposals/101-galilean-ultraviolet.md), with
-  surface reflection kept separate from atmospheric emission.
-- [Observed giant-planet spectra](proposals/108-giant-planet-measured-spectra.md)
-  and [Uranus atmospheric occultation curves](proposals/110-uranus-atmospheric-occultations.md)
-  for the existing prepared charts.
-
-Labels changed several initial interpretations. The sharp Dione VIMS product
-is a 64×352×1 cube: only one spatial line. The first Neptune PPS segment spans
-42,500–49,999 km and does not reach the Adams arcs. MVIC SCI labels describe
-calibrated DN that still require physical-unit conversion. The FOS Uranus
-atmosphere product is normalized stellar flux versus time, not a temperature
-profile. These limits remain in the proposals and the retained native labels.
-
-## Existing work and blockers
-
-The [repository comparison](evidence/repository-baseline.json) records selected
-dataset controls and investigation decisions at the OPUS baseline. Enceladus's
-infrared mosaic has merged since the earlier audit. Dione, Rhea, Tethys,
-Iapetus and Phoebe already have VIMS views. All five major Uranian moons have
-Voyager color. Proteus C1138920 is already selected. Arrokoth already uses
-native LORRI and a derived MVIC cube.
-
-The older [Photojournal review](photojournal-audit.md) and 95 proposals keep
-their original revision, `60ef02395df5c466027b8a70214b09cbc1afc570`; their
-Enceladus “owned elsewhere” decision is historical. The OPUS extension records
-the newer state explicitly. The original USGS screen used an older baseline;
-the prior ledger already reconciles the shipped Moon, Venus, Mercury, Bennu
-and Eros work. This audit does not claim a fresh native-data audit of those sources.
-
-Nix/Hydra registration, Nix color resolution and several moon photometric
-limits remain blockers. An archive listing does not satisfy an investigation's
-reopen condition. Three new proposal documents preserve those conditions
-instead of treating the same available files as new qualified surfaces.
-
-## Method and evidence
-
-The [OPUS API guide](https://opus.pds-rings.seti.org/opus/__help/apiguide.html)
-defines the metadata queries. The collection reads all instrument and target
-facets, then the [published volume inventory](https://opus.pds-rings.seti.org/opus/__help/bundles.html).
-Each volume is queried with an exact `bundleid` match and its instrument.
-Two earliest catalogue samples are retained per target slice, and one per
-volume. These samples establish locators and product types; they are not a
-statistical sample of image quality. Selected candidates get a separate
-geometry-aware or observing-mode query, full metadata, file links and native
-label inspection.
-
-The intended-target table partitions all records. The separate surface-geometry
-facets overlap and can include unresolved bodies or predicted positions in a
-field of view. Geometry-index membership is neither a detection nor a useful
-surface footprint. Surface geometry is queried for the six instruments
-advertised by OPUS: Cassini ISS/UVIS/VIMS, Galileo SSI, Voyager ISS and New
-Horizons LORRI. Its absence for another instrument does not establish that
-native geometry or SPICE support is absent.
-
-The screening rules in `collect/review.mts` assign a disclosed disposition to
-each instrument/target slice. The [TSV](evidence/opus-review.tsv) preserves
-every result. This is catalogue screening, with 23 focused scientific-label
-checks, **not a claim of manual review of 1.6 million observations**. Raw image,
-cube and time-series arrays were not decoded or qualified in this OPUS pass.
-
-- [OPUS evidence](evidence/opus.json): exact queries and retrieval times,
-  counts, all slices, volume entries, metadata samples, focused products and
-  native-label receipts.
-- [Prior audits](evidence/previous-audits.json): all 717 Photojournal rows,
-  189 PSI PDS4 bundle IDs, 1,643 USGS records and 95 proposal joins.
-- `evidence/labels/`: the 23 scientific product labels, retaining the definitions
-  that limit the proposed claims. Their original URLs and byte identities are
-  in the OPUS evidence. No crawled website snapshots or science image payloads
-  are committed.
-
-The source target tags, missing values and aliases remain visible. `2014 MU69`
-is identified as Arrokoth without erasing the original tag. A target tagged
-“Star,” “Sun,” “Sky” or “Unknown” is not silently discarded: it may need an
-occultation, calibration or field-geometry review. Mars remains individually
-recorded and deferred under the requested scope.
-
-## Slice the audit
-
-From the repository root:
+From the repository root, with the project's supported Node version:
 
 ```sh
 node tools/audits/planetary-data/serve.mts
 node tools/audits/planetary-data/slice.mts --source=opus --target=Mimas --format=json
-node tools/audits/planetary-data/slice.mts --source=opus --proposal=97 --format=tsv
-node tools/audits/planetary-data/slice.mts --source=photojournal --target=europa --format=json
+node tools/audits/planetary-data/slice.mts --proposal=111 --format=tsv
+sqlite3 -header -column tools/audits/planetary-data/ledger.sqlite \
+  'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-The local viewer uses port 4319 by default; set `PORT` if needed. It filters by
-source, target, instrument, decision, proposal and text. URLs preserve filters.
-JSON and copyable TSV contain every matching row, independently of pagination.
-`opus-volumes` and `opus-geometry` are separate sources so their overlapping
-counts cannot be mistaken for extra observations. Counts from different audit
-sources must not be added into one “dataset” total.
+The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. Filters cover
+source, target, instrument, decision, proposal and text. Exports contain every
+matching row, independently of pagination. An empty source filter searches all
+sources. Proposal pages read current work status from SQLite on each request;
+restart the viewer after changing dataset rows. `AUDIT_DB` selects another file
+for comparisons. Open `ledger.sqlite` in a SQLite browser for direct editing.
 
-The [inspected Mimas filter](evidence/mimas-slice.jpg) shows six instrument
-slices. They contain 9,987 OPUS records in this snapshot.
+| Table               | Owns                                                                                                                                      |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `datasets`          | Stable source/id, title, target, instrument, count, decision, reason, source URL; native metadata and retrieval records in `details_json` |
+| `proposals`         | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date                                             |
+| `dataset_proposals` | Many-to-many links between records and proposed work                                                                                      |
+| `evidence`          | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes                                       |
 
-## Reproduce and maintain
+Use `proposed`, `qualifying`, `blocked`, `in-progress`, `shipped`, `rejected` or
+`deferred` for proposal status. A source row's `decision` describes that source;
+it is separate from the implementation status of a proposal. Blank PR links mean
+no implementation PR is recorded. The audit PR itself is not an implementation.
+
+## Maintain it
+
+Edit a proposal's status and next action in the database, and edit its scope in
+PROPOSALS.md. Preserve IDs and cite the implementation PR when work ships. Keep
+negative source decisions and their reopen conditions. For SQLite edits enable
+foreign keys and use a transaction:
+
+```sql
+PRAGMA foreign_keys=ON;
+BEGIN;
+-- UPDATE proposals SET status=..., next_step=..., blocker=...,
+--   pr_url=..., updated_at=... WHERE id=...;
+COMMIT;
+```
+
+Git stores the database as a binary file. Review changes through a text export:
 
 ```sh
+sqlite3 tools/audits/planetary-data/ledger.sqlite .dump > /tmp/planetary-ledger.sql
 node tools/audits/planetary-data/verify.mts
-node tools/audits/planetary-data/build.mts
-OPUS_WORK_DIR=output/opus-refresh node tools/audits/planetary-data/collect-opus.mts
 ```
 
-The first command checks retained evidence and joins offline. The second
-regenerates the OPUS review and proposal extensions from retained evidence and
-the authored `opus-proposals.json`. The last command makes a fresh public-API
-collection in ignored output; requests use a resumable cache and at most four
-concurrent workers. Use a new output directory for a new snapshot. Review
-changes, new target values and scientific limits before replacing evidence.
-Collection never overwrites the committed audit snapshot automatically.
+For a revision comparison, extract the old database with `git show` to `/tmp`,
+export both with `.dump`, and diff the exports. Do not commit a second JSON/SQL
+copy. Resolve concurrent edits by applying the intended row changes to one
+chosen database, then run the verifier; do not choose an entire binary version
+without accounting for the other edits.
 
-Keep the [proposal scope](proposals/contract.md): shared renderer, camera,
-shell and existing moon geometry; offline preparation; existing controls and
-source labels. Implementation and pixel qualification belong to the subsequent
-body PRs. This audit changes no application or prepared assets.
+Public collectors write to ignored scratch output and never replace the ledger:
+
+```sh
+OPUS_WORK_DIR=output/opus-refresh node tools/audits/planetary-data/collect-opus.mts
+ARCHIVE_WORK_DIR=output/archive-refresh node tools/audits/planetary-data/collect-archives.mts umd
+ARCHIVE_WORK_DIR=output/archive-refresh node tools/audits/planetary-data/collect-archives.mts darts
+```
+
+Use a new output directory for fresh retrievals. Review additions, removals,
+versions and changed source metadata before a database transaction. Preserve
+our decisions, proposal joins and work status; do not replace tables with a new
+scrape. Family rules in `collect/archive-review.mts` suggest review scopes, not
+scientific acceptance. Update the retained coverage receipt and verifier's
+snapshot counts when accepting a new collection. Scratch HTML is never committed.
+
+## Coverage and limits
+
+The 27 September 2026 snapshot keeps different inventory populations separate:
+
+| Source population               |  Rows | What was checked                                                               |
+| ------------------------------- | ----: | ------------------------------------------------------------------------------ |
+| OPUS instrument/target slices   |   549 | Exact queries, metadata samples and explicit screening decisions               |
+| OPUS instrument/volume entries  |   990 | Catalogue inventory; 985 distinct volumes/bundles                              |
+| OPUS geometry-index memberships |   221 | Overlapping geometry entries, not detections                                   |
+| Photojournal                    |   717 | Earlier individual reviews retained                                            |
+| PSI PDS4                        |   189 | Earlier bundle review and proposal links retained                              |
+| USGS                            | 1,643 | Earlier catalogue review and proposal links retained                           |
+| Maryland indexed descriptions   | 3,880 | Every linked description requested; 3,878 parsed, two HTTP 404s                |
+| Maryland root holdings          | 5,110 | Directory inventory; 1,239 have no description in the audited indexes          |
+| DARTS dataset directory         |   360 | Every published science metadata entry parsed, including one typed Observation |
+| DARTS collection directory      |    46 | Mission/collection metadata, separate from dataset entries                     |
+| DARTS catalogue documents       |     2 | DataCatalog and ItemList containers                                            |
+
+Do not add these into a unique-dataset or observation count. An entry may be a
+version, mirror, bundle, collection, channel, session or container. The database
+retains each provider's identifiers and links so a work slice can reconcile them.
+
+OPUS's target and volume partitions each sum to 1,627,081 records across 40
+instruments. VIMS VIS/IR entries can share the same QUBE. Geometry matches do
+not prove detection or useful coverage. There were 23 focused native-label
+inspections; this is not manual review of every OPUS observation. Native image,
+cube and time-series arrays were not decoded in that pass.
+
+Maryland collection starts with the mission, target and datatype indexes and
+follows their internal catalogue pages. It also inventories the holdings root.
+It does not claim a recursive audit of every science file. The failed description
+URLs remain searchable, as do unindexed holdings. Abstracts, status, citations,
+identifiers, source links and retrieval times are retained as data. Family rules
+screen each record; native-product qualification remains proposed work.
+
+DARTS collection reads every JSON-LD file in the published dataset and collection
+metadata directories. Five products are marked in preparation, eight as old or
+obsolete, and four provisional. SLIM has mission metadata but no individual
+product in this dataset catalogue. That is a release lead, not calibrated imagery.
+
+## Opportunities and existing work
+
+The added Maryland/DARTS scopes include [lunar magnetic maps](PROPOSALS.md#p111),
+[elemental measurements](PROPOSALS.md#p112), [radar profiles](PROPOSALS.md#p113),
+[Apollo seismology](PROPOSALS.md#p114), [Venus winds](PROPOSALS.md#p115),
+[Rosetta thermal observations](PROPOSALS.md#p117), [gas and dust](PROPOSALS.md#p118),
+[Lucy encounters](PROPOSALS.md#p129), [DART measurements](PROPOSALS.md#p130), and
+[EPOCh transit curves](PROPOSALS.md#p131). Related sources extend existing proposals
+through database joins. These are work scopes, not 131 ready datasets.
+
+The Maryland/DARTS comparison also read the Moon, Venus, Sun and 67P READMEs at
+[`93517193d218`](https://github.com/layoutit/css.earth/tree/93517193d21885d253c0590cf37b21c94330b4af).
+67P already uses VIRTIS derived maps, Venus already uses an Akatsuki UVI exposure,
+and the Sun has prepared magnetic and solar-band maps. Those archives alone are
+not new opportunities. The new scopes require additional measurements with
+explicit dates, calibration and coverage. Mars stays deferred.
+
+The OPUS repository baseline is
+[`f1493dccc15d`](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3).
+The earlier 95 proposals retain their comparison with
+[`60ef02395df5`](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570).
+Their older Enceladus “owned elsewhere” note is historical: its infrared mosaic
+subsequently merged. The preserved repository comparison records that change.
+Nix/Hydra registration, Nix color resolution and earlier photometric blockers
+remain unresolved unless new evidence meets the owning investigation's condition.
+
+## Evidence and validation
+
+The original audit was consolidated without dropping its 4,309 exported records
+or proposal joins. Native-label bytes retain their original hashes and URLs.
+The database's size comes from retained per-record metadata and scientific labels;
+it contains no science image payloads or downloaded webpages. Historical reviews
+and collection receipts remain queryable in `evidence` instead of separate files.
+
+`verify.mts` checks SQLite integrity and foreign keys, snapshot coverage, all
+retained evidence hashes, OPUS partition reconciliation, label byte counts,
+proposal writeups/joins, filters and exports. These checks establish ledger
+consistency, not scientific acceptance of the proposed datasets.
+
+The [browser capture](evidence/ledger-slice.jpg) records the final SQLite viewer.
+The `validation:sqlite-migration` evidence entry records the compared revision,
+migration extent, commands and browser cases. Browser version and DPR were not
+recorded; this is no claim of pixel parity.
+It is a UI check; scientific decoding and rendered-body qualification belong to
+subsequent implementation PRs.
