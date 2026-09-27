@@ -1,11 +1,11 @@
-import { parseRuntimeManifest } from './runtime-assets.ts';
+import { parseRuntimeManifest } from './public-runtime-assets.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
-import type { RuntimeManifest } from './runtime-assets.ts';
+import type { RuntimeManifest } from './public-runtime-assets.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writePreparedSet, type PreparedOutput } from '@cssearth/bake/delivery';
+import { writePreparedSet, type PreparedOutput } from './write-prepared-set.ts';
 
 
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);

@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { sha256 } from '@cssearth/core/node';
 import { inventoryPreparedAssets, inventoryText, readInventory, verifyInventory } from '@cssearth/objects/node';
-import { publishPreparedObject } from './publication.mts';
+import { publishPreparedObject } from '@cssearth/bake/delivery';
 
 test('publication updates prepared inventory pins with the staged runtime', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'object-publication-'));

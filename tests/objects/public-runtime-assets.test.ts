@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { collectRuntimeAssetUrls, stylesheetTexts } from './runtime-assets.ts';
+import { collectRuntimeAssetUrls, stylesheetTexts } from '@cssearth/bake/delivery';
 
 test('a body ships the images its stylesheet references, not only its prepared data', async () => {
   // A stylesheet image is a runtime asset: bakes that inventoried only prepared data dropped Europa's composition images,

@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { prepareObjectContentAssets } from './content/prepare.js';
-import { parseRuntimeManifest } from './runtime-assets.js';
+import { parseRuntimeManifest } from '@cssearth/bake/delivery';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 
 export async function refreshPhotographs(id: string, lensIds: readonly string[]) {
