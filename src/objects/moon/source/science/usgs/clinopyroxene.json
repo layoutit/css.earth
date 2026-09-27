@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-geotiff-grid@1",
+  "source": {
+    "url": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_ClinopyroxenePercent_50N50S.tif",
+    "productId": "kaguya_lunar_multiband_imager_mi_derived_clinopyroxene_weight_percent_50n50s_512ppd_59mpp",
+    "width": 184320,
+    "height": 51200,
+    "origin": [
+      -180,
+      50
+    ],
+    "resolution": [
+      0.001953125,
+      -0.001953125
+    ],
+    "coordinates": "degrees",
+    "radius": 1737400,
+    "centerLongitude": 0,
+    "noData": -3.4028226550889045e+38,
+    "bits": 32,
+    "sampleFormat": 3
+  },
+  "output": {
+    "width": 2048,
+    "height": 1024,
+    "radius": 1737400
+  }
+}

@@ -62,17 +62,50 @@
     },
     {
       "id": "topography",
-      "source": "maps/mercury-topography-global.png",
+      "source": "science/usgs/elevation.tif",
       "falseColor": true,
-      "output": "mercury-surface-{id}{suffix}.jpg",
-      "encoding": {
-        "format": "jpeg",
-        "encoder": "libjpeg",
-        "progressive": false,
-        "quality": 85,
-        "chromaSubsampling": "4:2:0"
-      },
-      "thumbnail": "mercury-lens-{id}.webp"
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "elevation.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -6000,
+          "maximum": 6000,
+          "colors": [
+            "#243b85",
+            "#40a0c4",
+            "#dddac4",
+            "#ce9449",
+            "#89382d"
+          ],
+          "units": "m above 2,439.4 km sphere",
+          "valueTransform": {
+            "scale": 0.5,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.17578125,
+              -0.17578125
+            ],
+            "referenceRadiusMeters": 2439400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -99999
+          }
+        }
+      }
     }
   ],
   "lighting": {

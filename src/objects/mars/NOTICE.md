@@ -37,3 +37,4 @@ Landing, touchdown and impact sites (14, 2 traverses): compiled from NASA NSSDCA
 - Odyssey GRS concentrations: William V. Boynton and colleagues (2007), NASA/PDS Geosciences Node, ODY-M-GRS-5-ELEMENTS-V1.0.
 - Crustal magnetic model: Benoît Langlais and colleagues (2019), Zenodo 3876714; evaluated with pyshtools 4.14.1.
 - Crust thickness: Mark A. Wieczorek and colleagues (2022), Zenodo 6477509; precomputed Figure 2 model, Khan2022-39-2900-2900.
+Numeric MOLA global DEM: NASA Mars Global Surveyor MOLA team and USGS Astrogeology, 1999–2001 observations, elevations relative to the degree/order-50 GMM-2B areoid. cssEarth samples native cells and applies its own numeric palette and matching legend.

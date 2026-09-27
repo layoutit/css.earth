@@ -267,6 +267,14 @@
       ],
       "path": "crust/thickness.dat",
       "url": "https://earth-assets.lowpoly.cc/source-cache/mars/crust/thickness.dat"
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/elevation.tif",
+      "recipePath": "science/usgs/elevation.json",
+      "groups": [
+        "refresh-usgs"
+      ]
     }
   ]
 }

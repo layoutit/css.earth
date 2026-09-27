@@ -21,7 +21,7 @@
         "points": 253,
         "rangeMicrometers": [
           0.35,
-          1.0
+          1
         ],
         "modeled": "2026-08-30"
       }
@@ -39,7 +39,7 @@
           "label": "10⁻¹²"
         },
         {
-          "pressure": 1e-08,
+          "pressure": 1e-8,
           "label": "10⁻⁸"
         },
         {
@@ -102,8 +102,8 @@
             -4.384,
             -0.001044,
             0.0003687,
-            -2.814e-06,
-            8.938e-09
+            -0.000002814,
+            8.938e-9
           ]
         },
         {
@@ -117,10 +117,5 @@
         }
       ]
     }
-  ],
-  "gallery": {
-    "source": "venera/gallery.json",
-    "schema": "cssvenus-venera-surface-gallery-source@1",
-    "itemCount": 4
-  }
+  ]
 }

@@ -1,4 +1,4 @@
-import type { LightingRecipe, RasterRecipe } from './config.ts';
+import { RASTER_DENSITY, type LightingRecipe, type RasterRecipe } from './config.ts';
 import { resolveLightingRecipe } from './lighting-banks.ts';
 import { parseLimbBlock } from '../photometry/index.ts';
 type RecordValue = Record<string, unknown>;
@@ -109,7 +109,12 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError('Native source poles need density-before-pack storage.');
         if (surface.science !== undefined) {
             const science = record(surface.science, 'surface.science');
-            if (recipe.resample === 'source-packed') throw new TypeError('surface.science needs density-before-pack resampling.');
+            if (recipe.resample === 'source-packed') {
+                const numeric = science.scientific === undefined ? undefined : record(science.scientific, 'surface.science.scientific');
+                if (numeric?.displaySampling !== 'nearest' || surface.encoding || recipe.emission ||
+                    recipe.sourceWidth !== Number(recipe.width) * RASTER_DENSITY || recipe.sourceHeight !== Number(recipe.height) * RASTER_DENSITY)
+                    throw new TypeError('Source-packed science requires nearest numeric pixels at the canonical source dimensions and lossless encoding.');
+            }
             if (surface.coverage !== undefined || surface.sharpen !== undefined || surface.exposure !== undefined) throw new TypeError('surface.science replaces coverage, sharpen and exposure.');
             // Absent kind keeps the static-observation contract; other kinds are validated by their decoder owners in tools.
             if (science.kind !== undefined) text(science.kind, 'surface.science.kind');

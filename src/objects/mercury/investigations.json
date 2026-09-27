@@ -268,6 +268,23 @@
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
       ]
+    },
+    {
+      "id": "usgs-numeric-surfaces",
+      "subject": "Native numeric USGS products and compact display grids",
+      "status": "included",
+      "finding": "MESSENGER DEM v2 replaces the colored topography input. Native DN uses 0.5 m per unit; central-meridian 180 placement checked against independent native bytes.",
+      "evidence": [
+        "evidence/usgs-numeric/numeric-checks.json",
+        "README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+          "scope": "Working changes above the named base; evidence records tested file hashes."
+        }
+      ]
     }
   ]
 }

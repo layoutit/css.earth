@@ -1,6 +1,6 @@
 # Venus sources
 
-Venus shows a cloud map, Magellan radar and elevation displays, modeled atmosphere charts, and Venera surface photographs.
+Venus shows a cloud map, Magellan radar and elevation displays, and modeled atmosphere charts.
 
 The [navigation marker recipe](source/preparation/navigation.json) retains the existing credited image and crop, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). This stylized identifier does not represent the scene epoch or its illumination.
 
@@ -10,19 +10,29 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | --- | --- |
 | Clouds | Pinned cloud texture described below |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
-| Radar and elevation | [USGS Magellan radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) and [colorized topography](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m) |
-| Surface photographs | [PDS Venera collection](https://pds-geosciences.wustl.edu/missions/venera/) |
+| Radar | [USGS Magellan synthetic-color radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) |
+| Elevation, emissivity, reflectivity, roughness | [USGS numeric Magellan products](source/science/usgs/), at about 4.64 km grid spacing |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target) Venus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [emissivity](evidence/showcase/emissivity.png).
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. For PR #828, every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. That record applies to the #828 versions; the later numeric upgrade below rebakes emissivity and elevation. [emissivity](evidence/showcase/emissivity.png).
 
 ### Magellan microwave emissivity (26 September 2026)
 
-[USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) is decoded by the existing GeoTIFF science reader. Its signed 16-bit DN converts to dimensionless emissivity as `(DN − 1) / 10,000`; −32,768 is missing. The 8,193 × 4,097 grid has 1,334,015 missing samples, and valid values range from 0.2926 to 0.9986. The displayed scale is 0.29–1.00 and uses lossless colour encoding.
+[USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) was introduced in PR #828 and retains its single `emissivity` lens and
+`magellan-global-emissivity` source identity. The numeric upgrade samples the
+same native product into the compact grid before the existing science reader. Its signed 16-bit DN converts to dimensionless emissivity as `(DN − 1) / 10,000`; −32,768 is missing. The original 8,193 × 4,097 grid has 1,334,015 missing samples, and valid values range from 0.2926 to 0.9986. The displayed scale remains 0.29–1.00 with the original palette. The new numeric display uses lossless WebP; the #828 asset used lossy WebP. The compact grid contains 2,015,139 valid cells, spanning
+0.2926–0.9984, and 82,013 missing cells. No gap filling is applied.
+
+The output now starts at −180° east longitude, matching the body's surface-map
+frame (180° is the same meridian). The previous recipe omitted this setting and
+used the science painter's 0° default, placing the data half a turn from that
+frame. The [comparison record](evidence/usgs-numeric/emissivity-upgrade.json)
+identifies both recipes and assets. Both display 2,048 × 1,024 cells; the lossless
+packed asset grows from 182,456 to 1,142,498 bytes.
 
 The product corrects antenna sidelobes and atmospheric effects; it does not correct emission angle, roughness or surface tilt. It is microwave emissivity, not visible colour, temperature or evidence of present volcanism. The source's simple cylindrical projection and 6,051 km reference sphere are read from its own GeoTIFF tags. [The label](source/emissivity/magellan.lbl) and [raster recipe](source/preparation/raster.json) retain the scale, missing value and georeferencing choices. The original cloud view remains the default.
 
@@ -50,7 +60,6 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 - The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
 - The Magellan color source map has a darker one-pixel column at both its left and right edges (mean brightness 108 against about 124 beside them). A thin dark line can show along 180° E at close zoom.
-- The Venera photographs include archive assembly and tonal processing. PDS distributes this material outside its formally archived collection.
 - The camera and background sky do not represent an observer at a stated epoch.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -256,39 +265,36 @@ RenderableAtmosphere tuning is removed with its record.
 
 ## Magellan radar and elevation views
 
-The radar view uses USGS Astrogeology's public-domain `MAGELLAN_color` WMS
-layer, the official C3-MDIR synthetic-color global mosaic. The elevation view
-uses the matching `MAGELLAN_topography` WMS layer, the official C3-MDIR
-colorized topographic mosaic. Acquisition requests the complete -180 through
-180 degree longitude and -90 through 90 degree latitude extent in EPSG:4326 at
-2,048 by 1,024 pixels. Verification fails if any checked response byte changes.
+The Radar view retains the USGS C3-MDIR synthetic-color WMS mosaic. Elevation
+now uses the numeric GTDR v2, with meters above a 6,051 km sphere. Its new scale
+runs from −3,000 to 12,000 m, generated from the same palette as the map.
+Radar brightness and the former wrapping color legend no longer enter Elevation.
 
-Radar and elevation use a separate prepared observation material. It applies
-the same fixed source-bound lighting as the cloud view, omits optical cloud
-opacity over the measured surface, and retains only the sourced 70 km exterior
-atmospheric limb. This represents the instruments looking through or measuring
-past the visible cloud deck without presenting Venus as airless. The browser
-does not reduce material opacity, recompute lighting, or synthesize a surface
-view when a lens changes.
+The three additional numeric maps use the Magellan microwave products:
 
-USGS documents the source products as prepared global mosaics derived from
-Magellan radar and topography. The embedded colors are part of those USGS
-products; neither lens is a natural-color photograph. USGS describes the elevation
-product as a C3-MIDR radar mosaic "overlain with colorized topography", so its
-brightness is radar and its hue is height. The Elevation legend follows the
-USGS `venus_magellan_c3-mdir_clrtopo_legend.png`: −3 to 11 km, or a planet
-radius of 6,048 to 6,062 km. Its 29 color stops were read every 0.5 km along
-the middle rows of that image (fetched 2026-09-21, SHA-256
-`6761a432fb59ed6f8731670950be125c3bb63dfe1f32227fbf55588be06fc569`). The hue
-wraps: it runs purple, blue, green, orange, red and magenta, then returns to
-purple above about 8 km, so the highest terrain and the lowest share a color. Preparation resizes,
-sharpens, projects polar tiles, and orients the source for the retained grid. It
-does not synthesize surface measurements or recolor the sources.
+| View | Native DN conversion | Meaning |
+| --- | --- | --- |
+| Emissivity | (DN − 1) / 10,000 | Horizontal-polarization thermal emissivity at 13 cm |
+| Reflectivity | (DN − 1) / 200 | Fresnel reflectivity inferred from radar echoes |
+| Roughness | (DN − 1) / 10 | Meter-scale RMS slope, in degrees, fitted to radar echoes |
 
-USGS product references:
+Zero DN is missing for reflectivity and roughness; emissivity uses −32,768.
+Their grids have about 4.64 km
+spacing, while footprints and effective resolution are coarser. Emissivity
+retains changing observation angles (about 48° to 15°) and surface-roughness
+effects. Roughness is not a derivative of the elevation map. All four are
+archival scientific maps, not visible-color photographs or current conditions.
 
-- <https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m>
-- <https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m>
+The roughness ISIS label gives a 0.005 multiplier, conflicting with both the
+[original PDS GSDR specification](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MGN-V-RDRS-5-GDR-SLOPE-V1.0)
+and USGS's equation. We use the PDS factor 0.1. The
+[calibration record](source/science/usgs/roughness-calibration.json) preserves
+that decision; the original label is retained unchanged.
+
+The scientific views use the same prepared observation material as Radar,
+without an opaque cloud texture over the surface. Their geometry, lighting
+controls and exterior atmospheric limb remain shared with the existing body.
+See the [numeric acquisition method](../../../docs/usgs-numeric-surfaces.md).
 
 </details>
 
@@ -307,26 +313,15 @@ They are prepared files; the browser does not call PSG or derive chart geometry.
 </details>
 
 <details>
-<summary>Venera photographs, processing and rights</summary>
+<summary>Archived Venera photographs and rights</summary>
 
 ## Venera surface photographs
 
-The Surface photos panel publishes the four historical panorama files listed by
-the NASA PDS Geosciences Node: Venera 9 and 10 GIFs from 1975, and Venera 13
-and 14 JPEGs from 1982. The checked files retain the institutional archive's
-assembly, annotation, and tonal processing. They are not recolored, restored,
-cropped, filtered, or recompressed by this repository. Preparation validates
-each source hash and pixel dimensions, then copies the exact bytes into the
-declared Venus runtime closure.
-
-The source page credits the Vernadsky Institute and Moscow Power Institute and
-states that the material is provided through PDS but is not formally archived
-there. The UI and manifest preserve that distinction: the institutes receive
-the image credit and PDS is named as the distributor. NASA Science's Venera 9
-caption supports the qualified description that it is one of the first photos
-returned from another planet's surface. Descriptions of visible rocks, soil,
-calibration targets, and lander parts are conservative observations of the
-checked files.
+The Surface photographs section has been removed from the application. Venus
+preparation no longer builds the gallery, and the runtime inventory no longer
+ships its four panorama images. The original source files and credits remain
+for the historical record: Venera 9 and 10 GIFs from 1975, and Venera 13 and 14
+JPEGs from 1982, distributed by the NASA PDS Geosciences Node.
 
 The committed `source/venera/RIGHTS.md` records the automatic-camera
 public-domain basis and its limits. That qualification does not extend to later
@@ -350,3 +345,37 @@ manifest. Runtime closure verification rejects undeclared or changed assets.
 See the [contributor guide](../README.md) for acquisition and preparation commands.
 
 </details>
+
+## Numeric-map qualification
+
+The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+the compact input digests and tested processing files, count coverage, and
+compare native byte samples at hemispheres, seams, extrema and gaps. Their
+calibration check runs before the display coverage masks; it does not validate
+the original instrument or scientific model.
+The [failed label-only roughness comparison](evidence/usgs-numeric/roughness-label-conflict.json)
+is retained alongside the passing comparison using the cited PDS calibration.
+
+The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
+Sun world metadata, with no reused files. All 15 compact source grids restored
+from the source cache with native fallback disabled and matched byte for byte.
+
+The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+map descriptions, legends and retained scene. It includes screenshots; the
+[validation record](evidence/usgs-numeric/validation.json) names the checks
+and the local full-build limitation. These checks do not measure instrument
+accuracy or establish how well readers understand the explanations.
+
+The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+build, all 11 grouped selectors, source labels and phone playback. It explains
+which earlier scientific and browser evidence still applies to this version.
+
+The later [gallery removal check](evidence/usgs-numeric/gallery-removal.json)
+confirms that Surface photographs is absent on desktop, mobile and the built
+page. The four panorama files are absent from the delivery inventory.
+
+The [final dataset UI check](../moon/evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+and Surface photographs are absent from all 1,453 generated pages. Browser
+checks cover the Moon, Venus and WASP-12b; the final screenshots show the
+short description, legend and source link.

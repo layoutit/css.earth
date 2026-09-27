@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-dataset-browser-check@1",
+  "date": "2026-09-27T01:59:19.355Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
+  "testedFiles": {
+    "source/content/object.json": "8a1ef740889143379fb2a45fefc651244cfa5d0e9bc1f735b47589aa1bed1875",
+    "text.json": "b49d8bb2ec81abaaa853ad7d83110c01990de80ec83a0db99ba1b697a4100a67",
+    "inventory.json": "98eccd152c7accbab724416a248663b03816b30f03af946008044ab08b49342a"
+  },
+  "tests": {
+    "sourceLabels": {
+      "body": "ceres",
+      "dataset": "clay-band",
+      "labels": [
+        {
+          "id": "normal",
+          "source": "Dawn FC"
+        },
+        {
+          "id": "enhanced",
+          "source": "Dawn FC"
+        },
+        {
+          "id": "elevation",
+          "source": "Dawn FC / DLR"
+        },
+        {
+          "id": "clay-band",
+          "source": "Dawn VIR"
+        },
+        {
+          "id": "ammonium-band",
+          "source": "Dawn VIR"
+        }
+      ],
+      "url": "http://127.0.0.1:4277/ceres/?dataset=clay-band&v=UMJAoghLrfW0UkFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+      "scenes": 1
+    },
+    "group": {
+      "body": "ceres",
+      "firstPreviousDisabled": true,
+      "lastNextDisabled": true,
+      "keyboardPrevious": "clay-band",
+      "retainedAfterKeyboard": true,
+      "results": [
+        {
+          "id": "clay-band",
+          "url": "http://127.0.0.1:4277/ceres/?dataset=clay-band&v=UMJAoghLrfW0UkFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Clay · 2.7 µm · 1 of 2",
+          "legend": "0.229\n0.256\n0.283 band depth\n\nNo data",
+          "headings": [
+            "Dawn VIR 2.7 µm band depth",
+            "Dawn"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "ammonium-band",
+          "url": "http://127.0.0.1:4277/ceres/?dataset=ammonium-band&v=UMJAoghLrfW0UkFCxzNAAAAAv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA",
+          "step": "Ammonium · 3.1 µm · 2 of 2",
+          "legend": "0.106\n0.128\n0.151 band depth\n\nNo data",
+          "headings": [
+            "Dawn VIR 3.1 µm band depth",
+            "Dawn"
+          ],
+          "retained": true,
+          "scenes": 1
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "file": "ceres-clay-band.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 783622,
+      "sha256": "760cb260560073022dc8339d61df44a78acbedcb9dc854121d0cd549c2f6c297",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}

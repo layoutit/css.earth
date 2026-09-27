@@ -3,12 +3,6 @@
   "assets": [
     {
       "location": "public",
-      "filename": "mars-arrival.webp",
-      "bytes": 132076,
-      "sha256": "f0b22b15c24a72ae2cc620ff414333ec6ce2c9e11e6e6fefded63ee79b5bfd2e"
-    },
-    {
-      "location": "public",
       "filename": "mars-features.json",
       "bytes": 6046258,
       "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78"
@@ -28,8 +22,8 @@
     {
       "location": "public",
       "filename": "mars-lens-elevation.webp",
-      "bytes": 1344,
-      "sha256": "7afa3ee193c5403042ecaada2b64a48fc871f3f3e63a4a923b90fff69ba4d877"
+      "bytes": 2672,
+      "sha256": "9e7d0953620e662f80aaf432c53c2eddbd84f9452343f7d01ff3c8c22890e7a1"
     },
     {
       "location": "public",
@@ -124,8 +118,8 @@
     {
       "location": "public",
       "filename": "mars-poles-elevation@2x.webp",
-      "bytes": 461358,
-      "sha256": "c271fb2ac24ff3d1dbdc8b73e2f2fd47856416323df24cf23102988d334d7741"
+      "bytes": 62106,
+      "sha256": "d008d5e6990f4ad4d05bfaa5633df6b3dd6834b497299ba36a4dcb4c70ec4eb8"
     },
     {
       "location": "public",
@@ -202,8 +196,8 @@
     {
       "location": "public",
       "filename": "mars-surface-elevation@2x.webp",
-      "bytes": 2979390,
-      "sha256": "62bdbbf07bd46068f6817f3663cfdd3685ea740e48a1595b1c8129bc502c05ce"
+      "bytes": 1120324,
+      "sha256": "5db9c8c3a99fd51d81b463a0e12adad307d068bfa0311e465e398612e16374dc"
     },
     {
       "location": "public",
@@ -267,21 +261,15 @@
     },
     {
       "location": "prepared",
-      "filename": "arrival-billboard.json",
-      "bytes": 296,
-      "sha256": "80bb8271e2012361da18ff1608630af76d815d28d2460aff7b4f3a7055d19893"
-    },
-    {
-      "location": "prepared",
       "filename": "assets.json",
-      "bytes": 7524,
-      "sha256": "4deb428a9e2ab270c0501708680905b23906456cfab397f40f31a48b70260a17"
+      "bytes": 7523,
+      "sha256": "1333e0d9f3c4a86224b7df53a9c5f692eea57f9415a722630da3b2bb9827eb44"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1547,
-      "sha256": "7faf088b601097e93360e6b988acdfa65c05ffa0f8fcea866990d29c5a57298f"
+      "sha256": "694a895abc4ff3284c61922b1366ff34af06d38157a27005ebf4ee2b7aa0442e"
     },
     {
       "location": "prepared",
@@ -292,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 17740,
-      "sha256": "8a728b03ef5fb5491ac35d5405585e0a2b021c3a1adc30650425cff90fd790c6"
+      "bytes": 22177,
+      "sha256": "31048b2a724656d1ceb7c4b4547ff6ef53c92c3e40bb5c9c96808e0dfd155aef"
     },
     {
       "location": "prepared",
@@ -304,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 24983,
-      "sha256": "a8bdf22439f096b3a33b40f16dec9150d89d6eabc8c207046ffca9d1308962dc"
+      "bytes": 29688,
+      "sha256": "43e8ccc4651aef592a93fc71f11e97bd526efdd2ddc3d565ab24a26f00c0671a"
     },
     {
       "location": "prepared",
@@ -328,8 +316,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 21640,
-      "sha256": "9ba5a05bed36ccd7572d85eb0fde4c24fde15ef693782c898b750ae13eb424ca"
+      "bytes": 4802,
+      "sha256": "9bf57266d7698910e917962f9eb8f91f194fb02490c297dc0052f7b9529c81bf"
     },
     {
       "location": "prepared",
@@ -388,8 +376,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 564781,
-      "sha256": "a485d0c0f1881257377fb7bfdeeaf9db8b940c0c3b8bb8e6d7b3353f183f7bbf"
+      "bytes": 569214,
+      "sha256": "c3fff95160b4ad7e0746a6922e8d2caac29183dfa2d21d15e88aa89e7b8f5022"
     },
     {
       "location": "prepared",
@@ -412,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2786,
-      "sha256": "2808d1a3c4012c1f6bb7bdbdd2f7494b3c88640de46b8fe5d470658e0a3d14bd"
+      "bytes": 2816,
+      "sha256": "62c7facba1c38c447d480cddafdb61c3a5f4a602badb2a919030b6e57b532994"
     },
     {
       "location": "prepared",

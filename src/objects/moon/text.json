@@ -28,43 +28,83 @@
   "datasets": {
     "surface": {
       "title": "LROC photographic mosaic",
-      "detail": "LROC mosaic",
+      "detail": "LRO LROC",
       "summary": "LRO photographs from 2009–2011; crater shadows are part of the images."
     },
     "midnight-temperature": {
       "title": "LRO Diviner GHRM: midnight temperature",
-      "detail": "Temperature",
+      "detail": "LRO Diviner",
       "summary": "Midnight temperatures fitted from Diviner data, 2009–2022, within 70° of the equator. They average many nights."
     },
     "heat-anomalies": {
       "title": "LRO Diviner GHRM: heat anomalies",
-      "detail": "Anomaly",
+      "detail": "LRO Diviner",
       "summary": "Midnight warmth (red) or coolness (blue) compared with typical lunar soil. Warm spots are not signs of internal heat."
     },
     "rock-abundance": {
       "title": "LRO Diviner GHRM: rock abundance",
-      "detail": "Rock area",
+      "detail": "LRO Diviner",
       "summary": "The share of ground covered by rocks, modeled from Diviner midnight data. It estimates area, not boulder counts."
     },
     "topography": {
       "title": "LOLA LDEM16 elevation model",
-      "detail": "Numeric elevation",
+      "detail": "LRO LOLA",
       "summary": "Height above or below a 1,737.4 km sphere, from LRO's laser altimeter. Shading shows slopes."
     },
     "crust": {
       "title": "Crustal-thickness model",
-      "detail": "Thickness",
+      "detail": "GRAIL",
       "summary": "Thickness inferred from gravity and topography. It depends on assumed rock densities."
     },
     "silicate-signature": {
       "title": "Diviner Christiansen feature, 2009–2016",
-      "detail": "Composition proxy",
+      "detail": "LRO Diviner",
       "summary": "An infrared emissivity peak between 8.0 and 8.5 µm that tracks silicate composition, not mineral amounts."
     },
     "geology": {
       "title": "USGS unified global geology (2020 v2)",
-      "detail": "Mapped units",
+      "detail": "USGS",
       "summary": "Geologic units and their relative ages from the 2020 USGS map. Colors are map units, not surface color."
+    },
+    "submicroscopic-iron": {
+      "title": "Iron particles from space weathering",
+      "detail": "Kaguya MI",
+      "summary": "Tiny metallic iron particles build up as space exposure alters lunar soil; the model estimates their amount."
+    },
+    "plagioclase-grain-size": {
+      "title": "Fine or coarse plagioclase grains",
+      "detail": "Kaguya MI",
+      "summary": "Plagioclase is a mineral in highland rocks; the model tries fine or coarse grains to match the reflected light."
+    },
+    "plagioclase": {
+      "title": "Mineral in the bright highlands",
+      "detail": "Kaguya MI",
+      "summary": "Plagioclase is a mineral common in the Moon’s bright highland rocks; colors estimate its share of the surface material."
+    },
+    "iron-oxide": {
+      "title": "Iron estimated from reflected light",
+      "detail": "Kaguya MI",
+      "summary": "Iron in the surface material, reported as iron oxide (FeO); colors show the estimated percentage by weight."
+    },
+    "olivine": {
+      "title": "Olivine in surface rocks",
+      "detail": "Kaguya MI",
+      "summary": "Olivine is a mineral made with iron and magnesium, found in volcanic rocks; colors estimate its share by weight."
+    },
+    "orthopyroxene": {
+      "title": "Low-calcium pyroxene",
+      "detail": "Kaguya MI",
+      "summary": "Orthopyroxene is a rock-forming mineral with little calcium; its distribution helps distinguish lunar rock mixtures."
+    },
+    "clinopyroxene": {
+      "title": "High-calcium pyroxene",
+      "detail": "Kaguya MI",
+      "summary": "This map estimates calcium-rich pyroxene, a mineral found in volcanic rocks; colors show its share by weight."
+    },
+    "optical-maturity": {
+      "title": "Changes from exposure to space",
+      "detail": "Kaguya MI",
+      "summary": "Sunlight reflected by the soil reveals changes from exposure to space; lower values indicate more weathered material."
     }
   }
 }

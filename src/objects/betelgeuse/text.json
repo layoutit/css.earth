@@ -30,12 +30,12 @@
   "datasets": {
     "matisse": {
       "title": "Photosphere at 4 µm",
-      "detail": "February 2020, one side",
+      "detail": "VLTI/MATISSE",
       "summary": "Rebuilt from four telescopes' fringes, with the light outside its disc given a shape. Patches unconfirmed."
     },
     "dust-2024": {
       "title": "Polarised dust, 2024",
-      "detail": "3 December 2024, V band",
+      "detail": "VLT/SPHERE-ZIMPOL",
       "summary": "Dust one to four stellar radii out, in the paper's own colour scale. Its depth is the shell that best fits its profile.",
       "sources": [
         {
@@ -48,7 +48,7 @@
     },
     "dust-2019": {
       "title": "The Great Dimming clump",
-      "detail": "December 2019, a model",
+      "detail": "Montargès et al. (2021)",
       "summary": "The dust that dimmed the southern half ten times, as Montargès and colleagues fitted it. A model, not an image.",
       "sources": [
         {
@@ -61,7 +61,7 @@
     },
     "sio-2023": {
       "title": "Silicon monoxide around the star",
-      "detail": "August 2023, ALMA",
+      "detail": "ALMA",
       "summary": "Silicon monoxide around the star, the only dataset here placed in depth by its own measured velocities.",
       "sources": [
         {
@@ -74,17 +74,17 @@
     },
     "color": {
       "title": "Photosphere colour",
-      "detail": "From its spectrum",
+      "detail": "VLT/X-shooter",
       "summary": "The colour of a measured spectrum of the star. No surface picture or edge darkening is measured."
     },
     "matisse-2018-12": {
       "title": "Photosphere at 4 µm",
-      "detail": "Dec. 2018, before dimming",
+      "detail": "VLTI/MATISSE",
       "summary": "Rebuilt from four telescopes' fringes before the Great Dimming. Patches unconfirmed."
     },
     "matisse-2020-12": {
       "title": "Photosphere at 4 µm",
-      "detail": "Dec. 2020, after dimming",
+      "detail": "VLTI/MATISSE",
       "summary": "Rebuilt from four telescopes' fringes after the Great Dimming. Patches unconfirmed."
     }
   }

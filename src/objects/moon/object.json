@@ -112,6 +112,46 @@
               "id": "geology",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "submicroscopic-iron",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "plagioclase-grain-size",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "plagioclase",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "iron-oxide",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "olivine",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "orthopyroxene",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "clinopyroxene",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "optical-maturity",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

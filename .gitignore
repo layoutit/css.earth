@@ -347,3 +347,5 @@ src/objects/*/source/**/*.bpc
 
 # Published Mars crust model and its coordinate-only conversion
 src/objects/mars/source/crust/*.dat
+# Compact native-cell GeoTIFFs, restored by the USGS acquisition recipes or source cache.
+/src/objects/*/source/science/usgs/*.tif

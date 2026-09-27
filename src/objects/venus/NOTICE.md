@@ -37,3 +37,4 @@ Feature caption notes: 112 lead summaries from the English Wikipedia (Wikipedia 
 Landing, touchdown and impact sites (13): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.
 
 - Microwave emissivity: NASA/JPL Magellan GEDR and USGS Astrogeology, global 4,641 m product; decoded from the published DN convention and GeoTIFF projection.
+Numeric Magellan GTDR v2, GEDR, GRDR and GSDR: NASA Magellan mission; Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley (MIT); NASA PDS Geosciences Node; USGS Astrogeology. cssEarth samples native grid cells and applies the documented calibration and its own palettes. The original data and labels are credited in the source manifest; the roughness-label conflict is documented beside its calibration.

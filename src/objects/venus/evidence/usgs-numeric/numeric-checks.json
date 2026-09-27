@@ -1,0 +1,4984 @@
+{
+  "schema": "cssearth-usgs-numeric-evidence@1",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation atop this base; tested file hashes identify the relevant version. Native sample checks qualify decoding, coordinates and calibration before the separately audited quality masks. Range hashes identify only bytes actually read, never the full native product.",
+  "testedFiles": {
+    "tools/objects/acquisition/geotiff-grid.mts": "d377dd0968f9940cb9f0c1d99549dcb7844e8ccfc8c6b567814d6ebd13661e3c",
+    "tools/oracles/isis-geotiff-grid.mts": "59a8f5738b972e3d342387d822c185fcb957539211234df68f7d77839a4cd7da",
+    "src/objects/venus/source/preparation/raster.json": "bcdd728c9fafb847b139e0545d1b1aab9d029419fac205c57dc039f698a3bed5"
+  },
+  "products": [
+    {
+      "id": "elevation",
+      "conversion": {
+        "schema": "cssearth-geotiff-grid-conversion@1",
+        "source": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_Topography_Global_4641m_v02.tif",
+          "productId": "venus_magellan_global_topography_4641m",
+          "width": 8192,
+          "height": 4096,
+          "origin": [
+            -19009777.2544,
+            9504888.6272
+          ],
+          "resolution": [
+            4641.0589,
+            -4641.0589
+          ],
+          "coordinates": "meters",
+          "radius": 6051000,
+          "centerLongitude": 0,
+          "noData": -32768,
+          "bits": 16,
+          "sampleFormat": 2
+        },
+        "output": {
+          "width": 2048,
+          "height": 1024,
+          "radius": 6051000
+        },
+        "processing": "Native cell containing each output pixel centre; original sample units retained as float32; no averaging or gap fill.",
+        "valid": 1924029,
+        "missing": 173123,
+        "minimum": -2886,
+        "maximum": 11622,
+        "zeroCount": 867,
+        "maxRoundingError": 0,
+        "maximumNativeRowBytes": 16384,
+        "sourceIdentity": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_Topography_Global_4641m_v02.tif",
+          "etag": "\"b040ee6d8fd4aa8473bb372d500dc503-9\"",
+          "lastModified": "Thu, 10 Nov 2022 13:21:19 GMT",
+          "totalBytes": 67142279,
+          "transferredBytes": 16787884,
+          "rangeCount": 3080
+        },
+        "anchors": [
+          {
+            "x": 256,
+            "y": 64,
+            "sourceColumn": 1026,
+            "sourceRow": 258,
+            "value": 423
+          },
+          {
+            "x": 512,
+            "y": 64,
+            "sourceColumn": 2050,
+            "sourceRow": 258,
+            "value": 114
+          },
+          {
+            "x": 768,
+            "y": 64,
+            "sourceColumn": 3074,
+            "sourceRow": 258,
+            "value": 2452
+          },
+          {
+            "x": 1024,
+            "y": 64,
+            "sourceColumn": 4097,
+            "sourceRow": 258,
+            "value": 538
+          },
+          {
+            "x": 1280,
+            "y": 64,
+            "sourceColumn": 5121,
+            "sourceRow": 258,
+            "value": 25
+          },
+          {
+            "x": 1536,
+            "y": 64,
+            "sourceColumn": 6145,
+            "sourceRow": 258,
+            "value": -350
+          },
+          {
+            "x": 1792,
+            "y": 64,
+            "sourceColumn": 7169,
+            "sourceRow": 258,
+            "value": 352
+          },
+          {
+            "x": 256,
+            "y": 128,
+            "sourceColumn": 1026,
+            "sourceRow": 514,
+            "value": 350
+          },
+          {
+            "x": 512,
+            "y": 128,
+            "sourceColumn": 2050,
+            "sourceRow": 514,
+            "value": 694
+          },
+          {
+            "x": 768,
+            "y": 128,
+            "sourceColumn": 3074,
+            "sourceRow": 514,
+            "value": 5767
+          },
+          {
+            "x": 1024,
+            "y": 128,
+            "sourceColumn": 4097,
+            "sourceRow": 514,
+            "value": 8692
+          },
+          {
+            "x": 1280,
+            "y": 128,
+            "sourceColumn": 5121,
+            "sourceRow": 514,
+            "value": 3142
+          },
+          {
+            "x": 1536,
+            "y": 128,
+            "sourceColumn": 6145,
+            "sourceRow": 514,
+            "value": 455
+          },
+          {
+            "x": 1792,
+            "y": 128,
+            "sourceColumn": 7169,
+            "sourceRow": 514,
+            "value": 1024
+          },
+          {
+            "x": 256,
+            "y": 192,
+            "sourceColumn": 1026,
+            "sourceRow": 770,
+            "value": 363
+          },
+          {
+            "x": 512,
+            "y": 192,
+            "sourceColumn": 2050,
+            "sourceRow": 770,
+            "value": 468
+          },
+          {
+            "x": 768,
+            "y": 192,
+            "sourceColumn": 3074,
+            "sourceRow": 770,
+            "value": 233
+          },
+          {
+            "x": 1024,
+            "y": 192,
+            "sourceColumn": 4097,
+            "sourceRow": 770,
+            "value": 1887
+          },
+          {
+            "x": 1280,
+            "y": 192,
+            "sourceColumn": 5121,
+            "sourceRow": 770,
+            "value": 2256
+          },
+          {
+            "x": 1536,
+            "y": 192,
+            "sourceColumn": 6145,
+            "sourceRow": 770,
+            "value": 459
+          },
+          {
+            "x": 1792,
+            "y": 192,
+            "sourceColumn": 7169,
+            "sourceRow": 770,
+            "value": 670
+          },
+          {
+            "x": 256,
+            "y": 256,
+            "sourceColumn": 1026,
+            "sourceRow": 1026,
+            "value": 1354
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "value": -452
+          },
+          {
+            "x": 768,
+            "y": 256,
+            "sourceColumn": 3074,
+            "sourceRow": 1026,
+            "value": -564
+          },
+          {
+            "x": 1024,
+            "y": 256,
+            "sourceColumn": 4097,
+            "sourceRow": 1026,
+            "value": 277
+          },
+          {
+            "x": 1280,
+            "y": 256,
+            "sourceColumn": 5121,
+            "sourceRow": 1026,
+            "value": 314
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "sourceColumn": 6145,
+            "sourceRow": 1026,
+            "value": 2063
+          },
+          {
+            "x": 1792,
+            "y": 256,
+            "sourceColumn": 7169,
+            "sourceRow": 1026,
+            "value": 656
+          },
+          {
+            "x": 0,
+            "y": 320,
+            "sourceColumn": 2,
+            "sourceRow": 1282,
+            "value": 259
+          },
+          {
+            "x": 256,
+            "y": 320,
+            "sourceColumn": 1026,
+            "sourceRow": 1282,
+            "value": 1447
+          },
+          {
+            "x": 512,
+            "y": 320,
+            "sourceColumn": 2050,
+            "sourceRow": 1282,
+            "value": 1181
+          },
+          {
+            "x": 768,
+            "y": 320,
+            "sourceColumn": 3074,
+            "sourceRow": 1282,
+            "value": -295
+          },
+          {
+            "x": 1024,
+            "y": 320,
+            "sourceColumn": 4097,
+            "sourceRow": 1282,
+            "value": 401
+          },
+          {
+            "x": 1280,
+            "y": 320,
+            "sourceColumn": 5121,
+            "sourceRow": 1282,
+            "value": 1233
+          },
+          {
+            "x": 1536,
+            "y": 320,
+            "sourceColumn": 6145,
+            "sourceRow": 1282,
+            "value": 173
+          },
+          {
+            "x": 1792,
+            "y": 320,
+            "sourceColumn": 7169,
+            "sourceRow": 1282,
+            "value": -350
+          },
+          {
+            "x": 0,
+            "y": 384,
+            "sourceColumn": 2,
+            "sourceRow": 1538,
+            "value": 892
+          },
+          {
+            "x": 256,
+            "y": 384,
+            "sourceColumn": 1026,
+            "sourceRow": 1538,
+            "value": 1338
+          },
+          {
+            "x": 512,
+            "y": 384,
+            "sourceColumn": 2050,
+            "sourceRow": 1538,
+            "value": 895
+          },
+          {
+            "x": 768,
+            "y": 384,
+            "sourceColumn": 3074,
+            "sourceRow": 1538,
+            "value": -3
+          },
+          {
+            "x": 1024,
+            "y": 384,
+            "sourceColumn": 4097,
+            "sourceRow": 1538,
+            "value": 2148
+          },
+          {
+            "x": 1280,
+            "y": 384,
+            "sourceColumn": 5121,
+            "sourceRow": 1538,
+            "value": 589
+          },
+          {
+            "x": 1536,
+            "y": 384,
+            "sourceColumn": 6145,
+            "sourceRow": 1538,
+            "value": 471
+          },
+          {
+            "x": 1792,
+            "y": 384,
+            "sourceColumn": 7169,
+            "sourceRow": 1538,
+            "value": 548
+          },
+          {
+            "x": 0,
+            "y": 448,
+            "sourceColumn": 2,
+            "sourceRow": 1794,
+            "value": 1259
+          },
+          {
+            "x": 256,
+            "y": 448,
+            "sourceColumn": 1026,
+            "sourceRow": 1794,
+            "value": 1253
+          },
+          {
+            "x": 512,
+            "y": 448,
+            "sourceColumn": 2050,
+            "sourceRow": 1794,
+            "value": 52
+          },
+          {
+            "x": 768,
+            "y": 448,
+            "sourceColumn": 3074,
+            "sourceRow": 1794,
+            "value": 559
+          },
+          {
+            "x": 1024,
+            "y": 448,
+            "sourceColumn": 4097,
+            "sourceRow": 1794,
+            "value": 79
+          },
+          {
+            "x": 1280,
+            "y": 448,
+            "sourceColumn": 5121,
+            "sourceRow": 1794,
+            "value": 549
+          },
+          {
+            "x": 1536,
+            "y": 448,
+            "sourceColumn": 6145,
+            "sourceRow": 1794,
+            "value": 1452
+          },
+          {
+            "x": 1792,
+            "y": 448,
+            "sourceColumn": 7169,
+            "sourceRow": 1794,
+            "value": 574
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "sourceColumn": 2,
+            "sourceRow": 2049,
+            "value": 100
+          },
+          {
+            "x": 256,
+            "y": 512,
+            "sourceColumn": 1026,
+            "sourceRow": 2049,
+            "value": 1166
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "sourceColumn": 2050,
+            "sourceRow": 2049,
+            "value": 544
+          },
+          {
+            "x": 768,
+            "y": 512,
+            "sourceColumn": 3074,
+            "sourceRow": 2049,
+            "value": 679
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "sourceColumn": 4097,
+            "sourceRow": 2049,
+            "value": 596
+          },
+          {
+            "x": 1280,
+            "y": 512,
+            "sourceColumn": 5121,
+            "sourceRow": 2049,
+            "value": 364
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "sourceColumn": 6145,
+            "sourceRow": 2049,
+            "value": 4224
+          },
+          {
+            "x": 1792,
+            "y": 512,
+            "sourceColumn": 7169,
+            "sourceRow": 2049,
+            "value": 2784
+          },
+          {
+            "x": 0,
+            "y": 576,
+            "sourceColumn": 2,
+            "sourceRow": 2305,
+            "value": 2172
+          },
+          {
+            "x": 256,
+            "y": 576,
+            "sourceColumn": 1026,
+            "sourceRow": 2305,
+            "value": 1379
+          },
+          {
+            "x": 512,
+            "y": 576,
+            "sourceColumn": 2050,
+            "sourceRow": 2305,
+            "value": 1110
+          },
+          {
+            "x": 768,
+            "y": 576,
+            "sourceColumn": 3074,
+            "sourceRow": 2305,
+            "value": 115
+          },
+          {
+            "x": 1024,
+            "y": 576,
+            "sourceColumn": 4097,
+            "sourceRow": 2305,
+            "value": 509
+          },
+          {
+            "x": 1280,
+            "y": 576,
+            "sourceColumn": 5121,
+            "sourceRow": 2305,
+            "value": 253
+          },
+          {
+            "x": 1536,
+            "y": 576,
+            "sourceColumn": 6145,
+            "sourceRow": 2305,
+            "value": 3834
+          },
+          {
+            "x": 1792,
+            "y": 576,
+            "sourceColumn": 7169,
+            "sourceRow": 2305,
+            "value": 4291
+          },
+          {
+            "x": 0,
+            "y": 640,
+            "sourceColumn": 2,
+            "sourceRow": 2561,
+            "value": 1662
+          },
+          {
+            "x": 256,
+            "y": 640,
+            "sourceColumn": 1026,
+            "sourceRow": 2561,
+            "value": 856
+          },
+          {
+            "x": 512,
+            "y": 640,
+            "sourceColumn": 2050,
+            "sourceRow": 2561,
+            "value": 1270
+          },
+          {
+            "x": 768,
+            "y": 640,
+            "sourceColumn": 3074,
+            "sourceRow": 2561,
+            "value": 429
+          },
+          {
+            "x": 1024,
+            "y": 640,
+            "sourceColumn": 4097,
+            "sourceRow": 2561,
+            "value": 2479
+          },
+          {
+            "x": 1280,
+            "y": 640,
+            "sourceColumn": 5121,
+            "sourceRow": 2561,
+            "value": 1242
+          },
+          {
+            "x": 1536,
+            "y": 640,
+            "sourceColumn": 6145,
+            "sourceRow": 2561,
+            "value": 234
+          },
+          {
+            "x": 1792,
+            "y": 640,
+            "sourceColumn": 7169,
+            "sourceRow": 2561,
+            "value": 1926
+          },
+          {
+            "x": 0,
+            "y": 704,
+            "sourceColumn": 2,
+            "sourceRow": 2817,
+            "value": 742
+          },
+          {
+            "x": 256,
+            "y": 704,
+            "sourceColumn": 1026,
+            "sourceRow": 2817,
+            "value": 643
+          },
+          {
+            "x": 512,
+            "y": 704,
+            "sourceColumn": 2050,
+            "sourceRow": 2817,
+            "value": 809
+          },
+          {
+            "x": 768,
+            "y": 704,
+            "sourceColumn": 3074,
+            "sourceRow": 2817,
+            "value": 944
+          },
+          {
+            "x": 1024,
+            "y": 704,
+            "sourceColumn": 4097,
+            "sourceRow": 2817,
+            "value": 1112
+          },
+          {
+            "x": 1280,
+            "y": 704,
+            "sourceColumn": 5121,
+            "sourceRow": 2817,
+            "value": 940
+          },
+          {
+            "x": 1536,
+            "y": 704,
+            "sourceColumn": 6145,
+            "sourceRow": 2817,
+            "value": 850
+          },
+          {
+            "x": 1792,
+            "y": 704,
+            "sourceColumn": 7169,
+            "sourceRow": 2817,
+            "value": 1520
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "sourceColumn": 2,
+            "sourceRow": 3073,
+            "value": 545
+          },
+          {
+            "x": 256,
+            "y": 768,
+            "sourceColumn": 1026,
+            "sourceRow": 3073,
+            "value": -85
+          },
+          {
+            "x": 512,
+            "y": 768,
+            "sourceColumn": 2050,
+            "sourceRow": 3073,
+            "value": 546
+          },
+          {
+            "x": 768,
+            "y": 768,
+            "sourceColumn": 3074,
+            "sourceRow": 3073,
+            "value": 420
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "sourceColumn": 4097,
+            "sourceRow": 3073,
+            "value": -28
+          },
+          {
+            "x": 1280,
+            "y": 768,
+            "sourceColumn": 5121,
+            "sourceRow": 3073,
+            "value": 721
+          },
+          {
+            "x": 1536,
+            "y": 768,
+            "sourceColumn": 6145,
+            "sourceRow": 3073,
+            "value": 55
+          },
+          {
+            "x": 1792,
+            "y": 768,
+            "sourceColumn": 7169,
+            "sourceRow": 3073,
+            "value": 903
+          },
+          {
+            "x": 0,
+            "y": 832,
+            "sourceColumn": 2,
+            "sourceRow": 3329,
+            "value": 350
+          },
+          {
+            "x": 256,
+            "y": 832,
+            "sourceColumn": 1026,
+            "sourceRow": 3329,
+            "value": 48
+          },
+          {
+            "x": 512,
+            "y": 832,
+            "sourceColumn": 2050,
+            "sourceRow": 3329,
+            "value": 95
+          },
+          {
+            "x": 768,
+            "y": 832,
+            "sourceColumn": 3074,
+            "sourceRow": 3329,
+            "value": 400
+          },
+          {
+            "x": 1024,
+            "y": 832,
+            "sourceColumn": 4097,
+            "sourceRow": 3329,
+            "value": 877
+          },
+          {
+            "x": 1536,
+            "y": 832,
+            "sourceColumn": 6145,
+            "sourceRow": 3329,
+            "value": 974
+          },
+          {
+            "x": 1792,
+            "y": 832,
+            "sourceColumn": 7169,
+            "sourceRow": 3329,
+            "value": -174
+          },
+          {
+            "x": 0,
+            "y": 896,
+            "sourceColumn": 2,
+            "sourceRow": 3585,
+            "value": 207
+          },
+          {
+            "x": 256,
+            "y": 896,
+            "sourceColumn": 1026,
+            "sourceRow": 3585,
+            "value": -80
+          },
+          {
+            "x": 512,
+            "y": 896,
+            "sourceColumn": 2050,
+            "sourceRow": 3585,
+            "value": 67
+          },
+          {
+            "x": 768,
+            "y": 896,
+            "sourceColumn": 3074,
+            "sourceRow": 3585,
+            "value": 190
+          },
+          {
+            "x": 1024,
+            "y": 896,
+            "sourceColumn": 4097,
+            "sourceRow": 3585,
+            "value": 2313
+          },
+          {
+            "x": 1536,
+            "y": 896,
+            "sourceColumn": 6145,
+            "sourceRow": 3585,
+            "value": 1075
+          },
+          {
+            "x": 0,
+            "y": 960,
+            "sourceColumn": 2,
+            "sourceRow": 3841,
+            "value": 631
+          },
+          {
+            "x": 256,
+            "y": 960,
+            "sourceColumn": 1026,
+            "sourceRow": 3841,
+            "value": 35
+          },
+          {
+            "x": 512,
+            "y": 960,
+            "sourceColumn": 2050,
+            "sourceRow": 3841,
+            "value": 50
+          },
+          {
+            "x": 768,
+            "y": 960,
+            "sourceColumn": 3074,
+            "sourceRow": 3841,
+            "value": 655
+          },
+          {
+            "x": 1024,
+            "y": 960,
+            "sourceColumn": 4097,
+            "sourceRow": 3841,
+            "value": 243
+          },
+          {
+            "x": 1280,
+            "y": 960,
+            "sourceColumn": 5121,
+            "sourceRow": 3841,
+            "value": 854
+          },
+          {
+            "x": 1536,
+            "y": 960,
+            "sourceColumn": 6145,
+            "sourceRow": 3841,
+            "value": 574
+          },
+          {
+            "x": 1792,
+            "y": 960,
+            "sourceColumn": 7169,
+            "sourceRow": 3841,
+            "value": 152
+          }
+        ],
+        "outputSha256": "27c56abb19c4dfc781dec6e96fa9d5e11130e4dcd2ce68212b25386798ca04e0",
+        "outputBytes": 8389608
+      },
+      "nativeChecks": {
+        "schema": "cssearth-native-grid-oracle@1",
+        "passed": true,
+        "method": "Independent ISIS-label coordinates and byte offsets; native samples decoded by DataView. Checks source-to-compact sampling, not instrument accuracy or all native pixels.",
+        "recipe": "src/objects/venus/source/science/usgs/elevation.json",
+        "recipeSha256": "9a03ad99c31d2db710d2f017d2a09e8a5bd88f5a0587233572bfd767485a577a",
+        "label": "src/objects/venus/source/science/usgs/elevation-isis.lbl",
+        "labelSha256": "63824965413f93d7e2bf1d5881d2d7456f1a637d7700159125b81d5c35decffd",
+        "grid": "src/objects/venus/source/science/usgs/elevation.tif",
+        "gridSha256": "27c56abb19c4dfc781dec6e96fa9d5e11130e4dcd2ce68212b25386798ca04e0",
+        "nativeUrl": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_Topography_Global_4641m_v02.tif",
+        "etag": "\"b040ee6d8fd4aa8473bb372d500dc503-9\"",
+        "entityChanged": false,
+        "nativeScale": 1,
+        "nativeOffset": 0,
+        "unitScale": 1,
+        "checks": [
+          {
+            "x": 0,
+            "y": 0,
+            "longitude": -179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 2,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=66187-66188",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 0,
+            "longitude": 0.087890625,
+            "latitude": 89.912109375,
+            "sourceColumn": 4097,
+            "sourceRow": 2,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=74377-74378",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 0,
+            "longitude": 179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 8189,
+            "sourceRow": 2,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=82561-82562",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "longitude": -179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=16843403-16843404",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "longitude": -89.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "raw": -452,
+            "expected": -452,
+            "actual": -452,
+            "range": "bytes=16847499-16847500",
+            "rangeSha256": "02a49bc8de18993d1e6dbedf15a2bfd4d3dd45cecf9b01a1442364a553b79f7a",
+            "expectedDisplay": -452,
+            "actualDisplay": -452,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "longitude": 90.087890625,
+            "latitude": 44.912109375,
+            "sourceColumn": 6145,
+            "sourceRow": 1026,
+            "raw": 2063,
+            "expected": 2063,
+            "actual": 2063,
+            "range": "bytes=16855689-16855690",
+            "rangeSha256": "5573f05f7a352caf5f00771e73dd5d649bfce2c5c5c60e14ec694eb8e477b658",
+            "expectedDisplay": 2063,
+            "actualDisplay": 2063,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 256,
+            "longitude": 179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 8189,
+            "sourceRow": 1026,
+            "raw": -96,
+            "expected": -96,
+            "actual": -96,
+            "range": "bytes=16859777-16859778",
+            "rangeSha256": "752b1b4414441a5d6325b8355777443e05814ea943400d848ac4acf6dd1115dd",
+            "expectedDisplay": -96,
+            "actualDisplay": -96,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "longitude": -179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 2049,
+            "raw": 100,
+            "expected": 100,
+            "actual": 100,
+            "range": "bytes=33604235-33604236",
+            "rangeSha256": "4658d6abbbaf7748c172ed5a3e003cdb8997648f88724834e41f75e54520e142",
+            "expectedDisplay": 100,
+            "actualDisplay": 100,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "longitude": -89.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2050,
+            "sourceRow": 2049,
+            "raw": 544,
+            "expected": 544,
+            "actual": 544,
+            "range": "bytes=33608331-33608332",
+            "rangeSha256": "3da5c199770b6698291ece54d9da2d5168b04db7638739527d8bb69881e15985",
+            "expectedDisplay": 544,
+            "actualDisplay": 544,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "longitude": 0.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 4097,
+            "sourceRow": 2049,
+            "raw": 596,
+            "expected": 596,
+            "actual": 596,
+            "range": "bytes=33612425-33612426",
+            "rangeSha256": "9699cb93fca57d5c19d643c463c7d09a25d5b681cf85d9f0bd3ce417e69ad42e",
+            "expectedDisplay": 596,
+            "actualDisplay": 596,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "longitude": 90.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 6145,
+            "sourceRow": 2049,
+            "raw": 4224,
+            "expected": 4224,
+            "actual": 4224,
+            "range": "bytes=33616521-33616522",
+            "rangeSha256": "f56f4c121d502d7a2898a2edeb86dd47831c6c19de8dae6dc142277835389472",
+            "expectedDisplay": 4224,
+            "actualDisplay": 4224,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 512,
+            "longitude": 179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 8189,
+            "sourceRow": 2049,
+            "raw": 376,
+            "expected": 376,
+            "actual": 376,
+            "range": "bytes=33620609-33620610",
+            "rangeSha256": "f5e2794887fba944442f1d3619e6773e55259ef5f3c73112857f0e293be739a0",
+            "expectedDisplay": 376,
+            "actualDisplay": 376,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "longitude": -179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 3073,
+            "raw": 545,
+            "expected": 545,
+            "actual": 545,
+            "range": "bytes=50381451-50381452",
+            "rangeSha256": "ccf50141e0cab2b2de7fd4abe6799757b337a77f06ffa7e9b7913ed9f5edf7a9",
+            "expectedDisplay": 545,
+            "actualDisplay": 545,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "longitude": 0.087890625,
+            "latitude": -45.087890625,
+            "sourceColumn": 4097,
+            "sourceRow": 3073,
+            "raw": -28,
+            "expected": -28,
+            "actual": -28,
+            "range": "bytes=50389641-50389642",
+            "rangeSha256": "83656d6c20798037eaf0c7157c8414af9da4581dbd4dc06c4826f982e7b0a870",
+            "expectedDisplay": -28,
+            "actualDisplay": -28,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 768,
+            "longitude": 179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 8189,
+            "sourceRow": 3073,
+            "raw": 370,
+            "expected": 370,
+            "actual": 370,
+            "range": "bytes=50397825-50397826",
+            "rangeSha256": "4153001a2df16384a120a448b481570b50a834ac872b61e53c505e804a3c1524",
+            "expectedDisplay": 370,
+            "actualDisplay": 370,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 1023,
+            "longitude": -179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 4093,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=67093131-67093132",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 1023,
+            "longitude": 0.087890625,
+            "latitude": -89.912109375,
+            "sourceColumn": 4097,
+            "sourceRow": 4093,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=67101321-67101322",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 1023,
+            "longitude": 179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 8189,
+            "sourceRow": 4093,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=67109505-67109506",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 105,
+            "y": 466,
+            "longitude": -161.455078125,
+            "latitude": 7.998046875,
+            "sourceColumn": 422,
+            "sourceRow": 1866,
+            "raw": -2886,
+            "expected": -2886,
+            "actual": -2886,
+            "range": "bytes=30606803-30606804",
+            "rangeSha256": "14a32223571918944b6bd076e11eab4f6ee15730fc43a6634ff9f23a5e74d09b",
+            "expectedDisplay": -2886,
+            "actualDisplay": -2886,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1028,
+            "y": 143,
+            "longitude": 0.791015625,
+            "latitude": 64.775390625,
+            "sourceColumn": 4113,
+            "sourceRow": 574,
+            "raw": 11622,
+            "expected": 11622,
+            "actual": 11622,
+            "range": "bytes=9446057-9446058",
+            "rangeSha256": "31402271be6e59af063bd632deb2959e7a3d82d76787d18096b192be1a590b7a",
+            "expectedDisplay": 11622,
+            "actualDisplay": 11622,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1969,
+            "y": 22,
+            "longitude": 166.201171875,
+            "latitude": 86.044921875,
+            "sourceColumn": 7877,
+            "sourceRow": 90,
+            "raw": 0,
+            "expected": 0,
+            "actual": 0,
+            "range": "bytes=1523729-1523730",
+            "rangeSha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+            "expectedDisplay": 0,
+            "actualDisplay": 0,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 779,
+            "y": 341,
+            "longitude": -42.978515625,
+            "latitude": 29.970703125,
+            "sourceColumn": 3118,
+            "sourceRow": 1366,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=22420195-22420196",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emissivity",
+      "conversion": {
+        "schema": "cssearth-geotiff-grid-conversion@1",
+        "source": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif",
+          "productId": "venus_magellan_global_microwave_emissivity_4641m",
+          "width": 8193,
+          "height": 4097,
+          "origin": [
+            -19014417.9036,
+            9509529.4812
+          ],
+          "resolution": [
+            4641.0588,
+            -4641.0588
+          ],
+          "coordinates": "meters",
+          "radius": 6051000,
+          "centerLongitude": 0,
+          "noData": -32768,
+          "bits": 16,
+          "sampleFormat": 2
+        },
+        "output": {
+          "width": 2048,
+          "height": 1024,
+          "radius": 6051000
+        },
+        "processing": "Native cell containing each output pixel centre; original sample units retained as float32; no averaging or gap fill.",
+        "valid": 2015139,
+        "missing": 82013,
+        "minimum": 2927,
+        "maximum": 9985,
+        "zeroCount": 0,
+        "maxRoundingError": 0,
+        "maximumNativeRowBytes": 16386,
+        "sourceIdentity": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif",
+          "etag": "\"5b1bec3f7dc6f982c815652e947522c5-9\"",
+          "lastModified": "Thu, 10 Nov 2022 08:11:18 GMT",
+          "totalBytes": 67167065,
+          "transferredBytes": 16789932,
+          "rangeCount": 3080
+        },
+        "anchors": [
+          {
+            "x": 0,
+            "y": 0,
+            "sourceColumn": 2,
+            "sourceRow": 2,
+            "value": 8494
+          },
+          {
+            "x": 256,
+            "y": 0,
+            "sourceColumn": 1026,
+            "sourceRow": 2,
+            "value": 8484
+          },
+          {
+            "x": 512,
+            "y": 0,
+            "sourceColumn": 2050,
+            "sourceRow": 2,
+            "value": 8492
+          },
+          {
+            "x": 768,
+            "y": 0,
+            "sourceColumn": 3074,
+            "sourceRow": 2,
+            "value": 8494
+          },
+          {
+            "x": 1024,
+            "y": 0,
+            "sourceColumn": 4099,
+            "sourceRow": 2,
+            "value": 8491
+          },
+          {
+            "x": 1280,
+            "y": 0,
+            "sourceColumn": 5123,
+            "sourceRow": 2,
+            "value": 8496
+          },
+          {
+            "x": 1536,
+            "y": 0,
+            "sourceColumn": 6147,
+            "sourceRow": 2,
+            "value": 8433
+          },
+          {
+            "x": 1792,
+            "y": 0,
+            "sourceColumn": 7171,
+            "sourceRow": 2,
+            "value": 8512
+          },
+          {
+            "x": 0,
+            "y": 64,
+            "sourceColumn": 2,
+            "sourceRow": 258,
+            "value": 8223
+          },
+          {
+            "x": 256,
+            "y": 64,
+            "sourceColumn": 1026,
+            "sourceRow": 258,
+            "value": 8583
+          },
+          {
+            "x": 512,
+            "y": 64,
+            "sourceColumn": 2050,
+            "sourceRow": 258,
+            "value": 8556
+          },
+          {
+            "x": 768,
+            "y": 64,
+            "sourceColumn": 3074,
+            "sourceRow": 258,
+            "value": 8696
+          },
+          {
+            "x": 1024,
+            "y": 64,
+            "sourceColumn": 4099,
+            "sourceRow": 258,
+            "value": 8329
+          },
+          {
+            "x": 1536,
+            "y": 64,
+            "sourceColumn": 6147,
+            "sourceRow": 258,
+            "value": 8338
+          },
+          {
+            "x": 0,
+            "y": 128,
+            "sourceColumn": 2,
+            "sourceRow": 514,
+            "value": 8651
+          },
+          {
+            "x": 256,
+            "y": 128,
+            "sourceColumn": 1026,
+            "sourceRow": 514,
+            "value": 8721
+          },
+          {
+            "x": 512,
+            "y": 128,
+            "sourceColumn": 2050,
+            "sourceRow": 514,
+            "value": 8616
+          },
+          {
+            "x": 768,
+            "y": 128,
+            "sourceColumn": 3074,
+            "sourceRow": 514,
+            "value": 7986
+          },
+          {
+            "x": 1024,
+            "y": 128,
+            "sourceColumn": 4099,
+            "sourceRow": 514,
+            "value": 4401
+          },
+          {
+            "x": 1536,
+            "y": 128,
+            "sourceColumn": 6147,
+            "sourceRow": 514,
+            "value": 8610
+          },
+          {
+            "x": 1792,
+            "y": 128,
+            "sourceColumn": 7171,
+            "sourceRow": 514,
+            "value": 8261
+          },
+          {
+            "x": 0,
+            "y": 192,
+            "sourceColumn": 2,
+            "sourceRow": 770,
+            "value": 8634
+          },
+          {
+            "x": 256,
+            "y": 192,
+            "sourceColumn": 1026,
+            "sourceRow": 770,
+            "value": 8740
+          },
+          {
+            "x": 512,
+            "y": 192,
+            "sourceColumn": 2050,
+            "sourceRow": 770,
+            "value": 8741
+          },
+          {
+            "x": 768,
+            "y": 192,
+            "sourceColumn": 3074,
+            "sourceRow": 770,
+            "value": 8723
+          },
+          {
+            "x": 1024,
+            "y": 192,
+            "sourceColumn": 4099,
+            "sourceRow": 770,
+            "value": 8742
+          },
+          {
+            "x": 1536,
+            "y": 192,
+            "sourceColumn": 6147,
+            "sourceRow": 770,
+            "value": 8601
+          },
+          {
+            "x": 1792,
+            "y": 192,
+            "sourceColumn": 7171,
+            "sourceRow": 770,
+            "value": 8269
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "value": 8570
+          },
+          {
+            "x": 256,
+            "y": 256,
+            "sourceColumn": 1026,
+            "sourceRow": 1026,
+            "value": 8894
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "value": 8804
+          },
+          {
+            "x": 768,
+            "y": 256,
+            "sourceColumn": 3074,
+            "sourceRow": 1026,
+            "value": 8422
+          },
+          {
+            "x": 1024,
+            "y": 256,
+            "sourceColumn": 4099,
+            "sourceRow": 1026,
+            "value": 8578
+          },
+          {
+            "x": 1280,
+            "y": 256,
+            "sourceColumn": 5123,
+            "sourceRow": 1026,
+            "value": 8347
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "sourceColumn": 6147,
+            "sourceRow": 1026,
+            "value": 8801
+          },
+          {
+            "x": 1792,
+            "y": 256,
+            "sourceColumn": 7171,
+            "sourceRow": 1026,
+            "value": 8489
+          },
+          {
+            "x": 0,
+            "y": 320,
+            "sourceColumn": 2,
+            "sourceRow": 1282,
+            "value": 9118
+          },
+          {
+            "x": 256,
+            "y": 320,
+            "sourceColumn": 1026,
+            "sourceRow": 1282,
+            "value": 8724
+          },
+          {
+            "x": 512,
+            "y": 320,
+            "sourceColumn": 2050,
+            "sourceRow": 1282,
+            "value": 8941
+          },
+          {
+            "x": 768,
+            "y": 320,
+            "sourceColumn": 3074,
+            "sourceRow": 1282,
+            "value": 8623
+          },
+          {
+            "x": 1024,
+            "y": 320,
+            "sourceColumn": 4099,
+            "sourceRow": 1282,
+            "value": 8863
+          },
+          {
+            "x": 1280,
+            "y": 320,
+            "sourceColumn": 5123,
+            "sourceRow": 1282,
+            "value": 7615
+          },
+          {
+            "x": 1536,
+            "y": 320,
+            "sourceColumn": 6147,
+            "sourceRow": 1282,
+            "value": 7996
+          },
+          {
+            "x": 1792,
+            "y": 320,
+            "sourceColumn": 7171,
+            "sourceRow": 1282,
+            "value": 8466
+          },
+          {
+            "x": 0,
+            "y": 384,
+            "sourceColumn": 2,
+            "sourceRow": 1538,
+            "value": 8553
+          },
+          {
+            "x": 256,
+            "y": 384,
+            "sourceColumn": 1026,
+            "sourceRow": 1538,
+            "value": 8290
+          },
+          {
+            "x": 512,
+            "y": 384,
+            "sourceColumn": 2050,
+            "sourceRow": 1538,
+            "value": 8565
+          },
+          {
+            "x": 768,
+            "y": 384,
+            "sourceColumn": 3074,
+            "sourceRow": 1538,
+            "value": 8442
+          },
+          {
+            "x": 1024,
+            "y": 384,
+            "sourceColumn": 4099,
+            "sourceRow": 1538,
+            "value": 7950
+          },
+          {
+            "x": 1280,
+            "y": 384,
+            "sourceColumn": 5123,
+            "sourceRow": 1538,
+            "value": 8576
+          },
+          {
+            "x": 1536,
+            "y": 384,
+            "sourceColumn": 6147,
+            "sourceRow": 1538,
+            "value": 7746
+          },
+          {
+            "x": 1792,
+            "y": 384,
+            "sourceColumn": 7171,
+            "sourceRow": 1538,
+            "value": 8384
+          },
+          {
+            "x": 0,
+            "y": 448,
+            "sourceColumn": 2,
+            "sourceRow": 1794,
+            "value": 8672
+          },
+          {
+            "x": 256,
+            "y": 448,
+            "sourceColumn": 1026,
+            "sourceRow": 1794,
+            "value": 8581
+          },
+          {
+            "x": 512,
+            "y": 448,
+            "sourceColumn": 2050,
+            "sourceRow": 1794,
+            "value": 8306
+          },
+          {
+            "x": 768,
+            "y": 448,
+            "sourceColumn": 3074,
+            "sourceRow": 1794,
+            "value": 8528
+          },
+          {
+            "x": 1024,
+            "y": 448,
+            "sourceColumn": 4099,
+            "sourceRow": 1794,
+            "value": 7878
+          },
+          {
+            "x": 1280,
+            "y": 448,
+            "sourceColumn": 5123,
+            "sourceRow": 1794,
+            "value": 8514
+          },
+          {
+            "x": 1536,
+            "y": 448,
+            "sourceColumn": 6147,
+            "sourceRow": 1794,
+            "value": 8006
+          },
+          {
+            "x": 1792,
+            "y": 448,
+            "sourceColumn": 7171,
+            "sourceRow": 1794,
+            "value": 8628
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "sourceColumn": 2,
+            "sourceRow": 2051,
+            "value": 8569
+          },
+          {
+            "x": 256,
+            "y": 512,
+            "sourceColumn": 1026,
+            "sourceRow": 2051,
+            "value": 8587
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "sourceColumn": 2050,
+            "sourceRow": 2051,
+            "value": 8578
+          },
+          {
+            "x": 768,
+            "y": 512,
+            "sourceColumn": 3074,
+            "sourceRow": 2051,
+            "value": 8107
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "sourceColumn": 4099,
+            "sourceRow": 2051,
+            "value": 8292
+          },
+          {
+            "x": 1280,
+            "y": 512,
+            "sourceColumn": 5123,
+            "sourceRow": 2051,
+            "value": 8486
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "sourceColumn": 6147,
+            "sourceRow": 2051,
+            "value": 5411
+          },
+          {
+            "x": 1792,
+            "y": 512,
+            "sourceColumn": 7171,
+            "sourceRow": 2051,
+            "value": 8838
+          },
+          {
+            "x": 0,
+            "y": 576,
+            "sourceColumn": 2,
+            "sourceRow": 2307,
+            "value": 8743
+          },
+          {
+            "x": 256,
+            "y": 576,
+            "sourceColumn": 1026,
+            "sourceRow": 2307,
+            "value": 8587
+          },
+          {
+            "x": 512,
+            "y": 576,
+            "sourceColumn": 2050,
+            "sourceRow": 2307,
+            "value": 8262
+          },
+          {
+            "x": 768,
+            "y": 576,
+            "sourceColumn": 3074,
+            "sourceRow": 2307,
+            "value": 7731
+          },
+          {
+            "x": 1024,
+            "y": 576,
+            "sourceColumn": 4099,
+            "sourceRow": 2307,
+            "value": 8125
+          },
+          {
+            "x": 1280,
+            "y": 576,
+            "sourceColumn": 5123,
+            "sourceRow": 2307,
+            "value": 8384
+          },
+          {
+            "x": 1536,
+            "y": 576,
+            "sourceColumn": 6147,
+            "sourceRow": 2307,
+            "value": 6740
+          },
+          {
+            "x": 1792,
+            "y": 576,
+            "sourceColumn": 7171,
+            "sourceRow": 2307,
+            "value": 7952
+          },
+          {
+            "x": 0,
+            "y": 640,
+            "sourceColumn": 2,
+            "sourceRow": 2563,
+            "value": 8689
+          },
+          {
+            "x": 256,
+            "y": 640,
+            "sourceColumn": 1026,
+            "sourceRow": 2563,
+            "value": 8758
+          },
+          {
+            "x": 512,
+            "y": 640,
+            "sourceColumn": 2050,
+            "sourceRow": 2563,
+            "value": 8995
+          },
+          {
+            "x": 1024,
+            "y": 640,
+            "sourceColumn": 4099,
+            "sourceRow": 2563,
+            "value": 8914
+          },
+          {
+            "x": 1280,
+            "y": 640,
+            "sourceColumn": 5123,
+            "sourceRow": 2563,
+            "value": 8537
+          },
+          {
+            "x": 1536,
+            "y": 640,
+            "sourceColumn": 6147,
+            "sourceRow": 2563,
+            "value": 8782
+          },
+          {
+            "x": 1792,
+            "y": 640,
+            "sourceColumn": 7171,
+            "sourceRow": 2563,
+            "value": 8855
+          },
+          {
+            "x": 0,
+            "y": 704,
+            "sourceColumn": 2,
+            "sourceRow": 2819,
+            "value": 8507
+          },
+          {
+            "x": 256,
+            "y": 704,
+            "sourceColumn": 1026,
+            "sourceRow": 2819,
+            "value": 8445
+          },
+          {
+            "x": 512,
+            "y": 704,
+            "sourceColumn": 2050,
+            "sourceRow": 2819,
+            "value": 8664
+          },
+          {
+            "x": 768,
+            "y": 704,
+            "sourceColumn": 3074,
+            "sourceRow": 2819,
+            "value": 8497
+          },
+          {
+            "x": 1024,
+            "y": 704,
+            "sourceColumn": 4099,
+            "sourceRow": 2819,
+            "value": 8600
+          },
+          {
+            "x": 1280,
+            "y": 704,
+            "sourceColumn": 5123,
+            "sourceRow": 2819,
+            "value": 9032
+          },
+          {
+            "x": 1536,
+            "y": 704,
+            "sourceColumn": 6147,
+            "sourceRow": 2819,
+            "value": 8694
+          },
+          {
+            "x": 1792,
+            "y": 704,
+            "sourceColumn": 7171,
+            "sourceRow": 2819,
+            "value": 8860
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "sourceColumn": 2,
+            "sourceRow": 3075,
+            "value": 8379
+          },
+          {
+            "x": 256,
+            "y": 768,
+            "sourceColumn": 1026,
+            "sourceRow": 3075,
+            "value": 8293
+          },
+          {
+            "x": 512,
+            "y": 768,
+            "sourceColumn": 2050,
+            "sourceRow": 3075,
+            "value": 8590
+          },
+          {
+            "x": 768,
+            "y": 768,
+            "sourceColumn": 3074,
+            "sourceRow": 3075,
+            "value": 8566
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "sourceColumn": 4099,
+            "sourceRow": 3075,
+            "value": 8564
+          },
+          {
+            "x": 1280,
+            "y": 768,
+            "sourceColumn": 5123,
+            "sourceRow": 3075,
+            "value": 9044
+          },
+          {
+            "x": 1536,
+            "y": 768,
+            "sourceColumn": 6147,
+            "sourceRow": 3075,
+            "value": 8664
+          },
+          {
+            "x": 1792,
+            "y": 768,
+            "sourceColumn": 7171,
+            "sourceRow": 3075,
+            "value": 8751
+          },
+          {
+            "x": 0,
+            "y": 832,
+            "sourceColumn": 2,
+            "sourceRow": 3331,
+            "value": 8284
+          },
+          {
+            "x": 256,
+            "y": 832,
+            "sourceColumn": 1026,
+            "sourceRow": 3331,
+            "value": 8452
+          },
+          {
+            "x": 512,
+            "y": 832,
+            "sourceColumn": 2050,
+            "sourceRow": 3331,
+            "value": 8614
+          },
+          {
+            "x": 768,
+            "y": 832,
+            "sourceColumn": 3074,
+            "sourceRow": 3331,
+            "value": 8506
+          },
+          {
+            "x": 1024,
+            "y": 832,
+            "sourceColumn": 4099,
+            "sourceRow": 3331,
+            "value": 8425
+          },
+          {
+            "x": 1280,
+            "y": 832,
+            "sourceColumn": 5123,
+            "sourceRow": 3331,
+            "value": 8802
+          },
+          {
+            "x": 1536,
+            "y": 832,
+            "sourceColumn": 6147,
+            "sourceRow": 3331,
+            "value": 8875
+          },
+          {
+            "x": 1792,
+            "y": 832,
+            "sourceColumn": 7171,
+            "sourceRow": 3331,
+            "value": 8588
+          },
+          {
+            "x": 0,
+            "y": 896,
+            "sourceColumn": 2,
+            "sourceRow": 3587,
+            "value": 8179
+          },
+          {
+            "x": 256,
+            "y": 896,
+            "sourceColumn": 1026,
+            "sourceRow": 3587,
+            "value": 8415
+          },
+          {
+            "x": 512,
+            "y": 896,
+            "sourceColumn": 2050,
+            "sourceRow": 3587,
+            "value": 8594
+          },
+          {
+            "x": 768,
+            "y": 896,
+            "sourceColumn": 3074,
+            "sourceRow": 3587,
+            "value": 8499
+          },
+          {
+            "x": 1024,
+            "y": 896,
+            "sourceColumn": 4099,
+            "sourceRow": 3587,
+            "value": 8414
+          },
+          {
+            "x": 1280,
+            "y": 896,
+            "sourceColumn": 5123,
+            "sourceRow": 3587,
+            "value": 8670
+          },
+          {
+            "x": 1536,
+            "y": 896,
+            "sourceColumn": 6147,
+            "sourceRow": 3587,
+            "value": 8712
+          },
+          {
+            "x": 1792,
+            "y": 896,
+            "sourceColumn": 7171,
+            "sourceRow": 3587,
+            "value": 8457
+          },
+          {
+            "x": 0,
+            "y": 960,
+            "sourceColumn": 2,
+            "sourceRow": 3843,
+            "value": 8524
+          },
+          {
+            "x": 256,
+            "y": 960,
+            "sourceColumn": 1026,
+            "sourceRow": 3843,
+            "value": 8529
+          },
+          {
+            "x": 512,
+            "y": 960,
+            "sourceColumn": 2050,
+            "sourceRow": 3843,
+            "value": 8536
+          },
+          {
+            "x": 768,
+            "y": 960,
+            "sourceColumn": 3074,
+            "sourceRow": 3843,
+            "value": 8624
+          },
+          {
+            "x": 1024,
+            "y": 960,
+            "sourceColumn": 4099,
+            "sourceRow": 3843,
+            "value": 8516
+          },
+          {
+            "x": 1280,
+            "y": 960,
+            "sourceColumn": 5123,
+            "sourceRow": 3843,
+            "value": 8618
+          },
+          {
+            "x": 1536,
+            "y": 960,
+            "sourceColumn": 6147,
+            "sourceRow": 3843,
+            "value": 8620
+          },
+          {
+            "x": 1792,
+            "y": 960,
+            "sourceColumn": 7171,
+            "sourceRow": 3843,
+            "value": 8448
+          }
+        ],
+        "outputSha256": "e02578ac6d2551a8677eeb3f58f712cfb7f67da6a2e0845398c4411ccbc5637a",
+        "outputBytes": 8389608
+      },
+      "nativeChecks": {
+        "schema": "cssearth-native-grid-oracle@1",
+        "passed": true,
+        "method": "Independent ISIS-label coordinates and byte offsets; native samples decoded by DataView. Checks source-to-compact sampling, not instrument accuracy or all native pixels.",
+        "recipe": "src/objects/venus/source/science/usgs/emissivity.json",
+        "recipeSha256": "1a00636747596757e4efebe7593ab7c4c36e1091407e689d59f17545ee9a7a59",
+        "label": "src/objects/venus/source/science/usgs/emissivity-isis.lbl",
+        "labelSha256": "7d4ffc2ca0dcf40529af68626ca9c591d449039d8fe3c161459139c28d5f13b0",
+        "grid": "src/objects/venus/source/science/usgs/emissivity.tif",
+        "gridSha256": "e02578ac6d2551a8677eeb3f58f712cfb7f67da6a2e0845398c4411ccbc5637a",
+        "nativeUrl": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif",
+        "etag": "\"5b1bec3f7dc6f982c815652e947522c5-9\"",
+        "entityChanged": false,
+        "nativeScale": 0.0001,
+        "nativeOffset": -0.000100000000000211,
+        "unitScale": 1,
+        "checks": [
+          {
+            "x": 0,
+            "y": 0,
+            "longitude": -179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 2,
+            "raw": 8494,
+            "expected": 8494,
+            "actual": 8494,
+            "range": "bytes=66399-66400",
+            "rangeSha256": "fd40e7fad7c96a55807abc55ff5edbcc8419e183d9a744a6a27051fe8ce264ff",
+            "expectedDisplay": 0.8492999999999998,
+            "actualDisplay": 0.8493,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 0,
+            "longitude": 0.087890625,
+            "latitude": 89.912109375,
+            "sourceColumn": 4099,
+            "sourceRow": 2,
+            "raw": 8491,
+            "expected": 8491,
+            "actual": 8491,
+            "range": "bytes=74593-74594",
+            "rangeSha256": "093524780fb220f596bd56611aecd6f34f999c9a0657e12b2c6dfc693edff58a",
+            "expectedDisplay": 0.8489999999999999,
+            "actualDisplay": 0.8490000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 0,
+            "longitude": 179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 2,
+            "raw": 8517,
+            "expected": 8517,
+            "actual": 8517,
+            "range": "bytes=82777-82778",
+            "rangeSha256": "1c9a022997fff82190f3b5a106c8e955d2cb123714bf5b02d16de615cabf358e",
+            "expectedDisplay": 0.8515999999999998,
+            "actualDisplay": 0.8516,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "longitude": -179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "raw": 8570,
+            "expected": 8570,
+            "actual": 8570,
+            "range": "bytes=16845663-16845664",
+            "rangeSha256": "1cf6485cbd85a9967c282b8dac4e9635146165ee91cb8a3e455ef02c4adf291f",
+            "expectedDisplay": 0.8568999999999999,
+            "actualDisplay": 0.8569000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "longitude": -89.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "raw": 8804,
+            "expected": 8804,
+            "actual": 8804,
+            "range": "bytes=16849759-16849760",
+            "rangeSha256": "c8b71b291944cde6631460fe594d9f94f2ccf2c8e114c6f719885a773c2c34ba",
+            "expectedDisplay": 0.8802999999999999,
+            "actualDisplay": 0.8803000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "longitude": 90.087890625,
+            "latitude": 44.912109375,
+            "sourceColumn": 6147,
+            "sourceRow": 1026,
+            "raw": 8801,
+            "expected": 8801,
+            "actual": 8801,
+            "range": "bytes=16857953-16857954",
+            "rangeSha256": "4ccb297e23e645d15888cc9202987f8b6bcaabea8649dcb0909ff429ecd845b5",
+            "expectedDisplay": 0.8799999999999998,
+            "actualDisplay": 0.88,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 256,
+            "longitude": 179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 1026,
+            "raw": 8588,
+            "expected": 8588,
+            "actual": 8588,
+            "range": "bytes=16862041-16862042",
+            "rangeSha256": "fb8f16d59cfe1498fd5158797a2516d10f866f904bd823f037e1ad19255f365f",
+            "expectedDisplay": 0.8586999999999998,
+            "actualDisplay": 0.8587,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "longitude": -179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 2051,
+            "raw": 8569,
+            "expected": 8569,
+            "actual": 8569,
+            "range": "bytes=33641313-33641314",
+            "rangeSha256": "dda485ca0a05dfa4cfe0494c7ba61cfba7006fc7839b035dcd83283e7757dff2",
+            "expectedDisplay": 0.8567999999999998,
+            "actualDisplay": 0.8568,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "longitude": -89.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2050,
+            "sourceRow": 2051,
+            "raw": 8578,
+            "expected": 8578,
+            "actual": 8578,
+            "range": "bytes=33645409-33645410",
+            "rangeSha256": "2e4b41254855991105a7f41fd2cf59ba61f797b808e5e6abc14f6d4c975c8279",
+            "expectedDisplay": 0.8576999999999998,
+            "actualDisplay": 0.8577,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "longitude": 0.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 4099,
+            "sourceRow": 2051,
+            "raw": 8292,
+            "expected": 8292,
+            "actual": 8292,
+            "range": "bytes=33649507-33649508",
+            "rangeSha256": "27ab88cdbeaa1ee90020d9b2e9c4dd2ce3ede881acfac400f52c045668c8997d",
+            "expectedDisplay": 0.8290999999999998,
+            "actualDisplay": 0.8291000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "longitude": 90.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 6147,
+            "sourceRow": 2051,
+            "raw": 5411,
+            "expected": 5411,
+            "actual": 5411,
+            "range": "bytes=33653603-33653604",
+            "rangeSha256": "95b428973f9c86ad78f12b89acdb4f47f0284be9aaf8e6598125a3d63853a06d",
+            "expectedDisplay": 0.5409999999999998,
+            "actualDisplay": 0.541,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 512,
+            "longitude": 179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 8191,
+            "sourceRow": 2051,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33657691-33657692",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "longitude": -179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 3075,
+            "raw": 8379,
+            "expected": 8379,
+            "actual": 8379,
+            "range": "bytes=50420577-50420578",
+            "rangeSha256": "1d9c84e419fafc1be0a64dac9565908934e96259e9145891f88622a12ba10ec3",
+            "expectedDisplay": 0.8377999999999999,
+            "actualDisplay": 0.8378000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "longitude": 0.087890625,
+            "latitude": -45.087890625,
+            "sourceColumn": 4099,
+            "sourceRow": 3075,
+            "raw": 8564,
+            "expected": 8564,
+            "actual": 8564,
+            "range": "bytes=50428771-50428772",
+            "rangeSha256": "03bd82dbf6f2d768f3041a00ffd984fc9ed5413955855454754c5c8497d26eea",
+            "expectedDisplay": 0.8562999999999998,
+            "actualDisplay": 0.8563000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 768,
+            "longitude": 179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 8191,
+            "sourceRow": 3075,
+            "raw": 8359,
+            "expected": 8359,
+            "actual": 8359,
+            "range": "bytes=50436955-50436956",
+            "rangeSha256": "04d5a5f106011b30f82f360cc0a2b74a0fb9266a81818b792dcb4895eb3117b9",
+            "expectedDisplay": 0.8357999999999999,
+            "actualDisplay": 0.8358000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 1023,
+            "longitude": -179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 4095,
+            "raw": 8549,
+            "expected": 8549,
+            "actual": 8549,
+            "range": "bytes=67134297-67134298",
+            "rangeSha256": "ca082fd9a6568cd3679e94fc74daeb0ab1f448264742d2ecffbc4e877846f8f6",
+            "expectedDisplay": 0.8547999999999998,
+            "actualDisplay": 0.8548,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 1023,
+            "longitude": 0.087890625,
+            "latitude": -89.912109375,
+            "sourceColumn": 4099,
+            "sourceRow": 4095,
+            "raw": 8548,
+            "expected": 8548,
+            "actual": 8548,
+            "range": "bytes=67142491-67142492",
+            "rangeSha256": "2615739d41db311a978c3232f5189cb5172f13ddc862712d4d750ff463b9cb8a",
+            "expectedDisplay": 0.8546999999999998,
+            "actualDisplay": 0.8547,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 1023,
+            "longitude": 179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 4095,
+            "raw": 8548,
+            "expected": 8548,
+            "actual": 8548,
+            "range": "bytes=67150675-67150676",
+            "rangeSha256": "2615739d41db311a978c3232f5189cb5172f13ddc862712d4d750ff463b9cb8a",
+            "expectedDisplay": 0.8546999999999998,
+            "actualDisplay": 0.8547,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1571,
+            "y": 544,
+            "longitude": 96.240234375,
+            "latitude": -5.712890625,
+            "sourceColumn": 6287,
+            "sourceRow": 2179,
+            "raw": 2927,
+            "expected": 2927,
+            "actual": 2927,
+            "range": "bytes=35751291-35751292",
+            "rangeSha256": "abad40b841bd35547cff49ae41a09e26b3eddea91727d270b0ee850756709783",
+            "expectedDisplay": 0.2925999999999998,
+            "actualDisplay": 0.2926,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1941,
+            "y": 528,
+            "longitude": 161.279296875,
+            "latitude": -2.900390625,
+            "sourceColumn": 7767,
+            "sourceRow": 2115,
+            "raw": 9985,
+            "expected": 9985,
+            "actual": 9985,
+            "range": "bytes=34705547-34705548",
+            "rangeSha256": "be3eea9a483308cb3134ce068e77b56e7c25af19480742880179827cb3c9b5c0",
+            "expectedDisplay": 0.9983999999999998,
+            "actualDisplay": 0.9984000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 799,
+            "y": 341,
+            "longitude": -39.462890625,
+            "latitude": 29.970703125,
+            "sourceColumn": 3198,
+            "sourceRow": 1366,
+            "raw": -32768,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=22423295-22423296",
+            "rangeSha256": "085edad400785fca7e7e90b1fac4beb776fc2beee5aa24352d5f39b5d57efcad",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "reflectivity",
+      "conversion": {
+        "schema": "cssearth-geotiff-grid-conversion@1",
+        "source": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_FresnelReflectivity_Global_4641m.tif",
+          "productId": "venus_magellan_global_fresnel_reflectivity_4641m",
+          "width": 8193,
+          "height": 4097,
+          "origin": [
+            -19014417.9036,
+            9509529.4812
+          ],
+          "resolution": [
+            4641.0588,
+            -4641.0588
+          ],
+          "coordinates": "meters",
+          "radius": 6051000,
+          "centerLongitude": 0,
+          "noData": 0,
+          "bits": 8,
+          "sampleFormat": 1
+        },
+        "output": {
+          "width": 2048,
+          "height": 1024,
+          "radius": 6051000
+        },
+        "processing": "Native cell containing each output pixel centre; original sample units retained as float32; no averaging or gap fill.",
+        "valid": 1830894,
+        "missing": 266258,
+        "minimum": 2,
+        "maximum": 197,
+        "zeroCount": 0,
+        "maxRoundingError": 0,
+        "maximumNativeRowBytes": 8193,
+        "sourceIdentity": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_FresnelReflectivity_Global_4641m.tif",
+          "etag": "\"e387f5b2bad3d1739f968bfee6bbfe19-5\"",
+          "lastModified": "Thu, 10 Nov 2022 06:16:56 GMT",
+          "totalBytes": 33600332,
+          "transferredBytes": 8400293,
+          "rangeCount": 3079
+        },
+        "anchors": [
+          {
+            "x": 0,
+            "y": 64,
+            "sourceColumn": 2,
+            "sourceRow": 258,
+            "value": 46
+          },
+          {
+            "x": 256,
+            "y": 64,
+            "sourceColumn": 1026,
+            "sourceRow": 258,
+            "value": 41
+          },
+          {
+            "x": 512,
+            "y": 64,
+            "sourceColumn": 2050,
+            "sourceRow": 258,
+            "value": 38
+          },
+          {
+            "x": 768,
+            "y": 64,
+            "sourceColumn": 3074,
+            "sourceRow": 258,
+            "value": 29
+          },
+          {
+            "x": 1024,
+            "y": 64,
+            "sourceColumn": 4099,
+            "sourceRow": 258,
+            "value": 44
+          },
+          {
+            "x": 1536,
+            "y": 64,
+            "sourceColumn": 6147,
+            "sourceRow": 258,
+            "value": 34
+          },
+          {
+            "x": 0,
+            "y": 128,
+            "sourceColumn": 2,
+            "sourceRow": 514,
+            "value": 26
+          },
+          {
+            "x": 256,
+            "y": 128,
+            "sourceColumn": 1026,
+            "sourceRow": 514,
+            "value": 23
+          },
+          {
+            "x": 512,
+            "y": 128,
+            "sourceColumn": 2050,
+            "sourceRow": 514,
+            "value": 35
+          },
+          {
+            "x": 768,
+            "y": 128,
+            "sourceColumn": 3074,
+            "sourceRow": 514,
+            "value": 30
+          },
+          {
+            "x": 1024,
+            "y": 128,
+            "sourceColumn": 4099,
+            "sourceRow": 514,
+            "value": 100
+          },
+          {
+            "x": 1280,
+            "y": 128,
+            "sourceColumn": 5123,
+            "sourceRow": 514,
+            "value": 20
+          },
+          {
+            "x": 1536,
+            "y": 128,
+            "sourceColumn": 6147,
+            "sourceRow": 514,
+            "value": 31
+          },
+          {
+            "x": 1792,
+            "y": 128,
+            "sourceColumn": 7171,
+            "sourceRow": 514,
+            "value": 47
+          },
+          {
+            "x": 0,
+            "y": 192,
+            "sourceColumn": 2,
+            "sourceRow": 770,
+            "value": 30
+          },
+          {
+            "x": 256,
+            "y": 192,
+            "sourceColumn": 1026,
+            "sourceRow": 770,
+            "value": 28
+          },
+          {
+            "x": 512,
+            "y": 192,
+            "sourceColumn": 2050,
+            "sourceRow": 770,
+            "value": 21
+          },
+          {
+            "x": 768,
+            "y": 192,
+            "sourceColumn": 3074,
+            "sourceRow": 770,
+            "value": 21
+          },
+          {
+            "x": 1024,
+            "y": 192,
+            "sourceColumn": 4099,
+            "sourceRow": 770,
+            "value": 24
+          },
+          {
+            "x": 1536,
+            "y": 192,
+            "sourceColumn": 6147,
+            "sourceRow": 770,
+            "value": 29
+          },
+          {
+            "x": 1792,
+            "y": 192,
+            "sourceColumn": 7171,
+            "sourceRow": 770,
+            "value": 38
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "value": 25
+          },
+          {
+            "x": 256,
+            "y": 256,
+            "sourceColumn": 1026,
+            "sourceRow": 1026,
+            "value": 21
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "value": 17
+          },
+          {
+            "x": 1024,
+            "y": 256,
+            "sourceColumn": 4099,
+            "sourceRow": 1026,
+            "value": 26
+          },
+          {
+            "x": 1280,
+            "y": 256,
+            "sourceColumn": 5123,
+            "sourceRow": 1026,
+            "value": 23
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "sourceColumn": 6147,
+            "sourceRow": 1026,
+            "value": 14
+          },
+          {
+            "x": 1792,
+            "y": 256,
+            "sourceColumn": 7171,
+            "sourceRow": 1026,
+            "value": 28
+          },
+          {
+            "x": 0,
+            "y": 320,
+            "sourceColumn": 2,
+            "sourceRow": 1282,
+            "value": 16
+          },
+          {
+            "x": 256,
+            "y": 320,
+            "sourceColumn": 1026,
+            "sourceRow": 1282,
+            "value": 17
+          },
+          {
+            "x": 512,
+            "y": 320,
+            "sourceColumn": 2050,
+            "sourceRow": 1282,
+            "value": 14
+          },
+          {
+            "x": 768,
+            "y": 320,
+            "sourceColumn": 3074,
+            "sourceRow": 1282,
+            "value": 20
+          },
+          {
+            "x": 1024,
+            "y": 320,
+            "sourceColumn": 4099,
+            "sourceRow": 1282,
+            "value": 16
+          },
+          {
+            "x": 1280,
+            "y": 320,
+            "sourceColumn": 5123,
+            "sourceRow": 1282,
+            "value": 41
+          },
+          {
+            "x": 1536,
+            "y": 320,
+            "sourceColumn": 6147,
+            "sourceRow": 1282,
+            "value": 32
+          },
+          {
+            "x": 1792,
+            "y": 320,
+            "sourceColumn": 7171,
+            "sourceRow": 1282,
+            "value": 22
+          },
+          {
+            "x": 0,
+            "y": 384,
+            "sourceColumn": 2,
+            "sourceRow": 1538,
+            "value": 20
+          },
+          {
+            "x": 256,
+            "y": 384,
+            "sourceColumn": 1026,
+            "sourceRow": 1538,
+            "value": 26
+          },
+          {
+            "x": 512,
+            "y": 384,
+            "sourceColumn": 2050,
+            "sourceRow": 1538,
+            "value": 16
+          },
+          {
+            "x": 768,
+            "y": 384,
+            "sourceColumn": 3074,
+            "sourceRow": 1538,
+            "value": 16
+          },
+          {
+            "x": 1024,
+            "y": 384,
+            "sourceColumn": 4099,
+            "sourceRow": 1538,
+            "value": 24
+          },
+          {
+            "x": 1280,
+            "y": 384,
+            "sourceColumn": 5123,
+            "sourceRow": 1538,
+            "value": 14
+          },
+          {
+            "x": 1536,
+            "y": 384,
+            "sourceColumn": 6147,
+            "sourceRow": 1538,
+            "value": 39
+          },
+          {
+            "x": 1792,
+            "y": 384,
+            "sourceColumn": 7171,
+            "sourceRow": 1538,
+            "value": 17
+          },
+          {
+            "x": 0,
+            "y": 448,
+            "sourceColumn": 2,
+            "sourceRow": 1794,
+            "value": 24
+          },
+          {
+            "x": 256,
+            "y": 448,
+            "sourceColumn": 1026,
+            "sourceRow": 1794,
+            "value": 18
+          },
+          {
+            "x": 512,
+            "y": 448,
+            "sourceColumn": 2050,
+            "sourceRow": 1794,
+            "value": 20
+          },
+          {
+            "x": 768,
+            "y": 448,
+            "sourceColumn": 3074,
+            "sourceRow": 1794,
+            "value": 16
+          },
+          {
+            "x": 1024,
+            "y": 448,
+            "sourceColumn": 4099,
+            "sourceRow": 1794,
+            "value": 25
+          },
+          {
+            "x": 1280,
+            "y": 448,
+            "sourceColumn": 5123,
+            "sourceRow": 1794,
+            "value": 18
+          },
+          {
+            "x": 1536,
+            "y": 448,
+            "sourceColumn": 6147,
+            "sourceRow": 1794,
+            "value": 27
+          },
+          {
+            "x": 1792,
+            "y": 448,
+            "sourceColumn": 7171,
+            "sourceRow": 1794,
+            "value": 14
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "sourceColumn": 2,
+            "sourceRow": 2051,
+            "value": 20
+          },
+          {
+            "x": 256,
+            "y": 512,
+            "sourceColumn": 1026,
+            "sourceRow": 2051,
+            "value": 20
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "sourceColumn": 2050,
+            "sourceRow": 2051,
+            "value": 20
+          },
+          {
+            "x": 768,
+            "y": 512,
+            "sourceColumn": 3074,
+            "sourceRow": 2051,
+            "value": 20
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "sourceColumn": 4099,
+            "sourceRow": 2051,
+            "value": 18
+          },
+          {
+            "x": 1280,
+            "y": 512,
+            "sourceColumn": 5123,
+            "sourceRow": 2051,
+            "value": 16
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "sourceColumn": 6147,
+            "sourceRow": 2051,
+            "value": 87
+          },
+          {
+            "x": 1792,
+            "y": 512,
+            "sourceColumn": 7171,
+            "sourceRow": 2051,
+            "value": 20
+          },
+          {
+            "x": 0,
+            "y": 576,
+            "sourceColumn": 2,
+            "sourceRow": 2307,
+            "value": 19
+          },
+          {
+            "x": 256,
+            "y": 576,
+            "sourceColumn": 1026,
+            "sourceRow": 2307,
+            "value": 19
+          },
+          {
+            "x": 512,
+            "y": 576,
+            "sourceColumn": 2050,
+            "sourceRow": 2307,
+            "value": 29
+          },
+          {
+            "x": 768,
+            "y": 576,
+            "sourceColumn": 3074,
+            "sourceRow": 2307,
+            "value": 28
+          },
+          {
+            "x": 1024,
+            "y": 576,
+            "sourceColumn": 4099,
+            "sourceRow": 2307,
+            "value": 27
+          },
+          {
+            "x": 1280,
+            "y": 576,
+            "sourceColumn": 5123,
+            "sourceRow": 2307,
+            "value": 21
+          },
+          {
+            "x": 1536,
+            "y": 576,
+            "sourceColumn": 6147,
+            "sourceRow": 2307,
+            "value": 51
+          },
+          {
+            "x": 1792,
+            "y": 576,
+            "sourceColumn": 7171,
+            "sourceRow": 2307,
+            "value": 22
+          },
+          {
+            "x": 0,
+            "y": 640,
+            "sourceColumn": 2,
+            "sourceRow": 2563,
+            "value": 22
+          },
+          {
+            "x": 256,
+            "y": 640,
+            "sourceColumn": 1026,
+            "sourceRow": 2563,
+            "value": 21
+          },
+          {
+            "x": 512,
+            "y": 640,
+            "sourceColumn": 2050,
+            "sourceRow": 2563,
+            "value": 16
+          },
+          {
+            "x": 768,
+            "y": 640,
+            "sourceColumn": 3074,
+            "sourceRow": 2563,
+            "value": 30
+          },
+          {
+            "x": 1024,
+            "y": 640,
+            "sourceColumn": 4099,
+            "sourceRow": 2563,
+            "value": 14
+          },
+          {
+            "x": 1280,
+            "y": 640,
+            "sourceColumn": 5123,
+            "sourceRow": 2563,
+            "value": 21
+          },
+          {
+            "x": 1536,
+            "y": 640,
+            "sourceColumn": 6147,
+            "sourceRow": 2563,
+            "value": 18
+          },
+          {
+            "x": 1792,
+            "y": 640,
+            "sourceColumn": 7171,
+            "sourceRow": 2563,
+            "value": 18
+          },
+          {
+            "x": 0,
+            "y": 704,
+            "sourceColumn": 2,
+            "sourceRow": 2819,
+            "value": 29
+          },
+          {
+            "x": 256,
+            "y": 704,
+            "sourceColumn": 1026,
+            "sourceRow": 2819,
+            "value": 33
+          },
+          {
+            "x": 512,
+            "y": 704,
+            "sourceColumn": 2050,
+            "sourceRow": 2819,
+            "value": 30
+          },
+          {
+            "x": 768,
+            "y": 704,
+            "sourceColumn": 3074,
+            "sourceRow": 2819,
+            "value": 23
+          },
+          {
+            "x": 1024,
+            "y": 704,
+            "sourceColumn": 4099,
+            "sourceRow": 2819,
+            "value": 24
+          },
+          {
+            "x": 1280,
+            "y": 704,
+            "sourceColumn": 5123,
+            "sourceRow": 2819,
+            "value": 16
+          },
+          {
+            "x": 1536,
+            "y": 704,
+            "sourceColumn": 6147,
+            "sourceRow": 2819,
+            "value": 23
+          },
+          {
+            "x": 1792,
+            "y": 704,
+            "sourceColumn": 7171,
+            "sourceRow": 2819,
+            "value": 20
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "sourceColumn": 2,
+            "sourceRow": 3075,
+            "value": 32
+          },
+          {
+            "x": 256,
+            "y": 768,
+            "sourceColumn": 1026,
+            "sourceRow": 3075,
+            "value": 50
+          },
+          {
+            "x": 512,
+            "y": 768,
+            "sourceColumn": 2050,
+            "sourceRow": 3075,
+            "value": 40
+          },
+          {
+            "x": 768,
+            "y": 768,
+            "sourceColumn": 3074,
+            "sourceRow": 3075,
+            "value": 32
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "sourceColumn": 4099,
+            "sourceRow": 3075,
+            "value": 34
+          },
+          {
+            "x": 1280,
+            "y": 768,
+            "sourceColumn": 5123,
+            "sourceRow": 3075,
+            "value": 18
+          },
+          {
+            "x": 1536,
+            "y": 768,
+            "sourceColumn": 6147,
+            "sourceRow": 3075,
+            "value": 34
+          },
+          {
+            "x": 1792,
+            "y": 768,
+            "sourceColumn": 7171,
+            "sourceRow": 3075,
+            "value": 29
+          },
+          {
+            "x": 0,
+            "y": 832,
+            "sourceColumn": 2,
+            "sourceRow": 3331,
+            "value": 87
+          },
+          {
+            "x": 256,
+            "y": 832,
+            "sourceColumn": 1026,
+            "sourceRow": 3331,
+            "value": 61
+          },
+          {
+            "x": 512,
+            "y": 832,
+            "sourceColumn": 2050,
+            "sourceRow": 3331,
+            "value": 51
+          },
+          {
+            "x": 768,
+            "y": 832,
+            "sourceColumn": 3074,
+            "sourceRow": 3331,
+            "value": 45
+          },
+          {
+            "x": 1024,
+            "y": 832,
+            "sourceColumn": 4099,
+            "sourceRow": 3331,
+            "value": 50
+          },
+          {
+            "x": 1536,
+            "y": 832,
+            "sourceColumn": 6147,
+            "sourceRow": 3331,
+            "value": 33
+          },
+          {
+            "x": 1792,
+            "y": 832,
+            "sourceColumn": 7171,
+            "sourceRow": 3331,
+            "value": 43
+          },
+          {
+            "x": 0,
+            "y": 896,
+            "sourceColumn": 2,
+            "sourceRow": 3587,
+            "value": 74
+          },
+          {
+            "x": 256,
+            "y": 896,
+            "sourceColumn": 1026,
+            "sourceRow": 3587,
+            "value": 50
+          },
+          {
+            "x": 512,
+            "y": 896,
+            "sourceColumn": 2050,
+            "sourceRow": 3587,
+            "value": 40
+          },
+          {
+            "x": 768,
+            "y": 896,
+            "sourceColumn": 3074,
+            "sourceRow": 3587,
+            "value": 35
+          },
+          {
+            "x": 1024,
+            "y": 896,
+            "sourceColumn": 4099,
+            "sourceRow": 3587,
+            "value": 48
+          },
+          {
+            "x": 1536,
+            "y": 896,
+            "sourceColumn": 6147,
+            "sourceRow": 3587,
+            "value": 30
+          },
+          {
+            "x": 0,
+            "y": 960,
+            "sourceColumn": 2,
+            "sourceRow": 3843,
+            "value": 34
+          },
+          {
+            "x": 256,
+            "y": 960,
+            "sourceColumn": 1026,
+            "sourceRow": 3843,
+            "value": 28
+          },
+          {
+            "x": 512,
+            "y": 960,
+            "sourceColumn": 2050,
+            "sourceRow": 3843,
+            "value": 37
+          },
+          {
+            "x": 1280,
+            "y": 960,
+            "sourceColumn": 5123,
+            "sourceRow": 3843,
+            "value": 38
+          },
+          {
+            "x": 1536,
+            "y": 960,
+            "sourceColumn": 6147,
+            "sourceRow": 3843,
+            "value": 32
+          },
+          {
+            "x": 1792,
+            "y": 960,
+            "sourceColumn": 7171,
+            "sourceRow": 3843,
+            "value": 39
+          }
+        ],
+        "outputSha256": "1914b333296b777b25c110dc929f9ddb9b8a4f676995e698696c0b5c944cbe3c",
+        "outputBytes": 8389608
+      },
+      "nativeChecks": {
+        "schema": "cssearth-native-grid-oracle@1",
+        "passed": true,
+        "method": "Independent ISIS-label coordinates and byte offsets; native samples decoded by DataView. Checks source-to-compact sampling, not instrument accuracy or all native pixels.",
+        "recipe": "src/objects/venus/source/science/usgs/reflectivity.json",
+        "recipeSha256": "2a4c31ca6c22f254252aaca30eaa45595c96ec9fff259a1616d3539c8058aca5",
+        "label": "src/objects/venus/source/science/usgs/reflectivity-isis.lbl",
+        "labelSha256": "2ce3be4d72fa3639e1d21f2f539587eb05376e8a141d1c86ff4e33ec95cc11c8",
+        "grid": "src/objects/venus/source/science/usgs/reflectivity.tif",
+        "gridSha256": "1914b333296b777b25c110dc929f9ddb9b8a4f676995e698696c0b5c944cbe3c",
+        "nativeUrl": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_FresnelReflectivity_Global_4641m.tif",
+        "etag": "\"e387f5b2bad3d1739f968bfee6bbfe19-5\"",
+        "entityChanged": false,
+        "nativeScale": 0.005,
+        "nativeOffset": -0.005,
+        "unitScale": 1,
+        "checks": [
+          {
+            "x": 0,
+            "y": 0,
+            "longitude": -179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 2,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=49999-49999",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 0,
+            "longitude": 0.087890625,
+            "latitude": 89.912109375,
+            "sourceColumn": 4099,
+            "sourceRow": 2,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=54096-54096",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 0,
+            "longitude": 179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 2,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=58188-58188",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "longitude": -179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "raw": 25,
+            "expected": 25,
+            "actual": 25,
+            "range": "bytes=8439631-8439631",
+            "rangeSha256": "68aa2e2ee5dff96e3355e6c7ee373e3d6a4e17f75f9518d843709c0c9bc3e3d4",
+            "expectedDisplay": 0.12,
+            "actualDisplay": 0.12,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "longitude": -89.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "raw": 17,
+            "expected": 17,
+            "actual": 17,
+            "range": "bytes=8441679-8441679",
+            "rangeSha256": "4a64a107f0cb32536e5bce6c98c393db21cca7f4ea187ba8c4dca8b51d4ea80a",
+            "expectedDisplay": 0.08,
+            "actualDisplay": 0.08,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "longitude": 90.087890625,
+            "latitude": 44.912109375,
+            "sourceColumn": 6147,
+            "sourceRow": 1026,
+            "raw": 14,
+            "expected": 14,
+            "actual": 14,
+            "range": "bytes=8445776-8445776",
+            "rangeSha256": "4d7b3ef7300acf70c892d8327db8272f54434adbc61a4e130a563cb59a0d0f47",
+            "expectedDisplay": 0.065,
+            "actualDisplay": 0.065,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 256,
+            "longitude": 179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 1026,
+            "raw": 27,
+            "expected": 27,
+            "actual": 27,
+            "range": "bytes=8447820-8447820",
+            "rangeSha256": "77adfc95029e73b173f60e556f915b0cd8850848111358b1c370fb7c154e61fd",
+            "expectedDisplay": 0.13,
+            "actualDisplay": 0.13,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "longitude": -179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 2051,
+            "raw": 20,
+            "expected": 20,
+            "actual": 20,
+            "range": "bytes=16837456-16837456",
+            "rangeSha256": "83891d7fe85c33e52c8b4e5814c92fb6a3b9467299200538a6babaa8b452d879",
+            "expectedDisplay": 0.095,
+            "actualDisplay": 0.095,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "longitude": -89.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2050,
+            "sourceRow": 2051,
+            "raw": 20,
+            "expected": 20,
+            "actual": 20,
+            "range": "bytes=16839504-16839504",
+            "rangeSha256": "83891d7fe85c33e52c8b4e5814c92fb6a3b9467299200538a6babaa8b452d879",
+            "expectedDisplay": 0.095,
+            "actualDisplay": 0.095,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "longitude": 0.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 4099,
+            "sourceRow": 2051,
+            "raw": 18,
+            "expected": 18,
+            "actual": 18,
+            "range": "bytes=16841553-16841553",
+            "rangeSha256": "f299791cddd3d6664f6670842812ef6053eb6501bd6282a476bbbf3ee91e750c",
+            "expectedDisplay": 0.08499999999999999,
+            "actualDisplay": 0.08499999999999999,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "longitude": 90.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 6147,
+            "sourceRow": 2051,
+            "raw": 87,
+            "expected": 87,
+            "actual": 87,
+            "range": "bytes=16843601-16843601",
+            "rangeSha256": "fcb5f40df9be6bae66c1d77a6c15968866a9e6cbd7314ca432b019d17392f6f4",
+            "expectedDisplay": 0.43,
+            "actualDisplay": 0.43,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 512,
+            "longitude": 179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 8191,
+            "sourceRow": 2051,
+            "raw": 20,
+            "expected": 20,
+            "actual": 20,
+            "range": "bytes=16845645-16845645",
+            "rangeSha256": "83891d7fe85c33e52c8b4e5814c92fb6a3b9467299200538a6babaa8b452d879",
+            "expectedDisplay": 0.095,
+            "actualDisplay": 0.095,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "longitude": -179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 3075,
+            "raw": 32,
+            "expected": 32,
+            "actual": 32,
+            "range": "bytes=25227088-25227088",
+            "rangeSha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+            "expectedDisplay": 0.155,
+            "actualDisplay": 0.155,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "longitude": 0.087890625,
+            "latitude": -45.087890625,
+            "sourceColumn": 4099,
+            "sourceRow": 3075,
+            "raw": 34,
+            "expected": 34,
+            "actual": 34,
+            "range": "bytes=25231185-25231185",
+            "rangeSha256": "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007",
+            "expectedDisplay": 0.165,
+            "actualDisplay": 0.165,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 768,
+            "longitude": 179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 8191,
+            "sourceRow": 3075,
+            "raw": 42,
+            "expected": 42,
+            "actual": 42,
+            "range": "bytes=25235277-25235277",
+            "rangeSha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+            "expectedDisplay": 0.205,
+            "actualDisplay": 0.205,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 1023,
+            "longitude": -179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 4095,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33583948-33583948",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 1023,
+            "longitude": 0.087890625,
+            "latitude": -89.912109375,
+            "sourceColumn": 4099,
+            "sourceRow": 4095,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33588045-33588045",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 1023,
+            "longitude": 179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 4095,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33592137-33592137",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1046,
+            "y": 412,
+            "longitude": 3.955078125,
+            "latitude": 17.490234375,
+            "sourceColumn": 4187,
+            "sourceRow": 1650,
+            "raw": 2,
+            "expected": 2,
+            "actual": 2,
+            "range": "bytes=13556248-13556248",
+            "rangeSha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986",
+            "expectedDisplay": 0.005,
+            "actualDisplay": 0.005,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 239,
+            "y": 36,
+            "longitude": -137.900390625,
+            "latitude": 83.583984375,
+            "sourceColumn": 958,
+            "sourceRow": 146,
+            "raw": 197,
+            "expected": 197,
+            "actual": 197,
+            "range": "bytes=1230747-1230747",
+            "rangeSha256": "5a0ec31daa84fa27666da56af259b9351086bba0b9ab4aa6007e3e6fb1866b47",
+            "expectedDisplay": 0.98,
+            "actualDisplay": 0.98,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 779,
+            "y": 341,
+            "longitude": -42.978515625,
+            "latitude": 29.970703125,
+            "sourceColumn": 3118,
+            "sourceRow": 1366,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=11228367-11228367",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "roughness",
+      "conversion": {
+        "schema": "cssearth-geotiff-grid-conversion@1",
+        "source": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MeterScaleSlope_Global_4641m.tif",
+          "productId": "venus_magellan_global_meter_scale_slope_4641m",
+          "width": 8193,
+          "height": 4097,
+          "origin": [
+            -19014417.9036,
+            9509529.4812
+          ],
+          "resolution": [
+            4641.0588,
+            -4641.0588
+          ],
+          "coordinates": "meters",
+          "radius": 6051000,
+          "centerLongitude": 0,
+          "noData": 0,
+          "bits": 8,
+          "sampleFormat": 1
+        },
+        "output": {
+          "width": 2048,
+          "height": 1024,
+          "radius": 6051000
+        },
+        "processing": "Native cell containing each output pixel centre; original sample units retained as float32; no averaging or gap fill.",
+        "valid": 1922691,
+        "missing": 174461,
+        "minimum": 3,
+        "maximum": 128,
+        "zeroCount": 0,
+        "maxRoundingError": 0,
+        "maximumNativeRowBytes": 8193,
+        "sourceIdentity": {
+          "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MeterScaleSlope_Global_4641m.tif",
+          "etag": "\"3866d1ee904b4cbb0a86dc26b3039db6-5\"",
+          "lastModified": "Thu, 10 Nov 2022 08:10:18 GMT",
+          "totalBytes": 33600330,
+          "transferredBytes": 8400293,
+          "rangeCount": 3079
+        },
+        "anchors": [
+          {
+            "x": 0,
+            "y": 64,
+            "sourceColumn": 2,
+            "sourceRow": 258,
+            "value": 13
+          },
+          {
+            "x": 256,
+            "y": 64,
+            "sourceColumn": 1026,
+            "sourceRow": 258,
+            "value": 34
+          },
+          {
+            "x": 512,
+            "y": 64,
+            "sourceColumn": 2050,
+            "sourceRow": 258,
+            "value": 24
+          },
+          {
+            "x": 768,
+            "y": 64,
+            "sourceColumn": 3074,
+            "sourceRow": 258,
+            "value": 23
+          },
+          {
+            "x": 1024,
+            "y": 64,
+            "sourceColumn": 4099,
+            "sourceRow": 258,
+            "value": 26
+          },
+          {
+            "x": 1280,
+            "y": 64,
+            "sourceColumn": 5123,
+            "sourceRow": 258,
+            "value": 20
+          },
+          {
+            "x": 1536,
+            "y": 64,
+            "sourceColumn": 6147,
+            "sourceRow": 258,
+            "value": 13
+          },
+          {
+            "x": 1792,
+            "y": 64,
+            "sourceColumn": 7171,
+            "sourceRow": 258,
+            "value": 14
+          },
+          {
+            "x": 0,
+            "y": 128,
+            "sourceColumn": 2,
+            "sourceRow": 514,
+            "value": 14
+          },
+          {
+            "x": 256,
+            "y": 128,
+            "sourceColumn": 1026,
+            "sourceRow": 514,
+            "value": 43
+          },
+          {
+            "x": 512,
+            "y": 128,
+            "sourceColumn": 2050,
+            "sourceRow": 514,
+            "value": 29
+          },
+          {
+            "x": 768,
+            "y": 128,
+            "sourceColumn": 3074,
+            "sourceRow": 514,
+            "value": 32
+          },
+          {
+            "x": 1024,
+            "y": 128,
+            "sourceColumn": 4099,
+            "sourceRow": 514,
+            "value": 49
+          },
+          {
+            "x": 1280,
+            "y": 128,
+            "sourceColumn": 5123,
+            "sourceRow": 514,
+            "value": 67
+          },
+          {
+            "x": 1536,
+            "y": 128,
+            "sourceColumn": 6147,
+            "sourceRow": 514,
+            "value": 35
+          },
+          {
+            "x": 1792,
+            "y": 128,
+            "sourceColumn": 7171,
+            "sourceRow": 514,
+            "value": 43
+          },
+          {
+            "x": 0,
+            "y": 192,
+            "sourceColumn": 2,
+            "sourceRow": 770,
+            "value": 41
+          },
+          {
+            "x": 256,
+            "y": 192,
+            "sourceColumn": 1026,
+            "sourceRow": 770,
+            "value": 32
+          },
+          {
+            "x": 512,
+            "y": 192,
+            "sourceColumn": 2050,
+            "sourceRow": 770,
+            "value": 32
+          },
+          {
+            "x": 768,
+            "y": 192,
+            "sourceColumn": 3074,
+            "sourceRow": 770,
+            "value": 29
+          },
+          {
+            "x": 1024,
+            "y": 192,
+            "sourceColumn": 4099,
+            "sourceRow": 770,
+            "value": 21
+          },
+          {
+            "x": 1280,
+            "y": 192,
+            "sourceColumn": 5123,
+            "sourceRow": 770,
+            "value": 38
+          },
+          {
+            "x": 1536,
+            "y": 192,
+            "sourceColumn": 6147,
+            "sourceRow": 770,
+            "value": 21
+          },
+          {
+            "x": 1792,
+            "y": 192,
+            "sourceColumn": 7171,
+            "sourceRow": 770,
+            "value": 32
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "value": 30
+          },
+          {
+            "x": 256,
+            "y": 256,
+            "sourceColumn": 1026,
+            "sourceRow": 1026,
+            "value": 85
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "value": 31
+          },
+          {
+            "x": 1024,
+            "y": 256,
+            "sourceColumn": 4099,
+            "sourceRow": 1026,
+            "value": 13
+          },
+          {
+            "x": 1280,
+            "y": 256,
+            "sourceColumn": 5123,
+            "sourceRow": 1026,
+            "value": 18
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "sourceColumn": 6147,
+            "sourceRow": 1026,
+            "value": 30
+          },
+          {
+            "x": 1792,
+            "y": 256,
+            "sourceColumn": 7171,
+            "sourceRow": 1026,
+            "value": 29
+          },
+          {
+            "x": 0,
+            "y": 320,
+            "sourceColumn": 2,
+            "sourceRow": 1282,
+            "value": 44
+          },
+          {
+            "x": 256,
+            "y": 320,
+            "sourceColumn": 1026,
+            "sourceRow": 1282,
+            "value": 28
+          },
+          {
+            "x": 512,
+            "y": 320,
+            "sourceColumn": 2050,
+            "sourceRow": 1282,
+            "value": 24
+          },
+          {
+            "x": 768,
+            "y": 320,
+            "sourceColumn": 3074,
+            "sourceRow": 1282,
+            "value": 14
+          },
+          {
+            "x": 1024,
+            "y": 320,
+            "sourceColumn": 4099,
+            "sourceRow": 1282,
+            "value": 37
+          },
+          {
+            "x": 1280,
+            "y": 320,
+            "sourceColumn": 5123,
+            "sourceRow": 1282,
+            "value": 15
+          },
+          {
+            "x": 1536,
+            "y": 320,
+            "sourceColumn": 6147,
+            "sourceRow": 1282,
+            "value": 21
+          },
+          {
+            "x": 1792,
+            "y": 320,
+            "sourceColumn": 7171,
+            "sourceRow": 1282,
+            "value": 17
+          },
+          {
+            "x": 0,
+            "y": 384,
+            "sourceColumn": 2,
+            "sourceRow": 1538,
+            "value": 27
+          },
+          {
+            "x": 256,
+            "y": 384,
+            "sourceColumn": 1026,
+            "sourceRow": 1538,
+            "value": 63
+          },
+          {
+            "x": 512,
+            "y": 384,
+            "sourceColumn": 2050,
+            "sourceRow": 1538,
+            "value": 20
+          },
+          {
+            "x": 768,
+            "y": 384,
+            "sourceColumn": 3074,
+            "sourceRow": 1538,
+            "value": 32
+          },
+          {
+            "x": 1024,
+            "y": 384,
+            "sourceColumn": 4099,
+            "sourceRow": 1538,
+            "value": 30
+          },
+          {
+            "x": 1280,
+            "y": 384,
+            "sourceColumn": 5123,
+            "sourceRow": 1538,
+            "value": 17
+          },
+          {
+            "x": 1536,
+            "y": 384,
+            "sourceColumn": 6147,
+            "sourceRow": 1538,
+            "value": 13
+          },
+          {
+            "x": 1792,
+            "y": 384,
+            "sourceColumn": 7171,
+            "sourceRow": 1538,
+            "value": 19
+          },
+          {
+            "x": 0,
+            "y": 448,
+            "sourceColumn": 2,
+            "sourceRow": 1794,
+            "value": 38
+          },
+          {
+            "x": 256,
+            "y": 448,
+            "sourceColumn": 1026,
+            "sourceRow": 1794,
+            "value": 37
+          },
+          {
+            "x": 512,
+            "y": 448,
+            "sourceColumn": 2050,
+            "sourceRow": 1794,
+            "value": 32
+          },
+          {
+            "x": 768,
+            "y": 448,
+            "sourceColumn": 3074,
+            "sourceRow": 1794,
+            "value": 23
+          },
+          {
+            "x": 1024,
+            "y": 448,
+            "sourceColumn": 4099,
+            "sourceRow": 1794,
+            "value": 30
+          },
+          {
+            "x": 1280,
+            "y": 448,
+            "sourceColumn": 5123,
+            "sourceRow": 1794,
+            "value": 26
+          },
+          {
+            "x": 1536,
+            "y": 448,
+            "sourceColumn": 6147,
+            "sourceRow": 1794,
+            "value": 39
+          },
+          {
+            "x": 1792,
+            "y": 448,
+            "sourceColumn": 7171,
+            "sourceRow": 1794,
+            "value": 24
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "sourceColumn": 2,
+            "sourceRow": 2051,
+            "value": 27
+          },
+          {
+            "x": 256,
+            "y": 512,
+            "sourceColumn": 1026,
+            "sourceRow": 2051,
+            "value": 47
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "sourceColumn": 2050,
+            "sourceRow": 2051,
+            "value": 27
+          },
+          {
+            "x": 768,
+            "y": 512,
+            "sourceColumn": 3074,
+            "sourceRow": 2051,
+            "value": 36
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "sourceColumn": 4099,
+            "sourceRow": 2051,
+            "value": 23
+          },
+          {
+            "x": 1280,
+            "y": 512,
+            "sourceColumn": 5123,
+            "sourceRow": 2051,
+            "value": 21
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "sourceColumn": 6147,
+            "sourceRow": 2051,
+            "value": 54
+          },
+          {
+            "x": 1792,
+            "y": 512,
+            "sourceColumn": 7171,
+            "sourceRow": 2051,
+            "value": 38
+          },
+          {
+            "x": 0,
+            "y": 576,
+            "sourceColumn": 2,
+            "sourceRow": 2307,
+            "value": 19
+          },
+          {
+            "x": 256,
+            "y": 576,
+            "sourceColumn": 1026,
+            "sourceRow": 2307,
+            "value": 21
+          },
+          {
+            "x": 512,
+            "y": 576,
+            "sourceColumn": 2050,
+            "sourceRow": 2307,
+            "value": 28
+          },
+          {
+            "x": 768,
+            "y": 576,
+            "sourceColumn": 3074,
+            "sourceRow": 2307,
+            "value": 22
+          },
+          {
+            "x": 1024,
+            "y": 576,
+            "sourceColumn": 4099,
+            "sourceRow": 2307,
+            "value": 11
+          },
+          {
+            "x": 1280,
+            "y": 576,
+            "sourceColumn": 5123,
+            "sourceRow": 2307,
+            "value": 29
+          },
+          {
+            "x": 1536,
+            "y": 576,
+            "sourceColumn": 6147,
+            "sourceRow": 2307,
+            "value": 22
+          },
+          {
+            "x": 1792,
+            "y": 576,
+            "sourceColumn": 7171,
+            "sourceRow": 2307,
+            "value": 35
+          },
+          {
+            "x": 0,
+            "y": 640,
+            "sourceColumn": 2,
+            "sourceRow": 2563,
+            "value": 17
+          },
+          {
+            "x": 256,
+            "y": 640,
+            "sourceColumn": 1026,
+            "sourceRow": 2563,
+            "value": 19
+          },
+          {
+            "x": 512,
+            "y": 640,
+            "sourceColumn": 2050,
+            "sourceRow": 2563,
+            "value": 36
+          },
+          {
+            "x": 768,
+            "y": 640,
+            "sourceColumn": 3074,
+            "sourceRow": 2563,
+            "value": 11
+          },
+          {
+            "x": 1024,
+            "y": 640,
+            "sourceColumn": 4099,
+            "sourceRow": 2563,
+            "value": 52
+          },
+          {
+            "x": 1280,
+            "y": 640,
+            "sourceColumn": 5123,
+            "sourceRow": 2563,
+            "value": 24
+          },
+          {
+            "x": 1536,
+            "y": 640,
+            "sourceColumn": 6147,
+            "sourceRow": 2563,
+            "value": 23
+          },
+          {
+            "x": 1792,
+            "y": 640,
+            "sourceColumn": 7171,
+            "sourceRow": 2563,
+            "value": 58
+          },
+          {
+            "x": 0,
+            "y": 704,
+            "sourceColumn": 2,
+            "sourceRow": 2819,
+            "value": 18
+          },
+          {
+            "x": 256,
+            "y": 704,
+            "sourceColumn": 1026,
+            "sourceRow": 2819,
+            "value": 25
+          },
+          {
+            "x": 512,
+            "y": 704,
+            "sourceColumn": 2050,
+            "sourceRow": 2819,
+            "value": 41
+          },
+          {
+            "x": 768,
+            "y": 704,
+            "sourceColumn": 3074,
+            "sourceRow": 2819,
+            "value": 44
+          },
+          {
+            "x": 1024,
+            "y": 704,
+            "sourceColumn": 4099,
+            "sourceRow": 2819,
+            "value": 28
+          },
+          {
+            "x": 1280,
+            "y": 704,
+            "sourceColumn": 5123,
+            "sourceRow": 2819,
+            "value": 35
+          },
+          {
+            "x": 1536,
+            "y": 704,
+            "sourceColumn": 6147,
+            "sourceRow": 2819,
+            "value": 13
+          },
+          {
+            "x": 1792,
+            "y": 704,
+            "sourceColumn": 7171,
+            "sourceRow": 2819,
+            "value": 34
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "sourceColumn": 2,
+            "sourceRow": 3075,
+            "value": 14
+          },
+          {
+            "x": 256,
+            "y": 768,
+            "sourceColumn": 1026,
+            "sourceRow": 3075,
+            "value": 20
+          },
+          {
+            "x": 512,
+            "y": 768,
+            "sourceColumn": 2050,
+            "sourceRow": 3075,
+            "value": 33
+          },
+          {
+            "x": 768,
+            "y": 768,
+            "sourceColumn": 3074,
+            "sourceRow": 3075,
+            "value": 26
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "sourceColumn": 4099,
+            "sourceRow": 3075,
+            "value": 25
+          },
+          {
+            "x": 1280,
+            "y": 768,
+            "sourceColumn": 5123,
+            "sourceRow": 3075,
+            "value": 25
+          },
+          {
+            "x": 1536,
+            "y": 768,
+            "sourceColumn": 6147,
+            "sourceRow": 3075,
+            "value": 37
+          },
+          {
+            "x": 1792,
+            "y": 768,
+            "sourceColumn": 7171,
+            "sourceRow": 3075,
+            "value": 27
+          },
+          {
+            "x": 0,
+            "y": 832,
+            "sourceColumn": 2,
+            "sourceRow": 3331,
+            "value": 49
+          },
+          {
+            "x": 256,
+            "y": 832,
+            "sourceColumn": 1026,
+            "sourceRow": 3331,
+            "value": 42
+          },
+          {
+            "x": 512,
+            "y": 832,
+            "sourceColumn": 2050,
+            "sourceRow": 3331,
+            "value": 45
+          },
+          {
+            "x": 768,
+            "y": 832,
+            "sourceColumn": 3074,
+            "sourceRow": 3331,
+            "value": 24
+          },
+          {
+            "x": 1024,
+            "y": 832,
+            "sourceColumn": 4099,
+            "sourceRow": 3331,
+            "value": 21
+          },
+          {
+            "x": 1536,
+            "y": 832,
+            "sourceColumn": 6147,
+            "sourceRow": 3331,
+            "value": 18
+          },
+          {
+            "x": 1792,
+            "y": 832,
+            "sourceColumn": 7171,
+            "sourceRow": 3331,
+            "value": 40
+          },
+          {
+            "x": 0,
+            "y": 896,
+            "sourceColumn": 2,
+            "sourceRow": 3587,
+            "value": 27
+          },
+          {
+            "x": 256,
+            "y": 896,
+            "sourceColumn": 1026,
+            "sourceRow": 3587,
+            "value": 16
+          },
+          {
+            "x": 512,
+            "y": 896,
+            "sourceColumn": 2050,
+            "sourceRow": 3587,
+            "value": 25
+          },
+          {
+            "x": 768,
+            "y": 896,
+            "sourceColumn": 3074,
+            "sourceRow": 3587,
+            "value": 29
+          },
+          {
+            "x": 1024,
+            "y": 896,
+            "sourceColumn": 4099,
+            "sourceRow": 3587,
+            "value": 31
+          },
+          {
+            "x": 1536,
+            "y": 896,
+            "sourceColumn": 6147,
+            "sourceRow": 3587,
+            "value": 19
+          },
+          {
+            "x": 0,
+            "y": 960,
+            "sourceColumn": 2,
+            "sourceRow": 3843,
+            "value": 25
+          },
+          {
+            "x": 256,
+            "y": 960,
+            "sourceColumn": 1026,
+            "sourceRow": 3843,
+            "value": 35
+          },
+          {
+            "x": 512,
+            "y": 960,
+            "sourceColumn": 2050,
+            "sourceRow": 3843,
+            "value": 40
+          },
+          {
+            "x": 768,
+            "y": 960,
+            "sourceColumn": 3074,
+            "sourceRow": 3843,
+            "value": 46
+          },
+          {
+            "x": 1024,
+            "y": 960,
+            "sourceColumn": 4099,
+            "sourceRow": 3843,
+            "value": 32
+          },
+          {
+            "x": 1280,
+            "y": 960,
+            "sourceColumn": 5123,
+            "sourceRow": 3843,
+            "value": 64
+          },
+          {
+            "x": 1536,
+            "y": 960,
+            "sourceColumn": 6147,
+            "sourceRow": 3843,
+            "value": 25
+          },
+          {
+            "x": 1792,
+            "y": 960,
+            "sourceColumn": 7171,
+            "sourceRow": 3843,
+            "value": 31
+          }
+        ],
+        "outputSha256": "36c972dd089b050b4df6166a9e76d96a5c5570132e397a7cbfd4166399725cbf",
+        "outputBytes": 8389608
+      },
+      "nativeChecks": {
+        "schema": "cssearth-native-grid-oracle@1",
+        "passed": true,
+        "method": "Independent ISIS-label coordinates and byte offsets; native samples decoded by DataView. Checks source-to-compact sampling, not instrument accuracy or all native pixels.",
+        "recipe": "src/objects/venus/source/science/usgs/roughness.json",
+        "recipeSha256": "eeadf9e3b26d61fa42d635c2a2244222bedafe5a89e4b5fd22f557eb71594444",
+        "label": "src/objects/venus/source/science/usgs/roughness-isis.lbl",
+        "labelSha256": "a505a19903af4802cfb88a6e3c582ba49b9338be6266417744597b1e6d7f4885",
+        "grid": "src/objects/venus/source/science/usgs/roughness.tif",
+        "gridSha256": "36c972dd089b050b4df6166a9e76d96a5c5570132e397a7cbfd4166399725cbf",
+        "nativeUrl": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MeterScaleSlope_Global_4641m.tif",
+        "etag": "\"3866d1ee904b4cbb0a86dc26b3039db6-5\"",
+        "entityChanged": false,
+        "nativeScale": 0.005,
+        "nativeOffset": -0.1,
+        "unitScale": 1,
+        "calibration": {
+          "scale": 0.1,
+          "offset": -0.1,
+          "source": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MGN-V-RDRS-5-GDR-SLOPE-V1.0",
+          "reason": "The original PDS GSDR dataset description and USGS catalogue both define DN = slope_degrees × 10 + 1. The detached ISIS label instead gives Multiplier 0.005 and Base -0.1, which contradict that equation and produces negative roughness for some valid positive DNs. Use the primary PDS equation and retain the conflicting label."
+        },
+        "checks": [
+          {
+            "x": 0,
+            "y": 0,
+            "longitude": -179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 2,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=49997-49997",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 0,
+            "longitude": 0.087890625,
+            "latitude": 89.912109375,
+            "sourceColumn": 4099,
+            "sourceRow": 2,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=54094-54094",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 0,
+            "longitude": 179.912109375,
+            "latitude": 89.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 2,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=58186-58186",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 256,
+            "longitude": -179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 1026,
+            "raw": 30,
+            "expected": 30,
+            "actual": 30,
+            "range": "bytes=8439629-8439629",
+            "rangeSha256": "9652595f37edd08c51dfa26567e6cd76e6fa2709c3e578478ca398d316837a7a",
+            "expectedDisplay": 2.9,
+            "actualDisplay": 2.9,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "longitude": -89.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 2050,
+            "sourceRow": 1026,
+            "raw": 31,
+            "expected": 31,
+            "actual": 31,
+            "range": "bytes=8441677-8441677",
+            "rangeSha256": "ffe679bb831c95b67dc17819c63c5090d221aac6f4c7bf530f594ab43d21fa1e",
+            "expectedDisplay": 3,
+            "actualDisplay": 3,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 256,
+            "longitude": 90.087890625,
+            "latitude": 44.912109375,
+            "sourceColumn": 6147,
+            "sourceRow": 1026,
+            "raw": 30,
+            "expected": 30,
+            "actual": 30,
+            "range": "bytes=8445774-8445774",
+            "rangeSha256": "9652595f37edd08c51dfa26567e6cd76e6fa2709c3e578478ca398d316837a7a",
+            "expectedDisplay": 2.9,
+            "actualDisplay": 2.9,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 256,
+            "longitude": 179.912109375,
+            "latitude": 44.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 1026,
+            "raw": 29,
+            "expected": 29,
+            "actual": 29,
+            "range": "bytes=8447818-8447818",
+            "rangeSha256": "1f18d650d205d71d934c3646ff5fac1c096ba52eba4cf758b865364f4167d3cd",
+            "expectedDisplay": 2.8000000000000003,
+            "actualDisplay": 2.8000000000000003,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 512,
+            "longitude": -179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 2051,
+            "raw": 27,
+            "expected": 27,
+            "actual": 27,
+            "range": "bytes=16837454-16837454",
+            "rangeSha256": "77adfc95029e73b173f60e556f915b0cd8850848111358b1c370fb7c154e61fd",
+            "expectedDisplay": 2.6,
+            "actualDisplay": 2.6,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "longitude": -89.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 2050,
+            "sourceRow": 2051,
+            "raw": 27,
+            "expected": 27,
+            "actual": 27,
+            "range": "bytes=16839502-16839502",
+            "rangeSha256": "77adfc95029e73b173f60e556f915b0cd8850848111358b1c370fb7c154e61fd",
+            "expectedDisplay": 2.6,
+            "actualDisplay": 2.6,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 512,
+            "longitude": 0.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 4099,
+            "sourceRow": 2051,
+            "raw": 23,
+            "expected": 23,
+            "actual": 23,
+            "range": "bytes=16841551-16841551",
+            "rangeSha256": "8f11b05da785e43e713d03774c6bd3405d99cd3024af334ffd68db663aa37034",
+            "expectedDisplay": 2.2,
+            "actualDisplay": 2.2,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1536,
+            "y": 512,
+            "longitude": 90.087890625,
+            "latitude": -0.087890625,
+            "sourceColumn": 6147,
+            "sourceRow": 2051,
+            "raw": 54,
+            "expected": 54,
+            "actual": 54,
+            "range": "bytes=16843599-16843599",
+            "rangeSha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+            "expectedDisplay": 5.300000000000001,
+            "actualDisplay": 5.300000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 512,
+            "longitude": 179.912109375,
+            "latitude": -0.087890625,
+            "sourceColumn": 8191,
+            "sourceRow": 2051,
+            "raw": 18,
+            "expected": 18,
+            "actual": 18,
+            "range": "bytes=16845643-16845643",
+            "rangeSha256": "f299791cddd3d6664f6670842812ef6053eb6501bd6282a476bbbf3ee91e750c",
+            "expectedDisplay": 1.7,
+            "actualDisplay": 1.7,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 768,
+            "longitude": -179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 2,
+            "sourceRow": 3075,
+            "raw": 14,
+            "expected": 14,
+            "actual": 14,
+            "range": "bytes=25227086-25227086",
+            "rangeSha256": "4d7b3ef7300acf70c892d8327db8272f54434adbc61a4e130a563cb59a0d0f47",
+            "expectedDisplay": 1.3,
+            "actualDisplay": 1.3,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 768,
+            "longitude": 0.087890625,
+            "latitude": -45.087890625,
+            "sourceColumn": 4099,
+            "sourceRow": 3075,
+            "raw": 25,
+            "expected": 25,
+            "actual": 25,
+            "range": "bytes=25231183-25231183",
+            "rangeSha256": "68aa2e2ee5dff96e3355e6c7ee373e3d6a4e17f75f9518d843709c0c9bc3e3d4",
+            "expectedDisplay": 2.4,
+            "actualDisplay": 2.4,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 768,
+            "longitude": 179.912109375,
+            "latitude": -45.087890625,
+            "sourceColumn": 8191,
+            "sourceRow": 3075,
+            "raw": 15,
+            "expected": 15,
+            "actual": 15,
+            "range": "bytes=25235275-25235275",
+            "rangeSha256": "dc0e9c3658a1a3ed1ec94274d8b19925c93e1abb7ddba294923ad9bde30f8cb8",
+            "expectedDisplay": 1.4,
+            "actualDisplay": 1.4,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 0,
+            "y": 1023,
+            "longitude": -179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 2,
+            "sourceRow": 4095,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33583946-33583946",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1024,
+            "y": 1023,
+            "longitude": 0.087890625,
+            "latitude": -89.912109375,
+            "sourceColumn": 4099,
+            "sourceRow": 4095,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33588043-33588043",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 2047,
+            "y": 1023,
+            "longitude": 179.912109375,
+            "latitude": -89.912109375,
+            "sourceColumn": 8191,
+            "sourceRow": 4095,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=33592135-33592135",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 1258,
+            "y": 139,
+            "longitude": 41.220703125,
+            "latitude": 65.478515625,
+            "sourceColumn": 5035,
+            "sourceRow": 558,
+            "raw": 3,
+            "expected": 3,
+            "actual": 3,
+            "range": "bytes=4610338-4610338",
+            "rangeSha256": "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5",
+            "expectedDisplay": 0.20000000000000004,
+            "actualDisplay": 0.20000000000000004,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 158,
+            "y": 472,
+            "longitude": -152.138671875,
+            "latitude": 6.943359375,
+            "sourceColumn": 634,
+            "sourceRow": 1890,
+            "raw": 128,
+            "expected": 128,
+            "actual": 128,
+            "range": "bytes=15519013-15519013",
+            "rangeSha256": "76be8b528d0075f7aae98d6fa57a6d3c83ae480a8469e668d7b0af968995ac71",
+            "expectedDisplay": 12.700000000000001,
+            "actualDisplay": 12.700000000000001,
+            "displayPass": true,
+            "pass": true
+          },
+          {
+            "x": 779,
+            "y": 341,
+            "longitude": -42.978515625,
+            "latitude": 29.970703125,
+            "sourceColumn": 3118,
+            "sourceRow": 1366,
+            "raw": 0,
+            "expected": null,
+            "actual": null,
+            "range": "bytes=11228365-11228365",
+            "rangeSha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "expectedDisplay": null,
+            "actualDisplay": null,
+            "displayPass": true,
+            "pass": true
+          }
+        ]
+      }
+    }
+  ]
+}

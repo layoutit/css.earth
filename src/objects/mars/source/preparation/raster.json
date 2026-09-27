@@ -27,10 +27,50 @@
     },
     {
       "id": "elevation",
-      "source": "lenses/mola-pseudocolor-z3.png",
+      "source": "science/usgs/elevation.tif",
       "falseColor": true,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp"
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "elevation.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -9000,
+          "maximum": 22000,
+          "colors": [
+            "#243b85",
+            "#40a0c4",
+            "#dddac4",
+            "#ce9449",
+            "#89382d"
+          ],
+          "units": "m above GMM-2B areoid",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.17578125,
+              -0.17578125
+            ],
+            "referenceRadiusMeters": 3396190,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -99999
+          }
+        }
+      }
     },
     {
       "id": "thermal",

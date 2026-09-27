@@ -68,7 +68,7 @@
       },
       {
         "id": "radial-field",
-        "label": "Radial field",
+        "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
         "thumbnail": "hd-29615-lens-radial-field.webp",
         "surface": "hd-29615-surface-radial-field@2x.webp",
@@ -115,11 +115,15 @@
           "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
         },
         "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
-        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 62° S; the star never shows us what lies below it."
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 62° S; the star never shows us what lies below it.",
+        "step": {
+          "group": "field-components",
+          "label": "Outward / inward"
+        }
       },
       {
         "id": "meridional-field",
-        "label": "Meridional field",
+        "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
         "thumbnail": "hd-29615-lens-meridional-field.webp",
         "surface": "hd-29615-surface-meridional-field@2x.webp",
@@ -166,11 +170,15 @@
           "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
         },
         "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
-        "legendNote": "Red and blue: the field running north or south along the surface, as in the paper. Black line: 62° S; the star never shows us what lies below it."
+        "legendNote": "Red and blue: the field running north or south along the surface, as in the paper. Black line: 62° S; the star never shows us what lies below it.",
+        "step": {
+          "group": "field-components",
+          "label": "North / south"
+        }
       },
       {
         "id": "azimuthal-field",
-        "label": "Azimuthal field",
+        "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
         "thumbnail": "hd-29615-lens-azimuthal-field.webp",
         "surface": "hd-29615-surface-azimuthal-field@2x.webp",
@@ -217,7 +225,11 @@
           "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
         },
         "notes": "The large-scale magnetic field in Dec 2017, mapped from how the star's light is polarised as it turns.",
-        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 62° S; the star never shows us what lies below it."
+        "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 62° S; the star never shows us what lies below it.",
+        "step": {
+          "group": "field-components",
+          "label": "Around the star"
+        }
       },
       {
         "id": "brightness",

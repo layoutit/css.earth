@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-geotiff-grid@1",
+  "source": {
+    "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MeterScaleSlope_Global_4641m.tif",
+    "productId": "venus_magellan_global_meter_scale_slope_4641m",
+    "width": 8193,
+    "height": 4097,
+    "origin": [
+      -19014417.9036,
+      9509529.4812
+    ],
+    "resolution": [
+      4641.0588,
+      -4641.0588
+    ],
+    "coordinates": "meters",
+    "radius": 6051000,
+    "centerLongitude": 0,
+    "noData": 0,
+    "bits": 8,
+    "sampleFormat": 1
+  },
+  "output": {
+    "width": 2048,
+    "height": 1024,
+    "radius": 6051000
+  }
+}

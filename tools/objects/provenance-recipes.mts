@@ -67,7 +67,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
       // An HMI continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
       const frames = maybeRecord(maybeRecord(plan.science)?.synoptic)?.kind === 'hmi-continuum-mosaic';
-      const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
+      const sourcePath = text(plan.source), sourceBase = sourcePath.slice(0, sourcePath.lastIndexOf('/') + 1);
+      const used = [...(frames ? [] : [sourcePath]), ...paths(plan.coverage), ...paths(plan.science, sourceBase)];
       // A surface-observation lens consumes its whole pinned group (frames, cameras, companions) and its reference shape.
       const surfaceObservation = maybeRecord(plan.science)?.kind === 'surface-observation' ? record(plan.science) : null;
       if (surfaceObservation) used.push(...group(text(record(surfaceObservation.lens).consumer)), text(record(surfaceObservation.shape).path));

@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-usgs-delivery-check@1",
+  "date": "2026-09-27T02:26:12.260Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "runtime": {
+    "installed": 1500,
+    "reused": 0,
+    "skipped": 0,
+    "files": 1500,
+    "bytes": 210933400,
+    "inventories": {
+      "moon": "e8dad4ea5481e6724b7c61fccb36525e732d72d04138b5cb858b24ed1ff523bb",
+      "venus": "38a3d667fec5c6ce3680c1d2f9fdeb3055d2f3308ba59080d793c0e99f85d48c",
+      "mercury": "595d631f45e1cda59299bccc898e131a53fd7cb772713c325cd4a79247d652b9",
+      "mars": "7088a58f57bb0d29a70d6461d5d8f0383eff57a6fda05c249965d97176c54031",
+      "pluto": "a25272505aff75b51925b49bfce64518eff9ff87eea991d41247b44d9077d754",
+      "ceres": "ed3a743612002fbd8700ea56341eb110398b351a32c876ec54eb63c06d9fd7c4",
+      "be-ceti": "7a0aa2078a23e7c7e20ab14f672cfc3b94ca350ce7979fb76fc487a7c981599e",
+      "chi1-orionis": "1f1ccbd2edab02f5f5a0e70435c9c469ba923fed051d1355c1044979b67561a8",
+      "hd-29615": "04fb0a223e64e871f1d4ee393992da33c7012ea06316fa691c271bebee3286c4",
+      "hd-35296": "f8df9d313f1d70c52836a42bd862c070c10118a24e3a89cd0dd4258b2d450759",
+      "ce-tauri": "7afdd69b314276b49f366d0ce15050c859e657ddce040dbd1cf0db52136b43e1",
+      "betelgeuse": "d30d74ebe5b1118fa0f53acbd722139da2b9c5192c35b9c83a00977ca8496519",
+      "wasp-12b": "8d99f793a7f504cfcc1fcd985402518dc0ff05aeb295d8809ec5fddfd57e558d",
+      "sun": "6902d05a2d4054bb5b756bcfcbc33cfc57ed873fdfc5f23d62d2f7d1ab7f2aa9"
+    }
+  },
+  "sourceFiles": [
+    {
+      "object": "venus",
+      "path": "science/usgs/elevation.tif",
+      "bytes": 8389608,
+      "sha256": "27c56abb19c4dfc781dec6e96fa9d5e11130e4dcd2ce68212b25386798ca04e0"
+    },
+    {
+      "object": "venus",
+      "path": "science/usgs/emissivity.tif",
+      "bytes": 8389608,
+      "sha256": "e02578ac6d2551a8677eeb3f58f712cfb7f67da6a2e0845398c4411ccbc5637a"
+    },
+    {
+      "object": "venus",
+      "path": "science/usgs/reflectivity.tif",
+      "bytes": 8389608,
+      "sha256": "1914b333296b777b25c110dc929f9ddb9b8a4f676995e698696c0b5c944cbe3c"
+    },
+    {
+      "object": "venus",
+      "path": "science/usgs/roughness.tif",
+      "bytes": 8389608,
+      "sha256": "36c972dd089b050b4df6166a9e76d96a5c5570132e397a7cbfd4166399725cbf"
+    }
+  ],
+  "method": "Empty destination directory. Runtime installer fetched and verified every byte count and inventory digest. Acquisition restored all compact grids from source-cache with native fallback disabled; every file equals the checked local numeric input.",
+  "testedCommit": "847b5e6a35a18ab3bbf234a941cd6b32f52809fc",
+  "scope": "Working version above the tested commit with the Venus photo gallery removed; gallery-removal.json identifies the changed source files."
+}

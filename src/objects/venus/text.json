@@ -28,28 +28,38 @@
   "datasets": {
     "clouds": {
       "title": "Cloud illustration",
-      "detail": "Illustration",
+      "detail": "OpenSpace",
       "summary": "An OpenSpace cloud texture of unknown camera, wavelength and processing."
     },
     "radar": {
       "title": "C3-MDIR synthetic-color radar mosaic",
-      "detail": "Radar mosaic",
+      "detail": "Magellan",
       "summary": "Radar images of the ground beneath the clouds, in added colors a person would not see."
     },
     "elevation": {
-      "title": "C3-MDIR colorized topography",
-      "detail": "Topography on radar",
-      "summary": "Colors show elevation over the radar mosaic. The scale wraps, so the highest peaks look purple again."
+      "title": "Height of the solid surface",
+      "detail": "Magellan",
+      "summary": "Radar measurements reveal Venus’s plains and mountains beneath the clouds; colors show height above a reference sphere."
     },
     "ultraviolet": {
       "title": "Akatsuki ultraviolet photograph",
-      "detail": "One exposure",
+      "detail": "Akatsuki UVI",
       "summary": "Venus in ultraviolet light from orbit on 30 August 2023. Grey marks the half the camera could not see."
     },
     "emissivity": {
-      "title": "Magellan microwave emissivity",
-      "detail": "Magellan · 4.64 km pixels",
-      "summary": "Microwave emissivity corrected for antenna and atmosphere, with unobserved cells left empty."
+      "title": "How efficiently the surface emits",
+      "detail": "Magellan",
+      "summary": "Warm ground gives off microwaves; emissivity measures how efficiently it does so compared with an ideal emitter."
+    },
+    "reflectivity": {
+      "title": "How strongly the surface reflects",
+      "detail": "Magellan",
+      "summary": "Magellan sent radar through the clouds; this map estimates how reflective the ground is at that wavelength."
+    },
+    "roughness": {
+      "title": "Small-scale bumps seen by radar",
+      "detail": "Magellan",
+      "summary": "Radar echoes reveal how uneven the ground is at scales of meters; larger values mean a rougher surface."
     }
   }
 }

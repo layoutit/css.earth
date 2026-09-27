@@ -53,7 +53,7 @@
     "controls": [
       {
         "id": "pionier-2016-11",
-        "label": "PIONIER image, November 2016",
+        "label": "Surface images",
         "thumbnail": "ce-tauri-lens-pionier-2016-11.webp",
         "surface": "ce-tauri-surface-pionier-2016-11@2x.webp",
         "poles": "ce-tauri-poles-pionier-2016-11@2x.webp",
@@ -113,11 +113,15 @@
           },
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
           "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
+        },
+        "step": {
+          "group": "pionier-dates",
+          "label": "November 2016"
         }
       },
       {
         "id": "pionier-2016-12",
-        "label": "PIONIER image, December 2016",
+        "label": "Surface images",
         "thumbnail": "ce-tauri-lens-pionier-2016-12.webp",
         "surface": "ce-tauri-surface-pionier-2016-12@2x.webp",
         "poles": "ce-tauri-poles-pionier-2016-12@2x.webp",
@@ -177,6 +181,10 @@
           },
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
           "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
+        },
+        "step": {
+          "group": "pionier-dates",
+          "label": "December 2016"
         }
       },
       {

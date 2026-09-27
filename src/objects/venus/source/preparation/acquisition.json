@@ -128,6 +128,38 @@
       ],
       "path": "emissivity/magellan.lbl",
       "url": "https://astrogeology.usgs.gov/ckan/dataset/d81b186f-8ebe-4b62-a5e5-6e6df4c1f778/resource/c7bb8738-5e65-43a3-bfa2-ba8b5177f9fe/download/venus_magellan_microwaveemissivity_global_4641m.lbl"
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/elevation.tif",
+      "recipePath": "science/usgs/elevation.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/emissivity.tif",
+      "recipePath": "science/usgs/emissivity.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/reflectivity.tif",
+      "recipePath": "science/usgs/reflectivity.json",
+      "groups": [
+        "refresh-usgs"
+      ]
+    },
+    {
+      "kind": "geotiff-grid",
+      "path": "science/usgs/roughness.tif",
+      "recipePath": "science/usgs/roughness.json",
+      "groups": [
+        "refresh-usgs"
+      ]
     }
   ]
 }

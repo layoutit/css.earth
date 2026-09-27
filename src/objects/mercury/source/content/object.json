@@ -171,49 +171,71 @@
       },
       {
         "id": "topography",
-        "label": "Topography",
+        "label": "Elevation",
         "thumbnail": "mercury-lens-topography.webp",
-        "surface": "mercury-surface-topography@2x.jpg",
+        "surface": "mercury-surface-topography@2x.webp",
+        "poles": "mercury-poles-topography@2x.webp",
         "source": {
-          "id": "messenger-topography",
+          "id": "usgs-mercury-elevation-numeric",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m"
         },
-        "poles": "mercury-poles-topography@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",
-          "meta": "m",
-          "image": "mercury-lens-topography-legend.webp",
-          "sourcePath": "maps/mercury-topography-legend.png",
-          "rasterRecipe": {
-            "crop": {
-              "left": 66,
-              "top": 12,
-              "width": 96,
-              "height": 2637
-            },
-            "dividerRows": {
-              "threshold": 8,
-              "expectedRuns": 27,
-              "minimumCoverage": 0.95
-            },
-            "outputWidth": 304,
-            "outputHeight": 14
-          },
-          "width": 304,
-          "height": 14,
+          "meta": "m above 2,439.4 km sphere",
           "labels": [
-            "−5,020",
-            "−450",
-            "4,140"
+            "≤−6,000",
+            "0",
+            "≥6,000"
           ],
-          "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
+          "recipe": {
+            "palette": [
+              "#243b85",
+              "#40a0c4",
+              "#dddac4",
+              "#ce9449",
+              "#89382d"
+            ],
+            "labels": [
+              "≤−6,000",
+              "0",
+              "≥6,000"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m"
         },
-        "legendNote": "Scale from the USGS legend for the older 2 km color shaded relief. It is not confirmed for the 665 m v2 DEM drawn here.",
         "falseColor": true,
-        "filter": "NASA Trek color hillshade of the USGS MESSENGER global DEM 665 m v2",
+        "qualification": "USGS MESSENGER global DEM v2 (2016), with native spacing about 665 m. Heights are meters above a 2,439.4 km sphere. USGS interpolated and smoothed the image-derived control-point cloud after a one-sigma filter. This display uses the numeric DEM with its own matching color scale.",
+        "notes": "Mercury has no sea level. Heights use a reference sphere with a radius of 2,439.4 km; zero means the surface of that sphere. Meters above the reference sphere. Blue is lower and warm colors are higher; values beyond −6,000 or +6,000 m use endpoint colors. USGS matched surface points across MESSENGER images to build its 2016 global elevation model, version 2. The source spacing is about 665 m. The height model was filtered, smoothed and interpolated; this globe displays a coarser sample. Gray grid marks missing source data.",
+        "noData": true,
         "view": "exterior",
-        "notes": "NASA Trek color hillshade of the USGS MESSENGER global DEM 665 m v2. The elevation legend comes from the older USGS 2 km color shaded relief product; its color bins are not confirmed for v2."
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Mercury has no sea level. Heights use a reference sphere with a radius of 2,439.4 km; zero means the surface of that sphere."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Meters above the reference sphere. Blue is lower and warm colors are higher; values beyond −6,000 or +6,000 m use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "USGS matched surface points across MESSENGER images to build its 2016 global elevation model, version 2."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The source spacing is about 665 m. The height model was filtered, smoothed and interpolated; this globe displays a coarser sample."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data."
+          }
+        ]
       },
       {
         "id": "interior",

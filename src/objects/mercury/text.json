@@ -37,9 +37,9 @@
       "summary": "Colors separate surface materials; missing polar color is filled from nearby imagery."
     },
     "topography": {
-      "title": "MESSENGER DEM hillshade",
+      "title": "Height of craters and plains",
       "detail": "USGS / MESSENGER",
-      "summary": "Colors show elevation and shading shows slopes, not the planet's visible color."
+      "summary": "Overlapping MESSENGER photographs reveal surface heights; colors show craters and plains above or below a reference sphere."
     },
     "interior": {
       "title": "Interior structure model",

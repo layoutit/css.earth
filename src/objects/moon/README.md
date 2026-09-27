@@ -10,6 +10,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 | --- | --- |
 | Monochrome surface | [LROC WAC global morphologic mosaic v1.3](https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P), 643 nm photography, 11,520 × 5,760 pixels |
 | Elevation | LRO LOLA LDEM16 v3.1 |
+| Mineral estimates, FeO, metallic iron, optical maturity, grain size | [Kaguya MI derived maps, May 2016](source/science/usgs/), numeric models within ±50° latitude |
 | Midnight temperature, heat anomalies, rock abundance | [LRO Diviner GHRM v1.0](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/), 2009–2022, false-color thermal estimates within ±70° |
 | Geology | [USGS Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), 49 units |
 | Silicate signature | [Lucey et al. (2021)](https://zenodo.org/records/4558194), Christiansen-feature wavelength |
@@ -292,3 +293,75 @@ See the [mapped-science conversion method](../../../tools/objects/acquisition/MA
 ## Catalogue attribution
 
 The GRAIL crustal-thickness print is attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.
+
+## Kaguya numeric views
+
+Eight views use the May 2016, 512-pixel-per-degree Kaguya MI derived products
+published by USGS. These are the ±50° maps made from MI MAP level 02, not the
+later global version-3 products. The native labels and acquisition recipes are
+in [source/science/usgs](source/science/usgs/).
+
+Olivine, orthopyroxene, clinopyroxene and plagioclase store mass fractions;
+preparation multiplies them by 100 for weight percent. FeO is already weight
+percent. Submicroscopic metallic iron is a fitted space-weathering parameter
+with the release's seven model amounts from 0.5 to 7 weight percent. The
+plagioclase grain-size fit chooses 17 or 200 µm; its legend shows two model
+classes. OMAT is dimensionless: smaller values mean greater optical maturity,
+not a measured age.
+
+The [original methods](https://www.hou.usra.edu/meetings/lpsc2016/pdf/2994.pdf)
+and [Lemelin's dissertation, chapter 3, pp. 44–45](https://www.soest.hawaii.edu/earthsciences/wp-content/uploads/2025/09/MLemelin_Dissertation.pdf)
+describe the spectral library and its assumptions. Mature soils with weak
+absorption bands can be assigned too much plagioclase; interpret mineral
+patterns together with OMAT. The metallic-iron model amounts are not a direct
+chemical assay of lunar soil.
+
+The ninth product, the weighted spectral-fit criterion, supplies a finite,
+nonnegative validity check. All eight new views use it as a conservative
+shared coverage gate, including the independently calculated FeO and OMAT.
+It has no published universal acceptance threshold, so no confidence cutoff is
+asserted. FeO also excludes estimates outside the physical 0–100 weight-percent
+domain. Of the compact cells, 344 fail this physical check; 22,314 OMAT zeros
+also lack a valid companion fit and are masked. This deliberately excludes
+standalone values where the companion fit is absent. OMAT values above the
+0.5 display stretch use its labeled endpoint; they are not reclassified as
+invalid. Missing native samples
+and the unmapped polar regions remain the gray coverage grid. No other image
+fills them. The common 2,048 × 1,024 numeric display grids preserve selected
+native cells but do not retain the original 59 m spatial detail.
+
+The [shared acquisition method](../../../docs/usgs-numeric-surfaces.md) explains
+bounded reads, native-cell selection, independent byte checks and lossless
+preparation. The existing mesh and lighting controls are retained.
+
+## Numeric-map qualification
+
+The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+the compact input digests and tested processing files, count coverage, and
+compare native byte samples at hemispheres, seams, extrema and gaps. Their
+calibration check runs before the display coverage masks; it does not validate
+the original instrument or scientific model.
+The [all-cell quality audit](evidence/usgs-numeric/quality.json) checks all
+eight views, including the shared fit mask and FeO physical domain. All
+16,777,216 comparisons pass. The four mineral fractions sum to one within
+4.48 × 10⁻⁸ at every cell with a valid companion fit.
+
+The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
+Sun world metadata, with no reused files. All 15 compact source grids restored
+from the source cache with native fallback disabled and matched byte for byte.
+
+The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+map descriptions, legends and retained scene. It includes screenshots; the
+[validation record](evidence/usgs-numeric/validation.json) names the checks
+and the local full-build limitation. These checks do not measure instrument
+accuracy or establish how well readers understand the explanations.
+
+The [current-main integration check](evidence/usgs-numeric/integration.json) records the
+build, all 11 grouped selectors, source labels and phone playback. It explains
+which earlier scientific and browser evidence still applies to this version.
+
+The [final dataset UI check](evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+and Surface photographs are absent from all 1,453 generated pages. Browser
+checks cover the Moon, Venus and WASP-12b; the final screenshots show the
+short description, legend and source link.

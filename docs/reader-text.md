@@ -22,7 +22,7 @@ updates its prepared output and delivery inventory.
 | Card | 1 sentence, 110 characters | Also the catalogue description used by search, previews and sharing |
 | Introduction | 2 sentences, 180 characters | Say something about the body that its mission and dataset cards do not |
 | Dataset title | 40 characters | Specific to the product, not the chooser label |
-| Dataset detail | 28 characters | Optional chooser subtitle |
+| Dataset detail | 28 characters | Source, mission or instrument shown beside the chooser label |
 | Dataset summary | 2 sentences, 125 characters | Fits the three lines the narrowest dataset card reserves |
 
 Each citation names a [source record](../src/sources/) by `catalogueId`, with
@@ -31,6 +31,43 @@ a reviewer the words to look for, which helps with numbers. The card and the
 introduction need at least one citation. A dataset summary may leave out
 `sources` when its prepared product already names its inputs; the dataset card
 lists those.
+
+The chooser's right-hand label identifies where the dataset comes from: for
+example, **Magellan**, **Kaguya MI**, **USGS** or **VLTI/PIONIER**. For a published
+model, use the author or archive. Keep explanations of the quantity in the
+summary. Members of a group from the same source share
+that source label; dates and other differences belong in the arrow selector.
+
+## Dataset groups
+
+Use the existing arrow selector for related maps that readers will compare:
+different dates, wavelength bands, mineral amounts, or components of one field.
+Similar colors alone are not a reason to group maps. A photograph, a height map
+and an interior model answer different questions and keep separate entries.
+
+In the body's `source/content/object.json`, give consecutive lens controls the
+same `label` and `step.group`, with a distinct `step.label` for each member.
+The chooser lists the group once. The selected member supplies its description,
+source and legend; the arrows select its neighbors. Each member keeps
+its original dataset ID and URL. A date group runs in chronological order;
+its existing default can remain a middle member.
+
+For example, the Moon's **Mineral composition** group switches between
+plagioclase, olivine and the two pyroxenes. Mars groups five chemical elements;
+Pluto groups three modeled ice fractions; Ceres groups two mineral absorption
+features. Betelgeuse, CE Tauri and WASP-12b group observations by date. BE Ceti,
+χ¹ Orionis, HD 29615 and HD 35296 group three magnetic-field directions.
+
+Keep units and limits beside each map. Mars's thorium scale uses parts per
+million while its other element scales use weight percent. Ceres's band depths
+are absorption strengths, not mineral percentages. Date selectors do not turn
+stellar reconstructions into confirmed images of surface changes.
+
+The short summary should explain the quantity in ordinary words. Keep necessary
+scientific names, and explain them when first used. Put full measurement methods,
+scale examples and qualifications in the body README and linked source records.
+Check the group, arrows, direct links and descriptions at desktop and phone
+widths; changing the selected map must retain the mounted scene.
 
 ## Publish and check
 

@@ -28,32 +28,32 @@
   "datasets": {
     "surface": {
       "title": "MVIC enhanced-color mosaic",
-      "detail": "Enhanced color",
+      "detail": "New Horizons MVIC",
       "summary": "Blue, red and near-infrared images, not natural color; they cover part of the surface."
     },
     "topography": {
       "title": "Stereo elevation map",
-      "detail": "Stereo relief",
+      "detail": "New Horizons / USGS",
       "summary": "Heights from −4.1 to +6.5 km on a −8 to +8 km color scale, with shading to show slopes."
     },
     "monochrome": {
       "title": "LORRI/MVIC mosaic",
-      "detail": "Photo mosaic",
+      "detail": "New Horizons / USGS",
       "summary": "LORRI and MVIC images, with detail varying across the surface."
     },
     "methane-ice": {
       "title": "LEISA methane ice",
-      "detail": "LEISA",
+      "detail": "New Horizons LEISA",
       "summary": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each area."
     },
     "nitrogen-ice": {
       "title": "LEISA nitrogen ice",
-      "detail": "LEISA",
+      "detail": "New Horizons LEISA",
       "summary": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share, which depends on the ice model."
     },
     "water-ice": {
       "title": "LEISA water ice",
-      "detail": "LEISA",
+      "detail": "New Horizons LEISA",
       "summary": "Water ice underlies Pluto’s more volatile ices. Colors show its surface share estimated from infrared spectra."
     }
   }

@@ -152,15 +152,6 @@ const stepOf = (lens: Control) => {
           {borrowedLegend(lens) && <DatasetLegend {objectId} lens={borrowedLegend(lens)!} owner={lens.id} />}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>
-        {!focus && lens.facts && lens.facts.length > 0 && <details class="object-lens-facts">
-          <summary>Dataset details</summary>
-          <ul class="object-facts" aria-label={`${lens.label} facts`}>
-            {lens.facts.map((fact) => <li>
-              <span class="object-fact-label">{fact.label}</span>{" "}
-              <span class="object-fact-value">{fact.value}</span>
-            </li>)}
-          </ul>
-        </details>}
       </div>
     ))}
   </div>

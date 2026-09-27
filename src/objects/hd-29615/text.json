@@ -30,27 +30,27 @@
   "datasets": {
     "color": {
       "title": "Colour",
-      "detail": "From its Gaia spectrum",
+      "detail": "Gaia DR3",
       "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
     },
     "radial-field": {
       "title": "Radial field, Dec 2017",
-      "detail": "Dec 2017",
+      "detail": "ESO HARPSpol",
       "summary": "Where the magnetic field points out of the star or into it, mapped from how it polarises starlight."
     },
     "meridional-field": {
       "title": "Meridional field, Dec 2017",
-      "detail": "Dec 2017",
+      "detail": "ESO HARPSpol",
       "summary": "The part of the magnetic field running north or south along the surface."
     },
     "azimuthal-field": {
       "title": "Azimuthal field, Dec 2017",
-      "detail": "Dec 2017",
+      "detail": "ESO HARPSpol",
       "summary": "The part of the magnetic field running around the spin axis."
     },
     "brightness": {
       "title": "Brightness, Dec 2017",
-      "detail": "Dec 2017",
+      "detail": "ESO HARPSpol",
       "summary": "Starspots: darker, cooler patches mapped from how they distort the spectrum as the star turns."
     }
   }

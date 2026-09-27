@@ -1,5 +1,7 @@
 # HD 35296
 
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+
 ## Sources
 
 HD 35296 is a young Sun-like star that turns in 3.5 days. Unlike the other fast spinners mapped with it, it has no dark spot over its pole. It is also HD 35296, HR 1780, HIP 25278.

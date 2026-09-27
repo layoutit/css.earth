@@ -10,13 +10,17 @@ Source selections, recorded trials and open questions are in the [investigation 
 | --- | --- |
 | Monochrome | USGS MESSENGER MDIS BDR, from NASA Trek WMTS tiles; NAC or WAC 750 nm reflectance imagery. |
 | Enhanced color | USGS MDIS 665 m mosaic through NASA Treks WMTS. False color: PC2/PC1/430-to-1000 nm ratio. Missing polar pixels receive an explicitly modeled completion. |
-| Topography | NASA Trek color hillshade of the USGS 665 m v2 DEM, with the elevation legend of the older 2 km USGS product; false color. |
+| Topography | [USGS MESSENGER 665 m DEM v2](https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m), numeric heights above a 2,439.4 km sphere with a matching color scale. |
 | Interior | [NASA facts](https://science.nasa.gov/mercury/facts/), retrieved 2026-08-30. A 0.85-radius metallic core and combined mantle/crust shell; colors and fine texture are illustrative. |
 | Spectrum | DLR/Zenodo MASCS one-degree cube, [10.5281/zenodo.7433033](https://doi.org/10.5281/zenodo.7433033). The 326-point spectrum is a global area-weighted mean over 350–1000 nm. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MERCURY/target) Mercury centre-point export, snapshot 2026-09-11, public domain. 573 IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 | Feature traces | [A Global Tectonic Map of Mercury](https://data.mendeley.com/datasets/p43b9wttpj/2), Klimczak, Byrne and Crane, version 2 (2025), CC BY 4.0. 18,451 mapped fault traces; the longest inside each rupes, dorsum or fossae extent draw that feature's outline. |
 
 ## Evidence
+
+The JPEG and resampling comparisons below describe the earlier photographic
+preparation. They still apply to Monochrome and Enhanced; the new numeric
+Topography view uses lossless WebP and has separate evidence below.
 
 The lower-resolution maps now resize before latitude bands and gutters are packed. This keeps stored strips separate during filtering. All three canonical @2x JPEGs reproduce their previous hashes exactly; the combined poles and scene are unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
@@ -62,7 +66,7 @@ Filled enhanced-color poles are not direct observations. The 366 km rendered out
 
 - Default surface: the USGS MESSENGER MDIS Map Projected Basemap RDR (BDR), acquired as NASA Trek zoom-3 WMTS tiles. Its own source declaration identifies the one-band product as a global monochrome reflectance map compiled from NAC or WAC 750 nm images. No display color is added.
 - Enhanced lens: the official NASA Solar System Treks level-3 WMTS matrix for the USGS MESSENGER MDIS 665 m enhanced-color global mosaic. The 16-by-8 tile matrix is stitched without resampling into a 4096-by-2048 source snapshot. The USGS product has neutral-black no-data near the poles. Preparation completes only those pixels with latitude-coherent observed enhanced chroma and local BDR detail, falling back to the complete topography product where BDR is also absent. Dedicated pole assets use the observed outer-cap chroma with BDR detail to avoid an equirectangular pole singularity. The lens remains false color; prepared completion does not claim direct enhanced-color observations in filled regions. The published channel encoding uses principal components 2 and 1 in red and green, and the 430/1000 nm ratio in blue. The optional Enhanced legend names three terrain readings from NASA's description of the MESSENGER false-color map: light blue or white young crater rays, medium and dark blue low-reflectance material, and tan lava plains. These are NASA's qualitative readings of the colors, not a classification computed from the channels.
-- Topography lens: NASA Trek zoom-3 WMTS tiles of the color hillshade layer `Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor`, drawn from the USGS MESSENGER Global DEM 665m (version 2, 2016). It is false color. Its optional elevation legend is prepared from the legend USGS publishes with the older MESSENGER MDIS DEM Global Color Shaded Relief 2km product. USGS publishes no color legend for the 665 m v2 layer, so the legend's color bins are not confirmed for the map drawn here. The default 750 nm lens has no legend.
+- Topography lens: USGS MESSENGER 665 m numeric DEM v2 (2016). The detached ISIS label defines 0.5 m per native integer and a 2,439.4 km reference sphere. The map is rolled from its 180° central meridian into the common −180° display domain. Its generated legend uses the same −6,000 to 6,000 m palette as the numeric surface. The old Trek image remains an input to the Enhanced polar completion; its unrelated 2 km legend no longer supplies Topography.
 - Navigation marker: NASA/JHU APL/Carnegie MESSENGER global view, PIA15162.
 - Physical facts and retained 3D cutaway: NASA Science's Mercury facts record, retrieved 2026-08-30. The only radial boundary claimed is the 0.85-radius metallic core; mantle and crust remain one combined outer shell. The rendered 366 km shell is the arithmetic difference between NASA's published 2,440 km planet radius and 2,074 km core radius, while the source's separate “about 400 km” statement is retained as an approximate published value. Interior colors and fine texture are explicitly declared illustrative presentation choices, and the optional Interior legend is marked schematic while using the exact prepared presentation palette. Preparation applies source-qualified depth/contact shading to the section faces, prepared object-space lighting to the retained core and outer cutaway, and a dedicated high-resolution default exterior light frame. None is represented as a direct observation or as sunlight inside Mercury.
 - Cutaway preparation follows the accepted Saturn presentation schema: the same wedge is removed from the exterior and the 8-by-32 retained metallic-core sphere, including their lossless polar assets, ahead of runtime. The two radial section faces occupy separate halves of a lossless 2048-by-2048 logical atlas, stored at 4096 by 4096. A prepared presentation-only pitch assist begins above 55 degrees of camera control so the meridional section remains readable in the pole-on lens; it does not change Mercury's physical axial-tilt claim. These are prepared presentation mechanics, not additional claims about Mercury's measured internal boundaries.
@@ -79,3 +83,34 @@ Landing sites: 1 spacecraft landing, touchdown or impact sites are labelled besi
 Feature notes: 486 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 </details>
+
+## Numeric USGS grid
+
+The selected native GeoTIFF, detached labels and compact-grid recipe are linked
+from [the source manifest](source/manifest.json). The compact grid keeps native
+samples; the display applies the declared units and palette. See the
+[shared acquisition and independent-check method](../../../docs/usgs-numeric-surfaces.md).
+No new terrain displacement is introduced.
+
+## Numeric-map qualification
+
+The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+the compact input digests and tested processing files, count coverage, and
+compare native byte samples at hemispheres, seams, extrema and gaps. Their
+calibration check runs before the display coverage masks; it does not validate
+the original instrument or scientific model.
+
+The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
+Sun world metadata, with no reused files. All 15 compact source grids restored
+from the source cache with native fallback disabled and matched byte for byte.
+
+The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+map descriptions, legends and retained scene. It includes screenshots; the
+[validation record](evidence/usgs-numeric/validation.json) names the checks
+and the local full-build limitation. These checks do not measure instrument
+accuracy or establish how well readers understand the explanations.
+
+The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+build, all 11 grouped selectors, source labels and phone playback. It explains
+which earlier scientific and browser evidence still applies to this version.

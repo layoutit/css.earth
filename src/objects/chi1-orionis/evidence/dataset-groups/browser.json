@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-dataset-browser-check@1",
+  "date": "2026-09-27T01:59:22.586Z",
+  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
+  "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
+  "testedFiles": {
+    "source/content/object.json": "4f1f185eff68e70180bf8c4a68e5255ace9b1ab06fc23e9dedd3791091e13dbc",
+    "text.json": "35982a34bfd6edf6c97cf81d4dfc8f0cfe6c97f4de81ed48944084fe18fd443f",
+    "inventory.json": "676bc4fd276d4c79dd6a35d99836b1029ab7b1f53e0b3fbf4f1492c6364ff912"
+  },
+  "tests": {
+    "sourceLabels": {
+      "body": "chi1-orionis",
+      "dataset": "radial-field",
+      "labels": [
+        {
+          "id": "color",
+          "source": "HST STIS"
+        },
+        {
+          "id": "radial-field",
+          "source": "ESO HARPSpol"
+        },
+        {
+          "id": "meridional-field",
+          "source": "ESO HARPSpol"
+        },
+        {
+          "id": "azimuthal-field",
+          "source": "ESO HARPSpol"
+        }
+      ],
+      "url": "http://127.0.0.1:4277/chi1-orionis/?dataset=radial-field&v=UEJBS2MSUER6ZEFCxzNAAAAAv8OXD88wzuK_w5cPzzDO4j_mF06_4X5rAAA",
+      "scenes": 1
+    },
+    "group": {
+      "body": "chi1-orionis",
+      "firstPreviousDisabled": true,
+      "lastNextDisabled": true,
+      "keyboardPrevious": "meridional-field",
+      "retainedAfterKeyboard": true,
+      "results": [
+        {
+          "id": "radial-field",
+          "url": "http://127.0.0.1:4277/chi1-orionis/?dataset=radial-field&v=UEJBS2MSUER6ZEFCxzNAAAAAv8OXD88wzuK_w5cPzzDO4j_mF06_4X5rAAA",
+          "step": "Outward / inward · 1 of 3",
+          "legend": "-33\n0\n+33 G",
+          "headings": [
+            "Radial field, Dec 2017"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "meridional-field",
+          "url": "http://127.0.0.1:4277/chi1-orionis/?dataset=meridional-field&v=UEJBS2MSUER6ZEFCxzNAAAAAv8OXD88wzuK_w5cPzzDO4j_mF06_4X5rAAA",
+          "step": "North / south · 2 of 3",
+          "legend": "-33\n0\n+33 G",
+          "headings": [
+            "Meridional field, Dec 2017"
+          ],
+          "retained": true,
+          "scenes": 1
+        },
+        {
+          "id": "azimuthal-field",
+          "url": "http://127.0.0.1:4277/chi1-orionis/?dataset=azimuthal-field&v=UEJBS2MSUER6ZEFCxzNAAAAAv8OXD88wzuK_w5cPzzDO4j_mF06_4X5rAAA",
+          "step": "Around the star · 3 of 3",
+          "legend": "-33\n0\n+33 G",
+          "headings": [
+            "Azimuthal field, Dec 2017"
+          ],
+          "retained": true,
+          "scenes": 1
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "file": "chi1-orionis-radial-field.webp",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 171498,
+      "sha256": "acfae1e0bf434b46f5da8571a65f3c9c3d092c6ba6738f978431c6c62f7ec590",
+      "decodedPixelsEqualToCapture": true
+    }
+  ]
+}
