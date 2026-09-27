@@ -107,6 +107,17 @@ qualified by this correction.
 See the [measured positions](evidence/jiram-close-passes/final-map-check.json) and
 [screened fits](evidence/jiram-close-passes/close-receipt.json).
 
+The [corrected map in the browser](evidence/jiram-close-passes/volcanic-heat.png)
+was inspected on 27 September in Chromium at 1440 × 900, DPR 1 and 2,
+with Shadows off and on, and at 390 × 844, DPR 2. No page errors or failed
+desktop asset requests occurred. The preparation code and map are from
+`734ad10780629e11b09707ff5d0c0f5601ecb02e`; later changes update delivery metadata,
+captions and evidence only. The 20 focused JIRAM, PDS-reader, object-contract,
+dataset-selection and investigation-report tests and preparation typecheck pass.
+A fresh restore verified every file in the Io and Ceres inventories, and the
+new source-cache float map matched its measured SHA-256. Faint residual tracks
+and smear remain; the screenshot does not establish absolute radiometry.
+
 The 17 orbit-57 and 22 orbit-58 images did not yield three overlapping qualified
 night-side frames per cell. Their [December](evidence/jiram-close-passes/orbit57-receipt.json)
 and [February](evidence/jiram-close-passes/orbit58-receipt.json) trials are retained;

@@ -50,6 +50,16 @@ of the 2016 figure.
 The archive's record-count and acquisition-date inconsistencies described below
 also occur in the centre labels.
 
+The [clay](evidence/band-centres/clay-centre.png) and
+[ammonium](evidence/band-centres/ammonium-centre.png) browser views were inspected
+on 27 September in Chromium at 1440 × 900, DPR 2, saved at 1440 pixels wide,
+with Shadows off. Switching lenses loaded each map's own title, units and image
+without page errors or failed requests; a 390 × 844, DPR 2 phone view also passed.
+The recipes and numeric checks are from `734ad10780629e11b09707ff5d0c0f5601ecb02e`;
+later changes retain main's Mineral signatures group and shorten these two
+selector subtitles to “Dawn VIR”. The shared focused checks and fresh delivery
+verification are recorded in [Io's qualification](../io/README.md#close-pass-volcanic-heat-27-september-2026).
+
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
 | View | Both prepared levels, before → current |
