@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Build the IHW/PDS near-nucleus Halley ledger from its fixed-width PDS file table.
  *
- *   pnpm exec node tools/cli/run-typed-module.mjs tools/objects/ihw/archive-ledger.mts FILELIST.TAB --write
+ *   node packages/telescope-cli/src/archives/ihw/archive-ledger.mts FILELIST.TAB --write
  *
  * The archive table is the index. This code preserves every observation identity and does not infer bandpasses from filter
  * names. The selected archive-final product is qualified only while its committed record agrees with the official pins. */
@@ -11,12 +11,16 @@ import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/telescope';
+import { WORKSPACE } from '@cssearth/telescope/node';
+import { archivePrograms } from '../programs.mts';
 
 export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';
 export const IHW_DATASET = 'IHW-C-NNSN-3-EDR-HALLEY-V2.0';
 export const IHW_DATASET_URL = 'https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/dataset.shtml';
 export const IHW_FILELIST_URL = 'https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/index/filelist.tab';
-const ROOT = resolve(import.meta.dirname, '../../..');
+const ROOT = WORKSPACE;
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const IHW_PROGRAMS = archivePrograms('ihw');
 
 /** The one body the dataset observes, the name the archive gives it, and the archive-final program qualified from it with that
  * program's observation and science product. They are data beside the programs (`ledger-focus.json`), because the archive code
@@ -25,7 +29,7 @@ export interface IhwLedgerFocus {
   readonly object: string; readonly targetName: string;
   readonly archiveFinal: { readonly program: string; readonly observation: string; readonly product: string };
 }
-export const IHW_LEDGER_FOCUS = 'tools/objects/ihw/ledger-focus.json';
+export const IHW_LEDGER_FOCUS = 'packages/telescope-cli/src/archives/ihw/ledger-focus.json';
 export async function ihwLedgerFocus(path = resolve(ROOT, IHW_LEDGER_FOCUS)): Promise<IhwLedgerFocus> {
   const record = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, 'IHW ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);
@@ -36,7 +40,8 @@ export async function ihwLedgerFocus(path = resolve(ROOT, IHW_LEDGER_FOCUS)): Pr
     archiveFinal: { program: requireString(archiveFinal.program, 'focus archive-final program'),
       observation: requireString(archiveFinal.observation, 'focus archive-final observation'), product: requireString(archiveFinal.product, 'focus archive-final product') } };
 }
-const receiptPath = (program: string) => `tools/objects/ihw/programs/${program}.archive-final.product.json`;
+/** The file a program's archive-final receipt is, among the programs. */
+const receiptName = (program: string) => `${program}.archive-final.product.json`;
 
 export interface IhwObservation {
   readonly id: string; readonly archiveObservationId: string; readonly observationTimeIso: string; readonly filter: string;
@@ -60,9 +65,11 @@ export function parseFileList(text: string): IhwObservation[] {
   return rows;
 }
 
-async function archiveFinalQualified(focus: IhwLedgerFocus): Promise<boolean> {
-  const { program: id, observation, product } = focus.archiveFinal, receipt = receiptPath(id);
-  const programPath = resolve(ROOT, `tools/objects/ihw/programs/${id}.archive-final.json`);
+export async function archiveFinalQualified(focus: IhwLedgerFocus): Promise<boolean> {
+  const { program: id, observation, product } = focus.archiveFinal, receipt = IHW_PROGRAMS.file(receiptName(id));
+  // A receipt written before the programs moved keeps the path it recorded for itself.
+  const recorded = new Set(IHW_PROGRAMS.recorded(receiptName(id)));
+  const programPath = resolve(ROOT, IHW_PROGRAMS.file(`${id}.archive-final.json`));
   const program = requireRecord(JSON.parse(await readFile(programPath, 'utf8')) as unknown, 'IHW archive-final program');
   const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
   if (program.schema !== 'cssearth-ihw-archive-final@1' || program.id !== id || program.target !== focus.object || program.observation !== observation) return false;
@@ -74,7 +81,7 @@ async function archiveFinalQualified(focus: IhwLedgerFocus): Promise<boolean> {
       const role = requireString(file.role, 'file role'), name = requireString(file.name, 'file name'), uri = requireString(file.uri, 'file uri');
       return record.inputs.some(input => input.role === role && input.identity === uri)
         && record.outputs.some(output => output.path === name);
-    }) && record.evidence.length === 1 && record.evidence[0]?.kind === 'archive-origin' && record.evidence[0].receipt === receipt
+    }) && record.evidence.length === 1 && record.evidence[0]?.kind === 'archive-origin' && recorded.has(record.evidence[0].receipt)
     && record.evidence[0].product === product;
 }
 
@@ -84,7 +91,7 @@ export async function buildIhwLedger(fileList: string) {
   return { schema: IHW_LEDGER_SCHEMA, archiveDate: '2026-09-19', dataset: { id: IHW_DATASET, status: 'ARCHIVED', target: focus.object, targetName: focus.targetName,
       source: IHW_DATASET_URL, index: { url: IHW_FILELIST_URL, bytes: Buffer.byteLength(fileList) } },
     modes: [{ mode: 'NNSN image', records: 'edited near-nucleus images in the archive-supplied relative-intensity units', observations: observations.length,
-      programs: [program], checked: [], receipts: [receiptPath(program)], archiveFinal: { programs: [program], qualified: qualified ? [program] : [] } }],
+      programs: [program], checked: [], receipts: [IHW_PROGRAMS.file(receiptName(program))], archiveFinal: { programs: [program], qualified: qualified ? [program] : [] } }],
     objects: [{ id: focus.object, observations }] } as const;
 }
 

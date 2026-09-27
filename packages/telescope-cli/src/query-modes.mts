@@ -336,7 +336,7 @@ function ihwModes(value: unknown, target: string): TargetMode[] {
     const mode = requireRecord(raw, 'IHW mode'), name = requireString(mode.mode, 'mode'), archive = requireRecord(mode.archiveFinal, 'archiveFinal');
     return { telescope: 'IHW/PDS', mode: name, archiveDate, observations: { count: observations.length, scope: 'this-mode' as const, records: observations },
       programmes: [requireString(requireRecord(ledger.dataset, 'dataset').id, 'dataset id')], dates: observations.map(row => ({ id: row.id, startIso: row.startIso, endIso: row.endIso })), datesComplete: true,
-      toolkit: { programs: stringList(mode.programs, `${name} programs`), checked: stringList(mode.checked, `${name} checked`), receipts: stringList(mode.receipts, `${name} receipts`),
+      toolkit: { programs: stringList(mode.programs, `${name} programs`), checked: stringList(mode.checked, `${name} checked`), receipts: stringList(mode.receipts, `${name} receipts`).map(archivePrograms('ihw').current),
         archiveFinal: { programs: stringList(archive.programs, `${name} archive-final programs`), qualified: stringList(archive.qualified, `${name} archive-final qualified`) } } };
   });
 }
