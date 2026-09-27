@@ -44,7 +44,7 @@ ESA/Hubble under CC BY 4.0. Jupiter owns the NASA, ESA, STScI, and Amy Simon
 2024 full-disc Hubble view inside its adapter. Saturn uses the exact OpenSpace
 source already owned by the Saturn adapter.
 
-Prepared output: `node tools/prepare/cli/prepare-navigation.mts` writes the 1× and 2× planet-marker
+Prepared output: `node packages/bake/cli/prepare-navigation.mts` writes the 1× and 2× planet-marker
 atlas, Sun marker, black-hole marker, supernova marker, and action markers to
 `public/navigation/`.
 
@@ -61,7 +61,7 @@ second detailed object scene is mounted. The images remain source-derived
 context proxies; they do not claim a newly rendered observation geometry.
 
 The Sun's scene indicator is a project-authored rounded heptagonal outline.
-`prepareSunIndicator` in `tools/prepare/prepare-navigation.mts` rasterizes the numerical
+`prepareSunIndicator` in `packages/bake/src/navigation/prepare-navigation.ts` rasterizes the numerical
 path to `public/navigation/sun-indicator-heptagon.png` at a fixed 80px resolution for a
 20px UI box. Its stroke uses the authored soft-yellow `display.hex` accent in
 `src/objects/sun/swatch.json`, matching the navigation label. The independent

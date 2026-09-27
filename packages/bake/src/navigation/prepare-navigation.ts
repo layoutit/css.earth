@@ -1,12 +1,12 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { constants } from "node:fs";
 import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 import type { ObjectEntry } from '@cssearth/objects';
-import type { MarkerDescriptor } from '@cssearth/bake/navigation';
+import type { MarkerDescriptor } from './marker-recipe.ts';
 import type { MarkerPresentation } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
@@ -27,31 +27,35 @@ import {
   NAVIGATION_SHARE_SOURCE,
   NAVIGATION_SUN_SOURCE,
   NAVIGATION_SUPERNOVA_SOURCE,
-} from "../../src/navigation/marker-descriptors.mts";
+} from "./marker-descriptors.ts";
 import {
   MARKER_SOURCE_HINTS,
   renderMarker,
   readMarkerImage,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
-} from "@cssearth/bake/navigation";
+} from "./marker-recipe.ts";
 import { validateMarkerPresentation } from "@cssearth/renderer/navigation/marker-presentation.ts";
-import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
-import { encodeLossyWebp } from '@cssearth/bake/raster';
-import { loadAstronomyPackage } from "@cssearth/bake/astronomy";
-import { authoredObject } from '@cssearth/bake/sources';
+import { optimizePreparedQ75Webp } from "../delivery/index.ts";
+import { encodeLossyWebp } from '../raster/index.ts';
+import { loadAstronomyPackage } from "../astronomy/index.ts";
+import { authoredObject } from '../sources/index.ts';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
 const markerTileSize = 16;
 export const BODY_MARKER_ATLAS_PAGE_SIZE = 256;
-const PLANET_MARKER_PLANETS = Object.freeze(
-  readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+/** The scene objects nearest first, read from the registry on first use rather than when the entry is imported. */
+let planetMarkerPlanets: readonly MarkerPlanet[] | undefined;
+const PLANET_MARKER_PLANETS = () => planetMarkerPlanets ??= Object.freeze(
+  readPreparedObjects(ROOT).sceneObjects
     .toSorted((left, right) => left.distance.meters - right.distance.meters),
 );
 
 export async function loadMarkerDescriptors({
-  planets = PLANET_MARKER_PLANETS,
-  projectRoot = resolve(import.meta.dirname, "../.."),
+  planets = PLANET_MARKER_PLANETS(),
+  projectRoot = ROOT,
 } : MarkerLoadOptions = {}) {
   const descriptors: ObjectMarkerDescriptor[] = [];
   for (const planet of planets) {
@@ -76,9 +80,9 @@ export async function loadMarkerDescriptors({
 }
 
 export async function prepareNavigation({
-  projectRoot = resolve(import.meta.dirname, "../.."),
+  projectRoot = ROOT,
   outputRoot = resolve(projectRoot, "public/navigation"),
-  planets = PLANET_MARKER_PLANETS,
+  planets = PLANET_MARKER_PLANETS(),
   presentationPath = resolve(projectRoot, "site/prepared-navigation-markers.mjs"),
   moveFile = moveNavigationFile,
   objectIds,
@@ -246,7 +250,7 @@ export async function moveNavigationFile(source: string, target: string, io: {re
 
 // A moon's parent can occupy hundreds of pixels in the shared world view.
 // Parents and explicitly sized resolved views use their own image; UI icons stay tiny.
-export async function prepareContextMarkers({ projectRoot, outputRoot, descriptors, planets = PLANET_MARKER_PLANETS }: MarkerRenderOptions & {planets?: readonly MarkerPlanet[]}) {
+export async function prepareContextMarkers({ projectRoot, outputRoot, descriptors, planets = PLANET_MARKER_PLANETS() }: MarkerRenderOptions & {planets?: readonly MarkerPlanet[]}) {
   const { BODIES } = await loadAstronomyPackage();
   const bodies: Readonly<Partial<Record<string, (typeof BODIES)[keyof typeof BODIES]>>> = BODIES;
   const parents = new Set<string | null | undefined>(planets.filter(({ classification }) => classification === "satellite")
@@ -555,7 +559,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
 
 /** Project-authored UI outline, rasterized once at canonical 4x density. */
 export async function prepareSunIndicator({
-  projectRoot = resolve(import.meta.dirname, "../.."),
+  projectRoot = ROOT,
   outputRoot = resolve(projectRoot, "public/navigation"),
 } = {}) {
   const swatch = requireRecord(JSON.parse(await readFile(resolve(projectRoot, "src/objects/sun/swatch.json"), "utf8")));
@@ -610,4 +614,3 @@ async function loadObjectDescriptor(objectId: string, projectRoot: string): Prom
   return module.default;
 }
 
-refuseDirectRun(import.meta);

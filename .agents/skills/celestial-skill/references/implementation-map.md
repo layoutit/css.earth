@@ -55,7 +55,7 @@ fallback requirements are not the current authored-package template.
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
 | Content, lens labels and minimap preparation | `@cssearth/bake/objects/content` (the content contract, lens labels, lens steps and legends), `tools/objects/content/prepare.ts`, `tools/prepare/prepare-surface-minimaps.mts` |
-| Search and marker presentation | `site/search/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
+| Search and marker presentation | `site/search/search-objects.mts`, `packages/bake/src/navigation/prepare-navigation.ts`, `packages/renderer/src/navigation/marker-presentation.ts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `packages/bake/src/world-context/hyperbolic-path.ts`, shared world-context preparation and orbit validation/projector |
 
 Minimap preparation accepts authored source paths and prepared source records.
@@ -83,7 +83,7 @@ the shared world camera.
 
 Navigation marker appearance comes from each authored package's
 `source/preparation/navigation.json`, which names its source image by path;
-the pins and attribution are the source manifest's record. `tools/prepare/prepare-navigation.mts` generates
+the pins and attribution are the source manifest's record. `packages/bake/src/navigation/prepare-navigation.ts` generates
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
 images and recipes; `ObjectNavigationMarker.astro` consumes it. Follow the

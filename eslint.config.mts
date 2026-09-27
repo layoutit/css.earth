@@ -96,9 +96,11 @@ export default [
     // The prepared-presentation passes rewrite the renderer's prepared tree, depth order and interior disc, and the object
     // runtime contract reads the renderer's prepared resources and object controls.
     // The object-content contract names the renderer's object contract types, and surface features index the renderer's label banks.
+    // Navigation preparation validates marker presentation with the renderer's marker rules.
     files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts', 'packages/bake/src/nebula/**/*.ts', 'packages/bake/src/world-context/**/*.ts', 'packages/bake/src/cluster-catalog/**/*.ts', 'packages/bake/src/galaxy-catalog/**/*.ts', 'packages/bake/src/environment/**/*.ts', 'packages/bake/src/image-layers/**/*.ts', 'packages/bake/src/density/**/*.ts', 'packages/bake/src/sky/**/*.ts', 'packages/bake/src/shell/**/*.ts', 'packages/bake/src/stars/**/*.ts', 'packages/bake/src/volume-leaves/**/*.ts', 'packages/bake/src/objects/layers/**/*.ts',
       'packages/bake/src/objects/scene/**/*.ts', 'packages/bake/src/prepared-presentation/**/*.ts',
-      'packages/bake/src/contract/**/*.ts', 'packages/bake/src/objects/content/**/*.ts', 'packages/bake/src/objects/surface-features/**/*.ts'],
+      'packages/bake/src/contract/**/*.ts', 'packages/bake/src/objects/content/**/*.ts', 'packages/bake/src/objects/surface-features/**/*.ts',
+      'packages/bake/src/navigation/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
@@ -147,8 +149,9 @@ export default [
   },
   {
     // Moved unchanged from tools/objects, which warns instead of failing on the line limit; splitting them is separate work.
-    // The layered-oblate and cutaway bakes were held byte-identical across the move, so neither module is split here.
-    files: ['packages/bake/src/objects/layers/material-composition/layered-oblate.ts', 'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts'],
+    // The layered-oblate and cutaway bakes and the navigation preparation were held byte-identical across the move, so none is split here.
+    files: ['packages/bake/src/objects/layers/material-composition/layered-oblate.ts', 'packages/bake/src/objects/layers/material-composition/cutaway-materials.ts',
+      'packages/bake/src/navigation/prepare-navigation.ts'],
     rules: { 'max-lines': 'off' },
   },
   {
