@@ -14,7 +14,7 @@ const esc = (v: unknown) =>
 const number = (n: number) => n.toLocaleString("en-US");
 const human = (s: string) => (s ? s[0].toUpperCase() + s.slice(1).replaceAll("-", " ") : "");
 const name = (token: string) => data.labels[token] ?? human(token);
-const info = (token: string) => data.catalogue[token] ?? { kind: "", parent: "", object: "" };
+const info = (token: string) => data.catalogue[token] ?? { kind: "", parent: "", object: "", catalogued: false };
 
 // Decisions that name a row as a candidate or proposal input, and decisions still waiting for a reader. "Qualification
 // first" is a screening note and "outside GeoTIFF candidates" a rejection, so neither counts.
@@ -38,38 +38,22 @@ for (const e of entries.values()) {
   const parent = info(e.token).parent;
   if (parent && parent !== e.token) entry(parent).children.push(e);
 }
-// Bodies cssEarth knows, or that a proposal names, stand on their own. The thousands of other targets the sources list
-// (calibration stars, lightcurve asteroids, "Multiple asteroids") wait in one group.
-const other = "other-targets";
-data.labels[other] = "Other targets";
-const standalone = (e: Entry) => !!(info(e.token).kind || info(e.token).object || e.proposals.length || e.children.length);
+// Targets outside cssEarth's catalogue with no proposal (lightcurve asteroids, calibration stars, solar wind) collapse
+// into one "more" row per kind section.
+const info0 = (t: string) => data.catalogue[t];
 for (const e of [...entries.values()])
-  if (!info(e.token).parent && !standalone(e)) entry(other).children.push(e);
-const top = [...entries.values()].filter(
-  (e) => e.token === other || ((!info(e.token).parent || !entries.has(info(e.token).parent)) && standalone(e)),
-);
+  if (info0(e.token) && !info0(e.token).catalogued && !e.proposals.length && !info(e.token).parent) {
+    const more = "more:" + info(e.token).kind;
+    data.catalogue[more] ??= { kind: info(e.token).kind, parent: "", object: "", catalogued: true };
+    entry(more).children.push(e);
+  }
+const hidden = (e: Entry) => !!info0(e.token) && !info0(e.token).catalogued && !e.proposals.length;
+const top = [...entries.values()].filter((e) => !hidden(e) && (!info(e.token).parent || !entries.has(info(e.token).parent)));
+for (const e of top) if (e.token.startsWith("more:")) data.labels[e.token] = "Not in cssEarth's catalogue";
 
-type Stats = {
-  rows: ViewerRow[];
-  proposals: ViewerProposal[];
-  priority: number;
-  blocked: number;
-  candidates: number;
-  review: number;
-  images: number;
-  sources: number;
-};
+type Stats = { rows: ViewerRow[]; proposals: ViewerProposal[]; review: number; sources: number };
 function stats(rows: ViewerRow[], proposals: ViewerProposal[]): Stats {
-  return {
-    rows,
-    proposals,
-    priority: Math.min(...proposals.map((p) => p.priority)),
-    blocked: proposals.filter((p) => p.status === "blocked").length,
-    candidates: rows.filter((r) => isCandidate(r.decision)).length,
-    review: rows.filter((r) => needsReview(r.decision)).length,
-    images: rows.filter((r) => r.thumbnail).length,
-    sources: new Set(rows.map((r) => r.source)).size,
-  };
+  return { rows, proposals, review: rows.filter((r) => needsReview(r.decision)).length, sources: new Set(rows.map((r) => r.source)).size };
 }
 const own = new Map<Entry, Stats>([...entries.values()].map((e) => [e, stats(e.rows, e.proposals)]));
 // A system counts each record and proposal once, though the Photojournal tags a moon's images with its planet too.
@@ -86,17 +70,13 @@ const statsOf = (e: Entry) => system.get(e) ?? own.get(e) ?? stats([], []);
 // ---------- filters and sorting, kept in the URL
 
 type Column = { key: string; label: string; numeric: boolean; value: (e: Entry, s: Stats) => number | string; cls?: string };
+// Four columns, one question each: can cssEarth show it, is work planned, what is still unread, how much exists.
 const columns: Column[] = [
   { key: "body", label: "Body", numeric: false, value: (e) => name(e.token).toLowerCase() },
   { key: "cssearth", label: "In cssEarth", numeric: false, value: (e) => (info(e.token).object ? "yes" : ""), cls: "hide" },
   { key: "proposals", label: "Proposals", numeric: true, value: (_, s) => s.proposals.length },
-  { key: "priority", label: "Best priority", numeric: true, value: (_, s) => (Number.isFinite(s.priority) ? s.priority : Infinity) },
-  { key: "blocked", label: "Blocked", numeric: true, value: (_, s) => s.blocked, cls: "hide" },
-  { key: "candidates", label: "Candidates", numeric: true, value: (_, s) => s.candidates },
   { key: "review", label: "Needs review", numeric: true, value: (_, s) => s.review },
-  { key: "images", label: "Images", numeric: true, value: (_, s) => s.images, cls: "hide" },
   { key: "records", label: "Records", numeric: true, value: (_, s) => s.rows.length },
-  { key: "sources", label: "Sources", numeric: true, value: (_, s) => s.sources, cls: "hide" },
 ];
 const url = new URLSearchParams(location.search);
 const state = {
@@ -104,7 +84,6 @@ const state = {
   kind: url.get("kind") ?? "",
   cssearth: url.get("cssearth") === "1",
   proposals: url.get("proposals") === "1",
-  candidates: url.get("candidates") === "1",
   sort: columns.some((c) => c.key === url.get("sort")) ? (url.get("sort") ?? "proposals") : "proposals",
   ascending: url.get("dir") === "asc",
   expanded: new Set<string>(),
@@ -116,13 +95,12 @@ function saveUrl(extra: Record<string, string> = {}) {
   if (state.kind) p.set("kind", state.kind);
   if (state.cssearth) p.set("cssearth", "1");
   if (state.proposals) p.set("proposals", "1");
-  if (state.candidates) p.set("candidates", "1");
   if (state.sort !== "proposals") p.set("sort", state.sort);
   if (state.ascending) p.set("dir", "asc");
   for (const [k, v] of Object.entries(extra)) p.set(k, v);
   return p.size ? "?" + p : "/";
 }
-const filtering = () => !!(state.q || state.kind || state.cssearth || state.proposals || state.candidates);
+const filtering = () => !!(state.q || state.kind || state.cssearth || state.proposals);
 function passes(e: Entry): boolean {
   const s = own.get(e) ?? stats([], []);
   const words = state.q.toLowerCase().split(/\s+/).filter(Boolean);
@@ -131,8 +109,7 @@ function passes(e: Entry): boolean {
     words.every((w) => text.includes(w)) &&
     (!state.kind || info(e.token).kind === state.kind) &&
     (!state.cssearth || !!info(e.token).object) &&
-    (!state.proposals || s.proposals.length > 0) &&
-    (!state.candidates || s.candidates > 0)
+    (!state.proposals || s.proposals.length > 0)
   );
 }
 function compare(a: Entry, b: Entry, sa = statsOf(a), sb = statsOf(b)): number {
@@ -149,22 +126,18 @@ function compare(a: Entry, b: Entry, sa = statsOf(a), sb = statsOf(b)): number {
 // ---------- the table
 
 function cells(e: Entry, s: Stats, label: string): string {
-  const object = info(e.token).object;
-  return `<td>${label}</td><td class="meta hide">${object ? "Yes" : ""}</td><td class="n">${s.proposals.length ? number(s.proposals.length) : ""}</td><td class="n">${
-    Number.isFinite(s.priority) ? s.priority : ""
-  }</td><td class="n hide">${s.blocked ? number(s.blocked) : ""}</td><td class="n">${s.candidates ? number(s.candidates) : ""}</td><td class="n">${s.review ? number(s.review) : ""}</td><td class="n hide">${s.images ? number(s.images) : ""}</td><td class="n">${
-    number(s.rows.length)
-  }</td><td class="n hide">${s.sources ? number(s.sources) : ""}</td>`;
+  const count = (n: number) => `<td class="n">${n ? number(n) : ""}</td>`;
+  return `<td>${label}</td><td class="meta hide">${info(e.token).object ? "Yes" : ""}</td>${count(s.proposals.length)}${count(s.review)}${count(s.rows.length)}`;
 }
 function childrenWord(e: Entry): string {
   const kinds = new Set(e.children.map((c) => info(c.token).kind));
   const word =
-    e.token === other ? "target" : kinds.size === 1 && kinds.has("satellite") ? "moon" : kinds.size === 1 && kinds.has("exoplanet") ? "planet" : "body";
+    e.token.startsWith("more:") ? "target" : kinds.size === 1 && kinds.has("satellite") ? "moon" : kinds.size === 1 && kinds.has("exoplanet") ? "planet" : "body";
   const n = e.children.length;
   return `${number(n)} ${word === "body" ? (n === 1 ? "body" : "bodies") : word + (n === 1 ? "" : "s")}`;
 }
 // Section order and headings for the kinds packages/astronomy uses; a kind missing here sorts after them.
-const kindOrder = ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "star", "black-hole", "exoplanet", ""];
+const kindOrder = ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "star", "black-hole", "exoplanet", "deep-sky", "cross-body", "field", ""];
 const kindHeading: Record<string, string> = {
   planet: "Planets",
   "dwarf-planet": "Dwarf planets",
@@ -176,19 +149,22 @@ const kindHeading: Record<string, string> = {
   star: "Stars",
   "black-hole": "Black holes",
   exoplanet: "Exoplanets",
+  "deep-sky": "Deep-sky objects",
+  "cross-body": "Proposals across bodies",
+  field: "Fields and phenomena",
   "": "Unclassified",
 };
 const kindRank = (k: string) => (kindOrder.includes(k) ? kindOrder.indexOf(k) : kindOrder.length - 1.5);
 function entryRows(e: Entry, active: boolean): string[] {
   if (!e.children.length)
     return passes(e) ? [`<tr class="link" data-body="${esc(e.token)}">${cells(e, own.get(e) ?? stats([], []), esc(name(e.token)))}</tr>`] : [];
-  const members = [...(e.token === other ? [] : [e]), ...[...e.children].sort((a, b) => compare(a, b, own.get(a), own.get(b)))];
+  const members = [...(e.token.startsWith("more:") ? [] : [e]), ...[...e.children].sort((a, b) => compare(a, b, own.get(a), own.get(b)))];
   const shown = active ? members.filter(passes) : members;
   if (!shown.length) return [];
   const open = active || state.expanded.has(e.token);
   const caret = `<button class="caret" data-toggle="${esc(e.token)}" aria-expanded="${open}" aria-label="Show ${esc(childrenWord(e))}">${open ? "▾" : "▸"}</button>`;
   const out = [
-    `<tr class="link system" data-body="${esc(e.token)}" data-system="1">${cells(e, statsOf(e), `${caret}${esc(name(e.token))} <span class="sub-inline">${e.token === other ? "" : "system · "}${esc(childrenWord(e))}</span>`)}</tr>`,
+    `<tr class="link system" data-body="${esc(e.token)}" data-system="1">${cells(e, statsOf(e), `${caret}${esc(name(e.token))} <span class="sub-inline">${e.token.startsWith("more:") ? "" : "system · "}${esc(childrenWord(e))}</span>`)}</tr>`,
   ];
   if (open)
     for (const m of shown)
@@ -201,16 +177,16 @@ function tableRows(): string {
   const active = filtering();
   const groups = new Map<string, Entry[]>();
   for (const e of top) {
-    const kind = e.token === other ? "other" : info(e.token).kind;
+    const kind = info(e.token).kind;
     groups.set(kind, [...(groups.get(kind) ?? []), e]);
   }
-  const order = [...groups.keys()].sort((a, b) => (a === "other" ? 1 : b === "other" ? -1 : kindRank(a) - kindRank(b) || a.localeCompare(b)));
+  const order = [...groups.keys()].sort((a, b) => kindRank(a) - kindRank(b) || a.localeCompare(b));
   const out: string[] = [];
   for (const kind of order) {
-    const members = (groups.get(kind) ?? []).sort((a, b) => compare(a, b));
+    const members = (groups.get(kind) ?? []).sort((a, b) => Number(a.token.startsWith("more:")) - Number(b.token.startsWith("more:")) || compare(a, b));
     const rows = members.map((e) => entryRows(e, active)).filter((r) => r.length);
     if (!rows.length) continue;
-    const heading = kind === "other" ? "Not in the cssEarth catalogue" : kindHeading[kind] ?? human(kind);
+    const heading = kindHeading[kind] ?? human(kind);
     const closed = !active && state.closedKinds.has(kind);
     out.push(
       `<tr class="kind" data-kind="${esc(kind)}"><td colspan="${columns.length}"><button class="caret" aria-expanded="${!closed}">${closed ? "▸" : "▾"}</button>${esc(heading)} <span class="sub-inline">${number(rows.length)}</span></td></tr>`,
@@ -228,12 +204,12 @@ function table(): string {
       return `<th class="sortable ${c.numeric ? "n" : ""} ${c.cls ?? ""}" data-sort="${c.key}" aria-sort="${sorted ? (state.ascending ? "ascending" : "descending") : "none"}">${c.label}${arrow}</th>`;
     })
     .join("");
-  const check = (key: "cssearth" | "proposals" | "candidates", label: string) =>
+  const check = (key: "cssearth" | "proposals", label: string) =>
     `<label class="check"><input type="checkbox" data-flag="${key}"${state[key] ? " checked" : ""}> ${label}</label>`;
   return `<h1>Astronomy data ledger</h1><p class="muted">${number(data.proposals.length)} proposals and ${number(data.rows.length)} source records. Sources count different populations, so record totals are not unique datasets. A system row adds up its planet and moons.</p>
   <div class="filters"><input id="filter" type="search" placeholder="Filter bodies" value="${esc(state.q)}" autocomplete="off"><select id="kind"><option value="">All kinds</option>${kinds
     .map((k) => `<option value="${esc(k)}"${state.kind === k ? " selected" : ""}>${esc(human(k))}</option>`)
-    .join("")}</select>${check("cssearth", "In cssEarth")}${check("proposals", "Has proposals")}${check("candidates", "Has candidates")}</div>
+    .join("")}</select>${check("cssearth", "In cssEarth")}${check("proposals", "Has proposals")}</div>
   <table><thead><tr>${header}</tr></thead><tbody id="rows">${tableRows()}</tbody></table>`;
 }
 
@@ -343,7 +319,7 @@ main.addEventListener("input", (event) => {
   else if (t instanceof HTMLSelectElement && t.id === "kind") state.kind = t.value;
   else if (t instanceof HTMLInputElement && t.dataset.flag) {
     const flag = t.dataset.flag;
-    if (flag === "cssearth" || flag === "proposals" || flag === "candidates") state[flag] = t.checked;
+    if (flag === "cssearth" || flag === "proposals") state[flag] = t.checked;
   } else return;
   refreshRows();
 });

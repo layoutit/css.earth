@@ -31,5 +31,5 @@ export type ViewerData = {
   sources: ViewerSource[];
   labels: Record<string, string>;
   // Per body token: its kind and parent body from packages/astronomy, and its src/objects package id if cssEarth has one.
-  catalogue: Record<string, { kind: string; parent: string; object: string }>;
+  catalogue: Record<string, { kind: string; parent: string; object: string; catalogued: boolean }>;
 };

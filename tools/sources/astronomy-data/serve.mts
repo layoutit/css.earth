@@ -1,8 +1,9 @@
 import { createServer, type ServerResponse } from "node:http";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { stripTypeScriptTypes } from "node:module";
-import { root, loadRows, loadProposals, bodiesOf, type Row } from "./model.mts";
+import { root, loadRows, loadProposals, type Row } from "./model.mts";
+import { bodyCatalogue, type Body } from "./viewer/catalogue.mts";
 import type {
   ViewerData,
   ViewerRow,
@@ -55,7 +56,7 @@ function listed(r: Row): ViewerRow {
     id: r.id,
     title: r.title,
     target: r.target,
-    bodies: bodiesOf(r.target),
+    bodies: [],
     instrument: r.instrument,
     decision: r.decision,
     reason: r.reason,
@@ -66,97 +67,59 @@ function listed(r: Row): ViewerRow {
   };
 }
 // PDS4 and Maryland rows shorten their target text ("…; +6 more") but keep every target in details.targets.
-function targetsOf(r: Row): string {
+function targetsOf(r: Row): string[] {
   const d = r.details;
   const all = d && typeof d === "object" && "targets" in d && Array.isArray(d.targets) ? d.targets.filter((t): t is string => typeof t === "string") : [];
-  return all.length ? all.join("; ") : r.target;
+  return all.length ? all : r.target.split(";");
 }
-const recorded = new Set(rows.flatMap((r) => bodiesOf(targetsOf(r))));
-async function proposals(): Promise<ViewerProposal[]> {
-  const markdown = await readFile(root + "/PROPOSALS.md", "utf8");
-  return loadProposals().map((p) => {
-    const writeup = markdown.split("\n## P" + p.id + "\n")[1]?.split("\n## P")[0]?.trim();
-    if (!writeup) throw Error(`PROPOSALS.md has no writeup for P${p.id}`);
-    // A writeup names its bodies on its "Content owners:" line. Otherwise its title may name them ("Moon and Mercury: …"),
-    // but only words a record also names count as bodies; "Taxonomy: …" or "Small bodies: …" go under "several".
-    const owners = /^Content owners: (.*)$/m.exec(writeup)?.[1] ?? "";
-    const named = [...owners.matchAll(/\[([^\]]+)\]\(/g)].map((m) => m[1].toLowerCase());
-    const titled = p.title.split(":")[0].split(/,\s*|\s+and\s+/).map((t) => t.trim().toLowerCase()).filter((t) => recorded.has(t));
-    return {
-      id: p.id,
-      title: p.title,
-      status: p.status,
-      priority: p.priority,
-      nextStep: p.next_step,
-      blocker: p.blocker,
-      prUrl: p.pr_url,
-      bodies: named.length ? named : titled.length ? titled : ["several"],
-      writeup: writeup.replace(/^### .*\n+/, ""),
-    };
-  });
-}
-function labels(): Record<string, string> {
-  // Sources spell one body differently ("mars", "MARS", "(4) Vesta").
-  const out: Record<string, string> = { several: "Several bodies" };
-  for (const r of rows)
-    for (const raw of targetsOf(r).split(";")) {
-      const label = raw.trim().replace(/^\(\d+\)\s*/, "").replace(/^\*\s+/, "");
-      const [key] = bodiesOf(label);
-      // Prefer "Tempel 1" over "TEMPEL 1" over "tempel 1".
-      const score = (t: string) => (t !== t.toLowerCase() && t !== t.toUpperCase() ? 2 : t !== t.toLowerCase() ? 1 : 0);
-      if (key && (!out[key] || score(label) > score(out[key]))) out[key] = label;
-    }
-  return out;
-}
-// What cssEarth knows about each body: its kind and parent from packages/astronomy/data/bodies, and whether it has an
-// object package. A ledger body matches a record by id, hyphenated name ("3i/atlas" is 3i-atlas) or comet id ("67p"
-// is comet-67p).
-const repository = resolve(root, "../../..");
-const packages = new Set(
-  (await readdir(resolve(repository, "src/objects"), { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name),
-);
-const known = new Map<string, { kind: string; parent: string; name: string }>();
-for (const file of await readdir(resolve(repository, "packages/astronomy/data/bodies"))) {
-  if (!file.endsWith(".json")) continue;
-  const record: unknown = JSON.parse(await readFile(resolve(repository, "packages/astronomy/data/bodies", file), "utf8"));
-  const id = field(record, "id");
-  if (!id) throw Error(`packages/astronomy/data/bodies/${file} has no id`);
-  const physical = record && typeof record === "object" && "physical" in record ? record.physical : undefined;
-  const satellite = record && typeof record === "object" && "satellite" in record ? record.satellite : undefined;
-  known.set(id, { kind: field(record, "classification"), parent: field(satellite, "parent") || field(physical, "parent"), name: field(physical, "name") });
-}
-// The Sun and Sgr A* are the roots of the Solar System and the Galaxy; nesting under them would fold nearly every
-// row into two groups, so their children stay at the top level.
-const roots = new Set(["sun", "sgr-a-star"]);
-const catalogue: ViewerData["catalogue"] = {};
-const idOf = (token: string) => [token, token.replaceAll(/[\s/]+/g, "-"), "comet-" + token].find((c) => known.has(c) || packages.has(c)) ?? "";
-const proposalList = await proposals();
-for (const token of [...recorded, ...proposalList.flatMap((p) => p.bodies)]) {
-  const id = idOf(token), record = known.get(id);
-  const parent = record && !roots.has(record.parent) ? record.parent : "";
-  catalogue[token] = { kind: record?.kind ?? "", parent, object: packages.has(id) ? id : "" };
+const catalogue = await bodyCatalogue(resolve(root, "../../.."));
+const bodies: ViewerData["catalogue"] = {};
+const labels: Record<string, string> = { several: "Several bodies" };
+const add = (b: Body) => {
+  bodies[b.key] = { kind: b.kind, parent: b.parent, object: b.object, catalogued: b.catalogued };
+  labels[b.key] ??= b.label;
   // A parent the ledger never names still needs its own row to hold its moons.
-  if (parent && !catalogue[parent] && !recorded.has(parent)) {
-    const up = known.get(parent);
-    catalogue[parent] = { kind: up?.kind ?? "", parent: "", object: packages.has(parent) ? parent : "" };
+  if (b.parent && !bodies[b.parent]) {
+    const up = catalogue.known.get(b.parent);
+    bodies[b.parent] = { kind: up?.kind ?? "", parent: "", object: "", catalogued: true };
+    labels[b.parent] ??= up?.name || b.parent;
   }
-}
-// The Photojournal tags a moon's images with its planet too ("earth; moon", "enceladus; saturn"). A record that names a
-// body and that body's parent counts for the body, so Earth and Saturn do not collect their moons' pictures.
+};
+// The Photojournal tags a moon's images with its planet too; such a record counts for the moon.
 function ownBodies(r: Row): string[] {
-  const tagged = bodiesOf(targetsOf(r));
-  if (r.source !== "photojournal") return tagged;
-  const parents = new Set(tagged.map((t) => known.get(idOf(t))?.parent).filter(Boolean));
-  const kept = tagged.filter((t) => !parents.has(idOf(t)));
-  return kept.length ? kept : tagged;
+  const found = targetsOf(r).map(catalogue.body).filter((b): b is Body => !!b);
+  found.forEach(add);
+  const keys = [...new Set(found.map((b) => b.key))];
+  if (r.source !== "photojournal") return keys;
+  const parents = new Set(keys.map(catalogue.parentOf));
+  const kept = keys.filter((k) => !parents.has(k));
+  return kept.length ? kept : keys;
 }
-const names = labels();
-// cssEarth's own name wins over a source's spelling ("EARTH", "earth").
-for (const token of Object.keys(catalogue)) {
-  const record = known.get(idOf(token));
-  if (record?.name) names[token] = record.name;
-}
-const data: ViewerData = { rows: rows.map((r) => ({ ...listed(r), bodies: ownBodies(r) })), proposals: proposalList, sources, labels: names, catalogue };
+const listedRows = rows.map((r) => ({ ...listed(r), bodies: ownBodies(r) }));
+const markdown = await readFile(root + "/PROPOSALS.md", "utf8");
+const proposals: ViewerProposal[] = loadProposals().map((p) => {
+  const writeup = markdown.split("\n## P" + p.id + "\n")[1]?.split("\n## P")[0]?.trim();
+  if (!writeup) throw Error(`PROPOSALS.md has no writeup for P${p.id}`);
+  // Bodies from the "Content owners:" line, else from the title ("Moon and Mercury: …") when cssEarth knows them;
+  // "Asteroids: …" and the like go under "several".
+  const owners = [...(/^Content owners: (.*)$/m.exec(writeup)?.[1] ?? "").matchAll(/\[([^\]]+)\]\(/g)].map((m) => m[1]);
+  const titled = p.title.split(":")[0].split(/,\s*|\s+and\s+/);
+  const found = (owners.length ? owners : titled).map(catalogue.body).filter((b): b is Body => !!b && b.catalogued);
+  found.forEach(add);
+  return {
+    id: p.id,
+    title: p.title,
+    status: p.status,
+    priority: p.priority,
+    nextStep: p.next_step,
+    blocker: p.blocker,
+    prUrl: p.pr_url,
+    bodies: found.length ? [...new Set(found.map((b) => b.key))] : ["several"],
+    writeup: writeup.replace(/^### .*\n+/, ""),
+  };
+});
+bodies.several = { kind: "cross-body", parent: "", object: "", catalogued: true };
+const data: ViewerData = { rows: listedRows, proposals, sources, labels, catalogue: bodies };
 const page = await readFile(root + "/viewer/index.html", "utf8");
 const script = stripTypeScriptTypes(await readFile(root + "/viewer/app.mts", "utf8"));
 const json = JSON.stringify(data);
