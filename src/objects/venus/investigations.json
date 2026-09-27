@@ -122,6 +122,69 @@
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
       ]
+    },
+    {
+      "id": "magellan-emissivity",
+      "subject": "Magellan global microwave emissivity",
+      "status": "included",
+      "finding": "The USGS 4641 m signed GeoTIFF is decoded as (DN-1)/10000 with its declared nodata and projection. Antenna and atmosphere corrections are included; emission angle, roughness and tilt are not corrected.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "akatsuki-ir2-night-clouds",
+      "subject": "Akatsuki IR2 2.26 micrometre night-side clouds",
+      "status": "deferred",
+      "finding": "No full-coverage date sequence was qualified here; this surface emissivity addition retains the existing ultraviolet cloud data.",
+      "evidence": [
+        "https://darts.isas.jaxa.jp/missions/akatsuki/ir2_en.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "A particular Level 3 release and its usable geographic coverage are selected."
+    },
+    {
+      "id": "ivanov-head-geology",
+      "subject": "Ivanov and Head 2011 geology",
+      "status": "deferred",
+      "finding": "The showcase investigation did not establish a reusable numerical GIS product for the published 13-unit map.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2011P&SS...59.1559I/abstract"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "The published GIS units and symbology are acquired with clear reuse terms."
+    },
+    {
+      "id": "virtis-surface-emissivity",
+      "subject": "VIRTIS 1 micrometre surface emissivity",
+      "status": "deferred",
+      "finding": "A calibrated geographic product and its southern coverage have not been qualified for this release. It is distinct from the Magellan microwave lens.",
+      "evidence": [
+        "https://www.cosmos.esa.int/web/psa/venus-express"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "The numeric surface-emissivity grid and its atmosphere correction and gaps are established."
     }
   ]
 }

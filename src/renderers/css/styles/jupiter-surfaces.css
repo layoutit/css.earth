@@ -106,7 +106,7 @@
   padding: 0;
   transform-origin: 0 0;
   backface-visibility: hidden;
-  background-image: url("/scenes/jupiter/jupiter-surface@2x.webp");
+  background-image: var(--jupiter-surface-image, url("/scenes/jupiter/jupiter-surface@2x.webp"));
   background-repeat: no-repeat;
   background-origin: border-box;
   background-clip: border-box;
@@ -114,7 +114,7 @@
 }
 
 :where(.object-stage[data-object-id="jupiter"]) .jupiter-body > .jupiter-pole {
-  background-image: url("/scenes/jupiter/jupiter-poles@2x.webp");
+  background-image: var(--jupiter-poles-image, url("/scenes/jupiter/jupiter-poles@2x.webp"));
 }
 
 .jupiter-stage:where([data-object-id="jupiter"])[data-lens="ultraviolet"] .jupiter-body > s:not(.jupiter-pole) {
@@ -149,4 +149,64 @@
 @keyframes jupiter-body-spin {
   from { transform: rotateZ(-145deg); }
   to { transform: rotateZ(-505deg); }
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2015a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2015a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2015a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2016a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2016a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2016a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2017a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2017a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2017a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2018a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2018a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2018a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2019a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2019a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2019a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2020a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2020a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2020a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2021a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2021a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2021a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2022a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2022a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2022a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2024a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2024a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2024a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2024c"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2024c@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2024c-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="visible-2025a"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-visible-2025a@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-visible-2025a-poles@2x.webp");
+}
+
+.jupiter-stage:where([data-object-id="jupiter"])[data-lens="magnetic"] {
+  --jupiter-surface-image: url("/scenes/jupiter/jupiter-magnetic@2x.webp");
+  --jupiter-poles-image: url("/scenes/jupiter/jupiter-magnetic-poles@2x.webp");
 }

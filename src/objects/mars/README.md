@@ -20,6 +20,8 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 ## Evidence
 
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [geology](evidence/showcase/geology.png).
+
 ### Additional surface datasets (26 September 2026)
 
 | View | Source, processing and limits |

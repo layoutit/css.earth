@@ -22,6 +22,8 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [carbon dioxide](evidence/showcase/carbon-dioxide.png).
+
 ### Recovered observation views (26 September 2026)
 
 Four views from the parked showcase have been prepared with the current tools while retaining the current Galileo colour work:

@@ -18,6 +18,8 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 ## Evidence
 
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [emissivity](evidence/showcase/emissivity.png).
+
 ### Magellan microwave emissivity (26 September 2026)
 
 [USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) is decoded by the existing GeoTIFF science reader. Its signed 16-bit DN converts to dimensionless emissivity as `(DN − 1) / 10,000`; −32,768 is missing. The 8,193 × 4,097 grid has 1,334,015 missing samples, and valid values range from 0.2926 to 0.9986. The displayed scale is 0.29–1.00 and uses lossless colour encoding.

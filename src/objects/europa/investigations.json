@@ -34,18 +34,20 @@
     },
     {
       "id": "jwst-trumbo-brown-2023-carbon-dioxide",
-      "subject": "Trumbo and Brown 2023 JWST spatial distribution of carbon dioxide",
-      "status": "unresolved",
-      "finding": "Read the paper and its data-availability statement. The observations show spatial variation associated with Tara Regio, but the cited availability route provides raw MAST program 1250 observations, calibration program 1538 and reduction software. A released coordinate-bound numerical map was not located in this pass. A plotted paper figure is not a qualified surface input, and lack of a located map is not proof that one does not exist.",
-      "revisitWhen": "Inspect the linked reduction-software release for numerical map outputs and coordinate metadata, or qualify preparation from the MAST observations before proposing a ready carbon-dioxide surface layer.",
+      "subject": "JWST carbon dioxide band depth",
+      "status": "included",
+      "finding": "The current cube reducer maps eight public NIRSpec visits from November 2022 to February 2025, preserving finite coverage. This satisfies the former numerical-map acquisition condition; the continuum-relative depth is not an abundance retrieval.",
       "evidence": [
-        "https://doi.org/10.1126/science.adg4155",
-        "https://arxiv.org/abs/2309.11684"
+        "https://doi.org/10.1126/science.adg4155"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        },
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
         }
       ]
     },
@@ -209,6 +211,83 @@
           "commit": "7387444f62423f84fde33abc338b634681508d31"
         }
       ]
+    },
+    {
+      "id": "jwst-peroxide-dispute",
+      "subject": "JWST 3.50 micrometre feature",
+      "status": "included",
+      "finding": "The continuum-relative feature is displayed as Peroxide signature with the Yoffe and Shahaf 2026 instrumental-artifact dispute in the reader caption. Negative estimates are retained; this is not the published band-area method.",
+      "evidence": [
+        "https://arxiv.org/html/2603.10520v1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "hst-salt-signature",
+      "subject": "STIS 450 nm absorption",
+      "status": "included",
+      "finding": "The current slit-scan reduction reproduces the 60-frame map, 82.3 percent coverage and the strongest feature beside Tara Regio. Irradiated sodium chloride is a spectral interpretation; an ocean origin is not established.",
+      "evidence": [
+        "https://doi.org/10.1126/sciadv.aaw7123"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "juno-2022-flyby",
+      "subject": "JunoCam 29 September 2022 flyby",
+      "status": "included",
+      "finding": "Four released RGB-strip observations use the existing SPICE camera and limb refinement. Their observed illumination and missing footprint remain explicit.",
+      "evidence": [
+        "https://pds-imaging.jpl.nasa.gov/volumes/juno.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "alma-thermal-showcase",
+      "subject": "Parked ALMA thermal map and additional sessions",
+      "status": "deferred",
+      "finding": "The parked derived temperature grid was absent from the branch and public source cache. Two additional sessions were unfinished. An old colour image cannot substitute for its numeric product.",
+      "evidence": [
+        "https://almascience.nrao.edu/aq/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "The numeric map is recovered with its reduction receipt, or the original calibrated data are reduced and independently checked."
+    },
+    {
+      "id": "plume-transit-gallery",
+      "subject": "Disputed Hubble plume-transit gallery",
+      "status": "deferred",
+      "finding": "The parked gallery preparation was unfinished. Its disputed plume interpretation needs an explicit caption and completed source registration before inclusion.",
+      "evidence": [
+        "https://doi.org/10.3847/0004-637X/829/2/121"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "The gallery is prepared and inspected with its dispute and registration evidence."
     }
   ]
 }

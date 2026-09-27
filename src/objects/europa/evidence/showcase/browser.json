@@ -1,0 +1,66 @@
+{
+  "testedRevision": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021",
+  "uncommittedCode": {
+    "src/renderers/css/styles/jupiter-surfaces.css": "999add7eb502791ac73bc64cf061db86836aad17290d45a5f2cf29d4019d7b6b"
+  },
+  "date": "2026-09-26",
+  "browser": "Chromium via Playwright CLI",
+  "viewport": {
+    "width": 1100,
+    "height": 760,
+    "deviceScaleFactor": 1
+  },
+  "inventorySha256": "f2af954c4bc16b4c3cda461cfe968b9b45a90121e31ec0d258888c7673485f68",
+  "captures": [
+    "carbon-dioxide.png"
+  ],
+  "existingRuntimeImagesChanged": [],
+  "checks": {
+    "selection": "Selected each new lens through the existing dataset UI and inspected the captured globe, thumbnail, missing coverage and legend. No browser console errors in the completed runs.",
+    "delivery": {
+      "installed": 354,
+      "reused": 0,
+      "skipped": 0,
+      "files": 354,
+      "bytes": 72243602,
+      "checks": "Every downloaded byte count and SHA-256 matches its body inventory. Empty destination, no source files or bake tools used.",
+      "bodies": [
+        "mars",
+        "jupiter",
+        "venus",
+        "europa"
+      ]
+    }
+  },
+  "limits": "These captures check presentation and dataset selection. They are not an independent quantitative oracle or a matched before/after pixel comparison.",
+  "states": [
+    {
+      "ready": true,
+      "lens": "carbon-dioxide",
+      "nodes": 721,
+      "mounted": 1,
+      "error": null
+    },
+    {
+      "ready": true,
+      "lens": "hydrogen-peroxide",
+      "nodes": 721,
+      "mounted": 1,
+      "error": null
+    },
+    {
+      "ready": true,
+      "lens": "sodium-chloride",
+      "nodes": 721,
+      "mounted": 1,
+      "error": null
+    },
+    {
+      "ready": true,
+      "lens": "junocam",
+      "nodes": 721,
+      "mounted": 1,
+      "error": null
+    }
+  ]
+}

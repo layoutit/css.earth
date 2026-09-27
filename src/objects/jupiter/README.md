@@ -15,6 +15,8 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [visible 2025a](evidence/showcase/visible-2025a.png) · [magnetic](evidence/showcase/magnetic.png) · [mobile dates](evidence/showcase/mobile-dates.png).
+
 ### Dated Hubble maps and magnetic field (26 September 2026)
 
 The [OPAL release](https://archive.stsci.edu/hlsp/opal) supplies eleven RGB maps here: 19 January 2015, 9 February 2016, 3 April 2017, 17 April 2018, 26 June 2019, 24 August 2020, 4 September 2021, 12 November 2022, 5 January 2024, 19 November 2024 and 11 December 2025. Dates come from each release's `DATE-OBS`. There is no 2023 release in this sequence; two observations belong to 2024. The existing dataset stepper presents those dates.
@@ -26,7 +28,7 @@ The magnetic lens is [JRM33](https://doi.org/10.1029/2021JE007055) through degre
 The [model recipe](source/preparation/magnetic.json) and [pinned upstream tool](../../../packages/telescope/toolchains/magnetic-toolchain.json) reproduce the numeric input. [Observed-map checks](../../../tests/objects/observed-polar.test.mts) exercise the RGB intersection, retained date control, valid zero field and neutral palette midpoint. Magnetic textures are lossless. Both models and observations are prepared before mounting; the shared runtime only selects their files.
 
 
-The record describes image-background and source-value checks, but cites no dated test or browser run. Source byte pins are in the input manifest.
+The dated checks above cover the new maps; the older polar illustrations retain their original qualification limits.
 
 ## Known problems
 
@@ -42,10 +44,9 @@ The record describes image-background and source-value checks, but cites no date
 <summary>Input pins and preparation</summary>
 
 Jupiter is prepared only from the checked inputs declared in
-`source/manifest.json`. Each entry fixes the expected byte count and SHA-256.
-Required ignored binaries have pinned restoration routes in
-`source/preparation/acquisition.json`; the shared acquisition operators reject
-any response that does not match the declared snapshot.
+`source/manifest.json`. Each entry identifies its product and acquisition route.
+Required ignored binaries are restored through `source/preparation/acquisition.json`;
+runtime file sizes and SHA-256 digests belong to `inventory.json`.
 
 ## Reproduction
 
