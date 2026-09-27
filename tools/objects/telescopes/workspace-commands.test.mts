@@ -1,7 +1,7 @@
 /** The process boundary between the telescope and the workspace entries it runs: the answer crosses IPC, logs go to stderr. */
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -69,5 +69,25 @@ test('the F16 volume bake refuses an invalid descriptor with the class and messa
     const { stdout, stderr } = await fixture.run([object]);
     assert.deepEqual(JSON.parse(stdout), { error: { class: 'TypeError', message: direct.message } });
     assert.doesNotMatch(stderr, /parseDensityVolumeFrame/u, 'no unsolicited stack');
+  } finally { await fixture.cleanup(); }
+});
+
+test('terminating the telescope stops the workspace command it is running', async () => {
+  const fixture = await workspace(`import { writeFileSync } from 'node:fs';
+writeFileSync(process.argv[2], String(process.pid));
+setInterval(() => {}, 1000);
+`);
+  const alive = (pid: number) => { try { process.kill(pid, 0); return true; } catch { return false; } };
+  const pidFile = resolve(fixture.directory, 'child.pid');
+  try {
+    const child = spawn(process.execPath, [resolve(fixture.directory, 'dispatch.mts'), pidFile], { cwd: ROOT, stdio: 'ignore' });
+    const closed = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>(accept => child.once('close', (code, signal) => accept({ code, signal })));
+    let pid = 0;
+    for (let attempt = 0; attempt < 200 && !pid; attempt++) { pid = Number(await readFile(pidFile, 'utf8').catch(() => '0')); if (!pid) await new Promise(accept => setTimeout(accept, 50)); }
+    assert.ok(pid && alive(pid), 'the workspace command started');
+    child.kill('SIGTERM');
+    assert.deepEqual(await closed, { code: null, signal: 'SIGTERM' }, 'the telescope ends by the signal it received');
+    for (let attempt = 0; attempt < 100 && alive(pid); attempt++) await new Promise(accept => setTimeout(accept, 50));
+    assert.equal(alive(pid), false, 'the workspace command stopped with it');
   } finally { await fixture.cleanup(); }
 });

@@ -16,7 +16,14 @@ export async function runWorkspaceCommand(root: string, command: WorkspaceComman
   const child = spawn(process.execPath, [resolve(root, command.script), ...args], { cwd: root, stdio: ['inherit', 2, 2, 'ipc'] });
   let answer: ProcessAnswer | undefined;
   child.on('message', message => { answer ??= parseProcessAnswer(message); });
-  const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => accept(status ?? (signal === 'SIGINT' ? 130 : 143))); });
+  // The command is part of the telescope's own run: a signal the telescope receives stops it too, and the telescope then
+  // ends by that signal as it did when it ran the command in process; if the telescope exits first, the command goes with it.
+  let received: NodeJS.Signals | undefined;
+  const forward = (signal: NodeJS.Signals) => { received ??= signal; child.kill(signal); }, orphan = () => { child.kill('SIGKILL'); };
+  process.on('SIGINT', forward); process.on('SIGTERM', forward); process.on('exit', orphan);
+  const code = await new Promise<number>((accept, reject) => { child.once('error', reject); child.once('close', (status, signal) => accept(status ?? (signal === 'SIGINT' ? 130 : 143))); })
+    .finally(() => { process.off('SIGINT', forward); process.off('SIGTERM', forward); process.off('exit', orphan); });
+  if (received) { process.kill(process.pid, received); await new Promise(() => {}); }
   if (answer && 'failure' in answer) throw raisedProcessFailure(answer.failure);
   if (!answer) throw new Error(`${command.script} exited with ${code} without answering.`);
   return answer.result;
