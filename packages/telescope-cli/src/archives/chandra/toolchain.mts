@@ -23,8 +23,8 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const repository = WORKSPACE;
-/** The toolchain's pins (descriptor and solved lock) stay in the checkout beside the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'tools/objects/chandra');
+/** The toolchain's pins (descriptor and solved lock) sit beside this code and the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/chandra');
 export const CHANDRA_ROOT = resolve(repository, 'output/toolchains/chandra');
 const LOCK = resolve(PINS, 'packages.lock');
 

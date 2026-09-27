@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { readdir } from 'node:fs/promises';
 import test from 'node:test';
-import { PDS_PROGRAMS } from './archive-final.mts';
-import { PDS_PROGRAMS_PATH } from './programs.mts';
+import { PDS_PROGRAMS, PDS_PROGRAMS_LOCATION } from './archive-final.mts';
 import { buildPdsLedger } from './archive-ledger.mts';
 // Plain node:test: it reads only the tracked programs and receipts beside this code.
 
@@ -11,5 +10,5 @@ test('every pinned PDS program qualifies, including receipts that recorded where
   assert.ok(programs.length > 0, 'no pinned PDS program');
   const ledger = await buildPdsLedger();
   assert.deepEqual(ledger.modes.flatMap(mode => mode.qualified).sort(), programs);
-  assert.deepEqual(ledger.modes.flatMap(mode => mode.receipts).sort(), programs.map(id => `${PDS_PROGRAMS_PATH}/${id}.archive-final.product.json`));
+  assert.deepEqual(ledger.modes.flatMap(mode => mode.receipts).sort(), programs.map(id => `${PDS_PROGRAMS_LOCATION.path}/${id}.archive-final.product.json`));
 });

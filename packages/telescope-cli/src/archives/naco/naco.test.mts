@@ -387,7 +387,7 @@ test('the ledger on disk is the one the guide states, and its states come from t
   assert.equal(ledger.schema, NACO_LEDGER.schema);
   assert.equal(ledger.instrument, 'NAOS+CONICA');
   const modes = requireArray(ledger.modes, 'modes').map(item => requireRecord(item, 'mode'));
-  const programs = await readdir(resolve(WORKSPACE, 'tools/objects/naco/programs'));
+  const programs = await readdir(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs'));
   for (const mode of modes) {
     const pinned = requireArray(mode.programs, 'programs').map(value => requireString(value));
     const receipts = requireArray(mode.receipts, 'receipts').map(value => requireString(value));
@@ -464,7 +464,7 @@ test('the slit geometry is read from the frames own headers, and a missing card 
 });
 
 test('the Europa receipt states what was measured, including that it is not resolved along the slit', async () => {
-  const receipt = requireRecord(JSON.parse(await readFile(resolve(WORKSPACE, 'tools/objects/naco/programs/europa-088C0833.spectrum.reproduction.json'), 'utf8')) as unknown, 'receipt');
+  const receipt = requireRecord(JSON.parse(await readFile(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs/europa-088C0833.spectrum.reproduction.json'), 'utf8')) as unknown, 'receipt');
   assert.equal(receipt.schema, 'cssearth-naco-spectrum@1');
   assert.equal(receipt.object, 'EUROPA');
   assert.equal(receipt.arcs, false, 'the night associates no arc frames, so no wavelength calibration was run');

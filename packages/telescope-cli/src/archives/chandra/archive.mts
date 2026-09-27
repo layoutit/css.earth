@@ -19,7 +19,7 @@
  * The catalogue is queried through PyVO at https://cda.cfa.harvard.edu/cxctap. ivoa.ObsCore is not served there; cxc.observation
  * is, and is what this route reads.
  *
- * The program is written to tools/objects/chandra/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/chandra/programs/<program id>.json. */
 import { createGunzip } from 'node:zlib';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
@@ -29,8 +29,8 @@ import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { tapRows, WORKSPACE } from '@cssearth/telescope/node';
 
-/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/chandra/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/chandra/programs');
 export const TAP = 'https://cda.cfa.harvard.edu/cxctap';
 export const ARCHIVE = 'https://cxc.cfa.harvard.edu/cdaftp/byobsid';
 const NAME = /^[A-Za-z0-9._-]+$/u;

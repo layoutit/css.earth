@@ -28,7 +28,7 @@ Juno passed Europa on 29 September 2022. With the bank's kernels the closest app
 - The labels state the altitude and sub-spacecraft point at mid-image. Evaluated at the start time, this reader gives 95 to 118 km less altitude, which is five seconds of flight at the range rate.
 - Strip rays reproduce the field-of-view corner and boresight vectors that the instrument kernel lists for all four strips to 5 × 10⁻⁸ ([`junocam.test.mts`](../tools/objects/terrestrial-layers/junocam.test.mts)). NAIF computed those vectors with its own code, so this settles the distortion inverse and the half-pixel origin.
 
-**The limb fit.** Holdout points are limb points the fit never saw. The numbers are the [receipt](../tools/objects/juno/programs/europa-pj45.registration.json)'s, written by `measure.mts` for the [pinned program](../tools/objects/juno/programs/europa-pj45.json).
+**The limb fit.** Holdout points are limb points the fit never saw. The numbers are the [receipt](../packages/telescope-cli/src/archives/juno/programs/europa-pj45.registration.json)'s, written by `measure.mts` for the [pinned program](../packages/telescope-cli/src/archives/juno/programs/europa-pj45.json).
 
 | Image | Altitude in label | Pixel at nadir | Pointing epoch | Ephemeris epoch | Holdout residual before | after |
 | --- | --- | --- | --- | --- | --- | --- |

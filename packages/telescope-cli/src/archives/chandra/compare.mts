@@ -230,7 +230,7 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
     const receipt = {
       schema: 'cssearth-chandra-reproduction@2', program: id, obsid, product: name.replace(/\.fits$/u, ''),
       instrument: `${entry.instrument}/${entry.detector}`, grating: entry.grating, dataMode: observationMode(entry),
-      target: entry.targetName, toolchain: 'tools/objects/chandra/toolchain.json',
+      target: entry.targetName, toolchain: 'packages/telescope-cli/src/archives/chandra/toolchain.json',
       // Where the versions below come from: the record the reprocessing run wrote beside its event list, and the digest of that
       // run. Nothing here is read from the software installed on the machine that ran this comparison.
       productRecord: { file: recordPath.slice(run.length + 1), runDigest: runDigest(made.record) },

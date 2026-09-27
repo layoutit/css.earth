@@ -13,9 +13,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
+import { archivePrograms } from '../programs.mts';
 
 export const VOLUMES = 'https://planetarydata.jpl.nasa.gov/img/data/juno/';
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/juno/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const PROGRAMS = resolve(WORKSPACE, archivePrograms('juno').path);
 export const PROGRAM_SCHEMA = 'cssearth-junocam-program@1';
 /** The kernel bank and the kernels a JunoCam camera reads, in load order. The trajectory and attitude kernels cover one perijove each, so a program names its own. */
 export const KERNEL_SET = 'juno';

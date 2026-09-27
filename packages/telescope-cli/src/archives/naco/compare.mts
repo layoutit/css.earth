@@ -26,7 +26,7 @@ import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits'
  * level, and, over the samples above that median level, the correlation and the relative difference at its median, 99th
  * percentile and largest. Beside them: the pipeline version each run recorded, and the frames each sequence combined.
  *
- * The receipt is written to tools/objects/naco/programs/<program id>.<product>.reproduction.json, and what it establishes is
+ * The receipt is written to packages/telescope-cli/src/archives/naco/programs/<program id>.<product>.reproduction.json, and what it establishes is
  * added to the product record each reduction wrote beside its own product, as `internal-consistency` evidence. That is the
  * only kind this route can add: with no archive product and no ESO master calibration to agree with, nothing here is
  * archive agreement. A product whose run wrote no record takes no evidence at all, and the comparison says so. */

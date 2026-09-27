@@ -11,15 +11,16 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 `@cssearth/telescope` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
 `@cssearth/telescope/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
-  ledger machinery they share (`src/archives/`), while its programs, toolchain pins, per-body authoring (the HST slit-scan
-  map, the JWST band maps, the NACO body map, the Io JIRAM maps) and the bodies a ledger or route is about
-  (`ledger-focus.json`, `moving-targets.json`, `horizons-bodies.json`) stay in `tools/objects/<archive>/`, which the code
-  reads through `WORKSPACE` when a query needs it. PDS, Keck and Gemini have moved theirs beside their code, in
-  `src/archives/<archive>/`, still read through `WORKSPACE`; receipts written before a move keep the path they recorded.
-  No archive module names a body (`archives/archive-scope.test.mts`). That per-body JSON sits outside the module
-  fingerprint closure, and a lock's `Regenerate:` header still naming the old tool path
-  is refreshed at the next solve, since the lock's text is hashed into `pinsSha256`. `tools/objects/juno/juno.test.mts` stays
-  beside the JunoCam programs until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
+  ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer and Juno keep their programs,
+  receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`, `moving-targets.json`,
+  `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; HST and JWST keep theirs in
+  `tools/objects/<archive>/` until they move. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body
+  map, the Io JIRAM maps) stays in `tools/objects/<archive>/`. A receipt or ledger written before a move keeps the path it
+  recorded; `src/archives/programs.mts` maps a recorded program path to its current location, for qualification, receipt
+  writing and query display alike. No archive module names a body (`archives/archive-scope.test.mts`). That per-body JSON
+  sits outside the module fingerprint closure, and a lock's `Regenerate:` header still naming the old tool path is
+  refreshed at the next solve, since the lock's text is hashed into `pinsSha256`. `tools/objects/juno/juno.test.mts` stays
+  in `tools/objects/juno/` until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
   `test:telescope-cli` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
   lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.

@@ -5,8 +5,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/telescope';
-import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS } from './archive-final.mts';
-import { pdsReceiptPath, recordedPdsReceiptPaths } from './programs.mts';
+import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS, PDS_PROGRAMS_LOCATION, pdsReceiptName } from './archive-final.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const ROOT = WORKSPACE;
@@ -54,7 +53,7 @@ export async function buildPdsLedger() {
       mode = requireString(program.mode, 'program mode'), files = requireArray(program.files, 'program files').map(entry => requireRecord(entry, 'program file')),
       observation = requireRecord(program.observation, 'program observation'), discovery = requireRecord(program.discovery, 'program discovery');
     harvestDates.push(requireString(discovery.harvestIso, 'registry harvest').slice(0, 10));
-    const receipt = pdsReceiptPath(id), recorded = new Set(recordedPdsReceiptPaths(id));
+    const receipt = PDS_PROGRAMS_LOCATION.file(pdsReceiptName(id)), recorded = new Set(PDS_PROGRAMS_LOCATION.recorded(pdsReceiptName(id)));
     const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
     const selection = requireRecord(record.parameters.selection, 'PDS selection'), science = files.find(file => file.role === 'science');
     const qualified = record.telescope === telescope && record.stage === 'archive-final' && selection.program === id && selection.target === target && selection.lidvid === program.lidvid
