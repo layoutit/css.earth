@@ -18,4 +18,4 @@ Dependencies: `@cssearth/bake/volume`, `@cssearth/bake/volume/node`, reconstruct
 
 Run `pnpm --filter @cssearth/nebula-lab typecheck` from the repository root after installing dependencies. The lab command runner discovers tests beside package owners.
 
-Research entrypoint: `labs/nebula/run.mts`. Ordinary application replay uses `tools/nebula/prepare.mts` separately. See [validation scope](../../docs/internal-packages.md) for routine CI and artifact-dependent checks.
+Research entrypoint: `labs/nebula/run.mts`. Ordinary application replay uses `packages/bake/cli/prepare-nebulae.mts` separately. See [validation scope](../../docs/internal-packages.md) for routine CI and artifact-dependent checks.

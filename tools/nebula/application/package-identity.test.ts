@@ -43,7 +43,7 @@ test('the bake inventory covers every bake topic a nebula delivery runs', async 
   const { readFile } = await import('node:fs/promises');
   const { resolve } = await import('node:path');
   const root = process.cwd();
-  const result = await build({ entryPoints: [resolve(root, 'tools/nebula/application/prepare.ts')], bundle: true, write: false, metafile: true,
+  const result = await build({ entryPoints: [resolve(root, 'packages/bake/cli/prepare-nebulae.mts')], bundle: true, write: false, metafile: true,
     platform: 'node', format: 'esm', packages: 'external', logLevel: 'silent',
     plugins: [{ name: 'bake-sources', setup(builder) { builder.onResolve({ filter: /^@cssearth\/bake\// }, args =>
       ({ path: resolve(root, 'packages/bake/src', args.path.slice('@cssearth/bake/'.length), 'index.ts') })); } }] });

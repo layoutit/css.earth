@@ -20,7 +20,7 @@ for (const name of names) {
 }
 // Native/external dependencies can reuse installation bytes; no research package is linked.
 for (const name of ['sharp']) await symlink(resolve(dirname(require.resolve(name)), '..'), join(sandbox, 'node_modules', name));
-const bundle = await build({ entryPoints: [resolve(root, 'tools/nebula/application/prepare.ts')], outfile: join(sandbox, 'prepare.mjs'),
+const bundle = await build({ entryPoints: [resolve(root, 'packages/bake/cli/prepare-nebulae.mts')], outfile: join(sandbox, 'prepare.mjs'),
   bundle: true, platform: 'node', format: 'esm', target: 'node22', packages: 'external', metafile: true,
   plugins: [{ name: 'public-workspace-packages', setup(plugin) {
     plugin.onResolve({ filter: /^@cssearth\// }, args => ({ path: require.resolve(args.path) }));

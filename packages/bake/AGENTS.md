@@ -171,7 +171,7 @@ its validators accept); the renderer never imports the bake.
   (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
-  render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `tools/nebula/prepare.mts` is its
+  render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `packages/bake/cli/prepare-nebulae.mts` is its
   entry and records the prepared closure with the platform's inventory.
 - The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
   inventory passed in (`inventory`, the platform's `inventoryPreparedAssets`); a scratch bake needs none.

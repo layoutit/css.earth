@@ -1,13 +1,14 @@
-# Application nebula preparation
+# Application nebula preparation tests
 
-The static application's nebula preparation entry. The delivery bake itself is the `@cssearth/bake/nebula` entry
-([`packages/bake/src/nebula/`](../../../packages/bake/src/nebula/)): it discovers source-owned delivery recipes, calls
-the private volume baker, embeds its outputs in the shared sky frame, prepares impostors and atlases and verifies installed
-resources.
+The tests of the static application's nebula preparation. The entry is the bake command
+[`packages/bake/cli/prepare-nebulae.mts`](../../../packages/bake/cli/prepare-nebulae.mts), and the delivery bake itself is
+the `@cssearth/bake/nebula` entry ([`packages/bake/src/nebula/`](../../../packages/bake/src/nebula/)): it discovers
+source-owned delivery recipes, calls the private volume baker, embeds its outputs in the shared sky frame, prepares
+impostors and atlases and verifies installed resources.
 
-`node tools/nebula/prepare.mts --if-missing` prepares all registered compact deliveries. Add `--object=<id>` for one
-object. The launcher bundles `prepare.ts` here, which calls the bake and records each prepared closure with the platform's
-inventory; it does not invoke the lab CLI or import research implementations.
+`node packages/bake/cli/prepare-nebulae.mts --if-missing` prepares all registered compact deliveries. Add `--object=<id>`
+for one object. The command calls the bake and records each prepared closure with the platform's inventory; it does not
+invoke the lab CLI or import research implementations.
 
 In `@cssearth/bake/nebula`:
 

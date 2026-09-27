@@ -30,7 +30,7 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 
 | Entry | Scope |
 | --- | --- |
-| `tools/nebula/prepare.mts` | Application delivery from source-owned compact inputs; `--if-missing` verifies or restores prepared outputs; `--object=<id>` selects one registered delivery |
+| `packages/bake/cli/prepare-nebulae.mts` | Application delivery from source-owned compact inputs; `--if-missing` verifies or restores prepared outputs; `--object=<id>` selects one registered delivery |
 | `labs/nebula/run.mts` | Explicit named research commands, processing environment setup, lab verification and test discovery |
 | `packages/lab/src/cli/commands.ts` | Research command registry; unknown commands fail |
 | `packages/lab/browser/` | Actual browser checks and isolated browser regression helpers |

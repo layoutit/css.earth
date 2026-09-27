@@ -180,7 +180,7 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
         // A computed load that may name the lab is unchecked everywhere. One that may name the bake is unchecked only where the
         // bake is forbidden: preparation code imports the bake by design, so its computed loads of other modules are not suspect.
         const text = readFileSync(file, 'utf8');
-        if (label.startsWith('tools/nebula/application/') || label.startsWith('packages/bake/src/nebula/') || /(?:labs\/nebula|@cssearth\/(?:nebula-|volume-))/.test(text)) node.unchecked = true;
+        if (label.startsWith('tools/nebula/application/') || label === 'packages/bake/cli/prepare-nebulae.mts' || label.startsWith('packages/bake/src/nebula/') || /(?:labs\/nebula|@cssearth\/(?:nebula-|volume-))/.test(text)) node.unchecked = true;
         else if (/(?:packages\/bake|@cssearth\/bake\b)/.test(text)) node.uncheckedBake = true;
         continue;
       }

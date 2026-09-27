@@ -14,7 +14,7 @@ Open [Alignment](http://127.0.0.1:4331/alignment). Startup restores neutral dens
 
 Do not restart an already running server to switch views. Legacy `?subject=…&tab=alignment|reconstruction` links normalize to the corresponding path. Object selection remains in the URL; camera and per-image adjustments are retained locally.
 
-The research command entrypoint is `labs/nebula/run.mts`; its registry and server live in `packages/lab`. React owns one application tree and its control portals; the retained viewer owns scene nodes. Application installation separately uses `tools/nebula/prepare.mts` with accepted compact inputs. See [package ownership and validation](internal-packages.md).
+The research command entrypoint is `labs/nebula/run.mts`; its registry and server live in `packages/lab`. React owns one application tree and its control portals; the retained viewer owns scene nodes. Application installation separately uses `packages/bake/cli/prepare-nebulae.mts` with accepted compact inputs. See [package ownership and validation](internal-packages.md).
 
 The centered object picker searches the available subjects. Camera and model controls are docked on the left; image selection and processing are on the right. Reconstruction views sit above the preview. Hover or focus a view button for its explanation, including missing-data requirements. The selected image credit appears at the bottom-right of the preview.
 

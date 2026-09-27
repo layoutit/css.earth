@@ -47,7 +47,7 @@ The volume contracts, fields and materials the packages share, and the determini
 
 Reprocess the saved LMC research recipe with **`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research`**, then check its native artifacts with **`node --experimental-strip-types labs/nebula/run.mts verify-nebula`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
 
-The five packages are private workspace owners, with explicit public exports. See [package boundaries and validation](docs/internal-packages.md) for the dependency graph, CI scope and isolated replay gates. Ordinary application preparation enters through `tools/nebula/prepare.mts` (`pnpm prepare:nebulae`); it does not invoke the research CLI or fit observations.
+The five packages are private workspace owners, with explicit public exports. See [package boundaries and validation](docs/internal-packages.md) for the dependency graph, CI scope and isolated replay gates. Ordinary application preparation enters through `packages/bake/cli/prepare-nebulae.mts` (`pnpm prepare:nebulae`); it does not invoke the research CLI or fit observations.
 
 Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the workflow](docs/workflows.md), [processing method](METHOD.md), or [documentation index](docs/README.md). Source/registration evidence and prior failed experiments remain accessible without adding more UI tabs.
 

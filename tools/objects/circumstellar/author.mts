@@ -17,7 +17,7 @@
  * star's distance; the frame is anchored on the star's prepared scene origin, so the star's sphere sits at the centre.
  *
  * --check recomputes every output and fails if any differs from the file on disk. After the first authoring, bake the bank
- * (node tools/nebula/prepare.mts --object=<id>) and author again: the presentation pins the baked bank. */
+ * (node packages/bake/cli/prepare-nebulae.mts --object=<id>) and author again: the presentation pins the baked bank. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
