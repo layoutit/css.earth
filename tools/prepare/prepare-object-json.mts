@@ -4,7 +4,7 @@ import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
 import type {CheckedObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
-import type {RecompiledPresentation} from '../prepared/prepared-depth-partitions.mts';
+import type {RecompiledPresentation} from '@cssearth/bake/prepared-presentation';
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
  * bindings (facing planes, depth partitions, interior fill). Facing planes are browser-measured against the solved
  * system node, so this is only safe when that solve did not move: refuse rather than publish stale geometry. */

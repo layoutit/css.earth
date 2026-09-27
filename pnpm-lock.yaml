@@ -295,6 +295,9 @@ importers:
       playwright:
         specifier: 1.60.0
         version: 1.60.0
+      robust-predicates:
+        specifier: 3.0.3
+        version: 3.0.3
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)

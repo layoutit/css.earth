@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/renderer';
+import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
 import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 import type { PreparedAssets } from '@cssearth/renderer/rendering/prepared-residency.ts';

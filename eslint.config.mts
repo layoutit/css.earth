@@ -92,8 +92,9 @@ export default [
     // The scene and presentation compilers read the renderer's prepared types, validators and silhouette steps, and the scene
     // projects leaves with PolyCSS, which the runtime uses to draw them.
     // The world frame's presentation and Sun directions name the renderer's vector types and its view-direction conversion.
+    // The prepared-presentation passes rewrite the renderer's prepared tree, depth order and interior disc.
     files: ['packages/bake/src/scene/**/*.ts', 'packages/bake/src/presentation/**/*.ts', 'packages/bake/src/nebula/**/*.ts', 'packages/bake/src/world-context/**/*.ts', 'packages/bake/src/cluster-catalog/**/*.ts', 'packages/bake/src/galaxy-catalog/**/*.ts', 'packages/bake/src/environment/**/*.ts', 'packages/bake/src/image-layers/**/*.ts', 'packages/bake/src/density/**/*.ts', 'packages/bake/src/sky/**/*.ts', 'packages/bake/src/shell/**/*.ts', 'packages/bake/src/stars/**/*.ts', 'packages/bake/src/volume-leaves/**/*.ts', 'packages/bake/src/objects/layers/**/*.ts',
-      'packages/bake/src/objects/scene/**/*.ts'],
+      'packages/bake/src/objects/scene/**/*.ts', 'packages/bake/src/prepared-presentation/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {

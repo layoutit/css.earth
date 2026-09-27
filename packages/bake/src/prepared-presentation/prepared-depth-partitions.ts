@@ -8,8 +8,8 @@ type TreeNode = PreparedTree['nodes'][number];
 type RecompiledFields='tree'|'variants'|'materials'|'animations'|'viewBindings'|'motion'|'surfaceHit'|'depthPartitions';
 export type RecompiledPresentation<T extends PreparedPresentationDefinition> = Omit<T, RecompiledFields> & Pick<PreparedPresentationDefinition,RecompiledFields>;
 
-import { prepareActivationGroups } from '@cssearth/bake/presentation';
-import { visibilityComponents } from './prepared-visibility-order.mts';
+import { prepareActivationGroups } from '../presentation/index.ts';
+import { visibilityComponents } from './prepared-visibility-order.ts';
 import { dot3 as dot } from '@cssearth/core';
 
 const MAXIMUM_DEPTH_LEAVES = 64;

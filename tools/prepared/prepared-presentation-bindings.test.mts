@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
-import type { PresentationSource } from './prepared-depth-partitions.mts';
+import type { PresentationSource } from '@cssearth/bake/prepared-presentation';
 import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 
 interface Fixture { root: string; definition: PresentationSource; css: string; setCss(value: string): Promise<void>; }

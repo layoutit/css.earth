@@ -51,6 +51,10 @@ its validators accept); the renderer never imports the bake.
   preparation and the runtime ownership checks share. It parses a runtime module into ESTree with its original ranges,
   resolves its imports to source files through each package's exports and tsup entries, and reads names, keys and static
   object properties. It imports no topic.
+- `src/prepared-presentation/` is published as `@cssearth/bake/prepared-presentation` (Node only): the passes that rewrite
+  a compiled prepared presentation: depth partitions of a body's projected surface in a proven visibility order, the
+  cascade check (Playwright's Chromium) that keeps each moved leaf's computed style, and the interior fill of a cut-open
+  body. It imports `presentation`. Its tests are `node --test` suites in `tests/prepared-presentation/`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,

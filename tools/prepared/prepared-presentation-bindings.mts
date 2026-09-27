@@ -1,9 +1,9 @@
-import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.mts';
+import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from '@cssearth/bake/prepared-presentation';
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '@cssearth/bake/raster';
 import { isRecord } from '@cssearth/core';
 import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.mts';
+import type { PresentationSource, DepthSurface } from '@cssearth/bake/prepared-presentation';
 /** A leaf's fixed plane in scene space, which the depth preparation needs to prove a surface static. */
 type FacingBinding = { plane: [number, number, number, number]; tolerance: number };
 type MotionTrack = Omit<NonNullable<PreparedPresentationDefinition['motion']>[number], 'timings'> & {timings: {when: PreparedVariant['when']; duration: number}[]};
@@ -14,8 +14,8 @@ import { basename, resolve } from 'node:path';
 import { objectPageStyles } from '../../site/object-page-contract.mts';
 import { chromium, type Browser } from 'playwright';
 import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes } from '@cssearth/bake/presentation';
-import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
-import { verifyDepthStyles } from './prepared-depth-styles.mts';
+import { prepareDepthPartitions, restoreDepthSource } from '@cssearth/bake/prepared-presentation';
+import { verifyDepthStyles } from '@cssearth/bake/prepared-presentation';
 
 /** Resolve authored motion offline. Runtime receives explicit animation
  * handles, never a live style discovery pass; the browser culls back faces. */

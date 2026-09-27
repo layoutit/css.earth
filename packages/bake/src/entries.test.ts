@@ -53,6 +53,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/layers/shape-model': ['presentation', 'scene', 'objects/color', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/material-composition'],
   'objects/layers/observation': ['raster', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster'],
   'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
+  'prepared-presentation': ['presentation'],
   'objects/layers/terrestrial': ['photometry', 'raster', 'scene', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/material-composition', 'objects/layers/shape-model'],
 };
 
