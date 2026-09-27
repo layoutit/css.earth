@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /** Focused FITS gate; optional restoration is limited to this suite's pinned inputs. */
 import { spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from './fixture.mts';
@@ -10,7 +11,13 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 const args = process.argv.slice(2);
 if (args.some(arg => !['--unit', '--restore'].includes(arg)) || args.includes('--unit') && args.includes('--restore'))
   throw new Error('Usage: pnpm test:fits [--unit | --restore]');
+// node --test skips a listed file that does not exist without failing, so a moved or deleted test would silently drop out.
+const requireListed = (paths: readonly string[]) => {
+  const missing = paths.filter(path => path.endsWith('.mts') && !existsSync(resolve(ORACLE_ROOT, path)));
+  if (missing.length) throw new Error(`Listed FITS tests do not exist:\n${missing.join('\n')}`);
+};
 const run = (args: string[], command = process.execPath) => {
+  if (command === process.execPath && args[0] === '--test') requireListed(args);
   const result = spawnSync(command, args, { cwd: ORACLE_ROOT, stdio: 'inherit' });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
@@ -20,7 +27,7 @@ run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tests/oracles/fits/core.oracle.test.mts', 'tests/oracles/fits/sky-orientation.oracle.test.mts', 'tests/oracles/fits/sky-projection.oracle.test.mts',
   'tests/oracles/fits/file-region.oracle.test.mts', 'tests/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
-  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
+  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tests/contract/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tests/objects/terrestrial/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);
@@ -101,6 +108,4 @@ run(['--test', '--test-concurrency=1',
   'tests/objects/terrestrial/llorri-geo.oracle.test.mts',
   'tests/objects/terrestrial/pds4-geometry-cube.oracle.test.mts',
   'tests/objects/terrestrial/new-horizons-geo.test.mts',
-  'tests/objects/observation/spectral-band-maps.test.mts',
-  'tests/objects/unit/pluto/leisa.test.mts', 'tests/objects/unit/arrokoth/source.test.mts',
-  'tests/objects/unit/didymos/albedo.test.mts', 'tests/objects/unit/dimorphos/albedo.test.mts']);
+  'tests/objects/observation/spectral-band-maps.test.mts']);

@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../site/object-page-contract.mts';
-import { repinObjectJson } from './prepare-object-json.mts';
+import { repinObjectJson } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;

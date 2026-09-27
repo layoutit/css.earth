@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { previewSite } from "../cli/preview.mts";
+import { previewSite } from "../../site/server/preview.mts";
 import { inventoriedObjectIds } from "@cssearth/bake/delivery";
 import { writeLossyWebp } from "@cssearth/bake/raster";
 import { readPreparedObjects } from "@cssearth/objects/node";

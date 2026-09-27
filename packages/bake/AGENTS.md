@@ -92,7 +92,10 @@ its validators accept); the renderer never imports the bake.
   against the descriptor (`check-prepared-presentation.ts`, `prepared-object-source.ts`; the prepared format constant comes
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
-  `tools/ci/check-object-runtime-ownership.mts` imports the readers. Its tests are in `tests/contract/`.
+  `tools/ci/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
+  transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
+  and spatial-context finalization before it stays in `tools/prepare/prepare-object-json.mts`, which reads the `tools/objects` bundle.
+  Its tests are in `tests/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
   published-asset gate, the deploy check (which reads the renderer's prepared world-context parsers) and the dry-run prune
@@ -113,6 +116,10 @@ its validators accept); the renderer never imports the bake.
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
   suites in `tests/navigation/`, with the navigation preparation's in `site/test/`.
+- `src/facility-renders/` is published as `@cssearth/bake/facility-renders` (Node only): the illustrative poses of the rendered
+  facility models, and the types of the three.js renderer (`render.ts`) that `packages/bake/cli/prepare-facility-renders.mts`
+  bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
+  them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `tests/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
   not an object's own: dataset sprites and search thumbnails cut from prepared page and navigation images, the planets'
   photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`

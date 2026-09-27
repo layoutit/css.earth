@@ -1,0 +1,73 @@
+// Pinning a prepared object to its transport: the `prepared/object.json` payload, the page metadata beside it, the descriptor's
+// `prepared` pin and the body's inventory. It prepares nothing; the world-navigation and spatial-context finalization that runs
+// before it on a fresh bake stays with `tools/prepare/prepare-object-json.mts`.
+import { mkdir, readFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { dirname, resolve } from 'node:path';
+import { requireRecord } from '@cssearth/core';
+import { parseObjectDescriptor } from '@cssearth/objects';
+import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
+import { preparePageMetadata, writePreparedText } from '../delivery/index.ts';
+import { requireObjectRuntimeDefinition } from './object-runtime-contract.ts';
+
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const root = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+const format = PREPARED_CSS_OBJECT_FORMAT;
+
+export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
+  const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
+  if (descriptor.schema !== 'cssearth-object@1' || typeof descriptor.type !== 'string' ||
+      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') {
+    throw new TypeError('Prepared object identity does not match its descriptor.');
+  }
+  return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,
+    type: descriptor.type, format, data: definition });
+}
+
+/** Transport the prepared runtime and pin descriptor and page to it. */
+export async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string,
+  target = { preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }) {
+  const { preparedDirectory, descriptorPath } = target;
+  await mkdir(preparedDirectory, { recursive: true });
+  const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
+  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8'));
+  const originalProperties = requireRecord(originalDescriptor.properties);
+  const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
+  const payload = serializeObjectJson(descriptor, runtime);
+  await writePreparedText(resolve(preparedDirectory, 'object.json'), payload);
+  const prepared = { format, url: 'prepared/object.json' };
+  const page = preparePageMetadata(id, definition);
+  await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
+  // Validation may normalize key order. Retain the authored document's order
+  // so an unchanged prepared object does not rewrite its descriptor.
+  await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
+    properties: { ...originalProperties, ...properties,
+      page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
+  // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json, page.json
+  // and provenance.json are regenerated on each checkout and stay out of it.
+  await inventoryPreparedAssets({ objectId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
+  return { bytes: Buffer.byteLength(payload), ...prepared };
+}
+
+/**
+ * Rewrite a body's inventory after a tool wrote under prepared/ without a full bake (facts, reader text,
+ * a content refresh). Nothing under prepared/ is tracked, so the inventory is the only record of the change; the
+ * bytes still have to be published. Returns whether the inventory changed.
+ */
+export async function refreshPreparedInventory(id: string, projectRoot = root): Promise<boolean> {
+  const objectDirectory = resolve(projectRoot, 'src/objects', id);
+  const before = await readInventory(id, objectDirectory);
+  if (before === null) return false;
+  const after = await inventoryPreparedAssets({ objectId: id, objectDirectory });
+  return JSON.stringify(after) !== JSON.stringify(before);
+}
+
+/** Re-pin an already prepared object to its transport without preparing anything. */
+export async function repinObjectJson(id: string, projectRoot = root) {
+  const descriptorPath = resolve(projectRoot, 'src/objects', id, 'object.json');
+  const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
+  const before = JSON.stringify(originalDescriptor.prepared);
+  const pin = await pinPreparedObject(id, originalDescriptor, {}, projectRoot);
+  return before !== JSON.stringify({ format: pin.format, url: pin.url });
+}

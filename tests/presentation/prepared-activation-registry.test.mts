@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { readPreparedObjects } from '@cssearth/objects/node';

@@ -1,7 +1,6 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
-import { preparePageMetadata } from '@cssearth/bake/delivery';
 import {parseObjectDescriptor} from '@cssearth/objects';
-import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
+import {requireObjectRuntimeDefinition, pinPreparedObject} from '@cssearth/bake/contract';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
 import type {CheckedObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import type {RecompiledPresentation} from '@cssearth/bake/prepared-presentation';
@@ -20,31 +19,17 @@ export function refuseStaleKeptBindings(id: string, systemTransform: { readonly 
       systemTransform.to}), so the bound facing planes and depth partitions no longer match it. Re-run without --keep-bindings.`);
   }
 }
-import { access, mkdir, readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../site/object-page-contract.mts';
-import { writePreparedText } from '@cssearth/bake/delivery';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
-import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
-const format = PREPARED_CSS_OBJECT_FORMAT;
-
-export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
-  const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
-  if (descriptor.schema !== 'cssearth-object@1' || typeof descriptor.type !== 'string' ||
-      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') {
-    throw new TypeError('Prepared object identity does not match its descriptor.');
-  }
-  return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,
-    type: descriptor.type, format, data: definition });
-}
 
 export async function writeObjectJson(id:string, definitionValue:unknown, options?:BindingOptions) {
   // A refusal names the body it stopped on: a run over hundreds of bodies otherwise leaves only the failing check.
@@ -79,53 +64,6 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });
   const pin = await pinPreparedObject(id, originalDescriptor, { worldFrame: preparedNavigation.frame }, projectRoot, target);
   return { id, ...pin, definition };
-}
-
-/** Transport the prepared runtime and pin descriptor and page to it. */
-async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string,
-  target = { preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }) {
-  const { preparedDirectory, descriptorPath } = target;
-  await mkdir(preparedDirectory, { recursive: true });
-  const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
-  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8'));
-  const originalProperties = requireRecord(originalDescriptor.properties);
-  const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
-  const payload = serializeObjectJson(descriptor, runtime);
-  await writePreparedText(resolve(preparedDirectory, 'object.json'), payload);
-  const prepared = { format, url: 'prepared/object.json' };
-  const page = preparePageMetadata(id, definition);
-  await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
-  // Validation may normalize key order. Retain the authored document's order
-  // so an unchanged prepared object does not rewrite its descriptor.
-  await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
-    properties: { ...originalProperties, ...properties,
-      page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
-  // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json, page.json
-  // and provenance.json are regenerated on each checkout and stay out of it.
-  await inventoryPreparedAssets({ objectId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
-  return { bytes: Buffer.byteLength(payload), ...prepared };
-}
-
-/**
- * Rewrite a body's inventory after a tool wrote under prepared/ without a full bake (facts, reader text,
- * a content refresh). Nothing under prepared/ is tracked, so the inventory is the only record of the change; the
- * bytes still have to be published. Returns whether the inventory changed.
- */
-export async function refreshPreparedInventory(id: string, projectRoot = root): Promise<boolean> {
-  const objectDirectory = resolve(projectRoot, 'src/objects', id);
-  const before = await readInventory(id, objectDirectory);
-  if (before === null) return false;
-  const after = await inventoryPreparedAssets({ objectId: id, objectDirectory });
-  return JSON.stringify(after) !== JSON.stringify(before);
-}
-
-/** Re-pin an already prepared object to its transport without preparing anything. */
-export async function repinObjectJson(id: string, projectRoot = root) {
-  const descriptorPath = resolve(projectRoot, 'src/objects', id, 'object.json');
-  const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
-  const before = JSON.stringify(originalDescriptor.prepared);
-  const pin = await pinPreparedObject(id, originalDescriptor, {}, projectRoot);
-  return before !== JSON.stringify({ format: pin.format, url: pin.url });
 }
 
 /** Existing descriptors opt into JSON baking; planned objects get no fallback. */

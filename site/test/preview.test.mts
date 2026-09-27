@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { previewSite } from "./preview.mts";
+import { previewSite } from "../server/preview.mts";
 import type { AddressInfo } from "node:net";
 function addressPort(address: string | AddressInfo | null) { assert.ok(address && typeof address !== "string"); return address.port; }
 

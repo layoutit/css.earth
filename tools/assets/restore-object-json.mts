@@ -3,7 +3,7 @@ import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { serializeObjectJson } from '../prepare/prepare-object-json.mts';
+import { serializeObjectJson } from '@cssearth/bake/contract';
 import { preparePageMetadata } from '@cssearth/bake/delivery';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';

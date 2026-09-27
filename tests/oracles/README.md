@@ -46,7 +46,7 @@ four scripts' usage comments still show the old `tools/oracles/` path; run them 
 
 Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
 only. Since `62cde1f331` it holds no runtime-lock or generator digest, while
-`tools/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
+`tests/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
 test runs past its restored-source skips. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
@@ -56,7 +56,7 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
 
 - A fixture is evidence. Its current envelope records oracle/interpreter
   versions, input paths and byte counts. External references name a commit in
-  their URL and record a size. `tools/contract/oracle-fixtures.test.mts`, included
+  their URL and record a size. `tests/contract/oracle-fixtures.test.mts`, included
   in `pnpm test:node`, checks tool versions, permitted input declarations and
   reference URLs. Body inputs must appear in their manifest; the shared reader
   also accepts the declared FITS, SBMT and hosted-orbit test fixtures. These checks

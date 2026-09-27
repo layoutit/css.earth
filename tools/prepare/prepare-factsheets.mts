@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { orderFacts } from '@cssearth/objects';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { verifyFactsheetSources } from '@cssearth/bake/sources';
-import { refreshPreparedInventory } from './prepare-object-json.mts';
+import { refreshPreparedInventory } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
