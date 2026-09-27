@@ -269,7 +269,7 @@ function spitzerModes(value: unknown, target: string): TargetMode[] {
     if (records.length !== expected) throw new Error(`Spitzer ${target} ${mode} counts ${expected} observations but retains ${records.length} records.`);
     const programs = entry ? stringList(entry.programs, `${mode} programs`) : [], checked = entry ? stringList(entry.checked, `${mode} checked programs`) : [];
     const targetPrograms = programs.filter(program => program === target || program.startsWith(`${target}-`));
-    const receipts = entry ? stringList(entry.receipts, `${mode} receipts`).filter(path => targetPrograms.some(program => path.includes(`/${program}.`))) : [];
+    const receipts = entry ? stringList(entry.receipts, `${mode} receipts`).map(archivePrograms('spitzer').current).filter(path => targetPrograms.some(program => path.includes(`/${program}.`))) : [];
     return { telescope: 'Spitzer', mode, archiveDate, observations: { count: expected, scope: 'this-mode' as const,
       records: records.map(({ mode: _mode, ...record }) => record) }, programmes: [...new Set(records.map(record => record.programme))].sort(),
       dates: records.map(record => ({ id: record.id, startIso: record.startIso, endIso: record.endIso })), datesComplete: true,

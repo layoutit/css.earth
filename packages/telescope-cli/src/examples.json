@@ -235,7 +235,7 @@
       "enlarge": 2,
       "product": {
         "command": "node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768",
-        "definition": "tools/objects/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
+        "definition": "packages/telescope-cli/src/archives/spitzer/programs/ngc3132-4416768.ch1.remosaic.reproduction.json"
       },
       "note": "Representative colour, not what an eye would see: three of the four re-made IRAC channels put into red, green and blue. The four channels are mosaicked onto one grid, so no channel is resampled."
     },

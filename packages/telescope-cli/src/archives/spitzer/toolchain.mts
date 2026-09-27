@@ -22,8 +22,8 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const repository = WORKSPACE;
-/** The toolchain's pins (descriptor and lock) stay in the checkout beside the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'tools/objects/spitzer');
+/** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
+const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/spitzer');
 export const SPITZER_ROOT = resolve(repository, 'output/toolchains/spitzer');
 /** The packages a run imports; a verify that cannot import one of these is a broken environment, not a warning. */
 export const REQUIRED_MODULES = ['numpy', 'astropy', 'reproject', 'scipy'] as const;

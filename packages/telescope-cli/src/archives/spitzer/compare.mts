@@ -19,7 +19,7 @@
  * archive's uncertainty plane is what makes the middle of that list meaningful: it is the archive saying how well it claims to
  * know each pixel, so a difference measured against it is a difference measured on the archive's own terms.
  *
- * The receipt is tools/objects/spitzer/programs/<program id>.<product>.reproduction.json, with its own
+ * The receipt is packages/telescope-cli/src/archives/spitzer/programs/<program id>.<product>.reproduction.json, with its own
  * `cssearth-telescope-product@1` record beside it. The evidence itself is added to the MOSAIC's record, the one the producing
  * stage wrote, so that a consumer holding the product finds the check through `evidenceFor(record, mosaic,
  * 'archive-agreement')` without knowing this toolkit exists. Its `establishes` says in as many words that the re-mosaic is

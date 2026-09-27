@@ -26,7 +26,7 @@
  *    on 2026-09-19 from both sha.ipac.caltech.edu and irsa.ipac.caltech.edu, so it is gone and this is what is left. It is an
  *    application backend, not a published API, and it may change without notice; everything it returns is validated here.
  *
- * The program is written to tools/objects/spitzer/programs/<program id>.json. */
+ * The program is written to packages/telescope-cli/src/archives/spitzer/programs/<program id>.json. */
 import { createHash } from 'node:crypto';
 import { mkdir, open, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -38,9 +38,11 @@ import { readFitsFileHdus } from '@cssearth/fits/node';
 import { sha256File } from '@cssearth/core/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
+import { archivePrograms } from '../programs.mts';
 
-/** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'tools/objects/spitzer/programs');
+/** The pinned programs and their receipts sit beside this code, found through the checkout. */
+export const SPITZER_PROGRAMS = archivePrograms('spitzer');
+export const PROGRAMS = resolve(WORKSPACE, SPITZER_PROGRAMS.path);
 export const REPOSITORY = WORKSPACE;
 export const SEARCH = 'https://irsa.ipac.caltech.edu/applications/Spitzer/SHA/sticky/CmdSrv';
 export const DATA = 'https://irsa.ipac.caltech.edu/ibe/data/spitzer';

@@ -19,7 +19,7 @@
  * count is not a question it takes, so this ledger says what Spitzer holds for these objects and does not pretend to say what
  * Spitzer holds.
  *
- * Each mode's state is read from this repository, not declared: the programs pinned in tools/objects/spitzer/programs and the
+ * Each mode's state is read from this repository, not declared: the programs pinned in packages/telescope-cli/src/archives/spitzer/programs and the
  * ones that carry a reproduction receipt that parses and names the observation and product it checked. A mode counts as
  * checked only then. --write replaces data/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
  * repository's own state from the ledger already on disk, for when a program is pinned or a receipt written and nothing the
@@ -29,7 +29,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { firstSkyPosition } from '../sky-position.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
+import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, SPITZER_PROGRAMS, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
 import { isCommand, ledgerFiles, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
 
@@ -169,7 +169,7 @@ export async function repositoryState(programs = PROGRAMS) {
     if (!against.every(entry => known.get(entry.name) === entry.bytes)) continue;
     checked.set(mode, (checked.get(mode) ?? 0) + 1);
     checkedProgramIds.set(mode, [...new Set([...(checkedProgramIds.get(mode) ?? []), receipt.program])]);
-    receiptPaths.set(mode, [...(receiptPaths.get(mode) ?? []), `tools/objects/spitzer/programs/${file}`]);
+    receiptPaths.set(mode, [...(receiptPaths.get(mode) ?? []), SPITZER_PROGRAMS.file(file)]);
   }
   for (const values of programIds.values()) values.sort();
   for (const values of checkedProgramIds.values()) values.sort();
@@ -289,7 +289,7 @@ const table = (header: readonly string[], rows: readonly (readonly string[])[]) 
 /** The group of objects the guide answers for by name, and what it says of them: data beside the programs, because this package
  * names no body. */
 export interface LedgerFocus { readonly heading: string; readonly objects: readonly string[]; readonly noneObserved: string; readonly allObserved: string }
-export const SPITZER_LEDGER_FOCUS = resolve(REPOSITORY, 'tools/objects/spitzer/ledger-focus.json');
+export const SPITZER_LEDGER_FOCUS = resolve(REPOSITORY, 'packages/telescope-cli/src/archives/spitzer/ledger-focus.json');
 export function spitzerLedgerFocus(path = SPITZER_LEDGER_FOCUS): LedgerFocus {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Spitzer ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);

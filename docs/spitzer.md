@@ -137,12 +137,12 @@ The channel 3 trade is the one unexplained-looking number in the table above and
 
 | What | Where |
 | --- | --- |
-| Pinned environment | [`tools/objects/spitzer/toolchain.json`](../tools/objects/spitzer/toolchain.json), [`toolchain.mts`](../packages/telescope-cli/src/archives/spitzer/toolchain.mts), [`requirements.lock`](../tools/objects/spitzer/requirements.lock) |
+| Pinned environment | [`packages/telescope-cli/src/archives/spitzer/toolchain.json`](../packages/telescope-cli/src/archives/spitzer/toolchain.json), [`toolchain.mts`](../packages/telescope-cli/src/archives/spitzer/toolchain.mts), [`requirements.lock`](../packages/telescope-cli/src/archives/spitzer/requirements.lock) |
 | Pin an observation | [`packages/telescope-cli/src/archives/spitzer/archive.mts`](../packages/telescope-cli/src/archives/spitzer/archive.mts) |
 | Re-make the mosaic | [`packages/telescope-cli/src/archives/spitzer/mosaic.mts`](../packages/telescope-cli/src/archives/spitzer/mosaic.mts), [`mosaic.py`](../packages/telescope-cli/src/archives/spitzer/mosaic.py) |
 | Compare and receipt | [`packages/telescope-cli/src/archives/spitzer/compare.mts`](../packages/telescope-cli/src/archives/spitzer/compare.mts) |
 | Ledger | [`packages/telescope-cli/src/archives/spitzer/archive-ledger.mts`](../packages/telescope-cli/src/archives/spitzer/archive-ledger.mts), [`docs/spitzer-ledger.md`](spitzer-ledger.md) |
-| Pinned observation and receipts | `tools/objects/spitzer/programs/` |
+| Pinned observation and receipts | `packages/telescope-cli/src/archives/spitzer/programs/` |
 | Tests | [`packages/telescope-cli/src/archives/spitzer/spitzer.test.mts`](../packages/telescope-cli/src/archives/spitzer/spitzer.test.mts), 14 tests, no network |
 
 ### Three gaps in the colour example
