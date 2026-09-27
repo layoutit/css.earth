@@ -19,7 +19,7 @@ and the difference is kept visible everywhere: see [two capabilities, never one]
 `pnpm telescope` provides a saved query and retrieval workflow over this API. The
 `@cssearth/telescope-cli` npm package exposes the same command as `telescope`; it uses an
 existing css.earth science workspace for the catalogue, archive clients and instrument
-pipelines. See [package setup](../packages/telescope/README.md). It does not bundle
+pipelines. See [package setup](../packages/telescope-cli/README.md). It does not bundle
 Python environments or download the repository during installation.
 
 Start with only a target to preserve the difference between discovery and a scientific request:
@@ -101,7 +101,7 @@ two-dimensional FITS science image's celestial WCS and reports `in-field`,
 full footprint test, moving-body ephemeris or calibration verdict. A Chandra
 event descriptor and a native OPUS PDS image keep their own operation routes;
 absence of a supported sky-image grid stays `unknown` rather than becoming a
-negative field claim. The [command guide](../packages/telescope/README.md#use)
+negative field claim. The [command guide](../packages/telescope-cli/README.md#use)
 shows the output and its limits.
 If a selected Chandra ObsID has several level-2 event files, or a Spitzer AOR has several science
 FITS products, fetch lists their exact names and requires `--file NAME`. It does not silently pick
@@ -1009,7 +1009,7 @@ so an unchanged checkout does not need a renderer build to identify a family ope
 
 `packages/telescope-cli/src/outputs.mts` is the final boundary after `session.mts` delivery.
 The CLI exposes `telescope outputs RESULT_JSON` and `telescope export RESULT_JSON`.
-[The command guide](../packages/telescope/README.md#outputs) covers selectors and files.
+[The command guide](../packages/telescope-cli/README.md#outputs) covers selectors and files.
 
 Executable outputs include a native FITS plane, a pixel spectrum, a wavelength-weighted
 band image, a background-subtracted region mean spectrum and a continuum-subtracted feature map. Astropy owns coordinates and units; the shared scientific reader applies the
@@ -1114,7 +1114,7 @@ The new output arithmetic uses Astropy NDData. A separate reference tool reads t
 FITS cube and computes spectra with Photutils aperture sums and spectral integrals with
 specutils. It does not call the production reducer. These comparisons cover all finite output
 samples; units and missing-sample masks match exactly. Reproduction commands are in the
-[CLI guide](../packages/telescope/README.md#independent-output-checks).
+[CLI guide](../packages/telescope-cli/README.md#independent-output-checks).
 
 | Eris output | Independent reference | Valid samples | Maximum absolute difference |
 | --- | --- | ---: | ---: |

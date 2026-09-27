@@ -7,7 +7,7 @@ Start here:
   telescope outputs ARTIFACT.json          Inspect a delivery and choose an output
 
 Use telescope --help for all commands, filters, and exit codes.
-Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope/README.md
+Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/README.md
 `;
 
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
@@ -181,6 +181,6 @@ fulfilled, unresolved or refused verdict.
 Exit codes: 0 exploration/retrieval completed or request fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.
 The npm command accepts --workspace PATH (or CSSEARTH_WORKSPACE) for a css.earth science checkout.
-Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope/README.md
+Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/README.md
 Issues: https://github.com/layoutit/css.earth/issues
 `;

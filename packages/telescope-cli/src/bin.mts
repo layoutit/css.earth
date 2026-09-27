@@ -29,7 +29,7 @@ async function workspace(start: string, explicit: boolean): Promise<string> {
           'telescope' in pkg.scripts && typeof pkg.scripts.telescope === 'string') return root;
     } catch { /* Try the parent directory unless the caller named an exact workspace. */ }
     const parent = dirname(root);
-    if (explicit || parent === root) throw new Error('No css.earth science workspace found. Use --workspace PATH or CSSEARTH_WORKSPACE. See @cssearth/telescope/README.md for setup.');
+    if (explicit || parent === root) throw new Error('No css.earth science workspace found. Use --workspace PATH or CSSEARTH_WORKSPACE. See @cssearth/telescope-cli/README.md for setup.');
     root = parent;
   }
 }
