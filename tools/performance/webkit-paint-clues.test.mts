@@ -36,3 +36,9 @@ test('keeps worker and main-thread native paths separate and labels clock overla
  assert.deepEqual(result.decodes[0].native.imageWork.map(group=>group.thread),['Main Thread','Worker']);
  assert.match(result.decodes[0].native.relation,/Approximate clock overlap/);
 });
+
+test('surfaces decoded-data destruction from native cache callbacks without inventing image identity', () => {
+ const result=paintClues({traceEvents:[{name:'sample',ts:100,pid:3,tid:1,ph:'X',args:{stack:'ImageFrame::clearImage < CachedImage::didReplaceSharedBufferContents < NetworkProcessConnection::didCacheResource'}}]},null,[]);
+ assert.equal(result.nativeImageLifecycle[0].reason,'encoded-buffer replacement');
+ assert.match(result.nativeImageLifecycle[0].relation,/image URL unavailable/);
+});

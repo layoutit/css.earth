@@ -101,12 +101,18 @@ opaque image. Scene readiness waits for decoded selection, complete attachment
 and a rendering opportunity. After the destination acknowledges that same camera,
 the image is removed in one swap and normal input can resume. Elapsed time cannot
 release the cover. The camera stays at that same pose and optical scale.
-A thin indeterminate line at the top of the shared header follows the navigation
-lifetime. It animates only its transform, becomes a static line for reduced
-motion, and clears when navigation completes or is cancelled.
 Decode and connected activation are observable; the
 browser exposes no promise that certifies GPU residency, so native device frames
 remain part of qualification.
+
+A preflight decode is not a pin on browser-decoded pixels. Before connecting an
+incoming scene, the resource owner rechecks `decode()` on its committed resident
+image handles. Shared atlas aliases are checked once; optional prewarm images
+are excluded. Direct mounts already decode in initial selection and skip this
+refresh. The existing billboard and lifetime cancellation cover the asynchronous
+check. This does not claim GPU residency or replace the subsequent paint gate.
+The owner's `paintDecodeChecks` diagnostic counts these checks separately from
+initial resource completions.
 
 The application frame queue owns publication of that complete view. It commits
 the worker-planned world, then the captured camera, before camera subscribers

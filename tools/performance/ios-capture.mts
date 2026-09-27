@@ -756,10 +756,27 @@ async function exportTimeProfile(native: string, pid: number | null): Promise<{ 
     // Instruments may still be finishing the file when its recorder exits; the first export can then fail with no message.
     const exportTable = async (attempt = 1): Promise<string> => run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 })
       .then(result => result.stdout, async (error: unknown) => { if (attempt >= 5) throw error; await wait(2000); return exportTable(attempt + 1); });
+    // xctrace can crash exporting the TOC after successfully exporting samples.
+    // Retry that read too; never silently present an empty native lane as success.
+    const exportClock = async (attempt = 1): Promise<number> => {
+      try {
+        const clockFile = resolve(native, '..', 'native-toc.xml');
+        const toc = await readFile(clockFile, 'utf8').catch(async () => {
+          const result = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 });
+          return result.stdout;
+        });
+        const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
+        const time = start ? Date.parse(start) : NaN;
+        if (!Number.isFinite(time)) throw new Error('Native trace clock origin is unavailable.');
+        await writeFile(clockFile, toc);
+        return time;
+      } catch (error) { if (attempt >= 3) throw error; await wait(2000); return exportClock(attempt + 1); }
+    };
+    const startMs = await exportClock();
     const stdout = await symbolicateNativeXml(await exportTable(), native);
-    const toc = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 }).then(result => result.stdout, () => '');
-    const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
-    return { summary: summariseTimeProfile(stdout), samples: timeProfileSamples(stdout, pid), startMs: start ? Date.parse(start) : null };
+    const samples = timeProfileSamples(stdout, pid);
+    if (!samples.length) throw new Error(`Native trace contains no samples for ${pid === null ? 'the recorded processes' : `page PID ${pid}`}.`);
+    return { summary: summariseTimeProfile(stdout), samples, startMs };
   } catch (error) { return { summary: { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }, samples: [], startMs: null }; }
 }
 

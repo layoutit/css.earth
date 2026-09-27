@@ -388,6 +388,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const initialized = await lifetime.wait(selection.start());
       if (lifetime.disposed || initialized.cancelled) return;
       if (!initialized.value) throw new Error("Initial object selection did not commit.");
+      // Preflight readiness can be seconds old; direct mounts just decoded in
+      // selection.start(). Refresh the claimed bank before its first CSS paint.
+      if (preparedResources) {
+        const decoded = await lifetime.wait(resources.decodeForPaint());
+        if (lifetime.disposed || decoded.cancelled || !decoded.value) return;
+      }
       // Initial selection, material and camera writes land on detached prepared roots.
       // The existing paced leaf activation starts only after this single connection.
       mounted.connect();

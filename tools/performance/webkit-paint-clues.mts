@@ -30,6 +30,15 @@ export function paintClues(trace: unknown, diagnostic: unknown, layerSamples: re
     return { sampleCount: selected.length, distinctStacks: stacks.length, stacks: stacks.slice(0, 8), imageWork,
       relation: 'Approximate clock overlap only; native stacks prove execution paths, not the image URL. Concurrent weights are not elapsed-time attribution.' };
   };
+  const nativeImageLifecycle = nativeSamples.flatMap(sample => {
+    const stack = typeof sample.args?.stack === 'string' ? sample.args.stack : '';
+    const reason = stack.includes('didReplaceSharedBufferContents') ? 'encoded-buffer replacement'
+      : stack.includes('pruneLiveResourcesToSize') ? 'live-resource pruning'
+      : stack.includes('pruneDeadResourcesToSize') ? 'dead-resource pruning'
+      : /destroyDecodedData|destroyDecodedFrames|destroyNativeImageAtIndex/.test(stack) ? 'decoded-image destruction' : null;
+    return reason ? [{ sourceUs: sample.ts, thread: nativeThreads.get(sample.tid) ?? String(sample.tid), reason, stack,
+      relation: 'Sample of native execution, not a complete event count; image URL unavailable.' }] : [];
+  });
   const times = new Map<number, { startUs?: number; endUs?: number }>();
   for (const event of events) {
     const match = /^cssEarth:decode:(\d+):(begin|end)$/.exec(String(dataOf(event).message ?? ''));
@@ -79,7 +88,7 @@ export function paintClues(trace: unknown, diagnostic: unknown, layerSamples: re
       nativeStackCoverage: { distinctStacks: native.distinctStacks, shown: native.stacks.length, relation: native.relation },
       identity: 'unavailable; native DOM snapshots are not an exact paint-time identity mapping' };
   });
-  return { enabled: Array.isArray(source.attachments), coverage: source.paintCoverage ?? null, decodes, attachments, expensivePaints,
+  return { enabled: Array.isArray(source.attachments), coverage: source.paintCoverage ?? null, decodes, attachments, expensivePaints, nativeImageLifecycle,
     nativePaintNodes: nativeNodes, paintEvents: paints.length, paintsWithNodeId: paints.filter(event => typeof dataOf(event).nodeId === 'number').length,
     limitations: ['Debug collection adds overhead; use a normal trace for timing.',
       'Native and WebKit clocks are bridged through host wall time; exact cross-profiler interval attribution is unavailable.',
@@ -91,6 +100,8 @@ export function paintClues(trace: unknown, diagnostic: unknown, layerSamples: re
 export function paintTraceEvents(clues: ReturnType<typeof paintClues>): Record<string, unknown>[] {
   if (!clues.enabled) return [];
   return [{ ph: 'M', pid: 1, tid: 5, name: 'thread_name', args: { name: 'Diagnostic mesh / atlas / decode evidence' } },
+    ...clues.nativeImageLifecycle.map(row => ({ ph: 'i', s: 't', pid: 1, tid: 5, cat: 'cssearth.paint-evidence',
+      name: `Native image sample: ${row.reason}`, ts: row.sourceUs, args: { data: row } })),
     ...clues.decodes.flatMap(row => row.startUs === null || row.endUs === null ? [] : [{ ph: 'X', pid: 1, tid: 5, cat: 'cssearth.paint-evidence',
       name: `Image decode: ${row.url}`, ts: row.startUs, dur: Math.max(1, row.endUs - row.startUs), args: { data: row } }]),
     ...clues.attachments.flatMap(row => row.startUs === null ? [] : [{ ph: 'i', s: 't', pid: 1, tid: 5, cat: 'cssearth.paint-evidence',
