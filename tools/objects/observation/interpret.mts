@@ -23,7 +23,7 @@ import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { prepareAkatsukiUviMap } from '../akatsuki/uvi-l3b.mts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '../../references/reference-bank.mts';
-import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
+import { prepareGlbSurface } from '@cssearth/bake/objects/layers/shape-model';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar/stellar-photometric-color.mts';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from './stellar/stellar-spot-occultation.mts';
 import { addSpotFigureToLimbPlate, parseSpotFigureModel } from './stellar/stellar-spot-figure.mts';

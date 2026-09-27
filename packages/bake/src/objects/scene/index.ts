@@ -10,3 +10,5 @@ export * from './default-camera.ts';
 export * from './prepare-sun-view-direction.ts';
 export * from './galactic-frame.ts';
 export * from './astrometric-sky-registration.ts';
+export * from './solar-system-scene.ts';
+export * from './focused-camera.ts';

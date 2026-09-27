@@ -6,11 +6,10 @@ import type { PresentationDraft } from './types.ts';
 export type { PreparedNode } from './prepared-node-tree.ts';
 export type NodeBuilder = ReturnType<typeof createPreparedNodeTree>;
 
-/** What the caller supplies: the material tracks, the prepared-presentation contract and the lens navigation are owned by
- * the preparation tools and the platform, which pass their implementations in. */
+/** What the caller supplies: the material tracks and the lens navigation are owned by the preparation tools, which pass
+ * their implementations in. */
 export interface PresentationHostAdapters {
   prepareMaterialTracks(draft: PresentationDraft): PreparedMaterialTrack[];
-  requirePreparedPresentation(input: unknown, options: { controls: unknown }): unknown;
   prepareLensNavigation(bodyId: string, focus: unknown, camera: unknown): PreparedSelectionNavigation;
 }
 
@@ -18,7 +17,7 @@ export interface PresentationHostAdapters {
 export function presentationAdapters(host: PresentationHostAdapters) {
   return {
     createPreparedNodeTree, prepareCssomDeclarationReads,
-    prepareMaterialTracks: host.prepareMaterialTracks, requirePreparedPresentation: host.requirePreparedPresentation,
+    prepareMaterialTracks: host.prepareMaterialTracks,
     prepareLensNavigation: host.prepareLensNavigation,
   };
 }

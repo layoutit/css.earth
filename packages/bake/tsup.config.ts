@@ -30,6 +30,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'nebula': 'src/nebula/index.ts',
     'objects/sources': 'src/objects/sources/index.ts',
     'objects/layers/observation': 'src/objects/layers/observation/index.ts',
+    'objects/layers/shape-model': 'src/objects/layers/shape-model/index.ts',
     'objects/layers/cutaway': 'src/objects/layers/cutaway/index.ts',
     'objects/layers/giant': 'src/objects/layers/giant/index.ts',
     'objects/layers/material-composition': 'src/objects/layers/material-composition/index.ts',

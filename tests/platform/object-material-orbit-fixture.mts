@@ -1,15 +1,15 @@
-import {loadObjectTestDefinition} from '../../../tools/contract/object-test-data.mts';
+import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
 import { createObjectRuntime } from '@cssearth/renderer';
 import { createSceneLifetime } from '@cssearth/engine';
-import { createPreparedResidency } from '../prepared-residency.mts';
-import { createObjectSelectionRuntime } from '../object-selection-runtime.mts';
+import { createPreparedResidency } from '../../src/platform/prepared-residency.mts';
+import { createObjectSelectionRuntime } from '../../src/platform/object-selection-runtime.mts';
 import { retainedPresentationFixture } from './object-runtime-package.mts';
-import { Surface, orbitFixture, type OrbitCallbacks } from './orbit-fixture.mts';
-import { requireObjectRuntimeDefinition } from '../object-runtime-contract.mts';
+import { Surface, orbitFixture, type OrbitCallbacks } from '../../src/platform/test/orbit-fixture.mts';
+import { requireObjectRuntimeDefinition } from '../../src/platform/object-runtime-contract.mts';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '@cssearth/renderer';
 import type { RetainedCubicSkyOrbit, OrbitServices } from '@cssearth/renderer/platform/object-orbit';
-import type { PreparedImage } from '../prepared-image-store.mts';
+import type { PreparedImage } from '../../src/platform/prepared-image-store.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 
 const definitions = new Map<string, ObjectRuntimeDefinition>(await Promise.all(['mercury', 'venus', 'mars'].map(async id =>

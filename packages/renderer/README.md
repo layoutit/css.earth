@@ -45,7 +45,8 @@ packages/renderer/
 │   ├── validation/     parsers for every prepared format
 │   ├── prepared-data/  world context, ellipsoid projections
 │   ├── universe/       universe context and catalogues
-│   ├── solar-system/, sky/, stars/, volume/, shell/, image-layers/, labels/
+│   ├── solar-system/   heliocentric geometry, orbits, and the prepared cubic-sky and directional-Sun contracts
+│   ├── sky/, stars/, volume/, shell/, image-layers/, labels/
 │   └── styles/         runtime stylesheets
 ├── tsup.config.ts      built entries
 ├── AGENTS.md           package rules

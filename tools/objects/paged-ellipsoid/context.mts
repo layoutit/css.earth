@@ -3,7 +3,7 @@ import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { readJsonSource } from '../../sources/source-values.mts';
 import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '@cssearth/objects/node';
-import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
+import { prepareDirectionalSun } from '@cssearth/bake/presentation';
 import { parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe } from './profile-source.mts';
 import { parseInteriorSource, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createAtmospherePreparation } from './atmosphere.mts';

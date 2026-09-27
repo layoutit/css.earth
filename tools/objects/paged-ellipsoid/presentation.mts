@@ -1,8 +1,8 @@
 import type { prepareTextureLevels, TextureLevelConfiguration, SurfaceBankLenses } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import type { PreparedNode } from '@cssearth/bake/presentation';
 import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
-import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
-import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
+import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
+import type { PreparedDirectionalSunPlan } from '@cssearth/bake/presentation';
 import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { preparePagedEllipsoidScene } from './scene.mts';
 import type { preparePlaces } from './geographic/places.mts';
@@ -18,7 +18,7 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/platform/prepared-object-assets";
-import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
+import { PREPARED_PRESENTATION_SCHEMA } from "@cssearth/bake/presentation";
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "@cssearth/bake/presentation";
 import { seamOutsetBinding, seamOutsetInitialValue } from "@cssearth/bake/scene";
 import { textureTileStyles, tiledTextureKeys } from "@cssearth/renderer";

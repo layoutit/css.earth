@@ -129,6 +129,11 @@
       "import": "./dist/objects/layers/observation.js",
       "default": "./dist/objects/layers/observation.js"
     },
+    "./objects/layers/shape-model": {
+      "types": "./dist/objects/layers/shape-model.d.ts",
+      "import": "./dist/objects/layers/shape-model.js",
+      "default": "./dist/objects/layers/shape-model.js"
+    },
     "./objects/layers/cutaway": {
       "types": "./dist/objects/layers/cutaway.d.ts",
       "import": "./dist/objects/layers/cutaway.js",

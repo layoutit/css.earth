@@ -14,15 +14,14 @@ import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {inventoryPublicAssets} from '../../../src/platform/runtime-asset-closure.mts';
-import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
-import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
-import {prepareCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
-import {prepareDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
+import {requirePreparedPresentation} from '@cssearth/bake/presentation';
+import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '@cssearth/bake/presentation';
+import { withFocusedCamera } from '@cssearth/bake/objects/scene';
+import { prepareCubicSky, prepareDirectionalSun } from '@cssearth/bake/presentation';
 import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
 import {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import {createLayeredOblatePreparation} from './layered-oblate.mts';
 import {prepareLayeredOblatePresentation} from './presentation.mts';
-import {withFocusedCamera} from '../focused-camera.mts';
 import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
 
 

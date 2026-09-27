@@ -1,10 +1,10 @@
-import type { DirectionalSunPresentation, PreparedDirectionalSunPlan } from "./directional-sun-contract.mts";
+import type { DirectionalSunPresentation, PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
 import {
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,
   PREPARED_DIRECTIONAL_SUN_SCHEMA,
   validateDirectionalSunPlan,
   validateDirectionalSunPresentationStandard,
-} from "./directional-sun-contract.mts";
+} from "./directional-sun-contract.ts";
 
 export interface DirectionalSunPreparationOptions {
   presentation?: DirectionalSunPresentation; planMetadata?: Readonly<Record<string, unknown>>;

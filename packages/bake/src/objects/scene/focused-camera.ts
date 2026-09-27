@@ -1,5 +1,5 @@
-import type { PreparedCubicSkyPlan } from "../../src/platform/cubic-sky-contract.mts";
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from "../../src/platform/cubic-sky-contract.mts";
+import type { PreparedCubicSkyPlan } from '../../presentation/index.ts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../presentation/index.ts';
 
 function skyFieldOfView(sky: PreparedCubicSkyPlan) {
   const camera = sky.cameraContract;

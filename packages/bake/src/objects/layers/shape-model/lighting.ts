@@ -1,11 +1,11 @@
-import type {createPreparedNodeTree,PreparedNode} from '@cssearth/bake/presentation';
+import type {createPreparedNodeTree,PreparedNode} from '../../../presentation/index.ts';
 import type {PreparedMaterialTrack,PreparedMaterialSelection} from '@cssearth/renderer/rendering/prepared-material.ts';
 import type {PreparedViewBinding} from '@cssearth/renderer/rendering/prepared-presentation.ts';
 interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};
   /** The published lighting image's pixel size, measured from its file. */
   image:{width:number;height:number};objectId:string;}
 import { BASE_TILE } from '@layoutit/polycss';
-import { leafRasterScale } from '@cssearth/bake/scene';
+import { leafRasterScale } from '../../../scene/index.ts';
 import { readPreparedMatrix4, preparedRotationMatrix4, multiplyPreparedMatrix4, invertPreparedAffineMatrix4 } from '@cssearth/core';
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
