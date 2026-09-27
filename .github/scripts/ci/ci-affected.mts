@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 // CI's change-classification step runs this before `pnpm install`, so import core's dependency-free source, not its built package.
-import { requireArray, requireRecord, requireString } from '../../packages/core/src/validate.ts';
+import { requireArray, requireRecord, requireString } from '../../../packages/core/src/validate.ts';
 import type { ChangeMode } from './classify-changes.mts';
 
 const execFileAsync = promisify(execFile);
@@ -54,7 +54,7 @@ export function parseCiAreasConfig(raw: unknown): CiAreasConfig {
   return { shared, areas, production };
 }
 
-export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '../..', '.github', 'ci-areas.json')): Promise<CiAreasConfig> {
+export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '../../..', '.github', 'ci-areas.json')): Promise<CiAreasConfig> {
   return parseCiAreasConfig(JSON.parse(await readFile(path, 'utf8')));
 }
 
@@ -62,7 +62,7 @@ export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '../
  * (including none, so `tools/**` also matches the bare directory marker `tools/` if one ever appeared); a lone `*`
  * (not part of `**`) matches any run of characters within one segment, never a `/`. Every other character is
  * matched literally. This is deliberately the same small vocabulary the repository already hand-rolls as regular
- * expressions elsewhere (for example `SHARED_CODE` in tools/ci/check-ci.mts) rather than a new dependency. */
+ * expressions elsewhere (for example `SHARED_CODE` in .github/scripts/ci/check-ci.mts) rather than a new dependency. */
 export function patternToRegExp(pattern: string): RegExp {
   let source = '';
   for (let index = 0; index < pattern.length; index += 1) {
@@ -103,7 +103,7 @@ export interface AffectedAreas {
   readonly paths: readonly string[];
   /** True when at least one changed path matched a shared pattern, or a path matched no area at all ("unsure means
    * shared"), or the diff could not be resolved. A change with no paths is also shared: an empty diff is never a
-   * reason to trust a skip, matching tools/ci/classify-changes.mts's docsOnly rule. */
+   * reason to trust a skip, matching .github/scripts/ci/classify-changes.mts's docsOnly rule. */
   readonly shared: boolean;
   /** The non-shared area ids at least one changed path fell into (empty when `shared` is true or nothing changed). */
   readonly areaIds: readonly string[];
@@ -145,10 +145,10 @@ export async function localChangedPaths(ref: string, root: string): Promise<stri
 }
 
 /** Same decision, computing `paths` itself from git and `config` itself from `.github/ci-areas.json`. An unresolved
- * push base (see tools/ci/classify-changes.mts) is treated as shared, the direction that can only run more, not skip
+ * push base (see .github/scripts/ci/classify-changes.mts) is treated as shared, the direction that can only run more, not skip
  * something that should have run. */
 export async function classifyAffectedChanges(mode: ChangeMode, ref: string,
-  { root = resolve(import.meta.dirname, '../..'),
+  { root = resolve(import.meta.dirname, '../../..'),
     changedPaths = (m: ChangeMode, r: string) => gitChangedPaths(m, r, root),
     config = () => loadCiAreasConfig(resolve(root, '.github', 'ci-areas.json')) }:
   { root?: string; changedPaths?: (mode: ChangeMode, ref: string) => Promise<readonly string[] | undefined>; config?: () => Promise<CiAreasConfig> } = {},

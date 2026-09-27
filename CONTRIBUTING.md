@@ -183,7 +183,8 @@ To run the fast subset before every push, opt in with `git config core.hooksPath
 pre-push hook runs `pnpm check:pr --quick`, which runs the `Contract lint` merge
 gate and the advisory repository audit, skipping the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
-`CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
+`CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath` (the next `pnpm install` restores the
+commit-msg dispatcher).
 
 `pnpm check:architecture` shows how your change moves the folder graph: which
 folders import which. CI runs it in the Contract lint job, so `pnpm check:pr`
@@ -228,7 +229,7 @@ GitHub Actions always runs Contract lint and the Object-scope gate. It also
 always runs Typecheck, the prepared-universe tests, the prepared-universe
 preparation and galaxy field job, and the nebula and renderer tests on every push
 to `main`; on a pull request it runs only the ones `.github/ci-areas.json` maps
-your changed paths to (`tools/ci/ci-affected.mts`, computed by the "Classify
+your changed paths to (`.github/scripts/ci/ci-affected.mts`, computed by the "Classify
 changes" job) — a job it skips still reports success, never failure, so it never
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
@@ -266,8 +267,10 @@ Write every commit as one [Conventional Commits](https://www.conventionalcommits
 Split a change into small steps so each line explains one step. Git's own merge, revert and `--fixup` messages are
 accepted as Git writes them.
 
-`pnpm install` installs a `commit-msg` hook that checks each message as you commit (it leaves an existing hook of your
-own in place). CI runs the same check over every commit in a pull request as part of the required `Classify changes`
+`pnpm install` installs a `commit-msg` hook that checks each message as you commit: it points `core.hooksPath` at a
+small dispatcher in `.git/cssearth-hooks/` that runs each worktree's own `.githooks/commit-msg`. It leaves hooks of
+your own in `.git/hooks` and any `core.hooksPath` you already set in place. The `publish-assets.yml` asset job runs lifecycle scripts, so
+its throwaway checkout gets this `core.hooksPath` too; it never commits there, so the setting is harmless. CI runs the same check over every commit in a pull request as part of the required `Classify changes`
 job, so reword a rejected commit with `git rebase -i` rather than skipping the hook.
 
 ## Pull requests

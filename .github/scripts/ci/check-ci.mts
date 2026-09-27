@@ -132,7 +132,7 @@ export function quickSteps(steps:readonly CiStep[]):CiStep[] {
 }
 
 /** Paths whose change can break types outside one object package: `--typecheck` appends `pnpm typecheck` for them. */
-export const SHARED_CODE=/^(?:tools|site|src\/platform|src\/renderers|packages)\//u;
+export const SHARED_CODE=/^(?:\.github\/scripts|tools|site|src\/platform|src\/renderers|packages)\//u;
 export function sharedCodeChanged(paths:readonly string[]):boolean {return paths.some(path=>SHARED_CODE.test(path));}
 // Keep these prerequisites with their consumer so command deduplication cannot discard them.
 export const SHARED_TYPECHECK_STEP:CiStep={
@@ -171,7 +171,7 @@ export async function runCiSteps(steps:readonly CiStep[],root:string,runnerTemp:
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
- const root=resolve(import.meta.dirname,'../..'),args=process.argv.slice(2);
+ const root=resolve(import.meta.dirname,'../../..'),args=process.argv.slice(2);
  const flags=['--list','--quick','--typecheck','--all','--pipeline-change'];
  if(args.some(arg=>!flags.includes(arg)&&!/^--job=[a-z][a-z0-9-]*$/.test(arg)&&!/^--base=.+$/.test(arg))||new Set(args.map(arg=>arg.split('=')[0])).size!==args.length)
   throw new Error('Usage: pnpm check:pr [--base=origin/main] [--all | --job=<id>] [--pipeline-change] [--quick] [--typecheck] [--list]');

@@ -33,7 +33,7 @@ async function gitChangedPaths(ref: string, root: string): Promise<string[]> {
 
 /** Same decision, computing `paths` itself from a three-dot diff against `ref` (the PR's base branch). */
 export async function scopeRuntimeOwnershipCheck(ref: string,
-  { root = resolve(import.meta.dirname, '../..'), changedPaths = (r: string) => gitChangedPaths(r, root) }:
+  { root = resolve(import.meta.dirname, '../../..'), changedPaths = (r: string) => gitChangedPaths(r, root) }:
   { root?: string; changedPaths?: (ref: string) => Promise<readonly string[]> } = {},
 ): Promise<string[]> {
   return selectRuntimeOwnershipArgs(await changedPaths(ref));
