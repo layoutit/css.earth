@@ -9,4 +9,3 @@ export * from './photometric-contract.ts';
 export * from './photometric-disc.ts';
 export * from './presentation-contract.ts';
 export * from './rings.ts';
-export * from './source-contract.ts';
